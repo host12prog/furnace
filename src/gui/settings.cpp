@@ -2954,11 +2954,31 @@ void FurnaceGUI::drawSettings() {
         ImGui::Unindent();
 
         ImGui::Text(_L("Pattern view labels:##sgse"));
-        if (ImGui::InputTextWithHint(_L("Note off (3-char)##sgse"),"OFF",&settings.noteOffLabel)) settingsChanged=true;
-        if (ImGui::InputTextWithHint(_L("Note release (3-char)##sgse"),"===",&settings.noteRelLabel)) settingsChanged=true;
-        if (ImGui::InputTextWithHint(_L("Macro release (3-char)##sgse"),"REL",&settings.macroRelLabel)) settingsChanged=true;
-        if (ImGui::InputTextWithHint(_L("Empty field (3-char)##sgse"),"...",&settings.emptyLabel)) settingsChanged=true;
-        if (ImGui::InputTextWithHint(_L("Empty field (2-char)##sgse"),"..",&settings.emptyLabel2)) settingsChanged=true;
+        ImGui::PushFont(patFont);
+        if (ImGui::InputTextWithHint("##PVLOff","OFF",&settings.noteOffLabel)) settingsChanged=true;
+        ImGui::PopFont();
+        ImGui::SameLine();
+        ImGui::Text("Note off (3-char)");
+        ImGui::PushFont(patFont);
+        if (ImGui::InputTextWithHint("##PVLRel","===",&settings.noteRelLabel)) settingsChanged=true;
+        ImGui::PopFont();
+        ImGui::SameLine();
+        ImGui::Text("Note release (3-char)");
+        ImGui::PushFont(patFont);
+        if (ImGui::InputTextWithHint("##PVLMacroRel","REL",&settings.macroRelLabel)) settingsChanged=true;
+        ImGui::PopFont();
+        ImGui::SameLine();
+        ImGui::Text("Macro release (3-char)");
+        ImGui::PushFont(patFont);
+        if (ImGui::InputTextWithHint("##PVLE3","...",&settings.emptyLabel)) settingsChanged=true;
+        ImGui::PopFont();
+        ImGui::SameLine();
+        ImGui::Text("Empty field (3-char)");
+        ImGui::PushFont(patFont);
+        if (ImGui::InputTextWithHint("##PVLE2","..",&settings.emptyLabel2)) settingsChanged=true;
+        ImGui::PopFont();
+        ImGui::SameLine();
+        ImGui::Text("Empty field (2-char)");
 
         ImGui::Text(_L("Pattern view spacing after:##sgse"));
 
