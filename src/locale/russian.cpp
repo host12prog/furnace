@@ -461,7 +461,6 @@ void DivLocale::addTranslationsRussian()
 
     //WINDOW NAMES
 
-    strings["Settings###Settings"].plurals[0] = "Настройки###Settings";
     strings["Pattern###Pattern"].plurals[0] = "Паттерны###Pattern";
     strings["Orders###Orders"].plurals[0] = "Матр. патт.###Orders";
     strings["Statistics###Statistics"].plurals[0] = "Статистика###Statistics";
@@ -861,7 +860,7 @@ void DivLocale::addTranslationsRussian()
     strings["Effect 8 value##sgse"].plurals[0] = "=Effect 8 value";
 
     strings["Press key...##sgse"].plurals[0] = "Нажмите клавишу...";
-    strings["Settings###Settings"].plurals[0] = "=Settings###Settings";
+    strings["Settings###Settings"].plurals[0] = "Настройки###Settings";
     strings["Do you want to save your settings?##sgse"].plurals[0] = "Вы хотите сохранить свои настройки?";
 
     strings["General##sgse"].plurals[0] = "Основные";
