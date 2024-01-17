@@ -74,18 +74,18 @@ String macroHoverGain(int id, float val, void* u) {
 
 String FurnaceGUI::realMacroHoverGain(int id, float val, void* u) {
   if (val>=224.0f) {
-    return fmt::sprintf("%d: +%d (%s)",id,(int)(val-224), _L("exponential"));
+    return fmt::sprintf("%d: +%d (%s)",id,(int)(val-224), settings.language == DIV_LANG_ENGLISH ? "exponential" : _L("exponential"));
   }
   if (val>=192.0f) {
-    return fmt::sprintf("%d: +%d (%s)",id,(int)(val-192), _L("linear"));
+    return fmt::sprintf("%d: +%d (%s)",id,(int)(val-192), settings.language == DIV_LANG_ENGLISH ? "linear" : _L("linear"));
   }
   if (val>=160.0f) {
-    return fmt::sprintf("%d: -%d (%s)",id,(int)(val-160), _L("exponential"));
+    return fmt::sprintf("%d: -%d (%s)",id,(int)(val-160), settings.language == DIV_LANG_ENGLISH ? "exponential" : _L("exponential"));
   }
   if (val>=128.0f) {
-    return fmt::sprintf("%d: -%d (%s)",id,(int)(val-128), _L("linear"));
+    return fmt::sprintf("%d: -%d (%s)",id,(int)(val-128), settings.language == DIV_LANG_ENGLISH ? "linear" : _L("linear"));
   }
-  return fmt::sprintf("%d: %d (%s)",id,(int)val, _L("direct"));
+  return fmt::sprintf("%d: %d (%s)",id,(int)val, settings.language == DIV_LANG_ENGLISH ? "direct" : _L("direct"));
 }
 
 String macroHoverES5506FilterMode(int id, float val, void* u) {
