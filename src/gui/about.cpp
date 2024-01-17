@@ -1,6 +1,6 @@
 /**
  * Furnace Tracker - multi-system chiptune tracker
- * Copyright (C) 2021-2023 tildearrow and contributors
+ * Copyright (C) 2021-2024 tildearrow and contributors
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,6 +40,7 @@ const char* aboutLine[]={
   "cam900",
   "djtuBIG-MaliceX",
   "Eknous",
+  "Kagamiin~",
   "laoo",
   "LTVA1",
   "MooingLemur",
@@ -240,6 +241,10 @@ const char* aboutLine[]={
   "(and contributors).##sgab",
   "licensed under GPLv2+! see##sgab",
   "LICENSE for more information.##sgab",
+  "copyright © 2021-2024 tildearrow",
+  "(and contributors).",
+  "licensed under GPLv2+! see",
+  "LICENSE for more information.",
   "",
   "help Furnace grow:##sgab",
   "https://github.com/tildearrow/furnace",
