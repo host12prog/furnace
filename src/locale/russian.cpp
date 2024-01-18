@@ -122,48 +122,45 @@ void DivLocale::addTranslationsRussian()
 
     //src/gui/channels.cpp
 
-    strings["Channels###Channels"].plurals[0] = "=Channels###Channels";
-    strings["Pat##sgch"].plurals[0] = "=Pat";
-    strings["Osc##sgch"].plurals[0] = "=Osc";
-    strings["Swap##sgch"].plurals[0] = "=Swap";
-    strings["Name##sgch"].plurals[0] = "=Name";
-    strings["Show in pattern##sgch"].plurals[0] = "=Show in pattern";
-    strings["Show in per-channel oscilloscope##sgch"].plurals[0] = "=Show in per-channel oscilloscope";
-    strings["%s #%d\n(drag to swap channels)##sgch"].plurals[0] = "=%s #%d\n(drag to swap channels)";
+    strings["Pat##sgch"].plurals[0] = "Пат.";
+    strings["Osc##sgch"].plurals[0] = "Осц.";
+    strings["Swap##sgch"].plurals[0] = "Перем.";
+    strings["Name##sgch"].plurals[0] = "Имя";
+    strings["Show in pattern##sgch"].plurals[0] = "Показывать в окне паттернов";
+    strings["Show in per-channel oscilloscope##sgch"].plurals[0] = "Показывать в окне осциллографов (для отдельных каналов)";
+    strings["%s #%d\n(drag to swap channels)##sgch"].plurals[0] = "%s #%d\n(перетащите, чтобы поменять местами каналы)";
 
     //src/gui/chanOsc.cpp
 
-    strings["None (0%)##sgco"].plurals[0] = "=None (0%)";
-    strings["None (50%)##sgco"].plurals[0] = "=None (50%)";
-    strings["None (100%)##sgco"].plurals[0] = "=None (100%)";
-    strings["Frequency##sgco"].plurals[0] = "=Frequency";
-    strings["Volume##sgco"].plurals[0] = "=Volume";
-    strings["Channel##sgco"].plurals[0] = "=Channel";
-    strings["Brightness##sgco"].plurals[0] = "=Brightness";
-    strings["Note Trigger##sgco"].plurals[0] = "=Note Trigger";
-    strings["Off##sgco"].plurals[0] = "=Off";
-    strings["Mode 1##sgco"].plurals[0] = "=Mode 1";
-    strings["Mode 2##sgco"].plurals[0] = "=Mode 2";
-    strings["Mode 3##sgco"].plurals[0] = "=Mode 3";
+    strings["None (0%)##sgco"].plurals[0] = "Нет (0%)";
+    strings["None (50%)##sgco"].plurals[0] = "Нет (50%)";
+    strings["None (100%)##sgco"].plurals[0] = "Нет (100%)";
+    strings["Frequency##sgco"].plurals[0] = "Частота";
+    strings["Volume##sgco"].plurals[0] = "Громкость";
+    strings["Channel##sgco"].plurals[0] = "Канал";
+    strings["Brightness##sgco"].plurals[0] = "Яркость";
+    strings["Note Trigger##sgco"].plurals[0] = "Новая нота";
+    strings["Off##sgco"].plurals[0] = "Выкл.";
+    strings["Mode 1##sgco"].plurals[0] = "Режим 1";
+    strings["Mode 2##sgco"].plurals[0] = "Режим 2";
+    strings["Mode 3##sgco"].plurals[0] = "Режим 3";
 
-    strings["Oscilloscope (per-channel)###Oscilloscope (per-channel)"].plurals[0] = "=Oscilloscope (per-channel)###Oscilloscope (per-channel)";
-
-    strings["Columns##sgco"].plurals[0] = "=Columns";
-    strings["Size (ms)##sgco"].plurals[0] = "=Size (ms)";
-    strings["Automatic columns##sgco"].plurals[0] = "=Automatic columns";
-    strings["Center waveform##sgco"].plurals[0] = "=Center waveform";
-    strings["Randomize phase on note##sgco"].plurals[0] = "=Randomize phase on note";
-    strings["Amplitude##sgco"].plurals[0] = "=Amplitude";
-    strings["Gradient##sgco"].plurals[0] = "=Gradient";
-    strings["Color##sgco0"].plurals[0] = "=Color";
-    strings["Distance##sgco"].plurals[0] = "=Distance";
-    strings["Spread##sgco"].plurals[0] = "=Spread";
-    strings["Remove##sgco"].plurals[0] = "=Remove";
-    strings["Background##sgco"].plurals[0] = "=Background";
-    strings["X Axis##AxisX"].plurals[0] = "=X Axis##AxisX";
-    strings["Y Axis##AxisY"].plurals[0] = "=Y Axis##AxisY";
-    strings["Color##sgco1"].plurals[0] = "=Color";
-    strings["Text format:##sgco"].plurals[0] = "=Text format:";
+    strings["Columns##sgco"].plurals[0] = "Столбцов";
+    strings["Size (ms)##sgco"].plurals[0] = "Ширина (в мс)";
+    strings["Automatic columns##sgco"].plurals[0] = "Автоматическое число столбцов";
+    strings["Center waveform##sgco"].plurals[0] = "Центрировать сигнал";
+    strings["Randomize phase on note##sgco"].plurals[0] = "Случайная фаза при запуске ноты";
+    strings["Amplitude##sgco"].plurals[0] = "Амплитуда";
+    strings["Gradient##sgco"].plurals[0] = "Градиент";
+    strings["Color##sgco0"].plurals[0] = "Цвет";
+    strings["Distance##sgco"].plurals[0] = "Расстояние";
+    strings["Spread##sgco"].plurals[0] = "Размыть";
+    strings["Remove##sgco"].plurals[0] = "Убрать";
+    strings["Background##sgco"].plurals[0] = "Цвет фона";
+    strings["X Axis##AxisX"].plurals[0] = "Ось X##AxisX";
+    strings["Y Axis##AxisY"].plurals[0] = "Ось Y##AxisY";
+    strings["Color##sgco1"].plurals[0] = "Цвет";
+    strings["Text format:##sgco"].plurals[0] = "Форматирование текста:";
 
     strings["format guide:\n"
             "- %c: channel name\n"
@@ -183,27 +180,27 @@ void DivLocale::addTranslationsRussian()
             "- %l: new line\n"
             "- %%: percent sign##sgco"].plurals[0] = 
 
-            "=format guide:\n"
-            "=- %c: channel name\n"
-            "=- %C: channel short name\n"
-            "=- %d: channel number (starting from 0)\n"
-            "=- %D: channel number (starting from 1)\n"
-            "=- %n: channel note\n"
-            "=- %i: instrument name\n"
-            "=- %I: instrument number (decimal)\n"
-            "=- %x: instrument number (hex)\n"
-            "=- %s: chip name\n"
-            "=- %p: chip part number\n"
-            "=- %S: chip ID\n"
-            "=- %v: volume (decimal)\n"
-            "=- %V: volume (percentage)\n"
-            "=- %b: volume (hex)\n"
-            "=- %l: new line\n"
-            "=- %%: percent sign";
+            "инструкция по форматированию:\n"
+            "- %c: имя канала\n"
+            "- %C: короткое имя канала\n"
+            "- %d: номер канала (начиная с 0)\n"
+            "- %D: номер канала (начиная с 1)\n"
+            "- %n: нота канала\n"
+            "- %i: название инструмента\n"
+            "- %I: номер инструмента (десятеричный)\n"
+            "- %x: номер инструмента (шестнадцатеричный)\n"
+            "- %s: название чипа\n"
+            "- %p: настоящее название чипа\n"
+            "- %S: идентификатор чипа\n"
+            "- %v: громкость (десятеричная)\n"
+            "- %V: громкость (в процентах)\n"
+            "- %b: громкость (шестнадцатеричная)\n"
+            "- %l: перенос на новую строку\n"
+            "- %%: знак процента";
 
-    strings["Text color##sgco"].plurals[0] = "=Text color";
-    strings["Error!##sgco"].plurals[0] = "=Error!";
-    strings["\nquiet##sgco"].plurals[0] = "=\nquiet";
+    strings["Text color##sgco"].plurals[0] = "Цвет текста";
+    strings["Error!##sgco"].plurals[0] = "Ошибка!";
+    strings["\nquiet##sgco"].plurals[0] = "\nтихо";
 
     //src/gui/clock.cpp
 

@@ -156,11 +156,11 @@ void FurnaceGUI::drawChanOsc() {
         ImGui::Text(_L("Automatic columns##sgco"));
         ImGui::SameLine();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-        const char* previewColType=autoColsTypes[chanOscAutoColsType&3];
+        const char* previewColType=_L(autoColsTypes[chanOscAutoColsType&3]);
         if (ImGui::BeginCombo("##AutoCols",previewColType)) {
           for (int j=0; j<4; j++) {
             const bool isSelected=(chanOscAutoColsType==j);
-            if (ImGui::Selectable(autoColsTypes[j],isSelected)) chanOscAutoColsType=j;
+            if (ImGui::Selectable(_L(autoColsTypes[j]),isSelected)) chanOscAutoColsType=j;
             if (isSelected) ImGui::SetItemDefaultFocus();
           }
           ImGui::EndCombo();
@@ -318,7 +318,7 @@ void FurnaceGUI::drawChanOsc() {
             updateChanOscGradTex=true;
           }
           //ImGui::Combo(_L("X Axis##AxisX"),&chanOscColorX,chanOscRefs,GUI_OSCREF_MAX);
-          if (ImGui::BeginCombo("X Axis##AxisX",_L(chanOscRefs[chanOscColorX])))
+          if (ImGui::BeginCombo(_L("X Axis##AxisX"),_L(chanOscRefs[chanOscColorX])))
           {
             int i = 0;
             while(chanOscRefs[i])
@@ -334,7 +334,7 @@ void FurnaceGUI::drawChanOsc() {
             ImGui::EndCombo();
           }
           //ImGui::Combo(_L("Y Axis##AxisY"),&chanOscColorY,chanOscRefs,GUI_OSCREF_MAX);
-          if (ImGui::BeginCombo("Y Axis##AxisY",_L(chanOscRefs[chanOscColorY])))
+          if (ImGui::BeginCombo(_L("Y Axis##AxisY"),_L(chanOscRefs[chanOscColorY])))
           {
             int i = 0;
             while(chanOscRefs[i])
