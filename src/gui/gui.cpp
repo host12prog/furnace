@@ -4814,7 +4814,7 @@ bool FurnaceGUI::loop() {
               break;
             case GUI_FILE_SAMPLE_OPEN: {
 // !!! NEEDS WORK
-              String errs="there were some errors while loading samples:\n";
+              String errs=_L("there were some errors while loading samples:\n");
 // !!! OKAY FROM HERE
               bool warn=false;
               for (String i: fileDialog->getFileName()) {
@@ -4904,13 +4904,13 @@ bool FurnaceGUI::loop() {
               bool ask=false;
               bool warn=false;
 // !!! NEEDS WORK
-              String warns="there were some warnings/errors while loading instruments:\n";
+              String warns=_L("there were some warnings/errors while loading instruments:\n");
               int sampleCountBefore=e->song.sampleLen;
               for (String i: fileDialog->getFileName()) {
                 std::vector<DivInstrument*> insTemp=e->instrumentFromFile(i.c_str(),true,settings.readInsNames);
                 if (insTemp.empty()) {
                   warn=true;
-                  warns+=fmt::sprintf("> %s: cannot load instrument! (%s)\n",i,e->getLastError());
+                  warns+=fmt::sprintf("> %s: cannot load instrument! (%s)\n",i,_L(e->getLastError().c_str()));
 // !!! OKAY FROM HERE
                 } else if (!e->getWarnings().empty()) {
                   warn=true;
@@ -4984,7 +4984,9 @@ bool FurnaceGUI::loop() {
                 }
               } else {
 // !!! NEEDS WORK
-                showError("cannot load instrument! ("+e->getLastError()+")");
+                String temp = (settings.language == DIV_LANG_ENGLISH ? "cannot load instrument! (" : _L("cannot load instrument! (##sggu"));
+                String errerr = _L(e->getLastError().c_str());
+                showError(temp + errerr + ")");
               }
               break;
             }
@@ -5330,7 +5332,7 @@ bool FurnaceGUI::loop() {
             } else {
               if (save(curFileName)>0) {
 // !!! NEEDS WORK
-                showError(fmt::sprintf("Error while saving file! (%s)",lastError));
+                showError(fmt::sprintf(_L("Error while saving file! (%s)##sggu"),lastError));
               } else {
                 quit=true;
               }
@@ -5456,7 +5458,7 @@ bool FurnaceGUI::loop() {
             if (!mobileUI) {
               ImGui::LoadIniSettingsFromMemory(defaultLayout);
               if (!ImGui::SaveIniSettingsToDisk(finalLayoutPath,true)) {
-                reportError(fmt::sprintf("could NOT save layout! %s",strerror(errno)));
+                reportError(fmt::sprintf(_L("could NOT save layout! %s##sggu"),strerror(errno)));
 // !!! OKAY FROM HERE
               }
             }
