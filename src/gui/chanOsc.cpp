@@ -380,8 +380,8 @@ void FurnaceGUI::drawChanOsc() {
             "- %v: volume (decimal)\n"
             "- %V: volume (percentage)\n"
             "- %b: volume (hex)\n"
-            "- %l: new line (line break)\n"
-            "- %%: percent sign##sgco")
+            "- %l: new line\n"
+            "- %%: percent sign"
           );
 //to here
           ImGui::EndTooltip();
@@ -786,7 +786,7 @@ void FurnaceGUI::drawChanOsc() {
                         break;
                       }
                       case 'l': {
-                        text+="\n";
+                        text+='\n';
                         break;
                       }
                       case '%':
