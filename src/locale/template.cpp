@@ -985,9 +985,9 @@ void DivLocale::addTranslationsTemplate()
 
     //macro hover notes
 
-    strings["exponential"].plurals[0] = "=exponential";
-    strings["linear"].plurals[0] = "=linear";
-    strings["direct"].plurals[0] = "=direct";
+    strings["exponential##sgmu"].plurals[0] = "=exponential";
+    strings["linear##sgmu"].plurals[0] = "=linear";
+    strings["direct##sgmu"].plurals[0] = "=direct";
 
     strings["Release"].plurals[0] = "=Release";
     strings["Loop"].plurals[0] = "=Loop";
@@ -995,15 +995,15 @@ void DivLocale::addTranslationsTemplate()
     strings["Fixed"].plurals[0] = "=Fixed";
     strings["Relative"].plurals[0] = "=Relative";
 
-    strings["HP/K2, HP/K2"].plurals[0] = "=HP/K2, HP/K2";
-    strings["HP/K2, LP/K1"].plurals[0] = "=HP/K2, LP/K1";
-    strings["LP/K2, LP/K2"].plurals[0] = "=LP/K2, LP/K2";
-    strings["LP/K2, LP/K1"].plurals[0] = "=LP/K2, LP/K1";
+    strings["HP/K2, HP/K2##sgmu"].plurals[0] = "=HP/K2, HP/K2";
+    strings["HP/K2, LP/K1##sgmu"].plurals[0] = "=HP/K2, LP/K1";
+    strings["LP/K2, LP/K2##sgmu"].plurals[0] = "=LP/K2, LP/K2";
+    strings["LP/K2, LP/K1##sgmu"].plurals[0] = "=LP/K2, LP/K1";
 
-    strings["Saw"].plurals[0] = "=Saw";
-    strings["Square"].plurals[0] = "=Square";
-    strings["Triangle"].plurals[0] = "=Triangle";
-    strings["Random"].plurals[0] = "=Random";
+    strings["Saw##sgmu"].plurals[0] = "=Saw";
+    strings["Square##sgmu"].plurals[0] = "=Square";
+    strings["Triangle##sgmu"].plurals[0] = "=Triangle";
+    strings["Random##sgmu"].plurals[0] = "=Random";
 
     //keyboard hotkeys
 

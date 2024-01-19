@@ -5705,7 +5705,7 @@ bool FurnaceGUI::loop() {
     if (ImGui::BeginPopup("InsTypeList",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoSavedSettings)) {
       char temp[1024];
       for (DivInstrumentType& i: makeInsTypeList) {
-        strncpy(temp,insTypes[i][0],1023);
+        strncpy(temp,_L(insTypes[i][0]),1023);
         if (ImGui::MenuItem(temp)) {
           // create ins
           curIns=e->addInstrument(-1,i);

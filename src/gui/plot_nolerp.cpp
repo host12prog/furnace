@@ -377,17 +377,19 @@ int FurnaceGUI::PlotCustomEx(ImGuiPlotType plot_type, const char* label, float (
                 hoverText = realMacroHoverGain(v_idx+values_display_offset,v0,hoverFuncUser);
               }
 
+              if(hoverFunc == macroHoverES5506FilterMode)
+              {
+                hoverText = realMacroHoverES5506FilterMode(v_idx+values_display_offset,v0,hoverFuncUser);
+              }
+
+              if(hoverFunc == macroLFOWaves)
+              {
+                hoverText = realMacroLFOWaves(v_idx+values_display_offset,v0,hoverFuncUser);
+              }
+
               if (!hoverText.empty()) 
               {
-                if(hoverFunc == macroHoverGain)
-                {
-                  ImGui::SetTooltip("%s",hoverText.c_str());
-                }
-                else
-                {
-                  ImGui::SetTooltip("%s",_L(hoverText.c_str()));
-                }
-                
+                ImGui::SetTooltip("%s",hoverText.c_str());
               }
             } else {
               if (plot_type == ImGuiPlotType_Lines)

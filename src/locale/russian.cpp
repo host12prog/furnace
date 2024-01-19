@@ -907,9 +907,9 @@ void DivLocale::addTranslationsRussian()
 
     //macro hover notes
 
-    strings["exponential"].plurals[0] = "экспоненциальное";
-    strings["linear"].plurals[0] = "линейное";
-    strings["direct"].plurals[0] = "прямое";
+    strings["exponential##sgmu"].plurals[0] = "экспоненциальное";
+    strings["linear##sgmu"].plurals[0] = "линейное";
+    strings["direct##sgmu"].plurals[0] = "прямое";
 
     strings["Release"].plurals[0] = "Затухание";
     strings["Loop"].plurals[0] = "Цикл";
@@ -917,15 +917,15 @@ void DivLocale::addTranslationsRussian()
     strings["Fixed"].plurals[0] = "Абсолютное";
     strings["Relative"].plurals[0] = "Относительное";
 
-    strings["HP/K2, HP/K2"].plurals[0] = "ФВЧ/K2, ФВЧ/K2";
-    strings["HP/K2, LP/K1"].plurals[0] = "ФВЧ/K2, ФНЧ/K1";
-    strings["LP/K2, LP/K2"].plurals[0] = "ФНЧ/K2, ФНЧ/K2";
-    strings["LP/K2, LP/K1"].plurals[0] = "ФНЧ/K2, ФНЧ/K1";
+    strings["HP/K2, HP/K2##sgmu"].plurals[0] = "ФВЧ/K2, ФВЧ/K2";
+    strings["HP/K2, LP/K1##sgmu"].plurals[0] = "ФВЧ/K2, ФНЧ/K1";
+    strings["LP/K2, LP/K2##sgmu"].plurals[0] = "ФНЧ/K2, ФНЧ/K2";
+    strings["LP/K2, LP/K1##sgmu"].plurals[0] = "ФНЧ/K2, ФНЧ/K1";
 
-    strings["Saw"].plurals[0] = "Пила";
-    strings["Square"].plurals[0] = "Меандр";
-    strings["Triangle"].plurals[0] = "Треугольная волна";
-    strings["Random"].plurals[0] = "Шум";
+    strings["Saw##sgmu"].plurals[0] = "Пила";
+    strings["Square##sgmu"].plurals[0] = "Меандр";
+    strings["Triangle##sgmu"].plurals[0] = "Треугольная волна";
+    strings["Random##sgmu"].plurals[0] = "Шум";
 
     //keyboard hotkeys
 
