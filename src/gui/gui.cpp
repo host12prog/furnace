@@ -4288,31 +4288,31 @@ bool FurnaceGUI::loop() {
 
         DivGroovePattern gp=e->getSpeeds();
         if (gp.len==2) {
-          info=fmt::sprintf(_L("| Speed %d:%d##sggu"),gp.val[0],gp.val[1]);
+          info=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Speed %d:%d" : _L("| Speed %d:%d##sggu")),gp.val[0],gp.val[1]);
         } else if (gp.len==1) {
           info=fmt::sprintf(_L("| Speed %d##sggu"),gp.val[0]);
         } else {
           info=_L("| Groove##sggu");
         }
 
-        info+=fmt::sprintf(_L(" @ %gHz (%g BPM) ##sggu"),e->getCurHz(),calcBPM(e->getSpeeds(),e->getCurHz(),e->curSubSong->virtualTempoN,e->curSubSong->virtualTempoD));
+        info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? " @ %gHz (%g BPM) " : _L(" @ %gHz (%g BPM) ##sggu")),e->getCurHz(),calcBPM(e->getSpeeds(),e->getCurHz(),e->curSubSong->virtualTempoN,e->curSubSong->virtualTempoD));
 
         if (settings.orderRowsBase) {
-          info+=fmt::sprintf(_L("| Order %.2X/%.2X ##sggu"),playOrder,e->curSubSong->ordersLen-1);
+          info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Order %.2X/%.2X " : _L("| Order %.2X/%.2X ##sggu")),playOrder,e->curSubSong->ordersLen-1);
         } else {
-          info+=fmt::sprintf(_L("| Order %d/%d ##sggu"),playOrder,e->curSubSong->ordersLen-1);
+          info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Order %d/%d " : _L("| Order %d/%d ##sggu")),playOrder,e->curSubSong->ordersLen-1);
         }
 
         if (settings.patRowsBase) {
-          info+=fmt::sprintf(_L("| Row %.2X/%.2X ##sggu"),oldRow,e->curSubSong->patLen);
+          info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Row %.2X/%.2X " : _L("| Row %.2X/%.2X ##sggu")),oldRow,e->curSubSong->patLen);
         } else {
-          info+=fmt::sprintf(_L("| Row %d/%d ##sggu"),oldRow,e->curSubSong->patLen);
+          info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Row %d/%d " : _L("| Row %d/%d ##sggu")),oldRow,e->curSubSong->patLen);
         }
 
         info+="| ";
 
         if (totalSeconds==0x7fffffff) {
-          info+=_L("Don't you have anything better to do?##sggu");
+          info+=(settings.language == DIV_LANG_ENGLISH ? "Don't you have anything better to do?" : _L("Don't you have anything better to do?##sggu"));
         } else {
           if (totalSeconds>=86400) {
             int totalDays=totalSeconds/86400;
@@ -4322,21 +4322,21 @@ bool FurnaceGUI::loop() {
             totalDays%=30;
 
             if (totalYears>1) {
-              info+=fmt::sprintf(_L("%d years ##sggu"),totalYears);
+              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d years " : _L("%d years ##sggu")),totalYears);
             } else if (totalYears) {
-              info+=fmt::sprintf(_L("%d year ##sggu"),totalYears);
+              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d year " : _L("%d year ##sggu")),totalYears);
             }
 
             if (totalMonths>1) {
-              info+=fmt::sprintf(_L("%d months ##sggu"),totalMonths);
+              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d months " : _L("%d months ##sggu")),totalMonths);
             } else if (totalMonths) {
-              info+=fmt::sprintf(_L("%d month ##sggu"),totalMonths);
+              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d month " : _L("%d month ##sggu")),totalMonths);
             }
 
             if (totalDays>1) {
-              info+=fmt::sprintf(_L("%d days ##sggu"),totalDays);
+              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d days " : _L("%d days ##sggu")),totalDays);
             } else {
-              info+=fmt::sprintf(_L("%d day ##sggu"),totalDays);
+              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d day " : _L("%d day ##sggu")),totalDays);
             }
           }
 
@@ -4392,7 +4392,7 @@ bool FurnaceGUI::loop() {
             default: // effect
               int actualCursor=((cursor.xFine+1)&(~1));
               if (p->data[cursor.y][actualCursor]>-1) {
-                info=e->getEffectDesc(p->data[cursor.y][actualCursor],cursor.xCoarse,true);
+                info=_L(e->getEffectDesc(p->data[cursor.y][actualCursor],cursor.xCoarse,true));
                 hasInfo=true;
               }
               break;
