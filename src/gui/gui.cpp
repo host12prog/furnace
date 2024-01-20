@@ -1633,6 +1633,24 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         dpiScale
       );
       break;
+    case GUI_FILE_SAVE_DMF:
+      if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
+      hasOpened=fileDialog->openSave(
+        "Save File",
+        {"DefleMask 1.1.3 module", "*.dmf"},
+        workingDirSong,
+        dpiScale
+      );
+      break;
+    case GUI_FILE_SAVE_DMF_LEGACY:
+      if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
+      hasOpened=fileDialog->openSave(
+        "Save File",
+        {"DefleMask 1.0/legacy module", "*.dmf"},
+        workingDirSong,
+        dpiScale
+      );
+      break;
     case GUI_FILE_INS_OPEN:
     case GUI_FILE_INS_OPEN_REPLACE:
       prevIns=-3;
@@ -2021,10 +2039,15 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
   //ImGui::GetIO().ConfigFlags|=ImGuiConfigFlags_NavEnableKeyboard;
 }
 
-int FurnaceGUI::save(String path) {
+int FurnaceGUI::save(String path, int dmfVersion) {
   SafeWriter* w;
   logD("saving file...");
-  w=e->saveFur(false,settings.newPatternFormat);
+  if (dmfVersion) {
+    if (dmfVersion<24) dmfVersion=24;
+    w=e->saveDMF(dmfVersion);
+  } else {
+    w=e->saveFur(false,settings.newPatternFormat);
+  }
   if (w==NULL) {
     lastError=e->getLastError();
     logE("couldn't save! %s",lastError);
@@ -2709,7 +2732,7 @@ void FurnaceGUI::editOptions(bool topMenu) {
     } else if (latchIns==-1) {
       strcpy(id,"..##LatchIns");
     } else {
-      snprintf(id,63,"%.2x##LatchIns",latchIns&0xff);
+      snprintf(id,63,"%.2X##LatchIns",latchIns&0xff);
     }
     if (ImGui::Selectable(id,latchTarget==1,ImGuiSelectableFlags_DontClosePopups)) {
       latchTarget=1;
@@ -2729,7 +2752,7 @@ void FurnaceGUI::editOptions(bool topMenu) {
     if (latchVol==-1) {
       strcpy(id,"..##LatchVol");
     } else {
-      snprintf(id,63,"%.2x##LatchVol",latchVol&0xff);
+      snprintf(id,63,"%.2X##LatchVol",latchVol&0xff);
     }
     if (ImGui::Selectable(id,latchTarget==2,ImGuiSelectableFlags_DontClosePopups)) {
       latchTarget=2;
@@ -2745,7 +2768,7 @@ void FurnaceGUI::editOptions(bool topMenu) {
       ImGui::PushStyleColor(ImGuiCol_Text,uiColors[GUI_COLOR_PATTERN_INACTIVE]);
     } else {
       const unsigned char data=latchEffect;
-      snprintf(id,63,"%.2x##LatchFX",data);
+      snprintf(id,63,"%.2X##LatchFX",data);
       ImGui::PushStyleColor(ImGuiCol_Text,uiColors[fxColors[data]]);
     }
 
@@ -2760,7 +2783,7 @@ void FurnaceGUI::editOptions(bool topMenu) {
     if (latchEffectVal==-1) {
       strcpy(id,"..##LatchFXV");
     } else {
-      snprintf(id,63,"%.2x##LatchFXV",latchEffectVal&0xff);
+      snprintf(id,63,"%.2X##LatchFXV",latchEffectVal&0xff);
     }
     if (ImGui::Selectable(id,latchTarget==4,ImGuiSelectableFlags_DontClosePopups)) {
       latchTarget=4;
@@ -4009,7 +4032,7 @@ bool FurnaceGUI::loop() {
           if (curFileName=="" || (curFileName.find(backupPath)==0) || e->song.version>=0xff00) {
             openFileDialog(GUI_FILE_SAVE);
           } else {
-            if (save(curFileName)>0) {
+            if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
               showError(fmt::sprintf(_L("Error while saving file! (%s)##sggu0"),lastError));
             }
           }
@@ -4026,6 +4049,12 @@ bool FurnaceGUI::loop() {
           if (ImGui::BeginMenu(_L("export VGM...##sggu0"))) {
             drawExportVGM();
             ImGui::EndMenu();
+          }
+          if (ImGui::MenuItem("export .dmf (1.1.3+)...")) {
+          openFileDialog(GUI_FILE_SAVE_DMF);
+          }
+          if (ImGui::MenuItem("export .dmf (1.0/legacy)...")) {
+            openFileDialog(GUI_FILE_SAVE_DMF_LEGACY);
           }
           int numZSMCompat=0;
           for (int i=0; i<e->song.systemLen; i++) {
@@ -4062,6 +4091,14 @@ bool FurnaceGUI::loop() {
           }
           if (ImGui::MenuItem(_L("export VGM...##sggu1"))) {
             curExportType=GUI_EXPORT_VGM;
+            displayExport=true;
+          }
+          if (ImGui::MenuItem("export .dmf (1.1.3+)...")) {
+            curExportType=(FurnaceGUIExportTypes)GUI_FILE_SAVE_DMF;
+            displayExport=true;
+          }
+          if (ImGui::MenuItem("export .dmf (1.0/legacy)...")) {
+            curExportType=(FurnaceGUIExportTypes)GUI_FILE_SAVE_DMF_LEGACY;
             displayExport=true;
           }
           int numZSMCompat=0;
@@ -4596,6 +4633,8 @@ bool FurnaceGUI::loop() {
       switch (curFileDialog) {
         case GUI_FILE_OPEN:
         case GUI_FILE_SAVE:
+        case GUI_FILE_SAVE_DMF:
+        case GUI_FILE_SAVE_DMF_LEGACY:
           workingDirSong=fileDialog->getPath()+DIR_SEPARATOR_STR;
           break;
         case GUI_FILE_INS_OPEN:
@@ -4690,6 +4729,12 @@ bool FurnaceGUI::loop() {
           if (curFileDialog==GUI_FILE_SAVE) {
             checkExtension(".fur");
           }
+          if (curFileDialog==GUI_FILE_SAVE_DMF) {
+            checkExtension(".dmf");
+          }
+          if (curFileDialog==GUI_FILE_SAVE_DMF_LEGACY) {
+            checkExtension(".dmf");
+          }
           if (curFileDialog==GUI_FILE_SAMPLE_SAVE ||
               curFileDialog==GUI_FILE_EXPORT_AUDIO_ONE ||
               curFileDialog==GUI_FILE_EXPORT_AUDIO_PER_SYS ||
@@ -4742,7 +4787,7 @@ bool FurnaceGUI::loop() {
               break;
             case GUI_FILE_SAVE: {
               bool saveWasSuccessful=true;
-              if (save(copyOfName)>0) {
+              if (save(copyOfName,0)>0) {
                 showError(fmt::sprintf(_L("Error while saving file! (%s)##sggu1"),lastError));
                 saveWasSuccessful=false;
               }
@@ -4775,6 +4820,18 @@ bool FurnaceGUI::loop() {
               }
               break;
             }
+            case GUI_FILE_SAVE_DMF:
+              logD("saving: %s",copyOfName.c_str());
+              if (save(copyOfName,26)>0) {
+                showError(fmt::sprintf("Error while saving file! (%s)",lastError));
+              }
+              break;
+            case GUI_FILE_SAVE_DMF_LEGACY:
+              logD("saving: %s",copyOfName.c_str());
+              if (save(copyOfName,24)>0) {
+                showError(fmt::sprintf("Error while saving file! (%s)",lastError));
+              }
+              break;
             case GUI_FILE_INS_SAVE:
               if (curIns>=0 && curIns<(int)e->song.ins.size()) {
                 if (e->song.ins[curIns]->save(copyOfName.c_str(),&e->song,settings.writeInsNames)) {
@@ -5330,8 +5387,7 @@ bool FurnaceGUI::loop() {
               openFileDialog(GUI_FILE_SAVE);
               postWarnAction=GUI_WARN_QUIT;
             } else {
-              if (save(curFileName)>0) {
-// !!! NEEDS WORK
+              if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
                 showError(fmt::sprintf(_L("Error while saving file! (%s)##sggu"),lastError));
               } else {
                 quit=true;
@@ -5355,7 +5411,7 @@ bool FurnaceGUI::loop() {
               openFileDialog(GUI_FILE_SAVE);
               postWarnAction=GUI_WARN_NEW;
             } else {
-              if (save(curFileName)>0) {
+              if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
                 showError(fmt::sprintf("Error while saving file! (%s)",lastError));
               } else {
                 displayNew=true;
@@ -5379,7 +5435,7 @@ bool FurnaceGUI::loop() {
               openFileDialog(GUI_FILE_SAVE);
               postWarnAction=GUI_WARN_OPEN;
             } else {
-              if (save(curFileName)>0) {
+              if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
                 showError(fmt::sprintf("Error while saving file! (%s)",lastError));
               } else {
                 openFileDialog(GUI_FILE_OPEN);
@@ -5403,7 +5459,7 @@ bool FurnaceGUI::loop() {
               openFileDialog(GUI_FILE_SAVE);
               postWarnAction=GUI_WARN_OPEN_BACKUP;
             } else {
-              if (save(curFileName)>0) {
+              if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
                 showError(fmt::sprintf("Error while saving file! (%s)",lastError));
               } else {
                 openFileDialog(GUI_FILE_OPEN_BACKUP);
@@ -5427,7 +5483,7 @@ bool FurnaceGUI::loop() {
               openFileDialog(GUI_FILE_SAVE);
               postWarnAction=GUI_WARN_OPEN_DROP;
             } else {
-              if (save(curFileName)>0) {
+              if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
                 showError(fmt::sprintf("Error while saving file! (%s)",lastError));
                 nextFile="";
               } else {

@@ -497,6 +497,8 @@ enum FurnaceGUIFileDialogs {
   GUI_FILE_OPEN,
   GUI_FILE_OPEN_BACKUP,
   GUI_FILE_SAVE,
+  GUI_FILE_SAVE_DMF,
+  GUI_FILE_SAVE_DMF_LEGACY,
   GUI_FILE_INS_OPEN,
   GUI_FILE_INS_OPEN_REPLACE,
   GUI_FILE_INS_SAVE,
@@ -563,6 +565,8 @@ enum FurnaceGUIExportTypes {
   GUI_EXPORT_AUDIO=0,
   GUI_EXPORT_VGM,
   GUI_EXPORT_ZSM,
+  GUI_EXPORT_DMF,
+  GUI_EXPORT_DMF_LEGACY,
   GUI_EXPORT_CMD_STREAM,
   GUI_EXPORT_AMIGA_VAL,
   GUI_EXPORT_TEXT
@@ -2365,6 +2369,8 @@ class FurnaceGUI {
   void drawExportAudio(bool onWindow=false);
   void drawExportVGM(bool onWindow=false);
   void drawExportZSM(bool onWindow=false);
+  void drawExportDMF(bool onWindow=false);
+  void drawExportDMFLegacy(bool onWindow=false);
   void drawExportAmigaVal(bool onWindow=false);
   void drawExportText(bool onWindow=false);
   void drawExportCommand(bool onWindow=false);
@@ -2592,8 +2598,8 @@ class FurnaceGUI {
   void doInsert();
   void doTranspose(int amount, OperationMask& mask);
   String doCopy(bool cut, bool writeClipboard, const SelectionPoint& sStart, const SelectionPoint& sEnd);
-  void doPasteFurnace(PasteMode mode, int arg, bool readClipboard, String clipb, std::vector<String> data, int startOff, bool invalidData);
-  void doPasteMPT(PasteMode mode, int arg, bool readClipboard, String clipb, std::vector<String> data, int mptFormat);
+  void doPasteFurnace(PasteMode mode, int arg, bool readClipboard, String clipb, std::vector<String> data, int startOff, bool invalidData, UndoRegion ur);
+  void doPasteMPT(PasteMode mode, int arg, bool readClipboard, String clipb, std::vector<String> data, int mptFormat, UndoRegion ur);
   void doPaste(PasteMode mode=GUI_PASTE_MODE_NORMAL, int arg=0, bool readClipboard=true, String clipb="");
   void doChangeIns(int ins);
   void doInterpolate();
@@ -2636,7 +2642,7 @@ class FurnaceGUI {
   void pointMotion(int x, int y, int xrel, int yrel);
 
   void openFileDialog(FurnaceGUIFileDialogs type);
-  int save(String path);
+  int save(String path, int dmfVersion);
   int load(String path);
   int loadStream(String path);
   void pushRecentFile(String path);
