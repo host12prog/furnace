@@ -1627,7 +1627,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAVE:
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Save File##sggu"),
+        _L("Save File##sggu0"),
         {_L("Furnace song##sggu1"), "*.fur"},
         workingDirSong,
         dpiScale
@@ -1636,8 +1636,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAVE_DMF:
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openSave(
-        "Save File",
-        {"DefleMask 1.1.3 module", "*.dmf"},
+        _L("Save File##sggu1"),
+        {_L("DefleMask 1.1.3 module##sggu"), "*.dmf"},
         workingDirSong,
         dpiScale
       );
@@ -1645,8 +1645,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAVE_DMF_LEGACY:
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openSave(
-        "Save File",
-        {"DefleMask 1.0/legacy module", "*.dmf"},
+        _L("Save File##sggu2"),
+        {_L("DefleMask 1.0/legacy module##sggu"), "*.dmf"},
         workingDirSong,
         dpiScale
       );
@@ -4050,10 +4050,10 @@ bool FurnaceGUI::loop() {
             drawExportVGM();
             ImGui::EndMenu();
           }
-          if (ImGui::MenuItem("export .dmf (1.1.3+)...")) {
+          if (ImGui::MenuItem(_L("export .dmf (1.1.3+)...##sggu0"))) {
           openFileDialog(GUI_FILE_SAVE_DMF);
           }
-          if (ImGui::MenuItem("export .dmf (1.0/legacy)...")) {
+          if (ImGui::MenuItem(_L("export .dmf (1.0/legacy)...##sggu0"))) {
             openFileDialog(GUI_FILE_SAVE_DMF_LEGACY);
           }
           int numZSMCompat=0;
@@ -4093,11 +4093,11 @@ bool FurnaceGUI::loop() {
             curExportType=GUI_EXPORT_VGM;
             displayExport=true;
           }
-          if (ImGui::MenuItem("export .dmf (1.1.3+)...")) {
+          if (ImGui::MenuItem(_L("export .dmf (1.1.3+)...##sggu1"))) {
             curExportType=(FurnaceGUIExportTypes)GUI_FILE_SAVE_DMF;
             displayExport=true;
           }
-          if (ImGui::MenuItem("export .dmf (1.0/legacy)...")) {
+          if (ImGui::MenuItem(_L("export .dmf (1.0/legacy)...##sggu1"))) {
             curExportType=(FurnaceGUIExportTypes)GUI_FILE_SAVE_DMF_LEGACY;
             displayExport=true;
           }
@@ -4823,13 +4823,13 @@ bool FurnaceGUI::loop() {
             case GUI_FILE_SAVE_DMF:
               logD("saving: %s",copyOfName.c_str());
               if (save(copyOfName,26)>0) {
-                showError(fmt::sprintf("Error while saving file! (%s)",lastError));
+                showError(fmt::sprintf(_L("Error while saving file! (%s)##sggu2"),lastError));
               }
               break;
             case GUI_FILE_SAVE_DMF_LEGACY:
               logD("saving: %s",copyOfName.c_str());
               if (save(copyOfName,24)>0) {
-                showError(fmt::sprintf("Error while saving file! (%s)",lastError));
+                showError(fmt::sprintf(_L("Error while saving file! (%s)##sggu3"),lastError));
               }
               break;
             case GUI_FILE_INS_SAVE:

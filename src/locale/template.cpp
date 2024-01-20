@@ -376,7 +376,11 @@ void DivLocale::addTranslationsTemplate()
     strings["no backups made yet!##sggu"].plurals[0] = "=no backups made yet!";
     strings["Restore Backup##sggu"].plurals[0] = "=Restore Backup";
     strings["Furnace song##sggu0"].plurals[0] = "=Furnace song";
-    strings["Save File##sggu"].plurals[0] = "=Save File";
+    strings["Save File##sggu0"].plurals[0] = "=Save File";
+    strings["DefleMask 1.1.3 module##sggu"].plurals[0] = "=DefleMask 1.1.3 module";
+    strings["Save File##sggu1"].plurals[0] = "=Save File";
+    strings["DefleMask 1.0/legacy module##sggu"].plurals[0] = "=DefleMask 1.0/legacy module";
+    strings["Save File##sggu2"].plurals[0] = "=Save File";
     strings["Furnace song##sggu1"].plurals[0] = "=Furnace song";
     strings["Load Instrument##sggu"].plurals[0] = "=Load Instrument";
     strings["all compatible files##sggu1"].plurals[0] = "=all compatible files";
@@ -561,12 +565,16 @@ void DivLocale::addTranslationsTemplate()
     strings["save as...##sggu"].plurals[0] = "=save as...";
     strings["export audio...##sggu0"].plurals[0] = "=export audio...";
     strings["export VGM...##sggu0"].plurals[0] = "=export VGM...";
+    strings["export .dmf (1.1.3+)...##sggu0"].plurals[0] = "=export .dmf (1.1.3+)...";
+    strings["export .dmf (1.0/legacy)...##sggu0"].plurals[0] = "=export .dmf (1.0/legacy)...";
     strings["export ZSM...##sggu0"].plurals[0] = "=export ZSM...";
     strings["export Amiga validation data...##sggu0"].plurals[0] = "=export Amiga validation data...";
     strings["export text...##sggu0"].plurals[0] = "=export text...";
     strings["export command stream...##sggu0"].plurals[0] = "=export command stream...";
     strings["export audio...##sggu1"].plurals[0] = "=export audio...";
     strings["export VGM...##sggu1"].plurals[0] = "=export VGM...";
+    strings["export .dmf (1.1.3+)...##sggu0"].plurals[0] = "=export .dmf (1.1.3+)...";
+    strings["export .dmf (1.0/legacy)...##sggu0"].plurals[0] = "=export .dmf (1.0/legacy)...";
     strings["export ZSM...##sggu1"].plurals[0] = "=export ZSM...";
     strings["export Amiga validation data...##sggu1"].plurals[0] = "=export Amiga validation data...";
     strings["export text...##sggu1"].plurals[0] = "=export text...";
@@ -667,6 +675,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Error while loading file! (%s)##sggu2"].plurals[0] = "=Error while loading file! (%s)";
     strings["Error while saving file! (%s)##sggu1"].plurals[0] = "=Error while saving file! (%s)";
     strings["Error while loading file! (%s)##sggu3"].plurals[0] = "=Error while loading file! (%s)";
+    strings["Error while saving file! (%s)##sggu2"].plurals[0] = "=Error while saving file! (%s)";
+    strings["Error while saving file! (%s)##sggu3"].plurals[0] = "=Error while saving file! (%s)";
     strings["error while saving instrument! make sure your instrument is compatible.##sggu"].plurals[0] = "=error while saving instrument! make sure your instrument is compatible.";
     strings["...but you haven't selected a sample!##sggu0"].plurals[0] = "=...but you haven't selected a sample!";
     strings["could not save sample! open Log Viewer for more information.##sggu0"].plurals[0] = "=could not save sample! open Log Viewer for more information.";
