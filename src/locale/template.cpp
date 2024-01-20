@@ -573,8 +573,8 @@ void DivLocale::addTranslationsTemplate()
     strings["export command stream...##sggu0"].plurals[0] = "=export command stream...";
     strings["export audio...##sggu1"].plurals[0] = "=export audio...";
     strings["export VGM...##sggu1"].plurals[0] = "=export VGM...";
-    strings["export .dmf (1.1.3+)...##sggu0"].plurals[0] = "=export .dmf (1.1.3+)...";
-    strings["export .dmf (1.0/legacy)...##sggu0"].plurals[0] = "=export .dmf (1.0/legacy)...";
+    strings["export .dmf (1.1.3+)...##sggu1"].plurals[0] = "=export .dmf (1.1.3+)...";
+    strings["export .dmf (1.0/legacy)...##sggu1"].plurals[0] = "=export .dmf (1.0/legacy)...";
     strings["export ZSM...##sggu1"].plurals[0] = "=export ZSM...";
     strings["export Amiga validation data...##sggu1"].plurals[0] = "=export Amiga validation data...";
     strings["export text...##sggu1"].plurals[0] = "=export text...";
