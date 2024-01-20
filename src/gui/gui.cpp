@@ -6743,10 +6743,6 @@ bool FurnaceGUI::init() {
   ImGui::GetIO().ConfigFlags|=ImGuiConfigFlags_DockingEnable;
   toggleMobileUI(mobileUI,true);
 
-  for (int i=0; i<DIV_MAX_CHANS; i++) {
-    oldPat[i]=new DivPattern;
-  }
-
   firstFrame=true;
 
   userEvents=SDL_RegisterEvents(1);
@@ -6993,10 +6989,6 @@ bool FurnaceGUI::finish() {
       delete[] oscValues[i];
       oscValues[i]=NULL;
     }
-  }
-
-  for (int i=0; i<DIV_MAX_CHANS; i++) {
-    delete oldPat[i];
   }
 
   if (backupTask.valid()) {
