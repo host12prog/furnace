@@ -36,7 +36,7 @@ void FurnaceGUI::drawInsVERA(DivInstrument* ins)
     macroList.push_back(FurnaceGUIMacroDesc("Pitch",ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
 
     macroList.push_back(FurnaceGUIMacroDesc("Duty",ins,DIV_MACRO_DUTY,0xff,0,63,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc("Waveform",ins,DIV_MACRO_WAVE,0xff,0,3,64,uiColors[GUI_COLOR_MACRO_WAVE]));
+    macroList.push_back(FurnaceGUIMacroDesc("Waveform",ins,DIV_MACRO_WAVE,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_WAVE]));
     macroList.push_back(FurnaceGUIMacroDesc("Panning",ins,DIV_MACRO_PAN_LEFT,0xff,0,2,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,panBits));
 
     drawMacros(macroList,macroEditStateMacros);
