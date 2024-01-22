@@ -29,17 +29,18 @@ void DivLocale::addTranslationsTemplate()
     // @       means it needs code help
     // +       means source has _L() wrappers but needs disambiguation
     // #       means all done!
- 
+    // >       means it needs review (possibly some redo)
+
     //   sg**  src/gui/
     // # sgab  src/gui/about.cpp
-    // # sgch  src/gui/channels.cpp
-    // # sgco  src/gui/chanOsc.cpp
+    // > sgch  src/gui/channels.cpp
+    // > sgco  src/gui/chanOsc.cpp
     // # sgcl  src/gui/clock.cpp
     // X sgcm  src/gui/compatFlags.cpp
-    // # sgdl  src/gui/dataList.cpp
+    // > sgdl  src/gui/dataList.cpp
     // X sgdb  src/gui/debug.cpp
     //   sgdw  src/gui/debugWindow.cpp
-    //   sgda  src/gui/doAction.cpp
+    // + sgda  src/gui/doAction.cpp
     //   sgec  src/gui/editControls.cpp
     //   sged  src/gui/editing.cpp
     //   sgef  src/gui/effectList.cpp
@@ -751,6 +752,26 @@ void DivLocale::addTranslationsTemplate()
     strings["it appears I couldn't load these fonts. any setting you can check?##sggu"].plurals[0] = "=it appears I couldn't load these fonts. any setting you can check?";
     strings["\r\nthe render driver has been set to a safe value. please restart Furnace.##sggu"].plurals[0] = "=\r\nthe render driver has been set to a safe value. please restart Furnace.";
     strings["error while loading fonts! please check your settings.##sggu2"].plurals[0] = "=error while loading fonts! please check your settings.";
+
+    //src/gui/doAction.cpp
+
+    strings["Unsaved changes! Save changes before creating a new song?##sgda"].plurals[0] = "=Unsaved changes! Save changes before creating a new song?";
+    strings["Unsaved changes! Save changes before opening another file?##sgda"].plurals[0] = "=Unsaved changes! Save changes before opening another file?";
+    strings["Unsaved changes! Save changes before opening backup?##sgda"].plurals[0] = "=Unsaved changes! Save changes before opening backup?";
+    strings["Error while saving file! (%s)##sgda"].plurals[0] = "=Error while saving file! (%s)";
+    strings["Error while sending request (MIDI output not configured?)##sgda"].plurals[0] = "=Error while sending request (MIDI output not configured?)";
+    strings["Select an option: (cannot be undone!)##sgda"].plurals[0] = "=Select an option: (cannot be undone!)";
+    strings["too many instruments!##sgda0"].plurals[0] = "=too many instruments!";
+    strings["too many instruments!##sgda1"].plurals[0] = "=too many instruments!";
+    strings["too many wavetables!##sgda0"].plurals[0] = "=too many wavetables!";
+    strings["too many wavetables!##sgda1"].plurals[0] = "=too many wavetables!";
+    strings["too many samples!##sgda0"].plurals[0] = "=too many samples!";
+    strings["too many samples!##sgda1"].plurals[0] = "=too many samples!";
+    strings["couldn't paste! make sure your sample is 8 or 16-bit.##sgda"].plurals[0] = "=couldn't paste! make sure your sample is 8 or 16-bit.";
+    strings["too many instruments!##sgda2"].plurals[0] = "=too many instruments!";
+    strings["select at least one sample!##sgda"].plurals[0] = "=select at least one sample!";
+    strings["maximum size is 256 samples!##sgda"].plurals[0] = "=maximum size is 256 samples!";
+    strings["too many wavetables!##sgda2"].plurals[0] = "=too many wavetables!";
 
 /*
     //MENU BAR ITEMS
