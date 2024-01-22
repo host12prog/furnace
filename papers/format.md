@@ -236,6 +236,7 @@ size | description
      |   - 0xd0: Namco C352 - 32 channels (UNAVAILABLE)
      |   - 0xd1: ESFM - 18 channels
      |   - 0xd2: Ensoniq ES5503 - 32 channels
+     |   - 0xd4: PowerNoise - 4 channels (UNAVAILABLE)
      |   - 0xde: YM2610B extended - 19 channels
      |   - 0xe0: QSound - 19 channels
      |   - 0xfc: Pong - 1 channel
@@ -243,7 +244,7 @@ size | description
      |   - 0xfe: reserved for development
      |   - 0xff: reserved for development
      | - (compound!) means that the system is composed of two or more chips,
-     |   and has to be flattened.
+     |   and has to be flattened. 
      | - (UNAVAILABLE) means that the chip hasn't been implemented in Furnace
      |   yet.
  32  | sound chip volumes (<135) or reserved
