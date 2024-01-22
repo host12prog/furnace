@@ -37,11 +37,11 @@ void DivLocale::addTranslationsTemplate()
     // # sgco  src/gui/chanOsc.cpp
     // # sgcl  src/gui/clock.cpp
     // X sgcm  src/gui/compatFlags.cpp
-    // > sgdl  src/gui/dataList.cpp
+    // # sgdl  src/gui/dataList.cpp
     // X sgdb  src/gui/debug.cpp
-    //   sgdw  src/gui/debugWindow.cpp
+    // X sgdw  src/gui/debugWindow.cpp
     // # sgda  src/gui/doAction.cpp
-    //   sgec  src/gui/editControls.cpp
+    // # sgec  src/gui/editControls.cpp
     //   sged  src/gui/editing.cpp
     //   sgef  src/gui/effectList.cpp
     //   sgeo  src/gui/exportOptions.cpp
@@ -772,6 +772,125 @@ void DivLocale::addTranslationsTemplate()
     strings["select at least one sample!##sgda"].plurals[0] = "=select at least one sample!";
     strings["maximum size is 256 samples!##sgda"].plurals[0] = "=maximum size is 256 samples!";
     strings["too many wavetables!##sgda2"].plurals[0] = "=too many wavetables!";
+
+    //src/gui/editControls.cpp
+
+    strings["Mobile Edit###MobileEdit"].plurals[0] = "=Mobile Edit###MobileEdit";
+    strings["Mobile Controls###Mobile Controls"].plurals[0] = "=Mobile Controls###Mobile Controls";
+    strings["Mobile Menu###Mobile Menu"].plurals[0] = "=Mobile Menu###Mobile Menu";
+    strings["Pattern##sgec0"].plurals[0] = "=Pattern##sgec0";
+    strings["Orders##sgec0"].plurals[0] = "=Orders##sgec0";
+    strings["Ins##sgec"].plurals[0] = "=Ins##sgec";
+    strings["Wave##sgec"].plurals[0] = "=Wave##sgec";
+    strings["Sample##sgec"].plurals[0] = "=Sample##sgec";
+    strings["Song##sgec"].plurals[0] = "=Song##sgec";
+    strings["Channels##sgec"].plurals[0] = "=Channels##sgec";
+    strings["Chips##sgec"].plurals[0] = "=Chips##sgec";
+    strings["Mixer##sgec"].plurals[0] = "=Mixer##sgec";
+    strings["Other##sgec"].plurals[0] = "=Other##sgec";
+    strings["New##sgec"].plurals[0] = "=New##sgec";
+    strings["Unsaved changes! Save changes before creating a new song?##sgec"].plurals[0] = "=Unsaved changes! Save changes before creating a new song?##sgec";
+    strings["Open##sgec"].plurals[0] = "=Open##sgec";
+    strings["Save##sgec"].plurals[0] = "=Save##sgec";
+    strings["Save as...##sgec"].plurals[0] = "=Save as...##sgec";
+    strings["Legacy .dmf##sgec"].plurals[0] = "=Legacy .dmf##sgec";
+    strings["Export##sgec"].plurals[0] = "=Export##sgec";
+    strings["Restore Backup##sgec"].plurals[0] = "=Restore Backup##sgec";
+    strings["Song Info##sgec"].plurals[0] = "=Song Info##sgec";
+    strings["Subsongs##sgec"].plurals[0] = "=Subsongs##sgec";
+    strings["Speed##sgec"].plurals[0] = "=Speed##sgec";
+    strings["Channels here...##sgec"].plurals[0] = "=Channels here...##sgec";
+    strings["Chips here...##sgec"].plurals[0] = "=Chips here...##sgec";
+    strings["What the hell...##sgec"].plurals[0] = "=What the hell...##sgec";
+    strings["Osc##sgec"].plurals[0] = "=Osc##sgec";
+    strings["ChanOsc##sgec"].plurals[0] = "=ChanOsc##sgec";
+    strings["RegView##sgec"].plurals[0] = "=RegView##sgec";
+    strings["Stats##sgec"].plurals[0] = "=Stats##sgec";
+    strings["Grooves##sgec"].plurals[0] = "=Grooves##sgec";
+    strings["Compat Flags##sgec"].plurals[0] = "=Compat Flags##sgec";
+    strings["XYOsc##sgec"].plurals[0] = "=XYOsc##sgec";
+    strings["Panic##sgec"].plurals[0] = "=Panic##sgec";
+    strings["Settings##sgec"].plurals[0] = "=Settings##sgec";
+    strings["Log##sgec"].plurals[0] = "=Log##sgec";
+    strings["Debug##sgec"].plurals[0] = "=Debug##sgec";
+    strings["About##sgec"].plurals[0] = "=About##sgec";
+    strings["Switch to Desktop Mode##sgec"].plurals[0] = "=Switch to Desktop Mode##sgec";
+    strings["this is NOT ROM export! only use for making sure the\n"
+            "Furnace Amiga emulator is working properly by\n"
+            "comparing it with real Amiga output."].plurals[0] = 
+
+            "=this is NOT ROM export! only use for making sure the\n"
+            "=Furnace Amiga emulator is working properly by\n"
+            "=comparing it with real Amiga output.";
+    strings["Directory##sgec"].plurals[0] = "=Directory##sgec";
+    strings["Bake Data##sgec"].plurals[0] = "=Bake Data##sgec";
+    strings["Done! Baked %d files.##sgec"].plurals[0] = "=Done! Baked %d files.##sgec";
+    strings["Play/Edit Controls###Play/Edit Controls"].plurals[0] = "=Play/Edit Controls###Play/Edit Controls";
+    strings["Octave##sgec0"].plurals[0] = "=Octave##sgec0";
+    strings["Edit Step##sgec0"].plurals[0] = "=Edit Step##sgec0";
+    strings["Play##sgec0"].plurals[0] = "=Play##sgec0";
+    strings["Stop##sgec0"].plurals[0] = "=Stop##sgec0";
+    strings["Edit##sgec0"].plurals[0] = "=Edit##sgec0";
+    strings["Metronome##sgec0"].plurals[0] = "=Metronome##sgec0";
+    strings["Follow##sgec0"].plurals[0] = "=Follow##sgec0";
+    strings["Orders##sgec1"].plurals[0] = "=Orders##sgec1";
+    strings["Pattern##sgec1"].plurals[0] = "=Pattern##sgec1";
+    strings["Repeat pattern##sgec0"].plurals[0] = "=Repeat pattern##sgec0";
+    strings["Step one row##sgec0"].plurals[0] = "=Step one row##sgec0";
+    strings["Poly##PolyInput"].plurals[0] = "=Poly##PolyInput";
+    strings["Mono##PolyInput"].plurals[0] = "=Mono##PolyInput";
+    strings["Polyphony##sgec0"].plurals[0] = "=Polyphony##sgec0";
+    strings["Play/Edit Controls###Play/Edit Controls"].plurals[0] = "=Play/Edit Controls###Play/Edit Controls";
+    strings["Stop##sgec1"].plurals[0] = "=Stop##sgec1";
+    strings["Play##sgec1"].plurals[0] = "=Play##sgec1";
+    strings["Step one row##sgec1"].plurals[0] = "=Step one row##sgec1";
+    strings["Repeat pattern##sgec1"].plurals[0] = "=Repeat pattern##sgec1";
+    strings["Edit##sgec1"].plurals[0] = "=Edit##sgec1";
+    strings["Metronome##sgec1"].plurals[0] = "=Metronome##sgec1";
+    strings["Octave##sgec1"].plurals[0] = "=Octave##sgec1";
+    strings["Edit Step##sgec1"].plurals[0] = "=Edit Step##sgec1";
+    strings["Follow##sgec1"].plurals[0] = "=Follow##sgec1";
+    strings["Orders##sgec2"].plurals[0] = "=Orders##sgec2";
+    strings["Pattern##sgec2"].plurals[0] = "=Pattern##sgec2";
+    strings["Poly##PolyInput"].plurals[0] = "=Poly##PolyInput";
+    strings["Mono##PolyInput"].plurals[0] = "=Mono##PolyInput";
+    strings["Polyphony##sgec1"].plurals[0] = "=Polyphony##sgec1";
+    strings["Play/Edit Controls###Play/Edit Controls"].plurals[0] = "=Play/Edit Controls###Play/Edit Controls";
+    strings["Play##sgec2"].plurals[0] = "=Play##sgec2";
+    strings["Stop##sgec2"].plurals[0] = "=Stop##sgec2";
+    strings["Step one row##sgec2"].plurals[0] = "=Step one row##sgec2";
+    strings["Repeat pattern##sgec2"].plurals[0] = "=Repeat pattern##sgec2";
+    strings["Edit##sgec2"].plurals[0] = "=Edit##sgec2";
+    strings["Metronome##sgec2"].plurals[0] = "=Metronome##sgec2";
+    strings["Oct.##sgec"].plurals[0] = "=Oct.##sgec";
+    strings["Octave##sgec2"].plurals[0] = "=Octave##sgec2";
+    strings["Step##sgec0"].plurals[0] = "=Step##sgec0";
+    strings["Foll.##sgec"].plurals[0] = "=Foll.##sgec";
+    strings["Follow##sgec2"].plurals[0] = "=Follow##sgec2";
+    strings["Ord##FollowOrders"].plurals[0] = "=Ord##FollowOrders";
+    strings["Orders##sgec3"].plurals[0] = "=Orders##sgec3";
+    strings["Pat##FollowPattern"].plurals[0] = "=Pat##FollowPattern";
+    strings["Pattern##sgec3"].plurals[0] = "=Pattern##sgec3";
+    strings["Poly##PolyInput"].plurals[0] = "=Poly##PolyInput";
+    strings["Mono##PolyInput"].plurals[0] = "=Mono##PolyInput";
+    strings["Polyphony##sgec2"].plurals[0] = "=Polyphony##sgec2";
+    strings["Play Controls###Play Controls"].plurals[0] = "=Play Controls###Play Controls";
+    strings["Stop##sgec3"].plurals[0] = "=Stop##sgec3";
+    strings["Play##sgec3"].plurals[0] = "=Play##sgec3";
+    strings["Play from the beginning of this pattern##sgec"].plurals[0] = "=Play from the beginning of this pattern##sgec";
+    strings["Repeat from the beginning of this pattern##sgec"].plurals[0] = "=Repeat from the beginning of this pattern##sgec";
+    strings["Step one row##sgec3"].plurals[0] = "=Step one row##sgec3";
+    strings["Edit##sgec3"].plurals[0] = "=Edit##sgec3";
+    strings["Metronome##sgec3"].plurals[0] = "=Metronome##sgec3";
+    strings["Repeat pattern##sgec3"].plurals[0] = "=Repeat pattern##sgec3";
+    strings["Poly##PolyInput"].plurals[0] = "=Poly##PolyInput";
+    strings["Mono##PolyInput"].plurals[0] = "=Mono##PolyInput";
+    strings["Polyphony##sgec3"].plurals[0] = "=Polyphony##sgec3";
+    strings["Edit Controls###Edit Controls"].plurals[0] = "=Edit Controls###Edit Controls";
+    strings["Octave##sgec3"].plurals[0] = "=Octave##sgec3";
+    strings["Step##sgec1"].plurals[0] = "=Step##sgec1";
+    strings["Follow orders##sgec"].plurals[0] = "=Follow orders##sgec";
+    strings["Follow pattern##sgec"].plurals[0] = "=Follow pattern##sgec";
 
 /*
     //MENU BAR ITEMS
