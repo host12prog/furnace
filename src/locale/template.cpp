@@ -33,14 +33,14 @@ void DivLocale::addTranslationsTemplate()
 
     //   sg**  src/gui/
     // # sgab  src/gui/about.cpp
-    // > sgch  src/gui/channels.cpp
-    // > sgco  src/gui/chanOsc.cpp
+    // # sgch  src/gui/channels.cpp
+    // # sgco  src/gui/chanOsc.cpp
     // # sgcl  src/gui/clock.cpp
     // X sgcm  src/gui/compatFlags.cpp
     // > sgdl  src/gui/dataList.cpp
     // X sgdb  src/gui/debug.cpp
     //   sgdw  src/gui/debugWindow.cpp
-    // + sgda  src/gui/doAction.cpp
+    // # sgda  src/gui/doAction.cpp
     //   sgec  src/gui/editControls.cpp
     //   sged  src/gui/editing.cpp
     //   sgef  src/gui/effectList.cpp

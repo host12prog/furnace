@@ -363,7 +363,6 @@ void FurnaceGUI::drawChanOsc() {
       ImGui::InputText("##TextFormat",&chanOscTextFormat);
       if (ImGui::IsItemHovered()) {
         if (ImGui::BeginTooltip()) {
-//translate this from here
           ImGui::TextUnformatted(
             _L("format guide:\n"
             "- %c: channel name\n"
@@ -382,7 +381,6 @@ void FurnaceGUI::drawChanOsc() {
             "- %b: volume (hex)\n"
             "- %l: new line\n"
             "- %%: percent sign##sgco"));
-//to here
           ImGui::EndTooltip();
         }
       }
@@ -592,7 +590,7 @@ void FurnaceGUI::drawChanOsc() {
           ChanOscStatus* fft=oscFFTs[i];
           int ch=oscChans[i];
           if (buf==NULL) {
-            ImGui::Text(_L("Error!"));
+            ImGui::Text(_L("Error!##sgco"));
           } else {
             ImVec2 size=ImGui::GetContentRegionAvail();
             size.y=availY/rows;
