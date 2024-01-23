@@ -4359,21 +4359,21 @@ bool FurnaceGUI::loop() {
             totalDays%=30;
 
             if (totalYears>1) {
-              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d years " : _L("%d years ##sggu")),totalYears);
+              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d years " : _LP("%d years ##sggu", totalYears)),totalYears);
             } else if (totalYears) {
-              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d year " : _L("%d year ##sggu")),totalYears);
+              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d year " : _LP("%d years ##sggu", totalYears)),totalYears);
             }
 
             if (totalMonths>1) {
-              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d months " : _L("%d months ##sggu")),totalMonths);
+              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d months " : _LP("%d months ##sggu", totalMonths)),totalMonths);
             } else if (totalMonths) {
-              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d month " : _L("%d month ##sggu")),totalMonths);
+              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d month " : _LP("%d months ##sggu", totalMonths)),totalMonths);
             }
 
             if (totalDays>1) {
-              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d days " : _L("%d days ##sggu")),totalDays);
+              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d days " : _LP("%d days ##sggu", totalDays)),totalDays);
             } else {
-              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d day " : _L("%d day ##sggu")),totalDays);
+              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d day " : _LP("%d days ##sggu", totalDays)),totalDays);
             }
           }
 

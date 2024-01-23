@@ -653,12 +653,12 @@ void DivLocale::addTranslationsTemplate()
     strings["| Row %.2X/%.2X ##sggu"].plurals[0] = "=| Row %.2X/%.2X ";
     strings["| Row %d/%d ##sggu"].plurals[0] = "=| Row %d/%d ";
     strings["Don't you have anything better to do?##sggu"].plurals[0] = "=Don't you have anything better to do?";
-    strings["%d years ##sggu"].plurals[0] = "=%d years ";
-    strings["%d year ##sggu"].plurals[0] = "=%d year ";
-    strings["%d months ##sggu"].plurals[0] = "=%d months ";
-    strings["%d month ##sggu"].plurals[0] = "=%d month ";
-    strings["%d days ##sggu"].plurals[0] = "=%d days ";
-    strings["%d day ##sggu"].plurals[0] = "=%d day ";
+    strings["%d years ##sggu"].plurals[0] = "=%d year ";
+    strings["%d years ##sggu"].plurals[1] = "=%d years ";
+    strings["%d months ##sggu"].plurals[0] = "=%d month ";
+    strings["%d months ##sggu"].plurals[1] = "=%d months ";
+    strings["%d days ##sggu"].plurals[0] = "=%d day ";
+    strings["%d days ##sggu"].plurals[1] = "=%d days ";
     strings["Note off (cut)##sggu"].plurals[0] = "=Note off (cut)";
     strings["Note off (release)##sggu"].plurals[0] = "=Note off (release)";
     strings["Macro release only##sggu"].plurals[0] = "=Macro release only";
