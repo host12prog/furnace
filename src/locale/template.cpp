@@ -45,8 +45,8 @@ void DivLocale::addTranslationsTemplate()
     // # sged  src/gui/editing.cpp
     // # sgef  src/gui/effectList.cpp
     // # sgeo  src/gui/exportOptions.cpp
-    //   sgfd  src/gui/fileDialog.cpp
-    //   sgfr  src/gui/findReplace.cpp
+    // # sgfd  src/gui/fileDialog.cpp
+    // @ sgfr  src/gui/findReplace.cpp
     //   sgfm  src/gui/fmPreview.cpp
     //   sgfo  src/gui/fonts.cpp
     //   sggd  src/gui/gradient.cpp
@@ -1010,7 +1010,75 @@ void DivLocale::addTranslationsTemplate()
     strings["Tell tildearrow this must be a mistake##sgeo"].plurals[0] = "=Tell tildearrow this must be a mistake";
     strings["yeah, it's a bug. write a bug report in the GitHub page and tell me how did you get here.##sgeo"].plurals[0] = "=yeah, it's a bug. write a bug report in the GitHub page and tell me how did you get here.";
 
-    //   sgfd  src/gui/fileDialog.cpp
+    //   sgfr  src/gui/findReplace.cpp
+
+    strings["ignore##sgfr"].plurals[0] = "=ignore";
+    strings["equals##sgfr"].plurals[0] = "=equals";
+    strings["not equal##sgfr"].plurals[0] = "=not equal";
+    strings["between##sgfr"].plurals[0] = "=between";
+    strings["not between##sgfr"].plurals[0] = "=not between";
+    strings["any##sgfr"].plurals[0] = "=any";
+    strings["none##sgfr"].plurals[0] = "=none";
+    strings["set##sgfr"].plurals[0] = "=set";
+    strings["add##sgfr"].plurals[0] = "=add";
+    strings["add (overflow)##sgfr"].plurals[0] = "=add (overflow)";
+    strings["scale %##sgfr"].plurals[0] = "=scale %";
+    strings["clear##sgfr"].plurals[0] = "=clear";
+
+    strings["Find/Replace###Find/Replace"].plurals[0] = "=Find/Replace###Find/Replace";
+    strings["Find##sgfr0"].plurals[0] = "=Find";
+    strings["order##sgfr0"].plurals[0] = "=order";
+    strings["row##sgfr0"].plurals[0] = "=row";
+    strings["order##sgfr1"].plurals[0] = "=order";
+    strings["row##sgfr1"].plurals[0] = "=row";
+    strings["channel##sgfr"].plurals[0] = "=channel";
+    strings["go##sgfr"].plurals[0] = "=go";
+    strings["no matches found!##sgfr"].plurals[0] = "=no matches found!";
+    strings["Back##sgfr"].plurals[0] = "=Back";
+    strings["Note##sgfr0"].plurals[0] = "=Note";
+    strings["Ins##sgfr0"].plurals[0] = "=Ins";
+    strings["Volume##sgfr0"].plurals[0] = "=Volume";
+    strings["Effect##sgfr0"].plurals[0] = "=Effect";
+    strings["Value##sgfr0"].plurals[0] = "=Value";
+    strings["Delete query##sgfr"].plurals[0] = "=Delete query";
+    strings["Add effect##sgfr0"].plurals[0] = "=Add effect";
+    strings["Remove effect##sgfr0"].plurals[0] = "=Remove effect";
+    strings["Search range:##sgfr"].plurals[0] = "=Search range:";
+    strings["Song##sgfr"].plurals[0] = "=Song";
+    strings["Selection##sgfr"].plurals[0] = "=Selection";
+    strings["Pattern##sgfr"].plurals[0] = "=Pattern";
+    strings["Confine to channels##sgfr"].plurals[0] = "=Confine to channels";
+    strings["From##sgfr"].plurals[0] = "=From";
+    strings["To##sgfr"].plurals[0] = "=To";
+    strings["Match effect position:##sgfr"].plurals[0] = "=Match effect position:";
+    strings["No##sgfr"].plurals[0] = "=No";
+    strings["match effects regardless of position.##sgfr"].plurals[0] = "=match effects regardless of position.";
+    strings["Lax##sgfr"].plurals[0] = "=Lax";
+    strings["match effects only if they appear in-order.##sgfr"].plurals[0] = "=match effects only if they appear in-order.";
+    strings["Strict##sgfr"].plurals[0] = "=Strict";
+    strings["match effects only if they appear exactly as specified.##sgfr"].plurals[0] = "=match effects only if they appear exactly as specified.";
+    strings["Find##sgfr1"].plurals[0] = "=Find";
+    strings["Replace##sgfr"].plurals[0] = "=Replace";
+    strings["Note##sgfr1"].plurals[0] = "=Note";
+    strings["INVALID##sgfr"].plurals[0] = "=INVALID";
+    strings["Ins##sgfr1"].plurals[0] = "=Ins";
+    strings["Volume##sgfr1"].plurals[0] = "=Volume";
+    strings["Effect##sgfr1"].plurals[0] = "=Effect";
+    strings["Value##sgfr1"].plurals[0] = "=Value";
+    strings["Add effect##sgfr1"].plurals[0] = "=Add effect";
+    strings["Remove effect##sgfr1"].plurals[0] = "=Remove effect";
+    strings["Effect replace mode:##sgfr"].plurals[0] = "=Effect replace mode:";
+    strings["Replace matches only##sgfr"].plurals[0] = "=Replace matches only";
+    strings["Replace matches, then free spaces##sgfr"].plurals[0] = "=Replace matches, then free spaces";
+    strings["Clear effects##sgfr"].plurals[0] = "=Clear effects";
+    strings["Insert in free spaces##sgfr"].plurals[0] = "=Insert in free spaces";
+    strings["Replace##QueryReplace"].plurals[0] = "=Replace##QueryReplace";
+
+    //   sgfm  src/gui/fmPreview.cpp
+
+
+
+//REMEMBER to check for anything that calls the strings at the top!
 
 /*
     //MENU BAR ITEMS
