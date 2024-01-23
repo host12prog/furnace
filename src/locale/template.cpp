@@ -287,7 +287,7 @@ void DivLocale::addTranslationsTemplate()
     strings["duplicate##sgdl0"].plurals[0] = "=duplicate";
     strings["replace...##sgdl0"].plurals[0] = "=replace...";
     strings["save##sgdl0"].plurals[0] = "=save";
-    strings["save (.dmp)##sgdl"].plurals[0] = "=save (.dmp)";
+    strings["export (.dmp)##sgdl"].plurals[0] = "=export (.dmp)";
     strings["delete##sgdl0"].plurals[0] = "=delete";
     strings["%.2X: <INVALID>##sgdl"].plurals[0] = "=%.2X: <INVALID>";
     strings["- None -##sgdl"].plurals[0] = "=- None -";

@@ -142,7 +142,7 @@ void FurnaceGUI::insListItem(int i, int dir, int asset) {
       if (ImGui::MenuItem(_L("save##sgdl0"))) {
         doAction(GUI_ACTION_INS_LIST_SAVE);
       }
-      if (ImGui::MenuItem(_L("save (.dmp)##sgdl"))) {
+      if (ImGui::MenuItem(_L("export (.dmp)##sgdl"))) {
         doAction(GUI_ACTION_INS_LIST_SAVE_DMP);
       }
       if (ImGui::MenuItem(_L("delete##sgdl0"))) {
