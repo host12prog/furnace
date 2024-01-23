@@ -26,23 +26,23 @@
 void FurnaceGUI::drawExportAudio(bool onWindow) {
   exitDisabledTimer=1;
 
-  ImGui::RadioButton("one file",&audioExportType,0);
-  ImGui::RadioButton("multiple files (one per chip)",&audioExportType,1);
-  ImGui::RadioButton("multiple files (one per channel)",&audioExportType,2);
-  if (ImGui::InputInt("Loops",&exportLoops,1,2)) {
+  ImGui::RadioButton(_L("one file##sgeo"),&audioExportType,0);
+  ImGui::RadioButton(_L("multiple files (one per chip)##sgeo"),&audioExportType,1);
+  ImGui::RadioButton(_L("multiple files (one per channel)##sgeo"),&audioExportType,2);
+  if (ImGui::InputInt(_L("Loops##sgeo"),&exportLoops,1,2)) {
     if (exportLoops<0) exportLoops=0;
   }
-  if (ImGui::InputDouble("Fade out (seconds)",&exportFadeOut,1.0,2.0,"%.1f")) {
+  if (ImGui::InputDouble(_L("Fade out (seconds)##sgeo"),&exportFadeOut,1.0,2.0,"%.1f")) {
     if (exportFadeOut<0.0) exportFadeOut=0.0;
   }
 
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button("Cancel",ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo0"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
 
-  if (ImGui::Button("Export",ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export##sgeo0"),ImVec2(200.0f*dpiScale,0))) {
     switch (audioExportType) {
       case 0:
         openFileDialog(GUI_FILE_EXPORT_AUDIO_ONE);
@@ -61,7 +61,7 @@ void FurnaceGUI::drawExportAudio(bool onWindow) {
 void FurnaceGUI::drawExportVGM(bool onWindow) {
   exitDisabledTimer=1;
 
-  ImGui::Text("settings:");
+  ImGui::Text(_L("settings:##sgeo"));
   if (ImGui::BeginCombo("format version",fmt::sprintf("%d.%.2x",vgmExportVersion>>8,vgmExportVersion&0xff).c_str())) {
     for (int i=0; i<7; i++) {
       if (ImGui::Selectable(fmt::sprintf("%d.%.2x",vgmVersions[i]>>8,vgmVersions[i]&0xff).c_str(),vgmExportVersion==vgmVersions[i])) {
@@ -70,17 +70,17 @@ void FurnaceGUI::drawExportVGM(bool onWindow) {
     }
     ImGui::EndCombo();
   }
-  ImGui::Checkbox("loop",&vgmExportLoop);
+  ImGui::Checkbox(_L("loop##sgeo0"),&vgmExportLoop);
   if (vgmExportLoop && e->song.loopModality==2) {
-    ImGui::Text("loop trail:");
+    ImGui::Text(_L("loop trail:##sgeo"));
     ImGui::Indent();
-    if (ImGui::RadioButton("auto-detect",vgmExportTrailingTicks==-1)) {
+    if (ImGui::RadioButton(_L("auto-detect##sgeo"),vgmExportTrailingTicks==-1)) {
       vgmExportTrailingTicks=-1;
     }
-    if (ImGui::RadioButton("add one loop",vgmExportTrailingTicks==-2)) {
+    if (ImGui::RadioButton(_L("add one loop##sgeo1"),vgmExportTrailingTicks==-2)) {
       vgmExportTrailingTicks=-2;
     }
-    if (ImGui::RadioButton("custom",vgmExportTrailingTicks>=0)) {
+    if (ImGui::RadioButton(_L("custom##sgeo"),vgmExportTrailingTicks>=0)) {
       vgmExportTrailingTicks=0;
     }
     if (vgmExportTrailingTicks>=0) {
@@ -91,9 +91,9 @@ void FurnaceGUI::drawExportVGM(bool onWindow) {
     }
     ImGui::Unindent();
   }
-  ImGui::Checkbox("add pattern change hints",&vgmExportPatternHints);
+  ImGui::Checkbox(_L("add pattern change hints##sgeo"),&vgmExportPatternHints);
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(
+    ImGui::SetTooltip(_L(
       "inserts data blocks on pattern changes.\n"
       "useful if you are writing a playback routine.\n\n"
 
@@ -105,17 +105,17 @@ void FurnaceGUI::drawExportVGM(bool onWindow) {
       "- pp: pattern index (one per channel)\n\n"
 
       "pattern indexes are ordered as they appear in the song."
-    );
+    ));
   }
-  ImGui::Checkbox("direct stream mode",&vgmExportDirectStream);
+  ImGui::Checkbox(_L("direct stream mode##sgeo"),&vgmExportDirectStream);
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(
+    ImGui::SetTooltip(_L(
       "required for DualPCM and MSM6258 export.\n\n"
       "allows for volume/direction changes when playing samples,\n"
       "at the cost of a massive increase in file size."
-    );
+    ));
   }
-  ImGui::Text("chips to export:");
+  ImGui::Text(_L("chips to export:##sgeo"));
   bool hasOneAtLeast=false;
   for (int i=0; i<e->song.systemLen; i++) {
     int minVersion=e->minVGMVersion(e->song.system[i]);
@@ -124,32 +124,32 @@ void FurnaceGUI::drawExportVGM(bool onWindow) {
     ImGui::EndDisabled();
     if (minVersion>vgmExportVersion) {
       if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
-        ImGui::SetTooltip("this chip is only available in VGM %d.%.2x and higher!",minVersion>>8,minVersion&0xff);
+        ImGui::SetTooltip(_L("this chip is only available in VGM %d.%.2x and higher!##sgeo"),minVersion>>8,minVersion&0xff);
       }
     } else if (minVersion==0) {
       if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
-        ImGui::SetTooltip("this chip is not supported by the VGM format!");
+        ImGui::SetTooltip(_L("this chip is not supported by the VGM format!##sgeo"));
       }
     } else {
       if (willExport[i]) hasOneAtLeast=true;
     }
   }
-  ImGui::Text("select the chip you wish to export, but only up to %d of each type.",(vgmExportVersion>=0x151)?2:1);
+  ImGui::Text(_L("select the chip you wish to export, but only up to %d of each type.##sgeo"),(vgmExportVersion>=0x151)?2:1);
   if (hasOneAtLeast) {
     if (onWindow) {
       ImGui::Separator();
-      if (ImGui::Button("Cancel",ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+      if (ImGui::Button(_L("Cancel##sgeo1"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
       ImGui::SameLine();
     }
-    if (ImGui::Button("Export",ImVec2(200.0f*dpiScale,0))) {
+    if (ImGui::Button(_L("Export##sgeo1"),ImVec2(200.0f*dpiScale,0))) {
       openFileDialog(GUI_FILE_EXPORT_VGM);
       ImGui::CloseCurrentPopup();
     }
   } else {
-    ImGui::Text("nothing to export");
+    ImGui::Text(_L("nothing to export##sgeo2"));
     if (onWindow) {
       ImGui::Separator();
-      if (ImGui::Button("Cancel",ImVec2(400.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+      if (ImGui::Button(_L("Cancel##sgeo2"),ImVec2(400.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     }
   }
 }
@@ -157,20 +157,20 @@ void FurnaceGUI::drawExportVGM(bool onWindow) {
 void FurnaceGUI::drawExportZSM(bool onWindow) {
   exitDisabledTimer=1;
 
-  ImGui::Text("Commander X16 Zsound Music File");
-  if (ImGui::InputInt("Tick Rate (Hz)",&zsmExportTickRate,1,2)) {
+  ImGui::Text(_L("Commander X16 Zsound Music File##sgeo"));
+  if (ImGui::InputInt(_L("Tick Rate (Hz)##sgeo"),&zsmExportTickRate,1,2)) {
     if (zsmExportTickRate<1) zsmExportTickRate=1;
     if (zsmExportTickRate>44100) zsmExportTickRate=44100;
   }
-  ImGui::Checkbox("loop",&zsmExportLoop);
+  ImGui::Checkbox(_L("loop##sgeo2"),&zsmExportLoop);
   ImGui::SameLine();
-  ImGui::Checkbox("optimize size",&zsmExportOptimize);
+  ImGui::Checkbox(_L("optimize size##sgeo"),&zsmExportOptimize);
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button("Cancel",ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo3"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button("Export",ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export##sgeo3"),ImVec2(200.0f*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_ZSM);
     ImGui::CloseCurrentPopup();
   }
@@ -179,13 +179,13 @@ void FurnaceGUI::drawExportZSM(bool onWindow) {
 void FurnaceGUI::drawExportDMF(bool onWindow) {
   exitDisabledTimer=1;
 
-  ImGui::Text("DefleMask file (1.1.3+)");
+  ImGui::Text(_L("DefleMask file (1.1.3+)##sgeo"));
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button("Cancel",ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo4"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button("Export",ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export##sgeo4"),ImVec2(200.0f*dpiScale,0))) {
     openFileDialog(GUI_FILE_SAVE_DMF);
     ImGui::CloseCurrentPopup();
   }
@@ -194,13 +194,13 @@ void FurnaceGUI::drawExportDMF(bool onWindow) {
 void FurnaceGUI::drawExportDMFLegacy(bool onWindow) {
   exitDisabledTimer=1;
 
-  ImGui::Text("DefleMask file (1.0/legacy)");
+  ImGui::Text(_L("DefleMask file (1.0/legacy)##sgeo"));
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button("Cancel",ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo5"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button("Export",ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export##sgeo5"),ImVec2(200.0f*dpiScale,0))) {
     openFileDialog(GUI_FILE_SAVE_DMF_LEGACY);
     ImGui::CloseCurrentPopup();
   }
@@ -209,21 +209,21 @@ void FurnaceGUI::drawExportDMFLegacy(bool onWindow) {
 void FurnaceGUI::drawExportAmigaVal(bool onWindow) {
   exitDisabledTimer=1;
 
-  ImGui::Text(
+  ImGui::Text(_L(
     "this is NOT ROM export! only use for making sure the\n"
     "Furnace Amiga emulator is working properly by\n"
     "comparing it with real Amiga output."
-  );
+  ));
   ImGui::AlignTextToFramePadding();
-  ImGui::Text("Directory");
+  ImGui::Text(_L("Directory##sgeo"));
   ImGui::SameLine();
   ImGui::InputText("##AVDPath",&workingDirROMExport);
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button("Cancel",ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo6"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button("Bake Data",ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Bake Data##sgeo"),ImVec2(200.0f*dpiScale,0))) {
     std::vector<DivROMExportOutput> out=e->buildROM(DIV_ROM_AMIGA_VALIDATION);
     if (workingDirROMExport.size()>0) {
       if (workingDirROMExport[workingDirROMExport.size()-1]!=DIR_SEPARATOR) workingDirROMExport+=DIR_SEPARATOR_STR;
@@ -238,7 +238,7 @@ void FurnaceGUI::drawExportAmigaVal(bool onWindow) {
       i.data->finish();
       delete i.data;
     }
-    showError(fmt::sprintf("Done! Baked %d files.",(int)out.size()));
+    showError(fmt::sprintf(_L("Done! Baked %d files.##sgeo"),(int)out.size()));
     ImGui::CloseCurrentPopup();
   }
 }
@@ -247,14 +247,14 @@ void FurnaceGUI::drawExportText(bool onWindow) {
   exitDisabledTimer=1;
 
   ImGui::Text(
-    "this option exports the song to a text file.\n"
+    _L("this option exports the song to a text file.\n##sgeo")
   );
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button("Cancel",ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo7"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button("Export",ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export##sgeo6"),ImVec2(200.0f*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_TEXT);
     ImGui::CloseCurrentPopup();
   }
@@ -263,24 +263,24 @@ void FurnaceGUI::drawExportText(bool onWindow) {
 void FurnaceGUI::drawExportCommand(bool onWindow) {
   exitDisabledTimer=1;
   
-  ImGui::Text(
+  ImGui::Text(_L(
     "this option exports a text or binary file which\n"
     "contains a dump of the internal command stream\n"
     "produced when playing the song.\n\n"
 
     "technical/development use only!"
-  );
+  ));
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button("Cancel",ImVec2(133.3f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo8"),ImVec2(133.3f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button("Export (binary)",ImVec2(133.3f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export (binary)##sgeo"),ImVec2(133.3f*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_CMDSTREAM_BINARY);
     ImGui::CloseCurrentPopup();
   }
   ImGui::SameLine();
-  if (ImGui::Button("Export (text)",ImVec2(133.3f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export (text)##sgeo"),ImVec2(133.3f*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_CMDSTREAM);
     ImGui::CloseCurrentPopup();
   }
@@ -289,7 +289,7 @@ void FurnaceGUI::drawExportCommand(bool onWindow) {
 void FurnaceGUI::drawExport() {
   if (settings.exportOptionsLayout==1 || curExportType==GUI_EXPORT_NONE) {
     if (ImGui::BeginTabBar("ExportTypes")) {
-      if (ImGui::BeginTabItem("Audio")) {
+      if (ImGui::BeginTabItem(_L("Audio##sgeo"))) {
         drawExportAudio(true);
         ImGui::EndTabItem();
       }
@@ -301,7 +301,7 @@ void FurnaceGUI::drawExport() {
         drawExportDMF(true);
         ImGui::EndTabItem();
       }
-      if (ImGui::BeginTabItem("DMF (1.0/legacy)")) {
+      if (ImGui::BeginTabItem(_L("DMF (1.0/legacy)##sgeo"))) {
         drawExportDMFLegacy(true);
         ImGui::EndTabItem();
       }
@@ -320,16 +320,16 @@ void FurnaceGUI::drawExport() {
         if (e->song.system[i]==DIV_SYSTEM_AMIGA) numAmiga++;
       }
       if (numAmiga && settings.iCannotWait) {
-        if (ImGui::BeginTabItem("Amiga Validation")) {
+        if (ImGui::BeginTabItem(_L("Amiga Validation##sgeo"))) {
           drawExportAmigaVal(true);
           ImGui::EndTabItem();
         }
       }
-      if (ImGui::BeginTabItem("Text")) {
+      if (ImGui::BeginTabItem(_L("Text##sgeo"))) {
         drawExportText(true);
         ImGui::EndTabItem();
       }
-      if (ImGui::BeginTabItem("Command Stream")) {
+      if (ImGui::BeginTabItem(_L("Command Stream##sgeo"))) {
         drawExportCommand(true);
         ImGui::EndTabItem();
       }
@@ -361,39 +361,39 @@ void FurnaceGUI::drawExport() {
       drawExportCommand(true);
       break;
     default:
-      ImGui::Text("congratulations! you've unlocked a secret panel.");
-      if (ImGui::Button("Toggle hidden systems")) {
+      ImGui::Text(_L("congratulations! you've unlocked a secret panel.##sgeo"));
+      if (ImGui::Button(_L("Toggle hidden systems##sgeo"))) {
         settings.hiddenSystems=!settings.hiddenSystems;
         ImGui::CloseCurrentPopup();
       }
-      if (ImGui::Button("Toggle all instrument types")) {
+      if (ImGui::Button(_L("Toggle all instrument types##sgeo"))) {
         settings.displayAllInsTypes=!settings.displayAllInsTypes;
         ImGui::CloseCurrentPopup();
       }
-      if (ImGui::Button("Set pitch linearity to Partial")) {
+      if (ImGui::Button(_L("Set pitch linearity to Partial##sgeo"))) {
         e->song.linearPitch=1;
         ImGui::CloseCurrentPopup();
       }
-      if (ImGui::Button("Enable multi-threading settings")) {
+      if (ImGui::Button(_L("Enable multi-threading settings##sgeo"))) {
         settings.showPool=1;
         ImGui::CloseCurrentPopup();
       }
-      if (ImGui::Button("Set fat to max")) {
+      if (ImGui::Button(_L("Set fat to max##sgeo"))) {
         ImGuiStyle& sty=ImGui::GetStyle();
         sty.FramePadding=ImVec2(20.0f*dpiScale,20.0f*dpiScale);
         sty.ItemSpacing=ImVec2(10.0f*dpiScale,10.0f*dpiScale);
         sty.ItemInnerSpacing=ImVec2(10.0f*dpiScale,10.0f*dpiScale);
         ImGui::CloseCurrentPopup();
       }
-      if (ImGui::Button("Set muscle and fat to zero")) {
+      if (ImGui::Button(_L("Set muscle and fat to zero##sgeo"))) {
         ImGuiStyle& sty=ImGui::GetStyle();
         sty.FramePadding=ImVec2(0,0);
         sty.ItemSpacing=ImVec2(0,0);
         sty.ItemInnerSpacing=ImVec2(0,0);
         ImGui::CloseCurrentPopup();
       }
-      if (ImGui::Button("Tell tildearrow this must be a mistake")) {
-        showError("yeah, it's a bug. write a bug report in the GitHub page and tell me how did you get here.");
+      if (ImGui::Button(_L("Tell tildearrow this must be a mistake##sgeo"))) {
+        showError(_L("yeah, it's a bug. write a bug report in the GitHub page and tell me how did you get here.##sgeo"));
         ImGui::CloseCurrentPopup();
       }
       break;

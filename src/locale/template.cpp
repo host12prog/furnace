@@ -44,7 +44,7 @@ void DivLocale::addTranslationsTemplate()
     // # sgec  src/gui/editControls.cpp
     // # sged  src/gui/editing.cpp
     // # sgef  src/gui/effectList.cpp
-    //   sgeo  src/gui/exportOptions.cpp
+    // # sgeo  src/gui/exportOptions.cpp
     //   sgfd  src/gui/fileDialog.cpp
     //   sgfr  src/gui/findReplace.cpp
     //   sgfm  src/gui/fmPreview.cpp
@@ -907,6 +907,110 @@ void DivLocale::addTranslationsTemplate()
     strings["Description##sgef"].plurals[0] = "=Description";
 
     //   sgeo  src/gui/exportOptions.cpp
+
+    strings["one file##sgeo"].plurals[0] = "=one file";
+    strings["multiple files (one per chip)##sgeo"].plurals[0] = "=multiple files (one per chip)";
+    strings["multiple files (one per channel)##sgeo"].plurals[0] = "=multiple files (one per channel)";
+    strings["Loops##sgeo"].plurals[0] = "=Loops";
+    strings["Fade out (seconds)##sgeo"].plurals[0] = "=Fade out (seconds)";
+    strings["Cancel##sgeo0"].plurals[0] = "=Cancel";
+    strings["Export##sgeo0"].plurals[0] = "=Export";
+    strings["settings:##sgeo"].plurals[0] = "=settings:";
+    strings["loop##sgeo0"].plurals[0] = "=loop";
+    strings["loop trail:##sgeo"].plurals[0] = "=loop trail:";
+    strings["auto-detect##sgeo"].plurals[0] = "=auto-detect";
+    strings["add one loop##sgeo1"].plurals[0] = "=add one loop";
+    strings["custom##sgeo"].plurals[0] = "=custom";
+    strings["add pattern change hints##sgeo"].plurals[0] = "=add pattern change hints";
+    strings["inserts data blocks on pattern changes.\n"
+            "useful if you are writing a playback routine.\n\n"
+            "the format of a pattern change data block is:\n"
+            "67 66 FE ll ll ll ll 01 oo rr pp pp pp ...\n"
+            "- ll: length, a 32-bit little-endian number\n"
+            "- oo: order\n"
+            "- rr: initial row (a 0Dxx effect is able to select a different row)\n"
+            "- pp: pattern index (one per channel)\n\n"
+            "pattern indexes are ordered as they appear in the song."].plurals[0] = 
+
+            "=inserts data blocks on pattern changes.\n"
+            "=useful if you are writing a playback routine.\n\n"
+            "=the format of a pattern change data block is:\n"
+            "=67 66 FE ll ll ll ll 01 oo rr pp pp pp ...\n"
+            "=- ll: length, a 32-bit little-endian number\n"
+            "=- oo: order\n"
+            "=- rr: initial row (a 0Dxx effect is able to select a different row)\n"
+            "=- pp: pattern index (one per channel)\n\n"
+            "=pattern indexes are ordered as they appear in the song.";
+    strings["direct stream mode##sgeo"].plurals[0] = "=direct stream mode";
+    strings["required for DualPCM and MSM6258 export.\n\n"
+            "allows for volume/direction changes when playing samples,\n"
+            "at the cost of a massive increase in file size."].plurals[0] = 
+
+            "=required for DualPCM and MSM6258 export.\n\n"
+            "=allows for volume/direction changes when playing samples,\n"
+            "=at the cost of a massive increase in file size.";
+    strings["chips to export:##sgeo"].plurals[0] = "=chips to export:";
+    strings["this chip is only available in VGM %d.%.2x and higher!##sgeo"].plurals[0] = "=this chip is only available in VGM %d.%.2x and higher!";
+    strings["this chip is not supported by the VGM format!##sgeo"].plurals[0] = "=this chip is not supported by the VGM format!";
+    strings["select the chip you wish to export, but only up to %d of each type.##sgeo"].plurals[0] = "=select the chip you wish to export, but only up to %d of each type.";
+    strings["Cancel##sgeo1"].plurals[0] = "=Cancel";
+    strings["Export##sgeo1"].plurals[0] = "=Export";
+    strings["nothing to export##sgeo2"].plurals[0] = "=nothing to export";
+    strings["Cancel##sgeo2"].plurals[0] = "=Cancel";
+    strings["Commander X16 Zsound Music File##sgeo"].plurals[0] = "=Commander X16 Zsound Music File";
+    strings["Tick Rate (Hz)##sgeo"].plurals[0] = "=Tick Rate (Hz)";
+    strings["loop##sgeo2"].plurals[0] = "=loop";
+    strings["optimize size##sgeo"].plurals[0] = "=optimize size";
+    strings["Cancel##sgeo3"].plurals[0] = "=Cancel";
+    strings["Export##sgeo3"].plurals[0] = "=Export";
+    strings["DefleMask file (1.1.3+)##sgeo"].plurals[0] = "=DefleMask file (1.1.3+)";
+    strings["Cancel##sgeo4"].plurals[0] = "=Cancel";
+    strings["Export##sgeo4"].plurals[0] = "=Export";
+    strings["DefleMask file (1.0/legacy)##sgeo"].plurals[0] = "=DefleMask file (1.0/legacy)";
+    strings["Cancel##sgeo5"].plurals[0] = "=Cancel";
+    strings["Export##sgeo5"].plurals[0] = "=Export";
+    strings["this is NOT ROM export! only use for making sure the\n"
+            "Furnace Amiga emulator is working properly by\n"
+            "comparing it with real Amiga output."].plurals[0] = 
+
+            "=this is NOT ROM export! only use for making sure the\n"
+            "=Furnace Amiga emulator is working properly by\n"
+            "=comparing it with real Amiga output.";
+    strings["Directory##sgeo"].plurals[0] = "=Directory";
+    strings["Cancel##sgeo6"].plurals[0] = "=Cancel";
+    strings["Bake Data##sgeo"].plurals[0] = "=Bake Data";
+    strings["Done! Baked %d files.##sgeo"].plurals[0] = "=Done! Baked %d files.";
+    strings["this option exports the song to a text file.\n##sgeo"].plurals[0] = "=this option exports the song to a text file.\n";
+    strings["Cancel##sgeo7"].plurals[0] = "=Cancel";
+    strings["Export##sgeo6"].plurals[0] = "=Export";
+    strings["this option exports a text or binary file which\n"
+            "contains a dump of the internal command stream\n"
+            "produced when playing the song.\n\n"
+            "technical/development use only!"].plurals[0] = 
+
+            "=this option exports a text or binary file which\n"
+            "=contains a dump of the internal command stream\n"
+            "=produced when playing the song.\n\n"
+            "=technical/development use only!";
+    strings["Cancel##sgeo8"].plurals[0] = "=Cancel";
+    strings["Export (binary)##sgeo"].plurals[0] = "=Export (binary)";
+    strings["Export (text)##sgeo"].plurals[0] = "=Export (text)";
+    strings["Audio##sgeo"].plurals[0] = "=Audio";
+    strings["DMF (1.0/legacy)##sgeo"].plurals[0] = "=DMF (1.0/legacy)";
+    strings["Amiga Validation##sgeo"].plurals[0] = "=Amiga Validation";
+    strings["Text##sgeo"].plurals[0] = "=Text";
+    strings["Command Stream##sgeo"].plurals[0] = "=Command Stream";
+    strings["congratulations! you've unlocked a secret panel.##sgeo"].plurals[0] = "=congratulations! you've unlocked a secret panel.";
+    strings["Toggle hidden systems##sgeo"].plurals[0] = "=Toggle hidden systems";
+    strings["Toggle all instrument types##sgeo"].plurals[0] = "=Toggle all instrument types";
+    strings["Set pitch linearity to Partial##sgeo"].plurals[0] = "=Set pitch linearity to Partial";
+    strings["Enable multi-threading settings##sgeo"].plurals[0] = "=Enable multi-threading settings";
+    strings["Set fat to max##sgeo"].plurals[0] = "=Set fat to max";
+    strings["Set muscle and fat to zero##sgeo"].plurals[0] = "=Set muscle and fat to zero";
+    strings["Tell tildearrow this must be a mistake##sgeo"].plurals[0] = "=Tell tildearrow this must be a mistake";
+    strings["yeah, it's a bug. write a bug report in the GitHub page and tell me how did you get here.##sgeo"].plurals[0] = "=yeah, it's a bug. write a bug report in the GitHub page and tell me how did you get here.";
+
+    //   sgfd  src/gui/fileDialog.cpp
 
 /*
     //MENU BAR ITEMS
