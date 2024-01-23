@@ -15,7 +15,7 @@ void FurnaceGUI::drawEffectList() {
     float availB=ImGui::GetContentRegionAvail().x-ImGui::GetFrameHeightWithSpacing();
     if (availB>0) {
       ImGui::PushTextWrapPos(availB);
-      ImGui::TextWrapped("Chip at cursor: %s",e->getSystemName(e->sysOfChan[cursor.xCoarse]));
+      ImGui::TextWrapped(_L("Chip at cursor: %s##sgef"),e->getSystemName(e->sysOfChan[cursor.xCoarse]));
       ImGui::PopTextWrapPos();
       ImGui::SameLine();
     }
@@ -27,9 +27,9 @@ void FurnaceGUI::drawEffectList() {
         ImGui::PopStyleColor();
       }
 
-      if (ImGui::Button("All")) memset(effectsShow,1,sizeof(bool)*10);
+      if (ImGui::Button(_L("All##sgef"))) memset(effectsShow,1,sizeof(bool)*10);
       ImGui::SameLine();
-      if (ImGui::Button("None")) memset(effectsShow,0,sizeof(bool)*10);
+      if (ImGui::Button(_L("None##sgef"))) memset(effectsShow,0,sizeof(bool)*10);
 
       ImGui::EndPopup();
     }
@@ -40,9 +40,9 @@ void FurnaceGUI::drawEffectList() {
 
       ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
       ImGui::TableNextColumn();
-      ImGui::Text("Name");
+      ImGui::Text(_L("Name##sgef"));
       ImGui::TableNextColumn();
-      ImGui::Text("Description");
+      ImGui::Text(_L("Description##sgef"));
 
       const char* prevName=NULL;
       for (int i=0; i<256; i++) {

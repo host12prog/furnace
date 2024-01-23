@@ -43,7 +43,7 @@ void DivLocale::addTranslationsTemplate()
     // # sgda  src/gui/doAction.cpp
     // # sgec  src/gui/editControls.cpp
     // # sged  src/gui/editing.cpp
-    //   sgef  src/gui/effectList.cpp
+    // # sgef  src/gui/effectList.cpp
     //   sgeo  src/gui/exportOptions.cpp
     //   sgfd  src/gui/fileDialog.cpp
     //   sgfr  src/gui/findReplace.cpp
@@ -896,6 +896,15 @@ void DivLocale::addTranslationsTemplate()
 
     strings["can't collapse any further!sged"].plurals[0] = "=can't collapse any further!";
     strings["can't expand any further!sged"].plurals[0] = "=can't expand any further!";
+
+    //src/gui/effectList.cpp
+
+    strings["Effect List###Effect List"].plurals[0] = "=Effect List###Effect List";
+    strings["Chip at cursor: %s##sgef"].plurals[0] = "=Chip at cursor: %s";
+    strings["All##sgef"].plurals[0] = "=All";
+    strings["None##sgef"].plurals[0] = "=None";
+    strings["Name##sgef"].plurals[0] = "=Name";
+    strings["Description##sgef"].plurals[0] = "=Description";
 
 /*
     //MENU BAR ITEMS
