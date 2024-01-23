@@ -42,7 +42,7 @@ void DivLocale::addTranslationsTemplate()
     // X sgdw  src/gui/debugWindow.cpp
     // # sgda  src/gui/doAction.cpp
     // # sgec  src/gui/editControls.cpp
-    //   sged  src/gui/editing.cpp
+    // # sged  src/gui/editing.cpp
     //   sgef  src/gui/effectList.cpp
     //   sgeo  src/gui/exportOptions.cpp
     //   sgfd  src/gui/fileDialog.cpp
@@ -891,6 +891,11 @@ void DivLocale::addTranslationsTemplate()
     strings["Step##sgec1"].plurals[0] = "=Step##sgec1";
     strings["Follow orders##sgec"].plurals[0] = "=Follow orders##sgec";
     strings["Follow pattern##sgec"].plurals[0] = "=Follow pattern##sgec";
+
+    //src/gui/editing.cpp
+
+    strings["can't collapse any further!sged"].plurals[0] = "=can't collapse any further!";
+    strings["can't expand any further!sged"].plurals[0] = "=can't expand any further!";
 
 /*
     //MENU BAR ITEMS
