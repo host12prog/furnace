@@ -36,7 +36,7 @@ void DivLocale::addTranslationsTemplate()
     // # sgch  src/gui/channels.cpp
     // # sgco  src/gui/chanOsc.cpp
     // # sgcl  src/gui/clock.cpp
-    // X sgcm  src/gui/compatFlags.cpp
+    // X sgcf  src/gui/compatFlags.cpp
     // # sgdl  src/gui/dataList.cpp
     // X sgdb  src/gui/debug.cpp
     // X sgdw  src/gui/debugWindow.cpp
@@ -92,7 +92,7 @@ void DivLocale::addTranslationsTemplate()
 
     strings["<nothing>##test"].plurals[0] = "=<nothing>##test";
 
-    //src/gui/about.cpp
+    //   sgab  src/gui/about.cpp
 
     strings["About Furnace###About Furnace"].plurals[0] = "=About Furnace###About Furnace";
 
@@ -187,7 +187,7 @@ void DivLocale::addTranslationsTemplate()
 
     strings["thanks to all contributors/bug reporters!##sgab"].plurals[0] = "=thanks to all contributors/bug reporters!";
 
-    //src/gui/channels.cpp
+    //   sgch  src/gui/channels.cpp
 
     strings["Channels###Channels"].plurals[0] = "=Channels###Channels";
     strings["Pat##sgch"].plurals[0] = "=Pat";
@@ -198,7 +198,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Show in per-channel oscilloscope##sgch"].plurals[0] = "=Show in per-channel oscilloscope";
     strings["%s #%d\n(drag to swap channels)##sgch"].plurals[0] = "=%s #%d\n(drag to swap channels)";
 
-    //src/gui/chanOsc.cpp
+    //   sgco  src/gui/chanOsc.cpp
 
     strings["None (0%)##sgco"].plurals[0] = "=None (0%)";
     strings["None (50%)##sgco"].plurals[0] = "=None (50%)";
@@ -272,15 +272,15 @@ void DivLocale::addTranslationsTemplate()
     strings["Error!##sgco"].plurals[0] = "=Error!";
     strings["\nquiet##sgco"].plurals[0] = "=\nquiet";
 
-    //src/gui/clock.cpp
+    //   sgcl  src/gui/clock.cpp
 
     strings["Clock###Clock"].plurals[0] = "=Clock###Clock";
 
-    //src/gui/compatFlags.cpp
+    //   sgcf  src/gui/compatFlags.cpp
 
         //waiting for compat flags reduction
 
-    //src/gui/dataList.cpp
+    //   sgdl  src/gui/dataList.cpp
 
     strings["Bug!##sgdl"].plurals[0] = "=Bug!";
     strings["Unknown##sgdl"].plurals[0] = "=Unknown";
@@ -365,9 +365,7 @@ void DivLocale::addTranslationsTemplate()
     strings["rename...##sgdl2"].plurals[0] = "=rename...";
     strings["delete##sgdl7"].plurals[0] = "=delete";
 
-//progress on sifting through files alphabetically
-
-    //src/gui/gui.cpp
+    //   sggu  src/gui/gui.cpp
 
     strings["the song is over!##sggu0"].plurals[0] = "=the song is over!";
     strings["the song is over!##sggu1"].plurals[0] = "=the song is over!";
@@ -753,7 +751,7 @@ void DivLocale::addTranslationsTemplate()
     strings["\r\nthe render driver has been set to a safe value. please restart Furnace.##sggu"].plurals[0] = "=\r\nthe render driver has been set to a safe value. please restart Furnace.";
     strings["error while loading fonts! please check your settings.##sggu2"].plurals[0] = "=error while loading fonts! please check your settings.";
 
-    //src/gui/doAction.cpp
+    //   sgda  src/gui/doAction.cpp
 
     strings["Unsaved changes! Save changes before creating a new song?##sgda"].plurals[0] = "=Unsaved changes! Save changes before creating a new song?";
     strings["Unsaved changes! Save changes before opening another file?##sgda"].plurals[0] = "=Unsaved changes! Save changes before opening another file?";
@@ -773,7 +771,7 @@ void DivLocale::addTranslationsTemplate()
     strings["maximum size is 256 samples!##sgda"].plurals[0] = "=maximum size is 256 samples!";
     strings["too many wavetables!##sgda2"].plurals[0] = "=too many wavetables!";
 
-    //src/gui/editControls.cpp
+    //   sgec  src/gui/editControls.cpp
 
     strings["Mobile Edit###MobileEdit"].plurals[0] = "=Mobile Edit###MobileEdit";
     strings["Mobile Controls###Mobile Controls"].plurals[0] = "=Mobile Controls###Mobile Controls";
@@ -892,12 +890,12 @@ void DivLocale::addTranslationsTemplate()
     strings["Follow orders##sgec"].plurals[0] = "=Follow orders##sgec";
     strings["Follow pattern##sgec"].plurals[0] = "=Follow pattern##sgec";
 
-    //src/gui/editing.cpp
+    //   sged  src/gui/editing.cpp
 
-    strings["can't collapse any further!sged"].plurals[0] = "=can't collapse any further!";
-    strings["can't expand any further!sged"].plurals[0] = "=can't expand any further!";
+    strings["can't collapse any further!##sged"].plurals[0] = "=can't collapse any further!";
+    strings["can't expand any further!##sged"].plurals[0] = "=can't expand any further!";
 
-    //src/gui/effectList.cpp
+    //   sgef  src/gui/effectList.cpp
 
     strings["Effect List###Effect List"].plurals[0] = "=Effect List###Effect List";
     strings["Chip at cursor: %s##sgef"].plurals[0] = "=Chip at cursor: %s";
@@ -905,6 +903,8 @@ void DivLocale::addTranslationsTemplate()
     strings["None##sgef"].plurals[0] = "=None";
     strings["Name##sgef"].plurals[0] = "=Name";
     strings["Description##sgef"].plurals[0] = "=Description";
+
+    //   sgeo  src/gui/exportOptions.cpp
 
 /*
     //MENU BAR ITEMS
@@ -1410,9 +1410,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Move down"].plurals[0] = "=Move down";
     strings["Replay"].plurals[0] = "=Replay";
 
-
-    //src/gui/settings.cpp
-
+    //   sgse  src/gui/settings.cpp
 
     strings["<Use system font>##sgse0"].plurals[0] = "=<Use system font>";
     strings["<Custom...>##sgse0"].plurals[0] = "=<Custom...>";
@@ -2294,7 +2292,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Cancel##SettingsCancel"].plurals[0] = "=Cancel##SettingsCancel";
     strings["Apply##SettingsApply"].plurals[0] = "=Apply##SettingsApply";
 
-    //src/gui/util.cpp
+    //   sgut  src/gui/util.cpp
     strings["<nothing>##sgut"].plurals[0] = "=<nothing>";
     strings["Unknown##sgut0"].plurals[0] = "=Unknown";
     strings["Unknown##sgut1"].plurals[0] = "=Unknown";
