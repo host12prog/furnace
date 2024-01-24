@@ -25,22 +25,24 @@
 #include "intConst.h"
 #include "../ta-log.h"
 
-const char* queryModes[GUI_QUERY_MAX]={
+const char* queryModes[GUI_QUERY_MAX+1]={
   "ignore##sgfr",
   "equals##sgfr",
   "not equal##sgfr",
   "between##sgfr",
   "not between##sgfr",
   "any##sgfr",
-  "none##sgfr"
+  "none##sgfr",
+  NULL
 };
 
-const char* queryReplaceModes[GUI_QUERY_REPLACE_MAX]={
+const char* queryReplaceModes[GUI_QUERY_REPLACE_MAX+1]={
   "set##sgfr",
   "add##sgfr",
   "add (overflow)##sgfr",
   "scale %##sgfr",
-  "clear##sgfr"
+  "clear##sgfr",
+  NULL
 };
 
 int queryNote(int note, int octave) {
@@ -601,7 +603,22 @@ void FurnaceGUI::drawFindReplace() {
               ImGui::Text(_L("Note##sgfr0"));
               ImGui::TableNextColumn();
               ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-              ImGui::Combo("##NCondition",&i.noteMode,queryModes,GUI_QUERY_MAX);
+              //ImGui::Combo("##NCondition",&i.noteMode,queryModes,GUI_QUERY_MAX);
+              if (ImGui::BeginCombo("##NCondition",_L(queryModes[i.noteMode])))
+              {
+                int j = 0;
+                while(queryModes[j])
+                {
+                  if (ImGui::Selectable(_L(queryModes[j])))
+                  {
+                    i.noteMode = j;
+                  }
+
+                  j++;
+                }
+
+                ImGui::EndCombo();
+              }
               ImGui::TableNextColumn();
               if (FIRST_VISIBLE(i.noteMode)) {
                 if ((i.noteMode==GUI_QUERY_RANGE || i.noteMode==GUI_QUERY_RANGE_NOT) && i.note>=120) {
@@ -669,7 +686,22 @@ void FurnaceGUI::drawFindReplace() {
               ImGui::Text(_L("Ins##sgfr0"));
               ImGui::TableNextColumn();
               ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-              ImGui::Combo("##ICondition",&i.insMode,queryModes,GUI_QUERY_MAX);
+              //ImGui::Combo("##ICondition",&i.insMode,queryModes,GUI_QUERY_MAX);
+              if (ImGui::BeginCombo("##ICondition",_L(queryModes[i.insMode])))
+              {
+                int j = 0;
+                while(queryModes[j])
+                {
+                  if (ImGui::Selectable(_L(queryModes[j])))
+                  {
+                    i.insMode = j;
+                  }
+
+                  j++;
+                }
+
+                ImGui::EndCombo();
+              }
               ImGui::TableNextColumn();
               if (FIRST_VISIBLE(i.insMode)) {
                 ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
@@ -687,7 +719,22 @@ void FurnaceGUI::drawFindReplace() {
               ImGui::Text(_L("Volume##sgfr0"));
               ImGui::TableNextColumn();
               ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-              ImGui::Combo("##VCondition",&i.volMode,queryModes,GUI_QUERY_MAX);
+              //ImGui::Combo("##VCondition",&i.volMode,queryModes,GUI_QUERY_MAX);
+              if (ImGui::BeginCombo("##VCondition",_L(queryModes[i.volMode])))
+              {
+                int j = 0;
+                while(queryModes[j])
+                {
+                  if (ImGui::Selectable(_L(queryModes[j])))
+                  {
+                    i.volMode = j;
+                  }
+
+                  j++;
+                }
+
+                ImGui::EndCombo();
+              }
               ImGui::TableNextColumn();
               if (FIRST_VISIBLE(i.volMode)) {
                 ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
@@ -707,7 +754,22 @@ void FurnaceGUI::drawFindReplace() {
                 ImGui::Text(_L("Effect##sgfr0"));
                 ImGui::TableNextColumn();
                 ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-                ImGui::Combo("##ECondition",&i.effectMode[j],queryModes,GUI_QUERY_MAX);
+                //ImGui::Combo("##ECondition",&i.effectMode[j],queryModes,GUI_QUERY_MAX);
+                if (ImGui::BeginCombo("##ECondition",_L(queryModes[i.effectMode[j]])))
+                {
+                  int k = 0;
+                  while(queryModes[k])
+                  {
+                    if (ImGui::Selectable(_L(queryModes[k])))
+                    {
+                      i.effectMode[j] = k;
+                    }
+
+                    k++;
+                  }
+
+                  ImGui::EndCombo();
+                }
                 ImGui::TableNextColumn();
                 if (FIRST_VISIBLE(i.effectMode[j])) {
                   ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
@@ -725,7 +787,22 @@ void FurnaceGUI::drawFindReplace() {
                 ImGui::Text(_L("Value##sgfr0"));
                 ImGui::TableNextColumn();
                 ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-                ImGui::Combo("##EVCondition",&i.effectValMode[j],queryModes,GUI_QUERY_MAX);
+                //ImGui::Combo("##EVCondition",&i.effectValMode[j],queryModes,GUI_QUERY_MAX);
+                if (ImGui::BeginCombo("##EVCondition",_L(queryModes[i.effectValMode[j]])))
+                {
+                  int k = 0;
+                  while(queryModes[k])
+                  {
+                    if (ImGui::Selectable(_L(queryModes[k])))
+                    {
+                      i.effectValMode[j] = k;
+                    }
+
+                    k++;
+                  }
+
+                  ImGui::EndCombo();
+                }
                 ImGui::TableNextColumn();
                 if (FIRST_VISIBLE(i.effectValMode[j])) {
                   ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
@@ -865,7 +942,22 @@ void FurnaceGUI::drawFindReplace() {
           ImGui::TableNextColumn();
           ImGui::BeginDisabled(!queryReplaceNoteDo);
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          ImGui::Combo("##NRMode",&queryReplaceNoteMode,queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+          //ImGui::Combo("##NRMode",&queryReplaceNoteMode,queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+          if (ImGui::BeginCombo("##NRMode",_L(queryReplaceModes[queryReplaceNoteMode])))
+          {
+            int k = 0;
+            while(queryReplaceModes[k])
+            {
+              if (ImGui::Selectable(_L(queryReplaceModes[k])))
+              {
+                queryReplaceNoteMode = k;
+              }
+
+              k++;
+            }
+
+            ImGui::EndCombo();
+          }
           ImGui::TableNextColumn();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (queryReplaceNoteMode==GUI_QUERY_REPLACE_SET) {
@@ -915,7 +1007,22 @@ void FurnaceGUI::drawFindReplace() {
           ImGui::TableNextColumn();
           ImGui::BeginDisabled(!queryReplaceInsDo);
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          ImGui::Combo("##IRMode",&queryReplaceInsMode,queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+          //ImGui::Combo("##IRMode",&queryReplaceInsMode,queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+          if (ImGui::BeginCombo("##IRMode",_L(queryReplaceModes[queryReplaceInsMode])))
+          {
+            int k = 0;
+            while(queryReplaceModes[k])
+            {
+              if (ImGui::Selectable(_L(queryReplaceModes[k])))
+              {
+                queryReplaceInsMode = k;
+              }
+
+              k++;
+            }
+
+            ImGui::EndCombo();
+          }
           ImGui::TableNextColumn();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (queryReplaceInsMode==GUI_QUERY_REPLACE_SET) {
@@ -944,7 +1051,22 @@ void FurnaceGUI::drawFindReplace() {
           ImGui::TableNextColumn();
           ImGui::BeginDisabled(!queryReplaceVolDo);
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          ImGui::Combo("##VRMode",&queryReplaceVolMode,queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+          //ImGui::Combo("##VRMode",&queryReplaceVolMode,queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+          if (ImGui::BeginCombo("##VRMode",_L(queryReplaceModes[queryReplaceVolMode])))
+          {
+            int k = 0;
+            while(queryReplaceModes[k])
+            {
+              if (ImGui::Selectable(_L(queryReplaceModes[k])))
+              {
+                queryReplaceVolMode = k;
+              }
+
+              k++;
+            }
+
+            ImGui::EndCombo();
+          }
           ImGui::TableNextColumn();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (queryReplaceVolMode==GUI_QUERY_REPLACE_SET) {
@@ -975,7 +1097,22 @@ void FurnaceGUI::drawFindReplace() {
             ImGui::TableNextColumn();
             ImGui::BeginDisabled(!queryReplaceEffectDo[i]);
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-            ImGui::Combo("##ERMode",&queryReplaceEffectMode[i],queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+            //ImGui::Combo("##ERMode",&queryReplaceEffectMode[i],queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+            if (ImGui::BeginCombo("##ERMode",_L(queryReplaceModes[queryReplaceEffectMode[i]])))
+            {
+              int k = 0;
+              while(queryReplaceModes[k])
+              {
+                if (ImGui::Selectable(_L(queryReplaceModes[k])))
+                {
+                  queryReplaceEffectMode[i] = k;
+                }
+
+                k++;
+              }
+
+              ImGui::EndCombo();
+            }
             ImGui::TableNextColumn();
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             if (queryReplaceEffectMode[i]==GUI_QUERY_REPLACE_SET) {
@@ -1004,7 +1141,22 @@ void FurnaceGUI::drawFindReplace() {
             ImGui::TableNextColumn();
             ImGui::BeginDisabled(!queryReplaceEffectValDo[i]);
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-            ImGui::Combo("##ERModeV",&queryReplaceEffectValMode[i],queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+            //ImGui::Combo("##ERModeV",&queryReplaceEffectValMode[i],queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+            if (ImGui::BeginCombo("##ERModeV",_L(queryReplaceModes[queryReplaceEffectValMode[i]])))
+            {
+              int k = 0;
+              while(queryReplaceModes[k])
+              {
+                if (ImGui::Selectable(_L(queryReplaceModes[k])))
+                {
+                  queryReplaceEffectValMode[i] = k;
+                }
+
+                k++;
+              }
+
+              ImGui::EndCombo();
+            }
             ImGui::TableNextColumn();
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             if (queryReplaceEffectValMode[i]==GUI_QUERY_REPLACE_SET) {
