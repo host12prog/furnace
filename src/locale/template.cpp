@@ -47,9 +47,9 @@ void DivLocale::addTranslationsTemplate()
     // # sgeo  src/gui/exportOptions.cpp
     // # sgfd  src/gui/fileDialog.cpp
     // @ sgfr  src/gui/findReplace.cpp
-    //   sgfm  src/gui/fmPreview.cpp
-    //   sgfo  src/gui/fonts.cpp
-    //   sggd  src/gui/gradient.cpp
+    // # sgfm  src/gui/fmPreview.cpp
+    // # sgfo  src/gui/fonts.cpp
+    // # sggd  src/gui/gradient.cpp
     //   sggv  src/gui/grooves.cpp
     // @ sggu  src/gui/gui.cpp
     //   sggc  src/gui/guiConst.cpp
@@ -1075,9 +1075,12 @@ void DivLocale::addTranslationsTemplate()
     strings["Insert in free spaces##sgfr"].plurals[0] = "=Insert in free spaces";
     strings["Replace##QueryReplace"].plurals[0] = "=Replace##QueryReplace";
 
-    //   sgfm  src/gui/fmPreview.cpp
+    //   sggv  src/gui/grooves.cpp
 
-
+    strings["Grooves###Grooves"].plurals[0] = "=Grooves###Grooves";
+    strings["use effect 09xx to select a groove pattern.##sggv"].plurals[0] = "=use effect 09xx to select a groove pattern.##sggv";
+    strings["pattern##sggv"].plurals[0] = "=pattern##sggv";
+    strings["remove##sggv"].plurals[0] = "=remove##sggv";
 
 //REMEMBER to check for anything that calls the strings at the top!
 
