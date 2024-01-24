@@ -50,12 +50,11 @@ void DivLocale::addTranslationsTemplate()
     // # sgfm  src/gui/fmPreview.cpp
     // # sgfo  src/gui/fonts.cpp
     // # sggd  src/gui/gradient.cpp
-    //   sggv  src/gui/grooves.cpp
+    // # sggv  src/gui/grooves.cpp
     // @ sggu  src/gui/gui.cpp
-    //   sggc  src/gui/guiConst.cpp
-    //   sgim  src/gui/image.cpp
-    //   sgii  src/gui/image_icon.cpp
-    //   sgie  src/gui/insEdit.cpp
+    // # sggc  src/gui/guiConst.cpp
+    // # sgim  src/gui/image.cpp
+    // # sgie  src/gui/insEdit.cpp
     //   sgic  src/gui/intConst.cpp
     //   sglo  src/gui/log.cpp
     //   sgms  src/gui/macstuff.m
@@ -1081,6 +1080,39 @@ void DivLocale::addTranslationsTemplate()
     strings["use effect 09xx to select a groove pattern.##sggv"].plurals[0] = "=use effect 09xx to select a groove pattern.##sggv";
     strings["pattern##sggv"].plurals[0] = "=pattern##sggv";
     strings["remove##sggv"].plurals[0] = "=remove##sggv";
+
+    //   sgie  src/gui/insEdit.cpp
+
+    strings["Name##sgie"].plurals[0] = "=Name";
+    strings["Open##sgie0"].plurals[0] = "=Open";
+    strings["Save##sgie"].plurals[0] = "=Save";
+    strings["save as .dmp...##sgie"].plurals[0] = "=save as .dmp...";
+    strings["Type##sgie"].plurals[0] = "=Type";
+    strings["Unknown##sgie"].plurals[0] = "=Unknown";
+    strings["none of the currently present chips are able to play this instrument type!##sgie"].plurals[0] = "=none of the currently present chips are able to play this instrument type!";
+    strings["Error##sgie"].plurals[0] = "=Error";
+    strings["invalid instrument type! change it first.##sgie"].plurals[0] = "=invalid instrument type! change it first.";
+    strings["Instrument Editor###Instrument Editor"].plurals[0] = "=Instrument Editor###Instrument Editor";
+    strings["waiting...##sgie0"].plurals[0] = "=waiting...";
+    strings["waiting...##sgie1"].plurals[0] = "=waiting...";
+    strings["no instrument selected##sgie0"].plurals[0] = "=no instrument selected";
+    strings["no instrument selected##sgie1"].plurals[0] = "=no instrument selected";
+    strings["select one...##sgie"].plurals[0] = "=select one...";
+    strings["or##sgie0"].plurals[0] = "=or";
+    strings["Open##sgie1"].plurals[0] = "=Open";
+    strings["or##sgie1"].plurals[0] = "=or";
+    strings["Create New##sgie"].plurals[0] = "=Create New";
+    strings["copy##sgie"].plurals[0] = "=copy";
+    strings["paste##sgie"].plurals[0] = "=paste";
+    strings["clear contents##sgie"].plurals[0] = "=clear contents";
+    strings["offset...##sgie"].plurals[0] = "=offset...";
+    strings["offset##sgie"].plurals[0] = "=offset";
+    strings["scale...##sgie"].plurals[0] = "=scale...";
+    strings["scale##sgie"].plurals[0] = "=scale";
+    strings["randomize...##sgie"].plurals[0] = "=randomize...";
+    strings["Min##sgie"].plurals[0] = "=Min";
+    strings["Max##sgie"].plurals[0] = "=Max";
+    strings["randomize##sgie"].plurals[0] = "=randomize";
 
 //REMEMBER to check for anything that calls the strings at the top!
 
