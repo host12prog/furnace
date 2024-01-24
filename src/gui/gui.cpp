@@ -76,6 +76,11 @@ bool Particle::update(float frameTime) {
   return (life>0);
 }
 
+const char* FurnaceGUI::getDefaultInsName()
+{
+  return _L("Instrument %d##sggu");
+}
+
 void FurnaceGUI::centerNextWindow(const char* name, float w, float h) {
   if (ImGui::IsPopupOpen(name)) {
     if (settings.centerPopup) {

@@ -292,6 +292,7 @@ void DivLocale::addTranslationsRussian()
 
     //src/gui/gui.cpp
 
+    strings["Instrument %d##sggu"].plurals[0] = "Инструмент %d";
     strings["the song is over!##sggu0"].plurals[0] = "трек закончился!";
     strings["the song is over!##sggu1"].plurals[0] = "трек закончился!";
     strings["Open File##sggu"].plurals[0] = "Открыть файл";

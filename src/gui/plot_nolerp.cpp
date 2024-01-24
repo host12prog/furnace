@@ -34,7 +34,9 @@
 
 class FurnaceGUI;
 //this is a horrible hack to allow localized strings in bitfield type macros...
+#ifdef HAVE_GUI
 extern FurnaceGUI g;
+#endif
 
 struct FurnacePlotArrayGetterData
 {

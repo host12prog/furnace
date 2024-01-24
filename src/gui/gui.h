@@ -2677,6 +2677,8 @@ class FurnaceGUI {
     String realMacroHoverES5506FilterMode(int id, float val, void* u);
     String realMacroLFOWaves(int id, float val, void* u);
 
+    const char* getDefaultInsName();
+
     void editStr(String* which);
     void showWarning(String what, FurnaceGUIWarnings type);
     void showError(String what);
