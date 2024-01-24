@@ -55,11 +55,9 @@ void DivLocale::addTranslationsTemplate()
     // # sggc  src/gui/guiConst.cpp
     // # sgim  src/gui/image.cpp
     // # sgie  src/gui/insEdit.cpp
-    //   sgic  src/gui/intConst.cpp
-    //   sglo  src/gui/log.cpp
-    //   sgms  src/gui/macstuff.m
-    //   sgmm  src/gui/midiMap.cpp
-    //   sgmx  src/gui/mixer.cpp
+    // X sglo  src/gui/log.cpp
+    // # sgmm  src/gui/midiMap.cpp
+    // # sgmx  src/gui/mixer.cpp
     //   sgns  src/gui/newSong.cpp
     //   sgor  src/gui/orders.cpp
     //   sgos  src/gui/osc.cpp
@@ -1113,6 +1111,26 @@ void DivLocale::addTranslationsTemplate()
     strings["Min##sgie"].plurals[0] = "=Min";
     strings["Max##sgie"].plurals[0] = "=Max";
     strings["randomize##sgie"].plurals[0] = "=randomize";
+
+    //   sgmx  src/gui/mixer.cpp
+
+    strings["input##sgmx"].plurals[0] = "=input";
+    strings["output##sgmx"].plurals[0] = "=output";
+    strings["Mixer##sgmx"].plurals[0] = "=Mixer";
+    strings["Master Volume##sgmx"].plurals[0] = "=Master Volume";
+    strings["Invert##sgmx"].plurals[0] = "=Invert";
+    strings["Volume##sgmx"].plurals[0] = "=Volume";
+    strings["Panning##sgmx"].plurals[0] = "=Panning";
+    strings["Front/Rear##sgmx"].plurals[0] = "=Front/Rear";
+    strings["Patchbay##sgmx"].plurals[0] = "=Patchbay";
+    strings["Automatic patchbay##sgmx"].plurals[0] = "=Automatic patchbay";
+    strings["Display hidden ports##sgmx"].plurals[0] = "=Display hidden ports";
+    strings["Display internal##sgmx"].plurals[0] = "=Display internal";
+    strings["System##sgmx0"].plurals[0] = "=System";
+    strings["Sample Preview##sgmx"].plurals[0] = "=Sample Preview";
+    strings["Metronome##sgmx"].plurals[0] = "=Metronome";
+    strings["System##sgmx1"].plurals[0] = "=System";
+    strings["disconnect all##sgmx"].plurals[0] = "=disconnect all";
 
 //REMEMBER to check for anything that calls the strings at the top!
 
