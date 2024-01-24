@@ -1155,17 +1155,17 @@ void DivLocale::addTranslationsRussian()
     //WINDOW NAMES
 
     strings["Pattern###Pattern"].plurals[0] = "Паттерны###Pattern";
-    strings["Orders###Orders"].plurals[0] = "Матр. патт.###Orders";
+    strings["Orders###Orders"].plurals[0] = "Матрица паттернов###Orders";
     strings["Statistics###Statistics"].plurals[0] = "Статистика###Statistics";
     strings["Song Info###Song Information"].plurals[0] = "О треке###Song Information";
     strings["Subsongs###Subsongs"].plurals[0] = "Подпесни###Subsongs";
     strings["About Furnace###About Furnace"].plurals[0] = "О Furnace###About Furnace";
     strings["Channels###Channels"].plurals[0] = "Каналы###Channels";
-    strings["Oscilloscope (per-channel)###Oscilloscope (per-channel)"].plurals[0] = "Осц-фы (отд. кан.)###Oscilloscope (per-channel)";
+    strings["Oscilloscope (per-channel)###Oscilloscope (per-channel)"].plurals[0] = "Осциллографы (отд. кан.)###Oscilloscope (per-channel)";
     strings["Clock###Clock"].plurals[0] = "Часы###Clock";
-    strings["Compatibility Flags###Compatibility Flags"].plurals[0] = "Флаги совм.###Compatibility Flags";
+    strings["Compatibility Flags###Compatibility Flags"].plurals[0] = "Флаги совместимости###Compatibility Flags";
     strings["Instruments###Instruments"].plurals[0] = "Инструменты###Instruments";
-    strings["Wavetables###Wavetables"].plurals[0] = "Волн. табл.###Wavetables";
+    strings["Wavetables###Wavetables"].plurals[0] = "Волновые таблицы###Wavetables";
     strings["Debug###Debug"].plurals[0] = "Отладка###Debug";
     strings["Samples###Samples"].plurals[0] = "Сэмплы###Samples";
     strings["MobileEdit###MobileEdit"].plurals[0] = "Моб. меню ред.###MobileEdit";
@@ -1185,22 +1185,22 @@ void DivLocale::addTranslationsRussian()
     strings["Pattern Manager###Pattern Manager"].plurals[0] = "Упр. паттернами###Pattern Manager";
     strings["Input Pad###Input Pad"].plurals[0] = "Панель ввода###Input Pad";
     strings["Piano###Piano"].plurals[0] = "Клав. пианино###Piano";
-    strings["Register View###Register View"].plurals[0] = "Просм. регистров###Register View";
-    strings["Sample Editor###Sample Editor"].plurals[0] = "Ред. сэмплов###Sample Editor";
-    strings["Song Comments###Song Comments"].plurals[0] = "Комм. трека###Song Comments";
+    strings["Register View###Register View"].plurals[0] = "Просмотр регистров###Register View";
+    strings["Sample Editor###Sample Editor"].plurals[0] = "Редактор сэмплов###Sample Editor";
+    strings["Song Comments###Song Comments"].plurals[0] = "Комментарии трека###Song Comments";
     strings["Speed###Speed"].plurals[0] = "Скорость###Speed";
     strings["Spoiler###Spoiler"].plurals[0] = "Спойлер###Spoiler";
-    strings["Chip Manager###Chip Manager"].plurals[0] = "Упр. чипами###Chip Manager";
-    strings["Volume Meter###Volume Meter"].plurals[0] = "Изм. громкости###Volume Meter";
-    strings["Wavetable Editor###Wavetable Editor"].plurals[0] = "Ред. волн. таблиц###Wavetable Editor";
+    strings["Chip Manager###Chip Manager"].plurals[0] = "Управление чипами###Chip Manager";
+    strings["Volume Meter###Volume Meter"].plurals[0] = "Измеритель громкости###Volume Meter";
+    strings["Wavetable Editor###Wavetable Editor"].plurals[0] = "Редактор волновых таблиц###Wavetable Editor";
     strings["Oscilloscope (X-Y)###Oscilloscope (X-Y)"].plurals[0] = "Осциллограф (X-Y)###Oscilloscope (X-Y)";
     //popups
-    strings["Warning###Warning"].plurals[0] = "=Warning###Warning";
-    strings["Error###Error"].plurals[0] = "=Error###Error";
-    strings["Select Instrument###Select Instrument"].plurals[0] = "=Select Instrument###Select Instrument";
-    strings["Import Raw Sample###Import Raw Sample"].plurals[0] = "=Import Raw Sample###Import Raw Sample";
-    strings["Rendering...###Rendering..."].plurals[0] = "=Rendering...###Rendering...";
-    strings["New Song###New Song"].plurals[0] = "=New Song###New Song";
+    strings["Warning###Warning"].plurals[0] = "Внимание###Warning";
+    strings["Error###Error"].plurals[0] = "Ошибка###Error";
+    strings["Select Instrument###Select Instrument"].plurals[0] = "Выберете инструмент###Select Instrument";
+    strings["Import Raw Sample###Import Raw Sample"].plurals[0] = "Импорт сырых данных сэмпла###Import Raw Sample";
+    strings["Rendering...###Rendering..."].plurals[0] = "Рендер...###Rendering...";
+    strings["New Song###New Song"].plurals[0] = "Новый трек###New Song";
 
     //EFFECT LIST
 
