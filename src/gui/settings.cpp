@@ -1969,7 +1969,7 @@ void FurnaceGUI::drawSettings() {
           ImGui::TreePop();
         }
         if (ImGui::TreeNode(_L("Pattern##sgse0"))) {
-          KEYBIND_CONFIG_BEGIN(_L("keysPattern##sgse"));
+          KEYBIND_CONFIG_BEGIN("keysPattern");
 
           UI_KEYBIND_CONFIG(GUI_ACTION_PAT_NOTE_UP);
           UI_KEYBIND_CONFIG(GUI_ACTION_PAT_NOTE_DOWN);

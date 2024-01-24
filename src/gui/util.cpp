@@ -90,7 +90,7 @@ String getKeyName(int key, bool emptyNone) {
     if (emptyNone) {
       return "";
     } else {
-      return "<nothing>##test";
+      return "<nothing>##sgut";
     }
   }
   String ret;
@@ -104,9 +104,9 @@ String getKeyName(int key, bool emptyNone) {
   }
   const char* name=SDL_GetKeyName(key&FURK_MASK);
   if (name==NULL) {
-    ret+="Unknown";
+    ret+="Unknown##sgut0";
   } else if (name[0]==0) {
-    ret+="Unknown";
+    ret+="Unknown##sgut1";
   } else {
     ret+=name;
   }

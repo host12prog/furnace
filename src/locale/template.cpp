@@ -1847,7 +1847,6 @@ void DivLocale::addTranslationsTemplate()
     strings["Note##SNType_%d"].plurals[0] = "=Note##SNType_%d";
     strings["Add...##sgse"].plurals[0] = "=Add...";
     strings["Pattern##sgse0"].plurals[0] = "=Pattern";
-    strings["keysPattern##sgse"].plurals[0] = "=keysPattern";
     strings["Instrument list##sgse"].plurals[0] = "=Instrument list";
     strings["Wavetable list##sgse"].plurals[0] = "=Wavetable list";
     strings["Sample list##sgse"].plurals[0] = "=Sample list";
