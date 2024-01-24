@@ -6881,6 +6881,20 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags, const 
             window->NameBufLen = (int)buf_len;
         }
 
+        if(window->DisplayedName)
+        {
+            if(strcmp(displayedName, window->DisplayedName) != 0)
+            {
+                free(window->DisplayedName);
+                window->DisplayedName = ImStrdup(displayedName);
+            }
+        }
+        
+        if(window->DisplayedName == NULL && displayedName != NULL)
+        {
+            window->DisplayedName = ImStrdup(displayedName);
+        }
+
         // UPDATE CONTENTS SIZE, UPDATE HIDDEN STATUS
 
         // Update contents size from last frame for auto-fitting (or use explicit size)
