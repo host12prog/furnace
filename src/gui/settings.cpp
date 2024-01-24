@@ -916,7 +916,7 @@ void FurnaceGUI::drawSettings() {
             ImGui::AlignTextToFramePadding();
             ImGui::Text(_L("Driver##sgse"));
             ImGui::TableNextColumn();
-            if (ImGui::BeginCombo("##SDLADriver",settings.sdlAudioDriver.empty()?"Automatic":settings.sdlAudioDriver.c_str())) {
+            if (ImGui::BeginCombo("##SDLADriver",settings.sdlAudioDriver.empty()?_L("Automatic##sgse2"):_L(settings.sdlAudioDriver.c_str()))) {
               if (ImGui::Selectable(_L("Automatic##sgse2"),settings.sdlAudioDriver.empty())) {
                 settings.sdlAudioDriver="";
                 settingsChanged=true;
