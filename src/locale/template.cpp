@@ -60,8 +60,8 @@ void DivLocale::addTranslationsTemplate()
     // # sgmx  src/gui/mixer.cpp
     //   sgns  src/gui/newSong.cpp
     // # sgor  src/gui/orders.cpp
-    //   sgos  src/gui/osc.cpp
-    //   sgpm  src/gui/patManager.cpp
+    // # sgos  src/gui/osc.cpp
+    // # sgpm  src/gui/patManager.cpp
     //   sgpa  src/gui/pattern.cpp
     //   sgpi  src/gui/piano.cpp
     //   sgpn  src/gui/plot_nolerp.cpp
@@ -1146,6 +1146,22 @@ void DivLocale::addTranslationsTemplate()
     strings["Order edit mode: Select and type (scroll horizontally)##sgor"].plurals[0] = "=Order edit mode: Select and type (scroll horizontally)";
     strings["Order edit mode: Select and type (don't scroll)##sgor"].plurals[0] = "=Order edit mode: Select and type (don't scroll)";
     strings["Order edit mode: Click to change##sgor"].plurals[0] = "=Order edit mode: Click to change";
+
+    //   sgos  src/gui/osc.cpp
+
+    strings["Oscilloscope###Oscilloscope"].plurals[0] = "=Oscilloscope###Oscilloscope";
+    strings["zoom: %.2fx (%.1fdB)##sgos"].plurals[0] = "=zoom: %.2fx (%.1fdB)";
+    strings["window size: %.1fms##sgos"].plurals[0] = "=window size: %.1fms";
+    strings["(-Infinity)dB##sgos"].plurals[0] = "=(-Infinity)dB";
+
+    //   sgpm  src/gui/patManager.cpp
+
+    strings["Pattern Manager###Pattern Manager"].plurals[0] = "=Pattern Manager###Pattern Manager";
+    strings["Global Tasks##sgpm"].plurals[0] = "=Global Tasks";
+    strings["De-duplicate patterns##sgpm"].plurals[0] = "=De-duplicate patterns";
+    strings["Re-arrange patterns##sgpm"].plurals[0] = "=Re-arrange patterns";
+    strings["Pattern %.2X\n- not allocated##sgpm"].plurals[0] = "=Pattern %.2X\n- not allocated";
+    strings["Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase##sgpm"].plurals[0] = "=Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase";
 
 //REMEMBER to check for anything that calls the strings at the top!
 

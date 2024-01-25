@@ -146,7 +146,7 @@ void FurnaceGUI::drawOsc() {
         if (oscZoom>2.0) oscZoom=2.0;
       } rightClickable
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip("zoom: %.2fx (%.1fdB)",oscZoom,20.0*log10(oscZoom*2.0));
+        ImGui::SetTooltip(_L("zoom: %.2fx (%.1fdB)##sgos"),oscZoom,20.0*log10(oscZoom*2.0));
       }
       if (ImGui::IsItemClicked(ImGuiMouseButton_Middle)) {
         oscZoom=0.5;
@@ -157,7 +157,7 @@ void FurnaceGUI::drawOsc() {
         if (oscWindowSize>100.0) oscWindowSize=100.0;
       } rightClickable
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip("window size: %.1fms",oscWindowSize);
+        ImGui::SetTooltip(_L("window size: %.1fms##sgos"),oscWindowSize);
       }
       if (ImGui::IsItemClicked(ImGuiMouseButton_Middle)) {
         oscWindowSize=20.0;
@@ -326,7 +326,7 @@ void FurnaceGUI::drawOsc() {
       float val=20.0*log10(2.0*fabs(0.5-((ImGui::GetMousePos().y-inRect.Min.y)/(inRect.Max.y-inRect.Min.y))));
       if (val>0.0f) val=0.0f;
       if (val<=-INFINITY) {
-        ImGui::SetTooltip("(-Infinity)dB");
+        ImGui::SetTooltip(_L("(-Infinity)dB##sgos"));
       } else {
         ImGui::SetTooltip("%.1fdB",val);
       }
