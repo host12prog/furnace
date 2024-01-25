@@ -996,6 +996,7 @@ void DivLocale::addTranslationsTemplate()
     strings["this chip is only available in VGM %d.%.2x and higher!##sgeo"].plurals[0] = "=this chip is only available in VGM %d.%.2x and higher!";
     strings["this chip is not supported by the VGM format!##sgeo"].plurals[0] = "=this chip is not supported by the VGM format!";
     strings["select the chip you wish to export, but only up to %d of each type.##sgeo"].plurals[0] = "=select the chip you wish to export, but only up to %d of each type.";
+    strings["select the chip you wish to export, but only up to %d of each type.##sgeo"].plurals[1] = "=select the chip you wish to export, but only up to %d of each type.";
     strings["Cancel##sgeo1"].plurals[0] = "=Cancel";
     strings["Export##sgeo1"].plurals[0] = "=Export";
     strings["nothing to export##sgeo2"].plurals[0] = "=nothing to export";
@@ -1022,7 +1023,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Directory##sgeo"].plurals[0] = "=Directory";
     strings["Cancel##sgeo6"].plurals[0] = "=Cancel";
     strings["Bake Data##sgeo"].plurals[0] = "=Bake Data";
-    strings["Done! Baked %d files.##sgeo"].plurals[0] = "=Done! Baked %d files.";
+    strings["Done! Baked %d files.##sgeo"].plurals[0] = "=Done! Baked %d file.";
+    strings["Done! Baked %d files.##sgeo"].plurals[1] = "=Done! Baked %d files.";
     strings["this option exports the song to a text file.\n##sgeo"].plurals[0] = "=this option exports the song to a text file.\n";
     strings["Cancel##sgeo7"].plurals[0] = "=Cancel";
     strings["Export##sgeo6"].plurals[0] = "=Export";

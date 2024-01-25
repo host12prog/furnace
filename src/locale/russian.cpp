@@ -889,12 +889,12 @@ void DivLocale::addTranslationsRussian()
     strings["Export##sgeo0"].plurals[0] = "Экспорт";
     strings["settings:##sgeo"].plurals[0] = "настройки:";
     strings["format version##sgeo"].plurals[0] = "версия формата";
-    strings["loop##sgeo0"].plurals[0] = "=loop";
-    strings["loop trail:##sgeo"].plurals[0] = "=loop trail:";
-    strings["auto-detect##sgeo"].plurals[0] = "=auto-detect";
-    strings["add one loop##sgeo1"].plurals[0] = "=add one loop";
-    strings["custom##sgeo"].plurals[0] = "=custom";
-    strings["add pattern change hints##sgeo"].plurals[0] = "=add pattern change hints";
+    strings["loop##sgeo0"].plurals[0] = "зациклить";
+    strings["loop trail:##sgeo"].plurals[0] = "маркер конца цикла:";
+    strings["auto-detect##sgeo"].plurals[0] = "автоматически";
+    strings["add one loop##sgeo1"].plurals[0] = "добавить один цикл";
+    strings["custom##sgeo"].plurals[0] = "свой";
+    strings["add pattern change hints##sgeo"].plurals[0] = "добавить метки концов паттернов";
     strings["inserts data blocks on pattern changes.\n"
             "useful if you are writing a playback routine.\n\n"
             "the format of a pattern change data block is:\n"
@@ -905,76 +905,81 @@ void DivLocale::addTranslationsRussian()
             "- pp: pattern index (one per channel)\n\n"
             "pattern indexes are ordered as they appear in the song."].plurals[0] = 
 
-            "=inserts data blocks on pattern changes.\n"
-            "=useful if you are writing a playback routine.\n\n"
-            "=the format of a pattern change data block is:\n"
-            "=67 66 FE ll ll ll ll 01 oo rr pp pp pp ...\n"
-            "=- ll: length, a 32-bit little-endian number\n"
-            "=- oo: order\n"
-            "=- rr: initial row (a 0Dxx effect is able to select a different row)\n"
-            "=- pp: pattern index (one per channel)\n\n"
-            "=pattern indexes are ordered as they appear in the song.";
-    strings["direct stream mode##sgeo"].plurals[0] = "=direct stream mode";
+            "вставляет блоки данных в местах смены паттернов.\n"
+            "полезно, если вы пишете программу для воспроизведения.\n\n"
+            "формат блока данных при смене паттерна:\n"
+            "67 66 FE ll ll ll ll 01 oo rr pp pp pp ...\n"
+            "- ll: длина, 32-битное число, прямой порядок байтов (litle endian)\n"
+            "- oo: строка матрицы паттернов\n"
+            "- rr: начальная строка паттерна (эффект 0Dxx может её поменять)\n"
+            "- pp: индекс паттерна (один на канал)\n\n"
+            "индексы паттернов рассортированы в том порядке, в котором они\n"
+            "встречаются в треке\n";
+    strings["direct stream mode##sgeo"].plurals[0] = "запись прямого потока";
     strings["required for DualPCM and MSM6258 export.\n\n"
             "allows for volume/direction changes when playing samples,\n"
             "at the cost of a massive increase in file size."].plurals[0] = 
 
-            "=required for DualPCM and MSM6258 export.\n\n"
-            "=allows for volume/direction changes when playing samples,\n"
-            "=at the cost of a massive increase in file size.";
-    strings["chips to export:##sgeo"].plurals[0] = "=chips to export:";
-    strings["this chip is only available in VGM %d.%.2x and higher!##sgeo"].plurals[0] = "=this chip is only available in VGM %d.%.2x and higher!";
-    strings["this chip is not supported by the VGM format!##sgeo"].plurals[0] = "=this chip is not supported by the VGM format!";
-    strings["select the chip you wish to export, but only up to %d of each type.##sgeo"].plurals[0] = "=select the chip you wish to export, but only up to %d of each type.";
-    strings["Cancel##sgeo1"].plurals[0] = "=Cancel";
-    strings["Export##sgeo1"].plurals[0] = "=Export";
-    strings["nothing to export##sgeo2"].plurals[0] = "=nothing to export";
-    strings["Cancel##sgeo2"].plurals[0] = "=Cancel";
-    strings["Commander X16 Zsound Music File##sgeo"].plurals[0] = "=Commander X16 Zsound Music File";
-    strings["Tick Rate (Hz)##sgeo"].plurals[0] = "=Tick Rate (Hz)";
-    strings["loop##sgeo2"].plurals[0] = "=loop";
-    strings["optimize size##sgeo"].plurals[0] = "=optimize size";
-    strings["Cancel##sgeo3"].plurals[0] = "=Cancel";
-    strings["Export##sgeo3"].plurals[0] = "=Export";
-    strings["DefleMask file (1.1.3+)##sgeo"].plurals[0] = "=DefleMask file (1.1.3+)";
-    strings["Cancel##sgeo4"].plurals[0] = "=Cancel";
-    strings["Export##sgeo4"].plurals[0] = "=Export";
-    strings["DefleMask file (1.0/legacy)##sgeo"].plurals[0] = "=DefleMask file (1.0/legacy)";
-    strings["Cancel##sgeo5"].plurals[0] = "=Cancel";
-    strings["Export##sgeo5"].plurals[0] = "=Export";
-    strings["Directory##sgeo"].plurals[0] = "=Directory";
-    strings["Cancel##sgeo6"].plurals[0] = "=Cancel";
-    strings["Bake Data##sgeo"].plurals[0] = "=Bake Data";
-    strings["Done! Baked %d files.##sgeo"].plurals[0] = "=Done! Baked %d files.";
-    strings["this option exports the song to a text file.\n##sgeo"].plurals[0] = "=this option exports the song to a text file.\n";
-    strings["Cancel##sgeo7"].plurals[0] = "=Cancel";
-    strings["Export##sgeo6"].plurals[0] = "=Export";
+            "необходим для экспорта DualPCM и MSM6258.\n\n"
+            "повзоляет записывать изменение громкости/направления воспроизведения сэмплов\n"
+            "ценой сильного увеличения размера файла.";
+    strings["chips to export:##sgeo"].plurals[0] = "экспорт следующих чипов:";
+    strings["this chip is only available in VGM %d.%.2x and higher!##sgeo"].plurals[0] = "этот чип доступен только в файле VGM версии %d.%.2x и выше!";
+    strings["this chip is not supported by the VGM format!##sgeo"].plurals[0] = "этот чип не поддерживается форматом VGM!";
+    strings["select the chip you wish to export, but only up to %d of each type.##sgeo"].plurals[0] = "выберите чипы, данные для которых вы хотите включить в файл, но не более %d чипа каждого типа.";
+    strings["select the chip you wish to export, but only up to %d of each type.##sgeo"].plurals[1] = "выберите чипы, данные для которых вы хотите включить в файл, но не более %d чипов каждого типа.";
+    strings["select the chip you wish to export, but only up to %d of each type.##sgeo"].plurals[2] = "выберите чипы, данные для которых вы хотите включить в файл, но не более %d чипов каждого типа.";
+    strings["Cancel##sgeo1"].plurals[0] = "Отмена";
+    strings["Export##sgeo1"].plurals[0] = "Экспорт";
+    strings["nothing to export##sgeo2"].plurals[0] = "нечего экспортировать";
+    strings["Cancel##sgeo2"].plurals[0] = "Отмена";
+    strings["Commander X16 Zsound Music File##sgeo"].plurals[0] = "Commander X16 Zsound Music File";
+    strings["Tick Rate (Hz)##sgeo"].plurals[0] = "Частота движка (Гц)";
+    strings["loop##sgeo2"].plurals[0] = "зациклить";
+    strings["optimize size##sgeo"].plurals[0] = "оптимизировать размер";
+    strings["Cancel##sgeo3"].plurals[0] = "Отмена";
+    strings["Export##sgeo3"].plurals[0] = "Экспорт";
+    strings["DefleMask file (1.1.3+)##sgeo"].plurals[0] = "Файл DefleMask (1.1.3+)";
+    strings["Cancel##sgeo4"].plurals[0] = "Отмена";
+    strings["Export##sgeo4"].plurals[0] = "Экспорт";
+    strings["DefleMask file (1.0/legacy)##sgeo"].plurals[0] = "Файл DefleMask (1.0/legacy)";
+    strings["Cancel##sgeo5"].plurals[0] = "Отмена";
+    strings["Export##sgeo5"].plurals[0] = "Экспорт";
+    strings["Directory##sgeo"].plurals[0] = "Папка";
+    strings["Cancel##sgeo6"].plurals[0] = "Отмена";
+    strings["Bake Data##sgeo"].plurals[0] = "Создать данные";
+    strings["Done! Baked %d files.##sgeo"].plurals[0] = "Готово! Создан %d файл.";
+    strings["Done! Baked %d files.##sgeo"].plurals[1] = "Готово! Создано %d файла.";
+    strings["Done! Baked %d files.##sgeo"].plurals[2] = "Готово! Создано %d файлов.";
+    strings["this option exports the song to a text file.\n##sgeo"].plurals[0] = "эта опция позволяет экспортировать трек в текстовый файл.\n";
+    strings["Cancel##sgeo7"].plurals[0] = "Отмена";
+    strings["Export##sgeo6"].plurals[0] = "Экспорт";
     strings["this option exports a text or binary file which\n"
             "contains a dump of the internal command stream\n"
             "produced when playing the song.\n\n"
             "technical/development use only!"].plurals[0] = 
 
-            "=this option exports a text or binary file which\n"
-            "=contains a dump of the internal command stream\n"
-            "=produced when playing the song.\n\n"
-            "=technical/development use only!";
-    strings["Cancel##sgeo8"].plurals[0] = "=Cancel";
-    strings["Export (binary)##sgeo"].plurals[0] = "=Export (binary)";
-    strings["Export (text)##sgeo"].plurals[0] = "=Export (text)";
-    strings["Audio##sgeo"].plurals[0] = "=Audio";
-    strings["DMF (1.0/legacy)##sgeo"].plurals[0] = "=DMF (1.0/legacy)";
-    strings["Amiga Validation##sgeo"].plurals[0] = "=Amiga Validation";
-    strings["Text##sgeo"].plurals[0] = "=Text";
-    strings["Command Stream##sgeo"].plurals[0] = "=Command Stream";
-    strings["congratulations! you've unlocked a secret panel.##sgeo"].plurals[0] = "=congratulations! you've unlocked a secret panel.";
-    strings["Toggle hidden systems##sgeo"].plurals[0] = "=Toggle hidden systems";
-    strings["Toggle all instrument types##sgeo"].plurals[0] = "=Toggle all instrument types";
-    strings["Set pitch linearity to Partial##sgeo"].plurals[0] = "=Set pitch linearity to Partial";
-    strings["Enable multi-threading settings##sgeo"].plurals[0] = "=Enable multi-threading settings";
-    strings["Set fat to max##sgeo"].plurals[0] = "=Set fat to max";
-    strings["Set muscle and fat to zero##sgeo"].plurals[0] = "=Set muscle and fat to zero";
-    strings["Tell tildearrow this must be a mistake##sgeo"].plurals[0] = "=Tell tildearrow this must be a mistake";
-    strings["yeah, it's a bug. write a bug report in the GitHub page and tell me how did you get here.##sgeo"].plurals[0] = "=yeah, it's a bug. write a bug report in the GitHub page and tell me how did you get here.";
+            "эта опция позволяет создать текстовый или бинарный файл,\n"
+            "в котором содержится дамп внутренних команд,\n"
+            "созданых во время проигрыаания трека.\n\n"
+            "используйте только при разработке!";
+    strings["Cancel##sgeo8"].plurals[0] = "Отмена";
+    strings["Export (binary)##sgeo"].plurals[0] = "Экспорт (бинарный)";
+    strings["Export (text)##sgeo"].plurals[0] = "Экспорт (текст)";
+    strings["Audio##sgeo"].plurals[0] = "Аудио";
+    strings["DMF (1.0/legacy)##sgeo"].plurals[0] = "DMF (1.0/legacy)";
+    strings["Amiga Validation##sgeo"].plurals[0] = "Проверка Amiga";
+    strings["Text##sgeo"].plurals[0] = "Текст";
+    strings["Command Stream##sgeo"].plurals[0] = "Поток команд";
+    strings["congratulations! you've unlocked a secret panel.##sgeo"].plurals[0] = "поздравляю! вы открыли секретную панель.";
+    strings["Toggle hidden systems##sgeo"].plurals[0] = "Включить скрытые системы";
+    strings["Toggle all instrument types##sgeo"].plurals[0] = "Включить все типы инструментов";
+    strings["Set pitch linearity to Partial##sgeo"].plurals[0] = "Выставить частичную линейность высоты тона";
+    strings["Enable multi-threading settings##sgeo"].plurals[0] = "Открыть настройки многопоточности";
+    strings["Set fat to max##sgeo"].plurals[0] = "Выкрутить жирность на максимум";
+    strings["Set muscle and fat to zero##sgeo"].plurals[0] = "Убрать все мышцы и жир";
+    strings["Tell tildearrow this must be a mistake##sgeo"].plurals[0] = "Сказать tildearrow, что, возможно, это ошибка";
+    strings["yeah, it's a bug. write a bug report in the GitHub page and tell me how did you get here.##sgeo"].plurals[0] = "да, это баг. заполните отчёт на гитхабе и скажите мне, как вы сюда добрались.";
 
     //   sgfr  src/gui/findReplace.cpp
 

@@ -1671,8 +1671,6 @@ void FurnaceGUI::doCollapseSong(int divider) {
   }
   finishSelection();
 
-  logW("collapse: %d %d", e->curSubSong->patLen, divider);
-
   UndoStep us;
   us.type=GUI_UNDO_PATTERN_COLLAPSE_SONG;
 

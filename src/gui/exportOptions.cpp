@@ -134,7 +134,7 @@ void FurnaceGUI::drawExportVGM(bool onWindow) {
       if (willExport[i]) hasOneAtLeast=true;
     }
   }
-  ImGui::Text(_L("select the chip you wish to export, but only up to %d of each type.##sgeo"),(vgmExportVersion>=0x151)?2:1);
+  ImGui::Text(_LP("select the chip you wish to export, but only up to %d of each type.##sgeo", (vgmExportVersion>=0x151)?2:1),(vgmExportVersion>=0x151)?2:1);
   if (hasOneAtLeast) {
     if (onWindow) {
       ImGui::Separator();
@@ -238,7 +238,7 @@ void FurnaceGUI::drawExportAmigaVal(bool onWindow) {
       i.data->finish();
       delete i.data;
     }
-    showError(fmt::sprintf(_L("Done! Baked %d files.##sgeo"),(int)out.size()));
+    showError(fmt::sprintf(_LP("Done! Baked %d files.##sgeo", (int)out.size()),(int)out.size()));
     ImGui::CloseCurrentPopup();
   }
 }
