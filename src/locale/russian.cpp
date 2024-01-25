@@ -662,6 +662,21 @@ void DivLocale::addTranslationsRussian()
     strings["No##sggu5"].plurals[0] = "Нет";
     strings["Yes##sggu6"].plurals[0] = "Да";
     strings["No##sggu6"].plurals[0] = "Нет";
+    strings["Yes##sggu7"].plurals[0] = "Да";
+    strings["Yes##sggu8"].plurals[0] = "Да";
+    strings["Yes##sggu9"].plurals[0] = "Да";
+    strings["Yes##sggu10"].plurals[0] = "Да";
+    strings["Yes##sggu11"].plurals[0] = "Да";
+    strings["No##sggu8"].plurals[0] = "Нет";
+    strings["No##sggu9"].plurals[0] = "Нет";
+    strings["No##sggu10"].plurals[0] = "Нет";
+    strings["No##sggu11"].plurals[0] = "Нет";
+    strings["No##sggu12"].plurals[0] = "Нет";
+    strings["Cancel##sggu4"].plurals[0] = "Отмена";
+    strings["Cancel##sggu5"].plurals[0] = "Отмена";
+    strings["Cancel##sggu6"].plurals[0] = "Отмена";
+    strings["Cancel##sggu7"].plurals[0] = "Отмена";
+    strings["Cancel##sggu8"].plurals[0] = "Отмена";
     strings["OK##sggu1"].plurals[0] = "ОК";
     strings["too many instruments!##sggu"].plurals[0] = "слишком много инструментов!";
     strings["too many wavetables!##sggu"].plurals[0] = "слишком много волновых таблиц!";
@@ -699,7 +714,7 @@ void DivLocale::addTranslationsRussian()
 
     //   sgda  src/gui/doAction.cpp
 
-    strings["Unsaved changes! Save changes before creating a new song?##sgda"].plurals[0] = "=Unsaved changes! Save changes before creating a new song?";
+    strings["Unsaved changes! Save changes before creating a new song?##sgda"].plurals[0] = "Остались несохранённые изменения! Сохранить их перед созданием нового трека?";
     strings["Unsaved changes! Save changes before opening another file?##sgda"].plurals[0] = "=Unsaved changes! Save changes before opening another file?";
     strings["Unsaved changes! Save changes before opening backup?##sgda"].plurals[0] = "=Unsaved changes! Save changes before opening backup?";
     strings["Error while saving file! (%s)##sgda"].plurals[0] = "=Error while saving file! (%s)";

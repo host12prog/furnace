@@ -5400,17 +5400,17 @@ bool FurnaceGUI::loop() {
             }
           }
           ImGui::SameLine();
-          if (ImGui::Button("No")) {
+          if (ImGui::Button(_L("No##sggu8"))) {
             ImGui::CloseCurrentPopup();
             quit=true;
           }
           ImGui::SameLine();
-          if (ImGui::Button("Cancel") || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+          if (ImGui::Button(_L("Cancel##sggu4")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_NEW:
-          if (ImGui::Button("Yes")) {
+          if (ImGui::Button(_L("Yes##sggu7"))) {
             ImGui::CloseCurrentPopup();
             if (curFileName=="" || curFileName.find(backupPath)==0 || e->song.version>=0xff00) {
               openFileDialog(GUI_FILE_SAVE);
@@ -5424,65 +5424,65 @@ bool FurnaceGUI::loop() {
             }
           }
           ImGui::SameLine();
-          if (ImGui::Button("No")) {
+          if (ImGui::Button(_L("No##sggu9"))) {
             ImGui::CloseCurrentPopup();
             displayNew=true;
           }
           ImGui::SameLine();
-          if (ImGui::Button("Cancel") || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+          if (ImGui::Button(_L("Cancel##sggu5")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_OPEN:
-          if (ImGui::Button("Yes")) {
+          if (ImGui::Button(_L("Yes##sggu8"))) {
             ImGui::CloseCurrentPopup();
             if (curFileName=="" || curFileName.find(backupPath)==0 || e->song.version>=0xff00) {
               openFileDialog(GUI_FILE_SAVE);
               postWarnAction=GUI_WARN_OPEN;
             } else {
               if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-                showError(fmt::sprintf("Error while saving file! (%s)",lastError));
+                showError(fmt::sprintf(_L("Error while saving file! (%s)##sggu"),lastError));
               } else {
                 openFileDialog(GUI_FILE_OPEN);
               }
             }
           }
           ImGui::SameLine();
-          if (ImGui::Button("No")) {
+          if (ImGui::Button(_L("No##sggu10"))) {
             ImGui::CloseCurrentPopup();
             openFileDialog(GUI_FILE_OPEN);
           }
           ImGui::SameLine();
-          if (ImGui::Button("Cancel") || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+          if (ImGui::Button(_L("Cancel##sggu6")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_OPEN_BACKUP:
-          if (ImGui::Button("Yes")) {
+          if (ImGui::Button(_L("Yes##sggu9"))) {
             ImGui::CloseCurrentPopup();
             if (curFileName=="" || curFileName.find(backupPath)==0 || e->song.version>=0xff00) {
               openFileDialog(GUI_FILE_SAVE);
               postWarnAction=GUI_WARN_OPEN_BACKUP;
             } else {
               if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-                showError(fmt::sprintf("Error while saving file! (%s)",lastError));
+                showError(fmt::sprintf(_L("Error while saving file! (%s)##sggu"),lastError));
               } else {
                 openFileDialog(GUI_FILE_OPEN_BACKUP);
               }
             }
           }
           ImGui::SameLine();
-          if (ImGui::Button("No")) {
+          if (ImGui::Button(_L("No##sggu11"))) {
             ImGui::CloseCurrentPopup();
             openFileDialog(GUI_FILE_OPEN_BACKUP);
           }
           ImGui::SameLine();
-          if (ImGui::Button("Cancel") || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+          if (ImGui::Button(_L("Cancel##sggu7")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_OPEN_DROP:
-          if (ImGui::Button("Yes")) {
+          if (ImGui::Button(_L("Yes##sggu10"))) {
             ImGui::CloseCurrentPopup();
             if (curFileName=="" || curFileName.find(backupPath)==0 || e->song.version>=0xff00) {
               openFileDialog(GUI_FILE_SAVE);
@@ -5500,7 +5500,7 @@ bool FurnaceGUI::loop() {
             }
           }
           ImGui::SameLine();
-          if (ImGui::Button("No")) {
+          if (ImGui::Button(_L("No##sggu12"))) {
             ImGui::CloseCurrentPopup();
             if (load(nextFile)>0) {
               showError(fmt::sprintf(_L("Error while loading file! (%s)##sggu6"),lastError));
@@ -5508,19 +5508,18 @@ bool FurnaceGUI::loop() {
             nextFile="";
           }
           ImGui::SameLine();
-          if (ImGui::Button("Cancel") || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+          if (ImGui::Button(_L("Cancel##sggu8")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
             ImGui::CloseCurrentPopup();
             nextFile="";
           }
           break;
         case GUI_WARN_RESET_LAYOUT:
-          if (ImGui::Button("Yes")) {
+          if (ImGui::Button(_L("Yes##sggu11"))) {
             ImGui::CloseCurrentPopup();
             if (!mobileUI) {
               ImGui::LoadIniSettingsFromMemory(defaultLayout);
               if (!ImGui::SaveIniSettingsToDisk(finalLayoutPath,true)) {
                 reportError(fmt::sprintf(_L("could NOT save layout! %s##sggu"),strerror(errno)));
-// !!! OKAY FROM HERE
               }
             }
             settingsChanged=true;
@@ -6725,7 +6724,7 @@ bool FurnaceGUI::init() {
       e->saveConf();
       lastError=fmt::sprintf("could not init renderer!\r\nthe render backend has been set to a safe value. please restart Furnace.");
     } else {
-      String rend_err = (settings.language == DIV_LANG_ENGLISH ? "could not init renderer! %s" : _L("could not init renderer! %s##sggu"))
+      String rend_err = (settings.language == DIV_LANG_ENGLISH ? "could not init renderer! %s" : _L("could not init renderer! %s##sggu"));
       lastError=fmt::sprintf(rend_err,SDL_GetError());
       if (!settings.renderDriver.empty()) {
         settings.renderDriver="";
