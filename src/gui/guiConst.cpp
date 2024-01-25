@@ -181,38 +181,39 @@ const char* insTypes[DIV_INS_MAX+1][3]={
 };
 
 const char* sampleLoopModes[DIV_SAMPLE_LOOP_MAX]={
-  "Forward",
-  "Backward",
-  "Ping pong"
+  "Forward##sggc",
+  "Backward##sggc",
+  "Ping pong##sggc"
 };
 
 const char* sampleDepths[DIV_SAMPLE_DEPTH_MAX]={
-  "1-bit PCM",
-  "1-bit DPCM",
+  "1-bit PCM##sggc",
+  "1-bit DPCM##sggc",
   NULL,
   "YMZ/YMU ADPCM",
   "QSound ADPCM",
   "ADPCM-A",
   "ADPCM-B",
   "K05 ADPCM",
-  "8-bit PCM",
+  "8-bit PCM##sggc",
   "BRR",
   "VOX",
-  "8-bit µ-law PCM",
+  "8-bit µ-law PCM##sggc",
   "C219 PCM",
   NULL,
   NULL,
   NULL,
-  "16-bit PCM"
+  "16-bit PCM##sggc"
 };
 
 const char* resampleStrats[]={
-  "none",
-  "linear",
-  "cubic spline",
-  "blep synthesis",
-  "sinc",
-  "best possible"
+  "none##sggc",
+  "linear##sggc",
+  "cubic spline##sggc",
+  "blep synthesis##sggc",
+  "sinc##sggc",
+  "best possible##sggc",
+  NULL
 };
 
 const FurnaceGUIColors fxColorsSort[]={//used for sorting
@@ -1348,13 +1349,13 @@ const int* chipCategories[]={
 };
 
 const char* chipCategoryNames[]={
-  "All chips",
+  "All chips##sggc",
   "FM",
-  "Square",
-  "Wavetable",
-  "Special",
-  "Sample",
-  "Modern/fantasy",
+  "Square##sggc",
+  "Wavetable##sggc",
+  "Special##sggc",
+  "Sample##sggc",
+  "Modern/fantasy##sggc",
   NULL
 };
 

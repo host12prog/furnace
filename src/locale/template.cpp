@@ -66,9 +66,9 @@ void DivLocale::addTranslationsTemplate()
     // # sgpi  src/gui/piano.cpp
     //   sgpn  src/gui/plot_nolerp.cpp
     // # sgpr  src/gui/presets.cpp
-    //   sgrv  src/gui/regView.cpp
+    // # sgrv  src/gui/regView.cpp
     //   sgre  src/gui/render.cpp
-    //   sgse  src/gui/sampleEdit.cpp
+    // # sgse  src/gui/sampleEdit.cpp
     //   sgsc  src/gui/scaling.cpp
     // # sgse  src/gui/settings.cpp
     //   sgsi  src/gui/songInfo.cpp
@@ -785,6 +785,20 @@ void DivLocale::addTranslationsTemplate()
 
     //   sggc  src/gui/guiConst.cpp
 
+    strings["Forward##sggc"].plurals[0] = "=Forward";
+    strings["Backward##sggc"].plurals[0] = "=Backward";
+    strings["Ping pong##sggc"].plurals[0] = "=Ping pong";
+    strings["1-bit PCM##sggc"].plurals[0] = "=1-bit PCM";
+    strings["1-bit DPCM##sggc"].plurals[0] = "=1-bit DPCM";
+    strings["8-bit PCM##sggc"].plurals[0] = "=8-bit PCM";
+    strings["8-bit µ-law PCM##sggc"].plurals[0] = "=8-bit µ-law PCM";
+    strings["16-bit PCM##sggc"].plurals[0] = "=16-bit PCM";
+    strings["none##sggc"].plurals[0] = "=none";
+    strings["linear##sggc"].plurals[0] = "=linear";
+    strings["cubic spline##sggc"].plurals[0] = "=cubic spline";
+    strings["blep synthesis##sggc"].plurals[0] = "=blep synthesis";
+    strings["sinc##sggc"].plurals[0] = "=sinc";
+    strings["best possible##sggc"].plurals[0] = "=best possible";
     strings["Pitch##sggc"].plurals[0] = "=Pitch";
     strings["Song##sggc"].plurals[0] = "=Song";
     strings["Time##sggc"].plurals[0] = "=Time";
@@ -795,6 +809,12 @@ void DivLocale::addTranslationsTemplate()
     strings["System Secondary##sggc"].plurals[0] = "=System Secondary";
     strings["Miscellaneous##sggc"].plurals[0] = "=Miscellaneous";
     strings["Invalid##sggc"].plurals[0] = "=Invalid";
+    strings["All chips##sggc"].plurals[0] = "=All chips";
+    strings["Square##sggc"].plurals[0] = "=Square";
+    strings["Wavetable##sggc"].plurals[0] = "=Wavetable";
+    strings["Special##sggc"].plurals[0] = "=Special";
+    strings["Sample##sggc"].plurals[0] = "=Sample";
+    strings["Modern/fantasy##sggc"].plurals[0] = "=Modern/fantasy";
 
     //   sgda  src/gui/doAction.cpp
 
@@ -1505,6 +1525,148 @@ void DivLocale::addTranslationsTemplate()
     strings["Sega Master System (with FM expansion)##sgpr"].plurals[0] = "=Sega Master System (with FM expansion)";
     strings["Arcade (YM2151 and SegaPCM)##sgpr"].plurals[0] = "=Arcade (YM2151 and SegaPCM)";
     strings["Neo Geo CD (extended channel 2)##sgpr"].plurals[0] = "=Neo Geo CD (extended channel 2)";
+
+    //   sgrv  src/gui/regView.cpp
+
+    strings["Register View###Register View"].plurals[0] = "=Register View###Register View";
+    strings["- no register pool available##sgrv"].plurals[0] = "=- no register pool available";
+
+    //   sgse  src/gui/sampleEdit.cpp
+
+    strings["%s: maximum sample rate is %d##sgse"].plurals[0] = "=%s: maximum sample rate is %d";
+    strings["%s: minimum sample rate is %d##sgse"].plurals[0] = "=%s: minimum sample rate is %d";
+    strings["%s: sample rate must be %d##sgse"].plurals[0] = "=%s: sample rate must be %d";
+    strings["Sample Editor###Sample Editor"].plurals[0] = "=Sample Editor###Sample Editor";
+    strings["no sample selected##sgse"].plurals[0] = "=no sample selected";
+    strings["or##sgse0"].plurals[0] = "=or";
+    strings["Open##sgse0"].plurals[0] = "=Open";
+    strings["or##sgse1"].plurals[0] = "=or";
+    strings["Create New##sgse"].plurals[0] = "=Create New";
+    strings["Invalid##sgse0"].plurals[0] = "=Invalid";
+    strings["Invalid##sgse1"].plurals[0] = "=Invalid";
+    strings["Open##sgse1"].plurals[0] = "=Open";
+    strings["import raw...##sgse"].plurals[0] = "=import raw...";
+    strings["Save##sgse"].plurals[0] = "=Save";
+    strings["save raw...##sgse"].plurals[0] = "=save raw...";
+    strings["Name##sgse"].plurals[0] = "=Name";
+    strings["SNES: loop start must be a multiple of 16 (try with %d)##sgse"].plurals[0] = "=SNES: loop start must be a multiple of 16 (try with %d)";
+    strings["SNES: loop end must be a multiple of 16 (try with %d)##sgse"].plurals[0] = "=SNES: loop end must be a multiple of 16 (try with %d)";
+    strings["SNES: sample length will be padded to multiple of 16##sgse"].plurals[0] = "=SNES: sample length will be padded to multiple of 16";
+    strings["QSound: loop cannot be longer than 32767 samples##sgse"].plurals[0] = "=QSound: loop cannot be longer than 32767 samples";
+    strings["QSound: maximum sample length is 65535##sgse"].plurals[0] = "=QSound: maximum sample length is 65535";
+    strings["NES: loop point ignored on DPCM (may only loop entire sample)##sgse"].plurals[0] = "=NES: loop point ignored on DPCM (may only loop entire sample)";
+    strings["NES: maximum DPCM sample length is 32648##sgse"].plurals[0] = "=NES: maximum DPCM sample length is 32648";
+    strings["X1-010: samples can't loop##sgse"].plurals[0] = "=X1-010: samples can't loop";
+    strings["X1-010: maximum sample length is 131072##sgse"].plurals[0] = "=X1-010: maximum sample length is 131072";
+    strings["GA20: samples can't loop##sgse"].plurals[0] = "=GA20: samples can't loop";
+    strings["YM2608: loop point ignored on ADPCM (may only loop entire sample)##sgse"].plurals[0] = "=YM2608: loop point ignored on ADPCM (may only loop entire sample)";
+    strings["YM2608: sample length will be padded to multiple of 512##sgse"].plurals[0] = "=YM2608: sample length will be padded to multiple of 512";
+    strings["YM2610: ADPCM-A samples can't loop##sgse"].plurals[0] = "=YM2610: ADPCM-A samples can't loop";
+    strings["YM2610: loop point ignored on ADPCM-B (may only loop entire sample)##sgse"].plurals[0] = "=YM2610: loop point ignored on ADPCM-B (may only loop entire sample)";
+    strings["YM2610: sample length will be padded to multiple of 512##sgse"].plurals[0] = "=YM2610: sample length will be padded to multiple of 512";
+    strings["YM2610: maximum ADPCM-A sample length is 2097152##sgse"].plurals[0] = "=YM2610: maximum ADPCM-A sample length is 2097152";
+    strings["Y8950: loop point ignored on ADPCM (may only loop entire sample)##sgse"].plurals[0] = "=Y8950: loop point ignored on ADPCM (may only loop entire sample)";
+    strings["Y8950: sample length will be padded to multiple of 512##sgse"].plurals[0] = "=Y8950: sample length will be padded to multiple of 512";
+    strings["Amiga: loop start must be a multiple of 2##sgse"].plurals[0] = "=Amiga: loop start must be a multiple of 2";
+    strings["Amiga: loop end must be a multiple of 2##sgse"].plurals[0] = "=Amiga: loop end must be a multiple of 2";
+    strings["Amiga: maximum sample length is 131070##sgse"].plurals[0] = "=Amiga: maximum sample length is 131070";
+    strings["SegaPCM: maximum sample length is 65280##sgse"].plurals[0] = "=SegaPCM: maximum sample length is 65280";
+    strings["K053260: loop point ignored (may only loop entire sample)##sgse"].plurals[0] = "=K053260: loop point ignored (may only loop entire sample)";
+    strings["K053260: maximum sample length is 65535##sgse"].plurals[0] = "=K053260: maximum sample length is 65535";
+    strings["C140: maximum sample length is 65535##sgse"].plurals[0] = "=C140: maximum sample length is 65535";
+    strings["C219: loop start must be a multiple of 2##sgse"].plurals[0] = "=C219: loop start must be a multiple of 2";
+    strings["C219: loop end must be a multiple of 2##sgse"].plurals[0] = "=C219: loop end must be a multiple of 2";
+    strings["C219: maximum sample length is 131072##sgse"].plurals[0] = "=C219: maximum sample length is 131072";
+    strings["MSM6295: samples can't loop##sgse"].plurals[0] = "=MSM6295: samples can't loop";
+    strings["ES5506: backward loop mode isn't supported##sgse"].plurals[0] = "=ES5506: backward loop mode isn't supported";
+    strings["backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506##sgse"].plurals[0] = "=backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506";
+    strings["Info##sgse"].plurals[0] = "=Info";
+    strings["Rate##sgse0"].plurals[0] = "=Rate";
+    strings["Compat Rate##sgse"].plurals[0] = "=Compat Rate";
+    strings["used in DefleMask-compatible sample mode (17xx), in where samples are mapped to an octave.##sgse"].plurals[0] = "=used in DefleMask-compatible sample mode (17xx), in where samples are mapped to an octave.";
+    strings["Loop (length: %d)##Loop"].plurals[0] = "=Loop (length: %d)##Loop";
+    strings["changing the loop in a BRR sample may result in glitches!##sgse0"].plurals[0] = "=changing the loop in a BRR sample may result in glitches!";
+    strings["Chips##sgse"].plurals[0] = "=Chips";
+    strings["Type##sgse"].plurals[0] = "=Type";
+    strings["BRR emphasis##sgse"].plurals[0] = "=BRR emphasis";
+    strings["this is a BRR sample.\nenabling this option will muffle it (only affects non-SNES chips).##sgse"].plurals[0] = "=this is a BRR sample.\nenabling this option will muffle it (only affects non-SNES chips).";
+    strings["enable this option to slightly boost high frequencies\nto compensate for the SNES' Gaussian filter's muffle.##sgse"].plurals[0] = "=enable this option to slightly boost high frequencies\nto compensate for the SNES' Gaussian filter's muffle.";
+    strings["8-bit dither##sgse"].plurals[0] = "=8-bit dither";
+    strings["dither the sample when used on a chip that only supports 8-bit samples.##sgse"].plurals[0] = "=dither the sample when used on a chip that only supports 8-bit samples.";
+    strings["Note##sgse"].plurals[0] = "=Note";
+    strings["Fine##sgse"].plurals[0] = "=Fine";
+    strings["Mode##sgse"].plurals[0] = "=Mode";
+    strings["Start##sgse"].plurals[0] = "=Start";
+    strings["changing the loop in a BRR sample may result in glitches!##sgse1"].plurals[0] = "=changing the loop in a BRR sample may result in glitches!";
+    strings["End##sgse"].plurals[0] = "=End";
+    strings["changing the loop in a BRR sample may result in glitches!##sgse2"].plurals[0] = "=changing the loop in a BRR sample may result in glitches!";
+    strings["%s\n%d bytes free##sgse"].plurals[0] = "=%s\n%d bytes free";
+    strings["%s (%s)\n%d bytes free##sgse"].plurals[0] = "=%s (%s)\n%d bytes free";
+    strings["\n\nnot enough memory for this sample!##sgse"].plurals[0] = "=\n\nnot enough memory for this sample!";
+    strings["Edit mode: Select##sgse"].plurals[0] = "=Edit mode: Select";
+    strings["Edit mode: Draw##sgse"].plurals[0] = "=Edit mode: Draw";
+    strings["Resize##sgse0"].plurals[0] = "=Resize";
+    strings["Samples##sgse0"].plurals[0] = "=Samples";
+    strings["Resize##sgse1"].plurals[0] = "=Resize";
+    strings["couldn't resize! make sure your sample is 8 or 16-bit.##sgse"].plurals[0] = "=couldn't resize! make sure your sample is 8 or 16-bit.";
+    strings["Resample##sgse0"].plurals[0] = "=Resample";
+    strings["Rate##sgse1"].plurals[0] = "=Rate";
+    strings["Factor##sgse"].plurals[0] = "=Factor";
+    strings["Filter##sgse"].plurals[0] = "=Filter";
+    strings["Resample##sgse1"].plurals[0] = "=Resample";
+    strings["couldn't resample! make sure your sample is 8 or 16-bit.##sgse"].plurals[0] = "=couldn't resample! make sure your sample is 8 or 16-bit.";
+    strings["Undo##sgse"].plurals[0] = "=Undo";
+    strings["Redo##sgse"].plurals[0] = "=Redo";
+    strings["Amplify##sgse"].plurals[0] = "=Amplify";
+    strings["Volume##sgse"].plurals[0] = "=Volume";
+    strings["Apply##sgse0"].plurals[0] = "=Apply";
+    strings["Normalize##sgse"].plurals[0] = "=Normalize";
+    strings["Fade in##sgse"].plurals[0] = "=Fade in";
+    strings["Fade out##sgse"].plurals[0] = "=Fade out";
+    strings["Insert silence##sgse"].plurals[0] = "=Insert silence";
+    strings["Samples##sgse1"].plurals[0] = "=Samples";
+    strings["Go##sgse"].plurals[0] = "=Go";
+    strings["couldn't insert! make sure your sample is 8 or 16-bit.##sgse"].plurals[0] = "=couldn't insert! make sure your sample is 8 or 16-bit.";
+    strings["Apply silence##sgse"].plurals[0] = "=Apply silence";
+    strings["Delete##sgse"].plurals[0] = "=Delete";
+    strings["Trim##sgse"].plurals[0] = "=Trim";
+    strings["Reverse##sgse"].plurals[0] = "=Reverse";
+    strings["Invert##sgse"].plurals[0] = "=Invert";
+    strings["Signed/unsigned exchange##sgse"].plurals[0] = "=Signed/unsigned exchange";
+    strings["Apply filter##sgse"].plurals[0] = "=Apply filter";
+    strings["Cutoff:##sgse"].plurals[0] = "=Cutoff:";
+    strings["From##sgse"].plurals[0] = "=From";
+    strings["To##sgse"].plurals[0] = "=To";
+    strings["Resonance##sgse"].plurals[0] = "=Resonance";
+    strings["Power##sgse"].plurals[0] = "=Power";
+    strings["Low-pass##sgse"].plurals[0] = "=Low-pass";
+    strings["Band-pass##sgse"].plurals[0] = "=Band-pass";
+    strings["High-pass##sgse"].plurals[0] = "=High-pass";
+    strings["Apply##sgse1"].plurals[0] = "=Apply";
+    strings["Crossfade loop points##sgse"].plurals[0] = "=Crossfade loop points";
+    strings["Number of samples##sgse"].plurals[0] = "=Number of samples";
+    strings["Linear <-> Equal power##sgse"].plurals[0] = "=Linear <-> Equal power";
+    strings["Apply##sgse2"].plurals[0] = "=Apply";
+    strings["Crossfade: length would go out of bounds. Aborted...##sgse"].plurals[0] = "=Crossfade: length would go out of bounds. Aborted...";
+    strings["Crossfade: length would overflow loopStart. Try a smaller random value.##sgse"].plurals[0] = "=Crossfade: length would overflow loopStart. Try a smaller random value.";
+    strings["Preview sample##sgse"].plurals[0] = "=Preview sample";
+    strings["Stop sample preview##sgse"].plurals[0] = "=Stop sample preview";
+    strings["Create instrument from sample##sgse"].plurals[0] = "=Create instrument from sample";
+    strings["Zoom##sgse0"].plurals[0] = "=Zoom";
+    strings["Zoom##sgse1"].plurals[0] = "=Zoom";
+    strings["Auto##sgse"].plurals[0] = "=Auto";
+    strings["cut##sgse"].plurals[0] = "=cut";
+    strings["copy##sgse"].plurals[0] = "=copy";
+    strings["paste##sgse"].plurals[0] = "=paste";
+    strings["paste (replace)##sgse"].plurals[0] = "=paste (replace)";
+    strings["paste (mix)##sgse"].plurals[0] = "=paste (mix)";
+    strings["select all##sgse"].plurals[0] = "=select all";
+    strings["set loop to selection##sgse"].plurals[0] = "=set loop to selection";
+    strings["create wavetable from selection##sgse"].plurals[0] = "=create wavetable from selection";
+    strings["Draw##sgse"].plurals[0] = "=Draw";
+    strings["%d samples, %d bytes##sgse"].plurals[0] = "=%d samples, %d bytes";
+    strings[" (%d-%d: %d samples)##sgse"].plurals[0] = "= (%d-%d: %d samples)";
+    strings["Non-8/16-bit samples cannot be edited without prior conversion.##sgse"].plurals[0] = "=Non-8/16-bit samples cannot be edited without prior conversion.";
 
 //REMEMBER to check for anything that calls the strings at the top!
 
