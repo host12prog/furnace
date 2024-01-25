@@ -59,7 +59,7 @@ void DivLocale::addTranslationsTemplate()
     // # sgmm  src/gui/midiMap.cpp
     // # sgmx  src/gui/mixer.cpp
     //   sgns  src/gui/newSong.cpp
-    //   sgor  src/gui/orders.cpp
+    // # sgor  src/gui/orders.cpp
     //   sgos  src/gui/osc.cpp
     //   sgpm  src/gui/patManager.cpp
     //   sgpa  src/gui/pattern.cpp
@@ -1131,6 +1131,21 @@ void DivLocale::addTranslationsTemplate()
     strings["Metronome##sgmx"].plurals[0] = "=Metronome";
     strings["System##sgmx1"].plurals[0] = "=System";
     strings["disconnect all##sgmx"].plurals[0] = "=disconnect all";
+
+    //   sgor  src/gui/orders.cpp
+
+    strings["Add new order##sgor"].plurals[0] = "=Add new order";
+    strings["Remove order##sgor"].plurals[0] = "=Remove order";
+    strings["Duplicate order (right-click to deep clone)##sgor"].plurals[0] = "=Duplicate order (right-click to deep clone)";
+    strings["Move order up##sgor"].plurals[0] = "=Move order up";
+    strings["Move order down##sgor"].plurals[0] = "=Move order down";
+    strings["Duplicate order at end of song (right-click to deep clone)##sgor"].plurals[0] = "=Duplicate order at end of song (right-click to deep clone)";
+    strings["Order change mode: entire row##sgor"].plurals[0] = "=Order change mode: entire row";
+    strings["Order change mode: one##sgor"].plurals[0] = "=Order change mode: one";
+    strings["Order edit mode: Select and type (scroll vertically)##sgor"].plurals[0] = "=Order edit mode: Select and type (scroll vertically)";
+    strings["Order edit mode: Select and type (scroll horizontally)##sgor"].plurals[0] = "=Order edit mode: Select and type (scroll horizontally)";
+    strings["Order edit mode: Select and type (don't scroll)##sgor"].plurals[0] = "=Order edit mode: Select and type (don't scroll)";
+    strings["Order edit mode: Click to change##sgor"].plurals[0] = "=Order edit mode: Click to change";
 
 //REMEMBER to check for anything that calls the strings at the top!
 
