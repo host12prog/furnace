@@ -101,7 +101,7 @@ void DivLocale::addTranslationsRussian()
     strings["Xenium Demoparty##sgab"].plurals[0] = "Демопати Xenium";
     strings["all members of Deflers of Noice!##sgab"].plurals[0] = "всем участникам Deflers of Noice!";
 
-    strings["copyright © 2021-2023 tildearrow##sgab"].plurals[0] = "Все права защищены © 2021-2023 tildearrow";
+    strings["copyright © 2021-2024 tildearrow##sgab"].plurals[0] = "Все права защищены © 2021-2024 tildearrow";
     strings["(and contributors).##sgab"].plurals[0] = "(и участники разработки).";
     strings["licensed under GPLv2+! see##sgab"].plurals[0] = "лицензировано по GPLv2+! см.";
     strings["LICENSE for more information.##sgab"].plurals[0] = "LICENSE для доп. информации.";
@@ -120,7 +120,7 @@ void DivLocale::addTranslationsRussian()
 
     strings["it also comes with ABSOLUTELY NO WARRANTY.##sgab"].plurals[0] = "она также предоставляется БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ.";
 
-    strings["thanks to all contributors/bug reporters!##sgab"].plurals[0] = "спасибо всем, кто помогал с разработкой и сообщал о багах!";
+    strings["thanks to all contributors/bug reporters!##sgab"].plurals[0] = "спасибо всем, кто помогает с разработкой и сообщает о багах!";
 
     //src/gui/channels.cpp
 
@@ -606,12 +606,26 @@ void DivLocale::addTranslationsRussian()
     strings["Error while saving file! (%s)##sggu2"].plurals[0] = "Ошибка при сохранении файла! (%s)";
     strings["Error while saving file! (%s)##sggu3"].plurals[0] = "Ошибка при сохранении файла! (%s)";
     strings["error while saving instrument! make sure your instrument is compatible.##sggu"].plurals[0] = "ошибка при сохранении инструмента! убедитесь, что ваш инструмент совместим с Deflemask.";
+    strings["there were some errors while loading samples:\n#sggu"].plurals[0] = "при загрузке сэмплов возникли следующие ошибки:\n";
     strings["...but you haven't selected a sample!##sggu0"].plurals[0] = "...но вы не выбрали сэмпл!";
     strings["could not save sample! open Log Viewer for more information.##sggu0"].plurals[0] = "не удалось сохранить сэмпл! откройте просмотрщик логов для получения дополнительной информации.";
     strings["could not save sample! open Log Viewer for more information.##sggu1"].plurals[0] = "не удалось сохранить сэмпл! откройте просмотрщик логов для получения дополнительной информации.";
-    strings["cannot load instrument! (##sggu"].plurals[0] = "=cannot load instrument! (";
-    strings["congratulations! you managed to load nothing.\nyou are entitled to a bug report.##sggu"].plurals[0] = "поздравляю! вам удалось загрузить ничто.\nвы приглашаетесь к написанию отчёта об ошибке.";
+    strings["there were some warnings/errors while loading instruments:\n#sggu"].plurals[0] = "при загрузке инструментов возникли следующие ошибки и предупреждения:\n";
+    strings["> %s: cannot load instrument! (%s)\n#sggu"].plurals[0] = "> %s: не могу загрузить инструмент! (%s)\n";
     strings["...but you haven't selected an instrument!##sggu0"].plurals[0] = "...но вы не выбрали инструмент!";
+    strings["cannot load instrument! (##sggu"].plurals[0] = "не могу загрузить инструмент! (";
+    strings["congratulations! you managed to load nothing.\nyou are entitled to a bug report.##sggu"].plurals[0] = "поздравляю! вам удалось загрузить ничто.\nвы приглашаетесь к написанию отчёта об ошибке.";
+    strings["there were some errors while loading wavetables:\n##sggu"].plurals[0] = "при загрузке волновых таблиц возникли следующие ошибки:\n";
+    strings["cannot load wavetable! (##sggu"].plurals[0] = "не могу загрузить волновую таблицу! (";
+    strings["...but you haven't selected a wavetable!##sggu"].plurals[0] = "...но вы не выбрали волновую таблицу!";
+    strings["could not open file!##sggu"].plurals[0] = "не удалось открыть файл!";
+    strings["Could not write ZSM! (%s)##sggu"].plurals[0] = "Не удалось записать файл ZSM! (%s)";
+    strings["could not write text! (%s)##sggu"].plurals[0] = "не удалось записать текстовый файл! (%s)";
+    strings["could not write command stream! (%s)##sggu"].plurals[0] = "не удалось записать файл с потоком команд! (%s)";
+    strings["Error while loading file! (%s)##sggu4"].plurals[0] = "Ошибка при загрузке файла! (%s)";
+    strings["You opened: %s##sggu"].plurals[0] = "Вы открыли: %s";
+    strings["You opened:##sggu"].plurals[0] = "Вы открыли:";
+    strings["You saved: %s##sggu"].plurals[0] = "Вы сохранили: %s";
     strings["Rendering...###Rendering..."].plurals[0] = "Рендер...###Rendering...";
     strings["Please wait...##sggu"].plurals[0] = "Пожалуйста, подождите...";
     strings["Abort##sggu"].plurals[0] = "Прервать";
@@ -677,8 +691,11 @@ void DivLocale::addTranslationsRussian()
     strings["OK##sggu4"].plurals[0] = "ОК";
     strings["error while loading fonts! please check your settings.##sggu1"].plurals[0] = "Ошибка при загрузке шрифтов! пожалуйста, проверьте настройки.";
     strings["it appears I couldn't load these fonts. any setting you can check?##sggu"].plurals[0] = "кажется, я не могу загрузить эти шрифты. проверьте настройки?";
+    strings["could not init renderer! %s##sggu"].plurals[0] = "не получилось инициализировать движок отрисовки! %s";
     strings["\r\nthe render driver has been set to a safe value. please restart Furnace.##sggu"].plurals[0] = "\r\nдвижок отрисовки был сброшен до безопасного. пожалуйста, перезапустите Furnace.";
+    strings["could not open window! %s##sggu"].plurals[0] = "не удалось открыть окно! %s";
     strings["error while loading fonts! please check your settings.##sggu2"].plurals[0] = "Ошибка при загрузке шрифтов! пожалуйста, проверьте настройки.";
+    strings["could NOT save layout! %s##sggu"].plurals[0] = "Не получилось сохранить компоновку окон! %s";
 
     //   sgda  src/gui/doAction.cpp
 
@@ -1000,6 +1017,97 @@ void DivLocale::addTranslationsRussian()
     strings["Clear effects##sgfr"].plurals[0] = "=Clear effects";
     strings["Insert in free spaces##sgfr"].plurals[0] = "=Insert in free spaces";
     strings["Replace##QueryReplace"].plurals[0] = "=Replace##QueryReplace";
+
+    //   sggv  src/gui/grooves.cpp
+
+    strings["Grooves###Grooves"].plurals[0] = "=Grooves###Grooves";
+    strings["use effect 09xx to select a groove pattern.##sggv"].plurals[0] = "=use effect 09xx to select a groove pattern.##sggv";
+    strings["pattern##sggv"].plurals[0] = "=pattern##sggv";
+    strings["remove##sggv"].plurals[0] = "=remove##sggv";
+
+    //   sgie  src/gui/insEdit.cpp
+
+    strings["Name##sgie"].plurals[0] = "=Name";
+    strings["Open##sgie0"].plurals[0] = "=Open";
+    strings["Save##sgie"].plurals[0] = "=Save";
+    strings["save as .dmp...##sgie"].plurals[0] = "=save as .dmp...";
+    strings["Type##sgie"].plurals[0] = "=Type";
+    strings["Unknown##sgie"].plurals[0] = "=Unknown";
+    strings["none of the currently present chips are able to play this instrument type!##sgie"].plurals[0] = "=none of the currently present chips are able to play this instrument type!";
+    strings["Error##sgie"].plurals[0] = "=Error";
+    strings["invalid instrument type! change it first.##sgie"].plurals[0] = "=invalid instrument type! change it first.";
+    strings["Instrument Editor###Instrument Editor"].plurals[0] = "=Instrument Editor###Instrument Editor";
+    strings["waiting...##sgie0"].plurals[0] = "=waiting...";
+    strings["waiting...##sgie1"].plurals[0] = "=waiting...";
+    strings["no instrument selected##sgie0"].plurals[0] = "=no instrument selected";
+    strings["no instrument selected##sgie1"].plurals[0] = "=no instrument selected";
+    strings["select one...##sgie"].plurals[0] = "=select one...";
+    strings["or##sgie0"].plurals[0] = "=or";
+    strings["Open##sgie1"].plurals[0] = "=Open";
+    strings["or##sgie1"].plurals[0] = "=or";
+    strings["Create New##sgie"].plurals[0] = "=Create New";
+    strings["copy##sgie"].plurals[0] = "=copy";
+    strings["paste##sgie"].plurals[0] = "=paste";
+    strings["clear contents##sgie"].plurals[0] = "=clear contents";
+    strings["offset...##sgie"].plurals[0] = "=offset...";
+    strings["offset##sgie"].plurals[0] = "=offset";
+    strings["scale...##sgie"].plurals[0] = "=scale...";
+    strings["scale##sgie"].plurals[0] = "=scale";
+    strings["randomize...##sgie"].plurals[0] = "=randomize...";
+    strings["Min##sgie"].plurals[0] = "=Min";
+    strings["Max##sgie"].plurals[0] = "=Max";
+    strings["randomize##sgie"].plurals[0] = "=randomize";
+
+    //   sgmx  src/gui/mixer.cpp
+
+    strings["input##sgmx"].plurals[0] = "=input";
+    strings["output##sgmx"].plurals[0] = "=output";
+    strings["Mixer##sgmx"].plurals[0] = "=Mixer";
+    strings["Master Volume##sgmx"].plurals[0] = "=Master Volume";
+    strings["Invert##sgmx"].plurals[0] = "=Invert";
+    strings["Volume##sgmx"].plurals[0] = "=Volume";
+    strings["Panning##sgmx"].plurals[0] = "=Panning";
+    strings["Front/Rear##sgmx"].plurals[0] = "=Front/Rear";
+    strings["Patchbay##sgmx"].plurals[0] = "=Patchbay";
+    strings["Automatic patchbay##sgmx"].plurals[0] = "=Automatic patchbay";
+    strings["Display hidden ports##sgmx"].plurals[0] = "=Display hidden ports";
+    strings["Display internal##sgmx"].plurals[0] = "=Display internal";
+    strings["System##sgmx0"].plurals[0] = "=System";
+    strings["Sample Preview##sgmx"].plurals[0] = "=Sample Preview";
+    strings["Metronome##sgmx"].plurals[0] = "=Metronome";
+    strings["System##sgmx1"].plurals[0] = "=System";
+    strings["disconnect all##sgmx"].plurals[0] = "=disconnect all";
+
+    //   sgor  src/gui/orders.cpp
+
+    strings["Add new order##sgor"].plurals[0] = "=Add new order";
+    strings["Remove order##sgor"].plurals[0] = "=Remove order";
+    strings["Duplicate order (right-click to deep clone)##sgor"].plurals[0] = "=Duplicate order (right-click to deep clone)";
+    strings["Move order up##sgor"].plurals[0] = "=Move order up";
+    strings["Move order down##sgor"].plurals[0] = "=Move order down";
+    strings["Duplicate order at end of song (right-click to deep clone)##sgor"].plurals[0] = "=Duplicate order at end of song (right-click to deep clone)";
+    strings["Order change mode: entire row##sgor"].plurals[0] = "=Order change mode: entire row";
+    strings["Order change mode: one##sgor"].plurals[0] = "=Order change mode: one";
+    strings["Order edit mode: Select and type (scroll vertically)##sgor"].plurals[0] = "=Order edit mode: Select and type (scroll vertically)";
+    strings["Order edit mode: Select and type (scroll horizontally)##sgor"].plurals[0] = "=Order edit mode: Select and type (scroll horizontally)";
+    strings["Order edit mode: Select and type (don't scroll)##sgor"].plurals[0] = "=Order edit mode: Select and type (don't scroll)";
+    strings["Order edit mode: Click to change##sgor"].plurals[0] = "=Order edit mode: Click to change";
+
+    //   sgos  src/gui/osc.cpp
+
+    strings["Oscilloscope###Oscilloscope"].plurals[0] = "=Oscilloscope###Oscilloscope";
+    strings["zoom: %.2fx (%.1fdB)##sgos"].plurals[0] = "=zoom: %.2fx (%.1fdB)";
+    strings["window size: %.1fms##sgos"].plurals[0] = "=window size: %.1fms";
+    strings["(-Infinity)dB##sgos"].plurals[0] = "=(-Infinity)dB";
+
+    //   sgpm  src/gui/patManager.cpp
+
+    strings["Pattern Manager###Pattern Manager"].plurals[0] = "=Pattern Manager###Pattern Manager";
+    strings["Global Tasks##sgpm"].plurals[0] = "=Global Tasks";
+    strings["De-duplicate patterns##sgpm"].plurals[0] = "=De-duplicate patterns";
+    strings["Re-arrange patterns##sgpm"].plurals[0] = "=Re-arrange patterns";
+    strings["Pattern %.2X\n- not allocated##sgpm"].plurals[0] = "=Pattern %.2X\n- not allocated";
+    strings["Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase##sgpm"].plurals[0] = "=Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase";
 
     //MENU BARS
 

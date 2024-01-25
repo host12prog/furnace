@@ -4875,9 +4875,7 @@ bool FurnaceGUI::loop() {
               }
               break;
             case GUI_FILE_SAMPLE_OPEN: {
-// !!! NEEDS WORK
-              String errs=_L("there were some errors while loading samples:\n");
-// !!! OKAY FROM HERE
+              String errs = (settings.language == DIV_LANG_ENGLISH ? "there were some errors while loading samples:\n" : _L("there were some errors while loading samples:\n#sggu"));
               bool warn=false;
               for (String i: fileDialog->getFileName()) {
                 DivSample* s=e->sampleFromFile(i.c_str());
@@ -4965,15 +4963,13 @@ bool FurnaceGUI::loop() {
               std::vector<DivInstrument*> instruments;
               bool ask=false;
               bool warn=false;
-// !!! NEEDS WORK
-              String warns=_L("there were some warnings/errors while loading instruments:\n");
+              String warns = (settings.language == DIV_LANG_ENGLISH ? "there were some warnings/errors while loading instruments:\n" : _L("there were some warnings/errors while loading instruments:\n#sggu"));
               int sampleCountBefore=e->song.sampleLen;
               for (String i: fileDialog->getFileName()) {
                 std::vector<DivInstrument*> insTemp=e->instrumentFromFile(i.c_str(),true,settings.readInsNames);
                 if (insTemp.empty()) {
                   warn=true;
-                  warns+=fmt::sprintf("> %s: cannot load instrument! (%s)\n",i,_L(e->getLastError().c_str()));
-// !!! OKAY FROM HERE
+                  warns+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "> %s: cannot load instrument! (%s)\n" : _L("> %s: cannot load instrument! (%s)\n#sggu")),i,_L(e->getLastError().c_str()));
                 } else if (!e->getWarnings().empty()) {
                   warn=true;
                   warns+=fmt::sprintf("> %s:\n%s\n",i,e->getWarnings());
@@ -5045,7 +5041,6 @@ bool FurnaceGUI::loop() {
                   }
                 }
               } else {
-// !!! NEEDS WORK
                 String temp = (settings.language == DIV_LANG_ENGLISH ? "cannot load instrument! (" : _L("cannot load instrument! (##sggu"));
                 String errerr = _L(e->getLastError().c_str());
                 showError(temp + errerr + ")");
@@ -5053,7 +5048,7 @@ bool FurnaceGUI::loop() {
               break;
             }
             case GUI_FILE_WAVE_OPEN: {
-              String errs="there were some errors while loading wavetables:\n";
+              String errs = (settings.language == DIV_LANG_ENGLISH ? "there were some errors while loading wavetables:\n" : _L("there were some errors while loading wavetables:\n##sggu"));
               bool warn=false;
               for (String i: fileDialog->getFileName()) {
                 DivWavetable* wave=e->waveFromFile(i.c_str());
@@ -5062,7 +5057,8 @@ bool FurnaceGUI::loop() {
                     warn=true;
                     errs+=fmt::sprintf("- %s: %s\n",i,e->getLastError());
                   } else {
-                    showError("cannot load wavetable! ("+e->getLastError()+")");
+                    String wave_err = (settings.language == DIV_LANG_ENGLISH ? "cannot load wavetable! (" : _L("cannot load wavetable! (##sggu"));
+                    showError(wave_err+e->getLastError()+")");
                   }
                 } else {
                   int waveCount=-1;
@@ -5072,7 +5068,8 @@ bool FurnaceGUI::loop() {
                       warn=true;
                       errs+=fmt::sprintf("- %s: %s\n",i,e->getLastError());
                     } else {
-                      showError("cannot load wavetable! ("+e->getLastError()+")");
+                      String wave_err = (settings.language == DIV_LANG_ENGLISH ? "cannot load wavetable! (" : _L("cannot load wavetable! (##sggu"));
+                      showError(wave_err+e->getLastError()+")");
                     }
                   } else {
                     if (settings.selectAssetOnLoad) {
@@ -5091,7 +5088,8 @@ bool FurnaceGUI::loop() {
             case GUI_FILE_WAVE_OPEN_REPLACE: {
               DivWavetable* wave=e->waveFromFile(copyOfName.c_str());
               if (wave==NULL) {
-                showError("cannot load wavetable! ("+e->getLastError()+")");
+                String wave_err = (settings.language == DIV_LANG_ENGLISH ? "cannot load wavetable! (" : _L("cannot load wavetable! (##sggu"));
+                showError(wave_err+e->getLastError()+")");
               } else {
                 if (curWave>=0 && curWave<(int)e->song.wave.size()) {
                   e->lockEngine([this,wave]() {
@@ -5099,7 +5097,7 @@ bool FurnaceGUI::loop() {
                     MARK_MODIFIED;
                   });
                 } else {
-                  showError(_L("...but you haven't selected a wavetable!"));
+                  showError(_L("...but you haven't selected a wavetable!##sggu"));
                 }
                 delete wave;
               }
@@ -5114,7 +5112,7 @@ bool FurnaceGUI::loop() {
                   fclose(f);
                   pushRecentSys(copyOfName.c_str());
                 } else {
-                  showError(_L("could not open file!"));
+                  showError(_L("could not open file!##sggu"));
                 }
                 w->finish();
                 delete w;
@@ -5135,7 +5133,7 @@ bool FurnaceGUI::loop() {
                   fclose(f);
                   pushRecentSys(copyOfName.c_str());
                 } else {
-                  showError("could not open file!");
+                  showError(_L("could not open file!##sggu"));
                 }
                 w->finish();
                 delete w;
@@ -5143,12 +5141,13 @@ bool FurnaceGUI::loop() {
                   showWarning(e->getWarnings(),GUI_WARN_GENERIC);
                 }
               } else {
-                showError(fmt::sprintf("Could not write ZSM! (%s)",e->getLastError()));
+                String export_err = _L("Could not write ZSM! (%s)##sggu");
+                showError(fmt::sprintf(export_err,e->getLastError()));
               }
               break;
             }
             case GUI_FILE_EXPORT_ROM:
-              showError("Coming soon!");
+              showError(_L("Coming soon!##sggu"));
               break;
             case GUI_FILE_EXPORT_TEXT: {
               SafeWriter* w=e->saveText(false);
@@ -5159,7 +5158,7 @@ bool FurnaceGUI::loop() {
                   fclose(f);
                   pushRecentSys(copyOfName.c_str());
                 } else {
-                  showError("could not open file!");
+                  showError(_L("could not open file!##sggu"));
                 }
                 w->finish();
                 delete w;
@@ -5167,7 +5166,8 @@ bool FurnaceGUI::loop() {
                   showWarning(e->getWarnings(),GUI_WARN_GENERIC);
                 }
               } else {
-                showError(fmt::sprintf("could not write text! (%s)",e->getLastError()));
+                String export_err = _L("could not write text! (%s)##sggu");
+                showError(fmt::sprintf(export_err,e->getLastError()));
               }
               break;
             }
@@ -5183,7 +5183,7 @@ bool FurnaceGUI::loop() {
                   fclose(f);
                   pushRecentSys(copyOfName.c_str());
                 } else {
-                  showError("could not open file!");
+                  showError(_L("could not open file!##sggu"));
                 }
                 w->finish();
                 delete w;
@@ -5191,7 +5191,8 @@ bool FurnaceGUI::loop() {
                   showWarning(e->getWarnings(),GUI_WARN_GENERIC);
                 }
               } else {
-                showError(fmt::sprintf("could not write command stream! (%s)",e->getLastError()));
+                String export_err = _L("could not write command stream! (%s)##sggu");
+                showError(fmt::sprintf(export_err,e->getLastError()));
               }
               break;
             }
@@ -5233,14 +5234,14 @@ bool FurnaceGUI::loop() {
               break;
             case GUI_FILE_CMDSTREAM_OPEN:
               if (loadStream(copyOfName)>0) {
-                showError(fmt::sprintf("Error while loading file! (%s)",lastError));
+                showError(fmt::sprintf(_L("Error while loading file! (%s)##sggu4"),lastError));
               }
               break;
             case GUI_FILE_TEST_OPEN:
-              showWarning(fmt::sprintf("You opened: %s",copyOfName),GUI_WARN_GENERIC);
+              showWarning(fmt::sprintf(_L("You opened: %s##sggu"),copyOfName),GUI_WARN_GENERIC);
               break;
             case GUI_FILE_TEST_OPEN_MULTI: {
-              String msg="You opened:";
+              String msg = (settings.language == DIV_LANG_ENGLISH ? "You opened:" : _L("You opened:##sggu"));
               for (String i: fileDialog->getFileName()) {
                 msg+=fmt::sprintf("\n- %s",i);
               }
@@ -5248,8 +5249,7 @@ bool FurnaceGUI::loop() {
               break;
             }
             case GUI_FILE_TEST_SAVE:
-              showWarning(fmt::sprintf("You saved: %s",copyOfName),GUI_WARN_GENERIC);
-// !!! OKAY FROM HERE
+              showWarning(fmt::sprintf(_L("You saved: %s"),copyOfName),GUI_WARN_GENERIC);
               break;
           }
           curFileDialog=GUI_FILE_OPEN;
@@ -5493,7 +5493,7 @@ bool FurnaceGUI::loop() {
                 nextFile="";
               } else {
                 if (load(nextFile)>0) {
-                  showError(fmt::sprintf("Error while loading file! (%s)",lastError));
+                  showError(fmt::sprintf(_L("Error while loading file! (%s)##sggu5"),lastError));
                 }
                 nextFile="";
               }
@@ -5503,7 +5503,7 @@ bool FurnaceGUI::loop() {
           if (ImGui::Button("No")) {
             ImGui::CloseCurrentPopup();
             if (load(nextFile)>0) {
-              showError(fmt::sprintf("Error while loading file! (%s)",lastError));
+              showError(fmt::sprintf(_L("Error while loading file! (%s)##sggu6"),lastError));
             }
             nextFile="";
           }
@@ -6618,8 +6618,8 @@ bool FurnaceGUI::init() {
       e->saveConf();
       lastError=fmt::sprintf("could not init renderer!\r\nthe render backend has been set to a safe value. please restart Furnace.");
     } else {
-// !!! NEEDS WORK
-      lastError=fmt::sprintf("could not init renderer! %s",SDL_GetError());
+      String rend_err = (settings.language == DIV_LANG_ENGLISH ? "could not init renderer! %s" : _L("could not init renderer! %s##sggu"));
+      lastError=fmt::sprintf(rend_err,SDL_GetError());
       if (!settings.renderDriver.empty()) {
         settings.renderDriver="";
         e->setConf("renderDriver","");
@@ -6635,8 +6635,7 @@ bool FurnaceGUI::init() {
   logD("creating window...");
   sdlWin=SDL_CreateWindow("Furnace",scrX,scrY,scrW,scrH,SDL_WINDOW_RESIZABLE|SDL_WINDOW_ALLOW_HIGHDPI|(scrMax?SDL_WINDOW_MAXIMIZED:0)|(fullScreen?SDL_WINDOW_FULLSCREEN_DESKTOP:0)|rend->getWindowFlags());
   if (sdlWin==NULL) {
-    lastError=fmt::sprintf("could not open window! %s",SDL_GetError());
-// !!! OKAY FROM HERE
+    lastError=fmt::sprintf(_L("could not open window! %s##sggu"),SDL_GetError());
     return false;
   }
 
@@ -6726,9 +6725,8 @@ bool FurnaceGUI::init() {
       e->saveConf();
       lastError=fmt::sprintf("could not init renderer!\r\nthe render backend has been set to a safe value. please restart Furnace.");
     } else {
-// !!! NEEDS WORK
-      lastError=fmt::sprintf("could not init renderer! %s",SDL_GetError());
-// !!! OKAY FROM HERE
+      String rend_err = (settings.language == DIV_LANG_ENGLISH ? "could not init renderer! %s" : _L("could not init renderer! %s##sggu"))
+      lastError=fmt::sprintf(rend_err,SDL_GetError());
       if (!settings.renderDriver.empty()) {
         settings.renderDriver="";
         e->setConf("renderDriver","");
@@ -6878,9 +6876,8 @@ bool FurnaceGUI::init() {
 void FurnaceGUI::commitState() {
   if (!mobileUI) {
     if (!ImGui::SaveIniSettingsToDisk(finalLayoutPath,true)) {
-// !!! NEEDS WORK
+      String layout_error = (settings.language == DIV_LANG_ENGLISH ? "could NOT save layout! %s" : _L("could NOT save layout! %s##sggu"));
       reportError(fmt::sprintf("could NOT save layout! %s",strerror(errno)));
-// !!! OKAY FROM HERE
     }
   }
 

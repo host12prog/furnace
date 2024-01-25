@@ -242,7 +242,7 @@ const char* aboutLine[]={
   "Xenium Demoparty##sgab",
   "all members of Deflers of Noice!##sgab",
   "",
-  "copyright © 2021-2023 tildearrow##sgab",
+  "copyright © 2021-2024 tildearrow##sgab",
   "(and contributors).##sgab",
   "licensed under GPLv2+! see##sgab",
   "LICENSE for more information.##sgab",

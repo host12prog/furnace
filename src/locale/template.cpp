@@ -165,7 +165,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Xenium Demoparty##sgab"].plurals[0] = "=Xenium Demoparty";
     strings["all members of Deflers of Noice!##sgab"].plurals[0] = "=all members of Deflers of Noice!";
 
-    strings["copyright © 2021-2023 tildearrow##sgab"].plurals[0] = "=copyright © 2021-2023 tildearrow";
+    strings["copyright © 2021-2024 tildearrow##sgab"].plurals[0] = "=copyright © 2021-2024 tildearrow";
     strings["(and contributors).##sgab"].plurals[0] = "=(and contributors).";
     strings["licensed under GPLv2+! see##sgab"].plurals[0] = "=licensed under GPLv2+! see";
     strings["LICENSE for more information.##sgab"].plurals[0] = "=LICENSE for more information.";
@@ -677,12 +677,26 @@ void DivLocale::addTranslationsTemplate()
     strings["Error while saving file! (%s)##sggu2"].plurals[0] = "=Error while saving file! (%s)";
     strings["Error while saving file! (%s)##sggu3"].plurals[0] = "=Error while saving file! (%s)";
     strings["error while saving instrument! make sure your instrument is compatible.##sggu"].plurals[0] = "=error while saving instrument! make sure your instrument is compatible.";
+    strings["there were some errors while loading samples:\n#sggu"].plurals[0] = "=there were some errors while loading samples:\n";
     strings["...but you haven't selected a sample!##sggu0"].plurals[0] = "=...but you haven't selected a sample!";
     strings["could not save sample! open Log Viewer for more information.##sggu0"].plurals[0] = "=could not save sample! open Log Viewer for more information.";
     strings["could not save sample! open Log Viewer for more information.##sggu1"].plurals[0] = "=could not save sample! open Log Viewer for more information.";
+    strings["there were some warnings/errors while loading instruments:\n#sggu"].plurals[0] = "=there were some warnings/errors while loading instruments:\n";
+    strings["> %s: cannot load instrument! (%s)\n#sggu"].plurals[0] = "=> %s: cannot load instrument! (%s)\n";
+    strings["...but you haven't selected an instrument!##sggu0"].plurals[0] = "=...but you haven't selected an instrument!";
     strings["cannot load instrument! (##sggu"].plurals[0] = "=cannot load instrument! (";
     strings["congratulations! you managed to load nothing.\nyou are entitled to a bug report.##sggu"].plurals[0] = "=congratulations! you managed to load nothing.\nyou are entitled to a bug report.";
-    strings["...but you haven't selected an instrument!##sggu0"].plurals[0] = "=...but you haven't selected an instrument!";
+    strings["there were some errors while loading wavetables:\n##sggu"].plurals[0] = "=there were some errors while loading wavetables:\n";
+    strings["cannot load wavetable! (##sggu"].plurals[0] = "=cannot load wavetable! (";
+    strings["...but you haven't selected a wavetable!##sggu"].plurals[0] = "=...but you haven't selected a wavetable!";
+    strings["could not open file!##sggu"].plurals[0] = "=could not open file!";
+    strings["Could not write ZSM! (%s)##sggu"].plurals[0] = "=Could not write ZSM! (%s)";
+    strings["could not write text! (%s)##sggu"].plurals[0] = "=could not write text! (%s)";
+    strings["could not write command stream! (%s)##sggu"].plurals[0] = "=could not write command stream! (%s)";
+    strings["Error while loading file! (%s)##sggu4"].plurals[0] = "=Error while loading file! (%s)";
+    strings["You opened: %s##sggu"].plurals[0] = "=You opened: %s";
+    strings["You opened:##sggu"].plurals[0] = "=You opened:##sggu";
+    strings["You saved: %s##sggu"].plurals[0] = "=You saved: %s";
     strings["Rendering...###Rendering..."].plurals[0] = "=Rendering...###Rendering...";
     strings["Please wait...##sggu"].plurals[0] = "=Please wait...";
     strings["Abort##sggu"].plurals[0] = "=Abort";
@@ -748,8 +762,11 @@ void DivLocale::addTranslationsTemplate()
     strings["OK##sggu4"].plurals[0] = "=OK";
     strings["error while loading fonts! please check your settings.##sggu1"].plurals[0] = "=error while loading fonts! please check your settings.";
     strings["it appears I couldn't load these fonts. any setting you can check?##sggu"].plurals[0] = "=it appears I couldn't load these fonts. any setting you can check?";
+    strings["could not init renderer! %s##sggu"].plurals[0] = "=could not init renderer! %s";
     strings["\r\nthe render driver has been set to a safe value. please restart Furnace.##sggu"].plurals[0] = "=\r\nthe render driver has been set to a safe value. please restart Furnace.";
+    strings["could not open window! %s##sggu"].plurals[0] = "=could not open window! %s";
     strings["error while loading fonts! please check your settings.##sggu2"].plurals[0] = "=error while loading fonts! please check your settings.";
+    strings["could NOT save layout! %s##sggu"].plurals[0] = "=could NOT save layout! %s";
 
     //   sgda  src/gui/doAction.cpp
 
