@@ -715,22 +715,22 @@ void DivLocale::addTranslationsRussian()
     //   sgda  src/gui/doAction.cpp
 
     strings["Unsaved changes! Save changes before creating a new song?##sgda"].plurals[0] = "Остались несохранённые изменения! Сохранить их перед созданием нового трека?";
-    strings["Unsaved changes! Save changes before opening another file?##sgda"].plurals[0] = "=Unsaved changes! Save changes before opening another file?";
-    strings["Unsaved changes! Save changes before opening backup?##sgda"].plurals[0] = "=Unsaved changes! Save changes before opening backup?";
-    strings["Error while saving file! (%s)##sgda"].plurals[0] = "=Error while saving file! (%s)";
-    strings["Error while sending request (MIDI output not configured?)##sgda"].plurals[0] = "=Error while sending request (MIDI output not configured?)";
-    strings["Select an option: (cannot be undone!)##sgda"].plurals[0] = "=Select an option: (cannot be undone!)";
-    strings["too many instruments!##sgda0"].plurals[0] = "=too many instruments!";
-    strings["too many instruments!##sgda1"].plurals[0] = "=too many instruments!";
-    strings["too many wavetables!##sgda0"].plurals[0] = "=too many wavetables!";
-    strings["too many wavetables!##sgda1"].plurals[0] = "=too many wavetables!";
-    strings["too many samples!##sgda0"].plurals[0] = "=too many samples!";
-    strings["too many samples!##sgda1"].plurals[0] = "=too many samples!";
-    strings["couldn't paste! make sure your sample is 8 or 16-bit.##sgda"].plurals[0] = "=couldn't paste! make sure your sample is 8 or 16-bit.";
-    strings["too many instruments!##sgda2"].plurals[0] = "=too many instruments!";
-    strings["select at least one sample!##sgda"].plurals[0] = "=select at least one sample!";
-    strings["maximum size is 256 samples!##sgda"].plurals[0] = "=maximum size is 256 samples!";
-    strings["too many wavetables!##sgda2"].plurals[0] = "=too many wavetables!";
+    strings["Unsaved changes! Save changes before opening another file?##sgda"].plurals[0] = "Остались несохранённые изменения! Сохранить их перед открытием другого файла?";
+    strings["Unsaved changes! Save changes before opening backup?##sgda"].plurals[0] = "Остались несохранённые изменения! Сохранить их перед открытием резервной копии?";
+    strings["Error while saving file! (%s)##sgda"].plurals[0] = "Ошибка при сохранении файла! (%s)";
+    strings["Error while sending request (MIDI output not configured?)##sgda"].plurals[0] = "Ошибка при посылке запроса (MIDI вывод не настроен?)";
+    strings["Select an option: (cannot be undone!)##sgda"].plurals[0] = "Выберите опцию: (действие не может быть отменено!)";
+    strings["too many instruments!##sgda0"].plurals[0] = "слишком много инструментов!";
+    strings["too many instruments!##sgda1"].plurals[0] = "слишком много инструментов!";
+    strings["too many wavetables!##sgda0"].plurals[0] = "слишком много волновых таблиц!";
+    strings["too many wavetables!##sgda1"].plurals[0] = "слишком много волновых таблиц!";
+    strings["too many samples!##sgda0"].plurals[0] = "слишком много сэмплов!";
+    strings["too many samples!##sgda1"].plurals[0] = "слишком много сэмплов!";
+    strings["couldn't paste! make sure your sample is 8 or 16-bit.##sgda"].plurals[0] = "Не получилось вставить сэмпл! убедитесь, что это 8- или 16-битный сэмпл.";
+    strings["too many instruments!##sgda2"].plurals[0] = "слишком много инструментов!";
+    strings["select at least one sample!##sgda"].plurals[0] = "выберите хотя бы один сэмпл!";
+    strings["maximum size is 256 samples!##sgda"].plurals[0] = "максимальный размер равен 256 сэмплам!";
+    strings["too many wavetables!##sgda2"].plurals[0] = "слишком много волновых таблиц!";
 
     //   sgec  src/gui/editControls.cpp
 
