@@ -38,14 +38,14 @@ void FurnaceGUI::drawSpeed(bool asChild) {
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
       ImGui::AlignTextToFramePadding();
-      if (ImGui::SmallButton(tempoView?"Base Tempo##TempoOrHz":"Tick Rate##TempoOrHz")) {
+      if (ImGui::SmallButton(tempoView?_L("Base Tempo##TempoOrHz"):_L("Tick Rate##TempoOrHz"))) {
         tempoView=!tempoView;
       }
       if (ImGui::IsItemHovered()) {
         if (tempoView) {
-          ImGui::SetTooltip("click to display tick rate");
+          ImGui::SetTooltip(_L("click to display tick rate##sgsp"));
         } else {
-          ImGui::SetTooltip("click to display base tempo");
+          ImGui::SetTooltip(_L("click to display base tempo##sgsp"));
         }
       }
       ImGui::TableNextColumn();
@@ -77,17 +77,17 @@ void FurnaceGUI::drawSpeed(bool asChild) {
       ImGui::TableNextColumn();
       ImGui::AlignTextToFramePadding();
       if (keepGrooveAlive || e->curSubSong->speeds.len>2) {
-        if (ImGui::SmallButton("Groove")) {
+        if (ImGui::SmallButton(_L("Groove##sgsp"))) {
           e->lockEngine([this]() {
             e->curSubSong->speeds.len=1;
           });
           if (e->isPlaying()) play();
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("click for one speed");
+          ImGui::SetTooltip(_L("click for one speed##sgsp"));
         }
       } else if (e->curSubSong->speeds.len>1) {
-        if (ImGui::SmallButton("Speeds")) {
+        if (ImGui::SmallButton(_L("Speeds##sgsp"))) {
           e->lockEngine([this]() {
             e->curSubSong->speeds.len=4;
             e->curSubSong->speeds.val[2]=e->curSubSong->speeds.val[0];
@@ -96,10 +96,10 @@ void FurnaceGUI::drawSpeed(bool asChild) {
           if (e->isPlaying()) play();
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("click for groove pattern");
+          ImGui::SetTooltip(_L("click for groove pattern##sgsp"));
         }
       } else {
-        if (ImGui::SmallButton("Speed")) {
+        if (ImGui::SmallButton(_L("Speed##sgsp"))) {
           e->lockEngine([this]() {
             e->curSubSong->speeds.len=2;
             e->curSubSong->speeds.val[1]=e->curSubSong->speeds.val[0];
@@ -107,7 +107,7 @@ void FurnaceGUI::drawSpeed(bool asChild) {
           if (e->isPlaying()) play();
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("click for two (alternating) speeds");
+          ImGui::SetTooltip(_L("click for two (alternating) speeds##sgsp"));
         }
       }
       ImGui::TableNextColumn();
@@ -165,7 +165,7 @@ void FurnaceGUI::drawSpeed(bool asChild) {
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
       ImGui::AlignTextToFramePadding();
-      ImGui::Text("Virtual Tempo");
+      ImGui::Text(_L("Virtual Tempo##sgsp"));
       ImGui::TableNextColumn();
       ImGui::SetNextItemWidth(halfAvail);
       if (ImGui::InputScalar("##VTempoN",ImGuiDataType_S16,&e->curSubSong->virtualTempoN,&_ONE,&_TEN)) { MARK_MODIFIED
@@ -173,7 +173,7 @@ void FurnaceGUI::drawSpeed(bool asChild) {
         if (e->curSubSong->virtualTempoN>255) e->curSubSong->virtualTempoN=255;
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip("Numerator");
+        ImGui::SetTooltip(_L("Numerator##sgsp"));
       }
       ImGui::SameLine();
       ImGui::SetNextItemWidth(halfAvail);
@@ -182,13 +182,13 @@ void FurnaceGUI::drawSpeed(bool asChild) {
         if (e->curSubSong->virtualTempoD>255) e->curSubSong->virtualTempoD=255;
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip("Denominator (set to base tempo)");
+        ImGui::SetTooltip(_L("Denominator (set to base tempo)##sgsp"));
       }
 
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
       ImGui::AlignTextToFramePadding();
-      ImGui::Text("Divider");
+      ImGui::Text(_L("Divider##sgsp"));
       ImGui::TableNextColumn();
       ImGui::SetNextItemWidth(halfAvail);
       unsigned char realTB=e->curSubSong->timeBase+1;
@@ -203,7 +203,7 @@ void FurnaceGUI::drawSpeed(bool asChild) {
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
       ImGui::AlignTextToFramePadding();
-      ImGui::Text("Highlight");
+      ImGui::Text(_L("Highlight##sgsp"));
       ImGui::TableNextColumn();
       ImGui::SetNextItemWidth(halfAvail);
       if (ImGui::InputScalar("##Highlight1",ImGuiDataType_U8,&e->curSubSong->hilightA,&_ONE,&_FOUR)) {
@@ -226,7 +226,7 @@ void FurnaceGUI::drawSpeed(bool asChild) {
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
       ImGui::AlignTextToFramePadding();
-      ImGui::Text("Pattern Length");
+      ImGui::Text(_L("Pattern Length##sgsp"));
       ImGui::TableNextColumn();
       float avail=ImGui::GetContentRegionAvail().x;
       ImGui::SetNextItemWidth(avail);
@@ -240,7 +240,7 @@ void FurnaceGUI::drawSpeed(bool asChild) {
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
       ImGui::AlignTextToFramePadding();
-      ImGui::Text("Song Length");
+      ImGui::Text(_L("Song Length##sgsp"));
       ImGui::TableNextColumn();
       ImGui::SetNextItemWidth(avail);
       int ordLen=e->curSubSong->ordersLen;

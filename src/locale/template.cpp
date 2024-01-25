@@ -70,12 +70,12 @@ void DivLocale::addTranslationsTemplate()
     //   sgre  src/gui/render.cpp
     // # sgse  src/gui/sampleEdit.cpp
     // # sgse  src/gui/settings.cpp
-    //   sgsi  src/gui/songInfo.cpp
-    //   sgsn  src/gui/songNotes.cpp
-    //   sgsp  src/gui/speed.cpp
+    // # sgsi  src/gui/songInfo.cpp
+    // # sgsn  src/gui/songNotes.cpp
+    // # sgsp  src/gui/speed.cpp
     //   sgsl  src/gui/spoiler.cpp
-    //   sgst  src/gui/stats.cpp
-    //   sgss  src/gui/subSongs.cpp
+    // # sgst  src/gui/stats.cpp
+    // # sgss  src/gui/subSongs.cpp
     //   sgsc  src/gui/sysConf.cpp
     //   sgsx  src/gui/sysEx.cpp
     //   sgsm  src/gui/sysManager.cpp
@@ -1666,6 +1666,62 @@ void DivLocale::addTranslationsTemplate()
     strings["%d samples, %d bytes##sgse"].plurals[0] = "=%d samples, %d bytes";
     strings[" (%d-%d: %d samples)##sgse"].plurals[0] = "= (%d-%d: %d samples)";
     strings["Non-8/16-bit samples cannot be edited without prior conversion.##sgse"].plurals[0] = "=Non-8/16-bit samples cannot be edited without prior conversion.";
+
+    //   sgsi  src/gui/songInfo.cpp
+
+    strings["Song Info###Song Information"].plurals[0] = "=Song Info###Song Information";
+    strings["Name##sgsi"].plurals[0] = "=Name";
+    strings["Author##sgsi"].plurals[0] = "=Author";
+    strings["Album##sgsi"].plurals[0] = "=Album";
+    strings["System##sgsi"].plurals[0] = "=System";
+    strings["Auto##sgsi"].plurals[0] = "=Auto";
+    strings["Tuning (A-4)##sgsi"].plurals[0] = "=Tuning (A-4)";
+
+    // # sgsn  src/gui/songNotes.cpp
+
+    strings["Song Comments###Song Comments"].plurals[0] = "=Song Comments###Song Comments";
+
+    //   sgsp  src/gui/speed.cpp
+
+    strings["Speed###Speed"].plurals[0] = "=Speed###Speed";
+    strings["Base Tempo##TempoOrHz"].plurals[0] = "=Base Tempo##TempoOrHz";
+    strings["Tick Rate##TempoOrHz"].plurals[0] = "=Tick Rate##TempoOrHz";
+    strings["click to display tick rate##sgsp"].plurals[0] = "=click to display tick rate";
+    strings["click to display base tempo##sgsp"].plurals[0] = "=click to display base tempo";
+    strings["Groove##sgsp"].plurals[0] = "=Groove";
+    strings["click for one speed##sgsp"].plurals[0] = "=click for one speed";
+    strings["Speeds##sgsp"].plurals[0] = "=Speeds";
+    strings["click for groove pattern##sgsp"].plurals[0] = "=click for groove pattern";
+    strings["Speed##sgsp"].plurals[0] = "=Speed";
+    strings["click for two (alternating) speeds##sgsp"].plurals[0] = "=click for two (alternating) speeds";
+    strings["Virtual Tempo##sgsp"].plurals[0] = "=Virtual Tempo";
+    strings["Numerator##sgsp"].plurals[0] = "=Numerator";
+    strings["Denominator (set to base tempo)##sgsp"].plurals[0] = "=Denominator (set to base tempo)";
+    strings["Divider##sgsp"].plurals[0] = "=Divider";
+    strings["Highlight##sgsp"].plurals[0] = "=Highlight";
+    strings["Pattern Length##sgsp"].plurals[0] = "=Pattern Length";
+    strings["Song Length##sgsp"].plurals[0] = "=Song Length";
+
+    //   sgst  src/gui/stats.cpp
+
+    strings["Statistics###Statistics"].plurals[0] = "=Statistics###Statistics";
+    strings["Audio load##sgst"].plurals[0] = "=Audio load";
+
+    //   sgss  src/gui/subSongs.cpp
+
+    strings["Subsongs###Subsongs"].plurals[0] = "=Subsongs###Subsongs";
+    strings["%d. <no name>##sgss0"].plurals[0] = "=%d. <no name>";
+    strings["%d. <no name>##sgss1"].plurals[0] = "=%d. <no name>";
+    strings["Move up##sgss"].plurals[0] = "=Move up";
+    strings["Move down##sgss"].plurals[0] = "=Move down";
+    strings["too many subsongs!##sgss0"].plurals[0] = "=too many subsongs!";
+    strings["Add##sgss"].plurals[0] = "=Add";
+    strings["too many subsongs!##sgss1"].plurals[0] = "=too many subsongs!";
+    strings["Duplicate##sgss"].plurals[0] = "=Duplicate";
+    strings["this is the only subsong!##sgss"].plurals[0] = "=this is the only subsong!";
+    strings["are you sure you want to remove this subsong?##sgss"].plurals[0] = "=are you sure you want to remove this subsong?";
+    strings["Remove##sgss"].plurals[0] = "=Remove";
+    strings["Name##sgss"].plurals[0] = "=Name";
 
 //REMEMBER to check for anything that calls the strings at the top!
 
