@@ -641,7 +641,7 @@ void FurnaceGUI::drawMobileControls() {
               i.data->finish();
               delete i.data;
             }
-            showError(fmt::sprintf(_L("Done! Baked %d files.##sgec"),(int)out.size()));
+            showError(fmt::sprintf(_LP("Done! Baked %d files.##sgec", (int)out.size()),(int)out.size()));
           }
         }
 
