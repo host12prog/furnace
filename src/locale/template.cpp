@@ -51,7 +51,7 @@ void DivLocale::addTranslationsTemplate()
     // # sgfo  src/gui/fonts.cpp
     // # sggd  src/gui/gradient.cpp
     // # sggv  src/gui/grooves.cpp
-    // @ sggu  src/gui/gui.cpp
+    // # sggu  src/gui/gui.cpp
     // # sggc  src/gui/guiConst.cpp
     // # sgim  src/gui/image.cpp
     // # sgie  src/gui/insEdit.cpp
@@ -62,8 +62,8 @@ void DivLocale::addTranslationsTemplate()
     // # sgor  src/gui/orders.cpp
     // # sgos  src/gui/osc.cpp
     // # sgpm  src/gui/patManager.cpp
-    //   sgpa  src/gui/pattern.cpp
-    //   sgpi  src/gui/piano.cpp
+    // # sgpa  src/gui/pattern.cpp
+    // # sgpi  src/gui/piano.cpp
     //   sgpn  src/gui/plot_nolerp.cpp
     //   sgpr  src/gui/presets.cpp
     //   sgrv  src/gui/regView.cpp
@@ -1209,6 +1209,41 @@ void DivLocale::addTranslationsTemplate()
     strings["Re-arrange patterns##sgpm"].plurals[0] = "=Re-arrange patterns";
     strings["Pattern %.2X\n- not allocated##sgpm"].plurals[0] = "=Pattern %.2X\n- not allocated";
     strings["Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase##sgpm"].plurals[0] = "=Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase";
+
+    //   sgpa  src/gui/pattern.cpp
+
+    strings["Pattern###Pattern"].plurals[0] = "=Pattern###Pattern";
+    strings["click for pattern options (effect columns/pattern names/visualizer)##sgpa"].plurals[0] = "=click for pattern options (effect columns/pattern names/visualizer)";
+    strings["Options:##sgpa"].plurals[0] = "=Options:";
+    strings["Effect columns/collapse##sgpa"].plurals[0] = "=Effect columns/collapse";
+    strings["Pattern names##sgpa"].plurals[0] = "=Pattern names";
+    strings["Channel group hints##sgpa"].plurals[0] = "=Channel group hints";
+    strings["Visualizer##sgpa"].plurals[0] = "=Visualizer";
+    strings["Channel status:##sgpa"].plurals[0] = "=Channel status:";
+    strings["No##_PCS0"].plurals[0] = "=No##_PCS0";
+    strings["Yes##_PCS1"].plurals[0] = "=Yes##_PCS1";
+    strings["WARNING!!##sgpa"].plurals[0] = "=WARNING!!";
+    strings["this instrument cannot be previewed because##sgpa"].plurals[0] = "=this instrument cannot be previewed because";
+    strings["none of the chips can play it##sgpa"].plurals[0] = "=none of the chips can play it";
+    strings["your instrument is in peril!! be careful...##sgpa"].plurals[0] = "=your instrument is in peril!! be careful...";
+
+    //   sgpi  src/gui/piano.cpp
+
+    strings["Piano###Piano"].plurals[0] = "=Piano###Piano";
+    strings["Options##sgpi"].plurals[0] = "=Options";
+    strings["Key layout:##sgpi"].plurals[0] = "=Key layout:";
+    strings["Automatic##sgpi"].plurals[0] = "=Automatic";
+    strings["Standard##sgpi"].plurals[0] = "=Standard";
+    strings["Continuous##sgpi"].plurals[0] = "=Continuous";
+    strings["Value input pad:##sgpi"].plurals[0] = "=Value input pad:";
+    strings["Disabled##sgpi"].plurals[0] = "=Disabled";
+    strings["Replace piano##sgpi"].plurals[0] = "=Replace piano";
+    strings["Split (automatic)##sgpi"].plurals[0] = "=Split (automatic)";
+    strings["Split (always visible)##sgpi"].plurals[0] = "=Split (always visible)";
+    strings["Share play/edit offset/range##sgpi"].plurals[0] = "=Share play/edit offset/range";
+    strings["Read-only (can't input notes)##sgpi"].plurals[0] = "=Read-only (can't input notes)";
+    strings["Input Pad###Input Pad"].plurals[0] = "=Input Pad###Input Pad";
+
 
 //REMEMBER to check for anything that calls the strings at the top!
 

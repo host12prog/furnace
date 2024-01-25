@@ -100,38 +100,38 @@ void FurnaceGUI::drawPiano() {
         ImGui::SameLine();
         ImGui::Button(ICON_FA_ELLIPSIS_V "##PianoOptions",optionSize);
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("Options");
+          ImGui::SetTooltip(_L("Options##sgpi"));
         }
         if (ImGui::BeginPopupContextItem("PianoOptions",ImGuiPopupFlags_MouseButtonLeft)) {
-          ImGui::Text("Key layout:");
+          ImGui::Text(_L("Key layout:##sgpi"));
           ImGui::Indent();
-          if (ImGui::RadioButton("Automatic",pianoView==PIANO_LAYOUT_AUTOMATIC)) {
+          if (ImGui::RadioButton(_L("Automatic##sgpi"),pianoView==PIANO_LAYOUT_AUTOMATIC)) {
             pianoView=PIANO_LAYOUT_AUTOMATIC;
           }
-          if (ImGui::RadioButton("Standard",pianoView==PIANO_LAYOUT_STANDARD)) {
+          if (ImGui::RadioButton(_L("Standard##sgpi"),pianoView==PIANO_LAYOUT_STANDARD)) {
             pianoView=PIANO_LAYOUT_STANDARD;
           }
-          if (ImGui::RadioButton("Continuous",pianoView==PIANO_LAYOUT_CONTINUOUS)) {
+          if (ImGui::RadioButton(_L("Continuous##sgpi"),pianoView==PIANO_LAYOUT_CONTINUOUS)) {
             pianoView=PIANO_LAYOUT_CONTINUOUS;
           }
           ImGui::Unindent();
-          ImGui::Text("Value input pad:");
+          ImGui::Text(_L("Value input pad:##sgpi"));
           ImGui::Indent();
-          if (ImGui::RadioButton("Disabled",pianoInputPadMode==PIANO_INPUT_PAD_DISABLE)) {
+          if (ImGui::RadioButton(_L("Disabled##sgpi"),pianoInputPadMode==PIANO_INPUT_PAD_DISABLE)) {
             pianoInputPadMode=PIANO_INPUT_PAD_DISABLE;
           }
-          if (ImGui::RadioButton("Replace piano",pianoInputPadMode==PIANO_INPUT_PAD_REPLACE)) {
+          if (ImGui::RadioButton(_L("Replace piano##sgpi"),pianoInputPadMode==PIANO_INPUT_PAD_REPLACE)) {
             pianoInputPadMode=PIANO_INPUT_PAD_REPLACE;
           }
-          if (ImGui::RadioButton("Split (automatic)",pianoInputPadMode==PIANO_INPUT_PAD_SPLIT_AUTO)) {
+          if (ImGui::RadioButton(_L("Split (automatic)##sgpi"),pianoInputPadMode==PIANO_INPUT_PAD_SPLIT_AUTO)) {
             pianoInputPadMode=PIANO_INPUT_PAD_SPLIT_AUTO;
           }
-          if (ImGui::RadioButton("Split (always visible)",pianoInputPadMode==PIANO_INPUT_PAD_SPLIT_VISIBLE)) {
+          if (ImGui::RadioButton(_L("Split (always visible)##sgpi"),pianoInputPadMode==PIANO_INPUT_PAD_SPLIT_VISIBLE)) {
             pianoInputPadMode=PIANO_INPUT_PAD_SPLIT_VISIBLE;
           }
           ImGui::Unindent();
-          ImGui::Checkbox("Share play/edit offset/range",&pianoSharePosition);
-          ImGui::Checkbox("Read-only (can't input notes)",&pianoReadonly);
+          ImGui::Checkbox(_L("Share play/edit offset/range##sgpi"),&pianoSharePosition);
+          ImGui::Checkbox(_L("Read-only (can't input notes)##sgpi"),&pianoReadonly);
           ImGui::EndPopup();
         }
 
