@@ -1131,7 +1131,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Name##sgie"].plurals[0] = "=Name";
     strings["Open##sgie0"].plurals[0] = "=Open";
     strings["Save##sgie"].plurals[0] = "=Save";
-    strings["save as .dmp...##sgie"].plurals[0] = "=save as .dmp...";
+    strings["export .dmp...##sgie"].plurals[0] = "=export .dmp...";
     strings["Type##sgie"].plurals[0] = "=Type";
     strings["Unknown##sgie"].plurals[0] = "=Unknown";
     strings["none of the currently present chips are able to play this instrument type!##sgie"].plurals[0] = "=none of the currently present chips are able to play this instrument type!";

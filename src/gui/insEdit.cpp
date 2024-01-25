@@ -108,7 +108,7 @@ void FurnaceGUI::drawActualInsEditor()
       ImGui::SetTooltip(_L("Save##sgie"));
     }
     if (ImGui::BeginPopupContextItem("InsSaveFormats",ImGuiMouseButton_Right)) {
-      if (ImGui::MenuItem(_L("save as .dmp...##sgie"))) {
+      if (ImGui::MenuItem(_L("export .dmp...##sgie"))) {
         doAction(GUI_ACTION_INS_LIST_SAVE_DMP);
       }
       ImGui::EndPopup();
