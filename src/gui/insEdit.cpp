@@ -82,7 +82,7 @@ void FurnaceGUI::drawActualInsEditor()
     }
 
     ImGui::TableNextColumn();
-    ImGui::Text("Name");
+    ImGui::Text(_L("Name##sgie"));
 
     ImGui::TableNextColumn();
     ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
@@ -98,24 +98,24 @@ void FurnaceGUI::drawActualInsEditor()
       doAction(GUI_ACTION_INS_LIST_OPEN_REPLACE);
     }
     if (ImGui::IsItemHovered()) {
-      ImGui::SetTooltip("Open");
+      ImGui::SetTooltip(_L("Open##sgie0"));
     }
     ImGui::SameLine();
     if (ImGui::Button(ICON_FA_FLOPPY_O "##IESave")) {
       doAction(GUI_ACTION_INS_LIST_SAVE);
     }
     if (ImGui::IsItemHovered()) {
-      ImGui::SetTooltip("Save");
+      ImGui::SetTooltip(_L("Save##sgie"));
     }
     if (ImGui::BeginPopupContextItem("InsSaveFormats",ImGuiMouseButton_Right)) {
-      if (ImGui::MenuItem("save as .dmp...")) {
+      if (ImGui::MenuItem(_L("save as .dmp...##sgie"))) {
         doAction(GUI_ACTION_INS_LIST_SAVE_DMP);
       }
       ImGui::EndPopup();
     }
 
     ImGui::TableNextColumn();
-    ImGui::Text("Type");
+    ImGui::Text(_L("Type##sgie"));
 
     ImGui::TableNextColumn();
     int insType=ins->type;
@@ -128,7 +128,7 @@ void FurnaceGUI::drawActualInsEditor()
     }
 
     pushWarningColor(warnType,warnType && failedNoteOn);
-    if (ImGui::BeginCombo("##Type",(insType>=DIV_INS_MAX)?"Unknown":insTypes[insType][0])) {
+    if (ImGui::BeginCombo("##Type",(insType>=DIV_INS_MAX)?_L("Unknown##sgie"):insTypes[insType][0])) {
       std::vector<DivInstrumentType> insTypeList;
       if (settings.displayAllInsTypes) {
         for (int i=0; insTypes[i][0]; i++) {
@@ -160,7 +160,7 @@ void FurnaceGUI::drawActualInsEditor()
       ImGui::EndCombo();
     } else if (warnType) {
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip("none of the currently present chips are able to play this instrument type!");
+        ImGui::SetTooltip(_L("none of the currently present chips are able to play this instrument type!##sgie"));
       }
     }
     popWarningColor();
@@ -455,8 +455,8 @@ void FurnaceGUI::drawActualInsEditor()
     }
 
     if (ins->type>=DIV_INS_MAX) {
-      if (ImGui::BeginTabItem("Error")) {
-        ImGui::Text("invalid instrument type! change it first.");
+      if (ImGui::BeginTabItem(_L("Error##sgie"))) {
+        ImGui::Text(_L("invalid instrument type! change it first.##sgie"));
         ImGui::EndTabItem();
       }
     }
@@ -482,15 +482,15 @@ void FurnaceGUI::drawInsEdit() {
   } else {
     ImGui::SetNextWindowSizeConstraints(ImVec2(440.0f*dpiScale,400.0f*dpiScale),ImVec2(canvasW,canvasH));
   }
-  if (ImGui::Begin("Instrument Editor",&insEditOpen,globalWinFlags|(settings.allowEditDocking?0:ImGuiWindowFlags_NoDocking))) {
+  if (ImGui::Begin("Instrument Editor",&insEditOpen,globalWinFlags|(settings.allowEditDocking?0:ImGuiWindowFlags_NoDocking), _L("Instrument Editor###Instrument Editor"))) {
     if (curIns==-2) {
       ImGui::SetCursorPosY(ImGui::GetCursorPosY()+(ImGui::GetContentRegionAvail().y-ImGui::GetFrameHeightWithSpacing()+ImGui::GetStyle().ItemSpacing.y)*0.5f);
-      CENTER_TEXT("waiting...");
-      ImGui::Text("waiting...");
+      CENTER_TEXT(_L("waiting...##sgie0"));
+      ImGui::Text(_L("waiting...##sgie1"));
     } else if (curIns<0 || curIns>=(int)e->song.ins.size()) {
       ImGui::SetCursorPosY(ImGui::GetCursorPosY()+(ImGui::GetContentRegionAvail().y-ImGui::GetFrameHeightWithSpacing()*(e->song.ins.empty()?2.0f:3.0f)+ImGui::GetStyle().ItemSpacing.y)*0.5f);
-      CENTER_TEXT("no instrument selected");
-      ImGui::Text("no instrument selected");
+      CENTER_TEXT(_L("no instrument selected##sgie0"));
+      ImGui::Text(_L("no instrument selected##sgie1"));
       if (ImGui::BeginTable("noAssetCenter",3)) {
         ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch,0.5f);
         ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed);
@@ -502,7 +502,7 @@ void FurnaceGUI::drawInsEdit() {
 
         if (e->song.ins.size()>0) {
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          if (ImGui::BeginCombo("##InsSelect","select one...")) {
+          if (ImGui::BeginCombo("##InsSelect",_L("select one...##sgie"))) {
             String name;
             for (size_t i=0; i<e->song.ins.size(); i++) {
               name=fmt::sprintf("%.2X: %s##_INSS%d",i,e->song.ins[i]->name,i);
@@ -515,16 +515,16 @@ void FurnaceGUI::drawInsEdit() {
             ImGui::EndCombo();
           }
           ImGui::AlignTextToFramePadding();
-          ImGui::TextUnformatted("or");
+          ImGui::TextUnformatted(_L("or##sgie0"));
           ImGui::SameLine();
         }
-        if (ImGui::Button("Open")) {
+        if (ImGui::Button(_L("Open##sgie1"))) {
           doAction(GUI_ACTION_INS_LIST_OPEN);
         }
         ImGui::SameLine();
-        ImGui::TextUnformatted("or");
+        ImGui::TextUnformatted(_L("or##sgie1"));
         ImGui::SameLine();
-        if (ImGui::Button("Create New")) {
+        if (ImGui::Button(_L("Create New##sgie"))) {
           doAction(GUI_ACTION_INS_LIST_ADD);
         }
 
@@ -542,12 +542,12 @@ void FurnaceGUI::drawInsEdit() {
       }
     }
     if (ImGui::BeginPopup("macroMenu",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoSavedSettings)) {
-      if (ImGui::MenuItem("copy")) {
+      if (ImGui::MenuItem(_L("copy##sgie"))) {
         String mmlStr;
         encodeMMLStr(mmlStr,lastMacroDesc.get_macro()->val,lastMacroDesc.get_macro()->len,lastMacroDesc.get_macro()->loop,lastMacroDesc.get_macro()->rel);
         SDL_SetClipboardText(mmlStr.c_str());
       }
-      if (ImGui::MenuItem("paste")) {
+      if (ImGui::MenuItem(_L("paste##sgie"))) {
         String mmlStr;
         char* clipText=SDL_GetClipboardText();
         if (clipText!=NULL) {
@@ -569,16 +569,16 @@ void FurnaceGUI::drawInsEdit() {
           lastMacroDesc.get_macro()->val[i]=0;
         }
       }
-      if (ImGui::MenuItem("clear contents")) {
+      if (ImGui::MenuItem(_L("clear contents##sgie"))) {
         for (int i=0; i<256; i++) {
           lastMacroDesc.get_macro()->val[i]=0;
         }
       }
       ImGui::Separator();
-      if (ImGui::BeginMenu("offset...")) {
+      if (ImGui::BeginMenu(_L("offset...##sgie"))) {
         ImGui::InputInt("X",&macroOffX,1,10);
         ImGui::InputInt("Y",&macroOffY,1,10);
-        if (ImGui::Button("offset")) {
+        if (ImGui::Button(_L("offset##sgie"))) {
           int oldData[256];
           memset(oldData,0,256*sizeof(int));
           memcpy(oldData,lastMacroDesc.get_macro()->val,lastMacroDesc.get_macro()->len*sizeof(int));
@@ -608,13 +608,13 @@ void FurnaceGUI::drawInsEdit() {
         }
         ImGui::EndMenu();
       }
-      if (ImGui::BeginMenu("scale...")) {
+      if (ImGui::BeginMenu(_L("scale...##sgie"))) {
         if (ImGui::InputFloat("X",&macroScaleX,1.0f,10.0f,"%.2f%%")) {
           if (macroScaleX<0.1) macroScaleX=0.1;
           if (macroScaleX>12800.0) macroScaleX=12800.0;
         }
         ImGui::InputFloat("Y",&macroScaleY,1.0f,10.0f,"%.2f%%");
-        if (ImGui::Button("scale")) {
+        if (ImGui::Button(_L("scale##sgie"))) {
           int oldData[256];
           memset(oldData,0,256*sizeof(int));
           memcpy(oldData,lastMacroDesc.get_macro()->val,lastMacroDesc.get_macro()->len*sizeof(int));
@@ -636,14 +636,14 @@ void FurnaceGUI::drawInsEdit() {
         }
         ImGui::EndMenu();
       }
-      if (ImGui::BeginMenu("randomize...")) {
+      if (ImGui::BeginMenu(_L("randomize...##sgie"))) {
         if (macroRandMin<lastMacroDesc.min) macroRandMin=lastMacroDesc.min;
         if (macroRandMin>lastMacroDesc.max) macroRandMin=lastMacroDesc.max;
         if (macroRandMax<lastMacroDesc.min) macroRandMax=lastMacroDesc.min;
         if (macroRandMax>lastMacroDesc.max) macroRandMax=lastMacroDesc.max;
-        ImGui::InputInt("Min",&macroRandMin,1,10);
-        ImGui::InputInt("Max",&macroRandMax,1,10);
-        if (ImGui::Button("randomize")) {
+        ImGui::InputInt(_L("Min##sgie"),&macroRandMin,1,10);
+        ImGui::InputInt(_L("Max##sgie"),&macroRandMax,1,10);
+        if (ImGui::Button(_L("randomize##sgie"))) {
           for (int i=0; i<lastMacroDesc.get_macro()->len; i++) {
             int val=0;
             if (macroRandMax<=macroRandMin) {

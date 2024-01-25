@@ -125,10 +125,10 @@ bool FurnaceGUI::portSet(String label, unsigned int portSetID, int ins, int outs
 
   // input ports
   for (int i=0; i<ins; i++) {
-    String portLabel="input";
+    String portLabel=_L("input##sgmx");
     String subPortID=fmt::sprintf("subPort%.5x",(portSetID<<4)|i);
     if (ins==2) {
-      portLabel=portNamesStereo[i&1];
+      portLabel=_L(portNamesStereo[i&1]);
     } else if (ins>2) {
       portLabel=fmt::sprintf("%d",i+1);
     }
@@ -165,10 +165,10 @@ bool FurnaceGUI::portSet(String label, unsigned int portSetID, int ins, int outs
 
   // output ports
   for (int i=0; i<outs; i++) {
-    String portLabel="output";
+    String portLabel=_L("output##sgmx");
     String subPortID=fmt::sprintf("subPort%.5x",(portSetID<<4)|i);
     if (outs==2) {
-      portLabel=portNamesStereo[i&1];
+      portLabel=_L(portNamesStereo[i&1]);
     } else if (outs>2) {
       portLabel=fmt::sprintf("%d",i+1);
     }
@@ -223,10 +223,10 @@ void FurnaceGUI::drawMixer() {
   } else {
     ImGui::SetNextWindowSizeConstraints(ImVec2(400.0f*dpiScale,200.0f*dpiScale),ImVec2(canvasW,canvasH));
   }
-  if (ImGui::Begin("Mixer",&mixerOpen,globalWinFlags|(settings.allowEditDocking?0:ImGuiWindowFlags_NoDocking))) {
+  if (ImGui::Begin("Mixer",&mixerOpen,globalWinFlags|(settings.allowEditDocking?0:ImGuiWindowFlags_NoDocking), _L("Mixer###Mixer"))) {
     if (ImGui::BeginTabBar("MixerView")) {
-      if (ImGui::BeginTabItem("Mixer")) {
-        if (ImGui::SliderFloat("Master Volume",&e->song.masterVol,0,3,"%.2fx")) {
+      if (ImGui::BeginTabItem(_L("Mixer##sgmx"))) {
+        if (ImGui::SliderFloat(_L("Master Volume##sgmx"),&e->song.masterVol,0,3,"%.2fx")) {
           if (e->song.masterVol<0) e->song.masterVol=0;
           if (e->song.masterVol>3) e->song.masterVol=3;
           MARK_MODIFIED;
@@ -247,7 +247,7 @@ void FurnaceGUI::drawMixer() {
             ImGui::AlignTextToFramePadding();
             ImGui::Text("%d. %s",i+1,getSystemName(e->song.system[i]));
             ImGui::TableNextColumn();
-            if (ImGui::Checkbox("Invert",&doInvert)) {
+            if (ImGui::Checkbox(_L("Invert##sgmx"),&doInvert)) {
               e->song.systemVol[i]=-e->song.systemVol[i];
               MARK_MODIFIED;
             }
@@ -265,7 +265,7 @@ void FurnaceGUI::drawMixer() {
               MARK_MODIFIED;
             } rightClickable
             ImGui::TableNextColumn();
-            ImGui::Text("Volume");
+            ImGui::Text(_L("Volume##sgmx"));
 
             ImGui::TableNextRow();
             ImGui::TableNextColumn();
@@ -276,7 +276,7 @@ void FurnaceGUI::drawMixer() {
               MARK_MODIFIED;
             } rightClickable
             ImGui::TableNextColumn();
-            ImGui::Text("Panning");
+            ImGui::Text(_L("Panning##sgmx"));
 
             ImGui::TableNextRow();
             ImGui::TableNextColumn();
@@ -287,7 +287,7 @@ void FurnaceGUI::drawMixer() {
               MARK_MODIFIED;
             } rightClickable
             ImGui::TableNextColumn();
-            ImGui::Text("Front/Rear");
+            ImGui::Text(_L("Front/Rear##sgmx"));
 
             ImGui::PopID();
           }
@@ -296,20 +296,20 @@ void FurnaceGUI::drawMixer() {
         }
         ImGui::EndTabItem();
       }
-      if (ImGui::BeginTabItem("Patchbay")) {
+      if (ImGui::BeginTabItem(_L("Patchbay##sgmx"))) {
         std::map<unsigned int,ImVec2> portPos;
 
         if (ImGui::BeginTable("PatchbayOptions",3)) {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
-          if (ImGui::Checkbox("Automatic patchbay",&e->song.patchbayAuto)) {
+          if (ImGui::Checkbox(_L("Automatic patchbay##sgmx"),&e->song.patchbayAuto)) {
             if (e->song.patchbayAuto) e->autoPatchbayP();
             MARK_MODIFIED;
           }
           ImGui::TableNextColumn();
-          ImGui::Checkbox("Display hidden ports",&displayHiddenPorts);
+          ImGui::Checkbox(_L("Display hidden ports##sgmx"),&displayHiddenPorts);
           ImGui::TableNextColumn();
-          ImGui::Checkbox("Display internal",&displayInternalPorts);
+          ImGui::Checkbox(_L("Display internal##sgmx"),&displayInternalPorts);
           ImGui::EndTable();
         }
 
@@ -319,7 +319,7 @@ void FurnaceGUI::drawMixer() {
         if (ImGui::BeginChild("Patchbay",ImVec2(0,0),true)) {
           ImDrawList* dl=ImGui::GetWindowDrawList();
           ImVec2 topPos=ImGui::GetCursorPos();
-          ImVec2 sysSize=calcPortSetSize("System",displayHiddenPorts?DIV_MAX_OUTPUTS:e->getAudioDescGot().outChans,0);
+          ImVec2 sysSize=calcPortSetSize(_L("System##sgmx0"),displayHiddenPorts?DIV_MAX_OUTPUTS:e->getAudioDescGot().outChans,0);
           topPos.x+=ImGui::GetContentRegionAvail().x-sysSize.x;
           if (ImGui::GetContentRegionAvail().y>sysSize.y) topPos.y+=(ImGui::GetContentRegionAvail().y-sysSize.y)*0.5+ImGui::GetScrollY();
 
@@ -351,7 +351,7 @@ void FurnaceGUI::drawMixer() {
 
           // metronome/sample preview
           if (displayInternalPorts) {
-            if (portSet("Sample Preview",0xffd,0,1,0,1,selectedSubPort,portPos)) {
+            if (portSet(_L("Sample Preview##sgmx"),0xffd,0,1,0,1,selectedSubPort,portPos)) {
               selectedPortSet=0xffd;
               if (selectedSubPort>=0) {
                 portDragActive=true;
@@ -364,7 +364,7 @@ void FurnaceGUI::drawMixer() {
                 }
               }
             }
-            if (portSet("Metronome",0xffe,0,1,0,1,selectedSubPort,portPos)) {
+            if (portSet(_L("Metronome##sgmx"),0xffe,0,1,0,1,selectedSubPort,portPos)) {
               selectedPortSet=0xffe;
               if (selectedSubPort>=0) {
                 portDragActive=true;
@@ -380,7 +380,7 @@ void FurnaceGUI::drawMixer() {
           }
 
           ImGui::SetCursorPos(topPos);
-          if (portSet("System",0x1000,displayHiddenPorts?DIV_MAX_OUTPUTS:e->getAudioDescGot().outChans,0,e->getAudioDescGot().outChans,0,selectedSubPort,portPos)) {
+          if (portSet(_L("System##sgmx1"),0x1000,displayHiddenPorts?DIV_MAX_OUTPUTS:e->getAudioDescGot().outChans,0,e->getAudioDescGot().outChans,0,selectedSubPort,portPos)) {
             selectedPortSet=0x1000;
             if (selectedSubPort>=0) {
               portDragActive=true;
@@ -443,7 +443,7 @@ void FurnaceGUI::drawMixer() {
           }
         }
         if (ImGui::BeginPopup("SubPortOptions",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoSavedSettings)) {
-          if (ImGui::MenuItem("disconnect all")) {
+          if (ImGui::MenuItem(_L("disconnect all##sgmx"))) {
             e->patchDisconnectAll(selectedPortSet);
             MARK_MODIFIED;
           }

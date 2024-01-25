@@ -40,6 +40,14 @@
 #include <float.h>
 #include <fmt/printf.h>
 
+#ifdef HAVE_GUI
+#endif
+
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
 void process(void* u, float** in, float** out, int inChans, int outChans, unsigned int size) {
   ((DivEngine*)u)->nextBuf(in,out,inChans,outChans,size);
 }
@@ -2425,7 +2433,11 @@ int DivEngine::addInstrument(int refChan, DivInstrumentType fallbackType) {
       *ins=song.nullInsQSound;
     }
   }
+#ifdef HAVE_GUI
+  ins->name=fmt::sprintf(g.getDefaultInsName(),insCount);
+#else
   ins->name=fmt::sprintf("Instrument %d",insCount);
+#endif
   if (prefType!=DIV_INS_NULL) {
     ins->type=prefType;
   }
