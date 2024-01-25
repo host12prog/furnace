@@ -21,7 +21,7 @@ typedef struct
 class DivLocale
 {
     private:
-        std::unordered_map<std::string, LocaleEntry> strings;
+        std::unordered_map<std::string, LocaleEntry> strings; //by my measurements at least 20% faster than std::map
         DivLang language;
 
     public:
@@ -47,4 +47,6 @@ class DivLocale
 
         void addTranslationsRussian();
         void addTranslationsTemplate();
+
+        size_t getMemoryUsage();
 };

@@ -11,6 +11,24 @@ const char* languages[] =
     NULL
 };
 
+size_t DivLocale::getMemoryUsage()
+{
+    size_t count = 0;
+    count += strings.size();
+
+    for (const auto& kv : strings) 
+    {
+        count += kv.first.size();
+
+        for(const auto& pl : kv.second.plurals)
+        {
+            count += pl.second.size();
+        }
+    }
+
+    return count;
+}
+
 const char* DivLocale::getLangName(DivLang lang)
 {
     return languages[lang];
@@ -28,7 +46,8 @@ void DivLocale::setLanguage(DivLang lang)
         return;
     }
 
-    strings.clear(); //language is valid, so we clear the std::map containing translations. 
+    strings.clear(); //language is valid, so we clear the std::unordered_map containing translations.
+    strings.rehash(0);
     // Lower is a switch that calls the corresponding function to fill it again with translations of specific language.
     language = lang;
 

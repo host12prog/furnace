@@ -852,6 +852,8 @@ void FurnaceGUI::drawSettings() {
 
               settings.language=i;
               settingsChanged=true;
+
+              logI("The locale translated strings array size: %d", (int)locale.getMemoryUsage());
             }
           }
 
