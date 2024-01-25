@@ -783,6 +783,19 @@ void DivLocale::addTranslationsTemplate()
     strings["error while loading fonts! please check your settings.##sggu2"].plurals[0] = "=error while loading fonts! please check your settings.";
     strings["could NOT save layout! %s##sggu"].plurals[0] = "=could NOT save layout! %s";
 
+    //   sggc  src/gui/guiConst.cpp
+
+    strings["Pitch##sggc"].plurals[0] = "=Pitch";
+    strings["Song##sggc"].plurals[0] = "=Song";
+    strings["Time##sggc"].plurals[0] = "=Time";
+    strings["Speed##sggc"].plurals[0] = "=Speed";
+    strings["Panning##sggc"].plurals[0] = "=Panning";
+    strings["Volume##sggc"].plurals[0] = "=Volume";
+    strings["System Primary##sggc"].plurals[0] = "=System Primary";
+    strings["System Secondary##sggc"].plurals[0] = "=System Secondary";
+    strings["Miscellaneous##sggc"].plurals[0] = "=Miscellaneous";
+    strings["Invalid##sggc"].plurals[0] = "=Invalid";
+
     //   sgda  src/gui/doAction.cpp
 
     strings["Unsaved changes! Save changes before creating a new song?##sgda"].plurals[0] = "=Unsaved changes! Save changes before creating a new song?";
@@ -945,6 +958,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Cancel##sgeo0"].plurals[0] = "=Cancel";
     strings["Export##sgeo0"].plurals[0] = "=Export";
     strings["settings:##sgeo"].plurals[0] = "=settings:";
+    strings["format version##sgeo"].plurals[0] = "=format version";
     strings["loop##sgeo0"].plurals[0] = "=loop";
     strings["loop trail:##sgeo"].plurals[0] = "=loop trail:";
     strings["auto-detect##sgeo"].plurals[0] = "=auto-detect";

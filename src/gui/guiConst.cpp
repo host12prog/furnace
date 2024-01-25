@@ -229,16 +229,16 @@ const FurnaceGUIColors fxColorsSort[]={//used for sorting
 };
 
 const char* fxColorsNames[]={
-  "Pitch",
-  "Song",
-  "Time",
-  "Speed",
-  "Panning",
-  "Volume",
-  "System Primary",
-  "System Secondary",
-  "Miscellaneous",
-  "Invalid"
+  "Pitch##sggc",
+  "Song##sggc",
+  "Time##sggc",
+  "Speed##sggc",
+  "Panning##sggc",
+  "Volume##sggc",
+  "System Primary##sggc",
+  "System Secondary##sggc",
+  "Miscellaneous##sggc",
+  "Invalid##sggc"
 };
 
 const FurnaceGUIColors fxColors[256]={

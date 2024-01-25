@@ -712,6 +712,19 @@ void DivLocale::addTranslationsRussian()
     strings["error while loading fonts! please check your settings.##sggu2"].plurals[0] = "Ошибка при загрузке шрифтов! пожалуйста, проверьте настройки.";
     strings["could NOT save layout! %s##sggu"].plurals[0] = "Не получилось сохранить компоновку окон! %s";
 
+    //   sggc  src/gui/guiConst.cpp
+
+    strings["Pitch##sggc"].plurals[0] = "Частота";
+    strings["Song##sggc"].plurals[0] = "Трек";
+    strings["Time##sggc"].plurals[0] = "Время";
+    strings["Speed##sggc"].plurals[0] = "Скорость";
+    strings["Panning##sggc"].plurals[0] = "Панорамирование";
+    strings["Volume##sggc"].plurals[0] = "Громкость";
+    strings["System Primary##sggc"].plurals[0] = "Основные эффекты чипа";
+    strings["System Secondary##sggc"].plurals[0] = "Вспомогательные эффекты чипа";
+    strings["Miscellaneous##sggc"].plurals[0] = "Разное";
+    strings["Invalid##sggc"].plurals[0] = "Недейств.";
+
     //   sgda  src/gui/doAction.cpp
 
     strings["Unsaved changes! Save changes before creating a new song?##sgda"].plurals[0] = "Остались несохранённые изменения! Сохранить их перед созданием нового трека?";
@@ -853,28 +866,29 @@ void DivLocale::addTranslationsRussian()
 
     //   sged  src/gui/editing.cpp
 
-    strings["can't collapse any further!##sged"].plurals[0] = "=can't collapse any further!";
-    strings["can't expand any further!##sged"].plurals[0] = "=can't expand any further!";
+    strings["can't collapse any further!##sged"].plurals[0] = "дальнейшее сжатие невозможно!";
+    strings["can't expand any further!##sged"].plurals[0] = "дальнейшее расширение невозможно!";
 
     //   sgef  src/gui/effectList.cpp
 
-    strings["Effect List###Effect List"].plurals[0] = "=Effect List###Effect List";
-    strings["Chip at cursor: %s##sgef"].plurals[0] = "=Chip at cursor: %s";
-    strings["All##sgef"].plurals[0] = "=All";
-    strings["None##sgef"].plurals[0] = "=None";
-    strings["Name##sgef"].plurals[0] = "=Name";
-    strings["Description##sgef"].plurals[0] = "=Description";
+    strings["Effect List###Effect List"].plurals[0] = "Список эффектов###Effect List";
+    strings["Chip at cursor: %s##sgef"].plurals[0] = "Курсор на канале чипа: %s";
+    strings["All##sgef"].plurals[0] = "Все";
+    strings["None##sgef"].plurals[0] = "Ни одного";
+    strings["Name##sgef"].plurals[0] = "Имя";
+    strings["Description##sgef"].plurals[0] = "Описание";
 
     //   sgeo  src/gui/exportOptions.cpp
 
-    strings["one file##sgeo"].plurals[0] = "=one file";
-    strings["multiple files (one per chip)##sgeo"].plurals[0] = "=multiple files (one per chip)";
-    strings["multiple files (one per channel)##sgeo"].plurals[0] = "=multiple files (one per channel)";
-    strings["Loops##sgeo"].plurals[0] = "=Loops";
-    strings["Fade out (seconds)##sgeo"].plurals[0] = "=Fade out (seconds)";
-    strings["Cancel##sgeo0"].plurals[0] = "=Cancel";
-    strings["Export##sgeo0"].plurals[0] = "=Export";
-    strings["settings:##sgeo"].plurals[0] = "=settings:";
+    strings["one file##sgeo"].plurals[0] = "один файл";
+    strings["multiple files (one per chip)##sgeo"].plurals[0] = "файлы (по одному на чип)";
+    strings["multiple files (one per channel)##sgeo"].plurals[0] = "файлы (по одному на канал)";
+    strings["Loops##sgeo"].plurals[0] = "Повторов трека";
+    strings["Fade out (seconds)##sgeo"].plurals[0] = "Затухание (в секундах)";
+    strings["Cancel##sgeo0"].plurals[0] = "Отмена";
+    strings["Export##sgeo0"].plurals[0] = "Экспорт";
+    strings["settings:##sgeo"].plurals[0] = "настройки:";
+    strings["format version##sgeo"].plurals[0] = "версия формата";
     strings["loop##sgeo0"].plurals[0] = "=loop";
     strings["loop trail:##sgeo"].plurals[0] = "=loop trail:";
     strings["auto-detect##sgeo"].plurals[0] = "=auto-detect";
@@ -1286,7 +1300,6 @@ void DivLocale::addTranslationsRussian()
     strings["Debug###Debug"].plurals[0] = "Отладка###Debug";
     strings["Samples###Samples"].plurals[0] = "Сэмплы###Samples";
     strings["MobileEdit###MobileEdit"].plurals[0] = "Моб. меню ред.###MobileEdit";
-    strings["Effect List###Effect List"].plurals[0] = "Спис. эффектов###Effect List";
     strings["Find/Replace###Find/Replace"].plurals[0] = "Найти/Заменить###Find/Replace";
     strings["Grooves###Grooves"].plurals[0] = "Ритм-паттерны###Grooves";
     strings["Instrument Editor###Instrument Editor"].plurals[0] = "Ред. инструментов###Instrument Editor";

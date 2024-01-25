@@ -23,7 +23,7 @@ void FurnaceGUI::drawEffectList() {
     if (ImGui::BeginPopupContextItem("effectSort",ImGuiPopupFlags_MouseButtonLeft)) {
       for (int i=0; i<9; i++) {
         ImGui::PushStyleColor(ImGuiCol_Text,uiColors[fxColorsSort[i]]);
-        ImGui::Checkbox(fxColorsNames[i],&effectsShow[i]);
+        ImGui::Checkbox(_L(fxColorsNames[i]),&effectsShow[i]);
         ImGui::PopStyleColor();
       }
 

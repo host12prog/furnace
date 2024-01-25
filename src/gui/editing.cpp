@@ -1665,7 +1665,13 @@ void FurnaceGUI::doExpand(int multiplier, const SelectionPoint& sStart, const Se
 
 void FurnaceGUI::doCollapseSong(int divider) {
   if (divider<2) return;
+  if (e->curSubSong->patLen<divider) {
+    showError(_L("can't collapse any further!##sged"));
+    return;
+  }
   finishSelection();
+
+  logW("collapse: %d %d", e->curSubSong->patLen, divider);
 
   UndoStep us;
   us.type=GUI_UNDO_PATTERN_COLLAPSE_SONG;
