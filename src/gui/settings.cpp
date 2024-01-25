@@ -5329,6 +5329,8 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
     sty.AntiAliasedLines=false;
     sty.AntiAliasedLinesUseTex=false;
     sty.AntiAliasedFill=false;
+
+    locale.setLanguage((DivLang)DIV_LANG_ENGLISH);
   }
 
   if (mobileUI) {
