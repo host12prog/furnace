@@ -17,6 +17,8 @@ LTVA:
 - apply frame shading to song/subsong info text fields (and a setting to toggle it)
 - refactor instrument editor GUI code - now each instrument is drawn by separate function instead of big mess that was there before
 - remove the ability to make pattern length 0 by repeatedly applying "collapse song"
+- Add localization code and Russian translation
+- Break compatibility with tildearrow Furnace because of PowerNoise and ES5503 instrument ID conflicts: you can load tildearrow's Furnace modules just fine, inst IDs will be converted, but the format (module and instrument) magic was changed so you won't be able to load Furnace-B modules in original Furnace.
 
 freq-mod:
 - 86-PCM streo DAC fix
@@ -25,3 +27,4 @@ freq-mod:
 
 Electric Keet:
 - "Furnace-B" name
+- The invaluable and enormous tiresome work of placing localization macros all over the GUI code
