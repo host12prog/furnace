@@ -3192,6 +3192,11 @@ void DivLocale::addTranslationsTemplate()
     strings["PV-1000##CC_GUI_COLOR_INSTR_PV1000"].plurals[0] = "=PV-1000##CC_GUI_COLOR_INSTR_PV1000";
     strings["K053260##CC_GUI_COLOR_INSTR_K053260"].plurals[0] = "=K053260##CC_GUI_COLOR_INSTR_K053260";
     strings["C140##CC_GUI_COLOR_INSTR_C140"].plurals[0] = "=C140##CC_GUI_COLOR_INSTR_C140";
+    strings["C219##CC_GUI_COLOR_INSTR_C219"].plurals[0] = "=C219##CC_GUI_COLOR_INSTR_C219";
+    strings["ESFM##CC_GUI_COLOR_INSTR_ESFM"].plurals[0] = "=ESFM##CC_GUI_COLOR_INSTR_ESFM";
+    strings["ES5503##CC_GUI_COLOR_INSTR_ES5503"].plurals[0] = "=ES5503##CC_GUI_COLOR_INSTR_ES5503";
+    strings["PowerNoise (noise)##CC_GUI_COLOR_INSTR_POWERNOISE"].plurals[0] = "=PowerNoise (noise)##CC_GUI_COLOR_INSTR_POWERNOISE";
+    strings["PowerNoise (slope)##CC_GUI_COLOR_INSTR_POWERNOISE_SLOPE"].plurals[0] = "=PowerNoise (slope)##CC_GUI_COLOR_INSTR_POWERNOISE_SLOPE";
     strings["Other/Unknown##CC_GUI_COLOR_INSTR_UNKNOWN"].plurals[0] = "=Other/Unknown##CC_GUI_COLOR_INSTR_UNKNOWN";
 
     strings["Single color (background)##CC_GUI_COLOR_CHANNEL_BG"].plurals[0] = "=Single color (background)##CC_GUI_COLOR_CHANNEL_BG";
