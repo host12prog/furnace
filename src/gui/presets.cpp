@@ -946,7 +946,7 @@ void FurnaceGUI::initSystemPresets() {
         "outDepth=15\n"
       ),
       CH(DIV_SYSTEM_PCSPKR, 1.0f, 0, "clockSel=1")
-    }
+    }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
     _L("NEC PC-98 (with PC-9801-86; extended channel 3) stereo##sgpr"), { // -73 also has OPNA
@@ -960,7 +960,7 @@ void FurnaceGUI::initSystemPresets() {
         "outDepth=15\n"
       ),
       CH(DIV_SYSTEM_PCSPKR, 1.0f, 0, "clockSel=1")
-    }
+    }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
     _L("NEC PC-98 (with PC-9801-86; extended channel 3 and CSM) stereo##sgpr"), { // -73 also has OPNA
@@ -974,7 +974,7 @@ void FurnaceGUI::initSystemPresets() {
         "outDepth=15\n"
       ),
       CH(DIV_SYSTEM_PCSPKR, 1.0f, 0, "clockSel=1")
-    }
+    }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
     _L("NEC PC-98 (with PC-9801-73)##sgpr"), {
