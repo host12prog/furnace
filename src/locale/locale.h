@@ -4,6 +4,9 @@
 #include <unordered_map>
 #include <string>
 
+#include <imgui.h>
+#include <imgui_internal.h>
+
 enum DivLang
 {
     DIV_LANG_ENGLISH = 0,

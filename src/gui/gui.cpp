@@ -6784,6 +6784,9 @@ bool FurnaceGUI::init() {
   ImGui::CreateContext();
   rend->initGUI(sdlWin);
 
+  locale.setLanguage((DivLang)settings.language);
+  initSystemPresets();
+
   applyUISettings();
 
   logD("building font...");

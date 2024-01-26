@@ -849,6 +849,7 @@ void FurnaceGUI::drawSettings() {
             if (ImGui::Selectable(locale.getLangName((DivLang)i))) 
             {
               locale.setLanguage((DivLang)i);
+              initSystemPresets();
 
               settings.language=i;
               settingsChanged=true;
@@ -3947,8 +3948,9 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.playOnLoad=conf.getInt("playOnLoad",0);
     settings.centerPopup=conf.getInt("centerPopup",1);
 
-    settings.language=conf.getInt("language",DIV_LANG_ENGLISH);
+    settings.language=conf.getInt("language",(int)DIV_LANG_ENGLISH);
     locale.setLanguage((DivLang)settings.language);
+    initSystemPresets();
   }
 
   if (groups&GUI_SETTINGS_AUDIO) {
@@ -5336,6 +5338,7 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
     sty.AntiAliasedFill=false;
 
     locale.setLanguage((DivLang)DIV_LANG_ENGLISH);
+    initSystemPresets();
   }
 
   if (mobileUI) {

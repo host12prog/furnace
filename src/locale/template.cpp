@@ -14,6 +14,19 @@ int getPluralIndexTemplate(int n)
     //see russian.cpp file for example of adapted statement
 }
 
+static const ImGuiLocEntry GLocalizationEntriesTmTM[] =
+{
+    { ImGuiLocKey_VersionStr,           "=Dear ImGui " IMGUI_VERSION " (" IM_STRINGIFY(IMGUI_VERSION_NUM) ")" },
+    { ImGuiLocKey_TableSizeOne,         "=Size column to fit###SizeOne"          },
+    { ImGuiLocKey_TableSizeAllFit,      "=Size all columns to fit###SizeAll"     },
+    { ImGuiLocKey_TableSizeAllDefault,  "=Size all columns to default###SizeAll" },
+    { ImGuiLocKey_TableResetOrder,      "=Reset order###ResetOrder"              },
+    { ImGuiLocKey_WindowingMainMenuBar, "=(Main menu bar)"                       },
+    { ImGuiLocKey_WindowingPopup,       "=(Popup)"                               },
+    { ImGuiLocKey_WindowingUntitled,    "=(Untitled)"                            },
+    { ImGuiLocKey_DockingHideTabBar,    "=Hide tab bar###HideTabBar"             },
+};
+
 class DivLocale;
 
 void DivLocale::addTranslationsTemplate()
@@ -85,6 +98,8 @@ void DivLocale::addTranslationsTemplate()
     //   sgvm  src/gui/volMeter.cpp
     //   sgwe  src/gui/waveEdit.cpp
     //   sgxy  src/gui/xyOsc.cpp
+
+    ImGui::LocalizeRegisterEntries(GLocalizationEntriesTmTM, IM_ARRAYSIZE(GLocalizationEntriesTmTM));
 
     strings["<nothing>##test"].plurals[0] = "=<nothing>##test";
 
@@ -1283,6 +1298,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Neo Geo AES (extended channel 2)##sgpr"].plurals[0] = "=Neo Geo AES (extended channel 2)";
     strings["Neo Geo AES (extended channel 2 and CSM)##sgpr"].plurals[0] = "=Neo Geo AES (extended channel 2 and CSM)";
     strings["Computers##sgpr"].plurals[0] = "=Computers";
+    strings["let's get to work on chiptune today.##sgpr"].plurals[0] = "=let's get to work on chiptune today.";
     strings["Commodore 64 (C64, 6581 SID + Sound Expander in drums mode)##sgpr"].plurals[0] = "=Commodore 64 (C64, 6581 SID + Sound Expander in drums mode)";
     strings["Commodore 64 (C64, 8580 SID + Sound Expander in drums mode)##sgpr"].plurals[0] = "=Commodore 64 (C64, 8580 SID + Sound Expander in drums mode)";
     strings["Commodore 64 (C64, 6581 SID + FM-YAM in drums mode)##sgpr"].plurals[0] = "=Commodore 64 (C64, 6581 SID + FM-YAM in drums mode)";
@@ -1392,6 +1408,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Commander X16 (with OPM)##sgpr"].plurals[0] = "=Commander X16 (with OPM)";
     strings["Commander X16 (with Twin OPL3)##sgpr"].plurals[0] = "=Commander X16 (with Twin OPL3)";
     strings["Arcade systems##sgpr"].plurals[0] = "=Arcade systems";
+    strings["INSERT COIN##sgpr"].plurals[0] = "=INSERT COIN##sgpr";
     strings["Williams/Midway Y/T unit w/ADPCM sound board##sgpr"].plurals[0] = "=Williams/Midway Y/T unit w/ADPCM sound board";
     strings["Konami Battlantis (drums mode on first OPL2)##sgpr"].plurals[0] = "=Konami Battlantis (drums mode on first OPL2)";
     strings["Konami Battlantis (drums mode on second OPL2)##sgpr"].plurals[0] = "=Konami Battlantis (drums mode on second OPL2)";
@@ -1487,6 +1504,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Dynax/Nakanihon 3rd generation hardware##sgpr"].plurals[0] = "=Dynax/Nakanihon 3rd generation hardware";
     strings["Dynax/Nakanihon 3rd generation hardware (drums mode)##sgpr"].plurals[0] = "=Dynax/Nakanihon 3rd generation hardware (drums mode)";
     strings["Dynax/Nakanihon Real Break (drums mode)##sgpr"].plurals[0] = "=Dynax/Nakanihon Real Break (drums mode)";
+    strings["chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.##sgpr"].plurals[0] = "=chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.";
     strings["Yamaha YM2203 (extended channel 3)##sgpr"].plurals[0] = "=Yamaha YM2203 (extended channel 3)";
     strings["Yamaha YM2203 (extended channel 3 and CSM)##sgpr"].plurals[0] = "=Yamaha YM2203 (extended channel 3 and CSM)";
     strings["Yamaha YM2608 (extended channel 3)##sgpr"].plurals[0] = "=Yamaha YM2608 (extended channel 3)";
@@ -1508,27 +1526,33 @@ void DivLocale::addTranslationsTemplate()
     strings["Yamaha YMF262 (drums mode)##sgpr"].plurals[0] = "=Yamaha YMF262 (drums mode)";
     strings["Yamaha YMF289B (drums mode)##sgpr"].plurals[0] = "=Yamaha YMF289B (drums mode)";
     strings["Square##sgpr"].plurals[0] = "=Square";
+    strings["these chips generate square/pulse tones only (but may include noise).##sgpr"].plurals[0] = "=these chips generate square/pulse tones only (but may include noise).";
     strings["Tandy PSSJ 3-voice sound##sgpr"].plurals[0] = "=Tandy PSSJ 3-voice sound";
     strings["Sega PSG (SN76489-like)##sgpr"].plurals[0] = "=Sega PSG (SN76489-like)";
     strings["Sega PSG (SN76489-like, Stereo)##sgpr"].plurals[0] = "=Sega PSG (SN76489-like, Stereo)";
     strings["PC Speaker##sgpr"].plurals[0] = "=PC Speaker";
     strings["Sample##sgpr"].plurals[0] = "=Sample";
+    strings["chips/systems which use PCM or ADPCM samples for sound synthesis.##sgpr"].plurals[0] = "=chips/systems which use PCM or ADPCM samples for sound synthesis.";
     strings["Generic PCM DAC##sgpr"].plurals[0] = "=Generic PCM DAC";
     strings["Wavetable##sgpr"].plurals[0] = "=Wavetable";
+    strings["chips which use user-specified waveforms to generate sound.##sgpr"].plurals[0] = "=chips which use user-specified waveforms to generate sound.";
     strings["Namco C15 (8-channel mono)##sgpr"].plurals[0] = "=Namco C15 (8-channel mono)";
     strings["Namco C30 (8-channel stereo)##sgpr"].plurals[0] = "=Namco C30 (8-channel stereo)";
     strings["Famicom Disk System (chip)##sgpr"].plurals[0] = "=Famicom Disk System (chip)";
     strings["Specialized##sgpr"].plurals[0] = "=Specialized";
+    strings["chips/systems with unique sound synthesis methods.##sgpr"].plurals[0] = "=chips/systems with unique sound synthesis methods.";
     strings["Commodore PET (pseudo-wavetable)##sgpr"].plurals[0] = "=Commodore PET (pseudo-wavetable)";
     strings["ZX Spectrum (beeper only, SFX-like engine)##sgpr"].plurals[0] = "=ZX Spectrum (beeper only, SFX-like engine)";
     strings["ZX Spectrum (beeper only, QuadTone engine)##sgpr"].plurals[0] = "=ZX Spectrum (beeper only, QuadTone engine)";
     strings["Modern/fantasy##sgpr"].plurals[0] = "=Modern/fantasy";
+    strings["chips/systems which do not exist in reality or were made just several years ago.##sgpr"].plurals[0] = "=chips/systems which do not exist in reality or were made just several years ago.";
     strings["Commander X16 (VERA only)##sgpr"].plurals[0] = "=Commander X16 (VERA only)";
     strings["DefleMask-compatible##sgpr"].plurals[0] = "=DefleMask-compatible";
-    strings["Sega Genesis (extended channel 3)##sgpr"].plurals[0] = "=Sega Genesis (extended channel 3)";
-    strings["Sega Master System (with FM expansion)##sgpr"].plurals[0] = "=Sega Master System (with FM expansion)";
-    strings["Arcade (YM2151 and SegaPCM)##sgpr"].plurals[0] = "=Arcade (YM2151 and SegaPCM)";
-    strings["Neo Geo CD (extended channel 2)##sgpr"].plurals[0] = "=Neo Geo CD (extended channel 2)";
+    strings["these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"].plurals[0] = "=these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.";
+    strings["Sega Genesis (extended channel 3)##sgpr1"].plurals[0] = "=Sega Genesis (extended channel 3)";
+    strings["Sega Master System (with FM expansion)##sgpr1"].plurals[0] = "=Sega Master System (with FM expansion)";
+    strings["Arcade (YM2151 and SegaPCM)##sgpr1"].plurals[0] = "=Arcade (YM2151 and SegaPCM)";
+    strings["Neo Geo CD (extended channel 2)##sgpr1"].plurals[0] = "=Neo Geo CD (extended channel 2)";
 
     //   sgrv  src/gui/regView.cpp
 

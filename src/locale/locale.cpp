@@ -39,7 +39,20 @@ DivLang DivLocale::getLangIndex()
     return language;
 }
 
-void DivLocale::setLanguage(DivLang lang)
+static const ImGuiLocEntry GLocalizationEntriesEnUS[] =
+{
+    { ImGuiLocKey_VersionStr,           "Dear ImGui " IMGUI_VERSION " (" IM_STRINGIFY(IMGUI_VERSION_NUM) ")" },
+    { ImGuiLocKey_TableSizeOne,         "Size column to fit###SizeOne"          },
+    { ImGuiLocKey_TableSizeAllFit,      "Size all columns to fit###SizeAll"     },
+    { ImGuiLocKey_TableSizeAllDefault,  "Size all columns to default###SizeAll" },
+    { ImGuiLocKey_TableResetOrder,      "Reset order###ResetOrder"              },
+    { ImGuiLocKey_WindowingMainMenuBar, "(Main menu bar)"                       },
+    { ImGuiLocKey_WindowingPopup,       "(Popup)"                               },
+    { ImGuiLocKey_WindowingUntitled,    "(Untitled)"                            },
+    { ImGuiLocKey_DockingHideTabBar,    "Hide tab bar###HideTabBar"             },
+};
+
+void DivLocale::setLanguage(DivLang lang) //if false, just update ImGui localization
 {
     if(lang >= DIV_LANG_MAX)
     {
@@ -48,13 +61,18 @@ void DivLocale::setLanguage(DivLang lang)
 
     strings.clear(); //language is valid, so we clear the std::unordered_map containing translations.
     strings.rehash(0);
-    // Lower is a switch that calls the corresponding function to fill it again with translations of specific language.
     language = lang;
-
-    getPluralIndex = &getPluralIndexTemplate; //by default we have no plural forms!
+    getPluralIndex = &getPluralIndexTemplate; //by default we have two plural forms (as in English)!
+    // Lower is a switch that calls the corresponding function to fill it again with translations of specific language.
 
     switch(lang)
     {
+        case DIV_LANG_ENGLISH:
+        {
+            ImGui::LocalizeRegisterEntries(GLocalizationEntriesEnUS, IM_ARRAYSIZE(GLocalizationEntriesEnUS)); //so we default to English ImGUI text...
+            break;
+        }
+
         case DIV_LANG_RUSSIAN:
         {
             addTranslationsRussian();

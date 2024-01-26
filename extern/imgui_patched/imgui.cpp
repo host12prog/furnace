@@ -14209,8 +14209,14 @@ static void WindowSettingsHandler_WriteAll(ImGuiContext* ctx, ImGuiSettingsHandl
 void ImGui::LocalizeRegisterEntries(const ImGuiLocEntry* entries, int count)
 {
     ImGuiContext& g = *GImGui;
-    for (int n = 0; n < count; n++)
-        g.LocalizationTable[entries[n].Key] = entries[n].Text;
+
+    if (GImGui != NULL)
+    {
+        for (int n = 0; n < count; n++)
+        {
+            g.LocalizationTable[entries[n].Key] = entries[n].Text;
+        }
+    }
 }
 
 

@@ -3231,7 +3231,7 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
-    _L("Commander X16 (VERA only)##sgpr"), {
+    _L("Commander X16 (VERA only)##sgpr1"), {
       CH(DIV_SYSTEM_VERA, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
   );
@@ -3257,7 +3257,7 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_LIST_START
   );
   ENTRY(
-    _L("Sega Genesis (extended channel 3)##sgpr"), {
+    _L("Sega Genesis (extended channel 3)##sgpr1"), {
       CH(DIV_SYSTEM_YM2612_EXT, 1.0f, 0, ""),
       CH(DIV_SYSTEM_SMS, 0.5f, 0, "")
     }, NULL, MENU_STATUS_LIST_END
@@ -3268,7 +3268,7 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_LIST_START
   );
   ENTRY(
-    _L("Sega Master System (with FM expansion)##sgpr"), {
+    _L("Sega Master System (with FM expansion)##sgpr1"), {
       CH(DIV_SYSTEM_SMS, 1.0f, 0, ""),
       CH(DIV_SYSTEM_OPLL, 1.0f, 0, "")
     }, NULL, MENU_STATUS_LIST_END
@@ -3313,7 +3313,7 @@ void FurnaceGUI::initSystemPresets() {
     "tickRate=50.1245421"
   );
   ENTRY(
-    _L("Arcade (YM2151 and SegaPCM)##sgpr"), {
+    _L("Arcade (YM2151 and SegaPCM)##sgpr1"), {
       CH(DIV_SYSTEM_YM2151, 1.0f, 0, ""),
       CH(DIV_SYSTEM_SEGAPCM_COMPAT, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
@@ -3324,7 +3324,7 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_LIST_START
   );
   ENTRY(
-    _L("Neo Geo CD (extended channel 2)##sgpr"), {
+    _L("Neo Geo CD (extended channel 2)##sgpr1"), {
       CH(DIV_SYSTEM_YM2610_EXT, 1.0f, 0, "")
     }, NULL, MENU_STATUS_LIST_END
   );
