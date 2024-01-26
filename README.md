@@ -109,6 +109,7 @@ for other operating systems, you may [build the source](#developer-info).
     - Commander X16 VERA
     - tildearrow Sound Unit
     - Generic PCM DAC
+    - PowerNoise
 - mix and match sound chips!
   - over 200 ready to use presets from computers, game consoles and arcade boards...
   - ...or create your own - up to 32 of them or a total of 128 channels!
@@ -170,9 +171,9 @@ some people have provided packages for Unix/Unix-like distributions. here's a li
 ---
 # developer info
 
-[![Build furnace](https://github.com/tildearrow/furnace/actions/workflows/build.yml/badge.svg)](https://github.com/tildearrow/furnace/actions/workflows/build.yml)
+[![Build furnace](https://github.com/LTVA1/furnace/actions/workflows/build.yml/badge.svg)](https://github.com/LTVA1/furnace/actions/workflows/build.yml)
 
-if you can't download these artifacts (because GitHub requires you to be logged in), [go here](https://nightly.link/tildearrow/furnace/workflows/build/master) instead.
+if you can't download these artifacts (because GitHub requires you to be logged in), [go here](https://nightly.link/LTVA1/furnace/workflows/build/master) instead.
 
 **NOTE: do not download the project's source as a .zip or .tar.gz as these do not include the project's submodules which are necessary to proceed with building. please instead use Git as shown below.**
 
@@ -199,7 +200,7 @@ some Linux distributions (e.g. Ubuntu or openSUSE) will require you to install t
 type the following on a terminal/console: (make sure Git is installed)
 
 ```
-git clone --recursive https://github.com/tildearrow/furnace.git
+git clone --recursive https://github.com/LTVA1/furnace.git
 cd furnace
 ```
 
