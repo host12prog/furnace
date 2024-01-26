@@ -97,7 +97,7 @@ void DivLocale::addTranslationsTemplate()
     // @ sgut  src/gui/util.cpp
     // # sgvm  src/gui/volMeter.cpp
     // # sgwe  src/gui/waveEdit.cpp
-    //   sgxy  src/gui/xyOsc.cpp
+    // # sgxy  src/gui/xyOsc.cpp
 
     ImGui::LocalizeRegisterEntries(GLocalizationEntriesTmTM, IM_ARRAYSIZE(GLocalizationEntriesTmTM));
 
@@ -2075,6 +2075,23 @@ void DivLocale::addTranslationsTemplate()
     strings["Dec##sgwe"].plurals[0] = "=Dec";
     strings["Hex##sgwe"].plurals[0] = "=Hex";
     strings["Signed/Unsigned##sgwe"].plurals[0] = "=Signed/Unsigned";
+
+    //   sgxy  src/gui/xyOsc.cpp
+
+    strings["Oscilloscope (X-Y)###Oscilloscope (X-Y)"].plurals[0] = "=Oscilloscope (X-Y)###Oscilloscope (X-Y)";
+    strings["X Channel##sgxy"].plurals[0] = "=X Channel";
+    strings["Invert##X"].plurals[0] = "=Invert";
+    strings["Y Channel##sgxy"].plurals[0] = "=Y Channel";
+    strings["Invert##Y"].plurals[0] = "=Invert";
+    strings["Zoom##sgxy"].plurals[0] = "=Zoom";
+    strings["Samples##sgxy"].plurals[0] = "=Samples";
+    strings["Decay Time (ms)##sgxy"].plurals[0] = "=Decay Time (ms)";
+    strings["Intensity##sgxy"].plurals[0] = "=Intensity";
+    strings["Line Thickness##sgxy"].plurals[0] = "=Line Thickness";
+    strings["OK##sgxy"].plurals[0] = "=OK";
+    strings["(-Infinity)dB,(-Infinity)dB##sgxy"].plurals[0] = "=(-Infinity)dB,(-Infinity)dB";
+    strings["(-Infinity)dB,%.1fdB##sgxy"].plurals[0] = "=(-Infinity)dB,%.1fdB";
+    strings["%.1fdB,(-Infinity)dB##sgxy"].plurals[0] = "=%.1fdB,(-Infinity)dB";
 
 //REMEMBER to check for anything that calls the strings at the top!
 
