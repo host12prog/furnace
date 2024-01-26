@@ -25,22 +25,24 @@
 #include "intConst.h"
 #include "../ta-log.h"
 
-const char* queryModes[GUI_QUERY_MAX]={
-  "ignore",
-  "equals",
-  "not equal",
-  "between",
-  "not between",
-  "any",
-  "none"
+const char* queryModes[GUI_QUERY_MAX+1]={
+  "ignore##sgfr",
+  "equals##sgfr",
+  "not equal##sgfr",
+  "between##sgfr",
+  "not between##sgfr",
+  "any##sgfr",
+  "none##sgfr",
+  NULL
 };
 
-const char* queryReplaceModes[GUI_QUERY_REPLACE_MAX]={
-  "set",
-  "add",
-  "add (overflow)",
-  "scale %",
-  "clear"
+const char* queryReplaceModes[GUI_QUERY_REPLACE_MAX+1]={
+  "set##sgfr",
+  "add##sgfr",
+  "add (overflow)##sgfr",
+  "scale %##sgfr",
+  "clear##sgfr",
+  NULL
 };
 
 int queryNote(int note, int octave) {
@@ -509,7 +511,7 @@ void FurnaceGUI::drawFindReplace() {
   }
   if (!findOpen) return;
   ImGui::SetNextWindowSizeConstraints(ImVec2(64.0f*dpiScale,32.0f*dpiScale),ImVec2(canvasW,canvasH));
-  if (ImGui::Begin("Find/Replace",&findOpen,globalWinFlags)) {
+  if (ImGui::Begin("Find/Replace",&findOpen,globalWinFlags,_L("Find/Replace###Find/Replace"))) {
     if (curQuery.empty()) {
       curQuery.push_back(FurnaceGUIFindQuery());
     }
@@ -517,14 +519,14 @@ void FurnaceGUI::drawFindReplace() {
     int eraseIndex=-1;
     char tempID[1024];
     if (ImGui::BeginTabBar("FindOrReplace")) {
-      if (ImGui::BeginTabItem("Find")) {
+      if (ImGui::BeginTabItem(_L("Find##sgfr0"))) {
         if (queryViewingResults) {
           if (!curQueryResults.empty()) {
             ImVec2 avail=ImGui::GetContentRegionAvail();
             avail.y-=ImGui::GetFrameHeightWithSpacing();
             if (ImGui::BeginTable("FindResults",4,ImGuiTableFlags_Borders|ImGuiTableFlags_ScrollY,avail)) {
-              ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed,ImGui::CalcTextSize("order").x);
-              ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed,ImGui::CalcTextSize("row").x);
+              ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed,ImGui::CalcTextSize(_L("order##sgfr0")).x);
+              ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed,ImGui::CalcTextSize(_L("row##sgfr0")).x);
               ImGui::TableSetupColumn("c2",ImGuiTableColumnFlags_WidthStretch);
               ImGui::TableSetupColumn("c3",ImGuiTableColumnFlags_WidthFixed);
 
@@ -532,13 +534,13 @@ void FurnaceGUI::drawFindReplace() {
 
               ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
               ImGui::TableNextColumn();
-              ImGui::Text("order");
+              ImGui::Text(_L("order##sgfr1"));
               ImGui::TableNextColumn();
-              ImGui::Text("row");
+              ImGui::Text(_L("row##sgfr1"));
               ImGui::TableNextColumn();
-              ImGui::Text("channel");
+              ImGui::Text(_L("channel##sgfr"));
               ImGui::TableNextColumn();
-              ImGui::Text("go");
+              ImGui::Text(_L("go##sgfr"));
 
               int index=0;
               for (FurnaceGUIQueryResult& i: curQueryResults) {
@@ -582,9 +584,9 @@ void FurnaceGUI::drawFindReplace() {
               ImGui::EndTable();
             }
           } else {
-            ImGui::Text("no matches found!");
+            ImGui::Text(_L("no matches found!##sgfr"));
           }
-          if (ImGui::Button("Back")) {
+          if (ImGui::Button(_L("Back##sgfr"))) {
             queryViewingResults=false;
           }
         } else {
@@ -598,10 +600,25 @@ void FurnaceGUI::drawFindReplace() {
               ImGui::TableNextRow();
               ImGui::TableNextColumn();
               ImGui::AlignTextToFramePadding();
-              ImGui::Text("Note");
+              ImGui::Text(_L("Note##sgfr0"));
               ImGui::TableNextColumn();
               ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-              ImGui::Combo("##NCondition",&i.noteMode,queryModes,GUI_QUERY_MAX);
+              //ImGui::Combo("##NCondition",&i.noteMode,queryModes,GUI_QUERY_MAX);
+              if (ImGui::BeginCombo("##NCondition",_L(queryModes[i.noteMode])))
+              {
+                int j = 0;
+                while(queryModes[j])
+                {
+                  if (ImGui::Selectable(_L(queryModes[j])))
+                  {
+                    i.noteMode = j;
+                  }
+
+                  j++;
+                }
+
+                ImGui::EndCombo();
+              }
               ImGui::TableNextColumn();
               if (FIRST_VISIBLE(i.noteMode)) {
                 if ((i.noteMode==GUI_QUERY_RANGE || i.noteMode==GUI_QUERY_RANGE_NOT) && i.note>=120) {
@@ -666,10 +683,25 @@ void FurnaceGUI::drawFindReplace() {
               ImGui::TableNextRow();
               ImGui::TableNextColumn();
               ImGui::AlignTextToFramePadding();
-              ImGui::Text("Ins");
+              ImGui::Text(_L("Ins##sgfr0"));
               ImGui::TableNextColumn();
               ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-              ImGui::Combo("##ICondition",&i.insMode,queryModes,GUI_QUERY_MAX);
+              //ImGui::Combo("##ICondition",&i.insMode,queryModes,GUI_QUERY_MAX);
+              if (ImGui::BeginCombo("##ICondition",_L(queryModes[i.insMode])))
+              {
+                int j = 0;
+                while(queryModes[j])
+                {
+                  if (ImGui::Selectable(_L(queryModes[j])))
+                  {
+                    i.insMode = j;
+                  }
+
+                  j++;
+                }
+
+                ImGui::EndCombo();
+              }
               ImGui::TableNextColumn();
               if (FIRST_VISIBLE(i.insMode)) {
                 ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
@@ -684,10 +716,25 @@ void FurnaceGUI::drawFindReplace() {
               ImGui::TableNextRow();
               ImGui::TableNextColumn();
               ImGui::AlignTextToFramePadding();
-              ImGui::Text("Volume");
+              ImGui::Text(_L("Volume##sgfr0"));
               ImGui::TableNextColumn();
               ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-              ImGui::Combo("##VCondition",&i.volMode,queryModes,GUI_QUERY_MAX);
+              //ImGui::Combo("##VCondition",&i.volMode,queryModes,GUI_QUERY_MAX);
+              if (ImGui::BeginCombo("##VCondition",_L(queryModes[i.volMode])))
+              {
+                int j = 0;
+                while(queryModes[j])
+                {
+                  if (ImGui::Selectable(_L(queryModes[j])))
+                  {
+                    i.volMode = j;
+                  }
+
+                  j++;
+                }
+
+                ImGui::EndCombo();
+              }
               ImGui::TableNextColumn();
               if (FIRST_VISIBLE(i.volMode)) {
                 ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
@@ -704,10 +751,25 @@ void FurnaceGUI::drawFindReplace() {
                 ImGui::TableNextRow();
                 ImGui::TableNextColumn();
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text("Effect");
+                ImGui::Text(_L("Effect##sgfr0"));
                 ImGui::TableNextColumn();
                 ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-                ImGui::Combo("##ECondition",&i.effectMode[j],queryModes,GUI_QUERY_MAX);
+                //ImGui::Combo("##ECondition",&i.effectMode[j],queryModes,GUI_QUERY_MAX);
+                if (ImGui::BeginCombo("##ECondition",_L(queryModes[i.effectMode[j]])))
+                {
+                  int k = 0;
+                  while(queryModes[k])
+                  {
+                    if (ImGui::Selectable(_L(queryModes[k])))
+                    {
+                      i.effectMode[j] = k;
+                    }
+
+                    k++;
+                  }
+
+                  ImGui::EndCombo();
+                }
                 ImGui::TableNextColumn();
                 if (FIRST_VISIBLE(i.effectMode[j])) {
                   ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
@@ -722,10 +784,25 @@ void FurnaceGUI::drawFindReplace() {
                 ImGui::TableNextRow();
                 ImGui::TableNextColumn();
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text("Value");
+                ImGui::Text(_L("Value##sgfr0"));
                 ImGui::TableNextColumn();
                 ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-                ImGui::Combo("##EVCondition",&i.effectValMode[j],queryModes,GUI_QUERY_MAX);
+                //ImGui::Combo("##EVCondition",&i.effectValMode[j],queryModes,GUI_QUERY_MAX);
+                if (ImGui::BeginCombo("##EVCondition",_L(queryModes[i.effectValMode[j]])))
+                {
+                  int k = 0;
+                  while(queryModes[k])
+                  {
+                    if (ImGui::Selectable(_L(queryModes[k])))
+                    {
+                      i.effectValMode[j] = k;
+                    }
+
+                    k++;
+                  }
+
+                  ImGui::EndCombo();
+                }
                 ImGui::TableNextColumn();
                 if (FIRST_VISIBLE(i.effectValMode[j])) {
                   ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
@@ -747,18 +824,18 @@ void FurnaceGUI::drawFindReplace() {
               }
               popDestColor();
               if (ImGui::IsItemHovered()) {
-                ImGui::SetTooltip("Delete query");
+                ImGui::SetTooltip(_L("Delete query##sgfr"));
               }
               ImGui::TableNextColumn();
               if (i.effectCount<8) {
-                if (ImGui::Button("Add effect")) {
+                if (ImGui::Button(_L("Add effect##sgfr0"))) {
                   i.effectCount++;
                 }
               }
               ImGui::TableNextColumn();
               if (i.effectCount>0) {
                 pushDestColor();
-                if (ImGui::Button("Remove effect")) {
+                if (ImGui::Button(_L("Remove effect##sgfr0"))) {
                   i.effectCount--;
                 }
                 popDestColor();
@@ -783,24 +860,24 @@ void FurnaceGUI::drawFindReplace() {
             ImGui::TableNextRow();
             ImGui::TableNextColumn();
 
-            ImGui::Text("Search range:");
+            ImGui::Text(_L("Search range:##sgfr"));
 
-            if (ImGui::RadioButton("Song",curQueryRangeY==0)) {
+            if (ImGui::RadioButton(_L("Song##sgfr"),curQueryRangeY==0)) {
               curQueryRangeY=0;
             }
-            if (ImGui::RadioButton("Selection",curQueryRangeY==1)) {
+            if (ImGui::RadioButton(_L("Selection##sgfr"),curQueryRangeY==1)) {
               curQueryRangeY=1;
             }
-            if (ImGui::RadioButton("Pattern",curQueryRangeY==2)) {
+            if (ImGui::RadioButton(_L("Pattern##sgfr"),curQueryRangeY==2)) {
               curQueryRangeY=2;
             }
 
             ImGui::TableNextColumn();
-            ImGui::Checkbox("Confine to channels",&curQueryRangeX);
+            ImGui::Checkbox(_L("Confine to channels##sgfr"),&curQueryRangeX);
 
             ImGui::BeginDisabled(!curQueryRangeX);
             snprintf(tempID,1024,"%d: %s",curQueryRangeXMin+1,e->getChannelName(curQueryRangeXMin));
-            if (ImGui::BeginCombo("From",tempID)) {
+            if (ImGui::BeginCombo(_L("From##sgfr"),tempID)) {
               for (int i=0; i<e->getTotalChannelCount(); i++) {
                 snprintf(tempID,1024,"%d: %s",i+1,e->getChannelName(i));
                 if (ImGui::Selectable(tempID,curQueryRangeXMin==i)) {
@@ -811,7 +888,7 @@ void FurnaceGUI::drawFindReplace() {
             }
 
             snprintf(tempID,1024,"%d: %s",curQueryRangeXMax+1,e->getChannelName(curQueryRangeXMax));
-            if (ImGui::BeginCombo("To",tempID)) {
+            if (ImGui::BeginCombo(_L("To##sgfr"),tempID)) {
               for (int i=0; i<e->getTotalChannelCount(); i++) {
                 snprintf(tempID,1024,"%d: %s",i+1,e->getChannelName(i));
                 if (ImGui::Selectable(tempID,curQueryRangeXMax==i)) {
@@ -823,37 +900,37 @@ void FurnaceGUI::drawFindReplace() {
             ImGui::EndDisabled();
 
             ImGui::TableNextColumn();
-            ImGui::Text("Match effect position:");
+            ImGui::Text(_L("Match effect position:##sgfr"));
 
-            if (ImGui::RadioButton("No",curQueryEffectPos==0)) {
+            if (ImGui::RadioButton(_L("No##sgfr"),curQueryEffectPos==0)) {
               curQueryEffectPos=0;
             }
             if (ImGui::IsItemHovered()) {
-              ImGui::SetTooltip("match effects regardless of position.");
+              ImGui::SetTooltip(_L("match effects regardless of position.##sgfr"));
             }
-            if (ImGui::RadioButton("Lax",curQueryEffectPos==1)) {
+            if (ImGui::RadioButton(_L("Lax##sgfr"),curQueryEffectPos==1)) {
               curQueryEffectPos=1;
             }
             if (ImGui::IsItemHovered()) {
-              ImGui::SetTooltip("match effects only if they appear in-order.");
+              ImGui::SetTooltip(_L("match effects only if they appear in-order.##sgfr"));
             }
-            if (ImGui::RadioButton("Strict",curQueryEffectPos==2)) {
+            if (ImGui::RadioButton(_L("Strict##sgfr"),curQueryEffectPos==2)) {
               curQueryEffectPos=2;
             }
             if (ImGui::IsItemHovered()) {
-              ImGui::SetTooltip("match effects only if they appear exactly as specified.");
+              ImGui::SetTooltip(_L("match effects only if they appear exactly as specified.##sgfr"));
             }
 
             ImGui::EndTable();
           }
 
-          if (ImGui::Button("Find")) {
+          if (ImGui::Button(_L("Find##sgfr1"))) {
             doFind();
           }
         }
         ImGui::EndTabItem();
       }
-      if (ImGui::BeginTabItem("Replace")) {
+      if (ImGui::BeginTabItem(_L("Replace##sgfr"))) {
         if (ImGui::BeginTable("QueryReplace",3,ImGuiTableFlags_BordersOuter)) {
           ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed);
           ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch,0.5);
@@ -861,11 +938,26 @@ void FurnaceGUI::drawFindReplace() {
 
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
-          ImGui::Checkbox("Note",&queryReplaceNoteDo);
+          ImGui::Checkbox(_L("Note##sgfr1"),&queryReplaceNoteDo);
           ImGui::TableNextColumn();
           ImGui::BeginDisabled(!queryReplaceNoteDo);
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          ImGui::Combo("##NRMode",&queryReplaceNoteMode,queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+          //ImGui::Combo("##NRMode",&queryReplaceNoteMode,queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+          if (ImGui::BeginCombo("##NRMode",_L(queryReplaceModes[queryReplaceNoteMode])))
+          {
+            int k = 0;
+            while(queryReplaceModes[k])
+            {
+              if (ImGui::Selectable(_L(queryReplaceModes[k])))
+              {
+                queryReplaceNoteMode = k;
+              }
+
+              k++;
+            }
+
+            ImGui::EndCombo();
+          }
           ImGui::TableNextColumn();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (queryReplaceNoteMode==GUI_QUERY_REPLACE_SET) {
@@ -905,17 +997,32 @@ void FurnaceGUI::drawFindReplace() {
               if (queryReplaceNote>180) queryReplaceNote=180;
             }
           } else if (queryReplaceNoteMode==GUI_QUERY_REPLACE_SCALE) {
-            ImGui::Text("INVALID");
+            ImGui::Text(_L("INVALID##sgfr"));
           }
           ImGui::EndDisabled();
 
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
-          ImGui::Checkbox("Ins",&queryReplaceInsDo);
+          ImGui::Checkbox(_L("Ins##sgfr1"),&queryReplaceInsDo);
           ImGui::TableNextColumn();
           ImGui::BeginDisabled(!queryReplaceInsDo);
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          ImGui::Combo("##IRMode",&queryReplaceInsMode,queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+          //ImGui::Combo("##IRMode",&queryReplaceInsMode,queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+          if (ImGui::BeginCombo("##IRMode",_L(queryReplaceModes[queryReplaceInsMode])))
+          {
+            int k = 0;
+            while(queryReplaceModes[k])
+            {
+              if (ImGui::Selectable(_L(queryReplaceModes[k])))
+              {
+                queryReplaceInsMode = k;
+              }
+
+              k++;
+            }
+
+            ImGui::EndCombo();
+          }
           ImGui::TableNextColumn();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (queryReplaceInsMode==GUI_QUERY_REPLACE_SET) {
@@ -940,11 +1047,26 @@ void FurnaceGUI::drawFindReplace() {
 
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
-          ImGui::Checkbox("Volume",&queryReplaceVolDo);
+          ImGui::Checkbox(_L("Volume##sgfr1"),&queryReplaceVolDo);
           ImGui::TableNextColumn();
           ImGui::BeginDisabled(!queryReplaceVolDo);
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          ImGui::Combo("##VRMode",&queryReplaceVolMode,queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+          //ImGui::Combo("##VRMode",&queryReplaceVolMode,queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+          if (ImGui::BeginCombo("##VRMode",_L(queryReplaceModes[queryReplaceVolMode])))
+          {
+            int k = 0;
+            while(queryReplaceModes[k])
+            {
+              if (ImGui::Selectable(_L(queryReplaceModes[k])))
+              {
+                queryReplaceVolMode = k;
+              }
+
+              k++;
+            }
+
+            ImGui::EndCombo();
+          }
           ImGui::TableNextColumn();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (queryReplaceVolMode==GUI_QUERY_REPLACE_SET) {
@@ -971,11 +1093,26 @@ void FurnaceGUI::drawFindReplace() {
             ImGui::PushID(0x100+i);
             ImGui::TableNextRow();
             ImGui::TableNextColumn();
-            ImGui::Checkbox("Effect",&queryReplaceEffectDo[i]);
+            ImGui::Checkbox(_L("Effect##sgfr1"),&queryReplaceEffectDo[i]);
             ImGui::TableNextColumn();
             ImGui::BeginDisabled(!queryReplaceEffectDo[i]);
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-            ImGui::Combo("##ERMode",&queryReplaceEffectMode[i],queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+            //ImGui::Combo("##ERMode",&queryReplaceEffectMode[i],queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+            if (ImGui::BeginCombo("##ERMode",_L(queryReplaceModes[queryReplaceEffectMode[i]])))
+            {
+              int k = 0;
+              while(queryReplaceModes[k])
+              {
+                if (ImGui::Selectable(_L(queryReplaceModes[k])))
+                {
+                  queryReplaceEffectMode[i] = k;
+                }
+
+                k++;
+              }
+
+              ImGui::EndCombo();
+            }
             ImGui::TableNextColumn();
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             if (queryReplaceEffectMode[i]==GUI_QUERY_REPLACE_SET) {
@@ -1000,11 +1137,26 @@ void FurnaceGUI::drawFindReplace() {
 
             ImGui::TableNextRow();
             ImGui::TableNextColumn();
-            ImGui::Checkbox("Value",&queryReplaceEffectValDo[i]);
+            ImGui::Checkbox(_L("Value##sgfr1"),&queryReplaceEffectValDo[i]);
             ImGui::TableNextColumn();
             ImGui::BeginDisabled(!queryReplaceEffectValDo[i]);
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-            ImGui::Combo("##ERModeV",&queryReplaceEffectValMode[i],queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+            //ImGui::Combo("##ERModeV",&queryReplaceEffectValMode[i],queryReplaceModes,GUI_QUERY_REPLACE_MAX);
+            if (ImGui::BeginCombo("##ERModeV",_L(queryReplaceModes[queryReplaceEffectValMode[i]])))
+            {
+              int k = 0;
+              while(queryReplaceModes[k])
+              {
+                if (ImGui::Selectable(_L(queryReplaceModes[k])))
+                {
+                  queryReplaceEffectValMode[i] = k;
+                }
+
+                k++;
+              }
+
+              ImGui::EndCombo();
+            }
             ImGui::TableNextColumn();
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             if (queryReplaceEffectValMode[i]==GUI_QUERY_REPLACE_SET) {
@@ -1034,14 +1186,14 @@ void FurnaceGUI::drawFindReplace() {
           ImGui::TableNextColumn();
           ImGui::TableNextColumn();
           if (queryReplaceEffectCount<8) {
-            if (ImGui::Button("Add effect")) {
+            if (ImGui::Button(_L("Add effect##sgfr1"))) {
               queryReplaceEffectCount++;
             }
           }
           ImGui::TableNextColumn();
           if (queryReplaceEffectCount>0) {
             pushDestColor();
-            if (ImGui::Button("Remove effect")) {
+            if (ImGui::Button(_L("Remove effect##sgfr1"))) {
               queryReplaceEffectCount--;
             }
             popDestColor();
@@ -1049,20 +1201,20 @@ void FurnaceGUI::drawFindReplace() {
 
           ImGui::EndTable();
         }
-        ImGui::Text("Effect replace mode:");
-        if (ImGui::RadioButton("Replace matches only",queryReplaceEffectPos==1)) {
+        ImGui::Text(_L("Effect replace mode:##sgfr"));
+        if (ImGui::RadioButton(_L("Replace matches only##sgfr"),queryReplaceEffectPos==1)) {
           queryReplaceEffectPos=1;
         }
-        if (ImGui::RadioButton("Replace matches, then free spaces",queryReplaceEffectPos==2)) {
+        if (ImGui::RadioButton(_L("Replace matches, then free spaces##sgfr"),queryReplaceEffectPos==2)) {
           queryReplaceEffectPos=2;
         }
-        if (ImGui::RadioButton("Clear effects",queryReplaceEffectPos==0)) {
+        if (ImGui::RadioButton(_L("Clear effects##sgfr"),queryReplaceEffectPos==0)) {
           queryReplaceEffectPos=0;
         }
-        if (ImGui::RadioButton("Insert in free spaces",queryReplaceEffectPos==3)) {
+        if (ImGui::RadioButton(_L("Insert in free spaces##sgfr"),queryReplaceEffectPos==3)) {
           queryReplaceEffectPos=3;
         }
-        if (ImGui::Button("Replace##QueryReplace")) {
+        if (ImGui::Button(_L("Replace##QueryReplace"))) {
           doReplace();
         }
         ImGui::EndTabItem();

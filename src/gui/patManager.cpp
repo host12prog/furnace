@@ -32,17 +32,17 @@ void FurnaceGUI::drawPatManager() {
   char id[1024];
   unsigned char isUsed[DIV_MAX_PATTERNS];
   bool isNull[DIV_MAX_PATTERNS];
-  if (ImGui::Begin("Pattern Manager",&patManagerOpen,globalWinFlags)) {
-    ImGui::Text("Global Tasks");
+  if (ImGui::Begin("Pattern Manager",&patManagerOpen,globalWinFlags, _L("Pattern Manager###Pattern Manager"))) {
+    ImGui::Text(_L("Global Tasks##sgpm"));
 
-    if (ImGui::Button("De-duplicate patterns")) {
+    if (ImGui::Button(_L("De-duplicate patterns##sgpm"))) {
       e->lockEngine([this]() {
         e->curSubSong->optimizePatterns();
       });
       MARK_MODIFIED;
     }
     ImGui::SameLine();
-    if (ImGui::Button("Re-arrange patterns")) {
+    if (ImGui::Button(_L("Re-arrange patterns##sgpm"))) {
       e->lockEngine([this]() {
         e->curSubSong->rearrangePatterns();
       });
@@ -88,9 +88,9 @@ void FurnaceGUI::drawPatManager() {
             ImGui::PushFont(mainFont);
             ImGui::PushStyleColor(ImGuiCol_Text,uiColors[GUI_COLOR_TEXT]);
             if (isNull[k]) {
-              ImGui::SetTooltip("Pattern %.2X\n- not allocated",k);
+              ImGui::SetTooltip(_L("Pattern %.2X\n- not allocated##sgpm"),k);
             } else {
-              ImGui::SetTooltip("Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase",k,isUsed[k],100.0*(double)isUsed[k]/(double)e->curSubSong->ordersLen);
+              ImGui::SetTooltip(_L("Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase##sgpm"),k,isUsed[k],100.0*(double)isUsed[k]/(double)e->curSubSong->ordersLen);
             }
             ImGui::PopStyleColor();
             ImGui::PopFont();
