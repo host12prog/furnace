@@ -59,7 +59,7 @@ void DivLocale::addTranslationsTemplate()
     // # sgef  src/gui/effectList.cpp
     // # sgeo  src/gui/exportOptions.cpp
     // # sgfd  src/gui/fileDialog.cpp
-    // @ sgfr  src/gui/findReplace.cpp
+    // # sgfr  src/gui/findReplace.cpp
     // # sgfm  src/gui/fmPreview.cpp
     // # sgfo  src/gui/fonts.cpp
     // # sggd  src/gui/gradient.cpp
@@ -71,7 +71,7 @@ void DivLocale::addTranslationsTemplate()
     // X sglo  src/gui/log.cpp
     // # sgmm  src/gui/midiMap.cpp
     // # sgmx  src/gui/mixer.cpp
-    //   sgns  src/gui/newSong.cpp
+    // # sgns  src/gui/newSong.cpp
     // # sgor  src/gui/orders.cpp
     // # sgos  src/gui/osc.cpp
     // # sgpm  src/gui/patManager.cpp
@@ -1213,6 +1213,15 @@ void DivLocale::addTranslationsTemplate()
     strings["Metronome##sgmx"].plurals[0] = "=Metronome";
     strings["System##sgmx1"].plurals[0] = "=System";
     strings["disconnect all##sgmx"].plurals[0] = "=disconnect all";
+
+    //   sgns  src/gui/newSong.cpp
+
+    strings["Choose a System!##sgns"].plurals[0] = "=Choose a System!";
+    strings["Search...##sgns"].plurals[0] = "=Search...";
+    strings["Categories##sgns"].plurals[0] = "=Categories";
+    strings["Systems##sgns"].plurals[0] = "=Systems";
+    strings["I'm feeling lucky##sgns"].plurals[0] = "=I'm feeling lucky";
+    strings["Cancel##sgns"].plurals[0] = "=Cancel";
 
     //   sgor  src/gui/orders.cpp
 

@@ -39,8 +39,8 @@ if (ImGui::IsItemHovered()) { \
       DivSystem chip=chips[chipIndex]; \
       const DivSysDef* sysDef=e->getSystemDef(chip); \
       ImGui::PushTextWrapPos(MIN(scrW*dpiScale,400.0f*dpiScale)); \
-      ImGui::Text("%s (x%d): ",sysDef->name,chipCounts[chip]); \
-      ImGui::Text("%s",sysDef->description); \
+      ImGui::Text("%s (x%d): ",_L(sysDef->name),chipCounts[chip]); \
+      ImGui::Text("%s",_L(sysDef->description)); \
       ImGui::PopTextWrapPos(); \
       if (chipIndex+1<chips.size()) { \
         ImGui::Separator(); \
@@ -56,8 +56,8 @@ void FurnaceGUI::drawNewSong() {
   bool accepted=false;
 
   ImGui::PushFont(bigFont);
-  ImGui::SetCursorPosX((ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize("Choose a System!").x)*0.5);
-  ImGui::Text("Choose a System!");
+  ImGui::SetCursorPosX((ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(_L("Choose a System!##sgns")).x)*0.5);
+  ImGui::Text(_L("Choose a System!##sgns"));
   ImGui::PopFont();
 
   ImVec2 avail=ImGui::GetContentRegionAvail();
@@ -67,7 +67,7 @@ void FurnaceGUI::drawNewSong() {
     if (newSongFirstFrame)
       ImGui::SetKeyboardFocusHere();
     ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-    if (ImGui::InputTextWithHint("##SysSearch","Search...",&newSongQuery)) {
+    if (ImGui::InputTextWithHint("##SysSearch",_L("Search...##sgns"),&newSongQuery)) {
       String lowerCase=newSongQuery;
       
       for (char& i: lowerCase) {
@@ -117,9 +117,9 @@ void FurnaceGUI::drawNewSong() {
       if (newSongQuery.empty()) {
         ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
         ImGui::TableNextColumn();
-        ImGui::Text("Categories");
+        ImGui::Text(_L("Categories##sgns"));
         ImGui::TableNextColumn();
-        ImGui::Text("Systems");
+        ImGui::Text(_L("Systems##sgns"));
       }
 
       ImGui::TableNextRow();
@@ -129,11 +129,11 @@ void FurnaceGUI::drawNewSong() {
         ImGui::TableNextColumn();
         int index=0;
         for (FurnaceGUISysCategory& i: sysCategories) {
-          if (ImGui::Selectable(i.name,newSongCategory==index,ImGuiSelectableFlags_DontClosePopups)) { \
+          if (ImGui::Selectable(_L(i.name),newSongCategory==index,ImGuiSelectableFlags_DontClosePopups)) { \
             newSongCategory=index;
           }
           if (ImGui::IsItemHovered()) {
-            ImGui::SetTooltip("%s",i.description);
+            ImGui::SetTooltip("%s",_L(i.description));
           }
           index++;
         }
@@ -153,7 +153,7 @@ void FurnaceGUI::drawNewSong() {
 
           if(sysdef->menuStatus == MENU_STATUS_LIST_START && showing_search_results == false)
           {
-            if(ImGui::TreeNode(sysdef->name))
+            if(ImGui::TreeNode(_L(sysdef->name)))
             {
               SHOW_HOVER_INFO
 
@@ -162,7 +162,7 @@ void FurnaceGUI::drawNewSong() {
                 sysdef = &category[i];
                 i++;
                 
-                if (ImGui::Selectable(sysdef->name,false,ImGuiSelectableFlags_DontClosePopups)) {
+                if (ImGui::Selectable(_L(sysdef->name),false,ImGuiSelectableFlags_DontClosePopups)) {
                   nextDesc=sysdef->definition;
                   nextDescName=sysdef->name;
                   accepted=true;
@@ -191,7 +191,7 @@ void FurnaceGUI::drawNewSong() {
 
           else
           {
-            if (ImGui::Selectable(sysdef->name,false,ImGuiSelectableFlags_DontClosePopups)) {
+            if (ImGui::Selectable(_L(sysdef->name),false,ImGuiSelectableFlags_DontClosePopups)) {
               nextDesc=sysdef->definition;
               nextDescName=sysdef->name;
               accepted=true;
@@ -209,7 +209,7 @@ void FurnaceGUI::drawNewSong() {
   }
   ImGui::EndChild();
 
-  if (ImGui::Button("I'm feeling lucky")) {
+  if (ImGui::Button(_L("I'm feeling lucky##sgns"))) {
     if (sysCategories.size()==0) {
       ImGui::CloseCurrentPopup();
     } else {
@@ -227,7 +227,7 @@ void FurnaceGUI::drawNewSong() {
 
   ImGui::SameLine();
 
-  if (ImGui::Button("Cancel") || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+  if (ImGui::Button(_L("Cancel##sgns")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
     ImGui::CloseCurrentPopup();
   }
 
