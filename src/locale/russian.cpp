@@ -1108,23 +1108,23 @@ void DivLocale::addTranslationsRussian()
 
     //   sgmx  src/gui/mixer.cpp
 
-    strings["input##sgmx"].plurals[0] = "=input";
-    strings["output##sgmx"].plurals[0] = "=output";
-    strings["Mixer##sgmx"].plurals[0] = "=Mixer";
-    strings["Master Volume##sgmx"].plurals[0] = "=Master Volume";
-    strings["Invert##sgmx"].plurals[0] = "=Invert";
-    strings["Volume##sgmx"].plurals[0] = "=Volume";
-    strings["Panning##sgmx"].plurals[0] = "=Panning";
-    strings["Front/Rear##sgmx"].plurals[0] = "=Front/Rear";
-    strings["Patchbay##sgmx"].plurals[0] = "=Patchbay";
-    strings["Automatic patchbay##sgmx"].plurals[0] = "=Automatic patchbay";
-    strings["Display hidden ports##sgmx"].plurals[0] = "=Display hidden ports";
-    strings["Display internal##sgmx"].plurals[0] = "=Display internal";
-    strings["System##sgmx0"].plurals[0] = "=System";
-    strings["Sample Preview##sgmx"].plurals[0] = "=Sample Preview";
-    strings["Metronome##sgmx"].plurals[0] = "=Metronome";
-    strings["System##sgmx1"].plurals[0] = "=System";
-    strings["disconnect all##sgmx"].plurals[0] = "=disconnect all";
+    strings["input##sgmx"].plurals[0] = "вход";
+    strings["output##sgmx"].plurals[0] = "выход";
+    strings["Mixer##sgmx"].plurals[0] = "Микшер";
+    strings["Master Volume##sgmx"].plurals[0] = "Общая громкость";
+    strings["Invert##sgmx"].plurals[0] = "Инвертировать";
+    strings["Volume##sgmx"].plurals[0] = "Громкость";
+    strings["Panning##sgmx"].plurals[0] = "Панорамирование";
+    strings["Front/Rear##sgmx"].plurals[0] = "Передн./задн.";
+    strings["Patchbay##sgmx"].plurals[0] = "Соединение каналов";
+    strings["Automatic patchbay##sgmx"].plurals[0] = "Автоматически";
+    strings["Display hidden ports##sgmx"].plurals[0] = "Отобразить скрытые порты";
+    strings["Display internal##sgmx"].plurals[0] = "Внутренние порты";
+    strings["System##sgmx0"].plurals[0] = "Система";
+    strings["Sample Preview##sgmx"].plurals[0] = "Превью сэмпла";
+    strings["Metronome##sgmx"].plurals[0] = "Метроном";
+    strings["System##sgmx1"].plurals[0] = "Система";
+    strings["disconnect all##sgmx"].plurals[0] = "отсоединить все";
 
     //   sgor  src/gui/orders.cpp
 
@@ -1282,6 +1282,9 @@ void DivLocale::addTranslationsRussian()
     strings["NEC PC-98 (with PC-9801-86)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86)";
     strings["NEC PC-98 (with PC-9801-86; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86; extended channel 3)";
     strings["NEC PC-98 (with PC-9801-86; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86; extended channel 3 and CSM)";
+    strings["NEC PC-98 (with PC-9801-86) stereo##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86) stereo";
+    strings["NEC PC-98 (with PC-9801-86; extended channel 3) stereo##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86; extended channel 3) stereo";
+    strings["NEC PC-98 (with PC-9801-86; extended channel 3 and CSM) stereo##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86; extended channel 3 and CSM) stereo";
     strings["NEC PC-98 (with PC-9801-73)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-73)";
     strings["NEC PC-98 (with PC-9801-73; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-73; extended channel 3)";
     strings["NEC PC-98 (with PC-9801-73; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-73; extended channel 3 and CSM)";
@@ -2887,33 +2890,33 @@ void DivLocale::addTranslationsRussian()
     strings["Wrap text in song/subsong comments window.##sgse"].plurals[0] = "Переносить текст на новую строку в окне информации/комментариев к композиции.";
     strings["Frame shading in text windows##sgse"].plurals[0] = "Градиент в текстовых окнах";
     strings["Apply frame shading to the multiline text fields\nsuch as song/subsong info/comments.##sgse"].plurals[0] = "Применять градиент в окне информации/комментариев к композиции.";
-    strings["Color##sgse"].plurals[0] = "=Color";
-    strings["Color scheme##sgse"].plurals[0] = "=Color scheme";
-    strings["Import##sgse2"].plurals[0] = "=Import";
-    strings["Export##sgse2"].plurals[0] = "=Export";
-    strings["Reset defaults##sgse1"].plurals[0] = "=Reset defaults";
-    strings["Are you sure you want to reset the color scheme?##sgse"].plurals[0] = "=Are you sure you want to reset the color scheme?";
-    strings["Interface##sgse1"].plurals[0] = "=Interface";
-    strings["Frame shading##sgse"].plurals[0] = "=Frame shading";
-    strings["Interface (other)##sgse"].plurals[0] = "=Interface (other)";
-    strings["Miscellaneous##sgse"].plurals[0] = "=Miscellaneous";
-    strings["File Picker (built-in)##sgse"].plurals[0] = "=File Picker (built-in)";
-    strings["Oscilloscope##sgse"].plurals[0] = "=Oscilloscope";
-    strings["Wave (non-mono)##sgse"].plurals[0] = "=Wave (non-mono)";
-    strings["Volume Meter##sgse"].plurals[0] = "=Volume Meter";
-    strings["Orders##sgse2"].plurals[0] = "=Orders";
-    strings["Envelope View##sgse"].plurals[0] = "=Envelope View";
-    strings["FM Editor##sgse1"].plurals[0] = "=FM Editor";
-    strings["Macro Editor##sgse1"].plurals[0] = "=Macro Editor";
-    strings["Instrument Types##sgse"].plurals[0] = "=Instrument Types";
-    strings["Channel##sgse2"].plurals[0] = "=Channel";
-    strings["Pattern##sgse2"].plurals[0] = "=Pattern";
-    strings["Sample Editor##sgse"].plurals[0] = "=Sample Editor";
-    strings["Pattern Manager##sgse"].plurals[0] = "=Pattern Manager";
-    strings["Piano##sgse"].plurals[0] = "=Piano";
-    strings["Clock##sgse"].plurals[0] = "=Clock";
-    strings["Patchbay##sgse"].plurals[0] = "=Patchbay";
-    strings["Log Viewer##sgse"].plurals[0] = "=Log Viewer";
+    strings["Color##sgse"].plurals[0] = "Цвета";
+    strings["Color scheme##sgse"].plurals[0] = "Цветовая схема";
+    strings["Import##sgse2"].plurals[0] = "Импорт";
+    strings["Export##sgse2"].plurals[0] = "Экспорт";
+    strings["Reset defaults##sgse1"].plurals[0] = "Сбросить";
+    strings["Are you sure you want to reset the color scheme?##sgse"].plurals[0] = "Вы действительно хотите сбросить цветовую схему?";
+    strings["Interface##sgse1"].plurals[0] = "Интерфейс";
+    strings["Frame shading##sgse"].plurals[0] = "Затенение рамок";
+    strings["Interface (other)##sgse"].plurals[0] = "Интерфейс (другое)";
+    strings["Miscellaneous##sgse"].plurals[0] = "Разное";
+    strings["File Picker (built-in)##sgse"].plurals[0] = "Меню выбора файлов (встроенное)";
+    strings["Oscilloscope##sgse"].plurals[0] = "Осциллограф";
+    strings["Wave (non-mono)##sgse"].plurals[0] = "Волна (не моно)";
+    strings["Volume Meter##sgse"].plurals[0] = "Измеритель громкости";
+    strings["Orders##sgse2"].plurals[0] = "Матрица паттернов";
+    strings["Envelope View##sgse"].plurals[0] = "Визуализатор огибающей";
+    strings["FM Editor##sgse1"].plurals[0] = "Редактор FM-инструментов";
+    strings["Macro Editor##sgse1"].plurals[0] = "Редактор макросов";
+    strings["Instrument Types##sgse"].plurals[0] = "Типы инструментов";
+    strings["Channel##sgse2"].plurals[0] = "Канал";
+    strings["Pattern##sgse2"].plurals[0] = "Паттерн";
+    strings["Sample Editor##sgse"].plurals[0] = "Редактор сэмплов";
+    strings["Pattern Manager##sgse"].plurals[0] = "Менеджер паттернов";
+    strings["Piano##sgse"].plurals[0] = "Клавиатура пианино";
+    strings["Clock##sgse"].plurals[0] = "Часы";
+    strings["Patchbay##sgse"].plurals[0] = "Соединение каналов";
+    strings["Log Viewer##sgse"].plurals[0] = "Просмотр логов";
 
     // these are messy, but the ##CC_GUI... is required.
     strings["Button##CC_GUI_COLOR_BUTTON"].plurals[0] = "=Button##CC_GUI_COLOR_BUTTON";
