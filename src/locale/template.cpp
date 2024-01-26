@@ -95,8 +95,8 @@ void DivLocale::addTranslationsTemplate()
     // # sgsa  src/gui/sysPartNumber.cpp
     // # sgsp  src/gui/sysPicker.cpp
     // @ sgut  src/gui/util.cpp
-    //   sgvm  src/gui/volMeter.cpp
-    //   sgwe  src/gui/waveEdit.cpp
+    // # sgvm  src/gui/volMeter.cpp
+    // # sgwe  src/gui/waveEdit.cpp
     //   sgxy  src/gui/xyOsc.cpp
 
     ImGui::LocalizeRegisterEntries(GLocalizationEntriesTmTM, IM_ARRAYSIZE(GLocalizationEntriesTmTM));
@@ -1975,6 +1975,106 @@ void DivLocale::addTranslationsTemplate()
     //   sgsp  src/gui/sysPicker.cpp
 
     strings["Search...##sgsp"].plurals[0] = "=Search...";
+
+    // # sgvm  src/gui/volMeter.cpp
+
+    strings["Volume Meter###Volume Meter"].plurals[0] = "=Volume Meter###Volume Meter";
+
+    //   sgwe  src/gui/waveEdit.cpp
+
+    strings["Sine##sgwe0"].plurals[0] = "=Sine";
+    strings["Triangle##sgwe0"].plurals[0] = "=Triangle";
+    strings["Saw##sgwe0"].plurals[0] = "=Saw";
+    strings["Pulse##sgwe"].plurals[0] = "=Pulse";
+
+    strings["None##sgwe"].plurals[0] = "=None";
+    strings["Linear##sgwe"].plurals[0] = "=Linear";
+    strings["Cosine##sgwe"].plurals[0] = "=Cosine";
+    strings["Cubic##sgwe"].plurals[0] = "=Cubic";
+
+    strings["Sine##sgwe1"].plurals[0] = "=Sine";
+    strings["Rect. Sine##sgwe"].plurals[0] = "=Rect. Sine";
+    strings["Abs. Sine##sgwe"].plurals[0] = "=Abs. Sine";
+    strings["Quart. Sine##sgwe"].plurals[0] = "=Quart. Sine";
+    strings["Squish. Sine##sgwe"].plurals[0] = "=Squish. Sine";
+    strings["Abs. Squish. Sine##sgwe"].plurals[0] = "=Abs. Squish. Sine";
+    strings["Square##sgwe"].plurals[0] = "=Square";
+    strings["rectSquare##sgwe"].plurals[0] = "=rectSquare";
+    strings["Saw##sgwe1"].plurals[0] = "=Saw";
+    strings["Rect. Saw##sgwe"].plurals[0] = "=Rect. Saw";
+    strings["Abs. Saw##sgwe"].plurals[0] = "=Abs. Saw";
+    strings["Cubed Saw##sgwe"].plurals[0] = "=Cubed Saw";
+    strings["Rect. Cubed Saw##sgwe"].plurals[0] = "=Rect. Cubed Saw";
+    strings["Abs. Cubed Saw##sgwe"].plurals[0] = "=Abs. Cubed Saw";
+    strings["Cubed Sine##sgwe"].plurals[0] = "=Cubed Sine";
+    strings["Rect. Cubed Sine##sgwe"].plurals[0] = "=Rect. Cubed Sine";
+    strings["Abs. Cubed Sine##sgwe"].plurals[0] = "=Abs. Cubed Sine";
+    strings["Quart. Cubed Sine##sgwe"].plurals[0] = "=Quart. Cubed Sine";
+    strings["Squish. Cubed Sine##sgwe"].plurals[0] = "=Squish. Cubed Sine";
+    strings["Squish. Abs. Cub. Sine##sgwe"].plurals[0] = "=Squish. Abs. Cub. Sine";
+    strings["Triangle##sgwe1"].plurals[0] = "=Triangle";
+    strings["Rect. Triangle##sgwe"].plurals[0] = "=Rect. Triangle";
+    strings["Abs. Triangle##sgwe"].plurals[0] = "=Abs. Triangle";
+    strings["Quart. Triangle##sgwe"].plurals[0] = "=Quart. Triangle";
+    strings["Squish. Triangle##sgwe"].plurals[0] = "=Squish. Triangle";
+    strings["Abs. Squish. Triangle##sgwe"].plurals[0] = "=Abs. Squish. Triangle";
+    strings["Cubed Triangle##sgwe"].plurals[0] = "=Cubed Triangle";
+    strings["Rect. Cubed Triangle##sgwe"].plurals[0] = "=Rect. Cubed Triangle";
+    strings["Abs. Cubed Triangle##sgwe"].plurals[0] = "=Abs. Cubed Triangle";
+    strings["Quart. Cubed Triangle##sgwe"].plurals[0] = "=Quart. Cubed Triangle";
+    strings["Squish. Cubed Triangle##sgwe"].plurals[0] = "=Squish. Cubed Triangle";
+    strings["Squish. Abs. Cub. Triangle##sgwe"].plurals[0] = "=Squish. Abs. Cub. Triangle";
+
+    strings["Wavetable Editor###Wavetable Editor"].plurals[0] = "=Wavetable Editor###Wavetable Editor";
+    strings["no wavetable selected##sgwe"].plurals[0] = "=no wavetable selected";
+    strings["no wavetable selected##sgwe"].plurals[0] = "=no wavetable selected";
+    strings["select one...##sgwe"].plurals[0] = "=select one...";
+    strings["or##sgwe0"].plurals[0] = "=or";
+    strings["Open##sgwe0"].plurals[0] = "=Open";
+    strings["or##sgwe1"].plurals[0] = "=or";
+    strings["Create New##sgwe"].plurals[0] = "=Create New";
+    strings["Open##sgwe1"].plurals[0] = "=Open";
+    strings["Save##sgwe"].plurals[0] = "=Save";
+    strings["export .dmw...##sgwe"].plurals[0] = "=export .dmw...";
+    strings["export raw...##sgwe"].plurals[0] = "=export raw...";
+    strings["Steps##sgwe"].plurals[0] = "=Steps";
+    strings["Lines##sgwe"].plurals[0] = "=Lines";
+    strings["Width##sgwe"].plurals[0] = "=Width";
+    strings["use a width of:\n- any on Amiga/N163\n- 32 on Game Boy, PC Engine, SCC, Konami Bubble System, Namco WSG, Virtual Boy and WonderSwan\n- 64 on FDS\n- 128 on X1-010\nany other widths will be scaled during playback.##sgwe"].plurals[0] = "=use a width of:\n- any on Amiga/N163\n- 32 on Game Boy, PC Engine, SCC, Konami Bubble System, Namco WSG, Virtual Boy and WonderSwan\n- 64 on FDS\n- 128 on X1-010\nany other widths will be scaled during playback.";
+    strings["Height##sgwe"].plurals[0] = "=Height";
+    strings["use a height of:\n- 16 for Game Boy, WonderSwan, Namco WSG, Konami Bubble System, X1-010 Envelope shape and N163\n- 32 for PC Engine\n- 64 for FDS and Virtual Boy\n- 256 for X1-010, SCC and ES5503\nany other heights will be scaled during playback.##sgwe"].plurals[0] = "=use a height of:\n- 16 for Game Boy, WonderSwan, Namco WSG, Konami Bubble System, X1-010 Envelope shape and N163\n- 32 for PC Engine\n- 64 for FDS and Virtual Boy\n- 256 for X1-010, SCC and ES5503\nany other heights will be scaled during playback.";
+    strings["Shapes##sgwe"].plurals[0] = "=Shapes";
+    strings["Duty##sgwe"].plurals[0] = "=Duty";
+    strings["Exponent##sgwe"].plurals[0] = "=Exponent";
+    strings["XOR Point##sgwe"].plurals[0] = "=XOR Point";
+    strings["Amplitude/Phase##sgwe"].plurals[0] = "=Amplitude/Phase";
+    strings["Op##sgwe0"].plurals[0] = "=Op";
+    strings["Level##sgwe"].plurals[0] = "=Level";
+    strings["Mult##sgwe"].plurals[0] = "=Mult";
+    strings["FB##sgwe"].plurals[0] = "=FB";
+    strings["Op##sgwe1"].plurals[0] = "=Op";
+    strings["Waveform##sgwe"].plurals[0] = "=Waveform";
+    strings["Connection Diagram##sgwe"].plurals[0] = "=Connection Diagram";
+    strings["Connection Diagram##sgwe"].plurals[0] = "=Connection Diagram";
+    strings["Out##sgwe"].plurals[0] = "=Out";
+    strings["WaveTools##sgwe"].plurals[0] = "=WaveTools";
+    strings["Scale X##sgwe"].plurals[0] = "=Scale X";
+    strings["wavetable longer than 256 samples!##sgwe"].plurals[0] = "=wavetable longer than 256 samples!";
+    strings["Scale Y##sgwe"].plurals[0] = "=Scale Y";
+    strings["Offset X##sgwe"].plurals[0] = "=Offset X";
+    strings["Offset Y##sgwe"].plurals[0] = "=Offset Y";
+    strings["Smooth##sgwe"].plurals[0] = "=Smooth";
+    strings["Amplify##sgwe"].plurals[0] = "=Amplify";
+    strings["Normalize##sgwe"].plurals[0] = "=Normalize";
+    strings["Invert##sgwe"].plurals[0] = "=Invert";
+    strings["Reverse##sgwe"].plurals[0] = "=Reverse";
+    strings["Half##sgwe"].plurals[0] = "=Half";
+    strings["Double##sgwe"].plurals[0] = "=Double";
+    strings["Convert Signed/Unsigned##sgwe"].plurals[0] = "=Convert Signed/Unsigned";
+    strings["Randomize##sgwe"].plurals[0] = "=Randomize";
+    strings["Dec##sgwe"].plurals[0] = "=Dec";
+    strings["Hex##sgwe"].plurals[0] = "=Hex";
+    strings["Signed/Unsigned##sgwe"].plurals[0] = "=Signed/Unsigned";
 
 //REMEMBER to check for anything that calls the strings at the top!
 

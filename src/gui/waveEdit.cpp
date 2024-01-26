@@ -27,17 +27,17 @@
 #include <imgui.h>
 
 const char* waveGenBaseShapes[4]={
-  "Sine",
-  "Triangle",
-  "Saw",
-  "Pulse"
+  "Sine##sgwe0",
+  "Triangle##sgwe0",
+  "Saw##sgwe0",
+  "Pulse##sgwe"
 };
 
 const char* waveInterpolations[4]={
-  "None",
-  "Linear",
-  "Cosine",
-  "Cubic"
+  "None##sgwe",
+  "Linear##sgwe",
+  "Cosine##sgwe",
+  "Cubic##sgwe"
 };
 
 double sinus(double x) {
@@ -189,44 +189,44 @@ WaveFunc waveFuncs[]={
 };
 
 const char* fmWaveforms[] = {
-  "Sine",
-  "Rect. Sine",
-  "Abs. Sine",
-  "Quart. Sine",
-  "Squish. Sine",
-  "Abs. Squish. Sine",
+  "Sine##sgwe1",
+  "Rect. Sine##sgwe",
+  "Abs. Sine##sgwe",
+  "Quart. Sine##sgwe",
+  "Squish. Sine##sgwe",
+  "Abs. Squish. Sine##sgwe",
 
-  "Square",
-  "rectSquare",
+  "Square##sgwe",
+  "rectSquare##sgwe",
 
-  "Saw",
-  "Rect. Saw",
-  "Abs. Saw",
+  "Saw##sgwe1",
+  "Rect. Saw##sgwe",
+  "Abs. Saw##sgwe",
 
-  "Cubed Saw",
-  "Rect. Cubed Saw",
-  "Abs. Cubed Saw",
+  "Cubed Saw##sgwe",
+  "Rect. Cubed Saw##sgwe",
+  "Abs. Cubed Saw##sgwe",
 
-  "Cubed Sine",
-  "Rect. Cubed Sine",
-  "Abs. Cubed Sine",
-  "Quart. Cubed Sine",
-  "Squish. Cubed Sine",
-  "Squish. Abs. Cub. Sine",
+  "Cubed Sine##sgwe",
+  "Rect. Cubed Sine##sgwe",
+  "Abs. Cubed Sine##sgwe",
+  "Quart. Cubed Sine##sgwe",
+  "Squish. Cubed Sine##sgwe",
+  "Squish. Abs. Cub. Sine##sgwe",
 
-  "Triangle",
-  "Rect. Triangle",
-  "Abs. Triangle",
-  "Quart. Triangle",
-  "Squish. Triangle",
-  "Abs. Squish. Triangle",
+  "Triangle##sgwe1",
+  "Rect. Triangle##sgwe",
+  "Abs. Triangle##sgwe",
+  "Quart. Triangle##sgwe",
+  "Squish. Triangle##sgwe",
+  "Abs. Squish. Triangle##sgwe",
 
-  "Cubed Triangle",
-  "Rect. Cubed Triangle",
-  "Abs. Cubed Triangle",
-  "Quart. Cubed Triangle",
-  "Squish. Cubed Triangle",
-  "Squish. Abs. Cub. Triangle",
+  "Cubed Triangle##sgwe",
+  "Rect. Cubed Triangle##sgwe",
+  "Abs. Cubed Triangle##sgwe",
+  "Quart. Cubed Triangle##sgwe",
+  "Squish. Cubed Triangle##sgwe",
+  "Squish. Abs. Cub. Triangle##sgwe",
 };
 
 const size_t fmWaveformsLen=sizeof(fmWaveforms)/sizeof(fmWaveforms[0]);
@@ -409,8 +409,8 @@ void FurnaceGUI::drawWaveEdit() {
   if (ImGui::Begin("Wavetable Editor",&waveEditOpen,globalWinFlags|(settings.allowEditDocking?0:ImGuiWindowFlags_NoDocking),_L("Wavetable Editor###Wavetable Editor"))) {
     if (curWave<0 || curWave>=(int)e->song.wave.size()) {
       ImGui::SetCursorPosY(ImGui::GetCursorPosY()+(ImGui::GetContentRegionAvail().y-ImGui::GetFrameHeightWithSpacing()*2.0f)*0.5f);
-      CENTER_TEXT("no wavetable selected");
-      ImGui::Text("no wavetable selected");
+      CENTER_TEXT(_L("no wavetable selected##sgwe"));
+      ImGui::Text(_L("no wavetable selected##sgwe"));
       if (ImGui::BeginTable("noAssetCenter",3)) {
         ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch,0.5f);
         ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed);
@@ -421,7 +421,7 @@ void FurnaceGUI::drawWaveEdit() {
         ImGui::TableNextColumn();
 
         if (e->song.wave.size()>0) {
-          if (ImGui::BeginCombo("##WaveSelect","select one...")) {
+          if (ImGui::BeginCombo("##WaveSelect",_L("select one...##sgwe"))) {
             if (ImGui::BeginTable("WaveSelCombo",1,ImGuiTableFlags_ScrollY)) {
               actualWaveList();
               ImGui::EndTable();
@@ -429,16 +429,16 @@ void FurnaceGUI::drawWaveEdit() {
             ImGui::EndCombo();
           }
           ImGui::SameLine();
-          ImGui::TextUnformatted("or");
+          ImGui::TextUnformatted(_L("or##sgwe0"));
           ImGui::SameLine();
         }
-        if (ImGui::Button("Open")) {
+        if (ImGui::Button(_L("Open##sgwe0"))) {
           doAction(GUI_ACTION_WAVE_LIST_OPEN);
         }
         ImGui::SameLine();
-        ImGui::TextUnformatted("or");
+        ImGui::TextUnformatted(_L("or##sgwe1"));
         ImGui::SameLine();
-        if (ImGui::Button("Create New")) {
+        if (ImGui::Button(_L("Create New##sgwe"))) {
           doAction(GUI_ACTION_WAVE_LIST_ADD);
         }
 
@@ -464,38 +464,38 @@ void FurnaceGUI::drawWaveEdit() {
           doAction(GUI_ACTION_WAVE_LIST_OPEN_REPLACE);
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("Open");
+          ImGui::SetTooltip(_L("Open##sgwe1"));
         }
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_FLOPPY_O "##WESave")) {
           doAction(GUI_ACTION_WAVE_LIST_SAVE);
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("Save");
+          ImGui::SetTooltip(_L("Save##sgwe"));
         }
         if (ImGui::BeginPopupContextItem("WaveSaveFormats",ImGuiMouseButton_Right)) {
-          if (ImGui::MenuItem("save as .dmw...")) {
+          if (ImGui::MenuItem(_L("export .dmw...##sgwe"))) {
             doAction(GUI_ACTION_WAVE_LIST_SAVE_DMW);
           }
-          if (ImGui::MenuItem("save raw...")) {
+          if (ImGui::MenuItem(_L("export raw...##sgwe"))) {
             doAction(GUI_ACTION_WAVE_LIST_SAVE_RAW);
           }
           ImGui::EndPopup();
         }
         ImGui::SameLine();
 
-        if (ImGui::RadioButton("Steps",waveEditStyle==0)) {
+        if (ImGui::RadioButton(_L("Steps##sgwe"),waveEditStyle==0)) {
           waveEditStyle=0;
         }
         ImGui::SameLine();
-        if (ImGui::RadioButton("Lines",waveEditStyle==1)) {
+        if (ImGui::RadioButton(_L("Lines##sgwe"),waveEditStyle==1)) {
           waveEditStyle=1;
         }
 
         ImGui::TableNextColumn();
-        ImGui::Text("Width");
+        ImGui::Text(_L("Width##sgwe"));
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("use a width of:\n- any on Amiga/N163\n- 32 on Game Boy, PC Engine, SCC, Konami Bubble System, Namco WSG, Virtual Boy and WonderSwan\n- 64 on FDS\n- 128 on X1-010\nany other widths will be scaled during playback.");
+          ImGui::SetTooltip(_L("use a width of:\n- any on Amiga/N163\n- 32 on Game Boy, PC Engine, SCC, Konami Bubble System, Namco WSG, Virtual Boy and WonderSwan\n- 64 on FDS\n- 128 on X1-010\nany other widths will be scaled during playback.##sgwe"));
         }
         ImGui::SameLine();
         ImGui::SetNextItemWidth(96.0f*dpiScale);
@@ -507,9 +507,9 @@ void FurnaceGUI::drawWaveEdit() {
           MARK_MODIFIED;
         }
         ImGui::SameLine();
-        ImGui::Text("Height");
+        ImGui::Text(_L("Height##sgwe"));
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("use a height of:\n- 16 for Game Boy, WonderSwan, Namco WSG, Konami Bubble System, X1-010 Envelope shape and N163\n- 32 for PC Engine\n- 64 for FDS and Virtual Boy\n- 256 for X1-010, SCC and ES5503\nany other heights will be scaled during playback.");
+          ImGui::SetTooltip(_L("use a height of:\n- 16 for Game Boy, WonderSwan, Namco WSG, Konami Bubble System, X1-010 Envelope shape and N163\n- 32 for PC Engine\n- 64 for FDS and Virtual Boy\n- 256 for X1-010, SCC and ES5503\nany other heights will be scaled during playback.##sgwe"));
         }
         ImGui::SameLine();
         ImGui::SetNextItemWidth(96.0f*dpiScale);
@@ -575,13 +575,13 @@ void FurnaceGUI::drawWaveEdit() {
           waveGenSize.y=contentRegion.y;
           if (ImGui::BeginChild("WaveGenView",waveGenSize)) {
             if (ImGui::BeginTabBar("WaveGenOpt")) {
-              if (ImGui::BeginTabItem("Shapes")) {
+              if (ImGui::BeginTabItem(_L("Shapes##sgwe"))) {
                 waveGenFM=false;
 
                 if (waveGenBaseShape<0) waveGenBaseShape=0;
                 if (waveGenBaseShape>3) waveGenBaseShape=3;
                 ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-                if (CWSliderInt("##WGShape",&waveGenBaseShape,0,3,waveGenBaseShapes[waveGenBaseShape])) {
+                if (CWSliderInt("##WGShape",&waveGenBaseShape,0,3,_L(waveGenBaseShapes[waveGenBaseShape]))) {
                   if (waveGenBaseShape<0) waveGenBaseShape=0;
                   if (waveGenBaseShape>3) waveGenBaseShape=3;
                   doGenerateWave();
@@ -594,7 +594,7 @@ void FurnaceGUI::drawWaveEdit() {
                   ImGui::TableNextRow();
                   ImGui::TableNextColumn();
                   ImGui::AlignTextToFramePadding();
-                  ImGui::Text("Duty");
+                  ImGui::Text(_L("Duty##sgwe"));
                   ImGui::TableNextColumn();
                   ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
                   if (CWSliderFloat("##WGDuty",&waveGenDuty,0.0f,1.0f)) {
@@ -604,7 +604,7 @@ void FurnaceGUI::drawWaveEdit() {
                   ImGui::TableNextRow();
                   ImGui::TableNextColumn();
                   ImGui::AlignTextToFramePadding();
-                  ImGui::Text("Exponent");
+                  ImGui::Text(_L("Exponent##sgwe"));
                   ImGui::TableNextColumn();
                   ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
                   if (CWSliderInt("##WGExp",&waveGenPower,1,8)) {
@@ -614,7 +614,7 @@ void FurnaceGUI::drawWaveEdit() {
                   ImGui::TableNextRow();
                   ImGui::TableNextColumn();
                   ImGui::AlignTextToFramePadding();
-                  ImGui::Text("XOR Point");
+                  ImGui::Text(_L("XOR Point##sgwe"));
                   ImGui::TableNextColumn();
                   ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
                   if (CWSliderFloat("##WGXOR",&waveGenInvertPoint,0.0f,1.0f)) {
@@ -624,7 +624,7 @@ void FurnaceGUI::drawWaveEdit() {
                   ImGui::EndTable();
                 }
 
-                if (ImGui::TreeNode("Amplitude/Phase")) {
+                if (ImGui::TreeNode(_L("Amplitude/Phase##sgwe"))) {
                   if (ImGui::BeginTable("WGShapeProps",3)) {
                     ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed);
                     ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch,0.6f);
@@ -676,13 +676,13 @@ void FurnaceGUI::drawWaveEdit() {
 
                   ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
                   ImGui::TableNextColumn();
-                  ImGui::Text("Op");
+                  ImGui::Text(_L("Op##sgwe0"));
                   ImGui::TableNextColumn();
-                  ImGui::Text("Level");
+                  ImGui::Text(_L("Level##sgwe"));
                   ImGui::TableNextColumn();
-                  ImGui::Text("Mult");
+                  ImGui::Text(_L("Mult##sgwe"));
                   ImGui::TableNextColumn();
-                  ImGui::Text("FB");
+                  ImGui::Text(_L("FB##sgwe"));
 
                   for (int i=0; i<4; i++) {
                     ImGui::TableNextRow();
@@ -725,9 +725,9 @@ void FurnaceGUI::drawWaveEdit() {
 
                   ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
                   ImGui::TableNextColumn();
-                  ImGui::Text("Op");
+                  ImGui::Text(_L("Op##sgwe1"));
                   ImGui::TableNextColumn();
-                  ImGui::Text("Waveform");
+                  ImGui::Text(_L("Waveform##sgwe"));
 
                   for (int i=0; i<4; i++) {
                     ImGui::TableNextRow();
@@ -738,7 +738,7 @@ void FurnaceGUI::drawWaveEdit() {
                     ImGui::TableNextColumn();
                     ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
                     ImGui::PushID(i);
-                    if (CWSliderInt("##WGWAVEFORM",&fmWaveform[i],0,fmWaveformsLen-1,fmWaveforms[fmWaveform[i]])) {
+                    if (CWSliderInt("##WGWAVEFORM",&fmWaveform[i],0,fmWaveformsLen-1,_L(fmWaveforms[fmWaveform[i]]))) {
                       doGenerateWave();
                     }
                     ImGui::PopID();
@@ -746,8 +746,8 @@ void FurnaceGUI::drawWaveEdit() {
                   ImGui::EndTable();
                 }
 
-                CENTER_TEXT("Connection Diagram");
-                ImGui::Text("Connection Diagram");
+                CENTER_TEXT(_L("Connection Diagram##sgwe"));
+                ImGui::Text(_L("Connection Diagram##sgwe"));
 
                 if (ImGui::BeginTable("WGFMCon",6)) {
                   ImGui::TableNextRow();
@@ -762,7 +762,7 @@ void FurnaceGUI::drawWaveEdit() {
                   ImGui::TableNextColumn();
                   ImGui::Text("4");
                   ImGui::TableNextColumn();
-                  ImGui::Text("Out");
+                  ImGui::Text(_L("Out##sgwe"));
 
                   ImGui::TableNextRow();
                   ImGui::TableNextColumn();
@@ -869,7 +869,7 @@ void FurnaceGUI::drawWaveEdit() {
 
                 ImGui::EndTabItem();
               }
-              if (ImGui::BeginTabItem("WaveTools")) {
+              if (ImGui::BeginTabItem(_L("WaveTools##sgwe"))) {
                 if (ImGui::BeginTable("WGParamItems",2)) {
                   ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch);
                   ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed);
@@ -882,18 +882,18 @@ void FurnaceGUI::drawWaveEdit() {
                     if (waveGenScaleX>256) waveGenScaleX=256;
                   }
                   ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-                  if (CWSliderInt("##WGInterpolation",&waveInterpolation,0,3,waveInterpolations[waveInterpolation])) {
+                  if (CWSliderInt("##WGInterpolation",&waveInterpolation,0,3,_L(waveInterpolations[waveInterpolation]))) {
                     if (waveInterpolation<0) waveInterpolation=0;
                     if (waveInterpolation>3) waveInterpolation=3;
                   }
                   ImGui::TableNextColumn();
-                  if (ImGui::Button("Scale X")) {
+                  if (ImGui::Button(_L("Scale X##sgwe"))) {
                     if (waveGenScaleX>0 && wave->len!=waveGenScaleX) e->lockEngine([this,wave]() {
                       int origData[256];
                       // Copy original wave to temp buffer
                       // If longer than 256 samples, return
                       if (wave->len>256) {
-                        showError("wavetable longer than 256 samples!");
+                        showError(_L("wavetable longer than 256 samples!##sgwe"));
                         return;
                       }
                       memcpy(origData,wave->data,wave->len*sizeof(int));
@@ -957,7 +957,7 @@ void FurnaceGUI::drawWaveEdit() {
                     if (waveGenScaleY>256) waveGenScaleY=256;
                   }
                   ImGui::TableNextColumn();
-                  if (ImGui::Button("Scale Y")) {
+                  if (ImGui::Button(_L("Scale Y##sgwe"))) {
                     if (waveGenScaleY>0 && wave->max!=(waveGenScaleY-1)) e->lockEngine([this,wave]() {
                       for (int i=0; i<wave->len; i++) {
                         wave->data[i]=(wave->data[i]*(waveGenScaleY))/(wave->max+1);
@@ -975,7 +975,7 @@ void FurnaceGUI::drawWaveEdit() {
                     if (waveGenOffsetX>wave->len-1) waveGenOffsetX=wave->len-1;
                   }
                   ImGui::TableNextColumn();
-                  if (ImGui::Button("Offset X")) {
+                  if (ImGui::Button(_L("Offset X##sgwe"))) {
                     if (waveGenOffsetX!=0 && wave->len>0) e->lockEngine([this,wave]() {
                       int origData[256];
                       memcpy(origData,wave->data,wave->len*sizeof(int));
@@ -997,7 +997,7 @@ void FurnaceGUI::drawWaveEdit() {
                     if (waveGenOffsetY>wave->max) waveGenOffsetY=wave->max;
                   }
                   ImGui::TableNextColumn();
-                  if (ImGui::Button("Offset Y")) {
+                  if (ImGui::Button(_L("Offset Y##sgwe"))) {
                     if (waveGenOffsetY!=0) e->lockEngine([this,wave]() {
                       for (int i=0; i<wave->len; i++) {
                         wave->data[i]=CLAMP(wave->data[i]+waveGenOffsetY,0,wave->max);
@@ -1014,7 +1014,7 @@ void FurnaceGUI::drawWaveEdit() {
                     if (waveGenSmooth<1) waveGenSmooth=1;
                   }
                   ImGui::TableNextColumn();
-                  if (ImGui::Button("Smooth")) {
+                  if (ImGui::Button(_L("Smooth##sgwe"))) {
                     if (waveGenSmooth>0) e->lockEngine([this,wave]() {
                       int origData[256];
                       memcpy(origData,wave->data,wave->len*sizeof(int));
@@ -1042,7 +1042,7 @@ void FurnaceGUI::drawWaveEdit() {
                     if (waveGenAmplify>100.0f) waveGenAmplify=100.0f;
                   }
                   ImGui::TableNextColumn();
-                  if (ImGui::Button("Amplify")) {
+                  if (ImGui::Button(_L("Amplify##sgwe"))) {
                     if (waveGenAmplify!=1.0f) e->lockEngine([this,wave]() {
                       for (int i=0; i<wave->len; i++) {
                         wave->data[i]=CLAMP(round((float)(wave->data[i]-(int)( /* Clang can you stop complaining */ (int)(wave->max+1)/(int)2))*waveGenAmplify),(int)(-((wave->max+1)/2)),(int)(wave->max/2))+(int)((wave->max+1)/2);
@@ -1060,7 +1060,7 @@ void FurnaceGUI::drawWaveEdit() {
                 buttonSizeHalf.x-=ImGui::GetStyle().ItemSpacing.x;
                 buttonSizeHalf.x*=0.5;
 
-                if (ImGui::Button("Normalize",buttonSize)) {
+                if (ImGui::Button(_L("Normalize##sgwe"),buttonSize)) {
                   e->lockEngine([this,wave]() {
                     // find lowest point
                     int lowest=wave->max;
@@ -1093,7 +1093,7 @@ void FurnaceGUI::drawWaveEdit() {
                     MARK_MODIFIED;
                   });
                 }
-                if (ImGui::Button("Invert",buttonSizeHalf)) {
+                if (ImGui::Button(_L("Invert##sgwe"),buttonSizeHalf)) {
                   e->lockEngine([this,wave]() {
                     for (int i=0; i<wave->len; i++) {
                       wave->data[i]=wave->max-wave->data[i];
@@ -1102,7 +1102,7 @@ void FurnaceGUI::drawWaveEdit() {
                   });
                 }
                 ImGui::SameLine();
-                if (ImGui::Button("Reverse",buttonSizeHalf)) {
+                if (ImGui::Button(_L("Reverse##sgwe"),buttonSizeHalf)) {
                   e->lockEngine([this,wave]() {
                     int origData[256];
                     memcpy(origData,wave->data,wave->len*sizeof(int));
@@ -1114,7 +1114,7 @@ void FurnaceGUI::drawWaveEdit() {
                   });
                 }
 
-                if (ImGui::Button("Half",buttonSizeHalf)) {
+                if (ImGui::Button(_L("Half##sgwe"),buttonSizeHalf)) {
                   int origData[256];
                   memcpy(origData,wave->data,wave->len*sizeof(int));
 
@@ -1124,7 +1124,7 @@ void FurnaceGUI::drawWaveEdit() {
                   MARK_MODIFIED;
                 }
                 ImGui::SameLine();
-                if (ImGui::Button("Double",buttonSizeHalf)) {
+                if (ImGui::Button(_L("Double##sgwe"),buttonSizeHalf)) {
                   int origData[256];
                   memcpy(origData,wave->data,wave->len*sizeof(int));
 
@@ -1134,7 +1134,7 @@ void FurnaceGUI::drawWaveEdit() {
                   MARK_MODIFIED;
                 }
 
-                if (ImGui::Button("Convert Signed/Unsigned",buttonSize)) {
+                if (ImGui::Button(_L("Convert Signed/Unsigned##sgwe"),buttonSize)) {
                   if (wave->max>0) e->lockEngine([this,wave]() {
                     for (int i=0; i<wave->len; i++) {
                       if (wave->data[i]>(wave->max/2)) {
@@ -1146,7 +1146,7 @@ void FurnaceGUI::drawWaveEdit() {
                     MARK_MODIFIED;
                   });
                 }
-                if (ImGui::Button("Randomize",buttonSize)) {
+                if (ImGui::Button(_L("Randomize##sgwe"),buttonSize)) {
                   if (wave->max>0) e->lockEngine([this,wave]() {
                     for (int i=0; i<wave->len; i++) {
                       wave->data[i]=rand()%(wave->max+1);
@@ -1164,11 +1164,11 @@ void FurnaceGUI::drawWaveEdit() {
         ImGui::EndTable();
       }
 
-      if (ImGui::RadioButton("Dec",!waveHex)) {
+      if (ImGui::RadioButton(_L("Dec##sgwe"),!waveHex)) {
         waveHex=false;
       }
       ImGui::SameLine();
-      if (ImGui::RadioButton("Hex",waveHex)) {
+      if (ImGui::RadioButton(_L("Hex##sgwe"),waveHex)) {
         waveHex=true;
       }
       ImGui::SameLine();
@@ -1176,7 +1176,7 @@ void FurnaceGUI::drawWaveEdit() {
         waveSigned=!waveSigned;
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip("Signed/Unsigned");
+        ImGui::SetTooltip(_L("Signed/Unsigned##sgwe"));
       }
       ImGui::SameLine();
       ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x); // wavetable text input size found here
