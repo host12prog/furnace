@@ -91,9 +91,9 @@ void DivLocale::addTranslationsTemplate()
     // # sgss  src/gui/subSongs.cpp
     // # sgsc  src/gui/sysConf.cpp
     //   sgsx  src/gui/sysEx.cpp
-    //   sgsm  src/gui/sysManager.cpp
-    //   sgsa  src/gui/sysPartNumber.cpp
-    //   sgsp  src/gui/sysPicker.cpp
+    // # sgsm  src/gui/sysManager.cpp
+    // # sgsa  src/gui/sysPartNumber.cpp
+    // # sgsp  src/gui/sysPicker.cpp
     // @ sgut  src/gui/util.cpp
     //   sgvm  src/gui/volMeter.cpp
     //   sgwe  src/gui/waveEdit.cpp
@@ -1956,6 +1956,25 @@ void DivLocale::addTranslationsTemplate()
     strings["Reserved blocks for wavetables:##sgsc"].plurals[0] = "=Reserved blocks for wavetables:";
     strings["Reserve this many blocks 256 bytes each in sample memory.\nEach block holds one wavetable (is used for one wavetable channel),\nso reserve as many as you need.##sgsc"].plurals[0] = "=Reserve this many blocks 256 bytes each in sample memory.\nEach block holds one wavetable (is used for one wavetable channel),\nso reserve as many as you need.";
     strings["Custom clock rate##sgsc"].plurals[0] = "=Custom clock rate";
+
+    //   sgsm  src/gui/sysManager.cpp
+
+    strings["Chip Manager###Chip Manager"].plurals[0] = "=Chip Manager###Chip Manager";
+    strings["Preserve channel order##sgsm"].plurals[0] = "=Preserve channel order";
+    strings["Name##sgsm"].plurals[0] = "=Name";
+    strings["Actions##sgsm"].plurals[0] = "=Actions";
+    strings["(drag to swap chips)##sgsm"].plurals[0] = "=(drag to swap chips)";
+    strings["Are you sure you want to remove this chip?##sgsm"].plurals[0] = "=Are you sure you want to remove this chip?";
+    strings["Remove##sgsm"].plurals[0] = "=Remove";
+    strings["cannot add chip! (##sgsm"].plurals[0] = "=cannot add chip! (";
+
+    //   sgsa  src/gui/sysPartNumber.cpp
+
+    strings["ZXS Beeper##sgsa"].plurals[0] = "=ZXS Beeper";
+
+    //   sgsp  src/gui/sysPicker.cpp
+
+    strings["Search...##sgsp"].plurals[0] = "=Search...";
 
 //REMEMBER to check for anything that calls the strings at the top!
 
