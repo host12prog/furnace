@@ -1128,72 +1128,73 @@ void DivLocale::addTranslationsRussian()
 
     //   sgor  src/gui/orders.cpp
 
-    strings["Add new order##sgor"].plurals[0] = "=Add new order";
-    strings["Remove order##sgor"].plurals[0] = "=Remove order";
-    strings["Duplicate order (right-click to deep clone)##sgor"].plurals[0] = "=Duplicate order (right-click to deep clone)";
-    strings["Move order up##sgor"].plurals[0] = "=Move order up";
-    strings["Move order down##sgor"].plurals[0] = "=Move order down";
-    strings["Duplicate order at end of song (right-click to deep clone)##sgor"].plurals[0] = "=Duplicate order at end of song (right-click to deep clone)";
-    strings["Order change mode: entire row##sgor"].plurals[0] = "=Order change mode: entire row";
-    strings["Order change mode: one##sgor"].plurals[0] = "=Order change mode: one";
-    strings["Order edit mode: Select and type (scroll vertically)##sgor"].plurals[0] = "=Order edit mode: Select and type (scroll vertically)";
-    strings["Order edit mode: Select and type (scroll horizontally)##sgor"].plurals[0] = "=Order edit mode: Select and type (scroll horizontally)";
-    strings["Order edit mode: Select and type (don't scroll)##sgor"].plurals[0] = "=Order edit mode: Select and type (don't scroll)";
-    strings["Order edit mode: Click to change##sgor"].plurals[0] = "=Order edit mode: Click to change";
+    strings["Add new order##sgor"].plurals[0] = "Добавить строку";
+    strings["Remove order##sgor"].plurals[0] = "Удалить строку";
+    strings["Duplicate order (right-click to deep clone)##sgor"].plurals[0] = "Клонировать строку (ПКМ для клонирования с выделением новых индексов)";
+    strings["Move order up##sgor"].plurals[0] = "Сдвинуть строку вверх";
+    strings["Move order down##sgor"].plurals[0] = "двинуть строку вниз";
+    strings["Duplicate order at end of song (right-click to deep clone)##sgor"].plurals[0] = "Клонировать строку (ПКМ для клонирования с выделением новых индексов) в конец трека";
+    strings["Order change mode: entire row##sgor"].plurals[0] = "Режим изменения: вся строка";
+    strings["Order change mode: one##sgor"].plurals[0] = "Режим изменения: ячейка";
+    strings["Order edit mode: Select and type (scroll vertically)##sgor"].plurals[0] = "Режим редактирования: Выбрать и печатать (вертикальная прокрутка)";
+    strings["Order edit mode: Select and type (scroll horizontally)##sgor"].plurals[0] = "Режим редактирования: Выбрать и печатать (горизонтальная прокрутка)";
+    strings["Order edit mode: Select and type (don't scroll)##sgor"].plurals[0] = "Режим редактирования: Выбрать и печатать (без прокрутки)";
+    strings["Order edit mode: Click to change##sgor"].plurals[0] = "Режим редактирования: нажмите для изменения";
 
     //   sgos  src/gui/osc.cpp
 
-    strings["Oscilloscope###Oscilloscope"].plurals[0] = "=Oscilloscope###Oscilloscope";
-    strings["zoom: %.2fx (%.1fdB)##sgos"].plurals[0] = "=zoom: %.2fx (%.1fdB)";
-    strings["window size: %.1fms##sgos"].plurals[0] = "=window size: %.1fms";
-    strings["(-Infinity)dB##sgos"].plurals[0] = "=(-Infinity)dB";
+    strings["Oscilloscope###Oscilloscope"].plurals[0] = "Осциллограф###Oscilloscope";
+    strings["zoom: %.2fx (%.1fdB)##sgos"].plurals[0] = "увеличение: %.2fx (%.1f дБ)";
+    strings["window size: %.1fms##sgos"].plurals[0] = "шиирна окна: %.1f мс";
+    strings["(-Infinity)dB##sgos"].plurals[0] = "(минус бесконечность) дБ";
 
     //   sgpm  src/gui/patManager.cpp
 
-    strings["Pattern Manager###Pattern Manager"].plurals[0] = "=Pattern Manager###Pattern Manager";
-    strings["Global Tasks##sgpm"].plurals[0] = "=Global Tasks";
-    strings["De-duplicate patterns##sgpm"].plurals[0] = "=De-duplicate patterns";
-    strings["Re-arrange patterns##sgpm"].plurals[0] = "=Re-arrange patterns";
-    strings["Pattern %.2X\n- not allocated##sgpm"].plurals[0] = "=Pattern %.2X\n- not allocated";
-    strings["Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase##sgpm"].plurals[0] = "=Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase";
+    strings["Pattern Manager###Pattern Manager"].plurals[0] = "Менеджер паттернов###Pattern Manager";
+    strings["Global Tasks##sgpm"].plurals[0] = "Глобальное редактирование";
+    strings["De-duplicate patterns##sgpm"].plurals[0] = "Удалить дубликаты паттернов";
+    strings["Re-arrange patterns##sgpm"].plurals[0] = "Отсортировать паттерны";
+    strings["Pattern %.2X\n- not allocated##sgpm"].plurals[0] = "Паттерн %.2X\n- не используется";
+    strings["Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase##sgpm"].plurals[0] = "Паттерн %.2X\n- сколько раз встречается в треке: %d (%.0f%%)\n\nПКМ, чтобы удалить";
 
     //   sgpa  src/gui/pattern.cpp
 
-    strings["Pattern###Pattern"].plurals[0] = "=Pattern###Pattern";
-    strings["click for pattern options (effect columns/pattern names/visualizer)##sgpa"].plurals[0] = "=click for pattern options (effect columns/pattern names/visualizer)";
-    strings["Options:##sgpa"].plurals[0] = "=Options:";
-    strings["Effect columns/collapse##sgpa"].plurals[0] = "=Effect columns/collapse";
-    strings["Pattern names##sgpa"].plurals[0] = "=Pattern names";
-    strings["Channel group hints##sgpa"].plurals[0] = "=Channel group hints";
-    strings["Visualizer##sgpa"].plurals[0] = "=Visualizer";
-    strings["Channel status:##sgpa"].plurals[0] = "=Channel status:";
-    strings["No##_PCS0"].plurals[0] = "=No##_PCS0";
-    strings["Yes##_PCS1"].plurals[0] = "=Yes##_PCS1";
-    strings["WARNING!!##sgpa"].plurals[0] = "=WARNING!!";
-    strings["this instrument cannot be previewed because##sgpa"].plurals[0] = "=this instrument cannot be previewed because";
-    strings["none of the chips can play it##sgpa"].plurals[0] = "=none of the chips can play it";
-    strings["your instrument is in peril!! be careful...##sgpa"].plurals[0] = "=your instrument is in peril!! be careful...";
+    strings["Pattern###Pattern"].plurals[0] = "Паттерны###Pattern";
+    strings["click for pattern options (effect columns/pattern names/visualizer)##sgpa"].plurals[0] = "нажмите для открытия меню настроек (столбцы эффектов/названия паттернов/визуализатор эффектов)";
+    strings["Options:##sgpa"].plurals[0] = "Настройки:";
+    strings["Effect columns/collapse##sgpa"].plurals[0] = "Столбцы эффектов и свёртка канала";
+    strings["Pattern names##sgpa"].plurals[0] = "Названия паттернов";
+    strings["Channel group hints##sgpa"].plurals[0] = "Подсказки о группировке каналов";
+    strings["Visualizer##sgpa"].plurals[0] = "Визуализатор эффектов";
+    strings["Channel status:##sgpa"].plurals[0] = "Статус канала:";
+    strings["No##_PCS0"].plurals[0] = "Нет##_PCS0";
+    strings["Yes##_PCS1"].plurals[0] = "Да##_PCS1";
+    strings["WARNING!!##sgpa"].plurals[0] = "ВНИМАНИЕ!!!";
+    strings["this instrument cannot be previewed because##sgpa"].plurals[0] = "превью этого инструмента невозможно, потому что";
+    strings["none of the chips can play it##sgpa"].plurals[0] = "ни один из чипов не совместим с ним";
+    strings["your instrument is in peril!! be careful...##sgpa"].plurals[0] = "ваш инструмент под угрозой!! будьте осторожны...";
 
     //   sgpi  src/gui/piano.cpp
 
-    strings["Piano###Piano"].plurals[0] = "=Piano###Piano";
-    strings["Options##sgpi"].plurals[0] = "=Options";
-    strings["Key layout:##sgpi"].plurals[0] = "=Key layout:";
-    strings["Automatic##sgpi"].plurals[0] = "=Automatic";
-    strings["Standard##sgpi"].plurals[0] = "=Standard";
-    strings["Continuous##sgpi"].plurals[0] = "=Continuous";
-    strings["Value input pad:##sgpi"].plurals[0] = "=Value input pad:";
-    strings["Disabled##sgpi"].plurals[0] = "=Disabled";
-    strings["Replace piano##sgpi"].plurals[0] = "=Replace piano";
-    strings["Split (automatic)##sgpi"].plurals[0] = "=Split (automatic)";
-    strings["Split (always visible)##sgpi"].plurals[0] = "=Split (always visible)";
-    strings["Share play/edit offset/range##sgpi"].plurals[0] = "=Share play/edit offset/range";
-    strings["Read-only (can't input notes)##sgpi"].plurals[0] = "=Read-only (can't input notes)";
-    strings["Input Pad###Input Pad"].plurals[0] = "=Input Pad###Input Pad";
+    strings["Piano###Piano"].plurals[0] = "Клав. пианино###Piano";
+    strings["Options##sgpi"].plurals[0] = "Настройки";
+    strings["Key layout:##sgpi"].plurals[0] = "Компоновка клавиш:";
+    strings["Automatic##sgpi"].plurals[0] = "Автоматически";
+    strings["Standard##sgpi"].plurals[0] = "Стандартная";
+    strings["Continuous##sgpi"].plurals[0] = "Непрерывная";
+    strings["Value input pad:##sgpi"].plurals[0] = "Панель ввода значений:";
+    strings["Disabled##sgpi"].plurals[0] = "Выкл.";
+    strings["Replace piano##sgpi"].plurals[0] = "Заменяет пианино";
+    strings["Split (automatic)##sgpi"].plurals[0] = "Разделённая (автоматически)";
+    strings["Split (always visible)##sgpi"].plurals[0] = "Разделённая (всегда отображать)";
+    strings["Share play/edit offset/range##sgpi"].plurals[0] = "Соблюдать настройки из окна настроек воспроизв./ред.";
+    strings["Read-only (can't input notes)##sgpi"].plurals[0] = "Только чтение (нельзя вводить ноты)";
+    strings["Input Pad###Input Pad"].plurals[0] = "Панель ввода###Input Pad";
 
     //   sgpr  src/gui/presets.cpp
 
     strings["Game consoles##sgpr"].plurals[0] = "=Game consoles";
+    strings["let's play some chiptune making games!##sgpr"].plurals[0] = "=let's play some chiptune making games!";
     strings["Sega Genesis (extended channel 3)##sgpr"].plurals[0] = "=Sega Genesis (extended channel 3)";
     strings["Sega Genesis (DualPCM, extended channel 3)##sgpr"].plurals[0] = "=Sega Genesis (DualPCM, extended channel 3)";
     strings["Sega Genesis (with Sega CD)##sgpr"].plurals[0] = "=Sega Genesis (with Sega CD)";
@@ -2013,7 +2014,6 @@ void DivLocale::addTranslationsRussian()
 
     //WINDOW NAMES
 
-    strings["Pattern###Pattern"].plurals[0] = "Паттерны###Pattern";
     strings["Orders###Orders"].plurals[0] = "Матрица паттернов###Orders";
     strings["Statistics###Statistics"].plurals[0] = "Статистика###Statistics";
     strings["Song Info###Song Information"].plurals[0] = "О треке###Song Information";
@@ -2031,10 +2031,6 @@ void DivLocale::addTranslationsRussian()
     strings["Log Viewer###Log Viewer"].plurals[0] = "Просмотр логов###Log Viewer";
     strings["Mixer###Mixer"].plurals[0] = "Микшер###Mixer";
     strings["OrderSel###OrderSel"].plurals[0] = "Выб. матр. пат.###OrderSel";
-    strings["Oscilloscope###Oscilloscope"].plurals[0] = "Осциллограф###Oscilloscope";
-    strings["Pattern Manager###Pattern Manager"].plurals[0] = "Мен. паттернов###Pattern Manager";
-    strings["Input Pad###Input Pad"].plurals[0] = "Панель ввода###Input Pad";
-    strings["Piano###Piano"].plurals[0] = "Клав. пианино###Piano";
     strings["Register View###Register View"].plurals[0] = "Просмотр регистров###Register View";
     strings["Sample Editor###Sample Editor"].plurals[0] = "Редактор сэмплов###Sample Editor";
     strings["Song Comments###Song Comments"].plurals[0] = "Комментарии трека###Song Comments";

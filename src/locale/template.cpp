@@ -1267,6 +1267,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgpr  src/gui/presets.cpp
 
     strings["Game consoles##sgpr"].plurals[0] = "=Game consoles";
+    strings["let's play some chiptune making games!##sgpr"].plurals[0] = "=let's play some chiptune making games!";
     strings["Sega Genesis (extended channel 3)##sgpr"].plurals[0] = "=Sega Genesis (extended channel 3)";
     strings["Sega Genesis (DualPCM, extended channel 3)##sgpr"].plurals[0] = "=Sega Genesis (DualPCM, extended channel 3)";
     strings["Sega Genesis (with Sega CD)##sgpr"].plurals[0] = "=Sega Genesis (with Sega CD)";
