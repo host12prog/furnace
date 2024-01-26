@@ -1601,13 +1601,13 @@ void DivLocale::addTranslationsRussian()
 
     //   sgsi  src/gui/songInfo.cpp
 
-    strings["Song Info###Song Information"].plurals[0] = "=Song Info###Song Information";
-    strings["Name##sgsi"].plurals[0] = "=Name";
-    strings["Author##sgsi"].plurals[0] = "=Author";
-    strings["Album##sgsi"].plurals[0] = "=Album";
-    strings["System##sgsi"].plurals[0] = "=System";
-    strings["Auto##sgsi"].plurals[0] = "=Auto";
-    strings["Tuning (A-4)##sgsi"].plurals[0] = "=Tuning (A-4)";
+    strings["Song Info###Song Information"].plurals[0] = "О треке###Song Information";
+    strings["Name##sgsi"].plurals[0] = "Название";
+    strings["Author##sgsi"].plurals[0] = "Автор";
+    strings["Album##sgsi"].plurals[0] = "Альбом";
+    strings["System##sgsi"].plurals[0] = "Система";
+    strings["Auto##sgsi"].plurals[0] = "Авто";
+    strings["Tuning (A-4)##sgsi"].plurals[0] = "Частота (ля 4-ой октавы)";
 
     // # sgsn  src/gui/songNotes.cpp
 
@@ -1615,45 +1615,45 @@ void DivLocale::addTranslationsRussian()
 
     //   sgsp  src/gui/speed.cpp
 
-    strings["Speed###Speed"].plurals[0] = "=Speed###Speed";
-    strings["Base Tempo##TempoOrHz"].plurals[0] = "=Base Tempo##TempoOrHz";
-    strings["Tick Rate##TempoOrHz"].plurals[0] = "=Tick Rate##TempoOrHz";
-    strings["click to display tick rate##sgsp"].plurals[0] = "=click to display tick rate";
-    strings["click to display base tempo##sgsp"].plurals[0] = "=click to display base tempo";
-    strings["Groove##sgsp"].plurals[0] = "=Groove";
-    strings["click for one speed##sgsp"].plurals[0] = "=click for one speed";
-    strings["Speeds##sgsp"].plurals[0] = "=Speeds";
-    strings["click for groove pattern##sgsp"].plurals[0] = "=click for groove pattern";
-    strings["Speed##sgsp"].plurals[0] = "=Speed";
-    strings["click for two (alternating) speeds##sgsp"].plurals[0] = "=click for two (alternating) speeds";
-    strings["Virtual Tempo##sgsp"].plurals[0] = "=Virtual Tempo";
-    strings["Numerator##sgsp"].plurals[0] = "=Numerator";
-    strings["Denominator (set to base tempo)##sgsp"].plurals[0] = "=Denominator (set to base tempo)";
-    strings["Divider##sgsp"].plurals[0] = "=Divider";
-    strings["Highlight##sgsp"].plurals[0] = "=Highlight";
-    strings["Pattern Length##sgsp"].plurals[0] = "=Pattern Length";
-    strings["Song Length##sgsp"].plurals[0] = "=Song Length";
+    strings["Speed###Speed"].plurals[0] = "Скорость###Speed";
+    strings["Base Tempo##TempoOrHz"].plurals[0] = "Основной темп##TempoOrHz";
+    strings["Tick Rate##TempoOrHz"].plurals[0] = "Частота движка##TempoOrHz";
+    strings["click to display tick rate##sgsp"].plurals[0] = "нажмите для отображения частоты движка";
+    strings["click to display base tempo##sgsp"].plurals[0] = "ажмите для отображения основного темпа";
+    strings["Groove##sgsp"].plurals[0] = "Ритм-паттерн";
+    strings["click for one speed##sgsp"].plurals[0] = "Нажмите для отображения одной скорости";
+    strings["Speeds##sgsp"].plurals[0] = "Скорости";
+    strings["click for groove pattern##sgsp"].plurals[0] = "Нажмите для отображения ритм-паттернов";
+    strings["Speed##sgsp"].plurals[0] = "Скорость";
+    strings["click for two (alternating) speeds##sgsp"].plurals[0] = "Нажмите для отображения двух (чередующихся) скоростей";
+    strings["Virtual Tempo##sgsp"].plurals[0] = "Виртуальный темп";
+    strings["Numerator##sgsp"].plurals[0] = "Числитель";
+    strings["Denominator (set to base tempo)##sgsp"].plurals[0] = "Знаменатель (установите равным основному темпу)";
+    strings["Divider##sgsp"].plurals[0] = "Делитель";
+    strings["Highlight##sgsp"].plurals[0] = "Подсветка";
+    strings["Pattern Length##sgsp"].plurals[0] = "Длина паттерна";
+    strings["Song Length##sgsp"].plurals[0] = "Длина трека";
 
     //   sgst  src/gui/stats.cpp
 
-    strings["Statistics###Statistics"].plurals[0] = "=Statistics###Statistics";
-    strings["Audio load##sgst"].plurals[0] = "=Audio load";
+    strings["Statistics###Statistics"].plurals[0] = "Статистика###Statistics";
+    strings["Audio load##sgst"].plurals[0] = "Нагрузка от аудио";
 
     //   sgss  src/gui/subSongs.cpp
 
-    strings["Subsongs###Subsongs"].plurals[0] = "=Subsongs###Subsongs";
-    strings["%d. <no name>##sgss0"].plurals[0] = "=%d. <no name>";
-    strings["%d. <no name>##sgss1"].plurals[0] = "=%d. <no name>";
-    strings["Move up##sgss"].plurals[0] = "=Move up";
-    strings["Move down##sgss"].plurals[0] = "=Move down";
-    strings["too many subsongs!##sgss0"].plurals[0] = "=too many subsongs!";
-    strings["Add##sgss"].plurals[0] = "=Add";
-    strings["too many subsongs!##sgss1"].plurals[0] = "=too many subsongs!";
-    strings["Duplicate##sgss"].plurals[0] = "=Duplicate";
-    strings["this is the only subsong!##sgss"].plurals[0] = "=this is the only subsong!";
-    strings["are you sure you want to remove this subsong?##sgss"].plurals[0] = "=are you sure you want to remove this subsong?";
-    strings["Remove##sgss"].plurals[0] = "=Remove";
-    strings["Name##sgss"].plurals[0] = "=Name";
+    strings["Subsongs###Subsongs"].plurals[0] = "Подпесни###Subsongs";
+    strings["%d. <no name>##sgss0"].plurals[0] = "%d. <без названия>";
+    strings["%d. <no name>##sgss1"].plurals[0] = "%d. <без названия>";
+    strings["Move up##sgss"].plurals[0] = "Сдвинуть вверх";
+    strings["Move down##sgss"].plurals[0] = "Сдвинуть вниз";
+    strings["too many subsongs!##sgss0"].plurals[0] = "слишком много подпесен!";
+    strings["Add##sgss"].plurals[0] = "Добавить";
+    strings["too many subsongs!##sgss1"].plurals[0] = "слишком много подпесен!";
+    strings["Duplicate##sgss"].plurals[0] = "Клонировать";
+    strings["this is the only subsong!##sgss"].plurals[0] = "это единственная подпесня!";
+    strings["are you sure you want to remove this subsong?##sgss"].plurals[0] = "вы действительно хотите удалить эту подпесню?";
+    strings["Remove##sgss"].plurals[0] = "Удалить";
+    strings["Name##sgss"].plurals[0] = "Название";
 
     //   sgsc  src/gui/sysConf.cpp
 
@@ -1863,9 +1863,6 @@ void DivLocale::addTranslationsRussian()
     //WINDOW NAMES
 
     strings["Orders###Orders"].plurals[0] = "Матрица паттернов###Orders";
-    strings["Statistics###Statistics"].plurals[0] = "Статистика###Statistics";
-    strings["Song Info###Song Information"].plurals[0] = "О треке###Song Information";
-    strings["Subsongs###Subsongs"].plurals[0] = "Подпесни###Subsongs";
     strings["About Furnace###About Furnace"].plurals[0] = "О Furnace###About Furnace";
     strings["Channels###Channels"].plurals[0] = "Каналы###Channels";
     strings["Oscilloscope (per-channel)###Oscilloscope (per-channel)"].plurals[0] = "Осциллографы (отд. кан.)###Oscilloscope (per-channel)";
@@ -1882,7 +1879,6 @@ void DivLocale::addTranslationsRussian()
     strings["Register View###Register View"].plurals[0] = "Просмотр регистров###Register View";
     strings["Sample Editor###Sample Editor"].plurals[0] = "Редактор сэмплов###Sample Editor";
     strings["Song Comments###Song Comments"].plurals[0] = "Комментарии трека###Song Comments";
-    strings["Speed###Speed"].plurals[0] = "Скорость###Speed";
     strings["Spoiler###Spoiler"].plurals[0] = "Спойлер###Spoiler";
     strings["Chip Manager###Chip Manager"].plurals[0] = "Управление чипами###Chip Manager";
     strings["Volume Meter###Volume Meter"].plurals[0] = "Измеритель громкости###Volume Meter";

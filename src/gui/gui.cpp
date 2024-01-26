@@ -715,7 +715,7 @@ void FurnaceGUI::autoDetectSystem() {
       if (k.second>1) {
         e->song.systemName+=fmt::sprintf("%d×",k.second);
       }
-      e->song.systemName+=e->getSystemName(k.first);
+      e->song.systemName+=_L(e->getSystemName(k.first));
       isFirst=false;
     }
   }
