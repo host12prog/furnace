@@ -158,6 +158,7 @@ void DivLocale::addTranslationsTemplate()
     strings["D65010G031 emulator (modified version) by cam900##sgab"].plurals[0] = "=D65010G031 emulator (modified version) by cam900";
     strings["Namco C140/C219 emulator (modified version) by cam900##sgab"].plurals[0] = "=Namco C140/C219 emulator (modified version) by cam900";
     strings["ESFMu emulator by Kagamiin~##sgab"].plurals[0] = "=ESFMu emulator by Kagamiin~";
+    strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] = "=PowerNoise emulator by scratchminer";
 
     strings["greetings to:##sgab"].plurals[0] = "=greetings to:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "=NEOART Costa Rica";
@@ -1354,6 +1355,9 @@ void DivLocale::addTranslationsTemplate()
     strings["NEC PC-98 (with PC-9801-86)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86)";
     strings["NEC PC-98 (with PC-9801-86; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86; extended channel 3)";
     strings["NEC PC-98 (with PC-9801-86; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86; extended channel 3 and CSM)";
+    strings["NEC PC-98 (with PC-9801-86) stereo##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86) stereo";
+    strings["NEC PC-98 (with PC-9801-86; extended channel 3) stereo##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86; extended channel 3) stereo";
+    strings["NEC PC-98 (with PC-9801-86; extended channel 3 and CSM) stereo##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86; extended channel 3 and CSM) stereo";
     strings["NEC PC-98 (with PC-9801-73)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-73)";
     strings["NEC PC-98 (with PC-9801-73; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-73; extended channel 3)";
     strings["NEC PC-98 (with PC-9801-73; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-73; extended channel 3 and CSM)";
@@ -2850,10 +2854,10 @@ void DivLocale::addTranslationsTemplate()
             "이 옵션은 Dear ImGui에 동적 글꼴 아틀라스가 구현될 때까지 임시 솔루션입니다.";
     strings["Program##sgse2"].plurals[0] = "=Program";
     strings["Title bar:##sgse"].plurals[0] = "=Title bar:";
-    strings["Furnace##tbar0"].plurals[0] = "=Furnace##tbar0";
-    strings["Song Name - Furnace##tbar1"].plurals[0] = "=Song Name - Furnace##tbar1";
-    strings["file_name.fur - Furnace##tbar2"].plurals[0] = "=file_name.fur - Furnace##tbar2";
-    strings["/path/to/file.fur - Furnace##tbar3"].plurals[0] = "=/path/to/file.fur - Furnace##tbar3";
+    strings["Furnace-B##tbar0"].plurals[0] = "=Furnace-B##tbar0";
+    strings["Song Name - Furnace-B##tbar1"].plurals[0] = "=Song Name - Furnace-B##tbar1";
+    strings["file_name.fur - Furnace-B##tbar2"].plurals[0] = "=file_name.fur - Furnace-B##tbar2";
+    strings["/path/to/file.fur - Furnace-B##tbar3"].plurals[0] = "=/path/to/file.fur - Furnace-B##tbar3";
     strings["Display system name on title bar##sgse"].plurals[0] = "=Display system name on title bar";
     strings["Display chip names instead of \"multi-system\" in title bar##sgse"].plurals[0] = "=Display chip names instead of \"multi-system\" in title bar##sgse";
     strings["Status bar:##sgse"].plurals[0] = "=Status bar:";
