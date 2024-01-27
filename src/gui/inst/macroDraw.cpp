@@ -606,7 +606,7 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
             // if you really need more than two macro modes please tell me.
             if (i.modeName!=NULL) {
               bool modeVal=i.get_macro()->mode;
-              String modeName=fmt::sprintf("%s##IMacroMode",i.modeName);
+              String modeName=fmt::sprintf("%s##IMacroMode",_L(i.modeName));
               if (ImGui::Checkbox(modeName.c_str(),&modeVal)) {
                 i.get_macro()->mode=modeVal;
               }

@@ -374,24 +374,29 @@ int FurnaceGUI::PlotCustomEx(ImGuiPlotType plot_type, const char* label, float (
             if (hoverFunc) {
               std::string hoverText=hoverFunc(v_idx+values_display_offset,v0,hoverFuncUser);
 
+              bool translate = true;
+
               if(hoverFunc == macroHoverGain)
               {
                 hoverText = realMacroHoverGain(v_idx+values_display_offset,v0,hoverFuncUser);
+                translate = false;
               }
 
               if(hoverFunc == macroHoverES5506FilterMode)
               {
                 hoverText = realMacroHoverES5506FilterMode(v_idx+values_display_offset,v0,hoverFuncUser);
+                translate = false;
               }
 
               if(hoverFunc == macroLFOWaves)
               {
                 hoverText = realMacroLFOWaves(v_idx+values_display_offset,v0,hoverFuncUser);
+                translate = false;
               }
 
               if (!hoverText.empty()) 
               {
-                ImGui::SetTooltip("%s",hoverText.c_str());
+                ImGui::SetTooltip("%s",translate ? _L(hoverText.c_str()) : hoverText.c_str());
               }
             } else {
               if (plot_type == ImGuiPlotType_Lines)
