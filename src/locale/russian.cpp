@@ -224,7 +224,7 @@ void DivLocale::addTranslationsRussian()
 
     //src/gui/clock.cpp
 
-    strings["Clock###Clock"].plurals[0] = "=Clock###Clock";
+    strings["Clock###Clock"].plurals[0] = "Часы###Clock";
 
     //src/gui/dataList.cpp
 
@@ -2028,7 +2028,6 @@ void DivLocale::addTranslationsRussian()
     strings["About Furnace###About Furnace"].plurals[0] = "О Furnace###About Furnace";
     strings["Channels###Channels"].plurals[0] = "Каналы###Channels";
     strings["Oscilloscope (per-channel)###Oscilloscope (per-channel)"].plurals[0] = "Осциллографы (отд. кан.)###Oscilloscope (per-channel)";
-    strings["Clock###Clock"].plurals[0] = "Часы###Clock";
     strings["Compatibility Flags###Compatibility Flags"].plurals[0] = "Флаги совместимости###Compatibility Flags";
     strings["Instruments###Instruments"].plurals[0] = "Инструменты###Instruments";
     strings["Wavetables###Wavetables"].plurals[0] = "Волновые таблицы###Wavetables";
@@ -2920,63 +2919,63 @@ void DivLocale::addTranslationsRussian()
     strings["Log Viewer##sgse"].plurals[0] = "Просмотр логов";
 
     // these are messy, but the ##CC_GUI... is required.
-    strings["Button##CC_GUI_COLOR_BUTTON"].plurals[0] = "=Button##CC_GUI_COLOR_BUTTON";
-    strings["Button (hovered)##CC_GUI_COLOR_BUTTON_HOVER"].plurals[0] = "=Button (hovered)##CC_GUI_COLOR_BUTTON_HOVER";
-    strings["Button (active)##CC_GUI_COLOR_BUTTON_ACTIVE"].plurals[0] = "=Button (active)##CC_GUI_COLOR_BUTTON_ACTIVE";
-    strings["Tab##CC_GUI_COLOR_TAB"].plurals[0] = "=Tab##CC_GUI_COLOR_TAB";
-    strings["Tab (hovered)##CC_GUI_COLOR_TAB_HOVER"].plurals[0] = "=Tab (hovered)##CC_GUI_COLOR_TAB_HOVER";
-    strings["Tab (active)##CC_GUI_COLOR_TAB_ACTIVE"].plurals[0] = "=Tab (active)##CC_GUI_COLOR_TAB_ACTIVE";
-    strings["Tab (unfocused)##CC_GUI_COLOR_TAB_UNFOCUSED"].plurals[0] = "=Tab (unfocused)##CC_GUI_COLOR_TAB_UNFOCUSED";
-    strings["Tab (unfocused and active)##CC_GUI_COLOR_TAB_UNFOCUSED_ACTIVE"].plurals[0] = "=Tab (unfocused and active)##CC_GUI_COLOR_TAB_UNFOCUSED_ACTIVE";
-    strings["ImGui header##CC_GUI_COLOR_IMGUI_HEADER"].plurals[0] = "=ImGui header##CC_GUI_COLOR_IMGUI_HEADER";
-    strings["ImGui header (hovered)##CC_GUI_COLOR_IMGUI_HEADER_HOVER"].plurals[0] = "=ImGui header (hovered)##CC_GUI_COLOR_IMGUI_HEADER_HOVER";
-    strings["ImGui header (active)##CC_GUI_COLOR_IMGUI_HEADER_ACTIVE"].plurals[0] = "=ImGui header (active)##CC_GUI_COLOR_IMGUI_HEADER_ACTIVE";
-    strings["Resize grip##CC_GUI_COLOR_RESIZE_GRIP"].plurals[0] = "=Resize grip##CC_GUI_COLOR_RESIZE_GRIP";
-    strings["Resize grip (hovered)##CC_GUI_COLOR_RESIZE_GRIP_HOVER"].plurals[0] = "=Resize grip (hovered)##CC_GUI_COLOR_RESIZE_GRIP_HOVER";
-    strings["Resize grip (active)##CC_GUI_COLOR_RESIZE_GRIP_ACTIVE"].plurals[0] = "=Resize grip (active)##CC_GUI_COLOR_RESIZE_GRIP_ACTIVE";
-    strings["Widget background##CC_GUI_COLOR_WIDGET_BACKGROUND"].plurals[0] = "=Widget background##CC_GUI_COLOR_WIDGET_BACKGROUND";
-    strings["Widget background (hovered)##CC_GUI_COLOR_WIDGET_BACKGROUND_HOVER"].plurals[0] = "=Widget background (hovered)##CC_GUI_COLOR_WIDGET_BACKGROUND_HOVER";
-    strings["Widget background (active)##CC_GUI_COLOR_WIDGET_BACKGROUND_ACTIVE"].plurals[0] = "=Widget background (active)##CC_GUI_COLOR_WIDGET_BACKGROUND_ACTIVE";
-    strings["Slider grab##CC_GUI_COLOR_SLIDER_GRAB"].plurals[0] = "=Slider grab##CC_GUI_COLOR_SLIDER_GRAB";
-    strings["Slider grab (active)##CC_GUI_COLOR_SLIDER_GRAB_ACTIVE"].plurals[0] = "=Slider grab (active)##CC_GUI_COLOR_SLIDER_GRAB_ACTIVE";
-    strings["Title background (active)##CC_GUI_COLOR_TITLE_BACKGROUND_ACTIVE"].plurals[0] = "=Title background (active)##CC_GUI_COLOR_TITLE_BACKGROUND_ACTIVE";
-    strings["Checkbox/radio button mark##CC_GUI_COLOR_CHECK_MARK"].plurals[0] = "=Checkbox/radio button mark##CC_GUI_COLOR_CHECK_MARK";
-    strings["Text selection##CC_GUI_COLOR_TEXT_SELECTION"].plurals[0] = "=Text selection##CC_GUI_COLOR_TEXT_SELECTION";
-    strings["Line plot##CC_GUI_COLOR_PLOT_LINES"].plurals[0] = "=Line plot##CC_GUI_COLOR_PLOT_LINES";
-    strings["Line plot (hovered)##CC_GUI_COLOR_PLOT_LINES_HOVER"].plurals[0] = "=Line plot (hovered)##CC_GUI_COLOR_PLOT_LINES_HOVER";
-    strings["Histogram plot##CC_GUI_COLOR_PLOT_HISTOGRAM"].plurals[0] = "=Histogram plot##CC_GUI_COLOR_PLOT_HISTOGRAM";
-    strings["Histogram plot (hovered)##CC_GUI_COLOR_PLOT_HISTOGRAM_HOVER"].plurals[0] = "=Histogram plot (hovered)##CC_GUI_COLOR_PLOT_HISTOGRAM_HOVER";
-    strings["Table row (even)##CC_GUI_COLOR_TABLE_ROW_EVEN"].plurals[0] = "=Table row (even)##CC_GUI_COLOR_TABLE_ROW_EVEN";
-    strings["Table row (odd)##CC_GUI_COLOR_TABLE_ROW_ODD"].plurals[0] = "=Table row (odd)##CC_GUI_COLOR_TABLE_ROW_ODD";
+    strings["Button##CC_GUI_COLOR_BUTTON"].plurals[0] = "Кнопка##CC_GUI_COLOR_BUTTON";
+    strings["Button (hovered)##CC_GUI_COLOR_BUTTON_HOVER"].plurals[0] = "Кнопка (курсор на кнопке)##CC_GUI_COLOR_BUTTON_HOVER";
+    strings["Button (active)##CC_GUI_COLOR_BUTTON_ACTIVE"].plurals[0] = "Кнопка (нажатая)##CC_GUI_COLOR_BUTTON_ACTIVE";
+    strings["Tab##CC_GUI_COLOR_TAB"].plurals[0] = "Вкладка##CC_GUI_COLOR_TAB";
+    strings["Tab (hovered)##CC_GUI_COLOR_TAB_HOVER"].plurals[0] = "Вкладка (курсор на вкладке)##CC_GUI_COLOR_TAB_HOVER";
+    strings["Tab (active)##CC_GUI_COLOR_TAB_ACTIVE"].plurals[0] = "Вкладка (активная)##CC_GUI_COLOR_TAB_ACTIVE";
+    strings["Tab (unfocused)##CC_GUI_COLOR_TAB_UNFOCUSED"].plurals[0] = "Вкладка (не текущая)##CC_GUI_COLOR_TAB_UNFOCUSED";
+    strings["Tab (unfocused and active)##CC_GUI_COLOR_TAB_UNFOCUSED_ACTIVE"].plurals[0] = "Вкладка (курсор на вкладке, текущая)##CC_GUI_COLOR_TAB_UNFOCUSED_ACTIVE";
+    strings["ImGui header##CC_GUI_COLOR_IMGUI_HEADER"].plurals[0] = "Заголовок ImGui##CC_GUI_COLOR_IMGUI_HEADER";
+    strings["ImGui header (hovered)##CC_GUI_COLOR_IMGUI_HEADER_HOVER"].plurals[0] = "Заголовок ImGui (курсор на заголовке)##CC_GUI_COLOR_IMGUI_HEADER_HOVER";
+    strings["ImGui header (active)##CC_GUI_COLOR_IMGUI_HEADER_ACTIVE"].plurals[0] = "Заголовок ImGui (активный)##CC_GUI_COLOR_IMGUI_HEADER_ACTIVE";
+    strings["Resize grip##CC_GUI_COLOR_RESIZE_GRIP"].plurals[0] = "Захват для изменения размера окна##CC_GUI_COLOR_RESIZE_GRIP";
+    strings["Resize grip (hovered)##CC_GUI_COLOR_RESIZE_GRIP_HOVER"].plurals[0] = "Захват для изменения размера окна (курсор на захвате)##CC_GUI_COLOR_RESIZE_GRIP_HOVER";
+    strings["Resize grip (active)##CC_GUI_COLOR_RESIZE_GRIP_ACTIVE"].plurals[0] = "Захват для изменения размера окна (активный)##CC_GUI_COLOR_RESIZE_GRIP_ACTIVE";
+    strings["Widget background##CC_GUI_COLOR_WIDGET_BACKGROUND"].plurals[0] = "Задний фон виджета##CC_GUI_COLOR_WIDGET_BACKGROUND";
+    strings["Widget background (hovered)##CC_GUI_COLOR_WIDGET_BACKGROUND_HOVER"].plurals[0] = "Задний фон виджета (курсор на виджете)##CC_GUI_COLOR_WIDGET_BACKGROUND_HOVER";
+    strings["Widget background (active)##CC_GUI_COLOR_WIDGET_BACKGROUND_ACTIVE"].plurals[0] = "Задний фон виджета (активный)##CC_GUI_COLOR_WIDGET_BACKGROUND_ACTIVE";
+    strings["Slider grab##CC_GUI_COLOR_SLIDER_GRAB"].plurals[0] = "Ползунок выставления значения##CC_GUI_COLOR_SLIDER_GRAB";
+    strings["Slider grab (active)##CC_GUI_COLOR_SLIDER_GRAB_ACTIVE"].plurals[0] = "Ползунок выставления значения (активный)##CC_GUI_COLOR_SLIDER_GRAB_ACTIVE";
+    strings["Title background (active)##CC_GUI_COLOR_TITLE_BACKGROUND_ACTIVE"].plurals[0] = "Задний фон заголовка (активный)##CC_GUI_COLOR_TITLE_BACKGROUND_ACTIVE";
+    strings["Checkbox/radio button mark##CC_GUI_COLOR_CHECK_MARK"].plurals[0] = "Маркировка в поле для галочки и радиокнопке##CC_GUI_COLOR_CHECK_MARK";
+    strings["Text selection##CC_GUI_COLOR_TEXT_SELECTION"].plurals[0] = "ВЫделение текста##CC_GUI_COLOR_TEXT_SELECTION";
+    strings["Line plot##CC_GUI_COLOR_PLOT_LINES"].plurals[0] = "Цвет линий##CC_GUI_COLOR_PLOT_LINES";
+    strings["Line plot (hovered)##CC_GUI_COLOR_PLOT_LINES_HOVER"].plurals[0] = "Цвет линий (курсор на поле)##CC_GUI_COLOR_PLOT_LINES_HOVER";
+    strings["Histogram plot##CC_GUI_COLOR_PLOT_HISTOGRAM"].plurals[0] = "Столбчатая диаграмма##CC_GUI_COLOR_PLOT_HISTOGRAM";
+    strings["Histogram plot (hovered)##CC_GUI_COLOR_PLOT_HISTOGRAM_HOVER"].plurals[0] = "Столбчатая диаграмма (курсор на диаграмме)##CC_GUI_COLOR_PLOT_HISTOGRAM_HOVER";
+    strings["Table row (even)##CC_GUI_COLOR_TABLE_ROW_EVEN"].plurals[0] = "Строка таблицы (чётная)##CC_GUI_COLOR_TABLE_ROW_EVEN";
+    strings["Table row (odd)##CC_GUI_COLOR_TABLE_ROW_ODD"].plurals[0] = "Строка таблицы (нечётная)##CC_GUI_COLOR_TABLE_ROW_ODD";
 
-    strings["Background##CC_GUI_COLOR_BACKGROUND"].plurals[0] = "=Background##CC_GUI_COLOR_BACKGROUND";
-    strings["Window background##CC_GUI_COLOR_FRAME_BACKGROUND"].plurals[0] = "=Window background##CC_GUI_COLOR_FRAME_BACKGROUND";
-    strings["Sub-window background##CC_GUI_COLOR_FRAME_BACKGROUND_CHILD"].plurals[0] = "=Sub-window background##CC_GUI_COLOR_FRAME_BACKGROUND_CHILD";
-    strings["Pop-up background##CC_GUI_COLOR_FRAME_BACKGROUND_POPUP"].plurals[0] = "=Pop-up background##CC_GUI_COLOR_FRAME_BACKGROUND_POPUP";
-    strings["Modal backdrop##CC_GUI_COLOR_MODAL_BACKDROP"].plurals[0] = "=Modal backdrop##CC_GUI_COLOR_MODAL_BACKDROP";
-    strings["Header##CC_GUI_COLOR_HEADER"].plurals[0] = "=Header##CC_GUI_COLOR_HEADER";
-    strings["Text##CC_GUI_COLOR_TEXT"].plurals[0] = "=Text##CC_GUI_COLOR_TEXT";
-    strings["Text (disabled)##CC_GUI_COLOR_TEXT_DISABLED"].plurals[0] = "=Text (disabled)##CC_GUI_COLOR_TEXT_DISABLED";
-    strings["Title bar (inactive)##CC_GUI_COLOR_TITLE_INACTIVE"].plurals[0] = "=Title bar (inactive)##CC_GUI_COLOR_TITLE_INACTIVE";
-    strings["Title bar (collapsed)##CC_GUI_COLOR_TITLE_COLLAPSED"].plurals[0] = "=Title bar (collapsed)##CC_GUI_COLOR_TITLE_COLLAPSED";
-    strings["Menu bar##CC_GUI_COLOR_MENU_BAR"].plurals[0] = "=Menu bar##CC_GUI_COLOR_MENU_BAR";
-    strings["Border##CC_GUI_COLOR_BORDER"].plurals[0] = "=Border##CC_GUI_COLOR_BORDER";
-    strings["Border shadow##CC_GUI_COLOR_BORDER_SHADOW"].plurals[0] = "=Border shadow##CC_GUI_COLOR_BORDER_SHADOW";
-    strings["Scroll bar##CC_GUI_COLOR_SCROLL"].plurals[0] = "=Scroll bar##CC_GUI_COLOR_SCROLL";
-    strings["Scroll bar (hovered)##CC_GUI_COLOR_SCROLL_HOVER"].plurals[0] = "=Scroll bar (hovered)##CC_GUI_COLOR_SCROLL_HOVER";
-    strings["Scroll bar (clicked)##CC_GUI_COLOR_SCROLL_ACTIVE"].plurals[0] = "=Scroll bar (clicked)##CC_GUI_COLOR_SCROLL_ACTIVE";
-    strings["Scroll bar background##CC_GUI_COLOR_SCROLL_BACKGROUND"].plurals[0] = "=Scroll bar background##CC_GUI_COLOR_SCROLL_BACKGROUND";
-    strings["Separator##CC_GUI_COLOR_SEPARATOR"].plurals[0] = "=Separator##CC_GUI_COLOR_SEPARATOR";
-    strings["Separator (hover)##CC_GUI_COLOR_SEPARATOR_HOVER"].plurals[0] = "=Separator (hover)##CC_GUI_COLOR_SEPARATOR_HOVER";
-    strings["Separator (active)##CC_GUI_COLOR_SEPARATOR_ACTIVE"].plurals[0] = "=Separator (active)##CC_GUI_COLOR_SEPARATOR_ACTIVE";
-    strings["Docking preview##CC_GUI_COLOR_DOCKING_PREVIEW"].plurals[0] = "=Docking preview##CC_GUI_COLOR_DOCKING_PREVIEW";
-    strings["Docking empty##CC_GUI_COLOR_DOCKING_EMPTY"].plurals[0] = "=Docking empty##CC_GUI_COLOR_DOCKING_EMPTY";
-    strings["Table header##CC_GUI_COLOR_TABLE_HEADER"].plurals[0] = "=Table header##CC_GUI_COLOR_TABLE_HEADER";
-    strings["Table border (hard)##CC_GUI_COLOR_TABLE_BORDER_HARD"].plurals[0] = "=Table border (hard)##CC_GUI_COLOR_TABLE_BORDER_HARD";
-    strings["Table border (soft)##CC_GUI_COLOR_TABLE_BORDER_SOFT"].plurals[0] = "=Table border (soft)##CC_GUI_COLOR_TABLE_BORDER_SOFT";
-    strings["Drag and drop target##CC_GUI_COLOR_DRAG_DROP_TARGET"].plurals[0] = "=Drag and drop target##CC_GUI_COLOR_DRAG_DROP_TARGET";
-    strings["Window switcher (highlight)##CC_GUI_COLOR_NAV_WIN_HIGHLIGHT"].plurals[0] = "=Window switcher (highlight)##CC_GUI_COLOR_NAV_WIN_HIGHLIGHT";
-    strings["Window switcher backdrop##CC_GUI_COLOR_NAV_WIN_BACKDROP"].plurals[0] = "=Window switcher backdrop##CC_GUI_COLOR_NAV_WIN_BACKDROP";
+    strings["Background##CC_GUI_COLOR_BACKGROUND"].plurals[0] = "Задний фон##CC_GUI_COLOR_BACKGROUND";
+    strings["Window background##CC_GUI_COLOR_FRAME_BACKGROUND"].plurals[0] = "Фон окон##CC_GUI_COLOR_FRAME_BACKGROUND";
+    strings["Sub-window background##CC_GUI_COLOR_FRAME_BACKGROUND_CHILD"].plurals[0] = "Фон подокн##CC_GUI_COLOR_FRAME_BACKGROUND_CHILD";
+    strings["Pop-up background##CC_GUI_COLOR_FRAME_BACKGROUND_POPUP"].plurals[0] = "Фон всплывающих окон##CC_GUI_COLOR_FRAME_BACKGROUND_POPUP";
+    strings["Modal backdrop##CC_GUI_COLOR_MODAL_BACKDROP"].plurals[0] = "Затенение при возникновении модального окна##CC_GUI_COLOR_MODAL_BACKDROP";
+    strings["Header##CC_GUI_COLOR_HEADER"].plurals[0] = "Заголовок##CC_GUI_COLOR_HEADER";
+    strings["Text##CC_GUI_COLOR_TEXT"].plurals[0] = "Текст##CC_GUI_COLOR_TEXT";
+    strings["Text (disabled)##CC_GUI_COLOR_TEXT_DISABLED"].plurals[0] = "Текст (выключенный)##CC_GUI_COLOR_TEXT_DISABLED";
+    strings["Title bar (inactive)##CC_GUI_COLOR_TITLE_INACTIVE"].plurals[0] = "Полоса заголовка (неактивная)##CC_GUI_COLOR_TITLE_INACTIVE";
+    strings["Title bar (collapsed)##CC_GUI_COLOR_TITLE_COLLAPSED"].plurals[0] = "Полоса заголовка (свёрнутое окно)##CC_GUI_COLOR_TITLE_COLLAPSED";
+    strings["Menu bar##CC_GUI_COLOR_MENU_BAR"].plurals[0] = "Полоса меню##CC_GUI_COLOR_MENU_BAR";
+    strings["Border##CC_GUI_COLOR_BORDER"].plurals[0] = "Граница##CC_GUI_COLOR_BORDER";
+    strings["Border shadow##CC_GUI_COLOR_BORDER_SHADOW"].plurals[0] = "Тень границы##CC_GUI_COLOR_BORDER_SHADOW";
+    strings["Scroll bar##CC_GUI_COLOR_SCROLL"].plurals[0] = "Полоса прокрутки##CC_GUI_COLOR_SCROLL";
+    strings["Scroll bar (hovered)##CC_GUI_COLOR_SCROLL_HOVER"].plurals[0] = "Полоса прокрутки (курсор на полосе)##CC_GUI_COLOR_SCROLL_HOVER";
+    strings["Scroll bar (clicked)##CC_GUI_COLOR_SCROLL_ACTIVE"].plurals[0] = "Полоса прокрутки (нажата)##CC_GUI_COLOR_SCROLL_ACTIVE";
+    strings["Scroll bar background##CC_GUI_COLOR_SCROLL_BACKGROUND"].plurals[0] = "Фон полосы прокрутки##CC_GUI_COLOR_SCROLL_BACKGROUND";
+    strings["Separator##CC_GUI_COLOR_SEPARATOR"].plurals[0] = "Разделитель строк##CC_GUI_COLOR_SEPARATOR";
+    strings["Separator (hover)##CC_GUI_COLOR_SEPARATOR_HOVER"].plurals[0] = "Разделитель строк (курсор на разделителе)##CC_GUI_COLOR_SEPARATOR_HOVER";
+    strings["Separator (active)##CC_GUI_COLOR_SEPARATOR_ACTIVE"].plurals[0] = "Разделитель строк (активный)##CC_GUI_COLOR_SEPARATOR_ACTIVE";
+    strings["Docking preview##CC_GUI_COLOR_DOCKING_PREVIEW"].plurals[0] = "Превью стыковки окон##CC_GUI_COLOR_DOCKING_PREVIEW";
+    strings["Docking empty##CC_GUI_COLOR_DOCKING_EMPTY"].plurals[0] = "Пустое поле стыковки окон##CC_GUI_COLOR_DOCKING_EMPTY";
+    strings["Table header##CC_GUI_COLOR_TABLE_HEADER"].plurals[0] = "Заголовок таблицы##CC_GUI_COLOR_TABLE_HEADER";
+    strings["Table border (hard)##CC_GUI_COLOR_TABLE_BORDER_HARD"].plurals[0] = "Заголовок таблицы (жёсткий)##CC_GUI_COLOR_TABLE_BORDER_HARD";
+    strings["Table border (soft)##CC_GUI_COLOR_TABLE_BORDER_SOFT"].plurals[0] = "Заголовок таблицы (мягкий)##CC_GUI_COLOR_TABLE_BORDER_SOFT";
+    strings["Drag and drop target##CC_GUI_COLOR_DRAG_DROP_TARGET"].plurals[0] = "Цель перетаскивания##CC_GUI_COLOR_DRAG_DROP_TARGET";
+    strings["Window switcher (highlight)##CC_GUI_COLOR_NAV_WIN_HIGHLIGHT"].plurals[0] = "Переключатель окон (подсвечен)##CC_GUI_COLOR_NAV_WIN_HIGHLIGHT";
+    strings["Window switcher backdrop##CC_GUI_COLOR_NAV_WIN_BACKDROP"].plurals[0] = "Переключатель окон (цвет затенения остального интерфейса)##CC_GUI_COLOR_NAV_WIN_BACKDROP";
 
     strings["Toggle on##CC_GUI_COLOR_TOGGLE_ON"].plurals[0] = "=Toggle on##CC_GUI_COLOR_TOGGLE_ON";
     strings["Toggle off##CC_GUI_COLOR_TOGGLE_OFF"].plurals[0] = "=Toggle off##CC_GUI_COLOR_TOGGLE_OFF";

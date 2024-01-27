@@ -862,14 +862,13 @@ void FurnaceGUI::drawSettings() {
         }
         //ImGui::TextUnformatted(_L("test##sgse"));
 
-        if(settings.language == (int)DIV_LANG_RUSSIAN)
+        /*if(settings.language == (int)DIV_LANG_RUSSIAN)
         {
           ImGui::Text(_LP("%d apple", 1), 1);
           ImGui::Text(_LP("%d apple", 2), 2);
           ImGui::Text(_LP("%d apple", 5), 5);
           ImGui::TextUnformatted(_L("iulserghiueshgui##sgse"));
-        }
-        
+        }*/
 
         END_SECTION;
       }
