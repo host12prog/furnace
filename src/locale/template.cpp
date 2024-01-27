@@ -3502,9 +3502,9 @@ void DivLocale::addTranslationsTemplate()
 
     // # sgiPCMA  src/gui/inst/adpcma.cpp
     // # sgiPCMB  src/gui/inst/adpcmb.cpp
-    //   sgiSMPL  src/gui/inst/amiga.cpp
-    //   sgiAY    src/gui/inst/ay.cpp
-    //   sgi8930  src/gui/inst/ay8930.cpp
+    // # sgiSMPL  src/gui/inst/amiga.cpp
+    // # sgiAY    src/gui/inst/ay.cpp
+    // # sgi8930  src/gui/inst/ay8930.cpp
     //   sgiBEEP  src/gui/inst/beeper.cpp
     //   sgiC140  src/gui/inst/c140.cpp
     //   sgiC219  src/gui/inst/c219.cpp
@@ -3585,8 +3585,47 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##sgiPCMB"].plurals[0] = "=Phase Reset";
 
     //   sgiSMPL  src/gui/inst/amiga.cpp
+
+    strings["Macros##sgiSMPL"].plurals[0] = "=Macros";
+    strings["Volume##sgiSMPL"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiSMPL"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiSMPL"].plurals[0] = "=Pitch";
+    strings["Panning##sgiSMPL"].plurals[0] = "=Panning";
+    strings["Panning (left)##sgiSMPL"].plurals[0] = "=Panning (left)";
+    strings["Surround##sgiSMPL"].plurals[0] = "=Surround";
+    strings["Panning (right)##sgiSMPL"].plurals[0] = "=Panning (right)";
+    strings["Waveform##sgiSMPL"].plurals[0] = "=Waveform";
+    strings["Phase Reset##sgiSMPL"].plurals[0] = "=Phase Reset";
+
     //   sgiAY    src/gui/inst/ay.cpp
+
+    strings["Macros##sgiAY"].plurals[0] = "=Macros";
+    strings["Volume##sgiAY"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiAY"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiAY"].plurals[0] = "=Pitch";
+    strings["Noise Freq##sgiAY"].plurals[0] = "=Noise Freq";
+    strings["Waveform##sgiAY"].plurals[0] = "=Waveform";
+    strings["Phase Reset##sgiAY"].plurals[0] = "=Phase Reset";
+    strings["Envelope##sgiAY"].plurals[0] = "=Envelope";
+    strings["AutoEnv Num##sgiAY"].plurals[0] = "=AutoEnv Num";
+    strings["AutoEnv Den##sgiAY"].plurals[0] = "=AutoEnv Den";
+
     //   sgi8930  src/gui/inst/ay8930.cpp
+
+    strings["Macros##sgi8930"].plurals[0] = "=Macros";
+    strings["Volume##sgi8930"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgi8930"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgi8930"].plurals[0] = "=Pitch";
+    strings["Noise Freq##sgi8930"].plurals[0] = "=Noise Freq";
+    strings["Waveform##sgi8930"].plurals[0] = "=Waveform";
+    strings["Phase Reset##sgi8930"].plurals[0] = "=Phase Reset";
+    strings["Duty##sgi8930"].plurals[0] = "=Duty";
+    strings["Envelope##sgi8930"].plurals[0] = "=Envelope";
+    strings["AutoEnv Num##sgi8930"].plurals[0] = "=AutoEnv Num";
+    strings["AutoEnv Den##sgi8930"].plurals[0] = "=AutoEnv Den";
+    strings["Noise AND Mask##sgi8930"].plurals[0] = "=Noise AND Mask";
+    strings["Noise OR Mask##sgi8930"].plurals[0] = "=Noise OR Mask";
+
     //   sgiBEEP  src/gui/inst/beeper.cpp
     //   sgiC140  src/gui/inst/c140.cpp
     //   sgiC219  src/gui/inst/c219.cpp
