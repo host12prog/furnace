@@ -1143,6 +1143,15 @@ void DivLocale::addTranslationsRussian()
     strings["System##sgmx1"].plurals[0] = "Система";
     strings["disconnect all##sgmx"].plurals[0] = "отсоединить все";
 
+    //   sgns  src/gui/newSong.cpp
+
+    strings["Choose a System!##sgns"].plurals[0] = "Выберите систему!";
+    strings["Search...##sgns"].plurals[0] = "Поиск...";
+    strings["Categories##sgns"].plurals[0] = "Категории";
+    strings["Systems##sgns"].plurals[0] = "Системы";
+    strings["I'm feeling lucky##sgns"].plurals[0] = "Мне повезёт!";
+    strings["Cancel##sgns"].plurals[0] = "Отмена";
+
     //   sgor  src/gui/orders.cpp
 
     strings["Add new order##sgor"].plurals[0] = "Добавить строку";
@@ -3195,7 +3204,7 @@ void DivLocale::addTranslationsRussian()
     strings["Used##CC_GUI_COLOR_PAT_MANAGER_USED"].plurals[0] = "Паттерн используется##CC_GUI_COLOR_PAT_MANAGER_USED";
     strings["Overused##CC_GUI_COLOR_PAT_MANAGER_OVERUSED"].plurals[0] = "Паттерн используется очень часто##CC_GUI_COLOR_PAT_MANAGER_OVERUSED";
     strings["Really overused##CC_GUI_COLOR_PAT_MANAGER_EXTREMELY_OVERUSED"].plurals[0] = "Паттерн используется крайне часто##CC_GUI_COLOR_PAT_MANAGER_EXTREMELY_OVERUSED";
-    strings["Combo Breaker##CC_GUI_COLOR_PAT_MANAGER_COMBO_BREAKER"].plurals[0] = "Число использований паттерна больше, чем длина трека??!!!##CC_GUI_COLOR_PAT_MANAGER_COMBO_BREAKER";
+    strings["Combo Breaker##CC_GUI_COLOR_PAT_MANAGER_COMBO_BREAKER"].plurals[0] = "Число использований паттерна больше, чем длина трека!##CC_GUI_COLOR_PAT_MANAGER_COMBO_BREAKER";
 
     strings["Background##CC_GUI_COLOR_PIANO_BACKGROUND"].plurals[0] = "Фон##CC_GUI_COLOR_PIANO_BACKGROUND";
     strings["Upper key##CC_GUI_COLOR_PIANO_KEY_TOP"].plurals[0] = "Верхние клавиши##CC_GUI_COLOR_PIANO_KEY_TOP";

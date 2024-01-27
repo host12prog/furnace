@@ -80,15 +80,21 @@ DivSystem FurnaceGUI::systemPicker(bool full_width) {
   }
   if (reissueSearch) {
     String lowerCase=sysSearchQuery;
-    for (char& i: lowerCase) {
+    /*for (char& i: lowerCase) {
       if (i>='A' && i<='Z') i+='a'-'A';
-    }
+    }*/
+    std::transform(lowerCase.begin(), lowerCase.end(), lowerCase.begin(),
+    [](unsigned char c){ return std::tolower(c); });
+
     sysSearchResults.clear();
     for (int j=0; curSysSection[j]; j++) {
       String lowerCase1=_L(e->getSystemName((DivSystem)curSysSection[j]));
-      for (char& i: lowerCase1) {
+      /*for (char& i: lowerCase1) {
         if (i>='A' && i<='Z') i+='a'-'A';
-      }
+      }*/
+      std::transform(lowerCase1.begin(), lowerCase1.end(), lowerCase1.begin(),
+      [](unsigned char c){ return std::tolower(c); });
+
       if (lowerCase1.find(lowerCase)!=String::npos) {
         sysSearchResults.push_back((DivSystem)curSysSection[j]);
       }
