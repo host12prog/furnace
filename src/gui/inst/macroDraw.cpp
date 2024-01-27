@@ -526,7 +526,8 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
 
   for(int i = 0; i < (int)macros.size(); i++) //calculate table column width (the one where macro names go) to eliminate one-frame glitch
   {
-    float current_width = ImGui::CalcTextSize(_L(macros[i].displayName)).x;
+    float current_width = ImGui::CalcTextSize(_L(macros[i].displayName), NULL, true).x;
+    //the text end is needed there to specify the flag to cut off the ## thing from text len calc
 
     if(current_width > max_macro_len)
     {
