@@ -495,7 +495,7 @@ void FurnaceGUI::drawWaveEdit() {
         ImGui::TableNextColumn();
         ImGui::Text(_L("Width##sgwe"));
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("use a width of:\n- any on Amiga/N163\n- 32 on Game Boy, PC Engine, SCC, Konami Bubble System, Namco WSG, Virtual Boy and WonderSwan\n- 64 on FDS\n- 128 on X1-010\nany other widths will be scaled during playback.##sgwe"));
+          ImGui::SetTooltip(_L("use a width of:\n- any on Amiga/N163\n- 32 on Game Boy, PC Engine, SCC, Konami Bubble System, Namco WSG, Virtual Boy and WonderSwan\n- 64 on FDS\n- 128 on X1-010\n- 256 for ES5503\nany other widths will be scaled during playback.##sgwe"));
         }
         ImGui::SameLine();
         ImGui::SetNextItemWidth(96.0f*dpiScale);
@@ -1172,12 +1172,17 @@ void FurnaceGUI::drawWaveEdit() {
         waveHex=true;
       }
       ImGui::SameLine();
-      if (!waveHex) if (ImGui::Button(waveSigned?"±##WaveSign":"+##WaveSign",ImVec2(ImGui::GetFrameHeight(),ImGui::GetFrameHeight()))) {
-        waveSigned=!waveSigned;
-      }
-      if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Signed/Unsigned##sgwe"));
-      }
+      if (!waveHex)
+      {
+        if (ImGui::Button(waveSigned?"±##WaveSign":"+##WaveSign",ImVec2(ImGui::GetFrameHeight(),ImGui::GetFrameHeight()))) {
+          waveSigned=!waveSigned;
+        }
+
+        if (ImGui::IsItemHovered()) {
+          ImGui::SetTooltip(_L("Signed/Unsigned##sgwe"));
+        }
+      } 
+      
       ImGui::SameLine();
       ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x); // wavetable text input size found here
       if (ImGui::InputText("##MMLWave",&mmlStringW)) {
