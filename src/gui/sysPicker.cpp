@@ -216,7 +216,7 @@ DivSystem FurnaceGUI::systemPicker(bool full_width) {
   if (ImGui::BeginChild("SysDesc",ImVec2(0.0f,150.0f*dpiScale),false,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse)) {
     if (hoveredSys!=DIV_SYSTEM_NULL) {
       const DivSysDef* sysDef=e->getSystemDef(hoveredSys);
-      ImGui::TextWrapped("%s",sysDef->description);
+      ImGui::TextWrapped("%s",_L(sysDef->description));
     }
   }
   ImGui::EndChild();

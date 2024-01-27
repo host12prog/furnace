@@ -41,6 +41,7 @@ void DivLocale::addTranslationsRussian()
     strings["%d apple"].plurals[2] = "%d яблок";
 
     //strings["Yamaha YM2151 (OPM)"].plurals[0] = "opmopmopmёшгывргшуыкп";
+    strings["this was Yamaha's first integrated FM chip.\nit was used in several synthesizers, computers and arcade boards."].plurals[0] = "этот чип был первой интегральной микросхемой Yamaha.\nОн использовался в нескольких синтезаторах, компьютерах и аркадных автоматах.";
 
     //src/gui/about.cpp
 
