@@ -3501,70 +3501,70 @@ void DivLocale::addTranslationsTemplate()
     strings["Unknown##sgut1"].plurals[0] = "=Unknown";
 /*  instruments
 
-    // # sgiPCMA  src/gui/inst/adpcma.cpp
-    // # sgiPCMB  src/gui/inst/adpcmb.cpp
-    // # sgiSMPL  src/gui/inst/amiga.cpp
-    // # sgiAY    src/gui/inst/ay.cpp
-    // # sgi8930  src/gui/inst/ay8930.cpp
-    //   sgiBEEP  src/gui/inst/beeper.cpp
-    //   sgiC140  src/gui/inst/c140.cpp
-    //   sgiC219  src/gui/inst/c219.cpp
-    //   sgiC64   src/gui/inst/c64.cpp
-    //   sgi5503  src/gui/inst/es5503.cpp
-    //   sgiOTTO  src/gui/inst/es5506.cpp
-    //   sgiESFM  src/gui/inst/esfm.cpp
-    //   sgiFDS   src/gui/inst/fds.cpp
-    //   sgifmeu  src/gui/inst/fmEnvUtil.cpp
-    //   sgifmeh  src/gui/inst/fmEnvUtil.h
-    //   sgiGA20  src/gui/inst/ga20.cpp
-    //   sgiGB    src/gui/inst/gb.cpp
-    //   sgiK00   src/gui/inst/k007232.cpp
-    //   sgiK05   src/gui/inst/k053260.cpp
-    //   sgimcd   src/gui/inst/macroDraw.cpp
-    //   sgimcdu  src/gui/inst/macroDrawUtil.cpp
-    //   sgiLYNX  src/gui/inst/mikey.cpp
-    //   sgi5232  src/gui/inst/msm5232.cpp
-    //   sgi6258  src/gui/inst/msm6258.cpp
-    //   sgi6295  src/gui/inst/msm6295.cpp
-    //   sgiMPCM  src/gui/inst/multipcm.cpp
-    //   sgiN163  src/gui/inst/n163.cpp
-    //   sgiWSG   src/gui/inst/namco.cpp
-    //   sgiNES   src/gui/inst/nes.cpp
-    //   sgiOPL   src/gui/inst/opl.cpp
-    //   sgiOPLL  src/gui/inst/opll.cpp
-    //   sgiOPM   src/gui/inst/opm.cpp
-    //   sgiOPN   src/gui/inst/opn.cpp
-    //   sgiOPZ   src/gui/inst/opz.cpp
-    //   sgiPCE   src/gui/inst/pce.cpp
-    //   sgiPET   src/gui/inst/pet.cpp
-    //   sgiPMQT  src/gui/inst/pokemini.cpp
-    //   sgiPOKEY src/gui/inst/pokey.cpp
-    //   sgiPNN   src/gui/inst/powernoise.cpp
-    //   sgiPNS   src/gui/inst/powernoise_slope.cpp
-    //   sgiPV    src/gui/inst/pv1000.cpp
-    //   sgiQ     src/gui/inst/qsound.cpp
-    //   sgiRF5   src/gui/inst/rf5c68.cpp
-    //   sgiSAA   src/gui/inst/saa1099.cpp
-    //   sgismpd  src/gui/inst/sampleDraw.cpp
-    //   sgiSCC   src/gui/inst/scc.cpp
-    //   sgiSEGA  src/gui/inst/segapcm.cpp
-    //   sgiSM    src/gui/inst/sm8521.cpp
-    //   sgiSNES  src/gui/inst/snes.cpp
-    //   sgiPSG   src/gui/inst/std.cpp
-    // # sgistru  src/gui/inst/stringsUtil.cpp
-    //   sgiSU    src/gui/inst/su.cpp
-    //   sgiSWAN  src/gui/inst/swan.cpp
-    //   sgiT6W   src/gui/inst/t6w28.cpp
-    //   sgiTED   src/gui/inst/ted.cpp
-    //   sgiTIA   src/gui/inst/tia.cpp
-    //   sgiVB    src/gui/inst/vboy.cpp
-    //   sgiVERA  src/gui/inst/vera.cpp
-    //   sgiVIC   src/gui/inst/vic.cpp
-    //   sgiVRC6  src/gui/inst/vrc6.cpp
-    //   sgiVRC6S src/gui/inst/vrc6saw.cpp
-    //   sgiwave  src/gui/inst/wavetable.cpp
-    //   sgiX1    src/gui/inst/x1_010.cpp
-    //   sgiYMZ   src/gui/inst/ymz280b.cpp
+    // # sgiPCMA   src/gui/inst/adpcma.cpp
+    // # sgiPCMB   src/gui/inst/adpcmb.cpp
+    // # sgiSAMPLE src/gui/inst/amiga.cpp
+    // # sgiAY     src/gui/inst/ay.cpp
+    // # sgi8930   src/gui/inst/ay8930.cpp
+    //   sgiB      src/gui/inst/beeper.cpp
+    //   sgiC140   src/gui/inst/c140.cpp
+    //   sgiC219   src/gui/inst/c219.cpp
+    //   sgiC64    src/gui/inst/c64.cpp
+    //   sgi5503   src/gui/inst/es5503.cpp
+    //   sgiOTTO   src/gui/inst/es5506.cpp
+    //   sgiESFM   src/gui/inst/esfm.cpp
+    //   sgiFDS    src/gui/inst/fds.cpp
+    //   sgifmeu   src/gui/inst/fmEnvUtil.cpp
+    //   sgifmeh   src/gui/inst/fmEnvUtil.h
+    //   sgiGA20   src/gui/inst/ga20.cpp
+    //   sgiGB     src/gui/inst/gb.cpp
+    //   sgiK00    src/gui/inst/k007232.cpp
+    //   sgiK05    src/gui/inst/k053260.cpp
+    //   sgimcd    src/gui/inst/macroDraw.cpp
+    //   sgimcdu   src/gui/inst/macroDrawUtil.cpp
+    //   sgiLYNX   src/gui/inst/mikey.cpp
+    //   sgi5232   src/gui/inst/msm5232.cpp
+    //   sgi6258   src/gui/inst/msm6258.cpp
+    //   sgi6295   src/gui/inst/msm6295.cpp
+    //   sgiMULPCM src/gui/inst/multipcm.cpp
+    //   sgiN163   src/gui/inst/n163.cpp
+    //   sgiWSG    src/gui/inst/namco.cpp
+    //   sgiNES    src/gui/inst/nes.cpp
+    //   sgiOPL    src/gui/inst/opl.cpp
+    //   sgiOPLL   src/gui/inst/opll.cpp
+    //   sgiOPM    src/gui/inst/opm.cpp
+    //   sgiOPN    src/gui/inst/opn.cpp
+    //   sgiOPZ    src/gui/inst/opz.cpp
+    //   sgiPCE    src/gui/inst/pce.cpp
+    //   sgiPET    src/gui/inst/pet.cpp
+    //   sgiPMQT   src/gui/inst/pokemini.cpp
+    //   sgiPOKEY  src/gui/inst/pokey.cpp
+    //   sgiPNN    src/gui/inst/powernoise.cpp
+    //   sgiPNS    src/gui/inst/powernoise_slope.cpp
+    //   sgiPV     src/gui/inst/pv1000.cpp
+    //   sgiQ      src/gui/inst/qsound.cpp
+    //   sgiRF5    src/gui/inst/rf5c68.cpp
+    //   sgiSAA    src/gui/inst/saa1099.cpp
+    //   sgismpd   src/gui/inst/sampleDraw.cpp
+    //   sgiSCC    src/gui/inst/scc.cpp
+    //   sgiSEGA   src/gui/inst/segapcm.cpp
+    //   sgiSM     src/gui/inst/sm8521.cpp
+    //   sgiSNES   src/gui/inst/snes.cpp
+    //   sgiPSG    src/gui/inst/std.cpp
+    // # sgistru   src/gui/inst/stringsUtil.cpp
+    //   sgiSU     src/gui/inst/su.cpp
+    //   sgiSWAN   src/gui/inst/swan.cpp
+    //   sgiT6W    src/gui/inst/t6w28.cpp
+    //   sgiTED    src/gui/inst/ted.cpp
+    //   sgiTIA    src/gui/inst/tia.cpp
+    //   sgiVB     src/gui/inst/vboy.cpp
+    //   sgiVERA   src/gui/inst/vera.cpp
+    //   sgiVIC    src/gui/inst/vic.cpp
+    //   sgiVRC6   src/gui/inst/vrc6.cpp
+    //   sgiVRC6S  src/gui/inst/vrc6saw.cpp
+    //   sgiwave   src/gui/inst/wavetable.cpp
+    //   sgiX1     src/gui/inst/x1_010.cpp
+    //   sgiYMZ    src/gui/inst/ymz280b.cpp
 
 */
 
@@ -3576,7 +3576,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Panning##sgiPCMA"].plurals[0] = "=Panning";
     strings["Phase Reset##sgiPCMA"].plurals[0] = "=Phase Reset";
 
-    //   sgiPCMB  src/gui/inst/adpcmb.cpp
+    //   sgiPCMB   src/gui/inst/adpcmb.cpp
 
     strings["Macros##sgiPCMB"].plurals[0] = "=Macros";
     strings["Volume##sgiPCMB"].plurals[0] = "=Volume";
@@ -3585,20 +3585,20 @@ void DivLocale::addTranslationsTemplate()
     strings["Panning##sgiPCMB"].plurals[0] = "=Panning";
     strings["Phase Reset##sgiPCMB"].plurals[0] = "=Phase Reset";
 
-    //   sgiSMPL  src/gui/inst/amiga.cpp
+    //   sgiSAMPLE src/gui/inst/amiga.cpp
 
-    strings["Macros##sgiSMPL"].plurals[0] = "=Macros";
-    strings["Volume##sgiSMPL"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiSMPL"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiSMPL"].plurals[0] = "=Pitch";
-    strings["Panning##sgiSMPL"].plurals[0] = "=Panning";
-    strings["Panning (left)##sgiSMPL"].plurals[0] = "=Panning (left)";
-    strings["Surround##sgiSMPL"].plurals[0] = "=Surround";
-    strings["Panning (right)##sgiSMPL"].plurals[0] = "=Panning (right)";
-    strings["Waveform##sgiSMPL"].plurals[0] = "=Waveform";
-    strings["Phase Reset##sgiSMPL"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiSAMPLE"].plurals[0] = "=Macros";
+    strings["Volume##sgiSAMPLE"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiSAMPLE"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiSAMPLE"].plurals[0] = "=Pitch";
+    strings["Panning##sgiSAMPLE"].plurals[0] = "=Panning";
+    strings["Panning (left)##sgiSAMPLE"].plurals[0] = "=Panning (left)";
+    strings["Surround##sgiSAMPLE"].plurals[0] = "=Surround";
+    strings["Panning (right)##sgiSAMPLE"].plurals[0] = "=Panning (right)";
+    strings["Waveform##sgiSAMPLE"].plurals[0] = "=Waveform";
+    strings["Phase Reset##sgiSAMPLE"].plurals[0] = "=Phase Reset";
 
-    //   sgiAY    src/gui/inst/ay.cpp
+    //   sgiAY     src/gui/inst/ay.cpp
 
     strings["Macros##sgiAY"].plurals[0] = "=Macros";
     strings["Volume##sgiAY"].plurals[0] = "=Volume";
@@ -3611,7 +3611,7 @@ void DivLocale::addTranslationsTemplate()
     strings["AutoEnv Num##sgiAY"].plurals[0] = "=AutoEnv Num";
     strings["AutoEnv Den##sgiAY"].plurals[0] = "=AutoEnv Den";
 
-    //   sgi8930  src/gui/inst/ay8930.cpp
+    //   sgi8930   src/gui/inst/ay8930.cpp
 
     strings["Macros##sgi8930"].plurals[0] = "=Macros";
     strings["Volume##sgi8930"].plurals[0] = "=Volume";
@@ -3627,52 +3627,52 @@ void DivLocale::addTranslationsTemplate()
     strings["Noise AND Mask##sgi8930"].plurals[0] = "=Noise AND Mask";
     strings["Noise OR Mask##sgi8930"].plurals[0] = "=Noise OR Mask";
 
-    //   sgiBEEP  src/gui/inst/beeper.cpp
-    //   sgiC140  src/gui/inst/c140.cpp
-    //   sgiC219  src/gui/inst/c219.cpp
-    //   sgiC64   src/gui/inst/c64.cpp
-    //   sgi5503  src/gui/inst/es5503.cpp
-    //   sgiOTTO  src/gui/inst/es5506.cpp
-    //   sgiESFM  src/gui/inst/esfm.cpp
-    //   sgiFDS   src/gui/inst/fds.cpp
-    //   sgifmeu  src/gui/inst/fmEnvUtil.cpp
-    //   sgifmeh  src/gui/inst/fmEnvUtil.h
-    //   sgiGA20  src/gui/inst/ga20.cpp
-    //   sgiGB    src/gui/inst/gb.cpp
-    //   sgiK00   src/gui/inst/k007232.cpp
-    //   sgiK05   src/gui/inst/k053260.cpp
-    //   sgimcd   src/gui/inst/macroDraw.cpp
-    //   sgimcdu  src/gui/inst/macroDrawUtil.cpp
-    //   sgiLYNX  src/gui/inst/mikey.cpp
-    //   sgi5232  src/gui/inst/msm5232.cpp
-    //   sgi6258  src/gui/inst/msm6258.cpp
-    //   sgi6295  src/gui/inst/msm6295.cpp
-    //   sgiMPCM  src/gui/inst/multipcm.cpp
-    //   sgiN163  src/gui/inst/n163.cpp
-    //   sgiWSG   src/gui/inst/namco.cpp
-    //   sgiNES   src/gui/inst/nes.cpp
-    //   sgiOPL   src/gui/inst/opl.cpp
-    //   sgiOPLL  src/gui/inst/opll.cpp
-    //   sgiOPM   src/gui/inst/opm.cpp
-    //   sgiOPN   src/gui/inst/opn.cpp
-    //   sgiOPZ   src/gui/inst/opz.cpp
-    //   sgiPCE   src/gui/inst/pce.cpp
-    //   sgiPET   src/gui/inst/pet.cpp
-    //   sgiPMQT  src/gui/inst/pokemini.cpp
-    //   sgiPOKEY src/gui/inst/pokey.cpp
-    //   sgiPNN   src/gui/inst/powernoise.cpp
-    //   sgiPNS   src/gui/inst/powernoise_slope.cpp
-    //   sgiPV    src/gui/inst/pv1000.cpp
-    //   sgiQ     src/gui/inst/qsound.cpp
-    //   sgiRF5   src/gui/inst/rf5c68.cpp
-    //   sgiSAA   src/gui/inst/saa1099.cpp
-    //   sgismpd  src/gui/inst/sampleDraw.cpp
-    //   sgiSCC   src/gui/inst/scc.cpp
-    //   sgiSEGA  src/gui/inst/segapcm.cpp
-    //   sgiSM    src/gui/inst/sm8521.cpp
-    //   sgiSNES  src/gui/inst/snes.cpp
-    //   sgiPSG   src/gui/inst/std.cpp
-    //   sgistru  src/gui/inst/stringsUtil.cpp
+    //   sgiB      src/gui/inst/beeper.cpp
+    //   sgiC140   src/gui/inst/c140.cpp
+    //   sgiC219   src/gui/inst/c219.cpp
+    //   sgiC64    src/gui/inst/c64.cpp
+    //   sgi5503   src/gui/inst/es5503.cpp
+    //   sgiOTTO   src/gui/inst/es5506.cpp
+    //   sgiESFM   src/gui/inst/esfm.cpp
+    //   sgiFDS    src/gui/inst/fds.cpp
+    //   sgifmeu   src/gui/inst/fmEnvUtil.cpp
+    //   sgifmeh   src/gui/inst/fmEnvUtil.h
+    //   sgiGA20   src/gui/inst/ga20.cpp
+    //   sgiGB     src/gui/inst/gb.cpp
+    //   sgiK00    src/gui/inst/k007232.cpp
+    //   sgiK05    src/gui/inst/k053260.cpp
+    //   sgimcd    src/gui/inst/macroDraw.cpp
+    //   sgimcdu   src/gui/inst/macroDrawUtil.cpp
+    //   sgiLYNX   src/gui/inst/mikey.cpp
+    //   sgi5232   src/gui/inst/msm5232.cpp
+    //   sgi6258   src/gui/inst/msm6258.cpp
+    //   sgi6295   src/gui/inst/msm6295.cpp
+    //   sgiMULPCM src/gui/inst/multipcm.cpp
+    //   sgiN163   src/gui/inst/n163.cpp
+    //   sgiWSG    src/gui/inst/namco.cpp
+    //   sgiNES    src/gui/inst/nes.cpp
+    //   sgiOPL    src/gui/inst/opl.cpp
+    //   sgiOPLL   src/gui/inst/opll.cpp
+    //   sgiOPM    src/gui/inst/opm.cpp
+    //   sgiOPN    src/gui/inst/opn.cpp
+    //   sgiOPZ    src/gui/inst/opz.cpp
+    //   sgiPCE    src/gui/inst/pce.cpp
+    //   sgiPET    src/gui/inst/pet.cpp
+    //   sgiPMQT   src/gui/inst/pokemini.cpp
+    //   sgiPOKEY  src/gui/inst/pokey.cpp
+    //   sgiPNN    src/gui/inst/powernoise.cpp
+    //   sgiPNS    src/gui/inst/powernoise_slope.cpp
+    //   sgiPV     src/gui/inst/pv1000.cpp
+    //   sgiQ      src/gui/inst/qsound.cpp
+    //   sgiRF5    src/gui/inst/rf5c68.cpp
+    //   sgiSAA    src/gui/inst/saa1099.cpp
+    //   sgismpd   src/gui/inst/sampleDraw.cpp
+    //   sgiSCC    src/gui/inst/scc.cpp
+    //   sgiSEGA   src/gui/inst/segapcm.cpp
+    //   sgiSM     src/gui/inst/sm8521.cpp
+    //   sgiSNES   src/gui/inst/snes.cpp
+    //   sgiPSG    src/gui/inst/std.cpp
+    //   sgistru   src/gui/inst/stringsUtil.cpp
 
     strings["Down Down Down##sgistru"].plurals[0] = "=Down Down Down";
     strings["Down.##sgistru"].plurals[0] = "=Down.";
@@ -3958,19 +3958,19 @@ void DivLocale::addTranslationsTemplate()
     strings["QSound##sgistru"].plurals[0] = "=QSound";
     strings["Bug##sgistru"].plurals[0] = "=Bug";
 ;
-    //   sgiSU    src/gui/inst/su.cpp
-    //   sgiSWAN  src/gui/inst/swan.cpp
-    //   sgiT6W   src/gui/inst/t6w28.cpp
-    //   sgiTED   src/gui/inst/ted.cpp
-    //   sgiTIA   src/gui/inst/tia.cpp
-    //   sgiVB    src/gui/inst/vboy.cpp
-    //   sgiVERA  src/gui/inst/vera.cpp
-    //   sgiVIC   src/gui/inst/vic.cpp
-    //   sgiVRC6  src/gui/inst/vrc6.cpp
-    //   sgiVRC6S src/gui/inst/vrc6saw.cpp
-    //   sgiwave  src/gui/inst/wavetable.cpp
-    //   sgiX1    src/gui/inst/x1_010.cpp
-    //   sgiYMZ   src/gui/inst/ymz280b.cpp
+    //   sgiSU     src/gui/inst/su.cpp
+    //   sgiSWAN   src/gui/inst/swan.cpp
+    //   sgiT6W    src/gui/inst/t6w28.cpp
+    //   sgiTED    src/gui/inst/ted.cpp
+    //   sgiTIA    src/gui/inst/tia.cpp
+    //   sgiVB     src/gui/inst/vboy.cpp
+    //   sgiVERA   src/gui/inst/vera.cpp
+    //   sgiVIC    src/gui/inst/vic.cpp
+    //   sgiVRC6   src/gui/inst/vrc6.cpp
+    //   sgiVRC6S  src/gui/inst/vrc6saw.cpp
+    //   sgiwave   src/gui/inst/wavetable.cpp
+    //   sgiX1     src/gui/inst/x1_010.cpp
+    //   sgiYMZ    src/gui/inst/ymz280b.cpp
 
 
 }
