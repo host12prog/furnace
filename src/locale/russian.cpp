@@ -1903,26 +1903,27 @@ void DivLocale::addTranslationsRussian()
 
     //   sgsm  src/gui/sysManager.cpp
 
-    strings["Chip Manager###Chip Manager"].plurals[0] = "=Chip Manager###Chip Manager";
-    strings["Preserve channel order##sgsm"].plurals[0] = "=Preserve channel order";
-    strings["Name##sgsm"].plurals[0] = "=Name";
-    strings["Actions##sgsm"].plurals[0] = "=Actions";
-    strings["(drag to swap chips)##sgsm"].plurals[0] = "=(drag to swap chips)";
-    strings["Are you sure you want to remove this chip?##sgsm"].plurals[0] = "=Are you sure you want to remove this chip?";
-    strings["Remove##sgsm"].plurals[0] = "=Remove";
-    strings["cannot add chip! (##sgsm"].plurals[0] = "=cannot add chip! (";
+    strings["Chip Manager###Chip Manager"].plurals[0] = "Управление чипами###Chip Manager";
+    strings["Preserve channel order##sgsm"].plurals[0] = "Сохранить порядок каналов";
+    strings["Name##sgsm"].plurals[0] = "Название";
+    strings["Actions##sgsm"].plurals[0] = "Действия";
+    strings["(drag to swap chips)##sgsm"].plurals[0] = "(перетащите, чтобы поменять местами каналы)";
+    strings["Change##SysChange"].plurals[0] = "Сменить##SysChange";
+    strings["Are you sure you want to remove this chip?##sgsm"].plurals[0] = "Вы действительно хотите удалить этот чип?";
+    strings["Remove##sgsm"].plurals[0] = "Удалить";
+    strings["cannot add chip! (##sgsm"].plurals[0] = "не могу добавить чип! (";
 
     //   sgsa  src/gui/sysPartNumber.cpp
 
-    strings["ZXS Beeper##sgsa"].plurals[0] = "=ZXS Beeper";
+    strings["ZXS Beeper##sgsa"].plurals[0] = "ZXS (пищалка)";
 
     //   sgsp  src/gui/sysPicker.cpp
 
-    strings["Search...##sgsp"].plurals[0] = "=Search...";
+    strings["Search...##sgsp"].plurals[0] = "Поиск...";
 
     // # sgvm  src/gui/volMeter.cpp
 
-    strings["Volume Meter###Volume Meter"].plurals[0] = "=Volume Meter###Volume Meter";
+    strings["Volume Meter###Volume Meter"].plurals[0] = "Измеритель громкости###Volume Meter";
 
     //   sgwe  src/gui/waveEdit.cpp
 
@@ -2053,8 +2054,6 @@ void DivLocale::addTranslationsRussian()
     strings["Mixer###Mixer"].plurals[0] = "Микшер###Mixer";
     strings["OrderSel###OrderSel"].plurals[0] = "Выб. матр. пат.###OrderSel";
     strings["Spoiler###Spoiler"].plurals[0] = "Спойлер###Spoiler";
-    strings["Chip Manager###Chip Manager"].plurals[0] = "Управление чипами###Chip Manager";
-    strings["Volume Meter###Volume Meter"].plurals[0] = "Измеритель громкости###Volume Meter";
     strings["Wavetable Editor###Wavetable Editor"].plurals[0] = "Редактор волновых таблиц###Wavetable Editor";
     //popups
     strings["Warning###Warning"].plurals[0] = "Внимание###Warning";
