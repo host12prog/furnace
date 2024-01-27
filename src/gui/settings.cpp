@@ -3610,7 +3610,7 @@ CONFIG_SECTION(_L("Color##sgse")) {
     UI_COLOR_CONFIG(GUI_COLOR_FM_SECONDARY_MOD,"Mod. accent (secondary)");
     UI_COLOR_CONFIG(GUI_COLOR_FM_BORDER_MOD,"Mod. border");
     UI_COLOR_CONFIG(GUI_COLOR_FM_BORDER_SHADOW_MOD,"Mod. border shadow");
-    UI_COLOR_CONFIG(GUI_COLOR_FM_PRIMARY_CAR,"Car. accent (primary");
+    UI_COLOR_CONFIG(GUI_COLOR_FM_PRIMARY_CAR,"Car. accent (primary)");
     UI_COLOR_CONFIG(GUI_COLOR_FM_SECONDARY_CAR,"Car. accent (secondary)");
     UI_COLOR_CONFIG(GUI_COLOR_FM_BORDER_CAR,"Car. border");
     UI_COLOR_CONFIG(GUI_COLOR_FM_BORDER_SHADOW_CAR,"Car. border shadow");
