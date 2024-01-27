@@ -34,7 +34,7 @@ const char* esfmParamLongNames[9]={
 };
 
 const char* esfmParamNames[9]={
-  "OP4 Noise Mode##sgistru1", "Env. Delay##sgistru", "Output Level##sgistru1", "ModInput##sgistru", "Left##sgistru", "Right##sgistru", "Tune##sgistru", "Detune##sgistru2", "Fixed##sgistru"
+  "OP4 Noise Mode##sgistru1", "Env. Delay##sgistru", "Output Level##sgistru1", "ModInput##sgistru", "Left##sgistru", "Right##sgistru", "Tune##sgistru", "Detune##sgistru2", "Fixed##sgistru0"
 };
 
 const char* esfmParamShortNames[9]={
@@ -197,7 +197,7 @@ const char* ssgEnvBits[5]={
 };
 
 const char* saaEnvBits[9]={
-  "mirror##sgistru", "loop##sgistru0", "cut##sgistru", "direction##sgistru1", "resolution##sgistru", "fixed##sgistru", "N/A##sgistru","enabled##sgistru1", NULL
+  "mirror##sgistru", "loop##sgistru0", "cut##sgistru", "direction##sgistru1", "resolution##sgistru", "fixed##sgistru1", "N/A##sgistru","enabled##sgistru1", NULL
 };
 
 const char* snesModeBits[6]={
@@ -344,7 +344,7 @@ const int kslMap[4]={
 //
 // if you really need to, and have a good rationale (and by good I mean a VERY
 // good one), please tell me and we'll sort it out.
-const char* macroAbsoluteMode="Fixed";
-const char* macroRelativeMode="Relative";
-const char* macroQSoundMode="QSound";
-const char* macroDummyMode="Bug";
+const char* macroAbsoluteMode="Fixed##sgistru2";
+const char* macroRelativeMode="Relative##sgistru";
+const char* macroQSoundMode="QSound##sgistru";
+const char* macroDummyMode="Bug##sgistru";

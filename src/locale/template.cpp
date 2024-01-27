@@ -3732,7 +3732,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Right##sgistru"].plurals[0] = "=Right";
     strings["Tune##sgistru"].plurals[0] = "=Tune";
     strings["Detune##sgistru2"].plurals[0] = "=Detune";
-    strings["Fixed##sgistru"].plurals[0] = "=Fixed";
+    strings["Fixed##sgistru0"].plurals[0] = "=Fixed";
     strings["Fine##sgistru3"].plurals[0] = "=Fine";
     strings["Fine##sgistru4"].plurals[0] = "=Fine";
     strings["Fine##sgistru5"].plurals[0] = "=Fine";
@@ -3861,7 +3861,7 @@ void DivLocale::addTranslationsTemplate()
     strings["cut##sgistru"].plurals[0] = "=cut";
     strings["direction##sgistru1"].plurals[0] = "=direction";
     strings["resolution##sgistru"].plurals[0] = "=resolution";
-    strings["fixed##sgistru"].plurals[0] = "=fixed";
+    strings["fixed##sgistru1"].plurals[0] = "=fixed";
     strings["N/A##sgistru"].plurals[0] = "=N/A";
     strings["enabled##sgistru1"].plurals[0] = "=enabled";
     strings["noise##sgistru2"].plurals[0] = "=noise";
@@ -3953,7 +3953,11 @@ void DivLocale::addTranslationsTemplate()
     strings["Decrease (logarithmic)##sgistru"].plurals[0] = "=Decrease (logarithmic)";
     strings["Increase (linear)##sgistru"].plurals[0] = "=Increase (linear)";
     strings["Increase (bent line)##sgistru"].plurals[0] = "=Increase (bent line)";
-
+    strings["Fixed##sgistru2"].plurals[0] = "=Fixed";
+    strings["Relative##sgistru"].plurals[0] = "=Relative";
+    strings["QSound##sgistru"].plurals[0] = "=QSound";
+    strings["Bug##sgistru"].plurals[0] = "=Bug";
+;
     //   sgiSU    src/gui/inst/su.cpp
     //   sgiSWAN  src/gui/inst/swan.cpp
     //   sgiT6W   src/gui/inst/t6w28.cpp
