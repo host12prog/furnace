@@ -2112,7 +2112,7 @@ void DivLocale::addTranslationsRussian()
 
     //keyboard hotkeys
 
-    strings["---Global##sggc"].plurals[0] = "=---Global";
+    strings["---Global##sggc"].plurals[0] = "---Global";
     strings["New##sggc"].plurals[0] = "Новый";
     strings["Open file##sggc"].plurals[0] = "Открыть файл";
     strings["Restore backup##sggc"].plurals[0] = "Загрузить резервную копию";
