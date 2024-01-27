@@ -953,7 +953,7 @@ void FurnaceGUI::drawSampleList(bool asChild) {
     }
     popDestColor();
     if (ImGui::IsItemHovered()) {
-      ImGui::SetTooltip(_L("Delete"));
+      ImGui::SetTooltip(_L("Delete##sgdl7"));
     }
     ImGui::Separator();
     if (ImGui::BeginTable("SampleListScroll",1,ImGuiTableFlags_ScrollY)) {

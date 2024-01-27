@@ -99,7 +99,7 @@ void FurnaceGUI::drawSampleEdit() {
         ImGui::TableNextColumn();
 
         if (e->song.sample.size()>0) {
-          if (ImGui::BeginCombo("##SampleSelect","select one...")) {
+          if (ImGui::BeginCombo("##SampleSelect",_L("select one...##sgse"))) {
             if (ImGui::BeginTable("SampleSelCombo",1,ImGuiTableFlags_ScrollY)) {
               actualSampleList();
               ImGui::EndTable();
@@ -812,9 +812,9 @@ void FurnaceGUI::drawSampleEdit() {
                     }
                     String toolText;
                     if (memName==NULL) {
-                      toolText=fmt::sprintf(_L("%s\n%d bytes free##sgse"),_L(e->getSystemName(e->song.system[j])),totalFree);
+                      toolText=fmt::sprintf(_LP("%s\n%d bytes free##sgse", totalFree),_L(e->getSystemName(e->song.system[j])),totalFree);
                     } else {
-                      toolText=fmt::sprintf(_L("%s (%s)\n%d bytes free##sgse"),_L(e->getSystemName(e->song.system[j])),memName,totalFree);
+                      toolText=fmt::sprintf(_LP("%s (%s)\n%d bytes free##sgse", totalFree),_L(e->getSystemName(e->song.system[j])),memName,totalFree);
                     }
 
                     if (isMemWarning[i][j] && sample->renderOn[i][j]) {

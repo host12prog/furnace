@@ -1575,6 +1575,7 @@ void DivLocale::addTranslationsTemplate()
     strings["%s: sample rate must be %d##sgse"].plurals[0] = "=%s: sample rate must be %d";
     strings["Sample Editor###Sample Editor"].plurals[0] = "=Sample Editor###Sample Editor";
     strings["no sample selected##sgse"].plurals[0] = "=no sample selected";
+    strings["select one...##sgse"].plurals[0] = "=select one...";
     strings["or##sgse0"].plurals[0] = "=or";
     strings["Open##sgse0"].plurals[0] = "=Open";
     strings["or##sgse1"].plurals[0] = "=or";
@@ -1622,6 +1623,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Compat Rate##sgse"].plurals[0] = "=Compat Rate";
     strings["used in DefleMask-compatible sample mode (17xx), in where samples are mapped to an octave.##sgse"].plurals[0] = "=used in DefleMask-compatible sample mode (17xx), in where samples are mapped to an octave.";
     strings["Loop (length: %d)##Loop"].plurals[0] = "=Loop (length: %d)##Loop";
+    strings["Loop##Loop"].plurals[0] = "=Loop##Loop";
     strings["changing the loop in a BRR sample may result in glitches!##sgse0"].plurals[0] = "=changing the loop in a BRR sample may result in glitches!";
     strings["Chips##sgse"].plurals[0] = "=Chips";
     strings["Type##sgse"].plurals[0] = "=Type";
@@ -1637,8 +1639,10 @@ void DivLocale::addTranslationsTemplate()
     strings["changing the loop in a BRR sample may result in glitches!##sgse1"].plurals[0] = "=changing the loop in a BRR sample may result in glitches!";
     strings["End##sgse"].plurals[0] = "=End";
     strings["changing the loop in a BRR sample may result in glitches!##sgse2"].plurals[0] = "=changing the loop in a BRR sample may result in glitches!";
-    strings["%s\n%d bytes free##sgse"].plurals[0] = "=%s\n%d bytes free";
-    strings["%s (%s)\n%d bytes free##sgse"].plurals[0] = "=%s (%s)\n%d bytes free";
+    strings["%s\n%d bytes free##sgse"].plurals[0] = "=%s\n%d byte free";
+    strings["%s\n%d bytes free##sgse"].plurals[1] = "=%s\n%d bytes free";
+    strings["%s (%s)\n%d bytes free##sgse"].plurals[0] = "=%s (%s)\n%d byte free";
+    strings["%s (%s)\n%d bytes free##sgse"].plurals[1] = "=%s (%s)\n%d bytes free";
     strings["\n\nnot enough memory for this sample!##sgse"].plurals[0] = "=\n\nnot enough memory for this sample!";
     strings["Edit mode: Select##sgse"].plurals[0] = "=Edit mode: Select";
     strings["Edit mode: Draw##sgse"].plurals[0] = "=Edit mode: Draw";
