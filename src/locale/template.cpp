@@ -3529,12 +3529,12 @@ void DivLocale::addTranslationsTemplate()
     // # sgiC140   src/gui/inst/c140.cpp
     // # sgiC219   src/gui/inst/c219.cpp
     // # sgiC64    src/gui/inst/c64.cpp
-    //   sgi5503   src/gui/inst/es5503.cpp
-    //   sgiOTTO   src/gui/inst/es5506.cpp
-    //   sgiESFM   src/gui/inst/esfm.cpp
+    // # sgi5503   src/gui/inst/es5503.cpp
+    // # sgiOTTO   src/gui/inst/es5506.cpp
+    // # sgiESFM   src/gui/inst/esfm.cpp
     //   sgiFDS    src/gui/inst/fds.cpp
     //   sgifmeu   src/gui/inst/fmEnvUtil.cpp
-    //   sgifmeh   src/gui/inst/fmEnvUtil.h
+    // # sgifmeh   src/gui/inst/fmEnvUtil.h
     //   sgiGA20   src/gui/inst/ga20.cpp
     //   sgiGB     src/gui/inst/gb.cpp
     //   sgiK00    src/gui/inst/k007232.cpp
@@ -3771,9 +3771,61 @@ void DivLocale::addTranslationsTemplate()
     strings["Control##sgiOTTO"].plurals[0] = "=Control";
 
     //   sgiESFM   src/gui/inst/esfm.cpp
+
+    strings["Other##sgiESFM0"].plurals[0] = "=Other";
+    strings["Other##sgiESFM1"].plurals[0] = "=Other";
+    strings["Envelope##sgiESFM0"].plurals[0] = "=Envelope";
+    strings["Envelope##sgiESFM1"].plurals[0] = "=Envelope";
+    strings["op%d##sgiESFM0"].plurals[0] = "=op%d";
+    strings["OP%d##sgiESFM1"].plurals[0] = "=OP%d";
+    strings["Detune in semitones##sgiESFM0"].plurals[0] = "=Detune in semitones";
+    strings["Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.##sgiESFM0"].plurals[0] = "=Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.";
+    strings["If operator outputs sound, enable left channel output.##sgiESFM0"].plurals[0] = "=If operator outputs sound, enable left channel output.";
+    strings["If operator outputs sound, enable right channel output.##sgiESFM0"].plurals[0] = "=If operator outputs sound, enable right channel output.";
+    strings["Block##sgiESFM0"].plurals[0] = "=Block";
+    strings["FreqNum##sgiESFM0"].plurals[0] = "=FreqNum";
+    strings["op%d##sgiESFM2"].plurals[0] = "=op%d";
+    strings["Operator %d##sgiESFM"].plurals[0] = "=Operator %d";
+    strings["Waveform##sgiESFM"].plurals[0] = "=Waveform";
+    strings["Envelope##sgiESFM"].plurals[0] = "=Envelope";
+    strings["Blk##sgiESFM"].plurals[0] = "=Blk";
+    strings["Block##sgiESFM1"].plurals[0] = "=Block";
+    strings["F##sgiESFM"].plurals[0] = "=F";
+    strings["Frequency (F-Num)##sgiESFM"].plurals[0] = "=Frequency (F-Num)";
+    strings["Detune in semitones##sgiESFM1"].plurals[0] = "=Detune in semitones";
+    strings["Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.##sgiESFM1"].plurals[0] = "=Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.";
+    strings["If operator outputs sound, enable left channel output.##sgiESFM1"].plurals[0] = "=If operator outputs sound, enable left channel output.";
+    strings["If operator outputs sound, enable right channel output.##sgiESFM1"].plurals[0] = "=If operator outputs sound, enable right channel output.";
+    strings["op%d##sgiESFM3"].plurals[0] = "=op%d";
+    strings["OP%d##sgiESFM4"].plurals[0] = "=OP%d";
+    strings["Block##sgiESFM2"].plurals[0] = "=Block";
+    strings["FreqNum##sgiESFM1"].plurals[0] = "=FreqNum";
+    strings["Detune in semitones##sgiESFM2"].plurals[0] = "=Detune in semitones";
+    strings["Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.##sgiESFM2"].plurals[0] = "=Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.";
+    strings["If operator outputs sound, enable left channel output.##sgiESFM2"].plurals[0] = "=If operator outputs sound, enable left channel output.";
+    strings["If operator outputs sound, enable right channel output.##sgiESFM2"].plurals[0] = "=If operator outputs sound, enable right channel output.";
+    strings["OP%d Macros##sgiESFM"].plurals[0] = "=OP%d Macros";
+    strings["Block##sgiESFM3"].plurals[0] = "=Block";
+    strings["FreqNum##sgiESFM2"].plurals[0] = "=FreqNum";
+    strings["Op. Arpeggio##sgiESFM"].plurals[0] = "=Op. Arpeggio";
+    strings["Op. Pitch##sgiESFM"].plurals[0] = "=Op. Pitch";
+    strings["Op. Panning##sgiESFM"].plurals[0] = "=Op. Panning";
+    strings["Macros##sgiESFM"].plurals[0] = "=Macros";
+    strings["Volume##sgiESFM"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiESFM"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiESFM"].plurals[0] = "=Pitch";
+    strings["OP4 Noise Mode##sgiESFM"].plurals[0] = "=OP4 Noise Mode";
+    strings["Panning##sgiESFM"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiESFM"].plurals[0] = "=Phase Reset";
+
     //   sgiFDS    src/gui/inst/fds.cpp
     //   sgifmeu   src/gui/inst/fmEnvUtil.cpp
     //   sgifmeh   src/gui/inst/fmEnvUtil.h
+
+    strings["(copying)##sgifmeh"].plurals[0] = "=(copying)";
+    strings["(swapping)##sgifmeh"].plurals[0] = "=(swapping)";
+    strings["- drag to swap operator\n- shift-drag to copy operator##sgifmeh"].plurals[0] = "=- drag to swap operator\n- shift-drag to copy operator";
+
     //   sgiGA20   src/gui/inst/ga20.cpp
     //   sgiGB     src/gui/inst/gb.cpp
     //   sgiK00    src/gui/inst/k007232.cpp
