@@ -3228,62 +3228,62 @@ void DivLocale::addTranslationsRussian()
     
     //   sgiPCMA  src/gui/inst/adpcma.cpp
 
-    strings["Macros##sgiPCMA"].plurals[0] = "=Macros";
-    strings["Volume##sgiPCMA"].plurals[0] = "=Volume";
-    strings["Global Volume##sgiPCMA"].plurals[0] = "=Global Volume";
-    strings["Panning##sgiPCMA"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiPCMA"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiPCMA"].plurals[0] = "Макросы";
+    strings["Volume##sgiPCMA"].plurals[0] = "Громкость";
+    strings["Global Volume##sgiPCMA"].plurals[0] = "Глобальная громкость";
+    strings["Panning##sgiPCMA"].plurals[0] = "Панорамирование";
+    strings["Phase Reset##sgiPCMA"].plurals[0]  = "Сброс фазы";
 
     //   sgiPCMB   src/gui/inst/adpcmb.cpp
 
-    strings["Macros##sgiPCMB"].plurals[0] = "=Macros";
-    strings["Volume##sgiPCMB"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiPCMB"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiPCMB"].plurals[0] = "=Pitch";
-    strings["Panning##sgiPCMB"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiPCMB"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiPCMB"].plurals[0] = "Макросы";
+    strings["Volume##sgiPCMB"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiPCMB"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiPCMB"].plurals[0] = "Частота";
+    strings["Panning##sgiPCMB"].plurals[0] = "Панорамирование";
+    strings["Phase Reset##sgiPCMB"].plurals[0]  = "Сброс фазы";
 
     //   sgiSAMPLE src/gui/inst/amiga.cpp
 
-    strings["Macros##sgiSAMPLE"].plurals[0] = "=Macros";
-    strings["Volume##sgiSAMPLE"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiSAMPLE"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiSAMPLE"].plurals[0] = "=Pitch";
-    strings["Panning##sgiSAMPLE"].plurals[0] = "=Panning";
-    strings["Panning (left)##sgiSAMPLE"].plurals[0] = "=Panning (left)";
-    strings["Surround##sgiSAMPLE"].plurals[0] = "=Surround";
-    strings["Panning (right)##sgiSAMPLE"].plurals[0] = "=Panning (right)";
-    strings["Waveform##sgiSAMPLE"].plurals[0] = "=Waveform";
-    strings["Phase Reset##sgiSAMPLE"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiSAMPLE"].plurals[0] = "Макросы";
+    strings["Volume##sgiSAMPLE"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiSAMPLE"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiSAMPLE"].plurals[0] = "Частота";
+    strings["Panning##sgiSAMPLE"].plurals[0] = "Панорамирование";
+    strings["Panning (left)##sgiSAMPLE"].plurals[0] = "Панорамирование (лево)";
+    strings["Surround##sgiSAMPLE"].plurals[0] = "Окружающее звучание";
+    strings["Panning (right)##sgiSAMPLE"].plurals[0] = "Панорамирование (право)";
+    strings["Waveform##sgiSAMPLE"].plurals[0] = "Волна";
+    strings["Phase Reset##sgiSAMPLE"].plurals[0]  = "Сброс фазы";
 
     //   sgiAY     src/gui/inst/ay.cpp
 
-    strings["Macros##sgiAY"].plurals[0] = "=Macros";
-    strings["Volume##sgiAY"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiAY"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiAY"].plurals[0] = "=Pitch";
-    strings["Noise Freq##sgiAY"].plurals[0] = "=Noise Freq";
-    strings["Waveform##sgiAY"].plurals[0] = "=Waveform";
-    strings["Phase Reset##sgiAY"].plurals[0] = "=Phase Reset";
-    strings["Envelope##sgiAY"].plurals[0] = "=Envelope";
-    strings["AutoEnv Num##sgiAY"].plurals[0] = "=AutoEnv Num";
-    strings["AutoEnv Den##sgiAY"].plurals[0] = "=AutoEnv Den";
+    strings["Macros##sgiAY"].plurals[0] = "Макросы";
+    strings["Volume##sgiAY"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiAY"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiAY"].plurals[0] = "Частота";
+    strings["Noise Freq##sgiAY"].plurals[0] = "Частота шума";
+    strings["Waveform##sgiAY"].plurals[0] = "Волна";
+    strings["Phase Reset##sgiAY"].plurals[0]  = "Сброс фазы";
+    strings["Envelope##sgiAY"].plurals[0] = "Огибающая";
+    strings["AutoEnv Num##sgiAY"].plurals[0] = "Множ. част. авто-огиб.";
+    strings["AutoEnv Den##sgiAY"].plurals[0] = "Дел. част. авто-огиб.";
 
     //   sgi8930   src/gui/inst/ay8930.cpp
 
-    strings["Macros##sgi8930"].plurals[0] = "=Macros";
-    strings["Volume##sgi8930"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgi8930"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgi8930"].plurals[0] = "=Pitch";
-    strings["Noise Freq##sgi8930"].plurals[0] = "=Noise Freq";
-    strings["Waveform##sgi8930"].plurals[0] = "=Waveform";
-    strings["Phase Reset##sgi8930"].plurals[0] = "=Phase Reset";
-    strings["Duty##sgi8930"].plurals[0] = "=Duty";
-    strings["Envelope##sgi8930"].plurals[0] = "=Envelope";
-    strings["AutoEnv Num##sgi8930"].plurals[0] = "=AutoEnv Num";
-    strings["AutoEnv Den##sgi8930"].plurals[0] = "=AutoEnv Den";
-    strings["Noise AND Mask##sgi8930"].plurals[0] = "=Noise AND Mask";
-    strings["Noise OR Mask##sgi8930"].plurals[0] = "=Noise OR Mask";
+    strings["Macros##sgi8930"].plurals[0] = "Макросы";
+    strings["Volume##sgi8930"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgi8930"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgi8930"].plurals[0] = "Частота";
+    strings["Noise Freq##sgi8930"].plurals[0] = "Частота шума";
+    strings["Waveform##sgi8930"].plurals[0] = "Волна";
+    strings["Phase Reset##sgi8930"].plurals[0]  = "Сброс фазы";
+    strings["Duty##sgi8930"].plurals[0] = "Скважность";
+    strings["Envelope##sgi8930"].plurals[0] = "Огибающая";
+    strings["AutoEnv Num##sgi8930"].plurals[0] = "Множ. част. авто-огиб.";
+    strings["AutoEnv Den##sgi8930"].plurals[0] = "Дел. част. авто-огиб.";
+    strings["Noise AND Mask##sgi8930"].plurals[0] = "Маска шума (И)";
+    strings["Noise OR Mask##sgi8930"].plurals[0] = "Маска шума (ИЛИ)";
 
     //   sgistru   src/gui/inst/stringsUtil.cpp
 
@@ -3317,7 +3317,7 @@ void DivLocale::addTranslationsRussian()
     strings["Level Scaling##sgistru"].plurals[0] = "=Level Scaling";
     strings["Sustain##sgistru1"].plurals[0] = "=Sustain";
     strings["Vibrato##sgistru"].plurals[0] = "=Vibrato";
-    strings["Waveform##sgistru"].plurals[0] = "=Waveform";
+    strings["Waveform##sgistru"].plurals[0] = "Волна";
     strings["Scale Rate##sgistru"].plurals[0] = "=Scale Rate";
     strings["OP2 Half Sine##sgistru"].plurals[0] = "=OP2 Half Sine";
     strings["OP1 Half Sine##sgistru"].plurals[0] = "=OP1 Half Sine";
@@ -3463,11 +3463,11 @@ void DivLocale::addTranslationsRussian()
     strings["noise##sgistru0"].plurals[0] = "=noise";
     strings["tone##sgistru"].plurals[0] = "=tone";
     strings["noise##sgistru1"].plurals[0] = "=noise";
-    strings["envelope##sgistru"].plurals[0] = "=envelope";
+    strings["envelope##sgistru"].plurals[0] = "огибающая";
     strings["hold##sgistru"].plurals[0] = "удержание";
     strings["alternate##sgistru"].plurals[0] = "изм. направл.";
-    strings["direction##sgistru"].plurals[0] = "направление";
-    strings["enable##sgistru"].plurals[0] = "вкл.";
+    strings["direction##sgistru0"].plurals[0] = "направление";
+    strings["enable##sgistru0"].plurals[0] = "вкл.";
     strings["enabled##sgistru0"].plurals[0] = "=enabled";
     strings["mirror##sgistru"].plurals[0] = "=mirror";
     strings["loop##sgistru0"].plurals[0] = "=loop";
@@ -3548,7 +3548,7 @@ void DivLocale::addTranslationsRussian()
     strings["Slide##sgistru"].plurals[0] = "=Slide";
     strings["Mix Chorus##sgistru"].plurals[0] = "=Mix Chorus";
     strings["Phase Modulation##sgistru"].plurals[0] = "=Phase Modulation";
-    strings["Envelope##sgistru"].plurals[0] = "=Envelope";
+    strings["Envelope##sgistru"].plurals[0] = "огибающая";
     strings["Sweep##sgistru"].plurals[0] = "=Sweep";
     strings["Wait##sgistru0"].plurals[0] = "=Wait";
     strings["Wait for Release##sgistru0"].plurals[0] = "=Wait for Release";
