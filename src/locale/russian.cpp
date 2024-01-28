@@ -1906,7 +1906,7 @@ void DivLocale::addTranslationsRussian()
 
     //   sgsm  src/gui/sysManager.cpp
 
-    strings["Chip Manager###Chip Manager"].plurals[0] = "Управление чипами###Chip Manager";
+    strings["Chip Manager###Chip Manager"].plurals[0] = "Менеджер чипов###Chip Manager";
     strings["Preserve channel order##sgsm"].plurals[0] = "Сохранить порядок каналов";
     strings["Name##sgsm"].plurals[0] = "Название";
     strings["Actions##sgsm"].plurals[0] = "Действия";
@@ -3298,6 +3298,130 @@ void DivLocale::addTranslationsRussian()
     strings["AutoEnv Den##sgi8930"].plurals[0] = "Дел. част. авто-огиб.";
     strings["Noise AND Mask##sgi8930"].plurals[0] = "Маска шума (И)";
     strings["Noise OR Mask##sgi8930"].plurals[0] = "Маска шума (ИЛИ)";
+
+    //   sgiB      src/gui/inst/beeper.cpp
+
+    strings["Macros##sgiB"].plurals[0] = "=Macros";
+    strings["Volume##sgiB"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiB"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiB"].plurals[0] = "=Pitch";
+    strings["Pulse Width##sgiB"].plurals[0] = "=Pulse Width";
+
+    //   sgiC140   src/gui/inst/c140.cpp
+
+    strings["Macros##sgiC140"].plurals[0] = "=Macros";
+    strings["Volume##sgiC140"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiC140"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiC140"].plurals[0] = "=Pitch";
+    strings["Panning (left)##sgiC140"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiC140"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiC140"].plurals[0] = "=Phase Reset";
+
+    //   sgiC219   src/gui/inst/c219.cpp
+
+    strings["Macros##sgiC219"].plurals[0] = "=Macros";
+    strings["Volume##sgiC219"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiC219"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiC219"].plurals[0] = "=Pitch";
+    strings["Control##sgiC219"].plurals[0] = "=Control";
+    strings["Panning (left)##sgiC219"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiC219"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiC219"].plurals[0] = "=Phase Reset";
+
+    //   sgiC64    src/gui/inst/c64.cpp
+
+    strings["Waveform##sgiC640"].plurals[0] = "=Waveform";
+    strings["tri##sgiC64"].plurals[0] = "=tri";
+    strings["saw##sgiC64"].plurals[0] = "=saw";
+    strings["pulse##sgiC64"].plurals[0] = "=pulse";
+    strings["noise##sgiC64"].plurals[0] = "=noise";
+    strings["A##sgiC640"].plurals[0] = "=A";
+    strings["A##sgiC641"].plurals[0] = "=A";
+    strings["D##sgiC640"].plurals[0] = "=D";
+    strings["D##sgiC641"].plurals[0] = "=D";
+    strings["S##sgiC640"].plurals[0] = "=S";
+    strings["S##sgiC641"].plurals[0] = "=S";
+    strings["R##sgiC640"].plurals[0] = "=R";
+    strings["R##sgiC641"].plurals[0] = "=R";
+    strings["Envelope##sgiC640"].plurals[0] = "=Envelope";
+    strings["Envelope##sgiC641"].plurals[0] = "=Envelope";
+    strings["Duty##sgiC640"].plurals[0] = "=Duty";
+    strings["Ring Modulation##sgiC64"].plurals[0] = "=Ring Modulation";
+    strings["Oscillator Sync##sgiC64"].plurals[0] = "=Oscillator Sync";
+    strings["Enable filter##sgiC64"].plurals[0] = "=Enable filter";
+    strings["Initialize filter##sgiC64"].plurals[0] = "=Initialize filter";
+    strings["Cutoff##sgiC640"].plurals[0] = "=Cutoff";
+    strings["Resonance##sgiC640"].plurals[0] = "=Resonance";
+    strings["Filter Mode##sgiC640"].plurals[0] = "=Filter Mode";
+    strings["low##sgiC64"].plurals[0] = "=low";
+    strings["band##sgiC64"].plurals[0] = "=band";
+    strings["high##sgiC64"].plurals[0] = "=high";
+    strings["ch3off##sgiC64"].plurals[0] = "=ch3off";
+    strings["Absolute Cutoff Macro##sgiC64"].plurals[0] = "=Absolute Cutoff Macro";
+    strings["Absolute Duty Macro##sgiC64"].plurals[0] = "=Absolute Duty Macro";
+    strings["Don't test before new note##sgiC64"].plurals[0] = "=Don't test before new note";
+    strings["Macros##sgiC64"].plurals[0] = "=Macros";
+    strings["Volume##sgiC64"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiC64"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiC64"].plurals[0] = "=Pitch";
+    strings["Duty##sgiC641"].plurals[0] = "=Duty";
+    strings["Waveform##sgiC641"].plurals[0] = "=Waveform";
+    strings["Cutoff##sgiC641"].plurals[0] = "=Cutoff";
+    strings["Filter Mode##sgiC641"].plurals[0] = "=Filter Mode";
+    strings["Filter Toggle##sgiC64"].plurals[0] = "=Filter Toggle";
+    strings["Resonance##sgiC641"].plurals[0] = "=Resonance";
+    strings["Special##sgiC64"].plurals[0] = "=Special";
+    strings["Attack##sgiC64"].plurals[0] = "=Attack";
+    strings["Decay##sgiC64"].plurals[0] = "=Decay";
+    strings["Sustain##sgiC64"].plurals[0] = "=Sustain";
+    strings["Release##sgiC64"].plurals[0] = "=Release";
+
+    //   sgi5503   src/gui/inst/es5503.cpp
+
+    strings["Oscillator mode:##sgi5503"].plurals[0] = "=Oscillator mode:";
+    strings["Freerun##sgi5503"].plurals[0] = "=Freerun";
+    strings["Oneshot##sgi5503"].plurals[0] = "=Oneshot";
+    strings["Sync/AM##sgi5503"].plurals[0] = "=Sync/AM";
+    strings["Swap##sgi5503"].plurals[0] = "=Swap";
+    strings["Virtual softpan channel##sgi5503"].plurals[0] = "=Virtual softpan channel";
+    strings["Combines odd and next even channel into one virtual channel with 256-step panning.\nInstrument, volume and effects need to be placed on the odd channel (e.g. 1st, 3rd, 5th etc.)##sgi5503"].plurals[0] = "=Combines odd and next even channel into one virtual channel with 256-step panning.\nInstrument, volume and effects need to be placed on the odd channel (e.g. 1st, 3rd, 5th etc.)";
+    strings["Phase reset on key-on##sgi5503"].plurals[0] = "=Phase reset on key-on";
+    strings["Macros##sgi5503"].plurals[0] = "=Macros";
+    strings["Volume##sgi5503"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgi5503"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgi5503"].plurals[0] = "=Pitch";
+    strings["Osc. mode##sgi5503"].plurals[0] = "=Osc. mode";
+    strings["Panning (left)##sgi5503"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgi5503"].plurals[0] = "=Panning (right)";
+    strings["Waveform##sgi5503"].plurals[0] = "=Waveform";
+    strings["Phase Reset##sgi5503"].plurals[0] = "=Phase Reset";
+    strings["Wave/sample pos.##sgi5503"].plurals[0] = "=Wave/sample pos.";
+    strings["Osc. output##sgi5503"].plurals[0] = "=Osc. output";
+
+    //   sgiOTTO   src/gui/inst/es5506.cpp
+
+    strings["Filter Mode##sgiOTTO0"].plurals[0] = "=Filter Mode";
+    strings["Filter K1##sgiOTTO0"].plurals[0] = "=Filter K1";
+    strings["Filter K2##sgiOTTO0"].plurals[0] = "=Filter K2";
+    strings["Envelope count##sgiOTTO"].plurals[0] = "=Envelope count";
+    strings["Left Volume Ramp##sgiOTTO"].plurals[0] = "=Left Volume Ramp";
+    strings["Right Volume Ramp##sgiOTTO"].plurals[0] = "=Right Volume Ramp";
+    strings["Filter K1 Ramp##sgiOTTO"].plurals[0] = "=Filter K1 Ramp";
+    strings["Filter K2 Ramp##sgiOTTO"].plurals[0] = "=Filter K2 Ramp";
+    strings["K1 Ramp Slowdown##sgiOTTO"].plurals[0] = "=K1 Ramp Slowdown";
+    strings["K2 Ramp Slowdown##sgiOTTO"].plurals[0] = "=K2 Ramp Slowdown";
+    strings["Macros##sgiOTTO"].plurals[0] = "=Macros";
+    strings["Volume##sgiOTTO"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiOTTO"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiOTTO"].plurals[0] = "=Pitch";
+    strings["Panning (left)##sgiOTTO"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiOTTO"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiOTTO"].plurals[0] = "=Phase Reset";
+    strings["Filter Mode##sgiOTTO1"].plurals[0] = "=Filter Mode";
+    strings["Filter K1##sgiOTTO1"].plurals[0] = "=Filter K1";
+    strings["Filter K2##sgiOTTO1"].plurals[0] = "=Filter K2";
+    strings["Outputs##sgiOTTO"].plurals[0] = "=Outputs";
+    strings["Control##sgiOTTO"].plurals[0] = "=Control";
 
     //   sgistru   src/gui/inst/stringsUtil.cpp
 
