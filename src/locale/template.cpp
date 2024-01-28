@@ -3518,6 +3518,7 @@ void DivLocale::addTranslationsTemplate()
     strings["<nothing>##sgut"].plurals[0] = "=<nothing>";
     strings["Unknown##sgut0"].plurals[0] = "=Unknown";
     strings["Unknown##sgut1"].plurals[0] = "=Unknown";
+
 /*  instruments
 
     // # sgiPCMA   src/gui/inst/adpcma.cpp
@@ -3532,7 +3533,7 @@ void DivLocale::addTranslationsTemplate()
     // # sgi5503   src/gui/inst/es5503.cpp
     // # sgiOTTO   src/gui/inst/es5506.cpp
     // # sgiESFM   src/gui/inst/esfm.cpp
-    //   sgiFDS    src/gui/inst/fds.cpp
+    // # sgiFDS    src/gui/inst/fds.cpp
     //   sgifmeu   src/gui/inst/fmEnvUtil.cpp
     // # sgifmeh   src/gui/inst/fmEnvUtil.h
     //   sgiGA20   src/gui/inst/ga20.cpp
@@ -3819,6 +3820,21 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##sgiESFM"].plurals[0] = "=Phase Reset";
 
     //   sgiFDS    src/gui/inst/fds.cpp
+
+    strings["Compatibility mode##sgiFDS"].plurals[0] = "=Compatibility mode";
+    strings["only use for compatibility with .dmf modules!\n- initializes modulation table with first wavetable\n- does not alter modulation parameters on instrument change##sgiFDS"].plurals[0] = "=only use for compatibility with .dmf modules!\n- initializes modulation table with first wavetable\n- does not alter modulation parameters on instrument change";
+    strings["Modulation depth##sgiFDS"].plurals[0] = "=Modulation depth";
+    strings["Modulation speed##sgiFDS"].plurals[0] = "=Modulation speed";
+    strings["Modulation table##sgiFDS"].plurals[0] = "=Modulation table";
+    strings["Macros##sgiFDS"].plurals[0] = "=Macros";
+    strings["Volume##sgiFDS"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiFDS"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiFDS"].plurals[0] = "=Pitch";
+    strings["Waveform##sgiFDS"].plurals[0] = "=Waveform";
+    strings["Mod Depth##sgiFDS"].plurals[0] = "=Mod Depth";
+    strings["Mod Speed##sgiFDS"].plurals[0] = "=Mod Speed";
+    strings["Mod Position##sgiFDS"].plurals[0] = "=Mod Position";
+
     //   sgifmeu   src/gui/inst/fmEnvUtil.cpp
     //   sgifmeh   src/gui/inst/fmEnvUtil.h
 
