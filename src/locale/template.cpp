@@ -3277,6 +3277,23 @@ void DivLocale::addTranslationsTemplate()
     strings["Reference##CC_GUI_COLOR_OSC_REF"].plurals[0] = "=Reference##CC_GUI_COLOR_OSC_REF";
     strings["Guide##CC_GUI_COLOR_OSC_GUIDE"].plurals[0] = "=Guide##CC_GUI_COLOR_OSC_GUIDE";
 
+    strings["Waveform (1)##CC_GUI_COLOR_OSC_WAVE_CH0"].plurals[0] = "=Waveform (1)##CC_GUI_COLOR_OSC_WAVE_CH0";
+    strings["Waveform (2)##CC_GUI_COLOR_OSC_WAVE_CH1"].plurals[0] = "=Waveform (2)##CC_GUI_COLOR_OSC_WAVE_CH1";
+    strings["Waveform (3)##CC_GUI_COLOR_OSC_WAVE_CH2"].plurals[0] = "=Waveform (3)##CC_GUI_COLOR_OSC_WAVE_CH2";
+    strings["Waveform (4)##CC_GUI_COLOR_OSC_WAVE_CH3"].plurals[0] = "=Waveform (4)##CC_GUI_COLOR_OSC_WAVE_CH3";
+    strings["Waveform (5)##CC_GUI_COLOR_OSC_WAVE_CH4"].plurals[0] = "=Waveform (5)##CC_GUI_COLOR_OSC_WAVE_CH4";
+    strings["Waveform (6)##CC_GUI_COLOR_OSC_WAVE_CH5"].plurals[0] = "=Waveform (6)##CC_GUI_COLOR_OSC_WAVE_CH5";
+    strings["Waveform (7)##CC_GUI_COLOR_OSC_WAVE_CH6"].plurals[0] = "=Waveform (7)##CC_GUI_COLOR_OSC_WAVE_CH6";
+    strings["Waveform (8)##CC_GUI_COLOR_OSC_WAVE_CH7"].plurals[0] = "=Waveform (8)##CC_GUI_COLOR_OSC_WAVE_CH7";
+    strings["Waveform (9)##CC_GUI_COLOR_OSC_WAVE_CH8"].plurals[0] = "=Waveform (9)##CC_GUI_COLOR_OSC_WAVE_CH8";
+    strings["Waveform (10)##CC_GUI_COLOR_OSC_WAVE_CH9"].plurals[0] = "=Waveform (10)##CC_GUI_COLOR_OSC_WAVE_CH9";
+    strings["Waveform (11)##CC_GUI_COLOR_OSC_WAVE_CH10"].plurals[0] = "=Waveform (11)##CC_GUI_COLOR_OSC_WAVE_CH10";
+    strings["Waveform (12)##CC_GUI_COLOR_OSC_WAVE_CH11"].plurals[0] = "=Waveform (12)##CC_GUI_COLOR_OSC_WAVE_CH11";
+    strings["Waveform (13)##CC_GUI_COLOR_OSC_WAVE_CH12"].plurals[0] = "=Waveform (13)##CC_GUI_COLOR_OSC_WAVE_CH12";
+    strings["Waveform (14)##CC_GUI_COLOR_OSC_WAVE_CH13"].plurals[0] = "=Waveform (14)##CC_GUI_COLOR_OSC_WAVE_CH13";
+    strings["Waveform (15)##CC_GUI_COLOR_OSC_WAVE_CH14"].plurals[0] = "=Waveform (15)##CC_GUI_COLOR_OSC_WAVE_CH14";
+    strings["Waveform (16)##CC_GUI_COLOR_OSC_WAVE_CH15"].plurals[0] = "=Waveform (16)##CC_GUI_COLOR_OSC_WAVE_CH15";
+
     strings["Low##CC_GUI_COLOR_VOLMETER_LOW"].plurals[0] = "=Low##CC_GUI_COLOR_VOLMETER_LOW";
     strings["High##CC_GUI_COLOR_VOLMETER_HIGH"].plurals[0] = "=High##CC_GUI_COLOR_VOLMETER_HIGH";
     strings["Clip##CC_GUI_COLOR_VOLMETER_PEAK"].plurals[0] = "=Clip##CC_GUI_COLOR_VOLMETER_PEAK";
