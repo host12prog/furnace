@@ -1753,6 +1753,8 @@ void DivLocale::addTranslationsRussian()
     strings["DPCM channel mode:##sgsc"].plurals[0] = "Режим ДИКМ-канала:";
     strings["DPCM (muffled samples; low CPU usage)##sgsc"].plurals[0] = "ДИКМ (замыленные сэмплы; малое использование ЦП)";
     strings["PCM (crisp samples; high CPU usage)##sgsc"].plurals[0] = "ИКМ (чёткие сэмплы; большое использование ЦП)";
+    strings["Clock rate:##sgsc18"].plurals[0] = "Тактовая частота:";
+    strings["Clock rate:##sgsc19"].plurals[0] = "Тактовая частота:";
     strings["Global parameter priority:##sgsc0"].plurals[0] = "Приоритет глобальных параметров:";
     strings["Left to right##sgsc0"].plurals[0] = "Слева направо";
     strings["Last used channel##sgsc0"].plurals[0] = "Последний использованный канал";

@@ -560,7 +560,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
     case DIV_SYSTEM_MMC5: {
       int clockSel=flags.getInt("clockSel",0);
 
-      ImGui::Text("Clock rate:");
+      ImGui::Text(_L("Clock rate:##sgsc18"));
 
       ImGui::Indent();
       if (ImGui::RadioButton("NTSC (1.79MHz)",clockSel==0)) {
@@ -596,7 +596,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       int testRelease=flags.getInt("testRelease",0);
       int initResetTime=flags.getInt("initResetTime",2);
 
-      ImGui::Text("Clock rate:");
+      ImGui::Text(_L("Clock rate:##sgsc19"));
 
       ImGui::Indent();
       if (ImGui::RadioButton("NTSC (1.02MHz)",clockSel==0)) {

@@ -1818,6 +1818,8 @@ void DivLocale::addTranslationsTemplate()
     strings["DPCM channel mode:##sgsc"].plurals[0] = "=DPCM channel mode:";
     strings["DPCM (muffled samples; low CPU usage)##sgsc"].plurals[0] = "=DPCM (muffled samples; low CPU usage)";
     strings["PCM (crisp samples; high CPU usage)##sgsc"].plurals[0] = "=PCM (crisp samples; high CPU usage)";
+    strings["Clock rate:##sgsc18"].plurals[0] = "=Clock rate:";
+    strings["Clock rate:##sgsc19"].plurals[0] = "=Clock rate:";
     strings["Global parameter priority:##sgsc0"].plurals[0] = "=Global parameter priority:";
     strings["Left to right##sgsc0"].plurals[0] = "=Left to right";
     strings["Last used channel##sgsc0"].plurals[0] = "=Last used channel";
