@@ -3836,6 +3836,12 @@ void DivLocale::addTranslationsTemplate()
     strings["Mod Position##sgiFDS"].plurals[0] = "=Mod Position";
 
     //   sgifmeu   src/gui/inst/fmEnvUtil.cpp
+
+    strings["left click to restart\nmiddle click to pause\nright click to see algorithm##sgifmeu"].plurals[0] = "=left click to restart\nmiddle click to pause\nright click to see algorithm";
+    strings["left click to configure TL scaling\nright click to see FM preview##sgifmeu"].plurals[0] = "=left click to configure TL scaling\nright click to see FM preview";
+    strings["right click to see FM preview##sgifmeu"].plurals[0] = "=right click to see FM preview";
+    strings["operator level changes with volume?##sgifmeu"].plurals[0] = "=operator level changes with volume?";
+
     //   sgifmeh   src/gui/inst/fmEnvUtil.h
 
     strings["(copying)##sgifmeh"].plurals[0] = "=(copying)";
@@ -3843,6 +3849,13 @@ void DivLocale::addTranslationsTemplate()
     strings["- drag to swap operator\n- shift-drag to copy operator##sgifmeh"].plurals[0] = "=- drag to swap operator\n- shift-drag to copy operator";
 
     //   sgiGA20   src/gui/inst/ga20.cpp
+
+    strings["Macros##sgiGA20"].plurals[0] = "=Macros";
+    strings["Volume##sgiGA20"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiGA20"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiGA20"].plurals[0] = "=Pitch";
+    strings["Phase Reset##sgiGA20"].plurals[0] = "=Phase Reset";
+
     //   sgiGB     src/gui/inst/gb.cpp
     //   sgiK00    src/gui/inst/k007232.cpp
     //   sgiK05    src/gui/inst/k053260.cpp
