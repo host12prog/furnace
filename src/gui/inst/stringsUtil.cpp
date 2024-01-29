@@ -253,11 +253,11 @@ const char* panBits[5]={
 };
 
 const char* powerNoiseControlBits[3]={
-  "tap B##sgistru", "slope AM##sgistru", NULL
+  "enable tap B##sgistru", "AM with slope##sgistru", NULL
 };
 
 const char* powerNoiseSlopeControlBits[7]={
-  "down B##sgistru", "down A##sgistru", "reset B##sgistru", "reset A##sgistru", "clip B##sgistru", "clip A##sgistru", NULL
+  "invert B##sgistru", "invert A##sgistru", "reset B##sgistru", "reset A##sgistru", "clip B##sgistru", "clip A##sgistru", NULL
 };
 
 const char* oneBit[2]={
