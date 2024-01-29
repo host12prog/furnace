@@ -3511,6 +3511,41 @@ void DivLocale::addTranslationsRussian()
     strings["Arpeggio##sgiGA20"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiGA20"].plurals[0] = "Частота";
     strings["Phase Reset##sgiGA20"].plurals[0] = "Сброс фазы";
+    
+    //   sgiGB     src/gui/inst/gb.cpp
+
+    strings["Game Boy##sgiGB"].plurals[0] = "Game Boy";
+    strings["Use software envelope##sgiGB"].plurals[0] = "Использовать программную огибающую громкости";
+    strings["Initialize envelope on every note##sgiGB"].plurals[0] = "Инициализировать огибающую на каждой ноте";
+    strings["Volume##sgiGB0"].plurals[0] = "Громкость";
+    strings["Length##sgiGB"].plurals[0] = "Длина";
+    strings["Sound Length##sgiGB"].plurals[0] = "Длина звука";
+    strings["Direction##sgiGB"].plurals[0] = "Направление";
+    strings["Up##sgiGB0"].plurals[0] = "Вверх";
+    strings["Down##sgiGB0"].plurals[0] = "Вниз";
+    strings["Hardware Sequence##sgiGB"].plurals[0] = "Аппаратная последовательность";
+    strings["Tick##sgiGB"].plurals[0] = "Шаг движка";
+    strings["Command##sgiGB"].plurals[0] = "Команда";
+    strings["Move/Remove##sgiGB"].plurals[0] = "Перем./Удал.";
+    strings["Volume##sgiGB1"].plurals[0] = "Громкость";
+    strings["Env Length##sgiGB"].plurals[0] = "Длина огибающей";
+    strings["Sound Length##sgiGB"].plurals[0] = "Длина звука";
+    strings["Up##sgiGB1"].plurals[0] = "Вверх";
+    strings["Down##sgiGB1"].plurals[0] = "Вниз";
+    strings["Shift##sgiGB"].plurals[0] = "На сколько";
+    strings["Speed##sgiGB"].plurals[0] = "Скорость";
+    strings["Up##sgiGB2"].plurals[0] = "Вверх";
+    strings["Down##sgiGB2"].plurals[0] = "Вниз";
+    strings["Ticks##sgiGB"].plurals[0] = "Шагов";
+    strings["Position##sgiGB"].plurals[0] = "Положение";
+    strings["Macros##sgiGB"].plurals[0] = "Макросы";
+    strings["Volume##sgiGB2"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiGB"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiGB"].plurals[0] = "Частота";
+    strings["Duty/Noise##sgiGB"].plurals[0] = "Скважность/режим шума";
+    strings["Waveform##sgiGB"].plurals[0] = "Волна";
+    strings["Panning##sgiGB"].plurals[0] = "Панорамирование";
+    strings["Phase Reset##sgiGB"].plurals[0] = "Сброс фазы";
 
     //   sgistru   src/gui/inst/stringsUtil.cpp
 
@@ -3775,7 +3810,7 @@ void DivLocale::addTranslationsRussian()
     strings["Slide##sgistru"].plurals[0] = "Сдвиг";
     strings["Mix Chorus##sgistru"].plurals[0] = "Микширование с хорусом";
     strings["Phase Modulation##sgistru"].plurals[0] = "Фазовая модуляция";
-    strings["Envelope##sgistru"].plurals[0] = "огибающая";
+    strings["Envelope##sgistru"].plurals[0] = "Огибающая";
     strings["Sweep##sgistru"].plurals[0] = "Аппаратное портаменто";
     strings["Wait##sgistru0"].plurals[0] = "Ждать";
     strings["Wait for Release##sgistru0"].plurals[0] = "Ждать релиз";

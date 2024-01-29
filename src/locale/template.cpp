@@ -3537,8 +3537,8 @@ void DivLocale::addTranslationsTemplate()
     // # sgiFDS    src/gui/inst/fds.cpp
     //   sgifmeu   src/gui/inst/fmEnvUtil.cpp
     // # sgifmeh   src/gui/inst/fmEnvUtil.h
-    //   sgiGA20   src/gui/inst/ga20.cpp
-    //   sgiGB     src/gui/inst/gb.cpp
+    // # sgiGA20   src/gui/inst/ga20.cpp
+    // # sgiGB     src/gui/inst/gb.cpp
     //   sgiK00    src/gui/inst/k007232.cpp
     //   sgiK05    src/gui/inst/k053260.cpp
     //   sgimcd    src/gui/inst/macroDraw.cpp
@@ -3861,6 +3861,40 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##sgiGA20"].plurals[0] = "=Phase Reset";
 
     //   sgiGB     src/gui/inst/gb.cpp
+
+    strings["Game Boy##sgiGB"].plurals[0] = "=Game Boy";
+    strings["Use software envelope##sgiGB"].plurals[0] = "=Use software envelope";
+    strings["Initialize envelope on every note##sgiGB"].plurals[0] = "=Initialize envelope on every note";
+    strings["Volume##sgiGB0"].plurals[0] = "=Volume";
+    strings["Length##sgiGB"].plurals[0] = "=Length";
+    strings["Sound Length##sgiGB"].plurals[0] = "=Sound Length";
+    strings["Direction##sgiGB"].plurals[0] = "=Direction";
+    strings["Up##sgiGB0"].plurals[0] = "=Up";
+    strings["Down##sgiGB0"].plurals[0] = "=Down";
+    strings["Hardware Sequence##sgiGB"].plurals[0] = "=Hardware Sequence";
+    strings["Tick##sgiGB"].plurals[0] = "=Tick";
+    strings["Command##sgiGB"].plurals[0] = "=Command";
+    strings["Move/Remove##sgiGB"].plurals[0] = "=Move/Remove";
+    strings["Volume##sgiGB1"].plurals[0] = "=Volume";
+    strings["Env Length##sgiGB"].plurals[0] = "=Env Length";
+    strings["Sound Length##sgiGB"].plurals[0] = "=Sound Length";
+    strings["Up##sgiGB1"].plurals[0] = "=Up";
+    strings["Down##sgiGB1"].plurals[0] = "=Down";
+    strings["Shift##sgiGB"].plurals[0] = "=Shift";
+    strings["Speed##sgiGB"].plurals[0] = "=Speed";
+    strings["Up##sgiGB2"].plurals[0] = "=Up";
+    strings["Down##sgiGB2"].plurals[0] = "=Down";
+    strings["Ticks##sgiGB"].plurals[0] = "=Ticks";
+    strings["Position##sgiGB"].plurals[0] = "=Position";
+    strings["Macros##sgiGB"].plurals[0] = "=Macros";
+    strings["Volume##sgiGB2"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiGB"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiGB"].plurals[0] = "=Pitch";
+    strings["Duty/Noise##sgiGB"].plurals[0] = "=Duty/Noise";
+    strings["Waveform##sgiGB"].plurals[0] = "=Waveform";
+    strings["Panning##sgiGB"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiGB"].plurals[0] = "=Phase Reset";
+
     //   sgiK00    src/gui/inst/k007232.cpp
     //   sgiK05    src/gui/inst/k053260.cpp
     //   sgimcd    src/gui/inst/macroDraw.cpp

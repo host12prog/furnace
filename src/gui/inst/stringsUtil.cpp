@@ -298,13 +298,14 @@ const char* dualWSEffects[9]={
   "Phase Modulation##sgistru"
 };
 
-const char* gbHWSeqCmdTypes[6]={
+const char* gbHWSeqCmdTypes[6+1]={
   "Envelope##sgistru",
   "Sweep##sgistru",
   "Wait##sgistru0",
   "Wait for Release##sgistru0",
   "Loop##sgistru1",
-  "Loop until Release##sgistru0"
+  "Loop until Release##sgistru0",
+  NULL
 };
 
 const char* suHWSeqCmdTypes[7]={
