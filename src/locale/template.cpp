@@ -3551,7 +3551,7 @@ void DivLocale::addTranslationsTemplate()
     // # sgiN163   src/gui/inst/n163.cpp
     // # sgiWSG    src/gui/inst/namco.cpp
     // # sgiNES    src/gui/inst/nes.cpp
-    //   sgiOPL    src/gui/inst/opl.cpp
+    // # sgiOPL    src/gui/inst/opl.cpp
     //   sgiOPLL   src/gui/inst/opll.cpp
     //   sgiOPM    src/gui/inst/opm.cpp
     //   sgiOPN    src/gui/inst/opn.cpp
@@ -3991,78 +3991,119 @@ void DivLocale::addTranslationsTemplate()
 
     //   sgiMULPCM src/gui/inst/multipcm.cpp
 
-    strings["MultiPCM##MULPCM"].plurals[0] = "=MultiPCM";
-    strings["AR##MULPCM0"].plurals[0] = "=AR";
-    strings["AR##MULPCM1"].plurals[0] = "=AR";
-    strings["Attack Rate##MULPCM"].plurals[0] = "=Attack Rate";
-    strings["D1R##MULPCM0"].plurals[0] = "=D1R";
-    strings["D1R##MULPCM1"].plurals[0] = "=D1R";
-    strings["Decay 1 Rate##MULPCM"].plurals[0] = "=Decay 1 Rate";
-    strings["DL##MULPCM0"].plurals[0] = "=DL";
-    strings["DL##MULPCM1"].plurals[0] = "=DL";
-    strings["Decay Level##MULPCM"].plurals[0] = "=Decay Level";
-    strings["D2R##MULPCM0"].plurals[0] = "=D2R";
-    strings["D2R##MULPCM1"].plurals[0] = "=D2R";
-    strings["Decay 2 Rate##MULPCM"].plurals[0] = "=Decay 2 Rate";
-    strings["RR##MULPCM0"].plurals[0] = "=RR";
-    strings["RR##MULPCM1"].plurals[0] = "=RR";
-    strings["Release Rate##MULPCM"].plurals[0] = "=Release Rate";
-    strings["RC##MULPCM0"].plurals[0] = "=RC";
-    strings["RC##MULPCM1"].plurals[0] = "=RC";
-    strings["Rate Correction##MULPCM"].plurals[0] = "=Rate Correction";
-    strings["Envelope##MULPCM0"].plurals[0] = "=Envelope";
-    strings["Envelope##MULPCM1"].plurals[0] = "=Envelope";
-    strings["LFO Rate##MULPCM"].plurals[0] = "=LFO Rate";
-    strings["PM Depth##MULPCM"].plurals[0] = "=PM Depth";
-    strings["AM Depth##MULPCM"].plurals[0] = "=AM Depth";
-    strings["Macros##MULPCM"].plurals[0] = "=Macros";
-    strings["Volume##MULPCM"].plurals[0] = "=Volume";
-    strings["Arpeggio##MULPCM"].plurals[0] = "=Arpeggio";
-    strings["Pitch##MULPCM"].plurals[0] = "=Pitch";
-    strings["Panning##MULPCM"].plurals[0] = "=Panning";
-    strings["Phase Reset##MULPCM"].plurals[0] = "=Phase Reset";
+    strings["MultiPCM##sgiMULPCM"].plurals[0] = "=MultiPCM";
+    strings["AR##sgiMULPCM0"].plurals[0] = "=AR";
+    strings["AR##sgiMULPCM1"].plurals[0] = "=AR";
+    strings["Attack Rate##sgiMULPCM"].plurals[0] = "=Attack Rate";
+    strings["D1R##sgiMULPCM0"].plurals[0] = "=D1R";
+    strings["D1R##sgiMULPCM1"].plurals[0] = "=D1R";
+    strings["Decay 1 Rate##sgiMULPCM"].plurals[0] = "=Decay 1 Rate";
+    strings["DL##sgiMULPCM0"].plurals[0] = "=DL";
+    strings["DL##sgiMULPCM1"].plurals[0] = "=DL";
+    strings["Decay Level##sgiMULPCM"].plurals[0] = "=Decay Level";
+    strings["D2R##sgiMULPCM0"].plurals[0] = "=D2R";
+    strings["D2R##sgiMULPCM1"].plurals[0] = "=D2R";
+    strings["Decay 2 Rate##sgiMULPCM"].plurals[0] = "=Decay 2 Rate";
+    strings["RR##sgiMULPCM0"].plurals[0] = "=RR";
+    strings["RR##sgiMULPCM1"].plurals[0] = "=RR";
+    strings["Release Rate##sgiMULPCM"].plurals[0] = "=Release Rate";
+    strings["RC##sgiMULPCM0"].plurals[0] = "=RC";
+    strings["RC##sgiMULPCM1"].plurals[0] = "=RC";
+    strings["Rate Correction##sgiMULPCM"].plurals[0] = "=Rate Correction";
+    strings["Envelope##sgiMULPCM0"].plurals[0] = "=Envelope";
+    strings["Envelope##sgiMULPCM1"].plurals[0] = "=Envelope";
+    strings["LFO Rate##sgiMULPCM"].plurals[0] = "=LFO Rate";
+    strings["PM Depth##sgiMULPCM"].plurals[0] = "=PM Depth";
+    strings["AM Depth##sgiMULPCM"].plurals[0] = "=AM Depth";
+    strings["Macros##sgiMULPCM"].plurals[0] = "=Macros";
+    strings["Volume##sgiMULPCM"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiMULPCM"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiMULPCM"].plurals[0] = "=Pitch";
+    strings["Panning##sgiMULPCM"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiMULPCM"].plurals[0] = "=Phase Reset";
 
     //   sgiN163   src/gui/inst/n163.cpp
 
-    strings["Namco 163##N163"].plurals[0] = "=Namco 163##N163";
-    strings["Load waveform##N163"].plurals[0] = "=Load waveform##N163";
-    strings["when enabled, a waveform will be loaded into RAM.\nwhen disabled, only the offset and length change.##N163"].plurals[0] = "=when enabled, a waveform will be loaded into RAM.\nwhen disabled, only the offset and length change.##N163";
+    strings["Namco 163##sgiN163"].plurals[0] = "=Namco 163";
+    strings["Load waveform##sgiN163"].plurals[0] = "=Load waveform";
+    strings["when enabled, a waveform will be loaded into RAM.\nwhen disabled, only the offset and length change.##sgiN163"].plurals[0] = "=when enabled, a waveform will be loaded into RAM.\nwhen disabled, only the offset and length change.";
     strings["Waveform##WAVE"].plurals[0] = "=Waveform##WAVE";
-    strings["Per-channel wave position/length##N163"].plurals[0] = "=Per-channel wave position/length##N163";
-    strings["Ch##N163"].plurals[0] = "=Ch##N163";
-    strings["Position##N163"].plurals[0] = "=Position##N163";
-    strings["Length##N163"].plurals[0] = "=Length##N163";
+    strings["Per-channel wave position/length##sgiN163"].plurals[0] = "=Per-channel wave position/length";
+    strings["Ch##sgiN163"].plurals[0] = "=Ch";
+    strings["Position##sgiN163"].plurals[0] = "=Position";
+    strings["Length##sgiN163"].plurals[0] = "=Length";
     strings["Position##WAVEPOS"].plurals[0] = "=Position##WAVEPOS";
     strings["Length##WAVELEN"].plurals[0] = "=Length##WAVELEN";
-    strings["Macros##N163"].plurals[0] = "=Macros##N163";
-    strings["Volume##N163"].plurals[0] = "=Volume##N163";
-    strings["Arpeggio##N163"].plurals[0] = "=Arpeggio##N163";
-    strings["Pitch##N163"].plurals[0] = "=Pitch##N163";
-    strings["Wave Pos##N163"].plurals[0] = "=Wave Pos##N163";
-    strings["Waveform##N163"].plurals[0] = "=Waveform##N163";
-    strings["Wave Length##N163"].plurals[0] = "=Wave Length##N163";
+    strings["Macros##sgiN163"].plurals[0] = "=Macros";
+    strings["Volume##sgiN163"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiN163"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiN163"].plurals[0] = "=Pitch";
+    strings["Wave Pos##sgiN163"].plurals[0] = "=Wave Pos";
+    strings["Waveform##sgiN163"].plurals[0] = "=Waveform";
+    strings["Wave Length##sgiN163"].plurals[0] = "=Wave Length";
 
     //   sgiWSG    src/gui/inst/namco.cpp
 
-    strings["Macros##WSG"].plurals[0] = "=Macros##WSG";
-    strings["Volume##WSG"].plurals[0] = "=Volume##WSG";
-    strings["Arpeggio##WSG"].plurals[0] = "=Arpeggio##WSG";
-    strings["Pitch##WSG"].plurals[0] = "=Pitch##WSG";
-    strings["Noise##WSG"].plurals[0] = "=Noise##WSG";
-    strings["Waveform##WSG"].plurals[0] = "=Waveform##WSG";
-    strings["Panning (left)##WSG"].plurals[0] = "=Panning (left)##WSG";
-    strings["Panning (right)##WSG"].plurals[0] = "=Panning (right)##WSG";
+    strings["Macros##sgiWSG"].plurals[0] = "=Macros";
+    strings["Volume##sgiWSG"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiWSG"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiWSG"].plurals[0] = "=Pitch";
+    strings["Noise##sgiWSG"].plurals[0] = "=Noise";
+    strings["Waveform##sgiWSG"].plurals[0] = "=Waveform";
+    strings["Panning (left)##sgiWSG"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiWSG"].plurals[0] = "=Panning (right)";
 
     //   sgiNES    src/gui/inst/nes.cpp
 
-    strings["Macros##NES"].plurals[0] = "=Macros##NES";
-    strings["Volume##NES"].plurals[0] = "=Volume##NES";
-    strings["Arpeggio##NES"].plurals[0] = "=Arpeggio##NES";
-    strings["Pitch##NES"].plurals[0] = "=Pitch##NES";
-    strings["Duty/Noise##NES"].plurals[0] = "=Duty/Noise##NES";
-    strings["Phase Reset##NES"].plurals[0] = "=Phase Reset##NES";
+    strings["Macros##sgiNES"].plurals[0] = "=Macros";
+    strings["Volume##sgiNES"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiNES"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiNES"].plurals[0] = "=Pitch";
+    strings["Duty/Noise##sgiNES"].plurals[0] = "=Duty/Noise";
+    strings["Phase Reset##sgiNES"].plurals[0] = "=Phase Reset";
 
     //   sgiOPL    src/gui/inst/opl.cpp
+
+    strings["4-op##sgiOPL"].plurals[0] = "=4-op";
+    strings["Drums##sgiOPL"].plurals[0] = "=Drums";
+    strings["Fixed frequency mode##sgiOPL"].plurals[0] = "=Fixed frequency mode";
+    strings["when enabled, drums will be set to the specified frequencies, ignoring the note.##sgiOPL"].plurals[0] = "=when enabled, drums will be set to the specified frequencies, ignoring the note.";
+    strings["Drum##sgiOPL"].plurals[0] = "=Drum";
+    strings["Block##sgiOPL"].plurals[0] = "=Block";
+    strings["FreqNum##sgiOPL"].plurals[0] = "=FreqNum";
+    strings["Kick##sgiOPL0"].plurals[0] = "=Kick";
+    strings["Snare/Hi-hat##sgiOPL"].plurals[0] = "=Snare/Hi-hat";
+    strings["Tom/Top##sgiOPL"].plurals[0] = "=Tom/Top";
+    strings["Other##sgiOPL0"].plurals[0] = "=Other";
+    strings["Other##sgiOPL1"].plurals[0] = "=Other";
+    strings["Envelope##sgiOPL0"].plurals[0] = "=Envelope";
+    strings["Envelope##sgiOPL1"].plurals[0] = "=Envelope";
+    strings["op%d##sgiOPL0"].plurals[0] = "=op%d";
+    strings["Kick##sgiOPL1"].plurals[0] = "=Kick";
+    strings["Env##sgiOPL"].plurals[0] = "=Env";
+    strings["OP%d##sgiOPL1"].plurals[0] = "=OP%d";
+    strings["OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL0"].plurals[0] = "=OPL2/3 only (last 4 waveforms are OPL3 only)";
+    strings["op%d##sgiOPL2"].plurals[0] = "=op%d";
+    strings["Envelope 2 (kick only)##sgiOPL0"].plurals[0] = "=Envelope 2 (kick only)";
+    strings["Envelope##sgiOPL2"].plurals[0] = "=Envelope";
+    strings["Operator %d##sgiOPL"].plurals[0] = "=Operator %d";
+    strings["Waveform##sgiOPL"].plurals[0] = "=Waveform";
+    strings["Envelope##sgiOPL3"].plurals[0] = "=Envelope";
+    strings["OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL1"].plurals[0] = "=OPL2/3 only (last 4 waveforms are OPL3 only)";
+    strings["op%d##sgiOPL3"].plurals[0] = "=op%d";
+    strings["Envelope 2 (kick only)##sgiOPL1"].plurals[0] = "=Envelope 2 (kick only)";
+    strings["Envelope##sgiOPL4"].plurals[0] = "=Envelope";
+    strings["OP%d##sgiOPL4"].plurals[0] = "=OP%d";
+    strings["OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL2"].plurals[0] = "=OPL2/3 only (last 4 waveforms are OPL3 only)";
+    strings["FM Macros##sgiOPL"].plurals[0] = "=FM Macros";
+    strings["OP%d Macros##sgiOPL"].plurals[0] = "=OP%d Macros";
+    strings["Macros##sgiOPL"].plurals[0] = "=Macros";
+    strings["Volume##sgiOPL"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiOPL"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiOPL"].plurals[0] = "=Pitch";
+    strings["Panning##sgiOPL"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiOPL"].plurals[0] = "=Phase Reset";
+
     //   sgiOPLL   src/gui/inst/opll.cpp
     //   sgiOPM    src/gui/inst/opm.cpp
     //   sgiOPN    src/gui/inst/opn.cpp

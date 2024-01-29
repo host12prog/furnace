@@ -29,17 +29,17 @@ class FurnaceGUI;
 
 void FurnaceGUI::drawInsN163(DivInstrument* ins)
 {
-  if (ImGui::BeginTabItem(_L("Namco 163##N163"))) 
+  if (ImGui::BeginTabItem(_L("Namco 163##sgiN163"))) 
   {
     bool preLoad=ins->n163.waveMode&0x1;
-    if (ImGui::Checkbox(_L("Load waveform##N163"),&preLoad)) 
+    if (ImGui::Checkbox(_L("Load waveform##sgiN163"),&preLoad)) 
     { PARAMETER
       ins->n163.waveMode=(ins->n163.waveMode&~0x1)|(preLoad?0x1:0);
     }
 
     if (ImGui::IsItemHovered()) 
     {
-      ImGui::SetTooltip(_L("when enabled, a waveform will be loaded into RAM.\nwhen disabled, only the offset and length change.##N163"));
+      ImGui::SetTooltip(_L("when enabled, a waveform will be loaded into RAM.\nwhen disabled, only the offset and length change.##sgiN163"));
     }
 
     if (preLoad) 
@@ -53,7 +53,7 @@ void FurnaceGUI::drawInsN163(DivInstrument* ins)
 
     ImGui::Separator();
 
-    P(ImGui::Checkbox(_L("Per-channel wave position/length##N163"),&ins->n163.perChanPos));
+    P(ImGui::Checkbox(_L("Per-channel wave position/length##sgiN163"),&ins->n163.perChanPos));
 
     if (ins->n163.perChanPos) 
     {
@@ -65,11 +65,11 @@ void FurnaceGUI::drawInsN163(DivInstrument* ins)
 
         ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Ch##N163"));
+        ImGui::Text(_L("Ch##sgiN163"));
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Position##N163"));
+        ImGui::Text(_L("Position##sgiN163"));
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Length##N163"));
+        ImGui::Text(_L("Length##sgiN163"));
 
         for (int i=0; i<8; i++) 
         {
@@ -121,14 +121,14 @@ void FurnaceGUI::drawInsN163(DivInstrument* ins)
 
   insTabWave(ins);
 
-  if (ImGui::BeginTabItem(_L("Macros##N163"))) 
+  if (ImGui::BeginTabItem(_L("Macros##sgiN163"))) 
   {
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##N163"),ins,DIV_MACRO_VOL,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##N163"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##N163"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Wave Pos##N163"),ins,DIV_MACRO_DUTY,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##N163"),ins,DIV_MACRO_WAVE,0xff,0,MAX(1,e->song.waveLen-1),160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Wave Length##N163"),ins,DIV_MACRO_EX1,0xff,0,252,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiN163"),ins,DIV_MACRO_VOL,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiN163"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiN163"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Wave Pos##sgiN163"),ins,DIV_MACRO_DUTY,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiN163"),ins,DIV_MACRO_WAVE,0xff,0,MAX(1,e->song.waveLen-1),160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Wave Length##sgiN163"),ins,DIV_MACRO_EX1,0xff,0,252,160,uiColors[GUI_COLOR_MACRO_OTHER]));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();
