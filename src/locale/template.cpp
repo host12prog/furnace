@@ -3907,6 +3907,14 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##sgiK00"].plurals[0] = "=Phase Reset";
 
     //   sgiK05    src/gui/inst/k053260.cpp
+
+    strings["Macros##sgiK05"].plurals[0] = "=Macros";
+    strings["Volume##sgiK05"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiK05"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiK05"].plurals[0] = "=Pitch";
+    strings["Panning##sgiK05"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiK05"].plurals[0] = "=Phase Reset";
+
     //   sgimcd    src/gui/inst/macroDraw.cpp
     //   sgimcdu   src/gui/inst/macroDrawUtil.cpp
     //   sgiLYNX   src/gui/inst/mikey.cpp
