@@ -1620,7 +1620,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Compat Rate##sgse"].plurals[0] = "=Compat Rate";
     strings["used in DefleMask-compatible sample mode (17xx), in where samples are mapped to an octave.##sgse"].plurals[0] = "=used in DefleMask-compatible sample mode (17xx), in where samples are mapped to an octave.";
     strings["Loop (length: %d)##Loop"].plurals[0] = "=Loop (length: %d)##Loop";
-    strings["Loop##Loop"].plurals[0] = "=Loop##Loop";
+    strings["Loop##sgse"].plurals[0] = "=Loop";
     strings["changing the loop in a BRR sample may result in glitches!##sgse0"].plurals[0] = "=changing the loop in a BRR sample may result in glitches!";
     strings["Chips##sgse"].plurals[0] = "=Chips";
     strings["Type##sgse"].plurals[0] = "=Type";
@@ -2557,7 +2557,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Cursor down##sggc"].plurals[0] = "=Cursor down";
     strings["Preview##sggc"].plurals[0] = "=Preview";
     strings["Stop preview##sggc"].plurals[0] = "=Stop preview";
-    strings["Toggle folders/standard view##sggc"].plurals[0] = "=Toggle folders/standard view";
+    strings["Make me a drum kit##sggc"].plurals[0] = "=Make me a drum kit";
+    strings["Toggle folders/standard view##sggc2"].plurals[0] = "=Toggle folders/standard view";
 
     strings["---Sample editor##sggc"].plurals[0] = "=---Sample editor";
     strings["Edit mode: Select##sggc"].plurals[0] = "=Edit mode: Select";
@@ -3841,6 +3842,9 @@ void DivLocale::addTranslationsTemplate()
     strings["left click to configure TL scaling\nright click to see FM preview##sgifmeu"].plurals[0] = "=left click to configure TL scaling\nright click to see FM preview";
     strings["right click to see FM preview##sgifmeu"].plurals[0] = "=right click to see FM preview";
     strings["operator level changes with volume?##sgifmeu"].plurals[0] = "=operator level changes with volume?";
+    strings["AUTO##OPKVS"].plurals[0] = "=AUTO##OPKVS";
+    strings["NO##OPKVS"].plurals[0] = "=NO##OPKVS";
+    strings["YES##OPKVS"].plurals[0] = "=YES##OPKVS";
 
     //   sgifmeh   src/gui/inst/fmEnvUtil.h
 
@@ -4124,10 +4128,10 @@ void DivLocale::addTranslationsTemplate()
     strings["left##sgistru"].plurals[0] = "=left";
     strings["rear right##sgistru"].plurals[0] = "=rear right";
     strings["rear left##sgistru"].plurals[0] = "=rear left";
-    strings["tap B##sgistru"].plurals[0] = "=tap B";
-    strings["slope AM##sgistru"].plurals[0] = "=slope AM";
-    strings["down B##sgistru"].plurals[0] = "=down B";
-    strings["down A##sgistru"].plurals[0] = "=down A";
+    strings["enable tap B##sgistru"].plurals[0] = "=enable tap B";
+    strings["AM with slope##sgistru"].plurals[0] = "=AM with slope";
+    strings["invert B##sgistru"].plurals[0] = "=invert B";
+    strings["invert A##sgistru"].plurals[0] = "=invert A";
     strings["reset B##sgistru"].plurals[0] = "=reset B";
     strings["reset A##sgistru"].plurals[0] = "=reset A";
     strings["clip B##sgistru"].plurals[0] = "=clip B";

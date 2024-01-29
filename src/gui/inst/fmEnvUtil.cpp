@@ -982,11 +982,11 @@ void FurnaceGUI::kvsConfig(DivInstrument* ins, bool supportsKVS) {
         for (int i=0; i<4; i++) {
           int o=(opCount==4 && ins->type!=DIV_INS_ESFM)?orderedOps[i]:i;
           if (!(i&1)) ImGui::TableNextRow();
-          const char* label="@AUTO##OPKVS";
+          const char* label=_L("AUTO##OPKVS");
           if (ins->fm.op[o].kvs==0) {
-            label="@NO##OPKVS";
+            label=_L("NO##OPKVS");
           } else if (ins->fm.op[o].kvs==1) {
-            label="@YES##OPKVS";
+            label=_L("YES##OPKVS");
           }
           ImGui::TableNextColumn();
           ImGui::Text("%d",i+1);

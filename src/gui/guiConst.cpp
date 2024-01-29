@@ -732,7 +732,7 @@ const FurnaceGUIActionDef guiActions[GUI_ACTION_MAX]={
   D("SAMPLE_LIST_PREVIEW", "Preview##sggc", 0),
   D("SAMPLE_LIST_STOP_PREVIEW", "Stop preview##sggc", 0),
   D("SAMPLE_LIST_DIR_VIEW", "Toggle folders/standard view##sggc2", FURKMOD_CMD|SDLK_v),
-  D("SAMPLE_LIST_MAKE_MAP", "Make me a drum kit##sgg", 0),
+  D("SAMPLE_LIST_MAKE_MAP", "Make me a drum kit##sggc", 0),
   D("SAMPLE_LIST_MAX", "", NOT_AN_ACTION),
 
   D("SAMPLE_MIN", "---Sample editor##sggc", NOT_AN_ACTION),
