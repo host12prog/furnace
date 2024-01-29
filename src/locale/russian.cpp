@@ -3547,6 +3547,17 @@ void DivLocale::addTranslationsRussian()
     strings["Panning##sgiGB"].plurals[0] = "Панорамирование";
     strings["Phase Reset##sgiGB"].plurals[0] = "Сброс фазы";
 
+    //   sgiK00    src/gui/inst/k007232.cpp
+
+    strings["Macros##sgiK00"].plurals[0] = "Макросы";
+    strings["Volume##sgiK00"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiK00"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiK00"].plurals[0] = "Частота";
+    strings["Waveform##sgiK00"].plurals[0] = "Волна";
+    strings["Panning (left)##sgiK00"].plurals[0] = "Панорамирование (лево)";
+    strings["Panning (right)##sgiK00"].plurals[0] = "Панорамирование (право)";
+    strings["Phase Reset##sgiK00"].plurals[0] = "Сброс фазы";
+
     //   sgistru   src/gui/inst/stringsUtil.cpp
 
     strings["Down Down Down##sgistru"].plurals[0] = "Вниз Вниз Вниз";

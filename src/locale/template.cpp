@@ -3539,7 +3539,7 @@ void DivLocale::addTranslationsTemplate()
     // # sgifmeh   src/gui/inst/fmEnvUtil.h
     // # sgiGA20   src/gui/inst/ga20.cpp
     // # sgiGB     src/gui/inst/gb.cpp
-    //   sgiK00    src/gui/inst/k007232.cpp
+    // # sgiK00    src/gui/inst/k007232.cpp
     //   sgiK05    src/gui/inst/k053260.cpp
     //   sgimcd    src/gui/inst/macroDraw.cpp
     //   sgimcdu   src/gui/inst/macroDrawUtil.cpp
@@ -3896,6 +3896,16 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##sgiGB"].plurals[0] = "=Phase Reset";
 
     //   sgiK00    src/gui/inst/k007232.cpp
+
+    strings["Macros##sgiK00"].plurals[0] = "=Macros";
+    strings["Volume##sgiK00"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiK00"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiK00"].plurals[0] = "=Pitch";
+    strings["Waveform##sgiK00"].plurals[0] = "=Waveform";
+    strings["Panning (left)##sgiK00"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiK00"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiK00"].plurals[0] = "=Phase Reset";
+
     //   sgiK05    src/gui/inst/k053260.cpp
     //   sgimcd    src/gui/inst/macroDraw.cpp
     //   sgimcdu   src/gui/inst/macroDrawUtil.cpp
