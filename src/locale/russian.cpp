@@ -3856,6 +3856,10 @@ void DivLocale::addTranslationsRussian()
     strings["low pass##sgistru"].plurals[0] = "ФНЧ";
     strings["high pass##sgistru"].plurals[0] = "ФВЧ";
     strings["band pass##sgistru"].plurals[0] = "ППФ";
+    strings["HP/K2, HP/K2##sgistru"].plurals[0] = "ВЧ/K2, ВЧ/K2";
+    strings["HP/K2, LP/K1##sgistru"].plurals[0] = "ВЧ/K2, НЧ/K1";
+    strings["LP/K2, LP/K2##sgistru"].plurals[0] = "НЧ/K2, НЧ/K2";
+    strings["LP/K2, LP/K1##sgistru"].plurals[0] = "НЧ/K2, НЧ/K1";
     strings["right##sgistru"].plurals[0] = "правый";
     strings["left##sgistru"].plurals[0] = "левый";
     strings["rear right##sgistru"].plurals[0] = "задний правый";

@@ -38,7 +38,7 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
       // filter
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
-      P(CWSliderScalar(_L("Filter Mode##sgiOTTO0"),ImGuiDataType_U8,&ins->es5506.filter.mode,&_ZERO,&_THREE,es5506FilterModes[ins->es5506.filter.mode&3]));
+      P(CWSliderScalar(_L("Filter Mode##sgiOTTO0"),ImGuiDataType_U8,&ins->es5506.filter.mode,&_ZERO,&_THREE,_L(es5506FilterModes[ins->es5506.filter.mode&3])));
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
       P(CWSliderScalar(_L("Filter K1##sgiOTTO0"),ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable

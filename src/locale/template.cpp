@@ -4231,6 +4231,10 @@ void DivLocale::addTranslationsTemplate()
     strings["low pass##sgistru"].plurals[0] = "=low pass";
     strings["high pass##sgistru"].plurals[0] = "=high pass";
     strings["band pass##sgistru"].plurals[0] = "=band pass";
+    strings["HP/K2, HP/K2##sgistru"].plurals[0] = "=HP/K2, HP/K2";
+    strings["HP/K2, LP/K1##sgistru"].plurals[0] = "=HP/K2, LP/K1";
+    strings["LP/K2, LP/K2##sgistru"].plurals[0] = "=LP/K2, LP/K2";
+    strings["LP/K2, LP/K1##sgistru"].plurals[0] = "=LP/K2, LP/K1";
     strings["right##sgistru"].plurals[0] = "=right";
     strings["left##sgistru"].plurals[0] = "=left";
     strings["rear right##sgistru"].plurals[0] = "=rear right";

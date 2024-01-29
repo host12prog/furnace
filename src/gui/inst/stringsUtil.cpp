@@ -245,7 +245,7 @@ const char* suControlBits[5]={
 };
 
 const char* es5506FilterModes[4]={
-  "HP/K2, HP/K2", "HP/K2, LP/K1", "LP/K2, LP/K2", "LP/K2, LP/K1",
+  "HP/K2, HP/K2##sgistru", "HP/K2, LP/K1##sgistru", "LP/K2, LP/K2##sgistru", "LP/K2, LP/K1##sgistru",
 };
 
 const char* panBits[5]={
