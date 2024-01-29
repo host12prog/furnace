@@ -3544,7 +3544,7 @@ void DivLocale::addTranslationsTemplate()
     // # sgimcd    src/gui/inst/macroDraw.cpp
     // # sgimcdu   src/gui/inst/macroDrawUtil.cpp
     // # sgiLYNX   src/gui/inst/mikey.cpp
-    //   sgi5232   src/gui/inst/msm5232.cpp
+    // # sgi5232   src/gui/inst/msm5232.cpp
     //   sgi6258   src/gui/inst/msm6258.cpp
     //   sgi6295   src/gui/inst/msm6295.cpp
     //   sgiMULPCM src/gui/inst/multipcm.cpp
@@ -3964,6 +3964,16 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##sgiLYNX"].plurals[0] = "=Phase Reset";
 
     //   sgi5232   src/gui/inst/msm5232.cpp
+
+    strings["Macros##sgi5232"].plurals[0] = "=Macros";
+    strings["Volume##sgi5232"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgi5232"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgi5232"].plurals[0] = "=Pitch";
+    strings["Group Ctrl##sgi5232"].plurals[0] = "=Group Ctrl";
+    strings["Group Attack##sgi5232"].plurals[0] = "=Group Attack";
+    strings["Group Decay##sgi5232"].plurals[0] = "=Group Decay";
+    strings["Noise##sgi5232"].plurals[0] = "=Noise";
+
     //   sgi6258   src/gui/inst/msm6258.cpp
     //   sgi6295   src/gui/inst/msm6295.cpp
     //   sgiMULPCM src/gui/inst/multipcm.cpp

@@ -1348,7 +1348,7 @@ void DivLocale::addTranslationsRussian()
     strings["Commander X16 (with Twin OPL3)##sgpr"].plurals[0] = "Commander X16 (с Twin OPL3)";
     strings["Arcade systems##sgpr"].plurals[0] = "Аркадные автоматы";
     strings["INSERT COIN##sgpr"].plurals[0] = "ВСТАВЬТЕ ЖЕТОН##sgpr";
-    strings["Williams/Midway Y/T unit w/ADPCM sound board##sgpr"].plurals[0] = "Автомат Williams/Midway Y/T со звуковой картой ADPCM";
+    strings["Williams/Midway Y/T unit w/ADPCM sound board##sgpr"].plurals[0] = "Автомат Williams/Midway Y/T со звуковой картой АДИКМ";
     strings["Konami Battlantis (drums mode on first OPL2)##sgpr"].plurals[0] = "Konami Battlantis (первый OPL2 в режиме ударных)";
     strings["Konami Battlantis (drums mode on second OPL2)##sgpr"].plurals[0] = "Konami Battlantis (второй OPL2 в режиме ударных)";
     strings["Konami Battlantis (drums mode on both OPL2s)##sgpr"].plurals[0] = "Konami Battlantis (оба OPL2 в режиме ударных)";
@@ -1522,18 +1522,18 @@ void DivLocale::addTranslationsRussian()
     strings["SNES: sample length will be padded to multiple of 16##sgse"].plurals[0] = "SNES: длина сэмпла будет скорректирована до кратности 16";
     strings["QSound: loop cannot be longer than 32767 samples##sgse"].plurals[0] = "QSound: цикл не может быть длиннее 32767 сэмплов";
     strings["QSound: maximum sample length is 65535##sgse"].plurals[0] = "QSound: максимальная длина сэмпла: 65535";
-    strings["NES: loop point ignored on DPCM (may only loop entire sample)##sgse"].plurals[0] = "NES: точка зацикливания игнорируется для DPCM (зациклить можно только сэмпл целиком)";
-    strings["NES: maximum DPCM sample length is 32648##sgse"].plurals[0] = "NES: максимальная длина DPCM-сэмпла равна 32648";
+    strings["NES: loop point ignored on DPCM (may only loop entire sample)##sgse"].plurals[0] = "NES: точка зацикливания игнорируется для ДИКМ (зациклить можно только сэмпл целиком)";
+    strings["NES: maximum DPCM sample length is 32648##sgse"].plurals[0] = "NES: максимальная длина ДИКМ-сэмпла равна 32648";
     strings["X1-010: samples can't loop##sgse"].plurals[0] = "X1-010: сэмплы не могут быть зациклены";
     strings["X1-010: maximum sample length is 131072##sgse"].plurals[0] = "X1-010: максимальная длина сэмпла равна 131072";
     strings["GA20: samples can't loop##sgse"].plurals[0] = "GA20: сэмплы не могут быть зациклены";
-    strings["YM2608: loop point ignored on ADPCM (may only loop entire sample)##sgse"].plurals[0] = "YM2608: точка зацикливания игнорируется для ADPCM (зациклить можно только сэмпл целиком)";
+    strings["YM2608: loop point ignored on ADPCM (may only loop entire sample)##sgse"].plurals[0] = "YM2608: точка зацикливания игнорируется для АДИКМ (зациклить можно только сэмпл целиком)";
     strings["YM2608: sample length will be padded to multiple of 512##sgse"].plurals[0] = "YM2608: длина сэмпла будет скорректирована до кратности 512";
     strings["YM2610: ADPCM-A samples can't loop##sgse"].plurals[0] = "YM2610: ADPCM-A сэмплы не могут быть зациклены";
-    strings["YM2610: loop point ignored on ADPCM-B (may only loop entire sample)##sgse"].plurals[0] = "YM2610: точка зацикливания игнорируется для ADPCM-B (зациклить можно только сэмпл целиком)";
+    strings["YM2610: loop point ignored on ADPCM-B (may only loop entire sample)##sgse"].plurals[0] = "YM2610: точка зацикливания игнорируется для АДИКМ-B (зациклить можно только сэмпл целиком)";
     strings["YM2610: sample length will be padded to multiple of 512##sgse"].plurals[0] = "YM2610: длина сэмпла будет скорректирована до кратности 512";
-    strings["YM2610: maximum ADPCM-A sample length is 2097152##sgse"].plurals[0] = "YM2610: максимальная длина ADPCM-A сэмпла равна 2097152";
-    strings["Y8950: loop point ignored on ADPCM (may only loop entire sample)##sgse"].plurals[0] = "Y8950: точка зацикливания игнорируется для ADPCM (зациклить можно только сэмпл целиком)";
+    strings["YM2610: maximum ADPCM-A sample length is 2097152##sgse"].plurals[0] = "YM2610: максимальная длина АДИКМ-A сэмпла равна 2097152";
+    strings["Y8950: loop point ignored on ADPCM (may only loop entire sample)##sgse"].plurals[0] = "Y8950: точка зацикливания игнорируется для АДИКМ (зациклить можно только сэмпл целиком)";
     strings["Y8950: sample length will be padded to multiple of 512##sgse"].plurals[0] = "Y8950: длина сэмпла будет скорректирована до кратности 512";
     strings["Amiga: loop start must be a multiple of 2##sgse"].plurals[0] = "Amiga: начало зацикливания должно быть кратно 2";
     strings["Amiga: loop end must be a multiple of 2##sgse"].plurals[0] = "Amiga: конец зацикливания должен быть кратен 2";
@@ -1770,7 +1770,7 @@ void DivLocale::addTranslationsRussian()
     strings["Disable ExtCh FM macros (compatibility)##sgsc1"].plurals[0] = "Отключить FM-макросы для расширенного канала (совместимость)";
     strings["Ins change in ExtCh operator 2-4 affects FB (compatibility)##sgsc1"].plurals[0] = "Смена инструмента на операторах 2-4 расш. канала меняет FB (совместимость)";
     strings["SSG Volume##sgsc0"].plurals[0] = "Громкость SSG";
-    strings["FM/ADPCM Volume##sgsc0"].plurals[0] = "Громкость FM/ADPCM";
+    strings["FM/ADPCM Volume##sgsc0"].plurals[0] = "Громкость FM/АДИКМ";
     strings["Clock rate:##sgsc3"].plurals[0] = "Тактовая частота:";
     strings["0.83MHz (Pre-divided Sunsoft 5B on PAL)##sgsc"].plurals[0] = "0.83 МГц (Sunsoft 5B с предварительным делителем частоты, PAL)";
     strings["0.89MHz (Pre-divided Sunsoft 5B)##sgsc"].plurals[0] = "0.89 МГц (Sunsoft 5B с предварительным делителем частоты)";
@@ -1823,7 +1823,7 @@ void DivLocale::addTranslationsRussian()
     strings["FM: clock / 72, SSG: clock / 16##sgsc1"].plurals[0] = "FM: такт. част. / 72, SSG: такт. част. / 16";
     strings["FM: clock / 48, SSG: clock / 8##sgsc"].plurals[0] = "FM: такт. част. / 48, SSG: такт. част. / 8";
     strings["SSG Volume##sgsc2"].plurals[0] = "Громкость SSG";
-    strings["FM/ADPCM Volume##sgsc1"].plurals[0] = "Громкость FM/ADPCM";
+    strings["FM/ADPCM Volume##sgsc1"].plurals[0] = "Громкость FM/АДИКМ";
     strings["Disable ExtCh FM macros (compatibility)##sgsc3"].plurals[0] = "Отключить FM-макросы для расширенного канала (совместимость)";
     strings["Ins change in ExtCh operator 2-4 affects FB (compatibility)##sgsc3"].plurals[0] = "Смена инструмента на операторах 2-4 расш. канала меняет FB (совместимость)";
     strings["Clock rate:##sgsc9"].plurals[0] = "Тактовая частота:";
@@ -3091,8 +3091,8 @@ void DivLocale::addTranslationsRussian()
     strings["NES##CC_GUI_COLOR_INSTR_NES"].plurals[0] = "NES##CC_GUI_COLOR_INSTR_NES";
     strings["MSM6258##CC_GUI_COLOR_INSTR_MSM6258"].plurals[0] = "MSM6258##CC_GUI_COLOR_INSTR_MSM6258";
     strings["MSM6295##CC_GUI_COLOR_INSTR_MSM6295"].plurals[0] = "MSM6295##CC_GUI_COLOR_INSTR_MSM6295";
-    strings["ADPCM-A##CC_GUI_COLOR_INSTR_ADPCMA"].plurals[0] = "ADPCM-A##CC_GUI_COLOR_INSTR_ADPCMA";
-    strings["ADPCM-B##CC_GUI_COLOR_INSTR_ADPCMB"].plurals[0] = "ADPCM-B##CC_GUI_COLOR_INSTR_ADPCMB";
+    strings["ADPCM-A##CC_GUI_COLOR_INSTR_ADPCMA"].plurals[0] = "АДИКМ-A##CC_GUI_COLOR_INSTR_ADPCMA";
+    strings["ADPCM-B##CC_GUI_COLOR_INSTR_ADPCMB"].plurals[0] = "АДИКМ-B##CC_GUI_COLOR_INSTR_ADPCMB";
     strings["Sega PCM##CC_GUI_COLOR_INSTR_SEGAPCM"].plurals[0] = "Sega PCM##CC_GUI_COLOR_INSTR_SEGAPCM";
     strings["QSound##CC_GUI_COLOR_INSTR_QSOUND"].plurals[0] = "QSound##CC_GUI_COLOR_INSTR_QSOUND";
     strings["YMZ280B##CC_GUI_COLOR_INSTR_YMZ280B"].plurals[0] = "YMZ280B##CC_GUI_COLOR_INSTR_YMZ280B";
@@ -3614,6 +3614,17 @@ void DivLocale::addTranslationsRussian()
     strings["Panning (left)##sgiLYNX"].plurals[0] = "Панорамирование (лево)";
     strings["Panning (right)##sgiLYNX"].plurals[0] = "Панорамирование (право)";
     strings["Phase Reset##sgiLYNX"].plurals[0] = "Сброс фазы";
+
+    //   sgi5232   src/gui/inst/msm5232.cpp
+
+    strings["Macros##sgi5232"].plurals[0] = "Макросы";
+    strings["Volume##sgi5232"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgi5232"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgi5232"].plurals[0] = "Частота";
+    strings["Group Ctrl##sgi5232"].plurals[0] = "Контроль группы";
+    strings["Group Attack##sgi5232"].plurals[0] = "Атака группы";
+    strings["Group Decay##sgi5232"].plurals[0] = "Спад группы";
+    strings["Noise##sgi5232"].plurals[0] = "Шум";
 
     //   sgistru   src/gui/inst/stringsUtil.cpp
 
