@@ -3548,9 +3548,9 @@ void DivLocale::addTranslationsTemplate()
     // # sgi6258   src/gui/inst/msm6258.cpp
     // # sgi6295   src/gui/inst/msm6295.cpp
     // # sgiMULPCM src/gui/inst/multipcm.cpp
-    //   sgiN163   src/gui/inst/n163.cpp
-    //   sgiWSG    src/gui/inst/namco.cpp
-    //   sgiNES    src/gui/inst/nes.cpp
+    // # sgiN163   src/gui/inst/n163.cpp
+    // # sgiWSG    src/gui/inst/namco.cpp
+    // # sgiNES    src/gui/inst/nes.cpp
     //   sgiOPL    src/gui/inst/opl.cpp
     //   sgiOPLL   src/gui/inst/opll.cpp
     //   sgiOPM    src/gui/inst/opm.cpp
@@ -3991,6 +3991,7 @@ void DivLocale::addTranslationsTemplate()
 
     //   sgiMULPCM src/gui/inst/multipcm.cpp
 
+    strings["MultiPCM##MULPCM"].plurals[0] = "=MultiPCM";
     strings["AR##MULPCM0"].plurals[0] = "=AR";
     strings["AR##MULPCM1"].plurals[0] = "=AR";
     strings["Attack Rate##MULPCM"].plurals[0] = "=Attack Rate";
@@ -4022,8 +4023,45 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##MULPCM"].plurals[0] = "=Phase Reset";
 
     //   sgiN163   src/gui/inst/n163.cpp
+
+    strings["Namco 163##N163"].plurals[0] = "=Namco 163##N163";
+    strings["Load waveform##N163"].plurals[0] = "=Load waveform##N163";
+    strings["when enabled, a waveform will be loaded into RAM.\nwhen disabled, only the offset and length change.##N163"].plurals[0] = "=when enabled, a waveform will be loaded into RAM.\nwhen disabled, only the offset and length change.##N163";
+    strings["Waveform##WAVE"].plurals[0] = "=Waveform##WAVE";
+    strings["Per-channel wave position/length##N163"].plurals[0] = "=Per-channel wave position/length##N163";
+    strings["Ch##N163"].plurals[0] = "=Ch##N163";
+    strings["Position##N163"].plurals[0] = "=Position##N163";
+    strings["Length##N163"].plurals[0] = "=Length##N163";
+    strings["Position##WAVEPOS"].plurals[0] = "=Position##WAVEPOS";
+    strings["Length##WAVELEN"].plurals[0] = "=Length##WAVELEN";
+    strings["Macros##N163"].plurals[0] = "=Macros##N163";
+    strings["Volume##N163"].plurals[0] = "=Volume##N163";
+    strings["Arpeggio##N163"].plurals[0] = "=Arpeggio##N163";
+    strings["Pitch##N163"].plurals[0] = "=Pitch##N163";
+    strings["Wave Pos##N163"].plurals[0] = "=Wave Pos##N163";
+    strings["Waveform##N163"].plurals[0] = "=Waveform##N163";
+    strings["Wave Length##N163"].plurals[0] = "=Wave Length##N163";
+
     //   sgiWSG    src/gui/inst/namco.cpp
+
+    strings["Macros##WSG"].plurals[0] = "=Macros##WSG";
+    strings["Volume##WSG"].plurals[0] = "=Volume##WSG";
+    strings["Arpeggio##WSG"].plurals[0] = "=Arpeggio##WSG";
+    strings["Pitch##WSG"].plurals[0] = "=Pitch##WSG";
+    strings["Noise##WSG"].plurals[0] = "=Noise##WSG";
+    strings["Waveform##WSG"].plurals[0] = "=Waveform##WSG";
+    strings["Panning (left)##WSG"].plurals[0] = "=Panning (left)##WSG";
+    strings["Panning (right)##WSG"].plurals[0] = "=Panning (right)##WSG";
+
     //   sgiNES    src/gui/inst/nes.cpp
+
+    strings["Macros##NES"].plurals[0] = "=Macros##NES";
+    strings["Volume##NES"].plurals[0] = "=Volume##NES";
+    strings["Arpeggio##NES"].plurals[0] = "=Arpeggio##NES";
+    strings["Pitch##NES"].plurals[0] = "=Pitch##NES";
+    strings["Duty/Noise##NES"].plurals[0] = "=Duty/Noise##NES";
+    strings["Phase Reset##NES"].plurals[0] = "=Phase Reset##NES";
+
     //   sgiOPL    src/gui/inst/opl.cpp
     //   sgiOPLL   src/gui/inst/opll.cpp
     //   sgiOPM    src/gui/inst/opm.cpp

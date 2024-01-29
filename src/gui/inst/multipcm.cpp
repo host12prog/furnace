@@ -29,7 +29,7 @@ class FurnaceGUI;
 
 void FurnaceGUI::drawInsMULTIPCM(DivInstrument* ins)
 {
-  if (ImGui::BeginTabItem("MultiPCM")) 
+  if (ImGui::BeginTabItem(_L("MultiPCM##MULPCM"))) 
   {
     ImVec2 sliderSize=ImVec2(20.0f*dpiScale,128.0*dpiScale);
     if (ImGui::BeginTable("MultiPCMADSRParams",7,ImGuiTableFlags_NoHostExtendX)) 
