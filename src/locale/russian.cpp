@@ -2616,7 +2616,7 @@ void DivLocale::addTranslationsRussian()
     strings["Classic##ecl0"].plurals[0] = "Классическая##ecl0";
     strings["Compact##ecl1"].plurals[0] = "Компактная##ecl1";
     strings["Compact (vertical)##ecl2"].plurals[0] = "Компактная (вертикальная)##ecl2";
-    strings["Split##ecl3"].plurals[0] = "С раздлением на два окна##ecl3";
+    strings["Split##ecl3"].plurals[0] = "С разделением на два окна##ecl3";
     strings["Position of buttons in Orders:##sgse"].plurals[0] = "Позиция кнопок в редакторе матрицы паттернов:";
     strings["Top##obp0"].plurals[0] = "Сверху##obp0";
     strings["Left##obp1"].plurals[0] = "Слева##obp1";
@@ -3566,6 +3566,54 @@ void DivLocale::addTranslationsRussian()
     strings["Pitch##sgiK05"].plurals[0] = "Частота";
     strings["Panning##sgiK05"].plurals[0] = "Панорамирование";
     strings["Phase Reset##sgiK05"].plurals[0] = "Сброс фазы";
+
+    //   sgimcd    src/gui/inst/macroDraw.cpp
+
+    strings["Triangle##sgimcd"].plurals[0] = "Треуг. волна";
+    strings["Saw##sgimcd"].plurals[0] = "Пила";
+    strings["Square##sgimcd"].plurals[0] = "Меандр";
+    strings["How did you even##sgimcd0"].plurals[0] = "Как вы вообще смогли";
+    strings["Bottom##sgimcd0"].plurals[0] = "Мин.";
+    strings["Top##sgimcd0"].plurals[0] = "Макс.";
+    strings["Attack##sgimcd"].plurals[0] = "Атака";
+    strings["Sustain##sgimcd"].plurals[0] = "Сустейн";
+    strings["Hold##sgimcd"].plurals[0] = "Задержка после атаки";
+    strings["SusTime##sgimcd"].plurals[0] = "Время сустейна";
+    strings["Decay##sgimcd"].plurals[0] = "Спад";
+    strings["SusDecay##sgimcd"].plurals[0] = "Спад сустейна";
+    strings["Release##sgimcd"].plurals[0] = "Релиз";
+    strings["Bottom##sgimcd1"].plurals[0] = "Мин.";
+    strings["Top##sgimcd1"].plurals[0] = "Макс.";
+    strings["Speed##sgimcd"].plurals[0] = "Скорость";
+    strings["Phase##sgimcd"].plurals[0] = "Фаза";
+    strings["Shape##sgimcd"].plurals[0] = "Форма волны";
+    strings["Macro type: Sequence##sgimcd"].plurals[0] = "Тип макроса: последовательность";
+    strings["Macro type: ADSR##sgimcd"].plurals[0] = "Тип макроса: ADSR-огибающая";
+    strings["Macro type: LFO##sgimcd"].plurals[0] = "Тип макроса: ОНЧ";
+    strings["Macro type: What's going on here?##sgimcd"].plurals[0] = "Тип макроса: Что здесь происходит?";
+    strings["Delay/Step Length##sgimcd"].plurals[0] = "Задержка/длина шага";
+    strings["Step Length (ticks)##IMacroSpeed"].plurals[0] = "Длина шага (в шагах движка трекера)##IMacroSpeed";
+    strings["Delay##IMacroDelay"].plurals[0] = "Задержка##IMacroDelay";
+    strings["Release mode: Active (jump to release pos)##sgimcd"].plurals[0] = "Тип релиза: активный (прыгнуть на позицию релиза)";
+    strings["Release mode: Passive (delayed release)##sgimcd"].plurals[0] = "Тип релиза: пассивный (отложенный релиз)";
+    strings["Tabs##sgimcd"].plurals[0] = "Вкладки";
+    strings["Length##sgimcd"].plurals[0] = "Длина";
+    strings["StepLen##sgimcd"].plurals[0] = "Дл. шага";
+    strings["Delay##sgimcd"].plurals[0] = "Задержка";
+    strings["The heck? No, this isn't even working correctly...##sgimcd"].plurals[0] = "Что за?.. Нет, оно ведь работает неправильно...";
+    strings["The only problem with that selectedMacro is that it's a bug...##sgimcd"].plurals[0] = "Единственная проблема с тем selectedMacro в том, что это не сбой...";
+    strings["Single (combo box)##sgimcd"].plurals[0] = "Один (выпадающий список)";
+
+    //   sgiLYNX   src/gui/inst/mikey.cpp
+
+    strings["Macros##sgiLYNX"].plurals[0] = "Макросы";
+    strings["Volume##sgiLYNX"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiLYNX"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiLYNX"].plurals[0] = "Частота";
+    strings["Duty/Int##sgiLYNX"].plurals[0] = "Скважность/инт.";
+    strings["Panning (left)##sgiLYNX"].plurals[0] = "Панорамирование (лево)";
+    strings["Panning (right)##sgiLYNX"].plurals[0] = "Панорамирование (право)";
+    strings["Phase Reset##sgiLYNX"].plurals[0] = "Сброс фазы";
 
     //   sgistru   src/gui/inst/stringsUtil.cpp
 

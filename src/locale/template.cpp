@@ -3540,10 +3540,10 @@ void DivLocale::addTranslationsTemplate()
     // # sgiGA20   src/gui/inst/ga20.cpp
     // # sgiGB     src/gui/inst/gb.cpp
     // # sgiK00    src/gui/inst/k007232.cpp
-    //   sgiK05    src/gui/inst/k053260.cpp
-    //   sgimcd    src/gui/inst/macroDraw.cpp
-    //   sgimcdu   src/gui/inst/macroDrawUtil.cpp
-    //   sgiLYNX   src/gui/inst/mikey.cpp
+    // # sgiK05    src/gui/inst/k053260.cpp
+    // # sgimcd    src/gui/inst/macroDraw.cpp
+    // # sgimcdu   src/gui/inst/macroDrawUtil.cpp
+    // # sgiLYNX   src/gui/inst/mikey.cpp
     //   sgi5232   src/gui/inst/msm5232.cpp
     //   sgi6258   src/gui/inst/msm6258.cpp
     //   sgi6295   src/gui/inst/msm6295.cpp
@@ -3916,8 +3916,53 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##sgiK05"].plurals[0] = "=Phase Reset";
 
     //   sgimcd    src/gui/inst/macroDraw.cpp
-    //   sgimcdu   src/gui/inst/macroDrawUtil.cpp
+
+    strings["Triangle##sgimcd"].plurals[0] = "=Triangle";
+    strings["Saw##sgimcd"].plurals[0] = "=Saw";
+    strings["Square##sgimcd"].plurals[0] = "=Square";
+    strings["How did you even##sgimcd0"].plurals[0] = "=How did you even";
+    strings["Bottom##sgimcd0"].plurals[0] = "=Bottom";
+    strings["Top##sgimcd0"].plurals[0] = "=Top";
+    strings["Attack##sgimcd"].plurals[0] = "=Attack";
+    strings["Sustain##sgimcd"].plurals[0] = "=Sustain";
+    strings["Hold##sgimcd"].plurals[0] = "=Hold";
+    strings["SusTime##sgimcd"].plurals[0] = "=SusTime";
+    strings["Decay##sgimcd"].plurals[0] = "=Decay";
+    strings["SusDecay##sgimcd"].plurals[0] = "=SusDecay";
+    strings["Release##sgimcd"].plurals[0] = "=Release";
+    strings["Bottom##sgimcd1"].plurals[0] = "=Bottom";
+    strings["Top##sgimcd1"].plurals[0] = "=Top";
+    strings["Speed##sgimcd"].plurals[0] = "=Speed";
+    strings["Phase##sgimcd"].plurals[0] = "=Phase";
+    strings["Shape##sgimcd"].plurals[0] = "=Shape";
+    strings["Macro type: Sequence##sgimcd"].plurals[0] = "=Macro type: Sequence";
+    strings["Macro type: ADSR##sgimcd"].plurals[0] = "=Macro type: ADSR";
+    strings["Macro type: LFO##sgimcd"].plurals[0] = "=Macro type: LFO";
+    strings["Macro type: What's going on here?##sgimcd"].plurals[0] = "=Macro type: What's going on here?";
+    strings["Delay/Step Length##sgimcd"].plurals[0] = "=Delay/Step Length";
+    strings["Step Length (ticks)##IMacroSpeed"].plurals[0] = "=Step Length (ticks)##IMacroSpeed";
+    strings["Delay##IMacroDelay"].plurals[0] = "=Delay##IMacroDelay";
+    strings["Release mode: Active (jump to release pos)##sgimcd"].plurals[0] = "=Release mode: Active (jump to release pos)";
+    strings["Release mode: Passive (delayed release)##sgimcd"].plurals[0] = "=Release mode: Passive (delayed release)";
+    strings["Tabs##sgimcd"].plurals[0] = "=Tabs";
+    strings["Length##sgimcd"].plurals[0] = "=Length";
+    strings["StepLen##sgimcd"].plurals[0] = "=StepLen";
+    strings["Delay##sgimcd"].plurals[0] = "=Delay";
+    strings["The heck? No, this isn't even working correctly...##sgimcd"].plurals[0] = "=The heck? No, this isn't even working correctly...";
+    strings["The only problem with that selectedMacro is that it's a bug...##sgimcd"].plurals[0] = "=The only problem with that selectedMacro is that it's a bug...";
+    strings["Single (combo box)##sgimcd"].plurals[0] = "=Single (combo box)";
+
     //   sgiLYNX   src/gui/inst/mikey.cpp
+
+    strings["Macros##sgiLYNX"].plurals[0] = "=Macros";
+    strings["Volume##sgiLYNX"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiLYNX"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiLYNX"].plurals[0] = "=Pitch";
+    strings["Duty/Int##sgiLYNX"].plurals[0] = "=Duty/Int";
+    strings["Panning (left)##sgiLYNX"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiLYNX"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiLYNX"].plurals[0] = "=Phase Reset";
+
     //   sgi5232   src/gui/inst/msm5232.cpp
     //   sgi6258   src/gui/inst/msm6258.cpp
     //   sgi6295   src/gui/inst/msm6295.cpp
