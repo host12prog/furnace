@@ -77,11 +77,11 @@ enum ES5503_osc_modes {
   OSC_MODE_SWAP = 3, //triggers next oscillator after previous finishes; since max wavetable size is 32 KiB allows for 64 KiB wavetables to be played seamlessly
 };
 
-#define FM_NAME(x) fmParamNames[settings.fmNames][x]
-#define FM_SHORT_NAME(x) fmParamShortNames[settings.fmNames][x]
-#define ESFM_LONG_NAME(x) (esfmParamLongNames[x])
-#define ESFM_NAME(x) (esfmParamNames[x])
-#define ESFM_SHORT_NAME(x) (esfmParamShortNames[x])
+#define FM_NAME(x) _L(fmParamNames[settings.fmNames][x])
+#define FM_SHORT_NAME(x) _L(fmParamShortNames[settings.fmNames][x])
+#define ESFM_LONG_NAME(x) (_L(esfmParamLongNames[x]))
+#define ESFM_NAME(x) (_L(esfmParamNames[x]))
+#define ESFM_SHORT_NAME(x) (_L(esfmParamShortNames[x]))
 
 #define DRUM_FREQ(name,db,df,prop) \
   ImGui::TableNextRow(); \
@@ -140,13 +140,13 @@ enum ES5503_osc_modes {
     ImGui::Button(ICON_FA_ARROWS "##SysDrag"); \
     ImGui::SameLine(); \
     if (ImGui::IsKeyDown(ImGuiKey_LeftShift) || ImGui::IsKeyDown(ImGuiKey_RightShift)) { \
-      ImGui::Text("(copying)"); \
+      ImGui::Text(_L("(copying)##sgifmeh")); \
     } else { \
-      ImGui::Text("(swapping)"); \
+      ImGui::Text(_L("(swapping)##sgifmeh")); \
     } \
     ImGui::EndDragDropSource(); \
   } else if (ImGui::IsItemHovered()) { \
-    ImGui::SetTooltip("- drag to swap operator\n- shift-drag to copy operator"); \
+    ImGui::SetTooltip(_L("- drag to swap operator\n- shift-drag to copy operator##sgifmeh")); \
   } \
   if (ImGui::BeginDragDropTarget()) { \
     const ImGuiPayload* dragItem=ImGui::AcceptDragDropPayload("FUR_OP"); \

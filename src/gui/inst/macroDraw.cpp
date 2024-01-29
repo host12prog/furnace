@@ -526,7 +526,8 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
 
   for(int i = 0; i < (int)macros.size(); i++) //calculate table column width (the one where macro names go) to eliminate one-frame glitch
   {
-    float current_width = ImGui::CalcTextSize(macros[i].displayName).x;
+    float current_width = ImGui::CalcTextSize(_L(macros[i].displayName), NULL, true).x;
+    //the text end is needed there to specify the flag to cut off the ## thing from text len calc
 
     if(current_width > max_macro_len)
     {
@@ -579,7 +580,7 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
 
           // description
           ImGui::TableNextColumn();
-          ImGui::Text("%s",i.displayName);
+          ImGui::Text("%s",_L(i.displayName));
           ImGui::SameLine();
           if (ImGui::SmallButton((i.get_macro()->open&1)?(ICON_FA_CHEVRON_UP "##IMacroOpen"):(ICON_FA_CHEVRON_DOWN "##IMacroOpen"))) {
             i.get_macro()->open^=1;
@@ -606,7 +607,7 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
             // if you really need more than two macro modes please tell me.
             if (i.modeName!=NULL) {
               bool modeVal=i.get_macro()->mode;
-              String modeName=fmt::sprintf("%s##IMacroMode",i.modeName);
+              String modeName=fmt::sprintf("%s##IMacroMode",_L(i.modeName));
               if (ImGui::Checkbox(modeName.c_str(),&modeVal)) {
                 i.get_macro()->mode=modeVal;
               }
@@ -655,7 +656,7 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
 
           ImGui::PushID(index);
 
-          ImGui::TextUnformatted(i.displayName);
+          ImGui::TextUnformatted(_L(i.displayName));
           ImGui::SameLine();
           if (ImGui::SmallButton((i.get_macro()->open&1)?(ICON_FA_CHEVRON_UP "##IMacroOpen"):(ICON_FA_CHEVRON_DOWN "##IMacroOpen"))) {
             i.get_macro()->open^=1;
@@ -711,7 +712,7 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
         for (size_t i=0; i<macros.size(); i++) {
-          if (ImGui::Selectable(macros[i].displayName,state.selectedMacro==(int)i)) {
+          if (ImGui::Selectable(_L(macros[i].displayName),state.selectedMacro==(int)i)) {
             state.selectedMacro=i;
           }
         }

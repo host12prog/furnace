@@ -1562,7 +1562,7 @@ void FurnaceGUI::doFlip() {
 void FurnaceGUI::doCollapse(int divider, const SelectionPoint& sStart, const SelectionPoint& sEnd) {
   if (divider<2) return;
   if (e->curSubSong->patLen<divider) {
-    showError("can't collapse any further!");
+    showError(_L("can't collapse any further!##sged"));
     return;
   }
 
@@ -1666,7 +1666,7 @@ void FurnaceGUI::doExpand(int multiplier, const SelectionPoint& sStart, const Se
 void FurnaceGUI::doCollapseSong(int divider) {
   if (divider<2) return;
   if (e->curSubSong->patLen<divider) {
-    showError("can't collapse any further!");
+    showError(_L("can't collapse any further!##sged"));
     return;
   }
   finishSelection();
@@ -1746,7 +1746,7 @@ void FurnaceGUI::doCollapseSong(int divider) {
 void FurnaceGUI::doExpandSong(int multiplier) {
   if (multiplier<2) return;
   if (e->curSubSong->patLen>(256/multiplier)) {
-    showError("can't expand any further!");
+    showError(_L("can't expand any further!##sged"));
     return;
   }
   finishSelection();

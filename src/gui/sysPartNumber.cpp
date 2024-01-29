@@ -198,7 +198,7 @@ const char* FurnaceGUI::getSystemPartNumber(DivSystem sys, DivConfig& flags) {
       break;
     case DIV_SYSTEM_SFX_BEEPER:
     case DIV_SYSTEM_SFX_BEEPER_QUADTONE:
-      return "ZXS Beeper";
+      return _L("ZXS Beeper##sgsa");
       break;
     case DIV_SYSTEM_SCC:
       return "SCC";
