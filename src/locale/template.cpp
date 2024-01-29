@@ -3545,9 +3545,9 @@ void DivLocale::addTranslationsTemplate()
     // # sgimcdu   src/gui/inst/macroDrawUtil.cpp
     // # sgiLYNX   src/gui/inst/mikey.cpp
     // # sgi5232   src/gui/inst/msm5232.cpp
-    //   sgi6258   src/gui/inst/msm6258.cpp
-    //   sgi6295   src/gui/inst/msm6295.cpp
-    //   sgiMULPCM src/gui/inst/multipcm.cpp
+    // # sgi6258   src/gui/inst/msm6258.cpp
+    // # sgi6295   src/gui/inst/msm6295.cpp
+    // # sgiMULPCM src/gui/inst/multipcm.cpp
     //   sgiN163   src/gui/inst/n163.cpp
     //   sgiWSG    src/gui/inst/namco.cpp
     //   sgiNES    src/gui/inst/nes.cpp
@@ -3975,8 +3975,52 @@ void DivLocale::addTranslationsTemplate()
     strings["Noise##sgi5232"].plurals[0] = "=Noise";
 
     //   sgi6258   src/gui/inst/msm6258.cpp
+
+    strings["Macros##sgi6258"].plurals[0] = "=Macros";
+    strings["Frequency Divider##sgi6258"].plurals[0] = "=Frequency Divider";
+    strings["Panning##sgi6258"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgi6258"].plurals[0] = "=Phase Reset";
+    strings["Clock Divider##sgi6258"].plurals[0] = "=Clock Divider";
+
     //   sgi6295   src/gui/inst/msm6295.cpp
+
+    strings["Macros##sgi6295"].plurals[0] = "=Macros";
+    strings["Volume##sgi6295"].plurals[0] = "=Volume";
+    strings["Frequency Divider##sgi6295"].plurals[0] = "=Frequency Divider";
+    strings["Phase Reset##sgi6295"].plurals[0] = "=Phase Reset";
+
     //   sgiMULPCM src/gui/inst/multipcm.cpp
+
+    strings["AR##MULPCM0"].plurals[0] = "=AR";
+    strings["AR##MULPCM1"].plurals[0] = "=AR";
+    strings["Attack Rate##MULPCM"].plurals[0] = "=Attack Rate";
+    strings["D1R##MULPCM0"].plurals[0] = "=D1R";
+    strings["D1R##MULPCM1"].plurals[0] = "=D1R";
+    strings["Decay 1 Rate##MULPCM"].plurals[0] = "=Decay 1 Rate";
+    strings["DL##MULPCM0"].plurals[0] = "=DL";
+    strings["DL##MULPCM1"].plurals[0] = "=DL";
+    strings["Decay Level##MULPCM"].plurals[0] = "=Decay Level";
+    strings["D2R##MULPCM0"].plurals[0] = "=D2R";
+    strings["D2R##MULPCM1"].plurals[0] = "=D2R";
+    strings["Decay 2 Rate##MULPCM"].plurals[0] = "=Decay 2 Rate";
+    strings["RR##MULPCM0"].plurals[0] = "=RR";
+    strings["RR##MULPCM1"].plurals[0] = "=RR";
+    strings["Release Rate##MULPCM"].plurals[0] = "=Release Rate";
+    strings["RC##MULPCM0"].plurals[0] = "=RC";
+    strings["RC##MULPCM1"].plurals[0] = "=RC";
+    strings["Rate Correction##MULPCM"].plurals[0] = "=Rate Correction";
+    strings["Envelope##MULPCM0"].plurals[0] = "=Envelope";
+    strings["Envelope##MULPCM1"].plurals[0] = "=Envelope";
+    strings["LFO Rate##MULPCM"].plurals[0] = "=LFO Rate";
+    strings["PM Depth##MULPCM"].plurals[0] = "=PM Depth";
+    strings["AM Depth##MULPCM"].plurals[0] = "=AM Depth";
+    strings["Macros##MULPCM"].plurals[0] = "=Macros";
+    strings["Volume##MULPCM"].plurals[0] = "=Volume";
+    strings["Arpeggio##MULPCM"].plurals[0] = "=Arpeggio";
+    strings["Pitch##MULPCM"].plurals[0] = "=Pitch";
+    strings["Panning##MULPCM"].plurals[0] = "=Panning";
+    strings["Phase Reset##MULPCM"].plurals[0] = "=Phase Reset";
+
     //   sgiN163   src/gui/inst/n163.cpp
     //   sgiWSG    src/gui/inst/namco.cpp
     //   sgiNES    src/gui/inst/nes.cpp

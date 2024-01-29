@@ -31,11 +31,11 @@ void FurnaceGUI::drawInsMSM6295(DivInstrument* ins)
 {
   insTabSample(ins);
 
-  if (ImGui::BeginTabItem("Macros")) 
+  if (ImGui::BeginTabItem(_L("Macros##sgi6295"))) 
   {
-    macroList.push_back(FurnaceGUIMacroDesc("Volume",ins,DIV_MACRO_VOL,0xff,0,8,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc("Frequency Divider",ins,DIV_MACRO_DUTY,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc("Phase Reset",ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgi6295"),ins,DIV_MACRO_VOL,0xff,0,8,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Frequency Divider##sgi6295"),ins,DIV_MACRO_DUTY,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgi6295"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

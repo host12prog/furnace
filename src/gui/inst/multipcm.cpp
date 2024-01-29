@@ -44,50 +44,50 @@ void FurnaceGUI::drawInsMULTIPCM(DivInstrument* ins)
 
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
-      CENTER_TEXT("AR");
-      ImGui::TextUnformatted("AR");
+      CENTER_TEXT(_L("AR##MULPCM0"));
+      ImGui::TextUnformatted(_L("AR##MULPCM1"));
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip("Attack Rate");
+        ImGui::SetTooltip(_L("Attack Rate##MULPCM"));
       }
       ImGui::TableNextColumn();
-      CENTER_TEXT("D1R");
-      ImGui::TextUnformatted("D1R");
+      CENTER_TEXT(_L("D1R##MULPCM0"));
+      ImGui::TextUnformatted(_L("D1R##MULPCM1"));
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip("Decay 1 Rate");
+        ImGui::SetTooltip(_L("Decay 1 Rate##MULPCM"));
       }
       ImGui::TableNextColumn();
-      CENTER_TEXT("DL");
-      ImGui::TextUnformatted("DL");
+      CENTER_TEXT(_L("DL##MULPCM0"));
+      ImGui::TextUnformatted(_L("DL##MULPCM1"));
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip("Decay Level");
+        ImGui::SetTooltip(_L("Decay Level##MULPCM"));
       }
       ImGui::TableNextColumn();
-      CENTER_TEXT("D2R");
-      ImGui::TextUnformatted("D2R");
+      CENTER_TEXT(_L("D2R##MULPCM0"));
+      ImGui::TextUnformatted(_L("D2R##MULPCM1"));
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip("Decay 2 Rate");
+        ImGui::SetTooltip(_L("Decay 2 Rate##MULPCM"));
       }
       ImGui::TableNextColumn();
-      CENTER_TEXT("RR");
-      ImGui::TextUnformatted("RR");
+      CENTER_TEXT(_L("RR##MULPCM0"));
+      ImGui::TextUnformatted(_L("RR##MULPCM1"));
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip("Release Rate");
+        ImGui::SetTooltip(_L("Release Rate##MULPCM"));
       }
       ImGui::TableNextColumn();
-      CENTER_TEXT("RC");
-      ImGui::TextUnformatted("RC");
+      CENTER_TEXT(_L("RC##MULPCM0"));
+      ImGui::TextUnformatted(_L("RC##MULPCM1"));
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip("Rate Correction");
+        ImGui::SetTooltip(_L("Rate Correction##MULPCM"));
       }
       ImGui::TableNextColumn();
-      CENTER_TEXT("Envelope");
-      ImGui::TextUnformatted("Envelope");
+      CENTER_TEXT(_L("Envelope##MULPCM0"));
+      ImGui::TextUnformatted(_L("Envelope##MULPCM1"));
 
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
@@ -113,11 +113,11 @@ void FurnaceGUI::drawInsMULTIPCM(DivInstrument* ins)
       ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch,0.0);
       ImGui::TableSetupColumn("c2",ImGuiTableColumnFlags_WidthStretch,0.0);
       ImGui::TableNextColumn();
-      P(CWSliderScalar("LFO Rate",ImGuiDataType_U8,&ins->multipcm.lfo,&_ZERO,&_SEVEN)); rightClickable
+      P(CWSliderScalar(_L("LFO Rate##MULPCM"),ImGuiDataType_U8,&ins->multipcm.lfo,&_ZERO,&_SEVEN)); rightClickable
       ImGui::TableNextColumn();
-      P(CWSliderScalar("PM Depth",ImGuiDataType_U8,&ins->multipcm.vib,&_ZERO,&_SEVEN)); rightClickable
+      P(CWSliderScalar(_L("PM Depth##MULPCM"),ImGuiDataType_U8,&ins->multipcm.vib,&_ZERO,&_SEVEN)); rightClickable
       ImGui::TableNextColumn();
-      P(CWSliderScalar("AM Depth",ImGuiDataType_U8,&ins->multipcm.am,&_ZERO,&_SEVEN)); rightClickable
+      P(CWSliderScalar(_L("AM Depth##MULPCM"),ImGuiDataType_U8,&ins->multipcm.am,&_ZERO,&_SEVEN)); rightClickable
       ImGui::EndTable();
     }
     ImGui::EndTabItem();
@@ -125,17 +125,17 @@ void FurnaceGUI::drawInsMULTIPCM(DivInstrument* ins)
 
   insTabSample(ins);
 
-  if (ImGui::BeginTabItem("Macros")) 
+  if (ImGui::BeginTabItem(_L("Macros##MULPCM"))) 
   {
     panMin=-7;
     panMax=7;
 
-    macroList.push_back(FurnaceGUIMacroDesc("Volume",ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc("Arpeggio",ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc("Pitch",ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
-    macroList.push_back(FurnaceGUIMacroDesc("Panning",ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##MULPCM"),ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##MULPCM"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##MULPCM"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning##MULPCM"),ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
 
-    macroList.push_back(FurnaceGUIMacroDesc("Phase Reset",ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##MULPCM"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();
