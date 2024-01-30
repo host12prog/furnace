@@ -3567,14 +3567,14 @@ void DivLocale::addTranslationsTemplate()
     // # sgiPOKEY  src/gui/inst/pokey.cpp
     // # sgiPNN    src/gui/inst/powernoise.cpp
     // # sgiPNS    src/gui/inst/powernoise_slope.cpp
-    //   sgiPV     src/gui/inst/pv1000.cpp
-    //   sgiQ      src/gui/inst/qsound.cpp
-    //   sgiRF5    src/gui/inst/rf5c68.cpp
-    //   sgiSAA    src/gui/inst/saa1099.cpp
+    // # sgiPV     src/gui/inst/pv1000.cpp
+    // # sgiQ      src/gui/inst/qsound.cpp
+    // # sgiRF5    src/gui/inst/rf5c68.cpp
+    // # sgiSAA    src/gui/inst/saa1099.cpp
     // # sgismpd   src/gui/inst/sampleDraw.cpp
-    //   sgiSCC    src/gui/inst/scc.cpp
-    //   sgiSEGA   src/gui/inst/segapcm.cpp
-    //   sgiSM     src/gui/inst/sm8521.cpp
+    // # sgiSCC    src/gui/inst/scc.cpp
+    // # sgiSEGA   src/gui/inst/segapcm.cpp
+    // # sgiSM     src/gui/inst/sm8521.cpp
     //   sgiSNES   src/gui/inst/snes.cpp
     //   sgiPSG    src/gui/inst/std.cpp
     // # sgistru   src/gui/inst/stringsUtil.cpp
@@ -4306,9 +4306,47 @@ void DivLocale::addTranslationsTemplate()
     strings["Portion B Offset##sgiPNS"].plurals[0] = "=Portion B Offset";
 
     //   sgiPV     src/gui/inst/pv1000.cpp
+
+    strings["Macros##sgiPV"].plurals[0] = "=Macros";
+    strings["Volume##sgiPV"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiPV"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiPV"].plurals[0] = "=Pitch";
+
     //   sgiQ      src/gui/inst/qsound.cpp
+
+    strings["Macros##sgiQ"].plurals[0] = "=Macros";
+    strings["Volume##sgiQ"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiQ"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiQ"].plurals[0] = "=Pitch";
+    strings["Panning##sgiQ"].plurals[0] = "=Panning";
+    strings["Surround##sgiQ"].plurals[0] = "=Surround";
+    strings["Phase Reset##sgiQ"].plurals[0] = "=Phase Reset";
+    strings["Echo Level##sgiQ"].plurals[0] = "=Echo Level";
+    strings["Echo Feedback##sgiQ"].plurals[0] = "=Echo Feedback";
+    strings["Echo Length##sgiQ"].plurals[0] = "=Echo Length";
+
     //   sgiRF5    src/gui/inst/rf5c68.cpp
+
+    strings["Macros##sgiRF5"].plurals[0] = "=Macros";
+    strings["Volume##sgiRF5"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiRF5"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiRF5"].plurals[0] = "=Pitch";
+    strings["Panning (left)##sgiRF5"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiRF5"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiRF5"].plurals[0] = "=Phase Reset";
+
     //   sgiSAA    src/gui/inst/saa1099.cpp
+
+    strings["Macros##sgiSAA"].plurals[0] = "=Macros";
+    strings["Volume##sgiSAA"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiSAA"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiSAA"].plurals[0] = "=Pitch";
+    strings["Duty/Noise##sgiSAA"].plurals[0] = "=Duty/Noise";
+    strings["Waveform##sgiSAA"].plurals[0] = "=Waveform";
+    strings["Panning (left)##sgiSAA"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiSAA"].plurals[0] = "=Panning (right)";
+    strings["Envelope##sgiSAA"].plurals[0] = "=Envelope";
+
     //   sgismpd   src/gui/inst/sampleDraw.cpp
 
     strings["Sample##sgismpd0"].plurals[0] = "=Sample";
@@ -4336,8 +4374,31 @@ void DivLocale::addTranslationsTemplate()
     strings["clear map samples##sgismpd"].plurals[0] = "=clear map samples";
 
     //   sgiSCC    src/gui/inst/scc.cpp
+
+    strings["Macros##sgiSCC"].plurals[0] = "=Macros";
+    strings["Volume##sgiSCC"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiSCC"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiSCC"].plurals[0] = "=Pitch";
+    strings["Waveform##sgiSCC"].plurals[0] = "=Waveform";
+
     //   sgiSEGA   src/gui/inst/segapcm.cpp
+
+    strings["Macros##sgiSEGA"].plurals[0] = "=Macros";
+    strings["Volume##sgiSEGA"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiSEGA"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiSEGA"].plurals[0] = "=Pitch";
+    strings["Panning (left)##sgiSEGA"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiSEGA"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiSEGA"].plurals[0] = "=Phase Reset";
+
     //   sgiSM     src/gui/inst/sm8521.cpp
+
+    strings["Macros##sgiSM"].plurals[0] = "=Macros";
+    strings["Volume##sgiSM"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiSM"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiSM"].plurals[0] = "=Pitch";
+    strings["Waveform##sgiSM"].plurals[0] = "=Waveform";
+
     //   sgiSNES   src/gui/inst/snes.cpp
     //   sgiPSG    src/gui/inst/std.cpp
     //   sgistru   src/gui/inst/stringsUtil.cpp
