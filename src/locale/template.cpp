@@ -304,6 +304,7 @@ void DivLocale::addTranslationsTemplate()
     strings["- None -##sgdl"].plurals[0] = "=- None -";
     strings["out of memory for this sample!##sgdl"].plurals[0] = "=out of memory for this sample!";
     strings["make instrument##sgdl"].plurals[0] = "=make instrument";
+    strings["make me a drum kit##sgdl"].plurals[0] = "=make me a drum kit";
     strings["duplicate##sgdl1"].plurals[0] = "=duplicate";
     strings["replace...##sgdl1"].plurals[0] = "=replace...";
     strings["save##sgdl1"].plurals[0] = "=save";
@@ -761,6 +762,10 @@ void DivLocale::addTranslationsTemplate()
     strings["Yes##sggu6"].plurals[0] = "=Yes";
     strings["No##sggu6"].plurals[0] = "=No";
     strings["OK##sggu1"].plurals[0] = "=OK";
+    strings["Drum kit mode:##sggu"].plurals[0] = "=Drum kit mode:";
+    strings["Normal##sggu"].plurals[0] = "=Normal";
+    strings["12 samples per octave##sggu"].plurals[0] = "=12 samples per octave";
+    strings["Starting octave##sggu"].plurals[0] = "=Starting octave";
     strings["too many instruments!##sggu"].plurals[0] = "=too many instruments!";
     strings["too many wavetables!##sggu"].plurals[0] = "=too many wavetables!";
     strings["Select Instrument###Select Instrument"].plurals[0] = "=Select Instrument###Select Instrument";
@@ -2557,7 +2562,6 @@ void DivLocale::addTranslationsTemplate()
     strings["Cursor down##sggc"].plurals[0] = "=Cursor down";
     strings["Preview##sggc"].plurals[0] = "=Preview";
     strings["Stop preview##sggc"].plurals[0] = "=Stop preview";
-    strings["Make me a drum kit##sggc"].plurals[0] = "=Make me a drum kit";
     strings["Toggle folders/standard view##sggc2"].plurals[0] = "=Toggle folders/standard view";
 
     strings["---Sample editor##sggc"].plurals[0] = "=---Sample editor";

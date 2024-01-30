@@ -5825,16 +5825,16 @@ bool FurnaceGUI::loop() {
     if (ImGui::BeginPopup("InsTypeList",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoSavedSettings)) {
       char temp[1024];
       if (displayInsTypeListMakeInsSample==-2) {
-        ImGui::Text("Drum kit mode:");
-        if (ImGui::RadioButton("Normal",!makeDrumkitMode)) {
+        ImGui::Text(_L("Drum kit mode:##sggu"));
+        if (ImGui::RadioButton(_L("Normal##sggu"),!makeDrumkitMode)) {
           makeDrumkitMode=false;
         }
-        if (ImGui::RadioButton("12 samples per octave",makeDrumkitMode)) {
+        if (ImGui::RadioButton(_L("12 samples per octave##sggu"),makeDrumkitMode)) {
           makeDrumkitMode=true;
         }
 
         if (!makeDrumkitMode) {
-          ImGui::Text("Starting octave");
+          ImGui::Text(_L("Starting octave##sggu"));
           ImGui::SameLine();
           if (ImGui::InputInt("##DKOctave",&makeDrumkitOctave,1,3)) {
             if (makeDrumkitOctave<0) makeDrumkitOctave=0;

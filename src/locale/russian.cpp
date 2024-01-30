@@ -240,6 +240,7 @@ void DivLocale::addTranslationsRussian()
     strings["- None -##sgdl"].plurals[0] = "- Нет -";
     strings["out of memory for this sample!##sgdl"].plurals[0] = "недостаточно памяти для этого сэмпла!";
     strings["make instrument##sgdl"].plurals[0] = "создать инструмент";
+    strings["make me a drum kit##sgdl"].plurals[0] = "создать инструмент с набором ударных";
     strings["duplicate##sgdl1"].plurals[0] = "клонировать";
     strings["replace...##sgdl1"].plurals[0] = "заменить...";
     strings["save##sgdl1"].plurals[0] = "сохранить";
@@ -697,6 +698,10 @@ void DivLocale::addTranslationsRussian()
     strings["Cancel##sggu7"].plurals[0] = "Отмена";
     strings["Cancel##sggu8"].plurals[0] = "Отмена";
     strings["OK##sggu1"].plurals[0] = "ОК";
+    strings["Drum kit mode:##sggu"].plurals[0] = "Режим создания набора ударных:";
+    strings["Normal##sggu"].plurals[0] = "Обычный";
+    strings["12 samples per octave##sggu"].plurals[0] = "12 сэмплов на октаву";
+    strings["Starting octave##sggu"].plurals[0] = "Начальная октава";
     strings["too many instruments!##sggu"].plurals[0] = "слишком много инструментов!";
     strings["too many wavetables!##sggu"].plurals[0] = "слишком много волновых таблиц!";
     strings["Select Instrument###Select Instrument"].plurals[0] = "Выберите инструмент###Select Instrument";
@@ -2276,7 +2281,6 @@ void DivLocale::addTranslationsRussian()
     strings["Cursor down##sggc2"].plurals[0] = "Курсор вниз";
     strings["Preview##sggc"].plurals[0] = "Превью";
     strings["Stop preview##sggc"].plurals[0] = "Остановить превью";
-    strings["Make me a drum kit##sggc"].plurals[0] = "Сделай мне набор ударных";
     strings["Toggle folders/standard view##sggc2"].plurals[0] = "Переключиться между видом с разбиением по папкам и обычным видом";
 
     strings["---Sample editor##sggc"].plurals[0] = "---Sample editor";
