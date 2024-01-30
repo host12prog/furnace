@@ -3507,7 +3507,7 @@ void DivLocale::addTranslationsRussian()
 
     strings["(copying)##sgifmeh"].plurals[0] = "(копирование)";
     strings["(swapping)##sgifmeh"].plurals[0] = "(замена)";
-    strings["- drag to swap operator\n- shift-drag to copy operator##sgifmeh"].plurals[0] = "- перетащите, чтобы поменять настройки операторов местами\n- перетащите с зажатой клавишей SHIFT, чтобы скопировать настройки оператораshift-drag to copy operator";
+    strings["- drag to swap operator\n- shift-drag to copy operator##sgifmeh"].plurals[0] = "- перетащите, чтобы поменять настройки операторов местами\n- перетащите с зажатой клавишей SHIFT, чтобы скопировать настройки оператора";
 
     //   sgiGA20   src/gui/inst/ga20.cpp
 
