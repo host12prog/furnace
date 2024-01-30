@@ -29,13 +29,13 @@ class FurnaceGUI;
 
 void FurnaceGUI::drawInsSU(DivInstrument* ins)
 {
-  if (ImGui::BeginTabItem("Sound Unit")) 
+  if (ImGui::BeginTabItem(_L("Sound Unit##sgiSU"))) 
   {
-    P(ImGui::Checkbox("Switch roles of frequency and phase reset timer",&ins->su.switchRoles));
+    P(ImGui::Checkbox(_L("Switch roles of frequency and phase reset timer##sgiSU"),&ins->su.switchRoles));
     if (ImGui::BeginChild("HWSeqSU",ImGui::GetContentRegionAvail(),true,ImGuiWindowFlags_MenuBar)) 
     {
       ImGui::BeginMenuBar();
-      ImGui::Text("Hardware Sequence");
+      ImGui::Text(_L("Hardware Sequence##sgiSU"));
       ImGui::EndMenuBar();
 
       if (ins->su.hwSeqLen>0) if (ImGui::BeginTable("HWSeqListSU",3)) 
@@ -46,11 +46,11 @@ void FurnaceGUI::drawInsSU(DivInstrument* ins)
         int curFrame=0;
         ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
         ImGui::TableNextColumn();
-        ImGui::Text("Tick");
+        ImGui::Text(_L("Tick##sgiSU0"));
         ImGui::TableNextColumn();
-        ImGui::Text("Command");
+        ImGui::Text(_L("Command##sgiSU0"));
         ImGui::TableNextColumn();
-        ImGui::Text("Move/Remove");
+        ImGui::Text(_L("Move/Remove##sgiSU0"));
         for (int i=0; i<ins->su.hwSeqLen; i++) 
         {
           ImGui::TableNextRow();
@@ -64,7 +64,7 @@ void FurnaceGUI::drawInsSU(DivInstrument* ins)
           }
           int cmd=ins->su.get_su_hw_seq(i, true)->cmd;
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          if (ImGui::Combo("##HWSeqCmd",&cmd,suHWSeqCmdTypes,DivInstrumentSoundUnit::DIV_SU_HWCMD_MAX)) 
+          /*if (ImGui::Combo("##HWSeqCmd",&cmd,suHWSeqCmdTypes,DivInstrumentSoundUnit::DIV_SU_HWCMD_MAX)) 
           {
             if (ins->su.get_su_hw_seq(i, true)->cmd!=cmd) 
             {
@@ -73,6 +73,28 @@ void FurnaceGUI::drawInsSU(DivInstrument* ins)
               ins->su.get_su_hw_seq(i, true)->bound=0;
               ins->su.get_su_hw_seq(i, true)->speed=0;
             }
+          }*/
+          if (ImGui::BeginCombo("##HWSeqCmd",_L(suHWSeqCmdTypes[cmd])))
+          {
+            int j = 0;
+
+            while(suHWSeqCmdTypes[j])
+            {
+              if (ImGui::Selectable(_L(suHWSeqCmdTypes[j])))
+              {
+                if (ins->su.get_su_hw_seq(i, true)->cmd!=j) 
+                {
+                  ins->su.get_su_hw_seq(i, true)->cmd=j;
+                  ins->su.get_su_hw_seq(i, true)->val=0;
+                  ins->su.get_su_hw_seq(i, true)->bound=0;
+                  ins->su.get_su_hw_seq(i, true)->speed=0;
+                }
+              }
+
+              j++;
+            }
+
+            ImGui::EndCombo();
           }
           bool somethingChanged=false;
           switch (ins->su.get_su_hw_seq(i, true)->cmd) 
@@ -86,36 +108,36 @@ void FurnaceGUI::drawInsSU(DivInstrument* ins)
               bool swLoop=ins->su.get_su_hw_seq(i, true)->val&64;
               bool swInvert=ins->su.get_su_hw_seq(i, true)->val&128;
 
-              if (ImGui::InputInt("Period",&swPeriod,1,16)) {
+              if (ImGui::InputInt(_L("Period##sgiSU0"),&swPeriod,1,16)) {
                 if (swPeriod<0) swPeriod=0;
                 if (swPeriod>65535) swPeriod=65535;
                 somethingChanged=true;
               }
-              if (CWSliderInt("Amount",&swVal,0,31)) 
+              if (CWSliderInt(_L("Amount##sgiSU0"),&swVal,0,31)) 
               {
                 somethingChanged=true;
               }
-              if (CWSliderInt("Bound",&swBound,0,255)) 
+              if (CWSliderInt(_L("Bound##sgiSU0"),&swBound,0,255)) 
               {
                 somethingChanged=true;
               }
-              if (ImGui::RadioButton("Up",swDir)) 
+              if (ImGui::RadioButton(_L("Up##sgiSU0"),swDir)) 
               { PARAMETER
                 swDir=true;
                 somethingChanged=true;
               }
               ImGui::SameLine();
-              if (ImGui::RadioButton("Down",!swDir)) 
+              if (ImGui::RadioButton(_L("Down##sgiSU0"),!swDir)) 
               { PARAMETER
                 swDir=false;
                 somethingChanged=true;
               }
-              if (ImGui::Checkbox("Loop",&swLoop)) 
+              if (ImGui::Checkbox(_L("Loop##sgiSU"),&swLoop)) 
               { PARAMETER
                 somethingChanged=true;
               }
               ImGui::SameLine();
-              if (ImGui::Checkbox("Flip",&swInvert)) 
+              if (ImGui::Checkbox(_L("Flip##sgiSU"),&swInvert)) 
               { PARAMETER
                 somethingChanged=true;
               }
@@ -137,27 +159,27 @@ void FurnaceGUI::drawInsSU(DivInstrument* ins)
               int swVal=ins->su.get_su_hw_seq(i, true)->val&127;
               bool swDir=ins->su.get_su_hw_seq(i, true)->val&128;
 
-              if (ImGui::InputInt("Period",&swPeriod,1,16))
+              if (ImGui::InputInt(_L("Period##sgiSU1"),&swPeriod,1,16))
               {
                 if (swPeriod<0) swPeriod=0;
                 if (swPeriod>65535) swPeriod=65535;
                 somethingChanged=true;
               }
-              if (CWSliderInt("Amount",&swVal,0,31)) 
+              if (CWSliderInt(_L("Amount##sgiSU1"),&swVal,0,31)) 
               {
                 somethingChanged=true;
               }
-              if (CWSliderInt("Bound",&swBound,0,255)) 
+              if (CWSliderInt(_L("Bound##sgiSU1"),&swBound,0,255)) 
               {
                 somethingChanged=true;
               }
-              if (ImGui::RadioButton("Up",swDir)) 
+              if (ImGui::RadioButton(_L("Up##sgiSU1"),swDir)) 
               { PARAMETER
                 swDir=true;
                 somethingChanged=true;
               }
               ImGui::SameLine();
-              if (ImGui::RadioButton("Down",!swDir)) 
+              if (ImGui::RadioButton(_L("Down##sgiSU1"),!swDir)) 
               { PARAMETER
                 swDir=false;
                 somethingChanged=true;
@@ -177,7 +199,7 @@ void FurnaceGUI::drawInsSU(DivInstrument* ins)
               int len=ins->su.get_su_hw_seq(i, true)->val+1;
               curFrame+=ins->su.get_su_hw_seq(i, true)->val+1;
 
-              if (ImGui::InputInt("Ticks",&len)) 
+              if (ImGui::InputInt(_L("Ticks##sgiSU"),&len)) 
               {
                 if (len<1) len=1;
                 if (len>255) len=256;
@@ -199,7 +221,7 @@ void FurnaceGUI::drawInsSU(DivInstrument* ins)
             {
               int pos=ins->su.get_su_hw_seq(i, true)->val;
 
-              if (ImGui::InputInt("Position",&pos,1,4)) 
+              if (ImGui::InputInt(_L("Position##sgiSU"),&pos,1,4)) 
               {
                 if (pos<0) pos=0;
                 if (pos>(ins->su.hwSeqLen-1)) pos=(ins->su.hwSeqLen-1);
@@ -307,25 +329,25 @@ void FurnaceGUI::drawInsSU(DivInstrument* ins)
 
   insTabSample(ins);
 
-  if (ImGui::BeginTabItem("Macros")) 
+  if (ImGui::BeginTabItem(_L("Macros##sgiSU"))) 
   {
     panMin=-127;
     panMax=127;
 
-    macroList.push_back(FurnaceGUIMacroDesc("Volume",ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc("Arpeggio",ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc("Pitch",ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
-    macroList.push_back(FurnaceGUIMacroDesc("Duty/Noise",ins,DIV_MACRO_DUTY,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc("Waveform",ins,DIV_MACRO_WAVE,0xff,0,8,160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiSU"),ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiSU"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiSU"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Duty/Noise##sgiSU"),ins,DIV_MACRO_DUTY,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiSU"),ins,DIV_MACRO_WAVE,0xff,0,8,160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
 
-    macroList.push_back(FurnaceGUIMacroDesc("Panning",ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning##sgiSU"),ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
 
-    macroList.push_back(FurnaceGUIMacroDesc("Phase Reset",ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgiSU"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 
-    macroList.push_back(FurnaceGUIMacroDesc("Cutoff",ins,DIV_MACRO_EX1,0xff,0,16383,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc("Resonance",ins,DIV_MACRO_EX2,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc("Control",ins,DIV_MACRO_EX3, 0xff,0,4,64,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,suControlBits));
-    macroList.push_back(FurnaceGUIMacroDesc("Phase Reset Timer",ins,DIV_MACRO_EX4,0xff,0,65535,160,uiColors[GUI_COLOR_MACRO_OTHER])); // again reuse code from resonance macro but use ex4 instead
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Cutoff##sgiSU"),ins,DIV_MACRO_EX1,0xff,0,16383,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Resonance##sgiSU"),ins,DIV_MACRO_EX2,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Control##sgiSU"),ins,DIV_MACRO_EX3, 0xff,0,4,64,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,suControlBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset Timer##sgiSU"),ins,DIV_MACRO_EX4,0xff,0,65535,160,uiColors[GUI_COLOR_MACRO_OTHER])); // again reuse code from resonance macro but use ex4 instead
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

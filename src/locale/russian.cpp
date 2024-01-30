@@ -1490,6 +1490,7 @@ void DivLocale::addTranslationsRussian()
     strings["ZX Spectrum (beeper only, QuadTone engine)##sgpr"].plurals[0] = "ZX Spectrum (только пищалка, драйвер QuadTone)";
     strings["Modern/fantasy##sgpr"].plurals[0] = "Совр./вымышл.";
     strings["chips/systems which do not exist in reality or were made just several years ago.##sgpr"].plurals[0] = "чипы/системы, не имеющие физического воплощения или сделанные всего несколько лет назад.";
+    strings["tildearrow Sound Unit"].plurals[0] = "Звуковой модуль tildearrow";
     strings["Commander X16 (VERA only)##sgpr1"].plurals[0] = "Commander X16 (только VERA)";
     strings["DefleMask-compatible##sgpr"].plurals[0] = "Совместимые с DefleMask";
     strings["these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"].plurals[0] = "эти пресеты совместимы с DefleMask.\nвыбирайте их, если вам будет нужно будет экспортировать модуль в .dmf или работать с этой программой.";
@@ -3088,7 +3089,7 @@ void DivLocale::addTranslationsRussian()
     strings["ES5506##CC_GUI_COLOR_INSTR_ES5506"].plurals[0] = "ES5506##CC_GUI_COLOR_INSTR_ES5506";
     strings["MultiPCM##CC_GUI_COLOR_INSTR_MULTIPCM"].plurals[0] = "MultiPCM##CC_GUI_COLOR_INSTR_MULTIPCM";
     strings["SNES##CC_GUI_COLOR_INSTR_SNES"].plurals[0] = "SNES##CC_GUI_COLOR_INSTR_SNES";
-    strings["Sound Unit##CC_GUI_COLOR_INSTR_SU"].plurals[0] = "Sound Unit##CC_GUI_COLOR_INSTR_SU";
+    strings["Sound Unit##CC_GUI_COLOR_INSTR_SU"].plurals[0] = "Звуковой модуль##CC_GUI_COLOR_INSTR_SU";
     strings["Namco WSG##CC_GUI_COLOR_INSTR_NAMCO"].plurals[0] = "Namco WSG##CC_GUI_COLOR_INSTR_NAMCO";
     strings["FM (OPL Drums)##CC_GUI_COLOR_INSTR_OPL_DRUMS"].plurals[0] = "FM (OPL, ударные)##CC_GUI_COLOR_INSTR_OPL_DRUMS";
     strings["FM (OPM)##CC_GUI_COLOR_INSTR_OPM"].plurals[0] = "FM (OPM)##CC_GUI_COLOR_INSTR_OPM";
@@ -3629,6 +3630,206 @@ void DivLocale::addTranslationsRussian()
     strings["Group Attack##sgi5232"].plurals[0] = "Атака группы";
     strings["Group Decay##sgi5232"].plurals[0] = "Спад группы";
     strings["Noise##sgi5232"].plurals[0] = "Шум";
+
+    //   sgi6258   src/gui/inst/msm6258.cpp
+
+    strings["Macros##sgi6258"].plurals[0] = "Макросы";
+    strings["Frequency Divider##sgi6258"].plurals[0] = "Делитель частоты";
+    strings["Panning##sgi6258"].plurals[0] = "Панорамирование";
+    strings["Phase Reset##sgi6258"].plurals[0] = "Сброс фазы";
+    strings["Clock Divider##sgi6258"].plurals[0] = "Делитель тактовой частоты";
+
+    //   sgi6295   src/gui/inst/msm6295.cpp
+
+    strings["Macros##sgi6295"].plurals[0] = "Макросы";
+    strings["Volume##sgi6295"].plurals[0] = "Громкость";
+    strings["Frequency Divider##sgi6295"].plurals[0] = "Делитель частоты";
+    strings["Phase Reset##sgi6295"].plurals[0] = "Сброс фазы";
+
+    //   sgiMULPCM src/gui/inst/multipcm.cpp
+
+    strings["MultiPCM##sgiMULPCM"].plurals[0] = "MultiPCM";
+    strings["AR##sgiMULPCM0"].plurals[0] = "СА";
+    strings["AR##sgiMULPCM1"].plurals[0] = "СА";
+    strings["Attack Rate##sgiMULPCM"].plurals[0] = "Скорость атаки";
+    strings["D1R##sgiMULPCM0"].plurals[0] = "С1С";
+    strings["D1R##sgiMULPCM1"].plurals[0] = "С1С";
+    strings["Decay 1 Rate##sgiMULPCM"].plurals[0] = "Скорость спада 1";
+    strings["DL##sgiMULPCM0"].plurals[0] = "УС";
+    strings["DL##sgiMULPCM1"].plurals[0] = "УС";
+    strings["Decay Level##sgiMULPCM"].plurals[0] = "Уровень спада";
+    strings["D2R##sgiMULPCM0"].plurals[0] = "С2С";
+    strings["D2R##sgiMULPCM1"].plurals[0] = "С2С";
+    strings["Decay 2 Rate##sgiMULPCM"].plurals[0] = "Скорость спада 2";
+    strings["RR##sgiMULPCM0"].plurals[0] = "СР";
+    strings["RR##sgiMULPCM1"].plurals[0] = "СР";
+    strings["Release Rate##sgiMULPCM"].plurals[0] = "Скорость релиза";
+    strings["RC##sgiMULPCM0"].plurals[0] = "КС";
+    strings["RC##sgiMULPCM1"].plurals[0] = "КС";
+    strings["Rate Correction##sgiMULPCM"].plurals[0] = "Коррекция скорости";
+    strings["Envelope##sgiMULPCM0"].plurals[0] = "Огибающая";
+    strings["Envelope##sgiMULPCM1"].plurals[0] = "Огибающая";
+    strings["LFO Rate##sgiMULPCM"].plurals[0] = "Скорость ОНЧ";
+    strings["PM Depth##sgiMULPCM"].plurals[0] = "Глубина ФМ";
+    strings["AM Depth##sgiMULPCM"].plurals[0] = "Глубина АМ";
+    strings["Macros##sgiMULPCM"].plurals[0] = "Макросы";
+    strings["Volume##sgiMULPCM"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiMULPCM"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiMULPCM"].plurals[0] = "Частота";
+    strings["Panning##sgiMULPCM"].plurals[0] = "Панорамирование";
+    strings["Phase Reset##sgiMULPCM"].plurals[0] = "Сброс фазы";
+
+    //   sgiN163   src/gui/inst/n163.cpp
+
+    strings["Namco 163##sgiN163"].plurals[0] = "Namco 163";
+    strings["Load waveform##sgiN163"].plurals[0] = "Загрузить волну";
+    strings["when enabled, a waveform will be loaded into RAM.\nwhen disabled, only the offset and length change.##sgiN163"].plurals[0] = "при включении этой опции олна будет загружена в ОЗУ.\nесли опция выключена, меняться будут только смещение и длина волны.";
+    strings["Waveform##WAVE"].plurals[0] = "Волна##WAVE";
+    strings["Per-channel wave position/length##sgiN163"].plurals[0] = "Позиционирование и длина волны отдельно для каждого канала";
+    strings["Ch##sgiN163"].plurals[0] = "Кан.";
+    strings["Position##sgiN163"].plurals[0] = "Положение";
+    strings["Length##sgiN163"].plurals[0] = "Длина";
+    strings["Position##WAVEPOS"].plurals[0] = "Положение##WAVEPOS";
+    strings["Length##WAVELEN"].plurals[0] = "Длина##WAVELEN";
+    strings["Macros##sgiN163"].plurals[0] = "Макросы";
+    strings["Volume##sgiN163"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiN163"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiN163"].plurals[0] = "Частота";
+    strings["Wave Pos##sgiN163"].plurals[0] = "Полож. волны";
+    strings["Waveform##sgiN163"].plurals[0] = "Волна";
+    strings["Wave Length##sgiN163"].plurals[0] = "Длина волны";
+
+    //   sgiWSG    src/gui/inst/namco.cpp
+
+    strings["Macros##sgiWSG"].plurals[0] = "Макросы";
+    strings["Volume##sgiWSG"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiWSG"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiWSG"].plurals[0] = "Частота";
+    strings["Noise##sgiWSG"].plurals[0] = "Шум";
+    strings["Waveform##sgiWSG"].plurals[0] = "Волна";
+    strings["Panning (left)##sgiWSG"].plurals[0] = "Панорамирование (лево)";
+    strings["Panning (right)##sgiWSG"].plurals[0] = "Панорамирование (право)";
+
+    //   sgiNES    src/gui/inst/nes.cpp
+
+    strings["Macros##sgiNES"].plurals[0] = "Макросы";
+    strings["Volume##sgiNES"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiNES"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiNES"].plurals[0] = "Частота";
+    strings["Duty/Noise##sgiNES"].plurals[0] = "Скважность/режим шума";
+    strings["Phase Reset##sgiNES"].plurals[0] = "Сброс фазы";
+
+    //   sgiOPL    src/gui/inst/opl.cpp
+
+    strings["4-op##sgiOPL"].plurals[0] = "4-оп";
+    strings["Drums##sgiOPL"].plurals[0] = "Ударные";
+    strings["Fixed frequency mode##sgiOPL"].plurals[0] = "Режим фиксированной частоты";
+    strings["when enabled, drums will be set to the specified frequencies, ignoring the note.##sgiOPL"].plurals[0] = "при включении режима ударные будут звучать на указанных частотах. Значения нот будут игнорироваться.";
+    strings["Drum##sgiOPL"].plurals[0] = "Ударный";
+    strings["Block##sgiOPL"].plurals[0] = "Блок";
+    strings["FreqNum##sgiOPL"].plurals[0] = "Частота";
+    strings["Kick##sgiOPL0"].plurals[0] = "Бас-барабан";
+    strings["Snare/Hi-hat##sgiOPL"].plurals[0] = "Рабочий барабан/хай-хэт";
+    strings["Tom/Top##sgiOPL"].plurals[0] = "Там-там/тарелка";
+    strings["Other##sgiOPL0"].plurals[0] = "Другое";
+    strings["Other##sgiOPL1"].plurals[0] = "Другое";
+    strings["Envelope##sgiOPL0"].plurals[0] = "Огибающая";
+    strings["Envelope##sgiOPL1"].plurals[0] = "Огибающая";
+    strings["op%d##sgiOPL0"].plurals[0] = "оп%d";
+    strings["Kick##sgiOPL1"].plurals[0] = "Бочка";
+    strings["Env##sgiOPL"].plurals[0] = "Огиб.";
+    strings["OP%d##sgiOPL1"].plurals[0] = "ОП%d";
+    strings["OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL0"].plurals[0] = "Только OPL2/3 (последние 4 волны только для OPL3)";
+    strings["op%d##sgiOPL2"].plurals[0] = "оп%d";
+    strings["Envelope 2 (kick only)##sgiOPL0"].plurals[0] = "Огибающая 2 (только бочка)";
+    strings["Envelope##sgiOPL2"].plurals[0] = "Огибающая";
+    strings["Operator %d##sgiOPL"].plurals[0] = "Оператор %d";
+    strings["Waveform##sgiOPL"].plurals[0] = "Волна";
+    strings["Envelope##sgiOPL3"].plurals[0] = "Огибающая";
+    strings["OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL1"].plurals[0] = "Только OPL2/3 (последние 4 волны только для OPL3)";
+    strings["op%d##sgiOPL3"].plurals[0] = "оп%d";
+    strings["Envelope 2 (kick only)##sgiOPL1"].plurals[0] = "Огибающая 2 (только бочка)";
+    strings["Envelope##sgiOPL4"].plurals[0] = "Огибающая";
+    strings["OP%d##sgiOPL4"].plurals[0] = "ОП%d";
+    strings["OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL2"].plurals[0] = "Только OPL2/3 (последние 4 волны только для OPL3)";
+    strings["FM Macros##sgiOPL"].plurals[0] = "Макросы FM";
+    strings["OP%d Macros##sgiOPL"].plurals[0] = "Макросы ОП%d";
+    strings["Macros##sgiOPL"].plurals[0] = "Макросы";
+    strings["Volume##sgiOPL"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiOPL"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiOPL"].plurals[0] = "Частота";
+    strings["Panning##sgiOPL"].plurals[0] = "Панорамирование";
+    strings["Phase Reset##sgiOPL"].plurals[0] = "Сброс фазы";
+
+    //   sgiOPLL   src/gui/inst/opll.cpp
+
+    strings["%s name##sgiOPLL"].plurals[0] = "название %s";
+    strings["Fixed frequency mode##sgiOPLL"].plurals[0] = "Режим фиксированной частоты";
+    strings["when enabled, drums will be set to the specified frequencies, ignoring the note.##sgiOPLL"].plurals[0] = "при включении режима ударные будут звучать на указанных частотах. Значения нот будут игнорироваться.";
+    strings["Drum##sgiOPLL"].plurals[0] = "Ударный";
+    strings["Block##sgiOPLL"].plurals[0] = "Блок";
+    strings["FreqNum##sgiOPLL"].plurals[0] = "Частота";
+    strings["Kick##sgiOPLL"].plurals[0] = "Бас-барабан";
+    strings["Snare/Hi-hat##sgiOPLL"].plurals[0] = "Рабочий барабан/хай-хэт";
+    strings["Tom/Top##sgiOPLL"].plurals[0] = "Там-там/тарелка";
+    strings["Volume##TL"].plurals[0] = "Громкость##TL";
+    strings["this volume slider only works in compatibility (non-drums) system.##sgiOPLL"].plurals[0] = "эта регулировка громкости работает только в совместимой (без ударных) системе.";
+    strings["Other##sgiOPLL0"].plurals[0] = "Другое";
+    strings["Other##sgiOPLL1"].plurals[0] = "Другое";
+    strings["Envelope##sgiOPLL0"].plurals[0] = "Огибающая";
+    strings["Envelope##sgiOPLL1"].plurals[0] = "Огибающая";
+    strings["op%d##sgiOPLL0"].plurals[0] = "оп%d";
+    strings["OP%d##sgiOPLL1"].plurals[0] = "ОП%d";
+    strings["op%d##sgiOPLL2"].plurals[0] = "оп%d";
+    strings["Operator %d##sgiOPLL"].plurals[0] = "Оператор %d";
+    strings["Waveform##sgiOPLL"].plurals[0] = "Волна";
+    strings["Envelope##sgiOPLL2"].plurals[0] = "Огибающая";
+    strings["op%d##sgiOPLL3"].plurals[0] = "оп%d";
+    strings["OP%d##sgiOPLL4"].plurals[0] = "ОП%d";
+    strings["SSG On##sgiOPLL"].plurals[0] = "Вкл. SSG";
+    strings["FM Macros##sgiOPLL"].plurals[0] = "Макросы FM";
+    strings["OP%d Macros##sgiOPLL"].plurals[0] = "Макросы ОП%d";
+    strings["Macros##sgiOPLL"].plurals[0] = "Макросы";
+    strings["Volume##sgiOPLL"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiOPLL"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiOPLL"].plurals[0] = "Частота";
+    strings["Patch##sgiOPLL"].plurals[0] = "Патч";
+    strings["Phase Reset##sgiOPLL"].plurals[0] = "Сброс фазы";
+
+    //   sgiSU     src/gui/inst/su.cpp
+
+    strings["Sound Unit##sgiSU"].plurals[0] = "Звуковой модуль";
+    strings["Switch roles of frequency and phase reset timer##sgiSU"].plurals[0] = "Поменять роли таймера сброса фазы и таймера изменения частоты";
+    strings["Hardware Sequence##sgiSU"].plurals[0] = "Аппаратная последовательность";
+    strings["Tick##sgiSU0"].plurals[0] = "Шаг движка";
+    strings["Command##sgiSU0"].plurals[0] = "Команда";
+    strings["Move/Remove##sgiSU0"].plurals[0] = "Перем./Удал.";
+    strings["Period##sgiSU0"].plurals[0] = "Период";
+    strings["Amount##sgiSU0"].plurals[0] = "Количество";
+    strings["Bound##sgiSU0"].plurals[0] = "Граница";
+    strings["Up##sgiSU0"].plurals[0] = "Вверх";
+    strings["Down##sgiSU0"].plurals[0] = "Вниз";
+    strings["Loop##sgiSU"].plurals[0] = "Цикл";
+    strings["Flip##sgiSU"].plurals[0] = "Туда-обратно";
+    strings["Period##sgiSU1"].plurals[0] = "Период";
+    strings["Amount##sgiSU1"].plurals[0] = "Количество";
+    strings["Bound##sgiSU1"].plurals[0] = "Граница";
+    strings["Up##sgiSU1"].plurals[0] = "Вверх";
+    strings["Down##sgiSU1"].plurals[0] = "Вниз";
+    strings["Ticks##sgiSU"].plurals[0] = "Шагов";
+    strings["Position##sgiSU"].plurals[0] = "Положение";
+    strings["Macros##sgiSU"].plurals[0] = "Макросы";
+    strings["Volume##sgiSU"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiSU"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiSU"].plurals[0] = "Частота";
+    strings["Duty/Noise##sgiSU"].plurals[0] = "Скважность/режим шума";
+    strings["Waveform##sgiSU"].plurals[0] = "Волна";
+    strings["Panning##sgiSU"].plurals[0] = "Панорамирование";
+    strings["Phase Reset##sgiSU"].plurals[0] = "Сброс фазы";
+    strings["Cutoff##sgiSU"].plurals[0] = "Частота среза";
+    strings["Resonance##sgiSU"].plurals[0] = "Резонанс";
+    strings["Control##sgiSU"].plurals[0] = "Управление";
+    strings["Phase Reset Timer##sgiSU"].plurals[0] = "Таймер сброса фазы";
 
     //   sgistru   src/gui/inst/stringsUtil.cpp
 

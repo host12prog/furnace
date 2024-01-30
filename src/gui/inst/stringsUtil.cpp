@@ -308,14 +308,15 @@ const char* gbHWSeqCmdTypes[6+1]={
   NULL
 };
 
-const char* suHWSeqCmdTypes[7]={
+const char* suHWSeqCmdTypes[7+1]={
   "Volume Sweep##sgistru",
   "Frequency Sweep##sgistru",
   "Cutoff Sweep##sgistru",
   "Wait##sgistru1",
   "Wait for Release##sgistru1",
   "Loop##sgistru2",
-  "Loop until Release##sgistru1"
+  "Loop until Release##sgistru1",
+  NULL
 };
 
 const char* snesGainModes[5]={

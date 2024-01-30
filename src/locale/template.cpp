@@ -1557,6 +1557,7 @@ void DivLocale::addTranslationsTemplate()
     strings["ZX Spectrum (beeper only, QuadTone engine)##sgpr"].plurals[0] = "=ZX Spectrum (beeper only, QuadTone engine)";
     strings["Modern/fantasy##sgpr"].plurals[0] = "=Modern/fantasy";
     strings["chips/systems which do not exist in reality or were made just several years ago.##sgpr"].plurals[0] = "=chips/systems which do not exist in reality or were made just several years ago.";
+    strings["tildearrow Sound Unit"].plurals[0] = "=tildearrow sound unit";
     strings["Commander X16 (VERA only)##sgpr"].plurals[0] = "=Commander X16 (VERA only)";
     strings["DefleMask-compatible##sgpr"].plurals[0] = "=DefleMask-compatible";
     strings["these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"].plurals[0] = "=these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.";
@@ -3577,7 +3578,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgiSNES   src/gui/inst/snes.cpp
     //   sgiPSG    src/gui/inst/std.cpp
     // # sgistru   src/gui/inst/stringsUtil.cpp
-    //   sgiSU     src/gui/inst/su.cpp
+    // # sgiSU     src/gui/inst/su.cpp
     //   sgiSWAN   src/gui/inst/swan.cpp
     //   sgiT6W    src/gui/inst/t6w28.cpp
     //   sgiTED    src/gui/inst/ted.cpp
@@ -4451,8 +4452,42 @@ void DivLocale::addTranslationsTemplate()
     strings["Relative##sgistru"].plurals[0] = "=Relative";
     strings["QSound##sgistru"].plurals[0] = "=QSound";
     strings["Bug##sgistru"].plurals[0] = "=Bug";
-;
+
     //   sgiSU     src/gui/inst/su.cpp
+
+    strings["Sound Unit##sgiSU"].plurals[0] = "=Sound Unit";
+    strings["Switch roles of frequency and phase reset timer##sgiSU"].plurals[0] = "=Switch roles of frequency and phase reset timer";
+    strings["Hardware Sequence##sgiSU"].plurals[0] = "=Hardware Sequence";
+    strings["Tick##sgiSU0"].plurals[0] = "=Tick";
+    strings["Command##sgiSU0"].plurals[0] = "=Command";
+    strings["Move/Remove##sgiSU0"].plurals[0] = "=Move/Remove";
+    strings["Period##sgiSU0"].plurals[0] = "=Period";
+    strings["Amount##sgiSU0"].plurals[0] = "=Amount";
+    strings["Bound##sgiSU0"].plurals[0] = "=Bound";
+    strings["Up##sgiSU0"].plurals[0] = "=Up";
+    strings["Down##sgiSU0"].plurals[0] = "=Down";
+    strings["Loop##sgiSU"].plurals[0] = "=Loop";
+    strings["Flip##sgiSU"].plurals[0] = "=Flip";
+    strings["Period##sgiSU1"].plurals[0] = "=Period";
+    strings["Amount##sgiSU1"].plurals[0] = "=Amount";
+    strings["Bound##sgiSU1"].plurals[0] = "=Bound";
+    strings["Up##sgiSU1"].plurals[0] = "=Up";
+    strings["Down##sgiSU1"].plurals[0] = "=Down";
+    strings["Ticks##sgiSU"].plurals[0] = "=Ticks";
+    strings["Position##sgiSU"].plurals[0] = "=Position";
+    strings["Macros##sgiSU"].plurals[0] = "=Macros";
+    strings["Volume##sgiSU"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiSU"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiSU"].plurals[0] = "=Pitch";
+    strings["Duty/Noise##sgiSU"].plurals[0] = "=Duty/Noise";
+    strings["Waveform##sgiSU"].plurals[0] = "=Waveform";
+    strings["Panning##sgiSU"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiSU"].plurals[0] = "=Phase Reset";
+    strings["Cutoff##sgiSU"].plurals[0] = "=Cutoff";
+    strings["Resonance##sgiSU"].plurals[0] = "=Resonance";
+    strings["Control##sgiSU"].plurals[0] = "=Control";
+    strings["Phase Reset Timer##sgiSU"].plurals[0] = "=Phase Reset Timer";
+
     //   sgiSWAN   src/gui/inst/swan.cpp
     //   sgiT6W    src/gui/inst/t6w28.cpp
     //   sgiTED    src/gui/inst/ted.cpp
