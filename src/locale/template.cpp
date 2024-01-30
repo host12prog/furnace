@@ -3561,12 +3561,12 @@ void DivLocale::addTranslationsTemplate()
     // # sgiOPM    src/gui/inst/opm.cpp
     // # sgiOPN    src/gui/inst/opn.cpp
     // # sgiOPZ    src/gui/inst/opz.cpp
-    //   sgiPCE    src/gui/inst/pce.cpp
-    //   sgiPET    src/gui/inst/pet.cpp
-    //   sgiPMQT   src/gui/inst/pokemini.cpp
-    //   sgiPOKEY  src/gui/inst/pokey.cpp
-    //   sgiPNN    src/gui/inst/powernoise.cpp
-    //   sgiPNS    src/gui/inst/powernoise_slope.cpp
+    // # sgiPCE    src/gui/inst/pce.cpp
+    // # sgiPET    src/gui/inst/pet.cpp
+    // # sgiPMQT   src/gui/inst/pokemini.cpp
+    // # sgiPOKEY  src/gui/inst/pokey.cpp
+    // # sgiPNN    src/gui/inst/powernoise.cpp
+    // # sgiPNS    src/gui/inst/powernoise_slope.cpp
     //   sgiPV     src/gui/inst/pv1000.cpp
     //   sgiQ      src/gui/inst/qsound.cpp
     //   sgiRF5    src/gui/inst/rf5c68.cpp
@@ -4237,11 +4237,74 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##sgiOPZ"].plurals[0] = "=Phase Reset";
 
     //   sgiPCE    src/gui/inst/pce.cpp
+
+    strings["Macros##sgiPCE"].plurals[0] = "=Macros";
+    strings["Volume##sgiPCE"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiPCE"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiPCE"].plurals[0] = "=Pitch";
+    strings["Noise##sgiPCE"].plurals[0] = "=Noise";
+    strings["Waveform##sgiPCE"].plurals[0] = "=Waveform";
+    strings["Panning (left)##sgiPCE"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiPCE"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiPCE"].plurals[0] = "=Phase Reset";
+
     //   sgiPET    src/gui/inst/pet.cpp
+
+    strings["Macros##sgiPET"].plurals[0] = "=Macros";
+    strings["Volume##sgiPET"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiPET"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiPET"].plurals[0] = "=Pitch";
+    strings["Waveform##sgiPET"].plurals[0] = "=Waveform";
+
     //   sgiPMQT   src/gui/inst/pokemini.cpp
+
+    strings["Macros##sgiPMQT"].plurals[0] = "=Macros";
+    strings["Volume##sgiPMQT"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiPMQT"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiPMQT"].plurals[0] = "=Pitch";
+    strings["Pulse Width##sgiPMQT"].plurals[0] = "=Pulse Width";
+
     //   sgiPOKEY  src/gui/inst/pokey.cpp
+
+    strings["Macros##sgiPOKEY"].plurals[0] = "=Macros";
+    strings["Volume##sgiPOKEY"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiPOKEY"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiPOKEY"].plurals[0] = "=Pitch";
+    strings["Waveform##sgiPOKEY"].plurals[0] = "=Waveform";
+
     //   sgiPNN    src/gui/inst/powernoise.cpp
+
+    strings["Octave offset##sgiPNN"].plurals[0] = "=Octave offset";
+    strings["go to Macros for other parameters.##sgiPNN"].plurals[0] = "=go to Macros for other parameters.";
+    strings["Macros##sgiPNN"].plurals[0] = "=Macros";
+    strings["Volume##sgiPNN"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiPNN"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiPNN"].plurals[0] = "=Pitch";
+    strings["Panning (left)##sgiPNN"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiPNN"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiPNN"].plurals[0] = "=Phase Reset";
+    strings["Control##sgiPNN"].plurals[0] = "=Control";
+    strings["Tap A Location##sgiPNN"].plurals[0] = "=Tap A Location";
+    strings["Tap B Location##sgiPNN"].plurals[0] = "=Tap B Location";
+    strings["Load LFSR##sgiPNN"].plurals[0] = "=Load LFSR";
+
     //   sgiPNS    src/gui/inst/powernoise_slope.cpp
+
+    strings["Octave offset##sgiPNS"].plurals[0] = "=Octave offset";
+    strings["go to Macros for other parameters.##sgiPNS"].plurals[0] = "=go to Macros for other parameters.";
+    strings["Macros##sgiPNS"].plurals[0] = "=Macros";
+    strings["Volume##sgiPNS"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiPNS"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiPNS"].plurals[0] = "=Pitch";
+    strings["Panning (left)##sgiPNS"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiPNS"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiPNS"].plurals[0] = "=Phase Reset";
+    strings["Control##sgiPNS"].plurals[0] = "=Control";
+    strings["Portion A Length##sgiPNS"].plurals[0] = "=Portion A Length";
+    strings["Portion B Length##sgiPNS"].plurals[0] = "=Portion B Length";
+    strings["Portion A Offset##sgiPNS"].plurals[0] = "=Portion A Offset";
+    strings["Portion B Offset##sgiPNS"].plurals[0] = "=Portion B Offset";
+
     //   sgiPV     src/gui/inst/pv1000.cpp
     //   sgiQ      src/gui/inst/qsound.cpp
     //   sgiRF5    src/gui/inst/rf5c68.cpp
