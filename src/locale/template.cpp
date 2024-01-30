@@ -3575,8 +3575,8 @@ void DivLocale::addTranslationsTemplate()
     // # sgiSCC    src/gui/inst/scc.cpp
     // # sgiSEGA   src/gui/inst/segapcm.cpp
     // # sgiSM     src/gui/inst/sm8521.cpp
-    //   sgiSNES   src/gui/inst/snes.cpp
-    //   sgiPSG    src/gui/inst/std.cpp
+    // # sgiSNES   src/gui/inst/snes.cpp
+    // # sgiPSG    src/gui/inst/std.cpp
     // # sgistru   src/gui/inst/stringsUtil.cpp
     // # sgiSU     src/gui/inst/su.cpp
     //   sgiSWAN   src/gui/inst/swan.cpp
@@ -4400,7 +4400,46 @@ void DivLocale::addTranslationsTemplate()
     strings["Waveform##sgiSM"].plurals[0] = "=Waveform";
 
     //   sgiSNES   src/gui/inst/snes.cpp
+
+    strings["Use envelope##sgiSNES"].plurals[0] = "=Use envelope";
+    strings["Envelope##sgiSNES0"].plurals[0] = "=Envelope";
+    strings["Envelope##sgiSNES1"].plurals[0] = "=Envelope";
+    strings["Sustain/release mode:##sgiSNES"].plurals[0] = "=Sustain/release mode:";
+    strings["Direct (cut on release)##sgiSNES"].plurals[0] = "=Direct (cut on release)";
+    strings["Effective (linear decrease)##sgiSNES"].plurals[0] = "=Effective (linear decrease)";
+    strings["Effective (exponential decrease)##sgiSNES"].plurals[0] = "=Effective (exponential decrease)";
+    strings["Delayed (write R on release)##sgiSNES"].plurals[0] = "=Delayed (write R on release)";
+    strings["Gain Mode##sgiSNES0"].plurals[0] = "=Gain Mode";
+    strings["Gain Mode##sgiSNES1"].plurals[0] = "=Gain Mode";
+    strings["Gain##sgiSNES0"].plurals[0] = "=Gain";
+    strings["Gain##sgiSNES1"].plurals[0] = "=Gain";
+    strings["Direct##sgiSNES"].plurals[0] = "=Direct";
+    strings["Decrease (linear)##sgiSNES"].plurals[0] = "=Decrease (linear)";
+    strings["Decrease (logarithmic)##sgiSNES"].plurals[0] = "=Decrease (logarithmic)";
+    strings["Increase (linear)##sgiSNES"].plurals[0] = "=Increase (linear)";
+    strings["Increase (bent line)##sgiSNES"].plurals[0] = "=Increase (bent line)";
+    strings["using decrease modes will not produce any sound at all, unless you know what you are doing.\nit is recommended to use the Gain macro for decrease instead.##sgiSNES"].plurals[0] = "=using decrease modes will not produce any sound at all, unless you know what you are doing.\nit is recommended to use the Gain macro for decrease instead.";
+    strings["Macros##sgiSNES"].plurals[0] = "=Macros";
+    strings["Volume##sgiSNES"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiSNES"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiSNES"].plurals[0] = "=Pitch";
+    strings["Noise Freq##sgiSNES"].plurals[0] = "=Noise Freq";
+    strings["Waveform##sgiSNES"].plurals[0] = "=Waveform";
+    strings["Panning (left)##sgiSNES"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiSNES"].plurals[0] = "=Panning (right)";
+    strings["Special##sgiSNES"].plurals[0] = "=Special";
+    strings["Gain##sgiSNES2"].plurals[0] = "=Gain";
+
     //   sgiPSG    src/gui/inst/std.cpp
+
+    strings["Macros##sgiPSG"].plurals[0] = "=Macros";
+    strings["Volume##sgiPSG"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiPSG"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiPSG"].plurals[0] = "=Pitch";
+    strings["Duty##sgiPSG"].plurals[0] = "=Duty";
+    strings["Panning##sgiPSG"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiPSG"].plurals[0] = "=Phase Reset";
+
     //   sgistru   src/gui/inst/stringsUtil.cpp
 
     strings["Down Down Down##sgistru"].plurals[0] = "=Down Down Down";
