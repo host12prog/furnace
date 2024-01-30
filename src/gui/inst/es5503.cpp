@@ -32,13 +32,13 @@ void FurnaceGUI::drawInsES5503(DivInstrument* ins)
   if (ImGui::BeginTabItem("ES5503")) 
   {
     ImGui::AlignTextToFramePadding();
-    ImGui::Text("Oscillator mode:");
+    ImGui::Text(_L("Oscillator mode:##sgi5503"));
     ImGui::SameLine();
     bool freerun = (ins->es5503.initial_osc_mode == OSC_MODE_FREERUN);
     bool oneshot = (ins->es5503.initial_osc_mode == OSC_MODE_ONESHOT);
     bool sync_am = (ins->es5503.initial_osc_mode == OSC_MODE_SYNC_OR_AM);
     bool swap = (ins->es5503.initial_osc_mode == OSC_MODE_SWAP);
-    if (ImGui::RadioButton("Freerun",freerun)) 
+    if (ImGui::RadioButton(_L("Freerun##sgi5503"),freerun)) 
     { PARAMETER
       freerun=true;
       oneshot=false;
@@ -47,7 +47,7 @@ void FurnaceGUI::drawInsES5503(DivInstrument* ins)
       ins->es5503.initial_osc_mode=OSC_MODE_FREERUN;
     }
     ImGui::SameLine();
-    if (ImGui::RadioButton("Oneshot",oneshot)) 
+    if (ImGui::RadioButton(_L("Oneshot##sgi5503"),oneshot)) 
     { PARAMETER
       freerun=false;
       oneshot=true;
@@ -56,7 +56,7 @@ void FurnaceGUI::drawInsES5503(DivInstrument* ins)
       ins->es5503.initial_osc_mode=OSC_MODE_ONESHOT;
     }
     ImGui::SameLine();
-    if (ImGui::RadioButton("Sync/AM",sync_am)) 
+    if (ImGui::RadioButton(_L("Sync/AM##sgi5503"),sync_am)) 
     { PARAMETER
       freerun=false;
       oneshot=false;
@@ -65,7 +65,7 @@ void FurnaceGUI::drawInsES5503(DivInstrument* ins)
       ins->es5503.initial_osc_mode=OSC_MODE_SYNC_OR_AM;
     }
     ImGui::SameLine();
-    if (ImGui::RadioButton("Swap",swap)) 
+    if (ImGui::RadioButton(_L("Swap##sgi5503"),swap)) 
     { PARAMETER
       freerun=false;
       oneshot=false;
@@ -74,13 +74,13 @@ void FurnaceGUI::drawInsES5503(DivInstrument* ins)
       ins->es5503.initial_osc_mode=OSC_MODE_SWAP;
     }
 
-    P(ImGui::Checkbox("Virtual softpan channel",&ins->es5503.softpan_virtual_channel));
+    P(ImGui::Checkbox(_L("Virtual softpan channel##sgi5503"),&ins->es5503.softpan_virtual_channel));
     if (ImGui::IsItemHovered())
     {
-      ImGui::SetTooltip("Combines odd and next even channel into one virtual channel with 256-step panning.\nInstrument, volume and effects need to be placed on the odd channel (e.g. 1st, 3rd, 5th etc.)");
+      ImGui::SetTooltip(_L("Combines odd and next even channel into one virtual channel with 256-step panning.\nInstrument, volume and effects need to be placed on the odd channel (e.g. 1st, 3rd, 5th etc.)##sgi5503"));
     }
 
-    P(ImGui::Checkbox("Phase reset on key-on",&ins->es5503.phase_reset_on_start));
+    P(ImGui::Checkbox(_L("Phase reset on key-on##sgi5503"),&ins->es5503.phase_reset_on_start));
     
     ImGui::EndTabItem();
   }
@@ -88,31 +88,31 @@ void FurnaceGUI::drawInsES5503(DivInstrument* ins)
   if(!ins->amiga.useSample) insTabWave(ins);
   insTabSample(ins);
 
-  if (ImGui::BeginTabItem("Macros")) 
+  if (ImGui::BeginTabItem(_L("Macros##sgi5503"))) 
   {
     panMin=0;
     panMax=255;
 
-    macroList.push_back(FurnaceGUIMacroDesc("Volume",ins,DIV_MACRO_VOL,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc("Arpeggio",ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc("Pitch",ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
-    macroList.push_back(FurnaceGUIMacroDesc("Osc. mode",ins,DIV_MACRO_DUTY,0xff,0,3,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgi5503"),ins,DIV_MACRO_VOL,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgi5503"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgi5503"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Osc. mode##sgi5503"),ins,DIV_MACRO_DUTY,0xff,0,3,160,uiColors[GUI_COLOR_MACRO_OTHER]));
 
     if(ins->es5503.softpan_virtual_channel)
     {
-      macroList.push_back(FurnaceGUIMacroDesc("Panning (left)",ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
-      macroList.push_back(FurnaceGUIMacroDesc("Panning (right)",ins,DIV_MACRO_PAN_RIGHT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER]));
+      macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (left)##sgi5503"),ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
+      macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (right)##sgi5503"),ins,DIV_MACRO_PAN_RIGHT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER]));
     }
 
     if(!ins->amiga.useSample)
     {
-      macroList.push_back(FurnaceGUIMacroDesc("Waveform",ins,DIV_MACRO_WAVE,0xff,0,MAX(1,e->song.waveLen-1),160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
+      macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgi5503"),ins,DIV_MACRO_WAVE,0xff,0,MAX(1,e->song.waveLen-1),160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
     }
 
-    macroList.push_back(FurnaceGUIMacroDesc("Phase Reset",ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgi5503"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 
-    macroList.push_back(FurnaceGUIMacroDesc("Wave/sample pos.",ins,DIV_MACRO_EX1,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc("Osc. output",ins,DIV_MACRO_EX2,0xff,0,7,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Wave/sample pos.##sgi5503"),ins,DIV_MACRO_EX1,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Osc. output##sgi5503"),ins,DIV_MACRO_EX2,0xff,0,7,64,uiColors[GUI_COLOR_MACRO_OTHER]));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

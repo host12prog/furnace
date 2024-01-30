@@ -139,7 +139,7 @@ void FurnaceGUI::drawSSGEnv(unsigned char type, const ImVec2& size) {
     }
   }
 }
-
+ 
 void FurnaceGUI::drawWaveform(unsigned char type, bool opz, const ImVec2& size) {
   ImDrawList* dl=ImGui::GetWindowDrawList();
   ImGuiWindow* window=ImGui::GetCurrentWindow();
@@ -944,7 +944,7 @@ void FurnaceGUI::drawGBEnv(unsigned char vol, unsigned char len, unsigned char s
 void FurnaceGUI::kvsConfig(DivInstrument* ins, bool supportsKVS) {
   if (fmPreviewOn) {
     if (ImGui::IsItemHovered()) {
-      ImGui::SetTooltip("left click to restart\nmiddle click to pause\nright click to see algorithm");
+      ImGui::SetTooltip(_L("left click to restart\nmiddle click to pause\nright click to see algorithm##sgifmeu"));
     }
     if (ImGui::IsItemClicked(ImGuiMouseButton_Left)) {
       updateFMPreview=true;
@@ -954,11 +954,11 @@ void FurnaceGUI::kvsConfig(DivInstrument* ins, bool supportsKVS) {
     }
   } else if (supportsKVS) {
     if (ImGui::IsItemHovered()) {
-      ImGui::SetTooltip("left click to configure TL scaling\nright click to see FM preview");
+      ImGui::SetTooltip(_L("left click to configure TL scaling\nright click to see FM preview##sgifmeu"));
     }
   } else {
     if (ImGui::IsItemHovered()) {
-      ImGui::SetTooltip("right click to see FM preview");
+      ImGui::SetTooltip(_L("right click to see FM preview##sgifmeu"));
     }
   }
   if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
@@ -973,7 +973,7 @@ void FurnaceGUI::kvsConfig(DivInstrument* ins, bool supportsKVS) {
     if (ins->type==DIV_INS_OPLL) opCount=2;
     if (ins->type==DIV_INS_OPL) opCount=(ins->fm.ops==4)?4:2;
     if (ImGui::BeginPopupContextItem("IKVSOpt",ImGuiPopupFlags_MouseButtonLeft)) {
-      ImGui::Text("operator level changes with volume?");
+      ImGui::Text(_L("operator level changes with volume?##sgifmeu"));
       if (ImGui::BeginTable("KVSTable",4,ImGuiTableFlags_BordersInner)) {
         ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed);
         ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch);
@@ -982,11 +982,11 @@ void FurnaceGUI::kvsConfig(DivInstrument* ins, bool supportsKVS) {
         for (int i=0; i<4; i++) {
           int o=(opCount==4 && ins->type!=DIV_INS_ESFM)?orderedOps[i]:i;
           if (!(i&1)) ImGui::TableNextRow();
-          const char* label="AUTO##OPKVS";
+          const char* label=_L("AUTO##OPKVS");
           if (ins->fm.op[o].kvs==0) {
-            label="NO##OPKVS";
+            label=_L("NO##OPKVS");
           } else if (ins->fm.op[o].kvs==1) {
-            label="YES##OPKVS";
+            label=_L("YES##OPKVS");
           }
           ImGui::TableNextColumn();
           ImGui::Text("%d",i+1);

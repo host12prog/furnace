@@ -29,10 +29,10 @@ class FurnaceGUI;
 
 void FurnaceGUI::drawInsGB(DivInstrument* ins)
 {
-  if (ImGui::BeginTabItem("Game Boy")) 
+  if (ImGui::BeginTabItem(_L("Game Boy##sgiGB"))) 
   {
-    P(ImGui::Checkbox("Use software envelope",&ins->gb.softEnv));
-    P(ImGui::Checkbox("Initialize envelope on every note",&ins->gb.alwaysInit));
+    P(ImGui::Checkbox(_L("Use software envelope##sgiGB"),&ins->gb.softEnv));
+    P(ImGui::Checkbox(_L("Initialize envelope on every note##sgiGB"),&ins->gb.alwaysInit));
 
     ImGui::BeginDisabled(ins->gb.softEnv);
     if (ImGui::BeginTable("GBParams",2)) 
@@ -49,37 +49,37 @@ void FurnaceGUI::drawInsGB(DivInstrument* ins)
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
-        ImGui::Text("Volume");
+        ImGui::Text(_L("Volume##sgiGB0"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         P(CWSliderScalar("##GBVolume",ImGuiDataType_U8,&ins->gb.envVol,&_ZERO,&_FIFTEEN)); rightClickable
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
-        ImGui::Text("Length");
+        ImGui::Text(_L("Length##sgiGB"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         P(CWSliderScalar("##GBEnvLen",ImGuiDataType_U8,&ins->gb.envLen,&_ZERO,&_SEVEN)); rightClickable
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
-        ImGui::Text("Sound Length");
+        ImGui::Text(_L("Sound Length##sgiGB"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         P(CWSliderScalar("##GBSoundLen",ImGuiDataType_U8,&ins->gb.soundLen,&_ZERO,&_SIXTY_FOUR,ins->gb.soundLen>63?"Infinity":"%d")); rightClickable
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
-        ImGui::Text("Direction");
+        ImGui::Text(_L("Direction##sgiGB"));
         ImGui::TableNextColumn();
         bool goesUp=ins->gb.envDir;
-        if (ImGui::RadioButton("Up",goesUp)) 
+        if (ImGui::RadioButton(_L("Up##sgiGB0"),goesUp)) 
         { PARAMETER
           goesUp=true;
           ins->gb.envDir=goesUp;
         }
         ImGui::SameLine();
-        if (ImGui::RadioButton("Down",!goesUp)) 
+        if (ImGui::RadioButton(_L("Down##sgiGB0"),!goesUp)) 
         { PARAMETER
           goesUp=false;
           ins->gb.envDir=goesUp;
@@ -97,7 +97,7 @@ void FurnaceGUI::drawInsGB(DivInstrument* ins)
     if (ImGui::BeginChild("HWSeq",ImGui::GetContentRegionAvail(),true,ImGuiWindowFlags_MenuBar)) 
     {
       ImGui::BeginMenuBar();
-      ImGui::Text("Hardware Sequence");
+      ImGui::Text(_L("Hardware Sequence##sgiGB"));
       ImGui::EndMenuBar();
 
       if (ins->gb.hwSeqLen>0) if (ImGui::BeginTable("HWSeqList",3)) 
@@ -108,11 +108,11 @@ void FurnaceGUI::drawInsGB(DivInstrument* ins)
         int curFrame=0;
         ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
         ImGui::TableNextColumn();
-        ImGui::Text("Tick");
+        ImGui::Text(_L("Tick##sgiGB"));
         ImGui::TableNextColumn();
-        ImGui::Text("Command");
+        ImGui::Text(_L("Command##sgiGB"));
         ImGui::TableNextColumn();
-        ImGui::Text("Move/Remove");
+        ImGui::Text(_L("Move/Remove##sgiGB"));
         for (int i=0; i<ins->gb.hwSeqLen; i++) {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
@@ -125,13 +125,34 @@ void FurnaceGUI::drawInsGB(DivInstrument* ins)
           }
           int cmd=ins->gb.get_gb_hw_seq(i, true)->cmd;
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          if (ImGui::Combo("##HWSeqCmd",&cmd,gbHWSeqCmdTypes,DivInstrumentGB::DIV_GB_HWCMD_MAX)) 
+          /*if (ImGui::Combo("##HWSeqCmd",&cmd,gbHWSeqCmdTypes,DivInstrumentGB::DIV_GB_HWCMD_MAX)) 
           {
             if (ins->gb.get_gb_hw_seq(i, true)->cmd!=cmd) 
             {
               ins->gb.get_gb_hw_seq(i, true)->cmd=cmd;
               ins->gb.get_gb_hw_seq(i, true)->data=0;
             }
+          }*/
+
+          if (ImGui::BeginCombo("##HWSeqCmd",_L(gbHWSeqCmdTypes[cmd])))
+          {
+            int j = 0;
+
+            while(gbHWSeqCmdTypes[j])
+            {
+              if (ImGui::Selectable(_L(gbHWSeqCmdTypes[j])))
+              {
+                if (ins->gb.get_gb_hw_seq(i, true)->cmd!=j) 
+                {
+                  ins->gb.get_gb_hw_seq(i, true)->cmd=j;
+                  ins->gb.get_gb_hw_seq(i, true)->data=0;
+                }
+              }
+
+              j++;
+            }
+
+            ImGui::EndCombo();
           }
           bool somethingChanged=false;
           switch (ins->gb.get_gb_hw_seq(i, true)->cmd) 
@@ -143,25 +164,25 @@ void FurnaceGUI::drawInsGB(DivInstrument* ins)
               int hwsLen=ins->gb.get_gb_hw_seq(i, true)->data&7;
               int hwsSoundLen=ins->gb.get_gb_hw_seq(i, true)->data>>8;
 
-              if (CWSliderInt("Volume",&hwsVol,0,15)) 
+              if (CWSliderInt(_L("Volume##sgiGB1"),&hwsVol,0,15)) 
               {
                 somethingChanged=true;
               }
-              if (CWSliderInt("Env Length",&hwsLen,0,7)) 
+              if (CWSliderInt(_L("Env Length##sgiGB"),&hwsLen,0,7)) 
               {
                 somethingChanged=true;
               }
-              if (CWSliderInt("Sound Length",&hwsSoundLen,0,64,hwsSoundLen>63?"Infinity":"%d")) 
+              if (CWSliderInt(_L("Sound Length##sgiGB"),&hwsSoundLen,0,64,hwsSoundLen>63?"Infinity":"%d")) 
               {
                 somethingChanged=true;
               }
-              if (ImGui::RadioButton("Up",hwsDir)) 
+              if (ImGui::RadioButton(_L("Up##sgiGB1"),hwsDir)) 
               { PARAMETER
                 hwsDir=true;
                 somethingChanged=true;
               }
               ImGui::SameLine();
-              if (ImGui::RadioButton("Down",!hwsDir)) 
+              if (ImGui::RadioButton(_L("Down##sgiGB1"),!hwsDir)) 
               { PARAMETER
                 hwsDir=false;
                 somethingChanged=true;
@@ -180,22 +201,22 @@ void FurnaceGUI::drawInsGB(DivInstrument* ins)
               int hwsSpeed=(ins->gb.get_gb_hw_seq(i, true)->data&0x70)>>4;
               bool hwsDir=ins->gb.get_gb_hw_seq(i, true)->data&8;
 
-              if (CWSliderInt("Shift",&hwsShift,0,7)) 
+              if (CWSliderInt(_L("Shift##sgiGB"),&hwsShift,0,7)) 
               {
                 somethingChanged=true;
               }
-              if (CWSliderInt("Speed",&hwsSpeed,0,7)) 
+              if (CWSliderInt(_L("Speed##sgiGB"),&hwsSpeed,0,7)) 
               {
                 somethingChanged=true;
               }
 
-              if (ImGui::RadioButton("Up",!hwsDir)) 
+              if (ImGui::RadioButton(_L("Up##sgiGB2"),!hwsDir)) 
               { PARAMETER
                 hwsDir=false;
                 somethingChanged=true;
               }
               ImGui::SameLine();
-              if (ImGui::RadioButton("Down",hwsDir)) 
+              if (ImGui::RadioButton(_L("Down##sgiGB2"),hwsDir)) 
               { PARAMETER
                 hwsDir=true;
                 somethingChanged=true;
@@ -213,7 +234,7 @@ void FurnaceGUI::drawInsGB(DivInstrument* ins)
               int len=ins->gb.get_gb_hw_seq(i, true)->data+1;
               curFrame+=ins->gb.get_gb_hw_seq(i, true)->data+1;
 
-              if (ImGui::InputInt("Ticks",&len,1,4)) 
+              if (ImGui::InputInt(_L("Ticks##sgiGB"),&len,1,4)) 
               {
                 if (len<1) len=1;
                 if (len>255) len=256;
@@ -235,7 +256,7 @@ void FurnaceGUI::drawInsGB(DivInstrument* ins)
             {
               int pos=ins->gb.get_gb_hw_seq(i, true)->data;
 
-              if (ImGui::InputInt("Position",&pos,1,1)) 
+              if (ImGui::InputInt(_L("Position##sgiGB"),&pos,1,1)) 
               {
                 if (pos<0) pos=0;
                 if (pos>(ins->gb.hwSeqLen-1)) pos=(ins->gb.hwSeqLen-1);
@@ -319,22 +340,22 @@ void FurnaceGUI::drawInsGB(DivInstrument* ins)
     ImGui::EndTabItem();
   }
 
-  if (ImGui::BeginTabItem("Macros")) 
+  if (ImGui::BeginTabItem(_L("Macros##sgiGB"))) 
   {
     panMax=2;
 
     if (ins->gb.softEnv) 
     {
-      macroList.push_back(FurnaceGUIMacroDesc("Volume",ins,DIV_MACRO_VOL,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
+      macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiGB2"),ins,DIV_MACRO_VOL,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
     }
     
-    macroList.push_back(FurnaceGUIMacroDesc("Arpeggio",ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc("Pitch",ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
-    macroList.push_back(FurnaceGUIMacroDesc("Duty/Noise",ins,DIV_MACRO_DUTY,0xff,0,3,64,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc("Waveform", ins, DIV_MACRO_WAVE, 0xff, 0, MAX(1,e->song.waveLen-1), 160, uiColors[GUI_COLOR_MACRO_WAVE], false, NULL, NULL));
-    macroList.push_back(FurnaceGUIMacroDesc("Panning",ins,DIV_MACRO_PAN_LEFT,0xff,0,panMax,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,panBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiGB"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiGB"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Duty/Noise##sgiGB"),ins,DIV_MACRO_DUTY,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiGB"), ins, DIV_MACRO_WAVE, 0xff, 0, MAX(1,e->song.waveLen-1), 160, uiColors[GUI_COLOR_MACRO_WAVE], false, NULL, NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning##sgiGB"),ins,DIV_MACRO_PAN_LEFT,0xff,0,panMax,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,panBits));
 
-    macroList.push_back(FurnaceGUIMacroDesc("Phase Reset",ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgiGB"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

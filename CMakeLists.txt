@@ -909,6 +909,10 @@ src/gui/inst/powernoise.cpp
 src/gui/inst/powernoise_slope.cpp
 
 src/gui/inst/wavetable.cpp
+
+src/locale/locale.cpp
+src/locale/russian.cpp
+src/locale/template.cpp
 )
 
 if (WIN32 AND NOT SUPPORT_XP)
@@ -1053,7 +1057,7 @@ if (NOT MSVC)
     endif()
   endif()
   if (WARNINGS_ARE_ERRORS)
-    list(APPEND WARNING_FLAGS -Werror)
+    list(APPEND WARNING_FLAGS -Werror -Wno-format-security)
   endif()
 else()
   add_compile_options("/utf-8")

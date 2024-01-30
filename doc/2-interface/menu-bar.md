@@ -2,8 +2,6 @@
 
 the menu bar allows you to select from five menus: file, edit, settings, window and help.
 
-items in _italic_ don't appear in basic mode and are only available in advanced mode.
-
 ## file
 
 - **new...**: creates a new song.
@@ -142,7 +140,7 @@ it's not really useful, unless you're a developer and want to use a command stre
 - **copy**: copies the current selection in the pattern view to clipboard.
 - **paste**: inserts the clipboard's contents in the cursor position.
   - you may be able to paste from OpenMPT as well.
-- _**paste special...**:_ variants of the paste feature.
+- **paste special...**: variants of the paste feature.
   - **paste mix**: inserts the clipboard's contents in the cursor position, but does not erase the occupied region.
   - **paste mix (background)**: does the same thing as paste mix, but doesn't alter content which is already there.
   - **paste with ins (foreground)**: same thing as paste mix, but changes the instrument.
@@ -156,8 +154,8 @@ it's not really useful, unless you're a developer and want to use a command stre
   - if a column is already selected, it will select the entire channel.
   - if a channel is already selected, it will select the entire pattern.
 
-- _**operation mask**:_ toggles which columns will be affected by the listed operations. [more information here.](../8-advanced/opmask.md)
-- _**input latch**:_ determines which data are placed along with a note. [more information here.](../8-advanced/inputlatch.md)
+- **operation mask**: toggles which columns will be affected by the listed operations. [more information here.](../8-advanced/opmask.md)
+- **input latch**: determines which data are placed along with a note. [more information here.](../8-advanced/inputlatch.md)
 
 - **note/octave up/down**: transposes notes in the current selection.
 
