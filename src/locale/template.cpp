@@ -3586,11 +3586,11 @@ void DivLocale::addTranslationsTemplate()
     // # sgiVB     src/gui/inst/vboy.cpp
     // # sgiVERA   src/gui/inst/vera.cpp
     // # sgiVIC    src/gui/inst/vic.cpp
-    //   sgiVRC6   src/gui/inst/vrc6.cpp
-    //   sgiVRC6S  src/gui/inst/vrc6saw.cpp
+    // # sgiVRC6   src/gui/inst/vrc6.cpp
+    // # sgiVRC6S  src/gui/inst/vrc6saw.cpp
     // # sgiwave   src/gui/inst/wavetable.cpp
-    //   sgiX1     src/gui/inst/x1_010.cpp
-    //   sgiYMZ    src/gui/inst/ymz280b.cpp
+    // # sgiX1     src/gui/inst/x1_010.cpp
+    // # sgiYMZ    src/gui/inst/ymz280b.cpp
 
 */
 
@@ -4836,7 +4836,22 @@ void DivLocale::addTranslationsTemplate()
     strings["Waveform##sgiVIC"].plurals[0] = "=Waveform";
 
     //   sgiVRC6   src/gui/inst/vrc6.cpp
+
+    strings["Macros##sgiVRC6"].plurals[0] = "=Macros";
+    strings["Volume##sgiVRC6"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiVRC6"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiVRC6"].plurals[0] = "=Pitch";
+    strings["Duty##sgiVRC6"].plurals[0] = "=Duty";
+    strings["Waveform##sgiVRC6"].plurals[0] = "=Waveform";
+    strings["Phase Reset##sgiVRC6"].plurals[0] = "=Phase Reset";
+
     //   sgiVRC6S  src/gui/inst/vrc6saw.cpp
+
+    strings["Macros##sgiVRC6S"].plurals[0] = "=Macros";
+    strings["Volume##sgiVRC6S"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiVRC6S"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiVRC6S"].plurals[0] = "=Pitch";
+
     //   sgiwave   src/gui/inst/wavetable.cpp
 
     strings["Wavetable##sgiwave"].plurals[0] = "=Wavetable";
@@ -4863,6 +4878,28 @@ void DivLocale::addTranslationsTemplate()
     strings["wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"].plurals[0] = "=wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.";
 
     //   sgiX1     src/gui/inst/x1_010.cpp
+
+    strings["Macros##sgiX1"].plurals[0] = "=Macros";
+    strings["Volume##sgiX1"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiX1"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiX1"].plurals[0] = "=Pitch";
+    strings["Waveform##sgiX1"].plurals[0] = "=Waveform";
+    strings["Panning (left)##sgiX1"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiX1"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiX1"].plurals[0] = "=Phase Reset";
+    strings["Envelope##sgiX1"].plurals[0] = "=Envelope";
+    strings["Envelope Mode##sgiX1"].plurals[0] = "=Envelope Mode";
+    strings["AutoEnv Num##sgiX1"].plurals[0] = "=AutoEnv Num";
+    strings["AutoEnv Den##sgiX1"].plurals[0] = "=AutoEnv Den";
+
     //   sgiYMZ    src/gui/inst/ymz280b.cpp
+
+    strings["Macros##sgiYMZ"].plurals[0] = "=Macros";
+    strings["Volume##sgiYMZ"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiYMZ"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiYMZ"].plurals[0] = "=Pitch";
+    strings["Panning##sgiYMZ"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiYMZ"].plurals[0] = "=Phase Reset";
+
 }
 
