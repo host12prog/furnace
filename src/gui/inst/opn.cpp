@@ -186,8 +186,8 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
         CENTER_TEXT(FM_NAME(FM_SSG));
         ImGui::TextUnformatted(FM_NAME(FM_SSG));
         ImGui::TableNextColumn();
-        CENTER_TEXT("Envelope");
-        ImGui::TextUnformatted("Envelope");
+        CENTER_TEXT(_L("Envelope##sgiOPN0"));
+        ImGui::TextUnformatted(_L("Envelope##sgiOPN1"));
 
         float sliderHeight=32.0f*dpiScale;
 
@@ -230,9 +230,9 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
             sliderHeight=(ImGui::GetContentRegionAvail().y/opCount)-ImGui::GetStyle().ItemSpacing.y;
           }
 
-          ImGui::PushID(fmt::sprintf("op%d",i).c_str());
+          ImGui::PushID(fmt::sprintf(_L("op%d##sgiOPN0"),i).c_str());
           String opNameLabel;
-          opNameLabel=fmt::sprintf("OP%d",i+1);
+          opNameLabel=fmt::sprintf(_L("OP%d##sgiOPN1"),i+1);
 
           if (opsAreMutable) 
           {
@@ -343,7 +343,7 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
 
           ImGui::SameLine();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          if (CWSliderScalar("##SSG",ImGuiDataType_U8,&ssgEnv,&_ZERO,&_SEVEN,ssgEnvTypes[ssgEnv])) 
+          if (CWSliderScalar("##SSG",ImGuiDataType_U8,&ssgEnv,&_ZERO,&_SEVEN,_L(ssgEnvTypes[ssgEnv]))) 
           { PARAMETER
             op.ssgEnv=(op.ssgEnv&8)|(ssgEnv&7);
           }
@@ -389,7 +389,7 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
           DivInstrumentFM::Operator& op=fmOrigin.op[opOrder[i]];
           if ((settings.fmLayout!=6 && ((i+1)&1)) || i==0 || settings.fmLayout==5) ImGui::TableNextRow();
           ImGui::TableNextColumn();
-          ImGui::PushID(fmt::sprintf("op%d",i).c_str());
+          ImGui::PushID(fmt::sprintf(_L("op%d##sgiOPN2"),i).c_str());
 
           // push colors
           if (settings.separateFMColors) 
@@ -422,7 +422,7 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
           }
 
           ImGui::Dummy(ImVec2(dpiScale,dpiScale));
-          snprintf(tempID,1024,"Operator %d",i+1);
+          snprintf(tempID,1024,_L("Operator %d##sgiOPN"),i+1);
           float nextCursorPosX=ImGui::GetCursorPosX()+0.5*(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(tempID).x-(opsAreMutable?(ImGui::GetStyle().FramePadding.x*2.0f):0.0f));
           OP_DRAG_POINT;
           ImGui::SameLine();
@@ -465,9 +465,9 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
             ImGui::TextUnformatted(FM_SHORT_NAME(FM_AR));
             TOOLTIP_TEXT(FM_NAME(FM_AR));
             ImGui::TableNextColumn();
-            ImGui::Text("SSG-EG");
+            ImGui::Text(_L("SSG-EG##sgiOPN"));
             ImGui::TableNextColumn();
-            ImGui::Text("Envelope");
+            ImGui::Text(_L("Envelope##sgiOPN2"));
             ImGui::TableNextColumn();
 
             // A/D/S/R
@@ -545,7 +545,7 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
 
             ImGui::SameLine();
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-            if (CWSliderScalar("##SSG",ImGuiDataType_U8,&ssgEnv,&_ZERO,&_SEVEN,ssgEnvTypes[ssgEnv])) 
+            if (CWSliderScalar("##SSG",ImGuiDataType_U8,&ssgEnv,&_ZERO,&_SEVEN,_L(ssgEnvTypes[ssgEnv]))) 
             { PARAMETER
               op.ssgEnv=(op.ssgEnv&8)|(ssgEnv&7);
             }
@@ -643,7 +643,7 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
           if ((settings.fmLayout!=3 && ((i+1)&1)) || i==0 || settings.fmLayout==2) ImGui::TableNextRow();
           ImGui::TableNextColumn();
           ImGui::Separator();
-          ImGui::PushID(fmt::sprintf("op%d",i).c_str());
+          ImGui::PushID(fmt::sprintf(_L("op%d##sgiOPN3"),i).c_str());
 
           // push colors
           if (settings.separateFMColors) {
@@ -675,7 +675,7 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
           String opNameLabel;
           OP_DRAG_POINT;
           ImGui::SameLine();
-          opNameLabel=fmt::sprintf("OP%d",i+1);
+          opNameLabel=fmt::sprintf(_L("OP%d##sgiOPN4"),i+1);
 
           if (opsAreMutable) 
           {
@@ -701,7 +701,7 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
           bool ssgOn=op.ssgEnv&8;
           unsigned char ssgEnv=op.ssgEnv&7;
           ImGui::SameLine();
-          if (ImGui::Checkbox("SSG On",&ssgOn)) 
+          if (ImGui::Checkbox(_L("SSG On##sgiOPN"),&ssgOn)) 
           { PARAMETER
             op.ssgEnv=(op.ssgEnv&7)|(ssgOn<<3);
           }
@@ -837,14 +837,14 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
     ImGui::EndTabItem();
   }
   
-  if (ImGui::BeginTabItem("FM Macros")) 
+  if (ImGui::BeginTabItem(_L("FM Macros##sgiOPN"))) 
   {
     macroList.push_back(FurnaceGUIMacroDesc(FM_NAME(FM_ALG),ins,DIV_MACRO_ALG,0xff,0,7,64,uiColors[GUI_COLOR_MACRO_OTHER]));
     macroList.push_back(FurnaceGUIMacroDesc(FM_NAME(FM_FB),ins,DIV_MACRO_FB,0xff,0,7,64,uiColors[GUI_COLOR_MACRO_OTHER]));
     macroList.push_back(FurnaceGUIMacroDesc(FM_NAME(FM_FMS),ins,DIV_MACRO_FMS,0xff,0,7,64,uiColors[GUI_COLOR_MACRO_OTHER]));
     macroList.push_back(FurnaceGUIMacroDesc(FM_NAME(FM_AMS),ins,DIV_MACRO_AMS,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc("LFO Speed",ins,DIV_MACRO_EX3,0xff,0,8,64,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc("OpMask",ins,DIV_MACRO_EX4,0xff,0,4,64,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,fmOperatorBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("LFO Speed##sgiOPN"),ins,DIV_MACRO_EX3,0xff,0,8,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("OpMask##sgiOPN"),ins,DIV_MACRO_EX4,0xff,0,4,64,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,fmOperatorBits));
 
     for(int i = 0; i < (int)ins->std.macros.size(); i++) // reset macro zoom
     {
@@ -870,7 +870,7 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
 
   for (int i=0; i<opCount; i++) 
   {
-    snprintf(label,31,"OP%d Macros",i+1);
+    snprintf(label,31,_L("OP%d Macros##sgiOPN"),i+1);
 
     if (ImGui::BeginTabItem(label)) 
     {
@@ -897,16 +897,16 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
     }
   }
 
-  if (ImGui::BeginTabItem("Macros")) 
+  if (ImGui::BeginTabItem(_L("Macros##sgiOPN"))) 
   {
     panMax=2;
 
-    macroList.push_back(FurnaceGUIMacroDesc("Volume",ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc("Arpeggio",ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc("Pitch",ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
-    macroList.push_back(FurnaceGUIMacroDesc("Panning",ins,DIV_MACRO_PAN_LEFT,0xff,0,panMax,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,panBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiOPN"),ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiOPN"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiOPN"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning##sgiOPN"),ins,DIV_MACRO_PAN_LEFT,0xff,0,panMax,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,panBits));
 
-    macroList.push_back(FurnaceGUIMacroDesc("Phase Reset",ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgiOPN"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

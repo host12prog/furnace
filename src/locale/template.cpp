@@ -3558,8 +3558,8 @@ void DivLocale::addTranslationsTemplate()
     // # sgiNES    src/gui/inst/nes.cpp
     // # sgiOPL    src/gui/inst/opl.cpp
     // # sgiOPLL   src/gui/inst/opll.cpp
-    //   sgiOPM    src/gui/inst/opm.cpp
-    //   sgiOPN    src/gui/inst/opn.cpp
+    // # sgiOPM    src/gui/inst/opm.cpp
+    // # sgiOPN    src/gui/inst/opn.cpp
     //   sgiOPZ    src/gui/inst/opz.cpp
     //   sgiPCE    src/gui/inst/pce.cpp
     //   sgiPET    src/gui/inst/pet.cpp
@@ -4171,6 +4171,29 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##sgiOPM"].plurals[0] = "=Phase Reset";
 
     //   sgiOPN    src/gui/inst/opn.cpp
+
+    strings["Envelope##sgiOPN0"].plurals[0] = "=Envelope";
+    strings["Envelope##sgiOPN1"].plurals[0] = "=Envelope";
+    strings["op%d##sgiOPN0"].plurals[0] = "=op%d";
+    strings["OP%d##sgiOPN1"].plurals[0] = "=OP%d";
+    strings["op%d##sgiOPN2"].plurals[0] = "=op%d";
+    strings["Operator %d##sgiOPN"].plurals[0] = "=Operator %d";
+    strings["SSG-EG##sgiOPN"].plurals[0] = "=SSG-EG";
+    strings["Envelope##sgiOPN2"].plurals[0] = "=Envelope";
+    strings["op%d##sgiOPN3"].plurals[0] = "=op%d";
+    strings["OP%d##sgiOPN4"].plurals[0] = "=OP%d";
+    strings["SSG On##sgiOPN"].plurals[0] = "=SSG On";
+    strings["FM Macros##sgiOPN"].plurals[0] = "=FM Macros";
+    strings["LFO Speed##sgiOPN"].plurals[0] = "=LFO Speed";
+    strings["OpMask##sgiOPN"].plurals[0] = "=OpMask";
+    strings["OP%d Macros##sgiOPN"].plurals[0] = "=OP%d Macros";
+    strings["Macros##sgiOPN"].plurals[0] = "=Macros";
+    strings["Volume##sgiOPN"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiOPN"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiOPN"].plurals[0] = "=Pitch";
+    strings["Panning##sgiOPN"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiOPN"].plurals[0] = "=Phase Reset";
+
     //   sgiOPZ    src/gui/inst/opz.cpp
     //   sgiPCE    src/gui/inst/pce.cpp
     //   sgiPET    src/gui/inst/pet.cpp
