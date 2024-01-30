@@ -4158,6 +4158,30 @@ void DivLocale::addTranslationsTemplate()
     //   sgiRF5    src/gui/inst/rf5c68.cpp
     //   sgiSAA    src/gui/inst/saa1099.cpp
     //   sgismpd   src/gui/inst/sampleDraw.cpp
+
+    strings["Sample##sgismpd0"].plurals[0] = "=Sample";
+    strings["DPCM##sgismpd"].plurals[0] = "=DPCM";
+    strings["new DPCM features disabled (compatibility)!##sgismpd"].plurals[0] = "=new DPCM features disabled (compatibility)!";
+    strings["click here to enable them.##sgismpd"].plurals[0] = "=click here to enable them.";
+    strings["Use sample##sgismpd"].plurals[0] = "=Use sample";
+    strings["Sample bank slot##BANKSLOT"].plurals[0] = "=Sample bank slot##BANKSLOT";
+    strings["Sample##sgismpd1"].plurals[0] = "=Sample";
+    strings["Use wavetable (Amiga/SNES/Generic DAC only)##sgismpd"].plurals[0] = "=Use wavetable (Amiga/SNES/Generic DAC only)";
+    strings["Width##sgismpd"].plurals[0] = "=Width";
+    strings["Use sample map##sgismpd"].plurals[0] = "=Use sample map";
+    strings["pitch##sgismpd"].plurals[0] = "=pitch";
+    strings["delta##sgismpd"].plurals[0] = "=delta";
+    strings["note##sgismpd"].plurals[0] = "=note";
+    strings["sample name##sgismpd"].plurals[0] = "=sample name";
+    strings["set entire map to this pitch##sgismpd"].plurals[0] = "=set entire map to this pitch";
+    strings["set entire map to this delta counter value##sgismpd"].plurals[0] = "=set entire map to this delta counter value";
+    strings["set entire map to this note##sgismpd"].plurals[0] = "=set entire map to this note";
+    strings["set entire map to this sample##sgismpd"].plurals[0] = "=set entire map to this sample";
+    strings["reset pitches##sgismpd"].plurals[0] = "=reset pitches";
+    strings["clear delta counter values##sgismpd"].plurals[0] = "=clear delta counter values";
+    strings["reset notes##sgismpd"].plurals[0] = "=reset notes";
+    strings["clear map samples##sgismpd"].plurals[0] = "=clear map samples";
+
     //   sgiSCC    src/gui/inst/scc.cpp
     //   sgiSEGA   src/gui/inst/segapcm.cpp
     //   sgiSM     src/gui/inst/sm8521.cpp
@@ -4500,7 +4524,5 @@ void DivLocale::addTranslationsTemplate()
     //   sgiwave   src/gui/inst/wavetable.cpp
     //   sgiX1     src/gui/inst/x1_010.cpp
     //   sgiYMZ    src/gui/inst/ymz280b.cpp
-
-
 }
 

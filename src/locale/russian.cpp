@@ -836,8 +836,8 @@ void DivLocale::addTranslationsRussian()
             "comparing it with real Amiga output."].plurals[0] = 
 
             "это НЕ экспорт в файл ROM! используйте только для\n"
-            "проверки того, что эмулятор Амиги в Furnace работает правильно,\n"
-            "сравнивая звук настоящей Амиги и Furnace.";
+            "проверки того, что эмулятор Amiga в Furnace работает правильно,\n"
+            "сравнивая звук настоящей Amiga и Furnace.";
     strings["Directory##sgec"].plurals[0] = "Папка";
     strings["Bake Data##sgec"].plurals[0] = "Создать данные";
     strings["Done! Baked %d files.##sgec"].plurals[0] = "Готово! Создан %d файл.";
@@ -3795,6 +3795,31 @@ void DivLocale::addTranslationsRussian()
     strings["Pitch##sgiOPLL"].plurals[0] = "Частота";
     strings["Patch##sgiOPLL"].plurals[0] = "Патч";
     strings["Phase Reset##sgiOPLL"].plurals[0] = "Сброс фазы";
+
+    //   sgismpd   src/gui/inst/sampleDraw.cpp
+
+    strings["Sample##sgismpd0"].plurals[0] = "Сэмплы";
+    strings["DPCM##sgismpd"].plurals[0] = "ДИКМ";
+    strings["new DPCM features disabled (compatibility)!##sgismpd"].plurals[0] = "новые функции ДИКМ отключены (совместимость)!";
+    strings["click here to enable them.##sgismpd"].plurals[0] = "нажмите сюда, чтобы включить их.";
+    strings["Use sample##sgismpd"].plurals[0] = "Использовать сэмпл";
+    strings["Sample bank slot##BANKSLOT"].plurals[0] = "Номер банка сэмплов##BANKSLOT";
+    strings["Sample##sgismpd1"].plurals[0] = "Сэмпл";
+    strings["Use wavetable (Amiga/SNES/Generic DAC only)##sgismpd"].plurals[0] = "Использовать волновую таблицу (только для Amiga/SNES/типичного ЦАП)";
+    strings["Width##sgismpd"].plurals[0] = "Длина";
+    strings["Use sample map##sgismpd"].plurals[0] = "Использовать карту сэмплов";
+    strings["pitch##sgismpd"].plurals[0] = "частота";
+    strings["delta##sgismpd"].plurals[0] = "нач. знач.";
+    strings["note##sgismpd"].plurals[0] = "нота";
+    strings["sample name##sgismpd"].plurals[0] = "название сэмпла";
+    strings["set entire map to this pitch##sgismpd"].plurals[0] = "установить эту частоту для всей карты";
+    strings["set entire map to this delta counter value##sgismpd"].plurals[0] = "установить это нач. знач. дельта-счётчика для всей карты";
+    strings["set entire map to this note##sgismpd"].plurals[0] = "установить эту ноту для всей карты";
+    strings["set entire map to this sample##sgismpd"].plurals[0] = "установить этот сэмпл для всей карты";
+    strings["reset pitches##sgismpd"].plurals[0] = "сбросить частоты";
+    strings["clear delta counter values##sgismpd"].plurals[0] = "очистить нач. знач. дельта-счётчика";
+    strings["reset notes##sgismpd"].plurals[0] = "сбросить ноты";
+    strings["clear map samples##sgismpd"].plurals[0] = "сбросить сэмплы карты";
 
     //   sgiSU     src/gui/inst/su.cpp
 
