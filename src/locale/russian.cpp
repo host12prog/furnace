@@ -4146,4 +4146,29 @@ void DivLocale::addTranslationsRussian()
     strings["Relative##sgistru"].plurals[0] = "Относительное";
     strings["QSound##sgistru"].plurals[0] = "QSound";
     strings["Bug##sgistru"].plurals[0] = "Сбой";
+
+    //   sgiwave   src/gui/inst/wavetable.cpp
+
+    strings["Wavetable##sgiwave"].plurals[0] = "Волновые таблицы";
+    strings["Enable synthesizer##sgiwave"].plurals[0] = "Включить синтезатор";
+    strings["Single-waveform##sgiwave"].plurals[0] = "Одна волна";
+    strings["Dual-waveform##sgiwave"].plurals[0] = "Две волны";
+    strings["Wave 1##sgiwave0"].plurals[0] = "Волна 1";
+    strings["Wave 2##sgiwave0"].plurals[0] = "Волна 2";
+    strings["Result##sgiwave"].plurals[0] = "Результат";
+    strings["Wave 1 ##sgiwave"].plurals[0] = "Волна 1 ";
+    strings["waveform macro is controlling wave 1!\nthis value will be ineffective.##sgiwave"].plurals[0] = "макрос волны контролирует волну 1!\nэто значение не даст результата.";
+    strings["Wave 1##sgiwave1"].plurals[0] = "Волна 1";
+    strings["Wave 2##sgiwave1"].plurals[0] = "Волна 2";
+    strings["Resume preview##sgiwave"].plurals[0] = "Возобовить превью";
+    strings["Pause preview##sgiwave"].plurals[0] = "Приостановить превью";
+    strings["Restart preview##sgiwave"].plurals[0] = "Перезапустить превью";
+    strings["too many wavetables!##sgiwave"].plurals[0] = "слишком много волновых таблиц!";
+    strings["Copy to new wavetable##sgiwave"].plurals[0] = "Копировать в новую волновую таблицу";
+    strings["Update Rate##sgiwave"].plurals[0] = "Частота обновления";
+    strings["Speed##sgiwave"].plurals[0] = "Скорость";
+    strings["Amount##sgiwave"].plurals[0] = "Количество";
+    strings["Power##sgiwave"].plurals[0] = "Степень";
+    strings["Global##sgiwave"].plurals[0] = "Глобально";
+    strings["wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"].plurals[0] = "синтезатор волновых таблиц выключен.\nиспользуйте макрос волны для задания волновой таблицы для этого инструмента.";
 }

@@ -3571,7 +3571,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgiQ      src/gui/inst/qsound.cpp
     //   sgiRF5    src/gui/inst/rf5c68.cpp
     //   sgiSAA    src/gui/inst/saa1099.cpp
-    //   sgismpd   src/gui/inst/sampleDraw.cpp
+    // # sgismpd   src/gui/inst/sampleDraw.cpp
     //   sgiSCC    src/gui/inst/scc.cpp
     //   sgiSEGA   src/gui/inst/segapcm.cpp
     //   sgiSM     src/gui/inst/sm8521.cpp
@@ -3588,7 +3588,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgiVIC    src/gui/inst/vic.cpp
     //   sgiVRC6   src/gui/inst/vrc6.cpp
     //   sgiVRC6S  src/gui/inst/vrc6saw.cpp
-    //   sgiwave   src/gui/inst/wavetable.cpp
+    // # sgiwave   src/gui/inst/wavetable.cpp
     //   sgiX1     src/gui/inst/x1_010.cpp
     //   sgiYMZ    src/gui/inst/ymz280b.cpp
 
@@ -4523,6 +4523,30 @@ void DivLocale::addTranslationsTemplate()
     //   sgiVRC6   src/gui/inst/vrc6.cpp
     //   sgiVRC6S  src/gui/inst/vrc6saw.cpp
     //   sgiwave   src/gui/inst/wavetable.cpp
+
+    strings["Wavetable##sgiwave"].plurals[0] = "=Wavetable";
+    strings["Enable synthesizer##sgiwave"].plurals[0] = "=Enable synthesizer";
+    strings["Single-waveform##sgiwave"].plurals[0] = "=Single-waveform";
+    strings["Dual-waveform##sgiwave"].plurals[0] = "=Dual-waveform";
+    strings["Wave 1##sgiwave0"].plurals[0] = "=Wave 1";
+    strings["Wave 2##sgiwave0"].plurals[0] = "=Wave 2";
+    strings["Result##sgiwave"].plurals[0] = "=Result";
+    strings["Wave 1 ##sgiwave"].plurals[0] = "=Wave 1 ";
+    strings["waveform macro is controlling wave 1!\nthis value will be ineffective.##sgiwave"].plurals[0] = "=waveform macro is controlling wave 1!\nthis value will be ineffective.";
+    strings["Wave 1##sgiwave1"].plurals[0] = "=Wave 1";
+    strings["Wave 2##sgiwave1"].plurals[0] = "=Wave 2";
+    strings["Resume preview##sgiwave"].plurals[0] = "=Resume preview";
+    strings["Pause preview##sgiwave"].plurals[0] = "=Pause preview";
+    strings["Restart preview##sgiwave"].plurals[0] = "=Restart preview";
+    strings["too many wavetables!##sgiwave"].plurals[0] = "=too many wavetables!";
+    strings["Copy to new wavetable##sgiwave"].plurals[0] = "=Copy to new wavetable";
+    strings["Update Rate##sgiwave"].plurals[0] = "=Update Rate";
+    strings["Speed##sgiwave"].plurals[0] = "=Speed";
+    strings["Amount##sgiwave"].plurals[0] = "=Amount";
+    strings["Power##sgiwave"].plurals[0] = "=Power";
+    strings["Global##sgiwave"].plurals[0] = "=Global";
+    strings["wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"].plurals[0] = "=wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.";
+
     //   sgiX1     src/gui/inst/x1_010.cpp
     //   sgiYMZ    src/gui/inst/ymz280b.cpp
 }
