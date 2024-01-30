@@ -3552,7 +3552,7 @@ void DivLocale::addTranslationsTemplate()
     // # sgiWSG    src/gui/inst/namco.cpp
     // # sgiNES    src/gui/inst/nes.cpp
     // # sgiOPL    src/gui/inst/opl.cpp
-    //   sgiOPLL   src/gui/inst/opll.cpp
+    // # sgiOPLL   src/gui/inst/opll.cpp
     //   sgiOPM    src/gui/inst/opm.cpp
     //   sgiOPN    src/gui/inst/opn.cpp
     //   sgiOPZ    src/gui/inst/opz.cpp
@@ -4105,6 +4105,40 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##sgiOPL"].plurals[0] = "=Phase Reset";
 
     //   sgiOPLL   src/gui/inst/opll.cpp
+
+    strings["%s name##sgiOPLL"].plurals[0] = "=%s name";
+    strings["Fixed frequency mode##sgiOPLL"].plurals[0] = "=Fixed frequency mode";
+    strings["when enabled, drums will be set to the specified frequencies, ignoring the note.##sgiOPLL"].plurals[0] = "=when enabled, drums will be set to the specified frequencies, ignoring the note.";
+    strings["Drum##sgiOPLL"].plurals[0] = "=Drum";
+    strings["Block##sgiOPLL"].plurals[0] = "=Block";
+    strings["FreqNum##sgiOPLL"].plurals[0] = "=FreqNum";
+    strings["Kick##sgiOPLL"].plurals[0] = "=Kick";
+    strings["Snare/Hi-hat##sgiOPLL"].plurals[0] = "=Snare/Hi-hat";
+    strings["Tom/Top##sgiOPLL"].plurals[0] = "=Tom/Top";
+    strings["Volume##TL"].plurals[0] = "=Volume##TL";
+    strings["this volume slider only works in compatibility (non-drums) system.##sgiOPLL"].plurals[0] = "=this volume slider only works in compatibility (non-drums) system.";
+    strings["Other##sgiOPLL0"].plurals[0] = "=Other";
+    strings["Other##sgiOPLL1"].plurals[0] = "=Other";
+    strings["Envelope##sgiOPLL0"].plurals[0] = "=Envelope";
+    strings["Envelope##sgiOPLL1"].plurals[0] = "=Envelope";
+    strings["op%d##sgiOPLL0"].plurals[0] = "=op%d";
+    strings["OP%d##sgiOPLL1"].plurals[0] = "=OP%d";
+    strings["op%d##sgiOPLL2"].plurals[0] = "=op%d";
+    strings["Operator %d##sgiOPLL"].plurals[0] = "=Operator %d";
+    strings["Waveform##sgiOPLL"].plurals[0] = "=Waveform";
+    strings["Envelope##sgiOPLL2"].plurals[0] = "=Envelope";
+    strings["op%d##sgiOPLL3"].plurals[0] = "=op%d";
+    strings["OP%d##sgiOPLL4"].plurals[0] = "=OP%d";
+    strings["SSG On##sgiOPLL"].plurals[0] = "=SSG On";
+    strings["FM Macros##sgiOPLL"].plurals[0] = "=FM Macros";
+    strings["OP%d Macros##sgiOPLL"].plurals[0] = "=OP%d Macros";
+    strings["Macros##sgiOPLL"].plurals[0] = "=Macros";
+    strings["Volume##sgiOPLL"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiOPLL"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiOPLL"].plurals[0] = "=Pitch";
+    strings["Patch##sgiOPLL"].plurals[0] = "=Patch";
+    strings["Phase Reset##sgiOPLL"].plurals[0] = "=Phase Reset";
+
     //   sgiOPM    src/gui/inst/opm.cpp
     //   sgiOPN    src/gui/inst/opn.cpp
     //   sgiOPZ    src/gui/inst/opz.cpp
