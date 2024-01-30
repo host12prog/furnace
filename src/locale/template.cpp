@@ -4163,6 +4163,7 @@ void DivLocale::addTranslationsTemplate()
     strings["DPCM##sgismpd"].plurals[0] = "=DPCM";
     strings["new DPCM features disabled (compatibility)!##sgismpd"].plurals[0] = "=new DPCM features disabled (compatibility)!";
     strings["click here to enable them.##sgismpd"].plurals[0] = "=click here to enable them.";
+    strings["none selected##sgismpd"].plurals[0] = "=none selected";
     strings["Use sample##sgismpd"].plurals[0] = "=Use sample";
     strings["Sample bank slot##BANKSLOT"].plurals[0] = "=Sample bank slot##BANKSLOT";
     strings["Sample##sgismpd1"].plurals[0] = "=Sample";

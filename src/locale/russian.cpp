@@ -3802,6 +3802,7 @@ void DivLocale::addTranslationsRussian()
     strings["DPCM##sgismpd"].plurals[0] = "ДИКМ";
     strings["new DPCM features disabled (compatibility)!##sgismpd"].plurals[0] = "новые функции ДИКМ отключены (совместимость)!";
     strings["click here to enable them.##sgismpd"].plurals[0] = "нажмите сюда, чтобы включить их.";
+    strings["none selected##sgismpd"].plurals[0] = "не выбран";
     strings["Use sample##sgismpd"].plurals[0] = "Использовать сэмпл";
     strings["Sample bank slot##BANKSLOT"].plurals[0] = "Номер банка сэмплов##BANKSLOT";
     strings["Sample##sgismpd1"].plurals[0] = "Сэмпл";

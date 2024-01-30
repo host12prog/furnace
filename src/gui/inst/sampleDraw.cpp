@@ -140,7 +140,7 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
     String sName;
     bool wannaOpenSMPopup=false;
     if (ins->amiga.initSample<0 || ins->amiga.initSample>=e->song.sampleLen) {
-      sName="none selected";
+      sName=_L("none selected##sgismpd");
     } else {
       sName=e->song.sample[ins->amiga.initSample]->name;
     }
