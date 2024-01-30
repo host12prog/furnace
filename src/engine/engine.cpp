@@ -41,9 +41,6 @@
 #include <fmt/printf.h>
 
 #ifdef HAVE_GUI
-#endif
-
-#ifdef HAVE_GUI
 #include "../gui/gui.h"
 extern FurnaceGUI g;
 #endif
