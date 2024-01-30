@@ -23,6 +23,12 @@ const char* ssgEnvTypes[8]={
   "Down Down Down##sgistru", "Down.##sgistru", "Down Up Down Up##sgistru", "Down UP##sgistru", "Up Up Up##sgistru", "Up.##sgistru", "Up Down Up Down##sgistru", "Up DOWN##sgistru"
 };
 
+const char* EngFmParamNames[3][32]={
+  {"Algorithm", "Feedback", "LFO > Freq", "LFO > Amp", "Attack", "Decay", "Decay 2", "Release", "Sustain", "Level", "EnvScale", "Multiplier", "Detune", "Detune 2", "SSG-EG", "AM", "AM Depth", "Vibrato Depth", "Sustained", "Sustained", "Level Scaling", "Sustain", "Vibrato", "Waveform", "Scale Rate", "OP2 Half Sine", "OP1 Half Sine", "EnvShift", "Reverb", "Fine", "LFO2 > Freq", "LFO2 > Amp"},
+  {"ALG", "FB", "FMS/PMS", "AMS", "AR", "DR", "SR", "RR", "SL", "TL", "KS", "MULT", "DT", "DT2", "SSG-EG", "AM", "AMD", "FMD", "EGT", "EGT", "KSL", "SUS", "VIB", "WS", "KSR", "DC", "DM", "EGS", "REV", "Fine", "FMS/PMS2", "AMS2"},
+  {"ALG", "FB", "FMS/PMS", "AMS", "AR", "DR", "D2R", "RR", "SL", "TL", "RS", "MULT", "DT", "DT2", "SSG-EG", "AM", "DAM", "DVB", "EGT", "EGS", "KSL", "SUS", "VIB", "WS", "KSR", "DC", "DM", "EGS", "REV", "Fine", "FMS/PMS2", "AMS2"}
+};
+
 const char* fmParamNames[3][32]={
   {"Algorithm##sgistru", "Feedback##sgistru", "LFO > Freq##sgistru", "LFO > Amp##sgistru", "Attack##sgistru", "Decay##sgistru", "Decay 2##sgistru", "Release##sgistru", "Sustain##sgistru0", "Level##sgistru", "EnvScale##sgistru", "Multiplier##sgistru", "Detune##sgistru0", "Detune 2##sgistru", "SSG-EG##sgistru", "AM", "AM Depth##sgistru", "Vibrato Depth##sgistru", "Sustained##sgistru0", "Sustained##sgistru1", "Level Scaling##sgistru", "Sustain##sgistru1", "Vibrato##sgistru", "Waveform##sgistru", "Scale Rate##sgistru", "OP2 Half Sine##sgistru", "OP1 Half Sine##sgistru", "EnvShift##sgistru", "Reverb##sgistru", "Fine##sgistru0", "LFO2 > Freq##sgistru", "LFO2 > Amp##sgistru"},
   {"ALG", "FB", "FMS/PMS", "AMS", "AR", "DR", "SR", "RR", "SL", "TL", "KS", "MULT", "DT", "DT2", "SSG-EG", "AM", "AMD", "FMD", "EGT", "EGT", "KSL", "SUS", "VIB", "WS", "KSR", "DC", "DM", "EGS", "REV", "Fine##sgistru1", "FMS/PMS2", "AMS2"},
@@ -31,6 +37,10 @@ const char* fmParamNames[3][32]={
 
 const char* esfmParamLongNames[9]={
   "OP4 Noise Mode##sgistru0", "Envelope Delay##sgistru", "Output Level##sgistru0", "Modulation Input Level##sgistru", "Left Output##sgistru", "Right Output##sgistru", "Coarse Tune (semitones)##sgistru", "Detune##sgistru1", "Fixed Frequency Mode##sgistru"
+};
+
+const char* EngEsfmParamLongNames[9]={
+  "OP4 Noise Mode", "Envelope Delay", "Output Level", "Modulation Input Level", "Left Output", "Right Output", "Coarse Tune (semitones)", "Detune", "Fixed Frequency Mode"
 };
 
 const char* esfmParamNames[9]={

@@ -77,11 +77,11 @@ enum ES5503_osc_modes {
   OSC_MODE_SWAP = 3, //triggers next oscillator after previous finishes; since max wavetable size is 32 KiB allows for 64 KiB wavetables to be played seamlessly
 };
 
-#define FM_NAME(x) _L(fmParamNames[settings.fmNames][x])
+#define FM_NAME(x) (settings.language == DIV_LANG_ENGLISH ? EngFmParamNames[settings.fmNames][x] : _L(fmParamNames[settings.fmNames][x]))
 #define FM_SHORT_NAME(x) _L(fmParamShortNames[settings.fmNames][x])
-#define ESFM_LONG_NAME(x) (_L(esfmParamLongNames[x]))
+#define ESFM_LONG_NAME(x) (settings.language == DIV_LANG_ENGLISH ? EngEsfmParamLongNames[x] : _L(esfmParamLongNames[x]))
 #define ESFM_NAME(x) (_L(esfmParamNames[x]))
-#define ESFM_SHORT_NAME(x) (_L(esfmParamShortNames[x]))
+#define ESFM_SHORT_NAME(x) (esfmParamShortNames[x])
 
 #define DRUM_FREQ(name,db,df,prop) \
   ImGui::TableNextRow(); \

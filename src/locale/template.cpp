@@ -4145,6 +4145,31 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##sgiOPLL"].plurals[0] = "=Phase Reset";
 
     //   sgiOPM    src/gui/inst/opm.cpp
+
+    strings["Envelope##sgiOPM0"].plurals[0] = "=Envelope";
+    strings["op%d##sgiOPM0"].plurals[0] = "=op%d";
+    strings["OP%d##sgiOPM"].plurals[0] = "=OP%d";
+    strings["op%d##sgiOPM1"].plurals[0] = "=op%d";
+    strings["Operator %d##sgiOPM"].plurals[0] = "=Operator %d";
+    strings["Waveform##sgiOPM"].plurals[0] = "=Waveform";
+    strings["Envelope##sgiOPM1"].plurals[0] = "=Envelope";
+    strings["op%d##sgiOPM2"].plurals[0] = "=op%d";
+    strings["OP%d##sgiOPM"].plurals[0] = "=OP%d";
+    strings["FM Macros##sgiOPM"].plurals[0] = "=FM Macros";
+    strings["AM Depth##sgiOPM"].plurals[0] = "=AM Depth";
+    strings["PM Depth##sgiOPM"].plurals[0] = "=PM Depth";
+    strings["LFO Speed##sgiOPM"].plurals[0] = "=LFO Speed";
+    strings["LFO Shape##sgiOPM"].plurals[0] = "=LFO Shape";
+    strings["OpMask##sgiOPM"].plurals[0] = "=OpMask";
+    strings["OP%d Macros##sgiOPM"].plurals[0] = "=OP%d Macros";
+    strings["Macros##sgiOPM"].plurals[0] = "=Macros";
+    strings["Volume##sgiOPM"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiOPM"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiOPM"].plurals[0] = "=Pitch";
+    strings["Noise Freq##sgiOPM"].plurals[0] = "=Noise Freq";
+    strings["Panning##sgiOPM"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiOPM"].plurals[0] = "=Phase Reset";
+
     //   sgiOPN    src/gui/inst/opn.cpp
     //   sgiOPZ    src/gui/inst/opz.cpp
     //   sgiPCE    src/gui/inst/pce.cpp

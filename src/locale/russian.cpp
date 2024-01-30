@@ -3796,6 +3796,32 @@ void DivLocale::addTranslationsRussian()
     strings["Patch##sgiOPLL"].plurals[0] = "Патч";
     strings["Phase Reset##sgiOPLL"].plurals[0] = "Сброс фазы";
 
+    //   sgiOPM    src/gui/inst/opm.cpp
+
+    strings["Envelope##sgiOPM0"].plurals[0] = "Огибающая";
+    strings["op%d##sgiOPM0"].plurals[0] = "оп%d";
+    strings["OP%d##sgiOPM"].plurals[0] = "ОП%d";
+    strings["op%d##sgiOPM1"].plurals[0] = "оп%d";
+    strings["Operator %d##sgiOPM"].plurals[0] = "Оператор %d";
+    strings["Waveform##sgiOPM"].plurals[0] = "Волна";
+    strings["Envelope##sgiOPM1"].plurals[0] = "Огибающая";
+    strings["op%d##sgiOPM2"].plurals[0] = "оп%d";
+    strings["OP%d##sgiOPM"].plurals[0] = "ОП%d";
+    strings["FM Macros##sgiOPM"].plurals[0] = "Макросы FM";
+    strings["AM Depth##sgiOPM"].plurals[0] = "Глубина АМ";
+    strings["PM Depth##sgiOPM"].plurals[0] = "Глубина ФМ";
+    strings["LFO Speed##sgiOPM"].plurals[0] = "Частота ОНЧ";
+    strings["LFO Shape##sgiOPM"].plurals[0] = "Форма волны ОНЧ";
+    strings["OpMask##sgiOPM"].plurals[0] = "Маска операторов";
+    strings["OP%d Macros##sgiOPM"].plurals[0] = "Макросы ОП%d";
+    strings["Macros##sgiOPM"].plurals[0] = "Макросы";
+    strings["Volume##sgiOPM"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiOPM"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiOPM"].plurals[0] = "Частота";
+    strings["Noise Freq##sgiOPM"].plurals[0] = "Частота шума";
+    strings["Panning##sgiOPM"].plurals[0] = "Панорамирование";
+    strings["Phase Reset##sgiOPM"].plurals[0] = "Сброс фазы";
+
     //   sgismpd   src/gui/inst/sampleDraw.cpp
 
     strings["Sample##sgismpd0"].plurals[0] = "Сэмплы";
