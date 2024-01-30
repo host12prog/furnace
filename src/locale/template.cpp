@@ -3579,13 +3579,13 @@ void DivLocale::addTranslationsTemplate()
     // # sgiPSG    src/gui/inst/std.cpp
     // # sgistru   src/gui/inst/stringsUtil.cpp
     // # sgiSU     src/gui/inst/su.cpp
-    //   sgiSWAN   src/gui/inst/swan.cpp
-    //   sgiT6W    src/gui/inst/t6w28.cpp
-    //   sgiTED    src/gui/inst/ted.cpp
-    //   sgiTIA    src/gui/inst/tia.cpp
-    //   sgiVB     src/gui/inst/vboy.cpp
-    //   sgiVERA   src/gui/inst/vera.cpp
-    //   sgiVIC    src/gui/inst/vic.cpp
+    // # sgiSWAN   src/gui/inst/swan.cpp
+    // # sgiT6W    src/gui/inst/t6w28.cpp
+    // # sgiTED    src/gui/inst/ted.cpp
+    // # sgiTIA    src/gui/inst/tia.cpp
+    // # sgiVB     src/gui/inst/vboy.cpp
+    // # sgiVERA   src/gui/inst/vera.cpp
+    // # sgiVIC    src/gui/inst/vic.cpp
     //   sgiVRC6   src/gui/inst/vrc6.cpp
     //   sgiVRC6S  src/gui/inst/vrc6saw.cpp
     // # sgiwave   src/gui/inst/wavetable.cpp
@@ -4766,12 +4766,75 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset Timer##sgiSU"].plurals[0] = "=Phase Reset Timer";
 
     //   sgiSWAN   src/gui/inst/swan.cpp
+
+    strings["Macros##sgiSWAN"].plurals[0] = "=Macros";
+    strings["Volume##sgiSWAN"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiSWAN"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiSWAN"].plurals[0] = "=Pitch";
+    strings["Noise##sgiSWAN"].plurals[0] = "=Noise";
+    strings["Waveform##sgiSWAN"].plurals[0] = "=Waveform";
+    strings["Phase Reset##sgiSWAN"].plurals[0] = "=Phase Reset";
+
     //   sgiT6W    src/gui/inst/t6w28.cpp
+
+    strings["Macros##sgiT6W"].plurals[0] = "=Macros";
+    strings["Volume##sgiT6W"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiT6W"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiT6W"].plurals[0] = "=Pitch";
+    strings["Panning (left)##sgiT6W"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiT6W"].plurals[0] = "=Panning (right)";
+    strings["Noise Type##sgiT6W"].plurals[0] = "=Noise Type";
+    strings["Phase Reset##sgiT6W"].plurals[0] = "=Phase Reset";
+
     //   sgiTED    src/gui/inst/ted.cpp
+
+    strings["Macros##sgiTED"].plurals[0] = "=Macros";
+    strings["Volume##sgiTED"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiTED"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiTED"].plurals[0] = "=Pitch";
+    strings["Square/Noise##sgiTED"].plurals[0] = "=Square/Noise";
+    strings["Phase Reset##sgiTED"].plurals[0] = "=Phase Reset";
+
     //   sgiTIA    src/gui/inst/tia.cpp
+
+    strings["Macros##sgiTIA"].plurals[0] = "=Macros";
+    strings["Volume##sgiTIA"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiTIA"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiTIA"].plurals[0] = "=Pitch";
+    strings["Waveform##sgiTIA"].plurals[0] = "=Waveform";
+
     //   sgiVB     src/gui/inst/vboy.cpp
+
+    strings["Set modulation table (channel 5 only)##sgiVB"].plurals[0] = "=Set modulation table (channel 5 only)";
+    strings["Macros##sgiVB"].plurals[0] = "=Macros";
+    strings["Volume##sgiVB"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiVB"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiVB"].plurals[0] = "=Pitch";
+    strings["Noise Length##sgiVB"].plurals[0] = "=Noise Length";
+    strings["Waveform##sgiVB"].plurals[0] = "=Waveform";
+    strings["Panning (left)##sgiVB"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiVB"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiVB"].plurals[0] = "=Phase Reset";
+
     //   sgiVERA   src/gui/inst/vera.cpp
+
+    strings["Macros##sgiVERA"].plurals[0] = "=Macros";
+    strings["Volume##sgiVERA"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiVERA"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiVERA"].plurals[0] = "=Pitch";
+    strings["Duty##sgiVERA"].plurals[0] = "=Duty";
+    strings["Waveform##sgiVERA"].plurals[0] = "=Waveform";
+    strings["Panning##sgiVERA"].plurals[0] = "=Panning";
+
     //   sgiVIC    src/gui/inst/vic.cpp
+
+    strings["Macros##sgiVIC"].plurals[0] = "=Macros";
+    strings["Volume##sgiVIC"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiVIC"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiVIC"].plurals[0] = "=Pitch";
+    strings["On/Off##sgiVIC"].plurals[0] = "=On/Off";
+    strings["Waveform##sgiVIC"].plurals[0] = "=Waveform";
+
     //   sgiVRC6   src/gui/inst/vrc6.cpp
     //   sgiVRC6S  src/gui/inst/vrc6saw.cpp
     //   sgiwave   src/gui/inst/wavetable.cpp
