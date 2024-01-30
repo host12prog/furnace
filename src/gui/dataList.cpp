@@ -254,6 +254,9 @@ void FurnaceGUI::sampleListItem(int i, int dir, int asset) {
     if (ImGui::MenuItem(_L("make instrument##sgdl"))) {
       doAction(GUI_ACTION_SAMPLE_MAKE_INS);
     }
+    if (ImGui::MenuItem(_L("make me a drum kit##sgdl"))) {
+      doAction(GUI_ACTION_SAMPLE_LIST_MAKE_MAP);
+    }
     if (ImGui::MenuItem(_L("duplicate##sgdl1"))) {
       doAction(GUI_ACTION_SAMPLE_LIST_DUPLICATE);
     }

@@ -1487,6 +1487,7 @@ class FurnaceGUI {
   bool killGraphics;
   bool safeMode;
   bool midiWakeUp;
+  bool makeDrumkitMode;
   bool audioEngineChanged, settingsChanged, debugFFT;
   bool willExport[DIV_MAX_CHIPS];
   int vgmExportVersion;
@@ -1496,6 +1497,7 @@ class FurnaceGUI {
   int macroPointSize;
   int waveEditStyle;
   int displayInsTypeListMakeInsSample;
+  int makeDrumkitOctave;
   int mobileEditPage;
   int wheelCalmDown;
   int shallDetectScale;
