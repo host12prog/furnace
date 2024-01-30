@@ -3560,7 +3560,7 @@ void DivLocale::addTranslationsTemplate()
     // # sgiOPLL   src/gui/inst/opll.cpp
     // # sgiOPM    src/gui/inst/opm.cpp
     // # sgiOPN    src/gui/inst/opn.cpp
-    //   sgiOPZ    src/gui/inst/opz.cpp
+    // # sgiOPZ    src/gui/inst/opz.cpp
     //   sgiPCE    src/gui/inst/pce.cpp
     //   sgiPET    src/gui/inst/pet.cpp
     //   sgiPMQT   src/gui/inst/pokemini.cpp
@@ -4195,6 +4195,47 @@ void DivLocale::addTranslationsTemplate()
     strings["Phase Reset##sgiOPN"].plurals[0] = "=Phase Reset";
 
     //   sgiOPZ    src/gui/inst/opz.cpp
+
+    strings["Request from TX81Z##sgiOPZ"].plurals[0] = "=Request from TX81Z";
+    strings["Other##sgiOPZ0"].plurals[0] = "=Other";
+    strings["Other##sgiOPZ1"].plurals[0] = "=Other";
+    strings["Envelope##sgiOPZ0"].plurals[0] = "=Envelope";
+    strings["Envelope##sgiOPZ1"].plurals[0] = "=Envelope";
+    strings["op%d##sgiOPZ0"].plurals[0] = "=op%d";
+    strings["OP%d##sgiOPZ1"].plurals[0] = "=OP%d";
+    strings["Fixed##sgiOPZ0"].plurals[0] = "=Fixed";
+    strings["Block##sgiOPZ0"].plurals[0] = "=Block";
+    strings["FreqNum##sgiOPZ0"].plurals[0] = "=FreqNum";
+    strings["op%d##sgiOPZ2"].plurals[0] = "=op%d";
+    strings["Operator %d##sgiOPZ"].plurals[0] = "=Operator %d";
+    strings["Waveform##sgiOPZ"].plurals[0] = "=Waveform";
+    strings["Envelope##sgiOPZ2"].plurals[0] = "=Envelope";
+    strings["Block##sgiOPZ1"].plurals[0] = "=Block";
+    strings["Freq##sgiOPZ"].plurals[0] = "=Freq";
+    strings["Fixed##sgiOPZ1"].plurals[0] = "=Fixed";
+    strings["op%d##sgiOPZ3"].plurals[0] = "=op%d";
+    strings["OP%d##sgiOPZ4"].plurals[0] = "=OP%d";
+    strings["Fixed##sgiOPZ2"].plurals[0] = "=Fixed";
+    strings["Block##sgiOPZ2"].plurals[0] = "=Block";
+    strings["FreqNum##sgiOPZ1"].plurals[0] = "=FreqNum";
+    strings["FM Macros##sgiOPZ"].plurals[0] = "=FM Macros";
+    strings["AM Depth##sgiOPZ"].plurals[0] = "=AM Depth";
+    strings["PM Depth##sgiOPZ"].plurals[0] = "=PM Depth";
+    strings["LFO Speed##sgiOPZ"].plurals[0] = "=LFO Speed";
+    strings["LFO Shape##sgiOPZ"].plurals[0] = "=LFO Shape";
+    strings["AM Depth 2##sgiOPZ"].plurals[0] = "=AM Depth 2";
+    strings["PM Depth 2##sgiOPZ"].plurals[0] = "=PM Depth 2";
+    strings["LFO2 Speed##sgiOPZ"].plurals[0] = "=LFO2 Speed";
+    strings["LFO2 Shape##sgiOPZ"].plurals[0] = "=LFO2 Shape";
+    strings["OP%d Macros##sgiOPZ"].plurals[0] = "=OP%d Macros";
+    strings["Macros##sgiOPZ"].plurals[0] = "=Macros";
+    strings["Volume##sgiOPZ"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiOPZ"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiOPZ"].plurals[0] = "=Pitch";
+    strings["Noise Freq##sgiOPZ"].plurals[0] = "=Noise Freq";
+    strings["Panning##sgiOPZ"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiOPZ"].plurals[0] = "=Phase Reset";
+
     //   sgiPCE    src/gui/inst/pce.cpp
     //   sgiPET    src/gui/inst/pet.cpp
     //   sgiPMQT   src/gui/inst/pokemini.cpp
