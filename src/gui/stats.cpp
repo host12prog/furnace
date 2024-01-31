@@ -44,7 +44,7 @@ void FurnaceGUI::drawStats() {
         size_t usage=dispatch->getSampleMemUsage(j);
         String usageStr;
         if (settings.memUsageUnit==1) {
-          usageStr=fmt::sprintf("%d/%dKB",usage/1024,capacity/1024);
+          usageStr=fmt::sprintf(_L("%d/%dKB##sgst"),usage/1024,capacity/1024);
         } else {
           usageStr=fmt::sprintf("%d/%d",usage,capacity);
         }

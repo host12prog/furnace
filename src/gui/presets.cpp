@@ -160,7 +160,7 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
-    _L("Famicom with Konami VRC7##sgpr"), {
+    _L("Famicom with Konami VRC7##sgpr0"), {
       CH(DIV_SYSTEM_NES, 1.0f, 0, ""),
       CH(DIV_SYSTEM_VRC7, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
@@ -1391,7 +1391,7 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_LIST_END
   );
   ENTRY(
-    _L("Commander X16 (VERA only)##sgpr"), {
+    _L("Commander X16 (VERA only)##sgpr0"), {
       CH(DIV_SYSTEM_VERA, 1.0f, 0, "")
     }, NULL, MENU_STATUS_LIST_START
   );
@@ -3289,7 +3289,7 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_LIST_START
   );
   ENTRY(
-    _L("Famicom with Konami VRC7##sgpr"), {
+    _L("Famicom with Konami VRC7##sgpr1"), {
       CH(DIV_SYSTEM_NES, 1.0f, 0, ""),
       CH(DIV_SYSTEM_VRC7, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL

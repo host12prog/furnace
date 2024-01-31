@@ -928,7 +928,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
         altered=true;
         mustRender=true;
       }
-      if (ImGui::RadioButton("1MB",chipMem==20)) {
+      if (ImGui::RadioButton(_L("1MB##sgsc"),chipMem==20)) {
         chipMem=20;
         altered=true;
         mustRender=true;
@@ -938,7 +938,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
         altered=true;
         mustRender=true;
       }
-      if (ImGui::RadioButton("256KB",chipMem==18)) {
+      if (ImGui::RadioButton(_L("256KB##sgsc"),chipMem==18)) {
         chipMem=18;
         altered=true;
         mustRender=true;
@@ -2226,12 +2226,12 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
 
       ImGui::Text(_L("Banking style:##sgsc"));
       ImGui::Indent();
-      if (ImGui::RadioButton("Namco System 2 (2MB)",bankType==0)) {
+      if (ImGui::RadioButton(_L("Namco System 2 (2MB)##sgsc"),bankType==0)) {
         bankType=0;
         altered=true;
         mustRender=true;
       }
-      if (ImGui::RadioButton("Namco System 21 (4MB)",bankType==1)) {
+      if (ImGui::RadioButton(_L("Namco System 21 (4MB)##sgsc"),bankType==1)) {
         bankType=1;
         altered=true;
         mustRender=true;

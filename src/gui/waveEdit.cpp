@@ -409,8 +409,8 @@ void FurnaceGUI::drawWaveEdit() {
   if (ImGui::Begin("Wavetable Editor",&waveEditOpen,globalWinFlags|(settings.allowEditDocking?0:ImGuiWindowFlags_NoDocking),_L("Wavetable Editor###Wavetable Editor"))) {
     if (curWave<0 || curWave>=(int)e->song.wave.size()) {
       ImGui::SetCursorPosY(ImGui::GetCursorPosY()+(ImGui::GetContentRegionAvail().y-ImGui::GetFrameHeightWithSpacing()*2.0f)*0.5f);
-      CENTER_TEXT(_L("no wavetable selected##sgwe"));
-      ImGui::Text(_L("no wavetable selected##sgwe"));
+      CENTER_TEXT(_L("no wavetable selected##sgwe0"));
+      ImGui::Text(_L("no wavetable selected##sgwe1"));
       if (ImGui::BeginTable("noAssetCenter",3)) {
         ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch,0.5f);
         ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed);
@@ -746,8 +746,8 @@ void FurnaceGUI::drawWaveEdit() {
                   ImGui::EndTable();
                 }
 
-                CENTER_TEXT(_L("Connection Diagram##sgwe"));
-                ImGui::Text(_L("Connection Diagram##sgwe"));
+                CENTER_TEXT(_L("Connection Diagram##sgwe0"));
+                ImGui::Text(_L("Connection Diagram##sgwe1"));
 
                 if (ImGui::BeginTable("WGFMCon",6)) {
                   ImGui::TableNextRow();

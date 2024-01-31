@@ -228,7 +228,7 @@ void FurnaceGUI::drawInsOPM(DivInstrument* ins)
 
           ImGui::PushID(fmt::sprintf(_L("op%d##sgiOPM0"),i).c_str());
           String opNameLabel;
-          opNameLabel=fmt::sprintf(_L("OP%d##sgiOPM"),i+1);
+          opNameLabel=fmt::sprintf(_L("OP%d##sgiOPM3"),i+1);
           if (opsAreMutable) 
           {
             pushToggleColors(op.enable);
@@ -630,7 +630,7 @@ void FurnaceGUI::drawInsOPM(DivInstrument* ins)
           String opNameLabel;
           OP_DRAG_POINT;
           ImGui::SameLine();
-          opNameLabel=fmt::sprintf(_L("OP%d##sgiOPM"),i+1);
+          opNameLabel=fmt::sprintf(_L("OP%d##sgiOPM4"),i+1);
 
           if (opsAreMutable) 
           {
