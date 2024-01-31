@@ -1755,6 +1755,7 @@ void DivLocale::addTranslationsRussian()
     strings["Broken pitch macro/slides (compatibility)##sgsc0"].plurals[0] = "Сломанное портаменто эффектов и макросов (совместимость)";
     strings["Pseudo-PAL##sgsc1"].plurals[0] = "Псевдо-PAL";
     strings["Broken pitch macro/slides (compatibility)##sgsc1"].plurals[0] = "Сломанное портаменто эффектов и макросов (совместимость)";
+    strings["Clock rate:##sgsc20"].plurals[0] = "Тактовая частота:";
     strings["DPCM channel mode:##sgsc"].plurals[0] = "Режим ДИКМ-канала:";
     strings["DPCM (muffled samples; low CPU usage)##sgsc"].plurals[0] = "ДИКМ (замыленные сэмплы; малое использование ЦП)";
     strings["PCM (crisp samples; high CPU usage)##sgsc"].plurals[0] = "ИКМ (чёткие сэмплы; большое использование ЦП)";
@@ -4451,6 +4452,8 @@ void DivLocale::addTranslationsRussian()
     //   sgiVB     src/gui/inst/vboy.cpp
 
     strings["Set modulation table (channel 5 only)##sgiVB"].plurals[0] = "Выставить таблицу модуляции (только для 5-го канала)";
+    strings["Hex##MTHex"].plurals[0] = "Шест.##MTHex";
+    strings["Dec##MTHex"].plurals[0] = "Дес.##MTHex";
     strings["Macros##sgiVB"].plurals[0] = "Макросы";
     strings["Volume##sgiVB"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiVB"].plurals[0] = "Арпеджио";

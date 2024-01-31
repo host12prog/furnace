@@ -1820,7 +1820,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Broken pitch macro/slides (compatibility)##sgsc0"].plurals[0] = "=Broken pitch macro/slides (compatibility)";
     strings["Pseudo-PAL##sgsc1"].plurals[0] = "=Pseudo-PAL";
     strings["Broken pitch macro/slides (compatibility)##sgsc1"].plurals[0] = "=Broken pitch macro/slides (compatibility)";
-    strings["Clock rate:##sgsc"].plurals[0] = "=Clock rate:";
+    strings["Clock rate:##sgsc20"].plurals[0] = "=Clock rate:";
     strings["DPCM channel mode:##sgsc"].plurals[0] = "=DPCM channel mode:";
     strings["DPCM (muffled samples; low CPU usage)##sgsc"].plurals[0] = "=DPCM (muffled samples; low CPU usage)";
     strings["PCM (crisp samples; high CPU usage)##sgsc"].plurals[0] = "=PCM (crisp samples; high CPU usage)";
