@@ -52,101 +52,101 @@ void process(void* u, float** in, float** out, int inChans, int outChans, unsign
 const char* DivEngine::getEffectDesc(unsigned char effect, int chan, bool notNull) {
   switch (effect) {
     case 0x00:
-      return "00xy: Arpeggio";
+      return "00xy: Arpeggio##seen";
     case 0x01:
-      return "01xx: Pitch slide up";
+      return "01xx: Pitch slide up##seen";
     case 0x02:
-      return "02xx: Pitch slide down";
+      return "02xx: Pitch slide down##seen";
     case 0x03:
-      return "03xx: Portamento";
+      return "03xx: Portamento##seen";
     case 0x04:
-      return "04xy: Vibrato (x: speed; y: depth)";
+      return "04xy: Vibrato (x: speed; y: depth)##seen";
     case 0x05:
-      return "05xy: Volume slide + vibrato (compatibility only!)";
+      return "05xy: Volume slide + vibrato (compatibility only!)##seen";
     case 0x06:
-      return "06xy: Volume slide + portamento (compatibility only!)";
+      return "06xy: Volume slide + portamento (compatibility only!)##seen";
     case 0x07:
-      return "07xy: Tremolo (x: speed; y: depth)";
+      return "07xy: Tremolo (x: speed; y: depth)##seen";
     case 0x08:
-      return "08xy: Set panning (x: left; y: right)";
+      return "08xy: Set panning (x: left; y: right)##seen";
     case 0x09:
-      return "09xx: Set groove pattern (speed 1 if no grooves exist)";
+      return "09xx: Set groove pattern (speed 1 if no grooves exist)##seen";
     case 0x0a:
-      return "0Axy: Volume slide (0y: down; x0: up)";
+      return "0Axy: Volume slide (0y: down; x0: up)##seen";
     case 0x0b:
-      return "0Bxx: Jump to pattern";
+      return "0Bxx: Jump to pattern##seen";
     case 0x0c:
-      return "0Cxx: Retrigger";
+      return "0Cxx: Retrigger##seen";
     case 0x0d:
-      return "0Dxx: Jump to next pattern";
+      return "0Dxx: Jump to next pattern##seen";
     case 0x0f:
-      return "0Fxx: Set speed (speed 2 if no grooves exist)";
+      return "0Fxx: Set speed (speed 2 if no grooves exist)##seen";
     case 0x80:
-      return "80xx: Set panning (00: left; 80: center; FF: right)";
+      return "80xx: Set panning (00: left; 80: center; FF: right)##seen";
     case 0x81:
-      return "81xx: Set panning (left channel)";
+      return "81xx: Set panning (left channel)##seen";
     case 0x82:
-      return "82xx: Set panning (right channel)";
+      return "82xx: Set panning (right channel)##seen";
     case 0x88:
-      return "88xy: Set panning (rear channels; x: left; y: right)";
+      return "88xy: Set panning (rear channels; x: left; y: right)##seen";
       break;
     case 0x89:
-      return "89xx: Set panning (rear left channel)";
+      return "89xx: Set panning (rear left channel)##seen";
       break;
     case 0x8a:
-      return "8Axx: Set panning (rear right channel)";
+      return "8Axx: Set panning (rear right channel)##seen";
       break;
     case 0xc0: case 0xc1: case 0xc2: case 0xc3:
-      return "Cxxx: Set tick rate (hz)";
+      return "Cxxx: Set tick rate (hz)##seen";
     case 0xe0:
-      return "E0xx: Set arp speed";
+      return "E0xx: Set arp speed##seen";
     case 0xe1:
-      return "E1xy: Note slide up (x: speed; y: semitones)";
+      return "E1xy: Note slide up (x: speed; y: semitones)##seen";
     case 0xe2:
-      return "E2xy: Note slide down (x: speed; y: semitones)";
+      return "E2xy: Note slide down (x: speed; y: semitones)##seen";
     case 0xe3:
-      return "E3xx: Set vibrato shape (0: up/down; 1: up only; 2: down only)";
+      return "E3xx: Set vibrato shape (0: up/down; 1: up only; 2: down only)##seen";
     case 0xe4:
-      return "E4xx: Set vibrato range";
+      return "E4xx: Set vibrato range##seen";
     case 0xe5:
-      return "E5xx: Set pitch (80: center)";
+      return "E5xx: Set pitch (80: center)##seen";
     case 0xea:
-      return "EAxx: Legato";
+      return "EAxx: Legato##seen";
     case 0xeb:
-      return "EBxx: Set LEGACY sample mode bank";
+      return "EBxx: Set LEGACY sample mode bank##seen";
     case 0xec:
-      return "ECxx: Note cut";
+      return "ECxx: Note cut##seen";
     case 0xed:
-      return "EDxx: Note delay";
+      return "EDxx: Note delay##seen";
     case 0xee:
-      return "EExx: Send external command";
+      return "EExx: Send external command##seen";
     case 0xf0:
-      return "F0xx: Set tick rate (bpm)";
+      return "F0xx: Set tick rate (bpm)##seen";
     case 0xf1:
-      return "F1xx: Single tick note slide up";
+      return "F1xx: Single tick note slide up##seen";
     case 0xf2:
-      return "F2xx: Single tick note slide down";
+      return "F2xx: Single tick note slide down##seen";
     case 0xf3:
-      return "F3xx: Fine volume slide up";
+      return "F3xx: Fine volume slide up##seen";
     case 0xf4:
-      return "F4xx: Fine volume slide down";
+      return "F4xx: Fine volume slide down##seen";
     case 0xf5:
-      return "F5xx: Disable macro (see manual)";
+      return "F5xx: Disable macro (see manual)##seen";
     case 0xf6:
-      return "F6xx: Enable macro (see manual)";
+      return "F6xx: Enable macro (see manual)##seen";
     case 0xf7:
-      return "F7xx: Restart macro (see manual)";
+      return "F7xx: Restart macro (see manual)##seen";
     case 0xf8:
-      return "F8xx: Single tick volume slide up";
+      return "F8xx: Single tick volume slide up##seen";
     case 0xf9:
-      return "F9xx: Single tick volume slide down";
+      return "F9xx: Single tick volume slide down##seen";
     case 0xfa:
-      return "FAxx: Fast volume slide (0y: down; x0: up)";
+      return "FAxx: Fast volume slide (0y: down; x0: up)##seen";
     case 0xff:
-      return "FFxx: Stop song";
+      return "FFxx: Stop song##seen";
     default:
       if ((effect&0xf0)==0x90) {
-        return "9xxx: Set sample offset*256";
+        return "9xxx: Set sample offset*256##seen";
       } else if (chan>=0 && chan<chans) {
         DivSysDef* sysDef=sysDefs[sysOfChan[chan]];
         auto iter=sysDef->effectHandlers.find(effect);
