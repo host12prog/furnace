@@ -1261,7 +1261,7 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
-    "PC + Sound Blaster w/Game Blaster Compatible", {
+    _L("PC + Sound Blaster w/Game Blaster Compatible##sgpr"), {
       CH(DIV_SYSTEM_OPL2, 1.0f, 0, ""),
       CH(DIV_SYSTEM_SAA1099, 1.0f, 0, "clockSel=1"),
       CH(DIV_SYSTEM_SAA1099, 1.0f, 0, "clockSel=1"),
@@ -2237,7 +2237,7 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
-    "Data East Dark Seal (extended channel 3 and CSM)", { // Dark Seal, Crude Buster, Vapor Trail, etc
+    _L("Data East Dark Seal (extended channel 3 and CSM)##sgpr"), { // Dark Seal, Crude Buster, Vapor Trail, etc
       CH(DIV_SYSTEM_YM2151, 1.0f, 0, ""), // 3.580MHz (32.22MHz / 9)
       CH(DIV_SYSTEM_YM2203_CSM, 1.0f, 0, "clockSel=2"), // 4.0275MHz (32.22MHz / 8); optional
       CH(DIV_SYSTEM_MSM6295, 1.0f, 0, ""), // 1.007MHz (32.22MHz / 32)
@@ -2865,7 +2865,7 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_LIST_END
   );
   ENTRY(
-    "ESS ES1xxx series (ESFM)", {
+    _L("ESS ES1xxx series (ESFM)##sgpr"), {
       CH(DIV_SYSTEM_ESFM, 1.0f, 0, "")
     }
   );
@@ -3289,7 +3289,7 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_LIST_START
   );
   ENTRY(
-    "Famicom with Konami VRC7", {
+    _L("Famicom with Konami VRC7##sgpr"), {
       CH(DIV_SYSTEM_NES, 1.0f, 0, ""),
       CH(DIV_SYSTEM_VRC7, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL

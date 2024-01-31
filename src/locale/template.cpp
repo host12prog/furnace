@@ -1565,6 +1565,11 @@ void DivLocale::addTranslationsTemplate()
     strings["Arcade (YM2151 and SegaPCM)##sgpr1"].plurals[0] = "=Arcade (YM2151 and SegaPCM)";
     strings["Neo Geo CD (extended channel 2)##sgpr1"].plurals[0] = "=Neo Geo CD (extended channel 2)";
 
+    strings["PC + Sound Blaster w/Game Blaster Compatible##sgpr"].plurals[0] = "=PC + Sound Blaster w/Game Blaster Compatible";
+    strings["Data East Dark Seal (extended channel 3 and CSM)##sgpr"].plurals[0] = "=Data East Dark Seal (extended channel 3 and CSM)";
+    strings["ESS ES1xxx series (ESFM)##sgpr"].plurals[0] = "=ESS ES1xxx series (ESFM)";
+    strings["Famicom with Konami VRC7##sgpr"].plurals[0] = "=Famicom with Konami VRC7";
+
     //   sgrv  src/gui/regView.cpp
 
     strings["Register View###Register View"].plurals[0] = "=Register View###Register View";
