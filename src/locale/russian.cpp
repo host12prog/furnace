@@ -1490,7 +1490,6 @@ void DivLocale::addTranslationsRussian()
     strings["ZX Spectrum (beeper only, QuadTone engine)##sgpr"].plurals[0] = "ZX Spectrum (только пищалка, драйвер QuadTone)";
     strings["Modern/fantasy##sgpr"].plurals[0] = "Совр./вымышл.";
     strings["chips/systems which do not exist in reality or were made just several years ago.##sgpr"].plurals[0] = "чипы/системы, не имеющие физического воплощения или сделанные всего несколько лет назад.";
-    strings["tildearrow Sound Unit"].plurals[0] = "Звуковой модуль tildearrow";
     strings["Commander X16 (VERA only)##sgpr1"].plurals[0] = "Commander X16 (только VERA)";
     strings["DefleMask-compatible##sgpr"].plurals[0] = "Совместимые с DefleMask";
     strings["these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"].plurals[0] = "эти пресеты совместимы с DefleMask.\nвыбирайте их, если вам будет нужно будет экспортировать модуль в .dmf или работать с этой программой.";

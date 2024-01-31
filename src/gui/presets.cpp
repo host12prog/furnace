@@ -3226,7 +3226,7 @@ void FurnaceGUI::initSystemPresets() {
 
   CATEGORY_BEGIN(_L("Modern/fantasy##sgpr"),_L("chips/systems which do not exist in reality or were made just several years ago.##sgpr"));
   ENTRY(
-    _L("tildearrow Sound Unit"), {
+    "tildearrow Sound Unit", {
       CH(DIV_SYSTEM_SOUND_UNIT, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
   );

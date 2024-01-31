@@ -1557,7 +1557,6 @@ void DivLocale::addTranslationsTemplate()
     strings["ZX Spectrum (beeper only, QuadTone engine)##sgpr"].plurals[0] = "=ZX Spectrum (beeper only, QuadTone engine)";
     strings["Modern/fantasy##sgpr"].plurals[0] = "=Modern/fantasy";
     strings["chips/systems which do not exist in reality or were made just several years ago.##sgpr"].plurals[0] = "=chips/systems which do not exist in reality or were made just several years ago.";
-    strings["tildearrow Sound Unit"].plurals[0] = "=tildearrow sound unit";
     strings["Commander X16 (VERA only)##sgpr"].plurals[0] = "=Commander X16 (VERA only)";
     strings["DefleMask-compatible##sgpr"].plurals[0] = "=DefleMask-compatible";
     strings["these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"].plurals[0] = "=these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.";
