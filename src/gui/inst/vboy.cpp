@@ -89,7 +89,7 @@ void FurnaceGUI::drawInsVBOY(DivInstrument* ins)
       ImGui::InhibitInertialScroll();
     }
     
-    if (ImGui::Button(modTableHex?"@Hex##MTHex":"@Dec##MTHex")) 
+    if (ImGui::Button(modTableHex?_L("Hex##MTHex"):_L("Dec##MTHex"))) 
     {
       modTableHex=!modTableHex;
     }

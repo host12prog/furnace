@@ -1820,6 +1820,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Broken pitch macro/slides (compatibility)##sgsc0"].plurals[0] = "=Broken pitch macro/slides (compatibility)";
     strings["Pseudo-PAL##sgsc1"].plurals[0] = "=Pseudo-PAL";
     strings["Broken pitch macro/slides (compatibility)##sgsc1"].plurals[0] = "=Broken pitch macro/slides (compatibility)";
+    strings["Clock rate:##sgsc"].plurals[0] = "=Clock rate:";
     strings["DPCM channel mode:##sgsc"].plurals[0] = "=DPCM channel mode:";
     strings["DPCM (muffled samples; low CPU usage)##sgsc"].plurals[0] = "=DPCM (muffled samples; low CPU usage)";
     strings["PCM (crisp samples; high CPU usage)##sgsc"].plurals[0] = "=PCM (crisp samples; high CPU usage)";
@@ -4805,6 +4806,8 @@ void DivLocale::addTranslationsTemplate()
     //   sgiVB     src/gui/inst/vboy.cpp
 
     strings["Set modulation table (channel 5 only)##sgiVB"].plurals[0] = "=Set modulation table (channel 5 only)";
+    strings["Hex##MTHex"].plurals[0] = "=Hex##MTHex";
+    strings["Dec##MTHex"].plurals[0] = "=Dec##MTHex";
     strings["Macros##sgiVB"].plurals[0] = "=Macros";
     strings["Volume##sgiVB"].plurals[0] = "=Volume";
     strings["Arpeggio##sgiVB"].plurals[0] = "=Arpeggio";

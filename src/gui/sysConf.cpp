@@ -517,7 +517,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       int clockSel=flags.getInt("clockSel",0);
       bool dpcmMode=flags.getBool("dpcmMode",true);
 
-      ImGui::Text("C@lock rate:");
+      ImGui::Text(_L("Clock rate:##sgsc"));
 
       ImGui::Indent();
       if (ImGui::RadioButton("NTSC (1.79MHz)",clockSel==0)) {
