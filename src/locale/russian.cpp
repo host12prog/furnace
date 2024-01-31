@@ -2068,12 +2068,6 @@ void DivLocale::addTranslationsRussian()
     strings["Select Instrument###Select Instrument"].plurals[0] = "Выберете инструмент###Select Instrument";
     strings["Import Raw Sample###Import Raw Sample"].plurals[0] = "Импорт сырых данных сэмпла###Import Raw Sample";
     strings["Rendering...###Rendering..."].plurals[0] = "Рендер...###Rendering...";
-
-    //EFFECT LIST
-
-    //common (non-chip-specific) effects
-
-    strings["00xy: Arpeggio"].plurals[0] = "00xy: Арпеджио";
     
     //MACRO EDITOR
 
@@ -4556,52 +4550,52 @@ void DivLocale::addTranslationsRussian()
 
     //   seen    src/engine/engine.cpp
 
-    strings["00xy: Arpeggio##seen"].plurals[0] = "00xy: =Arpeggio";
-    strings["01xx: Pitch slide up##seen"].plurals[0] = "01xx: =Pitch slide up";
-    strings["02xx: Pitch slide down##seen"].plurals[0] = "02xx: =Pitch slide down";
-    strings["03xx: Portamento##seen"].plurals[0] = "03xx: =Portamento";
-    strings["04xy: Vibrato (x: speed; y: depth)##seen"].plurals[0] = "04xy: =Vibrato (x: speed; y: depth)";
-    strings["05xy: Volume slide + vibrato (compatibility only!)##seen"].plurals[0] = "05xy: =Volume slide + vibrato (compatibility only!)";
-    strings["06xy: Volume slide + portamento (compatibility only!)##seen"].plurals[0] = "06xy: =Volume slide + portamento (compatibility only!)";
-    strings["07xy: Tremolo (x: speed; y: depth)##seen"].plurals[0] = "07xy: =Tremolo (x: speed; y: depth)";
-    strings["08xy: Set panning (x: left; y: right)##seen"].plurals[0] = "08xy: =Set panning (x: left; y: right)";
-    strings["09xx: Set groove pattern (speed 1 if no grooves exist)##seen"].plurals[0] = "09xx: =Set groove pattern (speed 1 if no grooves exist)";
-    strings["0Axy: Volume slide (0y: down; x0: up)##seen"].plurals[0] = "0Axy: =Volume slide (0y: down; x0: up)";
-    strings["0Bxx: Jump to pattern##seen"].plurals[0] = "0Bxx: =Jump to pattern";
-    strings["0Cxx: Retrigger##seen"].plurals[0] = "0Cxx: =Retrigger";
-    strings["0Dxx: Jump to next pattern##seen"].plurals[0] = "0Dxx: =Jump to next pattern";
-    strings["0Fxx: Set speed (speed 2 if no grooves exist)##seen"].plurals[0] = "0Fxx: =Set speed (speed 2 if no grooves exist)";
-    strings["80xx: Set panning (00: left; 80: center; FF: right)##seen"].plurals[0] = "80xx: =Set panning (00: left; 80: center; FF: right)";
-    strings["81xx: Set panning (left channel)##seen"].plurals[0] = "81xx: =Set panning (left channel)";
-    strings["82xx: Set panning (right channel)##seen"].plurals[0] = "82xx: =Set panning (right channel)";
-    strings["88xy: Set panning (rear channels; x: left; y: right)##seen"].plurals[0] = "88xy: =Set panning (rear channels; x: left; y: right)";
-    strings["89xx: Set panning (rear left channel)##seen"].plurals[0] = "89xx: =Set panning (rear left channel)";
-    strings["8Axx: Set panning (rear right channel)##seen"].plurals[0] = "8Axx: =Set panning (rear right channel)";
-    strings["Cxxx: Set tick rate (hz)##seen"].plurals[0] = "Cxxx: =Set tick rate (hz)";
-    strings["E0xx: Set arp speed##seen"].plurals[0] = "E0xx: =Set arp speed";
-    strings["E1xy: Note slide up (x: speed; y: semitones)##seen"].plurals[0] = "E1xy: =Note slide up (x: speed; y: semitones)";
-    strings["E2xy: Note slide down (x: speed; y: semitones)##seen"].plurals[0] = "E2xy: =Note slide down (x: speed; y: semitones)";
-    strings["E3xx: Set vibrato shape (0: up/down; 1: up only; 2: down only)##seen"].plurals[0] = "E3xx: =Set vibrato shape (0: up/down; 1: up only; 2: down only)";
-    strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: =Set vibrato range";
-    strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: =Set pitch (80: center)";
-    strings["EAxx: Legato##seen"].plurals[0] = "EAxx: =Legato";
-    strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: =Set LEGACY sample mode bank";
-    strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: =Note cut";
-    strings["EDxx: Note delay##seen"].plurals[0] = "EDxx: =Note delay";
-    strings["EExx: Send external command##seen"].plurals[0] = "EExx: =Send external command";
-    strings["F0xx: Set tick rate (bpm)##seen"].plurals[0] = "F0xx: =Set tick rate (bpm)";
-    strings["F1xx: Single tick note slide up##seen"].plurals[0] = "F1xx: =Single tick note slide up";
-    strings["F2xx: Single tick note slide down##seen"].plurals[0] = "F2xx: =Single tick note slide down";
-    strings["F3xx: Fine volume slide up##seen"].plurals[0] = "F3xx: =Fine volume slide up";
-    strings["F4xx: Fine volume slide down##seen"].plurals[0] = "F4xx: =Fine volume slide down";
-    strings["F5xx: Disable macro (see manual)##seen"].plurals[0] = "F5xx: =Disable macro (see manual)";
-    strings["F6xx: Enable macro (see manual)##seen"].plurals[0] = "F6xx: =Enable macro (see manual)";
-    strings["F7xx: Restart macro (see manual)##seen"].plurals[0] = "F7xx: =Restart macro (see manual)";
-    strings["F8xx: Single tick volume slide up##seen"].plurals[0] = "F8xx: =Single tick volume slide up";
-    strings["F9xx: Single tick volume slide down##seen"].plurals[0] = "F9xx: =Single tick volume slide down";
-    strings["FAxx: Fast volume slide (0y: down; x0: up)##seen"].plurals[0] = "FAxx: =Fast volume slide (0y: down; x0: up)";
-    strings["FFxx: Stop song##seen"].plurals[0] = "FFxx: =Stop song";
-    strings["9xxx: Set sample offset*256##seen"].plurals[0] = "9xxx: =Set sample offset*256";
+    strings["00xy: Arpeggio##seen"].plurals[0] = "00xy: Арпеджио";
+    strings["01xx: Pitch slide up##seen"].plurals[0] = "01xx: Портаменто вверх";
+    strings["02xx: Pitch slide down##seen"].plurals[0] = "02xx: Портаменто вниз";
+    strings["03xx: Portamento##seen"].plurals[0] = "03xx: Авто-портаменто (до указ. ноты)";
+    strings["04xy: Vibrato (x: speed; y: depth)##seen"].plurals[0] = "04xy: Вибрато (x: скорость; y: глубина)";
+    strings["05xy: Volume slide + vibrato (compatibility only!)##seen"].plurals[0] = "05xy: Изменение громкости + вибрато (исключительно в целях совместимости!)";
+    strings["06xy: Volume slide + portamento (compatibility only!)##seen"].plurals[0] = "06xy: Изменение громкости + портаменто (исключительно в целях совместимости!)";
+    strings["07xy: Tremolo (x: speed; y: depth)##seen"].plurals[0] = "07xy: Тремоло (x: скорость; y: глубина)";
+    strings["08xy: Set panning (x: left; y: right)##seen"].plurals[0] = "08xy: Панорамирование (x: лево; y: право)";
+    strings["09xx: Set groove pattern (speed 1 if no grooves exist)##seen"].plurals[0] = "09xx: Установить ритм-паттерн (скорость 1 при их отсутствии)";
+    strings["0Axy: Volume slide (0y: down; x0: up)##seen"].plurals[0] = "0Axy: Изменение громкости (0y: вниз; x0: вверх)";
+    strings["0Bxx: Jump to pattern##seen"].plurals[0] = "0Bxx: Прыжок на паттерн";
+    strings["0Cxx: Retrigger##seen"].plurals[0] = "0Cxx: Циклич. перезапуск";
+    strings["0Dxx: Jump to next pattern##seen"].plurals[0] = "0Dxx: Прыжок на след. паттерн";
+    strings["0Fxx: Set speed (speed 2 if no grooves exist)##seen"].plurals[0] = "0Fxx: Установить скорость (скорость 2 при отсутствии ритм-паттернов)";
+    strings["80xx: Set panning (00: left; 80: center; FF: right)##seen"].plurals[0] = "80xx: Панорамирование (00: лево; 80: центр; FF: право)";
+    strings["81xx: Set panning (left channel)##seen"].plurals[0] = "81xx: Панорамирование (левый канал)";
+    strings["82xx: Set panning (right channel)##seen"].plurals[0] = "82xx: Панорамирование (правый канал)";
+    strings["88xy: Set panning (rear channels; x: left; y: right)##seen"].plurals[0] = "88xy: Панорамирование (задние каналы; x: левый; y: правый)";
+    strings["89xx: Set panning (rear left channel)##seen"].plurals[0] = "89xx: Панорамирование (задний левый канал)";
+    strings["8Axx: Set panning (rear right channel)##seen"].plurals[0] = "8Axx: Панорамирование (задний правый канал)";
+    strings["Cxxx: Set tick rate (hz)##seen"].plurals[0] = "Cxxx: Установить частоту движка трекера (Гц)";
+    strings["E0xx: Set arp speed##seen"].plurals[0] = "E0xx: Установить скорость арпеджио";
+    strings["E1xy: Note slide up (x: speed; y: semitones)##seen"].plurals[0] = "E1xy: Портаменто вверх (x: скорость; y: полутонов)";
+    strings["E2xy: Note slide down (x: speed; y: semitones)##seen"].plurals[0] = "E2xy: Портаменто вниз (x: скорость; y: полутонов)";
+    strings["E3xx: Set vibrato shape (0: up/down; 1: up only; 2: down only)##seen"].plurals[0] = "E3xx: Тип вибрато (0: вверх/вниз; 1: только вверх; 2: только вниз)";
+    strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: Установить глубину вибрато";
+    strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: Расстройка (80: без расстройки)";
+    strings["EAxx: Legato##seen"].plurals[0] = "EAxx: Легато";
+    strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: (СОВМЕСТИМОСТЬ) Установить банк сэмплов";
+    strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: Заглушить ноту";
+    strings["EDxx: Note delay##seen"].plurals[0] = "EDxx: Задержать ноту";
+    strings["EExx: Send external command##seen"].plurals[0] = "EExx: Послать внешнюю команду";
+    strings["F0xx: Set tick rate (bpm)##seen"].plurals[0] = "F0xx: Установить частоту движка трекера (BPM)";
+    strings["F1xx: Single tick note slide up##seen"].plurals[0] = "F1xx: Портаменто вверх (один шаг движка)";
+    strings["F2xx: Single tick note slide down##seen"].plurals[0] = "F2xx: Портаменто вниз (один шаг движка)";
+    strings["F3xx: Fine volume slide up##seen"].plurals[0] = "F3xx: Точное изменение громкости вверх";
+    strings["F4xx: Fine volume slide down##seen"].plurals[0] = "F4xx: Точное изменение громкости вниз";
+    strings["F5xx: Disable macro (see manual)##seen"].plurals[0] = "F5xx: Отключить макрос (см. инструкцию)";
+    strings["F6xx: Enable macro (see manual)##seen"].plurals[0] = "F6xx: Включить макрос (см. инструкцию)";
+    strings["F7xx: Restart macro (see manual)##seen"].plurals[0] = "F7xx: Перезапустить макрос (см. инструкцию)";
+    strings["F8xx: Single tick volume slide up##seen"].plurals[0] = "F8xx: Изменение громкости вверх (один шаг движка)";
+    strings["F9xx: Single tick volume slide down##seen"].plurals[0] = "F9xx: Изменение громкости вниз (один шаг движка)";
+    strings["FAxx: Fast volume slide (0y: down; x0: up)##seen"].plurals[0] = "FAxx: Быстрое изменение громкости (0y: вниз; x0: вверх)";
+    strings["FFxx: Stop song##seen"].plurals[0] = "FFxx: Остановить трек";
+    strings["9xxx: Set sample offset*256##seen"].plurals[0] = "9xxx: Начальное смещение сэмпла (xxx*256 шагов)";
 
     //   sesd    src/engine/sysDef.cpp
 
