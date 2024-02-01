@@ -15,7 +15,7 @@ void FurnaceGUI::drawEffectList() {
     float availB=ImGui::GetContentRegionAvail().x-ImGui::GetFrameHeightWithSpacing();
     if (availB>0) {
       ImGui::PushTextWrapPos(availB);
-      ImGui::TextWrapped(_L("Chip at cursor: %s##sgef"),e->getSystemName(e->sysOfChan[cursor.xCoarse]));
+      ImGui::TextWrapped(_L("Chip at cursor: %s##sgef"),_L(e->getSystemName(e->sysOfChan[cursor.xCoarse])));
       ImGui::PopTextWrapPos();
       ImGui::SameLine();
     }
