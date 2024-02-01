@@ -3169,7 +3169,6 @@ SafeWriter* DivEngine::saveText(bool separatePatterns) {
 
           for (int l=0; l<chans; l++) {
             DivPattern* p=s->pat[l].getPattern(s->orders.ord[l][j],false);
-
             int note=p->data[k][0];
             int octave=p->data[k][1];
 

@@ -35,7 +35,7 @@ class FurnaceGUI;
 
 void FurnaceGUI::insTabWave(DivInstrument* ins)
 {
-    if (ImGui::BeginTabItem("Wavetable")) 
+    if (ImGui::BeginTabItem(_L("Wavetable##sgiwave"))) 
     {
         switch (ins->type)
         {
@@ -87,7 +87,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                 wavePreviewHeight=31;
                 break;
         }
-        if (ImGui::Checkbox("Enable synthesizer",&ins->ws.enabled)) {
+        if (ImGui::Checkbox(_L("Enable synthesizer##sgiwave"),&ins->ws.enabled)) {
         wavePreviewInit=true;
         }
         if (ins->ws.enabled) {
@@ -104,20 +104,20 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
             wavePreviewInit=true;
             }
         }
-        if (ImGui::BeginCombo("##WSEffect",(ins->ws.effect&0x80)?dualWSEffects[ins->ws.effect&0x7f]:singleWSEffects[ins->ws.effect&0x7f])) {
-            ImGui::Text("Single-waveform");
+        if (ImGui::BeginCombo("##WSEffect",(ins->ws.effect&0x80)?_L(dualWSEffects[ins->ws.effect&0x7f]):_L(singleWSEffects[ins->ws.effect&0x7f]))) {
+            ImGui::Text(_L("Single-waveform##sgiwave"));
             ImGui::Indent();
             for (int i=0; i<DIV_WS_SINGLE_MAX; i++) {
-            if (ImGui::Selectable(singleWSEffects[i])) {
+            if (ImGui::Selectable(_L(singleWSEffects[i]))) {
                 ins->ws.effect=i;
                 wavePreviewInit=true;
             }
             }
             ImGui::Unindent();
-            ImGui::Text("Dual-waveform");
+            ImGui::Text(_L("Dual-waveform##sgiwave"));
             ImGui::Indent();
             for (int i=129; i<DIV_WS_DUAL_MAX; i++) {
-            if (ImGui::Selectable(dualWSEffects[i-128])) {
+            if (ImGui::Selectable(_L(dualWSEffects[i-128]))) {
                 ins->ws.effect=i;
                 wavePreviewInit=true;
             }
@@ -172,29 +172,42 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
             ImGui::TableNextRow();
             ImGui::TableNextColumn();
             ImVec2 size1=ImVec2(ImGui::GetContentRegionAvail().x,ySize);
-            PlotNoLerp("##WaveformP1",wavePreview1,wave1->len+1,0,"Wave 1",0,wave1->max,size1);
+            PlotNoLerp("##WaveformP1",wavePreview1,wave1->len+1,0,_L("Wave 1##sgiwave0"),0,wave1->max,size1);
             if (isSingleWaveFX) {
             ImGui::TableNextColumn();
             ImVec2 size2=ImVec2(ImGui::GetContentRegionAvail().x,ySize);
-            PlotNoLerp("##WaveformP2",wavePreview2,wave2->len+1,0,"Wave 2",0,wave2->max,size2);
+            PlotNoLerp("##WaveformP2",wavePreview2,wave2->len+1,0,_L("Wave 2##sgiwave0"),0,wave2->max,size2);
             }
             ImGui::TableNextColumn();
             ImVec2 size3=ImVec2(ImGui::GetContentRegionAvail().x,ySize);
-            PlotNoLerp("##WaveformP3",wavePreview3,wavePreviewLen+1,0,"Result",0,wavePreviewHeight,size3);
+            PlotNoLerp("##WaveformP3",wavePreview3,wavePreviewLen+1,0,_L("Result##sgiwave"),0,wavePreviewHeight,size3);
 
             ImGui::TableNextRow();
             ImGui::TableNextColumn();
             if (ins->std.get_macro(DIV_MACRO_WAVE, true)->len>0) {
             ImGui::PushStyleColor(ImGuiCol_Text,uiColors[GUI_COLOR_WARNING]);
             ImGui::AlignTextToFramePadding();
-            ImGui::Text("Wave 1 " ICON_FA_EXCLAMATION_TRIANGLE);
+
+            if(settings.language == DIV_LANG_ENGLISH)
+            {
+                ImGui::Text("Wave 1 " ICON_FA_EXCLAMATION_TRIANGLE);
+            }
+            else
+            {
+                std::string str1 = _L("Wave 1 ##sgiwave");
+                std::string str2 = ICON_FA_EXCLAMATION_TRIANGLE;
+
+                std::string sumstr = str1 + str2;
+                ImGui::Text(sumstr.c_str());
+            }
+            
             ImGui::PopStyleColor();
             if (ImGui::IsItemHovered()) {
-                ImGui::SetTooltip("waveform macro is controlling wave 1!\nthis value will be ineffective.");
+                ImGui::SetTooltip(_L("waveform macro is controlling wave 1!\nthis value will be ineffective.##sgiwave"));
             }
             } else {
             ImGui::AlignTextToFramePadding();
-            ImGui::Text("Wave 1");
+            ImGui::Text(_L("Wave 1##sgiwave1"));
             }
             ImGui::SameLine();
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
@@ -205,13 +218,13 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
             }
             if (ins->std.get_macro(DIV_MACRO_WAVE, true)->len>0) {
             if (ImGui::IsItemHovered()) {
-                ImGui::SetTooltip("waveform macro is controlling wave 1!\nthis value will be ineffective.");
+                ImGui::SetTooltip(_L("waveform macro is controlling wave 1!\nthis value will be ineffective.##sgiwave"));
             }
             }
             if (isSingleWaveFX) {
             ImGui::TableNextColumn();
             ImGui::AlignTextToFramePadding();
-            ImGui::Text("Wave 2");
+            ImGui::Text(_L("Wave 2##sgiwave1"));
             ImGui::SameLine();
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             if (ImGui::InputInt("##SelWave2",&ins->ws.wave2,1,4)) {
@@ -226,9 +239,9 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
             }
             if (ImGui::IsItemHovered()) {
             if (wavePreviewPaused) {
-                ImGui::SetTooltip("Resume preview");
+                ImGui::SetTooltip(_L("Resume preview##sgiwave"));
             } else {
-                ImGui::SetTooltip("Pause preview");
+                ImGui::SetTooltip(_L("Pause preview##sgiwave"));
             }
             }
             ImGui::SameLine();
@@ -236,13 +249,13 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
             wavePreviewInit=true;
             }
             if (ImGui::IsItemHovered()) {
-            ImGui::SetTooltip("Restart preview");
+            ImGui::SetTooltip(_L("Restart preview##sgiwave"));
             }
             ImGui::SameLine();
             if (ImGui::Button(ICON_FA_UPLOAD "##WSCopy")) {
             curWave=e->addWave();
             if (curWave==-1) {
-                showError("too many wavetables!");
+                showError(_L("too many wavetables!##sgiwave"));
             } else {
                 wantScrollList=true;
                 MARK_MODIFIED;
@@ -256,39 +269,39 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
             }
             }
             if (ImGui::IsItemHovered()) {
-            ImGui::SetTooltip("Copy to new wavetable");
+            ImGui::SetTooltip(_L("Copy to new wavetable##sgiwave"));
             }
             ImGui::SameLine();
             ImGui::Text("(%d×%d)",wavePreviewLen,wavePreviewHeight+1);
             ImGui::EndTable();
         }
 
-        if (ImGui::InputScalar("Update Rate",ImGuiDataType_U8,&ins->ws.rateDivider,&_ONE,&_EIGHT)) {
+        if (ImGui::InputScalar(_L("Update Rate##sgiwave"),ImGuiDataType_U8,&ins->ws.rateDivider,&_ONE,&_EIGHT)) {
             wavePreviewInit=true;
         }
         int speed=ins->ws.speed+1;
-        if (ImGui::InputInt("Speed",&speed,1,8)) {
+        if (ImGui::InputInt(_L("Speed##sgiwave"),&speed,1,8)) {
             if (speed<1) speed=1;
             if (speed>256) speed=256;
             ins->ws.speed=speed-1;
             wavePreviewInit=true;
         }
 
-        if (ImGui::InputScalar("Amount",ImGuiDataType_U8,&ins->ws.param1,&_ONE,&_EIGHT)) {
+        if (ImGui::InputScalar(_L("Amount##sgiwave"),ImGuiDataType_U8,&ins->ws.param1,&_ONE,&_EIGHT)) {
             wavePreviewInit=true;
         }
 
         if (ins->ws.effect==DIV_WS_PHASE_MOD) {
-            if (ImGui::InputScalar("Power",ImGuiDataType_U8,&ins->ws.param2,&_ONE,&_EIGHT)) {
+            if (ImGui::InputScalar(_L("Power##sgiwave"),ImGuiDataType_U8,&ins->ws.param2,&_ONE,&_EIGHT)) {
             wavePreviewInit=true;
             }
         }
 
-        if (ImGui::Checkbox("Global",&ins->ws.global)) {
+        if (ImGui::Checkbox(_L("Global##sgiwave"),&ins->ws.global)) {
             wavePreviewInit=true;
         }
         } else {
-        ImGui::TextWrapped("wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.");
+        ImGui::TextWrapped(_L("wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"));
         }
 
         ImGui::EndTabItem();

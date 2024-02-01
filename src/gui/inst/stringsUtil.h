@@ -21,7 +21,9 @@
 
 extern const char* ssgEnvTypes[8];
 extern const char* fmParamNames[3][32];
+extern const char* EngFmParamNames[3][32];
 extern const char* esfmParamLongNames[9];
+extern const char* EngEsfmParamLongNames[9];
 extern const char* esfmParamNames[9];
 extern const char* esfmParamShortNames[9];
 extern const char* fmParamShortNames[3][32];
@@ -61,8 +63,8 @@ extern const char* es5506ControlModes[3];
 extern const int orderedOps[4];
 extern const char* singleWSEffects[7];
 extern const char* dualWSEffects[9];
-extern const char* gbHWSeqCmdTypes[6];
-extern const char* suHWSeqCmdTypes[7];
+extern const char* gbHWSeqCmdTypes[6+1];
+extern const char* suHWSeqCmdTypes[7+1];
 extern const char* snesGainModes[5];
 extern const int detuneMap[2][8];
 extern const int detuneUnmap[2][11];

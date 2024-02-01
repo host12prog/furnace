@@ -27,7 +27,7 @@ void FurnaceGUI::drawRegView() {
     nextWindow=GUI_WINDOW_NOTHING;
   }
   if (!regViewOpen) return;
-  if (ImGui::Begin("Register View",&regViewOpen,globalWinFlags)) {
+  if (ImGui::Begin("Register View",&regViewOpen,globalWinFlags,_L("Register View###Register View"))) {
     for (int i=0; i<e->song.systemLen; i++) {
       ImGui::Text("%d. %s",i+1,getSystemName(e->song.system[i]));
       int size=0;
@@ -35,7 +35,7 @@ void FurnaceGUI::drawRegView() {
       unsigned char* regPool=e->getRegisterPool(i,size,depth);
       unsigned short* regPoolW=(unsigned short*)regPool;
       if (regPool==NULL) {
-        ImGui::Text("- no register pool available");
+        ImGui::Text(_L("- no register pool available##sgrv"));
       } else {
         ImGui::PushFont(patFont);
         if (ImGui::BeginTable("Memory",17)) {

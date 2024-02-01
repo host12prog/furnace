@@ -436,7 +436,7 @@ void FurnaceGUI::drawPattern() {
     ImGui::SetNextWindowPos(patWindowPos);
     ImGui::SetNextWindowSize(patWindowSize);
   }
-  if (ImGui::Begin("Pattern",&patternOpen,globalWinFlags|(settings.avoidRaisingPattern?ImGuiWindowFlags_NoBringToFrontOnFocus:0)|(settings.cursorFollowsWheel?ImGuiWindowFlags_NoScrollWithMouse:0))) {
+  if (ImGui::Begin("Pattern",&patternOpen,globalWinFlags|(settings.avoidRaisingPattern?ImGuiWindowFlags_NoBringToFrontOnFocus:0)|(settings.cursorFollowsWheel?ImGuiWindowFlags_NoScrollWithMouse:0), _L("Pattern###Pattern"))) {
     if (!mobileUI) {
       patWindowPos=ImGui::GetWindowPos();
       patWindowSize=ImGui::GetWindowSize();
@@ -492,7 +492,7 @@ void FurnaceGUI::drawPattern() {
         ImGui::OpenPopup("PatternOpt");
       }
       if (ImGui::IsItemHovered() && !mobileUI) {
-        ImGui::SetTooltip("click for pattern options (effect columns/pattern names/visualizer)");
+        ImGui::SetTooltip(_L("click for pattern options (effect columns/pattern names/visualizer)##sgpa"));
       }
       if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
         fancyPattern=!fancyPattern;
@@ -504,12 +504,12 @@ void FurnaceGUI::drawPattern() {
       ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,origWinPadding);
       ImGui::PushFont(mainFont);
       if (ImGui::BeginPopup("PatternOpt",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoSavedSettings)) {
-        ImGui::Text("Options:");
+        ImGui::Text(_L("Options:##sgpa"));
         ImGui::Indent();
-        ImGui::Checkbox("Effect columns/collapse",&patExtraButtons);
-        ImGui::Checkbox("Pattern names",&patChannelNames);
-        ImGui::Checkbox("Channel group hints",&patChannelPairs);
-        if (ImGui::Checkbox("Visualizer",&fancyPattern)) {
+        ImGui::Checkbox(_L("Effect columns/collapse##sgpa"),&patExtraButtons);
+        ImGui::Checkbox(_L("Pattern names##sgpa"),&patChannelNames);
+        ImGui::Checkbox(_L("Channel group hints##sgpa"),&patChannelPairs);
+        if (ImGui::Checkbox(_L("Visualizer##sgpa"),&fancyPattern)) {
           inhibitMenu=true;
           e->enableCommandStream(fancyPattern);
           e->getCommandStream(cmdStream);
@@ -517,12 +517,12 @@ void FurnaceGUI::drawPattern() {
         }
         ImGui::Unindent();
 
-        ImGui::Text("Channel status:");
+        ImGui::Text(_L("Channel status:##sgpa"));
         ImGui::Indent();
-        if (ImGui::RadioButton("No##_PCS0",patChannelHints==0)) {
+        if (ImGui::RadioButton(_L("No##_PCS0"),patChannelHints==0)) {
           patChannelHints=0;
         }
-        if (ImGui::RadioButton("Yes##_PCS1",patChannelHints==1)) {
+        if (ImGui::RadioButton(_L("Yes##_PCS1"),patChannelHints==1)) {
           patChannelHints=1;
         }
         /*
@@ -1384,11 +1384,11 @@ void FurnaceGUI::drawPattern() {
     if (tdl!=NULL && failedNoteOn) {
       ImVec2 winCenter=ImGui::GetWindowPos()+ImGui::GetWindowSize()*0.5f;
       ImGui::PushFont(bigFont);
-      ImVec2 warnHeadSize=ImGui::CalcTextSize("WARNING!!");
+      ImVec2 warnHeadSize=ImGui::CalcTextSize(_L("WARNING!!##sgpa"));
       ImGui::PopFont();
-      ImVec2 warnTextSize1=ImGui::CalcTextSize("this instrument cannot be previewed because");
-      ImVec2 warnTextSize2=ImGui::CalcTextSize("none of the chips can play it");
-      ImVec2 warnTextSize3=ImGui::CalcTextSize("your instrument is in peril!! be careful...");
+      ImVec2 warnTextSize1=ImGui::CalcTextSize(_L("this instrument cannot be previewed because##sgpa"));
+      ImVec2 warnTextSize2=ImGui::CalcTextSize(_L("none of the chips can play it##sgpa"));
+      ImVec2 warnTextSize3=ImGui::CalcTextSize(_L("your instrument is in peril!! be careful...##sgpa"));
 
       float maxTextSize=warnHeadSize.x;
       if (warnTextSize1.x>maxTextSize) maxTextSize=warnTextSize1.x;
@@ -1416,28 +1416,28 @@ void FurnaceGUI::drawPattern() {
         MAX(1,40*dpiScale),
         ImVec2(winCenter.x-warnHeadSize.x*0.5,whereY),
         ImGui::GetColorU32(ImGuiCol_Text),
-        "WARNING!!"
+        _L("WARNING!!##sgpa")
       );
       whereY+=warnHeadSize.y;
 
       tdl->AddText(
         ImVec2(winCenter.x-warnTextSize1.x*0.5,whereY),
         ImGui::GetColorU32(ImGuiCol_Text),
-        "this instrument cannot be previewed because"
+        _L("this instrument cannot be previewed because##sgpa")
       );
       whereY+=warnTextSize1.y;
 
       tdl->AddText(
         ImVec2(winCenter.x-warnTextSize2.x*0.5,whereY),
         ImGui::GetColorU32(ImGuiCol_Text),
-        "none of the chips can play it"
+        _L("none of the chips can play it##sgpa")
       );
       whereY+=warnTextSize2.y;
 
       tdl->AddText(
         ImVec2(winCenter.x-warnTextSize3.x*0.5,whereY),
         ImGui::GetColorU32(ImGuiCol_Text),
-        "your instrument is in peril!! be careful..."
+        _L("your instrument is in peril!! be careful...##sgpa")
       );
       whereY+=warnTextSize3.y;
     }
