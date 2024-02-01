@@ -31,6 +31,10 @@ class DivLocale;
 
 void DivLocale::addTranslationsTemplate()
 {
+    ImGui::LocalizeRegisterEntries(GLocalizationEntriesTmTM, IM_ARRAYSIZE(GLocalizationEntriesTmTM));
+
+    strings["<nothing>##test"].plurals[0] = "=<nothing>##test";
+
     // everything in a string after the ## or ### must remain as is
     //   unless it's one of these purely-for-translation codes
     // example: "Sparkles!##sgab1" means the second instance of "Sparkles!"
@@ -38,67 +42,54 @@ void DivLocale::addTranslationsTemplate()
 
     //progress tracker
     //   code  is the hashcode prefix (derived from path)
-    // X       means not to translate
-    // @       means it needs code help
-    // +       means source has _L() wrappers but needs disambiguation
-    // #       means all done!
-    // >       means it needs review (possibly some redo)
 
     //   sg**  src/gui/
-    // # sgab  src/gui/about.cpp
-    // # sgch  src/gui/channels.cpp
-    // # sgco  src/gui/chanOsc.cpp
-    // # sgcl  src/gui/clock.cpp
-    // X sgcf  src/gui/compatFlags.cpp
-    // # sgdl  src/gui/dataList.cpp
-    // X sgdb  src/gui/debug.cpp
-    // X sgdw  src/gui/debugWindow.cpp
-    // # sgda  src/gui/doAction.cpp
-    // # sgec  src/gui/editControls.cpp
-    // # sged  src/gui/editing.cpp
-    // # sgef  src/gui/effectList.cpp
-    // # sgeo  src/gui/exportOptions.cpp
-    // # sgfd  src/gui/fileDialog.cpp
-    // # sgfr  src/gui/findReplace.cpp
-    // # sgfm  src/gui/fmPreview.cpp
-    // # sgfo  src/gui/fonts.cpp
-    // # sggd  src/gui/gradient.cpp
-    // # sggv  src/gui/grooves.cpp
-    // # sggu  src/gui/gui.cpp
-    // # sggc  src/gui/guiConst.cpp
-    // # sgim  src/gui/image.cpp
-    // # sgie  src/gui/insEdit.cpp
-    // X sglo  src/gui/log.cpp
-    // # sgmm  src/gui/midiMap.cpp
-    // # sgmx  src/gui/mixer.cpp
-    // # sgns  src/gui/newSong.cpp
-    // # sgor  src/gui/orders.cpp
-    // # sgos  src/gui/osc.cpp
-    // # sgpm  src/gui/patManager.cpp
-    // # sgpa  src/gui/pattern.cpp
-    // # sgpi  src/gui/piano.cpp
-    // # sgpr  src/gui/presets.cpp
-    // # sgrv  src/gui/regView.cpp
-    // # sgse  src/gui/sampleEdit.cpp
-    // # sgse  src/gui/settings.cpp
-    // # sgsi  src/gui/songInfo.cpp
-    // # sgsn  src/gui/songNotes.cpp
-    // # sgsp  src/gui/speed.cpp
-    // X sgsl  src/gui/spoiler.cpp
-    // # sgst  src/gui/stats.cpp
-    // # sgss  src/gui/subSongs.cpp
-    // # sgsc  src/gui/sysConf.cpp
-    // # sgsm  src/gui/sysManager.cpp
-    // # sgsa  src/gui/sysPartNumber.cpp
-    // # sgsp  src/gui/sysPicker.cpp
-    // # sgut  src/gui/util.cpp
-    // # sgvm  src/gui/volMeter.cpp
-    // # sgwe  src/gui/waveEdit.cpp
-    // # sgxy  src/gui/xyOsc.cpp
-
-    ImGui::LocalizeRegisterEntries(GLocalizationEntriesTmTM, IM_ARRAYSIZE(GLocalizationEntriesTmTM));
-
-    strings["<nothing>##test"].plurals[0] = "=<nothing>##test";
+    //   sgab  src/gui/about.cpp
+    //   sgch  src/gui/channels.cpp
+    //   sgco  src/gui/chanOsc.cpp
+    //   sgcl  src/gui/clock.cpp
+    //   sgcf  src/gui/compatFlags.cpp
+    //   sgdl  src/gui/dataList.cpp
+    //   sgda  src/gui/doAction.cpp
+    //   sgec  src/gui/editControls.cpp
+    //   sged  src/gui/editing.cpp
+    //   sgef  src/gui/effectList.cpp
+    //   sgeo  src/gui/exportOptions.cpp
+    //   sgfd  src/gui/fileDialog.cpp
+    //   sgfr  src/gui/findReplace.cpp
+    //   sgfm  src/gui/fmPreview.cpp
+    //   sgfo  src/gui/fonts.cpp
+    //   sggd  src/gui/gradient.cpp
+    //   sggv  src/gui/grooves.cpp
+    //   sggu  src/gui/gui.cpp
+    //   sggc  src/gui/guiConst.cpp
+    //   sgim  src/gui/image.cpp
+    //   sgie  src/gui/insEdit.cpp
+    //   sgmm  src/gui/midiMap.cpp
+    //   sgmx  src/gui/mixer.cpp
+    //   sgns  src/gui/newSong.cpp
+    //   sgor  src/gui/orders.cpp
+    //   sgos  src/gui/osc.cpp
+    //   sgpm  src/gui/patManager.cpp
+    //   sgpa  src/gui/pattern.cpp
+    //   sgpi  src/gui/piano.cpp
+    //   sgpr  src/gui/presets.cpp
+    //   sgrv  src/gui/regView.cpp
+    //   sgse  src/gui/sampleEdit.cpp
+    //   sgse  src/gui/settings.cpp
+    //   sgsi  src/gui/songInfo.cpp
+    //   sgsn  src/gui/songNotes.cpp
+    //   sgsp  src/gui/speed.cpp
+    //   sgst  src/gui/stats.cpp
+    //   sgss  src/gui/subSongs.cpp
+    //   sgsc  src/gui/sysConf.cpp
+    //   sgsm  src/gui/sysManager.cpp
+    //   sgsa  src/gui/sysPartNumber.cpp
+    //   sgsp  src/gui/sysPicker.cpp
+    //   sgut  src/gui/util.cpp
+    //   sgvm  src/gui/volMeter.cpp
+    //   sgwe  src/gui/waveEdit.cpp
+    //   sgxy  src/gui/xyOsc.cpp
 
     //   sgab  src/gui/about.cpp
 
@@ -289,7 +280,66 @@ void DivLocale::addTranslationsTemplate()
 
     //   sgcf  src/gui/compatFlags.cpp
 
-        //waiting for compat flags reduction
+    strings["Compatibility Flags###Compatibility Flags"].plurals[0] = "=Compatibility Flags###Compatibility Flags";
+    strings["these flags are designed to provide better DefleMask/older Furnace compatibility.\nit is recommended to disable most of these unless you rely on specific quirks.##sgcf"].plurals[0] = "=these flags are designed to provide better DefleMask/older Furnace compatibility.\nit is recommended to disable most of these unless you rely on specific quirks.";
+    strings["Game Boy instrument duty is wave volume##sgcf"].plurals[0] = "=Game Boy instrument duty is wave volume";
+    strings["if enabled, an instrument with duty macro in the wave channel will be mapped to wavetable volume.##sgcf"].plurals[0] = "=if enabled, an instrument with duty macro in the wave channel will be mapped to wavetable volume.";
+    strings["Restart macro on portamento##sgcf"].plurals[0] = "=Restart macro on portamento";
+    strings["when enabled, a portamento effect will reset the channel's macro if used in combination with a note.##sgcf"].plurals[0] = "=when enabled, a portamento effect will reset the channel's macro if used in combination with a note.";
+    strings["Ignore duplicate slide effects##sgcf"].plurals[0] = "=Ignore duplicate slide effects";
+    strings["if this is on, only the first slide of a row in a channel will be considered.##sgcf"].plurals[0] = "=if this is on, only the first slide of a row in a channel will be considered.";
+    strings["Ignore 0Dxx on the last order##sgcf"].plurals[0] = "=Ignore 0Dxx on the last order";
+    strings["if this is on, a jump to next row effect will not take place when it is on the last order of a song.##sgcf"].plurals[0] = "=if this is on, a jump to next row effect will not take place when it is on the last order of a song.";
+    strings["Don't apply Game Boy envelope on note-less instrument change##sgcf"].plurals[0] = "=Don't apply Game Boy envelope on note-less instrument change";
+    strings["if this is on, an instrument change will not affect the envelope.##sgcf"].plurals[0] = "=if this is on, an instrument change will not affect the envelope.";
+    strings["Ignore DAC mode change outside of intended channel in ExtCh mode##sgcf"].plurals[0] = "=Ignore DAC mode change outside of intended channel in ExtCh mode";
+    strings["if this is on, 17xx has no effect on the operator channels in YM2612.##sgcf"].plurals[0] = "=if this is on, 17xx has no effect on the operator channels in YM2612.";
+    strings["SN76489 duty macro always resets phase##sgcf"].plurals[0] = "=SN76489 duty macro always resets phase";
+    strings["when enabled, duty macro will always reset phase, even if its value hasn't changed.##sgcf"].plurals[0] = "=when enabled, duty macro will always reset phase, even if its value hasn't changed.";
+    strings["Don't persist volume macro after it finishes##sgcf"].plurals[0] = "=Don't persist volume macro after it finishes";
+    strings["when enabled, a value in the volume column that happens after the volume macro is done will disregard the macro.##sgcf"].plurals[0] = "=when enabled, a value in the volume column that happens after the volume macro is done will disregard the macro.";
+    strings[".mod import##sgcf"].plurals[0] = "=.mod import";
+    strings["Don't slide on the first tick of a row##sgcf"].plurals[0] = "=Don't slide on the first tick of a row";
+    strings["simulates ProTracker's behavior of not applying volume/pitch slides on the first tick of a row.##sgcf"].plurals[0] = "=simulates ProTracker's behavior of not applying volume/pitch slides on the first tick of a row.";
+    strings["Reset arpeggio position on row change##sgcf"].plurals[0] = "=Reset arpeggio position on row change";
+    strings["simulates ProTracker's behavior of arpeggio being bound to the current tick of a row.##sgcf"].plurals[0] = "=simulates ProTracker's behavior of arpeggio being bound to the current tick of a row.";
+    strings["Pitch/Playback##sgcf"].plurals[0] = "=Pitch/Playback";
+    strings["Pitch linearity:##sgcf"].plurals[0] = "=Pitch linearity:";
+    strings["None##sgcf"].plurals[0] = "=None";
+    strings["like ProTracker/FamiTracker##sgcf"].plurals[0] = "=like ProTracker/FamiTracker";
+    strings["Full##sgcf"].plurals[0] = "=Full";
+    strings["like Impulse Tracker##sgcf"].plurals[0] = "=like Impulse Tracker";
+    strings["Pitch slide speed multiplier##sgcf"].plurals[0] = "=Pitch slide speed multiplier";
+    strings["Loop modality:##sgcf"].plurals[0] = "=Loop modality:";
+    strings["Reset channels##sgcf"].plurals[0] = "=Reset channels";
+    strings["select to reset channels on loop. may trigger a voltage click on every loop!##sgcf"].plurals[0] = "=select to reset channels on loop. may trigger a voltage click on every loop!";
+    strings["Soft reset channels##sgcf"].plurals[0] = "=Soft reset channels";
+    strings["select to turn channels off on loop.##sgcf"].plurals[0] = "=select to turn channels off on loop.";
+    strings["Do nothing##sgcf"].plurals[0] = "=Do nothing";
+    strings["select to not reset channels on loop.##sgcf"].plurals[0] = "=select to not reset channels on loop.";
+    strings["Cut/delay effect policy:##sgcf"].plurals[0] = "=Cut/delay effect policy:";
+    strings["Strict##sgcf"].plurals[0] = "=Strict";
+    strings["only when time is less than speed (like DefleMask/ProTracker)##sgcf"].plurals[0] = "=only when time is less than speed (like DefleMask/ProTracker)";
+    strings["Lax##sgcf"].plurals[0] = "=Lax";
+    strings["no checks##sgcf"].plurals[0] = "=no checks";
+    strings["Simultaneous jump (0B+0D) treatment:##sgcf"].plurals[0] = "=Simultaneous jump (0B+0D) treatment:";
+    strings["Normal##sgcf"].plurals[0] = "=Normal";
+    strings["accept 0B+0D to jump to a specific row of an order##sgcf"].plurals[0] = "=accept 0B+0D to jump to a specific row of an order";
+    strings["Other##sgcf"].plurals[0] = "=Other";
+    strings["Auto-insert one tick gap between notes##sgcf"].plurals[0] = "=Auto-insert one tick gap between notes";
+    strings["when enabled, a one-tick note cut will be inserted between non-legato/non-portamento notes.\nthis simulates the behavior of some Amiga/SNES music engines.\n\nineffective on C64.##sgcf"].plurals[0] = "=when enabled, a one-tick note cut will be inserted between non-legato/non-portamento notes.\nthis simulates the behavior of some Amiga/SNES music engines.\n\nineffective on C64.";
+    strings["Don't reset slides after note off##sgcf"].plurals[0] = "=Don't reset slides after note off";
+    strings["when enabled, note off will not reset the channel's slide effect.##sgcf"].plurals[0] = "=when enabled, note off will not reset the channel's slide effect.";
+    strings["Don't reset portamento after reaching target##sgcf"].plurals[0] = "=Don't reset portamento after reaching target";
+    strings["when enabled, the slide effect will not be disabled after it reaches its target.##sgcf"].plurals[0] = "=when enabled, the slide effect will not be disabled after it reaches its target.";
+    strings["Continuous vibrato##sgcf"].plurals[0] = "=Continuous vibrato";
+    strings["when enabled, vibrato phase/position will not be reset on a new note.##sgcf"].plurals[0] = "=when enabled, vibrato phase/position will not be reset on a new note.";
+    strings["Pitch macro is not linear##sgcf"].plurals[0] = "=Pitch macro is not linear";
+    strings["when enabled, the pitch macro of an instrument is in frequency/period space.##sgcf"].plurals[0] = "=when enabled, the pitch macro of an instrument is in frequency/period space.";
+    strings["Reset arpeggio effect position on new note##sgcf"].plurals[0] = "=Reset arpeggio effect position on new note";
+    strings["when enabled, arpeggio effect (00xy) position is reset on a new note.##sgcf"].plurals[0] = "=when enabled, arpeggio effect (00xy) position is reset on a new note.";
+    strings["Volume scaling rounds up##sgcf"].plurals[0] = "=Volume scaling rounds up";
+    strings["when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels##sgcf"].plurals[0] = "=when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels";
 
     //   sgdl  src/gui/dataList.cpp
 
@@ -3271,74 +3321,74 @@ void DivLocale::addTranslationsTemplate()
     strings["Unknown##sgut0"].plurals[0] = "=Unknown";
     strings["Unknown##sgut1"].plurals[0] = "=Unknown";
 
-/*  instruments
+    // instruments
+    //      icon   is the letter icon for the instrument
 
-    // # sgiPCMA   src/gui/inst/adpcma.cpp
-    // # sgiPCMB   src/gui/inst/adpcmb.cpp
-    // # sgiSAMPLE src/gui/inst/amiga.cpp
-    // # sgiAY     src/gui/inst/ay.cpp
-    // # sgi8930   src/gui/inst/ay8930.cpp
-    // # sgiB      src/gui/inst/beeper.cpp
-    // # sgiC140   src/gui/inst/c140.cpp
-    // # sgiC219   src/gui/inst/c219.cpp
-    // # sgiC64    src/gui/inst/c64.cpp
-    // # sgi5503   src/gui/inst/es5503.cpp
-    // # sgiOTTO   src/gui/inst/es5506.cpp
-    // # sgiESFM   src/gui/inst/esfm.cpp
-    // # sgiFDS    src/gui/inst/fds.cpp
+    //   sgi**     src/gui/inst/
+    //   sgiPCMA   src/gui/inst/adpcma.cpp
+    //   sgiPCMB   src/gui/inst/adpcmb.cpp
+    //   sgiSAMPLE src/gui/inst/amiga.cpp
+    //   sgiAY     src/gui/inst/ay.cpp
+    //   sgi8930   src/gui/inst/ay8930.cpp
+    //   sgiB      src/gui/inst/beeper.cpp
+    //   sgiC140   src/gui/inst/c140.cpp
+    //   sgiC219   src/gui/inst/c219.cpp
+    //   sgiC64    src/gui/inst/c64.cpp
+    //   sgi5503   src/gui/inst/es5503.cpp
+    //   sgiOTTO   src/gui/inst/es5506.cpp
+    //   sgiESFM   src/gui/inst/esfm.cpp
+    //   sgiFDS    src/gui/inst/fds.cpp
     //   sgifmeu   src/gui/inst/fmEnvUtil.cpp
-    // # sgifmeh   src/gui/inst/fmEnvUtil.h
-    // # sgiGA20   src/gui/inst/ga20.cpp
-    // # sgiGB     src/gui/inst/gb.cpp
-    // # sgiK00    src/gui/inst/k007232.cpp
-    // # sgiK05    src/gui/inst/k053260.cpp
-    // # sgimcd    src/gui/inst/macroDraw.cpp
-    // # sgimcdu   src/gui/inst/macroDrawUtil.cpp
-    // # sgiLYNX   src/gui/inst/mikey.cpp
-    // # sgi5232   src/gui/inst/msm5232.cpp
-    // # sgi6258   src/gui/inst/msm6258.cpp
-    // # sgi6295   src/gui/inst/msm6295.cpp
-    // # sgiMULPCM src/gui/inst/multipcm.cpp
-    // # sgiN163   src/gui/inst/n163.cpp
-    // # sgiWSG    src/gui/inst/namco.cpp
-    // # sgiNES    src/gui/inst/nes.cpp
-    // # sgiOPL    src/gui/inst/opl.cpp
-    // # sgiOPLL   src/gui/inst/opll.cpp
-    // # sgiOPM    src/gui/inst/opm.cpp
-    // # sgiOPN    src/gui/inst/opn.cpp
-    // # sgiOPZ    src/gui/inst/opz.cpp
-    // # sgiPCE    src/gui/inst/pce.cpp
-    // # sgiPET    src/gui/inst/pet.cpp
-    // # sgiPMQT   src/gui/inst/pokemini.cpp
-    // # sgiPOKEY  src/gui/inst/pokey.cpp
-    // # sgiPNN    src/gui/inst/powernoise.cpp
-    // # sgiPNS    src/gui/inst/powernoise_slope.cpp
-    // # sgiPV     src/gui/inst/pv1000.cpp
-    // # sgiQ      src/gui/inst/qsound.cpp
-    // # sgiRF5    src/gui/inst/rf5c68.cpp
-    // # sgiSAA    src/gui/inst/saa1099.cpp
-    // # sgismpd   src/gui/inst/sampleDraw.cpp
-    // # sgiSCC    src/gui/inst/scc.cpp
-    // # sgiSEGA   src/gui/inst/segapcm.cpp
-    // # sgiSM     src/gui/inst/sm8521.cpp
-    // # sgiSNES   src/gui/inst/snes.cpp
-    // # sgiPSG    src/gui/inst/std.cpp
-    // # sgistru   src/gui/inst/stringsUtil.cpp
-    // # sgiSU     src/gui/inst/su.cpp
-    // # sgiSWAN   src/gui/inst/swan.cpp
-    // # sgiT6W    src/gui/inst/t6w28.cpp
-    // # sgiTED    src/gui/inst/ted.cpp
-    // # sgiTIA    src/gui/inst/tia.cpp
-    // # sgiVB     src/gui/inst/vboy.cpp
-    // # sgiVERA   src/gui/inst/vera.cpp
-    // # sgiVIC    src/gui/inst/vic.cpp
-    // # sgiVRC6   src/gui/inst/vrc6.cpp
-    // # sgiVRC6S  src/gui/inst/vrc6saw.cpp
-    // # sgiwave   src/gui/inst/wavetable.cpp
-    // # sgiX1     src/gui/inst/x1_010.cpp
-    // # sgiYMZ    src/gui/inst/ymz280b.cpp
-
-*/
+    //   sgifmeh   src/gui/inst/fmEnvUtil.h
+    //   sgiGA20   src/gui/inst/ga20.cpp
+    //   sgiGB     src/gui/inst/gb.cpp
+    //   sgiK00    src/gui/inst/k007232.cpp
+    //   sgiK05    src/gui/inst/k053260.cpp
+    //   sgimcd    src/gui/inst/macroDraw.cpp
+    //   sgimcdu   src/gui/inst/macroDrawUtil.cpp
+    //   sgiLYNX   src/gui/inst/mikey.cpp
+    //   sgi5232   src/gui/inst/msm5232.cpp
+    //   sgi6258   src/gui/inst/msm6258.cpp
+    //   sgi6295   src/gui/inst/msm6295.cpp
+    //   sgiMULPCM src/gui/inst/multipcm.cpp
+    //   sgiN163   src/gui/inst/n163.cpp
+    //   sgiWSG    src/gui/inst/namco.cpp
+    //   sgiNES    src/gui/inst/nes.cpp
+    //   sgiOPL    src/gui/inst/opl.cpp
+    //   sgiOPLL   src/gui/inst/opll.cpp
+    //   sgiOPM    src/gui/inst/opm.cpp
+    //   sgiOPN    src/gui/inst/opn.cpp
+    //   sgiOPZ    src/gui/inst/opz.cpp
+    //   sgiPCE    src/gui/inst/pce.cpp
+    //   sgiPET    src/gui/inst/pet.cpp
+    //   sgiPMQT   src/gui/inst/pokemini.cpp
+    //   sgiPOKEY  src/gui/inst/pokey.cpp
+    //   sgiPNN    src/gui/inst/powernoise.cpp
+    //   sgiPNS    src/gui/inst/powernoise_slope.cpp
+    //   sgiPV     src/gui/inst/pv1000.cpp
+    //   sgiQ      src/gui/inst/qsound.cpp
+    //   sgiRF5    src/gui/inst/rf5c68.cpp
+    //   sgiSAA    src/gui/inst/saa1099.cpp
+    //   sgismpd   src/gui/inst/sampleDraw.cpp
+    //   sgiSCC    src/gui/inst/scc.cpp
+    //   sgiSEGA   src/gui/inst/segapcm.cpp
+    //   sgiSM     src/gui/inst/sm8521.cpp
+    //   sgiSNES   src/gui/inst/snes.cpp
+    //   sgiPSG    src/gui/inst/std.cpp
+    //   sgistru   src/gui/inst/stringsUtil.cpp
+    //   sgiSU     src/gui/inst/su.cpp
+    //   sgiSWAN   src/gui/inst/swan.cpp
+    //   sgiT6W    src/gui/inst/t6w28.cpp
+    //   sgiTED    src/gui/inst/ted.cpp
+    //   sgiTIA    src/gui/inst/tia.cpp
+    //   sgiVB     src/gui/inst/vboy.cpp
+    //   sgiVERA   src/gui/inst/vera.cpp
+    //   sgiVIC    src/gui/inst/vic.cpp
+    //   sgiVRC6   src/gui/inst/vrc6.cpp
+    //   sgiVRC6S  src/gui/inst/vrc6saw.cpp
+    //   sgiwave   src/gui/inst/wavetable.cpp
+    //   sgiX1     src/gui/inst/x1_010.cpp
+    //   sgiYMZ    src/gui/inst/ymz280b.cpp
 
     //   sgiPCMA  src/gui/inst/adpcma.cpp
 
@@ -4649,7 +4699,9 @@ void DivLocale::addTranslationsTemplate()
     strings["Panning##sgiYMZ"].plurals[0] = "=Panning";
     strings["Phase Reset##sgiYMZ"].plurals[0] = "=Phase Reset";
 
-    // no more instruments
+    //   se**    src/engine/
+    //   seen    src/engine/engine.cpp
+    //   sesd    src/engine/sysDef.cpp
 
     //   seen    src/engine/engine.cpp
 
@@ -4702,446 +4754,6 @@ void DivLocale::addTranslationsTemplate()
 
     //   sesd    src/engine/sysDef.cpp
 
-    strings["20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"].plurals[0] = "20xx: =Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)";
-    strings["21xx: Set noise frequency (0 to 1F)##sesd"].plurals[0] = "21xx: =Set noise frequency (0 to 1F)";
-    strings["22xy: Set envelope mode (x: shape, y: enable for this channel)##sesd"].plurals[0] = "22xy: =Set envelope mode (x: shape, y: enable for this channel)";
-    strings["23xx: Set envelope period low byte##sesd"].plurals[0] = "23xx: =Set envelope period low byte";
-    strings["24xx: Set envelope period high byte##sesd"].plurals[0] = "24xx: =Set envelope period high byte";
-    strings["25xx: Envelope slide up##sesd0"].plurals[0] = "25xx: =Envelope slide up";
-    strings["26xx: Envelope slide down##sesd0"].plurals[0] = "26xx: =Envelope slide down";
-    strings["29xy: Set auto-envelope (x: numerator; y: denominator)##sesd0"].plurals[0] = "29xy: =Set auto-envelope (x: numerator; y: denominator)";
-    strings["2Exx: Write to I/O port A##sesd"].plurals[0] = "2Exx: =Write to I/O port A";
-    strings["2Fxx: Write to I/O port B##sesd"].plurals[0] = "2Fxx: =Write to I/O port B";
-    strings["12xx: Set duty cycle (0 to 8)##sesd"].plurals[0] = "12xx: =Set duty cycle (0 to 8)";
-    strings["27xx: Set noise AND mask##sesd"].plurals[0] = "27xx: =Set noise AND mask";
-    strings["28xx: Set noise OR mask##sesd"].plurals[0] = "28xx: =Set noise OR mask";
-    strings["2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER##sesd"].plurals[0] = "2Dxx: =NOT TO BE EMPLOYED BY THE COMPOSER";
-    strings["30xx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "30xx: =Toggle hard envelope reset on new notes";
-    strings["18xx: Toggle extended channel 3 mode##sesd"].plurals[0] = "18xx: =Toggle extended channel 3 mode";
-    strings["17xx: Toggle PCM mode (LEGACY)##sesd0"].plurals[0] = "17xx: =Toggle PCM mode (LEGACY)";
-    strings["DFxx: Set sample playback direction (0: normal; 1: reverse)##sesd0"].plurals[0] = "DFxx: =Set sample playback direction (0: normal; 1: reverse)";
-    strings["18xx: Toggle drums mode (1: enabled; 0: disabled)##sesd"].plurals[0] = "18xx: =Toggle drums mode (1: enabled; 0: disabled)";
-    strings["11xx: Set feedback (0 to 7)##sesd0"].plurals[0] = "11xx: =Set feedback (0 to 7)";
-    strings["12xx: Set level of operator 1 (0 highest, 7F lowest)##sesd"].plurals[0] = "12xx: =Set level of operator 1 (0 highest, 7F lowest)";
-    strings["13xx: Set level of operator 2 (0 highest, 7F lowest)##sesd"].plurals[0] = "13xx: =Set level of operator 2 (0 highest, 7F lowest)";
-    strings["14xx: Set level of operator 3 (0 highest, 7F lowest)##sesd"].plurals[0] = "14xx: =Set level of operator 3 (0 highest, 7F lowest)";
-    strings["15xx: Set level of operator 4 (0 highest, 7F lowest)##sesd"].plurals[0] = "15xx: =Set level of operator 4 (0 highest, 7F lowest)";
-    strings["16xy: Set operator multiplier (x: operator from 1 to 4; y: multiplier)##sesd0"].plurals[0] = "16xy: =Set operator multiplier (x: operator from 1 to 4; y: multiplier)";
-    strings["19xx: Set attack of all operators (0 to 1F)##sesd"].plurals[0] = "19xx: =Set attack of all operators (0 to 1F)";
-    strings["1Axx: Set attack of operator 1 (0 to 1F)##sesd"].plurals[0] = "1Axx: =Set attack of operator 1 (0 to 1F)";
-    strings["1Bxx: Set attack of operator 2 (0 to 1F)##sesd"].plurals[0] = "1Bxx: =Set attack of operator 2 (0 to 1F)";
-    strings["1Cxx: Set attack of operator 3 (0 to 1F)##sesd"].plurals[0] = "1Cxx: =Set attack of operator 3 (0 to 1F)";
-    strings["1Dxx: Set attack of operator 4 (0 to 1F)##sesd"].plurals[0] = "1Dxx: =Set attack of operator 4 (0 to 1F)";
-    strings["50xy: Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)##sesd0"].plurals[0] = "50xy: =Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)";
-    strings["51xy: Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)##sesd0"].plurals[0] = "51xy: =Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)";
-    strings["52xy: Set release (x: operator from 1 to 4 (0 for all ops); y: release)##sesd0"].plurals[0] = "52xy: =Set release (x: operator from 1 to 4 (0 for all ops); y: release)";
-    strings["53xy: Set detune (x: operator from 1 to 4 (0 for all ops); y: detune where 3 is center)##sesd"].plurals[0] = "53xy: =Set detune (x: operator from 1 to 4 (0 for all ops); y: detune where 3 is center)";
-    strings["54xy: Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)##sesd0"].plurals[0] = "54xy: =Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)";
-    strings["56xx: Set decay of all operators (0 to 1F)##sesd"].plurals[0] = "56xx: =Set decay of all operators (0 to 1F)";
-    strings["57xx: Set decay of operator 1 (0 to 1F)##sesd"].plurals[0] = "57xx: =Set decay of operator 1 (0 to 1F)";
-    strings["58xx: Set decay of operator 2 (0 to 1F)##sesd"].plurals[0] = "58xx: =Set decay of operator 2 (0 to 1F)";
-    strings["59xx: Set decay of operator 3 (0 to 1F)##sesd"].plurals[0] = "59xx: =Set decay of operator 3 (0 to 1F)";
-    strings["5Axx: Set decay of operator 4 (0 to 1F)##sesd"].plurals[0] = "5Axx: =Set decay of operator 4 (0 to 1F)";
-    strings["5Bxx: Set decay 2 of all operators (0 to 1F)##sesd"].plurals[0] = "5Bxx: =Set decay 2 of all operators (0 to 1F)";
-    strings["5Cxx: Set decay 2 of operator 1 (0 to 1F)##sesd"].plurals[0] = "5Cxx: =Set decay 2 of operator 1 (0 to 1F)";
-    strings["5Dxx: Set decay 2 of operator 2 (0 to 1F)##sesd"].plurals[0] = "5Dxx: =Set decay 2 of operator 2 (0 to 1F)";
-    strings["5Exx: Set decay 2 of operator 3 (0 to 1F)##sesd"].plurals[0] = "5Exx: =Set decay 2 of operator 3 (0 to 1F)";
-    strings["5Fxx: Set decay 2 of operator 4 (0 to 1F)##sesd"].plurals[0] = "5Fxx: =Set decay 2 of operator 4 (0 to 1F)";
-    strings["10xx: Set noise frequency (xx: value; 0 disables noise)##sesd"].plurals[0] = "10xx: =Set noise frequency (xx: value; 0 disables noise)";
-    strings["17xx: Set LFO speed##sesd"].plurals[0] = "17xx: =Set LFO speed";
-    strings["18xx: Set LFO waveform (0 saw, 1 square, 2 triangle, 3 noise)##sesd"].plurals[0] = "18xx: =Set LFO waveform (0 saw, 1 square, 2 triangle, 3 noise)";
-    strings["1Exx: Set AM depth (0 to 7F)##sesd"].plurals[0] = "1Exx: =Set AM depth (0 to 7F)";
-    strings["1Fxx: Set PM depth (0 to 7F)##sesd"].plurals[0] = "1Fxx: =Set PM depth (0 to 7F)";
-    strings["55xy: Set detune 2 (x: operator from 1 to 4 (0 for all ops); y: detune from 0 to 3)##sesd"].plurals[0] = "55xy: =Set detune 2 (x: operator from 1 to 4 (0 for all ops); y: detune from 0 to 3)";
-    strings["24xx: Set LFO 2 speed##sesd"].plurals[0] = "24xx: =Set LFO 2 speed";
-    strings["25xx: Set LFO 2 waveform (0 saw, 1 square, 2 triangle, 3 noise)##sesd"].plurals[0] = "25xx: =Set LFO 2 waveform (0 saw, 1 square, 2 triangle, 3 noise)";
-    strings["26xx: Set AM 2 depth (0 to 7F)##sesd"].plurals[0] = "26xx: =Set AM 2 depth (0 to 7F)";
-    strings["27xx: Set PM 2 depth (0 to 7F)##sesd"].plurals[0] = "27xx: =Set PM 2 depth (0 to 7F)";
-    strings["28xy: Set reverb (x: operator from 1 to 4 (0 for all ops); y: reverb from 0 to 7)##sesd"].plurals[0] = "28xy: =Set reverb (x: operator from 1 to 4 (0 for all ops); y: reverb from 0 to 7)";
-    strings["2Axy: Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 7)##sesd0"].plurals[0] = "2Axy: =Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 7)";
-    strings["2Bxy: Set envelope generator shift (x: operator from 1 to 4 (0 for all ops); y: shift from 0 to 3)##sesd"].plurals[0] = "2Bxy: =Set envelope generator shift (x: operator from 1 to 4 (0 for all ops); y: shift from 0 to 3)";
-    strings["2Cxy: Set fine multiplier (x: operator from 1 to 4 (0 for all ops); y: fine)##sesd"].plurals[0] = "2Cxy: =Set fine multiplier (x: operator from 1 to 4 (0 for all ops); y: fine)";
-    strings["3xyy: Set fixed frequency of operator 1 (x: octave from 0 to 7; y: frequency)##sesd"].plurals[0] = "3xyy: =Set fixed frequency of operator 1 (x: octave from 0 to 7; y: frequency)";
-    strings["3xyy: Set fixed frequency of operator 2 (x: octave from 8 to F; y: frequency)##sesd"].plurals[0] = "3xyy: =Set fixed frequency of operator 2 (x: octave from 8 to F; y: frequency)";
-    strings["4xyy: Set fixed frequency of operator 3 (x: octave from 0 to 7; y: frequency)##sesd"].plurals[0] = "4xyy: =Set fixed frequency of operator 3 (x: octave from 0 to 7; y: frequency)";
-    strings["4xyy: Set fixed frequency of operator 4 (x: octave from 8 to F; y: frequency)##sesd"].plurals[0] = "4xyy: =Set fixed frequency of operator 4 (x: octave from 8 to F; y: frequency)";
-    strings["10xy: Setup LFO (x: enable; y: speed)##sesd"].plurals[0] = "10xy: =Setup LFO (x: enable; y: speed)";
-    strings["55xy: Set SSG envelope (x: operator from 1 to 4 (0 for all ops); y: 0-7 on, 8 off)##sesd"].plurals[0] = "55xy: =Set SSG envelope (x: operator from 1 to 4 (0 for all ops); y: 0-7 on, 8 off)";
-    strings["1Fxx: Set ADPCM-A global volume (0 to 3F)##sesd"].plurals[0] = "1Fxx: =Set ADPCM-A global volume (0 to 3F)";
-    strings["11xx: Set feedback (0 to 7)##sesd1"].plurals[0] = "11xx: =Set feedback (0 to 7)";
-    strings["12xx: Set level of operator 1 (0 highest, 3F lowest)##sesd0"].plurals[0] = "12xx: =Set level of operator 1 (0 highest, 3F lowest)";
-    strings["13xx: Set level of operator 2 (0 highest, 3F lowest)##sesd0"].plurals[0] = "13xx: =Set level of operator 2 (0 highest, 3F lowest)";
-    strings["16xy: Set operator multiplier (x: operator from 1 to 2; y: multiplier)##sesd"].plurals[0] = "16xy: =Set operator multiplier (x: operator from 1 to 2; y: multiplier)";
-    strings["19xx: Set attack of all operators (0 to F)##sesd0"].plurals[0] = "19xx: =Set attack of all operators (0 to F)";
-    strings["1Axx: Set attack of operator 1 (0 to F)##sesd0"].plurals[0] = "1Axx: =Set attack of operator 1 (0 to F)";
-    strings["1Bxx: Set attack of operator 2 (0 to F)##sesd0"].plurals[0] = "1Bxx: =Set attack of operator 2 (0 to F)";
-    strings["50xy: Set AM (x: operator from 1 to 2 (0 for all ops); y: AM)##sesd"].plurals[0] = "50xy: =Set AM (x: operator from 1 to 2 (0 for all ops); y: AM)";
-    strings["51xy: Set sustain level (x: operator from 1 to 2 (0 for all ops); y: sustain)##sesd"].plurals[0] = "51xy: =Set sustain level (x: operator from 1 to 2 (0 for all ops); y: sustain)";
-    strings["52xy: Set release (x: operator from 1 to 2 (0 for all ops); y: release)##sesd"].plurals[0] = "52xy: =Set release (x: operator from 1 to 2 (0 for all ops); y: release)";
-    strings["53xy: Set vibrato (x: operator from 1 to 2 (0 for all ops); y: enabled)##sesd"].plurals[0] = "53xy: =Set vibrato (x: operator from 1 to 2 (0 for all ops); y: enabled)";
-    strings["54xy: Set envelope scale (x: operator from 1 to 2 (0 for all ops); y: scale from 0 to 3)##sesd"].plurals[0] = "54xy: =Set envelope scale (x: operator from 1 to 2 (0 for all ops); y: scale from 0 to 3)";
-    strings["55xy: Set envelope sustain (x: operator from 1 to 2 (0 for all ops); y: enabled)##sesd"].plurals[0] = "55xy: =Set envelope sustain (x: operator from 1 to 2 (0 for all ops); y: enabled)";
-    strings["56xx: Set decay of all operators (0 to F)##sesd0"].plurals[0] = "56xx: =Set decay of all operators (0 to F)";
-    strings["57xx: Set decay of operator 1 (0 to F)##sesd0"].plurals[0] = "57xx: =Set decay of operator 1 (0 to F)";
-    strings["58xx: Set decay of operator 2 (0 to F)##sesd0"].plurals[0] = "58xx: =Set decay of operator 2 (0 to F)";
-    strings["5Bxy: Set whether key will scale envelope (x: operator from 1 to 2 (0 for all ops); y: enabled)##sesd"].plurals[0] = "5Bxy: =Set whether key will scale envelope (x: operator from 1 to 2 (0 for all ops); y: enabled)";
-    strings["10xx: Set global AM depth (0: 1dB, 1: 4.8dB)##sesd"].plurals[0] = "10xx: =Set global AM depth (0: 1dB, 1: 4.8dB)";
-    strings["11xx: Set feedback (0 to 7)##sesd2"].plurals[0] = "11xx: =Set feedback (0 to 7)";
-    strings["12xx: Set level of operator 1 (0 highest, 3F lowest)##sesd1"].plurals[0] = "12xx: =Set level of operator 1 (0 highest, 3F lowest)";
-    strings["13xx: Set level of operator 2 (0 highest, 3F lowest)##sesd1"].plurals[0] = "13xx: =Set level of operator 2 (0 highest, 3F lowest)";
-    strings["14xx: Set level of operator 3 (0 highest, 3F lowest)##sesd0"].plurals[0] = "14xx: =Set level of operator 3 (0 highest, 3F lowest)";
-    strings["15xx: Set level of operator 4 (0 highest, 3F lowest)##sesd0"].plurals[0] = "15xx: =Set level of operator 4 (0 highest, 3F lowest)";
-    strings["16xy: Set operator multiplier (x: operator from 1 to 4; y: multiplier)##sesd1"].plurals[0] = "16xy: =Set operator multiplier (x: operator from 1 to 4; y: multiplier)";
-    strings["17xx: Set global vibrato depth (0: normal, 1: double)##sesd"].plurals[0] = "17xx: =Set global vibrato depth (0: normal, 1: double)";
-    strings["19xx: Set attack of all operators (0 to F)##sesd1"].plurals[0] = "19xx: =Set attack of all operators (0 to F)";
-    strings["1Axx: Set attack of operator 1 (0 to F)##sesd1"].plurals[0] = "1Axx: =Set attack of operator 1 (0 to F)";
-    strings["1Bxx: Set attack of operator 2 (0 to F)##sesd1"].plurals[0] = "1Bxx: =Set attack of operator 2 (0 to F)";
-    strings["1Cxx: Set attack of operator 3 (0 to F)##sesd0"].plurals[0] = "1Cxx: =Set attack of operator 3 (0 to F)";
-    strings["1Dxx: Set attack of operator 4 (0 to F)##sesd0"].plurals[0] = "1Dxx: =Set attack of operator 4 (0 to F)";
-    strings["2Axy: Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 3 in OPL2 and 0 to 7 in OPL3)##sesd"].plurals[0] = "2Axy: =Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 3 in OPL2 and 0 to 7 in OPL3)";
-    strings["50xy: Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)##sesd1"].plurals[0] = "50xy: =Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)";
-    strings["51xy: Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)##sesd1"].plurals[0] = "51xy: =Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)";
-    strings["52xy: Set release (x: operator from 1 to 4 (0 for all ops); y: release)##sesd1"].plurals[0] = "52xy: =Set release (x: operator from 1 to 4 (0 for all ops); y: release)";
-    strings["53xy: Set vibrato (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd0"].plurals[0] = "53xy: =Set vibrato (x: operator from 1 to 4 (0 for all ops); y: enabled)";
-    strings["54xy: Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)##sesd1"].plurals[0] = "54xy: =Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)";
-    strings["55xy: Set envelope sustain (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd0"].plurals[0] = "55xy: =Set envelope sustain (x: operator from 1 to 4 (0 for all ops); y: enabled)";
-    strings["56xx: Set decay of all operators (0 to F)##sesd1"].plurals[0] = "56xx: =Set decay of all operators (0 to F)";
-    strings["57xx: Set decay of operator 1 (0 to F)##sesd1"].plurals[0] = "57xx: =Set decay of operator 1 (0 to F)";
-    strings["58xx: Set decay of operator 2 (0 to F)##sesd1"].plurals[0] = "58xx: =Set decay of operator 2 (0 to F)";
-    strings["59xx: Set decay of operator 3 (0 to F)##sesd0"].plurals[0] = "59xx: =Set decay of operator 3 (0 to F)";
-    strings["5Axx: Set decay of operator 4 (0 to F)##sesd0"].plurals[0] = "5Axx: =Set decay of operator 4 (0 to F)";
-    strings["5Bxy: Set whether key will scale envelope (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd0"].plurals[0] = "5Bxy: =Set whether key will scale envelope (x: operator from 1 to 4 (0 for all ops); y: enabled)";
-    strings["10xx: Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)##sesd"].plurals[0] = "10xx: =Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)";
-    strings["11xx: Set coarse cutoff (not recommended; use 4xxx instead)##sesd"].plurals[0] = "11xx: =Set coarse cutoff (not recommended; use 4xxx instead)";
-    strings["12xx: Set coarse pulse width (not recommended; use 3xxx instead)##sesd"].plurals[0] = "12xx: =Set coarse pulse width (not recommended; use 3xxx instead)";
-    strings["13xx: Set resonance (0 to F)##sesd"].plurals[0] = "13xx: =Set resonance (0 to F)";
-    strings["14xx: Set filter mode (bit 0: low pass; bit 1: band pass; bit 2: high pass)##sesd"].plurals[0] = "14xx: =Set filter mode (bit 0: low pass; bit 1: band pass; bit 2: high pass)";
-    strings["15xx: Set envelope reset time##sesd"].plurals[0] = "15xx: =Set envelope reset time";
-    strings["1Axx: Disable envelope reset for this channel (1 disables; 0 enables)##sesd"].plurals[0] = "1Axx: =Disable envelope reset for this channel (1 disables; 0 enables)";
-    strings["1Bxy: Reset cutoff (x: on new note; y: now)##sesd"].plurals[0] = "1Bxy: =Reset cutoff (x: on new note; y: now)";
-    strings["1Cxy: Reset pulse width (x: on new note; y: now)##sesd"].plurals[0] = "1Cxy: =Reset pulse width (x: on new note; y: now)";
-    strings["1Exy: Change other parameters (LEGACY)##sesd"].plurals[0] = "1Exy: =Change other parameters (LEGACY)";
-    strings["20xy: Set attack/decay (x: attack; y: decay)##sesd"].plurals[0] = "20xy: =Set attack/decay (x: attack; y: decay)";
-    strings["21xy: Set sustain/release (x: sustain; y: release)##sesd"].plurals[0] = "21xy: =Set sustain/release (x: sustain; y: release)";
-    strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "3xxx: =Set pulse width (0 to FFF)";
-    strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "4xxx: =Set cutoff (0 to 7FF)";
-    strings["10xx: Set waveform##sesd0"].plurals[0] = "10xx: =Set waveform";
-    strings["20xx: Set PCM frequency##sesd"].plurals[0] = "20xx: =Set PCM frequency";
-    strings["10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))##sesd"].plurals[0] = "10xy: =Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))";
-    strings["12xx: Set level of operator 1 (0 highest, 3F lowest)##sesd2"].plurals[0] = "12xx: =Set level of operator 1 (0 highest, 3F lowest)";
-    strings["13xx: Set level of operator 2 (0 highest, 3F lowest)##sesd2"].plurals[0] = "13xx: =Set level of operator 2 (0 highest, 3F lowest)";
-    strings["14xx: Set level of operator 3 (0 highest, 3F lowest)##sesd1"].plurals[0] = "14xx: =Set level of operator 3 (0 highest, 3F lowest)";
-    strings["15xx: Set level of operator 4 (0 highest, 3F lowest)##sesd1"].plurals[0] = "15xx: =Set level of operator 4 (0 highest, 3F lowest)";
-    strings["16xy: Set operator multiplier (x: operator from 1 to 4; y: multiplier)##sesd2"].plurals[0] = "16xy: =Set operator multiplier (x: operator from 1 to 4; y: multiplier)";
-    strings["17xy: Set vibrato depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: normal, 1: double))##sesd"].plurals[0] = "17xy: =Set vibrato depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: normal, 1: double))";
-    strings["19xx: Set attack of all operators (0 to F)##sesd"].plurals[0] = "19xx: =Set attack of all operators (0 to F)";
-    strings["1Axx: Set attack of operator 1 (0 to F)##sesd2"].plurals[0] = "1Axx: =Set attack of operator 1 (0 to F)";
-    strings["1Bxx: Set attack of operator 2 (0 to F)##sesd2"].plurals[0] = "1Bxx: =Set attack of operator 2 (0 to F)";
-    strings["1Cxx: Set attack of operator 3 (0 to F)##sesd1"].plurals[0] = "1Cxx: =Set attack of operator 3 (0 to F)";
-    strings["1Dxx: Set attack of operator 4 (0 to F)##sesd1"].plurals[0] = "1Dxx: =Set attack of operator 4 (0 to F)";
-    strings["20xy: Set panning of operator 1 (x: left; y: right)##sesd"].plurals[0] = "20xy: =Set panning of operator 1 (x: left; y: right)";
-    strings["21xy: Set panning of operator 2 (x: left; y: right)##sesd"].plurals[0] = "21xy: =Set panning of operator 2 (x: left; y: right)";
-    strings["22xy: Set panning of operator 3 (x: left; y: right)##sesd"].plurals[0] = "22xy: =Set panning of operator 3 (x: left; y: right)";
-    strings["23xy: Set panning of operator 4 (x: left; y: right)##sesd"].plurals[0] = "23xy: =Set panning of operator 4 (x: left; y: right)";
-    strings["24xy: Set output level register (x: operator from 1 to 4 (0 for all ops); y: level from 0 to 7)##sesd"].plurals[0] = "24xy: =Set output level register (x: operator from 1 to 4 (0 for all ops); y: level from 0 to 7)";
-    strings["25xy: Set modulation input level (x: operator from 1 to 4 (0 for all ops); y: level from 0 to 7)##sesd"].plurals[0] = "25xy: =Set modulation input level (x: operator from 1 to 4 (0 for all ops); y: level from 0 to 7)";
-    strings["26xy: Set envelope delay (x: operator from 1 to 4 (0 for all ops); y: delay from 0 to 7)##sesd"].plurals[0] = "26xy: =Set envelope delay (x: operator from 1 to 4 (0 for all ops); y: delay from 0 to 7)";
-    strings["27xx: Set noise mode for operator 4 (x: mode from 0 to 3)##sesd"].plurals[0] = "27xx: =Set noise mode for operator 4 (x: mode from 0 to 3)";
-    strings["2Axy: Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 7)##sesd1"].plurals[0] = "2Axy: =Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 7)";
-    strings["2Fxy: Set fixed frequency block (x: operator from 1 to 4; y: octave from 0 to 7)##sesd"].plurals[0] = "2Fxy: =Set fixed frequency block (x: operator from 1 to 4; y: octave from 0 to 7)";
-    strings["40xx: Set detune of operator 1 (80: center)##sesd"].plurals[0] = "40xx: =Set detune of operator 1 (80: center)";
-    strings["41xx: Set detune of operator 2 (80: center)##sesd"].plurals[0] = "41xx: =Set detune of operator 2 (80: center)";
-    strings["42xx: Set detune of operator 3 (80: center)##sesd"].plurals[0] = "42xx: =Set detune of operator 3 (80: center)";
-    strings["43xx: Set detune of operator 4 (80: center)##sesd"].plurals[0] = "43xx: =Set detune of operator 4 (80: center)";
-    strings["50xy: Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)##sesd2"].plurals[0] = "50xy: =Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)";
-    strings["51xy: Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)##sesd2"].plurals[0] = "51xy: =Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)";
-    strings["52xy: Set release (x: operator from 1 to 4 (0 for all ops); y: release)##sesd2"].plurals[0] = "52xy: =Set release (x: operator from 1 to 4 (0 for all ops); y: release)";
-    strings["53xy: Set vibrato (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd1"].plurals[0] = "53xy: =Set vibrato (x: operator from 1 to 4 (0 for all ops); y: enabled)";
-    strings["54xy: Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)##sesd2"].plurals[0] = "54xy: =Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)";
-    strings["55xy: Set envelope sustain (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd1"].plurals[0] = "55xy: =Set envelope sustain (x: operator from 1 to 4 (0 for all ops); y: enabled)";
-    strings["56xx: Set decay of all operators (0 to F)##sesd2"].plurals[0] = "56xx: =Set decay of all operators (0 to F)";
-    strings["57xx: Set decay of operator 1 (0 to F)##sesd2"].plurals[0] = "57xx: =Set decay of operator 1 (0 to F)";
-    strings["58xx: Set decay of operator 2 (0 to F)##sesd2"].plurals[0] = "58xx: =Set decay of operator 2 (0 to F)";
-    strings["59xx: Set decay of operator 3 (0 to F)##sesd1"].plurals[0] = "59xx: =Set decay of operator 3 (0 to F)";
-    strings["5Axx: Set decay of operator 4 (0 to F)##sesd1"].plurals[0] = "5Axx: =Set decay of operator 4 (0 to F)";
-    strings["5Bxy: Set whether key will scale envelope (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd1"].plurals[0] = "5Bxy: =Set whether key will scale envelope (x: operator from 1 to 4 (0 for all ops); y: enabled)";
-    strings["3xyy: Set fixed frequency F-num of operator 1 (x: high 2 bits from 0 to 3; y: low 8 bits of F-num)##sesd"].plurals[0] = "3xyy: =Set fixed frequency F-num of operator 1 (x: high 2 bits from 0 to 3; y: low 8 bits of F-num)";
-    strings["3xyy: Set fixed frequency F-num of operator 2 (x: high 2 bits from 4 to 7; y: low 8 bits of F-num)##sesd"].plurals[0] = "3xyy: =Set fixed frequency F-num of operator 2 (x: high 2 bits from 4 to 7; y: low 8 bits of F-num)";
-    strings["3xyy: Set fixed frequency F-num of operator 3 (x: high 2 bits from 8 to B; y: low 8 bits of F-num)##sesd"].plurals[0] = "3xyy: =Set fixed frequency F-num of operator 3 (x: high 2 bits from 8 to B; y: low 8 bits of F-num)";
-    strings["3xyy: Set fixed frequency F-num of operator 4 (x: high 2 bits from C to F; y: low 8 bits of F-num)##sesd"].plurals[0] = "3xyy: =Set fixed frequency F-num of operator 4 (x: high 2 bits from C to F; y: low 8 bits of F-num)";
-    strings["a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.##sesd"].plurals[0] = "=a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.";
-    strings["<COMPOUND SYSTEM!>##sesd0"].plurals[0] = "=<COMPOUND SYSTEM!>";
-    strings["<COMPOUND SYSTEM!>##sesd1"].plurals[0] = "=<COMPOUND SYSTEM!>";
-    strings["a square/noise sound chip found on the Sega Master System, ColecoVision, Tandy, TI's own 99/4A and a few other places.##sesd"].plurals[0] = "=a square/noise sound chip found on the Sega Master System, ColecoVision, Tandy, TI's own 99/4A and a few other places.";
-    strings["20xy: Set noise mode (x: preset freq/ch3 freq; y: thin pulse/noise)##sesd"].plurals[0] = "20xy: =Set noise mode (x: preset freq/ch3 freq; y: thin pulse/noise)";
-    strings["<COMPOUND SYSTEM!>##sesd2"].plurals[0] = "=<COMPOUND SYSTEM!>";
-    strings["the most popular portable game console of the era.##sesd"].plurals[0] = "=the most popular portable game console of the era.";
-    strings["10xx: Set waveform##sesd1"].plurals[0] = "10xx: =Set waveform";
-    strings["11xx: Set noise length (0: long; 1: short)##sesd"].plurals[0] = "11xx: =Set noise length (0: long; 1: short)";
-    strings["12xx: Set duty cycle (0 to 3)##sesd"].plurals[0] = "12xx: =Set duty cycle (0 to 3)";
-    strings["13xy: Setup sweep (x: time; y: shift)##sesd"].plurals[0] = "13xy: =Setup sweep (x: time; y: shift)";
-    strings["14xx: Set sweep direction (0: up; 1: down)##sesd"].plurals[0] = "14xx: =Set sweep direction (0: up; 1: down)";
-    strings["an '80s game console with a wavetable sound chip, popular in Japan.##sesd"].plurals[0] = "=an '80s game console with a wavetable sound chip, popular in Japan.";
-    strings["10xx: Set waveform##sesd2"].plurals[0] = "10xx: =Set waveform";
-    strings["11xx: Toggle noise mode##sesd0"].plurals[0] = "11xx: =Toggle noise mode";
-    strings["12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)##sesd"].plurals[0] = "12xx: =Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)";
-    strings["13xx: Set LFO speed##sesd"].plurals[0] = "13xx: =Set LFO speed";
-    strings["17xx: Toggle PCM mode (LEGACY)##sesd1"].plurals[0] = "17xx: =Toggle PCM mode (LEGACY)";
-    strings["also known as Famicom in Japan, it's the most well-known game console of the '80s.##sesd"].plurals[0] = "=also known as Famicom in Japan, it's the most well-known game console of the '80s.";
-    strings["11xx: Write to delta modulation counter (0 to 7F)##sesd"].plurals[0] = "11xx: =Write to delta modulation counter (0 to 7F)";
-    strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd0"].plurals[0] = "12xx: =Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)";
-    strings["13xy: Sweep up (x: time; y: shift)##sesd"].plurals[0] = "13xy: =Sweep up (x: time; y: shift)";
-    strings["14xy: Sweep down (x: time; y: shift)##sesd"].plurals[0] = "14xy: =Sweep down (x: time; y: shift)";
-    strings["15xx: Set envelope mode (0: envelope, 1: length, 2: looping, 3: constant)##sesd"].plurals[0] = "15xx: =Set envelope mode (0: envelope, 1: length, 2: looping, 3: constant)";
-    strings["16xx: Set length counter (refer to manual for a list of values)##sesd"].plurals[0] = "16xx: =Set length counter (refer to manual for a list of values)";
-    strings["17xx: Set frame counter mode (0: 4-step, 1: 5-step)##sesd"].plurals[0] = "17xx: =Set frame counter mode (0: 4-step, 1: 5-step)";
-    strings["18xx: Select PCM/DPCM mode (0: PCM; 1: DPCM)##sesd"].plurals[0] = "18xx: =Select PCM/DPCM mode (0: PCM; 1: DPCM)";
-    strings["19xx: Set triangle linear counter (0 to 7F; 80 and higher halt)##sesd"].plurals[0] = "19xx: =Set triangle linear counter (0 to 7F; 80 and higher halt)";
-    strings["20xx: Set DPCM frequency (0 to F)##sesd"].plurals[0] = "20xx: =Set DPCM frequency (0 to F)";
-    strings["<COMPOUND SYSTEM!>##sesd3"].plurals[0] = "=<COMPOUND SYSTEM!>";
-    strings["<COMPOUND SYSTEM!>##sesd4"].plurals[0] = "=<COMPOUND SYSTEM!>";
-    strings["this computer is powered by the SID chip, which had synthesizer features like a filter and ADSR.##sesd"].plurals[0] = "=this computer is powered by the SID chip, which had synthesizer features like a filter and ADSR.";
-    strings["this computer is powered by the SID chip, which had synthesizer features like a filter and ADSR.\nthis is the newer revision of the chip.##sesd"].plurals[0] = "=this computer is powered by the SID chip, which had synthesizer features like a filter and ADSR.\nthis is the newer revision of the chip.";
-    strings["<COMPOUND SYSTEM!>##sesd5"].plurals[0] = "=<COMPOUND SYSTEM!>";
-    strings["like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect the pins.##sesd"].plurals[0] = "=like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect the pins.";
-    strings["like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect the pins.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.##sesd"].plurals[0] = "=like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect the pins.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.";
-    strings["this chip is everywhere! ZX Spectrum, MSX, Amstrad CPC, Intellivision, Vectrex...\nthe discovery of envelope bass helped it beat the SN76489 with ease.##sesd"].plurals[0] = "=this chip is everywhere! ZX Spectrum, MSX, Amstrad CPC, Intellivision, Vectrex...\nthe discovery of envelope bass helped it beat the SN76489 with ease.";
-    strings["a computer from the '80s with full sampling capabilities, giving it a sound ahead of its time.##sesd"].plurals[0] = "=a computer from the '80s with full sampling capabilities, giving it a sound ahead of its time.";
-    strings["10xx: Toggle filter (0 disables; 1 enables)##sesd"].plurals[0] = "10xx: =Toggle filter (0 disables; 1 enables)";
-    strings["11xx: Toggle AM with next channel##sesd"].plurals[0] = "11xx: =Toggle AM with next channel";
-    strings["12xx: Toggle period modulation with next channel##sesd"].plurals[0] = "12xx: =Toggle period modulation with next channel";
-    strings["13xx: Set waveform##sesd"].plurals[0] = "13xx: =Set waveform";
-    strings["this was Yamaha's first integrated FM chip.\nit was used in several synthesizers, computers and arcade boards.##sesd"].plurals[0] = "=this was Yamaha's first integrated FM chip.\nit was used in several synthesizers, computers and arcade boards.";
-    strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).";
-    strings["it's a challenge to make music on this chip which barely has musical capabilities...##sesd"].plurals[0] = "=it's a challenge to make music on this chip which barely has musical capabilities...";
-    strings["supposedly an upgrade from the AY-3-8910, this was present on the Creative Music System (Game Blaster) and SAM Coupé.##sesd"].plurals[0] = "=supposedly an upgrade from the AY-3-8910, this was present on the Creative Music System (Game Blaster) and SAM Coupé.";
-    strings["10xy: Set channel mode (x: noise; y: tone)##sesd"].plurals[0] = "10xy: =Set channel mode (x: noise; y: tone)";
-    strings["11xx: Set noise frequency##sesd"].plurals[0] = "11xx: =Set noise frequency";
-    strings["12xx: Setup envelope (refer to docs for more information)##sesd"].plurals[0] = "12xx: =Setup envelope (refer to docs for more information)";
-    strings["an improved version of the AY-3-8910 with a bigger frequency range, duty cycles, configurable noise and per-channel envelopes!##sesd"].plurals[0] = "=an improved version of the AY-3-8910 with a bigger frequency range, duty cycles, configurable noise and per-channel envelopes!";
-    strings["Commodore's successor to the PET.\nits square wave channels are more than just square...##sesd"].plurals[0] = "=Commodore's successor to the PET.\nits square wave channels are more than just square...";
-    strings["one channel of 1-bit wavetable which is better (and worse) than the PC Speaker.##sesd"].plurals[0] = "=one channel of 1-bit wavetable which is better (and worse) than the PC Speaker.";
-    strings["FM? nah... samples! Nintendo's answer to Sega.##sesd"].plurals[0] = "=FM? nah... samples! Nintendo's answer to Sega.";
-    strings["18xx: Enable echo buffer##sesd"].plurals[0] = "18xx: =Enable echo buffer";
-    strings["19xx: Set echo delay (0 to F)##sesd"].plurals[0] = "19xx: =Set echo delay (0 to F)";
-    strings["1Axx: Set left echo volume##sesd"].plurals[0] = "1Axx: =Set left echo volume";
-    strings["1Bxx: Set right echo volume##sesd"].plurals[0] = "1Bxx: =Set right echo volume";
-    strings["1Cxx: Set echo feedback##sesd"].plurals[0] = "1Cxx: =Set echo feedback";
-    strings["1Exx: Set dry output volume (left)##sesd"].plurals[0] = "1Exx: =Set dry output volume (left)";
-    strings["1Fxx: Set dry output volume (right)##sesd"].plurals[0] = "1Fxx: =Set dry output volume (right)";
-    strings["30xx: Set echo filter coefficient 0##sesd"].plurals[0] = "30xx: =Set echo filter coefficient 0";
-    strings["31xx: Set echo filter coefficient 1##sesd"].plurals[0] = "31xx: =Set echo filter coefficient 1";
-    strings["32xx: Set echo filter coefficient 2##sesd"].plurals[0] = "32xx: =Set echo filter coefficient 2";
-    strings["33xx: Set echo filter coefficient 3##sesd"].plurals[0] = "33xx: =Set echo filter coefficient 3";
-    strings["34xx: Set echo filter coefficient 4##sesd"].plurals[0] = "34xx: =Set echo filter coefficient 4";
-    strings["35xx: Set echo filter coefficient 5##sesd"].plurals[0] = "35xx: =Set echo filter coefficient 5";
-    strings["36xx: Set echo filter coefficient 6##sesd"].plurals[0] = "36xx: =Set echo filter coefficient 6";
-    strings["37xx: Set echo filter coefficient 7##sesd"].plurals[0] = "37xx: =Set echo filter coefficient 7";
-    strings["10xx: Set waveform##sesd3"].plurals[0] = "10xx: =Set waveform";
-    strings["11xx: Toggle noise mode##sesd1"].plurals[0] = "11xx: =Toggle noise mode";
-    strings["12xx: Toggle echo on this channel##sesd"].plurals[0] = "12xx: =Toggle echo on this channel";
-    strings["13xx: Toggle pitch modulation##sesd"].plurals[0] = "13xx: =Toggle pitch modulation";
-    strings["14xy: Toggle invert (x: left; y: right)##sesd"].plurals[0] = "14xy: =Toggle invert (x: left; y: right)";
-    strings["15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)##sesd"].plurals[0] = "15xx: =Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)";
-    strings["16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)##sesd"].plurals[0] = "16xx: =Set gain (00 to 7F if direct; 00 to 1F otherwise)";
-    strings["1Dxx: Set noise frequency (00 to 1F)##sesd"].plurals[0] = "1Dxx: =Set noise frequency (00 to 1F)";
-    strings["20xx: Set attack (0 to F)##sesd"].plurals[0] = "20xx: =Set attack (0 to F)";
-    strings["21xx: Set decay (0 to 7)##sesd"].plurals[0] = "21xx: =Set decay (0 to 7)";
-    strings["22xx: Set sustain (0 to 7)##sesd"].plurals[0] = "22xx: =Set sustain (0 to 7)";
-    strings["23xx: Set release (00 to 1F)##sesd"].plurals[0] = "23xx: =Set release (00 to 1F)";
-    strings["an expansion chip for the Famicom, featuring a quirky sawtooth channel.##sesd"].plurals[0] = "=an expansion chip for the Famicom, featuring a quirky sawtooth channel.";
-    strings["12xx: Set duty cycle (pulse: 0 to 7)##sesd"].plurals[0] = "12xx: =Set duty cycle (pulse: 0 to 7)";
-    strings["17xx: Toggle PCM mode (LEGACY)##sesd2"].plurals[0] = "17xx: =Toggle PCM mode (LEGACY)";
-    strings["cost-reduced version of the OPL with 16 patches and only one of them is user-configurable.##sesd"].plurals[0] = "=cost-reduced version of the OPL with 16 patches and only one of them is user-configurable.";
-    strings["a disk drive for the Famicom which also contains one wavetable channel.##sesd"].plurals[0] = "=a disk drive for the Famicom which also contains one wavetable channel.";
-    strings["10xx: Set waveform##sesd4"].plurals[0] = "10xx: =Set waveform";
-    strings["11xx: Set modulation depth##sesd"].plurals[0] = "11xx: =Set modulation depth";
-    strings["12xy: Set modulation speed high byte (x: enable; y: value)##sesd"].plurals[0] = "12xy: =Set modulation speed high byte (x: enable; y: value)";
-    strings["13xx: Set modulation speed low byte##sesd"].plurals[0] = "13xx: =Set modulation speed low byte";
-    strings["14xx: Set modulator position##sesd"].plurals[0] = "14xx: =Set modulator position";
-    strings["15xx: Set modulator table to waveform##sesd"].plurals[0] = "15xx: =Set modulator table to waveform";
-    strings["an expansion chip for the Famicom, featuring a little-known PCM channel.##sesd"].plurals[0] = "=an expansion chip for the Famicom, featuring a little-known PCM channel.";
-    strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd1"].plurals[0] = "12xx: =Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)";
-    strings["an expansion chip for the Famicom, with full wavetable.##sesd"].plurals[0] = "=an expansion chip for the Famicom, with full wavetable.";
-    strings["18xx: Change channel limits (0 to 7, x + 1)##sesd"].plurals[0] = "18xx: =Change channel limits (0 to 7, x + 1)";
-    strings["20xx: Load a waveform into memory##sesd"].plurals[0] = "20xx: =Load a waveform into memory";
-    strings["21xx: Set position for wave load##sesd"].plurals[0] = "21xx: =Set position for wave load";
-    strings["10xx: Select waveform##sesd"].plurals[0] = "10xx: =Select waveform";
-    strings["11xx: Set waveform position in RAM##sesd"].plurals[0] = "11xx: =Set waveform position in RAM";
-    strings["12xx: Set waveform length in RAM (04 to FC in steps of 4)##sesd"].plurals[0] = "12xx: =Set waveform length in RAM (04 to FC in steps of 4)";
-    strings["15xx: Set waveform load position##sesd"].plurals[0] = "15xx: =Set waveform load position";
-    strings["16xx: Set waveform load length (04 to FC in steps of 4)##sesd"].plurals[0] = "16xx: =Set waveform load length (04 to FC in steps of 4)";
-    strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)##sesd"].plurals[0] = "=cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)";
-    strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies##sesd"].plurals[0] = "=cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies";
-    strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "=cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.";
-    strings["OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.##sesd"].plurals[0] = "=OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.";
-    strings["OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.##sesd"].plurals[0] = "=OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.";
-    strings["OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "=OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.";
-    strings["OPN, but what if you only had two operators, no stereo, no detune and a lower ADSR parameter range?##sesd"].plurals[0] = "=OPN, but what if you only had two operators, no stereo, no detune and a lower ADSR parameter range?";
-    strings["OPL, but what if you had more waveforms to choose than the normal sine?##sesd"].plurals[0] = "=OPL, but what if you had more waveforms to choose than the normal sine?";
-    strings["OPL2, but what if you had twice the channels, 4-op mode, stereo and even more waveforms?##sesd"].plurals[0] = "=OPL2, but what if you had twice the channels, 4-op mode, stereo and even more waveforms?";
-    strings["how many channels of PCM do you want?\nMultiPCM: yes##sesd"].plurals[0] = "=how many channels of PCM do you want?\nMultiPCM: yes";
-    strings["good luck! you get one square and no volume control.##sesd"].plurals[0] = "=good luck! you get one square and no volume control.";
-    strings["please don't use this chip. it was added as a joke.##sesd"].plurals[0] = "=please don't use this chip. it was added as a joke.";
-    strings["TIA, but better and more flexible.\nused in the Atari 8-bit family of computers (400/800/XL/XE).##sesd"].plurals[0] = "=TIA, but better and more flexible.\nused in the Atari 8-bit family of computers (400/800/XL/XE).";
-    strings["10xx: Set waveform (0 to 7)##sesd0"].plurals[0] = "10xx: =Set waveform (0 to 7)";
-    strings["11xx: Set AUDCTL##sesd"].plurals[0] = "11xx: =Set AUDCTL";
-    strings["12xx: Toggle two-tone mode##sesd"].plurals[0] = "12xx: =Toggle two-tone mode";
-    strings["this is like SNES' sound chip but without interpolation and the rest of nice bits.##sesd"].plurals[0] = "=this is like SNES' sound chip but without interpolation and the rest of nice bits.";
-    strings["developed by the makers of the Game Boy and the Virtual Boy...##sesd"].plurals[0] = "=developed by the makers of the Game Boy and the Virtual Boy...";
-    strings["10xx: Set waveform##sesd5"].plurals[0] = "10xx: =Set waveform";
-    strings["11xx: Setup noise mode (0: disabled; 1-8: enabled/tap)##sesd"].plurals[0] = "11xx: =Setup noise mode (0: disabled; 1-8: enabled/tap)";
-    strings["12xx: Setup sweep period (0: disabled; 1-20: enabled/period)##sesd"].plurals[0] = "12xx: =Setup sweep period (0: disabled; 1-20: enabled/period)";
-    strings["13xx: Set sweep amount##sesd"].plurals[0] = "13xx: =Set sweep amount";
-    strings["17xx: Toggle PCM mode (LEGACY)##sesd3"].plurals[0] = "17xx: =Toggle PCM mode (LEGACY)";
-    strings["like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.##sesd"].plurals[0] = "=like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.";
-    strings["2Fxx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "2Fxx: =Toggle hard envelope reset on new notes";
-    strings["this one is like PC Speaker but has duty cycles.##sesd"].plurals[0] = "=this one is like PC Speaker but has duty cycles.";
-    strings["used in some Sega arcade boards (like OutRun), and usually paired with a YM2151.##sesd"].plurals[0] = "=used in some Sega arcade boards (like OutRun), and usually paired with a YM2151.";
-    strings["a console which failed to sell well due to its headache-inducing features.##sesd"].plurals[0] = "=a console which failed to sell well due to its headache-inducing features.";
-    strings["10xx: Set waveform##sesd6"].plurals[0] = "10xx: =Set waveform";
-    strings["11xx: Set noise length (0 to 7)##sesd"].plurals[0] = "11xx: =Set noise length (0 to 7)";
-    strings["12xy: Setup envelope (x: enabled/loop (1: enable, 3: enable+loop); y: speed/direction (0-7: down, 8-F: up))##sesd"].plurals[0] = "12xy: =Setup envelope (x: enabled/loop (1: enable, 3: enable+loop); y: speed/direction (0-7: down, 8-F: up))";
-    strings["13xy: Setup sweep (x: speed; y: shift; channel 5 only)##sesd"].plurals[0] = "13xy: =Setup sweep (x: speed; y: shift; channel 5 only)";
-    strings["14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)##sesd"].plurals[0] = "14xy: =Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)";
-    strings["15xx: Set modulation waveform (x: wavetable; channel 5 only)##sesd"].plurals[0] = "15xx: =Set modulation waveform (x: wavetable; channel 5 only)";
-    strings["like OPLL, but even more cost reductions applied. three less FM channels, and no drums mode...##sesd"].plurals[0] = "=like OPLL, but even more cost reductions applied. three less FM channels, and no drums mode...";
-    strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.##sesd"].plurals[0] = "=so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.";
-    strings["the ZX Spectrum only had a basic beeper capable of...\n...a bunch of thin pulses and tons of other interesting stuff!\nFurnace provides a thin pulse system.##sesd"].plurals[0] = "=the ZX Spectrum only had a basic beeper capable of...\n...a bunch of thin pulses and tons of other interesting stuff!\nFurnace provides a thin pulse system.";
-    strings["12xx: Set pulse width##sesd0"].plurals[0] = "12xx: =Set pulse width";
-    strings["17xx: Trigger overlay drum##sesd"].plurals[0] = "17xx: =Trigger overlay drum";
-    strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.";
-    strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis one includes CSM mode control for special effects on Channel 3.";
-    strings["a wavetable chip made by Konami for use with the MSX.\nthe last channel shares its wavetable with the previous one though.##sesd"].plurals[0] = "=a wavetable chip made by Konami for use with the MSX.\nthe last channel shares its wavetable with the previous one though.";
-    strings["the OPL chip but with drums mode enabled.##sesd"].plurals[0] = "=the OPL chip but with drums mode enabled.";
-    strings["the OPL2 chip but with drums mode enabled.##sesd"].plurals[0] = "=the OPL2 chip but with drums mode enabled.";
-    strings["the OPL3 chip but with drums mode enabled.##sesd"].plurals[0] = "=the OPL3 chip but with drums mode enabled.";
-    strings["this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.##sesd"].plurals[0] = "=this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.";
-    strings["this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.##sesd"].plurals[0] = "=this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.";
-    strings["this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 2.##sesd"].plurals[0] = "=this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 2.";
-    strings["the OPLL chip but with drums mode turned on.##sesd"].plurals[0] = "=the OPLL chip but with drums mode turned on.";
-    strings["3xxx: Load LFSR (0 to FFF)##sesd"].plurals[0] = "3xxx: =Load LFSR (0 to FFF)";
-    strings["a portable console made by Atari. it has all of Atari's trademark waveforms.##sesd"].plurals[0] = "=a portable console made by Atari. it has all of Atari's trademark waveforms.";
-    strings["10xx: Set echo feedback level (00 to FF)##sesd"].plurals[0] = "10xx: =Set echo feedback level (00 to FF)";
-    strings["11xx: Set channel echo level (00 to FF)##sesd"].plurals[0] = "11xx: =Set channel echo level (00 to FF)";
-    strings["12xx: Toggle QSound algorithm (0: disabled; 1: enabled)##sesd"].plurals[0] = "12xx: =Toggle QSound algorithm (0: disabled; 1: enabled)";
-    strings["3xxx: Set echo delay buffer length (000 to AA5)##sesd"].plurals[0] = "3xxx: =Set echo delay buffer length (000 to AA5)";
-    strings["used in some of Capcom's arcade boards. surround-like sampled sound with echo.##sesd"].plurals[0] = "=used in some of Capcom's arcade boards. surround-like sampled sound with echo.";
-    strings["the chip used in a computer design created by The 8-Bit Guy.##sesd"].plurals[0] = "=the chip used in a computer design created by The 8-Bit Guy.";
-    strings["20xx: Set waveform##sesd"].plurals[0] = "20xx: =Set waveform";
-    strings["22xx: Set duty cycle (0 to 3F)##sesd"].plurals[0] = "22xx: =Set duty cycle (0 to 3F)";
-    strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.##sesd"].plurals[0] = "=so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.";
-    strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "=so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.";
-    strings["this is the same thing as SegaPCM, but only exposes 5 of the channels for compatibility with DefleMask.##sesd"].plurals[0] = "=this is the same thing as SegaPCM, but only exposes 5 of the channels for compatibility with DefleMask.";
-    strings["a sound chip used in several Seta/Allumer-manufactured arcade boards with too many channels of wavetable sound, which also are capable of sampled sound.##sesd"].plurals[0] = "=a sound chip used in several Seta/Allumer-manufactured arcade boards with too many channels of wavetable sound, which also are capable of sampled sound.";
-    strings["10xx: Set waveform##sesd7"].plurals[0] = "10xx: =Set waveform";
-    strings["11xx: Set envelope shape##sesd"].plurals[0] = "11xx: =Set envelope shape";
-    strings["12xx: Set sample bank slot (0 to 7)##sesd"].plurals[0] = "12xx: =Set sample bank slot (0 to 7)";
-    strings["17xx: Toggle PCM mode (LEGACY)##sesd4"].plurals[0] = "17xx: =Toggle PCM mode (LEGACY)";
-    strings["20xx: Set PCM frequency (1 to FF)##sesd"].plurals[0] = "20xx: =Set PCM frequency (1 to FF)";
-    strings["22xx: Set envelope mode (bit 0: enable; bit 1: one-shot; bit 2: split shape to L/R; bit 3/5: H.invert right/left; bit 4/6: V.invert right/left)##sesd"].plurals[0] = "22xx: =Set envelope mode (bit 0: enable; bit 1: one-shot; bit 2: split shape to L/R; bit 3/5: H.invert right/left; bit 4/6: V.invert right/left)";
-    strings["23xx: Set envelope period##sesd"].plurals[0] = "23xx: =Set envelope period";
-    strings["25xx: Envelope slide up##sesd1"].plurals[0] = "25xx: =Envelope slide up";
-    strings["26xx: Envelope slide down##sesd1"].plurals[0] = "26xx: =Envelope slide down";
-    strings["29xy: Set auto-envelope (x: numerator; y: denominator)##sesd1"].plurals[0] = "29xy: =Set auto-envelope (x: numerator; y: denominator)";
-    strings["this is the wavetable part of the Bubble System, which also had two AY-3-8910s.##sesd"].plurals[0] = "=this is the wavetable part of the Bubble System, which also had two AY-3-8910s.";
-    strings["like OPL3, but this time it also has a 24-channel version of MultiPCM.##sesd"].plurals[0] = "=like OPL3, but this time it also has a 24-channel version of MultiPCM.";
-    strings["the OPL4 but with drums mode turned on.##sesd"].plurals[0] = "=the OPL4 but with drums mode turned on.";
-    strings["11xx: Set filter mode (00 to 03)##sesd"].plurals[0] = "11xx: =Set filter mode (00 to 03)";
-    strings["14xx: Set filter coefficient K1 low byte (00 to FF)##sesd"].plurals[0] = "14xx: =Set filter coefficient K1 low byte (00 to FF)";
-    strings["15xx: Set filter coefficient K1 high byte (00 to FF)##sesd"].plurals[0] = "15xx: =Set filter coefficient K1 high byte (00 to FF)";
-    strings["16xx: Set filter coefficient K2 low byte (00 to FF)##sesd"].plurals[0] = "16xx: =Set filter coefficient K2 low byte (00 to FF)";
-    strings["17xx: Set filter coefficient K2 high byte (00 to FF)##sesd"].plurals[0] = "17xx: =Set filter coefficient K2 high byte (00 to FF)";
-    strings["18xx: Set filter coefficient K1 slide up (00 to FF)##sesd"].plurals[0] = "18xx: =Set filter coefficient K1 slide up (00 to FF)";
-    strings["19xx: Set filter coefficient K1 slide down (00 to FF)##sesd"].plurals[0] = "19xx: =Set filter coefficient K1 slide down (00 to FF)";
-    strings["1Axx: Set filter coefficient K2 slide up (00 to FF)##sesd"].plurals[0] = "1Axx: =Set filter coefficient K2 slide up (00 to FF)";
-    strings["1Bxx: Set filter coefficient K2 slide down (00 to FF)##sesd"].plurals[0] = "1Bxx: =Set filter coefficient K2 slide down (00 to FF)";
-    strings["22xx: Set envelope left volume ramp (signed) (00 to FF)##sesd"].plurals[0] = "22xx: =Set envelope left volume ramp (signed) (00 to FF)";
-    strings["23xx: Set envelope right volume ramp (signed) (00 to FF)##sesd"].plurals[0] = "23xx: =Set envelope right volume ramp (signed) (00 to FF)";
-    strings["24xx: Set envelope filter coefficient k1 ramp (signed) (00 to FF)##sesd"].plurals[0] = "24xx: =Set envelope filter coefficient k1 ramp (signed) (00 to FF)";
-    strings["25xx: Set envelope filter coefficient k1 ramp (signed, slower) (00 to FF)##sesd"].plurals[0] = "25xx: =Set envelope filter coefficient k1 ramp (signed, slower) (00 to FF)";
-    strings["26xx: Set envelope filter coefficient k2 ramp (signed) (00 to FF)##sesd"].plurals[0] = "26xx: =Set envelope filter coefficient k2 ramp (signed) (00 to FF)";
-    strings["27xx: Set envelope filter coefficient k2 ramp (signed, slower) (00 to FF)##sesd"].plurals[0] = "27xx: =Set envelope filter coefficient k2 ramp (signed, slower) (00 to FF)";
-    strings["DFxx: Set sample playback direction (0: normal; 1: reverse)##sesd1"].plurals[0] = "DFxx: =Set sample playback direction (0: normal; 1: reverse)";
-    strings["120x: Set pause (bit 0)##sesd"].plurals[0] = "120x: =Set pause (bit 0)";
-    strings["2xxx: Set envelope count (000 to 1FF)##sesd"].plurals[0] = "2xxx: =Set envelope count (000 to 1FF)";
-    strings["3xxx: Set filter coefficient K1 (000 to FFF)##sesd"].plurals[0] = "3xxx: =Set filter coefficient K1 (000 to FFF)";
-    strings["4xxx: Set filter coefficient K2 (000 to FFF)##sesd"].plurals[0] = "4xxx: =Set filter coefficient K2 (000 to FFF)";
-    strings["a sample chip made by Ensoniq, which is the basis for the GF1 chip found in Gravis' Ultrasound cards.##sesd"].plurals[0] = "=a sample chip made by Ensoniq, which is the basis for the GF1 chip found in Gravis' Ultrasound cards.";
-    strings["like OPL but with an ADPCM channel.##sesd"].plurals[0] = "=like OPL but with an ADPCM channel.";
-    strings["the Y8950 chip, in drums mode.##sesd"].plurals[0] = "=the Y8950 chip, in drums mode.";
-    strings["this is a variant of Konami's SCC chip with the last channel's wavetable being independent.##sesd"].plurals[0] = "=this is a variant of Konami's SCC chip with the last channel's wavetable being independent.";
-    strings["10xx: Set waveform (0 to 7)##sesd1"].plurals[0] = "10xx: =Set waveform (0 to 7)";
-    strings["12xx: Set pulse width (0 to 7F)##sesd"].plurals[0] = "12xx: =Set pulse width (0 to 7F)";
-    strings["13xx: Set resonance (0 to FF)##sesd"].plurals[0] = "13xx: =Set resonance (0 to FF)";
-    strings["14xx: Set filter mode (bit 0: ring mod; bit 1: low pass; bit 2: high pass; bit 3: band pass)##sesd"].plurals[0] = "14xx: =Set filter mode (bit 0: ring mod; bit 1: low pass; bit 2: high pass; bit 3: band pass)";
-    strings["15xx: Set frequency sweep period low byte##sesd"].plurals[0] = "15xx: =Set frequency sweep period low byte";
-    strings["16xx: Set frequency sweep period high byte##sesd"].plurals[0] = "16xx: =Set frequency sweep period high byte";
-    strings["17xx: Set volume sweep period low byte##sesd"].plurals[0] = "17xx: =Set volume sweep period low byte";
-    strings["18xx: Set volume sweep period high byte##sesd"].plurals[0] = "18xx: =Set volume sweep period high byte";
-    strings["19xx: Set cutoff sweep period low byte##sesd"].plurals[0] = "19xx: =Set cutoff sweep period low byte";
-    strings["1Axx: Set cutoff sweep period high byte##sesd"].plurals[0] = "1Axx: =Set cutoff sweep period high byte";
-    strings["1Bxx: Set frequency sweep boundary##sesd"].plurals[0] = "1Bxx: =Set frequency sweep boundary";
-    strings["1Cxx: Set volume sweep boundary##sesd"].plurals[0] = "1Cxx: =Set volume sweep boundary";
-    strings["1Dxx: Set cutoff sweep boundary##sesd"].plurals[0] = "1Dxx: =Set cutoff sweep boundary";
-    strings["1Exx: Set phase reset period low byte##sesd"].plurals[0] = "1Exx: =Set phase reset period low byte";
-    strings["1Fxx: Set phase reset period high byte##sesd"].plurals[0] = "1Fxx: =Set phase reset period high byte";
-    strings["20xx: Toggle frequency sweep (bit 0-6: speed; bit 7: direction is up)##sesd"].plurals[0] = "20xx: =Toggle frequency sweep (bit 0-6: speed; bit 7: direction is up)";
-    strings["21xx: Toggle volume sweep (bit 0-4: speed; bit 5: direction is up; bit 6: loop; bit 7: alternate)##sesd"].plurals[0] = "21xx: =Toggle volume sweep (bit 0-4: speed; bit 5: direction is up; bit 6: loop; bit 7: alternate)";
-    strings["22xx: Toggle cutoff sweep (bit 0-6: speed; bit 7: direction is up)##sesd"].plurals[0] = "22xx: =Toggle cutoff sweep (bit 0-6: speed; bit 7: direction is up)";
-    strings["4xxx: Set cutoff (0 to FFF)##sesd"].plurals[0] = "4xxx: =Set cutoff (0 to FFF)";
-    strings["tildearrow's fantasy sound chip. put SID, AY and VERA in a blender, and you get this!##sesd"].plurals[0] = "=tildearrow's fantasy sound chip. put SID, AY and VERA in a blender, and you get this!";
-    strings["an ADPCM sound chip manufactured by OKI and used in many arcade boards.##sesd"].plurals[0] = "=an ADPCM sound chip manufactured by OKI and used in many arcade boards.";
-    strings["20xx: Set chip output rate (0: clock/132; 1: clock/165)##sesd"].plurals[0] = "20xx: =Set chip output rate (0: clock/132; 1: clock/165)";
-    strings["an ADPCM sound chip manufactured by OKI and used in the Sharp X68000.##sesd"].plurals[0] = "=an ADPCM sound chip manufactured by OKI and used in the Sharp X68000.";
-    strings["20xx: Set frequency divider (0-2)##sesd"].plurals[0] = "20xx: =Set frequency divider (0-2)";
-    strings["21xx: Select clock rate (0: full; 1: half)##sesd"].plurals[0] = "21xx: =Select clock rate (0: full; 1: half)";
-    strings["used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or 16-bit PCM.##sesd"].plurals[0] = "=used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or 16-bit PCM.";
-    strings["10xx: Set waveform##sesd8"].plurals[0] = "10xx: =Set waveform";
-    strings["10xx: Set waveform##sesd9"].plurals[0] = "10xx: =Set waveform";
-    strings["11xx: Toggle noise mode##sesd2"].plurals[0] = "11xx: =Toggle noise mode";
-    strings["a wavetable sound chip used in Pac-Man, among other early Namco arcade games.##sesd"].plurals[0] = "=a wavetable sound chip used in Pac-Man, among other early Namco arcade games.";
-    strings["successor of the original Namco WSG chip, used in later Namco arcade games.##sesd"].plurals[0] = "=successor of the original Namco WSG chip, used in later Namco arcade games.";
-    strings["like Namco C15 but with stereo sound.##sesd"].plurals[0] = "=like Namco C15 but with stereo sound.";
-    strings["a square wave additive synthesis chip made by OKI. used in some arcade machines and instruments.##sesd"].plurals[0] = "=a square wave additive synthesis chip made by OKI. used in some arcade machines and instruments.";
-    strings["10xy: Set group control (x: sustain; y: part toggle bitmask)##sesd"].plurals[0] = "10xy: =Set group control (x: sustain; y: part toggle bitmask)";
-    strings["11xx: Set noise mode##sesd0"].plurals[0] = "11xx: =Set noise mode";
-    strings["12xx: Set group attack (0 to 5)##sesd"].plurals[0] = "12xx: =Set group attack (0 to 5)";
-    strings["13xx: Set group decay (0 to 11)##sesd"].plurals[0] = "13xx: =Set group decay (0 to 11)";
-    strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis system uses software mixing to provide two sample channels.##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis system uses software mixing to provide two sample channels.";
-    strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis system uses software mixing to provide two sample channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis system uses software mixing to provide two sample channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.";
-    strings["an SN76489 derivative used in Neo Geo Pocket, has independent stereo volume and noise channel frequency.##sesd"].plurals[0] = "=an SN76489 derivative used in Neo Geo Pocket, has independent stereo volume and noise channel frequency.";
-    strings["20xx: Set noise length (0: short, 1: long)##sesd"].plurals[0] = "20xx: =Set noise length (0: short, 1: long)";
-    strings["as generic sample playback as it gets.##sesd"].plurals[0] = "=as generic sample playback as it gets.";
-    strings["this PCM chip was widely used at Konami arcade boards in 1986-1990.##sesd"].plurals[0] = "=this PCM chip was widely used at Konami arcade boards in 1986-1990.";
-    strings["yet another PCM chip from Irem. like Amiga, but less pitch resolution and no sample loop.##sesd"].plurals[0] = "=yet another PCM chip from Irem. like Amiga, but less pitch resolution and no sample loop.";
-    strings["a SoC with wavetable sound hardware.##sesd"].plurals[0] = "=a SoC with wavetable sound hardware.";
-    strings["a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.##sesd"].plurals[0] = "=a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.";
-    strings["10xx: Set ring modulation (0: disable, 1: enable)##sesd"].plurals[0] = "10xx: =Set ring modulation (0: disable, 1: enable)";
-    strings["another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.##sesd"].plurals[0] = "=another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.";
-    strings["12xx: Set pulse width##sesd1"].plurals[0] = "12xx: =Set pulse width";
-    strings["this PCM chip was widely used at Konami arcade boards in 1990-1992.##sesd"].plurals[0] = "=this PCM chip was widely used at Konami arcade boards in 1990-1992.";
-    strings["DFxx: Set sample playback direction (0: normal; 1: reverse)##sesd2"].plurals[0] = "DFxx: =Set sample playback direction (0: normal; 1: reverse)";
-    strings["two square waves (one may be turned into noise). used in the Commodore Plus/4, 16 and 116.##sesd"].plurals[0] = "=two square waves (one may be turned into noise). used in the Commodore Plus/4, 16 and 116.";
-    strings["Namco's first PCM chip from 1987. it's pretty good for being so.##sesd"].plurals[0] = "=Namco's first PCM chip from 1987. it's pretty good for being so.";
-    strings["Namco's PCM chip used in their NA-1/2 hardware.\nvery similar to C140, but has noise generator.##sesd"].plurals[0] = "=Namco's PCM chip used in their NA-1/2 hardware.\nvery similar to C140, but has noise generator.";
-    strings["11xx: Set noise mode##sesd1"].plurals[0] = "11xx: =Set noise mode";
-    strings["12xy: Set invert mode (x: surround; y: invert)##sesd"].plurals[0] = "12xy: =Set invert mode (x: surround; y: invert)";
-    strings["a unique FM synth featured in PC sound cards.\nbased on the OPL3 design, but with lots of its features extended.##sesd"].plurals[0] = "=a unique FM synth featured in PC sound cards.\nbased on the OPL3 design, but with lots of its features extended.";
-    strings["2Exx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "2Exx: =Toggle hard envelope reset on new notes";
-    strings["first Ensoniq chip used in their synths and Apple IIGS computer. Has 32 hard-panned 8-bit wavetable/sample channels, can do oscillator sync (like SID) and amplitude modulation. Can have up to 128 KiB (2 banks of 64 KiB) of memory for wavetables/samples.\nAs Robert Yannes (SID chip creator) said, it's more or less what SID chip could be if he was given enough time for its development.##sesd"].plurals[0] = "=first Ensoniq chip used in their synths and Apple IIGS computer. Has 32 hard-panned 8-bit wavetable/sample channels, can do oscillator sync (like SID) and amplitude modulation. Can have up to 128 KiB (2 banks of 64 KiB) of memory for wavetables/samples.\nAs Robert Yannes (SID chip creator) said, it's more or less what SID chip could be if he was given enough time for its development.";
-    strings["11xx: Set number of enabled oscillators (2-1F)##sesd"].plurals[0] = "11xx: =Set number of enabled oscillators (2-1F)";
-    strings["12xx: Set oscillator output (0-7, 0=left, 1=right)##sesd"].plurals[0] = "12xx: =Set oscillator output (0-7, 0=left, 1=right)";
-    strings["13xx: Set wave/sample length (0-7, 0=256, 1=512, 2=1024, etc.)##sesd"].plurals[0] = "13xx: =Set wave/sample length (0-7, 0=256, 1=512, 2=1024, etc.)";
-    strings["14xx: Set wave/sample position in memory (xx*256 offset)##sesd"].plurals[0] = "14xx: =Set wave/sample position in memory (xx*256 offset)";
-    strings["15xx: Set oscillator mode (0-3)##sesd"].plurals[0] = "15xx: =Set oscillator mode (0-3)";
-    strings["a fantasy sound chip designed by jvsTSX and The Beesh-Spweesh!\nused in the Hexheld fantasy console.##sesd"].plurals[0] = "=a fantasy sound chip designed by jvsTSX and The Beesh-Spweesh!\nused in the Hexheld fantasy console.";
-    strings["20xx: Load low byte of noise channel LFSR (00 to FF) or slope channel accumulator (00 to 7F)##sesd"].plurals[0] = "20xx: =Load low byte of noise channel LFSR (00 to FF) or slope channel accumulator (00 to 7F)";
-    strings["21xx: Load high byte of noise channel LFSR (00 to FF)##sesd"].plurals[0] = "21xx: =Load high byte of noise channel LFSR (00 to FF)";
-    strings["22xx: Write to I/O port A##sesd"].plurals[0] = "22xx: =Write to I/O port A";
-    strings["23xx: Write to I/O port B##sesd"].plurals[0] = "23xx: =Write to I/O port B";
-    strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "=this is a system designed for testing purposes.";
-
     strings["help! what's going on!##sesd"].plurals[0] = "=help! what's going on!";
     strings["Sunsoft 5B standalone##sesd"].plurals[0] = "=Sunsoft 5B standalone";
     strings["Sunsoft 5B standalone (PAL)##sesd"].plurals[0] = "=Sunsoft 5B standalone (PAL)";
@@ -5156,30 +4768,469 @@ void DivLocale::addTranslationsTemplate()
     strings["Game Boy with AY expansion##sesd"].plurals[0] = "=Game Boy with AY expansion";
     strings["multi-system##sesd"].plurals[0] = "=multi-system";
     strings["Unknown##sesd"].plurals[0] = "=Unknown";
+    strings["20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"].plurals[0] = "=20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)";
+    strings["21xx: Set noise frequency (0 to 1F)##sesd"].plurals[0] = "=21xx: Set noise frequency (0 to 1F)";
+    strings["22xy: Set envelope mode (x: shape, y: enable for this channel)##sesd"].plurals[0] = "=22xy: Set envelope mode (x: shape, y: enable for this channel)";
+    strings["23xx: Set envelope period low byte##sesd"].plurals[0] = "=23xx: Set envelope period low byte";
+    strings["24xx: Set envelope period high byte##sesd"].plurals[0] = "=24xx: Set envelope period high byte";
+    strings["25xx: Envelope slide up##sesd0"].plurals[0] = "=25xx: Envelope slide up";
+    strings["26xx: Envelope slide down##sesd0"].plurals[0] = "=26xx: Envelope slide down";
+    strings["29xy: Set auto-envelope (x: numerator; y: denominator)##sesd0"].plurals[0] = "=29xy: Set auto-envelope (x: numerator; y: denominator)";
+    strings["2Exx: Write to I/O port A##sesd"].plurals[0] = "=2Exx: Write to I/O port A";
+    strings["2Fxx: Write to I/O port B##sesd"].plurals[0] = "=2Fxx: Write to I/O port B";
+    strings["12xx: Set duty cycle (0 to 8)##sesd"].plurals[0] = "=12xx: Set duty cycle (0 to 8)";
+    strings["27xx: Set noise AND mask##sesd"].plurals[0] = "=27xx: Set noise AND mask";
+    strings["28xx: Set noise OR mask##sesd"].plurals[0] = "=28xx: Set noise OR mask";
+    strings["2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER##sesd"].plurals[0] = "=2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER";
+    strings["30xx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "=30xx: Toggle hard envelope reset on new notes";
+    strings["18xx: Toggle extended channel 3 mode##sesd"].plurals[0] = "=18xx: Toggle extended channel 3 mode";
+    strings["17xx: Toggle PCM mode (LEGACY)##sesd0"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["DFxx: Set sample playback direction (0: normal; 1: reverse)##sesd0"].plurals[0] = "=DFxx: Set sample playback direction (0: normal; 1: reverse)";
+    strings["18xx: Toggle drums mode (1: enabled; 0: disabled)##sesd"].plurals[0] = "=18xx: Toggle drums mode (1: enabled; 0: disabled)";
+    strings["11xx: Set feedback (0 to 7)##sesd0"].plurals[0] = "=11xx: Set feedback (0 to 7)";
+    strings["12xx: Set level of operator 1 (0 highest, 7F lowest)##sesd"].plurals[0] = "=12xx: Set level of operator 1 (0 highest, 7F lowest)";
+    strings["13xx: Set level of operator 2 (0 highest, 7F lowest)##sesd"].plurals[0] = "=13xx: Set level of operator 2 (0 highest, 7F lowest)";
+    strings["14xx: Set level of operator 3 (0 highest, 7F lowest)##sesd"].plurals[0] = "=14xx: Set level of operator 3 (0 highest, 7F lowest)";
+    strings["15xx: Set level of operator 4 (0 highest, 7F lowest)##sesd"].plurals[0] = "=15xx: Set level of operator 4 (0 highest, 7F lowest)";
+    strings["16xy: Set operator multiplier (x: operator from 1 to 4; y: multiplier)##sesd0"].plurals[0] = "=16xy: Set operator multiplier (x: operator from 1 to 4; y: multiplier)";
+    strings["19xx: Set attack of all operators (0 to 1F)##sesd"].plurals[0] = "=19xx: Set attack of all operators (0 to 1F)";
+    strings["1Axx: Set attack of operator 1 (0 to 1F)##sesd"].plurals[0] = "=1Axx: Set attack of operator 1 (0 to 1F)";
+    strings["1Bxx: Set attack of operator 2 (0 to 1F)##sesd"].plurals[0] = "=1Bxx: Set attack of operator 2 (0 to 1F)";
+    strings["1Cxx: Set attack of operator 3 (0 to 1F)##sesd"].plurals[0] = "=1Cxx: Set attack of operator 3 (0 to 1F)";
+    strings["1Dxx: Set attack of operator 4 (0 to 1F)##sesd"].plurals[0] = "=1Dxx: Set attack of operator 4 (0 to 1F)";
+    strings["50xy: Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)##sesd0"].plurals[0] = "=50xy: Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)";
+    strings["51xy: Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)##sesd0"].plurals[0] = "=51xy: Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)";
+    strings["52xy: Set release (x: operator from 1 to 4 (0 for all ops); y: release)##sesd0"].plurals[0] = "=52xy: Set release (x: operator from 1 to 4 (0 for all ops); y: release)";
+    strings["53xy: Set detune (x: operator from 1 to 4 (0 for all ops); y: detune where 3 is center)##sesd"].plurals[0] = "=53xy: Set detune (x: operator from 1 to 4 (0 for all ops); y: detune where 3 is center)";
+    strings["54xy: Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)##sesd0"].plurals[0] = "=54xy: Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)";
+    strings["56xx: Set decay of all operators (0 to 1F)##sesd"].plurals[0] = "=56xx: Set decay of all operators (0 to 1F)";
+    strings["57xx: Set decay of operator 1 (0 to 1F)##sesd"].plurals[0] = "=57xx: Set decay of operator 1 (0 to 1F)";
+    strings["58xx: Set decay of operator 2 (0 to 1F)##sesd"].plurals[0] = "=58xx: Set decay of operator 2 (0 to 1F)";
+    strings["59xx: Set decay of operator 3 (0 to 1F)##sesd"].plurals[0] = "=59xx: Set decay of operator 3 (0 to 1F)";
+    strings["5Axx: Set decay of operator 4 (0 to 1F)##sesd"].plurals[0] = "=5Axx: Set decay of operator 4 (0 to 1F)";
+    strings["5Bxx: Set decay 2 of all operators (0 to 1F)##sesd"].plurals[0] = "=5Bxx: Set decay 2 of all operators (0 to 1F)";
+    strings["5Cxx: Set decay 2 of operator 1 (0 to 1F)##sesd"].plurals[0] = "=5Cxx: Set decay 2 of operator 1 (0 to 1F)";
+    strings["5Dxx: Set decay 2 of operator 2 (0 to 1F)##sesd"].plurals[0] = "=5Dxx: Set decay 2 of operator 2 (0 to 1F)";
+    strings["5Exx: Set decay 2 of operator 3 (0 to 1F)##sesd"].plurals[0] = "=5Exx: Set decay 2 of operator 3 (0 to 1F)";
+    strings["5Fxx: Set decay 2 of operator 4 (0 to 1F)##sesd"].plurals[0] = "=5Fxx: Set decay 2 of operator 4 (0 to 1F)";
+    strings["10xx: Set noise frequency (xx: value; 0 disables noise)##sesd"].plurals[0] = "=10xx: Set noise frequency (xx: value; 0 disables noise)";
+    strings["17xx: Set LFO speed##sesd"].plurals[0] = "=17xx: Set LFO speed";
+    strings["18xx: Set LFO waveform (0 saw, 1 square, 2 triangle, 3 noise)##sesd"].plurals[0] = "=18xx: Set LFO waveform (0 saw, 1 square, 2 triangle, 3 noise)";
+    strings["1Exx: Set AM depth (0 to 7F)##sesd"].plurals[0] = "=1Exx: Set AM depth (0 to 7F)";
+    strings["1Fxx: Set PM depth (0 to 7F)##sesd"].plurals[0] = "=1Fxx: Set PM depth (0 to 7F)";
+    strings["55xy: Set detune 2 (x: operator from 1 to 4 (0 for all ops); y: detune from 0 to 3)##sesd"].plurals[0] = "=55xy: Set detune 2 (x: operator from 1 to 4 (0 for all ops); y: detune from 0 to 3)";
+    strings["24xx: Set LFO 2 speed##sesd"].plurals[0] = "=24xx: Set LFO 2 speed";
+    strings["25xx: Set LFO 2 waveform (0 saw, 1 square, 2 triangle, 3 noise)##sesd"].plurals[0] = "=25xx: Set LFO 2 waveform (0 saw, 1 square, 2 triangle, 3 noise)";
+    strings["26xx: Set AM 2 depth (0 to 7F)##sesd"].plurals[0] = "=26xx: Set AM 2 depth (0 to 7F)";
+    strings["27xx: Set PM 2 depth (0 to 7F)##sesd"].plurals[0] = "=27xx: Set PM 2 depth (0 to 7F)";
+    strings["28xy: Set reverb (x: operator from 1 to 4 (0 for all ops); y: reverb from 0 to 7)##sesd"].plurals[0] = "=28xy: Set reverb (x: operator from 1 to 4 (0 for all ops); y: reverb from 0 to 7)";
+    strings["2Axy: Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 7)##sesd0"].plurals[0] = "=2Axy: Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 7)";
+    strings["2Bxy: Set envelope generator shift (x: operator from 1 to 4 (0 for all ops); y: shift from 0 to 3)##sesd"].plurals[0] = "=2Bxy: Set envelope generator shift (x: operator from 1 to 4 (0 for all ops); y: shift from 0 to 3)";
+    strings["2Cxy: Set fine multiplier (x: operator from 1 to 4 (0 for all ops); y: fine)##sesd"].plurals[0] = "=2Cxy: Set fine multiplier (x: operator from 1 to 4 (0 for all ops); y: fine)";
+    strings["3xyy: Set fixed frequency of operator 1 (x: octave from 0 to 7; y: frequency)##sesd"].plurals[0] = "=3xyy: Set fixed frequency of operator 1 (x: octave from 0 to 7; y: frequency)";
+    strings["3xyy: Set fixed frequency of operator 2 (x: octave from 8 to F; y: frequency)##sesd"].plurals[0] = "=3xyy: Set fixed frequency of operator 2 (x: octave from 8 to F; y: frequency)";
+    strings["4xyy: Set fixed frequency of operator 3 (x: octave from 0 to 7; y: frequency)##sesd"].plurals[0] = "=4xyy: Set fixed frequency of operator 3 (x: octave from 0 to 7; y: frequency)";
+    strings["4xyy: Set fixed frequency of operator 4 (x: octave from 8 to F; y: frequency)##sesd"].plurals[0] = "=4xyy: Set fixed frequency of operator 4 (x: octave from 8 to F; y: frequency)";
+    strings["10xy: Setup LFO (x: enable; y: speed)##sesd"].plurals[0] = "=10xy: Setup LFO (x: enable; y: speed)";
+    strings["55xy: Set SSG envelope (x: operator from 1 to 4 (0 for all ops); y: 0-7 on, 8 off)##sesd"].plurals[0] = "=55xy: Set SSG envelope (x: operator from 1 to 4 (0 for all ops); y: 0-7 on, 8 off)";
+    strings["1Fxx: Set ADPCM-A global volume (0 to 3F)##sesd"].plurals[0] = "=1Fxx: Set ADPCM-A global volume (0 to 3F)";
+    strings["11xx: Set feedback (0 to 7)##sesd1"].plurals[0] = "=11xx: Set feedback (0 to 7)";
+    strings["12xx: Set level of operator 1 (0 highest, 3F lowest)##sesd0"].plurals[0] = "=12xx: Set level of operator 1 (0 highest, 3F lowest)";
+    strings["13xx: Set level of operator 2 (0 highest, 3F lowest)##sesd0"].plurals[0] = "=13xx: Set level of operator 2 (0 highest, 3F lowest)";
+    strings["16xy: Set operator multiplier (x: operator from 1 to 2; y: multiplier)##sesd"].plurals[0] = "=16xy: Set operator multiplier (x: operator from 1 to 2; y: multiplier)";
+    strings["19xx: Set attack of all operators (0 to F)##sesd0"].plurals[0] = "=19xx: Set attack of all operators (0 to F)";
+    strings["1Axx: Set attack of operator 1 (0 to F)##sesd0"].plurals[0] = "=1Axx: Set attack of operator 1 (0 to F)";
+    strings["1Bxx: Set attack of operator 2 (0 to F)##sesd0"].plurals[0] = "=1Bxx: Set attack of operator 2 (0 to F)";
+    strings["50xy: Set AM (x: operator from 1 to 2 (0 for all ops); y: AM)##sesd"].plurals[0] = "=50xy: Set AM (x: operator from 1 to 2 (0 for all ops); y: AM)";
+    strings["51xy: Set sustain level (x: operator from 1 to 2 (0 for all ops); y: sustain)##sesd"].plurals[0] = "=51xy: Set sustain level (x: operator from 1 to 2 (0 for all ops); y: sustain)";
+    strings["52xy: Set release (x: operator from 1 to 2 (0 for all ops); y: release)##sesd"].plurals[0] = "=52xy: Set release (x: operator from 1 to 2 (0 for all ops); y: release)";
+    strings["53xy: Set vibrato (x: operator from 1 to 2 (0 for all ops); y: enabled)##sesd"].plurals[0] = "=53xy: Set vibrato (x: operator from 1 to 2 (0 for all ops); y: enabled)";
+    strings["54xy: Set envelope scale (x: operator from 1 to 2 (0 for all ops); y: scale from 0 to 3)##sesd"].plurals[0] = "=54xy: Set envelope scale (x: operator from 1 to 2 (0 for all ops); y: scale from 0 to 3)";
+    strings["55xy: Set envelope sustain (x: operator from 1 to 2 (0 for all ops); y: enabled)##sesd"].plurals[0] = "=55xy: Set envelope sustain (x: operator from 1 to 2 (0 for all ops); y: enabled)";
+    strings["56xx: Set decay of all operators (0 to F)##sesd0"].plurals[0] = "=56xx: Set decay of all operators (0 to F)";
+    strings["57xx: Set decay of operator 1 (0 to F)##sesd0"].plurals[0] = "=57xx: Set decay of operator 1 (0 to F)";
+    strings["58xx: Set decay of operator 2 (0 to F)##sesd0"].plurals[0] = "=58xx: Set decay of operator 2 (0 to F)";
+    strings["5Bxy: Set whether key will scale envelope (x: operator from 1 to 2 (0 for all ops); y: enabled)##sesd"].plurals[0] = "=5Bxy: Set whether key will scale envelope (x: operator from 1 to 2 (0 for all ops); y: enabled)";
+    strings["10xx: Set global AM depth (0: 1dB, 1: 4.8dB)##sesd"].plurals[0] = "=10xx: Set global AM depth (0: 1dB, 1: 4.8dB)";
+    strings["11xx: Set feedback (0 to 7)##sesd2"].plurals[0] = "=11xx: Set feedback (0 to 7)";
+    strings["12xx: Set level of operator 1 (0 highest, 3F lowest)##sesd1"].plurals[0] = "=12xx: Set level of operator 1 (0 highest, 3F lowest)";
+    strings["13xx: Set level of operator 2 (0 highest, 3F lowest)##sesd1"].plurals[0] = "=13xx: Set level of operator 2 (0 highest, 3F lowest)";
+    strings["14xx: Set level of operator 3 (0 highest, 3F lowest)##sesd0"].plurals[0] = "=14xx: Set level of operator 3 (0 highest, 3F lowest)";
+    strings["15xx: Set level of operator 4 (0 highest, 3F lowest)##sesd0"].plurals[0] = "=15xx: Set level of operator 4 (0 highest, 3F lowest)";
+    strings["16xy: Set operator multiplier (x: operator from 1 to 4; y: multiplier)##sesd1"].plurals[0] = "=16xy: Set operator multiplier (x: operator from 1 to 4; y: multiplier)";
+    strings["17xx: Set global vibrato depth (0: normal, 1: double)##sesd"].plurals[0] = "=17xx: Set global vibrato depth (0: normal, 1: double)";
+    strings["19xx: Set attack of all operators (0 to F)##sesd1"].plurals[0] = "=19xx: Set attack of all operators (0 to F)";
+    strings["1Axx: Set attack of operator 1 (0 to F)##sesd1"].plurals[0] = "=1Axx: Set attack of operator 1 (0 to F)";
+    strings["1Bxx: Set attack of operator 2 (0 to F)##sesd1"].plurals[0] = "=1Bxx: Set attack of operator 2 (0 to F)";
+    strings["1Cxx: Set attack of operator 3 (0 to F)##sesd0"].plurals[0] = "=1Cxx: Set attack of operator 3 (0 to F)";
+    strings["1Dxx: Set attack of operator 4 (0 to F)##sesd0"].plurals[0] = "=1Dxx: Set attack of operator 4 (0 to F)";
+    strings["2Axy: Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 3 in OPL2 and 0 to 7 in OPL3)##sesd"].plurals[0] = "=2Axy: Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 3 in OPL2 and 0 to 7 in OPL3)";
+    strings["50xy: Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)##sesd1"].plurals[0] = "=50xy: Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)";
+    strings["51xy: Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)##sesd1"].plurals[0] = "=51xy: Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)";
+    strings["52xy: Set release (x: operator from 1 to 4 (0 for all ops); y: release)##sesd1"].plurals[0] = "=52xy: Set release (x: operator from 1 to 4 (0 for all ops); y: release)";
+    strings["53xy: Set vibrato (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd0"].plurals[0] = "=53xy: Set vibrato (x: operator from 1 to 4 (0 for all ops); y: enabled)";
+    strings["54xy: Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)##sesd1"].plurals[0] = "=54xy: Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)";
+    strings["55xy: Set envelope sustain (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd0"].plurals[0] = "=55xy: Set envelope sustain (x: operator from 1 to 4 (0 for all ops); y: enabled)";
+    strings["56xx: Set decay of all operators (0 to F)##sesd1"].plurals[0] = "=56xx: Set decay of all operators (0 to F)";
+    strings["57xx: Set decay of operator 1 (0 to F)##sesd1"].plurals[0] = "=57xx: Set decay of operator 1 (0 to F)";
+    strings["58xx: Set decay of operator 2 (0 to F)##sesd1"].plurals[0] = "=58xx: Set decay of operator 2 (0 to F)";
+    strings["59xx: Set decay of operator 3 (0 to F)##sesd0"].plurals[0] = "=59xx: Set decay of operator 3 (0 to F)";
+    strings["5Axx: Set decay of operator 4 (0 to F)##sesd0"].plurals[0] = "=5Axx: Set decay of operator 4 (0 to F)";
+    strings["5Bxy: Set whether key will scale envelope (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd0"].plurals[0] = "=5Bxy: Set whether key will scale envelope (x: operator from 1 to 4 (0 for all ops); y: enabled)";
+    strings["10xx: Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)##sesd"].plurals[0] = "=10xx: Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)";
+    strings["11xx: Set coarse cutoff (not recommended; use 4xxx instead)##sesd"].plurals[0] = "=11xx: Set coarse cutoff (not recommended; use 4xxx instead)";
+    strings["12xx: Set coarse pulse width (not recommended; use 3xxx instead)##sesd"].plurals[0] = "=12xx: Set coarse pulse width (not recommended; use 3xxx instead)";
+    strings["13xx: Set resonance (0 to F)##sesd"].plurals[0] = "=13xx: Set resonance (0 to F)";
+    strings["14xx: Set filter mode (bit 0: low pass; bit 1: band pass; bit 2: high pass)##sesd"].plurals[0] = "=14xx: Set filter mode (bit 0: low pass; bit 1: band pass; bit 2: high pass)";
+    strings["15xx: Set envelope reset time##sesd"].plurals[0] = "=15xx: Set envelope reset time";
+    strings["1Axx: Disable envelope reset for this channel (1 disables; 0 enables)##sesd"].plurals[0] = "=1Axx: Disable envelope reset for this channel (1 disables; 0 enables)";
+    strings["1Bxy: Reset cutoff (x: on new note; y: now)##sesd"].plurals[0] = "=1Bxy: Reset cutoff (x: on new note; y: now)";
+    strings["1Cxy: Reset pulse width (x: on new note; y: now)##sesd"].plurals[0] = "=1Cxy: Reset pulse width (x: on new note; y: now)";
+    strings["1Exy: Change other parameters (LEGACY)##sesd"].plurals[0] = "=1Exy: Change other parameters (LEGACY)";
+    strings["20xy: Set attack/decay (x: attack; y: decay)##sesd"].plurals[0] = "=20xy: Set attack/decay (x: attack; y: decay)";
+    strings["21xy: Set sustain/release (x: sustain; y: release)##sesd"].plurals[0] = "=21xy: Set sustain/release (x: sustain; y: release)";
+    strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "=3xxx: Set pulse width (0 to FFF)";
+    strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "=4xxx: Set cutoff (0 to 7FF)";
+    strings["10xx: Set waveform##sesd0"].plurals[0] = "=10xx: Set waveform";
+    strings["20xx: Set PCM frequency##sesd"].plurals[0] = "=20xx: Set PCM frequency";
+    strings["10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))##sesd"].plurals[0] = "=10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))";
+    strings["12xx: Set level of operator 1 (0 highest, 3F lowest)##sesd2"].plurals[0] = "=12xx: Set level of operator 1 (0 highest, 3F lowest)";
+    strings["13xx: Set level of operator 2 (0 highest, 3F lowest)##sesd2"].plurals[0] = "=13xx: Set level of operator 2 (0 highest, 3F lowest)";
+    strings["14xx: Set level of operator 3 (0 highest, 3F lowest)##sesd1"].plurals[0] = "=14xx: Set level of operator 3 (0 highest, 3F lowest)";
+    strings["15xx: Set level of operator 4 (0 highest, 3F lowest)##sesd1"].plurals[0] = "=15xx: Set level of operator 4 (0 highest, 3F lowest)";
+    strings["16xy: Set operator multiplier (x: operator from 1 to 4; y: multiplier)##sesd2"].plurals[0] = "=16xy: Set operator multiplier (x: operator from 1 to 4; y: multiplier)";
+    strings["17xy: Set vibrato depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: normal, 1: double))##sesd"].plurals[0] = "=17xy: Set vibrato depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: normal, 1: double))";
+    strings["19xx: Set attack of all operators (0 to F)##sesd"].plurals[0] = "=19xx: Set attack of all operators (0 to F)";
+    strings["1Axx: Set attack of operator 1 (0 to F)##sesd2"].plurals[0] = "=1Axx: Set attack of operator 1 (0 to F)";
+    strings["1Bxx: Set attack of operator 2 (0 to F)##sesd2"].plurals[0] = "=1Bxx: Set attack of operator 2 (0 to F)";
+    strings["1Cxx: Set attack of operator 3 (0 to F)##sesd1"].plurals[0] = "=1Cxx: Set attack of operator 3 (0 to F)";
+    strings["1Dxx: Set attack of operator 4 (0 to F)##sesd1"].plurals[0] = "=1Dxx: Set attack of operator 4 (0 to F)";
+    strings["20xy: Set panning of operator 1 (x: left; y: right)##sesd"].plurals[0] = "=20xy: Set panning of operator 1 (x: left; y: right)";
+    strings["21xy: Set panning of operator 2 (x: left; y: right)##sesd"].plurals[0] = "=21xy: Set panning of operator 2 (x: left; y: right)";
+    strings["22xy: Set panning of operator 3 (x: left; y: right)##sesd"].plurals[0] = "=22xy: Set panning of operator 3 (x: left; y: right)";
+    strings["23xy: Set panning of operator 4 (x: left; y: right)##sesd"].plurals[0] = "=23xy: Set panning of operator 4 (x: left; y: right)";
+    strings["24xy: Set output level register (x: operator from 1 to 4 (0 for all ops); y: level from 0 to 7)##sesd"].plurals[0] = "=24xy: Set output level register (x: operator from 1 to 4 (0 for all ops); y: level from 0 to 7)";
+    strings["25xy: Set modulation input level (x: operator from 1 to 4 (0 for all ops); y: level from 0 to 7)##sesd"].plurals[0] = "=25xy: Set modulation input level (x: operator from 1 to 4 (0 for all ops); y: level from 0 to 7)";
+    strings["26xy: Set envelope delay (x: operator from 1 to 4 (0 for all ops); y: delay from 0 to 7)##sesd"].plurals[0] = "=26xy: Set envelope delay (x: operator from 1 to 4 (0 for all ops); y: delay from 0 to 7)";
+    strings["27xx: Set noise mode for operator 4 (x: mode from 0 to 3)##sesd"].plurals[0] = "=27xx: Set noise mode for operator 4 (x: mode from 0 to 3)";
+    strings["2Axy: Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 7)##sesd1"].plurals[0] = "=2Axy: Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 7)";
+    strings["2Fxy: Set fixed frequency block (x: operator from 1 to 4; y: octave from 0 to 7)##sesd"].plurals[0] = "=2Fxy: Set fixed frequency block (x: operator from 1 to 4; y: octave from 0 to 7)";
+    strings["40xx: Set detune of operator 1 (80: center)##sesd"].plurals[0] = "=40xx: Set detune of operator 1 (80: center)";
+    strings["41xx: Set detune of operator 2 (80: center)##sesd"].plurals[0] = "=41xx: Set detune of operator 2 (80: center)";
+    strings["42xx: Set detune of operator 3 (80: center)##sesd"].plurals[0] = "=42xx: Set detune of operator 3 (80: center)";
+    strings["43xx: Set detune of operator 4 (80: center)##sesd"].plurals[0] = "=43xx: Set detune of operator 4 (80: center)";
+    strings["50xy: Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)##sesd2"].plurals[0] = "=50xy: Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)";
+    strings["51xy: Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)##sesd2"].plurals[0] = "=51xy: Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)";
+    strings["52xy: Set release (x: operator from 1 to 4 (0 for all ops); y: release)##sesd2"].plurals[0] = "=52xy: Set release (x: operator from 1 to 4 (0 for all ops); y: release)";
+    strings["53xy: Set vibrato (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd1"].plurals[0] = "=53xy: Set vibrato (x: operator from 1 to 4 (0 for all ops); y: enabled)";
+    strings["54xy: Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)##sesd2"].plurals[0] = "=54xy: Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)";
+    strings["55xy: Set envelope sustain (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd1"].plurals[0] = "=55xy: Set envelope sustain (x: operator from 1 to 4 (0 for all ops); y: enabled)";
+    strings["56xx: Set decay of all operators (0 to F)##sesd2"].plurals[0] = "=56xx: Set decay of all operators (0 to F)";
+    strings["57xx: Set decay of operator 1 (0 to F)##sesd2"].plurals[0] = "=57xx: Set decay of operator 1 (0 to F)";
+    strings["58xx: Set decay of operator 2 (0 to F)##sesd2"].plurals[0] = "=58xx: Set decay of operator 2 (0 to F)";
+    strings["59xx: Set decay of operator 3 (0 to F)##sesd1"].plurals[0] = "=59xx: Set decay of operator 3 (0 to F)";
+    strings["5Axx: Set decay of operator 4 (0 to F)##sesd1"].plurals[0] = "=5Axx: Set decay of operator 4 (0 to F)";
+    strings["5Bxy: Set whether key will scale envelope (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd1"].plurals[0] = "=5Bxy: Set whether key will scale envelope (x: operator from 1 to 4 (0 for all ops); y: enabled)";
+    strings["3xyy: Set fixed frequency F-num of operator 1 (x: high 2 bits from 0 to 3; y: low 8 bits of F-num)##sesd"].plurals[0] = "=3xyy: Set fixed frequency F-num of operator 1 (x: high 2 bits from 0 to 3; y: low 8 bits of F-num)";
+    strings["3xyy: Set fixed frequency F-num of operator 2 (x: high 2 bits from 4 to 7; y: low 8 bits of F-num)##sesd"].plurals[0] = "=3xyy: Set fixed frequency F-num of operator 2 (x: high 2 bits from 4 to 7; y: low 8 bits of F-num)";
+    strings["3xyy: Set fixed frequency F-num of operator 3 (x: high 2 bits from 8 to B; y: low 8 bits of F-num)##sesd"].plurals[0] = "=3xyy: Set fixed frequency F-num of operator 3 (x: high 2 bits from 8 to B; y: low 8 bits of F-num)";
+    strings["3xyy: Set fixed frequency F-num of operator 4 (x: high 2 bits from C to F; y: low 8 bits of F-num)##sesd"].plurals[0] = "=3xyy: Set fixed frequency F-num of operator 4 (x: high 2 bits from C to F; y: low 8 bits of F-num)";
+    strings["a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.##sesd"].plurals[0] = "=a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.";
+    strings["<COMPOUND SYSTEM!>##sesd0"].plurals[0] = "=<COMPOUND SYSTEM!>";
     strings["Sega Genesis Extended Channel 3##sesd1"].plurals[0] = "=Sega Genesis Extended Channel 3";
+    strings["<COMPOUND SYSTEM!>##sesd1"].plurals[0] = "=<COMPOUND SYSTEM!>";
+    strings["a square/noise sound chip found on the Sega Master System, ColecoVision, Tandy, TI's own 99/4A and a few other places.##sesd"].plurals[0] = "=a square/noise sound chip found on the Sega Master System, ColecoVision, Tandy, TI's own 99/4A and a few other places.";
+    strings["20xy: Set noise mode (x: preset freq/ch3 freq; y: thin pulse/noise)##sesd"].plurals[0] = "=20xy: Set noise mode (x: preset freq/ch3 freq; y: thin pulse/noise)";
+    strings["<COMPOUND SYSTEM!>##sesd2"].plurals[0] = "=<COMPOUND SYSTEM!>";
+    strings["the most popular portable game console of the era.##sesd"].plurals[0] = "=the most popular portable game console of the era.";
+    strings["10xx: Set waveform##sesd1"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Set noise length (0: long; 1: short)##sesd"].plurals[0] = "=11xx: Set noise length (0: long; 1: short)";
+    strings["12xx: Set duty cycle (0 to 3)##sesd"].plurals[0] = "=12xx: Set duty cycle (0 to 3)";
+    strings["13xy: Setup sweep (x: time; y: shift)##sesd"].plurals[0] = "=13xy: Setup sweep (x: time; y: shift)";
+    strings["14xx: Set sweep direction (0: up; 1: down)##sesd"].plurals[0] = "=14xx: Set sweep direction (0: up; 1: down)";
+    strings["an '80s game console with a wavetable sound chip, popular in Japan.##sesd"].plurals[0] = "=an '80s game console with a wavetable sound chip, popular in Japan.";
+    strings["10xx: Set waveform##sesd2"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Toggle noise mode##sesd0"].plurals[0] = "=11xx: Toggle noise mode";
+    strings["12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)##sesd"].plurals[0] = "=12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)";
+    strings["13xx: Set LFO speed##sesd"].plurals[0] = "=13xx: Set LFO speed";
+    strings["17xx: Toggle PCM mode (LEGACY)##sesd1"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["also known as Famicom in Japan, it's the most well-known game console of the '80s.##sesd"].plurals[0] = "=also known as Famicom in Japan, it's the most well-known game console of the '80s.";
+    strings["11xx: Write to delta modulation counter (0 to 7F)##sesd"].plurals[0] = "=11xx: Write to delta modulation counter (0 to 7F)";
+    strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd0"].plurals[0] = "=12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)";
+    strings["13xy: Sweep up (x: time; y: shift)##sesd"].plurals[0] = "=13xy: Sweep up (x: time; y: shift)";
+    strings["14xy: Sweep down (x: time; y: shift)##sesd"].plurals[0] = "=14xy: Sweep down (x: time; y: shift)";
+    strings["15xx: Set envelope mode (0: envelope, 1: length, 2: looping, 3: constant)##sesd"].plurals[0] = "=15xx: Set envelope mode (0: envelope, 1: length, 2: looping, 3: constant)";
+    strings["16xx: Set length counter (refer to manual for a list of values)##sesd"].plurals[0] = "=16xx: Set length counter (refer to manual for a list of values)";
+    strings["17xx: Set frame counter mode (0: 4-step, 1: 5-step)##sesd"].plurals[0] = "=17xx: Set frame counter mode (0: 4-step, 1: 5-step)";
+    strings["18xx: Select PCM/DPCM mode (0: PCM; 1: DPCM)##sesd"].plurals[0] = "=18xx: Select PCM/DPCM mode (0: PCM; 1: DPCM)";
+    strings["19xx: Set triangle linear counter (0 to 7F; 80 and higher halt)##sesd"].plurals[0] = "=19xx: Set triangle linear counter (0 to 7F; 80 and higher halt)";
+    strings["20xx: Set DPCM frequency (0 to F)##sesd"].plurals[0] = "=20xx: Set DPCM frequency (0 to F)";
+    strings["<COMPOUND SYSTEM!>##sesd3"].plurals[0] = "=<COMPOUND SYSTEM!>";
+    strings["<COMPOUND SYSTEM!>##sesd4"].plurals[0] = "=<COMPOUND SYSTEM!>";
+    strings["this computer is powered by the SID chip, which had synthesizer features like a filter and ADSR.##sesd"].plurals[0] = "=this computer is powered by the SID chip, which had synthesizer features like a filter and ADSR.";
+    strings["this computer is powered by the SID chip, which had synthesizer features like a filter and ADSR.\nthis is the newer revision of the chip.##sesd"].plurals[0] = "=this computer is powered by the SID chip, which had synthesizer features like a filter and ADSR.\nthis is the newer revision of the chip.";
+    strings["<COMPOUND SYSTEM!>##sesd5"].plurals[0] = "=<COMPOUND SYSTEM!>";
+    strings["like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect the pins.##sesd"].plurals[0] = "=like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect the pins.";
     strings["Neo Geo CD Extended Channel 2##sesd"].plurals[0] = "=Neo Geo CD Extended Channel 2";
+    strings["like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect the pins.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.##sesd"].plurals[0] = "=like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect the pins.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.";
+    strings["this chip is everywhere! ZX Spectrum, MSX, Amstrad CPC, Intellivision, Vectrex...\nthe discovery of envelope bass helped it beat the SN76489 with ease.##sesd"].plurals[0] = "=this chip is everywhere! ZX Spectrum, MSX, Amstrad CPC, Intellivision, Vectrex...\nthe discovery of envelope bass helped it beat the SN76489 with ease.";
+    strings["a computer from the '80s with full sampling capabilities, giving it a sound ahead of its time.##sesd"].plurals[0] = "=a computer from the '80s with full sampling capabilities, giving it a sound ahead of its time.";
+    strings["10xx: Toggle filter (0 disables; 1 enables)##sesd"].plurals[0] = "=10xx: Toggle filter (0 disables; 1 enables)";
+    strings["11xx: Toggle AM with next channel##sesd"].plurals[0] = "=11xx: Toggle AM with next channel";
+    strings["12xx: Toggle period modulation with next channel##sesd"].plurals[0] = "=12xx: Toggle period modulation with next channel";
+    strings["13xx: Set waveform##sesd"].plurals[0] = "=13xx: Set waveform";
+    strings["this was Yamaha's first integrated FM chip.\nit was used in several synthesizers, computers and arcade boards.##sesd"].plurals[0] = "=this was Yamaha's first integrated FM chip.\nit was used in several synthesizers, computers and arcade boards.";
+    strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).";
+    strings["it's a challenge to make music on this chip which barely has musical capabilities...##sesd"].plurals[0] = "=it's a challenge to make music on this chip which barely has musical capabilities...";
+    strings["supposedly an upgrade from the AY-3-8910, this was present on the Creative Music System (Game Blaster) and SAM Coupé.##sesd"].plurals[0] = "=supposedly an upgrade from the AY-3-8910, this was present on the Creative Music System (Game Blaster) and SAM Coupé.";
+    strings["10xy: Set channel mode (x: noise; y: tone)##sesd"].plurals[0] = "=10xy: Set channel mode (x: noise; y: tone)";
+    strings["11xx: Set noise frequency##sesd"].plurals[0] = "=11xx: Set noise frequency";
+    strings["12xx: Setup envelope (refer to docs for more information)##sesd"].plurals[0] = "=12xx: Setup envelope (refer to docs for more information)";
+    strings["an improved version of the AY-3-8910 with a bigger frequency range, duty cycles, configurable noise and per-channel envelopes!##sesd"].plurals[0] = "=an improved version of the AY-3-8910 with a bigger frequency range, duty cycles, configurable noise and per-channel envelopes!";
+    strings["Commodore's successor to the PET.\nits square wave channels are more than just square...##sesd"].plurals[0] = "=Commodore's successor to the PET.\nits square wave channels are more than just square...";
+    strings["one channel of 1-bit wavetable which is better (and worse) than the PC Speaker.##sesd"].plurals[0] = "=one channel of 1-bit wavetable which is better (and worse) than the PC Speaker.";
+    strings["FM? nah... samples! Nintendo's answer to Sega.##sesd"].plurals[0] = "=FM? nah... samples! Nintendo's answer to Sega.";
+    strings["18xx: Enable echo buffer##sesd"].plurals[0] = "=18xx: Enable echo buffer";
+    strings["19xx: Set echo delay (0 to F)##sesd"].plurals[0] = "=19xx: Set echo delay (0 to F)";
+    strings["1Axx: Set left echo volume##sesd"].plurals[0] = "=1Axx: Set left echo volume";
+    strings["1Bxx: Set right echo volume##sesd"].plurals[0] = "=1Bxx: Set right echo volume";
+    strings["1Cxx: Set echo feedback##sesd"].plurals[0] = "=1Cxx: Set echo feedback";
+    strings["1Exx: Set dry output volume (left)##sesd"].plurals[0] = "=1Exx: Set dry output volume (left)";
+    strings["1Fxx: Set dry output volume (right)##sesd"].plurals[0] = "=1Fxx: Set dry output volume (right)";
+    strings["30xx: Set echo filter coefficient 0##sesd"].plurals[0] = "=30xx: Set echo filter coefficient 0";
+    strings["31xx: Set echo filter coefficient 1##sesd"].plurals[0] = "=31xx: Set echo filter coefficient 1";
+    strings["32xx: Set echo filter coefficient 2##sesd"].plurals[0] = "=32xx: Set echo filter coefficient 2";
+    strings["33xx: Set echo filter coefficient 3##sesd"].plurals[0] = "=33xx: Set echo filter coefficient 3";
+    strings["34xx: Set echo filter coefficient 4##sesd"].plurals[0] = "=34xx: Set echo filter coefficient 4";
+    strings["35xx: Set echo filter coefficient 5##sesd"].plurals[0] = "=35xx: Set echo filter coefficient 5";
+    strings["36xx: Set echo filter coefficient 6##sesd"].plurals[0] = "=36xx: Set echo filter coefficient 6";
+    strings["37xx: Set echo filter coefficient 7##sesd"].plurals[0] = "=37xx: Set echo filter coefficient 7";
+    strings["10xx: Set waveform##sesd3"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Toggle noise mode##sesd1"].plurals[0] = "=11xx: Toggle noise mode";
+    strings["12xx: Toggle echo on this channel##sesd"].plurals[0] = "=12xx: Toggle echo on this channel";
+    strings["13xx: Toggle pitch modulation##sesd"].plurals[0] = "=13xx: Toggle pitch modulation";
+    strings["14xy: Toggle invert (x: left; y: right)##sesd"].plurals[0] = "=14xy: Toggle invert (x: left; y: right)";
+    strings["15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)##sesd"].plurals[0] = "=15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)";
+    strings["16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)##sesd"].plurals[0] = "=16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)";
+    strings["1Dxx: Set noise frequency (00 to 1F)##sesd"].plurals[0] = "=1Dxx: Set noise frequency (00 to 1F)";
+    strings["20xx: Set attack (0 to F)##sesd"].plurals[0] = "=20xx: Set attack (0 to F)";
+    strings["21xx: Set decay (0 to 7)##sesd"].plurals[0] = "=21xx: Set decay (0 to 7)";
+    strings["22xx: Set sustain (0 to 7)##sesd"].plurals[0] = "=22xx: Set sustain (0 to 7)";
+    strings["23xx: Set release (00 to 1F)##sesd"].plurals[0] = "=23xx: Set release (00 to 1F)";
+    strings["an expansion chip for the Famicom, featuring a quirky sawtooth channel.##sesd"].plurals[0] = "=an expansion chip for the Famicom, featuring a quirky sawtooth channel.";
+    strings["12xx: Set duty cycle (pulse: 0 to 7)##sesd"].plurals[0] = "=12xx: Set duty cycle (pulse: 0 to 7)";
+    strings["17xx: Toggle PCM mode (LEGACY)##sesd2"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["cost-reduced version of the OPL with 16 patches and only one of them is user-configurable.##sesd"].plurals[0] = "=cost-reduced version of the OPL with 16 patches and only one of them is user-configurable.";
     strings["Famicom Disk System (chip)##sesd"].plurals[0] = "=Famicom Disk System (chip)";
+    strings["a disk drive for the Famicom which also contains one wavetable channel.##sesd"].plurals[0] = "=a disk drive for the Famicom which also contains one wavetable channel.";
+    strings["10xx: Set waveform##sesd4"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Set modulation depth##sesd"].plurals[0] = "=11xx: Set modulation depth";
+    strings["12xy: Set modulation speed high byte (x: enable; y: value)##sesd"].plurals[0] = "=12xy: Set modulation speed high byte (x: enable; y: value)";
+    strings["13xx: Set modulation speed low byte##sesd"].plurals[0] = "=13xx: Set modulation speed low byte";
+    strings["14xx: Set modulator position##sesd"].plurals[0] = "=14xx: Set modulator position";
+    strings["15xx: Set modulator table to waveform##sesd"].plurals[0] = "=15xx: Set modulator table to waveform";
+    strings["an expansion chip for the Famicom, featuring a little-known PCM channel.##sesd"].plurals[0] = "=an expansion chip for the Famicom, featuring a little-known PCM channel.";
+    strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd1"].plurals[0] = "=12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)";
+    strings["an expansion chip for the Famicom, with full wavetable.##sesd"].plurals[0] = "=an expansion chip for the Famicom, with full wavetable.";
+    strings["18xx: Change channel limits (0 to 7, x + 1)##sesd"].plurals[0] = "=18xx: Change channel limits (0 to 7, x + 1)";
+    strings["20xx: Load a waveform into memory##sesd"].plurals[0] = "=20xx: Load a waveform into memory";
+    strings["21xx: Set position for wave load##sesd"].plurals[0] = "=21xx: Set position for wave load";
+    strings["10xx: Select waveform##sesd"].plurals[0] = "=10xx: Select waveform";
+    strings["11xx: Set waveform position in RAM##sesd"].plurals[0] = "=11xx: Set waveform position in RAM";
+    strings["12xx: Set waveform length in RAM (04 to FC in steps of 4)##sesd"].plurals[0] = "=12xx: Set waveform length in RAM (04 to FC in steps of 4)";
+    strings["15xx: Set waveform load position##sesd"].plurals[0] = "=15xx: Set waveform load position";
+    strings["16xx: Set waveform load length (04 to FC in steps of 4)##sesd"].plurals[0] = "=16xx: Set waveform load length (04 to FC in steps of 4)";
+    strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)##sesd"].plurals[0] = "=cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)";
     strings["Yamaha YM2203 (OPN) Extended Channel 3##sesd"].plurals[0] = "=Yamaha YM2203 (OPN) Extended Channel 3";
+    strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies##sesd"].plurals[0] = "=cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies";
+    strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "=cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.";
+    strings["OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.##sesd"].plurals[0] = "=OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.";
     strings["Yamaha YM2608 (OPNA) Extended Channel 3##sesd"].plurals[0] = "=Yamaha YM2608 (OPNA) Extended Channel 3";
+    strings["OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.##sesd"].plurals[0] = "=OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.";
     strings["Yamaha YM2608 (OPNA) Extended Channel 3 and CSM##sesd"].plurals[0] = "=Yamaha YM2608 (OPNA) Extended Channel 3 and CSM";
+    strings["OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "=OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.";
+    strings["OPN, but what if you only had two operators, no stereo, no detune and a lower ADSR parameter range?##sesd"].plurals[0] = "=OPN, but what if you only had two operators, no stereo, no detune and a lower ADSR parameter range?";
+    strings["OPL, but what if you had more waveforms to choose than the normal sine?##sesd"].plurals[0] = "=OPL, but what if you had more waveforms to choose than the normal sine?";
+    strings["OPL2, but what if you had twice the channels, 4-op mode, stereo and even more waveforms?##sesd"].plurals[0] = "=OPL2, but what if you had twice the channels, 4-op mode, stereo and even more waveforms?";
+    strings["how many channels of PCM do you want?\nMultiPCM: yes##sesd"].plurals[0] = "=how many channels of PCM do you want?\nMultiPCM: yes";
     strings["PC Speaker##sesd"].plurals[0] = "=PC Speaker";
+    strings["good luck! you get one square and no volume control.##sesd"].plurals[0] = "=good luck! you get one square and no volume control.";
+    strings["please don't use this chip. it was added as a joke.##sesd"].plurals[0] = "=please don't use this chip. it was added as a joke.";
+    strings["TIA, but better and more flexible.\nused in the Atari 8-bit family of computers (400/800/XL/XE).##sesd"].plurals[0] = "=TIA, but better and more flexible.\nused in the Atari 8-bit family of computers (400/800/XL/XE).";
+    strings["10xx: Set waveform (0 to 7)##sesd0"].plurals[0] = "=10xx: Set waveform (0 to 7)";
+    strings["11xx: Set AUDCTL##sesd"].plurals[0] = "=11xx: Set AUDCTL";
+    strings["12xx: Toggle two-tone mode##sesd"].plurals[0] = "=12xx: Toggle two-tone mode";
+    strings["this is like SNES' sound chip but without interpolation and the rest of nice bits.##sesd"].plurals[0] = "=this is like SNES' sound chip but without interpolation and the rest of nice bits.";
+    strings["developed by the makers of the Game Boy and the Virtual Boy...##sesd"].plurals[0] = "=developed by the makers of the Game Boy and the Virtual Boy...";
+    strings["10xx: Set waveform##sesd5"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Setup noise mode (0: disabled; 1-8: enabled/tap)##sesd"].plurals[0] = "=11xx: Setup noise mode (0: disabled; 1-8: enabled/tap)";
+    strings["12xx: Setup sweep period (0: disabled; 1-20: enabled/period)##sesd"].plurals[0] = "=12xx: Setup sweep period (0: disabled; 1-20: enabled/period)";
+    strings["13xx: Set sweep amount##sesd"].plurals[0] = "=13xx: Set sweep amount";
+    strings["17xx: Toggle PCM mode (LEGACY)##sesd3"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.##sesd"].plurals[0] = "=like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.";
+    strings["2Fxx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "=2Fxx: Toggle hard envelope reset on new notes";
+    strings["this one is like PC Speaker but has duty cycles.##sesd"].plurals[0] = "=this one is like PC Speaker but has duty cycles.";
+    strings["used in some Sega arcade boards (like OutRun), and usually paired with a YM2151.##sesd"].plurals[0] = "=used in some Sega arcade boards (like OutRun), and usually paired with a YM2151.";
+    strings["a console which failed to sell well due to its headache-inducing features.##sesd"].plurals[0] = "=a console which failed to sell well due to its headache-inducing features.";
+    strings["10xx: Set waveform##sesd6"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Set noise length (0 to 7)##sesd"].plurals[0] = "=11xx: Set noise length (0 to 7)";
+    strings["12xy: Setup envelope (x: enabled/loop (1: enable, 3: enable+loop); y: speed/direction (0-7: down, 8-F: up))##sesd"].plurals[0] = "=12xy: Setup envelope (x: enabled/loop (1: enable, 3: enable+loop); y: speed/direction (0-7: down, 8-F: up))";
+    strings["13xy: Setup sweep (x: speed; y: shift; channel 5 only)##sesd"].plurals[0] = "=13xy: Setup sweep (x: speed; y: shift; channel 5 only)";
+    strings["14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)##sesd"].plurals[0] = "=14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)";
+    strings["15xx: Set modulation waveform (x: wavetable; channel 5 only)##sesd"].plurals[0] = "=15xx: Set modulation waveform (x: wavetable; channel 5 only)";
+    strings["like OPLL, but even more cost reductions applied. three less FM channels, and no drums mode...##sesd"].plurals[0] = "=like OPLL, but even more cost reductions applied. three less FM channels, and no drums mode...";
+    strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.##sesd"].plurals[0] = "=so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.";
     strings["ZX Spectrum Beeper##sesd"].plurals[0] = "=ZX Spectrum Beeper";
+    strings["the ZX Spectrum only had a basic beeper capable of...\n...a bunch of thin pulses and tons of other interesting stuff!\nFurnace provides a thin pulse system.##sesd"].plurals[0] = "=the ZX Spectrum only had a basic beeper capable of...\n...a bunch of thin pulses and tons of other interesting stuff!\nFurnace provides a thin pulse system.";
+    strings["12xx: Set pulse width##sesd0"].plurals[0] = "=12xx: Set pulse width";
+    strings["17xx: Trigger overlay drum##sesd"].plurals[0] = "=17xx: Trigger overlay drum";
     strings["Yamaha YM2612 (OPN2) Extended Channel 3##sesd"].plurals[0] = "=Yamaha YM2612 (OPN2) Extended Channel 3";
+    strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.";
+    strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis one includes CSM mode control for special effects on Channel 3.";
+    strings["a wavetable chip made by Konami for use with the MSX.\nthe last channel shares its wavetable with the previous one though.##sesd"].plurals[0] = "=a wavetable chip made by Konami for use with the MSX.\nthe last channel shares its wavetable with the previous one though.";
     strings["Yamaha YM3526 (OPL) with drums##sesd"].plurals[0] = "=Yamaha YM3526 (OPL) with drums";
+    strings["the OPL chip but with drums mode enabled.##sesd"].plurals[0] = "=the OPL chip but with drums mode enabled.";
     strings["Yamaha YM3812 (OPL2) with drums##sesd"].plurals[0] = "=Yamaha YM3812 (OPL2) with drums";
+    strings["the OPL2 chip but with drums mode enabled.##sesd"].plurals[0] = "=the OPL2 chip but with drums mode enabled.";
     strings["Yamaha YMF262 (OPL3) with drums##sesd"].plurals[0] = "=Yamaha YMF262 (OPL3) with drums";
+    strings["the OPL3 chip but with drums mode enabled.##sesd"].plurals[0] = "=the OPL3 chip but with drums mode enabled.";
+    strings["this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.##sesd"].plurals[0] = "=this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.";
     strings["Yamaha YM2610 (OPNB) Extended Channel 2##sesd"].plurals[0] = "=Yamaha YM2610 (OPNB) Extended Channel 2";
+    strings["this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.##sesd"].plurals[0] = "=this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.";
+    strings["this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 2.##sesd"].plurals[0] = "=this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 2.";
     strings["Yamaha YM2413 (OPLL) with drums##sesd"].plurals[0] = "=Yamaha YM2413 (OPLL) with drums";
+    strings["the OPLL chip but with drums mode turned on.##sesd"].plurals[0] = "=the OPLL chip but with drums mode turned on.";
+    strings["3xxx: Load LFSR (0 to FFF)##sesd"].plurals[0] = "=3xxx: Load LFSR (0 to FFF)";
+    strings["a portable console made by Atari. it has all of Atari's trademark waveforms.##sesd"].plurals[0] = "=a portable console made by Atari. it has all of Atari's trademark waveforms.";
+    strings["10xx: Set echo feedback level (00 to FF)##sesd"].plurals[0] = "=10xx: Set echo feedback level (00 to FF)";
+    strings["11xx: Set channel echo level (00 to FF)##sesd"].plurals[0] = "=11xx: Set channel echo level (00 to FF)";
+    strings["12xx: Toggle QSound algorithm (0: disabled; 1: enabled)##sesd"].plurals[0] = "=12xx: Toggle QSound algorithm (0: disabled; 1: enabled)";
+    strings["3xxx: Set echo delay buffer length (000 to AA5)##sesd"].plurals[0] = "=3xxx: Set echo delay buffer length (000 to AA5)";
+    strings["used in some of Capcom's arcade boards. surround-like sampled sound with echo.##sesd"].plurals[0] = "=used in some of Capcom's arcade boards. surround-like sampled sound with echo.";
+    strings["the chip used in a computer design created by The 8-Bit Guy.##sesd"].plurals[0] = "=the chip used in a computer design created by The 8-Bit Guy.";
+    strings["20xx: Set waveform##sesd"].plurals[0] = "=20xx: Set waveform";
+    strings["22xx: Set duty cycle (0 to 3F)##sesd"].plurals[0] = "=22xx: Set duty cycle (0 to 3F)";
     strings["Yamaha YM2610B (OPNB2) Extended Channel 3##sesd"].plurals[0] = "=Yamaha YM2610B (OPNB2) Extended Channel 3";
+    strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.##sesd"].plurals[0] = "=so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.";
+    strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "=so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.";
     strings["SegaPCM (compatible 5-channel mode)##sesd"].plurals[0] = "=SegaPCM (compatible 5-channel mode)";
+    strings["this is the same thing as SegaPCM, but only exposes 5 of the channels for compatibility with DefleMask.##sesd"].plurals[0] = "=this is the same thing as SegaPCM, but only exposes 5 of the channels for compatibility with DefleMask.";
+    strings["a sound chip used in several Seta/Allumer-manufactured arcade boards with too many channels of wavetable sound, which also are capable of sampled sound.##sesd"].plurals[0] = "=a sound chip used in several Seta/Allumer-manufactured arcade boards with too many channels of wavetable sound, which also are capable of sampled sound.";
+    strings["10xx: Set waveform##sesd7"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Set envelope shape##sesd"].plurals[0] = "=11xx: Set envelope shape";
+    strings["12xx: Set sample bank slot (0 to 7)##sesd"].plurals[0] = "=12xx: Set sample bank slot (0 to 7)";
+    strings["17xx: Toggle PCM mode (LEGACY)##sesd4"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["20xx: Set PCM frequency (1 to FF)##sesd"].plurals[0] = "=20xx: Set PCM frequency (1 to FF)";
+    strings["22xx: Set envelope mode (bit 0: enable; bit 1: one-shot; bit 2: split shape to L/R; bit 3/5: H.invert right/left; bit 4/6: V.invert right/left)##sesd"].plurals[0] = "=22xx: Set envelope mode (bit 0: enable; bit 1: one-shot; bit 2: split shape to L/R; bit 3/5: H.invert right/left; bit 4/6: V.invert right/left)";
+    strings["23xx: Set envelope period##sesd"].plurals[0] = "=23xx: Set envelope period";
+    strings["25xx: Envelope slide up##sesd1"].plurals[0] = "=25xx: Envelope slide up";
+    strings["26xx: Envelope slide down##sesd1"].plurals[0] = "=26xx: Envelope slide down";
+    strings["29xy: Set auto-envelope (x: numerator; y: denominator)##sesd1"].plurals[0] = "=29xy: Set auto-envelope (x: numerator; y: denominator)";
+    strings["this is the wavetable part of the Bubble System, which also had two AY-3-8910s.##sesd"].plurals[0] = "=this is the wavetable part of the Bubble System, which also had two AY-3-8910s.";
+    strings["like OPL3, but this time it also has a 24-channel version of MultiPCM.##sesd"].plurals[0] = "=like OPL3, but this time it also has a 24-channel version of MultiPCM.";
     strings["Yamaha YMF278B (OPL4) with drums##sesd"].plurals[0] = "=Yamaha YMF278B (OPL4) with drums";
+    strings["the OPL4 but with drums mode turned on.##sesd"].plurals[0] = "=the OPL4 but with drums mode turned on.";
+    strings["11xx: Set filter mode (00 to 03)##sesd"].plurals[0] = "=11xx: Set filter mode (00 to 03)";
+    strings["14xx: Set filter coefficient K1 low byte (00 to FF)##sesd"].plurals[0] = "=14xx: Set filter coefficient K1 low byte (00 to FF)";
+    strings["15xx: Set filter coefficient K1 high byte (00 to FF)##sesd"].plurals[0] = "=15xx: Set filter coefficient K1 high byte (00 to FF)";
+    strings["16xx: Set filter coefficient K2 low byte (00 to FF)##sesd"].plurals[0] = "=16xx: Set filter coefficient K2 low byte (00 to FF)";
+    strings["17xx: Set filter coefficient K2 high byte (00 to FF)##sesd"].plurals[0] = "=17xx: Set filter coefficient K2 high byte (00 to FF)";
+    strings["18xx: Set filter coefficient K1 slide up (00 to FF)##sesd"].plurals[0] = "=18xx: Set filter coefficient K1 slide up (00 to FF)";
+    strings["19xx: Set filter coefficient K1 slide down (00 to FF)##sesd"].plurals[0] = "=19xx: Set filter coefficient K1 slide down (00 to FF)";
+    strings["1Axx: Set filter coefficient K2 slide up (00 to FF)##sesd"].plurals[0] = "=1Axx: Set filter coefficient K2 slide up (00 to FF)";
+    strings["1Bxx: Set filter coefficient K2 slide down (00 to FF)##sesd"].plurals[0] = "=1Bxx: Set filter coefficient K2 slide down (00 to FF)";
+    strings["22xx: Set envelope left volume ramp (signed) (00 to FF)##sesd"].plurals[0] = "=22xx: Set envelope left volume ramp (signed) (00 to FF)";
+    strings["23xx: Set envelope right volume ramp (signed) (00 to FF)##sesd"].plurals[0] = "=23xx: Set envelope right volume ramp (signed) (00 to FF)";
+    strings["24xx: Set envelope filter coefficient k1 ramp (signed) (00 to FF)##sesd"].plurals[0] = "=24xx: Set envelope filter coefficient k1 ramp (signed) (00 to FF)";
+    strings["25xx: Set envelope filter coefficient k1 ramp (signed, slower) (00 to FF)##sesd"].plurals[0] = "=25xx: Set envelope filter coefficient k1 ramp (signed, slower) (00 to FF)";
+    strings["26xx: Set envelope filter coefficient k2 ramp (signed) (00 to FF)##sesd"].plurals[0] = "=26xx: Set envelope filter coefficient k2 ramp (signed) (00 to FF)";
+    strings["27xx: Set envelope filter coefficient k2 ramp (signed, slower) (00 to FF)##sesd"].plurals[0] = "=27xx: Set envelope filter coefficient k2 ramp (signed, slower) (00 to FF)";
+    strings["DFxx: Set sample playback direction (0: normal; 1: reverse)##sesd1"].plurals[0] = "=DFxx: Set sample playback direction (0: normal; 1: reverse)";
+    strings["120x: Set pause (bit 0)##sesd"].plurals[0] = "=120x: Set pause (bit 0)";
+    strings["2xxx: Set envelope count (000 to 1FF)##sesd"].plurals[0] = "=2xxx: Set envelope count (000 to 1FF)";
+    strings["3xxx: Set filter coefficient K1 (000 to FFF)##sesd"].plurals[0] = "=3xxx: Set filter coefficient K1 (000 to FFF)";
+    strings["4xxx: Set filter coefficient K2 (000 to FFF)##sesd"].plurals[0] = "=4xxx: Set filter coefficient K2 (000 to FFF)";
+    strings["a sample chip made by Ensoniq, which is the basis for the GF1 chip found in Gravis' Ultrasound cards.##sesd"].plurals[0] = "=a sample chip made by Ensoniq, which is the basis for the GF1 chip found in Gravis' Ultrasound cards.";
+    strings["like OPL but with an ADPCM channel.##sesd"].plurals[0] = "=like OPL but with an ADPCM channel.";
     strings["Yamaha Y8950 with drums##sesd"].plurals[0] = "=Yamaha Y8950 with drums";
+    strings["the Y8950 chip, in drums mode.##sesd"].plurals[0] = "=the Y8950 chip, in drums mode.";
+    strings["this is a variant of Konami's SCC chip with the last channel's wavetable being independent.##sesd"].plurals[0] = "=this is a variant of Konami's SCC chip with the last channel's wavetable being independent.";
+    strings["10xx: Set waveform (0 to 7)##sesd1"].plurals[0] = "=10xx: Set waveform (0 to 7)";
+    strings["12xx: Set pulse width (0 to 7F)##sesd"].plurals[0] = "=12xx: Set pulse width (0 to 7F)";
+    strings["13xx: Set resonance (0 to FF)##sesd"].plurals[0] = "=13xx: Set resonance (0 to FF)";
+    strings["14xx: Set filter mode (bit 0: ring mod; bit 1: low pass; bit 2: high pass; bit 3: band pass)##sesd"].plurals[0] = "=14xx: Set filter mode (bit 0: ring mod; bit 1: low pass; bit 2: high pass; bit 3: band pass)";
+    strings["15xx: Set frequency sweep period low byte##sesd"].plurals[0] = "=15xx: Set frequency sweep period low byte";
+    strings["16xx: Set frequency sweep period high byte##sesd"].plurals[0] = "=16xx: Set frequency sweep period high byte";
+    strings["17xx: Set volume sweep period low byte##sesd"].plurals[0] = "=17xx: Set volume sweep period low byte";
+    strings["18xx: Set volume sweep period high byte##sesd"].plurals[0] = "=18xx: Set volume sweep period high byte";
+    strings["19xx: Set cutoff sweep period low byte##sesd"].plurals[0] = "=19xx: Set cutoff sweep period low byte";
+    strings["1Axx: Set cutoff sweep period high byte##sesd"].plurals[0] = "=1Axx: Set cutoff sweep period high byte";
+    strings["1Bxx: Set frequency sweep boundary##sesd"].plurals[0] = "=1Bxx: Set frequency sweep boundary";
+    strings["1Cxx: Set volume sweep boundary##sesd"].plurals[0] = "=1Cxx: Set volume sweep boundary";
+    strings["1Dxx: Set cutoff sweep boundary##sesd"].plurals[0] = "=1Dxx: Set cutoff sweep boundary";
+    strings["1Exx: Set phase reset period low byte##sesd"].plurals[0] = "=1Exx: Set phase reset period low byte";
+    strings["1Fxx: Set phase reset period high byte##sesd"].plurals[0] = "=1Fxx: Set phase reset period high byte";
+    strings["20xx: Toggle frequency sweep (bit 0-6: speed; bit 7: direction is up)##sesd"].plurals[0] = "=20xx: Toggle frequency sweep (bit 0-6: speed; bit 7: direction is up)";
+    strings["21xx: Toggle volume sweep (bit 0-4: speed; bit 5: direction is up; bit 6: loop; bit 7: alternate)##sesd"].plurals[0] = "=21xx: Toggle volume sweep (bit 0-4: speed; bit 5: direction is up; bit 6: loop; bit 7: alternate)";
+    strings["22xx: Toggle cutoff sweep (bit 0-6: speed; bit 7: direction is up)##sesd"].plurals[0] = "=22xx: Toggle cutoff sweep (bit 0-6: speed; bit 7: direction is up)";
+    strings["4xxx: Set cutoff (0 to FFF)##sesd"].plurals[0] = "=4xxx: Set cutoff (0 to FFF)";
+    strings["tildearrow's fantasy sound chip. put SID, AY and VERA in a blender, and you get this!##sesd"].plurals[0] = "=tildearrow's fantasy sound chip. put SID, AY and VERA in a blender, and you get this!";
+    strings["an ADPCM sound chip manufactured by OKI and used in many arcade boards.##sesd"].plurals[0] = "=an ADPCM sound chip manufactured by OKI and used in many arcade boards.";
+    strings["20xx: Set chip output rate (0: clock/132; 1: clock/165)##sesd"].plurals[0] = "=20xx: Set chip output rate (0: clock/132; 1: clock/165)";
+    strings["an ADPCM sound chip manufactured by OKI and used in the Sharp X68000.##sesd"].plurals[0] = "=an ADPCM sound chip manufactured by OKI and used in the Sharp X68000.";
+    strings["20xx: Set frequency divider (0-2)##sesd"].plurals[0] = "=20xx: Set frequency divider (0-2)";
+    strings["21xx: Select clock rate (0: full; 1: half)##sesd"].plurals[0] = "=21xx: Select clock rate (0: full; 1: half)";
+    strings["used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or 16-bit PCM.##sesd"].plurals[0] = "=used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or 16-bit PCM.";
+    strings["10xx: Set waveform##sesd8"].plurals[0] = "=10xx: Set waveform";
+    strings["10xx: Set waveform##sesd9"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Toggle noise mode##sesd2"].plurals[0] = "=11xx: Toggle noise mode";
+    strings["a wavetable sound chip used in Pac-Man, among other early Namco arcade games.##sesd"].plurals[0] = "=a wavetable sound chip used in Pac-Man, among other early Namco arcade games.";
+    strings["successor of the original Namco WSG chip, used in later Namco arcade games.##sesd"].plurals[0] = "=successor of the original Namco WSG chip, used in later Namco arcade games.";
+    strings["like Namco C15 but with stereo sound.##sesd"].plurals[0] = "=like Namco C15 but with stereo sound.";
+    strings["a square wave additive synthesis chip made by OKI. used in some arcade machines and instruments.##sesd"].plurals[0] = "=a square wave additive synthesis chip made by OKI. used in some arcade machines and instruments.";
+    strings["10xy: Set group control (x: sustain; y: part toggle bitmask)##sesd"].plurals[0] = "=10xy: Set group control (x: sustain; y: part toggle bitmask)";
+    strings["11xx: Set noise mode##sesd0"].plurals[0] = "=11xx: Set noise mode";
+    strings["12xx: Set group attack (0 to 5)##sesd"].plurals[0] = "=12xx: Set group attack (0 to 5)";
+    strings["13xx: Set group decay (0 to 11)##sesd"].plurals[0] = "=13xx: Set group decay (0 to 11)";
     strings["Yamaha YM2612 (OPN2) with DualPCM##sesd"].plurals[0] = "=Yamaha YM2612 (OPN2) with DualPCM";
+    strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis system uses software mixing to provide two sample channels.##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis system uses software mixing to provide two sample channels.";
     strings["Yamaha YM2612 (OPN2) Extended Channel 3 with DualPCM and CSM##sesd"].plurals[0] = "=Yamaha YM2612 (OPN2) Extended Channel 3 with DualPCM and CSM";
+    strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis system uses software mixing to provide two sample channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis system uses software mixing to provide two sample channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.";
+    strings["an SN76489 derivative used in Neo Geo Pocket, has independent stereo volume and noise channel frequency.##sesd"].plurals[0] = "=an SN76489 derivative used in Neo Geo Pocket, has independent stereo volume and noise channel frequency.";
+    strings["20xx: Set noise length (0: short, 1: long)##sesd"].plurals[0] = "=20xx: Set noise length (0: short, 1: long)";
     strings["Generic PCM DAC##sesd"].plurals[0] = "=Generic PCM DAC";
+    strings["as generic sample playback as it gets.##sesd"].plurals[0] = "=as generic sample playback as it gets.";
+    strings["this PCM chip was widely used at Konami arcade boards in 1986-1990.##sesd"].plurals[0] = "=this PCM chip was widely used at Konami arcade boards in 1986-1990.";
+    strings["yet another PCM chip from Irem. like Amiga, but less pitch resolution and no sample loop.##sesd"].plurals[0] = "=yet another PCM chip from Irem. like Amiga, but less pitch resolution and no sample loop.";
+    strings["a SoC with wavetable sound hardware.##sesd"].plurals[0] = "=a SoC with wavetable sound hardware.";
+    strings["a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.##sesd"].plurals[0] = "=a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.";
+    strings["10xx: Set ring modulation (0: disable, 1: enable)##sesd"].plurals[0] = "=10xx: Set ring modulation (0: disable, 1: enable)";
     strings["ZX Spectrum Beeper (QuadTone Engine)##sesd"].plurals[0] = "=ZX Spectrum Beeper (QuadTone Engine)";
+    strings["another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.##sesd"].plurals[0] = "=another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.";
+    strings["12xx: Set pulse width##sesd1"].plurals[0] = "=12xx: Set pulse width";
+    strings["this PCM chip was widely used at Konami arcade boards in 1990-1992.##sesd"].plurals[0] = "=this PCM chip was widely used at Konami arcade boards in 1990-1992.";
+    strings["DFxx: Set sample playback direction (0: normal; 1: reverse)##sesd2"].plurals[0] = "=DFxx: Set sample playback direction (0: normal; 1: reverse)";
+    strings["two square waves (one may be turned into noise). used in the Commodore Plus/4, 16 and 116.##sesd"].plurals[0] = "=two square waves (one may be turned into noise). used in the Commodore Plus/4, 16 and 116.";
+    strings["Namco's first PCM chip from 1987. it's pretty good for being so.##sesd"].plurals[0] = "=Namco's first PCM chip from 1987. it's pretty good for being so.";
+    strings["Namco's PCM chip used in their NA-1/2 hardware.\nvery similar to C140, but has noise generator.##sesd"].plurals[0] = "=Namco's PCM chip used in their NA-1/2 hardware.\nvery similar to C140, but has noise generator.";
+    strings["11xx: Set noise mode##sesd1"].plurals[0] = "=11xx: Set noise mode";
+    strings["12xy: Set invert mode (x: surround; y: invert)##sesd"].plurals[0] = "=12xy: Set invert mode (x: surround; y: invert)";
     strings["ESS ES1xxx series (ESFM)##sesd"].plurals[0] = "=ESS ES1xxx series (ESFM)";
+    strings["a unique FM synth featured in PC sound cards.\nbased on the OPL3 design, but with lots of its features extended.##sesd"].plurals[0] = "=a unique FM synth featured in PC sound cards.\nbased on the OPL3 design, but with lots of its features extended.";
+    strings["2Exx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "=2Exx: Toggle hard envelope reset on new notes";
+    strings["first Ensoniq chip used in their synths and Apple IIGS computer. Has 32 hard-panned 8-bit wavetable/sample channels, can do oscillator sync (like SID) and amplitude modulation. Can have up to 128 KiB (2 banks of 64 KiB) of memory for wavetables/samples.\nAs Robert Yannes (SID chip creator) said, it's more or less what SID chip could be if he was given enough time for its development.##sesd"].plurals[0] = "=first Ensoniq chip used in their synths and Apple IIGS computer. Has 32 hard-panned 8-bit wavetable/sample channels, can do oscillator sync (like SID) and amplitude modulation. Can have up to 128 KiB (2 banks of 64 KiB) of memory for wavetables/samples.\nAs Robert Yannes (SID chip creator) said, it's more or less what SID chip could be if he was given enough time for its development.";
+    strings["11xx: Set number of enabled oscillators (2-1F)##sesd"].plurals[0] = "=11xx: Set number of enabled oscillators (2-1F)";
+    strings["12xx: Set oscillator output (0-7, 0=left, 1=right)##sesd"].plurals[0] = "=12xx: Set oscillator output (0-7, 0=left, 1=right)";
+    strings["13xx: Set wave/sample length (0-7, 0=256, 1=512, 2=1024, etc.)##sesd"].plurals[0] = "=13xx: Set wave/sample length (0-7, 0=256, 1=512, 2=1024, etc.)";
+    strings["14xx: Set wave/sample position in memory (xx*256 offset)##sesd"].plurals[0] = "=14xx: Set wave/sample position in memory (xx*256 offset)";
+    strings["15xx: Set oscillator mode (0-3)##sesd"].plurals[0] = "=15xx: Set oscillator mode (0-3)";
+    strings["a fantasy sound chip designed by jvsTSX and The Beesh-Spweesh!\nused in the Hexheld fantasy console.##sesd"].plurals[0] = "=a fantasy sound chip designed by jvsTSX and The Beesh-Spweesh!\nused in the Hexheld fantasy console.";
+    strings["20xx: Load low byte of noise channel LFSR (00 to FF) or slope channel accumulator (00 to 7F)##sesd"].plurals[0] = "=20xx: Load low byte of noise channel LFSR (00 to FF) or slope channel accumulator (00 to 7F)";
+    strings["21xx: Load high byte of noise channel LFSR (00 to FF)##sesd"].plurals[0] = "=21xx: Load high byte of noise channel LFSR (00 to FF)";
+    strings["22xx: Write to I/O port A##sesd"].plurals[0] = "=22xx: Write to I/O port A";
+    strings["23xx: Write to I/O port B##sesd"].plurals[0] = "=23xx: Write to I/O port B";
     strings["Dummy System##sesd"].plurals[0] = "=Dummy System";
+    strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "=this is a system designed for testing purposes.";
 
 }
 

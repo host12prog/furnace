@@ -224,7 +224,70 @@ void DivLocale::addTranslationsRussian()
 
     strings["Clock###Clock"].plurals[0] = "Часы###Clock";
 
-    //src/gui/dataList.cpp
+    //   sgcf  src/gui/compatFlags.cpp
+
+    strings["Compatibility Flags###Compatibility Flags"].plurals[0] = "Флаги совместимости###Compatibility Flags";
+    strings["these flags are designed to provide better DefleMask/older Furnace compatibility.\nit is recommended to disable most of these unless you rely on specific quirks.##sgcf"].plurals[0] = "эти флаги предназначены для лучшей совместимости с DefleMask/стрыми версиями Furnace.\nрекомендуется отключать большинство из них, если вы не полагаетесь на специфику работы программы, которую они обеспечивают.";
+    strings["Game Boy instrument duty is wave volume##sgcf"].plurals[0] = "Макрос скважности инструмента Game Boy контролирует громкость канала волновых таблиц";
+    strings["if enabled, an instrument with duty macro in the wave channel will be mapped to wavetable volume.##sgcf"].plurals[0] = "при включении макрос скважности инструмента будет назначен для контроля громкости канала волновых таблиц.";
+    strings["Restart macro on portamento##sgcf"].plurals[0] = "Перезапуск макроса при портаменто";
+    strings["when enabled, a portamento effect will reset the channel's macro if used in combination with a note.##sgcf"].plurals[0] = "при включении этого флага эффект портаменто, будучи размещённым рядом с нотой, будет перезапускать макросы инструмента.";
+    strings["Ignore duplicate slide effects##sgcf"].plurals[0] = "Игнорировать дублирующиеся эффекты авто-портаменто";
+    strings["if this is on, only the first slide of a row in a channel will be considered.##sgcf"].plurals[0] = "при включении этого флага только первый эффект авто-портаменто в данной строке будет эффективен.";
+    strings["Ignore 0Dxx on the last order##sgcf"].plurals[0] = "Игнорировать 0Dxx на последней строке матрицы паттернов";
+    strings["if this is on, a jump to next row effect will not take place when it is on the last order of a song.##sgcf"].plurals[0] = "при включении флага эффект прыжка на следующий паттерн не будет работать, если паттерн проигрывается в последней строке матрицы паттернов.";
+    strings["Don't apply Game Boy envelope on note-less instrument change##sgcf"].plurals[0] = "Не применять огибающую Game Boy при смене инструмента без ноты";
+    strings["if this is on, an instrument change will not affect the envelope.##sgcf"].plurals[0] = "при включении этого флага смена инструмента без смены ноты не будет влиять на огибающую.";
+    strings["Ignore DAC mode change outside of intended channel in ExtCh mode##sgcf"].plurals[0] = "Игнорировать переключение режима ЦАП, если оно не происходит на соответствующем канале, в режиме расширенного канала";
+    strings["if this is on, 17xx has no effect on the operator channels in YM2612.##sgcf"].plurals[0] = "при включении этого флага 17xx не работает, если размещён на каналах операторов расширенного канала (для YM2612).";
+    strings["SN76489 duty macro always resets phase##sgcf"].plurals[0] = "Макрос скважности SN76489 всегда сбрасывает фазу";
+    strings["when enabled, duty macro will always reset phase, even if its value hasn't changed.##sgcf"].plurals[0] = "при включении этого флага макрос скважности всегда будет сбрасывать фазу, даже если значение скважности не меняется.";
+    strings["Don't persist volume macro after it finishes##sgcf"].plurals[0] = "Не удерживать значение макроса громкости после его завершения";
+    strings["when enabled, a value in the volume column that happens after the volume macro is done will disregard the macro.##sgcf"].plurals[0] = "при включении этого флага значение в столбце громкости, расположенное после завершения макроса громкости, не будет учитывать значение макроса.";
+    strings[".mod import##sgcf"].plurals[0] = "импорт .mod";
+    strings["Don't slide on the first tick of a row##sgcf"].plurals[0] = "Не исполнять авто-портаменто в первый шаг движка трекера каждой строки";
+    strings["simulates ProTracker's behavior of not applying volume/pitch slides on the first tick of a row.##sgcf"].plurals[0] = "симулирует поведение программы ProTracker, которая не исполняет изменения громкости и частоты на первом шаге движка каждого столбца.";
+    strings["Reset arpeggio position on row change##sgcf"].plurals[0] = "Перезапуск позиции арпеджио при продвижении по строкам паттерна";
+    strings["simulates ProTracker's behavior of arpeggio being bound to the current tick of a row.##sgcf"].plurals[0] = "симулирует поведение программы ProTracker, которая привязывает исполнение арпеджио к номеру шага движка в каждой строке паттерна.";
+    strings["Pitch/Playback##sgcf"].plurals[0] = "Частота/Воспроизведение";
+    strings["Pitch linearity:##sgcf"].plurals[0] = "Линейность частоты (в долях полутонов):";
+    strings["None##sgcf"].plurals[0] = "Нет (прямая работа с частотой)";
+    strings["like ProTracker/FamiTracker##sgcf"].plurals[0] = "как ProTracker/FamiTracker";
+    strings["Full##sgcf"].plurals[0] = "Полная";
+    strings["like Impulse Tracker##sgcf"].plurals[0] = "как Impulse Tracker";
+    strings["Pitch slide speed multiplier##sgcf"].plurals[0] = "Множитель скорости команды авто-портаменто";
+    strings["Loop modality:##sgcf"].plurals[0] = "Работа зацикливания:";
+    strings["Reset channels##sgcf"].plurals[0] = "Перезапуск каналов";
+    strings["select to reset channels on loop. may trigger a voltage click on every loop!##sgcf"].plurals[0] = "выберите для перезапуска каналов каждый раз в начале цикла. может вызывать щелчок в каждом начале цикла из-за смены напряжения!";
+    strings["Soft reset channels##sgcf"].plurals[0] = "Мягкий перезапуск каналов";
+    strings["select to turn channels off on loop.##sgcf"].plurals[0] = "выберите для отключения каналов в начале цикла.";
+    strings["Do nothing##sgcf"].plurals[0] = "Ничего не делать";
+    strings["select to not reset channels on loop.##sgcf"].plurals[0] = "выберите, чтобы отключить перезапуск каналов в начале цикла.";
+    strings["Cut/delay effect policy:##sgcf"].plurals[0] = "Поведение эффектов заглушения/задержки ноты:";
+    strings["Strict##sgcf"].plurals[0] = "Строгое";
+    strings["only when time is less than speed (like DefleMask/ProTracker)##sgcf"].plurals[0] = "только в случае, когда параметр меньше скорости (как DefleMask/ProTracker)";
+    strings["Lax##sgcf"].plurals[0] = "Нестрогое";
+    strings["no checks##sgcf"].plurals[0] = "без проверок";
+    strings["Simultaneous jump (0B+0D) treatment:##sgcf"].plurals[0] = "Поведение при одновременном прыжке (0B+0D):";
+    strings["Normal##sgcf"].plurals[0] = "Нормальное";
+    strings["accept 0B+0D to jump to a specific row of an order##sgcf"].plurals[0] = "принять 0B+0D как прыжок на конкретную строку паттерна на конкретной позиции матрицы паттернов";
+    strings["Other##sgcf"].plurals[0] = "Другое";
+    strings["Auto-insert one tick gap between notes##sgcf"].plurals[0] = "Автоматически вставлять паузу в 1 шаг движка между нотами";
+    strings["when enabled, a one-tick note cut will be inserted between non-legato/non-portamento notes.\nthis simulates the behavior of some Amiga/SNES music engines.\n\nineffective on C64.##sgcf"].plurals[0] = "при включении этого флага между нотами без эффекта легато и авто-портаменто будет вставлено заглушение ноты длиной в один шаг движка.\nэто симуляция повдения некоторых музыкальных драйверов Amiga/SNES.\n\nничего не меняет для C64.";
+    strings["Don't reset slides after note off##sgcf"].plurals[0] = "Не переинициализировать авто-портаменто после окончания ноты";
+    strings["when enabled, note off will not reset the channel's slide effect.##sgcf"].plurals[0] = "при включении этого флага окончание ноты не будет останавливать авто-портаменто на этом канале.";
+    strings["Don't reset portamento after reaching target##sgcf"].plurals[0] = "Не переинициализировать авто-портаменто после достижения цели";
+    strings["when enabled, the slide effect will not be disabled after it reaches its target.##sgcf"].plurals[0] = "при включении этого флага эффект авто-портаменто не будет переинициализирован при достижении целевой частоты.";
+    strings["Continuous vibrato##sgcf"].plurals[0] = "Непрерывное вибрато";
+    strings["when enabled, vibrato phase/position will not be reset on a new note.##sgcf"].plurals[0] = "при включении этого флага фаза/положение вибрато не будут сбрасываться на новой ноте.";
+    strings["Pitch macro is not linear##sgcf"].plurals[0] = "Нелинейный макрос частоты";
+    strings["when enabled, the pitch macro of an instrument is in frequency/period space.##sgcf"].plurals[0] = "при включении этого флага макрос частоты будет работать относительно периода/частоты, а не долей полутона.";
+    strings["Reset arpeggio effect position on new note##sgcf"].plurals[0] = "Сбрасывать положение эффекта арпеджио на новой ноте";
+    strings["when enabled, arpeggio effect (00xy) position is reset on a new note.##sgcf"].plurals[0] = "при включении этого флага положение эффекта арпеджио (00xy) сбрасывается на новой ноте.";
+    strings["Volume scaling rounds up##sgcf"].plurals[0] = "Масштабирование громкости округляется вверх";
+    strings["when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels##sgcf"].plurals[0] = "при включении этого флага значения макросов громкости округляются вверх\nэто предотвращает возникновение ситуации vol=0 при масштабировании громкости, что приводит к заглушению на некоторых чипах\n\nне эффективно на чипах с логарифмическим контролем громкости";
+
+    //   sgdl  src/gui/dataList.cpp
 
     strings["Bug!##sgdl"].plurals[0] = "Баг!";
     strings["Unknown##sgdl"].plurals[0] = "Неизвестный тип инструмента";
@@ -2307,7 +2370,6 @@ void DivLocale::addTranslationsRussian()
     strings["About Furnace###About Furnace"].plurals[0] = "О Furnace###About Furnace";
     strings["Channels###Channels"].plurals[0] = "Каналы###Channels";
     strings["Oscilloscope (per-channel)###Oscilloscope (per-channel)"].plurals[0] = "Осциллографы (отд. кан.)###Oscilloscope (per-channel)";
-    strings["Compatibility Flags###Compatibility Flags"].plurals[0] = "Флаги совместимости###Compatibility Flags";
     strings["Instruments###Instruments"].plurals[0] = "Инструменты###Instruments";
     strings["Wavetables###Wavetables"].plurals[0] = "Волновые таблицы###Wavetables";
     strings["Debug###Debug"].plurals[0] = "Отладка###Debug";
