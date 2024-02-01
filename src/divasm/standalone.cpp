@@ -17,25 +17,14 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef _DEFINES_H
-#define _DEFINES_H
+#include "divasm.h"
 
-// global
-#define DIV_MAX_CHIPS 32
-#define DIV_MAX_CHANS 128
-#define DIV_MAX_PATTERNS 256
-#define DIV_MAX_CHIP_DEFS 256
+int main(int argc, char** argv) {
+  if (argc<2) {
+    printf("usage: %s file\n",argv[0]);
+    return 1;
+  }
 
-// in-pattern
-#define DIV_MAX_ROWS 256
-#define DIV_MAX_COLS 32
-#define DIV_MAX_EFFECTS 8
-
-// sample related
-#define DIV_MAX_SAMPLE_TYPE 4
-
-// dispatch
-#define DIV_MAX_OUTPUTS 16
-#define DIV_NOTE_NULL 0x7fffffff
-
-#endif
+  
+  return 0;
+}

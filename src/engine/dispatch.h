@@ -26,10 +26,9 @@
 #include "config.h"
 #include "chipUtils.h"
 #include "macroInt.h"
+#include "defines.h"
 
 #define ONE_SEMITONE 2200
-
-#define DIV_NOTE_NULL 0x7fffffff
 
 #define addWrite(a,v) regWrites.push_back(DivRegWrite(a,v));
 
