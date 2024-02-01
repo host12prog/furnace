@@ -7,7 +7,7 @@ const char* languages[] =
 {
     "English",
     "Русский",
-    "TEMPLATE",
+    //"TEMPLATE",
     NULL
 };
 
@@ -80,12 +80,12 @@ void DivLocale::setLanguage(DivLang lang) //if false, just update ImGui localiza
             break;
         }
 
-        case DIV_LANG_TEMPLATE:
+        /*case DIV_LANG_TEMPLATE:
         {
             addTranslationsTemplate();
             getPluralIndex = &getPluralIndexTemplate;
             break;
-        }
+        }*/
 
         default: break;
     }
