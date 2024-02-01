@@ -1755,7 +1755,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Dynax/Nakanihon 3rd generation hardware##sgpr"].plurals[0] = "=Dynax/Nakanihon 3rd generation hardware";
     strings["Dynax/Nakanihon 3rd generation hardware (drums mode)##sgpr"].plurals[0] = "=Dynax/Nakanihon 3rd generation hardware (drums mode)";
     strings["Dynax/Nakanihon Real Break (drums mode)##sgpr"].plurals[0] = "=Dynax/Nakanihon Real Break (drums mode)";
-    strings[" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.##sgpr"].plurals[0] = "= here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.";
+    strings["chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.##sgpr"].plurals[0] = "=chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.";
     strings["Yamaha YM2203 (extended channel 3)##sgpr"].plurals[0] = "=Yamaha YM2203 (extended channel 3)";
     strings["Yamaha YM2203 (extended channel 3 and CSM)##sgpr"].plurals[0] = "=Yamaha YM2203 (extended channel 3 and CSM)";
     strings["Yamaha YM2608 (extended channel 3)##sgpr"].plurals[0] = "=Yamaha YM2608 (extended channel 3)";
@@ -1817,8 +1817,7 @@ void DivLocale::addTranslationsTemplate()
     strings["%s: maximum sample rate is %d##sgse"].plurals[0] = "=%s: maximum sample rate is %d";
     strings["%s: minimum sample rate is %d##sgse"].plurals[0] = "=%s: minimum sample rate is %d";
     strings["%s: sample rate must be %d##sgse"].plurals[0] = "=%s: sample rate must be %d";
-    strings["Sample Editor"].plurals[0] = "=Sample Editor";
-    strings["no sample selected##sgse"].plurals[0] = "=no sample selected";
+    strings["Sample Editor###Sample Editor"].plurals[0] = "=Sample Editor###Sample Editor";
     strings["no sample selected##sgse"].plurals[0] = "=no sample selected";
     strings["select one...##sgse"].plurals[0] = "=select one...";
     strings["or##sgse0"].plurals[0] = "=or";
@@ -1868,7 +1867,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Rate##sgse0"].plurals[0] = "=Rate";
     strings["Compat Rate##sgse"].plurals[0] = "=Compat Rate";
     strings["used in DefleMask-compatible sample mode (17xx), in where samples are mapped to an octave.##sgse"].plurals[0] = "=used in DefleMask-compatible sample mode (17xx), in where samples are mapped to an octave.";
-    strings["Loop (length: %d)"].plurals[0] = "=Loop (length: %d)";
+    strings["Loop (length: %d)##Loop"].plurals[0] = "=Loop (length: %d)";
     strings["Loop##sgse"].plurals[0] = "=Loop";
     strings["changing the loop in a BRR sample may result in glitches!##sgse0"].plurals[0] = "=changing the loop in a BRR sample may result in glitches!";
     strings["Chips##sgse"].plurals[0] = "=Chips";
@@ -1886,8 +1885,10 @@ void DivLocale::addTranslationsTemplate()
     strings["changing the loop in a BRR sample may result in glitches!##sgse1"].plurals[0] = "=changing the loop in a BRR sample may result in glitches!";
     strings["End##sgse"].plurals[0] = "=End";
     strings["changing the loop in a BRR sample may result in glitches!##sgse2"].plurals[0] = "=changing the loop in a BRR sample may result in glitches!";
-    strings["%s\n%d bytes free##sgse"].plurals[0] = "=%s\n%d bytes free";
-    strings["%s (%s)\n%d bytes free##sgse"].plurals[0] = "=%s (%s)\n%d bytes free";
+    strings["%s\n%d bytes free##sgse"].plurals[0] = "=%s\n%d byte free";
+    strings["%s\n%d bytes free##sgse"].plurals[1] = "=%s\n%d bytes free";
+    strings["%s (%s)\n%d bytes free##sgse"].plurals[0] = "=%s (%s)\n%d byte free";
+    strings["%s (%s)\n%d bytes free##sgse"].plurals[1] = "=%s (%s)\n%d bytes free";
     strings["\n\nnot enough memory for this sample!##sgse"].plurals[0] = "=\n\nnot enough memory for this sample!";
     strings["Edit mode: Select##sgse"].plurals[0] = "=Edit mode: Select";
     strings["Edit mode: Draw##sgse"].plurals[0] = "=Edit mode: Draw";
@@ -1898,7 +1899,6 @@ void DivLocale::addTranslationsTemplate()
     strings["Resample##sgse0"].plurals[0] = "=Resample";
     strings["Rate##sgse1"].plurals[0] = "=Rate";
     strings["Factor##sgse"].plurals[0] = "=Factor";
-    strings["Filter##sgse"].plurals[0] = "=Filter";
     strings["Filter##sgse"].plurals[0] = "=Filter";
     strings["Resample##sgse1"].plurals[0] = "=Resample";
     strings["couldn't resample! make sure your sample is 8 or 16-bit.##sgse"].plurals[0] = "=couldn't resample! make sure your sample is 8 or 16-bit.";
