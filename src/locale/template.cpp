@@ -380,6 +380,7 @@ void DivLocale::addTranslationsTemplate()
     //   sggu  src/gui/gui.cpp
 
     strings["Instrument %d##sggu"].plurals[0] = "=Instrument %d";
+    strings["Sample %d"].plurals[0] = "=Sample %d";
     strings["the song is over!##sggu0"].plurals[0] = "=the song is over!";
     strings["the song is over!##sggu1"].plurals[0] = "=the song is over!";
     strings["Open File##sggu"].plurals[0] = "=Open File";

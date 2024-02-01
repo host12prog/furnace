@@ -838,19 +838,34 @@ void FurnaceGUI::doAction(int what) {
       break;
 
     case GUI_ACTION_SAMPLE_LIST_ADD:
-      curSample=e->addSample();
-      if (curSample==-1) {
-        showError(_L("too many samples!##sgda0"));
-      } else {
-        wantScrollList=true;
-        MARK_MODIFIED;
-      }
-      updateSampleTex=true;
-      break;
+    {
+        curSample = e->addSample();
+        DivSample* cSample = e->getSample(curSample);
+        if (settings.language != DIV_LANG_ENGLISH)
+        {
+          cSample->name=fmt::sprintf(_L("Sample %d"),curSample);
+        }
+
+        if (curSample == -1) {
+            showError(_L("too many samples!##sgda0"));
+        }
+        else {
+            wantScrollList = true;
+            MARK_MODIFIED;
+        }
+        updateSampleTex = true;
+        break;
+    }
     case GUI_ACTION_SAMPLE_LIST_DUPLICATE:
+    {
       if (curSample>=0 && curSample<(int)e->song.sample.size()) {
         DivSample* prevSample=e->getSample(curSample);
         curSample=e->addSample();
+        DivSample* cSample = e->getSample(curSample);
+        if (settings.language != DIV_LANG_ENGLISH)
+        {
+          cSample->name=fmt::sprintf(_L("Sample %d"),curSample);
+        }
         if (curSample==-1) {
           showError(_L("too many samples!##sgda1"));
         } else {
@@ -881,6 +896,7 @@ void FurnaceGUI::doAction(int what) {
         updateSampleTex=true;
       }
       break;
+    }
     case GUI_ACTION_SAMPLE_LIST_OPEN:
       openFileDialog(GUI_FILE_SAMPLE_OPEN);
       break;

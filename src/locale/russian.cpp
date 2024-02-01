@@ -310,6 +310,7 @@ void DivLocale::addTranslationsRussian()
     //src/gui/gui.cpp
 
     strings["Instrument %d##sggu"].plurals[0] = "Инструмент %d";
+    strings["Sample %d"].plurals[0] = "Сэмпл %d";
     strings["the song is over!##sggu0"].plurals[0] = "трек закончился!";
     strings["the song is over!##sggu1"].plurals[0] = "трек закончился!";
     strings["Open File##sggu"].plurals[0] = "Открыть файл";
@@ -1494,6 +1495,11 @@ void DivLocale::addTranslationsRussian()
     strings["Sega Master System (with FM expansion)##sgpr1"].plurals[0] = "Sega Master System (с FM-расширением)";
     strings["Arcade (YM2151 and SegaPCM)##sgpr1"].plurals[0] = "Arcade (YM2151 и SegaPCM)";
     strings["Neo Geo CD (extended channel 2)##sgpr1"].plurals[0] = "Neo Geo CD (расширенный 2-ой канал)";
+
+    strings["PC + Sound Blaster w/Game Blaster Compatible##sgpr"].plurals[0] = "PC + Sound Blaster, совместимый с Game Blaster";
+    strings["Data East Dark Seal (extended channel 3 and CSM)##sgpr"].plurals[0] = "Data East Dark Seal (расширенный 3-ий канал и CSM)";
+    strings["ESS ES1xxx series (ESFM)##sgpr"].plurals[0] = "ESS серия ES1xxx (ESFM)";
+    strings["Famicom with Konami VRC7##sgpr"].plurals[0] = "Famicom с Konami VRC7";
 
     //   sgrv  src/gui/regView.cpp
 
@@ -5038,4 +5044,43 @@ void DivLocale::addTranslationsRussian()
     strings["22xx: Write to I/O port A##sesd"].plurals[0] = "22xx: =Write to I/O port A";
     strings["23xx: Write to I/O port B##sesd"].plurals[0] = "23xx: =Write to I/O port B";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "=this is a system designed for testing purposes.";
+
+    strings["help! what's going on!##sesd"].plurals[0] = "=help! what's going on!";
+    strings["Sunsoft 5B standalone##sesd"].plurals[0] = "=Sunsoft 5B standalone";
+    strings["Sunsoft 5B standalone (PAL)##sesd"].plurals[0] = "=Sunsoft 5B standalone (PAL)";
+    strings["Overclocked Sunsoft 5B##sesd"].plurals[0] = "=Overclocked Sunsoft 5B";
+    strings["Sega Genesis Extended Channel 3##sesd"].plurals[0] = "=Sega Genesis Extended Channel 3";
+    strings["NTSC-J Sega Master System + drums##sesd"].plurals[0] = "=NTSC-J Sega Master System + drums";
+    strings["MSX-MUSIC + drums##sesd"].plurals[0] = "=MSX-MUSIC + drums";
+    strings["Commodore 64 with dual 6581##sesd"].plurals[0] = "=Commodore 64 with dual 6581";
+    strings["Commodore 64 with dual 8580##sesd"].plurals[0] = "=Commodore 64 with dual 8580";
+    strings["YM2151 + SegaPCM Arcade (compatibility)##sesd"].plurals[0] = "=YM2151 + SegaPCM Arcade (compatibility)";
+    strings["YM2151 + SegaPCM Arcade##sesd"].plurals[0] = "=YM2151 + SegaPCM Arcade";
+    strings["Game Boy with AY expansion##sesd"].plurals[0] = "=Game Boy with AY expansion";
+    strings["multi-system##sesd"].plurals[0] = "=multi-system";
+    strings["Unknown##sesd"].plurals[0] = "=Unknown";
+    strings["Sega Genesis Extended Channel 3##sesd"].plurals[0] = "=Sega Genesis Extended Channel 3";
+    strings["Neo Geo CD Extended Channel 2##sesd"].plurals[0] = "=Neo Geo CD Extended Channel 2";
+    strings["Famicom Disk System (chip)##sesd"].plurals[0] = "=Famicom Disk System (chip)";
+    strings["Yamaha YM2203 (OPN) Extended Channel 3##sesd"].plurals[0] = "=Yamaha YM2203 (OPN) Extended Channel 3";
+    strings["Yamaha YM2608 (OPNA) Extended Channel 3##sesd"].plurals[0] = "=Yamaha YM2608 (OPNA) Extended Channel 3";
+    strings["Yamaha YM2608 (OPNA) Extended Channel 3 and CSM##sesd"].plurals[0] = "=Yamaha YM2608 (OPNA) Extended Channel 3 and CSM";
+    strings["PC Speaker##sesd"].plurals[0] = "=PC Speaker";
+    strings["ZX Spectrum Beeper##sesd"].plurals[0] = "=ZX Spectrum Beeper";
+    strings["Yamaha YM2612 (OPN2) Extended Channel 3##sesd"].plurals[0] = "=Yamaha YM2612 (OPN2) Extended Channel 3";
+    strings["Yamaha YM3526 (OPL) with drums##sesd"].plurals[0] = "=Yamaha YM3526 (OPL) with drums";
+    strings["Yamaha YM3812 (OPL2) with drums##sesd"].plurals[0] = "=Yamaha YM3812 (OPL2) with drums";
+    strings["Yamaha YMF262 (OPL3) with drums##sesd"].plurals[0] = "=Yamaha YMF262 (OPL3) with drums";
+    strings["Yamaha YM2610 (OPNB) Extended Channel 2##sesd"].plurals[0] = "=Yamaha YM2610 (OPNB) Extended Channel 2";
+    strings["Yamaha YM2413 (OPLL) with drums##sesd"].plurals[0] = "=Yamaha YM2413 (OPLL) with drums";
+    strings["Yamaha YM2610B (OPNB2) Extended Channel 3##sesd"].plurals[0] = "=Yamaha YM2610B (OPNB2) Extended Channel 3";
+    strings["SegaPCM (compatible 5-channel mode)##sesd"].plurals[0] = "=SegaPCM (compatible 5-channel mode)";
+    strings["Yamaha YMF278B (OPL4) with drums##sesd"].plurals[0] = "=Yamaha YMF278B (OPL4) with drums";
+    strings["Yamaha Y8950 with drums##sesd"].plurals[0] = "=Yamaha Y8950 with drums";
+    strings["Yamaha YM2612 (OPN2) with DualPCM##sesd"].plurals[0] = "=Yamaha YM2612 (OPN2) with DualPCM";
+    strings["Yamaha YM2612 (OPN2) Extended Channel 3 with DualPCM and CSM##sesd"].plurals[0] = "=Yamaha YM2612 (OPN2) Extended Channel 3 with DualPCM and CSM";
+    strings["Generic PCM DAC##sesd"].plurals[0] = "=Generic PCM DAC";
+    strings["ZX Spectrum Beeper (QuadTone Engine)##sesd"].plurals[0] = "=ZX Spectrum Beeper (QuadTone Engine)";
+    strings["ESS ES1xxx series (ESFM)##sesd"].plurals[0] = "=ESS ES1xxx series (ESFM)";
+    strings["Dummy System##sesd"].plurals[0] = "=Dummy System";
 }
