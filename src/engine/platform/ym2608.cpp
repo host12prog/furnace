@@ -919,7 +919,9 @@ int DivPlatformYM2608::dispatch(DivCommand c) {
           }
           if (c.value!=DIV_NOTE_NULL) {
             chan[c.chan].sample=ins->amiga.getSample(c.value);
+            chan[c.chan].sampleNote=c.value;
             c.value=ins->amiga.getFreq(c.value);
+            chan[c.chan].sampleNoteDelta=c.value-chan[c.chan].sampleNote;
           }
           if (chan[c.chan].sample>=0 && chan[c.chan].sample<parent->song.sampleLen) {
             DivSample* s=parent->getSample(chan[c.chan].sample);
@@ -1146,7 +1148,7 @@ int DivPlatformYM2608::dispatch(DivCommand c) {
         break;
       }
       if (c.chan>(psgChanOffs - 1) || parent->song.linearPitch==2) { // PSG, ADPCM-B
-        int destFreq=NOTE_OPNB(c.chan,c.value2);
+        int destFreq=NOTE_OPNB(c.chan,c.value2+chan[c.chan].sampleNoteDelta);
         bool return2=false;
         if (destFreq>chan[c.chan].baseFreq) {
           chan[c.chan].baseFreq+=c.value;
@@ -1190,7 +1192,7 @@ int DivPlatformYM2608::dispatch(DivCommand c) {
           chan[c.chan].insChanged=false;
         }
       }
-      chan[c.chan].baseFreq=NOTE_OPNB(c.chan,c.value);
+      chan[c.chan].baseFreq=NOTE_OPNB(c.chan,c.value+chan[c.chan].sampleNoteDelta);
       chan[c.chan].freqChanged=true;
       break;
     }
