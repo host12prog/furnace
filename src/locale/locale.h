@@ -49,7 +49,7 @@ class DivLocale
         //FUNCTIONS THAT DEFINE TRANSLATED STRINGS:
 
         void addTranslationsRussian();
-        void addTranslationsTemplate();
+        //void addTranslationsTemplate();
 
         size_t getMemoryUsage();
 };

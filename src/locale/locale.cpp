@@ -52,6 +52,11 @@ static const ImGuiLocEntry GLocalizationEntriesEnUS[] =
     { ImGuiLocKey_DockingHideTabBar,    "Hide tab bar###HideTabBar"             },
 };
 
+int getPluralIndexPlaceholder(int n)
+{
+    return 0;
+}
+
 void DivLocale::setLanguage(DivLang lang) //if false, just update ImGui localization
 {
     if(lang >= DIV_LANG_MAX)
@@ -62,7 +67,7 @@ void DivLocale::setLanguage(DivLang lang) //if false, just update ImGui localiza
     strings.clear(); //language is valid, so we clear the std::unordered_map containing translations.
     strings.rehash(0);
     language = lang;
-    getPluralIndex = &getPluralIndexTemplate; //by default we have two plural forms (as in English)!
+    getPluralIndex = &getPluralIndexPlaceholder; //by default we have no plural forms!
     // Lower is a switch that calls the corresponding function to fill it again with translations of specific language.
 
     switch(lang)
