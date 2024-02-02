@@ -72,7 +72,7 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
 
       if(ins->es5506.filter.mode >= 1 && ins->es5506.filter.mode <= 6)
       {
-        ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize("Cutoff").x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0);
+        ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize("Cutoff").x);
         P(CWSliderScalar("Cutoff",ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
       }
 
