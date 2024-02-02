@@ -2002,8 +2002,12 @@ void DivLocale::addTranslationsTemplate()
     strings["create wavetable from selection##sgse"].plurals[0] = "=create wavetable from selection";
     strings["Draw##sgse"].plurals[0] = "=Draw";
     strings["Select##sgse"].plurals[0] = "=Select";
-    strings["%d samples, %d bytes##sgse"].plurals[0] = "=%d samples, %d bytes";
-    strings[" (%d-%d: %d samples)##sgse"].plurals[0] = "= (%d-%d: %d samples)";
+    strings["%d samples##sgse"].plurals[0] = "=%d sample";
+    strings["%d samples##sgse"].plurals[1] = "=%d samples";
+    strings["%d bytes##sgse"].plurals[0] = "=%d byte";
+    strings["%d bytes##sgse"].plurals[1] = "=%d bytes";
+    strings[" (%d-%d: %d samples)##sgse"].plurals[0] = "= (%d-%d: %d sample)";
+    strings[" (%d-%d: %d samples)##sgse"].plurals[1] = "= (%d-%d: %d samples)";
     strings["Non-8/16-bit samples cannot be edited without prior conversion.##sgse"].plurals[0] = "=Non-8/16-bit samples cannot be edited without prior conversion.";
 
     //   sgsi  src/gui/songInfo.cpp
@@ -2374,8 +2378,8 @@ void DivLocale::addTranslationsTemplate()
     strings["FB##sgwe"].plurals[0] = "=FB";
     strings["Op##sgwe1"].plurals[0] = "=Op";
     strings["Waveform##sgwe"].plurals[0] = "=Waveform";
-    strings["Connection Diagram##sgwe"].plurals[0] = "=Connection Diagram";
-    strings["Connection Diagram##sgwe"].plurals[0] = "=Connection Diagram";
+    strings["Connection Diagram##sgwe0"].plurals[0] = "=Connection Diagram";
+    strings["Connection Diagram##sgwe1"].plurals[0] = "=Connection Diagram";
     strings["Out##sgwe"].plurals[0] = "=Out";
     strings["WaveTools##sgwe"].plurals[0] = "=WaveTools";
     strings["Scale X##sgwe"].plurals[0] = "=Scale X";
@@ -3669,6 +3673,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Volume##sgiGB0"].plurals[0] = "=Volume";
     strings["Length##sgiGB"].plurals[0] = "=Length";
     strings["Sound Length##sgiGB0"].plurals[0] = "=Sound Length";
+    strings["Infinity##sgiGB"].plurals[0] = "=Infinity";
     strings["Direction##sgiGB"].plurals[0] = "=Direction";
     strings["Up##sgiGB0"].plurals[0] = "=Up";
     strings["Down##sgiGB0"].plurals[0] = "=Down";
@@ -5231,6 +5236,4 @@ void DivLocale::addTranslationsTemplate()
     strings["23xx: Write to I/O port B##sesd"].plurals[0] = "=23xx: Write to I/O port B";
     strings["Dummy System##sesd"].plurals[0] = "=Dummy System";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "=this is a system designed for testing purposes.";
-
 }
-

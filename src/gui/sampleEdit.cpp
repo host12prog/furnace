@@ -1726,7 +1726,19 @@ void FurnaceGUI::drawSampleEdit() {
 
         String statusBar=sampleDragMode?_L("Draw##sgse"):_L("Select##sgse");
         String statusBar2="";
-        String statusBar3=fmt::sprintf(_L("%d samples, %d bytes##sgse"),sample->samples,sample->getCurBufLen());
+        String statusBar3="";
+
+        if(settings.language == DIV_LANG_ENGLISH)
+        {
+          statusBar3=fmt::sprintf("%d samples, %d bytes",sample->samples,sample->getCurBufLen());
+        }
+        else
+        {
+          String temp1 = fmt::sprintf(_LP("%d samples##sgse", sample->samples), sample->samples);
+          String temp2 = fmt::sprintf(_LP("%d bytes##sgse", sample->getCurBufLen()), sample->getCurBufLen());
+          statusBar3=fmt::sprintf("%s, %s",temp1,temp2);
+        }
+        
         bool drawSelection=false;
 
         if (!sampleDragMode) {
@@ -1741,7 +1753,7 @@ void FurnaceGUI::drawSampleEdit() {
             if (start==end) {
               statusBar+=fmt::sprintf(" (%d)",start);
             } else {
-              statusBar+=fmt::sprintf(_L(" (%d-%d: %d samples)##sgse"),start,end,end-start);
+              statusBar+=fmt::sprintf(_LP(" (%d-%d: %d samples)##sgse", end-start),start,end,end-start);
             }
             drawSelection=true;
           }
