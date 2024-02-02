@@ -3951,6 +3951,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.language=conf.getInt("language",(int)DIV_LANG_ENGLISH);
     locale.setLanguage((DivLang)settings.language);
     initSystemPresets();
+    updateWindowTitle();
   }
 
   if (groups&GUI_SETTINGS_AUDIO) {
