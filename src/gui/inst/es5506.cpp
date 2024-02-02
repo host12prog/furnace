@@ -27,43 +27,127 @@
 
 class FurnaceGUI;
 
+const char* friendly_filter_modes[] = 
+{
+  "Off",
+  "6dB/oct lowpass",
+  "12dB/oct lowpass",
+  "18dB/oct lowpass",
+  "24dB/oct lowpass",
+  "6dB/oct highpass",
+  "12dB/oct highpass",
+  "12dB/oct lowpass + 12dB/oct lowpass",
+  "18dB/oct lowpass + 6dB/oct lowpass",
+  "12dB/oct lowpass + 12dB/oct highpass",
+  "18dB/oct lowpass + 6dB/oct highpass",
+  NULL
+};
+
 void FurnaceGUI::drawInsES5506(DivInstrument* ins)
 {
   if (ImGui::BeginTabItem("ES5506")) 
   {
-    if (ImGui::BeginTable("ESParams",2,ImGuiTableFlags_SizingStretchSame)) 
+    bool friendly = ins->es5506.friendly_mode;
+    ImGui::Checkbox("Friendly insrument editor", &ins->es5506.friendly_mode);
+    ImGui::Separator();
+    
+    if(friendly)
     {
-      ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch,0.0);
-      ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch,0.0);
-      // filter
-      ImGui::TableNextRow();
-      ImGui::TableNextColumn();
-      P(CWSliderScalar(_L("Filter Mode##sgiOTTO0"),ImGuiDataType_U8,&ins->es5506.filter.mode,&_ZERO,&_THREE,_L(es5506FilterModes[ins->es5506.filter.mode&3])));
-      ImGui::TableNextRow();
-      ImGui::TableNextColumn();
-      P(CWSliderScalar(_L("Filter K1##sgiOTTO0"),ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
-      ImGui::TableNextColumn();
-      P(CWSliderScalar(_L("Filter K2##sgiOTTO0"),ImGuiDataType_U16,&ins->es5506.filter.k2,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
-      // envelope
-      ImGui::TableNextRow();
-      ImGui::TableNextColumn();
-      P(CWSliderScalar(_L("Envelope count##sgiOTTO"),ImGuiDataType_U16,&ins->es5506.envelope.ecount,&_ZERO,&_FIVE_HUNDRED_ELEVEN)); rightClickable
-      ImGui::TableNextRow();
-      ImGui::TableNextColumn();
-      P(CWSliderScalar(_L("Left Volume Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.lVRamp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
-      ImGui::TableNextColumn();
-      P(CWSliderScalar(_L("Right Volume Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.rVRamp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
-      ImGui::TableNextRow();
-      ImGui::TableNextColumn();
-      P(CWSliderScalar(_L("Filter K1 Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.k1Ramp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
-      ImGui::TableNextColumn();
-      P(CWSliderScalar(_L("Filter K2 Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.k2Ramp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
-      ImGui::TableNextRow();
-      ImGui::TableNextColumn();
-      ImGui::Checkbox(_L("K1 Ramp Slowdown##sgiOTTO"),&ins->es5506.envelope.k1Slow);
-      ImGui::TableNextColumn();
-      ImGui::Checkbox(_L("K2 Ramp Slowdown##sgiOTTO"),&ins->es5506.envelope.k2Slow);
-      ImGui::EndTable();
+      ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+      if (ImGui::BeginCombo("##filtModes",friendly_filter_modes[ins->es5506.filter.mode]))
+      {
+        int j = 0;
+        while(friendly_filter_modes[j])
+        {
+          if (ImGui::Selectable(friendly_filter_modes[j]))
+          {
+            ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)j;
+          }
+
+          j++;
+        }
+
+        ImGui::EndCombo();
+      }
+
+      if(ins->es5506.filter.mode >= 1 && ins->es5506.filter.mode <= 6)
+      {
+        ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize("Cutoff").x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0);
+        P(CWSliderScalar("Cutoff",ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
+      }
+
+      if (ImGui::BeginTable("ESParams",2,ImGuiTableFlags_SizingStretchSame)) 
+      {
+        ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch,0.0);
+        ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch,0.0);
+        // filter
+        if(ins->es5506.filter.mode >= 6)
+        {
+          ImGui::TableNextRow();
+          ImGui::TableNextColumn();
+          P(CWSliderScalar("Cutoff 1",ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
+          ImGui::TableNextColumn();
+          P(CWSliderScalar("Cutoff 2",ImGuiDataType_U16,&ins->es5506.filter.k2,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
+        }
+
+        // envelope
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Envelope count##sgiOTTO"),ImGuiDataType_U16,&ins->es5506.envelope.ecount,&_ZERO,&_FIVE_HUNDRED_ELEVEN)); rightClickable
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Left Volume Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.lVRamp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Right Volume Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.rVRamp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Filter K1 Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.k1Ramp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Filter K2 Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.k2Ramp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        ImGui::Checkbox(_L("K1 Ramp Slowdown##sgiOTTO"),&ins->es5506.envelope.k1Slow);
+        ImGui::TableNextColumn();
+        ImGui::Checkbox(_L("K2 Ramp Slowdown##sgiOTTO"),&ins->es5506.envelope.k2Slow);
+        ImGui::EndTable();
+      }
+    }
+    else
+    {
+      if (ImGui::BeginTable("ESParams",2,ImGuiTableFlags_SizingStretchSame)) 
+      {
+        ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch,0.0);
+        ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch,0.0);
+        // filter
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Filter Mode##sgiOTTO0"),ImGuiDataType_U8,&ins->es5506.filter.mode,&_ZERO,&_THREE,_L(es5506FilterModes[ins->es5506.filter.mode&3])));
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Filter K1##sgiOTTO0"),ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Filter K2##sgiOTTO0"),ImGuiDataType_U16,&ins->es5506.filter.k2,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
+        // envelope
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Envelope count##sgiOTTO"),ImGuiDataType_U16,&ins->es5506.envelope.ecount,&_ZERO,&_FIVE_HUNDRED_ELEVEN)); rightClickable
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Left Volume Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.lVRamp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Right Volume Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.rVRamp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Filter K1 Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.k1Ramp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
+        ImGui::TableNextColumn();
+        P(CWSliderScalar(_L("Filter K2 Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.k2Ramp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        ImGui::Checkbox(_L("K1 Ramp Slowdown##sgiOTTO"),&ins->es5506.envelope.k1Slow);
+        ImGui::TableNextColumn();
+        ImGui::Checkbox(_L("K2 Ramp Slowdown##sgiOTTO"),&ins->es5506.envelope.k2Slow);
+        ImGui::EndTable();
+      }
     }
 
     ImGui::EndTabItem();

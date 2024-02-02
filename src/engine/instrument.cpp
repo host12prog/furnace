@@ -214,7 +214,8 @@ bool DivInstrumentES5506::operator==(const DivInstrumentES5506& other) {
     _C(envelope.k1Ramp) &&
     _C(envelope.k2Ramp) &&
     _C(envelope.k1Slow) &&
-    _C(envelope.k2Slow)
+    _C(envelope.k2Slow) &&
+    _C(friendly_mode)
   );
 }
 
