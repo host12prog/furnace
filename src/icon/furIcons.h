@@ -3,7 +3,7 @@
 // not auto-generated. update every time you change icons.ttf!
 
 #define ICON_MIN_FUR 0xe0f0
-#define ICON_MAX_FUR 0xe15c
+#define ICON_MAX_FUR 0xe15d
 
 // test
 #define ICON_FUR_TEST0 u8"\ue0f0"
