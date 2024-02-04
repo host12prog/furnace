@@ -1100,8 +1100,8 @@ void DivLocale::addTranslationsPolish()
 
     //   sgec  src/gui/editControls.cpp
 
-    strings["Mobile Edit###MobileEdit"].plurals[0] = "Мобильное меню редактирования###MobileEdit";
-    strings["Mobile Controls###Mobile Controls"].plurals[0] = "Мобильное меню управления###Mobile Controls";
+    strings["Mobile Edit###MobileEdit"].plurals[0] = "Mobilne menu edytowania###MobileEdit";
+    strings["Mobile Controls###Mobile Controls"].plurals[0] = "Mobile menu ustawien###Mobile Controls";
     strings["Mobile Menu###Mobile Menu"].plurals[0] = "Mobilne menu###Mobile Menu";
     strings["Pattern##sgec0"].plurals[0] = "Wzorzec";
     strings["Orders##sgec0"].plurals[0] = "Matryca wzorcow";
@@ -1114,20 +1114,20 @@ void DivLocale::addTranslationsPolish()
     strings["Mixer##sgec"].plurals[0] = "Mikser";
     strings["Other##sgec"].plurals[0] = "Inne";
     strings["New##sgec"].plurals[0] = "Nowy";
-    strings["Unsaved changes! Save changes before creating a new song?##sgec"].plurals[0] = "Остались несохранённые изменения! Сохранить их перед созданием нового трека?";
+    strings["Unsaved changes! Save changes before creating a new song?##sgec"].plurals[0] = "Niezapisane zmiany! Zapisac zmiany przed stworzeniem nowego utworu?";
     strings["Open##sgec"].plurals[0] = "Otworz";
-    strings["Save##sgec"].plurals[0] = "Сохранить";
-    strings["Save as...##sgec"].plurals[0] = "Сохранить как...";
+    strings["Save##sgec"].plurals[0] = "Zapisz";
+    strings["Save as...##sgec"].plurals[0] = "Zapisz jako...";
     strings["Legacy .dmf##sgec"].plurals[0] = ".dmf (legacy)";
-    strings["Export##sgec"].plurals[0] = "eksportuj";
-    strings["Restore Backup##sgec"].plurals[0] = "Загрузить резервную копию";
-    strings["Song Info##sgec"].plurals[0] = "О треке";
-    strings["Subsongs##sgec"].plurals[0] = "Подпесни";
-    strings["Speed##sgec"].plurals[0] = "Скорость";
+    strings["Export##sgec"].plurals[0] = "Eksportuj";
+    strings["Restore Backup##sgec"].plurals[0] = "Przywroc kopie zapasowa";
+    strings["Song Info##sgec"].plurals[0] = "O utworze";
+    strings["Subsongs##sgec"].plurals[0] = "Podutwory";
+    strings["Speed##sgec"].plurals[0] = "Predkosc";
     strings["Channels here...##sgec"].plurals[0] = "Каналы здесь...";
     strings["Chips here...##sgec"].plurals[0] = "Чипы здесь...";
     strings["What the hell...##sgec"].plurals[0] = "Что за хрень...";
-    strings["Osc##sgec"].plurals[0] = "Осц.";
+    strings["Osc##sgec"].plurals[0] = "Osc.";
     strings["ChanOsc##sgec"].plurals[0] = "Осц-фы кан.";
     strings["RegView##sgec"].plurals[0] = "Регистры";
     strings["Stats##sgec"].plurals[0] = "Стат.";
@@ -1238,8 +1238,8 @@ void DivLocale::addTranslationsPolish()
     strings["one file##sgeo"].plurals[0] = "jeden plik";
     strings["multiple files (one per chip)##sgeo"].plurals[0] = "wiele plikow (po jednym na uklad)";
     strings["multiple files (one per channel)##sgeo"].plurals[0] = "wiele plikow (po jednym na kanal)";
-    strings["Loops##sgeo"].plurals[0] = "Повторов трека";
-    strings["Fade out (seconds)##sgeo"].plurals[0] = "Затухание (в секундах)";
+    strings["Loops##sgeo"].plurals[0] = "Ilosc powtorzen";
+    strings["Fade out (seconds)##sgeo"].plurals[0] = "Zanikanie (w sekundach))";
     strings["Cancel##sgeo0"].plurals[0] = "Anuluj";
     strings["Export##sgeo0"].plurals[0] = "Eksportuj";
     strings["settings:##sgeo"].plurals[0] = "ustawienia:";
@@ -3677,12 +3677,12 @@ void DivLocale::addTranslationsPolish()
 
     strings["Triangle##sgimcd"].plurals[0] = "Треуг. волна";
     strings["Saw##sgimcd"].plurals[0] = "Пила";
-    strings["Square##sgimcd"].plurals[0] = "Меандр";
+    strings["Square##sgimcd"].plurals[0] = "Kwadrat";
     strings["How did you even##sgimcd0"].plurals[0] = "Как вы вообще смогли";
     strings["Bottom##sgimcd0"].plurals[0] = "Мин.";
     strings["Top##sgimcd0"].plurals[0] = "Макс.";
     strings["Attack##sgimcd"].plurals[0] = "Атака";
-    strings["Sustain##sgimcd"].plurals[0] = "Сустейн";
+    strings["Sustain##sgimcd"].plurals[0] = "Podtrzymanie";
     strings["Hold##sgimcd"].plurals[0] = "Задержка после атаки";
     strings["SusTime##sgimcd"].plurals[0] = "Время сустейна";
     strings["Decay##sgimcd"].plurals[0] = "Спад";
@@ -3690,20 +3690,20 @@ void DivLocale::addTranslationsPolish()
     strings["Release##sgimcd"].plurals[0] = "Релиз";
     strings["Bottom##sgimcd1"].plurals[0] = "Мин.";
     strings["Top##sgimcd1"].plurals[0] = "Макс.";
-    strings["Speed##sgimcd"].plurals[0] = "Скорость";
-    strings["Phase##sgimcd"].plurals[0] = "Фаза";
-    strings["Shape##sgimcd"].plurals[0] = "Форма волны";
-    strings["Macro type: Sequence##sgimcd"].plurals[0] = "Тип макроса: последовательность";
-    strings["Macro type: ADSR##sgimcd"].plurals[0] = "Тип макроса: ADSR-огибающая";
-    strings["Macro type: LFO##sgimcd"].plurals[0] = "Тип макроса: ГНЧ";
-    strings["Macro type: What's going on here?##sgimcd"].plurals[0] = "Тип макроса: Что здесь происходит?";
+    strings["Speed##sgimcd"].plurals[0] = "Predkosc";
+    strings["Phase##sgimcd"].plurals[0] = "Faza";
+    strings["Shape##sgimcd"].plurals[0] = "Ksztalt fali";
+    strings["Macro type: Sequence##sgimcd"].plurals[0] = "Typ makra: Sekwencja";
+    strings["Macro type: ADSR##sgimcd"].plurals[0] = "Typ makra: obwiednia ADSR";
+    strings["Macro type: LFO##sgimcd"].plurals[0] = "Typ makra: LFO";
+    strings["Macro type: What's going on here?##sgimcd"].plurals[0] = "Typ makra: Co tu sie dzieje?";
     strings["Delay/Step Length##sgimcd"].plurals[0] = "Задержка/длина шага";
     strings["Step Length (ticks)##IMacroSpeed"].plurals[0] = "Длина шага (в шагах движка трекера)##IMacroSpeed";
     strings["Delay##IMacroDelay"].plurals[0] = "Задержка##IMacroDelay";
     strings["Release mode: Active (jump to release pos)##sgimcd"].plurals[0] = "Тип релиза: активный (прыгнуть на позицию релиза)";
     strings["Release mode: Passive (delayed release)##sgimcd"].plurals[0] = "Тип релиза: пассивный (отложенный релиз)";
-    strings["Tabs##sgimcd"].plurals[0] = "Вкладки";
-    strings["Length##sgimcd"].plurals[0] = "Длина";
+    strings["Tabs##sgimcd"].plurals[0] = "Zakladki";
+    strings["Length##sgimcd"].plurals[0] = "Dlugosc";
     strings["StepLen##sgimcd"].plurals[0] = "Дл. шага";
     strings["Delay##sgimcd"].plurals[0] = "Задержка";
     strings["The heck? No, this isn't even working correctly...##sgimcd"].plurals[0] = "Что за?.. Нет, оно ведь работает неправильно...";
@@ -4513,7 +4513,7 @@ void DivLocale::addTranslationsPolish()
     strings["Macros##sgiSU"].plurals[0] = "Makra";
     strings["Volume##sgiSU"].plurals[0] = "Glosnosc";
     strings["Arpeggio##sgiSU"].plurals[0] = "Arpeggio";
-    strings["Pitch##sgiSU"].plurals[0] = "Частота";
+    strings["Pitch##sgiSU"].plurals[0] = "Wysokosc";
     strings["Duty/Noise##sgiSU"].plurals[0] = "Скважность/режим шума";
     strings["Waveform##sgiSU"].plurals[0] = "Fala";
     strings["Panning##sgiSU"].plurals[0] = "Panning";
@@ -4528,8 +4528,8 @@ void DivLocale::addTranslationsPolish()
     strings["Macros##sgiSWAN"].plurals[0] = "Makra";
     strings["Volume##sgiSWAN"].plurals[0] = "Glosnosc";
     strings["Arpeggio##sgiSWAN"].plurals[0] = "Arpeggio";
-    strings["Pitch##sgiSWAN"].plurals[0] = "Частота";
-    strings["Noise##sgiSWAN"].plurals[0] = "Шум";
+    strings["Pitch##sgiSWAN"].plurals[0] = "Wysokosc";
+    strings["Noise##sgiSWAN"].plurals[0] = "Szum";
     strings["Waveform##sgiSWAN"].plurals[0] = "Fala";
     strings["Phase Reset##sgiSWAN"].plurals[0] = "Reset fazy";
 
@@ -4538,10 +4538,10 @@ void DivLocale::addTranslationsPolish()
     strings["Macros##sgiT6W"].plurals[0] = "Makra";
     strings["Volume##sgiT6W"].plurals[0] = "Glosnosc";
     strings["Arpeggio##sgiT6W"].plurals[0] = "Arpeggio";
-    strings["Pitch##sgiT6W"].plurals[0] = "Частота";
-    strings["Panning (left)##sgiT6W"].plurals[0] = "Panning (лево)";
-    strings["Panning (right)##sgiT6W"].plurals[0] = "Panning (право)";
-    strings["Noise Type##sgiT6W"].plurals[0] = "Режим шума";
+    strings["Pitch##sgiT6W"].plurals[0] = "Wysokosc";
+    strings["Panning (left)##sgiT6W"].plurals[0] = "Panning (lewo)";
+    strings["Panning (right)##sgiT6W"].plurals[0] = "Panning (prawo)";
+    strings["Noise Type##sgiT6W"].plurals[0] = "Typ szumu";
     strings["Phase Reset##sgiT6W"].plurals[0] = "Reset fazy";
 
     //   sgiTED    src/gui/inst/ted.cpp
@@ -4549,8 +4549,8 @@ void DivLocale::addTranslationsPolish()
     strings["Macros##sgiTED"].plurals[0] = "Makra";
     strings["Volume##sgiTED"].plurals[0] = "Glosnosc";
     strings["Arpeggio##sgiTED"].plurals[0] = "Arpeggio";
-    strings["Pitch##sgiTED"].plurals[0] = "Частота";
-    strings["Square/Noise##sgiTED"].plurals[0] = "Меандр/шум";
+    strings["Pitch##sgiTED"].plurals[0] = "Wysokosc";
+    strings["Square/Noise##sgiTED"].plurals[0] = "Kwadrat/szum";
     strings["Phase Reset##sgiTED"].plurals[0] = "Reset fazy";
 
     //   sgiTIA    src/gui/inst/tia.cpp
@@ -4558,7 +4558,7 @@ void DivLocale::addTranslationsPolish()
     strings["Macros##sgiTIA"].plurals[0] = "Makra";
     strings["Volume##sgiTIA"].plurals[0] = "Glosnosc";
     strings["Arpeggio##sgiTIA"].plurals[0] = "Arpeggio";
-    strings["Pitch##sgiTIA"].plurals[0] = "Частота";
+    strings["Pitch##sgiTIA"].plurals[0] = "Wysokosc";
     strings["Waveform##sgiTIA"].plurals[0] = "Fala";
 
     //   sgiVB     src/gui/inst/vboy.cpp
@@ -4569,11 +4569,11 @@ void DivLocale::addTranslationsPolish()
     strings["Macros##sgiVB"].plurals[0] = "Makra";
     strings["Volume##sgiVB"].plurals[0] = "Glosnosc";
     strings["Arpeggio##sgiVB"].plurals[0] = "Arpeggio";
-    strings["Pitch##sgiVB"].plurals[0] = "Частота";
-    strings["Noise Length##sgiVB"].plurals[0] = "Длина шума";
+    strings["Pitch##sgiVB"].plurals[0] = "Wysokosc";
+    // strings["Noise Length##sgiVB"].plurals[0] = "lugosc szumu";
     strings["Waveform##sgiVB"].plurals[0] = "Fala";
-    strings["Panning (left)##sgiVB"].plurals[0] = "Panning (лево)";
-    strings["Panning (right)##sgiVB"].plurals[0] = "Panning (право)";
+    strings["Panning (left)##sgiVB"].plurals[0] = "Panning (lewo)";
+    strings["Panning (right)##sgiVB"].plurals[0] = "Panning (prawo)";
     strings["Phase Reset##sgiVB"].plurals[0] = "Reset fazy";
 
     //   sgiVERA   src/gui/inst/vera.cpp
@@ -4581,8 +4581,8 @@ void DivLocale::addTranslationsPolish()
     strings["Macros##sgiVERA"].plurals[0] = "Makra";
     strings["Volume##sgiVERA"].plurals[0] = "Glosnosc";
     strings["Arpeggio##sgiVERA"].plurals[0] = "Arpeggio";
-    strings["Pitch##sgiVERA"].plurals[0] = "Частота";
-    strings["Duty##sgiVERA"].plurals[0] = "Скважность";
+    strings["Pitch##sgiVERA"].plurals[0] = "Wysokosc";
+    strings["Duty##sgiVERA"].plurals[0] = "Szerokosc pulsu";
     strings["Waveform##sgiVERA"].plurals[0] = "Fala";
     strings["Panning##sgiVERA"].plurals[0] = "Panning";
 
@@ -4591,8 +4591,8 @@ void DivLocale::addTranslationsPolish()
     strings["Macros##sgiVIC"].plurals[0] = "Makra";
     strings["Volume##sgiVIC"].plurals[0] = "Glosnosc";
     strings["Arpeggio##sgiVIC"].plurals[0] = "Arpeggio";
-    strings["Pitch##sgiVIC"].plurals[0] = "Частота";
-    strings["On/Off##sgiVIC"].plurals[0] = "Вкл./выкл.";
+    strings["Pitch##sgiVIC"].plurals[0] = "Wysokosc";
+    strings["On/Off##sgiVIC"].plurals[0] = "Wl./wyl.";
     strings["Waveform##sgiVIC"].plurals[0] = "Fala";
 
     //   sgiVRC6   src/gui/inst/vrc6.cpp
@@ -4600,8 +4600,8 @@ void DivLocale::addTranslationsPolish()
     strings["Macros##sgiVRC6"].plurals[0] = "Makra";
     strings["Volume##sgiVRC6"].plurals[0] = "Glosnosc";
     strings["Arpeggio##sgiVRC6"].plurals[0] = "Arpeggio";
-    strings["Pitch##sgiVRC6"].plurals[0] = "Частота";
-    strings["Duty##sgiVRC6"].plurals[0] = "Скважность";
+    strings["Pitch##sgiVRC6"].plurals[0] = "Wysokosc";
+    strings["Duty##sgiVRC6"].plurals[0] = "Szerokosc pulsu";
     strings["Waveform##sgiVRC6"].plurals[0] = "Fala";
     strings["Phase Reset##sgiVRC6"].plurals[0] = "Reset fazy";
 
@@ -4610,7 +4610,7 @@ void DivLocale::addTranslationsPolish()
     strings["Macros##sgiVRC6S"].plurals[0] = "Makra";
     strings["Volume##sgiVRC6S"].plurals[0] = "Glosnosc";
     strings["Arpeggio##sgiVRC6S"].plurals[0] = "Arpeggio";
-    strings["Pitch##sgiVRC6S"].plurals[0] = "Частота";
+    strings["Pitch##sgiVRC6S"].plurals[0] = "Wysokosc";
 
     //   sgiwave   src/gui/inst/wavetable.cpp
 
@@ -4628,7 +4628,7 @@ void DivLocale::addTranslationsPolish()
     strings["Resume preview##sgiwave"].plurals[0] = "Возобовить превью";
     strings["Pause preview##sgiwave"].plurals[0] = "Приостановить превью";
     strings["Restart preview##sgiwave"].plurals[0] = "Перезапустить превью";
-    strings["too many wavetables!##sgiwave"].plurals[0] = "слишком много волновых таблиц!";
+    strings["too many wavetables!##sgiwave"].plurals[0] = "zbyt wiele tablic fali!";
     strings["Copy to new wavetable##sgiwave"].plurals[0] = "Копировать в новую волновую таблицу";
     strings["Update Rate##sgiwave"].plurals[0] = "Частота обновления";
     strings["Speed##sgiwave"].plurals[0] = "Скорость";
@@ -4642,13 +4642,13 @@ void DivLocale::addTranslationsPolish()
     strings["Macros##sgiX1"].plurals[0] = "Makra";
     strings["Volume##sgiX1"].plurals[0] = "Glosnosc";
     strings["Arpeggio##sgiX1"].plurals[0] = "Arpeggio";
-    strings["Pitch##sgiX1"].plurals[0] = "Частота";
+    strings["Pitch##sgiX1"].plurals[0] = "Wysokosc";
     strings["Waveform##sgiX1"].plurals[0] = "Fala";
-    strings["Panning (left)##sgiX1"].plurals[0] = "Panning (лево)";
-    strings["Panning (right)##sgiX1"].plurals[0] = "Panning (право)";
+    strings["Panning (left)##sgiX1"].plurals[0] = "Panning (lewo)";
+    strings["Panning (right)##sgiX1"].plurals[0] = "Panning (prawo)";
     strings["Phase Reset##sgiX1"].plurals[0] = "Reset fazy";
     strings["Envelope##sgiX1"].plurals[0] = "Obwiednia";
-    strings["Envelope Mode##sgiX1"].plurals[0] = "Режим огибающей";
+    strings["Envelope Mode##sgiX1"].plurals[0] = "Tryb obwiedni";
     strings["AutoEnv Num##sgiX1"].plurals[0] = "Множ. част. авто-огиб.";
     strings["AutoEnv Den##sgiX1"].plurals[0] = "Знам. част. авто-огиб.";
 
@@ -4657,7 +4657,7 @@ void DivLocale::addTranslationsPolish()
     strings["Macros##sgiYMZ"].plurals[0] = "Makra";
     strings["Volume##sgiYMZ"].plurals[0] = "Glosnosc";
     strings["Arpeggio##sgiYMZ"].plurals[0] = "Arpeggio";
-    strings["Pitch##sgiYMZ"].plurals[0] = "Частота";
+    strings["Pitch##sgiYMZ"].plurals[0] = "Wysokosc";
     strings["Panning##sgiYMZ"].plurals[0] = "Panning";
     strings["Phase Reset##sgiYMZ"].plurals[0] = "Reset fazy";
 
