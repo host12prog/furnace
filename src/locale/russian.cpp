@@ -841,6 +841,7 @@ void DivLocale::addTranslationsRussian()
     strings["Export##sggc"].plurals[0] = "Экспорт";
     strings["Undo##sggc"].plurals[0] = "Отменить";
     strings["Redo##sggc"].plurals[0] = "Вернуть";
+    strings["Exit##sggc"].plurals[0] = "Выход";
     strings["Play/Stop (toggle)##sggc"].plurals[0] = "Старт/стоп (переключение)";
     strings["Play##sggc"].plurals[0] = "Воспроизведение";
     strings["Stop##sggc"].plurals[0] = "Стоп";
