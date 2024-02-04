@@ -155,7 +155,6 @@ void DivPlatformES5503::updateWave(int ch)
       temp = isMuted[ch] ? 0 : chan[ch].outVol*chan[ch].panright / 255;
       rWrite(0x40+ch+1,temp);
     }
-
     else
     {
       rWrite(0x40+ch,isMuted[ch] ? 0 : chan[ch].outVol);
@@ -178,7 +177,6 @@ void DivPlatformES5503::tick(bool sysTick) {
         temp = chan[i].outVol * chan[i].panright / 255;
         rWrite(0x40 + i + 1, isMuted[i] ? 0 : (temp));
       }
-
       else
       {
         rWrite(0x40 + i, isMuted[i] ? 0 : chan[i].outVol);
@@ -208,7 +206,6 @@ void DivPlatformES5503::tick(bool sysTick) {
         rWrite(0xA0 + i, (chan[i].osc_mode << 1) | (chan[i].output << 4)); //update osc. mode, do not disturb the osc
         rWrite(0xA0 + i + 1, (chan[i].osc_mode << 1) | (chan[i + 1].output << 4));
       }
-
       else
       {
         rWrite(0xA0 + i, (chan[i].osc_mode << 1) | (chan[i].output << 4));
@@ -231,7 +228,6 @@ void DivPlatformES5503::tick(bool sysTick) {
         rWrite(0xA0 + i + 1, (chan[i].osc_mode << 1) | 1 | (chan[i + 1].output << 4)); //writing 1 resets acc
         rWrite(0xA0 + i + 1, (chan[i].osc_mode << 1) | (chan[i + 1].output << 4)); //writing 0 forces the reset
       }
-
       else
       {
         rWrite(0xA0 + i, (chan[i].osc_mode << 1) | 1 | (chan[i].output << 4)); //writing 1 resets acc
@@ -245,7 +241,6 @@ void DivPlatformES5503::tick(bool sysTick) {
         rWrite(0x80 + i, chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val);
         rWrite(0x80 + i + 1, chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val);
       }
-
       else
       {
         rWrite(0x80 + i, chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val);
@@ -289,7 +284,6 @@ void DivPlatformES5503::tick(bool sysTick) {
         rWrite(i+1, chan[i].freq&0xff);
         rWrite(0x20+i+1, chan[i].freq>>8);
       }
-
       else
       {
         rWrite(i, chan[i].freq&0xff);
@@ -331,7 +325,6 @@ void DivPlatformES5503::tick(bool sysTick) {
             }
           }
         }
-
         else
         {
           rWrite(0x40+i, isMuted[i] ? 0 : chan[i].outVol); //set volume
@@ -361,7 +354,6 @@ void DivPlatformES5503::tick(bool sysTick) {
           rWrite(0xA0+i, 1 | (chan[i].output << 4)); //halt oscillator
           rWrite(0xA0+i+1, 1 | (chan[i + 1].output << 4)); //halt oscillator
         }
-
         else
         {
           rWrite(0xA0+i, 1 | (chan[i].output << 4)); //halt oscillator
@@ -556,7 +548,6 @@ int DivPlatformES5503::dispatch(DivCommand c) {
               temp = chan[c.chan].outVol * chan[c.chan].panright / 255;
               rWrite(0x40 + c.chan + 1, isMuted[c.chan] ? 0 : temp);
             }
-
             else
             {
               rWrite(0x40 + c.chan, isMuted[c.chan] ? 0 : chan[c.chan].outVol);
@@ -707,7 +698,6 @@ void DivPlatformES5503::muteChannel(int ch, bool mute) {
       rWrite(0x40 + ch + 1, 0); //force mute even for samples, I hope
     }
   }
-
   else
   {
     if(chan[ch].softpan_channel)
@@ -717,7 +707,6 @@ void DivPlatformES5503::muteChannel(int ch, bool mute) {
       temp = chan[ch].outVol * chan[ch].panright / 255;
       rWrite(0x40 + ch + 1, isMuted[ch] ? 0 : (temp));
     }
-
     else
     {
       rWrite(0x40 + ch, isMuted[ch] ? 0 : chan[ch].outVol);
@@ -738,7 +727,6 @@ void DivPlatformES5503::forceIns() {
       temp = chan[i].outVol * chan[i].panright / 255;
       rWrite(0x40+i+1,isMuted[i]?0:(temp));
     }
-
     else
     {
       rWrite(0x40+i,isMuted[i]?0:chan[i].outVol);
@@ -848,7 +836,6 @@ void DivPlatformES5503::renderSamples(int sysID) {
       {
         if (actualLength < minsize || actualLength >= maxsize) goto end;
       }
-
       else //for samples with <= 256 steps length
       {
         if (actualLength >= maxsize) goto end;
@@ -861,7 +848,6 @@ void DivPlatformES5503::renderSamples(int sysID) {
         logW("out of ES5503 PCM memory for sample %d!", i);
         break;
       }
-
       else
       {
         int actual_start_pos = start_pos * 256;

@@ -162,6 +162,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Namco C140/C219 emulator (modified version) by cam900##sgab"].plurals[0] = "=Namco C140/C219 emulator (modified version) by cam900";
     strings["ESFMu emulator by Kagamiin~##sgab"].plurals[0] = "=ESFMu emulator by Kagamiin~";
     strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] = "=PowerNoise emulator by scratchminer";
+    strings["ep128emu by Istvan Varga##sgab"].plurals[0] = "=ep128emu by Istvan Varga";
 
     strings["greetings to:##sgab"].plurals[0] = "=greetings to:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "=NEOART Costa Rica";
@@ -652,6 +653,7 @@ void DivLocale::addTranslationsTemplate()
     strings["remove chip...##sggu"].plurals[0] = "=remove chip...";
     strings["Preserve channel positions##sggu1"].plurals[0] = "=Preserve channel positions";
     strings["cannot remove chip! (##sggu"].plurals[0] = "=cannot remove chip! (";
+    strings["open built-in assets directory##sggu"].plurals[0] = "=open built-in assets directory";
     strings["restore backup##sggu"].plurals[0] = "=restore backup";
     strings["exit##sggu"].plurals[0] = "=exit";
     strings["Unsaved changes! Save before quitting?##sggu"].plurals[0] = "=Unsaved changes! Save before quitting?";
@@ -1743,6 +1745,11 @@ void DivLocale::addTranslationsTemplate()
     strings["NMK 16-bit Arcade##sgpr"].plurals[0] = "=NMK 16-bit Arcade";
     strings["NMK 16-bit Arcade (extended channel 3)##sgpr"].plurals[0] = "=NMK 16-bit Arcade (extended channel 3)";
     strings["NMK 16-bit Arcade (extended channel 3 and CSM)##sgpr"].plurals[0] = "=NMK 16-bit Arcade (extended channel 3 and CSM)";
+    strings["NMK 16-bit Arcade (w/NMK112 bankswitching)##sgpr"].plurals[0] = "=NMK 16-bit Arcade (w/NMK112 bankswitching)";
+    strings["NMK 16-bit Arcade (w/NMK112 bankswitching, extended channel 3)##sgpr"].plurals[0] = "=NMK 16-bit Arcade (w/NMK112 bankswitching, extended channel 3)";
+    strings["NMK 16-bit Arcade (w/NMK112 bankswitching, extended channel 3 and CSM)##sgpr"].plurals[0] = "=NMK 16-bit Arcade (w/NMK112 bankswitching, extended channel 3 and CSM)";
+    strings["Atlus Power Instinct 2 (extended channel 3)##sgpr"].plurals[0] = "=Atlus Power Instinct 2 (extended channel 3)";
+    strings["Atlus Power Instinct 2 (extended channel 3 and CSM)##sgpr"].plurals[0] = "=Atlus Power Instinct 2 (extended channel 3 and CSM)";
     strings["Kaneko DJ Boy (extended channel 3)##sgpr"].plurals[0] = "=Kaneko DJ Boy (extended channel 3)";
     strings["Kaneko DJ Boy (extended channel 3 and CSM)##sgpr"].plurals[0] = "=Kaneko DJ Boy (extended channel 3 and CSM)";
     strings["Kaneko Air Buster (extended channel 3)##sgpr"].plurals[0] = "=Kaneko Air Buster (extended channel 3)";
@@ -1911,6 +1918,7 @@ void DivLocale::addTranslationsTemplate()
     strings["C219: loop end must be a multiple of 2##sgse"].plurals[0] = "=C219: loop end must be a multiple of 2";
     strings["C219: maximum sample length is 131072##sgse"].plurals[0] = "=C219: maximum sample length is 131072";
     strings["MSM6295: samples can't loop##sgse"].plurals[0] = "=MSM6295: samples can't loop";
+    strings["MSM6295: maximum bankswitched sample length is 129024##sgse"].plurals[0] = "=MSM6295: maximum bankswitched sample length is 129024";
     strings["ES5506: backward loop mode isn't supported##sgse"].plurals[0] = "=ES5506: backward loop mode isn't supported";
     strings["backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506##sgse"].plurals[0] = "=backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506";
     strings["Info##sgse"].plurals[0] = "=Info";
@@ -2210,6 +2218,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Output rate:##sgsc2"].plurals[0] = "=Output rate:";
     strings["clock / 132##sgsc"].plurals[0] = "=clock / 132";
     strings["clock / 165##sgsc"].plurals[0] = "=clock / 165";
+    strings["Bankswitched (NMK112)##sgsc"].plurals[0] = "=Bankswitched (NMK112)";
     strings["Clock rate:##sgsc12"].plurals[0] = "=Clock rate:";
     strings["1.5MHz (Arcade)##sgsc"].plurals[0] = "=1.5MHz (Arcade)";
     strings["Clock rate:##sgsc13"].plurals[0] = "=Clock rate:";
@@ -3530,6 +3539,19 @@ void DivLocale::addTranslationsTemplate()
     strings["Sustain##sgiC64"].plurals[0] = "=Sustain";
     strings["Release##sgiC64"].plurals[0] = "=Release";
 
+    //   sgiDAVE   src/gui/inst/dave.cpp
+
+    strings["Macros##sgiDAVE"].plurals[0] = "=Macros";
+    strings["Volume##sgiDAVE"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiDAVE"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiDAVE"].plurals[0] = "=Pitch";
+    strings["Noise Freq##sgiDAVE"].plurals[0] = "=Noise Freq";
+    strings["Waveform##sgiDAVE"].plurals[0] = "=Waveform";
+    strings["Panning (left)##sgiDAVE"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiDAVE"].plurals[0] = "=Panning (right)";
+    strings["Phase Reset##sgiDAVE"].plurals[0] = "=Phase Reset";
+    strings["Control##sgiDAVE"].plurals[0] = "=Control";
+
     //   sgi5503   src/gui/inst/es5503.cpp
 
     strings["Oscillator mode:##sgi5503"].plurals[0] = "=Oscillator mode:";
@@ -4446,6 +4468,7 @@ void DivLocale::addTranslationsTemplate()
     strings["sync##sgistru"].plurals[0] = "=sync";
     strings["ring##sgistru"].plurals[0] = "=ring";
     strings["test##sgistru"].plurals[0] = "=test";
+    strings["15kHz##sgistru"].plurals[0] = "=15kHz";
     strings["filter 2+4##sgistru"].plurals[0] = "=filter 2+4";
     strings["filter 1+3##sgistru"].plurals[0] = "=filter 1+3";
     strings["16-bit 3+4##sgistru"].plurals[0] = "=16-bit 3+4";
@@ -4492,6 +4515,10 @@ void DivLocale::addTranslationsTemplate()
     strings["k2 slowdown##sgistru"].plurals[0] = "=k2 slowdown";
     strings["pause##sgistru"].plurals[0] = "=pause";
     strings["reverse##sgistru"].plurals[0] = "=reverse";
+    strings["high pass##sgistru1"].plurals[0] = "=high pass";
+    strings["ring mod##sgistru1"].plurals[0] = "=ring mod";
+    strings["swap counters (noise)##sgistru"].plurals[0] = "=swap counters (noise)";
+    strings["low pass (noise)##sgistru"].plurals[0] = "=low pass (noise)";
     strings["None##sgistru"].plurals[0] = "=None";
     strings["Invert##sgistru"].plurals[0] = "=Invert";
     strings["Add##sgistru"].plurals[0] = "=Add";
@@ -5234,6 +5261,14 @@ void DivLocale::addTranslationsTemplate()
     strings["21xx: Load high byte of noise channel LFSR (00 to FF)##sesd"].plurals[0] = "=21xx: Load high byte of noise channel LFSR (00 to FF)";
     strings["22xx: Write to I/O port A##sesd"].plurals[0] = "=22xx: Write to I/O port A";
     strings["23xx: Write to I/O port B##sesd"].plurals[0] = "=23xx: Write to I/O port B";
+    strings["this chip was featured in the Enterprise 128 computer. it is similar to POKEY, but with stereo output, more features and frequency precision and the ability to turn left or right (or both) channel into a 6-bit DAC for sample playback.##sesd"].plurals[0] = "=this chip was featured in the Enterprise 128 computer. it is similar to POKEY, but with stereo output, more features and frequency precision and the ability to turn left or right (or both) channel into a 6-bit DAC for sample playback.";
+    strings["10xx: Set waveform (0 to 4; 0 to 3 on noise)##sesd"].plurals[0] = "=10xx: Set waveform (0 to 4; 0 to 3 on noise)";
+    strings["11xx: Set noise frequency source (0: fixed; 1-3: channels 1 to 3)##sesd"].plurals[0] = "=11xx: Set noise frequency source (0: fixed; 1-3: channels 1 to 3)";
+    strings["12xx: Toggle high-pass with next channel##sesd"].plurals[0] = "=12xx: Toggle high-pass with next channel";
+    strings["13xx: Toggle ring modulation with channel+2##sesd"].plurals[0] = "=13xx: Toggle ring modulation with channel+2";
+    strings["14xx: Toggle swap counters (noise only)##sesd"].plurals[0] = "=14xx: Toggle swap counters (noise only)";
+    strings["15xx: Toggle low pass (noise only)##sesd"].plurals[0] = "=15xx: Toggle low pass (noise only)";
+    strings["16xx: Set clock divider (0: /2; 1: /3)##sesd"].plurals[0] = "=16xx: Set clock divider (0: /2; 1: /3)";
     strings["Dummy System##sesd"].plurals[0] = "=Dummy System";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "=this is a system designed for testing purposes.";
 }

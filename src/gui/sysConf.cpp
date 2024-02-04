@@ -1554,7 +1554,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       }
       ImGui::Unindent();
 
-      if (ImGui::Checkbox("Bankswitched (NMK112)",&isBanked)) {
+      if (ImGui::Checkbox(_L("Bankswitched (NMK112)##sgsc"),&isBanked)) {
         altered=true;
       }
 

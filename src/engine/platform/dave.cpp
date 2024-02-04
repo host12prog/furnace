@@ -143,57 +143,57 @@ void DivPlatformDave::acquire(short** buf, size_t len) {
 void DivPlatformDave::tick(bool sysTick) {
   for (int i=0; i<6; i++) {
     chan[i].std.next();
-    if (chan[i].std.vol.had) {
-      chan[i].outVol=VOL_SCALE_LINEAR(chan[i].vol&63,MIN(63,chan[i].std.vol.val),63);
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
+      chan[i].outVol=VOL_SCALE_LINEAR(chan[i].vol&63,MIN(63,chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val),63);
       chan[i].writeVol=true;
     }
-    if (chan[i].std.duty.had) {
-      chan[i].noiseFreq=chan[i].std.duty.val&3;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->had) {
+      chan[i].noiseFreq=chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->val&3;
       chan[i].freqChanged=true;
     }
     if (NEW_ARP_STRAT) {
       chan[i].handleArp();
-    } else if (chan[i].std.arp.had) {
+    } else if (chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->had) {
       if (!chan[i].inPorta) {
         if (i>=4) {
-          chan[i].baseFreq=parent->calcBaseFreq(1,1,parent->calcArp(chan[i].note,chan[i].std.arp.val),false);
+          chan[i].baseFreq=parent->calcBaseFreq(1,1,parent->calcArp(chan[i].note,chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val),false);
         } else {
-          chan[i].baseFreq=NOTE_PERIODIC(parent->calcArp(chan[i].note,chan[i].std.arp.val));
+          chan[i].baseFreq=NOTE_PERIODIC(parent->calcArp(chan[i].note,chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val));
         }
       }
       chan[i].freqChanged=true;
     }
-    if (chan[i].std.wave.had) {
-      chan[i].wave=chan[i].std.wave.val&7;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
+      chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&7;
       if (i==3 && chan[i].wave>3) chan[i].wave=3;
       chan[i].freqChanged=true;
     }
-    if (chan[i].std.panL.had) {
-      chan[i].panL=chan[i].std.panL.val&63;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->had) {
+      chan[i].panL=chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->val&63;
     }
-    if (chan[i].std.panR.had) {
-      chan[i].panR=chan[i].std.panR.val&63;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_RIGHT)->had) {
+      chan[i].panR=chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_RIGHT)->val&63;
     }
-    if (chan[i].std.panL.had || chan[i].std.panR.had) {
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->had || chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_RIGHT)->had) {
       chan[i].writeVol=true;
     }
-    if (chan[i].std.ex1.had) {
-      chan[i].highPass=chan[i].std.ex1.val&1;
-      chan[i].ringMod=chan[i].std.ex1.val&2;
-      chan[i].swapCounters=chan[i].std.ex1.val&4;
-      chan[i].lowPass=chan[i].std.ex1.val&8;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->had) {
+      chan[i].highPass=chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val&1;
+      chan[i].ringMod=chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val&2;
+      chan[i].swapCounters=chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val&4;
+      chan[i].lowPass=chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val&8;
       chan[i].freqChanged=true;
     }
-    if (chan[i].std.pitch.had) {
-      if (chan[i].std.pitch.mode) {
-        chan[i].pitch2+=chan[i].std.pitch.val;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
+      if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->mode) {
+        chan[i].pitch2+=chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
         CLAMP_VAR(chan[i].pitch2,-32768,32767);
       } else {
-        chan[i].pitch2=chan[i].std.pitch.val;
+        chan[i].pitch2=chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
       }
       chan[i].freqChanged=true;
     }
-    if (chan[i].std.phaseReset.had && chan[i].std.phaseReset.val==1) {
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->had && chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->val==1) {
       if (i>=4) {
         if (chan[i].active && chan[i].dacSample>=0 && chan[i].dacSample<parent->song.sampleLen) {
           chan[i].dacPos=0;
@@ -341,7 +341,7 @@ int DivPlatformDave::dispatch(DivCommand c) {
       chan[c.chan].keyOn=true;
       chan[c.chan].writeVol=true;
       chan[c.chan].macroInit(ins);
-      if (!parent->song.brokenOutVol && !chan[c.chan].std.vol.will) {
+      if (!parent->song.brokenOutVol && !chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->will) {
         chan[c.chan].outVol=chan[c.chan].vol;
       }
       chan[c.chan].insChanged=false;
@@ -371,7 +371,7 @@ int DivPlatformDave::dispatch(DivCommand c) {
     case DIV_CMD_VOLUME:
       if (chan[c.chan].vol!=c.value) {
         chan[c.chan].vol=c.value;
-        if (!chan[c.chan].std.vol.has) {
+        if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
           chan[c.chan].outVol=c.value;
           if (chan[c.chan].active) {
             chan[c.chan].writeVol=true;
@@ -380,7 +380,7 @@ int DivPlatformDave::dispatch(DivCommand c) {
       }
       break;
     case DIV_CMD_GET_VOLUME:
-      if (chan[c.chan].std.vol.has) {
+      if (chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
         return chan[c.chan].vol;
       }
       return chan[c.chan].outVol;
@@ -456,7 +456,7 @@ int DivPlatformDave::dispatch(DivCommand c) {
       if (chan[c.chan].active && c.value2) {
         if (parent->song.resetMacroOnPorta) chan[c.chan].macroInit(parent->getIns(chan[c.chan].ins,DIV_INS_DAVE));
       }
-      if (!chan[c.chan].inPorta && c.value && !parent->song.brokenPortaArp && chan[c.chan].std.arp.will && !NEW_ARP_STRAT) chan[c.chan].baseFreq=NOTE_PERIODIC(chan[c.chan].note);
+      if (!chan[c.chan].inPorta && c.value && !parent->song.brokenPortaArp && chan[c.chan].std.get_div_macro_struct(DIV_MACRO_ARP)->will && !NEW_ARP_STRAT) chan[c.chan].baseFreq=NOTE_PERIODIC(chan[c.chan].note);
       chan[c.chan].inPorta=c.value;
       break;
     case DIV_CMD_GET_VOLMAX:

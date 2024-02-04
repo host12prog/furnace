@@ -5599,7 +5599,6 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
         logE("could not load big UI font for Russian language!");
       }
     }
-
     else
     {
       static const ImWchar bigFontRange[] = { 0x20,0xFF,0x39b,0x39b,0 };

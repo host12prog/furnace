@@ -911,6 +911,7 @@ src/gui/inst/x1_010.cpp
 src/gui/inst/ymz280b.cpp
 src/gui/inst/powernoise.cpp
 src/gui/inst/powernoise_slope.cpp
+src/gui/inst/dave.cpp
 
 src/gui/inst/wavetable.cpp
 

@@ -60,6 +60,7 @@ extern const char* powerNoiseSlopeControlBits[7];
 extern const char* oneBit[2];
 extern const char* es5506EnvelopeModes[3];
 extern const char* es5506ControlModes[3];
+extern const char* daveControlBits[5];
 extern const int orderedOps[4];
 extern const char* singleWSEffects[7];
 extern const char* dualWSEffects[9];
