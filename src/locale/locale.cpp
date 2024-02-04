@@ -2,11 +2,13 @@
 
 #include "template.h"
 #include "russian.h"
+#include "polish.h"
 
 const char* languages[] = 
 {
     "English",
     "Русский",
+    "Polski",
     //"TEMPLATE",
     NULL
 };
