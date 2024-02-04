@@ -5600,6 +5600,14 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
       }
     }
 
+    else if(settings.language == DIV_LANG_POLISH)
+    {
+      static const ImWchar bigFontRange[] = { 0x20,0x17F,0x39b,0x39b,0 };
+      if ((bigFont = ImGui::GetIO().Fonts->AddFontFromMemoryCompressedTTF(font_plexSans_compressed_data, font_plexSans_compressed_size, MAX(1, 40 * dpiScale), &fontConfB, bigFontRange)) == NULL) {
+        logE("could not load big UI font for Polish language!");
+      }
+    }
+
     else
     {
       static const ImWchar bigFontRange[] = { 0x20,0xFF,0x39b,0x39b,0 };

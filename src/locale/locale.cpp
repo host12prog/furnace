@@ -87,6 +87,13 @@ void DivLocale::setLanguage(DivLang lang) //if false, just update ImGui localiza
             break;
         }
 
+        case DIV_LANG_POLISH:
+        {
+            addTranslationsPolish();
+            getPluralIndex = &getPluralIndexPolish;
+            break;
+        }
+
         /*case DIV_LANG_TEMPLATE:
         {
             addTranslationsTemplate();
