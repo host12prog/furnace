@@ -1241,12 +1241,12 @@ void DivLocale::addTranslationsPolish()
     strings["Loops##sgeo"].plurals[0] = "Повторов трека";
     strings["Fade out (seconds)##sgeo"].plurals[0] = "Затухание (в секундах)";
     strings["Cancel##sgeo0"].plurals[0] = "Anuluj";
-    strings["Export##sgeo0"].plurals[0] = "eksportuj";
+    strings["Export##sgeo0"].plurals[0] = "Eksportuj";
     strings["settings:##sgeo"].plurals[0] = "ustawienia:";
     strings["format version##sgeo"].plurals[0] = "wersja formatu";
     strings["loop##sgeo0"].plurals[0] = "зациклить";
     strings["loop trail:##sgeo"].plurals[0] = "маркер конца цикла:";
-    strings["auto-detect##sgeo"].plurals[0] = "автоматически";
+    strings["auto-detect##sgeo"].plurals[0] = "automatyczny";
     strings["add one loop##sgeo1"].plurals[0] = "добавить один цикл";
     strings["custom##sgeo"].plurals[0] = "пользовательский";
     strings["add pattern change hints##sgeo"].plurals[0] = "добавить метки концов паттернов";
@@ -1270,7 +1270,7 @@ void DivLocale::addTranslationsPolish()
             "- pp: индекс паттерна (один на канал)\n\n"
             "индексы паттернов рассортированы в том порядке, в котором они\n"
             "встречаются в треке\n";
-    strings["direct stream mode##sgeo"].plurals[0] = "запись прямого потока";
+    strings["direct stream mode##sgeo"].plurals[0] = "tryb bezposredniego strumienia";
     strings["required for DualPCM and MSM6258 export.\n\n"
             "allows for volume/direction changes when playing samples,\n"
             "at the cost of a massive increase in file size."].plurals[0] = 
@@ -1280,7 +1280,7 @@ void DivLocale::addTranslationsPolish()
             "ценой сильного увеличения размера файла.";
     strings["chips to export:##sgeo"].plurals[0] = "экспорт следующих чипов:";
     strings["this chip is only available in VGM %d.%.2x and higher!##sgeo"].plurals[0] = "этот чип доступен только в файле VGM версии %d.%.2x и выше!";
-    strings["this chip is not supported by the VGM format!##sgeo"].plurals[0] = "этот чип не поддерживается форматом VGM!";
+    strings["this chip is not supported by the VGM format!##sgeo"].plurals[0] = "ten uklad nie jest wspierany przez format VGM!";
     strings["select the chip you wish to export, but only up to %d of each type.##sgeo"].plurals[0] = "выберите чипы, данные для которых вы хотите включить в файл, но не более %d чипа каждого типа.";
     strings["select the chip you wish to export, but only up to %d of each type.##sgeo"].plurals[1] = "выберите чипы, данные для которых вы хотите включить в файл, но не более %d чипов каждого типа.";
     strings["select the chip you wish to export, but only up to %d of each type.##sgeo"].plurals[2] = "выберите чипы, данные для которых вы хотите включить в файл, но не более %d чипов каждого типа.";
@@ -1649,8 +1649,8 @@ void DivLocale::addTranslationsPolish()
     strings["ZX Spectrum (128K) with TurboSound FM (extended channel 3 and CSM on second OPN)##sgpr"].plurals[0] = "ZX Spectrum (128K) с TurboSound FM (расширенный 3-ий канал и CSM на втором чипе OPN)";
     strings["ZX Spectrum (128K) with TurboSound FM (extended channel 3 on both OPNs)##sgpr"].plurals[0] = "ZX Spectrum (128K) с TurboSound FM (расширенный 3-ий канал на обоих чипах OPN)";
     strings["ZX Spectrum (128K) with TurboSound FM (extended channel 3 and CSM on both OPNs)##sgpr"].plurals[0] = "ZX Spectrum (128K) с TurboSound FM (расширенный 3-ий канал и CSM на обоих чипах OPN)";
-    strings["Atari 800 (stereo)##sgpr"].plurals[0] = "Atari 800 (стерео)";
-    strings["PC (beeper)##sgpr"].plurals[0] = "PC (пищалка)";
+    strings["Atari 800 (stereo)##sgpr"].plurals[0] = "Atari 800 (stereo)";
+    strings["PC (beeper)##sgpr"].plurals[0] = "PC (brzeczyk)";
     strings["PC + AdLib (drums mode)##sgpr"].plurals[0] = "PC + AdLib (в режиме ударных)";
     strings["PC + Sound Blaster (drums mode)##sgpr"].plurals[0] = "PC + Sound Blaster (в режиме ударных)";
     strings["PC + Sound Blaster w/Game Blaster Compatible##sgpr"].plurals[0] = "PC + Sound Blaster совм. с Game Blaster";
@@ -1892,7 +1892,7 @@ void DivLocale::addTranslationsPolish()
     strings["Note##sgse"].plurals[0] = "Нота";
     strings["%s"].plurals[0] = "%s";
     strings["Fine##sgse"].plurals[0] = "Расстройка";
-    strings["Mode##sgse"].plurals[0] = "Режим";
+    strings["Mode##sgse"].plurals[0] = "Tryb";
     strings["Start##sgse"].plurals[0] = "Начало";
     strings["changing the loop in a BRR sample may result in glitches!##sgse1"].plurals[0] = "смена зацикленной части в сэмпле BRR может привести к сбоям!";
     strings["End##sgse"].plurals[0] = "Конец";
@@ -1929,8 +1929,8 @@ void DivLocale::addTranslationsPolish()
     strings["Go##sgse"].plurals[0] = "Применить";
     strings["couldn't insert! make sure your sample is 8 or 16-bit.##sgse"].plurals[0] = "не получилось вставить! убедитесь, что это 8- или 16-битный сэмпл.";
     strings["Apply silence##sgse"].plurals[0] = "Применить тишину";
-    strings["Delete##sgse"].plurals[0] = "Удалить";
-    strings["Trim##sgse"].plurals[0] = "Обрезать";
+    strings["Delete##sgse"].plurals[0] = "Usun";
+    strings["Trim##sgse"].plurals[0] = "Obetnij";
     strings["Reverse##sgse"].plurals[0] = "Реверс";
     strings["Invert##sgse"].plurals[0] = "Инвертировать";
     strings["Signed/unsigned exchange##sgse"].plurals[0] = "Знаковый <-> беззнаковый";
@@ -1945,7 +1945,7 @@ void DivLocale::addTranslationsPolish()
     strings["High-pass##sgse"].plurals[0] = "ФВЧ";
     strings["Apply##sgse1"].plurals[0] = "Применить";
     strings["Crossfade loop points##sgse"].plurals[0] = "Сделать плавный переход между началом и концом зацикленной части";
-    strings["Number of samples##sgse"].plurals[0] = "Число сэмплов";
+    strings["Number of samples##sgse"].plurals[0] = "Ilosc sampli";
     strings["Linear <-> Equal power##sgse"].plurals[0] = "Линейный <-> Одинаковая степень";
     strings["Apply##sgse2"].plurals[0] = "Применить";
     strings["Crossfade: length would go out of bounds. Aborted...##sgse"].plurals[0] = "Плавный переход: длина выйдет за границы. Действие отменено.";
