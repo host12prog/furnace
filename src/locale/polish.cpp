@@ -60,7 +60,6 @@ void DivLocale::addTranslationsPolish()
     strings["LTVA1 (Russian translation)##sgab"].plurals[0] = "LTVA1 (tłumaczenie na język rosyjski)";
     strings["freq-mod (Polish translation)##sgab"].plurals[0] = "freq-mod (tłumaczenie na język polski)";
 
-
     strings["powered by:##sgab"].plurals[0] = "z użyciem następujących komponentów:";
     strings["Dear ImGui by Omar Cornut##sgab"].plurals[0] = "Dear ImGui autorstwa Omara Cornuta";
     strings["SDL2 by Sam Lantinga##sgab"].plurals[0] = "SDL2 autorstwa Sama Lantingi";
@@ -113,6 +112,7 @@ void DivLocale::addTranslationsPolish()
     strings["Namco C140/C219 emulator (modified version) by cam900##sgab"].plurals[0] = "Emulator C140/C219 (wersja zmodyfikowana) autorstwa cam900";
     strings["ESFMu emulator by Kagamiin~##sgab"].plurals[0] = "Emulator ESFMu autorstwa Kagamiin~";
     strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] = "Emulator PowerNoise autorstwa scratchminera";
+    strings["ep128emu by Istvan Varga##sgab"].plurals[0] = "ep128emu autorstwa Istvana Vargi";
 
     strings["greetings to:##sgab"].plurals[0] = "z pozdrowieniami dla:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "NEOART Costa Rica";
@@ -597,6 +597,7 @@ void DivLocale::addTranslationsPolish()
     strings["remove chip...##sggu"].plurals[0] = "убрать чип...";
     strings["Preserve channel positions##sggu1"].plurals[0] = "Сохранить положение каналов";
     strings["cannot remove chip! (##sggu"].plurals[0] = "не могу убрать чип! (";
+    strings["open built-in assets directory##sggu"].plurals[0] = "открыть внутреннюю папку с ресурсами";
     strings["restore backup##sggu"].plurals[0] = "загрузить резервную копию";
     strings["exit##sggu"].plurals[0] = "выход";
     strings["Unsaved changes! Save before quitting?##sggu"].plurals[0] = "Остались несохранённые изменения! Сохранить их перед выходом?";
@@ -1695,6 +1696,11 @@ void DivLocale::addTranslationsPolish()
     strings["NMK 16-bit Arcade##sgpr"].plurals[0] = "NMK 16-bit Arcade";
     strings["NMK 16-bit Arcade (extended channel 3)##sgpr"].plurals[0] = "NMK 16-bit Arcade (расширенный 3-ий канал)";
     strings["NMK 16-bit Arcade (extended channel 3 and CSM)##sgpr"].plurals[0] = "NMK 16-bit Arcade (расширенный 3-ий канал и CSM)";
+    strings["NMK 16-bit Arcade (w/NMK112 bankswitching)##sgpr"].plurals[0] = "NMK 16-bit Arcade (со сменой банков NMK112)";
+    strings["NMK 16-bit Arcade (w/NMK112 bankswitching, extended channel 3)##sgpr"].plurals[0] = "NMK 16-bit Arcade (со сменой банков NMK112, расширенный 3-ий канал)";
+    strings["NMK 16-bit Arcade (w/NMK112 bankswitching, extended channel 3 and CSM)##sgpr"].plurals[0] = "NMK 16-bit Arcade (со сменой банков NMK112, расширенный 3-ий канал и CSM)";
+    strings["Atlus Power Instinct 2 (extended channel 3)##sgpr"].plurals[0] = "Atlus Power Instinct 2 (расширенный 3-ий канал)";
+    strings["Atlus Power Instinct 2 (extended channel 3 and CSM)##sgpr"].plurals[0] = "Atlus Power Instinct 2 (расширенный 3-ий канал и CSM)";
     strings["Kaneko DJ Boy (extended channel 3)##sgpr"].plurals[0] = "Kaneko DJ Boy (расширенный 3-ий канал)";
     strings["Kaneko DJ Boy (extended channel 3 and CSM)##sgpr"].plurals[0] = "Kaneko DJ Boy (расширенный 3-ий канал и CSM)";
     strings["Kaneko Air Buster (extended channel 3)##sgpr"].plurals[0] = "Kaneko Air Buster (расширенный 3-ий канал)";
@@ -1863,6 +1869,7 @@ void DivLocale::addTranslationsPolish()
     strings["C219: loop end must be a multiple of 2##sgse"].plurals[0] = "C219: конец зацикливания должен быть кратен 2";
     strings["C219: maximum sample length is 131072##sgse"].plurals[0] = "C219: максимальная длина сэмпла равна 131072";
     strings["MSM6295: samples can't loop##sgse"].plurals[0] = "MSM6295: сэмплы не могут быть зациклены";
+    strings["MSM6295: maximum bankswitched sample length is 129024##sgse"].plurals[0] = "MSM6295: максимальная длина сэмпла с заменой банков равна 129024";
     strings["ES5506: backward loop mode isn't supported##sgse"].plurals[0] = "ES5506: режим обратного зацикливания не поддерживается";
     strings["backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506##sgse"].plurals[0] = "режим обратного и \"туда-обратно\" зацикливания поддерживается только для универсального ИКМ ЦАП\n\"туда-обратно\" также поддерживается для ES5506";
     strings["Info##sgse"].plurals[0] = "Информация";
@@ -2167,6 +2174,7 @@ void DivLocale::addTranslationsPolish()
     strings["Output rate:##sgsc2"].plurals[0] = "Частота квантования на выходе:";
     strings["clock / 132##sgsc"].plurals[0] = "такт. част. / 132";
     strings["clock / 165##sgsc"].plurals[0] = "такт. част. / 165";
+    strings["Bankswitched (NMK112)##sgsc"].plurals[0] = "Смена банков (NMK112)";
     strings["Clock rate:##sgsc12"].plurals[0] = "Тактовая частота:";
     strings["1.5MHz (Arcade)##sgsc"].plurals[0] = "1.5 МГц (Arcade)";
     strings["Clock rate:##sgsc13"].plurals[0] = "Тактовая частота:";
@@ -3461,6 +3469,19 @@ void DivLocale::addTranslationsPolish()
     strings["Sustain##sgiC64"].plurals[0] = "Сустейн";
     strings["Release##sgiC64"].plurals[0] = "Релиз";
 
+     //   sgiDAVE   src/gui/inst/dave.cpp
+
+    strings["Macros##sgiDAVE"].plurals[0] = "Макросы";
+    strings["Volume##sgiDAVE"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiDAVE"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiDAVE"].plurals[0] = "Частота";
+    strings["Noise Freq##sgiDAVE"].plurals[0] = "Частота шума";
+    strings["Waveform##sgiDAVE"].plurals[0] = "Волна";
+    strings["Panning (left)##sgiDAVE"].plurals[0] = "Панорамирование (лево)";
+    strings["Panning (right)##sgiDAVE"].plurals[0] = "Панорамирование (право)";
+    strings["Phase Reset##sgiDAVE"].plurals[0] = "Сброс фазы";
+    strings["Control##sgiDAVE"].plurals[0] = "Управление";
+
     //   sgi5503   src/gui/inst/es5503.cpp
 
     strings["Oscillator mode:##sgi5503"].plurals[0] = "Режим осциллятора:";
@@ -4377,6 +4398,7 @@ void DivLocale::addTranslationsPolish()
     strings["sync##sgistru"].plurals[0] = "синхр.";
     strings["ring##sgistru"].plurals[0] = "кольц.";
     strings["test##sgistru"].plurals[0] = "тест";
+    strings["15kHz##sgistru"].plurals[0] = "15 kHz";
     strings["filter 2+4##sgistru"].plurals[0] = "фильтр 2+4";
     strings["filter 1+3##sgistru"].plurals[0] = "фильтр 1+3";
     strings["16-bit 3+4##sgistru"].plurals[0] = "16-битн. 3+4";
@@ -4423,6 +4445,10 @@ void DivLocale::addTranslationsPolish()
     strings["k2 slowdown##sgistru"].plurals[0] = "замедл. k2";
     strings["pause##sgistru"].plurals[0] = "стоп";
     strings["reverse##sgistru"].plurals[0] = "реверс";
+    strings["high pass##sgistru1"].plurals[0] = "ФВЧ";
+    strings["ring mod##sgistru1"].plurals[0] = "кольц. мод.";
+    strings["swap counters (noise)##sgistru"].plurals[0] = "помен. счётч. (шум)";
+    strings["low pass (noise)##sgistru"].plurals[0] = "ФНЧ (шум)";
     strings["None##sgistru"].plurals[0] = "Нет";
     strings["Invert##sgistru"].plurals[0] = "Инвертировать";
     strings["Add##sgistru"].plurals[0] = "Сложить";
@@ -5126,6 +5152,14 @@ void DivLocale::addTranslationsPolish()
     strings["21xx: Load high byte of noise channel LFSR (00 to FF)##sesd"].plurals[0] = "21xx: Загрузить старший байт в РСЛОС канала шума (00-FF)";
     strings["22xx: Write to I/O port A##sesd"].plurals[0] = "22xx: Записать в порт ввода-вывода A";
     strings["23xx: Write to I/O port B##sesd"].plurals[0] = "23xx: Записать в порт ввода-вывода B";
+    strings["this chip was featured in the Enterprise 128 computer. it is similar to POKEY, but with stereo output, more features and frequency precision and the ability to turn left or right (or both) channel into a 6-bit DAC for sample playback.##sesd"].plurals[0] = "этот чип стоял в компьютере Enterprise 128. он похож на POKEY, но имеет стерео звук, больше функций, более точную настройку частоты и возможность превращать левый или правый (или оба) канал в 6-битный ЦАП для проигрывания сэмплов.";
+    strings["10xx: Set waveform (0 to 4; 0 to 3 on noise)##sesd"].plurals[0] = "10xx: Волна (0-4; 0-3 на канале шума)";
+    strings["11xx: Set noise frequency source (0: fixed; 1-3: channels 1 to 3)##sesd"].plurals[0] = "11xx: Источник частоты шума (0: фикс.; 1-3: каналы 1-3)";
+    strings["12xx: Toggle high-pass with next channel##sesd"].plurals[0] = "12xx: Переключить ФВЧ от следующего канала";
+    strings["13xx: Toggle ring modulation with channel+2##sesd"].plurals[0] = "13xx: Переключить кольцевую модуляцию от канал+2";
+    strings["14xx: Toggle swap counters (noise only)##sesd"].plurals[0] = "14xx: Переключить смену счётчиков (только шум)";
+    strings["15xx: Toggle low pass (noise only)##sesd"].plurals[0] = "15xx: Переключить ФНЧ (только шум)";
+    strings["16xx: Set clock divider (0: /2; 1: /3)##sesd"].plurals[0] = "16xx: Делитель частоты (0: /2; 1: /3)";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "это система, разработанная для тестирования.";
 
     strings["help! what's going on!"].plurals[0] = "помогите! что происходит!";
