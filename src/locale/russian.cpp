@@ -338,7 +338,7 @@ void DivLocale::addTranslationsRussian()
     strings["Wavetables##sgdl"].plurals[0] = "Волновые таблицы";
     strings["Samples##sgdl"].plurals[0] = "Сэмплы";
     strings["Add##sgdl1"].plurals[0] = "Добавить";
-    strings["Duplicate##sgdl3"].plurals[0] = "Клоинровать";
+    strings["Duplicate##sgdl3"].plurals[0] = "Клонировать";
     strings["Open##sgdl1"].plurals[0] = "Открыть";
     strings["replace...##sgdl3"].plurals[0] = "заменить...";
     strings["Save##sgdl3"].plurals[0] = "Сохранить";
@@ -598,7 +598,7 @@ void DivLocale::addTranslationsRussian()
     strings["cannot remove chip! (##sggu"].plurals[0] = "не могу убрать чип! (";
     strings["open built-in assets directory##sggu"].plurals[0] = "открыть внутреннюю папку с ресурсами";
     strings["restore backup##sggu"].plurals[0] = "загрузить резервную копию";
-    strings["exit##sggu"].plurals[0] = "выход";
+    strings["exit...##sggu"].plurals[0] = "выйти...";
     strings["Unsaved changes! Save before quitting?##sggu"].plurals[0] = "Остались несохранённые изменения! Сохранить их перед выходом?";
     strings["Edit##menubar"].plurals[0] = "Правка##menubar";
     strings["edit##menubar"].plurals[0] = "правка##menubar";
@@ -656,7 +656,7 @@ void DivLocale::addTranslationsRussian()
     strings["| Speed %d:%d##sggu"].plurals[0] = "| Скорость %d:%d";
     strings["| Speed %d##sggu"].plurals[0] = "| Скорость %d";
     strings["| Groove##sggu"].plurals[0] = "| Ритм-паттерн";
-    strings[" @ %gHz (%g BPM) ##sggu"].plurals[0] = " @ %gHz (%g BPM) ";
+    strings[" @ %gHz (%g BPM) ##sggu"].plurals[0] = " @ %g Гц (%g BPM) ";
     strings["| Order %.2X/%.2X ##sggu"].plurals[0] = "| Строка матр. патт. %.2X/%.2X ";
     strings["| Order %d/%d ##sggu"].plurals[0] = "| Строка матр. патт. %d/%d ";
     strings["| Row %.2X/%.2X ##sggu"].plurals[0] = "| Строка %.2X/%.2X ";
@@ -827,8 +827,8 @@ void DivLocale::addTranslationsRussian()
     strings["Speed##sggc0"].plurals[0] = "Скорость";
     strings["Panning##sggc"].plurals[0] = "Панорамирование";
     strings["Volume##sggc"].plurals[0] = "Громкость";
-    strings["System Primary##sggc"].plurals[0] = "Основные эффекты чипа";
-    strings["System Secondary##sggc"].plurals[0] = "Вспомогательные эффекты чипа";
+    strings["System (Primary)##sggc"].plurals[0] = "Основные эффекты чипа";
+    strings["System (Secondary)##sggc"].plurals[0] = "Вспомогательные эффекты чипа";
     strings["Miscellaneous##sggc"].plurals[0] = "Разное";
     strings["Invalid##sggc"].plurals[0] = "Недейств.";
 
@@ -841,6 +841,7 @@ void DivLocale::addTranslationsRussian()
     strings["Export##sggc"].plurals[0] = "Экспорт";
     strings["Undo##sggc"].plurals[0] = "Отменить";
     strings["Redo##sggc"].plurals[0] = "Вернуть";
+    strings["Exit##sggc"].plurals[0] = "Выход";
     strings["Play/Stop (toggle)##sggc"].plurals[0] = "Старт/стоп (переключение)";
     strings["Play##sggc"].plurals[0] = "Воспроизведение";
     strings["Stop##sggc"].plurals[0] = "Стоп";
@@ -1224,6 +1225,8 @@ void DivLocale::addTranslationsRussian()
 
     strings["Effect List###Effect List"].plurals[0] = "Список эффектов###Effect List";
     strings["Chip at cursor: %s##sgef"].plurals[0] = "Курсор на канале чипа: %s";
+    strings["Search##sgef"].plurals[0] = "Поиск";
+    strings["Effect types to show:##sgef"].plurals[0] = "Показывать типы эффектов:";
     strings["All##sgef"].plurals[0] = "Все";
     strings["None##sgef"].plurals[0] = "Ни одного";
     strings["Name##sgef"].plurals[0] = "Имя";
@@ -4964,7 +4967,7 @@ void DivLocale::addTranslationsRussian()
     strings["12xx: Set duty cycle (pulse: 0 to 7)##sesd"].plurals[0] = "12xx: Скважность (меандр: 0-7)";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd2"].plurals[0] = "17xx: Переключить режим ИКМ (СОВМЕСТИМОСТЬ)";
     strings["cost-reduced version of the OPL with 16 patches and only one of them is user-configurable.##sesd"].plurals[0] = "удешевлённая версия OPL с 16-ю патчами, причём только один из них доступен для настройки пользователем.";
-    strings["a disk drive for the Famicom which also contains one wavetable channel.##sesd"].plurals[0] = "дисковый привод для Famicom, также содержащий оин канал волновых таблиц.";
+    strings["a disk drive for the Famicom which also contains one wavetable channel.##sesd"].plurals[0] = "дисковый привод для Famicom, также содержащий один канал волновых таблиц.";
     strings["10xx: Set waveform##sesd4"].plurals[0] = "10xx: Волна";
     strings["11xx: Set modulation depth##sesd"].plurals[0] = "11xx: Глуюина модуляции";
     strings["12xy: Set modulation speed high byte (x: enable; y: value)##sesd"].plurals[0] = "12xy: Старший байт скорости модуляции (x: вкл.; y: значение)";
@@ -5008,7 +5011,7 @@ void DivLocale::addTranslationsRussian()
     strings["like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.##sesd"].plurals[0] = "как OPM, но с большим количеством волн, режимом фиксированной частоты, и полным... отсутствием сведений о его устройстве.\nиспользовался в Yamaha TX81Z и некоторых других синтезаторах.";
     strings["2Fxx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "2Fxx: Переключить жёсткий перезапуск огибающей на новой ноте";
     strings["this one is like PC Speaker but has duty cycles.##sesd"].plurals[0] = "Похож на PC Speaker, но имеет настройку скважности.";
-    strings["used in some Sega arcade boards (like OutRun), and usually paired with a YM2151.##sesd"].plurals[0] = "использовался в некоторых аркадных автоматах Sega (например, OutRun), и обыно использовался в связке с YM2151.";
+    strings["used in some Sega arcade boards (like OutRun), and usually paired with a YM2151.##sesd"].plurals[0] = "использовался в некоторых аркадных автоматах Sega (например, OutRun), и обычно использовался в связке с YM2151.";
     strings["a console which failed to sell well due to its headache-inducing features.##sesd"].plurals[0] = "консоль, продажи которой не удались из-за того, что её особенности вызывали головную боль у игроков.";
     strings["10xx: Set waveform##sesd6"].plurals[0] = "10xx: Волна";
     strings["11xx: Set noise length (0 to 7)##sesd"].plurals[0] = "11xx: Длина шума (0-7)";
