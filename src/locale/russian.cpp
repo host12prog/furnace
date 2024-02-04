@@ -5011,7 +5011,7 @@ void DivLocale::addTranslationsRussian()
     strings["like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.##sesd"].plurals[0] = "как OPM, но с большим количеством волн, режимом фиксированной частоты, и полным... отсутствием сведений о его устройстве.\nиспользовался в Yamaha TX81Z и некоторых других синтезаторах.";
     strings["2Fxx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "2Fxx: Переключить жёсткий перезапуск огибающей на новой ноте";
     strings["this one is like PC Speaker but has duty cycles.##sesd"].plurals[0] = "Похож на PC Speaker, но имеет настройку скважности.";
-    strings["used in some Sega arcade boards (like OutRun), and usually paired with a YM2151.##sesd"].plurals[0] = "использовался в некоторых аркадных автоматах Sega (например, OutRun), и обыно использовался в связке с YM2151.";
+    strings["used in some Sega arcade boards (like OutRun), and usually paired with a YM2151.##sesd"].plurals[0] = "использовался в некоторых аркадных автоматах Sega (например, OutRun), и обычно использовался в связке с YM2151.";
     strings["a console which failed to sell well due to its headache-inducing features.##sesd"].plurals[0] = "консоль, продажи которой не удались из-за того, что её особенности вызывали головную боль у игроков.";
     strings["10xx: Set waveform##sesd6"].plurals[0] = "10xx: Волна";
     strings["11xx: Set noise length (0 to 7)##sesd"].plurals[0] = "11xx: Длина шума (0-7)";
