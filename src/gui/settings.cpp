@@ -5592,19 +5592,19 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
     // 0x39B = Λ
     //static const ImWchar bigFontRange[]={0x20,0xFF,0x39b,0x39b,0};
 
-    if (settings.language == DIV_LANG_ENGLISH) //|| settings.language == DIV_LANG_TEMPLATE)
-    {
-      static const ImWchar bigFontRange[] = { 0x20,0xFF,0x39b,0x39b,0 };
-      if ((bigFont = ImGui::GetIO().Fonts->AddFontFromMemoryCompressedTTF(font_plexSans_compressed_data, font_plexSans_compressed_size, MAX(1, 40 * dpiScale), &fontConfB, bigFontRange)) == NULL) {
-        logE("could not load big UI font!");
-      }
-    }
-
     if(settings.language == DIV_LANG_RUSSIAN)
     {
       static const ImWchar bigFontRangeRus[] = {0x20,0xFF,0x39b,0x39b,0x400,0x451,0};
       if ((bigFont = ImGui::GetIO().Fonts->AddFontFromMemoryCompressedTTF(font_plexSans_compressed_data, font_plexSans_compressed_size, MAX(1, 40 * dpiScale), &fontConfB, bigFontRangeRus)) == NULL) {
         logE("could not load big UI font for Russian language!");
+      }
+    }
+
+    else
+    {
+      static const ImWchar bigFontRange[] = { 0x20,0xFF,0x39b,0x39b,0 };
+      if ((bigFont = ImGui::GetIO().Fonts->AddFontFromMemoryCompressedTTF(font_plexSans_compressed_data, font_plexSans_compressed_size, MAX(1, 40 * dpiScale), &fontConfB, bigFontRange)) == NULL) {
+        logE("could not load big UI font!");
       }
     }
 
