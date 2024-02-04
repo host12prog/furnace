@@ -655,7 +655,7 @@ void DivLocale::addTranslationsTemplate()
     strings["cannot remove chip! (##sggu"].plurals[0] = "=cannot remove chip! (";
     strings["open built-in assets directory##sggu"].plurals[0] = "=open built-in assets directory";
     strings["restore backup##sggu"].plurals[0] = "=restore backup";
-    strings["exit##sggu"].plurals[0] = "=exit";
+    strings["exit...##sggu"].plurals[0] = "=exit...";
     strings["Unsaved changes! Save before quitting?##sggu"].plurals[0] = "=Unsaved changes! Save before quitting?";
     strings["Edit##menubar"].plurals[0] = "=Edit##menubar";
     strings["edit##menubar"].plurals[0] = "=edit##menubar";
@@ -881,8 +881,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Speed##sggc0"].plurals[0] = "=Speed";
     strings["Panning##sggc"].plurals[0] = "=Panning";
     strings["Volume##sggc"].plurals[0] = "=Volume";
-    strings["System Primary##sggc"].plurals[0] = "=System Primary";
-    strings["System Secondary##sggc"].plurals[0] = "=System Secondary";
+    strings["System (Primary)##sggc"].plurals[0] = "=System (Primary)";
+    strings["System (Secondary)##sggc"].plurals[0] = "=System (Secondary)";
     strings["Miscellaneous##sggc"].plurals[0] = "=Miscellaneous";
     strings["Invalid##sggc"].plurals[0] = "=Invalid";
 
@@ -895,6 +895,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Export##sggc"].plurals[0] = "=Export";
     strings["Undo##sggc"].plurals[0] = "=Undo";
     strings["Redo##sggc"].plurals[0] = "=Redo";
+    strings["Exit##sggc"].plurals[0] = "=Exit";
     strings["Play/Stop (toggle)##sggc"].plurals[0] = "=Play/Stop (toggle)";
     strings["Play##sggc"].plurals[0] = "=Play";
     strings["Stop##sggc"].plurals[0] = "=Stop";
@@ -1270,6 +1271,8 @@ void DivLocale::addTranslationsTemplate()
 
     strings["Effect List###Effect List"].plurals[0] = "=Effect List###Effect List";
     strings["Chip at cursor: %s##sgef"].plurals[0] = "=Chip at cursor: %s";
+    strings["Search##sgef"].plurals[0] = "=Search";
+    strings["Effect types to show:##sgef"].plurals[0] = "=Effect types to show:";
     strings["All##sgef"].plurals[0] = "=All";
     strings["None##sgef"].plurals[0] = "=None";
     strings["Name##sgef"].plurals[0] = "=Name";

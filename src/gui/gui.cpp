@@ -7174,7 +7174,7 @@ bool FurnaceGUI::finish() {
 
 bool FurnaceGUI::requestQuit() {
   if (modified) {
-    showWarning("Unsaved changes! Save changes before quitting?",GUI_WARN_QUIT);
+    showWarning(_L("Unsaved changes! Save changes before quitting?##sggu"),GUI_WARN_QUIT);
   } else {
     quit=true;
   }

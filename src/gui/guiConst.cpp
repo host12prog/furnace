@@ -210,12 +210,12 @@ const char* sampleDepths[DIV_SAMPLE_DEPTH_MAX]={
 };
 
 const char* resampleStrats[]={
-  "none",
-  "linear",
-  "cubic spline",
-  "blep synthesis",
-  "sinc",
-  "best possible"
+  "none##sggc",
+  "linear##sggc",
+  "cubic spline##sggc",
+  "blep synthesis##sggc",
+  "sinc##sggc",
+  "best possible##sggc"
 };
 
 const char* fxColorsNames[]={

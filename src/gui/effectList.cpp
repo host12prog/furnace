@@ -18,11 +18,11 @@ void FurnaceGUI::drawEffectList() {
       ImGui::TextWrapped(_L("Chip at cursor: %s##sgef"),_L(e->getSystemName(e->sysOfChan[cursor.xCoarse])));
       ImGui::PopTextWrapPos();
     }
-    effectSearch.Draw("Search");
+    effectSearch.Draw(_L("Search##sgef"));
     ImGui::SameLine();
     ImGui::Button(ICON_FA_BARS "##SortEffects");
     if (ImGui::BeginPopupContextItem("effectSort",ImGuiPopupFlags_MouseButtonLeft)) {
-      ImGui::Text("Effect types to show:");
+      ImGui::Text(_L("Effect types to show:##sgef"));
       for (int i=1; i<10; i++) {
         ImGui::PushStyleColor(ImGuiCol_Text,uiColors[i+GUI_COLOR_PATTERN_EFFECT_INVALID]);
         ImGui::Checkbox(_L(fxColorsNames[i]),&effectsShow[i]);

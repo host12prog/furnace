@@ -598,7 +598,7 @@ void DivLocale::addTranslationsRussian()
     strings["cannot remove chip! (##sggu"].plurals[0] = "не могу убрать чип! (";
     strings["open built-in assets directory##sggu"].plurals[0] = "открыть внутреннюю папку с ресурсами";
     strings["restore backup##sggu"].plurals[0] = "загрузить резервную копию";
-    strings["exit##sggu"].plurals[0] = "выход";
+    strings["exit...##sggu"].plurals[0] = "выйти...";
     strings["Unsaved changes! Save before quitting?##sggu"].plurals[0] = "Остались несохранённые изменения! Сохранить их перед выходом?";
     strings["Edit##menubar"].plurals[0] = "Правка##menubar";
     strings["edit##menubar"].plurals[0] = "правка##menubar";
@@ -827,8 +827,8 @@ void DivLocale::addTranslationsRussian()
     strings["Speed##sggc0"].plurals[0] = "Скорость";
     strings["Panning##sggc"].plurals[0] = "Панорамирование";
     strings["Volume##sggc"].plurals[0] = "Громкость";
-    strings["System Primary##sggc"].plurals[0] = "Основные эффекты чипа";
-    strings["System Secondary##sggc"].plurals[0] = "Вспомогательные эффекты чипа";
+    strings["System (Primary)##sggc"].plurals[0] = "Основные эффекты чипа";
+    strings["System (Secondary)##sggc"].plurals[0] = "Вспомогательные эффекты чипа";
     strings["Miscellaneous##sggc"].plurals[0] = "Разное";
     strings["Invalid##sggc"].plurals[0] = "Недейств.";
 
@@ -1224,6 +1224,8 @@ void DivLocale::addTranslationsRussian()
 
     strings["Effect List###Effect List"].plurals[0] = "Список эффектов###Effect List";
     strings["Chip at cursor: %s##sgef"].plurals[0] = "Курсор на канале чипа: %s";
+    strings["Search##sgef"].plurals[0] = "Поиск";
+    strings["Effect types to show:##sgef"].plurals[0] = "Показывать типы эффектов:";
     strings["All##sgef"].plurals[0] = "Все";
     strings["None##sgef"].plurals[0] = "Ни одного";
     strings["Name##sgef"].plurals[0] = "Имя";
