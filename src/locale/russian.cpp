@@ -338,7 +338,7 @@ void DivLocale::addTranslationsRussian()
     strings["Wavetables##sgdl"].plurals[0] = "Волновые таблицы";
     strings["Samples##sgdl"].plurals[0] = "Сэмплы";
     strings["Add##sgdl1"].plurals[0] = "Добавить";
-    strings["Duplicate##sgdl3"].plurals[0] = "Клоинровать";
+    strings["Duplicate##sgdl3"].plurals[0] = "Клонировать";
     strings["Open##sgdl1"].plurals[0] = "Открыть";
     strings["replace...##sgdl3"].plurals[0] = "заменить...";
     strings["Save##sgdl3"].plurals[0] = "Сохранить";
