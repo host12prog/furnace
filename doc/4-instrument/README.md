@@ -77,6 +77,7 @@ the following instrument types are available:
 - [FM (ESFM)](fm-esfm.md) - for use with ESS ES1xxx-series (ESFM).
 - [ES5503](es5503.md) - for use with Ensoniq ES5503 sound chip.
 - [PowerNoise](powernoise.md) - for use with PowerNoise chip.
+- [Dave](dave.md) - for use with Dave chip.
 
 ## macros
 

@@ -304,6 +304,7 @@ enum FurnaceGUIColors {
   GUI_COLOR_INSTR_ES5503,
   GUI_COLOR_INSTR_POWERNOISE,
   GUI_COLOR_INSTR_POWERNOISE_SLOPE,
+  GUI_COLOR_INSTR_DAVE,
   GUI_COLOR_INSTR_UNKNOWN,
 
   GUI_COLOR_CHANNEL_BG,
@@ -1273,7 +1274,6 @@ struct FurnaceGUIMacroDesc {
     {
       return ins->std.get_macro(macro_id, true);
     }
-
     else
     {
       if(oper <= (int)ins->std.ops.size())
@@ -2535,6 +2535,7 @@ class FurnaceGUI {
   void drawInsES5503(DivInstrument* ins);
   void drawInsPOWERNOISE(DivInstrument* ins);
   void drawInsPOWERNOISESLOPE(DivInstrument* ins);
+  void drawInsDAVE(DivInstrument* ins);
 
   void insTabWave(DivInstrument* ins);
 

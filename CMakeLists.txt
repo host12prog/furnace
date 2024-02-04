@@ -109,6 +109,7 @@ option(WARNINGS_ARE_ERRORS "Whether warnings in furnace's C++ code should be tre
 option(WITH_DEMOS "Install demo songs" ON)
 option(WITH_INSTRUMENTS "Install instruments" ON)
 option(WITH_WAVETABLES "Install wavetables" ON)
+option(SHOW_OPEN_ASSETS_MENU_ENTRY "Show option to open built-in assets directory (on supported platforms)" ON)
 
 set(DEPENDENCIES_INCLUDE_DIRS extern/IconFontCppHeaders src/icon)
 
@@ -608,6 +609,8 @@ src/engine/platform/sound/c140_c219.c
 
 src/engine/platform/sound/es5503.cpp
 
+src/engine/platform/sound/dave/dave.cpp
+
 src/engine/platform/oplAInterface.cpp
 src/engine/platform/ym2608Interface.cpp
 src/engine/platform/ym2610Interface.cpp
@@ -709,6 +712,7 @@ src/engine/platform/c140.cpp
 src/engine/platform/esfm.cpp
 src/engine/platform/es5503.cpp
 src/engine/platform/powernoise.cpp
+src/engine/platform/dave.cpp
 src/engine/platform/pcmdac.cpp
 src/engine/platform/dummy.cpp
 
@@ -907,6 +911,7 @@ src/gui/inst/x1_010.cpp
 src/gui/inst/ymz280b.cpp
 src/gui/inst/powernoise.cpp
 src/gui/inst/powernoise_slope.cpp
+src/gui/inst/dave.cpp
 
 src/gui/inst/wavetable.cpp
 
@@ -1006,8 +1011,19 @@ set(USED_SOURCES ${ENGINE_SOURCES} ${AUDIO_SOURCES} ${CLI_SOURCES} src/main.cpp)
 
 if (USE_BACKWARD)
   list(APPEND USED_SOURCES src/backtrace.cpp)
-  if (WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    list(APPEND DEPENDENCIES_LIBRARIES dbghelp psapi)
+  if (WIN32)
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+      include(CheckCXXCompilerFlag)
+      check_cxx_compiler_flag(-gcodeview GCC_CODEVIEW)
+      if (GCC_CODEVIEW)
+        set(CMAKE_EXE_LINKER_FLAGS "-Wl,--pdb= ")
+        add_compile_options(-gcodeview)
+        message(STATUS "Enabling -gcodeview flag for backward-cpp.")
+      else()
+        message(WARNING "Could not enable -gcodeview! backward-cpp will not work.")
+      endif()
+      list(APPEND DEPENDENCIES_LIBRARIES dbghelp psapi)
+    endif()
   endif()
   find_library(EXECINFO_IS_LIBRARY execinfo)
   if (EXECINFO_IS_LIBRARY)
@@ -1143,14 +1159,21 @@ if (NOT ANDROID OR TERMUX)
     install(DIRECTORY doc DESTINATION ${CMAKE_INSTALL_DOCDIR})
     install(DIRECTORY papers DESTINATION ${CMAKE_INSTALL_DOCDIR}/other)
     install(FILES LICENSE DESTINATION ${CMAKE_INSTALL_DATADIR}/licenses/furnace)
-    if (WITH_DEMOS)
-      install(DIRECTORY demos DESTINATION ${CMAKE_INSTALL_DATADIR}/furnace)
-    endif()
-    if (WITH_INSTRUMENTS)
-      install(DIRECTORY instruments DESTINATION ${CMAKE_INSTALL_DATADIR}/furnace)
-    endif()
-    if (WITH_WAVETABLES)
-      install(DIRECTORY wavetables DESTINATION ${CMAKE_INSTALL_DATADIR}/furnace)
+    if (WITH_DEMOS OR WITH_INSTRUMENTS OR WITH_WAVETABLES)
+      set(FURNACE_DATADIR ${CMAKE_INSTALL_DATADIR}/furnace)
+      if (WITH_DEMOS)
+        install(DIRECTORY demos DESTINATION ${FURNACE_DATADIR})
+      endif()
+      if (WITH_INSTRUMENTS)
+        install(DIRECTORY instruments DESTINATION ${FURNACE_DATADIR})
+      endif()
+      if (WITH_WAVETABLES)
+        install(DIRECTORY wavetables DESTINATION ${FURNACE_DATADIR})
+      endif()
+      add_compile_definitions(FURNACE_DATADIR="${CMAKE_INSTALL_PREFIX}/${FURNACE_DATADIR}")
+      if (SHOW_OPEN_ASSETS_MENU_ENTRY)
+        add_compile_definitions(SHOW_OPEN_ASSETS_MENU_ENTRY)
+      endif()
     endif()
     foreach(num 16 32 64 128 256 512)
       set(res ${num}x${num})

@@ -282,6 +282,10 @@ const char* es5506ControlModes[3]={
   "pause##sgistru", "reverse##sgistru", NULL
 };
 
+const char* daveControlBits[5]={
+  "high pass##sgistru1", "ring mod##sgistru1", "swap counters (noise)##sgistru", "low pass (noise)##sgistru", NULL
+};
+
 const int orderedOps[4]={
   0, 2, 1, 3
 };

@@ -56,6 +56,7 @@
 #include "../engine/platform/k053260.h"
 #include "../engine/platform/c140.h"
 #include "../engine/platform/esfm.h"
+#include "../engine/platform/msm6295.h"
 #include "../engine/platform/dummy.h"
 
 #define COMMON_CHIP_DEBUG \

@@ -4275,6 +4275,11 @@ bool FurnaceGUI::loop() {
             ImGui::EndMenu();
           }
         }
+#if defined(FURNACE_DATADIR) && defined(SHOW_OPEN_ASSETS_MENU_ENTRY)
+        if (ImGui::MenuItem(_L("open built-in assets directory##sggu"))) {
+          SDL_OpenURL("file://" FURNACE_DATADIR);
+        }
+#endif
         ImGui::BeginDisabled(exitDisabledTimer);
         ImGui::Separator();
         if (ImGui::MenuItem(_L("restore backup##sggu"),BIND_FOR(GUI_ACTION_OPEN_BACKUP))) {
@@ -6319,7 +6324,6 @@ bool FurnaceGUI::loop() {
       mustClear--;
       if (mustClear == 0) e->everythingOK();
     }
-
     else
     {
       if (initialScreenWipe>0.0f && !settings.disableFadeIn)

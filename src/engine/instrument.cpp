@@ -1055,6 +1055,8 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
       case DIV_INS_POWERNOISE_SLOPE:
         featurePN=true;
         break;
+      case DIV_INS_DAVE:
+        break;
       case DIV_INS_MAX:
         break;
       case DIV_INS_NULL:
@@ -1138,7 +1140,19 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
       std.get_macro(DIV_MACRO_EX5, false)->len ||
       std.get_macro(DIV_MACRO_EX6, false)->len ||
       std.get_macro(DIV_MACRO_EX7, false)->len ||
-      std.get_macro(DIV_MACRO_EX8, false)->len) {
+      std.get_macro(DIV_MACRO_EX8, false)->len ||
+      std.get_macro(DIV_MACRO_EX9, false)->len ||
+      std.get_macro(DIV_MACRO_EX10, false)->len ||
+      std.get_macro(DIV_MACRO_EX11, false)->len ||
+      std.get_macro(DIV_MACRO_EX12, false)->len ||
+      std.get_macro(DIV_MACRO_EX13, false)->len ||
+      std.get_macro(DIV_MACRO_EX14, false)->len ||
+      std.get_macro(DIV_MACRO_EX15, false)->len ||
+      std.get_macro(DIV_MACRO_EX16, false)->len ||
+      std.get_macro(DIV_MACRO_EX17, false)->len ||
+      std.get_macro(DIV_MACRO_EX18, false)->len ||
+      std.get_macro(DIV_MACRO_EX19, false)->len ||
+      std.get_macro(DIV_MACRO_EX20, false)->len) {
     featureMA=true;
   }
 
@@ -1191,7 +1205,19 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
             m.op_get_macro(DIV_MACRO_OP_SUS, false)->len ||
             m.op_get_macro(DIV_MACRO_OP_VIB, false)->len ||
             m.op_get_macro(DIV_MACRO_OP_WS, false)->len ||
-            m.op_get_macro(DIV_MACRO_OP_KSR, false)->len)
+            m.op_get_macro(DIV_MACRO_OP_KSR, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX1, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX2, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX3, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX4, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX5, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX6, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX7, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX8, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX9, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX10, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX11, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX12, false)->len)
         {
           featureOx[i]=true;
         }
@@ -2001,6 +2027,12 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
     if(type == 57) //powernoise slope inst
     {
       type = DIV_INS_POWERNOISE_SLOPE;
+      goto proceed;
+    }
+
+    if(type == 58) //powernoise slope inst
+    {
+      type = DIV_INS_DAVE;
       goto proceed;
     }
   }
