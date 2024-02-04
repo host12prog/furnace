@@ -656,7 +656,7 @@ void DivLocale::addTranslationsRussian()
     strings["| Speed %d:%d##sggu"].plurals[0] = "| Скорость %d:%d";
     strings["| Speed %d##sggu"].plurals[0] = "| Скорость %d";
     strings["| Groove##sggu"].plurals[0] = "| Ритм-паттерн";
-    strings[" @ %gHz (%g BPM) ##sggu"].plurals[0] = " @ %gHz (%g BPM) ";
+    strings[" @ %gHz (%g BPM) ##sggu"].plurals[0] = " @ %g Гц (%g BPM) ";
     strings["| Order %.2X/%.2X ##sggu"].plurals[0] = "| Строка матр. патт. %.2X/%.2X ";
     strings["| Order %d/%d ##sggu"].plurals[0] = "| Строка матр. патт. %d/%d ";
     strings["| Row %.2X/%.2X ##sggu"].plurals[0] = "| Строка %.2X/%.2X ";
