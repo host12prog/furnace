@@ -4967,7 +4967,7 @@ void DivLocale::addTranslationsRussian()
     strings["12xx: Set duty cycle (pulse: 0 to 7)##sesd"].plurals[0] = "12xx: Скважность (меандр: 0-7)";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd2"].plurals[0] = "17xx: Переключить режим ИКМ (СОВМЕСТИМОСТЬ)";
     strings["cost-reduced version of the OPL with 16 patches and only one of them is user-configurable.##sesd"].plurals[0] = "удешевлённая версия OPL с 16-ю патчами, причём только один из них доступен для настройки пользователем.";
-    strings["a disk drive for the Famicom which also contains one wavetable channel.##sesd"].plurals[0] = "дисковый привод для Famicom, также содержащий оин канал волновых таблиц.";
+    strings["a disk drive for the Famicom which also contains one wavetable channel.##sesd"].plurals[0] = "дисковый привод для Famicom, также содержащий один канал волновых таблиц.";
     strings["10xx: Set waveform##sesd4"].plurals[0] = "10xx: Волна";
     strings["11xx: Set modulation depth##sesd"].plurals[0] = "11xx: Глуюина модуляции";
     strings["12xy: Set modulation speed high byte (x: enable; y: value)##sesd"].plurals[0] = "12xy: Старший байт скорости модуляции (x: вкл.; y: значение)";
