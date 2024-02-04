@@ -5196,7 +5196,7 @@ void DivLocale::addTranslationsPolish()
     strings["Yamaha Y8950 with drums##sesd"].plurals[0] = "Yamaha Y8950 (tryb perkusji)";
     strings["Yamaha YM2612 (OPN2) with DualPCM##sesd"].plurals[0] = "Yamaha YM2612 (OPN2) z DualPCM";
     strings["Yamaha YM2612 (OPN2) Extended Channel 3 with DualPCM and CSM##sesd"].plurals[0] = "Yamaha YM2612 (OPN2) z rozszerzonym kanałem 3, DualPCM i CSM";
-    strings["Generic PCM DAC##sesd"].plurals[0] = "Typowy przetwornik C/A;
+    strings["Generic PCM DAC##sesd"].plurals[0] = "Typowy przetwornik C/A";
     strings["ZX Spectrum Beeper (QuadTone Engine)##sesd"].plurals[0] = "Brzęczyk ZX Spectrum (silnik QuadTone)";
     strings["ESS ES1xxx series (ESFM)##sesd"].plurals[0] = "ESS serii ES1xxx (ESFM)";
     strings["Dummy System##sesd"].plurals[0] = "Система-болванка";
