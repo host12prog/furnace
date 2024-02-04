@@ -210,39 +210,25 @@ const char* sampleDepths[DIV_SAMPLE_DEPTH_MAX]={
 };
 
 const char* resampleStrats[]={
-  "none##sggc",
-  "linear##sggc",
-  "cubic spline##sggc",
-  "blep synthesis##sggc",
-  "sinc##sggc",
-  "best possible##sggc",
-  NULL
-};
-
-const FurnaceGUIColors fxColorsSort[]={//used for sorting
-  GUI_COLOR_PATTERN_EFFECT_PITCH,
-  GUI_COLOR_PATTERN_EFFECT_SONG,
-  GUI_COLOR_PATTERN_EFFECT_TIME,
-  GUI_COLOR_PATTERN_EFFECT_SPEED,
-  GUI_COLOR_PATTERN_EFFECT_PANNING,
-  GUI_COLOR_PATTERN_EFFECT_VOLUME,
-  GUI_COLOR_PATTERN_EFFECT_SYS_PRIMARY,
-  GUI_COLOR_PATTERN_EFFECT_SYS_SECONDARY,
-  GUI_COLOR_PATTERN_EFFECT_MISC,
-  GUI_COLOR_PATTERN_EFFECT_INVALID
+  "none",
+  "linear",
+  "cubic spline",
+  "blep synthesis",
+  "sinc",
+  "best possible"
 };
 
 const char* fxColorsNames[]={
+  "Invalid##sggc",
   "Pitch##sggc",
+  "Volume##sggc",
+  "Panning##sggc",
   "Song##sggc",
   "Time##sggc",
-  "Speed##sggc0",
-  "Panning##sggc",
-  "Volume##sggc",
-  "System Primary##sggc",
-  "System Secondary##sggc",
-  "Miscellaneous##sggc",
-  "Invalid##sggc"
+  "Speed##sggc",
+  "System (Primary)##sggc",
+  "System (Secondary)##sggc",
+  "Miscellaneous##sggc"
 };
 
 const FurnaceGUIColors fxColors[256]={
@@ -550,6 +536,7 @@ const FurnaceGUIActionDef guiActions[GUI_ACTION_MAX]={
 #else
   D("REDO", "Redo##sggc", FURKMOD_CMD|SDLK_y),
 #endif
+  D("QUIT", "Exit##sggc", 0),
   D("PLAY_TOGGLE", "Play/Stop (toggle)##sggc", SDLK_RETURN),
   D("PLAY", "Play##sggc", 0),
   D("STOP", "Stop##sggc", 0),
