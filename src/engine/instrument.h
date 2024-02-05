@@ -1010,7 +1010,7 @@ struct DivInstrument {
   void convertC64SpecialMacro();
 
   /**
-   * save the instrument to a SafeWriter using new format.
+   * save the instrument to a SafeWriter.
    * @param w the SafeWriter in question.
    */
   void putInsData2(SafeWriter* w, bool fui=false, const DivSong* song=NULL, bool insName=true);
