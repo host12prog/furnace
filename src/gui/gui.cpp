@@ -4394,9 +4394,9 @@ bool FurnaceGUI::loop() {
         if (gp.len==2) {
           info=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Speed %d:%d" : _L("| Speed %d:%d##sggu")),gp.val[0],gp.val[1]);
         } else if (gp.len==1) {
-          info=fmt::sprintf(_L("| Speed %d##sggu"),gp.val[0]);
+          info=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Speed %d" : _L("| Speed %d##sggu")),gp.val[0]);
         } else {
-          info=_L("| Groove##sggu");
+          info=settings.language == DIV_LANG_ENGLISH ? "| Groove" : _L("| Groove##sggu");
         }
 
         info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? " @ %gHz (%g BPM) " : _L(" @ %gHz (%g BPM) ##sggu")),e->getCurHz(),calcBPM(e->getSpeeds(),e->getCurHz(),e->curSubSong->virtualTempoN,e->curSubSong->virtualTempoD));
@@ -4909,7 +4909,7 @@ bool FurnaceGUI::loop() {
             case GUI_FILE_INS_SAVE_DMP:
               if (curIns>=0 && curIns<(int)e->song.ins.size()) {
                 if (!e->song.ins[curIns]->saveDMP(copyOfName.c_str())) {
-                  showError(_L("error while saving instrument! make sure your instrument is compatible.##sggu"));
+                  showError("error while saving instrument! only the following instrument types are supported:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS##sggu");
                 } else {
                   pushRecentSys(copyOfName.c_str());
                 }

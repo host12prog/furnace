@@ -688,7 +688,7 @@ void DivLocale::addTranslationsRussian()
     strings["Error while loading file! (%s)##sggu3"].plurals[0] = "Ошибка при загрузке файла! (%s)";
     strings["Error while saving file! (%s)##sggu2"].plurals[0] = "Ошибка при сохранении файла! (%s)";
     strings["Error while saving file! (%s)##sggu3"].plurals[0] = "Ошибка при сохранении файла! (%s)";
-    strings["error while saving instrument! make sure your instrument is compatible.##sggu"].plurals[0] = "ошибка при сохранении инструмента! убедитесь, что ваш инструмент совместим с Deflemask.";
+    strings["error while saving instrument! only the following instrument types are supported:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS##sggu"].plurals[0] = "ошибка при сохранении инструмента! поддерживаются только следующие типы инструментов:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS";
     strings["there were some errors while loading samples:\n#sggu"].plurals[0] = "при загрузке сэмплов возникли следующие ошибки:\n";
     strings["...but you haven't selected a sample!##sggu0"].plurals[0] = "...но вы не выбрали сэмпл!";
     strings["could not save sample! open Log Viewer for more information.##sggu0"].plurals[0] = "не удалось сохранить сэмпл! откройте просмотрщик логов для получения дополнительной информации.";
@@ -3513,7 +3513,7 @@ void DivLocale::addTranslationsRussian()
     strings["Filter Mode##sgiOTTO0"].plurals[0] = "Режим фильтра";
     strings["Filter K1##sgiOTTO0"].plurals[0] = "K1 фильтра";
     strings["Filter K2##sgiOTTO0"].plurals[0] = "K2 фильтра";
-    strings["Envelope count##sgiOTTO"].plurals[0] = "Длина огиб.";
+    strings["Envelope length##sgiOTTO"].plurals[0] = "Длина огиб.";
     strings["Left Volume Ramp##sgiOTTO"].plurals[0] = "Нараст. лев. громк.";
     strings["Right Volume Ramp##sgiOTTO"].plurals[0] = "Нараст. прав. громк.";
     strings["Filter K1 Ramp##sgiOTTO"].plurals[0] = "Нараст. K1 фильтра";

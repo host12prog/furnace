@@ -742,7 +742,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Error while loading file! (%s)##sggu3"].plurals[0] = "=Error while loading file! (%s)";
     strings["Error while saving file! (%s)##sggu2"].plurals[0] = "=Error while saving file! (%s)";
     strings["Error while saving file! (%s)##sggu3"].plurals[0] = "=Error while saving file! (%s)";
-    strings["error while saving instrument! make sure your instrument is compatible.##sggu"].plurals[0] = "=error while saving instrument! make sure your instrument is compatible.";
+    strings["error while saving instrument! only the following instrument types are supported:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS##sggu##sggu"].plurals[0] = "=error while saving instrument! only the following instrument types are supported:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS";
     strings["there were some errors while loading samples:\n#sggu"].plurals[0] = "=there were some errors while loading samples:\n";
     strings["...but you haven't selected a sample!##sggu0"].plurals[0] = "=...but you haven't selected a sample!";
     strings["could not save sample! open Log Viewer for more information.##sggu0"].plurals[0] = "=could not save sample! open Log Viewer for more information.";
@@ -3584,7 +3584,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Filter Mode##sgiOTTO0"].plurals[0] = "=Filter Mode";
     strings["Filter K1##sgiOTTO0"].plurals[0] = "=Filter K1";
     strings["Filter K2##sgiOTTO0"].plurals[0] = "=Filter K2";
-    strings["Envelope count##sgiOTTO"].plurals[0] = "=Envelope count";
+    strings["Envelope length##sgiOTTO"].plurals[0] = "=Envelope length";
     strings["Left Volume Ramp##sgiOTTO"].plurals[0] = "=Left Volume Ramp";
     strings["Right Volume Ramp##sgiOTTO"].plurals[0] = "=Right Volume Ramp";
     strings["Filter K1 Ramp##sgiOTTO"].plurals[0] = "=Filter K1 Ramp";
