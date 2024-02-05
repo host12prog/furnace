@@ -1,5 +1,5 @@
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
 //  Copyright (C) 2004  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -27,7 +27,7 @@ WaveformGenerator2::WaveformGenerator2()
 {
   sync_source = this;
 
-  set_chip_model(MOS6581);
+  set_chip_model(MOS6581_2);
 
   reset();
 }
@@ -46,7 +46,7 @@ void WaveformGenerator2::set_sync_source(WaveformGenerator2* source)
 // ----------------------------------------------------------------------------
 // Set chip model.
 // ----------------------------------------------------------------------------
-void WaveformGenerator2::set_chip_model(chip_model model)
+void WaveformGenerator2::set_chip_model(chip_model2 model)
 {
   wave__ST = wave8580__ST;
   wave_P_T = wave8580_P_T;

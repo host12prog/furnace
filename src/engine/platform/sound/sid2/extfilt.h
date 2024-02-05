@@ -1,5 +1,5 @@
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
 //  Copyright (C) 2004  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -16,9 +16,6 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  ---------------------------------------------------------------------------
-
-#ifndef __EXTFILT_H__
-#define __EXTFILT_H__
 
 #include "siddefs.h"
 
@@ -41,7 +38,7 @@ public:
   ExternalFilter2();
 
   void enable_filter(bool enable);
-  void set_chip_model(chip_model model);
+  void set_chip_model(chip_model2 model);
 
   RESID_INLINE void clock(sound_sample Vi);
   RESID_INLINE void clock(cycle_count delta_t, sound_sample Vi);
@@ -160,5 +157,3 @@ sound_sample ExternalFilter2::output()
 }
 
 #endif // RESID_INLINING || defined(__EXTFILT_CC__)
-
-#endif // not __EXTFILT_H__

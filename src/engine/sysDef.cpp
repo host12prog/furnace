@@ -2039,6 +2039,18 @@ void DivEngine::registerSystems() {
     }
   );
 
+  sysDefs[DIV_SYSTEM_SID2]=new DivSysDef(
+    "SID2", NULL, 0xff, 0, 3, false, true, 0, false, 0, 0, 0,
+    "a finctional sound chip. like SID, but with many of its problems fixed.##sesd",
+    {"Channel 1", "Channel 2", "Channel 3"},
+    {"CH1", "CH2", "CH3"},
+    {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
+    {DIV_INS_C64, DIV_INS_C64, DIV_INS_C64},
+    {},
+    {},
+    c64PostEffectHandlerMap
+  );
+
   sysDefs[DIV_SYSTEM_DUMMY]=new DivSysDef(
     "Dummy System##sesd", NULL, 0xfd, 0, 8, false, true, 0, false, 0, 0, 0,
     "this is a system designed for testing purposes.##sesd",

@@ -1,5 +1,5 @@
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
 //  Copyright (C) 2004  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -16,10 +16,6 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  ---------------------------------------------------------------------------
-
-#ifndef __ENVELOPE_H__
-#define __ENVELOPE_H__
-
 #include "siddefs.h"
 
 // ----------------------------------------------------------------------------
@@ -305,4 +301,3 @@ reg8 EnvelopeGenerator2::output()
 
 #endif // RESID_INLINING || defined(__ENVELOPE_CC__)
 
-#endif // not __ENVELOPE_H__

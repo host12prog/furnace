@@ -1,5 +1,5 @@
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
 //  Copyright (C) 2004  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -17,9 +17,6 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  ---------------------------------------------------------------------------
 
-#ifndef __SID_H__
-#define __SID_H__
-
 #include "siddefs.h"
 #include "voice.h"
 #include "filter.h"
@@ -35,16 +32,16 @@ public:
 
   sound_sample get_dc(int ch);
   void set_is_muted(int ch, bool val);
-  void set_chip_model(chip_model model);
+  void set_chip_model(chip_model2 model);
   void enable_filter(bool enable);
   void enable_external_filter(bool enable);
-  bool set_sampling_parameters(double clock_freq, sampling_method method,
+  bool set_sampling_parameters(double clock_freq, sampling_method2 method,
 			       double sample_freq, double pass_freq = -1,
 			       double filter_scale = 0.97);
   void adjust_sampling_frequency(double sample_freq);
 
   void fc_default(const fc_point*& points, int& count);
-  PointPlotter<sound_sample> fc_plotter();
+  PointPlotter2<sound_sample> fc_plotter();
 
   void clock();
   void clock(cycle_count delta_t);
@@ -86,7 +83,7 @@ public:
   int output(int bits);
 
 protected:
-  static double I0(double x);
+  static double I0(double x2);
   RESID_INLINE int clock_fast(cycle_count& delta_t, short* buf, int n,
 			      int interleave);
   RESID_INLINE int clock_interpolate(cycle_count& delta_t, short* buf, int n,
@@ -128,7 +125,7 @@ protected:
   static const int FIXP_MASK = 0xffff;
 
   // Sampling variables.
-  sampling_method sampling;
+  sampling_method2 sampling;
   cycle_count cycles_per_sample;
   cycle_count sample_offset;
   int sample_index;
@@ -143,4 +140,3 @@ protected:
   short* fir;
 };
 
-#endif // not __SID_H__

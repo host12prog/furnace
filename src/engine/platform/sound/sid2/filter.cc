@@ -1,5 +1,5 @@
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
 //  Copyright (C) 2004  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -24,10 +24,10 @@
 // FCmax = 2.6e-5/C = 2.6e-5/2200e-12 = 11818.
 //
 // Measurements indicate a cutoff frequency range of approximately
-// 220Hz - 18kHz on a MOS6581 fitted with 470pF capacitors. The function
+// 220Hz - 18kHz on a MOS6581_2 fitted with 470pF capacitors. The function
 // mapping FC to cutoff frequency has the shape of the tanh function, with
 // a discontinuity at FCHI = 0x80.
-// In contrast, the MOS8580 almost perfectly corresponds with the
+// In contrast, the MOS8580_2 almost perfectly corresponds with the
 // specification of a linear mapping from 30Hz to 12kHz.
 // 
 // The mappings have been measured by feeding the SID2 with an external
@@ -89,11 +89,11 @@ Filter2::Filter2()
 
   enable_filter(true);
 
-  interpolate(f0_points_8580, f0_points_8580
+  interpolate2(f0_points_8580, f0_points_8580
 	      + sizeof(f0_points_8580)/sizeof(*f0_points_8580) - 1,
-	      PointPlotter<sound_sample>(f0_8580), 1.0);
+	      PointPlotter2<sound_sample>(f0_8580), 1.0);
 
-  set_chip_model(MOS6581);
+  set_chip_model(MOS6581_2);
 }
 
 
@@ -109,7 +109,7 @@ void Filter2::enable_filter(bool enable)
 // ----------------------------------------------------------------------------
 // Set chip model.
 // ----------------------------------------------------------------------------
-void Filter2::set_chip_model(chip_model model)
+void Filter2::set_chip_model(chip_model2 model)
 {
   mixer_DC = 0;
 
@@ -222,12 +222,12 @@ void Filter2::fc_default(const fc_point*& points, int& count)
 // ----------------------------------------------------------------------------
 // Given an array of interpolation points p with n points, the following
 // statement will specify a new FC mapping:
-//   interpolate(p, p + n - 1, filter.fc_plotter(), 1.0);
-// Note that the x range of the interpolation points *must* be [0, 2047],
+//   interpolate2(p, p + n - 1, filter.fc_plotter(), 1.0);
+// Note that the x2 range of the interpolation points *must* be [0, 2047],
 // and that additional end points *must* be present since the end points
 // are not interpolated.
 // ----------------------------------------------------------------------------
-PointPlotter<sound_sample> Filter2::fc_plotter()
+PointPlotter2<sound_sample> Filter2::fc_plotter()
 {
-  return PointPlotter<sound_sample>(f0);
+  return PointPlotter2<sound_sample>(f0);
 }

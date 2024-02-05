@@ -1208,6 +1208,7 @@ const int availableSystems[]={
   DIV_SYSTEM_PONG,
   DIV_SYSTEM_POWERNOISE,
   DIV_SYSTEM_DAVE,
+  DIV_SYSTEM_SID2,
   0 // don't remove this last one!
 };
 
@@ -1331,6 +1332,7 @@ const int chipsModernFantasy[]={
   DIV_SYSTEM_SOUND_UNIT,
   DIV_SYSTEM_VERA,
   DIV_SYSTEM_POWERNOISE,
+  DIV_SYSTEM_SID2,
   0 // don't remove this last one!
 };
 

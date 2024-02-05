@@ -1,5 +1,5 @@
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
 //  Copyright (C) 2004  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -17,14 +17,12 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  ---------------------------------------------------------------------------
 
-#ifndef __SPLINE_H__
-#define __SPLINE_H__
 
 // Our objective is to construct a smooth interpolating single-valued function
 // y = f(x).
 //
 // Catmull-Rom splines are widely used for interpolation, however these are
-// parametric curves [x(t) y(t) ...] and can not be used to directly calculate
+// parametric curves [x2(t) y2(t) ...] and can not be used to directly calculate
 // y = f(x).
 // For a discussion of Catmull-Rom splines see Catmull, E., and R. Rom,
 // "A Class of Local Interpolating Splines", Computer Aided Geometric Design.
@@ -43,7 +41,7 @@
 // piecewice cubic polynomials f(x) = ax^3 + bx^2 + cx + d as follows:
 // Each curve segment is specified by four interpolation points,
 // p0, p1, p2, p3.
-// The curve between p1 and p2 must interpolate both p1 and p2, and in addition
+// The curve between p1 and p2 must interpolate2 both p1 and p2, and in addition
 //   f'(p1.x) = k1 = (p2.y - p0.y)/(p2.x - p0.x) and
 //   f'(p2.x) = k2 = (p3.y - p1.y)/(p3.x - p1.x).
 //
@@ -115,9 +113,9 @@
 
 
 #if SPLINE_BRUTE_FORCE
-#define interpolate_segment interpolate_brute_force
+#define interpolate_segment2 interpolate_brute_force2
 #else
-#define interpolate_segment interpolate_forward_difference
+#define interpolate_segment2 interpolate_forward_difference2
 #endif
 
 
@@ -125,7 +123,7 @@
 // Calculation of coefficients.
 // ----------------------------------------------------------------------------
 inline
-void cubic_coefficients(double x1, double y1, double x2, double y2,
+void cubic_coefficients2(double x1, double y1, double x2, double y2,
 			double k1, double k2,
 			double& a, double& b, double& c, double& d)
 {
@@ -140,14 +138,14 @@ void cubic_coefficients(double x1, double y1, double x2, double y2,
 // ----------------------------------------------------------------------------
 // Evaluation of cubic polynomial by brute force.
 // ----------------------------------------------------------------------------
-template<class PointPlotter>
+template<class PointPlotter2>
 inline
-void interpolate_brute_force(double x1, double y1, double x2, double y2,
+void interpolate_brute_force2(double x1, double y1, double x2, double y2,
 			     double k1, double k2,
-			     PointPlotter plot, double res)
+			     PointPlotter2 plot, double res)
 {
   double a, b, c, d;
-  cubic_coefficients(x1, y1, x2, y2, k1, k2, a, b, c, d);
+  cubic_coefficients2(x1, y1, x2, y2, k1, k2, a, b, c, d);
   
   // Calculate each point.
   for (double x = x1; x <= x2; x += res) {
@@ -159,14 +157,14 @@ void interpolate_brute_force(double x1, double y1, double x2, double y2,
 // ----------------------------------------------------------------------------
 // Evaluation of cubic polynomial by forward differencing.
 // ----------------------------------------------------------------------------
-template<class PointPlotter>
+template<class PointPlotter2>
 inline
-void interpolate_forward_difference(double x1, double y1, double x2, double y2,
+void interpolate_forward_difference2(double x1, double y1, double x2, double y2,
 				    double k1, double k2,
-				    PointPlotter plot, double res)
+				    PointPlotter2 plot, double res)
 {
   double a, b, c, d;
-  cubic_coefficients(x1, y1, x2, y2, k1, k2, a, b, c, d);
+  cubic_coefficients2(x1, y1, x2, y2, k1, k2, a, b, c, d);
   
   double y = ((a*x1 + b)*x1 + c)*x1 + d;
   double dy = (3*a*(x1 + res) + 2*b)*x1*res + ((a*res + b)*res + c)*res;
@@ -182,14 +180,14 @@ void interpolate_forward_difference(double x1, double y1, double x2, double y2,
 
 template<class PointIter>
 inline
-double x(PointIter p)
+double x2(PointIter p)
 {
   return (*p)[0];
 }
 
 template<class PointIter>
 inline
-double y(PointIter p)
+double y2(PointIter p)
 {
   return (*p)[1];
 }
@@ -202,9 +200,9 @@ double y(PointIter p)
 // Note also that points of non-differentiability and discontinuity can be
 // introduced by repeating points.
 // ----------------------------------------------------------------------------
-template<class PointIter, class PointPlotter>
+template<class PointIter, class PointPlotter2>
 inline
-void interpolate(PointIter p0, PointIter pn, PointPlotter plot, double res)
+void interpolate2(PointIter p0, PointIter pn, PointPlotter2 plot, double res)
 {
   double k1, k2;
 
@@ -216,30 +214,30 @@ void interpolate(PointIter p0, PointIter pn, PointPlotter plot, double res)
   // Draw each curve segment.
   for (; p2 != pn; ++p0, ++p1, ++p2, ++p3) {
     // p1 and p2 equal; single point.
-    if (x(p1) == x(p2)) {
+    if (x2(p1) == x2(p2)) {
       continue;
     }
     // Both end points repeated; straight line.
-    if (x(p0) == x(p1) && x(p2) == x(p3)) {
-      k1 = k2 = (y(p2) - y(p1))/(x(p2) - x(p1));
+    if (x2(p0) == x2(p1) && x2(p2) == x2(p3)) {
+      k1 = k2 = (y2(p2) - y2(p1))/(x2(p2) - x2(p1));
     }
     // p0 and p1 equal; use f''(x1) = 0.
-    else if (x(p0) == x(p1)) {
-      k2 = (y(p3) - y(p1))/(x(p3) - x(p1));
-      k1 = (3*(y(p2) - y(p1))/(x(p2) - x(p1)) - k2)/2;
+    else if (x2(p0) == x2(p1)) {
+      k2 = (y2(p3) - y2(p1))/(x2(p3) - x2(p1));
+      k1 = (3*(y2(p2) - y2(p1))/(x2(p2) - x2(p1)) - k2)/2;
     }
     // p2 and p3 equal; use f''(x2) = 0.
-    else if (x(p2) == x(p3)) {
-      k1 = (y(p2) - y(p0))/(x(p2) - x(p0));
-      k2 = (3*(y(p2) - y(p1))/(x(p2) - x(p1)) - k1)/2;
+    else if (x2(p2) == x2(p3)) {
+      k1 = (y2(p2) - y2(p0))/(x2(p2) - x2(p0));
+      k2 = (3*(y2(p2) - y2(p1))/(x2(p2) - x2(p1)) - k1)/2;
     }
     // Normal curve.
     else {
-      k1 = (y(p2) - y(p0))/(x(p2) - x(p0));
-      k2 = (y(p3) - y(p1))/(x(p3) - x(p1));
+      k1 = (y2(p2) - y2(p0))/(x2(p2) - x2(p0));
+      k2 = (y2(p3) - y2(p1))/(x2(p3) - x2(p1));
     }
 
-    interpolate_segment(x(p1), y(p1), x(p2), y(p2), k1, k2, plot, res);
+    interpolate_segment2(x2(p1), y2(p1), x2(p2), y2(p2), k1, k2, plot, res);
   }
 }
 
@@ -247,13 +245,13 @@ void interpolate(PointIter p0, PointIter pn, PointPlotter plot, double res)
 // Class for plotting integers into an array.
 // ----------------------------------------------------------------------------
 template<class F>
-class PointPlotter
+class PointPlotter2
 {
  protected:
   F* f;
 
  public:
-  PointPlotter(F* arr) : f(arr)
+  PointPlotter2(F* arr) : f(arr)
   {
   }
 
@@ -267,6 +265,3 @@ class PointPlotter
     f[F(x)] = F(y);
   }
 };
-
-
-#endif // not __SPLINE_H__

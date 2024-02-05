@@ -1,5 +1,5 @@
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
 //  Copyright (C) 2004  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -17,8 +17,6 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  ---------------------------------------------------------------------------
 
-#ifndef __VOICE_H__
-#define __VOICE_H__
 
 #include "siddefs.h"
 #include "wave.h"
@@ -29,7 +27,7 @@ class Voice2
 public:
   Voice2();
 
-  void set_chip_model(chip_model model);
+  void set_chip_model(chip_model2 model);
   void set_sync_source(Voice2*);
   void reset();
 
@@ -81,4 +79,3 @@ sound_sample Voice2::getDC()
 
 #endif // RESID_INLINING || defined(__VOICE_CC__)
 
-#endif // not __VOICE_H__

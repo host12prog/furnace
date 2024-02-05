@@ -1,5 +1,5 @@
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
 //  Copyright (C) 2004  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -17,8 +17,6 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  ---------------------------------------------------------------------------
 
-#ifndef __FILTER_H__
-#define __FILTER_H__
 
 #include "siddefs.h"
 #include "spline.h"
@@ -124,7 +122,7 @@ public:
   Filter2();
 
   void enable_filter(bool enable);
-  void set_chip_model(chip_model model);
+  void set_chip_model(chip_model2 model);
 
   RESID_INLINE
   void clock(sound_sample voice,
@@ -146,7 +144,7 @@ public:
 
   // Spline functions.
   void fc_default(const fc_point*& points, int& count);
-  PointPlotter<sound_sample> fc_plotter();
+  PointPlotter2<sound_sample> fc_plotter();
 
 protected:
   void set_w0();
@@ -383,4 +381,3 @@ sound_sample Filter2::output()
 
 #endif // RESID_INLINING || defined(__FILTER_CC__)
 
-#endif // not __FILTER_H__

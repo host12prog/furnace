@@ -17,16 +17,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef _C64_H
-#define _C64_H
+#ifndef _SID2_H
+#define _SID2_H
 
 #include "../dispatch.h"
 #include "../../fixedQueue.h"
 #include "sound/sid2/sid.h"
-
-// TODO:
-// - ex3 (special) unify with ex4 (gate/test)
-// - ex4 (test) compatibility
 
 class DivPlatformSID2: public DivDispatch {
   struct Channel: public SharedChannel<signed char> {
@@ -35,6 +31,9 @@ class DivPlatformSID2: public DivDispatch {
     short duty;
     bool sweepChanged, filter;
     bool resetMask, resetFilter, resetDuty, gate, ring, sync, test;
+    unsigned char vol;
+    unsigned char filtControl, filtRes;
+    int filtCut;
     Channel():
       SharedChannel<signed char>(15),
       prevFreq(65535),
@@ -54,14 +53,18 @@ class DivPlatformSID2: public DivDispatch {
       gate(true),
       ring(false),
       sync(false),
-      test(false) {}
+      test(false),
+      vol(15),
+      filtControl(0),
+      filtRes(0),
+      filtCut(0) {}
   };
   Channel chan[3];
   DivDispatchOscBuffer* oscBuf[3];
   bool isMuted[3];
   float fakeLow[3];
   float fakeBand[3];
-  float fakeCutTable[2048];
+  float fakeCutTable[4096];
   struct QueuedWrite {
       unsigned char addr;
       unsigned char val;
@@ -70,11 +73,9 @@ class DivPlatformSID2: public DivDispatch {
   };
   FixedQueue<QueuedWrite,128> writes;
 
-  unsigned char filtControl, filtRes, vol;
   unsigned char writeOscBuf;
-  int filtCut, resetTime, initResetTime;
 
-  bool keyPriority, sidIs6581, needInitTables, no1EUpdate, multiplyRel;
+  bool keyPriority, needInitTables;
   unsigned char chanOrder[3];
   unsigned char testAD, testSR;
 
@@ -89,7 +90,7 @@ class DivPlatformSID2: public DivDispatch {
   void acquire_classic(short* bufL, short* bufR, size_t start, size_t len);
   void acquire_fp(short* bufL, short* bufR, size_t start, size_t len);
 
-  void updateFilter();
+  void updateFilter(int channel);
   public:
     void acquire(short** buf, size_t len);
     int dispatch(DivCommand c);

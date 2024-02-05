@@ -1,5 +1,5 @@
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
 //  Copyright (C) 2004  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -17,8 +17,6 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  ---------------------------------------------------------------------------
 
-#ifndef __WAVE_H__
-#define __WAVE_H__
 
 #include "siddefs.h"
 
@@ -36,7 +34,7 @@ public:
   WaveformGenerator2();
 
   void set_sync_source(WaveformGenerator2*);
-  void set_chip_model(chip_model model);
+  void set_chip_model(chip_model2 model);
 
   RESID_INLINE void clock();
   RESID_INLINE void clock(cycle_count delta_t);
@@ -495,4 +493,3 @@ reg12 WaveformGenerator2::output()
 
 #endif // RESID_INLINING || defined(__WAVE_CC__)
 
-#endif // not __WAVE_H__

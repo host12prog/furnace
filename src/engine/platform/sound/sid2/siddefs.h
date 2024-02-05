@@ -1,5 +1,7 @@
+#pragma once
+
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
 //  Copyright (C) 1999  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -16,9 +18,6 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  ---------------------------------------------------------------------------
-
-#ifndef __SIDDEFS_H__
-#define __SIDDEFS_H__
 
 // Define bool, true, and false for C++ compilers that lack these keywords.
 #define RESID_HAVE_BOOL 1
@@ -46,14 +45,13 @@ typedef int cycle_count;
 typedef int sound_sample;
 typedef sound_sample fc_point[2];
 
-enum chip_model { MOS6581, MOS8580 };
+enum chip_model2 { MOS6581_2, MOS8580_2 };
 
-enum sampling_method { SAMPLE_FAST, SAMPLE_INTERPOLATE,
-		       SAMPLE_RESAMPLE_INTERPOLATE, SAMPLE_RESAMPLE_FAST };
+enum sampling_method2 { SAMPLE_FAST2, SAMPLE_INTERPOLATE2,
+		       SAMPLE_RESAMPLE_INTERPOLATE2, SAMPLE_RESAMPLE_FAST2 };
 
 
 // Inlining on/off.
 #define RESID_INLINING 1
 #define RESID_INLINE inline
 
-#endif // not __SIDDEFS_H__

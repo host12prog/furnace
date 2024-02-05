@@ -1,5 +1,5 @@
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
 //  Copyright (C) 2004  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -34,7 +34,7 @@ SID2::SID2()
   voice[1].set_sync_source(&voice[0]);
   voice[2].set_sync_source(&voice[1]);
 
-  set_sampling_parameters(985248, SAMPLE_FAST, 44100);
+  set_sampling_parameters(985248, SAMPLE_FAST2, 44100);
 
   bus_value = 0;
   bus_value_ttl = 0;
@@ -79,7 +79,7 @@ void SID2::set_is_muted(int ch, bool val) {
 // ----------------------------------------------------------------------------
 // Set chip model.
 // ----------------------------------------------------------------------------
-void SID2::set_chip_model(chip_model model)
+void SID2::set_chip_model(chip_model2 model)
 {
   for (int i = 0; i < 3; i++) {
     voice[i].set_chip_model(model);
@@ -116,7 +116,7 @@ void SID2::reset()
 void SID2::input(int sample)
 {
   // Voice2 outputs are 20 bits. Scale up to match three voices in order
-  // to facilitate simulation of the MOS8580 "digi boost" hardware hack.
+  // to facilitate simulation of the MOS8580_2 "digi boost" hardware hack.
   ext_in = (sample << 4)*3;
 }
 
@@ -346,7 +346,7 @@ void SID2::enable_external_filter(bool enable)
 // I0() computes the 0th order modified Bessel function of the first kind.
 // This function is originally from resample-1.5/filterkit.c by J. O. Smith.
 // ----------------------------------------------------------------------------
-double SID2::I0(double x)
+double SID2::I0(double x2)
 {
   // Max error acceptable in I0.
   const double I0e = 1e-6;
@@ -355,7 +355,7 @@ double SID2::I0(double x)
   int n;
 
   sum = u = n = 1;
-  halfx = x/2.0;
+  halfx = x2/2.0;
 
   do {
     temp = halfx/n++;
@@ -389,12 +389,12 @@ double SID2::I0(double x)
 // to slightly below 20kHz. This constraint ensures that the FIR table is
 // not overfilled.
 // ----------------------------------------------------------------------------
-bool SID2::set_sampling_parameters(double clock_freq, sampling_method method,
+bool SID2::set_sampling_parameters(double clock_freq, sampling_method2 method,
 				  double sample_freq, double pass_freq,
 				  double filter_scale)
 {
   // Check resampling constraints.
-  if (method == SAMPLE_RESAMPLE_INTERPOLATE || method == SAMPLE_RESAMPLE_FAST)
+  if (method == SAMPLE_RESAMPLE_INTERPOLATE2 || method == SAMPLE_RESAMPLE_FAST2)
   {
     // Check whether the sample ring buffer would overfill.
     if (FIR_N*clock_freq/sample_freq >= RINGSIZE) {
@@ -431,7 +431,7 @@ bool SID2::set_sampling_parameters(double clock_freq, sampling_method method,
   sample_prev = 0;
 
   // FIR initialization is only necessary for resampling.
-  if (method != SAMPLE_RESAMPLE_INTERPOLATE && method != SAMPLE_RESAMPLE_FAST)
+  if (method != SAMPLE_RESAMPLE_INTERPOLATE2 && method != SAMPLE_RESAMPLE_FAST2)
   {
     delete[] sample;
     delete[] fir;
@@ -458,7 +458,7 @@ bool SID2::set_sampling_parameters(double clock_freq, sampling_method method,
   // The filter order will maximally be 124 with the current constraints.
   // N >= (96.33 - 7.95)/(2.285*0.1*pi) -> N >= 123
   // The filter order is equal to the number of zero crossings, i.e.
-  // it should be an even number (sinc is symmetric about x = 0).
+  // it should be an even number (sinc is symmetric about x2 = 0).
   int N = int((A - 7.95)/(2.285*dw) + 0.5);
   N += N & 1;
 
@@ -466,13 +466,13 @@ bool SID2::set_sampling_parameters(double clock_freq, sampling_method method,
   double f_cycles_per_sample = clock_freq/sample_freq;
 
   // The filter length is equal to the filter order + 1.
-  // The filter length must be an odd number (sinc is symmetric about x = 0).
+  // The filter length must be an odd number (sinc is symmetric about x2 = 0).
   fir_N = int(N*f_cycles_per_sample) + 1;
   fir_N |= 1;
 
   // We clamp the filter table resolution to 2^n, making the fixpoint
   // sample_offset a whole multiple of the filter table resolution.
-  int res = method == SAMPLE_RESAMPLE_INTERPOLATE ?
+  int res = method == SAMPLE_RESAMPLE_INTERPOLATE2 ?
     FIR_RES_INTERPOLATE : FIR_RES_FAST;
   int n = (int)ceil(log(res/f_cycles_per_sample)/log(2));
   fir_RES = 1 << n;
@@ -550,7 +550,7 @@ void SID2::fc_default(const fc_point*& points, int& count)
 // ----------------------------------------------------------------------------
 // Return FC spline plotter object.
 // ----------------------------------------------------------------------------
-PointPlotter<sound_sample> SID2::fc_plotter()
+PointPlotter2<sound_sample> SID2::fc_plotter()
 {
   return filter[0].fc_plotter();
 }
@@ -707,13 +707,13 @@ int SID2::clock(cycle_count& delta_t, short* buf, int n, int interleave)
 {
   switch (sampling) {
   default:
-  case SAMPLE_FAST:
+  case SAMPLE_FAST2:
     return clock_fast(delta_t, buf, n, interleave);
-  case SAMPLE_INTERPOLATE:
+  case SAMPLE_INTERPOLATE2:
     return clock_interpolate(delta_t, buf, n, interleave);
-  case SAMPLE_RESAMPLE_INTERPOLATE:
+  case SAMPLE_RESAMPLE_INTERPOLATE2:
     return clock_resample_interpolate(delta_t, buf, n, interleave);
-  case SAMPLE_RESAMPLE_FAST:
+  case SAMPLE_RESAMPLE_FAST2:
     return clock_resample_fast(delta_t, buf, n, interleave);
   }
 }

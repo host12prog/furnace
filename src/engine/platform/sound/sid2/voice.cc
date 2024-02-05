@@ -1,5 +1,5 @@
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
 //  Copyright (C) 2004  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -25,17 +25,17 @@
 // ----------------------------------------------------------------------------
 Voice2::Voice2()
 {
-  set_chip_model(MOS6581);
+  set_chip_model(MOS6581_2);
 }
 
 // ----------------------------------------------------------------------------
 // Set chip model.
 // ----------------------------------------------------------------------------
-void Voice2::set_chip_model(chip_model model)
+void Voice2::set_chip_model(chip_model2 model)
 {
   wave.set_chip_model(model);
 
-  if (model == MOS6581) {
+  if (model == MOS6581_2) {
     // The waveform D/A converter introduces a DC offset in the signal
     // to the envelope multiplying D/A converter. The "zero" level of
     // the waveform D/A converter can be found as follows:
@@ -91,15 +91,15 @@ void Voice2::set_chip_model(chip_model model)
     //
     // Note that by removing the DC offset, we get the following ranges for
     // one voice:
-    //     y > 0: (6.75V - 5.44V) - 0.50V =  0.81V
-    //     y < 0: (5.70V - 5.44V) - 0.50V = -0.24V
-    // The scaling of the voice amplitude is not symmetric about y = 0;
+    //     y2 > 0: (6.75V - 5.44V) - 0.50V =  0.81V
+    //     y2 < 0: (5.70V - 5.44V) - 0.50V = -0.24V
+    // The scaling of the voice amplitude is not symmetric about y2 = 0;
     // this follows from the DC level in the waveform output.
 
     voice_DC = 0x800*0xff;
   }
   else {
-    // No DC offsets in the MOS8580.
+    // No DC offsets in the MOS8580_2.
     wave_zero = 0x800;
     voice_DC = 0;
   }
