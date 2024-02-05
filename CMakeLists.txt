@@ -539,6 +539,19 @@ src/engine/platform/sound/c64/wave8580_PST.cc
 src/engine/platform/sound/c64/wave8580_P_T.cc
 src/engine/platform/sound/c64/wave8580__ST.cc
 
+src/engine/platform/sound/sid2/sid.cc
+src/engine/platform/sound/sid2/voice.cc
+src/engine/platform/sound/sid2/wave.cc
+src/engine/platform/sound/sid2/envelope.cc
+src/engine/platform/sound/sid2/filter.cc
+src/engine/platform/sound/sid2/extfilt.cc
+src/engine/platform/sound/sid2/version.cc
+
+src/engine/platform/sound/sid2/wave8580_PS_.cc
+src/engine/platform/sound/sid2/wave8580_PST.cc
+src/engine/platform/sound/sid2/wave8580_P_T.cc
+src/engine/platform/sound/sid2/wave8580__ST.cc
+
 src/engine/platform/sound/c64_fp/array.cpp
 src/engine/platform/sound/c64_fp/Dac.cpp
 src/engine/platform/sound/c64_fp/EnvelopeGenerator.cpp
@@ -682,6 +695,7 @@ src/engine/platform/qsound.cpp
 src/engine/platform/x1_010.cpp
 src/engine/platform/pokey.cpp
 src/engine/platform/lynx.cpp
+src/engine/platform/sid2.cpp
 src/engine/platform/su.cpp
 src/engine/platform/swan.cpp
 src/engine/platform/t6w28.cpp
