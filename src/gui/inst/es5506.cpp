@@ -47,7 +47,7 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
       // envelope
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
-      P(CWSliderScalar(_L("Envelope count##sgiOTTO"),ImGuiDataType_U16,&ins->es5506.envelope.ecount,&_ZERO,&_FIVE_HUNDRED_ELEVEN)); rightClickable
+      P(CWSliderScalar(_L("Envelope length##sgiOTTO"),ImGuiDataType_U16,&ins->es5506.envelope.ecount,&_ZERO,&_FIVE_HUNDRED_ELEVEN)); rightClickable
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
       P(CWSliderScalar(_L("Left Volume Ramp##sgiOTTO"),ImGuiDataType_S8,&ins->es5506.envelope.lVRamp,&_MINUS_ONE_HUNDRED_TWENTY_EIGHT,&_ONE_HUNDRED_TWENTY_SEVEN)); rightClickable
