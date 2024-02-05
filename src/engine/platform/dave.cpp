@@ -184,6 +184,16 @@ void DivPlatformDave::tick(bool sysTick) {
       chan[i].lowPass=chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val&8;
       chan[i].freqChanged=true;
     }
+    bool raw_freq = false;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->had) 
+    {
+      if(i < 3) //only for tone channels
+      {
+        chan[i].freq = 4095 - chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->val;
+        chan[i].freqChanged=true;
+        raw_freq = true;
+      }
+    }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
       if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->mode) {
         chan[i].pitch2+=chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
@@ -238,28 +248,56 @@ void DivPlatformDave::tick(bool sysTick) {
         }
         chan[i].dacRate=chan[i].freq*off;
       } else {
-        chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,chan[i].pitch2,chipClock,CHIP_DIVIDER);
+        if(!raw_freq)
+        {
+          chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,chan[i].pitch2,chipClock,CHIP_DIVIDER);
+        }
       }
 
       if (i<3) {
         switch (chan[i].wave) {
           case 0:
-            chan[i].freq>>=2;
+          {
+            if(!raw_freq)
+            {
+              chan[i].freq>>=2;
+            }
             break;
+          }
           case 1:
-            chan[i].freq/=5;
-            chan[i].freq>>=1;
+          {
+            if(!raw_freq)
+            {
+              chan[i].freq/=5;
+              chan[i].freq>>=1;
+            }
             break;
+          }
           case 2:
-            chan[i].freq/=15;
-            chan[i].freq>>=1;
+          {
+            if(!raw_freq)
+            {
+              chan[i].freq/=15;
+              chan[i].freq>>=1;
+            }
             break;
+          }
           case 3:
-            chan[i].freq/=63;
+          {
+            if(!raw_freq)
+            {
+              chan[i].freq/=63;
+            }
             break;
+          }
           case 4:
-            chan[i].freq>>=5;
+          {
+            if(!raw_freq)
+            {
+              chan[i].freq>>=5;
+            }
             break;
+          }
         }
       }
 

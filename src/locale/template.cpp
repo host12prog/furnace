@@ -3555,6 +3555,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Panning (right)##sgiDAVE"].plurals[0] = "=Panning (right)";
     strings["Phase Reset##sgiDAVE"].plurals[0] = "=Phase Reset";
     strings["Control##sgiDAVE"].plurals[0] = "=Control";
+    strings["Raw Frequency##sgiDAVE"].plurals[0] = "=Raw Frequency";
 
     //   sgi5503   src/gui/inst/es5503.cpp
 

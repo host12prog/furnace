@@ -3484,6 +3484,7 @@ void DivLocale::addTranslationsRussian()
     strings["Panning (right)##sgiDAVE"].plurals[0] = "Панорамирование (право)";
     strings["Phase Reset##sgiDAVE"].plurals[0] = "Сброс фазы";
     strings["Control##sgiDAVE"].plurals[0] = "Управление";
+    strings["Raw Frequency##sgiDAVE"].plurals[0] = "Частота (регистровое знач.)";
 
     //   sgi5503   src/gui/inst/es5503.cpp
 
