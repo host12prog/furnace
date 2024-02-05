@@ -81,7 +81,7 @@ void FurnaceGUI::drawEffectList() {
           if (strlen(name)>6) {
             ImGui::TextWrapped("%s",&name[6]);
           } else {
-            ImGui::Text("ERROR");
+            ImGui::Text(_L("ERROR##sgef"));
           }
         }
       }

@@ -1277,6 +1277,7 @@ void DivLocale::addTranslationsTemplate()
     strings["None##sgef"].plurals[0] = "=None";
     strings["Name##sgef"].plurals[0] = "=Name";
     strings["Description##sgef"].plurals[0] = "=Description";
+    strings["ERROR##sgef"].plurals[0] = "=ERROR";
 
     //   sgeo  src/gui/exportOptions.cpp
 

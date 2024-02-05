@@ -1231,6 +1231,7 @@ void DivLocale::addTranslationsRussian()
     strings["None##sgef"].plurals[0] = "Ни одного";
     strings["Name##sgef"].plurals[0] = "Имя";
     strings["Description##sgef"].plurals[0] = "Описание";
+    strings["ERROR##sgef"].plurals[0] = "ОШИБКА";
 
     //   sgeo  src/gui/exportOptions.cpp
 
