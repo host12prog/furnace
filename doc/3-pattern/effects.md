@@ -207,19 +207,19 @@ ex | SAA1099  | X1-010     | Namco 163  | FDS       | Sound Unit | ES5506    | M
  7 |          |            |            |           |            | EnvRampK2 |          |
  8 |          |            |            |           |            | Env Mode  |          |
 
-ex | QSound       | SNES      | MSM5232   |    ESFM    |   ES5503    |
----|--------------|-----------|-----------|------------|-------------|
- D | Echo Level   | NoiseFreq | GroupCtrl | OP4NoiMode |  Osc. mode  |
- W |              | Waveform  |           |  Waveform  |  Waveform   |
- 1 | EchoFeedback | Special   | GroupAtk  |            |  Wave pos   |
- 2 | Echo Length  | Gain      | GroupDec  |            | Osc. output |
- 3 |              |           | Noise     |            |             |
- A |              |           |           |            |             |
- B |              |           |           |            |             |
- C |              |           |           |            |             |
- D |              |           |           |            |             |
- 4 |              |           |           |            |             |
- 5 |              |           |           |            |             |
- 6 |              |           |           |            |             |
- 7 |              |           |           |            |             |
- 8 |              |           |           |            |             |
+ex | QSound       | SNES      | MSM5232   |    ESFM    |   ES5503    |    DAVE     |
+---|--------------|-----------|-----------|------------|-------------|-------------|
+ D | Echo Level   | NoiseFreq | GroupCtrl | OP4NoiMode |  Osc. mode  |  NoiseFreq  |
+ W |              | Waveform  |           |  Waveform  |  Waveform   |  Waveform   |
+ 1 | EchoFeedback | Special   | GroupAtk  |            |  Wave pos   |   Control   |
+ 2 | Echo Length  | Gain      | GroupDec  |            | Osc. output |  Raw freq.  |
+ 3 |              |           | Noise     |            |             |             |
+ A |              |           |           |            |             |             |
+ B |              |           |           |            |             |             |
+ C |              |           |           |            |             |             |
+ D |              |           |           |            |             |             |
+ 4 |              |           |           |            |             |             |
+ 5 |              |           |           |            |             |             |
+ 6 |              |           |           |            |             |             |
+ 7 |              |           |           |            |             |             |
+ 8 |              |           |           |            |             |             |
