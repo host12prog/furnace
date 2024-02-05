@@ -4394,9 +4394,9 @@ bool FurnaceGUI::loop() {
         if (gp.len==2) {
           info=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Speed %d:%d" : _L("| Speed %d:%d##sggu")),gp.val[0],gp.val[1]);
         } else if (gp.len==1) {
-          info=fmt::sprintf(_L("| Speed %d##sggu"),gp.val[0]);
+          info=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Speed %d" : _L("| Speed %d##sggu")),gp.val[0]);
         } else {
-          info=_L("| Groove##sggu");
+          info=settings.language == DIV_LANG_ENGLISH ? "| Groove" : _L("| Groove##sggu");
         }
 
         info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? " @ %gHz (%g BPM) " : _L(" @ %gHz (%g BPM) ##sggu")),e->getCurHz(),calcBPM(e->getSpeeds(),e->getCurHz(),e->curSubSong->virtualTempoN,e->curSubSong->virtualTempoD));
