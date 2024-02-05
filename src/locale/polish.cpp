@@ -499,7 +499,7 @@ void DivLocale::addTranslationsPolish()
     strings["select all##sggu"].plurals[0] = "wybierz wszystko";
     strings["operation mask...##sggu"].plurals[0] = "maska operacji...";
     strings["delete##sggu1"].plurals[0] = "usuń";
-    strings["pull delete##sggu"].plurals[0] = usuń" z zaciągnięciem następujących rzędów";
+    strings["pull delete##sggu"].plurals[0] = "usuń z zaciągnięciem następujących rzędów";
     strings["insert##sggu"].plurals[0] = "wstaw pusty rząd";
     strings["paste##sggu1"].plurals[0] = "wklej";
     strings["transpose (note)##sggu"].plurals[0] = "transponuj nutę";
@@ -681,7 +681,7 @@ void DivLocale::addTranslationsPolish()
     strings["Set volume: %d (%.2X, INVALID!)##sggu"].plurals[0] = "Głośność: %d (%.2X, NIEPOPRAWNA!)";
     strings["Set volume: %d (%.2X, %d%%)##sggu"].plurals[0] = "Głośność: %d (%.2X, %d%%)";
     strings["| modified##sggu"].plurals[0] = "| zmodyfikowany";
-    strings["there was an error in the file dialog! you may want to report this issue to:\nhttps://github.com/tildearrow/furnace/issues\ncheck the Log Viewer (window > log viewer) for more information.\n\nfor now please disable the system file picker in Settings > General.##sggu"].plurals[0] = "возникла ошибка в окне файлового диалога! возможно, вы захотите сообщить об ошибке:\nhttps://github.com/tildearrow/furnace/issues\nвы можете открыть просмотр логов (окно > просмотр логов) для получения дополнительной информации.\n\nпока можете отключить файловый диалог ОС в настройки > основные.";
+    strings["there was an error in the file dialog! you may want to report this issue to:\nhttps://github.com/tildearrow/furnace/issues\ncheck the Log Viewer (window > log viewer) for more information.\n\nfor now please disable the system file picker in Settings > General.##sggu"].plurals[0] = "wystąpił błąd w oknie dialogowym pliku!możesz chcieć zgłosić błąd:\nhttps://github.com/tildearrow/furnace/issues\nAby uzyskać więcej informacji, można otworzyć podgląd logów (okno > podgląd logów).\n\nna razie można wyłączyć systemowe okno dialogowe plików w ustawieniach > podstawowe.";
     strings["can't do anything without Storage permissions!##sggu"].plurals[0] = "не могу ничего сделать без разрешения \"Хранилище\"!";
     strings["Zenity/KDialog not available!\nplease install one of these, or disable the system file picker in Settings > General.##sggu"].plurals[0] = "Zenity/KDialog недоступны!\nпожалуйста, установите один из них, или отключите файловый диалог ОС в настройки > основные.";
     strings["Error while loading file! (%s)##sggu2"].plurals[0] = "Ошибка при загрузке файла! (%s)";
@@ -978,17 +978,17 @@ void DivLocale::addTranslationsPolish()
     strings["Export (.dmp)##sggc"].plurals[0] = "Eksportuj (.dmp)";
     strings["Move up##sggc0"].plurals[0] = "Przesun w gore";
     strings["Move down##sggc0"].plurals[0] = "Przesun w dol";
-    strings["Delete##sggc0"].plurals[0] = "usuń";
-    strings["Edit##sggc0"].plurals[0] = "Редактировать";
-    strings["Cursor up##sggc0"].plurals[0] = "Курсор вверх";
-    strings["Cursor down##sggc0"].plurals[0] = "Курсор вниз";
+    strings["Delete##sggc0"].plurals[0] = "Usuń";
+    strings["Edit##sggc0"].plurals[0] = "Educja";
+    strings["Cursor up##sggc0"].plurals[0] = "Kursor w górę";
+    strings["Cursor down##sggc0"].plurals[0] = "Kursor w dół";
     strings["Toggle folders/standard view##sggc0"].plurals[0] = "Przełączaj między widokiem złożonym i normalnym";
 
     strings["---Wavetable list##sggc"].plurals[0] = "---Wavetable list";
     strings["Add##sggc1"].plurals[0] = "Dodaj";
     strings["Duplicate##sggc1"].plurals[0] = "Sklonuj";
     strings["Open##sggc1"].plurals[0] = "Otworz";
-    strings["Open (replace current)##sggc1"].plurals[0] = "Otworz (с заменой выделенной)";
+    strings["Open (replace current)##sggc1"].plurals[0] = "Otworz (z zamianą obecnego)";
     strings["Save##sggc1"].plurals[0] = "Zapisz";
     strings["Save (.dmw)##sggc"].plurals[0] = "Zapisz (.dmw)";
     strings["Save (raw)##sggc0"].plurals[0] = "Zapisz (dane surowe)";
@@ -996,8 +996,8 @@ void DivLocale::addTranslationsPolish()
     strings["Move down##sggc1"].plurals[0] = "Przesun w dol";
     strings["Delete##sggc1"].plurals[0] = "usuń";
     strings["Edit##sggc1"].plurals[0] = "Edytuj";
-    strings["Cursor up##sggc1"].plurals[0] = "Курсор вверх";
-    strings["Cursor down##sggc1"].plurals[0] = "Курсор вниз";
+    strings["Cursor up##sggc1"].plurals[0] = "Kursor do góry";
+    strings["Cursor down##sggc1"].plurals[0] = "Kursur w dół";
     strings["Toggle folders/standard view##sggc1"].plurals[0] = "Przełączaj między widokiem złożonym i normalnym";
 
     strings["---Sample list##sggc"].plurals[0] = "---Sample list";
@@ -1066,7 +1066,7 @@ void DivLocale::addTranslationsPolish()
     strings["Deep clone##sggc"].plurals[0] = "Sklonuj gleboko";
     strings["Duplicate to end of song##sggc"].plurals[0] = "Клонировать в конец трека";
     strings["Deep clone to end of song##sggc"].plurals[0] = "Клонировать в конец трека с выделением новых индексов";
-    strings["Remove##sggc"].plurals[0] = "usuń";
+    strings["Remove##sggc"].plurals[0] = "Usuń";
     strings["Move up##sggc3"].plurals[0] = "Сдвинуть вверх";
     strings["Move down##sggc3"].plurals[0] = "Сдвинуть вниз";
     strings["Replay##sggc"].plurals[0] = "Воспроизвести";
@@ -1086,17 +1086,17 @@ void DivLocale::addTranslationsPolish()
     strings["Error while saving file! (%s)##sgda"].plurals[0] = "Ошибка при сохранении файла! (%s)";
     strings["Error while sending request (MIDI output not configured?)##sgda"].plurals[0] = "Ошибка при посылке запроса (MIDI вывод не настроен?)";
     strings["Select an option: (cannot be undone!)##sgda"].plurals[0] = "Выберите опцию: (действие не может быть отменено!)";
-    strings["too many instruments!##sgda0"].plurals[0] = "слишком много инструментов!";
-    strings["too many instruments!##sgda1"].plurals[0] = "слишком много инструментов!";
-    strings["too many wavetables!##sgda0"].plurals[0] = "слишком много волновых таблиц!";
-    strings["too many wavetables!##sgda1"].plurals[0] = "слишком много волновых таблиц!";
-    strings["too many samples!##sgda0"].plurals[0] = "слишком много сэмплов!";
-    strings["too many samples!##sgda1"].plurals[0] = "слишком много сэмплов!";
-    strings["couldn't paste! make sure your sample is 8 or 16-bit.##sgda"].plurals[0] = "Не получилось вставить сэмпл! убедитесь, что это 8- или 16-битный сэмпл.";
-    strings["too many instruments!##sgda2"].plurals[0] = "слишком много инструментов!";
-    strings["select at least one sample!##sgda"].plurals[0] = "выберите хотя бы один сэмпл!";
+    strings["too many instruments!##sgda0"].plurals[0] = "zbyt wiele instrumentów!";
+    strings["too many instruments!##sgda1"].plurals[0] = "zbyt wiele instrumentów!";
+    strings["too many wavetables!##sgda0"].plurals[0] = "zbyt wiele tablic fal!";
+    strings["too many wavetables!##sgda1"].plurals[0] = "zbyt wiele tablic fal!";
+    strings["too many samples!##sgda0"].plurals[0] = "zbyt wiele sampli!";
+    strings["too many samples!##sgda1"].plurals[0] = "zbyt wiele sampli!";
+    strings["couldn't paste! make sure your sample is 8 or 16-bit.##sgda"].plurals[0] = "nie udało się wkleić! upewnij się że twój sampel jest 8 lub 16-bitowy.";
+    strings["too many instruments!##sgda2"].plurals[0] = "zbyt wiele instrumentów!";
+    strings["select at least one sample!##sgda"].plurals[0] = "wybierz co najmniej jeden sampel!";
     strings["maximum size is 256 samples!##sgda"].plurals[0] = "maksymalny rozmiar to 256 sampli!";
-    strings["too many wavetables!##sgda2"].plurals[0] = "слишком много волновых таблиц!";
+    strings["too many wavetables!##sgda2"].plurals[0] = "zbyt wiele tablic fal!";
 
     //   sgec  src/gui/editControls.cpp
 
@@ -1173,13 +1173,13 @@ void DivLocale::addTranslationsPolish()
     strings["Repeat pattern##sgec1"].plurals[0] = "Зациклить текущий паттерн";
     strings["Edit##sgec1"].plurals[0] = "Режим редактирования";
     strings["Metronome##sgec1"].plurals[0] = "Metronom";
-    strings["Octave##sgec1"].plurals[0] = "Октава";
-    strings["Edit Step##sgec1"].plurals[0] = "Шаг";
+    strings["Octave##sgec1"].plurals[0] = "Oktawa";
+    strings["Edit Step##sgec1"].plurals[0] = "Krok edycji";
     strings["Follow##sgec1"].plurals[0] = "Следовать за прогрессом воспроизведения";
     strings["Orders##sgec2"].plurals[0] = "Matryca wzorcow";
     strings["Pattern##sgec2"].plurals[0] = "Wzorzec";
-    strings["Poly##PolyInput"].plurals[0] = "Полифония##PolyInput";
-    strings["Mono##PolyInput"].plurals[0] = "Моно##PolyInput";
+    strings["Poly##PolyInput"].plurals[0] = "Polifonia##PolyInput";
+    strings["Mono##PolyInput"].plurals[0] = "Mono##PolyInput";
     strings["Polyphony##sgec1"].plurals[0] = "Полифония превью";
     strings["Play##sgec2"].plurals[0] = "Odtwarzaj";
     strings["Stop##sgec2"].plurals[0] = "Stop";
@@ -1191,14 +1191,14 @@ void DivLocale::addTranslationsPolish()
     strings["Octave##sgec2"].plurals[0] = "Oktawa";
     strings["Step##sgec0"].plurals[0] = "Krok";
     strings["Foll.##sgec"].plurals[0] = "Podazaj";
-    strings["Follow##sgec2"].plurals[0] = "Следовать за прогрессом воспроизведения";
-    strings["Ord##FollowOrders"].plurals[0] = "Матр.##FollowOrders";
+    strings["Follow##sgec2"].plurals[0] = "Podążaj za postępem odtwarzania";
+    strings["Ord##FollowOrders"].plurals[0] = "Matr.##FollowOrders";
     strings["Orders##sgec3"].plurals[0] = "Matryca wzorcow";
-    strings["Pat##FollowPattern"].plurals[0] = "Патт.##FollowPattern";
+    strings["Pat##FollowPattern"].plurals[0] = "Wz.##FollowPattern";
     strings["Pattern##sgec3"].plurals[0] = "Wzorzec";
-    strings["Poly##PolyInput"].plurals[0] = "Полифония##PolyInput";
-    strings["Mono##PolyInput"].plurals[0] = "Моно##PolyInput";
-    strings["Polyphony##sgec2"].plurals[0] = "Полифония превью";
+    strings["Poly##PolyInput"].plurals[0] = "Polifonia##PolyInput";
+    strings["Mono##PolyInput"].plurals[0] = "Mono##PolyInput";
+    strings["Polyphony##sgec2"].plurals[0] = "Polifonia podglądu";
     strings["Play Controls###Play Controls"].plurals[0] = "Управление воспроизведением###Play Controls";
     strings["Stop##sgec3"].plurals[0] = "Stop";
     strings["Play##sgec3"].plurals[0] = "Odtwarzaj";
@@ -4559,13 +4559,13 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiTIA"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiTIA"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiTIA"].plurals[0] = "Wysokosc";
-    strings["Waveform##sgiTIA"].plurals[0] = "Fala";
+    strings["Waveform##sgiTIA"].plurals[0] = "Kształt fali";
 
     //   sgiVB     src/gui/inst/vboy.cpp
 
-    strings["Set modulation table (channel 5 only)##sgiVB"].plurals[0] = "Выставить таблицу модуляции (только для 5-го канала)";
-    strings["Hex##MTHex"].plurals[0] = "Шест.##MTHex";
-    strings["Dec##MTHex"].plurals[0] = "Дес.##MTHex";
+    strings["Set modulation table (channel 5 only)##sgiVB"].plurals[0] = "Ustaw tablicę modulacji (tylko dla piątego kanału)";
+    strings["Hex##MTHex"].plurals[0] = "Hex.##MTHex";
+    strings["Dec##MTHex"].plurals[0] = "Dec.##MTHex";
     strings["Macros##sgiVB"].plurals[0] = "Makra";
     strings["Volume##sgiVB"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiVB"].plurals[0] = "Arpeggio";
@@ -4649,8 +4649,8 @@ void DivLocale::addTranslationsPolish()
     strings["Phase Reset##sgiX1"].plurals[0] = "Reset fazy";
     strings["Envelope##sgiX1"].plurals[0] = "Obwiednia";
     strings["Envelope Mode##sgiX1"].plurals[0] = "Tryb obwiedni";
-    strings["AutoEnv Num##sgiX1"].plurals[0] = "Множ. част. авто-огиб.";
-    strings["AutoEnv Den##sgiX1"].plurals[0] = "Знам. част. авто-огиб.";
+    strings["AutoEnv Num##sgiX1"].plurals[0] = "Licznik częst. auto-obwiedni.";
+    strings["AutoEnv Den##sgiX1"].plurals[0] = "Nianownik częst. auto-obwiedni.";
 
     //   sgiYMZ    src/gui/inst/ymz280b.cpp
 
