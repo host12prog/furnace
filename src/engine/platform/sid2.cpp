@@ -46,8 +46,8 @@ short DivPlatformSID2::runFakeFilter(unsigned char ch, int in) {
   // taken from dSID
   float fin=in;
   float fout=0;
-  float ctf=fakeCutTable[((regPool[0x15 + 3 * ch]&16)|(regPool[0x16]<<4))&0xfff];
-  float reso=regPool[0x17 + 3 * ch] / 16.0;
+  float ctf=fakeCutTable[((regPool[0x15 + 3 * ch]&16)|(regPool[0x16 + 3 * ch]<<4))&0xfff];
+  float reso=(pow(2,((float)(4-(float)(regPool[0x17 + 3 * ch]))/(8.0 * 16.0))));
   float tmp=fin+fakeBand[ch]*reso+fakeLow[ch];
   if (regPool[0x15 + 3 * ch]&0x40) { //highpass
     fout-=tmp;
@@ -112,7 +112,7 @@ void DivPlatformSID2::tick(bool sysTick) {
     chan[i].std.next();
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
       chan[i].vol=MIN(15,chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val);
-      willUpdateFilter=true;
+      rWrite(i*7+3,(chan[i].duty>>8) | (chan[i].vol << 4));
     }
 
     if (NEW_ARP_STRAT) {
@@ -152,7 +152,7 @@ void DivPlatformSID2::tick(bool sysTick) {
           chan[i].filtCut=MIN(4095,chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val);
       } else {
           chan[i].filtCut+=chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val;
-        if (chan[i].filtCut> 4095) chan[i].filtCut= 4095;
+        if (chan[i].filtCut > 4095) chan[i].filtCut = 4095;
         if (chan[i].filtCut<0) chan[i].filtCut=0;
       }
       willUpdateFilter=true;
@@ -162,11 +162,11 @@ void DivPlatformSID2::tick(bool sysTick) {
       willUpdateFilter=true;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->had) {
-        chan[i].filtRes=chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->val&15;
+      chan[i].filtRes=chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->val&255;
       willUpdateFilter=true;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX3)->had) {
-      chan[i].filtControl=(chan[i].std.get_div_macro_struct(DIV_MACRO_EX3)->val&1 << 3);
+      chan[i].filter=(chan[i].std.get_div_macro_struct(DIV_MACRO_EX3)->val&1);
       willUpdateFilter=true;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->had) {
@@ -199,11 +199,15 @@ void DivPlatformSID2::tick(bool sysTick) {
     }
 
     if (sysTick) {
-      if (!chan[i].resetMask && !chan[i].inPorta) {
-        DivInstrument* ins=parent->getIns(chan[i].ins,DIV_INS_C64);
-        rWrite(i*7+5,testAD);
-        rWrite(i*7+6,testSR);
-        rWrite(i*7+4,(chan[i].wave<<4)|(ins->c64.noTest?0:8)|(chan[i].test<<3)|(chan[i].ring<<2)|(chan[i].sync<<1));
+      if (chan[i].testWhen>0) {
+        if (--chan[i].testWhen<1) {
+          if (!chan[i].resetMask && !chan[i].inPorta) {
+            DivInstrument* ins=parent->getIns(chan[i].ins,DIV_INS_C64);
+            rWrite(i*7+5,testAD);
+            rWrite(i*7+6,testSR);
+            rWrite(i*7+4,(chan[i].wave<<4)|(ins->c64.noTest?0:8)|(chan[i].test<<3)|(chan[i].ring<<2)|(chan[i].sync<<1));
+          }
+        }
       }
     }
 
@@ -236,7 +240,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
   if (c.chan>2) return 0;
   switch (c.cmd) {
     case DIV_CMD_NOTE_ON: {
-      DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_C64);
+      DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_SID2);
       if (c.value!=DIV_NOTE_NULL) {
         chan[c.chan].baseFreq=NOTE_FREQUENCY(c.value);
         chan[c.chan].freqChanged=true;
@@ -245,6 +249,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
       chan[c.chan].active=true;
       chan[c.chan].keyOn=true;
       chan[c.chan].test=false;
+
       if (chan[c.chan].insChanged || chan[c.chan].resetDuty || ins->std.get_macro(DIV_MACRO_WAVE, true)->len>0) {
         chan[c.chan].duty=ins->c64.duty;
         rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
@@ -258,6 +263,9 @@ int DivPlatformSID2::dispatch(DivCommand c) {
         chan[c.chan].release=ins->c64.r;
         chan[c.chan].ring=ins->c64.ringMod;
         chan[c.chan].sync=ins->c64.oscSync;
+
+        chan[c.chan].vol = ins->sid2.volume;
+        rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
       }
       if (chan[c.chan].insChanged || chan[c.chan].resetFilter) {
         chan[c.chan].filter=ins->c64.toFilter;
@@ -311,7 +319,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
         if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
           chan[c.chan].outVol=c.value;
           chan[c.chan].vol=chan[c.chan].outVol;
-          //TODO: add volume reg write
+          rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
         }
       }
       break;
@@ -570,7 +578,7 @@ void DivPlatformSID2::reset() {
     fakeBand[i]=0;
     chan[i].vol = 15;
 
-    chan[i].filtControl = 15;
+    chan[i].filtControl = 7;
     chan[i].filtRes = 0;
     chan[i].filtCut = 4095;
 

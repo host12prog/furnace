@@ -263,6 +263,13 @@ bool DivInstrumentESFM::Operator::operator==(const DivInstrumentESFM::Operator& 
   );
 }
 
+bool DivInstrumentSID2::operator==(const DivInstrumentSID2& other) {
+  return (
+    _C(volume) &&
+    _C(mix_mode)
+  );
+}
+
 bool DivInstrumentPowerNoise::operator==(const DivInstrumentPowerNoise& other) {
   return _C(octave);
 }

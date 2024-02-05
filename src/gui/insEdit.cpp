@@ -466,6 +466,11 @@ void FurnaceGUI::drawActualInsEditor()
         drawInsDAVE(ins); break;
       }
 
+      case DIV_INS_SID2:
+      {
+        drawInsSID2(ins); break;
+      }
+
       default: break;
     }
 

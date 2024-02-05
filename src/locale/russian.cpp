@@ -4394,7 +4394,7 @@ void DivLocale::addTranslationsRussian()
     strings["pitch mod##sgistru"].plurals[0] = "част. мод.";
     strings["invert right##sgistru"].plurals[0] = "инв. справа";
     strings["invert left##sgistru"].plurals[0] = "инв. слева";
-    strings["low##sgistru"].plurals[0] = "ФВЧ";
+    strings["low##sgistru"].plurals[0] = "ФНЧ";
     strings["band##sgistru"].plurals[0] = "ППФ";
     strings["high##sgistru"].plurals[0] = "ФВЧ";
     strings["ch3off##sgistru"].plurals[0] = "выкл. 3 кан.";

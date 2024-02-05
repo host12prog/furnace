@@ -2538,6 +2538,7 @@ class FurnaceGUI {
   void drawInsPOWERNOISE(DivInstrument* ins);
   void drawInsPOWERNOISESLOPE(DivInstrument* ins);
   void drawInsDAVE(DivInstrument* ins);
+  void drawInsSID2(DivInstrument* ins);
 
   void insTabWave(DivInstrument* ins);
 

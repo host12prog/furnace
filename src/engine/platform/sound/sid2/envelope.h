@@ -1,5 +1,5 @@
 //  ---------------------------------------------------------------------------
-//  This file is part of reSID, a MOS6581_2 SID2 emulator engine.
+//  This file is part of reSID, a MOS6581 SID2 emulator engine.
 //  Copyright (C) 2004  Dag Lem <resid@nimrod.no>
 //
 //  This program is free software; you can redistribute it and/or modify

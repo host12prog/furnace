@@ -63,8 +63,8 @@ fc_point Filter2::f0_points_8580[] =
   { 1664 * 2, 10500 },   // 0xd0
   { 1792 * 2, 11000 },   // 0xe0
   { 1920 * 2, 11700 },   // 0xf0
-  { 2047 * 2, 12500 },   // 0xff 0x07
-  { 2047 * 2, 12500 }    // 0xff 0x07 - repeated end point
+  { 4095, 12500 },   // 0xff 0x07
+  { 4095, 12500 }    // 0xff 0x07 - repeated end point
 };
 
 
@@ -93,7 +93,7 @@ Filter2::Filter2()
 	      + sizeof(f0_points_8580)/sizeof(*f0_points_8580) - 1,
 	      PointPlotter2<sound_sample>(f0_8580), 1.0);
 
-  set_chip_model(MOS6581_2);
+  set_chip_model(MOS8580_2);
 }
 
 
@@ -202,7 +202,7 @@ void Filter2::set_Q()
 
   // The coefficient 1024 is dispensed of later by right-shifting 10 times
   // (2 ^ 10 = 1024).
-  _1024_div_Q = static_cast<sound_sample>(1024.0/(0.707 + 1.0*res/0x0ff));
+  _1024_div_Q = static_cast<sound_sample>(1024.0/(0.707 + 2.5*res/0x0ff));
 }
 
 // ----------------------------------------------------------------------------
