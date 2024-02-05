@@ -689,7 +689,7 @@ void DivLocale::addTranslationsPolish()
     strings["Error while loading file! (%s)##sggu3"].plurals[0] = "Błąd podczas wczytywania pliku!  (%s)";
     strings["Error while saving file! (%s)##sggu2"].plurals[0] = "Błąd podczas zapisywania pliku! (%s)";
     strings["Error while saving file! (%s)##sggu3"].plurals[0] = "Błąd podczas zapisywania pliku! (%s)";
-    strings["error while saving instrument! make sure your instrument is compatible.##sggu"].plurals[0] = "błąd podczas zapisywania instrumentu! Upewnij się, że instrument jest kompatybilny z Deflemaskiem";
+    strings["error while saving instrument! only the following instrument types are supported:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS##sggu"].plurals[0] = "błąd podczas zapisywania! tylko następujące typy instruymentów są wspierane:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS";
     strings["there were some errors while loading samples:\n#sggu"].plurals[0] = "podczas ładowania sampli wystąpiły następujące błędy:\n";
     strings["...but you haven't selected a sample!##sggu0"].plurals[0] = "...ale nie wybrano sampla!";
     strings["could not save sample! open Log Viewer for more information.##sggu0"].plurals[0] = "nie udało się zapisać sampla! otwoórz podląd logów aby uzyskać więcej informacji.";
@@ -3509,7 +3509,7 @@ void DivLocale::addTranslationsPolish()
     strings["Filter Mode##sgiOTTO0"].plurals[0] = "Tryb filtra";
     strings["Filter K1##sgiOTTO0"].plurals[0] = "K1 filtra";
     strings["Filter K2##sgiOTTO0"].plurals[0] = "K2 filtra";
-    strings["Envelope count##sgiOTTO"].plurals[0] = "Długośc obwiedni";
+    strings["Envelope length##sgiOTTO"].plurals[0] = "Długośc obwiedni";
     strings["Left Volume Ramp##sgiOTTO"].plurals[0] = "Zwiększenie głośności lewej strony.";
     strings["Right Volume Ramp##sgiOTTO"].plurals[0] = "Zwiększenie głośności prawej strony.";
     strings["Filter K1 Ramp##sgiOTTO"].plurals[0] = "Zwiększenie K1 filtra";
