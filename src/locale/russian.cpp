@@ -3360,9 +3360,9 @@ void DivLocale::addTranslationsRussian()
     strings["Arpeggio##sgiSAMPLE"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiSAMPLE"].plurals[0] = "Частота";
     strings["Panning##sgiSAMPLE"].plurals[0] = "Панорамирование";
-    strings["Panning (left)##sgiSAMPLE"].plurals[0] = "Панорамирование (лево)";
+    strings["Panning (left)##sgiSAMPLE"].plurals[0] = "Панорамирование (левый)";
     strings["Surround##sgiSAMPLE"].plurals[0] = "Окружающее звучание";
-    strings["Panning (right)##sgiSAMPLE"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (right)##sgiSAMPLE"].plurals[0] = "Панорамирование (правый)";
     strings["Waveform##sgiSAMPLE"].plurals[0] = "Волна";
     strings["Phase Reset##sgiSAMPLE"].plurals[0]  = "Сброс фазы";
 
@@ -3409,8 +3409,8 @@ void DivLocale::addTranslationsRussian()
     strings["Volume##sgiC140"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiC140"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiC140"].plurals[0] = "Частота";
-    strings["Panning (left)##sgiC140"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiC140"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiC140"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiC140"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiC140"].plurals[0] = "Сброс фазы";
 
     //   sgiC219   src/gui/inst/c219.cpp
@@ -3420,8 +3420,8 @@ void DivLocale::addTranslationsRussian()
     strings["Arpeggio##sgiC219"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiC219"].plurals[0] = "Частота";
     strings["Control##sgiC219"].plurals[0] = "Управление";
-    strings["Panning (left)##sgiC219"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiC219"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiC219"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiC219"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiC219"].plurals[0] = "Сброс фазы";
 
     //   sgiC64    src/gui/inst/c64.cpp
@@ -3480,8 +3480,8 @@ void DivLocale::addTranslationsRussian()
     strings["Pitch##sgiDAVE"].plurals[0] = "Частота";
     strings["Noise Freq##sgiDAVE"].plurals[0] = "Частота шума";
     strings["Waveform##sgiDAVE"].plurals[0] = "Волна";
-    strings["Panning (left)##sgiDAVE"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiDAVE"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiDAVE"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiDAVE"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiDAVE"].plurals[0] = "Сброс фазы";
     strings["Control##sgiDAVE"].plurals[0] = "Управление";
     strings["Raw Frequency##sgiDAVE"].plurals[0] = "Частота (регистровое знач.)";
@@ -3501,8 +3501,8 @@ void DivLocale::addTranslationsRussian()
     strings["Arpeggio##sgi5503"].plurals[0] = "Арпеджио";
     strings["Pitch##sgi5503"].plurals[0] = "Частота";
     strings["Osc. mode##sgi5503"].plurals[0] = "Реж. осцилл.";
-    strings["Panning (left)##sgi5503"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgi5503"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgi5503"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgi5503"].plurals[0] = "Панорамирование (правый)";
     strings["Waveform##sgi5503"].plurals[0] = "Волна";
     strings["Phase Reset##sgi5503"].plurals[0] = "Сброс фазы";
     strings["Wave/sample pos.##sgi5503"].plurals[0] = "Полож. волны/сэмпла в памяти";
@@ -3524,8 +3524,8 @@ void DivLocale::addTranslationsRussian()
     strings["Volume##sgiOTTO"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiOTTO"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiOTTO"].plurals[0] = "Частота";
-    strings["Panning (left)##sgiOTTO"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiOTTO"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiOTTO"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiOTTO"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiOTTO"].plurals[0] = "Сброс фазы";
     strings["Filter Mode##sgiOTTO1"].plurals[0] = "Режим фильтра";
     strings["Filter K1##sgiOTTO1"].plurals[0] = "K1 фильтра";
@@ -3664,8 +3664,8 @@ void DivLocale::addTranslationsRussian()
     strings["Arpeggio##sgiK00"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiK00"].plurals[0] = "Частота";
     strings["Waveform##sgiK00"].plurals[0] = "Волна";
-    strings["Panning (left)##sgiK00"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiK00"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiK00"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiK00"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiK00"].plurals[0] = "Сброс фазы";
 
     //   sgiK05    src/gui/inst/k053260.cpp
@@ -3721,8 +3721,8 @@ void DivLocale::addTranslationsRussian()
     strings["Arpeggio##sgiLYNX"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiLYNX"].plurals[0] = "Частота";
     strings["Duty/Int##sgiLYNX"].plurals[0] = "Скважность/инт.";
-    strings["Panning (left)##sgiLYNX"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiLYNX"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiLYNX"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiLYNX"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiLYNX"].plurals[0] = "Сброс фазы";
 
     //   sgi5232   src/gui/inst/msm5232.cpp
@@ -3812,8 +3812,8 @@ void DivLocale::addTranslationsRussian()
     strings["Pitch##sgiWSG"].plurals[0] = "Частота";
     strings["Noise##sgiWSG"].plurals[0] = "Шум";
     strings["Waveform##sgiWSG"].plurals[0] = "Волна";
-    strings["Panning (left)##sgiWSG"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiWSG"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiWSG"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiWSG"].plurals[0] = "Панорамирование (правый)";
 
     //   sgiNES    src/gui/inst/nes.cpp
 
@@ -4001,8 +4001,8 @@ void DivLocale::addTranslationsRussian()
     strings["Pitch##sgiPCE"].plurals[0] = "Частота";
     strings["Noise##sgiPCE"].plurals[0] = "Шум";
     strings["Waveform##sgiPCE"].plurals[0] = "Волна";
-    strings["Panning (left)##sgiPCE"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiPCE"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiPCE"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiPCE"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiPCE"].plurals[0] = "Сброс фазы";
 
     //   sgiPET    src/gui/inst/pet.cpp
@@ -4037,8 +4037,8 @@ void DivLocale::addTranslationsRussian()
     strings["Volume##sgiPNN"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiPNN"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiPNN"].plurals[0] = "Частота";
-    strings["Panning (left)##sgiPNN"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiPNN"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiPNN"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiPNN"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiPNN"].plurals[0] = "Сброс фазы";
     strings["Control##sgiPNN"].plurals[0] = "Управление";
     strings["Tap A Location##sgiPNN"].plurals[0] = "Положение отвода A";
@@ -4053,8 +4053,8 @@ void DivLocale::addTranslationsRussian()
     strings["Volume##sgiPNS"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiPNS"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiPNS"].plurals[0] = "Частота";
-    strings["Panning (left)##sgiPNS"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiPNS"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiPNS"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiPNS"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiPNS"].plurals[0] = "Сброс фазы";
     strings["Control##sgiPNS"].plurals[0] = "Управление";
     strings["Portion A Length##sgiPNS"].plurals[0] = "Длина части A";
@@ -4088,8 +4088,8 @@ void DivLocale::addTranslationsRussian()
     strings["Volume##sgiRF5"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiRF5"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiRF5"].plurals[0] = "Частота";
-    strings["Panning (left)##sgiRF5"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiRF5"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiRF5"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiRF5"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiRF5"].plurals[0] = "Сброс фазы";
 
     //   sgiSAA    src/gui/inst/saa1099.cpp
@@ -4100,8 +4100,8 @@ void DivLocale::addTranslationsRussian()
     strings["Pitch##sgiSAA"].plurals[0] = "Частота";
     strings["Duty/Noise##sgiSAA"].plurals[0] = "Скважность/режим шума";
     strings["Waveform##sgiSAA"].plurals[0] = "Волна";
-    strings["Panning (left)##sgiSAA"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiSAA"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiSAA"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiSAA"].plurals[0] = "Панорамирование (правый)";
     strings["Envelope##sgiSAA"].plurals[0] = "Огибающая";
 
     //   sgismpd   src/gui/inst/sampleDraw.cpp
@@ -4144,8 +4144,8 @@ void DivLocale::addTranslationsRussian()
     strings["Volume##sgiSEGA"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiSEGA"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiSEGA"].plurals[0] = "Частота";
-    strings["Panning (left)##sgiSEGA"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiSEGA"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiSEGA"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiSEGA"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiSEGA"].plurals[0] = "Сброс фазы";
 
     //   sgiSM     src/gui/inst/sm8521.cpp
@@ -4182,8 +4182,8 @@ void DivLocale::addTranslationsRussian()
     strings["Pitch##sgiSNES"].plurals[0] = "Частота";
     strings["Noise Freq##sgiSNES"].plurals[0] = "Частота шума";
     strings["Waveform##sgiSNES"].plurals[0] = "Волна";
-    strings["Panning (left)##sgiSNES"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiSNES"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiSNES"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiSNES"].plurals[0] = "Панорамирование (правый)";
     strings["Special##sgiSNES"].plurals[0] = "Разное";
     strings["Gain##sgiSNES2"].plurals[0] = "Усиление";
 
@@ -4543,8 +4543,8 @@ void DivLocale::addTranslationsRussian()
     strings["Volume##sgiT6W"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiT6W"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiT6W"].plurals[0] = "Частота";
-    strings["Panning (left)##sgiT6W"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiT6W"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiT6W"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiT6W"].plurals[0] = "Панорамирование (правый)";
     strings["Noise Type##sgiT6W"].plurals[0] = "Режим шума";
     strings["Phase Reset##sgiT6W"].plurals[0] = "Сброс фазы";
 
@@ -4576,8 +4576,8 @@ void DivLocale::addTranslationsRussian()
     strings["Pitch##sgiVB"].plurals[0] = "Частота";
     strings["Noise Length##sgiVB"].plurals[0] = "Длина шума";
     strings["Waveform##sgiVB"].plurals[0] = "Волна";
-    strings["Panning (left)##sgiVB"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiVB"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiVB"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiVB"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiVB"].plurals[0] = "Сброс фазы";
 
     //   sgiVERA   src/gui/inst/vera.cpp
@@ -4648,8 +4648,8 @@ void DivLocale::addTranslationsRussian()
     strings["Arpeggio##sgiX1"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiX1"].plurals[0] = "Частота";
     strings["Waveform##sgiX1"].plurals[0] = "Волна";
-    strings["Panning (left)##sgiX1"].plurals[0] = "Панорамирование (лево)";
-    strings["Panning (right)##sgiX1"].plurals[0] = "Панорамирование (право)";
+    strings["Panning (left)##sgiX1"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiX1"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiX1"].plurals[0] = "Сброс фазы";
     strings["Envelope##sgiX1"].plurals[0] = "Огибающая";
     strings["Envelope Mode##sgiX1"].plurals[0] = "Режим огибающей";
