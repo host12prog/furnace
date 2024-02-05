@@ -76,9 +76,6 @@ public:
     EnvelopeGenerator2::State envelope_state[3];
     bool hold_zero[3];
   };
-    
-  State read_state();
-  void write_state(const State& state);
 
   // 16-bit input (EXT IN).
   void input(int sample);
@@ -100,7 +97,7 @@ protected:
 				       int n, int interleave);
 
   Voice2 voice[3];
-  Filter2 filter;
+  Filter2 filter[3];
   ExternalFilter2 extfilt;
 
   bool isMuted[3];

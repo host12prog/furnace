@@ -39,6 +39,7 @@ void EnvelopeGenerator2::reset()
   decay = 0;
   sustain = 0;
   release = 0;
+  volume = 0;
 
   gate = 0;
 
@@ -219,6 +220,11 @@ void EnvelopeGenerator2::writeSUSTAIN_RELEASE(reg8 sustain_release)
   if (state == RELEASE) {
     rate_period = rate_counter_period[release];
   }
+}
+
+void EnvelopeGenerator2::writeVOL(reg8 vol_reg)
+{
+  volume = vol_reg >> 4;
 }
 
 reg8 EnvelopeGenerator2::readENV()

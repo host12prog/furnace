@@ -83,9 +83,9 @@ void SID2::set_chip_model(chip_model model)
 {
   for (int i = 0; i < 3; i++) {
     voice[i].set_chip_model(model);
+    filter[i].set_chip_model(model);
   }
 
-  filter.set_chip_model(model);
   extfilt.set_chip_model(model);
 }
 
@@ -97,8 +97,9 @@ void SID2::reset()
 {
   for (int i = 0; i < 3; i++) {
     voice[i].reset();
+    filter[i].reset();
   }
-  filter.reset();
+  
   extfilt.reset();
 
   bus_value = 0;
@@ -202,6 +203,7 @@ void SID2::write(reg8 offset, reg8 value)
     break;
   case 0x03:
     voice[0].wave.writePW_HI(value);
+    voice[0].envelope.writeVOL(value);
     break;
   case 0x04:
     voice[0].writeCONTROL_REG(value);
@@ -223,6 +225,7 @@ void SID2::write(reg8 offset, reg8 value)
     break;
   case 0x0a:
     voice[1].wave.writePW_HI(value);
+    voice[1].envelope.writeVOL(value);
     break;
   case 0x0b:
     voice[1].writeCONTROL_REG(value);
@@ -244,6 +247,7 @@ void SID2::write(reg8 offset, reg8 value)
     break;
   case 0x11:
     voice[2].wave.writePW_HI(value);
+    voice[2].envelope.writeVOL(value);
     break;
   case 0x12:
     voice[2].writeCONTROL_REG(value);
@@ -255,16 +259,34 @@ void SID2::write(reg8 offset, reg8 value)
     voice[2].envelope.writeSUSTAIN_RELEASE(value);
     break;
   case 0x15:
-    filter.writeFC_LO(value);
+    filter[0].writeFC_LO(value);
+    filter[0].writeMODE_VOL(value);
     break;
   case 0x16:
-    filter.writeFC_HI(value);
+    filter[0].writeFC_HI(value);
     break;
   case 0x17:
-    filter.writeRES_FILT(value);
+    filter[0].writeRES(value);
     break;
   case 0x18:
-    filter.writeMODE_VOL(value);
+    filter[1].writeFC_LO(value);
+    filter[1].writeMODE_VOL(value);
+    break;
+  case 0x19:
+    filter[1].writeFC_HI(value);
+    break;
+  case 0x1a:
+    filter[1].writeRES(value);
+    break;
+  case 0x1b:
+    filter[2].writeFC_LO(value);
+    filter[2].writeMODE_VOL(value);
+    break;
+  case 0x1c:
+    filter[2].writeFC_HI(value);
+    break;
+  case 0x1d:
+    filter[2].writeRES(value);
     break;
   default:
     break;
@@ -299,101 +321,15 @@ SID2::State::State()
   }
 }
 
-
-// ----------------------------------------------------------------------------
-// Read state.
-// ----------------------------------------------------------------------------
-SID2::State SID2::read_state()
-{
-  State state;
-  int i, j;
-
-  for (i = 0, j = 0; i < 3; i++, j += 7) {
-    WaveformGenerator2& wave = voice[i].wave;
-    EnvelopeGenerator2& envelope = voice[i].envelope;
-    state.sid_register[j + 0] = wave.freq & 0xff;
-    state.sid_register[j + 1] = wave.freq >> 8;
-    state.sid_register[j + 2] = wave.pw & 0xff;
-    state.sid_register[j + 3] = wave.pw >> 8;
-    state.sid_register[j + 4] =
-      (wave.waveform << 4)
-      | (wave.test ? 0x08 : 0)
-      | (wave.ring_mod ? 0x04 : 0)
-      | (wave.sync ? 0x02 : 0)
-      | (envelope.gate ? 0x01 : 0);
-    state.sid_register[j + 5] = (envelope.attack << 4) | envelope.decay;
-    state.sid_register[j + 6] = (envelope.sustain << 4) | envelope.release;
-  }
-
-  state.sid_register[j++] = filter.fc & 0x007;
-  state.sid_register[j++] = filter.fc >> 3;
-  state.sid_register[j++] = (filter.res << 4) | filter.filt;
-  state.sid_register[j++] =
-    (filter.voice3off ? 0x80 : 0)
-    | (filter.hp_bp_lp << 4)
-    | filter.vol;
-
-  // These registers are superfluous, but included for completeness.
-  for (; j < 0x1d; j++) {
-    state.sid_register[j] = read(j);
-  }
-  for (; j < 0x20; j++) {
-    state.sid_register[j] = 0;
-  }
-
-  state.bus_value = bus_value;
-  state.bus_value_ttl = bus_value_ttl;
-
-  for (i = 0; i < 3; i++) {
-    state.accumulator[i] = voice[i].wave.accumulator;
-    state.shift_register[i] = voice[i].wave.shift_register;
-    state.rate_counter[i] = voice[i].envelope.rate_counter;
-    state.rate_counter_period[i] = voice[i].envelope.rate_period;
-    state.exponential_counter[i] = voice[i].envelope.exponential_counter;
-    state.exponential_counter_period[i] = voice[i].envelope.exponential_counter_period;
-    state.envelope_counter[i] = voice[i].envelope.envelope_counter;
-    state.envelope_state[i] = voice[i].envelope.state;
-    state.hold_zero[i] = voice[i].envelope.hold_zero;
-  }
-
-  return state;
-}
-
-
-// ----------------------------------------------------------------------------
-// Write state.
-// ----------------------------------------------------------------------------
-void SID2::write_state(const State& state)
-{
-  int i;
-
-  for (i = 0; i <= 0x18; i++) {
-    write(i, state.sid_register[i]);
-  }
-
-  bus_value = state.bus_value;
-  bus_value_ttl = state.bus_value_ttl;
-
-  for (i = 0; i < 3; i++) {
-    voice[i].wave.accumulator = state.accumulator[i];
-    voice[i].wave.shift_register = state.shift_register[i];
-    voice[i].envelope.rate_counter = state.rate_counter[i];
-    voice[i].envelope.rate_period = state.rate_counter_period[i];
-    voice[i].envelope.exponential_counter = state.exponential_counter[i];
-    voice[i].envelope.exponential_counter_period = state.exponential_counter_period[i];
-    voice[i].envelope.envelope_counter = state.envelope_counter[i];
-    voice[i].envelope.state = state.envelope_state[i];
-    voice[i].envelope.hold_zero = state.hold_zero[i];
-  }
-}
-
-
 // ----------------------------------------------------------------------------
 // Enable filter.
 // ----------------------------------------------------------------------------
 void SID2::enable_filter(bool enable)
 {
-  filter.enable_filter(enable);
+  for(int i = 0; i < 3; i++)
+  {
+    filter[i].enable_filter(enable);
+  }
 }
 
 
@@ -604,7 +540,10 @@ void SID2::adjust_sampling_frequency(double sample_freq)
 // ----------------------------------------------------------------------------
 void SID2::fc_default(const fc_point*& points, int& count)
 {
-  filter.fc_default(points, count);
+  for(int i = 0; i < 3; i++)
+  {
+    filter[i].fc_default(points, count);
+  }
 }
 
 
@@ -613,7 +552,7 @@ void SID2::fc_default(const fc_point*& points, int& count)
 // ----------------------------------------------------------------------------
 PointPlotter<sound_sample> SID2::fc_plotter()
 {
-  return filter.fc_plotter();
+  return filter[0].fc_plotter();
 }
 
 
@@ -651,10 +590,14 @@ void SID2::clock()
   last_chan_out[2]=isMuted[2]?0:voice[2].output();
 
   // Clock filter.
-  filter.clock(last_chan_out[0], last_chan_out[1], last_chan_out[2], ext_in);
+  for(int i = 0; i < 3; i++)
+  {
+    filter[i].clock(last_chan_out[i], ext_in);
+  }
+  
 
   // Clock external filter.
-  extfilt.clock(filter.output());
+  extfilt.clock(filter[0].output() + filter[1].output() + filter[2].output());
 }
 
 
@@ -735,11 +678,14 @@ void SID2::clock(cycle_count delta_t)
   last_chan_out[2]=isMuted[2]?0:voice[2].output();
 
   // Clock filter.
-  filter.clock(delta_t,
-               last_chan_out[0], last_chan_out[1], last_chan_out[2], ext_in);
+  for (int i = 0; i < 3; i++)
+  {
+      filter[i].clock(delta_t, last_chan_out[i], ext_in);
+  }
+
 
   // Clock external filter.
-  extfilt.clock(delta_t, filter.output());
+  extfilt.clock(delta_t, filter[0].output() + filter[1].output() + filter[2].output());
 }
 
 

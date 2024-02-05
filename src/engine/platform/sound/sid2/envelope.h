@@ -45,6 +45,7 @@ public:
   void writeCONTROL_REG(reg8);
   void writeATTACK_DECAY(reg8);
   void writeSUSTAIN_RELEASE(reg8);
+  void writeVOL(reg8);
   reg8 readENV();
 
   // 8-bit envelope output.
@@ -64,6 +65,8 @@ protected:
   reg4 release;
 
   reg8 gate;
+
+  reg8 volume;
 
   State state;
 
@@ -297,7 +300,7 @@ void EnvelopeGenerator2::clock(cycle_count delta_t)
 RESID_INLINE
 reg8 EnvelopeGenerator2::output()
 {
-  return envelope_counter;
+  return (reg8)((uint32_t)envelope_counter * volume / 0xf);
 }
 
 #endif // RESID_INLINING || defined(__ENVELOPE_CC__)

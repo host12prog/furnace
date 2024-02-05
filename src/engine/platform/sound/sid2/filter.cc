@@ -42,66 +42,29 @@
 // NB! Cutoff frequency characteristics may vary, we have modeled two
 // particular Commodore 64s.
 
-fc_point Filter2::f0_points_6581[] =
-{
-  //  FC      f         FCHI FCLO
-  // ----------------------------
-  {    0,   220 },   // 0x00      - repeated end point
-  {    0,   220 },   // 0x00
-  {  128,   230 },   // 0x10
-  {  256,   250 },   // 0x20
-  {  384,   300 },   // 0x30
-  {  512,   420 },   // 0x40
-  {  640,   780 },   // 0x50
-  {  768,  1600 },   // 0x60
-  {  832,  2300 },   // 0x68
-  {  896,  3200 },   // 0x70
-  {  960,  4300 },   // 0x78
-  {  992,  5000 },   // 0x7c
-  { 1008,  5400 },   // 0x7e
-  { 1016,  5700 },   // 0x7f
-  { 1023,  6000 },   // 0x7f 0x07
-  { 1023,  6000 },   // 0x7f 0x07 - discontinuity
-  { 1024,  4600 },   // 0x80      -
-  { 1024,  4600 },   // 0x80
-  { 1032,  4800 },   // 0x81
-  { 1056,  5300 },   // 0x84
-  { 1088,  6000 },   // 0x88
-  { 1120,  6600 },   // 0x8c
-  { 1152,  7200 },   // 0x90
-  { 1280,  9500 },   // 0xa0
-  { 1408, 12000 },   // 0xb0
-  { 1536, 14500 },   // 0xc0
-  { 1664, 16000 },   // 0xd0
-  { 1792, 17100 },   // 0xe0
-  { 1920, 17700 },   // 0xf0
-  { 2047, 18000 },   // 0xff 0x07
-  { 2047, 18000 }    // 0xff 0x07 - repeated end point
-};
-
 fc_point Filter2::f0_points_8580[] =
 {
   //  FC      f         FCHI FCLO
   // ----------------------------
   {    0,     0 },   // 0x00      - repeated end point
   {    0,     0 },   // 0x00
-  {  128,   800 },   // 0x10
-  {  256,  1600 },   // 0x20
-  {  384,  2500 },   // 0x30
-  {  512,  3300 },   // 0x40
-  {  640,  4100 },   // 0x50
-  {  768,  4800 },   // 0x60
-  {  896,  5600 },   // 0x70
-  { 1024,  6500 },   // 0x80
-  { 1152,  7500 },   // 0x90
-  { 1280,  8400 },   // 0xa0
-  { 1408,  9200 },   // 0xb0
-  { 1536,  9800 },   // 0xc0
-  { 1664, 10500 },   // 0xd0
-  { 1792, 11000 },   // 0xe0
-  { 1920, 11700 },   // 0xf0
-  { 2047, 12500 },   // 0xff 0x07
-  { 2047, 12500 }    // 0xff 0x07 - repeated end point
+  {  128 * 2,   800 },   // 0x10
+  {  256 * 2,  1600 },   // 0x20
+  {  384 * 2,  2500 },   // 0x30
+  {  512 * 2,  3300 },   // 0x40
+  {  640 * 2,  4100 },   // 0x50
+  {  768 * 2,  4800 },   // 0x60
+  {  896 * 2,  5600 },   // 0x70
+  { 1024 * 2,  6500 },   // 0x80
+  { 1152 * 2,  7500 },   // 0x90
+  { 1280 * 2,  8400 },   // 0xa0
+  { 1408 * 2,  9200 },   // 0xb0
+  { 1536 * 2,  9800 },   // 0xc0
+  { 1664 * 2, 10500 },   // 0xd0
+  { 1792 * 2, 11000 },   // 0xe0
+  { 1920 * 2, 11700 },   // 0xf0
+  { 2047 * 2, 12500 },   // 0xff 0x07
+  { 2047 * 2, 12500 }    // 0xff 0x07 - repeated end point
 };
 
 
@@ -116,11 +79,7 @@ Filter2::Filter2()
 
   filt = 0;
 
-  voice3off = 0;
-
   hp_bp_lp = 0;
-
-  vol = 0;
 
   // State of filter.
   Vhp = 0;
@@ -130,10 +89,6 @@ Filter2::Filter2()
 
   enable_filter(true);
 
-  // Create mappings from FC to cutoff frequency.
-  interpolate(f0_points_6581, f0_points_6581
-	      + sizeof(f0_points_6581)/sizeof(*f0_points_6581) - 1,
-	      PointPlotter<sound_sample>(f0_6581), 1.0);
   interpolate(f0_points_8580, f0_points_8580
 	      + sizeof(f0_points_8580)/sizeof(*f0_points_8580) - 1,
 	      PointPlotter<sound_sample>(f0_8580), 1.0);
@@ -156,31 +111,11 @@ void Filter2::enable_filter(bool enable)
 // ----------------------------------------------------------------------------
 void Filter2::set_chip_model(chip_model model)
 {
-  if (model == MOS6581) {
-    // The mixer has a small input DC offset. This is found as follows:
-    //
-    // The "zero" output level of the mixer measured on the SID2 audio
-    // output pin is 5.50V at zero volume, and 5.44 at full
-    // volume. This yields a DC offset of (5.44V - 5.50V) = -0.06V.
-    //
-    // The DC offset is thus -0.06V/1.05V ~ -1/18 of the dynamic range
-    // of one voice. See voice.cc for measurement of the dynamic
-    // range.
+  mixer_DC = 0;
 
-    mixer_DC = -0xfff*0xff/18 >> 7;
-
-    f0 = f0_6581;
-    f0_points = f0_points_6581;
-    f0_count = sizeof(f0_points_6581)/sizeof(*f0_points_6581);
-  }
-  else {
-    // No DC offsets in the MOS8580.
-    mixer_DC = 0;
-
-    f0 = f0_8580;
-    f0_points = f0_points_8580;
-    f0_count = sizeof(f0_points_8580)/sizeof(*f0_points_8580);
-  }
+  f0 = f0_8580;
+  f0_points = f0_points_8580;
+  f0_count = sizeof(f0_points_8580)/sizeof(*f0_points_8580);
 
   set_w0();
   set_Q();
@@ -198,11 +133,7 @@ void Filter2::reset()
 
   filt = 0;
 
-  voice3off = 0;
-
   hp_bp_lp = 0;
-
-  vol = 0;
 
   // State of filter.
   Vhp = 0;
@@ -220,31 +151,28 @@ void Filter2::reset()
 // ----------------------------------------------------------------------------
 void Filter2::writeFC_LO(reg8 fc_lo)
 {
-  fc = (fc & 0x7f8) | (fc_lo & 0x007);
+  fc = (fc & 0xff0) | (fc_lo & 0xf);
   set_w0();
 }
 
 void Filter2::writeFC_HI(reg8 fc_hi)
 {
-  fc = ((fc_hi << 3) & 0x7f8) | (fc & 0x007);
+  fc = (fc & 0xf) | (fc_hi << 4);
   set_w0();
 }
 
-void Filter2::writeRES_FILT(reg8 res_filt)
+void Filter2::writeRES(reg8 res_filt)
 {
-  res = (res_filt >> 4) & 0x0f;
+  res = res_filt;
   set_Q();
-
-  filt = res_filt & 0x0f;
 }
 
 void Filter2::writeMODE_VOL(reg8 mode_vol)
 {
-  voice3off = mode_vol & 0x80;
-
   hp_bp_lp = (mode_vol >> 4) & 0x07;
+  filt = mode_vol >> 7;
 
-  vol = mode_vol & 0x0f;
+  //vol = mode_vol & 0x0f;
 }
 
 // Set filter cutoff frequency.
@@ -274,7 +202,7 @@ void Filter2::set_Q()
 
   // The coefficient 1024 is dispensed of later by right-shifting 10 times
   // (2 ^ 10 = 1024).
-  _1024_div_Q = static_cast<sound_sample>(1024.0/(0.707 + 1.0*res/0x0f));
+  _1024_div_Q = static_cast<sound_sample>(1024.0/(0.707 + 1.0*res/0x0ff));
 }
 
 // ----------------------------------------------------------------------------
