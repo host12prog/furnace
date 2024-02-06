@@ -139,11 +139,13 @@ void DivPlatformSID2::tick(bool sysTick) {
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX10)->had) {
       chan[i].noise_mode=chan[i].std.get_div_macro_struct(DIV_MACRO_EX10)->val;
-      rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4));
+      //rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4));
+      rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4) | ((chan[0].freq >> 16) << 6) | ((chan[1].freq >> 16) << 7));
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX11)->had) {
       chan[i].mix_mode=chan[i].std.get_div_macro_struct(DIV_MACRO_EX11)->val;
-      rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4));
+      //rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4));
+      rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4) | ((chan[2].freq >> 16) << 6));
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
       if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->mode) {
@@ -219,14 +221,14 @@ void DivPlatformSID2::tick(bool sysTick) {
     if (chan[i].freqChanged || chan[i].keyOn || chan[i].keyOff) {
       chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
       if (chan[i].freq<0) chan[i].freq=0;
-      if (chan[i].freq>0xffff) chan[i].freq=0xffff;
+      if (chan[i].freq>0x1ffff) chan[i].freq=0x1ffff;
       if (chan[i].keyOn) {
         rWrite(i*7+5,(chan[i].attack<<4)|(chan[i].decay));
         rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
         rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(chan[i].gate?1:0));
 
-        rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4));
-        rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4));
+        rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4) | ((chan[0].freq >> 16) << 6) | ((chan[1].freq >> 16) << 7));
+        rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4) | ((chan[2].freq >> 16) << 6));
       }
       if (chan[i].keyOff) {
         rWrite(i*7+5,(chan[i].attack<<4)|(chan[i].decay));

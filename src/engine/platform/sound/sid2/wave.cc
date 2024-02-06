@@ -60,12 +60,17 @@ void WaveformGenerator2::set_chip_model(chip_model2 model)
 // ----------------------------------------------------------------------------
 void WaveformGenerator2::writeFREQ_LO(reg8 freq_lo)
 {
-  freq = (freq & 0xff00) | (freq_lo & 0x00ff);
+  freq = (freq & 0x1ff00) | (freq_lo & 0x00ff);
 }
 
 void WaveformGenerator2::writeFREQ_HI(reg8 freq_hi)
 {
-  freq = ((freq_hi << 8) & 0xff00) | (freq & 0x00ff);
+  freq = ((freq_hi << 8) & 0xff00) | (freq & 0x100ff);
+}
+
+void WaveformGenerator2::writeFREQ_HIGHEST(reg8 freq_highest)
+{
+  freq = ((freq_highest << 16) & 0x10000) | (freq & 0xffff);
 }
 
 void WaveformGenerator2::writePW_LO(reg8 pw_lo)

@@ -43,6 +43,7 @@ public:
 
   void writeFREQ_LO(reg8);
   void writeFREQ_HI(reg8);
+  void writeFREQ_HIGHEST(reg8);
   void writePW_LO(reg8);
   void writePW_HI(reg8);
   void writeCONTROL_REG(reg8);
