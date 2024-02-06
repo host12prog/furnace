@@ -124,7 +124,7 @@ void DivPlatformSID2::tick(bool sysTick) {
       chan[i].freqChanged=true;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->had) {
-      DivInstrument* ins=parent->getIns(chan[i].ins,DIV_INS_C64);
+      DivInstrument* ins=parent->getIns(chan[i].ins,DIV_INS_SID2);
       if (ins->c64.dutyIsAbs) {
         chan[i].duty=chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->val;
       } else {
@@ -135,7 +135,15 @@ void DivPlatformSID2::tick(bool sysTick) {
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
-      rWrite(i*7+4,(chan[i].wave<<4)|(chan[i].test<<3)|(chan[i].ring<<2)|(chan[i].sync<<1)|(int)(chan[i].active && chan[i].gate));
+      rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(int)(chan[i].active && chan[i].gate));
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX10)->had) {
+      chan[i].noise_mode=chan[i].std.get_div_macro_struct(DIV_MACRO_EX10)->val;
+      rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4));
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX11)->had) {
+      chan[i].mix_mode=chan[i].std.get_div_macro_struct(DIV_MACRO_EX11)->val;
+      rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4));
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
       if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->mode) {
@@ -147,7 +155,7 @@ void DivPlatformSID2::tick(bool sysTick) {
       chan[i].freqChanged=true;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) { // new cutoff macro
-      DivInstrument* ins=parent->getIns(chan[i].ins,DIV_INS_C64);
+      DivInstrument* ins=parent->getIns(chan[i].ins,DIV_INS_SID2);
       if (ins->c64.filterIsAbs) {
           chan[i].filtCut=MIN(4095,chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val);
       } else {
@@ -170,12 +178,22 @@ void DivPlatformSID2::tick(bool sysTick) {
       willUpdateFilter=true;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->had) {
-      chan[i].gate=chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val&1;
-      chan[i].sync=chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val&2;
-      chan[i].ring=chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val&4;
-      chan[i].test=chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val&8;
+      chan[i].sync=chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val&1;
+      chan[i].ring=chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val&2;
       chan[i].freqChanged=true;
-      rWrite(i*7+4,(chan[i].wave<<4)|(chan[i].test<<3)|(chan[i].ring<<2)|(chan[i].sync<<1)|(int)(chan[i].active && chan[i].gate));
+      rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(int)(chan[i].active && chan[i].gate));
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->had) {
+      chan[i].test=(chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->val&1);
+      rWrite(i*7+4,(chan[i].wave<<4)|(chan[i].test << 3)|(chan[i].ring<<2)|(chan[i].sync<<1)|(int)(chan[i].active && chan[i].gate));
+      rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(int)(chan[i].active && chan[i].gate));
+      chan[i].test = false;
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->had) {
+      chan[i].gate=(chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->val&1);
+      rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(int)(chan[i].active && chan[i].gate));
     }
 
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX5)->had) {
@@ -198,19 +216,6 @@ void DivPlatformSID2::tick(bool sysTick) {
       rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
     }
 
-    if (sysTick) {
-      if (chan[i].testWhen>0) {
-        if (--chan[i].testWhen<1) {
-          if (!chan[i].resetMask && !chan[i].inPorta) {
-            DivInstrument* ins=parent->getIns(chan[i].ins,DIV_INS_C64);
-            rWrite(i*7+5,testAD);
-            rWrite(i*7+6,testSR);
-            rWrite(i*7+4,(chan[i].wave<<4)|(ins->c64.noTest?0:8)|(chan[i].test<<3)|(chan[i].ring<<2)|(chan[i].sync<<1));
-          }
-        }
-      }
-    }
-
     if (chan[i].freqChanged || chan[i].keyOn || chan[i].keyOff) {
       chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
       if (chan[i].freq<0) chan[i].freq=0;
@@ -218,12 +223,15 @@ void DivPlatformSID2::tick(bool sysTick) {
       if (chan[i].keyOn) {
         rWrite(i*7+5,(chan[i].attack<<4)|(chan[i].decay));
         rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
-        rWrite(i*7+4,(chan[i].wave<<4)|(chan[i].test<<3)|(chan[i].ring<<2)|(chan[i].sync<<1)|(chan[i].gate?1:0));
+        rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(chan[i].gate?1:0));
+
+        rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4));
+        rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4));
       }
       if (chan[i].keyOff) {
         rWrite(i*7+5,(chan[i].attack<<4)|(chan[i].decay));
         rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
-        rWrite(i*7+4,(chan[i].wave<<4)|(chan[i].test<<3)|(chan[i].ring<<2)|(chan[i].sync<<1)|0);
+        rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|0);
       }
       rWrite(i*7,chan[i].freq&0xff);
       rWrite(i*7+1,chan[i].freq>>8);
@@ -263,6 +271,9 @@ int DivPlatformSID2::dispatch(DivCommand c) {
         chan[c.chan].release=ins->c64.r;
         chan[c.chan].ring=ins->c64.ringMod;
         chan[c.chan].sync=ins->c64.oscSync;
+
+        chan[c.chan].noise_mode = ins->sid2.noise_mode;
+        chan[c.chan].mix_mode = ins->sid2.mix_mode;
 
         chan[c.chan].vol = ins->sid2.volume;
         rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
@@ -365,7 +376,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
       break;
     case DIV_CMD_WAVE:
       chan[c.chan].wave=c.value;
-      rWrite(c.chan*7+4,(chan[c.chan].wave<<4)|(chan[c.chan].test<<3)|(chan[c.chan].ring<<2)|(chan[c.chan].sync<<1)|(int)(chan[c.chan].active && chan[c.chan].gate));
+      rWrite(c.chan*7+4,(chan[c.chan].wave<<4)|0|(chan[c.chan].ring<<2)|(chan[c.chan].sync<<1)|(int)(chan[c.chan].active && chan[c.chan].gate));
       break;
     case DIV_CMD_LEGATO:
       chan[c.chan].baseFreq=NOTE_FREQUENCY(c.value+((HACKY_LEGATO_MESS)?(chan[c.chan].std.get_div_macro_struct(DIV_MACRO_ARP)->val):(0)));
@@ -375,15 +386,12 @@ int DivPlatformSID2::dispatch(DivCommand c) {
     case DIV_CMD_PRE_PORTA:
       if (chan[c.chan].active && c.value2) {
         if (parent->song.resetMacroOnPorta || parent->song.preNoteNoEffect) {
-          chan[c.chan].macroInit(parent->getIns(chan[c.chan].ins,DIV_INS_C64));
+          chan[c.chan].macroInit(parent->getIns(chan[c.chan].ins,DIV_INS_SID2));
           chan[c.chan].keyOn=true;
         }
       }
       if (!chan[c.chan].inPorta && c.value && !parent->song.brokenPortaArp && chan[c.chan].std.get_div_macro_struct(DIV_MACRO_ARP)->will && !NEW_ARP_STRAT) chan[c.chan].baseFreq=NOTE_FREQUENCY(chan[c.chan].note);
       chan[c.chan].inPorta=c.value;
-      break;
-    case DIV_CMD_PRE_NOTE:
-      //if (resetTime) chan[c.chan].testWhen=c.value-resetTime+1;
       break;
     case DIV_CMD_GET_VOLMAX:
       return 15;
@@ -411,7 +419,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
       break;
     case DIV_CMD_C64_FILTER_RESET:
       if (c.value&15) {
-        DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_C64);
+        DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_SID2);
         if (ins->c64.initFilter) {
           chan[c.chan].filtCut=ins->c64.cut;
           updateFilter(c.chan);
@@ -421,7 +429,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
       break;
     case DIV_CMD_C64_DUTY_RESET:
       if (c.value&15) {
-        DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_C64);
+        DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_SID2);
         chan[c.chan].duty=ins->c64.duty;
         rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
         rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
@@ -448,11 +456,11 @@ int DivPlatformSID2::dispatch(DivCommand c) {
           break;
         case 4:
           chan[c.chan].ring=c.value;
-          rWrite(c.chan*7+4,(chan[c.chan].wave<<4)|(chan[c.chan].test<<3)|(chan[c.chan].ring<<2)|(chan[c.chan].sync<<1)|(int)(chan[c.chan].active && chan[c.chan].gate));
+          rWrite(c.chan*7+4,(chan[c.chan].wave<<4)|0|(chan[c.chan].ring<<2)|(chan[c.chan].sync<<1)|(int)(chan[c.chan].active && chan[c.chan].gate));
           break;
         case 5:
           chan[c.chan].sync=c.value;
-          rWrite(c.chan*7+4,(chan[c.chan].wave<<4)|(chan[c.chan].test<<3)|(chan[c.chan].ring<<2)|(chan[c.chan].sync<<1)|(int)(chan[c.chan].active && chan[c.chan].gate));
+          rWrite(c.chan*7+4,(chan[c.chan].wave<<4)|0|(chan[c.chan].ring<<2)|(chan[c.chan].sync<<1)|(int)(chan[c.chan].active && chan[c.chan].gate));
           break;
         case 6:
           chan[c.chan].filtControl&=7;
@@ -528,13 +536,10 @@ DivChannelModeHints DivPlatformSID2::getModeHints(int ch) {
   ret.count=1;
   ret.hint[0]=ICON_FA_BELL_SLASH_O;
   ret.type[0]=0;
-  if (ch==2 && (chan[ch].filtControl&8)) {
-    ret.type[0]=7;
-  } else if (chan[ch].test && !chan[ch].gate) {
-    ret.type[0]=5;
-  } else if (chan[ch].test) {
-    ret.type[0]=6;
-  } else if (!chan[ch].gate) {
+  if (ch == 2 && (chan[ch].filtControl & 8)) {
+      ret.type[0] = 7;
+  }
+  else if (!chan[ch].gate) {
     ret.type[0]=4;
   }
 
@@ -582,6 +587,8 @@ void DivPlatformSID2::reset() {
     chan[i].filtRes = 0;
     chan[i].filtCut = 4095;
 
+    chan[i].noise_mode = 0;
+
     rWrite(0x3 + 7 * i,0xf0);
   }
 
@@ -620,8 +627,6 @@ void DivPlatformSID2::setFlags(const DivConfig& flags) {
     oscBuf[i]->rate=rate/16;
   }
   keyPriority=flags.getBool("keyPriority",true);
-  testAD=((flags.getInt("testAttack",0)&15)<<4)|(flags.getInt("testDecay",0)&15);
-  testSR=((flags.getInt("testSustain",0)&15)<<4)|(flags.getInt("testRelease",0)&15);
 
   // init fake filter table
   // taken from dSID

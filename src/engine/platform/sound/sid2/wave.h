@@ -46,6 +46,8 @@ public:
   void writePW_LO(reg8);
   void writePW_HI(reg8);
   void writeCONTROL_REG(reg8);
+  void writeNOISE_MODE(reg8);
+  void writeMIX_MODE(reg8);
   reg8 readOSC();
 
   // 12-bit waveform output.
@@ -69,6 +71,9 @@ protected:
   // The control register right-shifted 4 bits; used for output function
   // table lookup.
   reg8 waveform;
+
+  reg8 mix_mode;
+  reg8 noise_mode;
 
   // The remaining control register bits.
   reg8 test;
@@ -140,10 +145,46 @@ void WaveformGenerator2::clock()
 
   // Shift noise register once for each time accumulator bit 19 is set high.
   if (!(accumulator_prev & 0x080000) && (accumulator & 0x080000)) {
-    reg24 bit0 = ((shift_register >> 22) ^ (shift_register >> 17)) & 0x1;
-    shift_register <<= 1;
-    shift_register &= 0x7fffff;
-    shift_register |= bit0;
+
+    switch(noise_mode)
+    {
+      case 0:
+      {
+        reg24 bit0 = ((shift_register >> 22) ^ (shift_register >> 17)) & 0x1;
+        shift_register <<= 1;
+        shift_register &= 0x7fffff;
+        shift_register |= bit0;
+        break;
+      }
+
+      case 1:
+      {
+        reg24 bit0 = ((shift_register >> 15) ^ (shift_register >> 7)) & 0x1;
+        shift_register <<= 1;
+        shift_register &= 0x7fffff;
+        shift_register |= bit0;
+        break;
+      }
+
+      case 2:
+      {
+        reg24 bit0 = ((shift_register >> 2) ^ (shift_register >> 4)) & 0x1;
+        shift_register <<= 1;
+        shift_register &= 0x7fffff;
+        shift_register |= bit0;
+        break;
+      }
+
+      case 3:
+      {
+        reg24 bit0 = ((shift_register >> 5) ^ (shift_register >> 4)) & 0x1;
+        shift_register <<= 1;
+        shift_register &= 0x7fffff;
+        shift_register |= bit0;
+        break;
+      }
+      default: break;
+    }
   }
 }
 
@@ -373,25 +414,53 @@ reg12 WaveformGenerator2::outputN___()
 RESID_INLINE
 reg12 WaveformGenerator2::output__ST()
 {
-  return wave__ST[output__S_()] << 4;
+  switch(mix_mode)
+  {
+    case 0: return wave__ST[output__S_()] << 4; break;
+    case 1: return (output__S_() & output___T()); break;
+    case 2: return (output__S_() | output___T()); break;
+    case 3: return (output__S_() ^ output___T()); break;
+    default: return 0; break;
+  }
 }
 
 RESID_INLINE
 reg12 WaveformGenerator2::output_P_T()
 {
-  return (wave_P_T[output___T() >> 1] << 4) & output_P__();
+  switch(mix_mode)
+  {
+    case 0: return (wave_P_T[output___T() >> 1] << 4) & output_P__(); break;
+    case 1: return (output___T() & output_P__()); break;
+    case 2: return (output___T() | output_P__()); break;
+    case 3: return (output___T() ^ output_P__()); break;
+    default: return 0; break;
+  }
 }
 
 RESID_INLINE
 reg12 WaveformGenerator2::output_PS_()
 {
-  return (wave_PS_[output__S_()] << 4) & output_P__();
+  switch(mix_mode)
+  {
+    case 0: return (wave_PS_[output__S_()] << 4) & output_P__(); break;
+    case 1: return (output__S_() & output_P__()); break;
+    case 2: return (output__S_() | output_P__()); break;
+    case 3: return (output__S_() ^ output_P__()); break;
+    default: return 0; break;
+  }
 }
 
 RESID_INLINE
 reg12 WaveformGenerator2::output_PST()
 {
-  return (wave_PST[output__S_()] << 4) & output_P__();
+  switch(mix_mode)
+  {
+    case 0: return (wave_PST[output__S_()] << 4) & output_P__(); break;
+    case 1: return (output__S_() & output_P__() & output___T()); break;
+    case 2: return (output__S_() | output_P__() | output___T()); break;
+    case 3: return (output__S_() ^ output_P__() ^ output___T()); break;
+    default: return 0; break;
+  }
 }
 
 // Combined waveforms including noise:
@@ -406,43 +475,92 @@ reg12 WaveformGenerator2::output_PST()
 RESID_INLINE
 reg12 WaveformGenerator2::outputN__T()
 {
-  return 0;
+  switch(mix_mode)
+  {
+    case 0: return 0; break;
+    case 1: return (output___T() & outputN___()); break;
+    case 2: return (output___T() | outputN___()); break;
+    case 3: return (output___T() ^ outputN___()); break;
+    default: return 0; break;
+  }
 }
 
 RESID_INLINE
 reg12 WaveformGenerator2::outputN_S_()
 {
-  return 0;
+  switch(mix_mode)
+  {
+    case 0: return 0; break;
+    case 1: return (output__S_() & outputN___()); break;
+    case 2: return (output__S_() | outputN___()); break;
+    case 3: return (output__S_() ^ outputN___()); break;
+    default: return 0; break;
+  }
 }
 
 RESID_INLINE
 reg12 WaveformGenerator2::outputN_ST()
 {
-  return 0;
+  switch(mix_mode)
+  {
+    case 0: return 0; break;
+    case 1: return (output__S_() & outputN___() & output___T()); break;
+    case 2: return (output__S_() | outputN___() | output___T()); break;
+    case 3: return (output__S_() ^ outputN___() ^ output___T()); break;
+    default: return 0; break;
+  }
 }
 
 RESID_INLINE
 reg12 WaveformGenerator2::outputNP__()
 {
-  return 0;
+  switch(mix_mode)
+  {
+    case 0: return 0; break;
+    case 1: return (output_P__() & outputN___()); break;
+    case 2: return (output_P__() | outputN___()); break;
+    case 3: return (output_P__() ^ outputN___()); break;
+    default: return 0; break;
+  }
 }
 
 RESID_INLINE
 reg12 WaveformGenerator2::outputNP_T()
 {
-  return 0;
+  switch(mix_mode)
+  {
+    case 0: return 0; break;
+    case 1: return (output_P__() & outputN___() & output___T()); break;
+    case 2: return (output_P__() | outputN___() | output___T()); break;
+    case 3: return (output_P__() ^ outputN___() ^ output___T()); break;
+    default: return 0; break;
+  }
 }
 
 RESID_INLINE
 reg12 WaveformGenerator2::outputNPS_()
 {
-  return 0;
+  switch(mix_mode)
+  {
+    case 0: return 0; break;
+    case 1: return (output_P__() & outputN___() & output__S_()); break;
+    case 2: return (output_P__() | outputN___() | output__S_()); break;
+    case 3: return (output_P__() ^ outputN___() ^ output__S_()); break;
+    default: return 0; break;
+  }
 }
 
 RESID_INLINE
 reg12 WaveformGenerator2::outputNPST()
 {
-  return 0;
+  switch(mix_mode)
+  {
+    case 0: return 0; break;
+    case 1: return (output_P__() & outputN___() & output__S_() & output___T()); break;
+    case 2: return (output_P__() | outputN___() | output__S_() | output___T()); break;
+    case 3: return (output_P__() ^ outputN___() ^ output__S_() ^ output___T()); break;
+    default: return 0; break;
+  }
 }
 
 // ----------------------------------------------------------------------------

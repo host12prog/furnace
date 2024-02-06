@@ -938,6 +938,7 @@ struct DivInstrumentPowerNoise {
 struct DivInstrumentSID2 {
   unsigned char volume;
   unsigned char mix_mode;
+  unsigned char noise_mode;
 
   bool operator==(const DivInstrumentSID2& other);
   bool operator!=(const DivInstrumentSID2& other) {
@@ -945,7 +946,8 @@ struct DivInstrumentSID2 {
   }
   DivInstrumentSID2():
     volume(15),
-    mix_mode(0) {}
+    mix_mode(0),
+    noise_mode(0) {}
 };
 
 struct DivInstrument {

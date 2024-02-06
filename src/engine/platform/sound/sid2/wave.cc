@@ -113,6 +113,21 @@ void WaveformGenerator2::writeCONTROL_REG(reg8 control)
   // The gate bit is handled by the EnvelopeGenerator2.
 }
 
+void WaveformGenerator2::writeNOISE_MODE(reg8 value)
+{
+  if(noise_mode != value)
+  {
+    shift_register = 0x7ffff8;
+  }
+
+  noise_mode = value;
+}
+
+void WaveformGenerator2::writeMIX_MODE(reg8 value)
+{
+  mix_mode = value;
+}
+
 reg8 WaveformGenerator2::readOSC()
 {
   return output() >> 4;
@@ -133,4 +148,7 @@ void WaveformGenerator2::reset()
   sync = 0;
 
   msb_rising = false;
+
+  mix_mode = 0;
+  noise_mode = 3;
 }

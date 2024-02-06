@@ -288,6 +288,16 @@ void SID2::write(reg8 offset, reg8 value)
   case 0x1d:
     filter[2].writeRES(value);
     break;
+  case 0x1e:
+    voice[0].wave.writeNOISE_MODE(value & 3);
+    voice[1].wave.writeNOISE_MODE((value >> 2) & 3);
+    voice[2].wave.writeNOISE_MODE((value >> 4) & 3);
+    break;
+  case 0x1f:
+    voice[0].wave.writeMIX_MODE(value & 3);
+    voice[1].wave.writeMIX_MODE((value >> 2) & 3);
+    voice[2].wave.writeMIX_MODE((value >> 4) & 3);
+    break;
   default:
     break;
   }

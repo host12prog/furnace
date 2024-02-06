@@ -266,7 +266,8 @@ bool DivInstrumentESFM::Operator::operator==(const DivInstrumentESFM::Operator& 
 bool DivInstrumentSID2::operator==(const DivInstrumentSID2& other) {
   return (
     _C(volume) &&
-    _C(mix_mode)
+    _C(mix_mode) &&
+    _C(noise_mode)
   );
 }
 
@@ -818,7 +819,7 @@ void DivInstrument::writeFeatureS2(SafeWriter* w) {
   w->writeS(c64.cut&4095);
   w->writeC(c64.res);
 
-  w->writeC(sid2.volume | (sid2.mix_mode << 4));
+  w->writeC(sid2.volume | (sid2.mix_mode << 4) | (sid2.noise_mode << 6));
 
   FEATURE_END;
 }
@@ -1159,7 +1160,7 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
     if (powernoise!=defaultIns.powernoise) {
       featurePN=true;
     }
-    if (sid2!=defaultIns.sid2) {
+    if (type == DIV_INS_SID2 && (sid2!=defaultIns.sid2 || c64!=defaultIns.c64)) {
       featureS2=true;
     }
   }
@@ -2088,7 +2089,8 @@ void DivInstrument::readFeatureS2(SafeReader& reader, short version) {
   uint8_t temp = reader.readC();
 
   sid2.volume = temp & 0xf;
-  sid2.mix_mode = temp >> 4;
+  sid2.mix_mode = (temp >> 4) & 3;
+  sid2.noise_mode = temp >> 6;
 
   READ_FEAT_END;
 }

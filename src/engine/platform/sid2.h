@@ -26,26 +26,25 @@
 
 class DivPlatformSID2: public DivDispatch {
   struct Channel: public SharedChannel<signed char> {
-    int prevFreq, testWhen;
-    unsigned char sweep, wave, attack, decay, sustain, release;
+    int prevFreq;
+    unsigned char wave, attack, decay, sustain, release;
     short duty;
-    bool sweepChanged, filter;
+    bool filter;
     bool resetMask, resetFilter, resetDuty, gate, ring, sync, test;
     unsigned char vol;
     unsigned char filtControl, filtRes;
+    unsigned char noise_mode;
+    unsigned char mix_mode;
     int filtCut;
     Channel():
       SharedChannel<signed char>(15),
       prevFreq(65535),
-      testWhen(0),
-      sweep(0),
       wave(0),
       attack(0),
       decay(0),
       sustain(0),
       release(0),
       duty(0),
-      sweepChanged(false),
       filter(false),
       resetMask(false),
       resetFilter(false),
@@ -57,6 +56,8 @@ class DivPlatformSID2: public DivDispatch {
       vol(15),
       filtControl(0),
       filtRes(0),
+      noise_mode(0),
+      mix_mode(0),
       filtCut(0) {}
   };
   Channel chan[3];

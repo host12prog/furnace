@@ -64,13 +64,14 @@ void FurnaceGUI::drawInsSID2(DivInstrument* ins)
 
     ImVec2 sliderSize=ImVec2(20.0f*dpiScale,128.0*dpiScale);
 
-    if (ImGui::BeginTable("C64EnvParams",5,ImGuiTableFlags_NoHostExtendX))
+    if (ImGui::BeginTable("C64EnvParams",6,ImGuiTableFlags_NoHostExtendX))
     {
       ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed,sliderSize.x);
       ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed,sliderSize.x);
       ImGui::TableSetupColumn("c2",ImGuiTableColumnFlags_WidthFixed,sliderSize.x);
       ImGui::TableSetupColumn("c3",ImGuiTableColumnFlags_WidthFixed,sliderSize.x);
-      ImGui::TableSetupColumn("c4",ImGuiTableColumnFlags_WidthStretch);
+      ImGui::TableSetupColumn("c4",ImGuiTableColumnFlags_WidthFixed,sliderSize.x);
+      ImGui::TableSetupColumn("c5",ImGuiTableColumnFlags_WidthStretch);
 
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
@@ -86,6 +87,9 @@ void FurnaceGUI::drawInsSID2(DivInstrument* ins)
       CENTER_TEXT(_L("R##sgiSID2"));
       ImGui::TextUnformatted(_L("R##sgiSID2"));
       ImGui::TableNextColumn();
+      CENTER_TEXT(_L("VOL##sgiSID2"));
+      ImGui::TextUnformatted(_L("VOL##sgiSID2"));
+      ImGui::TableNextColumn();
       CENTER_TEXT(_L("Envelope##sgiSID2"));
       ImGui::TextUnformatted(_L("Envelope##sgiSID2"));
 
@@ -99,12 +103,13 @@ void FurnaceGUI::drawInsSID2(DivInstrument* ins)
       ImGui::TableNextColumn();
       P(CWVSliderScalar("##Release",sliderSize,ImGuiDataType_U8,&ins->c64.r,&_ZERO,&_FIFTEEN)); rightClickable
       ImGui::TableNextColumn();
-      drawFMEnv(0,16-ins->c64.a,16-ins->c64.d,15-ins->c64.r,15-ins->c64.r,15-ins->c64.s,0,0,0,15,16,15,ImVec2(ImGui::GetContentRegionAvail().x,sliderSize.y),ins->type);
+      P(CWVSliderScalar("##Volume",sliderSize,ImGuiDataType_U8,&ins->sid2.volume,&_ZERO,&_FIFTEEN)); rightClickable
+      ImGui::TableNextColumn();
+      drawFMEnv(15-ins->sid2.volume,16-ins->c64.a,16-ins->c64.d,15-(ins->c64.r == 15 ? (ins->c64.r - 1) : ins->c64.r),15-(ins->c64.r == 15 ? (ins->c64.r - 1) : ins->c64.r),15-ins->c64.s,0,0,0,15,16,15,ImVec2(ImGui::GetContentRegionAvail().x,sliderSize.y),ins->type); //the (ins->c64.r == 15 ? (ins->c64.r - 1) : ins->c64.r) is used so release part never becomes horizontal (which isn't the case with SID envelope)
 
       ImGui::EndTable();
     }
 
-    P(CWSliderScalar(_L("Volume##sgiSID2"),ImGuiDataType_U16,&ins->sid2.volume,&_ZERO,&_FIFTEEN)); rightClickable
     P(CWSliderScalar(_L("Duty##sgiSID2"),ImGuiDataType_U16,&ins->c64.duty,&_ZERO,&_FOUR_THOUSAND_NINETY_FIVE)); rightClickable
 
     bool ringMod=ins->c64.ringMod;
@@ -148,6 +153,9 @@ void FurnaceGUI::drawInsSID2(DivInstrument* ins)
     }
     popToggleColors();
 
+    P(CWSliderScalar(_L("Noise Mode##sgiSID2"),ImGuiDataType_U8,&ins->sid2.noise_mode,&_ZERO,&_THREE));
+    P(CWSliderScalar(_L("Wave Mix Mode##sgiSID2"),ImGuiDataType_U8,&ins->sid2.mix_mode,&_ZERO,&_THREE,_L(SID2waveMixModes[ins->sid2.mix_mode&3])));
+
     if (ImGui::Checkbox(_L("Absolute Cutoff Macro##sgiSID2"),&ins->c64.filterIsAbs)) 
     {
       ins->std.get_macro(DIV_MACRO_ALG, true)->vZoom=-1;
@@ -158,7 +166,6 @@ void FurnaceGUI::drawInsSID2(DivInstrument* ins)
       ins->std.get_macro(DIV_MACRO_DUTY, true)->vZoom=-1;
       PARAMETER;
     }
-    P(ImGui::Checkbox(_L("Don't test before new note##sgiSID2"),&ins->c64.noTest));
     ImGui::EndTabItem();
   }
 
@@ -193,12 +200,18 @@ void FurnaceGUI::drawInsSID2(DivInstrument* ins)
     macroList.push_back(FurnaceGUIMacroDesc(_L("Duty##sgiSID2"),ins,DIV_MACRO_DUTY,0xff,dutyMin,dutyMax,160,uiColors[GUI_COLOR_MACRO_OTHER]));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiSID2"),ins,DIV_MACRO_WAVE,0xff,0,4,64,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,true,c64ShapeBits,0));
 
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Noise Mode##sgiSID2"),ins,DIV_MACRO_EX10,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Wave Mix Mode##sgiSID2"),ins,DIV_MACRO_EX11,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER]));
+
     macroList.push_back(FurnaceGUIMacroDesc(_L("Cutoff##sgiSID2"),ins,DIV_MACRO_ALG,0xff,cutoffMin,cutoffMax,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Filter Mode##sgiSID2"),ins,DIV_MACRO_EX1,0xff,0,4,64,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,filtModeBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Filter Mode##sgiSID2"),ins,DIV_MACRO_EX1,0xff,0,3,48,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,SID2filtModeBits));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Filter Toggle##sgiSID2"),ins,DIV_MACRO_EX3,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Resonance##sgiSID2"),ins,DIV_MACRO_EX2,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Special##sgiSID2"),ins,DIV_MACRO_EX4,0xff,0,4,64,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,c64TestGateBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgiSID2"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Envelope Reset/Key Control##sgiSID2"),ins,DIV_MACRO_EX9,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Special##sgiSID2"),ins,DIV_MACRO_EX4,0xff,0,2,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,SID2controlBits));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Attack##sgiSID2"),ins,DIV_MACRO_EX5, 0xff,0,15,64,uiColors[GUI_COLOR_MACRO_OTHER]));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Decay##sgiSID2"),ins,DIV_MACRO_EX6, 0xff,0,15,64,uiColors[GUI_COLOR_MACRO_OTHER]));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Sustain##sgiSID2"),ins,DIV_MACRO_EX7, 0xff,0,15,64,uiColors[GUI_COLOR_MACRO_OTHER]));

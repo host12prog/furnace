@@ -191,6 +191,9 @@ void EnvelopeGenerator2::writeCONTROL_REG(reg8 control)
 
     // Switching to attack state unlocks the zero freeze.
     hold_zero = false;
+
+    rate_counter = 0;
+    exponential_counter = 0;
   }
   // Gate bit off: Start release.
   else if (gate && !gate_next) {
