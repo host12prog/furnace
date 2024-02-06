@@ -133,15 +133,17 @@ void DivPlatformSID2::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
       rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(int)(chan[i].active && chan[i].gate));
+
+      chan[i].freqChanged=true; //to update freq (if only noise was enabled/disabled)
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX10)->had) {
       chan[i].noise_mode=chan[i].std.get_div_macro_struct(DIV_MACRO_EX10)->val;
-      //rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4));
       rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4) | ((chan[0].freq >> 16) << 6) | ((chan[1].freq >> 16) << 7));
+
+      chan[i].freqChanged=true; //to update freq (if only noise was enabled and periodic noise mode is set)
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX11)->had) {
       chan[i].mix_mode=chan[i].std.get_div_macro_struct(DIV_MACRO_EX11)->val;
-      //rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4));
       rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4) | ((chan[2].freq >> 16) << 6));
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
@@ -165,7 +167,7 @@ void DivPlatformSID2::tick(bool sysTick) {
       willUpdateFilter=true;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->had) {
-        chan[i].filtControl=chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val&15;
+      chan[i].filtControl=chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val&15;
       willUpdateFilter=true;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->had) {
@@ -396,11 +398,6 @@ int DivPlatformSID2::dispatch(DivCommand c) {
       }
       break;
     }
-    case DIV_CMD_STD_NOISE_MODE:
-      chan[c.chan].duty=(c.value*4095)/100;
-      rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
-      rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
-      break;
     case DIV_CMD_C64_FINE_DUTY:
       chan[c.chan].duty=c.value;
       rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
@@ -409,6 +406,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
     case DIV_CMD_WAVE:
       chan[c.chan].wave=c.value;
       rWrite(c.chan*7+4,(chan[c.chan].wave<<4)|0|(chan[c.chan].ring<<2)|(chan[c.chan].sync<<1)|(int)(chan[c.chan].active && chan[c.chan].gate));
+      chan[c.chan].freqChanged=true;
       break;
     case DIV_CMD_LEGATO:
       chan[c.chan].baseFreq=NOTE_FREQUENCY(c.value+((HACKY_LEGATO_MESS)?(chan[c.chan].std.get_div_macro_struct(DIV_MACRO_ARP)->val):(0)));
@@ -427,11 +425,6 @@ int DivPlatformSID2::dispatch(DivCommand c) {
       break;
     case DIV_CMD_GET_VOLMAX:
       return 15;
-      break;
-    case DIV_CMD_C64_CUTOFF:
-      if (c.value>100) c.value=100;
-      chan[c.chan].filtCut=(c.value+2)*2047/102;
-      updateFilter(c.chan);
       break;
     case DIV_CMD_C64_FINE_CUTOFF:
       chan[c.chan].filtCut=c.value;
