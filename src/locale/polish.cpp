@@ -4715,7 +4715,7 @@ void DivLocale::addTranslationsPolish()
     //   sesd    src/engine/sysDef.cpp
 
     strings["20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"].plurals[0] = "20xx: Режим канала (bit 0: меандр; bit 1: szum; bit 2: огибающая)";
-    strings["21xx: Set noise frequency (0 to 1F)##sesd"].plurals[0] = "21xx: Частота шума (0-1F)";
+    strings["21xx: Set noise frequency (0 to 1F)##sesd"].plurals[0] = "21xx: Ustaw częstotliwość szumu (0-1F)";
     strings["22xy: Set envelope mode (x: shape, y: enable for this channel)##sesd"].plurals[0] = "22xy: Режим огибающей (x: форма, y: включить для этого канала)";
     strings["23xx: Set envelope period low byte##sesd"].plurals[0] = "23xx: Младший байт периода огибающей";
     strings["24xx: Set envelope period high byte##sesd"].plurals[0] = "24xx: Старший байт периода огибающей";
@@ -4933,7 +4933,7 @@ void DivLocale::addTranslationsPolish()
     strings["an improved version of the AY-3-8910 with a bigger frequency range, duty cycles, configurable noise and per-channel envelopes!##sesd"].plurals[0] = "улучшенная версия AY-3-8910 с большим диапазоном частот, настройкой скважности, настраиваемым шумом и огибвющей на каждый канал!";
     strings["Commodore's successor to the PET.\nits square wave channels are more than just square...##sesd"].plurals[0] = "Компьютер Commodore, вышедший после PET.\nего каналы квадратных волн могут играть не только лишь квадратные волны...";
     strings["one channel of 1-bit wavetable which is better (and worse) than the PC Speaker.##sesd"].plurals[0] = "один канал 1-битной волновой таблицы, что лучше (или хуже), чем PC Speaker (пищалка).";
-    strings["FM? nah... samples! Nintendo's answer to Sega.##sesd"].plurals[0] = "FM? nieee,sample! Odpowiedź Nintendo na sukces Segi.";
+    strings["FM? nah... samples! Nintendo's answer to Sega.##sesd"].plurals[0] = "FM? nieee, sample! Odpowiedź Nintendo na sukces Segi.";
     strings["18xx: Enable echo buffer##sesd"].plurals[0] = "18xx: Включить эхо-буфер";
     strings["19xx: Set echo delay (0 to F)##sesd"].plurals[0] = "19xx: Задержка эхо (0-F)";
     strings["1Axx: Set left echo volume##sesd"].plurals[0] = "1Axx: Głośność эхо на левом канале";
@@ -4973,9 +4973,9 @@ void DivLocale::addTranslationsPolish()
     strings["14xx: Set modulator position##sesd"].plurals[0] = "14xx: Положение модулятора";
     strings["15xx: Set modulator table to waveform##sesd"].plurals[0] = "15xx: Ustaw tablicę modulacji na dany kształt fali";
     strings["an expansion chip for the Famicom, featuring a little-known PCM channel.##sesd"].plurals[0] = "układ rozszerzający dla Famicoma,, posiadający mało znany kanał PCM";
-    strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd1"].plurals[0] = "12xx: Скважность/режим шума (меандр: 0-3; шум: 0 или 1)";
+    strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd1"].plurals[0] = "12xx: Ustaw szerokość pulsu/tryb szumu (fala prostokątna: 0-3; szum: 0 lub 1)";
     strings["an expansion chip for the Famicom, with full wavetable.##sesd"].plurals[0] = "układ rozszerzający dla Famicoma, który jest pełnoprawnym syntezatorem tablicowym.";
-    strings["18xx: Change channel limits (0 to 7, x + 1)##sesd"].plurals[0] = "18xx: Изменить лимит каналов (0-7, x + 1)";
+    strings["18xx: Change channel limits (0 to 7, x + 1)##sesd"].plurals[0] = "18xx: Zmień ilość kanałów (0-7, x + 1)";
     strings["20xx: Load a waveform into memory##sesd"].plurals[0] = "20xx: Wczytaj falę do pamięci";
     strings["21xx: Set position for wave load##sesd"].plurals[0] = "21xx: Задать начальное смещение для загрузки волны";
     strings["10xx: Select waveform##sesd"].plurals[0] = "10xx: Выбрать волну";
@@ -4986,15 +4986,15 @@ void DivLocale::addTranslationsPolish()
     strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)##sesd"].plurals[0] = "удешевлённая версия OPM с другим расположением регистров и отсутствием стерео...\n...но у неё внутри AY-3-8910! (на самом деле YM2149)";
     strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies##sesd"].plurals[0] = "удешевлённая версия OPM с другим расположением регистров и отсутствием стерео...\n...но у неё внутри AY-3-8910! (на самом деле YM2149)\nЭто версия в режиме расширенного канала, который превращает третий FM-канал в четыре оператора с независимыми нотами/частотами.";
     strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "удешевлённая версия OPM с другим расположением регистров и отсутствием стерео...\n...но у неё внутри AY-3-8910! (на самом деле YM2149)\nЭто версия в режиме расширенного канала, который превращает третий FM-канал в четыре оператора с независимыми нотами/частотами.\nУ этой версии есть контроль режима CSM для специальных эффектов на третьем канале.";
-    strings["OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.##sesd"].plurals[0] = "OPN, но вдвое больше FM-каналов, возвращённое стерео, ритм- и АДИКМ каналы.";
-    strings["OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies##sesd"].plurals[0] = "OPN, но вдвое больше FM-каналов, возвращённое стерео, ритм- и АДИКМ каналы.\nЭто версия в режиме расширенного канала, который превращает третий FM-канал в четыре оператора с независимыми нотами/частотами.";
-    strings["OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "OPN, но вдвое больше FM-каналов, возвращённое стерео, ритм- и АДИКМ каналы.\nЭто версия в режиме расширенного канала, который превращает третий FM-канал в четыре оператора с независимыми нотами/частотами.\nУ этой версии есть контроль режима CSM для специальных эффектов на третьем канале.";
-    strings["OPN, but what if you only had two operators, no stereo, no detune and a lower ADSR parameter range?##sesd"].plurals[0] = "OPN, но что если у него всего два оператора, нет стерео, нет расстройки и меньший диапазон регулировки параметров ADSR?";
-    strings["OPL, but what if you had more waveforms to choose than the normal sine?##sesd"].plurals[0] = "OPL, но что если у него есть ещё волны, помимо синусоиды?";
-    strings["OPL2, but what if you had twice the channels, 4-op mode, stereo and even more waveforms?##sesd"].plurals[0] = "OPL2, но что если у него вдвое больше каналов, 4-оп режим, стерео и ещё больше волн?";
-    strings["how many channels of PCM do you want?\nMultiPCM: yes##sesd"].plurals[0] = "Сколько каналов ИКМ-сэмплов вам нужно?\nMultiPCM: да";
-    strings["good luck! you get one square and no volume control.##sesd"].plurals[0] = "удачи! у вас один канал меандра и нет регулировки громкости.";
-    strings["please don't use this chip. it was added as a joke.##sesd"].plurals[0] = "пожалуйста, не используйте этот чип. он был добавлен в качестве шутки.";
+    strings["OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.##sesd"].plurals[0] = "OPN, ale z dwa razy większą ilością kanałów FM, stereo powrca, są też kanały perkusji i ADPCM.";
+    strings["OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies##sesd"].plurals[0] = "OPN, ale z dwa razy większą ilością kanałów FM, stereo powrca, są też kanały perkusji i ADPCM.\nЭjest to układ w trybie rozszerzonego kanału, która zamienia trzeci kanał FM w cztery operatory z niezależnymi nutami/częstotliwościami.";
+    strings["OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "OPN, ale z dwa razy większą ilością kanałów FM, stereo powrca, są też kanały perkusji i ADPCM.\nЭjest to układ w trybie rozszerzonego kanału, która zamienia trzeci kanał FM w cztery operatory z niezależnymi nutami/częstotliwościami.\nten układ posiada kontrolę trybu CSM dla efektów specjalnych na trzecim kanale.";
+    strings["OPN, but what if you only had two operators, no stereo, no detune and a lower ADSR parameter range?##sesd"].plurals[0] = "OPN, ale co jeśli są tylko dwa operatory na kanał, nie ma stereo, nie ma rozstrajania operatorów, a zakres regulacji parametrów ADSR jest mniejszy?";
+    strings["OPL, but what if you had more waveforms to choose than the normal sine?##sesd"].plurals[0] = "OPL, ale co jeśli oferuje inne kształty fal oprócz sinusoidy?";
+    strings["OPL2, but what if you had twice the channels, 4-op mode, stereo and even more waveforms?##sesd"].plurals[0] = "OPL2, ale co jeśli ma dwa razy więcej kanałów, tryb 4-op, stereo i jeszcze więcej kształtów fal do wyboru?";
+    strings["how many channels of PCM do you want?\nMultiPCM: yes##sesd"].plurals[0] = "ile kanałów PCM chcesz?\nMultiPCM: tak";
+    strings["good luck! you get one square and no volume control.##sesd"].plurals[0] = "powodzenia! masz jeden kanał fali kwadratowej i zero regulacji głośności.";
+    strings["please don't use this chip. it was added as a joke.##sesd"].plurals[0] = "nie używaj tego układu. został dodany jako żart.";
     strings["TIA, but better and more flexible.\nused in the Atari 8-bit family of computers (400/800/XL/XE).##sesd"].plurals[0] = "TIA, ale lepsze i prostsze w obsłudze\nbył używany w rodzinie 8-bitowych komputerów Atari (400/800/XL/XE).";
     strings["10xx: Set waveform (0 to 7)##sesd0"].plurals[0] = "10xx: Ustaw kształt fali (0-7)";
     strings["11xx: Set AUDCTL##sesd"].plurals[0] = "11xx: Ustaw AUDCTL";
@@ -5006,16 +5006,16 @@ void DivLocale::addTranslationsPolish()
     strings["12xx: Setup sweep period (0: disabled; 1-20: enabled/period)##sesd"].plurals[0] = "12xx: Настроить период аппаратного портаменто (0: выкл.; 1-20: вкл./период)";
     strings["13xx: Set sweep amount##sesd"].plurals[0] = "13xx: Скорость аппаратного портаменто";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd3"].plurals[0] = "17xx: Włącz tryb PCM (PRZESTARZAŁY)";
-    strings["like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.##sesd"].plurals[0] = "как OPM, но с большим количеством волн, режимом фиксированной частоты, и полным... отсутствием сведений о его устройстве.\nиспользовался в Yamaha TX81Z и некоторых других синтезаторах.";
-    strings["2Fxx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "2Fxx: Переключить жёсткий перезапуск огибающей на новой ноте";
+    strings["like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.##sesd"].plurals[0] = "jak OPM, ale z większą liczbą fal, trybem stałej częstotliwości i całkowitym... brakiem informacji o jego konstrukcji.\nużywany w Yamaha TX81Z i niektórych innych syntezatorach.";
+    strings["2Fxx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "2Fxx: Włącz twardy reset obwiedni przy nowych nutach";
     strings["this one is like PC Speaker but has duty cycles.##sesd"].plurals[0] = "ten układ jest podobny do PC Speakera, ale ma zmienną szerokość fali prostokątnej";
     strings["used in some Sega arcade boards (like OutRun), and usually paired with a YM2151.##sesd"].plurals[0] = "był używany w niektórych automatach do gier Segi (np. OutRun) i był zwykle używany w połączeniu z YM2151.";
     strings["a console which failed to sell well due to its headache-inducing features.##sesd"].plurals[0] = "konsola, która się nie sprzedawałą, ponieważ jej funkcje przyprawiały graczy o ból głowy.";
     strings["10xx: Set waveform##sesd6"].plurals[0] = "10xx: Ustaw kształt fali";
     strings["11xx: Set noise length (0 to 7)##sesd"].plurals[0] = "11xx: Ustaw długość szumu (0-7)";
     strings["12xy: Setup envelope (x: enabled/loop (1: enable, 3: enable+loop); y: speed/direction (0-7: down, 8-F: up))##sesd"].plurals[0] = "12xy: Skonfiguruj obwiednię (x: wł./zapętla (1: wł., 3: wł.i zapętla); y: prędkość/kierunek (0-7: w dół, 8-F: w górę))";
-    strings["13xy: Setup sweep (x: speed; y: shift; channel 5 only)##sesd"].plurals[0] = "13xy: Настройка аппаратного портаменто (x: скорость; y: количество; только для 5-го канала)";
-    strings["14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)##sesd"].plurals[0] = "14xy: Настроить модуляцию (x: вкл./цикл (1: вкл., 3: вкл.+цикл); y: скорость; только для 5-го канала)";
+    strings["13xy: Setup sweep (x: speed; y: shift; channel 5 only)##sesd"].plurals[0] = "13xy: Skonfiguruj sprzętowe portamento (x: szybkość; y: zakres; tylko kanał 5)";
+    strings["14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)##sesd"].plurals[0] = "14xy: Skonfiguruj modulację (x: wł./zapętla (1: wł, 3: wł.i zapętla); y: szybkość; tylko kanał 5)";
     strings["15xx: Set modulation waveform (x: wavetable; channel 5 only)##sesd"].plurals[0] = "15xx: Ustaw kształt fali modulatora (x: tablica fal; tylko kanał 5)";
     strings["like OPLL, but even more cost reductions applied. three less FM channels, and no drums mode...##sesd"].plurals[0] = "jak OPLL, ale jeszcze bardziej wykastrowany. trzy kanały mniej, brak trybu perkusyjnego...";
     strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.##sesd"].plurals[0] = "a więc Taito poprosiło Yamahę o dodanie do YM2610 dwóch brakujących kanałów FM, a Yamaha z przyjemnością dostarczyła ów układ.";
