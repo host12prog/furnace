@@ -194,6 +194,7 @@ void EnvelopeGenerator2::writeCONTROL_REG(reg8 control)
 
     rate_counter = 0;
     exponential_counter = 0;
+    //envelope_counter = 0;
   }
   // Gate bit off: Start release.
   else if (gate && !gate_next) {

@@ -222,8 +222,8 @@ void EnvelopeGenerator2::clock(cycle_count delta_t)
 
       // Check whether the envelope counter is frozen at zero.
       if (hold_zero) {
-	rate_step = rate_period;
-	continue;
+        rate_step = rate_period;
+        continue;
       }
 
       switch (state) {

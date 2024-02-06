@@ -93,11 +93,8 @@ void DivPlatformSID2::acquire(short** buf, size_t len)
   }
 }
 
-void DivPlatformSID2::updateFilter(int channel) {
-  //rWrite(0x15,filtCut&7);
-  //rWrite(0x16,filtCut>>3);
-  //rWrite(0x17,(filtRes<<4)|(chan[2].filter<<2)|(chan[1].filter<<1)|(int)(chan[0].filter));
-  //rWrite(0x18,(filtControl<<4)|vol);
+void DivPlatformSID2::updateFilter(int channel) 
+{
   rWrite(0x15 + 3 * channel,(chan[channel].filtCut&15) | ((chan[channel].filtControl & 7) << 4) | (chan[channel].filter << 7));
   rWrite(0x16 + 3 * channel,(chan[channel].filtCut >> 4));
   rWrite(0x17 + 3 * channel,chan[channel].filtRes);
@@ -228,9 +225,9 @@ void DivPlatformSID2::tick(bool sysTick) {
         {
           rWrite(i*7+5,(chan[i].attack<<4)|(chan[i].decay));
           rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
+          rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(0));
+          rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(chan[i].gate?1:0));
         }
-        
-        rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(chan[i].gate?1:0));
 
         rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4) | ((chan[0].freq >> 16) << 6) | ((chan[1].freq >> 16) << 7));
         rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4) | ((chan[2].freq >> 16) << 6));
