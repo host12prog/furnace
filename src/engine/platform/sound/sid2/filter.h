@@ -248,7 +248,7 @@ void Filter2::clock(sound_sample voice, sound_sample ext_in)
   // dVlp = -w0*Vbp*dt;
 
   double dVbp = ((double)w0_ceil_1 * Vhp / (1 << 20));
-  double dVlp = ((double)w0_ceil_1 * Vbp  / (1 << 20));
+  double dVlp = ((double)w0_ceil_1 * Vbp / (1 << 20));
   Vbp -= dVbp;
   Vlp -= dVlp;
   Vhp = (Vbp * (double)_1024_div_Q / (1 << 10)) - Vlp - Vi;

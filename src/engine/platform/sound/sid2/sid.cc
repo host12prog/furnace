@@ -609,7 +609,6 @@ void SID2::clock()
   {
     filter[i].clock(last_chan_out[i], ext_in);
   }
-  
 
   // Clock external filter.
   extfilt.clock(filter[0].output() + filter[1].output() + filter[2].output());
