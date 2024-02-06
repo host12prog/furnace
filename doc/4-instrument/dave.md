@@ -26,3 +26,4 @@ the Dave instrument editor consists of these macros:
   - **swap counters (noise)**: enable swap counters mode. only in noise channel.
   - **ring mod**: enable ring mod with channel+2.
   - **high pass**: enable high-pass filter with the next channel.
+- **Raw Frequency**: set raw period value. the higher the value, the higher the tone frequency. this macro does not round up the frequency so waves `1` and `2` may emerge randomly and interchangebly if you select wave `1` or `2`.

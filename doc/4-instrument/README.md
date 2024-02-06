@@ -78,6 +78,7 @@ the following instrument types are available:
 - [ES5503](es5503.md) - for use with Ensoniq ES5503 sound chip.
 - [PowerNoise](powernoise.md) - for use with PowerNoise chip.
 - [Dave](dave.md) - for use with Dave chip.
+- [SID2](sid2.md) - for use with SID2 chip.
 
 ## macros
 

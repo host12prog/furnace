@@ -219,10 +219,17 @@ void EnvelopeGenerator2::writeATTACK_DECAY(reg8 attack_decay)
 
 void EnvelopeGenerator2::writeSUSTAIN_RELEASE(reg8 sustain_release)
 {
+  reg4 prev_sus = sustain;
+
   sustain = (sustain_release >> 4) & 0x0f;
   release = sustain_release & 0x0f;
   if (state == RELEASE) {
     rate_period = rate_counter_period[release];
+  }
+
+  if (envelope_counter != sustain_level[sustain] && envelope_counter == sustain_level[prev_sus] && state == DECAY_SUSTAIN) 
+  {
+	  envelope_counter = sustain_level[sustain]; //so we can change sustain level without triggering envelope release, e.g. 2->6
   }
 }
 
