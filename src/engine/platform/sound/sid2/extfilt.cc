@@ -28,7 +28,7 @@ ExternalFilter2::ExternalFilter2()
 {
   reset();
   enable_filter(true);
-  set_chip_model(MOS6581_2);
+  set_chip_model(MOS8580_2);
 
   // Low-pass:  R = 10kOhm, C = 1000pF; w0l = 1/RC = 1/(1e4*1e-9) = 100000
   // High-pass: R =  1kOhm, C =   10uF; w0h = 1/RC = 1/(1e3*1e-5) =    100
@@ -54,16 +54,7 @@ void ExternalFilter2::enable_filter(bool enable)
 // ----------------------------------------------------------------------------
 void ExternalFilter2::set_chip_model(chip_model2 model)
 {
-  if (model == MOS6581_2) {
-    // Maximum mixer DC output level; to be removed if the external
-    // filter is turned off: ((wave DC + voice DC)*voices + mixer DC)*volume
-    // See voice.cc and filter.cc for an explanation of the values.
-    mixer_DC = ((((0x800 - 0x380) + 0x800)*0xff*3 - 0xfff*0xff/18) >> 7)*0x0f;
-  }
-  else {
-    // No DC offsets in the MOS8580_2.
-    mixer_DC = 0;
-  }
+  mixer_DC = 0;
 }
 
 
