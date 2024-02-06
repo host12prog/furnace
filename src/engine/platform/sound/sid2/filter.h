@@ -210,6 +210,8 @@ void Filter2::clock(sound_sample voice, sound_sample ext_in)
 
   ext_in >>= 7;
 
+  (void*)ext_in;
+
   // This is handy for testing.
   /*if (!enabled) {
     Vnf = voice + ext_in;
@@ -264,6 +266,8 @@ void Filter2::clock(cycle_count delta_t,
   voice >>= 7;
 
   ext_in >>= 7;
+
+  (void*)ext_in;
 
   // Enable filter on/off.
   // This is not really part of SID2, but is useful for testing.
