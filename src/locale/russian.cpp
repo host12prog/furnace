@@ -4827,7 +4827,7 @@ void DivLocale::addTranslationsRussian()
     strings["59xx: Set decay of operator 3 (0 to F)##sesd0"].plurals[0] = "59xx: Спад оператора 3 (0-F)";
     strings["5Axx: Set decay of operator 4 (0 to F)##sesd0"].plurals[0] = "5Axx: Спад оператора 4 (0-F)";
     strings["5Bxy: Set whether key will scale envelope (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd0"].plurals[0] = "5Bxy: Масштаб. огиб. в зав. от ноты (x: оператор 1-4 (0 для всех операторов); y: вкл.)";
-    strings["10xx: Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)##sesd"].plurals[0] = "10xx: Форма волны (бит 0: треуг.; бит 1: пила; бит 2: меандр; бит 3: шум)";
+    strings["10xx: Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)##sesd"].plurals[0] = "10xx: Форма волны (бит 0: треуг.; бит 1: пила; бит 2: прямоуг.; бит 3: шум)";
     strings["11xx: Set coarse cutoff (not recommended; use 4xxx instead)##sesd"].plurals[0] = "11xx: Грубая частота среза (не рекомендуется; используйте 4xxx)";
     strings["12xx: Set coarse pulse width (not recommended; use 3xxx instead)##sesd"].plurals[0] = "12xx: Грубая скважность (не рекомендуется; используйте 3xxx)";
     strings["13xx: Set resonance (0 to F)##sesd"].plurals[0] = "13xx: Резонанс (0-F)";

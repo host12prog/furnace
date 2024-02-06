@@ -1101,6 +1101,12 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         break;
       case DIV_INS_DAVE:
         break;
+      case DIV_INS_GBA_DMA:
+        break;
+      case DIV_INS_GBA_MINMOD:
+        break;
+      case DIV_INS_KURUMITSU:
+        break;
       case DIV_INS_SID2:
         featureS2=true;
         break;

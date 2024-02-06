@@ -222,15 +222,21 @@ void DivPlatformSID2::tick(bool sysTick) {
       chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
       if (chan[i].freq<0) chan[i].freq=0;
       if (chan[i].freq>0x1ffff) chan[i].freq=0x1ffff;
-      if (chan[i].keyOn) {
-        rWrite(i*7+5,(chan[i].attack<<4)|(chan[i].decay));
-        rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
+      if (chan[i].keyOn) 
+      {
+        if(!chan[i].resetMask)
+        {
+          rWrite(i*7+5,(chan[i].attack<<4)|(chan[i].decay));
+          rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
+        }
+        
         rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(chan[i].gate?1:0));
 
         rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4) | ((chan[0].freq >> 16) << 6) | ((chan[1].freq >> 16) << 7));
         rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4) | ((chan[2].freq >> 16) << 6));
       }
-      if (chan[i].keyOff) {
+      if (chan[i].keyOff) 
+      {
         rWrite(i*7+5,(chan[i].attack<<4)|(chan[i].decay));
         rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
         rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|0);
@@ -491,6 +497,25 @@ int DivPlatformSID2::dispatch(DivCommand c) {
         case 6:
           chan[c.chan].filtControl&=7;
           chan[c.chan].filtControl|=(!!c.value)<<3;
+          break;
+        case 7:
+          chan[c.chan].mix_mode=(c.value & 3);
+          rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4) | ((chan[2].freq >> 16) << 6));
+          break;
+        case 8:
+          chan[c.chan].noise_mode=(c.value & 3);
+          chan[c.chan].freqChanged = true;
+          rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4) | ((chan[0].freq >> 16) << 6) | ((chan[1].freq >> 16) << 7));
+          break;
+        case 9: //phase reset
+          chan[c.chan].test=true;
+          rWrite(c.chan*7+4,(chan[c.chan].wave<<4)|(chan[c.chan].test << 3)|(chan[c.chan].ring<<2)|(chan[c.chan].sync<<1)|(int)(chan[c.chan].active && chan[c.chan].gate));
+          rWrite(c.chan*7+4,(chan[c.chan].wave<<4)|0|(chan[c.chan].ring<<2)|(chan[c.chan].sync<<1)|(int)(chan[c.chan].active && chan[c.chan].gate));
+          chan[c.chan].test = false;
+          break;
+        case 0xa: //envelope on/off
+          chan[c.chan].gate=(c.value & 1);
+          rWrite(c.chan*7+4,(chan[c.chan].wave<<4)|0|(chan[c.chan].ring<<2)|(chan[c.chan].sync<<1)|(int)(chan[c.chan].active && chan[c.chan].gate));
           break;
       }
       break;
