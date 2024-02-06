@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 
+set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 if (APPLE)
   set(MACOSX_DEPLOYMENT_TARGET 10.9)
 endif()
@@ -933,6 +935,7 @@ src/gui/inst/wavetable.cpp
 
 src/locale/locale.cpp
 src/locale/russian.cpp
+src/locale/portuguese.cpp
 # src/locale/template.cpp
 )
 

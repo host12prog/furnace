@@ -2,11 +2,13 @@
 
 #include "template.h"
 #include "russian.h"
+#include "portuguese.h"
 
 const char* languages[] = 
 {
     "English",
     "Русский",
+    "Português",
     //"TEMPLATE",
     NULL
 };
@@ -82,6 +84,13 @@ void DivLocale::setLanguage(DivLang lang) //if false, just update ImGui localiza
         {
             addTranslationsRussian();
             getPluralIndex = &getPluralIndexRussian;
+            break;
+        }
+
+        case DIV_LANG_PORTUGUESE:
+        {
+            addTranslationsPortuguese();
+            getPluralIndex = &getPluralIndexPortuguese;
             break;
         }
 
