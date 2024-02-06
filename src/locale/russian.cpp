@@ -3429,7 +3429,7 @@ void DivLocale::addTranslationsRussian()
     strings["Waveform##sgiC640"].plurals[0] = "Волна";
     strings["tri##sgiC64"].plurals[0] = "треуг.";
     strings["saw##sgiC64"].plurals[0] = "пила";
-    strings["pulse##sgiC64"].plurals[0] = "меандр";
+    strings["pulse##sgiC64"].plurals[0] = "прямоуг.";
     strings["noise##sgiC64"].plurals[0] = "шум";
     strings["A##sgiC640"].plurals[0] = "А";
     strings["A##sgiC641"].plurals[0] = "А";
@@ -4148,6 +4148,54 @@ void DivLocale::addTranslationsRussian()
     strings["Panning (right)##sgiSEGA"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiSEGA"].plurals[0] = "Сброс фазы";
 
+    //   sgiSID2   src/gui/inst/sid2.cpp
+
+    strings["Waveform##sgiSID2"].plurals[0] = "Волна";
+    strings["tri##sgiSID2"].plurals[0] = "треуг.";
+    strings["saw##sgiSID2"].plurals[0] = "пила";
+    strings["pulse##sgiSID2"].plurals[0] = "прямоуг.";
+    strings["noise##sgiSID2"].plurals[0] = "шум";
+    strings["A##sgiSID2"].plurals[0] = "А";
+    strings["D##sgiSID2"].plurals[0] = "С";
+    strings["S##sgiSID2"].plurals[0] = "С";
+    strings["R##sgiSID2"].plurals[0] = "Р";
+    strings["VOL##sgiSID2"].plurals[0] = "ГР";
+    strings["Envelope##sgiSID2"].plurals[0] = "Огибающая";
+    strings["Duty##sgiSID2"].plurals[0] = "Скважность";
+    strings["Ring Modulation##sgiSID2"].plurals[0] = "Кольцевая модуляция";
+    strings["Oscillator Sync##sgiSID2"].plurals[0] = "Синхронизация осцилляторов";
+    strings["Enable filter##sgiSID2"].plurals[0] = "Включить фильтр";
+    strings["Initialize filter##sgiSID2"].plurals[0] = "Инициализировать фильтр";
+    strings["Cutoff##sgiSID2"].plurals[0] = "Частота среза";
+    strings["Resonance##sgiSID2"].plurals[0] = "Резонанс (добротность)";
+    strings["Filter Mode##sgiSID2"].plurals[0] = "Тип фильтра";
+    strings["low##sgiSID2"].plurals[0] = "ФНЧ";
+    strings["band##sgiSID2"].plurals[0] = "ППФ";
+    strings["high##sgiSID2"].plurals[0] = "ФВЧ";
+    strings["Noise Mode##sgiSID2"].plurals[0] = "Режим шума";
+    strings["Wave Mix Mode##sgiSID2"].plurals[0] = "Режим смешения волн";
+    strings["Absolute Cutoff Macro##sgiSID2"].plurals[0] = "Абсолютный макрос частоты среза";
+    strings["Absolute Duty Macro##sgiSID2"].plurals[0] = "Абсолютный макрос скважности";
+    strings["Macros##sgiSID2"].plurals[0] = "Макросы";
+    strings["Volume##sgiSID2"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiSID2"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiSID2"].plurals[0] = "Частота";
+    strings["Duty##sgiSID21"].plurals[0] = "Скважность";
+    strings["Waveform##sgiSID21"].plurals[0] = "Волна";
+    strings["Noise Mode##sgiSID21"].plurals[0] = "Режим шума";
+    strings["Wave Mix Mode##sgiSID21"].plurals[0] = "Режим смеш. волн";
+    strings["Cutoff##sgiSID21"].plurals[0] = "Частота среза";
+    strings["Filter Mode##sgiSID21"].plurals[0] = "Тип фильтра";
+    strings["Filter Toggle##sgiSID2"].plurals[0] = "Вкл./выкл. фильтр";
+    strings["Resonance##sgiSID21"].plurals[0] = "Резонанс";
+    strings["Phase Reset##sgiSID2"].plurals[0] = "Сброс фазы";
+    strings["Envelope Reset/Key Control##sgiSID2"].plurals[0] = "Упр. огибающей";
+    strings["Special##sgiSID2"].plurals[0] = "Разное";
+    strings["Attack##sgiSID2"].plurals[0] = "Атака";
+    strings["Decay##sgiSID2"].plurals[0] = "Спад";
+    strings["Sustain##sgiSID2"].plurals[0] = "Сустейн";
+    strings["Release##sgiSID2"].plurals[0] = "Релиз";
+
     //   sgiSM     src/gui/inst/sm8521.cpp
 
     strings["Macros##sgiSM"].plurals[0] = "Макросы";
@@ -4412,7 +4460,7 @@ void DivLocale::addTranslationsRussian()
     strings["poly9##sgistru"].plurals[0] = "полином 9";
     strings["int##sgistru"].plurals[0] = "интегр.";
     strings["sustain##sgistru2"].plurals[0] = "сустейн";
-    strings["square##sgistru2"].plurals[0] = "меандр";
+    strings["square##sgistru2"].plurals[0] = "прямоуг.";
     strings["noise##sgistru3"].plurals[0] = "шум";
     strings["noise##sgistru4"].plurals[0] = "шум";
     strings["invert##sgistru"].plurals[0] = "инверт.";
@@ -4453,6 +4501,15 @@ void DivLocale::addTranslationsRussian()
     strings["ring mod##sgistru1"].plurals[0] = "кольц. мод.";
     strings["swap counters (noise)##sgistru"].plurals[0] = "помен. счётч. (шум)";
     strings["low pass (noise)##sgistru"].plurals[0] = "ФНЧ (шум)";
+    strings["sync##sgistru1"].plurals[0] = "синхр.";
+    strings["ring##sgistru1"].plurals[0] = "кольц.";
+    strings["low##sgistru1"].plurals[0] = "ФНЧ";
+    strings["band##sgistru1"].plurals[0] = "ППФ";
+    strings["high##sgistru1"].plurals[0] = "ФВЧ";
+    strings["8580 SID##sgistru"].plurals[0] = "8580 SID";
+    strings["bitwise AND##sgistru"].plurals[0] = "побитовое И";
+    strings["bitwise OR##sgistru"].plurals[0] = "побитовое ИЛИ";
+    strings["bitwise XOR##sgistru"].plurals[0] = "побитовое искл. ИЛИ";
     strings["None##sgistru"].plurals[0] = "Нет";
     strings["Invert##sgistru"].plurals[0] = "Инвертировать";
     strings["Add##sgistru"].plurals[0] = "Сложить";
@@ -4885,6 +4942,15 @@ void DivLocale::addTranslationsRussian()
     strings["3xyy: Set fixed frequency F-num of operator 2 (x: high 2 bits from 4 to 7; y: low 8 bits of F-num)##sesd"].plurals[0] = "3xyy: Частота в режиме фиксированной частоты для оператора 2 (x: два старших бита 4-7; y: 8 младших битов частоты)";
     strings["3xyy: Set fixed frequency F-num of operator 3 (x: high 2 bits from 8 to B; y: low 8 bits of F-num)##sesd"].plurals[0] = "3xyy: Частота в режиме фиксированной частоты для оператора 3 (x: два старших бита 8-B; y: 8 младших битов частоты)";
     strings["3xyy: Set fixed frequency F-num of operator 4 (x: high 2 bits from C to F; y: low 8 bits of F-num)##sesd"].plurals[0] = "3xyy: Частота в режиме фиксированной частоты для оператора 4 (x: два старших бита C-F; y: 8 младших битов частоты)";
+    strings["10xx: Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)##sesd1"].plurals[0] = "10xx: Форма волны (бит 0: треуг.; бит 1: пила; бит 2: прямоуг.; бит 3: шум)";
+    strings["11xx: Set resonance (0 to FF)##sesd"].plurals[0] = "11xx: Резонанс (0-FF)";
+    strings["12xx: Set filter mode (bit 0: low pass; bit 1: band pass; bit 2: high pass)##sesd"].plurals[0] = "12xx: Режим фильтра (бит 0: ФНЧ; бит 1: ППФ; бит 2: ФВЧ)";
+    strings["13xx: Disable envelope reset for this channel (1 disables; 0 enables)##sesd"].plurals[0] = "13xx: Отключить ресет огибающей для этого канала (1 выкл.; 0 вкл.)";
+    strings["14xy: Reset cutoff (x: on new note; y: now)##sesd"].plurals[0] = "14xy: Сбросить частоту среза (x: на след. ноте; y: сейчас)";
+    strings["15xy: Reset pulse width (x: on new note; y: now)##sesd"].plurals[0] = "15xy: Сбросить скважность (x: на след. ноте; y: сейчас)";
+    strings["16xy: Change other parameters##sesd"].plurals[0] = "16xy: Изменить другие параметры";
+    strings["3xxx: Set pulse width (0 to FFF)##sesd1"].plurals[0] = "3xxx: Скважность (0-FFF)";
+    strings["4xxx: Set cutoff (0 to FFF)##sesd1"].plurals[0] = "4xxx: Частота среза (0-FFF)";
     strings["a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.##sesd"].plurals[0] = "чип, начавший появляться в мобильных телефонах в 2000-ые.\nнесмотря на проприетарность, он проиграл формату MP3 во время соперничества разных видов мобильного железа.";
     strings["<COMPOUND SYSTEM!>##sesd0"].plurals[0] = "<СОСТАВНАЯ СИСТЕМА!>";
     strings["<COMPOUND SYSTEM!>##sesd1"].plurals[0] = "<СОСТАВНАЯ СИСТЕМА!>";
@@ -5164,6 +5230,7 @@ void DivLocale::addTranslationsRussian()
     strings["14xx: Toggle swap counters (noise only)##sesd"].plurals[0] = "14xx: Переключить смену счётчиков (только шум)";
     strings["15xx: Toggle low pass (noise only)##sesd"].plurals[0] = "15xx: Переключить ФНЧ (только шум)";
     strings["16xx: Set clock divider (0: /2; 1: /3)##sesd"].plurals[0] = "16xx: Делитель частоты (0: /2; 1: /3)";
+    strings["a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.##sesd"].plurals[0] = "вымышленный звуковой чип за авторством LTVA. похож на SID, но в нём исправлены многие его проблемы. также в этом чипе имеется дополнительный функционал, например, новые способы смешения волн, тональный зацикленный шум, отдельные регулировка громкости и фильтр на каждом канале.";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "это система, разработанная для тестирования.";
 
     strings["help! what's going on!"].plurals[0] = "помогите! что происходит!";

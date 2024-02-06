@@ -2055,7 +2055,7 @@ void DivEngine::registerSystems() {
 
   sysDefs[DIV_SYSTEM_SID2]=new DivSysDef(
     "SID2", NULL, 0xf0, 0, 3, false, true, 0, false, 0, 0, 0,
-    "a fictional sound chip. like SID, but with many of its problems fixed.##sesd",
+    "a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.##sesd",
     {"Channel 1", "Channel 2", "Channel 3"},
     {"CH1", "CH2", "CH3"},
     {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
