@@ -172,7 +172,7 @@ protected:
   float Vhp; // highpass
   float Vbp; // bandpass
   float Vlp; // lowpass
-  float Vnf; // not filtered
+  sound_sample Vnf; // not filtered
 
   // Cutoff frequency, resonance.
   sound_sample w0, w0_ceil_1, w0_ceil_dt;
@@ -207,9 +207,6 @@ void Filter2::clock(sound_sample voice, sound_sample ext_in)
 {
   // Scale each voice down from 20 to 13 bits.
   voice >>= 7;
-
-  ext_in >>= 7;
-
   (void)(ext_in);
 
   // This is handy for testing.
