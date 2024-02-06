@@ -262,8 +262,6 @@ void Filter2::clock(cycle_count delta_t,
   // Scale each voice down from 20 to 13 bits.
   voice >>= 7;
 
-  ext_in >>= 7;
-
   (void)(ext_in);
 
   // Enable filter on/off.
