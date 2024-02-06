@@ -169,10 +169,10 @@ protected:
   sound_sample mixer_DC;
 
   // State of filter.
-  double Vhp; // highpass
-  double Vbp; // bandpass
-  double Vlp; // lowpass
-  double Vnf; // not filtered
+  float Vhp; // highpass
+  float Vbp; // bandpass
+  float Vlp; // lowpass
+  float Vnf; // not filtered
 
   // Cutoff frequency, resonance.
   sound_sample w0, w0_ceil_1, w0_ceil_dt;
@@ -225,7 +225,7 @@ void Filter2::clock(sound_sample voice, sound_sample ext_in)
   // (filt2 ? Vi : Vnf) += voice2;
   // (filt3 ? Vi : Vnf) += voice3;
 
-  double Vi;
+  float Vi;
 
   if(filt)
   {
@@ -247,11 +247,11 @@ void Filter2::clock(sound_sample voice, sound_sample ext_in)
   // dVbp = -w0*Vhp*dt;
   // dVlp = -w0*Vbp*dt;
 
-  double dVbp = ((double)w0_ceil_1 * Vhp / (1 << 20));
-  double dVlp = ((double)w0_ceil_1 * Vbp / (1 << 20));
+  float dVbp = ((float)w0_ceil_1 * Vhp / (1 << 20));
+  float dVlp = ((float)w0_ceil_1 * Vbp / (1 << 20));
   Vbp -= dVbp;
   Vlp -= dVlp;
-  Vhp = (Vbp * (double)_1024_div_Q / (1 << 10)) - Vlp - Vi;
+  Vhp = (Vbp * (float)_1024_div_Q / (1 << 10)) - Vlp - Vi;
 }
 
 // ----------------------------------------------------------------------------
@@ -317,13 +317,13 @@ void Filter2::clock(cycle_count delta_t,
     // Vhp = Vbp/Q - Vlp - Vi;
     // dVbp = -w0*Vhp*dt;
     // dVlp = -w0*Vbp*dt;
-    double w0_delta_t = w0_ceil_dt*delta_t_flt >> 6;
+    float w0_delta_t = w0_ceil_dt*delta_t_flt >> 6;
 
-    double dVbp = ((double)w0_delta_t * Vhp / (1 << 14));
-    double dVlp = ((double)w0_delta_t * Vbp / (1 << 14));
+    float dVbp = ((float)w0_delta_t * Vhp / (1 << 14));
+    float dVlp = ((float)w0_delta_t * Vbp / (1 << 14));
     Vbp -= dVbp;
     Vlp -= dVlp;
-    Vhp = (Vbp * (double)_1024_div_Q / (1 << 10)) - Vlp - Vi;
+    Vhp = (Vbp * (float)_1024_div_Q / (1 << 10)) - Vlp - Vi;
 
     delta_t -= delta_t_flt;
   }
