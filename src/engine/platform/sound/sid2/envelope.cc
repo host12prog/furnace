@@ -195,11 +195,19 @@ void EnvelopeGenerator2::writeCONTROL_REG(reg8 control)
     rate_counter = 0;
     exponential_counter = 0;
     //envelope_counter = 0;
+
+    if(envelope_counter == sustain_level[0xf])
+    {
+      envelope_counter--; //idk why it happens, but when envelope has max sustain and I retrigger with new note it just becomes silent so this is the only solution I found so far
+    }
   }
   // Gate bit off: Start release.
   else if (gate && !gate_next) {
     state = RELEASE;
     rate_period = rate_counter_period[release];
+
+    rate_counter = 0;
+    exponential_counter = 0;
   }
 
   gate = gate_next;

@@ -4419,7 +4419,7 @@ void DivLocale::addTranslationsRussian()
     strings["op4##sgistru"].plurals[0] = "оп4";
     strings["triangle##sgistru"].plurals[0] = "треуг.";
     strings["saw##sgistru"].plurals[0] = "пила";
-    strings["pulse##sgistru"].plurals[0] = "меандр";
+    strings["pulse##sgistru"].plurals[0] = "прямоуг.";
     strings["noise##sgistru0"].plurals[0] = "шум";
     strings["tone##sgistru"].plurals[0] = "тон";
     strings["noise##sgistru1"].plurals[0] = "шум";

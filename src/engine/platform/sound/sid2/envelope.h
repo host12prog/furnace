@@ -98,8 +98,18 @@ void EnvelopeGenerator2::clock()
   // envelope can finally be stepped.
   // This has been verified by sampling ENV3.
   //
-  if (++rate_counter & 0x8000) {
-    ++rate_counter &= 0x7fff;
+  //if (++rate_counter & 0x8000) {
+  //  ++rate_counter &= 0x7fff;
+  //}
+
+  if(rate_counter < rate_period)
+  {
+    rate_counter++;
+  }
+
+  if(rate_counter > rate_period)
+  {
+    rate_counter = rate_period; //so you can do alternating writes (e.g. writing attack 10-11-10-11-... results in the somewhat average envelope speed)
   }
 
   if (rate_counter != rate_period) {
@@ -129,13 +139,13 @@ void EnvelopeGenerator2::clock()
       //
       ++envelope_counter &= 0xff;
       if (envelope_counter == 0xff) {
-	state = DECAY_SUSTAIN;
-	rate_period = rate_counter_period[decay];
+        state = DECAY_SUSTAIN;
+        rate_period = rate_counter_period[decay];
       }
       break;
     case DECAY_SUSTAIN:
-      if (envelope_counter != sustain_level[sustain]) {
-	--envelope_counter;
+        if (envelope_counter != sustain_level[sustain]) {
+          --envelope_counter;
       }
       break;
     case RELEASE:

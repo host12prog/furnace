@@ -223,10 +223,12 @@ void DivPlatformSID2::tick(bool sysTick) {
       {
         if(!chan[i].resetMask)
         {
-          rWrite(i*7+5,(chan[i].attack<<4)|(chan[i].decay));
-          rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
+          chan[i].gate = true;
+          
           rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(0));
           rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|(chan[i].gate?1:0));
+          rWrite(i*7+5,(chan[i].attack<<4)|(chan[i].decay));
+          rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
         }
 
         rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4) | ((chan[0].freq >> 16) << 6) | ((chan[1].freq >> 16) << 7));
@@ -234,6 +236,7 @@ void DivPlatformSID2::tick(bool sysTick) {
       }
       if (chan[i].keyOff) 
       {
+        chan[i].gate = false;
         rWrite(i*7+5,(chan[i].attack<<4)|(chan[i].decay));
         rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
         rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|0);
