@@ -235,8 +235,32 @@ void DivPlatformSID2::tick(bool sysTick) {
         rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
         rWrite(i*7+4,(chan[i].wave<<4)|0|(chan[i].ring<<2)|(chan[i].sync<<1)|0);
       }
+
+      if(chan[i].wave == 0x8) //if we have noise (noise only, since tone frequency would be wrong)
+      {
+        if(chan[i].noise_mode == 1) //1st short noise
+        {
+          chan[i].freq = (int)((double)chan[i].freq * 523.25 / 349.0); //these numbers and later determined by spectrum analyzer peak of looped noise signal at known frequency (frequency known for tone that would play if tone wave was enabled)
+        }
+
+        if(chan[i].noise_mode == 2) //2nd short noise
+        {
+          chan[i].freq = (int)((double)chan[i].freq * 523.25 / 270.0);
+        }
+
+        if(chan[i].noise_mode == 3) //3rd short noise
+        {
+          chan[i].freq = (int)((double)chan[i].freq * 523.25 / 133.0);
+        }
+      }
+
+      if (chan[i].freq<0) chan[i].freq=0;
+      if (chan[i].freq>0x1ffff) chan[i].freq=0x1ffff;
+
       rWrite(i*7,chan[i].freq&0xff);
       rWrite(i*7+1,chan[i].freq>>8);
+      rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4) | ((chan[0].freq >> 16) << 6) | ((chan[1].freq >> 16) << 7));
+      rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4) | ((chan[2].freq >> 16) << 6));
       if (chan[i].keyOn) chan[i].keyOn=false;
       if (chan[i].keyOff) chan[i].keyOff=false;
       chan[i].freqChanged=false;
