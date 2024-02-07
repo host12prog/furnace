@@ -164,7 +164,7 @@ void FurnaceGUI::drawOrderButtons() {
     doAction(GUI_ACTION_ORDERS_DEEP_CLONE_END);
   }
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(_L("Duplicate order at end of song (right-click to deep clone)##sgor"));
+    ImGui::SetTooltip(_L("Place copy of current order at end of song (right-click to deep clone)##sgor"));
   }
   NEXT_BUTTON;
 
