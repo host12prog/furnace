@@ -175,8 +175,8 @@ protected:
   sound_sample Vnf; // not filtered
 
   // Cutoff frequency, resonance.
-  sound_sample w0, w0_ceil_1, w0_ceil_dt;
-  sound_sample _1024_div_Q;
+  float w0, w0_ceil_1, w0_ceil_dt;
+  float _1024_div_Q;
 
   // Cutoff frequency tables.
   // FC is an 11 bit register.
@@ -244,11 +244,11 @@ void Filter2::clock(sound_sample voice, sound_sample ext_in)
   // dVbp = -w0*Vhp*dt;
   // dVlp = -w0*Vbp*dt;
 
-  float dVbp = ((float)w0_ceil_1 * Vhp / (1 << 20));
-  float dVlp = ((float)w0_ceil_1 * Vbp / (1 << 20));
+  float dVbp = (w0_ceil_1 * Vhp);
+  float dVlp = (w0_ceil_1 * Vbp);
   Vbp -= dVbp;
   Vlp -= dVlp;
-  Vhp = (Vbp * (float)_1024_div_Q / (1 << 10)) - Vlp - Vi;
+  Vhp = (Vbp * _1024_div_Q) - Vlp - Vi;
 }
 
 // ----------------------------------------------------------------------------
@@ -312,13 +312,13 @@ void Filter2::clock(cycle_count delta_t,
     // Vhp = Vbp/Q - Vlp - Vi;
     // dVbp = -w0*Vhp*dt;
     // dVlp = -w0*Vbp*dt;
-    float w0_delta_t = w0_ceil_dt*delta_t_flt >> 6;
+    float w0_delta_t = w0_ceil_dt*delta_t_flt / 64.0;
 
     float dVbp = ((float)w0_delta_t * Vhp / (1 << 14));
     float dVlp = ((float)w0_delta_t * Vbp / (1 << 14));
     Vbp -= dVbp;
     Vlp -= dVlp;
-    Vhp = (Vbp * (float)_1024_div_Q / (1 << 10)) - Vlp - Vi;
+    Vhp = (Vbp * (float)_1024_div_Q) - Vlp - Vi;
 
     delta_t -= delta_t_flt;
   }
@@ -331,10 +331,6 @@ void Filter2::clock(cycle_count delta_t,
 RESID_INLINE
 sound_sample Filter2::output()
 {
-  // This is handy for testing.
-  if (!enabled) {
-    return (Vnf + mixer_DC)*static_cast<sound_sample>(15);
-  }
 
   // Mix highpass, bandpass, and lowpass outputs. The sum is not
   // weighted, this can be confirmed by sampling sound output for
@@ -377,7 +373,7 @@ sound_sample Filter2::output()
 
   // Sum non-filtered and filtered output.
   // Multiply the sum with volume.
-  return (Vnf + Vf + mixer_DC)*static_cast<sound_sample>(15);
+  return (Vnf + Vf)*15;
 }
 
 #endif // RESID_INLINING || defined(__FILTER_CC__)

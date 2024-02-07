@@ -182,10 +182,10 @@ void Filter2::set_w0()
 
   // Multiply with 1.048576 to facilitate division by 1 000 000 by right-
   // shifting 20 times (2 ^ 20 = 1048576).
-  w0 = static_cast<sound_sample>(2*pi*f0[fc]*1.048576);
+  w0 = (2.0*pi*(float)f0[fc]) / 1000000.0;
 
   // Limit f0 to 16kHz to keep 1 cycle filter stable.
-  const sound_sample w0_max_1 = static_cast<sound_sample>(2*pi*16000*1.048576);
+  const float w0_max_1 = (2.0*pi*16000.0) / 1000000.0;
   w0_ceil_1 = w0 <= w0_max_1 ? w0 : w0_max_1;
 
   // Limit f0 to 4kHz to keep delta_t cycle filter stable.
@@ -202,7 +202,7 @@ void Filter2::set_Q()
 
   // The coefficient 1024 is dispensed of later by right-shifting 10 times
   // (2 ^ 10 = 1024).
-  _1024_div_Q = static_cast<sound_sample>(1024.0/(0.707 + 2.5*res/0x0ff));
+  _1024_div_Q = (1.0/(0.707 + 2.5*(float)res/(float)0x0ff));
 }
 
 // ----------------------------------------------------------------------------
