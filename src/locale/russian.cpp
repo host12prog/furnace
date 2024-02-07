@@ -3194,7 +3194,7 @@ void DivLocale::addTranslationsRussian()
     strings["ES5506##CC_GUI_COLOR_INSTR_ES5506"].plurals[0] = "ES5506##CC_GUI_COLOR_INSTR_ES5506";
     strings["MultiPCM##CC_GUI_COLOR_INSTR_MULTIPCM"].plurals[0] = "MultiPCM##CC_GUI_COLOR_INSTR_MULTIPCM";
     strings["SNES##CC_GUI_COLOR_INSTR_SNES"].plurals[0] = "SNES##CC_GUI_COLOR_INSTR_SNES";
-    strings["Sound Unit##CC_GUI_COLOR_INSTR_SU"].plurals[0] = "Звуковой модуль##CC_GUI_COLOR_INSTR_SU";
+    strings["Sound Unit##CC_GUI_COLOR_INSTR_SU"].plurals[0] = "Sound Unit##CC_GUI_COLOR_INSTR_SU";
     strings["Namco WSG##CC_GUI_COLOR_INSTR_NAMCO"].plurals[0] = "Namco WSG##CC_GUI_COLOR_INSTR_NAMCO";
     strings["FM (OPL Drums)##CC_GUI_COLOR_INSTR_OPL_DRUMS"].plurals[0] = "FM (OPL, ударные)##CC_GUI_COLOR_INSTR_OPL_DRUMS";
     strings["FM (OPM)##CC_GUI_COLOR_INSTR_OPM"].plurals[0] = "FM (OPM)##CC_GUI_COLOR_INSTR_OPM";

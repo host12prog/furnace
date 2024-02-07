@@ -3,7 +3,7 @@
 // not auto-generated. update every time you change icons.ttf!
 
 #define ICON_MIN_FUR 0xe0f0
-#define ICON_MAX_FUR 0xe15d
+#define ICON_MAX_FUR 0xe15e
 
 // test
 #define ICON_FUR_TEST0 u8"\ue0f0"
@@ -73,6 +73,7 @@
 #define ICON_FUR_INS_POWERNOISE u8"\ue15b"
 #define ICON_FUR_INS_POWERNOISE_SLOPE u8"\ue15c"
 #define ICON_FUR_INS_DAVE u8"\ue15d"
+#define ICON_FUR_INS_SID2 u8"\ue15e"
 
 // sample editor
 #define ICON_FUR_SAMPLE_APPLY_SILENCE u8"\ue136"
