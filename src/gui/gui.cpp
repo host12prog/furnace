@@ -2249,7 +2249,7 @@ int FurnaceGUI::load(String path) {
 void FurnaceGUI::openRecentFile(String path) {
   if (modified) {
     nextFile=path;
-    showWarning("Unsaved changes! Save changes before opening file?",GUI_WARN_OPEN_DROP);
+    showWarning(_L("Unsaved changes! Save changes before opening file?##sggu1"),GUI_WARN_OPEN_DROP);
   } else {
     if (load(path)>0) {
       showError(fmt::sprintf("Error while loading file! (%s)",lastError));
@@ -5393,15 +5393,6 @@ bool FurnaceGUI::loop() {
       } else {
         ImGui::OpenPopup("New Song###New Song");
       }
-    }
-
-    if (displayPalette) {
-      paletteSearchResults.clear();
-      paletteQuery="";
-      paletteFirstFrame=true;
-      curPaletteChoice=0;
-      displayPalette=false;
-      ImGui::OpenPopup("Command Palette");
     }
 
     if (displayPalette) {

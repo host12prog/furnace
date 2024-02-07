@@ -120,7 +120,7 @@ void FurnaceGUI::drawSysManager() {
           DivSystem picked=systemPicker(false);
           if (picked!=DIV_SYSTEM_NULL) {
             if (!e->addSystem(picked)) {
-              showError(_L("cannot add chip! (##sgsm")+e->getLastError()+")");
+              showError(settings.language == DIV_LANG_ENGLISH ? ("cannot add chip! (") : (_L("cannot add chip! (##sgsm"))+e->getLastError()+")");
             } else {
               MARK_MODIFIED;
             }

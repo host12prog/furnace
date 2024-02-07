@@ -48,22 +48,22 @@ void FurnaceGUI::drawPalette() {
   int width=ImGui::GetContentRegionAvail().x;
   ImGui::SetNextItemWidth(width);
 
-  const char* hint="Search...";
+  const char* hint=_L("Search...##sgcp");
   switch (curPaletteType) {
   case CMDPAL_TYPE_RECENT:
-    hint="Search recent files...";
+    hint=_L("Search recent files...##sgcp");
     break;
   case CMDPAL_TYPE_INSTRUMENTS:
-    hint="Search instruments...";
+    hint=_L("Search instruments...##sgcp");
     break;
   case CMDPAL_TYPE_SAMPLES:
-    hint="Search samples...";
+    hint=_L("Search samples...##sgcp");
     break;
   case CMDPAL_TYPE_INSTRUMENT_CHANGE:
-    hint="Search instruments (to change to)...";
+    hint=_L("Search instruments (to change to)...##sgcp");
     break;
   case CMDPAL_TYPE_ADD_CHIP:
-    hint="Search chip (to add)...";
+    hint=_L("Search chip (to add)...##sgcp");
     break;
   }
 
@@ -74,7 +74,7 @@ void FurnaceGUI::drawPalette() {
     case CMDPAL_TYPE_MAIN:
       for (int i=0; i<GUI_ACTION_MAX; i++) {
         if (guiActions[i].defaultBind==-1) continue;
-        if (matchFuzzy(guiActions[i].friendlyName,paletteQuery.c_str())) {
+        if (matchFuzzy(_L(guiActions[i].friendlyName),paletteQuery.c_str())) {
           paletteSearchResults.push_back(i);
         }
       }
@@ -90,7 +90,7 @@ void FurnaceGUI::drawPalette() {
 
     case CMDPAL_TYPE_INSTRUMENTS:
     case CMDPAL_TYPE_INSTRUMENT_CHANGE:
-      if (matchFuzzy("- None -",paletteQuery.c_str())) {
+      if (matchFuzzy(_L("- None -"),paletteQuery.c_str())) {
         paletteSearchResults.push_back(0);
       }
       for (int i=0; i<e->song.insLen; i++) {
@@ -112,7 +112,7 @@ void FurnaceGUI::drawPalette() {
     case CMDPAL_TYPE_ADD_CHIP:
       for (int i=0; availableSystems[i]; i++) {
         int ds=availableSystems[i];
-        const char* sysname=getSystemName((DivSystem)ds);
+        const char* sysname=_L(getSystemName((DivSystem)ds));
         if (matchFuzzy(sysname,paletteQuery.c_str())) {
           paletteSearchResults.push_back(ds);
         }
@@ -156,7 +156,7 @@ void FurnaceGUI::drawPalette() {
       String s="???";
       switch (curPaletteType) {
       case CMDPAL_TYPE_MAIN:
-        s=guiActions[id].friendlyName;
+        s=_L(guiActions[id].friendlyName);
         break;
       case CMDPAL_TYPE_RECENT:
         s=recentFile[id].c_str();
@@ -164,7 +164,7 @@ void FurnaceGUI::drawPalette() {
       case CMDPAL_TYPE_INSTRUMENTS:
       case CMDPAL_TYPE_INSTRUMENT_CHANGE:
         if (id==0) {
-          s="- None -";
+          s=_L("- None -");
         } else {
           s=fmt::sprintf("%02X: %s", id-1, e->song.ins[id-1]->name.c_str());
         }
@@ -173,7 +173,7 @@ void FurnaceGUI::drawPalette() {
         s=e->song.sample[id]->name.c_str();
         break;
       case CMDPAL_TYPE_ADD_CHIP:
-        s=getSystemName((DivSystem)id);
+        s=_L(getSystemName((DivSystem)id));
         break;
       default:
         logE("invalid command palette type");
@@ -196,7 +196,7 @@ void FurnaceGUI::drawPalette() {
     accepted=ImGui::IsKeyPressed(ImGuiKey_Enter);
   }
 
-  if (ImGui::Button("Cancel") || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+  if (ImGui::Button(_L("Cancel##sgcp")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
     ImGui::CloseCurrentPopup();
   }
 
@@ -231,7 +231,7 @@ void FurnaceGUI::drawPalette() {
       case CMDPAL_TYPE_ADD_CHIP:
         if (i!=DIV_SYSTEM_NULL) {
           if (!e->addSystem((DivSystem)i)) {
-            showError("cannot add chip! ("+e->getLastError()+")");
+            showError(settings.language == DIV_LANG_ENGLISH ? ("cannot add chip! (") : (_L("cannot add chip! (##sgcp"))+e->getLastError()+")");
           } else {
             MARK_MODIFIED;
           }
