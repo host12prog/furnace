@@ -620,6 +620,15 @@ enum FurnaceGUIActions {
   GUI_ACTION_PANIC,
   GUI_ACTION_CLEAR,
 
+  GUI_ACTION_COMMAND_PALETTE,
+  GUI_ACTION_CMDPAL_MIN,
+  GUI_ACTION_CMDPAL_RECENT,
+  GUI_ACTION_CMDPAL_INSTRUMENTS,
+  GUI_ACTION_CMDPAL_SAMPLES,
+  GUI_ACTION_CMDPAL_INSTRUMENT_CHANGE,
+  GUI_ACTION_CMDPAL_ADD_CHIP,
+  GUI_ACTION_CMDPAL_MAX,
+
   GUI_ACTION_WINDOW_EDIT_CONTROLS,
   GUI_ACTION_WINDOW_ORDERS,
   GUI_ACTION_WINDOW_INS_LIST,
@@ -1465,7 +1474,7 @@ class FurnaceGUI {
   int sampleTexW, sampleTexH;
   bool updateSampleTex;
 
-  String workingDir, fileName, clipboard, warnString, errorString, lastError, curFileName, nextFile, sysSearchQuery, newSongQuery;
+  String workingDir, fileName, clipboard, warnString, errorString, lastError, curFileName, nextFile, sysSearchQuery, newSongQuery, paletteQuery;
   String workingDirSong, workingDirIns, workingDirWave, workingDirSample, workingDirAudioExport;
   String workingDirVGMExport, workingDirZSMExport, workingDirROMExport, workingDirFont, workingDirColors, workingDirKeybinds;
   String workingDirLayout, workingDirROM, workingDirTest;
@@ -1476,6 +1485,7 @@ class FurnaceGUI {
 
   std::vector<DivSystem> sysSearchResults;
   std::vector<FurnaceGUISysDef> newSongSearchResults;
+  std::vector<int> paletteSearchResults;
   FixedQueue<String,32> recentFile;
   std::vector<DivInstrumentType> makeInsTypeList;
   std::vector<FurnaceGUIWaveSizeEntry> waveSizeList;
@@ -1486,7 +1496,7 @@ class FurnaceGUI {
   bool vgmExportDirectStream, displayInsTypeList, displayWaveSizeList;
   bool portrait, injectBackUp, mobileMenuOpen, warnColorPushed;
   bool wantCaptureKeyboard, oldWantCaptureKeyboard, displayMacroMenu;
-  bool displayNew, displayExport, fullScreen, preserveChanPos, wantScrollList, noteInputPoly, notifyWaveChange;
+  bool displayNew, displayExport, displayPalette, fullScreen, preserveChanPos, wantScrollList, noteInputPoly, notifyWaveChange;
   bool displayPendingIns, pendingInsSingle, displayPendingRawSample, snesFilterHex, modTableHex, displayEditString;
   bool mobileEdit;
   bool killGraphics;
@@ -1993,6 +2003,7 @@ class FurnaceGUI {
   int loopOrder, loopRow, loopEnd, isClipping, newSongCategory, latchTarget;
   int wheelX, wheelY, dragSourceX, dragSourceXFine, dragSourceY, dragDestinationX, dragDestinationXFine, dragDestinationY, oldBeat, oldBar;
   int curGroove, exitDisabledTimer;
+  int curPaletteChoice, curPaletteType;
   float soloTimeout;
 
   double exportFadeOut;
@@ -2000,7 +2011,7 @@ class FurnaceGUI {
   bool patExtraButtons, patChannelNames, patChannelPairs;
   unsigned char patChannelHints;
 
-  bool newSongFirstFrame, oldRowChanged;
+  bool newSongFirstFrame, paletteFirstFrame, oldRowChanged;
   bool editControlsOpen, ordersOpen, insListOpen, songInfoOpen, patternOpen, insEditOpen;
   bool waveListOpen, waveEditOpen, sampleListOpen, sampleEditOpen, aboutOpen, settingsOpen;
   bool mixerOpen, debugOpen, inspectorOpen, oscOpen, volMeterOpen, statsOpen, compatFlagsOpen;
@@ -2566,6 +2577,7 @@ class FurnaceGUI {
   void drawSettings();
   void drawDebug();
   void drawNewSong();
+  void drawPalette();
   void drawExport();
   void drawLog();
   void drawEffectList();
@@ -2666,6 +2678,7 @@ class FurnaceGUI {
   int save(String path, int dmfVersion);
   int load(String path);
   int loadStream(String path);
+  void openRecentFile(String path);
   void pushRecentFile(String path);
   void pushRecentSys(const char* path);
   void exportAudio(String path, DivAudioExportModes mode);
