@@ -486,8 +486,8 @@ int DivPlatformSID2::dispatch(DivCommand c) {
           rWrite(c.chan*7+4,(chan[c.chan].wave<<4)|0|(chan[c.chan].ring<<2)|(chan[c.chan].sync<<1)|(int)(chan[c.chan].active && chan[c.chan].gate));
           break;
         case 6:
-          chan[c.chan].filtControl&=7;
-          chan[c.chan].filtControl|=(!!c.value)<<3;
+          chan[c.chan].filtControl = c.value;
+          updateFilter(c.chan);
           break;
         case 7:
           chan[c.chan].mix_mode=(c.value & 3);
@@ -507,6 +507,10 @@ int DivPlatformSID2::dispatch(DivCommand c) {
         case 0xa: //envelope on/off
           chan[c.chan].gate=(c.value & 1);
           rWrite(c.chan*7+4,(chan[c.chan].wave<<4)|0|(chan[c.chan].ring<<2)|(chan[c.chan].sync<<1)|(int)(chan[c.chan].active && chan[c.chan].gate));
+          break;
+        case 0xb: //filter on/off
+          chan[c.chan].filter=(c.value & 1);
+          updateFilter(c.chan);
           break;
       }
       break;
