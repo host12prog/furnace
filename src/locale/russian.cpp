@@ -5381,6 +5381,11 @@ void DivLocale::addTranslationsRussian()
 
     strings["ADPCM-B##sesd"].plurals[0] = "АДИКМ-B";
 
+    strings["Sample##sesd"].plurals[0] = "Сэмплы";
+
+    strings["DAC Left##sesd"].plurals[0] = "ЦАП левый";
+    strings["DAC Right##sesd"].plurals[0] = "ЦАП правый";
+
     strings["Noise##sesd"].plurals[0] = "Шум";
 
     strings["Noise 1##sesd"].plurals[0] = "Шум 1";

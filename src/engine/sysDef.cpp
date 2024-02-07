@@ -1752,7 +1752,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_MSM6258]=new DivSysDef(
     "OKI MSM6258", NULL, 0xab, 0, 1, false, true, 0x150, false, 1U<<DIV_SAMPLE_DEPTH_VOX, 0, 0,
     "an ADPCM sound chip manufactured by OKI and used in the Sharp X68000.##sesd",
-    {"Sample"},
+    {"Sample##sesd"},
     {"PCM##sesd"},
     {DIV_CH_PCM},
     {DIV_INS_MSM6258},
@@ -1873,7 +1873,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_PCM_DAC]=new DivSysDef(
     "Generic PCM DAC##sesd", NULL, 0xc0, 0, 1, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_16BIT, 0, 256,
     "as generic sample playback as it gets.##sesd",
-    {"Sample"},
+    {"Sample##sesd"},
     {"PCM##sesd"},
     {DIV_CH_PCM},
     {DIV_INS_AMIGA}
@@ -2037,7 +2037,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_DAVE]=new DivSysDef(
     "DAVE", NULL, 0xd5, 0, 6, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "this chip was featured in the Enterprise 128 computer. it is similar to POKEY, but with stereo output, more features and frequency precision and the ability to turn left or right (or both) channel into a 6-bit DAC for sample playback.##sesd",
-    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Noise##sesd", "DAC Left", "DAC Right"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Noise##sesd", "DAC Left##sesd", "DAC Right##sesd"},
     {"CH1", "CH2", "CH3", "NO", "L", "R"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_NOISE, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_DAVE, DIV_INS_DAVE, DIV_INS_DAVE, DIV_INS_DAVE, DIV_INS_AMIGA, DIV_INS_AMIGA},

@@ -5460,6 +5460,11 @@ void DivLocale::addTranslationsTemplate()
 
     strings["ADPCM-B##sesd"].plurals[0] = "=ADPCM-B";
 
+    strings["Sample##sesd"].plurals[0] = "=Sample";
+
+    strings["DAC Left##sesd"].plurals[0] = "=DAC Left";
+    strings["DAC Right##sesd"].plurals[0] = "=DAC Right";
+
     strings["Noise##sesd"].plurals[0] = "=Noise";
 
     strings["Noise 1##sesd"].plurals[0] = "=Noise 1";
