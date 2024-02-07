@@ -686,7 +686,6 @@ void DivLocale::addTranslationsTemplate()
     strings["settings...##sggu"].plurals[0] = "=settings...";
     strings["Window##menubar"].plurals[0] = "=Window##menubar";
     strings["window##menubar"].plurals[0] = "=window##menubar";
-    strings["command palette##sggu"].plurals[0] = "=command palette";
     strings["song information##sggu"].plurals[0] = "=song information";
     strings["subsongs##sggu"].plurals[0] = "=subsongs";
     strings["speed##sggu"].plurals[0] = "=speed";
@@ -1130,8 +1129,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Add order##sggc3"].plurals[0] = "=Add order";
     strings["Duplicate order##sggc3"].plurals[0] = "=Duplicate order";
     strings["Deep clone order##sggc"].plurals[0] = "=Deep clone order";
-    strings["Duplicate order to end of song##sggc"].plurals[0] = "=Duplicate order to end of song";
-    strings["Deep clone order to end of song##sggc"].plurals[0] = "=Deep clone order to end of song";
+    strings["Copy current order to end of song##sggc"].plurals[0] = "=Copy current order to end of song";
+    strings["Deep clone current order to end of song##sggc"].plurals[0] = "=Deep clone current order to end of song";
     strings["Remove order##sggc"].plurals[0] = "=Remove order";
     strings["Move order up##sggc3"].plurals[0] = "=Move order up";
     strings["Move order down##sggc3"].plurals[0] = "=Move order down";
@@ -1546,7 +1545,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Duplicate order (right-click to deep clone)##sgor"].plurals[0] = "=Duplicate order (right-click to deep clone)";
     strings["Move order up##sgor"].plurals[0] = "=Move order up";
     strings["Move order down##sgor"].plurals[0] = "=Move order down";
-    strings["Duplicate order at end of song (right-click to deep clone)##sgor"].plurals[0] = "=Duplicate order at end of song (right-click to deep clone)";
+    strings["Place copy of current order at end of song (right-click to deep clone)##sgor"].plurals[0] = "=Place copy of current order at end of song (right-click to deep clone)";
     strings["Order change mode: entire row##sgor"].plurals[0] = "=Order change mode: entire row";
     strings["Order change mode: one##sgor"].plurals[0] = "=Order change mode: one";
     strings["Order edit mode: Select and type (scroll vertically)##sgor"].plurals[0] = "=Order edit mode: Select and type (scroll vertically)";

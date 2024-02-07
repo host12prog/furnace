@@ -628,7 +628,6 @@ void DivLocale::addTranslationsRussian()
     strings["settings...##sggu"].plurals[0] = "настройки...";
     strings["Window##menubar"].plurals[0] = "Окно##menubar";
     strings["window##menubar"].plurals[0] = "окно##menubar";
-    strings["command palette##sggu"].plurals[0] = "палитра команд";
     strings["song information##sggu"].plurals[0] = "о треке";
     strings["subsongs##sggu"].plurals[0] = "подпесни";
     strings["speed##sggu"].plurals[0] = "скорость";
@@ -1078,8 +1077,8 @@ void DivLocale::addTranslationsRussian()
     strings["Add order##sggc3"].plurals[0] = "Добавить строку матрицы паттернов";
     strings["Duplicate order##sggc3"].plurals[0] = "Клонировать строку матрицы паттернов";
     strings["Deep clone order##sggc"].plurals[0] = "Клонировать строку матрицы паттернов с выделением новых индексов";
-    strings["Duplicate order to end of song##sggc"].plurals[0] = "Клонировать строку матрицы паттернов в конец трека";
-    strings["Deep clone order to end of song##sggc"].plurals[0] = "Клонировать строку матрицы паттернов в конец трека с выделением новых индексов";
+    strings["Copy current order to end of song##sggc"].plurals[0] = "Клонировать текущую строку матрицы паттернов в конец трека";
+    strings["Deep clone current order to end of song##sggc"].plurals[0] = "Клонировать текущую строку матрицы паттернов в конец трека с выделением новых индексов";
     strings["Remove order##sggc"].plurals[0] = "Удалить строку матрицы паттернов";
     strings["Move order up##sggc3"].plurals[0] = "Сдвинуть строку матрицы паттернов вверх";
     strings["Move order down##sggc3"].plurals[0] = "Сдвинуть строку матрицы паттернов вниз";
@@ -1491,7 +1490,7 @@ void DivLocale::addTranslationsRussian()
     strings["Duplicate order (right-click to deep clone)##sgor"].plurals[0] = "Клонировать строку (ПКМ для клонирования с выделением новых индексов)";
     strings["Move order up##sgor"].plurals[0] = "Сдвинуть строку вверх";
     strings["Move order down##sgor"].plurals[0] = "Сдвинуть строку вниз";
-    strings["Duplicate order at end of song (right-click to deep clone)##sgor"].plurals[0] = "Клонировать строку (ПКМ для клонирования с выделением новых индексов) в конец трека";
+    strings["Place copy of current order at end of song (right-click to deep clone)##sgor"].plurals[0] = "Поместить копию строки (ПКМ для копирования с выделением новых индексов) в конец трека";
     strings["Order change mode: entire row##sgor"].plurals[0] = "Режим изменения: вся строка";
     strings["Order change mode: one##sgor"].plurals[0] = "Режим изменения: ячейка";
     strings["Order edit mode: Select and type (scroll vertically)##sgor"].plurals[0] = "Режим редактирования: Выбрать и печатать (вертикальная прокрутка)";
