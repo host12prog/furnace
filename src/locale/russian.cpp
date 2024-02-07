@@ -5323,6 +5323,8 @@ void DivLocale::addTranslationsRussian()
     strings["Channel 31##sesd"].plurals[0] = "Канал 31";
     strings["Channel 32##sesd"].plurals[0] = "Канал 32";
 
+    strings["Square##sesd"].plurals[0] = "Меандр";
+
     strings["Square 1##sesd"].plurals[0] = "Меандр 1";
     strings["Square 2##sesd"].plurals[0] = "Меандр 2";
     strings["Square 3##sesd"].plurals[0] = "Меандр 3";
@@ -5333,7 +5335,7 @@ void DivLocale::addTranslationsRussian()
     strings["Pulse 2##sesd"].plurals[0] = "Прямоуг. 2";
 
     strings["Wave##sesd"].plurals[0] = "Волна";
-    strings["Wavetable##sesd"].plurals[0] = "Волн. табл.";
+    strings["Wavetable##sesd"].plurals[0] = "Волн. т.";
 
     strings["Triangle##sesd"].plurals[0] = "Треуг.";
 

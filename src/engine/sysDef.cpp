@@ -725,7 +725,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_GB]=new DivSysDef(
     "Game Boy", NULL, 0x04, 0x04, 4, false, true, 0x161, false, 0, 32, 16,
     "the most popular portable game console of the era.##sesd",
-    {"Pulse 1##sesd", "Pulse 2##sesd", "Wavetable", "Noise##sesd"},
+    {"Pulse 1##sesd", "Pulse 2##sesd", "Wavetable##sesd", "Noise##sesd"},
     {"S1", "S2", "WA", "NO"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_WAVE, DIV_CH_NOISE},
     {DIV_INS_GB, DIV_INS_GB, DIV_INS_GB, DIV_INS_GB},
@@ -1205,7 +1205,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_PCSPKR]=new DivSysDef(
     "PC Speaker##sesd", NULL, 0x93, 0, 1, false, true, 0, false, 0, 0, 0,
     "good luck! you get one square and no volume control.##sesd",
-    {"Square"},
+    {"Square##sesd"},
     {"SQ"},
     {DIV_CH_PULSE},
     {DIV_INS_BEEPER}
@@ -1214,7 +1214,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_PONG]=new DivSysDef(
     "Pong", NULL, 0xfc, 0, 1, false, true, 0, false, 0, 0, 0,
     "please don't use this chip. it was added as a joke.##sesd",
-    {"Square"},
+    {"Square##sesd"},
     {"SQ"},
     {DIV_CH_PULSE},
     {DIV_INS_BEEPER}

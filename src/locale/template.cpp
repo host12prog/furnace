@@ -5402,6 +5402,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Channel 31##sesd"].plurals[0] = "=Channel 31";
     strings["Channel 32##sesd"].plurals[0] = "=Channel 32";
 
+    strings["Square##sesd"].plurals[0] = "=Square";
+
     strings["Square 1##sesd"].plurals[0] = "=Square 1";
     strings["Square 2##sesd"].plurals[0] = "=Square 2";
     strings["Square 3##sesd"].plurals[0] = "=Square 3";

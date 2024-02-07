@@ -798,7 +798,7 @@ void FurnaceGUI::drawPattern() {
         if ((!patExtraButtons && !patChannelNames && !patChannelHints) || settings.channelVolStyle!=0) ImGui::PopStyleVar();
 
         if (displayTooltip && ImGui::IsItemHovered() && !mobileUI) {
-          ImGui::SetTooltip("%s",e->getChannelName(i));
+          ImGui::SetTooltip("%s",settings.translate_channel_names_pattern ? _L(e->getChannelName(i)) : e->getChannelName(i));
         }
         if (settings.channelFont==0) ImGui::PopFont();
         if (mobileUI) {
