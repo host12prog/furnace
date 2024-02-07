@@ -1772,6 +1772,8 @@ class FurnaceGUI {
     int selectAssetOnLoad;
     unsigned int maxUndoSteps;
     int language;
+    int translate_channel_names_pattern;
+    int translate_channel_names_osc;
     String mainFontPath;
     String headFontPath;
     String patFontPath;
@@ -1972,6 +1974,8 @@ class FurnaceGUI {
       selectAssetOnLoad(1),
       maxUndoSteps(100),
       language(DIV_LANG_ENGLISH),
+      translate_channel_names_pattern(0),
+      translate_channel_names_osc(0),
       mainFontPath(""),
       headFontPath(""),
       patFontPath(""),

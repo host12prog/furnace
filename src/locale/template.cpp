@@ -2581,6 +2581,8 @@ void DivLocale::addTranslationsTemplate()
     strings["New instruments are blank##sgse"].plurals[0] = "=New instruments are blank";
     strings["Language##sgse"].plurals[0] = "=Language";
     strings["GUI language##sgse"].plurals[0] = "=GUI language";
+    strings["Translate channel names in pattern header##sgse"].plurals[0] = "=Translate channel names in pattern header";
+    strings["Translate channel names in channel oscilloscope label##sgse"].plurals[0] = "=Translate channel names in channel oscilloscope label";
     strings["test##sgse"].plurals[0] = "=test";
     strings["iulserghiueshgui##sgse"].plurals[0] = "=iulserghiueshgui";
     strings["Audio##sgse"].plurals[0] = "=Audio";
@@ -5365,4 +5367,108 @@ void DivLocale::addTranslationsTemplate()
     strings["a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.##sesd"].plurals[0] = "=a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.";
     strings["Dummy System##sesd"].plurals[0] = "=Dummy System";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "=this is a system designed for testing purposes.";
+
+    //channel names
+
+    strings["Channel 1##sesd"].plurals[0] = "=Channel 1";
+    strings["Channel 2##sesd"].plurals[0] = "=Channel 2";
+    strings["Channel 3##sesd"].plurals[0] = "=Channel 3";
+    strings["Channel 4##sesd"].plurals[0] = "=Channel 4";
+    strings["Channel 5##sesd"].plurals[0] = "=Channel 5";
+    strings["Channel 6##sesd"].plurals[0] = "=Channel 6";
+    strings["Channel 7##sesd"].plurals[0] = "=Channel 7";
+    strings["Channel 8##sesd"].plurals[0] = "=Channel 8";
+    strings["Channel 9##sesd"].plurals[0] = "=Channel 9";
+    strings["Channel 10##sesd"].plurals[0] = "=Channel 10";
+    strings["Channel 11##sesd"].plurals[0] = "=Channel 11";
+    strings["Channel 12##sesd"].plurals[0] = "=Channel 12";
+    strings["Channel 13##sesd"].plurals[0] = "=Channel 13";
+    strings["Channel 14##sesd"].plurals[0] = "=Channel 14";
+    strings["Channel 15##sesd"].plurals[0] = "=Channel 15";
+    strings["Channel 16##sesd"].plurals[0] = "=Channel 16";
+    strings["Channel 17##sesd"].plurals[0] = "=Channel 17";
+    strings["Channel 18##sesd"].plurals[0] = "=Channel 18";
+    strings["Channel 19##sesd"].plurals[0] = "=Channel 19";
+    strings["Channel 20##sesd"].plurals[0] = "=Channel 20";
+    strings["Channel 21##sesd"].plurals[0] = "=Channel 21";
+    strings["Channel 22##sesd"].plurals[0] = "=Channel 22";
+    strings["Channel 23##sesd"].plurals[0] = "=Channel 23";
+    strings["Channel 24##sesd"].plurals[0] = "=Channel 24";
+    strings["Channel 25##sesd"].plurals[0] = "=Channel 25";
+    strings["Channel 26##sesd"].plurals[0] = "=Channel 26";
+    strings["Channel 27##sesd"].plurals[0] = "=Channel 27";
+    strings["Channel 28##sesd"].plurals[0] = "=Channel 28";
+    strings["Channel 29##sesd"].plurals[0] = "=Channel 29";
+    strings["Channel 30##sesd"].plurals[0] = "=Channel 30";
+    strings["Channel 31##sesd"].plurals[0] = "=Channel 31";
+    strings["Channel 32##sesd"].plurals[0] = "=Channel 32";
+
+    strings["Square 1##sesd"].plurals[0] = "=Square 1";
+    strings["Square 2##sesd"].plurals[0] = "=Square 2";
+    strings["Square 3##sesd"].plurals[0] = "=Square 3";
+
+    strings["Pulse##sesd"].plurals[0] = "=Pulse";
+
+    strings["Pulse 1##sesd"].plurals[0] = "=Pulse 1";
+    strings["Pulse 2##sesd"].plurals[0] = "=Pulse 2";
+
+    strings["Wave##sesd"].plurals[0] = "=Wave";
+    strings["Wavetable##sesd"].plurals[0] = "=Wavetable";
+
+    strings["Triangle##sesd"].plurals[0] = "=Triangle";
+
+    strings["PCM##sesd"].plurals[0] = "=PCM";
+
+    strings["PCM 1##sesd"].plurals[0] = "=PCM 1";
+    strings["PCM 2##sesd"].plurals[0] = "=PCM 2";
+    strings["PCM 3##sesd"].plurals[0] = "=PCM 3";
+    strings["PCM 4##sesd"].plurals[0] = "=PCM 4";
+    strings["PCM 5##sesd"].plurals[0] = "=PCM 5";
+    strings["PCM 6##sesd"].plurals[0] = "=PCM 6";
+    strings["PCM 7##sesd"].plurals[0] = "=PCM 7";
+    strings["PCM 8##sesd"].plurals[0] = "=PCM 8";
+    strings["PCM 9##sesd"].plurals[0] = "=PCM 9";
+    strings["PCM 10##sesd"].plurals[0] = "=PCM 10";
+    strings["PCM 11##sesd"].plurals[0] = "=PCM 11";
+    strings["PCM 12##sesd"].plurals[0] = "=PCM 12";
+    strings["PCM 13##sesd"].plurals[0] = "=PCM 13";
+    strings["PCM 14##sesd"].plurals[0] = "=PCM 14";
+    strings["PCM 15##sesd"].plurals[0] = "=PCM 15";
+    strings["PCM 16##sesd"].plurals[0] = "=PCM 16";
+    strings["PCM 17##sesd"].plurals[0] = "=PCM 17";
+    strings["PCM 18##sesd"].plurals[0] = "=PCM 18";
+    strings["PCM 19##sesd"].plurals[0] = "=PCM 19";
+    strings["PCM 20##sesd"].plurals[0] = "=PCM 20";
+    strings["PCM 21##sesd"].plurals[0] = "=PCM 21";
+    strings["PCM 22##sesd"].plurals[0] = "=PCM 22";
+    strings["PCM 23##sesd"].plurals[0] = "=PCM 23";
+    strings["PCM 24##sesd"].plurals[0] = "=PCM 24";
+
+    strings["DPCM##sesd"].plurals[0] = "=DPCM";
+
+    strings["ADPCM##sesd"].plurals[0] = "=ADPCM";
+
+    strings["ADPCM 1##sesd"].plurals[0] = "=ADPCM 1";
+    strings["ADPCM 2##sesd"].plurals[0] = "=ADPCM 2";
+    strings["ADPCM 3##sesd"].plurals[0] = "=ADPCM 3";
+
+    strings["ADPCM-A 1##sesd"].plurals[0] = "=ADPCM-A 1";
+    strings["ADPCM-A 2##sesd"].plurals[0] = "=ADPCM-A 2";
+    strings["ADPCM-A 3##sesd"].plurals[0] = "=ADPCM-A 3";
+    strings["ADPCM-A 4##sesd"].plurals[0] = "=ADPCM-A 4";
+    strings["ADPCM-A 5##sesd"].plurals[0] = "=ADPCM-A 5";
+    strings["ADPCM-A 6##sesd"].plurals[0] = "=ADPCM-A 6";
+
+    strings["ADPCM-B##sesd"].plurals[0] = "=ADPCM-B";
+
+    strings["Noise##sesd"].plurals[0] = "=Noise";
+
+    strings["Noise 1##sesd"].plurals[0] = "=Noise 1";
+    strings["Noise 2##sesd"].plurals[0] = "=Noise 2";
+    strings["Noise 3##sesd"].plurals[0] = "=Noise 3";
+
+    strings["Slope##sesd"].plurals[0] = "=Slope";
+    
+    strings["FM 6/PCM 1##sesd"].plurals[0] = "=FM 6/PCM 1";
+    strings["CSM Timer##sesd"].plurals[0] = "=CSM Timer";
 }

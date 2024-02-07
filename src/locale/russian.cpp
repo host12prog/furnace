@@ -2574,6 +2574,8 @@ void DivLocale::addTranslationsRussian()
     strings["New instruments are blank##sgse"].plurals[0] = "Пустые новые инструменты";
     strings["Language##sgse"].plurals[0] = "Язык";
     strings["GUI language##sgse"].plurals[0] = "Язык интерфейса";
+    strings["Translate channel names in pattern header##sgse"].plurals[0] = "Переводить имена каналов в заголовках паттернов";
+    strings["Translate channel names in channel oscilloscope label##sgse"].plurals[0] = "Переводить имена каналов в надписях на осциллографах отдельных каналов";
     strings["Audio##sgse"].plurals[0] = "Аудио";
     strings["Output##sgse"].plurals[0] = "Вывод";
     strings["Backend##sgse"].plurals[0] = "Интерфейс";
@@ -5286,4 +5288,108 @@ void DivLocale::addTranslationsRussian()
     strings["ZX Spectrum Beeper (QuadTone Engine)##sesd"].plurals[0] = "ZX Spectrum пищалка (движок QuadTone)";
     strings["ESS ES1xxx series (ESFM)##sesd"].plurals[0] = "ESS серия ES1xxx (ESFM)";
     strings["Dummy System##sesd"].plurals[0] = "Система-болванка";
+    
+    //channel names
+
+    strings["Channel 1##sesd"].plurals[0] = "Канал 1";
+    strings["Channel 2##sesd"].plurals[0] = "Канал 2";
+    strings["Channel 3##sesd"].plurals[0] = "Канал 3";
+    strings["Channel 4##sesd"].plurals[0] = "Канал 4";
+    strings["Channel 5##sesd"].plurals[0] = "Канал 5";
+    strings["Channel 6##sesd"].plurals[0] = "Канал 6";
+    strings["Channel 7##sesd"].plurals[0] = "Канал 7";
+    strings["Channel 8##sesd"].plurals[0] = "Канал 8";
+    strings["Channel 9##sesd"].plurals[0] = "Канал 9";
+    strings["Channel 10##sesd"].plurals[0] = "Канал 10";
+    strings["Channel 11##sesd"].plurals[0] = "Канал 11";
+    strings["Channel 12##sesd"].plurals[0] = "Канал 12";
+    strings["Channel 13##sesd"].plurals[0] = "Канал 13";
+    strings["Channel 14##sesd"].plurals[0] = "Канал 14";
+    strings["Channel 15##sesd"].plurals[0] = "Канал 15";
+    strings["Channel 16##sesd"].plurals[0] = "Канал 16";
+    strings["Channel 17##sesd"].plurals[0] = "Канал 17";
+    strings["Channel 18##sesd"].plurals[0] = "Канал 18";
+    strings["Channel 19##sesd"].plurals[0] = "Канал 19";
+    strings["Channel 20##sesd"].plurals[0] = "Канал 20";
+    strings["Channel 21##sesd"].plurals[0] = "Канал 21";
+    strings["Channel 22##sesd"].plurals[0] = "Канал 22";
+    strings["Channel 23##sesd"].plurals[0] = "Канал 23";
+    strings["Channel 24##sesd"].plurals[0] = "Канал 24";
+    strings["Channel 25##sesd"].plurals[0] = "Канал 25";
+    strings["Channel 26##sesd"].plurals[0] = "Канал 26";
+    strings["Channel 27##sesd"].plurals[0] = "Канал 27";
+    strings["Channel 28##sesd"].plurals[0] = "Канал 28";
+    strings["Channel 29##sesd"].plurals[0] = "Канал 29";
+    strings["Channel 30##sesd"].plurals[0] = "Канал 30";
+    strings["Channel 31##sesd"].plurals[0] = "Канал 31";
+    strings["Channel 32##sesd"].plurals[0] = "Канал 32";
+
+    strings["Square 1##sesd"].plurals[0] = "Меандр 1";
+    strings["Square 2##sesd"].plurals[0] = "Меандр 2";
+    strings["Square 3##sesd"].plurals[0] = "Меандр 3";
+
+    strings["Pulse##sesd"].plurals[0] = "Прямоуг.";
+
+    strings["Pulse 1##sesd"].plurals[0] = "Прямоуг. 1";
+    strings["Pulse 2##sesd"].plurals[0] = "Прямоуг. 2";
+
+    strings["Wave##sesd"].plurals[0] = "Волна";
+    strings["Wavetable##sesd"].plurals[0] = "Волн. табл.";
+
+    strings["Triangle##sesd"].plurals[0] = "Треуг.";
+
+    strings["PCM##sesd"].plurals[0] = "ИКМ";
+
+    strings["PCM 1##sesd"].plurals[0] = "ИКМ 1";
+    strings["PCM 2##sesd"].plurals[0] = "ИКМ 2";
+    strings["PCM 3##sesd"].plurals[0] = "ИКМ 3";
+    strings["PCM 4##sesd"].plurals[0] = "ИКМ 4";
+    strings["PCM 5##sesd"].plurals[0] = "ИКМ 5";
+    strings["PCM 6##sesd"].plurals[0] = "ИКМ 6";
+    strings["PCM 7##sesd"].plurals[0] = "ИКМ 7";
+    strings["PCM 8##sesd"].plurals[0] = "ИКМ 8";
+    strings["PCM 9##sesd"].plurals[0] = "ИКМ 9";
+    strings["PCM 10##sesd"].plurals[0] = "ИКМ 10";
+    strings["PCM 11##sesd"].plurals[0] = "ИКМ 11";
+    strings["PCM 12##sesd"].plurals[0] = "ИКМ 12";
+    strings["PCM 13##sesd"].plurals[0] = "ИКМ 13";
+    strings["PCM 14##sesd"].plurals[0] = "ИКМ 14";
+    strings["PCM 15##sesd"].plurals[0] = "ИКМ 15";
+    strings["PCM 16##sesd"].plurals[0] = "ИКМ 16";
+    strings["PCM 17##sesd"].plurals[0] = "ИКМ 17";
+    strings["PCM 18##sesd"].plurals[0] = "ИКМ 18";
+    strings["PCM 19##sesd"].plurals[0] = "ИКМ 19";
+    strings["PCM 20##sesd"].plurals[0] = "ИКМ 20";
+    strings["PCM 21##sesd"].plurals[0] = "ИКМ 21";
+    strings["PCM 22##sesd"].plurals[0] = "ИКМ 22";
+    strings["PCM 23##sesd"].plurals[0] = "ИКМ 23";
+    strings["PCM 24##sesd"].plurals[0] = "ИКМ 24";
+
+    strings["DPCM##sesd"].plurals[0] = "ДИКМ";
+
+    strings["ADPCM##sesd"].plurals[0] = "АДИКМ";
+
+    strings["ADPCM 1##sesd"].plurals[0] = "АДИКМ 1";
+    strings["ADPCM 2##sesd"].plurals[0] = "АДИКМ 2";
+    strings["ADPCM 3##sesd"].plurals[0] = "АДИКМ 3";
+
+    strings["ADPCM-A 1##sesd"].plurals[0] = "АДИКМ-A 1";
+    strings["ADPCM-A 2##sesd"].plurals[0] = "АДИКМ-A 2";
+    strings["ADPCM-A 3##sesd"].plurals[0] = "АДИКМ-A 3";
+    strings["ADPCM-A 4##sesd"].plurals[0] = "АДИКМ-A 4";
+    strings["ADPCM-A 5##sesd"].plurals[0] = "АДИКМ-A 5";
+    strings["ADPCM-A 6##sesd"].plurals[0] = "АДИКМ-A 6";
+
+    strings["ADPCM-B##sesd"].plurals[0] = "АДИКМ-B";
+
+    strings["Noise##sesd"].plurals[0] = "Шум";
+
+    strings["Noise 1##sesd"].plurals[0] = "Шум 1";
+    strings["Noise 2##sesd"].plurals[0] = "Шум 2";
+    strings["Noise 3##sesd"].plurals[0] = "Шум 3";
+
+    strings["Slope##sesd"].plurals[0] = "Скат";
+
+    strings["FM 6/PCM 1##sesd"].plurals[0] = "FM 6/ИКМ 1";
+    strings["CSM Timer##sesd"].plurals[0] = "CSM таймер";
 }

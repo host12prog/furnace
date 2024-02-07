@@ -648,7 +648,7 @@ void FurnaceGUI::drawPattern() {
           if (settings.channelStyle==3) { // split button
             maxLabelArea.x-=ImGui::GetFrameHeightWithSpacing();
           }
-          const char* chName=e->getChannelName(i);
+          const char* chName = settings.translate_channel_names_pattern ? _L(e->getChannelName(i)) : e->getChannelName(i);
           float chNameLimit=maxLabelArea.x-minLabelArea.x;
           if (ImGui::CalcTextSize(chName).x>chNameLimit) {
             String shortChName;

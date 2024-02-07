@@ -860,6 +860,18 @@ void FurnaceGUI::drawSettings() {
 
           ImGui::EndCombo();
         }
+
+        bool translate_channel_names_patternB=settings.translate_channel_names_pattern;
+        if (ImGui::Checkbox(_L("Translate channel names in pattern header##sgse"),&translate_channel_names_patternB)) {
+          settings.translate_channel_names_pattern=translate_channel_names_patternB;
+          settingsChanged=true;
+        }
+
+        bool translate_channel_names_oscB=settings.translate_channel_names_osc;
+        if (ImGui::Checkbox(_L("Translate channel names in channel oscilloscope label##sgse"),&translate_channel_names_oscB)) {
+          settings.translate_channel_names_osc=translate_channel_names_oscB;
+          settingsChanged=true;
+        }
         //ImGui::TextUnformatted(_L("test##sgse"));
 
         /*if(settings.language == (int)DIV_LANG_RUSSIAN)
@@ -3960,6 +3972,9 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     locale.setLanguage((DivLang)settings.language);
     initSystemPresets();
     updateWindowTitle();
+
+    settings.translate_channel_names_pattern=conf.getInt("translateChanNamesPat",0);
+    settings.translate_channel_names_osc=conf.getInt("translateChanNamesOsc",0);
   }
 
   if (groups&GUI_SETTINGS_AUDIO) {
@@ -4371,6 +4386,8 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.selectAssetOnLoad,0,1);
 
   clampSetting(settings.language,0,DIV_LANG_MAX-1);
+  clampSetting(settings.translate_channel_names_pattern, 0, 1);
+  clampSetting(settings.translate_channel_names_osc, 0, 1);
 
   if (settings.exportLoops<0.0) settings.exportLoops=0.0;
   if (settings.exportFadeOut<0.0) settings.exportFadeOut=0.0;  
@@ -4429,6 +4446,9 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("centerPopup",settings.centerPopup);
 
     conf.set("language",settings.language);
+
+    conf.set("translateChanNamesPat",settings.translate_channel_names_pattern);
+    conf.set("translateChanNamesOsc",settings.translate_channel_names_osc);
   }
 
   // audio
