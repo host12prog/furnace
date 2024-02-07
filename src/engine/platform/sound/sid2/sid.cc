@@ -607,7 +607,10 @@ void SID2::clock()
   // Clock filter.
   for(int i = 0; i < 3; i++)
   {
-    filter[i].clock(last_chan_out[i], ext_in);
+    if (voice[i].envelope.envelope_counter != 0)
+    {
+      filter[i].clock(last_chan_out[i], ext_in);
+    }
   }
 
   // Clock external filter.
