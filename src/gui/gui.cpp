@@ -616,7 +616,11 @@ void FurnaceGUI::updateWindowTitle() {
 
   if (settings.titleBarSys) {
     if (e->song.systemName!="") {
-      title+=fmt::sprintf(" (%s)",e->song.systemName);
+      String name = _L(e->song.systemName.c_str());
+
+      String namee = name.substr(0, name.find("##"));
+
+      title+=fmt::sprintf(" (%s)", namee);
     }
   }
 
@@ -1610,9 +1614,9 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_OPEN:
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Open File##sggu"),
-        {_L("compatible files##sggu0"), "*.fur *.dmf *.mod *.fc13 *.fc14 *.smod *.fc",
-         _L("all files##sggu0"), "*"},
+        settings.language == DIV_LANG_ENGLISH ? "Open File" : _L("Open File##sggu"),
+        { settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu0"), "*.fur *.dmf *.mod *.fc13 *.fc14 *.smod *.fc",
+         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu0"), "*"},
         workingDirSong,
         dpiScale
       );
@@ -1623,8 +1627,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         break;
       }
       hasOpened=fileDialog->openLoad(
-        _L("Restore Backup##sggu"),
-        {_L("Furnace song##sggu0"), "*.fur"},
+        settings.language == DIV_LANG_ENGLISH ? "Restore Backup" : _L("Restore Backup##sggu"),
+        { settings.language == DIV_LANG_ENGLISH ? "Furnace song" : _L("Furnace song##sggu0"), "*.fur"},
         backupPath+String(DIR_SEPARATOR_STR),
         dpiScale
       );
@@ -1632,8 +1636,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAVE:
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Save File##sggu0"),
-        {_L("Furnace song##sggu1"), "*.fur"},
+        settings.language == DIV_LANG_ENGLISH ? "Save File" : _L("Save File##sggu0"),
+        {settings.language == DIV_LANG_ENGLISH ? "Furnace song" : _L("Furnace song##sggu1"), "*.fur"},
         workingDirSong,
         dpiScale
       );
@@ -1641,8 +1645,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAVE_DMF:
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Save File##sggu1"),
-        {_L("DefleMask 1.1.3 module##sggu"), "*.dmf"},
+        settings.language == DIV_LANG_ENGLISH ? "Save File" : _L("Save File##sggu1"),
+        { settings.language == DIV_LANG_ENGLISH ? "DefleMask 1.1.3 module" : _L("DefleMask 1.1.3 module##sggu"), "*.dmf"},
         workingDirSong,
         dpiScale
       );
@@ -1650,8 +1654,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAVE_DMF_LEGACY:
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Save File##sggu2"),
-        {_L("DefleMask 1.0/legacy module##sggu"), "*.dmf"},
+        settings.language == DIV_LANG_ENGLISH ? "Save File" : _L("Save File##sggu2"),
+        { settings.language == DIV_LANG_ENGLISH ? "DefleMask 1.0/legacy module" : _L("DefleMask 1.0/legacy module##sggu"), "*.dmf"},
         workingDirSong,
         dpiScale
       );
@@ -1668,24 +1672,24 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
 
       if (!dirExists(workingDirIns)) workingDirIns=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Load Instrument##sggu"),
-        {_L("all compatible files##sggu1"), "*.fui *.dmp *.tfi *.vgi *.s3i *.sbi *.opli *.opni *.y12 *.bnk *.ff *.gyb *.opm *.wopl *.wopn",
-         _L("Furnace instrument##sggu0"), "*.fui",
-         _L("DefleMask preset##sggu0"), "*.dmp",
-         _L("TFM Music Maker instrument##sggu"), "*.tfi",
-         _L("VGM Music Maker instrument##sggu"), "*.vgi",
-         _L("Scream Tracker 3 instrument##sggu"), "*.s3i",
-         _L("SoundBlaster instrument##sggu"), "*.sbi",
-         _L("Wohlstand OPL instrument##sggu"), "*.opli",
-         _L("Wohlstand OPN instrument##sggu"), "*.opni",
-         _L("Gens KMod patch dump##sggu"), "*.y12",
-         _L("BNK file (AdLib)##sggu"), "*.bnk",
-         _L("FF preset bank##sggu"), "*.ff",
-         _L("2612edit GYB preset bank##sggu"), "*.gyb",
-         _L("VOPM preset bank##sggu"), "*.opm",
-         _L("Wohlstand WOPL bank##sggu"), "*.wopl",
-         _L("Wohlstand WOPN bank##sggu"), "*.wopn",
-         _L("all files##sggu1"), "*"},
+        settings.language == DIV_LANG_ENGLISH ? "Load Instrument" : _L("Load Instrument##sggu"),
+        { settings.language == DIV_LANG_ENGLISH ? "all compatible files" : _L("all compatible files##sggu1"), "*.fui *.dmp *.tfi *.vgi *.s3i *.sbi *.opli *.opni *.y12 *.bnk *.ff *.gyb *.opm *.wopl *.wopn",
+         settings.language == DIV_LANG_ENGLISH ? "Furnace instrument" : _L("Furnace instrument##sggu0"), "*.fui",
+         settings.language == DIV_LANG_ENGLISH ? "DefleMask preset" : _L("DefleMask preset##sggu0"), "*.dmp",
+         settings.language == DIV_LANG_ENGLISH ? "TFM Music Maker instrument" : _L("TFM Music Maker instrument##sggu"), "*.tfi",
+         settings.language == DIV_LANG_ENGLISH ? "VGM Music Maker instrument" : _L("VGM Music Maker instrument##sggu"), "*.vgi",
+         settings.language == DIV_LANG_ENGLISH ? "Scream Tracker 3 instrument" : _L("Scream Tracker 3 instrument##sggu"), "*.s3i",
+         settings.language == DIV_LANG_ENGLISH ? "SoundBlaster instrument" : _L("SoundBlaster instrument##sggu"), "*.sbi",
+         settings.language == DIV_LANG_ENGLISH ? "Wohlstand OPL instrument" : _L("Wohlstand OPL instrument##sggu"), "*.opli",
+         settings.language == DIV_LANG_ENGLISH ? "Wohlstand OPN instrument" : _L("Wohlstand OPN instrument##sggu"), "*.opni",
+         settings.language == DIV_LANG_ENGLISH ? "Gens KMod patch dump" : _L("Gens KMod patch dump##sggu"), "*.y12",
+         settings.language == DIV_LANG_ENGLISH ? "BNK file (AdLib)" : _L("BNK file (AdLib)##sggu"), "*.bnk",
+         settings.language == DIV_LANG_ENGLISH ? "FF preset bank" : _L("FF preset bank##sggu"), "*.ff",
+         settings.language == DIV_LANG_ENGLISH ? "2612edit GYB preset bank" : _L("2612edit GYB preset bank##sggu"), "*.gyb",
+         settings.language == DIV_LANG_ENGLISH ? "VOPM preset bank" : _L("VOPM preset bank##sggu"), "*.opm",
+         settings.language == DIV_LANG_ENGLISH ? "Wohlstand WOPL bank" : _L("Wohlstand WOPL bank##sggu"), "*.wopl",
+         settings.language == DIV_LANG_ENGLISH ? "Wohlstand WOPN bank" : _L("Wohlstand WOPN bank##sggu"), "*.wopn",
+         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu1"), "*"},
         workingDirIns,
         dpiScale,
         [this](const char* path) {
@@ -1718,8 +1722,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_INS_SAVE:
       if (!dirExists(workingDirIns)) workingDirIns=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Save Instrument##sggu0"),
-        {_L("Furnace instrument##sggu1"), "*.fui"},
+        settings.language == DIV_LANG_ENGLISH ? "Save Instrument" : _L("Save Instrument##sggu0"),
+        {settings.language == DIV_LANG_ENGLISH ? "Furnace instrument" : _L("Furnace instrument##sggu1"), "*.fui"},
         workingDirIns,
         dpiScale
       );
@@ -1727,8 +1731,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_INS_SAVE_DMP:
       if (!dirExists(workingDirIns)) workingDirIns=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Save Instrument##sggu1"),
-        {_L("DefleMask preset##sggu1"), "*.dmp"},
+        settings.language == DIV_LANG_ENGLISH ? "Save Instrument" : _L("Save Instrument##sggu1"),
+        {settings.language == DIV_LANG_ENGLISH ? "DefleMask preset" : _L("DefleMask preset##sggu1"), "*.dmp"},
         workingDirIns,
         dpiScale
       );
@@ -1737,9 +1741,9 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_WAVE_OPEN_REPLACE:
       if (!dirExists(workingDirWave)) workingDirWave=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Load Wavetable##sggu"),
-        {_L("compatible files##sggu2"), "*.fuw *.dmw",
-         _L("all files##sggu2"), "*"},
+        settings.language == DIV_LANG_ENGLISH ? "Load Wavetable" : _L("Load Wavetable##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu2"), "*.fuw *.dmw",
+         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu2"), "*"},
         workingDirWave,
         dpiScale,
         NULL, // TODO
@@ -1749,8 +1753,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_WAVE_SAVE:
       if (!dirExists(workingDirWave)) workingDirWave=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Save Wavetable##sggu0"),
-        {_L("Furnace wavetable##sggu"), ".fuw"},
+        settings.language == DIV_LANG_ENGLISH ? "Save Wavetable" : _L("Save Wavetable##sggu0"),
+        {settings.language == DIV_LANG_ENGLISH ? "Furnace wavetable" : _L("Furnace wavetable##sggu"), ".fuw"},
         workingDirWave,
         dpiScale
       );
@@ -1758,8 +1762,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_WAVE_SAVE_DMW:
       if (!dirExists(workingDirWave)) workingDirWave=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Save Wavetable##sggu1"),
-        {_L("DefleMask wavetable##sggu"), ".dmw"},
+        settings.language == DIV_LANG_ENGLISH ? "Save Wavetable" : _L("Save Wavetable##sggu1"),
+        {settings.language == DIV_LANG_ENGLISH ? "DefleMask wavetable" : _L("DefleMask wavetable##sggu"), ".dmw"},
         workingDirWave,
         dpiScale
       );
@@ -1767,8 +1771,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_WAVE_SAVE_RAW:
       if (!dirExists(workingDirWave)) workingDirWave=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Save Wavetable##sggu2"),
-        {_L("raw data##sggu"), ".raw"},
+        settings.language == DIV_LANG_ENGLISH ? "Save Wavetable" : _L("Save Wavetable##sggu2"),
+        {settings.language == DIV_LANG_ENGLISH ? "raw data" : _L("raw data##sggu"), ".raw"},
         workingDirWave,
         dpiScale
       );
@@ -1777,9 +1781,9 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAMPLE_OPEN_REPLACE:
       if (!dirExists(workingDirSample)) workingDirSample=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Load Sample##sggu"),
-        {_L("compatible files##sggu3"), "*.wav *.dmc *.brr",
-         _L("all files##sggu3"), "*"},
+        settings.language == DIV_LANG_ENGLISH ? "Load Sample" : _L("Load Sample##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu3"), "*.wav *.dmc *.brr",
+         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu3"), "*"},
         workingDirSample,
         dpiScale,
         NULL, // TODO
@@ -1790,8 +1794,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAMPLE_OPEN_REPLACE_RAW:
       if (!dirExists(workingDirSample)) workingDirSample=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Load Raw Sample##sggu"),
-        {_L("all files##sggu4"), "*"},
+        settings.language == DIV_LANG_ENGLISH ? "Load Raw Sample" : _L("Load Raw Sample##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu4"), "*"},
         workingDirSample,
         dpiScale
       );
@@ -1799,8 +1803,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAMPLE_SAVE:
       if (!dirExists(workingDirSample)) workingDirSample=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Save Sample##sggu"),
-        {_L("Wave file##sggu0"), "*.wav"},
+        settings.language == DIV_LANG_ENGLISH ? "Save Sample" : _L("Save Sample##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "Wave file" : _L("Wave file##sggu0"), "*.wav"},
         workingDirSample,
         dpiScale
       );
@@ -1808,8 +1812,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAMPLE_SAVE_RAW:
       if (!dirExists(workingDirSample)) workingDirSample=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Save Raw Sample##sggu"),
-        {_L("all files##sggu5"), "*"},
+        settings.language == DIV_LANG_ENGLISH ? "Save Raw Sample" : _L("Save Raw Sample##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu5"), "*"},
         workingDirSample,
         dpiScale
       );
@@ -1817,8 +1821,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_AUDIO_ONE:
       if (!dirExists(workingDirAudioExport)) workingDirAudioExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Export Audio##sggu0"),
-        {_L("Wave file##sggu1"), "*.wav"},
+        settings.language == DIV_LANG_ENGLISH ? "Export Audio" : _L("Export Audio##sggu0"),
+        {settings.language == DIV_LANG_ENGLISH ? "Wave file" : _L("Wave file##sggu1"), "*.wav"},
         workingDirAudioExport,
         dpiScale
       );
@@ -1826,8 +1830,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_AUDIO_PER_SYS:
       if (!dirExists(workingDirAudioExport)) workingDirAudioExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Export Audio##sggu1"),
-        {_L("Wave file##sggu2"), "*.wav"},
+        settings.language == DIV_LANG_ENGLISH ? "Export Audio" : _L("Export Audio##sggu1"),
+        {settings.language == DIV_LANG_ENGLISH ? "Wave file" : _L("Wave file##sggu2"), "*.wav"},
         workingDirAudioExport,
         dpiScale
       );
@@ -1835,8 +1839,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_AUDIO_PER_CHANNEL:
       if (!dirExists(workingDirAudioExport)) workingDirAudioExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Export Audio##sggu2"),
-        {_L("Wave file##sggu3"), "*.wav"},
+        settings.language == DIV_LANG_ENGLISH ? "Export Audio" : _L("Export Audio##sggu2"),
+        {settings.language == DIV_LANG_ENGLISH ? "Wave file" : _L("Wave file##sggu3"), "*.wav"},
         workingDirAudioExport,
         dpiScale
       );
@@ -1844,8 +1848,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_VGM:
       if (!dirExists(workingDirVGMExport)) workingDirVGMExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Export VGM##sggu"),
-        {_L("VGM file##sggu"), "*.vgm"},
+        settings.language == DIV_LANG_ENGLISH ? "Export VGM" : _L("Export VGM##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "VGM file" : _L("VGM file##sggu"), "*.vgm"},
         workingDirVGMExport,
         dpiScale
       );
@@ -1853,8 +1857,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_ZSM:
       if (!dirExists(workingDirZSMExport)) workingDirZSMExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Export ZSM##sggu"),
-        {_L("ZSM file##sggu"), "*.zsm"},
+        settings.language == DIV_LANG_ENGLISH ? "Export ZSM" : _L("Export ZSM##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "ZSM file" : _L("ZSM file##sggu"), "*.zsm"},
         workingDirZSMExport,
         dpiScale
       );
@@ -1862,8 +1866,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_TEXT:
       if (!dirExists(workingDirROMExport)) workingDirROMExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Export Command Stream##sggu0"),
-        {_L("text file##sggu0"), "*.txt"},
+        settings.language == DIV_LANG_ENGLISH ? "Export Command Stream" : _L("Export Command Stream##sggu0"),
+        {settings.language == DIV_LANG_ENGLISH ? "text file" : _L("text file##sggu0"), "*.txt"},
         workingDirROMExport,
         dpiScale
       );
@@ -1871,8 +1875,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_CMDSTREAM:
       if (!dirExists(workingDirROMExport)) workingDirROMExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Export Command Stream##sggu1"),
-        {_L("text file##sggu1"), "*.txt"},
+        settings.language == DIV_LANG_ENGLISH ? "Export Command Stream" : _L("Export Command Stream##sggu1"),
+        {settings.language == DIV_LANG_ENGLISH ? "text file" : _L("text file##sggu1"), "*.txt"},
         workingDirROMExport,
         dpiScale
       );
@@ -1880,8 +1884,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_CMDSTREAM_BINARY:
       if (!dirExists(workingDirROMExport)) workingDirROMExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Export Command Stream##sggu2"),
-        {_L("binary file##sggu"), "*.bin"},
+        settings.language == DIV_LANG_ENGLISH ? "Export Command Stream" : _L("Export Command Stream##sggu2"),
+        {settings.language == DIV_LANG_ENGLISH ? "binary file" : _L("binary file##sggu"), "*.bin"},
         workingDirROMExport,
         dpiScale
       );
@@ -1892,8 +1896,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_LOAD_MAIN_FONT:
       if (!dirExists(workingDirFont)) workingDirFont=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Select Font##sggu0"),
-        {_L("compatible files##sggu4"), "*.ttf *.otf *.ttc *.dfont *.pcf *.psf *.fon"},
+        settings.language == DIV_LANG_ENGLISH ? "Select Font" : _L("Select Font##sggu0"),
+        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu4"), "*.ttf *.otf *.ttc *.dfont *.pcf *.psf *.fon"},
         workingDirFont,
         dpiScale
       );
@@ -1901,8 +1905,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_LOAD_HEAD_FONT:
       if (!dirExists(workingDirFont)) workingDirFont=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Select Font##sggu1"),
-        {_L("compatible files##sggu5"), "*.ttf *.otf *.ttc *.dfont *.pcf *.psf *.fon"},
+        settings.language == DIV_LANG_ENGLISH ? "Select Font" : _L("Select Font##sggu1"),
+        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu5"), "*.ttf *.otf *.ttc *.dfont *.pcf *.psf *.fon"},
         workingDirFont,
         dpiScale
       );
@@ -1910,8 +1914,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_LOAD_PAT_FONT:
       if (!dirExists(workingDirFont)) workingDirFont=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Select Font##sggu2"),
-        {_L("compatible files##sggu6"), "*.ttf *.otf *.ttc *.dfont *.pcf *.psf *.fon"},
+        settings.language == DIV_LANG_ENGLISH ? "Select Font" : _L("Select Font##sggu2"),
+        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu6"), "*.ttf *.otf *.ttc *.dfont *.pcf *.psf *.fon"},
         workingDirFont,
         dpiScale
       );
@@ -1919,8 +1923,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_IMPORT_COLORS:
       if (!dirExists(workingDirColors)) workingDirColors=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Select Color File##sggu"),
-        {_L("configuration files##sggu0"), "*.cfgc"},
+        settings.language == DIV_LANG_ENGLISH ? "Select Color File" : _L("Select Color File##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu0"), "*.cfgc"},
         workingDirColors,
         dpiScale
       );
@@ -1928,8 +1932,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_IMPORT_KEYBINDS:
       if (!dirExists(workingDirKeybinds)) workingDirKeybinds=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Select Keybind File##sggu"),
-        {_L("configuration files##sggu1"), "*.cfgk"},
+        settings.language == DIV_LANG_ENGLISH ? "Select Keybind File" : _L("Select Keybind File##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu1"), "*.cfgk"},
         workingDirKeybinds,
         dpiScale
       );
@@ -1937,8 +1941,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_IMPORT_LAYOUT:
       if (!dirExists(workingDirKeybinds)) workingDirKeybinds=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Select Layout File##sggu"),
-        {_L(".ini files##sggu0"), "*.ini"},
+        settings.language == DIV_LANG_ENGLISH ? "Select Layout File" : _L("Select Layout File##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? ".ini files" : _L(".ini files##sggu0"), "*.ini"},
         workingDirKeybinds,
         dpiScale
       );
@@ -1946,8 +1950,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_COLORS:
       if (!dirExists(workingDirColors)) workingDirColors=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Export Colors##sggu"),
-        {_L("configuration files##sggu2"), "*.cfgc"},
+        settings.language == DIV_LANG_ENGLISH ? "Export Colors" : _L("Export Colors##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu2"), "*.cfgc"},
         workingDirColors,
         dpiScale
       );
@@ -1955,8 +1959,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_KEYBINDS:
       if (!dirExists(workingDirKeybinds)) workingDirKeybinds=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Export Keybinds##sggu"),
-        {_L("configuration files##sggu3"), "*.cfgk"},
+        settings.language == DIV_LANG_ENGLISH ? "Export Keybinds" : _L("Export Keybinds##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu3"), "*.cfgk"},
         workingDirKeybinds,
         dpiScale
       );
@@ -1964,8 +1968,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_LAYOUT:
       if (!dirExists(workingDirKeybinds)) workingDirKeybinds=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Export Layout##sggu"),
-        {_L(".ini files##sggu1"), "*.ini"},
+        settings.language == DIV_LANG_ENGLISH ? "Export Layout" : _L("Export Layout##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? ".ini files" : _L(".ini files##sggu1"), "*.ini"},
         workingDirKeybinds,
         dpiScale
       );
@@ -1975,9 +1979,9 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_MU5_ROM_OPEN:
       if (!dirExists(workingDirSample)) workingDirSample=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Load ROM##sggu"),
-        {_L("compatible files##sggu7"), "*.rom *.bin",
-         _L("all files##sggu6"), "*"},
+        settings.language == DIV_LANG_ENGLISH ? "Load ROM" : _L("Load ROM##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu7"), "*.rom *.bin",
+         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu6"), "*"},
         workingDirROM,
         dpiScale
       );
@@ -1985,9 +1989,9 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_CMDSTREAM_OPEN:
       if (!dirExists(workingDirROM)) workingDirROM=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Play Command Stream##sggu"),
-        {_L("command stream##sggu"), "*.bin",
-         _L("all files##sggu7"), "*"},
+        settings.language == DIV_LANG_ENGLISH ? "Play Command Stream" : _L("Play Command Stream##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "command stream" : _L("command stream##sggu"), "*.bin",
+         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu7"), "*"},
         workingDirROM,
         dpiScale
       );
@@ -1995,10 +1999,10 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_TEST_OPEN:
       if (!dirExists(workingDirTest)) workingDirTest=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Open Test##sggu"),
-        {_L("compatible files##sggu8"), "*.fur *.dmf *.mod",
-         _L("another option##sggu0"), "*.wav *.ttf",
-         _L("all files##sggu8"), "*"},
+        settings.language == DIV_LANG_ENGLISH ? "Open Test" : _L("Open Test##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu8"), "*.fur *.dmf *.mod",
+         settings.language == DIV_LANG_ENGLISH ? "another option" : _L("another option##sggu0"), "*.wav *.ttf",
+         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu8"), "*"},
         workingDirTest,
         dpiScale,
         [](const char* path) {
@@ -2013,10 +2017,10 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_TEST_OPEN_MULTI:
       if (!dirExists(workingDirTest)) workingDirTest=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        _L("Open Test (Multi)##sggu"),
-        {_L("compatible files##sggu9"), "*.fur *.dmf *.mod",
-         _L("another option##sggu1"), "*.wav *.ttf",
-         _L("all files##sggu9"), "*"},
+        settings.language == DIV_LANG_ENGLISH ? "Open Test (Multi)" : _L("Open Test (Multi)##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu9"), "*.fur *.dmf *.mod",
+         settings.language == DIV_LANG_ENGLISH ? "another option" : _L("another option##sggu1"), "*.wav *.ttf",
+         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu9"), "*"},
         workingDirTest,
         dpiScale,
         [](const char* path) {
@@ -2032,9 +2036,9 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_TEST_SAVE:
       if (!dirExists(workingDirTest)) workingDirTest=getHomeDir();
       hasOpened=fileDialog->openSave(
-        _L("Save Test##sggu"),
-        {_L("Furnace song##sggu"), "*.fur",
-         _L("DefleMask module##sggu"), "*.dmf"},
+        settings.language == DIV_LANG_ENGLISH ? "Save Test" : _L("Save Test##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "Furnace song" : _L("Furnace song##sggu"), "*.fur",
+         settings.language == DIV_LANG_ENGLISH ? "DefleMask module" : _L("DefleMask module##sggu"), "*.dmf"},
         workingDirTest,
         dpiScale
       );
@@ -2240,6 +2244,17 @@ int FurnaceGUI::load(String path) {
     showWarning(_L("you have loaded a backup!\nif you need to, please save it somewhere.\n\nDO NOT RELY ON THE BACKUP SYSTEM FOR AUTO-SAVE!\nFurnace will not save backups of backups.##sggu"),GUI_WARN_GENERIC);
   }
   return 0;
+}
+
+void FurnaceGUI::openRecentFile(String path) {
+  if (modified) {
+    nextFile=path;
+    showWarning(_L("Unsaved changes! Save changes before opening file?##sggu1"),GUI_WARN_OPEN_DROP);
+  } else {
+    if (load(path)>0) {
+      showError(fmt::sprintf("Error while loading file! (%s)",lastError));
+    }
+  }
 }
 
 void FurnaceGUI::pushRecentFile(String path) {
@@ -3630,10 +3645,7 @@ bool FurnaceGUI::loop() {
           // used for MIDI wake up
           break;
         case SDL_QUIT:
-          if (modified) {
-            showWarning(_L("Unsaved changes! Save changes before quitting?##sggu"),GUI_WARN_QUIT);
-          } else {
-            quit=true;
+          if (requestQuit()) {
             return true;
           }
           break;
@@ -4076,10 +4088,8 @@ bool FurnaceGUI::loop() {
               } else {
                 recentFile.erase(i);
                 i--;
-                if (load(item)>0) {
-                  showError(fmt::sprintf(_L("Error while loading file! (%s)##sggu1"),lastError));
-                }
               }
+              openRecentFile(item);
             }
           }
           if (recentFile.empty()) {
@@ -4271,18 +4281,19 @@ bool FurnaceGUI::loop() {
             ImGui::EndMenu();
           }
         }
+#if defined(FURNACE_DATADIR) && defined(SHOW_OPEN_ASSETS_MENU_ENTRY)
+        if (ImGui::MenuItem(_L("open built-in assets directory##sggu"))) {
+          SDL_OpenURL("file://" FURNACE_DATADIR);
+        }
+#endif
         ImGui::BeginDisabled(exitDisabledTimer);
         ImGui::Separator();
         if (ImGui::MenuItem(_L("restore backup##sggu"),BIND_FOR(GUI_ACTION_OPEN_BACKUP))) {
           doAction(GUI_ACTION_OPEN_BACKUP);
         }
         ImGui::Separator();
-        if (ImGui::MenuItem(_L("exit##sggu"))) {
-          if (modified) {
-            showWarning(_L("Unsaved changes! Save before quitting?##sggu"),GUI_WARN_QUIT);
-          } else {
-            quit=true;
-          }
+        if (ImGui::MenuItem(_L("exit...##sggu"),BIND_FOR(GUI_ACTION_QUIT))) {
+          requestQuit();
         }
         ImGui::EndDisabled();
         ImGui::EndMenu();
@@ -4332,6 +4343,8 @@ bool FurnaceGUI::loop() {
         ImGui::EndMenu();
       }
       if (ImGui::BeginMenu(settings.capitalMenuBar?_L("Window##menubar"):_L("window##menubar"))) {
+        if (ImGui::MenuItem(_L("command palette##sggu"),BIND_FOR(GUI_ACTION_COMMAND_PALETTE)))
+          displayPalette=true;
         if (ImGui::MenuItem(_L("song information##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SONG_INFO),songInfoOpen)) songInfoOpen=!songInfoOpen;
         if (ImGui::MenuItem(_L("subsongs##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SUBSONGS),subSongsOpen)) subSongsOpen=!subSongsOpen;
         if (ImGui::MenuItem(_L("speed##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SPEED),speedOpen)) speedOpen=!speedOpen;
@@ -4392,9 +4405,9 @@ bool FurnaceGUI::loop() {
         if (gp.len==2) {
           info=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Speed %d:%d" : _L("| Speed %d:%d##sggu")),gp.val[0],gp.val[1]);
         } else if (gp.len==1) {
-          info=fmt::sprintf(_L("| Speed %d##sggu"),gp.val[0]);
+          info=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Speed %d" : _L("| Speed %d##sggu")),gp.val[0]);
         } else {
-          info=_L("| Groove##sggu");
+          info=settings.language == DIV_LANG_ENGLISH ? "| Groove" : _L("| Groove##sggu");
         }
 
         info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? " @ %gHz (%g BPM) " : _L(" @ %gHz (%g BPM) ##sggu")),e->getCurHz(),calcBPM(e->getSpeeds(),e->getCurHz(),e->curSubSong->virtualTempoN,e->curSubSong->virtualTempoD));
@@ -4907,7 +4920,7 @@ bool FurnaceGUI::loop() {
             case GUI_FILE_INS_SAVE_DMP:
               if (curIns>=0 && curIns<(int)e->song.ins.size()) {
                 if (!e->song.ins[curIns]->saveDMP(copyOfName.c_str())) {
-                  showError(_L("error while saving instrument! make sure your instrument is compatible.##sggu"));
+                  showError("error while saving instrument! only the following instrument types are supported:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS##sggu");
                 } else {
                   pushRecentSys(copyOfName.c_str());
                 }
@@ -5382,6 +5395,15 @@ bool FurnaceGUI::loop() {
       }
     }
 
+    if (displayPalette) {
+      paletteSearchResults.clear();
+      paletteQuery="";
+      paletteFirstFrame=true;
+      curPaletteChoice=0;
+      displayPalette=false;
+      ImGui::OpenPopup("Command Palette");
+    }
+
     if (displayExport) {
       displayExport=false;
       ImGui::OpenPopup("Export###Export");
@@ -5423,6 +5445,14 @@ bool FurnaceGUI::loop() {
         ImGui::SetWindowSize(newSongMinSize,ImGuiCond_Always);
       }
       drawNewSong();
+      ImGui::EndPopup();
+    }
+
+    ImVec2 wsize=ImVec2(canvasW*0.9,canvasH*0.4);
+    ImGui::SetNextWindowPos(ImVec2((canvasW-wsize.x)*0.5,50*dpiScale));
+    ImGui::SetNextWindowSize(wsize,ImGuiCond_Always);
+    if (ImGui::BeginPopup("Command Palette",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings)) {
+      drawPalette();
       ImGui::EndPopup();
     }
 
@@ -6315,7 +6345,6 @@ bool FurnaceGUI::loop() {
       mustClear--;
       if (mustClear == 0) e->everythingOK();
     }
-
     else
     {
       if (initialScreenWipe>0.0f && !settings.disableFadeIn)
@@ -7171,8 +7200,13 @@ bool FurnaceGUI::finish() {
   return true;
 }
 
-void FurnaceGUI::requestQuit() {
-  quit=true;
+bool FurnaceGUI::requestQuit() {
+  if (modified) {
+    showWarning(_L("Unsaved changes! Save changes before quitting?##sggu"),GUI_WARN_QUIT);
+  } else {
+    quit=true;
+  }
+  return quit;
 }
 
 FurnaceGUI::FurnaceGUI():
@@ -7209,6 +7243,7 @@ FurnaceGUI::FurnaceGUI():
   oldWantCaptureKeyboard(false),
   displayMacroMenu(false),
   displayNew(false),
+  displayPalette(false),
   fullScreen(false),
   preserveChanPos(false),
   wantScrollList(false),
@@ -7329,6 +7364,8 @@ FurnaceGUI::FurnaceGUI():
   oldBar(-1),
   curGroove(-1),
   exitDisabledTimer(0),
+  curPaletteChoice(0),
+  curPaletteType(0),
   soloTimeout(0.0f),
   exportFadeOut(5.0),
   patExtraButtons(false),

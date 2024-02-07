@@ -62,7 +62,7 @@ std::vector<DivInstrumentType>& DivEngine::getPossibleInsTypes() {
 String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAcceptable) {
   switch (ds.systemLen) {
     case 0:
-      return "help! what's going on!##sesd";
+      return "help! what's going on!";
     case 1:
       if (ds.system[0]==DIV_SYSTEM_AY8910) {
         switch (ds.systemFlags[0].getInt("chipType",0)) {
@@ -664,6 +664,20 @@ void DivEngine::registerSystems() {
   for (int i=0; i<16; i++) {
     fmESFMPostEffectHandlerMap.emplace(0x30+i,fmESFMFixFreqFNumHandler[i/4]);
   }
+
+  EffectHandlerMap SID2PostEffectHandlerMap={
+    {0x10, {DIV_CMD_WAVE, "10xx: Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)##sesd1"}},
+    {0x11, {DIV_CMD_C64_RESONANCE, "11xx: Set resonance (0 to FF)##sesd"}},
+    {0x12, {DIV_CMD_C64_FILTER_MODE, "12xx: Set filter mode (bit 0: low pass; bit 1: band pass; bit 2: high pass)##sesd"}},
+    {0x13, {DIV_CMD_C64_RESET_MASK, "13xx: Disable envelope reset for this channel (1 disables; 0 enables)##sesd"}},
+    {0x14, {DIV_CMD_C64_FILTER_RESET, "14xy: Reset cutoff (x: on new note; y: now)##sesd"}},
+    {0x15, {DIV_CMD_C64_DUTY_RESET, "15xy: Reset pulse width (x: on new note; y: now)##sesd"}},
+    {0x16, {DIV_CMD_C64_EXTENDED, "16xy: Change other parameters##sesd"}},
+  };
+  const EffectHandler SID2FineDutyHandler(DIV_CMD_C64_FINE_DUTY, "3xxx: Set pulse width (0 to FFF)##sesd1", effectValLong<12>);
+  const EffectHandler SID2FineCutoffHandler(DIV_CMD_C64_FINE_CUTOFF, "4xxx: Set cutoff (0 to FFF)##sesd1", effectValLong<11>);
+  for (int i=0; i<16; i++) SID2PostEffectHandlerMap.emplace(0x30+i,SID2FineDutyHandler);
+  for (int i=0; i<16; i++) SID2PostEffectHandlerMap.emplace(0x40+i,SID2FineCutoffHandler);
 
   // SysDefs
 
@@ -2018,6 +2032,37 @@ void DivEngine::registerSystems() {
       {0x23, {DIV_CMD_POWERNOISE_IO_WRITE, "23xx: Write to I/O port B##sesd", constVal<1>, effectVal}},
     },
     {}
+  );
+
+  sysDefs[DIV_SYSTEM_DAVE]=new DivSysDef(
+    "DAVE", NULL, 0xd5, 0, 6, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
+    "this chip was featured in the Enterprise 128 computer. it is similar to POKEY, but with stereo output, more features and frequency precision and the ability to turn left or right (or both) channel into a 6-bit DAC for sample playback.##sesd",
+    {"Channel 1", "Channel 2", "Channel 3", "Noise", "DAC Left", "DAC Right"},
+    {"CH1", "CH2", "CH3", "NO", "L", "R"},
+    {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_NOISE, DIV_CH_PCM, DIV_CH_PCM},
+    {DIV_INS_DAVE, DIV_INS_DAVE, DIV_INS_DAVE, DIV_INS_DAVE, DIV_INS_AMIGA, DIV_INS_AMIGA},
+    {},
+    {
+      {0x10, {DIV_CMD_WAVE, "10xx: Set waveform (0 to 4; 0 to 3 on noise)##sesd"}},
+      {0x11, {DIV_CMD_STD_NOISE_MODE, "11xx: Set noise frequency source (0: fixed; 1-3: channels 1 to 3)##sesd"}},
+      {0x12, {DIV_CMD_DAVE_HIGH_PASS, "12xx: Toggle high-pass with next channel##sesd"}},
+      {0x13, {DIV_CMD_DAVE_RING_MOD, "13xx: Toggle ring modulation with channel+2##sesd"}},
+      {0x14, {DIV_CMD_DAVE_SWAP_COUNTERS, "14xx: Toggle swap counters (noise only)##sesd"}},
+      {0x15, {DIV_CMD_DAVE_LOW_PASS, "15xx: Toggle low pass (noise only)##sesd"}},
+      {0x16, {DIV_CMD_DAVE_CLOCK_DIV, "16xx: Set clock divider (0: /2; 1: /3)##sesd"}},
+    }
+  );
+
+  sysDefs[DIV_SYSTEM_SID2]=new DivSysDef(
+    "SID2", NULL, 0xf0, 0, 3, false, true, 0, false, 0, 0, 0,
+    "a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.##sesd",
+    {"Channel 1", "Channel 2", "Channel 3"},
+    {"CH1", "CH2", "CH3"},
+    {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
+    {DIV_INS_SID2, DIV_INS_SID2, DIV_INS_SID2},
+    {},
+    {},
+    SID2PostEffectHandlerMap
   );
 
   sysDefs[DIV_SYSTEM_DUMMY]=new DivSysDef(

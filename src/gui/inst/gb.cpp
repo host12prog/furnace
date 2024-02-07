@@ -66,7 +66,7 @@ void FurnaceGUI::drawInsGB(DivInstrument* ins)
         ImGui::Text(_L("Sound Length##sgiGB0"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-        P(CWSliderScalar("##GBSoundLen",ImGuiDataType_U8,&ins->gb.soundLen,&_ZERO,&_SIXTY_FOUR,ins->gb.soundLen>63?"Infinity":"%d")); rightClickable
+        P(CWSliderScalar("##GBSoundLen",ImGuiDataType_U8,&ins->gb.soundLen,&_ZERO,&_SIXTY_FOUR,ins->gb.soundLen>63?_L("Infinity##sgiGB"):"%d")); rightClickable
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();

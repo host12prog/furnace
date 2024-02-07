@@ -282,6 +282,22 @@ const char* es5506ControlModes[3]={
   "pause##sgistru", "reverse##sgistru", NULL
 };
 
+const char* daveControlBits[5]={
+  "high pass##sgistru1", "ring mod##sgistru1", "swap counters (noise)##sgistru", "low pass (noise)##sgistru", NULL
+};
+
+const char* SID2controlBits[3]={
+  "sync##sgistru1", "ring##sgistru1", NULL
+};
+
+const char* SID2filtModeBits[4]={
+  "low##sgistru1", "band##sgistru1", "high##sgistru1", NULL
+};
+
+const char* SID2waveMixModes[5]={
+  "8580 SID##sgistru", "bitwise AND##sgistru", "bitwise OR##sgistru", "bitwise XOR##sgistru", NULL
+};
+
 const int orderedOps[4]={
   0, 2, 1, 3
 };

@@ -1185,6 +1185,12 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
+    "Enterprise 128", {
+      CH(DIV_SYSTEM_DAVE, 1.0f, 0, "")
+    },
+    "tickRate=50", MENU_STATUS_USUAL
+  );
+  ENTRY(
     "BBC Micro", {
       CH(DIV_SYSTEM_SMS, 1.0f, 0,
         "clockSel=2\n"
@@ -1894,6 +1900,119 @@ void FurnaceGUI::initSystemPresets() {
         "rateSel=true\n"
       ) // ^^
     }, NULL, MENU_STATUS_LIST_END
+  );
+  ENTRY(
+    "NMK 16-bit Arcade (w/NMK112 bankswitching)##sgpr", {
+      CH(DIV_SYSTEM_YM2203, 1.0f, 0, "clockSel=5"), // 1.5MHz; optional
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=2\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ), // 4MHz
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=2\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ) // ^^
+    }, NULL, MENU_STATUS_LIST_START
+  );
+  ENTRY(
+    "NMK 16-bit Arcade (w/NMK112 bankswitching, extended channel 3)##sgpr", {
+      CH(DIV_SYSTEM_YM2203_EXT, 1.0f, 0, "clockSel=5"), // 1.5MHz; optional
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=2\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ), // 4MHz
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=2\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ) // ^^
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "NMK 16-bit Arcade (w/NMK112 bankswitching, extended channel 3 and CSM)##sgpr", {
+      CH(DIV_SYSTEM_YM2203_CSM, 1.0f, 0, "clockSel=5"), // 1.5MHz; optional
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=2\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ), // 4MHz
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=2\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ) // ^^
+    }, NULL, MENU_STATUS_LIST_END
+  );
+  ENTRY(
+    "Atlus Power Instinct 2", {
+      CH(DIV_SYSTEM_YM2203, 1.0f, 0, "clockSel=2"), // 4MHz
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=13\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ), // 3MHz
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=13\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ) // ^^
+    }, NULL, MENU_STATUS_LIST_START
+  );
+  ENTRY(
+    "Atlus Power Instinct 2 (extended channel 3)##sgpr", {
+      CH(DIV_SYSTEM_YM2203_EXT, 1.0f, 0, "clockSel=2"), // 4MHz
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=13\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ), // 3MHz
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=13\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ) // ^^
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "Atlus Power Instinct 2 (extended channel 3 and CSM)##sgpr", {
+      CH(DIV_SYSTEM_YM2203_CSM, 1.0f, 0, "clockSel=2"), // 4MHz
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=13\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ), // 3MHz
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=13\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ) // ^^
+    }, NULL, MENU_STATUS_LIST_END
+  );
+  ENTRY(
+    "Raizing/Eighting Battle Garegga", {
+      CH(DIV_SYSTEM_YM2151, 1.0f, 0, "clockSel=2"), // 4MHz
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=8\n"
+        "isBanked=true\n"
+      ) // 2MHz
+    }
+  );
+  ENTRY(
+    "Raizing/Eighting Batrider", {
+      CH(DIV_SYSTEM_YM2151, 1.0f, 0, "clockSel=2"), // 4MHz
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=15\n"
+        "isBanked=true\n"
+      ), // 3.2MHz
+      CH(DIV_SYSTEM_MSM6295, 1.0f, 0,
+        "clockSel=15\n"
+        "rateSel=true\n"
+        "isBanked=true\n"
+      ) // 3.2MHz
+    }
   );
   ENTRY(
     "Kaneko DJ Boy", {
@@ -3222,6 +3341,12 @@ void FurnaceGUI::initSystemPresets() {
       CH(DIV_SYSTEM_SM8521, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
   );
+  ENTRY(
+    "DAVE", {
+      CH(DIV_SYSTEM_DAVE, 1.0f, 0, "")
+    },
+    "tickRate=50", MENU_STATUS_USUAL
+  );
   CATEGORY_END;
 
   CATEGORY_BEGIN(_L("Modern/fantasy##sgpr"),_L("chips/systems which do not exist in reality or were made just several years ago.##sgpr"));
@@ -3245,6 +3370,11 @@ void FurnaceGUI::initSystemPresets() {
   ENTRY(
     "PowerNoise", {
       CH(DIV_SYSTEM_POWERNOISE, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "SID2", {
+      CH(DIV_SYSTEM_SID2, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
   );
   CATEGORY_END;

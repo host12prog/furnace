@@ -264,6 +264,14 @@ bool DivInstrumentESFM::Operator::operator==(const DivInstrumentESFM::Operator& 
   );
 }
 
+bool DivInstrumentSID2::operator==(const DivInstrumentSID2& other) {
+  return (
+    _C(volume) &&
+    _C(mix_mode) &&
+    _C(noise_mode)
+  );
+}
+
 bool DivInstrumentPowerNoise::operator==(const DivInstrumentPowerNoise& other) {
   return _C(octave);
 }
@@ -782,6 +790,41 @@ void DivInstrument::writeFeaturePN(SafeWriter* w) {
   FEATURE_END;
 }
 
+void DivInstrument::writeFeatureS2(SafeWriter* w) {
+  FEATURE_BEGIN("S2");
+
+  w->writeC(
+    (c64.dutyIsAbs?0x80:0)|
+    (c64.initFilter?0x40:0)|
+    (c64.toFilter?0x10:0)|
+    (c64.noiseOn?8:0)|
+    (c64.pulseOn?4:0)|
+    (c64.sawOn?2:0)|
+    (c64.triOn?1:0)
+  );
+
+  w->writeC(
+    (c64.oscSync?0x80:0)|
+    (c64.ringMod?0x40:0)|
+    (c64.noTest?0x20:0)|
+    (c64.filterIsAbs?0x10:0)|
+    (c64.ch3off?8:0)|
+    (c64.bp?4:0)|
+    (c64.hp?2:0)|
+    (c64.lp?1:0)
+  );
+
+  w->writeC(((c64.a&15)<<4)|(c64.d&15));
+  w->writeC(((c64.s&15)<<4)|(c64.r&15));
+  w->writeS(c64.duty);
+  w->writeS(c64.cut&4095);
+  w->writeC(c64.res);
+
+  w->writeC(sid2.volume | (sid2.mix_mode << 4) | (sid2.noise_mode << 6));
+
+  FEATURE_END;
+}
+
 void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bool insName) {
   size_t blockStartSeek=0;
   size_t blockEndSeek=0;
@@ -830,6 +873,7 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
   bool featureEF=false;
   bool featureE3=false;
   bool featurePN=false;
+  bool featureS2=false;
 
   bool checkForWL=false;
 
@@ -1056,6 +1100,17 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
       case DIV_INS_POWERNOISE_SLOPE:
         featurePN=true;
         break;
+      case DIV_INS_DAVE:
+        break;
+      case DIV_INS_GBA_DMA:
+        break;
+      case DIV_INS_GBA_MINMOD:
+        break;
+      case DIV_INS_KURUMITSU:
+        break;
+      case DIV_INS_SID2:
+        featureS2=true;
+        break;
       case DIV_INS_MAX:
         break;
       case DIV_INS_NULL:
@@ -1112,6 +1167,9 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
     if (powernoise!=defaultIns.powernoise) {
       featurePN=true;
     }
+    if (type == DIV_INS_SID2 && (sid2!=defaultIns.sid2 || c64!=defaultIns.c64)) {
+      featureS2=true;
+    }
   }
 
   // check ins name
@@ -1139,7 +1197,19 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
       std.get_macro(DIV_MACRO_EX5, false)->len ||
       std.get_macro(DIV_MACRO_EX6, false)->len ||
       std.get_macro(DIV_MACRO_EX7, false)->len ||
-      std.get_macro(DIV_MACRO_EX8, false)->len) {
+      std.get_macro(DIV_MACRO_EX8, false)->len ||
+      std.get_macro(DIV_MACRO_EX9, false)->len ||
+      std.get_macro(DIV_MACRO_EX10, false)->len ||
+      std.get_macro(DIV_MACRO_EX11, false)->len ||
+      std.get_macro(DIV_MACRO_EX12, false)->len ||
+      std.get_macro(DIV_MACRO_EX13, false)->len ||
+      std.get_macro(DIV_MACRO_EX14, false)->len ||
+      std.get_macro(DIV_MACRO_EX15, false)->len ||
+      std.get_macro(DIV_MACRO_EX16, false)->len ||
+      std.get_macro(DIV_MACRO_EX17, false)->len ||
+      std.get_macro(DIV_MACRO_EX18, false)->len ||
+      std.get_macro(DIV_MACRO_EX19, false)->len ||
+      std.get_macro(DIV_MACRO_EX20, false)->len) {
     featureMA=true;
   }
 
@@ -1192,7 +1262,19 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
             m.op_get_macro(DIV_MACRO_OP_SUS, false)->len ||
             m.op_get_macro(DIV_MACRO_OP_VIB, false)->len ||
             m.op_get_macro(DIV_MACRO_OP_WS, false)->len ||
-            m.op_get_macro(DIV_MACRO_OP_KSR, false)->len)
+            m.op_get_macro(DIV_MACRO_OP_KSR, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX1, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX2, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX3, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX4, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX5, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX6, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX7, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX8, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX9, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX10, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX11, false)->len ||
+            m.op_get_macro(DIV_MACRO_OP_EX12, false)->len)
         {
           featureOx[i]=true;
         }
@@ -1268,6 +1350,9 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
   }
   if (featurePN) {
     writeFeaturePN(w);
+  }
+  if (featureS2) {
+    writeFeatureS2(w);
   }
 
   if (fui && (featureSL || featureWL)) {
@@ -1969,6 +2054,54 @@ void DivInstrument::readFeaturePN(SafeReader& reader, short version) {
   READ_FEAT_END;
 }
 
+void DivInstrument::readFeatureS2(SafeReader& reader, short version) {
+  READ_FEAT_BEGIN;
+
+  unsigned char next=reader.readC();
+  c64.dutyIsAbs=next&128;
+  c64.initFilter=next&64;
+  //volIsCutoff=next&32;
+  c64.toFilter=next&16;
+  c64.noiseOn=next&8;
+  c64.pulseOn=next&4;
+  c64.sawOn=next&2;
+  c64.triOn=next&1;
+
+  next=reader.readC();
+  c64.oscSync=(next&128)?1:0;
+  c64.ringMod=(next&64)?1:0;
+  c64.noTest=next&32;
+  c64.filterIsAbs=next&16;
+  c64.ch3off=next&8;
+  c64.bp=next&4;
+  c64.hp=next&2;
+  c64.lp=next&1;
+
+  next=reader.readC();
+  c64.a=(next>>4)&15;
+  c64.d=next&15;
+
+  next=reader.readC();
+  c64.s=(next>>4)&15;
+  c64.r=next&15;
+
+  c64.duty=reader.readS()&4095;
+
+  c64.cut=reader.readS();
+  c64.res=reader.readC();
+
+//  w->writeS(c64.cut&4095);
+//  w->writeC(c64.res);
+
+  uint8_t temp = reader.readC();
+
+  sid2.volume = temp & 0xf;
+  sid2.mix_mode = (temp >> 4) & 3;
+  sid2.noise_mode = temp >> 6;
+
+  READ_FEAT_END;
+}
+
 DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, bool fui, DivSong* song, bool tildearrow_version) {
   unsigned char featCode[2];
   bool volIsCutoff=false;
@@ -2002,6 +2135,12 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
     if(type == 57) //powernoise slope inst
     {
       type = DIV_INS_POWERNOISE_SLOPE;
+      goto proceed;
+    }
+
+    if(type == 58) //powernoise slope inst
+    {
+      type = DIV_INS_DAVE;
       goto proceed;
     }
   }
@@ -2066,6 +2205,8 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
       readFeatureE3(reader,version);
     } else if (memcmp(featCode,"PN",2)==0) { // PowerNoise
       readFeaturePN(reader,version);
+    } else if (memcmp(featCode,"S2",2)==0) { // PowerNoise
+      readFeatureS2(reader,version);
     } else {
       if (song==NULL && (memcmp(featCode,"SL",2)==0 || (memcmp(featCode,"WL",2)==0))) {
         // nothing
@@ -2997,13 +3138,16 @@ bool DivInstrument::saveDMP(const char* path) {
   // guess the system
   switch (type) {
     case DIV_INS_FM:
-      // we can't tell between Genesis, Neo Geo and Arcade ins type yet
+      // we can't tell Genesis and Neo Geo apart
       w->writeC(0x02);
       w->writeC(1);
       break;
     case DIV_INS_STD:
-      // we can't tell between SMS and NES ins type yet
       w->writeC(0x03);
+      w->writeC(0);
+      break;
+    case DIV_INS_NES:
+      w->writeC(0x06);
       w->writeC(0);
       break;
     case DIV_INS_GB:
@@ -3015,12 +3159,16 @@ bool DivInstrument::saveDMP(const char* path) {
       w->writeC(0);
       break;
     case DIV_INS_PCE:
-      w->writeC(0x06);
+      w->writeC(0x05);
       w->writeC(0);
       break;
     case DIV_INS_OPLL:
       // ???
       w->writeC(0x13);
+      w->writeC(1);
+      break;
+    case DIV_INS_OPM:
+      w->writeC(0x08);
       w->writeC(1);
       break;
     case DIV_INS_OPZ:
@@ -3039,7 +3187,7 @@ bool DivInstrument::saveDMP(const char* path) {
       return false;
   }
 
-  if (type==DIV_INS_FM || type==DIV_INS_OPLL || type==DIV_INS_OPZ) {
+  if (type==DIV_INS_FM || type==DIV_INS_OPM || type==DIV_INS_OPLL || type==DIV_INS_OPZ) {
     w->writeC(fm.fms);
     w->writeC(fm.fb);
     w->writeC(fm.alg);

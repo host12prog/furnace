@@ -108,8 +108,9 @@ for other operating systems, you may [build the source](#developer-info).
   - modern/fantasy:
     - Commander X16 VERA
     - tildearrow Sound Unit
-    - Generic PCM DAC
     - PowerNoise
+    - Generic PCM DAC
+    - SID2
 - mix and match sound chips!
   - over 200 ready to use presets from computers, game consoles and arcade boards...
   - ...or create your own - up to 32 of them or a total of 128 channels!
@@ -293,6 +294,7 @@ Available options:
 | `WITH_DEMOS` | `ON` | Install demo songs on `make install` |
 | `WITH_INSTRUMENTS` | `ON` | Install demo instruments on `make install` |
 | `WITH_WAVETABLES` | `ON` | Install wavetables on `make install` |
+| `SHOW_OPEN_ASSETS_MENU_ENTRY` | `ON` | `Show option to open built-in assets directory (on supported platforms)` |
 
 (\*) `ON` if system-installed JACK detected, otherwise `OFF`
 

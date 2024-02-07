@@ -1473,6 +1473,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
     case DIV_SYSTEM_MSM6295: {
       int clockSel=flags.getInt("clockSel",0);
       bool rateSel=flags.getBool("rateSel",false);
+      bool isBanked=flags.getBool("isBanked",false);
 
       ImGui::Text(_L("Clock rate:##sgsc11"));
       ImGui::Indent();
@@ -1524,6 +1525,10 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
         clockSel=13;
         altered=true;
       }
+      if (ImGui::RadioButton("3.2MHz",clockSel==15)) {
+        clockSel=15;
+        altered=true;
+      }
       if (ImGui::RadioButton("3.58MHz",clockSel==4)) {
         clockSel=4;
         altered=true;
@@ -1549,10 +1554,15 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       }
       ImGui::Unindent();
 
+      if (ImGui::Checkbox(_L("Bankswitched (NMK112)##sgsc"),&isBanked)) {
+        altered=true;
+      }
+
       if (altered) {
         e->lockSave([&]() {
           flags.set("clockSel",clockSel);
           flags.set("rateSel",rateSel);
+          flags.set("isBanked",isBanked);
         });
       }
       break;
@@ -2268,6 +2278,23 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       if (altered) {
         e->lockSave([&]() {
           flags.set("romMode",romMode);
+        });
+      }
+      break;
+    }
+    case DIV_SYSTEM_SFX_BEEPER_QUADTONE: {
+      bool sysPal=flags.getInt("clockSel",0);
+      bool noHiss=flags.getBool("noHiss",false);
+      if (ImGui::Checkbox("PAL",&sysPal)) {
+        altered=true;
+      }
+      if (ImGui::Checkbox("Disable hissing",&noHiss)) {
+        altered=true;
+      }
+      if (altered) {
+        e->lockSave([&]() {
+          flags.set("clockSel",(int)sysPal);
+          flags.set("noHiss",noHiss);
         });
       }
       break;

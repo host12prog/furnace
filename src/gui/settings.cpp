@@ -44,7 +44,7 @@
 #endif
 
 #ifdef HAVE_FREETYPE
-#define FONT_BACKEND_DEFAULT 1
+#define FONT_BACKEND_DEFAULT 0
 #else
 #define FONT_BACKEND_DEFAULT 0
 #endif
@@ -1839,6 +1839,7 @@ void FurnaceGUI::drawSettings() {
           UI_KEYBIND_CONFIG(GUI_ACTION_FULLSCREEN);
           UI_KEYBIND_CONFIG(GUI_ACTION_TX81Z_REQUEST);
           UI_KEYBIND_CONFIG(GUI_ACTION_PANIC);
+          UI_KEYBIND_CONFIG(GUI_ACTION_QUIT);
 
           KEYBIND_CONFIG_END;
           ImGui::TreePop();
@@ -1880,6 +1881,11 @@ void FurnaceGUI::drawSettings() {
           UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_ABOUT);
           UI_KEYBIND_CONFIG(GUI_ACTION_COLLAPSE_WINDOW);
           UI_KEYBIND_CONFIG(GUI_ACTION_CLOSE_WINDOW);
+
+          UI_KEYBIND_CONFIG(GUI_ACTION_COMMAND_PALETTE);
+          UI_KEYBIND_CONFIG(GUI_ACTION_CMDPAL_RECENT);
+          UI_KEYBIND_CONFIG(GUI_ACTION_CMDPAL_INSTRUMENTS);
+          UI_KEYBIND_CONFIG(GUI_ACTION_CMDPAL_SAMPLES);
 
           KEYBIND_CONFIG_END;
           ImGui::TreePop();
@@ -3683,6 +3689,8 @@ CONFIG_SECTION(_L("Color##sgse")) {
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_ES5503,"ES5503");
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_POWERNOISE,"PowerNoise (noise)");
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_POWERNOISE_SLOPE,"PowerNoise (slope)");
+    UI_COLOR_CONFIG(GUI_COLOR_INSTR_DAVE,"DAVE");
+    UI_COLOR_CONFIG(GUI_COLOR_INSTR_SID2,"SID2");
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_UNKNOWN,"Other/Unknown");
     ImGui::TreePop();
   }
@@ -3951,6 +3959,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.language=conf.getInt("language",(int)DIV_LANG_ENGLISH);
     locale.setLanguage((DivLang)settings.language);
     initSystemPresets();
+    updateWindowTitle();
   }
 
   if (groups&GUI_SETTINGS_AUDIO) {
@@ -5591,19 +5600,18 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
     // 0x39B = Λ
     //static const ImWchar bigFontRange[]={0x20,0xFF,0x39b,0x39b,0};
 
-    if (settings.language == DIV_LANG_ENGLISH) //|| settings.language == DIV_LANG_TEMPLATE)
-    {
-      static const ImWchar bigFontRange[] = { 0x20,0xFF,0x39b,0x39b,0 };
-      if ((bigFont = ImGui::GetIO().Fonts->AddFontFromMemoryCompressedTTF(font_plexSans_compressed_data, font_plexSans_compressed_size, MAX(1, 40 * dpiScale), &fontConfB, bigFontRange)) == NULL) {
-        logE("could not load big UI font!");
-      }
-    }
-
     if(settings.language == DIV_LANG_RUSSIAN)
     {
       static const ImWchar bigFontRangeRus[] = {0x20,0xFF,0x39b,0x39b,0x400,0x451,0};
       if ((bigFont = ImGui::GetIO().Fonts->AddFontFromMemoryCompressedTTF(font_plexSans_compressed_data, font_plexSans_compressed_size, MAX(1, 40 * dpiScale), &fontConfB, bigFontRangeRus)) == NULL) {
         logE("could not load big UI font for Russian language!");
+      }
+    }
+    else
+    {
+      static const ImWchar bigFontRange[] = { 0x20,0xFF,0x39b,0x39b,0 };
+      if ((bigFont = ImGui::GetIO().Fonts->AddFontFromMemoryCompressedTTF(font_plexSans_compressed_data, font_plexSans_compressed_size, MAX(1, 40 * dpiScale), &fontConfB, bigFontRange)) == NULL) {
+        logE("could not load big UI font!");
       }
     }
 
