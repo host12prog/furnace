@@ -58,7 +58,6 @@ void DivLocale::addTranslationsPolish()
     strings["-- additional feedback/fixes --##sgab"].plurals[0] = "-- dodatkowe opinie/poprawki --";
     strings["-- translations and related work --##sgab"].plurals[0] = "-- tłumaczenia --";
     strings["LTVA1 (Russian translation)##sgab"].plurals[0] = "LTVA1 (tłumaczenie na język rosyjski)";
-    strings["freq-mod (Polish translation)##sgab"].plurals[0] = "freq-mod (tłumaczenie na język polski)";
 
     strings["powered by:##sgab"].plurals[0] = "z użyciem następujących komponentów:";
     strings["Dear ImGui by Omar Cornut##sgab"].plurals[0] = "Dear ImGui autorstwa Omara Cornuta";
@@ -241,7 +240,7 @@ void DivLocale::addTranslationsPolish()
     //   sgcf  src/gui/compatFlags.cpp
 
     strings["Compatibility Flags###Compatibility Flags"].plurals[0] = "Flagi kompatybilności###Compatibility Flags";
-    strings["these flags are designed to provide better DefleMask/older Furnace compatibility.\nit is recommended to disable most of these unless you rely on specific quirks.##sgcf"].plurals[0] = "эти флаги предназначены для лучшей совместимости с DefleMask/стрыми версиями Furnace.\nрекомендуется отключать большинство из них, если вы не полагаетесь на специфику работы программы, которую они обеспечивают.";
+    strings["these flags are designed to provide better DefleMask/older Furnace compatibility.\nit is recommended to disable most of these unless you rely on specific quirks.##sgcf"].plurals[0] = "flagi te zostały zaprojektowane dla lepszej kompatybilności z DefleMaskiem/starszymi wersjami Furnace.\nрекомендуется отключать большинство из них, если вы не полагаетесь на специфику работы программы, которую они обеспечивают.";
     strings["Game Boy instrument duty is wave volume##sgcf"].plurals[0] = "Макрос скважности инструмента Game Boy контролирует громкость канала волновых таблиц";
     strings["if enabled, an instrument with duty macro in the wave channel will be mapped to wavetable volume.##sgcf"].plurals[0] = "при включении макрос скважности инструмента будет назначен для контроля громкости канала волновых таблиц.";
     strings["Restart macro on portamento##sgcf"].plurals[0] = "Перезапуск макроса при портаменто";
@@ -611,7 +610,7 @@ void DivLocale::addTranslationsPolish()
     strings["cannot remove chip! (##sggu"].plurals[0] = "nie mozna usunąć ukladu! (";
     strings["open built-in assets directory##sggu"].plurals[0] = "otwórz wbudowany folder z zasobami";
     strings["restore backup##sggu"].plurals[0] = "przywróć kopię zapasową";
-    strings["exit##sggu"].plurals[0] = "wyjdz";
+    strings["exit##sggu"].plurals[0] = "wyjdź";
     strings["Unsaved changes! Save before quitting?##sggu"].plurals[0] = "Niezapisane zmiany! Czy zapisać je przed wyjściem?";
     strings["Edit##menubar"].plurals[0] = "Edytuj##menubar";
     strings["edit##menubar"].plurals[0] = "edytuj##menubar";
@@ -1184,7 +1183,7 @@ void DivLocale::addTranslationsPolish()
     strings["Play##sgec1"].plurals[0] = "Odtwarzaj";
     strings["Step one row##sgec1"].plurals[0] = "Сделать один шаг по паттерну";
     strings["Repeat pattern##sgec1"].plurals[0] = "Зациклить текущий паттерн";
-    strings["Edit##sgec1"].plurals[0] = "Режим редактирования";
+    strings["Edit##sgec1"].plurals[0] = "Tryb edycji";
     strings["Metronome##sgec1"].plurals[0] = "Metronom";
     strings["Octave##sgec1"].plurals[0] = "Oktawa";
     strings["Edit Step##sgec1"].plurals[0] = "Krok edycji";
@@ -1198,7 +1197,7 @@ void DivLocale::addTranslationsPolish()
     strings["Stop##sgec2"].plurals[0] = "Stop";
     strings["Step one row##sgec2"].plurals[0] = "Сделать один шаг по паттерну";
     strings["Repeat pattern##sgec2"].plurals[0] = "Зациклить текущий паттерн";
-    strings["Edit##sgec2"].plurals[0] = "Режим редактирования";
+    strings["Edit##sgec2"].plurals[0] = "Tryb edycji";
     strings["Metronome##sgec2"].plurals[0] = "Metronom";
     strings["Oct.##sgec"].plurals[0] = "Okt.";
     strings["Octave##sgec2"].plurals[0] = "Oktawa";
@@ -1273,8 +1272,8 @@ void DivLocale::addTranslationsPolish()
             "- pp: pattern index (one per channel)\n\n"
             "pattern indexes are ordered as they appear in the song."].plurals[0] = 
 
-            "вставляет блоки данных в местах смены паттернов.\n"
-            "полезно, если вы пишете программу для воспроизведения.\n\n"
+            "wstawia bloki danych przy zmianie wzorca.\n"
+            "przydatne podczas pisania programu do odtwarzania.\n\n"
             "формат блока данных при смене паттерна:\n"
             "67 66 FE ll ll ll ll 01 oo rr pp pp pp ...\n"
             "- ll: długość, liczba 32-bitowa, bezpośrednia kolejność bajtów (little endian)\n"
@@ -1319,7 +1318,7 @@ void DivLocale::addTranslationsPolish()
     strings["Done! Baked %d files.##sgeo"].plurals[0] = "Gotowe! Wstawiono %d plik.";
     strings["Done! Baked %d files.##sgeo"].plurals[1] = "Gotowe! Wstawiono %d pliki.";
     strings["Done! Baked %d files.##sgeo"].plurals[2] = "Gotowe! Wstawiono %d plików.";
-    strings["this option exports the song to a text file.\n##sgeo"].plurals[0] = "эта опция позволяет экспортировать трек в текстовый файл.\n";
+    strings["this option exports the song to a text file.\n##sgeo"].plurals[0] = "ta opcja eksportuje piosenkę do pliku tekstowego\n";
     strings["Cancel##sgeo7"].plurals[0] = "Anuluj";
     strings["Export##sgeo6"].plurals[0] = "Eksportuj";
     strings["this option exports a text or binary file which\n"
@@ -1391,7 +1390,7 @@ void DivLocale::addTranslationsPolish()
     strings["To##sgfr"].plurals[0] = "Do";
     strings["Match effect position:##sgfr"].plurals[0] = "Dopasuj położenie efektu:";
     strings["No##sgfr"].plurals[0] = "Nie";
-    strings["match effects regardless of position.##sgfr"].plurals[0] = "эффекты обнаруживаются вне зависимости от положения.";
+    strings["match effects regardless of position.##sgfr"].plurals[0] = "dopasuj efekty niezależnie od położenia.";
     strings["Lax##sgfr"].plurals[0] = "Luźno";
     strings["match effects only if they appear in-order.##sgfr"].plurals[0] = "эффекты обнаруживаются, если они идут в правильном порядке.";
     strings["Strict##sgfr"].plurals[0] = "Ściśle";
@@ -1492,10 +1491,10 @@ void DivLocale::addTranslationsPolish()
     strings["Duplicate order at end of song (right-click to deep clone)##sgor"].plurals[0] = "Sklonuj rząd i wstaw na koniec utworu (PPM by glęboko sklonować)";
     strings["Order change mode: entire row##sgor"].plurals[0] = "Tryb zmiany: cały rząd";
     strings["Order change mode: one##sgor"].plurals[0] = "Tryb zmiany: jedna komórka";
-    strings["Order edit mode: Select and type (scroll vertically)##sgor"].plurals[0] = "Режим редактирования: Выбрать и печатать (вертикальная прокрутка)";
-    strings["Order edit mode: Select and type (scroll horizontally)##sgor"].plurals[0] = "Режим редактирования: Выбрать и печатать (горизонтальная прокрутка)";
-    strings["Order edit mode: Select and type (don't scroll)##sgor"].plurals[0] = "Режим редактирования: Выбрать и печатать (без прокрутки)";
-    strings["Order edit mode: Click to change##sgor"].plurals[0] = "Режим редактирования: нажмите для изменения";
+    strings["Order edit mode: Select and type (scroll vertically)##sgor"].plurals[0] = "Tryb edycji: Выбрать и печатать (вертикальная прокрутка)";
+    strings["Order edit mode: Select and type (scroll horizontally)##sgor"].plurals[0] = "Tryb edycji: Выбрать и печатать (горизонтальная прокрутка)";
+    strings["Order edit mode: Select and type (don't scroll)##sgor"].plurals[0] = "Tryb edycji: Выбрать и печатать (без прокрутки)";
+    strings["Order edit mode: Click to change##sgor"].plurals[0] = "Tryb edycji: нажмите для изменения";
 
     //   sgos  src/gui/osc.cpp
 
@@ -1917,11 +1916,11 @@ void DivLocale::addTranslationsPolish()
     strings["%s (%s)\n%d bytes free##sgse"].plurals[1] = "%s (%s)\nсвободно %d байта";
     strings["%s (%s)\n%d bytes free##sgse"].plurals[2] = "%s (%s)\nсвободно %d байт";
     strings["\n\nnot enough memory for this sample!##sgse"].plurals[0] = "\n\nнедостаточно памяти для этого сэмпла!";
-    strings["Edit mode: Select##sgse"].plurals[0] = "Режим редактирования: выделение";
-    strings["Edit mode: Draw##sgse"].plurals[0] = "Режим редактирования: рисование";
-    strings["Resize##sgse0"].plurals[0] = "Масштабировать";
+    strings["Edit mode: Select##sgse"].plurals[0] = "Tryb edycji: zaznaczanie";
+    strings["Edit mode: Draw##sgse"].plurals[0] = "Tryb edycji: rysowanie";
+    strings["Resize##sgse0"].plurals[0] = "Skaluj";
     strings["Samples##sgse0"].plurals[0] = "Сэмплов (новый размер)";
-    strings["Resize##sgse1"].plurals[0] = "Масштабировать";
+    strings["Resize##sgse1"].plurals[0] = "Skaluj";
     strings["couldn't resize! make sure your sample is 8 or 16-bit.##sgse"].plurals[0] = "не получилось отмасштабировать! убедитесь, что это 8- или 16-битный сэмпл.";
     strings["Resample##sgse0"].plurals[0] = "Изменить частоту дискретизации";
     strings["Rate##sgse1"].plurals[0] = "Частота";
@@ -5281,4 +5280,114 @@ void DivLocale::addTranslationsPolish()
     strings["ZX Spectrum Beeper (QuadTone Engine)##sesd"].plurals[0] = "Brzęczyk ZX Spectrum (silnik QuadTone)";
     strings["ESS ES1xxx series (ESFM)##sesd"].plurals[0] = "ESS serii ES1xxx (ESFM)";
     strings["Dummy System##sesd"].plurals[0] = "System-wydmuszka";
+
+     //channel names
+
+    strings["Channel 1##sesd"].plurals[0] = "Kanał 1";
+    strings["Channel 2##sesd"].plurals[0] = "Kanał 2";
+    strings["Channel 3##sesd"].plurals[0] = "Kanał 3";
+    strings["Channel 4##sesd"].plurals[0] = "Kanał 4";
+    strings["Channel 5##sesd"].plurals[0] = "Kanał 5";
+    strings["Channel 6##sesd"].plurals[0] = "Kanał 6";
+    strings["Channel 7##sesd"].plurals[0] = "Kanał 7";
+    strings["Channel 8##sesd"].plurals[0] = "Kanał 8";
+    strings["Channel 9##sesd"].plurals[0] = "Kanał 9";
+    strings["Channel 10##sesd"].plurals[0] = "Kanał 10";
+    strings["Channel 11##sesd"].plurals[0] = "Kanał 11";
+    strings["Channel 12##sesd"].plurals[0] = "Kanał 12";
+    strings["Channel 13##sesd"].plurals[0] = "Kanał 13";
+    strings["Channel 14##sesd"].plurals[0] = "Kanał 14";
+    strings["Channel 15##sesd"].plurals[0] = "Kanał 15";
+    strings["Channel 16##sesd"].plurals[0] = "Kanał 16";
+    strings["Channel 17##sesd"].plurals[0] = "Kanał 17";
+    strings["Channel 18##sesd"].plurals[0] = "Kanał 18";
+    strings["Channel 19##sesd"].plurals[0] = "Kanał 19";
+    strings["Channel 20##sesd"].plurals[0] = "Kanał 20";
+    strings["Channel 21##sesd"].plurals[0] = "Kanał 21";
+    strings["Channel 22##sesd"].plurals[0] = "Kanał 22";
+    strings["Channel 23##sesd"].plurals[0] = "Kanał 23";
+    strings["Channel 24##sesd"].plurals[0] = "Kanał 24";
+    strings["Channel 25##sesd"].plurals[0] = "Kanał 25";
+    strings["Channel 26##sesd"].plurals[0] = "Kanał 26";
+    strings["Channel 27##sesd"].plurals[0] = "Kanał 27";
+    strings["Channel 28##sesd"].plurals[0] = "Kanał 28";
+    strings["Channel 29##sesd"].plurals[0] = "Kanał 29";
+    strings["Channel 30##sesd"].plurals[0] = "Kanał 30";
+    strings["Channel 31##sesd"].plurals[0] = "Kanał 31";
+    strings["Channel 32##sesd"].plurals[0] = "Kanał 32";
+
+    strings["Square 1##sesd"].plurals[0] = "Kwadrat 1";
+    strings["Square 2##sesd"].plurals[0] = "Kwadrat 2";
+    strings["Square 3##sesd"].plurals[0] = "Kwadrat 3";
+
+    strings["Pulse##sesd"].plurals[0] = "Prostokąt";
+
+    strings["Pulse 1##sesd"].plurals[0] = "Prostokąt 1";
+    strings["Pulse 2##sesd"].plurals[0] = "Prostokąt 2";
+
+    strings["Wave##sesd"].plurals[0] = "Fala";
+    strings["Wavetable##sesd"].plurals[0] = "Tabl. fali";
+
+    strings["Triangle##sesd"].plurals[0] = "Trójkąt";
+
+    strings["PCM##sesd"].plurals[0] = "PCM";
+
+    strings["PCM 1##sesd"].plurals[0] = "PCM 1";
+    strings["PCM 2##sesd"].plurals[0] = "PCM 2";
+    strings["PCM 3##sesd"].plurals[0] = "PCM 3";
+    strings["PCM 4##sesd"].plurals[0] = "PCM 4";
+    strings["PCM 5##sesd"].plurals[0] = "PCM 5";
+    strings["PCM 6##sesd"].plurals[0] = "PCM 6";
+    strings["PCM 7##sesd"].plurals[0] = "PCM 7";
+    strings["PCM 8##sesd"].plurals[0] = "PCM 8";
+    strings["PCM 9##sesd"].plurals[0] = "PCM 9";
+    strings["PCM 10##sesd"].plurals[0] = "PCM 10";
+    strings["PCM 11##sesd"].plurals[0] = "PCM 11";
+    strings["PCM 12##sesd"].plurals[0] = "PCM 12";
+    strings["PCM 13##sesd"].plurals[0] = "PCM 13";
+    strings["PCM 14##sesd"].plurals[0] = "PCM 14";
+    strings["PCM 15##sesd"].plurals[0] = "PCM 15";
+    strings["PCM 16##sesd"].plurals[0] = "PCM 16";
+    strings["PCM 17##sesd"].plurals[0] = "PCM 17";
+    strings["PCM 18##sesd"].plurals[0] = "PCM 18";
+    strings["PCM 19##sesd"].plurals[0] = "PCM 19";
+    strings["PCM 20##sesd"].plurals[0] = "PCM 20";
+    strings["PCM 21##sesd"].plurals[0] = "PCM 21";
+    strings["PCM 22##sesd"].plurals[0] = "PCM 22";
+    strings["PCM 23##sesd"].plurals[0] = "PCM 23";
+    strings["PCM 24##sesd"].plurals[0] = "PCM 24";
+
+    strings["DPCM##sesd"].plurals[0] = "DPCM";
+
+    strings["ADPCM##sesd"].plurals[0] = "ADPCM";
+
+    strings["ADPCM 1##sesd"].plurals[0] = "ADPCM 1";
+    strings["ADPCM 2##sesd"].plurals[0] = "ADPCM 2";
+    strings["ADPCM 3##sesd"].plurals[0] = "ADPCM 3";
+
+    strings["ADPCM-A 1##sesd"].plurals[0] = "ADPCM-A 1";
+    strings["ADPCM-A 2##sesd"].plurals[0] = "ADPCM-A 2";
+    strings["ADPCM-A 3##sesd"].plurals[0] = "ADPCM-A 3";
+    strings["ADPCM-A 4##sesd"].plurals[0] = "ADPCM-A 4";
+    strings["ADPCM-A 5##sesd"].plurals[0] = "ADPCM-A 5";
+    strings["ADPCM-A 6##sesd"].plurals[0] = "ADPCM-A 6";
+
+    strings["ADPCM-B##sesd"].plurals[0] = "ADPCM-B";
+
+    strings["Sample##sesd"].plurals[0] = "Sampel";
+
+    strings["DAC Left##sesd"].plurals[0] = "DAC Lewy";
+    strings["DAC Right##sesd"].plurals[0] = "DAC Prawy";
+
+
+    strings["Noise##sesd"].plurals[0] = "Szum";
+
+    strings["Noise 1##sesd"].plurals[0] = "Szum 1";
+    strings["Noise 2##sesd"].plurals[0] = "Szum 2";
+    strings["Noise 3##sesd"].plurals[0] = "Szum 3";
+
+    strings["Slope##sesd"].plurals[0] = "Spadek";
+
+    strings["FM 6/PCM 1##sesd"].plurals[0] = "FM 6/PCM 1";
+    strings["CSM Timer##sesd"].plurals[0] = "Timer CSM";
 }
