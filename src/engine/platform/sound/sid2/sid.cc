@@ -611,6 +611,39 @@ void SID2::clock()
     {
       filter[i].clock(last_chan_out[i], ext_in);
     }
+
+    else if(filter[i].filt) //(sort of smoothly) remove DC offset that emerges because filter is frozen (and enabled)
+    {
+      if(filter[i].Vbp > 0)
+      {
+        filter[i].Vbp--;
+      }
+
+      if(filter[i].Vhp > 0)
+      {
+        filter[i].Vhp--;
+      }
+
+      if(filter[i].Vlp > 0)
+      {
+        filter[i].Vlp--;
+      }
+
+      if(filter[i].Vbp < 0)
+      {
+        filter[i].Vbp++;
+      }
+
+      if(filter[i].Vhp < 0)
+      {
+        filter[i].Vhp++;
+      }
+
+      if(filter[i].Vlp < 0)
+      {
+        filter[i].Vlp++;
+      }
+    }
   }
 
   // Clock external filter.
