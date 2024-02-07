@@ -30,22 +30,15 @@ public:
 
   sound_sample last_chan_out[3];
 
-  sound_sample get_dc(int ch);
   void set_is_muted(int ch, bool val);
   void set_chip_model(chip_model2 model);
   void enable_filter(bool enable);
   void enable_external_filter(bool enable);
-  bool set_sampling_parameters(double clock_freq, sampling_method2 method,
-			       double sample_freq, double pass_freq = -1,
-			       double filter_scale = 0.97);
-  void adjust_sampling_frequency(double sample_freq);
 
   void fc_default(const fc_point*& points, int& count);
   PointPlotter2<sound_sample> fc_plotter();
 
   void clock();
-  void clock(cycle_count delta_t);
-  int clock(cycle_count& delta_t, short* buf, int n, int interleave = 1);
   void reset();
   
   // Read/write registers.
@@ -74,24 +67,10 @@ public:
     bool hold_zero[3];
   };
 
-  // 16-bit input (EXT IN).
-  void input(int sample);
-
   // 16-bit output (AUDIO OUT).
   int output();
-  // n-bit output.
-  int output(int bits);
 
 protected:
-  static double I0(double x2);
-  RESID_INLINE int clock_fast(cycle_count& delta_t, short* buf, int n,
-			      int interleave);
-  RESID_INLINE int clock_interpolate(cycle_count& delta_t, short* buf, int n,
-				     int interleave);
-  RESID_INLINE int clock_resample_interpolate(cycle_count& delta_t, short* buf,
-					      int n, int interleave);
-  RESID_INLINE int clock_resample_fast(cycle_count& delta_t, short* buf,
-				       int n, int interleave);
 
   Voice2 voice[3];
   Filter2 filter[3];

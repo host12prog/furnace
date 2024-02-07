@@ -187,10 +187,6 @@ void Filter2::set_w0()
   // Limit f0 to 16kHz to keep 1 cycle filter stable.
   const float w0_max_1 = (2.0*pi*16000.0) / 1000000.0;
   w0_ceil_1 = w0 <= w0_max_1 ? w0 : w0_max_1;
-
-  // Limit f0 to 4kHz to keep delta_t cycle filter stable.
-  const sound_sample w0_max_dt = static_cast<sound_sample>(2*pi*4000*1.048576);
-  w0_ceil_dt = w0 <= w0_max_dt ? w0 : w0_max_dt;
 }
 
 // Set filter resonance.

@@ -127,10 +127,6 @@ public:
   RESID_INLINE
   void clock(sound_sample voice,
 	     sound_sample ext_in);
-  RESID_INLINE
-  void clock(cycle_count delta_t,
-  	     sound_sample voice,
-	     sound_sample ext_in);
   void reset();
 
   // Write registers.
@@ -175,7 +171,7 @@ protected:
   sound_sample Vnf; // not filtered
 
   // Cutoff frequency, resonance.
-  float w0, w0_ceil_1, w0_ceil_dt;
+  float w0, w0_ceil_1;
   float _1024_div_Q;
 
   // Cutoff frequency tables.
@@ -250,80 +246,6 @@ void Filter2::clock(sound_sample voice, sound_sample ext_in)
   Vlp -= dVlp;
   Vhp = (Vbp * _1024_div_Q) - Vlp - Vi;
 }
-
-// ----------------------------------------------------------------------------
-// SID2 clocking - delta_t cycles.
-// ----------------------------------------------------------------------------
-RESID_INLINE
-void Filter2::clock(cycle_count delta_t,
-		   sound_sample voice,
-		   sound_sample ext_in)
-{
-  // Scale each voice down from 20 to 13 bits.
-  voice >>= 7;
-
-  (void)(ext_in);
-
-  // Enable filter on/off.
-  // This is not really part of SID2, but is useful for testing.
-  // On slow CPUs it may be necessary to bypass the filter to lower the CPU
-  // load.
-  if (!enabled) 
-  {
-    Vnf = voice;
-    Vhp = Vbp = Vlp = 0;
-    return;
-  }
-
-  // Route voices into or around filter.
-  // The code below is expanded to a switch for faster execution.
-  // (filt1 ? Vi : Vnf) += voice1;
-  // (filt2 ? Vi : Vnf) += voice2;
-  // (filt3 ? Vi : Vnf) += voice3;
-
-  sound_sample Vi;
-
-  if(filt)
-  {
-    Vnf = 0;
-    Vi = voice;
-  }
-  else
-  {
-    Vnf = voice;
-    Vi = 0;
-    return;
-  }
-
-  // Maximum delta cycles for the filter to work satisfactorily under current
-  // cutoff frequency and resonance constraints is approximately 8.
-  cycle_count delta_t_flt = 8;
-
-  while (delta_t) {
-    if (delta_t < delta_t_flt) {
-      delta_t_flt = delta_t;
-    }
-
-    // delta_t is converted to seconds given a 1MHz clock by dividing
-    // with 1 000 000. This is done in two operations to avoid integer
-    // multiplication overflow.
-
-    // Calculate filter outputs.
-    // Vhp = Vbp/Q - Vlp - Vi;
-    // dVbp = -w0*Vhp*dt;
-    // dVlp = -w0*Vbp*dt;
-    float w0_delta_t = w0_ceil_dt*delta_t_flt / 64.0;
-
-    float dVbp = ((float)w0_delta_t * Vhp / (1 << 14));
-    float dVlp = ((float)w0_delta_t * Vbp / (1 << 14));
-    Vbp -= dVbp;
-    Vlp -= dVlp;
-    Vhp = (Vbp * (float)_1024_div_Q) - Vlp - Vi;
-
-    delta_t -= delta_t_flt;
-  }
-}
-
 
 // ----------------------------------------------------------------------------
 // SID2 audio output (20 bits).

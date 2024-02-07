@@ -41,7 +41,6 @@ public:
   void set_chip_model(chip_model2 model);
 
   RESID_INLINE void clock(sound_sample Vi);
-  RESID_INLINE void clock(cycle_count delta_t, sound_sample Vi);
   void reset();
 
   // Audio output (20 bits).
@@ -82,48 +81,6 @@ RESID_INLINE
 void ExternalFilter2::clock(sound_sample Vi)
 {
   Vo = Vi;
-}
-
-// ----------------------------------------------------------------------------
-// SID2 clocking - delta_t cycles.
-// ----------------------------------------------------------------------------
-RESID_INLINE
-void ExternalFilter2::clock(cycle_count delta_t,
-			   sound_sample Vi)
-{
-  // This is handy for testing.
-  if (!enabled) {
-    // Remove maximum DC level since there is no filter to do it.
-    Vlp = Vhp = 0;
-    Vo = Vi - mixer_DC;
-    return;
-  }
-
-  // Maximum delta cycles for the external filter to work satisfactorily
-  // is approximately 8.
-  cycle_count delta_t_flt = 8;
-
-  while (delta_t) {
-    if (delta_t < delta_t_flt) {
-      delta_t_flt = delta_t;
-    }
-
-    // delta_t is converted to seconds given a 1MHz clock by dividing
-    // with 1 000 000.
-
-    // Calculate filter outputs.
-    // Vo  = Vlp - Vhp;
-    // Vlp = Vlp + w0lp*(Vi - Vlp)*delta_t;
-    // Vhp = Vhp + w0hp*(Vlp - Vhp)*delta_t;
-
-    sound_sample dVlp = (w0lp*delta_t_flt >> 8)*(Vi - Vlp) >> 12;
-    sound_sample dVhp = w0hp*delta_t_flt*(Vlp - Vhp) >> 20;
-    Vo = Vlp - Vhp;
-    Vlp += dVlp;
-    Vhp += dVhp;
-
-    delta_t -= delta_t_flt;
-  }
 }
 
 

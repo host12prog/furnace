@@ -69,8 +69,6 @@ short DivPlatformSID2::runFakeFilter(unsigned char ch, int in) {
 
 void DivPlatformSID2::acquire(short** buf, size_t len) 
 {
-  int dcOff=sid2->get_dc(0);
-
   for (size_t i=0; i<len; i++) 
   {
     if (!writes.empty()) 
@@ -86,9 +84,9 @@ void DivPlatformSID2::acquire(short** buf, size_t len)
     if (++writeOscBuf>=16) 
     {
       writeOscBuf=0;
-      oscBuf[0]->data[oscBuf[0]->needle++]=runFakeFilter(0,(sid2->last_chan_out[0]-dcOff)>>5);
-      oscBuf[1]->data[oscBuf[1]->needle++]=runFakeFilter(1,(sid2->last_chan_out[1]-dcOff)>>5);
-      oscBuf[2]->data[oscBuf[2]->needle++]=runFakeFilter(2,(sid2->last_chan_out[2]-dcOff)>>5);
+      oscBuf[0]->data[oscBuf[0]->needle++]=runFakeFilter(0,(sid2->last_chan_out[0])>>5);
+      oscBuf[1]->data[oscBuf[1]->needle++]=runFakeFilter(1,(sid2->last_chan_out[1])>>5);
+      oscBuf[2]->data[oscBuf[2]->needle++]=runFakeFilter(2,(sid2->last_chan_out[2])>>5);
     }
   }
 }
