@@ -34,7 +34,6 @@ SID2::SID2()
   voice[1].set_sync_source(&voice[0]);
   voice[2].set_sync_source(&voice[1]);
 
-
   bus_value = 0;
   bus_value_ttl = 0;
 
@@ -87,7 +86,8 @@ void SID2::set_chip_model(chip_model2 model)
 // ----------------------------------------------------------------------------
 void SID2::reset()
 {
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < 3; i++)
+  {
     voice[i].reset();
     filter[i].reset();
   }
@@ -378,7 +378,7 @@ void SID2::clock()
   // Clock filter.
   for(int i = 0; i < 3; i++)
   {
-    if (voice[i].envelope.envelope_counter != 0)
+    if (voice[i].envelope.envelope_counter != 0) //clock filter only when there is signal (when signal is constant (no sound) filter makes CPU load skyrocket!)
     {
       filter[i].clock(last_chan_out[i], ext_in);
     }

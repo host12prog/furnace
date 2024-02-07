@@ -204,6 +204,7 @@ void WaveformGenerator2::synchronize()
   // not be synced. This has been verified by sampling OSC3.
   if (msb_rising && sync_dest->sync && !(sync && sync_source->msb_rising)) {
     sync_dest->accumulator = 0;
+    sync_dest->shift_register = 0x7ffff8;
   }
 }
 
