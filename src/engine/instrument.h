@@ -93,6 +93,10 @@ enum DivInstrumentType: unsigned short {
   DIV_INS_POWERNOISE=57,
   DIV_INS_POWERNOISE_SLOPE=58,
   DIV_INS_DAVE=59,
+  DIV_INS_GBA_DMA=60,
+  DIV_INS_GBA_MINMOD=61,
+  DIV_INS_KURUMITSU=62,
+  DIV_INS_SID2=63,
   DIV_INS_MAX,
   DIV_INS_NULL
 };
@@ -934,6 +938,21 @@ struct DivInstrumentPowerNoise {
     octave(0) {}
 };
 
+struct DivInstrumentSID2 {
+  unsigned char volume;
+  unsigned char mix_mode;
+  unsigned char noise_mode;
+
+  bool operator==(const DivInstrumentSID2& other);
+  bool operator!=(const DivInstrumentSID2& other) {
+    return !(*this==other);
+  }
+  DivInstrumentSID2():
+    volume(15),
+    mix_mode(0),
+    noise_mode(0) {}
+};
+
 struct DivInstrument {
   String name;
   DivInstrumentType type;
@@ -953,6 +972,7 @@ struct DivInstrument {
   DivInstrumentESFM esfm;
   DivInstrumentES5503 es5503;
   DivInstrumentPowerNoise powernoise;
+  DivInstrumentSID2 sid2;
 
   /**
    * these are internal functions.
@@ -980,6 +1000,7 @@ struct DivInstrument {
   void writeFeatureEF(SafeWriter* w);
   void writeFeatureE3(SafeWriter* w);
   void writeFeaturePN(SafeWriter* w);
+  void writeFeatureS2(SafeWriter* w);
 
   void readFeatureNA(SafeReader& reader, short version);
   void readFeatureFM(SafeReader& reader, short version);
@@ -1003,6 +1024,7 @@ struct DivInstrument {
   void readFeatureEF(SafeReader& reader, short version);
   void readFeatureE3(SafeReader& reader, short version);
   void readFeaturePN(SafeReader& reader, short version);
+  void readFeatureS2(SafeReader& reader, short version);
 
   DivDataErrors readInsDataOld(SafeReader& reader, short version, bool tildearrow_version);
   DivDataErrors readInsDataNew(SafeReader& reader, short version, bool fui, DivSong* song, bool tildearrow_version);

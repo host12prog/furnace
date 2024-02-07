@@ -3351,6 +3351,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgiC140   src/gui/inst/c140.cpp
     //   sgiC219   src/gui/inst/c219.cpp
     //   sgiC64    src/gui/inst/c64.cpp
+    //   sgiDAVE   src/gui/inst/dave.cpp
     //   sgi5503   src/gui/inst/es5503.cpp
     //   sgiOTTO   src/gui/inst/es5506.cpp
     //   sgiESFM   src/gui/inst/esfm.cpp
@@ -3389,6 +3390,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgismpd   src/gui/inst/sampleDraw.cpp
     //   sgiSCC    src/gui/inst/scc.cpp
     //   sgiSEGA   src/gui/inst/segapcm.cpp
+    //   sgiSID2   src/gui/inst/sid2.cpp
     //   sgiSM     src/gui/inst/sm8521.cpp
     //   sgiSNES   src/gui/inst/snes.cpp
     //   sgiPSG    src/gui/inst/std.cpp
@@ -4219,6 +4221,54 @@ void DivLocale::addTranslationsTemplate()
     strings["Panning (right)##sgiSEGA"].plurals[0] = "=Panning (right)";
     strings["Phase Reset##sgiSEGA"].plurals[0] = "=Phase Reset";
 
+    //   sgiSID2   src/gui/inst/sid2.cpp
+
+    strings["Waveform##sgiSID2"].plurals[0] = "=Waveform";
+    strings["tri##sgiSID2"].plurals[0] = "=tri";
+    strings["saw##sgiSID2"].plurals[0] = "=saw";
+    strings["pulse##sgiSID2"].plurals[0] = "=pulse";
+    strings["noise##sgiSID2"].plurals[0] = "=noise";
+    strings["A##sgiSID2"].plurals[0] = "=A";
+    strings["D##sgiSID2"].plurals[0] = "=D";
+    strings["S##sgiSID2"].plurals[0] = "=S";
+    strings["R##sgiSID2"].plurals[0] = "=R";
+    strings["VOL##sgiSID2"].plurals[0] = "=VOL";
+    strings["Envelope##sgiSID2"].plurals[0] = "=Envelope";
+    strings["Duty##sgiSID2"].plurals[0] = "=Duty";
+    strings["Ring Modulation##sgiSID2"].plurals[0] = "=Ring Modulation";
+    strings["Oscillator Sync##sgiSID2"].plurals[0] = "=Oscillator Sync";
+    strings["Enable filter##sgiSID2"].plurals[0] = "=Enable filter";
+    strings["Initialize filter##sgiSID2"].plurals[0] = "=Initialize filter";
+    strings["Cutoff##sgiSID2"].plurals[0] = "=Cutoff";
+    strings["Resonance##sgiSID2"].plurals[0] = "=Resonance";
+    strings["Filter Mode##sgiSID2"].plurals[0] = "=Filter Mode";
+    strings["low##sgiSID2"].plurals[0] = "=low";
+    strings["band##sgiSID2"].plurals[0] = "=band";
+    strings["high##sgiSID2"].plurals[0] = "=high";
+    strings["Noise Mode##sgiSID2"].plurals[0] = "=Noise Mode";
+    strings["Wave Mix Mode##sgiSID2"].plurals[0] = "=Wave Mix Mode";
+    strings["Absolute Cutoff Macro##sgiSID2"].plurals[0] = "=Absolute Cutoff Macro";
+    strings["Absolute Duty Macro##sgiSID2"].plurals[0] = "=Absolute Duty Macro";
+    strings["Macros##sgiSID2"].plurals[0] = "=Macros";
+    strings["Volume##sgiSID2"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiSID2"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiSID2"].plurals[0] = "=Pitch";
+    strings["Duty##sgiSID21"].plurals[0] = "=Duty";
+    strings["Waveform##sgiSID21"].plurals[0] = "=Waveform";
+    strings["Noise Mode##sgiSID21"].plurals[0] = "=Noise Mode";
+    strings["Wave Mix Mode##sgiSID21"].plurals[0] = "=Wave Mix Mode";
+    strings["Cutoff##sgiSID21"].plurals[0] = "=Cutoff";
+    strings["Filter Mode##sgiSID21"].plurals[0] = "=Filter Mode";
+    strings["Filter Toggle##sgiSID2"].plurals[0] = "=Filter Toggle";
+    strings["Resonance##sgiSID21"].plurals[0] = "=Resonance";
+    strings["Phase Reset##sgiSID2"].plurals[0] = "=Phase Reset";
+    strings["Envelope Reset/Key Control##sgiSID2"].plurals[0] = "=Envelope Reset/Key Control";
+    strings["Special##sgiSID2"].plurals[0] = "=Special";
+    strings["Attack##sgiSID2"].plurals[0] = "=Attack";
+    strings["Decay##sgiSID2"].plurals[0] = "=Decay";
+    strings["Sustain##sgiSID2"].plurals[0] = "=Sustain";
+    strings["Release##sgiSID2"].plurals[0] = "=Release";
+
     //   sgiSM     src/gui/inst/sm8521.cpp
 
     strings["Macros##sgiSM"].plurals[0] = "=Macros";
@@ -4524,6 +4574,15 @@ void DivLocale::addTranslationsTemplate()
     strings["ring mod##sgistru1"].plurals[0] = "=ring mod";
     strings["swap counters (noise)##sgistru"].plurals[0] = "=swap counters (noise)";
     strings["low pass (noise)##sgistru"].plurals[0] = "=low pass (noise)";
+    strings["sync##sgistru1"].plurals[0] = "=sync";
+    strings["ring##sgistru1"].plurals[0] = "=ring";
+    strings["low##sgistru1"].plurals[0] = "=low";
+    strings["band##sgistru1"].plurals[0] = "=band";
+    strings["high##sgistru1"].plurals[0] = "=high";
+    strings["8580 SID##sgistru"].plurals[0] = "=8580 SID";
+    strings["bitwise AND##sgistru"].plurals[0] = "=bitwise AND";
+    strings["bitwise OR##sgistru"].plurals[0] = "=bitwise OR";
+    strings["bitwise XOR##sgistru"].plurals[0] = "=bitwise XOR";
     strings["None##sgistru"].plurals[0] = "=None";
     strings["Invert##sgistru"].plurals[0] = "=Invert";
     strings["Add##sgistru"].plurals[0] = "=Add";
@@ -4972,6 +5031,15 @@ void DivLocale::addTranslationsTemplate()
     strings["3xyy: Set fixed frequency F-num of operator 2 (x: high 2 bits from 4 to 7; y: low 8 bits of F-num)##sesd"].plurals[0] = "=3xyy: Set fixed frequency F-num of operator 2 (x: high 2 bits from 4 to 7; y: low 8 bits of F-num)";
     strings["3xyy: Set fixed frequency F-num of operator 3 (x: high 2 bits from 8 to B; y: low 8 bits of F-num)##sesd"].plurals[0] = "=3xyy: Set fixed frequency F-num of operator 3 (x: high 2 bits from 8 to B; y: low 8 bits of F-num)";
     strings["3xyy: Set fixed frequency F-num of operator 4 (x: high 2 bits from C to F; y: low 8 bits of F-num)##sesd"].plurals[0] = "=3xyy: Set fixed frequency F-num of operator 4 (x: high 2 bits from C to F; y: low 8 bits of F-num)";
+    strings["10xx: Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)##sesd1"].plurals[0] = "=10xx: Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)";
+    strings["11xx: Set resonance (0 to FF)##sesd"].plurals[0] = "=11xx: Set resonance (0 to FF)";
+    strings["12xx: Set filter mode (bit 0: low pass; bit 1: band pass; bit 2: high pass)##sesd"].plurals[0] = "=12xx: Set filter mode (bit 0: low pass; bit 1: band pass; bit 2: high pass)";
+    strings["13xx: Disable envelope reset for this channel (1 disables; 0 enables)##sesd"].plurals[0] = "=13xx: Disable envelope reset for this channel (1 disables; 0 enables)";
+    strings["14xy: Reset cutoff (x: on new note; y: now)##sesd"].plurals[0] = "=14xy: Reset cutoff (x: on new note; y: now)";
+    strings["15xy: Reset pulse width (x: on new note; y: now)##sesd"].plurals[0] = "=15xy: Reset pulse width (x: on new note; y: now)";
+    strings["16xy: Change other parameters##sesd"].plurals[0] = "=16xy: Change other parameters";
+    strings["3xxx: Set pulse width (0 to FFF)##sesd1"].plurals[0] = "=3xxx: Set pulse width (0 to FFF)";
+    strings["4xxx: Set cutoff (0 to FFF)##sesd1"].plurals[0] = "=4xxx: Set cutoff (0 to FFF)";
     strings["a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.##sesd"].plurals[0] = "=a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.";
     strings["<COMPOUND SYSTEM!>##sesd0"].plurals[0] = "=<COMPOUND SYSTEM!>";
     strings["Sega Genesis Extended Channel 3##sesd1"].plurals[0] = "=Sega Genesis Extended Channel 3";
@@ -5274,6 +5342,7 @@ void DivLocale::addTranslationsTemplate()
     strings["14xx: Toggle swap counters (noise only)##sesd"].plurals[0] = "=14xx: Toggle swap counters (noise only)";
     strings["15xx: Toggle low pass (noise only)##sesd"].plurals[0] = "=15xx: Toggle low pass (noise only)";
     strings["16xx: Set clock divider (0: /2; 1: /3)##sesd"].plurals[0] = "=16xx: Set clock divider (0: /2; 1: /3)";
+    strings["a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.##sesd"].plurals[0] = "=a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.";
     strings["Dummy System##sesd"].plurals[0] = "=Dummy System";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "=this is a system designed for testing purposes.";
 }

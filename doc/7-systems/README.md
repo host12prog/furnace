@@ -99,6 +99,7 @@ this is the full list of chips that Furnace supports.
 - [RF5C68/RF5C164](ricoh.md)
 - [SAA1099](saa1099.md)
 - [SegaPCM](segapcm.md)
+- [SID2](sid2.md)
 - [SM8521](sm8521.md)
 - [SN76489/Sega PSG](sms.md)
 - [SNES](snes.md)
