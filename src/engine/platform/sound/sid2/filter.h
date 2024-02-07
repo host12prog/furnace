@@ -206,7 +206,7 @@ RESID_INLINE
 void Filter2::clock(sound_sample voice, sound_sample ext_in)
 {
   // Scale each voice down from 20 to 13 bits.
-  voice >>= 7;
+  voice >>= 3;
   (void)(ext_in);
 
   // This is handy for testing.
@@ -270,7 +270,7 @@ void Filter2::clock(cycle_count delta_t,
   // load.
   if (!enabled) 
   {
-    Vnf = voice + ext_in;
+    Vnf = voice;
     Vhp = Vbp = Vlp = 0;
     return;
   }
@@ -373,7 +373,7 @@ sound_sample Filter2::output()
 
   // Sum non-filtered and filtered output.
   // Multiply the sum with volume.
-  return (Vnf + Vf)*15;
+  return (Vnf + Vf);
 }
 
 #endif // RESID_INLINING || defined(__FILTER_CC__)
