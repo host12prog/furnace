@@ -28,7 +28,42 @@
 #define CHIP_FREQBASE 524288
 
 const char* regCheatSheetSID2[]={
+  "FreqL0", "00",
+  "FreqH0", "01",
+  "PWL0", "02",
+  "PWH0Vol", "03",
+  "Control0", "04",
+  "AtkDcy0", "05",
+  "StnRis0", "06",
+  "FreqL1", "07",
+  "FreqH1", "08",
+  "PWL1", "09",
+  "PWH1Vol", "0A",
+  "Control1", "0B",
+  "AtkDcy1", "0C",
+  "StnRis1", "0D",
+  "FreqL2", "0E",
+  "FreqH2", "0F",
+  "PWL2", "10",
+  "PWH2Vol", "11",
+  "Control2", "12",
+  "AtkDcy2", "13",
+  "StnRis2", "14",
 
+  "FCL0Ctrl", "15",
+  "FCH0", "16",
+  "FilterRes0", "17",
+
+  "FCL1Ctrl", "18",
+  "FCH1", "19",
+  "FilterRes1", "1A",
+
+  "FCL2Ctrl", "1B",
+  "FCH2", "1C",
+  "FilterRes2", "1D",
+
+  "NoiModeFrMSB01", "1E",
+  "WaveMixModeFrMSB2", "1F",
   NULL
 };
 
