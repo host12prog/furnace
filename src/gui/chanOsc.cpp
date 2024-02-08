@@ -723,8 +723,21 @@ void FurnaceGUI::drawChanOsc() {
                         break;
                       }
                       case 'C':
-                        text+=e->getChannelShortName(ch);
+                      {
+                        String teeemp;
+                        if(settings.translate_channel_names_osc)
+                        {
+                          teeemp+=_L(e->getChannelShortName(ch));
+                        }
+                        else
+                        {
+                          teeemp+=e->getChannelShortName(ch);
+                        }
+
+                        text += teeemp.substr(0, teeemp.find("##"));
+                        
                         break;
+                      }
                       case 'd':
                         text+=fmt::sprintf("%d",ch);
                         break;
