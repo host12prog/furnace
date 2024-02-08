@@ -289,8 +289,47 @@ void DivPlatformGenesis::acquire_ymfm(short** buf, size_t len) {
   }
 }
 
+void DivPlatformGenesis::handle_nuked276_per_chan_osc()
+{
+  /*if(fm_276.fsm_cnt2[1] == 0 && lle_cycle_counter != 0)
+  {
+    lle_cycle_counter = 0;
+  }
+
+  if(fm_276.flags == fmopn2_flags_ym3438)
+  {
+    osc_data_acc[lle_cycle_counter / (24 * 2)] += fm_276.out_l + fm_276.out_r;
+
+    lle_cycle_counter++;
+
+    if(lle_cycle_counter == (144 * 2))
+    {
+      //lle_cycle_counter = 0;
+
+      for(int i = 0; i < 6; i++)
+      {
+        oscBuf[i]->data[oscBuf[i]->needle++] = osc_data_acc[i];
+        osc_data_acc[i] = 0;
+      }
+    }
+  }
+  else
+  {
+    if(lle_cycle_counter >= (6 * 2) && lle_cycle_counter <= (11 * 2)) //cycles 6,7,8,9,10,11 are for 6 channels of the oscilloscope
+    {
+      oscBuf[(lle_cycle_counter - (6 * 2)) / 2]->data[oscBuf[(lle_cycle_counter - (6 * 2)) / 2]->needle++] = fm_276.osc_out;
+    }
+
+    lle_cycle_counter++;
+
+    if(lle_cycle_counter == (24 * 2))
+    {
+      lle_cycle_counter = 0;
+    }
+  }*/
+}
+
 void DivPlatformGenesis::acquire_nuked276(short** buf, size_t len) {
-  // TODO
   for (size_t h=0; h<len; h++) 
   {
     processDAC(rate);
@@ -302,6 +341,8 @@ void DivPlatformGenesis::acquire_nuked276(short** buf, size_t len) {
     int sample_r = 0;
 
     bool was_reg_write = false;
+
+    //lle_cycle_counter = 0;
 
     if (!writes.empty()) {
       QueuedWrite& w=writes.front();
@@ -316,10 +357,15 @@ void DivPlatformGenesis::acquire_nuked276(short** buf, size_t len) {
         FMOPN2_Clock(&fm_276, 0);
         sum_l += fm_276.out_l;
         sum_r += fm_276.out_r;
+
+        handle_nuked276_per_chan_osc();
+
         fm_276.input.wr = 0;
         FMOPN2_Clock(&fm_276, 1);
         sum_l += fm_276.out_l;
         sum_r += fm_276.out_r;
+
+        handle_nuked276_per_chan_osc();
 
         if (chipType == 2) //YMF276 mode
         {
@@ -345,9 +391,14 @@ void DivPlatformGenesis::acquire_nuked276(short** buf, size_t len) {
           FMOPN2_Clock(&fm_276, 0);
           sum_l += fm_276.out_l;
           sum_r += fm_276.out_r;
+
+          handle_nuked276_per_chan_osc();
+
           FMOPN2_Clock(&fm_276, 1);
           sum_l += fm_276.out_l;
           sum_r += fm_276.out_r;
+
+          handle_nuked276_per_chan_osc();
 
           if (chipType == 2) //YMF276 mode
           {
@@ -376,9 +427,14 @@ void DivPlatformGenesis::acquire_nuked276(short** buf, size_t len) {
         sum_l += fm_276.out_l;
         sum_r += fm_276.out_r;
         fm_276.input.wr = 0;
+
+        handle_nuked276_per_chan_osc();
+
         FMOPN2_Clock(&fm_276, 1);
         sum_l += fm_276.out_l;
         sum_r += fm_276.out_r;
+
+        handle_nuked276_per_chan_osc();
 
         if (chipType == 2) //YMF276 mode
         {
@@ -404,9 +460,14 @@ void DivPlatformGenesis::acquire_nuked276(short** buf, size_t len) {
           FMOPN2_Clock(&fm_276, 0);
           sum_l += fm_276.out_l;
           sum_r += fm_276.out_r;
+
+          handle_nuked276_per_chan_osc();
+
           FMOPN2_Clock(&fm_276, 1);
           sum_l += fm_276.out_l;
           sum_r += fm_276.out_r;
+
+          handle_nuked276_per_chan_osc();
 
           if (chipType == 2) //YMF276 mode
           {
@@ -457,9 +518,14 @@ void DivPlatformGenesis::acquire_nuked276(short** buf, size_t len) {
       FMOPN2_Clock(&fm_276, 0);
       sum_l += fm_276.out_l;
       sum_r += fm_276.out_r;
+
+      handle_nuked276_per_chan_osc();
+
       FMOPN2_Clock(&fm_276, 1);
       sum_l += fm_276.out_l;
       sum_r += fm_276.out_r;
+
+      handle_nuked276_per_chan_osc();
 
       if (chipType == 2) //YMF276 mode
       {
@@ -1543,6 +1609,13 @@ void DivPlatformGenesis::reset() {
     o_bco = 0;
     o_lro = 0;
 
+    lle_cycle_counter = 0;
+
+    for(int i = 0; i < 6; i++)
+    {
+      osc_data_acc[i] = 0;
+    }
+
     memset(&fm_276,0,sizeof(fmopn2_t));
 
     fm_276.input.cs = 1;
@@ -1565,7 +1638,10 @@ void DivPlatformGenesis::reset() {
     for (int i = 0; i < 288; i++)
     {
       FMOPN2_Clock(&fm_276, 0);
+      handle_nuked276_per_chan_osc();
       FMOPN2_Clock(&fm_276, 1);
+
+      handle_nuked276_per_chan_osc();
     }
 
     fm_276.input.ic = 1;
@@ -1573,7 +1649,10 @@ void DivPlatformGenesis::reset() {
     for (int i = 0; i < 288 * 2; i++)
     {
       FMOPN2_Clock(&fm_276, 0);
+      handle_nuked276_per_chan_osc();
       FMOPN2_Clock(&fm_276, 1);
+
+      handle_nuked276_per_chan_osc();
     }
 
     fm_276.input.ic = 0;
@@ -1581,7 +1660,10 @@ void DivPlatformGenesis::reset() {
     for (int i = 0; i < 288 * 2; i++)
     {
       FMOPN2_Clock(&fm_276, 0);
+      handle_nuked276_per_chan_osc();
       FMOPN2_Clock(&fm_276, 1);
+
+      handle_nuked276_per_chan_osc();
     }
   } else if (useYMFM==1) {
     fm_ymfm->reset();

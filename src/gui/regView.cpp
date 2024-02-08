@@ -29,7 +29,7 @@ void FurnaceGUI::drawRegView() {
   if (!regViewOpen) return;
   if (ImGui::Begin("Register View",&regViewOpen,globalWinFlags,_L("Register View###Register View"))) {
     for (int i=0; i<e->song.systemLen; i++) {
-      ImGui::Text("%d. %s",i+1,getSystemName(e->song.system[i]));
+      ImGui::Text("%d. %s",i+1,_L(getSystemName(e->song.system[i])));
       int size=0;
       int depth=8;
       unsigned char* regPool=e->getRegisterPool(i,size,depth);
