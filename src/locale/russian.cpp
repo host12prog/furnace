@@ -2254,7 +2254,7 @@ void DivLocale::addTranslationsRussian()
     strings["nothing to configure##sgsc"].plurals[0] = "настраивать нечего";
     strings["Downmix chip output to mono##sgsc"].plurals[0] = "Свести звук чипа в моно";
     strings["Reserved blocks for wavetables:##sgsc"].plurals[0] = "Зарезервированных блоков под волновые таблицы:";
-    strings["Reserve this many blocks 256 bytes each in sample memory.\nEach block holds one wavetable (is used for one wavetable channel),\nso reserve as many as you need.##sgsc"].plurals[0] = "Зрезервировать столько блоков, каждый по 256 байт, в памяти сэмплов.\nВ каждый блок помещается одна волновая таблица (он используется для одного канала в режиме волновых таблиц),\nтак что выделяйте столько, сколько вам нужно.";
+    strings["Reserve this many blocks 256 bytes each in sample memory.\nEach block holds one wavetable (is used for one wavetable channel),\nso reserve as many as you need.##sgsc"].plurals[0] = "Зарезервировать столько блоков, каждый по 256 байт, в памяти сэмплов.\nВ каждый блок помещается одна волновая таблица (он используется для одного канала в режиме волновых таблиц),\nтак что выделяйте столько, сколько вам нужно.";
     strings["Custom clock rate##sgsc"].plurals[0] = "Пользовательская тактовая частота";
     strings["1MB##sgsc"].plurals[0] = "1 МиБ";
     strings["256KB##sgsc"].plurals[0] = "256 КиБ";
