@@ -654,7 +654,7 @@ void DivLocale::addTranslationsRussian()
     strings["oscilloscope (X-Y)##sggu"].plurals[0] = "осциллограф (X-Y)";
     strings["volume meter##sggu"].plurals[0] = "измеритель громкости";
     strings["clock##sggu"].plurals[0] = "часы";
-    strings["register view##sggu"].plurals[0] = "просмотр регистров";
+    strings["register view##sggu"].plurals[0] = "регистры";
     strings["log viewer##sggu"].plurals[0] = "просмотр логов";
     strings["statistics##sggu"].plurals[0] = "статистика";
     strings["spoiler##sggu"].plurals[0] = "спойлер";
@@ -906,7 +906,7 @@ void DivLocale::addTranslationsRussian()
     strings["Channels##sggc"].plurals[0] = "Каналы";
     strings["Pattern Manager##sggc"].plurals[0] = "Менеджер паттернов";
     strings["Chip Manager##sggc"].plurals[0] = "Менеджер чипов";
-    strings["Register View##sggc"].plurals[0] = "Просмотр регистров";
+    strings["Register View##sggc"].plurals[0] = "Регистры";
     strings["Log Viewer##sggc"].plurals[0] = "Просмотр логов";
     strings["Effect List##sggc"].plurals[0] = "Список эффектов";
     strings["Oscilloscope (per-channel)##sggc"].plurals[0] = "Осциллографы (для отдельных каналов)";
@@ -1834,7 +1834,7 @@ void DivLocale::addTranslationsRussian()
 
     //   sgrv  src/gui/regView.cpp
 
-    strings["Register View###Register View"].plurals[0] = "Просмотр регистров###Register View";
+    strings["Register View###Register View"].plurals[0] = "Регистры###Register View";
     strings["- no register pool available##sgrv"].plurals[0] = "- список регистров недоступен";
 
     //   sgse  src/gui/sampleEdit.cpp
