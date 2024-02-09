@@ -389,6 +389,8 @@ int DivEngine::dispatchCmd(DivCommand c) {
             }
             break;
           }
+          default:
+            break;
         }
       }
     }
