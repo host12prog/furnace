@@ -289,12 +289,16 @@ void DivPlatformGenesis::acquire_ymfm(short** buf, size_t len) {
   }
 }
 
+const unsigned char map_ym2438_channels[6] = { 1,5,3,0,4,2 };
+
 void DivPlatformGenesis::handle_nuked276_per_chan_osc()
 {
-  /*if(fm_276.fsm_cnt2[1] == 0 && lle_cycle_counter != 0)
+  if(fm_276.fsm_cnt2[1] == 0 && prev_lle_cycle_counter != 0)
   {
     lle_cycle_counter = 0;
   }
+
+  prev_lle_cycle_counter = fm_276.fsm_cnt2[1];
 
   if(fm_276.flags == fmopn2_flags_ym3438)
   {
@@ -304,29 +308,42 @@ void DivPlatformGenesis::handle_nuked276_per_chan_osc()
 
     if(lle_cycle_counter == (144 * 2))
     {
-      //lle_cycle_counter = 0;
+      lle_cycle_counter = 0;
 
       for(int i = 0; i < 6; i++)
       {
-        oscBuf[i]->data[oscBuf[i]->needle++] = osc_data_acc[i];
+        if((softPCM && (map_ym2438_channels[i] != 5 || !chan[5].dacMode)) || (!(softPCM))) 
+        {
+          oscBuf[map_ym2438_channels[i]]->data[oscBuf[map_ym2438_channels[i]]->needle++] = osc_data_acc[i];
+        }
         osc_data_acc[i] = 0;
+      }
+
+      if (softPCM && chan[5].dacMode) 
+      {
+        oscBuf[5]->data[oscBuf[5]->needle++]=chan[5].dacOutput<<6;
+        oscBuf[6]->data[oscBuf[6]->needle++]=chan[6].dacOutput<<6;
+      }
+      else
+      {
+        oscBuf[6]->data[oscBuf[6]->needle++]=0;
       }
     }
   }
   else
   {
-    if(lle_cycle_counter >= (6 * 2) && lle_cycle_counter <= (11 * 2)) //cycles 6,7,8,9,10,11 are for 6 channels of the oscilloscope
+    if(lle_cycle_counter >= (12 * 12) && lle_cycle_counter <= (17 * 12)) //cycles 6,7,8,9,10,11 are for 6 channels of the oscilloscope
     {
-      oscBuf[(lle_cycle_counter - (6 * 2)) / 2]->data[oscBuf[(lle_cycle_counter - (6 * 2)) / 2]->needle++] = fm_276.osc_out;
+      oscBuf[(lle_cycle_counter - (12 * 12)) / 12]->data[oscBuf[(lle_cycle_counter - (12 * 12)) / 12]->needle++] = fm_276.osc_out;
     }
 
     lle_cycle_counter++;
 
-    if(lle_cycle_counter == (24 * 2))
+    if(lle_cycle_counter == (144 * 2))
     {
       lle_cycle_counter = 0;
     }
-  }*/
+  }
 }
 
 void DivPlatformGenesis::acquire_nuked276(short** buf, size_t len) {
@@ -549,7 +566,7 @@ void DivPlatformGenesis::acquire_nuked276(short** buf, size_t len) {
 
     for (int i = 0; i < 6; i++)
     {
-      oscBuf[i]->data[oscBuf[i]->needle++]=0;
+      //oscBuf[i]->data[oscBuf[i]->needle++]=0;
     }
 
     if (chipType == 2) //YMF276 mode
@@ -1610,6 +1627,7 @@ void DivPlatformGenesis::reset() {
     o_lro = 0;
 
     lle_cycle_counter = 0;
+    prev_lle_cycle_counter = 0;
 
     for(int i = 0; i < 6; i++)
     {

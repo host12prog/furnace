@@ -82,6 +82,7 @@ class DivPlatformGenesis: public DivPlatformOPN {
     fmopn2_t fm_276;
 
     int lle_cycle_counter; //to capture per-channel oscilloscope output!
+    int prev_lle_cycle_counter;
 
     int osc_data_acc[6];
 
