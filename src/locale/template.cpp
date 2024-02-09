@@ -5006,6 +5006,10 @@ void DivLocale::addTranslationsTemplate()
     strings["1Exy: Change other parameters (LEGACY)##sesd"].plurals[0] = "=1Exy: Change other parameters (LEGACY)";
     strings["20xy: Set attack/decay (x: attack; y: decay)##sesd"].plurals[0] = "=20xy: Set attack/decay (x: attack; y: decay)";
     strings["21xy: Set sustain/release (x: sustain; y: release)##sesd"].plurals[0] = "=21xy: Set sustain/release (x: sustain; y: release)";
+    strings["22xx: Pulse width slide up##sesd"].plurals[0] = "=22xx: Pulse width slide up";
+    strings["23xx: Pulse width slide down##sesd"].plurals[0] = "=23xx: Pulse width slide down";
+    strings["24xx: Cutoff slide up##sesd"].plurals[0] = "=24xx: Cutoff slide up";
+    strings["25xx: Cutoff slide down##sesd"].plurals[0] = "=25xx: Cutoff slide down";
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "=3xxx: Set pulse width (0 to FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "=4xxx: Set cutoff (0 to 7FF)";
     strings["10xx: Set waveform##sesd0"].plurals[0] = "=10xx: Set waveform";
@@ -5059,6 +5063,10 @@ void DivLocale::addTranslationsTemplate()
     strings["14xy: Reset cutoff (x: on new note; y: now)##sesd"].plurals[0] = "=14xy: Reset cutoff (x: on new note; y: now)";
     strings["15xy: Reset pulse width (x: on new note; y: now)##sesd"].plurals[0] = "=15xy: Reset pulse width (x: on new note; y: now)";
     strings["16xy: Change other parameters##sesd"].plurals[0] = "=16xy: Change other parameters";
+    strings["17xx: Pulse width slide up##sesd"].plurals[0] = "=17xx: Pulse width slide up";
+    strings["18xx: Pulse width slide down##sesd"].plurals[0] = "=18xx: Pulse width slide down";
+    strings["19xx: Cutoff slide up##sesd"].plurals[0] = "=19xx: Cutoff slide up";
+    strings["1Axx: Cutoff slide down##sesd"].plurals[0] = "=1Axx: Cutoff slide down";
     strings["3xxx: Set pulse width (0 to FFF)##sesd1"].plurals[0] = "=3xxx: Set pulse width (0 to FFF)";
     strings["4xxx: Set cutoff (0 to FFF)##sesd1"].plurals[0] = "=4xxx: Set cutoff (0 to FFF)";
     strings["a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.##sesd"].plurals[0] = "=a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.";

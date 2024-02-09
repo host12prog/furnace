@@ -338,6 +338,16 @@ bool DivCSPlayer::tick() {
       e->dispatchCmd(DivCommand(DIV_CMD_PITCH,i,chan[i].pitch+(vibTable[chan[i].vibratoPos&63]*chan[i].vibratoDepth)/15));
     }
 
+    if(chan[i].pw_slide)
+    {
+      e->dispatchCmd(DivCommand(DIV_CMD_DO_PW_SLIDE,i,chan[i].pw_slide,chan[i].pw_slide_speed));
+    }
+
+    if(chan[i].cutoff_slide)
+    {
+      e->dispatchCmd(DivCommand(DIV_CMD_DO_CUTOFF_SLIDE,i,chan[i].cutoff_slide,chan[i].cutoff_slide_speed));
+    }
+
     if (chan[i].portaSpeed) {
       e->dispatchCmd(DivCommand(DIV_CMD_NOTE_PORTA,i,chan[i].portaSpeed*(e->song.linearPitch==2?e->song.pitchSlideSpeed:1),chan[i].portaTarget));
     }

@@ -4912,6 +4912,10 @@ void DivLocale::addTranslationsRussian()
     strings["1Exy: Change other parameters (LEGACY)##sesd"].plurals[0] = "1Exy: Изменить другие параметры (СОВМЕСТИМОСТЬ)";
     strings["20xy: Set attack/decay (x: attack; y: decay)##sesd"].plurals[0] = "20xy: Установить атаку/спад (x: атака; y: спад)";
     strings["21xy: Set sustain/release (x: sustain; y: release)##sesd"].plurals[0] = "21xy: Установить сустейн/релиз (x: сустейн; y: релиз)";
+    strings["22xx: Pulse width slide up##sesd"].plurals[0] = "22xx: Изменение скважности вверх";
+    strings["23xx: Pulse width slide down##sesd"].plurals[0] = "23xx: Изменение скважности вниз";
+    strings["24xx: Cutoff slide up##sesd"].plurals[0] = "24xx: Изменение частоты среза вверх";
+    strings["25xx: Cutoff slide down##sesd"].plurals[0] = "25xx: Изменение частоты среза вниз";
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "3xxx: Скважность (0-FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "4xxx: Частота среза (0-7FF)";
     strings["10xx: Set waveform##sesd0"].plurals[0] = "10xx: Форма волны";
@@ -4965,6 +4969,10 @@ void DivLocale::addTranslationsRussian()
     strings["14xy: Reset cutoff (x: on new note; y: now)##sesd"].plurals[0] = "14xy: Сбросить частоту среза (x: на след. ноте; y: сейчас)";
     strings["15xy: Reset pulse width (x: on new note; y: now)##sesd"].plurals[0] = "15xy: Сбросить скважность (x: на след. ноте; y: сейчас)";
     strings["16xy: Change other parameters##sesd"].plurals[0] = "16xy: Изменить другие параметры";
+    strings["17xx: Pulse width slide up##sesd"].plurals[0] = "17xx: Изменение скважности вверх";
+    strings["18xx: Pulse width slide down##sesd"].plurals[0] = "18xx: Изменение скважности вниз";
+    strings["19xx: Cutoff slide up##sesd"].plurals[0] = "19xx: Изменение частоты среза вверх";
+    strings["1Axx: Cutoff slide down##sesd"].plurals[0] = "1Axx: Изменение частоты среза вниз";
     strings["3xxx: Set pulse width (0 to FFF)##sesd1"].plurals[0] = "3xxx: Скважность (0-FFF)";
     strings["4xxx: Set cutoff (0 to FFF)##sesd1"].plurals[0] = "4xxx: Частота среза (0-FFF)";
     strings["a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.##sesd"].plurals[0] = "чип, начавший появляться в мобильных телефонах в 2000-ые.\nнесмотря на проприетарность, он проиграл формату MP3 во время соперничества разных видов мобильного железа.";

@@ -104,6 +104,7 @@ struct DivChannelState {
   int delayOrder, delayRow, retrigSpeed, retrigTick;
   int vibratoDepth, vibratoRate, vibratoPos, vibratoPosGiant, vibratoDir, vibratoFine;
   int tremoloDepth, tremoloRate, tremoloPos;
+  int pw_slide, pw_slide_speed, cutoff_slide, cutoff_slide_speed;
   unsigned char arp, arpStage, arpTicks, panL, panR, panRL, panRR, lastVibrato, lastPorta;
   bool doNote, legato, portaStop, keyOn, keyOff, nowYouCanStop, stopOnOff, releasing;
   bool arpYield, delayLocked, inPorta, scheduledSlideReset, shorthandPorta, wasShorthandPorta, noteOnInhibit, resetArp;
@@ -138,6 +139,10 @@ struct DivChannelState {
     tremoloDepth(0),
     tremoloRate(0),
     tremoloPos(0),
+    pw_slide(0),
+    pw_slide_speed(0),
+    cutoff_slide(0),
+    cutoff_slide_speed(0),
     arp(0),
     arpStage(-1),
     arpTicks(1),

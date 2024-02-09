@@ -601,6 +601,12 @@ void DivEngine::registerSystems() {
     {0x1e, {DIV_CMD_C64_EXTENDED, "1Exy: Change other parameters (LEGACY)##sesd"}},
     {0x20, {DIV_CMD_C64_AD, "20xy: Set attack/decay (x: attack; y: decay)##sesd"}},
     {0x21, {DIV_CMD_C64_SR, "21xy: Set sustain/release (x: sustain; y: release)##sesd"}},
+
+    {0x22, {DIV_CMD_PW_SLIDE_UP, "22xx: Pulse width slide up##sesd"}},
+    {0x23, {DIV_CMD_PW_SLIDE_DN, "23xx: Pulse width slide down##sesd"}},
+
+    {0x24, {DIV_CMD_CUTOFF_SLIDE_UP, "24xx: Cutoff slide up##sesd"}},
+    {0x25, {DIV_CMD_CUTOFF_SLIDE_DN, "25xx: Cutoff slide down##sesd"}},
   };
   const EffectHandler c64FineDutyHandler(DIV_CMD_C64_FINE_DUTY, "3xxx: Set pulse width (0 to FFF)##sesd", effectValLong<12>);
   const EffectHandler c64FineCutoffHandler(DIV_CMD_C64_FINE_CUTOFF, "4xxx: Set cutoff (0 to 7FF)##sesd", effectValLong<11>);
@@ -673,6 +679,12 @@ void DivEngine::registerSystems() {
     {0x14, {DIV_CMD_C64_FILTER_RESET, "14xy: Reset cutoff (x: on new note; y: now)##sesd"}},
     {0x15, {DIV_CMD_C64_DUTY_RESET, "15xy: Reset pulse width (x: on new note; y: now)##sesd"}},
     {0x16, {DIV_CMD_C64_EXTENDED, "16xy: Change other parameters##sesd"}},
+
+    {0x17, {DIV_CMD_PW_SLIDE_UP, "17xx: Pulse width slide up##sesd"}},
+    {0x18, {DIV_CMD_PW_SLIDE_DN, "18xx: Pulse width slide down##sesd"}},
+
+    {0x19, {DIV_CMD_CUTOFF_SLIDE_UP, "19xx: Cutoff slide up##sesd"}},
+    {0x1A, {DIV_CMD_CUTOFF_SLIDE_DN, "1Axx: Cutoff slide down##sesd"}},
   };
   const EffectHandler SID2FineDutyHandler(DIV_CMD_C64_FINE_DUTY, "3xxx: Set pulse width (0 to FFF)##sesd1", effectValLong<12>);
   const EffectHandler SID2FineCutoffHandler(DIV_CMD_C64_FINE_CUTOFF, "4xxx: Set cutoff (0 to FFF)##sesd1", effectValLong<11>);

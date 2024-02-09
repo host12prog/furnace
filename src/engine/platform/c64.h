@@ -37,6 +37,7 @@ class DivPlatformC64: public DivDispatch {
     short duty;
     bool sweepChanged, filter;
     bool resetMask, resetFilter, resetDuty, gate, ring, sync, test;
+    bool do_pw_sweep_writes;
     Channel():
       SharedChannel<signed char>(15),
       prevFreq(65535),
@@ -56,8 +57,10 @@ class DivPlatformC64: public DivDispatch {
       gate(true),
       ring(false),
       sync(false),
-      test(false) {}
+      test(false),
+      do_pw_sweep_writes(false) {}
   };
+  bool do_cutoff_sweep_writes;
   Channel chan[3];
   DivDispatchOscBuffer* oscBuf[3];
   bool isMuted[3];

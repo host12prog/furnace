@@ -32,6 +32,7 @@ struct DivCSChannelState {
   int note, pitch;
   int volume, volMax, volSpeed;
   int vibratoDepth, vibratoRate, vibratoPos;
+  int pw_slide, pw_slide_speed, cutoff_slide, cutoff_slide_speed;
   int portaTarget, portaSpeed;
   unsigned char arp, arpStage, arpTicks;
 
@@ -58,6 +59,10 @@ struct DivCSChannelState {
     vibratoDepth(0),
     vibratoRate(0),
     vibratoPos(0),
+    pw_slide(0),
+    pw_slide_speed(0),
+    cutoff_slide(0),
+    cutoff_slide_speed(0),
     portaTarget(0),
     portaSpeed(0),
     arp(0),

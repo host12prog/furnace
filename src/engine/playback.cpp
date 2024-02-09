@@ -263,6 +263,14 @@ const char* cmdName[]={
   "ES5503_WAVE_LENGTH",
   "ES5503_WAVE_POS",
   "ES5503_OSC_MODE",
+
+  "DO_PW_SLIDE",
+  "DO_CUTOFF_SLIDE",
+
+  "PW_SLIDE_UP",
+  "PW_SLIDE_DN",
+  "CUTOFF_SLIDE_UP",
+  "CUTOFF_SLIDE_DN",
 };
 
 static_assert((sizeof(cmdName)/sizeof(void*))==DIV_CMD_MAX,"update cmdName!");
@@ -381,11 +389,38 @@ int DivEngine::dispatchCmd(DivCommand c) {
             }
             break;
           }
-          default:
-            break;
         }
       }
     }
+  }
+
+  switch (c.cmd) {
+    case DIV_CMD_PW_SLIDE_UP:
+    {
+      chan[c.chan].pw_slide = c.value ? 1 : 0;
+      chan[c.chan].pw_slide_speed = c.value;
+      break;
+    }
+    case DIV_CMD_PW_SLIDE_DN:
+    {
+      chan[c.chan].pw_slide = c.value ? 2 : 0;
+      chan[c.chan].pw_slide_speed = c.value;
+      break;
+    }
+    case DIV_CMD_CUTOFF_SLIDE_UP:
+    {
+      chan[c.chan].cutoff_slide = c.value ? 1 : 0;
+      chan[c.chan].cutoff_slide_speed = c.value;
+      break;
+    }
+    case DIV_CMD_CUTOFF_SLIDE_DN:
+    {
+      chan[c.chan].cutoff_slide = c.value ? 2 : 0;
+      chan[c.chan].cutoff_slide_speed = c.value;
+      break;
+    }
+    default:
+      break;
   }
 
   c.chan=dispatchChanOfChan[c.dis];
@@ -1521,6 +1556,17 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
               break;
           }
         }
+        
+        if(chan[i].pw_slide)
+        {
+          dispatchCmd(DivCommand(DIV_CMD_DO_PW_SLIDE,i,chan[i].pw_slide,chan[i].pw_slide_speed));
+        }
+
+        if(chan[i].cutoff_slide)
+        {
+          dispatchCmd(DivCommand(DIV_CMD_DO_CUTOFF_SLIDE,i,chan[i].cutoff_slide,chan[i].cutoff_slide_speed));
+        }
+
         if (!song.noSlidesOnFirstTick || !firstTick) {
           if ((chan[i].keyOn || chan[i].keyOff) && chan[i].portaSpeed>0) {
             if (dispatchCmd(DivCommand(DIV_CMD_NOTE_PORTA,i,chan[i].portaSpeed*(song.linearPitch==2?song.pitchSlideSpeed:1),chan[i].portaNote))==2 && chan[i].portaStop && song.targetResetsSlides) {
