@@ -334,14 +334,22 @@ void DivPlatformGenesis::handle_nuked276_per_chan_osc()
   {
     if(lle_cycle_counter >= (12 * 12) && lle_cycle_counter <= (17 * 12)) //cycles 6,7,8,9,10,11 are for 6 channels of the oscilloscope
     {
-      oscBuf[(lle_cycle_counter - (12 * 12)) / 12]->data[oscBuf[(lle_cycle_counter - (12 * 12)) / 12]->needle++] = fm_276.osc_out;
+      //oscBuf[(lle_cycle_counter - (12 * 12)) / 12]->data[oscBuf[(lle_cycle_counter - (12 * 12)) / 12]->needle] += fm_276.osc_out;
     }
+
+    oscBuf[lle_cycle_counter / (2 * 24)]->data[oscBuf[lle_cycle_counter / (2 * 24)]->needle] += fm_276.osc_out;
 
     lle_cycle_counter++;
 
     if(lle_cycle_counter == (144 * 2))
     {
       lle_cycle_counter = 0;
+
+      for(int i = 0; i < 6; i++)
+      {
+        oscBuf[i]->data[oscBuf[i]->needle] >>= 2;
+        oscBuf[i]->needle++;
+      }
     }
   }
 }
