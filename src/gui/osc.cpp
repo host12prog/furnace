@@ -125,7 +125,7 @@ void FurnaceGUI::readOsc() {
   readPos=(readPos+total)&0x7fff;
   e->oscReadPos=readPos;
 }
-
+/*
 void _pushPartBlend(const ImDrawList* drawList, const ImDrawCmd* cmd) {
   if (cmd!=NULL) {
     if (cmd->UserCallbackData!=NULL) {
@@ -133,7 +133,7 @@ void _pushPartBlend(const ImDrawList* drawList, const ImDrawCmd* cmd) {
     }
   }
 }
-
+*/
 void FurnaceGUI::drawOsc() {
   if (nextWindow==GUI_WINDOW_OSCILLOSCOPE) {
     oscOpen=true;
