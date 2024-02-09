@@ -141,8 +141,8 @@ void DivPlatformSID2::tick(bool sysTick) {
 
     chan[i].std.next();
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
-      chan[i].vol=MIN(15,chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val);
-      rWrite(i*7+3,(chan[i].duty>>8) | (chan[i].vol << 4));
+      chan[i].outVol=VOL_SCALE_LINEAR(chan[i].vol&15,MIN(15,chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val),15);
+      rWrite(i*7+3,(chan[i].duty>>8) | (chan[i].outVol << 4));
     }
 
     if (NEW_ARP_STRAT) {
@@ -161,7 +161,7 @@ void DivPlatformSID2::tick(bool sysTick) {
         chan[i].duty-=chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->val;
       }
       rWrite(i*7+2,chan[i].duty&0xff);
-      rWrite(i*7+3,(chan[i].duty>>8) | (chan[i].vol << 4));
+      rWrite(i*7+3,(chan[i].duty>>8) | (chan[i].outVol << 4));
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
@@ -266,6 +266,8 @@ void DivPlatformSID2::tick(bool sysTick) {
           rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
         }
 
+        rWrite(i*7+3, (chan[i].duty>>8) | (isMuted[i] ? 0 : (chan[i].outVol << 4))); //set volume
+
         rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4) | ((chan[0].freq >> 16) << 6) | ((chan[1].freq >> 16) << 7));
         rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4) | ((chan[2].freq >> 16) << 6));
       }
@@ -328,7 +330,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
       if (chan[c.chan].insChanged || chan[c.chan].resetDuty || ins->std.get_macro(DIV_MACRO_WAVE, true)->len>0) {
         chan[c.chan].duty=ins->c64.duty;
         rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
-        rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
+        rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].outVol << 4));
       }
       if (chan[c.chan].insChanged) {
         chan[c.chan].wave=(ins->c64.noiseOn<<3)|(ins->c64.pulseOn<<2)|(ins->c64.sawOn<<1)|(int)(ins->c64.triOn);
@@ -342,8 +344,9 @@ int DivPlatformSID2::dispatch(DivCommand c) {
         chan[c.chan].noise_mode = ins->sid2.noise_mode;
         chan[c.chan].mix_mode = ins->sid2.mix_mode;
 
-        chan[c.chan].vol = ins->sid2.volume;
-        rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
+        //chan[c.chan].vol = ins->sid2.volume;
+        //rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
+        chan[c.chan].outVol=VOL_SCALE_LINEAR(chan[c.chan].vol&15,ins->sid2.volume,15);
       }
       if (chan[c.chan].insChanged || chan[c.chan].resetFilter) {
         chan[c.chan].filter=ins->c64.toFilter;
@@ -402,7 +405,10 @@ int DivPlatformSID2::dispatch(DivCommand c) {
       }
       break;
     case DIV_CMD_GET_VOLUME:
-      return chan[c.chan].vol;
+      if (chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
+        return chan[c.chan].vol;
+      }
+      return chan[c.chan].outVol;
       break;
     case DIV_CMD_PITCH:
       chan[c.chan].pitch=c.value;
@@ -434,7 +440,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
     case DIV_CMD_C64_FINE_DUTY:
       chan[c.chan].duty=c.value;
       rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
-      rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
+      rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].outVol << 4));
       break;
     case DIV_CMD_WAVE:
       chan[c.chan].wave=c.value;
@@ -490,7 +496,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
         DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_SID2);
         chan[c.chan].duty=ins->c64.duty;
         rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
-        rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
+        rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].outVol << 4));
       }
       chan[c.chan].resetDuty=c.value>>4;
       break;
