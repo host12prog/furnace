@@ -51,6 +51,14 @@ filter cutoff and resonance ranges were extended, as well as the frequency - fin
     - `9`: phase reset (`y` is a discarded parameter and does not matter)
     - `A`: envelope key on/key off (`y` is `0` (trigger envelope release) or `1` (restart envelope again))
     - `B`: filter on/off (`y` is `0` (disable filter) or `1` (enable filter))
+- `17xx`: **filter cutoff up**
+  - works like `01xx` but for filter cutoff
+- `18xx`: **filter cutoff down**
+  - works like `02xx` but for filter cutoff
+- `19xx`: **pulse width up**
+  - works like `01xx` but for pulse width
+- `1Axx`: **pulse width down**
+  - works like `02xx` but for pulse width
 - `3xxx`: **set duty cycle.** `xxx` range is `000` to `FFF`.
 - `4xxx`: **set cutoff.** `xxx` range is `000` to `FFF`.
 
