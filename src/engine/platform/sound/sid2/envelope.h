@@ -154,7 +154,8 @@ void EnvelopeGenerator2::clock()
       // This has been verified by sampling ENV3.
       // NB! The operation below requires two's complement integer.
       //
-      --envelope_counter &= 0xff;
+      //--envelope_counter &= 0xff;
+      envelope_counter--;
       break;
     }
     

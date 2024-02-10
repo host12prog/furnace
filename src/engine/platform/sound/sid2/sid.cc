@@ -378,7 +378,7 @@ void SID2::clock()
   // Clock filter.
   for(int i = 0; i < 3; i++)
   {
-    if (voice[i].envelope.envelope_counter != 0) //clock filter only when there is signal (when signal is constant (no sound) filter makes CPU load skyrocket!)
+    if (voice[i].envelope.envelope_counter != 0 && voice[i].envelope.volume != 0 && !isMuted[i]) //clock filter only when there is signal (when signal is constant (no sound) filter makes CPU load skyrocket!)
     {
       filter[i].clock(last_chan_out[i], ext_in);
     }

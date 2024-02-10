@@ -68,7 +68,7 @@ RESID_INLINE
 sound_sample Voice2::output()
 {
   // Multiply oscillator output with envelope output.
-  return (wave.output() - wave_zero)*envelope.output() + voice_DC;
+  return (wave.output() - wave_zero)*envelope.output();
 }
 
 RESID_INLINE

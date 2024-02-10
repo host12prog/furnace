@@ -346,7 +346,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
 
         //chan[c.chan].vol = ins->sid2.volume;
         //rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
-        chan[c.chan].outVol=VOL_SCALE_LINEAR(chan[c.chan].vol&15,ins->sid2.volume,15);
+        chan[c.chan].outVol=ins->sid2.volume;
       }
       if (chan[c.chan].insChanged || chan[c.chan].resetFilter) {
         chan[c.chan].filter=ins->c64.toFilter;
