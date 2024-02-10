@@ -334,15 +334,10 @@ void DivPlatformGenesis::handle_nuked276_per_chan_osc()
   {
     for(int i = 0; i < 6; i++)
     {
-      if(lle_cycle_counter == ((7 + i) * 12) || lle_cycle_counter == ((1 + i) * 12))
+      if(lle_cycle_counter == ((7 + i) * 12))
       {
-        oscBuf[i]->data[oscBuf[i]->needle] += (fm_276.osc_out >> 1) * 8;
+        oscBuf[i]->data[oscBuf[i]->needle] = (fm_276.osc_out >> 1) * 8;
       }
-    }
-
-    if (chan[5].dacMode) 
-    {
-      //oscBuf[5]->data[oscBuf[5]->needle]=chan[5].dacOutput<<6;
     }
 
     lle_cycle_counter++;
