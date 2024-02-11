@@ -5485,4 +5485,6 @@ void DivLocale::addTranslationsTemplate()
     
     strings["FM 6/PCM 1##sesd"].plurals[0] = "=FM 6/PCM 1";
     strings["CSM Timer##sesd"].plurals[0] = "=CSM Timer";
+
+    strings["VRC6 Saw##sesd"].plurals[0] = "=VRC6 Saw";
 }

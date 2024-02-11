@@ -5406,4 +5406,6 @@ void DivLocale::addTranslationsRussian()
 
     strings["FM 6/PCM 1##sesd"].plurals[0] = "FM 6/ИКМ 1";
     strings["CSM Timer##sesd"].plurals[0] = "CSM таймер";
+
+    strings["VRC6 Saw##sesd"].plurals[0] = "VRC6 пила";
 }

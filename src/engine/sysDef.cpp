@@ -1016,7 +1016,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_VRC6]=new DivSysDef(
     "Konami VRC6", NULL, 0x88, 0, 3, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "an expansion chip for the Famicom, featuring a quirky sawtooth channel.##sesd",
-    {"VRC6 1", "VRC6 2", "VRC6 Saw"},
+    {"VRC6 1", "VRC6 2", "VRC6 Saw##sesd"},
     {"V1", "V2", "VS"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_WAVE},
     {DIV_INS_VRC6, DIV_INS_VRC6, DIV_INS_VRC6_SAW},
