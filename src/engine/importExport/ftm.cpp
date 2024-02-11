@@ -26,6 +26,57 @@ class DivEngine;
     logW("incompatible block version %d for %s!",blockVersion,blockName); \
   }
 
+enum
+{
+  FT_EF_NONE = 0,
+  FT_EF_SPEED,           	// Speed
+  FT_EF_JUMP,            	// Jump
+  FT_EF_SKIP,            	// Skip
+  FT_EF_HALT,            	// Halt
+  FT_EF_VOLUME,          	// Volume
+  FT_EF_PORTAMENTO,      	// Porta on
+  FT_EF_PORTAOFF,        	// Porta off		// unused
+  FT_EF_SWEEPUP,         	// Sweep up
+  FT_EF_SWEEPDOWN,       	// Sweep down
+  FT_EF_ARPEGGIO,        	// Arpeggio
+  FT_EF_VIBRATO,         	// Vibrato
+  FT_EF_TREMOLO,         	// Tremolo
+  FT_EF_PITCH,           	// Pitch
+  FT_EF_DELAY,           	// Note delay
+  FT_EF_DAC,             	// DAC setting
+  FT_EF_PORTA_UP,        	// Portamento up
+  FT_EF_PORTA_DOWN,      	// Portamento down
+  FT_EF_DUTY_CYCLE,      	// Duty cycle
+  FT_EF_SAMPLE_OFFSET,   	// Sample offset
+  FT_EF_SLIDE_UP,        	// Slide up
+  FT_EF_SLIDE_DOWN,      	// Slide down
+  FT_EF_VOLUME_SLIDE,    	// Volume slide
+  FT_EF_NOTE_CUT,        	// Note cut
+  FT_EF_RETRIGGER,       	// DPCM retrigger
+  FT_EF_DELAYED_VOLUME,  	// // // Delayed channel volume
+  FT_EF_FDS_MOD_DEPTH,   	// FDS modulation depth
+  FT_EF_FDS_MOD_SPEED_HI,	// FDS modulation speed hi
+  FT_EF_FDS_MOD_SPEED_LO,	// FDS modulation speed lo
+  FT_EF_DPCM_PITCH,      	// DPCM Pitch
+  FT_EF_SUNSOFT_ENV_TYPE,	// Sunsoft envelope type
+  FT_EF_SUNSOFT_ENV_HI,  	// Sunsoft envelope high
+  FT_EF_SUNSOFT_ENV_LO,  	// Sunsoft envelope low
+  FT_EF_SUNSOFT_NOISE,   	// // // 050B Sunsoft noise period
+  FT_EF_VRC7_PORT,       	// // // 050B VRC7 custom patch port
+  FT_EF_VRC7_WRITE,      	// // // 050B VRC7 custom patch write
+  FT_EF_NOTE_RELEASE,    	// // // Delayed release
+  FT_EF_GROOVE,          	// // // Groove
+  FT_EF_TRANSPOSE,       	// // // Delayed transpose
+  FT_EF_N163_WAVE_BUFFER,	// // // N163 wave buffer
+  FT_EF_FDS_VOLUME,      	// // // FDS volume envelope
+  FT_EF_FDS_MOD_BIAS,    	// // // FDS auto-FM bias
+  FT_EF_PHASE_RESET,  // Reset waveform phase without retriggering note (VRC6-only so far)
+  FT_EF_HARMONIC,  // Multiply the note pitch by an integer
+  FT_EF_TARGET_VOLUME_SLIDE,	// // !! Target volume slide
+
+  FT_EF_COUNT
+};
+
 const int ftEffectMap[]={
   -1, // none
   0x0f,
@@ -47,23 +98,23 @@ const int ftEffectMap[]={
   0x02, // porta down
   0x12,
   0x90, // sample offset - not supported yet
-  0xe1,
-  0xe2,
+  0xe1, // Slide up
+  0xe2,	// Slide down
   0x0a,
   0xec,
   0x0c,
   -1, // delayed volume - not supported yet
-  0x11, // FDS
-  0x12,
-  0x13,
+  0x11, // FDS modulation depth
+  0x12, // FDS modulation speed hi
+  0x13, // FDS modulation speed lo
   0x20, // DPCM pitch
-  0x22, // 5B
-  0x24,
-  0x23,
-  0x21,
+  0x22, // Sunsoft envelope type
+  0x24, // Sunsoft envelope high
+  0x23, // Sunsoft envelope low
+  0x21, // 050B Sunsoft noise period
   -1, // VRC7 "custom patch port" - not supported?
   -1, // VRC7 "custom patch write"
-  -1, // release - not supported yet
+  -1, // delayed release - not supported yet
   0x09, // select groove
   -1, // transpose - not supported
   0x10, // Namco 163
@@ -71,6 +122,21 @@ const int ftEffectMap[]={
   -1, // FDS auto FM - not supported yet
   -1, // phase reset - not supported
   -1, // harmonic - not supported
+  -1, // target volume slide - not supported
+};
+
+const int eff_conversion_050[][2] = 
+{
+	{FT_EF_SUNSOFT_NOISE,		FT_EF_NOTE_RELEASE},
+	{FT_EF_VRC7_PORT,			FT_EF_GROOVE},
+	{FT_EF_VRC7_WRITE,			FT_EF_TRANSPOSE},
+	{FT_EF_NOTE_RELEASE,		FT_EF_N163_WAVE_BUFFER},
+	{FT_EF_GROOVE,				FT_EF_FDS_VOLUME},
+	{FT_EF_TRANSPOSE,			FT_EF_FDS_MOD_BIAS},
+	{FT_EF_N163_WAVE_BUFFER,	FT_EF_SUNSOFT_NOISE},
+	{FT_EF_FDS_VOLUME,			FT_EF_VRC7_PORT},
+	{FT_EF_FDS_MOD_BIAS,		FT_EF_VRC7_WRITE},
+	{0xFF,	0xFF}, //end mark
 };
 
 constexpr int ftEffectMapSize=sizeof(ftEffectMap)/sizeof(int);
@@ -540,19 +606,19 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
         //reader.seek(blockSize,SEEK_CUR);
 
         unsigned char num_grooves = reader.readC();
+        int max_groove = 0;
+
+        for(int i = 0; i < 0xff; i++)
+        {
+          ds.grooves.push_back(DivGroovePattern());
+        }
 
         for(int gr = 0; gr < num_grooves; gr++)
         {
           unsigned char index = reader.readC();
           unsigned char size = reader.readC();
 
-          ds.grooves.reserve(0xff);
-
-          for(int gr = 0; gr < 0xff; gr++)
-          {
-            DivGroovePattern gp;
-            ds.grooves.push_back(gp);
-          }
+          if(index > max_groove) max_groove = index + 1;
           /*for (int i=0; i<grooveCount; i++) {
             DivGroovePattern gp;
             gp.len=reader.readC();
@@ -575,7 +641,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           ds.grooves[index] = gp;
         }
 
-        ds.grooves.shrink_to_fit();
+        ds.grooves.resize(max_groove);
 
         unsigned char subsongs = reader.readC();
         for(int sub = 0; sub < subsongs; sub++)
@@ -701,6 +767,26 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
             for (int j=0; j<effectCols; j++) {
               unsigned char nextEffect=reader.readC();
+
+              if(ds.version < 0x0450 || dnft)
+              {
+                unsigned char idx = 0;
+
+                while(eff_conversion_050[idx][0] != 0xFF) //until the end of the array
+                {
+                  if(nextEffect == eff_conversion_050[idx][0]) //remap the effects (0CC vs FT effects type order) bruh idk why but it should be done to correctly read some modules
+                  {
+                    nextEffect = eff_conversion_050[idx][1];
+
+                    goto stop;
+                  }
+
+                  idx++;
+                }
+
+                stop:;
+              }
+
               unsigned char nextEffectVal=0;
               if (nextEffect!=0 || blockVersion<6) nextEffectVal=reader.readC();
               if(map_channels[ch] != 0xff)
