@@ -2155,7 +2155,9 @@ bool DivEngine::load(unsigned char* f, size_t slen) {
   if (memcmp(file,DIV_DMF_MAGIC,16)==0) {
     return loadDMF(file,len); 
   } else if (memcmp(file,DIV_FTM_MAGIC,18)==0) {
-    return loadFTM(file,len);
+    return loadFTM(file,len,false);
+  } else if (memcmp(file,DIV_DN_FTM_MAGIC,21)==0) {
+    return loadFTM(file,len,true);
   } else if (memcmp(file,DIV_FUR_MAGIC,16)==0) {
     return loadFur(file,len,false);
   } else if (memcmp(file,DIV_FUR_B_MAGIC,16)==0) {

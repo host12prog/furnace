@@ -75,7 +75,7 @@ const int ftEffectMap[]={
 
 constexpr int ftEffectMapSize=sizeof(ftEffectMap)/sizeof(int);
 
-bool DivEngine::loadFTM(unsigned char* file, size_t len) {
+bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
   SafeReader reader=SafeReader(file,len);
   warnings="";
   try {
@@ -86,14 +86,16 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len) {
     unsigned int n163Chans=0;
     bool hasSequence[256][8];
     unsigned char sequenceIndex[256][8];
+    unsigned char map_channels[DIV_MAX_CHANS];
     unsigned int hilightA=4;
     unsigned int hilightB=16;
     double customHz=60;
     
     memset(hasSequence,0,256*8*sizeof(bool));
     memset(sequenceIndex,0,256*8);
+    memset(map_channels,0xfe,DIV_MAX_CHANS*sizeof(unsigned char));
 
-    if (!reader.seek(18,SEEK_SET)) {
+    if (!reader.seek(dnft ? 21 : 18,SEEK_SET)) {
       logE("premature end of file!");
       lastError="incomplete file";
       delete[] file;
@@ -132,12 +134,13 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len) {
       unsigned int blockSize=(unsigned int)reader.readI();
       size_t blockStart=reader.tell();
       
-      logD("reading block %s (version %d, %d bytes)",blockName,blockVersion,blockSize);
+      logD("reading block %s (version %d, %d bytes, position %x)",blockName,blockVersion,blockSize,reader.tell());
       if (blockName=="PARAMS") {
         // versions 7-9 don't change anything?
         CHECK_BLOCK_VERSION(9);
         unsigned int oldSpeedTempo=0;
-        if (blockVersion<=1) {
+        if (blockVersion<=1)
+        {
           oldSpeedTempo=reader.readI();
         }
         if (blockVersion>=2) {
@@ -172,14 +175,14 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len) {
           hilightA=reader.readI();
           hilightB=reader.readI();
         }
-        if (expansions&8) if (blockVersion>=5) { // N163 channels
+        if ((expansions&16) && blockVersion>=5) { // N163 channels
           n163Chans=reader.readI();
         }
         if (blockVersion>=6) {
           speedSplitPoint=reader.readI();
         }
 
-        if (blockVersion>=8) {
+        if (blockVersion==8) {
           int fineTuneCents=reader.readC()*100;
           fineTuneCents+=reader.readC();
 
@@ -200,31 +203,95 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len) {
 
         // initialize channels
         int systemID=0;
+
+        int curr_chan = 0;
+        int map_ch = 0;
+
         ds.system[systemID++]=DIV_SYSTEM_NES;
-        if (expansions&1) {
+
+        for(int ch = 0; ch < 5; ch++)
+        {
+          map_channels[curr_chan] = map_ch;
+          curr_chan++;
+          map_ch++;
+        }
+
+        if (expansions&1) 
+        {
           ds.system[systemID++]=DIV_SYSTEM_VRC6;
-        }
-        if (expansions&2) {
-          ds.system[systemID++]=DIV_SYSTEM_VRC7;
-        }
-        if (expansions&4) {
-          ds.system[systemID++]=DIV_SYSTEM_FDS;
+
+          for(int ch = 0; ch < 3; ch++)
+          {
+            map_channels[curr_chan] = map_ch;
+            curr_chan++;
+            map_ch++;
+          }
         }
         if (expansions&8) {
           ds.system[systemID++]=DIV_SYSTEM_MMC5;
+
+          for(int ch = 0; ch < 2; ch++)
+          {
+            map_channels[curr_chan] = map_ch;
+            curr_chan++;
+            map_ch++;
+          }
+          
+          map_channels[curr_chan] = map_ch; //do not populate and skip MMC5 PCM channel!
+          map_ch++;
         }
         if (expansions&16) {
           ds.system[systemID]=DIV_SYSTEM_N163;
           ds.systemFlags[systemID++].set("channels",(int)n163Chans);
+
+          for(int ch = 0; ch < (int)n163Chans; ch++)
+          {
+            map_channels[curr_chan] = map_ch;
+            curr_chan++;
+            map_ch++;
+          }
+        }
+        if (expansions&4) {
+          ds.system[systemID++]=DIV_SYSTEM_FDS;
+
+          map_channels[curr_chan] = map_ch;
+          curr_chan++;
+          map_ch++;
+        }
+        if (expansions&2) {
+          ds.system[systemID++]=DIV_SYSTEM_VRC7;
+
+          for(int ch = 0; ch < 6; ch++)
+          {
+            map_channels[curr_chan] = map_ch;
+            curr_chan++;
+            map_ch++;
+          }
         }
         if (expansions&32) {
           ds.system[systemID]=DIV_SYSTEM_AY8910;
           ds.systemFlags[systemID++].set("chipType",2); // Sunsoft 5B
+
+          for(int ch = 0; ch < 3; ch++)
+          {
+            map_channels[curr_chan] = map_ch;
+            curr_chan++;
+            map_ch++;
+          }
         }
         ds.systemLen=systemID;
 
+        for(int i = 0; i < curr_chan; i++)
+        {
+            logV("map ch: fami ch %d mapped to furnace ch %d", i, map_channels[i]);
+        }
+
         unsigned int calcChans=0;
         for (int i=0; i<ds.systemLen; i++) {
+          if(ds.system[i] == DIV_SYSTEM_MMC5)
+          {
+            calcChans--; //no PCM channel for MMC5 in famitracker
+          }
           calcChans+=getChannelCount(ds.system[i]);
         }
         if (calcChans!=tchans) {
@@ -265,8 +332,17 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len) {
           logV("for channel ID %d",chID);
           for (int j=0; j<=totalSongs; j++) {
             unsigned char effectCols=reader.readC();
-            ds.subsong[j]->pat[i].effectCols=effectCols+1;
-            logV("- song %d has %d effect columns",j,effectCols);
+
+            if(map_channels[i] == 0xfe)
+            {
+              ds.subsong[j]->pat[i].effectCols=1;
+              logV("- song %d has %d effect columns",j,effectCols);
+            }
+            else
+            {
+              ds.subsong[j]->pat[map_channels[i]].effectCols=effectCols+1;
+              logV("- song %d has %d effect columns",j,effectCols);
+            }
           }
         }
 
@@ -445,6 +521,64 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len) {
       } else if (blockName=="SEQUENCES") {
         CHECK_BLOCK_VERSION(6);
         reader.seek(blockSize,SEEK_CUR);
+      } else if (blockName=="GROOVES") {
+        CHECK_BLOCK_VERSION(6);
+        //reader.seek(blockSize,SEEK_CUR);
+
+        unsigned char num_grooves = reader.readC();
+
+        for(int gr = 0; gr < num_grooves; gr++)
+        {
+          unsigned char index = reader.readC();
+          unsigned char size = reader.readC();
+
+          ds.grooves.reserve(0xff);
+
+          for(int gr = 0; gr < 0xff; gr++)
+          {
+            DivGroovePattern gp;
+            ds.grooves.push_back(gp);
+          }
+          /*for (int i=0; i<grooveCount; i++) {
+            DivGroovePattern gp;
+            gp.len=reader.readC();
+            for (int j=0; j<16; j++) {
+              gp.val[j]=reader.readC();
+            }
+
+            ds.grooves.push_back(gp);
+          }*/
+
+          DivGroovePattern gp;
+          gp.len = size;
+
+          for(int sz = 0; sz < size; sz++)
+          {
+            unsigned char value = reader.readC();
+            gp.val[sz] = value;
+          }
+
+          ds.grooves[index] = gp;
+        }
+
+        ds.grooves.shrink_to_fit();
+
+        unsigned char subsongs = reader.readC();
+        for(int sub = 0; sub < subsongs; sub++)
+        {
+          unsigned char used = reader.readC();
+
+          if(used)
+          {
+            ds.subsong[sub]->speeds = ds.grooves[0];
+          }
+        }
+
+        if((reader.tell()-blockStart)!=blockSize)
+        {
+          logE("block %s size does not match! block size %d curr pos %d",blockName,blockSize,reader.tell()-blockStart);
+        }
+
       } else if (blockName=="FRAMES") {
         CHECK_BLOCK_VERSION(3);
 
@@ -457,6 +591,12 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len) {
           }
           if (blockVersion>=2) {
             s->virtualTempoN=reader.readI();
+            
+            if(s->virtualTempoN == 0)
+            {
+              s->virtualTempoN = 150; //TODO: make it properly
+            }
+
             s->patLen=reader.readI();
           }
           int why=tchans;
@@ -468,8 +608,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len) {
           for (int j=0; j<s->ordersLen; j++) {
             for (int k=0; k<why; k++) {
               unsigned char o=reader.readC();
-              logV("%.2x",o);
-              s->orders.ord[k][j]=o;
+              //logV("%.2x",o);
+              s->orders.ord[map_channels[k]][j]=o;
             }
           }
         }
@@ -493,7 +633,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len) {
           int patNum=reader.readI();
           int numRows=reader.readI();
 
-          DivPattern* pat=ds.subsong[subs]->pat[ch].getPattern(patNum,true);
+          DivPattern* pat=ds.subsong[subs]->pat[map_channels[ch]].getPattern(patNum,true);
           for (int i=0; i<numRows; i++) {
             unsigned int row=0;
             if (blockVersion>=2 && blockVersion<6) { // row index
@@ -504,51 +644,64 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len) {
 
             unsigned char nextNote=reader.readC();
             unsigned char nextOctave=reader.readC();
-            if (nextNote==0x0d) {
-              pat->data[row][0]=100;
-            } else if (nextNote==0x0e) {
-              pat->data[row][0]=101;
-            } else if (nextNote==0x01) {
-              pat->data[row][0]=12;
-              pat->data[row][1]=nextOctave-1;
-            } else if (nextNote==0) {
-              pat->data[row][0]=0;
-            } else if (nextNote<0x0d) {
-              pat->data[row][0]=nextNote-1;
-              pat->data[row][1]=nextOctave;
+
+            if(map_channels[ch] != 0xff)
+            {
+              if (nextNote==0x0d) {
+                pat->data[row][0]=100;
+              } else if (nextNote==0x0e) {
+                pat->data[row][0]=101;
+              } else if (nextNote==0x01) {
+                pat->data[row][0]=12;
+                pat->data[row][1]=nextOctave-1;
+              } else if (nextNote==0) {
+                pat->data[row][0]=0;
+              } else if (nextNote<0x0d) {
+                pat->data[row][0]=nextNote-1;
+                pat->data[row][1]=nextOctave;
+              }
             }
             
             unsigned char nextIns=reader.readC();
-            if (nextIns<0x40) {
-              pat->data[row][2]=nextIns;
-            } else {
-              pat->data[row][2]=-1;
+            if(map_channels[ch] != 0xff)
+            {
+              if (nextIns<0x40) {
+                pat->data[row][2]=nextIns;
+              } else {
+                pat->data[row][2]=-1;
+              }
             }
 
             unsigned char nextVol=reader.readC();
-            if (nextVol<0x10) {
-              pat->data[row][3]=nextVol;
-            } else {
-              pat->data[row][3]=-1;
+            if(map_channels[ch] != 0xff)
+            {
+              if (nextVol<0x10) {
+                pat->data[row][3]=nextVol;
+              } else {
+                pat->data[row][3]=-1;
+              }
             }
 
-            int effectCols=ds.subsong[subs]->pat[ch].effectCols;
+            int effectCols=ds.subsong[subs]->pat[map_channels[ch]].effectCols;
             if (blockVersion>=6) effectCols=4;
 
             for (int j=0; j<effectCols; j++) {
               unsigned char nextEffect=reader.readC();
               unsigned char nextEffectVal=0;
               if (nextEffect!=0 || blockVersion<6) nextEffectVal=reader.readC();
-              if (nextEffect==0 && nextEffectVal==0) {
-                pat->data[row][4+(j*2)]=-1;
-                pat->data[row][5+(j*2)]=-1;
-              } else {
-                if (nextEffect<ftEffectMapSize) {
-                  pat->data[row][4+(j*2)]=ftEffectMap[nextEffect];
-                } else {
+              if(map_channels[ch] != 0xff)
+              {
+                if (nextEffect==0 && nextEffectVal==0) {
                   pat->data[row][4+(j*2)]=-1;
+                  pat->data[row][5+(j*2)]=-1;
+                } else {
+                  if (nextEffect<ftEffectMapSize) {
+                    pat->data[row][4+(j*2)]=ftEffectMap[nextEffect];
+                  } else {
+                    pat->data[row][4+(j*2)]=-1;
+                  }
+                  pat->data[row][5+(j*2)]=nextEffectVal;
                 }
-                pat->data[row][5+(j*2)]=nextEffectVal;
               }
             }
           }
@@ -581,7 +734,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len) {
       }
     }
 
-    addWarning("FamiTracker import is experimental!");
+    //addWarning("FamiTracker import is experimental!");
 
     ds.version=DIV_VERSION_FTM;
 
