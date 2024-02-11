@@ -242,12 +242,19 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
         }
         if (expansions&16) {
           ds.system[systemID]=DIV_SYSTEM_N163;
-          ds.systemFlags[systemID++].set("channels",(int)n163Chans);
+          ds.systemFlags[systemID].set("channels",(int)n163Chans);
+          systemID++;
 
           for(int ch = 0; ch < (int)n163Chans; ch++)
           {
             map_channels[curr_chan] = map_ch;
             curr_chan++;
+            map_ch++;
+          }
+
+          for(int ch = 0; ch < (8 - (int)n163Chans); ch++)
+          {
+            map_channels[curr_chan] = map_ch; //do not populate and skip the missing N163 channels!
             map_ch++;
           }
         }
@@ -283,7 +290,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
         for(int i = 0; i < curr_chan; i++)
         {
-            logV("map ch: fami ch %d mapped to furnace ch %d", i, map_channels[i]);
+          logV("map ch: fami ch %d mapped to furnace ch %d", i, map_channels[i]);
         }
 
         unsigned int calcChans=0;
@@ -292,7 +299,14 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           {
             calcChans--; //no PCM channel for MMC5 in famitracker
           }
+
           calcChans+=getChannelCount(ds.system[i]);
+
+          if(ds.system[i] == DIV_SYSTEM_N163)
+          {
+            calcChans -= getChannelCount(ds.system[i]);
+            calcChans += (int)n163Chans;
+          }
         }
         if (calcChans!=tchans) {
           logE("channel counts do not match! %d != %d",tchans,calcChans);
@@ -697,10 +711,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
                 } else {
                   if (nextEffect<ftEffectMapSize) {
                     pat->data[row][4+(j*2)]=ftEffectMap[nextEffect];
+                    pat->data[row][5+(j*2)]=ftEffectMap[nextEffect] == -1 ? -1 : nextEffectVal;
                   } else {
                     pat->data[row][4+(j*2)]=-1;
+                    pat->data[row][5+(j*2)]=-1;
                   }
-                  pat->data[row][5+(j*2)]=nextEffectVal;
                 }
               }
             }
@@ -717,6 +732,18 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
       } else if (blockName=="COMMENTS") {
+        CHECK_BLOCK_VERSION(1);
+        reader.seek(blockSize,SEEK_CUR);
+      } else if (blockName=="DETUNETABLES") {
+        CHECK_BLOCK_VERSION(1);
+        reader.seek(blockSize,SEEK_CUR);
+      } else if (blockName=="PARAMS_EXTRA") {
+        CHECK_BLOCK_VERSION(1);
+        reader.seek(blockSize,SEEK_CUR);
+      } else if (blockName=="TUNING") {
+        CHECK_BLOCK_VERSION(1);
+        reader.seek(blockSize,SEEK_CUR);
+      } else if (blockName=="BOOKMARKS") {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
       } else {
