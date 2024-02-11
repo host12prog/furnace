@@ -712,6 +712,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
                   if (nextEffect<ftEffectMapSize) {
                     pat->data[row][4+(j*2)]=ftEffectMap[nextEffect];
                     pat->data[row][5+(j*2)]=ftEffectMap[nextEffect] == -1 ? -1 : nextEffectVal;
+
+                    if(ftEffectMap[nextEffect] == 0x0f && nextEffectVal > 0x1f)
+                    {
+                      pat->data[row][4+(j*2)] = 0xf0; //BPM speed change!
+                    }
                   } else {
                     pat->data[row][4+(j*2)]=-1;
                     pat->data[row][5+(j*2)]=-1;
