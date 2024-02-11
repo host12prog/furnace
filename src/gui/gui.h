@@ -1448,8 +1448,9 @@ class FurnaceGUIRender {
     virtual void destroyFontsTexture();
     virtual void renderGUI();
     virtual void wipe(float alpha);
-    virtual void drawOsc(float* data, size_t len, ImVec2 pos0, ImVec2 pos1, ImVec4 color);
+    virtual void drawOsc(float* data, size_t len, ImVec2 pos0, ImVec2 pos1, ImVec4 color, ImVec2 canvasSize, float lineWidth);
     virtual void present();
+    virtual bool supportsDrawOsc();
     virtual bool getOutputSize(int& w, int& h);
     virtual int getWindowFlags();
     virtual void preInit();
@@ -1459,6 +1460,22 @@ class FurnaceGUIRender {
     virtual bool quit();
     virtual bool isDead();
     virtual ~FurnaceGUIRender();
+};
+
+struct PendingDrawOsc {
+  void* gui;
+  float* data;
+  size_t len;
+  ImVec2 pos0;
+  ImVec2 pos1;
+  ImVec4 color;
+  PendingDrawOsc():
+    gui(NULL),
+    data(NULL),
+    len(0),
+    pos0(0,0),
+    pos1(0,0),
+    color(0,0,0,0) {}
 };
 
 class FurnaceGUI {
@@ -2259,6 +2276,7 @@ class FurnaceGUI {
   // oscilloscope
   int oscTotal, oscWidth;
   float* oscValues[DIV_MAX_OUTPUTS];
+  float* oscValuesAverage;
   float oscZoom;
   float oscWindowSize;
   float oscInput, oscInput1;
@@ -2733,6 +2751,7 @@ class FurnaceGUI {
     void runBackupThread();
     void pushPartBlend();
     void popPartBlend();
+    void runPendingDrawOsc(PendingDrawOsc* which);
     bool detectOutOfBoundsWindow(SDL_Rect& failing);
     int processEvent(SDL_Event* ev);
     bool loop();
