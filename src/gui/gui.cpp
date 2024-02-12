@@ -4393,7 +4393,7 @@ bool FurnaceGUI::loop() {
         ImGui::EndMenu();
       }
       ImGui::PushStyleColor(ImGuiCol_Text,uiColors[GUI_COLOR_PLAYBACK_STAT]);
-      if (e->isPlaying()) {
+      if (e->isPlaying() && settings.playbackTime) {
         int totalTicks=e->getTotalTicks();
         int totalSeconds=e->getTotalSeconds();
 
@@ -7411,6 +7411,7 @@ FurnaceGUI::FurnaceGUI():
   speedOpen(true),
   groovesOpen(false),
   xyOscOpen(false),
+  shortIntro(false),
   insListDir(false),
   waveListDir(false),
   sampleListDir(false),

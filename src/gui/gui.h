@@ -1788,6 +1788,8 @@ class FurnaceGUI {
     int fontAutoHint;
     int fontAntiAlias;
     int selectAssetOnLoad;
+    int basicColors;
+    int playbackTime;
     unsigned int maxUndoSteps;
     int language;
     int translate_channel_names_pattern;
@@ -1990,6 +1992,8 @@ class FurnaceGUI {
       fontAutoHint(1),
       fontAntiAlias(1),
       selectAssetOnLoad(1),
+      basicColors(1),
+      playbackTime(1),
       maxUndoSteps(100),
       language(DIV_LANG_ENGLISH),
       translate_channel_names_pattern(0),
