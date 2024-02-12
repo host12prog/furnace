@@ -190,8 +190,7 @@ const char* insTypes[DIV_INS_MAX+1][3]={
 const char* sampleLoopModes[DIV_SAMPLE_LOOP_MAX]={
   "Forward##sggc",
   "Backward##sggc",
-  "Ping pong##sggc",
-  NULL
+  "Ping pong##sggc"
 };
 
 const char* sampleDepths[DIV_SAMPLE_DEPTH_MAX]={
