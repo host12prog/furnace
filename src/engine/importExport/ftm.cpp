@@ -619,16 +619,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           unsigned char size = reader.readC();
 
           if(index > max_groove) max_groove = index + 1;
-          /*for (int i=0; i<grooveCount; i++) {
-            DivGroovePattern gp;
-            gp.len=reader.readC();
-            for (int j=0; j<16; j++) {
-              gp.val[j]=reader.readC();
-            }
-
-            ds.grooves.push_back(gp);
-          }*/
-
+          
           DivGroovePattern gp;
           gp.len = size;
 
