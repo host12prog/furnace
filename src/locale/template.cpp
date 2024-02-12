@@ -2880,6 +2880,7 @@ void DivLocale::addTranslationsTemplate()
     strings["File path##sbar1"].plurals[0] = "=File path##sbar1";
     strings["Cursor details or file path##sbar2"].plurals[0] = "=Cursor details or file path##sbar2";
     strings["Nothing##sbar3"].plurals[0] = "=Nothing##sbar3";
+    strings["Display playback status when playing##sgse"].plurals[0] = "=Display playback status when playing";
     strings["Export options layout:##sgse"].plurals[0] = "=Export options layout:";
     strings["Sub-menus in File menu##eol0"].plurals[0] = "=Sub-menus in File menu##eol0";
     strings["Modal window with tabs##eol1"].plurals[0] = "=Modal window with tabs##eol1";

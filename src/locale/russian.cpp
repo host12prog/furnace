@@ -2872,6 +2872,7 @@ void DivLocale::addTranslationsRussian()
     strings["File path##sbar1"].plurals[0] = "Путь к файлу##sbar1";
     strings["Cursor details or file path##sbar2"].plurals[0] = "Информация о выделенном элементе или путь к файлу##sbar2";
     strings["Nothing##sbar3"].plurals[0] = "Ничего##sbar3";
+    strings["Display playback status when playing##sgse"].plurals[0] = "Отображать статус проигрывания во время воспроизведения";
     strings["Export options layout:##sgse"].plurals[0] = "Вид настроек экспорта:";
     strings["Sub-menus in File menu##eol0"].plurals[0] = "Подпункты в меню \"Файл\"##eol0";
     strings["Modal window with tabs##eol1"].plurals[0] = "Модальное окно с вкладками##eol1";
