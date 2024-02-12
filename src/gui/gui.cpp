@@ -7411,7 +7411,6 @@ FurnaceGUI::FurnaceGUI():
   speedOpen(true),
   groovesOpen(false),
   xyOscOpen(false),
-  shortIntro(false),
   insListDir(false),
   waveListDir(false),
   sampleListDir(false),
