@@ -219,7 +219,8 @@ const char* resampleStrats[]={
   "cubic spline##sggc",
   "blep synthesis##sggc",
   "sinc##sggc",
-  "best possible##sggc"
+  "best possible##sggc", 
+  NULL
 };
 
 const char* fxColorsNames[]={
