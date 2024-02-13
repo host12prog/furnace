@@ -61,19 +61,19 @@ void DivLocale::addTranslationsPortuguese()
     //   sgfm  src/gui/fmPreview.cpp
     //   sgfo  src/gui/fonts.cpp
     //   sggd  src/gui/gradient.cpp
-    //   sggv  src/gui/grooves.cpp
+    //   sggv  src/gui/grooves.cpp        --DONE--
     //   sggu  src/gui/gui.cpp            --DONE--
     //   sggc  src/gui/guiConst.cpp       --    -- revise
     //   sgim  src/gui/image.cpp
-    //   sgie  src/gui/insEdit.cpp
+    //   sgie  src/gui/insEdit.cpp        --    -- revise
     //   sgmm  src/gui/midiMap.cpp
-    //   sgmx  src/gui/mixer.cpp
-    //   sgns  src/gui/newSong.cpp
-    //   sgor  src/gui/orders.cpp
-    //   sgos  src/gui/osc.cpp
-    //   sgpm  src/gui/patManager.cpp
-    //   sgpa  src/gui/pattern.cpp
-    //   sgpi  src/gui/piano.cpp
+    //   sgmx  src/gui/mixer.cpp          --DONE--
+    //   sgns  src/gui/newSong.cpp        --DONE--
+    //   sgor  src/gui/orders.cpp         --DONE--
+    //   sgos  src/gui/osc.cpp            --DONE--
+    //   sgpm  src/gui/patManager.cpp     --DONE--
+    //   sgpa  src/gui/pattern.cpp        --DONE--
+    //   sgpi  src/gui/piano.cpp          --    -- revise
     //   sgpr  src/gui/presets.cpp
     //   sgrv  src/gui/regView.cpp
     //   sgse  src/gui/sampleEdit.cpp
@@ -709,7 +709,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["wavetable editor##sggu"].plurals[0] = "editor de wavetables";
     strings["sample editor##sggu"].plurals[0] = "editor de samples";
     strings["play/edit controls##sggu"].plurals[0] = "controles de reprodução/edição";
-    strings["piano/input pad##sggu"].plurals[0] = "piano/superfície de entrada";
+    strings["piano/input pad##sggu"].plurals[0] = "piano/superfície de entrada"; // TODO: melhorar "superfície de entrada"
     strings["oscilloscope (master)##sggu"].plurals[0] = "osciloscópio (mestre)";
     strings["oscilloscope (per-channel)##sggu"].plurals[0] = "osciloscópio (por canal)";
     strings["oscilloscope (X-Y)##sggu"].plurals[0] = "osciloscópio (X-Y)";
@@ -1474,243 +1474,243 @@ void DivLocale::addTranslationsPortuguese()
 
     //   sggv  src/gui/grooves.cpp
 
-    strings["Grooves###Grooves"].plurals[0] = "=Grooves###Grooves";
-    strings["use effect 09xx to select a groove pattern.##sggv"].plurals[0] = "=use effect 09xx to select a groove pattern.##sggv";
-    strings["pattern##sggv"].plurals[0] = "=pattern##sggv";
-    strings["remove##sggv"].plurals[0] = "=remove##sggv";
+    strings["Grooves###Grooves"].plurals[0] = "Grooves###Grooves";
+    strings["use effect 09xx to select a groove pattern.##sggv"].plurals[0] = "use o efeito 09xx para selecionar um padrão de groove.##sggv";
+    strings["pattern##sggv"].plurals[0] = "padrão##sggv";
+    strings["remove##sggv"].plurals[0] = "excluir##sggv";
 
     //   sgie  src/gui/insEdit.cpp
 
-    strings["Name##sgie"].plurals[0] = "=Name";
-    strings["Open##sgie0"].plurals[0] = "=Open";
-    strings["Save##sgie"].plurals[0] = "=Save";
-    strings["export .dmp...##sgie"].plurals[0] = "=export .dmp...";
-    strings["Type##sgie"].plurals[0] = "=Type";
-    strings["Unknown##sgie"].plurals[0] = "=Unknown";
-    strings["none of the currently present chips are able to play this instrument type!##sgie"].plurals[0] = "=none of the currently present chips are able to play this instrument type!";
-    strings["Error##sgie"].plurals[0] = "=Error";
-    strings["invalid instrument type! change it first.##sgie"].plurals[0] = "=invalid instrument type! change it first.";
-    strings["Instrument Editor###Instrument Editor"].plurals[0] = "=Instrument Editor###Instrument Editor";
-    strings["waiting...##sgie0"].plurals[0] = "=waiting...";
-    strings["waiting...##sgie1"].plurals[0] = "=waiting...";
-    strings["no instrument selected##sgie0"].plurals[0] = "=no instrument selected";
-    strings["no instrument selected##sgie1"].plurals[0] = "=no instrument selected";
-    strings["select one...##sgie"].plurals[0] = "=select one...";
-    strings["or##sgie0"].plurals[0] = "=or";
-    strings["Open##sgie1"].plurals[0] = "=Open";
-    strings["or##sgie1"].plurals[0] = "=or";
-    strings["Create New##sgie"].plurals[0] = "=Create New";
-    strings["copy##sgie"].plurals[0] = "=copy";
-    strings["paste##sgie"].plurals[0] = "=paste";
-    strings["clear contents##sgie"].plurals[0] = "=clear contents";
-    strings["offset...##sgie"].plurals[0] = "=offset...";
-    strings["offset##sgie"].plurals[0] = "=offset";
-    strings["scale...##sgie"].plurals[0] = "=scale...";
-    strings["scale##sgie"].plurals[0] = "=scale";
-    strings["randomize...##sgie"].plurals[0] = "=randomize...";
-    strings["Min##sgie"].plurals[0] = "=Min";
-    strings["Max##sgie"].plurals[0] = "=Max";
-    strings["randomize##sgie"].plurals[0] = "=randomize";
+    strings["Name##sgie"].plurals[0] = "Nome";
+    strings["Open##sgie0"].plurals[0] = "Abrir";
+    strings["Save##sgie"].plurals[0] = "Salvar";
+    strings["export .dmp...##sgie"].plurals[0] = "exportar .dmp...";
+    strings["Type##sgie"].plurals[0] = "Tipo";
+    strings["Unknown##sgie"].plurals[0] = "Desconhecido";
+    strings["none of the currently present chips are able to play this instrument type!##sgie"].plurals[0] = "nenhum dos chips atualmente presentes são capazes de reproduzir esse tipo de instrumento!";
+    strings["Error##sgie"].plurals[0] = "Erro";
+    strings["invalid instrument type! change it first.##sgie"].plurals[0] = "tipo de instrumento inválido! troque-o primeiro."; // TODO revisar
+    strings["Instrument Editor###Instrument Editor"].plurals[0] = "Editor de Instrumento###Instrument Editor";
+    strings["waiting...##sgie0"].plurals[0] = "aguardando...";
+    strings["waiting...##sgie1"].plurals[0] = "aguardando...";
+    strings["no instrument selected##sgie0"].plurals[0] = "nenhum instrumento selecionado";
+    strings["no instrument selected##sgie1"].plurals[0] = "nenhum instrumento selecionado";
+    strings["select one...##sgie"].plurals[0] = "selecione um...";
+    strings["or##sgie0"].plurals[0] = "ou";
+    strings["Open##sgie1"].plurals[0] = "Abrir";
+    strings["or##sgie1"].plurals[0] = "ou";
+    strings["Create New##sgie"].plurals[0] = "Criar um novo";
+    strings["copy##sgie"].plurals[0] = "copiar";
+    strings["paste##sgie"].plurals[0] = "colar";
+    strings["clear contents##sgie"].plurals[0] = "limpar conteúdo";
+    strings["offset...##sgie"].plurals[0] = "deslocar...";
+    strings["offset##sgie"].plurals[0] = "deslocar";
+    strings["scale...##sgie"].plurals[0] = "escalonar";
+    strings["scale##sgie"].plurals[0] = "escalonar";
+    strings["randomize...##sgie"].plurals[0] = "aleatorizar";
+    strings["Min##sgie"].plurals[0] = "Mín.";
+    strings["Max##sgie"].plurals[0] = "Máx.";
+    strings["randomize##sgie"].plurals[0] = "aleatorizar";
 
     //   sgmx  src/gui/mixer.cpp
 
-    strings["input##sgmx"].plurals[0] = "=input";
-    strings["output##sgmx"].plurals[0] = "=output";
-    strings["Mixer##sgmx"].plurals[0] = "=Mixer";
-    strings["Master Volume##sgmx"].plurals[0] = "=Master Volume";
-    strings["Invert##sgmx"].plurals[0] = "=Invert";
-    strings["Volume##sgmx"].plurals[0] = "=Volume";
-    strings["Panning##sgmx"].plurals[0] = "=Panning";
-    strings["Front/Rear##sgmx"].plurals[0] = "=Front/Rear";
-    strings["Patchbay##sgmx"].plurals[0] = "=Patchbay";
-    strings["Automatic patchbay##sgmx"].plurals[0] = "=Automatic patchbay";
-    strings["Display hidden ports##sgmx"].plurals[0] = "=Display hidden ports";
-    strings["Display internal##sgmx"].plurals[0] = "=Display internal";
-    strings["System##sgmx0"].plurals[0] = "=System";
-    strings["Sample Preview##sgmx"].plurals[0] = "=Sample Preview";
-    strings["Metronome##sgmx"].plurals[0] = "=Metronome";
-    strings["System##sgmx1"].plurals[0] = "=System";
-    strings["disconnect all##sgmx"].plurals[0] = "=disconnect all";
+    strings["input##sgmx"].plurals[0] = "entrada";
+    strings["output##sgmx"].plurals[0] = "saída";
+    strings["Mixer##sgmx"].plurals[0] = "Mixer";
+    strings["Master Volume##sgmx"].plurals[0] = "Volume Mestre";
+    strings["Invert##sgmx"].plurals[0] = "Inverter";
+    strings["Volume##sgmx"].plurals[0] = "Volume";
+    strings["Panning##sgmx"].plurals[0] = "Balanço";
+    strings["Front/Rear##sgmx"].plurals[0] = "Frontal/Traseira";
+    strings["Patchbay##sgmx"].plurals[0] = "Patchbay";
+    strings["Automatic patchbay##sgmx"].plurals[0] = "Patchbay automático";
+    strings["Display hidden ports##sgmx"].plurals[0] = "Mostrar portas ocultas";
+    strings["Display internal##sgmx"].plurals[0] = "Mostrar portas internas";
+    strings["System##sgmx0"].plurals[0] = "Sistema";
+    strings["Sample Preview##sgmx"].plurals[0] = "Previsão de amostras";
+    strings["Metronome##sgmx"].plurals[0] = "Metrônomo";
+    strings["System##sgmx1"].plurals[0] = "Sistema";
+    strings["disconnect all##sgmx"].plurals[0] = "desconectar todas";
 
     //   sgns  src/gui/newSong.cpp
 
-    strings["Choose a System!##sgns"].plurals[0] = "=Choose a System!";
-    strings["Search...##sgns"].plurals[0] = "=Search...";
-    strings["Categories##sgns"].plurals[0] = "=Categories";
-    strings["Systems##sgns"].plurals[0] = "=Systems";
-    strings["I'm feeling lucky##sgns"].plurals[0] = "=I'm feeling lucky";
-    strings["Cancel##sgns"].plurals[0] = "=Cancel";
+    strings["Choose a System!##sgns"].plurals[0] = "Escolha um Sistema!";
+    strings["Search...##sgns"].plurals[0] = "Procurar...";
+    strings["Categories##sgns"].plurals[0] = "Categorias";
+    strings["Systems##sgns"].plurals[0] = "Sistemas";
+    strings["I'm feeling lucky##sgns"].plurals[0] = "Estou com sorte";
+    strings["Cancel##sgns"].plurals[0] = "Cancelar";
 
     //   sgor  src/gui/orders.cpp
 
-    strings["Add new order##sgor"].plurals[0] = "=Add new order";
-    strings["Remove order##sgor"].plurals[0] = "=Remove order";
-    strings["Duplicate order (right-click to deep clone)##sgor"].plurals[0] = "=Duplicate order (right-click to deep clone)";
-    strings["Move order up##sgor"].plurals[0] = "=Move order up";
-    strings["Move order down##sgor"].plurals[0] = "=Move order down";
-    strings["Place copy of current order at end of song (right-click to deep clone)##sgor"].plurals[0] = "=Place copy of current order at end of song (right-click to deep clone)";
-    strings["Order change mode: entire row##sgor"].plurals[0] = "=Order change mode: entire row";
-    strings["Order change mode: one##sgor"].plurals[0] = "=Order change mode: one";
-    strings["Order edit mode: Select and type (scroll vertically)##sgor"].plurals[0] = "=Order edit mode: Select and type (scroll vertically)";
-    strings["Order edit mode: Select and type (scroll horizontally)##sgor"].plurals[0] = "=Order edit mode: Select and type (scroll horizontally)";
-    strings["Order edit mode: Select and type (don't scroll)##sgor"].plurals[0] = "=Order edit mode: Select and type (don't scroll)";
-    strings["Order edit mode: Click to change##sgor"].plurals[0] = "=Order edit mode: Click to change";
+    strings["Add new order##sgor"].plurals[0] = "Adicionar nova ordem";
+    strings["Remove order##sgor"].plurals[0] = "Remover ordem";
+    strings["Duplicate order (right-click to deep clone)##sgor"].plurals[0] = "Duplicar ordem (clique com o botão direito para um clone profundo)";
+    strings["Move order up##sgor"].plurals[0] = "Mover ordem para cima";
+    strings["Move order down##sgor"].plurals[0] = "Mover ordem para baixo";
+    strings["Place copy of current order at end of song (right-click to deep clone)##sgor"].plurals[0] = "Adicionar cópia da ordem atual ao final da música (clique com o botão direito para um clone profundo)";
+    strings["Order change mode: entire row##sgor"].plurals[0] = "Modo de mudança da ordem: linha inteira";
+    strings["Order change mode: one##sgor"].plurals[0] = "Modo de mudança da ordem: uma célula";
+    strings["Order edit mode: Select and type (scroll vertically)##sgor"].plurals[0] = "Modo de edição de ordem: selecionar e digitar (rolagem vertical)";
+    strings["Order edit mode: Select and type (scroll horizontally)##sgor"].plurals[0] = "Modo de edição de ordem: selecionar e digitar (rolagem horizontal)";
+    strings["Order edit mode: Select and type (don't scroll)##sgor"].plurals[0] = "Modo de edição de ordem: selecionar e digitar (não rolar)";
+    strings["Order edit mode: Click to change##sgor"].plurals[0] = "Modo de edição de ordem: clicar para mudar";
 
     //   sgos  src/gui/osc.cpp
 
-    strings["Oscilloscope###Oscilloscope"].plurals[0] = "=Oscilloscope###Oscilloscope";
-    strings["zoom: %.2fx (%.1fdB)##sgos"].plurals[0] = "=zoom: %.2fx (%.1fdB)";
-    strings["window size: %.1fms##sgos"].plurals[0] = "=window size: %.1fms";
-    strings["(-Infinity)dB##sgos"].plurals[0] = "=(-Infinity)dB";
+    strings["Oscilloscope###Oscilloscope"].plurals[0] = "Osciloscópio###Oscilloscope";
+    strings["zoom: %.2fx (%.1fdB)##sgos"].plurals[0] = "zoom: %.2fx (%.1fdB)";
+    strings["window size: %.1fms##sgos"].plurals[0] = "tamanho da janela: %.1fms";
+    strings["(-Infinity)dB##sgos"].plurals[0] = "(-Infinito)dB";
 
     //   sgpm  src/gui/patManager.cpp
 
-    strings["Pattern Manager###Pattern Manager"].plurals[0] = "=Pattern Manager###Pattern Manager";
-    strings["Global Tasks##sgpm"].plurals[0] = "=Global Tasks";
-    strings["De-duplicate patterns##sgpm"].plurals[0] = "=De-duplicate patterns";
-    strings["Re-arrange patterns##sgpm"].plurals[0] = "=Re-arrange patterns";
-    strings["Pattern %.2X\n- not allocated##sgpm"].plurals[0] = "=Pattern %.2X\n- not allocated";
-    strings["Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase##sgpm"].plurals[0] = "=Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase";
+    strings["Pattern Manager###Pattern Manager"].plurals[0] = "Gerenciador de Sequências###Pattern Manager";
+    strings["Global Tasks##sgpm"].plurals[0] = "Tarefas Globais";
+    strings["De-duplicate patterns##sgpm"].plurals[0] = "Deduplicar sequências";
+    strings["Re-arrange patterns##sgpm"].plurals[0] = "Reordenar sequências";
+    strings["Pattern %.2X\n- not allocated##sgpm"].plurals[0] = "Sequência %.2X\n- não alocada";
+    strings["Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase##sgpm"].plurals[0] = "Sequência %.2X\n- usada %d vezes (%.0f%%)\n\nclique com o botão direito para excluir";
 
     //   sgpa  src/gui/pattern.cpp
 
-    strings["Pattern###Pattern"].plurals[0] = "=Pattern###Pattern";
-    strings["click for pattern options (effect columns/pattern names/visualizer)##sgpa"].plurals[0] = "=click for pattern options (effect columns/pattern names/visualizer)";
-    strings["Options:##sgpa"].plurals[0] = "=Options:";
-    strings["Effect columns/collapse##sgpa"].plurals[0] = "=Effect columns/collapse";
-    strings["Pattern names##sgpa"].plurals[0] = "=Pattern names";
-    strings["Channel group hints##sgpa"].plurals[0] = "=Channel group hints";
-    strings["Visualizer##sgpa"].plurals[0] = "=Visualizer";
-    strings["Channel status:##sgpa"].plurals[0] = "=Channel status:";
-    strings["No##_PCS0"].plurals[0] = "=No##_PCS0";
-    strings["Yes##_PCS1"].plurals[0] = "=Yes##_PCS1";
-    strings["WARNING!!##sgpa"].plurals[0] = "=WARNING!!";
-    strings["this instrument cannot be previewed because##sgpa"].plurals[0] = "=this instrument cannot be previewed because";
-    strings["none of the chips can play it##sgpa"].plurals[0] = "=none of the chips can play it";
-    strings["your instrument is in peril!! be careful...##sgpa"].plurals[0] = "=your instrument is in peril!! be careful...";
+    strings["Pattern###Pattern"].plurals[0] = "Sequência###Pattern";
+    strings["click for pattern options (effect columns/pattern names/visualizer)##sgpa"].plurals[0] = "clique para opções de sequência (colunas de efeito/nomes das faixas/visualizador)";
+    strings["Options:##sgpa"].plurals[0] = "Opções:";
+    strings["Effect columns/collapse##sgpa"].plurals[0] = "Botões de colunas de efeito/contrair faixa";
+    strings["Pattern names##sgpa"].plurals[0] = "Nomes das faixas";
+    strings["Channel group hints##sgpa"].plurals[0] = "Dicas de agrupamento de canais";
+    strings["Visualizer##sgpa"].plurals[0] = "Visualizador";
+    strings["Channel status:##sgpa"].plurals[0] = "Estado do canal:";
+    strings["No##_PCS0"].plurals[0] = "Não##_PCS0";
+    strings["Yes##_PCS1"].plurals[0] = "Sim##_PCS1";
+    strings["WARNING!!##sgpa"].plurals[0] = "AVISO!!";
+    strings["this instrument cannot be previewed because##sgpa"].plurals[0] = "este instrumento não pode ser previsto pois";
+    strings["none of the chips can play it##sgpa"].plurals[0] = "nenhum dos chips pode tocá-lo";
+    strings["your instrument is in peril!! be careful...##sgpa"].plurals[0] = "seu instrumento está em perigo! cuidado...";
 
     //   sgpi  src/gui/piano.cpp
 
-    strings["Piano###Piano"].plurals[0] = "=Piano###Piano";
-    strings["Options##sgpi"].plurals[0] = "=Options";
-    strings["Key layout:##sgpi"].plurals[0] = "=Key layout:";
-    strings["Automatic##sgpi"].plurals[0] = "=Automatic";
-    strings["Standard##sgpi"].plurals[0] = "=Standard";
-    strings["Continuous##sgpi"].plurals[0] = "=Continuous";
-    strings["Value input pad:##sgpi"].plurals[0] = "=Value input pad:";
-    strings["Disabled##sgpi"].plurals[0] = "=Disabled";
-    strings["Replace piano##sgpi"].plurals[0] = "=Replace piano";
-    strings["Split (automatic)##sgpi"].plurals[0] = "=Split (automatic)";
-    strings["Split (always visible)##sgpi"].plurals[0] = "=Split (always visible)";
-    strings["Share play/edit offset/range##sgpi"].plurals[0] = "=Share play/edit offset/range";
-    strings["Read-only (can't input notes)##sgpi"].plurals[0] = "=Read-only (can't input notes)";
-    strings["Input Pad###Input Pad"].plurals[0] = "=Input Pad###Input Pad";
+    strings["Piano###Piano"].plurals[0] = "Piano###Piano";
+    strings["Options##sgpi"].plurals[0] = "Opções";
+    strings["Key layout:##sgpi"].plurals[0] = "Leiaute das teclas:";
+    strings["Automatic##sgpi"].plurals[0] = "Automático";
+    strings["Standard##sgpi"].plurals[0] = "Padrão";
+    strings["Continuous##sgpi"].plurals[0] = "Contínuo";
+    strings["Value input pad:##sgpi"].plurals[0] = "Teclado numérico:";
+    strings["Disabled##sgpi"].plurals[0] = "Desabilitado";
+    strings["Replace piano##sgpi"].plurals[0] = "Substituir piano";
+    strings["Split (automatic)##sgpi"].plurals[0] = "Dividido (automático)";
+    strings["Split (always visible)##sgpi"].plurals[0] = "Dividido (sempre visível)";
+    strings["Share play/edit offset/range##sgpi"].plurals[0] = "Compartilhar intervalo/deslocamento entre modo de edição e reprodução";
+    strings["Read-only (can't input notes)##sgpi"].plurals[0] = "Somente leitura (não permite tocar notas)";
+    strings["Input Pad###Input Pad"].plurals[0] = "Superfície de entrada###Input Pad"; // TODO: trocar esse termo
 
     //   sgpr  src/gui/presets.cpp
 
-    strings["Game consoles##sgpr"].plurals[0] = "=Game consoles";
-    strings["let's play some chiptune making games!##sgpr"].plurals[0] = "=let's play some chiptune making games!";
-    strings["Sega Genesis (extended channel 3)##sgpr"].plurals[0] = "=Sega Genesis (extended channel 3)";
-    strings["Sega Genesis (DualPCM, extended channel 3)##sgpr"].plurals[0] = "=Sega Genesis (DualPCM, extended channel 3)";
-    strings["Sega Genesis (with Sega CD)##sgpr"].plurals[0] = "=Sega Genesis (with Sega CD)";
-    strings["Sega Genesis (extended channel 3 with Sega CD)##sgpr"].plurals[0] = "=Sega Genesis (extended channel 3 with Sega CD)";
-    strings["Sega Genesis (CSM with Sega CD)##sgpr"].plurals[0] = "=Sega Genesis (CSM with Sega CD)";
-    strings["Sega Master System (with FM expansion)##sgpr"].plurals[0] = "=Sega Master System (with FM expansion)";
-    strings["Sega Master System (with FM expansion in drums mode)##sgpr"].plurals[0] = "=Sega Master System (with FM expansion in drums mode)";
-    strings["Famicom with Konami VRC6##sgpr"].plurals[0] = "=Famicom with Konami VRC6";
-    strings["Famicom with Konami VRC7##sgpr0"].plurals[0] = "=Famicom with Konami VRC7";
-    strings["Famicom with MMC5##sgpr"].plurals[0] = "=Famicom with MMC5";
-    strings["Famicom with Sunsoft 5B##sgpr"].plurals[0] = "=Famicom with Sunsoft 5B";
-    strings["Famicom with Namco 163##sgpr"].plurals[0] = "=Famicom with Namco 163";
-    strings["Neo Geo AES (extended channel 2)##sgpr"].plurals[0] = "=Neo Geo AES (extended channel 2)";
-    strings["Neo Geo AES (extended channel 2 and CSM)##sgpr"].plurals[0] = "=Neo Geo AES (extended channel 2 and CSM)";
-    strings["Computers##sgpr"].plurals[0] = "=Computers";
-    strings["let's get to work on chiptune today.##sgpr"].plurals[0] = "=let's get to work on chiptune today.";
-    strings["Commodore 64 (C64, 6581 SID + Sound Expander in drums mode)##sgpr"].plurals[0] = "=Commodore 64 (C64, 6581 SID + Sound Expander in drums mode)";
-    strings["Commodore 64 (C64, 8580 SID + Sound Expander in drums mode)##sgpr"].plurals[0] = "=Commodore 64 (C64, 8580 SID + Sound Expander in drums mode)";
-    strings["Commodore 64 (C64, 6581 SID + FM-YAM in drums mode)##sgpr"].plurals[0] = "=Commodore 64 (C64, 6581 SID + FM-YAM in drums mode)";
-    strings["Commodore 64 (C64, 8580 SID + FM-YAM in drums mode)##sgpr"].plurals[0] = "=Commodore 64 (C64, 8580 SID + FM-YAM in drums mode)";
-    strings["MSX + MSX-AUDIO (drums mode)##sgpr"].plurals[0] = "=MSX + MSX-AUDIO (drums mode)";
-    strings["MSX + MSX-MUSIC (drums mode)##sgpr"].plurals[0] = "=MSX + MSX-MUSIC (drums mode)";
-    strings["MSX + Neotron (extended channel 2)##sgpr"].plurals[0] = "=MSX + Neotron (extended channel 2)";
-    strings["MSX + Neotron (extended channel 2 and CSM)##sgpr"].plurals[0] = "=MSX + Neotron (extended channel 2 and CSM)";
-    strings["MSX + Neotron (with YM2610B)##sgpr"].plurals[0] = "=MSX + Neotron (with YM2610B)";
-    strings["MSX + Neotron (with YM2610B; extended channel 3)##sgpr"].plurals[0] = "=MSX + Neotron (with YM2610B; extended channel 3)";
-    strings["MSX + Neotron (with YM2610B; extended channel 3 and CSM)##sgpr"].plurals[0] = "=MSX + Neotron (with YM2610B; extended channel 3 and CSM)";
-    strings["NEC PC-88 (with PC-8801-10)##sgpr"].plurals[0] = "=NEC PC-88 (with PC-8801-10)";
-    strings["NEC PC-88 (with PC-8801-11)##sgpr"].plurals[0] = "=NEC PC-88 (with PC-8801-11)";
-    strings["NEC PC-88 (with PC-8801-11; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-88 (with PC-8801-11; extended channel 3)";
-    strings["NEC PC-88 (with PC-8801-11; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-88 (with PC-8801-11; extended channel 3 and CSM)";
-    strings["NEC PC-88 (with PC-8801-23)##sgpr"].plurals[0] = "=NEC PC-88 (with PC-8801-23)";
-    strings["NEC PC-88 (with PC-8801-23; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-88 (with PC-8801-23; extended channel 3)";
-    strings["NEC PC-88 (with PC-8801-23; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-88 (with PC-8801-23; extended channel 3 and CSM)";
-    strings["NEC PC-88 (with HMB-20 HIBIKI-8800)##sgpr"].plurals[0] = "=NEC PC-88 (with HMB-20 HIBIKI-8800)";
-    strings["NEC PC-8801mk2SR (with PC-8801-10)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-10)";
-    strings["NEC PC-8801mk2SR (with PC-8801-10; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-10; extended channel 3)";
-    strings["NEC PC-8801mk2SR (with PC-8801-10; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-10; extended channel 3 and CSM)";
-    strings["NEC PC-8801mk2SR (with PC-8801-11)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-11)";
-    strings["NEC PC-8801mk2SR (with PC-8801-11; extended channel 3 on internal OPN)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-11; extended channel 3 on internal OPN)";
-    strings["NEC PC-8801mk2SR (with PC-8801-11; extended channel 3 on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-11; extended channel 3 on external OPN)";
-    strings["NEC PC-8801mk2SR (with PC-8801-11; extended channel 3 on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-11; extended channel 3 on both OPNs)";
-    strings["NEC PC-8801mk2SR (with PC-8801-11; extended channel 3 and CSM on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-11; extended channel 3 and CSM on both OPNs)";
-    strings["NEC PC-8801mk2SR (with PC-8801-23)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-23)";
-    strings["NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 on internal OPN)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 on internal OPN)";
-    strings["NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 and CSM on internal OPN)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 and CSM on internal OPN)";
-    strings["NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 on external OPN)";
-    strings["NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 and CSM on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 and CSM on external OPN)";
-    strings["NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 on both OPNs)";
-    strings["NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 and CSM on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 and CSM on both OPNs)";
-    strings["NEC PC-8801mk2SR (with HMB-20 HIBIKI-8800)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with HMB-20 HIBIKI-8800)";
-    strings["NEC PC-8801mk2SR (with HMB-20 HIBIKI-8800; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with HMB-20 HIBIKI-8800; extended channel 3)";
-    strings["NEC PC-8801mk2SR (with HMB-20 HIBIKI-8800; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (with HMB-20 HIBIKI-8800; extended channel 3 and CSM)";
-    strings["NEC PC-8801FA (with PC-8801-10)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-10)";
-    strings["NEC PC-8801FA (with PC-8801-10; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-10; extended channel 3)";
-    strings["NEC PC-8801FA (with PC-8801-11)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-11)";
-    strings["NEC PC-8801FA (with PC-8801-11; extended channel 3 on internal OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-11; extended channel 3 on internal OPN)";
-    strings["NEC PC-8801FA (with PC-8801-11; extended channel 3 on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-11; extended channel 3 on external OPN)";
-    strings["NEC PC-8801FA (with PC-8801-11; extended channel 3 and CSM on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-11; extended channel 3 and CSM on external OPN)";
-    strings["NEC PC-8801FA (with PC-8801-11; extended channel 3 on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-11; extended channel 3 on both OPNs)";
-    strings["NEC PC-8801FA (with PC-8801-11; extended channel 3 and CSM on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-11; extended channel 3 and CSM on both OPNs)";
-    strings["NEC PC-8801FA (with PC-8801-23)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-23)";
-    strings["NEC PC-8801FA (with PC-8801-23; extended channel 3 on internal OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-23; extended channel 3 on internal OPN)";
-    strings["NEC PC-8801FA (with PC-8801-23; extended channel 3 and CSM on internal OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-23; extended channel 3 and CSM on internal OPN)";
-    strings["NEC PC-8801FA (with PC-8801-23; extended channel 3 on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-23; extended channel 3 on external OPN)";
-    strings["NEC PC-8801FA (with PC-8801-23; extended channel 3 and CSM on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-23; extended channel 3 and CSM on external OPN)";
-    strings["NEC PC-8801FA (with PC-8801-23; extended channel 3 on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-23; extended channel 3 on both OPNs)";
-    strings["NEC PC-8801FA (with PC-8801-23; extended channel 3 and CSM on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801FA (with PC-8801-23; extended channel 3 and CSM on both OPNs)";
-    strings["NEC PC-8801FA (with HMB-20 HIBIKI-8800)##sgpr"].plurals[0] = "=NEC PC-8801FA (with HMB-20 HIBIKI-8800)";
-    strings["NEC PC-8801FA (with HMB-20 HIBIKI-8800; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-8801FA (with HMB-20 HIBIKI-8800; extended channel 3)";
-    strings["NEC PC-8801FA (with HMB-20 HIBIKI-8800; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-8801FA (with HMB-20 HIBIKI-8800; extended channel 3 and CSM)";
-    strings["NEC PC-98 (with PC-9801-26/K)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-26/K)";
-    strings["NEC PC-98 (with PC-9801-26/K; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-26/K; extended channel 3)";
-    strings["NEC PC-98 (with PC-9801-26/K; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-26/K; extended channel 3 and CSM)";
-    strings["NEC PC-98 (with Sound Orchestra)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Orchestra)";
-    strings["NEC PC-98 (with Sound Orchestra; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Orchestra; extended channel 3)";
-    strings["NEC PC-98 (with Sound Orchestra; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Orchestra; extended channel 3 and CSM)";
-    strings["NEC PC-98 (with Sound Orchestra in drums mode)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Orchestra in drums mode)";
-    strings["NEC PC-98 (with Sound Orchestra in drums mode; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Orchestra in drums mode; extended channel 3)";
-    strings["NEC PC-98 (with Sound Orchestra in drums mode; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Orchestra in drums mode; extended channel 3 and CSM)";
-    strings["NEC PC-98 (with Sound Orchestra V)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Orchestra V)";
-    strings["NEC PC-98 (with Sound Orchestra V; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Orchestra V; extended channel 3)";
-    strings["NEC PC-98 (with Sound Orchestra V; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Orchestra V; extended channel 3 and CSM)";
-    strings["NEC PC-98 (with Sound Orchestra V in drums mode)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Orchestra V in drums mode)";
-    strings["NEC PC-98 (with Sound Orchestra V in drums mode; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Orchestra V in drums mode; extended channel 3)";
-    strings["NEC PC-98 (with Sound Orchestra V in drums mode; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Orchestra V in drums mode; extended channel 3 and CSM)";
-    strings["NEC PC-98 (with PC-9801-86)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86)";
-    strings["NEC PC-98 (with PC-9801-86; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86; extended channel 3)";
-    strings["NEC PC-98 (with PC-9801-86; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86; extended channel 3 and CSM)";
-    strings["NEC PC-98 (with PC-9801-86) stereo##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86) stereo";
-    strings["NEC PC-98 (with PC-9801-86; extended channel 3) stereo##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86; extended channel 3) stereo";
-    strings["NEC PC-98 (with PC-9801-86; extended channel 3 and CSM) stereo##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-86; extended channel 3 and CSM) stereo";
-    strings["NEC PC-98 (with PC-9801-73)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-73)";
-    strings["NEC PC-98 (with PC-9801-73; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-73; extended channel 3)";
-    strings["NEC PC-98 (with PC-9801-73; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with PC-9801-73; extended channel 3 and CSM)";
-    strings["NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible)";
-    strings["NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible; extended channel 3)";
-    strings["NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible; extended channel 3 and CSM)";
-    strings["NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible in drums mode)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible in drums mode)";
-    strings["NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible in drums mode; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible in drums mode; extended channel 3)";
-    strings["NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible in drums mode; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible in drums mode; extended channel 3 and CSM)";
+    strings["Game consoles##sgpr"].plurals[0] = "Consoles de videogame";
+    strings["let's play some chiptune making games!##sgpr"].plurals[0] = "vamos jogar um pouco de chiptune fazendo jogos!";
+    strings["Sega Genesis (extended channel 3)##sgpr"].plurals[0] = "Sega Mega Drive (canal 3 estendido)";
+    strings["Sega Genesis (DualPCM, extended channel 3)##sgpr"].plurals[0] = "Sega Mega Drive (DualPCM, canal 3 estendido)";
+    strings["Sega Genesis (with Sega CD)##sgpr"].plurals[0] = "Sega Mega Drive (com Mega CD)";
+    strings["Sega Genesis (extended channel 3 with Sega CD)##sgpr"].plurals[0] = "Sega Mega Drive (canal 3 estendido com Mega CD)";
+    strings["Sega Genesis (CSM with Sega CD)##sgpr"].plurals[0] = "Sega Mega Drive (CSM, com Mega CD)";
+    strings["Sega Master System (with FM expansion)##sgpr"].plurals[0] = "Sega Master System (with expansão FM)";
+    strings["Sega Master System (with FM expansion in drums mode)##sgpr"].plurals[0] = "Sega Master System (with expansão FM em modo bateria)";
+    strings["Famicom with Konami VRC6##sgpr"].plurals[0] = "Famicom com Konami VRC6";
+    strings["Famicom with Konami VRC7##sgpr0"].plurals[0] = "Famicom com Konami VRC7";
+    strings["Famicom with MMC5##sgpr"].plurals[0] = "Famicom com MMC5";
+    strings["Famicom with Sunsoft 5B##sgpr"].plurals[0] = "Famicom com Sunsoft 5B";
+    strings["Famicom with Namco 163##sgpr"].plurals[0] = "Famicom com Namco 163";
+    strings["Neo Geo AES (extended channel 2)##sgpr"].plurals[0] = "Neo Geo AES (canal 2 estendido)";
+    strings["Neo Geo AES (extended channel 2 and CSM)##sgpr"].plurals[0] = "Neo Geo AES (canal 2 estendido e CSM)";
+    strings["Computers##sgpr"].plurals[0] = "Computadores";
+    strings["let's get to work on chiptune today.##sgpr"].plurals[0] = "porque hoje é dia de trabalhar em chiptune.";
+    strings["Commodore 64 (C64, 6581 SID + Sound Expander in drums mode)##sgpr"].plurals[0] = "Commodore 64 (C64, SID 6581 + Sound Expander em modo bateria)";
+    strings["Commodore 64 (C64, 8580 SID + Sound Expander in drums mode)##sgpr"].plurals[0] = "Commodore 64 (C64, SID 8580 + Sound Expander em modo bateria)";
+    strings["Commodore 64 (C64, 6581 SID + FM-YAM in drums mode)##sgpr"].plurals[0] = "Commodore 64 (C64, SID 6581 + FM-YAM em modo bateria)";
+    strings["Commodore 64 (C64, 8580 SID + FM-YAM in drums mode)##sgpr"].plurals[0] = "Commodore 64 (C64, SID 8580 + FM-YAM em modo bateria)";
+    strings["MSX + MSX-AUDIO (drums mode)##sgpr"].plurals[0] = "MSX + MSX-AUDIO (modo bateria)";
+    strings["MSX + MSX-MUSIC (drums mode)##sgpr"].plurals[0] = "MSX + MSX-MUSIC (modo bateria)";
+    strings["MSX + Neotron (extended channel 2)##sgpr"].plurals[0] = "MSX + Neotron (canal 2 estendido)";
+    strings["MSX + Neotron (extended channel 2 and CSM)##sgpr"].plurals[0] = "MSX + Neotron (canal 2 estendido e CSM)";
+    strings["MSX + Neotron (with YM2610B)##sgpr"].plurals[0] = "MSX + Neotron (com YM2610B)";
+    strings["MSX + Neotron (with YM2610B; extended channel 3)##sgpr"].plurals[0] = "MSX + Neotron (com YM2610B; canal 3 estendido)";
+    strings["MSX + Neotron (with YM2610B; extended channel 3 and CSM)##sgpr"].plurals[0] = "MSX + Neotron (com YM2610B; canal 3 estendido e CSM)";
+    strings["NEC PC-88 (with PC-8801-10)##sgpr"].plurals[0] ="NEC PC-88 (com PC-8801-10)";
+    strings["NEC PC-88 (with PC-8801-11)##sgpr"].plurals[0] = "NEC PC-88 (com PC-8801-11)";
+    strings["NEC PC-88 (with PC-8801-11; extended channel 3)##sgpr"].plurals[0] = "NEC PC-88 (com PC-8801-11; canal 3 estendido)";
+    strings["NEC PC-88 (with PC-8801-11; extended channel 3 and CSM)##sgpr"].plurals[0] = "NEC PC-88 (com PC-8801-11; canal 3 estendido e CSM)";
+    strings["NEC PC-88 (with PC-8801-23)##sgpr"].plurals[0] = "NEC PC-88 (com PC-8801-23)";
+    strings["NEC PC-88 (with PC-8801-23; extended channel 3)##sgpr"].plurals[0] = "NEC PC-88 (com PC-8801-23; canal 3 estendido)";
+    strings["NEC PC-88 (with PC-8801-23; extended channel 3 and CSM)##sgpr"].plurals[0] = "NEC PC-88 (com PC-8801-23; canal 3 estendido e CSM)";
+    strings["NEC PC-88 (with HMB-20 HIBIKI-8800)##sgpr"].plurals[0] = "NEC PC-88 (com HMB-20 HIBIKI-8800)";
+    strings["NEC PC-8801mk2SR (with PC-8801-10)##sgpr"].plurals[0] = "NEC PC-8801mk2SR (com PC-8801-10)";
+    strings["NEC PC-8801mk2SR (with PC-8801-10; extended channel 3)##sgpr"].plurals[0] = "NEC PC-8801mk2SR (com PC-8801-10; canal 3 estendido)";
+    strings["NEC PC-8801mk2SR (with PC-8801-10; extended channel 3 and CSM)##sgpr"].plurals[0] = "NEC PC-8801mk2SR (with PC-8801-10; canal 3 estendido e CSM)";
+    strings["NEC PC-8801mk2SR (with PC-8801-11)##sgpr"].plurals[0] = "NEC PC-8801mk2SR (com PC-8801-11)";
+    strings["NEC PC-8801mk2SR (with PC-8801-11; extended channel 3 on internal OPN)##sgpr"].plurals[0] = "NEC PC-8801mk2SR (com PC-8801-11; canal 3 estendido no OPN interno)";
+    strings["NEC PC-8801mk2SR (with PC-8801-11; extended channel 3 on external OPN)##sgpr"].plurals[0] = "NEC PC-8801mk2SR (com PC-8801-11; canal 3 estendido no OPN externo)";
+    strings["NEC PC-8801mk2SR (with PC-8801-11; extended channel 3 on both OPNs)##sgpr"].plurals[0] = "NEC PC-8801mk2SR (com PC-8801-11; canal 3 estendido em ambos os OPNs)";
+    strings["NEC PC-8801mk2SR (with PC-8801-11; extended channel 3 and CSM on both OPNs)##sgpr"].plurals[0] = "NEC PC-8801mk2SR (com PC-8801-11; canal 3 estendido e CSM em ambos os OPNs)";
+    strings["NEC PC-8801mk2SR (with PC-8801-23)##sgpr"].plurals[0] = "NEC PC-8801mk2SR (com PC-8801-23)";
+    strings["NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 on internal OPN)##sgpr"].plurals[0] = "NEC PC-8801mk2SR (com PC-8801-23; canal 3 estendido no OPN interno)";
+    strings["NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 and CSM on internal OPN)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (com PC-8801-23; canal 3 estendido e CSM no OPN interno)";
+    strings["NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (com PC-8801-23; canal 3 estendido no OPN externo)";
+    strings["NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 and CSM on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (com PC-8801-23; canal 3 estendido e CSM no OPN externo)";
+    strings["NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (com PC-8801-23; canal 3 estendido em ambos os OPNs)";
+    strings["NEC PC-8801mk2SR (with PC-8801-23; extended channel 3 and CSM on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (com PC-8801-23; canal 3 estendido e CSM em ambos os OPNs)";
+    strings["NEC PC-8801mk2SR (with HMB-20 HIBIKI-8800)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (com HMB-20 HIBIKI-8800)";
+    strings["NEC PC-8801mk2SR (with HMB-20 HIBIKI-8800; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (com HMB-20 HIBIKI-8800; canal 3 estendido)";
+    strings["NEC PC-8801mk2SR (with HMB-20 HIBIKI-8800; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-8801mk2SR (com HMB-20 HIBIKI-8800; canal 3 estendido e CSM)";
+    strings["NEC PC-8801FA (with PC-8801-10)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-10)";
+    strings["NEC PC-8801FA (with PC-8801-10; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-10; canal 3 estendido)";
+    strings["NEC PC-8801FA (with PC-8801-11)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-11)";
+    strings["NEC PC-8801FA (with PC-8801-11; extended channel 3 on internal OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-11; canal 3 estendido no OPN interno)";
+    strings["NEC PC-8801FA (with PC-8801-11; extended channel 3 on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-11; canal 3 estendido no OPN externo)";
+    strings["NEC PC-8801FA (with PC-8801-11; extended channel 3 and CSM on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-11; canal 3 estendido e CSM no OPN externo)";
+    strings["NEC PC-8801FA (with PC-8801-11; extended channel 3 on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-11; canal 3 estendido em ambos os OPNs)";
+    strings["NEC PC-8801FA (with PC-8801-11; extended channel 3 and CSM on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-11; canal 3 estendido e CSM em ambos os OPNs)";
+    strings["NEC PC-8801FA (with PC-8801-23)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-23)";
+    strings["NEC PC-8801FA (with PC-8801-23; extended channel 3 on internal OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-23; canal 3 estendido no OPN interno)";
+    strings["NEC PC-8801FA (with PC-8801-23; extended channel 3 and CSM on internal OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-23; canal 3 estendido e CSM no OPN interno)";
+    strings["NEC PC-8801FA (with PC-8801-23; extended channel 3 on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-23; canal 3 estendido no OPN externo)";
+    strings["NEC PC-8801FA (with PC-8801-23; extended channel 3 and CSM on external OPN)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-23; canal 3 estendido e CSM no OPN externo)";
+    strings["NEC PC-8801FA (with PC-8801-23; extended channel 3 on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-23; canal 3 estendido em ambos os OPNs)";
+    strings["NEC PC-8801FA (with PC-8801-23; extended channel 3 and CSM on both OPNs)##sgpr"].plurals[0] = "=NEC PC-8801FA (com PC-8801-23; canal 3 estendido e CSM em ambos os OPNs)";
+    strings["NEC PC-8801FA (with HMB-20 HIBIKI-8800)##sgpr"].plurals[0] = "=NEC PC-8801FA (com HMB-20 HIBIKI-8800)";
+    strings["NEC PC-8801FA (with HMB-20 HIBIKI-8800; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-8801FA (com HMB-20 HIBIKI-8800; canal 3 estendido)";
+    strings["NEC PC-8801FA (with HMB-20 HIBIKI-8800; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-8801FA (com HMB-20 HIBIKI-8800; canal 3 estendido e CSM)";
+    strings["NEC PC-98 (with PC-9801-26/K)##sgpr"].plurals[0] = "=NEC PC-98 (com PC-9801-26/K)";
+    strings["NEC PC-98 (with PC-9801-26/K; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (com PC-9801-26/K; canal 3 estendido)";
+    strings["NEC PC-98 (with PC-9801-26/K; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (com PC-9801-26/K; canal 3 estendido e CSM)";
+    strings["NEC PC-98 (with Sound Orchestra)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Orchestra)";
+    strings["NEC PC-98 (with Sound Orchestra; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Orchestra; canal 3 estendido)";
+    strings["NEC PC-98 (with Sound Orchestra; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Orchestra; canal 3 estendido e CSM)";
+    strings["NEC PC-98 (with Sound Orchestra in drums mode)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Orchestra em modo bateria)";
+    strings["NEC PC-98 (with Sound Orchestra in drums mode; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Orchestra em modo bateria; canal 3 estendido)";
+    strings["NEC PC-98 (with Sound Orchestra in drums mode; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Orchestra em modo bateria; canal 3 estendido e CSM)";
+    strings["NEC PC-98 (with Sound Orchestra V)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Orchestra V)";
+    strings["NEC PC-98 (with Sound Orchestra V; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Orchestra V; canal 3 estendido)";
+    strings["NEC PC-98 (with Sound Orchestra V; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Orchestra V; canal 3 estendido e CSM)";
+    strings["NEC PC-98 (with Sound Orchestra V in drums mode)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Orchestra V em modo bateria)";
+    strings["NEC PC-98 (with Sound Orchestra V in drums mode; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Orchestra V em modo bateria; canal 3 estendido)";
+    strings["NEC PC-98 (with Sound Orchestra V in drums mode; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Orchestra V em modo bateria; canal 3 estendido e CSM)";
+    strings["NEC PC-98 (with PC-9801-86)##sgpr"].plurals[0] = "=NEC PC-98 (com PC-9801-86)";
+    strings["NEC PC-98 (with PC-9801-86; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (com PC-9801-86; canal 3 estendido)";
+    strings["NEC PC-98 (with PC-9801-86; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (com PC-9801-86; canal 3 estendido e CSM)";
+    strings["NEC PC-98 (with PC-9801-86) stereo##sgpr"].plurals[0] = "=NEC PC-98 (com PC-9801-86) stereo";
+    strings["NEC PC-98 (with PC-9801-86; extended channel 3) stereo##sgpr"].plurals[0] = "=NEC PC-98 (com PC-9801-86; canal 3 estendido) stereo";
+    strings["NEC PC-98 (with PC-9801-86; extended channel 3 and CSM) stereo##sgpr"].plurals[0] = "=NEC PC-98 (com PC-9801-86; canal 3 estendido e CSM) stereo";
+    strings["NEC PC-98 (with PC-9801-73)##sgpr"].plurals[0] = "=NEC PC-98 (com PC-9801-73)";
+    strings["NEC PC-98 (with PC-9801-73; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (com PC-9801-73; canal 3 estendido)";
+    strings["NEC PC-98 (with PC-9801-73; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (com PC-9801-73; canal 3 estendido e CSM)";
+    strings["NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Blaster 16 para PC-9800 com PC-9801-26/K compatível)";
+    strings["NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Blaster 16 para PC-9800 com PC-9801-26/K compatível; canal 3 estendido)";
+    strings["NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Blaster 16 para PC-9800 com PC-9801-26/K compatível; canal 3 estendido e CSM)";
+    strings["NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible in drums mode)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Blaster 16 para PC-9800 com PC-9801-26/K compatível em modo bateria)";
+    strings["NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible in drums mode; extended channel 3)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Blaster 16 para PC-9800 com PC-9801-26/K compatível em modo bateria; canal 3 estendido)";
+    strings["NEC PC-98 (with Sound Blaster 16 for PC-9800 w/PC-9801-26/K compatible in drums mode; extended channel 3 and CSM)##sgpr"].plurals[0] = "=NEC PC-98 (com Sound Blaster 16 para PC-9800 com PC-9801-26/K compatível em modo bateria; canal 3 estendido e CSM)";
     strings["ZX Spectrum (48K, SFX-like engine)##sgpr"].plurals[0] = "=ZX Spectrum (48K, SFX-like engine)";
     strings["ZX Spectrum (48K, QuadTone engine)##sgpr"].plurals[0] = "=ZX Spectrum (48K, QuadTone engine)";
     strings["ZX Spectrum (128K) with TurboSound##sgpr"].plurals[0] = "=ZX Spectrum (128K) with TurboSound";
