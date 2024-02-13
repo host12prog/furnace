@@ -156,6 +156,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
     unsigned int hilightA=4;
     unsigned int hilightB=16;
     double customHz=60;
+
+    unsigned char fds_chan = 0xff;
     
     memset(hasSequence,0,256*8*sizeof(bool));
     memset(sequenceIndex,0,256*8);
@@ -328,6 +330,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           ds.system[systemID++]=DIV_SYSTEM_FDS;
 
           map_channels[curr_chan] = map_ch;
+          fds_chan = map_ch;
           curr_chan++;
           map_ch++;
         }
@@ -632,9 +635,10 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           ds.grooves[index] = gp;
         }
 
-        ds.grooves.resize(max_groove);
+        ds.grooves.resize(max_groove == 0 ? 1 : max_groove);
 
         unsigned char subsongs = reader.readC();
+
         for(int sub = 0; sub < subsongs; sub++)
         {
           unsigned char used = reader.readC();
@@ -715,6 +719,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
             unsigned char nextNote=reader.readC();
             unsigned char nextOctave=reader.readC();
+
+            if(blockVersion < 5 && map_channels[ch] == fds_chan) //FDS transpose
+            {
+              nextOctave += 2;
+            }
 
             if(map_channels[ch] != 0xff)
             {
