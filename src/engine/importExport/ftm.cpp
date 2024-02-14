@@ -141,6 +141,23 @@ const int eff_conversion_050[][2] =
 
 constexpr int ftEffectMapSize=sizeof(ftEffectMap)/sizeof(int);
 
+void copy_macro(DivInstrumentMacro* to, DivInstrumentMacro* from)
+{
+  for (int i=0; i<256; i++) 
+  {
+    to->val[i]=from->val[i];
+  }
+
+  to->len = from->len;
+  to->delay = from->delay;
+  to->lenMemory = from->lenMemory;
+  to->mode = from->mode;
+  to->rel = from->rel;
+  to->speed = from->speed;
+  to->loop = from->loop;
+  to->open = from->open;
+}
+
 bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
   SafeReader reader=SafeReader(file,len);
   warnings="";
@@ -664,9 +681,10 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           for(int k = 0; k < (int)ds.ins.size(); k++)
           {
             DivInstrument* ins=ds.ins[k];
-            if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_NES)
+            if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_NES && hasSequence[k][Types[i]])
             {
-              memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[index][type], sizeof(DivInstrumentMacro));
+              copy_macro(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[index][type]][type]);
+              //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[index][type]][type], sizeof(DivInstrumentMacro));
             }
           }
         }
@@ -683,12 +701,13 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
               for(int k = 0; k < (int)ds.ins.size(); k++)
               {
                 DivInstrument* ins=ds.ins[k];
-                if(sequenceIndex[k][j] == i && ins->type == DIV_INS_NES)
+                if(sequenceIndex[k][j] == i && ins->type == DIV_INS_NES && hasSequence[k][j])
                 {
                   macros[k][j].rel = release;
                   macro_types[k][j] = setting;
 
-                  memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)j, true), &macros[k][j], sizeof(DivInstrumentMacro));
+                  copy_macro(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)j, true), &macros[sequenceIndex[k][j]][j]);
+                  //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)j, true), &macros[sequenceIndex[k][j]][j], sizeof(DivInstrumentMacro));
                 }
               }
             }
@@ -708,12 +727,19 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             for(int k = 0; k < (int)ds.ins.size(); k++)
             {
               DivInstrument* ins=ds.ins[k];
-              if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_NES)
+              if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_NES && hasSequence[k][Types[i]])
               {
                 macros[k][Types[i]].rel = release;
                 macro_types[k][Types[i]] = setting;
 
-                memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[k][Types[i]], sizeof(DivInstrumentMacro));
+                if(Types[i] > 0)
+                {
+                  int y = 0;
+                  y++;
+                }
+                
+                copy_macro(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[k][Types[i]]][Types[i]]);
+                //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[k][Types[i]]][Types[i]], sizeof(DivInstrumentMacro));
               }
             }
           }
