@@ -20,7 +20,6 @@
 #include "siddefs.h"
 #include "voice.h"
 #include "filter.h"
-#include "extfilt.h"
 
 class SID2
 {
@@ -70,11 +69,12 @@ public:
   // 16-bit output (AUDIO OUT).
   int output();
 
+  int chan_out[3];
+
 protected:
 
   Voice2 voice[3];
   Filter2 filter[3];
-  ExternalFilter2 extfilt;
 
   bool isMuted[3];
 

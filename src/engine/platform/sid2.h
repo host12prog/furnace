@@ -89,8 +89,6 @@ class DivPlatformSID2: public DivDispatch {
   friend void putDispatchChip(void*,int);
   friend void putDispatchChan(void*,int,int);
 
-  inline short runFakeFilter(unsigned char ch, int in);
-
   void acquire_classic(short* bufL, short* bufR, size_t start, size_t len);
   void acquire_fp(short* bufL, short* bufR, size_t start, size_t len);
 

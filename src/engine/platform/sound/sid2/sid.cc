@@ -76,8 +76,6 @@ void SID2::set_chip_model(chip_model2 model)
     voice[i].set_chip_model(model);
     filter[i].set_chip_model(model);
   }
-
-  extfilt.set_chip_model(model);
 }
 
 
@@ -91,8 +89,6 @@ void SID2::reset()
     voice[i].reset();
     filter[i].reset();
   }
-  
-  extfilt.reset();
 
   bus_value = 0;
   bus_value_ttl = 0;
@@ -106,7 +102,7 @@ int SID2::output()
 {
   const int range = 1 << 16;
   const int half = range >> 1;
-  int sample = extfilt.output()/((4095*255 >> 7)*3*15*2/range);
+  int sample = (filter[0].output() + filter[1].output() + filter[2].output())/((4095*255 >> 7)*3*15*2/range);
   if (sample >= half) {
     return half - 1;
   }
@@ -311,15 +307,6 @@ void SID2::enable_filter(bool enable)
   }
 }
 
-
-// ----------------------------------------------------------------------------
-// Enable external filter.
-// ----------------------------------------------------------------------------
-void SID2::enable_external_filter(bool enable)
-{
-  extfilt.enable_filter(enable);
-}
-
 // ----------------------------------------------------------------------------
 // Return array of default spline interpolation points to map FC to
 // filter cutoff frequency.
@@ -417,6 +404,8 @@ void SID2::clock()
     }
   }
 
-  // Clock external filter.
-  extfilt.clock(filter[0].output() + filter[1].output() + filter[2].output());
+  for(int i = 0; i < 3; i++)
+  {
+    chan_out[i] = filter[i].output();
+  }
 }

@@ -71,37 +71,6 @@ const char** DivPlatformSID2::getRegisterSheet() {
   return regCheatSheetSID2;
 }
 
-short DivPlatformSID2::runFakeFilter(unsigned char ch, int in) {
-  if (!(regPool[0x15 + 3 * ch]&(1<<7))) {
-    float fin=in;
-    fin*=(float)(regPool[0x3 + 7 * ch] >> 4)/20.0f;
-    return CLAMP(fin,-32768,32767);
-  }
-
-  // taken from dSID
-  float fin=in;
-  float fout=0;
-  float ctf=fakeCutTable[((regPool[0x15 + 3 * ch]&16)|(regPool[0x16 + 3 * ch]<<4))&0xfff];
-  float reso=(pow(2,((float)(4-(float)(regPool[0x17 + 3 * ch]))/(8.0 * 16.0))));
-  float tmp=fin+fakeBand[ch]*reso+fakeLow[ch];
-  if (regPool[0x15 + 3 * ch]&0x40) { //highpass
-    fout-=tmp;
-  }
-  tmp=fakeBand[ch]-tmp*ctf;
-  fakeBand[ch]=tmp;
-  if (regPool[0x15 + 3 * ch]&0x20) { //bandpass
-    fout-=tmp;
-  }
-  tmp=fakeLow[ch]+tmp*ctf;
-  fakeLow[ch]=tmp;
-  if (regPool[0x15 + 3 * ch]&0x10) { //lowpass
-    fout+=tmp;
-  }
-
-  fout*=(float)(regPool[0x3 + 7 * ch] >> 4)/20.0f;
-  return CLAMP(fout,-32768,32767);
-}
-
 void DivPlatformSID2::acquire(short** buf, size_t len) 
 {
   for (size_t i=0; i<len; i++) 
@@ -119,9 +88,11 @@ void DivPlatformSID2::acquire(short** buf, size_t len)
     if (++writeOscBuf>=16) 
     {
       writeOscBuf=0;
-      oscBuf[0]->data[oscBuf[0]->needle++]=runFakeFilter(0,(sid2->last_chan_out[0])>>5);
-      oscBuf[1]->data[oscBuf[1]->needle++]=runFakeFilter(1,(sid2->last_chan_out[1])>>5);
-      oscBuf[2]->data[oscBuf[2]->needle++]=runFakeFilter(2,(sid2->last_chan_out[2])>>5);
+
+      for(int j = 0; j < 3; j++)
+      {
+        oscBuf[j]->data[oscBuf[j]->needle++] = sid2->chan_out[j] / 4;
+      }
     }
   }
 }
@@ -344,8 +315,6 @@ int DivPlatformSID2::dispatch(DivCommand c) {
         chan[c.chan].noise_mode = ins->sid2.noise_mode;
         chan[c.chan].mix_mode = ins->sid2.mix_mode;
 
-        //chan[c.chan].vol = ins->sid2.volume;
-        //rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
         chan[c.chan].outVol=ins->sid2.volume;
       }
       if (chan[c.chan].insChanged || chan[c.chan].resetFilter) {

@@ -544,7 +544,6 @@ src/engine/platform/sound/sid2/voice.cc
 src/engine/platform/sound/sid2/wave.cc
 src/engine/platform/sound/sid2/envelope.cc
 src/engine/platform/sound/sid2/filter.cc
-src/engine/platform/sound/sid2/extfilt.cc
 src/engine/platform/sound/sid2/version.cc
 
 src/engine/platform/sound/sid2/wave8580_PS_.cc
