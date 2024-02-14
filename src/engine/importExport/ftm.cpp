@@ -152,6 +152,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
     unsigned int n163Chans=0;
     bool hasSequence[256][8];
     unsigned char sequenceIndex[256][8];
+    unsigned char macro_types[256][8];
+    std::vector<std::vector<DivInstrumentMacro>> macros;
     unsigned char map_channels[DIV_MAX_CHANS];
     unsigned int hilightA=4;
     unsigned int hilightB=16;
@@ -161,7 +163,20 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
     
     memset(hasSequence,0,256*8*sizeof(bool));
     memset(sequenceIndex,0,256*8);
+    memset(macro_types,0,256*8);
     memset(map_channels,0xfe,DIV_MAX_CHANS*sizeof(unsigned char));
+
+    for(int i = 0; i < 256; i++)
+    {
+      std::vector<DivInstrumentMacro> mac;
+
+      for(int j = 0; j < 8; j++)
+      {
+        mac.push_back(DivInstrumentMacro(DIV_MACRO_VOL));
+      }
+
+      macros.push_back(mac);
+    }
 
     if (!reader.seek(dnft ? 21 : 18,SEEK_SET)) {
       logE("premature end of file!");
@@ -438,9 +453,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
       } else if (blockName=="INSTRUMENTS") {
         CHECK_BLOCK_VERSION(6);
 
-        reader.seek(blockSize,SEEK_CUR);
+        //reader.seek(blockSize,SEEK_CUR);
 
-        /*
+        
         ds.insLen=reader.readI();
         if (ds.insLen<0 || ds.insLen>256) {
           logE("too many instruments/out of range!");
@@ -521,7 +536,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             }
             case DIV_INS_VRC6: {
               unsigned int totalSeqs=reader.readI();
-              if (totalSeqs>4) {
+              if (totalSeqs>5) {
                 logE("%d: too many sequences!",insIndex);
                 lastError="too many sequences";
                 delete[] file;
@@ -600,11 +615,115 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           ins->name=reader.readString((unsigned int)reader.readI());
           logV("- %d: %s",insIndex,ins->name);
         }
-        */
+        
       } else if (blockName=="SEQUENCES") {
         CHECK_BLOCK_VERSION(6);
         reader.seek(blockSize,SEEK_CUR);
-      } else if (blockName=="GROOVES") {
+
+        /*if(blockVersion < 3)
+        {
+          lastError="sequences block version is too old";
+          delete[] file;
+          return false;
+        }
+
+        unsigned char* Indices = new unsigned char[128 * 5];
+		    unsigned char* Types = new unsigned char[128 * 5];
+
+        unsigned int seq_count = reader.readI();
+
+        for(int i = 0; i < seq_count; i++)
+        {
+          unsigned int index = reader.readI();
+          Indices[i] = index;
+          unsigned int type = reader.readI();
+          Types[i] = type;
+
+          unsigned char size = reader.readC();
+
+          macros[index][type].len = size;
+
+          unsigned int loop = reader.readI();
+
+          macros[index][type].loop = loop;
+
+          if(blockVersion == 4)
+          {
+            unsigned int release = reader.readI();
+            unsigned int setting = reader.readI();
+
+            macros[index][type].rel = release;
+            macro_types[index][type] = setting;
+          }
+
+          for(int j = 0; j < size; j++)
+          {
+            unsigned char seq = reader.readC();
+            macros[index][type].val[j] = seq;
+          }
+
+          for(int k = 0; k < (int)ds.ins.size(); k++)
+          {
+            DivInstrument* ins=ds.ins[k];
+            if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_NES)
+            {
+              memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[index][type], sizeof(DivInstrumentMacro));
+            }
+          }
+        }
+
+        if(blockVersion == 5)  // Version 5 saved the release points incorrectly, this is fixed in ver 6
+        {
+          for(int i = 0; i < 128; i++)
+          {
+            for(int j = 0; j < 5; j++)
+            {
+              unsigned int release = reader.readI();
+              unsigned int setting = reader.readI();
+
+              for(int k = 0; k < (int)ds.ins.size(); k++)
+              {
+                DivInstrument* ins=ds.ins[k];
+                if(sequenceIndex[k][j] == i && ins->type == DIV_INS_NES)
+                {
+                  macros[k][j].rel = release;
+                  macro_types[k][j] = setting;
+
+                  memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)j, true), &macros[k][j], sizeof(DivInstrumentMacro));
+                }
+              }
+            }
+          }
+        }
+
+        if(blockVersion >= 6) // Read release points correctly stored
+        {
+          for(int i = 0; i < seq_count; i++)
+          {
+            unsigned int release = reader.readI();
+            unsigned int setting = reader.readI();
+
+            //macros[index][type].rel = release;
+            //macro_types[index][type] = setting;
+
+            for(int k = 0; k < (int)ds.ins.size(); k++)
+            {
+              DivInstrument* ins=ds.ins[k];
+              if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_NES)
+              {
+                macros[k][Types[i]].rel = release;
+                macro_types[k][Types[i]] = setting;
+
+                memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[k][Types[i]], sizeof(DivInstrumentMacro));
+              }
+            }
+          }
+        }
+
+        delete Indices;
+        delete Types;*/
+      } 
+      else if (blockName=="GROOVES") {
         CHECK_BLOCK_VERSION(6);
         //reader.seek(blockSize,SEEK_CUR);
 
@@ -822,7 +941,19 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
       } else if (blockName=="SEQUENCES_N163") {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
-      } else if (blockName=="COMMENTS") {
+      } else if (blockName=="SEQUENCES_N106") {
+        CHECK_BLOCK_VERSION(1);
+        reader.seek(blockSize,SEEK_CUR);
+      } else if (blockName=="SEQUENCES_S5B") {
+        CHECK_BLOCK_VERSION(1);
+        reader.seek(blockSize,SEEK_CUR);
+      } else if (blockName=="SEQUENCES_N106") {
+        CHECK_BLOCK_VERSION(1);
+        reader.seek(blockSize,SEEK_CUR);
+      } else if (blockName=="JSON") {
+        CHECK_BLOCK_VERSION(1);
+        reader.seek(blockSize,SEEK_CUR);
+      } else if (blockName=="PARAMS_EMU") {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
       } else if (blockName=="DETUNETABLES") {
