@@ -1536,7 +1536,7 @@ class FurnaceGUI {
   int wheelCalmDown;
   int shallDetectScale;
   int cpuCores;
-  float secondTimer;
+  float secondTimer, newOscLineWidth;
   unsigned int userEvents;
   float mobileMenuPos, autoButtonSize, mobileEditAnim;
   ImVec2 mobileEditButtonPos, mobileEditButtonSize;
@@ -2314,6 +2314,8 @@ class FurnaceGUI {
     bool ready, loudEnough, waveCorr;
     fftw_plan plan;
     fftw_plan planI;
+    PendingDrawOsc drawOp;
+    float oscTex[2048];
     ChanOscStatus():
       inBuf(NULL),
       outBuf(NULL),

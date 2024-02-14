@@ -4643,6 +4643,11 @@ bool FurnaceGUI::loop() {
         pushToggleColors(newOscCode);
         if (ImGui::Button("New Code")) newOscCode=!newOscCode;
         popToggleColors();
+        ImGui::AlignTextToFramePadding();
+        ImGui::Text("Line size");
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(120.0f*dpiScale);
+        ImGui::InputFloat("##NewCodeLS",&newOscLineWidth,1,1,"%.1f");
       } else if (renderBackend==GUI_BACKEND_GL) {
         ImGui::Text("Master, are you playing a trick on me?\nThat's not very nice!");
       } else {
@@ -6912,6 +6917,8 @@ bool FurnaceGUI::init() {
     }
   }
 
+  newOscLineWidth=dpiScale;
+
   updateWindowTitle();
 
   rend->clear(ImVec4(0.0,0.0,0.0,1.0));
@@ -7293,6 +7300,7 @@ FurnaceGUI::FurnaceGUI():
   shallDetectScale(0),
   cpuCores(0),
   secondTimer(0.0f),
+  newOscLineWidth(2.0f),
   userEvents(0xffffffff),
   mobileMenuPos(0.0f),
   autoButtonSize(0.0f),
