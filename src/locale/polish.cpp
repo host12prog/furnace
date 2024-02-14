@@ -4905,6 +4905,10 @@ void DivLocale::addTranslationsPolish()
     strings["1Exy: Change other parameters (LEGACY)##sesd"].plurals[0] = "1Exy: Zmień inne parametry (PRZESTARZAŁE)";
     strings["20xy: Set attack/decay (x: attack; y: decay)##sesd"].plurals[0] = "20xy: Ustaw atak/opadanie (x: atak; y: opadanie)";
     strings["21xy: Set sustain/release (x: sustain; y: release)##sesd"].plurals[0] = "21xy: Ustaw podtrzymanie/zwolnienie (x: podtrzymanie; y: zwolnienie)";
+    strings["22xx: Pulse width slide up##sesd"].plurals[0] = "22xx: Изменение скважности вверх";
+    strings["23xx: Pulse width slide down##sesd"].plurals[0] = "23xx: Изменение скважности вниз";
+    strings["24xx: Cutoff slide up##sesd"].plurals[0] = "24xx: Изменение частоты среза вверх";
+    strings["25xx: Cutoff slide down##sesd"].plurals[0] = "25xx: Изменение частоты среза вниз";
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "3xxx: Ustaw szerokość fali prost. (0-FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "4xxx: Ustaw punkt odcięcia (0-7FF)";
     strings["10xx: Set waveform##sesd0"].plurals[0] = "10xx: Ustaw kształt fali";
@@ -4958,6 +4962,10 @@ void DivLocale::addTranslationsPolish()
     strings["14xy: Reset cutoff (x: on new note; y: now)##sesd"].plurals[0] = "14xy: Resetuj punkt odcięcia (x: od nowej nuty; y: teraz)";
     strings["15xy: Reset pulse width (x: on new note; y: now)##sesd"].plurals[0] = "15xy: Resetuj szerokość fali prost. (x: od nowej nuty; y: teraz)";
     strings["16xy: Change other parameters##sesd"].plurals[0] = "16xy: Zmień inne parametry";
+    strings["17xx: Pulse width slide up##sesd"].plurals[0] = "17xx: Изменение скважности вверх";
+    strings["18xx: Pulse width slide down##sesd"].plurals[0] = "18xx: Изменение скважности вниз";
+    strings["19xx: Cutoff slide up##sesd"].plurals[0] = "19xx: Изменение частоты среза вверх";
+    strings["1Axx: Cutoff slide down##sesd"].plurals[0] = "1Axx: Изменение частоты среза вниз";
     strings["3xxx: Set pulse width (0 to FFF)##sesd1"].plurals[0] = "3xxx: Ustaw szerokość pulsu (0-FFF)";
     strings["4xxx: Set cutoff (0 to FFF)##sesd1"].plurals[0] = "4xxx: Ustaw punkt odcięcia (0-FFF)";
     strings["a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.##sesd"].plurals[0] = "układ, który zaczął pojawiać się w telefonach komórkowych w 2000 r.\n jako iż wykorzystwał zastreżony format, przegrał z formatem MP3 podczas rywalizacji między różnymi typami sprzętu mobilnego.";
