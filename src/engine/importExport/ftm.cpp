@@ -453,10 +453,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
       } else if (blockName=="INSTRUMENTS") {
         CHECK_BLOCK_VERSION(6);
 
-        //reader.seek(blockSize,SEEK_CUR);
+        reader.seek(blockSize,SEEK_CUR);
 
-        
-        ds.insLen=reader.readI();
+        /*ds.insLen=reader.readI();
         if (ds.insLen<0 || ds.insLen>256) {
           logE("too many instruments/out of range!");
           lastError="too many instruments/out of range";
@@ -614,7 +613,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           // name
           ins->name=reader.readString((unsigned int)reader.readI());
           logV("- %d: %s",insIndex,ins->name);
-        }
+        }*/
         
       } else if (blockName=="SEQUENCES") {
         CHECK_BLOCK_VERSION(6);
