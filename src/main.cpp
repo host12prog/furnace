@@ -255,6 +255,7 @@ TAParamResult pVersion(String) {
   printf("- C140/C219 emulator (modified version) by cam900 (zlib license)\n");
   printf("- PowerNoise emulator by scratchminer (MIT)\n");
   printf("- ep128emu by Istvan Varga (GPLv2)\n");
+  printf("- SID2 emulator by LTVA (GPLv2); modified version of reSID\n");
   return TA_PARAM_QUIT;
 }
 

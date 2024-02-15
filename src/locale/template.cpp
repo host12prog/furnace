@@ -164,6 +164,7 @@ void DivLocale::addTranslationsTemplate()
     strings["ESFMu emulator by Kagamiin~##sgab"].plurals[0] = "=ESFMu emulator by Kagamiin~";
     strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] = "=PowerNoise emulator by scratchminer";
     strings["ep128emu by Istvan Varga##sgab"].plurals[0] = "=ep128emu by Istvan Varga";
+    strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] = "=SID2 emulator (modification of reSID) by LTVA";
 
     strings["greetings to:##sgab"].plurals[0] = "=greetings to:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "=NEOART Costa Rica";
