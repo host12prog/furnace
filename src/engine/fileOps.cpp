@@ -2239,7 +2239,7 @@ DivDataErrors DivEngine::readAssetDirData(SafeReader& reader, std::vector<DivAss
   return DIV_DATA_SUCCESS;
 }
 
-SafeWriter* DivEngine::saveFur(bool notPrimary, bool newPatternFormat) {
+SafeWriter* DivEngine::saveFur(bool notPrimary, bool newPatternFormat, bool tilde_version) {
   saveLock.lock();
   std::vector<int> subSongPtr;
   std::vector<int> sysFlagsPtr;
@@ -2295,7 +2295,7 @@ SafeWriter* DivEngine::saveFur(bool notPrimary, bool newPatternFormat) {
   /// HEADER
   // write magic
   //w->write(DIV_FUR_MAGIC,16);
-  w->write(DIV_FUR_B_MAGIC,16); //incompatibility of instrument types introduced when PowerNoise was added to Furnace-B, thus the different format is needed!
+  w->write(tilde_version ? DIV_FUR_MAGIC : DIV_FUR_B_MAGIC,16); //incompatibility of instrument types introduced when PowerNoise was added to Furnace-B, thus the different format is needed!
 
   // write version
   w->writeS(DIV_ENGINE_VERSION);
@@ -2668,7 +2668,7 @@ SafeWriter* DivEngine::saveFur(bool notPrimary, bool newPatternFormat) {
   for (int i=0; i<song.insLen; i++) {
     DivInstrument* ins=song.ins[i];
     insPtr.push_back(w->tell());
-    ins->putInsData2(w,false);
+    ins->putInsData2(w,false,NULL,true, tilde_version);
   }
 
   /// WAVETABLE

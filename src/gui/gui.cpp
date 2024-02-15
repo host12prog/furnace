@@ -1615,7 +1615,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openLoad(
         settings.language == DIV_LANG_ENGLISH ? "Open File" : _L("Open File##sggu"),
-        { settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu0"), "*.fur *.dmf *.mod *.fc13 *.fc14 *.smod *.fc *.ftm *.0cc *.dnm",
+        { settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu0"), "*.fub *.fur *.dmf *.mod *.fc13 *.fc14 *.smod *.fc *.ftm *.0cc *.dnm",
          settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu0"), "*"},
         workingDirSong,
         dpiScale
@@ -1628,7 +1628,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       }
       hasOpened=fileDialog->openLoad(
         settings.language == DIV_LANG_ENGLISH ? "Restore Backup" : _L("Restore Backup##sggu"),
-        { settings.language == DIV_LANG_ENGLISH ? "Furnace song" : _L("Furnace song##sggu0"), "*.fur"},
+        { settings.language == DIV_LANG_ENGLISH ? "Furnace or Furnace-B song" : _L("Furnace or Furnace-B song##sggu"), "*.fur *.fub"},
         backupPath+String(DIR_SEPARATOR_STR),
         dpiScale
       );
@@ -1637,7 +1637,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openSave(
         settings.language == DIV_LANG_ENGLISH ? "Save File" : _L("Save File##sggu0"),
-        {settings.language == DIV_LANG_ENGLISH ? "Furnace song" : _L("Furnace song##sggu1"), "*.fur"},
+        {settings.language == DIV_LANG_ENGLISH ? "Furnace-B song" : _L("Furnace-B song##sggu"), "*.fub"},
         workingDirSong,
         dpiScale
       );
@@ -1893,6 +1893,15 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_ROM:
       showError(_L("Coming soon!##sggu"));
       break;
+    case GUI_FILE_EXPORT_FUR:
+      if (!dirExists(workingDirFURExport)) workingDirFURExport=getHomeDir();
+      hasOpened=fileDialog->openSave(
+        settings.language == DIV_LANG_ENGLISH ? "Export Furnace song" : _L("Export Furnace song##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "Furnace song" : _L("Furnace song##sggu2"), "*.fur"},
+        workingDirFURExport,
+        dpiScale
+      );
+      break;
     case GUI_FILE_LOAD_MAIN_FONT:
       if (!dirExists(workingDirFont)) workingDirFont=getHomeDir();
       hasOpened=fileDialog->openLoad(
@@ -2000,7 +2009,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       if (!dirExists(workingDirTest)) workingDirTest=getHomeDir();
       hasOpened=fileDialog->openLoad(
         settings.language == DIV_LANG_ENGLISH ? "Open Test" : _L("Open Test##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu8"), "*.fur *.dmf *.mod",
+        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu8"), "*.fub *.fur *.dmf *.mod",
          settings.language == DIV_LANG_ENGLISH ? "another option" : _L("another option##sggu0"), "*.wav *.ttf",
          settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu8"), "*"},
         workingDirTest,
@@ -2018,7 +2027,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       if (!dirExists(workingDirTest)) workingDirTest=getHomeDir();
       hasOpened=fileDialog->openLoad(
         settings.language == DIV_LANG_ENGLISH ? "Open Test (Multi)" : _L("Open Test (Multi)##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu9"), "*.fur *.dmf *.mod",
+        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu9"), "*.fub *.fur *.dmf *.mod",
          settings.language == DIV_LANG_ENGLISH ? "another option" : _L("another option##sggu1"), "*.wav *.ttf",
          settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu9"), "*"},
         workingDirTest,
@@ -2037,7 +2046,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       if (!dirExists(workingDirTest)) workingDirTest=getHomeDir();
       hasOpened=fileDialog->openSave(
         settings.language == DIV_LANG_ENGLISH ? "Save Test" : _L("Save Test##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "Furnace song" : _L("Furnace song##sggu"), "*.fur",
+        {settings.language == DIV_LANG_ENGLISH ? "Furnace song" : _L("Furnace song##sggu"), "*.fub",
          settings.language == DIV_LANG_ENGLISH ? "DefleMask module" : _L("DefleMask module##sggu"), "*.dmf"},
         workingDirTest,
         dpiScale
@@ -2055,7 +2064,7 @@ int FurnaceGUI::save(String path, int dmfVersion) {
     if (dmfVersion<24) dmfVersion=24;
     w=e->saveDMF(dmfVersion);
   } else {
-    w=e->saveFur(false,settings.newPatternFormat);
+    w=e->saveFur(false,settings.newPatternFormat,false);
   }
   if (w==NULL) {
     lastError=e->getLastError();
@@ -2283,7 +2292,7 @@ void FurnaceGUI::pushRecentSys(const char* path) {
 void FurnaceGUI::delFirstBackup(String name) {
   std::vector<String> listOfFiles;
 #ifdef _WIN32
-  String findPath=backupPath+String(DIR_SEPARATOR_STR)+name+String("*.fur");
+  String findPath=backupPath+String(DIR_SEPARATOR_STR)+name+String("*.fub");
   WIN32_FIND_DATAW next;
   HANDLE backDir=FindFirstFileW(utf8To16(findPath.c_str()).c_str(),&next);
   if (backDir!=INVALID_HANDLE_VALUE) {
@@ -4159,6 +4168,10 @@ bool FurnaceGUI::loop() {
             drawExportCommand();
             ImGui::EndMenu();
           }
+          if (ImGui::BeginMenu(_L("export Furnace module...##sggu"))) {
+            drawExportFur();
+            ImGui::EndMenu();
+          }
         } else if (settings.exportOptionsLayout==2) {
           if (ImGui::MenuItem(_L("export audio...##sggu1"))) {
             curExportType=GUI_EXPORT_AUDIO;
@@ -4202,6 +4215,10 @@ bool FurnaceGUI::loop() {
           }
           if (ImGui::MenuItem(_L("export command stream...##sggu1"))) {
             curExportType=GUI_EXPORT_CMD_STREAM;
+            displayExport=true;
+          }
+          if (ImGui::MenuItem(_L("export Furnace module...##sggu"))) {
+            curExportType=GUI_EXPORT_FUR;
             displayExport=true;
           }
         } else {
@@ -4770,6 +4787,9 @@ bool FurnaceGUI::loop() {
         case GUI_FILE_EXPORT_CMDSTREAM_BINARY:
           workingDirROMExport=fileDialog->getPath()+DIR_SEPARATOR_STR;
           break;
+        case GUI_FILE_EXPORT_FUR:
+          workingDirFURExport=fileDialog->getPath()+DIR_SEPARATOR_STR;
+          break;
         case GUI_FILE_LOAD_MAIN_FONT:
         case GUI_FILE_LOAD_HEAD_FONT:
         case GUI_FILE_LOAD_PAT_FONT:
@@ -4822,7 +4842,7 @@ bool FurnaceGUI::loop() {
         }
         if (fileName!="") {
           if (curFileDialog==GUI_FILE_SAVE) {
-            checkExtension(".fur");
+            checkExtension(".fub");
           }
           if (curFileDialog==GUI_FILE_SAVE_DMF) {
             checkExtension(".dmf");
@@ -4862,6 +4882,9 @@ bool FurnaceGUI::loop() {
           }
           if (curFileDialog==GUI_FILE_EXPORT_CMDSTREAM_BINARY) {
             checkExtension(".bin");
+          }
+          if (curFileDialog==GUI_FILE_EXPORT_FUR) {
+            checkExtension(".fur");
           }
           if (curFileDialog==GUI_FILE_EXPORT_COLORS) {
             checkExtension(".cfgc");
@@ -5282,6 +5305,28 @@ bool FurnaceGUI::loop() {
                 }
               } else {
                 String export_err = _L("could not write command stream! (%s)##sggu");
+                showError(fmt::sprintf(export_err,e->getLastError()));
+              }
+              break;
+            }
+            case GUI_FILE_EXPORT_FUR: {
+              SafeWriter* w=e->saveFur(false,settings.newPatternFormat, true);
+              if (w!=NULL) {
+                FILE* f=ps_fopen(copyOfName.c_str(),"wb");
+                if (f!=NULL) {
+                  fwrite(w->getFinalBuf(),1,w->size(),f);
+                  fclose(f);
+                  pushRecentSys(copyOfName.c_str());
+                } else {
+                  showError(_L("could not open file!##sggu"));
+                }
+                w->finish();
+                delete w;
+                if (!e->getWarnings().empty()) {
+                  showWarning(e->getWarnings(),GUI_WARN_GENERIC);
+                }
+              } else {
+                String export_err = _L("could not write tildearrow version Furnace module! (%s)##sggu");
                 showError(fmt::sprintf(export_err,e->getLastError()));
               }
               break;
@@ -6225,7 +6270,7 @@ bool FurnaceGUI::loop() {
               }
             }
             logD("saving backup...");
-            SafeWriter* w=e->saveFur(true,true);
+            SafeWriter* w=e->saveFur(true,true,false);
             logV("writing file...");
 
             if (w!=NULL) {
@@ -6258,16 +6303,16 @@ bool FurnaceGUI::loop() {
 #ifdef _WIN32
               struct tm* tempTM=localtime(&curTime);
               if (tempTM==NULL) {
-                backupFileName+="-unknownTime.fur";
+                backupFileName+="-unknownTime.fub";
               } else {
                 curTM=*tempTM;
-                backupFileName+=fmt::sprintf("-%d%.2d%.2d-%.2d%.2d%.2d.fur",curTM.tm_year+1900,curTM.tm_mon+1,curTM.tm_mday,curTM.tm_hour,curTM.tm_min,curTM.tm_sec);
+                backupFileName+=fmt::sprintf("-%d%.2d%.2d-%.2d%.2d%.2d.fub",curTM.tm_year+1900,curTM.tm_mon+1,curTM.tm_mday,curTM.tm_hour,curTM.tm_min,curTM.tm_sec);
               }
 #else
               if (localtime_r(&curTime,&curTM)==NULL) {
-                backupFileName+="-unknownTime.fur";
+                backupFileName+="-unknownTime.fub";
               } else {
-                backupFileName+=fmt::sprintf("-%d%.2d%.2d-%.2d%.2d%.2d.fur",curTM.tm_year+1900,curTM.tm_mon+1,curTM.tm_mday,curTM.tm_hour,curTM.tm_min,curTM.tm_sec);
+                backupFileName+=fmt::sprintf("-%d%.2d%.2d-%.2d%.2d%.2d.fub",curTM.tm_year+1900,curTM.tm_mon+1,curTM.tm_mday,curTM.tm_hour,curTM.tm_min,curTM.tm_sec);
               }
 #endif
 

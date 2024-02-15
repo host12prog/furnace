@@ -1035,7 +1035,7 @@ struct DivInstrument {
    * save the instrument to a SafeWriter.
    * @param w the SafeWriter in question.
    */
-  void putInsData2(SafeWriter* w, bool fui=false, const DivSong* song=NULL, bool insName=true);
+  void putInsData2(SafeWriter* w, bool fui=false, const DivSong* song=NULL, bool insName=true, bool tilde_version=false);
 
   /**
    * read instrument data in .fui format.

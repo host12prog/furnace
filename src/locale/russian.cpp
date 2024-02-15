@@ -394,13 +394,14 @@ void DivLocale::addTranslationsRussian()
     strings["all files##sggu0"].plurals[0] = "все файлы";
     strings["no backups made yet!##sggu"].plurals[0] = "резервных копий пока нет!";
     strings["Restore Backup##sggu"].plurals[0] = "Загрузить резервную копию";
+    strings["Furnace or Furnace-B song##sggu"].plurals[0] = "модуль Furnace или Furnace-B";
     strings["Furnace song##sggu0"].plurals[0] = "модуль Furnace";
     strings["Save File##sggu0"].plurals[0] = "Сохранить файл";
     strings["DefleMask 1.1.3 module##sggu"].plurals[0] = "модуль DefleMask 1.1.3";
     strings["Save File##sggu1"].plurals[0] = "Сохранить файл";
     strings["DefleMask 1.0/legacy module##sggu"].plurals[0] = "модуль DefleMask 1.0/legacy";
     strings["Save File##sggu2"].plurals[0] = "Сохранить файл";
-    strings["Furnace song##sggu1"].plurals[0] = "модуль Furnace";
+    strings["Furnace-B song##sggu"].plurals[0] = "модуль Furnace-B";
     strings["Load Instrument##sggu"].plurals[0] = "загрузить инструмент";
     strings["all compatible files##sggu1"].plurals[0] = "все совместимые файлы";
     strings["Furnace instrument##sggu0"].plurals[0] = "инструмент Furnace";
@@ -457,6 +458,8 @@ void DivLocale::addTranslationsRussian()
     strings["text file##sggu1"].plurals[0] = "текстовый файл";
     strings["Export Command Stream##sggu2"].plurals[0] = "Экспорт потока команд";
     strings["binary file##sggu"].plurals[0] = "бинарный файл";
+    strings["Export Furnace song##sggu"].plurals[0] = "Экспорт модуля Furnace";
+    strings["Furnace song##sggu2"].plurals[0] = "Модуль Furnace";
     strings["Coming soon!##sggu"].plurals[0] = "скоро появится!";
     strings["Select Font##sggu0"].plurals[0] = "Выберите шрифт";
     strings["compatible files##sggu4"].plurals[0] = "совместимые файлы";
@@ -590,6 +593,7 @@ void DivLocale::addTranslationsRussian()
     strings["export Amiga validation data...##sggu0"].plurals[0] = "экспорт проверочного файла для компьютера Amiga...";
     strings["export text...##sggu0"].plurals[0] = "экспорт текста...";
     strings["export command stream...##sggu0"].plurals[0] = "экспорт потока команд...";
+    strings["export Furnace module...##sggu"].plurals[0] = "экспорт модуля Furnace...";
     strings["export audio...##sggu1"].plurals[0] = "экспорт аудио...";
     strings["export VGM...##sggu1"].plurals[0] = "экспорт VGM...";
     strings["export .dmf (1.1.3+)...##sggu1"].plurals[0] = "экспорт .dmf (1.1.3+)...";
@@ -717,6 +721,7 @@ void DivLocale::addTranslationsRussian()
     strings["Could not write ZSM! (%s)##sggu"].plurals[0] = "Не удалось записать файл ZSM! (%s)";
     strings["could not write text! (%s)##sggu"].plurals[0] = "не удалось записать текстовый файл! (%s)";
     strings["could not write command stream! (%s)##sggu"].plurals[0] = "не удалось записать файл с потоком команд! (%s)";
+    strings["could not write tildearrow version Furnace module! (%s)##sggu"].plurals[0] = "не удалось записать файл модуля для версии tildearrow! (%s)";
     strings["Error while loading file! (%s)##sggu4"].plurals[0] = "Ошибка при загрузке файла! (%s)";
     strings["You opened: %s##sggu"].plurals[0] = "Вы открыли: %s";
     strings["You opened:##sggu"].plurals[0] = "Вы открыли:";
@@ -1335,11 +1340,23 @@ void DivLocale::addTranslationsRussian()
     strings["Cancel##sgeo8"].plurals[0] = "Отмена";
     strings["Export (binary)##sgeo"].plurals[0] = "Экспорт (бинарный)";
     strings["Export (text)##sgeo"].plurals[0] = "Экспорт (текст)";
+    strings["this option exports a module which is\n"
+            "compatible with tildearrow Furnace app.\n\n"
+
+            "not all chips and inst macros will be supported!"].plurals[0] = 
+
+            "эта опция позволяет экспортировать модуль,\n"
+            "совместимый с версией Furnace от tildearrow.\n\n"
+
+            "поддерживаются не все чипы и не все макросы инструментов!";
+    strings["Cancel##sgeo9"].plurals[0] = "Отмена";
+    strings["Export##sgeo7"].plurals[0] = "Экспорт";
     strings["Audio##sgeo"].plurals[0] = "Аудио";
     strings["DMF (1.0/legacy)##sgeo"].plurals[0] = "DMF (1.0/legacy)";
     strings["Amiga Validation##sgeo"].plurals[0] = "Проверка Amiga";
     strings["Text##sgeo"].plurals[0] = "Текст";
     strings["Command Stream##sgeo"].plurals[0] = "Поток команд";
+    strings["Furnace##sgeo"].plurals[0] = "Furnace";
     strings["congratulations! you've unlocked a secret panel.##sgeo"].plurals[0] = "поздравляю! вы открыли секретную панель.";
     strings["Toggle hidden systems##sgeo"].plurals[0] = "Включить скрытые системы";
     strings["Toggle all instrument types##sgeo"].plurals[0] = "Включить все типы инструментов";

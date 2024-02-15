@@ -824,7 +824,7 @@ void DivInstrument::writeFeatureS2(SafeWriter* w) {
   FEATURE_END;
 }
 
-void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bool insName) {
+void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bool insName, bool tilde_version) {
   size_t blockStartSeek=0;
   size_t blockEndSeek=0;
   size_t slSeek=0;
@@ -837,16 +837,33 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
 
   if (fui) {
     //w->write("FINS",4);
-    w->write("FINB",4); //Furnace-B version
+    w->write(tilde_version ? "FINS" : "FINB",4); //Furnace-B version
   } else {
     //w->write("INS2",4);
-    w->write("IN2B",4); //Furnace-B version
+    w->write(tilde_version ? "INS2" : "IN2B",4); //Furnace-B version
     blockStartSeek=w->tell();
     w->writeI(0);
   }
 
   w->writeS(DIV_ENGINE_VERSION);
-  w->writeC(type);
+
+  unsigned short init_type = type;
+
+  if(tilde_version)
+  {
+    switch(init_type)
+    {
+      case DIV_INS_ES5503:
+      case DIV_INS_POWERNOISE:
+      case DIV_INS_POWERNOISE_SLOPE:
+      case DIV_INS_DAVE:
+      case DIV_INS_SID2:
+        init_type = init_type - (unsigned short)1; //tildearrow's verson modules are incompatible with these inst indices so we comply...
+      default: break;
+    }
+  }
+
+  w->writeC(init_type);
   w->writeC(0);
 
   // write features
@@ -3111,7 +3128,7 @@ bool DivInstrument::save(const char* path, DivSong* song, bool writeInsName) {
   SafeWriter* w=new SafeWriter();
   w->init();
 
-  putInsData2(w,true,song,writeInsName);
+  putInsData2(w,true,song,writeInsName,false);
 
   FILE* outFile=ps_fopen(path,"wb");
   if (outFile==NULL) {

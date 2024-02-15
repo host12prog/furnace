@@ -38,11 +38,11 @@ void FurnaceGUI::drawExportAudio(bool onWindow) {
 
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_L("Cancel##sgeo0"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo0"),ImVec2(250.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
 
-  if (ImGui::Button(_L("Export##sgeo0"),ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export##sgeo0"),ImVec2(250.0f*dpiScale,0))) {
     switch (audioExportType) {
       case 0:
         openFileDialog(GUI_FILE_EXPORT_AUDIO_ONE);
@@ -138,10 +138,10 @@ void FurnaceGUI::drawExportVGM(bool onWindow) {
   if (hasOneAtLeast) {
     if (onWindow) {
       ImGui::Separator();
-      if (ImGui::Button(_L("Cancel##sgeo1"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+      if (ImGui::Button(_L("Cancel##sgeo1"),ImVec2(250.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
       ImGui::SameLine();
     }
-    if (ImGui::Button(_L("Export##sgeo1"),ImVec2(200.0f*dpiScale,0))) {
+    if (ImGui::Button(_L("Export##sgeo1"),ImVec2(250.0f*dpiScale,0))) {
       openFileDialog(GUI_FILE_EXPORT_VGM);
       ImGui::CloseCurrentPopup();
     }
@@ -149,7 +149,7 @@ void FurnaceGUI::drawExportVGM(bool onWindow) {
     ImGui::Text(_L("nothing to export##sgeo2"));
     if (onWindow) {
       ImGui::Separator();
-      if (ImGui::Button(_L("Cancel##sgeo2"),ImVec2(400.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+      if (ImGui::Button(_L("Cancel##sgeo2"),ImVec2(500.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     }
   }
 }
@@ -167,10 +167,10 @@ void FurnaceGUI::drawExportZSM(bool onWindow) {
   ImGui::Checkbox(_L("optimize size##sgeo"),&zsmExportOptimize);
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_L("Cancel##sgeo3"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo3"),ImVec2(250.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_L("Export##sgeo3"),ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export##sgeo3"),ImVec2(250.0f*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_ZSM);
     ImGui::CloseCurrentPopup();
   }
@@ -182,10 +182,10 @@ void FurnaceGUI::drawExportDMF(bool onWindow) {
   ImGui::Text(_L("DefleMask file (1.1.3+)##sgeo"));
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_L("Cancel##sgeo4"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo4"),ImVec2(250.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_L("Export##sgeo4"),ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export##sgeo4"),ImVec2(250.0f*dpiScale,0))) {
     openFileDialog(GUI_FILE_SAVE_DMF);
     ImGui::CloseCurrentPopup();
   }
@@ -197,10 +197,10 @@ void FurnaceGUI::drawExportDMFLegacy(bool onWindow) {
   ImGui::Text(_L("DefleMask file (1.0/legacy)##sgeo"));
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_L("Cancel##sgeo5"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo5"),ImVec2(250.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_L("Export##sgeo5"),ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export##sgeo5"),ImVec2(250.0f*dpiScale,0))) {
     openFileDialog(GUI_FILE_SAVE_DMF_LEGACY);
     ImGui::CloseCurrentPopup();
   }
@@ -220,10 +220,10 @@ void FurnaceGUI::drawExportAmigaVal(bool onWindow) {
   ImGui::InputText("##AVDPath",&workingDirROMExport);
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_L("Cancel##sgeo6"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo6"),ImVec2(250.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_L("Bake Data##sgeo"),ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Bake Data##sgeo"),ImVec2(250.0f*dpiScale,0))) {
     std::vector<DivROMExportOutput> out=e->buildROM(DIV_ROM_AMIGA_VALIDATION);
     if (workingDirROMExport.size()>0) {
       if (workingDirROMExport[workingDirROMExport.size()-1]!=DIR_SEPARATOR) workingDirROMExport+=DIR_SEPARATOR_STR;
@@ -251,10 +251,10 @@ void FurnaceGUI::drawExportText(bool onWindow) {
   );
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_L("Cancel##sgeo7"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo7"),ImVec2(250.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_L("Export##sgeo6"),ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export##sgeo6"),ImVec2(250.0f*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_TEXT);
     ImGui::CloseCurrentPopup();
   }
@@ -272,16 +272,36 @@ void FurnaceGUI::drawExportCommand(bool onWindow) {
   ));
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_L("Cancel##sgeo8"),ImVec2(133.3f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo8"),ImVec2(166.6f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_L("Export (binary)##sgeo"),ImVec2(133.3f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export (binary)##sgeo"),ImVec2(166.6f*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_CMDSTREAM_BINARY);
     ImGui::CloseCurrentPopup();
   }
   ImGui::SameLine();
-  if (ImGui::Button(_L("Export (text)##sgeo"),ImVec2(133.3f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export (text)##sgeo"),ImVec2(166.6f*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_CMDSTREAM);
+    ImGui::CloseCurrentPopup();
+  }
+}
+
+void FurnaceGUI::drawExportFur(bool onWindow) {
+  exitDisabledTimer=1;
+  
+  ImGui::Text(_L(
+    "this option exports a module which is\n"
+    "compatible with tildearrow Furnace app.\n\n"
+
+    "not all chips and inst macros will be supported!"
+  ));
+  if (onWindow) {
+    ImGui::Separator();
+    if (ImGui::Button(_L("Cancel##sgeo9"),ImVec2(250.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    ImGui::SameLine();
+  }
+  if (ImGui::Button(_L("Export##sgeo7"),ImVec2(250.0f*dpiScale,0))) {
+    openFileDialog(GUI_FILE_EXPORT_FUR);
     ImGui::CloseCurrentPopup();
   }
 }
@@ -333,6 +353,10 @@ void FurnaceGUI::drawExport() {
         drawExportCommand(true);
         ImGui::EndTabItem();
       }
+      if (ImGui::BeginTabItem(_L("Furnace##sgeo"))) {
+        drawExportFur(true);
+        ImGui::EndTabItem();
+      }
       ImGui::EndTabBar();
     }
   } else switch (curExportType) {
@@ -359,6 +383,9 @@ void FurnaceGUI::drawExport() {
       break;
     case GUI_EXPORT_CMD_STREAM:
       drawExportCommand(true);
+      break;
+    case GUI_EXPORT_FUR:
+      drawExportFur(true);
       break;
     default:
       ImGui::Text(_L("congratulations! you've unlocked a secret panel.##sgeo"));

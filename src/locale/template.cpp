@@ -452,13 +452,14 @@ void DivLocale::addTranslationsTemplate()
     strings["all files##sggu0"].plurals[0] = "=all files";
     strings["no backups made yet!##sggu"].plurals[0] = "=no backups made yet!";
     strings["Restore Backup##sggu"].plurals[0] = "=Restore Backup";
+    strings["Furnace or Furnace-B song##sggu"].plurals[0] = "=Furnace or Furnace-B song";
     strings["Furnace song##sggu0"].plurals[0] = "=Furnace song";
     strings["Save File##sggu0"].plurals[0] = "=Save File";
     strings["DefleMask 1.1.3 module##sggu"].plurals[0] = "=DefleMask 1.1.3 module";
     strings["Save File##sggu1"].plurals[0] = "=Save File";
     strings["DefleMask 1.0/legacy module##sggu"].plurals[0] = "=DefleMask 1.0/legacy module";
     strings["Save File##sggu2"].plurals[0] = "=Save File";
-    strings["Furnace song##sggu1"].plurals[0] = "=Furnace song";
+    strings["Furnace-B song##sggu"].plurals[0] = "=Furnace-B song";
     strings["Load Instrument##sggu"].plurals[0] = "=Load Instrument";
     strings["all compatible files##sggu1"].plurals[0] = "=all compatible files";
     strings["Furnace instrument##sggu0"].plurals[0] = "=Furnace instrument";
@@ -515,6 +516,8 @@ void DivLocale::addTranslationsTemplate()
     strings["text file##sggu1"].plurals[0] = "=text file";
     strings["Export Command Stream##sggu2"].plurals[0] = "=Export Command Stream";
     strings["binary file##sggu"].plurals[0] = "=binary file";
+    strings["Export Furnace song##sggu"].plurals[0] = "=Export Furnace song";
+    strings["Furnace song##sggu2"].plurals[0] = "=Furnace song";
     strings["Coming soon!##sggu"].plurals[0] = "=Coming soon!";
     strings["Select Font##sggu0"].plurals[0] = "=Select Font";
     strings["compatible files##sggu4"].plurals[0] = "=compatible files";
@@ -648,6 +651,7 @@ void DivLocale::addTranslationsTemplate()
     strings["export Amiga validation data...##sggu0"].plurals[0] = "=export Amiga validation data...";
     strings["export text...##sggu0"].plurals[0] = "=export text...";
     strings["export command stream...##sggu0"].plurals[0] = "=export command stream...";
+    strings["export Furnace module...##sggu"].plurals[0] = "=export Furnace module...";
     strings["export audio...##sggu1"].plurals[0] = "=export audio...";
     strings["export VGM...##sggu1"].plurals[0] = "=export VGM...";
     strings["export .dmf (1.1.3+)...##sggu1"].plurals[0] = "=export .dmf (1.1.3+)...";
@@ -772,6 +776,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Could not write ZSM! (%s)##sggu"].plurals[0] = "=Could not write ZSM! (%s)";
     strings["could not write text! (%s)##sggu"].plurals[0] = "=could not write text! (%s)";
     strings["could not write command stream! (%s)##sggu"].plurals[0] = "=could not write command stream! (%s)";
+    strings["could not write tildearrow version Furnace module! (%s)##sggu"].plurals[0] = "=could not write tildearrow version Furnace module! (%s)";
     strings["Error while loading file! (%s)##sggu4"].plurals[0] = "=Error while loading file! (%s)";
     strings["You opened: %s##sggu"].plurals[0] = "=You opened: %s";
     strings["You opened:##sggu"].plurals[0] = "=You opened:##sggu";
@@ -1390,11 +1395,23 @@ void DivLocale::addTranslationsTemplate()
     strings["Cancel##sgeo8"].plurals[0] = "=Cancel";
     strings["Export (binary)##sgeo"].plurals[0] = "=Export (binary)";
     strings["Export (text)##sgeo"].plurals[0] = "=Export (text)";
+    strings["this option exports a module which is\n"
+            "compatible with tildearrow Furnace app.\n\n"
+
+            "not all chips and inst macros will be supported!"].plurals[0] = 
+
+            "=this option exports a module which is\n"
+            "compatible with tildearrow Furnace app.\n\n"
+
+            "not all chips and inst macros will be supported!";
+    strings["Cancel##sgeo9"].plurals[0] = "=Cancel";
+    strings["Export##sgeo7"].plurals[0] = "=Export";
     strings["Audio##sgeo"].plurals[0] = "=Audio";
     strings["DMF (1.0/legacy)##sgeo"].plurals[0] = "=DMF (1.0/legacy)";
     strings["Amiga Validation##sgeo"].plurals[0] = "=Amiga Validation";
     strings["Text##sgeo"].plurals[0] = "=Text";
     strings["Command Stream##sgeo"].plurals[0] = "=Command Stream";
+    strings["Furnace##sgeo"].plurals[0] = "=Furnace";
     strings["congratulations! you've unlocked a secret panel.##sgeo"].plurals[0] = "=congratulations! you've unlocked a secret panel.";
     strings["Toggle hidden systems##sgeo"].plurals[0] = "=Toggle hidden systems";
     strings["Toggle all instrument types##sgeo"].plurals[0] = "=Toggle all instrument types";
