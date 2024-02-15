@@ -825,6 +825,11 @@ void DivPlatformES5503::renderSamples(int sysID) {
         continue;
       }
 
+      if(s->length8 == 0)
+      {
+        sampleLoaded[i] = true; //so no warning for out of memory for empty samples
+      }
+
       int length = s->getLoopEndPosition(DIV_SAMPLE_DEPTH_8BIT);
 
       if(length < 0) break;
