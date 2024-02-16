@@ -524,6 +524,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
         for (int i=0; i<128; i++) {
           DivInstrument* ins=new DivInstrument;
           ds.ins.push_back(ins);
+          ds.ins[i]->type = DIV_INS_FM;
         }
 
         logV("instruments:");
@@ -748,6 +749,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           ins->name=reader.readString((unsigned int)reader.readI());
           logV("- %d: %s",insIndex,ins->name);
         }
+
+        ds.insLen = 128;
         
       } else if (blockName=="SEQUENCES") {
         CHECK_BLOCK_VERSION(6);
@@ -1214,9 +1217,23 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
       } else if (blockName=="DETUNETABLES") {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
-      } else if (blockName=="PARAMS_EXTRA") {
+      } else if (blockName=="COMMENTS") {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
+      } else if (blockName=="PARAMS_EXTRA") {
+        CHECK_BLOCK_VERSION(1);
+        //reader.seek(blockSize,SEEK_CUR);
+        unsigned int linear_pitch = reader.readI();
+
+        ds.linearPitch = linear_pitch == 0 ? 0 : 2;
+
+        if(blockVersion >= 2)
+        {
+          unsigned char detune_semi = reader.readC();
+          (void)detune_semi;
+          unsigned char detune_cents = reader.readC();
+          (void)detune_cents;
+        }
       } else if (blockName=="TUNING") {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
@@ -1239,6 +1256,35 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
     }
 
     //addWarning("FamiTracker import is experimental!");
+
+    for(int i = 0; i < (int)ds.insLen; i++)
+    {
+      DivInstrument* ins = ds.ins[i];
+
+      if(ins->type == DIV_INS_FM)
+      {
+        delete ds.ins[i];
+        ds.ins.erase(ds.ins.begin()+i);
+        ds.insLen=ds.ins.size();
+        for (int ii=0; ii<tchans; ii++) 
+        {
+          for (size_t j=0; j<ds.subsong.size(); j++) 
+          {
+            for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+            {
+              if (ds.subsong[j]->pat[ii].data[k]==NULL) continue;
+              for (int l=0; l<ds.subsong[j]->patLen; l++) 
+              {
+                if (ds.subsong[j]->pat[ii].data[k]->data[l][2]>i) 
+                {
+                  ds.subsong[j]->pat[ii].data[k]->data[l][2]--;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 
     ds.version=DIV_VERSION_FTM;
 
