@@ -141,11 +141,52 @@ const int eff_conversion_050[][2] =
 
 constexpr int ftEffectMapSize=sizeof(ftEffectMap)/sizeof(int);
 
-void copy_macro(DivInstrumentMacro* to, DivInstrumentMacro* from)
+int convert_macros_2a03[5] = { (int)DIV_MACRO_VOL, (int)DIV_MACRO_ARP, (int)DIV_MACRO_PITCH, -1, (int)DIV_MACRO_DUTY };
+int convert_macros_vrc6[5] = { (int)DIV_MACRO_VOL, (int)DIV_MACRO_ARP, (int)DIV_MACRO_PITCH, -1, (int)DIV_MACRO_DUTY };
+
+void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, int setting)
 {
+  DivInstrumentMacro* to = NULL;
+
+  switch(ins->type)
+  {
+    case DIV_INS_NES:
+    {
+      if(convert_macros_2a03[macro_type] == -1) return;
+      to = ins->std.get_macro(convert_macros_2a03[macro_type], true);
+      break;
+    }
+    case DIV_INS_VRC6:
+    {
+      if(convert_macros_vrc6[macro_type] == -1) return;
+      to = ins->std.get_macro(convert_macros_2a03[macro_type], true);
+      break;
+    }
+    default: break;
+  }
+
+  if(to == NULL) return;
+
   for (int i=0; i<256; i++) 
   {
     to->val[i]=from->val[i];
+
+    if((DivMacroType)convert_macros_2a03[macro_type] == DIV_MACRO_ARP)
+    {
+      if(setting == 0) //absolute
+      {
+        if(to->val[i] > 0x60)
+        {
+          int temp = to->val[i];
+          to->val[i] = 0xff - temp + 1; //2s complement integer my beloved
+        }
+      }
+
+      if(setting == 1) //fixed
+      {
+        to->val[i] |= (1 << 30); //30th bit in Furnace arp macro marks fixed mode
+      }
+    }
   }
 
   to->len = from->len;
@@ -470,9 +511,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
       } else if (blockName=="INSTRUMENTS") {
         CHECK_BLOCK_VERSION(6);
 
-        reader.seek(blockSize,SEEK_CUR);
+        //reader.seek(blockSize,SEEK_CUR);
 
-        /*ds.insLen=reader.readI();
+        ds.insLen=reader.readI();
         if (ds.insLen<0 || ds.insLen>256) {
           logE("too many instruments/out of range!");
           lastError="too many instruments/out of range";
@@ -567,7 +608,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             }
             case DIV_INS_OPLL: {
               ins->fm.opllPreset=(unsigned int)reader.readI();
-              // TODO
+              
+              for(int i = 0; i < 8; i++)
+              {
+                unsigned char custom_patch = reader.readC();
+              }
               break;
             }
             case DIV_INS_FDS: {
@@ -587,38 +632,107 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
               reader.readI(); // this is delay. currently ignored. TODO.
               ds.wave.push_back(wave);
 
-              ins->std.get_macro(DIV_MACRO_VOL, true)->len=reader.readC();
-              ins->std.get_macro(DIV_MACRO_VOL, true)->loop=reader.readI();
-              ins->std.get_macro(DIV_MACRO_VOL, true)->rel=reader.readI();
-              reader.readI(); // arp mode does not apply here
-              for (int j=0; j<ins->std.get_macro(DIV_MACRO_VOL, true)->len; j++) {
-                ins->std.get_macro(DIV_MACRO_VOL, true)->val[j]=reader.readC();
-              }
+              unsigned int a = reader.readI();
+              unsigned int b = reader.readI();
 
-              ins->std.get_macro(DIV_MACRO_ARP, true)->len=reader.readC();
-              ins->std.get_macro(DIV_MACRO_ARP, true)->loop=reader.readI();
-              ins->std.get_macro(DIV_MACRO_ARP, true)->rel=reader.readI();
-              // TODO: get rid
-              ins->std.get_macro(DIV_MACRO_ARP, true)->mode=reader.readI();
-              for (int j=0; j<ins->std.get_macro(DIV_MACRO_ARP, true)->len; j++) {
-                ins->std.get_macro(DIV_MACRO_ARP, true)->val[j]=reader.readC();
-              }
+              reader.seek(-8, SEEK_CUR);
 
-              ins->std.get_macro(DIV_MACRO_PITCH, true)->len=reader.readC();
-              ins->std.get_macro(DIV_MACRO_PITCH, true)->loop=reader.readI();
-              ins->std.get_macro(DIV_MACRO_PITCH, true)->rel=reader.readI();
-              reader.readI(); // arp mode does not apply here
-              for (int j=0; j<ins->std.get_macro(DIV_MACRO_PITCH, true)->len; j++) {
-                ins->std.get_macro(DIV_MACRO_PITCH, true)->val[j]=reader.readC();
+              if(a < 256 && (b & 0xFF) != 0x00)
+              {
+                //don't look at me like this. I don't know why this should be like this either!
+              }
+              else
+              {
+                ins->std.get_macro(DIV_MACRO_VOL, true)->len=reader.readC();
+                ins->std.get_macro(DIV_MACRO_VOL, true)->loop=reader.readI();
+                ins->std.get_macro(DIV_MACRO_VOL, true)->rel=reader.readI();
+                reader.readI(); // arp mode does not apply here
+                for (int j=0; j<ins->std.get_macro(DIV_MACRO_VOL, true)->len; j++) {
+                  ins->std.get_macro(DIV_MACRO_VOL, true)->val[j]=reader.readC();
+
+                  if(blockVersion <= 3)
+                  {
+                    ins->std.get_macro(DIV_MACRO_VOL, true)->val[j] *= 2;
+                  }
+                }
+
+                ins->std.get_macro(DIV_MACRO_ARP, true)->len=reader.readC();
+                ins->std.get_macro(DIV_MACRO_ARP, true)->loop=reader.readI();
+                ins->std.get_macro(DIV_MACRO_ARP, true)->rel=reader.readI();
+                // TODO: get rid
+                ins->std.get_macro(DIV_MACRO_ARP, true)->mode=reader.readI();
+                for (int j=0; j<ins->std.get_macro(DIV_MACRO_ARP, true)->len; j++) {
+                  ins->std.get_macro(DIV_MACRO_ARP, true)->val[j]=reader.readC();
+                }
+
+                if(blockVersion >= 3)
+                {
+                  ins->std.get_macro(DIV_MACRO_PITCH, true)->len=reader.readC();
+                  ins->std.get_macro(DIV_MACRO_PITCH, true)->loop=reader.readI();
+                  ins->std.get_macro(DIV_MACRO_PITCH, true)->rel=reader.readI();
+                  reader.readI(); // arp mode does not apply here
+                  for (int j=0; j<ins->std.get_macro(DIV_MACRO_PITCH, true)->len; j++) {
+                    ins->std.get_macro(DIV_MACRO_PITCH, true)->val[j]=reader.readC();
+                  }
+                }
               }
 
               break;
             }
-            case DIV_INS_N163: {
-              // TODO!
+            case DIV_INS_N163: { //TODO: add local wavetables and finish this!
+              unsigned int totalSeqs=reader.readI();
+              if (totalSeqs>5) {
+                logE("%d: too many sequences!",insIndex);
+                lastError="too many sequences";
+                delete[] file;
+                return false;
+              }
+
+              for (unsigned int j=0; j<totalSeqs; j++) {
+                hasSequence[insIndex][j]=reader.readC();
+                sequenceIndex[insIndex][j]=reader.readC();
+              }
+
+              unsigned int wave_size = reader.readI();
+              unsigned int wave_pos = reader.readI();
+
+              if(blockVersion >= 8)
+              {
+                unsigned int autopos = reader.readI();
+              }
+
+              unsigned int wave_count = reader.readI();
+
+              for(int ii = 0; ii < wave_count; ii++)
+              {
+                for(int jj = 0; jj < wave_size; jj++)
+                {
+                  unsigned char val = reader.readC();
+                  (void)val;
+                }
+              }
+
               break;
             }
-            // TODO: 5B!
+            
+            case DIV_INS_AY:
+            {
+              unsigned int totalSeqs=reader.readI();
+              if (totalSeqs>5) {
+                logE("%d: too many sequences!",insIndex);
+                lastError="too many sequences";
+                delete[] file;
+                return false;
+              }
+
+              for (unsigned int j=0; j<totalSeqs; j++) {
+                hasSequence[insIndex][j]=reader.readC();
+                sequenceIndex[insIndex][j]=reader.readC();
+              }
+
+              break;
+            }
+
             default: {
               logE("%d: what's going on here?",insIndex);
               lastError="invalid instrument type";
@@ -630,13 +744,13 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           // name
           ins->name=reader.readString((unsigned int)reader.readI());
           logV("- %d: %s",insIndex,ins->name);
-        }*/
+        }
         
       } else if (blockName=="SEQUENCES") {
         CHECK_BLOCK_VERSION(6);
-        reader.seek(blockSize,SEEK_CUR);
+        //reader.seek(blockSize,SEEK_CUR);
 
-        /*if(blockVersion < 3)
+        if(blockVersion < 3)
         {
           lastError="sequences block version is too old";
           delete[] file;
@@ -656,6 +770,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           Types[i] = type;
 
           unsigned char size = reader.readC();
+          unsigned int setting = 0;
 
           macros[index][type].len = size;
 
@@ -666,7 +781,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           if(blockVersion == 4)
           {
             unsigned int release = reader.readI();
-            unsigned int setting = reader.readI();
+            setting = reader.readI();
 
             macros[index][type].rel = release;
             macro_types[index][type] = setting;
@@ -683,7 +798,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             DivInstrument* ins=ds.ins[k];
             if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_NES && hasSequence[k][Types[i]])
             {
-              copy_macro(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[index][type]][type]);
+              copy_macro(ins, &macros[sequenceIndex[index][type]][type], Types[i], setting);
               //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[index][type]][type], sizeof(DivInstrumentMacro));
             }
           }
@@ -706,7 +821,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
                   macros[k][j].rel = release;
                   macro_types[k][j] = setting;
 
-                  copy_macro(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)j, true), &macros[sequenceIndex[k][j]][j]);
+                  copy_macro(ins, &macros[sequenceIndex[k][j]][j], j, setting);
                   //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)j, true), &macros[sequenceIndex[k][j]][j], sizeof(DivInstrumentMacro));
                 }
               }
@@ -738,7 +853,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
                   y++;
                 }
                 
-                copy_macro(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[k][Types[i]]][Types[i]]);
+                copy_macro(ins, &macros[sequenceIndex[k][Types[i]]][Types[i]], Types[i], setting);
                 //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[k][Types[i]]][Types[i]], sizeof(DivInstrumentMacro));
               }
             }
@@ -746,7 +861,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
         }
 
         delete Indices;
-        delete Types;*/
+        delete Types;
       } 
       else if (blockName=="GROOVES") {
         CHECK_BLOCK_VERSION(6);
@@ -960,9 +1075,121 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
       } else if (blockName=="SEQUENCES_VRC6") {
-        // where are the 5B and FDS sequences?
         CHECK_BLOCK_VERSION(6);
-        reader.seek(blockSize,SEEK_CUR);
+        //reader.seek(blockSize,SEEK_CUR);
+
+        if(blockVersion < 3)
+        {
+          lastError="sequences block version is too old";
+          delete[] file;
+          return false;
+        }
+
+        unsigned char* Indices = new unsigned char[128 * 5];
+		    unsigned char* Types = new unsigned char[128 * 5];
+
+        unsigned int seq_count = reader.readI();
+
+        for(int i = 0; i < seq_count; i++)
+        {
+          unsigned int index = reader.readI();
+          Indices[i] = index;
+          unsigned int type = reader.readI();
+          Types[i] = type;
+
+          unsigned char size = reader.readC();
+          unsigned int setting = 0;
+
+          macros[index][type].len = size;
+
+          unsigned int loop = reader.readI();
+
+          macros[index][type].loop = loop;
+
+          if(blockVersion == 4)
+          {
+            unsigned int release = reader.readI();
+            setting = reader.readI();
+
+            macros[index][type].rel = release;
+            macro_types[index][type] = setting;
+          }
+
+          for(int j = 0; j < size; j++)
+          {
+            unsigned char seq = reader.readC();
+            macros[index][type].val[j] = seq;
+          }
+
+          for(int k = 0; k < (int)ds.ins.size(); k++)
+          {
+            DivInstrument* ins=ds.ins[k];
+            if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_VRC6 && hasSequence[k][Types[i]])
+            {
+              copy_macro(ins, &macros[sequenceIndex[index][type]][type], type, setting);
+              //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[index][type]][type], sizeof(DivInstrumentMacro));
+            }
+          }
+        }
+
+        if(blockVersion == 5)  // Version 5 saved the release points incorrectly, this is fixed in ver 6
+        {
+          for(int i = 0; i < 128; i++)
+          {
+            for(int j = 0; j < 5; j++)
+            {
+              unsigned int release = reader.readI();
+              unsigned int setting = reader.readI();
+
+              for(int k = 0; k < (int)ds.ins.size(); k++)
+              {
+                DivInstrument* ins=ds.ins[k];
+                if(sequenceIndex[k][j] == i && ins->type == DIV_INS_VRC6 && hasSequence[k][j])
+                {
+                  macros[k][j].rel = release;
+                  macro_types[k][j] = setting;
+
+                  copy_macro(ins, &macros[sequenceIndex[k][j]][j], j, setting);
+                  //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)j, true), &macros[sequenceIndex[k][j]][j], sizeof(DivInstrumentMacro));
+                }
+              }
+            }
+          }
+        }
+
+        if(blockVersion >= 6) // Read release points correctly stored
+        {
+          for(int i = 0; i < seq_count; i++)
+          {
+            unsigned int release = reader.readI();
+            unsigned int setting = reader.readI();
+
+            //macros[index][type].rel = release;
+            //macro_types[index][type] = setting;
+
+            for(int k = 0; k < (int)ds.ins.size(); k++)
+            {
+              DivInstrument* ins=ds.ins[k];
+              if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_VRC6 && hasSequence[k][Types[i]])
+              {
+                macros[k][Types[i]].rel = release;
+                macro_types[k][Types[i]] = setting;
+
+                if(Types[i] > 0)
+                {
+                  int y = 0;
+                  y++;
+                }
+                
+                copy_macro(ins, &macros[sequenceIndex[k][Types[i]]][Types[i]], Types[i], setting);
+                //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[k][Types[i]]][Types[i]], sizeof(DivInstrumentMacro));
+              }
+            }
+          }
+        }
+
+        delete Indices;
+        delete Types;
       } else if (blockName=="SEQUENCES_N163") {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
