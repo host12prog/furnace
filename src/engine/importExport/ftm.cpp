@@ -197,11 +197,11 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
 
         if(temp_val < 0x80)
         {
-          to->val[i] = -1 * temp;
+          to->val[i] = temp;
         }
         else
         {
-          to->val[i] = (0x100 - temp - 1);
+          to->val[i] = -1 * (0x100 - temp - 1);
         }
       }
     }
@@ -244,6 +244,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
     double customHz=60;
 
     unsigned char fds_chan = 0xff;
+
+    int total_chans = 0;
     
     memset(hasSequence,0,256*8*sizeof(bool));
     memset(sequenceIndex,0,256*8);
@@ -469,6 +471,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           }
 
           calcChans+=getChannelCount(ds.system[i]);
+          total_chans += getChannelCount(ds.system[i]);
 
           if(ds.system[i] == DIV_SYSTEM_N163)
           {
@@ -653,12 +656,13 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
               ins->std.get_macro(DIV_MACRO_WAVE, true)->len=1;
               ins->std.get_macro(DIV_MACRO_WAVE, true)->val[0]=ds.wave.size();
               for (int j=0; j<32; j++) {
-                ins->fds.modTable[j]=reader.readC()-3;
+                ins->fds.modTable[j]=reader.readC() - 3;
               }
               ins->fds.modSpeed=reader.readI();
               ins->fds.modDepth=reader.readI();
               reader.readI(); // this is delay. currently ignored. TODO.
               ds.wave.push_back(wave);
+              ds.waveLen++;
 
               unsigned int a = reader.readI();
               unsigned int b = reader.readI();
@@ -688,9 +692,14 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
                 ins->std.get_macro(DIV_MACRO_ARP, true)->loop=reader.readI();
                 ins->std.get_macro(DIV_MACRO_ARP, true)->rel=reader.readI();
                 // TODO: get rid
-                ins->std.get_macro(DIV_MACRO_ARP, true)->mode=reader.readI();
+                unsigned int mode=reader.readI();
                 for (int j=0; j<ins->std.get_macro(DIV_MACRO_ARP, true)->len; j++) {
                   ins->std.get_macro(DIV_MACRO_ARP, true)->val[j]=reader.readC();
+
+                  if(mode == 1) //fixed arp
+                  {
+                    ins->std.get_macro(DIV_MACRO_ARP, true)->val[j] |= (1 << 30);
+                  }
                 }
 
                 if(blockVersion >= 3)
@@ -701,6 +710,23 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
                   reader.readI(); // arp mode does not apply here
                   for (int j=0; j<ins->std.get_macro(DIV_MACRO_PITCH, true)->len; j++) {
                     ins->std.get_macro(DIV_MACRO_PITCH, true)->val[j]=reader.readC();
+
+                    int temp_val = ins->std.get_macro(DIV_MACRO_PITCH, true)->val[j];
+                    int temp = temp_val;
+
+                    if(temp_val < 0x80)
+                    {
+                      ins->std.get_macro(DIV_MACRO_PITCH, true)->val[j] = temp;
+                    }
+                    else
+                    {
+                      ins->std.get_macro(DIV_MACRO_PITCH, true)->val[j] = -1 * (0x100 - temp - 1);
+                    }
+                  }
+
+                  if(mode == 0) //relative
+                  {
+                    ins->std.get_macro(DIV_MACRO_PITCH, true)->mode = 1;//setting relative mode
                   }
                 }
               }
@@ -1008,6 +1034,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             if(blockVersion < 5 && map_channels[ch] == fds_chan) //FDS transpose
             {
               nextOctave += 2;
+              nextOctave -= 2;
+            }
+            if(blockVersion >= 5 && map_channels[ch] == fds_chan) //FDS transpose
+            {
+              nextOctave -= 2;
             }
 
             if(map_channels[ch] != 0xff)
@@ -1297,7 +1328,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           delete ds.ins[index];
           ds.ins.erase(ds.ins.begin()+index);
           ds.insLen=ds.ins.size();
-          for (int ii=0; ii<(int)tchans; ii++) 
+          for (int ii=0; ii<total_chans; ii++) 
           {
             for (size_t j=0; j<ds.subsong.size(); j++) 
             {
