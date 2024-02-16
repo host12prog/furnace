@@ -80,6 +80,7 @@ const char* aboutLine[]={
   "Background2982",
   "battybeats",
   "bbqzzd",
+  "bedroomvampire",
   "Bernie",
   "BlastBrothers",
   "Blaze Weednix",
