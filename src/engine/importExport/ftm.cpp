@@ -612,6 +612,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
               for(int i = 0; i < 8; i++)
               {
                 unsigned char custom_patch = reader.readC();
+                (void)custom_patch;
               }
               break;
             }
@@ -695,17 +696,19 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
               unsigned int wave_size = reader.readI();
               unsigned int wave_pos = reader.readI();
+              (void)wave_pos;
 
               if(blockVersion >= 8)
               {
                 unsigned int autopos = reader.readI();
+                (void)autopos;
               }
 
               unsigned int wave_count = reader.readI();
 
-              for(int ii = 0; ii < wave_count; ii++)
+              for(unsigned int ii = 0; ii < wave_count; ii++)
               {
-                for(int jj = 0; jj < wave_size; jj++)
+                for(unsigned int jj = 0; jj < wave_size; jj++)
                 {
                   unsigned char val = reader.readC();
                   (void)val;
@@ -762,7 +765,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
         unsigned int seq_count = reader.readI();
 
-        for(int i = 0; i < seq_count; i++)
+        for(unsigned int i = 0; i < seq_count; i++)
         {
           unsigned int index = reader.readI();
           Indices[i] = index;
@@ -831,7 +834,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
         if(blockVersion >= 6) // Read release points correctly stored
         {
-          for(int i = 0; i < seq_count; i++)
+          for(unsigned int i = 0; i < seq_count; i++)
           {
             unsigned int release = reader.readI();
             unsigned int setting = reader.readI();
@@ -1090,7 +1093,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
         unsigned int seq_count = reader.readI();
 
-        for(int i = 0; i < seq_count; i++)
+        for(unsigned int i = 0; i < seq_count; i++)
         {
           unsigned int index = reader.readI();
           Indices[i] = index;
@@ -1159,7 +1162,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
         if(blockVersion >= 6) // Read release points correctly stored
         {
-          for(int i = 0; i < seq_count; i++)
+          for(unsigned int i = 0; i < seq_count; i++)
           {
             unsigned int release = reader.readI();
             unsigned int setting = reader.readI();
