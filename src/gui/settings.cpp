@@ -563,7 +563,7 @@ void FurnaceGUI::drawSettings() {
           exportLoops=settings.exportLoops;
           settingsChanged=true;
         }
-        if (ImGui::InputDouble(_L("Fade out (seconds)##sgse"),&settings.exportFadeOut,1.0,2.0,"%.1f##sgse")) {
+        if (ImGui::InputDouble(_L("Fade out (seconds)##sgse"),&settings.exportFadeOut,1.0,2.0,"%.1f")) {
           if (exportFadeOut<0.0) exportFadeOut=0.0;
           exportFadeOut=settings.exportFadeOut;
           settingsChanged=true;

@@ -48,22 +48,22 @@ void FurnaceGUI::drawPalette() {
   int width=ImGui::GetContentRegionAvail().x;
   ImGui::SetNextItemWidth(width);
 
-  const char* hint=_L("Search...##sgcp");
+  const char* hint=settings.language == DIV_LANG_ENGLISH ? "Search..." : _L("Search...##sgcp");
   switch (curPaletteType) {
   case CMDPAL_TYPE_RECENT:
-    hint=_L("Search recent files...##sgcp");
+    hint=settings.language == DIV_LANG_ENGLISH ? "Search recent files..." : _L("Search recent files...##sgcp");
     break;
   case CMDPAL_TYPE_INSTRUMENTS:
-    hint=_L("Search instruments...##sgcp");
+    hint=settings.language == DIV_LANG_ENGLISH ? "Search instruments..." : _L("Search instruments...##sgcp");
     break;
   case CMDPAL_TYPE_SAMPLES:
-    hint=_L("Search samples...##sgcp");
+    hint=settings.language == DIV_LANG_ENGLISH ? "Search samples..." : _L("Search samples...##sgcp");
     break;
   case CMDPAL_TYPE_INSTRUMENT_CHANGE:
-    hint=_L("Search instruments (to change to)...##sgcp");
+    hint=settings.language == DIV_LANG_ENGLISH ? "Search instruments (to change to)..." : _L("Search instruments (to change to)...##sgcp");
     break;
   case CMDPAL_TYPE_ADD_CHIP:
-    hint=_L("Search chip (to add)...##sgcp");
+    hint=settings.language == DIV_LANG_ENGLISH ? "Search chip (to add)..." : _L("Search chip (to add)...##sgcp");
     break;
   }
 

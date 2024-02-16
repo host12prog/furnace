@@ -67,7 +67,7 @@ void FurnaceGUI::drawNewSong() {
     if (newSongFirstFrame)
       ImGui::SetKeyboardFocusHere();
     ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-    if (ImGui::InputTextWithHint("##SysSearch",_L("Search...##sgns"),&newSongQuery)) {
+    if (ImGui::InputTextWithHint("##SysSearch",settings.language == DIV_LANG_ENGLISH ? "Search..." : _L("Search...##sgns"),&newSongQuery)) {
       String lowerCase=newSongQuery;
       
       for (char& i: lowerCase) {
