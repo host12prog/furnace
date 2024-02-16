@@ -103,7 +103,9 @@ void FurnaceGUI::drawChannels() {
         }
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-        if (ImGui::InputTextWithHint("##ChanShortName",e->getChannelShortName(i),&e->curSubSong->chanShortName[i])) {
+        translation_or_not = _L(e->getChannelShortName(i));
+        final_name = translation_or_not.substr(0, translation_or_not.find("##"));
+        if (ImGui::InputTextWithHint("##ChanShortName",final_name.c_str(),&e->curSubSong->chanShortName[i])) {
           MARK_MODIFIED;
         }
         ImGui::PopID();
