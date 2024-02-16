@@ -521,7 +521,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           return false;
         }
 
-        for (int i=0; i<ds.insLen; i++) {
+        for (int i=0; i<128; i++) {
           DivInstrument* ins=new DivInstrument;
           ds.ins.push_back(ins);
         }
@@ -530,10 +530,10 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
         for (int i=0; i<ds.insLen; i++) {
           unsigned int insIndex=reader.readI();
           if (insIndex>=ds.ins.size()) {
-            logE("instrument index %d is out of range!",insIndex);
-            lastError="instrument index out of range";
-            delete[] file;
-            return false;
+            //logE("instrument index %d is out of range!",insIndex);
+            //lastError="instrument index out of range";
+            //delete[] file;
+            //return false;
           }
 
           DivInstrument* ins=ds.ins[insIndex];
