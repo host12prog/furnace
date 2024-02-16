@@ -3343,6 +3343,17 @@ const char* ImGui::FindRenderedTextEnd(const char* text, const char* text_end)
     return text_display_end;
 }
 
+const char* FindRenderedTextEndNoHashHide(const char* text, const char* text_end)
+{
+    const char* text_display_end = text;
+    if (!text_end)
+        text_end = (const char*)-1;
+
+    while (text_display_end < text_end && *text_display_end != '\0')
+        text_display_end++;
+    return text_display_end;
+}
+
 // Internal ImGui functions to render text
 // RenderText***() functions calls ImDrawList::AddText() calls ImBitmapFont::RenderText()
 void ImGui::RenderText(ImVec2 pos, const char* text, const char* text_end, bool hide_text_after_hash)
@@ -3365,7 +3376,14 @@ void ImGui::RenderText(ImVec2 pos, const char* text, const char* text_end, bool 
 
     if (text != text_display_end)
     {
-        window->DrawList->AddText(g.Font, g.FontSize, pos, GetColorU32(ImGuiCol_Text), text, text_display_end);
+        if (hide_text_after_hash)
+        {
+            window->DrawList->AddText(g.Font, g.FontSize, pos, GetColorU32(ImGuiCol_Text), text, text_display_end);
+        }
+        else
+        {
+            window->DrawList->AddTextNoHashHide(g.Font, g.FontSize, pos, GetColorU32(ImGuiCol_Text), text, text_display_end);
+        }
         if (g.LogEnabled)
             LogRenderedText(&pos, text, text_display_end);
     }
@@ -3382,6 +3400,22 @@ void ImGui::RenderTextWrapped(ImVec2 pos, const char* text, const char* text_end
     if (text != text_end)
     {
         window->DrawList->AddText(g.Font, g.FontSize, pos, GetColorU32(ImGuiCol_Text), text, text_end, wrap_width);
+        if (g.LogEnabled)
+            LogRenderedText(&pos, text, text_end);
+    }
+}
+
+void ImGui::RenderTextWrappedNoHashHide(ImVec2 pos, const char* text, const char* text_end, float wrap_width)
+{
+    ImGuiContext& g = *GImGui;
+    ImGuiWindow* window = g.CurrentWindow;
+
+    if (!text_end)
+        text_end = text + strlen(text); // FIXME-OPT
+
+    if (text != text_end)
+    {
+        window->DrawList->AddTextNoHashHide(g.Font, g.FontSize, pos, GetColorU32(ImGuiCol_Text), text, text_end, wrap_width);
         if (g.LogEnabled)
             LogRenderedText(&pos, text, text_end);
     }
@@ -3424,6 +3458,21 @@ void ImGui::RenderTextClipped(const ImVec2& pos_min, const ImVec2& pos_max, cons
 {
     // Hide anything after a '##' string
     const char* text_display_end = FindRenderedTextEnd(text, text_end);
+    const int text_len = (int)(text_display_end - text);
+    if (text_len == 0)
+        return;
+
+    ImGuiContext& g = *GImGui;
+    ImGuiWindow* window = g.CurrentWindow;
+    RenderTextClippedEx(window->DrawList, pos_min, pos_max, text, text_display_end, text_size_if_known, align, clip_rect);
+    if (g.LogEnabled)
+        LogRenderedText(&pos_min, text, text_display_end);
+}
+
+void ImGui::RenderTextClippedNoHashHide(const ImVec2& pos_min, const ImVec2& pos_max, const char* text, const char* text_end, const ImVec2* text_size_if_known, const ImVec2& align, const ImRect* clip_rect)
+{
+    // Do not hide anything after a '##' string
+    const char* text_display_end = text_end;
     const int text_len = (int)(text_display_end - text);
     if (text_len == 0)
         return;

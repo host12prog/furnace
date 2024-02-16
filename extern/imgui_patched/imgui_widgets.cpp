@@ -255,6 +255,116 @@ void ImGui::TextEx(const char* text, const char* text_end, ImGuiTextFlags flags)
     }
 }
 
+void ImGui::TextExNoHashHide(const char* text, const char* text_end, ImGuiTextFlags flags)
+{
+    ImGuiWindow* window = GetCurrentWindow();
+    if (window->SkipItems)
+        return;
+    ImGuiContext& g = *GImGui;
+
+    // Accept null ranges
+    if (text == text_end)
+        text = text_end = "";
+
+    // Calculate length
+    const char* text_begin = text;
+    if (text_end == NULL)
+        text_end = text + strlen(text); // FIXME-OPT
+
+    //text_end = FindRenderedTextEnd(text, text_end); //hides everything after ##
+
+    const ImVec2 text_pos(window->DC.CursorPos.x, window->DC.CursorPos.y + window->DC.CurrLineTextBaseOffset);
+    const float wrap_pos_x = window->DC.TextWrapPos;
+    const bool wrap_enabled = (wrap_pos_x >= 0.0f);
+    if (text_end - text <= 2000 || wrap_enabled)
+    {
+        // Common case
+        const float wrap_width = wrap_enabled ? CalcWrapWidthForPos(window->DC.CursorPos, wrap_pos_x) : 0.0f;
+        const ImVec2 text_size = CalcTextSize(text_begin, text_end, false, wrap_width);
+
+        ImRect bb(text_pos, text_pos + text_size);
+        ItemSize(text_size, 0.0f);
+        if (!ItemAdd(bb, 0))
+            return;
+
+        // Render (we don't hide text after ## in this end-user function)
+        RenderTextWrappedNoHashHide(bb.Min, text_begin, text_end, wrap_width);
+    }
+    else
+    {
+        // Long text!
+        // Perform manual coarse clipping to optimize for long multi-line text
+        // - From this point we will only compute the width of lines that are visible. Optimization only available when word-wrapping is disabled.
+        // - We also don't vertically center the text within the line full height, which is unlikely to matter because we are likely the biggest and only item on the line.
+        // - We use memchr(), pay attention that well optimized versions of those str/mem functions are much faster than a casually written loop.
+        const char* line = text;
+        const float line_height = GetTextLineHeight();
+        ImVec2 text_size(0, 0);
+
+        // Lines to skip (can't skip when logging text)
+        ImVec2 pos = text_pos;
+        if (!g.LogEnabled)
+        {
+            int lines_skippable = (int)((window->ClipRect.Min.y - text_pos.y) / line_height);
+            if (lines_skippable > 0)
+            {
+                int lines_skipped = 0;
+                while (line < text_end && lines_skipped < lines_skippable)
+                {
+                    const char* line_end = (const char*)memchr(line, '\n', text_end - line);
+                    if (!line_end)
+                        line_end = text_end;
+                    if ((flags & ImGuiTextFlags_NoWidthForLargeClippedText) == 0)
+                        text_size.x = ImMax(text_size.x, CalcTextSize(line, line_end, false).x);
+                    line = line_end + 1;
+                    lines_skipped++;
+                }
+                pos.y += lines_skipped * line_height;
+            }
+        }
+
+        // Lines to render
+        if (line < text_end)
+        {
+            ImRect line_rect(pos, pos + ImVec2(FLT_MAX, line_height));
+            while (line < text_end)
+            {
+                if (IsClippedEx(line_rect, 0))
+                    break;
+
+                const char* line_end = (const char*)memchr(line, '\n', text_end - line);
+                if (!line_end)
+                    line_end = text_end;
+                text_size.x = ImMax(text_size.x, CalcTextSize(line, line_end, false).x);
+                RenderText(pos, line, line_end, false);
+                line = line_end + 1;
+                line_rect.Min.y += line_height;
+                line_rect.Max.y += line_height;
+                pos.y += line_height;
+            }
+
+            // Count remaining lines
+            int lines_skipped = 0;
+            while (line < text_end)
+            {
+                const char* line_end = (const char*)memchr(line, '\n', text_end - line);
+                if (!line_end)
+                    line_end = text_end;
+                if ((flags & ImGuiTextFlags_NoWidthForLargeClippedText) == 0)
+                    text_size.x = ImMax(text_size.x, CalcTextSize(line, line_end, false).x);
+                line = line_end + 1;
+                lines_skipped++;
+            }
+            pos.y += lines_skipped * line_height;
+        }
+        text_size.y = (pos - text_pos).y;
+
+        ImRect bb(text_pos, text_pos + text_size);
+        ItemSize(text_size, 0.0f);
+        ItemAdd(bb, 0);
+    }
+}
+
 void ImGui::TextUnformatted(const char* text, const char* text_end)
 {
     TextEx(text, text_end, ImGuiTextFlags_NoWidthForLargeClippedText);
@@ -265,6 +375,22 @@ void ImGui::Text(const char* fmt, ...)
     va_list args;
     va_start(args, fmt);
     TextV(fmt, args);
+    va_end(args);
+}
+
+void ImGui::TextNoHashHide(const char* fmt, ...)
+{
+    va_list args;
+    va_start(args, fmt);
+
+    ImGuiWindow* window = GetCurrentWindow();
+    if (window->SkipItems)
+        return;
+
+    const char* text, *text_end;
+    ImFormatStringToTempBufferV(&text, &text_end, fmt, args);
+    TextExNoHashHide(text, text_end, ImGuiTextFlags_NoWidthForLargeClippedText);
+    
     va_end(args);
 }
 
@@ -6713,7 +6839,17 @@ bool ImGui::Selectable(const char* label, bool selected, ImGuiSelectableFlags fl
 
     // Submit label or explicit size to ItemSize(), whereas ItemAdd() will submit a larger/spanning rectangle.
     ImGuiID id = window->GetID(label);
-    ImVec2 label_size = CalcTextSize(label, NULL, true);
+    ImVec2 label_size;
+    
+    if(flags & ImGuiSelectableFlags_NoHashTextHide)
+    {
+        label_size = CalcTextSize(label, NULL, false);
+    }
+    else
+    {
+        label_size = CalcTextSize(label, NULL, true);
+    }
+    
     ImVec2 size(size_arg.x != 0.0f ? size_arg.x : label_size.x, size_arg.y != 0.0f ? size_arg.y : label_size.y);
     ImVec2 pos = window->DC.CursorPos;
     pos.y += window->DC.CurrLineTextBaseOffset;
@@ -6830,7 +6966,14 @@ bool ImGui::Selectable(const char* label, bool selected, ImGuiSelectableFlags fl
     else if (span_all_columns && g.CurrentTable)
         TablePopBackgroundChannel();
 
-    RenderTextClipped(text_min, text_max, label, NULL, &label_size, style.SelectableTextAlign, &bb);
+    if(flags & ImGuiSelectableFlags_NoHashTextHide)
+    {
+        RenderTextClippedNoHashHide(text_min, text_max, label, NULL, &label_size, style.SelectableTextAlign, &bb);
+    }
+    else
+    {
+        RenderTextClipped(text_min, text_max, label, NULL, &label_size, style.SelectableTextAlign, &bb);
+    }
 
     // Automatically close popups
     if (pressed && (window->Flags & ImGuiWindowFlags_Popup) && !(flags & ImGuiSelectableFlags_DontClosePopups) && !(g.LastItemData.InFlags & ImGuiItemFlags_SelectableDontClosePopup))

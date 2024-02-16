@@ -156,7 +156,7 @@ void FurnaceGUI::insListItem(int i, int dir, int asset) {
     if (i<(int)e->song.ins.size()) {
       DivInstrument* ins=e->song.ins[i];
       ImGui::SameLine();
-      ImGui::Text("%.2X: %s",i,ins->name.c_str());
+      ImGui::TextNoHashHide("%.2X: %s",i,ins->name.c_str());
     } else {
       ImGui::SameLine();
       ImGui::Text(_L("%.2X: <INVALID>##sgdl"),i);
@@ -219,7 +219,7 @@ void FurnaceGUI::sampleListItem(int i, int dir, int asset) {
     if (memWarning) break;
   }
   if (memWarning) ImGui::PushStyleColor(ImGuiCol_Text,uiColors[GUI_COLOR_SAMPLE_CHIP_WARNING]);
-  if (ImGui::Selectable(fmt::sprintf("%d: %s##_SAM%d",i,sample->name,i).c_str(),curSample==i)) {
+  if (ImGui::Selectable(fmt::sprintf("%d: %s##_SAM%d",i,sample->name,i).c_str(),curSample==i,ImGuiSelectableFlags_NoHashTextHide)) {
     curSample=i;
     samplePos=0;
     updateSampleTex=true;
