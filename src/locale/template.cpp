@@ -4662,6 +4662,9 @@ void DivLocale::addTranslationsTemplate()
     strings["QSound##sgistru"].plurals[0] = "=QSound";
     strings["Bug##sgistru"].plurals[0] = "=Bug";
 
+    strings["Fixed"].plurals[0] = "=Fixed";
+    strings["Relative"].plurals[0] = "=Relative";
+
     //   sgiSU     src/gui/inst/su.cpp
 
     strings["Sound Unit##sgiSU"].plurals[0] = "=Sound Unit";
