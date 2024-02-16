@@ -187,6 +187,24 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
         to->val[i] |= (1 << 30); //30th bit in Furnace arp macro marks fixed mode
       }
     }
+
+    if((DivMacroType)convert_macros_2a03[macro_type] == DIV_MACRO_PITCH)
+    {
+      if(setting == 0 || setting == 1) //relative/absolute
+      {
+        int temp = to->val[i];
+        int temp_val = to->val[i];
+
+        if(temp_val < 0x80)
+        {
+          to->val[i] = -1 * temp;
+        }
+        else
+        {
+          to->val[i] = (0x100 - temp - 1);
+        }
+      }
+    }
   }
 
   to->len = from->len;
@@ -197,6 +215,14 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
   to->speed = from->speed;
   to->loop = from->loop;
   to->open = from->open;
+
+  if((DivMacroType)convert_macros_2a03[macro_type] == DIV_MACRO_PITCH)
+  {
+    if(setting == 0) //relative
+    {
+      to->mode = 1;//setting relative mode
+    }
+  }
 }
 
 bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
@@ -850,14 +876,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
               DivInstrument* ins=ds.ins[k];
               if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_NES && hasSequence[k][Types[i]])
               {
-                macros[k][Types[i]].rel = release;
+                macros[sequenceIndex[k][Types[i]]][Types[i]].rel = release;
                 macro_types[k][Types[i]] = setting;
-
-                if(Types[i] > 0)
-                {
-                  int y = 0;
-                  y++;
-                }
                 
                 copy_macro(ins, &macros[sequenceIndex[k][Types[i]]][Types[i]], Types[i], setting);
                 //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[k][Types[i]]][Types[i]], sizeof(DivInstrumentMacro));
@@ -866,8 +886,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           }
         }
 
-        delete Indices;
-        delete Types;
+        delete[] Indices;
+        delete[] Types;
       } 
       else if (blockName=="GROOVES") {
         CHECK_BLOCK_VERSION(6);
@@ -1178,14 +1198,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
               DivInstrument* ins=ds.ins[k];
               if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_VRC6 && hasSequence[k][Types[i]])
               {
-                macros[k][Types[i]].rel = release;
+                macros[sequenceIndex[k][Types[i]]][Types[i]].rel = release;
                 macro_types[k][Types[i]] = setting;
-
-                if(Types[i] > 0)
-                {
-                  int y = 0;
-                  y++;
-                }
                 
                 copy_macro(ins, &macros[sequenceIndex[k][Types[i]]][Types[i]], Types[i], setting);
                 //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[k][Types[i]]][Types[i]], sizeof(DivInstrumentMacro));
@@ -1194,8 +1208,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           }
         }
 
-        delete Indices;
-        delete Types;
+        delete[] Indices;
+        delete[] Types;
       } else if (blockName=="SEQUENCES_N163") {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
@@ -1257,16 +1271,17 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
     //addWarning("FamiTracker import is experimental!");
 
-    for(int i = 0; i < (int)ds.insLen; i++)
+    for(int i = 0; i < 128; i++)
     {
-      DivInstrument* ins = ds.ins[i];
+      int index = i >= (int)ds.insLen ? ((int)ds.insLen - 1) : i;
+      DivInstrument* ins = ds.ins[index];
 
       if(ins->type == DIV_INS_FM)
       {
-        delete ds.ins[i];
-        ds.ins.erase(ds.ins.begin()+i);
+        delete ds.ins[index];
+        ds.ins.erase(ds.ins.begin()+index);
         ds.insLen=ds.ins.size();
-        for (int ii=0; ii<tchans; ii++) 
+        for (int ii=0; ii<(int)tchans; ii++) 
         {
           for (size_t j=0; j<ds.subsong.size(); j++) 
           {
@@ -1275,7 +1290,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
               if (ds.subsong[j]->pat[ii].data[k]==NULL) continue;
               for (int l=0; l<ds.subsong[j]->patLen; l++) 
               {
-                if (ds.subsong[j]->pat[ii].data[k]->data[l][2]>i) 
+                if (ds.subsong[j]->pat[ii].data[k]->data[l][2]>index) 
                 {
                   ds.subsong[j]->pat[ii].data[k]->data[l][2]--;
                 }

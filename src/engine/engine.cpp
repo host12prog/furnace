@@ -2431,7 +2431,9 @@ int DivEngine::addInstrument(int refChan, DivInstrumentType fallbackType) {
     }
   }
 #ifdef HAVE_GUI
-  ins->name=fmt::sprintf(g.getDefaultInsName(),insCount);
+  String tempppp = fmt::sprintf(g.getDefaultInsName(),insCount);
+  String temmrrrp = tempppp.substr(0, tempppp.find("##"));
+  ins->name=fmt::sprintf(temmrrrp,insCount);
 #else
   ins->name=fmt::sprintf("Instrument %d",insCount);
 #endif
