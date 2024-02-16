@@ -1013,9 +1013,23 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             if(map_channels[ch] != 0xff)
             {
               if (nextNote==0x0d) {
-                pat->data[row][0]=100;
+                if(map_channels[ch] == 2) //note cut and note release work differently on tri chan...
+                {
+                  pat->data[row][0]=101;
+                }
+                else
+                {
+                  pat->data[row][0]=100;
+                }
               } else if (nextNote==0x0e) {
-                pat->data[row][0]=101;
+                if(map_channels[ch] == 2)
+                {
+                  pat->data[row][0]=100;
+                }
+                else
+                {
+                  pat->data[row][0]=101;
+                }
               } else if (nextNote==0x01) {
                 pat->data[row][0]=12;
                 pat->data[row][1]=nextOctave-1;
@@ -1030,7 +1044,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             unsigned char nextIns=reader.readC();
             if(map_channels[ch] != 0xff)
             {
-              if (nextIns<0x40) {
+              if (nextIns<0x40 && nextNote != 0x0d && nextNote != 0x0e) {
                 pat->data[row][2]=nextIns;
               } else {
                 pat->data[row][2]=-1;
@@ -1271,28 +1285,31 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
     //addWarning("FamiTracker import is experimental!");
 
-    for(int i = 0; i < 128; i++)
+    for(int tries = 0; tries < 5; tries++)
     {
-      int index = i >= (int)ds.insLen ? ((int)ds.insLen - 1) : i;
-      DivInstrument* ins = ds.ins[index];
-
-      if(ins->type == DIV_INS_FM)
+      for(int i = 0; i < 128; i++)
       {
-        delete ds.ins[index];
-        ds.ins.erase(ds.ins.begin()+index);
-        ds.insLen=ds.ins.size();
-        for (int ii=0; ii<(int)tchans; ii++) 
+        int index = i >= (int)ds.insLen ? ((int)ds.insLen - 1) : i;
+        DivInstrument* ins = ds.ins[index];
+
+        if(ins->type == DIV_INS_FM)
         {
-          for (size_t j=0; j<ds.subsong.size(); j++) 
+          delete ds.ins[index];
+          ds.ins.erase(ds.ins.begin()+index);
+          ds.insLen=ds.ins.size();
+          for (int ii=0; ii<(int)tchans; ii++) 
           {
-            for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+            for (size_t j=0; j<ds.subsong.size(); j++) 
             {
-              if (ds.subsong[j]->pat[ii].data[k]==NULL) continue;
-              for (int l=0; l<ds.subsong[j]->patLen; l++) 
+              for (int k=0; k<DIV_MAX_PATTERNS; k++) 
               {
-                if (ds.subsong[j]->pat[ii].data[k]->data[l][2]>index) 
+                if (ds.subsong[j]->pat[ii].data[k]==NULL) continue;
+                for (int l=0; l<ds.subsong[j]->patLen; l++) 
                 {
-                  ds.subsong[j]->pat[ii].data[k]->data[l][2]--;
+                  if (ds.subsong[j]->pat[ii].data[k]->data[l][2]>index) 
+                  {
+                    ds.subsong[j]->pat[ii].data[k]->data[l][2]--;
+                  }
                 }
               }
             }
