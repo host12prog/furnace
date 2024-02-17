@@ -13,11 +13,11 @@ Change:
 - Allow to dynamically load samples into chip’s memory if possible during song playback
 
 Add:
-- Full FamiTracker import (including E-FamiTracker)
+- Full FamiTracker import (including E-FamiTracker) (WIP)
 - Import of the following: “xm”, “it”, "med", "s3m", "mptm", "a2m", "rmt", “vt” (Vortex Tracker), “sng” (GoatTracker)
 - Local wavetables and samples inside each instrument with a switch so sample map/wavetable selection macro refers to local or global waves
 - DPCM loop point
-- Chips from pending Furnace PRs, if possible (right now it’s OPL4, MultiPCM)
+- Chips from pending Furnace PRs, if possible (right now it’s OPL4, MultiPCM and NDS)
 - Features from pending Furnace PRs, **if possible**
 - Ability to copy-paste LFO and ADSR type macros
 - Instrument preview on instrument load
@@ -30,7 +30,7 @@ Misc
 - Have an open approach to driver donation from the community and disassemblies. Invite members that have already designed their own routines.
 - Analyze chips that were implemented with emulation in a very HLE way (biggest offender: Game.com’s noise LFSR).
 - Debate on Follin-like ZX Spectrum beeper engine from hardware-export view (likely, replace with existing drivers like Octode or QChan)
-- If the project goes overboard, consider the age-old dilemma of changing the name.
+- If the project goes overboard, consider the age-old dilemma of changing the name. (done)
 - Try to come up with a way to enable multi-language support (a WIP now, kinda works!)
 - Wavetable editor as powerful as Kurumi (at least Kurumi 3)
 
