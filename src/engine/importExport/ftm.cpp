@@ -211,11 +211,11 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
 
         if(temp_val < 0x80)
         {
-          to->val[i] = temp;
+          to->val[i] = -1 * temp;
         }
         else
         {
-          to->val[i] = -1 * (0x100 - temp - 1);
+          to->val[i] = (0x100 - temp - 1);
         }
       }
     }
