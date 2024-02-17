@@ -835,7 +835,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610]=new DivSysDef(
     "Neo Geo CD", NULL, 0x09, 0x09, 13, true, true, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect the pins.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd"},
     {"F1", "F2", "F3", "F4", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA},
@@ -847,7 +847,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610_EXT]=new DivSysDef(
     "Neo Geo CD Extended Channel 2##sesd", NULL, 0x49, 0x49, 16, true, true, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect the pins.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.##sesd",
-    {"FM 1", "FM 2 OP1", "FM 2 OP2", "FM 2 OP3", "FM 2 OP4", "FM 3", "FM 4", "PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd"},
+    {"FM 1", "FM 2 OP1", "FM 2 OP2", "FM 2 OP3", "FM 2 OP4", "FM 3", "FM 4", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd"},
     {"F1", "O1", "O2", "O3", "O4", "F3", "F4", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6"},
     {DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA},
@@ -860,7 +860,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_AY8910]=new DivSysDef(
     "AY-3-8910", NULL, 0x80, 0, 3, false, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "this chip is everywhere! ZX Spectrum, MSX, Amstrad CPC, Intellivision, Vectrex...\nthe discovery of envelope bass helped it beat the SN76489 with ease.##sesd",
-    {"PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd"},
+    {"PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd"},
     {"S1", "S2", "S3"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_AY, DIV_INS_AY, DIV_INS_AY},
@@ -925,7 +925,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SAA1099]=new DivSysDef(
     "Philips SAA1099", NULL, 0x97, 0, 6, false, true, 0x171, false, 0, 0, 0,
     "supposedly an upgrade from the AY-3-8910, this was present on the Creative Music System (Game Blaster) and SAM Coupé.##sesd",
-    {"PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd", "PSG 4#sesd", "PSG 5#sesd", "PSG 6#sesd"},
+    {"PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "PSG 4##sesd", "PSG 5##sesd", "PSG 6##sesd"},
     {"S1", "S2", "S3", "S4", "S5", "S6"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_SAA1099, DIV_INS_SAA1099, DIV_INS_SAA1099, DIV_INS_SAA1099, DIV_INS_SAA1099, DIV_INS_SAA1099},
@@ -941,7 +941,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_AY8930]=new DivSysDef(
     "Microchip AY8930", NULL, 0x9a, 0, 3, false, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "an improved version of the AY-3-8910 with a bigger frequency range, duty cycles, configurable noise and per-channel envelopes!##sesd",
-    {"PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd"},
+    {"PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd"},
     {"S1", "S2", "S3"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_AY8930, DIV_INS_AY8930, DIV_INS_AY8930},
@@ -1095,7 +1095,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2203]=new DivSysDef(
     "Yamaha YM2203 (OPN)", NULL, 0x8d, 0, 6, true, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)##sesd",
-    {"FM 1", "FM 2", "FM 3", "PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd"},
+    {"FM 1", "FM 2", "FM 3", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd"},
     {"F1", "F2", "F3", "S1", "S2", "S3"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY},
@@ -1107,7 +1107,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2203_EXT]=new DivSysDef(
     "Yamaha YM2203 (OPN) Extended Channel 3##sesd", NULL, 0xb6, 0, 9, true, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies##sesd",
-    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd"},
+    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd"},
     {"F1", "F2", "O1", "O2", "O3", "O4", "S1", "S2", "S3"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY},
@@ -1120,7 +1120,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2203_CSM]=new DivSysDef(
     "Yamaha YM2203 (OPN) CSM", NULL, 0xc3, 0, 10, true, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd",
-    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "CSM Timer##sesd", "PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd"},
+    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "CSM Timer##sesd", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd"},
     {"F1", "F2", "O1", "O2", "O3", "O4", "CSM", "S1", "S2", "S3"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_NOISE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY},
@@ -1342,7 +1342,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610B]=new DivSysDef(
     "Yamaha YM2610B (OPNB2)", NULL, 0x9e, 0, 16, true, false, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
     {"F1", "F2", "F3", "F4", "F5", "F6", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6", "B"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
@@ -1441,7 +1441,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610_FULL]=new DivSysDef(
     "Yamaha YM2610 (OPNB)", NULL, 0xa5, 0, 14, true, false, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
     {"F1", "F2", "F3", "F4", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6", "B"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
@@ -1453,7 +1453,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610_FULL_EXT]=new DivSysDef(
     "Yamaha YM2610 (OPNB) Extended Channel 2##sesd", NULL, 0xa6, 0, 17, true, false, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.##sesd",
-    {"FM 1", "FM 2 OP1", "FM 2 OP2", "FM 2 OP3", "FM 2 OP4", "FM 3", "FM 4", "PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
+    {"FM 1", "FM 2 OP1", "FM 2 OP2", "FM 2 OP3", "FM 2 OP4", "FM 3", "FM 4", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
     {"F1", "O1", "O2", "O3", "O4", "F3", "F4", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6", "B"},
     {DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
@@ -1466,7 +1466,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610_CSM]=new DivSysDef(
     "Yamaha YM2610 (OPNB) CSM", NULL, 0xc2, 0, 18, true, false, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 2.##sesd",
-    {"FM 1", "FM 2 OP1", "FM 2 OP2", "FM 2 OP3", "FM 2 OP4", "FM 3", "FM 4", "CSM Timer##sesd", "PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
+    {"FM 1", "FM 2 OP1", "FM 2 OP2", "FM 2 OP3", "FM 2 OP4", "FM 3", "FM 4", "CSM Timer##sesd", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
     {"F1", "O1", "O2", "O3", "O4", "F3", "F4", "CSM", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6", "B"},
     {DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_NOISE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
@@ -1544,7 +1544,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610B_EXT]=new DivSysDef(
     "Yamaha YM2610B (OPNB2) Extended Channel 3##sesd", NULL, 0xde, 0, 19, true, false, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.##sesd",
-    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
+    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
     {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "F6", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6", "B"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
@@ -1557,7 +1557,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610B_CSM]=new DivSysDef(
     "Yamaha YM2610B (OPNB2) CSM", NULL, 0xc5, 0, 20, true, false, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd",
-    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "CSM Timer##sesd", "PSG 1#sesd", "PSG 2#sesd", "PSG 3#sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
+    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "CSM Timer##sesd", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
     {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "F6", "CSM", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6", "B"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_NOISE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},

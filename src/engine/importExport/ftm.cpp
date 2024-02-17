@@ -144,6 +144,7 @@ constexpr int ftEffectMapSize=sizeof(ftEffectMap)/sizeof(int);
 int convert_macros_2a03[5] = { (int)DIV_MACRO_VOL, (int)DIV_MACRO_ARP, (int)DIV_MACRO_PITCH, -1, (int)DIV_MACRO_DUTY };
 int convert_macros_vrc6[5] = { (int)DIV_MACRO_VOL, (int)DIV_MACRO_ARP, (int)DIV_MACRO_PITCH, -1, (int)DIV_MACRO_DUTY };
 int convert_macros_n163[5] = { (int)DIV_MACRO_VOL, (int)DIV_MACRO_ARP, (int)DIV_MACRO_PITCH, -1, (int)DIV_MACRO_WAVE };
+int convert_macros_s5b[5] = { (int)DIV_MACRO_VOL, (int)DIV_MACRO_ARP, (int)DIV_MACRO_PITCH, -1, (int)DIV_MACRO_DUTY };
 
 void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, int setting)
 {
@@ -167,6 +168,12 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
     {
       if(convert_macros_vrc6[macro_type] == -1) return;
       to = ins->std.get_macro(convert_macros_n163[macro_type], true);
+      break;
+    }
+    case DIV_INS_AY:
+    {
+      if(convert_macros_vrc6[macro_type] == -1) return;
+      to = ins->std.get_macro(convert_macros_s5b[macro_type], true);
       break;
     }
     default: break;
@@ -228,6 +235,57 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
     if(setting == 0) //relative
     {
       to->mode = 1;//setting relative mode
+    }
+  }
+
+  if(ins->type == DIV_INS_AY && macro_type == 4) //S5B noise/mode macro combines noise freq and tone/env/noise settings, so we need to separate them into two macros
+  {
+    DivInstrumentMacro* wave = ins->std.get_macro(DIV_MACRO_WAVE, true);
+    to = ins->std.get_macro(DIV_MACRO_DUTY, true);
+    wave = ins->std.get_macro(DIV_MACRO_WAVE, true);
+    to = ins->std.get_macro(DIV_MACRO_DUTY, true);
+
+    wave->len = to->len;
+    wave->delay = to->delay;
+    wave->lenMemory = to->lenMemory;
+    wave->mode = to->mode;
+    wave->rel = to->rel;
+    wave->speed = to->speed;
+    wave->loop = to->loop;
+    wave->open = to->open;
+
+    for (int i=0; i<to->len; i++) 
+    {
+      wave = ins->std.get_macro(DIV_MACRO_WAVE, true);
+      to = ins->std.get_macro(DIV_MACRO_DUTY, true);
+      wave = ins->std.get_macro(DIV_MACRO_WAVE, true);
+      to = ins->std.get_macro(DIV_MACRO_DUTY, true);
+
+      logI("%02X", to->val[i]);
+      wave->val[i] = 0;
+
+      int temp = 0;
+
+      if(to->val[i] & 0b10000000) //noi
+      {
+        temp |= 2;
+      }
+      if(to->val[i] & 0b01000000) //tone
+      {
+        temp |= 1;
+      }
+      if(to->val[i] & 0b00100000) //env
+      {
+        temp |= 4;
+      }
+
+      wave->val[i] = (temp - 1) & 7; //why 2s complement? Ask tildearrow!
+
+      //#define S5B_ENVL 0b10000000
+      //#define S5B_TONE 0b01000000
+      //#define S5B_NOIS 0b00100000
+
+      to->val[i] = to->val[i] & 31;
     }
   }
 }
@@ -1315,7 +1373,54 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
       } else if (blockName=="SEQUENCES_S5B") {
         CHECK_BLOCK_VERSION(1);
-        reader.seek(blockSize,SEEK_CUR);
+        //reader.seek(blockSize,SEEK_CUR);
+
+        unsigned char* Indices = new unsigned char[128 * 5];
+		    unsigned char* Types = new unsigned char[128 * 5];
+
+        unsigned int seq_count = reader.readI();
+
+        for(unsigned int i = 0; i < seq_count; i++)
+        {
+          unsigned int index = reader.readI();
+          Indices[i] = index;
+          unsigned int type = reader.readI();
+          Types[i] = type;
+
+          unsigned char size = reader.readC();
+          unsigned int setting = 0;
+
+          macros[index][type].len = size;
+
+          unsigned int loop = reader.readI();
+
+          macros[index][type].loop = loop;
+
+          unsigned int release = reader.readI();
+          setting = reader.readI();
+
+          macros[index][type].rel = release;
+          macro_types[index][type] = setting;
+
+          for(int j = 0; j < size; j++)
+          {
+            unsigned char seq = reader.readC();
+            macros[index][type].val[j] = seq;
+          }
+
+          for(int k = 0; k < (int)ds.ins.size(); k++)
+          {
+            DivInstrument* ins=ds.ins[k];
+            if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_AY && hasSequence[k][Types[i]])
+            {
+              copy_macro(ins, &macros[sequenceIndex[index][type]][type], type, setting);
+              //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[index][type]][type], sizeof(DivInstrumentMacro));
+            }
+          }
+        }
+
+        delete[] Indices;
+        delete[] Types;
       } else if (blockName=="JSON") {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
