@@ -143,6 +143,7 @@ constexpr int ftEffectMapSize=sizeof(ftEffectMap)/sizeof(int);
 
 int convert_macros_2a03[5] = { (int)DIV_MACRO_VOL, (int)DIV_MACRO_ARP, (int)DIV_MACRO_PITCH, -1, (int)DIV_MACRO_DUTY };
 int convert_macros_vrc6[5] = { (int)DIV_MACRO_VOL, (int)DIV_MACRO_ARP, (int)DIV_MACRO_PITCH, -1, (int)DIV_MACRO_DUTY };
+int convert_macros_n163[5] = { (int)DIV_MACRO_VOL, (int)DIV_MACRO_ARP, (int)DIV_MACRO_PITCH, -1, (int)DIV_MACRO_WAVE };
 
 void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, int setting)
 {
@@ -160,6 +161,12 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
     {
       if(convert_macros_vrc6[macro_type] == -1) return;
       to = ins->std.get_macro(convert_macros_2a03[macro_type], true);
+      break;
+    }
+    case DIV_INS_N163:
+    {
+      if(convert_macros_vrc6[macro_type] == -1) return;
+      to = ins->std.get_macro(convert_macros_n163[macro_type], true);
       break;
     }
     default: break;
@@ -1255,16 +1262,58 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
         delete[] Indices;
         delete[] Types;
-      } else if (blockName=="SEQUENCES_N163") {
+      } else if (blockName=="SEQUENCES_N163" || blockName=="SEQUENCES_N106") {
         CHECK_BLOCK_VERSION(1);
-        reader.seek(blockSize,SEEK_CUR);
-      } else if (blockName=="SEQUENCES_N106") {
-        CHECK_BLOCK_VERSION(1);
-        reader.seek(blockSize,SEEK_CUR);
+        //reader.seek(blockSize,SEEK_CUR);
+
+        unsigned char* Indices = new unsigned char[128 * 5];
+		    unsigned char* Types = new unsigned char[128 * 5];
+
+        unsigned int seq_count = reader.readI();
+
+        for(unsigned int i = 0; i < seq_count; i++)
+        {
+          unsigned int index = reader.readI();
+          Indices[i] = index;
+          unsigned int type = reader.readI();
+          Types[i] = type;
+
+          unsigned char size = reader.readC();
+          unsigned int setting = 0;
+
+          macros[index][type].len = size;
+
+          unsigned int loop = reader.readI();
+
+          macros[index][type].loop = loop;
+
+          unsigned int release = reader.readI();
+          setting = reader.readI();
+
+          macros[index][type].rel = release;
+          macro_types[index][type] = setting;
+
+          for(int j = 0; j < size; j++)
+          {
+            unsigned char seq = reader.readC();
+            macros[index][type].val[j] = seq;
+          }
+
+          for(int k = 0; k < (int)ds.ins.size(); k++)
+          {
+            DivInstrument* ins=ds.ins[k];
+            if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_N163 && hasSequence[k][Types[i]])
+            {
+              copy_macro(ins, &macros[sequenceIndex[index][type]][type], type, setting);
+              //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[index][type]][type], sizeof(DivInstrumentMacro));
+            }
+          }
+        }
+
+        delete[] Indices;
+        delete[] Types;
+
       } else if (blockName=="SEQUENCES_S5B") {
-        CHECK_BLOCK_VERSION(1);
-        reader.seek(blockSize,SEEK_CUR);
-      } else if (blockName=="SEQUENCES_N106") {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
       } else if (blockName=="JSON") {
