@@ -1458,9 +1458,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           for(int k = 0; k < (int)ds.ins.size(); k++)
           {
             DivInstrument* ins=ds.ins[k];
-            if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_AY && hasSequence[k][Types[i]])
+            if(sequenceIndex[k][type] == Indices[i] && ins->type == DIV_INS_AY && hasSequence[k][type])
             {
-              copy_macro(ins, &macros[sequenceIndex[index][type]][type], type, setting);
+              copy_macro(ins, &macros[index][type], type, setting);
               //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[index][type]][type], sizeof(DivInstrumentMacro));
             }
           }
