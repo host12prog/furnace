@@ -192,7 +192,7 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
         if(to->val[i] > 0x60)
         {
           int temp = to->val[i];
-          to->val[i] = 0xff - temp + 1; //2s complement integer my beloved
+          to->val[i] = -1 * (0xff - temp + 1); //2s complement integer my beloved
         }
       }
 
@@ -1112,23 +1112,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             if(map_channels[ch] != 0xff)
             {
               if (nextNote==0x0d) {
-                if(map_channels[ch] == 2) //note cut and note release work differently on tri chan...
-                {
-                  pat->data[row][0]=101;
-                }
-                else
-                {
-                  pat->data[row][0]=100;
-                }
+                pat->data[row][0]=101;
               } else if (nextNote==0x0e) {
-                if(map_channels[ch] == 2)
-                {
-                  pat->data[row][0]=100;
-                }
-                else
-                {
-                  pat->data[row][0]=101;
-                }
+                pat->data[row][0]=100;
               } else if (nextNote==0x01) {
                 pat->data[row][0]=12;
                 pat->data[row][1]=nextOctave-1;
