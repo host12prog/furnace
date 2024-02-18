@@ -12,6 +12,8 @@ Here are the [future plans](todo_list.md).
 
 [Our Discord server](https://discord.gg/sT8zcsyJZt)
 
+**Notice that Furnace-B modules are incompatible with tildearrow's Furnace version. However, you can export module in the format that is compatible (file -> export -> Furnace).**
+
 # Furnace (chiptune tracker)
 
 ![screenshot](papers/screenshot3.png)
