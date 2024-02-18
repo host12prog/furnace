@@ -679,11 +679,14 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
               const int dpcmNotes=(blockVersion>=2)?96:72;
               for (int j=0; j<dpcmNotes; j++) {
                 ins->amiga.get_amiga_sample_map(j, true)->map=(short)((unsigned char)reader.readC())-1;
-                ins->amiga.get_amiga_sample_map(j, true)->dpcmFreq=(unsigned char)reader.readC();
+                ins->amiga.get_amiga_sample_map(j, true)->dpcmFreq=((unsigned char)reader.readC() & 15); //0-15 = 0-15 unlooped, 128-143 = 0-15 looped; we ignore loop flag
                 if (blockVersion>=6) {
                   ins->amiga.get_amiga_sample_map(j, true)->dpcmDelta=(unsigned char)reader.readC(); // DMC value
                 }
               }
+
+              ins->amiga.useSample = true;
+              ins->amiga.useNoteMap = true;
               break;
             }
             case DIV_INS_VRC6: {
@@ -1209,7 +1212,65 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
         }
       } else if (blockName=="DPCM SAMPLES") {
         CHECK_BLOCK_VERSION(1);
-        reader.seek(blockSize,SEEK_CUR);
+        //reader.seek(blockSize,SEEK_CUR);
+        unsigned char num_samples = reader.readC();
+
+        for(int i = 0; i < 256; i++)
+        {
+          DivSample* s = new DivSample();
+          ds.sample.push_back(s);
+        }
+
+        ds.sampleLen = ds.sample.size();
+
+        unsigned int true_size = 0;
+        unsigned char index = 0;
+
+        for(unsigned char i = 0; i < num_samples; i++)
+        {
+          index = reader.readC();
+
+          DivSample* sample = ds.sample[index];
+
+          sample->rate=33144;
+          sample->centerRate=33144;
+          sample->depth=DIV_SAMPLE_DEPTH_1BIT_DPCM;
+
+          sample->name=reader.readString((unsigned int)reader.readI());
+
+          unsigned int sample_len = reader.readI();
+
+          true_size = sample_len + ((1 - (int)sample_len) & 0x0f);
+          sample->lengthDPCM = true_size;
+          sample->samples = true_size * 8;
+
+          sample->dataDPCM = new unsigned char[true_size];
+
+          memset(sample->dataDPCM, 0xAA, true_size);
+
+          reader.read(sample->dataDPCM,true_size);
+        }
+
+        int last_non_empty_sample = 0xff;
+
+        for(int i = 255; i > 0; i--)
+        {
+          DivSample* s = ds.sample[i];
+
+          if(s->dataDPCM)
+          {
+            last_non_empty_sample = i;
+            break;
+          }
+        }
+
+        for(int i = 255; i > last_non_empty_sample; i--)
+        {
+          ds.sample.erase(ds.sample.begin()+i);
+        }
+
+        ds.sampleLen = ds.sample.size();
+
       } else if (blockName=="SEQUENCES_VRC6") {
         CHECK_BLOCK_VERSION(6);
         //reader.seek(blockSize,SEEK_CUR);
