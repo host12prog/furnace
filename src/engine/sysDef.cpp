@@ -64,6 +64,7 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
     case 0:
       return "help! what's going on!";
     case 1:
+    {
       if (ds.system[0]==DIV_SYSTEM_AY8910) {
         switch (ds.systemFlags[0].getInt("chipType",0)) {
           case 0: // AY-3-8910
@@ -144,7 +145,11 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
             return "SAM Coupé";
         }
       }
-      return getSystemName(ds.system[0]);
+
+      String teeeemp = getSystemName(ds.system[0]);
+      String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
+      return temmrrrp;
+    }
     case 2:
       if (ds.system[0]==DIV_SYSTEM_YM2612 && ds.system[1]==DIV_SYSTEM_SMS) {
         return "Sega Genesis/Mega Drive";
@@ -228,7 +233,9 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
   String ret="";
   for (int i=0; i<ds.systemLen; i++) {
     if (i>0) ret+=" + ";
-    ret+=getSystemName(ds.system[i]);
+    String teeeemp = getSystemName(ds.system[i]);
+    String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
+    ret+=temmrrrp;
   }
 
   return ret;

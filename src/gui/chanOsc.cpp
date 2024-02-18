@@ -818,11 +818,15 @@ void FurnaceGUI::drawChanOsc() {
                         break;
                       }
                       case 's': {
-                        text+=e->getSystemName(e->sysOfChan[ch]);
+                        String teeeemp = e->getSystemName(e->sysOfChan[ch]);
+                        String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
+                        text+=temmrrrp;
                         break;
                       }
                       case 'p': {
-                        text+=FurnaceGUI::getSystemPartNumber(e->sysOfChan[ch],e->song.systemFlags[e->dispatchOfChan[ch]]);
+                        String teeeemp = FurnaceGUI::getSystemPartNumber(e->sysOfChan[ch],e->song.systemFlags[e->dispatchOfChan[ch]]);
+                        String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
+                        text+=temmrrrp;
                         break;
                       }
                       case 'S': {

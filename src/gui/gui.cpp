@@ -719,7 +719,9 @@ void FurnaceGUI::autoDetectSystem() {
       if (k.second>1) {
         e->song.systemName+=fmt::sprintf("%d×",k.second);
       }
-      e->song.systemName+=_L(e->getSystemName(k.first));
+      String teeeemp = _L(e->getSystemName(k.first));
+      String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
+      e->song.systemName+=temmrrrp;
       isFirst=false;
     }
   }
