@@ -679,9 +679,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
               const int dpcmNotes=(blockVersion>=2)?96:72;
               for (int j=0; j<dpcmNotes; j++) {
                 ins->amiga.get_amiga_sample_map(j, true)->map=(short)((unsigned char)reader.readC())-1;
-                ins->amiga.get_amiga_sample_map(j, true)->freq=(unsigned char)reader.readC();
+                ins->amiga.get_amiga_sample_map(j, true)->dpcmFreq=(unsigned char)reader.readC();
                 if (blockVersion>=6) {
-                  reader.readC(); // DMC value
+                  ins->amiga.get_amiga_sample_map(j, true)->dpcmDelta=(unsigned char)reader.readC(); // DMC value
                 }
               }
               break;
