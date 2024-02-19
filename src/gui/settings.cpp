@@ -486,19 +486,21 @@ void FurnaceGUI::drawSettings() {
         }
         popWarningColor();
 
-        ImGui::Text("Oscilloscope rendering engine:");
+        ImGui::Text(_L("Oscilloscope rendering engine:##sgse"));
         ImGui::Indent();
-        if (ImGui::RadioButton("ImGui line plot",settings.shaderOsc==0)) {
+        if (ImGui::RadioButton(_L("ImGui line plot##sgse"),settings.shaderOsc==0)) {
           settings.shaderOsc=0;
+          settingsChanged=true;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("render using Dear ImGui's built-in line drawing functions.");
+          ImGui::SetTooltip(_L("render using Dear ImGui's built-in line drawing functions.##sgse"));
         }
-        if (ImGui::RadioButton("GLSL/HLSL (if available)",settings.shaderOsc==1)) {
+        if (ImGui::RadioButton(_L("GLSL/HLSL (if available)##sgse"),settings.shaderOsc==1)) {
           settings.shaderOsc=1;
+          settingsChanged=true;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("render using shaders that run on the graphics card.\nonly available in OpenGL render backend.");
+          ImGui::SetTooltip(_L("render using shaders that run on the graphics card.\nonly available in OpenGL render backend.##sgse"));
         }
         ImGui::Unindent();
 

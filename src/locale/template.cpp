@@ -2551,6 +2551,11 @@ void DivLocale::addTranslationsTemplate()
     strings["you're being silly, aren't you? that's enough.##sgse"].plurals[0] = "=you're being silly, aren't you? that's enough.";
     strings["what are you doing? stop!##sgse"].plurals[0] = "=what are you doing? stop!";
     strings["it is a bad idea to set this number higher than your CPU core count (%d)!##sgse"].plurals[0] = "=it is a bad idea to set this number higher than your CPU core count (%d)!";
+    strings["Oscilloscope rendering engine:##sgse"].plurals[0] = "=Oscilloscope rendering engine:";
+    strings["ImGui line plot##sgse"].plurals[0] = "=ImGui line plot";
+    strings["render using Dear ImGui's built-in line drawing functions.##sgse"].plurals[0] = "=render using Dear ImGui's built-in line drawing functions.";
+    strings["GLSL/HLSL (if available)##sgse"].plurals[0] = "=GLSL/HLSL (if available)";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL render backend.##sgse"].plurals[0] = "=render using shaders that run on the graphics card.\nonly available in OpenGL render backend.";
     strings["File##sgse"].plurals[0] = "=File";
     strings["Use system file picker##sgse"].plurals[0] = "=Use system file picker";
     strings["Number of recent files##sgse"].plurals[0] = "=Number of recent files";
