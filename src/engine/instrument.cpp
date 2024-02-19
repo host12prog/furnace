@@ -1437,6 +1437,18 @@ void DivInstrument::readFeatureNA(SafeReader& reader, short version) {
 
   name=reader.readString();
 
+  if(version == 192) //fix bug when older Furnace-B versions added "##sggu" to default instrument name
+  {
+    // Find position of substring in string
+    String fucccckkk = "##sggu";
+    size_t pos = name.find(fucccckkk);
+    if (pos != std::string::npos)
+    {
+        // Remove found substring from string
+        name.erase(pos, fucccckkk.length());
+    }
+  }
+
   READ_FEAT_END;
 }
 
