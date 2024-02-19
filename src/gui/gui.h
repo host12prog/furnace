@@ -1523,7 +1523,6 @@ class FurnaceGUI {
   bool safeMode;
   bool midiWakeUp;
   bool makeDrumkitMode;
-  bool newOscCode;
   bool audioEngineChanged, settingsChanged, debugFFT;
   bool willExport[DIV_MAX_CHIPS];
   int vgmExportVersion;
@@ -1792,6 +1791,7 @@ class FurnaceGUI {
     int fontAntiAlias;
     int selectAssetOnLoad;
     int playbackTime;
+    int shaderOsc;
     unsigned int maxUndoSteps;
     int language;
     int translate_channel_names_pattern;
@@ -1995,6 +1995,7 @@ class FurnaceGUI {
       fontAntiAlias(1),
       selectAssetOnLoad(1),
       playbackTime(1),
+      shaderOsc(1),
       maxUndoSteps(100),
       language(DIV_LANG_ENGLISH),
       translate_channel_names_pattern(0),

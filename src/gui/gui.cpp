@@ -7311,7 +7311,6 @@ FurnaceGUI::FurnaceGUI():
   safeMode(false),
   midiWakeUp(true),
   makeDrumkitMode(false),
-  newOscCode(true),
   audioEngineChanged(false),
   settingsChanged(false),
   debugFFT(false),
