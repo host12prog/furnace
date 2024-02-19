@@ -18,7 +18,7 @@ enum DivLang
 typedef struct
 {
     std::map<int, std::string> plurals;
-    std::map<int, std::string> contexts;
+    //std::map<int, std::string> contexts; //not used now
 } LocaleEntry;
 
 class DivLocale
