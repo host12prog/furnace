@@ -1303,8 +1303,8 @@ void FurnaceGUI::drawInsESFM(DivInstrument* ins)
 
       else 
       {
-        macroList.push_back(FurnaceGUIMacroDesc(_L("Op. Arpeggio##sgiESFM"),ins,(DivMacroType)DIV_MACRO_OP_SSG,ordi,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.ops[ordi].op_get_macro(DIV_MACRO_OP_SSG, true)->val,true));
-        macroList.push_back(FurnaceGUIMacroDesc(_L("Op. Pitch##sgiESFM"),ins,(DivMacroType)DIV_MACRO_OP_DT,ordi,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode,NULL,false,NULL,0,false,NULL,false,true));
+        macroList.push_back(FurnaceGUIMacroDesc(_L("Op. Arpeggio##sgiESFM"),ins,(DivMacroType)DIV_MACRO_OP_SSG,ordi,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.ops[ordi].op_get_macro(DIV_MACRO_OP_SSG, true)->val,true));
+        macroList.push_back(FurnaceGUIMacroDesc(_L("Op. Pitch##sgiESFM"),ins,(DivMacroType)DIV_MACRO_OP_DT,ordi,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode,NULL,false,NULL,false,NULL,false,true));
       }
 
       macroList.push_back(FurnaceGUIMacroDesc(FM_NAME(FM_AM),ins,(DivMacroType)DIV_MACRO_OP_AM,ordi,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
@@ -1326,7 +1326,7 @@ void FurnaceGUI::drawInsESFM(DivInstrument* ins)
     panMax=2;
 
     macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiESFM"),ins,DIV_MACRO_VOL,0xff,0,63,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiESFM"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiESFM"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiESFM"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
     macroList.push_back(FurnaceGUIMacroDesc(_L("OP4 Noise Mode##sgiESFM"),ins,DIV_MACRO_DUTY,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER]));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Panning##sgiESFM"),ins,DIV_MACRO_PAN_LEFT,0xff,0,panMax,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,panBits));

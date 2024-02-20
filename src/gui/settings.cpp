@@ -3417,7 +3417,7 @@ void FurnaceGUI::drawSettings() {
           settingsChanged=true;
         }
 
-        if (ImGui::SliderFloat("Line size",&settings.oscLineSize,0.25f,16.0f,"%.1f")) {
+        if (ImGui::SliderFloat(_L("Line size##sgse"),&settings.oscLineSize,0.25f,16.0f,"%.1f")) {
           if (settings.oscLineSize<0.25f) settings.oscLineSize=0.25f;
           if (settings.oscLineSize>16.0f) settings.oscLineSize=16.0f;
           settingsChanged=true;

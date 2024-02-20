@@ -226,6 +226,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Center waveform##sgco"].plurals[0] = "=Center waveform";
     strings["Randomize phase on note##sgco"].plurals[0] = "=Randomize phase on note";
     strings["Amplitude##sgco"].plurals[0] = "=Amplitude";
+    strings["Line size##sgco"].plurals[0] = "=Line size";
     strings["Gradient##sgco"].plurals[0] = "=Gradient";
     strings["Color##sgco0"].plurals[0] = "=Color";
     strings["Distance##sgco"].plurals[0] = "=Distance";
@@ -3014,6 +3015,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Anti-aliased##sgse"].plurals[0] = "=Anti-aliased";
     strings["Fill entire window##sgse"].plurals[0] = "=Fill entire window";
     strings["Waveform goes out of bounds##sgse"].plurals[0] = "=Waveform goes out of bounds";
+    strings["Line size##sgse"].plurals[0] = "=Line size";
     strings["Windows##sgse"].plurals[0] = "=Windows";
     strings["Rounded window corners##sgse"].plurals[0] = "=Rounded window corners";
     strings["Rounded buttons##sgse"].plurals[0] = "=Rounded buttons";

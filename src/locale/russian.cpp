@@ -171,6 +171,7 @@ void DivLocale::addTranslationsRussian()
     strings["Center waveform##sgco"].plurals[0] = "Центрировать сигнал";
     strings["Randomize phase on note##sgco"].plurals[0] = "Случайная фаза при запуске ноты";
     strings["Amplitude##sgco"].plurals[0] = "Амплитуда";
+    strings["Line size##sgco"].plurals[0] = "Толщина линии";
     strings["Gradient##sgco"].plurals[0] = "Градиент";
     strings["Color##sgco0"].plurals[0] = "Цвет";
     strings["Distance##sgco"].plurals[0] = "Расстояние";
@@ -3006,6 +3007,7 @@ void DivLocale::addTranslationsRussian()
     strings["Anti-aliased##sgse"].plurals[0] = "Со сглаживанием";
     strings["Fill entire window##sgse"].plurals[0] = "Полностью заполняет окно";
     strings["Waveform goes out of bounds##sgse"].plurals[0] = "Волна может выходить за пределы окна";
+    strings["Line size##sgse"].plurals[0] = "Толщина линии";
     strings["Windows##sgse"].plurals[0] = "Окна";
     strings["Rounded window corners##sgse"].plurals[0] = "Закруглённые края окон";
     strings["Rounded buttons##sgse"].plurals[0] = "Закруглённые края кнопок";

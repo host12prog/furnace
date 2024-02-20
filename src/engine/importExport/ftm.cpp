@@ -266,7 +266,7 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
 
       int temp = 0;
 
-      if(to->val[i] & 0b10000000) //noi
+      if(to->val[i] & 0b10000000) //noise
       {
         temp |= 2;
       }
@@ -274,12 +274,12 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
       {
         temp |= 1;
       }
-      if(to->val[i] & 0b00100000) //env
+      if(to->val[i] & 0b00100000) //envelope
       {
         temp |= 4;
       }
 
-      wave->val[i] = (temp - 1) & 7; //why 2s complement? Ask tildearrow!
+      wave->val[i] = temp;
 
       //#define S5B_ENVL 0b10000000
       //#define S5B_TONE 0b01000000

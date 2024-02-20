@@ -3314,7 +3314,7 @@ bool DivInstrument::saveDMP(const char* path) {
       if (type==DIV_INS_AY) {
         w->writeI(std.get_macro(DIV_MACRO_WAVE, false)->val[i]-1);
       } else {
-        w->writeI(std.waveMacro.val[i]);
+        w->writeI(std.get_macro(DIV_MACRO_WAVE, false)->val[i]);
       }
     }
     if (std.get_macro(DIV_MACRO_WAVE, false)->len>0) w->writeC(std.get_macro(DIV_MACRO_WAVE, false)->loop);

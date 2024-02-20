@@ -59,7 +59,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         asInt[j]=0;
       } else {
         asFloat[j]=deBit30(i.get_macro()->val[j+macroDragScroll]);
-        asInt[j]=deBit30(i.get_macro()->val[j+macroDragScroll])+i.bitOffset;
+        asInt[j]=deBit30(i.get_macro()->val[j+macroDragScroll]);
         if (i.bit30) bit30Indicator[j]=enBit30(i.get_macro()->val[j+macroDragScroll]);
       }
       if (j+macroDragScroll>=i.get_macro()->len || (j+macroDragScroll>i.get_macro()->rel && i.get_macro()->loop<i.get_macro()->rel)) {
@@ -124,7 +124,6 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         macroDragMin=i.min+i.get_macro()->vScroll;
         macroDragMax=i.min+i.get_macro()->vScroll+i.get_macro()->vZoom;
       }
-      macroDragBitOff=i.bitOffset;
       macroDragBitMode=i.isBitfield;
       macroDragInitialValueSet=false;
       macroDragInitialValue=false;

@@ -183,8 +183,6 @@ void FurnaceGUI::drawChanOsc() {
         ImGui::TableNextColumn();
         if (ImGui::Checkbox(_L("Randomize phase on note##sgco"),&chanOscRandomPhase)) {
         }
-        ImGui::EndTable();
-      }
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
