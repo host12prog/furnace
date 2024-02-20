@@ -1500,14 +1500,20 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
         if(blockVersion >= 2)
         {
-          unsigned char detune_semi = reader.readC();
-          (void)detune_semi;
-          unsigned char detune_cents = reader.readC();
-          (void)detune_cents;
+          int fineTuneCents=reader.readC()*100;
+          fineTuneCents+=reader.readC();
+
+          ds.tuning=440.0*pow(2.0,(double)fineTuneCents/1200.0);
         }
       } else if (blockName=="TUNING") {
         CHECK_BLOCK_VERSION(1);
-        reader.seek(blockSize,SEEK_CUR);
+        //reader.seek(blockSize,SEEK_CUR);
+        if (blockVersion==1) {
+          int fineTuneCents=reader.readC()*100;
+          fineTuneCents+=reader.readC();
+
+          ds.tuning=440.0*pow(2.0,(double)fineTuneCents/1200.0);
+        }
       } else if (blockName=="BOOKMARKS") {
         CHECK_BLOCK_VERSION(1);
         reader.seek(blockSize,SEEK_CUR);
