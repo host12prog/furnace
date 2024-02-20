@@ -308,6 +308,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
     double customHz=60;
 
     unsigned char fds_chan = 0xff;
+    unsigned char vrc6_saw_chan = 0xff;
 
     int total_chans = 0;
     
@@ -459,6 +460,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             curr_chan++;
             map_ch++;
           }
+
+          vrc6_saw_chan = map_ch - 1;
         }
         if (expansions&8) {
           ds.system[systemID++]=DIV_SYSTEM_MMC5;
@@ -1139,7 +1142,13 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             {
               if (nextVol<0x10) {
                 pat->data[row][3]=nextVol;
-              } else {
+                if(map_channels[ch] == vrc6_saw_chan)
+                {
+                  pat->data[row][3] = pat->data[row][3] * 42 / 15;
+                }
+              } 
+              else 
+              {
                 pat->data[row][3]=-1;
               }
             }
@@ -1308,7 +1317,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_VRC6 && hasSequence[k][Types[i]])
             {
               copy_macro(ins, &macros[sequenceIndex[index][type]][type], type, setting);
-              //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[index][type]][type], sizeof(DivInstrumentMacro));
+
+              if(type == 0 && setting == 1)
+              {
+                ins->type = DIV_INS_VRC6_SAW;
+              }
             }
           }
         }
@@ -1331,7 +1344,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
                   macro_types[k][j] = setting;
 
                   copy_macro(ins, &macros[sequenceIndex[k][j]][j], j, setting);
-                  //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)j, true), &macros[sequenceIndex[k][j]][j], sizeof(DivInstrumentMacro));
+                  
+                  if(j == 0 && setting == 1)
+                  {
+                    ins->type = DIV_INS_VRC6_SAW;
+                  }
                 }
               }
             }
@@ -1357,7 +1374,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
                 macro_types[k][Types[i]] = setting;
                 
                 copy_macro(ins, &macros[sequenceIndex[k][Types[i]]][Types[i]], Types[i], setting);
-                //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[k][Types[i]]][Types[i]], sizeof(DivInstrumentMacro));
+
+                if(Types[i] == 0 && setting == 1)
+                {
+                  ins->type = DIV_INS_VRC6_SAW;
+                }
               }
             }
           }
