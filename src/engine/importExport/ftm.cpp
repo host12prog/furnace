@@ -1479,6 +1479,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
         CHECK_BLOCK_VERSION(1);
         //reader.seek(blockSize,SEEK_CUR);
         unsigned int display_comment = reader.readI();
+        (void)display_comment;
 
         char ch = 1;
 
