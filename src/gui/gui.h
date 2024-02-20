@@ -1255,14 +1255,13 @@ struct FurnaceGUIMacroDesc {
   const char** bitfieldBits;
   const char* modeName;
   ImVec4 color;
-  unsigned int bitOffset;
   bool isBitfield, blockMode, bit30;
   String (*hoverFunc)(int,float,void*);
   void* hoverFuncUser;
   bool is_arp;
   bool is_pitch;
 
-  FurnaceGUIMacroDesc(const char* name, DivInstrument* ins, DivMacroType macro_id, int oper, int macroMin, int macroMax, float macroHeight, ImVec4 col=ImVec4(1.0f,1.0f,1.0f,1.0f), bool block=false, const char* mName=NULL, String (*hf)(int,float,void*)=NULL, bool bitfield=false, const char** bfVal=NULL, unsigned int bitOff=0, bool bit30Special=false, void* hfu=NULL, bool isArp=false, bool isPitch=false):
+  FurnaceGUIMacroDesc(const char* name, DivInstrument* ins, DivMacroType macro_id, int oper, int macroMin, int macroMax, float macroHeight, ImVec4 col=ImVec4(1.0f,1.0f,1.0f,1.0f), bool block=false, const char* mName=NULL, String (*hf)(int,float,void*)=NULL, bool bitfield=false, const char** bfVal=NULL, bool bit30Special=false, void* hfu=NULL, bool isArp=false, bool isPitch=false):
     ins(ins),
     macro_id(macro_id),
     oper(oper),
@@ -1271,7 +1270,6 @@ struct FurnaceGUIMacroDesc {
     bitfieldBits(bfVal),
     modeName(mName),
     color(col),
-    bitOffset(bitOff),
     isBitfield(bitfield),
     blockMode(block),
     bit30(bit30Special),
@@ -1471,13 +1469,15 @@ struct PendingDrawOsc {
   ImVec2 pos0;
   ImVec2 pos1;
   ImVec4 color;
+  float lineSize;
   PendingDrawOsc():
     gui(NULL),
     data(NULL),
     len(0),
     pos0(0,0),
     pos1(0,0),
-    color(0,0,0,0) {}
+    color(0,0,0,0),
+    lineSize(0.0f) {}
 };
 
 class FurnaceGUI {
@@ -1537,7 +1537,7 @@ class FurnaceGUI {
   int wheelCalmDown;
   int shallDetectScale;
   int cpuCores;
-  float secondTimer, newOscLineWidth;
+  float secondTimer;
   unsigned int userEvents;
   float mobileMenuPos, autoButtonSize, mobileEditAnim;
   ImVec2 mobileEditButtonPos, mobileEditButtonSize;
@@ -1702,6 +1702,7 @@ class FurnaceGUI {
     int oscEscapesBoundary;
     int oscMono;
     int oscAntiAlias;
+    float oscLineSize;
     int separateFMColors;
     int insEditColorize;
     int metroVol;
@@ -1907,6 +1908,7 @@ class FurnaceGUI {
       oscEscapesBoundary(0),
       oscMono(1),
       oscAntiAlias(1),
+      oscLineSize(1.0f),
       separateFMColors(0),
       insEditColorize(0),
       metroVol(100),
@@ -2167,7 +2169,6 @@ class FurnaceGUI {
   int macroDragLen;
   int macroDragMin, macroDragMax;
   int macroDragLastX, macroDragLastY;
-  int macroDragBitOff;
   int macroDragScroll;
   bool macroDragBitMode;
   bool macroDragInitialValueSet;
@@ -2211,6 +2212,7 @@ class FurnaceGUI {
   uint64_t layoutTimeBegin, layoutTimeEnd, layoutTimeDelta;
   uint64_t renderTimeBegin, renderTimeEnd, renderTimeDelta;
   uint64_t drawTimeBegin, drawTimeEnd, drawTimeDelta;
+  uint64_t swapTimeBegin, swapTimeEnd, swapTimeDelta;
   uint64_t eventTimeBegin, eventTimeEnd, eventTimeDelta;
 
   FurnaceGUIPerfMetric perfMetrics[64];
@@ -2290,7 +2292,7 @@ class FurnaceGUI {
 
   // per-channel oscilloscope
   int chanOscCols, chanOscAutoColsType, chanOscColorX, chanOscColorY;
-  float chanOscWindowSize, chanOscTextX, chanOscTextY, chanOscAmplify;
+  float chanOscWindowSize, chanOscTextX, chanOscTextY, chanOscAmplify, chanOscLineSize;
   bool chanOscWaveCorr, chanOscOptions, updateChanOscGradTex, chanOscUseGrad, chanOscNormalize, chanOscRandomPhase;
   String chanOscTextFormat;
   ImVec4 chanOscColor, chanOscTextColor;

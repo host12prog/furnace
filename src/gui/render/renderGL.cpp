@@ -95,6 +95,7 @@ const char* sh_oscRender_srcV=
 
 // thank you akumanatt
 const char* sh_oscRender_srcF=
+  "precision highp float;\n"
   "uniform vec4 uColor;\n"
   "uniform vec2 uResolution;\n"
   "uniform float uLineWidth;\n"
@@ -113,6 +114,8 @@ const char* sh_oscRender_srcF=
   "    if (val>valmax) valmax=val;\n"
   "    if (val<valmin) valmin=val;\n"
   "  }\n"
+  "  if ((fur_fragCoord.y-uLineWidth)>valmax*uResolution.y*0.5) discard;\n"
+  "  if ((fur_fragCoord.y+uLineWidth)<valmin*uResolution.y*0.5) discard;\n"
   "  float slope=abs(valmax-valmin)*uResolution.y*0.5;\n"
   "  float slopeDiv=min(uAdvance,(uAdvance/slope));\n"
   "  float xRight=uv.x+((uLineWidth)/uResolution.x);\n"
@@ -174,6 +177,8 @@ const char* sh_oscRender_srcF=
   "    if (val>valmax) valmax=val;\n"
   "    if (val<valmin) valmin=val;\n"
   "  }\n"
+  "  if ((fur_fragCoord.y-uLineWidth)>valmax*uResolution.y*0.5) discard;\n"
+  "  if ((fur_fragCoord.y+uLineWidth)<valmin*uResolution.y*0.5) discard;\n"
   "  float slope=abs(valmax-valmin)*uResolution.y*0.5;\n"
   "  float slopeDiv=min(uAdvance,(uAdvance/slope));\n"
   "  float xRight=uv.x+((uLineWidth)/uResolution.x);\n"

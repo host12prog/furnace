@@ -584,6 +584,10 @@ void FurnaceGUI::drawMobileControls() {
         if (ImGui::Button(_L("XYOsc##sgec"))) {
           xyOscOpen=!xyOscOpen;
         }
+        ImGui::SameLine();
+        if (ImGui::Button("Meter")) {
+          volMeterOpen=!volMeterOpen;
+        }
 
         ImGui::Separator();
 

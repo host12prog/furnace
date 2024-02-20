@@ -256,9 +256,7 @@ void DivPlatformAY8930::tick(bool sysTick) {
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       if (!(chan[i].nextPSGMode.val&8)) {
-        // TODO: clean up.
-        // why does Defle start from 1?!
-        chan[i].nextPSGMode.val=(chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val+1)&7;
+        chan[i].nextPSGMode.val=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&7;
         if (chan[i].active) {
           chan[i].curPSGMode.val=chan[i].nextPSGMode.val;
         }

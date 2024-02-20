@@ -2446,14 +2446,14 @@ String FurnaceGUI::getLastError() {
       macroDragLastY=y; \
       if (macroDragInitialValueSet) { \
         if (macroDragInitialValue) { \
-          t[x]=(((t[x]+macroDragBitOff)&((1<<macroDragMax)-1))&(~(1<<y)))-macroDragBitOff; \
+          t[x]=(((t[x])&((1<<macroDragMax)-1))&(~(1<<y))); \
         } else { \
-          t[x]=(((t[x]+macroDragBitOff)&((1<<macroDragMax)-1))|(1<<y))-macroDragBitOff; \
+          t[x]=(((t[x])&((1<<macroDragMax)-1))|(1<<y)); \
         } \
       } else { \
-        macroDragInitialValue=(((t[x]+macroDragBitOff)&((1<<macroDragMax)-1))&(1<<y)); \
+        macroDragInitialValue=(((t[x])&((1<<macroDragMax)-1))&(1<<y)); \
         macroDragInitialValueSet=true; \
-        t[x]=(((t[x]+macroDragBitOff)&((1<<macroDragMax)-1))^(1<<y))-macroDragBitOff; \
+        t[x]=(((t[x])&((1<<macroDragMax)-1))^(1<<y)); \
       } \
       t[x]&=(1<<macroDragMax)-1; \
     } \
@@ -4612,6 +4612,7 @@ bool FurnaceGUI::loop() {
       MEASURE(osc,drawOsc());
       MEASURE(chanOsc,drawChanOsc());
       MEASURE(xyOsc,drawXYOsc());
+      MEASURE(volMeter,drawVolMeter());
       MEASURE(grooves,drawGrooves());
       MEASURE(regView,drawRegView());
     } else {
@@ -6404,14 +6405,17 @@ bool FurnaceGUI::loop() {
     }
     
     drawTimeEnd=SDL_GetPerformanceCounter();
+    swapTimeBegin=SDL_GetPerformanceCounter();
     rend->present();
     if (settings.renderClearPos) {
       rend->clear(uiColors[GUI_COLOR_BACKGROUND]);
     }
+    swapTimeEnd=SDL_GetPerformanceCounter();
 
     layoutTimeDelta=layoutTimeEnd-layoutTimeBegin;
     renderTimeDelta=renderTimeEnd-renderTimeBegin;
     drawTimeDelta=drawTimeEnd-drawTimeBegin;
+    swapTimeDelta=swapTimeEnd-swapTimeBegin;
     eventTimeDelta=eventTimeEnd-eventTimeBegin;
 
     soloTimeout-=ImGui::GetIO().DeltaTime;
@@ -6623,6 +6627,7 @@ bool FurnaceGUI::init() {
   chanOscTextX=e->getConfFloat("chanOscTextX",0.0f);
   chanOscTextY=e->getConfFloat("chanOscTextY",0.0f);
   chanOscAmplify=e->getConfFloat("chanOscAmplify",0.95f);
+  chanOscLineSize=e->getConfFloat("chanOscLineSize",1.0f);
   chanOscWindowSize=e->getConfFloat("chanOscWindowSize",20.0f);
   chanOscWaveCorr=e->getConfBool("chanOscWaveCorr",true);
   chanOscOptions=e->getConfBool("chanOscOptions",false);
@@ -6945,8 +6950,6 @@ bool FurnaceGUI::init() {
     }
   }
 
-  newOscLineWidth=dpiScale;
-
   updateWindowTitle();
 
   rend->clear(ImVec4(0.0,0.0,0.0,1.0));
@@ -7178,6 +7181,7 @@ void FurnaceGUI::commitState() {
   e->setConf("chanOscTextX",chanOscTextX);
   e->setConf("chanOscTextY",chanOscTextY);
   e->setConf("chanOscAmplify",chanOscAmplify);
+  e->setConf("chanOscLineSize",chanOscLineSize);
   e->setConf("chanOscWindowSize",chanOscWindowSize);
   e->setConf("chanOscWaveCorr",chanOscWaveCorr);
   e->setConf("chanOscOptions",chanOscOptions);
@@ -7327,7 +7331,6 @@ FurnaceGUI::FurnaceGUI():
   shallDetectScale(0),
   cpuCores(0),
   secondTimer(0.0f),
-  newOscLineWidth(2.0f),
   userEvents(0xffffffff),
   mobileMenuPos(0.0f),
   autoButtonSize(0.0f),
@@ -7555,7 +7558,6 @@ FurnaceGUI::FurnaceGUI():
   macroDragMax(0),
   macroDragLastX(-1),
   macroDragLastY(-1),
-  macroDragBitOff(0),
   macroDragScroll(0),
   macroDragBitMode(false),
   macroDragInitialValueSet(false),
@@ -7606,6 +7608,9 @@ FurnaceGUI::FurnaceGUI():
   drawTimeBegin(0),
   drawTimeEnd(0),
   drawTimeDelta(0),
+  swapTimeBegin(0),
+  swapTimeEnd(0),
+  swapTimeDelta(0),
   eventTimeBegin(0),
   eventTimeEnd(0),
   eventTimeDelta(0),
@@ -7691,6 +7696,7 @@ FurnaceGUI::FurnaceGUI():
   chanOscTextX(0.0f),
   chanOscTextY(0.0f),
   chanOscAmplify(0.95f),
+  chanOscLineSize(1.0f),
   chanOscWaveCorr(true),
   chanOscOptions(false),
   updateChanOscGradTex(true),

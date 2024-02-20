@@ -1583,6 +1583,14 @@ void DivInstrument::readFeatureMA(SafeReader& reader, short version) {
     }
   }
 
+  if (version<193) {
+    if (type==DIV_INS_AY || type==DIV_INS_AY8930) {
+      for (int j=0; j<std.get_macro(DIV_MACRO_WAVE, true)->len; j++) {
+        std.get_macro(DIV_MACRO_WAVE, true)->val[j]++;
+      }
+    }
+  }
+
   READ_FEAT_END;
 }
 
@@ -2439,6 +2447,13 @@ DivDataErrors DivInstrument::readInsDataOld(SafeReader &reader, short version, b
       std.get_macro(DIV_MACRO_DUTY, true)->val[j]-=12;
     }
   }
+  if (version<193) {
+    if (type==DIV_INS_AY || type==DIV_INS_AY8930) {
+      for (int j=0; j<std.get_macro(DIV_MACRO_WAVE, true)->len; j++) {
+        std.get_macro(DIV_MACRO_WAVE, true)->val[j]++;
+      }
+    }
+  }
   if (version>=17) {
     READ_MACRO_VALS(std.get_macro(DIV_MACRO_PITCH, true)->val,std.get_macro(DIV_MACRO_PITCH, true)->len);
     READ_MACRO_VALS(std.get_macro(DIV_MACRO_EX1, true)->val,std.get_macro(DIV_MACRO_EX1, true)->len);
@@ -3290,13 +3305,17 @@ bool DivInstrument::saveDMP(const char* path) {
 
     w->writeC(std.get_macro(DIV_MACRO_DUTY, false)->len);
     for (int i=0; i<std.get_macro(DIV_MACRO_DUTY, false)->len; i++) {
-      w->writeI(std.get_macro(DIV_MACRO_DUTY, false)->val[i]+12);
+      w->writeI(std.get_macro(DIV_MACRO_DUTY, false)->val[i]);
     }
     if (std.get_macro(DIV_MACRO_DUTY, false)->len>0) w->writeC(std.get_macro(DIV_MACRO_DUTY, false)->loop);
 
     w->writeC(std.get_macro(DIV_MACRO_WAVE, false)->len);
     for (int i=0; i<std.get_macro(DIV_MACRO_WAVE, false)->len; i++) {
-      w->writeI(std.get_macro(DIV_MACRO_WAVE, false)->val[i]+12);
+      if (type==DIV_INS_AY) {
+        w->writeI(std.get_macro(DIV_MACRO_WAVE, false)->val[i]-1);
+      } else {
+        w->writeI(std.waveMacro.val[i]);
+      }
     }
     if (std.get_macro(DIV_MACRO_WAVE, false)->len>0) w->writeC(std.get_macro(DIV_MACRO_WAVE, false)->loop);
 
