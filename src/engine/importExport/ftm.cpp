@@ -207,15 +207,14 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
       if(setting == 0 || setting == 1) //relative/absolute
       {
         int temp = to->val[i];
-        int temp_val = to->val[i];
 
-        if(temp_val < 0x80)
+        if(temp < 0x80)
         {
           to->val[i] = -1 * temp;
         }
         else
         {
-          to->val[i] = (0x100 - temp - 1);
+          to->val[i] = (0x100 - temp);
         }
       }
     }
@@ -759,7 +758,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
                 ins->std.get_macro(DIV_MACRO_ARP, true)->len=reader.readC();
                 ins->std.get_macro(DIV_MACRO_ARP, true)->loop=reader.readI();
                 ins->std.get_macro(DIV_MACRO_ARP, true)->rel=reader.readI();
-                // TODO: get rid
                 unsigned int mode=reader.readI();
                 for (int j=0; j<ins->std.get_macro(DIV_MACRO_ARP, true)->len; j++) {
                   ins->std.get_macro(DIV_MACRO_ARP, true)->val[j]=reader.readC();
@@ -788,7 +786,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
                     }
                     else
                     {
-                      ins->std.get_macro(DIV_MACRO_PITCH, true)->val[j] = -1 * (0x100 - temp - 1);
+                      ins->std.get_macro(DIV_MACRO_PITCH, true)->val[j] = -1 * (0x100 - temp);
                     }
                   }
 
@@ -1479,7 +1477,19 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
         reader.seek(blockSize,SEEK_CUR);
       } else if (blockName=="COMMENTS") {
         CHECK_BLOCK_VERSION(1);
-        reader.seek(blockSize,SEEK_CUR);
+        //reader.seek(blockSize,SEEK_CUR);
+        unsigned int display_comment = reader.readI();
+
+        char ch = 1;
+
+        do
+        {
+          ch = reader.readC();
+          String sss = String() + ch;
+          ds.subsong[0]->notes += sss;
+        } while (ch != 0);
+
+        //ds.subsong[0]->notes = reader.readS();
       } else if (blockName=="PARAMS_EXTRA") {
         CHECK_BLOCK_VERSION(1);
         //reader.seek(blockSize,SEEK_CUR);
