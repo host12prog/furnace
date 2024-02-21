@@ -251,7 +251,7 @@ void DivLocale::addTranslationsPolish()
     strings["if this is on, a jump to next row effect will not take place when it is on the last order of a song.##sgcf"].plurals[0] = "jeśli flaga jest włączona, efekt przeskoczenia do następnego wzorca nie zadziała, jeśli jest odtwarzany ostatni wiersz matrycy wzorców.";
     strings["Don't apply Game Boy envelope on note-less instrument change##sgcf"].plurals[0] = "nie uzywaj obwiedni Game Boya przy zmianie instrumntu bez nuty";
     strings["if this is on, an instrument change will not affect the envelope.##sgcf"].plurals[0] = "при включении этого флага смена инструмента без смены ноты не будет влиять на огибающую.";
-    strings["Ignore DAC mode change outside of intended channel in ExtCh mode##sgcf"].plurals[0] = "Игнорировать переключение режима ЦАП, если оно не происходит на соответствующем канале, в режиме расширенного канала";
+    strings["Ignore DAC mode change outside of intended channel in ExtCh mode##sgcf"].plurals[0] = "Ignoruj przełączanie trybu DAC, poza odpowiednim kanałem odpowiednim kanale, w trybie rozszerzonego kanału 3";
     strings["if this is on, 17xx has no effect on the operator channels in YM2612.##sgcf"].plurals[0] = "при включении этого флага 17xx не работает, если размещён на каналах operatorов расширенного канала (для YM2612).";
     strings["SN76489 duty macro always resets phase##sgcf"].plurals[0] = "Макрос скважности SN76489 всегда сбрасывает фазу";
     strings["when enabled, duty macro will always reset phase, even if its value hasn't changed.##sgcf"].plurals[0] = "при включении этого флага макрос скважности всегда будет сбрасывать фазу, даже если значение скважности не меняется.";
@@ -262,11 +262,11 @@ void DivLocale::addTranslationsPolish()
     strings["simulates ProTracker's behavior of not applying volume/pitch slides on the first tick of a row.##sgcf"].plurals[0] = "симулирует поведение программы ProTracker, которая не исполняет изменения громкости и частоты на первом шаге движка каждого столбца.";
     strings["Reset arpeggio position on row change##sgcf"].plurals[0] = "Перезапуск позиции арпеджио при продвижении по строкам паттерна";
     strings["simulates ProTracker's behavior of arpeggio being bound to the current tick of a row.##sgcf"].plurals[0] = "симулирует поведение программы ProTracker, которая привязывает исполнение арпеджио к номеру шага движка в каждой строке паттерна.";
-    strings["Pitch/Playback##sgcf"].plurals[0] = "Частота/Воспроизведение";
+    strings["Pitch/Playback##sgcf"].plurals[0] = "Wysokość dźwięku/odtwarzanie";
     strings["Pitch linearity:##sgcf"].plurals[0] = "Линейность частоты (в долях полутонов):";
-    strings["None##sgcf"].plurals[0] = "Нет (прямая работа с частотой)";
+    strings["None##sgcf"].plurals[0] = "Brak (прямая работа с частотой)";
     strings["like ProTracker/FamiTracker##sgcf"].plurals[0] = "tak jak ProTracker/FamiTracker";
-    strings["Full##sgcf"].plurals[0] = "Полная";
+    strings["Full##sgcf"].plurals[0] = "Pełna";
     strings["like Impulse Tracker##sgcf"].plurals[0] = "tak jak Impulse Tracker";
     strings["Pitch slide speed multiplier##sgcf"].plurals[0] = "Множитель скорости команды авто-портаменто";
     strings["Loop modality:##sgcf"].plurals[0] = "Работа зацикливания:";
@@ -282,9 +282,9 @@ void DivLocale::addTranslationsPolish()
     strings["Lax##sgcf"].plurals[0] = "Luźny";
     strings["no checks##sgcf"].plurals[0] = "bez sprawdzania";
     strings["Simultaneous jump (0B+0D) treatment:##sgcf"].plurals[0] = "Поведение при одновременном прыжке (0B+0D):";
-    strings["Normal##sgcf"].plurals[0] = "Нормальное";
+    strings["Normal##sgcf"].plurals[0] = "Normalny";
     strings["accept 0B+0D to jump to a specific row of an order##sgcf"].plurals[0] = "принять 0B+0D как прыжок на конкретную строку паттерна на конкретной позиции матрицы паттернов";
-    strings["Other##sgcf"].plurals[0] = "Другое";
+    strings["Other##sgcf"].plurals[0] = "Inne";
     strings["Auto-insert one tick gap between notes##sgcf"].plurals[0] = "Автоматически вставлять паузу в 1 шаг движка между нотами";
     strings["when enabled, a one-tick note cut will be inserted between non-legato/non-portamento notes.\nthis simulates the behavior of some Amiga/SNES music engines.\n\nineffective on C64.##sgcf"].plurals[0] = "при включении этого флага между нотами без эффекта легато и авто-портаменто будет вставлено заглушение ноты длиной в один шаг движка.\nэто симуляция повдения некоторых музыкальных драйверов Amiga/SNES.\n\nничего не меняет для C64.";
     strings["Don't reset slides after note off##sgcf"].plurals[0] = "Не переинициализировать авто-портаменто после окончания ноты";
@@ -957,7 +957,7 @@ void DivLocale::addTranslationsPolish()
     strings["Expand selection upwards (coarse)##sggc"].plurals[0] = "Расширить выделенную область вверх (грубо)";
     strings["Expand selection downwards (coarse)##sggc"].plurals[0] = "Расширить выделенную область вниз (грубо)";
     strings["Delete##sggc"].plurals[0] = "Usuń";
-    strings["Pull delete##sggc"].plurals[0] = "Удалить с подтягиванием следующих строк";
+    strings["Pull delete##sggc"].plurals[0] = "Usuń z zaciągnięciem następujących rzędów";
     strings["Insert##sggc"].plurals[0] = "Вставить с сдвигом строк вниз";
     strings["Mute channel at cursor##sggc"].plurals[0] = "Wycisz zaznaczony kanał";
     strings["Solo channel at cursor##sggc"].plurals[0] = "Wyizoluj zaznaczony kanał";
@@ -1065,8 +1065,8 @@ void DivLocale::addTranslationsPolish()
     strings["Sample editor: Create wavetable from selection##sggc"].plurals[0] = "=Sample editor: Create wavetable from selection";
 
     strings["---Orders##sggc"].plurals[0] = "---Orders";
-    strings["Previous order##sggc"].plurals[0] = "Poprzedni rząd matrycy wzorców";
-    strings["Next order##sggc"].plurals[0] = "Następny rząd matrycy wzorców";
+    strings["Previous order##sggc"].plurals[0] = "Poprzedni wiersz matrycy wzorców";
+    strings["Next order##sggc"].plurals[0] = "Następny wiersz matrycy wzorców";
     strings["Order cursor left##sggc"].plurals[0] = "Kursor w lewo";
     strings["Order cursor right##sggc"].plurals[0] = "Kursor w prawo";
     strings["Increase order value##sggc"].plurals[0] = "Zwieksz wartosc";
@@ -1277,8 +1277,8 @@ void DivLocale::addTranslationsPolish()
             "format bloku danych zmiany wzorca:\n"
             "67 66 FE ll ll ll ll 01 oo rr pp pp pp ...\n"
             "- ll: długość, liczba 32-bitowa, bezpośrednia kolejność bajtów (little endian)\n"
-            "- oo: rząd matrycy wzorców\n"
-            "- rr: początkowy rząd wzorca (efekt 0Dxx może go zmienić)\n"
+            "- oo: wiersz matrycy wzorców\n"
+            "- rr: początkowy wiersz wzorca (efekt 0Dxx może go zmienić)\n"
             "- pp: indeks wzorca (jeden na kanał)\n\n"
             "indeksy wzorców są posortowane w kolejności, w jakiej się znajdują\n"
             "w piosence\n";
@@ -1819,7 +1819,7 @@ void DivLocale::addTranslationsPolish()
     strings["Commodore PET (pseudo-wavetable)##sgpr"].plurals[0] = "Commodore PET (pseudo synteza tablicowa)";
     strings["ZX Spectrum (beeper only, SFX-like engine)##sgpr"].plurals[0] = "ZX Spectrum (tylko brzęczyk, silnik pokroju SFX)";
     strings["ZX Spectrum (beeper only, QuadTone engine)##sgpr"].plurals[0] = "ZX Spectrum (tylko brzęczyk, silnik QuadTone)";
-    strings["Modern/fantasy##sgpr"].plurals[0] = "Nowoczene/nieistniejace.";
+    strings["Modern/fantasy##sgpr"].plurals[0] = "Nowoczene/nieistniejace";
     strings["chips/systems which do not exist in reality or were made just several years ago.##sgpr"].plurals[0] = "Uklady/systemy, które nie wystepuja w fizycznej postaci lub zostały wyprodukowane zaledwie kilka lat temu.";
     strings["Commander X16 (VERA only)##sgpr1"].plurals[0] = "Commander X16 (tylko VERA)";
     strings["DefleMask-compatible##sgpr"].plurals[0] = "Zgodne z DefleMaskiem";
@@ -2345,7 +2345,7 @@ void DivLocale::addTranslationsPolish()
     strings["Width##sgwe"].plurals[0] = "Szerokość";
     strings["use a width of:\n- any on Amiga/N163\n- 32 on Game Boy, PC Engine, SCC, Konami Bubble System, Namco WSG, Virtual Boy and WonderSwan\n- 64 on FDS\n- 128 on X1-010\n- 256 for ES5503\nany other widths will be scaled during playback.##sgwe"].plurals[0] = "stosuj długości fal:\n- dowolne dla Amiga/N163\n- 32 dla Game Boy, PC Engine, SCC, Konami Bubble System, Namco WSG, Virtual Boy и WonderSwan\n- 64 dla FDS\n- 128 dla X1-010\n- 256 dla ES5503\nwszystkie inne długości będą przeskalowane do właściwych podczas odtwarzania.";
     strings["Height##sgwe"].plurals[0] = "Wysokość";
-    strings["use a height of:\n- 16 for Game Boy, WonderSwan, Namco WSG, Konami Bubble System, X1-010 Envelope shape and N163\n- 32 for PC Engine\n- 64 for FDS and Virtual Boy\n- 256 for X1-010, SCC and ES5503\nany other heights will be scaled during playback.##sgwe"].plurals[0] = "используйте следующие высоты:\n- 16 dla Game Boy, WonderSwan, Namco WSG, Konami Bubble System, формы огибающей X1-010 и N163\n- 32 dla PC Engine\n- 64 dla FDS и Virtual Boy\n- 256 dla X1-010, SCC и ES5503\nлюбые другие высоты будут отмасштабированы во время воспроизведения.";
+    strings["use a height of:\n- 16 for Game Boy, WonderSwan, Namco WSG, Konami Bubble System, X1-010 Envelope shape and N163\n- 32 for PC Engine\n- 64 for FDS and Virtual Boy\n- 256 for X1-010, SCC and ES5503\nany other heights will be scaled during playback.##sgwe"].plurals[0] = "stosuj wysokości fal:\n- 16 dla Game Boy, WonderSwan, Namco WSG, Konami Bubble System, kształtu obwiedni X1-010 i N163\n- 32 dla PC Engine\n- 64 dla FDS и Virtual Boy\n- 256 dla X1-010, SCC и ES5503\nszystkie inne wyskokości będą przeskalowane do właściwych podczas odtwarzania.";
     strings["Shapes##sgwe"].plurals[0] = "Kształty fal";
     strings["Duty##sgwe"].plurals[0] = "Szerokość fali prost.";
     strings["Exponent##sgwe"].plurals[0] = "Stopień";
@@ -2463,23 +2463,23 @@ void DivLocale::addTranslationsPolish()
     strings["KIOCSOUND on standard output##sgse"].plurals[0] = "KIOCSOUND na standardowym wyjściu";
     strings["Disabled/custom##sgse0"].plurals[0] = "Wył./niestandardowy";
     strings["Two octaves (0 is C-4, F is D#5)##sgse"].plurals[0] = "Dwie oktawy (0 = C-4, F = D#5)";
-    strings["Raw (note number is value)##sgse"].plurals[0] = "Сырой ввод (номер ноты - само значение)";
-    strings["Two octaves alternate (lower keys are 0-9, upper keys are A-F)##sgse"].plurals[0] = "Альтернативный ввод двух октав (нижние клавиши 0-9, верхние - A-F)";
-    strings["Use dual control change (one for each nibble)##sgse0"].plurals[0] = "Использовать двойную смену значения контроллера (по одному на тетраду)";
-    strings["Use 14-bit control change##sgse0"].plurals[0] = "Использовать 14-битную смену значения контроллера";
-    strings["Use single control change (imprecise)##sgse0"].plurals[0] = "Использовать однократную смену значения контроллера (малая точность)";
+    strings["Raw (note number is value)##sgse"].plurals[0] = "Tryb surowy (numer nuty jest wartością)";
+    strings["Two octaves alternate (lower keys are 0-9, upper keys are A-F)##sgse"].plurals[0] = "Alternatywne wprowadzanie dwóch oktaw (dolne klawisze 0-9, górne klawisze A-F)";
+    strings["Use dual control change (one for each nibble)##sgse0"].plurals[0] = "Użyj podwójnej komendy CC (jedna na półbajt)";
+    strings["Use 14-bit control change##sgse0"].plurals[0] = "Użyj 14-bitowej komendy CC";
+    strings["Use single control change (imprecise)##sgse0"].plurals[0] = "Użyj pojedynczej komendy CC (niska dokładność)";
     strings["Disabled/custom##sgse1"].plurals[0] = "Wył./niestandardowy";
-    strings["Use dual control change (one for each nibble)##sgse1"].plurals[0] = "Использовать двойную смену значения контроллера (по одному на тетраду)";
-    strings["Use 14-bit control change##sgse1"].plurals[0] = "Использовать 14-битную смену значения контроллера";
-    strings["Use single control change (imprecise)##sgse1"].plurals[0] = "Использовать однократную смену значения контроллера (малая точность)";
+    strings["Use dual control change (one for each nibble)##sgse1"].plurals[0] = "Użyj podwójnej komendy CC (jedna na półbajt)";
+    strings["Use 14-bit control change##sgse1"].plurals[0] = "Użyj 14-bitowej komendy CC";
+    strings["Use single control change (imprecise)##sgse1"].plurals[0] = "Użyj pojedynczej komendy CC (niska dokładność)";
     strings["--select--##sgse"].plurals[0] = "--wybierz--";
-    strings["Note Off##sgse"].plurals[0] = "Отпускание клавиши";
-    strings["Note On##sgse"].plurals[0] = "Нажатие клавиши";
-    strings["Aftertouch##sgse"].plurals[0] = "Давление на клавишу после нажатия";
-    strings["Control##sgse"].plurals[0] = "Значение контроллера";
-    strings["Program##sgse0"].plurals[0] = "Программа";
-    strings["ChanPressure##sgse"].plurals[0] = "Одинаковое давление на все нажатые клавиши в одном канале";
-    strings["Pitch Bend##sgse"].plurals[0] = "Смена высоты тона";
+    strings["Note Off##sgse"].plurals[0] = "Puszczenie klawisza";
+    strings["Note On##sgse"].plurals[0] = "Wciśnięcie klawisza";
+    strings["Aftertouch##sgse"].plurals[0] = "Aftertouch";
+    strings["Control##sgse"].plurals[0] = "Wartość CC";
+    strings["Program##sgse0"].plurals[0] = "Program";
+    strings["ChanPressure##sgse"].plurals[0] = "Równe naciskanie na kanał MIDI";
+    strings["Pitch Bend##sgse"].plurals[0] = "Zmiana wysokości dźwięku";
     strings["SysEx##sgse"].plurals[0] = "SysEx";
     strings["Instrument##sgse0"].plurals[0] = "Instrument";
     strings["Volume##sgse0"].plurals[0] = "Głośność";
@@ -2502,9 +2502,9 @@ void DivLocale::addTranslationsPolish()
 
     strings["Press key...##sgse"].plurals[0] = "Naciśnij klawisz...";
     strings["Settings###Settings"].plurals[0] = "Ustawienia###Settings";
-    strings["Do you want to save your settings?##sgse"].plurals[0] = "Czyt chcesz zapisać swoje ustawienia?";
+    strings["Do you want to save your settings?##sgse"].plurals[0] = "Czy chcesz zapisać swoje ustawienia?";
 
-    strings["General##sgse"].plurals[0] = "Основные";
+    strings["General##sgse"].plurals[0] = "Ogólne";
     strings["Program##sgse1"].plurals[0] = "Program";
     strings["Render backend##sgse"].plurals[0] = "Biblioteka renderownaia";
     strings["you may need to restart Furnace for this setting to take effect.##sgse0"].plurals[0] = "może być konieczne ponowne uruchomienie Furnace, aby to ustawienie zostało zastosowane.";
@@ -2512,12 +2512,12 @@ void DivLocale::addTranslationsPolish()
     strings["Automatic##sgse0"].plurals[0] = "Automatyczny";
     strings["Automatic##sgse1"].plurals[0] = "Automatyczny";
     strings["you may need to restart Furnace for this setting to take effect.##sgse1"].plurals[0] = "może być konieczne ponowne uruchomienie Furnace, aby to ustawienie zostało zastosowane.";
-    strings["Late render clear##sgse"].plurals[0] = "Запаздывающая очистка буфера отрисовщика";
-    strings["calls rend->clear() after rend->present(). might reduce UI latency by one frame in some drivers.##sgse"].plurals[0] = "вызывает rend->clear() после rend->present(). может устранить запаздывание отрисовки интерфейса на один кадр для некоторых драйверов.";
-    strings["Power-saving mode##sgse"].plurals[0] = "Режим энергосбережения";
-    strings["saves power by lowering the frame rate to 2fps when idle.\nmay cause issues under Mesa drivers!##sgse"].plurals[0] = "уменьшает энергопотребление при помощи уменьшения частоты отрисовки до двух кадров в секунду в режиме ожидания.\nможет приводить к проблемам на драйверах Mesa!";
-    strings["Disable threaded input (restart after changing!)##sgse"].plurals[0] = "Отключить обработку нажатий для превью инструмента в отдельном потоке (перезагрузите программу после изменения!)";
-    strings["threaded input processes key presses for note preview on a separate thread (on supported platforms), which reduces latency.\nhowever, crashes have been reported when threaded input is on. enable this option if that is the case.##sgse"].plurals[0] = "обработка нажатий клавиш для превью инструмента происходит в отдельном потоке (на поддерживаемых платформах), что позволяет уменьшить задержку ввода.\nтем не менее, есть сообщения о вылетах программы при выключённой настройке. включите её, если у вас программа вылетает.";
+    strings["Late render clear##sgse"].plurals[0] = "Opóźnione czyszczenie bufora renderowania";
+    strings["calls rend->clear() after rend->present(). might reduce UI latency by one frame in some drivers.##sgse"].plurals[0] = "Wywołuje rend->clear() po rend->present(). Może wyeliminować opóźnienie o jedną klatkę w renderowaniu interfejsu przy niektórych sterownikach.";
+    strings["Power-saving mode##sgse"].plurals[0] = "Tryb oszczędzania energii";
+    strings["saves power by lowering the frame rate to 2fps when idle.\nmay cause issues under Mesa drivers!##sgse"].plurals[0] = "zmniejsza zużycie energii, redukując szybkość renderowania do dwóch klatek na sekundę w trybie czuwania.\nmoże powodować problemy pod sterownikami Mesa!";
+    strings["Disable threaded input (restart after changing!)##sgse"].plurals[0] = "Wyłącz przetwarzanie naciśnięć klawiszy w osobnych wątkach (uruchom ponownie program po zmianie!).";
+    strings["threaded input processes key presses for note preview on a separate thread (on supported platforms), which reduces latency.\nhowever, crashes have been reported when threaded input is on. enable this option if that is the case.##sgse"].plurals[0] = "Przetwarzanie naciśnięć klawiszy dla podglądu instrumentów odbywa się wielowątkowo (na obsługiwanych platformach), co zmniejsza opóźnienia.\nsą jednak doniesienia o zawieszaniu się programu przy wyłączonym ustawieniu, w takim przypadku włącz je.";
     strings["Enable event delay##sgse"].plurals[0] = "Включить задержку событий";
     strings["may cause issues with high-polling-rate mice when previewing notes.##sgse"].plurals[0] = "может привести к проблемам во время превью инструмента, если подключена мышь с большой частотой обновления.";
     strings["Per-channel oscilloscope threads##sgse"].plurals[0] = "Потоки исполнения осциллографов для отдельных каналов";
@@ -2525,33 +2525,33 @@ void DivLocale::addTranslationsPolish()
     strings["what are you doing? stop!##sgse"].plurals[0] = "ты чё делаешь? хватит!";
     strings["it is a bad idea to set this number higher than your CPU core count (%d)!##sgse"].plurals[0] = "не рекомендуется выставлять здесь значение, большее количества ядер вашего ЦП (%d)!";
     strings["File##sgse"].plurals[0] = "Plik";
-    strings["Use system file picker##sgse"].plurals[0] = "Использовать диалоговое окно выбора файлов ОС";
-    strings["Number of recent files##sgse"].plurals[0] = "Количество недавних файлов";
+    strings["Use system file picker##sgse"].plurals[0] = "Użyj systemowego okna wyboru plików";
+    strings["Number of recent files##sgse"].plurals[0] = "Ilośćć ostatnich plików";
     strings["Compress when saving##sgse"].plurals[0] = "Kompresuj podczas zapisu";
     strings["use zlib to compress saved songs.##sgse"].plurals[0] = "иużywaj biblioteki zlib do kompresji utworów.";
-    strings["Save unused patterns##sgse"].plurals[0] = "Сохранять неиспользуемые паттерны";
+    strings["Save unused patterns##sgse"].plurals[0] = "Zapisuj nieużywane wzorce";
     strings["Use new pattern format when saving##sgse"].plurals[0] = "Использовать новый формат сохранения паттернов";
     strings["use a packed format which saves space when saving songs.\ndisable if you need compatibility with older Furnace and/or tools\nwhich do not support this format.##sgse"].plurals[0] = "использовать сжатый формат сохранения паттернов, что позволяет уменьшить размер файла с модулем.\nотключите, если нужна совместимость со старыми версиями Furnace и/или другими программами,\nкоторые не поддерживают новый формат.";
     strings["Don't apply compatibility flags when loading .dmf##sgse"].plurals[0] = "Не применять флаги совместимости при загрузке .dmf";
     strings["do not report any issues arising from the use of this option!##sgse"].plurals[0] = "не жалуйтесь на проблемы, которые возникнут после включения этой настройки!";
     strings["Play after opening song:##sgse"].plurals[0] = "Проигрывание модуля после его загрузки:";
     strings["No##pol0"].plurals[0] = "Nie##pol0";
-    strings["Only if already playing##pol1"].plurals[0] = "Только если до этого уже играл##pol1";
+    strings["Only if already playing##pol1"].plurals[0] = "Tylko jeśli już jest odtwarzany##pol1";
     strings["Yes##pol0"].plurals[0] = "Tak##pol0";
     strings["Audio export loop/fade out time:##sgse"].plurals[0] = "Количество циклов проигрывания и время затухания при экспорте аудио:";
     strings["Set to these values on start-up:##fot0"].plurals[0] = "Выставить эти значения при запуске:##fot0";
-    strings["Loops##sgse"].plurals[0] = "Циклы";
-    strings["Fade out (seconds)##sgse"].plurals[0] = "Затухание (в секундах)";
-    strings["Remember last values##fot1"].plurals[0] = "Запоминать предыдущие значения##fot1";
+    strings["Loops##sgse"].plurals[0] = "Pętle";
+    strings["Fade out (seconds)##sgse"].plurals[0] = "Wyciszanie (w sekundach)";
+    strings["Remember last values##fot1"].plurals[0] = "Zapamiętuj ostatnie wartości##fot1";
     strings["Store instrument name in .fui##sgse"].plurals[0] = "Сохранять название инструмента в файле .fui";
     strings["when enabled, saving an instrument will store its name.\nthis may increase file size.##sgse"].plurals[0] = "При включении имя инструмента будет сохраняться в файле.\nэто может увеличить размер файла.";
     strings["Load instrument name from .fui##sgse"].plurals[0] = "Загружать имя инструмента из файла .fui";
     strings["when enabled, loading an instrument will use the stored name (if present).\notherwise, it will use the file name.##sgse"].plurals[0] = "При включении имя инструмента будет загружаться из файла (при наличии имени в файле).\nВ противном случае будет использоваться имя файла.";
     strings["New Song##sgse"].plurals[0] = "Nowy utwór";
-    strings["Initial system:##sgse"].plurals[0] = "Система по умолчанию:";
-    strings["Current system##sgse"].plurals[0] = "Текущая";
-    strings["Randomize##sgse"].plurals[0] = "Выбрать случайно";
-    strings["Reset to defaults##sgse"].plurals[0] = "Устан. по умолчанию";
+    strings["Initial system:##sgse"].plurals[0] = "System domyślny:";
+    strings["Current system##sgse"].plurals[0] = "Bieżący";
+    strings["Randomize##sgse"].plurals[0] = "Losuj";
+    strings["Reset to defaults##sgse"].plurals[0] = "Resetuj ustawienia";
     strings["Name##sgse"].plurals[0] = "Nazwa";
     strings["Invert##sgse0"].plurals[0] = "Odwróć";
     strings["Invert##sgse1"].plurals[0] = "Odwróć";
@@ -2559,14 +2559,14 @@ void DivLocale::addTranslationsPolish()
     strings["Panning##sgse"].plurals[0] = "Panning";
     strings["Front/Rear##sgse"].plurals[0] = "Przód/tył";
     strings["Configure##sgse"].plurals[0] = "Konfiguruj";
-    strings["When creating new song:##sgse"].plurals[0] = "При создании новой композиции:";
+    strings["When creating new song:##sgse"].plurals[0] = "Przy tworzeniu nowego utworu:";
     strings["Display system preset selector##NSB0"].plurals[0] = "Отобразить окно выбора пресета системы##NSB0";
     strings["Start with initial system##NSB1"].plurals[0] = "Начать с системы по умолчанию##NSB1";
     strings["Default author name##sgse"].plurals[0] = "Имя автора по умолчанию";
     strings["Start-up##sgse"].plurals[0] = "Запуск";
     strings["Disable fade-in during start-up##sgse"].plurals[0] = "Отключить плавное появление интерфейса при запуске";
     strings["About screen party time##sgse"].plurals[0] = "Вечеринка на экране \"О программе\"";
-    strings["Warning: may cause epileptic seizures.##sgse"].plurals[0] = "Внимание: может вызвать эпилептические приступы.";
+    strings["Warning: may cause epileptic seizures.##sgse"].plurals[0] = "Uwaga: może wywoływać ataki padaczki.";
     strings["Behavior##sgse"].plurals[0] = "Zachowanie programu";
     strings["New instruments are blank##sgse"].plurals[0] = "Nowe instrumnty są wyzerowane";
     strings["Language##sgse"].plurals[0] = "Język";
@@ -2576,25 +2576,25 @@ void DivLocale::addTranslationsPolish()
     strings["Backend##sgse"].plurals[0] = "Interfejs";
     strings["Driver##sgse"].plurals[0] = "Sterownik";
     strings["Automatic##sgse2"].plurals[0] = "Automatyczny";
-    strings["you may need to restart Furnace for this setting to take effect.##sgse2"].plurals[0] = "возможно, вам придётся перезапустить Furnace для применения настройки.";
+    strings["you may need to restart Furnace for this setting to take effect.##sgse2"].plurals[0] = "może być konieczne ponowne uruchomienie Furnace, aby to ustawienie zostało zastosowane.";
     strings["Device##sgse"].plurals[0] = "Urządzenie wyjściowe";
-    strings["<click on OK or Apply first>##sgse"].plurals[0] = "<сначала нажмите на кнопки \"OK\" или \"Применить\">";
-    strings["ALERT - TRESPASSER DETECTED##sgse"].plurals[0] = "ВНИМАНИЕ - ОБНАРУЖЕН НАРУШИТЕЛЬ";
+    strings["<click on OK or Apply first>##sgse"].plurals[0] = "<najpierw kliknij \"OK\" albo \"Zastosuj\">";
+    strings["ALERT - TRESPASSER DETECTED##sgse"].plurals[0] = "UWAGA - WYKRYTO INTRUZA";
     strings["you have been arrested for trying to engage with a disabled combo box.##sgse"].plurals[0] = "вы были арестованы за попытку взаимодействия с выключенным выпадающим списком.";
     strings["<System default>##sgse0"].plurals[0] = "<Domyślny>";
     strings["<System default>##sgse1"].plurals[0] = "<Domyślny>";
-    strings["Sample rate##sgse"].plurals[0] = "Частота дискретизации";
+    strings["Sample rate##sgse"].plurals[0] = "Częstotliwość samplowania";
     strings["Outputs##sgse"].plurals[0] = "Wyjścia";
-    strings["Channels##sgse"].plurals[0] = "Число каналов";
+    strings["Channels##sgse"].plurals[0] = "Ilość kanałów";
     strings["What?##sgse3"].plurals[0] = "Co?";
     strings["Buffer size##sgse"].plurals[0] = "Rozmiar bufora";
     strings["%d (latency: ~%.1fms)##sgse"].plurals[0] = "%d (latencja: ~%.1f ms)";
     strings["Multi-threaded (EXPERIMENTAL)##sgse"].plurals[0] = "Wielowątkowość (EKSPERYMENTALNA)";
-    strings["runs chip emulation on separate threads.\nmay increase performance when using heavy emulation cores.\n\nwarnings:\n- experimental!\n- only useful on multi-chip songs.##sgse"].plurals[0] = "исполняет эмуляторы чипов в отдельных потоках.\nможет повысить производительность при использовании тяжёлых эмуляторов.\n\nвнимание:\n- экспериментальная функция!\n- полезна только для композиций, использующих несколько чипов.";
+    strings["runs chip emulation on separate threads.\nmay increase performance when using heavy emulation cores.\n\nwarnings:\n- experimental!\n- only useful on multi-chip songs.##sgse"].plurals[0] = "wykonuje emulatory układów w oddzielnych wątkach.\nmoże poprawić wydajność podczas korzystania z ciężkich emulatorów.\n\nostrzeżenie:\n- funkcja eksperymentalna!\n- użyteczna tylko dla utworów, które wykorzystują wiele układów.";
     strings["Number of threads##sgse"].plurals[0] = "Ilość wątków";
     strings["that's the limit!##sgse"].plurals[0] = "to już limit!";
-    strings["it is a VERY bad idea to set this number higher than your CPU core count (%d)!##sgse"].plurals[0] = "это ОЧЕНЬ плохая идея - устанавливать это значение большим, чем колчество ядер ЦП (%d)!";
-    strings["Low-latency mode##sgse"].plurals[0] = "Режим малой задержки";
+    strings["it is a VERY bad idea to set this number higher than your CPU core count (%d)!##sgse"].plurals[0] = "BARDZO złym pomysłem jest ustawianie tej wartości na wyższą niż liczba rdzeni procesora. (%d)!";
+    strings["Low-latency mode##sgse"].plurals[0] = "Tryb niskiej latencji";
     strings["reduces latency by running the engine faster than the tick rate.\nuseful for live playback/jam mode.\n\nwarning: only enable if your buffer size is small (10ms or less).##sgse"].plurals[0] = "уменьшает задержку, исполняя код движка трекера быстрее, чем указано в настройках.\nполезно для режима исполнения в реальном времени.\n\nвнимание: включайте только если размер вашего аудиобуфера мал (10 мс или меньше).";
     strings["Force mono audio##sgse"].plurals[0] = "Wymuś dźwięk mono";
     strings["Exclusive mode##sgse"].plurals[0] = "Tryb wyjątkowy";
@@ -2716,8 +2716,8 @@ void DivLocale::addTranslationsPolish()
     strings["Are you sure you want to reset the workspace layout?##sgse"].plurals[0] = "Czy jesteś pewien że chcesz zresetować układ przestrzeni roboczej?";
     strings["Allow docking editors##sgse"].plurals[0] = "Pozwalaj na dokowanie edytorów";
     strings["Remember window position##sgse"].plurals[0] = "Pamiętaj położenie okien";
-    strings["remembers the window's last position on start-up.##sgse"].plurals[0] = "при запуске программы восстанавливает последнее положение каждого окна.";
-    strings["Only allow window movement when clicking on title bar##sgse"].plurals[0] = "Разрешать перемещение окон только при нажатии на их полосу заголовка";
+    strings["remembers the window's last position on start-up.##sgse"].plurals[0] = "przywraca ostatnią pozycję każdego okna po uruchomieniu programu.";
+    strings["Only allow window movement when clicking on title bar##sgse"].plurals[0] = "Zezwalaj na przesuwanie okien tylko po kliknięciu ich paska tytułu.";
     strings["Center pop-up windows##sgse"].plurals[0] = "Centruj wyskakujące okna";
     strings["Play/edit controls layout:##sgse"].plurals[0] = "Układ kontrolek odtwarzania/edycji:";
     strings["Classic##ecl0"].plurals[0] = "Klasyczny##ecl0";
