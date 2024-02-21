@@ -2525,6 +2525,24 @@ int DivEngine::addWave() {
   return waveCount;
 }
 
+int DivEngine::addLocalWave(int inst) {
+  DivInstrument* ins = song.ins[inst];
+  if (ins->std.local_waves.size()>=256) {
+    lastError="too many wavetables!";
+    return -1;
+  }
+  BUSY_BEGIN;
+  saveLock.lock();
+  DivWavetable* wave=new DivWavetable;
+  int waveCount=(int)ins->std.local_waves.size();
+  ins->std.local_waves.push_back(wave);
+  //song.waveLen=waveCount+1;
+  //checkAssetDir(song.waveDir,song.wave.size());
+  saveLock.unlock();
+  BUSY_END;
+  return waveCount;
+}
+
 int DivEngine::addWavePtr(DivWavetable* which) {
   if (song.wave.size()>=256) {
     lastError="too many wavetables!";
@@ -2698,6 +2716,24 @@ void DivEngine::delWave(int index) {
   BUSY_BEGIN;
   saveLock.lock();
   delWaveUnsafe(index);
+  saveLock.unlock();
+  BUSY_END;
+}
+
+void DivEngine::delLocalWaveUnsafe(int index, DivInstrument* ins) {
+  if (index>=0 && index<(int)ins->std.local_waves.size()) {
+    delete ins->std.local_waves[index];
+    ins->std.local_waves.erase(ins->std.local_waves.begin()+index);
+    //song.waveLen=song.wave.size();
+    //removeAsset(song.waveDir,index);
+    //checkAssetDir(song.waveDir,song.wave.size());
+  }
+}
+
+void DivEngine::delLocalWave(int index, DivInstrument* ins) {
+  BUSY_BEGIN;
+  saveLock.lock();
+  delLocalWaveUnsafe(index, ins);
   saveLock.unlock();
   BUSY_END;
 }

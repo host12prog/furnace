@@ -864,6 +864,59 @@ void FurnaceGUI::doAction(int what) {
       waveListDir=!waveListDir;
       break;
 
+    case GUI_ACTION_LOCAL_WAVE_LIST_ADD: {
+      waveSizeList.clear();
+      for (int i=0; i<e->song.systemLen; i++) {
+        const DivSysDef* sysDef=e->getSystemDef(e->song.system[i]);
+        if (sysDef==NULL) continue;
+
+        if (sysDef->waveHeight==0) continue;
+        if (sysDef->waveWidth==0) {
+          // add three preset sizes
+          waveSizeList.push_back(FurnaceGUIWaveSizeEntry(32,sysDef->waveHeight,sysDef->name));
+          waveSizeList.push_back(FurnaceGUIWaveSizeEntry(64,sysDef->waveHeight,sysDef->name));
+          waveSizeList.push_back(FurnaceGUIWaveSizeEntry(128,sysDef->waveHeight,sysDef->name));
+        } else {
+          waveSizeList.push_back(FurnaceGUIWaveSizeEntry(sysDef->waveWidth,sysDef->waveHeight,sysDef->name));
+        }
+      }
+
+      int finalWidth=32;
+      int finalHeight=32;
+      if (waveSizeList.size()==1) {
+        finalWidth=waveSizeList[0].width;
+        finalHeight=waveSizeList[0].height;
+      } else if (waveSizeList.size()>1) {
+        displayWaveSizeList=true;
+        break;
+      }
+
+      curLocalWave=e->addLocalWave(curIns);
+      if (curLocalWave==-1) {
+        showError(_L("too many wavetables!##sgda0"));
+      } else {
+        wantScrollList=true;
+        e->song.ins[curIns]->std.local_waves[curLocalWave]->len=finalWidth;
+        e->song.ins[curIns]->std.local_waves[curLocalWave]->max=finalHeight-1;
+        for (int j=0; j<finalWidth; j++) {
+          e->song.ins[curIns]->std.local_waves[curLocalWave]->data[j]=(j*finalHeight)/finalWidth;
+        }
+        MARK_MODIFIED;
+        RESET_WAVE_MACRO_ZOOM;
+      }
+      break;
+    }
+    case GUI_ACTION_LOCAL_WAVE_LIST_DELETE:
+      if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) {
+        e->delLocalWave(curLocalWave, e->song.ins[curIns]);
+        MARK_MODIFIED;
+        wantScrollList=true;
+        if (curLocalWave>=(int)e->song.ins[curIns]->std.local_waves.size()) {
+          curLocalWave--;
+        }
+      }
+      break;
+
     case GUI_ACTION_SAMPLE_LIST_ADD:
     {
         curSample = e->addSample();

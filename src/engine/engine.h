@@ -940,6 +940,9 @@ class DivEngine {
     // add wavetable
     int addWave();
 
+    // add local wavetable
+    int addLocalWave(int inst);
+
     // add wavetable from pointer
     int addWavePtr(DivWavetable* which);
 
@@ -949,6 +952,10 @@ class DivEngine {
     // delete wavetable
     void delWave(int index);
     void delWaveUnsafe(int index);
+
+    // delete local wavetable
+    void delLocalWave(int index, DivInstrument* ins);
+    void delLocalWaveUnsafe(int index, DivInstrument* ins);
 
     // add sample
     int addSample();

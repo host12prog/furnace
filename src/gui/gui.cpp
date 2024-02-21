@@ -7392,6 +7392,7 @@ FurnaceGUI::FurnaceGUI():
   pendingLayoutImportStep(0),
   curIns(0),
   curWave(0),
+  curLocalWave(0),
   curSample(0),
   curOctave(3),
   curOrder(0),

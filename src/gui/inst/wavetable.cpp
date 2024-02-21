@@ -33,6 +33,55 @@ extern "C" {
 
 class FurnaceGUI;
 
+void FurnaceGUI::localWaveListItem(int i, float* wavePreview, DivInstrument* ins)
+{
+    DivWavetable* wave = ins->std.local_waves[i];
+
+    for (int ii=0; ii<wave->len; ii++) 
+    {
+        wavePreview[ii] = wave->data[ii];
+    }
+
+    if (wave->len>0) wavePreview[wave->len]=wave->data[wave->len-1];
+    ImVec2 curPos=ImGui::GetCursorPos();
+    ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign,ImVec2(0,0.5f));
+
+    if (ImGui::Selectable(fmt::sprintf(" %d##_WAVE%d\n",i,i).c_str(),curLocalWave == i,0,ImVec2(0,ImGui::GetFrameHeight()))) 
+    {
+        curLocalWave = i;
+    }
+
+    ImGui::PopStyleVar();
+    curPos.x+=ImGui::CalcTextSize("2222").x;
+    if (wantScrollList && curLocalWave == i) ImGui::SetScrollHereY();
+    if (ImGui::IsItemHovered()) 
+    {
+        if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) 
+        {
+            waveEditOpen = true;
+            nextWindow = GUI_WINDOW_WAVE_EDIT;
+        }
+    }
+
+    ImGui::SameLine();
+    ImGui::SetCursorPos(curPos);
+    PlotNoLerp(fmt::sprintf("##_WAVEP%d",i).c_str(),wavePreview,wave->len+1,0,NULL,0,wave->max,ImVec2(ImGui::GetContentRegionAvail().x,ImGui::GetFrameHeight()));
+}
+
+void FurnaceGUI::actualLocalWaveList()
+{
+    float wavePreview[257];
+
+    DivInstrument* ins = e->song.ins[curIns];
+
+    for (int i=0; i<(int)ins->std.local_waves.size(); i++) 
+    {
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        localWaveListItem(i,wavePreview,ins);
+    }
+}
+
 void FurnaceGUI::insTabWave(DivInstrument* ins)
 {
     if (ImGui::BeginTabItem(_L("Wavetable##sgiwave"))) 
@@ -311,7 +360,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
     {
         if (ImGui::Button(ICON_FA_PLUS "##WaveAdd")) 
         {
-            doAction(GUI_ACTION_WAVE_LIST_ADD);
+            doAction(GUI_ACTION_LOCAL_WAVE_LIST_ADD);
         }
         if (ImGui::IsItemHovered()) 
         {
@@ -386,7 +435,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         pushDestColor();
         if (ImGui::Button(ICON_FA_TIMES "##WaveDelete")) 
         {
-            doAction(GUI_ACTION_WAVE_LIST_DELETE);
+            doAction(GUI_ACTION_LOCAL_WAVE_LIST_DELETE);
         }
         popDestColor();
         if (ImGui::IsItemHovered()) 
@@ -396,7 +445,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         ImGui::Separator();
         if (ImGui::BeginTable("WaveListScroll",1,ImGuiTableFlags_ScrollY)) 
         {
-            actualWaveList();
+            actualLocalWaveList();
             ImGui::EndTable();
         }
 
