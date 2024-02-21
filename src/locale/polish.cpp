@@ -170,6 +170,7 @@ void DivLocale::addTranslationsPolish()
     strings["Center waveform##sgco"].plurals[0] = "Centruj fale";
     strings["Randomize phase on note##sgco"].plurals[0] = "Losowa faza przy nowej nucie";
     strings["Amplitude##sgco"].plurals[0] = "Amplituda";
+    strings["Line size##sgco"].plurals[0] = "Grubość linii";
     strings["Gradient##sgco"].plurals[0] = "Gradient";
     strings["Color##sgco0"].plurals[0] = "Kolor";
     strings["Distance##sgco"].plurals[0] = "Dystans";
@@ -2524,15 +2525,20 @@ void DivLocale::addTranslationsPolish()
     strings["you're being silly, aren't you? that's enough.##sgse"].plurals[0] = "может, хватит уже хернёй страдать? этого достаточно.";
     strings["what are you doing? stop!##sgse"].plurals[0] = "ты чё делаешь? хватит!";
     strings["it is a bad idea to set this number higher than your CPU core count (%d)!##sgse"].plurals[0] = "не рекомендуется выставлять здесь значение, большее количества ядер вашего ЦП (%d)!";
+    strings["Oscilloscope rendering engine:##sgse"].plurals[0] = "Silnik renderowania oscyloskopu:";
+    strings["ImGui line plot##sgse"].plurals[0] = "Rysunek linii z ImGui";
+    strings["render using Dear ImGui's built-in line drawing functions.##sgse"].plurals[0] = "renderuj przy pomocy wbudowanych funkcji Dear ImGui.";
+    strings["GLSL/HLSL (if available)##sgse"].plurals[0] = "GLSL/HLSL (jeśli dostępne)";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL render backend.##sgse"].plurals[0] = "renderowanie przy użyciu shaderów wykonywanych na GPU.\ndostępny wyłącznie na silniku renderowania OpenGL";
     strings["File##sgse"].plurals[0] = "Plik";
     strings["Use system file picker##sgse"].plurals[0] = "Użyj systemowego okna wyboru plików";
     strings["Number of recent files##sgse"].plurals[0] = "Ilośćć ostatnich plików";
     strings["Compress when saving##sgse"].plurals[0] = "Kompresuj podczas zapisu";
     strings["use zlib to compress saved songs.##sgse"].plurals[0] = "иużywaj biblioteki zlib do kompresji utworów.";
     strings["Save unused patterns##sgse"].plurals[0] = "Zapisuj nieużywane wzorce";
-    strings["Use new pattern format when saving##sgse"].plurals[0] = "Использовать новый формат сохранения паттернов";
+    strings["Use new pattern format when saving##sgse"].plurals[0] = "Używaj nowego formatu wzorców podczas zapisywania";
     strings["use a packed format which saves space when saving songs.\ndisable if you need compatibility with older Furnace and/or tools\nwhich do not support this format.##sgse"].plurals[0] = "использовать сжатый формат сохранения паттернов, что позволяет уменьшить размер файла с модулем.\nотключите, если нужна совместимость со старыми версиями Furnace и/или другими программами,\nкоторые не поддерживают новый формат.";
-    strings["Don't apply compatibility flags when loading .dmf##sgse"].plurals[0] = "Не применять флаги совместимости при загрузке .dmf";
+    strings["Don't apply compatibility flags when loading .dmf##sgse"].plurals[0] = "Nie stosuj flag kompatybilności podczas wczytywania pliku .dmf";
     strings["do not report any issues arising from the use of this option!##sgse"].plurals[0] = "не жалуйтесь на проблемы, которые возникнут после включения этой настройки!";
     strings["Play after opening song:##sgse"].plurals[0] = "Проигрывание модуля после его загрузки:";
     strings["No##pol0"].plurals[0] = "Nie##pol0";
@@ -2545,7 +2551,7 @@ void DivLocale::addTranslationsPolish()
     strings["Remember last values##fot1"].plurals[0] = "Zapamiętuj ostatnie wartości##fot1";
     strings["Store instrument name in .fui##sgse"].plurals[0] = "Сохранять название инструмента в файле .fui";
     strings["when enabled, saving an instrument will store its name.\nthis may increase file size.##sgse"].plurals[0] = "При включении имя инструмента будет сохраняться в файле.\nэто может увеличить размер файла.";
-    strings["Load instrument name from .fui##sgse"].plurals[0] = "Загружать имя инструмента из файла .fui";
+    strings["Load instrument name from .fui##sgse"].plurals[0] = "Wczytaj nazwę instrumentu z pliku .fui";
     strings["when enabled, loading an instrument will use the stored name (if present).\notherwise, it will use the file name.##sgse"].plurals[0] = "При включении имя инструмента будет загружаться из файла (при наличии имени в файле).\nВ противном случае будет использоваться имя файла.";
     strings["New Song##sgse"].plurals[0] = "Nowy utwór";
     strings["Initial system:##sgse"].plurals[0] = "System domyślny:";
@@ -2563,7 +2569,7 @@ void DivLocale::addTranslationsPolish()
     strings["Display system preset selector##NSB0"].plurals[0] = "Отобразить окно выбора пресета системы##NSB0";
     strings["Start with initial system##NSB1"].plurals[0] = "Начать с системы по умолчанию##NSB1";
     strings["Default author name##sgse"].plurals[0] = "Имя автора по умолчанию";
-    strings["Start-up##sgse"].plurals[0] = "Запуск";
+    strings["Start-up##sgse"].plurals[0] = "Uruchamianie";
     strings["Disable fade-in during start-up##sgse"].plurals[0] = "Отключить плавное появление интерфейса при запуске";
     strings["About screen party time##sgse"].plurals[0] = "Вечеринка на экране \"О программе\"";
     strings["Warning: may cause epileptic seizures.##sgse"].plurals[0] = "Uwaga: może wywoływać ataki padaczki.";
@@ -3049,7 +3055,7 @@ void DivLocale::addTranslationsPolish()
     strings["Table row (even)##CC_GUI_COLOR_TABLE_ROW_EVEN"].plurals[0] = "Строка таблицы (чётная)##CC_GUI_COLOR_TABLE_ROW_EVEN";
     strings["Table row (odd)##CC_GUI_COLOR_TABLE_ROW_ODD"].plurals[0] = "Строка таблицы (нечётная)##CC_GUI_COLOR_TABLE_ROW_ODD";
 
-    strings["Background##CC_GUI_COLOR_BACKGROUND"].plurals[0] = "Задний фон##CC_GUI_COLOR_BACKGROUND";
+    strings["Background##CC_GUI_COLOR_BACKGROUND"].plurals[0] = "Tło##CC_GUI_COLOR_BACKGROUND";
     strings["Window background##CC_GUI_COLOR_FRAME_BACKGROUND"].plurals[0] = "Фон окон##CC_GUI_COLOR_FRAME_BACKGROUND";
     strings["Sub-window background##CC_GUI_COLOR_FRAME_BACKGROUND_CHILD"].plurals[0] = "Фон подокн##CC_GUI_COLOR_FRAME_BACKGROUND_CHILD";
     strings["Pop-up background##CC_GUI_COLOR_FRAME_BACKGROUND_POPUP"].plurals[0] = "Фон всплывающих окон##CC_GUI_COLOR_FRAME_BACKGROUND_POPUP";
