@@ -4820,6 +4820,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Power##sgiwave"].plurals[0] = "=Power";
     strings["Global##sgiwave"].plurals[0] = "=Global";
     strings["wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"].plurals[0] = "=wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.";
+    strings["Local Waves##sgiwave"].plurals[0] = "=Local Waves";
 
     //   sgiX1     src/gui/inst/x1_010.cpp
 

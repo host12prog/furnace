@@ -27,6 +27,8 @@
 #include "../pch.h"
 #include <vector>
 
+#include "wavetable.h"
+
 struct DivSong;
 
 // NOTICE!
@@ -348,6 +350,8 @@ struct DivInstrumentSTD
   };
 
   std::vector<OpMacro> ops;
+
+  std::vector<DivWavetable*> local_waves;
 
   OpMacro* get_op_macro(uint8_t index)
   {
