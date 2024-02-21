@@ -166,6 +166,8 @@ void DivLocale::addTranslationsPortuguese()
     strings["ESFMu emulator by Kagamiin~##sgab"].plurals[0] =                                 "ESFMu por Kagamiin~";
     strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] =                         "emulador PowerNoise por scratchminer";
     strings["ep128emu by Istvan Varga##sgab"].plurals[0] =                                    "ep128emu por Istvan Varga";
+    strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] =               "emulador SID2 (modificação do reSID) por LTVA";
+
 
     strings["greetings to:##sgab"].plurals[0] =                    "saudações a:";
     strings["NEOART Costa Rica##sgab"].plurals[0] =                "NEOART Costa Rica";
@@ -227,6 +229,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["Center waveform##sgco"].plurals[0] = "Centralizar onda";
     strings["Randomize phase on note##sgco"].plurals[0] = "Aleatorizar fase a cada nota";
     strings["Amplitude##sgco"].plurals[0] = "Amplitude";
+    strings["Line size##sgco"].plurals[0] = "Espessura da linha";
     strings["Gradient##sgco"].plurals[0] = "Gradiente";
     strings["Color##sgco0"].plurals[0] = "Cor";
     strings["Distance##sgco"].plurals[0] = "Distância";
@@ -454,13 +457,14 @@ void DivLocale::addTranslationsPortuguese()
     strings["all files##sggu0"].plurals[0] = "todos os arquivos";
     strings["no backups made yet!##sggu"].plurals[0] = "nenhum backup realizado ainda!";
     strings["Restore Backup##sggu"].plurals[0] = "Restaurar Backup";
+    strings["Furnace or Furnace-B song##sggu"].plurals[0] = "Música do Furnace ou Furnace-B";
     strings["Furnace song##sggu0"].plurals[0] = "Música do Furnace";
     strings["Save File##sggu0"].plurals[0] = "Salvar Arquivo";
     strings["DefleMask 1.1.3 module##sggu"].plurals[0] = "Módulo do DefleMask 1.1.3";
     strings["Save File##sggu1"].plurals[0] = "Salvar Arquivo";
     strings["DefleMask 1.0/legacy module##sggu"].plurals[0] = "Módulo do DefleMask 1.0/legado";
     strings["Save File##sggu2"].plurals[0] = "Salvar arquivo";
-    strings["Furnace song##sggu1"].plurals[0] = "Música do Furnace";
+    strings["Furnace-B song##sggu1"].plurals[0] = "Música do Furnace-B";
     strings["Load Instrument##sggu"].plurals[0] = "Carregar Instrumento";
     strings["all compatible files##sggu1"].plurals[0] = "todos os arquivos compatíveis";
     strings["Furnace instrument##sggu0"].plurals[0] = "Instrumento do Furnace";
@@ -517,6 +521,8 @@ void DivLocale::addTranslationsPortuguese()
     strings["text file##sggu1"].plurals[0] = "arquivo de texto";
     strings["Export Command Stream##sggu2"].plurals[0] = "Exportar Fluxo de Comandos";
     strings["binary file##sggu"].plurals[0] = "arquivo binário";
+    strings["Export Furnace song##sggu"].plurals[0] = "Exportar Música do Furnace";
+    strings["Furnace song##sggu2"].plurals[0] = "Música do Furnace";
     strings["Coming soon!##sggu"].plurals[0] = "em breve!";
     strings["Select Font##sggu0"].plurals[0] = "Selecione a Fonte";
     strings["compatible files##sggu4"].plurals[0] = "arquivos compatíveis";
@@ -651,6 +657,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["export Amiga validation data...##sggu0"].plurals[0] = "exportar dados de validação do Amiga...";
     strings["export text...##sggu0"].plurals[0] = "exportar texto...";
     strings["export command stream...##sggu0"].plurals[0] = "exportar fluxo de comandos...";
+    strings["export Furnace module...##sggu"].plurals[0] = "exportar módulo do Furnace...";
     strings["export audio...##sggu1"].plurals[0] = "exportar audio...";
     strings["export VGM...##sggu1"].plurals[0] = "exportar VGM...";
     strings["export .dmf (1.1.3+)...##sggu1"].plurals[0] = "exportar .dmf (1.1.3+)...";
@@ -775,6 +782,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["Could not write ZSM! (%s)##sggu"].plurals[0] = "Não pôde escrever ZSM! (%s)";
     strings["could not write text! (%s)##sggu"].plurals[0] = "não pôde escrever texto! (%s)";
     strings["could not write command stream! (%s)##sggu"].plurals[0] = "não pôde escrever fluxo de comandos! (%s)";
+    strings["could not write tildearrow version Furnace module! (%s)##sggu"].plurals[0] = "não pôde escrever módulo do Furnace versão tildearrow! (%s)";
     strings["Error while loading file! (%s)##sggu4"].plurals[0] = "Erro ao carregar o arquivo! (%s)";
     strings["You opened: %s##sggu"].plurals[0] = "Você abriu: %s";
     strings["You opened:##sggu"].plurals[0] = "Você abriu:##sggu";
@@ -1393,11 +1401,23 @@ void DivLocale::addTranslationsPortuguese()
     strings["Cancel##sgeo8"].plurals[0] = "Cancelar";
     strings["Export (binary)##sgeo"].plurals[0] = "Exportar (binário)";
     strings["Export (text)##sgeo"].plurals[0] = "Exportar (texto)";
+    strings["this option exports a module which is\n"
+            "compatible with tildearrow Furnace app.\n\n"
+
+            "not all chips and inst macros will be supported!"].plurals[0] = 
+
+            "esta opção exporta um módulo que é\n"
+            "compatível com o aplicatívo Furnace do tildearrow.\n\n"
+
+            "nem todos os chips e macros de instrumento serão suportados!";
+    strings["Cancel##sgeo9"].plurals[0] = "Cancelar";
+    strings["Export##sgeo7"].plurals[0] = "Exportar";
     strings["Audio##sgeo"].plurals[0] = "Áudio";
     strings["DMF (1.0/legacy)##sgeo"].plurals[0] = "DMF (1.0/legado)";
     strings["Amiga Validation##sgeo"].plurals[0] = "Dados de Validação Amiga";
     strings["Text##sgeo"].plurals[0] = "Texto";
     strings["Command Stream##sgeo"].plurals[0] = "Fluxo de Comandos";
+    strings["Furnace##sgeo"].plurals[0] = "Furnace";
     strings["congratulations! you've unlocked a secret panel.##sgeo"].plurals[0] = "parabéns! você desbloqueou um painel secreto.";
     strings["Toggle hidden systems##sgeo"].plurals[0] = "Habilitar/desabilitar sistemas escondidos";
     strings["Toggle all instrument types##sgeo"].plurals[0] = "Habilitar/desabilitar todos os tipos de instrumentos";
@@ -2536,6 +2556,11 @@ void DivLocale::addTranslationsPortuguese()
     strings["you're being silly, aren't you? that's enough.##sgse"].plurals[0] = "você tá de brincadeira, né? isso é mais do que suficiente.";
     strings["what are you doing? stop!##sgse"].plurals[0] = "o que você tá fazendo? para!";
     strings["it is a bad idea to set this number higher than your CPU core count (%d)!##sgse"].plurals[0] = "é uma má ideia definir esse número pra um valor mais alto do que o número de núcleos da sua CPU (%d)!";
+    strings["Oscilloscope rendering engine:##sgse"].plurals[0] = "Motor de renderização de osciloscópio:";
+    strings["ImGui line plot##sgse"].plurals[0] = "Plotagem de linhas do ImGui";
+    strings["render using Dear ImGui's built-in line drawing functions.##sgse"].plurals[0] = "desenha o osciloscópio utilizando as funções embutidas de desenho de linha do Dear ImGui.";
+    strings["GLSL/HLSL (if available)##sgse"].plurals[0] = "GLSL/HLSL (se disponível)";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL render backend.##sgse"].plurals[0] = "renderiza utilizando sombreadores que executam na placa de vídeo.\nsomente disponível no backend de renderização OpenGL.";
     strings["File##sgse"].plurals[0] = "Arquivo";
     strings["Use system file picker##sgse"].plurals[0] = "Usar diálogo de arquivos do sistema";
     strings["Number of recent files##sgse"].plurals[0] = "Número de arquivos recentes";
@@ -2994,6 +3019,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["Anti-aliased##sgse"].plurals[0] = "Suavizado";
     strings["Fill entire window##sgse"].plurals[0] = "Preencher toda a janela";
     strings["Waveform goes out of bounds##sgse"].plurals[0] = "Forma de onda ultrapassa as bordas";
+    strings["Line size##sgse"].plurals[0] = "Espessura da linha";
     strings["Windows##sgse"].plurals[0] = "Janelas";
     strings["Rounded window corners##sgse"].plurals[0] = "Cantos das janelas arredondados";
     strings["Rounded buttons##sgse"].plurals[0] = "Botões arredondados";
@@ -4646,6 +4672,9 @@ void DivLocale::addTranslationsPortuguese()
     strings["Relative##sgistru"].plurals[0] = "=Relative";
     strings["QSound##sgistru"].plurals[0] = "=QSound";
     strings["Bug##sgistru"].plurals[0] = "=Bug";
+
+    strings["Fixed"].plurals[0] = "=Fixed";
+    strings["Relative"].plurals[0] = "=Relative";
 
     //   sgiSU     src/gui/inst/su.cpp
 
