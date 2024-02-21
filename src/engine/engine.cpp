@@ -1102,6 +1102,62 @@ bool DivEngine::addSystem(DivSystem which) {
   return true;
 }
 
+bool DivEngine::cloneSystem(int index, bool add_chip_count) {
+  if (song.systemLen>=DIV_MAX_CHIPS) {
+    lastError=fmt::sprintf("max number of systems is %d",DIV_MAX_CHIPS);
+    return false;
+  }
+  if (chans+getChannelCount(song.system[index])>DIV_MAX_CHANS) {
+    lastError=fmt::sprintf("max number of total channels is %d",DIV_MAX_CHANS);
+    return false;
+  }
+  quitDispatch();
+  BUSY_BEGIN;
+  saveLock.lock();
+  song.system[index + 1] = song.system[index];
+  song.systemVol[index + 1] = song.systemVol[index];
+  song.systemPan[index + 1] = song.systemPan[index];
+  song.systemPanFR[index + 1] = song.systemPanFR[index];
+  song.systemFlags[index + 1] = song.systemFlags[index]; //will it copy the std::map???
+  //yeah, seems like it copies the map!
+  if(add_chip_count)
+  {
+    song.systemLen++;
+  }
+  
+  recalcChans();
+  saveLock.unlock();
+  BUSY_END;
+  initDispatch();
+  BUSY_BEGIN;
+  saveLock.lock();
+  if (song.patchbayAuto) {
+    autoPatchbay();
+  } else {
+    int i=song.systemLen-1;
+    if (disCont[i].dispatch!=NULL) {
+      unsigned int outs=disCont[i].dispatch->getOutputCount();
+      if (outs>16) outs=16;
+      if (outs<2) {
+        song.patchbay.reserve(DIV_MAX_OUTPUTS);
+        for (unsigned int j=0; j<DIV_MAX_OUTPUTS; j++) {
+          song.patchbay.push_back((i<<20)|j);
+        }
+      } else {
+        if (outs>0) song.patchbay.reserve(outs);
+        for (unsigned int j=0; j<outs; j++) {
+          song.patchbay.push_back((i<<20)|(j<<16)|j);
+        }
+      }
+    }
+  }
+  saveLock.unlock();
+  renderSamples();
+  reset();
+  BUSY_END;
+  return true;
+}
+
 // TODO: maybe issue with subsongs?
 bool DivEngine::removeSystem(int index, bool preserveOrder) {
   if (song.systemLen<=1) {

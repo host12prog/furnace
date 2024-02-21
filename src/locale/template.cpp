@@ -2338,6 +2338,10 @@ void DivLocale::addTranslationsTemplate()
     strings["Name##sgsm"].plurals[0] = "=Name";
     strings["Actions##sgsm"].plurals[0] = "=Actions";
     strings["(drag to swap chips)##sgsm"].plurals[0] = "=(drag to swap chips)";
+    strings["Duplicate##SysDupl"].plurals[0] = "=Duplicate##SysDupl";
+    strings["cannot duplicate chip! (##sgsm"].plurals[0] = "=cannot duplicate chip! (";
+    strings["max number of systems is %d##sgsm"].plurals[0] = "=max number of systems is %d";
+    strings["max number of total channels is %d##sgsm"].plurals[0] = "=max number of total channels is %d";
     strings["Change##SysChange"].plurals[0] = "=Change##SysChange";
     strings["Are you sure you want to remove this chip?##sgsm"].plurals[0] = "=Are you sure you want to remove this chip?";
     strings["Remove##sgsm"].plurals[0] = "=Remove";

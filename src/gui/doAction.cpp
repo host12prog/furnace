@@ -35,21 +35,21 @@ void FurnaceGUI::doAction(int what) {
   switch (what) {
     case GUI_ACTION_NEW:
       if (modified) {
-        showWarning(_L("Unsaved changes! Save changes before creating a new song?##sgda"),GUI_WARN_NEW);
+        showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before creating a new song?" : _L("Unsaved changes! Save changes before creating a new song?##sgda"),GUI_WARN_NEW);
       } else {
         displayNew=true;
       }
       break;
     case GUI_ACTION_OPEN:
       if (modified) {
-        showWarning(_L("Unsaved changes! Save changes before opening another file?##sgda"),GUI_WARN_OPEN);
+        showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before opening another file?" : _L("Unsaved changes! Save changes before opening another file?##sgda"),GUI_WARN_OPEN);
       } else {
         openFileDialog(GUI_FILE_OPEN);
       }
       break;
     case GUI_ACTION_OPEN_BACKUP:
       if (modified) {
-        showWarning(_L("Unsaved changes! Save changes before opening backup?##sgda"),GUI_WARN_OPEN_BACKUP);
+        showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before opening backup?" : _L("Unsaved changes! Save changes before opening backup?##sgda"),GUI_WARN_OPEN_BACKUP);
       } else {
         openFileDialog(GUI_FILE_OPEN_BACKUP);
       }
@@ -59,7 +59,7 @@ void FurnaceGUI::doAction(int what) {
         openFileDialog(GUI_FILE_SAVE);
       } else {
         if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-          showError(fmt::sprintf(_L("Error while saving file! (%s)##sgda"),lastError));
+          showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sgda"),lastError));
         }
       }
       break;
@@ -186,7 +186,7 @@ void FurnaceGUI::doAction(int what) {
       msg.sysExLen=15;
       memcpy(msg.sysExData.get(),avRequest,15);
       if (!e->sendMidiMessage(msg)) {
-        showError(_L("Error while sending request (MIDI output not configured?)##sgda"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "Error while sending request (MIDI output not configured?)" : _L("Error while sending request (MIDI output not configured?)##sgda"));
       }
       break;
     }
@@ -194,7 +194,7 @@ void FurnaceGUI::doAction(int what) {
       e->syncReset();
       break;
     case GUI_ACTION_CLEAR:
-      showWarning(_L("Select an option: (cannot be undone!)##sgda"),GUI_WARN_CLEAR);
+      showWarning(settings.language == DIV_LANG_ENGLISH ? "Select an option: (cannot be undone!)" : _L("Select an option: (cannot be undone!)##sgda"),GUI_WARN_CLEAR);
       break;
     case GUI_ACTION_COMMAND_PALETTE:
       displayPalette=true;
@@ -659,7 +659,7 @@ void FurnaceGUI::doAction(int what) {
       }
       curIns=e->addInstrument(cursor.xCoarse);
       if (curIns==-1) {
-        showError(_L("too many instruments!##sgda0"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "too many instruments!" : _L("too many instruments!##sgda0"));
       } else {
         if (settings.blankIns) {
           e->song.ins[curIns]->fm.fb=0;
@@ -688,7 +688,7 @@ void FurnaceGUI::doAction(int what) {
         int prevIns=curIns;
         curIns=e->addInstrument(cursor.xCoarse);
         if (curIns==-1) {
-          showError(_L("too many instruments!##sgda1"));
+          showError(settings.language == DIV_LANG_ENGLISH ? "too many instruments!" : _L("too many instruments!##sgda1"));
         } else {
           (*e->song.ins[curIns])=(*e->song.ins[prevIns]);
           wantScrollList=true;
@@ -783,7 +783,7 @@ void FurnaceGUI::doAction(int what) {
 
       curWave=e->addWave();
       if (curWave==-1) {
-        showError(_L("too many wavetables!##sgda0"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgda0"));
       } else {
         wantScrollList=true;
         e->song.wave[curWave]->len=finalWidth;
@@ -801,7 +801,7 @@ void FurnaceGUI::doAction(int what) {
         int prevWave=curWave;
         curWave=e->addWave();
         if (curWave==-1) {
-          showError(_L("too many wavetables!##sgda1"));
+          showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgda1"));
         } else {
           (*e->song.wave[curWave])=(*e->song.wave[prevWave]);
           wantScrollList=true;
@@ -893,7 +893,7 @@ void FurnaceGUI::doAction(int what) {
 
       curLocalWave=e->addLocalWave(curIns);
       if (curLocalWave==-1) {
-        showError(_L("too many wavetables!##sgda0"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgda0"));
       } else {
         wantScrollList=true;
         e->song.ins[curIns]->std.local_waves[curLocalWave]->len=finalWidth;
@@ -927,7 +927,7 @@ void FurnaceGUI::doAction(int what) {
         }
 
         if (curSample == -1) {
-            showError(_L("too many samples!##sgda0"));
+            showError(settings.language == DIV_LANG_ENGLISH ? "too many samples!" : _L("too many samples!##sgda0"));
         }
         else {
             wantScrollList = true;
@@ -947,7 +947,7 @@ void FurnaceGUI::doAction(int what) {
           cSample->name=fmt::sprintf(_L("Sample %d"),curSample);
         }
         if (curSample==-1) {
-          showError(_L("too many samples!##sgda1"));
+          showError(settings.language == DIV_LANG_ENGLISH ? "too many samples!" : _L("too many samples!##sgda1"));
         } else {
           e->lockEngine([this,prevSample]() {
             DivSample* sample=e->getSample(curSample);
@@ -1151,7 +1151,7 @@ void FurnaceGUI::doAction(int what) {
 
       e->lockEngine([this,sample,pos]() {
         if (!sample->insert(pos,sampleClipboardLen)) {
-          showError(_L("couldn't paste! make sure your sample is 8 or 16-bit.##sgda"));
+          showError(settings.language == DIV_LANG_ENGLISH ? "couldn't paste! make sure your sample is 8 or 16-bit." : _L("couldn't paste! make sure your sample is 8 or 16-bit.##sgda"));
         } else {
           if (sample->depth==DIV_SAMPLE_DEPTH_8BIT) {
             for (size_t i=0; i<sampleClipboardLen; i++) {
@@ -1618,7 +1618,7 @@ void FurnaceGUI::doAction(int what) {
       DivSample* sample=e->song.sample[curSample];
       curIns=e->addInstrument(cursor.xCoarse);
       if (curIns==-1) {
-        showError(_L("too many instruments!##sgda2"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "too many instruments!" : _L("too many instruments!##sgda2"));
       } else {
         e->song.ins[curIns]->type=insType;
         e->song.ins[curIns]->name=sample->name;
@@ -1653,13 +1653,13 @@ void FurnaceGUI::doAction(int what) {
       DivSample* sample=e->song.sample[curSample];
       SAMPLE_OP_BEGIN;
       if (end-start<1) {
-        showError(_L("select at least one sample!##sgda"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "select at least one sample!" : _L("select at least one sample!##sgda"));
       } else if (end-start>256) {
-        showError(_L("maximum size is 256 samples!##sgda"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "maximum size is 256 samples!" : _L("maximum size is 256 samples!##sgda"));
       } else {
         curWave=e->addWave();
         if (curWave==-1) {
-          showError(_L("too many wavetables!##sgda2"));
+          showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgda2"));
         } else {
           DivWavetable* wave=e->song.wave[curWave];
           wave->min=0;

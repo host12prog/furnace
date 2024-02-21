@@ -238,7 +238,7 @@ void FurnaceGUI::drawExportAmigaVal(bool onWindow) {
       i.data->finish();
       delete i.data;
     }
-    showError(fmt::sprintf(_LP("Done! Baked %d files.##sgeo", (int)out.size()),(int)out.size()));
+    showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Done! Baked %d files." : _LP("Done! Baked %d files.##sgeo", (int)out.size()),(int)out.size()));
     ImGui::CloseCurrentPopup();
   }
 }
@@ -420,7 +420,7 @@ void FurnaceGUI::drawExport() {
         ImGui::CloseCurrentPopup();
       }
       if (ImGui::Button(_L("Tell tildearrow this must be a mistake##sgeo"))) {
-        showError(_L("yeah, it's a bug. write a bug report in the GitHub page and tell me how did you get here.##sgeo"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "yeah, it's a bug. write a bug report in the GitHub page and tell me how did you get here." : _L("yeah, it's a bug. write a bug report in the GitHub page and tell me how did you get here.##sgeo"));
         ImGui::CloseCurrentPopup();
       }
       break;

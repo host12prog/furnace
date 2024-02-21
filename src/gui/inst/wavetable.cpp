@@ -304,7 +304,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
             if (ImGui::Button(ICON_FA_UPLOAD "##WSCopy")) {
             curWave=e->addWave();
             if (curWave==-1) {
-                showError(_L("too many wavetables!##sgiwave"));
+                showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgiwave"));
             } else {
                 wantScrollList=true;
                 MARK_MODIFIED;
