@@ -356,7 +356,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         ImGui::EndTabItem();
     }
 
-    /*if (ImGui::BeginTabItem(_L("Local Waves##sgiwave"))) 
+    if (ImGui::BeginTabItem(_L("Local Waves##sgiwave"))) 
     {
         if (ImGui::Button(ICON_FA_PLUS "##WaveAdd")) 
         {
@@ -450,5 +450,5 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         }
 
         ImGui::EndTabItem();
-    }*/
+    }
 }
