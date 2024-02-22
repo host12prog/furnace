@@ -1529,7 +1529,7 @@ class FurnaceGUI {
   std::vector<String> availAudioDrivers;
 
   bool quit, warnQuit, willCommit, edit, editClone, isPatUnique, modified, displayError, displayExporting, vgmExportLoop, zsmExportLoop, zsmExportOptimize, vgmExportPatternHints;
-  bool vgmExportDirectStream, displayInsTypeList, displayWaveSizeList;
+  bool vgmExportDirectStream, displayInsTypeList, displayWaveSizeList, displayLocalWaveSizeList;
   bool portrait, injectBackUp, mobileMenuOpen, warnColorPushed;
   bool wantCaptureKeyboard, oldWantCaptureKeyboard, displayMacroMenu;
   bool displayNew, displayExport, displayPalette, fullScreen, preserveChanPos, sysDupCloneChannels, wantScrollList, noteInputPoly, notifyWaveChange;

@@ -1059,6 +1059,8 @@ bool DivEngine::changeSystem(int index, DivSystem which, bool preserveOrder) {
   renderSamples();
   reset();
   BUSY_END;
+
+  return true;
 }
 
 bool DivEngine::addSystem(DivSystem which) {

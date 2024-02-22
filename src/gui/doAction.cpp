@@ -887,7 +887,7 @@ void FurnaceGUI::doAction(int what) {
         finalWidth=waveSizeList[0].width;
         finalHeight=waveSizeList[0].height;
       } else if (waveSizeList.size()>1) {
-        displayWaveSizeList=true;
+        displayLocalWaveSizeList=true;
         break;
       }
 

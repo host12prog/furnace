@@ -5416,6 +5416,11 @@ bool FurnaceGUI::loop() {
       ImGui::OpenPopup("WaveSizeList");
     }
 
+    if (displayLocalWaveSizeList) {
+      displayLocalWaveSizeList=false;
+      ImGui::OpenPopup("LocalWaveSizeList");
+    }
+
     if (displayExporting) {
       displayExporting=false;
       ImGui::OpenPopup("Rendering...###Rendering...");
@@ -5992,18 +5997,58 @@ bool FurnaceGUI::loop() {
 
     if (ImGui::BeginPopup("WaveSizeList",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoSavedSettings)) {
       char temp[1024];
-      for (FurnaceGUIWaveSizeEntry i: waveSizeList) {
+      for (FurnaceGUIWaveSizeEntry i: waveSizeList) 
+      {
         snprintf(temp,1023,"%d×%d (%s)",i.width,i.height,i.sys);
-        if (ImGui::MenuItem(temp)) {
+
+        if (ImGui::MenuItem(temp)) 
+        {
           // create wave
           curWave=e->addWave();
-          if (curWave==-1) {
+          if (curWave==-1) 
+          {
             showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sggu"));
-          } else {
+          } 
+          else 
+          {
             e->song.wave[curWave]->len=i.width;
             e->song.wave[curWave]->max=i.height-1;
             for (int j=0; j<i.width; j++) {
               e->song.wave[curWave]->data[j]=(j*i.height)/i.width;
+            }
+            MARK_MODIFIED;
+            RESET_WAVE_MACRO_ZOOM;
+          }
+        }
+      }
+      ImGui::EndPopup();
+    }
+
+    if (ImGui::BeginPopup("LocalWaveSizeList",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoSavedSettings)) 
+    {
+      char temp[1024];
+
+      for (FurnaceGUIWaveSizeEntry i: waveSizeList) 
+      {
+        snprintf(temp,1023,"%d×%d (%s)",i.width,i.height,i.sys);
+
+        if (ImGui::MenuItem(temp)) 
+        {
+          // create wave
+          DivInstrument* ins = e->song.ins[curIns];
+          curWave=e->addLocalWave(curIns);
+          if (curWave==-1) 
+          {
+            showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sggu"));
+          } 
+          else 
+          {
+            wantScrollList=true;
+            e->song.ins[curIns]->std.local_waves[curLocalWave]->len=i.width;
+            e->song.ins[curIns]->std.local_waves[curLocalWave]->max=i.height-1;
+            for (int j=0; j<i.width; j++) 
+            {
+              e->song.ins[curIns]->std.local_waves[curLocalWave]->data[j]=(j*i.height)/i.width;
             }
             MARK_MODIFIED;
             RESET_WAVE_MACRO_ZOOM;
