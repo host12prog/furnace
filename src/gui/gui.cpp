@@ -6035,7 +6035,6 @@ bool FurnaceGUI::loop() {
         if (ImGui::MenuItem(temp)) 
         {
           // create wave
-          DivInstrument* ins = e->song.ins[curIns];
           curWave=e->addLocalWave(curIns);
           if (curWave==-1) 
           {
