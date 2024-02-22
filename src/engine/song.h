@@ -177,6 +177,8 @@ struct DivSubSong {
   void clearData();
   void optimizePatterns();
   void rearrangePatterns();
+  void sortOrders();
+  void makePatUnique();
 
   DivSubSong(): 
     hilightA(4),

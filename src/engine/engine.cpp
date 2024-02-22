@@ -1008,7 +1008,16 @@ void DivEngine::delUnusedSamples() {
   BUSY_END;
 }
 
-void DivEngine::changeSystem(int index, DivSystem which, bool preserveOrder) {
+bool DivEngine::changeSystem(int index, DivSystem which, bool preserveOrder) {
+  if (index<0 || index>=song.systemLen) {
+    lastError="invalid index";
+    return false;
+  }
+  if (chans-getChannelCount(song.system[index])+getChannelCount(which)>DIV_MAX_CHANS) {
+    lastError=fmt::sprintf("max number of total channels is %d",DIV_MAX_CHANS);
+    return false;
+  }
+
   int chanCount=chans;
   quitDispatch();
   BUSY_BEGIN;
@@ -1091,6 +1100,101 @@ bool DivEngine::addSystem(DivSystem which) {
         if (outs>0) song.patchbay.reserve(outs);
         for (unsigned int j=0; j<outs; j++) {
           song.patchbay.push_back((i<<20)|(j<<16)|j);
+        }
+      }
+    }
+  }
+  saveLock.unlock();
+  renderSamples();
+  reset();
+  BUSY_END;
+  return true;
+}
+
+bool DivEngine::cloneSystem(int index, bool add_chip_count, bool pat) {
+  if (song.systemLen>=DIV_MAX_CHIPS) {
+    lastError=fmt::sprintf("max number of systems is %d",DIV_MAX_CHIPS);
+    return false;
+  }
+  if (chans+getChannelCount(song.system[index])>DIV_MAX_CHANS) {
+    lastError=fmt::sprintf("max number of total channels is %d",DIV_MAX_CHANS);
+    return false;
+  }
+  quitDispatch();
+  BUSY_BEGIN;
+  saveLock.lock();
+  song.system[index + 1] = song.system[index];
+  song.systemVol[index + 1] = song.systemVol[index];
+  song.systemPan[index + 1] = song.systemPan[index];
+  song.systemPanFR[index + 1] = song.systemPanFR[index];
+  song.systemFlags[index + 1] = song.systemFlags[index]; //will it copy the std::map???
+  //yeah, seems like it copies the map!
+  if(add_chip_count)
+  {
+    song.systemLen++;
+  }
+  
+  recalcChans();
+  saveLock.unlock();
+  BUSY_END;
+  initDispatch();
+  BUSY_BEGIN;
+  saveLock.lock();
+  if (song.patchbayAuto) {
+    autoPatchbay();
+  } else {
+    int i=song.systemLen-1;
+    if (disCont[i].dispatch!=NULL) {
+      unsigned int outs=disCont[i].dispatch->getOutputCount();
+      if (outs>16) outs=16;
+      if (outs<2) {
+        song.patchbay.reserve(DIV_MAX_OUTPUTS);
+        for (unsigned int j=0; j<DIV_MAX_OUTPUTS; j++) {
+          song.patchbay.push_back((i<<20)|j);
+        }
+      } else {
+        if (outs>0) song.patchbay.reserve(outs);
+        for (unsigned int j=0; j<outs; j++) {
+          song.patchbay.push_back((i<<20)|(j<<16)|j);
+        }
+      }
+    }
+  }
+  // duplicate patterns
+  if (pat) 
+  {
+    int srcChan=0;
+    int destChan=0;
+    for (int i=0; i<index; i++) 
+    {
+      srcChan+=getChannelCount(song.system[i]);
+    }
+    for (int i=0; i<index+1; i++) 
+    {
+      destChan+=getChannelCount(song.system[i]);
+    }
+    for (DivSubSong* i: song.subsong) 
+    {
+      for (int j=0; j<getChannelCount(song.system[index]); j++) 
+      {
+        i->pat[destChan+j].effectCols=i->pat[srcChan+j].effectCols;
+        i->chanShow[destChan+j]=i->chanShow[srcChan+j];
+        i->chanShowChanOsc[destChan+j]=i->chanShowChanOsc[srcChan+j];
+        i->chanCollapse[destChan+j]=i->chanCollapse[srcChan+j];
+        i->chanName[destChan+j]=i->chanName[srcChan+j];
+        i->chanShortName[destChan+j]=i->chanShortName[srcChan+j];
+
+        for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+        {
+          if (i->pat[srcChan+j].data[k]!=NULL) 
+          {
+            i->pat[srcChan+j].data[k]->copyOn(i->pat[destChan+j].getPattern(k,true));
+          }
+        }
+
+        for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+        {
+          i->orders.ord[destChan+j][k]=i->orders.ord[srcChan+j][k];
         }
       }
     }
@@ -2525,6 +2629,24 @@ int DivEngine::addWave() {
   return waveCount;
 }
 
+int DivEngine::addLocalWave(int inst) {
+  DivInstrument* ins = song.ins[inst];
+  if (ins->std.local_waves.size()>=256) {
+    lastError="too many wavetables!";
+    return -1;
+  }
+  BUSY_BEGIN;
+  saveLock.lock();
+  DivWavetable* wave=new DivWavetable;
+  int waveCount=(int)ins->std.local_waves.size();
+  ins->std.local_waves.push_back(wave);
+  //song.waveLen=waveCount+1;
+  //checkAssetDir(song.waveDir,song.wave.size());
+  saveLock.unlock();
+  BUSY_END;
+  return waveCount;
+}
+
 int DivEngine::addWavePtr(DivWavetable* which) {
   if (song.wave.size()>=256) {
     lastError="too many wavetables!";
@@ -2698,6 +2820,24 @@ void DivEngine::delWave(int index) {
   BUSY_BEGIN;
   saveLock.lock();
   delWaveUnsafe(index);
+  saveLock.unlock();
+  BUSY_END;
+}
+
+void DivEngine::delLocalWaveUnsafe(int index, DivInstrument* ins) {
+  if (index>=0 && index<(int)ins->std.local_waves.size()) {
+    delete ins->std.local_waves[index];
+    ins->std.local_waves.erase(ins->std.local_waves.begin()+index);
+    //song.waveLen=song.wave.size();
+    //removeAsset(song.waveDir,index);
+    //checkAssetDir(song.waveDir,song.wave.size());
+  }
+}
+
+void DivEngine::delLocalWave(int index, DivInstrument* ins) {
+  BUSY_BEGIN;
+  saveLock.lock();
+  delLocalWaveUnsafe(index, ins);
   saveLock.unlock();
   BUSY_END;
 }

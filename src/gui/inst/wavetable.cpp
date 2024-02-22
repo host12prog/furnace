@@ -33,6 +33,55 @@ extern "C" {
 
 class FurnaceGUI;
 
+void FurnaceGUI::localWaveListItem(int i, float* wavePreview, DivInstrument* ins)
+{
+    DivWavetable* wave = ins->std.local_waves[i];
+
+    for (int ii=0; ii<wave->len; ii++) 
+    {
+        wavePreview[ii] = wave->data[ii];
+    }
+
+    if (wave->len>0) wavePreview[wave->len]=wave->data[wave->len-1];
+    ImVec2 curPos=ImGui::GetCursorPos();
+    ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign,ImVec2(0,0.5f));
+
+    if (ImGui::Selectable(fmt::sprintf(" %d##_WAVE%d\n",i,i).c_str(),curLocalWave == i,0,ImVec2(0,ImGui::GetFrameHeight()))) 
+    {
+        curLocalWave = i;
+    }
+
+    ImGui::PopStyleVar();
+    curPos.x+=ImGui::CalcTextSize("2222").x;
+    if (wantScrollList && curLocalWave == i) ImGui::SetScrollHereY();
+    if (ImGui::IsItemHovered()) 
+    {
+        if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) 
+        {
+            waveEditOpen = true;
+            nextWindow = GUI_WINDOW_WAVE_EDIT;
+        }
+    }
+
+    ImGui::SameLine();
+    ImGui::SetCursorPos(curPos);
+    PlotNoLerp(fmt::sprintf("##_WAVEP%d",i).c_str(),wavePreview,wave->len+1,0,NULL,0,wave->max,ImVec2(ImGui::GetContentRegionAvail().x,ImGui::GetFrameHeight()));
+}
+
+void FurnaceGUI::actualLocalWaveList()
+{
+    float wavePreview[257];
+
+    DivInstrument* ins = e->song.ins[curIns];
+
+    for (int i=0; i<(int)ins->std.local_waves.size(); i++) 
+    {
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        localWaveListItem(i,wavePreview,ins);
+    }
+}
+
 void FurnaceGUI::insTabWave(DivInstrument* ins)
 {
     if (ImGui::BeginTabItem(_L("Wavetable##sgiwave"))) 
@@ -255,7 +304,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
             if (ImGui::Button(ICON_FA_UPLOAD "##WSCopy")) {
             curWave=e->addWave();
             if (curWave==-1) {
-                showError(_L("too many wavetables!##sgiwave"));
+                showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgiwave"));
             } else {
                 wantScrollList=true;
                 MARK_MODIFIED;
@@ -306,4 +355,100 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
 
         ImGui::EndTabItem();
     }
+
+    /*if (ImGui::BeginTabItem(_L("Local Waves##sgiwave"))) 
+    {
+        if (ImGui::Button(ICON_FA_PLUS "##WaveAdd")) 
+        {
+            doAction(GUI_ACTION_LOCAL_WAVE_LIST_ADD);
+        }
+        if (ImGui::IsItemHovered()) 
+        {
+            ImGui::SetTooltip(_L("Add##sgdl1"));
+        }
+        ImGui::SameLine();
+        if (ImGui::Button(ICON_FA_FILES_O "##WaveClone")) 
+        {
+            doAction(GUI_ACTION_WAVE_LIST_DUPLICATE);
+        }
+        if (ImGui::IsItemHovered()) 
+        {
+            ImGui::SetTooltip(_L("Duplicate##sgdl3"));
+        }
+        ImGui::SameLine();
+        if (ImGui::Button(ICON_FA_FOLDER_OPEN "##WaveLoad")) 
+        {
+            doAction(GUI_ACTION_WAVE_LIST_OPEN);
+        }
+        if (ImGui::IsItemHovered()) 
+        {
+            ImGui::SetTooltip(_L("Open##sgdl1"));
+        }
+        if (ImGui::BeginPopupContextItem("WaveOpenOpt")) 
+        {
+            if (ImGui::MenuItem(_L("replace...##sgdl3"))) 
+            {
+                doAction((curWave>=0 && curWave<(int)e->song.wave.size())?GUI_ACTION_WAVE_LIST_OPEN_REPLACE:GUI_ACTION_WAVE_LIST_OPEN);
+            }
+            ImGui::EndPopup();
+        }
+        ImGui::SameLine();
+        if (ImGui::Button(ICON_FA_FLOPPY_O "##WaveSave")) 
+        {
+            doAction(GUI_ACTION_WAVE_LIST_SAVE);
+        }
+        if (ImGui::IsItemHovered()) 
+        {
+            ImGui::SetTooltip(_L("Save##sgdl3"));
+        }
+        if (ImGui::BeginPopupContextItem("WaveSaveFormats",ImGuiMouseButton_Right)) 
+        {
+            if (ImGui::MenuItem(_L("save as .dmw...##sgdl"))) 
+            {
+                doAction(GUI_ACTION_WAVE_LIST_SAVE_DMW);
+            }
+            if (ImGui::MenuItem(_L("save raw...##sgdl0"))) 
+            {
+                doAction(GUI_ACTION_WAVE_LIST_SAVE_RAW);
+            }
+            ImGui::EndPopup();
+        }
+        ImGui::SameLine();
+        if (ImGui::Button(ICON_FA_ARROW_UP "##WaveUp")) 
+        {
+            doAction(GUI_ACTION_WAVE_LIST_MOVE_UP);
+        }
+        if (ImGui::IsItemHovered()) 
+        {
+            ImGui::SetTooltip(_L("Move up##sgdl1"));
+        }
+        ImGui::SameLine();
+        if (ImGui::Button(ICON_FA_ARROW_DOWN "##WaveDown")) 
+        {
+            doAction(GUI_ACTION_WAVE_LIST_MOVE_DOWN);
+        }
+        if (ImGui::IsItemHovered()) 
+        {
+            ImGui::SetTooltip(_L("Move down##sgdl1"));
+        }
+        ImGui::SameLine();
+        pushDestColor();
+        if (ImGui::Button(ICON_FA_TIMES "##WaveDelete")) 
+        {
+            doAction(GUI_ACTION_LOCAL_WAVE_LIST_DELETE);
+        }
+        popDestColor();
+        if (ImGui::IsItemHovered()) 
+        {
+            ImGui::SetTooltip(_L("Delete##sgdl4"));
+        }
+        ImGui::Separator();
+        if (ImGui::BeginTable("WaveListScroll",1,ImGuiTableFlags_ScrollY)) 
+        {
+            actualLocalWaveList();
+            ImGui::EndTable();
+        }
+
+        ImGui::EndTabItem();
+    }*/
 }

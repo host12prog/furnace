@@ -940,6 +940,9 @@ class DivEngine {
     // add wavetable
     int addWave();
 
+    // add local wavetable
+    int addLocalWave(int inst);
+
     // add wavetable from pointer
     int addWavePtr(DivWavetable* which);
 
@@ -949,6 +952,10 @@ class DivEngine {
     // delete wavetable
     void delWave(int index);
     void delWaveUnsafe(int index);
+
+    // delete local wavetable
+    void delLocalWave(int index, DivInstrument* ins);
+    void delLocalWaveUnsafe(int index, DivInstrument* ins);
 
     // add sample
     int addSample();
@@ -1160,7 +1167,7 @@ class DivEngine {
     void delUnusedSamples();
 
     // change system
-    void changeSystem(int index, DivSystem which, bool preserveOrder=true);
+    bool changeSystem(int index, DivSystem which, bool preserveOrder=true);
 
     // add system
     bool addSystem(DivSystem which);
@@ -1170,6 +1177,9 @@ class DivEngine {
 
     // move system
     bool swapSystem(int src, int dest, bool preserveOrder=true);
+
+    // clone system
+    bool cloneSystem(int index, bool add_chip_count, bool pat);
 
     // add effect
     bool addEffect(DivEffectType which);

@@ -371,7 +371,7 @@ void FurnaceGUI::drawSettings() {
     if (!settingsOpen) {
       if (settingsChanged) {
         settingsOpen=true;
-        showWarning(_L("Do you want to save your settings?##sgse"),GUI_WARN_CLOSE_SETTINGS);
+        showWarning(settings.language == DIV_LANG_ENGLISH ? "Do you want to save your settings?" : _L("Do you want to save your settings?##sgse"),GUI_WARN_CLOSE_SETTINGS);
       } else {
         settingsOpen=false;
       }
@@ -976,7 +976,7 @@ void FurnaceGUI::drawSettings() {
             if (ImGui::BeginCombo("##AudioDevice",_L("<click on OK or Apply first>##sgse"))) {
               ImGui::Text(_L("ALERT - TRESPASSER DETECTED##sgse"));
               if (ImGui::IsItemHovered()) {
-                showError(_L("you have been arrested for trying to engage with a disabled combo box.##sgse"));
+                showError(settings.language == DIV_LANG_ENGLISH ? "you have been arrested for trying to engage with a disabled combo box." : _L("you have been arrested for trying to engage with a disabled combo box.##sgse"));
                 ImGui::CloseCurrentPopup();
               }
               ImGui::EndCombo();
@@ -1834,7 +1834,7 @@ void FurnaceGUI::drawSettings() {
         }
         ImGui::SameLine();
         if (ImGui::Button(_L("Reset defaults##sgse0"))) {
-          showWarning(_L("Are you sure you want to reset the keyboard settings?##sgse"),GUI_WARN_RESET_KEYBINDS);
+          showWarning(settings.language == DIV_LANG_ENGLISH ? "Are you sure you want to reset the keyboard settings?" : _L("Are you sure you want to reset the keyboard settings?##sgse"),GUI_WARN_RESET_KEYBINDS);
         }
         if (ImGui::TreeNode(_L("Global hotkeys##sgse"))) {
           KEYBIND_CONFIG_BEGIN("keysGlobal");
@@ -2221,7 +2221,7 @@ void FurnaceGUI::drawSettings() {
         }
         ImGui::SameLine();
         if (ImGui::Button(_L("Reset##sgse"))) {
-          showWarning(_L("Are you sure you want to reset the workspace layout?##sgse"),GUI_WARN_RESET_LAYOUT);
+          showWarning(settings.language == DIV_LANG_ENGLISH ? "Are you sure you want to reset the workspace layout?" : _L("Are you sure you want to reset the workspace layout?##sgse"),GUI_WARN_RESET_LAYOUT);
         }
 
         bool allowEditDockingB=settings.allowEditDocking;
@@ -3496,7 +3496,7 @@ CONFIG_SECTION(_L("Color##sgse")) {
   }
   ImGui::SameLine();
   if (ImGui::Button(_L("Reset defaults##sgse1"))) {
-    showWarning(_L("Are you sure you want to reset the color scheme?##sgse"),GUI_WARN_RESET_COLORS);
+    showWarning(settings.language == DIV_LANG_ENGLISH ? "Are you sure you want to reset the color scheme?" : _L("Are you sure you want to reset the color scheme?##sgse"),GUI_WARN_RESET_COLORS);
   }
   if (ImGui::TreeNode(_L("Interface##sgse1"))) {
     if (ImGui::SliderInt(_L("Frame shading##sgse"),&settings.guiColorsShading,0,100,"%d%%##sgse")) {

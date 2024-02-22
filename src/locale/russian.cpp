@@ -614,6 +614,7 @@ void DivLocale::addTranslationsRussian()
     strings["remove chip...##sggu"].plurals[0] = "убрать чип...";
     strings["Preserve channel positions##sggu1"].plurals[0] = "Сохранить положение каналов";
     strings["cannot remove chip! (##sggu"].plurals[0] = "не могу убрать чип! (";
+    strings["cannot change chip! (##sggu"].plurals[0] = "не могу сменить чип! (";
     strings["open built-in assets directory##sggu"].plurals[0] = "открыть внутреннюю папку с ресурсами";
     strings["restore backup##sggu"].plurals[0] = "загрузить резервную копию";
     strings["exit...##sggu"].plurals[0] = "выйти...";
@@ -1527,9 +1528,11 @@ void DivLocale::addTranslationsRussian()
     //   sgpm  src/gui/patManager.cpp
 
     strings["Pattern Manager###Pattern Manager"].plurals[0] = "Менеджер паттернов###Pattern Manager";
-    strings["Global Tasks##sgpm"].plurals[0] = "Глобальное редактирование";
+    strings["Global Tasks:##sgpm"].plurals[0] = "Глобальное редактирование:";
     strings["De-duplicate patterns##sgpm"].plurals[0] = "Удалить дубликаты паттернов";
     strings["Re-arrange patterns##sgpm"].plurals[0] = "Отсортировать паттерны";
+    strings["Sort orders##sgpm"].plurals[0] = "Отсортировать столбцы матрицы паттернов";
+    strings["Make patterns unique##sgpm"].plurals[0] = "Сделать паттерны уникальными";
     strings["Pattern %.2X\n- not allocated##sgpm"].plurals[0] = "Паттерн %.2X\n- не используется";
     strings["Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase##sgpm"].plurals[0] = "Паттерн %.2X\n- сколько раз встречается в треке: %d (%.0f%%)\n\nПКМ, чтобы удалить";
 
@@ -2284,9 +2287,14 @@ void DivLocale::addTranslationsRussian()
 
     strings["Chip Manager###Chip Manager"].plurals[0] = "Менеджер чипов###Chip Manager";
     strings["Preserve channel order##sgsm"].plurals[0] = "Сохранить порядок каналов";
+    strings["Clone channel data##sgsm"].plurals[0] = "Клонировать данные каналов";
     strings["Name##sgsm"].plurals[0] = "Название";
     strings["Actions##sgsm"].plurals[0] = "Действия";
     strings["(drag to swap chips)##sgsm"].plurals[0] = "(перетащите, чтобы поменять местами каналы)";
+    strings["Clone##SysDup"].plurals[0] = "Клонировать##SysDupl";
+    strings["cannot duplicate chip! (##sgsm"].plurals[0] = "не получилось склонировать чип! (";
+    strings["max number of systems is %d##sgsm"].plurals[0] = "максимальное число чипов/систем не может превышать %d";
+    strings["max number of total channels is %d##sgsm"].plurals[0] = "максимальное общее число каналов не может превышать %d";
     strings["Change##SysChange"].plurals[0] = "Сменить##SysChange";
     strings["Are you sure you want to remove this chip?##sgsm"].plurals[0] = "Вы действительно хотите удалить этот чип?";
     strings["Remove##sgsm"].plurals[0] = "Удалить";
@@ -4742,6 +4750,7 @@ void DivLocale::addTranslationsRussian()
     strings["Power##sgiwave"].plurals[0] = "Степень";
     strings["Global##sgiwave"].plurals[0] = "Глобально";
     strings["wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"].plurals[0] = "синтезатор волновых таблиц выключен.\nиспользуйте макрос волны для задания волновой таблицы для этого инструмента.";
+    strings["Local Waves##sgiwave"].plurals[0] = "Локальные волн. табл.";
 
     //   sgiX1     src/gui/inst/x1_010.cpp
 

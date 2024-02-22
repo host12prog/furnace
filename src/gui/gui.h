@@ -769,6 +769,22 @@ enum FurnaceGUIActions {
   GUI_ACTION_WAVE_LIST_DIR_VIEW,
   GUI_ACTION_WAVE_LIST_MAX,
 
+  GUI_ACTION_LOCAL_WAVE_LIST_MIN,
+  GUI_ACTION_LOCAL_WAVE_LIST_ADD,
+  GUI_ACTION_LOCAL_WAVE_LIST_DUPLICATE,
+  GUI_ACTION_LOCAL_WAVE_LIST_OPEN,
+  GUI_ACTION_LOCAL_WAVE_LIST_OPEN_REPLACE,
+  GUI_ACTION_LOCAL_WAVE_LIST_SAVE,
+  GUI_ACTION_LOCAL_WAVE_LIST_SAVE_DMW,
+  GUI_ACTION_LOCAL_WAVE_LIST_SAVE_RAW,
+  GUI_ACTION_LOCAL_WAVE_LIST_MOVE_UP,
+  GUI_ACTION_LOCAL_WAVE_LIST_MOVE_DOWN,
+  GUI_ACTION_LOCAL_WAVE_LIST_DELETE,
+  GUI_ACTION_LOCAL_WAVE_LIST_EDIT,
+  GUI_ACTION_LOCAL_WAVE_LIST_UP,
+  GUI_ACTION_LOCAL_WAVE_LIST_DOWN,
+  GUI_ACTION_LOCAL_WAVE_LIST_MAX,
+
   GUI_ACTION_SAMPLE_LIST_MIN,
   GUI_ACTION_SAMPLE_LIST_ADD,
   GUI_ACTION_SAMPLE_LIST_DUPLICATE,
@@ -1516,7 +1532,7 @@ class FurnaceGUI {
   bool vgmExportDirectStream, displayInsTypeList, displayWaveSizeList;
   bool portrait, injectBackUp, mobileMenuOpen, warnColorPushed;
   bool wantCaptureKeyboard, oldWantCaptureKeyboard, displayMacroMenu;
-  bool displayNew, displayExport, displayPalette, fullScreen, preserveChanPos, wantScrollList, noteInputPoly, notifyWaveChange;
+  bool displayNew, displayExport, displayPalette, fullScreen, preserveChanPos, sysDupCloneChannels, wantScrollList, noteInputPoly, notifyWaveChange;
   bool displayPendingIns, pendingInsSingle, displayPendingRawSample, snesFilterHex, modTableHex, displayEditString;
   bool mobileEdit;
   bool killGraphics;
@@ -2029,7 +2045,7 @@ class FurnaceGUI {
   int pendingLayoutImportStep;
   FixedQueue<bool*,64> pendingLayoutImportReopen;
 
-  int curIns, curWave, curSample, curOctave, curOrder, playOrder, prevIns, oldRow, editStep, exportLoops, soloChan, orderEditMode, orderCursor;
+  int curIns, curWave, curLocalWave, curSample, curOctave, curOrder, playOrder, prevIns, oldRow, editStep, exportLoops, soloChan, orderEditMode, orderCursor;
   int loopOrder, loopRow, loopEnd, isClipping, newSongCategory, latchTarget;
   int wheelX, wheelY, dragSourceX, dragSourceXFine, dragSourceY, dragDestinationX, dragDestinationXFine, dragDestinationY, oldBeat, oldBar;
   int curGroove, exitDisabledTimer;
@@ -2501,10 +2517,12 @@ class FurnaceGUI {
   void drawOrderButtons();
 
   void actualWaveList();
+  void actualLocalWaveList();
   void actualSampleList();
 
   void insListItem(int index, int dir, int asset);
   void waveListItem(int index, float* wavePreview, int dir, int asset);
+  void localWaveListItem(int i, float* wavePreview, DivInstrument* ins);
   void sampleListItem(int index, int dir, int asset);
 
   void toggleMobileUI(bool enable, bool force=false);

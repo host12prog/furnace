@@ -880,7 +880,7 @@ void FurnaceGUI::drawSampleEdit() {
           sample->prepareUndo(true);
           e->lockEngine([this,sample]() {
             if (!sample->resize(resizeSize)) {
-              showError(_L("couldn't resize! make sure your sample is 8 or 16-bit.##sgse"));
+              showError(settings.language == DIV_LANG_ENGLISH ? "couldn't resize! make sure your sample is 8 or 16-bit." : _L("couldn't resize! make sure your sample is 8 or 16-bit.##sgse"));
             }
             e->renderSamples(curSample);
           });
@@ -950,7 +950,7 @@ void FurnaceGUI::drawSampleEdit() {
           sample->prepareUndo(true);
           e->lockEngine([this,sample,targetRate]() {
             if (!sample->resample(targetRate,resampleTarget,resampleStrat)) {
-              showError(_L("couldn't resample! make sure your sample is 8 or 16-bit.##sgse"));
+              showError(settings.language == DIV_LANG_ENGLISH ? "couldn't resample! make sure your sample is 8 or 16-bit." : _L("couldn't resample! make sure your sample is 8 or 16-bit.##sgse"));
             }
             e->renderSamples(curSample);
           });
@@ -1070,7 +1070,7 @@ void FurnaceGUI::drawSampleEdit() {
           sample->prepareUndo(true);
           e->lockEngine([this,sample,pos]() {
             if (!sample->insert(pos,silenceSize)) {
-              showError(_L("couldn't insert! make sure your sample is 8 or 16-bit.##sgse"));
+              showError(settings.language == DIV_LANG_ENGLISH ? "couldn't insert! make sure your sample is 8 or 16-bit." : _L("couldn't insert! make sure your sample is 8 or 16-bit.##sgse"));
             }
             e->renderSamples(curSample);
           });
@@ -1267,10 +1267,10 @@ void FurnaceGUI::drawSampleEdit() {
         }
         if (ImGui::Button(_L("Apply##sgse2"))) {
           if (sampleCrossFadeLoopLength>sample->loopStart) {
-            showError(_L("Crossfade: length would go out of bounds. Aborted...##sgse"));
+            showError(settings.language == DIV_LANG_ENGLISH ? "Crossfade: length would go out of bounds. Aborted..." : _L("Crossfade: length would go out of bounds. Aborted...##sgse"));
             ImGui::CloseCurrentPopup();
           } else if (sampleCrossFadeLoopLength>(sample->loopEnd-sample->loopStart)) {
-            showError(_L("Crossfade: length would overflow loopStart. Try a smaller random value.##sgse"));
+            showError(settings.language == DIV_LANG_ENGLISH ? "Crossfade: length would overflow loopStart. Try a smaller random value." : _L("Crossfade: length would overflow loopStart. Try a smaller random value.##sgse"));
             ImGui::CloseCurrentPopup();
           } else {
             sample->prepareUndo(true);

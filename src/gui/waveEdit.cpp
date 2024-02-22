@@ -893,7 +893,7 @@ void FurnaceGUI::drawWaveEdit() {
                       // Copy original wave to temp buffer
                       // If longer than 256 samples, return
                       if (wave->len>256) {
-                        showError(_L("wavetable longer than 256 samples!##sgwe"));
+                        showError(settings.language == DIV_LANG_ENGLISH ? "wavetable longer than 256 samples!" : _L("wavetable longer than 256 samples!##sgwe"));
                         return;
                       }
                       memcpy(origData,wave->data,wave->len*sizeof(int));

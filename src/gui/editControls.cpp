@@ -488,7 +488,7 @@ void FurnaceGUI::drawMobileControls() {
           mobileMenuOpen=false;
           //doAction(GUI_ACTION_NEW);
           if (modified) {
-            showWarning(_L("Unsaved changes! Save changes before creating a new song?##sgec"),GUI_WARN_NEW);
+            showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before creating a new song?" : _L("Unsaved changes! Save changes before creating a new song?##sgec"),GUI_WARN_NEW);
           } else {
             displayNew=true;
           }
@@ -645,7 +645,7 @@ void FurnaceGUI::drawMobileControls() {
               i.data->finish();
               delete i.data;
             }
-            showError(fmt::sprintf(_LP("Done! Baked %d files.##sgec", (int)out.size()),(int)out.size()));
+            showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Done! Baked %d files." : _LP("Done! Baked %d files.##sgec", (int)out.size()),(int)out.size()));
           }
         }
 
