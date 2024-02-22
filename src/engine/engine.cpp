@@ -1008,7 +1008,16 @@ void DivEngine::delUnusedSamples() {
   BUSY_END;
 }
 
-void DivEngine::changeSystem(int index, DivSystem which, bool preserveOrder) {
+bool DivEngine::changeSystem(int index, DivSystem which, bool preserveOrder) {
+  if (index<0 || index>=song.systemLen) {
+    lastError="invalid index";
+    return false;
+  }
+  if (chans-getChannelCount(song.system[index])+getChannelCount(which)>DIV_MAX_CHANS) {
+    lastError=fmt::sprintf("max number of total channels is %d",DIV_MAX_CHANS);
+    return false;
+  }
+
   int chanCount=chans;
   quitDispatch();
   BUSY_BEGIN;
@@ -1102,7 +1111,7 @@ bool DivEngine::addSystem(DivSystem which) {
   return true;
 }
 
-bool DivEngine::cloneSystem(int index, bool add_chip_count) {
+bool DivEngine::cloneSystem(int index, bool add_chip_count, bool pat) {
   if (song.systemLen>=DIV_MAX_CHIPS) {
     lastError=fmt::sprintf("max number of systems is %d",DIV_MAX_CHIPS);
     return false;
@@ -1147,6 +1156,45 @@ bool DivEngine::cloneSystem(int index, bool add_chip_count) {
         if (outs>0) song.patchbay.reserve(outs);
         for (unsigned int j=0; j<outs; j++) {
           song.patchbay.push_back((i<<20)|(j<<16)|j);
+        }
+      }
+    }
+  }
+  // duplicate patterns
+  if (pat) 
+  {
+    int srcChan=0;
+    int destChan=0;
+    for (int i=0; i<index; i++) 
+    {
+      srcChan+=getChannelCount(song.system[i]);
+    }
+    for (int i=0; i<index+1; i++) 
+    {
+      destChan+=getChannelCount(song.system[i]);
+    }
+    for (DivSubSong* i: song.subsong) 
+    {
+      for (int j=0; j<getChannelCount(song.system[index]); j++) 
+      {
+        i->pat[destChan+j].effectCols=i->pat[srcChan+j].effectCols;
+        i->chanShow[destChan+j]=i->chanShow[srcChan+j];
+        i->chanShowChanOsc[destChan+j]=i->chanShowChanOsc[srcChan+j];
+        i->chanCollapse[destChan+j]=i->chanCollapse[srcChan+j];
+        i->chanName[destChan+j]=i->chanName[srcChan+j];
+        i->chanShortName[destChan+j]=i->chanShortName[srcChan+j];
+
+        for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+        {
+          if (i->pat[srcChan+j].data[k]!=NULL) 
+          {
+            i->pat[srcChan+j].data[k]->copyOn(i->pat[destChan+j].getPattern(k,true));
+          }
+        }
+
+        for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+        {
+          i->orders.ord[destChan+j][k]=i->orders.ord[srcChan+j][k];
         }
       }
     }

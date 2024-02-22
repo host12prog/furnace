@@ -1167,7 +1167,7 @@ class DivEngine {
     void delUnusedSamples();
 
     // change system
-    void changeSystem(int index, DivSystem which, bool preserveOrder=true);
+    bool changeSystem(int index, DivSystem which, bool preserveOrder=true);
 
     // add system
     bool addSystem(DivSystem which);
@@ -1179,7 +1179,7 @@ class DivEngine {
     bool swapSystem(int src, int dest, bool preserveOrder=true);
 
     // clone system
-    bool cloneSystem(int index, bool add_chip_count);
+    bool cloneSystem(int index, bool add_chip_count, bool pat);
 
     // add effect
     bool addEffect(DivEffectType which);

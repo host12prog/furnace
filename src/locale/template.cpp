@@ -672,6 +672,7 @@ void DivLocale::addTranslationsTemplate()
     strings["remove chip...##sggu"].plurals[0] = "=remove chip...";
     strings["Preserve channel positions##sggu1"].plurals[0] = "=Preserve channel positions";
     strings["cannot remove chip! (##sggu"].plurals[0] = "=cannot remove chip! (";
+    strings["cannot change chip! (##sggu"].plurals[0] = "=cannot change chip! (";
     strings["open built-in assets directory##sggu"].plurals[0] = "=open built-in assets directory";
     strings["restore backup##sggu"].plurals[0] = "=restore backup";
     strings["exit...##sggu"].plurals[0] = "=exit...";
@@ -1582,9 +1583,11 @@ void DivLocale::addTranslationsTemplate()
     //   sgpm  src/gui/patManager.cpp
 
     strings["Pattern Manager###Pattern Manager"].plurals[0] = "=Pattern Manager###Pattern Manager";
-    strings["Global Tasks##sgpm"].plurals[0] = "=Global Tasks";
+    strings["Global Tasks:##sgpm"].plurals[0] = "=Global Tasks:";
     strings["De-duplicate patterns##sgpm"].plurals[0] = "=De-duplicate patterns";
     strings["Re-arrange patterns##sgpm"].plurals[0] = "=Re-arrange patterns";
+    strings["Sort orders##sgpm"].plurals[0] = "=Sort orders";
+    strings["Make patterns unique##sgpm"].plurals[0] = "=Make patterns unique";
     strings["Pattern %.2X\n- not allocated##sgpm"].plurals[0] = "=Pattern %.2X\n- not allocated";
     strings["Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase##sgpm"].plurals[0] = "=Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase";
 
@@ -2335,10 +2338,11 @@ void DivLocale::addTranslationsTemplate()
 
     strings["Chip Manager###Chip Manager"].plurals[0] = "=Chip Manager###Chip Manager";
     strings["Preserve channel order##sgsm"].plurals[0] = "=Preserve channel order";
+    strings["Clone channel data##sgsm"].plurals[0] = "=Clone channel data";
     strings["Name##sgsm"].plurals[0] = "=Name";
     strings["Actions##sgsm"].plurals[0] = "=Actions";
     strings["(drag to swap chips)##sgsm"].plurals[0] = "=(drag to swap chips)";
-    strings["Duplicate##SysDupl"].plurals[0] = "=Duplicate##SysDupl";
+    strings["Clone##SysDup"].plurals[0] = "=Clone##SysDupl";
     strings["cannot duplicate chip! (##sgsm"].plurals[0] = "=cannot duplicate chip! (";
     strings["max number of systems is %d##sgsm"].plurals[0] = "=max number of systems is %d";
     strings["max number of total channels is %d##sgsm"].plurals[0] = "=max number of total channels is %d";

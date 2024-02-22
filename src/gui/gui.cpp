@@ -4268,10 +4268,14 @@ bool FurnaceGUI::loop() {
               if (ImGui::BeginMenu(fmt::sprintf("%d. %s##_SYSC%d",i+1,getSystemName(e->song.system[i]),i).c_str())) {
                 DivSystem picked=systemPicker(false);
                 if (picked!=DIV_SYSTEM_NULL) {
-                  e->changeSystem(i,picked,preserveChanPos);
-                  MARK_MODIFIED;
-                  if (e->song.autoSystem) {
-                    autoDetectSystem();
+                  if (e->changeSystem(i,picked,preserveChanPos)) {
+                    MARK_MODIFIED;
+                    if (e->song.autoSystem) {
+                      autoDetectSystem();
+                    }
+                    updateWindowTitle();
+                  } else {
+                    showError((settings.language == DIV_LANG_ENGLISH ? "cannot remove chip! (" : _L("cannot change chip! (##sggu"))+e->getLastError()+")");
                   }
                   updateWindowTitle();
                   ImGui::CloseCurrentPopup();
@@ -7301,6 +7305,7 @@ FurnaceGUI::FurnaceGUI():
   displayPalette(false),
   fullScreen(false),
   preserveChanPos(false),
+  sysDupCloneChannels(true),
   wantScrollList(false),
   noteInputPoly(true),
   notifyWaveChange(false),
