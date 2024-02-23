@@ -5006,6 +5006,7 @@ bool FurnaceGUI::loop() {
                   pushRecentSys(copyOfName.c_str());
                 }
               }
+              break;
             case GUI_FILE_SAMPLE_OPEN: {
               String errs = (settings.language == DIV_LANG_ENGLISH ? "there were some errors while loading samples:\n" : _L("there were some errors while loading samples:\n#sggu"));
               bool warn=false;
