@@ -2966,7 +2966,7 @@ void DivEngine::doPasteWaves(int index, bool local, int inst)
 
   data.push_back(tempS);
 
-  int max_val = 0;
+  //int max_val = 0;
 
   bool do_break = false;
 
