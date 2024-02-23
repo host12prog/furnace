@@ -2163,7 +2163,7 @@ void DivInstrument::readFeatureLW(SafeReader& reader, short version) {
   READ_FEAT_BEGIN;
 
   int waves = reader.readI();
-  
+
   for (int i=0; i<waves; i++) 
   {
     DivWavetable* wave=new DivWavetable;
@@ -2280,7 +2280,7 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
       readFeatureE3(reader,version);
     } else if (memcmp(featCode,"PN",2)==0) { // PowerNoise
       readFeaturePN(reader,version);
-    } else if (memcmp(featCode,"S2",2)==0) { // PowerNoise
+    } else if (memcmp(featCode,"S2",2)==0) { // SID2
       readFeatureS2(reader,version);
     } else if (memcmp(featCode,"LW",2)==0) { // local wavetables
       readFeatureLW(reader,version);
