@@ -5016,7 +5016,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["1Dxx: Set attack of operator 4 (0 to F)##sesd0"].plurals[0] = "1Dxx: Definir ataque do operador 4 (0 a F)";
     strings["2Axy: Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform from 0 to 3 in OPL2 and 0 to 7 in OPL3)##sesd"].plurals[0] = "2Axy: Definir forma de onda (x: operador de 1 a 4 (0 para todos os ops.); y: forma de onda de 0 a 3 no OPL2 e 0 a 7 no OPL3)";
     strings["50xy: Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)##sesd1"].plurals[0] = "50xy: Definir AM (x: operador de 1 a 4 (0 para todos os ops.); y: AM)";
-    strings["51xy: Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)##sesd1"].plurals[0] = "51xy: Definir nível de sustentação (x: operador de 1 a 4 (0 para todos os ops.); y: sustentação)";escalar
+    strings["51xy: Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)##sesd1"].plurals[0] = "51xy: Definir nível de sustentação (x: operador de 1 a 4 (0 para todos os ops.); y: sustentação)";
     strings["52xy: Set release (x: operator from 1 to 4 (0 for all ops); y: release)##sesd1"].plurals[0] = "52xy: Definir repouso (x: operador de 1 a 4 (0 para todos os ops.); y: repouso)";
     strings["53xy: Set vibrato (x: operator from 1 to 4 (0 for all ops); y: enabled)##sesd0"].plurals[0] = "53xy: Definir vibrato (x: operador de 1 a 4 (0 para todos os ops.); y: habilitado)";
     strings["54xy: Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale from 0 to 3)##sesd1"].plurals[0] = "54xy: Definir escalonamento de envelope (x: operador de 1 a 4 (0 para todos os ops.); y: escala de 0 a 3)";
