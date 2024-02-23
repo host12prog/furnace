@@ -2633,6 +2633,37 @@ void DivEngine::delInstrument(int index) {
   BUSY_END;
 }
 
+void DivEngine::addWaveUnsafe(bool local, int inst) {
+  if(local)
+  {
+    if (song.ins[inst]->std.local_waves.size()>=256) 
+    {
+      lastError="too many wavetables!";
+      return;
+    }
+  }
+  else
+  {
+    if (song.wave.size()>=256) 
+    {
+      lastError="too many wavetables!";
+      return;
+    }
+  }
+  DivWavetable* wave=new DivWavetable;
+  if(local)
+  {
+    song.ins[inst]->std.local_waves.push_back(wave);
+  }
+  else
+  {
+    int waveCount=(int)song.wave.size();
+    song.wave.push_back(wave);
+    song.waveLen=waveCount+1;
+    checkAssetDir(song.waveDir,song.wave.size());
+  }
+}
+
 int DivEngine::addWave() {
   if (song.wave.size()>=256) {
     lastError="too many wavetables!";
@@ -2877,6 +2908,141 @@ void DivEngine::delLocalWave(int index, DivInstrument* ins) {
   BUSY_BEGIN;
   saveLock.lock();
   delLocalWaveUnsafe(index, ins);
+  saveLock.unlock();
+  BUSY_END;
+}
+
+int find_max(int* data, int len)
+{
+  int maxi = 0;
+
+  for(int i = 0; i < len; i++)
+  {
+    if(data[i] > maxi) maxi = data[i];
+  }
+
+  return maxi;
+}
+
+bool non_zero_wave(int* data, int len)
+{
+  for(int i = 0; i < len; i++)
+  {
+    if(data[i] != 0) return true;
+  }
+
+  return false;
+}
+
+void DivEngine::doPasteWaves(int index, bool local, int inst)
+{
+  String clipb;
+
+  char* clipText=SDL_GetClipboardText();
+  if (clipText!=NULL) {
+    if (clipText[0]) {
+      clipb=clipText;
+    }
+    SDL_free(clipText);
+  }
+
+  logD("pasting wavetables from string");
+
+  std::vector<String> data;
+  String tempS;
+
+  for (char i: clipb) 
+  {
+    if (i=='\r') continue;
+    if (i=='\n') 
+    {
+      data.push_back(tempS);
+      tempS="";
+      continue;
+    }
+
+    tempS+=i;
+  }
+
+  data.push_back(tempS);
+
+  int max_val = 0;
+
+  bool do_break = false;
+
+  for(int i = 0; i < MIN((int)data.size(), 256 - (index)); i++)
+  {
+    String tempSs = data[i];
+    logD("Line %d: \"%s\"", i, tempSs.c_str());
+
+    int wave[256] = { 0 };
+    int wave_pos = 0;
+
+    char* temp = (char*)tempSs.c_str();
+    char* line = (char*)calloc(1, (strlen(temp) + 1) * sizeof(char));
+    strcpy(line, temp);
+    const char* delimiters = ",.; ";
+
+    char* numb = (char*)1;
+    int passes = 0;
+
+    while (numb != NULL)
+    {
+      numb = strtok(passes == 0 ? line : NULL, delimiters);
+      passes++;
+
+      if(numb != NULL)
+      {
+        if(wave_pos > 255)
+        {
+          do_break = true;
+          goto end;
+        }
+
+        wave[wave_pos] = atoi(numb);
+        logD("val %d", wave[wave_pos]);
+        wave_pos++;
+      }
+    }
+
+    if(non_zero_wave(wave, wave_pos))
+    {
+      addWaveUnsafe(local, inst);
+      
+      DivWavetable* w = NULL;
+
+      if(local)
+      {
+        w = song.ins[inst]->std.local_waves.back();
+      }
+      else
+      {
+        w = song.wave.back();
+      }
+
+      w->len = wave_pos;
+      w->max = find_max(wave, wave_pos);
+      memcpy(w->data, wave, w->len * sizeof(w->data[0]));
+    }
+
+    end:;
+
+    if(line)
+    {
+      free(line);
+    }
+
+    if(do_break)
+    {
+      break;
+    }
+  }
+}
+
+void DivEngine::pasteWaves(int index, bool local, int inst) {
+  BUSY_BEGIN;
+  saveLock.lock();
+  doPasteWaves(index, local, inst);
   saveLock.unlock();
   BUSY_END;
 }

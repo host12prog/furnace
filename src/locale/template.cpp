@@ -1074,6 +1074,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Wavetable cursor up##sggc1"].plurals[0] = "=Wavetable cursor up";
     strings["Wavetable cursor down##sggc1"].plurals[0] = "=Wavetable cursor down";
     strings["Wavetables: toggle folders/standard view##sggc1"].plurals[0] = "=Wavetables: toggle folders/standard view";
+    strings["Paste wavetables from clipboard##sggc"].plurals[0] = "=Paste wavetables from clipboard";
+    strings["Paste local wavetables from clipboard##sggc1"].plurals[0] = "=Paste local wavetables from clipboard";
     strings["---Sample list##sggc"].plurals[0] = "=---Sample list";
     strings["Add sample##sggc2"].plurals[0] = "=Add sample";
     strings["Duplicate sample##sggc2"].plurals[0] = "=Duplicate sample";

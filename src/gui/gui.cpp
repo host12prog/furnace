@@ -1565,6 +1565,17 @@ void FurnaceGUI::keyDown(SDL_Event& ev) {
       }
       break;
     }
+    case GUI_WINDOW_INS_EDIT: {
+      auto actionI=actionMapLocalWaveList.find(mapped);
+      if (actionI!=actionMapLocalWaveList.cend()) {
+        int action=actionI->second;
+        if (action>0) {
+          doAction(action);
+          return;
+        }
+      }
+      break;
+    }
     case GUI_WINDOW_WAVE_LIST: {
       auto actionI=actionMapWaveList.find(mapped);
       if (actionI!=actionMapWaveList.cend()) {

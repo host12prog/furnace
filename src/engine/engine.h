@@ -940,6 +940,7 @@ class DivEngine {
 
     // add wavetable
     int addWave();
+    void addWaveUnsafe(bool local, int inst = 0);
 
     // add local wavetable
     int addLocalWave(int inst);
@@ -954,6 +955,10 @@ class DivEngine {
     // delete wavetable
     void delWave(int index);
     void delWaveUnsafe(int index);
+
+    //paste wavetables from clipboard
+    void pasteWaves(int index, bool local = false, int inst = 0);
+    void doPasteWaves(int index, bool local = false, int inst = 0);
 
     // delete local wavetable
     void delLocalWave(int index, DivInstrument* ins);

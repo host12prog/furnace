@@ -2113,6 +2113,7 @@ void FurnaceGUI::drawSettings() {
           UI_KEYBIND_CONFIG(GUI_ACTION_WAVE_LIST_UP);
           UI_KEYBIND_CONFIG(GUI_ACTION_WAVE_LIST_DOWN);
           UI_KEYBIND_CONFIG(GUI_ACTION_WAVE_LIST_DIR_VIEW);
+          UI_KEYBIND_CONFIG(GUI_ACTION_WAVE_LIST_PASTE_CLIPBOARD);
 
           KEYBIND_CONFIG_END;
           ImGui::TreePop();
@@ -2133,6 +2134,7 @@ void FurnaceGUI::drawSettings() {
           UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_EDIT);
           UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_UP);
           UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_DOWN);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_PASTE_CLIPBOARD);
 
           KEYBIND_CONFIG_END;
           ImGui::TreePop();
@@ -5035,6 +5037,7 @@ void FurnaceGUI::parseKeybinds() {
   actionMapPat.clear();
   actionMapInsList.clear();
   actionMapWaveList.clear();
+  actionMapLocalWaveList.clear();
   actionMapSampleList.clear();
   actionMapSample.clear();
   actionMapOrders.clear();
@@ -5060,6 +5063,12 @@ void FurnaceGUI::parseKeybinds() {
   for (int i=GUI_ACTION_WAVE_LIST_MIN+1; i<GUI_ACTION_WAVE_LIST_MAX; i++) {
     if (actionKeys[i]&FURK_MASK) {
       actionMapWaveList[actionKeys[i]]=i;
+    }
+  }
+
+  for (int i=GUI_ACTION_LOCAL_WAVE_LIST_MIN+1; i<GUI_ACTION_LOCAL_WAVE_LIST_MAX; i++) {
+    if (actionKeys[i]&FURK_MASK) {
+      actionMapLocalWaveList[actionKeys[i]]=i;
     }
   }
 

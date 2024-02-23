@@ -1022,6 +1022,8 @@ void DivLocale::addTranslationsRussian()
     strings["Wavetable cursor up##sggc1"].plurals[0] = "Курсор в списке волновых таблиц вверх";
     strings["Wavetable cursor down##sggc1"].plurals[0] = "Курсор в списке волновых таблиц вниз";
     strings["Wavetables: toggle folders/standard view##sggc1"].plurals[0] = "Волновые таблицы: переключиться между видом с разбиением по папкам и обычным видом";
+    strings["Paste wavetables from clipboard##sggc"].plurals[0] = "Вставить волновые таблицы из буфера обмена";
+    strings["Paste local wavetables from clipboard##sggc1"].plurals[0] = "Вставить локальные волновые таблицы из буфера обмена";
     strings["---Sample list##sggc"].plurals[0] = "---Sample list";
     strings["Add sample##sggc2"].plurals[0] = "Добавить сэмпл";
     strings["Duplicate sample##sggc2"].plurals[0] = "Клонировать сэмпл";

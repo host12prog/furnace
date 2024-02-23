@@ -772,6 +772,7 @@ enum FurnaceGUIActions {
   GUI_ACTION_WAVE_LIST_UP,
   GUI_ACTION_WAVE_LIST_DOWN,
   GUI_ACTION_WAVE_LIST_DIR_VIEW,
+  GUI_ACTION_WAVE_LIST_PASTE_CLIPBOARD,
   GUI_ACTION_WAVE_LIST_MAX,
 
   GUI_ACTION_LOCAL_WAVE_LIST_MIN,
@@ -788,6 +789,7 @@ enum FurnaceGUIActions {
   GUI_ACTION_LOCAL_WAVE_LIST_EDIT,
   GUI_ACTION_LOCAL_WAVE_LIST_UP,
   GUI_ACTION_LOCAL_WAVE_LIST_DOWN,
+  GUI_ACTION_LOCAL_WAVE_LIST_PASTE_CLIPBOARD,
   GUI_ACTION_LOCAL_WAVE_LIST_MAX,
 
   GUI_ACTION_SAMPLE_LIST_MIN,
@@ -2114,6 +2116,7 @@ class FurnaceGUI {
   std::map<int,int> actionMapSample;
   std::map<int,int> actionMapInsList;
   std::map<int,int> actionMapWaveList;
+  std::map<int,int> actionMapLocalWaveList;
   std::map<int,int> actionMapSampleList;
 
   std::vector<DivRegWrite> pgProgram;
