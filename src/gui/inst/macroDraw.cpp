@@ -348,20 +348,23 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
 
-        char ttext[100] = {0};
+        if (i.bit30)
+        {
+          char ttext[100] = {0};
 
-        if(i.macro_id == DIV_MACRO_ARP)
-        {
-          strcpy(ttext, _L(macroHoverBit30Arp(0, 1.0, NULL).c_str()));
-        }
-        else
-        {
-          strcpy(ttext, _L(macroHoverBit30Wave(0, 1.0, NULL).c_str()));
-        }
-        
-        if (ImGui::Checkbox(ttext,(bool*)&i.get_macro()->val[16]))
-        {
-          //i.get_macro()->mode=modeVal;
+          if(i.macro_id == DIV_MACRO_ARP)
+          {
+            strcpy(ttext, _L(macroHoverBit30Arp(0, 1.0, NULL).c_str()));
+          }
+          else
+          {
+            strcpy(ttext, _L(macroHoverBit30Wave(0, 1.0, NULL).c_str()));
+          }
+          
+          if (ImGui::Checkbox(ttext,(bool*)&i.get_macro()->val[16]))
+          {
+            //i.get_macro()->mode=modeVal;
+          }
         }
 
         ImGui::TableNextColumn();
@@ -442,20 +445,23 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
 
         ImGui::TableNextColumn();
 
-        char ttext[100] = {0};
+        if (i.bit30)
+        {
+          char ttext[100] = {0};
 
-        if(i.macro_id == DIV_MACRO_ARP)
-        {
-          strcpy(ttext, _L(macroHoverBit30Arp(0, 1.0, NULL).c_str()));
-        }
-        else
-        {
-          strcpy(ttext, _L(macroHoverBit30Wave(0, 1.0, NULL).c_str()));
-        }
+          if(i.macro_id == DIV_MACRO_ARP)
+          {
+            strcpy(ttext, _L(macroHoverBit30Arp(0, 1.0, NULL).c_str()));
+          }
+          else
+          {
+            strcpy(ttext, _L(macroHoverBit30Wave(0, 1.0, NULL).c_str()));
+          }
 
-        if (ImGui::Checkbox(ttext,(bool*)&i.get_macro()->val[17]))
-        {
-          //i.get_macro()->mode=modeVal;
+          if (ImGui::Checkbox(ttext,(bool*)&i.get_macro()->val[17]))
+          {
+            //i.get_macro()->mode=modeVal;
+          }
         }
 
         ImGui::EndTable();
