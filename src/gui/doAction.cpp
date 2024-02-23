@@ -697,7 +697,7 @@ void FurnaceGUI::doAction(int what) {
             DivInstrument* prev = e->song.ins[prevIns];
             DivInstrument* cur = e->song.ins[curIns];
 
-            for(int i=0; i<e->song.ins[curIns]->std.local_waves.size(); i++) 
+            for(int i=0; i<(int)e->song.ins[curIns]->std.local_waves.size(); i++) 
             {
               cur->std.local_waves[i] = new DivWavetable();
               *cur->std.local_waves[i] = *prev->std.local_waves[i];
