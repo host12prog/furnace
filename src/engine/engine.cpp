@@ -1515,7 +1515,7 @@ DivWavetable* DivEngine::getWave(int index) {
 }
 
 DivWavetable* DivEngine::getLocalWave(DivInstrument* ins, int index) {
-  if (index<0 || index>=ins->std.local_waves.size()) {
+  if (index<0 || index>=(int)ins->std.local_waves.size()) {
     if (ins->std.local_waves.size() > 0) {
       return ins->std.local_waves[0];
     } else {
