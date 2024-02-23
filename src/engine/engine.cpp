@@ -2683,7 +2683,7 @@ int DivEngine::addLocalWavePtr(int inst, DivWavetable* which) {
   }
   BUSY_BEGIN;
   saveLock.lock();
-  int waveCount=(int)ins->std.local_waves.size();
+  //int waveCount=(int)ins->std.local_waves.size();
   ins->std.local_waves.push_back(which);
   //song.waveLen=waveCount+1;
   //checkAssetDir(song.waveDir,song.wave.size());

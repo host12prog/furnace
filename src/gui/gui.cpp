@@ -4574,6 +4574,7 @@ bool FurnaceGUI::loop() {
           break;
         case GUI_SCENE_WAVETABLE:
           waveEditOpen=true;
+          localWaveList = false;
           curWindow=GUI_WINDOW_WAVE_EDIT;
           MEASURE(waveEdit,drawWaveEdit());
           MEASURE(piano,drawPiano());
@@ -7580,6 +7581,7 @@ FurnaceGUI::FurnaceGUI():
   sampleEditOpen(false),
   aboutOpen(false),
   settingsOpen(false),
+  localWaveList(false),
   mixerOpen(false),
   debugOpen(false),
   inspectorOpen(false),

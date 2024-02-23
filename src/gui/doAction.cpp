@@ -851,6 +851,7 @@ void FurnaceGUI::doAction(int what) {
       break;
     case GUI_ACTION_WAVE_LIST_EDIT:
       waveEditOpen=true;
+      localWaveList = false;
       break;
     case GUI_ACTION_WAVE_LIST_UP:
       if (--curWave<0) curWave=0;
@@ -951,6 +952,7 @@ void FurnaceGUI::doAction(int what) {
       break;
     case GUI_ACTION_LOCAL_WAVE_LIST_EDIT:
       waveEditOpen=true;
+      localWaveList = true;
       break;
     case GUI_ACTION_LOCAL_WAVE_LIST_UP:
       if (--curLocalWave<0) curLocalWave=0;

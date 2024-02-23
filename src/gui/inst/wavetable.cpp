@@ -49,6 +49,7 @@ void FurnaceGUI::localWaveListItem(int i, float* wavePreview, DivInstrument* ins
     if (ImGui::Selectable(fmt::sprintf(" %d##_WAVE%d\n",i,i).c_str(),curLocalWave == i,0,ImVec2(0,ImGui::GetFrameHeight()))) 
     {
         curLocalWave = i;
+        localWaveList = true;
     }
 
     ImGui::PopStyleVar();
@@ -59,6 +60,7 @@ void FurnaceGUI::localWaveListItem(int i, float* wavePreview, DivInstrument* ins
         if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) 
         {
             waveEditOpen = true;
+            localWaveList = true;
             nextWindow = GUI_WINDOW_WAVE_EDIT;
         }
     }
@@ -388,7 +390,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         {
             if (ImGui::MenuItem(_L("replace...##sgdl3"))) 
             {
-                doAction((curWave>=0 && curWave<(int)e->song.wave.size())?GUI_ACTION_WAVE_LIST_OPEN_REPLACE:GUI_ACTION_WAVE_LIST_OPEN);
+                doAction((curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size())?GUI_ACTION_LOCAL_WAVE_LIST_OPEN_REPLACE:GUI_ACTION_LOCAL_WAVE_LIST_OPEN);
             }
             ImGui::EndPopup();
         }

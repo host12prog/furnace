@@ -407,7 +407,16 @@ void FurnaceGUI::drawWaveEdit() {
     ImGui::SetNextWindowSizeConstraints(ImVec2(300.0f*dpiScale,300.0f*dpiScale),ImVec2(canvasW,canvasH));
   }
   if (ImGui::Begin("Wavetable Editor",&waveEditOpen,globalWinFlags|(settings.allowEditDocking?0:ImGuiWindowFlags_NoDocking),_L("Wavetable Editor###Wavetable Editor"))) {
-    if (curWave<0 || curWave>=(int)e->song.wave.size()) {
+    bool show_selection_prompt = true;
+    if(localWaveList)
+    {
+      show_selection_prompt = curLocalWave<0 || curLocalWave>=(int)e->song.ins[curIns]->std.local_waves.size();
+    }
+    else
+    {
+      show_selection_prompt = curWave<0 || curWave>=(int)e->song.wave.size();
+    }
+    if (show_selection_prompt) {
       ImGui::SetCursorPosY(ImGui::GetCursorPosY()+(ImGui::GetContentRegionAvail().y-ImGui::GetFrameHeightWithSpacing()*2.0f)*0.5f);
       CENTER_TEXT(_L("no wavetable selected##sgwe0"));
       ImGui::Text(_L("no wavetable selected##sgwe1"));
@@ -446,7 +455,16 @@ void FurnaceGUI::drawWaveEdit() {
         ImGui::EndTable();
       }
     } else {
-      DivWavetable* wave=e->song.wave[curWave];
+      DivWavetable* wave=NULL;
+
+      if(localWaveList)
+      {
+        wave = e->song.ins[curIns]->std.local_waves[curLocalWave];
+      }
+      else
+      {
+        wave = e->song.wave[curWave];
+      }
 
       if (ImGui::BeginTable("WEProps",2)) {
         ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch);
