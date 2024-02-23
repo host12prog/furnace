@@ -2288,6 +2288,7 @@ void DivLocale::addTranslationsRussian()
     strings["Chip Manager###Chip Manager"].plurals[0] = "Менеджер чипов###Chip Manager";
     strings["Preserve channel order##sgsm"].plurals[0] = "Сохранить порядок каналов";
     strings["Clone channel data##sgsm"].plurals[0] = "Клонировать данные каналов";
+    strings["Clone at end##sgsm"].plurals[0] = "Клонировать в конец";
     strings["Name##sgsm"].plurals[0] = "Название";
     strings["Actions##sgsm"].plurals[0] = "Действия";
     strings["(drag to swap chips)##sgsm"].plurals[0] = "(перетащите, чтобы поменять местами каналы)";

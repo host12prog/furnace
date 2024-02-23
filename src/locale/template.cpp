@@ -2339,6 +2339,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Chip Manager###Chip Manager"].plurals[0] = "=Chip Manager###Chip Manager";
     strings["Preserve channel order##sgsm"].plurals[0] = "=Preserve channel order";
     strings["Clone channel data##sgsm"].plurals[0] = "=Clone channel data";
+    strings["Clone at end##sgsm"].plurals[0] = "=Clone at end";
     strings["Name##sgsm"].plurals[0] = "=Name";
     strings["Actions##sgsm"].plurals[0] = "=Actions";
     strings["(drag to swap chips)##sgsm"].plurals[0] = "=(drag to swap chips)";
