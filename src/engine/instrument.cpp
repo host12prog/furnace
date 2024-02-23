@@ -583,7 +583,7 @@ void DivInstrument::writeFeatureWS(SafeWriter* w) {
   w->writeI(ws.wave2);
   w->writeC(ws.rateDivider);
   w->writeC(ws.effect);
-  w->writeC(ws.enabled);
+  w->writeC((ws.enabled ? 1 : 0) | ((ws.wave1global ? 1 : 0) << 1) | ((ws.wave2global ? 1 : 0) << 2));
   w->writeC(ws.global);
   w->writeC(ws.speed);
   w->writeC(ws.param1);
@@ -1863,7 +1863,10 @@ void DivInstrument::readFeatureWS(SafeReader& reader, short version) {
   ws.wave2=reader.readI();
   ws.rateDivider=reader.readC();
   ws.effect=reader.readC();
-  ws.enabled=reader.readC();
+  unsigned char temp = reader.readC();
+  ws.enabled = temp & 1;
+  ws.wave1global = temp & 2;
+  ws.wave2global = temp & 4;
   ws.global=reader.readC();
   ws.speed=reader.readC();
   ws.param1=reader.readC();

@@ -4831,6 +4831,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Amount##sgiwave"].plurals[0] = "=Amount";
     strings["Power##sgiwave"].plurals[0] = "=Power";
     strings["Global##sgiwave"].plurals[0] = "=Global";
+    strings["Global##sgiwave1"].plurals[0] = "=Global";
+    strings["Global##sgiwave2"].plurals[0] = "=Global##jesus";
     strings["wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"].plurals[0] = "=wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.";
     strings["Local Waves##sgiwave"].plurals[0] = "=Local Waves";
 

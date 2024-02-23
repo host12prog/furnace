@@ -314,8 +314,8 @@ void DivWaveSynth::init(DivInstrument* which, int w, int h, bool insChanged) {
     divCounter=0;
     subDivCounter=0;
 
-    changeWave1(state.wave1,true);
-    changeWave2(state.wave2);
+    changeWave1(state.wave1,true,!which->ws.wave1global,which);
+    changeWave2(state.wave2,!which->ws.wave2global,which);
     //tick(true); // ???
     first=true;
   }

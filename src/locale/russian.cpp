@@ -4753,6 +4753,8 @@ void DivLocale::addTranslationsRussian()
     strings["Amount##sgiwave"].plurals[0] = "Количество";
     strings["Power##sgiwave"].plurals[0] = "Степень";
     strings["Global##sgiwave"].plurals[0] = "Глобально";
+    strings["Global##sgiwave1"].plurals[0] = "Глобальн.";
+    strings["Global##sgiwave2"].plurals[0] = "Глобальн.##jesus";
     strings["wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"].plurals[0] = "синтезатор волновых таблиц выключен.\nиспользуйте макрос волны для задания волновой таблицы для этого инструмента.";
     strings["Local Waves##sgiwave"].plurals[0] = "Локальные волн. табл.";
 

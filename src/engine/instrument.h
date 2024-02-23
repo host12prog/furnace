@@ -702,7 +702,7 @@ struct DivInstrumentWaveSynth {
   int wave1, wave2;
   unsigned char rateDivider;
   unsigned char effect;
-  bool oneShot, enabled, global;
+  bool oneShot, enabled, global, wave1global, wave2global;
   unsigned char speed, param1, param2, param3, param4;
 
   bool operator==(const DivInstrumentWaveSynth& other);
@@ -715,6 +715,8 @@ struct DivInstrumentWaveSynth {
     wave2(0),
     rateDivider(1),
     effect(DIV_WS_NONE),
+    wave1global(true),
+    wave2global(true),
     oneShot(false),
     enabled(false),
     global(false),
