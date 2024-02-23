@@ -829,7 +829,7 @@ void DivInstrument::writeFeatureLW(SafeWriter* w)
   FEATURE_BEGIN("LW");
 
   w->writeI((int)std.local_waves.size());
-  for (int i=0; i<std.local_waves.size(); i++) 
+  for (int i=0; i<(int)std.local_waves.size(); i++) 
   {
     DivWavetable* wave=std.local_waves[i];
     wave->putWaveData(w);
