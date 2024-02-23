@@ -32,7 +32,7 @@ class DivPlatformES5503: public DivDispatch {
     int sample;
     unsigned int panleft, panright;
     bool pcm;
-    int16_t wave;
+    int wave;
     int macroVolMul;
     unsigned int wave_pos, wave_size;
     unsigned char osc_mode;

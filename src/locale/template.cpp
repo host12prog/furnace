@@ -4681,6 +4681,8 @@ void DivLocale::addTranslationsTemplate()
 
     strings["Fixed"].plurals[0] = "=Fixed";
     strings["Relative"].plurals[0] = "=Relative";
+    strings["Local"].plurals[0] = "=Local";
+    strings["Global"].plurals[0] = "=Global";
 
     //   sgiSU     src/gui/inst/su.cpp
 

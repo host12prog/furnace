@@ -4603,6 +4603,8 @@ void DivLocale::addTranslationsRussian()
 
     strings["Fixed"].plurals[0] = "Абсолютное";
     strings["Relative"].plurals[0] = "Относительное";
+    strings["Local"].plurals[0] = "Локальная";
+    strings["Global"].plurals[0] = "Глобальная";
 
     //   sgiSU     src/gui/inst/su.cpp
 

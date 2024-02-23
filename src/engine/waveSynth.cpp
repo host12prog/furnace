@@ -229,8 +229,16 @@ void DivWaveSynth::setWidth(int val) {
 
 #define SHALL_UPDATE_OUT (!state.enabled || force || (state.enabled && effectOnlyAltersOutput(state.effect)))
 
-void DivWaveSynth::changeWave1(int num, bool force) {
-  DivWavetable* w1=e->getWave(num);
+void DivWaveSynth::changeWave1(int num, bool force, bool local, DivInstrument* ins) {
+  DivWavetable* w1=NULL;
+  if(local)
+  {
+    w1 = e->getLocalWave(ins, num);
+  }
+  else
+  {
+    w1 = e->getWave(num);
+  }
   if (width<1) return;
   for (int i=0; i<width; i++) {
     if (w1->max<1 || w1->len<1) {
@@ -247,8 +255,16 @@ void DivWaveSynth::changeWave1(int num, bool force) {
   first=true;
 }
 
-void DivWaveSynth::changeWave2(int num) {
-  DivWavetable* w2=e->getWave(num);
+void DivWaveSynth::changeWave2(int num, bool local, DivInstrument* ins) {
+  DivWavetable* w2=NULL;
+  if(local)
+  {
+    w2 = e->getLocalWave(ins, num);
+  }
+  else
+  {
+    w2 = e->getWave(num);
+  }
   if (width<1) return;
   for (int i=0; i<width; i++) {
     if (w2->max<1 || w2->len<1) {

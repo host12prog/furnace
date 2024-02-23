@@ -1514,6 +1514,17 @@ DivWavetable* DivEngine::getWave(int index) {
   return song.wave[index];
 }
 
+DivWavetable* DivEngine::getLocalWave(DivInstrument* ins, int index) {
+  if (index<0 || index>=ins->std.local_waves.size()) {
+    if (ins->std.local_waves.size() > 0) {
+      return ins->std.local_waves[0];
+    } else {
+      return &song.nullWave;
+    }
+  }
+  return ins->std.local_waves[index];
+}
+
 DivSample* DivEngine::getSample(int index) {
   if (index<0 || index>=song.sampleLen) return &song.nullSample;
   return song.sample[index];

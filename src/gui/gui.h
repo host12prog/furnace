@@ -2714,7 +2714,7 @@ class FurnaceGUI {
   void valueInput(int num, bool direct=false, int target=-1);
   void orderInput(int num);
 
-  void doGenerateWave();
+  void doGenerateWave(DivWavetable* wave);
 
   void doUndoSample();
   void doRedoSample();

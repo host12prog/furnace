@@ -38,7 +38,8 @@ bool enBit30(const int val);
 String macroHoverNote(int id, float val, void* u);
 String macroHover(int id, float val, void* u);
 String macroHoverLoop(int id, float val, void* u);
-String macroHoverBit30(int id, float val, void* u);
+String macroHoverBit30Arp(int id, float val, void* u);
+String macroHoverBit30Wave(int id, float val, void* u);
 
 char* int_to_char_array(int num);
 String macroHoverGain(int id, float val, void* u);

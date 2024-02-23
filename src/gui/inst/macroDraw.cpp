@@ -200,7 +200,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
 
       // bit 30 area
       if (i.bit30) {
-        PlotCustom("##IMacroBit30",bit30Indicator,totalFit,macroDragScroll,NULL,0,1,ImVec2(availableWidth,12.0f*dpiScale),sizeof(float),i.color,i.get_macro()->len-macroDragScroll,&macroHoverBit30);
+        PlotCustom("##IMacroBit30",bit30Indicator,totalFit,macroDragScroll,NULL,0,1,ImVec2(availableWidth,12.0f*dpiScale),sizeof(float),i.color,i.get_macro()->len-macroDragScroll,i.macro_id == DIV_MACRO_ARP ? &macroHoverBit30Arp : &macroHoverBit30Wave);
         if (ImGui::IsItemClicked(ImGuiMouseButton_Left)) {
           ImGui::InhibitInertialScroll();
           macroDragStart=ImGui::GetItemRectMin();

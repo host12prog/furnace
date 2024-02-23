@@ -57,12 +57,12 @@ class DivWaveSynth {
      * @param num wavetable number.
      * @param force whether to force overwriting the current wave.
      */
-    void changeWave1(int num, bool force=false);
+    void changeWave1(int num, bool force=false, bool local = false, DivInstrument* ins = NULL);
     /**
      * change the second wave.
      * @param num wavetable number.
      */
-    void changeWave2(int num);
+    void changeWave2(int num, bool local = false, DivInstrument* ins = NULL);
     /**
      * initialize this DivWaveSynth.
      * @param which the instrument.

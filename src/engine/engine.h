@@ -625,6 +625,7 @@ class DivEngine {
     void nextBuf(float** in, float** out, int inChans, int outChans, unsigned int size);
     DivInstrument* getIns(int index, DivInstrumentType fallbackType=DIV_INS_FM);
     DivWavetable* getWave(int index);
+    DivWavetable* getLocalWave(DivInstrument* ins, int index);
     DivSample* getSample(int index);
     DivDispatch* getDispatch(int index);
     // parse old system setup description
