@@ -47,11 +47,11 @@ void DivLocale::addTranslationsPortuguese()
     //   sgab  src/gui/about.cpp          --DONE--
     //   sgch  src/gui/channels.cpp       --DONE--
     //   sgco  src/gui/chanOsc.cpp        --    -- revise
-    //   sgcl  src/gui/clock.cpp
-    //   sgcp  src/gui/commandPalette.cpp
+    //   sgcl  src/gui/clock.cpp          --DONE--
+    //   sgcp  src/gui/commandPalette.cpp --DONE--
     //   sgcf  src/gui/compatFlags.cpp    --    -- revise
     //   sgdl  src/gui/dataList.cpp       --DONE--
-    //   sgda  src/gui/doAction.cpp
+    //   sgda  src/gui/doAction.cpp       --DONE--
     //   sgec  src/gui/editControls.cpp   --    -- revise
     //   sged  src/gui/editing.cpp        --DONE--
     //   sgef  src/gui/effectList.cpp     --DONE--
@@ -77,7 +77,7 @@ void DivLocale::addTranslationsPortuguese()
     //   sgpr  src/gui/presets.cpp        --DONE--
     //   sgrv  src/gui/regView.cpp        --DONE--
     //   sgse  src/gui/sampleEdit.cpp     --    -- revise
-    //   sgse  src/gui/settings.cpp
+    //   sgse  src/gui/settings.cpp       --DONE--
     //   sgsi  src/gui/songInfo.cpp       --DONE--
     //   sgsn  src/gui/songNotes.cpp      --DONE--
     //   sgsp  src/gui/speed.cpp          --    -- revise
@@ -86,8 +86,8 @@ void DivLocale::addTranslationsPortuguese()
     //   sgsc  src/gui/sysConf.cpp        --DONE--
     //   sgsm  src/gui/sysManager.cpp     --DONE--
     //   sgsa  src/gui/sysPartNumber.cpp  --DONE--
-    //   sgsp  src/gui/sysPicker.cpp
-    //   sgut  src/gui/util.cpp
+    //   sgsp  src/gui/sysPicker.cpp      --DONE--
+    //   sgut  src/gui/util.cpp           --DONE--
     //   sgvm  src/gui/volMeter.cpp       --DONE--
     //   sgwe  src/gui/waveEdit.cpp       --DONE--
     //   sgxy  src/gui/xyOsc.cpp          --DONE--
@@ -283,7 +283,7 @@ void DivLocale::addTranslationsPortuguese()
 
     //   sgcl  src/gui/clock.cpp
 
-    strings["Clock###Clock"].plurals[0] = "=Clock###Clock";
+    strings["Clock###Clock"].plurals[0] = "Clock###Clock";
 
     //   sgcp  src/gui/commandPalette.cpp
 
@@ -1156,23 +1156,23 @@ void DivLocale::addTranslationsPortuguese()
 
     //   sgda  src/gui/doAction.cpp
 
-    strings["Unsaved changes! Save changes before creating a new song?##sgda"].plurals[0] = "=Unsaved changes! Save changes before creating a new song?";
-    strings["Unsaved changes! Save changes before opening another file?##sgda"].plurals[0] = "=Unsaved changes! Save changes before opening another file?";
-    strings["Unsaved changes! Save changes before opening backup?##sgda"].plurals[0] = "=Unsaved changes! Save changes before opening backup?";
-    strings["Error while saving file! (%s)##sgda"].plurals[0] = "=Error while saving file! (%s)";
-    strings["Error while sending request (MIDI output not configured?)##sgda"].plurals[0] = "=Error while sending request (MIDI output not configured?)";
-    strings["Select an option: (cannot be undone!)##sgda"].plurals[0] = "=Select an option: (cannot be undone!)";
-    strings["too many instruments!##sgda0"].plurals[0] = "=too many instruments!";
-    strings["too many instruments!##sgda1"].plurals[0] = "=too many instruments!";
-    strings["too many wavetables!##sgda0"].plurals[0] = "=too many wavetables!";
-    strings["too many wavetables!##sgda1"].plurals[0] = "=too many wavetables!";
-    strings["too many samples!##sgda0"].plurals[0] = "=too many samples!";
-    strings["too many samples!##sgda1"].plurals[0] = "=too many samples!";
-    strings["couldn't paste! make sure your sample is 8 or 16-bit.##sgda"].plurals[0] = "=couldn't paste! make sure your sample is 8 or 16-bit.";
-    strings["too many instruments!##sgda2"].plurals[0] = "=too many instruments!";
-    strings["select at least one sample!##sgda"].plurals[0] = "=select at least one sample!";
-    strings["maximum size is 256 samples!##sgda"].plurals[0] = "=maximum size is 256 samples!";
-    strings["too many wavetables!##sgda2"].plurals[0] = "=too many wavetables!";
+    strings["Unsaved changes! Save changes before creating a new song?##sgda"].plurals[0] = "Há mudanças não salvas! Salvar mudanças antes de criar uma nova música?";
+    strings["Unsaved changes! Save changes before opening another file?##sgda"].plurals[0] = "Há mudanças não salvas! Salvar mudanças antes de abrir outro arquivo?";
+    strings["Unsaved changes! Save changes before opening backup?##sgda"].plurals[0] = "Há mudanças não salvas! Salvar mudanças antes de abrir o backup?";
+    strings["Error while saving file! (%s)##sgda"].plurals[0] = "Erro ao salvar o arquivo! (%s)";
+    strings["Error while sending request (MIDI output not configured?)##sgda"].plurals[0] = "Erro ao enviar a requisição (a saída MIDI não está configurada?)";
+    strings["Select an option: (cannot be undone!)##sgda"].plurals[0] = "Selecione uma opção: (não pode ser desfeita!)";
+    strings["too many instruments!##sgda0"].plurals[0] = "há muitos instrumentos!";
+    strings["too many instruments!##sgda1"].plurals[0] = "há muitos instrumentos!";
+    strings["too many wavetables!##sgda0"].plurals[0] = "há muitas wavetables!";
+    strings["too many wavetables!##sgda1"].plurals[0] = "há muitas wavetables!";
+    strings["too many samples!##sgda0"].plurals[0] = "há muitas samples!";
+    strings["too many samples!##sgda1"].plurals[0] = "há muitas samples!";
+    strings["couldn't paste! make sure your sample is 8 or 16-bit.##sgda"].plurals[0] = "não pôde colar! tenha certeza de que sua sample é 8 ou 16-bit.";
+    strings["too many instruments!##sgda2"].plurals[0] = "há muitos instrumentos!";
+    strings["select at least one sample!##sgda"].plurals[0] = "selecione pelo menos uma sample!";
+    strings["maximum size is 256 samples!##sgda"].plurals[0] = "o tamanho máximo é de 256 amostras!";
+    strings["too many wavetables!##sgda2"].plurals[0] = "há muitas wavetables!";
 
     //   sgec  src/gui/editControls.cpp
 
@@ -2095,7 +2095,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["Numerator##sgsp"].plurals[0] = "Numerador";
     strings["Denominator (set to base tempo)##sgsp"].plurals[0] = "Denominador (definido para tempo base)"; // TODO revisar
     strings["Divider##sgsp"].plurals[0] = "Divisor";
-    strings["Highlight##sgsp"].plurals[0] = "Realce";
+    strings["Highlight##sgsp"].plurals[0] = "Destaque";
     strings["Pattern Length##sgsp"].plurals[0] = "Tamanho da Sequência";
     strings["Song Length##sgsp"].plurals[0] = "Tamanho da Música";
 
@@ -2922,7 +2922,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["Hexadecimal##orbH"].plurals[0] = "Hexadecimal##orbH";
     strings["Pattern##sgse1"].plurals[0] = "Sequência";
     strings["Center pattern view##sgse"].plurals[0] = "Centralizar visualização da sequência";
-    strings["Overflow pattern highlights##sgse"].plurals[0] = "Preencher realces da sequência por todo o fundo";
+    strings["Overflow pattern highlights##sgse"].plurals[0] = "Preencher destaques da sequência por todo o fundo";
     strings["Display previous/next pattern##sgse"].plurals[0] = "Exibir sequência anterior/próxima";
     strings["Pattern row number format:##sgse"].plurals[0] = "Formato de número de linha da sequência:";
     strings["Decimal##prbD"].plurals[0] = "Decimal##prbD";
@@ -3061,1601 +3061,1601 @@ void DivLocale::addTranslationsPortuguese()
     strings["Log Viewer##sgse"].plurals[0] = "Visualizador de logs";
 
     // these are messy, but the ##CC_GUI... is required.
-    strings["Button##CC_GUI_COLOR_BUTTON"].plurals[0] = "=Button##CC_GUI_COLOR_BUTTON";
-    strings["Button (hovered)##CC_GUI_COLOR_BUTTON_HOVER"].plurals[0] = "=Button (hovered)##CC_GUI_COLOR_BUTTON_HOVER";
-    strings["Button (active)##CC_GUI_COLOR_BUTTON_ACTIVE"].plurals[0] = "=Button (active)##CC_GUI_COLOR_BUTTON_ACTIVE";
-    strings["Tab##CC_GUI_COLOR_TAB"].plurals[0] = "=Tab##CC_GUI_COLOR_TAB";
-    strings["Tab (hovered)##CC_GUI_COLOR_TAB_HOVER"].plurals[0] = "=Tab (hovered)##CC_GUI_COLOR_TAB_HOVER";
-    strings["Tab (active)##CC_GUI_COLOR_TAB_ACTIVE"].plurals[0] = "=Tab (active)##CC_GUI_COLOR_TAB_ACTIVE";
-    strings["Tab (unfocused)##CC_GUI_COLOR_TAB_UNFOCUSED"].plurals[0] = "=Tab (unfocused)##CC_GUI_COLOR_TAB_UNFOCUSED";
-    strings["Tab (unfocused and active)##CC_GUI_COLOR_TAB_UNFOCUSED_ACTIVE"].plurals[0] = "=Tab (unfocused and active)##CC_GUI_COLOR_TAB_UNFOCUSED_ACTIVE";
-    strings["ImGui header##CC_GUI_COLOR_IMGUI_HEADER"].plurals[0] = "=ImGui header##CC_GUI_COLOR_IMGUI_HEADER";
-    strings["ImGui header (hovered)##CC_GUI_COLOR_IMGUI_HEADER_HOVER"].plurals[0] = "=ImGui header (hovered)##CC_GUI_COLOR_IMGUI_HEADER_HOVER";
-    strings["ImGui header (active)##CC_GUI_COLOR_IMGUI_HEADER_ACTIVE"].plurals[0] = "=ImGui header (active)##CC_GUI_COLOR_IMGUI_HEADER_ACTIVE";
-    strings["Resize grip##CC_GUI_COLOR_RESIZE_GRIP"].plurals[0] = "=Resize grip##CC_GUI_COLOR_RESIZE_GRIP";
-    strings["Resize grip (hovered)##CC_GUI_COLOR_RESIZE_GRIP_HOVER"].plurals[0] = "=Resize grip (hovered)##CC_GUI_COLOR_RESIZE_GRIP_HOVER";
-    strings["Resize grip (active)##CC_GUI_COLOR_RESIZE_GRIP_ACTIVE"].plurals[0] = "=Resize grip (active)##CC_GUI_COLOR_RESIZE_GRIP_ACTIVE";
-    strings["Widget background##CC_GUI_COLOR_WIDGET_BACKGROUND"].plurals[0] = "=Widget background##CC_GUI_COLOR_WIDGET_BACKGROUND";
-    strings["Widget background (hovered)##CC_GUI_COLOR_WIDGET_BACKGROUND_HOVER"].plurals[0] = "=Widget background (hovered)##CC_GUI_COLOR_WIDGET_BACKGROUND_HOVER";
-    strings["Widget background (active)##CC_GUI_COLOR_WIDGET_BACKGROUND_ACTIVE"].plurals[0] = "=Widget background (active)##CC_GUI_COLOR_WIDGET_BACKGROUND_ACTIVE";
-    strings["Slider grab##CC_GUI_COLOR_SLIDER_GRAB"].plurals[0] = "=Slider grab##CC_GUI_COLOR_SLIDER_GRAB";
-    strings["Slider grab (active)##CC_GUI_COLOR_SLIDER_GRAB_ACTIVE"].plurals[0] = "=Slider grab (active)##CC_GUI_COLOR_SLIDER_GRAB_ACTIVE";
-    strings["Title background (active)##CC_GUI_COLOR_TITLE_BACKGROUND_ACTIVE"].plurals[0] = "=Title background (active)##CC_GUI_COLOR_TITLE_BACKGROUND_ACTIVE";
-    strings["Checkbox/radio button mark##CC_GUI_COLOR_CHECK_MARK"].plurals[0] = "=Checkbox/radio button mark##CC_GUI_COLOR_CHECK_MARK";
-    strings["Text selection##CC_GUI_COLOR_TEXT_SELECTION"].plurals[0] = "=Text selection##CC_GUI_COLOR_TEXT_SELECTION";
-    strings["Line plot##CC_GUI_COLOR_PLOT_LINES"].plurals[0] = "=Line plot##CC_GUI_COLOR_PLOT_LINES";
-    strings["Line plot (hovered)##CC_GUI_COLOR_PLOT_LINES_HOVER"].plurals[0] = "=Line plot (hovered)##CC_GUI_COLOR_PLOT_LINES_HOVER";
-    strings["Histogram plot##CC_GUI_COLOR_PLOT_HISTOGRAM"].plurals[0] = "=Histogram plot##CC_GUI_COLOR_PLOT_HISTOGRAM";
-    strings["Histogram plot (hovered)##CC_GUI_COLOR_PLOT_HISTOGRAM_HOVER"].plurals[0] = "=Histogram plot (hovered)##CC_GUI_COLOR_PLOT_HISTOGRAM_HOVER";
-    strings["Table row (even)##CC_GUI_COLOR_TABLE_ROW_EVEN"].plurals[0] = "=Table row (even)##CC_GUI_COLOR_TABLE_ROW_EVEN";
-    strings["Table row (odd)##CC_GUI_COLOR_TABLE_ROW_ODD"].plurals[0] = "=Table row (odd)##CC_GUI_COLOR_TABLE_ROW_ODD";
+    strings["Button##CC_GUI_COLOR_BUTTON"].plurals[0] = "Botão##CC_GUI_COLOR_BUTTON";
+    strings["Button (hovered)##CC_GUI_COLOR_BUTTON_HOVER"].plurals[0] = "Botão (flutuando sobre)##CC_GUI_COLOR_BUTTON_HOVER";
+    strings["Button (active)##CC_GUI_COLOR_BUTTON_ACTIVE"].plurals[0] = "=Button (ativado)##CC_GUI_COLOR_BUTTON_ACTIVE";
+    strings["Tab##CC_GUI_COLOR_TAB"].plurals[0] = "Aba##CC_GUI_COLOR_TAB";
+    strings["Tab (hovered)##CC_GUI_COLOR_TAB_HOVER"].plurals[0] = "Aba (flutuando sobre)##CC_GUI_COLOR_TAB_HOVER";
+    strings["Tab (active)##CC_GUI_COLOR_TAB_ACTIVE"].plurals[0] = "Aba (ativada)##CC_GUI_COLOR_TAB_ACTIVE";
+    strings["Tab (unfocused)##CC_GUI_COLOR_TAB_UNFOCUSED"].plurals[0] = "Aba (desfocada)##CC_GUI_COLOR_TAB_UNFOCUSED";
+    strings["Tab (unfocused and active)##CC_GUI_COLOR_TAB_UNFOCUSED_ACTIVE"].plurals[0] = "Aba (desfocada e ativada)##CC_GUI_COLOR_TAB_UNFOCUSED_ACTIVE";
+    strings["ImGui header##CC_GUI_COLOR_IMGUI_HEADER"].plurals[0] = "Cabeçalho ImGui##CC_GUI_COLOR_IMGUI_HEADER";
+    strings["ImGui header (hovered)##CC_GUI_COLOR_IMGUI_HEADER_HOVER"].plurals[0] = "Cabeçalho ImGui (flutuando sobre)##CC_GUI_COLOR_IMGUI_HEADER_HOVER";
+    strings["ImGui header (active)##CC_GUI_COLOR_IMGUI_HEADER_ACTIVE"].plurals[0] = "Cabeçalho ImGui (ativado)##CC_GUI_COLOR_IMGUI_HEADER_ACTIVE";
+    strings["Resize grip##CC_GUI_COLOR_RESIZE_GRIP"].plurals[0] = "Aba de redimensionamento##CC_GUI_COLOR_RESIZE_GRIP";
+    strings["Resize grip (hovered)##CC_GUI_COLOR_RESIZE_GRIP_HOVER"].plurals[0] = "Aba de redimensionamento (flutuando sobre)##CC_GUI_COLOR_RESIZE_GRIP_HOVER";
+    strings["Resize grip (active)##CC_GUI_COLOR_RESIZE_GRIP_ACTIVE"].plurals[0] = "Aba de redimensionamento (ativada)##CC_GUI_COLOR_RESIZE_GRIP_ACTIVE";
+    strings["Widget background##CC_GUI_COLOR_WIDGET_BACKGROUND"].plurals[0] = "Fundo de elemento##CC_GUI_COLOR_WIDGET_BACKGROUND";
+    strings["Widget background (hovered)##CC_GUI_COLOR_WIDGET_BACKGROUND_HOVER"].plurals[0] = "Fundo de elemento (flutuando sobre)##CC_GUI_COLOR_WIDGET_BACKGROUND_HOVER";
+    strings["Widget background (active)##CC_GUI_COLOR_WIDGET_BACKGROUND_ACTIVE"].plurals[0] = "Fundo de elemento (ativado)##CC_GUI_COLOR_WIDGET_BACKGROUND_ACTIVE";
+    strings["Slider grab##CC_GUI_COLOR_SLIDER_GRAB"].plurals[0] = "Botão deslizante##CC_GUI_COLOR_SLIDER_GRAB";
+    strings["Slider grab (active)##CC_GUI_COLOR_SLIDER_GRAB_ACTIVE"].plurals[0] = "Botão deslizante (ativado)##CC_GUI_COLOR_SLIDER_GRAB_ACTIVE";
+    strings["Title background (active)##CC_GUI_COLOR_TITLE_BACKGROUND_ACTIVE"].plurals[0] = "Fundo de título (ativado)##CC_GUI_COLOR_TITLE_BACKGROUND_ACTIVE";
+    strings["Checkbox/radio button mark##CC_GUI_COLOR_CHECK_MARK"].plurals[0] = "Marca de caixa de checagem/botão de rádio##CC_GUI_COLOR_CHECK_MARK";
+    strings["Text selection##CC_GUI_COLOR_TEXT_SELECTION"].plurals[0] = "Seleção de texto##CC_GUI_COLOR_TEXT_SELECTION";
+    strings["Line plot##CC_GUI_COLOR_PLOT_LINES"].plurals[0] = "Traçado de linha##CC_GUI_COLOR_PLOT_LINES";
+    strings["Line plot (hovered)##CC_GUI_COLOR_PLOT_LINES_HOVER"].plurals[0] = "Traçado de linha (flutuando sobre)##CC_GUI_COLOR_PLOT_LINES_HOVER";
+    strings["Histogram plot##CC_GUI_COLOR_PLOT_HISTOGRAM"].plurals[0] = "Desenho de histograma##CC_GUI_COLOR_PLOT_HISTOGRAM";
+    strings["Histogram plot (hovered)##CC_GUI_COLOR_PLOT_HISTOGRAM_HOVER"].plurals[0] = "Desenho de histograma (flutuando sobre)##CC_GUI_COLOR_PLOT_HISTOGRAM_HOVER";
+    strings["Table row (even)##CC_GUI_COLOR_TABLE_ROW_EVEN"].plurals[0] = "Linha de tabela (par)##CC_GUI_COLOR_TABLE_ROW_EVEN";
+    strings["Table row (odd)##CC_GUI_COLOR_TABLE_ROW_ODD"].plurals[0] = "Linha de tabela (ímpar)##CC_GUI_COLOR_TABLE_ROW_ODD";
 
-    strings["Background##CC_GUI_COLOR_BACKGROUND"].plurals[0] = "=Background##CC_GUI_COLOR_BACKGROUND";
-    strings["Window background##CC_GUI_COLOR_FRAME_BACKGROUND"].plurals[0] = "=Window background##CC_GUI_COLOR_FRAME_BACKGROUND";
-    strings["Sub-window background##CC_GUI_COLOR_FRAME_BACKGROUND_CHILD"].plurals[0] = "=Sub-window background##CC_GUI_COLOR_FRAME_BACKGROUND_CHILD";
-    strings["Pop-up background##CC_GUI_COLOR_FRAME_BACKGROUND_POPUP"].plurals[0] = "=Pop-up background##CC_GUI_COLOR_FRAME_BACKGROUND_POPUP";
-    strings["Modal backdrop##CC_GUI_COLOR_MODAL_BACKDROP"].plurals[0] = "=Modal backdrop##CC_GUI_COLOR_MODAL_BACKDROP";
-    strings["Header##CC_GUI_COLOR_HEADER"].plurals[0] = "=Header##CC_GUI_COLOR_HEADER";
-    strings["Text##CC_GUI_COLOR_TEXT"].plurals[0] = "=Text##CC_GUI_COLOR_TEXT";
-    strings["Text (disabled)##CC_GUI_COLOR_TEXT_DISABLED"].plurals[0] = "=Text (disabled)##CC_GUI_COLOR_TEXT_DISABLED";
-    strings["Title bar (inactive)##CC_GUI_COLOR_TITLE_INACTIVE"].plurals[0] = "=Title bar (inactive)##CC_GUI_COLOR_TITLE_INACTIVE";
-    strings["Title bar (collapsed)##CC_GUI_COLOR_TITLE_COLLAPSED"].plurals[0] = "=Title bar (collapsed)##CC_GUI_COLOR_TITLE_COLLAPSED";
-    strings["Menu bar##CC_GUI_COLOR_MENU_BAR"].plurals[0] = "=Menu bar##CC_GUI_COLOR_MENU_BAR";
-    strings["Border##CC_GUI_COLOR_BORDER"].plurals[0] = "=Border##CC_GUI_COLOR_BORDER";
-    strings["Border shadow##CC_GUI_COLOR_BORDER_SHADOW"].plurals[0] = "=Border shadow##CC_GUI_COLOR_BORDER_SHADOW";
-    strings["Scroll bar##CC_GUI_COLOR_SCROLL"].plurals[0] = "=Scroll bar##CC_GUI_COLOR_SCROLL";
-    strings["Scroll bar (hovered)##CC_GUI_COLOR_SCROLL_HOVER"].plurals[0] = "=Scroll bar (hovered)##CC_GUI_COLOR_SCROLL_HOVER";
-    strings["Scroll bar (clicked)##CC_GUI_COLOR_SCROLL_ACTIVE"].plurals[0] = "=Scroll bar (clicked)##CC_GUI_COLOR_SCROLL_ACTIVE";
-    strings["Scroll bar background##CC_GUI_COLOR_SCROLL_BACKGROUND"].plurals[0] = "=Scroll bar background##CC_GUI_COLOR_SCROLL_BACKGROUND";
-    strings["Separator##CC_GUI_COLOR_SEPARATOR"].plurals[0] = "=Separator##CC_GUI_COLOR_SEPARATOR";
-    strings["Separator (hover)##CC_GUI_COLOR_SEPARATOR_HOVER"].plurals[0] = "=Separator (hover)##CC_GUI_COLOR_SEPARATOR_HOVER";
-    strings["Separator (active)##CC_GUI_COLOR_SEPARATOR_ACTIVE"].plurals[0] = "=Separator (active)##CC_GUI_COLOR_SEPARATOR_ACTIVE";
-    strings["Docking preview##CC_GUI_COLOR_DOCKING_PREVIEW"].plurals[0] = "=Docking preview##CC_GUI_COLOR_DOCKING_PREVIEW";
-    strings["Docking empty##CC_GUI_COLOR_DOCKING_EMPTY"].plurals[0] = "=Docking empty##CC_GUI_COLOR_DOCKING_EMPTY";
-    strings["Table header##CC_GUI_COLOR_TABLE_HEADER"].plurals[0] = "=Table header##CC_GUI_COLOR_TABLE_HEADER";
-    strings["Table border (hard)##CC_GUI_COLOR_TABLE_BORDER_HARD"].plurals[0] = "=Table border (hard)##CC_GUI_COLOR_TABLE_BORDER_HARD";
-    strings["Table border (soft)##CC_GUI_COLOR_TABLE_BORDER_SOFT"].plurals[0] = "=Table border (soft)##CC_GUI_COLOR_TABLE_BORDER_SOFT";
-    strings["Drag and drop target##CC_GUI_COLOR_DRAG_DROP_TARGET"].plurals[0] = "=Drag and drop target##CC_GUI_COLOR_DRAG_DROP_TARGET";
-    strings["Window switcher (highlight)##CC_GUI_COLOR_NAV_WIN_HIGHLIGHT"].plurals[0] = "=Window switcher (highlight)##CC_GUI_COLOR_NAV_WIN_HIGHLIGHT";
-    strings["Window switcher backdrop##CC_GUI_COLOR_NAV_WIN_BACKDROP"].plurals[0] = "=Window switcher backdrop##CC_GUI_COLOR_NAV_WIN_BACKDROP";
+    strings["Background##CC_GUI_COLOR_BACKGROUND"].plurals[0] = "Fundo##CC_GUI_COLOR_BACKGROUND";
+    strings["Window background##CC_GUI_COLOR_FRAME_BACKGROUND"].plurals[0] = "Fundo de janela##CC_GUI_COLOR_FRAME_BACKGROUND";
+    strings["Sub-window background##CC_GUI_COLOR_FRAME_BACKGROUND_CHILD"].plurals[0] = "Fundo de sub-janela##CC_GUI_COLOR_FRAME_BACKGROUND_CHILD";
+    strings["Pop-up background##CC_GUI_COLOR_FRAME_BACKGROUND_POPUP"].plurals[0] = "Fundo de diálogo pop-up##CC_GUI_COLOR_FRAME_BACKGROUND_POPUP";
+    strings["Modal backdrop##CC_GUI_COLOR_MODAL_BACKDROP"].plurals[0] = "Fundo de diálogo modal##CC_GUI_COLOR_MODAL_BACKDROP";
+    strings["Header##CC_GUI_COLOR_HEADER"].plurals[0] = "Cabeçalho##CC_GUI_COLOR_HEADER";
+    strings["Text##CC_GUI_COLOR_TEXT"].plurals[0] = "Texto##CC_GUI_COLOR_TEXT";
+    strings["Text (disabled)##CC_GUI_COLOR_TEXT_DISABLED"].plurals[0] = "Texto (desabilitado)##CC_GUI_COLOR_TEXT_DISABLED";
+    strings["Title bar (inactive)##CC_GUI_COLOR_TITLE_INACTIVE"].plurals[0] = "Barra de título (inativa)##CC_GUI_COLOR_TITLE_INACTIVE";
+    strings["Title bar (collapsed)##CC_GUI_COLOR_TITLE_COLLAPSED"].plurals[0] = "Barra de título (contraída)##CC_GUI_COLOR_TITLE_COLLAPSED";
+    strings["Menu bar##CC_GUI_COLOR_MENU_BAR"].plurals[0] = "Barra de menu##CC_GUI_COLOR_MENU_BAR";
+    strings["Border##CC_GUI_COLOR_BORDER"].plurals[0] = "Borda##CC_GUI_COLOR_BORDER";
+    strings["Border shadow##CC_GUI_COLOR_BORDER_SHADOW"].plurals[0] = "Sombra de borda##CC_GUI_COLOR_BORDER_SHADOW";
+    strings["Scroll bar##CC_GUI_COLOR_SCROLL"].plurals[0] = "Barra de rolagem##CC_GUI_COLOR_SCROLL";
+    strings["Scroll bar (hovered)##CC_GUI_COLOR_SCROLL_HOVER"].plurals[0] = "Barra de rolagem (flutuando sobre)##CC_GUI_COLOR_SCROLL_HOVER";
+    strings["Scroll bar (clicked)##CC_GUI_COLOR_SCROLL_ACTIVE"].plurals[0] = "Barra de rolagem (clicada)##CC_GUI_COLOR_SCROLL_ACTIVE";
+    strings["Scroll bar background##CC_GUI_COLOR_SCROLL_BACKGROUND"].plurals[0] = "Fundo da barra de rolagem##CC_GUI_COLOR_SCROLL_BACKGROUND";
+    strings["Separator##CC_GUI_COLOR_SEPARATOR"].plurals[0] = "Separador##CC_GUI_COLOR_SEPARATOR";
+    strings["Separator (hover)##CC_GUI_COLOR_SEPARATOR_HOVER"].plurals[0] = "Separador (flutuando sobre)##CC_GUI_COLOR_SEPARATOR_HOVER";
+    strings["Separator (active)##CC_GUI_COLOR_SEPARATOR_ACTIVE"].plurals[0] = "Separador (ativado)##CC_GUI_COLOR_SEPARATOR_ACTIVE";
+    strings["Docking preview##CC_GUI_COLOR_DOCKING_PREVIEW"].plurals[0] = "Previsão de ancoragem##CC_GUI_COLOR_DOCKING_PREVIEW";
+    strings["Docking empty##CC_GUI_COLOR_DOCKING_EMPTY"].plurals[0] = "Ancoragem vazia##CC_GUI_COLOR_DOCKING_EMPTY";
+    strings["Table header##CC_GUI_COLOR_TABLE_HEADER"].plurals[0] = "Cabeçalho de tabela##CC_GUI_COLOR_TABLE_HEADER";
+    strings["Table border (hard)##CC_GUI_COLOR_TABLE_BORDER_HARD"].plurals[0] = "Borda de tabela (dura)##CC_GUI_COLOR_TABLE_BORDER_HARD";
+    strings["Table border (soft)##CC_GUI_COLOR_TABLE_BORDER_SOFT"].plurals[0] = "Borda de tabela (suave)##CC_GUI_COLOR_TABLE_BORDER_SOFT";
+    strings["Drag and drop target##CC_GUI_COLOR_DRAG_DROP_TARGET"].plurals[0] = "Alvo de arrastar e soltar##CC_GUI_COLOR_DRAG_DROP_TARGET";
+    strings["Window switcher (highlight)##CC_GUI_COLOR_NAV_WIN_HIGHLIGHT"].plurals[0] = "Seletor de janelas (realce)##CC_GUI_COLOR_NAV_WIN_HIGHLIGHT";
+    strings["Window switcher backdrop##CC_GUI_COLOR_NAV_WIN_BACKDROP"].plurals[0] = "Fundo do seletor de janelas##CC_GUI_COLOR_NAV_WIN_BACKDROP";
 
-    strings["Toggle on##CC_GUI_COLOR_TOGGLE_ON"].plurals[0] = "=Toggle on##CC_GUI_COLOR_TOGGLE_ON";
-    strings["Toggle off##CC_GUI_COLOR_TOGGLE_OFF"].plurals[0] = "=Toggle off##CC_GUI_COLOR_TOGGLE_OFF";
-    strings["Playback status##CC_GUI_COLOR_PLAYBACK_STAT"].plurals[0] = "=Playback status##CC_GUI_COLOR_PLAYBACK_STAT";
-    strings["Destructive hint##CC_GUI_COLOR_DESTRUCTIVE"].plurals[0] = "=Destructive hint##CC_GUI_COLOR_DESTRUCTIVE";
-    strings["Warning hint##CC_GUI_COLOR_WARNING"].plurals[0] = "=Warning hint##CC_GUI_COLOR_WARNING";
-    strings["Error hint##CC_GUI_COLOR_ERROR"].plurals[0] = "=Error hint##CC_GUI_COLOR_ERROR";
+    strings["Toggle on##CC_GUI_COLOR_TOGGLE_ON"].plurals[0] = "Alternativa ligada##CC_GUI_COLOR_TOGGLE_ON";
+    strings["Toggle off##CC_GUI_COLOR_TOGGLE_OFF"].plurals[0] = "Alternativa desligada##CC_GUI_COLOR_TOGGLE_OFF";
+    strings["Playback status##CC_GUI_COLOR_PLAYBACK_STAT"].plurals[0] = "Estado de reprodução##CC_GUI_COLOR_PLAYBACK_STAT";
+    strings["Destructive hint##CC_GUI_COLOR_DESTRUCTIVE"].plurals[0] = "Destaque destrutivo##CC_GUI_COLOR_DESTRUCTIVE";
+    strings["Warning hint##CC_GUI_COLOR_WARNING"].plurals[0] = "Destaque de aviso##CC_GUI_COLOR_WARNING";
+    strings["Error hint##CC_GUI_COLOR_ERROR"].plurals[0] = "Destaque de erro##CC_GUI_COLOR_ERROR";
 
-    strings["Directory##CC_GUI_COLOR_FILE_DIR"].plurals[0] = "=Directory##CC_GUI_COLOR_FILE_DIR";
-    strings["Song (native)##CC_GUI_COLOR_FILE_SONG_NATIVE"].plurals[0] = "=Song (native)##CC_GUI_COLOR_FILE_SONG_NATIVE";
-    strings["Song (import)##CC_GUI_COLOR_FILE_SONG_IMPORT"].plurals[0] = "=Song (import)##CC_GUI_COLOR_FILE_SONG_IMPORT";
-    strings["Instrument##CC_GUI_COLOR_FILE_INSTR"].plurals[0] = "=Instrument##CC_GUI_COLOR_FILE_INSTR";
-    strings["Audio##CC_GUI_COLOR_FILE_AUDIO"].plurals[0] = "=Audio##CC_GUI_COLOR_FILE_AUDIO";
-    strings["Wavetable##CC_GUI_COLOR_FILE_WAVE"].plurals[0] = "=Wavetable##CC_GUI_COLOR_FILE_WAVE";
-    strings["VGM##CC_GUI_COLOR_FILE_VGM"].plurals[0] = "=VGM##CC_GUI_COLOR_FILE_VGM";
-    strings["ZSM##CC_GUI_COLOR_FILE_ZSM"].plurals[0] = "=ZSM##CC_GUI_COLOR_FILE_ZSM";
-    strings["Font##CC_GUI_COLOR_FILE_FONT"].plurals[0] = "=Font##CC_GUI_COLOR_FILE_FONT";
-    strings["Other##CC_GUI_COLOR_FILE_OTHER"].plurals[0] = "=Other##CC_GUI_COLOR_FILE_OTHER";
+    strings["Directory##CC_GUI_COLOR_FILE_DIR"].plurals[0] = "Diretório##CC_GUI_COLOR_FILE_DIR";
+    strings["Song (native)##CC_GUI_COLOR_FILE_SONG_NATIVE"].plurals[0] = "Música (nativa)##CC_GUI_COLOR_FILE_SONG_NATIVE";
+    strings["Song (import)##CC_GUI_COLOR_FILE_SONG_IMPORT"].plurals[0] = "Música (importada)##CC_GUI_COLOR_FILE_SONG_IMPORT";
+    strings["Instrument##CC_GUI_COLOR_FILE_INSTR"].plurals[0] = "Instrumento##CC_GUI_COLOR_FILE_INSTR";
+    strings["Audio##CC_GUI_COLOR_FILE_AUDIO"].plurals[0] = "Áudio##CC_GUI_COLOR_FILE_AUDIO";
+    strings["Wavetable##CC_GUI_COLOR_FILE_WAVE"].plurals[0] = "Wavetable##CC_GUI_COLOR_FILE_WAVE";
+    strings["VGM##CC_GUI_COLOR_FILE_VGM"].plurals[0] = "VGM##CC_GUI_COLOR_FILE_VGM";
+    strings["ZSM##CC_GUI_COLOR_FILE_ZSM"].plurals[0] = "ZSM##CC_GUI_COLOR_FILE_ZSM";
+    strings["Font##CC_GUI_COLOR_FILE_FONT"].plurals[0] = "Fonte##CC_GUI_COLOR_FILE_FONT";
+    strings["Other##CC_GUI_COLOR_FILE_OTHER"].plurals[0] = "Outro##CC_GUI_COLOR_FILE_OTHER";
 
-    strings["Border##CC_GUI_COLOR_OSC_BORDER"].plurals[0] = "=Border##CC_GUI_COLOR_OSC_BORDER";
-    strings["Background (top-left)##CC_GUI_COLOR_OSC_BG1"].plurals[0] = "=Background (top-left)##CC_GUI_COLOR_OSC_BG1";
-    strings["Background (top-right)##CC_GUI_COLOR_OSC_BG2"].plurals[0] = "=Background (top-right)##CC_GUI_COLOR_OSC_BG2";
-    strings["Background (bottom-left)##CC_GUI_COLOR_OSC_BG3"].plurals[0] = "=Background (bottom-left)##CC_GUI_COLOR_OSC_BG3";
-    strings["Background (bottom-right)##CC_GUI_COLOR_OSC_BG4"].plurals[0] = "=Background (bottom-right)##CC_GUI_COLOR_OSC_BG4";
-    strings["Waveform##CC_GUI_COLOR_OSC_WAVE"].plurals[0] = "=Waveform##CC_GUI_COLOR_OSC_WAVE";
-    strings["Waveform (clip)##CC_GUI_COLOR_OSC_WAVE_PEAK"].plurals[0] = "=Waveform (clip)##CC_GUI_COLOR_OSC_WAVE_PEAK";
-    strings["Reference##CC_GUI_COLOR_OSC_REF"].plurals[0] = "=Reference##CC_GUI_COLOR_OSC_REF";
-    strings["Guide##CC_GUI_COLOR_OSC_GUIDE"].plurals[0] = "=Guide##CC_GUI_COLOR_OSC_GUIDE";
+    strings["Border##CC_GUI_COLOR_OSC_BORDER"].plurals[0] = "Borda##CC_GUI_COLOR_OSC_BORDER";
+    strings["Background (top-left)##CC_GUI_COLOR_OSC_BG1"].plurals[0] = "Fundo (superior esquerdo)##CC_GUI_COLOR_OSC_BG1";
+    strings["Background (top-right)##CC_GUI_COLOR_OSC_BG2"].plurals[0] = "Fundo (superior direito)##CC_GUI_COLOR_OSC_BG2";
+    strings["Background (bottom-left)##CC_GUI_COLOR_OSC_BG3"].plurals[0] = "Fundo (inferior esquerdo)##CC_GUI_COLOR_OSC_BG3";
+    strings["Background (bottom-right)##CC_GUI_COLOR_OSC_BG4"].plurals[0] = "Fundo (inferior direito)##CC_GUI_COLOR_OSC_BG4";
+    strings["Waveform##CC_GUI_COLOR_OSC_WAVE"].plurals[0] = "Forma de onda##CC_GUI_COLOR_OSC_WAVE";
+    strings["Waveform (clip)##CC_GUI_COLOR_OSC_WAVE_PEAK"].plurals[0] = "Forma de onda (corte/clip)##CC_GUI_COLOR_OSC_WAVE_PEAK";
+    strings["Reference##CC_GUI_COLOR_OSC_REF"].plurals[0] = "Referência##CC_GUI_COLOR_OSC_REF";
+    strings["Guide##CC_GUI_COLOR_OSC_GUIDE"].plurals[0] = "Guia##CC_GUI_COLOR_OSC_GUIDE";
 
-    strings["Waveform (1)##CC_GUI_COLOR_OSC_WAVE_CH0"].plurals[0] = "=Waveform (1)##CC_GUI_COLOR_OSC_WAVE_CH0";
-    strings["Waveform (2)##CC_GUI_COLOR_OSC_WAVE_CH1"].plurals[0] = "=Waveform (2)##CC_GUI_COLOR_OSC_WAVE_CH1";
-    strings["Waveform (3)##CC_GUI_COLOR_OSC_WAVE_CH2"].plurals[0] = "=Waveform (3)##CC_GUI_COLOR_OSC_WAVE_CH2";
-    strings["Waveform (4)##CC_GUI_COLOR_OSC_WAVE_CH3"].plurals[0] = "=Waveform (4)##CC_GUI_COLOR_OSC_WAVE_CH3";
-    strings["Waveform (5)##CC_GUI_COLOR_OSC_WAVE_CH4"].plurals[0] = "=Waveform (5)##CC_GUI_COLOR_OSC_WAVE_CH4";
-    strings["Waveform (6)##CC_GUI_COLOR_OSC_WAVE_CH5"].plurals[0] = "=Waveform (6)##CC_GUI_COLOR_OSC_WAVE_CH5";
-    strings["Waveform (7)##CC_GUI_COLOR_OSC_WAVE_CH6"].plurals[0] = "=Waveform (7)##CC_GUI_COLOR_OSC_WAVE_CH6";
-    strings["Waveform (8)##CC_GUI_COLOR_OSC_WAVE_CH7"].plurals[0] = "=Waveform (8)##CC_GUI_COLOR_OSC_WAVE_CH7";
-    strings["Waveform (9)##CC_GUI_COLOR_OSC_WAVE_CH8"].plurals[0] = "=Waveform (9)##CC_GUI_COLOR_OSC_WAVE_CH8";
-    strings["Waveform (10)##CC_GUI_COLOR_OSC_WAVE_CH9"].plurals[0] = "=Waveform (10)##CC_GUI_COLOR_OSC_WAVE_CH9";
-    strings["Waveform (11)##CC_GUI_COLOR_OSC_WAVE_CH10"].plurals[0] = "=Waveform (11)##CC_GUI_COLOR_OSC_WAVE_CH10";
-    strings["Waveform (12)##CC_GUI_COLOR_OSC_WAVE_CH11"].plurals[0] = "=Waveform (12)##CC_GUI_COLOR_OSC_WAVE_CH11";
-    strings["Waveform (13)##CC_GUI_COLOR_OSC_WAVE_CH12"].plurals[0] = "=Waveform (13)##CC_GUI_COLOR_OSC_WAVE_CH12";
-    strings["Waveform (14)##CC_GUI_COLOR_OSC_WAVE_CH13"].plurals[0] = "=Waveform (14)##CC_GUI_COLOR_OSC_WAVE_CH13";
-    strings["Waveform (15)##CC_GUI_COLOR_OSC_WAVE_CH14"].plurals[0] = "=Waveform (15)##CC_GUI_COLOR_OSC_WAVE_CH14";
-    strings["Waveform (16)##CC_GUI_COLOR_OSC_WAVE_CH15"].plurals[0] = "=Waveform (16)##CC_GUI_COLOR_OSC_WAVE_CH15";
+    strings["Waveform (1)##CC_GUI_COLOR_OSC_WAVE_CH0"].plurals[0] = "Forma de onda (1)##CC_GUI_COLOR_OSC_WAVE_CH0";
+    strings["Waveform (2)##CC_GUI_COLOR_OSC_WAVE_CH1"].plurals[0] = "Forma de onda (2)##CC_GUI_COLOR_OSC_WAVE_CH1";
+    strings["Waveform (3)##CC_GUI_COLOR_OSC_WAVE_CH2"].plurals[0] = "Forma de onda (3)##CC_GUI_COLOR_OSC_WAVE_CH2";
+    strings["Waveform (4)##CC_GUI_COLOR_OSC_WAVE_CH3"].plurals[0] = "Forma de onda (4)##CC_GUI_COLOR_OSC_WAVE_CH3";
+    strings["Waveform (5)##CC_GUI_COLOR_OSC_WAVE_CH4"].plurals[0] = "Forma de onda (5)##CC_GUI_COLOR_OSC_WAVE_CH4";
+    strings["Waveform (6)##CC_GUI_COLOR_OSC_WAVE_CH5"].plurals[0] = "Forma de onda (6)##CC_GUI_COLOR_OSC_WAVE_CH5";
+    strings["Waveform (7)##CC_GUI_COLOR_OSC_WAVE_CH6"].plurals[0] = "Forma de onda (7)##CC_GUI_COLOR_OSC_WAVE_CH6";
+    strings["Waveform (8)##CC_GUI_COLOR_OSC_WAVE_CH7"].plurals[0] = "Forma de onda (8)##CC_GUI_COLOR_OSC_WAVE_CH7";
+    strings["Waveform (9)##CC_GUI_COLOR_OSC_WAVE_CH8"].plurals[0] = "Forma de onda (9)##CC_GUI_COLOR_OSC_WAVE_CH8";
+    strings["Waveform (10)##CC_GUI_COLOR_OSC_WAVE_CH9"].plurals[0] = "Forma de onda (10)##CC_GUI_COLOR_OSC_WAVE_CH9";
+    strings["Waveform (11)##CC_GUI_COLOR_OSC_WAVE_CH10"].plurals[0] = "Forma de onda (11)##CC_GUI_COLOR_OSC_WAVE_CH10";
+    strings["Waveform (12)##CC_GUI_COLOR_OSC_WAVE_CH11"].plurals[0] = "Forma de onda (12)##CC_GUI_COLOR_OSC_WAVE_CH11";
+    strings["Waveform (13)##CC_GUI_COLOR_OSC_WAVE_CH12"].plurals[0] = "Forma de onda (13)##CC_GUI_COLOR_OSC_WAVE_CH12";
+    strings["Waveform (14)##CC_GUI_COLOR_OSC_WAVE_CH13"].plurals[0] = "Forma de onda (14)##CC_GUI_COLOR_OSC_WAVE_CH13";
+    strings["Waveform (15)##CC_GUI_COLOR_OSC_WAVE_CH14"].plurals[0] = "Forma de onda (15)##CC_GUI_COLOR_OSC_WAVE_CH14";
+    strings["Waveform (16)##CC_GUI_COLOR_OSC_WAVE_CH15"].plurals[0] = "Forma de onda (16)##CC_GUI_COLOR_OSC_WAVE_CH15";
 
-    strings["Low##CC_GUI_COLOR_VOLMETER_LOW"].plurals[0] = "=Low##CC_GUI_COLOR_VOLMETER_LOW";
-    strings["High##CC_GUI_COLOR_VOLMETER_HIGH"].plurals[0] = "=High##CC_GUI_COLOR_VOLMETER_HIGH";
-    strings["Clip##CC_GUI_COLOR_VOLMETER_PEAK"].plurals[0] = "=Clip##CC_GUI_COLOR_VOLMETER_PEAK";
+    strings["Low##CC_GUI_COLOR_VOLMETER_LOW"].plurals[0] = "Baixo##CC_GUI_COLOR_VOLMETER_LOW";
+    strings["High##CC_GUI_COLOR_VOLMETER_HIGH"].plurals[0] = "Alto##CC_GUI_COLOR_VOLMETER_HIGH";
+    strings["Clip##CC_GUI_COLOR_VOLMETER_PEAK"].plurals[0] = "Corte (clip)##CC_GUI_COLOR_VOLMETER_PEAK";
 
-    strings["Order number##CC_GUI_COLOR_ORDER_ROW_INDEX"].plurals[0] = "=Order number##CC_GUI_COLOR_ORDER_ROW_INDEX";
-    strings["Playing order background##CC_GUI_COLOR_ORDER_ACTIVE"].plurals[0] = "=Playing order background##CC_GUI_COLOR_ORDER_ACTIVE";
-    strings["Song loop##CC_GUI_COLOR_SONG_LOOP"].plurals[0] = "=Song loop##CC_GUI_COLOR_SONG_LOOP";
-    strings["Selected order##CC_GUI_COLOR_ORDER_SELECTED"].plurals[0] = "=Selected order##CC_GUI_COLOR_ORDER_SELECTED";
-    strings["Similar patterns##CC_GUI_COLOR_ORDER_SIMILAR"].plurals[0] = "=Similar patterns##CC_GUI_COLOR_ORDER_SIMILAR";
-    strings["Inactive patterns##CC_GUI_COLOR_ORDER_INACTIVE"].plurals[0] = "=Inactive patterns##CC_GUI_COLOR_ORDER_INACTIVE";
+    strings["Order number##CC_GUI_COLOR_ORDER_ROW_INDEX"].plurals[0] = "Número da ordem##CC_GUI_COLOR_ORDER_ROW_INDEX";
+    strings["Playing order background##CC_GUI_COLOR_ORDER_ACTIVE"].plurals[0] = "Fundo da ordem sendo reproduzida##CC_GUI_COLOR_ORDER_ACTIVE";
+    strings["Song loop##CC_GUI_COLOR_SONG_LOOP"].plurals[0] = "Loop da música##CC_GUI_COLOR_SONG_LOOP";
+    strings["Selected order##CC_GUI_COLOR_ORDER_SELECTED"].plurals[0] = "Ordem selecionada##CC_GUI_COLOR_ORDER_SELECTED";
+    strings["Similar patterns##CC_GUI_COLOR_ORDER_SIMILAR"].plurals[0] = "Sequências similares##CC_GUI_COLOR_ORDER_SIMILAR";
+    strings["Inactive patterns##CC_GUI_COLOR_ORDER_INACTIVE"].plurals[0] = "Sequências inativas##CC_GUI_COLOR_ORDER_INACTIVE";
 
-    strings["Envelope##CC_GUI_COLOR_FM_ENVELOPE"].plurals[0] = "=Envelope##CC_GUI_COLOR_FM_ENVELOPE";
-    strings["Sustain guide##CC_GUI_COLOR_FM_ENVELOPE_SUS_GUIDE"].plurals[0] = "=Sustain guide##CC_GUI_COLOR_FM_ENVELOPE_SUS_GUIDE";
-    strings["Release##CC_GUI_COLOR_FM_ENVELOPE_RELEASE"].plurals[0] = "=Release##CC_GUI_COLOR_FM_ENVELOPE_RELEASE";
+    strings["Envelope##CC_GUI_COLOR_FM_ENVELOPE"].plurals[0] = "Envelope##CC_GUI_COLOR_FM_ENVELOPE";
+    strings["Sustain guide##CC_GUI_COLOR_FM_ENVELOPE_SUS_GUIDE"].plurals[0] = "Guia de sustentação##CC_GUI_COLOR_FM_ENVELOPE_SUS_GUIDE";
+    strings["Release##CC_GUI_COLOR_FM_ENVELOPE_RELEASE"].plurals[0] = "Repouso##CC_GUI_COLOR_FM_ENVELOPE_RELEASE";
 
-    strings["Algorithm background##CC_GUI_COLOR_FM_ALG_BG"].plurals[0] = "=Algorithm background##CC_GUI_COLOR_FM_ALG_BG";
-    strings["Algorithm lines##CC_GUI_COLOR_FM_ALG_LINE"].plurals[0] = "=Algorithm lines##CC_GUI_COLOR_FM_ALG_LINE";
-    strings["Modulator##CC_GUI_COLOR_FM_MOD"].plurals[0] = "=Modulator##CC_GUI_COLOR_FM_MOD";
-    strings["Carrier##CC_GUI_COLOR_FM_CAR"].plurals[0] = "=Carrier##CC_GUI_COLOR_FM_CAR";
+    strings["Algorithm background##CC_GUI_COLOR_FM_ALG_BG"].plurals[0] = "Fundo do algoritmo##CC_GUI_COLOR_FM_ALG_BG";
+    strings["Algorithm lines##CC_GUI_COLOR_FM_ALG_LINE"].plurals[0] = "Linhas do algoritmo##CC_GUI_COLOR_FM_ALG_LINE";
+    strings["Modulator##CC_GUI_COLOR_FM_MOD"].plurals[0] = "Moduladora##CC_GUI_COLOR_FM_MOD";
+    strings["Carrier##CC_GUI_COLOR_FM_CAR"].plurals[0] = "Portadora##CC_GUI_COLOR_FM_CAR";
 
-    strings["SSG-EG##CC_GUI_COLOR_FM_SSG"].plurals[0] = "=SSG-EG##CC_GUI_COLOR_FM_SSG";
-    strings["Waveform##CC_GUI_COLOR_FM_WAVE"].plurals[0] = "=Waveform##CC_GUI_COLOR_FM_WAVE";
+    strings["SSG-EG##CC_GUI_COLOR_FM_SSG"].plurals[0] = "SSG-EG##CC_GUI_COLOR_FM_SSG";
+    strings["Waveform##CC_GUI_COLOR_FM_WAVE"].plurals[0] = "Forma de onda##CC_GUI_COLOR_FM_WAVE";
 
-    strings["Mod. accent (primary)##CC_GUI_COLOR_FM_PRIMARY_MOD"].plurals[0] = "=Mod. accent (primary)##CC_GUI_COLOR_FM_PRIMARY_MOD";
-    strings["Mod. accent (secondary)##CC_GUI_COLOR_FM_SECONDARY_MOD"].plurals[0] = "=Mod. accent (secondary)##CC_GUI_COLOR_FM_SECONDARY_MOD";
-    strings["Mod. border##CC_GUI_COLOR_FM_BORDER_MOD"].plurals[0] = "=Mod. border##CC_GUI_COLOR_FM_BORDER_MOD";
-    strings["Mod. border shadow##CC_GUI_COLOR_FM_BORDER_SHADOW_MOD"].plurals[0] = "=Mod. border shadow##CC_GUI_COLOR_FM_BORDER_SHADOW_MOD";
+    strings["Mod. accent (primary)##CC_GUI_COLOR_FM_PRIMARY_MOD"].plurals[0] = "Realce mod. (primário)##CC_GUI_COLOR_FM_PRIMARY_MOD";
+    strings["Mod. accent (secondary)##CC_GUI_COLOR_FM_SECONDARY_MOD"].plurals[0] = "Realce mod. (secundário)##CC_GUI_COLOR_FM_SECONDARY_MOD";
+    strings["Mod. border##CC_GUI_COLOR_FM_BORDER_MOD"].plurals[0] = "Borda mod.##CC_GUI_COLOR_FM_BORDER_MOD";
+    strings["Mod. border shadow##CC_GUI_COLOR_FM_BORDER_SHADOW_MOD"].plurals[0] = "Sombra borda mod.##CC_GUI_COLOR_FM_BORDER_SHADOW_MOD";
 
-    strings["Car. accent (primary)##CC_GUI_COLOR_FM_PRIMARY_CAR"].plurals[0] = "=Car. accent (primary)##CC_GUI_COLOR_FM_PRIMARY_CAR";
-    strings["Car. accent (secondary)##CC_GUI_COLOR_FM_SECONDARY_CAR"].plurals[0] = "=Car. accent (secondary)##CC_GUI_COLOR_FM_SECONDARY_CAR";
-    strings["Car. border##CC_GUI_COLOR_FM_BORDER_CAR"].plurals[0] = "=Car. border##CC_GUI_COLOR_FM_BORDER_CAR";
-    strings["Car. border shadow##CC_GUI_COLOR_FM_BORDER_SHADOW_CAR"].plurals[0] = "=Car. border shadow##CC_GUI_COLOR_FM_BORDER_SHADOW_CAR";
+    strings["Car. accent (primary)##CC_GUI_COLOR_FM_PRIMARY_CAR"].plurals[0] = "Realce port. (primário)##CC_GUI_COLOR_FM_PRIMARY_CAR";
+    strings["Car. accent (secondary)##CC_GUI_COLOR_FM_SECONDARY_CAR"].plurals[0] = "Realce port. (secundário)##CC_GUI_COLOR_FM_SECONDARY_CAR";
+    strings["Car. border##CC_GUI_COLOR_FM_BORDER_CAR"].plurals[0] = "Borda port.##CC_GUI_COLOR_FM_BORDER_CAR";
+    strings["Car. border shadow##CC_GUI_COLOR_FM_BORDER_SHADOW_CAR"].plurals[0] = "Sombra borda port.##CC_GUI_COLOR_FM_BORDER_SHADOW_CAR";
 
-    strings["Volume##CC_GUI_COLOR_MACRO_VOLUME"].plurals[0] = "=Volume##CC_GUI_COLOR_MACRO_VOLUME";
-    strings["Pitch##CC_GUI_COLOR_MACRO_PITCH"].plurals[0] = "=Pitch##CC_GUI_COLOR_MACRO_PITCH";
-    strings["Wave##CC_GUI_COLOR_MACRO_WAVE"].plurals[0] = "=Wave##CC_GUI_COLOR_MACRO_WAVE";
-    strings["Other##CC_GUI_COLOR_MACRO_OTHER"].plurals[0] = "=Other##CC_GUI_COLOR_MACRO_OTHER";
+    strings["Volume##CC_GUI_COLOR_MACRO_VOLUME"].plurals[0] = "Volume##CC_GUI_COLOR_MACRO_VOLUME";
+    strings["Pitch##CC_GUI_COLOR_MACRO_PITCH"].plurals[0] = "Tom##CC_GUI_COLOR_MACRO_PITCH";
+    strings["Wave##CC_GUI_COLOR_MACRO_WAVE"].plurals[0] = "Onda##CC_GUI_COLOR_MACRO_WAVE";
+    strings["Other##CC_GUI_COLOR_MACRO_OTHER"].plurals[0] = "Outro##CC_GUI_COLOR_MACRO_OTHER";
 
-    strings["FM (OPN)##CC_GUI_COLOR_INSTR_FM"].plurals[0] = "=FM (OPN)##CC_GUI_COLOR_INSTR_FM";
-    strings["SN76489/Sega PSG##CC_GUI_COLOR_INSTR_STD"].plurals[0] = "=SN76489/Sega PSG##CC_GUI_COLOR_INSTR_STD";
-    strings["T6W28##CC_GUI_COLOR_INSTR_T6W28"].plurals[0] = "=T6W28##CC_GUI_COLOR_INSTR_T6W28";
-    strings["Game Boy##CC_GUI_COLOR_INSTR_GB"].plurals[0] = "=Game Boy##CC_GUI_COLOR_INSTR_GB";
-    strings["C64##CC_GUI_COLOR_INSTR_C64"].plurals[0] = "=C64##CC_GUI_COLOR_INSTR_C64";
-    strings["Amiga/Generic Sample##CC_GUI_COLOR_INSTR_AMIGA"].plurals[0] = "=Amiga/Generic Sample##CC_GUI_COLOR_INSTR_AMIGA";
-    strings["PC Engine##CC_GUI_COLOR_INSTR_PCE"].plurals[0] = "=PC Engine##CC_GUI_COLOR_INSTR_PCE";
-    strings["AY-3-8910/SSG##CC_GUI_COLOR_INSTR_AY"].plurals[0] = "=AY-3-8910/SSG##CC_GUI_COLOR_INSTR_AY";
-    strings["AY8930##CC_GUI_COLOR_INSTR_AY8930"].plurals[0] = "=AY8930##CC_GUI_COLOR_INSTR_AY8930";
-    strings["TIA##CC_GUI_COLOR_INSTR_TIA"].plurals[0] = "=TIA##CC_GUI_COLOR_INSTR_TIA";
-    strings["SAA1099##CC_GUI_COLOR_INSTR_SAA1099"].plurals[0] = "=SAA1099##CC_GUI_COLOR_INSTR_SAA1099";
-    strings["VIC##CC_GUI_COLOR_INSTR_VIC"].plurals[0] = "=VIC##CC_GUI_COLOR_INSTR_VIC";
-    strings["PET##CC_GUI_COLOR_INSTR_PET"].plurals[0] = "=PET##CC_GUI_COLOR_INSTR_PET";
-    strings["VRC6##CC_GUI_COLOR_INSTR_VRC6"].plurals[0] = "=VRC6##CC_GUI_COLOR_INSTR_VRC6";
-    strings["VRC6 (saw)##CC_GUI_COLOR_INSTR_VRC6_SAW"].plurals[0] = "=VRC6 (saw)##CC_GUI_COLOR_INSTR_VRC6_SAW";
-    strings["FM (OPLL)##CC_GUI_COLOR_INSTR_OPLL"].plurals[0] = "=FM (OPLL)##CC_GUI_COLOR_INSTR_OPLL";
-    strings["FM (OPL)##CC_GUI_COLOR_INSTR_OPL"].plurals[0] = "=FM (OPL)##CC_GUI_COLOR_INSTR_OPL";
-    strings["FDS##CC_GUI_COLOR_INSTR_FDS"].plurals[0] = "=FDS##CC_GUI_COLOR_INSTR_FDS";
-    strings["Virtual Boy##CC_GUI_COLOR_INSTR_VBOY"].plurals[0] = "=Virtual Boy##CC_GUI_COLOR_INSTR_VBOY";
-    strings["Namco 163##CC_GUI_COLOR_INSTR_N163"].plurals[0] = "=Namco 163##CC_GUI_COLOR_INSTR_N163";
-    strings["Konami SCC##CC_GUI_COLOR_INSTR_SCC"].plurals[0] = "=Konami SCC##CC_GUI_COLOR_INSTR_SCC";
-    strings["FM (OPZ)##CC_GUI_COLOR_INSTR_OPZ"].plurals[0] = "=FM (OPZ)##CC_GUI_COLOR_INSTR_OPZ";
-    strings["POKEY##CC_GUI_COLOR_INSTR_POKEY"].plurals[0] = "=POKEY##CC_GUI_COLOR_INSTR_POKEY";
-    strings["PC Beeper##CC_GUI_COLOR_INSTR_BEEPER"].plurals[0] = "=PC Beeper##CC_GUI_COLOR_INSTR_BEEPER";
-    strings["WonderSwan##CC_GUI_COLOR_INSTR_SWAN"].plurals[0] = "=WonderSwan##CC_GUI_COLOR_INSTR_SWAN";
-    strings["Lynx##CC_GUI_COLOR_INSTR_MIKEY"].plurals[0] = "=Lynx##CC_GUI_COLOR_INSTR_MIKEY";
-    strings["VERA##CC_GUI_COLOR_INSTR_VERA"].plurals[0] = "=VERA##CC_GUI_COLOR_INSTR_VERA";
-    strings["X1-010##CC_GUI_COLOR_INSTR_X1_010"].plurals[0] = "=X1-010##CC_GUI_COLOR_INSTR_X1_010";
-    strings["ES5506##CC_GUI_COLOR_INSTR_ES5506"].plurals[0] = "=ES5506##CC_GUI_COLOR_INSTR_ES5506";
-    strings["MultiPCM##CC_GUI_COLOR_INSTR_MULTIPCM"].plurals[0] = "=MultiPCM##CC_GUI_COLOR_INSTR_MULTIPCM";
-    strings["SNES##CC_GUI_COLOR_INSTR_SNES"].plurals[0] = "=SNES##CC_GUI_COLOR_INSTR_SNES";
-    strings["Sound Unit##CC_GUI_COLOR_INSTR_SU"].plurals[0] = "=Sound Unit##CC_GUI_COLOR_INSTR_SU";
-    strings["Namco WSG##CC_GUI_COLOR_INSTR_NAMCO"].plurals[0] = "=Namco WSG##CC_GUI_COLOR_INSTR_NAMCO";
-    strings["FM (OPL Drums)##CC_GUI_COLOR_INSTR_OPL_DRUMS"].plurals[0] = "=FM (OPL Drums)##CC_GUI_COLOR_INSTR_OPL_DRUMS";
-    strings["FM (OPM)##CC_GUI_COLOR_INSTR_OPM"].plurals[0] = "=FM (OPM)##CC_GUI_COLOR_INSTR_OPM";
-    strings["NES##CC_GUI_COLOR_INSTR_NES"].plurals[0] = "=NES##CC_GUI_COLOR_INSTR_NES";
-    strings["MSM6258##CC_GUI_COLOR_INSTR_MSM6258"].plurals[0] = "=MSM6258##CC_GUI_COLOR_INSTR_MSM6258";
-    strings["MSM6295##CC_GUI_COLOR_INSTR_MSM6295"].plurals[0] = "=MSM6295##CC_GUI_COLOR_INSTR_MSM6295";
-    strings["ADPCM-A##CC_GUI_COLOR_INSTR_ADPCMA"].plurals[0] = "=ADPCM-A##CC_GUI_COLOR_INSTR_ADPCMA";
-    strings["ADPCM-B##CC_GUI_COLOR_INSTR_ADPCMB"].plurals[0] = "=ADPCM-B##CC_GUI_COLOR_INSTR_ADPCMB";
-    strings["Sega PCM##CC_GUI_COLOR_INSTR_SEGAPCM"].plurals[0] = "=Sega PCM##CC_GUI_COLOR_INSTR_SEGAPCM";
-    strings["QSound##CC_GUI_COLOR_INSTR_QSOUND"].plurals[0] = "=QSound##CC_GUI_COLOR_INSTR_QSOUND";
-    strings["YMZ280B##CC_GUI_COLOR_INSTR_YMZ280B"].plurals[0] = "=YMZ280B##CC_GUI_COLOR_INSTR_YMZ280B";
-    strings["RF5C68##CC_GUI_COLOR_INSTR_RF5C68"].plurals[0] = "=RF5C68##CC_GUI_COLOR_INSTR_RF5C68";
-    strings["MSM5232##CC_GUI_COLOR_INSTR_MSM5232"].plurals[0] = "=MSM5232##CC_GUI_COLOR_INSTR_MSM5232";
-    strings["K007232##CC_GUI_COLOR_INSTR_K007232"].plurals[0] = "=K007232##CC_GUI_COLOR_INSTR_K007232";
-    strings["GA20##CC_GUI_COLOR_INSTR_GA20"].plurals[0] = "=GA20##CC_GUI_COLOR_INSTR_GA20";
-    strings["Pokémon Mini##CC_GUI_COLOR_INSTR_POKEMINI"].plurals[0] = "=Pokémon Mini##CC_GUI_COLOR_INSTR_POKEMINI";
-    strings["SM8521##CC_GUI_COLOR_INSTR_SM8521"].plurals[0] = "=SM8521##CC_GUI_COLOR_INSTR_SM8521";
-    strings["PV-1000##CC_GUI_COLOR_INSTR_PV1000"].plurals[0] = "=PV-1000##CC_GUI_COLOR_INSTR_PV1000";
-    strings["K053260##CC_GUI_COLOR_INSTR_K053260"].plurals[0] = "=K053260##CC_GUI_COLOR_INSTR_K053260";
-    strings["C140##CC_GUI_COLOR_INSTR_C140"].plurals[0] = "=C140##CC_GUI_COLOR_INSTR_C140";
-    strings["C219##CC_GUI_COLOR_INSTR_C219"].plurals[0] = "=C219##CC_GUI_COLOR_INSTR_C219";
-    strings["ESFM##CC_GUI_COLOR_INSTR_ESFM"].plurals[0] = "=ESFM##CC_GUI_COLOR_INSTR_ESFM";
-    strings["ES5503##CC_GUI_COLOR_INSTR_ES5503"].plurals[0] = "=ES5503##CC_GUI_COLOR_INSTR_ES5503";
-    strings["PowerNoise (noise)##CC_GUI_COLOR_INSTR_POWERNOISE"].plurals[0] = "=PowerNoise (noise)##CC_GUI_COLOR_INSTR_POWERNOISE";
-    strings["PowerNoise (slope)##CC_GUI_COLOR_INSTR_POWERNOISE_SLOPE"].plurals[0] = "=PowerNoise (slope)##CC_GUI_COLOR_INSTR_POWERNOISE_SLOPE";
-    strings["Other/Unknown##CC_GUI_COLOR_INSTR_UNKNOWN"].plurals[0] = "=Other/Unknown##CC_GUI_COLOR_INSTR_UNKNOWN";
+    strings["FM (OPN)##CC_GUI_COLOR_INSTR_FM"].plurals[0] = "FM (OPN)##CC_GUI_COLOR_INSTR_FM";
+    strings["SN76489/Sega PSG##CC_GUI_COLOR_INSTR_STD"].plurals[0] = "SN76489/Sega PSG##CC_GUI_COLOR_INSTR_STD";
+    strings["T6W28##CC_GUI_COLOR_INSTR_T6W28"].plurals[0] = "T6W28##CC_GUI_COLOR_INSTR_T6W28";
+    strings["Game Boy##CC_GUI_COLOR_INSTR_GB"].plurals[0] = "Game Boy##CC_GUI_COLOR_INSTR_GB";
+    strings["C64##CC_GUI_COLOR_INSTR_C64"].plurals[0] = "C64##CC_GUI_COLOR_INSTR_C64";
+    strings["Amiga/Generic Sample##CC_GUI_COLOR_INSTR_AMIGA"].plurals[0] = "Amiga/Sample Genérica##CC_GUI_COLOR_INSTR_AMIGA";
+    strings["PC Engine##CC_GUI_COLOR_INSTR_PCE"].plurals[0] = "PC Engine##CC_GUI_COLOR_INSTR_PCE";
+    strings["AY-3-8910/SSG##CC_GUI_COLOR_INSTR_AY"].plurals[0] = "AY-3-8910/SSG##CC_GUI_COLOR_INSTR_AY";
+    strings["AY8930##CC_GUI_COLOR_INSTR_AY8930"].plurals[0] = "AY8930##CC_GUI_COLOR_INSTR_AY8930";
+    strings["TIA##CC_GUI_COLOR_INSTR_TIA"].plurals[0] = "TIA##CC_GUI_COLOR_INSTR_TIA";
+    strings["SAA1099##CC_GUI_COLOR_INSTR_SAA1099"].plurals[0] = "SAA1099##CC_GUI_COLOR_INSTR_SAA1099";
+    strings["VIC##CC_GUI_COLOR_INSTR_VIC"].plurals[0] = "VIC##CC_GUI_COLOR_INSTR_VIC";
+    strings["PET##CC_GUI_COLOR_INSTR_PET"].plurals[0] = "PET##CC_GUI_COLOR_INSTR_PET";
+    strings["VRC6##CC_GUI_COLOR_INSTR_VRC6"].plurals[0] = "VRC6##CC_GUI_COLOR_INSTR_VRC6";
+    strings["VRC6 (saw)##CC_GUI_COLOR_INSTR_VRC6_SAW"].plurals[0] = "VRC6 (serra)##CC_GUI_COLOR_INSTR_VRC6_SAW";
+    strings["FM (OPLL)##CC_GUI_COLOR_INSTR_OPLL"].plurals[0] = "FM (OPLL)##CC_GUI_COLOR_INSTR_OPLL";
+    strings["FM (OPL)##CC_GUI_COLOR_INSTR_OPL"].plurals[0] = "FM (OPL)##CC_GUI_COLOR_INSTR_OPL";
+    strings["FDS##CC_GUI_COLOR_INSTR_FDS"].plurals[0] = "FDS##CC_GUI_COLOR_INSTR_FDS";
+    strings["Virtual Boy##CC_GUI_COLOR_INSTR_VBOY"].plurals[0] = "Virtual Boy##CC_GUI_COLOR_INSTR_VBOY";
+    strings["Namco 163##CC_GUI_COLOR_INSTR_N163"].plurals[0] = "Namco 163##CC_GUI_COLOR_INSTR_N163";
+    strings["Konami SCC##CC_GUI_COLOR_INSTR_SCC"].plurals[0] = "Konami SCC##CC_GUI_COLOR_INSTR_SCC";
+    strings["FM (OPZ)##CC_GUI_COLOR_INSTR_OPZ"].plurals[0] = "FM (OPZ)##CC_GUI_COLOR_INSTR_OPZ";
+    strings["POKEY##CC_GUI_COLOR_INSTR_POKEY"].plurals[0] = "POKEY##CC_GUI_COLOR_INSTR_POKEY";
+    strings["PC Beeper##CC_GUI_COLOR_INSTR_BEEPER"].plurals[0] = "Beeper PC##CC_GUI_COLOR_INSTR_BEEPER";
+    strings["WonderSwan##CC_GUI_COLOR_INSTR_SWAN"].plurals[0] = "WonderSwan##CC_GUI_COLOR_INSTR_SWAN";
+    strings["Lynx##CC_GUI_COLOR_INSTR_MIKEY"].plurals[0] = "Lynx##CC_GUI_COLOR_INSTR_MIKEY";
+    strings["VERA##CC_GUI_COLOR_INSTR_VERA"].plurals[0] = "VERA##CC_GUI_COLOR_INSTR_VERA";
+    strings["X1-010##CC_GUI_COLOR_INSTR_X1_010"].plurals[0] = "X1-010##CC_GUI_COLOR_INSTR_X1_010";
+    strings["ES5506##CC_GUI_COLOR_INSTR_ES5506"].plurals[0] = "ES5506##CC_GUI_COLOR_INSTR_ES5506";
+    strings["MultiPCM##CC_GUI_COLOR_INSTR_MULTIPCM"].plurals[0] = "MultiPCM##CC_GUI_COLOR_INSTR_MULTIPCM";
+    strings["SNES##CC_GUI_COLOR_INSTR_SNES"].plurals[0] = "SNES##CC_GUI_COLOR_INSTR_SNES";
+    strings["Sound Unit##CC_GUI_COLOR_INSTR_SU"].plurals[0] = "Sound Unit##CC_GUI_COLOR_INSTR_SU";
+    strings["Namco WSG##CC_GUI_COLOR_INSTR_NAMCO"].plurals[0] = "Namco WSG##CC_GUI_COLOR_INSTR_NAMCO";
+    strings["FM (OPL Drums)##CC_GUI_COLOR_INSTR_OPL_DRUMS"].plurals[0] = "FM (OPL Bateria)##CC_GUI_COLOR_INSTR_OPL_DRUMS";
+    strings["FM (OPM)##CC_GUI_COLOR_INSTR_OPM"].plurals[0] = "FM (OPM)##CC_GUI_COLOR_INSTR_OPM";
+    strings["NES##CC_GUI_COLOR_INSTR_NES"].plurals[0] = "NES##CC_GUI_COLOR_INSTR_NES";
+    strings["MSM6258##CC_GUI_COLOR_INSTR_MSM6258"].plurals[0] = "MSM6258##CC_GUI_COLOR_INSTR_MSM6258";
+    strings["MSM6295##CC_GUI_COLOR_INSTR_MSM6295"].plurals[0] = "MSM6295##CC_GUI_COLOR_INSTR_MSM6295";
+    strings["ADPCM-A##CC_GUI_COLOR_INSTR_ADPCMA"].plurals[0] = "ADPCM-A##CC_GUI_COLOR_INSTR_ADPCMA";
+    strings["ADPCM-B##CC_GUI_COLOR_INSTR_ADPCMB"].plurals[0] = "ADPCM-B##CC_GUI_COLOR_INSTR_ADPCMB";
+    strings["Sega PCM##CC_GUI_COLOR_INSTR_SEGAPCM"].plurals[0] = "Sega PCM##CC_GUI_COLOR_INSTR_SEGAPCM";
+    strings["QSound##CC_GUI_COLOR_INSTR_QSOUND"].plurals[0] = "QSound##CC_GUI_COLOR_INSTR_QSOUND";
+    strings["YMZ280B##CC_GUI_COLOR_INSTR_YMZ280B"].plurals[0] = "YMZ280B##CC_GUI_COLOR_INSTR_YMZ280B";
+    strings["RF5C68##CC_GUI_COLOR_INSTR_RF5C68"].plurals[0] = "RF5C68##CC_GUI_COLOR_INSTR_RF5C68";
+    strings["MSM5232##CC_GUI_COLOR_INSTR_MSM5232"].plurals[0] = "MSM5232##CC_GUI_COLOR_INSTR_MSM5232";
+    strings["K007232##CC_GUI_COLOR_INSTR_K007232"].plurals[0] = "K007232##CC_GUI_COLOR_INSTR_K007232";
+    strings["GA20##CC_GUI_COLOR_INSTR_GA20"].plurals[0] = "GA20##CC_GUI_COLOR_INSTR_GA20";
+    strings["Pokémon Mini##CC_GUI_COLOR_INSTR_POKEMINI"].plurals[0] = "Pokémon Mini##CC_GUI_COLOR_INSTR_POKEMINI";
+    strings["SM8521##CC_GUI_COLOR_INSTR_SM8521"].plurals[0] = "SM8521##CC_GUI_COLOR_INSTR_SM8521";
+    strings["PV-1000##CC_GUI_COLOR_INSTR_PV1000"].plurals[0] = "PV-1000##CC_GUI_COLOR_INSTR_PV1000";
+    strings["K053260##CC_GUI_COLOR_INSTR_K053260"].plurals[0] = "K053260##CC_GUI_COLOR_INSTR_K053260";
+    strings["C140##CC_GUI_COLOR_INSTR_C140"].plurals[0] = "C140##CC_GUI_COLOR_INSTR_C140";
+    strings["C219##CC_GUI_COLOR_INSTR_C219"].plurals[0] = "C219##CC_GUI_COLOR_INSTR_C219";
+    strings["ESFM##CC_GUI_COLOR_INSTR_ESFM"].plurals[0] = "ESFM##CC_GUI_COLOR_INSTR_ESFM";
+    strings["ES5503##CC_GUI_COLOR_INSTR_ES5503"].plurals[0] = "ES5503##CC_GUI_COLOR_INSTR_ES5503";
+    strings["PowerNoise (noise)##CC_GUI_COLOR_INSTR_POWERNOISE"].plurals[0] = "PowerNoise (ruído)##CC_GUI_COLOR_INSTR_POWERNOISE";
+    strings["PowerNoise (slope)##CC_GUI_COLOR_INSTR_POWERNOISE_SLOPE"].plurals[0] = "PowerNoise (rampa)##CC_GUI_COLOR_INSTR_POWERNOISE_SLOPE";
+    strings["Other/Unknown##CC_GUI_COLOR_INSTR_UNKNOWN"].plurals[0] = "Outro/Desconhecido##CC_GUI_COLOR_INSTR_UNKNOWN";
 
-    strings["Single color (background)##CC_GUI_COLOR_CHANNEL_BG"].plurals[0] = "=Single color (background)##CC_GUI_COLOR_CHANNEL_BG";
-    strings["Single color (text)##CC_GUI_COLOR_CHANNEL_FG"].plurals[0] = "=Single color (text)##CC_GUI_COLOR_CHANNEL_FG";
-    strings["FM##CC_GUI_COLOR_CHANNEL_FM"].plurals[0] = "=FM##CC_GUI_COLOR_CHANNEL_FM";
-    strings["Pulse##CC_GUI_COLOR_CHANNEL_PULSE"].plurals[0] = "=Pulse##CC_GUI_COLOR_CHANNEL_PULSE";
-    strings["Noise##CC_GUI_COLOR_CHANNEL_NOISE"].plurals[0] = "=Noise##CC_GUI_COLOR_CHANNEL_NOISE";
-    strings["PCM##CC_GUI_COLOR_CHANNEL_PCM"].plurals[0] = "=PCM##CC_GUI_COLOR_CHANNEL_PCM";
-    strings["Wave##CC_GUI_COLOR_CHANNEL_WAVE"].plurals[0] = "=Wave##CC_GUI_COLOR_CHANNEL_WAVE";
-    strings["FM operator##CC_GUI_COLOR_CHANNEL_OP"].plurals[0] = "=FM operator##CC_GUI_COLOR_CHANNEL_OP";
-    strings["Muted##CC_GUI_COLOR_CHANNEL_MUTED"].plurals[0] = "=Muted##CC_GUI_COLOR_CHANNEL_MUTED";
+    strings["Single color (background)##CC_GUI_COLOR_CHANNEL_BG"].plurals[0] = "Cor única (fundo)##CC_GUI_COLOR_CHANNEL_BG";
+    strings["Single color (text)##CC_GUI_COLOR_CHANNEL_FG"].plurals[0] = "Cor única (texto)##CC_GUI_COLOR_CHANNEL_FG";
+    strings["FM##CC_GUI_COLOR_CHANNEL_FM"].plurals[0] = "FM##CC_GUI_COLOR_CHANNEL_FM";
+    strings["Pulse##CC_GUI_COLOR_CHANNEL_PULSE"].plurals[0] = "Pulsada##CC_GUI_COLOR_CHANNEL_PULSE";
+    strings["Noise##CC_GUI_COLOR_CHANNEL_NOISE"].plurals[0] = "Ruído##CC_GUI_COLOR_CHANNEL_NOISE";
+    strings["PCM##CC_GUI_COLOR_CHANNEL_PCM"].plurals[0] = "PCM##CC_GUI_COLOR_CHANNEL_PCM";
+    strings["Wave##CC_GUI_COLOR_CHANNEL_WAVE"].plurals[0] = "Onda##CC_GUI_COLOR_CHANNEL_WAVE";
+    strings["FM operator##CC_GUI_COLOR_CHANNEL_OP"].plurals[0] = "Operador FM##CC_GUI_COLOR_CHANNEL_OP";
+    strings["Muted##CC_GUI_COLOR_CHANNEL_MUTED"].plurals[0] = "Mudo##CC_GUI_COLOR_CHANNEL_MUTED";
 
-    strings["Playhead##CC_GUI_COLOR_PATTERN_PLAY_HEAD"].plurals[0] = "=Playhead##CC_GUI_COLOR_PATTERN_PLAY_HEAD";
-    strings["Editing##CC_GUI_COLOR_EDITING"].plurals[0] = "=Editing##CC_GUI_COLOR_EDITING";
-    strings["Editing (will clone)##CC_GUI_COLOR_EDITING_CLONE"].plurals[0] = "=Editing (will clone)##CC_GUI_COLOR_EDITING_CLONE";
-    strings["Cursor##CC_GUI_COLOR_PATTERN_CURSOR"].plurals[0] = "=Cursor##CC_GUI_COLOR_PATTERN_CURSOR";
-    strings["Cursor (hovered)##CC_GUI_COLOR_PATTERN_CURSOR_HOVER"].plurals[0] = "=Cursor (hovered)##CC_GUI_COLOR_PATTERN_CURSOR_HOVER";
-    strings["Cursor (clicked)##CC_GUI_COLOR_PATTERN_CURSOR_ACTIVE"].plurals[0] = "=Cursor (clicked)##CC_GUI_COLOR_PATTERN_CURSOR_ACTIVE";
-    strings["Selection##CC_GUI_COLOR_PATTERN_SELECTION"].plurals[0] = "=Selection##CC_GUI_COLOR_PATTERN_SELECTION";
-    strings["Selection (hovered)##CC_GUI_COLOR_PATTERN_SELECTION_HOVER"].plurals[0] = "=Selection (hovered)##CC_GUI_COLOR_PATTERN_SELECTION_HOVER";
-    strings["Selection (clicked)##CC_GUI_COLOR_PATTERN_SELECTION_ACTIVE"].plurals[0] = "=Selection (clicked)##CC_GUI_COLOR_PATTERN_SELECTION_ACTIVE";
-    strings["Highlight 1##CC_GUI_COLOR_PATTERN_HI_1"].plurals[0] = "=Highlight 1##CC_GUI_COLOR_PATTERN_HI_1";
-    strings["Highlight 2##CC_GUI_COLOR_PATTERN_HI_2"].plurals[0] = "=Highlight 2##CC_GUI_COLOR_PATTERN_HI_2";
-    strings["Row number##CC_GUI_COLOR_PATTERN_ROW_INDEX"].plurals[0] = "=Row number##CC_GUI_COLOR_PATTERN_ROW_INDEX";
-    strings["Row number (highlight 1)##CC_GUI_COLOR_PATTERN_ROW_INDEX_HI1"].plurals[0] = "=Row number (highlight 1)##CC_GUI_COLOR_PATTERN_ROW_INDEX_HI1";
-    strings["Row number (highlight 2)##CC_GUI_COLOR_PATTERN_ROW_INDEX_HI2"].plurals[0] = "=Row number (highlight 2)##CC_GUI_COLOR_PATTERN_ROW_INDEX_HI2";
-    strings["Note##CC_GUI_COLOR_PATTERN_ACTIVE"].plurals[0] = "=Note##CC_GUI_COLOR_PATTERN_ACTIVE";
-    strings["Note (highlight 1)##CC_GUI_COLOR_PATTERN_ACTIVE_HI1"].plurals[0] = "=Note (highlight 1)##CC_GUI_COLOR_PATTERN_ACTIVE_HI1";
-    strings["Note (highlight 2)##CC_GUI_COLOR_PATTERN_ACTIVE_HI2"].plurals[0] = "=Note (highlight 2)##CC_GUI_COLOR_PATTERN_ACTIVE_HI2";
-    strings["Blank##CC_GUI_COLOR_PATTERN_INACTIVE"].plurals[0] = "=Blank##CC_GUI_COLOR_PATTERN_INACTIVE";
-    strings["Blank (highlight 1)##CC_GUI_COLOR_PATTERN_INACTIVE_HI1"].plurals[0] = "=Blank (highlight 1)##CC_GUI_COLOR_PATTERN_INACTIVE_HI1";
-    strings["Blank (highlight 2)##CC_GUI_COLOR_PATTERN_INACTIVE_HI2"].plurals[0] = "=Blank (highlight 2)##CC_GUI_COLOR_PATTERN_INACTIVE_HI2";
-    strings["Instrument##CC_GUI_COLOR_PATTERN_INS"].plurals[0] = "=Instrument##CC_GUI_COLOR_PATTERN_INS";
-    strings["Instrument (invalid type)##CC_GUI_COLOR_PATTERN_INS_WARN"].plurals[0] = "=Instrument (invalid type)##CC_GUI_COLOR_PATTERN_INS_WARN";
-    strings["Instrument (out of range)##CC_GUI_COLOR_PATTERN_INS_ERROR"].plurals[0] = "=Instrument (out of range)##CC_GUI_COLOR_PATTERN_INS_ERROR";
-    strings["Volume (0%)##CC_GUI_COLOR_PATTERN_VOLUME_MIN"].plurals[0] = "=Volume (0%)##CC_GUI_COLOR_PATTERN_VOLUME_MIN";
-    strings["Volume (50%)##CC_GUI_COLOR_PATTERN_VOLUME_HALF"].plurals[0] = "=Volume (50%)##CC_GUI_COLOR_PATTERN_VOLUME_HALF";
-    strings["Volume (100%)##CC_GUI_COLOR_PATTERN_VOLUME_MAX"].plurals[0] = "=Volume (100%)##CC_GUI_COLOR_PATTERN_VOLUME_MAX";
-    strings["Invalid effect##CC_GUI_COLOR_PATTERN_EFFECT_INVALID"].plurals[0] = "=Invalid effect##CC_GUI_COLOR_PATTERN_EFFECT_INVALID";
-    strings["Pitch effect##CC_GUI_COLOR_PATTERN_EFFECT_PITCH"].plurals[0] = "=Pitch effect##CC_GUI_COLOR_PATTERN_EFFECT_PITCH";
-    strings["Volume effect##CC_GUI_COLOR_PATTERN_EFFECT_VOLUME"].plurals[0] = "=Volume effect##CC_GUI_COLOR_PATTERN_EFFECT_VOLUME";
-    strings["Panning effect##CC_GUI_COLOR_PATTERN_EFFECT_PANNING"].plurals[0] = "=Panning effect##CC_GUI_COLOR_PATTERN_EFFECT_PANNING";
-    strings["Song effect##CC_GUI_COLOR_PATTERN_EFFECT_SONG"].plurals[0] = "=Song effect##CC_GUI_COLOR_PATTERN_EFFECT_SONG";
-    strings["Time effect##CC_GUI_COLOR_PATTERN_EFFECT_TIME"].plurals[0] = "=Time effect##CC_GUI_COLOR_PATTERN_EFFECT_TIME";
-    strings["Speed effect##CC_GUI_COLOR_PATTERN_EFFECT_SPEED"].plurals[0] = "=Speed effect##CC_GUI_COLOR_PATTERN_EFFECT_SPEED";
-    strings["Primary specific effect##CC_GUI_COLOR_PATTERN_EFFECT_SYS_PRIMARY"].plurals[0] = "=Primary specific effect##CC_GUI_COLOR_PATTERN_EFFECT_SYS_PRIMARY";
-    strings["Secondary specific effect##CC_GUI_COLOR_PATTERN_EFFECT_SYS_SECONDARY"].plurals[0] = "=Secondary specific effect##CC_GUI_COLOR_PATTERN_EFFECT_SYS_SECONDARY";
-    strings["Miscellaneous##CC_GUI_COLOR_PATTERN_EFFECT_MISC"].plurals[0] = "=Miscellaneous##CC_GUI_COLOR_PATTERN_EFFECT_MISC";
-    strings["External command output##CC_GUI_COLOR_EE_VALUE"].plurals[0] = "=External command output##CC_GUI_COLOR_EE_VALUE";
-    strings["Status: off/disabled##CC_GUI_COLOR_PATTERN_STATUS_OFF"].plurals[0] = "=Status: off/disabled##CC_GUI_COLOR_PATTERN_STATUS_OFF";
-    strings["Status: off + macro rel##CC_GUI_COLOR_PATTERN_STATUS_REL"].plurals[0] = "=Status: off + macro rel##CC_GUI_COLOR_PATTERN_STATUS_REL";
-    strings["Status: on + macro rel##CC_GUI_COLOR_PATTERN_STATUS_REL_ON"].plurals[0] = "=Status: on + macro rel##CC_GUI_COLOR_PATTERN_STATUS_REL_ON";
-    strings["Status: on##CC_GUI_COLOR_PATTERN_STATUS_ON"].plurals[0] = "=Status: on##CC_GUI_COLOR_PATTERN_STATUS_ON";
-    strings["Status: volume##CC_GUI_COLOR_PATTERN_STATUS_VOLUME"].plurals[0] = "=Status: volume##CC_GUI_COLOR_PATTERN_STATUS_VOLUME";
-    strings["Status: pitch##CC_GUI_COLOR_PATTERN_STATUS_PITCH"].plurals[0] = "=Status: pitch##CC_GUI_COLOR_PATTERN_STATUS_PITCH";
-    strings["Status: panning##CC_GUI_COLOR_PATTERN_STATUS_PANNING"].plurals[0] = "=Status: panning##CC_GUI_COLOR_PATTERN_STATUS_PANNING";
-    strings["Status: chip (primary)##CC_GUI_COLOR_PATTERN_STATUS_SYS1"].plurals[0] = "=Status: chip (primary)##CC_GUI_COLOR_PATTERN_STATUS_SYS1";
-    strings["Status: chip (secondary)##CC_GUI_COLOR_PATTERN_STATUS_SYS2"].plurals[0] = "=Status: chip (secondary)##CC_GUI_COLOR_PATTERN_STATUS_SYS2";
-    strings["Status: mixing##CC_GUI_COLOR_PATTERN_STATUS_MIXING"].plurals[0] = "=Status: mixing##CC_GUI_COLOR_PATTERN_STATUS_MIXING";
-    strings["Status: DSP effect##CC_GUI_COLOR_PATTERN_STATUS_DSP"].plurals[0] = "=Status: DSP effect##CC_GUI_COLOR_PATTERN_STATUS_DSP";
-    strings["Status: note altering##CC_GUI_COLOR_PATTERN_STATUS_NOTE"].plurals[0] = "=Status: note altering##CC_GUI_COLOR_PATTERN_STATUS_NOTE";
-    strings["Status: misc color 1##CC_GUI_COLOR_PATTERN_STATUS_MISC1"].plurals[0] = "=Status: misc color 1##CC_GUI_COLOR_PATTERN_STATUS_MISC1";
-    strings["Status: misc color 2##CC_GUI_COLOR_PATTERN_STATUS_MISC2"].plurals[0] = "=Status: misc color 2##CC_GUI_COLOR_PATTERN_STATUS_MISC2";
-    strings["Status: misc color 3##CC_GUI_COLOR_PATTERN_STATUS_MISC3"].plurals[0] = "=Status: misc color 3##CC_GUI_COLOR_PATTERN_STATUS_MISC3";
-    strings["Status: attack##CC_GUI_COLOR_PATTERN_STATUS_ATTACK"].plurals[0] = "=Status: attack##CC_GUI_COLOR_PATTERN_STATUS_ATTACK";
-    strings["Status: decay##CC_GUI_COLOR_PATTERN_STATUS_DECAY"].plurals[0] = "=Status: decay##CC_GUI_COLOR_PATTERN_STATUS_DECAY";
-    strings["Status: sustain##CC_GUI_COLOR_PATTERN_STATUS_SUSTAIN"].plurals[0] = "=Status: sustain##CC_GUI_COLOR_PATTERN_STATUS_SUSTAIN";
-    strings["Status: release##CC_GUI_COLOR_PATTERN_STATUS_RELEASE"].plurals[0] = "=Status: release##CC_GUI_COLOR_PATTERN_STATUS_RELEASE";
-    strings["Status: decrease linear##CC_GUI_COLOR_PATTERN_STATUS_DEC_LINEAR"].plurals[0] = "=Status: decrease linear##CC_GUI_COLOR_PATTERN_STATUS_DEC_LINEAR";
-    strings["Status: decrease exp##CC_GUI_COLOR_PATTERN_STATUS_DEC_EXP"].plurals[0] = "=Status: decrease exp##CC_GUI_COLOR_PATTERN_STATUS_DEC_EXP";
-    strings["Status: increase##CC_GUI_COLOR_PATTERN_STATUS_INC"].plurals[0] = "=Status: increase##CC_GUI_COLOR_PATTERN_STATUS_INC";
-    strings["Status: bent##CC_GUI_COLOR_PATTERN_STATUS_BENT"].plurals[0] = "=Status: bent##CC_GUI_COLOR_PATTERN_STATUS_BENT";
-    strings["Status: direct##CC_GUI_COLOR_PATTERN_STATUS_DIRECT"].plurals[0] = "=Status: direct##CC_GUI_COLOR_PATTERN_STATUS_DIRECT";
+    strings["Playhead##CC_GUI_COLOR_PATTERN_PLAY_HEAD"].plurals[0] = "Cabeçote de reprodução##CC_GUI_COLOR_PATTERN_PLAY_HEAD";
+    strings["Editing##CC_GUI_COLOR_EDITING"].plurals[0] = "Edição##CC_GUI_COLOR_EDITING";
+    strings["Editing (will clone)##CC_GUI_COLOR_EDITING_CLONE"].plurals[0] = "Edição (modo de clone)##CC_GUI_COLOR_EDITING_CLONE";
+    strings["Cursor##CC_GUI_COLOR_PATTERN_CURSOR"].plurals[0] = "Cursor##CC_GUI_COLOR_PATTERN_CURSOR";
+    strings["Cursor (hovered)##CC_GUI_COLOR_PATTERN_CURSOR_HOVER"].plurals[0] = "Cursor (flutuando sobre)##CC_GUI_COLOR_PATTERN_CURSOR_HOVER";
+    strings["Cursor (clicked)##CC_GUI_COLOR_PATTERN_CURSOR_ACTIVE"].plurals[0] = "Cursor (clicado)##CC_GUI_COLOR_PATTERN_CURSOR_ACTIVE";
+    strings["Selection##CC_GUI_COLOR_PATTERN_SELECTION"].plurals[0] = "Seleção##CC_GUI_COLOR_PATTERN_SELECTION"; // é tetra! ^^
+    strings["Selection (hovered)##CC_GUI_COLOR_PATTERN_SELECTION_HOVER"].plurals[0] = "Seleção (flutuando sobre)##CC_GUI_COLOR_PATTERN_SELECTION_HOVER";
+    strings["Selection (clicked)##CC_GUI_COLOR_PATTERN_SELECTION_ACTIVE"].plurals[0] = "Seleção (clicada)##CC_GUI_COLOR_PATTERN_SELECTION_ACTIVE";
+    strings["Highlight 1##CC_GUI_COLOR_PATTERN_HI_1"].plurals[0] = "Destaque 1##CC_GUI_COLOR_PATTERN_HI_1";
+    strings["Highlight 2##CC_GUI_COLOR_PATTERN_HI_2"].plurals[0] = "Destaque 2##CC_GUI_COLOR_PATTERN_HI_2";
+    strings["Row number##CC_GUI_COLOR_PATTERN_ROW_INDEX"].plurals[0] = "Número da linha##CC_GUI_COLOR_PATTERN_ROW_INDEX";
+    strings["Row number (highlight 1)##CC_GUI_COLOR_PATTERN_ROW_INDEX_HI1"].plurals[0] = "Número da linha (destaque 1)##CC_GUI_COLOR_PATTERN_ROW_INDEX_HI1";
+    strings["Row number (highlight 2)##CC_GUI_COLOR_PATTERN_ROW_INDEX_HI2"].plurals[0] = "Número da linha (destaque 2)##CC_GUI_COLOR_PATTERN_ROW_INDEX_HI2";
+    strings["Note##CC_GUI_COLOR_PATTERN_ACTIVE"].plurals[0] = "Nota##CC_GUI_COLOR_PATTERN_ACTIVE";
+    strings["Note (highlight 1)##CC_GUI_COLOR_PATTERN_ACTIVE_HI1"].plurals[0] = "Nota (destaque 1)##CC_GUI_COLOR_PATTERN_ACTIVE_HI1";
+    strings["Note (highlight 2)##CC_GUI_COLOR_PATTERN_ACTIVE_HI2"].plurals[0] = "Nota (destaque 2)##CC_GUI_COLOR_PATTERN_ACTIVE_HI2";
+    strings["Blank##CC_GUI_COLOR_PATTERN_INACTIVE"].plurals[0] = "Em branco##CC_GUI_COLOR_PATTERN_INACTIVE";
+    strings["Blank (highlight 1)##CC_GUI_COLOR_PATTERN_INACTIVE_HI1"].plurals[0] = "Em branco (destaque 1)##CC_GUI_COLOR_PATTERN_INACTIVE_HI1";
+    strings["Blank (highlight 2)##CC_GUI_COLOR_PATTERN_INACTIVE_HI2"].plurals[0] = "Em branco (destaque 2)##CC_GUI_COLOR_PATTERN_INACTIVE_HI2";
+    strings["Instrument##CC_GUI_COLOR_PATTERN_INS"].plurals[0] = "Instrumento##CC_GUI_COLOR_PATTERN_INS";
+    strings["Instrument (invalid type)##CC_GUI_COLOR_PATTERN_INS_WARN"].plurals[0] = "Instrumento (tipo inválido)##CC_GUI_COLOR_PATTERN_INS_WARN";
+    strings["Instrument (out of range)##CC_GUI_COLOR_PATTERN_INS_ERROR"].plurals[0] = "Instrumento (fora de faixa)##CC_GUI_COLOR_PATTERN_INS_ERROR";
+    strings["Volume (0%)##CC_GUI_COLOR_PATTERN_VOLUME_MIN"].plurals[0] = "Volume (0%)##CC_GUI_COLOR_PATTERN_VOLUME_MIN";
+    strings["Volume (50%)##CC_GUI_COLOR_PATTERN_VOLUME_HALF"].plurals[0] = "Volume (50%)##CC_GUI_COLOR_PATTERN_VOLUME_HALF";
+    strings["Volume (100%)##CC_GUI_COLOR_PATTERN_VOLUME_MAX"].plurals[0] = "Volume (100%)##CC_GUI_COLOR_PATTERN_VOLUME_MAX";
+    strings["Invalid effect##CC_GUI_COLOR_PATTERN_EFFECT_INVALID"].plurals[0] = "Efeito inválido##CC_GUI_COLOR_PATTERN_EFFECT_INVALID";
+    strings["Pitch effect##CC_GUI_COLOR_PATTERN_EFFECT_PITCH"].plurals[0] = "Efeito de tom##CC_GUI_COLOR_PATTERN_EFFECT_PITCH";
+    strings["Volume effect##CC_GUI_COLOR_PATTERN_EFFECT_VOLUME"].plurals[0] = "Efeito de volume##CC_GUI_COLOR_PATTERN_EFFECT_VOLUME";
+    strings["Panning effect##CC_GUI_COLOR_PATTERN_EFFECT_PANNING"].plurals[0] = "Efeito de balanço##CC_GUI_COLOR_PATTERN_EFFECT_PANNING";
+    strings["Song effect##CC_GUI_COLOR_PATTERN_EFFECT_SONG"].plurals[0] = "Efeito de música##CC_GUI_COLOR_PATTERN_EFFECT_SONG";
+    strings["Time effect##CC_GUI_COLOR_PATTERN_EFFECT_TIME"].plurals[0] = "Efeito de tempo##CC_GUI_COLOR_PATTERN_EFFECT_TIME";
+    strings["Speed effect##CC_GUI_COLOR_PATTERN_EFFECT_SPEED"].plurals[0] = "Efeito de velocidade##CC_GUI_COLOR_PATTERN_EFFECT_SPEED";
+    strings["Primary specific effect##CC_GUI_COLOR_PATTERN_EFFECT_SYS_PRIMARY"].plurals[0] = "Efeito específico primário##CC_GUI_COLOR_PATTERN_EFFECT_SYS_PRIMARY";
+    strings["Secondary specific effect##CC_GUI_COLOR_PATTERN_EFFECT_SYS_SECONDARY"].plurals[0] = "Efeito específico secundário##CC_GUI_COLOR_PATTERN_EFFECT_SYS_SECONDARY";
+    strings["Miscellaneous##CC_GUI_COLOR_PATTERN_EFFECT_MISC"].plurals[0] = "Miscelânea##CC_GUI_COLOR_PATTERN_EFFECT_MISC";
+    strings["External command output##CC_GUI_COLOR_EE_VALUE"].plurals[0] = "Saída de comandos externos##CC_GUI_COLOR_EE_VALUE";
+    strings["Status: off/disabled##CC_GUI_COLOR_PATTERN_STATUS_OFF"].plurals[0] = "Estado do canal: desligado/desabilitado##CC_GUI_COLOR_PATTERN_STATUS_OFF";
+    strings["Status: off + macro rel##CC_GUI_COLOR_PATTERN_STATUS_REL"].plurals[0] = "Estado do canal: desligado + repouso de macro##CC_GUI_COLOR_PATTERN_STATUS_REL";
+    strings["Status: on + macro rel##CC_GUI_COLOR_PATTERN_STATUS_REL_ON"].plurals[0] = "Estado do canal: ligado + repouso de macro##CC_GUI_COLOR_PATTERN_STATUS_REL_ON";
+    strings["Status: on##CC_GUI_COLOR_PATTERN_STATUS_ON"].plurals[0] = "Estado do canal: ligado##CC_GUI_COLOR_PATTERN_STATUS_ON";
+    strings["Status: volume##CC_GUI_COLOR_PATTERN_STATUS_VOLUME"].plurals[0] = "Estado do canal: volume##CC_GUI_COLOR_PATTERN_STATUS_VOLUME";
+    strings["Status: pitch##CC_GUI_COLOR_PATTERN_STATUS_PITCH"].plurals[0] = "Estado do canal: tom##CC_GUI_COLOR_PATTERN_STATUS_PITCH";
+    strings["Status: panning##CC_GUI_COLOR_PATTERN_STATUS_PANNING"].plurals[0] = "Estado do canal: balanço##CC_GUI_COLOR_PATTERN_STATUS_PANNING";
+    strings["Status: chip (primary)##CC_GUI_COLOR_PATTERN_STATUS_SYS1"].plurals[0] = "Estado do canal: chip (primário)##CC_GUI_COLOR_PATTERN_STATUS_SYS1";
+    strings["Status: chip (secondary)##CC_GUI_COLOR_PATTERN_STATUS_SYS2"].plurals[0] = "Estado do canal: chip (secundário)##CC_GUI_COLOR_PATTERN_STATUS_SYS2";
+    strings["Status: mixing##CC_GUI_COLOR_PATTERN_STATUS_MIXING"].plurals[0] = "Estado do canal: mixing##CC_GUI_COLOR_PATTERN_STATUS_MIXING";
+    strings["Status: DSP effect##CC_GUI_COLOR_PATTERN_STATUS_DSP"].plurals[0] = "Estado do canal: efeito DSP##CC_GUI_COLOR_PATTERN_STATUS_DSP";
+    strings["Status: note altering##CC_GUI_COLOR_PATTERN_STATUS_NOTE"].plurals[0] = "Estado do canal: alteração de nota##CC_GUI_COLOR_PATTERN_STATUS_NOTE";
+    strings["Status: misc color 1##CC_GUI_COLOR_PATTERN_STATUS_MISC1"].plurals[0] = "Estado do canal: cor miscelânea 1##CC_GUI_COLOR_PATTERN_STATUS_MISC1";
+    strings["Status: misc color 2##CC_GUI_COLOR_PATTERN_STATUS_MISC2"].plurals[0] = "Estado do canal: cor miscelânea 2##CC_GUI_COLOR_PATTERN_STATUS_MISC2";
+    strings["Status: misc color 3##CC_GUI_COLOR_PATTERN_STATUS_MISC3"].plurals[0] = "Estado do canal: cor miscelânea 3##CC_GUI_COLOR_PATTERN_STATUS_MISC3";
+    strings["Status: attack##CC_GUI_COLOR_PATTERN_STATUS_ATTACK"].plurals[0] = "Estado do canal: ataque##CC_GUI_COLOR_PATTERN_STATUS_ATTACK";
+    strings["Status: decay##CC_GUI_COLOR_PATTERN_STATUS_DECAY"].plurals[0] = "Estado do canal: decaimento##CC_GUI_COLOR_PATTERN_STATUS_DECAY";
+    strings["Status: sustain##CC_GUI_COLOR_PATTERN_STATUS_SUSTAIN"].plurals[0] = "Estado do canal: sustentação##CC_GUI_COLOR_PATTERN_STATUS_SUSTAIN";
+    strings["Status: release##CC_GUI_COLOR_PATTERN_STATUS_RELEASE"].plurals[0] = "Estado do canal: repouso##CC_GUI_COLOR_PATTERN_STATUS_RELEASE";
+    strings["Status: decrease linear##CC_GUI_COLOR_PATTERN_STATUS_DEC_LINEAR"].plurals[0] = "Estado do canal: redução linear##CC_GUI_COLOR_PATTERN_STATUS_DEC_LINEAR";
+    strings["Status: decrease exp##CC_GUI_COLOR_PATTERN_STATUS_DEC_EXP"].plurals[0] = "Estado do canal: redução exponencial##CC_GUI_COLOR_PATTERN_STATUS_DEC_EXP";
+    strings["Status: increase##CC_GUI_COLOR_PATTERN_STATUS_INC"].plurals[0] = "Estado do canal: aumento##CC_GUI_COLOR_PATTERN_STATUS_INC";
+    strings["Status: bent##CC_GUI_COLOR_PATTERN_STATUS_BENT"].plurals[0] = "Estado do canal: pitchbend##CC_GUI_COLOR_PATTERN_STATUS_BENT";
+    strings["Status: direct##CC_GUI_COLOR_PATTERN_STATUS_DIRECT"].plurals[0] = "Estado do canal: direto##CC_GUI_COLOR_PATTERN_STATUS_DIRECT";
 
-    strings["Background##CC_GUI_COLOR_SAMPLE_BG"].plurals[0] = "=Background##CC_GUI_COLOR_SAMPLE_BG";
-    strings["Waveform##CC_GUI_COLOR_SAMPLE_FG"].plurals[0] = "=Waveform##CC_GUI_COLOR_SAMPLE_FG";
-    strings["Time background##CC_GUI_COLOR_SAMPLE_TIME_BG"].plurals[0] = "=Time background##CC_GUI_COLOR_SAMPLE_TIME_BG";
-    strings["Time text##CC_GUI_COLOR_SAMPLE_TIME_FG"].plurals[0] = "=Time text##CC_GUI_COLOR_SAMPLE_TIME_FG";
-    strings["Loop region##CC_GUI_COLOR_SAMPLE_LOOP"].plurals[0] = "=Loop region##CC_GUI_COLOR_SAMPLE_LOOP";
-    strings["Center guide##CC_GUI_COLOR_SAMPLE_CENTER"].plurals[0] = "=Center guide##CC_GUI_COLOR_SAMPLE_CENTER";
-    strings["Grid##CC_GUI_COLOR_SAMPLE_GRID"].plurals[0] = "=Grid##CC_GUI_COLOR_SAMPLE_GRID";
-    strings["Selection##CC_GUI_COLOR_SAMPLE_SEL"].plurals[0] = "=Selection##CC_GUI_COLOR_SAMPLE_SEL";
-    strings["Selection points##CC_GUI_COLOR_SAMPLE_SEL_POINT"].plurals[0] = "=Selection points##CC_GUI_COLOR_SAMPLE_SEL_POINT";
-    strings["Preview needle##CC_GUI_COLOR_SAMPLE_NEEDLE"].plurals[0] = "=Preview needle##CC_GUI_COLOR_SAMPLE_NEEDLE";
-    strings["Playing needles##CC_GUI_COLOR_SAMPLE_NEEDLE_PLAYING"].plurals[0] = "=Playing needles##CC_GUI_COLOR_SAMPLE_NEEDLE_PLAYING";
-    strings["Loop markers##CC_GUI_COLOR_SAMPLE_LOOP_POINT"].plurals[0] = "=Loop markers##CC_GUI_COLOR_SAMPLE_LOOP_POINT";
-    strings["Chip select: disabled##CC_GUI_COLOR_SAMPLE_CHIP_DISABLED"].plurals[0] = "=Chip select: disabled##CC_GUI_COLOR_SAMPLE_CHIP_DISABLED";
-    strings["Chip select: enabled##CC_GUI_COLOR_SAMPLE_CHIP_ENABLED"].plurals[0] = "=Chip select: enabled##CC_GUI_COLOR_SAMPLE_CHIP_ENABLED";
-    strings["Chip select: enabled (failure)##CC_GUI_COLOR_SAMPLE_CHIP_WARNING"].plurals[0] = "=Chip select: enabled (failure)##CC_GUI_COLOR_SAMPLE_CHIP_WARNING";
+    strings["Background##CC_GUI_COLOR_SAMPLE_BG"].plurals[0] = "Fundo##CC_GUI_COLOR_SAMPLE_BG";
+    strings["Waveform##CC_GUI_COLOR_SAMPLE_FG"].plurals[0] = "Forma de onda##CC_GUI_COLOR_SAMPLE_FG";
+    strings["Time background##CC_GUI_COLOR_SAMPLE_TIME_BG"].plurals[0] = "Fundo do tempo##CC_GUI_COLOR_SAMPLE_TIME_BG";
+    strings["Time text##CC_GUI_COLOR_SAMPLE_TIME_FG"].plurals[0] = "Texto do tempo##CC_GUI_COLOR_SAMPLE_TIME_FG";
+    strings["Loop region##CC_GUI_COLOR_SAMPLE_LOOP"].plurals[0] = "Região de repetição##CC_GUI_COLOR_SAMPLE_LOOP";
+    strings["Center guide##CC_GUI_COLOR_SAMPLE_CENTER"].plurals[0] = "Guia do centro##CC_GUI_COLOR_SAMPLE_CENTER";
+    strings["Grid##CC_GUI_COLOR_SAMPLE_GRID"].plurals[0] = "Grade##CC_GUI_COLOR_SAMPLE_GRID";
+    strings["Selection##CC_GUI_COLOR_SAMPLE_SEL"].plurals[0] = "Seleção##CC_GUI_COLOR_SAMPLE_SEL";
+    strings["Selection points##CC_GUI_COLOR_SAMPLE_SEL_POINT"].plurals[0] = "Pontos de seleção##CC_GUI_COLOR_SAMPLE_SEL_POINT";
+    strings["Preview needle##CC_GUI_COLOR_SAMPLE_NEEDLE"].plurals[0] = "Agulha de previsão##CC_GUI_COLOR_SAMPLE_NEEDLE";
+    strings["Playing needles##CC_GUI_COLOR_SAMPLE_NEEDLE_PLAYING"].plurals[0] = "Agulhas de reprodução##CC_GUI_COLOR_SAMPLE_NEEDLE_PLAYING";
+    strings["Loop markers##CC_GUI_COLOR_SAMPLE_LOOP_POINT"].plurals[0] = "Marcadores de repetição##CC_GUI_COLOR_SAMPLE_LOOP_POINT";
+    strings["Chip select: disabled##CC_GUI_COLOR_SAMPLE_CHIP_DISABLED"].plurals[0] = "Seleção de chip: desabilitada##CC_GUI_COLOR_SAMPLE_CHIP_DISABLED";
+    strings["Chip select: enabled##CC_GUI_COLOR_SAMPLE_CHIP_ENABLED"].plurals[0] = "Seleção de chip: habilitada##CC_GUI_COLOR_SAMPLE_CHIP_ENABLED";
+    strings["Chip select: enabled (failure)##CC_GUI_COLOR_SAMPLE_CHIP_WARNING"].plurals[0] = "Seleção de chip: habilitada (falha)##CC_GUI_COLOR_SAMPLE_CHIP_WARNING";
 
-    strings["Unallocated##CC_GUI_COLOR_PAT_MANAGER_NULL"].plurals[0] = "=Unallocated##CC_GUI_COLOR_PAT_MANAGER_NULL";
-    strings["Unused##CC_GUI_COLOR_PAT_MANAGER_UNUSED"].plurals[0] = "=Unused##CC_GUI_COLOR_PAT_MANAGER_UNUSED";
-    strings["Used##CC_GUI_COLOR_PAT_MANAGER_USED"].plurals[0] = "=Used##CC_GUI_COLOR_PAT_MANAGER_USED";
-    strings["Overused##CC_GUI_COLOR_PAT_MANAGER_OVERUSED"].plurals[0] = "=Overused##CC_GUI_COLOR_PAT_MANAGER_OVERUSED";
-    strings["Really overused##CC_GUI_COLOR_PAT_MANAGER_EXTREMELY_OVERUSED"].plurals[0] = "=Really overused##CC_GUI_COLOR_PAT_MANAGER_EXTREMELY_OVERUSED";
-    strings["Combo Breaker##CC_GUI_COLOR_PAT_MANAGER_COMBO_BREAKER"].plurals[0] = "=Combo Breaker##CC_GUI_COLOR_PAT_MANAGER_COMBO_BREAKER";
+    strings["Unallocated##CC_GUI_COLOR_PAT_MANAGER_NULL"].plurals[0] = "Não alocado##CC_GUI_COLOR_PAT_MANAGER_NULL";
+    strings["Unused##CC_GUI_COLOR_PAT_MANAGER_UNUSED"].plurals[0] = "Não utilizado##CC_GUI_COLOR_PAT_MANAGER_UNUSED";
+    strings["Used##CC_GUI_COLOR_PAT_MANAGER_USED"].plurals[0] = "Utilizado##CC_GUI_COLOR_PAT_MANAGER_USED";
+    strings["Overused##CC_GUI_COLOR_PAT_MANAGER_OVERUSED"].plurals[0] = "Muito utilizado##CC_GUI_COLOR_PAT_MANAGER_OVERUSED";
+    strings["Really overused##CC_GUI_COLOR_PAT_MANAGER_EXTREMELY_OVERUSED"].plurals[0] = "Extremamente utilizado##CC_GUI_COLOR_PAT_MANAGER_EXTREMELY_OVERUSED";
+    strings["Combo Breaker##CC_GUI_COLOR_PAT_MANAGER_COMBO_BREAKER"].plurals[0] = "Combo Breaker##CC_GUI_COLOR_PAT_MANAGER_COMBO_BREAKER";
 
-    strings["Background##CC_GUI_COLOR_PIANO_BACKGROUND"].plurals[0] = "=Background##CC_GUI_COLOR_PIANO_BACKGROUND";
-    strings["Upper key##CC_GUI_COLOR_PIANO_KEY_TOP"].plurals[0] = "=Upper key##CC_GUI_COLOR_PIANO_KEY_TOP";
-    strings["Upper key (feedback)##CC_GUI_COLOR_PIANO_KEY_TOP_HIT"].plurals[0] = "=Upper key (feedback)##CC_GUI_COLOR_PIANO_KEY_TOP_HIT";
-    strings["Upper key (pressed)##CC_GUI_COLOR_PIANO_KEY_TOP_ACTIVE"].plurals[0] = "=Upper key (pressed)##CC_GUI_COLOR_PIANO_KEY_TOP_ACTIVE";
-    strings["Lower key##CC_GUI_COLOR_PIANO_KEY_BOTTOM"].plurals[0] = "=Lower key##CC_GUI_COLOR_PIANO_KEY_BOTTOM";
-    strings["Lower key (feedback)##CC_GUI_COLOR_PIANO_KEY_BOTTOM_HIT"].plurals[0] = "=Lower key (feedback)##CC_GUI_COLOR_PIANO_KEY_BOTTOM_HIT";
-    strings["Lower key (pressed)##CC_GUI_COLOR_PIANO_KEY_BOTTOM_ACTIVE"].plurals[0] = "=Lower key (pressed)##CC_GUI_COLOR_PIANO_KEY_BOTTOM_ACTIVE";
+    strings["Background##CC_GUI_COLOR_PIANO_BACKGROUND"].plurals[0] = "Fundo##CC_GUI_COLOR_PIANO_BACKGROUND";
+    strings["Upper key##CC_GUI_COLOR_PIANO_KEY_TOP"].plurals[0] = "Tecla preta##CC_GUI_COLOR_PIANO_KEY_TOP";
+    strings["Upper key (feedback)##CC_GUI_COLOR_PIANO_KEY_TOP_HIT"].plurals[0] = "Tecla preta (feedback)##CC_GUI_COLOR_PIANO_KEY_TOP_HIT";
+    strings["Upper key (pressed)##CC_GUI_COLOR_PIANO_KEY_TOP_ACTIVE"].plurals[0] = "Tecla preta (pressionada)##CC_GUI_COLOR_PIANO_KEY_TOP_ACTIVE";
+    strings["Lower key##CC_GUI_COLOR_PIANO_KEY_BOTTOM"].plurals[0] = "Tecla branca##CC_GUI_COLOR_PIANO_KEY_BOTTOM";
+    strings["Lower key (feedback)##CC_GUI_COLOR_PIANO_KEY_BOTTOM_HIT"].plurals[0] = "Tecla branca (feedback)##CC_GUI_COLOR_PIANO_KEY_BOTTOM_HIT";
+    strings["Lower key (pressed)##CC_GUI_COLOR_PIANO_KEY_BOTTOM_ACTIVE"].plurals[0] = "Tecla branca (pressionada)##CC_GUI_COLOR_PIANO_KEY_BOTTOM_ACTIVE";
 
-    strings["Clock text##CC_GUI_COLOR_CLOCK_TEXT"].plurals[0] = "=Clock text##CC_GUI_COLOR_CLOCK_TEXT";
-    strings["Beat (off)##CC_GUI_COLOR_CLOCK_BEAT_LOW"].plurals[0] = "=Beat (off)##CC_GUI_COLOR_CLOCK_BEAT_LOW";
-    strings["Beat (on)##CC_GUI_COLOR_CLOCK_BEAT_HIGH"].plurals[0] = "=Beat (on)##CC_GUI_COLOR_CLOCK_BEAT_HIGH";
+    strings["Clock text##CC_GUI_COLOR_CLOCK_TEXT"].plurals[0] = "Texto do clock##CC_GUI_COLOR_CLOCK_TEXT";
+    strings["Beat (off)##CC_GUI_COLOR_CLOCK_BEAT_LOW"].plurals[0] = "Batida (secundária)##CC_GUI_COLOR_CLOCK_BEAT_LOW";
+    strings["Beat (on)##CC_GUI_COLOR_CLOCK_BEAT_HIGH"].plurals[0] = "Batida (primária)##CC_GUI_COLOR_CLOCK_BEAT_HIGH";
 
-    strings["PortSet##CC_GUI_COLOR_PATCHBAY_PORTSET"].plurals[0] = "=PortSet##CC_GUI_COLOR_PATCHBAY_PORTSET";
-    strings["Port##CC_GUI_COLOR_PATCHBAY_PORT"].plurals[0] = "=Port##CC_GUI_COLOR_PATCHBAY_PORT";
-    strings["Port (hidden/unavailable)##CC_GUI_COLOR_PATCHBAY_PORT_HIDDEN"].plurals[0] = "=Port (hidden/unavailable)##CC_GUI_COLOR_PATCHBAY_PORT_HIDDEN";
-    strings["Connection (selected)##CC_GUI_COLOR_PATCHBAY_CONNECTION"].plurals[0] = "=Connection (selected)##CC_GUI_COLOR_PATCHBAY_CONNECTION";
-    strings["Connection (other)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG"].plurals[0] = "=Connection (other)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG";
+    strings["PortSet##CC_GUI_COLOR_PATCHBAY_PORTSET"].plurals[0] = "Conjunto de portas##CC_GUI_COLOR_PATCHBAY_PORTSET";
+    strings["Port##CC_GUI_COLOR_PATCHBAY_PORT"].plurals[0] = "Porta##CC_GUI_COLOR_PATCHBAY_PORT";
+    strings["Port (hidden/unavailable)##CC_GUI_COLOR_PATCHBAY_PORT_HIDDEN"].plurals[0] = "Porta (escondida/indisponível)##CC_GUI_COLOR_PATCHBAY_PORT_HIDDEN";
+    strings["Connection (selected)##CC_GUI_COLOR_PATCHBAY_CONNECTION"].plurals[0] = "Conexão (selecionada)##CC_GUI_COLOR_PATCHBAY_CONNECTION";
+    strings["Connection (other)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG"].plurals[0] = "Conexão (outra)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG";
 
-    strings["Log level: Error##CC_GUI_COLOR_LOGLEVEL_ERROR"].plurals[0] = "=Log level: Error##CC_GUI_COLOR_LOGLEVEL_ERROR";
-    strings["Log level: Warning##CC_GUI_COLOR_LOGLEVEL_WARNING"].plurals[0] = "=Log level: Warning##CC_GUI_COLOR_LOGLEVEL_WARNING";
-    strings["Log level: Info##CC_GUI_COLOR_LOGLEVEL_INFO"].plurals[0] = "=Log level: Info##CC_GUI_COLOR_LOGLEVEL_INFO";
-    strings["Log level: Debug##CC_GUI_COLOR_LOGLEVEL_DEBUG"].plurals[0] = "=Log level: Debug##CC_GUI_COLOR_LOGLEVEL_DEBUG";
-    strings["Log level: Trace/Verbose##CC_GUI_COLOR_LOGLEVEL_TRACE"].plurals[0] = "=Log level: Trace/Verbose##CC_GUI_COLOR_LOGLEVEL_TRACE";
+    strings["Log level: Error##CC_GUI_COLOR_LOGLEVEL_ERROR"].plurals[0] = "Nível de log: Erro##CC_GUI_COLOR_LOGLEVEL_ERROR";
+    strings["Log level: Warning##CC_GUI_COLOR_LOGLEVEL_WARNING"].plurals[0] = "Nível de log: Aviso##CC_GUI_COLOR_LOGLEVEL_WARNING";
+    strings["Log level: Info##CC_GUI_COLOR_LOGLEVEL_INFO"].plurals[0] = "Nível de log: Informação##CC_GUI_COLOR_LOGLEVEL_INFO";
+    strings["Log level: Debug##CC_GUI_COLOR_LOGLEVEL_DEBUG"].plurals[0] = "Nível de log: Depuração##CC_GUI_COLOR_LOGLEVEL_DEBUG";
+    strings["Log level: Trace/Verbose##CC_GUI_COLOR_LOGLEVEL_TRACE"].plurals[0] = "Nível de log: Traço/Verboso##CC_GUI_COLOR_LOGLEVEL_TRACE";
 
-    strings["OK##SettingsOK"].plurals[0] = "=OK##SettingsOK";
-    strings["Cancel##SettingsCancel"].plurals[0] = "=Cancel##SettingsCancel";
-    strings["Apply##SettingsApply"].plurals[0] = "=Apply##SettingsApply";
+    strings["OK##SettingsOK"].plurals[0] = "OK##SettingsOK";
+    strings["Cancel##SettingsCancel"].plurals[0] = "Cancelar##SettingsCancel";
+    strings["Apply##SettingsApply"].plurals[0] = "Aplicar##SettingsApply";
 
     //   sgut  src/gui/util.cpp
-    strings["<nothing>##sgut"].plurals[0] = "=<nothing>";
-    strings["Unknown##sgut0"].plurals[0] = "=Unknown";
-    strings["Unknown##sgut1"].plurals[0] = "=Unknown";
+    strings["<nothing>##sgut"].plurals[0] = "<nada>";
+    strings["Unknown##sgut0"].plurals[0] = "Desconhecido";
+    strings["Unknown##sgut1"].plurals[0] = "Desconhecido";
 
     // instruments
     //      icon   is the letter icon for the instrument
 
     //   sgi**     src/gui/inst/
-    //   sgiPCMA   src/gui/inst/adpcma.cpp
-    //   sgiPCMB   src/gui/inst/adpcmb.cpp
-    //   sgiSAMPLE src/gui/inst/amiga.cpp
-    //   sgiAY     src/gui/inst/ay.cpp
-    //   sgi8930   src/gui/inst/ay8930.cpp
-    //   sgiB      src/gui/inst/beeper.cpp
-    //   sgiC140   src/gui/inst/c140.cpp
-    //   sgiC219   src/gui/inst/c219.cpp
-    //   sgiC64    src/gui/inst/c64.cpp
-    //   sgiDAVE   src/gui/inst/dave.cpp
-    //   sgi5503   src/gui/inst/es5503.cpp
-    //   sgiOTTO   src/gui/inst/es5506.cpp
-    //   sgiESFM   src/gui/inst/esfm.cpp
-    //   sgiFDS    src/gui/inst/fds.cpp
-    //   sgifmeu   src/gui/inst/fmEnvUtil.cpp
-    //   sgifmeh   src/gui/inst/fmEnvUtil.h
-    //   sgiGA20   src/gui/inst/ga20.cpp
-    //   sgiGB     src/gui/inst/gb.cpp
-    //   sgiK00    src/gui/inst/k007232.cpp
-    //   sgiK05    src/gui/inst/k053260.cpp
-    //   sgimcd    src/gui/inst/macroDraw.cpp
-    //   sgimcdu   src/gui/inst/macroDrawUtil.cpp
-    //   sgiLYNX   src/gui/inst/mikey.cpp
-    //   sgi5232   src/gui/inst/msm5232.cpp
-    //   sgi6258   src/gui/inst/msm6258.cpp
-    //   sgi6295   src/gui/inst/msm6295.cpp
-    //   sgiMULPCM src/gui/inst/multipcm.cpp
-    //   sgiN163   src/gui/inst/n163.cpp
-    //   sgiWSG    src/gui/inst/namco.cpp
-    //   sgiNES    src/gui/inst/nes.cpp
-    //   sgiOPL    src/gui/inst/opl.cpp
-    //   sgiOPLL   src/gui/inst/opll.cpp
-    //   sgiOPM    src/gui/inst/opm.cpp
-    //   sgiOPN    src/gui/inst/opn.cpp
-    //   sgiOPZ    src/gui/inst/opz.cpp
-    //   sgiPCE    src/gui/inst/pce.cpp
-    //   sgiPET    src/gui/inst/pet.cpp
-    //   sgiPMQT   src/gui/inst/pokemini.cpp
-    //   sgiPOKEY  src/gui/inst/pokey.cpp
-    //   sgiPNN    src/gui/inst/powernoise.cpp
-    //   sgiPNS    src/gui/inst/powernoise_slope.cpp
-    //   sgiPV     src/gui/inst/pv1000.cpp
-    //   sgiQ      src/gui/inst/qsound.cpp
-    //   sgiRF5    src/gui/inst/rf5c68.cpp
-    //   sgiSAA    src/gui/inst/saa1099.cpp
-    //   sgismpd   src/gui/inst/sampleDraw.cpp
-    //   sgiSCC    src/gui/inst/scc.cpp
-    //   sgiSEGA   src/gui/inst/segapcm.cpp
-    //   sgiSID2   src/gui/inst/sid2.cpp
-    //   sgiSM     src/gui/inst/sm8521.cpp
-    //   sgiSNES   src/gui/inst/snes.cpp
-    //   sgiPSG    src/gui/inst/std.cpp
-    //   sgistru   src/gui/inst/stringsUtil.cpp
-    //   sgiSU     src/gui/inst/su.cpp
-    //   sgiSWAN   src/gui/inst/swan.cpp
-    //   sgiT6W    src/gui/inst/t6w28.cpp
-    //   sgiTED    src/gui/inst/ted.cpp
-    //   sgiTIA    src/gui/inst/tia.cpp
-    //   sgiVB     src/gui/inst/vboy.cpp
-    //   sgiVERA   src/gui/inst/vera.cpp
-    //   sgiVIC    src/gui/inst/vic.cpp
-    //   sgiVRC6   src/gui/inst/vrc6.cpp
-    //   sgiVRC6S  src/gui/inst/vrc6saw.cpp
-    //   sgiwave   src/gui/inst/wavetable.cpp
-    //   sgiX1     src/gui/inst/x1_010.cpp
-    //   sgiYMZ    src/gui/inst/ymz280b.cpp
+    //   sgiPCMA   src/gui/inst/adpcma.cpp           --DONE--
+    //   sgiPCMB   src/gui/inst/adpcmb.cpp           --DONE--
+    //   sgiSAMPLE src/gui/inst/amiga.cpp            --DONE--
+    //   sgiAY     src/gui/inst/ay.cpp               --DONE--
+    //   sgi8930   src/gui/inst/ay8930.cpp           --DONE--
+    //   sgiB      src/gui/inst/beeper.cpp           --DONE--
+    //   sgiC140   src/gui/inst/c140.cpp             --DONE--
+    //   sgiC219   src/gui/inst/c219.cpp             --DONE--
+    //   sgiC64    src/gui/inst/c64.cpp              --DONE--
+    //   sgiDAVE   src/gui/inst/dave.cpp             --DONE--
+    //   sgi5503   src/gui/inst/es5503.cpp           --DONE--
+    //   sgiOTTO   src/gui/inst/es5506.cpp           --DONE--
+    //   sgiESFM   src/gui/inst/esfm.cpp             --DONE--
+    //   sgiFDS    src/gui/inst/fds.cpp              --DONE--
+    //   sgifmeu   src/gui/inst/fmEnvUtil.cpp        --DONE--
+    //   sgifmeh   src/gui/inst/fmEnvUtil.h          --DONE--
+    //   sgiGA20   src/gui/inst/ga20.cpp             --DONE--
+    //   sgiGB     src/gui/inst/gb.cpp               --DONE--
+    //   sgiK00    src/gui/inst/k007232.cpp          --DONE--
+    //   sgiK05    src/gui/inst/k053260.cpp          --DONE--
+    //   sgimcd    src/gui/inst/macroDraw.cpp        --DONE--
+    //   sgimcdu   src/gui/inst/macroDrawUtil.cpp    --
+    //   sgiLYNX   src/gui/inst/mikey.cpp            --DONE--
+    //   sgi5232   src/gui/inst/msm5232.cpp          --DONE--
+    //   sgi6258   src/gui/inst/msm6258.cpp          --DONE--
+    //   sgi6295   src/gui/inst/msm6295.cpp          --DONE--
+    //   sgiMULPCM src/gui/inst/multipcm.cpp         --DONE--
+    //   sgiN163   src/gui/inst/n163.cpp             --DONE--
+    //   sgiWSG    src/gui/inst/namco.cpp            --DONE--
+    //   sgiNES    src/gui/inst/nes.cpp              --DONE--
+    //   sgiOPL    src/gui/inst/opl.cpp              --DONE--
+    //   sgiOPLL   src/gui/inst/opll.cpp             --DONE--
+    //   sgiOPM    src/gui/inst/opm.cpp              --DONE--
+    //   sgiOPN    src/gui/inst/opn.cpp              --DONE--
+    //   sgiOPZ    src/gui/inst/opz.cpp              --DONE--
+    //   sgiPCE    src/gui/inst/pce.cpp              --DONE--
+    //   sgiPET    src/gui/inst/pet.cpp              --DONE--
+    //   sgiPMQT   src/gui/inst/pokemini.cpp         --DONE--
+    //   sgiPOKEY  src/gui/inst/pokey.cpp            --DONE--
+    //   sgiPNN    src/gui/inst/powernoise.cpp       --DONE--
+    //   sgiPNS    src/gui/inst/powernoise_slope.cpp --DONE--
+    //   sgiPV     src/gui/inst/pv1000.cpp           --DONE--
+    //   sgiQ      src/gui/inst/qsound.cpp           --DONE--
+    //   sgiRF5    src/gui/inst/rf5c68.cpp           --DONE--
+    //   sgiSAA    src/gui/inst/saa1099.cpp          --DONE--
+    //   sgismpd   src/gui/inst/sampleDraw.cpp       --DONE--
+    //   sgiSCC    src/gui/inst/scc.cpp              --DONE--
+    //   sgiSEGA   src/gui/inst/segapcm.cpp          --DONE--
+    //   sgiSID2   src/gui/inst/sid2.cpp             --DONE--
+    //   sgiSM     src/gui/inst/sm8521.cpp           --DONE--
+    //   sgiSNES   src/gui/inst/snes.cpp             --DONE--
+    //   sgiPSG    src/gui/inst/std.cpp              --DONE--
+    //   sgistru   src/gui/inst/stringsUtil.cpp      --    -- TODO revisar
+    //   sgiSU     src/gui/inst/su.cpp               --
+    //   sgiSWAN   src/gui/inst/swan.cpp             --
+    //   sgiT6W    src/gui/inst/t6w28.cpp            --
+    //   sgiTED    src/gui/inst/ted.cpp              --
+    //   sgiTIA    src/gui/inst/tia.cpp              --
+    //   sgiVB     src/gui/inst/vboy.cpp             --
+    //   sgiVERA   src/gui/inst/vera.cpp             --
+    //   sgiVIC    src/gui/inst/vic.cpp              --
+    //   sgiVRC6   src/gui/inst/vrc6.cpp             --
+    //   sgiVRC6S  src/gui/inst/vrc6saw.cpp          --
+    //   sgiwave   src/gui/inst/wavetable.cpp        --
+    //   sgiX1     src/gui/inst/x1_010.cpp           --
+    //   sgiYMZ    src/gui/inst/ymz280b.cpp          --
 
     //   sgiPCMA  src/gui/inst/adpcma.cpp
 
-    strings["Macros##sgiPCMA"].plurals[0] = "=Macros";
-    strings["Volume##sgiPCMA"].plurals[0] = "=Volume";
-    strings["Global Volume##sgiPCMA"].plurals[0] = "=Global Volume";
-    strings["Panning##sgiPCMA"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiPCMA"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiPCMA"].plurals[0] = "Macros";
+    strings["Volume##sgiPCMA"].plurals[0] = "Volume";
+    strings["Global Volume##sgiPCMA"].plurals[0] = "Volume Global";
+    strings["Panning##sgiPCMA"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiPCMA"].plurals[0] = "Redef. de Fase";
 
     //   sgiPCMB   src/gui/inst/adpcmb.cpp
 
-    strings["Macros##sgiPCMB"].plurals[0] = "=Macros";
-    strings["Volume##sgiPCMB"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiPCMB"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiPCMB"].plurals[0] = "=Pitch";
-    strings["Panning##sgiPCMB"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiPCMB"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiPCMB"].plurals[0] = "Macros";
+    strings["Volume##sgiPCMB"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiPCMB"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiPCMB"].plurals[0] = "Tom";
+    strings["Panning##sgiPCMB"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiPCMB"].plurals[0] = "Redef. de Fase";
 
     //   sgiSAMPLE src/gui/inst/amiga.cpp
 
-    strings["Macros##sgiSAMPLE"].plurals[0] = "=Macros";
-    strings["Volume##sgiSAMPLE"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiSAMPLE"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiSAMPLE"].plurals[0] = "=Pitch";
-    strings["Panning##sgiSAMPLE"].plurals[0] = "=Panning";
-    strings["Panning (left)##sgiSAMPLE"].plurals[0] = "=Panning (left)";
-    strings["Surround##sgiSAMPLE"].plurals[0] = "=Surround";
-    strings["Panning (right)##sgiSAMPLE"].plurals[0] = "=Panning (right)";
-    strings["Waveform##sgiSAMPLE"].plurals[0] = "=Waveform";
-    strings["Phase Reset##sgiSAMPLE"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiSAMPLE"].plurals[0] = "Macros";
+    strings["Volume##sgiSAMPLE"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiSAMPLE"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiSAMPLE"].plurals[0] = "Tom";
+    strings["Panning##sgiSAMPLE"].plurals[0] = "Balanço";
+    strings["Panning (left)##sgiSAMPLE"].plurals[0] = "Balanço (esquerda)";
+    strings["Surround##sgiSAMPLE"].plurals[0] = "Surround";
+    strings["Panning (right)##sgiSAMPLE"].plurals[0] = "Balanço (direita)";
+    strings["Waveform##sgiSAMPLE"].plurals[0] = "Forma de onda";
+    strings["Phase Reset##sgiSAMPLE"].plurals[0] = "Redef. de Fase";
 
     //   sgiAY     src/gui/inst/ay.cpp
 
-    strings["Macros##sgiAY"].plurals[0] = "=Macros";
-    strings["Volume##sgiAY"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiAY"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiAY"].plurals[0] = "=Pitch";
-    strings["Noise Freq##sgiAY"].plurals[0] = "=Noise Freq";
-    strings["Waveform##sgiAY"].plurals[0] = "=Waveform";
-    strings["Phase Reset##sgiAY"].plurals[0] = "=Phase Reset";
-    strings["Envelope##sgiAY"].plurals[0] = "=Envelope";
-    strings["AutoEnv Num##sgiAY"].plurals[0] = "=AutoEnv Num";
-    strings["AutoEnv Den##sgiAY"].plurals[0] = "=AutoEnv Den";
+    strings["Macros##sgiAY"].plurals[0] = "Macros";
+    strings["Volume##sgiAY"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiAY"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiAY"].plurals[0] = "Tom";
+    strings["Noise Freq##sgiAY"].plurals[0] = "Freq. Ruído";
+    strings["Waveform##sgiAY"].plurals[0] = "Forma de Onda";
+    strings["Phase Reset##sgiAY"].plurals[0] = "Redef. de Fase";
+    strings["Envelope##sgiAY"].plurals[0] = "Envelope";
+    strings["AutoEnv Num##sgiAY"].plurals[0] = "Num. EnvAuto";
+    strings["AutoEnv Den##sgiAY"].plurals[0] = "Den. EnvAuto";
 
     //   sgi8930   src/gui/inst/ay8930.cpp
 
-    strings["Macros##sgi8930"].plurals[0] = "=Macros";
-    strings["Volume##sgi8930"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgi8930"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgi8930"].plurals[0] = "=Pitch";
-    strings["Noise Freq##sgi8930"].plurals[0] = "=Noise Freq";
-    strings["Waveform##sgi8930"].plurals[0] = "=Waveform";
-    strings["Phase Reset##sgi8930"].plurals[0] = "=Phase Reset";
-    strings["Duty##sgi8930"].plurals[0] = "=Duty";
-    strings["Envelope##sgi8930"].plurals[0] = "=Envelope";
-    strings["AutoEnv Num##sgi8930"].plurals[0] = "=AutoEnv Num";
-    strings["AutoEnv Den##sgi8930"].plurals[0] = "=AutoEnv Den";
-    strings["Noise AND Mask##sgi8930"].plurals[0] = "=Noise AND Mask";
-    strings["Noise OR Mask##sgi8930"].plurals[0] = "=Noise OR Mask";
+    strings["Macros##sgi8930"].plurals[0] = "Macros";
+    strings["Volume##sgi8930"].plurals[0] = "Volume";
+    strings["Arpeggio##sgi8930"].plurals[0] = "Arpejo";
+    strings["Pitch##sgi8930"].plurals[0] = "Tom";
+    strings["Noise Freq##sgi8930"].plurals[0] = "Freq. Ruído";
+    strings["Waveform##sgi8930"].plurals[0] = "Forma de Onda";
+    strings["Phase Reset##sgi8930"].plurals[0] = "Redef. de Fase";
+    strings["Duty##sgi8930"].plurals[0] = "Ciclo de Trab.";
+    strings["Envelope##sgi8930"].plurals[0] = "Envelope";
+    strings["AutoEnv Num##sgi8930"].plurals[0] = "Num. EnvAuto";
+    strings["AutoEnv Den##sgi8930"].plurals[0] = "Den. EnvAuto";
+    strings["Noise AND Mask##sgi8930"].plurals[0] = "Máscara AND Ruído";
+    strings["Noise OR Mask##sgi8930"].plurals[0] = "Máscara OR Ruído";
 
     //   sgiB      src/gui/inst/beeper.cpp
 
-    strings["Macros##sgiB"].plurals[0] = "=Macros";
-    strings["Volume##sgiB"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiB"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiB"].plurals[0] = "=Pitch";
-    strings["Pulse Width##sgiB"].plurals[0] = "=Pulse Width";
+    strings["Macros##sgiB"].plurals[0] = "Macros";
+    strings["Volume##sgiB"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiB"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiB"].plurals[0] = "Tom";
+    strings["Pulse Width##sgiB"].plurals[0] = "Largura de Pulso";
 
     //   sgiC140   src/gui/inst/c140.cpp
 
-    strings["Macros##sgiC140"].plurals[0] = "=Macros";
-    strings["Volume##sgiC140"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiC140"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiC140"].plurals[0] = "=Pitch";
-    strings["Panning (left)##sgiC140"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiC140"].plurals[0] = "=Panning (right)";
-    strings["Phase Reset##sgiC140"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiC140"].plurals[0] = "Macros";
+    strings["Volume##sgiC140"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiC140"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiC140"].plurals[0] = "Tom";
+    strings["Panning (left)##sgiC140"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiC140"].plurals[0] = "Balanço (direita)";
+    strings["Phase Reset##sgiC140"].plurals[0] = "Redef. de Fase";
 
     //   sgiC219   src/gui/inst/c219.cpp
 
-    strings["Macros##sgiC219"].plurals[0] = "=Macros";
-    strings["Volume##sgiC219"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiC219"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiC219"].plurals[0] = "=Pitch";
-    strings["Control##sgiC219"].plurals[0] = "=Control";
-    strings["Panning (left)##sgiC219"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiC219"].plurals[0] = "=Panning (right)";
-    strings["Phase Reset##sgiC219"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiC219"].plurals[0] = "Macros";
+    strings["Volume##sgiC219"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiC219"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiC219"].plurals[0] = "Tom";
+    strings["Control##sgiC219"].plurals[0] = "Controle";
+    strings["Panning (left)##sgiC219"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiC219"].plurals[0] = "Balanço (direita)";
+    strings["Phase Reset##sgiC219"].plurals[0] = "Redef. de Fase";
 
     //   sgiC64    src/gui/inst/c64.cpp
 
-    strings["Waveform##sgiC640"].plurals[0] = "=Waveform";
-    strings["tri##sgiC64"].plurals[0] = "=tri";
-    strings["saw##sgiC64"].plurals[0] = "=saw";
-    strings["pulse##sgiC64"].plurals[0] = "=pulse";
-    strings["noise##sgiC64"].plurals[0] = "=noise";
-    strings["A##sgiC640"].plurals[0] = "=A";
-    strings["A##sgiC641"].plurals[0] = "=A";
-    strings["D##sgiC640"].plurals[0] = "=D";
-    strings["D##sgiC641"].plurals[0] = "=D";
-    strings["S##sgiC640"].plurals[0] = "=S";
-    strings["S##sgiC641"].plurals[0] = "=S";
-    strings["R##sgiC640"].plurals[0] = "=R";
-    strings["R##sgiC641"].plurals[0] = "=R";
-    strings["Envelope##sgiC640"].plurals[0] = "=Envelope";
-    strings["Envelope##sgiC641"].plurals[0] = "=Envelope";
-    strings["Duty##sgiC640"].plurals[0] = "=Duty";
-    strings["Ring Modulation##sgiC64"].plurals[0] = "=Ring Modulation";
-    strings["Oscillator Sync##sgiC64"].plurals[0] = "=Oscillator Sync";
-    strings["Enable filter##sgiC64"].plurals[0] = "=Enable filter";
-    strings["Initialize filter##sgiC64"].plurals[0] = "=Initialize filter";
-    strings["Cutoff##sgiC640"].plurals[0] = "=Cutoff";
-    strings["Resonance##sgiC640"].plurals[0] = "=Resonance";
-    strings["Filter Mode##sgiC640"].plurals[0] = "=Filter Mode";
-    strings["low##sgiC64"].plurals[0] = "=low";
-    strings["band##sgiC64"].plurals[0] = "=band";
-    strings["high##sgiC64"].plurals[0] = "=high";
-    strings["ch3off##sgiC64"].plurals[0] = "=ch3off";
-    strings["Absolute Cutoff Macro##sgiC64"].plurals[0] = "=Absolute Cutoff Macro";
-    strings["Absolute Duty Macro##sgiC64"].plurals[0] = "=Absolute Duty Macro";
-    strings["Don't test before new note##sgiC64"].plurals[0] = "=Don't test before new note";
-    strings["Macros##sgiC64"].plurals[0] = "=Macros";
-    strings["Volume##sgiC64"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiC64"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiC64"].plurals[0] = "=Pitch";
-    strings["Duty##sgiC641"].plurals[0] = "=Duty";
-    strings["Waveform##sgiC641"].plurals[0] = "=Waveform";
-    strings["Cutoff##sgiC641"].plurals[0] = "=Cutoff";
-    strings["Filter Mode##sgiC641"].plurals[0] = "=Filter Mode";
-    strings["Filter Toggle##sgiC64"].plurals[0] = "=Filter Toggle";
-    strings["Resonance##sgiC641"].plurals[0] = "=Resonance";
-    strings["Special##sgiC64"].plurals[0] = "=Special";
-    strings["Attack##sgiC64"].plurals[0] = "=Attack";
-    strings["Decay##sgiC64"].plurals[0] = "=Decay";
-    strings["Sustain##sgiC64"].plurals[0] = "=Sustain";
-    strings["Release##sgiC64"].plurals[0] = "=Release";
+    strings["Waveform##sgiC640"].plurals[0] = "Forma de Onda";
+    strings["tri##sgiC64"].plurals[0] = "tri";
+    strings["saw##sgiC64"].plurals[0] = "serra";
+    strings["pulse##sgiC64"].plurals[0] = "pulso";
+    strings["noise##sgiC64"].plurals[0] = "ruído";
+    strings["A##sgiC640"].plurals[0] = "A";
+    strings["A##sgiC641"].plurals[0] = "A";
+    strings["D##sgiC640"].plurals[0] = "D";
+    strings["D##sgiC641"].plurals[0] = "D";
+    strings["S##sgiC640"].plurals[0] = "S";
+    strings["S##sgiC641"].plurals[0] = "S";
+    strings["R##sgiC640"].plurals[0] = "R";
+    strings["R##sgiC641"].plurals[0] = "R";
+    strings["Envelope##sgiC640"].plurals[0] = "Envelope";
+    strings["Envelope##sgiC641"].plurals[0] = "Envelope";
+    strings["Duty##sgiC640"].plurals[0] = "Ciclo de Trabalho";
+    strings["Ring Modulation##sgiC64"].plurals[0] = "Modulação de Anel";
+    strings["Oscillator Sync##sgiC64"].plurals[0] = "Sincronização de Osciladores";
+    strings["Enable filter##sgiC64"].plurals[0] = "Habilitar filtro";
+    strings["Initialize filter##sgiC64"].plurals[0] = "Inicializar filtro";
+    strings["Cutoff##sgiC640"].plurals[0] = "Ponto de corte";
+    strings["Resonance##sgiC640"].plurals[0] = "Ressonância";
+    strings["Filter Mode##sgiC640"].plurals[0] = "Modo de filtro";
+    strings["low##sgiC64"].plurals[0] = "baixa";
+    strings["band##sgiC64"].plurals[0] = "banda";
+    strings["high##sgiC64"].plurals[0] = "alta";
+    strings["ch3off##sgiC64"].plurals[0] = "cn3desl";
+    strings["Absolute Cutoff Macro##sgiC64"].plurals[0] = "Macro de Corte Absoluta";
+    strings["Absolute Duty Macro##sgiC64"].plurals[0] = "Macro de Ciclo de Trab. Absoluta";
+    strings["Don't test before new note##sgiC64"].plurals[0] = "Não testar antes de uma nova nota";
+    strings["Macros##sgiC64"].plurals[0] = "Macros";
+    strings["Volume##sgiC64"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiC64"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiC64"].plurals[0] = "Tom";
+    strings["Duty##sgiC641"].plurals[0] = "Ciclo de Trabalho";
+    strings["Waveform##sgiC641"].plurals[0] = "Forma de onda";
+    strings["Cutoff##sgiC641"].plurals[0] = "Ponto de Corte";
+    strings["Filter Mode##sgiC641"].plurals[0] = "Modo de Filtro";
+    strings["Filter Toggle##sgiC64"].plurals[0] = "Alternar Filtro";
+    strings["Resonance##sgiC641"].plurals[0] = "Ressonância";
+    strings["Special##sgiC64"].plurals[0] = "Especial";
+    strings["Attack##sgiC64"].plurals[0] = "Ataque";
+    strings["Decay##sgiC64"].plurals[0] = "Decaimento";
+    strings["Sustain##sgiC64"].plurals[0] = "Sustentação";
+    strings["Release##sgiC64"].plurals[0] = "Repouso";
 
     //   sgiDAVE   src/gui/inst/dave.cpp
 
-    strings["Macros##sgiDAVE"].plurals[0] = "=Macros";
-    strings["Volume##sgiDAVE"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiDAVE"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiDAVE"].plurals[0] = "=Pitch";
-    strings["Noise Freq##sgiDAVE"].plurals[0] = "=Noise Freq";
-    strings["Waveform##sgiDAVE"].plurals[0] = "=Waveform";
-    strings["Panning (left)##sgiDAVE"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiDAVE"].plurals[0] = "=Panning (right)";
-    strings["Phase Reset##sgiDAVE"].plurals[0] = "=Phase Reset";
-    strings["Control##sgiDAVE"].plurals[0] = "=Control";
-    strings["Raw Frequency##sgiDAVE"].plurals[0] = "=Raw Frequency";
+    strings["Macros##sgiDAVE"].plurals[0] = "Macros";
+    strings["Volume##sgiDAVE"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiDAVE"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiDAVE"].plurals[0] = "Tom";
+    strings["Noise Freq##sgiDAVE"].plurals[0] = "Freq. Ruído";
+    strings["Waveform##sgiDAVE"].plurals[0] = "Forma de Onda";
+    strings["Panning (left)##sgiDAVE"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiDAVE"].plurals[0] = "Balanço (direita)";
+    strings["Phase Reset##sgiDAVE"].plurals[0] = "Redef. de fase";
+    strings["Control##sgiDAVE"].plurals[0] = "Controle";
+    strings["Raw Frequency##sgiDAVE"].plurals[0] = "Frequência Crua";
 
     //   sgi5503   src/gui/inst/es5503.cpp
 
-    strings["Oscillator mode:##sgi5503"].plurals[0] = "=Oscillator mode:";
-    strings["Freerun##sgi5503"].plurals[0] = "=Freerun";
-    strings["Oneshot##sgi5503"].plurals[0] = "=Oneshot";
-    strings["Sync/AM##sgi5503"].plurals[0] = "=Sync/AM";
-    strings["Swap##sgi5503"].plurals[0] = "=Swap";
-    strings["Virtual softpan channel##sgi5503"].plurals[0] = "=Virtual softpan channel";
-    strings["Combines odd and next even channel into one virtual channel with 256-step panning.\nInstrument, volume and effects need to be placed on the odd channel (e.g. 1st, 3rd, 5th etc.)##sgi5503"].plurals[0] = "=Combines odd and next even channel into one virtual channel with 256-step panning.\nInstrument, volume and effects need to be placed on the odd channel (e.g. 1st, 3rd, 5th etc.)";
-    strings["Phase reset on key-on##sgi5503"].plurals[0] = "=Phase reset on key-on";
-    strings["Macros##sgi5503"].plurals[0] = "=Macros";
-    strings["Volume##sgi5503"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgi5503"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgi5503"].plurals[0] = "=Pitch";
-    strings["Osc. mode##sgi5503"].plurals[0] = "=Osc. mode";
-    strings["Panning (left)##sgi5503"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgi5503"].plurals[0] = "=Panning (right)";
-    strings["Waveform##sgi5503"].plurals[0] = "=Waveform";
-    strings["Phase Reset##sgi5503"].plurals[0] = "=Phase Reset";
+    strings["Oscillator mode:##sgi5503"].plurals[0] = "Modo de Oscilador:";
+    strings["Freerun##sgi5503"].plurals[0] = "Livre/independente";
+    strings["Oneshot##sgi5503"].plurals[0] = "Uma vez";
+    strings["Sync/AM##sgi5503"].plurals[0] = "Sincronizado/AM";
+    strings["Swap##sgi5503"].plurals[0] = "Trocar";
+    strings["Virtual softpan channel##sgi5503"].plurals[0] = "Balanço suave virtual";
+    strings["Combines odd and next even channel into one virtual channel with 256-step panning.\nInstrument, volume and effects need to be placed on the odd channel (e.g. 1st, 3rd, 5th etc.)##sgi5503"].plurals[0] = "Combina um canal ímpar com o próximo canal par em um canal virtual com balanço de 256 passos.\nInstrumento, volume e efeitos precisam ser colocados em um canal ímpar (ex: 1º, 3º, 5º etc.)";
+    strings["Phase reset on key-on##sgi5503"].plurals[0] = "Realizar redefinição de fase em nova nota";
+    strings["Macros##sgi5503"].plurals[0] = "Macros";
+    strings["Volume##sgi5503"].plurals[0] = "Volume";
+    strings["Arpeggio##sgi5503"].plurals[0] = "Arpejo";
+    strings["Pitch##sgi5503"].plurals[0] = "Tom";
+    strings["Osc. mode##sgi5503"].plurals[0] = "Modo de Oscilador";
+    strings["Panning (left)##sgi5503"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgi5503"].plurals[0] = "Balanço (direita)";
+    strings["Waveform##sgi5503"].plurals[0] = "Forma de Onda";
+    strings["Phase Reset##sgi5503"].plurals[0] = "Redef. de Fase";
     strings["Wave/sample pos.##sgi5503"].plurals[0] = "=Wave/sample pos.";
     strings["Osc. output##sgi5503"].plurals[0] = "=Osc. output";
 
     //   sgiOTTO   src/gui/inst/es5506.cpp
 
-    strings["Filter Mode##sgiOTTO0"].plurals[0] = "=Filter Mode";
-    strings["Filter K1##sgiOTTO0"].plurals[0] = "=Filter K1";
-    strings["Filter K2##sgiOTTO0"].plurals[0] = "=Filter K2";
-    strings["Envelope length##sgiOTTO"].plurals[0] = "=Envelope length";
-    strings["Left Volume Ramp##sgiOTTO"].plurals[0] = "=Left Volume Ramp";
-    strings["Right Volume Ramp##sgiOTTO"].plurals[0] = "=Right Volume Ramp";
-    strings["Filter K1 Ramp##sgiOTTO"].plurals[0] = "=Filter K1 Ramp";
-    strings["Filter K2 Ramp##sgiOTTO"].plurals[0] = "=Filter K2 Ramp";
-    strings["K1 Ramp Slowdown##sgiOTTO"].plurals[0] = "=K1 Ramp Slowdown";
-    strings["K2 Ramp Slowdown##sgiOTTO"].plurals[0] = "=K2 Ramp Slowdown";
-    strings["Macros##sgiOTTO"].plurals[0] = "=Macros";
-    strings["Volume##sgiOTTO"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiOTTO"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiOTTO"].plurals[0] = "=Pitch";
-    strings["Panning (left)##sgiOTTO"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiOTTO"].plurals[0] = "=Panning (right)";
-    strings["Phase Reset##sgiOTTO"].plurals[0] = "=Phase Reset";
-    strings["Filter Mode##sgiOTTO1"].plurals[0] = "=Filter Mode";
-    strings["Filter K1##sgiOTTO1"].plurals[0] = "=Filter K1";
-    strings["Filter K2##sgiOTTO1"].plurals[0] = "=Filter K2";
-    strings["Outputs##sgiOTTO"].plurals[0] = "=Outputs";
-    strings["Control##sgiOTTO"].plurals[0] = "=Control";
+    strings["Filter Mode##sgiOTTO0"].plurals[0] = "Modo de filtro";
+    strings["Filter K1##sgiOTTO0"].plurals[0] = "Coef. K1 do filtro";
+    strings["Filter K2##sgiOTTO0"].plurals[0] = "Coef. K2 do filtro";
+    strings["Envelope length##sgiOTTO"].plurals[0] = "Comprimento do envelope";
+    strings["Left Volume Ramp##sgiOTTO"].plurals[0] = "Rampa do volume esquerdo";
+    strings["Right Volume Ramp##sgiOTTO"].plurals[0] = "Rampa do volume direito";
+    strings["Filter K1 Ramp##sgiOTTO"].plurals[0] = "Rampa do coef. K1 do filtro";
+    strings["Filter K2 Ramp##sgiOTTO"].plurals[0] = "Rampa do coef. K2 do filtro";
+    strings["K1 Ramp Slowdown##sgiOTTO"].plurals[0] = "Desaceleração da rampa do K1";
+    strings["K2 Ramp Slowdown##sgiOTTO"].plurals[0] = "Desaceleração da rampa do K2";
+    strings["Macros##sgiOTTO"].plurals[0] = "Macros";
+    strings["Volume##sgiOTTO"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiOTTO"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiOTTO"].plurals[0] = "Tom";
+    strings["Panning (left)##sgiOTTO"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiOTTO"].plurals[0] = "Balanço (direita)";
+    strings["Phase Reset##sgiOTTO"].plurals[0] = "Redef. de Fase";
+    strings["Filter Mode##sgiOTTO1"].plurals[0] = "Modo de filtro";
+    strings["Filter K1##sgiOTTO1"].plurals[0] = "Coef. K1 do filtro";
+    strings["Filter K2##sgiOTTO1"].plurals[0] = "Coef. K2 do filtro";
+    strings["Outputs##sgiOTTO"].plurals[0] = "Saídas";
+    strings["Control##sgiOTTO"].plurals[0] = "Controle";
 
     //   sgiESFM   src/gui/inst/esfm.cpp
 
-    strings["Other##sgiESFM0"].plurals[0] = "=Other";
-    strings["Other##sgiESFM1"].plurals[0] = "=Other";
-    strings["Envelope##sgiESFM0"].plurals[0] = "=Envelope";
-    strings["Envelope##sgiESFM1"].plurals[0] = "=Envelope";
-    strings["op%d##sgiESFM0"].plurals[0] = "=op%d";
-    strings["OP%d##sgiESFM1"].plurals[0] = "=OP%d";
-    strings["Detune in semitones##sgiESFM0"].plurals[0] = "=Detune in semitones";
-    strings["Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.##sgiESFM0"].plurals[0] = "=Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.";
-    strings["If operator outputs sound, enable left channel output.##sgiESFM0"].plurals[0] = "=If operator outputs sound, enable left channel output.";
-    strings["If operator outputs sound, enable right channel output.##sgiESFM0"].plurals[0] = "=If operator outputs sound, enable right channel output.";
-    strings["Block##sgiESFM0"].plurals[0] = "=Block";
-    strings["FreqNum##sgiESFM0"].plurals[0] = "=FreqNum";
-    strings["op%d##sgiESFM2"].plurals[0] = "=op%d";
-    strings["Operator %d##sgiESFM"].plurals[0] = "=Operator %d";
-    strings["Waveform##sgiESFM"].plurals[0] = "=Waveform";
-    strings["Envelope##sgiESFM"].plurals[0] = "=Envelope";
-    strings["Blk##sgiESFM"].plurals[0] = "=Blk";
-    strings["Block##sgiESFM1"].plurals[0] = "=Block";
-    strings["F##sgiESFM"].plurals[0] = "=F";
-    strings["Frequency (F-Num)##sgiESFM"].plurals[0] = "=Frequency (F-Num)";
-    strings["Detune in semitones##sgiESFM1"].plurals[0] = "=Detune in semitones";
-    strings["Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.##sgiESFM1"].plurals[0] = "=Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.";
-    strings["If operator outputs sound, enable left channel output.##sgiESFM1"].plurals[0] = "=If operator outputs sound, enable left channel output.";
-    strings["If operator outputs sound, enable right channel output.##sgiESFM1"].plurals[0] = "=If operator outputs sound, enable right channel output.";
-    strings["op%d##sgiESFM3"].plurals[0] = "=op%d";
-    strings["OP%d##sgiESFM4"].plurals[0] = "=OP%d";
-    strings["Block##sgiESFM2"].plurals[0] = "=Block";
-    strings["FreqNum##sgiESFM1"].plurals[0] = "=FreqNum";
-    strings["Detune in semitones##sgiESFM2"].plurals[0] = "=Detune in semitones";
-    strings["Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.##sgiESFM2"].plurals[0] = "=Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.";
-    strings["If operator outputs sound, enable left channel output.##sgiESFM2"].plurals[0] = "=If operator outputs sound, enable left channel output.";
-    strings["If operator outputs sound, enable right channel output.##sgiESFM2"].plurals[0] = "=If operator outputs sound, enable right channel output.";
-    strings["OP%d Macros##sgiESFM"].plurals[0] = "=OP%d Macros";
-    strings["Block##sgiESFM3"].plurals[0] = "=Block";
-    strings["FreqNum##sgiESFM2"].plurals[0] = "=FreqNum";
-    strings["Op. Arpeggio##sgiESFM"].plurals[0] = "=Op. Arpeggio";
-    strings["Op. Pitch##sgiESFM"].plurals[0] = "=Op. Pitch";
-    strings["Op. Panning##sgiESFM"].plurals[0] = "=Op. Panning";
-    strings["Macros##sgiESFM"].plurals[0] = "=Macros";
-    strings["Volume##sgiESFM"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiESFM"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiESFM"].plurals[0] = "=Pitch";
-    strings["OP4 Noise Mode##sgiESFM"].plurals[0] = "=OP4 Noise Mode";
-    strings["Panning##sgiESFM"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiESFM"].plurals[0] = "=Phase Reset";
+    strings["Other##sgiESFM0"].plurals[0] = "Outro";
+    strings["Other##sgiESFM1"].plurals[0] = "Outro";
+    strings["Envelope##sgiESFM0"].plurals[0] = "Envelope";
+    strings["Envelope##sgiESFM1"].plurals[0] = "Envelope";
+    strings["op%d##sgiESFM0"].plurals[0] = "op%d";
+    strings["OP%d##sgiESFM1"].plurals[0] = "OP%d";
+    strings["Detune in semitones##sgiESFM0"].plurals[0] = "Desafinação em semitons";
+    strings["Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.##sgiESFM0"].plurals[0] = "Desafinação em frações de semitom.\n128 = +1 semitom, -128 = -1 semitom.";
+    strings["If operator outputs sound, enable left channel output.##sgiESFM0"].plurals[0] = "Se o operador emite som, habilita a sua saída pelo canal esquerdo.";
+    strings["If operator outputs sound, enable right channel output.##sgiESFM0"].plurals[0] = "Se o operador emite som, habilita a sua saída pelo canal direito.";
+    strings["Block##sgiESFM0"].plurals[0] = "Bloco";
+    strings["FreqNum##sgiESFM0"].plurals[0] = "NúmFreq.";
+    strings["op%d##sgiESFM2"].plurals[0] = "op%d";
+    strings["Operator %d##sgiESFM"].plurals[0] = "Operador %d";
+    strings["Waveform##sgiESFM"].plurals[0] = "Forma de Onda";
+    strings["Envelope##sgiESFM"].plurals[0] = "Envelope";
+    strings["Blk##sgiESFM"].plurals[0] = "Blc";
+    strings["Block##sgiESFM1"].plurals[0] = "Bloco";
+    strings["F##sgiESFM"].plurals[0] = "F";
+    strings["Frequency (F-Num)##sgiESFM"].plurals[0] = "Frequência (Núm-F)";
+    strings["Detune in semitones##sgiESFM1"].plurals[0] = "Desafinação em semitons";
+    strings["Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.##sgiESFM1"].plurals[0] = "Desafinação em frações de semitom.\n128 = +1 semitom, -128 = -1 semitom.";
+    strings["If operator outputs sound, enable left channel output.##sgiESFM1"].plurals[0] = "Se o operador emite som, habilita a sua saída pelo canal esquerdo.";
+    strings["If operator outputs sound, enable right channel output.##sgiESFM1"].plurals[0] = "Se o operador emite som, habilita a sua saída pelo canal direito.";
+    strings["op%d##sgiESFM3"].plurals[0] = "op%d";
+    strings["OP%d##sgiESFM4"].plurals[0] = "OP%d";
+    strings["Block##sgiESFM2"].plurals[0] = "Bloco";
+    strings["FreqNum##sgiESFM1"].plurals[0] = "NúmFreq.";
+    strings["Detune in semitones##sgiESFM2"].plurals[0] = "Desafinação em semitons";
+    strings["Detune in fractions of semitone.\n128 = +1 semitone, -128 = -1 semitone.##sgiESFM2"].plurals[0] = "Desafinação em frações de semitom.\n128 = +1 semitom, -128 = -1 semitom.";
+    strings["If operator outputs sound, enable left channel output.##sgiESFM2"].plurals[0] = "Se o operador emite som, habilita a sua saída pelo canal esquerdo.";
+    strings["If operator outputs sound, enable right channel output.##sgiESFM2"].plurals[0] = "Se o operador emite som, habilita a sua saída pelo canal direito.";
+    strings["OP%d Macros##sgiESFM"].plurals[0] = "Macros OP%d";
+    strings["Block##sgiESFM3"].plurals[0] = "Bloco";
+    strings["FreqNum##sgiESFM2"].plurals[0] = "NúmFreq.";
+    strings["Op. Arpeggio##sgiESFM"].plurals[0] = "Arpejo Op.";
+    strings["Op. Pitch##sgiESFM"].plurals[0] = "Tom Op.";
+    strings["Op. Panning##sgiESFM"].plurals[0] = "Balanço Op.";
+    strings["Macros##sgiESFM"].plurals[0] = "Macros";
+    strings["Volume##sgiESFM"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiESFM"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiESFM"].plurals[0] = "Tom";
+    strings["OP4 Noise Mode##sgiESFM"].plurals[0] = "Modo de Ruído do OP4";
+    strings["Panning##sgiESFM"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiESFM"].plurals[0] = "Redef. de Fase";
 
     //   sgiFDS    src/gui/inst/fds.cpp
 
-    strings["Compatibility mode##sgiFDS"].plurals[0] = "=Compatibility mode";
-    strings["only use for compatibility with .dmf modules!\n- initializes modulation table with first wavetable\n- does not alter modulation parameters on instrument change##sgiFDS"].plurals[0] = "=only use for compatibility with .dmf modules!\n- initializes modulation table with first wavetable\n- does not alter modulation parameters on instrument change";
-    strings["Modulation depth##sgiFDS"].plurals[0] = "=Modulation depth";
-    strings["Modulation speed##sgiFDS"].plurals[0] = "=Modulation speed";
-    strings["Modulation table##sgiFDS"].plurals[0] = "=Modulation table";
-    strings["Macros##sgiFDS"].plurals[0] = "=Macros";
-    strings["Volume##sgiFDS"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiFDS"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiFDS"].plurals[0] = "=Pitch";
-    strings["Waveform##sgiFDS"].plurals[0] = "=Waveform";
-    strings["Mod Depth##sgiFDS"].plurals[0] = "=Mod Depth";
-    strings["Mod Speed##sgiFDS"].plurals[0] = "=Mod Speed";
-    strings["Mod Position##sgiFDS"].plurals[0] = "=Mod Position";
+    strings["Compatibility mode##sgiFDS"].plurals[0] = "Modo de compatibilidade";
+    strings["only use for compatibility with .dmf modules!\n- initializes modulation table with first wavetable\n- does not alter modulation parameters on instrument change##sgiFDS"].plurals[0] = "use apenas para compatibilidade com módulos .dmf!\n- inicializa a tabela de modulação com a primeira wavetable\n- não altera os parâmetros de modulação com mudança de instrumento";
+    strings["Modulation depth##sgiFDS"].plurals[0] = "Profundidade de modulação";
+    strings["Modulation speed##sgiFDS"].plurals[0] = "Velocidade de modulação";
+    strings["Modulation table##sgiFDS"].plurals[0] = "Tabela de modulação";
+    strings["Macros##sgiFDS"].plurals[0] = "Macros";
+    strings["Volume##sgiFDS"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiFDS"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiFDS"].plurals[0] = "Tom";
+    strings["Waveform##sgiFDS"].plurals[0] = "Forma de onda";
+    strings["Mod Depth##sgiFDS"].plurals[0] = "Profundidade Mod.";
+    strings["Mod Speed##sgiFDS"].plurals[0] = "Velocidade Mod.";
+    strings["Mod Position##sgiFDS"].plurals[0] = "Posição Mod.";
 
     //   sgifmeu   src/gui/inst/fmEnvUtil.cpp
 
-    strings["left click to restart\nmiddle click to pause\nright click to see algorithm##sgifmeu"].plurals[0] = "=left click to restart\nmiddle click to pause\nright click to see algorithm";
-    strings["left click to configure TL scaling\nright click to see FM preview##sgifmeu"].plurals[0] = "=left click to configure TL scaling\nright click to see FM preview";
-    strings["right click to see FM preview##sgifmeu"].plurals[0] = "=right click to see FM preview";
-    strings["operator level changes with volume?##sgifmeu"].plurals[0] = "=operator level changes with volume?";
-    strings["AUTO##OPKVS"].plurals[0] = "=AUTO##OPKVS";
-    strings["NO##OPKVS"].plurals[0] = "=NO##OPKVS";
-    strings["YES##OPKVS"].plurals[0] = "=YES##OPKVS";
+    strings["left click to restart\nmiddle click to pause\nright click to see algorithm##sgifmeu"].plurals[0] = "clique com o botão esquerdo para reiniciar\nclique com o botão do meio para pausar\nclique com o botão direito para ver o algoritmo";
+    strings["left click to configure TL scaling\nright click to see FM preview##sgifmeu"].plurals[0] = "clique com o botão esquerdo para configurar o escalonamento de TL\nclique com o botão direito para ver a previsão da onda FM";
+    strings["right click to see FM preview##sgifmeu"].plurals[0] = "clique com o botão direito para ver a previsão da onda FM";
+    strings["operator level changes with volume?##sgifmeu"].plurals[0] = "nível do operador muda com o volume?";
+    strings["AUTO##OPKVS"].plurals[0] = "AUTO##OPKVS";
+    strings["NO##OPKVS"].plurals[0] = "NÃO##OPKVS";
+    strings["YES##OPKVS"].plurals[0] = "SIM##OPKVS";
 
     //   sgifmeh   src/gui/inst/fmEnvUtil.h
 
-    strings["(copying)##sgifmeh"].plurals[0] = "=(copying)";
-    strings["(swapping)##sgifmeh"].plurals[0] = "=(swapping)";
-    strings["- drag to swap operator\n- shift-drag to copy operator##sgifmeh"].plurals[0] = "=- drag to swap operator\n- shift-drag to copy operator";
+    strings["(copying)##sgifmeh"].plurals[0] = "(copiando)";
+    strings["(swapping)##sgifmeh"].plurals[0] = "(trocando)";
+    strings["- drag to swap operator\n- shift-drag to copy operator##sgifmeh"].plurals[0] = "- arraste para trocar operadores\n- shift+arraste para copiar operador";
 
     //   sgiGA20   src/gui/inst/ga20.cpp
 
-    strings["Macros##sgiGA20"].plurals[0] = "=Macros";
-    strings["Volume##sgiGA20"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiGA20"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiGA20"].plurals[0] = "=Pitch";
-    strings["Phase Reset##sgiGA20"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiGA20"].plurals[0] = "Macros";
+    strings["Volume##sgiGA20"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiGA20"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiGA20"].plurals[0] = "Tom";
+    strings["Phase Reset##sgiGA20"].plurals[0] = "Redef. de Fase";
 
     //   sgiGB     src/gui/inst/gb.cpp
 
-    strings["Game Boy##sgiGB"].plurals[0] = "=Game Boy";
-    strings["Use software envelope##sgiGB"].plurals[0] = "=Use software envelope";
-    strings["Initialize envelope on every note##sgiGB"].plurals[0] = "=Initialize envelope on every note";
-    strings["Volume##sgiGB0"].plurals[0] = "=Volume";
-    strings["Length##sgiGB"].plurals[0] = "=Length";
-    strings["Sound Length##sgiGB0"].plurals[0] = "=Sound Length";
-    strings["Infinity##sgiGB"].plurals[0] = "=Infinity";
-    strings["Direction##sgiGB"].plurals[0] = "=Direction";
-    strings["Up##sgiGB0"].plurals[0] = "=Up";
-    strings["Down##sgiGB0"].plurals[0] = "=Down";
-    strings["Hardware Sequence##sgiGB"].plurals[0] = "=Hardware Sequence";
-    strings["Tick##sgiGB"].plurals[0] = "=Tick";
-    strings["Command##sgiGB"].plurals[0] = "=Command";
-    strings["Move/Remove##sgiGB"].plurals[0] = "=Move/Remove";
-    strings["Volume##sgiGB1"].plurals[0] = "=Volume";
-    strings["Env Length##sgiGB"].plurals[0] = "=Env Length";
-    strings["Sound Length##sgiGB1"].plurals[0] = "=Sound Length";
-    strings["Up##sgiGB1"].plurals[0] = "=Up";
-    strings["Down##sgiGB1"].plurals[0] = "=Down";
-    strings["Shift##sgiGB"].plurals[0] = "=Shift";
-    strings["Speed##sgiGB"].plurals[0] = "=Speed";
-    strings["Up##sgiGB2"].plurals[0] = "=Up";
-    strings["Down##sgiGB2"].plurals[0] = "=Down";
-    strings["Ticks##sgiGB"].plurals[0] = "=Ticks";
-    strings["Position##sgiGB"].plurals[0] = "=Position";
-    strings["Macros##sgiGB"].plurals[0] = "=Macros";
-    strings["Volume##sgiGB2"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiGB"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiGB"].plurals[0] = "=Pitch";
-    strings["Duty/Noise##sgiGB"].plurals[0] = "=Duty/Noise";
-    strings["Waveform##sgiGB"].plurals[0] = "=Waveform";
-    strings["Panning##sgiGB"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiGB"].plurals[0] = "=Phase Reset";
+    strings["Game Boy##sgiGB"].plurals[0] = "Game Boy";
+    strings["Use software envelope##sgiGB"].plurals[0] = "Utilizar envelope em software";
+    strings["Initialize envelope on every note##sgiGB"].plurals[0] = "Inicializar envelope em cada nota";
+    strings["Volume##sgiGB0"].plurals[0] = "Volume";
+    strings["Length##sgiGB"].plurals[0] = "Comprimento";
+    strings["Sound Length##sgiGB0"].plurals[0] = "Comprimento do som";
+    strings["Infinity##sgiGB"].plurals[0] = "Infinito";
+    strings["Direction##sgiGB"].plurals[0] = "Direção";
+    strings["Up##sgiGB0"].plurals[0] = "Cima";
+    strings["Down##sgiGB0"].plurals[0] = "Baixo";
+    strings["Hardware Sequence##sgiGB"].plurals[0] = "Sequência de Hardware";
+    strings["Tick##sgiGB"].plurals[0] = "Tick";
+    strings["Command##sgiGB"].plurals[0] = "Comando";
+    strings["Move/Remove##sgiGB"].plurals[0] = "Mover/Remover";
+    strings["Volume##sgiGB1"].plurals[0] = "Volume";
+    strings["Env Length##sgiGB"].plurals[0] = "Comprimento do Envelope";
+    strings["Sound Length##sgiGB1"].plurals[0] = "Comprimento do Som";
+    strings["Up##sgiGB1"].plurals[0] = "Cima";
+    strings["Down##sgiGB1"].plurals[0] = "Baixo";
+    strings["Shift##sgiGB"].plurals[0] = "Deslocar";
+    strings["Speed##sgiGB"].plurals[0] = "Velocidade";
+    strings["Up##sgiGB2"].plurals[0] = "Cima";
+    strings["Down##sgiGB2"].plurals[0] = "Baixo";
+    strings["Ticks##sgiGB"].plurals[0] = "Ticks";
+    strings["Position##sgiGB"].plurals[0] = "Posição";
+    strings["Macros##sgiGB"].plurals[0] = "Macros";
+    strings["Volume##sgiGB2"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiGB"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiGB"].plurals[0] = "Tom";
+    strings["Duty/Noise##sgiGB"].plurals[0] = "Ciclo de Trab./Ruído";
+    strings["Waveform##sgiGB"].plurals[0] = "Forma de Onda";
+    strings["Panning##sgiGB"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiGB"].plurals[0] = "Redef. de Fase";
 
     //   sgiK00    src/gui/inst/k007232.cpp
 
-    strings["Macros##sgiK00"].plurals[0] = "=Macros";
-    strings["Volume##sgiK00"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiK00"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiK00"].plurals[0] = "=Pitch";
-    strings["Waveform##sgiK00"].plurals[0] = "=Waveform";
-    strings["Panning (left)##sgiK00"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiK00"].plurals[0] = "=Panning (right)";
-    strings["Phase Reset##sgiK00"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiK00"].plurals[0] = "Macros";
+    strings["Volume##sgiK00"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiK00"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiK00"].plurals[0] = "Tom";
+    strings["Waveform##sgiK00"].plurals[0] = "Forma de Onda";
+    strings["Panning (left)##sgiK00"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiK00"].plurals[0] = "Balanço (direita)";
+    strings["Phase Reset##sgiK00"].plurals[0] = "Redef. de Fase";
 
     //   sgiK05    src/gui/inst/k053260.cpp
 
-    strings["Macros##sgiK05"].plurals[0] = "=Macros";
-    strings["Volume##sgiK05"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiK05"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiK05"].plurals[0] = "=Pitch";
-    strings["Panning##sgiK05"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiK05"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiK05"].plurals[0] = "Macros";
+    strings["Volume##sgiK05"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiK05"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiK05"].plurals[0] = "Tom";
+    strings["Panning##sgiK05"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiK05"].plurals[0] = "Redef. de Fase";
 
     //   sgimcd    src/gui/inst/macroDraw.cpp
 
-    strings["Triangle##sgimcd"].plurals[0] = "=Triangle";
-    strings["Saw##sgimcd"].plurals[0] = "=Saw";
-    strings["Square##sgimcd"].plurals[0] = "=Square";
-    strings["How did you even##sgimcd0"].plurals[0] = "=How did you even";
-    strings["Bottom##sgimcd0"].plurals[0] = "=Bottom";
-    strings["Top##sgimcd0"].plurals[0] = "=Top";
-    strings["Attack##sgimcd"].plurals[0] = "=Attack";
-    strings["Sustain##sgimcd"].plurals[0] = "=Sustain";
-    strings["Hold##sgimcd"].plurals[0] = "=Hold";
-    strings["SusTime##sgimcd"].plurals[0] = "=SusTime";
-    strings["Decay##sgimcd"].plurals[0] = "=Decay";
-    strings["SusDecay##sgimcd"].plurals[0] = "=SusDecay";
-    strings["Release##sgimcd"].plurals[0] = "=Release";
-    strings["Bottom##sgimcd1"].plurals[0] = "=Bottom";
-    strings["Top##sgimcd1"].plurals[0] = "=Top";
-    strings["Speed##sgimcd"].plurals[0] = "=Speed";
-    strings["Phase##sgimcd"].plurals[0] = "=Phase";
-    strings["Shape##sgimcd"].plurals[0] = "=Shape";
-    strings["Macro type: Sequence##sgimcd"].plurals[0] = "=Macro type: Sequence";
-    strings["Macro type: ADSR##sgimcd"].plurals[0] = "=Macro type: ADSR";
-    strings["Macro type: LFO##sgimcd"].plurals[0] = "=Macro type: LFO";
-    strings["Macro type: What's going on here?##sgimcd"].plurals[0] = "=Macro type: What's going on here?";
-    strings["Delay/Step Length##sgimcd"].plurals[0] = "=Delay/Step Length";
-    strings["Step Length (ticks)##IMacroSpeed"].plurals[0] = "=Step Length (ticks)##IMacroSpeed";
-    strings["Delay##IMacroDelay"].plurals[0] = "=Delay##IMacroDelay";
-    strings["Release mode: Active (jump to release pos)##sgimcd"].plurals[0] = "=Release mode: Active (jump to release pos)";
-    strings["Release mode: Passive (delayed release)##sgimcd"].plurals[0] = "=Release mode: Passive (delayed release)";
-    strings["Tabs##sgimcd"].plurals[0] = "=Tabs";
-    strings["Length##sgimcd"].plurals[0] = "=Length";
-    strings["StepLen##sgimcd"].plurals[0] = "=StepLen";
-    strings["Delay##sgimcd"].plurals[0] = "=Delay";
-    strings["The heck? No, this isn't even working correctly...##sgimcd"].plurals[0] = "=The heck? No, this isn't even working correctly...";
-    strings["The only problem with that selectedMacro is that it's a bug...##sgimcd"].plurals[0] = "=The only problem with that selectedMacro is that it's a bug...";
-    strings["Single (combo box)##sgimcd"].plurals[0] = "=Single (combo box)";
+    strings["Triangle##sgimcd"].plurals[0] = "Triângulo";
+    strings["Saw##sgimcd"].plurals[0] = "Dente de serra";
+    strings["Square##sgimcd"].plurals[0] = "Quadrada";
+    strings["How did you even##sgimcd0"].plurals[0] = "Como diabos você...";
+    strings["Bottom##sgimcd0"].plurals[0] = "Base";
+    strings["Top##sgimcd0"].plurals[0] = "Topo";
+    strings["Attack##sgimcd"].plurals[0] = "Ataque";
+    strings["Sustain##sgimcd"].plurals[0] = "Sustentação";
+    strings["Hold##sgimcd"].plurals[0] = "Retenção";
+    strings["SusTime##sgimcd"].plurals[0] = "Tempo Sust.";
+    strings["Decay##sgimcd"].plurals[0] = "Decaimento";
+    strings["SusDecay##sgimcd"].plurals[0] = "Decaim. Sust.";
+    strings["Release##sgimcd"].plurals[0] = "Repouso";
+    strings["Bottom##sgimcd1"].plurals[0] = "Base";
+    strings["Top##sgimcd1"].plurals[0] = "Topo";
+    strings["Speed##sgimcd"].plurals[0] = "Velocidade";
+    strings["Phase##sgimcd"].plurals[0] = "Fase";
+    strings["Shape##sgimcd"].plurals[0] = "Formato";
+    strings["Macro type: Sequence##sgimcd"].plurals[0] = "Tipo de macro: Sequência";
+    strings["Macro type: ADSR##sgimcd"].plurals[0] = "Tipo de macro: ADSR";
+    strings["Macro type: LFO##sgimcd"].plurals[0] = "Tipo de macro: LFO";
+    strings["Macro type: What's going on here?##sgimcd"].plurals[0] = "Tipo de macro: Que porcaria tá acontecendo aqui?";
+    strings["Delay/Step Length##sgimcd"].plurals[0] = "Atraso/Tamanho do passo";
+    strings["Step Length (ticks)##IMacroSpeed"].plurals[0] = "Tamanho do passo (ticks)##IMacroSpeed";
+    strings["Delay##IMacroDelay"].plurals[0] = "Atraso##IMacroDelay";
+    strings["Release mode: Active (jump to release pos)##sgimcd"].plurals[0] = "Modo de repouso: Ativo (pula para a posição de repouso)";
+    strings["Release mode: Passive (delayed release)##sgimcd"].plurals[0] = "Modo de repouso: Passivo (repouso atrasado)";
+    strings["Tabs##sgimcd"].plurals[0] = "Abas";
+    strings["Length##sgimcd"].plurals[0] = "Comprimento";
+    strings["StepLen##sgimcd"].plurals[0] = "Compr. Passo";
+    strings["Delay##sgimcd"].plurals[0] = "Atraso";
+    strings["The heck? No, this isn't even working correctly...##sgimcd"].plurals[0] = "Cacildis? Não, não, isso aí tá com problema...";
+    strings["The only problem with that selectedMacro is that it's a bug...##sgimcd"].plurals[0] = "O único problema com aquela \"selectedMacro\" é que ela é um bug...";
+    strings["Single (combo box)##sgimcd"].plurals[0] = "Única (caixa de combinação)"; // é sério isso?
 
     //   sgiLYNX   src/gui/inst/mikey.cpp
 
-    strings["Macros##sgiLYNX"].plurals[0] = "=Macros";
-    strings["Volume##sgiLYNX"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiLYNX"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiLYNX"].plurals[0] = "=Pitch";
-    strings["Duty/Int##sgiLYNX"].plurals[0] = "=Duty/Int";
-    strings["Panning (left)##sgiLYNX"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiLYNX"].plurals[0] = "=Panning (right)";
-    strings["Phase Reset##sgiLYNX"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiLYNX"].plurals[0] = "Macros";
+    strings["Volume##sgiLYNX"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiLYNX"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiLYNX"].plurals[0] = "Tom";
+    strings["Duty/Int##sgiLYNX"].plurals[0] = "Coeficientes/Integ.";
+    strings["Panning (left)##sgiLYNX"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiLYNX"].plurals[0] = "Balanço (direita)";
+    strings["Phase Reset##sgiLYNX"].plurals[0] = "Redef. de Fase";
 
     //   sgi5232   src/gui/inst/msm5232.cpp
 
-    strings["Macros##sgi5232"].plurals[0] = "=Macros";
-    strings["Volume##sgi5232"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgi5232"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgi5232"].plurals[0] = "=Pitch";
-    strings["Group Ctrl##sgi5232"].plurals[0] = "=Group Ctrl";
-    strings["Group Attack##sgi5232"].plurals[0] = "=Group Attack";
-    strings["Group Decay##sgi5232"].plurals[0] = "=Group Decay";
-    strings["Noise##sgi5232"].plurals[0] = "=Noise";
+    strings["Macros##sgi5232"].plurals[0] = "Macros";
+    strings["Volume##sgi5232"].plurals[0] = "Volume";
+    strings["Arpeggio##sgi5232"].plurals[0] = "Arpejo";
+    strings["Pitch##sgi5232"].plurals[0] = "Tom";
+    strings["Group Ctrl##sgi5232"].plurals[0] = "Controle de Grupo";
+    strings["Group Attack##sgi5232"].plurals[0] = "Ataque de Grupo";
+    strings["Group Decay##sgi5232"].plurals[0] = "Decaimento de Grupo";
+    strings["Noise##sgi5232"].plurals[0] = "Ruído";
 
     //   sgi6258   src/gui/inst/msm6258.cpp
 
-    strings["Macros##sgi6258"].plurals[0] = "=Macros";
-    strings["Frequency Divider##sgi6258"].plurals[0] = "=Frequency Divider";
-    strings["Panning##sgi6258"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgi6258"].plurals[0] = "=Phase Reset";
-    strings["Clock Divider##sgi6258"].plurals[0] = "=Clock Divider";
+    strings["Macros##sgi6258"].plurals[0] = "Macros";
+    strings["Frequency Divider##sgi6258"].plurals[0] = "Divisor de Frequência";
+    strings["Panning##sgi6258"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgi6258"].plurals[0] = "Redef. de Fase";
+    strings["Clock Divider##sgi6258"].plurals[0] = "Divisor de Clock";
 
     //   sgi6295   src/gui/inst/msm6295.cpp
 
-    strings["Macros##sgi6295"].plurals[0] = "=Macros";
-    strings["Volume##sgi6295"].plurals[0] = "=Volume";
-    strings["Frequency Divider##sgi6295"].plurals[0] = "=Frequency Divider";
-    strings["Phase Reset##sgi6295"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgi6295"].plurals[0] = "Macros";
+    strings["Volume##sgi6295"].plurals[0] = "Volume";
+    strings["Frequency Divider##sgi6295"].plurals[0] = "Divisor de Frequência";
+    strings["Phase Reset##sgi6295"].plurals[0] = "Redef. de Fase";
 
     //   sgiMULPCM src/gui/inst/multipcm.cpp
 
-    strings["MultiPCM##sgiMULPCM"].plurals[0] = "=MultiPCM";
-    strings["AR##sgiMULPCM0"].plurals[0] = "=AR";
-    strings["AR##sgiMULPCM1"].plurals[0] = "=AR";
-    strings["Attack Rate##sgiMULPCM"].plurals[0] = "=Attack Rate";
-    strings["D1R##sgiMULPCM0"].plurals[0] = "=D1R";
-    strings["D1R##sgiMULPCM1"].plurals[0] = "=D1R";
-    strings["Decay 1 Rate##sgiMULPCM"].plurals[0] = "=Decay 1 Rate";
-    strings["DL##sgiMULPCM0"].plurals[0] = "=DL";
-    strings["DL##sgiMULPCM1"].plurals[0] = "=DL";
-    strings["Decay Level##sgiMULPCM"].plurals[0] = "=Decay Level";
-    strings["D2R##sgiMULPCM0"].plurals[0] = "=D2R";
-    strings["D2R##sgiMULPCM1"].plurals[0] = "=D2R";
-    strings["Decay 2 Rate##sgiMULPCM"].plurals[0] = "=Decay 2 Rate";
-    strings["RR##sgiMULPCM0"].plurals[0] = "=RR";
-    strings["RR##sgiMULPCM1"].plurals[0] = "=RR";
-    strings["Release Rate##sgiMULPCM"].plurals[0] = "=Release Rate";
-    strings["RC##sgiMULPCM0"].plurals[0] = "=RC";
-    strings["RC##sgiMULPCM1"].plurals[0] = "=RC";
-    strings["Rate Correction##sgiMULPCM"].plurals[0] = "=Rate Correction";
-    strings["Envelope##sgiMULPCM0"].plurals[0] = "=Envelope";
-    strings["Envelope##sgiMULPCM1"].plurals[0] = "=Envelope";
-    strings["LFO Rate##sgiMULPCM"].plurals[0] = "=LFO Rate";
-    strings["PM Depth##sgiMULPCM"].plurals[0] = "=PM Depth";
-    strings["AM Depth##sgiMULPCM"].plurals[0] = "=AM Depth";
-    strings["Macros##sgiMULPCM"].plurals[0] = "=Macros";
-    strings["Volume##sgiMULPCM"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiMULPCM"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiMULPCM"].plurals[0] = "=Pitch";
-    strings["Panning##sgiMULPCM"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiMULPCM"].plurals[0] = "=Phase Reset";
+    strings["MultiPCM##sgiMULPCM"].plurals[0] = "MultiPCM";
+    strings["AR##sgiMULPCM0"].plurals[0] = "AR";
+    strings["AR##sgiMULPCM1"].plurals[0] = "AR";
+    strings["Attack Rate##sgiMULPCM"].plurals[0] = "Taxa de Ataque";
+    strings["D1R##sgiMULPCM0"].plurals[0] = "D1R";
+    strings["D1R##sgiMULPCM1"].plurals[0] = "D1R";
+    strings["Decay 1 Rate##sgiMULPCM"].plurals[0] = "Taxa de Decaimento 1";
+    strings["DL##sgiMULPCM0"].plurals[0] = "DL";
+    strings["DL##sgiMULPCM1"].plurals[0] = "DL";
+    strings["Decay Level##sgiMULPCM"].plurals[0] = "Nível de Decaimento";
+    strings["D2R##sgiMULPCM0"].plurals[0] = "D2R";
+    strings["D2R##sgiMULPCM1"].plurals[0] = "D2R";
+    strings["Decay 2 Rate##sgiMULPCM"].plurals[0] = "Taxa de Decaimento 2";
+    strings["RR##sgiMULPCM0"].plurals[0] = "RR";
+    strings["RR##sgiMULPCM1"].plurals[0] = "RR";
+    strings["Release Rate##sgiMULPCM"].plurals[0] = "Taxa de Repouso";
+    strings["RC##sgiMULPCM0"].plurals[0] = "RC";
+    strings["RC##sgiMULPCM1"].plurals[0] = "RC";
+    strings["Rate Correction##sgiMULPCM"].plurals[0] = "Correção de Taxa";
+    strings["Envelope##sgiMULPCM0"].plurals[0] = "Envelope";
+    strings["Envelope##sgiMULPCM1"].plurals[0] = "Envelope";
+    strings["LFO Rate##sgiMULPCM"].plurals[0] = "Taxa de LFO";
+    strings["PM Depth##sgiMULPCM"].plurals[0] = "Profundidade de PM";
+    strings["AM Depth##sgiMULPCM"].plurals[0] = "Profundidade de AM";
+    strings["Macros##sgiMULPCM"].plurals[0] = "Macros";
+    strings["Volume##sgiMULPCM"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiMULPCM"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiMULPCM"].plurals[0] = "Tom";
+    strings["Panning##sgiMULPCM"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiMULPCM"].plurals[0] = "Redef. de Fase";
 
     //   sgiN163   src/gui/inst/n163.cpp
 
-    strings["Namco 163##sgiN163"].plurals[0] = "=Namco 163";
-    strings["Load waveform##sgiN163"].plurals[0] = "=Load waveform";
-    strings["when enabled, a waveform will be loaded into RAM.\nwhen disabled, only the offset and length change.##sgiN163"].plurals[0] = "=when enabled, a waveform will be loaded into RAM.\nwhen disabled, only the offset and length change.";
-    strings["Waveform##WAVE"].plurals[0] = "=Waveform##WAVE";
-    strings["Per-channel wave position/length##sgiN163"].plurals[0] = "=Per-channel wave position/length";
-    strings["Ch##sgiN163"].plurals[0] = "=Ch";
-    strings["Position##sgiN163"].plurals[0] = "=Position";
-    strings["Length##sgiN163"].plurals[0] = "=Length";
-    strings["Position##WAVEPOS"].plurals[0] = "=Position##WAVEPOS";
-    strings["Length##WAVELEN"].plurals[0] = "=Length##WAVELEN";
-    strings["Macros##sgiN163"].plurals[0] = "=Macros";
-    strings["Volume##sgiN163"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiN163"].plurals[0] = "=Arpeggio";
+    strings["Namco 163##sgiN163"].plurals[0] = "Namco 163";
+    strings["Load waveform##sgiN163"].plurals[0] = "Carregar wavetable";
+    strings["when enabled, a waveform will be loaded into RAM.\nwhen disabled, only the offset and length change.##sgiN163"].plurals[0] = "quando habilitado, uma wavetable será carregada em RAM.\nquando desabilitado, somente o deslocamento e comprimento serão alterados.";
+    strings["Waveform##WAVE"].plurals[0] = "Forma de onda##WAVE";
+    strings["Per-channel wave position/length##sgiN163"].plurals[0] = "Posição/comprimento de onda por canal";
+    strings["Ch##sgiN163"].plurals[0] = "Can";
+    strings["Position##sgiN163"].plurals[0] = "Posição";
+    strings["Length##sgiN163"].plurals[0] = "Comprimento";
+    strings["Position##WAVEPOS"].plurals[0] = "Posição##WAVEPOS";
+    strings["Length##WAVELEN"].plurals[0] = "Comprimento##WAVELEN";
+    strings["Macros##sgiN163"].plurals[0] = "Macros";
+    strings["Volume##sgiN163"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiN163"].plurals[0] = "Arpejo";
     strings["Pitch##sgiN163"].plurals[0] = "=Pitch";
-    strings["Wave Pos##sgiN163"].plurals[0] = "=Wave Pos";
-    strings["Waveform##sgiN163"].plurals[0] = "=Waveform";
-    strings["Wave Length##sgiN163"].plurals[0] = "=Wave Length";
+    strings["Wave Pos##sgiN163"].plurals[0] = "Posição da onda";
+    strings["Waveform##sgiN163"].plurals[0] = "Forma de onda";
+    strings["Wave Length##sgiN163"].plurals[0] = "Comprimento da onda";
 
     //   sgiWSG    src/gui/inst/namco.cpp
 
-    strings["Macros##sgiWSG"].plurals[0] = "=Macros";
-    strings["Volume##sgiWSG"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiWSG"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiWSG"].plurals[0] = "=Pitch";
-    strings["Noise##sgiWSG"].plurals[0] = "=Noise";
-    strings["Waveform##sgiWSG"].plurals[0] = "=Waveform";
-    strings["Panning (left)##sgiWSG"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiWSG"].plurals[0] = "=Panning (right)";
+    strings["Macros##sgiWSG"].plurals[0] = "Macros";
+    strings["Volume##sgiWSG"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiWSG"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiWSG"].plurals[0] = "Tom";
+    strings["Noise##sgiWSG"].plurals[0] = "Ruído";
+    strings["Waveform##sgiWSG"].plurals[0] = "Forma de onda";
+    strings["Panning (left)##sgiWSG"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiWSG"].plurals[0] = "Balanço (direita)";
 
     //   sgiNES    src/gui/inst/nes.cpp
 
-    strings["Macros##sgiNES"].plurals[0] = "=Macros";
-    strings["Volume##sgiNES"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiNES"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiNES"].plurals[0] = "=Pitch";
-    strings["Duty/Noise##sgiNES"].plurals[0] = "=Duty/Noise";
-    strings["Phase Reset##sgiNES"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiNES"].plurals[0] = "Macros";
+    strings["Volume##sgiNES"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiNES"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiNES"].plurals[0] = "Tom";
+    strings["Duty/Noise##sgiNES"].plurals[0] = "Ciclo de Trab./Ruído";
+    strings["Phase Reset##sgiNES"].plurals[0] = "Redef. de Fase";
 
     //   sgiOPL    src/gui/inst/opl.cpp
 
-    strings["4-op##sgiOPL"].plurals[0] = "=4-op";
-    strings["Drums##sgiOPL"].plurals[0] = "=Drums";
-    strings["Fixed frequency mode##sgiOPL"].plurals[0] = "=Fixed frequency mode";
-    strings["when enabled, drums will be set to the specified frequencies, ignoring the note.##sgiOPL"].plurals[0] = "=when enabled, drums will be set to the specified frequencies, ignoring the note.";
-    strings["Drum##sgiOPL"].plurals[0] = "=Drum";
-    strings["Block##sgiOPL"].plurals[0] = "=Block";
-    strings["FreqNum##sgiOPL"].plurals[0] = "=FreqNum";
-    strings["Kick##sgiOPL0"].plurals[0] = "=Kick";
-    strings["Snare/Hi-hat##sgiOPL"].plurals[0] = "=Snare/Hi-hat";
-    strings["Tom/Top##sgiOPL"].plurals[0] = "=Tom/Top";
-    strings["Other##sgiOPL0"].plurals[0] = "=Other";
-    strings["Other##sgiOPL1"].plurals[0] = "=Other";
-    strings["Envelope##sgiOPL0"].plurals[0] = "=Envelope";
-    strings["Envelope##sgiOPL1"].plurals[0] = "=Envelope";
-    strings["op%d##sgiOPL0"].plurals[0] = "=op%d";
-    strings["Kick##sgiOPL1"].plurals[0] = "=Kick";
-    strings["Env##sgiOPL"].plurals[0] = "=Env";
-    strings["OP%d##sgiOPL1"].plurals[0] = "=OP%d";
-    strings["OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL0"].plurals[0] = "=OPL2/3 only (last 4 waveforms are OPL3 only)";
-    strings["op%d##sgiOPL2"].plurals[0] = "=op%d";
-    strings["Envelope 2 (kick only)##sgiOPL0"].plurals[0] = "=Envelope 2 (kick only)";
-    strings["Envelope##sgiOPL2"].plurals[0] = "=Envelope";
-    strings["Operator %d##sgiOPL"].plurals[0] = "=Operator %d";
-    strings["Waveform##sgiOPL"].plurals[0] = "=Waveform";
-    strings["Envelope##sgiOPL3"].plurals[0] = "=Envelope";
-    strings["OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL1"].plurals[0] = "=OPL2/3 only (last 4 waveforms are OPL3 only)";
-    strings["op%d##sgiOPL3"].plurals[0] = "=op%d";
-    strings["Envelope 2 (kick only)##sgiOPL1"].plurals[0] = "=Envelope 2 (kick only)";
-    strings["Envelope##sgiOPL4"].plurals[0] = "=Envelope";
-    strings["OP%d##sgiOPL4"].plurals[0] = "=OP%d";
-    strings["OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL2"].plurals[0] = "=OPL2/3 only (last 4 waveforms are OPL3 only)";
-    strings["FM Macros##sgiOPL"].plurals[0] = "=FM Macros";
-    strings["OP%d Macros##sgiOPL"].plurals[0] = "=OP%d Macros";
-    strings["Macros##sgiOPL"].plurals[0] = "=Macros";
-    strings["Volume##sgiOPL"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiOPL"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiOPL"].plurals[0] = "=Pitch";
-    strings["Panning##sgiOPL"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiOPL"].plurals[0] = "=Phase Reset";
+    strings["4-op##sgiOPL"].plurals[0] = "4-op";
+    strings["Drums##sgiOPL"].plurals[0] = "Bateria";
+    strings["Fixed frequency mode##sgiOPL"].plurals[0] = "Modo de frequência fixa";
+    strings["when enabled, drums will be set to the specified frequencies, ignoring the note.##sgiOPL"].plurals[0] = "quando habilitado, os canais de bateria serão definidos para as frequências especificadas, ignorando a nota.";
+    strings["Drum##sgiOPL"].plurals[0] = "Tambor";
+    strings["Block##sgiOPL"].plurals[0] = "Bloco";
+    strings["FreqNum##sgiOPL"].plurals[0] = "NúmFreq.";
+    strings["Kick##sgiOPL0"].plurals[0] = "Bumbo";
+    strings["Snare/Hi-hat##sgiOPL"].plurals[0] = "Caixa/Chimbal";
+    strings["Tom/Top##sgiOPL"].plurals[0] = "Surdo/Prato";
+    strings["Other##sgiOPL0"].plurals[0] = "Outro";
+    strings["Other##sgiOPL1"].plurals[0] = "Outro";
+    strings["Envelope##sgiOPL0"].plurals[0] = "Envelope";
+    strings["Envelope##sgiOPL1"].plurals[0] = "Envelope";
+    strings["op%d##sgiOPL0"].plurals[0] = "op%d";
+    strings["Kick##sgiOPL1"].plurals[0] = "Bumbo";
+    strings["Env##sgiOPL"].plurals[0] = "Env";
+    strings["OP%d##sgiOPL1"].plurals[0] = "OP%d";
+    strings["OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL0"].plurals[0] = "OPL2/OPL3 somente (as últimas 4 ondas são somente para o OPL3)";
+    strings["op%d##sgiOPL2"].plurals[0] = "op%d";
+    strings["Envelope 2 (kick only)##sgiOPL0"].plurals[0] = "Envelope 2 (bumbo somente)";
+    strings["Envelope##sgiOPL2"].plurals[0] = "Envelope";
+    strings["Operator %d##sgiOPL"].plurals[0] = "Operador %d";
+    strings["Waveform##sgiOPL"].plurals[0] = "Forma de onda";
+    strings["Envelope##sgiOPL3"].plurals[0] = "Envelope";
+    strings["OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL1"].plurals[0] = "OPL2/OPL3 somente (as últimas 4 ondas são somente para o OPL3)";
+    strings["op%d##sgiOPL3"].plurals[0] = "op%d";
+    strings["Envelope 2 (kick only)##sgiOPL1"].plurals[0] = "Envelope 2 (kick only)";
+    strings["Envelope##sgiOPL4"].plurals[0] = "Envelope";
+    strings["OP%d##sgiOPL4"].plurals[0] = "OP%d";
+    strings["OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL2"].plurals[0] = "OPL2/OPL3 somente (as últimas 4 ondas são somente para o OPL3)";
+    strings["FM Macros##sgiOPL"].plurals[0] = "Macros FM";
+    strings["OP%d Macros##sgiOPL"].plurals[0] = "Macros OP%d";
+    strings["Macros##sgiOPL"].plurals[0] = "Macros";
+    strings["Volume##sgiOPL"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiOPL"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiOPL"].plurals[0] = "Tom";
+    strings["Panning##sgiOPL"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiOPL"].plurals[0] = "Redef. de Fase";
 
     //   sgiOPLL   src/gui/inst/opll.cpp
 
-    strings["%s name##sgiOPLL"].plurals[0] = "=%s name";
-    strings["Fixed frequency mode##sgiOPLL"].plurals[0] = "=Fixed frequency mode";
-    strings["when enabled, drums will be set to the specified frequencies, ignoring the note.##sgiOPLL"].plurals[0] = "=when enabled, drums will be set to the specified frequencies, ignoring the note.";
-    strings["Drum##sgiOPLL"].plurals[0] = "=Drum";
-    strings["Block##sgiOPLL"].plurals[0] = "=Block";
-    strings["FreqNum##sgiOPLL"].plurals[0] = "=FreqNum";
-    strings["Kick##sgiOPLL"].plurals[0] = "=Kick";
-    strings["Snare/Hi-hat##sgiOPLL"].plurals[0] = "=Snare/Hi-hat";
-    strings["Tom/Top##sgiOPLL"].plurals[0] = "=Tom/Top";
-    strings["Volume##TL"].plurals[0] = "=Volume##TL";
-    strings["this volume slider only works in compatibility (non-drums) system.##sgiOPLL"].plurals[0] = "=this volume slider only works in compatibility (non-drums) system.";
-    strings["Other##sgiOPLL0"].plurals[0] = "=Other";
-    strings["Other##sgiOPLL1"].plurals[0] = "=Other";
-    strings["Envelope##sgiOPLL0"].plurals[0] = "=Envelope";
-    strings["Envelope##sgiOPLL1"].plurals[0] = "=Envelope";
-    strings["op%d##sgiOPLL0"].plurals[0] = "=op%d";
-    strings["OP%d##sgiOPLL1"].plurals[0] = "=OP%d";
-    strings["op%d##sgiOPLL2"].plurals[0] = "=op%d";
-    strings["Operator %d##sgiOPLL"].plurals[0] = "=Operator %d";
-    strings["Waveform##sgiOPLL"].plurals[0] = "=Waveform";
-    strings["Envelope##sgiOPLL2"].plurals[0] = "=Envelope";
-    strings["op%d##sgiOPLL3"].plurals[0] = "=op%d";
-    strings["OP%d##sgiOPLL4"].plurals[0] = "=OP%d";
-    strings["SSG On##sgiOPLL"].plurals[0] = "=SSG On";
-    strings["FM Macros##sgiOPLL"].plurals[0] = "=FM Macros";
-    strings["OP%d Macros##sgiOPLL"].plurals[0] = "=OP%d Macros";
-    strings["Macros##sgiOPLL"].plurals[0] = "=Macros";
-    strings["Volume##sgiOPLL"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiOPLL"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiOPLL"].plurals[0] = "=Pitch";
-    strings["Patch##sgiOPLL"].plurals[0] = "=Patch";
-    strings["Phase Reset##sgiOPLL"].plurals[0] = "=Phase Reset";
+    strings["%s name##sgiOPLL"].plurals[0] = "Nomes do %s";
+    strings["Fixed frequency mode##sgiOPLL"].plurals[0] = "Modo de frequência fixa";
+    strings["when enabled, drums will be set to the specified frequencies, ignoring the note.##sgiOPLL"].plurals[0] = "quando habilitado, os canais de bateria serão definidos para as frequências especificadas, ignorando a nota.";
+    strings["Drum##sgiOPLL"].plurals[0] = "Tambor";
+    strings["Block##sgiOPLL"].plurals[0] = "Bloco";
+    strings["FreqNum##sgiOPLL"].plurals[0] = "NúmFreq.";
+    strings["Kick##sgiOPLL"].plurals[0] = "Bumbo";
+    strings["Snare/Hi-hat##sgiOPLL"].plurals[0] = "Caixa/Chimbal";
+    strings["Tom/Top##sgiOPLL"].plurals[0] = "Surdo/Prato";
+    strings["Volume##TL"].plurals[0] = "Volume##TL";
+    strings["this volume slider only works in compatibility (non-drums) system.##sgiOPLL"].plurals[0] = "este slider de volume só funciona no sistema de compatibilidade (não-bateria).";
+    strings["Other##sgiOPLL0"].plurals[0] = "Outro";
+    strings["Other##sgiOPLL1"].plurals[0] = "Outro";
+    strings["Envelope##sgiOPLL0"].plurals[0] = "Envelope";
+    strings["Envelope##sgiOPLL1"].plurals[0] = "Envelope";
+    strings["op%d##sgiOPLL0"].plurals[0] = "op%d";
+    strings["OP%d##sgiOPLL1"].plurals[0] = "OP%d";
+    strings["op%d##sgiOPLL2"].plurals[0] = "op%d";
+    strings["Operator %d##sgiOPLL"].plurals[0] = "Operador %d";
+    strings["Waveform##sgiOPLL"].plurals[0] = "Forma de onda";
+    strings["Envelope##sgiOPLL2"].plurals[0] = "Envelope";
+    strings["op%d##sgiOPLL3"].plurals[0] = "op%d";
+    strings["OP%d##sgiOPLL4"].plurals[0] = "OP%d";
+    strings["SSG On##sgiOPLL"].plurals[0] = "Env. Sust."; // quem deu o nome de "SSG On" pra essa checkbox precisava de uma boa noite de sono...
+    strings["FM Macros##sgiOPLL"].plurals[0] = "Macros FM";
+    strings["OP%d Macros##sgiOPLL"].plurals[0] = "Macros OP%d";
+    strings["Macros##sgiOPLL"].plurals[0] = "Macros";
+    strings["Volume##sgiOPLL"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiOPLL"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiOPLL"].plurals[0] = "Tom";
+    strings["Patch##sgiOPLL"].plurals[0] = "Timbre";
+    strings["Phase Reset##sgiOPLL"].plurals[0] = "Redef. de Fase";
 
     //   sgiOPM    src/gui/inst/opm.cpp
 
-    strings["Envelope##sgiOPM0"].plurals[0] = "=Envelope";
-    strings["op%d##sgiOPM0"].plurals[0] = "=op%d";
-    strings["OP%d##sgiOPM3"].plurals[0] = "=OP%d";
-    strings["op%d##sgiOPM1"].plurals[0] = "=op%d";
-    strings["Operator %d##sgiOPM"].plurals[0] = "=Operator %d";
-    strings["Waveform##sgiOPM"].plurals[0] = "=Waveform";
-    strings["Envelope##sgiOPM1"].plurals[0] = "=Envelope";
-    strings["op%d##sgiOPM2"].plurals[0] = "=op%d";
-    strings["OP%d##sgiOPM4"].plurals[0] = "=OP%d";
-    strings["FM Macros##sgiOPM"].plurals[0] = "=FM Macros";
-    strings["AM Depth##sgiOPM"].plurals[0] = "=AM Depth";
-    strings["PM Depth##sgiOPM"].plurals[0] = "=PM Depth";
-    strings["LFO Speed##sgiOPM"].plurals[0] = "=LFO Speed";
-    strings["LFO Shape##sgiOPM"].plurals[0] = "=LFO Shape";
-    strings["OpMask##sgiOPM"].plurals[0] = "=OpMask";
-    strings["OP%d Macros##sgiOPM"].plurals[0] = "=OP%d Macros";
-    strings["Macros##sgiOPM"].plurals[0] = "=Macros";
-    strings["Volume##sgiOPM"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiOPM"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiOPM"].plurals[0] = "=Pitch";
-    strings["Noise Freq##sgiOPM"].plurals[0] = "=Noise Freq";
-    strings["Panning##sgiOPM"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiOPM"].plurals[0] = "=Phase Reset";
+    strings["Envelope##sgiOPM0"].plurals[0] = "Envelope";
+    strings["op%d##sgiOPM0"].plurals[0] = "op%d";
+    strings["OP%d##sgiOPM3"].plurals[0] = "OP%d";
+    strings["op%d##sgiOPM1"].plurals[0] = "op%d";
+    strings["Operator %d##sgiOPM"].plurals[0] = "Operador %d";
+    strings["Waveform##sgiOPM"].plurals[0] = "Forma de Onda"; // por que tem waveform no opm? kkkkkk
+    strings["Envelope##sgiOPM1"].plurals[0] = "Envelope";
+    strings["op%d##sgiOPM2"].plurals[0] = "op%d";
+    strings["OP%d##sgiOPM4"].plurals[0] = "OP%d";
+    strings["FM Macros##sgiOPM"].plurals[0] = "Macros FM";
+    strings["AM Depth##sgiOPM"].plurals[0] = "Profundidade AM";
+    strings["PM Depth##sgiOPM"].plurals[0] = "Profundidade PM";
+    strings["LFO Speed##sgiOPM"].plurals[0] = "Velocidade do LFO";
+    strings["LFO Shape##sgiOPM"].plurals[0] = "Formato do LFO";
+    strings["OpMask##sgiOPM"].plurals[0] = "Máscara de Op.";
+    strings["OP%d Macros##sgiOPM"].plurals[0] = "Macros OP%d";
+    strings["Macros##sgiOPM"].plurals[0] = "Macros";
+    strings["Volume##sgiOPM"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiOPM"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiOPM"].plurals[0] = "Tom";
+    strings["Noise Freq##sgiOPM"].plurals[0] = "Freq. Ruído";
+    strings["Panning##sgiOPM"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiOPM"].plurals[0] = "Redef. de Fase";
 
     //   sgiOPN    src/gui/inst/opn.cpp
 
-    strings["Envelope##sgiOPN0"].plurals[0] = "=Envelope";
-    strings["Envelope##sgiOPN1"].plurals[0] = "=Envelope";
-    strings["op%d##sgiOPN0"].plurals[0] = "=op%d";
-    strings["OP%d##sgiOPN1"].plurals[0] = "=OP%d";
-    strings["op%d##sgiOPN2"].plurals[0] = "=op%d";
-    strings["Operator %d##sgiOPN"].plurals[0] = "=Operator %d";
-    strings["SSG-EG##sgiOPN"].plurals[0] = "=SSG-EG";
-    strings["Envelope##sgiOPN2"].plurals[0] = "=Envelope";
-    strings["op%d##sgiOPN3"].plurals[0] = "=op%d";
-    strings["OP%d##sgiOPN4"].plurals[0] = "=OP%d";
-    strings["SSG On##sgiOPN"].plurals[0] = "=SSG On";
-    strings["FM Macros##sgiOPN"].plurals[0] = "=FM Macros";
-    strings["LFO Speed##sgiOPN"].plurals[0] = "=LFO Speed";
-    strings["OpMask##sgiOPN"].plurals[0] = "=OpMask";
-    strings["OP%d Macros##sgiOPN"].plurals[0] = "=OP%d Macros";
-    strings["Macros##sgiOPN"].plurals[0] = "=Macros";
-    strings["Volume##sgiOPN"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiOPN"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiOPN"].plurals[0] = "=Pitch";
-    strings["Panning##sgiOPN"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiOPN"].plurals[0] = "=Phase Reset";
+    strings["Envelope##sgiOPN0"].plurals[0] = "Envelope";
+    strings["Envelope##sgiOPN1"].plurals[0] = "Envelope";
+    strings["op%d##sgiOPN0"].plurals[0] = "op%d";
+    strings["OP%d##sgiOPN1"].plurals[0] = "OP%d";
+    strings["op%d##sgiOPN2"].plurals[0] = "op%d";
+    strings["Operator %d##sgiOPN"].plurals[0] = "Operador %d";
+    strings["SSG-EG##sgiOPN"].plurals[0] = "SSG-EG";
+    strings["Envelope##sgiOPN2"].plurals[0] = "Envelope";
+    strings["op%d##sgiOPN3"].plurals[0] = "op%d";
+    strings["OP%d##sgiOPN4"].plurals[0] = "OP%d";
+    strings["SSG On##sgiOPN"].plurals[0] = "SSG On";
+    strings["FM Macros##sgiOPN"].plurals[0] = "Macros FM";
+    strings["LFO Speed##sgiOPN"].plurals[0] = "Velocidade LFO";
+    strings["OpMask##sgiOPN"].plurals[0] = "Máscara de Op.";
+    strings["OP%d Macros##sgiOPN"].plurals[0] = "Macros OP%d";
+    strings["Macros##sgiOPN"].plurals[0] = "Macros";
+    strings["Volume##sgiOPN"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiOPN"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiOPN"].plurals[0] = "Tom";
+    strings["Panning##sgiOPN"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiOPN"].plurals[0] = "Redef. de Fase";
 
     //   sgiOPZ    src/gui/inst/opz.cpp
 
-    strings["Request from TX81Z##sgiOPZ"].plurals[0] = "=Request from TX81Z";
-    strings["Other##sgiOPZ0"].plurals[0] = "=Other";
-    strings["Other##sgiOPZ1"].plurals[0] = "=Other";
-    strings["Envelope##sgiOPZ0"].plurals[0] = "=Envelope";
-    strings["Envelope##sgiOPZ1"].plurals[0] = "=Envelope";
-    strings["op%d##sgiOPZ0"].plurals[0] = "=op%d";
-    strings["OP%d##sgiOPZ1"].plurals[0] = "=OP%d";
-    strings["Fixed##sgiOPZ0"].plurals[0] = "=Fixed";
-    strings["Block##sgiOPZ0"].plurals[0] = "=Block";
-    strings["FreqNum##sgiOPZ0"].plurals[0] = "=FreqNum";
-    strings["op%d##sgiOPZ2"].plurals[0] = "=op%d";
-    strings["Operator %d##sgiOPZ"].plurals[0] = "=Operator %d";
-    strings["Waveform##sgiOPZ"].plurals[0] = "=Waveform";
-    strings["Envelope##sgiOPZ2"].plurals[0] = "=Envelope";
-    strings["Block##sgiOPZ1"].plurals[0] = "=Block";
-    strings["Freq##sgiOPZ"].plurals[0] = "=Freq";
-    strings["Fixed##sgiOPZ1"].plurals[0] = "=Fixed";
-    strings["op%d##sgiOPZ3"].plurals[0] = "=op%d";
-    strings["OP%d##sgiOPZ4"].plurals[0] = "=OP%d";
-    strings["Fixed##sgiOPZ2"].plurals[0] = "=Fixed";
-    strings["Block##sgiOPZ2"].plurals[0] = "=Block";
-    strings["FreqNum##sgiOPZ1"].plurals[0] = "=FreqNum";
-    strings["FM Macros##sgiOPZ"].plurals[0] = "=FM Macros";
-    strings["AM Depth##sgiOPZ"].plurals[0] = "=AM Depth";
-    strings["PM Depth##sgiOPZ"].plurals[0] = "=PM Depth";
-    strings["LFO Speed##sgiOPZ"].plurals[0] = "=LFO Speed";
-    strings["LFO Shape##sgiOPZ"].plurals[0] = "=LFO Shape";
-    strings["AM Depth 2##sgiOPZ"].plurals[0] = "=AM Depth 2";
-    strings["PM Depth 2##sgiOPZ"].plurals[0] = "=PM Depth 2";
-    strings["LFO2 Speed##sgiOPZ"].plurals[0] = "=LFO2 Speed";
-    strings["LFO2 Shape##sgiOPZ"].plurals[0] = "=LFO2 Shape";
-    strings["OP%d Macros##sgiOPZ"].plurals[0] = "=OP%d Macros";
-    strings["Macros##sgiOPZ"].plurals[0] = "=Macros";
-    strings["Volume##sgiOPZ"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiOPZ"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiOPZ"].plurals[0] = "=Pitch";
-    strings["Noise Freq##sgiOPZ"].plurals[0] = "=Noise Freq";
-    strings["Panning##sgiOPZ"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiOPZ"].plurals[0] = "=Phase Reset";
+    strings["Request from TX81Z##sgiOPZ"].plurals[0] = "Requisitar do TX81Z";
+    strings["Other##sgiOPZ0"].plurals[0] = "Outro";
+    strings["Other##sgiOPZ1"].plurals[0] = "Outro";
+    strings["Envelope##sgiOPZ0"].plurals[0] = "Envelope";
+    strings["Envelope##sgiOPZ1"].plurals[0] = "Envelope";
+    strings["op%d##sgiOPZ0"].plurals[0] = "op%d";
+    strings["OP%d##sgiOPZ1"].plurals[0] = "OP%d";
+    strings["Fixed##sgiOPZ0"].plurals[0] = "F.Fixa";
+    strings["Block##sgiOPZ0"].plurals[0] = "Bloco";
+    strings["FreqNum##sgiOPZ0"].plurals[0] = "NúmFreq.";
+    strings["op%d##sgiOPZ2"].plurals[0] = "op%d";
+    strings["Operator %d##sgiOPZ"].plurals[0] = "Operador %d";
+    strings["Waveform##sgiOPZ"].plurals[0] = "Forma de Onda";
+    strings["Envelope##sgiOPZ2"].plurals[0] = "Envelope";
+    strings["Block##sgiOPZ1"].plurals[0] = "Bloco";
+    strings["Freq##sgiOPZ"].plurals[0] = "Freq.";
+    strings["Fixed##sgiOPZ1"].plurals[0] = "F.Fixa";
+    strings["op%d##sgiOPZ3"].plurals[0] = "op%d";
+    strings["OP%d##sgiOPZ4"].plurals[0] = "OP%d";
+    strings["Fixed##sgiOPZ2"].plurals[0] = "F.Fixa";
+    strings["Block##sgiOPZ2"].plurals[0] = "Bloco";
+    strings["FreqNum##sgiOPZ1"].plurals[0] = "NúmFreq.";
+    strings["FM Macros##sgiOPZ"].plurals[0] = "Macros FM";
+    strings["AM Depth##sgiOPZ"].plurals[0] = "Profundidade AM";
+    strings["PM Depth##sgiOPZ"].plurals[0] = "Profundidade PM";
+    strings["LFO Speed##sgiOPZ"].plurals[0] = "Velocidade do LFO";
+    strings["LFO Shape##sgiOPZ"].plurals[0] = "Formato do LFO";
+    strings["AM Depth 2##sgiOPZ"].plurals[0] = "Profundidade do AM 2";
+    strings["PM Depth 2##sgiOPZ"].plurals[0] = "Profundidade do PM 2";
+    strings["LFO2 Speed##sgiOPZ"].plurals[0] = "Velocidade do LFO2";
+    strings["LFO2 Shape##sgiOPZ"].plurals[0] = "Formato do LFO2";
+    strings["OP%d Macros##sgiOPZ"].plurals[0] = "Macros OP%d";
+    strings["Macros##sgiOPZ"].plurals[0] = "Macros";
+    strings["Volume##sgiOPZ"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiOPZ"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiOPZ"].plurals[0] = "Tom";
+    strings["Noise Freq##sgiOPZ"].plurals[0] = "Freq. Ruído";
+    strings["Panning##sgiOPZ"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiOPZ"].plurals[0] = "Redef. de Fase";
 
     //   sgiPCE    src/gui/inst/pce.cpp
 
-    strings["Macros##sgiPCE"].plurals[0] = "=Macros";
-    strings["Volume##sgiPCE"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiPCE"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiPCE"].plurals[0] = "=Pitch";
-    strings["Noise##sgiPCE"].plurals[0] = "=Noise";
-    strings["Waveform##sgiPCE"].plurals[0] = "=Waveform";
-    strings["Panning (left)##sgiPCE"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiPCE"].plurals[0] = "=Panning (right)";
-    strings["Phase Reset##sgiPCE"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiPCE"].plurals[0] = "Macros";
+    strings["Volume##sgiPCE"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiPCE"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiPCE"].plurals[0] = "Tom";
+    strings["Noise##sgiPCE"].plurals[0] = "Ruído";
+    strings["Waveform##sgiPCE"].plurals[0] = "Forma de Onda";
+    strings["Panning (left)##sgiPCE"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiPCE"].plurals[0] = "Balanço (direita)";
+    strings["Phase Reset##sgiPCE"].plurals[0] = "Redef. de Fase";
 
     //   sgiPET    src/gui/inst/pet.cpp
 
-    strings["Macros##sgiPET"].plurals[0] = "=Macros";
-    strings["Volume##sgiPET"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiPET"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiPET"].plurals[0] = "=Pitch";
-    strings["Waveform##sgiPET"].plurals[0] = "=Waveform";
+    strings["Macros##sgiPET"].plurals[0] = "Macros";
+    strings["Volume##sgiPET"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiPET"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiPET"].plurals[0] = "Tom";
+    strings["Waveform##sgiPET"].plurals[0] = "Forma de Onda";
 
     //   sgiPMQT   src/gui/inst/pokemini.cpp
 
-    strings["Macros##sgiPMQT"].plurals[0] = "=Macros";
-    strings["Volume##sgiPMQT"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiPMQT"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiPMQT"].plurals[0] = "=Pitch";
-    strings["Pulse Width##sgiPMQT"].plurals[0] = "=Pulse Width";
+    strings["Macros##sgiPMQT"].plurals[0] = "Macros";
+    strings["Volume##sgiPMQT"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiPMQT"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiPMQT"].plurals[0] = "Tom";
+    strings["Pulse Width##sgiPMQT"].plurals[0] = "Largura de Pulso";
 
     //   sgiPOKEY  src/gui/inst/pokey.cpp
 
-    strings["Macros##sgiPOKEY"].plurals[0] = "=Macros";
-    strings["Volume##sgiPOKEY"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiPOKEY"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiPOKEY"].plurals[0] = "=Pitch";
-    strings["Waveform##sgiPOKEY"].plurals[0] = "=Waveform";
+    strings["Macros##sgiPOKEY"].plurals[0] = "Macros";
+    strings["Volume##sgiPOKEY"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiPOKEY"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiPOKEY"].plurals[0] = "Tom";
+    strings["Waveform##sgiPOKEY"].plurals[0] = "Forma de Onda";
 
     //   sgiPNN    src/gui/inst/powernoise.cpp
 
-    strings["Octave offset##sgiPNN"].plurals[0] = "=Octave offset";
-    strings["go to Macros for other parameters.##sgiPNN"].plurals[0] = "=go to Macros for other parameters.";
-    strings["Macros##sgiPNN"].plurals[0] = "=Macros";
-    strings["Volume##sgiPNN"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiPNN"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiPNN"].plurals[0] = "=Pitch";
-    strings["Panning (left)##sgiPNN"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiPNN"].plurals[0] = "=Panning (right)";
-    strings["Phase Reset##sgiPNN"].plurals[0] = "=Phase Reset";
-    strings["Control##sgiPNN"].plurals[0] = "=Control";
-    strings["Tap A Location##sgiPNN"].plurals[0] = "=Tap A Location";
-    strings["Tap B Location##sgiPNN"].plurals[0] = "=Tap B Location";
-    strings["Load LFSR##sgiPNN"].plurals[0] = "=Load LFSR";
+    strings["Octave offset##sgiPNN"].plurals[0] = "Compensação de oitava";
+    strings["go to Macros for other parameters.##sgiPNN"].plurals[0] = "vá para Macros para outros parâmetros.";
+    strings["Macros##sgiPNN"].plurals[0] = "Macros";
+    strings["Volume##sgiPNN"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiPNN"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiPNN"].plurals[0] = "Tom";
+    strings["Panning (left)##sgiPNN"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiPNN"].plurals[0] = "Balanço (direita)";
+    strings["Phase Reset##sgiPNN"].plurals[0] = "Redef. de Fase";
+    strings["Control##sgiPNN"].plurals[0] = "Controle";
+    strings["Tap A Location##sgiPNN"].plurals[0] = "Local do Tap A";
+    strings["Tap B Location##sgiPNN"].plurals[0] = "Local do Tap B";
+    strings["Load LFSR##sgiPNN"].plurals[0] = "Carregar LFSR";
 
     //   sgiPNS    src/gui/inst/powernoise_slope.cpp
 
-    strings["Octave offset##sgiPNS"].plurals[0] = "=Octave offset";
-    strings["go to Macros for other parameters.##sgiPNS"].plurals[0] = "=go to Macros for other parameters.";
-    strings["Macros##sgiPNS"].plurals[0] = "=Macros";
-    strings["Volume##sgiPNS"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiPNS"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiPNS"].plurals[0] = "=Pitch";
-    strings["Panning (left)##sgiPNS"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiPNS"].plurals[0] = "=Panning (right)";
-    strings["Phase Reset##sgiPNS"].plurals[0] = "=Phase Reset";
-    strings["Control##sgiPNS"].plurals[0] = "=Control";
-    strings["Portion A Length##sgiPNS"].plurals[0] = "=Portion A Length";
-    strings["Portion B Length##sgiPNS"].plurals[0] = "=Portion B Length";
-    strings["Portion A Offset##sgiPNS"].plurals[0] = "=Portion A Offset";
-    strings["Portion B Offset##sgiPNS"].plurals[0] = "=Portion B Offset";
+    strings["Octave offset##sgiPNS"].plurals[0] = "Compensação de oitava";
+    strings["go to Macros for other parameters.##sgiPNS"].plurals[0] = "vá para Macros para outros parâmetros.";
+    strings["Macros##sgiPNS"].plurals[0] = "Macros";
+    strings["Volume##sgiPNS"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiPNS"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiPNS"].plurals[0] = "Tom";
+    strings["Panning (left)##sgiPNS"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiPNS"].plurals[0] = "Balanço (direita)";
+    strings["Phase Reset##sgiPNS"].plurals[0] = "Redef. de Fase";
+    strings["Control##sgiPNS"].plurals[0] = "Controle";
+    strings["Portion A Length##sgiPNS"].plurals[0] = "Comprimento da Porção A";
+    strings["Portion B Length##sgiPNS"].plurals[0] = "Comprimento da Porção B";
+    strings["Portion A Offset##sgiPNS"].plurals[0] = "Deslocamento da Porção A";
+    strings["Portion B Offset##sgiPNS"].plurals[0] = "Deslocamento da Porção B";
 
     //   sgiPV     src/gui/inst/pv1000.cpp
 
-    strings["Macros##sgiPV"].plurals[0] = "=Macros";
-    strings["Volume##sgiPV"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiPV"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiPV"].plurals[0] = "=Pitch";
+    strings["Macros##sgiPV"].plurals[0] = "Macros";
+    strings["Volume##sgiPV"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiPV"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiPV"].plurals[0] = "Tom";
 
     //   sgiQ      src/gui/inst/qsound.cpp
 
-    strings["Macros##sgiQ"].plurals[0] = "=Macros";
-    strings["Volume##sgiQ"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiQ"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiQ"].plurals[0] = "=Pitch";
-    strings["Panning##sgiQ"].plurals[0] = "=Panning";
-    strings["Surround##sgiQ"].plurals[0] = "=Surround";
-    strings["Phase Reset##sgiQ"].plurals[0] = "=Phase Reset";
-    strings["Echo Level##sgiQ"].plurals[0] = "=Echo Level";
-    strings["Echo Feedback##sgiQ"].plurals[0] = "=Echo Feedback";
-    strings["Echo Length##sgiQ"].plurals[0] = "=Echo Length";
+    strings["Macros##sgiQ"].plurals[0] = "Macros";
+    strings["Volume##sgiQ"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiQ"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiQ"].plurals[0] = "Tom";
+    strings["Panning##sgiQ"].plurals[0] = "Balanço";
+    strings["Surround##sgiQ"].plurals[0] = "Surround";
+    strings["Phase Reset##sgiQ"].plurals[0] = "Redef. de Fase";
+    strings["Echo Level##sgiQ"].plurals[0] = "Nível de Eco";
+    strings["Echo Feedback##sgiQ"].plurals[0] = "Retorno do Eco";
+    strings["Echo Length##sgiQ"].plurals[0] = "Atraso do Eco";
 
     //   sgiRF5    src/gui/inst/rf5c68.cpp
 
-    strings["Macros##sgiRF5"].plurals[0] = "=Macros";
-    strings["Volume##sgiRF5"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiRF5"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiRF5"].plurals[0] = "=Pitch";
-    strings["Panning (left)##sgiRF5"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiRF5"].plurals[0] = "=Panning (right)";
-    strings["Phase Reset##sgiRF5"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiRF5"].plurals[0] = "Macros";
+    strings["Volume##sgiRF5"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiRF5"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiRF5"].plurals[0] = "Tom";
+    strings["Panning (left)##sgiRF5"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiRF5"].plurals[0] = "Balanço (direita)";
+    strings["Phase Reset##sgiRF5"].plurals[0] = "Redef. de Fase";
 
     //   sgiSAA    src/gui/inst/saa1099.cpp
 
-    strings["Macros##sgiSAA"].plurals[0] = "=Macros";
-    strings["Volume##sgiSAA"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiSAA"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiSAA"].plurals[0] = "=Pitch";
-    strings["Duty/Noise##sgiSAA"].plurals[0] = "=Duty/Noise";
-    strings["Waveform##sgiSAA"].plurals[0] = "=Waveform";
-    strings["Panning (left)##sgiSAA"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiSAA"].plurals[0] = "=Panning (right)";
-    strings["Envelope##sgiSAA"].plurals[0] = "=Envelope";
+    strings["Macros##sgiSAA"].plurals[0] = "Macros";
+    strings["Volume##sgiSAA"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiSAA"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiSAA"].plurals[0] = "Tom";
+    strings["Duty/Noise##sgiSAA"].plurals[0] = "Ciclo de Trab./Ruído";
+    strings["Waveform##sgiSAA"].plurals[0] = "Forma de Onda";
+    strings["Panning (left)##sgiSAA"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiSAA"].plurals[0] = "Balanço (direita)";
+    strings["Envelope##sgiSAA"].plurals[0] = "Envelope";
 
     //   sgismpd   src/gui/inst/sampleDraw.cpp
 
-    strings["Sample##sgismpd0"].plurals[0] = "=Sample";
-    strings["DPCM##sgismpd"].plurals[0] = "=DPCM";
-    strings["new DPCM features disabled (compatibility)!##sgismpd"].plurals[0] = "=new DPCM features disabled (compatibility)!";
-    strings["click here to enable them.##sgismpd"].plurals[0] = "=click here to enable them.";
-    strings["none selected##sgismpd"].plurals[0] = "=none selected";
-    strings["Use sample##sgismpd"].plurals[0] = "=Use sample";
-    strings["Sample bank slot##BANKSLOT"].plurals[0] = "=Sample bank slot##BANKSLOT";
-    strings["Sample##sgismpd1"].plurals[0] = "=Sample";
-    strings["Use wavetable (Amiga/SNES/Generic DAC only)##sgismpd"].plurals[0] = "=Use wavetable (Amiga/SNES/Generic DAC only)";
-    strings["Width##sgismpd"].plurals[0] = "=Width";
-    strings["Use sample map##sgismpd"].plurals[0] = "=Use sample map";
-    strings["pitch##sgismpd"].plurals[0] = "=pitch";
-    strings["delta##sgismpd"].plurals[0] = "=delta";
-    strings["note##sgismpd"].plurals[0] = "=note";
-    strings["sample name##sgismpd"].plurals[0] = "=sample name";
-    strings["set entire map to this pitch##sgismpd"].plurals[0] = "=set entire map to this pitch";
-    strings["set entire map to this delta counter value##sgismpd"].plurals[0] = "=set entire map to this delta counter value";
-    strings["set entire map to this note##sgismpd"].plurals[0] = "=set entire map to this note";
-    strings["set entire map to this sample##sgismpd"].plurals[0] = "=set entire map to this sample";
-    strings["reset pitches##sgismpd"].plurals[0] = "=reset pitches";
-    strings["clear delta counter values##sgismpd"].plurals[0] = "=clear delta counter values";
-    strings["reset notes##sgismpd"].plurals[0] = "=reset notes";
-    strings["clear map samples##sgismpd"].plurals[0] = "=clear map samples";
+    strings["Sample##sgismpd0"].plurals[0] = "Sample";
+    strings["DPCM##sgismpd"].plurals[0] = "DPCM";
+    strings["new DPCM features disabled (compatibility)!##sgismpd"].plurals[0] = "novos recursos de DPCM desabilitados (compatibilidade)!";
+    strings["click here to enable them.##sgismpd"].plurals[0] = "clique aqui para habilitá-los.";
+    strings["none selected##sgismpd"].plurals[0] = "nenhuma selecionada";
+    strings["Use sample##sgismpd"].plurals[0] = "Usar amostra";
+    strings["Sample bank slot##BANKSLOT"].plurals[0] = "Vaga do banco de samples##BANKSLOT";
+    strings["Sample##sgismpd1"].plurals[0] = "Sample";
+    strings["Use wavetable (Amiga/SNES/Generic DAC only)##sgismpd"].plurals[0] = "Utilizar wavetable (Amiga/SNES/DAC Genérico somente)";
+    strings["Width##sgismpd"].plurals[0] = "Largura";
+    strings["Use sample map##sgismpd"].plurals[0] = "Utilizar mapa de samples";
+    strings["pitch##sgismpd"].plurals[0] = "tom";
+    strings["delta##sgismpd"].plurals[0] = "delta";
+    strings["note##sgismpd"].plurals[0] = "nota";
+    strings["sample name##sgismpd"].plurals[0] = "nome da sample";
+    strings["set entire map to this pitch##sgismpd"].plurals[0] = "definir mapa inteiro para esse tom";
+    strings["set entire map to this delta counter value##sgismpd"].plurals[0] = "definir mapa inteiro para esse valor de contador delta";
+    strings["set entire map to this note##sgismpd"].plurals[0] = "definir mapa inteiro para essa nota";
+    strings["set entire map to this sample##sgismpd"].plurals[0] = "definir mapa inteiro para essa sample";
+    strings["reset pitches##sgismpd"].plurals[0] = "redefinir tons";
+    strings["clear delta counter values##sgismpd"].plurals[0] = "limpar valores de contador delta";
+    strings["reset notes##sgismpd"].plurals[0] = "redefinir notas";
+    strings["clear map samples##sgismpd"].plurals[0] = "limpar samples do mapa";
 
     //   sgiSCC    src/gui/inst/scc.cpp
 
-    strings["Macros##sgiSCC"].plurals[0] = "=Macros";
-    strings["Volume##sgiSCC"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiSCC"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiSCC"].plurals[0] = "=Pitch";
-    strings["Waveform##sgiSCC"].plurals[0] = "=Waveform";
+    strings["Macros##sgiSCC"].plurals[0] = "Macros";
+    strings["Volume##sgiSCC"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiSCC"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiSCC"].plurals[0] = "Tom";
+    strings["Waveform##sgiSCC"].plurals[0] = "Forma de Onda";
 
     //   sgiSEGA   src/gui/inst/segapcm.cpp
 
-    strings["Macros##sgiSEGA"].plurals[0] = "=Macros";
-    strings["Volume##sgiSEGA"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiSEGA"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiSEGA"].plurals[0] = "=Pitch";
-    strings["Panning (left)##sgiSEGA"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiSEGA"].plurals[0] = "=Panning (right)";
-    strings["Phase Reset##sgiSEGA"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiSEGA"].plurals[0] = "Macros";
+    strings["Volume##sgiSEGA"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiSEGA"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiSEGA"].plurals[0] = "Tom";
+    strings["Panning (left)##sgiSEGA"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiSEGA"].plurals[0] = "Balanço (direita)";
+    strings["Phase Reset##sgiSEGA"].plurals[0] = "Redef. de Fase";
     
     //   sgiSID2   src/gui/inst/sid2.cpp
 
-    strings["Waveform##sgiSID2"].plurals[0] = "=Waveform";
-    strings["tri##sgiSID2"].plurals[0] = "=tri";
-    strings["saw##sgiSID2"].plurals[0] = "=saw";
-    strings["pulse##sgiSID2"].plurals[0] = "=pulse";
-    strings["noise##sgiSID2"].plurals[0] = "=noise";
-    strings["A##sgiSID2"].plurals[0] = "=A";
-    strings["D##sgiSID2"].plurals[0] = "=D";
-    strings["S##sgiSID2"].plurals[0] = "=S";
-    strings["R##sgiSID2"].plurals[0] = "=R";
-    strings["VOL##sgiSID2"].plurals[0] = "=VOL";
-    strings["Envelope##sgiSID2"].plurals[0] = "=Envelope";
-    strings["Duty##sgiSID2"].plurals[0] = "=Duty";
-    strings["Ring Modulation##sgiSID2"].plurals[0] = "=Ring Modulation";
-    strings["Oscillator Sync##sgiSID2"].plurals[0] = "=Oscillator Sync";
-    strings["Enable filter##sgiSID2"].plurals[0] = "=Enable filter";
-    strings["Initialize filter##sgiSID2"].plurals[0] = "=Initialize filter";
-    strings["Cutoff##sgiSID2"].plurals[0] = "=Cutoff";
-    strings["Resonance##sgiSID2"].plurals[0] = "=Resonance";
-    strings["Filter Mode##sgiSID2"].plurals[0] = "=Filter Mode";
-    strings["low##sgiSID2"].plurals[0] = "=low";
-    strings["band##sgiSID2"].plurals[0] = "=band";
-    strings["high##sgiSID2"].plurals[0] = "=high";
-    strings["Noise Mode##sgiSID2"].plurals[0] = "=Noise Mode";
-    strings["Wave Mix Mode##sgiSID2"].plurals[0] = "=Wave Mix Mode";
-    strings["Absolute Cutoff Macro##sgiSID2"].plurals[0] = "=Absolute Cutoff Macro";
-    strings["Absolute Duty Macro##sgiSID2"].plurals[0] = "=Absolute Duty Macro";
-    strings["Macros##sgiSID2"].plurals[0] = "=Macros";
-    strings["Volume##sgiSID2"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiSID2"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiSID2"].plurals[0] = "=Pitch";
-    strings["Duty##sgiSID21"].plurals[0] = "=Duty";
-    strings["Waveform##sgiSID21"].plurals[0] = "=Waveform";
-    strings["Noise Mode##sgiSID21"].plurals[0] = "=Noise Mode";
-    strings["Wave Mix Mode##sgiSID21"].plurals[0] = "=Wave Mix Mode";
-    strings["Cutoff##sgiSID21"].plurals[0] = "=Cutoff";
-    strings["Filter Mode##sgiSID21"].plurals[0] = "=Filter Mode";
-    strings["Filter Toggle##sgiSID2"].plurals[0] = "=Filter Toggle";
-    strings["Resonance##sgiSID21"].plurals[0] = "=Resonance";
-    strings["Phase Reset##sgiSID2"].plurals[0] = "=Phase Reset";
-    strings["Envelope Reset/Key Control##sgiSID2"].plurals[0] = "=Envelope Reset/Key Control";
-    strings["Special##sgiSID2"].plurals[0] = "=Special";
-    strings["Attack##sgiSID2"].plurals[0] = "=Attack";
-    strings["Decay##sgiSID2"].plurals[0] = "=Decay";
-    strings["Sustain##sgiSID2"].plurals[0] = "=Sustain";
-    strings["Release##sgiSID2"].plurals[0] = "=Release";
+    strings["Waveform##sgiSID2"].plurals[0] = "Forma de Onda";
+    strings["tri##sgiSID2"].plurals[0] = "tri";
+    strings["saw##sgiSID2"].plurals[0] = "serra";
+    strings["pulse##sgiSID2"].plurals[0] = "pulso";
+    strings["noise##sgiSID2"].plurals[0] = "ruído";
+    strings["A##sgiSID2"].plurals[0] = "A";
+    strings["D##sgiSID2"].plurals[0] = "D";
+    strings["S##sgiSID2"].plurals[0] = "S";
+    strings["R##sgiSID2"].plurals[0] = "R";
+    strings["VOL##sgiSID2"].plurals[0] = "VOL";
+    strings["Envelope##sgiSID2"].plurals[0] = "Envelope";
+    strings["Duty##sgiSID2"].plurals[0] = "Ciclo de Trabalho";
+    strings["Ring Modulation##sgiSID2"].plurals[0] = "Modulação de Anel";
+    strings["Oscillator Sync##sgiSID2"].plurals[0] = "Sincronização de Osciladores";
+    strings["Enable filter##sgiSID2"].plurals[0] = "Habilitar filtro";
+    strings["Initialize filter##sgiSID2"].plurals[0] = "Inicializar filtro";
+    strings["Cutoff##sgiSID2"].plurals[0] = "Ponto de corte";
+    strings["Resonance##sgiSID2"].plurals[0] = "Ressonância";
+    strings["Filter Mode##sgiSID2"].plurals[0] = "Modo de filtro";
+    strings["low##sgiSID2"].plurals[0] = "baixa";
+    strings["band##sgiSID2"].plurals[0] = "banda";
+    strings["high##sgiSID2"].plurals[0] = "alta";
+    strings["Noise Mode##sgiSID2"].plurals[0] = "Modo de Ruído";
+    strings["Wave Mix Mode##sgiSID2"].plurals[0] = "Modo de Mistura de Ondas";
+    strings["Absolute Cutoff Macro##sgiSID2"].plurals[0] = "Macro de Ponto de Corte Absoluta";
+    strings["Absolute Duty Macro##sgiSID2"].plurals[0] = "Macro de Ciclo de Trabalho Absoluta";
+    strings["Macros##sgiSID2"].plurals[0] = "Macros";
+    strings["Volume##sgiSID2"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiSID2"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiSID2"].plurals[0] = "Tom";
+    strings["Duty##sgiSID21"].plurals[0] = "Ciclo de Trabalho";
+    strings["Waveform##sgiSID21"].plurals[0] = "Forma de Onda";
+    strings["Noise Mode##sgiSID21"].plurals[0] = "Modo de Ruído";
+    strings["Wave Mix Mode##sgiSID21"].plurals[0] = "Modo de Mistura de Ondas";
+    strings["Cutoff##sgiSID21"].plurals[0] = "Ponto de Corte";
+    strings["Filter Mode##sgiSID21"].plurals[0] = "Modo de Filtro";
+    strings["Filter Toggle##sgiSID2"].plurals[0] = "Alternar Filtro";
+    strings["Resonance##sgiSID21"].plurals[0] = "Ressonância";
+    strings["Phase Reset##sgiSID2"].plurals[0] = "Redef. de Fase";
+    strings["Envelope Reset/Key Control##sgiSID2"].plurals[0] = "Reinício de Envelope/Controle de Chaveamento";
+    strings["Special##sgiSID2"].plurals[0] = "Especial";
+    strings["Attack##sgiSID2"].plurals[0] = "Ataque";
+    strings["Decay##sgiSID2"].plurals[0] = "Decaimento";
+    strings["Sustain##sgiSID2"].plurals[0] = "Sustentação";
+    strings["Release##sgiSID2"].plurals[0] = "Repouso";
 
     //   sgiSM     src/gui/inst/sm8521.cpp
 
-    strings["Macros##sgiSM"].plurals[0] = "=Macros";
-    strings["Volume##sgiSM"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiSM"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiSM"].plurals[0] = "=Pitch";
-    strings["Waveform##sgiSM"].plurals[0] = "=Waveform";
+    strings["Macros##sgiSM"].plurals[0] = "Macros";
+    strings["Volume##sgiSM"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiSM"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiSM"].plurals[0] = "Tom";
+    strings["Waveform##sgiSM"].plurals[0] = "Forma de Onda";
 
     //   sgiSNES   src/gui/inst/snes.cpp
 
-    strings["Use envelope##sgiSNES"].plurals[0] = "=Use envelope";
-    strings["Envelope##sgiSNES0"].plurals[0] = "=Envelope";
-    strings["Envelope##sgiSNES1"].plurals[0] = "=Envelope";
-    strings["Sustain/release mode:##sgiSNES"].plurals[0] = "=Sustain/release mode:";
-    strings["Direct (cut on release)##sgiSNES"].plurals[0] = "=Direct (cut on release)";
-    strings["Effective (linear decrease)##sgiSNES"].plurals[0] = "=Effective (linear decrease)";
-    strings["Effective (exponential decrease)##sgiSNES"].plurals[0] = "=Effective (exponential decrease)";
-    strings["Delayed (write R on release)##sgiSNES"].plurals[0] = "=Delayed (write R on release)";
-    strings["Gain Mode##sgiSNES0"].plurals[0] = "=Gain Mode";
-    strings["Gain Mode##sgiSNES1"].plurals[0] = "=Gain Mode";
-    strings["Gain##sgiSNES0"].plurals[0] = "=Gain";
-    strings["Gain##sgiSNES1"].plurals[0] = "=Gain";
-    strings["Direct##sgiSNES"].plurals[0] = "=Direct";
-    strings["Decrease (linear)##sgiSNES"].plurals[0] = "=Decrease (linear)";
-    strings["Decrease (logarithmic)##sgiSNES"].plurals[0] = "=Decrease (logarithmic)";
-    strings["Increase (linear)##sgiSNES"].plurals[0] = "=Increase (linear)";
-    strings["Increase (bent line)##sgiSNES"].plurals[0] = "=Increase (bent line)";
-    strings["using decrease modes will not produce any sound at all, unless you know what you are doing.\nit is recommended to use the Gain macro for decrease instead.##sgiSNES"].plurals[0] = "=using decrease modes will not produce any sound at all, unless you know what you are doing.\nit is recommended to use the Gain macro for decrease instead.";
-    strings["Macros##sgiSNES"].plurals[0] = "=Macros";
-    strings["Volume##sgiSNES"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiSNES"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiSNES"].plurals[0] = "=Pitch";
-    strings["Noise Freq##sgiSNES"].plurals[0] = "=Noise Freq";
-    strings["Waveform##sgiSNES"].plurals[0] = "=Waveform";
-    strings["Panning (left)##sgiSNES"].plurals[0] = "=Panning (left)";
-    strings["Panning (right)##sgiSNES"].plurals[0] = "=Panning (right)";
-    strings["Special##sgiSNES"].plurals[0] = "=Special";
-    strings["Gain##sgiSNES2"].plurals[0] = "=Gain";
+    strings["Use envelope##sgiSNES"].plurals[0] = "Usar envelope";
+    strings["Envelope##sgiSNES0"].plurals[0] = "Envelope";
+    strings["Envelope##sgiSNES1"].plurals[0] = "Envelope";
+    strings["Sustain/release mode:##sgiSNES"].plurals[0] = "Modo de sustentação/repouso:";
+    strings["Direct (cut on release)##sgiSNES"].plurals[0] = "Direto (cortar no repouso)";
+    strings["Effective (linear decrease)##sgiSNES"].plurals[0] = "Efetivo (redução linear)";
+    strings["Effective (exponential decrease)##sgiSNES"].plurals[0] = "Efetivo (redução exponencial)";
+    strings["Delayed (write R on release)##sgiSNES"].plurals[0] = "Atrasado (escrever R no momento do repouso)";
+    strings["Gain Mode##sgiSNES0"].plurals[0] = "Modo de Ganho";
+    strings["Gain Mode##sgiSNES1"].plurals[0] = "Modo de Ganho";
+    strings["Gain##sgiSNES0"].plurals[0] = "Ganho";
+    strings["Gain##sgiSNES1"].plurals[0] = "Ganho";
+    strings["Direct##sgiSNES"].plurals[0] = "Direto";
+    strings["Decrease (linear)##sgiSNES"].plurals[0] = "Diminuir (linear)";
+    strings["Decrease (logarithmic)##sgiSNES"].plurals[0] = "Diminuir (logarítmico)";
+    strings["Increase (linear)##sgiSNES"].plurals[0] = "Aumentar (linear)";
+    strings["Increase (bent line)##sgiSNES"].plurals[0] = "Aumentar (linha torta)";
+    strings["using decrease modes will not produce any sound at all, unless you know what you are doing.\nit is recommended to use the Gain macro for decrease instead.##sgiSNES"].plurals[0] = "utilizar modos de diminuição não irá produzir som nenhum, a não ser que você saiba o que está fazendo.\né recomendado utilizar a macro de Ganho para diminuição ao invés disso.";
+    strings["Macros##sgiSNES"].plurals[0] = "Macros";
+    strings["Volume##sgiSNES"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiSNES"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiSNES"].plurals[0] = "Tom";
+    strings["Noise Freq##sgiSNES"].plurals[0] = "Freq. Ruído";
+    strings["Waveform##sgiSNES"].plurals[0] = "Forma de Onda";
+    strings["Panning (left)##sgiSNES"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiSNES"].plurals[0] = "Balanço (direita)";
+    strings["Special##sgiSNES"].plurals[0] = "Especial";
+    strings["Gain##sgiSNES2"].plurals[0] = "Ganho";
 
     //   sgiPSG    src/gui/inst/std.cpp
 
-    strings["Macros##sgiPSG"].plurals[0] = "=Macros";
-    strings["Volume##sgiPSG"].plurals[0] = "=Volume";
-    strings["Arpeggio##sgiPSG"].plurals[0] = "=Arpeggio";
-    strings["Pitch##sgiPSG"].plurals[0] = "=Pitch";
-    strings["Duty##sgiPSG"].plurals[0] = "=Duty";
-    strings["Panning##sgiPSG"].plurals[0] = "=Panning";
-    strings["Phase Reset##sgiPSG"].plurals[0] = "=Phase Reset";
+    strings["Macros##sgiPSG"].plurals[0] = "Macros";
+    strings["Volume##sgiPSG"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiPSG"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiPSG"].plurals[0] = "Tom";
+    strings["Duty##sgiPSG"].plurals[0] = "Ciclo de Trabalho"; // na verdade nesses chips é qualquer coisa menos ciclo de trabalho... acho isso tão besta, viu?
+    strings["Panning##sgiPSG"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiPSG"].plurals[0] = "Redef. de Fase";
 
     //   sgistru   src/gui/inst/stringsUtil.cpp
 
-    strings["Down Down Down##sgistru"].plurals[0] = "=Down Down Down";
-    strings["Down.##sgistru"].plurals[0] = "=Down.";
-    strings["Down Up Down Up##sgistru"].plurals[0] = "=Down Up Down Up";
-    strings["Down UP##sgistru"].plurals[0] = "=Down UP";
-    strings["Up Up Up##sgistru"].plurals[0] = "=Up Up Up";
-    strings["Up.##sgistru"].plurals[0] = "=Up.";
-    strings["Up Down Up Down##sgistru"].plurals[0] = "=Up Down Up Down";
-    strings["Up DOWN##sgistru"].plurals[0] = "=Up DOWN";
-    strings["Algorithm##sgistru"].plurals[0] = "=Algorithm";
-    strings["Feedback##sgistru"].plurals[0] = "=Feedback";
-    strings["LFO > Freq##sgistru"].plurals[0] = "=LFO > Freq";
-    strings["LFO > Amp##sgistru"].plurals[0] = "=LFO > Amp";
-    strings["Attack##sgistru"].plurals[0] = "=Attack";
-    strings["Decay##sgistru"].plurals[0] = "=Decay";
-    strings["Decay 2##sgistru"].plurals[0] = "=Decay 2";
-    strings["Release##sgistru"].plurals[0] = "=Release";
-    strings["Sustain##sgistru0"].plurals[0] = "=Sustain";
-    strings["Level##sgistru"].plurals[0] = "=Level";
-    strings["EnvScale##sgistru"].plurals[0] = "=EnvScale";
-    strings["Multiplier##sgistru"].plurals[0] = "=Multiplier";
-    strings["Detune##sgistru0"].plurals[0] = "=Detune";
-    strings["Detune 2##sgistru"].plurals[0] = "=Detune 2";
-    strings["SSG-EG##sgistru"].plurals[0] = "=SSG-EG";
-    strings["AM Depth##sgistru"].plurals[0] = "=AM Depth";
-    strings["Vibrato Depth##sgistru"].plurals[0] = "=Vibrato Depth";
-    strings["Sustained##sgistru0"].plurals[0] = "=Sustained";
-    strings["Sustained##sgistru1"].plurals[0] = "=Sustained";
-    strings["Level Scaling##sgistru"].plurals[0] = "=Level Scaling";
-    strings["Sustain##sgistru1"].plurals[0] = "=Sustain";
-    strings["Vibrato##sgistru"].plurals[0] = "=Vibrato";
-    strings["Waveform##sgistru"].plurals[0] = "=Waveform";
-    strings["Scale Rate##sgistru"].plurals[0] = "=Scale Rate";
-    strings["OP2 Half Sine##sgistru"].plurals[0] = "=OP2 Half Sine";
-    strings["OP1 Half Sine##sgistru"].plurals[0] = "=OP1 Half Sine";
-    strings["EnvShift##sgistru"].plurals[0] = "=EnvShift";
-    strings["Reverb##sgistru"].plurals[0] = "=Reverb";
-    strings["Fine##sgistru0"].plurals[0] = "=Fine";
-    strings["LFO2 > Freq##sgistru"].plurals[0] = "=LFO2 > Freq";
-    strings["LFO2 > Amp##sgistru"].plurals[0] = "=LFO2 > Amp";
-    strings["Fine##sgistru1"].plurals[0] = "=Fine";
-    strings["Fine##sgistru2"].plurals[0] = "=Fine";
-    strings["OP4 Noise Mode##sgistru0"].plurals[0] = "=OP4 Noise Mode";
-    strings["Envelope Delay##sgistru"].plurals[0] = "=Envelope Delay";
-    strings["Output Level##sgistru0"].plurals[0] = "=Output Level";
-    strings["Modulation Input Level##sgistru"].plurals[0] = "=Modulation Input Level";
-    strings["Left Output##sgistru"].plurals[0] = "=Left Output";
-    strings["Right Output##sgistru"].plurals[0] = "=Right Output";
-    strings["Coarse Tune (semitones)##sgistru"].plurals[0] = "=Coarse Tune (semitones)";
-    strings["Detune##sgistru1"].plurals[0] = "=Detune";
-    strings["Fixed Frequency Mode##sgistru"].plurals[0] = "=Fixed Frequency Mode";
-    strings["OP4 Noise Mode##sgistru1"].plurals[0] = "=OP4 Noise Mode";
-    strings["Env. Delay##sgistru"].plurals[0] = "=Env. Delay";
-    strings["Output Level##sgistru1"].plurals[0] = "=Output Level";
-    strings["ModInput##sgistru"].plurals[0] = "=ModInput";
-    strings["Left##sgistru"].plurals[0] = "=Left";
-    strings["Right##sgistru"].plurals[0] = "=Right";
-    strings["Tune##sgistru"].plurals[0] = "=Tune";
-    strings["Detune##sgistru2"].plurals[0] = "=Detune";
-    strings["Fixed##sgistru0"].plurals[0] = "=Fixed";
-    strings["Fine##sgistru3"].plurals[0] = "=Fine";
-    strings["Fine##sgistru4"].plurals[0] = "=Fine";
-    strings["Fine##sgistru5"].plurals[0] = "=Fine";
-    strings["User##sgistru0"].plurals[0] = "=User";
-    strings["1. Violin##sgistru"].plurals[0] = "=1. Violin";
-    strings["2. Guitar##sgistru0"].plurals[0] = "=2. Guitar";
-    strings["3. Piano##sgistru0"].plurals[0] = "=3. Piano";
-    strings["4. Flute##sgistru0"].plurals[0] = "=4. Flute";
-    strings["5. Clarinet##sgistru0"].plurals[0] = "=5. Clarinet";
-    strings["6. Oboe##sgistru"].plurals[0] = "=6. Oboe";
-    strings["7. Trumpet##sgistru0"].plurals[0] = "=7. Trumpet";
-    strings["8. Organ##sgistru"].plurals[0] = "=8. Organ";
-    strings["9. Horn##sgistru"].plurals[0] = "=9. Horn";
-    strings["10. Synth##sgistru"].plurals[0] = "=10. Synth";
-    strings["11. Harpsichord##sgistru"].plurals[0] = "=11. Harpsichord";
-    strings["12. Vibraphone##sgistru0"].plurals[0] = "=12. Vibraphone";
-    strings["13. Synth Bass##sgistru"].plurals[0] = "=13. Synth Bass";
-    strings["14. Acoustic Bass##sgistru"].plurals[0] = "=14. Acoustic Bass";
-    strings["15. Electric Guitar##sgistru"].plurals[0] = "=15. Electric Guitar";
-    strings["Drums##sgistru0"].plurals[0] = "=Drums";
-    strings["User##sgistru1"].plurals[0] = "=User";
-    strings["1. Electric String##sgistru"].plurals[0] = "=1. Electric String";
-    strings["2. Bow wow##sgistru"].plurals[0] = "=2. Bow wow";
-    strings["3. Electric Guitar##sgistru0"].plurals[0] = "=3. Electric Guitar";
-    strings["4. Organ##sgistru"].plurals[0] = "=4. Organ";
-    strings["5. Clarinet##sgistru1"].plurals[0] = "=5. Clarinet";
-    strings["6. Saxophone##sgistru"].plurals[0] = "=6. Saxophone";
-    strings["7. Trumpet##sgistru1"].plurals[0] = "=7. Trumpet";
-    strings["8. Street Organ##sgistru"].plurals[0] = "=8. Street Organ";
-    strings["9. Synth Brass##sgistru"].plurals[0] = "=9. Synth Brass";
-    strings["10. Electric Piano##sgistru"].plurals[0] = "=10. Electric Piano";
-    strings["11. Bass##sgistru"].plurals[0] = "=11. Bass";
-    strings["12. Vibraphone##sgistru1"].plurals[0] = "=12. Vibraphone";
-    strings["13. Chime##sgistru"].plurals[0] = "=13. Chime";
-    strings["14. Tom Tom II##sgistru"].plurals[0] = "=14. Tom Tom II";
-    strings["15. Noise##sgistru"].plurals[0] = "=15. Noise";
-    strings["Drums##sgistru1"].plurals[0] = "=Drums";
-    strings["User##sgistru2"].plurals[0] = "=User";
-    strings["1. Strings##sgistru"].plurals[0] = "=1. Strings";
-    strings["2. Guitar##sgistru1"].plurals[0] = "=2. Guitar";
-    strings["3. Electric Guitar##sgistru1"].plurals[0] = "=3. Electric Guitar";
-    strings["4. Electric Piano##sgistru"].plurals[0] = "=4. Electric Piano";
-    strings["5. Flute##sgistru"].plurals[0] = "=5. Flute";
-    strings["6. Marimba##sgistru"].plurals[0] = "=6. Marimba";
-    strings["7. Trumpet##sgistru2"].plurals[0] = "=7. Trumpet";
-    strings["8. Harmonica##sgistru"].plurals[0] = "=8. Harmonica";
-    strings["9. Tuba##sgistru"].plurals[0] = "=9. Tuba";
-    strings["10. Synth Brass##sgistru"].plurals[0] = "=10. Synth Brass";
-    strings["11. Short Saw##sgistru"].plurals[0] = "=11. Short Saw";
-    strings["12. Vibraphone##sgistru2"].plurals[0] = "=12. Vibraphone";
-    strings["13. Electric Guitar 2##sgistru"].plurals[0] = "=13. Electric Guitar 2";
-    strings["14. Synth Bass##sgistru"].plurals[0] = "=14. Synth Bass";
-    strings["15. Sitar##sgistru"].plurals[0] = "=15. Sitar";
-    strings["Drums##sgistru2"].plurals[0] = "=Drums";
-    strings["User##sgistru3"].plurals[0] = "=User";
-    strings["1. Bell##sgistru"].plurals[0] = "=1. Bell";
-    strings["2. Guitar##sgistru2"].plurals[0] = "=2. Guitar";
-    strings["3. Piano##sgistru1"].plurals[0] = "=3. Piano";
-    strings["4. Flute##sgistru1"].plurals[0] = "=4. Flute";
-    strings["5. Clarinet##sgistru2"].plurals[0] = "=5. Clarinet";
-    strings["6. Rattling Bell##sgistru"].plurals[0] = "=6. Rattling Bell";
-    strings["7. Trumpet##sgistru3"].plurals[0] = "=7. Trumpet";
-    strings["8. Reed Organ##sgistru"].plurals[0] = "=8. Reed Organ";
-    strings["9. Soft Bell##sgistru"].plurals[0] = "=9. Soft Bell";
-    strings["10. Xylophone##sgistru"].plurals[0] = "=10. Xylophone";
-    strings["11. Vibraphone##sgistru"].plurals[0] = "=11. Vibraphone";
-    strings["12. Brass##sgistru"].plurals[0] = "=12. Brass";
-    strings["13. Bass Guitar##sgistru"].plurals[0] = "=13. Bass Guitar";
-    strings["14. Synth##sgistru"].plurals[0] = "=14. Synth";
-    strings["15. Chorus##sgistru"].plurals[0] = "=15. Chorus";
-    strings["Drums##sgistru3"].plurals[0] = "=Drums";
-    strings["Sine##sgistru0"].plurals[0] = "=Sine";
-    strings["Half Sine##sgistru0"].plurals[0] = "=Half Sine";
-    strings["Absolute Sine##sgistru0"].plurals[0] = "=Absolute Sine";
-    strings["Quarter Sine##sgistru"].plurals[0] = "=Quarter Sine";
-    strings["Squished Sine##sgistru0"].plurals[0] = "=Squished Sine";
-    strings["Squished AbsSine##sgistru0"].plurals[0] = "=Squished AbsSine";
-    strings["Square##sgistru0"].plurals[0] = "=Square";
-    strings["Derived Square##sgistru0"].plurals[0] = "=Derived Square";
-    strings["Sine##sgistru1"].plurals[0] = "=Sine";
-    strings["Half Sine##sgistru1"].plurals[0] = "=Half Sine";
-    strings["Absolute Sine##sgistru1"].plurals[0] = "=Absolute Sine";
-    strings["Pulse Sine##sgistru"].plurals[0] = "=Pulse Sine";
-    strings["Sine (Even Periods)##sgistru"].plurals[0] = "=Sine (Even Periods)";
-    strings["AbsSine (Even Periods)##sgistru"].plurals[0] = "=AbsSine (Even Periods)";
-    strings["Square##sgistru1"].plurals[0] = "=Square";
-    strings["Derived Square##sgistru1"].plurals[0] = "=Derived Square";
-    strings["Sine##sgistru2"].plurals[0] = "=Sine";
-    strings["Triangle##sgistru"].plurals[0] = "=Triangle";
-    strings["Cut Sine##sgistru"].plurals[0] = "=Cut Sine";
-    strings["Cut Triangle##sgistru"].plurals[0] = "=Cut Triangle";
-    strings["Squished Sine##sgistru1"].plurals[0] = "=Squished Sine";
-    strings["Squished Triangle##sgistru"].plurals[0] = "=Squished Triangle";
-    strings["Squished AbsSine##sgistru1"].plurals[0] = "=Squished AbsSine";
-    strings["Squished AbsTriangle##sgistru"].plurals[0] = "=Squished AbsTriangle";
-    strings["Snare##sgistru0"].plurals[0] = "=Snare";
-    strings["Tom##sgistru"].plurals[0] = "=Tom";
-    strings["Top##sgistru0"].plurals[0] = "=Top";
-    strings["HiHat##sgistru0"].plurals[0] = "=HiHat";
-    strings["Normal##sgistru"].plurals[0] = "=Normal";
-    strings["Snare##sgistru1"].plurals[0] = "=Snare";
-    strings["HiHat##sgistru1"].plurals[0] = "=HiHat";
-    strings["Top##sgistru1"].plurals[0] = "=Top";
-    strings["Noise disabled##sgistru"].plurals[0] = "=Noise disabled";
-    strings["Square + noise##sgistru"].plurals[0] = "=Square + noise";
-    strings["Ringmod from OP3 + noise##sgistru"].plurals[0] = "=Ringmod from OP3 + noise";
-    strings["Ringmod from OP3 + double pitch ModInput\nWARNING - has emulation issues, subject to change##sgistru"].plurals[0] = "=Ringmod from OP3 + double pitch ModInput\nWARNING - has emulation issues, subject to change";
-    strings["op1##sgistru"].plurals[0] = "=op1";
-    strings["op2##sgistru"].plurals[0] = "=op2";
-    strings["op3##sgistru"].plurals[0] = "=op3";
-    strings["op4##sgistru"].plurals[0] = "=op4";
-    strings["triangle##sgistru"].plurals[0] = "=triangle";
-    strings["saw##sgistru"].plurals[0] = "=saw";
-    strings["pulse##sgistru"].plurals[0] = "=pulse";
-    strings["noise##sgistru0"].plurals[0] = "=noise";
-    strings["tone##sgistru"].plurals[0] = "=tone";
-    strings["noise##sgistru1"].plurals[0] = "=noise";
-    strings["envelope##sgistru"].plurals[0] = "=envelope";
-    strings["hold##sgistru"].plurals[0] = "=hold";
-    strings["alternate##sgistru"].plurals[0] = "=alternate";
-    strings["direction##sgistru0"].plurals[0] = "=direction";
-    strings["enable##sgistru0"].plurals[0] = "=enable";
-    strings["enabled##sgistru0"].plurals[0] = "=enabled";
-    strings["mirror##sgistru"].plurals[0] = "=mirror";
-    strings["loop##sgistru0"].plurals[0] = "=loop";
-    strings["cut##sgistru"].plurals[0] = "=cut";
-    strings["direction##sgistru1"].plurals[0] = "=direction";
-    strings["resolution##sgistru"].plurals[0] = "=resolution";
-    strings["fixed##sgistru1"].plurals[0] = "=fixed";
-    strings["N/A##sgistru"].plurals[0] = "=N/A";
-    strings["enabled##sgistru1"].plurals[0] = "=enabled";
-    strings["noise##sgistru2"].plurals[0] = "=noise";
-    strings["echo##sgistru"].plurals[0] = "=echo";
-    strings["pitch mod##sgistru"].plurals[0] = "=pitch mod";
-    strings["invert right##sgistru"].plurals[0] = "=invert right";
-    strings["invert left##sgistru"].plurals[0] = "=invert left";
-    strings["low##sgistru"].plurals[0] = "=low";
-    strings["band##sgistru"].plurals[0] = "=band";
-    strings["high##sgistru"].plurals[0] = "=high";
-    strings["ch3off##sgistru"].plurals[0] = "=ch3off";
-    strings["gate##sgistru"].plurals[0] = "=gate";
-    strings["sync##sgistru"].plurals[0] = "=sync";
-    strings["ring##sgistru"].plurals[0] = "=ring";
-    strings["test##sgistru"].plurals[0] = "=test";
-    strings["15kHz##sgistru"].plurals[0] = "=15kHz";
-    strings["filter 2+4##sgistru"].plurals[0] = "=filter 2+4";
-    strings["filter 1+3##sgistru"].plurals[0] = "=filter 1+3";
-    strings["16-bit 3+4##sgistru"].plurals[0] = "=16-bit 3+4";
-    strings["16-bit 1+2##sgistru"].plurals[0] = "=16-bit 1+2";
-    strings["high3##sgistru"].plurals[0] = "=high3";
-    strings["high1##sgistru"].plurals[0] = "=high1";
-    strings["poly9##sgistru"].plurals[0] = "=poly9";
-    strings["int##sgistru"].plurals[0] = "=int";
-    strings["sustain##sgistru2"].plurals[0] = "=sustain";
-    strings["square##sgistru2"].plurals[0] = "=square";
-    strings["noise##sgistru3"].plurals[0] = "=noise";
-    strings["noise##sgistru4"].plurals[0] = "=noise";
-    strings["invert##sgistru"].plurals[0] = "=invert";
-    strings["surround##sgistru"].plurals[0] = "=surround";
-    strings["enable##sgistru1"].plurals[0] = "=enable";
-    strings["oneshot##sgistru"].plurals[0] = "=oneshot";
-    strings["split L/R##sgistru"].plurals[0] = "=split L/R";
-    strings["HinvR##sgistru"].plurals[0] = "=HinvR";
-    strings["VinvR##sgistru"].plurals[0] = "=VinvR";
-    strings["HinvL##sgistru"].plurals[0] = "=HinvL";
-    strings["VinvL##sgistru"].plurals[0] = "=VinvL";
-    strings["ring mod##sgistru"].plurals[0] = "=ring mod";
-    strings["low pass##sgistru"].plurals[0] = "=low pass";
-    strings["high pass##sgistru"].plurals[0] = "=high pass";
-    strings["band pass##sgistru"].plurals[0] = "=band pass";
-    strings["HP/K2, HP/K2##sgistru"].plurals[0] = "=HP/K2, HP/K2";
-    strings["HP/K2, LP/K1##sgistru"].plurals[0] = "=HP/K2, LP/K1";
-    strings["LP/K2, LP/K2##sgistru"].plurals[0] = "=LP/K2, LP/K2";
-    strings["LP/K2, LP/K1##sgistru"].plurals[0] = "=LP/K2, LP/K1";
-    strings["right##sgistru"].plurals[0] = "=right";
-    strings["left##sgistru"].plurals[0] = "=left";
-    strings["rear right##sgistru"].plurals[0] = "=rear right";
-    strings["rear left##sgistru"].plurals[0] = "=rear left";
-    strings["enable tap B##sgistru"].plurals[0] = "=enable tap B";
-    strings["AM with slope##sgistru"].plurals[0] = "=AM with slope";
-    strings["invert B##sgistru"].plurals[0] = "=invert B";
-    strings["invert A##sgistru"].plurals[0] = "=invert A";
-    strings["reset B##sgistru"].plurals[0] = "=reset B";
-    strings["reset A##sgistru"].plurals[0] = "=reset A";
-    strings["clip B##sgistru"].plurals[0] = "=clip B";
-    strings["clip A##sgistru"].plurals[0] = "=clip A";
-    strings["on##sgistru"].plurals[0] = "=on";
-    strings["k1 slowdown##sgistru"].plurals[0] = "=k1 slowdown";
-    strings["k2 slowdown##sgistru"].plurals[0] = "=k2 slowdown";
-    strings["pause##sgistru"].plurals[0] = "=pause";
-    strings["reverse##sgistru"].plurals[0] = "=reverse";
-    strings["high pass##sgistru1"].plurals[0] = "=high pass";
-    strings["ring mod##sgistru1"].plurals[0] = "=ring mod";
-    strings["swap counters (noise)##sgistru"].plurals[0] = "=swap counters (noise)";
-    strings["low pass (noise)##sgistru"].plurals[0] = "=low pass (noise)";
-    strings["sync##sgistru1"].plurals[0] = "=sync";
-    strings["ring##sgistru1"].plurals[0] = "=ring";
-    strings["low##sgistru1"].plurals[0] = "=low";
-    strings["band##sgistru1"].plurals[0] = "=band";
-    strings["high##sgistru1"].plurals[0] = "=high";
-    strings["8580 SID##sgistru"].plurals[0] = "=8580 SID";
-    strings["bitwise AND##sgistru"].plurals[0] = "=bitwise AND";
-    strings["bitwise OR##sgistru"].plurals[0] = "=bitwise OR";
-    strings["bitwise XOR##sgistru"].plurals[0] = "=bitwise XOR";
-    strings["None##sgistru"].plurals[0] = "=None";
-    strings["Invert##sgistru"].plurals[0] = "=Invert";
-    strings["Add##sgistru"].plurals[0] = "=Add";
-    strings["Subtract##sgistru"].plurals[0] = "=Subtract";
-    strings["Average##sgistru"].plurals[0] = "=Average";
-    strings["Phase##sgistru"].plurals[0] = "=Phase";
-    strings["Chorus##sgistru"].plurals[0] = "=Chorus";
-    strings["None (dual)##sgistru"].plurals[0] = "=None (dual)";
-    strings["Wipe##sgistru"].plurals[0] = "=Wipe";
-    strings["Fade##sgistru"].plurals[0] = "=Fade";
-    strings["Fade (ping-pong)##sgistru"].plurals[0] = "=Fade (ping-pong)";
-    strings["Overlay##sgistru"].plurals[0] = "=Overlay";
-    strings["Negative Overlay##sgistru"].plurals[0] = "=Negative Overlay";
-    strings["Slide##sgistru"].plurals[0] = "=Slide";
-    strings["Mix Chorus##sgistru"].plurals[0] = "=Mix Chorus";
-    strings["Phase Modulation##sgistru"].plurals[0] = "=Phase Modulation";
-    strings["Envelope##sgistru"].plurals[0] = "=Envelope";
-    strings["Sweep##sgistru"].plurals[0] = "=Sweep";
-    strings["Wait##sgistru0"].plurals[0] = "=Wait";
-    strings["Wait for Release##sgistru0"].plurals[0] = "=Wait for Release";
-    strings["Loop##sgistru1"].plurals[0] = "=Loop";
-    strings["Loop until Release##sgistru0"].plurals[0] = "=Loop until Release";
+    strings["Down Down Down##sgistru"].plurals[0] = "Baixo Baixo Baixo";
+    strings["Down.##sgistru"].plurals[0] = "Baixo.";
+    strings["Down Up Down Up##sgistru"].plurals[0] = "Baixo Cima Baixo Cima";
+    strings["Down UP##sgistru"].plurals[0] = "Baixo CIMA";
+    strings["Up Up Up##sgistru"].plurals[0] = "Cima Cima Cima";
+    strings["Up.##sgistru"].plurals[0] = "Cima.";
+    strings["Up Down Up Down##sgistru"].plurals[0] = "Cima Baixo Cima Baixo";
+    strings["Up DOWN##sgistru"].plurals[0] = "Cima BAIXO";
+    strings["Algorithm##sgistru"].plurals[0] = "Algoritmo";
+    strings["Feedback##sgistru"].plurals[0] = "Feedback";
+    strings["LFO > Freq##sgistru"].plurals[0] = "LFO > Freq";
+    strings["LFO > Amp##sgistru"].plurals[0] = "LFO > Amp";
+    strings["Attack##sgistru"].plurals[0] = "Ataque";
+    strings["Decay##sgistru"].plurals[0] = "Decaimento";
+    strings["Decay 2##sgistru"].plurals[0] = "Decaimento 2";
+    strings["Release##sgistru"].plurals[0] = "Repouso";
+    strings["Sustain##sgistru0"].plurals[0] = "Sustentação";
+    strings["Level##sgistru"].plurals[0] = "Nível";
+    strings["EnvScale##sgistru"].plurals[0] = "EscalaEnv";
+    strings["Multiplier##sgistru"].plurals[0] = "Multiplicador";
+    strings["Detune##sgistru0"].plurals[0] = "Desafinação";
+    strings["Detune 2##sgistru"].plurals[0] = "Desafinação 2";
+    strings["SSG-EG##sgistru"].plurals[0] = "SSG-EG";
+    strings["AM Depth##sgistru"].plurals[0] = "Profundidade AM";
+    strings["Vibrato Depth##sgistru"].plurals[0] = "Profundidade Vibrato";
+    strings["Sustained##sgistru0"].plurals[0] = "Env. Sustentado";
+    strings["Sustained##sgistru1"].plurals[0] = "Env. Sustentado";
+    strings["Level Scaling##sgistru"].plurals[0] = "Escalonamento de Nível";
+    strings["Sustain##sgistru1"].plurals[0] = "Sustentação";
+    strings["Vibrato##sgistru"].plurals[0] = "Vibrato";
+    strings["Waveform##sgistru"].plurals[0] = "Forma de Onda";
+    strings["Scale Rate##sgistru"].plurals[0] = "Escala de Taxas";
+    strings["OP2 Half Sine##sgistru"].plurals[0] = "OP2 Meio Seno";
+    strings["OP1 Half Sine##sgistru"].plurals[0] = "OP1 Meio Seno";
+    strings["EnvShift##sgistru"].plurals[0] = "DeslocEnv";
+    strings["Reverb##sgistru"].plurals[0] = "Reverb";
+    strings["Fine##sgistru0"].plurals[0] = "Fino";
+    strings["LFO2 > Freq##sgistru"].plurals[0] = "LFO2 > Freq";
+    strings["LFO2 > Amp##sgistru"].plurals[0] = "LFO2 > Amp";
+    strings["Fine##sgistru1"].plurals[0] = "Fino";
+    strings["Fine##sgistru2"].plurals[0] = "Fino";
+    strings["OP4 Noise Mode##sgistru0"].plurals[0] = "Modo de Ruído do OP4";
+    strings["Envelope Delay##sgistru"].plurals[0] = "Atraso de Envelope";
+    strings["Output Level##sgistru0"].plurals[0] = "Nível de Saída";
+    strings["Modulation Input Level##sgistru"].plurals[0] = "Nível de Entrada de Modulação";
+    strings["Left Output##sgistru"].plurals[0] = "Saída Esquerda";
+    strings["Right Output##sgistru"].plurals[0] = "Saída Direita";
+    strings["Coarse Tune (semitones)##sgistru"].plurals[0] = "Afinação Grossa (semitons)";
+    strings["Detune##sgistru1"].plurals[0] = "Desafinação";
+    strings["Fixed Frequency Mode##sgistru"].plurals[0] = "Modo de Frequência Fixa";
+    strings["OP4 Noise Mode##sgistru1"].plurals[0] = "Modo de Ruído do OP4";
+    strings["Env. Delay##sgistru"].plurals[0] = "Atraso Env.";
+    strings["Output Level##sgistru1"].plurals[0] = "Nív. Saída";
+    strings["ModInput##sgistru"].plurals[0] = "EntraMod.";
+    strings["Left##sgistru"].plurals[0] = "Esq.";
+    strings["Right##sgistru"].plurals[0] = "Dir.";
+    strings["Tune##sgistru"].plurals[0] = "Afin.";
+    strings["Detune##sgistru2"].plurals[0] = "Desaf.";
+    strings["Fixed##sgistru0"].plurals[0] = "F.Fixa";
+    strings["Fine##sgistru3"].plurals[0] = "Fina";
+    strings["Fine##sgistru4"].plurals[0] = "Fina";
+    strings["Fine##sgistru5"].plurals[0] = "Fina";
+    strings["User##sgistru0"].plurals[0] = "Usuário";
+    strings["1. Violin##sgistru"].plurals[0] = "1. Violino";
+    strings["2. Guitar##sgistru0"].plurals[0] = "2. Violão";
+    strings["3. Piano##sgistru0"].plurals[0] = "3. Piano";
+    strings["4. Flute##sgistru0"].plurals[0] = "4. Flauta";
+    strings["5. Clarinet##sgistru0"].plurals[0] = "5. Clarinete";
+    strings["6. Oboe##sgistru"].plurals[0] = "6. Oboé";
+    strings["7. Trumpet##sgistru0"].plurals[0] = "7. Trompete";
+    strings["8. Organ##sgistru"].plurals[0] = "8. Órgão";
+    strings["9. Horn##sgistru"].plurals[0] = "9. Trompa";
+    strings["10. Synth##sgistru"].plurals[0] = "10. Sintetizador";
+    strings["11. Harpsichord##sgistru"].plurals[0] = "11. Cravo";
+    strings["12. Vibraphone##sgistru0"].plurals[0] = "12. Vibrafone";
+    strings["13. Synth Bass##sgistru"].plurals[0] = "13. Baixo Sintético";
+    strings["14. Acoustic Bass##sgistru"].plurals[0] = "14. Baixo Acústico";
+    strings["15. Electric Guitar##sgistru"].plurals[0] = "15. Guitarra Elétrica";
+    strings["Drums##sgistru0"].plurals[0] = "Bateria";
+    strings["User##sgistru1"].plurals[0] = "Usuário";
+    strings["1. Electric String##sgistru"].plurals[0] = "1. Cordas Elétricas";
+    strings["2. Bow wow##sgistru"].plurals[0] = "2. Bow wow";
+    strings["3. Electric Guitar##sgistru0"].plurals[0] = "3. Guitarra Elétrica"; // nada a ver com a guitarra elétrica do YM2413 lol
+    strings["4. Organ##sgistru"].plurals[0] = "4. Órgão";
+    strings["5. Clarinet##sgistru1"].plurals[0] = "5. Clarinete";
+    strings["6. Saxophone##sgistru"].plurals[0] = "6. Saxofone";
+    strings["7. Trumpet##sgistru1"].plurals[0] = "7. Trompete";
+    strings["8. Street Organ##sgistru"].plurals[0] = "8. Órgão de Rua";
+    strings["9. Synth Brass##sgistru"].plurals[0] = "9. Synth Brass";
+    strings["10. Electric Piano##sgistru"].plurals[0] = "10. Piano Elétrico"; // parece mais um piano de brinquedo kkk
+    strings["11. Bass##sgistru"].plurals[0] = "11. Baixo";
+    strings["12. Vibraphone##sgistru1"].plurals[0] = "12. Vibrafone";
+    strings["13. Chime##sgistru"].plurals[0] = "13. Campainha";
+    strings["14. Tom Tom II##sgistru"].plurals[0] = "14. Surdo 2";
+    strings["15. Noise##sgistru"].plurals[0] = "15. Ruído";
+    strings["Drums##sgistru1"].plurals[0] = "Bateria";
+    strings["User##sgistru2"].plurals[0] = "Usuário";
+    strings["1. Strings##sgistru"].plurals[0] = "1. Cordas";
+    strings["2. Guitar##sgistru1"].plurals[0] = "2. Violão"; // parece mais uma guitarra clean com pedal de efeito de tremolo...
+    strings["3. Electric Guitar##sgistru1"].plurals[0] = "3. Guitarra Elétrica";
+    strings["4. Electric Piano##sgistru"].plurals[0] = "4. Piano Elétrico"; // eu não sei que diabos de som é esse
+    strings["5. Flute##sgistru"].plurals[0] = "5. Flauta";
+    strings["6. Marimba##sgistru"].plurals[0] = "6. Marimba";
+    strings["7. Trumpet##sgistru2"].plurals[0] = "7. Trompete";
+    strings["8. Harmonica##sgistru"].plurals[0] = "8. Gaita";
+    strings["9. Tuba##sgistru"].plurals[0] = "9. Tuba";
+    strings["10. Synth Brass##sgistru"].plurals[0] = "10. Synth Brass";
+    strings["11. Short Saw##sgistru"].plurals[0] = "11. Serra Curta";
+    strings["12. Vibraphone##sgistru2"].plurals[0] = "12. Vibrafone";
+    strings["13. Electric Guitar 2##sgistru"].plurals[0] = "13. Guitarra Elétrica 2";
+    strings["14. Synth Bass##sgistru"].plurals[0] = "14. Baixo Sintético";
+    strings["15. Sitar##sgistru"].plurals[0] = "15. Cítara";
+    strings["Drums##sgistru2"].plurals[0] = "Bateria";
+    strings["User##sgistru3"].plurals[0] = "Usuário";
+    strings["1. Bell##sgistru"].plurals[0] = "1. Sino";
+    strings["2. Guitar##sgistru2"].plurals[0] = "2. Violão";
+    strings["3. Piano##sgistru1"].plurals[0] = "3. Piano";
+    strings["4. Flute##sgistru1"].plurals[0] = "4. Flauta";
+    strings["5. Clarinet##sgistru2"].plurals[0] = "5. Clarinete";
+    strings["6. Rattling Bell##sgistru"].plurals[0] = "6. Sino Chacoalhante";
+    strings["7. Trumpet##sgistru3"].plurals[0] = "7. Trompete";
+    strings["8. Reed Organ##sgistru"].plurals[0] = "8. Órgão de Palheta";
+    strings["9. Soft Bell##sgistru"].plurals[0] = "9. Sino Suave";
+    strings["10. Xylophone##sgistru"].plurals[0] = "10. Xilofone";
+    strings["11. Vibraphone##sgistru"].plurals[0] = "11. Vibrafone";
+    strings["12. Brass##sgistru"].plurals[0] = "12. Metais";
+    strings["13. Bass Guitar##sgistru"].plurals[0] = "13. Baixo";
+    strings["14. Synth##sgistru"].plurals[0] = "14. Sintetizador";
+    strings["15. Chorus##sgistru"].plurals[0] = "15. Coro";
+    strings["Drums##sgistru3"].plurals[0] = "Bateria";
+    strings["Sine##sgistru0"].plurals[0] = "Seno";
+    strings["Half Sine##sgistru0"].plurals[0] = "Meio Seno";
+    strings["Absolute Sine##sgistru0"].plurals[0] = "Seno Absoluto";
+    strings["Quarter Sine##sgistru"].plurals[0] = "1/4 Seno";
+    strings["Squished Sine##sgistru0"].plurals[0] = "Seno Espremido";
+    strings["Squished AbsSine##sgistru0"].plurals[0] = "Seno Absoluto Espremido";
+    strings["Square##sgistru0"].plurals[0] = "Onda Quadrada";
+    strings["Derived Square##sgistru0"].plurals[0] = "Dente de Serra Logarítmica"; // quadrado derivado é o meu zovo, aqui só vai nome tecnicamente correto
+    strings["Sine##sgistru1"].plurals[0] = "Seno";
+    strings["Half Sine##sgistru1"].plurals[0] = "Meio Seno";
+    strings["Absolute Sine##sgistru1"].plurals[0] = "Seno Absoluto";
+    strings["Pulse Sine##sgistru"].plurals[0] = "Seno Pulsado";
+    strings["Sine (Even Periods)##sgistru"].plurals[0] = "Seno (Períodos Pares)";
+    strings["AbsSine (Even Periods)##sgistru"].plurals[0] = "Seno Absoluto (Períodos Pares)";
+    strings["Square##sgistru1"].plurals[0] = "Onda Quadrada";
+    strings["Derived Square##sgistru1"].plurals[0] = "Dente de Serra Logarítmica";
+    strings["Sine##sgistru2"].plurals[0] = "Seno";
+    strings["Triangle##sgistru"].plurals[0] = "Triângulo";
+    strings["Cut Sine##sgistru"].plurals[0] = "Seno Cortado";
+    strings["Cut Triangle##sgistru"].plurals[0] = "Triângulo Cortado";
+    strings["Squished Sine##sgistru1"].plurals[0] = "Seno Espremido";
+    strings["Squished Triangle##sgistru"].plurals[0] = "Triângulo Espremido";
+    strings["Squished AbsSine##sgistru1"].plurals[0] = "Seno Absoluto Espremido";
+    strings["Squished AbsTriangle##sgistru"].plurals[0] = "Triângulo Absoluto Espremido";
+    strings["Snare##sgistru0"].plurals[0] = "Caixa";
+    strings["Tom##sgistru"].plurals[0] = "Surdo";
+    strings["Top##sgistru0"].plurals[0] = "Prato";
+    strings["HiHat##sgistru0"].plurals[0] = "Chimbal";
+    strings["Normal##sgistru"].plurals[0] = "Normal";
+    strings["Snare##sgistru1"].plurals[0] = "Caixa";
+    strings["HiHat##sgistru1"].plurals[0] = "Chimbal";
+    strings["Top##sgistru1"].plurals[0] = "Prato";
+    strings["Noise disabled##sgistru"].plurals[0] = "Ruído desabilitado";
+    strings["Square + noise##sgistru"].plurals[0] = "Onda quadrada + ruído";
+    strings["Ringmod from OP3 + noise##sgistru"].plurals[0] = "Modulação anel do OP3 + ruído";
+    strings["Ringmod from OP3 + double pitch ModInput\nWARNING - has emulation issues, subject to change##sgistru"].plurals[0] = "Modulação anel do OP3 + EntraMod com tom dobrado\nAVISO - há problemas na emulação desse modo, está sujeito a mudanças";
+    strings["op1##sgistru"].plurals[0] = "op1";
+    strings["op2##sgistru"].plurals[0] = "op2";
+    strings["op3##sgistru"].plurals[0] = "op3";
+    strings["op4##sgistru"].plurals[0] = "op4";
+    strings["triangle##sgistru"].plurals[0] = "triângulo";
+    strings["saw##sgistru"].plurals[0] = "serra";
+    strings["pulse##sgistru"].plurals[0] = "pulso";
+    strings["noise##sgistru0"].plurals[0] = "ruído";
+    strings["tone##sgistru"].plurals[0] = "tom";
+    strings["noise##sgistru1"].plurals[0] = "ruído";
+    strings["envelope##sgistru"].plurals[0] = "envelope";
+    strings["hold##sgistru"].plurals[0] = "segurar";
+    strings["alternate##sgistru"].plurals[0] = "alternar";
+    strings["direction##sgistru0"].plurals[0] = "direção";
+    strings["enable##sgistru0"].plurals[0] = "habilitar";
+    strings["enabled##sgistru0"].plurals[0] = "habilitado";
+    strings["mirror##sgistru"].plurals[0] = "espelhar";
+    strings["loop##sgistru0"].plurals[0] = "repetir";
+    strings["cut##sgistru"].plurals[0] = "cortar";
+    strings["direction##sgistru1"].plurals[0] = "direção";
+    strings["resolution##sgistru"].plurals[0] = "resolução";
+    strings["fixed##sgistru1"].plurals[0] = "fixo";
+    strings["N/A##sgistru"].plurals[0] = "N/A";
+    strings["enabled##sgistru1"].plurals[0] = "habilitado";
+    strings["noise##sgistru2"].plurals[0] = "ruído";
+    strings["echo##sgistru"].plurals[0] = "eco";
+    strings["pitch mod##sgistru"].plurals[0] = "mod. de tom";
+    strings["invert right##sgistru"].plurals[0] = "inverter direita";
+    strings["invert left##sgistru"].plurals[0] = "inverter esquerda";
+    strings["low##sgistru"].plurals[0] = "baixa";
+    strings["band##sgistru"].plurals[0] = "banda";
+    strings["high##sgistru"].plurals[0] = "alta";
+    strings["ch3off##sgistru"].plurals[0] = "can3desl";
+    strings["gate##sgistru"].plurals[0] = "gate";
+    strings["sync##sgistru"].plurals[0] = "sincron.";
+    strings["ring##sgistru"].plurals[0] = "anel";
+    strings["test##sgistru"].plurals[0] = "teste";
+    strings["15kHz##sgistru"].plurals[0] = "15kHz";
+    strings["filter 2+4##sgistru"].plurals[0] = "filtrar 2+4";
+    strings["filter 1+3##sgistru"].plurals[0] = "filtrar 1+3";
+    strings["16-bit 3+4##sgistru"].plurals[0] = "16-bit 3+4";
+    strings["16-bit 1+2##sgistru"].plurals[0] = "16-bit 1+2";
+    strings["high3##sgistru"].plurals[0] = "altafreq3";
+    strings["high1##sgistru"].plurals[0] = "altafreq1";
+    strings["poly9##sgistru"].plurals[0] = "poly9";
+    strings["int##sgistru"].plurals[0] = "int";
+    strings["sustain##sgistru2"].plurals[0] = "sustentação";
+    strings["square##sgistru2"].plurals[0] = "quadrada";
+    strings["noise##sgistru3"].plurals[0] = "ruído";
+    strings["noise##sgistru4"].plurals[0] = "ruído";
+    strings["invert##sgistru"].plurals[0] = "inverter";
+    strings["surround##sgistru"].plurals[0] = "surround";
+    strings["enable##sgistru1"].plurals[0] = "habilitar";
+    strings["oneshot##sgistru"].plurals[0] = "oneshot";
+    strings["split L/R##sgistru"].plurals[0] = "separar esq/dir";
+    strings["HinvR##sgistru"].plurals[0] = "HinvR";
+    strings["VinvR##sgistru"].plurals[0] = "VinvR";
+    strings["HinvL##sgistru"].plurals[0] = "HinvL";
+    strings["VinvL##sgistru"].plurals[0] = "VinvL";
+    strings["ring mod##sgistru"].plurals[0] = "mod anel";
+    strings["low pass##sgistru"].plurals[0] = "passa baixa";
+    strings["high pass##sgistru"].plurals[0] = "passa alta";
+    strings["band pass##sgistru"].plurals[0] = "passa banda";
+    strings["HP/K2, HP/K2##sgistru"].plurals[0] = "alta/K2, alta/K2";
+    strings["HP/K2, LP/K1##sgistru"].plurals[0] = "alta/K2, baixa/K1";
+    strings["LP/K2, LP/K2##sgistru"].plurals[0] = "baixa/K2, baixa/K2";
+    strings["LP/K2, LP/K1##sgistru"].plurals[0] = "baixa/K2, baixa/K1";
+    strings["right##sgistru"].plurals[0] = "direita";
+    strings["left##sgistru"].plurals[0] = "esquerda";
+    strings["rear right##sgistru"].plurals[0] = "traseira direita";
+    strings["rear left##sgistru"].plurals[0] = "traseira esquerda";
+    strings["enable tap B##sgistru"].plurals[0] = "habilitar tap B";
+    strings["AM with slope##sgistru"].plurals[0] = "AM com rampa";
+    strings["invert B##sgistru"].plurals[0] = "inverter B";
+    strings["invert A##sgistru"].plurals[0] = "inverter A";
+    strings["reset B##sgistru"].plurals[0] = "reiniciar B";
+    strings["reset A##sgistru"].plurals[0] = "reiniciar A";
+    strings["clip B##sgistru"].plurals[0] = "cortar B";
+    strings["clip A##sgistru"].plurals[0] = "cortar A";
+    strings["on##sgistru"].plurals[0] = "ligado";
+    strings["k1 slowdown##sgistru"].plurals[0] = "desacelerar k1";
+    strings["k2 slowdown##sgistru"].plurals[0] = "desacelerar k2";
+    strings["pause##sgistru"].plurals[0] = "pausar";
+    strings["reverse##sgistru"].plurals[0] = "reverter";
+    strings["high pass##sgistru1"].plurals[0] = "passa alta";
+    strings["ring mod##sgistru1"].plurals[0] = "modulação anel";
+    strings["swap counters (noise)##sgistru"].plurals[0] = "trocar contadores (ruído)";
+    strings["low pass (noise)##sgistru"].plurals[0] = "passa baixa (ruído)";
+    strings["sync##sgistru1"].plurals[0] = "sincronizar";
+    strings["ring##sgistru1"].plurals[0] = "anel";
+    strings["low##sgistru1"].plurals[0] = "baixa";
+    strings["band##sgistru1"].plurals[0] = "banda";
+    strings["high##sgistru1"].plurals[0] = "alta";
+    strings["8580 SID##sgistru"].plurals[0] = "SID 8580";
+    strings["bitwise AND##sgistru"].plurals[0] = "AND bit a bit";
+    strings["bitwise OR##sgistru"].plurals[0] = "OR bit a bit";
+    strings["bitwise XOR##sgistru"].plurals[0] = "XOR bit a bit";
+    strings["None##sgistru"].plurals[0] = "Nenhum";
+    strings["Invert##sgistru"].plurals[0] = "Inverter";
+    strings["Add##sgistru"].plurals[0] = "Somar";
+    strings["Subtract##sgistru"].plurals[0] = "Subtrair";
+    strings["Average##sgistru"].plurals[0] = "Média";
+    strings["Phase##sgistru"].plurals[0] = "Fase";
+    strings["Chorus##sgistru"].plurals[0] = "Coro";
+    strings["None (dual)##sgistru"].plurals[0] = "Nenhum (dupla)";
+    strings["Wipe##sgistru"].plurals[0] = "Wipe";
+    strings["Fade##sgistru"].plurals[0] = "Misturar";
+    strings["Fade (ping-pong)##sgistru"].plurals[0] = "Misturar (ping-pong)";
+    strings["Overlay##sgistru"].plurals[0] = "Sobrepor";
+    strings["Negative Overlay##sgistru"].plurals[0] = "Sobreposição Negativa";
+    strings["Slide##sgistru"].plurals[0] = "Deslizar";
+    strings["Mix Chorus##sgistru"].plurals[0] = "Coro Misto";
+    strings["Phase Modulation##sgistru"].plurals[0] = "Modulação de Fase";
+    strings["Envelope##sgistru"].plurals[0] = "Envelope";
+    strings["Sweep##sgistru"].plurals[0] = "=Sweep"; // TODO
+    strings["Wait##sgistru0"].plurals[0] = "Aguardar";
+    strings["Wait for Release##sgistru0"].plurals[0] = "Aguardar pelo Repouso";
+    strings["Loop##sgistru1"].plurals[0] = "Repetir";
+    strings["Loop until Release##sgistru0"].plurals[0] = "Repetir até o Repouso";
     strings["Volume Sweep##sgistru"].plurals[0] = "=Volume Sweep";
     strings["Frequency Sweep##sgistru"].plurals[0] = "=Frequency Sweep";
     strings["Cutoff Sweep##sgistru"].plurals[0] = "=Cutoff Sweep";
