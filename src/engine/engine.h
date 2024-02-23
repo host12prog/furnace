@@ -945,6 +945,7 @@ class DivEngine {
 
     // add wavetable from pointer
     int addWavePtr(DivWavetable* which);
+    int addLocalWavePtr(int inst, DivWavetable* which);
 
     // get wavetable from file
     DivWavetable* waveFromFile(const char* path, bool loadRaw=true);
@@ -992,11 +993,13 @@ class DivEngine {
     bool moveInsUp(int which);
     bool moveWaveUp(int which);
     bool moveSampleUp(int which);
+    bool moveLocalWaveUp(int inst, int which);
 
     // move thing down
     bool moveInsDown(int which);
     bool moveWaveDown(int which);
     bool moveSampleDown(int which);
+    bool moveLocalWaveDown(int inst, int which);
 
     // automatic patchbay
     void autoPatchbay();

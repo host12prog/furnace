@@ -369,7 +369,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_FILES_O "##WaveClone")) 
         {
-            doAction(GUI_ACTION_WAVE_LIST_DUPLICATE);
+            doAction(GUI_ACTION_LOCAL_WAVE_LIST_DUPLICATE);
         }
         if (ImGui::IsItemHovered()) 
         {
@@ -378,7 +378,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_FOLDER_OPEN "##WaveLoad")) 
         {
-            doAction(GUI_ACTION_WAVE_LIST_OPEN);
+            doAction(GUI_ACTION_LOCAL_WAVE_LIST_OPEN);
         }
         if (ImGui::IsItemHovered()) 
         {
@@ -395,7 +395,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_FLOPPY_O "##WaveSave")) 
         {
-            doAction(GUI_ACTION_WAVE_LIST_SAVE);
+            doAction(GUI_ACTION_LOCAL_WAVE_LIST_SAVE);
         }
         if (ImGui::IsItemHovered()) 
         {
@@ -405,18 +405,18 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         {
             if (ImGui::MenuItem(_L("save as .dmw...##sgdl"))) 
             {
-                doAction(GUI_ACTION_WAVE_LIST_SAVE_DMW);
+                doAction(GUI_ACTION_LOCAL_WAVE_LIST_SAVE_DMW);
             }
             if (ImGui::MenuItem(_L("save raw...##sgdl0"))) 
             {
-                doAction(GUI_ACTION_WAVE_LIST_SAVE_RAW);
+                doAction(GUI_ACTION_LOCAL_WAVE_LIST_SAVE_RAW);
             }
             ImGui::EndPopup();
         }
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_ARROW_UP "##WaveUp")) 
         {
-            doAction(GUI_ACTION_WAVE_LIST_MOVE_UP);
+            doAction(GUI_ACTION_LOCAL_WAVE_LIST_MOVE_UP);
         }
         if (ImGui::IsItemHovered()) 
         {
@@ -425,7 +425,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_ARROW_DOWN "##WaveDown")) 
         {
-            doAction(GUI_ACTION_WAVE_LIST_MOVE_DOWN);
+            doAction(GUI_ACTION_LOCAL_WAVE_LIST_MOVE_DOWN);
         }
         if (ImGui::IsItemHovered()) 
         {

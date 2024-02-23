@@ -2674,6 +2674,24 @@ int DivEngine::addWavePtr(DivWavetable* which) {
   return song.waveLen;
 }
 
+int DivEngine::addLocalWavePtr(int inst, DivWavetable* which) {
+  DivInstrument* ins = song.ins[inst];
+  if (ins->std.local_waves.size()>=256) {
+    lastError="too many wavetables!";
+    delete which;
+    return -1;
+  }
+  BUSY_BEGIN;
+  saveLock.lock();
+  int waveCount=(int)ins->std.local_waves.size();
+  ins->std.local_waves.push_back(which);
+  //song.waveLen=waveCount+1;
+  //checkAssetDir(song.waveDir,song.wave.size());
+  saveLock.unlock();
+  BUSY_END;
+  return (int)ins->std.local_waves.size();
+}
+
 DivWavetable* DivEngine::waveFromFile(const char* path, bool addRaw) {
   FILE* f=ps_fopen(path,"rb");
   if (f==NULL) {
@@ -3165,6 +3183,21 @@ bool DivEngine::moveWaveUp(int which) {
   return true;
 }
 
+bool DivEngine::moveLocalWaveUp(int inst, int which) {
+  DivInstrument* ins = song.ins[inst];
+  if (which<1 || which>=(int)ins->std.local_waves.size()) return false;
+  BUSY_BEGIN;
+  DivWavetable* prev=ins->std.local_waves[which];
+  saveLock.lock();
+  ins->std.local_waves[which]=ins->std.local_waves[which-1];
+  ins->std.local_waves[which-1]=prev;
+  //moveAsset(song.waveDir,which,which-1);
+  exchangeWave(which,which-1);
+  saveLock.unlock();
+  BUSY_END;
+  return true;
+}
+
 bool DivEngine::moveSampleUp(int which) {
   if (which<1 || which>=(int)song.sample.size()) return false;
   BUSY_BEGIN;
@@ -3206,6 +3239,21 @@ bool DivEngine::moveWaveDown(int which) {
   song.wave[which+1]=prev;
   exchangeWave(which,which+1);
   moveAsset(song.waveDir,which,which+1);
+  saveLock.unlock();
+  BUSY_END;
+  return true;
+}
+
+bool DivEngine::moveLocalWaveDown(int inst, int which) {
+  DivInstrument* ins = song.ins[inst];
+  if (which<0 || which>=((int)ins->std.local_waves.size())-1) return false;
+  BUSY_BEGIN;
+  DivWavetable* prev=ins->std.local_waves[which];
+  saveLock.lock();
+  ins->std.local_waves[which]=ins->std.local_waves[which+1];
+  ins->std.local_waves[which+1]=prev;
+  exchangeWave(which,which+1);
+  //moveAsset(song.waveDir,which,which+1);
   saveLock.unlock();
   BUSY_END;
   return true;

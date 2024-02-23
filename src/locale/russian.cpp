@@ -1015,7 +1015,7 @@ void DivLocale::addTranslationsRussian()
     strings["Save wavetable##sggc1"].plurals[0] = "Сохранить волновую таблицу";
     strings["Save wavetable (.dmw)##sggc"].plurals[0] = "Сохранить волновую таблицу (.dmw)";
     strings["Save wavetable (raw)##sggc0"].plurals[0] = "Сохранить волновую таблицу (сырые данные)";
-    strings["MMove wavetable up in list##sggc1"].plurals[0] = "Сдвинуть волновую таблицу вверх в списке";
+    strings["Move wavetable up in list##sggc1"].plurals[0] = "Сдвинуть волновую таблицу вверх в списке";
     strings["Move wavetable down in list##sggc1"].plurals[0] = "Сдвинуть волновую таблицу вниз в списке";
     strings["Delete wavetable##sggc1"].plurals[0] = "Удалить волновую таблицу";
     strings["Edit wavetable##sggc1"].plurals[0] = "Редактировать волновую таблицу";
@@ -2741,6 +2741,7 @@ void DivLocale::addTranslationsRussian()
     strings["Pattern##sgse0"].plurals[0] = "Паттерн";
     strings["Instrument list##sgse"].plurals[0] = "Список инструментов";
     strings["Wavetable list##sgse"].plurals[0] = "Список волновых таблиц";
+    strings["Local wavetables list##sgse"].plurals[0] = "Список локальных волновых таблиц";
     strings["Sample list##sgse"].plurals[0] = "Список сэмплов";
     strings["Orders##sgse0"].plurals[0] = "Матрица паттернов";
     strings["Sample editor##sgse"].plurals[0] = "Редактор сэмплов";

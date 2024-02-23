@@ -42,7 +42,8 @@ void FurnaceGUI::drawSysManager() {
     ImGui::Checkbox(_L("Preserve channel order##sgsm"),&preserveChanPos);
     ImGui::SameLine();
     ImGui::Checkbox(_L("Clone channel data##sgsm"),&sysDupCloneChannels);
-    ImGui::SameLine();
+    //ImGui::SameLine();
+    //russian is too long
     ImGui::Checkbox(_L("Clone at end##sgsm"),&sysDupEnd);
     if (ImGui::BeginTable("SystemList",3)) {
       ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed);

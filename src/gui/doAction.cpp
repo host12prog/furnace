@@ -906,6 +906,60 @@ void FurnaceGUI::doAction(int what) {
       }
       break;
     }
+    case GUI_ACTION_LOCAL_WAVE_LIST_DUPLICATE:
+      if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) {
+        int prevWave=curLocalWave;
+        curLocalWave=e->addLocalWave(curIns);
+        if (curLocalWave==-1) {
+          showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgda1"));
+        } else {
+          (*e->song.ins[curIns]->std.local_waves[curLocalWave])=(*e->song.ins[curIns]->std.local_waves[prevWave]);
+          wantScrollList=true;
+          MARK_MODIFIED;
+          RESET_WAVE_MACRO_ZOOM;
+        }
+      }
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_OPEN:
+      openFileDialog(GUI_FILE_LOCAL_WAVE_OPEN);
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_OPEN_REPLACE:
+      openFileDialog(GUI_FILE_LOCAL_WAVE_OPEN_REPLACE);
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_SAVE:
+      if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) openFileDialog(GUI_FILE_LOCAL_WAVE_SAVE);
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_SAVE_DMW:
+      if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) openFileDialog(GUI_FILE_LOCAL_WAVE_SAVE_DMW);
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_SAVE_RAW:
+      if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) openFileDialog(GUI_FILE_LOCAL_WAVE_SAVE_RAW);
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_MOVE_UP:
+      if (e->moveLocalWaveUp(curIns, curLocalWave)) {
+        curLocalWave--;
+        wantScrollList=true;
+        MARK_MODIFIED;
+      }
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_MOVE_DOWN:
+      if (e->moveLocalWaveDown(curIns, curLocalWave)) {
+        curLocalWave++;
+        wantScrollList=true;
+        MARK_MODIFIED;
+      }
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_EDIT:
+      waveEditOpen=true;
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_UP:
+      if (--curLocalWave<0) curLocalWave=0;
+      wantScrollList=true;
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_DOWN:
+      if (++curLocalWave>=(int)e->song.ins[curIns]->std.local_waves.size()) curLocalWave=((int)e->song.ins[curIns]->std.local_waves.size())-1;
+      wantScrollList=true;
+      break;
     case GUI_ACTION_LOCAL_WAVE_LIST_DELETE:
       if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) {
         e->delLocalWave(curLocalWave, e->song.ins[curIns]);

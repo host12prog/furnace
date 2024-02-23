@@ -1067,7 +1067,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Save wavetable##sggc1"].plurals[0] = "=Save wavetable";
     strings["Save wavetable (.dmw)##sggc"].plurals[0] = "=Save wavetable (.dmw)";
     strings["Save wavetable (raw)##sggc0"].plurals[0] = "=Save wavetable (raw)";
-    strings["MMove wavetable up in list##sggc1"].plurals[0] = "=Move wavetable up in list";
+    strings["Move wavetable up in list##sggc1"].plurals[0] = "=Move wavetable up in list";
     strings["Move wavetable down in list##sggc1"].plurals[0] = "=Move wavetable down in list";
     strings["Delete wavetable##sggc1"].plurals[0] = "=Delete wavetable";
     strings["Edit wavetable##sggc1"].plurals[0] = "=Edit wavetable";
@@ -2749,6 +2749,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Pattern##sgse0"].plurals[0] = "=Pattern";
     strings["Instrument list##sgse"].plurals[0] = "=Instrument list";
     strings["Wavetable list##sgse"].plurals[0] = "=Wavetable list";
+    strings["Local wavetables list##sgse"].plurals[0] = "=Local wavetables list";
     strings["Sample list##sgse"].plurals[0] = "=Sample list";
     strings["Orders##sgse0"].plurals[0] = "=Orders";
     strings["Sample editor##sgse"].plurals[0] = "=Sample editor";
