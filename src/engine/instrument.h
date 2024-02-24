@@ -1020,7 +1020,7 @@ struct DivInstrument {
   void readFeatureSN(SafeReader& reader, short version);
   void readFeatureN1(SafeReader& reader, short version);
   void readFeatureFD(SafeReader& reader, short version);
-  void readFeatureWS(SafeReader& reader, short version);
+  void readFeatureWS(SafeReader& reader, short version, bool tildearrow_version);
   void readFeatureSL(SafeReader& reader, DivSong* song, short version);
   void readFeatureWL(SafeReader& reader, DivSong* song, short version);
   void readFeatureMP(SafeReader& reader, short version);

@@ -1856,7 +1856,7 @@ void DivInstrument::readFeatureFD(SafeReader& reader, short version) {
   READ_FEAT_END;
 }
 
-void DivInstrument::readFeatureWS(SafeReader& reader, short version) {
+void DivInstrument::readFeatureWS(SafeReader& reader, short version, bool tildearrow_version) {
   READ_FEAT_BEGIN;
 
   ws.wave1=reader.readI();
@@ -1867,6 +1867,11 @@ void DivInstrument::readFeatureWS(SafeReader& reader, short version) {
   ws.enabled = temp & 1;
   ws.wave1global = temp & 2;
   ws.wave2global = temp & 4;
+  if(tildearrow_version || version < 193)
+  {
+    ws.wave1global = true;
+    ws.wave2global = true;
+  }
   ws.global=reader.readC();
   ws.speed=reader.readC();
   ws.param1=reader.readC();
@@ -2262,7 +2267,7 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
     } else if (memcmp(featCode,"FD",2)==0) { // FDS/VB
       readFeatureFD(reader,version);
     } else if (memcmp(featCode,"WS",2)==0) { // WaveSynth
-      readFeatureWS(reader,version);
+      readFeatureWS(reader,version,tildearrow_version);
     } else if (memcmp(featCode,"SL",2)==0 && fui && song!=NULL) { // sample list
       readFeatureSL(reader,song,version);
     } else if (memcmp(featCode,"WL",2)==0 && fui && song!=NULL) { // wave list
