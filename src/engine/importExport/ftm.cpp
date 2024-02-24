@@ -495,7 +495,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
         }
         if (expansions&16) {
           ds.system[systemID]=DIV_SYSTEM_N163;
-          ds.systemFlags[systemID].set("channels",(int)n163Chans);
+          ds.systemFlags[systemID].set("channels",(int)n163Chans - 1);
           systemID++;
 
           for(int ch = 0; ch < (int)n163Chans; ch++)
