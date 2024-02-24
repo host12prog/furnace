@@ -731,7 +731,7 @@ const FurnaceGUIActionDef guiActions[GUI_ACTION_MAX]={
   D("LOCAL_WAVE_LIST_EDIT", "Edit wavetable##sggc1", FURKMOD_SHIFT|SDLK_RETURN),
   D("LOCAL_WAVE_LIST_UP", "Wavetable cursor up##sggc1", SDLK_UP),
   D("LOCAL_WAVE_LIST_DOWN", "Wavetable cursor down##sggc1", SDLK_DOWN),
-  D("LOCAL_WAVE_LIST_PASTE_CLIPBOARD", "Paste local wavetables from clipboard##sggc1", FURKMOD_CMD|FURKMOD_ALT|SDLK_v),
+  D("LOCAL_WAVE_LIST_PASTE_CLIPBOARD", "Paste local wavetables from clipboard##sggc1", FURKMOD_CMD|FURKMOD_SHIFT|SDLK_v),
   D("LOCAL_WAVE_LIST_MAX", "", NOT_AN_ACTION),
 
   D("SAMPLE_LIST_MIN", "---Sample list##sggc", NOT_AN_ACTION),
