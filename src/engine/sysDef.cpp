@@ -754,7 +754,8 @@ void DivEngine::registerSystems() {
       {0x11, {DIV_CMD_STD_NOISE_MODE, "11xx: Set noise length (0: long; 1: short)##sesd"}},
       {0x12, {DIV_CMD_STD_NOISE_MODE, "12xx: Set duty cycle (0 to 3)##sesd"}},
       {0x13, {DIV_CMD_GB_SWEEP_TIME, "13xy: Setup sweep (x: time; y: shift)##sesd"}},
-      {0x14, {DIV_CMD_GB_SWEEP_DIR, "14xx: Set sweep direction (0: up; 1: down)##sesd"}}
+      {0x14, {DIV_CMD_GB_SWEEP_DIR, "14xx: Set sweep direction (0: up; 1: down)##sesd"}},
+      {0x15, {DIV_CMD_WAVE_LOCAL, "15xx: Set waveform (local)##sesd"}}
     }
   );
 

@@ -5033,6 +5033,7 @@ void DivLocale::addTranslationsRussian()
     strings["12xx: Set duty cycle (0 to 3)##sesd"].plurals[0] = "12xx: Скважность (0-3)";
     strings["13xy: Setup sweep (x: time; y: shift)##sesd"].plurals[0] = "13xy: Сконфигурировать аппаратное портаменто (x: длительность; y: расстояние)";
     strings["14xx: Set sweep direction (0: up; 1: down)##sesd"].plurals[0] = "14xx: Направление аппаратного портаменто (0: вверх; 1: вниз)";
+    strings["15xx: Set waveform (local)##sesd"].plurals[0] = "15xx: Волна (локальная)";
     strings["an '80s game console with a wavetable sound chip, popular in Japan.##sesd"].plurals[0] = "игровая консоль из 80-ых с чипом на волновых таблицах. Была популярна в Японии.";
     strings["10xx: Set waveform##sesd2"].plurals[0] = "10xx: Волна";
     strings["11xx: Toggle noise mode##sesd0"].plurals[0] = "11xx: Переключить режим шума";
