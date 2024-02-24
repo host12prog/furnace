@@ -448,6 +448,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
         ds.system[systemID++]=DIV_SYSTEM_NES;
 
+        if(pal)
+        {
+          ds.systemFlags[0].set("clockSel",1);
+        }
+
         for(int ch = 0; ch < 5; ch++)
         {
           map_channels[curr_chan] = map_ch;
