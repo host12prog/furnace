@@ -2902,11 +2902,11 @@ void writeTextMacro(SafeWriter* w, DivInstrumentMacro& m, const char* name, bool
   int len=m.len;
   switch (m.open&6) {
     case 2:
-      len=16;
+      len=18;
       w->writeText(" [ADSR]");
       break;
     case 4:
-      len=16;
+      len=18;
       w->writeText(" [LFO]");
       break;
   }

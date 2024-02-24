@@ -27,7 +27,7 @@
 class DivPlatformSCC: public DivDispatch {
   struct Channel: public SharedChannel<signed char> {
     bool freqInit;
-    signed short wave;
+    int wave;
     signed char waveROM[32] = {0}; // 8 bit signed waveform
     DivWaveSynth ws;
     Channel():

@@ -273,6 +273,8 @@ enum DivDispatchCmds {
   DIV_CMD_CUTOFF_SLIDE_UP,
   DIV_CMD_CUTOFF_SLIDE_DN,
 
+  DIV_CMD_WAVE_LOCAL, //wavetable (from local list)
+
   DIV_CMD_MAX
 };
 

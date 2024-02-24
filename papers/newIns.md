@@ -156,6 +156,7 @@ the following feature codes are recognized:
 - `PN`: PowerNoise ins data
 - `E3`: ES5503 ins data
 - `S2`: SID2 ins data
+- `LW`: local wavetables
 - `EN`: end of features
   - if you find this feature code, stop reading the instrument.
   - it will usually appear only when there sample/wave lists.
@@ -534,6 +535,9 @@ size | description
   1  | effect
      | - bit 7: single or dual effect
   1  | enabled
+     | - bit 0: enabled
+     | - bit 1: global wave 1
+     | - bit 2: global wave 2
   1  | global
   1  | speed (+1)
   1  | parameter 1
@@ -721,3 +725,13 @@ size | description
      | - bits 5-4: waveform mixing mode
      | - bits 3-0: volume
 ```
+
+# Local wavetables data (LW)
+
+```
+size | description
+-----|------------------------------------
+  4  | number of local wavetables
+```
+
+Then the wavetable data follows, as in "Wavetable" section of [file format](format.md). Yes, each local wavetable starts with `WAVE` signature and stuff. There are as many waves as `number of local wavetables`.

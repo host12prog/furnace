@@ -1565,6 +1565,17 @@ void FurnaceGUI::keyDown(SDL_Event& ev) {
       }
       break;
     }
+    case GUI_WINDOW_INS_EDIT: {
+      auto actionI=actionMapLocalWaveList.find(mapped);
+      if (actionI!=actionMapLocalWaveList.cend()) {
+        int action=actionI->second;
+        if (action>0) {
+          doAction(action);
+          return;
+        }
+      }
+      break;
+    }
     case GUI_WINDOW_WAVE_LIST: {
       auto actionI=actionMapWaveList.find(mapped);
       if (actionI!=actionMapWaveList.cend()) {
@@ -1741,6 +1752,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       break;
     case GUI_FILE_WAVE_OPEN:
     case GUI_FILE_WAVE_OPEN_REPLACE:
+    case GUI_FILE_LOCAL_WAVE_OPEN:
+    case GUI_FILE_LOCAL_WAVE_OPEN_REPLACE:
       if (!dirExists(workingDirWave)) workingDirWave=getHomeDir();
       hasOpened=fileDialog->openLoad(
         settings.language == DIV_LANG_ENGLISH ? "Load Wavetable" : _L("Load Wavetable##sggu"),
@@ -1749,10 +1762,11 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         workingDirWave,
         dpiScale,
         NULL, // TODO
-        (type==GUI_FILE_WAVE_OPEN)
+        (type==GUI_FILE_WAVE_OPEN || type==GUI_FILE_LOCAL_WAVE_OPEN)
       );
       break;
     case GUI_FILE_WAVE_SAVE:
+    case GUI_FILE_LOCAL_WAVE_SAVE:
       if (!dirExists(workingDirWave)) workingDirWave=getHomeDir();
       hasOpened=fileDialog->openSave(
         settings.language == DIV_LANG_ENGLISH ? "Save Wavetable" : _L("Save Wavetable##sggu0"),
@@ -1762,6 +1776,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       );
       break;
     case GUI_FILE_WAVE_SAVE_DMW:
+    case GUI_FILE_LOCAL_WAVE_SAVE_DMW:
       if (!dirExists(workingDirWave)) workingDirWave=getHomeDir();
       hasOpened=fileDialog->openSave(
         settings.language == DIV_LANG_ENGLISH ? "Save Wavetable" : _L("Save Wavetable##sggu1"),
@@ -1771,6 +1786,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       );
       break;
     case GUI_FILE_WAVE_SAVE_RAW:
+    case GUI_FILE_LOCAL_WAVE_SAVE_RAW:
       if (!dirExists(workingDirWave)) workingDirWave=getHomeDir();
       hasOpened=fileDialog->openSave(
         settings.language == DIV_LANG_ENGLISH ? "Save Wavetable" : _L("Save Wavetable##sggu2"),
@@ -4569,6 +4585,7 @@ bool FurnaceGUI::loop() {
           break;
         case GUI_SCENE_WAVETABLE:
           waveEditOpen=true;
+          localWaveList = false;
           curWindow=GUI_WINDOW_WAVE_EDIT;
           MEASURE(waveEdit,drawWaveEdit());
           MEASURE(piano,drawPiano());
@@ -4748,6 +4765,11 @@ bool FurnaceGUI::loop() {
         case GUI_FILE_WAVE_SAVE:
         case GUI_FILE_WAVE_SAVE_DMW:
         case GUI_FILE_WAVE_SAVE_RAW:
+        case GUI_FILE_LOCAL_WAVE_OPEN:
+        case GUI_FILE_LOCAL_WAVE_OPEN_REPLACE:
+        case GUI_FILE_LOCAL_WAVE_SAVE:
+        case GUI_FILE_LOCAL_WAVE_SAVE_DMW:
+        case GUI_FILE_LOCAL_WAVE_SAVE_RAW:
           workingDirWave=fileDialog->getPath()+DIR_SEPARATOR_STR;
           break;
         case GUI_FILE_SAMPLE_OPEN:
@@ -4850,13 +4872,13 @@ bool FurnaceGUI::loop() {
           if (curFileDialog==GUI_FILE_INS_SAVE_DMP) {
             checkExtension(".dmp");
           }
-          if (curFileDialog==GUI_FILE_WAVE_SAVE) {
+          if (curFileDialog==GUI_FILE_WAVE_SAVE || curFileDialog==GUI_FILE_LOCAL_WAVE_SAVE) {
             checkExtension(".fuw");
           }
-          if (curFileDialog==GUI_FILE_WAVE_SAVE_DMW) {
+          if (curFileDialog==GUI_FILE_WAVE_SAVE_DMW || curFileDialog==GUI_FILE_LOCAL_WAVE_SAVE_DMW) {
             checkExtension(".dmw");
           }
-          if (curFileDialog==GUI_FILE_WAVE_SAVE_RAW) {
+          if (curFileDialog==GUI_FILE_WAVE_SAVE_RAW || curFileDialog==GUI_FILE_LOCAL_WAVE_SAVE_RAW) {
             checkExtension(".raw");
           }
           if (curFileDialog==GUI_FILE_EXPORT_VGM) {
@@ -4971,6 +4993,27 @@ bool FurnaceGUI::loop() {
             case GUI_FILE_WAVE_SAVE_RAW:
               if (curWave>=0 && curWave<(int)e->song.wave.size()) {
                 if (e->song.wave[curWave]->saveRaw(copyOfName.c_str())) {
+                  pushRecentSys(copyOfName.c_str());
+                }
+              }
+              break;
+            case GUI_FILE_LOCAL_WAVE_SAVE:
+              if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) {
+                if (e->song.ins[curIns]->std.local_waves[curLocalWave]->save(copyOfName.c_str())) {
+                  pushRecentSys(copyOfName.c_str());
+                }
+              }
+              break;
+            case GUI_FILE_LOCAL_WAVE_SAVE_DMW:
+              if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) {
+                if (e->song.ins[curIns]->std.local_waves[curLocalWave]->saveDMW(copyOfName.c_str())) {
+                  pushRecentSys(copyOfName.c_str());
+                }
+              }
+              break;
+            case GUI_FILE_LOCAL_WAVE_SAVE_RAW:
+              if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) {
+                if (e->song.ins[curIns]->std.local_waves[curLocalWave]->saveRaw(copyOfName.c_str())) {
                   pushRecentSys(copyOfName.c_str());
                 }
               }
@@ -5186,6 +5229,44 @@ bool FurnaceGUI::loop() {
               }
               break;
             }
+            case GUI_FILE_LOCAL_WAVE_OPEN: {
+              String errs = (settings.language == DIV_LANG_ENGLISH ? "there were some errors while loading wavetables:\n" : _L("there were some errors while loading wavetables:\n##sggu"));
+              bool warn=false;
+              for (String i: fileDialog->getFileName()) {
+                DivWavetable* wave=e->waveFromFile(i.c_str());
+                if (wave==NULL) {
+                  if (fileDialog->getFileName().size()>1) {
+                    warn=true;
+                    errs+=fmt::sprintf("- %s: %s\n",i,e->getLastError());
+                  } else {
+                    String wave_err = (settings.language == DIV_LANG_ENGLISH ? "cannot load wavetable! (" : _L("cannot load wavetable! (##sggu"));
+                    showError(wave_err+e->getLastError()+")");
+                  }
+                } else {
+                  int waveCount=-1;
+                  waveCount=e->addLocalWavePtr(curIns, wave);
+                  if (waveCount==-1) {
+                    if (fileDialog->getFileName().size()>1) {
+                      warn=true;
+                      errs+=fmt::sprintf("- %s: %s\n",i,e->getLastError());
+                    } else {
+                      String wave_err = (settings.language == DIV_LANG_ENGLISH ? "cannot load wavetable! (" : _L("cannot load wavetable! (##sggu"));
+                      showError(wave_err+e->getLastError()+")");
+                    }
+                  } else {
+                    if (settings.selectAssetOnLoad) {
+                      curLocalWave=waveCount-1;
+                    }
+                    MARK_MODIFIED;
+                    RESET_WAVE_MACRO_ZOOM;
+                  }
+                }
+              }
+              if (warn) {
+                showWarning(errs,GUI_WARN_GENERIC);
+              }
+              break;
+            }
             case GUI_FILE_WAVE_OPEN_REPLACE: {
               DivWavetable* wave=e->waveFromFile(copyOfName.c_str());
               if (wave==NULL) {
@@ -5195,6 +5276,26 @@ bool FurnaceGUI::loop() {
                 if (curWave>=0 && curWave<(int)e->song.wave.size()) {
                   e->lockEngine([this,wave]() {
                     *e->song.wave[curWave]=*wave;
+                    MARK_MODIFIED;
+                  });
+                } else {
+                  showError(settings.language == DIV_LANG_ENGLISH ? "...but you haven't selected a wavetable!" : _L("...but you haven't selected a wavetable!##sggu"));
+                }
+                delete wave;
+              }
+              break;
+            }
+            case GUI_FILE_LOCAL_WAVE_OPEN_REPLACE: {
+              DivWavetable* wave=e->waveFromFile(copyOfName.c_str());
+              if (wave==NULL) {
+                String wave_err = (settings.language == DIV_LANG_ENGLISH ? "cannot load wavetable! (" : _L("cannot load wavetable! (##sggu"));
+                showError(wave_err+e->getLastError()+")");
+              } else {
+                if (curWave>=0 && curWave<(int)e->song.wave.size()) {
+                  e->lockEngine([this,wave]() {
+                    DivInstrument* ins = e->song.ins[curIns];
+                    *ins->std.local_waves[curLocalWave] = *wave;
+                    //*e->song.wave[curWave]=*wave;
                     MARK_MODIFIED;
                   });
                 } else {
@@ -5414,6 +5515,11 @@ bool FurnaceGUI::loop() {
     if (displayWaveSizeList) {
       displayWaveSizeList=false;
       ImGui::OpenPopup("WaveSizeList");
+    }
+
+    if (displayLocalWaveSizeList) {
+      displayLocalWaveSizeList=false;
+      ImGui::OpenPopup("LocalWaveSizeList");
     }
 
     if (displayExporting) {
@@ -5992,18 +6098,57 @@ bool FurnaceGUI::loop() {
 
     if (ImGui::BeginPopup("WaveSizeList",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoSavedSettings)) {
       char temp[1024];
-      for (FurnaceGUIWaveSizeEntry i: waveSizeList) {
+      for (FurnaceGUIWaveSizeEntry i: waveSizeList) 
+      {
         snprintf(temp,1023,"%d×%d (%s)",i.width,i.height,i.sys);
-        if (ImGui::MenuItem(temp)) {
+
+        if (ImGui::MenuItem(temp)) 
+        {
           // create wave
           curWave=e->addWave();
-          if (curWave==-1) {
+          if (curWave==-1) 
+          {
             showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sggu"));
-          } else {
+          } 
+          else 
+          {
             e->song.wave[curWave]->len=i.width;
             e->song.wave[curWave]->max=i.height-1;
             for (int j=0; j<i.width; j++) {
               e->song.wave[curWave]->data[j]=(j*i.height)/i.width;
+            }
+            MARK_MODIFIED;
+            RESET_WAVE_MACRO_ZOOM;
+          }
+        }
+      }
+      ImGui::EndPopup();
+    }
+
+    if (ImGui::BeginPopup("LocalWaveSizeList",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoSavedSettings)) 
+    {
+      char temp[1024];
+
+      for (FurnaceGUIWaveSizeEntry i: waveSizeList) 
+      {
+        snprintf(temp,1023,"%d×%d (%s)",i.width,i.height,i.sys);
+
+        if (ImGui::MenuItem(temp)) 
+        {
+          // create wave
+          curWave=e->addLocalWave(curIns);
+          if (curWave==-1) 
+          {
+            showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sggu"));
+          } 
+          else 
+          {
+            wantScrollList=true;
+            e->song.ins[curIns]->std.local_waves[curLocalWave]->len=i.width;
+            e->song.ins[curIns]->std.local_waves[curLocalWave]->max=i.height-1;
+            for (int j=0; j<i.width; j++) 
+            {
+              e->song.ins[curIns]->std.local_waves[curLocalWave]->data[j]=(j*i.height)/i.width;
             }
             MARK_MODIFIED;
             RESET_WAVE_MACRO_ZOOM;
@@ -7448,6 +7593,7 @@ FurnaceGUI::FurnaceGUI():
   sampleEditOpen(false),
   aboutOpen(false),
   settingsOpen(false),
+  localWaveList(false),
   mixerOpen(false),
   debugOpen(false),
   inspectorOpen(false),

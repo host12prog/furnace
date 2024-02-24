@@ -1067,13 +1067,15 @@ void DivLocale::addTranslationsTemplate()
     strings["Save wavetable##sggc1"].plurals[0] = "=Save wavetable";
     strings["Save wavetable (.dmw)##sggc"].plurals[0] = "=Save wavetable (.dmw)";
     strings["Save wavetable (raw)##sggc0"].plurals[0] = "=Save wavetable (raw)";
-    strings["MMove wavetable up in list##sggc1"].plurals[0] = "=Move wavetable up in list";
+    strings["Move wavetable up in list##sggc1"].plurals[0] = "=Move wavetable up in list";
     strings["Move wavetable down in list##sggc1"].plurals[0] = "=Move wavetable down in list";
     strings["Delete wavetable##sggc1"].plurals[0] = "=Delete wavetable";
     strings["Edit wavetable##sggc1"].plurals[0] = "=Edit wavetable";
     strings["Wavetable cursor up##sggc1"].plurals[0] = "=Wavetable cursor up";
     strings["Wavetable cursor down##sggc1"].plurals[0] = "=Wavetable cursor down";
     strings["Wavetables: toggle folders/standard view##sggc1"].plurals[0] = "=Wavetables: toggle folders/standard view";
+    strings["Paste wavetables from clipboard##sggc"].plurals[0] = "=Paste wavetables from clipboard";
+    strings["Paste local wavetables from clipboard##sggc1"].plurals[0] = "=Paste local wavetables from clipboard";
     strings["---Sample list##sggc"].plurals[0] = "=---Sample list";
     strings["Add sample##sggc2"].plurals[0] = "=Add sample";
     strings["Duplicate sample##sggc2"].plurals[0] = "=Duplicate sample";
@@ -2749,6 +2751,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Pattern##sgse0"].plurals[0] = "=Pattern";
     strings["Instrument list##sgse"].plurals[0] = "=Instrument list";
     strings["Wavetable list##sgse"].plurals[0] = "=Wavetable list";
+    strings["Local wavetables list##sgse"].plurals[0] = "=Local wavetables list";
     strings["Sample list##sgse"].plurals[0] = "=Sample list";
     strings["Orders##sgse0"].plurals[0] = "=Orders";
     strings["Sample editor##sgse"].plurals[0] = "=Sample editor";
@@ -4680,6 +4683,8 @@ void DivLocale::addTranslationsTemplate()
 
     strings["Fixed"].plurals[0] = "=Fixed";
     strings["Relative"].plurals[0] = "=Relative";
+    strings["Local"].plurals[0] = "=Local";
+    strings["Global"].plurals[0] = "=Global";
 
     //   sgiSU     src/gui/inst/su.cpp
 
@@ -4828,6 +4833,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Amount##sgiwave"].plurals[0] = "=Amount";
     strings["Power##sgiwave"].plurals[0] = "=Power";
     strings["Global##sgiwave"].plurals[0] = "=Global";
+    strings["Global##sgiwave1"].plurals[0] = "=Global";
+    strings["Global##sgiwave2"].plurals[0] = "=Global##jesus";
     strings["wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"].plurals[0] = "=wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.";
     strings["Local Waves##sgiwave"].plurals[0] = "=Local Waves";
 
@@ -5052,6 +5059,7 @@ void DivLocale::addTranslationsTemplate()
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "=3xxx: Set pulse width (0 to FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "=4xxx: Set cutoff (0 to 7FF)";
     strings["10xx: Set waveform##sesd0"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Set waveform (local)##sesd"].plurals[0] = "=11xx: Set waveform (local)";
     strings["20xx: Set PCM frequency##sesd"].plurals[0] = "=20xx: Set PCM frequency";
     strings["10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))##sesd"].plurals[0] = "=10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))";
     strings["12xx: Set level of operator 1 (0 highest, 3F lowest)##sesd2"].plurals[0] = "=12xx: Set level of operator 1 (0 highest, 3F lowest)";
@@ -5121,12 +5129,14 @@ void DivLocale::addTranslationsTemplate()
     strings["12xx: Set duty cycle (0 to 3)##sesd"].plurals[0] = "=12xx: Set duty cycle (0 to 3)";
     strings["13xy: Setup sweep (x: time; y: shift)##sesd"].plurals[0] = "=13xy: Setup sweep (x: time; y: shift)";
     strings["14xx: Set sweep direction (0: up; 1: down)##sesd"].plurals[0] = "=14xx: Set sweep direction (0: up; 1: down)";
+    strings["15xx: Set waveform (local)##sesd"].plurals[0] = "=15xx: Set waveform (local)";
     strings["an '80s game console with a wavetable sound chip, popular in Japan.##sesd"].plurals[0] = "=an '80s game console with a wavetable sound chip, popular in Japan.";
     strings["10xx: Set waveform##sesd2"].plurals[0] = "=10xx: Set waveform";
     strings["11xx: Toggle noise mode##sesd0"].plurals[0] = "=11xx: Toggle noise mode";
     strings["12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)##sesd"].plurals[0] = "=12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)";
     strings["13xx: Set LFO speed##sesd"].plurals[0] = "=13xx: Set LFO speed";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd1"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["18xx: Set waveform (local)##sesd"].plurals[0] = "=18xx: Set waveform (local)";
     strings["also known as Famicom in Japan, it's the most well-known game console of the '80s.##sesd"].plurals[0] = "=also known as Famicom in Japan, it's the most well-known game console of the '80s.";
     strings["11xx: Write to delta modulation counter (0 to 7F)##sesd"].plurals[0] = "=11xx: Write to delta modulation counter (0 to 7F)";
     strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd0"].plurals[0] = "=12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)";
@@ -5152,6 +5162,7 @@ void DivLocale::addTranslationsTemplate()
     strings["11xx: Toggle AM with next channel##sesd"].plurals[0] = "=11xx: Toggle AM with next channel";
     strings["12xx: Toggle period modulation with next channel##sesd"].plurals[0] = "=12xx: Toggle period modulation with next channel";
     strings["13xx: Set waveform##sesd"].plurals[0] = "=13xx: Set waveform";
+    strings["14xx: Set waveform (local)##sesd"].plurals[0] = "=14xx: Set waveform (local)";
     strings["this was Yamaha's first integrated FM chip.\nit was used in several synthesizers, computers and arcade boards.##sesd"].plurals[0] = "=this was Yamaha's first integrated FM chip.\nit was used in several synthesizers, computers and arcade boards.";
     strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).";
     strings["it's a challenge to make music on this chip which barely has musical capabilities...##sesd"].plurals[0] = "=it's a challenge to make music on this chip which barely has musical capabilities...";
@@ -5185,6 +5196,7 @@ void DivLocale::addTranslationsTemplate()
     strings["14xy: Toggle invert (x: left; y: right)##sesd"].plurals[0] = "=14xy: Toggle invert (x: left; y: right)";
     strings["15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)##sesd"].plurals[0] = "=15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)";
     strings["16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)##sesd"].plurals[0] = "=16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)";
+    strings["17xx: Set waveform (local)##sesd"].plurals[0] = "=17xx: Set waveform (local)";
     strings["1Dxx: Set noise frequency (00 to 1F)##sesd"].plurals[0] = "=1Dxx: Set noise frequency (00 to 1F)";
     strings["20xx: Set attack (0 to F)##sesd"].plurals[0] = "=20xx: Set attack (0 to F)";
     strings["21xx: Set decay (0 to 7)##sesd"].plurals[0] = "=21xx: Set decay (0 to 7)";
@@ -5202,6 +5214,7 @@ void DivLocale::addTranslationsTemplate()
     strings["13xx: Set modulation speed low byte##sesd"].plurals[0] = "=13xx: Set modulation speed low byte";
     strings["14xx: Set modulator position##sesd"].plurals[0] = "=14xx: Set modulator position";
     strings["15xx: Set modulator table to waveform##sesd"].plurals[0] = "=15xx: Set modulator table to waveform";
+    strings["16xx: Set waveform (local)##sesd"].plurals[0] = "=16xx: Set waveform (local)";
     strings["an expansion chip for the Famicom, featuring a little-known PCM channel.##sesd"].plurals[0] = "=an expansion chip for the Famicom, featuring a little-known PCM channel.";
     strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd1"].plurals[0] = "=12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)";
     strings["an expansion chip for the Famicom, with full wavetable.##sesd"].plurals[0] = "=an expansion chip for the Famicom, with full wavetable.";
@@ -5213,6 +5226,7 @@ void DivLocale::addTranslationsTemplate()
     strings["12xx: Set waveform length in RAM (04 to FC in steps of 4)##sesd"].plurals[0] = "=12xx: Set waveform length in RAM (04 to FC in steps of 4)";
     strings["15xx: Set waveform load position##sesd"].plurals[0] = "=15xx: Set waveform load position";
     strings["16xx: Set waveform load length (04 to FC in steps of 4)##sesd"].plurals[0] = "=16xx: Set waveform load length (04 to FC in steps of 4)";
+    strings["17xx: Select waveform (local)##sesd1"].plurals[0] = "=17xx: Select waveform (local)";
     strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)##sesd"].plurals[0] = "=cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)";
     strings["Yamaha YM2203 (OPN) Extended Channel 3##sesd"].plurals[0] = "=Yamaha YM2203 (OPN) Extended Channel 3";
     strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies##sesd"].plurals[0] = "=cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies";
@@ -5240,6 +5254,7 @@ void DivLocale::addTranslationsTemplate()
     strings["12xx: Setup sweep period (0: disabled; 1-20: enabled/period)##sesd"].plurals[0] = "=12xx: Setup sweep period (0: disabled; 1-20: enabled/period)";
     strings["13xx: Set sweep amount##sesd"].plurals[0] = "=13xx: Set sweep amount";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd3"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["18xx: Set waveform (local)##sesd1"].plurals[0] = "=18xx: Set waveform (local)";
     strings["like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.##sesd"].plurals[0] = "=like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.";
     strings["2Fxx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "=2Fxx: Toggle hard envelope reset on new notes";
     strings["this one is like PC Speaker but has duty cycles.##sesd"].plurals[0] = "=this one is like PC Speaker but has duty cycles.";
@@ -5251,6 +5266,7 @@ void DivLocale::addTranslationsTemplate()
     strings["13xy: Setup sweep (x: speed; y: shift; channel 5 only)##sesd"].plurals[0] = "=13xy: Setup sweep (x: speed; y: shift; channel 5 only)";
     strings["14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)##sesd"].plurals[0] = "=14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)";
     strings["15xx: Set modulation waveform (x: wavetable; channel 5 only)##sesd"].plurals[0] = "=15xx: Set modulation waveform (x: wavetable; channel 5 only)";
+    strings["16xx: Set waveform (local)##sesd1"].plurals[0] = "=16xx: Set waveform (local)";
     strings["like OPLL, but even more cost reductions applied. three less FM channels, and no drums mode...##sesd"].plurals[0] = "=like OPLL, but even more cost reductions applied. three less FM channels, and no drums mode...";
     strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.##sesd"].plurals[0] = "=so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.";
     strings["ZX Spectrum Beeper##sesd"].plurals[0] = "=ZX Spectrum Beeper";
@@ -5293,6 +5309,7 @@ void DivLocale::addTranslationsTemplate()
     strings["11xx: Set envelope shape##sesd"].plurals[0] = "=11xx: Set envelope shape";
     strings["12xx: Set sample bank slot (0 to 7)##sesd"].plurals[0] = "=12xx: Set sample bank slot (0 to 7)";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd4"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["18xx: Set waveform (local)##sesd2"].plurals[0] = "=18xx: Set waveform (local)";
     strings["20xx: Set PCM frequency (1 to FF)##sesd"].plurals[0] = "=20xx: Set PCM frequency (1 to FF)";
     strings["22xx: Set envelope mode (bit 0: enable; bit 1: one-shot; bit 2: split shape to L/R; bit 3/5: H.invert right/left; bit 4/6: V.invert right/left)##sesd"].plurals[0] = "=22xx: Set envelope mode (bit 0: enable; bit 1: one-shot; bit 2: split shape to L/R; bit 3/5: H.invert right/left; bit 4/6: V.invert right/left)";
     strings["23xx: Set envelope period##sesd"].plurals[0] = "=23xx: Set envelope period";
@@ -5355,6 +5372,7 @@ void DivLocale::addTranslationsTemplate()
     strings["21xx: Select clock rate (0: full; 1: half)##sesd"].plurals[0] = "=21xx: Select clock rate (0: full; 1: half)";
     strings["used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or 16-bit PCM.##sesd"].plurals[0] = "=used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or 16-bit PCM.";
     strings["10xx: Set waveform##sesd8"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Select waveform (local)##sesd1"].plurals[0] = "=11xx: Select waveform (local)";
     strings["10xx: Set waveform##sesd9"].plurals[0] = "=10xx: Set waveform";
     strings["11xx: Toggle noise mode##sesd2"].plurals[0] = "=11xx: Toggle noise mode";
     strings["a wavetable sound chip used in Pac-Man, among other early Namco arcade games.##sesd"].plurals[0] = "=a wavetable sound chip used in Pac-Man, among other early Namco arcade games.";

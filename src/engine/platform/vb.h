@@ -29,7 +29,7 @@ class DivPlatformVB: public DivDispatch {
   struct Channel: public SharedChannel<signed char> {
     unsigned char pan, envLow, envHigh;
     bool noise, deferredWaveUpdate;
-    signed short wave;
+    int wave;
     DivWaveSynth ws;
     Channel():
       SharedChannel<signed char>(15),

@@ -625,6 +625,7 @@ class DivEngine {
     void nextBuf(float** in, float** out, int inChans, int outChans, unsigned int size);
     DivInstrument* getIns(int index, DivInstrumentType fallbackType=DIV_INS_FM);
     DivWavetable* getWave(int index);
+    DivWavetable* getLocalWave(DivInstrument* ins, int index);
     DivSample* getSample(int index);
     DivDispatch* getDispatch(int index);
     // parse old system setup description
@@ -939,12 +940,14 @@ class DivEngine {
 
     // add wavetable
     int addWave();
+    void addWaveUnsafe(bool local, int inst = 0);
 
     // add local wavetable
     int addLocalWave(int inst);
 
     // add wavetable from pointer
     int addWavePtr(DivWavetable* which);
+    int addLocalWavePtr(int inst, DivWavetable* which);
 
     // get wavetable from file
     DivWavetable* waveFromFile(const char* path, bool loadRaw=true);
@@ -952,6 +955,10 @@ class DivEngine {
     // delete wavetable
     void delWave(int index);
     void delWaveUnsafe(int index);
+
+    //paste wavetables from clipboard
+    void pasteWaves(int index, bool local = false, int inst = 0);
+    void doPasteWaves(int index, bool local = false, int inst = 0);
 
     // delete local wavetable
     void delLocalWave(int index, DivInstrument* ins);
@@ -992,11 +999,13 @@ class DivEngine {
     bool moveInsUp(int which);
     bool moveWaveUp(int which);
     bool moveSampleUp(int which);
+    bool moveLocalWaveUp(int inst, int which);
 
     // move thing down
     bool moveInsDown(int which);
     bool moveWaveDown(int which);
     bool moveSampleDown(int which);
+    bool moveLocalWaveDown(int inst, int which);
 
     // automatic patchbay
     void autoPatchbay();

@@ -147,7 +147,7 @@ void DivPlatformFDS::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || ws.activeChanged()) {
         chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
-        ws.changeWave1(chan[i].wave);
+        ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_FDS));
         //if (!chan[i].keyOff) chan[i].keyOn=true;
       }
     }
@@ -259,7 +259,7 @@ int DivPlatformFDS::dispatch(DivCommand c) {
       }
       if (chan[c.chan].wave<0) {
         chan[c.chan].wave=0;
-        ws.changeWave1(chan[c.chan].wave);
+        ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_FDS));
       }
       ws.init(ins,64,63,chan[c.chan].insChanged);
       rWrite(0x4080,0x80|chan[c.chan].vol);
@@ -300,7 +300,13 @@ int DivPlatformFDS::dispatch(DivCommand c) {
     case DIV_CMD_WAVE:
       if (chan[c.chan].wave!=c.value) {
         chan[c.chan].wave=c.value;
-        ws.changeWave1(chan[c.chan].wave);
+        ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_FDS));
+      }
+      break;
+    case DIV_CMD_WAVE_LOCAL:
+      if (chan[c.chan].wave!= (c.value | (1 << 30))) {
+        chan[c.chan].wave=c.value | (1 << 30);
+        ws.changeWave1(chan[c.chan].wave & 0xff, false, true, parent->getIns(chan[c.chan].ins,DIV_INS_FDS));
       }
       break;
     case DIV_CMD_FDS_MOD_DEPTH:

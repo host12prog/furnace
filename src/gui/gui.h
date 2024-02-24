@@ -516,6 +516,11 @@ enum FurnaceGUIFileDialogs {
   GUI_FILE_WAVE_SAVE,
   GUI_FILE_WAVE_SAVE_DMW,
   GUI_FILE_WAVE_SAVE_RAW,
+  GUI_FILE_LOCAL_WAVE_OPEN,
+  GUI_FILE_LOCAL_WAVE_OPEN_REPLACE,
+  GUI_FILE_LOCAL_WAVE_SAVE,
+  GUI_FILE_LOCAL_WAVE_SAVE_DMW,
+  GUI_FILE_LOCAL_WAVE_SAVE_RAW,
   GUI_FILE_SAMPLE_OPEN,
   GUI_FILE_SAMPLE_OPEN_RAW,
   GUI_FILE_SAMPLE_OPEN_REPLACE,
@@ -767,6 +772,7 @@ enum FurnaceGUIActions {
   GUI_ACTION_WAVE_LIST_UP,
   GUI_ACTION_WAVE_LIST_DOWN,
   GUI_ACTION_WAVE_LIST_DIR_VIEW,
+  GUI_ACTION_WAVE_LIST_PASTE_CLIPBOARD,
   GUI_ACTION_WAVE_LIST_MAX,
 
   GUI_ACTION_LOCAL_WAVE_LIST_MIN,
@@ -783,6 +789,7 @@ enum FurnaceGUIActions {
   GUI_ACTION_LOCAL_WAVE_LIST_EDIT,
   GUI_ACTION_LOCAL_WAVE_LIST_UP,
   GUI_ACTION_LOCAL_WAVE_LIST_DOWN,
+  GUI_ACTION_LOCAL_WAVE_LIST_PASTE_CLIPBOARD,
   GUI_ACTION_LOCAL_WAVE_LIST_MAX,
 
   GUI_ACTION_SAMPLE_LIST_MIN,
@@ -1529,7 +1536,7 @@ class FurnaceGUI {
   std::vector<String> availAudioDrivers;
 
   bool quit, warnQuit, willCommit, edit, editClone, isPatUnique, modified, displayError, displayExporting, vgmExportLoop, zsmExportLoop, zsmExportOptimize, vgmExportPatternHints;
-  bool vgmExportDirectStream, displayInsTypeList, displayWaveSizeList;
+  bool vgmExportDirectStream, displayInsTypeList, displayWaveSizeList, displayLocalWaveSizeList;
   bool portrait, injectBackUp, mobileMenuOpen, warnColorPushed;
   bool wantCaptureKeyboard, oldWantCaptureKeyboard, displayMacroMenu;
   bool displayNew, displayExport, displayPalette, fullScreen, preserveChanPos, sysDupCloneChannels, sysDupEnd, wantScrollList, noteInputPoly, notifyWaveChange;
@@ -2060,6 +2067,7 @@ class FurnaceGUI {
   bool newSongFirstFrame, paletteFirstFrame, oldRowChanged;
   bool editControlsOpen, ordersOpen, insListOpen, songInfoOpen, patternOpen, insEditOpen;
   bool waveListOpen, waveEditOpen, sampleListOpen, sampleEditOpen, aboutOpen, settingsOpen;
+  bool localWaveList;
   bool mixerOpen, debugOpen, inspectorOpen, oscOpen, volMeterOpen, statsOpen, compatFlagsOpen;
   bool pianoOpen, notesOpen, channelsOpen, regViewOpen, logOpen, effectListOpen, chanOscOpen;
   bool subSongsOpen, findOpen, spoilerOpen, patManagerOpen, sysManagerOpen, clockOpen, speedOpen;
@@ -2108,6 +2116,7 @@ class FurnaceGUI {
   std::map<int,int> actionMapSample;
   std::map<int,int> actionMapInsList;
   std::map<int,int> actionMapWaveList;
+  std::map<int,int> actionMapLocalWaveList;
   std::map<int,int> actionMapSampleList;
 
   std::vector<DivRegWrite> pgProgram;
@@ -2708,7 +2717,7 @@ class FurnaceGUI {
   void valueInput(int num, bool direct=false, int target=-1);
   void orderInput(int num);
 
-  void doGenerateWave();
+  void doGenerateWave(DivWavetable* wave);
 
   void doUndoSample();
   void doRedoSample();

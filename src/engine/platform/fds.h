@@ -30,7 +30,7 @@ class DivPlatformFDS: public DivDispatch {
     int prevFreq, modFreq;
     unsigned char duty, sweep, modDepth, modPos;
     bool sweepChanged, modOn;
-    signed short wave;
+    int wave;
     signed char modTable[32];
     Channel():
       SharedChannel<signed char>(32),

@@ -1134,76 +1134,84 @@ bool DivEngine::cloneSystem(int index, bool add_chip_count, bool pat) {
   if(add_chip_count)
   {
     song.systemLen++;
+    recalcChans();
   }
-  
-  recalcChans();
+
   saveLock.unlock();
   BUSY_END;
   initDispatch();
   BUSY_BEGIN;
   saveLock.lock();
-  if (song.patchbayAuto) {
-    autoPatchbay();
-  } else {
-    int i=song.systemLen-1;
-    if (disCont[i].dispatch!=NULL) {
-      unsigned int outs=disCont[i].dispatch->getOutputCount();
-      if (outs>16) outs=16;
-      if (outs<2) {
-        song.patchbay.reserve(DIV_MAX_OUTPUTS);
-        for (unsigned int j=0; j<DIV_MAX_OUTPUTS; j++) {
-          song.patchbay.push_back((i<<20)|j);
-        }
-      } else {
-        if (outs>0) song.patchbay.reserve(outs);
-        for (unsigned int j=0; j<outs; j++) {
-          song.patchbay.push_back((i<<20)|(j<<16)|j);
+  if(add_chip_count)
+  {
+    if (song.patchbayAuto) {
+      autoPatchbay();
+    } else {
+      int i=song.systemLen-1;
+      if (disCont[i].dispatch!=NULL) {
+        unsigned int outs=disCont[i].dispatch->getOutputCount();
+        if (outs>16) outs=16;
+        if (outs<2) {
+          song.patchbay.reserve(DIV_MAX_OUTPUTS);
+          for (unsigned int j=0; j<DIV_MAX_OUTPUTS; j++) {
+            song.patchbay.push_back((i<<20)|j);
+          }
+        } else {
+          if (outs>0) song.patchbay.reserve(outs);
+          for (unsigned int j=0; j<outs; j++) {
+            song.patchbay.push_back((i<<20)|(j<<16)|j);
+          }
         }
       }
     }
-  }
-  // duplicate patterns
-  if (pat) 
-  {
-    int srcChan=0;
-    int destChan=0;
-    for (int i=0; i<index; i++) 
+
+    // duplicate patterns
+    if (pat) 
     {
-      srcChan+=getChannelCount(song.system[i]);
-    }
-    for (int i=0; i<index+1; i++) 
-    {
-      destChan+=getChannelCount(song.system[i]);
-    }
-    for (DivSubSong* i: song.subsong) 
-    {
-      for (int j=0; j<getChannelCount(song.system[index]); j++) 
+      int srcChan=0;
+      int destChan=0;
+      for (int i=0; i<index; i++) 
       {
-        i->pat[destChan+j].effectCols=i->pat[srcChan+j].effectCols;
-        i->chanShow[destChan+j]=i->chanShow[srcChan+j];
-        i->chanShowChanOsc[destChan+j]=i->chanShowChanOsc[srcChan+j];
-        i->chanCollapse[destChan+j]=i->chanCollapse[srcChan+j];
-        i->chanName[destChan+j]=i->chanName[srcChan+j];
-        i->chanShortName[destChan+j]=i->chanShortName[srcChan+j];
-
-        for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+        srcChan+=getChannelCount(song.system[i]);
+      }
+      for (int i=0; i<index+1; i++) 
+      {
+        destChan+=getChannelCount(song.system[i]);
+      }
+      for (DivSubSong* i: song.subsong) 
+      {
+        for (int j=0; j<getChannelCount(song.system[index]); j++) 
         {
-          if (i->pat[srcChan+j].data[k]!=NULL) 
+          i->pat[destChan+j].effectCols=i->pat[srcChan+j].effectCols;
+          i->chanShow[destChan+j]=i->chanShow[srcChan+j];
+          i->chanShowChanOsc[destChan+j]=i->chanShowChanOsc[srcChan+j];
+          i->chanCollapse[destChan+j]=i->chanCollapse[srcChan+j];
+          i->chanName[destChan+j]=i->chanName[srcChan+j];
+          i->chanShortName[destChan+j]=i->chanShortName[srcChan+j];
+
+          for (int k=0; k<DIV_MAX_PATTERNS; k++) 
           {
-            i->pat[srcChan+j].data[k]->copyOn(i->pat[destChan+j].getPattern(k,true));
+            if (i->pat[srcChan+j].data[k]!=NULL) 
+            {
+              i->pat[srcChan+j].data[k]->copyOn(i->pat[destChan+j].getPattern(k,true));
+            }
           }
-        }
 
-        for (int k=0; k<DIV_MAX_PATTERNS; k++) 
-        {
-          i->orders.ord[destChan+j][k]=i->orders.ord[srcChan+j][k];
+          for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+          {
+            i->orders.ord[destChan+j][k]=i->orders.ord[srcChan+j][k];
+          }
         }
       }
     }
   }
   saveLock.unlock();
-  renderSamples();
-  reset();
+
+  if(add_chip_count)
+  {
+    renderSamples();
+    reset();
+  }
   BUSY_END;
   return true;
 }
@@ -1504,6 +1512,17 @@ DivWavetable* DivEngine::getWave(int index) {
     }
   }
   return song.wave[index];
+}
+
+DivWavetable* DivEngine::getLocalWave(DivInstrument* ins, int index) {
+  if (index<0 || index>=(int)ins->std.local_waves.size()) {
+    if (ins->std.local_waves.size() > 0) {
+      return ins->std.local_waves[0];
+    } else {
+      return &song.nullWave;
+    }
+  }
+  return ins->std.local_waves[index];
 }
 
 DivSample* DivEngine::getSample(int index) {
@@ -2614,6 +2633,37 @@ void DivEngine::delInstrument(int index) {
   BUSY_END;
 }
 
+void DivEngine::addWaveUnsafe(bool local, int inst) {
+  if(local)
+  {
+    if (song.ins[inst]->std.local_waves.size()>=256) 
+    {
+      lastError="too many wavetables!";
+      return;
+    }
+  }
+  else
+  {
+    if (song.wave.size()>=256) 
+    {
+      lastError="too many wavetables!";
+      return;
+    }
+  }
+  DivWavetable* wave=new DivWavetable;
+  if(local)
+  {
+    song.ins[inst]->std.local_waves.push_back(wave);
+  }
+  else
+  {
+    int waveCount=(int)song.wave.size();
+    song.wave.push_back(wave);
+    song.waveLen=waveCount+1;
+    checkAssetDir(song.waveDir,song.wave.size());
+  }
+}
+
 int DivEngine::addWave() {
   if (song.wave.size()>=256) {
     lastError="too many wavetables!";
@@ -2646,6 +2696,12 @@ int DivEngine::addLocalWave(int inst) {
   //checkAssetDir(song.waveDir,song.wave.size());
   saveLock.unlock();
   BUSY_END;
+
+  for (DivInstrument* _wi: song.ins) 
+  {
+    _wi->std.get_macro(DIV_MACRO_WAVE, true)->vZoom=-1;
+    _wi->std.get_macro(DIV_MACRO_WAVE, true)->vScroll=-1;
+  }
   return waveCount;
 }
 
@@ -2664,6 +2720,24 @@ int DivEngine::addWavePtr(DivWavetable* which) {
   saveLock.unlock();
   BUSY_END;
   return song.waveLen;
+}
+
+int DivEngine::addLocalWavePtr(int inst, DivWavetable* which) {
+  DivInstrument* ins = song.ins[inst];
+  if (ins->std.local_waves.size()>=256) {
+    lastError="too many wavetables!";
+    delete which;
+    return -1;
+  }
+  BUSY_BEGIN;
+  saveLock.lock();
+  //int waveCount=(int)ins->std.local_waves.size();
+  ins->std.local_waves.push_back(which);
+  //song.waveLen=waveCount+1;
+  //checkAssetDir(song.waveDir,song.wave.size());
+  saveLock.unlock();
+  BUSY_END;
+  return (int)ins->std.local_waves.size();
 }
 
 DivWavetable* DivEngine::waveFromFile(const char* path, bool addRaw) {
@@ -2840,6 +2914,147 @@ void DivEngine::delLocalWave(int index, DivInstrument* ins) {
   BUSY_BEGIN;
   saveLock.lock();
   delLocalWaveUnsafe(index, ins);
+  saveLock.unlock();
+  BUSY_END;
+}
+
+int find_max(int* data, int len)
+{
+  int maxi = 0;
+
+  for(int i = 0; i < len; i++)
+  {
+    if(data[i] > maxi) maxi = data[i];
+  }
+
+  return maxi;
+}
+
+bool non_zero_wave(int* data, int len)
+{
+  for(int i = 0; i < len; i++)
+  {
+    if(data[i] != 0) return true;
+  }
+
+  return false;
+}
+
+void DivEngine::doPasteWaves(int index, bool local, int inst)
+{
+  String clipb;
+
+  char* clipText=SDL_GetClipboardText();
+  if (clipText!=NULL) {
+    if (clipText[0]) {
+      clipb=clipText;
+    }
+    SDL_free(clipText);
+  }
+
+  logD("pasting wavetables from string");
+
+  std::vector<String> data;
+  String tempS;
+
+  for (char i: clipb) 
+  {
+    if (i=='\r') continue;
+    if (i=='\n') 
+    {
+      data.push_back(tempS);
+      tempS="";
+      continue;
+    }
+
+    tempS+=i;
+  }
+
+  data.push_back(tempS);
+
+  //int max_val = 0;
+
+  bool do_break = false;
+
+  for(int i = 0; i < MIN((int)data.size(), 256 - (index)); i++)
+  {
+    String tempSs = data[i];
+    logD("Line %d: \"%s\"", i, tempSs.c_str());
+
+    int wave[256] = { 0 };
+    int wave_pos = 0;
+
+    char* temp = (char*)tempSs.c_str();
+    char* line = (char*)calloc(1, (strlen(temp) + 1) * sizeof(char));
+    strcpy(line, temp);
+    const char* delimiters = ",.; ";
+
+    char* numb = (char*)1;
+    int passes = 0;
+
+    while (numb != NULL)
+    {
+      numb = strtok(passes == 0 ? line : NULL, delimiters);
+      passes++;
+
+      if(numb != NULL)
+      {
+        if(wave_pos > 255)
+        {
+          do_break = true;
+          goto end;
+        }
+
+        wave[wave_pos] = atoi(numb);
+        logD("val %d", wave[wave_pos]);
+        wave_pos++;
+      }
+    }
+
+    if(non_zero_wave(wave, wave_pos))
+    {
+      addWaveUnsafe(local, inst);
+      
+      DivWavetable* w = NULL;
+
+      if(local)
+      {
+        w = song.ins[inst]->std.local_waves.back();
+      }
+      else
+      {
+        w = song.wave.back();
+      }
+
+      w->len = wave_pos;
+      w->max = find_max(wave, wave_pos);
+      memcpy(w->data, wave, w->len * sizeof(w->data[0]));
+    }
+
+    end:;
+
+    if(line)
+    {
+      free(line);
+    }
+
+    if(do_break)
+    {
+      break;
+    }
+  }
+
+  for (DivInstrument* _wi: song.ins) 
+  {
+    _wi->std.get_macro(DIV_MACRO_WAVE, true)->vZoom=-1;
+    _wi->std.get_macro(DIV_MACRO_WAVE, true)->vScroll=-1;
+  }
+}
+
+void DivEngine::pasteWaves(int index, bool local, int inst) {
+  BUSY_BEGIN;
+  saveLock.lock();
+  doPasteWaves(index, local, inst);
   saveLock.unlock();
   BUSY_END;
 }
@@ -3157,6 +3372,21 @@ bool DivEngine::moveWaveUp(int which) {
   return true;
 }
 
+bool DivEngine::moveLocalWaveUp(int inst, int which) {
+  DivInstrument* ins = song.ins[inst];
+  if (which<1 || which>=(int)ins->std.local_waves.size()) return false;
+  BUSY_BEGIN;
+  DivWavetable* prev=ins->std.local_waves[which];
+  saveLock.lock();
+  ins->std.local_waves[which]=ins->std.local_waves[which-1];
+  ins->std.local_waves[which-1]=prev;
+  //moveAsset(song.waveDir,which,which-1);
+  exchangeWave(which,which-1);
+  saveLock.unlock();
+  BUSY_END;
+  return true;
+}
+
 bool DivEngine::moveSampleUp(int which) {
   if (which<1 || which>=(int)song.sample.size()) return false;
   BUSY_BEGIN;
@@ -3198,6 +3428,21 @@ bool DivEngine::moveWaveDown(int which) {
   song.wave[which+1]=prev;
   exchangeWave(which,which+1);
   moveAsset(song.waveDir,which,which+1);
+  saveLock.unlock();
+  BUSY_END;
+  return true;
+}
+
+bool DivEngine::moveLocalWaveDown(int inst, int which) {
+  DivInstrument* ins = song.ins[inst];
+  if (which<0 || which>=((int)ins->std.local_waves.size())-1) return false;
+  BUSY_BEGIN;
+  DivWavetable* prev=ins->std.local_waves[which];
+  saveLock.lock();
+  ins->std.local_waves[which]=ins->std.local_waves[which+1];
+  ins->std.local_waves[which+1]=prev;
+  exchangeWave(which,which+1);
+  //moveAsset(song.waveDir,which,which+1);
   saveLock.unlock();
   BUSY_END;
   return true;

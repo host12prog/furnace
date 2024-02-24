@@ -622,6 +622,7 @@ void DivEngine::registerSystems() {
 
   EffectHandlerMap waveOnlyEffectHandlerMap={
     {0x10, {DIV_CMD_WAVE, "10xx: Set waveform##sesd0"}},
+    {0x11, {DIV_CMD_WAVE_LOCAL, "11xx: Set waveform (local)##sesd"}},
   };
 
   EffectHandlerMap segaPCMPostEffectHandlerMap={
@@ -754,7 +755,8 @@ void DivEngine::registerSystems() {
       {0x11, {DIV_CMD_STD_NOISE_MODE, "11xx: Set noise length (0: long; 1: short)##sesd"}},
       {0x12, {DIV_CMD_STD_NOISE_MODE, "12xx: Set duty cycle (0 to 3)##sesd"}},
       {0x13, {DIV_CMD_GB_SWEEP_TIME, "13xy: Setup sweep (x: time; y: shift)##sesd"}},
-      {0x14, {DIV_CMD_GB_SWEEP_DIR, "14xx: Set sweep direction (0: up; 1: down)##sesd"}}
+      {0x14, {DIV_CMD_GB_SWEEP_DIR, "14xx: Set sweep direction (0: up; 1: down)##sesd"}},
+      {0x15, {DIV_CMD_WAVE_LOCAL, "15xx: Set waveform (local)##sesd"}}
     }
   );
 
@@ -771,7 +773,8 @@ void DivEngine::registerSystems() {
       {0x11, {DIV_CMD_STD_NOISE_MODE, "11xx: Toggle noise mode##sesd0"}},
       {0x12, {DIV_CMD_PCE_LFO_MODE, "12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)##sesd"}},
       {0x13, {DIV_CMD_PCE_LFO_SPEED, "13xx: Set LFO speed##sesd"}},
-      {0x17, {DIV_CMD_SAMPLE_MODE, "17xx: Toggle PCM mode (LEGACY)##sesd1"}}
+      {0x17, {DIV_CMD_SAMPLE_MODE, "17xx: Toggle PCM mode (LEGACY)##sesd1"}},
+      {0x18, {DIV_CMD_WAVE_LOCAL, "18xx: Set waveform (local)##sesd"}},
     }
   );
 
@@ -889,7 +892,8 @@ void DivEngine::registerSystems() {
       {0x10, {DIV_CMD_AMIGA_FILTER, "10xx: Toggle filter (0 disables; 1 enables)##sesd"}},
       {0x11, {DIV_CMD_AMIGA_AM, "11xx: Toggle AM with next channel##sesd"}},
       {0x12, {DIV_CMD_AMIGA_PM, "12xx: Toggle period modulation with next channel##sesd"}},
-      {0x13, {DIV_CMD_WAVE, "13xx: Set waveform##sesd"}}
+      {0x13, {DIV_CMD_WAVE, "13xx: Set waveform##sesd"}},
+      {0x14, {DIV_CMD_WAVE_LOCAL, "14xx: Set waveform (local)##sesd"}},
     }
   );
 
@@ -1012,6 +1016,7 @@ void DivEngine::registerSystems() {
       {0x14, {DIV_CMD_SNES_INVERT, "14xy: Toggle invert (x: left; y: right)##sesd"}},
       {0x15, {DIV_CMD_SNES_GAIN_MODE, "15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)##sesd"}},
       {0x16, {DIV_CMD_SNES_GAIN, "16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)##sesd"}},
+      {0x17, {DIV_CMD_WAVE_LOCAL, "17xx: Set waveform (local)##sesd"}},
       {0x1d, {DIV_CMD_STD_NOISE_FREQ, "1Dxx: Set noise frequency (00 to 1F)##sesd"}},
       {0x20, {DIV_CMD_FM_AR, "20xx: Set attack (0 to F)##sesd"}},
       {0x21, {DIV_CMD_FM_DR, "21xx: Set decay (0 to 7)##sesd"}},
@@ -1061,6 +1066,7 @@ void DivEngine::registerSystems() {
       {0x13, {DIV_CMD_FDS_MOD_LOW, "13xx: Set modulation speed low byte##sesd"}},
       {0x14, {DIV_CMD_FDS_MOD_POS, "14xx: Set modulator position##sesd"}},
       {0x15, {DIV_CMD_FDS_MOD_WAVE, "15xx: Set modulator table to waveform##sesd"}},
+      {0x16, {DIV_CMD_WAVE_LOCAL, "16xx: Set waveform (local)##sesd"}},
     }
   );
 
@@ -1096,6 +1102,7 @@ void DivEngine::registerSystems() {
       {0x12, {DIV_CMD_N163_WAVE_LENGTH, "12xx: Set waveform length in RAM (04 to FC in steps of 4)##sesd"}},
       {0x15, {DIV_CMD_N163_WAVE_LOADPOS, "15xx: Set waveform load position##sesd"}},
       {0x16, {DIV_CMD_N163_WAVE_LOADLEN, "16xx: Set waveform load length (04 to FC in steps of 4)##sesd"}},
+      {0x17, {DIV_CMD_WAVE_LOCAL, "17xx: Select waveform (local)##sesd1"}},
     }
   );
 
@@ -1278,6 +1285,7 @@ void DivEngine::registerSystems() {
       {0x12, {DIV_CMD_WS_SWEEP_TIME, "12xx: Setup sweep period (0: disabled; 1-20: enabled/period)##sesd"}},
       {0x13, {DIV_CMD_WS_SWEEP_AMOUNT, "13xx: Set sweep amount##sesd"}},
       {0x17, {DIV_CMD_SAMPLE_MODE, "17xx: Toggle PCM mode (LEGACY)##sesd3"}},
+      {0x18, {DIV_CMD_WAVE_LOCAL, "18xx: Set waveform (local)##sesd1"}},
     }
   );
 
@@ -1331,6 +1339,7 @@ void DivEngine::registerSystems() {
       {0x13, {DIV_CMD_GB_SWEEP_TIME, "13xy: Setup sweep (x: speed; y: shift; channel 5 only)##sesd"}},
       {0x14, {DIV_CMD_FDS_MOD_DEPTH, "14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)##sesd"}},
       {0x15, {DIV_CMD_FDS_MOD_WAVE, "15xx: Set modulation waveform (x: wavetable; channel 5 only)##sesd"}},
+      {0x16, {DIV_CMD_WAVE_LOCAL, "16xx: Set waveform (local)##sesd1"}},
     }
   );
 
@@ -1599,6 +1608,7 @@ void DivEngine::registerSystems() {
       {0x11, {DIV_CMD_X1_010_ENVELOPE_SHAPE, "11xx: Set envelope shape##sesd"}},
       {0x12, {DIV_CMD_X1_010_SAMPLE_BANK_SLOT, "12xx: Set sample bank slot (0 to 7)##sesd"}},
       {0x17, {DIV_CMD_SAMPLE_MODE, "17xx: Toggle PCM mode (LEGACY)##sesd4"}},
+      {0x18, {DIV_CMD_WAVE_LOCAL, "18xx: Set waveform (local)##sesd2"}},
     },
     {
       {0x20, {DIV_CMD_SAMPLE_FREQ, "20xx: Set PCM frequency (1 to FF)##sesd"}},
@@ -1794,6 +1804,7 @@ void DivEngine::registerSystems() {
 
   EffectHandlerMap namcoEffectHandlerMap={
     {0x10, {DIV_CMD_WAVE, "10xx: Set waveform##sesd8"}},
+    {0x11, {DIV_CMD_WAVE_LOCAL, "11xx: Select waveform (local)##sesd1"}},
   };
 
   EffectHandlerMap namcoC30EffectHandlerMap={

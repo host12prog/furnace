@@ -271,6 +271,8 @@ const char* cmdName[]={
   "PW_SLIDE_DN",
   "CUTOFF_SLIDE_UP",
   "CUTOFF_SLIDE_DN",
+
+  "WAVE_LOCAL",
 };
 
 static_assert((sizeof(cmdName)/sizeof(void*))==DIV_CMD_MAX,"update cmdName!");

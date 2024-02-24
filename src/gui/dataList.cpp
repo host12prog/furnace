@@ -179,6 +179,7 @@ void FurnaceGUI::waveListItem(int i, float* wavePreview, int dir, int asset) {
   ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign,ImVec2(0,0.5f));
   if (ImGui::Selectable(fmt::sprintf(" %d##_WAVE%d\n",i,i).c_str(),curWave==i,0,ImVec2(0,ImGui::GetFrameHeight()))) {
     curWave=i;
+    localWaveList = false;
     lastAssetType=1;
   }
   ImGui::PopStyleVar();
@@ -187,6 +188,7 @@ void FurnaceGUI::waveListItem(int i, float* wavePreview, int dir, int asset) {
   if (ImGui::IsItemHovered()) {
     if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
       waveEditOpen=true;
+      localWaveList = false;
       nextWindow=GUI_WINDOW_WAVE_EDIT;
     }
   }

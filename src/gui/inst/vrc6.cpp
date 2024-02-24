@@ -44,7 +44,7 @@ void FurnaceGUI::drawInsVRC6(DivInstrument* ins)
 
     if(ins->amiga.useSample)
     {
-      macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiVRC6"),ins,DIV_MACRO_WAVE,0xff,0,MAX(1,e->song.waveLen-1),160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
+      macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiVRC6"),ins,DIV_MACRO_WAVE,0xff,0,WAVE_MACRO_MAX,160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,false,NULL,true));
       macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgiVRC6"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
     }
 

@@ -1015,13 +1015,15 @@ void DivLocale::addTranslationsRussian()
     strings["Save wavetable##sggc1"].plurals[0] = "Сохранить волновую таблицу";
     strings["Save wavetable (.dmw)##sggc"].plurals[0] = "Сохранить волновую таблицу (.dmw)";
     strings["Save wavetable (raw)##sggc0"].plurals[0] = "Сохранить волновую таблицу (сырые данные)";
-    strings["MMove wavetable up in list##sggc1"].plurals[0] = "Сдвинуть волновую таблицу вверх в списке";
+    strings["Move wavetable up in list##sggc1"].plurals[0] = "Сдвинуть волновую таблицу вверх в списке";
     strings["Move wavetable down in list##sggc1"].plurals[0] = "Сдвинуть волновую таблицу вниз в списке";
     strings["Delete wavetable##sggc1"].plurals[0] = "Удалить волновую таблицу";
     strings["Edit wavetable##sggc1"].plurals[0] = "Редактировать волновую таблицу";
     strings["Wavetable cursor up##sggc1"].plurals[0] = "Курсор в списке волновых таблиц вверх";
     strings["Wavetable cursor down##sggc1"].plurals[0] = "Курсор в списке волновых таблиц вниз";
     strings["Wavetables: toggle folders/standard view##sggc1"].plurals[0] = "Волновые таблицы: переключиться между видом с разбиением по папкам и обычным видом";
+    strings["Paste wavetables from clipboard##sggc"].plurals[0] = "Вставить волновые таблицы из буфера обмена";
+    strings["Paste local wavetables from clipboard##sggc1"].plurals[0] = "Вставить локальные волновые таблицы из буфера обмена";
     strings["---Sample list##sggc"].plurals[0] = "---Sample list";
     strings["Add sample##sggc2"].plurals[0] = "Добавить сэмпл";
     strings["Duplicate sample##sggc2"].plurals[0] = "Клонировать сэмпл";
@@ -2741,6 +2743,7 @@ void DivLocale::addTranslationsRussian()
     strings["Pattern##sgse0"].plurals[0] = "Паттерн";
     strings["Instrument list##sgse"].plurals[0] = "Список инструментов";
     strings["Wavetable list##sgse"].plurals[0] = "Список волновых таблиц";
+    strings["Local wavetables list##sgse"].plurals[0] = "Список локальных волновых таблиц";
     strings["Sample list##sgse"].plurals[0] = "Список сэмплов";
     strings["Orders##sgse0"].plurals[0] = "Матрица паттернов";
     strings["Sample editor##sgse"].plurals[0] = "Редактор сэмплов";
@@ -4602,6 +4605,8 @@ void DivLocale::addTranslationsRussian()
 
     strings["Fixed"].plurals[0] = "Абсолютное";
     strings["Relative"].plurals[0] = "Относительное";
+    strings["Local"].plurals[0] = "Локальная";
+    strings["Global"].plurals[0] = "Глобальная";
 
     //   sgiSU     src/gui/inst/su.cpp
 
@@ -4750,6 +4755,8 @@ void DivLocale::addTranslationsRussian()
     strings["Amount##sgiwave"].plurals[0] = "Количество";
     strings["Power##sgiwave"].plurals[0] = "Степень";
     strings["Global##sgiwave"].plurals[0] = "Глобально";
+    strings["Global##sgiwave1"].plurals[0] = "Глобальн.";
+    strings["Global##sgiwave2"].plurals[0] = "Глобальн.##jesus";
     strings["wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"].plurals[0] = "синтезатор волновых таблиц выключен.\nиспользуйте макрос волны для задания волновой таблицы для этого инструмента.";
     strings["Local Waves##sgiwave"].plurals[0] = "Локальные волн. табл.";
 
@@ -4957,7 +4964,8 @@ void DivLocale::addTranslationsRussian()
     strings["25xx: Cutoff slide down##sesd"].plurals[0] = "25xx: Изменение частоты среза вниз";
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "3xxx: Скважность (0-FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "4xxx: Частота среза (0-7FF)";
-    strings["10xx: Set waveform##sesd0"].plurals[0] = "10xx: Форма волны";
+    strings["10xx: Set waveform##sesd0"].plurals[0] = "10xx: Волна";
+    strings["11xx: Set waveform (local)##sesd"].plurals[0] = "11xx: Волна (локальная)";
     strings["20xx: Set PCM frequency##sesd"].plurals[0] = "20xx: Частота ИКМ";
     strings["10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))##sesd"].plurals[0] = "10xy: Глубина АМ (x: оператор 1-4 (0 для всех операторов); y: глубина (0: 1 дБ, 1: 4.8 дБ))";
     strings["12xx: Set level of operator 1 (0 highest, 3F lowest)##sesd2"].plurals[0] = "12xx: Уровень оператора 1 (0 макс., 3F мин.)";
@@ -5026,12 +5034,14 @@ void DivLocale::addTranslationsRussian()
     strings["12xx: Set duty cycle (0 to 3)##sesd"].plurals[0] = "12xx: Скважность (0-3)";
     strings["13xy: Setup sweep (x: time; y: shift)##sesd"].plurals[0] = "13xy: Сконфигурировать аппаратное портаменто (x: длительность; y: расстояние)";
     strings["14xx: Set sweep direction (0: up; 1: down)##sesd"].plurals[0] = "14xx: Направление аппаратного портаменто (0: вверх; 1: вниз)";
+    strings["15xx: Set waveform (local)##sesd"].plurals[0] = "15xx: Волна (локальная)";
     strings["an '80s game console with a wavetable sound chip, popular in Japan.##sesd"].plurals[0] = "игровая консоль из 80-ых с чипом на волновых таблицах. Была популярна в Японии.";
     strings["10xx: Set waveform##sesd2"].plurals[0] = "10xx: Волна";
     strings["11xx: Toggle noise mode##sesd0"].plurals[0] = "11xx: Переключить режим шума";
     strings["12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)##sesd"].plurals[0] = "12xx: Настроить ГНЧ (0: выкл.; 1: глубина 1x; 2: глубина 16x; 3: глубина 256x)";
     strings["13xx: Set LFO speed##sesd"].plurals[0] = "13xx: Частота ГНЧ";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd1"].plurals[0] = "17xx: Переключить режим ИКМ (СОВМЕСТИМОСТЬ)";
+    strings["18xx: Set waveform (local)##sesd"].plurals[0] = "18xx: Волна (локальная)";
     strings["also known as Famicom in Japan, it's the most well-known game console of the '80s.##sesd"].plurals[0] = "также известная в Японии как Famicom. Самая известная игровая консоль 80-ых.";
     strings["11xx: Write to delta modulation counter (0 to 7F)##sesd"].plurals[0] = "11xx: Запись в регистр дельта-счётчика (0-7F)";
     strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd0"].plurals[0] = "12xx: Скважность/режим шума (меандр: 0-3; шум: 0 или 1)";
@@ -5056,6 +5066,7 @@ void DivLocale::addTranslationsRussian()
     strings["11xx: Toggle AM with next channel##sesd"].plurals[0] = "11xx: Переключить АМ со следующим каналом";
     strings["12xx: Toggle period modulation with next channel##sesd"].plurals[0] = "12xx: Переключить модуляцию периода со следующим каналом";
     strings["13xx: Set waveform##sesd"].plurals[0] = "13xx: Волна";
+    strings["14xx: Set waveform (local)##sesd"].plurals[0] = "14xx: Волна (локлаьная)";
     strings["this was Yamaha's first integrated FM chip.\nit was used in several synthesizers, computers and arcade boards.##sesd"].plurals[0] = "этот чип был первой интегральной микросхемой Yamaha.\nОн использовался в нескольких синтезаторах, компьютерах и аркадных автоматах.";
     strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).##sesd"].plurals[0] = "этот чип в основном известен по причине того, что он находился в Sega Genesis (но он также использовался в компьютере FM Towns).";
     strings["it's a challenge to make music on this chip which barely has musical capabilities...##sesd"].plurals[0] = "на этом чипе очень сложно писать музыку, ведь он едва ли обладает музыкальными возможностями...";
@@ -5089,6 +5100,7 @@ void DivLocale::addTranslationsRussian()
     strings["14xy: Toggle invert (x: left; y: right)##sesd"].plurals[0] = "14xy: Переключить инвертирование сигнала (x: левый; y: правый)";
     strings["15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)##sesd"].plurals[0] = "15xx: Режим огибающей (0: ADSR, 1: усиление/прямой, 2: спад, 3: экспоненциальная, 4: нарастание, 5: изогн.)";
     strings["16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)##sesd"].plurals[0] = "16xx: Усиление (00-7F в прямом режиме; иначе 00-1F)";
+    strings["17xx: Set waveform (local)##sesd"].plurals[0] = "17xx: Волна (локальная)";
     strings["1Dxx: Set noise frequency (00 to 1F)##sesd"].plurals[0] = "1Dxx: Частота шума (00-1F)";
     strings["20xx: Set attack (0 to F)##sesd"].plurals[0] = "20xx: Атака (0-F)";
     strings["21xx: Set decay (0 to 7)##sesd"].plurals[0] = "21xx: Спад (0-7)";
@@ -5100,11 +5112,12 @@ void DivLocale::addTranslationsRussian()
     strings["cost-reduced version of the OPL with 16 patches and only one of them is user-configurable.##sesd"].plurals[0] = "удешевлённая версия OPL с 16-ю патчами, причём только один из них доступен для настройки пользователем.";
     strings["a disk drive for the Famicom which also contains one wavetable channel.##sesd"].plurals[0] = "дисковый привод для Famicom, также содержащий один канал волновых таблиц.";
     strings["10xx: Set waveform##sesd4"].plurals[0] = "10xx: Волна";
-    strings["11xx: Set modulation depth##sesd"].plurals[0] = "11xx: Глуюина модуляции";
+    strings["11xx: Set modulation depth##sesd"].plurals[0] = "11xx: Глубина модуляции";
     strings["12xy: Set modulation speed high byte (x: enable; y: value)##sesd"].plurals[0] = "12xy: Старший байт скорости модуляции (x: вкл.; y: значение)";
     strings["13xx: Set modulation speed low byte##sesd"].plurals[0] = "13xx: Младший байт скорости модуляции";
     strings["14xx: Set modulator position##sesd"].plurals[0] = "14xx: Положение модулятора";
     strings["15xx: Set modulator table to waveform##sesd"].plurals[0] = "15xx: Назначить таблицу модуляции волны";
+    strings["16xx: Set waveform (local)##sesd"].plurals[0] = "16xx: Волна (локальная)";
     strings["an expansion chip for the Famicom, featuring a little-known PCM channel.##sesd"].plurals[0] = "чип расширения для Famicom, имеющий малоизвестный канал ИКМ-сэмплов.";
     strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd1"].plurals[0] = "12xx: Скважность/режим шума (меандр: 0-3; шум: 0 или 1)";
     strings["an expansion chip for the Famicom, with full wavetable.##sesd"].plurals[0] = "чип расширения для Famicom, полностью на волновых таблицах.";
@@ -5116,6 +5129,7 @@ void DivLocale::addTranslationsRussian()
     strings["12xx: Set waveform length in RAM (04 to FC in steps of 4)##sesd"].plurals[0] = "12xx: Задать длину волны в ОЗУ (04-FC с шагом 4)";
     strings["15xx: Set waveform load position##sesd"].plurals[0] = "15xx: Задать положение для загрузки волны";
     strings["16xx: Set waveform load length (04 to FC in steps of 4)##sesd"].plurals[0] = "16xx: Задать длину загружаемой волны (04-FC с шагом 4)";
+    strings["17xx: Select waveform (local)##sesd1"].plurals[0] = "17xx: Волна (локальная)";
     strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)##sesd"].plurals[0] = "удешевлённая версия OPM с другим расположением регистров и отсутствием стерео...\n...но у неё внутри AY-3-8910! (на самом деле YM2149)";
     strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies##sesd"].plurals[0] = "удешевлённая версия OPM с другим расположением регистров и отсутствием стерео...\n...но у неё внутри AY-3-8910! (на самом деле YM2149)\nЭто версия в режиме расширенного канала, который превращает третий FM-канал в четыре оператора с независимыми нотами/частотами.";
     strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "удешевлённая версия OPM с другим расположением регистров и отсутствием стерео...\n...но у неё внутри AY-3-8910! (на самом деле YM2149)\nЭто версия в режиме расширенного канала, который превращает третий FM-канал в четыре оператора с независимыми нотами/частотами.\nУ этой версии есть контроль режима CSM для специальных эффектов на третьем канале.";
@@ -5139,6 +5153,7 @@ void DivLocale::addTranslationsRussian()
     strings["12xx: Setup sweep period (0: disabled; 1-20: enabled/period)##sesd"].plurals[0] = "12xx: Настроить период аппаратного портаменто (0: выкл.; 1-20: вкл./период)";
     strings["13xx: Set sweep amount##sesd"].plurals[0] = "13xx: Скорость аппаратного портаменто";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd3"].plurals[0] = "17xx: Переключить режим ИКМ (СОВМЕСТИМОСТЬ)";
+    strings["18xx: Set waveform (local)##sesd1"].plurals[0] = "18xx: Волна (локальная)";
     strings["like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.##sesd"].plurals[0] = "как OPM, но с большим количеством волн, режимом фиксированной частоты, и полным... отсутствием сведений о его устройстве.\nиспользовался в Yamaha TX81Z и некоторых других синтезаторах.";
     strings["2Fxx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "2Fxx: Переключить жёсткий перезапуск огибающей на новой ноте";
     strings["this one is like PC Speaker but has duty cycles.##sesd"].plurals[0] = "Похож на PC Speaker, но имеет настройку скважности.";
@@ -5150,6 +5165,7 @@ void DivLocale::addTranslationsRussian()
     strings["13xy: Setup sweep (x: speed; y: shift; channel 5 only)##sesd"].plurals[0] = "13xy: Настройка аппаратного портаменто (x: скорость; y: количество; только для 5-го канала)";
     strings["14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)##sesd"].plurals[0] = "14xy: Настроить модуляцию (x: вкл./цикл (1: вкл., 3: вкл.+цикл); y: скорость; только для 5-го канала)";
     strings["15xx: Set modulation waveform (x: wavetable; channel 5 only)##sesd"].plurals[0] = "15xx: Настройка волны модулятора (x: волновая таблица; только для 5-го канала)";
+    strings["16xx: Set waveform (local)##sesd1"].plurals[0] = "16xx: Волна (локальная)";
     strings["like OPLL, but even more cost reductions applied. three less FM channels, and no drums mode...##sesd"].plurals[0] = "как OPLL, но ещё более удешевлённый. на три канала меньше, нет режима ударных...";
     strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.##sesd"].plurals[0] = "Taito попросили Yamaha вернуть два отсутствующих FM-канала, и Yamaha с радостью предоставила им этот чип.";
     strings["the ZX Spectrum only had a basic beeper capable of...\n...a bunch of thin pulses and tons of other interesting stuff!\nFurnace provides a thin pulse system.##sesd"].plurals[0] = "ZX Spectrum имел только пищалку, способную на...\n...несколько \"тонких\" прямоугольных волн и множество других интересных вещей!\nFurnace предоставляет систему с \"тонкими\" прямоугольными волнами.";
@@ -5183,6 +5199,7 @@ void DivLocale::addTranslationsRussian()
     strings["11xx: Set envelope shape##sesd"].plurals[0] = "11xx: Форма огибающей";
     strings["12xx: Set sample bank slot (0 to 7)##sesd"].plurals[0] = "12xx: Слот банка сэмплов (0-7)";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd4"].plurals[0] = "17xx: Переключить режим ИКМ (СОВМЕСТИМОСТЬ)";
+    strings["18xx: Set waveform (local)##sesd2"].plurals[0] = "18xx: Волна (локальная)";
     strings["20xx: Set PCM frequency (1 to FF)##sesd"].plurals[0] = "20xx: Частота ИКМ (1-FF)";
     strings["22xx: Set envelope mode (bit 0: enable; bit 1: one-shot; bit 2: split shape to L/R; bit 3/5: H.invert right/left; bit 4/6: V.invert right/left)##sesd"].plurals[0] = "22xx: Режим огибающей (бит 0: вкл.; бит 1: однокр.; бит 2: разделить форму на лево/право; биты 3/5: Г.инвертир. право/лево; бит 4/6: В.инвертир. право/лево)";
     strings["23xx: Set envelope period##sesd"].plurals[0] = "23xx: Период огибающей";
@@ -5243,6 +5260,7 @@ void DivLocale::addTranslationsRussian()
     strings["21xx: Select clock rate (0: full; 1: half)##sesd"].plurals[0] = "21xx: Тактовая частота (0: полная; 1: половинная)";
     strings["used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or 16-bit PCM.##sesd"].plurals[0] = "использовался в некоторых аркадных автоматах. Может воспроизводить 4-битные АДИКМ, 8- и 16-битные ИКМ сэмплы.";
     strings["10xx: Set waveform##sesd8"].plurals[0] = "10xx: Волна";
+    strings["11xx: Select waveform (local)##sesd1"].plurals[0] = "11xx: Волна (локальная)";
     strings["10xx: Set waveform##sesd9"].plurals[0] = "10xx: Волна";
     strings["11xx: Toggle noise mode##sesd2"].plurals[0] = "11xx: Переключить режим шума";
     strings["a wavetable sound chip used in Pac-Man, among other early Namco arcade games.##sesd"].plurals[0] = "таблично-волновой чип, использовавшийся в игровом автомате Pac-Man и других ранних автоматах Namco.";

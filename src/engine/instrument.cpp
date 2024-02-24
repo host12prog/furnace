@@ -583,7 +583,7 @@ void DivInstrument::writeFeatureWS(SafeWriter* w) {
   w->writeI(ws.wave2);
   w->writeC(ws.rateDivider);
   w->writeC(ws.effect);
-  w->writeC(ws.enabled);
+  w->writeC((ws.enabled ? 1 : 0) | ((ws.wave1global ? 1 : 0) << 1) | ((ws.wave2global ? 1 : 0) << 2));
   w->writeC(ws.global);
   w->writeC(ws.speed);
   w->writeC(ws.param1);
@@ -824,6 +824,20 @@ void DivInstrument::writeFeatureS2(SafeWriter* w) {
   FEATURE_END;
 }
 
+void DivInstrument::writeFeatureLW(SafeWriter* w) 
+{
+  FEATURE_BEGIN("LW");
+
+  w->writeI((int)std.local_waves.size());
+  for (int i=0; i<(int)std.local_waves.size(); i++) 
+  {
+    DivWavetable* wave=std.local_waves[i];
+    wave->putWaveData(w);
+  }
+
+  FEATURE_END;
+}
+
 void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bool insName, bool tilde_version) {
   size_t blockStartSeek=0;
   size_t blockEndSeek=0;
@@ -890,6 +904,8 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
   bool featureE3=false;
   bool featurePN=false;
   bool featureS2=false;
+
+  bool featureLW=(std.local_waves.size() > 0 ? true : false);
 
   bool checkForWL=false;
 
@@ -1109,6 +1125,8 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         break;
       case DIV_INS_ES5503:
         featureE3=true;
+        checkForWL=true;
+        if (ws.enabled) featureWS=true;
         break;
       case DIV_INS_POWERNOISE:
         featurePN=true;
@@ -1369,6 +1387,9 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
   }
   if (featureS2) {
     writeFeatureS2(w);
+  }
+  if (featureLW) {
+    writeFeatureLW(w);
   }
 
   if (fui && (featureSL || featureWL)) {
@@ -1842,7 +1863,10 @@ void DivInstrument::readFeatureWS(SafeReader& reader, short version) {
   ws.wave2=reader.readI();
   ws.rateDivider=reader.readC();
   ws.effect=reader.readC();
-  ws.enabled=reader.readC();
+  unsigned char temp = reader.readC();
+  ws.enabled = temp & 1;
+  ws.wave1global = temp & 2;
+  ws.wave2global = temp & 4;
   ws.global=reader.readC();
   ws.speed=reader.readC();
   ws.param1=reader.readC();
@@ -2138,6 +2162,24 @@ void DivInstrument::readFeatureS2(SafeReader& reader, short version) {
   READ_FEAT_END;
 }
 
+void DivInstrument::readFeatureLW(SafeReader& reader, short version) {
+  READ_FEAT_BEGIN;
+
+  int waves = reader.readI();
+
+  for (int i=0; i<waves; i++) 
+  {
+    DivWavetable* wave=new DivWavetable;
+
+    if (wave->readWaveData(reader,version)==DIV_DATA_SUCCESS) 
+    {
+      std.local_waves.push_back(wave);
+    }
+  }
+
+  READ_FEAT_END;
+}
+
 DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, bool fui, DivSong* song, bool tildearrow_version) {
   unsigned char featCode[2];
   bool volIsCutoff=false;
@@ -2241,8 +2283,10 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
       readFeatureE3(reader,version);
     } else if (memcmp(featCode,"PN",2)==0) { // PowerNoise
       readFeaturePN(reader,version);
-    } else if (memcmp(featCode,"S2",2)==0) { // PowerNoise
+    } else if (memcmp(featCode,"S2",2)==0) { // SID2
       readFeatureS2(reader,version);
+    } else if (memcmp(featCode,"LW",2)==0) { // local wavetables
+      readFeatureLW(reader,version);
     } else {
       if (song==NULL && (memcmp(featCode,"SL",2)==0 || (memcmp(featCode,"WL",2)==0))) {
         // nothing

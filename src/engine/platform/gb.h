@@ -30,7 +30,7 @@ class DivPlatformGB: public DivDispatch {
     unsigned char duty, sweep;
     bool sweepChanged, released, softEnv, killIt;
     bool soManyHacksToMakeItDefleCompatible;
-    signed short wave;
+    int wave;
     signed char lastKill;
     unsigned char envVol, envDir, envLen, soundLen;
     unsigned short hwSeqPos;

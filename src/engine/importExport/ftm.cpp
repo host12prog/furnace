@@ -218,6 +218,11 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
         }
       }
     }
+
+    if((DivMacroType)convert_macros_n163[macro_type] == DIV_MACRO_WAVE && ins->type == DIV_INS_N163)
+    {
+      to->val[i] |= (1 << 30); //referencing local wavetables!
+    }
   }
 
   to->len = from->len;
@@ -818,7 +823,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
               unsigned int wave_size = reader.readI();
               unsigned int wave_pos = reader.readI();
-              (void)wave_pos;
+              ins->n163.waveLen = wave_size;
+              ins->n163.wavePos = wave_pos;
 
               if(blockVersion >= 8)
               {
@@ -830,11 +836,23 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
               for(unsigned int ii = 0; ii < wave_count; ii++)
               {
+                DivWavetable* wave = new DivWavetable();
+                wave->len = wave_size;
+                wave->max = 15;
+
                 for(unsigned int jj = 0; jj < wave_size; jj++)
                 {
                   unsigned char val = reader.readC();
-                  (void)val;
+                  wave->data[jj] = val;
                 }
+
+                ins->std.local_waves.push_back(wave);
+              }
+
+              if(ins->std.get_macro(DIV_MACRO_WAVE, true)->len == 0) //empty wave macro
+              {
+                ins->std.get_macro(DIV_MACRO_WAVE, true)->len = 1;
+                ins->std.get_macro(DIV_MACRO_WAVE, true)->val[0] = 0 | (1 << 30); //force local wave number 0
               }
 
               break;
