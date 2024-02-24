@@ -5159,6 +5159,7 @@ void DivLocale::addTranslationsTemplate()
     strings["11xx: Toggle AM with next channel##sesd"].plurals[0] = "=11xx: Toggle AM with next channel";
     strings["12xx: Toggle period modulation with next channel##sesd"].plurals[0] = "=12xx: Toggle period modulation with next channel";
     strings["13xx: Set waveform##sesd"].plurals[0] = "=13xx: Set waveform";
+    strings["14xx: Set waveform (local)##sesd"].plurals[0] = "=14xx: Set waveform (local)";
     strings["this was Yamaha's first integrated FM chip.\nit was used in several synthesizers, computers and arcade boards.##sesd"].plurals[0] = "=this was Yamaha's first integrated FM chip.\nit was used in several synthesizers, computers and arcade boards.";
     strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).";
     strings["it's a challenge to make music on this chip which barely has musical capabilities...##sesd"].plurals[0] = "=it's a challenge to make music on this chip which barely has musical capabilities...";
