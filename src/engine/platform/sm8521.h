@@ -32,7 +32,7 @@ class DivPlatformSM8521: public DivDispatch {
 
   struct Channel: public SharedChannel<signed char> {
     int antiClickPeriodCount, antiClickWavePos;
-    signed short wave;
+    int wave;
     bool volumeChanged;
     DivWaveSynth ws;
     Channel():
