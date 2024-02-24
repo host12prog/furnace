@@ -2696,6 +2696,12 @@ int DivEngine::addLocalWave(int inst) {
   //checkAssetDir(song.waveDir,song.wave.size());
   saveLock.unlock();
   BUSY_END;
+
+  for (DivInstrument* _wi: song.ins) 
+  {
+    _wi->std.get_macro(DIV_MACRO_WAVE, true)->vZoom=-1;
+    _wi->std.get_macro(DIV_MACRO_WAVE, true)->vScroll=-1;
+  }
   return waveCount;
 }
 
@@ -3036,6 +3042,12 @@ void DivEngine::doPasteWaves(int index, bool local, int inst)
     {
       break;
     }
+  }
+
+  for (DivInstrument* _wi: song.ins) 
+  {
+    _wi->std.get_macro(DIV_MACRO_WAVE, true)->vZoom=-1;
+    _wi->std.get_macro(DIV_MACRO_WAVE, true)->vScroll=-1;
   }
 }
 
