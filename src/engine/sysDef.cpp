@@ -1608,6 +1608,7 @@ void DivEngine::registerSystems() {
       {0x11, {DIV_CMD_X1_010_ENVELOPE_SHAPE, "11xx: Set envelope shape##sesd"}},
       {0x12, {DIV_CMD_X1_010_SAMPLE_BANK_SLOT, "12xx: Set sample bank slot (0 to 7)##sesd"}},
       {0x17, {DIV_CMD_SAMPLE_MODE, "17xx: Toggle PCM mode (LEGACY)##sesd4"}},
+      {0x18, {DIV_CMD_WAVE_LOCAL, "18xx: Set waveform (local)##sesd2"}},
     },
     {
       {0x20, {DIV_CMD_SAMPLE_FREQ, "20xx: Set PCM frequency (1 to FF)##sesd"}},

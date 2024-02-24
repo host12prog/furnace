@@ -5309,6 +5309,7 @@ void DivLocale::addTranslationsTemplate()
     strings["11xx: Set envelope shape##sesd"].plurals[0] = "=11xx: Set envelope shape";
     strings["12xx: Set sample bank slot (0 to 7)##sesd"].plurals[0] = "=12xx: Set sample bank slot (0 to 7)";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd4"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["18xx: Set waveform (local)##sesd2"].plurals[0] = "=18xx: Set waveform (local)";
     strings["20xx: Set PCM frequency (1 to FF)##sesd"].plurals[0] = "=20xx: Set PCM frequency (1 to FF)";
     strings["22xx: Set envelope mode (bit 0: enable; bit 1: one-shot; bit 2: split shape to L/R; bit 3/5: H.invert right/left; bit 4/6: V.invert right/left)##sesd"].plurals[0] = "=22xx: Set envelope mode (bit 0: enable; bit 1: one-shot; bit 2: split shape to L/R; bit 3/5: H.invert right/left; bit 4/6: V.invert right/left)";
     strings["23xx: Set envelope period##sesd"].plurals[0] = "=23xx: Set envelope period";
