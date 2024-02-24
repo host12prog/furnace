@@ -2304,6 +2304,12 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
     }
   }
 
+  if((ws.wave1global == false || ws.wave2global == false) && std.local_waves.size() == 0) //just to be sure that we don't reference default wave
+  {
+    ws.wave1global = true;
+    ws.wave2global = true;
+  }
+
   // <187 C64 cutoff macro compatibility
   if (type==DIV_INS_C64 && volIsCutoff && version<187) 
   {
