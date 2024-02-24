@@ -1608,7 +1608,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
       }
     }
 
-    ds.version=DIV_VERSION_FTM;
+    //ds.version=DIV_VERSION_FTM;
+    ds.version=DIV_ENGINE_VERSION;
+    ds.insLen=ds.ins.size();
+    ds.sampleLen = ds.sample.size();
+    ds.waveLen = ds.wave.size();
 
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;
