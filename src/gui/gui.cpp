@@ -704,7 +704,9 @@ void FurnaceGUI::autoDetectSystem() {
       }
       if (isMatch) {
         logV("match found!");
-        e->song.systemName=j.name;
+        String xcv = j.name;
+        String temmrrrp = xcv.substr(0, xcv.find("##"));
+        e->song.systemName=temmrrrp;
         break;
       }
     }
