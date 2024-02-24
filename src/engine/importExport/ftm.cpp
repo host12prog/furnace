@@ -358,6 +358,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
     ds.linearPitch=0;
 
+    unsigned int pal = 0;
+
     while (true) {
       blockName=reader.readString(3);
       if (blockName=="END") {
@@ -386,7 +388,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           expansions=reader.readC();
         }
         tchans=reader.readI();
-        unsigned int pal=reader.readI();
+        pal=reader.readI();
         if (blockVersion>=7) {
           // advanced Hz control
           int controlType=reader.readI();
@@ -450,7 +452,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
         if(pal)
         {
-          ds.systemFlags[0].set("clockSel",1);
+          ds.systemFlags[0].set("clockSel",1); //PAL clock
         }
 
         for(int ch = 0; ch < 5; ch++)
@@ -585,6 +587,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           ds.subsong[i]->hilightB=hilightB;
           if (customHz!=0) {
             ds.subsong[i]->hz=customHz;
+
+            ds.subsong[i]->virtualTempoN = (short)(150.0 / (float)customHz * (pal ? (50.0) : (60.0)));
           }
           logV("- %s",subSongName);
         }
@@ -1070,11 +1074,18 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             s->speeds.val[0]=reader.readI();
           }
           if (blockVersion>=2) {
-            s->virtualTempoN=reader.readI();
+            int temp = s->virtualTempoN;
+            int tempo = reader.readI();
+
+            logI("tempo %d", tempo);
             
-            if(s->virtualTempoN == 0)
+            if(tempo == 0)
             {
-              s->virtualTempoN = 150; //TODO: make it properly
+              s->virtualTempoN = 150.0; //TODO: make it properly
+            }
+            else
+            {
+              s->virtualTempoN = (short)((float)temp * (float)tempo / 150.0);
             }
 
             s->patLen=reader.readI();
