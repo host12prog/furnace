@@ -5210,6 +5210,7 @@ void DivLocale::addTranslationsTemplate()
     strings["13xx: Set modulation speed low byte##sesd"].plurals[0] = "=13xx: Set modulation speed low byte";
     strings["14xx: Set modulator position##sesd"].plurals[0] = "=14xx: Set modulator position";
     strings["15xx: Set modulator table to waveform##sesd"].plurals[0] = "=15xx: Set modulator table to waveform";
+    strings["16xx: Set waveform (local)##sesd"].plurals[0] = "=16xx: Set waveform (local)";
     strings["an expansion chip for the Famicom, featuring a little-known PCM channel.##sesd"].plurals[0] = "=an expansion chip for the Famicom, featuring a little-known PCM channel.";
     strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd1"].plurals[0] = "=12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)";
     strings["an expansion chip for the Famicom, with full wavetable.##sesd"].plurals[0] = "=an expansion chip for the Famicom, with full wavetable.";

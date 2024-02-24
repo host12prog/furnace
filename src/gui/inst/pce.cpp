@@ -50,7 +50,7 @@ void FurnaceGUI::drawInsPCE(DivInstrument* ins)
       macroList.push_back(FurnaceGUIMacroDesc(_L("Noise##sgiPCE"),ins,DIV_MACRO_DUTY,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER]));
     }
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiPCE"),ins,DIV_MACRO_WAVE,0xff,0,WAVE_MACRO_MAX,160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiPCE"),ins,DIV_MACRO_WAVE,0xff,0,WAVE_MACRO_MAX,160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,false,NULL,true));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (left)##sgiPCE"),ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (right)##sgiPCE"),ins,DIV_MACRO_PAN_RIGHT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER]));
 

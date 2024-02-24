@@ -1062,6 +1062,7 @@ void DivEngine::registerSystems() {
       {0x13, {DIV_CMD_FDS_MOD_LOW, "13xx: Set modulation speed low byte##sesd"}},
       {0x14, {DIV_CMD_FDS_MOD_POS, "14xx: Set modulator position##sesd"}},
       {0x15, {DIV_CMD_FDS_MOD_WAVE, "15xx: Set modulator table to waveform##sesd"}},
+      {0x16, {DIV_CMD_WAVE_LOCAL, "16xx: Set waveform (local)##sesd"}},
     }
   );
 

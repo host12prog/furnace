@@ -5108,11 +5108,12 @@ void DivLocale::addTranslationsRussian()
     strings["cost-reduced version of the OPL with 16 patches and only one of them is user-configurable.##sesd"].plurals[0] = "удешевлённая версия OPL с 16-ю патчами, причём только один из них доступен для настройки пользователем.";
     strings["a disk drive for the Famicom which also contains one wavetable channel.##sesd"].plurals[0] = "дисковый привод для Famicom, также содержащий один канал волновых таблиц.";
     strings["10xx: Set waveform##sesd4"].plurals[0] = "10xx: Волна";
-    strings["11xx: Set modulation depth##sesd"].plurals[0] = "11xx: Глуюина модуляции";
+    strings["11xx: Set modulation depth##sesd"].plurals[0] = "11xx: Глубина модуляции";
     strings["12xy: Set modulation speed high byte (x: enable; y: value)##sesd"].plurals[0] = "12xy: Старший байт скорости модуляции (x: вкл.; y: значение)";
     strings["13xx: Set modulation speed low byte##sesd"].plurals[0] = "13xx: Младший байт скорости модуляции";
     strings["14xx: Set modulator position##sesd"].plurals[0] = "14xx: Положение модулятора";
     strings["15xx: Set modulator table to waveform##sesd"].plurals[0] = "15xx: Назначить таблицу модуляции волны";
+    strings["16xx: Set waveform (local)##sesd"].plurals[0] = "16xx: Волна (локальная)";
     strings["an expansion chip for the Famicom, featuring a little-known PCM channel.##sesd"].plurals[0] = "чип расширения для Famicom, имеющий малоизвестный канал ИКМ-сэмплов.";
     strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd1"].plurals[0] = "12xx: Скважность/режим шума (меандр: 0-3; шум: 0 или 1)";
     strings["an expansion chip for the Famicom, with full wavetable.##sesd"].plurals[0] = "чип расширения для Famicom, полностью на волновых таблицах.";
