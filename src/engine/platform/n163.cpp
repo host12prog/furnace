@@ -207,7 +207,7 @@ void DivPlatformN163::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || chan[i].ws.activeChanged()) {
         chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
-        chan[i].ws.changeWave1(chan[i].wave);
+        chan[i].ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_N163));
         if (chan[i].waveMode) {
           chan[i].waveUpdated=true;
         }
@@ -298,7 +298,7 @@ int DivPlatformN163::dispatch(DivCommand c) {
         if (chan[c.chan].wave<0) {
           chan[c.chan].wave=0;
         }
-        chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+        chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_N163));
         chan[c.chan].waveChanged=true;
         if (chan[c.chan].waveMode) {
           chan[c.chan].waveUpdated=true;
@@ -389,6 +389,15 @@ int DivPlatformN163::dispatch(DivCommand c) {
       chan[c.chan].wave=c.value;
       if (chan[c.chan].waveMode) {
         chan[c.chan].waveUpdated=true;
+        chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_N163));
+      }
+      chan[c.chan].keyOn=true;
+      break;
+    case DIV_CMD_WAVE_LOCAL:
+      chan[c.chan].wave=c.value | (1 << 30);
+      if (chan[c.chan].waveMode) {
+        chan[c.chan].waveUpdated=true;
+        chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_N163));
       }
       chan[c.chan].keyOn=true;
       break;
@@ -482,7 +491,7 @@ void DivPlatformN163::notifyWaveChange(int wave) {
   for (int i=0; i<8; i++) {
     if (chan[i].wave==wave) {
       if (chan[i].waveMode) {
-        chan[i].ws.changeWave1(wave);
+        chan[i].ws.changeWave1(wave & 0xff, false, (wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_N163));
         chan[i].waveUpdated=true;
       }
     }

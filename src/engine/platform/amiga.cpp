@@ -811,7 +811,7 @@ void DivPlatformAmiga::notifyInsChange(int ins) {
 void DivPlatformAmiga::notifyWaveChange(int wave) {
   for (int i=0; i<4; i++) {
     if (chan[i].useWave && chan[i].wave==wave) {
-      chan[i].ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_AMIGA));
+      chan[i].ws.changeWave1(wave & 0xff, false, (wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_AMIGA));
       chan[i].updateWave=true;
     }
   }
