@@ -4416,7 +4416,7 @@ void DivLocale::addTranslationsRussian()
     strings["14. Synth Bass##sgistru"].plurals[0] = "14. Синтезаторный бас";
     strings["15. Sitar##sgistru"].plurals[0] = "15. Ситар";
     strings["Drums##sgistru2"].plurals[0] = "Ударные";
-    strings["User##sgistru3"].plurals[0] = "Пользровательский";
+    strings["User##sgistru3"].plurals[0] = "Пользовательский";
     strings["1. Bell##sgistru"].plurals[0] = "1. Колокол";
     strings["2. Guitar##sgistru2"].plurals[0] = "2. Гитара";
     strings["3. Piano##sgistru1"].plurals[0] = "3. Пианино";
