@@ -5059,6 +5059,7 @@ void DivLocale::addTranslationsTemplate()
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "=3xxx: Set pulse width (0 to FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "=4xxx: Set cutoff (0 to 7FF)";
     strings["10xx: Set waveform##sesd0"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Set waveform (local)##sesd"].plurals[0] = "=11xx: Set waveform (local)";
     strings["20xx: Set PCM frequency##sesd"].plurals[0] = "=20xx: Set PCM frequency";
     strings["10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))##sesd"].plurals[0] = "=10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))";
     strings["12xx: Set level of operator 1 (0 highest, 3F lowest)##sesd2"].plurals[0] = "=12xx: Set level of operator 1 (0 highest, 3F lowest)";
@@ -5135,6 +5136,7 @@ void DivLocale::addTranslationsTemplate()
     strings["12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)##sesd"].plurals[0] = "=12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)";
     strings["13xx: Set LFO speed##sesd"].plurals[0] = "=13xx: Set LFO speed";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd1"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["18xx: Set waveform (local)##sesd"].plurals[0] = "=18xx: Set waveform (local)";
     strings["also known as Famicom in Japan, it's the most well-known game console of the '80s.##sesd"].plurals[0] = "=also known as Famicom in Japan, it's the most well-known game console of the '80s.";
     strings["11xx: Write to delta modulation counter (0 to 7F)##sesd"].plurals[0] = "=11xx: Write to delta modulation counter (0 to 7F)";
     strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd0"].plurals[0] = "=12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)";
@@ -5194,6 +5196,7 @@ void DivLocale::addTranslationsTemplate()
     strings["14xy: Toggle invert (x: left; y: right)##sesd"].plurals[0] = "=14xy: Toggle invert (x: left; y: right)";
     strings["15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)##sesd"].plurals[0] = "=15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)";
     strings["16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)##sesd"].plurals[0] = "=16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)";
+    strings["17xx: Set waveform (local)##sesd"].plurals[0] = "=17xx: Set waveform (local)";
     strings["1Dxx: Set noise frequency (00 to 1F)##sesd"].plurals[0] = "=1Dxx: Set noise frequency (00 to 1F)";
     strings["20xx: Set attack (0 to F)##sesd"].plurals[0] = "=20xx: Set attack (0 to F)";
     strings["21xx: Set decay (0 to 7)##sesd"].plurals[0] = "=21xx: Set decay (0 to 7)";
@@ -5223,6 +5226,7 @@ void DivLocale::addTranslationsTemplate()
     strings["12xx: Set waveform length in RAM (04 to FC in steps of 4)##sesd"].plurals[0] = "=12xx: Set waveform length in RAM (04 to FC in steps of 4)";
     strings["15xx: Set waveform load position##sesd"].plurals[0] = "=15xx: Set waveform load position";
     strings["16xx: Set waveform load length (04 to FC in steps of 4)##sesd"].plurals[0] = "=16xx: Set waveform load length (04 to FC in steps of 4)";
+    strings["17xx: Select waveform (local)##sesd1"].plurals[0] = "=17xx: Select waveform (local)";
     strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)##sesd"].plurals[0] = "=cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)";
     strings["Yamaha YM2203 (OPN) Extended Channel 3##sesd"].plurals[0] = "=Yamaha YM2203 (OPN) Extended Channel 3";
     strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies##sesd"].plurals[0] = "=cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies";
@@ -5250,6 +5254,7 @@ void DivLocale::addTranslationsTemplate()
     strings["12xx: Setup sweep period (0: disabled; 1-20: enabled/period)##sesd"].plurals[0] = "=12xx: Setup sweep period (0: disabled; 1-20: enabled/period)";
     strings["13xx: Set sweep amount##sesd"].plurals[0] = "=13xx: Set sweep amount";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd3"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["18xx: Set waveform (local)##sesd1"].plurals[0] = "=18xx: Set waveform (local)";
     strings["like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.##sesd"].plurals[0] = "=like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.";
     strings["2Fxx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "=2Fxx: Toggle hard envelope reset on new notes";
     strings["this one is like PC Speaker but has duty cycles.##sesd"].plurals[0] = "=this one is like PC Speaker but has duty cycles.";
@@ -5261,6 +5266,7 @@ void DivLocale::addTranslationsTemplate()
     strings["13xy: Setup sweep (x: speed; y: shift; channel 5 only)##sesd"].plurals[0] = "=13xy: Setup sweep (x: speed; y: shift; channel 5 only)";
     strings["14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)##sesd"].plurals[0] = "=14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)";
     strings["15xx: Set modulation waveform (x: wavetable; channel 5 only)##sesd"].plurals[0] = "=15xx: Set modulation waveform (x: wavetable; channel 5 only)";
+    strings["16xx: Set waveform (local)##sesd1"].plurals[0] = "=16xx: Set waveform (local)";
     strings["like OPLL, but even more cost reductions applied. three less FM channels, and no drums mode...##sesd"].plurals[0] = "=like OPLL, but even more cost reductions applied. three less FM channels, and no drums mode...";
     strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.##sesd"].plurals[0] = "=so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.";
     strings["ZX Spectrum Beeper##sesd"].plurals[0] = "=ZX Spectrum Beeper";
@@ -5365,6 +5371,7 @@ void DivLocale::addTranslationsTemplate()
     strings["21xx: Select clock rate (0: full; 1: half)##sesd"].plurals[0] = "=21xx: Select clock rate (0: full; 1: half)";
     strings["used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or 16-bit PCM.##sesd"].plurals[0] = "=used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or 16-bit PCM.";
     strings["10xx: Set waveform##sesd8"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Select waveform (local)##sesd1"].plurals[0] = "=11xx: Select waveform (local)";
     strings["10xx: Set waveform##sesd9"].plurals[0] = "=10xx: Set waveform";
     strings["11xx: Toggle noise mode##sesd2"].plurals[0] = "=11xx: Toggle noise mode";
     strings["a wavetable sound chip used in Pac-Man, among other early Namco arcade games.##sesd"].plurals[0] = "=a wavetable sound chip used in Pac-Man, among other early Namco arcade games.";
