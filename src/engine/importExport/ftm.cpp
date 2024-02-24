@@ -223,6 +223,11 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
     {
       to->val[i] |= (1 << 30); //referencing local wavetables!
     }
+
+    if((DivMacroType)convert_macros_n163[macro_type] == DIV_MACRO_PITCH && ins->type == DIV_INS_N163)
+    {
+      to->val[i] *= -1; //wtf is going on!!!
+    }
   }
 
   to->len = from->len;
@@ -1464,7 +1469,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             DivInstrument* ins=ds.ins[k];
             if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_N163 && hasSequence[k][Types[i]])
             {
-              copy_macro(ins, &macros[sequenceIndex[index][type]][type], type, setting);
+              copy_macro(ins, &macros[index][type], type, setting);
               //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[index][type]][type], sizeof(DivInstrumentMacro));
             }
           }
