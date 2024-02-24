@@ -686,7 +686,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
               const int dpcmNotes=(blockVersion>=2)?96:72;
               for (int j=0; j<dpcmNotes; j++) {
                 ins->amiga.get_amiga_sample_map(j, true)->map=(short)((unsigned char)reader.readC())-1;
-                ins->amiga.get_amiga_sample_map(j, true)->dpcmFreq=((unsigned char)reader.readC() & 15); //0-15 = 0-15 unlooped, 128-143 = 0-15 looped; we ignore loop flag
+                unsigned char freq = reader.readC();
+                ins->amiga.get_amiga_sample_map(j, true)->dpcmFreq=(freq & 15); //0-15 = 0-15 unlooped, 128-143 = 0-15 looped
+                ins->amiga.get_amiga_sample_map(j, true)->freq = (freq & 0x80) ? 1 : 0; //loop
                 if (blockVersion>=6) {
                   ins->amiga.get_amiga_sample_map(j, true)->dpcmDelta=(unsigned char)reader.readC(); // DMC value
                 }

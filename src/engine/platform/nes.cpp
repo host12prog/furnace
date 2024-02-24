@@ -335,6 +335,15 @@ void DivPlatformNES::tick(bool sysTick) {
           unsigned int dpcmLen=parent->getSample(dacSample)->lengthDPCM>>4;
           if (dpcmLen>255) dpcmLen=255;
           goingToLoop=parent->getSample(dacSample)->isLoopable();
+
+          DivInstrument* ins = parent->getIns(chan[4].ins, DIV_INS_NES);
+          if (ins->amiga.useNoteMap)
+          {
+            if(ins->type==DIV_INS_NES && !parent->song.oldDPCM)
+            {
+              goingToLoop=ins->amiga.getFreq(chan[4].note) ? true : false;
+            }
+          }
           // write DPCM
           rWrite(0x4015,15);
           if (nextDPCMFreq>=0) {
@@ -376,6 +385,7 @@ void DivPlatformNES::tick(bool sysTick) {
 int DivPlatformNES::dispatch(DivCommand c) {
   switch (c.cmd) {
     case DIV_CMD_NOTE_ON:
+      chan[c.chan].note = c.value;
       if (c.chan==4) { // PCM
         DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_NES);
         if (ins->type==DIV_INS_AMIGA || (ins->type==DIV_INS_NES && !parent->song.oldDPCM)) {
@@ -396,6 +406,11 @@ int DivPlatformNES::dispatch(DivCommand c) {
               if (nextDPCMFreq<0 || nextDPCMFreq>15) nextDPCMFreq=lastDPCMFreq;
               lastDPCMFreq=nextDPCMFreq;
               nextDPCMDelta=ins->amiga.getDPCMDelta(c.value);
+
+              if(ins->type==DIV_INS_NES && !parent->song.oldDPCM)
+              {
+                goingToLoop=ins->amiga.getFreq(c.value) ? true : false;
+              }
             } else {
               if (c.value==DIV_NOTE_NULL) {
                 nextDPCMFreq=lastDPCMFreq;
@@ -628,6 +643,14 @@ int DivPlatformNES::dispatch(DivCommand c) {
       break;
     case DIV_CMD_SAMPLE_FREQ: {
       bool goingToLoop=parent->getSample(dacSample)->isLoopable();
+      DivInstrument* ins = parent->getIns(chan[4].ins, DIV_INS_NES);
+      if (ins->amiga.useNoteMap)
+      {
+        if(ins->type==DIV_INS_NES && !parent->song.oldDPCM)
+        {
+          goingToLoop=ins->amiga.getFreq(chan[4].note) ? true : false;
+        }
+      }
       if (dpcmMode) {
         nextDPCMFreq=c.value&15;
         rWrite(0x4010,(c.value&15)|(goingToLoop?0x40:0));

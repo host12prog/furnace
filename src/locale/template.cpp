@@ -4250,9 +4250,11 @@ void DivLocale::addTranslationsTemplate()
     strings["Width##sgismpd"].plurals[0] = "=Width";
     strings["Use sample map##sgismpd"].plurals[0] = "=Use sample map";
     strings["pitch##sgismpd"].plurals[0] = "=pitch";
+    strings["loop##sgismpd"].plurals[0] = "=loop";
     strings["delta##sgismpd"].plurals[0] = "=delta";
     strings["note##sgismpd"].plurals[0] = "=note";
     strings["sample name##sgismpd"].plurals[0] = "=sample name";
+    strings["L##L%d"].plurals[0] = "=L##L%d";
     strings["set entire map to this pitch##sgismpd"].plurals[0] = "=set entire map to this pitch";
     strings["set entire map to this delta counter value##sgismpd"].plurals[0] = "=set entire map to this delta counter value";
     strings["set entire map to this note##sgismpd"].plurals[0] = "=set entire map to this note";

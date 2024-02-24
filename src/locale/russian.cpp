@@ -4172,9 +4172,11 @@ void DivLocale::addTranslationsRussian()
     strings["Width##sgismpd"].plurals[0] = "Длина";
     strings["Use sample map##sgismpd"].plurals[0] = "Использовать карту сэмплов";
     strings["pitch##sgismpd"].plurals[0] = "частота";
+    strings["loop##sgismpd"].plurals[0] = "цикл";
     strings["delta##sgismpd"].plurals[0] = "нач. знач.";
     strings["note##sgismpd"].plurals[0] = "нота";
     strings["sample name##sgismpd"].plurals[0] = "название сэмпла";
+    strings["L##L%d"].plurals[0] = "Ц##L%d";
     strings["set entire map to this pitch##sgismpd"].plurals[0] = "установить эту частоту для всей карты";
     strings["set entire map to this delta counter value##sgismpd"].plurals[0] = "установить это нач. знач. дельта-счётчика для всей карты";
     strings["set entire map to this note##sgismpd"].plurals[0] = "установить эту ноту для всей карты";
