@@ -2888,7 +2888,7 @@ void DivLocale::addTranslationsPolish()
     strings["Export options layout:##sgse"].plurals[0] = "Układ opcji eksportu:";
     strings["Sub-menus in File menu##eol0"].plurals[0] = "Menu podrzędne w menu \"Plik\"##eol0";
     strings["Modal window with tabs##eol1"].plurals[0] = "Modalne okno z zakładkami##eol1";
-    strings["Modal windows with options in File menu##eol2"].plurals[0] = "Okno modalne z ustawieniami w menu "Plik"";
+    strings["Modal windows with options in File menu##eol2"].plurals[0] = "Okno modalne z ustawieniami w menu \"Plik\"";
     strings["Capitalize menu bar##sgse"].plurals[0] = "Pozycje paska menu zaczynają się od wielkiej litery";
     strings["Display add/configure/change/remove chip menus in File menu##sgse"].plurals[0] = "Wyświetlanie pozycji: Dodaj/Zmień/Usuń Chip w menu \"Plik\".";
     strings["Orders##sgse1"].plurals[0] = "Matryca wzorców";
