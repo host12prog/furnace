@@ -232,7 +232,9 @@ void FurnaceGUI::drawNewSong() {
   }
 
   if (accepted) {
-    e->createNew(nextDesc.c_str(),nextDescName,false);
+    String temmrrrp = nextDescName.substr(0, nextDescName.find("##"));
+    String temmrrrp_desc = nextDesc.substr(0, nextDesc.find("##"));
+    e->createNew(temmrrrp_desc.c_str(),temmrrrp,false);
     undoHist.clear();
     redoHist.clear();
     curFileName="";
