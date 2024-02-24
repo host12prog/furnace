@@ -122,7 +122,7 @@ void DivPlatformSCC::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || chan[i].ws.activeChanged()) {
         chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
-        chan[i].ws.changeWave1(chan[i].wave);
+        chan[i].ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_SCC));
       }
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
@@ -174,7 +174,7 @@ int DivPlatformSCC::dispatch(DivCommand c) {
       }
       if (chan[c.chan].wave<0) {
         chan[c.chan].wave=0;
-        chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+        chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_SCC));
       }
       chan[c.chan].ws.init(ins,32,255,chan[c.chan].insChanged);
       chan[c.chan].insChanged=false;
@@ -215,7 +215,11 @@ int DivPlatformSCC::dispatch(DivCommand c) {
       break;
     case DIV_CMD_WAVE:
       chan[c.chan].wave=c.value;
-      chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_SCC));
+      break;
+    case DIV_CMD_WAVE_LOCAL:
+      chan[c.chan].wave=c.value | (1 << 30);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_SCC));
       break;
     case DIV_CMD_NOTE_PORTA: {
       int destFreq=NOTE_PERIODIC(c.value2);
@@ -340,7 +344,7 @@ int DivPlatformSCC::getOutputCount() {
 void DivPlatformSCC::notifyWaveChange(int wave) {
   for (int i=0; i<5; i++) {
     if (chan[i].wave==wave) {
-      chan[i].ws.changeWave1(chan[i].wave);
+      chan[i].ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_SCC));
       if (chan[i].active) {
         updateWave(i);
       }
