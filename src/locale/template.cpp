@@ -1562,6 +1562,7 @@ void DivLocale::addTranslationsTemplate()
 
     //   sgor  src/gui/orders.cpp
 
+    strings["Orders###Orders"].plurals[0] = "=Orders###Orders";
     strings["Add new order##sgor"].plurals[0] = "=Add new order";
     strings["Remove order##sgor"].plurals[0] = "=Remove order";
     strings["Duplicate order (right-click to deep clone)##sgor"].plurals[0] = "=Duplicate order (right-click to deep clone)";
@@ -2478,6 +2479,27 @@ void DivLocale::addTranslationsTemplate()
     strings["(-Infinity)dB,(-Infinity)dB##sgxy"].plurals[0] = "=(-Infinity)dB,(-Infinity)dB";
     strings["(-Infinity)dB,%.1fdB##sgxy"].plurals[0] = "=(-Infinity)dB,%.1fdB";
     strings["%.1fdB,(-Infinity)dB##sgxy"].plurals[0] = "=%.1fdB,(-Infinity)dB";
+    
+    //MACRO EDITOR
+
+    //macro hover notes
+
+    strings["exponential##sgmu"].plurals[0] = "=exponential";
+    strings["linear##sgmu"].plurals[0] = "=linear";
+    strings["direct##sgmu"].plurals[0] = "=direct";
+
+    strings["Release"].plurals[0] = "=Release";
+    strings["Loop"].plurals[0] = "=Loop";
+
+    strings["HP/K2, HP/K2##sgmu"].plurals[0] = "=HP/K2, HP/K2";
+    strings["HP/K2, LP/K1##sgmu"].plurals[0] = "=HP/K2, LP/K1";
+    strings["LP/K2, LP/K2##sgmu"].plurals[0] = "=LP/K2, LP/K2";
+    strings["LP/K2, LP/K1##sgmu"].plurals[0] = "=LP/K2, LP/K1";
+
+    strings["Saw##sgmu"].plurals[0] = "=Saw";
+    strings["Square##sgmu"].plurals[0] = "=Square";
+    strings["Triangle##sgmu"].plurals[0] = "=Triangle";
+    strings["Random##sgmu"].plurals[0] = "=Random";
 
     //   sgse  src/gui/settings.cpp
 
