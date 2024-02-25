@@ -732,11 +732,36 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             case DIV_INS_OPLL: {
               ins->fm.opllPreset=(unsigned int)reader.readI();
               
+              unsigned char custom_patch[8] = { 0 };
+
               for(int i = 0; i < 8; i++)
               {
-                unsigned char custom_patch = reader.readC();
-                (void)custom_patch;
+                custom_patch[i] = reader.readC();
               }
+
+              for(int i = 0; i < 2; i++)
+              {
+                ins->fm.op[i].am = custom_patch[i] >> 7;
+                ins->fm.op[i].vib = (custom_patch[i] >> 6) & 1;
+                ins->fm.op[i].ksr = (custom_patch[i] >> 5) & 1;
+                ins->fm.op[i].ksr = (custom_patch[i] >> 4) & 1;
+
+                ins->fm.op[i].mult = custom_patch[i] & 15;
+
+                ins->fm.op[i].ksl = custom_patch[i + 2] >> 6;
+
+                ins->fm.op[i].ar = custom_patch[i + 4] >> 4;
+                ins->fm.op[i].dr = custom_patch[i + 4] & 15;
+
+                ins->fm.op[i].sl = custom_patch[i + 6] >> 4;
+                ins->fm.op[i].rr = custom_patch[i + 6] & 15;
+              }
+
+              ins->fm.fms = (custom_patch[3] >> 4) & 1;
+              ins->fm.ams = (custom_patch[3] >> 3) & 1;
+              ins->fm.fb = custom_patch[3] & 7;
+              
+              ins->fm.op[0].tl = custom_patch[2] & 0x3f;
               break;
             }
             case DIV_INS_FDS: {
