@@ -1563,6 +1563,8 @@ void DivLocale::addTranslationsPortuguese()
 
     //   sgor  src/gui/orders.cpp
 
+    strings["Orders###Orders"].plurals[0] = "Ordens###Orders";
+
     strings["Add new order##sgor"].plurals[0] = "Adicionar nova ordem";
     strings["Remove order##sgor"].plurals[0] = "Remover ordem";
     strings["Duplicate order (right-click to deep clone)##sgor"].plurals[0] = "Duplicar ordem (clique com o botão direito para um clone profundo)";
@@ -4867,7 +4869,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["09xx: Set groove pattern (speed 1 if no grooves exist)##seen"].plurals[0] = "09xx: Escolher padrão de groove (velocidade 1 se não houverem grooves)";
     strings["0Axy: Volume slide (0y: down; x0: up)##seen"].plurals[0] = "0Axy: Slide de volume (0y: para baixo; x0: para cima)";
     strings["0Bxx: Jump to pattern##seen"].plurals[0] = "0Bxx: Pular para sequência"; // não deveria ser "pular para ordem"?
-    strings["0Cxx: Retrigger##seen"].plurals[0] = "0Cxx: Reacionar";
+    strings["0Cxx: Retrigger##seen"].plurals[0] = "0Cxx: Reacionar nota";
     strings["0Dxx: Jump to next pattern##seen"].plurals[0] = "0Dxx: Pular para a próxima sequência";
     strings["0Fxx: Set speed (speed 2 if no grooves exist)##seen"].plurals[0] = "0Fxx: Definir velocidade (define a velocidade 2 se não houverem grooves)";
     strings["80xx: Set panning (00: left; 80: center; FF: right)##seen"].plurals[0] = "80xx: Definir balanço (00: esquerda; 80: centro; FF: direita)";
@@ -4884,7 +4886,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: Definir alcance do vibrato";
     strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: Definir tom (desafinação; 80: centro)";
     strings["EAxx: Legato##seen"].plurals[0] = "EAxx: Legato";
-    strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: definir banco de samples modo LEGADO";
+    strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: Definir banco de samples modo LEGADO";
     strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: Corte de nota";
     strings["EDxx: Note delay##seen"].plurals[0] = "EDxx: Atraso de nota";
     strings["EExx: Send external command##seen"].plurals[0] = "EExx: Enviar comando externo";
