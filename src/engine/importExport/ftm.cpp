@@ -117,7 +117,7 @@ const int ftEffectMap[]={
   -1, // delayed release - not supported yet
   0x09, // select groove
   -1, // transpose - not supported
-  0x10, // Namco 163
+  0x11, // Namco 163 wave RAM offset
   -1, // FDS vol env - not supported
   -1, // FDS auto FM - not supported yet
   -1, // phase reset - not supported
@@ -299,7 +299,7 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
   }
 }
 
-bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
+bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_sig) {
   SafeReader reader=SafeReader(file,len);
   warnings="";
   try {
@@ -319,6 +319,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
 
     unsigned char fds_chan = 0xff;
     unsigned char vrc6_saw_chan = 0xff;
+    unsigned char n163_chans[8] = { 0xff };
 
     int total_chans = 0;
     
@@ -339,7 +340,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
       macros.push_back(mac);
     }
 
-    if (!reader.seek(dnft ? 21 : 18,SEEK_SET)) {
+    if (!reader.seek((dnft && dnft_sig) ? 21 : 18,SEEK_SET)) {
       logE("premature end of file!");
       lastError="incomplete file";
       delete[] file;
@@ -502,6 +503,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
           {
             map_channels[curr_chan] = map_ch;
             curr_chan++;
+            n163_chans[ch] = map_ch;
             map_ch++;
           }
 
@@ -1082,7 +1084,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             int temp = s->virtualTempoN;
             int tempo = reader.readI();
 
-            logI("tempo %d", tempo);
+            logV("tempo %d", tempo);
             
             if(tempo == 0)
             {
@@ -1200,6 +1202,17 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
             for (int j=0; j<effectCols; j++) {
               unsigned char nextEffect=reader.readC();
 
+              for(int v = 0; v < 8; v++)
+              {
+                if(map_channels[ch] == n163_chans[v])
+                {
+                  if(nextEffect == FT_EF_SAMPLE_OFFSET)
+                  {
+                    nextEffect = FT_EF_N163_WAVE_BUFFER;
+                  }
+                }
+              }
+
               if(ds.version < 0x0450 || dnft)
               {
                 unsigned char idx = 0;
@@ -1219,12 +1232,10 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
                 stop:;
               }
 
-              
-
               unsigned char nextEffectVal=0;
               if (nextEffect!=0 || blockVersion<6) nextEffectVal=reader.readC();
               
-              logW("next effect %d val %d", nextEffect, nextEffectVal);
+              //logW("next effect %d val %d", nextEffect, nextEffectVal);
 
               if(map_channels[ch] != 0xff)
               {

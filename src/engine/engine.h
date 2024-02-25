@@ -550,7 +550,7 @@ class DivEngine {
   bool loadFur(unsigned char* file, size_t len, bool tildearrow_version);
   bool loadMod(unsigned char* file, size_t len);
   bool loadS3M(unsigned char* file, size_t len);
-  bool loadFTM(unsigned char* file, size_t len, bool dnft);
+  bool loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_sig);
   bool loadFC(unsigned char* file, size_t len);
 
   void loadDMP(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath);
@@ -634,7 +634,7 @@ class DivEngine {
     void createNew(const char* description, String sysName, bool inBase64=true);
     void createNewFromDefaults();
     // load a file.
-    bool load(unsigned char* f, size_t length);
+    bool load(unsigned char* f, size_t length, String path);
     // play a binary command stream.
     bool playStream(unsigned char* f, size_t length);
     // save as .dmf.

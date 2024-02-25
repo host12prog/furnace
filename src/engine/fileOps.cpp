@@ -2048,7 +2048,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
   return true;
 }
 
-bool DivEngine::load(unsigned char* f, size_t slen) {
+bool DivEngine::load(unsigned char* f, size_t slen, String path) {
   unsigned char* file;
   size_t len;
   if (slen<18) {
@@ -2056,6 +2056,13 @@ bool DivEngine::load(unsigned char* f, size_t slen) {
     lastError="file is too small";
     delete[] f;
     return false;
+  }
+
+  bool dnft_extension = false;
+
+  if (path.find(".dnm") != std::string::npos)
+  {
+    dnft_extension = true;
   }
 
   if (!systemsRegistered) registerSystems();
@@ -2157,9 +2164,9 @@ bool DivEngine::load(unsigned char* f, size_t slen) {
   if (memcmp(file,DIV_DMF_MAGIC,16)==0) {
     return loadDMF(file,len); 
   } else if (memcmp(file,DIV_FTM_MAGIC,18)==0) {
-    return loadFTM(file,len,false);
+    return loadFTM(file,len,false || dnft_extension,false);
   } else if (memcmp(file,DIV_DN_FTM_MAGIC,21)==0) {
-    return loadFTM(file,len,true);
+    return loadFTM(file,len,true,true);
   } else if (memcmp(file,DIV_FUR_MAGIC,16)==0) {
     return loadFur(file,len,false);
   } else if (memcmp(file,DIV_FUR_B_MAGIC,16)==0) {
