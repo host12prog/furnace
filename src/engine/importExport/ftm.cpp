@@ -1219,8 +1219,13 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft) {
                 stop:;
               }
 
+              
+
               unsigned char nextEffectVal=0;
               if (nextEffect!=0 || blockVersion<6) nextEffectVal=reader.readC();
+              
+              logW("next effect %d val %d", nextEffect, nextEffectVal);
+
               if(map_channels[ch] != 0xff)
               {
                 if (nextEffect==0 && nextEffectVal==0) {
