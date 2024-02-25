@@ -1276,6 +1276,16 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                     {
                       pat->data[row][4+(j*2)] = 0xf0; //BPM speed change!
                     }
+                    for(int v = 0; v < 8; v++)
+                    {
+                      if(map_channels[ch] == n163_chans[v])
+                      {
+                        if(pat->data[row][4 + (j * 2)] == 0x12)
+                        {
+                          pat->data[row][4 + (j * 2)] = 0x17; //local wave
+                        }
+                      }
+                    }
                   } else {
                     pat->data[row][4+(j*2)]=-1;
                     pat->data[row][5+(j*2)]=-1;
