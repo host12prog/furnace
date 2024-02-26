@@ -458,7 +458,7 @@ void DivLocale::addTranslationsPolish()
     strings["text file##sggu1"].plurals[0] = "plik tekstowy";
     strings["Export Command Stream##sggu2"].plurals[0] = "eksportuj strumień komend";
     strings["binary file##sggu"].plurals[0] = "plik binarny";
-    strings["Coming soon!##sggu"].plurals[0] = "Juz wkrótce!";
+    strings["Coming soon!##sggu"].plurals[0] = "Już wkrótce!";
     strings["Select Font##sggu0"].plurals[0] = "Wybierz czcionkę";
     strings["compatible files##sggu4"].plurals[0] = "kompatybilne pliki";
     strings["Select Font##sggu1"].plurals[0] = "Wybierz czcionkę";
@@ -469,9 +469,9 @@ void DivLocale::addTranslationsPolish()
     strings["configuration files##sggu0"].plurals[0] = "pliki konfiguracji";
     strings["Select Keybind File##sggu"].plurals[0] = "Wybierz plik z przypisaniami klawiszy";
     strings["configuration files##sggu1"].plurals[0] = "pliki konfiguracji";
-    strings["Select Layout File##sggu"].plurals[0] = "Wybierz plik z ustawieniami ukladu okna";
+    strings["Select Layout File##sggu"].plurals[0] = "Wybierz plik z ustawieniami układu okna";
     strings[".ini files##sggu0"].plurals[0] = "pliki .ini";
-    strings["Export Colors##sggu"].plurals[0] = "eksportuj ustawienia kolorow";
+    strings["Export Colors##sggu"].plurals[0] = "eksportuj ustawienia koloró";
     strings["configuration files##sggu2"].plurals[0] = "pliki konfiguracji";
     strings["Export Keybinds##sggu"].plurals[0] = "eksportuj przypisania klawiszy";
     strings["configuration files##sggu3"].plurals[0] = "pliki konfiguracji";
@@ -1115,7 +1115,7 @@ void DivLocale::addTranslationsPolish()
     //   sgec  src/gui/editControls.cpp
 
     strings["Mobile Edit###MobileEdit"].plurals[0] = "Mobilne menu edytowania###MobileEdit";
-    strings["Mobile Controls###Mobile Controls"].plurals[0] = "Mobile menu ustawien###Mobile Controls";
+    strings["Mobile Controls###Mobile Controls"].plurals[0] = "Mobilne menu ustawien###Mobile Controls";
     strings["Mobile Menu###Mobile Menu"].plurals[0] = "Mobilne menu###Mobile Menu";
     strings["Pattern##sgec0"].plurals[0] = "Wzorzec";
     strings["Orders##sgec0"].plurals[0] = "Matryca wzorców";
@@ -2265,7 +2265,7 @@ void DivLocale::addTranslationsPolish()
 
     //   sgsm  src/gui/sysManager.cpp
 
-    strings["Chip Manager###Chip Manager"].plurals[0] = "Menedżer układó###Chip Manager";
+    strings["Chip Manager###Chip Manager"].plurals[0] = "Menedżer układów###Chip Manager";
     strings["Preserve channel order##sgsm"].plurals[0] = "Zachowaj kolejność kanałów";
     strings["Clone channel data##sgsm"].plurals[0] = "Klonuj dane kanału";
     strings["Clone at end##sgsm"].plurals[0] = "Sklonuj i wstaw na koniec";
@@ -2444,7 +2444,7 @@ void DivLocale::addTranslationsPolish()
     strings["LP/K2, LP/K2##sgmu"].plurals[0] = "LP/K2, LP/K2";
     strings["LP/K2, LP/K1##sgmu"].plurals[0] = "LP/K2, LP/K1";
 
-    strings["Saw##sgmu"].plurals[0] = "Пила";
+    strings["Saw##sgmu"].plurals[0] = "Fala piłokształtna";
     strings["Square##sgmu"].plurals[0] = "Fala kwadratowa";
     strings["Triangle##sgmu"].plurals[0] = "Fala trójkątna";
     strings["Random##sgmu"].plurals[0] = "Szum";
@@ -2517,23 +2517,23 @@ void DivLocale::addTranslationsPolish()
     strings["General##sgse"].plurals[0] = "Ogólne";
     strings["Program##sgse1"].plurals[0] = "Program";
     strings["Render backend##sgse"].plurals[0] = "Biblioteka renderownaia";
-    strings["you may need to restart Furnace for this setting to take effect.##sgse0"].plurals[0] = "może być konieczne ponowne uruchomienie Furnace, aby to ustawienie zostało zastosowane.";
+    strings["you may need to restart Furnace for this setting to take effect.##sgse0"].plurals[0] = "może być konieczne ponowne uruchomienie Furnace, aby ta opcja została zastosowana";
     strings["Render driver##sgse"].plurals[0] = "Sterownik renderowwania";
     strings["Automatic##sgse0"].plurals[0] = "Automatyczny";
     strings["Automatic##sgse1"].plurals[0] = "Automatyczny";
-    strings["you may need to restart Furnace for this setting to take effect.##sgse1"].plurals[0] = "może być konieczne ponowne uruchomienie Furnace, aby to ustawienie zostało zastosowane.";
+    strings["you may need to restart Furnace for this setting to take effect.##sgse1"].plurals[0] = "może być konieczne ponowne uruchomienie Furnace, aby ta opcja została zastosowana.";
     strings["Late render clear##sgse"].plurals[0] = "Opóźnione czyszczenie bufora renderowania";
     strings["calls rend->clear() after rend->present(). might reduce UI latency by one frame in some drivers.##sgse"].plurals[0] = "Wywołuje rend->clear() po rend->present(). Może wyeliminować opóźnienie o jedną klatkę w renderowaniu interfejsu przy niektórych sterownikach.";
     strings["Power-saving mode##sgse"].plurals[0] = "Tryb oszczędzania energii";
     strings["saves power by lowering the frame rate to 2fps when idle.\nmay cause issues under Mesa drivers!##sgse"].plurals[0] = "zmniejsza zużycie energii, redukując szybkość renderowania do dwóch klatek na sekundę w trybie czuwania.\nmoże powodować problemy pod sterownikami Mesa!";
     strings["Disable threaded input (restart after changing!)##sgse"].plurals[0] = "Wyłącz przetwarzanie naciśnięć klawiszy w osobnych wątkach (uruchom ponownie program po zmianie!).";
-    strings["threaded input processes key presses for note preview on a separate thread (on supported platforms), which reduces latency.\nhowever, crashes have been reported when threaded input is on. enable this option if that is the case.##sgse"].plurals[0] = "Przetwarzanie naciśnięć klawiszy dla podglądu instrumentów odbywa się wielowątkowo (na obsługiwanych platformach), co zmniejsza opóźnienia.\nsą jednak doniesienia o zawieszaniu się programu przy wyłączonym ustawieniu, w takim przypadku włącz je.";
-    strings["Enable event delay##sgse"].plurals[0] = "Включить задержку событий";
-    strings["may cause issues with high-polling-rate mice when previewing notes.##sgse"].plurals[0] = "может привести к проблемам во время превью инструмента, если подключена мышь с большой частотой обновления.";
-    strings["Per-channel oscilloscope threads##sgse"].plurals[0] = "Потоки исполнения осциллографов для отдельных каналов";
-    strings["you're being silly, aren't you? that's enough.##sgse"].plurals[0] = "может, хватит уже хернёй страдать? этого достаточно.";
-    strings["what are you doing? stop!##sgse"].plurals[0] = "ты чё делаешь? хватит!";
-    strings["it is a bad idea to set this number higher than your CPU core count (%d)!##sgse"].plurals[0] = "не рекомендуется выставлять здесь значение, большее количества ядер вашего ЦП (%d)!";
+    strings["threaded input processes key presses for note preview on a separate thread (on supported platforms), which reduces latency.\nhowever, crashes have been reported when threaded input is on. enable this option if that is the case.##sgse"].plurals[0] = "przetwarzanie naciśnięć klawiszy dla podglądu instrumentów odbywa się wielowątkowo (na obsługiwanych platformach), co zmniejsza opóźnienia.\nsą jednak doniesienia o zawieszaniu się programu po wyłączeniu tej opcji, w takim przypadku włącz ją.";
+    strings["Enable event delay##sgse"].plurals[0] = "Włącz opóźnienie zdarzeń";
+    strings["may cause issues with high-polling-rate mice when previewing notes.##sgse"].plurals[0] = "może powodować problemy podczas podglądu instrumentów, jeśli podłączona jest mysz o wysokiej częstotliwości odświeżania.";
+    strings["Per-channel oscilloscope threads##sgse"].plurals[0] = "Wielowątkowość oscyloskopu dla poszczególnych kanałów";
+    strings["you're being silly, aren't you? that's enough.##sgse"].plurals[0] = "wystarczy.";
+    strings["what are you doing? stop!##sgse"].plurals[0] = "stop!";
+    strings["it is a bad idea to set this number higher than your CPU core count (%d)!##sgse"].plurals[0] = " ustawianie tej wartości na wyższą niż ilość rdzeni twojego CPU to bardzo zły pomysł (%d)!";
     strings["Oscilloscope rendering engine:##sgse"].plurals[0] = "Silnik renderowania oscyloskopu:";
     strings["ImGui line plot##sgse"].plurals[0] = "Rysunek linii z ImGui";
     strings["render using Dear ImGui's built-in line drawing functions.##sgse"].plurals[0] = "renderuj przy pomocy wbudowanych funkcji Dear ImGui.";
@@ -2546,22 +2546,22 @@ void DivLocale::addTranslationsPolish()
     strings["use zlib to compress saved songs.##sgse"].plurals[0] = "иużywaj biblioteki zlib do kompresji utworów.";
     strings["Save unused patterns##sgse"].plurals[0] = "Zapisuj nieużywane wzorce";
     strings["Use new pattern format when saving##sgse"].plurals[0] = "Używaj nowego formatu wzorców podczas zapisywania";
-    strings["use a packed format which saves space when saving songs.\ndisable if you need compatibility with older Furnace and/or tools\nwhich do not support this format.##sgse"].plurals[0] = "использовать сжатый формат сохранения паттернов, что позволяет уменьшить размер файла с модулем.\nотключите, если нужна совместимость со старыми версиями Furnace и/или другими программами,\nкоторые не поддерживают новый формат.";
+    strings["use a packed format which saves space when saving songs.\ndisable if you need compatibility with older Furnace and/or tools\nwhich do not support this format.##sgse"].plurals[0] = "użyj skompresowanego formatu do zapisywania wzorców, co zmniejsza rozmiar pliku modułu.\nwyłącz tę opcję, jeśli chcesz zachować kompatybilność ze starszymi wersjami Furnace\n i/lub innymi programami, które nie obsługują nowego formatu.";
     strings["Don't apply compatibility flags when loading .dmf##sgse"].plurals[0] = "Nie stosuj flag kompatybilności podczas wczytywania pliku .dmf";
-    strings["do not report any issues arising from the use of this option!##sgse"].plurals[0] = "не жалуйтесь на проблемы, которые возникнут после включения этой настройки!";
-    strings["Play after opening song:##sgse"].plurals[0] = "Проигрывание модуля после его загрузки:";
+    strings["do not report any issues arising from the use of this option!##sgse"].plurals[0] = "nie zgłaszaj żadnych problemów występujących po włączeniu tej opcji!";
+    strings["Play after opening song:##sgse"].plurals[0] = "Odtawrzaj po otwarciu utworu:";
     strings["No##pol0"].plurals[0] = "Nie##pol0";
     strings["Only if already playing##pol1"].plurals[0] = "Tylko jeśli już jest odtwarzany##pol1";
     strings["Yes##pol0"].plurals[0] = "Tak##pol0";
-    strings["Audio export loop/fade out time:##sgse"].plurals[0] = "Количество циклов проигрывания и время затухания при экспорте аудио:";
-    strings["Set to these values on start-up:##fot0"].plurals[0] = "Выставить эти значения при запуске:##fot0";
+    strings["Audio export loop/fade out time:##sgse"].plurals[0] = "Liczba cykli odtwarzania i czas wyciszania podczas eksportowania dźwięku:";
+    strings["Set to these values on start-up:##fot0"].plurals[0] = "Ustaw te wartości podczas uruchamiania:##fot0";
     strings["Loops##sgse"].plurals[0] = "Pętle";
     strings["Fade out (seconds)##sgse"].plurals[0] = "Wyciszanie (w sekundach)";
     strings["Remember last values##fot1"].plurals[0] = "Zapamiętuj ostatnie wartości##fot1";
-    strings["Store instrument name in .fui##sgse"].plurals[0] = "Сохранять название инструмента в файле .fui";
-    strings["when enabled, saving an instrument will store its name.\nthis may increase file size.##sgse"].plurals[0] = "При включении имя инструмента будет сохраняться в файле.\nэто может увеличить размер файла.";
+    strings["Store instrument name in .fui##sgse"].plurals[0] = "Przechowuj nazwę instrumentu w pliku .fui";
+    strings["when enabled, saving an instrument will store its name.\nthis may increase file size.##sgse"].plurals[0] = "po włączeniu tej opcji nazwa instrumentu zostanie zapisana w pliku, co może zwiększyć jego rozmiar.";
     strings["Load instrument name from .fui##sgse"].plurals[0] = "Wczytaj nazwę instrumentu z pliku .fui";
-    strings["when enabled, loading an instrument will use the stored name (if present).\notherwise, it will use the file name.##sgse"].plurals[0] = "При включении имя инструмента будет загружаться из файла (при наличии имени в файле).\nВ противном случае будет использоваться имя файла.";
+    strings["when enabled, loading an instrument will use the stored name (if present).\notherwise, it will use the file name.##sgse"].plurals[0] = "gdy opcja ta jest włączona, nazwa instrumentu zostanie wczytana z pliku (jeśli w pliku znajduje się nazwa).\nw przeciwnym razie użyta zostanie nazwa pliku.";
     strings["New Song##sgse"].plurals[0] = "Nowy utwór";
     strings["Initial system:##sgse"].plurals[0] = "System domyślny:";
     strings["Current system##sgse"].plurals[0] = "Bieżący";
@@ -2575,12 +2575,12 @@ void DivLocale::addTranslationsPolish()
     strings["Front/Rear##sgse"].plurals[0] = "Przód/tył";
     strings["Configure##sgse"].plurals[0] = "Konfiguruj";
     strings["When creating new song:##sgse"].plurals[0] = "Przy tworzeniu nowego utworu:";
-    strings["Display system preset selector##NSB0"].plurals[0] = "Отобразить окно выбора пресета системы##NSB0";
-    strings["Start with initial system##NSB1"].plurals[0] = "Начать с системы по умолчанию##NSB1";
-    strings["Default author name##sgse"].plurals[0] = "Имя автора по умолчанию";
+    strings["Display system preset selector##NSB0"].plurals[0] = "Wyświetlaj okno wyboru domyślnego systemu##NSB0";
+    strings["Start with initial system##NSB1"].plurals[0] = "Rozpocznij od systemu domyślnego##NSB1";
+    strings["Default author name##sgse"].plurals[0] = "Domyślna nazwa autora";
     strings["Start-up##sgse"].plurals[0] = "Uruchamianie";
-    strings["Disable fade-in during start-up##sgse"].plurals[0] = "Отключить плавное появление интерфейса при запуске";
-    strings["About screen party time##sgse"].plurals[0] = "Вечеринка на экране \"О программе\"";
+    strings["Disable fade-in during start-up##sgse"].plurals[0] = "Wyłącz fade-in interfejsu podczas uruchamiania";
+    strings["About screen party time##sgse"].plurals[0] = "Impreza na ekranie \"O programie\"";
     strings["Warning: may cause epileptic seizures.##sgse"].plurals[0] = "Uwaga: może wywoływać ataki padaczki.";
     strings["Behavior##sgse"].plurals[0] = "Zachowanie programu";
     strings["New instruments are blank##sgse"].plurals[0] = "Nowe instrumnty są wyzerowane";
@@ -2591,11 +2591,11 @@ void DivLocale::addTranslationsPolish()
     strings["Backend##sgse"].plurals[0] = "Interfejs";
     strings["Driver##sgse"].plurals[0] = "Sterownik";
     strings["Automatic##sgse2"].plurals[0] = "Automatyczny";
-    strings["you may need to restart Furnace for this setting to take effect.##sgse2"].plurals[0] = "może być konieczne ponowne uruchomienie Furnace, aby to ustawienie zostało zastosowane.";
+    strings["you may need to restart Furnace for this setting to take effect.##sgse2"].plurals[0] = "może być konieczne ponowne uruchomienie Furnace, aby ta opcja została zastosowana.";
     strings["Device##sgse"].plurals[0] = "Urządzenie wyjściowe";
     strings["<click on OK or Apply first>##sgse"].plurals[0] = "<najpierw kliknij \"OK\" albo \"Zastosuj\">";
     strings["ALERT - TRESPASSER DETECTED##sgse"].plurals[0] = "UWAGA - WYKRYTO INTRUZA";
-    strings["you have been arrested for trying to engage with a disabled combo box.##sgse"].plurals[0] = "вы были арестованы за попытку взаимодействия с выключенным выпадающим списком.";
+    strings["you have been arrested for trying to engage with a disabled combo box.##sgse"].plurals[0] = "zostałeś aresztowany za próbę interakcji z wyłączoną listą rozwijaną.";
     strings["<System default>##sgse0"].plurals[0] = "<Domyślny>";
     strings["<System default>##sgse1"].plurals[0] = "<Domyślny>";
     strings["Sample rate##sgse"].plurals[0] = "Częstotliwość samplowania";
@@ -2610,7 +2610,7 @@ void DivLocale::addTranslationsPolish()
     strings["that's the limit!##sgse"].plurals[0] = "to już limit!";
     strings["it is a VERY bad idea to set this number higher than your CPU core count (%d)!##sgse"].plurals[0] = "BARDZO złym pomysłem jest ustawianie tej wartości na wyższą niż liczba rdzeni procesora. (%d)!";
     strings["Low-latency mode##sgse"].plurals[0] = "Tryb niskiej latencji";
-    strings["reduces latency by running the engine faster than the tick rate.\nuseful for live playback/jam mode.\n\nwarning: only enable if your buffer size is small (10ms or less).##sgse"].plurals[0] = "уменьшает задержку, исполняя код движка трекера быстрее, чем указано в настройках.\nполезно для режима исполнения в реальном времени.\n\nвнимание: включайте только если размер вашего аудиобуфера мал (10 мс или меньше).";
+    strings["reduces latency by running the engine faster than the tick rate.\nuseful for live playback/jam mode.\n\nwarning: only enable if your buffer size is small (10ms or less).##sgse"].plurals[0] = "zmniejsza latencję, wykonując kod silnika trackera szybciej niż określono w ustawieniach. \nprzydatne w trybie wykonywania w czasie rzeczywistym.\n\n uwaga: włącz tylko wtedy, gdy rozmiar bufora audio jest mały (10 ms lub mniej).";
     strings["Force mono audio##sgse"].plurals[0] = "Wymuś dźwięk mono";
     strings["Exclusive mode##sgse"].plurals[0] = "Tryb wyjątkowy";
     strings["want: %d samples @ %.0fHz (%d %s)##sgse"].plurals[0] = "potrzeba: %d sampli @ %.0f Hz (%d %s)";
@@ -2633,9 +2633,9 @@ void DivLocale::addTranslationsPolish()
     strings["<disabled>##sgse1"].plurals[0] = "<wył.>";
     strings["Re-scan MIDI devices##sgse"].plurals[0] = "Skanuj urządzenia MIDI ponownie";
     strings["Note input##sgse0"].plurals[0] = "Wprowadzanie nut";
-    strings["Velocity input##sgse"].plurals[0] = "Ввод скорости нажатия";
-    strings["Map MIDI channels to direct channels##sgse"].plurals[0] = "Привязать MIDI-каналы к прямым каналам";
-    strings["Program change pass-through##sgse"].plurals[0] = "Пропускать на выход сообщения об изменении программы";
+    strings["Velocity input##sgse"].plurals[0] = "Wprowadzanie prędkości";
+    strings["Map MIDI channels to direct channels##sgse"].plurals[0] = "Przypisz kanały MIDI do bezpośrednich kanałów";
+    strings["Program change pass-through##sgse"].plurals[0] = "Przekazywanie komunikatów o zmianie programu do wyjścia";
     strings["Map Yamaha FM voice data to instruments##sgse"].plurals[0] = "Przypisz dane głosu FM do instrumentu";
     strings["Program change is instrument selection##sgse"].plurals[0] = "Zmiana programu to wyubór instrumentu";
     strings["Listen to MIDI clock##sgse"].plurals[0] = "Monitoruj częst. zegara MIDI";
@@ -2660,12 +2660,12 @@ void DivLocale::addTranslationsPolish()
     strings["Type##sgse0"].plurals[0] = "Typ";
     strings["Channel##sgse0"].plurals[0] = "Kanał";
     strings["Note/Control##sgse"].plurals[0] = "Nuta/sterowanie";
-    strings["Velocity/Value##sgse"].plurals[0] = "Скор. наж./парам.";
+    strings["Velocity/Value##sgse"].plurals[0] = "Szybkość/Parametr";
     strings["Action##sgse"].plurals[0] = "Działania";
-    strings["Any##sgse0"].plurals[0] = "Любой";
-    strings["Any##sgse1"].plurals[0] = "Любая";
-    strings["Any##sgse2"].plurals[0] = "Любая";
-    strings["Any##sgse3"].plurals[0] = "Любое";
+    strings["Any##sgse0"].plurals[0] = "Każdy";
+    strings["Any##sgse1"].plurals[0] = "Każdy";
+    strings["Any##sgse2"].plurals[0] = "Każdy";
+    strings["Any##sgse3"].plurals[0] = "Każdy";
     strings["--none--##sgse"].plurals[0] = "--żaden--";
     strings["waiting...##BLearn"].plurals[0] = "czekaj...##BLearn";
     strings["Learn##BLearn"].plurals[0] = "Pamięć MIDI##BLearn";
@@ -2745,29 +2745,29 @@ void DivLocale::addTranslationsPolish()
     strings["Left##obp1"].plurals[0] = "Z lewej##obp1";
     strings["Right##obp2"].plurals[0] = "Z prawej##obp2";
     strings["Mouse##sgse"].plurals[0] = "Mysz";
-    strings["Double-click time (seconds)##sgse"].plurals[0] = "Время двойного нажатия (в секундах)";
-    strings["Don't raise pattern editor on click##sgse"].plurals[0] = "Не поднимать редактор паттернов при нажатии";
+    strings["Double-click time (seconds)##sgse"].plurals[0] = "Czas dwukrotnego kliknięcia myszą (w sekundach)";
+    strings["Don't raise pattern editor on click##sgse"].plurals[0] = "Nie wywołuj edytora wzorców po naciśnięciu przycisku";
     strings["Focus pattern editor when selecting instrument##sgse"].plurals[0] = "Переместить фокус на редактор паттернов при выборе инструмента";
     strings["Note preview behavior:##sgse"].plurals[0] = "Ustawienia podglądu nut:";
     strings["Never##npb0"].plurals[0] = "Nigdy##npb0";
-    strings["When cursor is in Note column##npb1"].plurals[0] = "Когда курсор находится в столбце нот##npb1";
-    strings["When cursor is in Note column or not in edit mode##npb2"].plurals[0] = "Когда курсор находится в столбце нот или не включён режим редактирования##npb2";
+    strings["When cursor is in Note column##npb1"].plurals[0] = "Gdy kursor znajduje się w kolumnie nuty##npb1";
+    strings["When cursor is in Note column or not in edit mode##npb2"].plurals[0] = "Gdy kursor znajduje się w kolumnie nut lub tryb edycji nie jest włączony##npb2";
     strings["Always##npb3"].plurals[0] = "Zawsze##npb3";
-    strings["Allow dragging selection:##sgse"].plurals[0] = "Разрешить перемещение выделенного фрагмента:";
+    strings["Allow dragging selection:##sgse"].plurals[0] = "Zezwól na przeniesienie zaznaczenia:";
     strings["No##dms0"].plurals[0] = "Nie##dms0";
     strings["Yes##dms1"].plurals[0] = "Tak##dms1";
-    strings["Yes (while holding Ctrl only)##dms2"].plurals[0] = "Да (только при нажатой клавише Ctrl)##dms2";
-    strings["Toggle channel solo on:##sgse"].plurals[0] = "Включать режим соло для канала:";
+    strings["Yes (while holding Ctrl only)##dms2"].plurals[0] = "Tak (tylko przy wciśniętym klawiuszu Ctrl)##dms2";
+    strings["Toggle channel solo on:##sgse"].plurals[0] = "Włącz tryb solo dla kanału:";
     strings["Right-click or double-click##soloA"].plurals[0] = "PPM alko podwójne kliknięcie##soloA";
     strings["Right-click##soloR"].plurals[0] = "PPM##soloR";
     strings["Double-click##soloD"].plurals[0] = "Podwójne kliknięcie##soloD";
     strings["Double click selects entire column##sgse"].plurals[0] = "Podwójne kliknięcie wybiera całą kolumnę";
     strings["Cursor behavior##sgse"].plurals[0] = "Zachowanie kursora";
-    strings["Insert pushes entire channel row##sgse"].plurals[0] = "Клавиша Insert сдвигает паттерны на всех каналах";
+    strings["Insert pushes entire channel row##sgse"].plurals[0] = "Klawisz Insert przesuwa wiersz całego kanału";
     strings["Pull delete affects entire channel row##sgse"].plurals[0] = "Удаление с подтягиванием следующих строк сдвигает паттерны на всех каналах";
     strings["Push value when overwriting instead of clearing it##sgse"].plurals[0] = "Отодвинуть значение ячейки в соседнюю вместо удаления при перезаписи ячейки";
-    strings["Effect input behavior:##sgse"].plurals[0] = "Wprowadzanie efektó:";
-    strings["Move down##eicb0"].plurals[0] = "перемещаться вниз##eicb0";
+    strings["Effect input behavior:##sgse"].plurals[0] = "Wprowadzanie efektów:";
+    strings["Move down##eicb0"].plurals[0] = "Przesuń w dół##eicb0";
     strings["Move to effect value (otherwise move down)##eicb1"].plurals[0] = "Перепрыгнуть на параметр эффекта (иначе перемещаться вниз)##eicb1";
     strings["Move to effect value/next effect and wrap around##eicb2"].plurals[0] = "Перепрыгнуть на параметр эффекта/следующий эффект, в конце строки перепрыгнуть в начало строки эффектов##eicb2";
     strings["Delete effect value when deleting effect##sgse"].plurals[0] = "Удалять параметр эффекта при удалении эффекта";
@@ -2778,19 +2778,19 @@ void DivLocale::addTranslationsPolish()
     strings["Wrap horizontally:##sgse"].plurals[0] = "Przenoszenie w poziomie:";
     strings["No##wrapH0"].plurals[0] = "Nie##wrapH0";
     strings["Yes##wrapH1"].plurals[0] = "Tak##wrapH1";
-    strings["Yes, and move to next/prev row##wrapH2"].plurals[0] = "Да, и переходить на следующую/предыдущую строку##wrapH2";
+    strings["Yes, and move to next/prev row##wrapH2"].plurals[0] = "Tak, i przejdź do następnego wiersza##wrapH2";
     strings["Wrap vertically:##sgse"].plurals[0] = "Przenoszenie w pionie:";
     strings["No##wrapV0"].plurals[0] = "Nie##wrapV0";
     strings["Yes##wrapV1"].plurals[0] = "Tak##wrapV1";
     strings["Yes, and move to next/prev pattern##wrapV2"].plurals[0] = "Tak, i przejdź do następnego/poprzedniego wzorca##wrapV2";
-    strings["Yes, and move to next/prev pattern (wrap around)##wrapV2"].plurals[0] = "Да, и переходить на следующий/предыдущий паттерн (с переносом в начало/конец)##wrapV2";
-    strings["Cursor movement keys behavior:##sgse"].plurals[0] = "Передвижение курсора при помощи клавиш:";
-    strings["Move by one##cmk0"].plurals[0] = "Przesuway o jeden##cmk0";
-    strings["Move by Edit Step##cmk1"].plurals[0] = "Сдвигать на шаг редактирования##cmk1";
-    strings["Move cursor by edit step on delete##sgse"].plurals[0] = "Сдвигать курсор на шаг редактирования при удалении";
-    strings["Move cursor by edit step on insert (push)##sgse"].plurals[0] = "Сдвигать курсор на шаг редактирования при вставке";
-    strings["Move cursor up on backspace-delete##sgse"].plurals[0] = "Сдвигать курсор вверх при удалении по нажатию Backspace";
-    strings["Move cursor to end of clipboard content when pasting##sgse"].plurals[0] = "Сдвигать курсор в конец вставленного фрагмента при вставке";
+    strings["Yes, and move to next/prev pattern (wrap around)##wrapV2"].plurals[0] = "Tak, i przejdź do następnego/poprzedniego wzorca (z przeniesieniem na początek/koniec).##wrapV2";
+    strings["Cursor movement keys behavior:##sgse"].plurals[0] = "Zachowanie przesuwanie kursora:";
+    strings["Move by one##cmk0"].plurals[0] = "Przesuwaj o jeden##cmk0";
+    strings["Move by Edit Step##cmk1"].plurals[0] = "Przesuń o krok edycji##cmk1";
+    strings["Move cursor by edit step on delete##sgse"].plurals[0] = "Przesuń kursor o krok edycji podczas usuwania";
+    strings["Move cursor by edit step on insert (push)##sgse"].plurals[0] = "Przesuń kursor o krok edycji podczas wklejania";
+    strings["Move cursor up on backspace-delete##sgse"].plurals[0] = "Przesuń kursor do góry po naciśnięciu Backspace";
+    strings["Move cursor to end of clipboard content when pasting##sgse"].plurals[0] = "Przesuń kursor do końca wklejanej zawartości";
     strings["Scrolling##sgse"].plurals[0] = "Przewijanie";
     strings["Change order when scrolling outside of pattern bounds:##sgse"].plurals[0] = "Zmiana pozycji w matrycy wzorców podczas przewijania poza wzorcami:";
     strings["No##pscroll0"].plurals[0] = "Nie##pscroll0";
@@ -2836,7 +2836,7 @@ void DivLocale::addTranslationsPolish()
             "このオプションは、十分なグラフィックメモリがある場合にのみ切り替えてください。\n"
             "これは、Dear ImGuiにダイナミックフォントアトラスが実装されるまでの一時的な解決策です。##sgse"].plurals[0] = 
             
-            "Włącz to ustawienie tylko wtedy, gdy masz wystarczającą ilość VRAM-u.\n"
+            "Włącz tą opcję tylko wtedy, gdy masz wystarczającą ilość VRAM-u.\n"
             "Jest to rozwiązanie tymczasowe, ponieważ Dear ImGui nie obsługuje obecnie dynamicznego atlasu czcionek.\n\n"
             "このオプションは、十分なグラフィックメモリがある場合にのみ切り替えてください。\n"
             "これは、Dear ImGuiにダイナミックフォントアトラスが実装されるまでの一時的な解決策です。";
@@ -2846,7 +2846,7 @@ void DivLocale::addTranslationsPolish()
             "请在确保你有足够的显存后再启动此设定\n"
             "这是一个在ImGui实现动态字体加载之前的临时解决方案##sgse"].plurals[0] = 
             
-            "Włącz to ustawienie tylko wtedy, gdy masz wystarczającą ilość VRAM-u.\n"
+            "Włącz tą opcję tylko wtedy, gdy masz wystarczającą ilość VRAM-u.\n"
             "Jest to rozwiązanie tymczasowe, ponieważ Dear ImGui nie obsługuje obecnie dynamicznego atlasu czcionek.\n\n"
             "请在确保你有足够的显存后再启动此设定\n"
             "这是一个在ImGui实现动态字体加载之前的临时解决方案";
@@ -2856,7 +2856,7 @@ void DivLocale::addTranslationsPolish()
             "請在確保你有足夠的顯存后再啟動此設定\n"
             "這是一個在ImGui實現動態字體加載之前的臨時解決方案##sgse"].plurals[0] = 
             
-            "Włącz to ustawienie tylko wtedy, gdy masz wystarczającą ilość VRAM-u.\n"
+            "Włącz tą opcję tylko wtedy, gdy masz wystarczającą ilość VRAM-u.\n"
             "Jest to rozwiązanie tymczasowe, ponieważ Dear ImGui nie obsługuje obecnie dynamicznego atlasu czcionek.\n\n"
             "請在確保你有足夠的顯存后再啟動此設定\n"
             "這是一個在ImGui實現動態字體加載之前的臨時解決方案";
@@ -2866,7 +2866,7 @@ void DivLocale::addTranslationsPolish()
             "그래픽 메모리가 충분한 경우에만 이 옵션을 선택하십시오.\n"
             "이 옵션은 Dear ImGui에 동적 글꼴 아틀라스가 구현될 때까지 임시 솔루션입니다.##sgse"].plurals[0] = 
             
-            "Włącz to ustawienie tylko wtedy, gdy masz wystarczającą ilość VRAM-u.\n"
+            "Włącz tą opcję tylko wtedy, gdy masz wystarczającą ilość VRAM-u.\n"
             "Jest to rozwiązanie tymczasowe, ponieważ Dear ImGui nie obsługuje obecnie dynamicznego atlasu czcionek.\n\n"
             "그래픽 메모리가 충분한 경우에만 이 옵션을 선택하십시오.\n"
             "이 옵션은 Dear ImGui에 동적 글꼴 아틀라스가 구현될 때까지 임시 솔루션입니다.";
@@ -3037,16 +3037,16 @@ void DivLocale::addTranslationsPolish()
 
     // these are messy, but the ##CC_GUI... is required.
     strings["Button##CC_GUI_COLOR_BUTTON"].plurals[0] = "Przycisk##CC_GUI_COLOR_BUTTON";
-    strings["Button (hovered)##CC_GUI_COLOR_BUTTON_HOVER"].plurals[0] = "Кнопка (курсор на кнопке)##CC_GUI_COLOR_BUTTON_HOVER";
-    strings["Button (active)##CC_GUI_COLOR_BUTTON_ACTIVE"].plurals[0] = "Кнопка (нажатая)##CC_GUI_COLOR_BUTTON_ACTIVE";
-    strings["Tab##CC_GUI_COLOR_TAB"].plurals[0] = "Вкладка##CC_GUI_COLOR_TAB";
-    strings["Tab (hovered)##CC_GUI_COLOR_TAB_HOVER"].plurals[0] = "Вкладка (курсор на вкладке)##CC_GUI_COLOR_TAB_HOVER";
-    strings["Tab (active)##CC_GUI_COLOR_TAB_ACTIVE"].plurals[0] = "Вкладка (активная)##CC_GUI_COLOR_TAB_ACTIVE";
-    strings["Tab (unfocused)##CC_GUI_COLOR_TAB_UNFOCUSED"].plurals[0] = "Вкладка (не текущая)##CC_GUI_COLOR_TAB_UNFOCUSED";
-    strings["Tab (unfocused and active)##CC_GUI_COLOR_TAB_UNFOCUSED_ACTIVE"].plurals[0] = "Вкладка (курсор на вкладке, текущая)##CC_GUI_COLOR_TAB_UNFOCUSED_ACTIVE";
-    strings["ImGui header##CC_GUI_COLOR_IMGUI_HEADER"].plurals[0] = "Заголовок ImGui##CC_GUI_COLOR_IMGUI_HEADER";
-    strings["ImGui header (hovered)##CC_GUI_COLOR_IMGUI_HEADER_HOVER"].plurals[0] = "Заголовок ImGui (курсор на заголовке)##CC_GUI_COLOR_IMGUI_HEADER_HOVER";
-    strings["ImGui header (active)##CC_GUI_COLOR_IMGUI_HEADER_ACTIVE"].plurals[0] = "Заголовок ImGui (активный)##CC_GUI_COLOR_IMGUI_HEADER_ACTIVE";
+    strings["Button (hovered)##CC_GUI_COLOR_BUTTON_HOVER"].plurals[0] = "Przycisk (курсор на кнопке)##CC_GUI_COLOR_BUTTON_HOVER";
+    strings["Button (active)##CC_GUI_COLOR_BUTTON_ACTIVE"].plurals[0] = "Przycisk (нажатая)##CC_GUI_COLOR_BUTTON_ACTIVE";
+    strings["Tab##CC_GUI_COLOR_TAB"].plurals[0] = "Zakładka##CC_GUI_COLOR_TAB";
+    strings["Tab (hovered)##CC_GUI_COLOR_TAB_HOVER"].plurals[0] = "Zakładka (курсор на вкладке)##CC_GUI_COLOR_TAB_HOVER";
+    strings["Tab (active)##CC_GUI_COLOR_TAB_ACTIVE"].plurals[0] = "Zakładka (активная)##CC_GUI_COLOR_TAB_ACTIVE";
+    strings["Tab (unfocused)##CC_GUI_COLOR_TAB_UNFOCUSED"].plurals[0] = "Zakładka (не текущая)##CC_GUI_COLOR_TAB_UNFOCUSED";
+    strings["Tab (unfocused and active)##CC_GUI_COLOR_TAB_UNFOCUSED_ACTIVE"].plurals[0] = "Zakładka (курсор на вкладке, текущая)##CC_GUI_COLOR_TAB_UNFOCUSED_ACTIVE";
+    strings["ImGui header##CC_GUI_COLOR_IMGUI_HEADER"].plurals[0] = "Nagłówek ImGui##CC_GUI_COLOR_IMGUI_HEADER";
+    strings["ImGui header (hovered)##CC_GUI_COLOR_IMGUI_HEADER_HOVER"].plurals[0] = "Nagłówek ImGui (курсор на заголовке)##CC_GUI_COLOR_IMGUI_HEADER_HOVER";
+    strings["ImGui header (active)##CC_GUI_COLOR_IMGUI_HEADER_ACTIVE"].plurals[0] = "Nagłówek ImGui (активный)##CC_GUI_COLOR_IMGUI_HEADER_ACTIVE";
     strings["Resize grip##CC_GUI_COLOR_RESIZE_GRIP"].plurals[0] = "Захват для изменения размера окна##CC_GUI_COLOR_RESIZE_GRIP";
     strings["Resize grip (hovered)##CC_GUI_COLOR_RESIZE_GRIP_HOVER"].plurals[0] = "Захват для изменения размера окна (курсор на захвате)##CC_GUI_COLOR_RESIZE_GRIP_HOVER";
     strings["Resize grip (active)##CC_GUI_COLOR_RESIZE_GRIP_ACTIVE"].plurals[0] = "Захват для изменения размера окна (активный)##CC_GUI_COLOR_RESIZE_GRIP_ACTIVE";
@@ -3112,7 +3112,7 @@ void DivLocale::addTranslationsPolish()
     strings["Font##CC_GUI_COLOR_FILE_FONT"].plurals[0] = "Czcionka##CC_GUI_COLOR_FILE_FONT";
     strings["Other##CC_GUI_COLOR_FILE_OTHER"].plurals[0] = "Inne##CC_GUI_COLOR_FILE_OTHER";
 
-    strings["Border##CC_GUI_COLOR_OSC_BORDER"].plurals[0] = "Граница осциллографа##CC_GUI_COLOR_OSC_BORDER";
+    strings["Border##CC_GUI_COLOR_OSC_BORDER"].plurals[0] = "Krawędź oscyloskopu##CC_GUI_COLOR_OSC_BORDER";
     strings["Background (top-left)##CC_GUI_COLOR_OSC_BG1"].plurals[0] = "Фон (верхний левый угол)##CC_GUI_COLOR_OSC_BG1";
     strings["Background (top-right)##CC_GUI_COLOR_OSC_BG2"].plurals[0] = "Фон (верхний правый угол)##CC_GUI_COLOR_OSC_BG2";
     strings["Background (bottom-left)##CC_GUI_COLOR_OSC_BG3"].plurals[0] = "Фон (нижний левый угол)##CC_GUI_COLOR_OSC_BG3";
@@ -3154,8 +3154,8 @@ void DivLocale::addTranslationsPolish()
     strings["Sustain guide##CC_GUI_COLOR_FM_ENVELOPE_SUS_GUIDE"].plurals[0] = "Wizualizacja podtrzymania##CC_GUI_COLOR_FM_ENVELOPE_SUS_GUIDE";
     strings["Release##CC_GUI_COLOR_FM_ENVELOPE_RELEASE"].plurals[0] = "Zwolnienie##CC_GUI_COLOR_FM_ENVELOPE_RELEASE";
 
-    strings["Algorithm background##CC_GUI_COLOR_FM_ALG_BG"].plurals[0] = "Задний фон схемы алгоритма##CC_GUI_COLOR_FM_ALG_BG";
-    strings["Algorithm lines##CC_GUI_COLOR_FM_ALG_LINE"].plurals[0] = "Линии схемы алгоритма##CC_GUI_COLOR_FM_ALG_LINE";
+    strings["Algorithm background##CC_GUI_COLOR_FM_ALG_BG"].plurals[0] = "Tło schematu algorytmu##CC_GUI_COLOR_FM_ALG_BG";
+    strings["Algorithm lines##CC_GUI_COLOR_FM_ALG_LINE"].plurals[0] = "Linie schematu algorytmu##CC_GUI_COLOR_FM_ALG_LINE";
     strings["Modulator##CC_GUI_COLOR_FM_MOD"].plurals[0] = "Modulator##CC_GUI_COLOR_FM_MOD";
     strings["Carrier##CC_GUI_COLOR_FM_CAR"].plurals[0] = "Fala nośna##CC_GUI_COLOR_FM_CAR";
 
@@ -3174,7 +3174,7 @@ void DivLocale::addTranslationsPolish()
 
     strings["Volume##CC_GUI_COLOR_MACRO_VOLUME"].plurals[0] = "Głośność##CC_GUI_COLOR_MACRO_VOLUME";
     strings["Pitch##CC_GUI_COLOR_MACRO_PITCH"].plurals[0] = "Wysokość##CC_GUI_COLOR_MACRO_PITCH";
-    strings["Wave##CC_GUI_COLOR_MACRO_WAVE"].plurals[0] = "Волна##CC_GUI_COLOR_MACRO_WAVE";
+    strings["Wave##CC_GUI_COLOR_MACRO_WAVE"].plurals[0] = "Fala##CC_GUI_COLOR_MACRO_WAVE";
     strings["Other##CC_GUI_COLOR_MACRO_OTHER"].plurals[0] = "Inne##CC_GUI_COLOR_MACRO_OTHER";
 
     strings["FM (OPN)##CC_GUI_COLOR_INSTR_FM"].plurals[0] = "FM (OPN)##CC_GUI_COLOR_INSTR_FM";
@@ -3236,14 +3236,14 @@ void DivLocale::addTranslationsPolish()
     strings["PowerNoise (slope)##CC_GUI_COLOR_INSTR_POWERNOISE_SLOPE"].plurals[0] = "PowerNoise (spadek)##CC_GUI_COLOR_INSTR_POWERNOISE_SLOPE";
     strings["Other/Unknown##CC_GUI_COLOR_INSTR_UNKNOWN"].plurals[0] = "Inny/nieznany##CC_GUI_COLOR_INSTR_UNKNOWN";
 
-    strings["Single color (background)##CC_GUI_COLOR_CHANNEL_BG"].plurals[0] = "Один цвет (фон)##CC_GUI_COLOR_CHANNEL_BG";
-    strings["Single color (text)##CC_GUI_COLOR_CHANNEL_FG"].plurals[0] = "Один цвет (текст)##CC_GUI_COLOR_CHANNEL_FG";
+    strings["Single color (background)##CC_GUI_COLOR_CHANNEL_BG"].plurals[0] = "Jednolity kolor (tło)##CC_GUI_COLOR_CHANNEL_BG";
+    strings["Single color (text)##CC_GUI_COLOR_CHANNEL_FG"].plurals[0] = "Jednolity kolor (tekst)##CC_GUI_COLOR_CHANNEL_FG";
     strings["FM##CC_GUI_COLOR_CHANNEL_FM"].plurals[0] = "FM##CC_GUI_COLOR_CHANNEL_FM";
-    strings["Pulse##CC_GUI_COLOR_CHANNEL_PULSE"].plurals[0] = "Fala kwadratowa##CC_GUI_COLOR_CHANNEL_PULSE";
+    strings["Pulse##CC_GUI_COLOR_CHANNEL_PULSE"].plurals[0] = "Fala prostokątna##CC_GUI_COLOR_CHANNEL_PULSE";
     strings["Noise##CC_GUI_COLOR_CHANNEL_NOISE"].plurals[0] = "Szum##CC_GUI_COLOR_CHANNEL_NOISE";
     strings["PCM##CC_GUI_COLOR_CHANNEL_PCM"].plurals[0] = "PCM##CC_GUI_COLOR_CHANNEL_PCM";
-    strings["Wave##CC_GUI_COLOR_CHANNEL_WAVE"].plurals[0] = "Волна##CC_GUI_COLOR_CHANNEL_WAVE";
-    strings["FM operator##CC_GUI_COLOR_CHANNEL_OP"].plurals[0] = "FM-operator##CC_GUI_COLOR_CHANNEL_OP";
+    strings["Wave##CC_GUI_COLOR_CHANNEL_WAVE"].plurals[0] = "Fala##CC_GUI_COLOR_CHANNEL_WAVE";
+    strings["FM operator##CC_GUI_COLOR_CHANNEL_OP"].plurals[0] = "Operator FM##CC_GUI_COLOR_CHANNEL_OP";
     strings["Muted##CC_GUI_COLOR_CHANNEL_MUTED"].plurals[0] = "Заглушен##CC_GUI_COLOR_CHANNEL_MUTED";
 
     strings["Playhead##CC_GUI_COLOR_PATTERN_PLAY_HEAD"].plurals[0] = "Указатель воспроизведения##CC_GUI_COLOR_PATTERN_PLAY_HEAD";
@@ -3314,8 +3314,8 @@ void DivLocale::addTranslationsPolish()
     strings["Time text##CC_GUI_COLOR_SAMPLE_TIME_FG"].plurals[0] = "Текст поля времени##CC_GUI_COLOR_SAMPLE_TIME_FG";
     strings["Loop region##CC_GUI_COLOR_SAMPLE_LOOP"].plurals[0] = "Зацикленная часть##CC_GUI_COLOR_SAMPLE_LOOP";
     strings["Center guide##CC_GUI_COLOR_SAMPLE_CENTER"].plurals[0] = "Центральная полоса##CC_GUI_COLOR_SAMPLE_CENTER";
-    strings["Grid##CC_GUI_COLOR_SAMPLE_GRID"].plurals[0] = "Сетка##CC_GUI_COLOR_SAMPLE_GRID";
-    strings["Selection##CC_GUI_COLOR_SAMPLE_SEL"].plurals[0] = "Выделение##CC_GUI_COLOR_SAMPLE_SEL";
+    strings["Grid##CC_GUI_COLOR_SAMPLE_GRID"].plurals[0] = "Siatka##CC_GUI_COLOR_SAMPLE_GRID";
+    strings["Selection##CC_GUI_COLOR_SAMPLE_SEL"].plurals[0] = "Zaznaczenie##CC_GUI_COLOR_SAMPLE_SEL";
     strings["Selection points##CC_GUI_COLOR_SAMPLE_SEL_POINT"].plurals[0] = "Границы выделения##CC_GUI_COLOR_SAMPLE_SEL_POINT";
     strings["Preview needle##CC_GUI_COLOR_SAMPLE_NEEDLE"].plurals[0] = "Курсор воспроизведения превью##CC_GUI_COLOR_SAMPLE_NEEDLE";
     strings["Playing needles##CC_GUI_COLOR_SAMPLE_NEEDLE_PLAYING"].plurals[0] = "Курсоры воспроизведения##CC_GUI_COLOR_SAMPLE_NEEDLE_PLAYING";
@@ -3324,12 +3324,12 @@ void DivLocale::addTranslationsPolish()
     strings["Chip select: enabled##CC_GUI_COLOR_SAMPLE_CHIP_ENABLED"].plurals[0] = "Выбор чипа: вкл.##CC_GUI_COLOR_SAMPLE_CHIP_ENABLED";
     strings["Chip select: enabled (failure)##CC_GUI_COLOR_SAMPLE_CHIP_WARNING"].plurals[0] = "Выбор чипа: вкл. (ошибка)##CC_GUI_COLOR_SAMPLE_CHIP_WARNING";
 
-    strings["Unallocated##CC_GUI_COLOR_PAT_MANAGER_NULL"].plurals[0] = "Паттерн не используется и память под него не выделена##CC_GUI_COLOR_PAT_MANAGER_NULL";
-    strings["Unused##CC_GUI_COLOR_PAT_MANAGER_UNUSED"].plurals[0] = "Паттерн не используется##CC_GUI_COLOR_PAT_MANAGER_UNUSED";
-    strings["Used##CC_GUI_COLOR_PAT_MANAGER_USED"].plurals[0] = "Паттерн используется##CC_GUI_COLOR_PAT_MANAGER_USED";
-    strings["Overused##CC_GUI_COLOR_PAT_MANAGER_OVERUSED"].plurals[0] = "Паттерн используется очень часто##CC_GUI_COLOR_PAT_MANAGER_OVERUSED";
-    strings["Really overused##CC_GUI_COLOR_PAT_MANAGER_EXTREMELY_OVERUSED"].plurals[0] = "Паттерн используется крайне часто##CC_GUI_COLOR_PAT_MANAGER_EXTREMELY_OVERUSED";
-    strings["Combo Breaker##CC_GUI_COLOR_PAT_MANAGER_COMBO_BREAKER"].plurals[0] = "Число использований паттерна больше, чем длина трека!##CC_GUI_COLOR_PAT_MANAGER_COMBO_BREAKER";
+    strings["Unallocated##CC_GUI_COLOR_PAT_MANAGER_NULL"].plurals[0] = "Nieprzypisany##CC_GUI_COLOR_PAT_MANAGER_NULL";
+    strings["Unused##CC_GUI_COLOR_PAT_MANAGER_UNUSED"].plurals[0] = "Nieużywany##CC_GUI_COLOR_PAT_MANAGER_UNUSED";
+    strings["Used##CC_GUI_COLOR_PAT_MANAGER_USED"].plurals[0] = "Używany##CC_GUI_COLOR_PAT_MANAGER_USED";
+    strings["Overused##CC_GUI_COLOR_PAT_MANAGER_OVERUSED"].plurals[0] = "Nadużywany##CC_GUI_COLOR_PAT_MANAGER_OVERUSED";
+    strings["Really overused##CC_GUI_COLOR_PAT_MANAGER_EXTREMELY_OVERUSED"].plurals[0] = "Bardzo nadużywany##CC_GUI_COLOR_PAT_MANAGER_EXTREMELY_OVERUSED";
+    strings["Combo Breaker##CC_GUI_COLOR_PAT_MANAGER_COMBO_BREAKER"].plurals[0] = "COMBO BREAKER##CC_GUI_COLOR_PAT_MANAGER_COMBO_BREAKER";
 
     strings["Background##CC_GUI_COLOR_PIANO_BACKGROUND"].plurals[0] = "Фон##CC_GUI_COLOR_PIANO_BACKGROUND";
     strings["Upper key##CC_GUI_COLOR_PIANO_KEY_TOP"].plurals[0] = "Верхние клавиши##CC_GUI_COLOR_PIANO_KEY_TOP";
@@ -3339,17 +3339,17 @@ void DivLocale::addTranslationsPolish()
     strings["Lower key (feedback)##CC_GUI_COLOR_PIANO_KEY_BOTTOM_HIT"].plurals[0] = "Нижние клавиши (обратная связь)##CC_GUI_COLOR_PIANO_KEY_BOTTOM_HIT";
     strings["Lower key (pressed)##CC_GUI_COLOR_PIANO_KEY_BOTTOM_ACTIVE"].plurals[0] = "Нижние клавиши (нажатые)##CC_GUI_COLOR_PIANO_KEY_BOTTOM_ACTIVE";
 
-    strings["Clock text##CC_GUI_COLOR_CLOCK_TEXT"].plurals[0] = "Текст часов##CC_GUI_COLOR_CLOCK_TEXT";
+    strings["Clock text##CC_GUI_COLOR_CLOCK_TEXT"].plurals[0] = "Tekst zegara##CC_GUI_COLOR_CLOCK_TEXT";
     strings["Beat (off)##CC_GUI_COLOR_CLOCK_BEAT_LOW"].plurals[0] = "Слабая доля##CC_GUI_COLOR_CLOCK_BEAT_LOW";
     strings["Beat (on)##CC_GUI_COLOR_CLOCK_BEAT_HIGH"].plurals[0] = "Сильная доля##CC_GUI_COLOR_CLOCK_BEAT_HIGH";
 
-    strings["PortSet##CC_GUI_COLOR_PATCHBAY_PORTSET"].plurals[0] = "grupa portów##CC_GUI_COLOR_PATCHBAY_PORTSET";
+    strings["PortSet##CC_GUI_COLOR_PATCHBAY_PORTSET"].plurals[0] = "Grupa portów##CC_GUI_COLOR_PATCHBAY_PORTSET";
     strings["Port##CC_GUI_COLOR_PATCHBAY_PORT"].plurals[0] = "Port##CC_GUI_COLOR_PATCHBAY_PORT";
     strings["Port (hidden/unavailable)##CC_GUI_COLOR_PATCHBAY_PORT_HIDDEN"].plurals[0] = "Port (ukryty/niedostępny)##CC_GUI_COLOR_PATCHBAY_PORT_HIDDEN";
-    strings["Connection (selected)##CC_GUI_COLOR_PATCHBAY_CONNECTION"].plurals[0] = "Соединение (выделенное)##CC_GUI_COLOR_PATCHBAY_CONNECTION";
-    strings["Connection (other)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG"].plurals[0] = "Соединение (обычное)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG";
+    strings["Connection (selected)##CC_GUI_COLOR_PATCHBAY_CONNECTION"].plurals[0] = "Połączenie (zaznaczone)##CC_GUI_COLOR_PATCHBAY_CONNECTION";
+    strings["Connection (other)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG"].plurals[0] = "Połączenie (inne)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG";
 
-    strings["Log level: Error##CC_GUI_COLOR_LOGLEVEL_ERROR"].plurals[0] = "Уровень лога: Błą##CC_GUI_COLOR_LOGLEVEL_ERROR";
+    strings["Log level: Error##CC_GUI_COLOR_LOGLEVEL_ERROR"].plurals[0] = "Уровень лога: Błąd##CC_GUI_COLOR_LOGLEVEL_ERROR";
     strings["Log level: Warning##CC_GUI_COLOR_LOGLEVEL_WARNING"].plurals[0] = "Уровень лога: Ostrzeżenie##CC_GUI_COLOR_LOGLEVEL_WARNING";
     strings["Log level: Info##CC_GUI_COLOR_LOGLEVEL_INFO"].plurals[0] = "Уровень лога: Info##CC_GUI_COLOR_LOGLEVEL_INFO";
     strings["Log level: Debug##CC_GUI_COLOR_LOGLEVEL_DEBUG"].plurals[0] = "Уровень лога: Debug##CC_GUI_COLOR_LOGLEVEL_DEBUG";
@@ -4199,8 +4199,8 @@ void DivLocale::addTranslationsPolish()
     strings["high##sgiSID2"].plurals[0] = "górno";
     strings["Noise Mode##sgiSID2"].plurals[0] = "Tryb szumu";
     strings["Wave Mix Mode##sgiSID2"].plurals[0] = "Tryb mieszania fali";
-    strings["Absolute Cutoff Macro##sgiSID2"].plurals[0] = "Абсолютный макрос частоты среза";
-    strings["Absolute Duty Macro##sgiSID2"].plurals[0] = "Абсолютный макрос скважности";
+    strings["Absolute Cutoff Macro##sgiSID2"].plurals[0] = "Absolutne makro punktu odcięcia";
+    strings["Absolute Duty Macro##sgiSID2"].plurals[0] = "Absolutne makro szerokości fali prost.";
     strings["Macros##sgiSID2"].plurals[0] = "Makra";
     strings["Volume##sgiSID2"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiSID2"].plurals[0] = "Arpeggio";
@@ -4331,9 +4331,9 @@ void DivLocale::addTranslationsPolish()
     strings["Tune##sgistru"].plurals[0] = "Strojenie";
     strings["Detune##sgistru2"].plurals[0] = "Rozstrój";
     strings["Fixed##sgistru0"].plurals[0] = "Stały";
-    strings["Fine##sgistru3"].plurals[0] = "Точн.";
-    strings["Fine##sgistru4"].plurals[0] = "Точн.";
-    strings["Fine##sgistru5"].plurals[0] = "Точн.";
+    strings["Fine##sgistru3"].plurals[0] = "Dokładne";
+    strings["Fine##sgistru4"].plurals[0] = "Dokładne";
+    strings["Fine##sgistru5"].plurals[0] = "Dokładne";
     strings["User##sgistru0"].plurals[0] = "Użytkownika";
     strings["1. Violin##sgistru"].plurals[0] = "1. Skrzypce";
     strings["2. Guitar##sgistru0"].plurals[0] = "2. Gitara";
@@ -4557,14 +4557,14 @@ void DivLocale::addTranslationsPolish()
     strings["Wait for Release##sgistru0"].plurals[0] = "Czekaj na zwolnienie";
     strings["Loop##sgistru1"].plurals[0] = "Pętla";
     strings["Loop until Release##sgistru0"].plurals[0] = "Zapętlaj aż do zwolnienie";
-    strings["Volume Sweep##sgistru"].plurals[0] = "Изменение громкости";
-    strings["Frequency Sweep##sgistru"].plurals[0] = "Изменение частоты";
-    strings["Cutoff Sweep##sgistru"].plurals[0] = "Изменение частоты среза";
+    strings["Volume Sweep##sgistru"].plurals[0] = "Płynna zmiana głośności";
+    strings["Frequency Sweep##sgistru"].plurals[0] = "Płynna zmiana częstotliwości";
+    strings["Cutoff Sweep##sgistru"].plurals[0] = "Płynna zmiana punktu odcięcia";
     strings["Wait##sgistru1"].plurals[0] = "Czekaj";
     strings["Wait for Release##sgistru1"].plurals[0] = "Czekaj na zwolnienie";
     strings["Loop##sgistru2"].plurals[0] = "Pętla";
     strings["Loop until Release##sgistru1"].plurals[0] = "Zapętlaj aż do zwolnienie";
-    strings["Direct##sgistru"].plurals[0] = "Прямое";
+    strings["Direct##sgistru"].plurals[0] = "Bezpośrednie";
     strings["Decrease (linear)##sgistru"].plurals[0] = "Opadanie (liniowe)";
     strings["Decrease (logarithmic)##sgistru"].plurals[0] = "Opadanie (logarytmiczne)";
     strings["Increase (linear)##sgistru"].plurals[0] = "Увелич. (линейное)";
