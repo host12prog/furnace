@@ -393,7 +393,14 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         if (blockVersion>=2) {
           expansions=reader.readC();
         }
+
         tchans=reader.readI();
+
+        if(tchans == 5)
+        {
+          expansions = 0; // This is strange. Sometimes expansion chip is set to 0xFF in files
+        }
+
         pal=reader.readI();
         if (blockVersion>=7) {
           // advanced Hz control
@@ -434,6 +441,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           fineTuneCents+=reader.readC();
 
           ds.tuning=440.0*pow(2.0,(double)fineTuneCents/1200.0);
+
+          logV("detune: %d",fineTuneCents);
         }
 
         logV("old speed/tempo: %d",oldSpeedTempo);
@@ -447,6 +456,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         logV("highlight 2: %d",hilightB);
         logV("split point: %d",speedSplitPoint);
         logV("sweep reset: %d",sweepReset);
+        
 
         // initialize channels
         int systemID=0;
@@ -575,6 +585,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           tchans=DIV_MAX_CHANS;
           logW("too many channels!");
         }
+        reader.seek(blockSize - (reader.tell()-blockStart),SEEK_CUR);
       } else if (blockName=="INFO") {
         CHECK_BLOCK_VERSION(1);
         ds.name=reader.readString(32);
@@ -626,7 +637,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           }
         }
       } else if (blockName=="INSTRUMENTS") {
-        CHECK_BLOCK_VERSION(6);
+        CHECK_BLOCK_VERSION(9);
 
         //reader.seek(blockSize,SEEK_CUR);
 
@@ -699,14 +710,26 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                 sequenceIndex[insIndex][j]=reader.readC();
               }
 
-              const int dpcmNotes=(blockVersion>=2)?96:72;
+              int dpcmNotes=(blockVersion>=2)?96:72;
+
+              if(blockVersion >= 7)
+              {
+                unsigned int notes = reader.readI();
+                dpcmNotes = notes;
+              }
+
               for (int j=0; j<dpcmNotes; j++) {
-                ins->amiga.get_amiga_sample_map(j, true)->map=(short)((unsigned char)reader.readC())-1;
+                int note = j;
+                if(blockVersion >= 7)
+                {
+                  note = reader.readC();
+                }
+                ins->amiga.get_amiga_sample_map(note, true)->map=(short)((unsigned char)reader.readC())-1;
                 unsigned char freq = reader.readC();
-                ins->amiga.get_amiga_sample_map(j, true)->dpcmFreq=(freq & 15); //0-15 = 0-15 unlooped, 128-143 = 0-15 looped
-                ins->amiga.get_amiga_sample_map(j, true)->freq = (freq & 0x80) ? 1 : 0; //loop
+                ins->amiga.get_amiga_sample_map(note, true)->dpcmFreq=(freq & 15); //0-15 = 0-15 unlooped, 128-143 = 0-15 looped
+                ins->amiga.get_amiga_sample_map(note, true)->freq = (freq & 0x80) ? 1 : 0; //loop
                 if (blockVersion>=6) {
-                  ins->amiga.get_amiga_sample_map(j, true)->dpcmDelta=(unsigned char)reader.readC(); // DMC value
+                  ins->amiga.get_amiga_sample_map(note, true)->dpcmDelta=(unsigned char)reader.readC(); // DMC value
                 }
               }
 
@@ -1638,7 +1661,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
       }
 
       if ((reader.tell()-blockStart)!=blockSize) {
-        logE("block %s is incomplete!",blockName);
+        logE("block %s is incomplete! reader.tell()-blockStart %d blockSize %d",blockName, (reader.tell()-blockStart),blockSize);
         lastError="incomplete block "+blockName;
         delete[] file;
         return false;
