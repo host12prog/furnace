@@ -585,7 +585,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           tchans=DIV_MAX_CHANS;
           logW("too many channels!");
         }
-        reader.seek(blockSize - (reader.tell()-blockStart),SEEK_CUR);
+        if(blockVersion == 9 && blockSize - (reader.tell()-blockStart) == 2) //weird
+        {
+          reader.seek(2,SEEK_CUR);
+        }
+        
       } else if (blockName=="INFO") {
         CHECK_BLOCK_VERSION(1);
         ds.name=reader.readString(32);
