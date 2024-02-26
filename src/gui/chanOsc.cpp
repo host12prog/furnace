@@ -790,7 +790,7 @@ void FurnaceGUI::drawChanOsc() {
                       case 'C':
                       {
                         String teeemp;
-                        if(settings.translate_channel_names_osc)
+                        if(settings.translate_short_channel_names)
                         {
                           teeemp+=_L(e->getChannelShortName(ch));
                         }

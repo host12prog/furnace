@@ -1826,6 +1826,7 @@ class FurnaceGUI {
     int language;
     int translate_channel_names_pattern;
     int translate_channel_names_osc;
+    int translate_short_channel_names;
     String mainFontPath;
     String headFontPath;
     String patFontPath;
@@ -2031,6 +2032,7 @@ class FurnaceGUI {
       language(DIV_LANG_ENGLISH),
       translate_channel_names_pattern(0),
       translate_channel_names_osc(0),
+      translate_short_channel_names(0),
       mainFontPath(""),
       headFontPath(""),
       patFontPath(""),

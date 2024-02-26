@@ -79,7 +79,7 @@ void FurnaceGUI::drawPatManager() {
           isNull[j]=(e->curSubSong->pat[i].data[j]==NULL);
         }
         ImGui::TableNextColumn();
-        ImGui::Text("%s",e->getChannelShortName(i));
+        ImGui::Text("%s",settings.translate_short_channel_names ? _L(e->getChannelShortName(i)) : e->getChannelShortName(i));
 
         ImGui::PushID(1000+i);
         for (int k=0; k<DIV_MAX_PATTERNS; k++) {

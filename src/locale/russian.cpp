@@ -2616,6 +2616,7 @@ void DivLocale::addTranslationsRussian()
     strings["GUI language##sgse"].plurals[0] = "Язык интерфейса";
     strings["Translate channel names in pattern header##sgse"].plurals[0] = "Переводить имена каналов в заголовках паттернов";
     strings["Translate channel names in channel oscilloscope label##sgse"].plurals[0] = "Переводить имена каналов в надписях на осциллографах отдельных каналов";
+    strings["Translate short channel names (in orders and other places)##sgse"].plurals[0] = "Переводить короткие имена каналов (в матрице паттернов и других местах)";
     strings["Audio##sgse"].plurals[0] = "Аудио";
     strings["Output##sgse"].plurals[0] = "Вывод";
     strings["Backend##sgse"].plurals[0] = "Интерфейс";
@@ -5349,7 +5350,7 @@ void DivLocale::addTranslationsRussian()
     strings["Yamaha YM3812 (OPL2) with drums##sesd"].plurals[0] = "Yamaha YM3812 (OPL2) с ударными";
     strings["Yamaha YMF262 (OPL3) with drums##sesd"].plurals[0] = "Yamaha YMF262 (OPL3) с ударными";
     strings["Yamaha YM2610 (OPNB) Extended Channel 2##sesd"].plurals[0] = "Yamaha YM2610 (OPNB) расширенный 2-ой канал";
-    strings["Yamaha YM2413 (OPLL) with drums##sesd"].plurals[0] = "=Yamaha YM2413 (OPLL) с ударными";
+    strings["Yamaha YM2413 (OPLL) with drums##sesd"].plurals[0] = "Yamaha YM2413 (OPLL) с ударными";
     strings["Yamaha YM2610B (OPNB2) Extended Channel 3##sesd"].plurals[0] = "Yamaha YM2610B (OPNB2) расширенный 3-ий канал";
     strings["SegaPCM (compatible 5-channel mode)##sesd"].plurals[0] = "SegaPCM (совместимый 5-канальный режим)";
     strings["Yamaha YMF278B (OPL4) with drums##sesd"].plurals[0] = "Yamaha YMF278B (OPL4) с ударными";
@@ -5473,4 +5474,87 @@ void DivLocale::addTranslationsRussian()
     strings["CSM Timer##sesd"].plurals[0] = "CSM таймер";
 
     strings["VRC6 Saw##sesd"].plurals[0] = "VRC6 пила";
+    
+    strings["4OP 1##sesd"].plurals[0] = "4ОП 1";
+    strings["4OP 3##sesd"].plurals[0] = "4ОП 3";
+    strings["4OP 5##sesd"].plurals[0] = "4ОП 5";
+    strings["4OP 7##sesd"].plurals[0] = "4ОП 7";
+    strings["4OP 9##sesd"].plurals[0] = "4ОП 9";
+    strings["4OP 11##sesd"].plurals[0] = "4ОП 11";
+
+    strings["Kick/FM 7##sesd"].plurals[0] = "Бочка/FM7";
+    strings["Kick/FM 16##sesd"].plurals[0] = "Бочка/FM16";
+    strings["Kick##sesd"].plurals[0] = "Бочка";
+    strings["Snare##sesd"].plurals[0] = "М. бараб.";
+    strings["Top##sesd"].plurals[0] = "Тарелка";
+    strings["HiHat##sesd"].plurals[0] = "Хай-хэт";
+    strings["Tom##sesd"].plurals[0] = "Том-том";
+    strings["Rim##sesd"].plurals[0] = "Римшот";
+
+    // channel short names
+
+    strings["CH1##sesd"].plurals[0] = "КН1";
+    strings["CH2##sesd"].plurals[0] = "КН2";
+    strings["CH3##sesd"].plurals[0] = "КН3";
+    strings["CH4##sesd"].plurals[0] = "КН4";
+    strings["CH5##sesd"].plurals[0] = "КН5";
+    strings["CH6##sesd"].plurals[0] = "КН6";
+    strings["CH7##sesd"].plurals[0] = "КН7";
+    strings["CH8##sesd"].plurals[0] = "КН8";
+    strings["CH9##sesd"].plurals[0] = "КН9";
+
+    strings["NO##sesd"].plurals[0] = "ШУ";
+    strings["N1##sesd"].plurals[0] = "Ш1";
+    strings["N2##sesd"].plurals[0] = "Ш2";
+    strings["N3##sesd"].plurals[0] = "Ш3";
+
+    strings["SL##sesd"].plurals[0] = "СК";
+
+    strings["S1##sesd"].plurals[0] = "М1";
+    strings["S2##sesd"].plurals[0] = "М2";
+    strings["S3##sesd"].plurals[0] = "М3";
+    strings["S4##sesd"].plurals[0] = "М4";
+    strings["S5##sesd"].plurals[0] = "М5";
+    strings["S6##sesd"].plurals[0] = "М6";
+
+    strings["P1##sesd"].plurals[0] = "И1";
+    strings["P2##sesd"].plurals[0] = "И2";
+    strings["P3##sesd"].plurals[0] = "И3";
+    strings["P4##sesd"].plurals[0] = "И4";
+    strings["P5##sesd"].plurals[0] = "И5";
+    strings["P6##sesd"].plurals[0] = "И6";
+    strings["P7##sesd"].plurals[0] = "И7";
+    strings["P8##sesd"].plurals[0] = "И8";
+    strings["P9##sesd"].plurals[0] = "И9";
+    strings["P10##sesd"].plurals[0] = "И10";
+    strings["P11##sesd"].plurals[0] = "И11";
+    strings["P12##sesd"].plurals[0] = "И12";
+    strings["P13##sesd"].plurals[0] = "И13";
+    strings["P14##sesd"].plurals[0] = "И14";
+    strings["P15##sesd"].plurals[0] = "И15";
+    strings["P16##sesd"].plurals[0] = "И16";
+    strings["P17##sesd"].plurals[0] = "И17";
+    strings["P18##sesd"].plurals[0] = "И18";
+    strings["P19##sesd"].plurals[0] = "И19";
+    strings["P20##sesd"].plurals[0] = "И20";
+    strings["P21##sesd"].plurals[0] = "И21";
+    strings["P22##sesd"].plurals[0] = "И22";
+    strings["P23##sesd"].plurals[0] = "И23";
+    strings["P24##sesd"].plurals[0] = "И24";
+
+    strings["BD##sesd"].plurals[0] = "ББ";
+    strings["SD##sesd"].plurals[0] = "РБ";
+    strings["TP##sesd"].plurals[0] = "ТР";
+    strings["HH##sesd"].plurals[0] = "ХХ";
+    strings["TM##sesd"].plurals[0] = "ТМ";
+    strings["RM##sesd"].plurals[0] = "РМ";
+
+    strings["P##sesd"].plurals[0] = "И";
+
+    strings["VS##sesd"].plurals[0] = "VП";
+
+    strings["TR##sesd"].plurals[0] = "ТР";
+    strings["DMC##sesd"].plurals[0] = "ДМК";
+
+    strings["WA##sesd"].plurals[0] = "ВТ";
 }

@@ -635,7 +635,7 @@ void FurnaceGUI::drawPattern() {
         ImVec2 maxLabelArea=maxArea;
 
         if (e->curSubSong->chanCollapse[i]) {
-          const char* chName=e->getChannelShortName(i);
+          const char* chName=settings.translate_short_channel_names ? _L(e->getChannelShortName(i)) : e->getChannelShortName(i);
           if (strlen(chName)>3) {
             snprintf(chanID,2048,"...");
           } else {

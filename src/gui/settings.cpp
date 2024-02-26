@@ -890,6 +890,12 @@ void FurnaceGUI::drawSettings() {
           settings.translate_channel_names_osc=translate_channel_names_oscB;
           settingsChanged=true;
         }
+
+        bool translate_short_channel_namesB=settings.translate_short_channel_names;
+        if (ImGui::Checkbox(_L("Translate short channel names (in orders and other places)##sgse"),&translate_short_channel_namesB)) {
+          settings.translate_short_channel_names=translate_short_channel_namesB;
+          settingsChanged=true;
+        }
         //ImGui::TextUnformatted(_L("test##sgse"));
 
         /*if(settings.language == (int)DIV_LANG_RUSSIAN)
@@ -4030,6 +4036,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
 
     settings.translate_channel_names_pattern=conf.getInt("translateChanNamesPat",0);
     settings.translate_channel_names_osc=conf.getInt("translateChanNamesOsc",0);
+    settings.translate_short_channel_names=conf.getInt("translateShortChanNames",0);
   }
 
   if (groups&GUI_SETTINGS_AUDIO) {
@@ -4445,6 +4452,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.language,0,DIV_LANG_MAX-1);
   clampSetting(settings.translate_channel_names_pattern, 0, 1);
   clampSetting(settings.translate_channel_names_osc, 0, 1);
+  clampSetting(settings.translate_short_channel_names, 0, 1);
   clampSetting(settings.playbackTime,0,1);
   clampSetting(settings.shaderOsc,0,1);
   clampSetting(settings.oscLineSize,0.25f,16.0f);
@@ -4510,6 +4518,7 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
 
     conf.set("translateChanNamesPat",settings.translate_channel_names_pattern);
     conf.set("translateChanNamesOsc",settings.translate_channel_names_osc);
+    conf.set("translateShortChanNames",settings.translate_short_channel_names);
   }
 
   // audio

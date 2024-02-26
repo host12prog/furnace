@@ -2646,6 +2646,7 @@ void DivLocale::addTranslationsTemplate()
     strings["GUI language##sgse"].plurals[0] = "=GUI language";
     strings["Translate channel names in pattern header##sgse"].plurals[0] = "=Translate channel names in pattern header";
     strings["Translate channel names in channel oscilloscope label##sgse"].plurals[0] = "=Translate channel names in channel oscilloscope label";
+    strings["Translate short channel names (in orders and other places)##sgse"].plurals[0] = "=Translate short channel names (in orders and other places)";
     strings["test##sgse"].plurals[0] = "=test";
     strings["iulserghiueshgui##sgse"].plurals[0] = "=iulserghiueshgui";
     strings["Audio##sgse"].plurals[0] = "=Audio";
@@ -5575,4 +5576,87 @@ void DivLocale::addTranslationsTemplate()
     strings["CSM Timer##sesd"].plurals[0] = "=CSM Timer";
 
     strings["VRC6 Saw##sesd"].plurals[0] = "=VRC6 Saw";
+
+    strings["4OP 1##sesd"].plurals[0] = "=4OP 1";
+    strings["4OP 3##sesd"].plurals[0] = "=4OP 3";
+    strings["4OP 5##sesd"].plurals[0] = "=4OP 5";
+    strings["4OP 7##sesd"].plurals[0] = "=4OP 7";
+    strings["4OP 9##sesd"].plurals[0] = "=4OP 9";
+    strings["4OP 11##sesd"].plurals[0] = "=4OP 11";
+
+    strings["Kick/FM 7##sesd"].plurals[0] = "=Kick/FM 7";
+    strings["Kick/FM 16##sesd"].plurals[0] = "=Kick/FM 16";
+    strings["Kick##sesd"].plurals[0] = "=Kick";
+    strings["Snare##sesd"].plurals[0] = "=Snare";
+    strings["Top##sesd"].plurals[0] = "=Top";
+    strings["HiHat##sesd"].plurals[0] = "=HiHat";
+    strings["Tom##sesd"].plurals[0] = "=Tom";
+    strings["Rim##sesd"].plurals[0] = "=Rim";
+
+    // channel short names
+
+    strings["CH1##sesd"].plurals[0] = "=CH1";
+    strings["CH2##sesd"].plurals[0] = "=CH2";
+    strings["CH3##sesd"].plurals[0] = "=CH3";
+    strings["CH4##sesd"].plurals[0] = "=CH4";
+    strings["CH5##sesd"].plurals[0] = "=CH5";
+    strings["CH6##sesd"].plurals[0] = "=CH6";
+    strings["CH7##sesd"].plurals[0] = "=CH7";
+    strings["CH8##sesd"].plurals[0] = "=CH8";
+    strings["CH9##sesd"].plurals[0] = "=CH9";
+
+    strings["NO##sesd"].plurals[0] = "=NO";
+    strings["N1##sesd"].plurals[0] = "=N1";
+    strings["N2##sesd"].plurals[0] = "=N2";
+    strings["N3##sesd"].plurals[0] = "=N3";
+
+    strings["SL##sesd"].plurals[0] = "=SL";
+
+    strings["S1##sesd"].plurals[0] = "=S1";
+    strings["S2##sesd"].plurals[0] = "=S2";
+    strings["S3##sesd"].plurals[0] = "=S3";
+    strings["S4##sesd"].plurals[0] = "=S4";
+    strings["S5##sesd"].plurals[0] = "=S5";
+    strings["S6##sesd"].plurals[0] = "=S6";
+
+    strings["P1##sesd"].plurals[0] = "=P1";
+    strings["P2##sesd"].plurals[0] = "=P2";
+    strings["P3##sesd"].plurals[0] = "=P3";
+    strings["P4##sesd"].plurals[0] = "=P4";
+    strings["P5##sesd"].plurals[0] = "=P5";
+    strings["P6##sesd"].plurals[0] = "=P6";
+    strings["P7##sesd"].plurals[0] = "=P7";
+    strings["P8##sesd"].plurals[0] = "=P8";
+    strings["P9##sesd"].plurals[0] = "=P9";
+    strings["P10##sesd"].plurals[0] = "=P10";
+    strings["P11##sesd"].plurals[0] = "=P11";
+    strings["P12##sesd"].plurals[0] = "=P12";
+    strings["P13##sesd"].plurals[0] = "=P13";
+    strings["P14##sesd"].plurals[0] = "=P14";
+    strings["P15##sesd"].plurals[0] = "=P15";
+    strings["P16##sesd"].plurals[0] = "=P16";
+    strings["P17##sesd"].plurals[0] = "=P17";
+    strings["P18##sesd"].plurals[0] = "=P18";
+    strings["P19##sesd"].plurals[0] = "=P19";
+    strings["P20##sesd"].plurals[0] = "=P20";
+    strings["P21##sesd"].plurals[0] = "=P21";
+    strings["P22##sesd"].plurals[0] = "=P22";
+    strings["P23##sesd"].plurals[0] = "=P23";
+    strings["P24##sesd"].plurals[0] = "=P24";
+
+    strings["BD##sesd"].plurals[0] = "=BD";
+    strings["SD##sesd"].plurals[0] = "=SD";
+    strings["TP##sesd"].plurals[0] = "=TP";
+    strings["HH##sesd"].plurals[0] = "=HH";
+    strings["TM##sesd"].plurals[0] = "=TM";
+    strings["RM##sesd"].plurals[0] = "=RM";
+
+    strings["P##sesd"].plurals[0] = "=P";
+
+    strings["VS##sesd"].plurals[0] = "=VS";
+
+    strings["TR##sesd"].plurals[0] = "=TR";
+    strings["DMC##sesd"].plurals[0] = "=DMC";
+
+    strings["WA##sesd"].plurals[0] = "=WA";
 }
