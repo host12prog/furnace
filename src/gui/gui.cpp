@@ -3465,6 +3465,7 @@ bool FurnaceGUI::loop() {
   DECLARE_METRIC(settings)
   DECLARE_METRIC(debug)
   DECLARE_METRIC(stats)
+  DECLARE_METRIC(memory)
   DECLARE_METRIC(compatFlags)
   DECLARE_METRIC(piano)
   DECLARE_METRIC(notes)
@@ -4030,6 +4031,7 @@ bool FurnaceGUI::loop() {
         IMPORT_CLOSE(speedOpen);
         IMPORT_CLOSE(groovesOpen);
         IMPORT_CLOSE(xyOscOpen);
+        IMPORT_CLOSE(memoryOpen);
       } else if (pendingLayoutImportStep==1) {
         // let the UI settle
       } else if (pendingLayoutImportStep==2) {
@@ -4418,6 +4420,7 @@ bool FurnaceGUI::loop() {
         if (ImGui::MenuItem(_L("register view##sggu"),BIND_FOR(GUI_ACTION_WINDOW_REGISTER_VIEW),regViewOpen)) regViewOpen=!regViewOpen;
         if (ImGui::MenuItem(_L("log viewer##sggu"),BIND_FOR(GUI_ACTION_WINDOW_LOG),logOpen)) logOpen=!logOpen;
         if (ImGui::MenuItem(_L("statistics##sggu"),BIND_FOR(GUI_ACTION_WINDOW_STATS),statsOpen)) statsOpen=!statsOpen;
+        if (ImGui::MenuItem(_L("memory composition##sggu"),BIND_FOR(GUI_ACTION_WINDOW_MEMORY),memoryOpen)) memoryOpen=!memoryOpen;
         if (spoilerOpen) if (ImGui::MenuItem(_L("spoiler##sggu"),NULL,spoilerOpen)) spoilerOpen=!spoilerOpen;
 
         ImGui::EndMenu();
@@ -4639,6 +4642,7 @@ bool FurnaceGUI::loop() {
       MEASURE(volMeter,drawVolMeter());
       MEASURE(grooves,drawGrooves());
       MEASURE(regView,drawRegView());
+      MEASURE(memory,drawMemory());
     } else {
       globalWinFlags=0;
       ImGui::DockSpaceOverViewport(NULL,lockLayout?(ImGuiDockNodeFlags_NoWindowMenuButton|ImGuiDockNodeFlags_NoMove|ImGuiDockNodeFlags_NoResize|ImGuiDockNodeFlags_NoCloseButton|ImGuiDockNodeFlags_NoDocking|ImGuiDockNodeFlags_NoDockingSplitMe|ImGuiDockNodeFlags_NoDockingSplitOther):0);
@@ -4669,6 +4673,7 @@ bool FurnaceGUI::loop() {
       MEASURE(settings,drawSettings());
       MEASURE(debug,drawDebug());
       MEASURE(stats,drawStats());
+      MEASURE(memory,drawMemory());
       MEASURE(compatFlags,drawCompatFlags());
       MEASURE(piano,drawPiano());
       MEASURE(notes,drawNotes());
@@ -6720,6 +6725,7 @@ bool FurnaceGUI::init() {
   oscOpen=e->getConfBool("oscOpen",true);
   chanOscOpen=e->getConfBool("chanOscOpen",false);
   xyOscOpen=e->getConfBool("xyOscOpen",false);
+  memoryOpen=e->getConfBool("memoryOpen",false);
   volMeterOpen=e->getConfBool("volMeterOpen",true);
   statsOpen=e->getConfBool("statsOpen",false);
   compatFlagsOpen=e->getConfBool("compatFlagsOpen",false);
@@ -7285,6 +7291,7 @@ void FurnaceGUI::commitState() {
   e->setConf("oscOpen",oscOpen);
   e->setConf("chanOscOpen",chanOscOpen);
   e->setConf("xyOscOpen",xyOscOpen);
+  e->setConf("memoryOpen",memoryOpen);
   e->setConf("volMeterOpen",volMeterOpen);
   e->setConf("statsOpen",statsOpen);
   e->setConf("compatFlagsOpen",compatFlagsOpen);
@@ -7650,6 +7657,7 @@ FurnaceGUI::FurnaceGUI():
   speedOpen(true),
   groovesOpen(false),
   xyOscOpen(false),
+  memoryOpen(false),
   insListDir(false),
   waveListDir(false),
   sampleListDir(false),

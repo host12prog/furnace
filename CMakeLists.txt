@@ -827,6 +827,7 @@ src/gui/gradient.cpp
 src/gui/grooves.cpp
 src/gui/insEdit.cpp
 src/gui/log.cpp
+src/gui/memory.cpp
 src/gui/mixer.cpp
 src/gui/midiMap.cpp
 src/gui/newSong.cpp
