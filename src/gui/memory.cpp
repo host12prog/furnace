@@ -28,7 +28,7 @@ void FurnaceGUI::drawMemory() {
     nextWindow=GUI_WINDOW_NOTHING;
   }
   if (!memoryOpen) return;
-  if (ImGui::Begin("Memory Composition",&memoryOpen,globalWinFlags)) {
+  if (ImGui::Begin("Memory Composition",&memoryOpen,globalWinFlags,_L("Memory Composition###Memory Composition"))) {
     ImGui::Text("Contents here...");
   }
   if (ImGui::IsWindowFocused(ImGuiFocusedFlags_ChildWindows)) curWindow=GUI_WINDOW_MEMORY;

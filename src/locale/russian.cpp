@@ -664,6 +664,7 @@ void DivLocale::addTranslationsRussian()
     strings["register view##sggu"].plurals[0] = "регистры";
     strings["log viewer##sggu"].plurals[0] = "просмотр логов";
     strings["statistics##sggu"].plurals[0] = "статистика";
+    strings["memory composition##sggu"].plurals[0] = "содержание памяти";
     strings["spoiler##sggu"].plurals[0] = "спойлер";
     strings["Help##menubar"].plurals[0] = "Справка##menubar";
     strings["help##menubar"].plurals[0] = "справка##menubar";
@@ -923,6 +924,7 @@ void DivLocale::addTranslationsRussian()
     strings["Clock##sggc"].plurals[0] = "Часы";
     strings["Grooves##sggc"].plurals[0] = "Ритм-паттерны";
     strings["Oscilloscope (X-Y)##sggc"].plurals[0] = "Осциллограф (X-Y)";
+    strings["Memory Composition##sggc"].plurals[0] = "Содержание памяти";
 
     strings["Collapse/expand current window##sggc"].plurals[0] = "Свернуть/развернуть текущее окно";
     strings["Close current window##sggc"].plurals[0] = "Закрыть текущее окно";
@@ -1504,6 +1506,10 @@ void DivLocale::addTranslationsRussian()
     strings["Systems##sgns"].plurals[0] = "Системы";
     strings["I'm feeling lucky##sgns"].plurals[0] = "Мне повезёт!";
     strings["Cancel##sgns"].plurals[0] = "Отмена";
+
+    //   sgme  src/gui/memory.cpp
+
+    strings["Memory Composition###Memory Composition"].plurals[0] = "Содержание памяти###Memory Composition";
 
     //   sgor  src/gui/orders.cpp
 

@@ -69,6 +69,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgmm  src/gui/midiMap.cpp
     //   sgmx  src/gui/mixer.cpp
     //   sgns  src/gui/newSong.cpp
+    //   sgme  src/gui/memory.cpp
     //   sgor  src/gui/orders.cpp
     //   sgos  src/gui/osc.cpp
     //   sgpm  src/gui/patManager.cpp
@@ -722,6 +723,7 @@ void DivLocale::addTranslationsTemplate()
     strings["register view##sggu"].plurals[0] = "=register view";
     strings["log viewer##sggu"].plurals[0] = "=log viewer";
     strings["statistics##sggu"].plurals[0] = "=statistics";
+    strings["memory composition##sggu"].plurals[0] = "=memory composition";
     strings["spoiler##sggu"].plurals[0] = "=spoiler";
     strings["Help##menubar"].plurals[0] = "=Help##menubar";
     strings["help##menubar"].plurals[0] = "=help##menubar";
@@ -978,6 +980,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Clock##sggc"].plurals[0] = "=Clock";
     strings["Grooves##sggc"].plurals[0] = "=Grooves";
     strings["Oscilloscope (X-Y)##sggc"].plurals[0] = "=Oscilloscope (X-Y)";
+    strings["Memory Composition##sggc"].plurals[0] = "=Memory Composition";
     strings["Collapse/expand current window##sggc"].plurals[0] = "=Collapse/expand current window";
     strings["Close current window##sggc"].plurals[0] = "=Close current window";
     strings["---Pattern##sggc"].plurals[0] = "=---Pattern";
@@ -1559,6 +1562,10 @@ void DivLocale::addTranslationsTemplate()
     strings["Systems##sgns"].plurals[0] = "=Systems";
     strings["I'm feeling lucky##sgns"].plurals[0] = "=I'm feeling lucky";
     strings["Cancel##sgns"].plurals[0] = "=Cancel";
+
+    //   sgme  src/gui/memory.cpp
+
+    strings["Memory Composition###Memory Composition"].plurals[0] = "=Memory Composition###Memory Composition";
 
     //   sgor  src/gui/orders.cpp
 
