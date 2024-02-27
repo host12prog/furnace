@@ -4084,11 +4084,13 @@ void DivLocale::addTranslationsRussian()
 
     //   sgiPOKEY  src/gui/inst/pokey.cpp
 
+    strings["16-bit raw period macro##sgiPOKEY"].plurals[0] = "16-битный макрос периода (регистровое знач.)";
     strings["Macros##sgiPOKEY"].plurals[0] = "Макросы";
     strings["Volume##sgiPOKEY"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiPOKEY"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiPOKEY"].plurals[0] = "Частота";
     strings["Waveform##sgiPOKEY"].plurals[0] = "Волна";
+    strings["Raw Period##sgiPOKEY"].plurals[0] = "Период (регистровое знач.)";
 
     //   sgiPNN    src/gui/inst/powernoise.cpp
 

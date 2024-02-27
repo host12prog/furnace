@@ -112,6 +112,8 @@ void DivPlatformPOKEY::acquireASAP(short* buf, size_t len) {
 }
 
 void DivPlatformPOKEY::tick(bool sysTick) {
+  bool raw_freq[4] = { false };
+
   for (int i=0; i<4; i++) {
     chan[i].std.next();
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
@@ -144,6 +146,11 @@ void DivPlatformPOKEY::tick(bool sysTick) {
       }
       chan[i].freqChanged=true;
     }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->had) {
+      chan[i].freq = chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val;
+      raw_freq[i] = true;
+      chan[i].freqChanged=true;
+    }
   }
 
   if (audctlChanged) {
@@ -162,72 +169,75 @@ void DivPlatformPOKEY::tick(bool sysTick) {
 
   for (int i=0; i<4; i++) {
     if (chan[i].freqChanged || chan[i].keyOn || chan[i].keyOff) {
-      chan[i].freq=parent->calcFreq(chan[i].baseFreq,parent->song.linearPitch?chan[i].pitch:0,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,parent->song.linearPitch?chan[i].pitch2:0,chipClock,CHIP_DIVIDER);
+      if(!raw_freq[i])
+      {
+        chan[i].freq=parent->calcFreq(chan[i].baseFreq,parent->song.linearPitch?chan[i].pitch:0,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,parent->song.linearPitch?chan[i].pitch2:0,chipClock,CHIP_DIVIDER);
 
-      if ((i==0 && !(audctl&64)) || (i==2 && !(audctl&32)) || i==1 || i==3) {
-        chan[i].freq/=7;
-        switch (chan[i].wave) {
-          case 6:
-            chan[i].freq/=5;
-            chan[i].freq>>=1;
-            break;
-          case 7:
-            if (audctl&1) {
+        if ((i==0 && !(audctl&64)) || (i==2 && !(audctl&32)) || i==1 || i==3) {
+          chan[i].freq/=7;
+          switch (chan[i].wave) {
+            case 6:
               chan[i].freq/=5;
-            } else {
+              chan[i].freq>>=1;
+              break;
+            case 7:
+              if (audctl&1) {
+                chan[i].freq/=5;
+              } else {
+                chan[i].freq/=15;
+              }
+              chan[i].freq>>=1;
+              break;
+            default:
+              chan[i].freq>>=2;
+              break;
+          }
+        } else if ((i==0 && audctl&64) || (i==2 && audctl&32)) {
+          switch (chan[i].wave) {
+            case 6:
+              chan[i].freq<<=1;
+              chan[i].freq/=5;
+              break;
+            case 7:
+              chan[i].freq<<=1;
               chan[i].freq/=15;
-            }
-            chan[i].freq>>=1;
-            break;
-          default:
-            chan[i].freq>>=2;
-            break;
+              break;
+          }
         }
-      } else if ((i==0 && audctl&64) || (i==2 && audctl&32)) {
-        switch (chan[i].wave) {
-          case 6:
-            chan[i].freq<<=1;
-            chan[i].freq/=5;
-            break;
-          case 7:
-            chan[i].freq<<=1;
-            chan[i].freq/=15;
-            break;
+
+        if (audctl&1 && !((i==0 && audctl&64) || (i==2 && audctl&32))) {
+          chan[i].freq>>=2;
         }
-      }
 
-      if (audctl&1 && !((i==0 && audctl&64) || (i==2 && audctl&32))) {
-        chan[i].freq>>=2;
-      }
+        // non-linear pitch
+        if (parent->song.linearPitch==0) {
+          chan[i].freq-=chan[i].pitch;
+        }
 
-      // non-linear pitch
-      if (parent->song.linearPitch==0) {
-        chan[i].freq-=chan[i].pitch;
-      }
+        if (--chan[i].freq<0) chan[i].freq=0;
 
-      if (--chan[i].freq<0) chan[i].freq=0;
+        // snap buzz periods
+        int minFreq8=255;
+        if (chan[i].wave==7) {
+          if ((i==0 && audctl&64) || (i==2 && audctl&32)) {
+            chan[i].freq=15*(chan[i].freq/15)+snapPeriodLong16[(chan[i].freq%15)]+1;
+          } else {
+            if (!(audctl&1)) chan[i].freq=15*(chan[i].freq/15)+snapPeriodLong[(chan[i].freq%15)];
+          }
+        } else if (chan[i].wave==6) {
+          if ((i==0 && audctl&64) || (i==2 && audctl&32)) {
+            chan[i].freq=15*(chan[i].freq/15)+snapPeriodShort16[(chan[i].freq%15)]+1;
+          } else {
+            if (!(audctl&1)) chan[i].freq=15*(chan[i].freq/15)+snapPeriodShort[(chan[i].freq%15)];
+          }
+          minFreq8=251;
+        }
 
-      // snap buzz periods
-      int minFreq8=255;
-      if (chan[i].wave==7) {
-        if ((i==0 && audctl&64) || (i==2 && audctl&32)) {
-          chan[i].freq=15*(chan[i].freq/15)+snapPeriodLong16[(chan[i].freq%15)]+1;
+        if ((i==0 && audctl&16) || (i==2 && audctl&8)) {
+          if (chan[i].freq>65535) chan[i].freq=65535;
         } else {
-          if (!(audctl&1)) chan[i].freq=15*(chan[i].freq/15)+snapPeriodLong[(chan[i].freq%15)];
+          if (chan[i].freq>minFreq8) chan[i].freq=minFreq8;
         }
-      } else if (chan[i].wave==6) {
-        if ((i==0 && audctl&64) || (i==2 && audctl&32)) {
-          chan[i].freq=15*(chan[i].freq/15)+snapPeriodShort16[(chan[i].freq%15)]+1;
-        } else {
-          if (!(audctl&1)) chan[i].freq=15*(chan[i].freq/15)+snapPeriodShort[(chan[i].freq%15)];
-        }
-        minFreq8=251;
-      }
-
-      if ((i==0 && audctl&16) || (i==2 && audctl&8)) {
-        if (chan[i].freq>65535) chan[i].freq=65535;
-      } else {
-        if (chan[i].freq>minFreq8) chan[i].freq=minFreq8;
       }
 
       // write frequency

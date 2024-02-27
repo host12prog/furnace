@@ -959,6 +959,17 @@ struct DivInstrumentSID2 {
     noise_mode(0) {}
 };
 
+struct DivInstrumentPOKEY {
+  unsigned char raw_freq_macro_mode;
+
+  bool operator==(const DivInstrumentPOKEY& other);
+  bool operator!=(const DivInstrumentPOKEY& other) {
+    return !(*this==other);
+  }
+  DivInstrumentPOKEY():
+    raw_freq_macro_mode(0) {}
+};
+
 struct DivInstrument {
   String name;
   DivInstrumentType type;
@@ -979,6 +990,7 @@ struct DivInstrument {
   DivInstrumentES5503 es5503;
   DivInstrumentPowerNoise powernoise;
   DivInstrumentSID2 sid2;
+  DivInstrumentPOKEY pokey;
 
   /**
    * these are internal functions.
@@ -1008,6 +1020,7 @@ struct DivInstrument {
   void writeFeaturePN(SafeWriter* w);
   void writeFeatureS2(SafeWriter* w);
   void writeFeatureLW(SafeWriter* w);
+  void writeFeaturePO(SafeWriter* w);
 
   void readFeatureNA(SafeReader& reader, short version);
   void readFeatureFM(SafeReader& reader, short version);
@@ -1033,6 +1046,7 @@ struct DivInstrument {
   void readFeaturePN(SafeReader& reader, short version);
   void readFeatureS2(SafeReader& reader, short version);
   void readFeatureLW(SafeReader& reader, short version);
+  void readFeaturePO(SafeReader& reader, short version);
 
   DivDataErrors readInsDataOld(SafeReader& reader, short version, bool tildearrow_version);
   DivDataErrors readInsDataNew(SafeReader& reader, short version, bool fui, DivSong* song, bool tildearrow_version);

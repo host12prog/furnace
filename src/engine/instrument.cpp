@@ -275,6 +275,10 @@ bool DivInstrumentPowerNoise::operator==(const DivInstrumentPowerNoise& other) {
   return _C(octave);
 }
 
+bool DivInstrumentPOKEY::operator==(const DivInstrumentPOKEY& other) {
+  return _C(raw_freq_macro_mode);
+}
+
 #undef _C
 
 #define FEATURE_BEGIN(x) \
@@ -838,6 +842,15 @@ void DivInstrument::writeFeatureLW(SafeWriter* w)
   FEATURE_END;
 }
 
+void DivInstrument::writeFeaturePO(SafeWriter* w)
+{
+  FEATURE_BEGIN("PO");
+
+  w->writeC(pokey.raw_freq_macro_mode);
+
+  FEATURE_END;
+}
+
 void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bool insName, bool tilde_version) {
   size_t blockStartSeek=0;
   size_t blockEndSeek=0;
@@ -906,6 +919,8 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
   bool featureS2=false;
 
   bool featureLW=(std.local_waves.size() > 0 ? true : false);
+
+  bool featurePO=false;
 
   bool checkForWL=false;
 
@@ -989,8 +1004,6 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         break;
       case DIV_INS_OPZ:
         featureFM=true;
-        break;
-      case DIV_INS_POKEY:
         break;
       case DIV_INS_BEEPER:
         break;
@@ -1145,6 +1158,9 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
       case DIV_INS_SID2:
         featureS2=true;
         break;
+      case DIV_INS_POKEY:
+        featurePO=true;
+        break;
       case DIV_INS_MAX:
         break;
       case DIV_INS_NULL:
@@ -1203,6 +1219,9 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
     }
     if (type == DIV_INS_SID2 && (sid2!=defaultIns.sid2 || c64!=defaultIns.c64)) {
       featureS2=true;
+    }
+    if (pokey!=defaultIns.pokey) {
+      featurePO=true;
     }
   }
 
@@ -1390,6 +1409,9 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
   }
   if (featureLW) {
     writeFeatureLW(w);
+  }
+  if (featurePO) {
+    writeFeaturePO(w);
   }
 
   if (fui && (featureSL || featureWL)) {
@@ -2185,6 +2207,14 @@ void DivInstrument::readFeatureLW(SafeReader& reader, short version) {
   READ_FEAT_END;
 }
 
+void DivInstrument::readFeaturePO(SafeReader& reader, short version) {
+  READ_FEAT_BEGIN;
+
+  pokey.raw_freq_macro_mode = reader.readC();
+
+  READ_FEAT_END;
+}
+
 DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, bool fui, DivSong* song, bool tildearrow_version) {
   unsigned char featCode[2];
   bool volIsCutoff=false;
@@ -2292,6 +2322,8 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
       readFeatureS2(reader,version);
     } else if (memcmp(featCode,"LW",2)==0) { // local wavetables
       readFeatureLW(reader,version);
+    } else if (memcmp(featCode,"PO",2)==0) { // local wavetables
+      readFeaturePO(reader,version);
     } else {
       if (song==NULL && (memcmp(featCode,"SL",2)==0 || (memcmp(featCode,"WL",2)==0))) {
         // nothing

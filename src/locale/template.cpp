@@ -4185,11 +4185,13 @@ void DivLocale::addTranslationsTemplate()
 
     //   sgiPOKEY  src/gui/inst/pokey.cpp
 
+    strings["16-bit raw period macro##sgiPOKEY"].plurals[0] = "=16-bit raw period macro";
     strings["Macros##sgiPOKEY"].plurals[0] = "=Macros";
     strings["Volume##sgiPOKEY"].plurals[0] = "=Volume";
     strings["Arpeggio##sgiPOKEY"].plurals[0] = "=Arpeggio";
     strings["Pitch##sgiPOKEY"].plurals[0] = "=Pitch";
     strings["Waveform##sgiPOKEY"].plurals[0] = "=Waveform";
+    strings["Raw Period##sgiPOKEY"].plurals[0] = "=Raw Period";
 
     //   sgiPNN    src/gui/inst/powernoise.cpp
 

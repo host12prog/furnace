@@ -29,6 +29,16 @@ class FurnaceGUI;
 
 void FurnaceGUI::drawInsPOKEY(DivInstrument* ins)
 {
+  if (ImGui::BeginTabItem("POKEY")) 
+  {
+    if(ImGui::Checkbox(_L("16-bit raw period macro##sgiPOKEY"),(bool*)&ins->pokey.raw_freq_macro_mode))
+    {
+      ins->std.get_macro(DIV_MACRO_EX1, true)->vZoom=-1;
+      ins->std.get_macro(DIV_MACRO_EX1, true)->vScroll=-1;
+    }
+    ImGui::EndTabItem();
+  }
+
   if (ImGui::BeginTabItem(_L("Macros##sgiPOKEY"))) 
   {
     macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiPOKEY"),ins,DIV_MACRO_VOL,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
@@ -37,6 +47,8 @@ void FurnaceGUI::drawInsPOKEY(DivInstrument* ins)
 
     macroList.push_back(FurnaceGUIMacroDesc("AUDCTL",ins,DIV_MACRO_DUTY,0xff,0,8,128,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,pokeyCtlBits));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiPOKEY"),ins,DIV_MACRO_WAVE,0xff,0,7,64,uiColors[GUI_COLOR_MACRO_WAVE]));
+
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Raw Period##sgiPOKEY"),ins,DIV_MACRO_EX1,0xff,0,(ins->pokey.raw_freq_macro_mode ? 65535 : 255),256,uiColors[GUI_COLOR_MACRO_OTHER]));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();
