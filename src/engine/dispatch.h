@@ -477,6 +477,8 @@ struct DivMemoryEntry {
 
 struct DivMemoryComposition {
   std::vector<DivMemoryEntry> entries;
+  size_t capacity;
+  size_t used;
 };
 
 class DivEngine;
