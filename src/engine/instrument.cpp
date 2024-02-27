@@ -2322,7 +2322,7 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
       readFeatureS2(reader,version);
     } else if (memcmp(featCode,"LW",2)==0) { // local wavetables
       readFeatureLW(reader,version);
-    } else if (memcmp(featCode,"PO",2)==0) { // local wavetables
+    } else if (memcmp(featCode,"PO",2)==0) { // POKEY
       readFeaturePO(reader,version);
     } else {
       if (song==NULL && (memcmp(featCode,"SL",2)==0 || (memcmp(featCode,"WL",2)==0))) {
