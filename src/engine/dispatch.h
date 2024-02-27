@@ -275,6 +275,9 @@ enum DivDispatchCmds {
 
   DIV_CMD_WAVE_LOCAL, //wavetable (from local list)
 
+  DIV_CMD_RAW_FREQ,
+  DIV_CMD_RAW_FREQ_HIGHER_BYTE,
+
   DIV_CMD_MAX
 };
 

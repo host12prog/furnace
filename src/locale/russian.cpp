@@ -5157,6 +5157,8 @@ void DivLocale::addTranslationsRussian()
     strings["10xx: Set waveform (0 to 7)##sesd0"].plurals[0] = "10xx: Волна (0-7)";
     strings["11xx: Set AUDCTL##sesd"].plurals[0] = "11xx: Установить AUDCTL";
     strings["12xx: Toggle two-tone mode##sesd"].plurals[0] = "12xx: Переключить двухголосый режим";
+    strings["13xx: Set raw period##sesd"].plurals[0] = "13xx: \"Сырое\" значение периода";
+    strings["14xx: Set raw period (higher byte; only for 16-bit mode)##sesd"].plurals[0] = "14xx: \"Сырое\" значение периода (старший байт; только для 16-битного режима)";
     strings["this is like SNES' sound chip but without interpolation and the rest of nice bits.##sesd"].plurals[0] = "похоже на звуковой чип SNES, но без интерполяции и других приятных вещей.";
     strings["developed by the makers of the Game Boy and the Virtual Boy...##sesd"].plurals[0] = "от создателей Game Boy и Virtual Boy...";
     strings["10xx: Set waveform##sesd5"].plurals[0] = "10xx: Волна";

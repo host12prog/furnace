@@ -112,8 +112,6 @@ void DivPlatformPOKEY::acquireASAP(short* buf, size_t len) {
 }
 
 void DivPlatformPOKEY::tick(bool sysTick) {
-  bool raw_freq[4] = { false };
-
   for (int i=0; i<4; i++) {
     chan[i].std.next();
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
@@ -270,6 +268,8 @@ void DivPlatformPOKEY::tick(bool sysTick) {
         rWrite(1+(i<<1),val);
       }
     }
+    
+    raw_freq[i] = false;
   }
 }
 
@@ -340,6 +340,16 @@ int DivPlatformPOKEY::dispatch(DivCommand c) {
     case DIV_CMD_STD_NOISE_FREQ:
       skctl=c.value?0x8b:0x03;
       skctlChanged=true;
+      break;
+    case DIV_CMD_RAW_FREQ:
+      chan[c.chan].freq = (chan[c.chan].freq & 0xff00) | c.value;
+      raw_freq[c.chan] = true;
+      chan[c.chan].freqChanged = true;
+      break;
+    case DIV_CMD_RAW_FREQ_HIGHER_BYTE:
+      chan[c.chan].freq = (chan[c.chan].freq & 0x00ff) | (c.value << 8);
+      raw_freq[c.chan] = true;
+      chan[c.chan].freqChanged = true;
       break;
     case DIV_CMD_NOTE_PORTA: {
       int destFreq=NOTE_PERIODIC(c.value2);
@@ -457,6 +467,7 @@ void DivPlatformPOKEY::reset() {
   for (int i=0; i<4; i++) {
     chan[i]=DivPlatformPOKEY::Channel();
     chan[i].std.setEngine(parent);
+    raw_freq[i] = false;
   }
   if (dumpWrites) {
     addWrite(0xffffffff,0);

@@ -1258,6 +1258,8 @@ void DivEngine::registerSystems() {
       {0x10, {DIV_CMD_WAVE, "10xx: Set waveform (0 to 7)##sesd0"}},
       {0x11, {DIV_CMD_STD_NOISE_MODE, "11xx: Set AUDCTL##sesd"}},
       {0x12, {DIV_CMD_STD_NOISE_FREQ, "12xx: Toggle two-tone mode##sesd"}},
+      {0x13, {DIV_CMD_RAW_FREQ, "13xx: Set raw period##sesd"}},
+      {0x14, {DIV_CMD_RAW_FREQ_HIGHER_BYTE, "14xx: Set raw period (higher byte; only for 16-bit mode)##sesd"}},
     }
   );
 

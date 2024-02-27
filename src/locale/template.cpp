@@ -5281,6 +5281,8 @@ void DivLocale::addTranslationsTemplate()
     strings["10xx: Set waveform (0 to 7)##sesd0"].plurals[0] = "=10xx: Set waveform (0 to 7)";
     strings["11xx: Set AUDCTL##sesd"].plurals[0] = "=11xx: Set AUDCTL";
     strings["12xx: Toggle two-tone mode##sesd"].plurals[0] = "=12xx: Toggle two-tone mode";
+    strings["13xx: Set raw period##sesd"].plurals[0] = "=13xx: Set raw period";
+    strings["14xx: Set raw period (higher byte; only for 16-bit mode)##sesd"].plurals[0] = "=14xx: Set raw period (higher byte; only for 16-bit mode)";
     strings["this is like SNES' sound chip but without interpolation and the rest of nice bits.##sesd"].plurals[0] = "=this is like SNES' sound chip but without interpolation and the rest of nice bits.";
     strings["developed by the makers of the Game Boy and the Virtual Boy...##sesd"].plurals[0] = "=developed by the makers of the Game Boy and the Virtual Boy...";
     strings["10xx: Set waveform##sesd5"].plurals[0] = "=10xx: Set waveform";

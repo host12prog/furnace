@@ -273,6 +273,9 @@ const char* cmdName[]={
   "CUTOFF_SLIDE_DN",
 
   "WAVE_LOCAL",
+
+  "RAW_FREQ",
+  "RAW_FREQ_HIGHER_BYTE",
 };
 
 static_assert((sizeof(cmdName)/sizeof(void*))==DIV_CMD_MAX,"update cmdName!");
