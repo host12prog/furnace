@@ -551,7 +551,7 @@ unsigned short DivPlatformDave::getPan(int ch) {
 // TODO: the rest
 DivChannelPair DivPlatformDave::getPaired(int ch) {
   if (chan[ch].highPass) {
-    DivChannelPair("high",(ch+1)&3);
+    return DivChannelPair("high",(ch+1)&3);
   }
   return DivChannelPair();
 }
