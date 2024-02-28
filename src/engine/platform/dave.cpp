@@ -553,6 +553,12 @@ DivChannelPair DivPlatformDave::getPaired(int ch) {
   if (chan[ch].highPass) {
     return DivChannelPair("high",(ch+1)&3);
   }
+  if (chan[3].lowPass && ch == 3) {
+    return DivChannelPair("low",2); //lowpass is only between noise chan and chan 2
+  }
+  if (chan[ch].ringMod) {
+    return DivChannelPair("ring",(ch+2)&3);
+  }
   return DivChannelPair();
 }
 
