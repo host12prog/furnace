@@ -1521,12 +1521,18 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
             chan[i].volume+=chan[i].volSpeed;
             if (chan[i].volume>chan[i].volMax) {
               chan[i].volume=chan[i].volMax;
-              chan[i].volSpeed=0;
+              if(!song.dontDisableVolSlideOnZero)
+              {
+                chan[i].volSpeed=0;
+              }
               dispatchCmd(DivCommand(DIV_CMD_HINT_VOLUME,i,chan[i].volume>>8));
               dispatchCmd(DivCommand(DIV_CMD_VOLUME,i,chan[i].volume>>8));
               dispatchCmd(DivCommand(DIV_CMD_HINT_VOL_SLIDE,i,0));
             } else if (chan[i].volume<0) {
-              chan[i].volSpeed=0;
+              if(!song.dontDisableVolSlideOnZero)
+              {
+                chan[i].volSpeed=0;
+              }
               dispatchCmd(DivCommand(DIV_CMD_HINT_VOL_SLIDE,i,0));
               if (song.legacyVolumeSlides) {
                 chan[i].volume=chan[i].volMax+1;

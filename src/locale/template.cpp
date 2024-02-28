@@ -357,6 +357,8 @@ void DivLocale::addTranslationsTemplate()
     strings["when enabled, arpeggio effect (00xy) position is reset on a new note.##sgcf"].plurals[0] = "=when enabled, arpeggio effect (00xy) position is reset on a new note.";
     strings["Volume scaling rounds up##sgcf"].plurals[0] = "=Volume scaling rounds up";
     strings["when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels##sgcf"].plurals[0] = "=when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels";
+    strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "=Stop NES pulse channels hardware sweep on new note";
+    strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "=Do not stop volume slide after reaching zero or full volume";
 
     //   sgdl  src/gui/dataList.cpp
 

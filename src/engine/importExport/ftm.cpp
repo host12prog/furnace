@@ -1713,6 +1713,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     ds.sampleLen = ds.sample.size();
     ds.waveLen = ds.wave.size();
 
+    ds.dontDisableVolSlideOnZero = true;
+    ds.resetNesSweep = true;
+
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;
     saveLock.lock();

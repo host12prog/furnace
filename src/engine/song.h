@@ -391,6 +391,10 @@ struct DivSong {
   bool ceilVolumeScaling;
   bool oldAlwaysSetVolume;
 
+  //famitracker compatibility flags
+  bool resetNesSweep; //reset sweep on new note
+  bool dontDisableVolSlideOnZero; //do not disable volume slide when volume reached zero
+
   std::vector<DivInstrument*> ins;
   std::vector<DivWavetable*> wave;
   std::vector<DivSample*> sample;
@@ -513,7 +517,9 @@ struct DivSong {
     oldDPCM(false),
     resetArpPhaseOnNewNote(false),
     ceilVolumeScaling(false),
-    oldAlwaysSetVolume(false) {
+    oldAlwaysSetVolume(false),
+    resetNesSweep(false),
+    dontDisableVolSlideOnZero(false) {
     for (int i=0; i<DIV_MAX_CHIPS; i++) {
       system[i]=DIV_SYSTEM_NULL;
       systemVol[i]=1.0;

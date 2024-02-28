@@ -301,6 +301,8 @@ void DivLocale::addTranslationsRussian()
     strings["when enabled, arpeggio effect (00xy) position is reset on a new note.##sgcf"].plurals[0] = "при включении этого флага положение эффекта арпеджио (00xy) сбрасывается на новой ноте.";
     strings["Volume scaling rounds up##sgcf"].plurals[0] = "Масштабирование громкости округляется вверх";
     strings["when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels##sgcf"].plurals[0] = "при включении этого флага значения макросов громкости округляются вверх\nэто предотвращает возникновение ситуации vol=0 при масштабировании громкости, что приводит к заглушению на некоторых чипах\n\nне эффективно на чипах с логарифмическим контролем громкости";
+    strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "Останавливать аппаратное портаменто на каналах импульсов NES при начале новой ноты";
+    strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "Не останавливать эффект изменения громкости при достижении нулевой или максимальной громкости";
 
     //   sgdl  src/gui/dataList.cpp
 

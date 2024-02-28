@@ -187,6 +187,12 @@ void FurnaceGUI::drawCompatFlags() {
         }
         ImGui::EndTabItem();
       }
+      if (ImGui::BeginTabItem("FamiTracker")) {
+        ImGui::Checkbox(_L("Stop NES pulse channels hardware sweep on new note##sgcf"),&e->song.resetNesSweep);
+        ImGui::Checkbox(_L("Do not stop volume slide after reaching zero or full volume##sgcf"),&e->song.dontDisableVolSlideOnZero);
+        
+        ImGui::EndTabItem();
+      }
       ImGui::EndTabBar();
     }
   }
