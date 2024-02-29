@@ -3437,6 +3437,7 @@ void DivLocale::addTranslationsRussian()
     strings["Pitch##sgiAY"].plurals[0] = "Частота";
     strings["Noise Freq##sgiAY"].plurals[0] = "Частота шума";
     strings["Waveform##sgiAY"].plurals[0] = "Волна";
+    strings["Raw Period##sgiAY"].plurals[0] = "Период (регистровое знач.)";
     strings["Phase Reset##sgiAY"].plurals[0]  = "Сброс фазы";
     strings["Envelope##sgiAY"].plurals[0] = "Огибающая";
     strings["AutoEnv Num##sgiAY"].plurals[0] = "Множ. част. авто-огиб.";
@@ -3450,6 +3451,7 @@ void DivLocale::addTranslationsRussian()
     strings["Pitch##sgi8930"].plurals[0] = "Частота";
     strings["Noise Freq##sgi8930"].plurals[0] = "Частота шума";
     strings["Waveform##sgi8930"].plurals[0] = "Волна";
+    strings["Raw Period##sgi8930"].plurals[0] = "Период (регистровое знач.)";
     strings["Phase Reset##sgi8930"].plurals[0]  = "Сброс фазы";
     strings["Duty##sgi8930"].plurals[0] = "Скважность";
     strings["Envelope##sgi8930"].plurals[0] = "Огибающая";
@@ -4692,6 +4694,7 @@ void DivLocale::addTranslationsRussian()
     strings["Volume##sgiTIA"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiTIA"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiTIA"].plurals[0] = "Частота";
+    strings["Raw Period##sgiTIA"].plurals[0] = "Период (регистровое знач.)";
     strings["Waveform##sgiTIA"].plurals[0] = "Волна";
 
     //   sgiVB     src/gui/inst/vboy.cpp
@@ -4861,6 +4864,7 @@ void DivLocale::addTranslationsRussian()
     strings["2Exx: Write to I/O port A##sesd"].plurals[0] = "2Exx: Запись в порт ввода-вывода A";
     strings["2Fxx: Write to I/O port B##sesd"].plurals[0] = "2Fxx: Запись в порт ввода-вывода B";
     strings["12xx: Set duty cycle (0 to 8)##sesd"].plurals[0] = "12xx: Скважность (0-8)";
+    strings["16xx: Set raw period higher byte##sesd"].plurals[0] = "16xx: \"Сырое\" значение периода (старший байт)";
     strings["27xx: Set noise AND mask##sesd"].plurals[0] = "27xx: Маска шума И";
     strings["28xx: Set noise OR mask##sesd"].plurals[0] = "28xx: Маска шума ИЛИ";
     strings["2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER##sesd"].plurals[0] = "2Dxx: НЕ ДЛЯ ИСПОЛЬЗОВАНИЯ КОМПОЗИТОРОМ";
@@ -4978,6 +4982,7 @@ void DivLocale::addTranslationsRussian()
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "3xxx: Скважность (0-FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "4xxx: Частота среза (0-7FF)";
     strings["10xx: Set waveform##sesd0"].plurals[0] = "10xx: Волна";
+    strings["11xx: Set raw period (0-1F)##sesd"].plurals[0] = "11xx: \"Сырое\" значение периода (0-1F)";
     strings["11xx: Set waveform (local)##sesd"].plurals[0] = "11xx: Волна (локальная)";
     strings["20xx: Set PCM frequency##sesd"].plurals[0] = "20xx: Частота ИКМ";
     strings["10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))##sesd"].plurals[0] = "10xy: Глубина АМ (x: оператор 1-4 (0 для всех операторов); y: глубина (0: 1 дБ, 1: 4.8 дБ))";
@@ -5343,6 +5348,8 @@ void DivLocale::addTranslationsRussian()
     strings["Game Boy with AY expansion##sesd"].plurals[0] = "Game Boy с расширением AY";
     strings["multi-system##sesd"].plurals[0] = "мульти-система";
     strings["Unknown##sesd"].plurals[0] = "Неизвестно";
+    strings["15xx: Set raw period##sesd"].plurals[0] = "15xx: \"Сырое\" значение периода";
+    strings["16xx: Set raw period higher nybble (0-F)##sesd"].plurals[0] = "16xx: \"Сырое\" значение периода, старшая тетрада (0-F)";
     strings["Sega Genesis Extended Channel 3##sesd1"].plurals[0] = "Sega Genesis расширенный 3-ий канал";
     strings["Neo Geo CD Extended Channel 2##sesd"].plurals[0] = "Neo Geo CD расширенный 2-ой канал";
     strings["Famicom Disk System (chip)##sesd"].plurals[0] = "Famicom Disk System (чип)";

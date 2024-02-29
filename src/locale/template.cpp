@@ -3538,6 +3538,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Pitch##sgiAY"].plurals[0] = "=Pitch";
     strings["Noise Freq##sgiAY"].plurals[0] = "=Noise Freq";
     strings["Waveform##sgiAY"].plurals[0] = "=Waveform";
+    strings["Raw Period##sgiAY"].plurals[0] = "=Raw Period";
     strings["Phase Reset##sgiAY"].plurals[0] = "=Phase Reset";
     strings["Envelope##sgiAY"].plurals[0] = "=Envelope";
     strings["AutoEnv Num##sgiAY"].plurals[0] = "=AutoEnv Num";
@@ -3551,6 +3552,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Pitch##sgi8930"].plurals[0] = "=Pitch";
     strings["Noise Freq##sgi8930"].plurals[0] = "=Noise Freq";
     strings["Waveform##sgi8930"].plurals[0] = "=Waveform";
+    strings["Raw Period##sgiAY"].plurals[0] = "=Raw Period";
     strings["Phase Reset##sgi8930"].plurals[0] = "=Phase Reset";
     strings["Duty##sgi8930"].plurals[0] = "=Duty";
     strings["Envelope##sgi8930"].plurals[0] = "=Envelope";
@@ -4793,6 +4795,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Volume##sgiTIA"].plurals[0] = "=Volume";
     strings["Arpeggio##sgiTIA"].plurals[0] = "=Arpeggio";
     strings["Pitch##sgiTIA"].plurals[0] = "=Pitch";
+    strings["Raw Period##sgiTIA"].plurals[0] = "=Raw Period";
     strings["Waveform##sgiTIA"].plurals[0] = "=Waveform";
 
     //   sgiVB     src/gui/inst/vboy.cpp
@@ -4967,6 +4970,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Game Boy with AY expansion##sesd"].plurals[0] = "=Game Boy with AY expansion";
     strings["multi-system##sesd"].plurals[0] = "=multi-system";
     strings["Unknown##sesd"].plurals[0] = "=Unknown";
+    strings["15xx: Set raw period##sesd"].plurals[0] = "=15xx: Set raw period";
+    strings["16xx: Set raw period higher nybble (0-F)##sesd"].plurals[0] = "=16xx: Set raw period higher nybble (0-F)";
     strings["20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"].plurals[0] = "=20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)";
     strings["21xx: Set noise frequency (0 to 1F)##sesd"].plurals[0] = "=21xx: Set noise frequency (0 to 1F)";
     strings["22xy: Set envelope mode (x: shape, y: enable for this channel)##sesd"].plurals[0] = "=22xy: Set envelope mode (x: shape, y: enable for this channel)";
@@ -4978,6 +4983,7 @@ void DivLocale::addTranslationsTemplate()
     strings["2Exx: Write to I/O port A##sesd"].plurals[0] = "=2Exx: Write to I/O port A";
     strings["2Fxx: Write to I/O port B##sesd"].plurals[0] = "=2Fxx: Write to I/O port B";
     strings["12xx: Set duty cycle (0 to 8)##sesd"].plurals[0] = "=12xx: Set duty cycle (0 to 8)";
+    strings["16xx: Set raw period higher byte##sesd"].plurals[0] = "=16xx: Set raw period higher byte";
     strings["27xx: Set noise AND mask##sesd"].plurals[0] = "=27xx: Set noise AND mask";
     strings["28xx: Set noise OR mask##sesd"].plurals[0] = "=28xx: Set noise OR mask";
     strings["2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER##sesd"].plurals[0] = "=2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER";
@@ -5095,6 +5101,7 @@ void DivLocale::addTranslationsTemplate()
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "=3xxx: Set pulse width (0 to FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "=4xxx: Set cutoff (0 to 7FF)";
     strings["10xx: Set waveform##sesd0"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Set raw period##sesd"].plurals[0] = "=11xx: Set raw period (0-1F)";
     strings["11xx: Set waveform (local)##sesd"].plurals[0] = "=11xx: Set waveform (local)";
     strings["20xx: Set PCM frequency##sesd"].plurals[0] = "=20xx: Set PCM frequency";
     strings["10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))##sesd"].plurals[0] = "=10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))";

@@ -306,6 +306,11 @@ void DivPlatformAY8930::tick(bool sysTick) {
       chan[i].freqChanged=true;
       if (!chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->will) chan[i].autoEnvDen=1;
     }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->had) {
+      chan[i].freq=chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val;
+      chan[i].freqChanged=true;
+      raw_freq[i] = true;
+    }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) {
       chan[i].autoEnvDen=chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val;
       chan[i].freqChanged=true;
@@ -320,7 +325,10 @@ void DivPlatformAY8930::tick(bool sysTick) {
       immWrite(0x1a,ayNoiseOr);
     }
     if (chan[i].freqChanged || chan[i].keyOn || chan[i].keyOff) {
-      chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,chan[i].pitch2,chipClock,CHIP_DIVIDER);
+      if(!raw_freq[i])
+      {
+        chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,chan[i].pitch2,chipClock,CHIP_DIVIDER);
+      }
       if (chan[i].dac.furnaceDAC) {
         double off=1.0;
         if (chan[i].dac.sample>=0 && chan[i].dac.sample<parent->song.sampleLen) {
@@ -380,6 +388,8 @@ void DivPlatformAY8930::tick(bool sysTick) {
         }
       }
     }
+
+    raw_freq[i] = false;
   }
 
   updateOutSel();
@@ -526,6 +536,16 @@ int DivPlatformAY8930::dispatch(DivCommand c) {
       chan[c.chan].freqChanged=true;
       break;
     }
+    case DIV_CMD_RAW_FREQ:
+      chan[c.chan].freq = (chan[c.chan].freq & 0xff00) | c.value;
+      raw_freq[c.chan] = true;
+      chan[c.chan].freqChanged = true;
+      break;
+    case DIV_CMD_RAW_FREQ_HIGHER_BYTE:
+      chan[c.chan].freq = (chan[c.chan].freq & 0x00ff) | (c.value << 8);
+      raw_freq[c.chan] = true;
+      chan[c.chan].freqChanged = true;
+      break;
     case DIV_CMD_NOTE_PORTA: {
       int destFreq=NOTE_PERIODIC(c.value2+chan[c.chan].sampleNoteDelta);
       bool return2=false;
@@ -749,6 +769,7 @@ void DivPlatformAY8930::reset() {
     chan[i].envelope.mode=0;
     chan[i].envelope.slide=0;
     chan[i].envelope.slideLow=0;
+    raw_freq[i] = false;
   }
   if (dumpWrites) {
     addWrite(0xffffffff,0);
