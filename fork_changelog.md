@@ -22,6 +22,10 @@ LTVA:
 - YMF276-LLE now actually produces sound
 - Russian translation
 - SID2 fictional sound chip
+- Local (per-instrument) wavetables
+- Improved FamiTracker import
+- Raw period macro and effects for POKEY
+- A list of wavetables (e.g. Kurumi wavetable builder output) can be pasted into global/local wavetable list using just one shortcut
 
 freq-mod:
 - 86-PCM streo DAC fix
