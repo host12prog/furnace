@@ -784,6 +784,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               {
                 ins->amiga.useSample = false;
                 ins->amiga.useNoteMap = false;
+                ins->amiga.initSample=-1;
               }
               break;
             }
