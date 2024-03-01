@@ -146,6 +146,8 @@ int convert_macros_vrc6[5] = { (int)DIV_MACRO_VOL, (int)DIV_MACRO_ARP, (int)DIV_
 int convert_macros_n163[5] = { (int)DIV_MACRO_VOL, (int)DIV_MACRO_ARP, (int)DIV_MACRO_PITCH, -1, (int)DIV_MACRO_WAVE };
 int convert_macros_s5b[5] = { (int)DIV_MACRO_VOL, (int)DIV_MACRO_ARP, (int)DIV_MACRO_PITCH, -1, (int)DIV_MACRO_DUTY };
 
+int convert_vrc6_duties[4] = { 1, 3, 7, 3 };
+
 void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, int setting)
 {
   DivInstrumentMacro* to = NULL;
@@ -1770,6 +1772,18 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   ds.ins[ds.ins.size() - 1]->amiga.useNoteMap = false;
 
                   ds.ins[ds.ins.size() - 1]->type = DIV_INS_VRC6;
+
+                  if(ins->std.get_macro(DIV_MACRO_DUTY, false)->len > 0)
+                  {
+                    for(int mm = 0; mm < ins->std.get_macro(DIV_MACRO_DUTY, false)->len; mm++)
+                    {
+                      if(ds.ins[ds.ins.size() - 1]->std.get_macro(DIV_MACRO_DUTY, false)->val[mm] < 4)
+                      {
+                        int vall = ins->std.get_macro(DIV_MACRO_DUTY, false)->val[mm];
+                        ds.ins[ds.ins.size() - 1]->std.get_macro(DIV_MACRO_DUTY, false)->val[mm] = convert_vrc6_duties[vall];
+                      }
+                    }
+                  }
 
                   ins_vrc6_conv[i][0] = i;
                   ins_vrc6_conv[i][1] = ds.ins.size() - 1;
