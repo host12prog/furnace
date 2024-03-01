@@ -2601,6 +2601,8 @@ int DivEngine::addInstrumentPtr(DivInstrument* which) {
 
 void DivEngine::copyInstrument(DivInstrument* to, DivInstrument* from)
 {
+  BUSY_BEGIN;
+  saveLock.lock();
   (*to)=(*from);
 
   if(to->std.local_waves.size() > 0)
@@ -2611,6 +2613,8 @@ void DivEngine::copyInstrument(DivInstrument* to, DivInstrument* from)
       *to->std.local_waves[i] = *from->std.local_waves[i];
     }
   }
+  saveLock.unlock();
+  BUSY_END;
 }
 
 void DivEngine::loadTempIns(DivInstrument* which) {
