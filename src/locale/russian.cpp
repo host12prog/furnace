@@ -3438,6 +3438,7 @@ void DivLocale::addTranslationsRussian()
     strings["Noise Freq##sgiAY"].plurals[0] = "Частота шума";
     strings["Waveform##sgiAY"].plurals[0] = "Волна";
     strings["Raw Period##sgiAY"].plurals[0] = "Период (регистровое знач.)";
+    strings["Raw Envelope Period##sgiAY"].plurals[0] = "Период огиб. (регистровое знач.)";
     strings["Phase Reset##sgiAY"].plurals[0]  = "Сброс фазы";
     strings["Envelope##sgiAY"].plurals[0] = "Огибающая";
     strings["AutoEnv Num##sgiAY"].plurals[0] = "Множ. част. авто-огиб.";
@@ -3452,6 +3453,7 @@ void DivLocale::addTranslationsRussian()
     strings["Noise Freq##sgi8930"].plurals[0] = "Частота шума";
     strings["Waveform##sgi8930"].plurals[0] = "Волна";
     strings["Raw Period##sgi8930"].plurals[0] = "Период (регистровое знач.)";
+    strings["Raw Envelope Period##sgi8930"].plurals[0] = "Период огиб. (регистровое знач.)";
     strings["Phase Reset##sgi8930"].plurals[0]  = "Сброс фазы";
     strings["Duty##sgi8930"].plurals[0] = "Скважность";
     strings["Envelope##sgi8930"].plurals[0] = "Огибающая";

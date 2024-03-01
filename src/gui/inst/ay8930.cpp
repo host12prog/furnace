@@ -44,6 +44,7 @@ void FurnaceGUI::drawInsAY8930(DivInstrument* ins)
     }
 
     macroList.push_back(FurnaceGUIMacroDesc(_L("Raw Period##sgi8930"),ins,DIV_MACRO_EX4,0xff,0,0xffff,256,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Raw Envelope Period##sgi8930"),ins,DIV_MACRO_EX5,0xff,0,0xffff,256,uiColors[GUI_COLOR_MACRO_OTHER]));
 
     macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgi8930"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 

@@ -320,6 +320,11 @@ void DivPlatformAY8910::tick(bool sysTick) {
       chan[i].freqChanged=true;
       raw_freq[i] = true;
     }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX5)->had) {
+      ayEnvPeriod=chan[i].std.get_div_macro_struct(DIV_MACRO_EX5)->val;
+      immWrite(0x0b,ayEnvPeriod);
+      immWrite(0x0c,ayEnvPeriod>>8);
+    }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) {
       chan[i].autoEnvDen=chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val;
       chan[i].freqChanged=true;

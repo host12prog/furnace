@@ -3539,6 +3539,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Noise Freq##sgiAY"].plurals[0] = "=Noise Freq";
     strings["Waveform##sgiAY"].plurals[0] = "=Waveform";
     strings["Raw Period##sgiAY"].plurals[0] = "=Raw Period";
+    strings["Raw Envelope Period##sgiAY"].plurals[0] = "=Raw Envelope Period";
     strings["Phase Reset##sgiAY"].plurals[0] = "=Phase Reset";
     strings["Envelope##sgiAY"].plurals[0] = "=Envelope";
     strings["AutoEnv Num##sgiAY"].plurals[0] = "=AutoEnv Num";
@@ -3552,7 +3553,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Pitch##sgi8930"].plurals[0] = "=Pitch";
     strings["Noise Freq##sgi8930"].plurals[0] = "=Noise Freq";
     strings["Waveform##sgi8930"].plurals[0] = "=Waveform";
-    strings["Raw Period##sgiAY"].plurals[0] = "=Raw Period";
+    strings["Raw Period##sgi8930"].plurals[0] = "=Raw Period";
+    strings["Raw Envelope Period##sgi8930"].plurals[0] = "=Raw Envelope Period";
     strings["Phase Reset##sgi8930"].plurals[0] = "=Phase Reset";
     strings["Duty##sgi8930"].plurals[0] = "=Duty";
     strings["Envelope##sgi8930"].plurals[0] = "=Envelope";
