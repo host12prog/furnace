@@ -1881,6 +1881,9 @@ void DivLocale::addTranslationsTemplate()
     strings["Yamaha YM2612 (extended channel 3)##sgpr"].plurals[0] = "=Yamaha YM2612 (extended channel 3)";
     strings["Yamaha YM2612 (OPN2) with DualPCM##sgpr"].plurals[0] = "=Yamaha YM2612 (OPN2) with DualPCM";
     strings["Yamaha YM2612 (extended channel 3) with DualPCM and CSM##sgpr"].plurals[0] = "=Yamaha YM2612 (extended channel 3) with DualPCM and CSM";
+    strings["Yamaha YMF276 (extended channel 3)##sgpr"].plurals[0] = "=Yamaha YMF276 (extended channel 3)";
+    strings["Yamaha YMF276 with DualPCM##sgpr"].plurals[0] = "=Yamaha YMF276 with DualPCM";
+    strings["Yamaha YMF276 (extended channel 3) with DualPCM and CSM##sgpr"].plurals[0] = "=Yamaha YMF276 (extended channel 3) with DualPCM and CSM";
     strings["Yamaha YM2413 (drums mode)##sgpr"].plurals[0] = "=Yamaha YM2413 (drums mode)";
     strings["Yamaha YM3438 (extended channel 3)##sgpr"].plurals[0] = "=Yamaha YM3438 (extended channel 3)";
     strings["Yamaha YM3438 (OPN2C) with DualPCM##sgpr"].plurals[0] = "=Yamaha YM3438 (OPN2C) with DualPCM";
