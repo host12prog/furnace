@@ -23,6 +23,19 @@
 #include <fmt/printf.h>
 #include <imgui.h>
 
+#define SHOW_HOVER_INFO \
+if (ImGui::IsItemHovered()) { \
+  if (ImGui::BeginTooltip()) { \
+    DivSystem chip=e->song.system[i]; \
+    const DivSysDef* sysDef=e->getSystemDef(chip); \
+    ImGui::PushTextWrapPos(MIN(scrW*dpiScale,400.0f*dpiScale)); \
+    ImGui::Text("%s:",_L(sysDef->name)); \
+    ImGui::Text("%s",_L(sysDef->description)); \
+    ImGui::PopTextWrapPos(); \
+    ImGui::EndTooltip(); \
+  } \
+} \
+
 void FurnaceGUI::drawSysManager() {
   if (nextWindow==GUI_WINDOW_SYS_MANAGER) {
     sysManagerOpen=true;
@@ -87,6 +100,8 @@ void FurnaceGUI::drawSysManager() {
           drawSysConf(i,i,e->song.system[i],e->song.systemFlags[i],true);
           ImGui::TreePop();
         }
+        SHOW_HOVER_INFO
+
         ImGui::TableNextColumn();
         ImGui::Button(_L("Change##SysChange"));
         if (ImGui::BeginPopupContextItem("SysPickerC",ImGuiPopupFlags_MouseButtonLeft)) {
