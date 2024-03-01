@@ -816,7 +816,7 @@ class DivDispatch {
      * @param index the memory index.
      * @return a pointer to DivMemoryComposition, or NULL.
      */
-    virtual const DivMemoryComposition* getMemCompo();
+    //virtual const DivMemoryComposition* getMemCompo();
 
     /**
      * Render samples into sample memory.
