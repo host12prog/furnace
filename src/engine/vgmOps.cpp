@@ -188,8 +188,10 @@ void DivEngine::performVGMWrite(SafeWriter* w, DivSystem sys, DivRegWrite& write
       case DIV_SYSTEM_YM2610_FULL:
       case DIV_SYSTEM_YM2610B:
       case DIV_SYSTEM_YM2610_EXT:
+      case DIV_SYSTEM_YM2610_CSM:
       case DIV_SYSTEM_YM2610_FULL_EXT:
       case DIV_SYSTEM_YM2610B_EXT:
+      case DIV_SYSTEM_YM2610B_CSM:
         // TODO: YM2610B channels 1 and 4 and ADPCM-B
         for (int i=0; i<2; i++) { // set SL and RR to highest
           w->writeC(8|baseAddr1);
@@ -266,6 +268,7 @@ void DivEngine::performVGMWrite(SafeWriter* w, DivSystem sys, DivRegWrite& write
         break;
       case DIV_SYSTEM_YM2203:
       case DIV_SYSTEM_YM2203_EXT:
+      case DIV_SYSTEM_YM2203_CSM:
         for (int i=0; i<3; i++) { // set SL and RR to highest
           w->writeC(5|baseAddr1);
           w->writeC(0x80+i);
@@ -923,8 +926,10 @@ void DivEngine::performVGMWrite(SafeWriter* w, DivSystem sys, DivRegWrite& write
     case DIV_SYSTEM_YM2610_FULL:
     case DIV_SYSTEM_YM2610B:
     case DIV_SYSTEM_YM2610_EXT:
+    case DIV_SYSTEM_YM2610_CSM:
     case DIV_SYSTEM_YM2610_FULL_EXT:
     case DIV_SYSTEM_YM2610B_EXT:
+    case DIV_SYSTEM_YM2610B_CSM:
       switch (write.addr>>8) {
         case 0: // port 0
           w->writeC(8|baseAddr1);
@@ -940,12 +945,14 @@ void DivEngine::performVGMWrite(SafeWriter* w, DivSystem sys, DivRegWrite& write
       break;
     case DIV_SYSTEM_YM2203:
     case DIV_SYSTEM_YM2203_EXT:
+    case DIV_SYSTEM_YM2203_CSM:
       w->writeC(5|baseAddr1);
       w->writeC(write.addr&0xff);
       w->writeC(write.val);
       break;
     case DIV_SYSTEM_YM2608:
     case DIV_SYSTEM_YM2608_EXT:
+    case DIV_SYSTEM_YM2608_CSM:
       switch (write.addr>>8) {
         case 0: // port 0
           w->writeC(6|baseAddr1);
@@ -1459,8 +1466,10 @@ SafeWriter* DivEngine::saveVGM(bool* sysToExport, bool loop, int version, bool p
       case DIV_SYSTEM_YM2610_FULL:
       case DIV_SYSTEM_YM2610B:
       case DIV_SYSTEM_YM2610_EXT:
+      case DIV_SYSTEM_YM2610_CSM:
       case DIV_SYSTEM_YM2610_FULL_EXT:
       case DIV_SYSTEM_YM2610B_EXT:
+      case DIV_SYSTEM_YM2610B_CSM:
         if (!hasOPNB) {
           hasOPNB=disCont[i].dispatch->chipClock;
           CHIP_VOL(8,1.0);
@@ -1476,7 +1485,7 @@ SafeWriter* DivEngine::saveVGM(bool* sysToExport, bool loop, int version, bool p
           hasOPNB|=0x40000000;
           howManyChips++;
         }
-        if (((song.system[i]==DIV_SYSTEM_YM2610B) || (song.system[i]==DIV_SYSTEM_YM2610B_EXT)) && (!(hasOPNB&0x80000000))) { // YM2610B flag
+        if (((song.system[i]==DIV_SYSTEM_YM2610B) || (song.system[i]==DIV_SYSTEM_YM2610B_EXT) || (song.system[i]==DIV_SYSTEM_YM2610B_CSM)) && (!(hasOPNB&0x80000000))) { // YM2610B flag
           hasOPNB|=0x80000000;
         }
         break;
@@ -1572,6 +1581,7 @@ SafeWriter* DivEngine::saveVGM(bool* sysToExport, bool loop, int version, bool p
         break;
       case DIV_SYSTEM_YM2203:
       case DIV_SYSTEM_YM2203_EXT:
+      case DIV_SYSTEM_YM2203_CSM:
         if (!hasOPN) {
           hasOPN=disCont[i].dispatch->chipClock;
           willExport[i]=true;
@@ -1588,6 +1598,7 @@ SafeWriter* DivEngine::saveVGM(bool* sysToExport, bool loop, int version, bool p
         break;
       case DIV_SYSTEM_YM2608:
       case DIV_SYSTEM_YM2608_EXT:
+      case DIV_SYSTEM_YM2608_CSM:
         if (!hasOPNA) {
           hasOPNA=disCont[i].dispatch->chipClock;
           CHIP_VOL(7,1.0);
