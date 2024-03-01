@@ -241,6 +241,18 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
   to->loop = from->loop;
   to->open = from->open;
 
+  if((DivMacroType)convert_macros_2a03[macro_type] == DIV_MACRO_ARP)
+  {
+    if(setting == 1) //fixed
+    {
+      if(to->loop == 255) // no loop
+      {
+        to->len++;
+        to->val[to->len - 1] = 0; //return to orig pitch (relative mode, 0 offset)
+      }
+    }
+  }
+
   if((DivMacroType)convert_macros_2a03[macro_type] == DIV_MACRO_PITCH)
   {
     if(setting == 0) //relative
