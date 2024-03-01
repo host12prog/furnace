@@ -769,6 +769,22 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
               ins->amiga.useSample = true;
               ins->amiga.useNoteMap = true;
+
+              bool empty_note_map = true;
+
+              for (int j=0; j<dpcmNotes; j++) 
+              {
+                if(ins->amiga.get_amiga_sample_map(j, true)->map != -1)
+                {
+                  empty_note_map = false;
+                }
+              }
+
+              if(empty_note_map)
+              {
+                ins->amiga.useSample = false;
+                ins->amiga.useNoteMap = false;
+              }
               break;
             }
             case DIV_INS_VRC6: {
@@ -1271,6 +1287,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                 if(map_channels[ch] == vrc6_saw_chan)
                 {
                   pat->data[row][3] = pat->data[row][3] * 42 / 15;
+                }
+
+                if(map_channels[ch] == fds_chan)
+                {
+                  pat->data[row][3] = pat->data[row][3] * 31 / 15;
                 }
               } 
               else 
