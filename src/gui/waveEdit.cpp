@@ -410,7 +410,7 @@ void FurnaceGUI::drawWaveEdit() {
   if (ImGui::Begin("Wavetable Editor",&waveEditOpen,globalWinFlags|(settings.allowEditDocking?0:ImGuiWindowFlags_NoDocking),_L("Wavetable Editor###Wavetable Editor"))) {
     bool show_selection_prompt = true;
 
-    if(curIns + 1 > e->song.ins.size() || e->song.ins.size() == 0)
+    if(curIns + 1 > (int)e->song.ins.size() || (int)e->song.ins.size() == 0)
     {
       localWaveList = false;
     }
