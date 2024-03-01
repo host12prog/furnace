@@ -319,10 +319,10 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
     unsigned char fds_chan = 0xff;
     unsigned char vrc6_saw_chan = 0xff;
-    unsigned char n163_chans[8] = { 0xff };
+    unsigned char n163_chans[8] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
 
-    unsigned char vrc6_chans[2] = { 0xff };
-    unsigned char mmc5_chans[2] = { 0xff };
+    unsigned char vrc6_chans[2] = { 0xff, 0xff };
+    unsigned char mmc5_chans[2] = { 0xff, 0xff };
     (void)mmc5_chans[0];
 
     int total_chans = 0;
@@ -786,7 +786,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               {
                 ins->fm.op[i].am = custom_patch[i] >> 7;
                 ins->fm.op[i].vib = (custom_patch[i] >> 6) & 1;
-                ins->fm.op[i].ksr = (custom_patch[i] >> 5) & 1;
+                ins->fm.op[i].ssgEnv = ((custom_patch[i] >> 5) & 1) << 3;
                 ins->fm.op[i].ksr = (custom_patch[i] >> 4) & 1;
 
                 ins->fm.op[i].mult = custom_patch[i] & 15;
