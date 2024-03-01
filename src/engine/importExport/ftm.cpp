@@ -322,7 +322,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     unsigned char n163_chans[8] = { 0xff };
 
     unsigned char vrc6_chans[2] = { 0xff };
-    //unsigned char mmc5_chans[2] = { 0xff };
+    unsigned char mmc5_chans[2] = { 0xff };
+    (void)mmc5_chans[0];
 
     int total_chans = 0;
     
