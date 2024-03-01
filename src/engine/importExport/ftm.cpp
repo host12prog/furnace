@@ -321,6 +321,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     unsigned char vrc6_saw_chan = 0xff;
     unsigned char n163_chans[8] = { 0xff };
 
+    unsigned char vrc6_chans[2] = { 0xff };
+    unsigned char mmc5_chans[2] = { 0xff };
+
     int total_chans = 0;
     
     memset(hasSequence,0,256*8*sizeof(bool));
@@ -485,6 +488,12 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           for(int ch = 0; ch < 3; ch++)
           {
             map_channels[curr_chan] = map_ch;
+
+            if(ch < 2)
+            {
+              vrc6_chans[ch] = map_ch;
+            }
+
             curr_chan++;
             map_ch++;
           }
@@ -497,6 +506,12 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           for(int ch = 0; ch < 2; ch++)
           {
             map_channels[curr_chan] = map_ch;
+
+            if(ch < 2)
+            {
+              mmc5_chans[ch] = map_ch;
+            }
+
             curr_chan++;
             map_ch++;
           }
@@ -1674,7 +1689,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
     //addWarning("FamiTracker import is experimental!");
 
-    for(int tries = 0; tries < 5; tries++)
+    for(int tries = 0; tries < 5; tries++) //de-duplicating instruments
     {
       for(int i = 0; i < 128; i++)
       {
@@ -1699,6 +1714,120 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   {
                     ds.subsong[j]->pat[ii].data[k]->data[l][2]--;
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    //famitracker is not fucking strict with what instrument types can be used on any channel. This leads to e.g. 2A03 instuments being used on VRC6 channels.
+    //Furnace is way more strict, so NES instrument in VRC6 channel just does not play. To fix this, we are creating copies of instruments, changing their type to please Furnace system.
+    //I kinda did the same in klystrack import, tbh.
+    
+    int ins_vrc6_conv[256][2];
+    int ins_vrc6_saw_conv[256][2];
+
+    for(int i = 0; i < 256; i++)
+    {
+      ins_vrc6_conv[i][0] = -1;
+      ins_vrc6_conv[i][1] = -1;
+
+      ins_vrc6_saw_conv[i][0] = -1;
+      ins_vrc6_saw_conv[i][1] = -1;
+    }
+
+    int init_inst_num = ds.ins.size();
+
+    for(int i = 0; i < init_inst_num; i++)
+    {
+      for (int ii=0; ii<total_chans; ii++) 
+      {
+        for (size_t j=0; j<ds.subsong.size(); j++) 
+        {
+          for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+          {
+            if (ds.subsong[j]->pat[ii].data[k]==NULL) continue;
+            for (int l=0; l<ds.subsong[j]->patLen; l++) 
+            {
+              if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == i) //instrument
+              {
+                DivInstrument* ins = ds.ins[i];
+                bool go_to_end = false;
+
+                if(ins->type != DIV_INS_VRC6 && (ii == vrc6_chans[0] || ii == vrc6_chans[1])) //we encountered non-VRC6 instrument on VRC6 channel
+                {
+                  DivInstrument* insnew=new DivInstrument;
+                  ds.ins.push_back(insnew);
+
+                  copyInstrument(ds.ins[ds.ins.size() - 1], ins);
+
+                  ds.ins[ds.ins.size() - 1]->name += " [VRC6 copy]";
+                  ds.ins[ds.ins.size() - 1]->amiga.useSample = false;
+                  ds.ins[ds.ins.size() - 1]->amiga.useNoteMap = false;
+
+                  ds.ins[ds.ins.size() - 1]->type = DIV_INS_VRC6;
+
+                  ins_vrc6_conv[i][0] = i;
+                  ins_vrc6_conv[i][1] = ds.ins.size() - 1;
+
+                  go_to_end = true;
+                }
+
+                if(ins->type != DIV_INS_VRC6_SAW && ii == vrc6_saw_chan) //we encountered non-VRC6-saw instrument on VRC6 saw channel
+                {
+                  DivInstrument* insnew=new DivInstrument;
+                  ds.ins.push_back(insnew);
+
+                  copyInstrument(ds.ins[ds.ins.size() - 1], ins);
+
+                  ds.ins[ds.ins.size() - 1]->name += " [VRC6 saw copy]";
+                  ds.ins[ds.ins.size() - 1]->amiga.useSample = false;
+                  ds.ins[ds.ins.size() - 1]->amiga.useNoteMap = false;
+
+                  ds.ins[ds.ins.size() - 1]->type = DIV_INS_VRC6_SAW;
+
+                  ins_vrc6_saw_conv[i][0] = i;
+                  ins_vrc6_saw_conv[i][1] = ds.ins.size() - 1;
+
+                  go_to_end = true;
+                }
+
+                if(go_to_end)
+                {
+                  goto end;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      end:;
+    }
+
+    for(int i = 0; i < 256; i++)
+    {
+      if(ins_vrc6_conv[i][0] != -1 || ins_vrc6_saw_conv[i][0] != -1)
+      {
+        for (int ii=0; ii<total_chans; ii++) 
+        {
+          for (size_t j=0; j<ds.subsong.size(); j++) 
+          {
+            for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+            {
+              if (ds.subsong[j]->pat[ii].data[k]==NULL) continue;
+              for (int l=0; l<ds.subsong[j]->patLen; l++) 
+              {
+                if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == ins_vrc6_conv[i][0] && (ii == vrc6_chans[0] || ii == vrc6_chans[1])) //change ins index
+                {
+                  ds.subsong[j]->pat[ii].data[k]->data[l][2] = ins_vrc6_conv[i][1];
+                }
+
+                if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == ins_vrc6_saw_conv[i][0] && ii == vrc6_saw_chan)
+                {
+                  ds.subsong[j]->pat[ii].data[k]->data[l][2] = ins_vrc6_saw_conv[i][1];
                 }
               }
             }
