@@ -3072,6 +3072,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Wrap text in song/subsong comments window.##sgse"].plurals[0] = "=Wrap text in song/subsong comments window.";
     strings["Frame shading in text windows##sgse"].plurals[0] = "=Frame shading in text windows";
     strings["Apply frame shading to the multiline text fields\nsuch as song/subsong info/comments.##sgse"].plurals[0] = "=Apply frame shading to the multiline text fields\nsuch as song/subsong info/comments.";
+    strings["Show chip info in chip manager##sgse"].plurals[0] = "=Show chip info in chip manager";
+    strings["Display tooltip in chip manager when hovering over the chip. Tooltip shows chip name and description.##sgse"].plurals[0] = "=Display tooltip in chip manager when hovering over the chip. Tooltip shows chip name and description.";
     strings["Color##sgse"].plurals[0] = "=Color";
     strings["Color scheme##sgse"].plurals[0] = "=Color scheme";
     strings["Import##sgse2"].plurals[0] = "=Import";

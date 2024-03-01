@@ -3041,6 +3041,8 @@ void DivLocale::addTranslationsRussian()
     strings["Wrap text in song/subsong comments window.##sgse"].plurals[0] = "Переносить текст на новую строку в окне информации/комментариев к композиции.";
     strings["Frame shading in text windows##sgse"].plurals[0] = "Градиент в текстовых окнах";
     strings["Apply frame shading to the multiline text fields\nsuch as song/subsong info/comments.##sgse"].plurals[0] = "Применять градиент в окне информации/комментариев к композиции.";
+    strings["Show chip info in chip manager##sgse"].plurals[0] = "Отображать информацию о чипе в менеджере чипов";
+    strings["Display tooltip in chip manager when hovering over the chip. Tooltip shows chip name and description.##sgse"].plurals[0] = "Отображать подсказку при наведении курсора на чип. Подсказка отображает название и описание чипа.";
     strings["Color##sgse"].plurals[0] = "Цвета";
     strings["Color scheme##sgse"].plurals[0] = "Цветовая схема";
     strings["Import##sgse2"].plurals[0] = "Импорт";

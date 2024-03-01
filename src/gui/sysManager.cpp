@@ -100,7 +100,10 @@ void FurnaceGUI::drawSysManager() {
           drawSysConf(i,i,e->song.system[i],e->song.systemFlags[i],true);
           ImGui::TreePop();
         }
-        SHOW_HOVER_INFO
+        if(settings.showTooltipInChipManager)
+        {
+          SHOW_HOVER_INFO
+        }
 
         ImGui::TableNextColumn();
         ImGui::Button(_L("Change##SysChange"));

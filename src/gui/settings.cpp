@@ -3511,6 +3511,15 @@ void FurnaceGUI::drawSettings() {
           ImGui::SetTooltip(_L("Apply frame shading to the multiline text fields\nsuch as song/subsong info/comments.##sgse"));
         }
 
+        bool showTooltipInChipManagerB=settings.showTooltipInChipManager;
+        if (ImGui::Checkbox(_L("Show chip info in chip manager##sgse"),&showTooltipInChipManagerB)) {
+          settings.showTooltipInChipManager=showTooltipInChipManagerB;
+          settingsChanged=true;
+        }
+        if (ImGui::IsItemHovered()) {
+          ImGui::SetTooltip(_L("Display tooltip in chip manager when hovering over the chip. Tooltip shows chip name and description.##sgse"));
+        }
+
         END_SECTION;
       }
 
@@ -4174,6 +4183,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.roundedButtons=conf.getInt("roundedButtons",1);
     settings.roundedTabs=conf.getInt("roundedTabs",1);
     settings.wrapText=conf.getInt("wrapText",1);
+    settings.showTooltipInChipManager=conf.getInt("showTooltipInChipManager",1);
     settings.roundedScrollbars=conf.getInt("roundedScrollbars",1);
     settings.roundedMenus=conf.getInt("roundedMenus",0);
 
@@ -4344,6 +4354,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.roundedButtons,0,1);
   clampSetting(settings.roundedTabs,0,1);
   clampSetting(settings.wrapText,0,1);
+  clampSetting(settings.showTooltipInChipManager,0,1);
   clampSetting(settings.roundedScrollbars,0,1);
   clampSetting(settings.roundedMenus,0,1);
   clampSetting(settings.roundedTabs,0,1);
@@ -4655,6 +4666,7 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("roundedButtons",settings.roundedButtons);
     conf.set("roundedTabs",settings.roundedTabs);
     conf.set("wrapText",settings.wrapText);
+    conf.set("showTooltipInChipManager",settings.showTooltipInChipManager);
     conf.set("roundedScrollbars",settings.roundedScrollbars);
     conf.set("roundedMenus",settings.roundedMenus);
 
