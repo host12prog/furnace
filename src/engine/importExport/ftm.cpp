@@ -805,6 +805,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               ins->fm.fb = custom_patch[3] & 7;
               
               ins->fm.op[0].tl = custom_patch[2] & 0x3f;
+              ins->fm.op[1].tl = 0;
               break;
             }
             case DIV_INS_FDS: {
