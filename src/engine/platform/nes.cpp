@@ -318,7 +318,7 @@ void DivPlatformNES::tick(bool sysTick) {
         rWrite(0x4003+i*4,(chan[i].len<<3));
       } else {
         rWrite(0x4002+i*4,chan[i].freq&0xff);
-        if ((chan[i].prevFreq>>8)!=(chan[i].freq>>8) || i==2 || (parent->song.resetNesSweep && i < 2)) {
+        if ((chan[i].prevFreq>>8)!=(chan[i].freq>>8) || i==2 || (parent->song.resetNesSweep && i < 2 && chan[i].keyOn)) {
           rWrite(0x4003+i*4,(chan[i].len<<3)|(chan[i].freq>>8));
         }
         if (chan[i].freq!=65535 && chan[i].freq!=0) {
