@@ -931,6 +931,9 @@ class DivEngine {
     // if the returned vector is empty then there was an error.
     std::vector<DivInstrument*> instrumentFromFile(const char* path, bool loadAssets=true, bool readInsName=true);
 
+    // copy instrument
+    void copyInstrument(DivInstrument* to, DivInstrument* from);
+
     // load temporary instrument
     void loadTempIns(DivInstrument* which);
 

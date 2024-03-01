@@ -696,19 +696,7 @@ void FurnaceGUI::doAction(int what) {
         if (curIns==-1) {
           showError(settings.language == DIV_LANG_ENGLISH ? "too many instruments!" : _L("too many instruments!##sgda1"));
         } else {
-          (*e->song.ins[curIns])=(*e->song.ins[prevIns]);
-
-          if(e->song.ins[curIns]->std.local_waves.size() > 0)
-          {
-            DivInstrument* prev = e->song.ins[prevIns];
-            DivInstrument* cur = e->song.ins[curIns];
-
-            for(int i=0; i<(int)e->song.ins[curIns]->std.local_waves.size(); i++) 
-            {
-              cur->std.local_waves[i] = new DivWavetable();
-              *cur->std.local_waves[i] = *prev->std.local_waves[i];
-            }
-          }
+          e->copyInstrument(e->song.ins[curIns], e->song.ins[prevIns]);
 
           wantScrollList=true;
           MARK_MODIFIED;

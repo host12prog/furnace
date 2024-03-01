@@ -2599,6 +2599,20 @@ int DivEngine::addInstrumentPtr(DivInstrument* which) {
   return song.insLen;
 }
 
+void DivEngine::copyInstrument(DivInstrument* to, DivInstrument* from)
+{
+  (*to)=(*from);
+
+  if(to->std.local_waves.size() > 0)
+  {
+    for(int i=0; i<(int)to->std.local_waves.size(); i++) 
+    {
+      to->std.local_waves[i] = new DivWavetable();
+      *to->std.local_waves[i] = *from->std.local_waves[i];
+    }
+  }
+}
+
 void DivEngine::loadTempIns(DivInstrument* which) {
   BUSY_BEGIN;
   if (tempIns==NULL) {
