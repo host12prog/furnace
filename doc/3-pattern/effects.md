@@ -185,8 +185,8 @@ ex | FM     | OPM       | OPZ       | OPLL  | AY-3-8910  | AY8930     | Lynx    
  B | FB     | FB        | FB        |       |            | Noise AND  |          |              |
  C | FMS    | FMS       | FMS       |       |            | Noise OR   |          |              |
  D | AMS    | AMS       | AMS       |       |            |            |          |              |
- 4 | OpMask | OpMask    |           |       |            |            |          | Special      |
- 5 |        |           | AMD2      |       |            |            |          | Attack       |
+ 4 | OpMask | OpMask    |           |       |  Raw freq. |  Raw freq. |          | Special      |
+ 5 |        |           | AMD2      |       |Raw env. fr.|Raw env. fr.|          | Attack       |
  6 |        |           | PMD2      |       |            |            |          | Decay        |
  7 |        |           | LFO2Speed |       |            |            |          | Sustain      |
  8 |        |           | LFO2Shape |       |            |            |          | Release      |
@@ -208,19 +208,39 @@ ex | SAA1099  | X1-010     | Namco 163  | FDS       | Sound Unit | ES5506    | M
  7 |          |            |            |           |            | EnvRampK2 |          |
  8 |          |            |            |           |            | Env Mode  |          |
 
-ex | QSound       | SNES      | MSM5232   |    ESFM    |   ES5503    |    DAVE     |
----|--------------|-----------|-----------|------------|-------------|-------------|
- D | Echo Level   | NoiseFreq | GroupCtrl | OP4NoiMode |  Osc. mode  |  NoiseFreq  |
- W |              | Waveform  |           |  Waveform  |  Waveform   |  Waveform   |
- 1 | EchoFeedback | Special   | GroupAtk  |            |  Wave pos   |   Control   |
- 2 | Echo Length  | Gain      | GroupDec  |            | Osc. output |  Raw freq.  |
- 3 |              |           | Noise     |            |             |             |
- A |              |           |           |            |             |             |
- B |              |           |           |            |             |             |
- C |              |           |           |            |             |             |
- D |              |           |           |            |             |             |
- 4 |              |           |           |            |             |             |
- 5 |              |           |           |            |             |             |
- 6 |              |           |           |            |             |             |
- 7 |              |           |           |            |             |             |
- 8 |              |           |           |            |             |             |
+ex | QSound       | SNES      | MSM5232   |    ESFM    |   ES5503    |    DAVE     |     TIA     |
+---|--------------|-----------|-----------|------------|-------------|-------------|-------------|
+ D | Echo Level   | NoiseFreq | GroupCtrl | OP4NoiMode |  Osc. mode  |  NoiseFreq  |             |
+ W |              | Waveform  |           |  Waveform  |  Waveform   |  Waveform   |             |
+ 1 | EchoFeedback | Special   | GroupAtk  |            |  Wave pos   |   Control   |  Raw freq.  |
+ 2 | Echo Length  | Gain      | GroupDec  |            | Osc. output |  Raw freq.  |             |
+ 3 |              |           | Noise     |            |             |             |             |
+ A |              |           |           |            |             |             |             |
+ B |              |           |           |            |             |             |             |
+ C |              |           |           |            |             |             |             |
+ D |              |           |           |            |             |             |             |
+ 4 |              |           |           |            |             |             |             |
+ 5 |              |           |           |            |             |             |             |
+ 6 |              |           |           |            |             |             |             |
+ 7 |              |           |           |            |             |             |             |
+ 8 |              |           |           |            |             |             |             |
+
+ex |   SID2       |    POKEY     |
+---|--------------|--------------|
+ D | Duty         |    AUDCTL    |
+ W | Waveform     |   Waveform   |
+ 1 | FilterMode   |   Raw freq.  |
+ 2 | Resonance    |              |
+ 3 | Filt. on/off |              |
+ A | Cutoff       |              |
+ B |              |              |
+ C |              |              |
+ D |              |              |
+ 4 | Special      |              |
+ 5 | Attack       |              |
+ 6 | Decay        |              |
+ 7 | Sustain      |              |
+ 8 | Release      |              |
+ 9 | Env. reset   |              |
+10 | Noise mode   |              |
+11 | Wave mix mode|              |
