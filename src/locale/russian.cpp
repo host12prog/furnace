@@ -4839,6 +4839,7 @@ void DivLocale::addTranslationsRussian()
     strings["E3xx: Set vibrato shape (0: up/down; 1: up only; 2: down only)##seen"].plurals[0] = "E3xx: Тип вибрато (0: вверх/вниз; 1: только вверх; 2: только вниз)";
     strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: Установить глубину вибрато";
     strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: Расстройка (80: без расстройки)";
+    strings["E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen"].plurals[0] = "E6xy: Отложенное транспонирование ноты (x: 0-7 = вверх, 8-F = вниз (после (x % 7) шагов движка); y: полутонов)";
     strings["EAxx: Legato##seen"].plurals[0] = "EAxx: Легато";
     strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: (СОВМЕСТИМОСТЬ) Установить банк сэмплов";
     strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: Заглушить ноту";

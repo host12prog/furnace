@@ -110,6 +110,8 @@ const char* DivEngine::getEffectDesc(unsigned char effect, int chan, bool notNul
       return "E4xx: Set vibrato range##seen";
     case 0xe5:
       return "E5xx: Set pitch (80: center)##seen";
+    case 0xe6:
+      return "E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen";
     case 0xea:
       return "EAxx: Legato##seen";
     case 0xeb:

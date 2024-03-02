@@ -36,6 +36,7 @@ however, effects are continuous, which means you only need to type it once and t
 - `EAxx`: **Toggle legato.** while on, new notes instantly change the pitch of the currently playing sound instead of starting it over.
 - `00xy`: **Arpeggio.** this effect produces a rapid cycle between the current note, the note plus `x` semitones and the note plus `y` semitones.
 - `E0xx`: **Set arpeggio speed.** this sets the number of ticks between arpeggio values. default is 1.
+- `E6xy`: **Delayed note transpose** (works like `Txy` in FamiTracker) instantly transposes note up or down after certain number of ticks. `x` dictates the delay and the direction of transpose: when `x` is between `0` and `7` note is transposed *up* after `x` ticks. when `x` is between `8` and `F` note is transposed *down* after `(x - 7)` ticks. so the MSB of `x` dictates the direction. `y` is how many semitones to transpose up/down.
   - ---
 - `04xy`: **Vibrato.** changes pitch to be "wavy" with a sine LFO. `x` is the speed, while `y` is the depth.
   - maximum vibrato depth is ±1 semitone.

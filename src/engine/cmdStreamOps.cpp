@@ -154,6 +154,7 @@ void writePackedCommandValues(SafeWriter* w, const DivCommand& c) {
     case DIV_CMD_MACRO_OFF:
     case DIV_CMD_MACRO_ON:
     case DIV_CMD_MACRO_RESTART:
+    case DIV_CMD_DELAYED_TRANSPOSE:
     case DIV_CMD_HINT_ARP_TIME:
       w->writeC(1); // length
       w->writeC(c.value);

@@ -276,6 +276,8 @@ const char* cmdName[]={
 
   "RAW_FREQ",
   "RAW_FREQ_HIGHER_BYTE",
+
+  "DELAYED_TRANSPOSE",
 };
 
 static_assert((sizeof(cmdName)/sizeof(void*))==DIV_CMD_MAX,"update cmdName!");
@@ -998,6 +1000,24 @@ void DivEngine::processRow(int i, bool afterDelay) {
         dispatchCmd(DivCommand(DIV_CMD_PITCH,i,chan[i].pitch+(((chan[i].vibratoDepth*vibTable[chan[i].vibratoPos]*chan[i].vibratoFine)>>4)/15)));
         dispatchCmd(DivCommand(DIV_CMD_HINT_PITCH,i,chan[i].pitch));
         break;
+      case 0xe6: // Delayed note transpose
+        if(effectVal != 0)
+        {
+          chan[i].transposeDelay = (((effectVal & 0xf0) >> 4) & 7);
+          bool negative_semitones = (effectVal >> 7);
+          chan[i].transposeSemitones = (effectVal & 0xf);
+
+          if(negative_semitones)
+          {
+            chan[i].transposeSemitones *= -1;
+          }
+        }
+        else
+        {
+          chan[i].transposeDelay = -1;
+          chan[i].transposeSemitones = 0xff;
+        }
+        break;
       case 0xea: // legato mode
         chan[i].legato=effectVal;
         break;
@@ -1578,6 +1598,22 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
         if(chan[i].cutoff_slide)
         {
           dispatchCmd(DivCommand(DIV_CMD_DO_CUTOFF_SLIDE,i,chan[i].cutoff_slide,chan[i].cutoff_slide_speed));
+        }
+
+        if(chan[i].transposeSemitones != 0xff)
+        {
+          if(chan[i].transposeDelay > 0)
+          {
+            chan[i].transposeDelay--;
+          }
+          else
+          {
+            chan[i].note += chan[i].transposeSemitones;
+            dispatchCmd(DivCommand(DIV_CMD_LEGATO,i,chan[i].note+(chan[i].arp>>4)));
+
+            chan[i].transposeDelay = -1;
+            chan[i].transposeSemitones = 0xff;
+          }
         }
 
         if (!song.noSlidesOnFirstTick || !firstTick) {

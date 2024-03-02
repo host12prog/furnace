@@ -116,7 +116,7 @@ const int ftEffectMap[]={
   -1, // VRC7 "custom patch write"
   -1, // delayed release - not supported yet
   0x09, // select groove
-  -1, // transpose - not supported
+  0xe6, // delayed note transpose
   0x11, // Namco 163 wave RAM offset
   -1, // FDS vol env - not supported
   -1, // FDS auto FM - not supported yet

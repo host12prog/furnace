@@ -278,6 +278,8 @@ enum DivDispatchCmds {
   DIV_CMD_RAW_FREQ,
   DIV_CMD_RAW_FREQ_HIGHER_BYTE,
 
+  DIV_CMD_DELAYED_TRANSPOSE, // (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)
+
   DIV_CMD_MAX
 };
 
