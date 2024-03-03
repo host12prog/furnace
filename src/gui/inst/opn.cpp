@@ -212,8 +212,7 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
                 uiColors[GUI_COLOR_FM_BORDER_MOD],
                 uiColors[GUI_COLOR_FM_BORDER_SHADOW_MOD]
               );
-            } 
-
+            }
             else 
             {
               pushAccentColors(
@@ -408,8 +407,7 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
                 uiColors[GUI_COLOR_FM_BORDER_MOD],
                 uiColors[GUI_COLOR_FM_BORDER_SHADOW_MOD]
               );
-            } 
-            
+            }
             else 
             {
               pushAccentColors(
@@ -659,7 +657,6 @@ void FurnaceGUI::drawInsOPN(DivInstrument* ins)
                 uiColors[GUI_COLOR_FM_BORDER_SHADOW_MOD]
               );
             } 
-            
             else 
             {
               pushAccentColors(
