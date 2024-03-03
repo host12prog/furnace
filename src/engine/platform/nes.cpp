@@ -353,7 +353,7 @@ void DivPlatformNES::tick(bool sysTick) {
           {
             if(ins->type==DIV_INS_NES && !parent->song.oldDPCM)
             {
-              goingToLoop=ins->amiga.getFreq(chan[4].note) ? true : false;
+              goingToLoop=ins->amiga.getFreq(chan[4].note) ? true : parent->getSample(dacSample)->isLoopable();
             }
           }
           // write DPCM
