@@ -23,14 +23,48 @@
 #include <fmt/printf.h>
 #include <imgui.h>
 
+static const char* chan_type_names[DIV_CH_MAX] = {
+  "FM",
+  "Pulse",
+  "Noise",
+  "Wave",
+  "PCM",
+  "FM"
+};
+
 #define SHOW_HOVER_INFO \
 if (ImGui::IsItemHovered()) { \
   if (ImGui::BeginTooltip()) { \
     DivSystem chip=e->song.system[i]; \
     const DivSysDef* sysDef=e->getSystemDef(chip); \
     ImGui::PushTextWrapPos(MIN(scrW*dpiScale,400.0f*dpiScale)); \
-    ImGui::Text("%s:",_L(sysDef->name)); \
     ImGui::Text("%s",_L(sysDef->description)); \
+    int num_chans[DIV_CH_MAX + 1] = { 0 }; \
+    for(int ch = 0; ch < e->getChannelCount(chip); ch++) \
+    { \
+      if(sysDef->chanTypes[ch] == (int)DIV_CH_OP) \
+      { \
+        num_chans[DIV_CH_FM]++; \
+      } \
+      else \
+      { \
+        num_chans[sysDef->chanTypes[ch]]++; \
+      } \
+    } \
+    String chan_number_info; \
+    for(int ch = 0; ch < (int)DIV_CH_MAX; ch++) \
+    { \
+      if(num_chans[ch] > 0 && ch != DIV_CH_OP) \
+      { \
+        chan_number_info += fmt::sprintf((ch == (int)DIV_CH_MAX - 1) ? "%d×%s" : "%d×%s, ", num_chans[ch], chan_type_names[ch]); \
+      } \
+    } \
+    if(chan_number_info[chan_number_info.length() - 1] == ' ') \
+    { \
+      chan_number_info.pop_back(); \
+      chan_number_info.pop_back(); \
+    } \
+    ImGui::Text("\n%s",chan_number_info.c_str()); \
     ImGui::PopTextWrapPos(); \
     ImGui::EndTooltip(); \
   } \
@@ -96,11 +130,13 @@ void FurnaceGUI::drawSysManager() {
           ImGui::EndDragDropTarget();
         }
         ImGui::TableNextColumn();
+        bool collapsed = true;
         if (ImGui::TreeNode(fmt::sprintf("%d. %s##_SYSM%d",i+1,_L(getSystemName(e->song.system[i])),i).c_str())) {
           drawSysConf(i,i,e->song.system[i],e->song.systemFlags[i],true);
           ImGui::TreePop();
+          collapsed = false;
         }
-        if(settings.showTooltipInChipManager)
+        if(settings.showTooltipInChipManager && collapsed)
         {
           SHOW_HOVER_INFO
         }
