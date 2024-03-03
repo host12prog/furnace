@@ -291,7 +291,7 @@ void DivPlatformNES::tick(bool sysTick) {
         {
           if(i < 2)
           {
-            if(parent->song.resetNesSweep)
+            if(parent->song.resetNesSweep && !(chan[i].do_sweep)) //so if sweep effect is on the same row with new note it actually works ig
             {
               chan[i].sweep=0x08;
               rWrite(0x4001+(i*4),chan[i].sweep);
@@ -329,6 +329,8 @@ void DivPlatformNES::tick(bool sysTick) {
       if (chan[i].keyOff) chan[i].keyOff=false;
       chan[i].freqChanged=false;
     }
+
+    chan[i].do_sweep = false;
   }
 
   // PCM
@@ -609,6 +611,7 @@ int DivPlatformNES::dispatch(DivCommand c) {
         } else { // up
           chan[c.chan].sweep=0x80|(c.value2&0x77);
         }
+        chan[c.chan].do_sweep = true;
       }
       rWrite(0x4001+(c.chan*4),chan[c.chan].sweep);
       break;
@@ -758,6 +761,8 @@ void DivPlatformNES::reset() {
   for (int i=0; i<5; i++) {
     chan[i]=DivPlatformNES::Channel();
     chan[i].std.setEngine(parent);
+
+    chan[i].do_sweep = false;
   }
   if (dumpWrites) {
     addWrite(0xffffffff,0);

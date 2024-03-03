@@ -1838,6 +1838,18 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
                   ds.ins[ds.ins.size() - 1]->type = DIV_INS_VRC6_SAW;
 
+                  if(ins->std.get_macro(DIV_MACRO_VOL, false)->len > 0)
+                  {
+                    for(int mm = 0; mm < ins->std.get_macro(DIV_MACRO_VOL, false)->len; mm++)
+                    {
+                      if(ds.ins[ds.ins.size() - 1]->std.get_macro(DIV_MACRO_VOL, false)->val[mm] < 16)
+                      {
+                        int vall = ins->std.get_macro(DIV_MACRO_VOL, false)->val[mm];
+                        ds.ins[ds.ins.size() - 1]->std.get_macro(DIV_MACRO_VOL, false)->val[mm] = vall * 42 / 15;
+                      }
+                    }
+                  }
+
                   ins_vrc6_saw_conv[i][0] = i;
                   ins_vrc6_saw_conv[i][1] = ds.ins.size() - 1;
 

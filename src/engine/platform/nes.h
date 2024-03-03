@@ -30,6 +30,7 @@ class DivPlatformNES: public DivDispatch {
     unsigned char duty, sweep, envMode, len;
     bool sweepChanged, furnaceDac;
     int note;
+    bool do_sweep;
     Channel():
       SharedChannel<signed char>(15),
       prevFreq(65535),
@@ -39,7 +40,8 @@ class DivPlatformNES: public DivDispatch {
       len(0x1f),
       sweepChanged(false),
       furnaceDac(false),
-      note(0) {}
+      note(0),
+      do_sweep(false) {}
   };
   Channel chan[5];
   DivDispatchOscBuffer* oscBuf[5];
