@@ -2059,10 +2059,16 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
   }
 
   bool dnft_extension = false;
+  bool eft_extension = false;
 
   if (path.find(".dnm") != std::string::npos)
   {
     dnft_extension = true;
+  }
+
+  if (path.find(".eft") != std::string::npos)
+  {
+    eft_extension = true;
   }
 
   if (!systemsRegistered) registerSystems();
@@ -2164,9 +2170,9 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
   if (memcmp(file,DIV_DMF_MAGIC,16)==0) {
     return loadDMF(file,len); 
   } else if (memcmp(file,DIV_FTM_MAGIC,18)==0) {
-    return loadFTM(file,len,false || dnft_extension,false);
+    return loadFTM(file,len,false || dnft_extension,false,eft_extension);
   } else if (memcmp(file,DIV_DN_FTM_MAGIC,21)==0) {
-    return loadFTM(file,len,true,true);
+    return loadFTM(file,len,true,true,false);
   } else if (memcmp(file,DIV_FUR_MAGIC,16)==0) {
     return loadFur(file,len,false);
   } else if (memcmp(file,DIV_FUR_B_MAGIC,16)==0) {

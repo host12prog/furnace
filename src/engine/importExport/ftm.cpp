@@ -313,13 +313,13 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
   }
 }
 
-bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_sig) {
+bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_sig, bool eft) {
   SafeReader reader=SafeReader(file,len);
   warnings="";
   try {
     DivSong ds;
     String blockName;
-    unsigned char expansions=0;
+    unsigned int expansions=0;
     unsigned int tchans=0;
     unsigned int n163Chans=0;
     bool hasSequence[256][8];
@@ -367,7 +367,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     ds.version=(unsigned short)reader.readI();
     logI("module version %d (0x%.4x)",ds.version,ds.version);
 
-    if (ds.version>0x0450) {
+    if ((ds.version>0x0450 && !eft) || (eft && ds.version>0x0460)) {
       logE("incompatible version %x!",ds.version);
       lastError="incompatible version";
       delete[] file;
@@ -409,7 +409,21 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           oldSpeedTempo=reader.readI();
         }
         if (blockVersion>=2) {
-          expansions=reader.readC();
+          if(eft)
+          {
+            if(blockVersion < 7)
+            {
+              expansions=reader.readC();
+            }
+            else
+            {
+              expansions=reader.readI();
+            }
+          }
+          else
+          {
+            expansions=reader.readC();
+          }
         }
 
         tchans=reader.readI();
@@ -420,20 +434,28 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         }
 
         pal=reader.readI();
-        if (blockVersion>=7) {
-          // advanced Hz control
-          int controlType=reader.readI();
-          switch (controlType) {
-            case 1:
-              customHz=1000000.0/(double)reader.readI();
-              break;
-            default:
-              reader.readI();
-              break;
+        if(!eft)
+        {
+          if (blockVersion>=7) {
+            // advanced Hz control
+            int controlType=reader.readI();
+            switch (controlType) {
+              case 1:
+                customHz=1000000.0/(double)reader.readI();
+                break;
+              default:
+                reader.readI();
+                break;
+            }
+          } else {
+            customHz=reader.readI();
           }
-        } else {
+        }
+        else 
+        {
           customHz=reader.readI();
         }
+        
         unsigned int newVibrato=0;
         bool sweepReset=false;
         unsigned int speedSplitPoint=0;
@@ -582,6 +604,66 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             map_ch++;
           }
         }
+        if (expansions&64) {
+          ds.system[systemID++]=DIV_SYSTEM_AY8930;
+
+          for(int ch = 0; ch < 3; ch++)
+          {
+            map_channels[curr_chan] = map_ch;
+            curr_chan++;
+            map_ch++;
+          }
+        }
+        if (expansions&128) {
+          ds.system[systemID++]=DIV_SYSTEM_SAA1099;
+
+          for(int ch = 0; ch < 6; ch++)
+          {
+            map_channels[curr_chan] = map_ch;
+            curr_chan++;
+            map_ch++;
+          }
+        }
+        if (expansions&256) {
+          ds.system[systemID++]=DIV_SYSTEM_NES;
+
+          for(int ch = 0; ch < 5; ch++)
+          {
+            map_channels[curr_chan] = map_ch;
+            curr_chan++;
+            map_ch++;
+          }
+        }
+        if (expansions&512) {
+          ds.system[systemID++]=DIV_SYSTEM_C64_6581;
+
+          for(int ch = 0; ch < 3; ch++)
+          {
+            map_channels[curr_chan] = map_ch;
+            curr_chan++;
+            map_ch++;
+          }
+        }
+        if (expansions&1024) {
+          ds.system[systemID++]=DIV_SYSTEM_C64_8580;
+
+          for(int ch = 0; ch < 3; ch++)
+          {
+            map_channels[curr_chan] = map_ch;
+            curr_chan++;
+            map_ch++;
+          }
+        }
+        if (expansions&2048) {
+          ds.system[systemID++]=DIV_SYSTEM_POKEY;
+
+          for(int ch = 0; ch < 4; ch++)
+          {
+            map_channels[curr_chan] = map_ch;
+            curr_chan++;
+            map_ch++;
+          }
+        }
         ds.systemLen=systemID;
 
         for(int i = 0; i < curr_chan; i++)
@@ -618,6 +700,10 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         if(blockVersion == 9 && blockSize - (reader.tell()-blockStart) == 2) //weird
         {
           reader.seek(2,SEEK_CUR);
+        }
+        if(eft)
+        {
+          reader.seek(8,SEEK_CUR);
         }
         
       } else if (blockName=="INFO") {
@@ -705,10 +791,10 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             case 1:
               ins->type=DIV_INS_NES;
               break;
-            case 2: // TODO: tell VRC6 and VRC6 saw instruments apart
+            case 2:
               ins->type=DIV_INS_VRC6;
               break;
-            case 3:
+            case 3: // VRC7
               ins->type=DIV_INS_OPLL;
               break;
             case 4:
@@ -717,8 +803,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             case 5:
               ins->type=DIV_INS_N163;
               break;
-            case 6: // 5B?
+            case 6: // 5B
               ins->type=DIV_INS_AY;
+              break;
+            case 7: // 6581 SID
+              ins->type=DIV_INS_C64;
               break;
             default: {
               logE("%d: invalid instrument type %d",insIndex,insType);
@@ -989,6 +1078,79 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               for (unsigned int j=0; j<totalSeqs; j++) {
                 hasSequence[insIndex][j]=reader.readC();
                 sequenceIndex[insIndex][j]=reader.readC();
+              }
+
+              break;
+            }
+
+            case DIV_INS_C64:
+            {
+              unsigned int instVersion=reader.readI();
+              logV("C64 inst version %d", instVersion);
+
+              int seek_amount = 94 - 4;
+              
+              if(instVersion <= 255)
+              {
+                unsigned char ad = reader.readC();
+                unsigned char sr = reader.readC();
+
+                seek_amount -= 2;
+
+                if(instVersion >= 2)
+                {
+                  unsigned int pwm_start = reader.readI();
+                  unsigned int pwm_end = reader.readI();
+
+                  unsigned char pwm_speed = reader.readC();
+                  unsigned char pwm_mode = reader.readC();
+
+                  seek_amount -= 10;
+                }
+
+                if(instVersion >= 3)
+                {
+                  unsigned int filter_start = reader.readI();
+                  unsigned int filter_end = reader.readI();
+
+                  unsigned char filter_speed = reader.readC();
+                  unsigned char filter_mode = reader.readC();
+
+                  seek_amount -= 10;
+                }
+
+                if(instVersion >= 4)
+                {
+                  unsigned int totalSeqs=reader.readI();
+                  seek_amount -= 4;
+                  if (totalSeqs>5) 
+                  {
+                    logE("%d: too many sequences!",insIndex);
+                    lastError="too many sequences";
+                    delete[] file;
+                    return false;
+                  }
+
+                  for (unsigned int j=0; j<totalSeqs; j++) 
+                  {
+                    hasSequence[insIndex][j]=reader.readC();
+                    sequenceIndex[insIndex][j]=reader.readC();
+
+                    seek_amount -= 2;
+                  }
+                }
+
+                reader.seek(seek_amount, SEEK_CUR);
+
+                /*for(int tti = 0; tti < 20; tti++)
+                {
+                  char aaaa = reader.readC();
+                  logV("\'%c\'", aaaa);
+                }*/
+              }
+              else
+              {
+                reader.seek(-4, SEEK_CUR);
               }
 
               break;
@@ -1685,7 +1847,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
         //ds.subsong[0]->notes = reader.readS();
       } else if (blockName=="PARAMS_EXTRA") {
-        CHECK_BLOCK_VERSION(1);
+        CHECK_BLOCK_VERSION(3);
         //reader.seek(blockSize,SEEK_CUR);
         unsigned int linear_pitch = reader.readI();
 
@@ -1697,6 +1859,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           fineTuneCents+=reader.readC();
 
           ds.tuning=440.0*pow(2.0,(double)fineTuneCents/1200.0);
+        }
+        if(blockVersion >= 3)
+        {
+          unsigned char flats = reader.readC();
+          (void)flats;
         }
       } else if (blockName=="TUNING") {
         CHECK_BLOCK_VERSION(1);
