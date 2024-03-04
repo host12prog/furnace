@@ -1094,6 +1094,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               {
                 unsigned char ad = reader.readC();
                 unsigned char sr = reader.readC();
+                (void)ad;
+                (void)sr;
 
                 seek_amount -= 2;
 
@@ -1101,9 +1103,13 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                 {
                   unsigned int pwm_start = reader.readI();
                   unsigned int pwm_end = reader.readI();
+                  (void)pwm_start;
+                  (void)pwm_end;
 
                   unsigned char pwm_speed = reader.readC();
                   unsigned char pwm_mode = reader.readC();
+                  (void)pwm_speed;
+                  (void)pwm_mode;
 
                   seek_amount -= 10;
                 }
@@ -1112,9 +1118,13 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                 {
                   unsigned int filter_start = reader.readI();
                   unsigned int filter_end = reader.readI();
+                  (void)filter_start;
+                  (void)filter_end;
 
                   unsigned char filter_speed = reader.readC();
                   unsigned char filter_mode = reader.readC();
+                  (void)filter_speed;
+                  (void)filter_mode;
 
                   seek_amount -= 10;
                 }
