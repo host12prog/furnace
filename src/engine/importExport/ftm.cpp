@@ -473,10 +473,21 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         if (blockVersion>=9) {
           sweepReset=reader.readI();
         }
-        if (blockVersion>=4 && blockVersion<7) {
-          hilightA=reader.readI();
-          hilightB=reader.readI();
+        if(eft)
+        {
+          if (blockVersion>=4 && blockVersion<=7) {
+            hilightA=reader.readI();
+            hilightB=reader.readI();
+          }
         }
+        else
+        {
+          if (blockVersion>=4 && blockVersion<7) {
+            hilightA=reader.readI();
+            hilightB=reader.readI();
+          }
+        }
+        
         if ((expansions&16) && blockVersion>=5) { // N163 channels
           n163Chans=reader.readI();
         }
@@ -711,7 +722,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         }
         if(eft)
         {
-          reader.seek(8,SEEK_CUR);
+          //reader.seek(8,SEEK_CUR);
         }
         
       } else if (blockName=="INFO") {
@@ -1964,30 +1975,34 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
     //addWarning("FamiTracker import is experimental!");
 
-    for(int tries = 0; tries < 5; tries++) //de-duplicating instruments
+    if(ds.insLen > 0)
     {
-      for(int i = 0; i < 128; i++)
+      for(int tries = 0; tries < 5; tries++) //de-duplicating instruments
       {
-        int index = i >= (int)ds.insLen ? ((int)ds.insLen - 1) : i;
-        DivInstrument* ins = ds.ins[index];
-
-        if(ins->type == DIV_INS_FM)
+        for(int i = 0; i < 128; i++)
         {
-          delete ds.ins[index];
-          ds.ins.erase(ds.ins.begin()+index);
-          ds.insLen=ds.ins.size();
-          for (int ii=0; ii<total_chans; ii++) 
+          int index = i >= (int)ds.insLen ? ((int)ds.insLen - 1) : i;
+          if(index < 0) index = 0;
+          DivInstrument* ins = ds.ins[index];
+
+          if(ins->type == DIV_INS_FM)
           {
-            for (size_t j=0; j<ds.subsong.size(); j++) 
+            delete ds.ins[index];
+            ds.ins.erase(ds.ins.begin()+index);
+            ds.insLen=ds.ins.size();
+            for (int ii=0; ii<total_chans; ii++) 
             {
-              for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+              for (size_t j=0; j<ds.subsong.size(); j++) 
               {
-                if (ds.subsong[j]->pat[ii].data[k]==NULL) continue;
-                for (int l=0; l<ds.subsong[j]->patLen; l++) 
+                for (int k=0; k<DIV_MAX_PATTERNS; k++) 
                 {
-                  if (ds.subsong[j]->pat[ii].data[k]->data[l][2]>index) 
+                  if (ds.subsong[j]->pat[ii].data[k]==NULL) continue;
+                  for (int l=0; l<ds.subsong[j]->patLen; l++) 
                   {
-                    ds.subsong[j]->pat[ii].data[k]->data[l][2]--;
+                    if (ds.subsong[j]->pat[ii].data[k]->data[l][2]>index) 
+                    {
+                      ds.subsong[j]->pat[ii].data[k]->data[l][2]--;
+                    }
                   }
                 }
               }
@@ -1996,6 +2011,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         }
       }
     }
+    
 
     //famitracker is not fucking strict with what instrument types can be used on any channel. This leads to e.g. 2A03 instuments being used on VRC6 channels.
     //Furnace is way more strict, so NES instrument in VRC6 channel just does not play. To fix this, we are creating copies of instruments, changing their type to please Furnace system.
