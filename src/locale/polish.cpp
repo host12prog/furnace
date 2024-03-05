@@ -3007,6 +3007,8 @@ void DivLocale::addTranslationsPolish()
     strings["Wrap text in song/subsong comments window.##sgse"].plurals[0] = "Zawijaj wiersz w oknach komentarzy do utworu/podutworu";
     strings["Frame shading in text windows##sgse"].plurals[0] = "Cieniowanie ramek w oknach tekstowych";
     strings["Apply frame shading to the multiline text fields\nsuch as song/subsong info/comments.##sgse"].plurals[0] = "Zastosuj gradient w oknie informacji o utworze/komentarzach.";
+    strings["Show chip info in chip manager##sgse"].plurals[0] = "Pokazuj informacje o układzie w menedżerze ukłądów";
+    strings["Display tooltip in chip manager when hovering over the chip. Tooltip shows chip name and description.##sgse"].plurals[0] = "Wyświetla podpowiedź po najechaniu kursorem na układ. Podpowiedź wyświetla nazwę i opis układu.";
     strings["Color##sgse"].plurals[0] = "Kolor";
     strings["Color scheme##sgse"].plurals[0] = "Schemat kolorów";
     strings["Import##sgse2"].plurals[0] = "Importuj";
