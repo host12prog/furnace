@@ -1255,7 +1255,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             DivInstrument* ins=ds.ins[k];
             if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_NES && hasSequence[k][Types[i]])
             {
-              copy_macro(ins, &macros[sequenceIndex[index][type]][type], Types[i], setting);
+              copy_macro(ins, &macros[index][type], Types[i], setting);
               //memcpy(ins->std.get_macro(DIV_MACRO_VOL + (DivMacroType)Types[i], true), &macros[sequenceIndex[index][type]][type], sizeof(DivInstrumentMacro));
             }
           }
@@ -1632,14 +1632,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
       } else if (blockName=="SEQUENCES_VRC6") {
         CHECK_BLOCK_VERSION(6);
-        //reader.seek(blockSize,SEEK_CUR);
-
-        if(blockVersion < 3)
-        {
-          lastError="sequences block version is too old";
-          delete[] file;
-          return false;
-        }
 
         unsigned char* Indices = new unsigned char[128 * 5];
 		    unsigned char* Types = new unsigned char[128 * 5];
@@ -1682,7 +1674,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             DivInstrument* ins=ds.ins[k];
             if(sequenceIndex[k][Types[i]] == Indices[i] && ins->type == DIV_INS_VRC6 && hasSequence[k][Types[i]])
             {
-              copy_macro(ins, &macros[sequenceIndex[index][type]][type], type, setting);
+              copy_macro(ins, &macros[index][type], type, setting);
 
               if(type == 0 && setting == 1)
               {
