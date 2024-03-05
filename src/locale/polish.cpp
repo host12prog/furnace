@@ -334,11 +334,11 @@ void DivLocale::addTranslationsPolish()
     strings["Save##sgdl2"].plurals[0] = "Zapisz";
     strings["save instrument as .dmp...##sgdl"].plurals[0] = "zapisz instrument jako .dmp...";
     strings["save wavetable as .dmw...##sgdl"].plurals[0] = "zapisz tablice fal jako .dmw...";
-    strings["save raw wavetable...##sgdl"].plurals[0] = "zapisz surowa tablice fal...";
+    strings["save raw wavetable...##sgdl"].plurals[0] = "zapisz surową tablice fal...";
     strings["save raw sample...##sgdl"].plurals[0] = "zapisz surowy sampel";
     strings["save as .dmp...##sgdl"].plurals[0] = "zapisz jako .dmp...";
     strings["Toggle folders/standard view##sgdl0"].plurals[0] = "Przełącz między widokiem złożonym i normalnym";
-    strings["Move up##sgdl0"].plurals[0] = "Przesuń w góre o jedną pozycję";
+    strings["Move up##sgdl0"].plurals[0] = "Przesuń w górę o jedną pozycję";
     strings["Move down##sgdl0"].plurals[0] = "Przesuń w dół o jedną pozycję";
     strings["Create##sgdl0"].plurals[0] = "Stwórz";
     strings["New folder##sgdl0"].plurals[0] = "Nowy folder";
@@ -358,7 +358,7 @@ void DivLocale::addTranslationsPolish()
     strings["save as .dmw...##sgdl"].plurals[0] = "zapisz jako .dmw...";
     strings["save raw...##sgdl0"].plurals[0] = "zapisz dane surowe...";
     strings["Toggle folders/standard view##sgdl1"].plurals[0] = "Przełączanie między widokiem złożonym i normalnym";
-    strings["Move up##sgdl1"].plurals[0] = "Przesuń w góre o jedną pozycję";
+    strings["Move up##sgdl1"].plurals[0] = "Przesuń w górę o jedną pozycję";
     strings["Move down##sgdl1"].plurals[0] = "Przesuń w dół o jedną pozycję";
     strings["Create##sgdl1"].plurals[0] = "Stwórz";
     strings["New folder##sgdl1"].plurals[0] = "Nowy folder";
@@ -372,7 +372,7 @@ void DivLocale::addTranslationsPolish()
     strings["Save##sgdl4"].plurals[0] = "Zapisz";
     strings["save raw...##sgdl1"].plurals[0] = "zapisz dane surowe...";
     strings["Toggle folders/standard view##sgdl2"].plurals[0] = "Przełączanie między widokiem złożonym i normalnym";
-    strings["Move up##sgdl2"].plurals[0] = "Przesun w gore o jedną pozycję";
+    strings["Move up##sgdl2"].plurals[0] = "Przesun w górę o jedną pozycję";
     strings["Move down##sgdl2"].plurals[0] = "Przesun w dół o jedną pozycję";
     strings["Create##sgdl2"].plurals[0] = "Stwórz";
     strings["New folder##sgdl2"].plurals[0] = "Nowy folder";
@@ -922,10 +922,10 @@ void DivLocale::addTranslationsPolish()
     strings["Transpose (-1)##sggc"].plurals[0] = "Transponuj (-1)";
     strings["Transpose (+1 octave)##sggc"].plurals[0] = "Transponuj (+1 oktawa)";
     strings["Transpose (-1 octave)##sggc"].plurals[0] = "Transponuj (-1 oktawa)";
-    strings["Increase values (+1)##sggc"].plurals[0] = "Zwieksz wartosci (+1)";
-    strings["Increase values (-1)##sggc"].plurals[0] = "Zmniejsz wartosci (-1)";
-    strings["Increase values (+16)##sggc"].plurals[0] = "Zwieksz wartosci (+16)";
-    strings["Increase values (-16)##sggc"].plurals[0] = "Zmniejsz wartosci (-16)";
+    strings["Increase values (+1)##sggc"].plurals[0] = "Zwieksz wartości (+1)";
+    strings["Increase values (-1)##sggc"].plurals[0] = "Zmniejsz wartości (-1)";
+    strings["Increase values (+16)##sggc"].plurals[0] = "Zwieksz wartości (+16)";
+    strings["Increase values (-16)##sggc"].plurals[0] = "Zmniejsz wartości (-16)";
     strings["Select all##sggc0"].plurals[0] = "Wybierz wszystko";
     strings["Cut##sggc0"].plurals[0] = "Wytnij";
     strings["Copy##sggc0"].plurals[0] = "Kopiuj";
@@ -934,7 +934,7 @@ void DivLocale::addTranslationsPolish()
     strings["Paste Mix (background)##sggc"].plurals[0] = "Wklej nad zawartość (zastąp komórki z zaw.)";
     strings["Paste Flood##sggc"].plurals[0] = "Wstawić z buforem powtarzając cykl (do końca wzorca)";
     strings["Paste Overflow##sggc"].plurals[0] = "Wklej z przepełnieniem";
-    strings["Move cursor up##sggc"].plurals[0] = "Kursor w gorę";
+    strings["Move cursor up##sggc"].plurals[0] = "Kursor w górę";
     strings["Move cursor down##sggc"].plurals[0] = "Kursor w dół";
     strings["Move cursor left##sggc"].plurals[0] = "Kursor w lewo";
     strings["Move cursor right##sggc"].plurals[0] = "Kursor w prawo";
@@ -990,7 +990,7 @@ void DivLocale::addTranslationsPolish()
     strings["Open (replace current instrument)##sggc0"].plurals[0] = "Otwórz (z zamiana obecnego)";
     strings["Save instrument##sggc0"].plurals[0] = "Zapisz";
     strings["Export instrument (.dmp)##sggc"].plurals[0] = "Eksportuj (.dmp)";
-    strings["Move instrument up in list##sggc0"].plurals[0] = "Przesun w gore";
+    strings["Move instrument up in list##sggc0"].plurals[0] = "Przesun w górę";
     strings["Move instrument down in list##sggc0"].plurals[0] = "Przesun w dol";
     strings["Delete instrument##sggc0"].plurals[0] = "Usuń";
     strings["Edit instrument##sggc0"].plurals[0] = "Educja";
@@ -1006,7 +1006,7 @@ void DivLocale::addTranslationsPolish()
     strings["Save wavetable##sggc1"].plurals[0] = "Zapisz";
     strings["Save wavetable (.dmw)##sggc"].plurals[0] = "Zapisz (.dmw)";
     strings["Save wavetable (raw)##sggc0"].plurals[0] = "Zapisz (dane surowe)";
-    strings["Move wavetable up in list##sggc1"].plurals[0] = "Przesuń w goreę";
+    strings["Move wavetable up in list##sggc1"].plurals[0] = "Przesuń w górę";
     strings["Move wavetable down in list##sggc1"].plurals[0] = "Przesuń w dół";
     strings["Delete wavetable##sggc1"].plurals[0] = "Usuń";
     strings["Edit wavetable##sggc1"].plurals[0] = "Edytuj";
@@ -1071,8 +1071,8 @@ void DivLocale::addTranslationsPolish()
     strings["Next order##sggc"].plurals[0] = "Następny wiersz matrycy wzorców";
     strings["Order cursor left##sggc"].plurals[0] = "Kursor w lewo";
     strings["Order cursor right##sggc"].plurals[0] = "Kursor w prawo";
-    strings["Increase order value##sggc"].plurals[0] = "Zwieksz wartosc";
-    strings["Decrease order value##sggc"].plurals[0] = "Zmniejsz wartosc";
+    strings["Increase order value##sggc"].plurals[0] = "Zwieksz wartość";
+    strings["Decrease order value##sggc"].plurals[0] = "Zmniejsz wartość";
     strings["Switch order edit mode##sggc"].plurals[0] = "Wlacz tryb edytowania";
     strings["Order: toggle alter entire row##sggc"].plurals[0] = "Wlacz tryb zmiany całego rzędu";
     strings["Add order##sggc3"].plurals[0] = "Dodaj";
@@ -1444,9 +1444,9 @@ void DivLocale::addTranslationsPolish()
     strings["Create New##sgie"].plurals[0] = "Stwórz nowy";
     strings["copy##sgie"].plurals[0] = "kopiuj";
     strings["paste##sgie"].plurals[0] = "wklej";
-    strings["clear contents##sgie"].plurals[0] = "wyczysc zawartosc";
-    strings["offset...##sgie"].plurals[0] = "przesuniecie...";
-    strings["offset##sgie"].plurals[0] = "przesuniecie";
+    strings["clear contents##sgie"].plurals[0] = "wyczyść zawartość";
+    strings["offset...##sgie"].plurals[0] = "przesunięcie...";
+    strings["offset##sgie"].plurals[0] = "przesunięcie";
     strings["scale...##sgie"].plurals[0] = "skaluj...";
     strings["scale##sgie"].plurals[0] = "skaluj";
     strings["randomize...##sgie"].plurals[0] = "wypełnij losowymi wartościami...";
@@ -1456,8 +1456,8 @@ void DivLocale::addTranslationsPolish()
 
     //   sgmx  src/gui/mixer.cpp
 
-    strings["input##sgmx"].plurals[0] = "wejscie";
-    strings["output##sgmx"].plurals[0] = "wyjscie";
+    strings["input##sgmx"].plurals[0] = "wejście";
+    strings["output##sgmx"].plurals[0] = "wyjście";
     strings["Mixer##sgmx"].plurals[0] = "Mikser";
     strings["Master Volume##sgmx"].plurals[0] = "Główna Głośność";
     strings["Invert##sgmx"].plurals[0] = "Odwróć";
@@ -2454,9 +2454,9 @@ void DivLocale::addTranslationsPolish()
 
     strings["<Use system font>##sgse0"].plurals[0] = "<Używaj czcionki systemowej>";
     strings["<Custom...>##sgse0"].plurals[0] = "<Niestandardowa...>";
-    strings["<Use system font>##sgse1"].plurals[0] = "<żywaj czcionki systemowej>";
+    strings["<Use system font>##sgse1"].plurals[0] = "<Używaj czcionki systemowej>";
     strings["<Custom...>##sgse1"].plurals[0] = "<Niestandardowa...>";
-    strings["<Use system font>##sgse2"].plurals[0] = "<żywaj czcionki systemowej>";
+    strings["<Use system font>##sgse2"].plurals[0] = "<Używaj czcionki systemowej>";
     strings["<Custom...>##sgse2"].plurals[0] = "<Niestandardowa...>";
     strings["Mono##sgse0"].plurals[0] = "Mono";
     strings["Stereo##sgse"].plurals[0] = "Stereo";
@@ -3419,7 +3419,7 @@ void DivLocale::addTranslationsPolish()
     strings["Noise Freq##sgi8930"].plurals[0] = "Częstotliwość szumu";
     strings["Waveform##sgi8930"].plurals[0] = "Kształt fali";
     strings["Phase Reset##sgi8930"].plurals[0]  = "Reset fazy";
-    strings["Duty##sgi8930"].plurals[0] = "Szerokość pulsu";
+    //strings["Duty##sgi8930"].plurals[0] = "Szerokość fali prostokątnej";
     strings["Envelope##sgi8930"].plurals[0] = "Obwiednia";
     strings["AutoEnv Num##sgi8930"].plurals[0] = "Licznik. częst. аuto-obwiedni";
     strings["AutoEnv Den##sgi8930"].plurals[0] = "Mianownik. częst. аuto-obwiedni";
@@ -3429,7 +3429,7 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiB"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiB"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiB"].plurals[0] = "Wysokość";
-    strings["Pulse Width##sgiB"].plurals[0] = "Szerokość pulsu";
+    strings["Pulse Width##sgiB"].plurals[0] = "Szerokość fali prostokątnej";
 
     //   sgiC140   src/gui/inst/c140.cpp
 
@@ -3469,7 +3469,7 @@ void DivLocale::addTranslationsPolish()
     strings["R##sgiC641"].plurals[0] = "R";
     strings["Envelope##sgiC640"].plurals[0] = "Obwiednia";
     strings["Envelope##sgiC641"].plurals[0] = "Obwiednia";
-    strings["Duty##sgiC640"].plurals[0] = "Szerokość pulsu";
+    strings["Duty##sgiC640"].plurals[0] = "Szerokość fali prost.";
     strings["Ring Modulation##sgiC64"].plurals[0] = "Modulacja kolowa";
     strings["Oscillator Sync##sgiC64"].plurals[0] = "Synchronizacja oscylotorów";
     strings["Enable filter##sgiC64"].plurals[0] = "Wlacz filtr";
@@ -3482,17 +3482,17 @@ void DivLocale::addTranslationsPolish()
     strings["high##sgiC64"].plurals[0] = "górno";
     strings["ch3off##sgiC64"].plurals[0] = "wył. kanał 3";
     strings["Absolute Cutoff Macro##sgiC64"].plurals[0] = "Absolutne makro punktu odcięcia";
-    strings["Absolute Duty Macro##sgiC64"].plurals[0] = "Absolutne makro szerokości pulsu";
+    strings["Absolute Duty Macro##sgiC64"].plurals[0] = "Absolutne makro szerokości fali prost.";
     strings["Don't test before new note##sgiC64"].plurals[0] = "Nie włączaj bitu testowego przed nową nutą";
     strings["Macros##sgiC64"].plurals[0] = "Makra";
     strings["Volume##sgiC64"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiC64"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiC64"].plurals[0] = "Wysokość";
-    strings["Duty##sgiC641"].plurals[0] = "Szerokość pulsu";
+    strings["Duty##sgiC641"].plurals[0] = "Szerokość fali prost.";
     strings["Waveform##sgiC641"].plurals[0] = "Kształt fali";
     strings["Cutoff##sgiC641"].plurals[0] = "Punkt odcięcia";
     strings["Filter Mode##sgiC641"].plurals[0] = "Typ filtra";
-    strings["Filter Toggle##sgiC64"].plurals[0] = "Wł/Wył filtr";
+    strings["Filter Toggle##sgiC64"].plurals[0] = "Wł./Wył. filtr";
     strings["Resonance##sgiC641"].plurals[0] = "Rezonans";
     strings["Special##sgiC64"].plurals[0] = "Specjalne";
     strings["Attack##sgiC64"].plurals[0] = "Atak";
@@ -3610,7 +3610,7 @@ void DivLocale::addTranslationsPolish()
 
     //   sgiFDS    src/gui/inst/fds.cpp
 
-    strings["Compatibility mode##sgiFDS"].plurals[0] = "Tryb kompatybilnosci";
+    strings["Compatibility mode##sgiFDS"].plurals[0] = "Tryb kompatybilności";
     strings["only use for compatibility with .dmf modules!\n- initializes modulation table with first wavetable\n- does not alter modulation parameters on instrument change##sgiFDS"].plurals[0] = "tylko dla kompatybilności z modułami .dmf!\n- inicjalizuje tablice modulatora wraz z pierwszą tablica fal\n- nie zmienia parametrów modulacji przy zmianie instrumentu";
     strings["Modulation depth##sgiFDS"].plurals[0] = "Głębokość modulacji";
     strings["Modulation speed##sgiFDS"].plurals[0] = "Szybkość modulacji";
@@ -3651,7 +3651,7 @@ void DivLocale::addTranslationsPolish()
     //   sgiGB     src/gui/inst/gb.cpp
 
     strings["Game Boy##sgiGB"].plurals[0] = "Game Boy";
-    strings["Use software envelope##sgiGB"].plurals[0] = "Uzywaj obwiedni sprzetowej";
+    strings["Use software envelope##sgiGB"].plurals[0] = "Używaj obwiedni sprzetowej";
     strings["Initialize envelope on every note##sgiGB"].plurals[0] = "Inicjalizuj obwiednię przy każdej nucie";
     strings["Volume##sgiGB0"].plurals[0] = "Głośność";
     strings["Length##sgiGB"].plurals[0] = "Długość";
@@ -3679,7 +3679,7 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiGB2"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiGB"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiGB"].plurals[0] = "Wysokość";
-    strings["Duty/Noise##sgiGB"].plurals[0] = "Szerokość pulsu/tryb szumu";
+    strings["Duty/Noise##sgiGB"].plurals[0] = "Szerokość fali prost./tryb szumu";
     strings["Waveform##sgiGB"].plurals[0] = "Fala";
     strings["Panning##sgiGB"].plurals[0] = "Panning";
     strings["Phase Reset##sgiGB"].plurals[0] = "Reset fazy";
@@ -3747,7 +3747,7 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiLYNX"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiLYNX"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiLYNX"].plurals[0] = "Wysokość";
-    strings["Duty/Int##sgiLYNX"].plurals[0] = "Szerokość pulsu/int.";
+    strings["Duty/Int##sgiLYNX"].plurals[0] = "Szerokość fali prostokątnej/int.";
     strings["Panning (left)##sgiLYNX"].plurals[0] = "Panning (lewo)";
     strings["Panning (right)##sgiLYNX"].plurals[0] = "Panning (prawo)";
     strings["Phase Reset##sgiLYNX"].plurals[0] = "Reset fazy";
@@ -3848,14 +3848,14 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiNES"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiNES"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiNES"].plurals[0] = "Wysokość";
-    strings["Duty/Noise##sgiNES"].plurals[0] = "Szerokość pulsu/tryb szumu";
+    strings["Duty/Noise##sgiNES"].plurals[0] = "Szerokość fali prostokątnej/tryb szumu";
     strings["Phase Reset##sgiNES"].plurals[0] = "Reset fazy";
 
     //   sgiOPL    src/gui/inst/opl.cpp
 
     strings["4-op##sgiOPL"].plurals[0] = "4-op";
     strings["Drums##sgiOPL"].plurals[0] = "Perkusja";
-    strings["Fixed frequency mode##sgiOPL"].plurals[0] = "Tryb stalej czestotliwosci";
+    strings["Fixed frequency mode##sgiOPL"].plurals[0] = "Tryb stałej czestotliwości";
     strings["when enabled, drums will be set to the specified frequencies, ignoring the note.##sgiOPL"].plurals[0] = "gdy tryb ten jest włączony, instrumenty perkusji będą grane na określonych częstotliwościach. Wartości nut będą ignorowane.";
     strings["Drum##sgiOPL"].plurals[0] = "Perkusja";
     strings["Block##sgiOPL"].plurals[0] = "Blok";
@@ -4046,7 +4046,7 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiPMQT"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiPMQT"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiPMQT"].plurals[0] = "Wysokość";
-    strings["Pulse Width##sgiPMQT"].plurals[0] = "Szerokość pulsu";
+    strings["Pulse Width##sgiPMQT"].plurals[0] = "Szerokość fali prostokątnej";
 
     //   sgiPOKEY  src/gui/inst/pokey.cpp
 
@@ -4125,7 +4125,7 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiSAA"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiSAA"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiSAA"].plurals[0] = "Wysokość";
-    strings["Duty/Noise##sgiSAA"].plurals[0] = "Szerokość pulsu/szum";
+    strings["Duty/Noise##sgiSAA"].plurals[0] = "Szerokość fali prostokątnej/szum";
     strings["Waveform##sgiSAA"].plurals[0] = "Kształt fali";
     strings["Panning (left)##sgiSAA"].plurals[0] = "Panning (lewo)";
     strings["Panning (right)##sgiSAA"].plurals[0] = "Panning (prawo)";
@@ -4207,7 +4207,7 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiSID2"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiSID2"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiSID2"].plurals[0] = "Wysokość";
-    strings["Duty##sgiSID21"].plurals[0] = "Szerokość pulsu";
+    strings["Duty##sgiSID21"].plurals[0] = "Szerokość fali prostokątnej";
     strings["Waveform##sgiSID21"].plurals[0] = "Kształt fali";
     strings["Noise Mode##sgiSID21"].plurals[0] = "Tryb szumu";
     strings["Wave Mix Mode##sgiSID21"].plurals[0] = "Tryb mieszania fali";
@@ -4237,7 +4237,7 @@ void DivLocale::addTranslationsPolish()
     strings["Envelope##sgiSNES0"].plurals[0] = "Obwiednia";
     strings["Envelope##sgiSNES1"].plurals[0] = "Obwiednia";
     strings["Sustain/release mode:##sgiSNES"].plurals[0] = "Tryb podtrzymania/zwolnienia:";
-    strings["Direct (cut on release)##sgiSNES"].plurals[0] = "Bezpości (zatrzymaj przy zwolnieniu)";
+    strings["Direct (cut on release)##sgiSNES"].plurals[0] = "Bezpośredni (zatrzymaj przy zwolnieniu)";
     strings["Effective (linear decrease)##sgiSNES"].plurals[0] = "Efektywny (liniowe opadanie)";
     strings["Effective (exponential decrease)##sgiSNES"].plurals[0] = "Efektywny (wykładnicze opadanie)";
     strings["Delayed (write R on release)##sgiSNES"].plurals[0] = "Opóźniony (zapis R podczas zwolnienia)";
@@ -4268,7 +4268,7 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiPSG"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiPSG"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiPSG"].plurals[0] = "Wysokość";
-    strings["Duty##sgiPSG"].plurals[0] = "Szerokość pulsu";
+    strings["Duty##sgiPSG"].plurals[0] = "Szerokość fali prostokątnej";
     strings["Panning##sgiPSG"].plurals[0] = "Panning";
     strings["Phase Reset##sgiPSG"].plurals[0] = "Reset fazy";
 
@@ -4602,7 +4602,7 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiSU"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiSU"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiSU"].plurals[0] = "Wysokość";
-    strings["Duty/Noise##sgiSU"].plurals[0] = "Szerokość pulsu/szum";
+    strings["Duty/Noise##sgiSU"].plurals[0] = "Szerokość fali prostokątnej/szum";
     strings["Waveform##sgiSU"].plurals[0] = "Fala";
     strings["Panning##sgiSU"].plurals[0] = "Panning";
     strings["Phase Reset##sgiSU"].plurals[0] = "Reset fazy";
@@ -4670,7 +4670,7 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiVERA"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiVERA"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiVERA"].plurals[0] = "Wysokość";
-    strings["Duty##sgiVERA"].plurals[0] = "Szerokość pulsu";
+    strings["Duty##sgiVERA"].plurals[0] = "Szerokość fali prostokątnej";
     strings["Waveform##sgiVERA"].plurals[0] = "Kształt fali";
     strings["Panning##sgiVERA"].plurals[0] = "Panning";
 
@@ -4689,7 +4689,7 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiVRC6"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiVRC6"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiVRC6"].plurals[0] = "Wysokość";
-    strings["Duty##sgiVRC6"].plurals[0] = "Szerokość pulsu";
+    strings["Duty##sgiVRC6"].plurals[0] = "Szerokość fali prostokątnej";
     strings["Waveform##sgiVRC6"].plurals[0] = "Kształt fali";
     strings["Phase Reset##sgiVRC6"].plurals[0] = "Reset fazy";
 
@@ -4986,7 +4986,7 @@ void DivLocale::addTranslationsPolish()
     strings["18xx: Pulse width slide down##sesd"].plurals[0] = "18xx: Opadanie szerokości fali prostokątnej";
     strings["19xx: Cutoff slide up##sesd"].plurals[0] = "19xx: Narastanie punktu odcięcia";
     strings["1Axx: Cutoff slide down##sesd"].plurals[0] = "1Axx: Opadanie punktu odcięcia";
-    strings["3xxx: Set pulse width (0 to FFF)##sesd1"].plurals[0] = "3xxx: Ustaw szerokość pulsu (0-FFF)";
+    strings["3xxx: Set pulse width (0 to FFF)##sesd1"].plurals[0] = "3xxx: Ustaw szerokość fali prostokątnej (0-FFF)";
     strings["4xxx: Set cutoff (0 to FFF)##sesd1"].plurals[0] = "4xxx: Ustaw punkt odcięcia (0-FFF)";
     strings["a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.##sesd"].plurals[0] = "układ, który zaczął pojawiać się w telefonach komórkowych w 2000 r.\n jako iż wykorzystwał zastreżony format, przegrał z formatem MP3 podczas rywalizacji między różnymi typami sprzętu mobilnego.";
     strings["<COMPOUND SYSTEM!>##sesd0"].plurals[0] = "<SYSTEM ZŁOŻONY!>";
