@@ -203,6 +203,7 @@ const char* aboutLine[]={
   "-- translations and related work --##sgab",
   "Electric Keet",
   "LTVA1 (Russian translation)##sgab",
+  "Kagamiin~ (Portuguese translation)##sgab",
   "",
   "powered by:##sgab",
   "Dear ImGui by Omar Cornut##sgab",
