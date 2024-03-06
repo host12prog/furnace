@@ -70,7 +70,7 @@ void FurnaceGUI::drawSubSongs(bool asChild) {
     ImGui::SameLine();
     if (ImGui::Button(ICON_FA_PLUS "##SubSongAdd")) {
       if (!e->addSubSong()) {
-        showError(_L("too many subsongs!##sgss0"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "too many subsongs!" : _L("too many subsongs!##sgss0"));
       } else {
         e->changeSongP(e->song.subsong.size()-1);
         updateScroll(0);
@@ -90,7 +90,7 @@ void FurnaceGUI::drawSubSongs(bool asChild) {
     ImGui::SameLine();
     if (ImGui::Button(ICON_FA_FILES_O "##SubSongDuplicate")) {
       if (!e->duplicateSubSong(e->getCurrentSubSong())) {
-        showError(_L("too many subsongs!##sgss1"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "too many subsongs!" : _L("too many subsongs!##sgss1"));
       } else {
         e->changeSongP(e->song.subsong.size()-1);
         updateScroll(0);
@@ -111,9 +111,9 @@ void FurnaceGUI::drawSubSongs(bool asChild) {
     pushDestColor();
     if (ImGui::Button(ICON_FA_MINUS "##SubSongDel")) {
       if (e->song.subsong.size()<=1) {
-        showError(_L("this is the only subsong!##sgss"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "this is the only subsong!" : _L("this is the only subsong!##sgss"));
       } else {
-        showWarning(_L("are you sure you want to remove this subsong?##sgss"),GUI_WARN_SUBSONG_DEL);
+        showWarning(settings.language == DIV_LANG_ENGLISH ? "are you sure you want to remove this subsong?" : _L("are you sure you want to remove this subsong?##sgss"),GUI_WARN_SUBSONG_DEL);
       }
     }
     popDestColor();

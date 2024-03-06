@@ -81,6 +81,11 @@ class DivPlatformGenesis: public DivPlatformOPN {
     ym3438_t fm;
     fmopn2_t fm_276;
 
+    int lle_cycle_counter; //to capture per-channel oscilloscope output!
+    int prev_lle_cycle_counter;
+
+    int osc_data_acc[6];
+
     ymfm::ym2612* fm_ymfm;
     ymfm::ym2612::output_data out_ymfm;
     DivYM2612Interface iface;
@@ -103,6 +108,7 @@ class DivPlatformGenesis: public DivPlatformOPN {
     inline void commitState(int ch, DivInstrument* ins);
     void acquire_nuked(short** buf, size_t len);
     void acquire_nuked276(short** buf, size_t len);
+    void handle_nuked276_per_chan_osc();
     void acquire_ymfm(short** buf, size_t len);
   
     friend void putDispatchChip(void*,int);

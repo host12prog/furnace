@@ -287,12 +287,24 @@ void DivPlatformNES::tick(bool sysTick) {
           chan[i].freq=noiseTable[ntPos];
         }
       } else {
+        if (chan[i].keyOn) 
+        {
+          if(i < 2)
+          {
+            if(parent->song.resetNesSweep && !(chan[i].do_sweep)) //so if sweep effect is on the same row with new note it actually works ig
+            {
+              chan[i].sweep=0x08;
+              rWrite(0x4001+(i*4),chan[i].sweep);
+            }
+          }
+        }
+        
         chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,chan[i].pitch2,chipClock,CHIP_DIVIDER)-1;
         if (chan[i].freq>2047) chan[i].freq=2047;
         if (chan[i].freq<0) chan[i].freq=0;
       }
-      if (chan[i].keyOn) {
-      }
+      if (chan[i].keyOn) 
+      {}
       if (chan[i].keyOff) {
         //rWrite(16+i*5+2,8);
         if (i==2) { // triangle
@@ -306,7 +318,7 @@ void DivPlatformNES::tick(bool sysTick) {
         rWrite(0x4003+i*4,(chan[i].len<<3));
       } else {
         rWrite(0x4002+i*4,chan[i].freq&0xff);
-        if ((chan[i].prevFreq>>8)!=(chan[i].freq>>8) || i==2) {
+        if ((chan[i].prevFreq>>8)!=(chan[i].freq>>8) || i==2 || (parent->song.resetNesSweep && i < 2 && chan[i].keyOn)) {
           rWrite(0x4003+i*4,(chan[i].len<<3)|(chan[i].freq>>8));
         }
         if (chan[i].freq!=65535 && chan[i].freq!=0) {
@@ -317,6 +329,8 @@ void DivPlatformNES::tick(bool sysTick) {
       if (chan[i].keyOff) chan[i].keyOff=false;
       chan[i].freqChanged=false;
     }
+
+    chan[i].do_sweep = false;
   }
 
   // PCM
@@ -335,6 +349,15 @@ void DivPlatformNES::tick(bool sysTick) {
           unsigned int dpcmLen=parent->getSample(dacSample)->lengthDPCM>>4;
           if (dpcmLen>255) dpcmLen=255;
           goingToLoop=parent->getSample(dacSample)->isLoopable();
+
+          DivInstrument* ins = parent->getIns(chan[4].ins, DIV_INS_NES);
+          if (ins->amiga.useNoteMap)
+          {
+            if(ins->type==DIV_INS_NES && !parent->song.oldDPCM)
+            {
+              goingToLoop=ins->amiga.getFreq(chan[4].note) ? true : parent->getSample(dacSample)->isLoopable();
+            }
+          }
           // write DPCM
           rWrite(0x4015,15);
           if (nextDPCMFreq>=0) {
@@ -376,6 +399,7 @@ void DivPlatformNES::tick(bool sysTick) {
 int DivPlatformNES::dispatch(DivCommand c) {
   switch (c.cmd) {
     case DIV_CMD_NOTE_ON:
+      chan[c.chan].note = c.value;
       if (c.chan==4) { // PCM
         DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_NES);
         if (ins->type==DIV_INS_AMIGA || (ins->type==DIV_INS_NES && !parent->song.oldDPCM)) {
@@ -396,6 +420,11 @@ int DivPlatformNES::dispatch(DivCommand c) {
               if (nextDPCMFreq<0 || nextDPCMFreq>15) nextDPCMFreq=lastDPCMFreq;
               lastDPCMFreq=nextDPCMFreq;
               nextDPCMDelta=ins->amiga.getDPCMDelta(c.value);
+
+              if(ins->type==DIV_INS_NES && !parent->song.oldDPCM)
+              {
+                goingToLoop=ins->amiga.getFreq(c.value) ? true : false;
+              }
             } else {
               if (c.value==DIV_NOTE_NULL) {
                 nextDPCMFreq=lastDPCMFreq;
@@ -582,6 +611,7 @@ int DivPlatformNES::dispatch(DivCommand c) {
         } else { // up
           chan[c.chan].sweep=0x80|(c.value2&0x77);
         }
+        chan[c.chan].do_sweep = true;
       }
       rWrite(0x4001+(c.chan*4),chan[c.chan].sweep);
       break;
@@ -628,6 +658,14 @@ int DivPlatformNES::dispatch(DivCommand c) {
       break;
     case DIV_CMD_SAMPLE_FREQ: {
       bool goingToLoop=parent->getSample(dacSample)->isLoopable();
+      DivInstrument* ins = parent->getIns(chan[4].ins, DIV_INS_NES);
+      if (ins->amiga.useNoteMap)
+      {
+        if(ins->type==DIV_INS_NES && !parent->song.oldDPCM)
+        {
+          goingToLoop=ins->amiga.getFreq(chan[4].note) ? true : false;
+        }
+      }
       if (dpcmMode) {
         nextDPCMFreq=c.value&15;
         rWrite(0x4010,(c.value&15)|(goingToLoop?0x40:0));
@@ -723,6 +761,8 @@ void DivPlatformNES::reset() {
   for (int i=0; i<5; i++) {
     chan[i]=DivPlatformNES::Channel();
     chan[i].std.setEngine(parent);
+
+    chan[i].do_sweep = false;
   }
   if (dumpWrites) {
     addWrite(0xffffffff,0);

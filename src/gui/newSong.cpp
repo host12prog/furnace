@@ -67,7 +67,7 @@ void FurnaceGUI::drawNewSong() {
     if (newSongFirstFrame)
       ImGui::SetKeyboardFocusHere();
     ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-    if (ImGui::InputTextWithHint("##SysSearch",_L("Search...##sgns"),&newSongQuery)) {
+    if (ImGui::InputTextWithHint("##SysSearch",settings.language == DIV_LANG_ENGLISH ? "Search..." : _L("Search...##sgns"),&newSongQuery)) {
       String lowerCase=newSongQuery;
       
       for (char& i: lowerCase) {
@@ -232,7 +232,9 @@ void FurnaceGUI::drawNewSong() {
   }
 
   if (accepted) {
-    e->createNew(nextDesc.c_str(),nextDescName,false);
+    String temmrrrp = nextDescName.substr(0, nextDescName.find("##"));
+    String temmrrrp_desc = nextDesc.substr(0, nextDesc.find("##"));
+    e->createNew(temmrrrp_desc.c_str(),temmrrrp,false);
     undoHist.clear();
     redoHist.clear();
     curFileName="";

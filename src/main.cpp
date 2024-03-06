@@ -255,6 +255,7 @@ TAParamResult pVersion(String) {
   printf("- C140/C219 emulator (modified version) by cam900 (zlib license)\n");
   printf("- PowerNoise emulator by scratchminer (MIT)\n");
   printf("- ep128emu by Istvan Varga (GPLv2)\n");
+  printf("- SID2 emulator by LTVA (GPLv2); modified version of reSID\n");
   return TA_PARAM_QUIT;
 }
 
@@ -620,7 +621,7 @@ int main(int argc, char** argv) {
       return 1;
     }
     fclose(f);
-    if (!e.load(file,(size_t)len)) {
+    if (!e.load(file,(size_t)len,fileName)) {
       reportError(fmt::sprintf("could not open file! (%s)",e.getLastError()));
       e.everythingOK();
       finishLogFile();

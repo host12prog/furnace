@@ -345,7 +345,7 @@ void DivPlatformX1_010::tick(bool sysTick) {
       if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || chan[i].ws.activeChanged()) {
         chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
         if (!chan[i].pcm) {
-          chan[i].ws.changeWave1(chan[i].wave);
+          chan[i].ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_X1_010));
           if (!chan[i].keyOff) chan[i].keyOn=true;
         }
       }
@@ -534,11 +534,21 @@ int DivPlatformX1_010::dispatch(DivCommand c) {
       if ((ins->type==DIV_INS_AMIGA || ins->amiga.useSample) || chan[c.chan].pcm) {
         if (ins->type==DIV_INS_AMIGA || ins->amiga.useSample) {
           chan[c.chan].furnacePCM=true;
+          chan[c.chan].pcm=true;
         } else {
           chan[c.chan].furnacePCM=false;
+          chan[c.chan].pcm=false;
           chan[c.chan].sampleNote=DIV_NOTE_NULL;
           chan[c.chan].sampleNoteDelta=0;
+          chWrite(c.chan,0,0); // reset
+          chWrite(c.chan,1,0);
+          chWrite(c.chan,2,0);
+          chWrite(c.chan,4,0);
+          chWrite(c.chan,5,0);
+          updateWave(c.chan);
         }
+      }
+      if (chan[c.chan].pcm) {
         if (skipRegisterWrites) break;
         if (chan[c.chan].furnacePCM) {
           chan[c.chan].pcm=true;
@@ -627,7 +637,7 @@ int DivPlatformX1_010::dispatch(DivCommand c) {
       }
       if (chan[c.chan].wave<0) {
         chan[c.chan].wave=0;
-        chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+        chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_X1_010));
       }
       chan[c.chan].ws.init(ins,128,255,chan[c.chan].insChanged);
       chan[c.chan].insChanged=false;
@@ -675,7 +685,12 @@ int DivPlatformX1_010::dispatch(DivCommand c) {
       break;
     case DIV_CMD_WAVE:
       chan[c.chan].wave=c.value;
-      chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_X1_010));
+      chan[c.chan].keyOn=true;
+      break;
+    case DIV_CMD_WAVE_LOCAL:
+      chan[c.chan].wave=c.value | (1 << 30);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_X1_010));
       chan[c.chan].keyOn=true;
       break;
     case DIV_CMD_X1_010_ENVELOPE_SHAPE:
@@ -925,7 +940,7 @@ float DivPlatformX1_010::getPostAmp() {
 void DivPlatformX1_010::notifyWaveChange(int wave) {
   for (int i=0; i<16; i++) {
     if (chan[i].wave==wave) {
-      chan[i].ws.changeWave1(wave);
+      chan[i].ws.changeWave1(wave & 0xff, false, (wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_X1_010));
       updateWave(i);
     }
   }

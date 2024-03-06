@@ -534,6 +534,134 @@ int DivPlatformC64::dispatch(DivCommand c) {
       chan[c.chan].release=c.value&15;
       rWrite(c.chan*7+6,(chan[c.chan].sustain<<4)|(chan[c.chan].release));
       break;
+    case DIV_CMD_DO_PW_SLIDE:
+      if(c.value == 1)
+      {
+        if(chan[c.chan].duty == 0xfff)
+        {
+          chan[c.chan].do_pw_sweep_writes = false;
+        }
+        else
+        {
+          chan[c.chan].do_pw_sweep_writes = true;
+        }
+
+        chan[c.chan].duty += c.value2;
+
+        if(chan[c.chan].duty > 0xfff)
+        {
+          chan[c.chan].duty = 0xfff;
+
+          if(chan[c.chan].do_pw_sweep_writes)
+          {
+            rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
+            rWrite(c.chan*7+3,chan[c.chan].duty>>8);
+          }
+        }
+        else
+        {
+          if(chan[c.chan].do_pw_sweep_writes)
+          {
+            rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
+            rWrite(c.chan*7+3,chan[c.chan].duty>>8);
+          }
+        }
+      }
+      if(c.value == 2)
+      {
+        if(chan[c.chan].duty == 0)
+        {
+          chan[c.chan].do_pw_sweep_writes = false;
+        }
+        else
+        {
+          chan[c.chan].do_pw_sweep_writes = true;
+        }
+
+        chan[c.chan].duty -= c.value2;
+
+        if(chan[c.chan].duty < 0)
+        {
+          chan[c.chan].duty = 0;
+
+          if(chan[c.chan].do_pw_sweep_writes)
+          {
+            rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
+            rWrite(c.chan*7+3,chan[c.chan].duty>>8);
+          }
+        }
+        else
+        {
+          if(chan[c.chan].do_pw_sweep_writes)
+          {
+            rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
+            rWrite(c.chan*7+3,chan[c.chan].duty>>8);
+          }
+        }
+      }
+      break;
+    case DIV_CMD_DO_CUTOFF_SLIDE:
+      if(c.value == 1)
+      {
+        if(filtCut == 0x7ff)
+        {
+          do_cutoff_sweep_writes = false;
+        }
+        else
+        {
+          do_cutoff_sweep_writes = true;
+        }
+
+        filtCut += c.value2;
+
+        if(filtCut > 0x7ff)
+        {
+          filtCut = 0x7ff;
+
+          if(do_cutoff_sweep_writes)
+          {
+            updateFilter();
+          }
+        }
+        else
+        {
+          if(do_cutoff_sweep_writes)
+          {
+            updateFilter();
+          }
+        }
+      }
+      if(c.value == 2)
+      {
+        if(filtCut == 0)
+        {
+          do_cutoff_sweep_writes = false;
+        }
+        else
+        {
+          do_cutoff_sweep_writes = true;
+        }
+
+        filtCut -= c.value2;
+
+        if(filtCut < 0)
+        {
+          filtCut = 0;
+
+          if(do_cutoff_sweep_writes)
+          {
+            updateFilter();
+          }
+        }
+        else
+        {
+          if(do_cutoff_sweep_writes)
+          {
+            updateFilter();
+          }
+        }
+      }
+      break;
     case DIV_CMD_MACRO_OFF:
       chan[c.chan].std.mask(c.value,true);
       break;

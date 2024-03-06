@@ -2888,6 +2888,31 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_LIST_END
   );
   ENTRY(
+    "Yamaha YMF276", {
+      CH(DIV_SYSTEM_YM2612, 1.0f, 0, "chipType=2")
+    }, NULL, MENU_STATUS_LIST_START
+  );
+  ENTRY(
+    _L("Yamaha YMF276 (extended channel 3)##sgpr"), {
+      CH(DIV_SYSTEM_YM2612_EXT, 1.0f, 0, "chipType=2")
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "Yamaha YMF276 CSM", {
+      CH(DIV_SYSTEM_YM2612_CSM, 1.0f, 0, "chipType=2")
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    _L("Yamaha YMF276 with DualPCM##sgpr"), {
+      CH(DIV_SYSTEM_YM2612_DUALPCM, 1.0f, 0, "chipType=2")
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    _L("Yamaha YMF276 (extended channel 3) with DualPCM and CSM##sgpr"), {
+      CH(DIV_SYSTEM_YM2612_DUALPCM_EXT, 1.0f, 0, "chipType=2")
+    }, NULL, MENU_STATUS_LIST_END
+  );
+  ENTRY(
     "Yamaha YM2413 (OPLL)", {
       CH(DIV_SYSTEM_OPLL, 1.0f, 0, "")
     }, NULL, MENU_STATUS_LIST_START
@@ -3370,6 +3395,11 @@ void FurnaceGUI::initSystemPresets() {
   ENTRY(
     "PowerNoise", {
       CH(DIV_SYSTEM_POWERNOISE, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "SID2", {
+      CH(DIV_SYSTEM_SID2, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
   );
   CATEGORY_END;

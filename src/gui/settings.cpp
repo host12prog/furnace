@@ -371,7 +371,7 @@ void FurnaceGUI::drawSettings() {
     if (!settingsOpen) {
       if (settingsChanged) {
         settingsOpen=true;
-        showWarning(_L("Do you want to save your settings?##sgse"),GUI_WARN_CLOSE_SETTINGS);
+        showWarning(settings.language == DIV_LANG_ENGLISH ? "Do you want to save your settings?" : _L("Do you want to save your settings?##sgse"),GUI_WARN_CLOSE_SETTINGS);
       } else {
         settingsOpen=false;
       }
@@ -486,6 +486,24 @@ void FurnaceGUI::drawSettings() {
         }
         popWarningColor();
 
+        ImGui::Text(_L("Oscilloscope rendering engine:##sgse"));
+        ImGui::Indent();
+        if (ImGui::RadioButton(_L("ImGui line plot##sgse"),settings.shaderOsc==0)) {
+          settings.shaderOsc=0;
+          settingsChanged=true;
+        }
+        if (ImGui::IsItemHovered()) {
+          ImGui::SetTooltip(_L("render using Dear ImGui's built-in line drawing functions.##sgse"));
+        }
+        if (ImGui::RadioButton(_L("GLSL/HLSL (if available)##sgse"),settings.shaderOsc==1)) {
+          settings.shaderOsc=1;
+          settingsChanged=true;
+        }
+        if (ImGui::IsItemHovered()) {
+          ImGui::SetTooltip(_L("render using shaders that run on the graphics card.\nonly available in OpenGL render backend.##sgse"));
+        }
+        ImGui::Unindent();
+
         // SUBSECTION FILE
         CONFIG_SUBSECTION(_L("File##sgse"));
 
@@ -563,7 +581,7 @@ void FurnaceGUI::drawSettings() {
           exportLoops=settings.exportLoops;
           settingsChanged=true;
         }
-        if (ImGui::InputDouble(_L("Fade out (seconds)##sgse"),&settings.exportFadeOut,1.0,2.0,"%.1f##sgse")) {
+        if (ImGui::InputDouble(_L("Fade out (seconds)##sgse"),&settings.exportFadeOut,1.0,2.0,"%.1f")) {
           if (exportFadeOut<0.0) exportFadeOut=0.0;
           exportFadeOut=settings.exportFadeOut;
           settingsChanged=true;
@@ -860,6 +878,24 @@ void FurnaceGUI::drawSettings() {
 
           ImGui::EndCombo();
         }
+
+        bool translate_channel_names_patternB=settings.translate_channel_names_pattern;
+        if (ImGui::Checkbox(_L("Translate channel names in pattern header##sgse"),&translate_channel_names_patternB)) {
+          settings.translate_channel_names_pattern=translate_channel_names_patternB;
+          settingsChanged=true;
+        }
+
+        bool translate_channel_names_oscB=settings.translate_channel_names_osc;
+        if (ImGui::Checkbox(_L("Translate channel names in channel oscilloscope label##sgse"),&translate_channel_names_oscB)) {
+          settings.translate_channel_names_osc=translate_channel_names_oscB;
+          settingsChanged=true;
+        }
+
+        bool translate_short_channel_namesB=settings.translate_short_channel_names;
+        if (ImGui::Checkbox(_L("Translate short channel names (in orders and other places)##sgse"),&translate_short_channel_namesB)) {
+          settings.translate_short_channel_names=translate_short_channel_namesB;
+          settingsChanged=true;
+        }
         //ImGui::TextUnformatted(_L("test##sgse"));
 
         /*if(settings.language == (int)DIV_LANG_RUSSIAN)
@@ -946,7 +982,7 @@ void FurnaceGUI::drawSettings() {
             if (ImGui::BeginCombo("##AudioDevice",_L("<click on OK or Apply first>##sgse"))) {
               ImGui::Text(_L("ALERT - TRESPASSER DETECTED##sgse"));
               if (ImGui::IsItemHovered()) {
-                showError(_L("you have been arrested for trying to engage with a disabled combo box.##sgse"));
+                showError(settings.language == DIV_LANG_ENGLISH ? "you have been arrested for trying to engage with a disabled combo box." : _L("you have been arrested for trying to engage with a disabled combo box.##sgse"));
                 ImGui::CloseCurrentPopup();
               }
               ImGui::EndCombo();
@@ -1804,7 +1840,7 @@ void FurnaceGUI::drawSettings() {
         }
         ImGui::SameLine();
         if (ImGui::Button(_L("Reset defaults##sgse0"))) {
-          showWarning(_L("Are you sure you want to reset the keyboard settings?##sgse"),GUI_WARN_RESET_KEYBINDS);
+          showWarning(settings.language == DIV_LANG_ENGLISH ? "Are you sure you want to reset the keyboard settings?" : _L("Are you sure you want to reset the keyboard settings?##sgse"),GUI_WARN_RESET_KEYBINDS);
         }
         if (ImGui::TreeNode(_L("Global hotkeys##sgse"))) {
           KEYBIND_CONFIG_BEGIN("keysGlobal");
@@ -1839,6 +1875,7 @@ void FurnaceGUI::drawSettings() {
           UI_KEYBIND_CONFIG(GUI_ACTION_FULLSCREEN);
           UI_KEYBIND_CONFIG(GUI_ACTION_TX81Z_REQUEST);
           UI_KEYBIND_CONFIG(GUI_ACTION_PANIC);
+          UI_KEYBIND_CONFIG(GUI_ACTION_QUIT);
 
           KEYBIND_CONFIG_END;
           ImGui::TreePop();
@@ -1870,16 +1907,23 @@ void FurnaceGUI::drawSettings() {
           UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_PIANO);
           UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_OSCILLOSCOPE);
           UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_CHAN_OSC);
+          UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_XY_OSC);
           UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_VOL_METER);
           UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_CLOCK);
           UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_REGISTER_VIEW);
           UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_LOG);
           UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_STATS);
+          UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_MEMORY);
           UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_EFFECT_LIST);
           UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_DEBUG);
           UI_KEYBIND_CONFIG(GUI_ACTION_WINDOW_ABOUT);
           UI_KEYBIND_CONFIG(GUI_ACTION_COLLAPSE_WINDOW);
           UI_KEYBIND_CONFIG(GUI_ACTION_CLOSE_WINDOW);
+
+          UI_KEYBIND_CONFIG(GUI_ACTION_COMMAND_PALETTE);
+          UI_KEYBIND_CONFIG(GUI_ACTION_CMDPAL_RECENT);
+          UI_KEYBIND_CONFIG(GUI_ACTION_CMDPAL_INSTRUMENTS);
+          UI_KEYBIND_CONFIG(GUI_ACTION_CMDPAL_SAMPLES);
 
           KEYBIND_CONFIG_END;
           ImGui::TreePop();
@@ -2077,6 +2121,28 @@ void FurnaceGUI::drawSettings() {
           UI_KEYBIND_CONFIG(GUI_ACTION_WAVE_LIST_UP);
           UI_KEYBIND_CONFIG(GUI_ACTION_WAVE_LIST_DOWN);
           UI_KEYBIND_CONFIG(GUI_ACTION_WAVE_LIST_DIR_VIEW);
+          UI_KEYBIND_CONFIG(GUI_ACTION_WAVE_LIST_PASTE_CLIPBOARD);
+
+          KEYBIND_CONFIG_END;
+          ImGui::TreePop();
+        }
+        if (ImGui::TreeNode(_L("Local wavetables list##sgse"))) {
+          KEYBIND_CONFIG_BEGIN("keysLocalWaveList");
+
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_ADD);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_DUPLICATE);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_OPEN);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_OPEN_REPLACE);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_SAVE);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_SAVE_DMW);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_SAVE_RAW);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_MOVE_UP);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_MOVE_DOWN);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_DELETE);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_EDIT);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_UP);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_DOWN);
+          UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_PASTE_CLIPBOARD);
 
           KEYBIND_CONFIG_END;
           ImGui::TreePop();
@@ -2185,7 +2251,7 @@ void FurnaceGUI::drawSettings() {
         }
         ImGui::SameLine();
         if (ImGui::Button(_L("Reset##sgse"))) {
-          showWarning(_L("Are you sure you want to reset the workspace layout?##sgse"),GUI_WARN_RESET_LAYOUT);
+          showWarning(settings.language == DIV_LANG_ENGLISH ? "Are you sure you want to reset the workspace layout?" : _L("Are you sure you want to reset the workspace layout?##sgse"),GUI_WARN_RESET_LAYOUT);
         }
 
         bool allowEditDockingB=settings.allowEditDocking;
@@ -2870,6 +2936,12 @@ void FurnaceGUI::drawSettings() {
         }
         ImGui::Unindent();
 
+        bool playbackTimeB=settings.playbackTime;
+        if (ImGui::Checkbox(_L("Display playback status when playing##sgse"),&playbackTimeB)) {
+          settings.playbackTime=playbackTimeB;
+          settingsChanged=true;
+        }
+
         ImGui::Text(_L("Export options layout:##sgse"));
         ImGui::Indent();
         if (ImGui::RadioButton(_L("Sub-menus in File menu##eol0"),settings.exportOptionsLayout==0)) {
@@ -3375,6 +3447,12 @@ void FurnaceGUI::drawSettings() {
           settingsChanged=true;
         }
 
+        if (ImGui::SliderFloat(_L("Line size##sgse"),&settings.oscLineSize,0.25f,16.0f,"%.1f")) {
+          if (settings.oscLineSize<0.25f) settings.oscLineSize=0.25f;
+          if (settings.oscLineSize>16.0f) settings.oscLineSize=16.0f;
+          settingsChanged=true;
+        } rightClickable
+
         // SUBSECTION WINDOWS
         CONFIG_SUBSECTION(_L("Windows##sgse"));
         bool roundedWindowsB=settings.roundedWindows;
@@ -3433,6 +3511,15 @@ void FurnaceGUI::drawSettings() {
           ImGui::SetTooltip(_L("Apply frame shading to the multiline text fields\nsuch as song/subsong info/comments.##sgse"));
         }
 
+        bool showTooltipInChipManagerB=settings.showTooltipInChipManager;
+        if (ImGui::Checkbox(_L("Show chip info in chip manager##sgse"),&showTooltipInChipManagerB)) {
+          settings.showTooltipInChipManager=showTooltipInChipManagerB;
+          settingsChanged=true;
+        }
+        if (ImGui::IsItemHovered()) {
+          ImGui::SetTooltip(_L("Display tooltip in chip manager when hovering over the chip. Tooltip shows chip name and description.##sgse"));
+        }
+
         END_SECTION;
       }
 
@@ -3448,7 +3535,7 @@ CONFIG_SECTION(_L("Color##sgse")) {
   }
   ImGui::SameLine();
   if (ImGui::Button(_L("Reset defaults##sgse1"))) {
-    showWarning(_L("Are you sure you want to reset the color scheme?##sgse"),GUI_WARN_RESET_COLORS);
+    showWarning(settings.language == DIV_LANG_ENGLISH ? "Are you sure you want to reset the color scheme?" : _L("Are you sure you want to reset the color scheme?##sgse"),GUI_WARN_RESET_COLORS);
   }
   if (ImGui::TreeNode(_L("Interface##sgse1"))) {
     if (ImGui::SliderInt(_L("Frame shading##sgse"),&settings.guiColorsShading,0,100,"%d%%##sgse")) {
@@ -3683,6 +3770,8 @@ CONFIG_SECTION(_L("Color##sgse")) {
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_ES5503,"ES5503");
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_POWERNOISE,"PowerNoise (noise)");
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_POWERNOISE_SLOPE,"PowerNoise (slope)");
+    UI_COLOR_CONFIG(GUI_COLOR_INSTR_DAVE,"DAVE");
+    UI_COLOR_CONFIG(GUI_COLOR_INSTR_SID2,"SID2");
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_UNKNOWN,"Other/Unknown");
     ImGui::TreePop();
   }
@@ -3916,6 +4005,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
 
     settings.chanOscThreads=conf.getInt("chanOscThreads",0);
     settings.renderPoolThreads=conf.getInt("renderPoolThreads",0);
+    settings.shaderOsc=conf.getInt("shaderOsc",0);
     settings.showPool=conf.getInt("showPool",0);
     settings.writeInsNames=conf.getInt("writeInsNames",0);
     settings.readInsNames=conf.getInt("readInsNames",1);
@@ -3952,6 +4042,10 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     locale.setLanguage((DivLang)settings.language);
     initSystemPresets();
     updateWindowTitle();
+
+    settings.translate_channel_names_pattern=conf.getInt("translateChanNamesPat",0);
+    settings.translate_channel_names_osc=conf.getInt("translateChanNamesOsc",0);
+    settings.translate_short_channel_names=conf.getInt("translateShortChanNames",0);
   }
 
   if (groups&GUI_SETTINGS_AUDIO) {
@@ -4075,6 +4169,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.oscEscapesBoundary=conf.getInt("oscEscapesBoundary",0);
     settings.oscMono=conf.getInt("oscMono",1);
     settings.oscAntiAlias=conf.getInt("oscAntiAlias",1);
+    settings.oscLineSize=conf.getFloat("oscLineSize",1.0f);
 
     settings.channelColors=conf.getInt("channelColors",1);
     settings.channelTextColors=conf.getInt("channelTextColors",0);
@@ -4088,6 +4183,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.roundedButtons=conf.getInt("roundedButtons",1);
     settings.roundedTabs=conf.getInt("roundedTabs",1);
     settings.wrapText=conf.getInt("wrapText",1);
+    settings.showTooltipInChipManager=conf.getInt("showTooltipInChipManager",1);
     settings.roundedScrollbars=conf.getInt("roundedScrollbars",1);
     settings.roundedMenus=conf.getInt("roundedMenus",0);
 
@@ -4119,6 +4215,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.orderRowsBase=conf.getInt("orderRowsBase",1);
     settings.fmNames=conf.getInt("fmNames",0);
     settings.statusDisplay=conf.getInt("statusDisplay",0);
+    settings.playbackTime=conf.getInt("playbackTime",1);
     settings.viewPrevPattern=conf.getInt("viewPrevPattern",1);
     settings.susPosition=conf.getInt("susPosition",0);
 
@@ -4257,6 +4354,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.roundedButtons,0,1);
   clampSetting(settings.roundedTabs,0,1);
   clampSetting(settings.wrapText,0,1);
+  clampSetting(settings.showTooltipInChipManager,0,1);
   clampSetting(settings.roundedScrollbars,0,1);
   clampSetting(settings.roundedMenus,0,1);
   clampSetting(settings.roundedTabs,0,1);
@@ -4363,6 +4461,12 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.selectAssetOnLoad,0,1);
 
   clampSetting(settings.language,0,DIV_LANG_MAX-1);
+  clampSetting(settings.translate_channel_names_pattern, 0, 1);
+  clampSetting(settings.translate_channel_names_osc, 0, 1);
+  clampSetting(settings.translate_short_channel_names, 0, 1);
+  clampSetting(settings.playbackTime,0,1);
+  clampSetting(settings.shaderOsc,0,1);
+  clampSetting(settings.oscLineSize,0.25f,16.0f);
 
   if (settings.exportLoops<0.0) settings.exportLoops=0.0;
   if (settings.exportFadeOut<0.0) settings.exportFadeOut=0.0;  
@@ -4388,6 +4492,7 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     
     conf.set("chanOscThreads",settings.chanOscThreads);
     conf.set("renderPoolThreads",settings.renderPoolThreads);
+    conf.set("shaderOsc",settings.shaderOsc);
     conf.set("showPool",settings.showPool);
     conf.set("writeInsNames",settings.writeInsNames);
     conf.set("readInsNames",settings.readInsNames);
@@ -4421,6 +4526,10 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("centerPopup",settings.centerPopup);
 
     conf.set("language",settings.language);
+
+    conf.set("translateChanNamesPat",settings.translate_channel_names_pattern);
+    conf.set("translateChanNamesOsc",settings.translate_channel_names_osc);
+    conf.set("translateShortChanNames",settings.translate_short_channel_names);
   }
 
   // audio
@@ -4543,6 +4652,7 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("oscEscapesBoundary",settings.oscEscapesBoundary);
     conf.set("oscMono",settings.oscMono);
     conf.set("oscAntiAlias",settings.oscAntiAlias);
+    conf.set("oscLineSize",settings.oscLineSize);
 
     conf.set("channelColors",settings.channelColors);
     conf.set("channelTextColors",settings.channelTextColors);
@@ -4556,6 +4666,7 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("roundedButtons",settings.roundedButtons);
     conf.set("roundedTabs",settings.roundedTabs);
     conf.set("wrapText",settings.wrapText);
+    conf.set("showTooltipInChipManager",settings.showTooltipInChipManager);
     conf.set("roundedScrollbars",settings.roundedScrollbars);
     conf.set("roundedMenus",settings.roundedMenus);
 
@@ -4586,6 +4697,7 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("orderRowsBase",settings.orderRowsBase);
     conf.set("fmNames",settings.fmNames);
     conf.set("statusDisplay",settings.statusDisplay);
+    conf.set("playbackTime",settings.playbackTime);
     conf.set("viewPrevPattern",settings.viewPrevPattern);
     conf.set("susPosition",settings.susPosition);
 
@@ -4948,6 +5060,7 @@ void FurnaceGUI::parseKeybinds() {
   actionMapPat.clear();
   actionMapInsList.clear();
   actionMapWaveList.clear();
+  actionMapLocalWaveList.clear();
   actionMapSampleList.clear();
   actionMapSample.clear();
   actionMapOrders.clear();
@@ -4973,6 +5086,12 @@ void FurnaceGUI::parseKeybinds() {
   for (int i=GUI_ACTION_WAVE_LIST_MIN+1; i<GUI_ACTION_WAVE_LIST_MAX; i++) {
     if (actionKeys[i]&FURK_MASK) {
       actionMapWaveList[actionKeys[i]]=i;
+    }
+  }
+
+  for (int i=GUI_ACTION_LOCAL_WAVE_LIST_MIN+1; i<GUI_ACTION_LOCAL_WAVE_LIST_MAX; i++) {
+    if (actionKeys[i]&FURK_MASK) {
+      actionMapLocalWaveList[actionKeys[i]]=i;
     }
   }
 
@@ -5667,11 +5786,11 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
 
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByTypeDir,"",uiColors[GUI_COLOR_FILE_DIR],ICON_FA_FOLDER_O);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByTypeFile,"",uiColors[GUI_COLOR_FILE_OTHER],ICON_FA_FILE_O);
-  ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".fur",uiColors[GUI_COLOR_FILE_SONG_NATIVE],ICON_FA_FILE);
+  
+  ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".fur",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
+  ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".fub",uiColors[GUI_COLOR_FILE_SONG_NATIVE],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".fui",uiColors[GUI_COLOR_FILE_INSTR],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".fuw",uiColors[GUI_COLOR_FILE_WAVE],ICON_FA_FILE);
-  ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".dmf",uiColors[GUI_COLOR_FILE_SONG_NATIVE],ICON_FA_FILE);
-  ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".dmp",uiColors[GUI_COLOR_FILE_INSTR],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".dmw",uiColors[GUI_COLOR_FILE_WAVE],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".wav",uiColors[GUI_COLOR_FILE_AUDIO],ICON_FA_FILE_AUDIO_O);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".dmc",uiColors[GUI_COLOR_FILE_AUDIO],ICON_FA_FILE_AUDIO_O);
@@ -5692,6 +5811,11 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".fc",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".smod",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".ftm",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
+  ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".0cc",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
+  ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".dnm",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
+  ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".eft",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
+  ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".dmf",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
+  ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".dmp",uiColors[GUI_COLOR_FILE_INSTR],ICON_FA_FILE);
 
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".tfi",uiColors[GUI_COLOR_FILE_INSTR],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".vgi",uiColors[GUI_COLOR_FILE_INSTR],ICON_FA_FILE);
@@ -5705,6 +5829,8 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".bti",uiColors[GUI_COLOR_FILE_INSTR],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".ff",uiColors[GUI_COLOR_FILE_INSTR],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".opm",uiColors[GUI_COLOR_FILE_INSTR],ICON_FA_FILE);
+
+  //ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByTypeFile,"",uiColors[GUI_COLOR_FILE_OTHER],ICON_FA_FILE_O);
 
   if (updateFonts) {
     if (fileDialog!=NULL) delete fileDialog;

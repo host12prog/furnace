@@ -147,7 +147,7 @@ void DivPlatformSwan::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had && !(i==1 && pcm)) {
       if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || chan[i].ws.activeChanged()) {
         chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
-        chan[i].ws.changeWave1(chan[i].wave);
+        chan[i].ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_SWAN));
       }
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->had) {
@@ -328,7 +328,7 @@ int DivPlatformSwan::dispatch(DivCommand c) {
       }
       if (chan[c.chan].wave<0) {
         chan[c.chan].wave=0;
-        chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+        chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_SWAN));
       }
       chan[c.chan].ws.init(ins,32,15,chan[c.chan].insChanged);
       chan[c.chan].insChanged=false;
@@ -373,7 +373,12 @@ int DivPlatformSwan::dispatch(DivCommand c) {
       break;
     case DIV_CMD_WAVE:
       chan[c.chan].wave=c.value;
-      chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_SWAN));
+      chan[c.chan].keyOn=true;
+      break;
+    case DIV_CMD_WAVE_LOCAL:
+      chan[c.chan].wave=c.value | (1 << 30);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_SWAN));
       chan[c.chan].keyOn=true;
       break;
     case DIV_CMD_WS_SWEEP_TIME:
@@ -573,7 +578,7 @@ int DivPlatformSwan::getOutputCount() {
 void DivPlatformSwan::notifyWaveChange(int wave) {
   for (int i=0; i<4; i++) {
     if (chan[i].wave==wave) {
-      chan[i].ws.changeWave1(wave);
+      chan[i].ws.changeWave1(wave & 0xff, false, (wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_SWAN));
       updateWave(i);
     }
   }

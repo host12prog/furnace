@@ -2,7 +2,7 @@
 
 A fork of [Furnace chiptune tracker](https://github.com/tildearrow/furnace) with the aim to cut out the bloat (aka abandoned/unfinished stuff), make codebase cleaner and easier to understand, optimize performance and memory usage, and bring more useful features.
 
-Here are our [community rules](code_of_conduct.md) and [contribution rules](contribution_guide.md). And here's [what we need the help with](PLEASE_HEEEEEELP_AHHH.md) right now.
+Here are our [community rules](code_of_conduct.md) and [contribution rules](contribution_guide.md).
 
 Here are the [future plans](todo_list.md).
 
@@ -11,6 +11,8 @@ Here are the [future plans](todo_list.md).
 [Fork changelog](fork_changelog.md)
 
 [Our Discord server](https://discord.gg/sT8zcsyJZt)
+
+**Notice that Furnace-B modules are incompatible with tildearrow's Furnace version. However, you can export module in the format that is compatible (file -> export -> Furnace).**
 
 # Furnace (chiptune tracker)
 
@@ -102,6 +104,7 @@ for other operating systems, you may [build the source](#developer-info).
   - Casio PV-1000
   - TIA used in Atari 2600
   - POKEY used in Atari 8-bit computers
+  - Dave used in Enterprise 64/128 computers
   - **Game Boy**
     - including SOFTWARE ENVELOPES (zombie mode)
   - Virtual Boy
@@ -110,7 +113,7 @@ for other operating systems, you may [build the source](#developer-info).
     - tildearrow Sound Unit
     - PowerNoise
     - Generic PCM DAC
-    - PowerNoise
+    - SID2
 - mix and match sound chips!
   - over 200 ready to use presets from computers, game consoles and arcade boards...
   - ...or create your own - up to 32 of them or a total of 128 channels!
@@ -164,6 +167,7 @@ some people have provided packages for Unix/Unix-like distributions. here's a li
 - **Flatpak**: yes! Furnace is now available on [Flathub](https://flathub.org/apps/org.tildearrow.furnace) thanks to ColinKinloch.
 
 - **Arch Linux**: [furnace](https://archlinux.org/packages/extra/x86_64/furnace/) is in the official repositories.
+- **Chimera Linux**: [furnace](https://pkgs.chimera-linux.org/package/current/contrib/x86_64/furnace) is in the contrib repository.
 - **FreeBSD**: [a package in ports](https://www.freshports.org/audio/furnace/) is available courtesy of ehaupt.
 - **Nix**: [package](https://search.nixos.org/packages?channel=unstable&show=furnace&from=0&size=50&sort=relevance&type=packages&query=furnace) thanks to OPNA2608.
 - **openSUSE**: [a package](https://software.opensuse.org/package/furnace) is available, courtesy of fpesari.

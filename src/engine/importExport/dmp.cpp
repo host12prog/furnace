@@ -267,6 +267,10 @@ void DivEngine::loadDMP(SafeReader& reader, std::vector<DivInstrument*>& ret, St
       if (version>5) {
         for (int i=0; i<ins->std.get_macro(DIV_MACRO_WAVE, true)->len; i++) {
           ins->std.get_macro(DIV_MACRO_WAVE, true)->val[i]=reader.readI();
+          // piece of crap offset by 1
+          if (ins->type==DIV_INS_AY) {
+            ins->std.get_macro(DIV_MACRO_WAVE, true)->val[i]++;
+          }
         }
       } else {
         for (int i=0; i<ins->std.get_macro(DIV_MACRO_WAVE, true)->len; i++) {

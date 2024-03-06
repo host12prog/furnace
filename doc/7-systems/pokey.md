@@ -35,6 +35,8 @@ a sound and input chip developed by Atari for their 8-bit computers (Atari 400, 
 - `12xx`: **toggle two-tone mode.**
   - when enabled, channel 2 modulates channel 1. I don't know how, but it does.
   - only on ASAP core.
+- `13xx`: **set raw period lower byte**
+- `14xx`: **set raw period higher byte (only for 16-bit mode)**
 
 ## info
 

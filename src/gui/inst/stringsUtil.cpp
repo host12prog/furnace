@@ -223,7 +223,7 @@ const char* c64TestGateBits[5]={
 };
 
 const char* pokeyCtlBits[9]={
-  "15KHz", "filter 2+4##sgistru", "filter 1+3##sgistru", "16-bit 3+4##sgistru", "16-bit 1+2##sgistru", "high3##sgistru", "high1##sgistru", "poly9##sgistru", NULL
+  "15KHz##sgistru", "filter 2+4##sgistru", "filter 1+3##sgistru", "16-bit 3+4##sgistru", "16-bit 1+2##sgistru", "high3##sgistru", "high1##sgistru", "poly9##sgistru", NULL
 };
 
 const char* mikeyFeedbackBits[11] = {
@@ -284,6 +284,18 @@ const char* es5506ControlModes[3]={
 
 const char* daveControlBits[5]={
   "high pass##sgistru1", "ring mod##sgistru1", "swap counters (noise)##sgistru", "low pass (noise)##sgistru", NULL
+};
+
+const char* SID2controlBits[3]={
+  "sync##sgistru1", "ring##sgistru1", NULL
+};
+
+const char* SID2filtModeBits[4]={
+  "low##sgistru1", "band##sgistru1", "high##sgistru1", NULL
+};
+
+const char* SID2waveMixModes[5]={
+  "8580 SID##sgistru", "bitwise AND##sgistru", "bitwise OR##sgistru", "bitwise XOR##sgistru", NULL
 };
 
 const int orderedOps[4]={

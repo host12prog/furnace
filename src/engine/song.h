@@ -136,6 +136,7 @@ enum DivSystem {
   DIV_SYSTEM_ES5503,
   DIV_SYSTEM_POWERNOISE,
   DIV_SYSTEM_DAVE,
+  DIV_SYSTEM_SID2
 };
 
 enum DivEffectType: unsigned short {
@@ -176,6 +177,8 @@ struct DivSubSong {
   void clearData();
   void optimizePatterns();
   void rearrangePatterns();
+  void sortOrders();
+  void makePatUnique();
 
   DivSubSong(): 
     hilightA(4),
@@ -388,6 +391,10 @@ struct DivSong {
   bool ceilVolumeScaling;
   bool oldAlwaysSetVolume;
 
+  //famitracker compatibility flags
+  bool resetNesSweep; //reset sweep on new note
+  bool dontDisableVolSlideOnZero; //do not disable volume slide when volume reached zero
+
   std::vector<DivInstrument*> ins;
   std::vector<DivWavetable*> wave;
   std::vector<DivSample*> sample;
@@ -510,7 +517,9 @@ struct DivSong {
     oldDPCM(false),
     resetArpPhaseOnNewNote(false),
     ceilVolumeScaling(false),
-    oldAlwaysSetVolume(false) {
+    oldAlwaysSetVolume(false),
+    resetNesSweep(false),
+    dontDisableVolSlideOnZero(false) {
     for (int i=0; i<DIV_MAX_CHIPS; i++) {
       system[i]=DIV_SYSTEM_NULL;
       systemVol[i]=1.0;

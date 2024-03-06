@@ -156,7 +156,7 @@ void FurnaceGUI::insListItem(int i, int dir, int asset) {
     if (i<(int)e->song.ins.size()) {
       DivInstrument* ins=e->song.ins[i];
       ImGui::SameLine();
-      ImGui::Text("%.2X: %s",i,ins->name.c_str());
+      ImGui::TextNoHashHide("%.2X: %s",i,ins->name.c_str());
     } else {
       ImGui::SameLine();
       ImGui::Text(_L("%.2X: <INVALID>##sgdl"),i);
@@ -179,6 +179,7 @@ void FurnaceGUI::waveListItem(int i, float* wavePreview, int dir, int asset) {
   ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign,ImVec2(0,0.5f));
   if (ImGui::Selectable(fmt::sprintf(" %d##_WAVE%d\n",i,i).c_str(),curWave==i,0,ImVec2(0,ImGui::GetFrameHeight()))) {
     curWave=i;
+    localWaveList = false;
     lastAssetType=1;
   }
   ImGui::PopStyleVar();
@@ -187,6 +188,7 @@ void FurnaceGUI::waveListItem(int i, float* wavePreview, int dir, int asset) {
   if (ImGui::IsItemHovered()) {
     if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
       waveEditOpen=true;
+      localWaveList = false;
       nextWindow=GUI_WINDOW_WAVE_EDIT;
     }
   }
@@ -219,7 +221,7 @@ void FurnaceGUI::sampleListItem(int i, int dir, int asset) {
     if (memWarning) break;
   }
   if (memWarning) ImGui::PushStyleColor(ImGuiCol_Text,uiColors[GUI_COLOR_SAMPLE_CHIP_WARNING]);
-  if (ImGui::Selectable(fmt::sprintf("%d: %s##_SAM%d",i,sample->name,i).c_str(),curSample==i)) {
+  if (ImGui::Selectable(fmt::sprintf("%d: %s##_SAM%d",i,sample->name,i).c_str(),curSample==i,ImGuiSelectableFlags_NoHashTextHide)) {
     curSample=i;
     samplePos=0;
     updateSampleTex=true;

@@ -263,8 +263,20 @@ bool DivInstrumentESFM::Operator::operator==(const DivInstrumentESFM::Operator& 
   );
 }
 
+bool DivInstrumentSID2::operator==(const DivInstrumentSID2& other) {
+  return (
+    _C(volume) &&
+    _C(mix_mode) &&
+    _C(noise_mode)
+  );
+}
+
 bool DivInstrumentPowerNoise::operator==(const DivInstrumentPowerNoise& other) {
   return _C(octave);
+}
+
+bool DivInstrumentPOKEY::operator==(const DivInstrumentPOKEY& other) {
+  return _C(raw_freq_macro_mode);
 }
 
 #undef _C
@@ -575,7 +587,7 @@ void DivInstrument::writeFeatureWS(SafeWriter* w) {
   w->writeI(ws.wave2);
   w->writeC(ws.rateDivider);
   w->writeC(ws.effect);
-  w->writeC(ws.enabled);
+  w->writeC((ws.enabled ? 1 : 0) | ((ws.wave1global ? 1 : 0) << 1) | ((ws.wave2global ? 1 : 0) << 2));
   w->writeC(ws.global);
   w->writeC(ws.speed);
   w->writeC(ws.param1);
@@ -781,7 +793,65 @@ void DivInstrument::writeFeaturePN(SafeWriter* w) {
   FEATURE_END;
 }
 
-void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bool insName) {
+void DivInstrument::writeFeatureS2(SafeWriter* w) {
+  FEATURE_BEGIN("S2");
+
+  w->writeC(
+    (c64.dutyIsAbs?0x80:0)|
+    (c64.initFilter?0x40:0)|
+    (c64.toFilter?0x10:0)|
+    (c64.noiseOn?8:0)|
+    (c64.pulseOn?4:0)|
+    (c64.sawOn?2:0)|
+    (c64.triOn?1:0)
+  );
+
+  w->writeC(
+    (c64.oscSync?0x80:0)|
+    (c64.ringMod?0x40:0)|
+    (c64.noTest?0x20:0)|
+    (c64.filterIsAbs?0x10:0)|
+    (c64.ch3off?8:0)|
+    (c64.bp?4:0)|
+    (c64.hp?2:0)|
+    (c64.lp?1:0)
+  );
+
+  w->writeC(((c64.a&15)<<4)|(c64.d&15));
+  w->writeC(((c64.s&15)<<4)|(c64.r&15));
+  w->writeS(c64.duty);
+  w->writeS(c64.cut&4095);
+  w->writeC(c64.res);
+
+  w->writeC(sid2.volume | (sid2.mix_mode << 4) | (sid2.noise_mode << 6));
+
+  FEATURE_END;
+}
+
+void DivInstrument::writeFeatureLW(SafeWriter* w) 
+{
+  FEATURE_BEGIN("LW");
+
+  w->writeI((int)std.local_waves.size());
+  for (int i=0; i<(int)std.local_waves.size(); i++) 
+  {
+    DivWavetable* wave=std.local_waves[i];
+    wave->putWaveData(w);
+  }
+
+  FEATURE_END;
+}
+
+void DivInstrument::writeFeaturePO(SafeWriter* w)
+{
+  FEATURE_BEGIN("PO");
+
+  w->writeC(pokey.raw_freq_macro_mode);
+
+  FEATURE_END;
+}
+
+void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bool insName, bool tilde_version) {
   size_t blockStartSeek=0;
   size_t blockEndSeek=0;
   size_t slSeek=0;
@@ -794,16 +864,33 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
 
   if (fui) {
     //w->write("FINS",4);
-    w->write("FINB",4); //Furnace-B version
+    w->write(tilde_version ? "FINS" : "FINB",4); //Furnace-B version
   } else {
     //w->write("INS2",4);
-    w->write("IN2B",4); //Furnace-B version
+    w->write(tilde_version ? "INS2" : "IN2B",4); //Furnace-B version
     blockStartSeek=w->tell();
     w->writeI(0);
   }
 
   w->writeS(DIV_ENGINE_VERSION);
-  w->writeC(type);
+
+  unsigned short init_type = type;
+
+  if(tilde_version)
+  {
+    switch(init_type)
+    {
+      case DIV_INS_ES5503:
+      case DIV_INS_POWERNOISE:
+      case DIV_INS_POWERNOISE_SLOPE:
+      case DIV_INS_DAVE:
+      case DIV_INS_SID2:
+        init_type = init_type - (unsigned short)1; //tildearrow's verson modules are incompatible with these inst indices so we comply...
+      default: break;
+    }
+  }
+
+  w->writeC(init_type);
   w->writeC(0);
 
   // write features
@@ -829,6 +916,11 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
   bool featureEF=false;
   bool featureE3=false;
   bool featurePN=false;
+  bool featureS2=false;
+
+  bool featureLW=(std.local_waves.size() > 0 ? true : false);
+
+  bool featurePO=false;
 
   bool checkForWL=false;
 
@@ -912,8 +1004,6 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         break;
       case DIV_INS_OPZ:
         featureFM=true;
-        break;
-      case DIV_INS_POKEY:
         break;
       case DIV_INS_BEEPER:
         break;
@@ -1048,6 +1138,8 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         break;
       case DIV_INS_ES5503:
         featureE3=true;
+        checkForWL=true;
+        if (ws.enabled) featureWS=true;
         break;
       case DIV_INS_POWERNOISE:
         featurePN=true;
@@ -1056,6 +1148,18 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         featurePN=true;
         break;
       case DIV_INS_DAVE:
+        break;
+      case DIV_INS_GBA_DMA:
+        break;
+      case DIV_INS_GBA_MINMOD:
+        break;
+      case DIV_INS_KURUMITSU:
+        break;
+      case DIV_INS_SID2:
+        featureS2=true;
+        break;
+      case DIV_INS_POKEY:
+        featurePO=true;
         break;
       case DIV_INS_MAX:
         break;
@@ -1112,6 +1216,12 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
     }
     if (powernoise!=defaultIns.powernoise) {
       featurePN=true;
+    }
+    if (type == DIV_INS_SID2 && (sid2!=defaultIns.sid2 || c64!=defaultIns.c64)) {
+      featureS2=true;
+    }
+    if (pokey!=defaultIns.pokey) {
+      featurePO=true;
     }
   }
 
@@ -1294,6 +1404,15 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
   if (featurePN) {
     writeFeaturePN(w);
   }
+  if (featureS2) {
+    writeFeatureS2(w);
+  }
+  if (featureLW) {
+    writeFeatureLW(w);
+  }
+  if (featurePO) {
+    writeFeaturePO(w);
+  }
 
   if (fui && (featureSL || featureWL)) {
     w->write("EN",2);
@@ -1360,6 +1479,18 @@ void DivInstrument::readFeatureNA(SafeReader& reader, short version) {
   READ_FEAT_BEGIN;
 
   name=reader.readString();
+
+  if(version == 192) //fix bug when older Furnace-B versions added "##sggu" to default instrument name
+  {
+    // Find position of substring in string
+    String fucccckkk = "##sggu";
+    size_t pos = name.find(fucccckkk);
+    if (pos != std::string::npos)
+    {
+        // Remove found substring from string
+        name.erase(pos, fucccckkk.length());
+    }
+  }
 
   READ_FEAT_END;
 }
@@ -1492,6 +1623,14 @@ void DivInstrument::readFeatureMA(SafeReader& reader, short version) {
           target->val[i]=reader.readI();
         }
         break;
+    }
+  }
+
+  if (version<193) {
+    if (type==DIV_INS_AY || type==DIV_INS_AY8930) {
+      for (int j=0; j<std.get_macro(DIV_MACRO_WAVE, true)->len; j++) {
+        std.get_macro(DIV_MACRO_WAVE, true)->val[j]++;
+      }
     }
   }
 
@@ -1739,14 +1878,22 @@ void DivInstrument::readFeatureFD(SafeReader& reader, short version) {
   READ_FEAT_END;
 }
 
-void DivInstrument::readFeatureWS(SafeReader& reader, short version) {
+void DivInstrument::readFeatureWS(SafeReader& reader, short version, bool tildearrow_version) {
   READ_FEAT_BEGIN;
 
   ws.wave1=reader.readI();
   ws.wave2=reader.readI();
   ws.rateDivider=reader.readC();
   ws.effect=reader.readC();
-  ws.enabled=reader.readC();
+  unsigned char temp = reader.readC();
+  ws.enabled = temp & 1;
+  ws.wave1global = temp & 2;
+  ws.wave2global = temp & 4;
+  if(tildearrow_version || version < 193)
+  {
+    ws.wave1global = true;
+    ws.wave2global = true;
+  }
   ws.global=reader.readC();
   ws.speed=reader.readC();
   ws.param1=reader.readC();
@@ -1938,10 +2085,19 @@ void DivInstrument::readFeatureNE(SafeReader& reader, short version) {
 
   amiga.useNoteMap=reader.readC();
 
-  if (amiga.useNoteMap) {
-    for (int note=0; note<120; note++) {
+  if (amiga.useNoteMap) 
+  {
+    amiga.get_amiga_sample_map(0, true)->dpcmFreq = 0;
+
+    for (int note=0; note<120; note++) 
+    {
       amiga.get_amiga_sample_map(note, true)->dpcmFreq=reader.readC();
       amiga.get_amiga_sample_map(note, true)->dpcmDelta=reader.readC();
+
+      if(version < 193)
+      {
+        amiga.get_amiga_sample_map(note, true)->freq = 0;
+      }
     }
   }
 
@@ -1990,6 +2146,80 @@ void DivInstrument::readFeaturePN(SafeReader& reader, short version) {
   READ_FEAT_BEGIN;
 
   powernoise.octave=reader.readC();
+
+  READ_FEAT_END;
+}
+
+void DivInstrument::readFeatureS2(SafeReader& reader, short version) {
+  READ_FEAT_BEGIN;
+
+  unsigned char next=reader.readC();
+  c64.dutyIsAbs=next&128;
+  c64.initFilter=next&64;
+  //volIsCutoff=next&32;
+  c64.toFilter=next&16;
+  c64.noiseOn=next&8;
+  c64.pulseOn=next&4;
+  c64.sawOn=next&2;
+  c64.triOn=next&1;
+
+  next=reader.readC();
+  c64.oscSync=(next&128)?1:0;
+  c64.ringMod=(next&64)?1:0;
+  c64.noTest=next&32;
+  c64.filterIsAbs=next&16;
+  c64.ch3off=next&8;
+  c64.bp=next&4;
+  c64.hp=next&2;
+  c64.lp=next&1;
+
+  next=reader.readC();
+  c64.a=(next>>4)&15;
+  c64.d=next&15;
+
+  next=reader.readC();
+  c64.s=(next>>4)&15;
+  c64.r=next&15;
+
+  c64.duty=reader.readS()&4095;
+
+  c64.cut=reader.readS();
+  c64.res=reader.readC();
+
+//  w->writeS(c64.cut&4095);
+//  w->writeC(c64.res);
+
+  uint8_t temp = reader.readC();
+
+  sid2.volume = temp & 0xf;
+  sid2.mix_mode = (temp >> 4) & 3;
+  sid2.noise_mode = temp >> 6;
+
+  READ_FEAT_END;
+}
+
+void DivInstrument::readFeatureLW(SafeReader& reader, short version) {
+  READ_FEAT_BEGIN;
+
+  int waves = reader.readI();
+
+  for (int i=0; i<waves; i++) 
+  {
+    DivWavetable* wave=new DivWavetable;
+
+    if (wave->readWaveData(reader,version)==DIV_DATA_SUCCESS) 
+    {
+      std.local_waves.push_back(wave);
+    }
+  }
+
+  READ_FEAT_END;
+}
+
+void DivInstrument::readFeaturePO(SafeReader& reader, short version) {
+  READ_FEAT_BEGIN;
+
+  pokey.raw_freq_macro_mode = reader.readC();
 
   READ_FEAT_END;
 }
@@ -2076,7 +2306,7 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
     } else if (memcmp(featCode,"FD",2)==0) { // FDS/VB
       readFeatureFD(reader,version);
     } else if (memcmp(featCode,"WS",2)==0) { // WaveSynth
-      readFeatureWS(reader,version);
+      readFeatureWS(reader,version,tildearrow_version);
     } else if (memcmp(featCode,"SL",2)==0 && fui && song!=NULL) { // sample list
       readFeatureSL(reader,song,version);
     } else if (memcmp(featCode,"WL",2)==0 && fui && song!=NULL) { // wave list
@@ -2097,6 +2327,12 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
       readFeatureE3(reader,version);
     } else if (memcmp(featCode,"PN",2)==0) { // PowerNoise
       readFeaturePN(reader,version);
+    } else if (memcmp(featCode,"S2",2)==0) { // SID2
+      readFeatureS2(reader,version);
+    } else if (memcmp(featCode,"LW",2)==0) { // local wavetables
+      readFeatureLW(reader,version);
+    } else if (memcmp(featCode,"PO",2)==0) { // POKEY
+      readFeaturePO(reader,version);
     } else {
       if (song==NULL && (memcmp(featCode,"SL",2)==0 || (memcmp(featCode,"WL",2)==0))) {
         // nothing
@@ -2107,6 +2343,12 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
       unsigned short skip=reader.readS();
       reader.seek(skip,SEEK_CUR);
     }
+  }
+
+  if((ws.wave1global == false || ws.wave2global == false) && std.local_waves.size() == 0) //just to be sure that we don't reference default wave
+  {
+    ws.wave1global = true;
+    ws.wave2global = true;
   }
 
   // <187 C64 cutoff macro compatibility
@@ -2299,6 +2541,13 @@ DivDataErrors DivInstrument::readInsDataOld(SafeReader &reader, short version, b
     }
     if (!c64.dutyIsAbs) for (int j=0; j<std.get_macro(DIV_MACRO_DUTY, true)->len; j++) {
       std.get_macro(DIV_MACRO_DUTY, true)->val[j]-=12;
+    }
+  }
+  if (version<193) {
+    if (type==DIV_INS_AY || type==DIV_INS_AY8930) {
+      for (int j=0; j<std.get_macro(DIV_MACRO_WAVE, true)->len; j++) {
+        std.get_macro(DIV_MACRO_WAVE, true)->val[j]++;
+      }
     }
   }
   if (version>=17) {
@@ -3002,7 +3251,7 @@ bool DivInstrument::save(const char* path, DivSong* song, bool writeInsName) {
   SafeWriter* w=new SafeWriter();
   w->init();
 
-  putInsData2(w,true,song,writeInsName);
+  putInsData2(w,true,song,writeInsName,false);
 
   FILE* outFile=ps_fopen(path,"wb");
   if (outFile==NULL) {
@@ -3028,13 +3277,16 @@ bool DivInstrument::saveDMP(const char* path) {
   // guess the system
   switch (type) {
     case DIV_INS_FM:
-      // we can't tell between Genesis, Neo Geo and Arcade ins type yet
+      // we can't tell Genesis and Neo Geo apart
       w->writeC(0x02);
       w->writeC(1);
       break;
     case DIV_INS_STD:
-      // we can't tell between SMS and NES ins type yet
       w->writeC(0x03);
+      w->writeC(0);
+      break;
+    case DIV_INS_NES:
+      w->writeC(0x06);
       w->writeC(0);
       break;
     case DIV_INS_GB:
@@ -3046,12 +3298,16 @@ bool DivInstrument::saveDMP(const char* path) {
       w->writeC(0);
       break;
     case DIV_INS_PCE:
-      w->writeC(0x06);
+      w->writeC(0x05);
       w->writeC(0);
       break;
     case DIV_INS_OPLL:
       // ???
       w->writeC(0x13);
+      w->writeC(1);
+      break;
+    case DIV_INS_OPM:
+      w->writeC(0x08);
       w->writeC(1);
       break;
     case DIV_INS_OPZ:
@@ -3070,7 +3326,7 @@ bool DivInstrument::saveDMP(const char* path) {
       return false;
   }
 
-  if (type==DIV_INS_FM || type==DIV_INS_OPLL || type==DIV_INS_OPZ) {
+  if (type==DIV_INS_FM || type==DIV_INS_OPM || type==DIV_INS_OPLL || type==DIV_INS_OPZ) {
     w->writeC(fm.fms);
     w->writeC(fm.fb);
     w->writeC(fm.alg);
@@ -3145,13 +3401,17 @@ bool DivInstrument::saveDMP(const char* path) {
 
     w->writeC(std.get_macro(DIV_MACRO_DUTY, false)->len);
     for (int i=0; i<std.get_macro(DIV_MACRO_DUTY, false)->len; i++) {
-      w->writeI(std.get_macro(DIV_MACRO_DUTY, false)->val[i]+12);
+      w->writeI(std.get_macro(DIV_MACRO_DUTY, false)->val[i]);
     }
     if (std.get_macro(DIV_MACRO_DUTY, false)->len>0) w->writeC(std.get_macro(DIV_MACRO_DUTY, false)->loop);
 
     w->writeC(std.get_macro(DIV_MACRO_WAVE, false)->len);
     for (int i=0; i<std.get_macro(DIV_MACRO_WAVE, false)->len; i++) {
-      w->writeI(std.get_macro(DIV_MACRO_WAVE, false)->val[i]+12);
+      if (type==DIV_INS_AY) {
+        w->writeI(std.get_macro(DIV_MACRO_WAVE, false)->val[i]-1);
+      } else {
+        w->writeI(std.get_macro(DIV_MACRO_WAVE, false)->val[i]);
+      }
     }
     if (std.get_macro(DIV_MACRO_WAVE, false)->len>0) w->writeC(std.get_macro(DIV_MACRO_WAVE, false)->loop);
 

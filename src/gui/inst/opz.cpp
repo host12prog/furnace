@@ -443,7 +443,6 @@ void FurnaceGUI::drawInsOPZ(DivInstrument* ins)
                 uiColors[GUI_COLOR_FM_BORDER_SHADOW_MOD]
               );
             } 
-            
             else 
             {
               pushAccentColors(
@@ -718,7 +717,7 @@ void FurnaceGUI::drawInsOPZ(DivInstrument* ins)
           if (settings.separateFMColors) 
           {
             bool mod=true;
-            if (opIsOutputOPL[fmOrigin.alg&3][i]) mod=false;
+            if (opIsOutput[fmOrigin.alg&7][i]) mod=false;
 
             if (mod) 
             {
@@ -729,7 +728,6 @@ void FurnaceGUI::drawInsOPZ(DivInstrument* ins)
                 uiColors[GUI_COLOR_FM_BORDER_SHADOW_MOD]
               );
             } 
-            
             else 
             {
               pushAccentColors(
@@ -1024,7 +1022,7 @@ void FurnaceGUI::drawInsOPZ(DivInstrument* ins)
     panMax=2;
 
     macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiOPZ"),ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiOPZ"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiOPZ"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiOPZ"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Noise Freq##sgiOPZ"),ins,DIV_MACRO_DUTY,0xff,0,32,64,uiColors[GUI_COLOR_MACRO_OTHER]));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Panning##sgiOPZ"),ins,DIV_MACRO_PAN_LEFT,0xff,0,panMax,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,panBits));

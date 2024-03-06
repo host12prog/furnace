@@ -28,7 +28,8 @@
 class DivPlatformN163: public DivDispatch {
   struct Channel: public SharedChannel<signed char> {
     signed char resVol;
-    short wave, wavePos, waveLen;
+    int wave;
+    short wavePos, waveLen;
     short curWavePos, curWaveLen;
     bool waveMode;
     bool volumeChanged;

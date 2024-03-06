@@ -96,12 +96,16 @@ void FurnaceGUI::drawChannels() {
         }
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-        if (ImGui::InputTextWithHint("##ChanName",e->getChannelName(i),&e->curSubSong->chanName[i])) {
+        String translation_or_not = _L(e->getChannelName(i));
+        String final_name = translation_or_not.substr(0, translation_or_not.find("##"));
+        if (ImGui::InputTextWithHint("##ChanName",final_name.c_str(), &e->curSubSong->chanName[i])) {
           MARK_MODIFIED;
         }
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-        if (ImGui::InputTextWithHint("##ChanShortName",e->getChannelShortName(i),&e->curSubSong->chanShortName[i])) {
+        translation_or_not = settings.translate_short_channel_names ? _L(e->getChannelShortName(i)) : e->getChannelShortName(i);
+        final_name = translation_or_not.substr(0, translation_or_not.find("##"));
+        if (ImGui::InputTextWithHint("##ChanShortName",final_name.c_str(),&e->curSubSong->chanShortName[i])) {
           MARK_MODIFIED;
         }
         ImGui::PopID();

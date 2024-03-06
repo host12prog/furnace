@@ -635,7 +635,7 @@ void FurnaceGUI::drawPattern() {
         ImVec2 maxLabelArea=maxArea;
 
         if (e->curSubSong->chanCollapse[i]) {
-          const char* chName=e->getChannelShortName(i);
+          const char* chName=settings.translate_short_channel_names ? _L(e->getChannelShortName(i)) : e->getChannelShortName(i);
           if (strlen(chName)>3) {
             snprintf(chanID,2048,"...");
           } else {
@@ -648,7 +648,7 @@ void FurnaceGUI::drawPattern() {
           if (settings.channelStyle==3) { // split button
             maxLabelArea.x-=ImGui::GetFrameHeightWithSpacing();
           }
-          const char* chName=e->getChannelName(i);
+          const char* chName = settings.translate_channel_names_pattern ? _L(e->getChannelName(i)) : e->getChannelName(i);
           float chNameLimit=maxLabelArea.x-minLabelArea.x;
           if (ImGui::CalcTextSize(chName).x>chNameLimit) {
             String shortChName;
@@ -798,7 +798,7 @@ void FurnaceGUI::drawPattern() {
         if ((!patExtraButtons && !patChannelNames && !patChannelHints) || settings.channelVolStyle!=0) ImGui::PopStyleVar();
 
         if (displayTooltip && ImGui::IsItemHovered() && !mobileUI) {
-          ImGui::SetTooltip("%s",e->getChannelName(i));
+          ImGui::SetTooltip("%s",settings.translate_channel_names_pattern ? _L(e->getChannelName(i)) : e->getChannelName(i));
         }
         if (settings.channelFont==0) ImGui::PopFont();
         if (mobileUI) {

@@ -266,7 +266,7 @@ void DivPlatformAY8910::tick(bool sysTick) {
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       if (!(chan[i].nextPSGMode.val&8)) {
-        chan[i].nextPSGMode.val=(chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val+1)&7;
+        chan[i].nextPSGMode.val=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&7;
         if (chan[i].active) {
           chan[i].curPSGMode.val=chan[i].nextPSGMode.val;
         }
@@ -315,13 +315,27 @@ void DivPlatformAY8910::tick(bool sysTick) {
       chan[i].freqChanged=true;
       if (!chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->will) chan[i].autoEnvDen=1;
     }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->had) {
+      chan[i].freq=chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val;
+      chan[i].freqChanged=true;
+      raw_freq[i] = true;
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX5)->had) {
+      ayEnvPeriod=chan[i].std.get_div_macro_struct(DIV_MACRO_EX5)->val;
+      immWrite(0x0b,ayEnvPeriod);
+      immWrite(0x0c,ayEnvPeriod>>8);
+    }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) {
       chan[i].autoEnvDen=chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val;
       chan[i].freqChanged=true;
       if (!chan[i].std.get_div_macro_struct(DIV_MACRO_EX3)->will) chan[i].autoEnvNum=1;
     }
     if (chan[i].freqChanged || chan[i].keyOn || chan[i].keyOff) {
-      chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,chan[i].pitch2,chipClock,CHIP_DIVIDER);
+      if(!raw_freq[i])
+      {
+        chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,chan[i].pitch2,chipClock,CHIP_DIVIDER);
+      }
+      
       if (chan[i].dac.furnaceDAC) {
         double off=1.0;
         if (chan[i].dac.sample>=0 && chan[i].dac.sample<parent->song.sampleLen) {
@@ -359,6 +373,8 @@ void DivPlatformAY8910::tick(bool sysTick) {
       }
       chan[i].freqChanged=false;
     }
+
+    raw_freq[i] = false;
   }
 
   updateOutSel();
@@ -532,6 +548,16 @@ int DivPlatformAY8910::dispatch(DivCommand c) {
       chan[c.chan].freqChanged=true;
       break;
     }
+    case DIV_CMD_RAW_FREQ:
+      chan[c.chan].freq = (chan[c.chan].freq & 0xf00) | c.value;
+      raw_freq[c.chan] = true;
+      chan[c.chan].freqChanged = true;
+      break;
+    case DIV_CMD_RAW_FREQ_HIGHER_BYTE:
+      chan[c.chan].freq = (chan[c.chan].freq & 0x0ff) | ((c.value & 15) << 8);
+      raw_freq[c.chan] = true;
+      chan[c.chan].freqChanged = true;
+      break;
     case DIV_CMD_NOTE_PORTA: {
       int destFreq=NOTE_PERIODIC(c.value2+chan[c.chan].sampleNoteDelta);
       bool return2=false;
@@ -754,6 +780,7 @@ void DivPlatformAY8910::reset() {
     chan[i]=DivPlatformAY8910::Channel();
     chan[i].std.setEngine(parent);
     chan[i].vol=0x0f;
+    raw_freq[i] = false;
   }
   if (dumpWrites) {
     addWrite(0xffffffff,0);
@@ -818,7 +845,6 @@ void DivPlatformAY8910::setFlags(const DivConfig& flags) {
     clockSel=false;
     dacRate=chipClock/dacRateDiv;
   } else {
-    clockSel=flags.getBool("halfClock",false);
     switch (flags.getInt("clockSel",0)) {
       case 1:
         chipClock=COLOR_PAL*2.0/5.0;
@@ -881,6 +907,7 @@ void DivPlatformAY8910::setFlags(const DivConfig& flags) {
   switch (flags.getInt("chipType",0)) {
     case 1:
       ay=new ym2149_device(rate,clockSel);
+      clockSel=flags.getBool("halfClock",false);
       sunsoft=false;
       intellivision=false;
       break;
@@ -888,16 +915,19 @@ void DivPlatformAY8910::setFlags(const DivConfig& flags) {
       ay=new sunsoft_5b_sound_device(rate);
       sunsoft=true;
       intellivision=false;
+      clockSel=false;
       break;
     case 3:
       ay=new ay8914_device(rate);
       sunsoft=false;
       intellivision=true;
+      clockSel=false;
       break;
     default:
       ay=new ay8910_device(rate);
       sunsoft=false;
       intellivision=false;
+      clockSel=false;
       break;
   }
   ay->device_start();

@@ -234,6 +234,7 @@ bool DivCSPlayer::tick() {
           case DIV_CMD_MACRO_OFF:
           case DIV_CMD_MACRO_ON:
           case DIV_CMD_MACRO_RESTART:
+          case DIV_CMD_DELAYED_TRANSPOSE:
             arg0=(unsigned char)stream.readC();
             break;
           case DIV_CMD_FM_TL:
@@ -336,6 +337,16 @@ bool DivCSPlayer::tick() {
         if (chan[i].vibratoPos>=64) chan[i].vibratoPos-=64;
       }
       e->dispatchCmd(DivCommand(DIV_CMD_PITCH,i,chan[i].pitch+(vibTable[chan[i].vibratoPos&63]*chan[i].vibratoDepth)/15));
+    }
+
+    if(chan[i].pw_slide)
+    {
+      e->dispatchCmd(DivCommand(DIV_CMD_DO_PW_SLIDE,i,chan[i].pw_slide,chan[i].pw_slide_speed));
+    }
+
+    if(chan[i].cutoff_slide)
+    {
+      e->dispatchCmd(DivCommand(DIV_CMD_DO_CUTOFF_SLIDE,i,chan[i].cutoff_slide,chan[i].cutoff_slide_speed));
     }
 
     if (chan[i].portaSpeed) {

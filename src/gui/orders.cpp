@@ -164,7 +164,7 @@ void FurnaceGUI::drawOrderButtons() {
     doAction(GUI_ACTION_ORDERS_DEEP_CLONE_END);
   }
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(_L("Duplicate order at end of song (right-click to deep clone)##sgor"));
+    ImGui::SetTooltip(_L("Place copy of current order at end of song (right-click to deep clone)##sgor"));
   }
   NEXT_BUTTON;
 
@@ -282,7 +282,7 @@ void FurnaceGUI::drawOrders() {
         for (int i=0; i<e->getTotalChannelCount(); i++) {
           if (!e->curSubSong->chanShow[i]) continue;
           ImGui::TableNextColumn();
-          ImGui::Text("%s",e->getChannelShortName(i));
+          ImGui::Text("%s",settings.translate_short_channel_names ? _L(e->getChannelShortName(i)) : e->getChannelShortName(i));
         }
         ImGui::PopStyleColor();
         for (int i=0; i<e->curSubSong->ordersLen; i++) {
