@@ -234,7 +234,7 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
       to->val[i] |= (1 << 30); //referencing local wavetables!
     }
 
-    if((DivMacroType)convert_macros_n163[macro_type] == DIV_MACRO_PITCH && ins->type == DIV_INS_N163)
+    if((DivMacroType)convert_macros_n163[macro_type] == DIV_MACRO_PITCH && (ins->type == DIV_INS_N163 || ins->type == DIV_INS_C64))
     {
       to->val[i] *= -1; //wtf is going on!!!
     }
