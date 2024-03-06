@@ -1113,8 +1113,13 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               {
                 unsigned char ad = reader.readC();
                 unsigned char sr = reader.readC();
-                (void)ad;
-                (void)sr;
+                ins->c64.a = ad >> 4;
+                ins->c64.d = ad & 15;
+                ins->c64.s = sr >> 4;
+                ins->c64.r = sr & 15;
+
+                ins->c64.pulseOn = true;
+                ins->c64.sawOn = false;
 
                 seek_amount -= 2;
 
@@ -1122,13 +1127,54 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                 {
                   unsigned int pwm_start = reader.readI();
                   unsigned int pwm_end = reader.readI();
-                  (void)pwm_start;
-                  (void)pwm_end;
 
-                  unsigned char pwm_speed = reader.readC();
-                  unsigned char pwm_mode = reader.readC();
-                  (void)pwm_speed;
-                  (void)pwm_mode;
+                  unsigned char pwm_speed = reader.readC(); //for LFO mode * 40 / 69 * (diff / (2048 - 311)) (and divide by two for triangle mode)
+                  unsigned char pwm_mode = reader.readC(); //for ADSR mode * 11 / 69
+
+                  if(pwm_mode == 0) goto skip_pwm;
+
+                  ins->c64.dutyIsAbs = true;
+
+                  logV("pwm mode %d", pwm_mode);
+
+                  //modes: 1 = saw lfo, 2 = tri lfo, 3 = oneshot ADSR, 4 = set val?
+
+                  ins->std.get_macro(DIV_MACRO_DUTY, true)->len = 18;
+
+                  if(pwm_mode != 4)
+                  {
+                    ins->std.get_macro(DIV_MACRO_DUTY, true)->val[0] = pwm_start;
+                    ins->std.get_macro(DIV_MACRO_DUTY, true)->val[1] = pwm_end;
+                  }
+                  else
+                  {
+                    ins->std.get_macro(DIV_MACRO_DUTY, true)->len = 1;
+                    ins->std.get_macro(DIV_MACRO_DUTY, true)->val[0] = pwm_end; //sequence mode, set last value
+                  }
+
+                  if(pwm_mode == 1 || pwm_mode == 2)
+                  {
+                    ins->std.get_macro(DIV_MACRO_DUTY, true)->open = 4 | 1; //LFO
+                    ins->std.get_macro(DIV_MACRO_DUTY, true)->mode = 2; //LFO
+
+                    ins->std.get_macro(DIV_MACRO_DUTY, true)->val[11] = (int)((uint64_t)pwm_speed * (uint64_t)40 * (uint64_t)abs((int)(pwm_start - pwm_end)) / (2048 - 311) / 69); //LFO speed
+                    ins->std.get_macro(DIV_MACRO_DUTY, true)->val[12] = 1; //sawtooth LFO wave
+                    
+                    if(pwm_mode == 2)
+                    {
+                      ins->std.get_macro(DIV_MACRO_DUTY, true)->val[11] = (int)((uint64_t)pwm_speed * (uint64_t)40 * (uint64_t)abs((int)(pwm_start - pwm_end)) / (2048 - 311) / 69 / 2); //LFO speed multiplied by 2
+                      ins->std.get_macro(DIV_MACRO_DUTY, true)->val[12] = 0; //triangle LFO wave
+                    }
+                  }
+
+                  if(pwm_mode == 3)
+                  {
+                    ins->std.get_macro(DIV_MACRO_DUTY, true)->open = 2 | 1; //ADSR
+                    ins->std.get_macro(DIV_MACRO_DUTY, true)->mode = 1; //LFO
+                    ins->std.get_macro(DIV_MACRO_DUTY, true)->val[2] = (int)((uint64_t)pwm_speed * (uint64_t)11 * (uint64_t)abs((int)(pwm_start - pwm_end)) / (2048 - 311) / 69); //ADSR attack rate
+                  }
+
+                  skip_pwm:;
 
                   seek_amount -= 10;
                 }
@@ -1137,13 +1183,52 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                 {
                   unsigned int filter_start = reader.readI();
                   unsigned int filter_end = reader.readI();
-                  (void)filter_start;
-                  (void)filter_end;
 
                   unsigned char filter_speed = reader.readC();
                   unsigned char filter_mode = reader.readC();
-                  (void)filter_speed;
-                  (void)filter_mode;
+
+                  if(filter_mode == 0) goto skip_filter;
+
+                  ins->c64.filterIsAbs = true;
+
+                  //modes: 1 = saw lfo, 2 = tri lfo, 3 = oneshot ADSR, 4 = set val?
+
+                  ins->std.get_macro(DIV_MACRO_ALG, true)->len = 18;
+
+                  if(filter_mode != 4)
+                  {
+                    ins->std.get_macro(DIV_MACRO_ALG, true)->val[0] = filter_start;
+                    ins->std.get_macro(DIV_MACRO_ALG, true)->val[1] = filter_end;
+                  }
+                  else
+                  {
+                    ins->std.get_macro(DIV_MACRO_ALG, true)->len = 1;
+                    ins->std.get_macro(DIV_MACRO_ALG, true)->val[0] = filter_end; //sequence mode, set last value
+                  }
+
+                  if(filter_mode == 1 || filter_mode == 2)
+                  {
+                    ins->std.get_macro(DIV_MACRO_ALG, true)->open = 4 | 1; //LFO
+                    ins->std.get_macro(DIV_MACRO_ALG, true)->mode = 2; //LFO
+
+                    ins->std.get_macro(DIV_MACRO_ALG, true)->val[11] = (int)((uint64_t)filter_speed * (uint64_t)40 * (uint64_t)abs((int)(filter_start - filter_end)) / (2048 - 311) / 69); //LFO speed
+                    ins->std.get_macro(DIV_MACRO_ALG, true)->val[12] = 1; //sawtooth LFO wave
+                    
+                    if(filter_mode == 2)
+                    {
+                      ins->std.get_macro(DIV_MACRO_ALG, true)->val[11] = (int)((uint64_t)filter_speed * (uint64_t)40 * (uint64_t)abs((int)(filter_start - filter_end)) / (2048 - 311) / 69 / 2); //LFO speed multiplied by 2
+                      ins->std.get_macro(DIV_MACRO_ALG, true)->val[12] = 0; //triangle LFO wave
+                    }
+                  }
+
+                  if(filter_mode == 3)
+                  {
+                    ins->std.get_macro(DIV_MACRO_ALG, true)->open = 2 | 1; //ADSR
+                    ins->std.get_macro(DIV_MACRO_ALG, true)->mode = 1; //LFO
+                    ins->std.get_macro(DIV_MACRO_ALG, true)->val[2] = (int)((uint64_t)filter_speed * (uint64_t)11 * (uint64_t)abs((int)(filter_start - filter_end)) / (2048 - 311) / 69); //ADSR attack rate
+                  }
+
+                  skip_filter:;
 
                   seek_amount -= 10;
                 }
