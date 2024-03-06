@@ -58,6 +58,7 @@ void DivLocale::addTranslationsPolish()
     strings["-- additional feedback/fixes --##sgab"].plurals[0] = "-- dodatkowe opinie/poprawki --";
     strings["-- translations and related work --##sgab"].plurals[0] = "-- tłumaczenia --";
     strings["LTVA1 (Russian translation)##sgab"].plurals[0] = "LTVA1 (tłumaczenie na język rosyjski)";
+    strings["Kagamiin~ (Portuguese translation)##sgab"].plurals[0] = "Kagamiin~ (tłumaczenie na język portugalski)";
 
     strings["powered by:##sgab"].plurals[0] = "z użyciem następujących komponentów:";
     strings["Dear ImGui by Omar Cornut##sgab"].plurals[0] = "Dear ImGui autorstwa Omara Cornuta";
@@ -112,6 +113,7 @@ void DivLocale::addTranslationsPolish()
     strings["ESFMu emulator by Kagamiin~##sgab"].plurals[0] = "Emulator ESFMu autorstwa Kagamiin~";
     strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] = "Emulator PowerNoise autorstwa scratchminera";
     strings["ep128emu by Istvan Varga##sgab"].plurals[0] = "ep128emu autorstwa Istvana Vargi";
+    strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] = "emulator SID2 (modyfikacja reSID) autorstwa LTVA";
 
     strings["greetings to:##sgab"].plurals[0] = "z pozdrowieniami dla:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "NEOART Costa Rica";
@@ -300,7 +302,9 @@ void DivLocale::addTranslationsPolish()
     strings["when enabled, arpeggio effect (00xy) position is reset on a new note.##sgcf"].plurals[0] = "włączenie tej flagi resetuje pozycję efektu arpeggio (00xy) dla nowej nuty.";
     strings["Volume scaling rounds up##sgcf"].plurals[0] = "Skalowanie głośności zaokrągla w górę";
     strings["when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels##sgcf"].plurals[0] = "gdy ta flaga jest włączona, wartości makra głośności są zaokrąglane w górę\nzapobiega to sytuacji gdy vol=0 podczas skalowania, która powoduje wyciszenie na niektórych układach.\n\nnie działa na układach z logarytmiczną regulacją głośności";
-
+    strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "Zatrzymaj sprzętowe portamento na kanałach fal prostokątnych NESa przy nowej nucie";
+    strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "Nie zatrzymuj efektu płynnej zmiany głośności po osiągnięciu zerowej lub pełnej głośności";
+    
     //   sgdl  src/gui/dataList.cpp
 
     strings["Bug!##sgdl"].plurals[0] = "Błąd!";
@@ -395,6 +399,7 @@ void DivLocale::addTranslationsPolish()
     strings["all files##sggu0"].plurals[0] = "wszystkie pliki";
     strings["no backups made yet!##sggu"].plurals[0] = "nie utworzono jeszcze żadnych kopii zapasowych";
     strings["Restore Backup##sggu"].plurals[0] = "Wczytaj kopię zapasową";
+    strings["Furnace or Furnace-B song##sggu0"].plurals[0] = "Utwór Furnace lub Furnace-B";
     strings["Furnace song##sggu0"].plurals[0] = "Utwór Furnace";
     strings["Save File##sggu0"].plurals[0] = "Zapisz plik";
     strings["DefleMask 1.1.3 module##sggu"].plurals[0] = "moduł DefleMaska 1.1.3";
@@ -454,10 +459,12 @@ void DivLocale::addTranslationsPolish()
     strings["ZSM file##sggu"].plurals[0] = "plik ZSM";
     strings["Export Command Stream##sggu0"].plurals[0] = "Eksportuj strumień komend";
     strings["text file##sggu0"].plurals[0] = "plik tekstowy";
-    strings["Export Command Stream##sggu1"].plurals[0] = "eksportuj strumień komend";
+    strings["Export Command Stream##sggu1"].plurals[0] = "Eksportuj strumień komend";
     strings["text file##sggu1"].plurals[0] = "plik tekstowy";
-    strings["Export Command Stream##sggu2"].plurals[0] = "eksportuj strumień komend";
+    strings["Export Command Stream##sggu2"].plurals[0] = "Eksportuj strumień komend";
     strings["binary file##sggu"].plurals[0] = "plik binarny";
+    strings["Export Furnace song##sggu"].plurals[0] = "Eksportuj utwór Furnace";
+    strings["Furnace song##sggu2"].plurals[0] = "Utwór Furnace";
     strings["Coming soon!##sggu"].plurals[0] = "Już wkrótce!";
     strings["Select Font##sggu0"].plurals[0] = "Wybierz czcionkę";
     strings["compatible files##sggu4"].plurals[0] = "kompatybilne pliki";
@@ -560,8 +567,8 @@ void DivLocale::addTranslationsPolish()
     strings["expand##sggu"].plurals[0] = "rozszerz";
     strings["collapse pattern##sggu"].plurals[0] = "skróć wzorzec";
     strings["expand pattern##sggu"].plurals[0] = "rozszerz wzorzec";
-    strings["collapse song##sggu"].plurals[0] = "skróć utwor";
-    strings["expand song##sggu"].plurals[0] = "rozszerz utwor";
+    strings["collapse song##sggu"].plurals[0] = "skróć utwór";
+    strings["expand song##sggu"].plurals[0] = "rozszerz utwór";
     strings["find/replace##sggu"].plurals[0] = "znajdź/zamień";
     strings["Furnace has been started in Safe Mode.\nthis means that:\n\n- software rendering is being used\n- audio output may not work\n- font loading is disabled\n\ncheck any settings which may have made Furnace start up in this mode.\nfont loading is one of these.##sggu"].plurals[0] = "Furnace został uruchomiony w trybie awaryjnym.\noznacza to, że:\n\n- używane jest renderowanie programowe\n- wyjście dźwięku może nie działać\n- wczytywanie czcionek jest wyłączone\n\nnależy sprawdzić, jakie ustawienia mogły spowodować, że program działa w tym trybie.\nczytanie czcionki mogło być jednym z nich.";
     strings["Unsaved changes! Save changes before opening file?##sggu0"].plurals[0] = "Niezapisano zmiany! Zapisać je przed wczytaniem pliku?";
@@ -591,6 +598,7 @@ void DivLocale::addTranslationsPolish()
     strings["export Amiga validation data...##sggu0"].plurals[0] = "eksportuj plik kontrolny dla Amigi...";
     strings["export text...##sggu0"].plurals[0] = "eksportuj tekst...";
     strings["export command stream...##sggu0"].plurals[0] = "eksportuj strumień komend...";
+    strings["export Furnace module...##sggu"].plurals[0] = "eksportuj moduł Furnace...";
     strings["export audio...##sggu1"].plurals[0] = "eksportuj audio...";
     strings["export VGM...##sggu1"].plurals[0] = "eksportuj VGM...";
     strings["export .dmf (1.1.3+)...##sggu1"].plurals[0] = "eksportuj .dmf (1.1.3+)...";
@@ -630,7 +638,6 @@ void DivLocale::addTranslationsPolish()
     strings["settings...##sggu"].plurals[0] = "ustawienia...";
     strings["Window##menubar"].plurals[0] = "Okno##menubar";
     strings["window##menubar"].plurals[0] = "okno##menubar";
-    strings["command palette##sggu"].plurals[0] = "paleta komend";
     strings["song information##sggu"].plurals[0] = "o utworze";
     strings["subsongs##sggu"].plurals[0] = "podutwory";
     strings["speed##sggu"].plurals[0] = "prędkość";
@@ -660,6 +667,7 @@ void DivLocale::addTranslationsPolish()
     strings["register view##sggu"].plurals[0] = "podgląd rejestrów";
     strings["log viewer##sggu"].plurals[0] = "podglad logów";
     strings["statistics##sggu"].plurals[0] = "statystyki";
+    strings["memory composition##sggu"].plurals[0] = "Zawartość pamięci";
     strings["spoiler##sggu"].plurals[0] = "spoiler";
     strings["Help##menubar"].plurals[0] = "Pomoc##menubar";
     strings["help##menubar"].plurals[0] = "pomoc##menubar";
@@ -720,6 +728,7 @@ void DivLocale::addTranslationsPolish()
     strings["Could not write ZSM! (%s)##sggu"].plurals[0] = "nie udało się zapisać pliku ZSM! (%s)";
     strings["could not write text! (%s)##sggu"].plurals[0] = "nie udało się zapisać pliku tekstowego! (%s)";
     strings["could not write command stream! (%s)##sggu"].plurals[0] = "nie udało się zapisać strumienia komend! (%s)";
+    strings["could not write tildearrow version Furnace module! (%s)##sggu"].plurals[0] = "nie udało się zapisać moduło dla wersji od tildearrowa! (%s)";
     strings["Error while loading file! (%s)##sggu4"].plurals[0] = "Blad podczas wczytywania pliku! (%s)";
     strings["You opened: %s##sggu"].plurals[0] = "Otwarto: %s";
     strings["You opened:##sggu"].plurals[0] = "Otwarto:";
@@ -879,7 +888,12 @@ void DivLocale::addTranslationsPolish()
     strings["Request voice from TX81Z##sggc"].plurals[0] = "Poproś o kanał od TX81Z";
     strings["Panic##sggc"].plurals[0] = "Panika";
     strings["Clear song data##sggc"].plurals[0] = "Wyczyść dane utworu";
-
+    strings["Command Palette##sggc"].plurals[0] = "Paleta komend";
+    strings["Recent files (Palette)##sggc"].plurals[0] = "Ostatnio otawrte pliki (paleta)";
+    strings["Instruments (Palette)##sggc"].plurals[0] = "Instrumenty (paleta)";
+    strings["Samples (Palette)##sggc"].plurals[0] = "Sample (paleta)";
+    strings["Change instrument (Palette)##sggc"].plurals[0] = "Zmień instrument (paleta)";
+    strings["Add chip (Palette)##sggc"].plurals[0] = "Dodaj układ (paleta)";
     strings["Edit Controls##sggc"].plurals[0] = "Edycja";
     strings["Orders##sggc"].plurals[0] = "Matryca wzorców";
     strings["Instrument List##sggc"].plurals[0] = "Lista instrumentów";
@@ -913,6 +927,7 @@ void DivLocale::addTranslationsPolish()
     strings["Clock##sggc"].plurals[0] = "Zegar";
     strings["Grooves##sggc"].plurals[0] = "Wzory rytmów";
     strings["Oscilloscope (X-Y)##sggc"].plurals[0] = "Oscyloskop (X-Y)";
+    strings["Memory Composition##sggc"].plurals[0] = "Zawartość pamięci";
 
     strings["Collapse/expand current window##sggc"].plurals[0] = "Maksymalizuj/minimalizuj obecne okno";
     strings["Close current window##sggc"].plurals[0] = "Zamknij obecne okno";
@@ -997,7 +1012,6 @@ void DivLocale::addTranslationsPolish()
     strings["Instrument cursor up##sggc0"].plurals[0] = "Kursor w górę";
     strings["Instrument cursor down##sggc0"].plurals[0] = "Kursor w dół";
     strings["Instrument: toggle folders/standard view##sggc0"].plurals[0] = "Przełączaj między widokiem złożonym i normalnym";
-
     strings["---Wavetable list##sggc"].plurals[0] = "---Wavetable list";
     strings["Add wavetable##sggc1"].plurals[0] = "Dodaj";
     strings["Duplicate wavetable##sggc1"].plurals[0] = "Sklonuj";
@@ -1013,59 +1027,59 @@ void DivLocale::addTranslationsPolish()
     strings["Wavetable cursor up##sggc1"].plurals[0] = "Kursor do góry";
     strings["Wavetable cursor down##sggc1"].plurals[0] = "Kursur w dół";
     strings["Wavetable: toggle folders/standard view##sggc1"].plurals[0] = "Przełączaj między widokiem złożonym i normalnym";
-
+    strings["Paste wavetables from clipboard##sggc"].plurals[0] = "Wklej tablice fal ze schowka";
+    strings["Paste local wavetables from clipboard##sggc1"].plurals[0] = "Wklej lokalne tablice fal ze schowka";
     strings["---Sample list##sggc"].plurals[0] = "---Sample list";
-    strings["Add sample##sggc2"].plurals[0] = "=Add sample";
-    strings["Duplicate sample##sggc2"].plurals[0] = "=Duplicate sample";
-    strings["Open sample##sggc2"].plurals[0] = "=Open sample";
-    strings["Open sample (replace current)##sggc2"].plurals[0] = "=Open sample (replace current)";
-    strings["Import raw sample data##sggc"].plurals[0] = "=Import raw sample data";
-    strings["Import raw sample data (replace current)##sggc"].plurals[0] = "=Import raw sample data (replace current)";
-    strings["Save sample##sggc2"].plurals[0] = "=Save sample";
-    strings["Save sample (raw)##sggc1"].plurals[0] = "=Save sample (raw)";
-    strings["Move sample up in list##sggc2"].plurals[0] = "=Move sample up in list";
-    strings["Move sample down in list##sggc2"].plurals[0] = "=Move sample down in list";
-    strings["Delete sample##sggc2"].plurals[0] = "=Delete sample";
-    strings["Edit sample##sggc2"].plurals[0] = "=Edit sample";
-    strings["Sample cursor up##sggc2"].plurals[0] = "=Sample cursor up";
-    strings["Sample cursor down##sggc2"].plurals[0] = "=Sample cursor down";
-    strings["Sample preview##sggc"].plurals[0] = "=Sample preview";
-    strings["Stop sample preview##sggc"].plurals[0] = "=Stop sample preview";
-    strings["Samples: Toggle folders/standard view##sggc2"].plurals[0] = "=Samples: Toggle folders/standard view";
-    strings["Samples: Make me a drum kit##sggc"].plurals[0] = "=Samples: Make me a drum kit";
-    strings["---Sample editor##sggc"].plurals[0] = "=---Sample editor";
-    strings["Sample editor mode: Select##sggc"].plurals[0] = "=Sample editor mode: Select";
-    strings["Sample editor mode: Draw##sggc"].plurals[0] = "=Sample editor mode: Draw";
-    strings["Sample editor: Cut##sggc1"].plurals[0] = "=Sample editor: Cut";
-    strings["Sample editor: Copy##sggc1"].plurals[0] = "=Sample editor: Copy";
-    strings["Sample editor: Paste##sggc1"].plurals[0] = "=Sample editor: Paste";
-    strings["Sample editor: Paste replace##sggc"].plurals[0] = "=Sample editor: Paste replace";
-    strings["Sample editor: Paste mix##sggc"].plurals[0] = "=Sample editor: Paste mix";
-    strings["Sample editor: Select all##sggc1"].plurals[0] = "=Sample editor: Select all";
-    strings["Sample editor: Resize##sggc"].plurals[0] = "=Sample editor: Resize";
-    strings["Sample editor: Resample##sggc"].plurals[0] = "=Sample editor: Resample";
-    strings["Sample editor: Amplify##sggc"].plurals[0] = "=Sample editor: Amplify";
-    strings["Sample editor: Normalize##sggc"].plurals[0] = "=Sample editor: Normalize";
-    strings["Sample editor: Fade in##sggc"].plurals[0] = "=Sample editor: Fade in";
-    strings["Sample editor: Fade out##sggc"].plurals[0] = "=Sample editor: Fade out";
-    strings["Sample editor: Apply silence##sggc"].plurals[0] = "=Sample editor: Apply silence";
-    strings["Sample editor: Insert silence##sggc"].plurals[0] = "=Sample editor: Insert silence";
-    strings["Sample editor: Delete##sggc3"].plurals[0] = "=Sample editor: Delete";
-    strings["Sample editor: Trim##sggc"].plurals[0] = "=Sample editor: Trim";
-    strings["Sample editor: Reverse##sggc"].plurals[0] = "=Sample editor: Reverse";
-    strings["Sample editor: Invert##sggc"].plurals[0] = "=Sample editor: Invert";
-    strings["Sample editor: Signed/unsigned exchange##sggc"].plurals[0] = "=Sample editor: Signed/unsigned exchange";
-    strings["Sample editor: Apply filter##sggc"].plurals[0] = "=Sample editor: Apply filter";
-    strings["Sample editor: Crossfade loop points##sggc"].plurals[0] = "=Sample editor: Crossfade loop points";
-    strings["Sample editor: Preview sample##sggc"].plurals[0] = "=Sample editor: Preview sample";
-    strings["Sample editor: Stop sample preview##sggc"].plurals[0] = "=Sample editor: Stop sample preview";
-    strings["Sample editor: Zoom in##sggc"].plurals[0] = "=Sample editor: Zoom in";
-    strings["Sample editor: Zoom out##sggc"].plurals[0] = "=Sample editor: Zoom out";
-    strings["Sample editor: Toggle auto-zoom##sggc"].plurals[0] = "=Sample editor: Toggle auto-zoom";
-    strings["Sample editor: Create instrument from sample##sggc"].plurals[0] = "=Sample editor: Create instrument from sample";
-    strings["Sample editor: Set loop to selection##sggc"].plurals[0] = "=Sample editor: Set loop to selection";
-    strings["Sample editor: Create wavetable from selection##sggc"].plurals[0] = "=Sample editor: Create wavetable from selection";
-
+    strings["Add sample##sggc2"].plurals[0] = "Dodaj sampel";
+    strings["Duplicate sample##sggc2"].plurals[0] = "Klonuj sampel";
+    strings["Open sample##sggc2"].plurals[0] = "Klonuj sampel";
+    strings["Open sample (replace current)##sggc2"].plurals[0] = "Otwórz sampel (zamień obecny)";
+    strings["Import raw sample data##sggc"].plurals[0] = "Importuj surowe dane";
+    strings["Import raw sample data (replace current)##sggc"].plurals[0] = "Importuj surowe dane (zamień obecny)";
+    strings["Save sample##sggc2"].plurals[0] = "Zapisz sampel";
+    strings["Save sample (raw)##sggc1"].plurals[0] = "Zapisz sampel (surowy)";
+    strings["Move sample up in list##sggc2"].plurals[0] = "Przesuń sampel w górę na liście";
+    strings["Move sample down in list##sggc2"].plurals[0] = "Przesuń sampel w dół na liście";
+    strings["Delete sample##sggc2"].plurals[0] = "Usuń sampel";
+    strings["Edit sample##sggc2"].plurals[0] = "Edytuj sampel";
+    strings["Sample cursor up##sggc2"].plurals[0] = "Kursor w górę";
+    strings["Sample cursor down##sggc2"].plurals[0] = "Kursor w dół";
+    strings["Sample preview##sggc"].plurals[0] = "Podgląd sampla";
+    strings["Stop sample preview##sggc"].plurals[0] = "Zatrzymaj podgląd sampla";
+    strings["Samples: Toggle folders/standard view##sggc2"].plurals[0] = "=Sample: Przełączaj pomiędzy widokiem standardowym/folderami";
+    strings["Samples: Make me a drum kit##sggc"].plurals[0] = "=Sample: Stwórz mapę perkusyjną";
+    strings["---Sample editor##sggc"].plurals[0] = "---Edytor sampli";
+    strings["Sample editor mode: Select##sggc"].plurals[0] = "Tryb edytora sampli: Zaznacz";
+    strings["Sample editor mode: Draw##sggc"].plurals[0] = "Tryb edytora sampli: Rysuj";
+    strings["Sample editor: Cut##sggc1"].plurals[0] = "Edytor sampli: Wytnij";
+    strings["Sample editor: Copy##sggc1"].plurals[0] = "Edytor sampli: Kopiuj";
+    strings["Sample editor: Paste##sggc1"].plurals[0] = "Edytor sampli: Wklej";
+    strings["Sample editor: Paste replace##sggc"].plurals[0] = "Edytor sampli: Wklej i zamień";
+    strings["Sample editor: Paste mix##sggc"].plurals[0] = "Edytor sampli: Wklej ponad zawartość";
+    strings["Sample editor: Select all##sggc1"].plurals[0] = "Edytor sampli: Wybierz wszystko";
+    strings["Sample editor: Resize##sggc"].plurals[0] = "Edytor sampli: Zmień rozmiar";
+    strings["Sample editor: Resample##sggc"].plurals[0] = "Edytor sampli: Resample";
+    strings["Sample editor: Amplify##sggc"].plurals[0] = "Edytor sampli: Wzmocnij";
+    strings["Sample editor: Normalize##sggc"].plurals[0] = "Edytor sampli: Normalizuj";
+    strings["Sample editor: Fade in##sggc"].plurals[0] = "Edytor sampli: Fade in";
+    strings["Sample editor: Fade out##sggc"].plurals[0] = "Edytor sampli: Fade out";
+    strings["Sample editor: Apply silence##sggc"].plurals[0] = "Edytor sampli: Zastosuj ciszę";
+    strings["Sample editor: Insert silence##sggc"].plurals[0] = "Edytor sampli: Wstaw ciszę";
+    strings["Sample editor: Delete##sggc3"].plurals[0] = "Edytor sampli: Usuń";
+    strings["Sample editor: Trim##sggc"].plurals[0] = "Edytor sampli: Przytnij";
+    strings["Sample editor: Reverse##sggc"].plurals[0] = "Edytor sampli: Zamień początek z końcem";
+    strings["Sample editor: Invert##sggc"].plurals[0] = "Edytor sampli: Odrwóć";
+    strings["Sample editor: Signed/unsigned exchange##sggc"].plurals[0] = "Edytor sampli: Konwersja na ze znakiem/bez znaku";
+    strings["Sample editor: Apply filter##sggc"].plurals[0] = "Edytor sampli: Zastosuj filtr";
+    strings["Sample editor: Crossfade loop points##sggc"].plurals[0] = "Edytor sampli: Crossfade loop points";
+    strings["Sample editor: Preview sample##sggc"].plurals[0] = "Edytor sampli: Podgląd sampla";
+    strings["Sample editor: Stop sample preview##sggc"].plurals[0] = "Edytor sampli: Zatrzymaj podgląd sampla";
+    strings["Sample editor: Zoom in##sggc"].plurals[0] = "Edytor sampli: Przybliż";
+    strings["Sample editor: Zoom out##sggc"].plurals[0] = "Edytor sampli: Oddal";
+    strings["Sample editor: Toggle auto-zoom##sggc"].plurals[0] = "Edytor sampli: Włącz auto-zoom";
+    strings["Sample editor: Create instrument from sample##sggc"].plurals[0] = "Edytor sampli: Stwórz instrument z sampla";
+    strings["Sample editor: Set loop to selection##sggc"].plurals[0] = "Edytor sampli: Ustaw pętlę na zaznaczenie";
+    strings["Sample editor: Create wavetable from selection##sggc"].plurals[0] = "Edytor sampli: Stwórz tablicę fal z zaznaczenia";
     strings["---Orders##sggc"].plurals[0] = "---Orders";
     strings["Previous order##sggc"].plurals[0] = "Poprzedni wiersz matrycy wzorców";
     strings["Next order##sggc"].plurals[0] = "Następny wiersz matrycy wzorców";
@@ -1115,16 +1129,16 @@ void DivLocale::addTranslationsPolish()
     //   sgec  src/gui/editControls.cpp
 
     strings["Mobile Edit###MobileEdit"].plurals[0] = "Mobilne menu edytowania###MobileEdit";
-    strings["Mobile Controls###Mobile Controls"].plurals[0] = "Mobilne menu ustawien###Mobile Controls";
+    strings["Mobile Controls###Mobile Controls"].plurals[0] = "Mobilne menu ustawień###Mobile Controls";
     strings["Mobile Menu###Mobile Menu"].plurals[0] = "Mobilne menu###Mobile Menu";
     strings["Pattern##sgec0"].plurals[0] = "Wzorzec";
     strings["Orders##sgec0"].plurals[0] = "Matryca wzorców";
     strings["Ins##sgec"].plurals[0] = "Instr.";
     strings["Wave##sgec"].plurals[0] = "Tab. fal";
-    strings["Sample##sgec"].plurals[0] = "Sample";
-    strings["Song##sgec"].plurals[0] = "Utwor";
-    strings["Channels##sgec"].plurals[0] = "Kanaly";
-    strings["Chips##sgec"].plurals[0] = "Ukladu";
+    strings["Sample##sgec"].plurals[0] = "Sampel";
+    strings["Song##sgec"].plurals[0] = "Utwór";
+    strings["Channels##sgec"].plurals[0] = "Kanały";
+    strings["Chips##sgec"].plurals[0] = "Układy";
     strings["Mixer##sgec"].plurals[0] = "Mikser";
     strings["Other##sgec"].plurals[0] = "Inne";
     strings["New##sgec"].plurals[0] = "Nowy";
@@ -1134,7 +1148,7 @@ void DivLocale::addTranslationsPolish()
     strings["Save as...##sgec"].plurals[0] = "Zapisz jako...";
     strings["Legacy .dmf##sgec"].plurals[0] = ".dmf (legacy)";
     strings["Export##sgec"].plurals[0] = "Eksportuj";
-    strings["Restore Backup##sgec"].plurals[0] = "Przywroc kopie zapasowa";
+    strings["Restore Backup##sgec"].plurals[0] = "Przywróć kopię zapasową";
     strings["Song Info##sgec"].plurals[0] = "O utworze";
     strings["Subsongs##sgec"].plurals[0] = "Podutwory";
     strings["Speed##sgec"].plurals[0] = "Prędkość";
@@ -1173,8 +1187,8 @@ void DivLocale::addTranslationsPolish()
     strings["Stop##sgec0"].plurals[0] = "Stop";
     strings["Edit##sgec0"].plurals[0] = "Edytuj";
     strings["Metronome##sgec0"].plurals[0] = "Metronom";
-    strings["Follow##sgec0"].plurals[0] = "Podązaj";
-    strings["Orders##sgec1"].plurals[0] = "Matryca wzorcow";
+    strings["Follow##sgec0"].plurals[0] = "Podążaj";
+    strings["Orders##sgec1"].plurals[0] = "Matryca wzorców";
     strings["Pattern##sgec1"].plurals[0] = "Wzorzec";
     strings["Repeat pattern##sgec0"].plurals[0] = "Zapętl wzorzec";
     strings["Step one row##sgec0"].plurals[0] = "Zrób jeden krok we wzorcu";
@@ -1246,6 +1260,7 @@ void DivLocale::addTranslationsPolish()
     strings["None##sgef"].plurals[0] = "Żadnego";
     strings["Name##sgef"].plurals[0] = "Nazwa";
     strings["Description##sgef"].plurals[0] = "Opis";
+    strings["ERROR##sgef"].plurals[0] = "BŁĄD";
 
     //   sgeo  src/gui/exportOptions.cpp
 
@@ -1335,11 +1350,23 @@ void DivLocale::addTranslationsPolish()
     strings["Cancel##sgeo8"].plurals[0] = "Anuluj";
     strings["Export (binary)##sgeo"].plurals[0] = "Eksportuj (dane binarne)";
     strings["Export (text)##sgeo"].plurals[0] = "Eksportuj (tekst)";
+    strings["this option exports a module which is\n"
+            "compatible with tildearrow Furnace app.\n\n"
+
+            "not all chips and inst macros will be supported!"].plurals[0] = 
+
+            "ta opcja eksportuje pik modułu,\n"
+            "który jest kompatybilny z Furnace od tildearrowa.\n\n"
+
+            "nie wszystkie układy i makra będą wspierane!";
+    strings["Cancel##sgeo9"].plurals[0] = "Anuluj";
+    strings["Export##sgeo7"].plurals[0] = "Eksportuj";
     strings["Audio##sgeo"].plurals[0] = "Audio";
     strings["DMF (1.0/legacy)##sgeo"].plurals[0] = "DMF (1.0/legacy)";
     strings["Amiga Validation##sgeo"].plurals[0] = "Walidacja Amigi";
     strings["Text##sgeo"].plurals[0] = "Tekst";
     strings["Command Stream##sgeo"].plurals[0] = "Strumień komend";
+    strings["Furnace##sgeo"].plurals[0] = "Furnace";
     strings["congratulations! you've unlocked a secret panel.##sgeo"].plurals[0] = "gratulacje! odkryłeś tajny panel.";
     strings["Toggle hidden systems##sgeo"].plurals[0] = "Włącz ukryhte systemy";
     strings["Toggle all instrument types##sgeo"].plurals[0] = "Włącz wszystkie typy instrumentów";
@@ -1482,6 +1509,10 @@ void DivLocale::addTranslationsPolish()
     strings["Systems##sgns"].plurals[0] = "Systemy";
     strings["I'm feeling lucky##sgns"].plurals[0] = "Szczęśliwy traf";
     strings["Cancel##sgns"].plurals[0] = "Anuluj";
+
+    //   sgme  src/gui/memory.cpp
+
+    strings["Memory Composition###Memory Composition"].plurals[0] = "Zawartość pamięci###Memory Composition";
 
     //   sgor  src/gui/orders.cpp
 
@@ -1793,7 +1824,10 @@ void DivLocale::addTranslationsPolish()
     strings["Yamaha YM2610B (extended channel 3 and CSM)##sgpr"].plurals[0] = "Yamaha YM2610B z rozszerzonym kanałem 3 i CSM)";
     strings["Yamaha YM2612 (extended channel 3)##sgpr"].plurals[0] = "Yamaha YM2612 z rozszerzonym kanałem 3";
     strings["Yamaha YM2612 (OPN2) with DualPCM##sgpr"].plurals[0] = "Yamaha YM2612 (OPN2) z DualPCM";
-    strings["Yamaha YM2612 (extended channel 3) with DualPCM and CSM##sgpr"].plurals[0] = "Yamaha YM2612 z rozszerzonym kanałem 3, DualPCM i CSM";
+    strings["Yamaha YM2612 (extended channel 3) with DualPCM and CSM##sgpr"].plurals[0] = "Yamaha YM2612 z rozszerzonym kanałem 3, DualPCM i CSM"
+    strings["Yamaha YMF276 (extended channel 3)##sgpr"].plurals[0] = "Yamaha YMF276  z rozszerzonym kanałem 3";
+    strings["Yamaha YMF276 with DualPCM##sgpr"].plurals[0] = "Yamaha YMF276 (OPN2L) z DualPCM";
+    strings["Yamaha YMF276 (extended channel 3) with DualPCM and CSM##sgpr"].plurals[0] = "Yamaha YMF276 z rozszerzonym kanałem 3, DualPCM i CSM";;
     strings["Yamaha YM2413 (drums mode)##sgpr"].plurals[0] = "Yamaha YM2413 (tryb perkusji)";
     strings["Yamaha YM3438 (extended channel 3)##sgpr"].plurals[0] = "Yamaha YM3438 z rozszerzonym kanałem 3";
     strings["Yamaha YM3438 (OPN2C) with DualPCM##sgpr"].plurals[0] = "Yamaha YM3438 (OPN2C) z DualPCM";
