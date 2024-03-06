@@ -125,18 +125,141 @@ const int ftEffectMap[]={
   -1, // target volume slide - not supported
 };
 
+enum
+{
+  EFT_EF_NONE = 0,
+  EFT_EF_SPEED,           	// Speed
+  EFT_EF_JUMP,            	// Jump
+  EFT_EF_SKIP,            	// Skip
+  EFT_EF_HALT,            	// Halt
+  EFT_EF_VOLUME,          	// Volume
+  EFT_EF_PORTAMENTO,      	// Porta on
+  EFT_EF_PORTAOFF,        	// Porta off		// unused
+  EFT_EF_SWEEPUP,         	// Sweep up
+  EFT_EF_SWEEPDOWN,       	// Sweep down
+  EFT_EF_ARPEGGIO,        	// Arpeggio
+  EFT_EF_VIBRATO,         	// Vibrato
+  EFT_EF_TREMOLO,         	// Tremolo
+  EFT_EF_PITCH,           	// Pitch
+  EFT_EF_DELAY,           	// Note delay
+  EFT_EF_DAC,             	// DAC setting
+  EFT_EF_PORTA_UP,        	// Portamento up
+  EFT_EF_PORTA_DOWN,      	// Portamento down
+  EFT_EF_DUTY_CYCLE,      	// Duty cycle
+  EFT_EF_SAMPLE_OFFSET,   	// Sample offset
+  EFT_EF_SLIDE_UP,        	// Slide up
+  EFT_EF_SLIDE_DOWN,      	// Slide down
+  EFT_EF_VOLUME_SLIDE,    	// Volume slide
+  EFT_EF_NOTE_CUT,        	// Note cut
+  EFT_EF_RETRIGGER,       	// DPCM retrigger
+  EFT_EF_DELAYED_VOLUME,  	// // // Delayed channel volume
+  EFT_EF_FDS_MOD_DEPTH,   	// FDS modulation depth
+  EFT_EF_FDS_MOD_SPEED_HI,	// FDS modulation speed hi
+  EFT_EF_FDS_MOD_SPEED_LO,	// FDS modulation speed lo
+  EFT_EF_DPCM_PITCH,      	// DPCM Pitch
+  EFT_EF_SUNSOFT_ENV_TYPE,	// Sunsoft envelope type
+  EFT_EF_SUNSOFT_ENV_HI,  	// Sunsoft envelope high
+  EFT_EF_SUNSOFT_ENV_LO,  	// Sunsoft envelope low
+  EFT_EF_SUNSOFT_NOISE,   	// // // 050B Sunsoft noise period
+  EFT_EF_AY8930_PULSE_WIDTH,   	// // // AY8930 pulse width
+  EFT_EF_AY8930_AND_MASK,   	// // // AY8930 noise AND mask
+  EFT_EF_AY8930_OR_MASK,   	// // // AY8930 noise OR mask
+  EFT_EF_AY8930_VOL,					// // // AY8930 extra volume bit
+  EFT_EF_VRC7_PORT,       	// // // 050B VRC7 custom patch port
+  EFT_EF_VRC7_WRITE,      	// // // 050B VRC7 custom patch write
+  EFT_EF_NOTE_RELEASE,    	// // // Delayed release
+  EFT_EF_GROOVE,          	// // // Groove
+  EFT_EF_TRANSPOSE,       	// // // Delayed transpose
+  EFT_EF_N163_WAVE_BUFFER,	// // // N163 wave buffer
+  EFT_EF_FDS_VOLUME,      	// // // FDS volume envelope
+  EFT_EF_FDS_MOD_BIAS,    	// // // FDS auto-FM bias
+  EFT_EF_PHASE_RESET,  // Reset waveform phase without retriggering note (VRC6-only so far)
+  EFT_EF_HARMONIC,  // Multiply the note pitch by an integer
+  EFT_EF_PWM,								// // // Pulse width modulation effect
+  EFT_EF_VOLUME_OFFSET,     // // // Relative volume change
+  EFT_EF_SAA_NOISE_MODE,    // // // SAA1099 noise mode
+  EFT_EF_SID_FILTER_RESONANCE, // // // SID filter resonance
+  EFT_EF_SID_FILTER_CUTOFF_HI, // // // SID filter cutoff hi
+  EFT_EF_SID_FILTER_CUTOFF_LO, // // // SID filter cutoff lo
+  EFT_EF_SID_FILTER_MODE, // // // SID filter mode
+  EFT_EF_SID_ENVELOPE,    // // // SID envelope parameters
+  EFT_EF_SID_RING,        // // // SID ringmod
+
+  EFT_EF_COUNT
+};
+
+const int eftEffectMap[]={
+  -1, // none
+  0x0f,
+  0x0b,
+  0x0d,
+  0xff,
+  -1, // volume? not supported in Furnace yet
+  0x03,
+  0x03, // unused?
+  0x13,
+  0x14,
+  0x00,
+  0x04,
+  0x07,
+  0xe5,
+  0xed,
+  0x11,
+  0x01, // porta up
+  0x02, // porta down
+  0x12,
+  0x90, // sample offset - not supported yet
+  0xe1, // Slide up
+  0xe2,	// Slide down
+  0x0a,
+  0xec,
+  0x0c,
+  -1, // delayed volume - not supported yet
+  0x11, // FDS modulation depth
+  0x12, // FDS modulation speed hi
+  0x13, // FDS modulation speed lo
+  0x20, // DPCM pitch
+  0x22, // Sunsoft envelope type
+  0x24, // Sunsoft envelope high
+  0x23, // Sunsoft envelope low
+  0x21, // 050B Sunsoft noise period
+  0x12,   	// // // AY8930 pulse width
+  0x27,   	// // // AY8930 noise AND mask
+  0x28,   	// // // AY8930 noise OR mask
+  0x100,		// // // AY8930 extra volume bit
+  -1, // VRC7 "custom patch port" - not supported?
+  -1, // VRC7 "custom patch write"
+  -1, // delayed release - not supported yet
+  0x09, // select groove
+  0xe6, // delayed note transpose
+  0x11, // Namco 163 wave RAM offset
+  -1, // FDS vol env - not supported
+  -1, // FDS auto FM - not supported yet
+  -1, // phase reset - not supported
+  -1, // harmonic - not supported
+  -1,								// // // Pulse width modulation effect
+  -1,     // // // Relative volume change
+  -1,    // // // SAA1099 noise mode
+  0x13, // // // SID filter resonance
+  0x40, // // // SID filter cutoff hi
+  0x40, // // // SID filter cutoff lo
+  0x14, // // // SID filter mode
+  -1,    // // // SID envelope parameters
+  -1,        // // // SID ringmod
+};
+
 const int eff_conversion_050[][2] = 
 {
-	{FT_EF_SUNSOFT_NOISE,		FT_EF_NOTE_RELEASE},
-	{FT_EF_VRC7_PORT,			FT_EF_GROOVE},
-	{FT_EF_VRC7_WRITE,			FT_EF_TRANSPOSE},
-	{FT_EF_NOTE_RELEASE,		FT_EF_N163_WAVE_BUFFER},
-	{FT_EF_GROOVE,				FT_EF_FDS_VOLUME},
-	{FT_EF_TRANSPOSE,			FT_EF_FDS_MOD_BIAS},
-	{FT_EF_N163_WAVE_BUFFER,	FT_EF_SUNSOFT_NOISE},
-	{FT_EF_FDS_VOLUME,			FT_EF_VRC7_PORT},
-	{FT_EF_FDS_MOD_BIAS,		FT_EF_VRC7_WRITE},
-	{0xFF,	0xFF}, //end mark
+  {FT_EF_SUNSOFT_NOISE,		FT_EF_NOTE_RELEASE},
+  {FT_EF_VRC7_PORT,			FT_EF_GROOVE},
+  {FT_EF_VRC7_WRITE,			FT_EF_TRANSPOSE},
+  {FT_EF_NOTE_RELEASE,		FT_EF_N163_WAVE_BUFFER},
+  {FT_EF_GROOVE,				FT_EF_FDS_VOLUME},
+  {FT_EF_TRANSPOSE,			FT_EF_FDS_MOD_BIAS},
+  {FT_EF_N163_WAVE_BUFFER,	FT_EF_SUNSOFT_NOISE},
+  {FT_EF_FDS_VOLUME,			FT_EF_VRC7_PORT},
+  {FT_EF_FDS_MOD_BIAS,		FT_EF_VRC7_WRITE},
+  {0xFF,	0xFF}, //end mark
 };
 
 constexpr int ftEffectMapSize=sizeof(ftEffectMap)/sizeof(int);
@@ -1628,8 +1751,24 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   pat->data[row][5+(j*2)]=-1;
                 } else {
                   if (nextEffect<ftEffectMapSize) {
-                    pat->data[row][4+(j*2)]=ftEffectMap[nextEffect];
-                    pat->data[row][5+(j*2)]=ftEffectMap[nextEffect] == -1 ? -1 : nextEffectVal;
+                    if(eft)
+                    {
+                      pat->data[row][4+(j*2)]=eftEffectMap[nextEffect];
+                      pat->data[row][5+(j*2)]=eftEffectMap[nextEffect] == -1 ? -1 : nextEffectVal;
+
+                      if(pat->data[row][4+(j*2)] == 0x100)
+                      {
+                        pat->data[row][3] += pat->data[row][5+(j*2)] ? 0x10 : 0; //extra volume bit for AY8930
+                        pat->data[row][4+(j*2)] = -1;
+                        pat->data[row][5+(j*2)] = -1;
+                      }
+                    }
+                    else
+                    {
+                      pat->data[row][4+(j*2)]=ftEffectMap[nextEffect];
+                      pat->data[row][5+(j*2)]=ftEffectMap[nextEffect] == -1 ? -1 : nextEffectVal;
+                    }
+                    
 
                     if(ftEffectMap[nextEffect] == 0x0f && nextEffectVal > 0x1f)
                     {
