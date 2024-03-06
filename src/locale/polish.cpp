@@ -439,7 +439,7 @@ void DivLocale::addTranslationsPolish()
     strings["Save Wavetable##sggu2"].plurals[0] = "Zapisz tablice fal";
     strings["raw data##sggu"].plurals[0] = "surowe dane";
     strings["Load Sample##sggu"].plurals[0] = "Wczytaj sampel";
-    strings["compatible files##sggu3"].plurals[0] = "kompatybilne formaty plikow";
+    strings["compatible files##sggu3"].plurals[0] = "kompatybilne formaty plików";
     strings["all files##sggu3"].plurals[0] = "wszystkie pliki";
     strings["Load Raw Sample##sggu"].plurals[0] = "Wczytaj surowy sampel";
     strings["all files##sggu4"].plurals[0] = "wszystkie pliki";
@@ -509,7 +509,7 @@ void DivLocale::addTranslationsPolish()
     strings["paste mix##sggu"].plurals[0] = "wstaw i nałóż";
     strings["paste mix (background)##sggu"].plurals[0] = "wklej (zastąp istniejący)";
     strings["paste with ins (foreground)##sggu"].plurals[0] = "wklej na wierzch instrument (bez zastępowania istniejącego)";
-    strings["no instruments available##sggu0"].plurals[0] = "brak dostepnych instrumentow";
+    strings["no instruments available##sggu0"].plurals[0] = "brak dostepnych instrumentów";
     strings["paste with ins (background)##sggu"].plurals[0] = "wklej instrumnet na wierzch (zastępując istniejący)";
     strings["no instruments available##sggu1"].plurals[0] = "brak dostępnych instrumentów";
     strings["paste flood##sggu"].plurals[0] = "wstaw z buforem, powtarzając cykl (do końca wzorca)";
@@ -551,7 +551,7 @@ void DivLocale::addTranslationsPolish()
     strings["gradient/fade...##sggu"].plurals[0] = "gradient/zanikanie...";
     strings["Start##sggu"].plurals[0] = "Poczatek";
     strings["End##sggu"].plurals[0] = "Koniec";
-    strings["Nibble mode##sggu0"].plurals[0] = "Tryb półbajtow";
+    strings["Nibble mode##sggu0"].plurals[0] = "Tryb półbajtów";
     strings["Go ahead##sggu"].plurals[0] = "Zastosuj";
     strings["scale...##sggu"].plurals[0] = "skaluj...";
     strings["Scale##sggu"].plurals[0] = "Skaluj";
@@ -667,7 +667,7 @@ void DivLocale::addTranslationsPolish()
     strings["register view##sggu"].plurals[0] = "podgląd rejestrów";
     strings["log viewer##sggu"].plurals[0] = "podglad logów";
     strings["statistics##sggu"].plurals[0] = "statystyki";
-    strings["memory composition##sggu"].plurals[0] = "Zawartość pamięci";
+    strings["memory composition##sggu"].plurals[0] = "zawartość pamięci";
     strings["spoiler##sggu"].plurals[0] = "spoiler";
     strings["Help##menubar"].plurals[0] = "Pomoc##menubar";
     strings["help##menubar"].plurals[0] = "pomoc##menubar";
@@ -864,8 +864,8 @@ void DivLocale::addTranslationsPolish()
     strings["Save as##sggc"].plurals[0] = "Zapisz jako";
     strings["Export##sggc"].plurals[0] = "Eksportuj";
     strings["Undo##sggc"].plurals[0] = "Cofnij";
-    strings["Redo##sggc"].plurals[0] = "Ponow";
-    strings["Exit##sggc"].plurals[0] = "Wyjdz";
+    strings["Redo##sggc"].plurals[0] = "Ponów";
+    strings["Exit##sggc"].plurals[0] = "Wyjdź";
     strings["Play/Stop (toggle)##sggc"].plurals[0] = "Start/stop (przelacznik))";
     strings["Play##sggc"].plurals[0] = "Odtwarzaj";
     strings["Stop##sggc"].plurals[0] = "Stop";
@@ -1204,7 +1204,7 @@ void DivLocale::addTranslationsPolish()
     strings["Octave##sgec1"].plurals[0] = "Oktawa";
     strings["Edit Step##sgec1"].plurals[0] = "Krok edycji";
     strings["Follow##sgec1"].plurals[0] = "Podążaj";
-    strings["Orders##sgec2"].plurals[0] = "Matryca wzorcow";
+    strings["Orders##sgec2"].plurals[0] = "Matryca wzorców";
     strings["Pattern##sgec2"].plurals[0] = "Wzorzec";
     strings["Poly##PolyInput"].plurals[0] = "Polifonia##PolyInput";
     strings["Mono##PolyInput"].plurals[0] = "Mono##PolyInput";
@@ -1252,10 +1252,10 @@ void DivLocale::addTranslationsPolish()
 
     //   sgef  src/gui/effectList.cpp
 
-    strings["Effect List###Effect List"].plurals[0] = "Lista efektow###Effect List";
+    strings["Effect List###Effect List"].plurals[0] = "Lista efektów###Effect List";
     strings["Chip at cursor: %s##sgef"].plurals[0] = "Zazanaczony uklad: %s";
     strings["Search##sgef"].plurals[0] = "Szukaj";
-    strings["Effect types to show:##sgef"].plurals[0] = "Wyświetlanie typow efektow:";
+    strings["Effect types to show:##sgef"].plurals[0] = "Wyświetlanie typów efektów:";
     strings["All##sgef"].plurals[0] = "Wszystkie";
     strings["None##sgef"].plurals[0] = "Żadnego";
     strings["Name##sgef"].plurals[0] = "Nazwa";
@@ -1265,7 +1265,7 @@ void DivLocale::addTranslationsPolish()
     //   sgeo  src/gui/exportOptions.cpp
 
     strings["one file##sgeo"].plurals[0] = "jeden plik";
-    strings["multiple files (one per chip)##sgeo"].plurals[0] = "wiele plików (po jednym na uklad)";
+    strings["multiple files (one per chip)##sgeo"].plurals[0] = "wiele plików (po jednym na układ)";
     strings["multiple files (one per channel)##sgeo"].plurals[0] = "wiele plików (po jednym na kanał)";
     strings["Loops##sgeo"].plurals[0] = "Ilość powtórzeń";
     strings["Fade out (seconds)##sgeo"].plurals[0] = "Zanikanie (w sekundach))";
@@ -2968,7 +2968,7 @@ void DivLocale::addTranslationsPolish()
     strings["Simple##CHV1"].plurals[0] = "Prosty##CHV1";
     strings["Stereo##CHV2"].plurals[0] = "Stereo##CHV2";
     strings["Real##CHV3"].plurals[0] = "Rzeczywisty##CHV3";
-    strings["Real (stereo)##CHV4"].plurals[0] = "НRzeczywisty (stereo)##CHV4";
+    strings["Real (stereo)##CHV4"].plurals[0] = "Rzeczywisty (stereo)##CHV4";
     strings["Channel feedback style:##sgse"].plurals[0] = "Tryb podświetlenia nagłowka kanału";
     strings["Off##CHF0"].plurals[0] = "Wył.##CHF0";
     strings["Note##CHF1"].plurals[0] = "Nuta##CHF1";
@@ -3061,11 +3061,11 @@ void DivLocale::addTranslationsPolish()
     strings["Oscilloscope##sgse"].plurals[0] = "Oscyloskop";
     strings["Wave (non-mono)##sgse"].plurals[0] = "Fala (nie mono)";
     strings["Volume Meter##sgse"].plurals[0] = "Miernik glośśności";
-    strings["Orders##sgse2"].plurals[0] = "Matryca wzorcow";
+    strings["Orders##sgse2"].plurals[0] = "Matryca wzorców";
     strings["Envelope View##sgse"].plurals[0] = "Podglad obwiedni";
     strings["FM Editor##sgse1"].plurals[0] = "Edytor instrumentow FM";
     strings["Macro Editor##sgse1"].plurals[0] = "Edytor makr";
-    strings["Instrument Types##sgse"].plurals[0] = "Typy instrumentow";
+    strings["Instrument Types##sgse"].plurals[0] = "Typy instrumentów";
     strings["Channel##sgse2"].plurals[0] = "Kanal";
     strings["Pattern##sgse2"].plurals[0] = "Wzorzec";
     strings["Sample Editor##sgse"].plurals[0] = "Edytor sampli";
@@ -3901,7 +3901,7 @@ void DivLocale::addTranslationsPolish()
 
     strings["4-op##sgiOPL"].plurals[0] = "4-op";
     strings["Drums##sgiOPL"].plurals[0] = "Perkusja";
-    strings["Fixed frequency mode##sgiOPL"].plurals[0] = "Tryb stałej czestotliwości";
+    strings["Fixed frequency mode##sgiOPL"].plurals[0] = "Tryb stałej częstotliwości";
     strings["when enabled, drums will be set to the specified frequencies, ignoring the note.##sgiOPL"].plurals[0] = "gdy tryb ten jest włączony, instrumenty perkusji będą grane na określonych częstotliwościach. Wartości nut będą ignorowane.";
     strings["Drum##sgiOPL"].plurals[0] = "Perkusja";
     strings["Block##sgiOPL"].plurals[0] = "Blok";
@@ -3942,7 +3942,7 @@ void DivLocale::addTranslationsPolish()
     //   sgiOPLL   src/gui/inst/opll.cpp
 
     strings["%s name##sgiOPLL"].plurals[0] = "nazwa %s";
-    strings["Fixed frequency mode##sgiOPLL"].plurals[0] = "Tryb stalej czestotliwosci";
+    strings["Fixed frequency mode##sgiOPLL"].plurals[0] = "Tryb stałej częstotliwosci";
     strings["when enabled, drums will be set to the specified frequencies, ignoring the note.##sgiOPLL"].plurals[0] = "gdy tryb ten jest włączony, instrumenty perkusji będą grane na określonych częstotliwościach. Wartości nut będą ignorowane.";
     strings["Drum##sgiOPLL"].plurals[0] = "Perkusja";
     strings["Block##sgiOPLL"].plurals[0] = "Blok";
@@ -4015,7 +4015,7 @@ void DivLocale::addTranslationsPolish()
     strings["SSG On##sgiOPN"].plurals[0] = "Wł. SSG";
     strings["FM Macros##sgiOPN"].plurals[0] = "Makra FM";
     strings["LFO Speed##sgiOPN"].plurals[0] = "Prędkość LFO";
-    strings["OpMask##sgiOPN"].plurals[0] = "Maska operatoró";
+    strings["OpMask##sgiOPN"].plurals[0] = "Maska operatorów";
     strings["OP%d Macros##sgiOPN"].plurals[0] = "Makra OP%d";
     strings["Macros##sgiOPN"].plurals[0] = "Makra";
     strings["Volume##sgiOPN"].plurals[0] = "Głośność";
