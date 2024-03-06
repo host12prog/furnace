@@ -12,6 +12,7 @@ enum DivLang
     DIV_LANG_ENGLISH = 0,
     DIV_LANG_RUSSIAN,
     DIV_LANG_POLISH,
+    DIV_LANG_PORTUGUESE,
     //DIV_LANG_TEMPLATE,
     DIV_LANG_MAX,
 };
@@ -51,6 +52,7 @@ class DivLocale
 
         void addTranslationsRussian();
         void addTranslationsPolish();
+        void addTranslationsPortuguese();
         //void addTranslationsTemplate();
 
         size_t getMemoryUsage();
