@@ -208,11 +208,15 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
       if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) && ImGui::IsWindowHovered(ImGuiHoveredFlags_ChildWindows)) sampleMapFocused=false;
       if (curWindowLast!=GUI_WINDOW_INS_EDIT) sampleMapFocused=false;
       if (!sampleMapFocused) sampleMapDigit=0;
-      if (ImGui::BeginTable("NoteMap",(ins->type==DIV_INS_NES)?5:4,ImGuiTableFlags_ScrollY|ImGuiTableFlags_Borders|ImGuiTableFlags_SizingStretchSame)) {
+      if (ImGui::BeginTable("NoteMap",(ins->type==DIV_INS_NES)?6:4,ImGuiTableFlags_ScrollY|ImGuiTableFlags_Borders|ImGuiTableFlags_SizingStretchSame)) {
         ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed);
         ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed);
         ImGui::TableSetupColumn("c2",ImGuiTableColumnFlags_WidthFixed);
-        if (ins->type==DIV_INS_NES) ImGui::TableSetupColumn("c3",ImGuiTableColumnFlags_WidthFixed);
+        if (ins->type==DIV_INS_NES)
+        {
+          ImGui::TableSetupColumn("c3",ImGuiTableColumnFlags_WidthFixed);
+          ImGui::TableSetupColumn("c33",ImGuiTableColumnFlags_WidthFixed);
+        }
         ImGui::TableSetupColumn("c4",ImGuiTableColumnFlags_WidthStretch);
 
         ImGui::TableSetupScrollFreeze(0,1);
@@ -224,6 +228,8 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
         if (ins->type==DIV_INS_NES) {
           ImGui::TableNextColumn();
           ImGui::Text(_L("pitch##sgismpd"));
+          ImGui::TableNextColumn();
+          ImGui::Text(_L("loop##sgismpd"));
           ImGui::TableNextColumn();
           ImGui::Text(_L("delta##sgismpd"));
         } else {
@@ -355,6 +361,10 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
             }
 
             ImGui::PopFont();
+
+            ImGui::TableNextColumn();
+            sName=fmt::sprintf(_L("L##L%d"),i);
+            ImGui::Checkbox(sName.c_str(), (bool*)&ins->amiga.get_amiga_sample_map(i, true)->freq);
 
             // delta
             ImGui::TableNextColumn();

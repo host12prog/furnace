@@ -1824,10 +1824,10 @@ void DivLocale::addTranslationsPolish()
     strings["Yamaha YM2610B (extended channel 3 and CSM)##sgpr"].plurals[0] = "Yamaha YM2610B z rozszerzonym kanałem 3 i CSM)";
     strings["Yamaha YM2612 (extended channel 3)##sgpr"].plurals[0] = "Yamaha YM2612 z rozszerzonym kanałem 3";
     strings["Yamaha YM2612 (OPN2) with DualPCM##sgpr"].plurals[0] = "Yamaha YM2612 (OPN2) z DualPCM";
-    strings["Yamaha YM2612 (extended channel 3) with DualPCM and CSM##sgpr"].plurals[0] = "Yamaha YM2612 z rozszerzonym kanałem 3, DualPCM i CSM"
+    strings["Yamaha YM2612 (extended channel 3) with DualPCM and CSM##sgpr"].plurals[0] = "Yamaha YM2612 z rozszerzonym kanałem 3, DualPCM i CSM";
     strings["Yamaha YMF276 (extended channel 3)##sgpr"].plurals[0] = "Yamaha YMF276  z rozszerzonym kanałem 3";
     strings["Yamaha YMF276 with DualPCM##sgpr"].plurals[0] = "Yamaha YMF276 (OPN2L) z DualPCM";
-    strings["Yamaha YMF276 (extended channel 3) with DualPCM and CSM##sgpr"].plurals[0] = "Yamaha YMF276 z rozszerzonym kanałem 3, DualPCM i CSM";;
+    strings["Yamaha YMF276 (extended channel 3) with DualPCM and CSM##sgpr"].plurals[0] = "Yamaha YMF276 z rozszerzonym kanałem 3, DualPCM i CSM";
     strings["Yamaha YM2413 (drums mode)##sgpr"].plurals[0] = "Yamaha YM2413 (tryb perkusji)";
     strings["Yamaha YM3438 (extended channel 3)##sgpr"].plurals[0] = "Yamaha YM3438 z rozszerzonym kanałem 3";
     strings["Yamaha YM3438 (OPN2C) with DualPCM##sgpr"].plurals[0] = "Yamaha YM3438 (OPN2C) z DualPCM";
@@ -4702,7 +4702,7 @@ void DivLocale::addTranslationsPolish()
     strings["Volume##sgiTIA"].plurals[0] = "Głośność";
     strings["Arpeggio##sgiTIA"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiTIA"].plurals[0] = "Wysokość";
-    strings["Raw Period##sgiTIA"].plurals[0] = "Absolutny okres"
+    strings["Raw Period##sgiTIA"].plurals[0] = "Absolutny okres";
     strings["Waveform##sgiTIA"].plurals[0] = "Kształt fali";
 
     //   sgiVB     src/gui/inst/vboy.cpp

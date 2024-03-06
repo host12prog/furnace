@@ -32,11 +32,15 @@
 #define ADSR_SR source.val[7]
 #define ADSR_RR source.val[8]
 
+#define ADSR_BIT30 source.val[16]
+
 #define LFO_SPEED source.val[11]
 #define LFO_WAVE source.val[12]
 #define LFO_PHASE source.val[13]
 #define LFO_LOOP source.val[14]
 #define LFO_GLOBAL source.val[15]
+
+#define LFO_BIT30 source.val[17]
 
 void DivMacroStruct::prepare(DivInstrumentMacro& source, DivEngine* e) {
   has=had=actualHad=will=true;
@@ -144,6 +148,11 @@ void DivMacroStruct::doMacro(DivInstrumentMacro& source, bool released, bool tic
           break;
       }
       val=ADSR_LOW+((pos+(ADSR_HIGH-ADSR_LOW)*pos)>>8);
+
+      if(ADSR_BIT30)
+      {
+        val |= (1 << 30);
+      }
     }
     if (type==2) { // LFO
       lfoPos+=LFO_SPEED;
@@ -162,6 +171,11 @@ void DivMacroStruct::doMacro(DivInstrumentMacro& source, bool released, bool tic
           break;
       }
       val=ADSR_LOW+((lfoOut+(ADSR_HIGH-ADSR_LOW)*lfoOut)>>8);
+
+      if(LFO_BIT30)
+      {
+        val |= (1 << 30);
+      }
     }
   }
 }

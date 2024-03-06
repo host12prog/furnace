@@ -1035,7 +1035,7 @@ void FurnaceGUI::doPasteMPT(PasteMode mode, int arg, bool readClipboard, String 
         else 
         {
           unsigned int val=0;
-          if (sscanf(note,"%2X",&val)!=1) 
+          if (sscanf(note,"%2d",&val)!=1) 
           {
             invalidData=true;
             break;
@@ -1043,7 +1043,7 @@ void FurnaceGUI::doPasteMPT(PasteMode mode, int arg, bool readClipboard, String 
 
           if (!(mode==GUI_PASTE_MODE_MIX_BG || mode==GUI_PASTE_MODE_INS_BG) || pat->data[j][iFine+1]==-1) 
           {
-            pat->data[j][iFine+1]=val;
+            pat->data[j][iFine+1]=val - 1;
           }
         }
       }
@@ -1562,7 +1562,7 @@ void FurnaceGUI::doFlip() {
 void FurnaceGUI::doCollapse(int divider, const SelectionPoint& sStart, const SelectionPoint& sEnd) {
   if (divider<2) return;
   if (e->curSubSong->patLen<divider) {
-    showError(_L("can't collapse any further!##sged"));
+    showError(settings.language == DIV_LANG_ENGLISH ? "can't collapse any further!" : _L("can't collapse any further!##sged"));
     return;
   }
 
@@ -1666,7 +1666,7 @@ void FurnaceGUI::doExpand(int multiplier, const SelectionPoint& sStart, const Se
 void FurnaceGUI::doCollapseSong(int divider) {
   if (divider<2) return;
   if (e->curSubSong->patLen<divider) {
-    showError(_L("can't collapse any further!##sged"));
+    showError(settings.language == DIV_LANG_ENGLISH ? "can't collapse any further!" : _L("can't collapse any further!##sged"));
     return;
   }
   finishSelection();
@@ -1746,7 +1746,7 @@ void FurnaceGUI::doCollapseSong(int divider) {
 void FurnaceGUI::doExpandSong(int multiplier) {
   if (multiplier<2) return;
   if (e->curSubSong->patLen>(256/multiplier)) {
-    showError(_L("can't expand any further!##sged"));
+    showError(settings.language == DIV_LANG_ENGLISH ? "can't expand any further!" : _L("can't expand any further!##sged"));
     return;
   }
   finishSelection();

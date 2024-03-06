@@ -18,6 +18,7 @@
  */
 
 #include "gui.h"
+#include "commandPalette.h"
 #include "../ta-log.h"
 #include <fmt/printf.h>
 #include <imgui.h>
@@ -34,21 +35,21 @@ void FurnaceGUI::doAction(int what) {
   switch (what) {
     case GUI_ACTION_NEW:
       if (modified) {
-        showWarning(_L("Unsaved changes! Save changes before creating a new song?##sgda"),GUI_WARN_NEW);
+        showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before creating a new song?" : _L("Unsaved changes! Save changes before creating a new song?##sgda"),GUI_WARN_NEW);
       } else {
         displayNew=true;
       }
       break;
     case GUI_ACTION_OPEN:
       if (modified) {
-        showWarning(_L("Unsaved changes! Save changes before opening another file?##sgda"),GUI_WARN_OPEN);
+        showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before opening another file?" : _L("Unsaved changes! Save changes before opening another file?##sgda"),GUI_WARN_OPEN);
       } else {
         openFileDialog(GUI_FILE_OPEN);
       }
       break;
     case GUI_ACTION_OPEN_BACKUP:
       if (modified) {
-        showWarning(_L("Unsaved changes! Save changes before opening backup?##sgda"),GUI_WARN_OPEN_BACKUP);
+        showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before opening backup?" : _L("Unsaved changes! Save changes before opening backup?##sgda"),GUI_WARN_OPEN_BACKUP);
       } else {
         openFileDialog(GUI_FILE_OPEN_BACKUP);
       }
@@ -58,7 +59,7 @@ void FurnaceGUI::doAction(int what) {
         openFileDialog(GUI_FILE_SAVE);
       } else {
         if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-          showError(fmt::sprintf(_L("Error while saving file! (%s)##sgda"),lastError));
+          showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sgda"),lastError));
         }
       }
       break;
@@ -82,6 +83,9 @@ void FurnaceGUI::doAction(int what) {
       } else {
         doRedo();
       }
+      break;
+    case GUI_ACTION_QUIT:
+      requestQuit();
       break;
     case GUI_ACTION_PLAY_TOGGLE:
       if (e->isPlaying() && !e->isStepping()) {
@@ -182,7 +186,7 @@ void FurnaceGUI::doAction(int what) {
       msg.sysExLen=15;
       memcpy(msg.sysExData.get(),avRequest,15);
       if (!e->sendMidiMessage(msg)) {
-        showError(_L("Error while sending request (MIDI output not configured?)##sgda"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "Error while sending request (MIDI output not configured?)" : _L("Error while sending request (MIDI output not configured?)##sgda"));
       }
       break;
     }
@@ -190,9 +194,32 @@ void FurnaceGUI::doAction(int what) {
       e->syncReset();
       break;
     case GUI_ACTION_CLEAR:
-      showWarning(_L("Select an option: (cannot be undone!)##sgda"),GUI_WARN_CLEAR);
+      showWarning(settings.language == DIV_LANG_ENGLISH ? "Select an option: (cannot be undone!)" : _L("Select an option: (cannot be undone!)##sgda"),GUI_WARN_CLEAR);
       break;
-
+    case GUI_ACTION_COMMAND_PALETTE:
+      displayPalette=true;
+      curPaletteType=CMDPAL_TYPE_MAIN;
+      break;
+    case GUI_ACTION_CMDPAL_RECENT:
+      displayPalette=true;
+      curPaletteType=CMDPAL_TYPE_RECENT;
+      break;
+    case GUI_ACTION_CMDPAL_INSTRUMENTS:
+      displayPalette=true;
+      curPaletteType=CMDPAL_TYPE_INSTRUMENTS;
+      break;
+    case GUI_ACTION_CMDPAL_SAMPLES:
+      displayPalette=true;
+      curPaletteType=CMDPAL_TYPE_SAMPLES;
+      break;
+    case GUI_ACTION_CMDPAL_INSTRUMENT_CHANGE:
+      displayPalette=true;
+      curPaletteType=CMDPAL_TYPE_INSTRUMENT_CHANGE;
+      break;
+    case GUI_ACTION_CMDPAL_ADD_CHIP:
+      displayPalette=true;
+      curPaletteType=CMDPAL_TYPE_ADD_CHIP;
+      break;
     case GUI_ACTION_WINDOW_EDIT_CONTROLS:
       nextWindow=GUI_WINDOW_EDIT_CONTROLS;
       break;
@@ -285,6 +312,9 @@ void FurnaceGUI::doAction(int what) {
       break;
     case GUI_ACTION_WINDOW_XY_OSC:
       nextWindow=GUI_WINDOW_XY_OSC;
+      break;
+    case GUI_ACTION_WINDOW_MEMORY:
+      nextWindow=GUI_WINDOW_MEMORY;
       break;
     
     case GUI_ACTION_COLLAPSE_WINDOW:
@@ -384,6 +414,9 @@ void FurnaceGUI::doAction(int what) {
           break;
         case GUI_WINDOW_XY_OSC:
           xyOscOpen=false;
+          break;
+        case GUI_WINDOW_MEMORY:
+          memoryOpen=false;
           break;
         default:
           break;
@@ -632,7 +665,7 @@ void FurnaceGUI::doAction(int what) {
       }
       curIns=e->addInstrument(cursor.xCoarse);
       if (curIns==-1) {
-        showError(_L("too many instruments!##sgda0"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "too many instruments!" : _L("too many instruments!##sgda0"));
       } else {
         if (settings.blankIns) {
           e->song.ins[curIns]->fm.fb=0;
@@ -661,9 +694,10 @@ void FurnaceGUI::doAction(int what) {
         int prevIns=curIns;
         curIns=e->addInstrument(cursor.xCoarse);
         if (curIns==-1) {
-          showError(_L("too many instruments!##sgda1"));
+          showError(settings.language == DIV_LANG_ENGLISH ? "too many instruments!" : _L("too many instruments!##sgda1"));
         } else {
-          (*e->song.ins[curIns])=(*e->song.ins[prevIns]);
+          e->copyInstrument(e->song.ins[curIns], e->song.ins[prevIns]);
+
           wantScrollList=true;
           MARK_MODIFIED;
           wavePreviewInit=true;
@@ -756,7 +790,7 @@ void FurnaceGUI::doAction(int what) {
 
       curWave=e->addWave();
       if (curWave==-1) {
-        showError(_L("too many wavetables!##sgda0"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgda0"));
       } else {
         wantScrollList=true;
         e->song.wave[curWave]->len=finalWidth;
@@ -774,7 +808,7 @@ void FurnaceGUI::doAction(int what) {
         int prevWave=curWave;
         curWave=e->addWave();
         if (curWave==-1) {
-          showError(_L("too many wavetables!##sgda1"));
+          showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgda1"));
         } else {
           (*e->song.wave[curWave])=(*e->song.wave[prevWave]);
           wantScrollList=true;
@@ -824,6 +858,7 @@ void FurnaceGUI::doAction(int what) {
       break;
     case GUI_ACTION_WAVE_LIST_EDIT:
       waveEditOpen=true;
+      localWaveList = false;
       break;
     case GUI_ACTION_WAVE_LIST_UP:
       if (--curWave<0) curWave=0;
@@ -836,6 +871,120 @@ void FurnaceGUI::doAction(int what) {
     case GUI_ACTION_WAVE_LIST_DIR_VIEW:
       waveListDir=!waveListDir;
       break;
+    case GUI_ACTION_WAVE_LIST_PASTE_CLIPBOARD:
+      e->pasteWaves(curWave);
+      break;
+
+    case GUI_ACTION_LOCAL_WAVE_LIST_ADD: {
+      waveSizeList.clear();
+      for (int i=0; i<e->song.systemLen; i++) {
+        const DivSysDef* sysDef=e->getSystemDef(e->song.system[i]);
+        if (sysDef==NULL) continue;
+
+        if (sysDef->waveHeight==0) continue;
+        if (sysDef->waveWidth==0) {
+          // add three preset sizes
+          waveSizeList.push_back(FurnaceGUIWaveSizeEntry(32,sysDef->waveHeight,sysDef->name));
+          waveSizeList.push_back(FurnaceGUIWaveSizeEntry(64,sysDef->waveHeight,sysDef->name));
+          waveSizeList.push_back(FurnaceGUIWaveSizeEntry(128,sysDef->waveHeight,sysDef->name));
+        } else {
+          waveSizeList.push_back(FurnaceGUIWaveSizeEntry(sysDef->waveWidth,sysDef->waveHeight,sysDef->name));
+        }
+      }
+
+      int finalWidth=32;
+      int finalHeight=32;
+      if (waveSizeList.size()==1) {
+        finalWidth=waveSizeList[0].width;
+        finalHeight=waveSizeList[0].height;
+      } else if (waveSizeList.size()>1) {
+        displayLocalWaveSizeList=true;
+        break;
+      }
+
+      curLocalWave=e->addLocalWave(curIns);
+      if (curLocalWave==-1) {
+        showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgda0"));
+      } else {
+        wantScrollList=true;
+        e->song.ins[curIns]->std.local_waves[curLocalWave]->len=finalWidth;
+        e->song.ins[curIns]->std.local_waves[curLocalWave]->max=finalHeight-1;
+        for (int j=0; j<finalWidth; j++) {
+          e->song.ins[curIns]->std.local_waves[curLocalWave]->data[j]=(j*finalHeight)/finalWidth;
+        }
+        MARK_MODIFIED;
+        RESET_WAVE_MACRO_ZOOM;
+      }
+      break;
+    }
+    case GUI_ACTION_LOCAL_WAVE_LIST_DUPLICATE:
+      if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) {
+        int prevWave=curLocalWave;
+        curLocalWave=e->addLocalWave(curIns);
+        if (curLocalWave==-1) {
+          showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgda1"));
+        } else {
+          (*e->song.ins[curIns]->std.local_waves[curLocalWave])=(*e->song.ins[curIns]->std.local_waves[prevWave]);
+          wantScrollList=true;
+          MARK_MODIFIED;
+          RESET_WAVE_MACRO_ZOOM;
+        }
+      }
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_OPEN:
+      openFileDialog(GUI_FILE_LOCAL_WAVE_OPEN);
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_OPEN_REPLACE:
+      openFileDialog(GUI_FILE_LOCAL_WAVE_OPEN_REPLACE);
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_SAVE:
+      if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) openFileDialog(GUI_FILE_LOCAL_WAVE_SAVE);
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_SAVE_DMW:
+      if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) openFileDialog(GUI_FILE_LOCAL_WAVE_SAVE_DMW);
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_SAVE_RAW:
+      if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) openFileDialog(GUI_FILE_LOCAL_WAVE_SAVE_RAW);
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_MOVE_UP:
+      if (e->moveLocalWaveUp(curIns, curLocalWave)) {
+        curLocalWave--;
+        wantScrollList=true;
+        MARK_MODIFIED;
+      }
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_MOVE_DOWN:
+      if (e->moveLocalWaveDown(curIns, curLocalWave)) {
+        curLocalWave++;
+        wantScrollList=true;
+        MARK_MODIFIED;
+      }
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_EDIT:
+      waveEditOpen=true;
+      localWaveList = true;
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_UP:
+      if (--curLocalWave<0) curLocalWave=0;
+      wantScrollList=true;
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_DOWN:
+      if (++curLocalWave>=(int)e->song.ins[curIns]->std.local_waves.size()) curLocalWave=((int)e->song.ins[curIns]->std.local_waves.size())-1;
+      wantScrollList=true;
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_DELETE:
+      if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) {
+        e->delLocalWave(curLocalWave, e->song.ins[curIns]);
+        MARK_MODIFIED;
+        wantScrollList=true;
+        if (curLocalWave>=(int)e->song.ins[curIns]->std.local_waves.size()) {
+          curLocalWave--;
+        }
+      }
+      break;
+    case GUI_ACTION_LOCAL_WAVE_LIST_PASTE_CLIPBOARD:
+      e->pasteWaves(curLocalWave, true, curIns);
+      break;
 
     case GUI_ACTION_SAMPLE_LIST_ADD:
     {
@@ -847,7 +996,7 @@ void FurnaceGUI::doAction(int what) {
         }
 
         if (curSample == -1) {
-            showError(_L("too many samples!##sgda0"));
+            showError(settings.language == DIV_LANG_ENGLISH ? "too many samples!" : _L("too many samples!##sgda0"));
         }
         else {
             wantScrollList = true;
@@ -867,7 +1016,7 @@ void FurnaceGUI::doAction(int what) {
           cSample->name=fmt::sprintf(_L("Sample %d"),curSample);
         }
         if (curSample==-1) {
-          showError(_L("too many samples!##sgda1"));
+          showError(settings.language == DIV_LANG_ENGLISH ? "too many samples!" : _L("too many samples!##sgda1"));
         } else {
           e->lockEngine([this,prevSample]() {
             DivSample* sample=e->getSample(curSample);
@@ -1071,7 +1220,7 @@ void FurnaceGUI::doAction(int what) {
 
       e->lockEngine([this,sample,pos]() {
         if (!sample->insert(pos,sampleClipboardLen)) {
-          showError(_L("couldn't paste! make sure your sample is 8 or 16-bit.##sgda"));
+          showError(settings.language == DIV_LANG_ENGLISH ? "couldn't paste! make sure your sample is 8 or 16-bit." : _L("couldn't paste! make sure your sample is 8 or 16-bit.##sgda"));
         } else {
           if (sample->depth==DIV_SAMPLE_DEPTH_8BIT) {
             for (size_t i=0; i<sampleClipboardLen; i++) {
@@ -1538,7 +1687,7 @@ void FurnaceGUI::doAction(int what) {
       DivSample* sample=e->song.sample[curSample];
       curIns=e->addInstrument(cursor.xCoarse);
       if (curIns==-1) {
-        showError(_L("too many instruments!##sgda2"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "too many instruments!" : _L("too many instruments!##sgda2"));
       } else {
         e->song.ins[curIns]->type=insType;
         e->song.ins[curIns]->name=sample->name;
@@ -1573,13 +1722,13 @@ void FurnaceGUI::doAction(int what) {
       DivSample* sample=e->song.sample[curSample];
       SAMPLE_OP_BEGIN;
       if (end-start<1) {
-        showError(_L("select at least one sample!##sgda"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "select at least one sample!" : _L("select at least one sample!##sgda"));
       } else if (end-start>256) {
-        showError(_L("maximum size is 256 samples!##sgda"));
+        showError(settings.language == DIV_LANG_ENGLISH ? "maximum size is 256 samples!" : _L("maximum size is 256 samples!##sgda"));
       } else {
         curWave=e->addWave();
         if (curWave==-1) {
-          showError(_L("too many wavetables!##sgda2"));
+          showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgda2"));
         } else {
           DivWavetable* wave=e->song.wave[curWave];
           wave->min=0;

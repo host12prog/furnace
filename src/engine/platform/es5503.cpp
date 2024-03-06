@@ -215,7 +215,7 @@ void DivPlatformES5503::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had && !chan[i].pcm) {
       if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || chan[i].ws.activeChanged()) {
         chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
-        chan[i].ws.changeWave1(chan[i].wave);
+        chan[i].ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_ES5503));
         if (!chan[i].keyOff) chan[i].keyOn=true;
       }
     }
@@ -464,7 +464,7 @@ int DivPlatformES5503::dispatch(DivCommand c) {
           chan[c.chan].wave=0;
         }
 
-        chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+        chan[c.chan].ws.changeWave1(chan[c.chan].wave, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_ES5503));
 
         chan[c.chan].ws.init(ins,256,255,chan[c.chan].insChanged);
         chan[c.chan].insChanged=false;
@@ -825,6 +825,11 @@ void DivPlatformES5503::renderSamples(int sysID) {
         continue;
       }
 
+      if(s->length8 == 0)
+      {
+        sampleLoaded[i] = true; //so no warning for out of memory for empty samples
+      }
+
       int length = s->getLoopEndPosition(DIV_SAMPLE_DEPTH_8BIT);
 
       if(length < 0) break;
@@ -952,7 +957,7 @@ bool DivPlatformES5503::keyOffAffectsArp(int ch) {
 void DivPlatformES5503::notifyWaveChange(int wave) {
   for (int i=0; i<32; i++) {
     if (chan[i].wave==wave) {
-      chan[i].ws.changeWave1(wave);
+      chan[i].ws.changeWave1(wave & 0xff, false, (wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_ES5503));
       updateWave(i);
     }
   }

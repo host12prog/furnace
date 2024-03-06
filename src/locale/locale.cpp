@@ -3,6 +3,7 @@
 #include "template.h"
 #include "russian.h"
 #include "polish.h"
+#include "portuguese.h"
 
 const char* languages[] = 
 {
@@ -87,7 +88,7 @@ void DivLocale::setLanguage(DivLang lang) //if false, just update ImGui localiza
             getPluralIndex = &getPluralIndexRussian;
             break;
         }
-
+        
         case DIV_LANG_POLISH:
         {
             addTranslationsPolish();
@@ -95,14 +96,13 @@ void DivLocale::setLanguage(DivLang lang) //if false, just update ImGui localiza
             break;
         }
         
-         case DIV_LANG_PORTUGUESE:
+        case DIV_LANG_PORTUGUESE:
         {
             addTranslationsPortuguese();
             getPluralIndex = &getPluralIndexPortuguese;
             break;
         }
-
-
+        
         /*case DIV_LANG_TEMPLATE:
         {
             addTranslationsTemplate();

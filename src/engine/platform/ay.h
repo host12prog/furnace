@@ -90,6 +90,7 @@ class DivPlatformAY8910: public DivDispatch {
     };
     FixedQueue<QueuedWrite,128> writes;
     ay8910_device* ay;
+    bool raw_freq[3];
     DivDispatchOscBuffer* oscBuf[3];
     unsigned char regPool[16];
     unsigned char lastBusy;

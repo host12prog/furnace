@@ -68,7 +68,7 @@ void DivPlatformDave::acquire(short** buf, size_t len) {
     for (int i=4; i<6; i++) {
       if (chan[i].dacSample!=-1) {
         chan[i].dacPeriod+=chan[i].dacRate;
-        if (chan[i].dacPeriod>rate) {
+        while (chan[i].dacPeriod>rate) {
           DivSample* s=parent->getSample(chan[i].dacSample);
           if (s->samples<=0) {
             chan[i].dacSample=-1;
@@ -184,6 +184,16 @@ void DivPlatformDave::tick(bool sysTick) {
       chan[i].lowPass=chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val&8;
       chan[i].freqChanged=true;
     }
+    bool raw_freq = false;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->had) 
+    {
+      if(i < 3) //only for tone channels
+      {
+        chan[i].freq = 4095 - chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->val;
+        chan[i].freqChanged=true;
+        raw_freq = true;
+      }
+    }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
       if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->mode) {
         chan[i].pitch2+=chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
@@ -238,28 +248,56 @@ void DivPlatformDave::tick(bool sysTick) {
         }
         chan[i].dacRate=chan[i].freq*off;
       } else {
-        chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,chan[i].pitch2,chipClock,CHIP_DIVIDER);
+        if(!raw_freq)
+        {
+          chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,chan[i].pitch2,chipClock,CHIP_DIVIDER);
+        }
       }
 
       if (i<3) {
         switch (chan[i].wave) {
           case 0:
-            chan[i].freq>>=2;
+          {
+            if(!raw_freq)
+            {
+              chan[i].freq>>=2;
+            }
             break;
+          }
           case 1:
-            chan[i].freq/=5;
-            chan[i].freq>>=1;
+          {
+            if(!raw_freq)
+            {
+              chan[i].freq/=5;
+              chan[i].freq>>=1;
+            }
             break;
+          }
           case 2:
-            chan[i].freq/=15;
-            chan[i].freq>>=1;
+          {
+            if(!raw_freq)
+            {
+              chan[i].freq/=15;
+              chan[i].freq>>=1;
+            }
             break;
+          }
           case 3:
-            chan[i].freq/=63;
+          {
+            if(!raw_freq)
+            {
+              chan[i].freq/=63;
+            }
             break;
+          }
           case 4:
-            chan[i].freq>>=5;
+          {
+            if(!raw_freq)
+            {
+              chan[i].freq>>=5;
+            }
             break;
+          }
         }
       }
 
@@ -460,7 +498,7 @@ int DivPlatformDave::dispatch(DivCommand c) {
       chan[c.chan].inPorta=c.value;
       break;
     case DIV_CMD_GET_VOLMAX:
-      return 31;
+      return 63;
       break;
     case DIV_CMD_MACRO_OFF:
       chan[c.chan].std.mask(c.value,true);
@@ -513,7 +551,13 @@ unsigned short DivPlatformDave::getPan(int ch) {
 // TODO: the rest
 DivChannelPair DivPlatformDave::getPaired(int ch) {
   if (chan[ch].highPass) {
-    DivChannelPair("high",(ch+1)&3);
+    return DivChannelPair("high",(ch+1)&3);
+  }
+  if (chan[3].lowPass && ch == 3) {
+    return DivChannelPair("low",2); //lowpass is only between noise chan and chan 2
+  }
+  if (chan[ch].ringMod) {
+    return DivChannelPair("ring",(ch+2)&3);
   }
   return DivChannelPair();
 }

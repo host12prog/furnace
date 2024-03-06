@@ -65,7 +65,7 @@ DivSystem FurnaceGUI::systemPicker(bool full_width) {
   }
 
   ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-  if (ImGui::InputTextWithHint("##SysSearch",_L("Search...##sgsp"),&sysSearchQuery)) reissueSearch=true;
+  if (ImGui::InputTextWithHint("##SysSearch",settings.language == DIV_LANG_ENGLISH ? "Search..." : _L("Search...##sgsp"),&sysSearchQuery)) reissueSearch=true;
   if (ImGui::BeginTabBar("SysCats")) {
     for (int i=0; chipCategories[i]; i++) {
       if (ImGui::BeginTabItem(_L(chipCategoryNames[i]))) {

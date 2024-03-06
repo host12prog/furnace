@@ -33,7 +33,9 @@ void FurnaceGUI::drawPatManager() {
   unsigned char isUsed[DIV_MAX_PATTERNS];
   bool isNull[DIV_MAX_PATTERNS];
   if (ImGui::Begin("Pattern Manager",&patManagerOpen,globalWinFlags, _L("Pattern Manager###Pattern Manager"))) {
-    ImGui::Text(_L("Global Tasks##sgpm"));
+    ImGui::Text(_L("Global Tasks:##sgpm"));
+
+    ImGui::SameLine();
 
     if (ImGui::Button(_L("De-duplicate patterns##sgpm"))) {
       e->lockEngine([this]() {
@@ -45,6 +47,20 @@ void FurnaceGUI::drawPatManager() {
     if (ImGui::Button(_L("Re-arrange patterns##sgpm"))) {
       e->lockEngine([this]() {
         e->curSubSong->rearrangePatterns();
+      });
+      MARK_MODIFIED;
+    }
+    //ImGui::SameLine();
+    if (ImGui::Button(_L("Sort orders##sgpm"))) {
+      e->lockEngine([this]() {
+        e->curSubSong->sortOrders();
+      });
+      MARK_MODIFIED;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button(_L("Make patterns unique##sgpm"))) {
+      e->lockEngine([this]() {
+        e->curSubSong->makePatUnique();
       });
       MARK_MODIFIED;
     }
@@ -63,7 +79,7 @@ void FurnaceGUI::drawPatManager() {
           isNull[j]=(e->curSubSong->pat[i].data[j]==NULL);
         }
         ImGui::TableNextColumn();
-        ImGui::Text("%s",e->getChannelShortName(i));
+        ImGui::Text("%s",settings.translate_short_channel_names ? _L(e->getChannelShortName(i)) : e->getChannelShortName(i));
 
         ImGui::PushID(1000+i);
         for (int k=0; k<DIV_MAX_PATTERNS; k++) {

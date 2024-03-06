@@ -23,3 +23,4 @@ the TIA instrument editor consists of these macros:
   - `E`: low pure buzzy
   - `F`: low reedy
 - **Pitch**: "fine" pitch. fine in quotes as TIA doesn't have true pitch control at all.
+- **Raw Period**: directly sets the period register values. The smaller the value, the higher the pitch.

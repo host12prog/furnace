@@ -36,6 +36,7 @@ however, effects are continuous, which means you only need to type it once and t
 - `EAxx`: **Toggle legato.** while on, new notes instantly change the pitch of the currently playing sound instead of starting it over.
 - `00xy`: **Arpeggio.** this effect produces a rapid cycle between the current note, the note plus `x` semitones and the note plus `y` semitones.
 - `E0xx`: **Set arpeggio speed.** this sets the number of ticks between arpeggio values. default is 1.
+- `E6xy`: **Delayed note transpose.** (works like `Txy` in FamiTracker) instantly transposes note up or down after certain number of ticks. `x` dictates the delay and the direction of transpose: when `x` is between `0` and `7` note is transposed *up* after `x` ticks. when `x` is between `8` and `F` note is transposed *down* after `(x - 7)` ticks. so the MSB of `x` dictates the direction. `y` is how many semitones to transpose up/down.
   - ---
 - `04xy`: **Vibrato.** changes pitch to be "wavy" with a sine LFO. `x` is the speed, while `y` is the depth.
   - maximum vibrato depth is ±1 semitone.
@@ -184,8 +185,8 @@ ex | FM     | OPM       | OPZ       | OPLL  | AY-3-8910  | AY8930     | Lynx    
  B | FB     | FB        | FB        |       |            | Noise AND  |          |              |
  C | FMS    | FMS       | FMS       |       |            | Noise OR   |          |              |
  D | AMS    | AMS       | AMS       |       |            |            |          |              |
- 4 | OpMask | OpMask    |           |       |            |            |          | Special      |
- 5 |        |           | AMD2      |       |            |            |          | Attack       |
+ 4 | OpMask | OpMask    |           |       |  Raw freq. |  Raw freq. |          | Special      |
+ 5 |        |           | AMD2      |       |Raw env. fr.|Raw env. fr.|          | Attack       |
  6 |        |           | PMD2      |       |            |            |          | Decay        |
  7 |        |           | LFO2Speed |       |            |            |          | Sustain      |
  8 |        |           | LFO2Shape |       |            |            |          | Release      |
@@ -207,19 +208,39 @@ ex | SAA1099  | X1-010     | Namco 163  | FDS       | Sound Unit | ES5506    | M
  7 |          |            |            |           |            | EnvRampK2 |          |
  8 |          |            |            |           |            | Env Mode  |          |
 
-ex | QSound       | SNES      | MSM5232   |    ESFM    |   ES5503    |
----|--------------|-----------|-----------|------------|-------------|
- D | Echo Level   | NoiseFreq | GroupCtrl | OP4NoiMode |  Osc. mode  |
- W |              | Waveform  |           |  Waveform  |  Waveform   |
- 1 | EchoFeedback | Special   | GroupAtk  |            |  Wave pos   |
- 2 | Echo Length  | Gain      | GroupDec  |            | Osc. output |
- 3 |              |           | Noise     |            |             |
- A |              |           |           |            |             |
- B |              |           |           |            |             |
- C |              |           |           |            |             |
- D |              |           |           |            |             |
- 4 |              |           |           |            |             |
- 5 |              |           |           |            |             |
- 6 |              |           |           |            |             |
- 7 |              |           |           |            |             |
- 8 |              |           |           |            |             |
+ex | QSound       | SNES      | MSM5232   |    ESFM    |   ES5503    |    DAVE     |     TIA     |
+---|--------------|-----------|-----------|------------|-------------|-------------|-------------|
+ D | Echo Level   | NoiseFreq | GroupCtrl | OP4NoiMode |  Osc. mode  |  NoiseFreq  |             |
+ W |              | Waveform  |           |  Waveform  |  Waveform   |  Waveform   |             |
+ 1 | EchoFeedback | Special   | GroupAtk  |            |  Wave pos   |   Control   |  Raw freq.  |
+ 2 | Echo Length  | Gain      | GroupDec  |            | Osc. output |  Raw freq.  |             |
+ 3 |              |           | Noise     |            |             |             |             |
+ A |              |           |           |            |             |             |             |
+ B |              |           |           |            |             |             |             |
+ C |              |           |           |            |             |             |             |
+ D |              |           |           |            |             |             |             |
+ 4 |              |           |           |            |             |             |             |
+ 5 |              |           |           |            |             |             |             |
+ 6 |              |           |           |            |             |             |             |
+ 7 |              |           |           |            |             |             |             |
+ 8 |              |           |           |            |             |             |             |
+
+ex |   SID2       |    POKEY     |
+---|--------------|--------------|
+ D | Duty         |    AUDCTL    |
+ W | Waveform     |   Waveform   |
+ 1 | FilterMode   |   Raw freq.  |
+ 2 | Resonance    |              |
+ 3 | Filt. on/off |              |
+ A | Cutoff       |              |
+ B |              |              |
+ C |              |              |
+ D |              |              |
+ 4 | Special      |              |
+ 5 | Attack       |              |
+ 6 | Decay        |              |
+ 7 | Sustain      |              |
+ 8 | Release      |              |
+ 9 | Env. reset   |              |
+10 | Noise mode   |              |
+11 | Wave mix mode|              |

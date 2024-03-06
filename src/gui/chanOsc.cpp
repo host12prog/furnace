@@ -49,6 +49,14 @@ const char* autoColsTypes[]={
   "Mode 3##sgco"
 };
 
+static void _drawOsc(const ImDrawList* drawList, const ImDrawCmd* cmd) {
+  if (cmd!=NULL) {
+    if (cmd->UserCallbackData!=NULL) {
+      ((FurnaceGUI*)(((PendingDrawOsc*)cmd->UserCallbackData)->gui))->runPendingDrawOsc((PendingDrawOsc*)cmd->UserCallbackData);
+    }
+  }
+}
+
 float FurnaceGUI::computeGradPos(int type, int chan) {
   switch (type) {
     case GUI_OSCREF_NONE:
@@ -175,16 +183,30 @@ void FurnaceGUI::drawChanOsc() {
         ImGui::TableNextColumn();
         if (ImGui::Checkbox(_L("Randomize phase on note##sgco"),&chanOscRandomPhase)) {
         }
-        ImGui::EndTable();
-      }
 
-      ImGui::AlignTextToFramePadding();
-      ImGui::Text(_L("Amplitude##sgco"));
-      ImGui::SameLine();
-      ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-      if (CWSliderFloat("##COSAmp",&chanOscAmplify,0.0f,2.0f)) {
-        if (chanOscAmplify<0.0f) chanOscAmplify=0.0f;
-        if (chanOscAmplify>2.0f) chanOscAmplify=2.0f;
+        ImGui::TableNextRow();
+        ImGui::TableNextColumn();
+        ImGui::AlignTextToFramePadding();
+        ImGui::Text(_L("Amplitude##sgco"));
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+        if (CWSliderFloat("##COSAmp",&chanOscAmplify,0.0f,2.0f)) {
+          if (chanOscAmplify<0.0f) chanOscAmplify=0.0f;
+          if (chanOscAmplify>2.0f) chanOscAmplify=2.0f;
+        }
+
+        ImGui::TableNextColumn();
+        ImGui::AlignTextToFramePadding();
+        ImGui::Text(_L("Line size##sgco"));
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+        if (CWSliderFloat("##COSLine",&chanOscLineSize,0.25f,16.0f)) {
+          if (chanOscLineSize<0.25f) chanOscLineSize=0.26f;
+          if (chanOscLineSize>16.0f) chanOscLineSize=16.0f;
+        }
+
+
+        ImGui::EndTable();
       }
 
       ImGui::Checkbox(_L("Gradient##sgco"),&chanOscUseGrad);
@@ -614,9 +636,13 @@ void FurnaceGUI::drawChanOsc() {
             ImGui::ItemSize(size,style.FramePadding.y);
             if (ImGui::ItemAdd(rect,ImGui::GetID("chOscDisplay"))) {
               if (!e->isRunning()) {
-                for (unsigned short j=0; j<precision; j++) {
-                  float x=(float)j/(float)precision;
-                  waveform[j]=ImLerp(inRect.Min,inRect.Max,ImVec2(x,0.5f));
+                if (rend->supportsDrawOsc() && settings.shaderOsc) {
+                  memset(fft->oscTex,0,2048*sizeof(float));
+                } else {
+                  for (unsigned short j=0; j<precision; j++) {
+                    float x=(float)j/(float)precision;
+                    waveform[j]=ImLerp(inRect.Min,inRect.Max,ImVec2(x,0.5f));
+                  }
                 }
               } else {
                 int displaySize=(float)(buf->rate)*(chanOscWindowSize/1000.0f);
@@ -635,15 +661,27 @@ void FurnaceGUI::drawChanOsc() {
                   }
                   if (maxavg>0.0000001) maxavg=0.5/maxavg;
 
-                  for (unsigned short j=0; j<precision; j++) {
-                    float x=(float)j/(float)precision;
-                    float y;
-                    if (j>=precision/2) {
-                      y=fft->inBuf[((j-(precision/2))*FURNACE_FFT_SIZE*2)/(precision)];
-                    } else {
-                      y=fft->corrBuf[(j*FURNACE_FFT_SIZE)/precision]*maxavg;
+                  if (rend->supportsDrawOsc() && settings.shaderOsc) {
+                    for (unsigned short j=0; j<precision && j<2048; j++) {
+                      float y;
+                      if (j>=precision/2) {
+                        y=fft->inBuf[((j-(precision/2))*FURNACE_FFT_SIZE*2)/(precision)];
+                      } else {
+                        y=fft->corrBuf[(j*FURNACE_FFT_SIZE)/precision]*maxavg;
+                      }
+                      fft->oscTex[j]=y*2.0;
                     }
-                    waveform[j]=ImLerp(inRect.Min,inRect.Max,ImVec2(x,0.5f-y));
+                  } else {
+                    for (unsigned short j=0; j<precision; j++) {
+                      float x=(float)j/(float)precision;
+                      float y;
+                      if (j>=precision/2) {
+                        y=fft->inBuf[((j-(precision/2))*FURNACE_FFT_SIZE*2)/(precision)];
+                      } else {
+                        y=fft->corrBuf[(j*FURNACE_FFT_SIZE)/precision]*maxavg;
+                      }
+                      waveform[j]=ImLerp(inRect.Min,inRect.Max,ImVec2(x,0.5f-y));
+                    }
                   }
                   if (fft->loudEnough) {
                     String cPhase=fmt::sprintf("\n%.1f (b: %d t: %d)",fft->waveLen,fft->waveLenBottom,fft->waveLenTop);
@@ -671,14 +709,26 @@ void FurnaceGUI::drawChanOsc() {
                     if (maxLevel<y) maxLevel=y;
                   }
                   dcOff=(minLevel+maxLevel)*0.5f;
-                  for (unsigned short j=0; j<precision; j++) {
-                    float x=(float)j/(float)precision;
-                    float y=(float)buf->data[(unsigned short)(fft->needle+(j*displaySize/precision))]/32768.0f;
-                    y-=dcOff;
-                    if (y<-0.5f) y=-0.5f;
-                    if (y>0.5f) y=0.5f;
-                    y*=chanOscAmplify;
-                    waveform[j]=ImLerp(inRect.Min,inRect.Max,ImVec2(x,0.5f-y));
+
+                  if (rend->supportsDrawOsc() && settings.shaderOsc) {
+                    for (unsigned short j=0; j<precision; j++) {
+                      float y=(float)buf->data[(unsigned short)(fft->needle+(j*displaySize/precision))]/32768.0f;
+                      y-=dcOff;
+                      if (y<-0.5f) y=-0.5f;
+                      if (y>0.5f) y=0.5f;
+                      y*=chanOscAmplify*2.0f;
+                      fft->oscTex[j]=y;
+                    }
+                  } else {
+                    for (unsigned short j=0; j<precision; j++) {
+                      float x=(float)j/(float)precision;
+                      float y=(float)buf->data[(unsigned short)(fft->needle+(j*displaySize/precision))]/32768.0f;
+                      y-=dcOff;
+                      if (y<-0.5f) y=-0.5f;
+                      if (y>0.5f) y=0.5f;
+                      y*=chanOscAmplify;
+                      waveform[j]=ImLerp(inRect.Min,inRect.Max,ImVec2(x,0.5f-y));
+                    }
                   }
                 }
               }
@@ -692,13 +742,28 @@ void FurnaceGUI::drawChanOsc() {
 
                 color=chanOscGrad.get(xVal,1.0f-yVal);
               }
-              ImGui::PushClipRect(inRect.Min,inRect.Max,false);
 
-              //ImDrawListFlags prevFlags=dl->Flags;
-              //dl->Flags&=~(ImDrawListFlags_AntiAliasedLines|ImDrawListFlags_AntiAliasedLinesUseTex);
-              dl->AddPolyline(waveform,precision,color,ImDrawFlags_None,dpiScale);
-              //dl->Flags=prevFlags;
+              if (rend->supportsDrawOsc() && settings.shaderOsc) {
+                fft->drawOp.gui=this;
+                fft->drawOp.data=fft->oscTex;
+                fft->drawOp.len=precision;
+                fft->drawOp.pos0=inRect.Min;
+                fft->drawOp.pos1=inRect.Max;
+                fft->drawOp.color=ImGui::ColorConvertU32ToFloat4(color);
+                fft->drawOp.lineSize=dpiScale*chanOscLineSize;
 
+                dl->AddCallback(_drawOsc,&fft->drawOp);
+                dl->AddCallback(ImDrawCallback_ResetRenderState,NULL);
+              } else {
+                //ImGui::PushClipRect(inRect.Min,inRect.Max,false);
+                //ImDrawListFlags prevFlags=dl->Flags;
+                //dl->Flags&=~(ImDrawListFlags_AntiAliasedLines|ImDrawListFlags_AntiAliasedLinesUseTex);
+                dl->AddPolyline(waveform,precision,color,ImDrawFlags_None,dpiScale*chanOscLineSize);
+                //dl->Flags=prevFlags;
+                //ImGui::PopClipRect();
+              }
+
+              //ImGui::PushClipRect(inRect.Min,inRect.Max,false);
               if (!chanOscTextFormat.empty()) {
                 String text;
                 bool inFormat=false;
@@ -707,11 +772,37 @@ void FurnaceGUI::drawChanOsc() {
                   if (inFormat) {
                     switch (j) {
                       case 'c':
-                        text+=e->getChannelName(ch);
+                      {
+                        String teeemp;
+                        if(settings.translate_channel_names_osc)
+                        {
+                          teeemp+=_L(e->getChannelName(ch));
+                        }
+                        else
+                        {
+                          teeemp+=e->getChannelName(ch);
+                        }
+
+                        text += teeemp.substr(0, teeemp.find("##"));
+                        
                         break;
+                      }
                       case 'C':
-                        text+=e->getChannelShortName(ch);
+                      {
+                        String teeemp;
+                        if(settings.translate_short_channel_names)
+                        {
+                          teeemp+=_L(e->getChannelShortName(ch));
+                        }
+                        else
+                        {
+                          teeemp+=e->getChannelShortName(ch);
+                        }
+
+                        text += teeemp.substr(0, teeemp.find("##"));
+                        
                         break;
+                      }
                       case 'd':
                         text+=fmt::sprintf("%d",ch);
                         break;
@@ -742,11 +833,15 @@ void FurnaceGUI::drawChanOsc() {
                         break;
                       }
                       case 's': {
-                        text+=e->getSystemName(e->sysOfChan[ch]);
+                        String teeeemp = e->getSystemName(e->sysOfChan[ch]);
+                        String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
+                        text+=temmrrrp;
                         break;
                       }
                       case 'p': {
-                        text+=FurnaceGUI::getSystemPartNumber(e->sysOfChan[ch],e->song.systemFlags[e->dispatchOfChan[ch]]);
+                        String teeeemp = FurnaceGUI::getSystemPartNumber(e->sysOfChan[ch],e->song.systemFlags[e->dispatchOfChan[ch]]);
+                        String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
+                        text+=temmrrrp;
                         break;
                       }
                       case 'S': {
@@ -806,7 +901,7 @@ void FurnaceGUI::drawChanOsc() {
                 dl->AddText(ImLerp(inRect.Min,inRect.Max,ImVec2(0.0f,0.0f)),ImGui::GetColorU32(chanOscTextColor),text.c_str());
               }
 
-              ImGui::PopClipRect();
+              //ImGui::PopClipRect();
             }
           }
         }

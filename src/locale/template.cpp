@@ -48,6 +48,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgch  src/gui/channels.cpp
     //   sgco  src/gui/chanOsc.cpp
     //   sgcl  src/gui/clock.cpp
+    //   sgcp  src/gui/commandPalette.cpp
     //   sgcf  src/gui/compatFlags.cpp
     //   sgdl  src/gui/dataList.cpp
     //   sgda  src/gui/doAction.cpp
@@ -68,6 +69,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgmm  src/gui/midiMap.cpp
     //   sgmx  src/gui/mixer.cpp
     //   sgns  src/gui/newSong.cpp
+    //   sgme  src/gui/memory.cpp
     //   sgor  src/gui/orders.cpp
     //   sgos  src/gui/osc.cpp
     //   sgpm  src/gui/patManager.cpp
@@ -109,6 +111,7 @@ void DivLocale::addTranslationsTemplate()
     strings["-- additional feedback/fixes --##sgab"].plurals[0] = "=-- additional feedback/fixes --";
     strings["-- translations and related work --##sgab"].plurals[0] = "=-- translations and related work --";
     strings["LTVA1 (Russian translation)##sgab"].plurals[0] = "=LTVA1 (Russian translation)";
+    strings["Kagamiin~ (Portuguese translation)##sgab"].plurals[0] = "=Kagamiin~ (Portuguese translation)";
 
     strings["powered by:##sgab"].plurals[0] = "=powered by:";
     strings["Dear ImGui by Omar Cornut##sgab"].plurals[0] = "=Dear ImGui by Omar Cornut";
@@ -163,6 +166,7 @@ void DivLocale::addTranslationsTemplate()
     strings["ESFMu emulator by Kagamiin~##sgab"].plurals[0] = "=ESFMu emulator by Kagamiin~";
     strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] = "=PowerNoise emulator by scratchminer";
     strings["ep128emu by Istvan Varga##sgab"].plurals[0] = "=ep128emu by Istvan Varga";
+    strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] = "=SID2 emulator (modification of reSID) by LTVA";
 
     strings["greetings to:##sgab"].plurals[0] = "=greetings to:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "=NEOART Costa Rica";
@@ -224,6 +228,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Center waveform##sgco"].plurals[0] = "=Center waveform";
     strings["Randomize phase on note##sgco"].plurals[0] = "=Randomize phase on note";
     strings["Amplitude##sgco"].plurals[0] = "=Amplitude";
+    strings["Line size##sgco"].plurals[0] = "=Line size";
     strings["Gradient##sgco"].plurals[0] = "=Gradient";
     strings["Color##sgco0"].plurals[0] = "=Color";
     strings["Distance##sgco"].plurals[0] = "=Distance";
@@ -278,6 +283,18 @@ void DivLocale::addTranslationsTemplate()
     //   sgcl  src/gui/clock.cpp
 
     strings["Clock###Clock"].plurals[0] = "=Clock###Clock";
+
+    //   sgcp  src/gui/commandPalette.cpp
+
+    strings["Search...##sgcp"].plurals[0] = "=Search...";
+    strings["Search recent files...##sgcp"].plurals[0] = "=Search recent files...";
+    strings["Search instruments...##sgcp"].plurals[0] = "=Search instruments...";
+    strings["Search samples...##sgcp"].plurals[0] = "=Search samples...";
+    strings["Search instruments (to change to)...##sgcp"].plurals[0] = "=Search instruments (to change to)...";
+    strings["Search chip (to add)...##sgcp"].plurals[0] = "=Search chip (to add)...";
+    strings["Cancel##sgcp"].plurals[0] = "=Cancel";
+    strings["cannot add chip! (##sgcp"].plurals[0] = "=cannot add chip! (";
+    strings["- None -"].plurals[0] = "=- None -";
 
     //   sgcf  src/gui/compatFlags.cpp
 
@@ -341,6 +358,8 @@ void DivLocale::addTranslationsTemplate()
     strings["when enabled, arpeggio effect (00xy) position is reset on a new note.##sgcf"].plurals[0] = "=when enabled, arpeggio effect (00xy) position is reset on a new note.";
     strings["Volume scaling rounds up##sgcf"].plurals[0] = "=Volume scaling rounds up";
     strings["when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels##sgcf"].plurals[0] = "=when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels";
+    strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "=Stop NES pulse channels hardware sweep on new note";
+    strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "=Do not stop volume slide after reaching zero or full volume";
 
     //   sgdl  src/gui/dataList.cpp
 
@@ -439,13 +458,14 @@ void DivLocale::addTranslationsTemplate()
     strings["all files##sggu0"].plurals[0] = "=all files";
     strings["no backups made yet!##sggu"].plurals[0] = "=no backups made yet!";
     strings["Restore Backup##sggu"].plurals[0] = "=Restore Backup";
+    strings["Furnace or Furnace-B song##sggu"].plurals[0] = "=Furnace or Furnace-B song";
     strings["Furnace song##sggu0"].plurals[0] = "=Furnace song";
     strings["Save File##sggu0"].plurals[0] = "=Save File";
     strings["DefleMask 1.1.3 module##sggu"].plurals[0] = "=DefleMask 1.1.3 module";
     strings["Save File##sggu1"].plurals[0] = "=Save File";
     strings["DefleMask 1.0/legacy module##sggu"].plurals[0] = "=DefleMask 1.0/legacy module";
     strings["Save File##sggu2"].plurals[0] = "=Save File";
-    strings["Furnace song##sggu1"].plurals[0] = "=Furnace song";
+    strings["Furnace-B song##sggu"].plurals[0] = "=Furnace-B song";
     strings["Load Instrument##sggu"].plurals[0] = "=Load Instrument";
     strings["all compatible files##sggu1"].plurals[0] = "=all compatible files";
     strings["Furnace instrument##sggu0"].plurals[0] = "=Furnace instrument";
@@ -502,6 +522,8 @@ void DivLocale::addTranslationsTemplate()
     strings["text file##sggu1"].plurals[0] = "=text file";
     strings["Export Command Stream##sggu2"].plurals[0] = "=Export Command Stream";
     strings["binary file##sggu"].plurals[0] = "=binary file";
+    strings["Export Furnace song##sggu"].plurals[0] = "=Export Furnace song";
+    strings["Furnace song##sggu2"].plurals[0] = "=Furnace song";
     strings["Coming soon!##sggu"].plurals[0] = "=Coming soon!";
     strings["Select Font##sggu0"].plurals[0] = "=Select Font";
     strings["compatible files##sggu4"].plurals[0] = "=compatible files";
@@ -609,6 +631,7 @@ void DivLocale::addTranslationsTemplate()
     strings["find/replace##sggu"].plurals[0] = "=find/replace";
     strings["Furnace has been started in Safe Mode.\nthis means that:\n\n- software rendering is being used\n- audio output may not work\n- font loading is disabled\n\ncheck any settings which may have made Furnace start up in this mode.\nfont loading is one of these.##sggu"].plurals[0] = "=Furnace has been started in Safe Mode.\nthis means that:\n\n- software rendering is being used\n- audio output may not work\n- font loading is disabled\n\ncheck any settings which may have made Furnace start up in this mode.\nfont loading is one of these.";
     strings["Unsaved changes! Save changes before opening file?##sggu0"].plurals[0] = "=Unsaved changes! Save changes before opening file?";
+    strings["Unsaved changes! Save changes before opening file?##sggu2"].plurals[0] = "=Unsaved changes! Save changes before opening file?";
     strings["Error while loading file! (%s)##sggu0"].plurals[0] = "=Error while loading file! (%s)";
     strings["Unsaved changes! Save changes before quitting?##sggu"].plurals[0] = "=Unsaved changes! Save changes before quitting?";
     strings["error while loading fonts! please check your settings.##sggu0"].plurals[0] = "=error while loading fonts! please check your settings.";
@@ -620,7 +643,6 @@ void DivLocale::addTranslationsTemplate()
     strings["Unsaved changes! Save changes before opening another file?##sggu"].plurals[0] = "=Unsaved changes! Save changes before opening another file?";
     strings["open recent##sggu"].plurals[0] = "=open recent";
     strings["Unsaved changes! Save changes before opening file?##sggu1"].plurals[0] = "=Unsaved changes! Save changes before opening file?";
-    strings["Error while loading file! (%s)##sggu1"].plurals[0] = "=Error while loading file! (%s)";
     strings["nothing here yet##sggu"].plurals[0] = "=nothing here yet";
     strings["clear history##sggu"].plurals[0] = "=clear history";
     strings["Are you sure you want to clear the recent file list?##sggu"].plurals[0] = "=Are you sure you want to clear the recent file list?";
@@ -635,6 +657,7 @@ void DivLocale::addTranslationsTemplate()
     strings["export Amiga validation data...##sggu0"].plurals[0] = "=export Amiga validation data...";
     strings["export text...##sggu0"].plurals[0] = "=export text...";
     strings["export command stream...##sggu0"].plurals[0] = "=export command stream...";
+    strings["export Furnace module...##sggu"].plurals[0] = "=export Furnace module...";
     strings["export audio...##sggu1"].plurals[0] = "=export audio...";
     strings["export VGM...##sggu1"].plurals[0] = "=export VGM...";
     strings["export .dmf (1.1.3+)...##sggu1"].plurals[0] = "=export .dmf (1.1.3+)...";
@@ -653,9 +676,10 @@ void DivLocale::addTranslationsTemplate()
     strings["remove chip...##sggu"].plurals[0] = "=remove chip...";
     strings["Preserve channel positions##sggu1"].plurals[0] = "=Preserve channel positions";
     strings["cannot remove chip! (##sggu"].plurals[0] = "=cannot remove chip! (";
+    strings["cannot change chip! (##sggu"].plurals[0] = "=cannot change chip! (";
     strings["open built-in assets directory##sggu"].plurals[0] = "=open built-in assets directory";
     strings["restore backup##sggu"].plurals[0] = "=restore backup";
-    strings["exit##sggu"].plurals[0] = "=exit";
+    strings["exit...##sggu"].plurals[0] = "=exit...";
     strings["Unsaved changes! Save before quitting?##sggu"].plurals[0] = "=Unsaved changes! Save before quitting?";
     strings["Edit##menubar"].plurals[0] = "=Edit##menubar";
     strings["edit##menubar"].plurals[0] = "=edit##menubar";
@@ -702,6 +726,7 @@ void DivLocale::addTranslationsTemplate()
     strings["register view##sggu"].plurals[0] = "=register view";
     strings["log viewer##sggu"].plurals[0] = "=log viewer";
     strings["statistics##sggu"].plurals[0] = "=statistics";
+    strings["memory composition##sggu"].plurals[0] = "=memory composition";
     strings["spoiler##sggu"].plurals[0] = "=spoiler";
     strings["Help##menubar"].plurals[0] = "=Help##menubar";
     strings["help##menubar"].plurals[0] = "=help##menubar";
@@ -742,7 +767,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Error while loading file! (%s)##sggu3"].plurals[0] = "=Error while loading file! (%s)";
     strings["Error while saving file! (%s)##sggu2"].plurals[0] = "=Error while saving file! (%s)";
     strings["Error while saving file! (%s)##sggu3"].plurals[0] = "=Error while saving file! (%s)";
-    strings["error while saving instrument! make sure your instrument is compatible.##sggu"].plurals[0] = "=error while saving instrument! make sure your instrument is compatible.";
+    strings["error while saving instrument! only the following instrument types are supported:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS##sggu##sggu"].plurals[0] = "=error while saving instrument! only the following instrument types are supported:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS";
     strings["there were some errors while loading samples:\n#sggu"].plurals[0] = "=there were some errors while loading samples:\n";
     strings["...but you haven't selected a sample!##sggu0"].plurals[0] = "=...but you haven't selected a sample!";
     strings["could not save sample! open Log Viewer for more information.##sggu0"].plurals[0] = "=could not save sample! open Log Viewer for more information.";
@@ -759,6 +784,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Could not write ZSM! (%s)##sggu"].plurals[0] = "=Could not write ZSM! (%s)";
     strings["could not write text! (%s)##sggu"].plurals[0] = "=could not write text! (%s)";
     strings["could not write command stream! (%s)##sggu"].plurals[0] = "=could not write command stream! (%s)";
+    strings["could not write tildearrow version Furnace module! (%s)##sggu"].plurals[0] = "=could not write tildearrow version Furnace module! (%s)";
     strings["Error while loading file! (%s)##sggu4"].plurals[0] = "=Error while loading file! (%s)";
     strings["You opened: %s##sggu"].plurals[0] = "=You opened: %s";
     strings["You opened:##sggu"].plurals[0] = "=You opened:##sggu";
@@ -881,8 +907,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Speed##sggc0"].plurals[0] = "=Speed";
     strings["Panning##sggc"].plurals[0] = "=Panning";
     strings["Volume##sggc"].plurals[0] = "=Volume";
-    strings["System Primary##sggc"].plurals[0] = "=System Primary";
-    strings["System Secondary##sggc"].plurals[0] = "=System Secondary";
+    strings["System (Primary)##sggc"].plurals[0] = "=System (Primary)";
+    strings["System (Secondary)##sggc"].plurals[0] = "=System (Secondary)";
     strings["Miscellaneous##sggc"].plurals[0] = "=Miscellaneous";
     strings["Invalid##sggc"].plurals[0] = "=Invalid";
 
@@ -895,6 +921,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Export##sggc"].plurals[0] = "=Export";
     strings["Undo##sggc"].plurals[0] = "=Undo";
     strings["Redo##sggc"].plurals[0] = "=Redo";
+    strings["Exit##sggc"].plurals[0] = "=Exit";
     strings["Play/Stop (toggle)##sggc"].plurals[0] = "=Play/Stop (toggle)";
     strings["Play##sggc"].plurals[0] = "=Play";
     strings["Stop##sggc"].plurals[0] = "=Stop";
@@ -917,6 +944,12 @@ void DivLocale::addTranslationsTemplate()
     strings["Request voice from TX81Z##sggc"].plurals[0] = "=Request voice from TX81Z";
     strings["Panic##sggc"].plurals[0] = "=Panic";
     strings["Clear song data##sggc"].plurals[0] = "=Clear song data";
+    strings["Command Palette##sggc"].plurals[0] = "=Command Palette";
+    strings["Recent files (Palette)##sggc"].plurals[0] = "=Recent files (Palette)";
+    strings["Instruments (Palette)##sggc"].plurals[0] = "=Instruments (Palette)";
+    strings["Samples (Palette)##sggc"].plurals[0] = "=Samples (Palette)";
+    strings["Change instrument (Palette)##sggc"].plurals[0] = "=Change instrument (Palette)";
+    strings["Add chip (Palette)##sggc"].plurals[0] = "=Add chip (Palette)";
     strings["Edit Controls##sggc"].plurals[0] = "=Edit Controls";
     strings["Orders##sggc"].plurals[0] = "=Orders";
     strings["Instrument List##sggc"].plurals[0] = "=Instrument List";
@@ -950,6 +983,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Clock##sggc"].plurals[0] = "=Clock";
     strings["Grooves##sggc"].plurals[0] = "=Grooves";
     strings["Oscilloscope (X-Y)##sggc"].plurals[0] = "=Oscilloscope (X-Y)";
+    strings["Memory Composition##sggc"].plurals[0] = "=Memory Composition";
     strings["Collapse/expand current window##sggc"].plurals[0] = "=Collapse/expand current window";
     strings["Close current window##sggc"].plurals[0] = "=Close current window";
     strings["---Pattern##sggc"].plurals[0] = "=---Pattern";
@@ -1018,103 +1052,105 @@ void DivLocale::addTranslationsTemplate()
     strings["Change mobile scroll mode##sggc"].plurals[0] = "=Change mobile scroll mode";
     strings["Clear note input latch##sggc"].plurals[0] = "=Clear note input latch";
     strings["---Instrument list##sggc"].plurals[0] = "=---Instrument list";
-    strings["Add##sggc0"].plurals[0] = "=Add";
-    strings["Duplicate##sggc0"].plurals[0] = "=Duplicate";
-    strings["Open##sggc0"].plurals[0] = "=Open";
-    strings["Open (replace current)##sggc0"].plurals[0] = "=Open (replace current)";
-    strings["Save##sggc0"].plurals[0] = "=Save";
-    strings["Export (.dmp)##sggc"].plurals[0] = "=Export (.dmp)";
-    strings["Move up##sggc0"].plurals[0] = "=Move up";
-    strings["Move down##sggc0"].plurals[0] = "=Move down";
-    strings["Delete##sggc0"].plurals[0] = "=Delete";
-    strings["Edit##sggc0"].plurals[0] = "=Edit";
-    strings["Cursor up##sggc0"].plurals[0] = "=Cursor up";
-    strings["Cursor down##sggc0"].plurals[0] = "=Cursor down";
-    strings["Toggle folders/standard view##sggc0"].plurals[0] = "=Toggle folders/standard view";
+    strings["Add instrument##sggc0"].plurals[0] = "=Add instrument";
+    strings["Duplicate instrument##sggc0"].plurals[0] = "=Duplicate instrument";
+    strings["Open instrument##sggc0"].plurals[0] = "=Open instrument";
+    strings["Open instrument (replace current)##sggc0"].plurals[0] = "=Open instrument (replace current)";
+    strings["Save instrument##sggc0"].plurals[0] = "=Save instrument";
+    strings["Export instrument (.dmp)##sggc"].plurals[0] = "=Export instrument (.dmp)";
+    strings["Move instrument up in list##sggc0"].plurals[0] = "=Move instrument up in list";
+    strings["Move instrument down in list##sggc0"].plurals[0] = "=Move instrument down in list";
+    strings["Delete instrument##sggc0"].plurals[0] = "=Delete instrument";
+    strings["Edit instrument##sggc0"].plurals[0] = "=Edit instrument";
+    strings["Instrument cursor up##sggc0"].plurals[0] = "=Instrument cursor up";
+    strings["Instrument cursor down##sggc0"].plurals[0] = "=Instrument cursor down";
+    strings["Instruments: toggle folders/standard view##sggc0"].plurals[0] = "=Instruments: toggle folders/standard view";
     strings["---Wavetable list##sggc"].plurals[0] = "=---Wavetable list";
-    strings["Add##sggc1"].plurals[0] = "=Add";
-    strings["Duplicate##sggc1"].plurals[0] = "=Duplicate";
-    strings["Open##sggc1"].plurals[0] = "=Open";
-    strings["Open (replace current)##sggc1"].plurals[0] = "=Open (replace current)";
-    strings["Save##sggc1"].plurals[0] = "=Save";
-    strings["Save (.dmw)##sggc"].plurals[0] = "=Save (.dmw)";
-    strings["Save (raw)##sggc0"].plurals[0] = "=Save (raw)";
-    strings["Move up##sggc1"].plurals[0] = "=Move up";
-    strings["Move down##sggc1"].plurals[0] = "=Move down";
-    strings["Delete##sggc1"].plurals[0] = "=Delete";
-    strings["Edit##sggc1"].plurals[0] = "=Edit";
-    strings["Cursor up##sggc1"].plurals[0] = "=Cursor up";
-    strings["Cursor down##sggc1"].plurals[0] = "=Cursor down";
-    strings["Toggle folders/standard view##sggc1"].plurals[0] = "=Toggle folders/standard view";
+    strings["Add wavetable##sggc1"].plurals[0] = "=Add wavetable";
+    strings["Duplicate wavetable##sggc1"].plurals[0] = "=Duplicate wavetable";
+    strings["Open wavetable##sggc1"].plurals[0] = "=Open wavetable";
+    strings["Open wavetable (replace current)##sggc1"].plurals[0] = "=Open wavetable (replace current)";
+    strings["Save wavetable##sggc1"].plurals[0] = "=Save wavetable";
+    strings["Save wavetable (.dmw)##sggc"].plurals[0] = "=Save wavetable (.dmw)";
+    strings["Save wavetable (raw)##sggc0"].plurals[0] = "=Save wavetable (raw)";
+    strings["Move wavetable up in list##sggc1"].plurals[0] = "=Move wavetable up in list";
+    strings["Move wavetable down in list##sggc1"].plurals[0] = "=Move wavetable down in list";
+    strings["Delete wavetable##sggc1"].plurals[0] = "=Delete wavetable";
+    strings["Edit wavetable##sggc1"].plurals[0] = "=Edit wavetable";
+    strings["Wavetable cursor up##sggc1"].plurals[0] = "=Wavetable cursor up";
+    strings["Wavetable cursor down##sggc1"].plurals[0] = "=Wavetable cursor down";
+    strings["Wavetables: toggle folders/standard view##sggc1"].plurals[0] = "=Wavetables: toggle folders/standard view";
+    strings["Paste wavetables from clipboard##sggc"].plurals[0] = "=Paste wavetables from clipboard";
+    strings["Paste local wavetables from clipboard##sggc1"].plurals[0] = "=Paste local wavetables from clipboard";
     strings["---Sample list##sggc"].plurals[0] = "=---Sample list";
-    strings["Add##sggc2"].plurals[0] = "=Add";
-    strings["Duplicate##sggc2"].plurals[0] = "=Duplicate";
-    strings["Open##sggc2"].plurals[0] = "=Open";
-    strings["Open (replace current)##sggc2"].plurals[0] = "=Open (replace current)";
-    strings["Import raw data##sggc"].plurals[0] = "=Import raw data";
-    strings["Import raw data (replace current)##sggc"].plurals[0] = "=Import raw data (replace current)";
-    strings["Save##sggc2"].plurals[0] = "=Save";
-    strings["Save (raw)##sggc1"].plurals[0] = "=Save (raw)";
-    strings["Move up##sggc2"].plurals[0] = "=Move up";
-    strings["Move down##sggc2"].plurals[0] = "=Move down";
-    strings["Delete##sggc2"].plurals[0] = "=Delete";
-    strings["Edit##sggc2"].plurals[0] = "=Edit";
-    strings["Cursor up##sggc2"].plurals[0] = "=Cursor up";
-    strings["Cursor down##sggc2"].plurals[0] = "=Cursor down";
-    strings["Preview##sggc"].plurals[0] = "=Preview";
-    strings["Stop preview##sggc"].plurals[0] = "=Stop preview";
-    strings["Toggle folders/standard view##sggc2"].plurals[0] = "=Toggle folders/standard view";
-    strings["Make me a drum kit##sggc"].plurals[0] = "=Make me a drum kit";
-    strings["---Sample editor##sggc"].plurals[0] = "=---Sample editor";
-    strings["Edit mode: Select##sggc"].plurals[0] = "=Edit mode: Select";
-    strings["Edit mode: Draw##sggc"].plurals[0] = "=Edit mode: Draw";
-    strings["Cut##sggc1"].plurals[0] = "=Cut";
-    strings["Copy##sggc1"].plurals[0] = "=Copy";
-    strings["Paste##sggc1"].plurals[0] = "=Paste";
-    strings["Paste replace##sggc"].plurals[0] = "=Paste replace";
-    strings["Paste mix##sggc"].plurals[0] = "=Paste mix";
-    strings["Select all##sggc1"].plurals[0] = "=Select all";
-    strings["Resize##sggc"].plurals[0] = "=Resize";
-    strings["Resample##sggc"].plurals[0] = "=Resample";
-    strings["Amplify##sggc"].plurals[0] = "=Amplify";
-    strings["Normalize##sggc"].plurals[0] = "=Normalize";
-    strings["Fade in##sggc"].plurals[0] = "=Fade in";
-    strings["Fade out##sggc"].plurals[0] = "=Fade out";
-    strings["Apply silence##sggc"].plurals[0] = "=Apply silence";
-    strings["Insert silence##sggc"].plurals[0] = "=Insert silence";
-    strings["Delete##sggc3"].plurals[0] = "=Delete";
-    strings["Trim##sggc"].plurals[0] = "=Trim";
-    strings["Reverse##sggc"].plurals[0] = "=Reverse";
-    strings["Invert##sggc"].plurals[0] = "=Invert";
-    strings["Signed/unsigned exchange##sggc"].plurals[0] = "=Signed/unsigned exchange";
-    strings["Apply filter##sggc"].plurals[0] = "=Apply filter";
-    strings["Crossfade loop points##sggc"].plurals[0] = "=Crossfade loop points";
-    strings["Preview sample##sggc"].plurals[0] = "=Preview sample";
+    strings["Add sample##sggc2"].plurals[0] = "=Add sample";
+    strings["Duplicate sample##sggc2"].plurals[0] = "=Duplicate sample";
+    strings["Open sample##sggc2"].plurals[0] = "=Open sample";
+    strings["Open sample (replace current)##sggc2"].plurals[0] = "=Open sample (replace current)";
+    strings["Import raw sample data##sggc"].plurals[0] = "=Import raw sample data";
+    strings["Import raw sample data (replace current)##sggc"].plurals[0] = "=Import raw sample data (replace current)";
+    strings["Save sample##sggc2"].plurals[0] = "=Save sample";
+    strings["Save sample (raw)##sggc1"].plurals[0] = "=Save sample (raw)";
+    strings["Move sample up in list##sggc2"].plurals[0] = "=Move sample up in list";
+    strings["Move sample down in list##sggc2"].plurals[0] = "=Move sample down in list";
+    strings["Delete sample##sggc2"].plurals[0] = "=Delete sample";
+    strings["Edit sample##sggc2"].plurals[0] = "=Edit sample";
+    strings["Sample cursor up##sggc2"].plurals[0] = "=Sample cursor up";
+    strings["Sample cursor down##sggc2"].plurals[0] = "=Sample cursor down";
+    strings["Sample preview##sggc"].plurals[0] = "=Sample preview";
     strings["Stop sample preview##sggc"].plurals[0] = "=Stop sample preview";
-    strings["Zoom in##sggc"].plurals[0] = "=Zoom in";
-    strings["Zoom out##sggc"].plurals[0] = "=Zoom out";
-    strings["Toggle auto-zoom##sggc"].plurals[0] = "=Toggle auto-zoom";
-    strings["Create instrument from sample##sggc"].plurals[0] = "=Create instrument from sample";
-    strings["Set loop to selection##sggc"].plurals[0] = "=Set loop to selection";
-    strings["Create wavetable from selection##sggc"].plurals[0] = "=Create wavetable from selection";
+    strings["Samples: Toggle folders/standard view##sggc2"].plurals[0] = "=Samples: Toggle folders/standard view";
+    strings["Samples: Make me a drum kit##sggc"].plurals[0] = "=Samples: Make me a drum kit";
+    strings["---Sample editor##sggc"].plurals[0] = "=---Sample editor";
+    strings["Sample editor mode: Select##sggc"].plurals[0] = "=Sample editor mode: Select";
+    strings["Sample editor mode: Draw##sggc"].plurals[0] = "=Sample editor mode: Draw";
+    strings["Sample editor: Cut##sggc1"].plurals[0] = "=Sample editor: Cut";
+    strings["Sample editor: Copy##sggc1"].plurals[0] = "=Sample editor: Copy";
+    strings["Sample editor: Paste##sggc1"].plurals[0] = "=Sample editor: Paste";
+    strings["Sample editor: Paste replace##sggc"].plurals[0] = "=Sample editor: Paste replace";
+    strings["Sample editor: Paste mix##sggc"].plurals[0] = "=Sample editor: Paste mix";
+    strings["Sample editor: Select all##sggc1"].plurals[0] = "=Sample editor: Select all";
+    strings["Sample editor: Resize##sggc"].plurals[0] = "=Sample editor: Resize";
+    strings["Sample editor: Resample##sggc"].plurals[0] = "=Sample editor: Resample";
+    strings["Sample editor: Amplify##sggc"].plurals[0] = "=Sample editor: Amplify";
+    strings["Sample editor: Normalize##sggc"].plurals[0] = "=Sample editor: Normalize";
+    strings["Sample editor: Fade in##sggc"].plurals[0] = "=Sample editor: Fade in";
+    strings["Sample editor: Fade out##sggc"].plurals[0] = "=Sample editor: Fade out";
+    strings["Sample editor: Apply silence##sggc"].plurals[0] = "=Sample editor: Apply silence";
+    strings["Sample editor: Insert silence##sggc"].plurals[0] = "=Sample editor: Insert silence";
+    strings["Sample editor: Delete##sggc3"].plurals[0] = "=Sample editor: Delete";
+    strings["Sample editor: Trim##sggc"].plurals[0] = "=Sample editor: Trim";
+    strings["Sample editor: Reverse##sggc"].plurals[0] = "=Sample editor: Reverse";
+    strings["Sample editor: Invert##sggc"].plurals[0] = "=Sample editor: Invert";
+    strings["Sample editor: Signed/unsigned exchange##sggc"].plurals[0] = "=Sample editor: Signed/unsigned exchange";
+    strings["Sample editor: Apply filter##sggc"].plurals[0] = "=Sample editor: Apply filter";
+    strings["Sample editor: Crossfade loop points##sggc"].plurals[0] = "=Sample editor: Crossfade loop points";
+    strings["Sample editor: Preview sample##sggc"].plurals[0] = "=Sample editor: Preview sample";
+    strings["Sample editor: Stop sample preview##sggc"].plurals[0] = "=Sample editor: Stop sample preview";
+    strings["Sample editor: Zoom in##sggc"].plurals[0] = "=Sample editor: Zoom in";
+    strings["Sample editor: Zoom out##sggc"].plurals[0] = "=Sample editor: Zoom out";
+    strings["Sample editor: Toggle auto-zoom##sggc"].plurals[0] = "=Sample editor: Toggle auto-zoom";
+    strings["Sample editor: Create instrument from sample##sggc"].plurals[0] = "=Sample editor: Create instrument from sample";
+    strings["Sample editor: Set loop to selection##sggc"].plurals[0] = "=Sample editor: Set loop to selection";
+    strings["Sample editor: Create wavetable from selection##sggc"].plurals[0] = "=Sample editor: Create wavetable from selection";
     strings["---Orders##sggc"].plurals[0] = "=---Orders";
     strings["Previous order##sggc"].plurals[0] = "=Previous order";
     strings["Next order##sggc"].plurals[0] = "=Next order";
-    strings["Cursor left##sggc"].plurals[0] = "=Cursor left";
-    strings["Cursor right##sggc"].plurals[0] = "=Cursor right";
-    strings["Increase value##sggc"].plurals[0] = "=Increase value";
-    strings["Decrease value##sggc"].plurals[0] = "=Decrease value";
-    strings["Switch edit mode##sggc"].plurals[0] = "=Switch edit mode";
-    strings["Toggle alter entire row##sggc"].plurals[0] = "=Toggle alter entire row";
-    strings["Add##sggc3"].plurals[0] = "=Add";
-    strings["Duplicate##sggc3"].plurals[0] = "=Duplicate";
-    strings["Deep clone##sggc"].plurals[0] = "=Deep clone";
-    strings["Duplicate to end of song##sggc"].plurals[0] = "=Duplicate to end of song";
-    strings["Deep clone to end of song##sggc"].plurals[0] = "=Deep clone to end of song";
-    strings["Remove##sggc"].plurals[0] = "=Remove";
-    strings["Move up##sggc3"].plurals[0] = "=Move up";
-    strings["Move down##sggc3"].plurals[0] = "=Move down";
-    strings["Replay##sggc"].plurals[0] = "=Replay";
+    strings["Order cursor left##sggc"].plurals[0] = "=Order cursor left";
+    strings["Order cursor right##sggc"].plurals[0] = "=Order cursor right";
+    strings["Increase order value##sggc"].plurals[0] = "=Increase order value";
+    strings["Decrease order value##sggc"].plurals[0] = "=Decrease order value";
+    strings["Switch order edit mode##sggc"].plurals[0] = "=Switch order edit mode";
+    strings["Order: toggle alter entire row##sggc"].plurals[0] = "=Order: toggle alter entire row";
+    strings["Add order##sggc3"].plurals[0] = "=Add order";
+    strings["Duplicate order##sggc3"].plurals[0] = "=Duplicate order";
+    strings["Deep clone order##sggc"].plurals[0] = "=Deep clone order";
+    strings["Copy current order to end of song##sggc"].plurals[0] = "=Copy current order to end of song";
+    strings["Deep clone current order to end of song##sggc"].plurals[0] = "=Deep clone current order to end of song";
+    strings["Remove order##sggc"].plurals[0] = "=Remove order";
+    strings["Move order up##sggc3"].plurals[0] = "=Move order up";
+    strings["Move order down##sggc3"].plurals[0] = "=Move order down";
+    strings["Replay order##sggc"].plurals[0] = "=Replay order";
 
     strings["All chips##sggc"].plurals[0] = "=All chips";
     strings["Square##sggc"].plurals[0] = "=Square";
@@ -1270,10 +1306,13 @@ void DivLocale::addTranslationsTemplate()
 
     strings["Effect List###Effect List"].plurals[0] = "=Effect List###Effect List";
     strings["Chip at cursor: %s##sgef"].plurals[0] = "=Chip at cursor: %s";
+    strings["Search##sgef"].plurals[0] = "=Search";
+    strings["Effect types to show:##sgef"].plurals[0] = "=Effect types to show:";
     strings["All##sgef"].plurals[0] = "=All";
     strings["None##sgef"].plurals[0] = "=None";
     strings["Name##sgef"].plurals[0] = "=Name";
     strings["Description##sgef"].plurals[0] = "=Description";
+    strings["ERROR##sgef"].plurals[0] = "=ERROR";
 
     //   sgeo  src/gui/exportOptions.cpp
 
@@ -1367,11 +1406,23 @@ void DivLocale::addTranslationsTemplate()
     strings["Cancel##sgeo8"].plurals[0] = "=Cancel";
     strings["Export (binary)##sgeo"].plurals[0] = "=Export (binary)";
     strings["Export (text)##sgeo"].plurals[0] = "=Export (text)";
+    strings["this option exports a module which is\n"
+            "compatible with tildearrow Furnace app.\n\n"
+
+            "not all chips and inst macros will be supported!"].plurals[0] = 
+
+            "=this option exports a module which is\n"
+            "compatible with tildearrow Furnace app.\n\n"
+
+            "not all chips and inst macros will be supported!";
+    strings["Cancel##sgeo9"].plurals[0] = "=Cancel";
+    strings["Export##sgeo7"].plurals[0] = "=Export";
     strings["Audio##sgeo"].plurals[0] = "=Audio";
     strings["DMF (1.0/legacy)##sgeo"].plurals[0] = "=DMF (1.0/legacy)";
     strings["Amiga Validation##sgeo"].plurals[0] = "=Amiga Validation";
     strings["Text##sgeo"].plurals[0] = "=Text";
     strings["Command Stream##sgeo"].plurals[0] = "=Command Stream";
+    strings["Furnace##sgeo"].plurals[0] = "=Furnace";
     strings["congratulations! you've unlocked a secret panel.##sgeo"].plurals[0] = "=congratulations! you've unlocked a secret panel.";
     strings["Toggle hidden systems##sgeo"].plurals[0] = "=Toggle hidden systems";
     strings["Toggle all instrument types##sgeo"].plurals[0] = "=Toggle all instrument types";
@@ -1515,14 +1566,19 @@ void DivLocale::addTranslationsTemplate()
     strings["I'm feeling lucky##sgns"].plurals[0] = "=I'm feeling lucky";
     strings["Cancel##sgns"].plurals[0] = "=Cancel";
 
+    //   sgme  src/gui/memory.cpp
+
+    strings["Memory Composition###Memory Composition"].plurals[0] = "=Memory Composition###Memory Composition";
+
     //   sgor  src/gui/orders.cpp
 
+    strings["Orders###Orders"].plurals[0] = "=Orders###Orders";
     strings["Add new order##sgor"].plurals[0] = "=Add new order";
     strings["Remove order##sgor"].plurals[0] = "=Remove order";
     strings["Duplicate order (right-click to deep clone)##sgor"].plurals[0] = "=Duplicate order (right-click to deep clone)";
     strings["Move order up##sgor"].plurals[0] = "=Move order up";
     strings["Move order down##sgor"].plurals[0] = "=Move order down";
-    strings["Duplicate order at end of song (right-click to deep clone)##sgor"].plurals[0] = "=Duplicate order at end of song (right-click to deep clone)";
+    strings["Place copy of current order at end of song (right-click to deep clone)##sgor"].plurals[0] = "=Place copy of current order at end of song (right-click to deep clone)";
     strings["Order change mode: entire row##sgor"].plurals[0] = "=Order change mode: entire row";
     strings["Order change mode: one##sgor"].plurals[0] = "=Order change mode: one";
     strings["Order edit mode: Select and type (scroll vertically)##sgor"].plurals[0] = "=Order edit mode: Select and type (scroll vertically)";
@@ -1540,9 +1596,11 @@ void DivLocale::addTranslationsTemplate()
     //   sgpm  src/gui/patManager.cpp
 
     strings["Pattern Manager###Pattern Manager"].plurals[0] = "=Pattern Manager###Pattern Manager";
-    strings["Global Tasks##sgpm"].plurals[0] = "=Global Tasks";
+    strings["Global Tasks:##sgpm"].plurals[0] = "=Global Tasks:";
     strings["De-duplicate patterns##sgpm"].plurals[0] = "=De-duplicate patterns";
     strings["Re-arrange patterns##sgpm"].plurals[0] = "=Re-arrange patterns";
+    strings["Sort orders##sgpm"].plurals[0] = "=Sort orders";
+    strings["Make patterns unique##sgpm"].plurals[0] = "=Make patterns unique";
     strings["Pattern %.2X\n- not allocated##sgpm"].plurals[0] = "=Pattern %.2X\n- not allocated";
     strings["Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase##sgpm"].plurals[0] = "=Pattern %.2X\n- use count: %d (%.0f%%)\n\nright-click to erase";
 
@@ -1824,6 +1882,9 @@ void DivLocale::addTranslationsTemplate()
     strings["Yamaha YM2612 (extended channel 3)##sgpr"].plurals[0] = "=Yamaha YM2612 (extended channel 3)";
     strings["Yamaha YM2612 (OPN2) with DualPCM##sgpr"].plurals[0] = "=Yamaha YM2612 (OPN2) with DualPCM";
     strings["Yamaha YM2612 (extended channel 3) with DualPCM and CSM##sgpr"].plurals[0] = "=Yamaha YM2612 (extended channel 3) with DualPCM and CSM";
+    strings["Yamaha YMF276 (extended channel 3)##sgpr"].plurals[0] = "=Yamaha YMF276 (extended channel 3)";
+    strings["Yamaha YMF276 with DualPCM##sgpr"].plurals[0] = "=Yamaha YMF276 with DualPCM";
+    strings["Yamaha YMF276 (extended channel 3) with DualPCM and CSM##sgpr"].plurals[0] = "=Yamaha YMF276 (extended channel 3) with DualPCM and CSM";
     strings["Yamaha YM2413 (drums mode)##sgpr"].plurals[0] = "=Yamaha YM2413 (drums mode)";
     strings["Yamaha YM3438 (extended channel 3)##sgpr"].plurals[0] = "=Yamaha YM3438 (extended channel 3)";
     strings["Yamaha YM3438 (OPN2C) with DualPCM##sgpr"].plurals[0] = "=Yamaha YM3438 (OPN2C) with DualPCM";
@@ -2293,9 +2354,15 @@ void DivLocale::addTranslationsTemplate()
 
     strings["Chip Manager###Chip Manager"].plurals[0] = "=Chip Manager###Chip Manager";
     strings["Preserve channel order##sgsm"].plurals[0] = "=Preserve channel order";
+    strings["Clone channel data##sgsm"].plurals[0] = "=Clone channel data";
+    strings["Clone at end##sgsm"].plurals[0] = "=Clone at end";
     strings["Name##sgsm"].plurals[0] = "=Name";
     strings["Actions##sgsm"].plurals[0] = "=Actions";
     strings["(drag to swap chips)##sgsm"].plurals[0] = "=(drag to swap chips)";
+    strings["Clone##SysDup"].plurals[0] = "=Clone##SysDupl";
+    strings["cannot duplicate chip! (##sgsm"].plurals[0] = "=cannot duplicate chip! (";
+    strings["max number of systems is %d##sgsm"].plurals[0] = "=max number of systems is %d";
+    strings["max number of total channels is %d##sgsm"].plurals[0] = "=max number of total channels is %d";
     strings["Change##SysChange"].plurals[0] = "=Change##SysChange";
     strings["Are you sure you want to remove this chip?##sgsm"].plurals[0] = "=Are you sure you want to remove this chip?";
     strings["Remove##sgsm"].plurals[0] = "=Remove";
@@ -2425,6 +2492,27 @@ void DivLocale::addTranslationsTemplate()
     strings["(-Infinity)dB,(-Infinity)dB##sgxy"].plurals[0] = "=(-Infinity)dB,(-Infinity)dB";
     strings["(-Infinity)dB,%.1fdB##sgxy"].plurals[0] = "=(-Infinity)dB,%.1fdB";
     strings["%.1fdB,(-Infinity)dB##sgxy"].plurals[0] = "=%.1fdB,(-Infinity)dB";
+    
+    //MACRO EDITOR
+
+    //macro hover notes
+
+    strings["exponential##sgmu"].plurals[0] = "=exponential";
+    strings["linear##sgmu"].plurals[0] = "=linear";
+    strings["direct##sgmu"].plurals[0] = "=direct";
+
+    strings["Release"].plurals[0] = "=Release";
+    strings["Loop"].plurals[0] = "=Loop";
+
+    strings["HP/K2, HP/K2##sgmu"].plurals[0] = "=HP/K2, HP/K2";
+    strings["HP/K2, LP/K1##sgmu"].plurals[0] = "=HP/K2, LP/K1";
+    strings["LP/K2, LP/K2##sgmu"].plurals[0] = "=LP/K2, LP/K2";
+    strings["LP/K2, LP/K1##sgmu"].plurals[0] = "=LP/K2, LP/K1";
+
+    strings["Saw##sgmu"].plurals[0] = "=Saw";
+    strings["Square##sgmu"].plurals[0] = "=Square";
+    strings["Triangle##sgmu"].plurals[0] = "=Triangle";
+    strings["Random##sgmu"].plurals[0] = "=Random";
 
     //   sgse  src/gui/settings.cpp
 
@@ -2510,6 +2598,11 @@ void DivLocale::addTranslationsTemplate()
     strings["you're being silly, aren't you? that's enough.##sgse"].plurals[0] = "=you're being silly, aren't you? that's enough.";
     strings["what are you doing? stop!##sgse"].plurals[0] = "=what are you doing? stop!";
     strings["it is a bad idea to set this number higher than your CPU core count (%d)!##sgse"].plurals[0] = "=it is a bad idea to set this number higher than your CPU core count (%d)!";
+    strings["Oscilloscope rendering engine:##sgse"].plurals[0] = "=Oscilloscope rendering engine:";
+    strings["ImGui line plot##sgse"].plurals[0] = "=ImGui line plot";
+    strings["render using Dear ImGui's built-in line drawing functions.##sgse"].plurals[0] = "=render using Dear ImGui's built-in line drawing functions.";
+    strings["GLSL/HLSL (if available)##sgse"].plurals[0] = "=GLSL/HLSL (if available)";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL render backend.##sgse"].plurals[0] = "=render using shaders that run on the graphics card.\nonly available in OpenGL render backend.";
     strings["File##sgse"].plurals[0] = "=File";
     strings["Use system file picker##sgse"].plurals[0] = "=Use system file picker";
     strings["Number of recent files##sgse"].plurals[0] = "=Number of recent files";
@@ -2557,6 +2650,9 @@ void DivLocale::addTranslationsTemplate()
     strings["New instruments are blank##sgse"].plurals[0] = "=New instruments are blank";
     strings["Language##sgse"].plurals[0] = "=Language";
     strings["GUI language##sgse"].plurals[0] = "=GUI language";
+    strings["Translate channel names in pattern header##sgse"].plurals[0] = "=Translate channel names in pattern header";
+    strings["Translate channel names in channel oscilloscope label##sgse"].plurals[0] = "=Translate channel names in channel oscilloscope label";
+    strings["Translate short channel names (in orders and other places)##sgse"].plurals[0] = "=Translate short channel names (in orders and other places)";
     strings["test##sgse"].plurals[0] = "=test";
     strings["iulserghiueshgui##sgse"].plurals[0] = "=iulserghiueshgui";
     strings["Audio##sgse"].plurals[0] = "=Audio";
@@ -2691,6 +2787,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Pattern##sgse0"].plurals[0] = "=Pattern";
     strings["Instrument list##sgse"].plurals[0] = "=Instrument list";
     strings["Wavetable list##sgse"].plurals[0] = "=Wavetable list";
+    strings["Local wavetables list##sgse"].plurals[0] = "=Local wavetables list";
     strings["Sample list##sgse"].plurals[0] = "=Sample list";
     strings["Orders##sgse0"].plurals[0] = "=Orders";
     strings["Sample editor##sgse"].plurals[0] = "=Sample editor";
@@ -2855,6 +2952,7 @@ void DivLocale::addTranslationsTemplate()
     strings["File path##sbar1"].plurals[0] = "=File path##sbar1";
     strings["Cursor details or file path##sbar2"].plurals[0] = "=Cursor details or file path##sbar2";
     strings["Nothing##sbar3"].plurals[0] = "=Nothing##sbar3";
+    strings["Display playback status when playing##sgse"].plurals[0] = "=Display playback status when playing";
     strings["Export options layout:##sgse"].plurals[0] = "=Export options layout:";
     strings["Sub-menus in File menu##eol0"].plurals[0] = "=Sub-menus in File menu##eol0";
     strings["Modal window with tabs##eol1"].plurals[0] = "=Modal window with tabs##eol1";
@@ -2965,6 +3063,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Anti-aliased##sgse"].plurals[0] = "=Anti-aliased";
     strings["Fill entire window##sgse"].plurals[0] = "=Fill entire window";
     strings["Waveform goes out of bounds##sgse"].plurals[0] = "=Waveform goes out of bounds";
+    strings["Line size##sgse"].plurals[0] = "=Line size";
     strings["Windows##sgse"].plurals[0] = "=Windows";
     strings["Rounded window corners##sgse"].plurals[0] = "=Rounded window corners";
     strings["Rounded buttons##sgse"].plurals[0] = "=Rounded buttons";
@@ -2977,6 +3076,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Wrap text in song/subsong comments window.##sgse"].plurals[0] = "=Wrap text in song/subsong comments window.";
     strings["Frame shading in text windows##sgse"].plurals[0] = "=Frame shading in text windows";
     strings["Apply frame shading to the multiline text fields\nsuch as song/subsong info/comments.##sgse"].plurals[0] = "=Apply frame shading to the multiline text fields\nsuch as song/subsong info/comments.";
+    strings["Show chip info in chip manager##sgse"].plurals[0] = "=Show chip info in chip manager";
+    strings["Display tooltip in chip manager when hovering over the chip. Tooltip shows chip name and description.##sgse"].plurals[0] = "=Display tooltip in chip manager when hovering over the chip. Tooltip shows chip name and description.";
     strings["Color##sgse"].plurals[0] = "=Color";
     strings["Color scheme##sgse"].plurals[0] = "=Color scheme";
     strings["Import##sgse2"].plurals[0] = "=Import";
@@ -3347,6 +3448,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgiC140   src/gui/inst/c140.cpp
     //   sgiC219   src/gui/inst/c219.cpp
     //   sgiC64    src/gui/inst/c64.cpp
+    //   sgiDAVE   src/gui/inst/dave.cpp
     //   sgi5503   src/gui/inst/es5503.cpp
     //   sgiOTTO   src/gui/inst/es5506.cpp
     //   sgiESFM   src/gui/inst/esfm.cpp
@@ -3385,6 +3487,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgismpd   src/gui/inst/sampleDraw.cpp
     //   sgiSCC    src/gui/inst/scc.cpp
     //   sgiSEGA   src/gui/inst/segapcm.cpp
+    //   sgiSID2   src/gui/inst/sid2.cpp
     //   sgiSM     src/gui/inst/sm8521.cpp
     //   sgiSNES   src/gui/inst/snes.cpp
     //   sgiPSG    src/gui/inst/std.cpp
@@ -3441,6 +3544,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Pitch##sgiAY"].plurals[0] = "=Pitch";
     strings["Noise Freq##sgiAY"].plurals[0] = "=Noise Freq";
     strings["Waveform##sgiAY"].plurals[0] = "=Waveform";
+    strings["Raw Period##sgiAY"].plurals[0] = "=Raw Period";
+    strings["Raw Envelope Period##sgiAY"].plurals[0] = "=Raw Envelope Period";
     strings["Phase Reset##sgiAY"].plurals[0] = "=Phase Reset";
     strings["Envelope##sgiAY"].plurals[0] = "=Envelope";
     strings["AutoEnv Num##sgiAY"].plurals[0] = "=AutoEnv Num";
@@ -3454,6 +3559,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Pitch##sgi8930"].plurals[0] = "=Pitch";
     strings["Noise Freq##sgi8930"].plurals[0] = "=Noise Freq";
     strings["Waveform##sgi8930"].plurals[0] = "=Waveform";
+    strings["Raw Period##sgi8930"].plurals[0] = "=Raw Period";
+    strings["Raw Envelope Period##sgi8930"].plurals[0] = "=Raw Envelope Period";
     strings["Phase Reset##sgi8930"].plurals[0] = "=Phase Reset";
     strings["Duty##sgi8930"].plurals[0] = "=Duty";
     strings["Envelope##sgi8930"].plurals[0] = "=Envelope";
@@ -3551,6 +3658,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Panning (right)##sgiDAVE"].plurals[0] = "=Panning (right)";
     strings["Phase Reset##sgiDAVE"].plurals[0] = "=Phase Reset";
     strings["Control##sgiDAVE"].plurals[0] = "=Control";
+    strings["Raw Frequency##sgiDAVE"].plurals[0] = "=Raw Frequency";
 
     //   sgi5503   src/gui/inst/es5503.cpp
 
@@ -3579,7 +3687,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Filter Mode##sgiOTTO0"].plurals[0] = "=Filter Mode";
     strings["Filter K1##sgiOTTO0"].plurals[0] = "=Filter K1";
     strings["Filter K2##sgiOTTO0"].plurals[0] = "=Filter K2";
-    strings["Envelope count##sgiOTTO"].plurals[0] = "=Envelope count";
+    strings["Envelope length##sgiOTTO"].plurals[0] = "=Envelope length";
     strings["Left Volume Ramp##sgiOTTO"].plurals[0] = "=Left Volume Ramp";
     strings["Right Volume Ramp##sgiOTTO"].plurals[0] = "=Right Volume Ramp";
     strings["Filter K1 Ramp##sgiOTTO"].plurals[0] = "=Filter K1 Ramp";
@@ -4089,11 +4197,13 @@ void DivLocale::addTranslationsTemplate()
 
     //   sgiPOKEY  src/gui/inst/pokey.cpp
 
+    strings["16-bit raw period macro##sgiPOKEY"].plurals[0] = "=16-bit raw period macro";
     strings["Macros##sgiPOKEY"].plurals[0] = "=Macros";
     strings["Volume##sgiPOKEY"].plurals[0] = "=Volume";
     strings["Arpeggio##sgiPOKEY"].plurals[0] = "=Arpeggio";
     strings["Pitch##sgiPOKEY"].plurals[0] = "=Pitch";
     strings["Waveform##sgiPOKEY"].plurals[0] = "=Waveform";
+    strings["Raw Period##sgiPOKEY"].plurals[0] = "=Raw Period";
 
     //   sgiPNN    src/gui/inst/powernoise.cpp
 
@@ -4184,9 +4294,11 @@ void DivLocale::addTranslationsTemplate()
     strings["Width##sgismpd"].plurals[0] = "=Width";
     strings["Use sample map##sgismpd"].plurals[0] = "=Use sample map";
     strings["pitch##sgismpd"].plurals[0] = "=pitch";
+    strings["loop##sgismpd"].plurals[0] = "=loop";
     strings["delta##sgismpd"].plurals[0] = "=delta";
     strings["note##sgismpd"].plurals[0] = "=note";
     strings["sample name##sgismpd"].plurals[0] = "=sample name";
+    strings["L##L%d"].plurals[0] = "=L##L%d";
     strings["set entire map to this pitch##sgismpd"].plurals[0] = "=set entire map to this pitch";
     strings["set entire map to this delta counter value##sgismpd"].plurals[0] = "=set entire map to this delta counter value";
     strings["set entire map to this note##sgismpd"].plurals[0] = "=set entire map to this note";
@@ -4213,6 +4325,54 @@ void DivLocale::addTranslationsTemplate()
     strings["Panning (left)##sgiSEGA"].plurals[0] = "=Panning (left)";
     strings["Panning (right)##sgiSEGA"].plurals[0] = "=Panning (right)";
     strings["Phase Reset##sgiSEGA"].plurals[0] = "=Phase Reset";
+
+    //   sgiSID2   src/gui/inst/sid2.cpp
+
+    strings["Waveform##sgiSID2"].plurals[0] = "=Waveform";
+    strings["tri##sgiSID2"].plurals[0] = "=tri";
+    strings["saw##sgiSID2"].plurals[0] = "=saw";
+    strings["pulse##sgiSID2"].plurals[0] = "=pulse";
+    strings["noise##sgiSID2"].plurals[0] = "=noise";
+    strings["A##sgiSID2"].plurals[0] = "=A";
+    strings["D##sgiSID2"].plurals[0] = "=D";
+    strings["S##sgiSID2"].plurals[0] = "=S";
+    strings["R##sgiSID2"].plurals[0] = "=R";
+    strings["VOL##sgiSID2"].plurals[0] = "=VOL";
+    strings["Envelope##sgiSID2"].plurals[0] = "=Envelope";
+    strings["Duty##sgiSID2"].plurals[0] = "=Duty";
+    strings["Ring Modulation##sgiSID2"].plurals[0] = "=Ring Modulation";
+    strings["Oscillator Sync##sgiSID2"].plurals[0] = "=Oscillator Sync";
+    strings["Enable filter##sgiSID2"].plurals[0] = "=Enable filter";
+    strings["Initialize filter##sgiSID2"].plurals[0] = "=Initialize filter";
+    strings["Cutoff##sgiSID2"].plurals[0] = "=Cutoff";
+    strings["Resonance##sgiSID2"].plurals[0] = "=Resonance";
+    strings["Filter Mode##sgiSID2"].plurals[0] = "=Filter Mode";
+    strings["low##sgiSID2"].plurals[0] = "=low";
+    strings["band##sgiSID2"].plurals[0] = "=band";
+    strings["high##sgiSID2"].plurals[0] = "=high";
+    strings["Noise Mode##sgiSID2"].plurals[0] = "=Noise Mode";
+    strings["Wave Mix Mode##sgiSID2"].plurals[0] = "=Wave Mix Mode";
+    strings["Absolute Cutoff Macro##sgiSID2"].plurals[0] = "=Absolute Cutoff Macro";
+    strings["Absolute Duty Macro##sgiSID2"].plurals[0] = "=Absolute Duty Macro";
+    strings["Macros##sgiSID2"].plurals[0] = "=Macros";
+    strings["Volume##sgiSID2"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiSID2"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiSID2"].plurals[0] = "=Pitch";
+    strings["Duty##sgiSID21"].plurals[0] = "=Duty";
+    strings["Waveform##sgiSID21"].plurals[0] = "=Waveform";
+    strings["Noise Mode##sgiSID21"].plurals[0] = "=Noise Mode";
+    strings["Wave Mix Mode##sgiSID21"].plurals[0] = "=Wave Mix Mode";
+    strings["Cutoff##sgiSID21"].plurals[0] = "=Cutoff";
+    strings["Filter Mode##sgiSID21"].plurals[0] = "=Filter Mode";
+    strings["Filter Toggle##sgiSID2"].plurals[0] = "=Filter Toggle";
+    strings["Resonance##sgiSID21"].plurals[0] = "=Resonance";
+    strings["Phase Reset##sgiSID2"].plurals[0] = "=Phase Reset";
+    strings["Envelope Reset/Key Control##sgiSID2"].plurals[0] = "=Envelope Reset/Key Control";
+    strings["Special##sgiSID2"].plurals[0] = "=Special";
+    strings["Attack##sgiSID2"].plurals[0] = "=Attack";
+    strings["Decay##sgiSID2"].plurals[0] = "=Decay";
+    strings["Sustain##sgiSID2"].plurals[0] = "=Sustain";
+    strings["Release##sgiSID2"].plurals[0] = "=Release";
 
     //   sgiSM     src/gui/inst/sm8521.cpp
 
@@ -4519,6 +4679,15 @@ void DivLocale::addTranslationsTemplate()
     strings["ring mod##sgistru1"].plurals[0] = "=ring mod";
     strings["swap counters (noise)##sgistru"].plurals[0] = "=swap counters (noise)";
     strings["low pass (noise)##sgistru"].plurals[0] = "=low pass (noise)";
+    strings["sync##sgistru1"].plurals[0] = "=sync";
+    strings["ring##sgistru1"].plurals[0] = "=ring";
+    strings["low##sgistru1"].plurals[0] = "=low";
+    strings["band##sgistru1"].plurals[0] = "=band";
+    strings["high##sgistru1"].plurals[0] = "=high";
+    strings["8580 SID##sgistru"].plurals[0] = "=8580 SID";
+    strings["bitwise AND##sgistru"].plurals[0] = "=bitwise AND";
+    strings["bitwise OR##sgistru"].plurals[0] = "=bitwise OR";
+    strings["bitwise XOR##sgistru"].plurals[0] = "=bitwise XOR";
     strings["None##sgistru"].plurals[0] = "=None";
     strings["Invert##sgistru"].plurals[0] = "=Invert";
     strings["Add##sgistru"].plurals[0] = "=Add";
@@ -4557,6 +4726,11 @@ void DivLocale::addTranslationsTemplate()
     strings["Relative##sgistru"].plurals[0] = "=Relative";
     strings["QSound##sgistru"].plurals[0] = "=QSound";
     strings["Bug##sgistru"].plurals[0] = "=Bug";
+
+    strings["Fixed"].plurals[0] = "=Fixed";
+    strings["Relative"].plurals[0] = "=Relative";
+    strings["Local"].plurals[0] = "=Local";
+    strings["Global"].plurals[0] = "=Global";
 
     //   sgiSU     src/gui/inst/su.cpp
 
@@ -4629,6 +4803,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Volume##sgiTIA"].plurals[0] = "=Volume";
     strings["Arpeggio##sgiTIA"].plurals[0] = "=Arpeggio";
     strings["Pitch##sgiTIA"].plurals[0] = "=Pitch";
+    strings["Raw Period##sgiTIA"].plurals[0] = "=Raw Period";
     strings["Waveform##sgiTIA"].plurals[0] = "=Waveform";
 
     //   sgiVB     src/gui/inst/vboy.cpp
@@ -4705,7 +4880,10 @@ void DivLocale::addTranslationsTemplate()
     strings["Amount##sgiwave"].plurals[0] = "=Amount";
     strings["Power##sgiwave"].plurals[0] = "=Power";
     strings["Global##sgiwave"].plurals[0] = "=Global";
+    strings["Global##sgiwave1"].plurals[0] = "=Global";
+    strings["Global##sgiwave2"].plurals[0] = "=Global##jesus";
     strings["wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"].plurals[0] = "=wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.";
+    strings["Local Waves##sgiwave"].plurals[0] = "=Local Waves";
 
     //   sgiX1     src/gui/inst/x1_010.cpp
 
@@ -4765,6 +4943,7 @@ void DivLocale::addTranslationsTemplate()
     strings["E3xx: Set vibrato shape (0: up/down; 1: up only; 2: down only)##seen"].plurals[0] = "E3xx: =Set vibrato shape (0: up/down; 1: up only; 2: down only)";
     strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: =Set vibrato range";
     strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: =Set pitch (80: center)";
+    strings["E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen"].plurals[0] = "E6xy: =Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)";
     strings["EAxx: Legato##seen"].plurals[0] = "EAxx: =Legato";
     strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: =Set LEGACY sample mode bank";
     strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: =Note cut";
@@ -4800,6 +4979,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Game Boy with AY expansion##sesd"].plurals[0] = "=Game Boy with AY expansion";
     strings["multi-system##sesd"].plurals[0] = "=multi-system";
     strings["Unknown##sesd"].plurals[0] = "=Unknown";
+    strings["15xx: Set raw period##sesd"].plurals[0] = "=15xx: Set raw period";
+    strings["16xx: Set raw period higher nybble (0-F)##sesd"].plurals[0] = "=16xx: Set raw period higher nybble (0-F)";
     strings["20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"].plurals[0] = "=20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)";
     strings["21xx: Set noise frequency (0 to 1F)##sesd"].plurals[0] = "=21xx: Set noise frequency (0 to 1F)";
     strings["22xy: Set envelope mode (x: shape, y: enable for this channel)##sesd"].plurals[0] = "=22xy: Set envelope mode (x: shape, y: enable for this channel)";
@@ -4811,6 +4992,7 @@ void DivLocale::addTranslationsTemplate()
     strings["2Exx: Write to I/O port A##sesd"].plurals[0] = "=2Exx: Write to I/O port A";
     strings["2Fxx: Write to I/O port B##sesd"].plurals[0] = "=2Fxx: Write to I/O port B";
     strings["12xx: Set duty cycle (0 to 8)##sesd"].plurals[0] = "=12xx: Set duty cycle (0 to 8)";
+    strings["16xx: Set raw period higher byte##sesd"].plurals[0] = "=16xx: Set raw period higher byte";
     strings["27xx: Set noise AND mask##sesd"].plurals[0] = "=27xx: Set noise AND mask";
     strings["28xx: Set noise OR mask##sesd"].plurals[0] = "=28xx: Set noise OR mask";
     strings["2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER##sesd"].plurals[0] = "=2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER";
@@ -4921,9 +5103,15 @@ void DivLocale::addTranslationsTemplate()
     strings["1Exy: Change other parameters (LEGACY)##sesd"].plurals[0] = "=1Exy: Change other parameters (LEGACY)";
     strings["20xy: Set attack/decay (x: attack; y: decay)##sesd"].plurals[0] = "=20xy: Set attack/decay (x: attack; y: decay)";
     strings["21xy: Set sustain/release (x: sustain; y: release)##sesd"].plurals[0] = "=21xy: Set sustain/release (x: sustain; y: release)";
+    strings["22xx: Pulse width slide up##sesd"].plurals[0] = "=22xx: Pulse width slide up";
+    strings["23xx: Pulse width slide down##sesd"].plurals[0] = "=23xx: Pulse width slide down";
+    strings["24xx: Cutoff slide up##sesd"].plurals[0] = "=24xx: Cutoff slide up";
+    strings["25xx: Cutoff slide down##sesd"].plurals[0] = "=25xx: Cutoff slide down";
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "=3xxx: Set pulse width (0 to FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "=4xxx: Set cutoff (0 to 7FF)";
     strings["10xx: Set waveform##sesd0"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Set raw period##sesd"].plurals[0] = "=11xx: Set raw period (0-1F)";
+    strings["11xx: Set waveform (local)##sesd"].plurals[0] = "=11xx: Set waveform (local)";
     strings["20xx: Set PCM frequency##sesd"].plurals[0] = "=20xx: Set PCM frequency";
     strings["10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))##sesd"].plurals[0] = "=10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: 1dB, 1: 4.8dB))";
     strings["12xx: Set level of operator 1 (0 highest, 3F lowest)##sesd2"].plurals[0] = "=12xx: Set level of operator 1 (0 highest, 3F lowest)";
@@ -4967,6 +5155,19 @@ void DivLocale::addTranslationsTemplate()
     strings["3xyy: Set fixed frequency F-num of operator 2 (x: high 2 bits from 4 to 7; y: low 8 bits of F-num)##sesd"].plurals[0] = "=3xyy: Set fixed frequency F-num of operator 2 (x: high 2 bits from 4 to 7; y: low 8 bits of F-num)";
     strings["3xyy: Set fixed frequency F-num of operator 3 (x: high 2 bits from 8 to B; y: low 8 bits of F-num)##sesd"].plurals[0] = "=3xyy: Set fixed frequency F-num of operator 3 (x: high 2 bits from 8 to B; y: low 8 bits of F-num)";
     strings["3xyy: Set fixed frequency F-num of operator 4 (x: high 2 bits from C to F; y: low 8 bits of F-num)##sesd"].plurals[0] = "=3xyy: Set fixed frequency F-num of operator 4 (x: high 2 bits from C to F; y: low 8 bits of F-num)";
+    strings["10xx: Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)##sesd1"].plurals[0] = "=10xx: Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)";
+    strings["11xx: Set resonance (0 to FF)##sesd"].plurals[0] = "=11xx: Set resonance (0 to FF)";
+    strings["12xx: Set filter mode (bit 0: low pass; bit 1: band pass; bit 2: high pass)##sesd"].plurals[0] = "=12xx: Set filter mode (bit 0: low pass; bit 1: band pass; bit 2: high pass)";
+    strings["13xx: Disable envelope reset for this channel (1 disables; 0 enables)##sesd"].plurals[0] = "=13xx: Disable envelope reset for this channel (1 disables; 0 enables)";
+    strings["14xy: Reset cutoff (x: on new note; y: now)##sesd"].plurals[0] = "=14xy: Reset cutoff (x: on new note; y: now)";
+    strings["15xy: Reset pulse width (x: on new note; y: now)##sesd"].plurals[0] = "=15xy: Reset pulse width (x: on new note; y: now)";
+    strings["16xy: Change other parameters##sesd"].plurals[0] = "=16xy: Change other parameters";
+    strings["17xx: Pulse width slide up##sesd"].plurals[0] = "=17xx: Pulse width slide up";
+    strings["18xx: Pulse width slide down##sesd"].plurals[0] = "=18xx: Pulse width slide down";
+    strings["19xx: Cutoff slide up##sesd"].plurals[0] = "=19xx: Cutoff slide up";
+    strings["1Axx: Cutoff slide down##sesd"].plurals[0] = "=1Axx: Cutoff slide down";
+    strings["3xxx: Set pulse width (0 to FFF)##sesd1"].plurals[0] = "=3xxx: Set pulse width (0 to FFF)";
+    strings["4xxx: Set cutoff (0 to FFF)##sesd1"].plurals[0] = "=4xxx: Set cutoff (0 to FFF)";
     strings["a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.##sesd"].plurals[0] = "=a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.";
     strings["<COMPOUND SYSTEM!>##sesd0"].plurals[0] = "=<COMPOUND SYSTEM!>";
     strings["Sega Genesis Extended Channel 3##sesd1"].plurals[0] = "=Sega Genesis Extended Channel 3";
@@ -4980,12 +5181,14 @@ void DivLocale::addTranslationsTemplate()
     strings["12xx: Set duty cycle (0 to 3)##sesd"].plurals[0] = "=12xx: Set duty cycle (0 to 3)";
     strings["13xy: Setup sweep (x: time; y: shift)##sesd"].plurals[0] = "=13xy: Setup sweep (x: time; y: shift)";
     strings["14xx: Set sweep direction (0: up; 1: down)##sesd"].plurals[0] = "=14xx: Set sweep direction (0: up; 1: down)";
+    strings["15xx: Set waveform (local)##sesd"].plurals[0] = "=15xx: Set waveform (local)";
     strings["an '80s game console with a wavetable sound chip, popular in Japan.##sesd"].plurals[0] = "=an '80s game console with a wavetable sound chip, popular in Japan.";
     strings["10xx: Set waveform##sesd2"].plurals[0] = "=10xx: Set waveform";
     strings["11xx: Toggle noise mode##sesd0"].plurals[0] = "=11xx: Toggle noise mode";
     strings["12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)##sesd"].plurals[0] = "=12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)";
     strings["13xx: Set LFO speed##sesd"].plurals[0] = "=13xx: Set LFO speed";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd1"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["18xx: Set waveform (local)##sesd"].plurals[0] = "=18xx: Set waveform (local)";
     strings["also known as Famicom in Japan, it's the most well-known game console of the '80s.##sesd"].plurals[0] = "=also known as Famicom in Japan, it's the most well-known game console of the '80s.";
     strings["11xx: Write to delta modulation counter (0 to 7F)##sesd"].plurals[0] = "=11xx: Write to delta modulation counter (0 to 7F)";
     strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd0"].plurals[0] = "=12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)";
@@ -5011,6 +5214,7 @@ void DivLocale::addTranslationsTemplate()
     strings["11xx: Toggle AM with next channel##sesd"].plurals[0] = "=11xx: Toggle AM with next channel";
     strings["12xx: Toggle period modulation with next channel##sesd"].plurals[0] = "=12xx: Toggle period modulation with next channel";
     strings["13xx: Set waveform##sesd"].plurals[0] = "=13xx: Set waveform";
+    strings["14xx: Set waveform (local)##sesd"].plurals[0] = "=14xx: Set waveform (local)";
     strings["this was Yamaha's first integrated FM chip.\nit was used in several synthesizers, computers and arcade boards.##sesd"].plurals[0] = "=this was Yamaha's first integrated FM chip.\nit was used in several synthesizers, computers and arcade boards.";
     strings["this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).##sesd"].plurals[0] = "=this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).";
     strings["it's a challenge to make music on this chip which barely has musical capabilities...##sesd"].plurals[0] = "=it's a challenge to make music on this chip which barely has musical capabilities...";
@@ -5044,6 +5248,7 @@ void DivLocale::addTranslationsTemplate()
     strings["14xy: Toggle invert (x: left; y: right)##sesd"].plurals[0] = "=14xy: Toggle invert (x: left; y: right)";
     strings["15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)##sesd"].plurals[0] = "=15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)";
     strings["16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)##sesd"].plurals[0] = "=16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)";
+    strings["17xx: Set waveform (local)##sesd"].plurals[0] = "=17xx: Set waveform (local)";
     strings["1Dxx: Set noise frequency (00 to 1F)##sesd"].plurals[0] = "=1Dxx: Set noise frequency (00 to 1F)";
     strings["20xx: Set attack (0 to F)##sesd"].plurals[0] = "=20xx: Set attack (0 to F)";
     strings["21xx: Set decay (0 to 7)##sesd"].plurals[0] = "=21xx: Set decay (0 to 7)";
@@ -5061,6 +5266,7 @@ void DivLocale::addTranslationsTemplate()
     strings["13xx: Set modulation speed low byte##sesd"].plurals[0] = "=13xx: Set modulation speed low byte";
     strings["14xx: Set modulator position##sesd"].plurals[0] = "=14xx: Set modulator position";
     strings["15xx: Set modulator table to waveform##sesd"].plurals[0] = "=15xx: Set modulator table to waveform";
+    strings["16xx: Set waveform (local)##sesd"].plurals[0] = "=16xx: Set waveform (local)";
     strings["an expansion chip for the Famicom, featuring a little-known PCM channel.##sesd"].plurals[0] = "=an expansion chip for the Famicom, featuring a little-known PCM channel.";
     strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)##sesd1"].plurals[0] = "=12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)";
     strings["an expansion chip for the Famicom, with full wavetable.##sesd"].plurals[0] = "=an expansion chip for the Famicom, with full wavetable.";
@@ -5072,6 +5278,7 @@ void DivLocale::addTranslationsTemplate()
     strings["12xx: Set waveform length in RAM (04 to FC in steps of 4)##sesd"].plurals[0] = "=12xx: Set waveform length in RAM (04 to FC in steps of 4)";
     strings["15xx: Set waveform load position##sesd"].plurals[0] = "=15xx: Set waveform load position";
     strings["16xx: Set waveform load length (04 to FC in steps of 4)##sesd"].plurals[0] = "=16xx: Set waveform load length (04 to FC in steps of 4)";
+    strings["17xx: Select waveform (local)##sesd1"].plurals[0] = "=17xx: Select waveform (local)";
     strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)##sesd"].plurals[0] = "=cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)";
     strings["Yamaha YM2203 (OPN) Extended Channel 3##sesd"].plurals[0] = "=Yamaha YM2203 (OPN) Extended Channel 3";
     strings["cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies##sesd"].plurals[0] = "=cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies";
@@ -5092,6 +5299,8 @@ void DivLocale::addTranslationsTemplate()
     strings["10xx: Set waveform (0 to 7)##sesd0"].plurals[0] = "=10xx: Set waveform (0 to 7)";
     strings["11xx: Set AUDCTL##sesd"].plurals[0] = "=11xx: Set AUDCTL";
     strings["12xx: Toggle two-tone mode##sesd"].plurals[0] = "=12xx: Toggle two-tone mode";
+    strings["13xx: Set raw period##sesd"].plurals[0] = "=13xx: Set raw period";
+    strings["14xx: Set raw period (higher byte; only for 16-bit mode)##sesd"].plurals[0] = "=14xx: Set raw period (higher byte; only for 16-bit mode)";
     strings["this is like SNES' sound chip but without interpolation and the rest of nice bits.##sesd"].plurals[0] = "=this is like SNES' sound chip but without interpolation and the rest of nice bits.";
     strings["developed by the makers of the Game Boy and the Virtual Boy...##sesd"].plurals[0] = "=developed by the makers of the Game Boy and the Virtual Boy...";
     strings["10xx: Set waveform##sesd5"].plurals[0] = "=10xx: Set waveform";
@@ -5099,6 +5308,7 @@ void DivLocale::addTranslationsTemplate()
     strings["12xx: Setup sweep period (0: disabled; 1-20: enabled/period)##sesd"].plurals[0] = "=12xx: Setup sweep period (0: disabled; 1-20: enabled/period)";
     strings["13xx: Set sweep amount##sesd"].plurals[0] = "=13xx: Set sweep amount";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd3"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["18xx: Set waveform (local)##sesd1"].plurals[0] = "=18xx: Set waveform (local)";
     strings["like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.##sesd"].plurals[0] = "=like OPM, but with more waveforms, fixed frequency mode and totally... undocumented.\nused in the Yamaha TX81Z and some other synthesizers.";
     strings["2Fxx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "=2Fxx: Toggle hard envelope reset on new notes";
     strings["this one is like PC Speaker but has duty cycles.##sesd"].plurals[0] = "=this one is like PC Speaker but has duty cycles.";
@@ -5110,6 +5320,7 @@ void DivLocale::addTranslationsTemplate()
     strings["13xy: Setup sweep (x: speed; y: shift; channel 5 only)##sesd"].plurals[0] = "=13xy: Setup sweep (x: speed; y: shift; channel 5 only)";
     strings["14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)##sesd"].plurals[0] = "=14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)";
     strings["15xx: Set modulation waveform (x: wavetable; channel 5 only)##sesd"].plurals[0] = "=15xx: Set modulation waveform (x: wavetable; channel 5 only)";
+    strings["16xx: Set waveform (local)##sesd1"].plurals[0] = "=16xx: Set waveform (local)";
     strings["like OPLL, but even more cost reductions applied. three less FM channels, and no drums mode...##sesd"].plurals[0] = "=like OPLL, but even more cost reductions applied. three less FM channels, and no drums mode...";
     strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.##sesd"].plurals[0] = "=so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.";
     strings["ZX Spectrum Beeper##sesd"].plurals[0] = "=ZX Spectrum Beeper";
@@ -5152,6 +5363,7 @@ void DivLocale::addTranslationsTemplate()
     strings["11xx: Set envelope shape##sesd"].plurals[0] = "=11xx: Set envelope shape";
     strings["12xx: Set sample bank slot (0 to 7)##sesd"].plurals[0] = "=12xx: Set sample bank slot (0 to 7)";
     strings["17xx: Toggle PCM mode (LEGACY)##sesd4"].plurals[0] = "=17xx: Toggle PCM mode (LEGACY)";
+    strings["18xx: Set waveform (local)##sesd2"].plurals[0] = "=18xx: Set waveform (local)";
     strings["20xx: Set PCM frequency (1 to FF)##sesd"].plurals[0] = "=20xx: Set PCM frequency (1 to FF)";
     strings["22xx: Set envelope mode (bit 0: enable; bit 1: one-shot; bit 2: split shape to L/R; bit 3/5: H.invert right/left; bit 4/6: V.invert right/left)##sesd"].plurals[0] = "=22xx: Set envelope mode (bit 0: enable; bit 1: one-shot; bit 2: split shape to L/R; bit 3/5: H.invert right/left; bit 4/6: V.invert right/left)";
     strings["23xx: Set envelope period##sesd"].plurals[0] = "=23xx: Set envelope period";
@@ -5214,6 +5426,7 @@ void DivLocale::addTranslationsTemplate()
     strings["21xx: Select clock rate (0: full; 1: half)##sesd"].plurals[0] = "=21xx: Select clock rate (0: full; 1: half)";
     strings["used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or 16-bit PCM.##sesd"].plurals[0] = "=used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or 16-bit PCM.";
     strings["10xx: Set waveform##sesd8"].plurals[0] = "=10xx: Set waveform";
+    strings["11xx: Select waveform (local)##sesd1"].plurals[0] = "=11xx: Select waveform (local)";
     strings["10xx: Set waveform##sesd9"].plurals[0] = "=10xx: Set waveform";
     strings["11xx: Toggle noise mode##sesd2"].plurals[0] = "=11xx: Toggle noise mode";
     strings["a wavetable sound chip used in Pac-Man, among other early Namco arcade games.##sesd"].plurals[0] = "=a wavetable sound chip used in Pac-Man, among other early Namco arcade games.";
@@ -5269,6 +5482,203 @@ void DivLocale::addTranslationsTemplate()
     strings["14xx: Toggle swap counters (noise only)##sesd"].plurals[0] = "=14xx: Toggle swap counters (noise only)";
     strings["15xx: Toggle low pass (noise only)##sesd"].plurals[0] = "=15xx: Toggle low pass (noise only)";
     strings["16xx: Set clock divider (0: /2; 1: /3)##sesd"].plurals[0] = "=16xx: Set clock divider (0: /2; 1: /3)";
+    strings["a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.##sesd"].plurals[0] = "=a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.";
     strings["Dummy System##sesd"].plurals[0] = "=Dummy System";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "=this is a system designed for testing purposes.";
+
+    //channel names
+
+    strings["Channel 1##sesd"].plurals[0] = "=Channel 1";
+    strings["Channel 2##sesd"].plurals[0] = "=Channel 2";
+    strings["Channel 3##sesd"].plurals[0] = "=Channel 3";
+    strings["Channel 4##sesd"].plurals[0] = "=Channel 4";
+    strings["Channel 5##sesd"].plurals[0] = "=Channel 5";
+    strings["Channel 6##sesd"].plurals[0] = "=Channel 6";
+    strings["Channel 7##sesd"].plurals[0] = "=Channel 7";
+    strings["Channel 8##sesd"].plurals[0] = "=Channel 8";
+    strings["Channel 9##sesd"].plurals[0] = "=Channel 9";
+    strings["Channel 10##sesd"].plurals[0] = "=Channel 10";
+    strings["Channel 11##sesd"].plurals[0] = "=Channel 11";
+    strings["Channel 12##sesd"].plurals[0] = "=Channel 12";
+    strings["Channel 13##sesd"].plurals[0] = "=Channel 13";
+    strings["Channel 14##sesd"].plurals[0] = "=Channel 14";
+    strings["Channel 15##sesd"].plurals[0] = "=Channel 15";
+    strings["Channel 16##sesd"].plurals[0] = "=Channel 16";
+    strings["Channel 17##sesd"].plurals[0] = "=Channel 17";
+    strings["Channel 18##sesd"].plurals[0] = "=Channel 18";
+    strings["Channel 19##sesd"].plurals[0] = "=Channel 19";
+    strings["Channel 20##sesd"].plurals[0] = "=Channel 20";
+    strings["Channel 21##sesd"].plurals[0] = "=Channel 21";
+    strings["Channel 22##sesd"].plurals[0] = "=Channel 22";
+    strings["Channel 23##sesd"].plurals[0] = "=Channel 23";
+    strings["Channel 24##sesd"].plurals[0] = "=Channel 24";
+    strings["Channel 25##sesd"].plurals[0] = "=Channel 25";
+    strings["Channel 26##sesd"].plurals[0] = "=Channel 26";
+    strings["Channel 27##sesd"].plurals[0] = "=Channel 27";
+    strings["Channel 28##sesd"].plurals[0] = "=Channel 28";
+    strings["Channel 29##sesd"].plurals[0] = "=Channel 29";
+    strings["Channel 30##sesd"].plurals[0] = "=Channel 30";
+    strings["Channel 31##sesd"].plurals[0] = "=Channel 31";
+    strings["Channel 32##sesd"].plurals[0] = "=Channel 32";
+
+    strings["Square##sesd"].plurals[0] = "=Square";
+
+    strings["Square 1##sesd"].plurals[0] = "=Square 1";
+    strings["Square 2##sesd"].plurals[0] = "=Square 2";
+    strings["Square 3##sesd"].plurals[0] = "=Square 3";
+
+    strings["Pulse##sesd"].plurals[0] = "=Pulse";
+
+    strings["Pulse 1##sesd"].plurals[0] = "=Pulse 1";
+    strings["Pulse 2##sesd"].plurals[0] = "=Pulse 2";
+
+    strings["Wave##sesd"].plurals[0] = "=Wave";
+    strings["Wavetable##sesd"].plurals[0] = "=Wavetable";
+
+    strings["Triangle##sesd"].plurals[0] = "=Triangle";
+
+    strings["PCM##sesd"].plurals[0] = "=PCM";
+
+    strings["PCM 1##sesd"].plurals[0] = "=PCM 1";
+    strings["PCM 2##sesd"].plurals[0] = "=PCM 2";
+    strings["PCM 3##sesd"].plurals[0] = "=PCM 3";
+    strings["PCM 4##sesd"].plurals[0] = "=PCM 4";
+    strings["PCM 5##sesd"].plurals[0] = "=PCM 5";
+    strings["PCM 6##sesd"].plurals[0] = "=PCM 6";
+    strings["PCM 7##sesd"].plurals[0] = "=PCM 7";
+    strings["PCM 8##sesd"].plurals[0] = "=PCM 8";
+    strings["PCM 9##sesd"].plurals[0] = "=PCM 9";
+    strings["PCM 10##sesd"].plurals[0] = "=PCM 10";
+    strings["PCM 11##sesd"].plurals[0] = "=PCM 11";
+    strings["PCM 12##sesd"].plurals[0] = "=PCM 12";
+    strings["PCM 13##sesd"].plurals[0] = "=PCM 13";
+    strings["PCM 14##sesd"].plurals[0] = "=PCM 14";
+    strings["PCM 15##sesd"].plurals[0] = "=PCM 15";
+    strings["PCM 16##sesd"].plurals[0] = "=PCM 16";
+    strings["PCM 17##sesd"].plurals[0] = "=PCM 17";
+    strings["PCM 18##sesd"].plurals[0] = "=PCM 18";
+    strings["PCM 19##sesd"].plurals[0] = "=PCM 19";
+    strings["PCM 20##sesd"].plurals[0] = "=PCM 20";
+    strings["PCM 21##sesd"].plurals[0] = "=PCM 21";
+    strings["PCM 22##sesd"].plurals[0] = "=PCM 22";
+    strings["PCM 23##sesd"].plurals[0] = "=PCM 23";
+    strings["PCM 24##sesd"].plurals[0] = "=PCM 24";
+
+    strings["DPCM##sesd"].plurals[0] = "=DPCM";
+
+    strings["ADPCM##sesd"].plurals[0] = "=ADPCM";
+
+    strings["ADPCM 1##sesd"].plurals[0] = "=ADPCM 1";
+    strings["ADPCM 2##sesd"].plurals[0] = "=ADPCM 2";
+    strings["ADPCM 3##sesd"].plurals[0] = "=ADPCM 3";
+
+    strings["ADPCM-A 1##sesd"].plurals[0] = "=ADPCM-A 1";
+    strings["ADPCM-A 2##sesd"].plurals[0] = "=ADPCM-A 2";
+    strings["ADPCM-A 3##sesd"].plurals[0] = "=ADPCM-A 3";
+    strings["ADPCM-A 4##sesd"].plurals[0] = "=ADPCM-A 4";
+    strings["ADPCM-A 5##sesd"].plurals[0] = "=ADPCM-A 5";
+    strings["ADPCM-A 6##sesd"].plurals[0] = "=ADPCM-A 6";
+
+    strings["ADPCM-B##sesd"].plurals[0] = "=ADPCM-B";
+
+    strings["Sample##sesd"].plurals[0] = "=Sample";
+
+    strings["DAC Left##sesd"].plurals[0] = "=DAC Left";
+    strings["DAC Right##sesd"].plurals[0] = "=DAC Right";
+
+    strings["Noise##sesd"].plurals[0] = "=Noise";
+
+    strings["Noise 1##sesd"].plurals[0] = "=Noise 1";
+    strings["Noise 2##sesd"].plurals[0] = "=Noise 2";
+    strings["Noise 3##sesd"].plurals[0] = "=Noise 3";
+
+    strings["Slope##sesd"].plurals[0] = "=Slope";
+    
+    strings["FM 6/PCM 1##sesd"].plurals[0] = "=FM 6/PCM 1";
+    strings["CSM Timer##sesd"].plurals[0] = "=CSM Timer";
+
+    strings["VRC6 Saw##sesd"].plurals[0] = "=VRC6 Saw";
+
+    strings["4OP 1##sesd"].plurals[0] = "=4OP 1";
+    strings["4OP 3##sesd"].plurals[0] = "=4OP 3";
+    strings["4OP 5##sesd"].plurals[0] = "=4OP 5";
+    strings["4OP 7##sesd"].plurals[0] = "=4OP 7";
+    strings["4OP 9##sesd"].plurals[0] = "=4OP 9";
+    strings["4OP 11##sesd"].plurals[0] = "=4OP 11";
+
+    strings["Kick/FM 7##sesd"].plurals[0] = "=Kick/FM 7";
+    strings["Kick/FM 16##sesd"].plurals[0] = "=Kick/FM 16";
+    strings["Kick##sesd"].plurals[0] = "=Kick";
+    strings["Snare##sesd"].plurals[0] = "=Snare";
+    strings["Top##sesd"].plurals[0] = "=Top";
+    strings["HiHat##sesd"].plurals[0] = "=HiHat";
+    strings["Tom##sesd"].plurals[0] = "=Tom";
+    strings["Rim##sesd"].plurals[0] = "=Rim";
+
+    // channel short names
+
+    strings["CH1##sesd"].plurals[0] = "=CH1";
+    strings["CH2##sesd"].plurals[0] = "=CH2";
+    strings["CH3##sesd"].plurals[0] = "=CH3";
+    strings["CH4##sesd"].plurals[0] = "=CH4";
+    strings["CH5##sesd"].plurals[0] = "=CH5";
+    strings["CH6##sesd"].plurals[0] = "=CH6";
+    strings["CH7##sesd"].plurals[0] = "=CH7";
+    strings["CH8##sesd"].plurals[0] = "=CH8";
+    strings["CH9##sesd"].plurals[0] = "=CH9";
+
+    strings["NO##sesd"].plurals[0] = "=NO";
+    strings["N1##sesd"].plurals[0] = "=N1";
+    strings["N2##sesd"].plurals[0] = "=N2";
+    strings["N3##sesd"].plurals[0] = "=N3";
+
+    strings["SL##sesd"].plurals[0] = "=SL";
+
+    strings["S1##sesd"].plurals[0] = "=S1";
+    strings["S2##sesd"].plurals[0] = "=S2";
+    strings["S3##sesd"].plurals[0] = "=S3";
+    strings["S4##sesd"].plurals[0] = "=S4";
+    strings["S5##sesd"].plurals[0] = "=S5";
+    strings["S6##sesd"].plurals[0] = "=S6";
+
+    strings["P1##sesd"].plurals[0] = "=P1";
+    strings["P2##sesd"].plurals[0] = "=P2";
+    strings["P3##sesd"].plurals[0] = "=P3";
+    strings["P4##sesd"].plurals[0] = "=P4";
+    strings["P5##sesd"].plurals[0] = "=P5";
+    strings["P6##sesd"].plurals[0] = "=P6";
+    strings["P7##sesd"].plurals[0] = "=P7";
+    strings["P8##sesd"].plurals[0] = "=P8";
+    strings["P9##sesd"].plurals[0] = "=P9";
+    strings["P10##sesd"].plurals[0] = "=P10";
+    strings["P11##sesd"].plurals[0] = "=P11";
+    strings["P12##sesd"].plurals[0] = "=P12";
+    strings["P13##sesd"].plurals[0] = "=P13";
+    strings["P14##sesd"].plurals[0] = "=P14";
+    strings["P15##sesd"].plurals[0] = "=P15";
+    strings["P16##sesd"].plurals[0] = "=P16";
+    strings["P17##sesd"].plurals[0] = "=P17";
+    strings["P18##sesd"].plurals[0] = "=P18";
+    strings["P19##sesd"].plurals[0] = "=P19";
+    strings["P20##sesd"].plurals[0] = "=P20";
+    strings["P21##sesd"].plurals[0] = "=P21";
+    strings["P22##sesd"].plurals[0] = "=P22";
+    strings["P23##sesd"].plurals[0] = "=P23";
+    strings["P24##sesd"].plurals[0] = "=P24";
+
+    strings["BD##sesd"].plurals[0] = "=BD";
+    strings["SD##sesd"].plurals[0] = "=SD";
+    strings["TP##sesd"].plurals[0] = "=TP";
+    strings["HH##sesd"].plurals[0] = "=HH";
+    strings["TM##sesd"].plurals[0] = "=TM";
+    strings["RM##sesd"].plurals[0] = "=RM";
+
+    strings["P##sesd"].plurals[0] = "=P";
+
+    strings["VS##sesd"].plurals[0] = "=VS";
+
+    strings["TR##sesd"].plurals[0] = "=TR";
+    strings["DMC##sesd"].plurals[0] = "=DMC";
+
+    strings["WA##sesd"].plurals[0] = "=WA";
 }

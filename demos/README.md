@@ -1,6 +1,6 @@
 # demos
 
-demo songs for Furnace.
+demo songs for Furnace-B.
 
 these demo songs are not under the GPL. all rights are reserved to the original author(s).
 
@@ -14,6 +14,6 @@ contact me or send a pull request if you want your song to be added to this coll
 
 make sure to put your demo song under the respective category.
 
-tildearrow also accepts demo songs in the .dmf format as well as the .fur format.
+Furnace-B devs also accept demo songs in the .dmf format as well as the .fur/.fub format.
 
 thank you for contributing!

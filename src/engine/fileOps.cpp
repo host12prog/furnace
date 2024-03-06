@@ -1323,7 +1323,9 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       ds.systemNameJ=reader.readString();
       ds.categoryJ=reader.readString();
     } else {
-      ds.systemName=getSongSystemLegacyName(ds,!getConfInt("noMultiSystem",0));
+      String teeeemp = getSongSystemLegacyName(ds,!getConfInt("noMultiSystem",0));
+      String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
+      ds.systemName=temmrrrp;
       ds.autoSystem=true;
     }
 
@@ -2046,7 +2048,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
   return true;
 }
 
-bool DivEngine::load(unsigned char* f, size_t slen) {
+bool DivEngine::load(unsigned char* f, size_t slen, String path) {
   unsigned char* file;
   size_t len;
   if (slen<18) {
@@ -2054,6 +2056,19 @@ bool DivEngine::load(unsigned char* f, size_t slen) {
     lastError="file is too small";
     delete[] f;
     return false;
+  }
+
+  bool dnft_extension = false;
+  bool eft_extension = false;
+
+  if (path.find(".dnm") != std::string::npos)
+  {
+    dnft_extension = true;
+  }
+
+  if (path.find(".eft") != std::string::npos)
+  {
+    eft_extension = true;
   }
 
   if (!systemsRegistered) registerSystems();
@@ -2155,7 +2170,9 @@ bool DivEngine::load(unsigned char* f, size_t slen) {
   if (memcmp(file,DIV_DMF_MAGIC,16)==0) {
     return loadDMF(file,len); 
   } else if (memcmp(file,DIV_FTM_MAGIC,18)==0) {
-    return loadFTM(file,len);
+    return loadFTM(file,len,false || dnft_extension,false,eft_extension);
+  } else if (memcmp(file,DIV_DN_FTM_MAGIC,21)==0) {
+    return loadFTM(file,len,true,true,false);
   } else if (memcmp(file,DIV_FUR_MAGIC,16)==0) {
     return loadFur(file,len,false);
   } else if (memcmp(file,DIV_FUR_B_MAGIC,16)==0) {
@@ -2165,7 +2182,7 @@ bool DivEngine::load(unsigned char* f, size_t slen) {
   }
 
   // step 3: try loading as .mod
-  if (loadMod(f,slen)) {
+  if (loadMod(file,len)) {
     delete[] f;
     return true;
   }
@@ -2237,7 +2254,7 @@ DivDataErrors DivEngine::readAssetDirData(SafeReader& reader, std::vector<DivAss
   return DIV_DATA_SUCCESS;
 }
 
-SafeWriter* DivEngine::saveFur(bool notPrimary, bool newPatternFormat) {
+SafeWriter* DivEngine::saveFur(bool notPrimary, bool newPatternFormat, bool tilde_version) {
   saveLock.lock();
   std::vector<int> subSongPtr;
   std::vector<int> sysFlagsPtr;
@@ -2293,7 +2310,7 @@ SafeWriter* DivEngine::saveFur(bool notPrimary, bool newPatternFormat) {
   /// HEADER
   // write magic
   //w->write(DIV_FUR_MAGIC,16);
-  w->write(DIV_FUR_B_MAGIC,16); //incompatibility of instrument types introduced when PowerNoise was added to Furnace-B, thus the different format is needed!
+  w->write(tilde_version ? DIV_FUR_MAGIC : DIV_FUR_B_MAGIC,16); //incompatibility of instrument types introduced when PowerNoise was added to Furnace-B, thus the different format is needed!
 
   // write version
   w->writeS(DIV_ENGINE_VERSION);
@@ -2666,7 +2683,7 @@ SafeWriter* DivEngine::saveFur(bool notPrimary, bool newPatternFormat) {
   for (int i=0; i<song.insLen; i++) {
     DivInstrument* ins=song.ins[i];
     insPtr.push_back(w->tell());
-    ins->putInsData2(w,false);
+    ins->putInsData2(w,false,NULL,true, tilde_version);
   }
 
   /// WAVETABLE
@@ -2898,11 +2915,11 @@ void writeTextMacro(SafeWriter* w, DivInstrumentMacro& m, const char* name, bool
   int len=m.len;
   switch (m.open&6) {
     case 2:
-      len=16;
+      len=18;
       w->writeText(" [ADSR]");
       break;
     case 4:
-      len=16;
+      len=18;
       w->writeText(" [LFO]");
       break;
   }

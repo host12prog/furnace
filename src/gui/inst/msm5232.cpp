@@ -34,7 +34,7 @@ void FurnaceGUI::drawInsMSM5232(DivInstrument* ins)
   if (ImGui::BeginTabItem(_L("Macros##sgi5232"))) 
   {
     macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgi5232"),ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgi5232"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgi5232"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
 
     macroList.push_back(FurnaceGUIMacroDesc(_L("Group Ctrl##sgi5232"),ins,DIV_MACRO_DUTY,0xff,0,5,72,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,msm5232ControlBits));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Group Attack##sgi5232"),ins,DIV_MACRO_EX1,0xff,0,5,64,uiColors[GUI_COLOR_MACRO_OTHER]));

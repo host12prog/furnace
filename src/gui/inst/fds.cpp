@@ -88,7 +88,6 @@ void FurnaceGUI::drawInsFDS(DivInstrument* ins)
       macroDragAreaSize=modTableSize;
       macroDragMin=-4;
       macroDragMax=3;
-      macroDragBitOff=0;
       macroDragBitMode=false;
       macroDragInitialValueSet=false;
       macroDragInitialValue=false;
@@ -135,9 +134,9 @@ void FurnaceGUI::drawInsFDS(DivInstrument* ins)
   if (ImGui::BeginTabItem(_L("Macros##sgiFDS"))) 
   {
     macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiFDS"),ins,DIV_MACRO_VOL,0xff,0,32,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiFDS"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,0,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiFDS"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiFDS"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiFDS"),ins,DIV_MACRO_WAVE,0xff,0,MAX(1,e->song.waveLen-1),160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiFDS"),ins,DIV_MACRO_WAVE,0xff,0,WAVE_MACRO_MAX,160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,false,NULL,true));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Mod Depth##sgiFDS"),ins,DIV_MACRO_EX1,0xff,0,63,160,uiColors[GUI_COLOR_MACRO_OTHER]));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Mod Speed##sgiFDS"),ins,DIV_MACRO_EX2,0xff,0,4095,160,uiColors[GUI_COLOR_MACRO_OTHER]));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Mod Position##sgiFDS"),ins,DIV_MACRO_EX3, 0xff,0,127,160,uiColors[GUI_COLOR_MACRO_OTHER]));

@@ -52,10 +52,10 @@ class DivWorkPool;
 #define EXTERN_BUSY_BEGIN_SOFT e->softLocked=true; e->isBusy.lock();
 #define EXTERN_BUSY_END e->isBusy.unlock(); e->softLocked=false;
 
-//#define DIV_UNSTABLE
+#define DIV_UNSTABLE
 
-#define DIV_VERSION "0.6.1"
-#define DIV_ENGINE_VERSION 192
+#define DIV_VERSION "dev193"
+#define DIV_ENGINE_VERSION 193
 // for imports
 #define DIV_VERSION_MOD 0xff01
 #define DIV_VERSION_FC 0xff02
@@ -104,6 +104,8 @@ struct DivChannelState {
   int delayOrder, delayRow, retrigSpeed, retrigTick;
   int vibratoDepth, vibratoRate, vibratoPos, vibratoPosGiant, vibratoDir, vibratoFine;
   int tremoloDepth, tremoloRate, tremoloPos;
+  int pw_slide, pw_slide_speed, cutoff_slide, cutoff_slide_speed;
+  int transposeDelay, transposeSemitones;
   unsigned char arp, arpStage, arpTicks, panL, panR, panRL, panRR, lastVibrato, lastPorta;
   bool doNote, legato, portaStop, keyOn, keyOff, nowYouCanStop, stopOnOff, releasing;
   bool arpYield, delayLocked, inPorta, scheduledSlideReset, shorthandPorta, wasShorthandPorta, noteOnInhibit, resetArp;
@@ -138,6 +140,12 @@ struct DivChannelState {
     tremoloDepth(0),
     tremoloRate(0),
     tremoloPos(0),
+    pw_slide(0),
+    pw_slide_speed(0),
+    cutoff_slide(0),
+    cutoff_slide_speed(0),
+    transposeDelay(-1),
+    transposeSemitones(0xff),
     arp(0),
     arpStage(-1),
     arpTicks(1),
@@ -383,6 +391,7 @@ enum DivChanTypes {
   DIV_CH_WAVE=3,
   DIV_CH_PCM=4,
   DIV_CH_OP=5,
+  DIV_CH_MAX,
 };
 
 extern const char* cmdName[];
@@ -545,7 +554,7 @@ class DivEngine {
   bool loadFur(unsigned char* file, size_t len, bool tildearrow_version);
   bool loadMod(unsigned char* file, size_t len);
   bool loadS3M(unsigned char* file, size_t len);
-  bool loadFTM(unsigned char* file, size_t len);
+  bool loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_sig, bool eft);
   bool loadFC(unsigned char* file, size_t len);
 
   void loadDMP(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath);
@@ -620,6 +629,7 @@ class DivEngine {
     void nextBuf(float** in, float** out, int inChans, int outChans, unsigned int size);
     DivInstrument* getIns(int index, DivInstrumentType fallbackType=DIV_INS_FM);
     DivWavetable* getWave(int index);
+    DivWavetable* getLocalWave(DivInstrument* ins, int index);
     DivSample* getSample(int index);
     DivDispatch* getDispatch(int index);
     // parse old system setup description
@@ -628,14 +638,14 @@ class DivEngine {
     void createNew(const char* description, String sysName, bool inBase64=true);
     void createNewFromDefaults();
     // load a file.
-    bool load(unsigned char* f, size_t length);
+    bool load(unsigned char* f, size_t length, String path);
     // play a binary command stream.
     bool playStream(unsigned char* f, size_t length);
     // save as .dmf.
     SafeWriter* saveDMF(unsigned char version);
     // save as .fur.
     // if notPrimary is true then the song will not be altered
-    SafeWriter* saveFur(bool notPrimary=false, bool newPatternFormat=true);
+    SafeWriter* saveFur(bool notPrimary=false, bool newPatternFormat=true, bool tilde_version=false);
     // build a ROM file (TODO).
     // specify system to build ROM for.
     std::vector<DivROMExportOutput> buildROM(DivROMExportOptions sys);
@@ -925,6 +935,9 @@ class DivEngine {
     // if the returned vector is empty then there was an error.
     std::vector<DivInstrument*> instrumentFromFile(const char* path, bool loadAssets=true, bool readInsName=true);
 
+    // copy instrument
+    void copyInstrument(DivInstrument* to, DivInstrument* from);
+
     // load temporary instrument
     void loadTempIns(DivInstrument* which);
 
@@ -934,9 +947,14 @@ class DivEngine {
 
     // add wavetable
     int addWave();
+    void addWaveUnsafe(bool local, int inst = 0);
+
+    // add local wavetable
+    int addLocalWave(int inst);
 
     // add wavetable from pointer
     int addWavePtr(DivWavetable* which);
+    int addLocalWavePtr(int inst, DivWavetable* which);
 
     // get wavetable from file
     DivWavetable* waveFromFile(const char* path, bool loadRaw=true);
@@ -944,6 +962,14 @@ class DivEngine {
     // delete wavetable
     void delWave(int index);
     void delWaveUnsafe(int index);
+
+    //paste wavetables from clipboard
+    void pasteWaves(int index, bool local = false, int inst = 0);
+    void doPasteWaves(int index, bool local = false, int inst = 0);
+
+    // delete local wavetable
+    void delLocalWave(int index, DivInstrument* ins);
+    void delLocalWaveUnsafe(int index, DivInstrument* ins);
 
     // add sample
     int addSample();
@@ -980,11 +1006,13 @@ class DivEngine {
     bool moveInsUp(int which);
     bool moveWaveUp(int which);
     bool moveSampleUp(int which);
+    bool moveLocalWaveUp(int inst, int which);
 
     // move thing down
     bool moveInsDown(int which);
     bool moveWaveDown(int which);
     bool moveSampleDown(int which);
+    bool moveLocalWaveDown(int inst, int which);
 
     // automatic patchbay
     void autoPatchbay();
@@ -1155,7 +1183,7 @@ class DivEngine {
     void delUnusedSamples();
 
     // change system
-    void changeSystem(int index, DivSystem which, bool preserveOrder=true);
+    bool changeSystem(int index, DivSystem which, bool preserveOrder=true);
 
     // add system
     bool addSystem(DivSystem which);
@@ -1165,6 +1193,9 @@ class DivEngine {
 
     // move system
     bool swapSystem(int src, int dest, bool preserveOrder=true);
+
+    // clone system
+    bool cloneSystem(int index, bool add_chip_count, bool pat);
 
     // add effect
     bool addEffect(DivEffectType which);

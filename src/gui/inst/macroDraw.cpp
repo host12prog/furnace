@@ -59,7 +59,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         asInt[j]=0;
       } else {
         asFloat[j]=deBit30(i.get_macro()->val[j+macroDragScroll]);
-        asInt[j]=deBit30(i.get_macro()->val[j+macroDragScroll])+i.bitOffset;
+        asInt[j]=deBit30(i.get_macro()->val[j+macroDragScroll]);
         if (i.bit30) bit30Indicator[j]=enBit30(i.get_macro()->val[j+macroDragScroll]);
       }
       if (j+macroDragScroll>=i.get_macro()->len || (j+macroDragScroll>i.get_macro()->rel && i.get_macro()->loop<i.get_macro()->rel)) {
@@ -124,7 +124,6 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         macroDragMin=i.min+i.get_macro()->vScroll;
         macroDragMax=i.min+i.get_macro()->vScroll+i.get_macro()->vZoom;
       }
-      macroDragBitOff=i.bitOffset;
       macroDragBitMode=i.isBitfield;
       macroDragInitialValueSet=false;
       macroDragInitialValue=false;
@@ -201,7 +200,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
 
       // bit 30 area
       if (i.bit30) {
-        PlotCustom("##IMacroBit30",bit30Indicator,totalFit,macroDragScroll,NULL,0,1,ImVec2(availableWidth,12.0f*dpiScale),sizeof(float),i.color,i.get_macro()->len-macroDragScroll,&macroHoverBit30);
+        PlotCustom("##IMacroBit30",bit30Indicator,totalFit,macroDragScroll,NULL,0,1,ImVec2(availableWidth,12.0f*dpiScale),sizeof(float),i.color,i.get_macro()->len-macroDragScroll,i.macro_id == DIV_MACRO_ARP ? &macroHoverBit30Arp : &macroHoverBit30Wave);
         if (ImGui::IsItemClicked(ImGuiMouseButton_Left)) {
           ImGui::InhibitInertialScroll();
           macroDragStart=ImGui::GetItemRectMin();
@@ -348,9 +347,29 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
+
+        if (i.bit30)
+        {
+          char ttext[100] = {0};
+
+          if(i.macro_id == DIV_MACRO_ARP)
+          {
+            strcpy(ttext, _L(macroHoverBit30Arp(0, 1.0, NULL).c_str()));
+          }
+          else
+          {
+            strcpy(ttext, _L(macroHoverBit30Wave(0, 1.0, NULL).c_str()));
+          }
+          
+          if (ImGui::Checkbox(ttext,(bool*)&i.get_macro()->val[16]))
+          {
+            //i.get_macro()->mode=modeVal;
+          }
+        }
+
         ImGui::TableNextColumn();
-        
         ImGui::TableNextColumn();
+
         ImGui::AlignTextToFramePadding();
         ImGui::Text(_L("Release##sgimcd"));
         ImGui::TableNextColumn();
@@ -424,6 +443,27 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
           if (i.get_macro()->val[12]>2) i.get_macro()->val[12]=2;
         } rightClickable
 
+        ImGui::TableNextColumn();
+
+        if (i.bit30)
+        {
+          char ttext[100] = {0};
+
+          if(i.macro_id == DIV_MACRO_ARP)
+          {
+            strcpy(ttext, _L(macroHoverBit30Arp(0, 1.0, NULL).c_str()));
+          }
+          else
+          {
+            strcpy(ttext, _L(macroHoverBit30Wave(0, 1.0, NULL).c_str()));
+          }
+
+          if (ImGui::Checkbox(ttext,(bool*)&i.get_macro()->val[17]))
+          {
+            //i.get_macro()->mode=modeVal;
+          }
+        }
+
         ImGui::EndTable();
       }
     }
@@ -483,7 +523,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
     } \
   } \
   if (i.get_macro()->open&6) { \
-    i.get_macro()->len=16; \
+    i.get_macro()->len=18; \
   }
 
 #define BUTTON_TO_SET_PROPS(_x) \
