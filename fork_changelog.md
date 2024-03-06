@@ -36,3 +36,6 @@ Electric Keet:
 - "Furnace-B" name
 - The invaluable and enormous tiresome work of placing localization macros all over the GUI code
 - Furnace-B logo
+
+Kagamiin~:
+- Portuguese translation
