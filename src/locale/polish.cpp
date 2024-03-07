@@ -2983,7 +2983,7 @@ void DivLocale::addTranslationsPolish()
     strings["Channel type##CHC1"].plurals[0] = "Zgodne z typem kanału##CHC1";
     strings["Instrument type##CHC2"].plurals[0] = "Zgodne z typem instrumentu##CHC2";
     strings["Channel name colors:##sgse"].plurals[0] = "Kolory nazwy kanału:";
-    strings["Single##CTC0"].plurals[0] = "Jednolite#CTC0";
+    strings["Single##CTC0"].plurals[0] = "Jednolite##CTC0";
     strings["Channel type##CTC1"].plurals[0] = "Zgodnie z typem kanału##CTC1";
     strings["Instrument type##CTC2"].plurals[0] = "Zgodnie z typem instrumentu##CTC2";
     strings["Assets##sgse1"].plurals[0] = "Prezentacja zasobów modułu";
