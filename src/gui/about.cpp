@@ -204,6 +204,7 @@ const char* aboutLine[]={
   "Electric Keet",
   "LTVA1 (Russian translation)##sgab",
   "Kagamiin~ (Portuguese translation)##sgab",
+  "freq-mod (Polish translation)##sgab",
   "",
   "powered by:##sgab",
   "Dear ImGui by Omar Cornut##sgab",

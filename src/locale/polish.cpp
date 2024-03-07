@@ -59,6 +59,7 @@ void DivLocale::addTranslationsPolish()
     strings["-- translations and related work --##sgab"].plurals[0] = "-- tłumaczenia --";
     strings["LTVA1 (Russian translation)##sgab"].plurals[0] = "LTVA1 (tłumaczenie na język rosyjski)";
     strings["Kagamiin~ (Portuguese translation)##sgab"].plurals[0] = "Kagamiin~ (tłumaczenie na język portugalski)";
+    strings["freq-mod (Polish translation)##sgab"].plurals[0] = "freq-mod (tłumaczenie na język polski)";
 
     strings["powered by:##sgab"].plurals[0] = "z użyciem następujących komponentów:";
     strings["Dear ImGui by Omar Cornut##sgab"].plurals[0] = "Dear ImGui autorstwa Omara Cornuta";
