@@ -187,7 +187,7 @@ TAParamResult pLogLevel(String val) {
 }
 
 TAParamResult pVersion(String) {
-  printf("Furnace version " DIV_VERSION ".\n\n");
+  printf("Furnace-B version " DIV_VERSION ".\n\n");
   printf("copyright (C) 2021-2024 tildearrow and contributors.\n");
   printf("licensed under the GNU General Public License version 2 or later\n");
   printf("<https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>.\n\n");
@@ -195,7 +195,7 @@ TAParamResult pVersion(String) {
   printf("pass the -warranty parameter for more information.\n\n");
   printf("DISCLAIMER: this program is not affiliated with Delek in any form.\n");
   printf("\n");
-  printf("furnace is powered by:\n");
+  printf("Furnace-B is powered by:\n");
   printf("- libsndfile by Erik de Castro Lopo and rest of libsndfile team (LGPLv2.1)\n");
   printf("- SDL2 by Sam Lantinga (zlib license)\n");
   printf("- zlib by Jean-loup Gailly and Mark Adler (zlib license)\n");
