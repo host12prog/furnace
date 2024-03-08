@@ -253,7 +253,7 @@ void DivLocale::addTranslationsPolish()
     strings["if this is on, only the first slide of a row in a channel will be considered.##sgcf"].plurals[0] = "gdy ta flaga jest włączona, tylko pierwszy efekt płynnej zmiany parametru w danym wierszu będzie skuteczny.";
     strings["Ignore 0Dxx on the last order##sgcf"].plurals[0] = "Ignoruj 0Dxx w ostatnim wierszu macierzy wzorca";
     strings["if this is on, a jump to next row effect will not take place when it is on the last order of a song.##sgcf"].plurals[0] = "jeśli flaga jest włączona, efekt przeskoczenia do następnego wzorca nie zadziała, jeśli jest odtwarzany ostatni wiersz matrycy wzorców.";
-    strings["Don't apply Game Boy envelope on note-less instrument change##sgcf"].plurals[0] = "nie uzywaj obwiedni Game Boya przy zmianie instrumntu bez nuty";
+    strings["Don't apply Game Boy envelope on note-less instrument change##sgcf"].plurals[0] = "nie uzywaj obwiedni Game Boya przy zmianie instrumentu bez nuty";
     strings["if this is on, an instrument change will not affect the envelope.##sgcf"].plurals[0] = "gdy ta flaga jest włączona, zmiana instrumentu bez zmiany nuty nie będzie miała wpływu na obwiednię.";
     strings["Ignore DAC mode change outside of intended channel in ExtCh mode##sgcf"].plurals[0] = "Ignoruj przełączanie trybu DAC, poza odpowiednim kanałem, w trybie rozszerzonego kanału 3";
     strings["if this is on, 17xx has no effect on the operator channels in YM2612.##sgcf"].plurals[0] = "gdy ta flaga jest włączona, 17xx nie działa, jeśli jest umieszczony na operatorach rozszerzonego kanału 3 (dla YM2612).";
@@ -511,7 +511,7 @@ void DivLocale::addTranslationsPolish()
     strings["paste mix (background)##sggu"].plurals[0] = "wklej (zastąp istniejący)";
     strings["paste with ins (foreground)##sggu"].plurals[0] = "wklej na wierzch instrument (bez zastępowania istniejącego)";
     strings["no instruments available##sggu0"].plurals[0] = "brak dostepnych instrumentów";
-    strings["paste with ins (background)##sggu"].plurals[0] = "wklej instrumnet na wierzch (zastępując istniejący)";
+    strings["paste with ins (background)##sggu"].plurals[0] = "wklej instrumet na wierzch (zastępując istniejący)";
     strings["no instruments available##sggu1"].plurals[0] = "brak dostępnych instrumentów";
     strings["paste flood##sggu"].plurals[0] = "wstaw z buforem, powtarzając cykl (do końca wzorca)";
     strings["paste overflow##sggu"].plurals[0] = "wstaw (z możliwym przejściem do następnego wzorca)";
@@ -2446,7 +2446,7 @@ void DivLocale::addTranslationsPolish()
     strings["About Furnace###About Furnace"].plurals[0] = "O Furnace###About Furnace";
     strings["Channels###Channels"].plurals[0] = "Kanały###Channels";
     strings["Oscilloscope (per-channel)###Oscilloscope (per-channel)"].plurals[0] = "Oscyloskop (na poscz. kanał)###Oscilloscope (per-channel)";
-    strings["Instruments###Instruments"].plurals[0] = "Instrumnety###Instruments";
+    strings["Instruments###Instruments"].plurals[0] = "Instrumenty###Instruments";
     strings["Wavetables###Wavetables"].plurals[0] = "Tablice fal###Wavetables";
     strings["Debug###Debug"].plurals[0] = "Menu Debugowania###Debug";
     strings["Samples###Samples"].plurals[0] = "Sample###Samples";
@@ -2987,7 +2987,7 @@ void DivLocale::addTranslationsPolish()
     strings["Channel type##CTC1"].plurals[0] = "Zgodnie z typem kanału##CTC1";
     strings["Instrument type##CTC2"].plurals[0] = "Zgodnie z typem instrumentu##CTC2";
     strings["Assets##sgse1"].plurals[0] = "Prezentacja zasobów modułu";
-    strings["Unified instrument/wavetable/sample list##sgse"].plurals[0] = "Połączona lista instrumnetów, tablic fal i sampli";
+    strings["Unified instrument/wavetable/sample list##sgse"].plurals[0] = "Połączona lista instrumentów, tablic fal i sampli";
     strings["Horizontal instrument list##sgse"].plurals[0] = "Pozioma lista instrumentów";
     strings["Instrument list icon style:##sgse"].plurals[0] = "Styl ikon listy instrumentów:";
     strings["None##iis0"].plurals[0] = "Nie pokazuj##iis0";
@@ -3519,7 +3519,7 @@ void DivLocale::addTranslationsPolish()
     strings["Oscillator Sync##sgiC64"].plurals[0] = "Synchronizacja oscylotorów";
     strings["Enable filter##sgiC64"].plurals[0] = "Włącz filtr";
     strings["Initialize filter##sgiC64"].plurals[0] = "Inicjalizuj filtr";
-    strings["Cutoff##sgiC640"].plurals[0] = "Punkt odciecia";
+    strings["Cutoff##sgiC640"].plurals[0] = "Punkt odcięcia";
     strings["Resonance##sgiC640"].plurals[0] = "Rezonans)";
     strings["Filter Mode##sgiC640"].plurals[0] = "typ filtra";
     strings["low##sgiC64"].plurals[0] = "dolno";
@@ -4663,7 +4663,7 @@ void DivLocale::addTranslationsPolish()
     strings["Phase Reset##sgiSU"].plurals[0] = "Reset fazy";
     strings["Cutoff##sgiSU"].plurals[0] = "Punkt odcięcia";
     strings["Resonance##sgiSU"].plurals[0] = "Rezonans";
-    strings["Control##sgiSU"].plurals[0] = "Sterownie";
+    strings["Control##sgiSU"].plurals[0] = "Sterowanie";
     strings["Phase Reset Timer##sgiSU"].plurals[0] = "Timer resetu fazy";
 
     //   sgiSWAN   src/gui/inst/swan.cpp
@@ -5336,7 +5336,7 @@ void DivLocale::addTranslationsPolish()
     strings["10xx: Set waveform (0 to 4; 0 to 3 on noise)##sesd"].plurals[0] = "10xx: Ustaw kształt fali (0-4; 0-3 na kanale szumu)";
     strings["11xx: Set noise frequency source (0: fixed; 1-3: channels 1 to 3)##sesd"].plurals[0] = "11xx: Ustaw źródło częstotliwości szumu(0: stały, 1-3: kanały 1-3)";
     strings["12xx: Toggle high-pass with next channel##sesd"].plurals[0] = "12xx: Włącz filtr gornoprzep. na następnym kanale";
-    strings["13xx: Toggle ring modulation with channel+2##sesd"].plurals[0] = "13xx: Włącz modulację kolową na kanale +2";
+    strings["13xx: Toggle ring modulation with channel+2##sesd"].plurals[0] = "13xx: Włącz modulację kołową na kanale +2";
     strings["14xx: Toggle swap counters (noise only)##sesd"].plurals[0] = "14xx: Włącz zamianę liczników (tylko szum)";
     strings["15xx: Toggle low pass (noise only)##sesd"].plurals[0] = "15xx: Włącz filtr dolnoprzep. (tylko szum)";
     strings["16xx: Set clock divider (0: /2; 1: /3)##sesd"].plurals[0] = "16xx: Ustaw dzielnik zegara (0: /2; 1: /3)";
