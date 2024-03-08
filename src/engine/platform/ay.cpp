@@ -910,6 +910,7 @@ void DivPlatformAY8910::setFlags(const DivConfig& flags) {
       clockSel=flags.getBool("halfClock",false);
       sunsoft=false;
       intellivision=false;
+      clockSel=flags.getBool("halfClock",false);
       break;
     case 2:
       ay=new sunsoft_5b_sound_device(rate);

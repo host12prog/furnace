@@ -73,10 +73,10 @@ class DivPlatformES5503: public DivDispatch {
     QueuedWrite(unsigned int a, unsigned int v): addr(a), val(v) {}
   };
   FixedQueue<QueuedWrite,1024> writes;
-  unsigned char lastPan;
 
   int curChan;
-  unsigned char sampleBank, lfoMode, lfoSpeed;
+
+  DivMemoryComposition memCompo;
 
   uint32_t sampleOffsets[256];
   bool sampleLoaded[256];
@@ -126,6 +126,7 @@ class DivPlatformES5503: public DivDispatch {
     bool getLegacyAlwaysSetVolume();
     size_t getSampleMemCapacity(int index = 0);
     bool isSampleLoaded(int index, int sample);
+    const DivMemoryComposition* getMemCompo(int index);
     size_t getSampleMemUsage(int index = 0);
     void renderSamples(int chipID);
 };

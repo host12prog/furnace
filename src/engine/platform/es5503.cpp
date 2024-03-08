@@ -801,12 +801,22 @@ size_t DivPlatformES5503::getSampleMemUsage(int index) {
   return index == 0 ? (getSampleMemCapacity() - count_free_blocks() * 256) : 0;
 }
 
+const DivMemoryComposition* DivPlatformES5503::getMemCompo(int index) {
+  if (index!=0) return NULL;
+  return &memCompo;
+}
+
 void DivPlatformES5503::renderSamples(int sysID) {
   memset(es5503.sampleMem,0,getSampleMemCapacity());
   memset(sampleOffsets,0,256*sizeof(uint32_t));
   memset(sampleLoaded,0,256*sizeof(bool));
   memset(free_block,1,256*sizeof(bool));
   memset(sampleLengths,0,256*sizeof(uint32_t));
+
+  memCompo=DivMemoryComposition();
+  memCompo.name="Chip Memory";
+
+  //memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_WAVE_RAM,"Reserved wavetable RAM",-1,0,reserved_blocks * 256));
 
   memset(wavetable_blocks_offsets,0,32*sizeof(uint32_t));
 
@@ -871,7 +881,9 @@ void DivPlatformES5503::renderSamples(int sysID) {
         sampleLoaded[i] = true;
         sampleOffsets[i] = actual_start_pos;
 
-        logW("sample %d length %d startpos %d", i, sampleLengths[i], sampleOffsets[i]);
+        memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,actual_start_pos,actual_start_pos + sampleLengths[i]));
+
+        //logW("sample %d length %d startpos %d", i, sampleLengths[i], sampleOffsets[i]);
 
         for(int b = start_pos; b < start_pos + num_blocks; b++)
         {
@@ -888,7 +900,11 @@ void DivPlatformES5503::renderSamples(int sysID) {
     int block_index = is_enough_continuous_memory(0);
     wavetable_blocks_offsets[i] = block_index * 256;
     free_block[block_index] = false;
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_WAVE_RAM,"Reserved wavetable RAM",-1,block_index * 256,block_index * 256 + 256));
   }
+
+  memCompo.used=getSampleMemUsage(0);
+  memCompo.capacity=getSampleMemCapacity(0);
 }
 
 DivDispatchOscBuffer* DivPlatformES5503::getOscBuffer(int ch) {
