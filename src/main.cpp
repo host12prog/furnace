@@ -389,14 +389,14 @@ void initParams() {
 
   params.push_back(TAParam("B","benchmark",true,pBenchmark,"render|seek","run performance test"));
 
-  params.push_back(TAParam("V","version",false,pVersion,"","view information about Furnace."));
+  params.push_back(TAParam("V","version",false,pVersion,"","view information about Furnace-B."));
   params.push_back(TAParam("W","warranty",false,pWarranty,"","view warranty disclaimer."));
 }
 
 #ifdef _WIN32
 void reportError(String what) {
   logE("%s",what);
-  MessageBox(NULL,what.c_str(),"Furnace",MB_OK|MB_ICONERROR);
+  MessageBox(NULL,what.c_str(),"Furnace-B",MB_OK|MB_ICONERROR);
 }
 #elif defined(ANDROID)
 void reportError(String what) {
@@ -548,14 +548,14 @@ int main(int argc, char** argv) {
 #ifdef HAVE_GUI
   if (e.preInit(consoleMode || benchMode || infoMode || outName!="" || vgmOutName!="" || cmdOutName!="")) {
     if (consoleMode || benchMode || infoMode || outName!="" || vgmOutName!="" || cmdOutName!="") {
-      logW("engine wants safe mode, but Furnace GUI is not going to start.");
+      logW("engine wants safe mode, but Furnace-B GUI is not going to start.");
     } else {
       safeMode=true;
     }
   }
 #else
   if (e.preInit(true)) {
-    logW("engine wants safe mode, but Furnace GUI is not available.");
+    logW("engine wants safe mode, but Furnace-B GUI is not available.");
   }
 #endif
 
