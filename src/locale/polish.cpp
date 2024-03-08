@@ -514,7 +514,7 @@ void DivLocale::addTranslationsPolish()
     strings["paste with ins (background)##sggu"].plurals[0] = "wklej instrumnet na wierzch (zastępując istniejący)";
     strings["no instruments available##sggu1"].plurals[0] = "brak dostępnych instrumentów";
     strings["paste flood##sggu"].plurals[0] = "wstaw z buforem, powtarzając cykl (do końca wzorca)";
-    strings["paste overflow##sggu"].plurals[0] = "wstaw (z możliwym przejściem do następnego wzoru))";
+    strings["paste overflow##sggu"].plurals[0] = "wstaw (z możliwym przejściem do następnego wzorca)";
     strings["delete##sggu0"].plurals[0] = "usuń";
     strings["select all##sggu"].plurals[0] = "wybierz wszystko";
     strings["operation mask...##sggu"].plurals[0] = "maska operacji...";
@@ -523,7 +523,7 @@ void DivLocale::addTranslationsPolish()
     strings["insert##sggu"].plurals[0] = "wstaw pusty wiersz";
     strings["paste##sggu1"].plurals[0] = "wklej";
     strings["transpose (note)##sggu"].plurals[0] = "transponuj nutę";
-    strings["transpose (value)##sggu"].plurals[0] = "transponuj (parametry))";
+    strings["transpose (value)##sggu"].plurals[0] = "transponuj (parametry)";
     strings["interpolate##sggu0"].plurals[0] = "interpoluj";
     strings["fade##sggu"].plurals[0] = "zanikaj";
     strings["invert values##sggu0"].plurals[0] = "odwróć parametry";
@@ -615,7 +615,7 @@ void DivLocale::addTranslationsPolish()
     strings["configure chip...##sggu"].plurals[0] = "konfiguruj układ...";
     strings["change chip...##sggu"].plurals[0] = "zmień układ...";
     strings["Preserve channel positions##sggu0"].plurals[0] = "Zachowaj pozycję kanałów";
-    strings["remove chip...##sggu"].plurals[0] = "usuń układ..";
+    strings["remove chip...##sggu"].plurals[0] = "usuń układ...";
     strings["Preserve channel positions##sggu1"].plurals[0] = "Zachowaj pozycję kanałów";
     strings["cannot remove chip! (##sggu"].plurals[0] = "nie mozna usunąć ukladu! (";
     strings["cannot change chip! (##sggu"].plurals[0] = "nie można zmienić układu (";
@@ -860,14 +860,14 @@ void DivLocale::addTranslationsPolish()
     strings["---Global##sggc"].plurals[0] = "---Globalny";
     strings["New##sggc"].plurals[0] = "Nowy";
     strings["Open file##sggc"].plurals[0] = "Otwórz plik";
-    strings["Restore backup##sggc"].plurals[0] = "Przywróc kopię zapasową";
+    strings["Restore backup##sggc"].plurals[0] = "Przywróć kopię zapasową";
     strings["Save file##sggc"].plurals[0] = "Zapisz plik";
     strings["Save as##sggc"].plurals[0] = "Zapisz jako";
     strings["Export##sggc"].plurals[0] = "Eksportuj";
     strings["Undo##sggc"].plurals[0] = "Cofnij";
     strings["Redo##sggc"].plurals[0] = "Ponów";
     strings["Exit##sggc"].plurals[0] = "Wyjdź";
-    strings["Play/Stop (toggle)##sggc"].plurals[0] = "Start/stop (przelacznik))";
+    strings["Play/Stop (toggle)##sggc"].plurals[0] = "Start/stop (przełącznik)";
     strings["Play##sggc"].plurals[0] = "Odtwarzaj";
     strings["Stop##sggc"].plurals[0] = "Stop";
     strings["Play (from beginning)##sggc"].plurals[0] = "Odtwarzaj (od początku)";
@@ -1269,7 +1269,7 @@ void DivLocale::addTranslationsPolish()
     strings["multiple files (one per chip)##sgeo"].plurals[0] = "wiele plików (po jednym na układ)";
     strings["multiple files (one per channel)##sgeo"].plurals[0] = "wiele plików (po jednym na kanał)";
     strings["Loops##sgeo"].plurals[0] = "Ilość powtórzeń";
-    strings["Fade out (seconds)##sgeo"].plurals[0] = "Zanikanie (w sekundach))";
+    strings["Fade out (seconds)##sgeo"].plurals[0] = "Zanikanie (w sekundach)";
     strings["Cancel##sgeo0"].plurals[0] = "Anuluj";
     strings["Export##sgeo0"].plurals[0] = "Eksportuj";
     strings["settings:##sgeo"].plurals[0] = "ustawienia:";
@@ -1526,7 +1526,7 @@ void DivLocale::addTranslationsPolish()
     strings["Order change mode: entire row##sgor"].plurals[0] = "Tryb zmiany: cały wiersz";
     strings["Order change mode: one##sgor"].plurals[0] = "Tryb zmiany: jedna komórka";
     strings["Order edit mode: Select and type (scroll vertically)##sgor"].plurals[0] = "Tryb edycji: Wybierz i wpisz (przewiń w pionie)";
-    strings["Order edit mode: Select and type (scroll horizontally)##sgor"].plurals[0] = "Tryb edycji: Wybierz i wpisz (przewiń w poziomie))";
+    strings["Order edit mode: Select and type (scroll horizontally)##sgor"].plurals[0] = "Tryb edycji: Wybierz i wpisz (przewiń w poziomie)";
     strings["Order edit mode: Select and type (don't scroll)##sgor"].plurals[0] = "Tryb edycji: Wybierz i wpisz";
     strings["Order edit mode: Click to change##sgor"].plurals[0] = "Tryb edycji: kliknij by zmienić";
 
@@ -1871,7 +1871,7 @@ void DivLocale::addTranslationsPolish()
 
     //   sgrv  src/gui/regView.cpp
 
-    strings["Register View###Register View"].plurals[0] = "Podglad rejestrow###Register View";
+    strings["Register View###Register View"].plurals[0] = "Podglad rejestrów###Register View";
     strings["- no register pool available##sgrv"].plurals[0] = "- lista rejestrów niedostępna";
 
     //   sgse  src/gui/sampleEdit.cpp
@@ -1928,7 +1928,7 @@ void DivLocale::addTranslationsPolish()
     strings["backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506##sgse"].plurals[0] = "Tryb odwrócony jest obsługiwany tylko przez uniwersalny przetwornik C/A, a także przez ES5506.";
     strings["Info##sgse"].plurals[0] = "Info";
     strings["Rate##sgse0"].plurals[0] = "Częstotliwość";
-    strings["Compat Rate##sgse"].plurals[0] = "Kompatybilna częstotliwość";
+    strings["Compat Rate##sgse"].plurals[0] = "Kompat. częstotliwość";
     strings["used in DefleMask-compatible sample mode (17xx), in where samples are mapped to an octave.##sgse"].plurals[0] = "jest używana podczas odtwarzania w trybie zgodności z DefleMaskiem (17xx), w którym sample odpowiadają oktawie.";
     strings["Loop##sgse"].plurals[0] = "Pętla";
     strings["Loop (length: %d)##Loop"].plurals[0] = "Pętla (długość: %d)##Loop";
@@ -2036,7 +2036,7 @@ void DivLocale::addTranslationsPolish()
     strings["Album##sgsi"].plurals[0] = "Album";
     strings["System##sgsi"].plurals[0] = "System";
     strings["Auto##sgsi"].plurals[0] = "Auto";
-    strings["Tuning (A-4)##sgsi"].plurals[0] = "Tuning (A-4))";
+    strings["Tuning (A-4)##sgsi"].plurals[0] = "Tuning (A-4)";
 
     //   sgsn  src/gui/songNotes.cpp
 
@@ -2237,7 +2237,7 @@ void DivLocale::addTranslationsPolish()
     strings["Compatible panning (0800)##sgsc"].plurals[0] = "Kompatybilny panning (0800)";
     strings["Clock rate:##sgsc15"].plurals[0] = "Taktowanie zegara:";
     strings["Output rate:##sgsc3"].plurals[0] = "Częstotliwość audio na wyjściu:";
-    strings["Output bit depth:##sgsc"].plurals[0] = "Rozdzielczośćć audio na wyjściu:";
+    strings["Output bit depth:##sgsc"].plurals[0] = "Rozdzielczość audio na wyjściu:";
     strings["Stereo##sgsc2"].plurals[0] = "Stereo";
     strings["Interpolation:##sgsc"].plurals[0] = "Interpolacja:";
     strings["None##sgsc"].plurals[0] = "Wył.";
@@ -2576,7 +2576,7 @@ void DivLocale::addTranslationsPolish()
     strings["render using shaders that run on the graphics card.\nonly available in OpenGL render backend.##sgse"].plurals[0] = "renderowanie przy użyciu shaderów wykonywanych na GPU.\ndostępny wyłącznie na silniku renderowania OpenGL";
     strings["File##sgse"].plurals[0] = "Plik";
     strings["Use system file picker##sgse"].plurals[0] = "Użyj systemowego okna wyboru plików";
-    strings["Number of recent files##sgse"].plurals[0] = "Ilośćć ostatnich plików";
+    strings["Number of recent files##sgse"].plurals[0] = "Ilość ostatnich plików";
     strings["Compress when saving##sgse"].plurals[0] = "Kompresuj podczas zapisu";
     strings["use zlib to compress saved songs.##sgse"].plurals[0] = "иużywaj biblioteki zlib do kompresji utworów.";
     strings["Save unused patterns##sgse"].plurals[0] = "Zapisuj nieużywane wzorce";
@@ -2778,8 +2778,8 @@ void DivLocale::addTranslationsPolish()
     strings["Compact##ecl1"].plurals[0] = "Kompatowy##ecl1";
     strings["Compact (vertical)##ecl2"].plurals[0] = "Kompaktowy (pionowy)##ecl2";
     strings["Split##ecl3"].plurals[0] = "Podzielony na dwa okna##ecl3";
-    strings["Position of buttons in Orders:##sgse"].plurals[0] = "Pozycja przyciskow w matrycy wzorcow:";
-    strings["Top##obp0"].plurals[0] = "Na gorze##obp0";
+    strings["Position of buttons in Orders:##sgse"].plurals[0] = "Pozycja przycisków w matrycy wzorców:";
+    strings["Top##obp0"].plurals[0] = "Na górze##obp0";
     strings["Left##obp1"].plurals[0] = "Z lewej##obp1";
     strings["Right##obp2"].plurals[0] = "Z prawej##obp2";
     strings["Mouse##sgse"].plurals[0] = "Mysz";
@@ -2996,7 +2996,7 @@ void DivLocale::addTranslationsPolish()
     strings["Letter icons##iis2"].plurals[0] = "Ikony liter##iis2";
     strings["Colorize instrument editor using instrument type##sgse"].plurals[0] = "Zmień kolory edytora instrumentów zgodnie z typem instrumentu";
     strings["Macro Editor##sgse0"].plurals[0] = "Edytor makr";
-    strings["Macro editor layout:##sgse"].plurals[0] = "Układ edyutora makr:";
+    strings["Macro editor layout:##sgse"].plurals[0] = "Układ edytora makr:";
     strings["Unified##mel0"].plurals[0] = "Połączony##mel0";
     strings["Grid##mel2"].plurals[0] = "Siatka##mel2";
     strings["Single (with list)##mel3"].plurals[0] = "Pojedyncze okno (z listą)##mel3";
@@ -3667,7 +3667,7 @@ void DivLocale::addTranslationsPolish()
     strings["Arpeggio##sgiFDS"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiFDS"].plurals[0] = "Wysokość";
     strings["Waveform##sgiFDS"].plurals[0] = "Fala";
-    strings["Mod Depth##sgiFDS"].plurals[0] = "Głębokość mod..";
+    strings["Mod Depth##sgiFDS"].plurals[0] = "Głębokość mod.";
     strings["Mod Speed##sgiFDS"].plurals[0] = "Szybkość mod.";
     strings["Mod Position##sgiFDS"].plurals[0] = "Położenie mod.";
 
