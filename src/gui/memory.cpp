@@ -96,15 +96,15 @@ void FurnaceGUI::drawMemory() {
                     DivSample* sample=e->getSample(entry.asset);
                     ImGui::Text("%d: %s",curHover,sample->name.c_str());
                     if ((int)entry.type>=(int)DIV_MEMORY_BANK0) {
-                      ImGui::Text("bank %d",(int)entry.type-(int)DIV_MEMORY_BANK0);
+                      ImGui::Text(_L("bank %d##sgme"),(int)entry.type-(int)DIV_MEMORY_BANK0);
                     }
-                    ImGui::Text("%d-%d ($%x-$%x): %d bytes ($%x)",(int)entry.begin,(int)entry.end-1,(int)entry.begin,(int)entry.end-1,(int)(entry.end-entry.begin),(int)(entry.end-entry.begin));
-                    ImGui::Text("click to open sample editor");
+                    ImGui::Text(_L("%d-%d ($%x-$%x): %d bytes ($%x)##sgme"),(int)entry.begin,(int)entry.end-1,(int)entry.begin,(int)entry.end-1,(int)(entry.end-entry.begin),(int)(entry.end-entry.begin));
+                    ImGui::Text(_L("click to open sample editor##sgme"));
                     break;
                   }
                   default:
                     ImGui::Text("%d: %s",curHover,entry.name.c_str());
-                    ImGui::Text("%d-%d ($%x-$%x): %d bytes ($%x)",(int)entry.begin,(int)entry.end-1,(int)entry.begin,(int)entry.end-1,(int)(entry.end-entry.begin),(int)(entry.end-entry.begin));
+                    ImGui::Text(_L("%d-%d ($%x-$%x): %d bytes ($%x)##sgme"),(int)entry.begin,(int)entry.end-1,(int)entry.begin,(int)entry.end-1,(int)(entry.end-entry.begin),(int)(entry.end-entry.begin));
                     break;
                 }
 
@@ -118,8 +118,8 @@ void FurnaceGUI::drawMemory() {
 
     if (!have) {
       ImGui::SetCursorPosY(ImGui::GetCursorPosY()+(ImGui::GetContentRegionAvail().y-ImGui::GetFrameHeight()+ImGui::GetStyle().ItemSpacing.y)*0.5f);
-      CENTER_TEXT("no chips with memory");
-      ImGui::Text("no chips with memory");
+      CENTER_TEXT(_L("no chips with memory##sgme"));
+      ImGui::Text(_L("no chips with memory##sgme"));
     }
   }
   if (ImGui::IsWindowFocused(ImGuiFocusedFlags_ChildWindows)) curWindow=GUI_WINDOW_MEMORY;

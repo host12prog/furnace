@@ -1570,6 +1570,11 @@ void DivLocale::addTranslationsTemplate()
     //   sgme  src/gui/memory.cpp
 
     strings["Memory Composition###Memory Composition"].plurals[0] = "=Memory Composition###Memory Composition";
+    strings["bank %d##sgme"].plurals[0] = "=bank %d";
+    strings["%d-%d ($%x-$%x): %d bytes ($%x)##sgme"].plurals[0] = "=%d-%d ($%x-$%x): %d bytes ($%x)";
+    strings["click to open sample editor##sgme"].plurals[0] = "=click to open sample editor";
+    strings["%d-%d ($%x-$%x): %d bytes ($%x)##sgme"].plurals[0] = "=%d-%d ($%x-$%x): %d bytes ($%x)";
+    strings["no chips with memory##sgme"].plurals[0] = "=no chips with memory";
 
     //   sgor  src/gui/orders.cpp
 
@@ -2119,7 +2124,6 @@ void DivLocale::addTranslationsTemplate()
 
     strings["Statistics###Statistics"].plurals[0] = "=Statistics###Statistics";
     strings["Audio load##sgst"].plurals[0] = "=Audio load";
-    strings["%d/%dKB##sgst"].plurals[0] = "=%d/%dKB";
 
     //   sgss  src/gui/subSongs.cpp
 
@@ -2345,6 +2349,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Reserved blocks for wavetables:##sgsc"].plurals[0] = "=Reserved blocks for wavetables:";
     strings["Reserve this many blocks 256 bytes each in sample memory.\nEach block holds one wavetable (is used for one wavetable channel),\nso reserve as many as you need.##sgsc"].plurals[0] = "=Reserve this many blocks 256 bytes each in sample memory.\nEach block holds one wavetable (is used for one wavetable channel),\nso reserve as many as you need.";
     strings["Custom clock rate##sgsc"].plurals[0] = "=Custom clock rate";
+    strings["Hz##sgscHz"].plurals[0] = "=Hz##sgscHz";
     strings["1MB##sgsc"].plurals[0] = "=1MB";
     strings["256KB##sgsc"].plurals[0] = "=256KB";
     strings["Namco System 2 (2MB)##sgsc"].plurals[0] = "=Namco System 2 (2MB)";
@@ -3105,6 +3110,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Piano##sgse"].plurals[0] = "=Piano";
     strings["Clock##sgse"].plurals[0] = "=Clock";
     strings["Patchbay##sgse"].plurals[0] = "=Patchbay";
+    strings["Memory Composition##sgse"].plurals[0] = "=Memory Composition##sgse";
     strings["Log Viewer##sgse"].plurals[0] = "=Log Viewer";
 
     // these are messy, but the ##CC_GUI... is required.
@@ -3420,6 +3426,25 @@ void DivLocale::addTranslationsTemplate()
     strings["Port (hidden/unavailable)##CC_GUI_COLOR_PATCHBAY_PORT_HIDDEN"].plurals[0] = "=Port (hidden/unavailable)##CC_GUI_COLOR_PATCHBAY_PORT_HIDDEN";
     strings["Connection (selected)##CC_GUI_COLOR_PATCHBAY_CONNECTION"].plurals[0] = "=Connection (selected)##CC_GUI_COLOR_PATCHBAY_CONNECTION";
     strings["Connection (other)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG"].plurals[0] = "=Connection (other)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG";
+
+    strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "=Background##CC_GUI_COLOR_MEMORY_BG";
+    strings["Unknown##CC_GUI_COLOR_MEMORY_FREE"].plurals[0] = "=Unknown##CC_GUI_COLOR_MEMORY_FREE";
+    strings["Reserved##CC_GUI_COLOR_MEMORY_RESERVED"].plurals[0] = "=Reserved##CC_GUI_COLOR_MEMORY_RESERVED";
+    strings["Sample##CC_GUI_COLOR_MEMORY_SAMPLE"].plurals[0] = "=Sample##CC_GUI_COLOR_MEMORY_SAMPLE";
+    strings["Sample (alternate 1)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT1"].plurals[0] = "=Sample (alternate 1)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT1";
+    strings["Sample (alternate 2)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT2"].plurals[0] = "=Sample (alternate 2)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT2";
+    strings["Sample (alternate 3)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT3"].plurals[0] = "=Sample (alternate 3)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT3";
+    strings["Wave RAM##CC_GUI_COLOR_MEMORY_WAVE_RAM"].plurals[0] = "=Wave RAM##CC_GUI_COLOR_MEMORY_WAVE_RAM";
+    strings["Wavetable (static)##CC_GUI_COLOR_MEMORY_WAVE_STATIC"].plurals[0] = "=Wavetable (static)##CC_GUI_COLOR_MEMORY_WAVE_STATIC";
+    strings["Echo buffer##CC_GUI_COLOR_MEMORY_ECHO"].plurals[0] = "=Echo buffer##CC_GUI_COLOR_MEMORY_ECHO";
+    strings["Sample (bank 0)##CC_GUI_COLOR_MEMORY_BANK0"].plurals[0] = "=Sample (bank 0)##CC_GUI_COLOR_MEMORY_BANK0";
+    strings["Sample (bank 1)##CC_GUI_COLOR_MEMORY_BANK1"].plurals[0] = "=Sample (bank 1)##CC_GUI_COLOR_MEMORY_BANK1";
+    strings["Sample (bank 2)##CC_GUI_COLOR_MEMORY_BANK2"].plurals[0] = "=Sample (bank 2)##CC_GUI_COLOR_MEMORY_BANK2";
+    strings["Sample (bank 3)##CC_GUI_COLOR_MEMORY_BANK3"].plurals[0] = "=Sample (bank 3)##CC_GUI_COLOR_MEMORY_BANK3";
+    strings["Sample (bank 4)##CC_GUI_COLOR_MEMORY_BANK4"].plurals[0] = "=Sample (bank 4)##CC_GUI_COLOR_MEMORY_BANK4";
+    strings["Sample (bank 5)##CC_GUI_COLOR_MEMORY_BANK5"].plurals[0] = "=Sample (bank 5)##CC_GUI_COLOR_MEMORY_BANK5";
+    strings["Sample (bank 6)##CC_GUI_COLOR_MEMORY_BANK6"].plurals[0] = "=Sample (bank 6)##CC_GUI_COLOR_MEMORY_BANK6";
+    strings["Sample (bank 7)##CC_GUI_COLOR_MEMORY_BANK7"].plurals[0] = "=Sample (bank 7)##CC_GUI_COLOR_MEMORY_BANK7";
 
     strings["Log level: Error##CC_GUI_COLOR_LOGLEVEL_ERROR"].plurals[0] = "=Log level: Error##CC_GUI_COLOR_LOGLEVEL_ERROR";
     strings["Log level: Warning##CC_GUI_COLOR_LOGLEVEL_WARNING"].plurals[0] = "=Log level: Warning##CC_GUI_COLOR_LOGLEVEL_WARNING";

@@ -2067,7 +2067,6 @@ void DivLocale::addTranslationsPolish()
 
     strings["Statistics###Statistics"].plurals[0] = "Statystyki###Statistics";
     strings["Audio load##sgst"].plurals[0] = "Obciążenie audio";
-    strings["%d/%dKB##sgst"].plurals[0] = "%d/%d kB";
 
     //   sgss  src/gui/subSongs.cpp
 

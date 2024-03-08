@@ -1514,6 +1514,11 @@ void DivLocale::addTranslationsRussian()
     //   sgme  src/gui/memory.cpp
 
     strings["Memory Composition###Memory Composition"].plurals[0] = "Содержание памяти###Memory Composition";
+    strings["bank %d##sgme"].plurals[0] = "банк %d";
+    strings["%d-%d ($%x-$%x): %d bytes ($%x)##sgme"].plurals[0] = "%d-%d ($%x-$%x): %d байт ($%x)";
+    strings["click to open sample editor##sgme"].plurals[0] = "нажмите, чтобы открыть редактор сэмплов";
+    strings["%d-%d ($%x-$%x): %d bytes ($%x)##sgme"].plurals[0] = "%d-%d ($%x-$%x): %d байт ($%x)";
+    strings["no chips with memory##sgme"].plurals[0] = "нет чипов с памятью";
 
     //   sgor  src/gui/orders.cpp
 
@@ -2067,7 +2072,6 @@ void DivLocale::addTranslationsRussian()
 
     strings["Statistics###Statistics"].plurals[0] = "Статистика###Statistics";
     strings["Audio load##sgst"].plurals[0] = "Нагрузка от аудио";
-    strings["%d/%dKB##sgst"].plurals[0] = "%d/%d КиБ";
 
     //   sgss  src/gui/subSongs.cpp
 
@@ -2293,6 +2297,7 @@ void DivLocale::addTranslationsRussian()
     strings["Reserved blocks for wavetables:##sgsc"].plurals[0] = "Зарезервированных блоков под волновые таблицы:";
     strings["Reserve this many blocks 256 bytes each in sample memory.\nEach block holds one wavetable (is used for one wavetable channel),\nso reserve as many as you need.##sgsc"].plurals[0] = "Зарезервировать столько блоков, каждый по 256 байт, в памяти сэмплов.\nВ каждый блок помещается одна волновая таблица (он используется для одного канала в режиме волновых таблиц),\nтак что выделяйте столько, сколько вам нужно.";
     strings["Custom clock rate##sgsc"].plurals[0] = "Пользовательская тактовая частота";
+    strings["Hz##sgscHz"].plurals[0] = "Гц##sgscHz";
     strings["1MB##sgsc"].plurals[0] = "1 МиБ";
     strings["256KB##sgsc"].plurals[0] = "256 КиБ";
     strings["Namco System 2 (2MB)##sgsc"].plurals[0] = "Namco System 2 (2 МиБ)";
@@ -3074,6 +3079,7 @@ void DivLocale::addTranslationsRussian()
     strings["Piano##sgse"].plurals[0] = "Клавиатура пианино";
     strings["Clock##sgse"].plurals[0] = "Часы";
     strings["Patchbay##sgse"].plurals[0] = "Соединение каналов";
+    strings["Memory Composition##sgse"].plurals[0] = "Содержание памяти##sgse";
     strings["Log Viewer##sgse"].plurals[0] = "Просмотр логов";
 
     // these are messy, but the ##CC_GUI... is required.
@@ -3389,6 +3395,25 @@ void DivLocale::addTranslationsRussian()
     strings["Port (hidden/unavailable)##CC_GUI_COLOR_PATCHBAY_PORT_HIDDEN"].plurals[0] = "Порт (скрыт/недоступен)##CC_GUI_COLOR_PATCHBAY_PORT_HIDDEN";
     strings["Connection (selected)##CC_GUI_COLOR_PATCHBAY_CONNECTION"].plurals[0] = "Соединение (выделенное)##CC_GUI_COLOR_PATCHBAY_CONNECTION";
     strings["Connection (other)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG"].plurals[0] = "Соединение (обычное)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG";
+
+    strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Фон##CC_GUI_COLOR_MEMORY_BG";
+    strings["Unknown##CC_GUI_COLOR_MEMORY_FREE"].plurals[0] = "Неизв.##CC_GUI_COLOR_MEMORY_FREE";
+    strings["Reserved##CC_GUI_COLOR_MEMORY_RESERVED"].plurals[0] = "Зарезерв.##CC_GUI_COLOR_MEMORY_RESERVED";
+    strings["Sample##CC_GUI_COLOR_MEMORY_SAMPLE"].plurals[0] = "Сэмпл##CC_GUI_COLOR_MEMORY_SAMPLE";
+    strings["Sample (alternate 1)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT1"].plurals[0] = "Сэмпл (альтерн. 1)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT1";
+    strings["Sample (alternate 2)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT2"].plurals[0] = "Сэмпл (альтерн. 2)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT2";
+    strings["Sample (alternate 3)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT3"].plurals[0] = "Сэмпл (альтерн. 3)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT3";
+    strings["Wave RAM##CC_GUI_COLOR_MEMORY_WAVE_RAM"].plurals[0] = "ОЗУ волн##CC_GUI_COLOR_MEMORY_WAVE_RAM";
+    strings["Wavetable (static)##CC_GUI_COLOR_MEMORY_WAVE_STATIC"].plurals[0] = "Волновая таблица (статич.)##CC_GUI_COLOR_MEMORY_WAVE_STATIC";
+    strings["Echo buffer##CC_GUI_COLOR_MEMORY_ECHO"].plurals[0] = "Буфер эхо##CC_GUI_COLOR_MEMORY_ECHO";
+    strings["Sample (bank 0)##CC_GUI_COLOR_MEMORY_BANK0"].plurals[0] = "Сэмпл (банк 0)##CC_GUI_COLOR_MEMORY_BANK0";
+    strings["Sample (bank 1)##CC_GUI_COLOR_MEMORY_BANK1"].plurals[0] = "Сэмпл (банк 1)##CC_GUI_COLOR_MEMORY_BANK1";
+    strings["Sample (bank 2)##CC_GUI_COLOR_MEMORY_BANK2"].plurals[0] = "Сэмпл (банк 2)##CC_GUI_COLOR_MEMORY_BANK2";
+    strings["Sample (bank 3)##CC_GUI_COLOR_MEMORY_BANK3"].plurals[0] = "Сэмпл (банк 3)##CC_GUI_COLOR_MEMORY_BANK3";
+    strings["Sample (bank 4)##CC_GUI_COLOR_MEMORY_BANK4"].plurals[0] = "Сэмпл (банк 4)##CC_GUI_COLOR_MEMORY_BANK4";
+    strings["Sample (bank 5)##CC_GUI_COLOR_MEMORY_BANK5"].plurals[0] = "Сэмпл (банк 5)##CC_GUI_COLOR_MEMORY_BANK5";
+    strings["Sample (bank 6)##CC_GUI_COLOR_MEMORY_BANK6"].plurals[0] = "Сэмпл (банк 6)##CC_GUI_COLOR_MEMORY_BANK6";
+    strings["Sample (bank 7)##CC_GUI_COLOR_MEMORY_BANK7"].plurals[0] = "Сэмпл (банк 7)##CC_GUI_COLOR_MEMORY_BANK7";
 
     strings["Log level: Error##CC_GUI_COLOR_LOGLEVEL_ERROR"].plurals[0] = "Уровень лога: ошибка##CC_GUI_COLOR_LOGLEVEL_ERROR";
     strings["Log level: Warning##CC_GUI_COLOR_LOGLEVEL_WARNING"].plurals[0] = "Уровень лога: предупреждение##CC_GUI_COLOR_LOGLEVEL_WARNING";

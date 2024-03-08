@@ -2124,7 +2124,6 @@ void DivLocale::addTranslationsPortuguese()
 
     strings["Statistics###Statistics"].plurals[0] = "Estatísticas###Statistics";
     strings["Audio load##sgst"].plurals[0] = "Carga de áudio";
-    strings["%d/%dKB##sgst"].plurals[0] = "%d/%dKB";
 
     //   sgss  src/gui/subSongs.cpp
 
