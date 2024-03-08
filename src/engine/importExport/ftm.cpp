@@ -682,7 +682,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         if (expansions&8) {
           ds.system[systemID++]=DIV_SYSTEM_MMC5;
 
-          for(int ch = 0; ch < 2; ch++)
+          for(int ch = 0; ch < (eft ? 3 : 2); ch++)
           {
             map_channels[curr_chan] = map_ch;
 
@@ -695,8 +695,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             map_ch++;
           }
           
-          map_channels[curr_chan] = map_ch; //do not populate and skip MMC5 PCM channel!
-          map_ch++;
+          if(!eft)
+          {
+            map_channels[curr_chan] = map_ch; //do not populate and skip MMC5 PCM channel!
+            map_ch++;
+          }
         }
         if (expansions&16) {
           ds.system[systemID]=DIV_SYSTEM_N163;
@@ -815,7 +818,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
         unsigned int calcChans=0;
         for (int i=0; i<ds.systemLen; i++) {
-          if(ds.system[i] == DIV_SYSTEM_MMC5)
+          if(ds.system[i] == DIV_SYSTEM_MMC5 && !eft)
           {
             calcChans--; //no PCM channel for MMC5 in famitracker
           }
@@ -830,10 +833,13 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           }
         }
         if (calcChans!=tchans) {
-          logE("channel counts do not match! %d != %d",tchans,calcChans);
-          lastError="channel counts do not match";
-          delete[] file;
-          return false;
+          if(!eft || (eft && (expansions & 8) == 0)) //ignore since I have no idea how to tell apart E-FT versions which do or do not have PCM chan. Yes, this may lead to all the righer channels to be shifted but at least you still get note data!
+          {
+            logE("channel counts do not match! %d != %d",tchans,calcChans);
+            lastError="channel counts do not match";
+            delete[] file;
+            return false;
+          }
         }
         if (tchans>DIV_MAX_CHANS) {
           tchans=DIV_MAX_CHANS;
