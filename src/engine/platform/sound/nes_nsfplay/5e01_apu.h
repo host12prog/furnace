@@ -7,7 +7,7 @@ namespace xgm
   /** Upper half of APU **/
   class I5E01_APU
   {
-  protected:
+  public:
     enum
     {
         OPT_UNMUTE_ON_RESET=0,

@@ -5377,6 +5377,9 @@ void DivLocale::addTranslationsRussian()
     strings["15xx: Toggle low pass (noise only)##sesd"].plurals[0] = "15xx: Переключить ФНЧ (только шум)";
     strings["16xx: Set clock divider (0: /2; 1: /3)##sesd"].plurals[0] = "16xx: Делитель частоты (0: /2; 1: /3)";
     strings["a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.##sesd"].plurals[0] = "вымышленный звуковой чип за авторством LTVA. похож на SID, но в нём исправлены многие его проблемы. также в этом чипе имеется дополнительный функционал, например, новые способы смешения волн, тональный зацикленный шум, отдельные регулировка громкости и фильтр на каждом канале.";
+    strings["a fictional sound chip by Euly. similar to Ricoh 2A03, but all the duty cycles are different, noise has 32 pitches instead of 16 and you have four hard-coded waveforms on triangle channel.##sesd"].plurals[0] = "вымышленный звуковой чип за авторством Euly. почти как Ricoh 2A03, но все четыре скважности разные, у шума 32 частоты вместо 16, а на канале треугольной волны можно играть четыре предопределённые волны.";
+    strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1, wave: 0 to 3)##sesd"].plurals[0] = "12xx: Скважность/режим шума (меандр: 0-3; шум: 0 или 1; волна: 0-3)";
+    strings["19xx: Set wave linear counter (0 to 7F; 80 and higher halt)##sesd"].plurals[0] = "19xx: Линейный счётчик канала волны (0-7F; 80 и выше мгновенно останавливают волну)";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "это система, разработанная для тестирования.";
 
     strings["help! what's going on!"].plurals[0] = "помогите! что происходит!";

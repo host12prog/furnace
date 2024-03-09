@@ -697,6 +697,7 @@ src/engine/platform/x1_010.cpp
 src/engine/platform/pokey.cpp
 src/engine/platform/lynx.cpp
 src/engine/platform/sid2.cpp
+src/engine/platform/5e01.cpp
 src/engine/platform/su.cpp
 src/engine/platform/swan.cpp
 src/engine/platform/t6w28.cpp
