@@ -28,18 +28,18 @@ void FurnaceGUI::drawCSPlayer() {
     nextWindow=GUI_WINDOW_NOTHING;
   }
   if (!csPlayerOpen) return;
-  if (ImGui::Begin("Command Stream Player",&csPlayerOpen,globalWinFlags)) {
-    if (ImGui::Button("Load")) {
+  if (ImGui::Begin("Command Stream Player",&csPlayerOpen,globalWinFlags,_L("Command Stream Player###Command Stream Player"))) {
+    if (ImGui::Button(_L("Load##sgcs"))) {
       openFileDialog(GUI_FILE_CMDSTREAM_OPEN);
     }
     ImGui::SameLine();
-    if (ImGui::Button("Kill")) {
+    if (ImGui::Button(_L("Kill##sgcs"))) {
       if (!e->killStream()) {
         showError("Kikai wa mou shindeiru!");
       }
     }
     ImGui::SameLine();
-    if (ImGui::Button("Burn Current Song")) {
+    if (ImGui::Button(_L("Burn Current Song##sgcs"))) {
       SafeWriter* w=e->saveCommand(true);
       if (w!=NULL) {
         if (!e->playStream(w->getFinalBuf(),w->size())) {
@@ -57,10 +57,10 @@ void FurnaceGUI::drawCSPlayer() {
     if (cs) {
       if (ImGui::BeginTabBar("CSOptions")) {
         int chans=e->getTotalChannelCount();
-        if (ImGui::BeginTabItem("Status")) {
+        if (ImGui::BeginTabItem(_L("Status##sgcs"))) {
           ImGui::EndTabItem();
         }
-        if (ImGui::BeginTabItem("Hex")) {
+        if (ImGui::BeginTabItem(_L("Hex##sgcs"))) {
           ImGui::PushFont(patFont);
           if (ImGui::BeginTable("CSHexPos",chans,ImGuiTableFlags_SizingStretchSame)) {
             ImGui::TableNextRow();

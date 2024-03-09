@@ -306,6 +306,15 @@ void DivLocale::addTranslationsRussian()
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "Останавливать аппаратное портаменто на каналах импульсов NES при начале новой ноты";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "Не останавливать эффект изменения громкости при достижении нулевой или максимальной громкости";
 
+    //   sgcs  src/gui/csPlayer.cpp
+
+    strings["Command Stream Player###Command Stream Player"].plurals[0] = "Проигрыватель потока команд###Command Stream Player";
+    strings["Load##sgcs"].plurals[0] = "Загрузить";
+    strings["Kill##sgcs"].plurals[0] = "Остановить";
+    strings["Burn Current Song##sgcs"].plurals[0] = "Сохранить текущий трек";
+    strings["Status##sgcs"].plurals[0] = "Статус";
+    strings["Hex##sgcs"].plurals[0] = "Шест.";
+
     //   sgdl  src/gui/dataList.cpp
 
     strings["Bug!##sgdl"].plurals[0] = "Баг!";
@@ -929,7 +938,7 @@ void DivLocale::addTranslationsRussian()
     strings["Grooves##sggc"].plurals[0] = "Ритм-паттерны";
     strings["Oscilloscope (X-Y)##sggc"].plurals[0] = "Осциллограф (X-Y)";
     strings["Memory Composition##sggc"].plurals[0] = "Содержание памяти";
-
+    strings["Command Stream Player##sggc"].plurals[0] = "Проигрыватель потока команд";
     strings["Collapse/expand current window##sggc"].plurals[0] = "Свернуть/развернуть текущее окно";
     strings["Close current window##sggc"].plurals[0] = "Закрыть текущее окно";
 

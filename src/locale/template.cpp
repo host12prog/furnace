@@ -50,6 +50,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgcl  src/gui/clock.cpp
     //   sgcp  src/gui/commandPalette.cpp
     //   sgcf  src/gui/compatFlags.cpp
+    //   sgcs  src/gui/csPlayer.cpp
     //   sgdl  src/gui/dataList.cpp
     //   sgda  src/gui/doAction.cpp
     //   sgec  src/gui/editControls.cpp
@@ -361,6 +362,15 @@ void DivLocale::addTranslationsTemplate()
     strings["when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels##sgcf"].plurals[0] = "=when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels";
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "=Stop NES pulse channels hardware sweep on new note";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "=Do not stop volume slide after reaching zero or full volume";
+
+    //   sgcs  src/gui/csPlayer.cpp
+
+    strings["Command Stream Player###Command Stream Player"].plurals[0] = "=Command Stream Player###Command Stream Player";
+    strings["Load##sgcs"].plurals[0] = "=Load";
+    strings["Kill##sgcs"].plurals[0] = "=Kill";
+    strings["Burn Current Song##sgcs"].plurals[0] = "=Burn Current Song";
+    strings["Status##sgcs"].plurals[0] = "=Status";
+    strings["Hex##sgcs"].plurals[0] = "=Hex";
 
     //   sgdl  src/gui/dataList.cpp
 
@@ -985,6 +995,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Grooves##sggc"].plurals[0] = "=Grooves";
     strings["Oscilloscope (X-Y)##sggc"].plurals[0] = "=Oscilloscope (X-Y)";
     strings["Memory Composition##sggc"].plurals[0] = "=Memory Composition";
+    strings["Command Stream Player##sggc"].plurals[0] = "=Command Stream Player";
     strings["Collapse/expand current window##sggc"].plurals[0] = "=Collapse/expand current window";
     strings["Close current window##sggc"].plurals[0] = "=Close current window";
     strings["---Pattern##sggc"].plurals[0] = "=---Pattern";
