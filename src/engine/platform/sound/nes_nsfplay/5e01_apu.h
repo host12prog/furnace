@@ -64,7 +64,6 @@ namespace xgm
   public:
       int out[2];
       I5E01_APU ();
-     ~I5E01_APU ();
 
     // // !! fetch frequency directly instead of through GetTrackInfo()
     double GetFrequencyPulse1() const;
