@@ -243,6 +243,7 @@ size | description
      |   - 0xde: YM2610B extended - 19 channels
      |   - 0xe0: QSound - 19 channels
      |   - 0xf0: SID2 - 3 channels
+     |   - 0xf1: 5E01 - 5 channels
      |   - 0xfc: Pong - 1 channel
      |   - 0xfd: Dummy System - 8 channels
      |   - 0xfe: reserved for development
