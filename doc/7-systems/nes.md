@@ -9,6 +9,7 @@ also known as Famicom. it is a five-channel sound generator: first two channels 
 - `11xx`: **write to delta modulation counter.** range is `00` to `7F`.
   - this may be used to attenuate the triangle and noise channels; at `7F`, they will be at about 57% volume.
   - will not work if a sample is playing.
+  - there's an audible click when you change this counter.
 - `12xx`: **set duty cycle or noise mode of channel.**
   - may be `0` to `3` for the pulse channels:
     - `0`: 12.5%
