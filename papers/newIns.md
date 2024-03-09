@@ -734,4 +734,12 @@ size | description
   4  | number of local wavetables
 ```
 
+# POKEY data (PO)
+
+```
+size | description
+-----|------------------------------------
+  1  | raw frequency macro is 16-bit
+```
+
 Then the wavetable data follows, as in "Wavetable" section of [file format](format.md). Yes, each local wavetable starts with `WAVE` signature and stuff. There are as many waves as `number of local wavetables`.
