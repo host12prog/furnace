@@ -770,7 +770,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           }
         }
         if (expansions&256) {
-          ds.system[systemID++]=DIV_SYSTEM_NES;
+          ds.system[systemID++]=DIV_SYSTEM_5E01;
 
           for(int ch = 0; ch < 5; ch++)
           {
