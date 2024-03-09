@@ -1696,9 +1696,7 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
 
   if (subticks==tickMult && cmdStreamInt) {
     if (!cmdStreamInt->tick()) {
-      cmdStreamInt->cleanup();
-      delete cmdStreamInt;
-      cmdStreamInt=NULL;
+      // !!!
     }
   }
 
