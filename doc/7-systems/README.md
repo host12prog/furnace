@@ -64,6 +64,7 @@ some systems have alternate chips, such as the Sega Genesis having a YM2612 or Y
 this is the full list of chips that Furnace supports.
 
 - [2A03](nes.md)
+- [5E01](5e01.md)
 - [Amiga](amiga.md)
 - [AY-3-8910/8914/YM2149(F)/Sunsoft 5B](ay8910.md)
 - [Microship AY8930](ay8930.md)
