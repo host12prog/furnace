@@ -520,6 +520,8 @@ src/engine/platform/sound/nes_nsfplay/nes_fds.cpp
 src/engine/platform/sound/nes_nsfplay/nes_mmc5.cpp
 src/engine/platform/sound/nes_nsfplay/nes_n106.cpp
 src/engine/platform/sound/nes_nsfplay/nes_vrc6.cpp
+src/engine/platform/sound/nes_nsfplay/5e01_apu.cpp
+src/engine/platform/sound/nes_nsfplay/5e01_dmc.cpp
 
 src/engine/platform/sound/c64/sid.cc
 src/engine/platform/sound/c64/voice.cc
