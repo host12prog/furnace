@@ -115,6 +115,7 @@ void DivLocale::addTranslationsRussian()
     strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] = "Эмулятор PowerNoise за авторством scratchminer";
     strings["ep128emu by Istvan Varga##sgab"].plurals[0] = "ep128emu за авторством Istvan Varga";
     strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] = "эмулятор SID2 (модификация reSID) за авторством LTVA";
+    strings["5E01 emulator (modification of NSFPlay) by Euly##sgab"].plurals[0] = "эмулятор 5E01 (модификация NSFPlay) за авторством Euly";
 
     strings["greetings to:##sgab"].plurals[0] = "передаём привет:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "NEOART Costa Rica";
