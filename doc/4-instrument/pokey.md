@@ -1,6 +1,12 @@
 # Atari POKEY instrument editor
 
-the instrument editor for POKEY consists of these macros:
+the POKEY instrument editor consists of two tabs.
+
+## POKEY
+
+- **16-bit raw period macro**: makes Raw Period macro to go from `0` to `65535`.
+
+## Macros
 
 - **Volume**: volume sequence.
 - **Arpeggio**: pitch sequence.
@@ -23,3 +29,5 @@ the instrument editor for POKEY consists of these macros:
   - 6: bass (poly4)
   - 7: buzz (poly4)
 - **Pitch**: fine pitch.
+- **Raw Period**: directly sets the period register values. the smaller the value, the higher the pitch.
+ - use 16-bit mode if you combine channels into 16-bit frequency mode via `AUDCTL` control bits.

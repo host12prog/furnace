@@ -64,6 +64,7 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
     case 0:
       return "help! what's going on!";
     case 1:
+    {
       if (ds.system[0]==DIV_SYSTEM_AY8910) {
         switch (ds.systemFlags[0].getInt("chipType",0)) {
           case 0: // AY-3-8910
@@ -144,7 +145,11 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
             return "SAM Coupé";
         }
       }
-      return getSystemName(ds.system[0]);
+
+      String teeeemp = getSystemName(ds.system[0]);
+      String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
+      return temmrrrp;
+    }
     case 2:
       if (ds.system[0]==DIV_SYSTEM_YM2612 && ds.system[1]==DIV_SYSTEM_SMS) {
         return "Sega Genesis/Mega Drive";
@@ -228,7 +233,9 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
   String ret="";
   for (int i=0; i<ds.systemLen; i++) {
     if (i>0) ret+=" + ";
-    ret+=getSystemName(ds.system[i]);
+    String teeeemp = getSystemName(ds.system[i]);
+    String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
+    ret+=temmrrrp;
   }
 
   return ret;
@@ -425,6 +432,9 @@ void DivEngine::registerSystems() {
   // Common effect handler maps
 
   EffectHandlerMap ayPostEffectHandlerMap={
+    {0x15, {DIV_CMD_RAW_FREQ, "15xx: Set raw period##sesd"}},
+    {0x16, {DIV_CMD_RAW_FREQ_HIGHER_BYTE, "16xx: Set raw period higher nybble (0-F)##sesd"}},
+
     {0x20, {DIV_CMD_STD_NOISE_MODE, "20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"}},
     {0x21, {DIV_CMD_STD_NOISE_FREQ, "21xx: Set noise frequency (0 to 1F)##sesd"}},
     {0x22, {DIV_CMD_AY_ENVELOPE_SET, "22xy: Set envelope mode (x: shape, y: enable for this channel)##sesd"}},
@@ -437,14 +447,28 @@ void DivEngine::registerSystems() {
     {0x2f, {DIV_CMD_AY_IO_WRITE, "2Fxx: Write to I/O port B##sesd", constVal<1>, effectVal}},
   };
 
-  EffectHandlerMap ay8930PostEffectHandlerMap(ayPostEffectHandlerMap);
-  ay8930PostEffectHandlerMap.insert({
+  EffectHandlerMap ay8930PostEffectHandlerMap = {
     {0x12, {DIV_CMD_STD_NOISE_MODE, "12xx: Set duty cycle (0 to 8)##sesd",
       [](unsigned char, unsigned char val) -> int { return 0x10+(val&15); }}},
+    
+    {0x15, {DIV_CMD_RAW_FREQ, "15xx: Set raw period##sesd"}},
+    {0x16, {DIV_CMD_RAW_FREQ_HIGHER_BYTE, "16xx: Set raw period higher byte##sesd"}},
+
+    {0x20, {DIV_CMD_STD_NOISE_MODE, "20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"}},
+    {0x21, {DIV_CMD_STD_NOISE_FREQ, "21xx: Set noise frequency (0 to 1F)##sesd"}},
+    {0x22, {DIV_CMD_AY_ENVELOPE_SET, "22xy: Set envelope mode (x: shape, y: enable for this channel)##sesd"}},
+    {0x23, {DIV_CMD_AY_ENVELOPE_LOW, "23xx: Set envelope period low byte##sesd"}},
+    {0x24, {DIV_CMD_AY_ENVELOPE_HIGH, "24xx: Set envelope period high byte##sesd"}},
+    {0x25, {DIV_CMD_AY_ENVELOPE_SLIDE, "25xx: Envelope slide up##sesd0", negEffectVal}},
+    {0x26, {DIV_CMD_AY_ENVELOPE_SLIDE, "26xx: Envelope slide down##sesd0"}},
+    {0x29, {DIV_CMD_AY_AUTO_ENVELOPE, "29xy: Set auto-envelope (x: numerator; y: denominator)##sesd0"}},
+    {0x2e, {DIV_CMD_AY_IO_WRITE, "2Exx: Write to I/O port A##sesd", constVal<0>, effectVal}},
+    {0x2f, {DIV_CMD_AY_IO_WRITE, "2Fxx: Write to I/O port B##sesd", constVal<1>, effectVal}},
+
     {0x27, {DIV_CMD_AY_NOISE_MASK_AND, "27xx: Set noise AND mask##sesd"}},
     {0x28, {DIV_CMD_AY_NOISE_MASK_OR, "28xx: Set noise OR mask##sesd"}},
     {0x2d, {DIV_CMD_AY_IO_WRITE, "2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER##sesd", constVal<255>, effectVal}},
-  });
+  };
 
   EffectHandlerMap fmEffectHandlerMap={
     {0x30, {DIV_CMD_FM_HARD_RESET, "30xx: Toggle hard envelope reset on new notes##sesd"}},
@@ -601,6 +625,12 @@ void DivEngine::registerSystems() {
     {0x1e, {DIV_CMD_C64_EXTENDED, "1Exy: Change other parameters (LEGACY)##sesd"}},
     {0x20, {DIV_CMD_C64_AD, "20xy: Set attack/decay (x: attack; y: decay)##sesd"}},
     {0x21, {DIV_CMD_C64_SR, "21xy: Set sustain/release (x: sustain; y: release)##sesd"}},
+
+    {0x22, {DIV_CMD_PW_SLIDE_UP, "22xx: Pulse width slide up##sesd"}},
+    {0x23, {DIV_CMD_PW_SLIDE_DN, "23xx: Pulse width slide down##sesd"}},
+
+    {0x24, {DIV_CMD_CUTOFF_SLIDE_UP, "24xx: Cutoff slide up##sesd"}},
+    {0x25, {DIV_CMD_CUTOFF_SLIDE_DN, "25xx: Cutoff slide down##sesd"}},
   };
   const EffectHandler c64FineDutyHandler(DIV_CMD_C64_FINE_DUTY, "3xxx: Set pulse width (0 to FFF)##sesd", effectValLong<12>);
   const EffectHandler c64FineCutoffHandler(DIV_CMD_C64_FINE_CUTOFF, "4xxx: Set cutoff (0 to 7FF)##sesd", effectValLong<11>);
@@ -609,6 +639,7 @@ void DivEngine::registerSystems() {
 
   EffectHandlerMap waveOnlyEffectHandlerMap={
     {0x10, {DIV_CMD_WAVE, "10xx: Set waveform##sesd0"}},
+    {0x11, {DIV_CMD_WAVE_LOCAL, "11xx: Set waveform (local)##sesd"}},
   };
 
   EffectHandlerMap segaPCMPostEffectHandlerMap={
@@ -673,6 +704,12 @@ void DivEngine::registerSystems() {
     {0x14, {DIV_CMD_C64_FILTER_RESET, "14xy: Reset cutoff (x: on new note; y: now)##sesd"}},
     {0x15, {DIV_CMD_C64_DUTY_RESET, "15xy: Reset pulse width (x: on new note; y: now)##sesd"}},
     {0x16, {DIV_CMD_C64_EXTENDED, "16xy: Change other parameters##sesd"}},
+
+    {0x17, {DIV_CMD_PW_SLIDE_UP, "17xx: Pulse width slide up##sesd"}},
+    {0x18, {DIV_CMD_PW_SLIDE_DN, "18xx: Pulse width slide down##sesd"}},
+
+    {0x19, {DIV_CMD_CUTOFF_SLIDE_UP, "19xx: Cutoff slide up##sesd"}},
+    {0x1A, {DIV_CMD_CUTOFF_SLIDE_DN, "1Axx: Cutoff slide down##sesd"}},
   };
   const EffectHandler SID2FineDutyHandler(DIV_CMD_C64_FINE_DUTY, "3xxx: Set pulse width (0 to FFF)##sesd1", effectValLong<12>);
   const EffectHandler SID2FineCutoffHandler(DIV_CMD_C64_FINE_CUTOFF, "4xxx: Set cutoff (0 to FFF)##sesd1", effectValLong<11>);
@@ -685,8 +722,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YMU759]=new DivSysDef(
     "Yamaha YMU759 (MA-2)", NULL, 0x01, 0x01, 17, true, false, 0, false, (1U<<DIV_SAMPLE_DEPTH_YMZ_ADPCM)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B), 0, 0,
     "a chip which found its way inside mobile phones in the 2000's.\nas proprietary as it is, it passed away after losing to MP3 in the mobile hardware battle.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8", "Channel 9", "Channel 10", "Channel 11", "Channel 12", "Channel 13", "Channel 14", "Channel 15", "Channel 16", "PCM"        }, // name
-    {"1",         "2",         "3",         "4",         "5",         "6",         "7",         "8",         "9",         "10",         "11",         "12",         "13",         "14",         "15",         "16",         "PCM"        }, // short
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd", "Channel 9##sesd", "Channel 10##sesd", "Channel 11##sesd", "Channel 12##sesd", "Channel 13##sesd", "Channel 14##sesd", "Channel 15##sesd", "Channel 16##sesd", "PCM##sesd"        }, // name
+    {"1",         "2",         "3",         "4",         "5",         "6",         "7",         "8",         "9",         "10",         "11",         "12",         "13",         "14",         "15",         "16",         "PCM##sesd"        }, // short
     {DIV_CH_FM,   DIV_CH_FM,   DIV_CH_FM,   DIV_CH_FM,   DIV_CH_FM,   DIV_CH_FM,   DIV_CH_FM,   DIV_CH_FM,   DIV_CH_FM,   DIV_CH_FM,    DIV_CH_FM,    DIV_CH_FM,    DIV_CH_FM,    DIV_CH_FM,    DIV_CH_FM,    DIV_CH_FM,    DIV_CH_PCM   }, // type
     {DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL,  DIV_INS_OPL,  DIV_INS_OPL,  DIV_INS_OPL,  DIV_INS_OPL,  DIV_INS_OPL,  DIV_INS_OPL,  DIV_INS_AMIGA}  // ins
   );
@@ -706,8 +743,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SMS]=new DivSysDef(
     "TI SN76489", NULL, 0x03, 0x03, 4, false, true, 0x150, false, 0, 0, 0,
     "a square/noise sound chip found on the Sega Master System, ColecoVision, Tandy, TI's own 99/4A and a few other places.##sesd",
-    {"Square 1", "Square 2", "Square 3", "Noise"},
-    {"S1", "S2", "S3", "NO"},
+    {"Square 1##sesd", "Square 2##sesd", "Square 3##sesd", "Noise##sesd"},
+    {"S1##sesd", "S2##sesd", "S3##sesd", "NO##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_NOISE},
     {DIV_INS_STD, DIV_INS_STD, DIV_INS_STD, DIV_INS_STD},
     {},
@@ -725,8 +762,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_GB]=new DivSysDef(
     "Game Boy", NULL, 0x04, 0x04, 4, false, true, 0x161, false, 0, 32, 16,
     "the most popular portable game console of the era.##sesd",
-    {"Pulse 1", "Pulse 2", "Wavetable", "Noise"},
-    {"S1", "S2", "WA", "NO"},
+    {"Pulse 1##sesd", "Pulse 2##sesd", "Wavetable##sesd", "Noise##sesd"},
+    {"S1##sesd", "S2##sesd", "WA##sesd", "NO##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_WAVE, DIV_CH_NOISE},
     {DIV_INS_GB, DIV_INS_GB, DIV_INS_GB, DIV_INS_GB},
     {},
@@ -735,15 +772,16 @@ void DivEngine::registerSystems() {
       {0x11, {DIV_CMD_STD_NOISE_MODE, "11xx: Set noise length (0: long; 1: short)##sesd"}},
       {0x12, {DIV_CMD_STD_NOISE_MODE, "12xx: Set duty cycle (0 to 3)##sesd"}},
       {0x13, {DIV_CMD_GB_SWEEP_TIME, "13xy: Setup sweep (x: time; y: shift)##sesd"}},
-      {0x14, {DIV_CMD_GB_SWEEP_DIR, "14xx: Set sweep direction (0: up; 1: down)##sesd"}}
+      {0x14, {DIV_CMD_GB_SWEEP_DIR, "14xx: Set sweep direction (0: up; 1: down)##sesd"}},
+      {0x15, {DIV_CMD_WAVE_LOCAL, "15xx: Set waveform (local)##sesd"}}
     }
   );
 
   sysDefs[DIV_SYSTEM_PCE]=new DivSysDef(
     "PC Engine/TurboGrafx-16", NULL, 0x05, 0x05, 6, false, true, 0x161, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 32, 32,
     "an '80s game console with a wavetable sound chip, popular in Japan.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5", "CH6"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "CH6##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_PCE, DIV_INS_PCE, DIV_INS_PCE, DIV_INS_PCE, DIV_INS_PCE, DIV_INS_PCE},
     {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -752,15 +790,16 @@ void DivEngine::registerSystems() {
       {0x11, {DIV_CMD_STD_NOISE_MODE, "11xx: Toggle noise mode##sesd0"}},
       {0x12, {DIV_CMD_PCE_LFO_MODE, "12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)##sesd"}},
       {0x13, {DIV_CMD_PCE_LFO_SPEED, "13xx: Set LFO speed##sesd"}},
-      {0x17, {DIV_CMD_SAMPLE_MODE, "17xx: Toggle PCM mode (LEGACY)##sesd1"}}
+      {0x17, {DIV_CMD_SAMPLE_MODE, "17xx: Toggle PCM mode (LEGACY)##sesd1"}},
+      {0x18, {DIV_CMD_WAVE_LOCAL, "18xx: Set waveform (local)##sesd"}},
     }
   );
 
   sysDefs[DIV_SYSTEM_NES]=new DivSysDef(
     "NES (Ricoh 2A03)", NULL, 0x06, 0x06, 5, false, true, 0x161, false, (1U<<DIV_SAMPLE_DEPTH_1BIT_DPCM)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "also known as Famicom in Japan, it's the most well-known game console of the '80s.##sesd",
-    {"Pulse 1", "Pulse 2", "Triangle", "Noise", "DPCM"},
-    {"S1", "S2", "TR", "NO", "DMC"},
+    {"Pulse 1##sesd", "Pulse 2##sesd", "Triangle##sesd", "Noise##sesd", "DPCM##sesd"},
+    {"S1##sesd", "S2##sesd", "TR##sesd", "NO##sesd", "DMC##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_WAVE, DIV_CH_NOISE, DIV_CH_PCM},
     {DIV_INS_NES, DIV_INS_NES, DIV_INS_NES, DIV_INS_NES, DIV_INS_NES},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA},
@@ -793,8 +832,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_C64_6581]=new DivSysDef(
     "Commodore 64 (C64, 6581 SID)", NULL, 0x47, 0x47, 3, false, true, 0, false, 0, 0, 0,
     "this computer is powered by the SID chip, which had synthesizer features like a filter and ADSR.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3"},
-    {"CH1", "CH2", "CH3"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd"},
     {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
     {DIV_INS_C64, DIV_INS_C64, DIV_INS_C64},
     {},
@@ -805,8 +844,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_C64_8580]=new DivSysDef(
     "Commodore 64 (C64, 8580 SID)", NULL, 0x07, 0x07, 3, false, true, 0, false, 0, 0, 0,
     "this computer is powered by the SID chip, which had synthesizer features like a filter and ADSR.\nthis is the newer revision of the chip.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3"},
-    {"CH1", "CH2", "CH3"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd"},
     {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
     {DIV_INS_C64, DIV_INS_C64, DIV_INS_C64},
     {},
@@ -823,8 +862,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610]=new DivSysDef(
     "Neo Geo CD", NULL, 0x09, 0x09, 13, true, true, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect the pins.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "PSG 1", "PSG 2", "PSG 3", "ADPCM-A 1", "ADPCM-A 2", "ADPCM-A 3", "ADPCM-A 4", "ADPCM-A 5", "ADPCM-A 6"},
-    {"F1", "F2", "F3", "F4", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd"},
+    {"F1", "F2", "F3", "F4", "S1##sesd", "S2##sesd", "S3##sesd", "P1##sesd", "P2##sesd", "P3##sesd", "P4##sesd", "P5##sesd", "P6##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -835,8 +874,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610_EXT]=new DivSysDef(
     "Neo Geo CD Extended Channel 2##sesd", NULL, 0x49, 0x49, 16, true, true, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect the pins.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.##sesd",
-    {"FM 1", "FM 2 OP1", "FM 2 OP2", "FM 2 OP3", "FM 2 OP4", "FM 3", "FM 4", "PSG 1", "PSG 2", "PSG 3", "ADPCM-A 1", "ADPCM-A 2", "ADPCM-A 3", "ADPCM-A 4", "ADPCM-A 5", "ADPCM-A 6"},
-    {"F1", "O1", "O2", "O3", "O4", "F3", "F4", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6"},
+    {"FM 1", "FM 2 OP1", "FM 2 OP2", "FM 2 OP3", "FM 2 OP4", "FM 3", "FM 4", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd"},
+    {"F1", "O1", "O2", "O3", "O4", "F3", "F4", "S1##sesd", "S2##sesd", "S3##sesd", "P1##sesd", "P2##sesd", "P3##sesd", "P4##sesd", "P5##sesd", "P6##sesd"},
     {DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -848,8 +887,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_AY8910]=new DivSysDef(
     "AY-3-8910", NULL, 0x80, 0, 3, false, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "this chip is everywhere! ZX Spectrum, MSX, Amstrad CPC, Intellivision, Vectrex...\nthe discovery of envelope bass helped it beat the SN76489 with ease.##sesd",
-    {"PSG 1", "PSG 2", "PSG 3"},
-    {"S1", "S2", "S3"},
+    {"PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd"},
+    {"S1##sesd", "S2##sesd", "S3##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_AY, DIV_INS_AY, DIV_INS_AY},
     {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -860,8 +899,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_AMIGA]=new DivSysDef(
     "Amiga", NULL, 0x81, 0, 4, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 256,
     "a computer from the '80s with full sampling capabilities, giving it a sound ahead of its time.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4"},
-    {"CH1", "CH2", "CH3", "CH4"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
     {},
@@ -870,7 +909,8 @@ void DivEngine::registerSystems() {
       {0x10, {DIV_CMD_AMIGA_FILTER, "10xx: Toggle filter (0 disables; 1 enables)##sesd"}},
       {0x11, {DIV_CMD_AMIGA_AM, "11xx: Toggle AM with next channel##sesd"}},
       {0x12, {DIV_CMD_AMIGA_PM, "12xx: Toggle period modulation with next channel##sesd"}},
-      {0x13, {DIV_CMD_WAVE, "13xx: Set waveform##sesd"}}
+      {0x13, {DIV_CMD_WAVE, "13xx: Set waveform##sesd"}},
+      {0x14, {DIV_CMD_WAVE_LOCAL, "14xx: Set waveform (local)##sesd"}},
     }
   );
 
@@ -901,20 +941,23 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_TIA]=new DivSysDef(
     "Atari 2600 (TIA)", NULL, 0x84, 0, 2, false, true, 0, false, 0, 0, 0,
     "it's a challenge to make music on this chip which barely has musical capabilities...##sesd",
-    {"Channel 1", "Channel 2"},
-    {"CH1", "CH2"},
+    {"Channel 1##sesd", "Channel 2##sesd"},
+    {"CH1##sesd", "CH2##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_TIA, DIV_INS_TIA},
     {},
     {},
-    waveOnlyEffectHandlerMap
+    {
+      {0x10, {DIV_CMD_WAVE, "10xx: Set waveform##sesd0"}},
+      {0x11, {DIV_CMD_RAW_FREQ, "11xx: Set raw period (0-1F)##sesd"}},
+    }
   );
 
   sysDefs[DIV_SYSTEM_SAA1099]=new DivSysDef(
     "Philips SAA1099", NULL, 0x97, 0, 6, false, true, 0x171, false, 0, 0, 0,
     "supposedly an upgrade from the AY-3-8910, this was present on the Creative Music System (Game Blaster) and SAM Coupé.##sesd",
-    {"PSG 1", "PSG 2", "PSG 3", "PSG 4", "PSG 5", "PSG 6"},
-    {"S1", "S2", "S3", "S4", "S5", "S6"},
+    {"PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "PSG 4##sesd", "PSG 5##sesd", "PSG 6##sesd"},
+    {"S1##sesd", "S2##sesd", "S3##sesd", "S4##sesd", "S5##sesd", "S6##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_SAA1099, DIV_INS_SAA1099, DIV_INS_SAA1099, DIV_INS_SAA1099, DIV_INS_SAA1099, DIV_INS_SAA1099},
     {},
@@ -929,8 +972,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_AY8930]=new DivSysDef(
     "Microchip AY8930", NULL, 0x9a, 0, 3, false, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "an improved version of the AY-3-8910 with a bigger frequency range, duty cycles, configurable noise and per-channel envelopes!##sesd",
-    {"PSG 1", "PSG 2", "PSG 3"},
-    {"S1", "S2", "S3"},
+    {"PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd"},
+    {"S1##sesd", "S2##sesd", "S3##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_AY8930, DIV_INS_AY8930, DIV_INS_AY8930},
     {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -941,8 +984,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_VIC20]=new DivSysDef(
     "Commodore VIC-20", NULL, 0x85, 0, 4, false, true, 0, false, 0, 0, 0,
     "Commodore's successor to the PET.\nits square wave channels are more than just square...##sesd",
-    {"Low", "Mid", "High", "Noise"},
-    {"LO", "MID", "HI", "NO"},
+    {"Low", "Mid", "High", "Noise##sesd"},
+    {"LO", "MID", "HI", "NO##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_NOISE},
     {DIV_INS_VIC, DIV_INS_VIC, DIV_INS_VIC, DIV_INS_VIC},
     {},
@@ -952,7 +995,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_PET]=new DivSysDef(
     "Commodore PET", NULL, 0x86, 0, 1, false, true, 0, false, 0, 0, 0,
     "one channel of 1-bit wavetable which is better (and worse) than the PC Speaker.##sesd",
-    {"Wave"},
+    {"Wave##sesd"},
     {"PET"},
     {DIV_CH_PULSE},
     {DIV_INS_PET},
@@ -963,8 +1006,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SNES]=new DivSysDef(
     "SNES", NULL, 0x87, 0, 8, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_BRR, 0, 16,
     "FM? nah... samples! Nintendo's answer to Sega.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "CH6##sesd", "CH7##sesd", "CH8##sesd"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_SNES, DIV_INS_SNES, DIV_INS_SNES, DIV_INS_SNES, DIV_INS_SNES, DIV_INS_SNES, DIV_INS_SNES, DIV_INS_SNES},
     {},
@@ -993,6 +1036,7 @@ void DivEngine::registerSystems() {
       {0x14, {DIV_CMD_SNES_INVERT, "14xy: Toggle invert (x: left; y: right)##sesd"}},
       {0x15, {DIV_CMD_SNES_GAIN_MODE, "15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: bent)##sesd"}},
       {0x16, {DIV_CMD_SNES_GAIN, "16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)##sesd"}},
+      {0x17, {DIV_CMD_WAVE_LOCAL, "17xx: Set waveform (local)##sesd"}},
       {0x1d, {DIV_CMD_STD_NOISE_FREQ, "1Dxx: Set noise frequency (00 to 1F)##sesd"}},
       {0x20, {DIV_CMD_FM_AR, "20xx: Set attack (0 to F)##sesd"}},
       {0x21, {DIV_CMD_FM_DR, "21xx: Set decay (0 to 7)##sesd"}},
@@ -1004,8 +1048,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_VRC6]=new DivSysDef(
     "Konami VRC6", NULL, 0x88, 0, 3, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "an expansion chip for the Famicom, featuring a quirky sawtooth channel.##sesd",
-    {"VRC6 1", "VRC6 2", "VRC6 Saw"},
-    {"V1", "V2", "VS"},
+    {"VRC6 1", "VRC6 2", "VRC6 Saw##sesd"},
+    {"V1", "V2", "VS##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_WAVE},
     {DIV_INS_VRC6, DIV_INS_VRC6, DIV_INS_VRC6_SAW},
     {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_NULL},
@@ -1042,14 +1086,15 @@ void DivEngine::registerSystems() {
       {0x13, {DIV_CMD_FDS_MOD_LOW, "13xx: Set modulation speed low byte##sesd"}},
       {0x14, {DIV_CMD_FDS_MOD_POS, "14xx: Set modulator position##sesd"}},
       {0x15, {DIV_CMD_FDS_MOD_WAVE, "15xx: Set modulator table to waveform##sesd"}},
+      {0x16, {DIV_CMD_WAVE_LOCAL, "16xx: Set waveform (local)##sesd"}},
     }
   );
 
   sysDefs[DIV_SYSTEM_MMC5]=new DivSysDef(
     "MMC5", NULL, 0x8b, 0, 3, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "an expansion chip for the Famicom, featuring a little-known PCM channel.##sesd",
-    {"Pulse 1", "Pulse 2", "PCM"},
-    {"S1", "S2", "PCM"},
+    {"Pulse 1##sesd", "Pulse 2##sesd", "PCM##sesd"},
+    {"S1##sesd", "S2##sesd", "PCM##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM},
     {DIV_INS_NES, DIV_INS_NES, DIV_INS_AMIGA},
     {},
@@ -1061,8 +1106,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_N163]=new DivSysDef(
     "Namco 163", NULL, 0x8c, 0, 8, false, true, 0, false, 0, 0, 16,
     "an expansion chip for the Famicom, with full wavetable.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "CH6##sesd", "CH7##sesd", "CH8##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_N163, DIV_INS_N163, DIV_INS_N163, DIV_INS_N163, DIV_INS_N163, DIV_INS_N163, DIV_INS_N163, DIV_INS_N163},
     {},
@@ -1077,14 +1122,15 @@ void DivEngine::registerSystems() {
       {0x12, {DIV_CMD_N163_WAVE_LENGTH, "12xx: Set waveform length in RAM (04 to FC in steps of 4)##sesd"}},
       {0x15, {DIV_CMD_N163_WAVE_LOADPOS, "15xx: Set waveform load position##sesd"}},
       {0x16, {DIV_CMD_N163_WAVE_LOADLEN, "16xx: Set waveform load length (04 to FC in steps of 4)##sesd"}},
+      {0x17, {DIV_CMD_WAVE_LOCAL, "17xx: Select waveform (local)##sesd1"}},
     }
   );
 
   sysDefs[DIV_SYSTEM_YM2203]=new DivSysDef(
     "Yamaha YM2203 (OPN)", NULL, 0x8d, 0, 6, true, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)##sesd",
-    {"FM 1", "FM 2", "FM 3", "PSG 1", "PSG 2", "PSG 3"},
-    {"F1", "F2", "F3", "S1", "S2", "S3"},
+    {"FM 1", "FM 2", "FM 3", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd"},
+    {"F1", "F2", "F3", "S1##sesd", "S2##sesd", "S3##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY},
     {},
@@ -1095,8 +1141,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2203_EXT]=new DivSysDef(
     "Yamaha YM2203 (OPN) Extended Channel 3##sesd", NULL, 0xb6, 0, 9, true, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies##sesd",
-    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "PSG 1", "PSG 2", "PSG 3"},
-    {"F1", "F2", "O1", "O2", "O3", "O4", "S1", "S2", "S3"},
+    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd"},
+    {"F1", "F2", "O1", "O2", "O3", "O4", "S1##sesd", "S2##sesd", "S3##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY},
     {},
@@ -1108,8 +1154,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2203_CSM]=new DivSysDef(
     "Yamaha YM2203 (OPN) CSM", NULL, 0xc3, 0, 10, true, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "cost-reduced version of the OPM with a different register layout and no stereo...\n...but it has a built-in AY-3-8910! (actually an YM2149)\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd",
-    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "CSM Timer", "PSG 1", "PSG 2", "PSG 3"},
-    {"F1", "F2", "O1", "O2", "O3", "O4", "CSM", "S1", "S2", "S3"},
+    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "CSM Timer##sesd", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd"},
+    {"F1", "F2", "O1", "O2", "O3", "O4", "CSM", "S1##sesd", "S2##sesd", "S3##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_NOISE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY},
     {},
@@ -1121,8 +1167,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2608]=new DivSysDef(
     "Yamaha YM2608 (OPNA)", NULL, 0x8e, 0, 16, true, true, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "Square 1", "Square 2", "Square 3", "Kick", "Snare", "Top", "HiHat", "Tom", "Rim", "ADPCM"},
-    {"F1", "F2", "F3", "F4", "F5", "F6", "S1", "S2", "S3", "BD", "SD", "TP", "HH", "TM", "RM", "P"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "Square 1##sesd", "Square 2##sesd", "Square 3##sesd", "Kick##sesd", "Snare##sesd", "Top##sesd", "HiHat##sesd", "Tom##sesd", "Rim##sesd", "ADPCM##sesd"},
+    {"F1", "F2", "F3", "F4", "F5", "F6", "S1##sesd", "S2##sesd", "S3##sesd", "BD##sesd", "SD##sesd", "TP##sesd", "HH##sesd", "TM##sesd", "RM##sesd", "P##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA},
@@ -1133,8 +1179,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2608_EXT]=new DivSysDef(
     "Yamaha YM2608 (OPNA) Extended Channel 3##sesd", NULL, 0xb7, 0, 19, true, true, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.##sesd",
-    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "Square 1", "Square 2", "Square 3", "Kick", "Snare", "Top", "HiHat", "Tom", "Rim", "ADPCM"},
-    {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "F6", "S1", "S2", "S3", "BD", "SD", "TP", "HH", "TM", "RM", "P"},
+    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "Square 1##sesd", "Square 2##sesd", "Square 3##sesd", "Kick##sesd", "Snare##sesd", "Top##sesd", "HiHat##sesd", "Tom##sesd", "Rim##sesd", "ADPCM##sesd"},
+    {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "F6", "S1##sesd", "S2##sesd", "S3##sesd", "BD##sesd", "SD##sesd", "TP##sesd", "HH##sesd", "TM##sesd", "RM##sesd", "P##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA},
@@ -1146,8 +1192,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2608_CSM]=new DivSysDef(
     "Yamaha YM2608 (OPNA) Extended Channel 3 and CSM##sesd", NULL, 0xc4, 0, 20, true, true, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "OPN but twice the FM channels, stereo makes a come-back and has rhythm and ADPCM channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd",
-    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "CSM Timer", "Square 1", "Square 2", "Square 3", "Kick", "Snare", "Top", "HiHat", "Tom", "Rim", "ADPCM"},
-    {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "F6", "CSM", "S1", "S2", "S3", "BD", "SD", "TP", "HH", "TM", "RM", "P"},
+    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "CSM Timer##sesd", "Square 1##sesd", "Square 2##sesd", "Square 3##sesd", "Kick##sesd", "Snare##sesd", "Top##sesd", "HiHat##sesd", "Tom##sesd", "Rim##sesd", "ADPCM##sesd"},
+    {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "F6", "CSM", "S1##sesd", "S2##sesd", "S3##sesd", "BD##sesd", "SD##sesd", "TP##sesd", "HH##sesd", "TM##sesd", "RM##sesd", "P##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_NOISE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA},
@@ -1183,7 +1229,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_OPL3]=new DivSysDef(
     "Yamaha YMF262 (OPL3)", NULL, 0x91, 0, 18, true, false, 0x151, false, 0, 0, 0,
     "OPL2, but what if you had twice the channels, 4-op mode, stereo and even more waveforms?##sesd",
-    {"4OP 1", "FM 2", "4OP 3", "FM 4", "4OP 5", "FM 6", "4OP 7", "FM 8", "4OP 9", "FM 10", "4OP 11", "FM 12", "FM 13", "FM 14", "FM 15", "FM 16", "FM 17", "FM 18"},
+    {"4OP 1##sesd", "FM 2", "4OP 3##sesd", "FM 4", "4OP 5##sesd", "FM 6", "4OP 7##sesd", "FM 8", "4OP 9##sesd", "FM 10", "4OP 11##sesd", "FM 12", "FM 13", "FM 14", "FM 15", "FM 16", "FM 17", "FM 18"},
     {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"},
     {DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM},
     {DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL},
@@ -1196,7 +1242,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_MULTIPCM]=new DivSysDef(
     "MultiPCM", NULL, 0x92, 0, 28, false, true, 0, false, (1U<<DIV_SAMPLE_DEPTH_8BIT)|(1U<<DIV_SAMPLE_DEPTH_16BIT), 0, 0,
     "how many channels of PCM do you want?\nMultiPCM: yes##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8", "Channel 9", "Channel 10", "Channel 11", "Channel 12", "Channel 13", "Channel 14", "Channel 15", "Channel 16", "Channel 17", "Channel 18", "Channel 19", "Channel 20", "Channel 21", "Channel 22", "Channel 23", "Channel 24", "Channel 25", "Channel 26", "Channel 27", "Channel 28"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd", "Channel 9##sesd", "Channel 10##sesd", "Channel 11##sesd", "Channel 12##sesd", "Channel 13##sesd", "Channel 14##sesd", "Channel 15##sesd", "Channel 16##sesd", "Channel 17##sesd", "Channel 18##sesd", "Channel 19##sesd", "Channel 20##sesd", "Channel 21##sesd", "Channel 22##sesd", "Channel 23##sesd", "Channel 24##sesd", "Channel 25##sesd", "Channel 26##sesd", "Channel 27##sesd", "Channel 28##sesd"},
     {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM}
@@ -1205,8 +1251,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_PCSPKR]=new DivSysDef(
     "PC Speaker##sesd", NULL, 0x93, 0, 1, false, true, 0, false, 0, 0, 0,
     "good luck! you get one square and no volume control.##sesd",
-    {"Square"},
-    {"SQ"},
+    {"Square##sesd"},
+    {"SQ##sesd"},
     {DIV_CH_PULSE},
     {DIV_INS_BEEPER}
   );
@@ -1214,8 +1260,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_PONG]=new DivSysDef(
     "Pong", NULL, 0xfc, 0, 1, false, true, 0, false, 0, 0, 0,
     "please don't use this chip. it was added as a joke.##sesd",
-    {"Square"},
-    {"SQ"},
+    {"Square##sesd"},
+    {"SQ##sesd"},
     {DIV_CH_PULSE},
     {DIV_INS_BEEPER}
   );
@@ -1223,8 +1269,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_POKEY]=new DivSysDef(
     "POKEY", NULL, 0x94, 0, 4, false, true, 0x161, false, 0, 0, 0,
     "TIA, but better and more flexible.\nused in the Atari 8-bit family of computers (400/800/XL/XE).##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4"},
-    {"CH1", "CH2", "CH3", "CH4"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_POKEY, DIV_INS_POKEY, DIV_INS_POKEY, DIV_INS_POKEY},
     {},
@@ -1232,14 +1278,16 @@ void DivEngine::registerSystems() {
       {0x10, {DIV_CMD_WAVE, "10xx: Set waveform (0 to 7)##sesd0"}},
       {0x11, {DIV_CMD_STD_NOISE_MODE, "11xx: Set AUDCTL##sesd"}},
       {0x12, {DIV_CMD_STD_NOISE_FREQ, "12xx: Toggle two-tone mode##sesd"}},
+      {0x13, {DIV_CMD_RAW_FREQ, "13xx: Set raw period##sesd"}},
+      {0x14, {DIV_CMD_RAW_FREQ_HIGHER_BYTE, "14xx: Set raw period (higher byte; only for 16-bit mode)##sesd"}},
     }
   );
 
   sysDefs[DIV_SYSTEM_RF5C68]=new DivSysDef(
     "Ricoh RF5C68", NULL, 0x95, 0, 8, false, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "this is like SNES' sound chip but without interpolation and the rest of nice bits.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "CH6##sesd", "CH7##sesd", "CH8##sesd"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_RF5C68, DIV_INS_RF5C68, DIV_INS_RF5C68, DIV_INS_RF5C68, DIV_INS_RF5C68, DIV_INS_RF5C68, DIV_INS_RF5C68, DIV_INS_RF5C68},
     {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA}
@@ -1248,8 +1296,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SWAN]=new DivSysDef(
     "WonderSwan", NULL, 0x96, 0, 4, false, true, 0x171, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 32, 16,
     "developed by the makers of the Game Boy and the Virtual Boy...##sesd",
-    {"Wave", "Wave/PCM", "Wave/Sweep", "Wave/Noise"},
-    {"CH1", "CH2", "CH3", "CH4"},
+    {"Wave##sesd", "Wave/PCM", "Wave/Sweep", "Wave/Noise"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd"},
     {DIV_CH_WAVE, DIV_CH_PCM, DIV_CH_WAVE, DIV_CH_NOISE},
     {DIV_INS_SWAN, DIV_INS_SWAN, DIV_INS_SWAN, DIV_INS_SWAN},
     {DIV_INS_NULL, DIV_INS_AMIGA, DIV_INS_NULL, DIV_INS_NULL},
@@ -1259,6 +1307,7 @@ void DivEngine::registerSystems() {
       {0x12, {DIV_CMD_WS_SWEEP_TIME, "12xx: Setup sweep period (0: disabled; 1-20: enabled/period)##sesd"}},
       {0x13, {DIV_CMD_WS_SWEEP_AMOUNT, "13xx: Set sweep amount##sesd"}},
       {0x17, {DIV_CMD_SAMPLE_MODE, "17xx: Toggle PCM mode (LEGACY)##sesd3"}},
+      {0x18, {DIV_CMD_WAVE_LOCAL, "18xx: Set waveform (local)##sesd1"}},
     }
   );
 
@@ -1279,8 +1328,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_POKEMINI]=new DivSysDef(
     "Pokémon Mini", NULL, 0x99, 0, 1, false, true, 0, false, 0, 0, 0,
     "this one is like PC Speaker but has duty cycles.##sesd",
-    {"Pulse"},
-    {"P"},
+    {"Pulse##sesd"},
+    {"P##sesd"},
     {DIV_CH_PULSE},
     {DIV_INS_POKEMINI}
   );
@@ -1288,7 +1337,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SEGAPCM]=new DivSysDef(
     "SegaPCM", NULL, 0x9b, 0, 16, false, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "used in some Sega arcade boards (like OutRun), and usually paired with a YM2151.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8", "Channel 9", "Channel 10", "Channel 11", "Channel 12", "Channel 13", "Channel 14", "Channel 15", "Channel 16"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd", "Channel 9##sesd", "Channel 10##sesd", "Channel 11##sesd", "Channel 12##sesd", "Channel 13##sesd", "Channel 14##sesd", "Channel 15##sesd", "Channel 16##sesd"},
     {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM},
@@ -1300,8 +1349,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_VBOY]=new DivSysDef(
     "Virtual Boy", NULL, 0x9c, 0, 6, false, true, 0x171, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 32, 64,
     "a console which failed to sell well due to its headache-inducing features.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Noise"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5", "NO"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Noise##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "NO##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_NOISE},
     {DIV_INS_VBOY, DIV_INS_VBOY, DIV_INS_VBOY, DIV_INS_VBOY, DIV_INS_VBOY, DIV_INS_VBOY},
     {},
@@ -1312,6 +1361,7 @@ void DivEngine::registerSystems() {
       {0x13, {DIV_CMD_GB_SWEEP_TIME, "13xy: Setup sweep (x: speed; y: shift; channel 5 only)##sesd"}},
       {0x14, {DIV_CMD_FDS_MOD_DEPTH, "14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: speed; channel 5 only)##sesd"}},
       {0x15, {DIV_CMD_FDS_MOD_WAVE, "15xx: Set modulation waveform (x: wavetable; channel 5 only)##sesd"}},
+      {0x16, {DIV_CMD_WAVE_LOCAL, "16xx: Set waveform (local)##sesd1"}},
     }
   );
 
@@ -1330,8 +1380,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610B]=new DivSysDef(
     "Yamaha YM2610B (OPNB2)", NULL, 0x9e, 0, 16, true, false, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "PSG 1", "PSG 2", "PSG 3", "ADPCM-A 1", "ADPCM-A 2", "ADPCM-A 3", "ADPCM-A 4", "ADPCM-A 5", "ADPCM-A 6", "ADPCM-B"},
-    {"F1", "F2", "F3", "F4", "F5", "F6", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6", "B"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
+    {"F1", "F2", "F3", "F4", "F5", "F6", "S1##sesd", "S2##sesd", "S3##sesd", "P1##sesd", "P2##sesd", "P3##sesd", "P4##sesd", "P5##sesd", "P6##sesd", "B"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -1342,8 +1392,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SFX_BEEPER]=new DivSysDef(
     "ZX Spectrum Beeper##sesd", NULL, 0x9f, 0, 6, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "the ZX Spectrum only had a basic beeper capable of...\n...a bunch of thin pulses and tons of other interesting stuff!\nFurnace provides a thin pulse system.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5", "CH6"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "CH6##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_BEEPER, DIV_INS_BEEPER, DIV_INS_BEEPER, DIV_INS_BEEPER, DIV_INS_BEEPER, DIV_INS_BEEPER},
     {},
@@ -1369,7 +1419,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2612_CSM]=new DivSysDef(
     "Yamaha YM2612 (OPN2) CSM", NULL, 0xc1, 0, 10, true, false, 0x150, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis one includes CSM mode control for special effects on Channel 3.##sesd",
-    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "CSM Timer"},
+    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "CSM Timer##sesd"},
     {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "F6", "CSM"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_NOISE},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM},
@@ -1382,8 +1432,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SCC]=new DivSysDef(
     "Konami SCC", NULL, 0xa1, 0, 5, false, true, 0x161, false, 0, 32, 256,
     "a wavetable chip made by Konami for use with the MSX.\nthe last channel shares its wavetable with the previous one though.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_SCC, DIV_INS_SCC, DIV_INS_SCC, DIV_INS_SCC, DIV_INS_SCC},
     {},
@@ -1393,8 +1443,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_OPL_DRUMS]=new DivSysDef(
     "Yamaha YM3526 (OPL) with drums##sesd", NULL, 0xa2, 0, 11, true, false, 0x151, false, 0, 0, 0,
     "the OPL chip but with drums mode enabled.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "Kick/FM 7", "Snare", "Tom", "Top", "HiHat"},
-    {"F1", "F2", "F3", "F4", "F5", "F6", "BD", "SD", "TM", "TP", "HH"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "Kick/FM 7##sesd", "Snare##sesd", "Tom##sesd", "Top##sesd", "HiHat##sesd"},
+    {"F1", "F2", "F3", "F4", "F5", "F6", "BD##sesd", "SD##sesd", "TM##sesd", "TP##sesd", "HH##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
     {DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL_DRUMS, DIV_INS_OPL_DRUMS, DIV_INS_OPL_DRUMS, DIV_INS_OPL_DRUMS},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL},
@@ -1405,8 +1455,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_OPL2_DRUMS]=new DivSysDef(
     "Yamaha YM3812 (OPL2) with drums##sesd", NULL, 0xa3, 0, 11, true, false, 0x151, false, 0, 0, 0,
     "the OPL2 chip but with drums mode enabled.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "Kick/FM 7", "Snare", "Tom", "Top", "HiHat"},
-    {"F1", "F2", "F3", "F4", "F5", "F6", "BD", "SD", "TM", "TP", "HH"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "Kick/FM 7##sesd", "Snare##sesd", "Tom##sesd", "Top##sesd", "HiHat##sesd"},
+    {"F1", "F2", "F3", "F4", "F5", "F6", "BD##sesd", "SD##sesd", "TM##sesd", "TP##sesd", "HH##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
     {DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL_DRUMS, DIV_INS_OPL_DRUMS, DIV_INS_OPL_DRUMS, DIV_INS_OPL_DRUMS},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL},
@@ -1417,8 +1467,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_OPL3_DRUMS]=new DivSysDef(
     "Yamaha YMF262 (OPL3) with drums##sesd", NULL, 0xa4, 0, 20, true, false, 0x151, false, 0, 0, 0,
     "the OPL3 chip but with drums mode enabled.##sesd",
-    {"4OP 1", "FM 2", "4OP 3", "FM 4", "4OP 5", "FM 6", "4OP 7", "FM 8", "4OP 9", "FM 10", "4OP 11", "FM 12", "FM 13", "FM 14", "FM 15", "Kick/FM 16", "Snare", "Tom", "Top", "HiHat"},
-    {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "BD", "SD", "TM", "TP", "HH"},
+    {"4OP 1##sesd", "FM 2", "4OP 3##sesd", "FM 4", "4OP 5##sesd", "FM 6", "4OP 7##sesd", "FM 8", "4OP 9##sesd", "FM 10", "4OP 11##sesd", "FM 12", "FM 13", "FM 14", "FM 15", "Kick/FM 16##sesd", "Snare##sesd", "Tom##sesd", "Top##sesd", "HiHat##sesd"},
+    {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "BD##sesd", "SD##sesd", "TM##sesd", "TP##sesd", "HH##sesd"},
     {DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
     {DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL_DRUMS, DIV_INS_OPL_DRUMS, DIV_INS_OPL_DRUMS, DIV_INS_OPL_DRUMS},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL},
@@ -1429,8 +1479,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610_FULL]=new DivSysDef(
     "Yamaha YM2610 (OPNB)", NULL, 0xa5, 0, 14, true, false, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "PSG 1", "PSG 2", "PSG 3", "ADPCM-A 1", "ADPCM-A 2", "ADPCM-A 3", "ADPCM-A 4", "ADPCM-A 5", "ADPCM-A 6", "ADPCM-B"},
-    {"F1", "F2", "F3", "F4", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6", "B"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
+    {"F1", "F2", "F3", "F4", "S1##sesd", "S2##sesd", "S3##sesd", "P1##sesd", "P2##sesd", "P3##sesd", "P4##sesd", "P5##sesd", "P6##sesd", "B"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -1441,8 +1491,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610_FULL_EXT]=new DivSysDef(
     "Yamaha YM2610 (OPNB) Extended Channel 2##sesd", NULL, 0xa6, 0, 17, true, false, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.##sesd",
-    {"FM 1", "FM 2 OP1", "FM 2 OP2", "FM 2 OP3", "FM 2 OP4", "FM 3", "FM 4", "PSG 1", "PSG 2", "PSG 3", "ADPCM-A 1", "ADPCM-A 2", "ADPCM-A 3", "ADPCM-A 4", "ADPCM-A 5", "ADPCM-A 6", "ADPCM-B"},
-    {"F1", "O1", "O2", "O3", "O4", "F3", "F4", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6", "B"},
+    {"FM 1", "FM 2 OP1", "FM 2 OP2", "FM 2 OP3", "FM 2 OP4", "FM 3", "FM 4", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
+    {"F1", "O1", "O2", "O3", "O4", "F3", "F4", "S1##sesd", "S2##sesd", "S3##sesd", "P1##sesd", "P2##sesd", "P3##sesd", "P4##sesd", "P5##sesd", "P6##sesd", "B"},
     {DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -1454,8 +1504,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610_CSM]=new DivSysDef(
     "Yamaha YM2610 (OPNB) CSM", NULL, 0xc2, 0, 18, true, false, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "this chip was used in SNK's Neo Geo arcade board and video game console.\nit's like OPNA but the rhythm channels are ADPCM channels and two FM channels went missing.\nthis one is in Extended Channel mode, which turns the second FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 2.##sesd",
-    {"FM 1", "FM 2 OP1", "FM 2 OP2", "FM 2 OP3", "FM 2 OP4", "FM 3", "FM 4", "CSM Timer", "PSG 1", "PSG 2", "PSG 3", "ADPCM-A 1", "ADPCM-A 2", "ADPCM-A 3", "ADPCM-A 4", "ADPCM-A 5", "ADPCM-A 6", "ADPCM-B"},
-    {"F1", "O1", "O2", "O3", "O4", "F3", "F4", "CSM", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6", "B"},
+    {"FM 1", "FM 2 OP1", "FM 2 OP2", "FM 2 OP3", "FM 2 OP4", "FM 3", "FM 4", "CSM Timer##sesd", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
+    {"F1", "O1", "O2", "O3", "O4", "F3", "F4", "CSM", "S1##sesd", "S2##sesd", "S3##sesd", "P1##sesd", "P2##sesd", "P3##sesd", "P4##sesd", "P5##sesd", "P6##sesd", "B"},
     {DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_NOISE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -1467,8 +1517,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_OPLL_DRUMS]=new DivSysDef(
     "Yamaha YM2413 (OPLL) with drums##sesd", NULL, 0xa7, 0, 11, true, false, 0x150, false, 0, 0, 0,
     "the OPLL chip but with drums mode turned on.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "Kick", "Snare", "Tom", "Top", "HiHat"},
-    {"F1", "F2", "F3", "F4", "F5", "F6", "BD", "SD", "TM", "TP", "HH"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "Kick##sesd", "Snare##sesd", "Tom##sesd", "Top##sesd", "HiHat##sesd"},
+    {"F1", "F2", "F3", "F4", "F5", "F6", "BD##sesd", "SD##sesd", "TM##sesd", "TP##sesd", "HH##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
     {DIV_INS_OPLL, DIV_INS_OPLL, DIV_INS_OPLL, DIV_INS_OPLL, DIV_INS_OPLL, DIV_INS_OPLL, DIV_INS_OPLL, DIV_INS_OPLL, DIV_INS_OPLL, DIV_INS_OPLL, DIV_INS_OPLL},
     {},
@@ -1485,8 +1535,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_LYNX]=new DivSysDef(
     "Atari Lynx (MIKEY)", NULL, 0xa8, 0, 4, false, true, 0x172, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "a portable console made by Atari. it has all of Atari's trademark waveforms.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4"},
-    {"CH1", "CH2", "CH3", "CH4"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_MIKEY, DIV_INS_MIKEY, DIV_INS_MIKEY, DIV_INS_MIKEY},
     {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -1507,7 +1557,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_QSOUND]=new DivSysDef(
     "Capcom QSound", NULL, 0xe0, 0, 19, false, true, 0x161, false, (1U<<DIV_SAMPLE_DEPTH_QSOUND_ADPCM)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "used in some of Capcom's arcade boards. surround-like sampled sound with echo.##sesd",
-    {"PCM 1", "PCM 2", "PCM 3", "PCM 4", "PCM 5", "PCM 6", "PCM 7", "PCM 8", "PCM 9", "PCM 10", "PCM 11", "PCM 12", "PCM 13", "PCM 14", "PCM 15", "PCM 16", "ADPCM 1", "ADPCM 2", "ADPCM 3"},
+    {"PCM 1##sesd", "PCM 2##sesd", "PCM 3##sesd", "PCM 4##sesd", "PCM 5##sesd", "PCM 6##sesd", "PCM 7##sesd", "PCM 8##sesd", "PCM 9##sesd", "PCM 10##sesd", "PCM 11##sesd", "PCM 12##sesd", "PCM 13##sesd", "PCM 14##sesd", "PCM 15##sesd", "PCM 16##sesd", "ADPCM 1##sesd", "ADPCM 2##sesd", "ADPCM 3##sesd"},
     {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "A1", "A2", "A3"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
     {DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND, DIV_INS_QSOUND},
@@ -1518,8 +1568,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_VERA]=new DivSysDef(
     "VERA", NULL, 0xac, 0, 17, false, true, 0, false, (1U<<DIV_SAMPLE_DEPTH_8BIT)|(1U<<DIV_SAMPLE_DEPTH_16BIT), 0, 0,
     "the chip used in a computer design created by The 8-Bit Guy.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8", "Channel 9", "Channel 10", "Channel 11", "Channel 12", "Channel 13", "Channel 14", "Channel 15", "Channel 16", "PCM"},
-    {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "PCM"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd", "Channel 9##sesd", "Channel 10##sesd", "Channel 11##sesd", "Channel 12##sesd", "Channel 13##sesd", "Channel 14##sesd", "Channel 15##sesd", "Channel 16##sesd", "PCM##sesd"},
+    {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "PCM##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM},
     {DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_VERA, DIV_INS_AMIGA},
     {},
@@ -1532,8 +1582,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610B_EXT]=new DivSysDef(
     "Yamaha YM2610B (OPNB2) Extended Channel 3##sesd", NULL, 0xde, 0, 19, true, false, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.##sesd",
-    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "PSG 1", "PSG 2", "PSG 3", "ADPCM-A 1", "ADPCM-A 2", "ADPCM-A 3", "ADPCM-A 4", "ADPCM-A 5", "ADPCM-A 6", "ADPCM-B"},
-    {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "F6", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6", "B"},
+    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
+    {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "F6", "S1##sesd", "S2##sesd", "S3##sesd", "P1##sesd", "P2##sesd", "P3##sesd", "P4##sesd", "P5##sesd", "P6##sesd", "B"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -1545,8 +1595,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2610B_CSM]=new DivSysDef(
     "Yamaha YM2610B (OPNB2) CSM", NULL, 0xc5, 0, 20, true, false, 0x151, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_A)|(1U<<DIV_SAMPLE_DEPTH_ADPCM_B)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd",
-    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "CSM Timer", "PSG 1", "PSG 2", "PSG 3", "ADPCM-A 1", "ADPCM-A 2", "ADPCM-A 3", "ADPCM-A 4", "ADPCM-A 5", "ADPCM-A 6", "ADPCM-B"},
-    {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "F6", "CSM", "S1", "S2", "S3", "P1", "P2", "P3", "P4", "P5", "P6", "B"},
+    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6", "CSM Timer##sesd", "PSG 1##sesd", "PSG 2##sesd", "PSG 3##sesd", "ADPCM-A 1##sesd", "ADPCM-A 2##sesd", "ADPCM-A 3##sesd", "ADPCM-A 4##sesd", "ADPCM-A 5##sesd", "ADPCM-A 6##sesd", "ADPCM-B##sesd"},
+    {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "F6", "CSM", "S1##sesd", "S2##sesd", "S3##sesd", "P1##sesd", "P2##sesd", "P3##sesd", "P4##sesd", "P5##sesd", "P6##sesd", "B"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_NOISE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AY, DIV_INS_AY, DIV_INS_AY, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMA, DIV_INS_ADPCMB},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -1558,8 +1608,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SEGAPCM_COMPAT]=new DivSysDef(
     "SegaPCM (compatible 5-channel mode)##sesd", NULL, 0xa9, 0, 5, false, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "this is the same thing as SegaPCM, but only exposes 5 of the channels for compatibility with DefleMask.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5"},
-    {"P1", "P2", "P3", "P4", "P5"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd"},
+    {"P1##sesd", "P2##sesd", "P3##sesd", "P4##sesd", "P5##sesd"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM, DIV_INS_SEGAPCM},
     {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -1570,7 +1620,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_X1_010]=new DivSysDef(
     "Seta/Allumer X1-010", NULL, 0xb0, 0, 16, false, true, 0x171, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 128, 256,
     "a sound chip used in several Seta/Allumer-manufactured arcade boards with too many channels of wavetable sound, which also are capable of sampled sound.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8", "Channel 9", "Channel 10", "Channel 11", "Channel 12", "Channel 13", "Channel 14", "Channel 15", "Channel 16"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd", "Channel 9##sesd", "Channel 10##sesd", "Channel 11##sesd", "Channel 12##sesd", "Channel 13##sesd", "Channel 14##sesd", "Channel 15##sesd", "Channel 16##sesd"},
     {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010, DIV_INS_X1_010},
@@ -1580,6 +1630,7 @@ void DivEngine::registerSystems() {
       {0x11, {DIV_CMD_X1_010_ENVELOPE_SHAPE, "11xx: Set envelope shape##sesd"}},
       {0x12, {DIV_CMD_X1_010_SAMPLE_BANK_SLOT, "12xx: Set sample bank slot (0 to 7)##sesd"}},
       {0x17, {DIV_CMD_SAMPLE_MODE, "17xx: Toggle PCM mode (LEGACY)##sesd4"}},
+      {0x18, {DIV_CMD_WAVE_LOCAL, "18xx: Set waveform (local)##sesd2"}},
     },
     {
       {0x20, {DIV_CMD_SAMPLE_FREQ, "20xx: Set PCM frequency (1 to FF)##sesd"}},
@@ -1594,8 +1645,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_BUBSYS_WSG]=new DivSysDef(
     "Konami Bubble System WSG", NULL, 0xad, 0, 2, false, true, 0, false, 0, 32, 16,
     "this is the wavetable part of the Bubble System, which also had two AY-3-8910s.##sesd",
-    {"Channel 1", "Channel 2"},
-    {"CH1", "CH2"},
+    {"Channel 1##sesd", "Channel 2##sesd"},
+    {"CH1##sesd", "CH2##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_SCC, DIV_INS_SCC},
     {},
@@ -1607,8 +1658,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_OPL4]=new DivSysDef(
     "Yamaha YMF278B (OPL4)", NULL, 0xae, 0, 42, true, true, 0, false, (1U<<DIV_SAMPLE_DEPTH_8BIT)|(1U<<DIV_SAMPLE_DEPTH_16BIT), 0, 0,
     "like OPL3, but this time it also has a 24-channel version of MultiPCM.##sesd",
-    {"4OP 1", "FM 2", "4OP 3", "FM 4", "4OP 5", "FM 6", "4OP 7", "FM 8", "4OP 9", "FM 10", "4OP 11", "FM 12", "FM 13", "FM 14", "FM 15", "FM 16", "FM 17", "FM 18", "PCM 1", "PCM 2", "PCM 3", "PCM 4", "PCM 5", "PCM 6", "PCM 7", "PCM 8", "PCM 9", "PCM 10", "PCM 11", "PCM 12", "PCM 13", "PCM 14", "PCM 15", "PCM 16", "PCM 17", "PCM 18", "PCM 19", "PCM 20", "PCM 21", "PCM 22", "PCM 23", "PCM 24"},
-    {"F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "F13", "F14", "F15", "F16", "F17", "F18", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P8", "P10", "P11", "P12", "P13", "P14", "P15", "P16", "P17", "P18", "P19", "P20", "P21", "P22", "P23", "P24"},
+    {"4OP 1##sesd", "FM 2", "4OP 3##sesd", "FM 4", "4OP 5##sesd", "FM 6", "4OP 7##sesd", "FM 8", "4OP 9##sesd", "FM 10", "4OP 11##sesd", "FM 12", "FM 13", "FM 14", "FM 15", "FM 16", "FM 17", "FM 18", "PCM 1##sesd", "PCM 2##sesd", "PCM 3##sesd", "PCM 4##sesd", "PCM 5##sesd", "PCM 6##sesd", "PCM 7##sesd", "PCM 8##sesd", "PCM 9##sesd", "PCM 10##sesd", "PCM 11##sesd", "PCM 12##sesd", "PCM 13##sesd", "PCM 14##sesd", "PCM 15##sesd", "PCM 16##sesd", "PCM 17##sesd", "PCM 18##sesd", "PCM 19##sesd", "PCM 20##sesd", "PCM 21##sesd", "PCM 22##sesd", "PCM 23##sesd", "PCM 24##sesd"},
+    {"F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "F13", "F14", "F15", "F16", "F17", "F18", "P1##sesd", "P2##sesd", "P3##sesd", "P4##sesd", "P5##sesd", "P6##sesd", "P7##sesd", "P8##sesd", "P9##sesd", "P10##sesd", "P11##sesd", "P12##sesd", "P13##sesd", "P14##sesd", "P15##sesd", "P16##sesd", "P17##sesd", "P18##sesd", "P19##sesd", "P20##sesd", "P21##sesd", "P22##sesd", "P23##sesd", "P24##sesd"},
     {DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM}
   );
@@ -1617,8 +1668,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_OPL4_DRUMS]=new DivSysDef(
     "Yamaha YMF278B (OPL4) with drums##sesd", NULL, 0xaf, 0, 44, true, true, 0, false, (1U<<DIV_SAMPLE_DEPTH_8BIT)|(1U<<DIV_SAMPLE_DEPTH_16BIT), 0, 0,
     "the OPL4 but with drums mode turned on.##sesd",
-    {"4OP 1", "FM 2", "4OP 3", "FM 4", "4OP 5", "FM 6", "4OP 7", "FM 8", "4OP 9", "FM 10", "4OP 11", "FM 12", "FM 13", "FM 14", "FM 15", "Kick/FM 16", "Snare", "Tom", "Top", "HiHat", "PCM 1", "PCM 2", "PCM 3", "PCM 4", "PCM 5", "PCM 6", "PCM 7", "PCM 8", "PCM 9", "PCM 10", "PCM 11", "PCM 12", "PCM 13", "PCM 14", "PCM 15", "PCM 16", "PCM 17", "PCM 18", "PCM 19", "PCM 20", "PCM 21", "PCM 22", "PCM 23", "PCM 24"},
-    {"F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "F13", "F14", "F15", "BD", "SD", "TM", "TP", "HH", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P8", "P10", "P11", "P12", "P13", "P14", "P15", "P16", "P17", "P18", "P19", "P20", "P21", "P22", "P23", "P24"},
+    {"4OP 1##sesd", "FM 2", "4OP 3##sesd", "FM 4", "4OP 5##sesd", "FM 6", "4OP 7##sesd", "FM 8", "4OP 9##sesd", "FM 10", "4OP 11##sesd", "FM 12", "FM 13", "FM 14", "FM 15", "Kick/FM 16##sesd", "Snare##sesd", "Tom##sesd", "Top##sesd", "HiHat##sesd", "PCM 1##sesd", "PCM 2##sesd", "PCM 3##sesd", "PCM 4##sesd", "PCM 5##sesd", "PCM 6##sesd", "PCM 7##sesd", "PCM 8##sesd", "PCM 9##sesd", "PCM 10##sesd", "PCM 11##sesd", "PCM 12##sesd", "PCM 13##sesd", "PCM 14##sesd", "PCM 15##sesd", "PCM 16##sesd", "PCM 17##sesd", "PCM 18##sesd", "PCM 19##sesd", "PCM 20##sesd", "PCM 21##sesd", "PCM 22##sesd", "PCM 23##sesd", "PCM 24##sesd"},
+    {"F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "F13", "F14", "F15", "BD##sesd", "SD##sesd", "TM##sesd", "TP##sesd", "HH##sesd", "P1##sesd", "P2##sesd", "P3##sesd", "P4##sesd", "P5##sesd", "P6##sesd", "P7##sesd", "P8##sesd", "P9##sesd", "P10##sesd", "P11##sesd", "P12##sesd", "P13##sesd", "P14##sesd", "P15##sesd", "P16##sesd", "P17##sesd", "P18##sesd", "P19##sesd", "P20##sesd", "P21##sesd", "P22##sesd", "P23##sesd", "P24##sesd"},
     {DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM, DIV_INS_MULTIPCM}
   );
@@ -1655,7 +1706,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_ES5506]=new DivSysDef(
     "Ensoniq ES5506", NULL, 0xb1, 0, 32, false, true, 0/*0x171*/, false, (1U<<DIV_SAMPLE_DEPTH_16BIT), 0, 0,
     "a sample chip made by Ensoniq, which is the basis for the GF1 chip found in Gravis' Ultrasound cards.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8", "Channel 9", "Channel 10", "Channel 11", "Channel 12", "Channel 13", "Channel 14", "Channel 15", "Channel 16", "Channel 17", "Channel 18", "Channel 19", "Channel 20", "Channel 21", "Channel 22", "Channel 23", "Channel 24", "Channel 25", "Channel 26", "Channel 27", "Channel 28", "Channel 29", "Channel 30", "Channel 31", "Channel 32"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd", "Channel 9##sesd", "Channel 10##sesd", "Channel 11##sesd", "Channel 12##sesd", "Channel 13##sesd", "Channel 14##sesd", "Channel 15##sesd", "Channel 16##sesd", "Channel 17##sesd", "Channel 18##sesd", "Channel 19##sesd", "Channel 20##sesd", "Channel 21##sesd", "Channel 22##sesd", "Channel 23##sesd", "Channel 24##sesd", "Channel 25##sesd", "Channel 26##sesd", "Channel 27##sesd", "Channel 28##sesd", "Channel 29##sesd", "Channel 30##sesd", "Channel 31##sesd", "Channel 32##sesd"},
     {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506, DIV_INS_ES5506},
@@ -1667,8 +1718,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_Y8950]=new DivSysDef(
     "Yamaha Y8950", NULL, 0xb2, 0, 10, true, false, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_ADPCM_B, 0, 0,
     "like OPL but with an ADPCM channel.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "FM 7", "FM 8", "FM 9", "ADPCM"},
-    {"F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "P"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "FM 7", "FM 8", "FM 9", "ADPCM##sesd"},
+    {"F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "P##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PCM},
     {DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_ADPCMB},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA},
@@ -1679,8 +1730,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_Y8950_DRUMS]=new DivSysDef(
     "Yamaha Y8950 with drums##sesd", NULL, 0xb3, 0, 12, true, false, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_ADPCM_B, 0, 0,
     "the Y8950 chip, in drums mode.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "Kick/FM 7", "Snare", "Tom", "Top", "HiHat", "ADPCM"},
-    {"F1", "F2", "F3", "F4", "F5", "F6", "BD", "SD", "TM", "TP", "HH", "P"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6", "Kick/FM 7##sesd", "Snare##sesd", "Tom##sesd", "Top##sesd", "HiHat##sesd", "ADPCM##sesd"},
+    {"F1", "F2", "F3", "F4", "F5", "F6", "BD##sesd", "SD##sesd", "TM##sesd", "TP##sesd", "HH##sesd", "P##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_PCM},
     {DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL_DRUMS, DIV_INS_OPL_DRUMS, DIV_INS_OPL_DRUMS, DIV_INS_OPL_DRUMS, DIV_INS_ADPCMB},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_OPL, DIV_INS_AMIGA},
@@ -1691,8 +1742,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SCC_PLUS]=new DivSysDef(
     "Konami SCC+", NULL, 0xb4, 0, 5, false, true, 0x161, false, 0, 32, 256,
     "this is a variant of Konami's SCC chip with the last channel's wavetable being independent.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_SCC, DIV_INS_SCC, DIV_INS_SCC, DIV_INS_SCC, DIV_INS_SCC},
     {},
@@ -1727,8 +1778,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SOUND_UNIT]=new DivSysDef(
     "tildearrow Sound Unit", NULL, 0xb5, 0, 8, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "tildearrow's fantasy sound chip. put SID, AY and VERA in a blender, and you get this!##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "CH6##sesd", "CH7##sesd", "CH8##sesd"},
     {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
     {DIV_INS_SU, DIV_INS_SU, DIV_INS_SU, DIV_INS_SU, DIV_INS_SU, DIV_INS_SU, DIV_INS_SU, DIV_INS_SU},
     {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -1739,8 +1790,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_MSM6295]=new DivSysDef(
     "OKI MSM6295", NULL, 0xaa, 0, 4, false, true, 0x161, false, 1U<<DIV_SAMPLE_DEPTH_VOX, 0, 0,
     "an ADPCM sound chip manufactured by OKI and used in many arcade boards.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4"},
-    {"CH1", "CH2", "CH3", "CH4"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_MSM6295, DIV_INS_MSM6295, DIV_INS_MSM6295, DIV_INS_MSM6295},
     {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -1752,8 +1803,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_MSM6258]=new DivSysDef(
     "OKI MSM6258", NULL, 0xab, 0, 1, false, true, 0x150, false, 1U<<DIV_SAMPLE_DEPTH_VOX, 0, 0,
     "an ADPCM sound chip manufactured by OKI and used in the Sharp X68000.##sesd",
-    {"Sample"},
-    {"PCM"},
+    {"Sample##sesd"},
+    {"PCM##sesd"},
     {DIV_CH_PCM},
     {DIV_INS_MSM6258},
     {DIV_INS_AMIGA},
@@ -1766,7 +1817,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YMZ280B]=new DivSysDef(
     "Yamaha YMZ280B (PCMD8)", NULL, 0xb8, 0, 8, false, true, 0x151, false, 1U<<DIV_SAMPLE_DEPTH_YMZ_ADPCM, 0, 0,
     "used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or 16-bit PCM.##sesd",
-    {"PCM 1", "PCM 2", "PCM 3", "PCM 4", "PCM 5", "PCM 6", "PCM 7", "PCM 8"},
+    {"PCM 1##sesd", "PCM 2##sesd", "PCM 3##sesd", "PCM 4##sesd", "PCM 5##sesd", "PCM 6##sesd", "PCM 7##sesd", "PCM 8##sesd"},
     {"1", "2", "3", "4", "5", "6", "7", "8"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_YMZ280B, DIV_INS_YMZ280B, DIV_INS_YMZ280B, DIV_INS_YMZ280B, DIV_INS_YMZ280B, DIV_INS_YMZ280B, DIV_INS_YMZ280B, DIV_INS_YMZ280B},
@@ -1775,6 +1826,7 @@ void DivEngine::registerSystems() {
 
   EffectHandlerMap namcoEffectHandlerMap={
     {0x10, {DIV_CMD_WAVE, "10xx: Set waveform##sesd8"}},
+    {0x11, {DIV_CMD_WAVE_LOCAL, "11xx: Select waveform (local)##sesd1"}},
   };
 
   EffectHandlerMap namcoC30EffectHandlerMap={
@@ -1785,8 +1837,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_NAMCO]=new DivSysDef(
     "Namco WSG", NULL, 0xb9, 0, 3, false, true, 0, false, 0, 32, 16,
     "a wavetable sound chip used in Pac-Man, among other early Namco arcade games.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3"},
-    {"CH1", "CH2", "CH3"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO},
     {},
@@ -1796,8 +1848,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_NAMCO_15XX]=new DivSysDef(
     "Namco C15 WSG", NULL, 0xba, 0, 8, false, true, 0, false, 0, 32, 16,
     "successor of the original Namco WSG chip, used in later Namco arcade games.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "CH6##sesd", "CH7##sesd", "CH8##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO},
     {},
@@ -1807,8 +1859,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_NAMCO_CUS30]=new DivSysDef(
     "Namco C30 WSG", NULL, 0xbb, 0, 8, false, true, 0, false, 0, 32, 16,
     "like Namco C15 but with stereo sound.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "CH6##sesd", "CH7##sesd", "CH8##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO, DIV_INS_NAMCO},
     {},
@@ -1818,8 +1870,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_MSM5232]=new DivSysDef(
     "OKI MSM5232", NULL, 0xbc, 0, 8, false, true, 0, false, 0, 0, 0,
     "a square wave additive synthesis chip made by OKI. used in some arcade machines and instruments.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "CH6##sesd", "CH7##sesd", "CH8##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_MSM5232, DIV_INS_MSM5232, DIV_INS_MSM5232, DIV_INS_MSM5232, DIV_INS_MSM5232, DIV_INS_MSM5232, DIV_INS_MSM5232, DIV_INS_MSM5232},
     {},
@@ -1835,8 +1887,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2612_DUALPCM]=new DivSysDef(
     "Yamaha YM2612 (OPN2) with DualPCM##sesd", NULL, 0xbe, 0, 7, true, false, 0x150, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis system uses software mixing to provide two sample channels.##sesd",
-    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6/PCM 1", "PCM 2"},
-    {"F1", "F2", "F3", "F4", "F5", "P1", "P2"},
+    {"FM 1", "FM 2", "FM 3", "FM 4", "FM 5", "FM 6/PCM 1##sesd", "PCM 2##sesd"},
+    {"F1", "F2", "F3", "F4", "F5", "P1##sesd", "P2##sesd"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_FM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AMIGA},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA, DIV_INS_NULL},
@@ -1847,8 +1899,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_YM2612_DUALPCM_EXT]=new DivSysDef(
     "Yamaha YM2612 (OPN2) Extended Channel 3 with DualPCM and CSM##sesd", NULL, 0xbd, 0, 11, true, false, 0x150, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "this chip is mostly known for being in the Sega Genesis (but it also was on the FM Towns computer).\nthis system uses software mixing to provide two sample channels.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd",
-    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6/PCM 1", "PCM 2", "CSM Timer"},
-    {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "P1", "P2", "CSM"},
+    {"FM 1", "FM 2", "FM 3 OP1", "FM 3 OP2", "FM 3 OP3", "FM 3 OP4", "FM 4", "FM 5", "FM 6/PCM 1##sesd", "PCM 2##sesd", "CSM Timer##sesd"},
+    {"F1", "F2", "O1", "O2", "O3", "O4", "F4", "F5", "P1##sesd", "P2##sesd", "CSM"},
     {DIV_CH_FM, DIV_CH_FM, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_OP, DIV_CH_FM, DIV_CH_FM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_NOISE},
     {DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_FM, DIV_INS_AMIGA, DIV_INS_FM},
     {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA, DIV_INS_NULL, DIV_INS_NULL},
@@ -1860,8 +1912,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_T6W28]=new DivSysDef(
     "T6W28", NULL, 0xbf, 0, 4, false, true, 0x160, false, 0, 0, 0,
     "an SN76489 derivative used in Neo Geo Pocket, has independent stereo volume and noise channel frequency.##sesd",
-    {"Square 1", "Square 2", "Square 3", "Noise"},
-    {"S1", "S2", "S3", "NO"},
+    {"Square 1##sesd", "Square 2##sesd", "Square 3##sesd", "Noise##sesd"},
+    {"S1##sesd", "S2##sesd", "S3##sesd", "NO##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_NOISE},
     {DIV_INS_T6W28, DIV_INS_T6W28, DIV_INS_T6W28, DIV_INS_T6W28},
     {},
@@ -1873,8 +1925,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_PCM_DAC]=new DivSysDef(
     "Generic PCM DAC##sesd", NULL, 0xc0, 0, 1, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_16BIT, 0, 256,
     "as generic sample playback as it gets.##sesd",
-    {"Sample"},
-    {"PCM"},
+    {"Sample##sesd"},
+    {"PCM##sesd"},
     {DIV_CH_PCM},
     {DIV_INS_AMIGA}
   );
@@ -1882,8 +1934,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_K007232]=new DivSysDef(
     "Konami K007232", NULL, 0xc6, 0, 2, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "this PCM chip was widely used at Konami arcade boards in 1986-1990.##sesd",
-    {"Channel 1", "Channel 2"},
-    {"CH1", "CH2"},
+    {"Channel 1##sesd", "Channel 2##sesd"},
+    {"CH1##sesd", "CH2##sesd"},
     {DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_K007232, DIV_INS_K007232},
     {DIV_INS_AMIGA, DIV_INS_AMIGA}
@@ -1892,8 +1944,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_GA20]=new DivSysDef(
     "Irem GA20", NULL, 0xc7, 0, 4, false, true, 0x171, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "yet another PCM chip from Irem. like Amiga, but less pitch resolution and no sample loop.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4"},
-    {"CH1", "CH2", "CH3", "CH4"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_GA20, DIV_INS_GA20, DIV_INS_GA20, DIV_INS_GA20},
     {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA}
@@ -1902,8 +1954,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SM8521]=new DivSysDef(
     "Sharp SM8521", NULL, 0xc8, 0, 3, false, true, 0, false, 0, 32, 16,
     "a SoC with wavetable sound hardware.##sesd",
-    {"Channel 1", "Channel 2", "Noise"},
-    {"CH1", "CH2", "NS"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Noise##sesd"},
+    {"CH1##sesd", "CH2##sesd", "NS"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_NOISE},
     {DIV_INS_SM8521, DIV_INS_SM8521, DIV_INS_SM8521},
     {},
@@ -1913,8 +1965,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_PV1000]=new DivSysDef(
     "Casio PV-1000", NULL, 0xcb, 0, 3, false, true, 0, false, 0, 0, 0,
     "a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.##sesd",
-    {"Square 1", "Square 2", "Square 3"},
-    {"S1", "S2", "S3"},
+    {"Square 1##sesd", "Square 2##sesd", "Square 3##sesd"},
+    {"S1##sesd", "S2##sesd", "S3##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_PV1000, DIV_INS_PV1000, DIV_INS_PV1000},
     {},
@@ -1926,8 +1978,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SFX_BEEPER_QUADTONE]=new DivSysDef(
     "ZX Spectrum Beeper (QuadTone Engine)##sesd", NULL, 0xca, 0, 5, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "PCM"},
-    {"CH1", "CH2", "CH3", "CH4", "PCM"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "PCM##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "PCM##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PCM},
     {DIV_INS_POKEMINI, DIV_INS_POKEMINI, DIV_INS_POKEMINI, DIV_INS_POKEMINI, DIV_INS_AMIGA},
     {},
@@ -1939,8 +1991,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_K053260]=new DivSysDef(
     "Konami K053260", NULL, 0xcc, 0, 4, false, true, 0x161, false, (1U<<DIV_SAMPLE_DEPTH_ADPCM_K)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "this PCM chip was widely used at Konami arcade boards in 1990-1992.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4"},
-    {"CH1", "CH2", "CH3", "CH4"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_K053260, DIV_INS_K053260, DIV_INS_K053260, DIV_INS_K053260},
     {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
@@ -1952,8 +2004,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_TED]=new DivSysDef(
     "MOS Technology TED", NULL, 0xcd, 0, 2, false, true, 0, false, 0, 0, 0,
     "two square waves (one may be turned into noise). used in the Commodore Plus/4, 16 and 116.##sesd",
-    {"Channel 1", "Channel 2"},
-    {"CH1", "CH2"},
+    {"Channel 1##sesd", "Channel 2##sesd"},
+    {"CH1##sesd", "CH2##sesd"},
     {DIV_CH_PULSE, DIV_CH_PULSE},
     {DIV_INS_TED, DIV_INS_TED},
     {}
@@ -1962,7 +2014,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_C140]=new DivSysDef(
     "Namco C140", NULL, 0xce, 0, 24, false, true, 0x161, false, (1U<<DIV_SAMPLE_DEPTH_MULAW)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "Namco's first PCM chip from 1987. it's pretty good for being so.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8", "Channel 9", "Channel 10", "Channel 11", "Channel 12", "Channel 13", "Channel 14", "Channel 15", "Channel 16", "Channel 17", "Channel 18", "Channel 19", "Channel 20", "Channel 21", "Channel 22", "Channel 23", "Channel 24"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd", "Channel 9##sesd", "Channel 10##sesd", "Channel 11##sesd", "Channel 12##sesd", "Channel 13##sesd", "Channel 14##sesd", "Channel 15##sesd", "Channel 16##sesd", "Channel 17##sesd", "Channel 18##sesd", "Channel 19##sesd", "Channel 20##sesd", "Channel 21##sesd", "Channel 22##sesd", "Channel 23##sesd", "Channel 24##sesd"},
     {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140, DIV_INS_C140},
@@ -1973,7 +2025,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_C219]=new DivSysDef(
     "Namco C219", NULL, 0xcf, 0, 16, false, true, 0x161, false, (1U<<DIV_SAMPLE_DEPTH_C219)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "Namco's PCM chip used in their NA-1/2 hardware.\nvery similar to C140, but has noise generator.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8", "Channel 9", "Channel 10", "Channel 11", "Channel 12", "Channel 13", "Channel 14", "Channel 15", "Channel 16"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd", "Channel 9##sesd", "Channel 10##sesd", "Channel 11##sesd", "Channel 12##sesd", "Channel 13##sesd", "Channel 14##sesd", "Channel 15##sesd", "Channel 16##sesd"},
     {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"},
     {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219, DIV_INS_C219},
@@ -2002,7 +2054,7 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_ES5503]=new DivSysDef(
     "Ensoniq ES5503", NULL, 0xd2, 0, 32, false, true, 0x171, false, (1U<<DIV_SAMPLE_DEPTH_8BIT), 256, 256,
     "first Ensoniq chip used in their synths and Apple IIGS computer. Has 32 hard-panned 8-bit wavetable/sample channels, can do oscillator sync (like SID) and amplitude modulation. Can have up to 128 KiB (2 banks of 64 KiB) of memory for wavetables/samples.\nAs Robert Yannes (SID chip creator) said, it's more or less what SID chip could be if he was given enough time for its development.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8", "Channel 9", "Channel 10", "Channel 11", "Channel 12", "Channel 13", "Channel 14", "Channel 15", "Channel 16", "Channel 17", "Channel 18", "Channel 19", "Channel 20", "Channel 21", "Channel 22", "Channel 23", "Channel 24", "Channel 25", "Channel 26", "Channel 27", "Channel 28", "Channel 29", "Channel 30", "Channel 31", "Channel 32"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd", "Channel 9##sesd", "Channel 10##sesd", "Channel 11##sesd", "Channel 12##sesd", "Channel 13##sesd", "Channel 14##sesd", "Channel 15##sesd", "Channel 16##sesd", "Channel 17##sesd", "Channel 18##sesd", "Channel 19##sesd", "Channel 20##sesd", "Channel 21##sesd", "Channel 22##sesd", "Channel 23##sesd", "Channel 24##sesd", "Channel 25##sesd", "Channel 26##sesd", "Channel 27##sesd", "Channel 28##sesd", "Channel 29##sesd", "Channel 30##sesd", "Channel 31##sesd", "Channel 32##sesd"},
     {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE },
     {DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503},
@@ -2020,8 +2072,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_POWERNOISE]=new DivSysDef(
     "PowerNoise", NULL, 0xd4, 0, 4, false, false, 0, false, 0, 0, 0, 
     "a fantasy sound chip designed by jvsTSX and The Beesh-Spweesh!\nused in the Hexheld fantasy console.##sesd",
-    {"Noise 1", "Noise 2", "Noise 3", "Slope"},
-    {"N1", "N2", "N3", "SL"},
+    {"Noise 1##sesd", "Noise 2##sesd", "Noise 3##sesd", "Slope##sesd"},
+    {"N1##sesd", "N2##sesd", "N3##sesd", "SL##sesd"},
     {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_WAVE},
     {DIV_INS_POWERNOISE, DIV_INS_POWERNOISE, DIV_INS_POWERNOISE, DIV_INS_POWERNOISE_SLOPE},
     {},
@@ -2037,8 +2089,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_DAVE]=new DivSysDef(
     "DAVE", NULL, 0xd5, 0, 6, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 0,
     "this chip was featured in the Enterprise 128 computer. it is similar to POKEY, but with stereo output, more features and frequency precision and the ability to turn left or right (or both) channel into a 6-bit DAC for sample playback.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Noise", "DAC Left", "DAC Right"},
-    {"CH1", "CH2", "CH3", "NO", "L", "R"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Noise##sesd", "DAC Left##sesd", "DAC Right##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "NO##sesd", "L##sesd", "R##sesd"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_NOISE, DIV_CH_PCM, DIV_CH_PCM},
     {DIV_INS_DAVE, DIV_INS_DAVE, DIV_INS_DAVE, DIV_INS_DAVE, DIV_INS_AMIGA, DIV_INS_AMIGA},
     {},
@@ -2056,8 +2108,8 @@ void DivEngine::registerSystems() {
   sysDefs[DIV_SYSTEM_SID2]=new DivSysDef(
     "SID2", NULL, 0xf0, 0, 3, false, true, 0, false, 0, 0, 0,
     "a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3"},
-    {"CH1", "CH2", "CH3"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd"},
     {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
     {DIV_INS_SID2, DIV_INS_SID2, DIV_INS_SID2},
     {},
@@ -2065,11 +2117,33 @@ void DivEngine::registerSystems() {
     SID2PostEffectHandlerMap
   );
 
+  sysDefs[DIV_SYSTEM_5E01]=new DivSysDef(
+    "5E01", NULL, 0xf1, 0, 5, false, true, 0, false, 0, 0, 0,
+    "a fictional sound chip by Euly. similar to Ricoh 2A03, but all the duty cycles are different, noise has 32 pitches instead of 16 and you have four hard-coded waveforms on triangle channel.##sesd",
+    {"Pulse 1##sesd", "Pulse 2##sesd", "Wave##sesd", "Noise##sesd", "DPCM##sesd"},
+    {"S1##sesd", "S2##sesd", "WA##sesd", "NO##sesd", "DMC##sesd"},
+    {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_WAVE, DIV_CH_NOISE, DIV_CH_PCM},
+    {DIV_INS_NES, DIV_INS_NES, DIV_INS_NES, DIV_INS_NES, DIV_INS_NES},
+    {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA},
+    {
+      {0x11, {DIV_CMD_NES_DMC, "11xx: Write to delta modulation counter (0 to 7F)##sesd"}},
+      {0x12, {DIV_CMD_STD_NOISE_MODE, "12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1, wave: 0 to 3)##sesd"}},
+      {0x13, {DIV_CMD_NES_SWEEP, "13xy: Sweep up (x: time; y: shift)##sesd",constVal<0>,effectVal}},
+      {0x14, {DIV_CMD_NES_SWEEP, "14xy: Sweep down (x: time; y: shift)##sesd",constVal<1>,effectVal}},
+      {0x15, {DIV_CMD_NES_ENV_MODE, "15xx: Set envelope mode (0: envelope, 1: length, 2: looping, 3: constant)##sesd"}},
+      {0x16, {DIV_CMD_NES_LENGTH, "16xx: Set length counter (refer to manual for a list of values)##sesd"}},
+      {0x17, {DIV_CMD_NES_COUNT_MODE, "17xx: Set frame counter mode (0: 4-step, 1: 5-step)##sesd"}},
+      {0x18, {DIV_CMD_SAMPLE_MODE, "18xx: Select PCM/DPCM mode (0: PCM; 1: DPCM)##sesd"}},
+      {0x19, {DIV_CMD_NES_LINEAR_LENGTH, "19xx: Set wave linear counter (0 to 7F; 80 and higher halt)##sesd"}},
+      {0x20, {DIV_CMD_SAMPLE_FREQ, "20xx: Set DPCM frequency (0 to F)##sesd"}}
+    }
+  );
+
   sysDefs[DIV_SYSTEM_DUMMY]=new DivSysDef(
     "Dummy System##sesd", NULL, 0xfd, 0, 8, false, true, 0, false, 0, 0, 0,
     "this is a system designed for testing purposes.##sesd",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4", "Channel 5", "Channel 6", "Channel 7", "Channel 8"},
-    {"CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8"},
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "CH6##sesd", "CH7##sesd", "CH8##sesd"},
     {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
     {DIV_INS_STD, DIV_INS_STD, DIV_INS_STD, DIV_INS_STD, DIV_INS_STD, DIV_INS_STD, DIV_INS_STD, DIV_INS_STD}
   );

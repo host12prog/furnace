@@ -154,6 +154,7 @@ void writePackedCommandValues(SafeWriter* w, const DivCommand& c) {
     case DIV_CMD_MACRO_OFF:
     case DIV_CMD_MACRO_ON:
     case DIV_CMD_MACRO_RESTART:
+    case DIV_CMD_DELAYED_TRANSPOSE:
     case DIV_CMD_HINT_ARP_TIME:
       w->writeC(1); // length
       w->writeC(c.value);
@@ -293,12 +294,14 @@ SafeWriter* DivEngine::saveCommand(bool binary) {
   int lastTick[DIV_MAX_CHANS];
 
   memset(lastTick,0,DIV_MAX_CHANS*sizeof(int));
+  bool wroteTickGlobal=false;
   while (!done) {
     if (nextTick(false,true) || !playing) {
       done=true;
+      break;
     }
     // get command stream
-    bool wroteTickGlobal=false;
+    wroteTickGlobal=false;
     memset(wroteTick,0,DIV_MAX_CHANS*sizeof(bool));
     if (curDivider!=divider) {
       curDivider=divider;
@@ -338,6 +341,11 @@ SafeWriter* DivEngine::saveCommand(bool binary) {
     }
     cmdStream.clear();
     tick++;
+  }
+  wroteTickGlobal=false;
+  memset(wroteTick,0,DIV_MAX_CHANS*sizeof(bool));
+  for (int i=0; i<chans; i++) {
+    WRITE_TICK(i);
   }
   cmdStreamEnabled=oldCmdStreamEnabled;
 

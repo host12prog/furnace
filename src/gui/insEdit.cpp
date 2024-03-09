@@ -128,7 +128,7 @@ void FurnaceGUI::drawActualInsEditor()
     }
 
     pushWarningColor(warnType,warnType && failedNoteOn);
-    if (ImGui::BeginCombo("##Type",(insType>=DIV_INS_MAX)?_L("Unknown##sgie"):insTypes[insType][0])) {
+    if (ImGui::BeginCombo("##Type",(insType>=DIV_INS_MAX)?_L("Unknown##sgie"):_L(insTypes[insType][0]))) {
       std::vector<DivInstrumentType> insTypeList;
       if (settings.displayAllInsTypes) {
         for (int i=0; insTypes[i][0]; i++) {
@@ -138,7 +138,7 @@ void FurnaceGUI::drawActualInsEditor()
         insTypeList=e->getPossibleInsTypes();
       }
       for (DivInstrumentType i: insTypeList) {
-        if (ImGui::Selectable(insTypes[i][0],insType==i)) {
+        if (ImGui::Selectable(_L(insTypes[i][0]),insType==i)) {
           ins->type=i;
 
           // reset macro zoom

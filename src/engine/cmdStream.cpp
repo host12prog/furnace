@@ -35,8 +35,30 @@ bool DivCSChannelState::doCall(unsigned int addr) {
   return true;
 }
 
+unsigned char* DivCSPlayer::getData() {
+  return b;
+}
+
+size_t DivCSPlayer::getDataLen() {
+  return bLen;
+}
+
+DivCSChannelState* DivCSPlayer::getChanState(int ch) {
+  return &chan[ch];
+}
+
+unsigned char* DivCSPlayer::getFastDelays() {
+  return fastDelays;
+}
+
+unsigned char* DivCSPlayer::getFastCmds() {
+  return fastCmds;
+}
+
 void DivCSPlayer::cleanup() {
   delete b;
+  b=NULL;
+  bLen=0;
 }
 
 bool DivCSPlayer::tick() {
@@ -57,6 +79,7 @@ bool DivCSPlayer::tick() {
       }
       unsigned char next=stream.readC();
       unsigned char command=0;
+      bool mustTell=true;
 
       if (next<0xb3) { // note
         e->dispatchCmd(DivCommand(DIV_CMD_NOTE_ON,i,(int)next-60));
@@ -121,9 +144,11 @@ bool DivCSPlayer::tick() {
             break;
           }
           chan[i].readPos=chan[i].callStack[--chan[i].callStackPos];
+          mustTell=false;
           break;
         case 0xfa:
           chan[i].readPos=stream.readI();
+          mustTell=false;
           break;
         case 0xfb:
           logE("TODO: RATE");
@@ -139,8 +164,9 @@ bool DivCSPlayer::tick() {
           chan[i].waitTicks=1;
           break;
         case 0xff:
-          chan[i].readPos=0;
-          logI("%d: stop",i);
+          chan[i].readPos=chan[i].startPos;
+          mustTell=false;
+          logI("%d: stop go back to %x",i,chan[i].readPos);
           break;
         default:
           logE("%d: illegal instruction $%.2x! $%.x",i,next,chan[i].readPos);
@@ -234,6 +260,7 @@ bool DivCSPlayer::tick() {
           case DIV_CMD_MACRO_OFF:
           case DIV_CMD_MACRO_ON:
           case DIV_CMD_MACRO_RESTART:
+          case DIV_CMD_DELAYED_TRANSPOSE:
             arg0=(unsigned char)stream.readC();
             break;
           case DIV_CMD_FM_TL:
@@ -315,7 +342,7 @@ bool DivCSPlayer::tick() {
         }
       }
 
-      chan[i].readPos=stream.tell();
+      if (mustTell) chan[i].readPos=stream.tell();
     }
 
     if (sendVolume || chan[i].volSpeed!=0) {
@@ -336,6 +363,16 @@ bool DivCSPlayer::tick() {
         if (chan[i].vibratoPos>=64) chan[i].vibratoPos-=64;
       }
       e->dispatchCmd(DivCommand(DIV_CMD_PITCH,i,chan[i].pitch+(vibTable[chan[i].vibratoPos&63]*chan[i].vibratoDepth)/15));
+    }
+
+    if(chan[i].pw_slide)
+    {
+      e->dispatchCmd(DivCommand(DIV_CMD_DO_PW_SLIDE,i,chan[i].pw_slide,chan[i].pw_slide_speed));
+    }
+
+    if(chan[i].cutoff_slide)
+    {
+      e->dispatchCmd(DivCommand(DIV_CMD_DO_CUTOFF_SLIDE,i,chan[i].cutoff_slide,chan[i].cutoff_slide_speed));
     }
 
     if (chan[i].portaSpeed) {
@@ -383,7 +420,8 @@ bool DivCSPlayer::init() {
       stream.readI();
       continue;
     }
-    chan[i].readPos=stream.readI();
+    chan[i].startPos=stream.readI();
+    chan[i].readPos=chan[i].startPos;
   }
 
   stream.read(fastDelays,16);
@@ -424,6 +462,20 @@ bool DivEngine::playStream(unsigned char* f, size_t length) {
     freelance=true;
     playing=true;
   }
+  BUSY_END;
+  return true;
+}
+
+DivCSPlayer* DivEngine::getStreamPlayer() {
+  return cmdStreamInt;
+}
+
+bool DivEngine::killStream() {
+  if (!cmdStreamInt) return false;
+  BUSY_BEGIN;
+  cmdStreamInt->cleanup();
+  delete cmdStreamInt;
+  cmdStreamInt=NULL;
   BUSY_END;
   return true;
 }

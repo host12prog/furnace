@@ -100,6 +100,7 @@ class DivPlatformAY8930: public DivDispatch {
     };
     FixedQueue<QueuedWrite,128> writes;
     ay8930_device* ay;
+    bool raw_freq[3];
     DivDispatchOscBuffer* oscBuf[3];
     unsigned char regPool[32];
     unsigned char ayNoiseAnd, ayNoiseOr;

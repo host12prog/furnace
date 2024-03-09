@@ -68,7 +68,7 @@ void DivPlatformDave::acquire(short** buf, size_t len) {
     for (int i=4; i<6; i++) {
       if (chan[i].dacSample!=-1) {
         chan[i].dacPeriod+=chan[i].dacRate;
-        if (chan[i].dacPeriod>rate) {
+        while (chan[i].dacPeriod>rate) {
           DivSample* s=parent->getSample(chan[i].dacSample);
           if (s->samples<=0) {
             chan[i].dacSample=-1;
@@ -551,7 +551,13 @@ unsigned short DivPlatformDave::getPan(int ch) {
 // TODO: the rest
 DivChannelPair DivPlatformDave::getPaired(int ch) {
   if (chan[ch].highPass) {
-    DivChannelPair("high",(ch+1)&3);
+    return DivChannelPair("high",(ch+1)&3);
+  }
+  if (chan[3].lowPass && ch == 3) {
+    return DivChannelPair("low",2); //lowpass is only between noise chan and chan 2
+  }
+  if (chan[ch].ringMod) {
+    return DivChannelPair("ring",(ch+2)&3);
   }
   return DivChannelPair();
 }

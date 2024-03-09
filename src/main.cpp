@@ -187,7 +187,7 @@ TAParamResult pLogLevel(String val) {
 }
 
 TAParamResult pVersion(String) {
-  printf("Furnace version " DIV_VERSION ".\n\n");
+  printf("Furnace-B version " DIV_VERSION ".\n\n");
   printf("copyright (C) 2021-2024 tildearrow and contributors.\n");
   printf("licensed under the GNU General Public License version 2 or later\n");
   printf("<https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>.\n\n");
@@ -195,7 +195,7 @@ TAParamResult pVersion(String) {
   printf("pass the -warranty parameter for more information.\n\n");
   printf("DISCLAIMER: this program is not affiliated with Delek in any form.\n");
   printf("\n");
-  printf("furnace is powered by:\n");
+  printf("Furnace-B is powered by:\n");
   printf("- libsndfile by Erik de Castro Lopo and rest of libsndfile team (LGPLv2.1)\n");
   printf("- SDL2 by Sam Lantinga (zlib license)\n");
   printf("- zlib by Jean-loup Gailly and Mark Adler (zlib license)\n");
@@ -255,6 +255,8 @@ TAParamResult pVersion(String) {
   printf("- C140/C219 emulator (modified version) by cam900 (zlib license)\n");
   printf("- PowerNoise emulator by scratchminer (MIT)\n");
   printf("- ep128emu by Istvan Varga (GPLv2)\n");
+  printf("- SID2 emulator by LTVA (GPLv2); modified version of reSID\n");
+  printf("- 5E01 emulator by Euly (unknown open-source license); modified version of NSFPlay\n");
   return TA_PARAM_QUIT;
 }
 
@@ -388,14 +390,14 @@ void initParams() {
 
   params.push_back(TAParam("B","benchmark",true,pBenchmark,"render|seek","run performance test"));
 
-  params.push_back(TAParam("V","version",false,pVersion,"","view information about Furnace."));
+  params.push_back(TAParam("V","version",false,pVersion,"","view information about Furnace-B."));
   params.push_back(TAParam("W","warranty",false,pWarranty,"","view warranty disclaimer."));
 }
 
 #ifdef _WIN32
 void reportError(String what) {
   logE("%s",what);
-  MessageBox(NULL,what.c_str(),"Furnace",MB_OK|MB_ICONERROR);
+  MessageBox(NULL,what.c_str(),"Furnace-B",MB_OK|MB_ICONERROR);
 }
 #elif defined(ANDROID)
 void reportError(String what) {
@@ -547,14 +549,14 @@ int main(int argc, char** argv) {
 #ifdef HAVE_GUI
   if (e.preInit(consoleMode || benchMode || infoMode || outName!="" || vgmOutName!="" || cmdOutName!="")) {
     if (consoleMode || benchMode || infoMode || outName!="" || vgmOutName!="" || cmdOutName!="") {
-      logW("engine wants safe mode, but Furnace GUI is not going to start.");
+      logW("engine wants safe mode, but Furnace-B GUI is not going to start.");
     } else {
       safeMode=true;
     }
   }
 #else
   if (e.preInit(true)) {
-    logW("engine wants safe mode, but Furnace GUI is not available.");
+    logW("engine wants safe mode, but Furnace-B GUI is not available.");
   }
 #endif
 
@@ -620,7 +622,7 @@ int main(int argc, char** argv) {
       return 1;
     }
     fclose(f);
-    if (!e.load(file,(size_t)len)) {
+    if (!e.load(file,(size_t)len,fileName)) {
       reportError(fmt::sprintf("could not open file! (%s)",e.getLastError()));
       e.everythingOK();
       finishLogFile();

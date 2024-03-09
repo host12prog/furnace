@@ -263,6 +263,21 @@ const char* cmdName[]={
   "ES5503_WAVE_LENGTH",
   "ES5503_WAVE_POS",
   "ES5503_OSC_MODE",
+
+  "DO_PW_SLIDE",
+  "DO_CUTOFF_SLIDE",
+
+  "PW_SLIDE_UP",
+  "PW_SLIDE_DN",
+  "CUTOFF_SLIDE_UP",
+  "CUTOFF_SLIDE_DN",
+
+  "WAVE_LOCAL",
+
+  "RAW_FREQ",
+  "RAW_FREQ_HIGHER_BYTE",
+
+  "DELAYED_TRANSPOSE",
 };
 
 static_assert((sizeof(cmdName)/sizeof(void*))==DIV_CMD_MAX,"update cmdName!");
@@ -386,6 +401,35 @@ int DivEngine::dispatchCmd(DivCommand c) {
         }
       }
     }
+  }
+
+  switch (c.cmd) {
+    case DIV_CMD_PW_SLIDE_UP:
+    {
+      chan[c.chan].pw_slide = c.value ? 1 : 0;
+      chan[c.chan].pw_slide_speed = c.value;
+      break;
+    }
+    case DIV_CMD_PW_SLIDE_DN:
+    {
+      chan[c.chan].pw_slide = c.value ? 2 : 0;
+      chan[c.chan].pw_slide_speed = c.value;
+      break;
+    }
+    case DIV_CMD_CUTOFF_SLIDE_UP:
+    {
+      chan[c.chan].cutoff_slide = c.value ? 1 : 0;
+      chan[c.chan].cutoff_slide_speed = c.value;
+      break;
+    }
+    case DIV_CMD_CUTOFF_SLIDE_DN:
+    {
+      chan[c.chan].cutoff_slide = c.value ? 2 : 0;
+      chan[c.chan].cutoff_slide_speed = c.value;
+      break;
+    }
+    default:
+      break;
   }
 
   c.chan=dispatchChanOfChan[c.dis];
@@ -956,6 +1000,24 @@ void DivEngine::processRow(int i, bool afterDelay) {
         dispatchCmd(DivCommand(DIV_CMD_PITCH,i,chan[i].pitch+(((chan[i].vibratoDepth*vibTable[chan[i].vibratoPos]*chan[i].vibratoFine)>>4)/15)));
         dispatchCmd(DivCommand(DIV_CMD_HINT_PITCH,i,chan[i].pitch));
         break;
+      case 0xe6: // Delayed note transpose
+        if(effectVal != 0)
+        {
+          chan[i].transposeDelay = (((effectVal & 0xf0) >> 4) & 7);
+          bool negative_semitones = (effectVal >> 7);
+          chan[i].transposeSemitones = (effectVal & 0xf);
+
+          if(negative_semitones)
+          {
+            chan[i].transposeSemitones *= -1;
+          }
+        }
+        else
+        {
+          chan[i].transposeDelay = -1;
+          chan[i].transposeSemitones = 0xff;
+        }
+        break;
       case 0xea: // legato mode
         chan[i].legato=effectVal;
         break;
@@ -1479,12 +1541,18 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
             chan[i].volume+=chan[i].volSpeed;
             if (chan[i].volume>chan[i].volMax) {
               chan[i].volume=chan[i].volMax;
-              chan[i].volSpeed=0;
+              if(!song.dontDisableVolSlideOnZero)
+              {
+                chan[i].volSpeed=0;
+              }
               dispatchCmd(DivCommand(DIV_CMD_HINT_VOLUME,i,chan[i].volume>>8));
               dispatchCmd(DivCommand(DIV_CMD_VOLUME,i,chan[i].volume>>8));
               dispatchCmd(DivCommand(DIV_CMD_HINT_VOL_SLIDE,i,0));
             } else if (chan[i].volume<0) {
-              chan[i].volSpeed=0;
+              if(!song.dontDisableVolSlideOnZero)
+              {
+                chan[i].volSpeed=0;
+              }
               dispatchCmd(DivCommand(DIV_CMD_HINT_VOL_SLIDE,i,0));
               if (song.legacyVolumeSlides) {
                 chan[i].volume=chan[i].volMax+1;
@@ -1521,6 +1589,33 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
               break;
           }
         }
+        
+        if(chan[i].pw_slide)
+        {
+          dispatchCmd(DivCommand(DIV_CMD_DO_PW_SLIDE,i,chan[i].pw_slide,chan[i].pw_slide_speed));
+        }
+
+        if(chan[i].cutoff_slide)
+        {
+          dispatchCmd(DivCommand(DIV_CMD_DO_CUTOFF_SLIDE,i,chan[i].cutoff_slide,chan[i].cutoff_slide_speed));
+        }
+
+        if(chan[i].transposeSemitones != 0xff)
+        {
+          if(chan[i].transposeDelay > 0)
+          {
+            chan[i].transposeDelay--;
+          }
+          else
+          {
+            chan[i].note += chan[i].transposeSemitones;
+            dispatchCmd(DivCommand(DIV_CMD_LEGATO,i,chan[i].note+(chan[i].arp>>4)));
+
+            chan[i].transposeDelay = -1;
+            chan[i].transposeSemitones = 0xff;
+          }
+        }
+
         if (!song.noSlidesOnFirstTick || !firstTick) {
           if ((chan[i].keyOn || chan[i].keyOff) && chan[i].portaSpeed>0) {
             if (dispatchCmd(DivCommand(DIV_CMD_NOTE_PORTA,i,chan[i].portaSpeed*(song.linearPitch==2?song.pitchSlideSpeed:1),chan[i].portaNote))==2 && chan[i].portaStop && song.targetResetsSlides) {
@@ -1601,9 +1696,7 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
 
   if (subticks==tickMult && cmdStreamInt) {
     if (!cmdStreamInt->tick()) {
-      cmdStreamInt->cleanup();
-      delete cmdStreamInt;
-      cmdStreamInt=NULL;
+      // !!!
     }
   }
 

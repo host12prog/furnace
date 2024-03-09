@@ -29,6 +29,8 @@ class DivPlatformNES: public DivDispatch {
     int prevFreq;
     unsigned char duty, sweep, envMode, len;
     bool sweepChanged, furnaceDac;
+    int note;
+    bool do_sweep;
     Channel():
       SharedChannel<signed char>(15),
       prevFreq(65535),
@@ -37,7 +39,9 @@ class DivPlatformNES: public DivDispatch {
       envMode(3),
       len(0x1f),
       sweepChanged(false),
-      furnaceDac(false) {}
+      furnaceDac(false),
+      note(0),
+      do_sweep(false) {}
   };
   Channel chan[5];
   DivDispatchOscBuffer* oscBuf[5];
@@ -67,6 +71,7 @@ class DivPlatformNES: public DivDispatch {
   xgm::NES_DMC* nes2_NP;
   unsigned char regPool[128];
   unsigned int sampleOffDPCM[256];
+  DivMemoryComposition memCompo;
 
   friend void putDispatchChip(void*,int);
   friend void putDispatchChan(void*,int,int);
@@ -101,6 +106,7 @@ class DivPlatformNES: public DivDispatch {
     size_t getSampleMemCapacity(int index);
     size_t getSampleMemUsage(int index);
     bool isSampleLoaded(int index, int sample);
+    const DivMemoryComposition* getMemCompo(int index);
     void renderSamples(int chipID);
     int init(DivEngine* parent, int channels, int sugRate, const DivConfig& flags);
     void quit();

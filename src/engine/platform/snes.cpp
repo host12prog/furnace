@@ -122,7 +122,7 @@ void DivPlatformSNES::tick(bool sysTick) {
     if (chan[i].useWave && chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || chan[i].ws.activeChanged()) {
         chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
-        chan[i].ws.changeWave1(chan[i].wave);
+        chan[i].ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_SNES));
       }
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
@@ -341,7 +341,7 @@ int DivPlatformSNES::dispatch(DivCommand c) {
             chan[c.chan].wave=0;
           }
           chan[c.chan].ws.setWidth(chan[c.chan].wtLen);
-          chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+          chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_SNES));
         }
         chan[c.chan].ws.init(ins,chan[c.chan].wtLen,15,chan[c.chan].insChanged);
       } else {
@@ -425,7 +425,12 @@ int DivPlatformSNES::dispatch(DivCommand c) {
     case DIV_CMD_WAVE:
       if (!chan[c.chan].useWave) break;
       chan[c.chan].wave=c.value;
-      chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_SNES));
+      break;
+    case DIV_CMD_WAVE_LOCAL:
+      if (!chan[c.chan].useWave) break;
+      chan[c.chan].wave=c.value | (1 << 30);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_SNES));
       break;
     case DIV_CMD_NOTE_PORTA: {
       int destFreq=round(NOTE_FREQUENCY(c.value2+chan[c.chan].sampleNoteDelta));
@@ -827,6 +832,13 @@ void DivPlatformSNES::initEcho() {
     rWrite(0x7d,0);
     rWrite(0x6d,0xff);
   }
+
+  for (DivMemoryEntry& i: memCompo.entries) {
+    if (i.type==DIV_MEMORY_ECHO) {
+      i.begin=(65536-echoDelay*2048);
+    }
+  }
+  memCompo.used=sampleMemLen+echoDelay*2048;
 }
 
 void DivPlatformSNES::reset() {
@@ -899,7 +911,7 @@ void DivPlatformSNES::notifyInsChange(int ins) {
 void DivPlatformSNES::notifyWaveChange(int wave) {
   for (int i=0; i<8; i++) {
     if (chan[i].useWave && chan[i].wave==wave) {
-      chan[i].ws.changeWave1(wave);
+      chan[i].ws.changeWave1(wave & 0xff, false, (wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_SNES));
       if (chan[i].active) {
         updateWave(i);
       }
@@ -940,10 +952,22 @@ bool DivPlatformSNES::isSampleLoaded(int index, int sample) {
   return sampleLoaded[sample];
 }
 
+const DivMemoryComposition* DivPlatformSNES::getMemCompo(int index) {
+  if (index!=0) return NULL;
+  return &memCompo;
+}
+
 void DivPlatformSNES::renderSamples(int sysID) {
   memset(copyOfSampleMem,0,65536);
   memset(sampleOff,0,256*sizeof(unsigned int));
   memset(sampleLoaded,0,256*sizeof(bool));
+
+  memCompo=DivMemoryComposition();
+  memCompo.name="SPC/DSP Memory";
+
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,"State",-1,0,sampleTableBase));
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,"Sample Directory",-1,sampleTableBase,sampleTableBase+8*4));
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_WAVE_RAM,"Wave RAM",-1,sampleTableBase+8*4,sampleTableBase+8*4+8*9*16));
 
   // skip past sample table and wavetable buffer
   size_t memPos=sampleTableBase+8*4+8*9*16;
@@ -963,6 +987,7 @@ void DivPlatformSNES::renderSamples(int sysID) {
       if (s->loop) {
         copyOfSampleMem[memPos+actualLength-9]|=3;
       }
+      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+actualLength));
       memPos+=actualLength;
     }
     if (actualLength<length) {
@@ -974,6 +999,11 @@ void DivPlatformSNES::renderSamples(int sysID) {
     sampleLoaded[i]=true;
   }
   sampleMemLen=memPos;
+
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_ECHO,"Echo Buffer",-1,(65536-echoDelay*2048),65536));
+
+  memCompo.capacity=65536;
+  memCompo.used=sampleMemLen+echoDelay*2048;
   memcpy(sampleMem,copyOfSampleMem,65536);
 }
 

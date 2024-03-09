@@ -520,6 +520,8 @@ src/engine/platform/sound/nes_nsfplay/nes_fds.cpp
 src/engine/platform/sound/nes_nsfplay/nes_mmc5.cpp
 src/engine/platform/sound/nes_nsfplay/nes_n106.cpp
 src/engine/platform/sound/nes_nsfplay/nes_vrc6.cpp
+src/engine/platform/sound/nes_nsfplay/5e01_apu.cpp
+src/engine/platform/sound/nes_nsfplay/5e01_dmc.cpp
 
 src/engine/platform/sound/c64/sid.cc
 src/engine/platform/sound/c64/voice.cc
@@ -544,7 +546,6 @@ src/engine/platform/sound/sid2/voice.cc
 src/engine/platform/sound/sid2/wave.cc
 src/engine/platform/sound/sid2/envelope.cc
 src/engine/platform/sound/sid2/filter.cc
-src/engine/platform/sound/sid2/extfilt.cc
 src/engine/platform/sound/sid2/version.cc
 
 src/engine/platform/sound/sid2/wave8580_PS_.cc
@@ -696,6 +697,7 @@ src/engine/platform/x1_010.cpp
 src/engine/platform/pokey.cpp
 src/engine/platform/lynx.cpp
 src/engine/platform/sid2.cpp
+src/engine/platform/5e01.cpp
 src/engine/platform/su.cpp
 src/engine/platform/swan.cpp
 src/engine/platform/t6w28.cpp
@@ -814,6 +816,7 @@ src/gui/channels.cpp
 src/gui/chanOsc.cpp
 src/gui/clock.cpp
 src/gui/compatFlags.cpp
+src/gui/csPlayer.cpp
 src/gui/cursor.cpp
 src/gui/dataList.cpp
 src/gui/debugWindow.cpp
@@ -828,6 +831,7 @@ src/gui/gradient.cpp
 src/gui/grooves.cpp
 src/gui/insEdit.cpp
 src/gui/log.cpp
+src/gui/memory.cpp
 src/gui/mixer.cpp
 src/gui/midiMap.cpp
 src/gui/newSong.cpp
@@ -933,6 +937,8 @@ src/gui/inst/wavetable.cpp
 
 src/locale/locale.cpp
 src/locale/russian.cpp
+src/locale/polish.cpp
+src/locale/portuguese.cpp
 # src/locale/template.cpp
 )
 
@@ -1175,7 +1181,7 @@ if (NOT ANDROID OR TERMUX)
     install(DIRECTORY papers DESTINATION ${CMAKE_INSTALL_DOCDIR}/other)
     install(FILES LICENSE DESTINATION ${CMAKE_INSTALL_DATADIR}/licenses/furnace)
     if (WITH_DEMOS OR WITH_INSTRUMENTS OR WITH_WAVETABLES)
-      set(FURNACE_DATADIR ${CMAKE_INSTALL_DATADIR}/furnace)
+      set(FURNACE_DATADIR ${CMAKE_INSTALL_FULL_DATADIR}/furnace)
       if (WITH_DEMOS)
         install(DIRECTORY demos DESTINATION ${FURNACE_DATADIR})
       endif()
@@ -1185,7 +1191,7 @@ if (NOT ANDROID OR TERMUX)
       if (WITH_WAVETABLES)
         install(DIRECTORY wavetables DESTINATION ${FURNACE_DATADIR})
       endif()
-      add_compile_definitions(FURNACE_DATADIR="${CMAKE_INSTALL_PREFIX}/${FURNACE_DATADIR}")
+      add_compile_definitions(FURNACE_DATADIR="${FURNACE_DATADIR}")
       if (SHOW_OPEN_ASSETS_MENU_ENTRY)
         add_compile_definitions(SHOW_OPEN_ASSETS_MENU_ENTRY)
       endif()

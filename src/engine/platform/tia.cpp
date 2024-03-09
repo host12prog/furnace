@@ -119,22 +119,39 @@ void DivPlatformTIA::tick(bool sysTick) {
       }
       chan[i].freqChanged=true;
     }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->had) {
+      chan[i].freq=chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val;
+      chan[i].freqChanged=true;
+      raw_freq[i] = true;
+    }
     if (chan[i].freqChanged || chan[i].keyOn || chan[i].keyOff) {
       int bf=chan[i].baseFreq;
       if (!chan[i].fixedArp) {
         bf+=chan[i].arpOff<<8;
       }
       if (chan[i].fixedArp) {
-        chan[i].freq=chan[i].baseNoteOverride&31;
+        if(!raw_freq[i])
+        {
+          chan[i].freq=chan[i].baseNoteOverride&31;
+        }
       } else {
-        chan[i].freq=dealWithFreq(chan[i].shape,bf,chan[i].pitch+chan[i].pitch2);
+        if(!raw_freq[i])
+        {
+          chan[i].freq=dealWithFreq(chan[i].shape,bf,chan[i].pitch+chan[i].pitch2);
+        }
         if (chan[i].shape==4 || chan[i].shape==5) {
           if (bf<39*256) {
             rWrite(0x15+i,6);
-            chan[i].freq=dealWithFreq(6,bf,chan[i].pitch+chan[i].pitch2);
+            if(!raw_freq[i])
+            {
+              chan[i].freq=dealWithFreq(6,bf,chan[i].pitch+chan[i].pitch2);
+            }
           } else if (bf<59*256) {
             rWrite(0x15+i,12);
-            chan[i].freq=dealWithFreq(12,bf,chan[i].pitch+chan[i].pitch2);
+            if(!raw_freq[i])
+            {
+              chan[i].freq=dealWithFreq(12,bf,chan[i].pitch+chan[i].pitch2);
+            }
           } else {
             rWrite(0x15+i,chan[i].shape);
           }
@@ -150,6 +167,8 @@ void DivPlatformTIA::tick(bool sysTick) {
       if (chan[i].keyOff) chan[i].keyOff=false;
       chan[i].freqChanged=false;
     }
+
+    raw_freq[i] = false;
   }
 }
 
@@ -219,6 +238,11 @@ int DivPlatformTIA::dispatch(DivCommand c) {
       chan[c.chan].freqChanged=true;
       break;
     }
+    case DIV_CMD_RAW_FREQ:
+      chan[c.chan].freq = c.value & 31;
+      raw_freq[c.chan] = true;
+      chan[c.chan].freqChanged = true;
+      break;
     case DIV_CMD_NOTE_PORTA: {
       int destFreq=c.value2<<8;
       bool return2=false;
@@ -325,6 +349,7 @@ void DivPlatformTIA::reset() {
     chan[i]=DivPlatformTIA::Channel();
     chan[i].std.setEngine(parent);
     chan[i].vol=0x0f;
+    raw_freq[i] = false;
   }
 }
 

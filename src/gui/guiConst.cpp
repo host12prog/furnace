@@ -183,7 +183,7 @@ const char* insTypes[DIV_INS_MAX+1][3]={
   {"DIV_INS_GBA_DMA",ICON_FA_BAR_CHART,ICON_FUR_INS_STD},
   {"DIV_INS_GBA_MINMOD",ICON_FA_BAR_CHART,ICON_FUR_INS_STD},
   {"DIV_INS_KURUMITSU",ICON_FA_BAR_CHART,ICON_FUR_INS_STD},
-  {"SID2",ICON_FA_KEYBOARD_O,ICON_FUR_INS_C64},
+  {"SID2",ICON_FA_KEYBOARD_O,ICON_FUR_INS_SID2},
   {NULL,ICON_FA_QUESTION,ICON_FA_QUESTION}
 };
 
@@ -219,7 +219,8 @@ const char* resampleStrats[]={
   "cubic spline##sggc",
   "blep synthesis##sggc",
   "sinc##sggc",
-  "best possible##sggc"
+  "best possible##sggc", 
+  NULL
 };
 
 const char* fxColorsNames[]={
@@ -229,7 +230,7 @@ const char* fxColorsNames[]={
   "Panning##sggc",
   "Song##sggc",
   "Time##sggc",
-  "Speed##sggc",
+  "Speed##sggc0",
   "System (Primary)##sggc",
   "System (Secondary)##sggc",
   "Miscellaneous##sggc"
@@ -494,7 +495,7 @@ const FurnaceGUIColors fxColors[256]={
   GUI_COLOR_PATTERN_EFFECT_MISC, // E3
   GUI_COLOR_PATTERN_EFFECT_MISC, // E4
   GUI_COLOR_PATTERN_EFFECT_PITCH, // E5
-  GUI_COLOR_PATTERN_EFFECT_INVALID, // E6
+  GUI_COLOR_PATTERN_EFFECT_PITCH, // E6
   GUI_COLOR_PATTERN_EFFECT_INVALID, // E7
   GUI_COLOR_PATTERN_EFFECT_INVALID, // E8
   GUI_COLOR_PATTERN_EFFECT_INVALID, // E9
@@ -610,6 +611,8 @@ const FurnaceGUIActionDef guiActions[GUI_ACTION_MAX]={
   D("WINDOW_CLOCK", "Clock##sggc", 0),
   D("WINDOW_GROOVES", "Grooves##sggc", 0),
   D("WINDOW_XY_OSC", "Oscilloscope (X-Y)##sggc", 0),
+  D("WINDOW_MEMORY", "Memory Composition##sggc", 0),
+  D("WINDOW_CS_PLAYER", "Command Stream Player##sggc", 0),
 
   D("COLLAPSE_WINDOW", "Collapse/expand current window##sggc", 0),
   D("CLOSE_WINDOW", "Close current window##sggc", FURKMOD_SHIFT|SDLK_ESCAPE),
@@ -713,7 +716,25 @@ const FurnaceGUIActionDef guiActions[GUI_ACTION_MAX]={
   D("WAVE_LIST_UP", "Wavetable cursor up##sggc1", SDLK_UP),
   D("WAVE_LIST_DOWN", "Wavetable cursor down##sggc1", SDLK_DOWN),
   D("WAVE_LIST_DIR_VIEW", "Wavetables: toggle folders/standard view##sggc1", FURKMOD_CMD|SDLK_v),
+  D("WAVE_LIST_PASTE_CLIPBOARD", "Paste wavetables from clipboard##sggc", FURKMOD_CMD|FURKMOD_SHIFT|SDLK_v),
   D("WAVE_LIST_MAX", "", NOT_AN_ACTION),
+
+  D("LOCAL_WAVE_LIST_MIN", "---Local wavetables list##sggc", NOT_AN_ACTION),
+  D("LOCAL_WAVE_LIST_ADD", "Add wavetable##sggc1", SDLK_INSERT),
+  D("LOCAL_WAVE_LIST_DUPLICATE", "Duplicate wavetable##sggc1", FURKMOD_CMD|SDLK_d),
+  D("LOCAL_WAVE_LIST_OPEN", "Open wavetable##sggc1", 0),
+  D("LOCAL_WAVE_LIST_OPEN_REPLACE", "Open wavetable (replace current)##sggc1", 0),
+  D("LOCAL_WAVE_LIST_SAVE", "Save wavetable##sggc1", 0),
+  D("LOCAL_WAVE_LIST_SAVE_DMW", "Save wavetable (.dmw)##sggc", 0),
+  D("LOCAL_WAVE_LIST_SAVE_RAW", "Save wavetable (raw)##sggc0", 0),
+  D("LOCAL_WAVE_LIST_MOVE_UP", "Move wavetable up in list##sggc1", FURKMOD_SHIFT|SDLK_UP),
+  D("LOCAL_WAVE_LIST_MOVE_DOWN", "Move wavetable down in list##sggc1", FURKMOD_SHIFT|SDLK_DOWN),
+  D("LOCAL_WAVE_LIST_DELETE", "Delete wavetable##sggc1", 0),
+  D("LOCAL_WAVE_LIST_EDIT", "Edit wavetable##sggc1", FURKMOD_SHIFT|SDLK_RETURN),
+  D("LOCAL_WAVE_LIST_UP", "Wavetable cursor up##sggc1", SDLK_UP),
+  D("LOCAL_WAVE_LIST_DOWN", "Wavetable cursor down##sggc1", SDLK_DOWN),
+  D("LOCAL_WAVE_LIST_PASTE_CLIPBOARD", "Paste local wavetables from clipboard##sggc1", FURKMOD_CMD|FURKMOD_SHIFT|SDLK_v),
+  D("LOCAL_WAVE_LIST_MAX", "", NOT_AN_ACTION),
 
   D("SAMPLE_LIST_MIN", "---Sample list##sggc", NOT_AN_ACTION),
   D("SAMPLE_LIST_ADD", "Add sample##sggc2", SDLK_INSERT),
@@ -782,8 +803,8 @@ const FurnaceGUIActionDef guiActions[GUI_ACTION_MAX]={
   D("ORDERS_ADD", "Add order##sggc3", SDLK_INSERT),
   D("ORDERS_DUPLICATE", "Duplicate order##sggc3", FURKMOD_CMD|SDLK_d),
   D("ORDERS_DEEP_CLONE", "Deep clone order##sggc", FURKMOD_CMD|FURKMOD_SHIFT|SDLK_d),
-  D("ORDERS_DUPLICATE_END", "Duplicate order to end of song##sggc", FURKMOD_CMD|SDLK_e),
-  D("ORDERS_DEEP_CLONE_END", "Deep clone order to end of song##sggc", FURKMOD_CMD|FURKMOD_SHIFT|SDLK_e),
+  D("ORDERS_DUPLICATE_END", "Copy current order to end of song##sggc", FURKMOD_CMD|SDLK_e),
+  D("ORDERS_DEEP_CLONE_END", "Deep clone current order to end of song##sggc", FURKMOD_CMD|FURKMOD_SHIFT|SDLK_e),
   D("ORDERS_REMOVE", "Remove order##sggc", SDLK_DELETE),
   D("ORDERS_MOVE_UP", "Move order up##sggc3", FURKMOD_SHIFT|SDLK_UP),
   D("ORDERS_MOVE_DOWN", "Move order down##sggc3", FURKMOD_SHIFT|SDLK_DOWN),
@@ -1116,6 +1137,26 @@ const FurnaceGUIColorDef guiColors[GUI_COLOR_MAX]={
   D(GUI_COLOR_PATCHBAY_CONNECTION_BG,"",ImVec4(0.1f,0.25f,0.3f,1.0f)),
   D(GUI_COLOR_PATCHBAY_CONNECTION_HI,"",ImVec4(0.2f,1.0f,1.0f,1.0f)),
 
+  D(GUI_COLOR_MEMORY_BG,"",ImVec4(0.12f,0.12f,0.12f,1.0f)),
+  D(GUI_COLOR_MEMORY_FREE,"",ImVec4(0.25f,0.25f,0.25f,1.0f)),
+  D(GUI_COLOR_MEMORY_PADDING,"",ImVec4(0.25f,0.25f,0.25f,1.0f)),
+  D(GUI_COLOR_MEMORY_RESERVED,"",ImVec4(0.5f,0.5f,0.6f,1.0f)),
+  D(GUI_COLOR_MEMORY_SAMPLE,"",ImVec4(1.0f,1.0f,0.2f,1.0f)),
+  D(GUI_COLOR_MEMORY_SAMPLE_ALT1,"",ImVec4(0.5f,1.0f,0.2f,1.0f)),
+  D(GUI_COLOR_MEMORY_SAMPLE_ALT2,"",ImVec4(0.2f,1.0f,0.2f,1.0f)),
+  D(GUI_COLOR_MEMORY_SAMPLE_ALT3,"",ImVec4(0.2f,1.0f,0.5f,1.0f)),
+  D(GUI_COLOR_MEMORY_WAVE_RAM,"",ImVec4(1.0f,0.5f,0.1f,1.0f)),
+  D(GUI_COLOR_MEMORY_WAVE_STATIC,"",ImVec4(1.0f,0.3f,0.1f,1.0f)),
+  D(GUI_COLOR_MEMORY_ECHO,"",ImVec4(0.2f,1.0f,1.0f,1.0f)),
+  D(GUI_COLOR_MEMORY_BANK0,"",ImVec4(1.0f,0.1f,0.1f,1.0f)),
+  D(GUI_COLOR_MEMORY_BANK1,"",ImVec4(1.0f,0.5f,0.1f,1.0f)),
+  D(GUI_COLOR_MEMORY_BANK2,"",ImVec4(1.0f,1.0f,0.1f,1.0f)),
+  D(GUI_COLOR_MEMORY_BANK3,"",ImVec4(0.1f,1.0f,0.1f,1.0f)),
+  D(GUI_COLOR_MEMORY_BANK4,"",ImVec4(0.1f,1.0f,1.0f,1.0f)),
+  D(GUI_COLOR_MEMORY_BANK5,"",ImVec4(0.1f,0.1f,1.0f,1.0f)),
+  D(GUI_COLOR_MEMORY_BANK6,"",ImVec4(0.5f,0.1f,1.0f,1.0f)),
+  D(GUI_COLOR_MEMORY_BANK7,"",ImVec4(1.0f,0.1f,1.0f,1.0f)),
+
   D(GUI_COLOR_LOGLEVEL_ERROR,"",ImVec4(1.0f,0.2f,0.2f,1.0f)),
   D(GUI_COLOR_LOGLEVEL_WARNING,"",ImVec4(1.0f,1.0f,0.2f,1.0f)),
   D(GUI_COLOR_LOGLEVEL_INFO,"",ImVec4(0.4f,1.0f,0.4f,1.0f)),
@@ -1226,6 +1267,7 @@ const int availableSystems[]={
   DIV_SYSTEM_POWERNOISE,
   DIV_SYSTEM_DAVE,
   DIV_SYSTEM_SID2,
+  DIV_SYSTEM_5E01,
   0 // don't remove this last one!
 };
 
@@ -1350,6 +1392,7 @@ const int chipsModernFantasy[]={
   DIV_SYSTEM_VERA,
   DIV_SYSTEM_POWERNOISE,
   DIV_SYSTEM_SID2,
+  DIV_SYSTEM_5E01,
   0 // don't remove this last one!
 };
 

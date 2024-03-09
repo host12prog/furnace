@@ -379,7 +379,7 @@ void DivPlatformAmiga::tick(bool sysTick) {
     if (chan[i].useWave && chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || chan[i].ws.activeChanged()) {
         chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
-        chan[i].ws.changeWave1(chan[i].wave);
+        chan[i].ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_AMIGA));
         chan[i].updateWave=true;
       }
     }
@@ -563,7 +563,7 @@ int DivPlatformAmiga::dispatch(DivCommand c) {
           if (chan[c.chan].wave<0) {
             chan[c.chan].wave=0;
             chan[c.chan].ws.setWidth(chan[c.chan].audLen<<1);
-            chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+            chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_AMIGA));
             chan[c.chan].updateWave=true;
           }
         }
@@ -647,7 +647,14 @@ int DivPlatformAmiga::dispatch(DivCommand c) {
       if (!chan[c.chan].useWave) break;
       chan[c.chan].wave=c.value;
       chan[c.chan].keyOn=true;
-      chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_AMIGA));
+      chan[c.chan].updateWave=true;
+      break;
+    case DIV_CMD_WAVE_LOCAL:
+      if (!chan[c.chan].useWave) break;
+      chan[c.chan].wave=c.value | (1 << 30);
+      chan[c.chan].keyOn=true;
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, true, parent->getIns(chan[c.chan].ins,DIV_INS_AMIGA));
       chan[c.chan].updateWave=true;
       break;
     case DIV_CMD_NOTE_PORTA: {
@@ -804,7 +811,7 @@ void DivPlatformAmiga::notifyInsChange(int ins) {
 void DivPlatformAmiga::notifyWaveChange(int wave) {
   for (int i=0; i<4; i++) {
     if (chan[i].useWave && chan[i].wave==wave) {
-      chan[i].ws.changeWave1(wave);
+      chan[i].ws.changeWave1(wave & 0xff, false, (wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_AMIGA));
       chan[i].updateWave=true;
     }
   }
@@ -922,10 +929,21 @@ bool DivPlatformAmiga::isSampleLoaded(int index, int sample) {
   return sampleLoaded[sample];
 }
 
+const DivMemoryComposition* DivPlatformAmiga::getMemCompo(int index) {
+  if (index!=0) return NULL;
+  return &memCompo;
+}
+
 void DivPlatformAmiga::renderSamples(int sysID) {
   memset(sampleMem,0,2097152);
   memset(sampleOff,0,256*sizeof(unsigned int));
   memset(sampleLoaded,0,256*sizeof(bool));
+
+  memCompo=DivMemoryComposition();
+  memCompo.name="Chip Memory";
+
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_WAVE_RAM,"Wave RAM",-1,0,1024));
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,"End of Sample",-1,1024,1026));
 
   // first 1024 bytes reserved for wavetable
   // the next 2 bytes are reserved for end of sample
@@ -947,6 +965,7 @@ void DivPlatformAmiga::renderSamples(int sysID) {
     if (actualLength>0) {
       sampleOff[i]=memPos;
       memcpy(&sampleMem[memPos],s->data8,actualLength);
+      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+actualLength));
       memPos+=actualLength;
     }
     // align memPos to short
@@ -954,6 +973,9 @@ void DivPlatformAmiga::renderSamples(int sysID) {
     sampleLoaded[i]=true;
   }
   sampleMemLen=memPos;
+
+  memCompo.capacity=1<<chipMem;
+  memCompo.used=sampleMemLen;
 }
 
 int DivPlatformAmiga::init(DivEngine* p, int channels, int sugRate, const DivConfig& flags) {

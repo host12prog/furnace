@@ -72,6 +72,8 @@ typedef struct {
     int out_l;
     int out_r;
 
+    int osc_out; //added by LTVA for Furnace tracker per-channel oscilloscopes!
+
     // io
     int write_addr_trig;
     int write_addr_trig_sync;

@@ -125,6 +125,8 @@ the following instrument types are available:
 - 56: ES5503
 - 57: PowerNoise (noise)
 - 58: PowerNoise (slope)
+- 59: Dave
+- 63: SID2
 
 the following feature codes are recognized:
 
@@ -153,6 +155,8 @@ the following feature codes are recognized:
 - `EF`: ESFM ins data
 - `PN`: PowerNoise ins data
 - `E3`: ES5503 ins data
+- `S2`: SID2 ins data
+- `LW`: local wavetables
 - `EN`: end of features
   - if you find this feature code, stop reading the instrument.
   - it will usually appear only when there sample/wave lists.
@@ -531,6 +535,9 @@ size | description
   1  | effect
      | - bit 7: single or dual effect
   1  | enabled
+     | - bit 0: enabled
+     | - bit 1: global wave 1
+     | - bit 2: global wave 2
   1  | global
   1  | speed (+1)
   1  | parameter 1
@@ -679,3 +686,60 @@ size | description
 -----|------------------------------------
   1  | octave
 ```
+
+# SID2 data (S2)
+
+Basically C64 data, but last three bytes are different (and volIsCutoff flag is missing).
+
+```
+size | description
+-----|------------------------------------
+  1  | flags 1
+     | - bit 7: dutyIsAbs
+     | - bit 6: initFilter
+     | - bit 4: toFilter
+     | - bit 3: noise on
+     | - bit 2: pulse on
+     | - bit 1: saw on
+     | - bit 0: triangle on
+  1  | flags 2
+     | - bit 7: oscSync
+     | - bit 6: ringMod
+     | - bit 5: noTest
+     | - bit 4: filterIsAbs
+     | - bit 3: ch3off
+     | - bit 2: band pass
+     | - bit 1: high pass
+     | - bit 0: low pass
+  1  | attack/decay
+     | - bit 4-7: attack
+     | - bit 0-3: decay
+  1  | sustain release
+     | - bit 4-7: sustain
+     | - bit 0-3: release
+  2  | duty
+  2  | cutoff
+  1  | resonance
+  1  | data
+     | - bits 7-6: noise mode
+     | - bits 5-4: waveform mixing mode
+     | - bits 3-0: volume
+```
+
+# Local wavetables data (LW)
+
+```
+size | description
+-----|------------------------------------
+  4  | number of local wavetables
+```
+
+# POKEY data (PO)
+
+```
+size | description
+-----|------------------------------------
+  1  | raw frequency macro is 16-bit
+```
+
+Then the wavetable data follows, as in "Wavetable" section of [file format](format.md). Yes, each local wavetable starts with `WAVE` signature and stuff. There are as many waves as `number of local wavetables`.

@@ -513,7 +513,8 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       }
       break;
     }
-    case DIV_SYSTEM_NES: {
+    case DIV_SYSTEM_NES:
+    case DIV_SYSTEM_5E01: {
       int clockSel=flags.getInt("clockSel",0);
       bool dpcmMode=flags.getBool("dpcmMode",true);
 
@@ -2379,7 +2380,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       altered=true;
     }
     ImGui::Indent();
-    if (ImGui::InputInt("Hz",&customClock,100,10000)) {
+    if (ImGui::InputInt(_L("Hz##sgscHz"),&customClock,100,10000)) {
       if (customClock<MIN_CUSTOM_CLOCK) customClock=0;
       if (customClock>MAX_CUSTOM_CLOCK) customClock=MAX_CUSTOM_CLOCK;
       altered=true;

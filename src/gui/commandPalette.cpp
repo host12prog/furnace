@@ -48,22 +48,22 @@ void FurnaceGUI::drawPalette() {
   int width=ImGui::GetContentRegionAvail().x;
   ImGui::SetNextItemWidth(width);
 
-  const char* hint=_L("Search...##sgcp");
+  const char* hint=settings.language == DIV_LANG_ENGLISH ? "Search..." : _L("Search...##sgcp");
   switch (curPaletteType) {
   case CMDPAL_TYPE_RECENT:
-    hint=_L("Search recent files...##sgcp");
+    hint=settings.language == DIV_LANG_ENGLISH ? "Search recent files..." : _L("Search recent files...##sgcp");
     break;
   case CMDPAL_TYPE_INSTRUMENTS:
-    hint=_L("Search instruments...##sgcp");
+    hint=settings.language == DIV_LANG_ENGLISH ? "Search instruments..." : _L("Search instruments...##sgcp");
     break;
   case CMDPAL_TYPE_SAMPLES:
-    hint=_L("Search samples...##sgcp");
+    hint=settings.language == DIV_LANG_ENGLISH ? "Search samples..." : _L("Search samples...##sgcp");
     break;
   case CMDPAL_TYPE_INSTRUMENT_CHANGE:
-    hint=_L("Search instruments (to change to)...##sgcp");
+    hint=settings.language == DIV_LANG_ENGLISH ? "Search instruments (to change to)..." : _L("Search instruments (to change to)...##sgcp");
     break;
   case CMDPAL_TYPE_ADD_CHIP:
-    hint=_L("Search chip (to add)...##sgcp");
+    hint=settings.language == DIV_LANG_ENGLISH ? "Search chip (to add)..." : _L("Search chip (to add)...##sgcp");
     break;
   }
 
@@ -208,44 +208,38 @@ void FurnaceGUI::drawPalette() {
     if (paletteSearchResults.size()>0) {
       int i=paletteSearchResults[curPaletteChoice];
       switch (curPaletteType) {
-      case CMDPAL_TYPE_MAIN:
-        doAction(i);
-        break;
-
-      case CMDPAL_TYPE_RECENT:
-        openRecentFile(recentFile[i]);
-        break;
-
-      case CMDPAL_TYPE_INSTRUMENTS:
-        curIns=i-1;
-        break;
-
-      case CMDPAL_TYPE_SAMPLES:
-        curSample=i;
-        break;
-
-      case CMDPAL_TYPE_INSTRUMENT_CHANGE:
-        doChangeIns(i-1);
-        break;
-
-      case CMDPAL_TYPE_ADD_CHIP:
-        if (i!=DIV_SYSTEM_NULL) {
-          if (!e->addSystem((DivSystem)i)) {
-            showError(settings.language == DIV_LANG_ENGLISH ? ("cannot add chip! (") : (_L("cannot add chip! (##sgcp"))+e->getLastError()+")");
-          } else {
-            MARK_MODIFIED;
+        case CMDPAL_TYPE_MAIN:
+          doAction(i);
+          break;
+        case CMDPAL_TYPE_RECENT:
+          openRecentFile(recentFile[i]);
+          break;
+        case CMDPAL_TYPE_INSTRUMENTS:
+          curIns=i-1;
+          break;
+        case CMDPAL_TYPE_SAMPLES:
+          curSample=i;
+          break;
+        case CMDPAL_TYPE_INSTRUMENT_CHANGE:
+          doChangeIns(i-1);
+          break;
+        case CMDPAL_TYPE_ADD_CHIP:
+          if (i!=DIV_SYSTEM_NULL) {
+            if (!e->addSystem((DivSystem)i)) {
+              showError(settings.language == DIV_LANG_ENGLISH ? ("cannot add chip! (") : (_L("cannot add chip! (##sgcp"))+e->getLastError()+")");
+            } else {
+              MARK_MODIFIED;
+            }
+            ImGui::CloseCurrentPopup();
+            if (e->song.autoSystem) {
+              autoDetectSystem();
+            }
+            updateWindowTitle();
           }
-          ImGui::CloseCurrentPopup();
-          if (e->song.autoSystem) {
-            autoDetectSystem();
-          }
-          updateWindowTitle();
-        }
-        break;
-
-      default:
-        logE("invalid command palette type");
-        break;
+          break;
+        default:
+          logE("invalid command palette type");
+          break;
       };
     }
     ImGui::CloseCurrentPopup();

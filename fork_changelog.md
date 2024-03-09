@@ -21,12 +21,23 @@ LTVA:
 - Break compatibility with tildearrow Furnace because of PowerNoise and ES5503 instrument ID conflicts: you can load tildearrow's Furnace modules just fine, inst IDs will be converted, but the format (module and instrument) magic was changed so you won't be able to load Furnace-B modules in original Furnace.
 - YMF276-LLE now actually produces sound
 - Russian translation
+- SID2 fictional sound chip
+- Local (per-instrument) wavetables
+- Improved FamiTracker import
+- Raw period macro and effects for POKEY
+- A list of wavetables (e.g. Kurumi wavetable builder output) can be pasted into global/local wavetable list using just one shortcut
+- Add Euly's 5E01 fictional sound chip
 
 freq-mod:
 - 86-PCM streo DAC fix
 - Remove basic mode, tutorial and intro
 - Remove certian compatibility flags from the GUI (notably, old Furnace compatibility)
+- Polish translation
 
 Electric Keet:
 - "Furnace-B" name
 - The invaluable and enormous tiresome work of placing localization macros all over the GUI code
+- Furnace-B logo
+
+Kagamiin~:
+- Portuguese translation

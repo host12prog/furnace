@@ -195,7 +195,7 @@ void DivPlatformGB::tick(bool sysTick) {
     if (i==2 && chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || ws.activeChanged()) {
         chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
-        ws.changeWave1(chan[i].wave);
+        ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_GB));
         if (!chan[i].keyOff) chan[i].keyOn=true;
       }
     }
@@ -381,7 +381,7 @@ int DivPlatformGB::dispatch(DivCommand c) {
       if (c.chan==2) {
         if (chan[c.chan].wave<0) {
           chan[c.chan].wave=0;
-          ws.changeWave1(chan[c.chan].wave);
+          ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_GB));
         }
         ws.init(ins,32,15,chan[c.chan].insChanged);
       }
@@ -473,6 +473,14 @@ int DivPlatformGB::dispatch(DivCommand c) {
       if (c.chan!=2) break;
       chan[c.chan].wave=c.value;
       ws.changeWave1(chan[c.chan].wave);
+      if (chan[c.chan].active) {
+        chan[c.chan].keyOn=true;
+      }
+      break;
+    case DIV_CMD_WAVE_LOCAL:
+      if (c.chan!=2) break;
+      chan[c.chan].wave=c.value | (1 << 30);
+      ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_GB));
       if (chan[c.chan].active) {
         chan[c.chan].keyOn=true;
       }
@@ -643,7 +651,7 @@ void DivPlatformGB::notifyInsChange(int ins) {
 
 void DivPlatformGB::notifyWaveChange(int wave) {
   if (chan[2].wave==wave) {
-    ws.changeWave1(wave);
+    ws.changeWave1(wave & 0xff, false, (wave & (1 << 30)) ? true : false, parent->getIns(chan[2].ins,DIV_INS_GB));
     updateWave();
     if (!chan[2].keyOff && chan[2].active) chan[2].keyOn=true;
   }

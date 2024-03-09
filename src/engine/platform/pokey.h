@@ -55,6 +55,7 @@ class DivPlatformPOKEY: public DivDispatch {
   PokeyState pokey;
   AltASAP::Pokey altASAP;
   bool useAltASAP;
+  bool raw_freq[4];
   unsigned char regPool[16];
   friend void putDispatchChip(void*,int);
   friend void putDispatchChan(void*,int,int);

@@ -55,9 +55,14 @@ String macroHoverLoop(int id, float val, void* u) {
   return "";
 }
 
-String macroHoverBit30(int id, float val, void* u) {
+String macroHoverBit30Arp(int id, float val, void* u) {
   if (val>0) return "Fixed";
   return "Relative";
+}
+
+String macroHoverBit30Wave(int id, float val, void* u) {
+  if (val>0) return "Local";
+  return "Global";
 }
 
 char* int_to_char_array(int num)

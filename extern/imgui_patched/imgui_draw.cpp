@@ -1667,6 +1667,42 @@ void ImDrawList::AddText(const ImVec2& pos, ImU32 col, const char* text_begin, c
     AddText(NULL, 0.0f, pos, col, text_begin, text_end);
 }
 
+void ImDrawList::AddTextNoHashHide(const ImFont* font, float font_size, const ImVec2& pos, ImU32 col, const char* text_begin, const char* text_end, float wrap_width, const ImVec4* cpu_fine_clip_rect)
+{
+    if ((col & IM_COL32_A_MASK) == 0)
+        return;
+
+    if (text_end == NULL)
+        text_end = text_begin + strlen(text_begin);
+    if (text_begin == text_end)
+        return;
+
+    //text_end = FindTextEnd(text_begin, text_end); //hides everything after ##
+
+    // Pull default font/size from the shared ImDrawListSharedData instance
+    if (font == NULL)
+        font = _Data->Font;
+    if (font_size == 0.0f)
+        font_size = _Data->FontSize;
+
+    IM_ASSERT(font->ContainerAtlas->TexID == _CmdHeader.TextureId);  // Use high-level ImGui::PushFont() or low-level ImDrawList::PushTextureId() to change font.
+
+    ImVec4 clip_rect = _CmdHeader.ClipRect;
+    if (cpu_fine_clip_rect)
+    {
+        clip_rect.x = ImMax(clip_rect.x, cpu_fine_clip_rect->x);
+        clip_rect.y = ImMax(clip_rect.y, cpu_fine_clip_rect->y);
+        clip_rect.z = ImMin(clip_rect.z, cpu_fine_clip_rect->z);
+        clip_rect.w = ImMin(clip_rect.w, cpu_fine_clip_rect->w);
+    }
+    font->RenderText(this, font_size, pos, col, clip_rect, text_begin, text_end, wrap_width, cpu_fine_clip_rect != NULL);
+}
+
+void ImDrawList::AddTextNoHashHide(const ImVec2& pos, ImU32 col, const char* text_begin, const char* text_end)
+{
+    AddTextNoHashHide(NULL, 0.0f, pos, col, text_begin, text_end);
+}
+
 void ImDrawList::AddImage(ImTextureID user_texture_id, const ImVec2& p_min, const ImVec2& p_max, const ImVec2& uv_min, const ImVec2& uv_max, ImU32 col)
 {
     if ((col & IM_COL32_A_MASK) == 0)

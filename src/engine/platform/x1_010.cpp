@@ -345,7 +345,7 @@ void DivPlatformX1_010::tick(bool sysTick) {
       if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || chan[i].ws.activeChanged()) {
         chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
         if (!chan[i].pcm) {
-          chan[i].ws.changeWave1(chan[i].wave);
+          chan[i].ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_X1_010));
           if (!chan[i].keyOff) chan[i].keyOn=true;
         }
       }
@@ -637,7 +637,7 @@ int DivPlatformX1_010::dispatch(DivCommand c) {
       }
       if (chan[c.chan].wave<0) {
         chan[c.chan].wave=0;
-        chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+        chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_X1_010));
       }
       chan[c.chan].ws.init(ins,128,255,chan[c.chan].insChanged);
       chan[c.chan].insChanged=false;
@@ -685,7 +685,12 @@ int DivPlatformX1_010::dispatch(DivCommand c) {
       break;
     case DIV_CMD_WAVE:
       chan[c.chan].wave=c.value;
-      chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_X1_010));
+      chan[c.chan].keyOn=true;
+      break;
+    case DIV_CMD_WAVE_LOCAL:
+      chan[c.chan].wave=c.value | (1 << 30);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_X1_010));
       chan[c.chan].keyOn=true;
       break;
     case DIV_CMD_X1_010_ENVELOPE_SHAPE:
@@ -935,7 +940,7 @@ float DivPlatformX1_010::getPostAmp() {
 void DivPlatformX1_010::notifyWaveChange(int wave) {
   for (int i=0; i<16; i++) {
     if (chan[i].wave==wave) {
-      chan[i].ws.changeWave1(wave);
+      chan[i].ws.changeWave1(wave & 0xff, false, (wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_X1_010));
       updateWave(i);
     }
   }
@@ -995,10 +1000,18 @@ bool DivPlatformX1_010::isSampleLoaded(int index, int sample) {
   return sampleLoaded[sample];
 }
 
+const DivMemoryComposition* DivPlatformX1_010::getMemCompo(int index) {
+  if (index!=0) return NULL;
+  return &memCompo;
+}
+
 void DivPlatformX1_010::renderSamples(int sysID) {
   memset(sampleMem,0,16777216);
   memset(sampleOffX1,0,256*sizeof(unsigned int));
   memset(sampleLoaded,0,256*sizeof(bool));
+
+  memCompo=DivMemoryComposition();
+  memCompo.name="Sample ROM";
 
   size_t memPos=0;
   for (int i=0; i<parent->song.sampleLen; i++) {
@@ -1030,9 +1043,13 @@ void DivPlatformX1_010::renderSamples(int sysID) {
       sampleLoaded[i]=true;
     }
     sampleOffX1[i]=memPos;
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+paddedLen));
     memPos+=paddedLen;
   }
   sampleMemLen=memPos+256;
+
+  memCompo.used=sampleMemLen;
+  memCompo.capacity=getSampleMemCapacity(0);
 }
 
 int DivPlatformX1_010::init(DivEngine* p, int channels, int sugRate, const DivConfig& flags) {

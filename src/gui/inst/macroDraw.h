@@ -32,13 +32,16 @@
 
 #define PARAMETER MARK_MODIFIED; e->notifyInsChange(curIns); updateFMPreview=true;
 
+#define WAVE_MACRO_MAX (MAX(MAX(1,e->song.waveLen-1), MAX(1, ((int)e->song.ins[curIns]->std.local_waves.size() - 1))))
+
 String genericGuide(float value);
 int deBit30(const int val);
 bool enBit30(const int val);
 String macroHoverNote(int id, float val, void* u);
 String macroHover(int id, float val, void* u);
 String macroHoverLoop(int id, float val, void* u);
-String macroHoverBit30(int id, float val, void* u);
+String macroHoverBit30Arp(int id, float val, void* u);
+String macroHoverBit30Wave(int id, float val, void* u);
 
 char* int_to_char_array(int num);
 String macroHoverGain(int id, float val, void* u);

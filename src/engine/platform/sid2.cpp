@@ -28,43 +28,47 @@
 #define CHIP_FREQBASE 524288
 
 const char* regCheatSheetSID2[]={
+  "FreqL0", "00",
+  "FreqH0", "01",
+  "PWL0", "02",
+  "PWH0Vol", "03",
+  "Control0", "04",
+  "AtkDcy0", "05",
+  "StnRis0", "06",
+  "FreqL1", "07",
+  "FreqH1", "08",
+  "PWL1", "09",
+  "PWH1Vol", "0A",
+  "Control1", "0B",
+  "AtkDcy1", "0C",
+  "StnRis1", "0D",
+  "FreqL2", "0E",
+  "FreqH2", "0F",
+  "PWL2", "10",
+  "PWH2Vol", "11",
+  "Control2", "12",
+  "AtkDcy2", "13",
+  "StnRis2", "14",
 
+  "FCL0Ctrl", "15",
+  "FCH0", "16",
+  "FilterRes0", "17",
+
+  "FCL1Ctrl", "18",
+  "FCH1", "19",
+  "FilterRes1", "1A",
+
+  "FCL2Ctrl", "1B",
+  "FCH2", "1C",
+  "FilterRes2", "1D",
+
+  "NoiModeFrMSB01", "1E",
+  "WaveMixModeFrMSB2", "1F",
   NULL
 };
 
 const char** DivPlatformSID2::getRegisterSheet() {
   return regCheatSheetSID2;
-}
-
-short DivPlatformSID2::runFakeFilter(unsigned char ch, int in) {
-  if (!(regPool[0x15 + 3 * ch]&(1<<7))) {
-    float fin=in;
-    fin*=(float)(regPool[0x3 + 7 * ch] >> 4)/20.0f;
-    return CLAMP(fin,-32768,32767);
-  }
-
-  // taken from dSID
-  float fin=in;
-  float fout=0;
-  float ctf=fakeCutTable[((regPool[0x15 + 3 * ch]&16)|(regPool[0x16 + 3 * ch]<<4))&0xfff];
-  float reso=(pow(2,((float)(4-(float)(regPool[0x17 + 3 * ch]))/(8.0 * 16.0))));
-  float tmp=fin+fakeBand[ch]*reso+fakeLow[ch];
-  if (regPool[0x15 + 3 * ch]&0x40) { //highpass
-    fout-=tmp;
-  }
-  tmp=fakeBand[ch]-tmp*ctf;
-  fakeBand[ch]=tmp;
-  if (regPool[0x15 + 3 * ch]&0x20) { //bandpass
-    fout-=tmp;
-  }
-  tmp=fakeLow[ch]+tmp*ctf;
-  fakeLow[ch]=tmp;
-  if (regPool[0x15 + 3 * ch]&0x10) { //lowpass
-    fout+=tmp;
-  }
-
-  fout*=(float)(regPool[0x3 + 7 * ch] >> 4)/20.0f;
-  return CLAMP(fout,-32768,32767);
 }
 
 void DivPlatformSID2::acquire(short** buf, size_t len) 
@@ -84,9 +88,11 @@ void DivPlatformSID2::acquire(short** buf, size_t len)
     if (++writeOscBuf>=16) 
     {
       writeOscBuf=0;
-      oscBuf[0]->data[oscBuf[0]->needle++]=runFakeFilter(0,(sid2->last_chan_out[0])>>5);
-      oscBuf[1]->data[oscBuf[1]->needle++]=runFakeFilter(1,(sid2->last_chan_out[1])>>5);
-      oscBuf[2]->data[oscBuf[2]->needle++]=runFakeFilter(2,(sid2->last_chan_out[2])>>5);
+
+      for(int j = 0; j < 3; j++)
+      {
+        oscBuf[j]->data[oscBuf[j]->needle++] = sid2->chan_out[j] / 4;
+      }
     }
   }
 }
@@ -106,8 +112,8 @@ void DivPlatformSID2::tick(bool sysTick) {
 
     chan[i].std.next();
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
-      chan[i].vol=MIN(15,chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val);
-      rWrite(i*7+3,(chan[i].duty>>8) | (chan[i].vol << 4));
+      chan[i].outVol=VOL_SCALE_LINEAR(chan[i].vol&15,MIN(15,chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val),15);
+      rWrite(i*7+3,(chan[i].duty>>8) | (chan[i].outVol << 4));
     }
 
     if (NEW_ARP_STRAT) {
@@ -126,7 +132,7 @@ void DivPlatformSID2::tick(bool sysTick) {
         chan[i].duty-=chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->val;
       }
       rWrite(i*7+2,chan[i].duty&0xff);
-      rWrite(i*7+3,(chan[i].duty>>8) | (chan[i].vol << 4));
+      rWrite(i*7+3,(chan[i].duty>>8) | (chan[i].outVol << 4));
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
@@ -231,6 +237,8 @@ void DivPlatformSID2::tick(bool sysTick) {
           rWrite(i*7+6,(chan[i].sustain<<4)|(chan[i].release));
         }
 
+        rWrite(i*7+3, (chan[i].duty>>8) | (isMuted[i] ? 0 : (chan[i].outVol << 4))); //set volume
+
         rWrite(0x1e, (chan[0].noise_mode) | (chan[1].noise_mode << 2) | (chan[2].noise_mode << 4) | ((chan[0].freq >> 16) << 6) | ((chan[1].freq >> 16) << 7));
         rWrite(0x1f, (chan[0].mix_mode) | (chan[1].mix_mode << 2) | (chan[2].mix_mode << 4) | ((chan[2].freq >> 16) << 6));
       }
@@ -293,7 +301,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
       if (chan[c.chan].insChanged || chan[c.chan].resetDuty || ins->std.get_macro(DIV_MACRO_WAVE, true)->len>0) {
         chan[c.chan].duty=ins->c64.duty;
         rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
-        rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
+        rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].outVol << 4));
       }
       if (chan[c.chan].insChanged) {
         chan[c.chan].wave=(ins->c64.noiseOn<<3)|(ins->c64.pulseOn<<2)|(ins->c64.sawOn<<1)|(int)(ins->c64.triOn);
@@ -307,8 +315,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
         chan[c.chan].noise_mode = ins->sid2.noise_mode;
         chan[c.chan].mix_mode = ins->sid2.mix_mode;
 
-        chan[c.chan].vol = ins->sid2.volume;
-        rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
+        chan[c.chan].outVol=ins->sid2.volume;
       }
       if (chan[c.chan].insChanged || chan[c.chan].resetFilter) {
         chan[c.chan].filter=ins->c64.toFilter;
@@ -367,7 +374,10 @@ int DivPlatformSID2::dispatch(DivCommand c) {
       }
       break;
     case DIV_CMD_GET_VOLUME:
-      return chan[c.chan].vol;
+      if (chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
+        return chan[c.chan].vol;
+      }
+      return chan[c.chan].outVol;
       break;
     case DIV_CMD_PITCH:
       chan[c.chan].pitch=c.value;
@@ -399,7 +409,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
     case DIV_CMD_C64_FINE_DUTY:
       chan[c.chan].duty=c.value;
       rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
-      rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
+      rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].outVol << 4));
       break;
     case DIV_CMD_WAVE:
       chan[c.chan].wave=c.value;
@@ -455,7 +465,7 @@ int DivPlatformSID2::dispatch(DivCommand c) {
         DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_SID2);
         chan[c.chan].duty=ins->c64.duty;
         rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
-        rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].vol << 4));
+        rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].outVol << 4));
       }
       chan[c.chan].resetDuty=c.value>>4;
       break;
@@ -512,6 +522,134 @@ int DivPlatformSID2::dispatch(DivCommand c) {
           chan[c.chan].filter=(c.value & 1);
           updateFilter(c.chan);
           break;
+      }
+      break;
+    case DIV_CMD_DO_PW_SLIDE:
+      if(c.value == 1)
+      {
+        if(chan[c.chan].duty == 0xfff)
+        {
+          chan[c.chan].do_pw_sweep_writes = false;
+        }
+        else
+        {
+          chan[c.chan].do_pw_sweep_writes = true;
+        }
+
+        chan[c.chan].duty += c.value2;
+
+        if(chan[c.chan].duty > 0xfff)
+        {
+          chan[c.chan].duty = 0xfff;
+
+          if(chan[c.chan].do_pw_sweep_writes)
+          {
+            rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
+            rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].outVol << 4));
+          }
+        }
+        else
+        {
+          if(chan[c.chan].do_pw_sweep_writes)
+          {
+            rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
+            rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].outVol << 4));
+          }
+        }
+      }
+      if(c.value == 2)
+      {
+        if(chan[c.chan].duty == 0)
+        {
+          chan[c.chan].do_pw_sweep_writes = false;
+        }
+        else
+        {
+          chan[c.chan].do_pw_sweep_writes = true;
+        }
+
+        chan[c.chan].duty -= c.value2;
+
+        if(chan[c.chan].duty < 0)
+        {
+          chan[c.chan].duty = 0;
+
+          if(chan[c.chan].do_pw_sweep_writes)
+          {
+            rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
+            rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].outVol << 4));
+          }
+        }
+        else
+        {
+          if(chan[c.chan].do_pw_sweep_writes)
+          {
+            rWrite(c.chan*7+2,chan[c.chan].duty&0xff);
+            rWrite(c.chan*7+3,(chan[c.chan].duty>>8) | (chan[c.chan].outVol << 4));
+          }
+        }
+      }
+      break;
+    case DIV_CMD_DO_CUTOFF_SLIDE:
+      if(c.value == 1)
+      {
+        if(chan[c.chan].filtCut == 0xfff)
+        {
+          chan[c.chan].do_cutoff_sweep_writes = false;
+        }
+        else
+        {
+          chan[c.chan].do_cutoff_sweep_writes = true;
+        }
+
+        chan[c.chan].filtCut += c.value2;
+
+        if(chan[c.chan].filtCut > 0xfff)
+        {
+          chan[c.chan].filtCut = 0xfff;
+
+          if(chan[c.chan].do_cutoff_sweep_writes)
+          {
+            updateFilter(c.chan);
+          }
+        }
+        else
+        {
+          if(chan[c.chan].do_cutoff_sweep_writes)
+          {
+            updateFilter(c.chan);
+          }
+        }
+      }
+      if(c.value == 2)
+      {
+        if(chan[c.chan].filtCut == 0)
+        {
+          chan[c.chan].do_cutoff_sweep_writes = false;
+        }
+        else
+        {
+          chan[c.chan].do_cutoff_sweep_writes = true;
+        }
+
+        chan[c.chan].filtCut -= c.value2;
+
+        if(chan[c.chan].filtCut < 0)
+        {
+          chan[c.chan].filtCut = 0;
+
+          if(chan[c.chan].do_cutoff_sweep_writes)
+          {
+            updateFilter(c.chan);
+          }
+        }
+        else
+        {
+          if(chan[c.chan].do_cutoff_sweep_writes)
+          {
+            updateFilter(c.chan);
+          }
+        }
       }
       break;
     case DIV_CMD_MACRO_OFF:
