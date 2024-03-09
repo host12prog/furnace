@@ -87,6 +87,7 @@
 #include "platform/powernoise.h"
 #include "platform/dave.h"
 #include "platform/sid2.h"
+#include "platform/5e01.h"
 #include "platform/dummy.h"
 #include "../ta-log.h"
 #include "song.h"
@@ -707,6 +708,9 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
       break;
     case DIV_SYSTEM_SID2:
       dispatch=new DivPlatformSID2;
+      break;
+    case DIV_SYSTEM_5E01:
+      dispatch=new DivPlatform5E01;
       break;
     case DIV_SYSTEM_DUMMY:
       dispatch=new DivPlatformDummy;

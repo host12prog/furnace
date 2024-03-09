@@ -264,6 +264,7 @@ const char* aboutLine[]={
   "PowerNoise emulator by scratchminer##sgab",
   "ep128emu by Istvan Varga##sgab",
   "SID2 emulator (modification of reSID) by LTVA##sgab",
+  "5E01 emulator (modification of NSFPlay) by Euly##sgab",
   "",
   "greetings to:##sgab",
   "NEOART Costa Rica##sgab",

@@ -2117,6 +2117,28 @@ void DivEngine::registerSystems() {
     SID2PostEffectHandlerMap
   );
 
+  sysDefs[DIV_SYSTEM_5E01]=new DivSysDef(
+    "5E01", NULL, 0xf1, 0, 5, false, true, 0, false, 0, 0, 0,
+    "a fictional sound chip by Euly. similar to Ricoh 2A03, but all the duty cycles are different, noise has 32 pitches instead of 16 and you have four hard-coded waveforms on triangle channel.##sesd",
+    {"Pulse 1##sesd", "Pulse 2##sesd", "Wave##sesd", "Noise##sesd", "DPCM##sesd"},
+    {"S1##sesd", "S2##sesd", "WA##sesd", "NO##sesd", "DMC##sesd"},
+    {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_WAVE, DIV_CH_NOISE, DIV_CH_PCM},
+    {DIV_INS_NES, DIV_INS_NES, DIV_INS_NES, DIV_INS_NES, DIV_INS_NES},
+    {DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_NULL, DIV_INS_AMIGA},
+    {
+      {0x11, {DIV_CMD_NES_DMC, "11xx: Write to delta modulation counter (0 to 7F)##sesd"}},
+      {0x12, {DIV_CMD_STD_NOISE_MODE, "12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1, wave: 0 to 3)##sesd"}},
+      {0x13, {DIV_CMD_NES_SWEEP, "13xy: Sweep up (x: time; y: shift)##sesd",constVal<0>,effectVal}},
+      {0x14, {DIV_CMD_NES_SWEEP, "14xy: Sweep down (x: time; y: shift)##sesd",constVal<1>,effectVal}},
+      {0x15, {DIV_CMD_NES_ENV_MODE, "15xx: Set envelope mode (0: envelope, 1: length, 2: looping, 3: constant)##sesd"}},
+      {0x16, {DIV_CMD_NES_LENGTH, "16xx: Set length counter (refer to manual for a list of values)##sesd"}},
+      {0x17, {DIV_CMD_NES_COUNT_MODE, "17xx: Set frame counter mode (0: 4-step, 1: 5-step)##sesd"}},
+      {0x18, {DIV_CMD_SAMPLE_MODE, "18xx: Select PCM/DPCM mode (0: PCM; 1: DPCM)##sesd"}},
+      {0x19, {DIV_CMD_NES_LINEAR_LENGTH, "19xx: Set wave linear counter (0 to 7F; 80 and higher halt)##sesd"}},
+      {0x20, {DIV_CMD_SAMPLE_FREQ, "20xx: Set DPCM frequency (0 to F)##sesd"}}
+    }
+  );
+
   sysDefs[DIV_SYSTEM_DUMMY]=new DivSysDef(
     "Dummy System##sesd", NULL, 0xfd, 0, 8, false, true, 0, false, 0, 0, 0,
     "this is a system designed for testing purposes.##sesd",
