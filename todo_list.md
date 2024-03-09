@@ -8,14 +8,11 @@ Remove:
 - Panic attacks measures, like saving 5 copies of config files and backup modules
 
 Change:
-- Finish the FamiTracker import (WIP)
 - Make the damn chip description to scroll if it’s too long
 - Allow to dynamically load samples into chip’s memory if possible during song playback
 
 Add:
-- Full FamiTracker import (including E-FamiTracker) (WIP)
 - Import of the following: “xm”, “it”, "med", "s3m", "mptm", "a2m", "rmt", “vt” (Vortex Tracker), “sng” (GoatTracker)
-- Local wavetables and samples inside each instrument with a switch so sample map/wavetable selection macro refers to local or global waves
 - DPCM loop point
 - Chips from pending Furnace PRs, if possible (right now it’s OPL4, MultiPCM and NDS)
 - Features from pending Furnace PRs, **if possible**

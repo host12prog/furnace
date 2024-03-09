@@ -64,7 +64,6 @@ if (ImGui::IsItemHovered()) { \
       chan_number_info.pop_back(); \
       chan_number_info.pop_back(); \
     } \
-    ImGui::Text("\n%s",chan_number_info.c_str()); \
     ImGui::PopTextWrapPos(); \
     ImGui::EndTooltip(); \
   } \

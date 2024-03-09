@@ -54,7 +54,7 @@ the following instrument types are available:
 - [Sound Unit](su.md) - for use with Sound Unit chip.
 - [Namco WSG](wsg.md) - for use with Namco WSG wavetable chips, including C15 and C30.
 - [FM (OPM)](fm-opm.md) - for use with YM2151.
-- [NES](nes.md) - for use with NES.
+- [NES](nes.md) - for use with NES and 5E01.
 - [MSM6258](msm6258.md) - for use with MSM6258 sample chip.
 - [MSM6295](msm6295.md) - for use with MSM6295 sample chip.
 - [ADPCM-A](adpcm-a.md) - for use with ADPCM-A sample chip.

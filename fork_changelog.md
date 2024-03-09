@@ -26,11 +26,13 @@ LTVA:
 - Improved FamiTracker import
 - Raw period macro and effects for POKEY
 - A list of wavetables (e.g. Kurumi wavetable builder output) can be pasted into global/local wavetable list using just one shortcut
+- Add Euly's 5E01 fictional sound chip
 
 freq-mod:
 - 86-PCM streo DAC fix
 - Remove basic mode, tutorial and intro
 - Remove certian compatibility flags from the GUI (notably, old Furnace compatibility)
+- Polish translation
 
 Electric Keet:
 - "Furnace-B" name
