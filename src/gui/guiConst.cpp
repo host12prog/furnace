@@ -230,7 +230,7 @@ const char* fxColorsNames[]={
   "Panning##sggc",
   "Song##sggc",
   "Time##sggc",
-  "Speed##sggc",
+  "Speed##sggc0",
   "System (Primary)##sggc",
   "System (Secondary)##sggc",
   "Miscellaneous##sggc"

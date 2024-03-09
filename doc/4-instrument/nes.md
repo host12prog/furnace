@@ -21,11 +21,13 @@ after enabling this option, a table appears with the contents of the sample map.
 - the third one is used to set the DPCM pitch at which the specified sample will play.
   - for possible values, refer to the table below.
   - you may press Delete to clear it. if no value is specified, the last pitch is used.
-- the fourth column allows you to set the initial delta counter value when playing the sample.
+- the fourth column allows you to loop the sample on this specific note.
+  - if sample loop is enabled in sample editor, the sample will loop, no matter if loop flag is set or not.
+- the fifth column allows you to set the initial delta counter value when playing the sample.
   - this is an hexadecimal number.
   - the range is `00` to `7F`.
   - you may press Delete to clear it. if no value is specified, the delta counter isn't altered.
-- the fifth and last column provides a combo box for selecting a sample.
+- the sixth and last column provides a combo box for selecting a sample.
 
 you may right-click anywhere in the number, pitch and delta columns for additional options:
 - **set entire map to this pitch**: sets the DPCM pitch of all notes to the selected cell's.
