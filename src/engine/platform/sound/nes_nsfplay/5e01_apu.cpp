@@ -201,6 +201,10 @@ namespace xgm
         sm[c][t] = 128;
   }
 
+  I5E01_APU::~I5E01_APU()
+  {
+  }
+
   void I5E01_APU::Reset()
   {
     int i;
