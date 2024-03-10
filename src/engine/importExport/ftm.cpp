@@ -2317,6 +2317,35 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   go_to_end = true;
                 }
 
+                if(go_to_end)
+                {
+                  goto end1;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      end1:;
+    }
+
+    for(int i = 0; i < init_inst_num; i++)
+    {
+      for (int ii=0; ii<total_chans; ii++) 
+      {
+        for (size_t j=0; j<ds.subsong.size(); j++) 
+        {
+          for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+          {
+            if (ds.subsong[j]->pat[ii].data[k]==NULL) continue;
+            for (int l=0; l<ds.subsong[j]->patLen; l++) 
+            {
+              if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == i) //instrument
+              {
+                DivInstrument* ins = ds.ins[i];
+                bool go_to_end = false;
+
                 if(ins->type != DIV_INS_VRC6_SAW && ii == vrc6_saw_chan) //we encountered non-VRC6-saw instrument on VRC6 saw channel
                 {
                   DivInstrument* insnew=new DivInstrument;
@@ -2348,6 +2377,35 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   go_to_end = true;
                 }
 
+                if(go_to_end)
+                {
+                  goto end2;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      end2:;
+    }
+
+    for(int i = 0; i < init_inst_num; i++)
+    {
+      for (int ii=0; ii<total_chans; ii++) 
+      {
+        for (size_t j=0; j<ds.subsong.size(); j++) 
+        {
+          for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+          {
+            if (ds.subsong[j]->pat[ii].data[k]==NULL) continue;
+            for (int l=0; l<ds.subsong[j]->patLen; l++) 
+            {
+              if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == i) //instrument
+              {
+                DivInstrument* ins = ds.ins[i];
+                bool go_to_end = false;
+
                 if(ins->type != DIV_INS_NES && (ii == mmc5_chans[0] || ii == mmc5_chans[1] || ii < 5)) //we encountered VRC6 (or whatever?) instrument on NES/MMC5 channel
                 {
                   DivInstrument* insnew=new DivInstrument;
@@ -2367,7 +2425,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
                 if(go_to_end)
                 {
-                  goto end;
+                  goto end3;
                 }
               }
             }
@@ -2375,7 +2433,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         }
       }
 
-      end:;
+      end3:;
     }
 
     for(int i = 0; i < 256; i++)
