@@ -468,7 +468,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
     unsigned char vrc6_chans[2] = { 0xff, 0xff };
     unsigned char mmc5_chans[2] = { 0xff, 0xff };
-    (void)mmc5_chans[0];
 
     int total_chans = 0;
     
@@ -2255,6 +2254,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     
     int ins_vrc6_conv[256][2];
     int ins_vrc6_saw_conv[256][2];
+    int ins_nes_conv[256][2]; //vrc6 (or whatever) -> nes
 
     for(int i = 0; i < 256; i++)
     {
@@ -2263,6 +2263,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
       ins_vrc6_saw_conv[i][0] = -1;
       ins_vrc6_saw_conv[i][1] = -1;
+
+      ins_nes_conv[i][0] = -1;
+      ins_nes_conv[i][1] = -1;
     }
 
     int init_inst_num = ds.ins.size();
@@ -2345,6 +2348,23 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   go_to_end = true;
                 }
 
+                if(ins->type != DIV_INS_NES && (ii == mmc5_chans[0] || ii == mmc5_chans[1] || ii < 5)) //we encountered VRC6 (or whatever?) instrument on NES/MMC5 channel
+                {
+                  DivInstrument* insnew=new DivInstrument;
+                  ds.ins.push_back(insnew);
+
+                  copyInstrument(ds.ins[ds.ins.size() - 1], ins);
+
+                  ds.ins[ds.ins.size() - 1]->name += " [NES copy]";
+
+                  ds.ins[ds.ins.size() - 1]->type = DIV_INS_NES;
+
+                  ins_nes_conv[i][0] = i;
+                  ins_nes_conv[i][1] = ds.ins.size() - 1;
+
+                  go_to_end = true;
+                }
+
                 if(go_to_end)
                 {
                   goto end;
@@ -2360,7 +2380,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
     for(int i = 0; i < 256; i++)
     {
-      if(ins_vrc6_conv[i][0] != -1 || ins_vrc6_saw_conv[i][0] != -1)
+      if(ins_vrc6_conv[i][0] != -1 || ins_vrc6_saw_conv[i][0] != -1 || ins_nes_conv[i][0] != -1)
       {
         for (int ii=0; ii<total_chans; ii++) 
         {
@@ -2379,6 +2399,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                 if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == ins_vrc6_saw_conv[i][0] && ii == vrc6_saw_chan)
                 {
                   ds.subsong[j]->pat[ii].data[k]->data[l][2] = ins_vrc6_saw_conv[i][1];
+                }
+
+                if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == ins_nes_conv[i][0] && (ii == mmc5_chans[0] || ii == mmc5_chans[1] || ii < 5))
+                {
+                  ds.subsong[j]->pat[ii].data[k]->data[l][2] = ins_nes_conv[i][1];
                 }
               }
             }
