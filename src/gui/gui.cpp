@@ -1898,15 +1898,6 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_CMDSTREAM:
       if (!dirExists(workingDirROMExport)) workingDirROMExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export Command Stream" : _L("Export Command Stream##sggu1"),
-        {settings.language == DIV_LANG_ENGLISH ? "text file" : _L("text file##sggu1"), "*.txt"},
-        workingDirROMExport,
-        dpiScale
-      );
-      break;
-    case GUI_FILE_EXPORT_CMDSTREAM_BINARY:
-      if (!dirExists(workingDirROMExport)) workingDirROMExport=getHomeDir();
-      hasOpened=fileDialog->openSave(
         settings.language == DIV_LANG_ENGLISH ? "Export Command Stream" : _L("Export Command Stream##sggu2"),
         {settings.language == DIV_LANG_ENGLISH ? "binary file" : _L("binary file##sggu"), "*.bin"},
         workingDirROMExport,
@@ -4835,7 +4826,6 @@ bool FurnaceGUI::loop() {
         case GUI_FILE_EXPORT_ROM:
         case GUI_FILE_EXPORT_TEXT:
         case GUI_FILE_EXPORT_CMDSTREAM:
-        case GUI_FILE_EXPORT_CMDSTREAM_BINARY:
           workingDirROMExport=fileDialog->getPath()+DIR_SEPARATOR_STR;
           break;
         case GUI_FILE_EXPORT_FUR:
@@ -4928,10 +4918,10 @@ bool FurnaceGUI::loop() {
           if (curFileDialog==GUI_FILE_EXPORT_ZSM) {
             checkExtension(".zsm");
           }
-          if (curFileDialog==GUI_FILE_EXPORT_CMDSTREAM || curFileDialog==GUI_FILE_EXPORT_TEXT) {
+          if (curFileDialog==GUI_FILE_EXPORT_TEXT) {
             checkExtension(".txt");
           }
-          if (curFileDialog==GUI_FILE_EXPORT_CMDSTREAM_BINARY) {
+          if (curFileDialog==GUI_FILE_EXPORT_CMDSTREAM) {
             checkExtension(".bin");
           }
           if (curFileDialog==GUI_FILE_EXPORT_FUR) {
@@ -5414,11 +5404,8 @@ bool FurnaceGUI::loop() {
               }
               break;
             }
-            case GUI_FILE_EXPORT_CMDSTREAM:
-            case GUI_FILE_EXPORT_CMDSTREAM_BINARY: {
-              bool isBinary=(curFileDialog==GUI_FILE_EXPORT_CMDSTREAM_BINARY);
-
-              SafeWriter* w=e->saveCommand(isBinary);
+            case GUI_FILE_EXPORT_CMDSTREAM: {
+              SafeWriter* w=e->saveCommand();
               if (w!=NULL) {
                 FILE* f=ps_fopen(copyOfName.c_str(),"wb");
                 if (f!=NULL) {
