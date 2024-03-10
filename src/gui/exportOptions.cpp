@@ -264,7 +264,7 @@ void FurnaceGUI::drawExportCommand(bool onWindow) {
   exitDisabledTimer=1;
   
   ImGui::Text(_L(
-    "this option exports a text or binary file which\n"
+    "this option exports a binary file which\n"
     "contains a dump of the internal command stream\n"
     "produced when playing the song.\n\n"
 
@@ -272,10 +272,10 @@ void FurnaceGUI::drawExportCommand(bool onWindow) {
   ));
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_L("Cancel##sgeo8"),ImVec2(166.6f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo8"),ImVec2(250.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_L("Export##sgeo"),ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_L("Export##sgeo"),ImVec2(250.0f*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_CMDSTREAM);
     ImGui::CloseCurrentPopup();
   }

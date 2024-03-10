@@ -1407,18 +1407,17 @@ void DivLocale::addTranslationsTemplate()
     strings["this option exports the song to a text file.\n##sgeo"].plurals[0] = "=this option exports the song to a text file.\n";
     strings["Cancel##sgeo7"].plurals[0] = "=Cancel";
     strings["Export##sgeo6"].plurals[0] = "=Export";
-    strings["this option exports a text or binary file which\n"
+    strings["this option exports a binary file which\n"
             "contains a dump of the internal command stream\n"
             "produced when playing the song.\n\n"
             "technical/development use only!"].plurals[0] = 
 
-            "=this option exports a text or binary file which\n"
+            "=this option exports a binary file which\n"
             "=contains a dump of the internal command stream\n"
             "=produced when playing the song.\n\n"
             "=technical/development use only!";
     strings["Cancel##sgeo8"].plurals[0] = "=Cancel";
-    strings["Export (binary)##sgeo"].plurals[0] = "=Export (binary)";
-    strings["Export (text)##sgeo"].plurals[0] = "=Export (text)";
+    strings["Export##sgeo"].plurals[0] = "=Export";
     strings["this option exports a module which is\n"
             "compatible with tildearrow Furnace app.\n\n"
 
