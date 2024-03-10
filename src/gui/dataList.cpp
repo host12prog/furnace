@@ -76,7 +76,7 @@ void FurnaceGUI::insListItem(int i, int dir, int asset) {
   const char* insType=_L("Bug!##sgdl");
   if (i>=0 && i<e->song.insLen) {
     DivInstrument* ins=e->song.ins[i];
-    insType=(ins->type>=DIV_INS_MAX)?_L("Unknown##sgdl"):insTypes[ins->type][0];
+    insType=(ins->type>=DIV_INS_MAX)?_L("Unknown##sgdl"):_L(insTypes[ins->type][0]);
     const char** insIcon=NULL;
 
     if (ins->type>=DIV_INS_MAX) {

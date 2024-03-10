@@ -1768,17 +1768,31 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                         pat->data[row][4+(j*2)] = -1;
                         pat->data[row][5+(j*2)] = -1;
                       }
+
+                      if(eftEffectMap[nextEffect] == 0x0f && nextEffectVal > 0x1f)
+                      {
+                        pat->data[row][4+(j*2)] = 0xf0; //BPM speed change!
+                      }
+
+                      if((eftEffectMap[nextEffect] == 0xe1 || eftEffectMap[nextEffect] == 0xe2) && (nextEffectVal & 0xf0) == 0)
+                      {
+                        pat->data[row][5+(j*2)] |= 0x10; //in FamiTracker if e1/e2 commands speed is 0 the portamento still has some speed!
+                      }
                     }
                     else
                     {
                       pat->data[row][4+(j*2)]=ftEffectMap[nextEffect];
                       pat->data[row][5+(j*2)]=ftEffectMap[nextEffect] == -1 ? -1 : nextEffectVal;
-                    }
-                    
 
-                    if(ftEffectMap[nextEffect] == 0x0f && nextEffectVal > 0x1f)
-                    {
-                      pat->data[row][4+(j*2)] = 0xf0; //BPM speed change!
+                      if(ftEffectMap[nextEffect] == 0x0f && nextEffectVal > 0x1f)
+                      {
+                        pat->data[row][4+(j*2)] = 0xf0; //BPM speed change!
+                      }
+
+                      if((ftEffectMap[nextEffect] == 0xe1 || ftEffectMap[nextEffect] == 0xe2) && (nextEffectVal & 0xf0) == 0)
+                      {
+                        pat->data[row][5+(j*2)] |= 0x10; //in FamiTracker if e1/e2 commands speed is 0 the portamento still has some speed!
+                      }
                     }
                     for(int v = 0; v < 8; v++)
                     {
@@ -2381,6 +2395,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
     ds.dontDisableVolSlideOnZero = true;
     ds.resetNesSweep = true;
+    ds.stopE1E2OnNoteOn = true;
 
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;

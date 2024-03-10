@@ -395,6 +395,7 @@ struct DivSong {
   //famitracker compatibility flags
   bool resetNesSweep; //reset sweep on new note
   bool dontDisableVolSlideOnZero; //do not disable volume slide when volume reached zero
+  bool stopE1E2OnNoteOn; //
 
   std::vector<DivInstrument*> ins;
   std::vector<DivWavetable*> wave;
@@ -520,7 +521,8 @@ struct DivSong {
     ceilVolumeScaling(false),
     oldAlwaysSetVolume(false),
     resetNesSweep(false),
-    dontDisableVolSlideOnZero(false) {
+    dontDisableVolSlideOnZero(false),
+    stopE1E2OnNoteOn(false) {
     for (int i=0; i<DIV_MAX_CHIPS; i++) {
       system[i]=DIV_SYSTEM_NULL;
       systemVol[i]=1.0;
