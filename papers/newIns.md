@@ -157,6 +157,7 @@ the following feature codes are recognized:
 - `E3`: ES5503 ins data
 - `S2`: SID2 ins data
 - `LW`: local wavetables
+- `PO`: POKEY instrument data
 - `EN`: end of features
   - if you find this feature code, stop reading the instrument.
   - it will usually appear only when there sample/wave lists.
@@ -252,6 +253,18 @@ size | description
      | - 17: ex6
      | - 18: ex7
      | - 19: ex8
+     | - 20: ex9
+     | - 21: ex10
+     | - 22: ex11
+     | - 23: ex12
+     | - 24: ex13
+     | - 25: ex14
+     | - 26: ex15
+     | - 27: ex16
+     | - 28: ex17
+     | - 29: ex18
+     | - 30: ex19
+     | - 31: ex20
      | - 255: stop reading and move on
   1  | macro length
   1  | macro loop
@@ -288,6 +301,7 @@ size | description
   - `val[6]`: sustain hold time
   - `val[7]`: decay 2
   - `val[8]`: release
+  - `val[16]`: set bit 30 for all the macro generated values
 - LFO:
   - `val[11]`: speed
   - `val[12]`: waveform
@@ -297,6 +311,7 @@ size | description
   - `val[13]`: phase
   - `val[14]`: loop
   - `val[15]`: global (not sure how will I implement this)
+  - `val[17]`: set bit 30 for all the macro generated values
 
 # C64 data (64)
 
@@ -454,6 +469,18 @@ similar to macro data, but using these macro codes:
 - 17: VIB
 - 18: WS
 - 19: KSR
+- 20: EX1
+- 21: EX2
+- 22: EX3
+- 23: EX4
+- 24: EX5
+- 25: EX6
+- 26: EX7
+- 27: EX8
+- 28: EX9
+- 29: EX10
+- 30: EX11
+- 31: EX12
 
 # OPL drums mode data (LD)
 
@@ -734,6 +761,8 @@ size | description
   4  | number of local wavetables
 ```
 
+Then the wavetable data follows, as in "Wavetable" section of [file format](format.md). Yes, each local wavetable starts with `WAVE` signature and stuff. There are as many waves as `number of local wavetables`.
+
 # POKEY data (PO)
 
 ```
@@ -741,5 +770,3 @@ size | description
 -----|------------------------------------
   1  | raw frequency macro is 16-bit
 ```
-
-Then the wavetable data follows, as in "Wavetable" section of [file format](format.md). Yes, each local wavetable starts with `WAVE` signature and stuff. There are as many waves as `number of local wavetables`.
