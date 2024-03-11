@@ -398,7 +398,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       int clockSel=flags.getInt("clockSel",0);
       int patchSet=flags.getInt("patchSet",0);
       bool noTopHatFreq=flags.getBool("noTopHatFreq",false);
-      bool fixedAll=flags.getBool("fixedAll",false);
+      bool fixedAll=flags.getBool("fixedAll",true);
 
       ImGui::Text(_L("Clock rate:##sgsc2"));
       ImGui::Indent();
@@ -1596,6 +1596,19 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
         e->lockSave([&]() {
           flags.set("clockSel",clockSel);
         });
+      }
+      break;
+    }
+    case DIV_SYSTEM_LYNX: {
+      bool tuned=flags.getBool("tuned",false);
+      if (ImGui::Checkbox("Consistent frequency across all duties",&tuned)) {
+        altered=true;
+        e->lockSave([&]() {
+          flags.set("tuned",tuned);
+        });
+      }
+      if (ImGui::IsItemHovered()) {
+        ImGui::SetTooltip("note: only works for an initial LFSR value of 0!");
       }
       break;
     }
