@@ -128,6 +128,7 @@ class DivPlatformESFM: public DivDispatch {
     };
   FixedQueue<QueuedWrite,2048> writes;
   esfm_chip chip;
+  bool isFast;
 
   unsigned char regPool[ESFM_REG_POOL_SIZE];
   short oldWrites[ESFM_REG_POOL_SIZE];
@@ -210,6 +211,7 @@ class DivPlatformESFM: public DivDispatch {
     void poke(unsigned int addr, unsigned short val);
     void poke(std::vector<DivRegWrite>& wlist);
     void setFlags(const DivConfig& flags);
+    void setFast(bool fast);
     int init(DivEngine* parent, int channels, int sugRate, const DivConfig& flags);
     void quit();
     ~DivPlatformESFM();

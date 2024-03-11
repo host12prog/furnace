@@ -50,6 +50,8 @@ void FurnaceGUI::drawInsMIKEY(DivInstrument* ins)
 
     macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgiLYNX"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Load LFSR##sgiLYNX"),ins,DIV_MACRO_EX1,0xff,0,12,192,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();
   }

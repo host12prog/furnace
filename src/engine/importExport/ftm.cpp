@@ -2417,6 +2417,40 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
                   ds.ins[ds.ins.size() - 1]->type = DIV_INS_NES;
 
+                  if(ins->type == DIV_INS_VRC6)
+                  {
+                    if(insnew->std.get_macro(DIV_MACRO_DUTY, false)->len > 0) //convert duties for NES
+                    {
+                      for(int mm = 0; mm < insnew->std.get_macro(DIV_MACRO_DUTY, false)->len; mm++)
+                      {
+                        switch(insnew->std.get_macro(DIV_MACRO_DUTY, false)->val[mm])
+                        {
+                          case 0:
+                          case 1:
+                          {
+                            insnew->std.get_macro(DIV_MACRO_DUTY, false)->val[mm] = 0;
+                            break;
+                          }
+                          case 2:
+                          case 3:
+                          case 4:
+                          case 5:
+                          {
+                            insnew->std.get_macro(DIV_MACRO_DUTY, false)->val[mm] = 1;
+                            break;
+                          }
+                          case 6:
+                          case 7:
+                          {
+                            insnew->std.get_macro(DIV_MACRO_DUTY, false)->val[mm] = 2;
+                            break;
+                          }
+                          default: break;
+                        }
+                      }
+                    }
+                  }
+
                   ins_nes_conv[i][0] = i;
                   ins_nes_conv[i][1] = ds.ins.size() - 1;
 
