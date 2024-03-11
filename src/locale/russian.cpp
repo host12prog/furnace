@@ -4846,6 +4846,10 @@ void DivLocale::addTranslationsRussian()
 
     // no more instruments
 
+    //           src/engine/cmdStream.cpp
+
+    strings["not a command stream"].plurals[0] = "не является потоком команд";
+
     //   seen    src/engine/engine.cpp
 
     strings["00xy: Arpeggio##seen"].plurals[0] = "00xy: Арпеджио";

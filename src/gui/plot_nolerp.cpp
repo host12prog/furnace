@@ -303,7 +303,9 @@ int FurnaceGUI::PlotBitfieldEx(const char* label, int (*values_getter)(void* dat
 void PlotBitfield(const char* label, const int* values, int values_count, int values_offset, const char** overlay_text, int bits, ImVec2 graph_size, int stride, const bool* values_highlight, ImVec4 highlightColor)
 {
     FurnacePlotIntArrayGetterData data(values, stride);
+#ifdef HAVE_GUI
     g.PlotBitfieldEx(label, &Plot_IntArrayGetter, (void*)&data, values_count, values_offset, overlay_text, bits, graph_size, values_highlight, highlightColor);
+#endif
 }
 
 int FurnaceGUI::PlotCustomEx(ImGuiPlotType plot_type, const char* label, float (*values_getter)(void* data, int idx), void* data, int values_count, int values_display_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 frame_size, ImVec4 color, int highlight, std::string (*hoverFunc)(int,float,void*), void* hoverFuncUser, bool blockMode, std::string (*guideFunc)(float), const bool* values_highlight, ImVec4 highlightColor)
@@ -519,5 +521,7 @@ int FurnaceGUI::PlotCustomEx(ImGuiPlotType plot_type, const char* label, float (
 void PlotCustom(const char* label, const float* values, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 graph_size, int stride, ImVec4 color, int highlight, std::string (*hoverFunc)(int,float,void*), void* hoverFuncUser, bool blockMode, std::string (*guideFunc)(float), const bool* values_highlight, ImVec4 highlightColor)
 {
     FurnacePlotArrayGetterData data(values, stride);
+#ifdef HAVE_GUI
     g.PlotCustomEx(ImGuiPlotType_Histogram, label, &Plot_ArrayGetter, (void*)&data, values_count, values_offset, overlay_text, scale_min, scale_max, graph_size, color, highlight, hoverFunc, hoverFuncUser, blockMode, guideFunc, values_highlight, highlightColor);
+#endif
 }

@@ -4951,6 +4951,10 @@ void DivLocale::addTranslationsTemplate()
     //   seen    src/engine/engine.cpp
     //   sesd    src/engine/sysDef.cpp
 
+    //           src/engine/cmdStream.cpp
+
+    strings["not a command stream"].plurals[0] = "=not a command stream";
+
     //   seen    src/engine/engine.cpp
 
     strings["00xy: Arpeggio##seen"].plurals[0] = "00xy: =Arpeggio";
