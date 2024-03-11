@@ -77,6 +77,12 @@ bool DivCSPlayer::tick() {
         chan[i].readPos=0;
         break;
       }
+
+      chan[i].trace[chan[i].tracePos++]=chan[i].readPos;
+      if (chan[i].tracePos>=DIV_MAX_CSTRACE) {
+        chan[i].tracePos=0;
+      }
+
       unsigned char next=stream.readC();
       unsigned char command=0;
       bool mustTell=true;
@@ -89,6 +95,7 @@ bool DivCSPlayer::tick() {
         command=fastCmds[next&15];
       } else if (next>=0xe0 && next<=0xef) { // preset delay
         chan[i].waitTicks=fastDelays[next&15];
+        chan[i].lastWaitLen=chan[i].waitTicks;
       } else switch (next) {
         case 0xb4: // note on null
           e->dispatchCmd(DivCommand(DIV_CMD_NOTE_ON,i,DIV_NOTE_NULL));
@@ -156,12 +163,15 @@ bool DivCSPlayer::tick() {
           break;
         case 0xfc:
           chan[i].waitTicks=(unsigned short)stream.readS();
+          chan[i].lastWaitLen=chan[i].waitTicks;
           break;
         case 0xfd:
           chan[i].waitTicks=(unsigned char)stream.readC();
+          chan[i].lastWaitLen=chan[i].waitTicks;
           break;
         case 0xfe:
           chan[i].waitTicks=1;
+          chan[i].lastWaitLen=chan[i].waitTicks;
           break;
         case 0xff:
           chan[i].readPos=chan[i].startPos;

@@ -20,6 +20,87 @@
 #include "gui.h"
 #include <fmt/printf.h>
 #include "imgui.h"
+#include "guiConst.h"
+
+// TODO: memory safety
+String disasmCmd(unsigned char* buf, size_t bufLen, unsigned int addr) {
+  if (addr>=bufLen) return "???";
+
+  if (buf[addr]<0xb4) {
+    return fmt::sprintf("note %s",noteNames[buf[addr]]);
+  } else switch (buf[addr]) {
+    case 0xb4:
+      return "note null";
+      break;
+    case 0xb5:
+      return "off";
+      break;
+    case 0xb6:
+      return "offrel";
+      break;
+    case 0xb7:
+      return "mrel";
+      break;
+    case 0xb8:
+      return fmt::sprintf("ins $%.2x",(int)buf[addr+1]);
+      break;
+    case 0xbe:
+      return fmt::sprintf("pan $%x, $%x",(int)buf[addr+1],(int)buf[addr+2]);
+      break;
+    case 0xc0:
+      return fmt::sprintf("preporta $%.2x",(int)buf[addr+1]);
+      break;
+    case 0xc2:
+      return fmt::sprintf("vib %d, %d",(int)buf[addr+1],(int)buf[addr+2]);
+      break;
+    case 0xc3:
+      return fmt::sprintf("vibrange %d",(int)buf[addr+1]);
+      break;
+    case 0xc4:
+      return fmt::sprintf("vibshape %d",(int)buf[addr+1]);
+      break;
+    case 0xc5:
+      return fmt::sprintf("pitch $%.2x",(int)buf[addr+1]);
+      break;
+    case 0xc6:
+      return fmt::sprintf("arp %d, %d",(int)buf[addr+1],(int)buf[addr+2]);
+      break;
+    case 0xc7:
+      return fmt::sprintf("vol $%.2x",(int)buf[addr+1]);
+      break;
+    case 0xc8:
+      return fmt::sprintf("volslide %d",(int)((short)(buf[addr+1]|(buf[addr+2]<<8))));
+      break;
+    case 0xc9:
+      return fmt::sprintf("porta %d, %d",(int)buf[addr+1],(int)buf[addr+2]);
+      break;
+    case 0xca:
+      return fmt::sprintf("legato %d",(int)buf[addr+1]);
+      break;
+    case 0xe0: case 0xe1: case 0xe2: case 0xe3:
+    case 0xe4: case 0xe5: case 0xe6: case 0xe7:
+    case 0xe8: case 0xe9: case 0xea: case 0xeb:
+    case 0xec: case 0xed: case 0xee: case 0xef:
+      return fmt::sprintf("qwait (%d)",(int)(buf[addr]-0xe0));
+      break;
+    case 0xfc:
+      return fmt::sprintf("waits %d",(int)(buf[addr+1]|(buf[addr+2]<<8)));
+      break;
+    case 0xfd:
+      return fmt::sprintf("waitc %d",(int)buf[addr+1]);
+      break;
+    case 0xfe:
+      return "wait 1";
+      break;
+    case 0xff:
+      return "stop";
+      break;
+    default:
+      return "ill";
+      break;
+  }
+  return "TODO";
+}
 
 void FurnaceGUI::drawCSPlayer() {
   if (nextWindow==GUI_WINDOW_CS_PLAYER) {
@@ -40,7 +121,7 @@ void FurnaceGUI::drawCSPlayer() {
     }
     ImGui::SameLine();
     if (ImGui::Button(_L("Burn Current Song##sgcs"))) {
-      SafeWriter* w=e->saveCommand(true);
+      SafeWriter* w=e->saveCommand();
       if (w!=NULL) {
         if (!e->playStream(w->getFinalBuf(),w->size())) {
           showError(e->getLastError());
@@ -58,6 +139,109 @@ void FurnaceGUI::drawCSPlayer() {
       if (ImGui::BeginTabBar("CSOptions")) {
         int chans=e->getTotalChannelCount();
         if (ImGui::BeginTabItem(_L("Status##sgcs"))) {
+          if (ImGui::BeginTable("CSStat",11,ImGuiTableFlags_SizingFixedSame|ImGuiTableFlags_ScrollX|ImGuiTableFlags_Borders)) {
+            ImGui::TableSetupScrollFreeze(1,1);
+            ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
+            ImGui::TableNextColumn();
+            ImGui::Text("channel");
+            ImGui::TableNextColumn();
+            ImGui::Text("start");
+            ImGui::TableNextColumn();
+            ImGui::Text("PC");
+            ImGui::TableNextColumn();
+            ImGui::Text("wait");
+            ImGui::TableNextColumn();
+            ImGui::Text("SP");
+            ImGui::TableNextColumn();
+            ImGui::Text("note");
+            ImGui::TableNextColumn();
+            ImGui::Text("pitch");
+            ImGui::TableNextColumn();
+            ImGui::Text("vol");
+            ImGui::TableNextColumn();
+            ImGui::Text("vols");
+            ImGui::TableNextColumn();
+            ImGui::Text("vib");
+            ImGui::TableNextColumn();
+            ImGui::Text("porta");
+            ImGui::TableNextColumn();
+            ImGui::Text("arp");
+
+            for (int i=0; i<chans; i++) {
+              DivCSChannelState* state=cs->getChanState(i);
+              ImGui::TableNextRow();
+              ImGui::TableNextColumn();
+              ImGui::Text("%d",i);
+              ImGui::TableNextColumn();
+              ImGui::Text("$%.4x",state->startPos);
+              ImGui::TableNextColumn();
+              ImGui::Text("$%.4x",state->readPos);
+              ImGui::TableNextColumn();
+              ImGui::Text("%d/%d",state->waitTicks,state->lastWaitLen);
+              ImGui::TableNextColumn();
+              ImGui::Text("%d",state->callStackPos);
+              ImGui::TableNextColumn();
+              ImGui::Text("%d",state->note);
+              ImGui::TableNextColumn();
+              ImGui::Text("%d",state->pitch);
+              ImGui::TableNextColumn();
+              ImGui::Text("$%.4X",state->volume);
+              ImGui::TableNextColumn();
+              ImGui::Text("%+d",state->volSpeed);
+              ImGui::TableNextColumn();
+              ImGui::Text("%d/%d (%d)",state->vibratoDepth,state->vibratoRate,state->vibratoPos);
+              ImGui::TableNextColumn();
+              ImGui::Text("-> %d (%d)",state->portaTarget,state->portaSpeed);
+              ImGui::TableNextColumn();
+              ImGui::Text("$%.2X",state->arp);
+            }
+
+            ImGui::EndTable();
+          }
+          ImGui::EndTabItem();
+        }
+        if (ImGui::BeginTabItem("Trace")) {
+          ImGui::PushFont(patFont);
+          if (ImGui::BeginTable("CSTrace",chans,ImGuiTableFlags_SizingFixedSame|ImGuiTableFlags_Borders|ImGuiTableFlags_ScrollX)) {
+            char tempID[32];
+            for (int i=0; i<chans; i++) {
+              snprintf(tempID,31,"c%d",i);
+              ImGui::TableSetupColumn(tempID,ImGuiTableColumnFlags_WidthFixed,200.0*dpiScale);
+            }
+            ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
+            for (int i=0; i<chans; i++) {
+              DivCSChannelState* state=cs->getChanState(i);
+              ImGui::TableNextColumn();
+              ImGui::Text("%d: $%.4x",i,state->readPos);
+            }
+
+            ImGui::TableNextRow();
+            unsigned char* buf=cs->getData();
+            size_t bufSize=cs->getDataLen();
+            for (int i=0; i<chans; i++) {
+              DivCSChannelState* state=cs->getChanState(i);
+              ImGui::TableNextColumn();
+              int maxItems=(ImGui::GetContentRegionAvail().y/MAX(ImGui::GetTextLineHeightWithSpacing(),1.0f));
+              if (maxItems>=DIV_MAX_CSTRACE) maxItems=DIV_MAX_CSTRACE-1;
+
+              int tracePos=state->tracePos;
+
+              for (int j=(tracePos-maxItems)&(DIV_MAX_CSTRACE-1); j!=tracePos; j=(j+1)&(DIV_MAX_CSTRACE-1)) {
+                if (state->trace[j]==0) {
+                  ImGui::TextUnformatted("...");
+                } else {
+                  String dis=disasmCmd(buf,bufSize,state->trace[j]);
+                  ImGui::Text("%.4x: %s",state->trace[j],dis.c_str());
+                }
+              }
+            }
+
+            ImGui::EndTable();
+          }
+          ImGui::PopFont();
+          ImGui::EndTabItem();
+        }
+        if (ImGui::BeginTabItem("Disassemble")) {
           ImGui::EndTabItem();
         }
         if (ImGui::BeginTabItem(_L("Hex##sgcs"))) {

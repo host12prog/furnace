@@ -100,6 +100,7 @@ enum DivMIDIModes {
 struct DivChannelState {
   std::vector<DivDelayedCommand> delayed;
   int note, oldNote, lastIns, pitch, portaSpeed, portaNote;
+  bool isE1E2;
   int volume, volSpeed, cut, rowDelay, volMax;
   int delayOrder, delayRow, retrigSpeed, retrigTick;
   int vibratoDepth, vibratoRate, vibratoPos, vibratoPosGiant, vibratoDir, vibratoFine;
@@ -122,6 +123,7 @@ struct DivChannelState {
     pitch(0),
     portaSpeed(-1),
     portaNote(-1),
+    isE1E2(false),
     volume(0x7f00),
     volSpeed(0),
     cut(-1),
@@ -663,7 +665,7 @@ class DivEngine {
     // dump to ZSM.
     SafeWriter* saveZSM(unsigned int zsmrate=60, bool loop=true, bool optimize=true);
     // dump command stream.
-    SafeWriter* saveCommand(bool binary=false);
+    SafeWriter* saveCommand();
     // export to text
     SafeWriter* saveText(bool separatePatterns=true);
     // export to an audio file

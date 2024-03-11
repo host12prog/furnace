@@ -363,6 +363,7 @@ void DivLocale::addTranslationsTemplate()
     strings["when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels##sgcf"].plurals[0] = "=when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels";
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "=Stop NES pulse channels hardware sweep on new note";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "=Do not stop volume slide after reaching zero or full volume";
+    strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "=Stop E1xy/E2xy effects on new note";
 
     //   sgcs  src/gui/csPlayer.cpp
 
@@ -1407,18 +1408,17 @@ void DivLocale::addTranslationsTemplate()
     strings["this option exports the song to a text file.\n##sgeo"].plurals[0] = "=this option exports the song to a text file.\n";
     strings["Cancel##sgeo7"].plurals[0] = "=Cancel";
     strings["Export##sgeo6"].plurals[0] = "=Export";
-    strings["this option exports a text or binary file which\n"
+    strings["this option exports a binary file which\n"
             "contains a dump of the internal command stream\n"
             "produced when playing the song.\n\n"
             "technical/development use only!"].plurals[0] = 
 
-            "=this option exports a text or binary file which\n"
+            "=this option exports a binary file which\n"
             "=contains a dump of the internal command stream\n"
             "=produced when playing the song.\n\n"
             "=technical/development use only!";
     strings["Cancel##sgeo8"].plurals[0] = "=Cancel";
-    strings["Export (binary)##sgeo"].plurals[0] = "=Export (binary)";
-    strings["Export (text)##sgeo"].plurals[0] = "=Export (text)";
+    strings["Export##sgeo"].plurals[0] = "=Export";
     strings["this option exports a module which is\n"
             "compatible with tildearrow Furnace app.\n\n"
 

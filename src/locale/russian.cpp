@@ -306,6 +306,7 @@ void DivLocale::addTranslationsRussian()
     strings["when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels##sgcf"].plurals[0] = "при включении этого флага значения макросов громкости округляются вверх\nэто предотвращает возникновение ситуации vol=0 при масштабировании громкости, что приводит к заглушению на некоторых чипах\n\nне эффективно на чипах с логарифмическим контролем громкости";
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "Останавливать аппаратное портаменто на каналах импульсов NES при начале новой ноты";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "Не останавливать эффект изменения громкости при достижении нулевой или максимальной громкости";
+    strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Останавливать эффекты E1xy/E2xy на новой ноте";
 
     //   sgcs  src/gui/csPlayer.cpp
 
@@ -1349,18 +1350,17 @@ void DivLocale::addTranslationsRussian()
     strings["this option exports the song to a text file.\n##sgeo"].plurals[0] = "эта опция позволяет экспортировать трек в текстовый файл.\n";
     strings["Cancel##sgeo7"].plurals[0] = "Отмена";
     strings["Export##sgeo6"].plurals[0] = "Экспорт";
-    strings["this option exports a text or binary file which\n"
+    strings["this option exports a binary file which\n"
             "contains a dump of the internal command stream\n"
             "produced when playing the song.\n\n"
             "technical/development use only!"].plurals[0] = 
 
-            "эта опция позволяет создать текстовый или бинарный файл,\n"
+            "эта опция позволяет создать бинарный файл,\n"
             "в котором содержится дамп внутренних команд,\n"
             "созданных во время проигрыаания трека.\n\n"
             "используйте только при разработке!";
     strings["Cancel##sgeo8"].plurals[0] = "Отмена";
-    strings["Export (binary)##sgeo"].plurals[0] = "Экспорт (бинарный)";
-    strings["Export (text)##sgeo"].plurals[0] = "Экспорт (текст)";
+    strings["Export##sgeo"].plurals[0] = "Экспорт";
     strings["this option exports a module which is\n"
             "compatible with tildearrow Furnace app.\n\n"
 

@@ -468,7 +468,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
     unsigned char vrc6_chans[2] = { 0xff, 0xff };
     unsigned char mmc5_chans[2] = { 0xff, 0xff };
-    (void)mmc5_chans[0];
 
     int total_chans = 0;
     
@@ -1768,17 +1767,31 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                         pat->data[row][4+(j*2)] = -1;
                         pat->data[row][5+(j*2)] = -1;
                       }
+
+                      if(eftEffectMap[nextEffect] == 0x0f && nextEffectVal > 0x1f)
+                      {
+                        pat->data[row][4+(j*2)] = 0xf0; //BPM speed change!
+                      }
+
+                      if((eftEffectMap[nextEffect] == 0xe1 || eftEffectMap[nextEffect] == 0xe2) && (nextEffectVal & 0xf0) == 0)
+                      {
+                        pat->data[row][5+(j*2)] |= 0x10; //in FamiTracker if e1/e2 commands speed is 0 the portamento still has some speed!
+                      }
                     }
                     else
                     {
                       pat->data[row][4+(j*2)]=ftEffectMap[nextEffect];
                       pat->data[row][5+(j*2)]=ftEffectMap[nextEffect] == -1 ? -1 : nextEffectVal;
-                    }
-                    
 
-                    if(ftEffectMap[nextEffect] == 0x0f && nextEffectVal > 0x1f)
-                    {
-                      pat->data[row][4+(j*2)] = 0xf0; //BPM speed change!
+                      if(ftEffectMap[nextEffect] == 0x0f && nextEffectVal > 0x1f)
+                      {
+                        pat->data[row][4+(j*2)] = 0xf0; //BPM speed change!
+                      }
+
+                      if((ftEffectMap[nextEffect] == 0xe1 || ftEffectMap[nextEffect] == 0xe2) && (nextEffectVal & 0xf0) == 0)
+                      {
+                        pat->data[row][5+(j*2)] |= 0x10; //in FamiTracker if e1/e2 commands speed is 0 the portamento still has some speed!
+                      }
                     }
                     for(int v = 0; v < 8; v++)
                     {
@@ -2241,6 +2254,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     
     int ins_vrc6_conv[256][2];
     int ins_vrc6_saw_conv[256][2];
+    int ins_nes_conv[256][2]; //vrc6 (or whatever) -> nes
 
     for(int i = 0; i < 256; i++)
     {
@@ -2249,6 +2263,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
       ins_vrc6_saw_conv[i][0] = -1;
       ins_vrc6_saw_conv[i][1] = -1;
+
+      ins_nes_conv[i][0] = -1;
+      ins_nes_conv[i][1] = -1;
     }
 
     int init_inst_num = ds.ins.size();
@@ -2300,6 +2317,35 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   go_to_end = true;
                 }
 
+                if(go_to_end)
+                {
+                  goto end1;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      end1:;
+    }
+
+    for(int i = 0; i < init_inst_num; i++)
+    {
+      for (int ii=0; ii<total_chans; ii++) 
+      {
+        for (size_t j=0; j<ds.subsong.size(); j++) 
+        {
+          for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+          {
+            if (ds.subsong[j]->pat[ii].data[k]==NULL) continue;
+            for (int l=0; l<ds.subsong[j]->patLen; l++) 
+            {
+              if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == i) //instrument
+              {
+                DivInstrument* ins = ds.ins[i];
+                bool go_to_end = false;
+
                 if(ins->type != DIV_INS_VRC6_SAW && ii == vrc6_saw_chan) //we encountered non-VRC6-saw instrument on VRC6 saw channel
                 {
                   DivInstrument* insnew=new DivInstrument;
@@ -2333,7 +2379,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
                 if(go_to_end)
                 {
-                  goto end;
+                  goto end2;
                 }
               }
             }
@@ -2341,12 +2387,58 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         }
       }
 
-      end:;
+      end2:;
+    }
+
+    for(int i = 0; i < init_inst_num; i++)
+    {
+      for (int ii=0; ii<total_chans; ii++) 
+      {
+        for (size_t j=0; j<ds.subsong.size(); j++) 
+        {
+          for (int k=0; k<DIV_MAX_PATTERNS; k++) 
+          {
+            if (ds.subsong[j]->pat[ii].data[k]==NULL) continue;
+            for (int l=0; l<ds.subsong[j]->patLen; l++) 
+            {
+              if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == i) //instrument
+              {
+                DivInstrument* ins = ds.ins[i];
+                bool go_to_end = false;
+
+                if(ins->type != DIV_INS_NES && (ii == mmc5_chans[0] || ii == mmc5_chans[1] || ii < 5)) //we encountered VRC6 (or whatever?) instrument on NES/MMC5 channel
+                {
+                  DivInstrument* insnew=new DivInstrument;
+                  ds.ins.push_back(insnew);
+
+                  copyInstrument(ds.ins[ds.ins.size() - 1], ins);
+
+                  ds.ins[ds.ins.size() - 1]->name += " [NES copy]";
+
+                  ds.ins[ds.ins.size() - 1]->type = DIV_INS_NES;
+
+                  ins_nes_conv[i][0] = i;
+                  ins_nes_conv[i][1] = ds.ins.size() - 1;
+
+                  go_to_end = true;
+                }
+
+                if(go_to_end)
+                {
+                  goto end3;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      end3:;
     }
 
     for(int i = 0; i < 256; i++)
     {
-      if(ins_vrc6_conv[i][0] != -1 || ins_vrc6_saw_conv[i][0] != -1)
+      if(ins_vrc6_conv[i][0] != -1 || ins_vrc6_saw_conv[i][0] != -1 || ins_nes_conv[i][0] != -1)
       {
         for (int ii=0; ii<total_chans; ii++) 
         {
@@ -2366,6 +2458,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                 {
                   ds.subsong[j]->pat[ii].data[k]->data[l][2] = ins_vrc6_saw_conv[i][1];
                 }
+
+                if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == ins_nes_conv[i][0] && (ii == mmc5_chans[0] || ii == mmc5_chans[1] || ii < 5))
+                {
+                  ds.subsong[j]->pat[ii].data[k]->data[l][2] = ins_nes_conv[i][1];
+                }
               }
             }
           }
@@ -2381,6 +2478,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
     ds.dontDisableVolSlideOnZero = true;
     ds.resetNesSweep = true;
+    ds.stopE1E2OnNoteOn = true;
 
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;
