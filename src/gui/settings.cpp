@@ -187,7 +187,8 @@ const char* opl3Cores[]={
 
 const char* esfmCores[]={
   "ESFMu",
-  "ESFMu (fast)"
+  "ESFMu (fast)##sgse",
+  NULL,
 };
 
 const char* pcspkrOutMethods[]={
@@ -1779,10 +1780,42 @@ void FurnaceGUI::drawSettings() {
           ImGui::Text("ESFM");
           ImGui::TableNextColumn();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          if (ImGui::Combo("##ESFMCore",&settings.esfmCore,esfmCores,2)) settingsChanged=true;
+          //if (ImGui::Combo("##ESFMCore",&settings.esfmCore,esfmCores,2)) settingsChanged=true;
+          if (ImGui::BeginCombo("##ESFMCore",_L(esfmCores[settings.esfmCore])))
+          {
+            int i = 0;
+            while(esfmCores[i])
+            {
+              if (ImGui::Selectable(_L(esfmCores[i])))
+              {
+                settings.esfmCore = i;
+                settingsChanged=true;
+              }
+
+              i++;
+            }
+
+            ImGui::EndCombo();
+          }
           ImGui::TableNextColumn();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          if (ImGui::Combo("##ESFMCoreRender",&settings.esfmCoreRender,esfmCores,2)) settingsChanged=true;
+          //if (ImGui::Combo("##ESFMCoreRender",&settings.esfmCoreRender,esfmCores,2)) settingsChanged=true;
+          if (ImGui::BeginCombo("##ESFMCoreRender",_L(esfmCores[settings.esfmCoreRender])))
+          {
+            int i = 0;
+            while(esfmCores[i])
+            {
+              if (ImGui::Selectable(_L(esfmCores[i])))
+              {
+                settings.esfmCoreRender = i;
+                settingsChanged=true;
+              }
+
+              i++;
+            }
+
+            ImGui::EndCombo();
+          }
 
           ImGui::EndTable();
         }

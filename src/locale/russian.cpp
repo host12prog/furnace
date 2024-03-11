@@ -111,7 +111,7 @@ void DivLocale::addTranslationsRussian()
     strings["SM8521 emulator (modified version) by cam900##sgab"].plurals[0] = "Эмулятор SM8521 (модифицированная версия) за авторством cam900";
     strings["D65010G031 emulator (modified version) by cam900##sgab"].plurals[0] = "Эмулятор D65010G031 (модифицированная версия) за авторством cam900";
     strings["Namco C140/C219 emulator (modified version) by cam900##sgab"].plurals[0] = "Эмулятор C140/C219 (модифицированная версия) за авторством cam900";
-    strings["ESFMu emulator by Kagamiin~##sgab"].plurals[0] = "Эмулятор ESFMu за авторством Kagamiin~";
+    strings["ESFMu emulator (modified version) by Kagamiin~##sgab"].plurals[0] = "Эмулятор ESFMu (модифицированная версия) за авторством Kagamiin~";
     strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] = "Эмулятор PowerNoise за авторством scratchminer";
     strings["ep128emu by Istvan Varga##sgab"].plurals[0] = "ep128emu за авторством Istvan Varga";
     strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] = "эмулятор SID2 (модификация reSID) за авторством LTVA";
@@ -2245,6 +2245,8 @@ void DivLocale::addTranslationsRussian()
     strings["Bankswitched (NMK112)##sgsc"].plurals[0] = "Смена банков (NMK112)";
     strings["Clock rate:##sgsc12"].plurals[0] = "Тактовая частота:";
     strings["1.5MHz (Arcade)##sgsc"].plurals[0] = "1.5 МГц (Arcade)";
+    strings["Consistent frequency across all duties##sgsc"].plurals[0] = "Стабильная частота для всех скважностей";
+    strings["note: only works for an initial LFSR value of 0!##sgsc"].plurals[0] = "примечание: работает только для нулевого начального состояния РСЛОС!";
     strings["Clock rate:##sgsc13"].plurals[0] = "Тактовая частота:";
     strings["Clock rate:##sgsc14"].plurals[0] = "Тактовая частота:";
     strings["Chip type:##sgsc4"].plurals[0] = "Тип чипа:";
@@ -2519,6 +2521,7 @@ void DivLocale::addTranslationsRussian()
     strings["High##sgse"].plurals[0] = "Высокое";
     strings["Low##sgse"].plurals[0] = "Низкое";
     strings["ASAP (C++ port)##sgse"].plurals[0] = "ASAP (портирован на C++)";
+    strings["ESFMu (fast)##sgse"].plurals[0] = "ESFMu (быстрый)";
     strings["KIOCSOUND on /dev/tty1##sgse"].plurals[0] = "KIOCSOUND в /dev/tty1";
     strings["KIOCSOUND on standard output##sgse"].plurals[0] = "KIOCSOUND в стандартном выводе";
     strings["Disabled/custom##sgse0"].plurals[0] = "Выкл./пользовательский";
@@ -3833,6 +3836,7 @@ void DivLocale::addTranslationsRussian()
     strings["Panning (left)##sgiLYNX"].plurals[0] = "Панорамирование (левый)";
     strings["Panning (right)##sgiLYNX"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiLYNX"].plurals[0] = "Сброс фазы";
+    strings["Load LFSR##sgiLYNX"].plurals[0] = "Загрузить в РСЛОС";
 
     //   sgi5232   src/gui/inst/msm5232.cpp
 

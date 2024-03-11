@@ -165,7 +165,7 @@ void DivLocale::addTranslationsTemplate()
     strings["SM8521 emulator (modified version) by cam900##sgab"].plurals[0] = "=SM8521 emulator (modified version) by cam900";
     strings["D65010G031 emulator (modified version) by cam900##sgab"].plurals[0] = "=D65010G031 emulator (modified version) by cam900";
     strings["Namco C140/C219 emulator (modified version) by cam900##sgab"].plurals[0] = "=Namco C140/C219 emulator (modified version) by cam900";
-    strings["ESFMu emulator by Kagamiin~##sgab"].plurals[0] = "=ESFMu emulator by Kagamiin~";
+    strings["ESFMu emulator (modified version) by Kagamiin~##sgab"].plurals[0] = "=ESFMu emulator (modified version) by Kagamiin~";
     strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] = "=PowerNoise emulator by scratchminer";
     strings["ep128emu by Istvan Varga##sgab"].plurals[0] = "=ep128emu by Istvan Varga";
     strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] = "=SID2 emulator (modification of reSID) by LTVA";
@@ -2299,6 +2299,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Bankswitched (NMK112)##sgsc"].plurals[0] = "=Bankswitched (NMK112)";
     strings["Clock rate:##sgsc12"].plurals[0] = "=Clock rate:";
     strings["1.5MHz (Arcade)##sgsc"].plurals[0] = "=1.5MHz (Arcade)";
+    strings["Consistent frequency across all duties##sgsc"].plurals[0] = "=Consistent frequency across all duties";
+    strings["note: only works for an initial LFSR value of 0!##sgsc"].plurals[0] = "=note: only works for an initial LFSR value of 0!";
     strings["Clock rate:##sgsc13"].plurals[0] = "=Clock rate:";
     strings["Clock rate:##sgsc14"].plurals[0] = "=Clock rate:";
     strings["Chip type:##sgsc4"].plurals[0] = "=Chip type:";
@@ -2551,6 +2553,7 @@ void DivLocale::addTranslationsTemplate()
     strings["High##sgse"].plurals[0] = "=High";
     strings["Low##sgse"].plurals[0] = "=Low";
     strings["ASAP (C++ port)##sgse"].plurals[0] = "=ASAP (C++ port)";
+    strings["ESFMu (fast)##sgse"].plurals[0] = "=ESFMu (fast)";
     strings["KIOCSOUND on /dev/tty1##sgse"].plurals[0] = "=KIOCSOUND on /dev/tty1";
     strings["KIOCSOUND on standard output##sgse"].plurals[0] = "=KIOCSOUND on standard output";
     strings["Disabled/custom##sgse0"].plurals[0] = "=Disabled/custom";
@@ -3936,6 +3939,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Panning (left)##sgiLYNX"].plurals[0] = "=Panning (left)";
     strings["Panning (right)##sgiLYNX"].plurals[0] = "=Panning (right)";
     strings["Phase Reset##sgiLYNX"].plurals[0] = "=Phase Reset";
+    strings["Load LFSR##sgiLYNX"].plurals[0] = "=Load LFSR";
 
     //   sgi5232   src/gui/inst/msm5232.cpp
 
