@@ -54,14 +54,47 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
     if(friendly)
     {
       ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-      if (ImGui::BeginCombo("##filtModes",friendly_filter_modes[ins->es5506.filter.mode]))
+      if (ImGui::BeginCombo("##filtModes",friendly_filter_modes[ins->es5506.filter.virtual_filter_mode]))
       {
         int j = 0;
         while(friendly_filter_modes[j])
         {
           if (ImGui::Selectable(friendly_filter_modes[j]))
           {
-            ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)j;
+            //ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)j;
+            ins->es5506.filter.virtual_filter_mode = j;
+
+            switch(j)
+            {
+              case 6:
+              case 9: //nice?
+              {
+                ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)0;
+                break;
+              }
+              case 5:
+              case 10:
+              {
+                ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)1;
+                break;
+              }
+              case 0:
+              case 2:
+              case 4:
+              case 7:
+              {
+                ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)2;
+                break;
+              }
+              case 1:
+              case 3:
+              case 8:
+              {
+                ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)3;
+                break;
+              }
+              default: break;
+            }
           }
 
           j++;

@@ -206,6 +206,7 @@ bool DivInstrumentSoundUnit::operator==(const DivInstrumentSoundUnit& other) {
 bool DivInstrumentES5506::operator==(const DivInstrumentES5506& other) {
   return (
     _C(filter.mode) &&
+    _C(filter.virtual_filter_mode) &&
     _C(filter.k1) &&
     _C(filter.k2) &&
     _C(envelope.ecount) &&

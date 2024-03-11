@@ -794,9 +794,11 @@ struct DivInstrumentES5506 {
       FILTER_MODE_LPK2_LPK1,
     };
     FilterMode mode;
+    unsigned char virtual_filter_mode;
     unsigned short k1, k2;
     Filter():
       mode(FILTER_MODE_LPK2_LPK1),
+      virtual_filter_mode(0),
       k1(0xffff),
       k2(0xffff) {}
   };
