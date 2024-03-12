@@ -5009,6 +5009,30 @@ void DivLocale::addTranslationsTemplate()
     strings["FFxx: Stop song##seen"].plurals[0] = "FFxx: =Stop song";
     strings["9xxx: Set sample offset*256##seen"].plurals[0] = "9xxx: =Set sample offset*256";
 
+    strings["on seek: %s"].plurals[0] = "=on seek: %s";
+    strings["on pre tell: %s"].plurals[0] = "=on pre tell: %s";
+    strings["file is empty"].plurals[0] = "=file is empty";
+    strings["on tell: %s"].plurals[0] = "=on tell: %s";
+    strings["ROM size mismatch, expected: %d bytes, was: %d"].plurals[0] = "=ROM size mismatch, expected: %d bytes, was: %d";
+    strings["on get size: %s"].plurals[0] = "=on get size: %s";
+    strings["on read: %s"].plurals[0] = "=on read: %s";
+    strings["invalid index"].plurals[0] = "=invalid index";
+    strings["max number of total channels is %d"].plurals[0] = "=max number of total channels is %d";
+    strings["max number of systems is %d"].plurals[0] = "=max number of systems is %d";
+    strings["cannot remove the last one"].plurals[0] = "=cannot remove the last one";
+    strings["source and destination are equal"].plurals[0] = "=source and destination are equal";
+    strings["invalid source index"].plurals[0] = "=invalid source index";
+    strings["invalid destination index"].plurals[0] = "=invalid destination index";
+    strings["too many wavetables!"].plurals[0] = "=too many wavetables!";
+    strings["could not seek to end: %s"].plurals[0] = "=could not seek to end: %s";
+    strings["could not determine file size: %s"].plurals[0] = "=could not determine file size: %s";
+    strings["file size is invalid!"].plurals[0] = "=file size is invalid!";
+    strings["could not seek to beginning: %s"].plurals[0] = "=could not seek to beginning: %s";
+    strings["could not read entire file: %s"].plurals[0] = "=could not read entire file: %s";
+    strings["invalid wavetable header/data!"].plurals[0] = "=invalid wavetable header/data!";
+    strings["premature end of file"].plurals[0] = "=premature end of file";
+    strings["too many samples!"].plurals[0] = "=too many samples!";
+
     //   sesd    src/engine/sysDef.cpp
 
     strings["help! what's going on!"].plurals[0] = "=help! what's going on!";

@@ -4904,6 +4904,30 @@ void DivLocale::addTranslationsRussian()
     strings["FFxx: Stop song##seen"].plurals[0] = "FFxx: Остановить трек";
     strings["9xxx: Set sample offset*256##seen"].plurals[0] = "9xxx: Начальное смещение сэмпла (xxx*256 шагов)";
 
+    strings["on seek: %s"].plurals[0] = "во время перехода по файлу: %s";
+    strings["on pre tell: %s"].plurals[0] = "перед запросом положения в файле: %s";
+    strings["file is empty"].plurals[0] = "пустой файл";
+    strings["on tell: %s"].plurals[0] = "во время запроса положения в файле: %s";
+    strings["ROM size mismatch, expected: %d bytes, was: %d"].plurals[0] = "несоответствие размера ROM, ожидалось: %d байт, на самом деле: %d";
+    strings["on get size: %s"].plurals[0] = "при запросе размера: %s";
+    strings["on read: %s"].plurals[0] = "при чтении: %s";
+    strings["invalid index"].plurals[0] = "недействительный индекс";
+    strings["max number of total channels is %d"].plurals[0] = "максимальное общее число каналов равно %d";
+    strings["max number of systems is %d"].plurals[0] = "максимальное число чипов/систем равно %d";
+    strings["cannot remove the last one"].plurals[0] = "не могу удалить последнюю";
+    strings["source and destination are equal"].plurals[0] = "системы совпадают";
+    strings["invalid source index"].plurals[0] = "недействительный индекс исходной системы";
+    strings["invalid destination index"].plurals[0] = "недействительный индекс системы назначения";
+    strings["too many wavetables!"].plurals[0] = "слишком много волновых таблиц!";
+    strings["could not seek to end: %s"].plurals[0] = "не смог перейти в конец файла: %s";
+    strings["could not determine file size: %s"].plurals[0] = "не смог определить размер файла: %s";
+    strings["file size is invalid!"].plurals[0] = "недействительный размер файла!";
+    strings["could not seek to beginning: %s"].plurals[0] = "не смог перейти в начало файла: %s";
+    strings["could not read entire file: %s"].plurals[0] = "не смог прочитать весь файл: %s";
+    strings["invalid wavetable header/data!"].plurals[0] = "недействительный заголовок/данные волновой таблицы!";
+    strings["premature end of file"].plurals[0] = "преждевременный конец файла";
+    strings["too many samples!"].plurals[0] = "слишком много сэмплов!";
+
     //   sesd    src/engine/sysDef.cpp
 
     strings["20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"].plurals[0] = "20xx: Режим канала (бит 0: меандр; бит 1: шум; бит 2: огибающая)";

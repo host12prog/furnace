@@ -45,6 +45,12 @@
 extern FurnaceGUI g;
 #endif
 
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 void process(void* u, float** in, float** out, int inChans, int outChans, unsigned int size) {
   ((DivEngine*)u)->nextBuf(in,out,inChans,outChans,size);
 }
@@ -333,43 +339,43 @@ int DivEngine::loadSampleROM(String path, ssize_t expectedSize, unsigned char*& 
   }
   if (fseek(f,0,SEEK_END)<0) {
     logE("size error: %s",strerror(errno));
-    lastError=fmt::sprintf("on seek: %s",strerror(errno));
+    lastError=fmt::sprintf(_LE("on seek: %s"),strerror(errno));
     fclose(f);
     return -1;
   }
   ssize_t len=ftell(f);
   if (len==(SIZE_MAX>>1)) {
     logE("could not get file length: %s",strerror(errno));
-    lastError=fmt::sprintf("on pre tell: %s",strerror(errno));
+    lastError=fmt::sprintf(_LE("on pre tell: %s"),strerror(errno));
     fclose(f);
     return -1;
   }
   if (len<1) {
     if (len==0) {
       logE("that file is empty!");
-      lastError="file is empty";
+      lastError=_LE("file is empty");
     } else {
       logE("tell error: %s",strerror(errno));
-      lastError=fmt::sprintf("on tell: %s",strerror(errno));
+      lastError=fmt::sprintf(_LE("on tell: %s"),strerror(errno));
     }
     fclose(f);
     return -1;
   }
   if (len!=expectedSize) {
     logE("ROM size mismatch, expected: %d bytes, was: %d bytes", expectedSize, len);
-    lastError=fmt::sprintf("ROM size mismatch, expected: %d bytes, was: %d", expectedSize, len);
+    lastError=fmt::sprintf(_LE("ROM size mismatch, expected: %d bytes, was: %d"), expectedSize, len);
     return -1;
   }
   if (fseek(f,0,SEEK_SET)<0) {
     logE("size error: %s",strerror(errno));
-    lastError=fmt::sprintf("on get size: %s",strerror(errno));
+    lastError=fmt::sprintf(_LE("on get size: %s"),strerror(errno));
     fclose(f);
     return -1;
   }
   unsigned char* file=new unsigned char[len];
   if (fread(file,1,(size_t)len,f)!=(size_t)len) {
     logE("read error: %s",strerror(errno));
-    lastError=fmt::sprintf("on read: %s",strerror(errno));
+    lastError=fmt::sprintf(_LE("on read: %s"),strerror(errno));
     fclose(f);
     delete[] file;
     return -1;
@@ -1017,11 +1023,11 @@ void DivEngine::delUnusedSamples() {
 
 bool DivEngine::changeSystem(int index, DivSystem which, bool preserveOrder) {
   if (index<0 || index>=song.systemLen) {
-    lastError="invalid index";
+    lastError=_LE("invalid index");
     return false;
   }
   if (chans-getChannelCount(song.system[index])+getChannelCount(which)>DIV_MAX_CHANS) {
-    lastError=fmt::sprintf("max number of total channels is %d",DIV_MAX_CHANS);
+    lastError=fmt::sprintf(_LE("max number of total channels is %d"),DIV_MAX_CHANS);
     return false;
   }
 
@@ -1072,11 +1078,11 @@ bool DivEngine::changeSystem(int index, DivSystem which, bool preserveOrder) {
 
 bool DivEngine::addSystem(DivSystem which) {
   if (song.systemLen>DIV_MAX_CHIPS) {
-    lastError=fmt::sprintf("max number of systems is %d",DIV_MAX_CHIPS);
+    lastError=fmt::sprintf(_LE("max number of systems is %d"),DIV_MAX_CHIPS);
     return false;
   }
   if (chans+getChannelCount(which)>DIV_MAX_CHANS) {
-    lastError=fmt::sprintf("max number of total channels is %d",DIV_MAX_CHANS);
+    lastError=fmt::sprintf(_LE("max number of total channels is %d"),DIV_MAX_CHANS);
     return false;
   }
   quitDispatch();
@@ -1122,11 +1128,11 @@ bool DivEngine::addSystem(DivSystem which) {
 
 bool DivEngine::cloneSystem(int index, bool add_chip_count, bool pat) {
   if (song.systemLen>=DIV_MAX_CHIPS) {
-    lastError=fmt::sprintf("max number of systems is %d",DIV_MAX_CHIPS);
+    lastError=fmt::sprintf(_LE("max number of systems is %d"),DIV_MAX_CHIPS);
     return false;
   }
   if (chans+getChannelCount(song.system[index])>DIV_MAX_CHANS) {
-    lastError=fmt::sprintf("max number of total channels is %d",DIV_MAX_CHANS);
+    lastError=fmt::sprintf(_LE("max number of total channels is %d"),DIV_MAX_CHANS);
     return false;
   }
   quitDispatch();
@@ -1226,11 +1232,11 @@ bool DivEngine::cloneSystem(int index, bool add_chip_count, bool pat) {
 // TODO: maybe issue with subsongs?
 bool DivEngine::removeSystem(int index, bool preserveOrder) {
   if (song.systemLen<=1) {
-    lastError="cannot remove the last one";
+    lastError=_LE("cannot remove the last one");
     return false;
   }
   if (index<0 || index>=song.systemLen) {
-    lastError="invalid index";
+    lastError=_LE("invalid index");
     return false;
   }
   int chanCount=chans;
@@ -1279,15 +1285,15 @@ bool DivEngine::removeSystem(int index, bool preserveOrder) {
 
 bool DivEngine::swapSystem(int src, int dest, bool preserveOrder) {
   if (src==dest) {
-    lastError="source and destination are equal";
+    lastError=_LE("source and destination are equal");
     return false;
   }
   if (src<0 || src>=song.systemLen) {
-    lastError="invalid source index";
+    lastError=_LE("invalid source index");
     return false;
   }
   if (dest<0 || dest>=song.systemLen) {
-    lastError="invalid destination index";
+    lastError=_LE("invalid destination index");
     return false;
   }
   //int chanCount=chans;
@@ -2666,7 +2672,7 @@ void DivEngine::addWaveUnsafe(bool local, int inst) {
   {
     if (song.ins[inst]->std.local_waves.size()>=256) 
     {
-      lastError="too many wavetables!";
+      lastError=_LE("too many wavetables!");
       return;
     }
   }
@@ -2674,7 +2680,7 @@ void DivEngine::addWaveUnsafe(bool local, int inst) {
   {
     if (song.wave.size()>=256) 
     {
-      lastError="too many wavetables!";
+      lastError=_LE("too many wavetables!");
       return;
     }
   }
@@ -2694,7 +2700,7 @@ void DivEngine::addWaveUnsafe(bool local, int inst) {
 
 int DivEngine::addWave() {
   if (song.wave.size()>=256) {
-    lastError="too many wavetables!";
+    lastError=_LE("too many wavetables!");
     return -1;
   }
   BUSY_BEGIN;
@@ -2712,7 +2718,7 @@ int DivEngine::addWave() {
 int DivEngine::addLocalWave(int inst) {
   DivInstrument* ins = song.ins[inst];
   if (ins->std.local_waves.size()>=256) {
-    lastError="too many wavetables!";
+    lastError=_LE("too many wavetables!");
     return -1;
   }
   BUSY_BEGIN;
@@ -2735,7 +2741,7 @@ int DivEngine::addLocalWave(int inst) {
 
 int DivEngine::addWavePtr(DivWavetable* which) {
   if (song.wave.size()>=256) {
-    lastError="too many wavetables!";
+    lastError=_LE("too many wavetables!");
     delete which;
     return -1;
   }
@@ -2753,7 +2759,7 @@ int DivEngine::addWavePtr(DivWavetable* which) {
 int DivEngine::addLocalWavePtr(int inst, DivWavetable* which) {
   DivInstrument* ins = song.ins[inst];
   if (ins->std.local_waves.size()>=256) {
-    lastError="too many wavetables!";
+    lastError=_LE("too many wavetables!");
     delete which;
     return -1;
   }
@@ -2778,35 +2784,35 @@ DivWavetable* DivEngine::waveFromFile(const char* path, bool addRaw) {
   ssize_t len;
   if (fseek(f,0,SEEK_END)!=0) {
     fclose(f);
-    lastError=fmt::sprintf("could not seek to end: %s",strerror(errno));
+    lastError=fmt::sprintf(_LE("could not seek to end: %s"),strerror(errno));
     return NULL;
   }
   len=ftell(f);
   if (len<0) {
     fclose(f);
-    lastError=fmt::sprintf("could not determine file size: %s",strerror(errno));
+    lastError=fmt::sprintf(_LE("could not determine file size: %s"),strerror(errno));
     return NULL;
   }
   if (len==(SIZE_MAX>>1)) {
     fclose(f);
-    lastError="file size is invalid!";
+    lastError=_LE("file size is invalid!");
     return NULL;
   }
   if (len==0) {
     fclose(f);
-    lastError="file is empty";
+    lastError=_LE("file is empty");
     return NULL;
   }
   if (fseek(f,0,SEEK_SET)!=0) {
     fclose(f);
-    lastError=fmt::sprintf("could not seek to beginning: %s",strerror(errno));
+    lastError=fmt::sprintf(_LE("could not seek to beginning: %s"),strerror(errno));
     return NULL;
   }
   buf=new unsigned char[len];
   if (fread(buf,1,len,f)!=(size_t)len) {
     logW("did not read entire wavetable file buffer!");
     delete[] buf;
-    lastError=fmt::sprintf("could not read entire file: %s",strerror(errno));
+    lastError=fmt::sprintf(_LE("could not read entire file: %s"),strerror(errno));
     return NULL;
   }
   fclose(f);
@@ -2832,7 +2838,7 @@ DivWavetable* DivEngine::waveFromFile(const char* path, bool addRaw) {
       reader.readS(); // reserved
       reader.seek(20,SEEK_SET);
       if (wave->readWaveData(reader,version)!=DIV_DATA_SUCCESS) {
-        lastError="invalid wavetable header/data!";
+        lastError=_LE("invalid wavetable header/data!");
         delete wave;
         delete[] buf;
         return NULL;
@@ -2903,7 +2909,7 @@ DivWavetable* DivEngine::waveFromFile(const char* path, bool addRaw) {
   } catch (EndOfFileException& e) {
     delete wave;
     delete[] buf;
-    lastError="premature end of file";
+    lastError=_LE("premature end of file");
     return NULL;
   }
   
@@ -3089,7 +3095,7 @@ void DivEngine::pasteWaves(int index, bool local, int inst) {
 
 int DivEngine::addSample() {
   if (song.sample.size()>=256) {
-    lastError="too many samples!";
+    lastError=_LE("too many samples!");
     return -1;
   }
   BUSY_BEGIN;
@@ -3111,7 +3117,7 @@ int DivEngine::addSample() {
 
 int DivEngine::addSamplePtr(DivSample* which) {
   if (song.sample.size()>=256) {
-    lastError="too many samples!";
+    lastError=_LE("too many samples!");
     delete which;
     return -1;
   }
