@@ -4286,6 +4286,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Volume##sgiPV"].plurals[0] = "=Volume";
     strings["Arpeggio##sgiPV"].plurals[0] = "=Arpeggio";
     strings["Pitch##sgiPV"].plurals[0] = "=Pitch";
+    strings["Raw Frequency##sgiPV"].plurals[0] = "=Raw Frequency";
 
     //   sgiQ      src/gui/inst/qsound.cpp
 
@@ -5492,6 +5493,7 @@ void DivLocale::addTranslationsTemplate()
     strings["a SoC with wavetable sound hardware.##sesd"].plurals[0] = "=a SoC with wavetable sound hardware.";
     strings["a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.##sesd"].plurals[0] = "=a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.";
     strings["10xx: Set ring modulation (0: disable, 1: enable)##sesd"].plurals[0] = "=10xx: Set ring modulation (0: disable, 1: enable)";
+    strings["11xx: Raw frequency (0-3E)##sesd"].plurals[0] = "=11xx: Raw frequency (0-3E)";
     strings["ZX Spectrum Beeper (QuadTone Engine)##sesd"].plurals[0] = "=ZX Spectrum Beeper (QuadTone Engine)";
     strings["another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.##sesd"].plurals[0] = "=another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.";
     strings["12xx: Set pulse width##sesd1"].plurals[0] = "=12xx: Set pulse width";

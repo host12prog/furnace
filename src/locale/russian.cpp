@@ -4183,6 +4183,7 @@ void DivLocale::addTranslationsRussian()
     strings["Volume##sgiPV"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiPV"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiPV"].plurals[0] = "Частота";
+    strings["Raw Frequency##sgiPV"].plurals[0] = "Частота (регистровое знач.)";
 
     //   sgiQ      src/gui/inst/qsound.cpp
 
@@ -5350,6 +5351,7 @@ void DivLocale::addTranslationsRussian()
     strings["a SoC with wavetable sound hardware.##sesd"].plurals[0] = "СнК с таблично-волновым синтезатором звука.";
     strings["a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.##sesd"].plurals[0] = "игровая консоль с тремя каналами квадратных волн. вот что получается, если скрестить TIA и VIC.";
     strings["10xx: Set ring modulation (0: disable, 1: enable)##sesd"].plurals[0] = "10xx: Кольцевая модуляция (0: выкл., 1: вкл.)";
+    strings["11xx: Raw frequency (0-3E)##sesd"].plurals[0] = "11xx: Сырая частота (0-3E)";
     strings["another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.##sesd"].plurals[0] = "ещё одна система с пищалкой ZX Spectrum, на этот раз содержащая полноценные прямоугольные волны с регулировкой скважности и тремя уровнями громкости для каждого канала. Также имеется перекрывающий канал сэмплов с регулировкой частоты.";
     strings["12xx: Set pulse width##sesd1"].plurals[0] = "12xx: Скважность";
     strings["this PCM chip was widely used at Konami arcade boards in 1990-1992.##sesd"].plurals[0] = "этот ИКМ чип широко использовался в игровых автоматах Konami с 1990 по 1992.";
