@@ -4927,6 +4927,7 @@ void DivLocale::addTranslationsRussian()
     strings["invalid wavetable header/data!"].plurals[0] = "недействительный заголовок/данные волновой таблицы!";
     strings["premature end of file"].plurals[0] = "преждевременный конец файла";
     strings["too many samples!"].plurals[0] = "слишком много сэмплов!";
+    strings["no free patterns in channel %d!"].plurals[0] = "нет свободных паттернов для канала %d!";
 
     //   sesd    src/engine/sysDef.cpp
 

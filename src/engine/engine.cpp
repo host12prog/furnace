@@ -3247,7 +3247,7 @@ void DivEngine::deepCloneOrder(int pos, bool where) {
       }
     }
     if (didNotFind) {
-      addWarning(fmt::sprintf("no free patterns in channel %d!",i));
+      addWarning(fmt::sprintf(_LE("no free patterns in channel %d!"),i));
     }
   }
   if (where) { // at the end

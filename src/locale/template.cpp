@@ -5032,6 +5032,7 @@ void DivLocale::addTranslationsTemplate()
     strings["invalid wavetable header/data!"].plurals[0] = "=invalid wavetable header/data!";
     strings["premature end of file"].plurals[0] = "=premature end of file";
     strings["too many samples!"].plurals[0] = "=too many samples!";
+    strings["no free patterns in channel %d!"].plurals[0] = "=no free patterns in channel %d!";
 
     //   sesd    src/engine/sysDef.cpp
 
