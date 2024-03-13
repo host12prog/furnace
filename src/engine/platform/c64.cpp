@@ -198,7 +198,7 @@ void DivPlatformC64::tick(bool sysTick) {
       }
       chan[i].freqChanged=true;
     }
-    if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) { // new cutoff macro
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had && (_i==2 || macroRace)) { // new cutoff macro
       DivInstrument* ins=parent->getIns(chan[i].ins,DIV_INS_C64);
       if (ins->c64.filterIsAbs) {
         filtCut=MIN(2047,chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val);
@@ -864,6 +864,7 @@ void DivPlatformC64::setFlags(const DivConfig& flags) {
   keyPriority=flags.getBool("keyPriority",true);
   no1EUpdate=flags.getBool("no1EUpdate",false);
   multiplyRel=flags.getBool("multiplyRel",false);
+  macroRace=flags.getBool("macroRace",false);
   testAD=((flags.getInt("testAttack",0)&15)<<4)|(flags.getInt("testDecay",0)&15);
   testSR=((flags.getInt("testSustain",0)&15)<<4)|(flags.getInt("testRelease",0)&15);
   initResetTime=flags.getInt("initResetTime",2);
