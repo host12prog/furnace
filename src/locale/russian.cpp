@@ -2171,6 +2171,7 @@ void DivLocale::addTranslationsRussian()
     strings["- 0 disables envelope reset. not recommended!\n- 1 may trigger SID envelope bugs.\n- values that are too high may result in notes being skipped.##sgsc"].plurals[0] = "- 0 отключает сброс огибающей. не рекомендуется!\n- 1 может привести к появлению сбоев огибающей SID.\n- слишком большие значения могут привести к пропуску коротких нот.";
     strings["Disable 1Exy env update (compatibility)##sgsc"].plurals[0] = "Отключить обновление огибающей при применении эффекта 1Exy (совместимость)";
     strings["Relative duty and cutoff macros are coarse (compatibility)##sgsc"].plurals[0] = "Макросы скважности и частоты среза в относительном режиме имеют меньшее разрешение (совместимость)";
+    strings["Cutoff macro race conditions (compatibility)##sgsc"].plurals[0] = "Состояние гонки макроса скважности (совместимость)";
     strings["Disable ExtCh FM macros (compatibility)##sgsc1"].plurals[0] = "Отключить FM-макросы для расширенного канала (совместимость)";
     strings["Ins change in ExtCh operator 2-4 affects FB (compatibility)##sgsc1"].plurals[0] = "Смена инструмента на операторах 2-4 расш. канала меняет FB (совместимость)";
     strings["SSG Volume##sgsc0"].plurals[0] = "Громкость SSG";

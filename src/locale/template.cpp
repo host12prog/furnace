@@ -2225,6 +2225,7 @@ void DivLocale::addTranslationsTemplate()
     strings["- 0 disables envelope reset. not recommended!\n- 1 may trigger SID envelope bugs.\n- values that are too high may result in notes being skipped.##sgsc"].plurals[0] = "=- 0 disables envelope reset. not recommended!\n- 1 may trigger SID envelope bugs.\n- values that are too high may result in notes being skipped.";
     strings["Disable 1Exy env update (compatibility)##sgsc"].plurals[0] = "=Disable 1Exy env update (compatibility)";
     strings["Relative duty and cutoff macros are coarse (compatibility)##sgsc"].plurals[0] = "=Relative duty and cutoff macros are coarse (compatibility)";
+    strings["Cutoff macro race conditions (compatibility)##sgsc"].plurals[0] = "Cutoff macro race conditions (compatibility)";
     strings["Disable ExtCh FM macros (compatibility)##sgsc1"].plurals[0] = "=Disable ExtCh FM macros (compatibility)";
     strings["Ins change in ExtCh operator 2-4 affects FB (compatibility)##sgsc1"].plurals[0] = "=Ins change in ExtCh operator 2-4 affects FB (compatibility)";
     strings["SSG Volume##sgsc0"].plurals[0] = "=SSG Volume";

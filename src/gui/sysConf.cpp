@@ -671,7 +671,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
         altered=true;
       }
 
-      if (ImGui::Checkbox("Cutoff macro race conditions (compatibility)",&macroRace)) {
+      if (ImGui::Checkbox(_L("Cutoff macro race conditions (compatibility)##sgsc"),&macroRace)) {
         altered=true;
       }
 
