@@ -114,7 +114,7 @@ const int ftEffectMap[]={
   0x21, // 050B Sunsoft noise period
   -1, // VRC7 "custom patch port" - not supported?
   -1, // VRC7 "custom patch write"
-  -1, // delayed release - not supported yet
+  0xe7, // delayed release - not supported yet
   0x09, // select groove
   0xe6, // delayed note transpose
   0x11, // Namco 163 wave RAM offset
@@ -229,7 +229,7 @@ const int eftEffectMap[]={
   0x100,		// // // AY8930 extra volume bit
   -1, // VRC7 "custom patch port" - not supported?
   -1, // VRC7 "custom patch write"
-  -1, // delayed release - not supported yet
+  0xe7, // delayed release - not supported yet
   0x09, // select groove
   0xe6, // delayed note transpose
   0x11, // Namco 163 wave RAM offset
@@ -237,15 +237,15 @@ const int eftEffectMap[]={
   -1, // FDS auto FM - not supported yet
   -1, // phase reset - not supported
   -1, // harmonic - not supported
-  -1,								// // // Pulse width modulation effect
-  -1,     // // // Relative volume change
-  -1,    // // // SAA1099 noise mode
+  -1,	// // // Pulse width modulation effect
+  -1, // // // Relative volume change
+  -1, // // // SAA1099 noise mode
   0x13, // // // SID filter resonance
   0x40, // // // SID filter cutoff hi
   0x40, // // // SID filter cutoff lo
   0x14, // // // SID filter mode
-  -1,    // // // SID envelope parameters
-  -1,        // // // SID ringmod
+  -1,   // // // SID envelope parameters
+  -1,   // // // SID ringmod
 };
 
 const int eff_conversion_050[][2] = 
@@ -2510,9 +2510,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     ds.sampleLen = ds.sample.size();
     ds.waveLen = ds.wave.size();
 
+    //set compat flags
     ds.dontDisableVolSlideOnZero = true;
     ds.resetNesSweep = true;
     ds.stopE1E2OnNoteOn = true;
+    ds.slowerVolSlide = true;
 
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;

@@ -291,7 +291,7 @@ void DivLocale::addTranslationsRussian()
     strings["accept 0B+0D to jump to a specific row of an order##sgcf"].plurals[0] = "принять 0B+0D как прыжок на конкретную строку паттерна на конкретной позиции матрицы паттернов";
     strings["Other##sgcf"].plurals[0] = "Другое";
     strings["Auto-insert one tick gap between notes##sgcf"].plurals[0] = "Автоматически вставлять паузу в 1 шаг движка между нотами";
-    strings["when enabled, a one-tick note cut will be inserted between non-legato/non-portamento notes.\nthis simulates the behavior of some Amiga/SNES music engines.\n\nineffective on C64.##sgcf"].plurals[0] = "при включении этого флага между нотами без эффекта легато и авто-портаменто будет вставлено заглушение ноты длиной в один шаг движка.\nэто симуляция повдения некоторых музыкальных драйверов Amiga/SNES.\n\nничего не меняет для C64.";
+    strings["when enabled, a one-tick note cut will be inserted between non-legato/non-portamento notes.\nthis simulates the behavior of some Amiga/SNES music engines.\n\nineffective on C64.##sgcf"].plurals[0] = "при включении этого флага между нотами без эффекта легато и авто-портаменто будет вставлено заглушение ноты длиной в один шаг движка.\nэто симуляция поведения некоторых музыкальных драйверов Amiga/SNES.\n\nничего не меняет для C64.";
     strings["Don't reset slides after note off##sgcf"].plurals[0] = "Не переинициализировать авто-портаменто после окончания ноты";
     strings["when enabled, note off will not reset the channel's slide effect.##sgcf"].plurals[0] = "при включении этого флага окончание ноты не будет останавливать авто-портаменто на этом канале.";
     strings["Don't reset portamento after reaching target##sgcf"].plurals[0] = "Не переинициализировать авто-портаменто после достижения цели";
@@ -307,6 +307,7 @@ void DivLocale::addTranslationsRussian()
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "Останавливать аппаратное портаменто на каналах импульсов NES при начале новой ноты";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "Не останавливать эффект изменения громкости при достижении нулевой или максимальной громкости";
     strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Останавливать эффекты E1xy/E2xy на новой ноте";
+    strings["Slower 0Axy volume slide##sgcf"].plurals[0] = "Замедление изменения громкости эффектом 0Axy";
 
     //   sgcs  src/gui/csPlayer.cpp
 
@@ -4882,6 +4883,7 @@ void DivLocale::addTranslationsRussian()
     strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: Установить глубину вибрато";
     strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: Расстройка (80: без расстройки)";
     strings["E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen"].plurals[0] = "E6xy: Отложенное транспонирование ноты (x: 0-7 = вверх, 8-F = вниз (после (x % 7) шагов движка); y: полутонов)";
+    strings["E7xx: Delayed note release##seen"].plurals[0] = "E7xx: Отложенный релиз";
     strings["EAxx: Legato##seen"].plurals[0] = "EAxx: Легато";
     strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: (СОВМЕСТИМОСТЬ) Установить банк сэмплов";
     strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: Заглушить ноту";
