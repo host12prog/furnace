@@ -24,6 +24,17 @@
 #include <fmt/printf.h>
 #include <limits.h>
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 enum DivInsFormats {
   DIV_INSFORMAT_DMP,
   DIV_INSFORMAT_TFI,
@@ -99,7 +110,7 @@ std::vector<DivInstrument*> DivEngine::instrumentFromFile(const char* path, bool
   buf=new unsigned char[len];
   if (fread(buf,1,len,f)!=(size_t)len) {
     logW("did not read entire instrument file buffer!");
-    lastError="did not read entire instrument file!";
+    lastError=_LE("did not read entire instrument file!");
     delete[] buf;
     return ret;
   }
@@ -145,7 +156,7 @@ std::vector<DivInstrument*> DivEngine::instrumentFromFile(const char* path, bool
       }
 
       if (version>DIV_ENGINE_VERSION) {
-        warnings="this instrument is made with a more recent version of Furnace!";
+        warnings=_LE("this instrument is made with a more recent version of Furnace!");
       }
 
       if (isOldFurnaceIns) {
@@ -156,7 +167,7 @@ std::vector<DivInstrument*> DivEngine::instrumentFromFile(const char* path, bool
       ins->name=stripPath;
 
       if (ins->readInsData(reader,version,loadAssets?(&song):NULL)!=DIV_DATA_SUCCESS) {
-        lastError="invalid instrument header/data!";
+        lastError=_LE("invalid instrument header/data!");
         delete ins;
         delete[] buf;
         return ret;
@@ -167,7 +178,7 @@ std::vector<DivInstrument*> DivEngine::instrumentFromFile(const char* path, bool
         ret.push_back(ins);
       }
     } catch (EndOfFileException& e) {
-      lastError="premature end of file";
+      lastError=_LE("premature end of file");
       logE("premature end of file");
       delete ins;
       delete[] buf;
@@ -219,7 +230,7 @@ std::vector<DivInstrument*> DivEngine::instrumentFromFile(const char* path, bool
         format=DIV_INSFORMAT_WOPN;
       } else {
         // unknown format
-        lastError="unknown instrument format";
+        lastError=_LE("unknown instrument format");
         delete[] buf;
         return ret;
       }
@@ -276,8 +287,8 @@ std::vector<DivInstrument*> DivEngine::instrumentFromFile(const char* path, bool
 
     if (reader.tell()<reader.size()) {
       addWarning("https://github.com/tildearrow/furnace/issues/84");
-      addWarning("there is more data at the end of the file! what happened here!");
-      addWarning(fmt::sprintf("exactly %d bytes, if you are curious",reader.size()-reader.tell()));
+      addWarning(_LE("there is more data at the end of the file! what happened here!"));
+      addWarning(fmt::sprintf(_LE("exactly %d bytes, if you are curious"),reader.size()-reader.tell()));
     }
   }
 

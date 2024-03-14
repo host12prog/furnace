@@ -4977,6 +4977,30 @@ void DivLocale::addTranslationsRussian()
     strings["maximum number of wavetables is 256"].plurals[0] = "максимальное число волновых таблиц равно 256";
     strings["maximum number of samples is 256"].plurals[0] = "максимальное число сэмплов равно 256";
 
+    //           src/engine/fileOpsIns.cpp
+
+    strings["did not read entire instrument file!"].plurals[0] = "не смог прочитать весь файл инструмента!";
+    strings["this instrument is made with a more recent version of Furnace!"].plurals[0] = "этот инструмент был создан в более новой версии Furnace!";
+    strings["unknown instrument format"].plurals[0] = "неизвестный формат инструмента";
+    strings["there is more data at the end of the file! what happened here!"].plurals[0] = "в конце файла содержатся ещё данные! что происходит!";
+    strings["exactly %d bytes, if you are curious"].plurals[0] = "а именно %d байт, если вам интересно";
+
+    //           src/engine/fileOpsSample.cpp
+
+    strings["could not open file! (%s)"].plurals[0] = "не смог открыть файл! (%s)";
+    strings["could not get file length! (%s)"].plurals[0] = "не смог определить длину файла! (%s)";
+    strings["file is empty!"].plurals[0] = "файл пустой!";
+    strings["file is invalid!"].plurals[0] = "файл повреждён/слишком большой!";
+    strings["could not seek to beginning of file! (%s)"].plurals[0] = "не смог перейти к началу файла! (%s)";
+    strings["wait... is that right? no I don't think so..."].plurals[0] = "подождите... так вообще правильно? нет, я так не думаю...";
+    strings["BRR sample is empty!"].plurals[0] = "BRR-сэмпл пуст!";
+    strings["possibly corrupt BRR sample!"].plurals[0] = "BRR-сэмпл, возможно, повреждён!";
+    strings["could not read file! (%s)"].plurals[0] = "не смог прочитать файл! (%s)";
+    strings["Furnace was not compiled with libsndfile!"].plurals[0] = "Furnace не был скомпилирован с libsndfile!";
+    strings["could not open file! (%s %s)"].plurals[0] = "не смог открыть файл! (%s %s)";
+    strings["could not open file! (%s)\nif this is raw sample data, you may import it by right-clicking the Load Sample icon and selecting \"import raw\"."].plurals[0] = "не смог открыть файл! (%s)\nесли это сырые данные сэмпла, попробуйте импортировать их: ПКМ по иконке \"Открыть\" в списке сэмплов, выберите \"импорт сырых данных\".";
+    strings["this sample is too big! max sample size is 16777215."].plurals[0] = "сэмпл слишком большой! максимальный размер сэмпла 16777215.";
+
     //   sesd    src/engine/sysDef.cpp
 
     strings["20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"].plurals[0] = "20xx: Режим канала (бит 0: меандр; бит 1: шум; бит 2: огибающая)";

@@ -5082,6 +5082,30 @@ void DivLocale::addTranslationsTemplate()
     strings["maximum number of wavetables is 256"].plurals[0] = "=maximum number of wavetables is 256";
     strings["maximum number of samples is 256"].plurals[0] = "=maximum number of samples is 256";
 
+    //           src/engine/fileOpsIns.cpp
+
+    strings["did not read entire instrument file!"].plurals[0] = "=did not read entire instrument file!";
+    strings["this instrument is made with a more recent version of Furnace!"].plurals[0] = "=this instrument is made with a more recent version of Furnace!";
+    strings["unknown instrument format"].plurals[0] = "=unknown instrument format";
+    strings["there is more data at the end of the file! what happened here!"].plurals[0] = "=there is more data at the end of the file! what happened here!";
+    strings["exactly %d bytes, if you are curious"].plurals[0] = "=exactly %d bytes, if you are curious";
+
+    //           src/engine/fileOpsSample.cpp
+
+    strings["could not open file! (%s)"].plurals[0] = "=could not open file! (%s)";
+    strings["could not get file length! (%s)"].plurals[0] = "=could not get file length! (%s)";
+    strings["file is empty!"].plurals[0] = "=file is empty!";
+    strings["file is invalid!"].plurals[0] = "=file is invalid!";
+    strings["could not seek to beginning of file! (%s)"].plurals[0] = "=could not seek to beginning of file! (%s)";
+    strings["wait... is that right? no I don't think so..."].plurals[0] = "=wait... is that right? no I don't think so...";
+    strings["BRR sample is empty!"].plurals[0] = "=BRR sample is empty!";
+    strings["possibly corrupt BRR sample!"].plurals[0] = "=possibly corrupt BRR sample!";
+    strings["could not read file! (%s)"].plurals[0] = "=could not read file! (%s)";
+    strings["Furnace was not compiled with libsndfile!"].plurals[0] = "=Furnace was not compiled with libsndfile!";
+    strings["could not open file! (%s %s)"].plurals[0] = "=could not open file! (%s %s)";
+    strings["could not open file! (%s)\nif this is raw sample data, you may import it by right-clicking the Load Sample icon and selecting \"import raw\"."].plurals[0] = "=could not open file! (%s)\nif this is raw sample data, you may import it by right-clicking the Load Sample icon and selecting \"import raw\".";
+    strings["this sample is too big! max sample size is 16777215."].plurals[0] = "=this sample is too big! max sample size is 16777215.";
+
     //   sesd    src/engine/sysDef.cpp
 
     strings["help! what's going on!"].plurals[0] = "=help! what's going on!";
