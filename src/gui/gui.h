@@ -2833,7 +2833,7 @@ class FurnaceGUI {
     bool detectOutOfBoundsWindow(SDL_Rect& failing);
     int processEvent(SDL_Event* ev);
     bool loop();
-    bool finish();
+    bool finish(bool saveConfig=false);
     bool init();
     bool requestQuit();
     FurnaceGUI();
