@@ -5034,6 +5034,54 @@ void DivLocale::addTranslationsTemplate()
     strings["too many samples!"].plurals[0] = "=too many samples!";
     strings["no free patterns in channel %d!"].plurals[0] = "=no free patterns in channel %d!";
 
+    //           src/engine/fileOps.cpp
+
+    strings["this module was created with a more recent version of Furnace!"].plurals[0] = "=this module was created with a more recent version of Furnace!";
+    strings["couldn't seek to info header!"].plurals[0] = "=couldn't seek to info header!";
+    strings["invalid info header!"].plurals[0] = "=invalid info header!";
+    strings["pattern length is negative!"].plurals[0] = "=pattern length is negative!";
+    strings["pattern length is too large!"].plurals[0] = "=pattern length is too large!";
+    strings["song length is negative!"].plurals[0] = "=song length is negative!";
+    strings["song is too long!"].plurals[0] = "=song is too long!";
+    strings["invalid instrument count!"].plurals[0] = "=invalid instrument count!";
+    strings["invalid wavetable count!"].plurals[0] = "=invalid wavetable count!";
+    strings["invalid sample count!"].plurals[0] = "=invalid sample count!";
+    strings["invalid pattern count!"].plurals[0] = "=invalid pattern count!";
+    strings["unrecognized system ID %.2x!"].plurals[0] = "=unrecognized system ID %.2x!";
+    strings["zero chips!"].plurals[0] = "=zero chips!";
+    strings["channel %d has too many effect columns! (%d)"].plurals[0] = "=channel %d has too many effect columns! (%d)";
+    strings["couldn't seek to chip %d flags!"].plurals[0] = "=couldn't seek to chip %d flags!";
+    strings["invalid flag header!"].plurals[0] = "=invalid flag header!";
+    strings["couldn't read instrument directory"].plurals[0] = "=couldn't read instrument directory";
+    strings["invalid instrument directory data!"].plurals[0] = "=invalid instrument directory data!";
+    strings["couldn't read wavetable directory"].plurals[0] = "=couldn't read wavetable directory";
+    strings["invalid wavetable directory data!"].plurals[0] = "=invalid wavetable directory data!";
+    strings["couldn't read sample directory"].plurals[0] = "=couldn't read sample directory";
+    strings["invalid sample directory data!"].plurals[0] = "=invalid sample directory data!";
+    strings["couldn't seek to subsong %d!"].plurals[0] = "=couldn't seek to subsong %d!";
+    strings["invalid subsong header!"].plurals[0] = "=invalid subsong header!";
+    strings["couldn't seek to instrument %d!"].plurals[0] = "=couldn't seek to instrument %d!";
+    strings["invalid instrument header/data!"].plurals[0] = "=invalid instrument header/data!";
+    strings["couldn't seek to wavetable %d!"].plurals[0] = "=couldn't seek to wavetable %d!";
+    strings["couldn't seek to sample %d!"].plurals[0] = "=couldn't seek to sample %d!";
+    strings["invalid sample header/data!"].plurals[0] = "=invalid sample header/data!";
+    strings["couldn't seek to pattern in %x!"].plurals[0] = "=couldn't seek to pattern in %x!";
+    strings["invalid pattern header!"].plurals[0] = "=invalid pattern header!";
+    strings["pattern channel out of range!"].plurals[0] = "=pattern channel out of range!";
+    strings["pattern index out of range!"].plurals[0] = "=pattern index out of range!";
+    strings["pattern subsong out of range!"].plurals[0] = "=pattern subsong out of range!";
+    strings["incomplete file"].plurals[0] = "=incomplete file";
+    strings["file is too small"].plurals[0] = "=file is too small";
+    strings["not a .dmf/.fur/.fub song"].plurals[0] = "=not a .dmf/.fur/.fub song";
+    strings["unknown decompression error"].plurals[0] = "=unknown decompression error";
+    strings["decompression error: %s"].plurals[0] = "=decompression error: %s";
+    strings["unknown decompression finish error"].plurals[0] = "=unknown decompression finish error";
+    strings["decompression finish error: %s"].plurals[0] = "=decompression finish error: %s";
+    strings["not a compatible song/instrument"].plurals[0] = "=not a compatible song/instrument";
+    strings["maximum number of instruments is 256"].plurals[0] = "=maximum number of instruments is 256";
+    strings["maximum number of wavetables is 256"].plurals[0] = "=maximum number of wavetables is 256";
+    strings["maximum number of samples is 256"].plurals[0] = "=maximum number of samples is 256";
+
     //   sesd    src/engine/sysDef.cpp
 
     strings["help! what's going on!"].plurals[0] = "=help! what's going on!";

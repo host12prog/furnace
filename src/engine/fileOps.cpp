@@ -26,6 +26,17 @@
 #include <zlib.h>
 #include <fmt/printf.h>
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 struct InflateBlock {
   unsigned char* buf;
   size_t len;
@@ -681,7 +692,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
     if (!reader.seek(16,SEEK_SET)) {
       logE("premature end of file!");
-      lastError="incomplete file";
+      lastError=_LE("incomplete file");
       delete[] file;
       return false;
     }
@@ -690,7 +701,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
     if (ds.version>DIV_ENGINE_VERSION) {
       logW("this module was created with a more recent version of Furnace!");
-      addWarning("this module was created with a more recent version of Furnace!");
+      addWarning(_LE("this module was created with a more recent version of Furnace!"));
     }
 
     if (ds.version<37) { // compat flags not stored back then
@@ -831,7 +842,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
     if (!reader.seek(infoSeek,SEEK_SET)) {
       logE("couldn't seek to info header at %d!",infoSeek);
-      lastError="couldn't seek to info header!";
+      lastError=_LE("couldn't seek to info header!");
       delete[] file;
       return false;
     }
@@ -840,7 +851,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
     reader.read(magic,4);
     if (strcmp(magic,"INFO")!=0) {
       logE("invalid info header!");
-      lastError="invalid info header!";
+      lastError=_LE("invalid info header!");
       delete[] file;
       return false;
     }
@@ -866,49 +877,49 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
     if (subSong->patLen<0) {
       logE("pattern length is negative!");
-      lastError="pattern lengrh is negative!";
+      lastError=_LE("pattern length is negative!");
       delete[] file;
       return false;
     }
     if (subSong->patLen>DIV_MAX_ROWS) {
       logE("pattern length is too large!");
-      lastError="pattern length is too large!";
+      lastError=_LE("pattern length is too large!");
       delete[] file;
       return false;
     }
     if (subSong->ordersLen<0) {
       logE("song length is negative!");
-      lastError="song length is negative!";
+      lastError=_LE("song length is negative!");
       delete[] file;
       return false;
     }
     if (subSong->ordersLen>DIV_MAX_PATTERNS) {
       logE("song is too long!");
-      lastError="song is too long!";
+      lastError=_LE("song is too long!");
       delete[] file;
       return false;
     }
     if (ds.insLen<0 || ds.insLen>256) {
       logE("invalid instrument count!");
-      lastError="invalid instrument count!";
+      lastError=_LE("invalid instrument count!");
       delete[] file;
       return false;
     }
     if (ds.waveLen<0 || ds.waveLen>256) {
       logE("invalid wavetable count!");
-      lastError="invalid wavetable count!";
+      lastError=_LE("invalid wavetable count!");
       delete[] file;
       return false;
     }
     if (ds.sampleLen<0 || ds.sampleLen>256) {
       logE("invalid sample count!");
-      lastError="invalid sample count!";
+      lastError=_LE("invalid sample count!");
       delete[] file;
       return false;
     }
     if (numberOfPats<0) {
       logE("invalid pattern count!");
-      lastError="invalid pattern count!";
+      lastError=_LE("invalid pattern count!");
       delete[] file;
       return false;
     }
@@ -921,7 +932,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       logD("- %d: %.2x (%s)",i,sysID,getSystemName(ds.system[i]));
       if (sysID!=0 && systemToFileFur(ds.system[i])==0) {
         logE("unrecognized system ID %.2x",sysID);
-        lastError=fmt::sprintf("unrecognized system ID %.2x!",sysID);
+        lastError=fmt::sprintf(_LE("unrecognized system ID %.2x!"),sysID);
         delete[] file;
         return false;
       }
@@ -938,7 +949,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
     logV("system len: %d",ds.systemLen);
     if (ds.systemLen<1) {
       logE("zero chips!");
-      lastError="zero chips!";
+      lastError=_LE("zero chips!");
       delete[] file;
       return false;
     }
@@ -1125,7 +1136,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       subSong->pat[i].effectCols=reader.readC();
       if (subSong->pat[i].effectCols<1 || subSong->pat[i].effectCols>DIV_MAX_EFFECTS) {
         logE("channel %d has zero or too many effect columns! (%d)",i,subSong->pat[i].effectCols);
-        lastError=fmt::sprintf("channel %d has too many effect columns! (%d)",i,subSong->pat[i].effectCols);
+        lastError=fmt::sprintf(_LE("channel %d has too many effect columns! (%d)"),i,subSong->pat[i].effectCols);
         delete[] file;
         return false;
       }
@@ -1418,7 +1429,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
         if (!reader.seek(sysFlagsPtr[i],SEEK_SET)) {
           logE("couldn't seek to chip %d flags!",i+1);
-          lastError=fmt::sprintf("couldn't seek to chip %d flags!",i+1);
+          lastError=fmt::sprintf(_LE("couldn't seek to chip %d flags!"),i+1);
           ds.unload();
           delete[] file;
           return false;
@@ -1427,7 +1438,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
         reader.read(magic,4);
         if (strcmp(magic,"FLAG")!=0) {
           logE("%d: invalid flag header!",i);
-          lastError="invalid flag header!";
+          lastError=_LE("invalid flag header!");
           ds.unload();
           delete[] file;
           return false;
@@ -1450,13 +1461,13 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
       if (!reader.seek(assetDirPtr[0],SEEK_SET)) {
         logE("couldn't seek to ins dir!");
-        lastError=fmt::sprintf("couldn't read instrument directory");
+        lastError=fmt::sprintf(_LE("couldn't read instrument directory"));
         ds.unload();
         delete[] file;
         return false;
       }
       if (readAssetDirData(reader,ds.insDir)!=DIV_DATA_SUCCESS) {
-        lastError="invalid instrument directory data!";
+        lastError=_LE("invalid instrument directory data!");
         ds.unload();
         delete[] file;
         return false;
@@ -1464,13 +1475,13 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
       if (!reader.seek(assetDirPtr[1],SEEK_SET)) {
         logE("couldn't seek to wave dir!");
-        lastError=fmt::sprintf("couldn't read wavetable directory");
+        lastError=fmt::sprintf(_LE("couldn't read wavetable directory"));
         ds.unload();
         delete[] file;
         return false;
       }
       if (readAssetDirData(reader,ds.waveDir)!=DIV_DATA_SUCCESS) {
-        lastError="invalid wavetable directory data!";
+        lastError=_LE("invalid wavetable directory data!");
         ds.unload();
         delete[] file;
         return false;
@@ -1478,13 +1489,13 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
       if (!reader.seek(assetDirPtr[2],SEEK_SET)) {
         logE("couldn't seek to sample dir!");
-        lastError=fmt::sprintf("couldn't read sample directory");
+        lastError=fmt::sprintf(_LE("couldn't read sample directory"));
         ds.unload();
         delete[] file;
         return false;
       }
       if (readAssetDirData(reader,ds.sampleDir)!=DIV_DATA_SUCCESS) {
-        lastError="invalid sample directory data!";
+        lastError=_LE("invalid sample directory data!");
         ds.unload();
         delete[] file;
         return false;
@@ -1498,7 +1509,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
         ds.subsong.push_back(new DivSubSong);
         if (!reader.seek(subSongPtr[i],SEEK_SET)) {
           logE("couldn't seek to subsong %d!",i+1);
-          lastError=fmt::sprintf("couldn't seek to subsong %d!",i+1);
+          lastError=fmt::sprintf(_LE("couldn't seek to subsong %d!"),i+1);
           ds.unload();
           delete[] file;
           return false;
@@ -1507,7 +1518,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
         reader.read(magic,4);
         if (strcmp(magic,"SONG")!=0) {
           logE("%d: invalid subsong header!",i);
-          lastError="invalid subsong header!";
+          lastError=_LE("invalid subsong header!");
           ds.unload();
           delete[] file;
           return false;
@@ -1588,7 +1599,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       logD("reading instrument %d at %x...",i,insPtr[i]);
       if (!reader.seek(insPtr[i],SEEK_SET)) {
         logE("couldn't seek to instrument %d!",i);
-        lastError=fmt::sprintf("couldn't seek to instrument %d!",i);
+        lastError=fmt::sprintf(_LE("couldn't seek to instrument %d!"),i);
         ds.unload();
         delete ins;
         delete[] file;
@@ -1596,7 +1607,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       }
       
       if (ins->readInsData(reader,ds.version)!=DIV_DATA_SUCCESS) {
-        lastError="invalid instrument header/data!";
+        lastError=_LE("invalid instrument header/data!");
         ds.unload();
         delete ins;
         delete[] file;
@@ -1613,7 +1624,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       logD("reading wavetable %d at %x...",i,wavePtr[i]);
       if (!reader.seek(wavePtr[i],SEEK_SET)) {
         logE("couldn't seek to wavetable %d!",i);
-        lastError=fmt::sprintf("couldn't seek to wavetable %d!",i);
+        lastError=fmt::sprintf(_LE("couldn't seek to wavetable %d!"),i);
         ds.unload();
         delete wave;
         delete[] file;
@@ -1621,7 +1632,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       }
 
       if (wave->readWaveData(reader,ds.version)!=DIV_DATA_SUCCESS) {
-        lastError="invalid wavetable header/data!";
+        lastError=_LE("invalid wavetable header/data!");
         ds.unload();
         delete wave;
         delete[] file;
@@ -1638,7 +1649,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
       if (!reader.seek(samplePtr[i],SEEK_SET)) {
         logE("couldn't seek to sample %d!",i);
-        lastError=fmt::sprintf("couldn't seek to sample %d!",i);
+        lastError=fmt::sprintf(_LE("couldn't seek to sample %d!"),i);
         ds.unload();
         delete sample;
         delete[] file;
@@ -1646,7 +1657,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       }
 
       if (sample->readSampleData(reader,ds.version)!=DIV_DATA_SUCCESS) {
-        lastError="invalid sample header/data!";
+        lastError=_LE("invalid sample header/data!");
         ds.unload();
         delete sample;
         delete[] file;
@@ -1661,7 +1672,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       bool isNewFormat=false;
       if (!reader.seek(i,SEEK_SET)) {
         logE("couldn't seek to pattern in %x!",i);
-        lastError=fmt::sprintf("couldn't seek to pattern in %x!",i);
+        lastError=fmt::sprintf(_LE("couldn't seek to pattern in %x!"),i);
         ds.unload();
         delete[] file;
         return false;
@@ -1671,7 +1682,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       if (strcmp(magic,"PATR")!=0) {
         if (strcmp(magic,"PATN")!=0 || ds.version<157) {
           logE("%x: invalid pattern header!",i);
-          lastError="invalid pattern header!";
+          lastError=_LE("invalid pattern header!");
           ds.unload();
           delete[] file;
           return false;
@@ -1690,21 +1701,21 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
         if (chan<0 || chan>=tchans) {
           logE("pattern channel out of range!",i);
-          lastError="pattern channel out of range!";
+          lastError=_LE("pattern channel out of range!");
           ds.unload();
           delete[] file;
           return false;
         }
         if (index<0 || index>(DIV_MAX_PATTERNS-1)) {
           logE("pattern index out of range!",i);
-          lastError="pattern index out of range!";
+          lastError=_LE("pattern index out of range!");
           ds.unload();
           delete[] file;
           return false;
         }
         if (subs<0 || subs>=(int)ds.subsong.size()) {
           logE("pattern subsong out of range!",i);
-          lastError="pattern subsong out of range!";
+          lastError=_LE("pattern subsong out of range!");
           ds.unload();
           delete[] file;
           return false;
@@ -1779,21 +1790,21 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
         if (chan<0 || chan>=tchans) {
           logE("pattern channel out of range!",i);
-          lastError="pattern channel out of range!";
+          lastError=_LE("pattern channel out of range!");
           ds.unload();
           delete[] file;
           return false;
         }
         if (index<0 || index>(DIV_MAX_PATTERNS-1)) {
           logE("pattern index out of range!",i);
-          lastError="pattern index out of range!";
+          lastError=_LE("pattern index out of range!");
           ds.unload();
           delete[] file;
           return false;
         }
         if (subs<0 || subs>=(int)ds.subsong.size()) {
           logE("pattern subsong out of range!",i);
-          lastError="pattern subsong out of range!";
+          lastError=_LE("pattern subsong out of range!");
           ds.unload();
           delete[] file;
           return false;
@@ -2052,7 +2063,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
     }
   } catch (EndOfFileException& e) {
     logE("premature end of file!");
-    lastError="incomplete file";
+    lastError=_LE("incomplete file");
     delete[] file;
     return false;
   }
@@ -2065,7 +2076,7 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
   size_t len;
   if (slen<18) {
     logE("too small!");
-    lastError="file is too small";
+    lastError=_LE("file is too small");
     delete[] f;
     return false;
   }
@@ -2106,7 +2117,7 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
         logD("zlib error: %s",zl.msg);
       }
       inflateEnd(&zl);
-      lastError="not a .dmf/.fur song";
+      lastError=_LE("not a .dmf/.fur/.fub song");
       throw NotZlibException(0);
     }
 
@@ -2120,10 +2131,10 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
       if (nextErr!=Z_OK && nextErr!=Z_STREAM_END) {
         if (zl.msg==NULL) {
           logD("zlib error: unknown error! %d",nextErr);
-          lastError="unknown decompression error";
+          lastError=_LE("unknown decompression error");
         } else {
           logD("zlib inflate: %s",zl.msg);
-          lastError=fmt::sprintf("decompression error: %s",zl.msg);
+          lastError=fmt::sprintf(_LE("decompression error: %s"),zl.msg);
         }
         for (InflateBlock* i: blocks) delete i;
         blocks.clear();
@@ -2141,10 +2152,10 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
     if (nextErr!=Z_OK) {
       if (zl.msg==NULL) {
         logD("zlib end error: unknown error! %d",nextErr);
-        lastError="unknown decompression finish error";
+        lastError=_LE("unknown decompression finish error");
       } else {
         logD("zlib end: %s",zl.msg);
-        lastError=fmt::sprintf("decompression finish error: %s",zl.msg);
+        lastError=fmt::sprintf(_LE("decompression finish error: %s"),zl.msg);
       }
       for (InflateBlock* i: blocks) delete i;
       blocks.clear();
@@ -2158,7 +2169,7 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
     }
     if (finalSize<1) {
       logD("compressed too small!");
-      lastError="file too small";
+      lastError=_LE("file is too small");
       for (InflateBlock* i: blocks) delete i;
       blocks.clear();
       throw NotZlibException(0);
@@ -2201,7 +2212,7 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
   
   // step 4: not a valid file
   logE("not a valid module!");
-  lastError="not a compatible song/instrument";
+  lastError=_LE("not a compatible song/instrument");
   delete[] file;
   return false;
 }
@@ -2295,19 +2306,19 @@ SafeWriter* DivEngine::saveFur(bool notPrimary, bool newPatternFormat, bool tild
   */
   if (song.ins.size()>256) {
     logE("maximum number of instruments is 256!");
-    lastError="maximum number of instruments is 256";
+    lastError=_LE("maximum number of instruments is 256");
     saveLock.unlock();
     return NULL;
   }
   if (song.wave.size()>256) {
     logE("maximum number of wavetables is 256!");
-    lastError="maximum number of wavetables is 256";
+    lastError=_LE("maximum number of wavetables is 256");
     saveLock.unlock();
     return NULL;
   }
   if (song.sample.size()>256) {
     logE("maximum number of samples is 256!");
-    lastError="maximum number of samples is 256";
+    lastError=_LE("maximum number of samples is 256");
     saveLock.unlock();
     return NULL;
   }

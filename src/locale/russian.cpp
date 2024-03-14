@@ -4924,10 +4924,58 @@ void DivLocale::addTranslationsRussian()
     strings["file size is invalid!"].plurals[0] = "недействительный размер файла!";
     strings["could not seek to beginning: %s"].plurals[0] = "не смог перейти в начало файла: %s";
     strings["could not read entire file: %s"].plurals[0] = "не смог прочитать весь файл: %s";
-    strings["invalid wavetable header/data!"].plurals[0] = "недействительный заголовок/данные волновой таблицы!";
+    strings["invalid wavetable header/data!"].plurals[0] = "неправильный заголовок/данные волновой таблицы!";
     strings["premature end of file"].plurals[0] = "преждевременный конец файла";
     strings["too many samples!"].plurals[0] = "слишком много сэмплов!";
     strings["no free patterns in channel %d!"].plurals[0] = "нет свободных паттернов для канала %d!";
+    
+    //           src/engine/fileOps.cpp
+        
+    strings["this module was created with a more recent version of Furnace!"].plurals[0] = "этот модуль был создан в более новой версии Furnace!";
+    strings["couldn't seek to info header!"].plurals[0] = "не смог перейти к заголовку с информацией!";
+    strings["invalid info header!"].plurals[0] = "неправильный заголовок с информацией!";
+    strings["pattern length is negative!"].plurals[0] = "отрицательная длина паттерна!";
+    strings["pattern length is too large!"].plurals[0] = "слишком большая длина паттерна!";
+    strings["song length is negative!"].plurals[0] = "отрицательная длина трека!";
+    strings["song is too long!"].plurals[0] = "трек слишком длинный!";
+    strings["invalid instrument count!"].plurals[0] = "неправильное число инструментов!";
+    strings["invalid wavetable count!"].plurals[0] = "неправильное число волновых таблиц!";
+    strings["invalid sample count!"].plurals[0] = "неправильное число сэмплов!";
+    strings["invalid pattern count!"].plurals[0] = "неправильное число паттернов!";
+    strings["unrecognized system ID %.2x!"].plurals[0] = "неизвестный индекс системы %.2x!";
+    strings["zero chips!"].plurals[0] = "нулевое число чипов!";
+    strings["channel %d has too many effect columns! (%d)"].plurals[0] = "канал %d содержит слишком много столбцов эффектов! (%d)";
+    strings["couldn't seek to chip %d flags!"].plurals[0] = "не смог перейти к флагам чипа %d!";
+    strings["invalid flag header!"].plurals[0] = "неправильный заголовок флагов!";
+    strings["couldn't read instrument directory"].plurals[0] = "не смог прочитать папку с инструментами";
+    strings["invalid instrument directory data!"].plurals[0] = "неправильные данные папки с инструментами!";
+    strings["couldn't read wavetable directory"].plurals[0] = "не смог прочитать папку с волновыми таблицами";
+    strings["invalid wavetable directory data!"].plurals[0] = "неправильные данные папки с волновыми таблицами!";
+    strings["couldn't read sample directory"].plurals[0] = "не смог прочитать папку с сэмплами";
+    strings["invalid sample directory data!"].plurals[0] = "неправильные данные папки с сэмплами!";
+    strings["couldn't seek to subsong %d!"].plurals[0] = "не смог перейти к подпесне %d!";
+    strings["invalid subsong header!"].plurals[0] = "неправильный заголовок подпесни!";
+    strings["couldn't seek to instrument %d!"].plurals[0] = "не смог перейти к инструменту %d!";
+    strings["invalid instrument header/data!"].plurals[0] = "неправильный заголовок/данные инструмента!";
+    strings["couldn't seek to wavetable %d!"].plurals[0] = "не смог перейти к волновой таблице %d!";
+    strings["couldn't seek to sample %d!"].plurals[0] = "не смог перейти к сэмплу %d!";
+    strings["invalid sample header/data!"].plurals[0] = "неправильный заголовок/данные сэмпла!";
+    strings["couldn't seek to pattern in %x!"].plurals[0] = "не смог перейти к паттерну в %x!";
+    strings["invalid pattern header!"].plurals[0] = "неправильный заголовок паттерна!";
+    strings["pattern channel out of range!"].plurals[0] = "канал паттерна за пределами числа каналов!";
+    strings["pattern index out of range!"].plurals[0] = "индекс паттерна за пределами числа паттернов!";
+    strings["pattern subsong out of range!"].plurals[0] = "подпесня паттерна за пределами числа подпесен!";
+    strings["incomplete file"].plurals[0] = "неполный файл";
+    strings["file is too small"].plurals[0] = "файл слишком маленький";
+    strings["not a .dmf/.fur/.fub song"].plurals[0] = "не является модулем .dmf/.fur/.fub";
+    strings["unknown decompression error"].plurals[0] = "неизвестная ошибка распаковки";
+    strings["decompression error: %s"].plurals[0] = "ошибка распаковки: %s";
+    strings["unknown decompression finish error"].plurals[0] = "неизвестная ошибка при завершении распаковки";
+    strings["decompression finish error: %s"].plurals[0] = "ошибка при завершении распаковки: %s";
+    strings["not a compatible song/instrument"].plurals[0] = "не является совместимым модулем/файлом инструмента";
+    strings["maximum number of instruments is 256"].plurals[0] = "максимальное число инструментов равно 256";
+    strings["maximum number of wavetables is 256"].plurals[0] = "максимальное число волновых таблиц равно 256";
+    strings["maximum number of samples is 256"].plurals[0] = "максимальное число сэмплов равно 256";
 
     //   sesd    src/engine/sysDef.cpp
 
