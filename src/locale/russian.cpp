@@ -5063,6 +5063,9 @@ void DivLocale::addTranslationsRussian()
     strings["sequences block version is too old"].plurals[0] = "слишком старая версия блока последовательностей";
     strings["unknown block "].plurals[0] = "неизвестный блок ";
     strings["incomplete block "].plurals[0] = "неполный блок ";
+    strings[" [VRC6 copy]"].plurals[0] = " [копия для VRC6]";
+    strings[" [VRC6 saw copy]"].plurals[0] = " [копия для пилы VRC6]";
+    strings[" [NES copy]"].plurals[0] = " [копия для NES]";
 
     //           src/engine/importExport/gyb.cpp
 

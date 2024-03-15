@@ -5168,6 +5168,9 @@ void DivLocale::addTranslationsTemplate()
     strings["sequences block version is too old"].plurals[0] = "=sequences block version is too old";
     strings["unknown block "].plurals[0] = "=unknown block ";
     strings["incomplete block "].plurals[0] = "=incomplete block ";
+    strings[" [VRC6 copy]"].plurals[0] = " [=VRC6 copy]";
+    strings[" [VRC6 saw copy]"].plurals[0] = " [=VRC6 saw copy]";
+    strings[" [NES copy]"].plurals[0] = " [=NES copy]";
 
     //           src/engine/importExport/gyb.cpp
 

@@ -476,6 +476,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     unsigned char fds_chan = 0xff;
     unsigned char vrc6_saw_chan = 0xff;
     unsigned char n163_chans[8] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
+    unsigned char vrc7_chans[6] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
 
     unsigned char vrc6_chans[2] = { 0xff, 0xff };
     unsigned char mmc5_chans[2] = { 0xff, 0xff };
@@ -744,6 +745,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           for(int ch = 0; ch < 6; ch++)
           {
             map_channels[curr_chan] = map_ch;
+            vrc7_chans[ch] = map_ch;
             curr_chan++;
             map_ch++;
           }
@@ -1703,7 +1705,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             {
               if (nextVol<0x10) {
                 pat->data[row][3]=nextVol;
-                if(map_channels[ch] == vrc6_saw_chan)
+                if(map_channels[ch] == vrc6_saw_chan) //scale volume
                 {
                   pat->data[row][3] = pat->data[row][3] * 42 / 15;
                 }
@@ -1722,8 +1724,97 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             int effectCols=ds.subsong[subs]->pat[map_channels[ch]].effectCols;
             if (blockVersion>=6) effectCols=4;
 
-            for (int j=0; j<effectCols; j++) {
-              unsigned char nextEffect=reader.readC();
+            if(ds.version == 0x020)
+            {
+              effectCols = 1;
+            }
+
+            unsigned char nextEffectVal=0;
+            unsigned char nextEffect=0;
+
+            for (int j=0; j<effectCols; j++) 
+            {
+              nextEffect=reader.readC();
+
+              if((nextEffect < FT_EF_COUNT && !eft) || (nextEffect < EFT_EF_COUNT && eft))
+              {
+                nextEffectVal=reader.readC();
+
+                if (blockVersion < 3) 
+                {
+                  if (nextEffect == FT_EF_PORTAOFF)
+                  {
+                    nextEffect = FT_EF_PORTAMENTO;
+                    nextEffectVal = 0;
+                  }
+                  else if (nextEffect == FT_EF_PORTAMENTO)
+                  {
+                    if (nextEffect < 0xFF)
+                      nextEffectVal++;
+                  }
+                }
+              }
+              else if (blockVersion<6)
+              {
+                nextEffectVal=reader.readC();
+              }
+
+              // Specific for version 2.0
+              if (ds.version == 0x0200 && j == 0) 
+              {
+                if (nextEffect == FT_EF_SPEED && nextEffectVal < 20)
+                  nextEffectVal++;
+
+                if (pat->data[row][3] == 0)
+                  pat->data[row][3] = 0xf;
+                else {
+                  pat->data[row][3]--;
+                  pat->data[row][3] &= 0x0F;
+                }
+
+                if (pat->data[row][0] == 0)
+                  pat->data[row][2] = -1;
+              }
+
+              if (blockVersion == 3) 
+              {
+                // Fix for VRC7 portamento
+                bool is_vrc7 = false;
+
+                for(int vrr = 0; vrr < 6; vrr++)
+                {
+                  if(map_channels[ch] == vrc7_chans[vrr])
+                  {
+                    is_vrc7 = true;
+                  }
+                }
+
+                if (is_vrc7) 
+                {
+                  switch (nextEffect) 
+                  {
+                    case FT_EF_PORTA_DOWN:
+                      nextEffect = FT_EF_PORTA_UP;
+                      break;
+                    case FT_EF_PORTA_UP:
+                      nextEffect = FT_EF_PORTA_DOWN;
+                      break;
+                    default: break;
+                  }
+                }
+                // FDS pitch effect fix
+                else if (map_channels[ch] == fds_chan) 
+                {
+                  switch (nextEffect) 
+                  {
+                    case FT_EF_PITCH:
+                      if (nextEffectVal != 0x80)
+                        nextEffectVal = (0x100 - nextEffectVal) & 0xFF;
+                      break;
+                    default: break;
+                  }
+                }
+              }
 
               for(int v = 0; v < 8; v++)
               {
@@ -1754,9 +1845,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
                 stop:;
               }
-
-              unsigned char nextEffectVal=0;
-              if (nextEffect!=0 || blockVersion<6) nextEffectVal=reader.readC();
               
               //logW("next effect %d val %d", nextEffect, nextEffectVal);
 
@@ -2304,7 +2392,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
                   copyInstrument(ds.ins[ds.ins.size() - 1], ins);
 
-                  ds.ins[ds.ins.size() - 1]->name += " [VRC6 copy]";
+                  ds.ins[ds.ins.size() - 1]->name += _LE(" [VRC6 copy]");
                   ds.ins[ds.ins.size() - 1]->amiga.useSample = false;
                   ds.ins[ds.ins.size() - 1]->amiga.useNoteMap = false;
 
@@ -2364,7 +2452,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
                   copyInstrument(ds.ins[ds.ins.size() - 1], ins);
 
-                  ds.ins[ds.ins.size() - 1]->name += " [VRC6 saw copy]";
+                  ds.ins[ds.ins.size() - 1]->name += _LE(" [VRC6 saw copy]");
                   ds.ins[ds.ins.size() - 1]->amiga.useSample = false;
                   ds.ins[ds.ins.size() - 1]->amiga.useNoteMap = false;
 
@@ -2424,7 +2512,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
                   copyInstrument(ds.ins[ds.ins.size() - 1], ins);
 
-                  ds.ins[ds.ins.size() - 1]->name += " [NES copy]";
+                  ds.ins[ds.ins.size() - 1]->name += _LE(" [NES copy]");
 
                   ds.ins[ds.ins.size() - 1]->type = DIV_INS_NES;
 
