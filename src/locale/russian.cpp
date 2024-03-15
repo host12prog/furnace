@@ -3421,6 +3421,8 @@ void DivLocale::addTranslationsRussian()
     strings["Wave RAM##CC_GUI_COLOR_MEMORY_WAVE_RAM"].plurals[0] = "ОЗУ волн##CC_GUI_COLOR_MEMORY_WAVE_RAM";
     strings["Wavetable (static)##CC_GUI_COLOR_MEMORY_WAVE_STATIC"].plurals[0] = "Волновая таблица (статич.)##CC_GUI_COLOR_MEMORY_WAVE_STATIC";
     strings["Echo buffer##CC_GUI_COLOR_MEMORY_ECHO"].plurals[0] = "Буфер эхо##CC_GUI_COLOR_MEMORY_ECHO";
+    strings["Namco 163 load pos##CC_GUI_COLOR_MEMORY_N163_LOAD"].plurals[0] = "Namco 163 положение загрузки##CC_GUI_COLOR_MEMORY_N163_LOAD";
+    strings["Namco 163 play pos##CC_GUI_COLOR_MEMORY_N163_PLAY"].plurals[0] = "Namco 163 положение проигрывания##CC_GUI_COLOR_MEMORY_N163_PLAY";
     strings["Sample (bank 0)##CC_GUI_COLOR_MEMORY_BANK0"].plurals[0] = "Сэмпл (банк 0)##CC_GUI_COLOR_MEMORY_BANK0";
     strings["Sample (bank 1)##CC_GUI_COLOR_MEMORY_BANK1"].plurals[0] = "Сэмпл (банк 1)##CC_GUI_COLOR_MEMORY_BANK1";
     strings["Sample (bank 2)##CC_GUI_COLOR_MEMORY_BANK2"].plurals[0] = "Сэмпл (банк 2)##CC_GUI_COLOR_MEMORY_BANK2";
