@@ -4855,6 +4855,10 @@ void DivLocale::addTranslationsRussian()
 
     // no more instruments
 
+    //           src/engine/cmdStream.cpp
+
+    strings["not a command stream"].plurals[0] = "не является потоком команд";
+
     //   seen    src/engine/engine.cpp
 
     strings["00xy: Arpeggio##seen"].plurals[0] = "00xy: Арпеджио";
@@ -4905,6 +4909,199 @@ void DivLocale::addTranslationsRussian()
     strings["FAxx: Fast volume slide (0y: down; x0: up)##seen"].plurals[0] = "FAxx: Быстрое изменение громкости (0y: вниз; x0: вверх)";
     strings["FFxx: Stop song##seen"].plurals[0] = "FFxx: Остановить трек";
     strings["9xxx: Set sample offset*256##seen"].plurals[0] = "9xxx: Начальное смещение сэмпла (xxx*256 шагов)";
+
+    strings["on seek: %s"].plurals[0] = "во время перехода по файлу: %s";
+    strings["on pre tell: %s"].plurals[0] = "перед запросом положения в файле: %s";
+    strings["file is empty"].plurals[0] = "пустой файл";
+    strings["on tell: %s"].plurals[0] = "во время запроса положения в файле: %s";
+    strings["ROM size mismatch, expected: %d bytes, was: %d"].plurals[0] = "несоответствие размера ROM, ожидалось: %d байт, на самом деле: %d";
+    strings["on get size: %s"].plurals[0] = "при запросе размера: %s";
+    strings["on read: %s"].plurals[0] = "при чтении: %s";
+    strings["invalid index"].plurals[0] = "недействительный индекс";
+    strings["max number of total channels is %d"].plurals[0] = "максимальное общее число каналов равно %d";
+    strings["max number of systems is %d"].plurals[0] = "максимальное число чипов/систем равно %d";
+    strings["cannot remove the last one"].plurals[0] = "не могу удалить последнюю";
+    strings["source and destination are equal"].plurals[0] = "системы совпадают";
+    strings["invalid source index"].plurals[0] = "недействительный индекс исходной системы";
+    strings["invalid destination index"].plurals[0] = "недействительный индекс системы назначения";
+    strings["too many wavetables!"].plurals[0] = "слишком много волновых таблиц!";
+    strings["could not seek to end: %s"].plurals[0] = "не смог перейти в конец файла: %s";
+    strings["could not determine file size: %s"].plurals[0] = "не смог определить размер файла: %s";
+    strings["file size is invalid!"].plurals[0] = "недействительный размер файла!";
+    strings["could not seek to beginning: %s"].plurals[0] = "не смог перейти в начало файла: %s";
+    strings["could not read entire file: %s"].plurals[0] = "не смог прочитать весь файл: %s";
+    strings["invalid wavetable header/data!"].plurals[0] = "неправильный заголовок/данные волновой таблицы!";
+    strings["premature end of file"].plurals[0] = "преждевременный конец файла";
+    strings["too many samples!"].plurals[0] = "слишком много сэмплов!";
+    strings["no free patterns in channel %d!"].plurals[0] = "нет свободных паттернов для канала %d!";
+    
+    //           src/engine/fileOps.cpp
+        
+    strings["this module was created with a more recent version of Furnace!"].plurals[0] = "этот модуль был создан в более новой версии Furnace!";
+    strings["couldn't seek to info header!"].plurals[0] = "не смог перейти к заголовку с информацией!";
+    strings["invalid info header!"].plurals[0] = "неправильный заголовок с информацией!";
+    strings["pattern length is negative!"].plurals[0] = "отрицательная длина паттерна!";
+    strings["pattern length is too large!"].plurals[0] = "слишком большая длина паттерна!";
+    strings["song length is negative!"].plurals[0] = "отрицательная длина трека!";
+    strings["song is too long!"].plurals[0] = "трек слишком длинный!";
+    strings["invalid instrument count!"].plurals[0] = "неправильное число инструментов!";
+    strings["invalid wavetable count!"].plurals[0] = "неправильное число волновых таблиц!";
+    strings["invalid sample count!"].plurals[0] = "неправильное число сэмплов!";
+    strings["invalid pattern count!"].plurals[0] = "неправильное число паттернов!";
+    strings["unrecognized system ID %.2x!"].plurals[0] = "неизвестный индекс системы %.2x!";
+    strings["zero chips!"].plurals[0] = "нулевое число чипов!";
+    strings["channel %d has too many effect columns! (%d)"].plurals[0] = "канал %d содержит слишком много столбцов эффектов! (%d)";
+    strings["couldn't seek to chip %d flags!"].plurals[0] = "не смог перейти к флагам чипа %d!";
+    strings["invalid flag header!"].plurals[0] = "неправильный заголовок флагов!";
+    strings["couldn't read instrument directory"].plurals[0] = "не смог прочитать папку с инструментами";
+    strings["invalid instrument directory data!"].plurals[0] = "неправильные данные папки с инструментами!";
+    strings["couldn't read wavetable directory"].plurals[0] = "не смог прочитать папку с волновыми таблицами";
+    strings["invalid wavetable directory data!"].plurals[0] = "неправильные данные папки с волновыми таблицами!";
+    strings["couldn't read sample directory"].plurals[0] = "не смог прочитать папку с сэмплами";
+    strings["invalid sample directory data!"].plurals[0] = "неправильные данные папки с сэмплами!";
+    strings["couldn't seek to subsong %d!"].plurals[0] = "не смог перейти к подпесне %d!";
+    strings["invalid subsong header!"].plurals[0] = "неправильный заголовок подпесни!";
+    strings["couldn't seek to instrument %d!"].plurals[0] = "не смог перейти к инструменту %d!";
+    strings["invalid instrument header/data!"].plurals[0] = "неправильный заголовок/данные инструмента!";
+    strings["couldn't seek to wavetable %d!"].plurals[0] = "не смог перейти к волновой таблице %d!";
+    strings["couldn't seek to sample %d!"].plurals[0] = "не смог перейти к сэмплу %d!";
+    strings["invalid sample header/data!"].plurals[0] = "неправильный заголовок/данные сэмпла!";
+    strings["couldn't seek to pattern in %x!"].plurals[0] = "не смог перейти к паттерну в %x!";
+    strings["invalid pattern header!"].plurals[0] = "неправильный заголовок паттерна!";
+    strings["pattern channel out of range!"].plurals[0] = "канал паттерна за пределами числа каналов!";
+    strings["pattern index out of range!"].plurals[0] = "индекс паттерна за пределами числа паттернов!";
+    strings["pattern subsong out of range!"].plurals[0] = "подпесня паттерна за пределами числа подпесен!";
+    strings["incomplete file"].plurals[0] = "неполный файл";
+    strings["file is too small"].plurals[0] = "файл слишком маленький";
+    strings["not a .dmf/.fur/.fub song"].plurals[0] = "не является модулем .dmf/.fur/.fub";
+    strings["unknown decompression error"].plurals[0] = "неизвестная ошибка распаковки";
+    strings["decompression error: %s"].plurals[0] = "ошибка распаковки: %s";
+    strings["unknown decompression finish error"].plurals[0] = "неизвестная ошибка при завершении распаковки";
+    strings["decompression finish error: %s"].plurals[0] = "ошибка при завершении распаковки: %s";
+    strings["not a compatible song/instrument"].plurals[0] = "не является совместимым модулем/файлом инструмента";
+    strings["maximum number of instruments is 256"].plurals[0] = "максимальное число инструментов равно 256";
+    strings["maximum number of wavetables is 256"].plurals[0] = "максимальное число волновых таблиц равно 256";
+    strings["maximum number of samples is 256"].plurals[0] = "максимальное число сэмплов равно 256";
+
+    //           src/engine/fileOpsIns.cpp
+
+    strings["did not read entire instrument file!"].plurals[0] = "не смог прочитать весь файл инструмента!";
+    strings["this instrument is made with a more recent version of Furnace!"].plurals[0] = "этот инструмент был создан в более новой версии Furnace!";
+    strings["unknown instrument format"].plurals[0] = "неизвестный формат инструмента";
+    strings["there is more data at the end of the file! what happened here!"].plurals[0] = "в конце файла содержатся ещё данные! что происходит!";
+    strings["exactly %d bytes, if you are curious"].plurals[0] = "а именно %d байт, если вам интересно";
+
+    //           src/engine/fileOpsSample.cpp
+
+    strings["could not open file! (%s)"].plurals[0] = "не смог открыть файл! (%s)";
+    strings["could not get file length! (%s)"].plurals[0] = "не смог определить длину файла! (%s)";
+    strings["file is empty!"].plurals[0] = "файл пустой!";
+    strings["file is invalid!"].plurals[0] = "файл повреждён/слишком большой!";
+    strings["could not seek to beginning of file! (%s)"].plurals[0] = "не смог перейти к началу файла! (%s)";
+    strings["wait... is that right? no I don't think so..."].plurals[0] = "подождите... так вообще правильно? нет, я так не думаю...";
+    strings["BRR sample is empty!"].plurals[0] = "BRR-сэмпл пуст!";
+    strings["possibly corrupt BRR sample!"].plurals[0] = "BRR-сэмпл, возможно, повреждён!";
+    strings["could not read file! (%s)"].plurals[0] = "не смог прочитать файл! (%s)";
+    strings["Furnace was not compiled with libsndfile!"].plurals[0] = "Furnace не был скомпилирован с libsndfile!";
+    strings["could not open file! (%s %s)"].plurals[0] = "не смог открыть файл! (%s %s)";
+    strings["could not open file! (%s)\nif this is raw sample data, you may import it by right-clicking the Load Sample icon and selecting \"import raw\"."].plurals[0] = "не смог открыть файл! (%s)\nесли это сырые данные сэмпла, попробуйте импортировать их: ПКМ по иконке \"Открыть\" в списке сэмплов, выберите \"импорт сырых данных\".";
+    strings["this sample is too big! max sample size is 16777215."].plurals[0] = "сэмпл слишком большой! максимальный размер сэмпла 16777215.";
+
+    //           src/engine/importExport/bnk.cpp
+
+    strings["GEMS BNK currently not supported."].plurals[0] = "GEMS BNK пока не поддерживается.";
+
+    //           src/engine/importExport/dmf.cpp
+
+    strings["this version is not supported by Furnace yet"].plurals[0] = "эта версия пока не поддерживается Furnace";
+    strings["system not supported. running old version?"].plurals[0] = "система не поддерживается. вы на старой версии?";
+    strings["Yamaha YMU759 emulation is incomplete! please migrate your song to the OPL3 system."].plurals[0] = "Эмуляция Yamaha YMU759 неполноценна! переделайте свой трек под OPL3.";
+    strings["order at %d, %d out of range! (%d)"].plurals[0] = "значение в матрице паттернов %d, %d недействительно! (%d)";
+    strings["file is corrupt or unreadable at operators"].plurals[0] = "файл повреждён/нечитаем в секции операторов";
+    strings["file is corrupt or unreadable at wavetables"].plurals[0] = "файл повреждён/нечитаем в секции волновых таблиц";
+    strings["file is corrupt or unreadable at effect columns"].plurals[0] = "файл повреждён/нечитаем в секции столбцов эффектов";
+    strings["file is corrupt or unreadable at samples"].plurals[0] = "файл повреждён/нечитаем в секции сэмплов";
+    strings["invalid version to save in! this is a bug!"].plurals[0] = "енправильная версия для сохранения! это баг!";
+    strings["multiple systems not possible on .dmf"].plurals[0] = "несколько чипов/систем невозможно сохранить в .dmf";
+    strings["YMU759 song saving is not supported"].plurals[0] = "Сохранение треков с YMU759 не поддерживается";
+    strings["Master System FM expansion not supported in 1.0/legacy .dmf!"].plurals[0] = "Master System FM расширение не поддерживается в 1.0/legacy .dmf!";
+    strings["NES + VRC7 not supported in 1.0/legacy .dmf!"].plurals[0] = "NES + VRC7 не поддерживаются в 1.0/legacy .dmf!";
+    strings["FDS not supported in 1.0/legacy .dmf!"].plurals[0] = "FDS не поддерживается в 1.0/legacy .dmf!";
+    strings["this system is not possible on .dmf"].plurals[0] = "эта система не поддерживается в .dmf";
+    strings["maximum .dmf song length is 127"].plurals[0] = "маскимальная длина трека .dmf составляет 127";
+    strings["maximum number of instruments in .dmf is 128"].plurals[0] = "максимальное число инструментов в .dmf равно 128";
+    strings["maximum number of wavetables in .dmf is 64"].plurals[0] = "максимальное число волновых таблиц в .dmf равно 64";
+    strings["order %d, %d is out of range (0-127)"].plurals[0] = "значение в матрице паттернов %d, %d недействительно (0-127)";
+    strings["only the currently selected subsong will be saved"].plurals[0] = "будет сохранена только текущая подпесня";
+    strings["grooves will not be saved"].plurals[0] = "ритм-паттерны не будут сохранены";
+    strings["only the first two speeds will be effective"].plurals[0] = "только первые две скорости будут применены";
+    strings[".dmf format does not support virtual tempo"].plurals[0] = ".dmf не поддерживает виртуальный темп";
+    strings[".dmf format does not support tuning"].plurals[0] = ".dmf не поддерживает настройку строя (частоты ноты A-4)";
+    strings["absolute duty/cutoff macro not available in .dmf!"].plurals[0] = "абсолютные макросы частоты среза/скважности не поддерживаются в .dmf!";
+    strings["duty precision will be lost"].plurals[0] = "точность настройки скважности не будет сохранена";
+    strings[".dmf format does not support arbitrary-pitch sample mode"].plurals[0] = ".dmf не поддерживает проигрывание сэмплов с произвольной частотой";
+    strings["no FM macros in .dmf format"].plurals[0] = "формат .dmf не поддерживает FM-макросы";
+    strings[".dmf only supports volume or cutoff macro in C64, but not both. volume macro will be lost."].plurals[0] = ".dmf позволяет применять для C64 либо макрос громкости, либо макрос частоты среза, но не оба одновременно. макрос громкости не будет сохранён.";
+    strings["note/macro release will be converted to note off!"].plurals[0] = "ноты релиза макросов или огибающей будут преобразованы в заглушение ноты!";
+    strings["samples' rates will be rounded to nearest compatible value"].plurals[0] = "частоты дискретизации сэмплов будут преобразованы в ближайшие совместимые.";
+
+    //           src/engine/importExport/dmp.cpp
+
+    strings["unknown instrument type %d!"].plurals[0] = "неизвестный тип инструмента %d!";
+
+    //           src/engine/importExport/fc.cpp
+
+    strings["invalid header!"].plurals[0] = "неправильный заголовок";
+
+    //           src/engine/importExport/ftm.cpp
+
+    strings["incompatible version"].plurals[0] = "несовместимая версия";
+    strings["channel counts do not match"].plurals[0] = "количества каналов не совпадают";
+    strings["too many instruments/out of range"].plurals[0] = "слишком много инструментов/недействительное значение";
+    strings["invalid instrument type"].plurals[0] = "неизвестный тип инструмента";
+    strings["too many sequences"].plurals[0] = "слишком много последовательностей (макросов)";
+    strings["sequences block version is too old"].plurals[0] = "слишком старая версия блока последовательностей";
+    strings["unknown block "].plurals[0] = "неизвестный блок ";
+    strings["incomplete block "].plurals[0] = "неполный блок ";
+
+    //           src/engine/importExport/gyb.cpp
+
+    strings["GYBv3 file appears to have invalid data offsets."].plurals[0] = "Похоже, что в файле GYBv3 неверные смещения (указатели на данные).";
+    strings["Invalid value found in patch file. %s"].plurals[0] = "Найдено недействительное значение в файле патча. %s";
+
+    //           src/engine/importExport/s3i.cpp
+
+    strings["S3I PCM samples currently not supported."].plurals[0] = "S3I: ИКМ-сэмплы пока не поддерживаются.";
+
+    //           src/engine/vgmOps.cpp
+
+    strings["VGM version is too low"].plurals[0] = "Версия VGM слишком старая";
+
+    //names of memory composition memories
+
+    strings["DPCM"].plurals[0] = "ДИКМ";
+    strings["Chip Memory"].plurals[0] = "Память чипа";
+    strings["Sample ROM"].plurals[0] = "ПЗУ сэмплов";
+    strings["Sample Memory"].plurals[0] = "Память сэмплов";
+    strings["SPC/DSP Memory"].plurals[0] = "Память SPC/DSP";
+    strings["Sample RAM"].plurals[0] = "ОЗУ сэмплов";
+    strings["ADPCM"].plurals[0] = "АДИКМ";
+
+    //names of memory entries
+
+    strings["Sample"].plurals[0] = "Сэмпл";
+    strings["Wave RAM"].plurals[0] = "ОЗУ волн";
+    strings["End of Sample"].plurals[0] = "Конец сэмпла";
+    strings["Reserved wavetable RAM"].plurals[0] = "ОЗУ, зарезервированная под волновую таблицу";
+    strings["Phrase Book"].plurals[0] = "Книга фраз";
+    strings["Channel %d (load)"].plurals[0] = "Канал %d (загрузка)";
+    strings["Channel %d (play)"].plurals[0] = "Канал %d (проигрывание)";
+    strings["Registers"].plurals[0] = "Регистры";
+    strings["PCM"].plurals[0] = "ИКМ";
+    strings["ADPCM"].plurals[0] = "АДИКМ";
+    strings["State"].plurals[0] = "Состояние";
+    strings["Sample Directory"].plurals[0] = "Секция сэмплов";
+    strings["Echo Buffer"].plurals[0] = "Буфер эхо";
 
     //   sesd    src/engine/sysDef.cpp
 

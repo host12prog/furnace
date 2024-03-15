@@ -19,6 +19,17 @@
 
 #include "importExport.h"
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 class DivEngine;
 
 bool DivEngine::loadS3M(unsigned char* file, size_t len) {
@@ -47,7 +58,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
     // load here
     if (!reader.seek(0x2c,SEEK_SET)) {
       logE("premature end of file!");
-      lastError="incomplete file";
+      lastError=_LE("incomplete file");
       delete[] file;
       return false;
     }
@@ -60,7 +71,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
 
     if (!reader.seek(0,SEEK_SET)) {
       logE("premature end of file!");
-      lastError="incomplete file";
+      lastError=_LE("incomplete file");
       delete[] file;
       return false;
     }
@@ -78,7 +89,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
 
     if (ds.insLen<0 || ds.insLen>256) {
       logE("invalid instrument count!");
-      lastError="invalid instrument count!";
+      lastError=_LE("invalid instrument count!");
       delete[] file;
       return false;
     }
@@ -179,7 +190,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
       DivInstrument* ins=new DivInstrument;
       if (!reader.seek(0x4c+insPtr[i]*16,SEEK_SET)) {
         logE("premature end of file!");
-        lastError="incomplete file";
+        lastError=_LE("incomplete file");
         delete ins;
         delete[] file;
         return false;
@@ -199,7 +210,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
 
       if (!reader.seek(insPtr[i]*16,SEEK_SET)) {
         logE("premature end of file!");
-        lastError="incomplete file";
+        lastError=_LE("incomplete file");
         delete ins;
         delete[] file;
         return false;
@@ -253,10 +264,10 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
     success=true;
   } catch (EndOfFileException& e) {
     //logE("premature end of file!");
-    lastError="incomplete file";
+    lastError=_LE("incomplete file");
   } catch (InvalidHeaderException& e) {
     //logE("invalid header!");
-    lastError="invalid header!";
+    lastError=_LE("invalid header!");
   }
   return success;
 }

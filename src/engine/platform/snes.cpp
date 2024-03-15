@@ -23,6 +23,17 @@
 #include "furIcons.h"
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define CHIP_FREQBASE 131072
 
 #define rWrite(a,v) if (!skipRegisterWrites) {writes.push(QueuedWrite(a,v)); if (dumpWrites) {addWrite(a,v);} }
@@ -963,11 +974,11 @@ void DivPlatformSNES::renderSamples(int sysID) {
   memset(sampleLoaded,0,256*sizeof(bool));
 
   memCompo=DivMemoryComposition();
-  memCompo.name="SPC/DSP Memory";
+  memCompo.name=_LE("SPC/DSP Memory");
 
-  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,"State",-1,0,sampleTableBase));
-  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,"Sample Directory",-1,sampleTableBase,sampleTableBase+8*4));
-  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_WAVE_RAM,"Wave RAM",-1,sampleTableBase+8*4,sampleTableBase+8*4+8*9*16));
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,_LE("State"),-1,0,sampleTableBase));
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,_LE("Sample Directory"),-1,sampleTableBase,sampleTableBase+8*4));
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_WAVE_RAM,_LE("Wave RAM"),-1,sampleTableBase+8*4,sampleTableBase+8*4+8*9*16));
 
   // skip past sample table and wavetable buffer
   size_t memPos=sampleTableBase+8*4+8*9*16;
@@ -987,7 +998,7 @@ void DivPlatformSNES::renderSamples(int sysID) {
       if (s->loop) {
         copyOfSampleMem[memPos+actualLength-9]|=3;
       }
-      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+actualLength));
+      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+actualLength));
       memPos+=actualLength;
     }
     if (actualLength<length) {
@@ -1000,7 +1011,7 @@ void DivPlatformSNES::renderSamples(int sysID) {
   }
   sampleMemLen=memPos;
 
-  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_ECHO,"Echo Buffer",-1,(65536-echoDelay*2048),65536));
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_ECHO,_LE("Echo Buffer"),-1,(65536-echoDelay*2048),65536));
 
   memCompo.capacity=65536;
   memCompo.used=sampleMemLen+echoDelay*2048;

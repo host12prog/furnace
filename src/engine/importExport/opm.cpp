@@ -19,6 +19,17 @@
 
 #include "shared.h"
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 class DivEngine;
 
 void DivEngine::loadOPM(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath) {
@@ -177,11 +188,11 @@ void DivEngine::loadOPM(SafeReader& reader, std::vector<DivInstrument*>& ret, St
       ret.push_back(insList[i]);
     }
   } catch (EndOfFileException& e) {
-    lastError="premature end of file";
+    lastError=_LE("premature end of file");
     logE("premature end of file");
     is_failed = true;
   } catch (std::invalid_argument& e) {
-    lastError=fmt::sprintf("Invalid value found in patch file. %s", e.what());
+    lastError=fmt::sprintf(_LE("Invalid value found in patch file. %s"), e.what());
     logE("Invalid value found in patch file.");
     logE(e.what());
     is_failed = true;

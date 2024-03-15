@@ -22,6 +22,17 @@
 #include "../../ta-log.h"
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define rWrite(a,v) if (!skipRegisterWrites) {writes.push(QueuedWrite(a,v)); if (dumpWrites) {addWrite(a,v);} }
 #define rWriteMask(a,v,m) if (!skipRegisterWrites) {writes.push(QueuedWrite(a,v,m)); if (dumpWrites) {addWrite(a,v);} }
 #define chWrite(c,a,v) \
@@ -625,12 +636,12 @@ int DivPlatformN163::init(DivEngine* p, int channels, int sugRate, const DivConf
   memCompo.waveformView=DIV_MEMORY_WAVE_4BIT;
 
   for (int i=0; i<8; i++) {
-    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_N163_LOAD,fmt::sprintf("Channel %d (load)",i),-1,0,0));
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_N163_LOAD,fmt::sprintf(_LE("Channel %d (load)"),i),-1,0,0));
   }
   for (int i=0; i<8; i++) {
-    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_N163_PLAY,fmt::sprintf("Channel %d (play)",i),-1,0,0));
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_N163_PLAY,fmt::sprintf(_LE("Channel %d (play)"),i),-1,0,0));
   }
-  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,"Registers",-1,127,128));
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,_LE("Registers"),-1,127,128));
 
   setFlags(flags);
 

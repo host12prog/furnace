@@ -24,6 +24,17 @@
 #include <stddef.h>
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 struct _nla_table nla_table;
 
 #define CHIP_DIVIDER 16
@@ -889,7 +900,7 @@ void DivPlatformNES::renderSamples(int sysID) {
   memset(sampleLoaded,0,256*sizeof(bool));
 
   memCompo=DivMemoryComposition();
-  memCompo.name="DPCM";
+  memCompo.name=_LE("DPCM");
 
   size_t memPos=0;
   for (int i=0; i<parent->song.sampleLen; i++) {
@@ -919,7 +930,7 @@ void DivPlatformNES::renderSamples(int sysID) {
       sampleLoaded[i]=true;
     }
     sampleOffDPCM[i]=memPos;
-    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+paddedLen));
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+paddedLen));
     memPos+=paddedLen;
   }
   dpcmMemLen=memPos;

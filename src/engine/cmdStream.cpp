@@ -23,6 +23,17 @@
 #include "engine.h"
 #include "../ta-log.h"
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 bool DivCSChannelState::doCall(unsigned int addr) {
   if (callStackPos>=8) {
     readPos=0;
@@ -459,7 +470,7 @@ bool DivEngine::playStream(unsigned char* f, size_t length) {
   cmdStreamInt=new DivCSPlayer(this,f,length);
   if (!cmdStreamInt->init()) {
     logE("not a command stream!");
-    lastError="not a command stream";
+    lastError=_LE("not a command stream");
     delete[] f;
     delete cmdStreamInt;
     cmdStreamInt=NULL;

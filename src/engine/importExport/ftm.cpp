@@ -19,6 +19,17 @@
 
 #include "importExport.h"
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 class DivEngine;
 
 #define CHECK_BLOCK_VERSION(x) \
@@ -490,7 +501,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
     if (!reader.seek((dnft && dnft_sig) ? 21 : 18,SEEK_SET)) {
       logE("premature end of file!");
-      lastError="incomplete file";
+      lastError=_LE("incomplete file");
       delete[] file;
       return false;
     }
@@ -499,7 +510,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
     if ((ds.version>0x0450 && !eft) || (eft && ds.version>0x0460)) {
       logE("incompatible version %x!",ds.version);
-      lastError="incompatible version";
+      lastError=_LE("incompatible version");
       delete[] file;
       return false;
     }
@@ -835,7 +846,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           if(!eft || (eft && (expansions & 8) == 0)) //ignore since I have no idea how to tell apart E-FT versions which do or do not have PCM chan. Yes, this may lead to all the righer channels to be shifted but at least you still get note data!
           {
             logE("channel counts do not match! %d != %d",tchans,calcChans);
-            lastError="channel counts do not match";
+            lastError=_LE("channel counts do not match");
             delete[] file;
             return false;
           }
@@ -911,7 +922,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         ds.insLen=reader.readI();
         if (ds.insLen<0 || ds.insLen>256) {
           logE("too many instruments/out of range!");
-          lastError="too many instruments/out of range";
+          lastError=_LE("too many instruments/out of range");
           delete[] file;
           return false;
         }
@@ -958,7 +969,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               break;
             default: {
               logE("%d: invalid instrument type %d",insIndex,insType);
-              lastError="invalid instrument type";
+              lastError=_LE("invalid instrument type");
               delete[] file;
               return false;
             }
@@ -970,7 +981,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               unsigned int totalSeqs=reader.readI();
               if (totalSeqs>5) {
                 logE("%d: too many sequences!",insIndex);
-                lastError="too many sequences";
+                lastError=_LE("too many sequences");
                 delete[] file;
                 return false;
               }
@@ -1028,7 +1039,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               unsigned int totalSeqs=reader.readI();
               if (totalSeqs>5) {
                 logE("%d: too many sequences!",insIndex);
-                lastError="too many sequences";
+                lastError=_LE("too many sequences");
                 delete[] file;
                 return false;
               }
@@ -1165,7 +1176,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               unsigned int totalSeqs=reader.readI();
               if (totalSeqs>5) {
                 logE("%d: too many sequences!",insIndex);
-                lastError="too many sequences";
+                lastError=_LE("too many sequences");
                 delete[] file;
                 return false;
               }
@@ -1217,7 +1228,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               unsigned int totalSeqs=reader.readI();
               if (totalSeqs>5) {
                 logE("%d: too many sequences!",insIndex);
-                lastError="too many sequences";
+                lastError=_LE("too many sequences");
                 delete[] file;
                 return false;
               }
@@ -1368,7 +1379,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   if (totalSeqs>5) 
                   {
                     logE("%d: too many sequences!",insIndex);
-                    lastError="too many sequences";
+                    lastError=_LE("too many sequences");
                     delete[] file;
                     return false;
                   }
@@ -1403,7 +1414,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
             default: {
               logE("%d: what's going on here?",insIndex);
-              lastError="invalid instrument type";
+              lastError=_LE("invalid instrument type");
               delete[] file;
               return false;
             }
@@ -1422,7 +1433,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
         if(blockVersion < 3)
         {
-          lastError="sequences block version is too old";
+          lastError=_LE("sequences block version is too old");
           delete[] file;
           return false;
         }
@@ -2195,14 +2206,14 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         reader.seek(blockSize,SEEK_CUR);
       } else {
         logE("block %s is unknown!",blockName);
-        lastError="unknown block "+blockName;
+        lastError=_LE("unknown block ")+blockName;
         delete[] file;
         return false;
       }
 
       if ((reader.tell()-blockStart)!=blockSize) {
         logE("block %s is incomplete! reader.tell()-blockStart %d blockSize %d",blockName, (reader.tell()-blockStart),blockSize);
-        lastError="incomplete block "+blockName;
+        lastError=_LE("incomplete block ")+blockName;
         delete[] file;
         return false;
       }
@@ -2534,7 +2545,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     }
   } catch (EndOfFileException& e) {
     logE("premature end of file!");
-    lastError="incomplete file";
+    lastError=_LE("incomplete file");
     delete[] file;
     return false;
   }

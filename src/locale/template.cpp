@@ -4960,6 +4960,10 @@ void DivLocale::addTranslationsTemplate()
     //   seen    src/engine/engine.cpp
     //   sesd    src/engine/sysDef.cpp
 
+    //           src/engine/cmdStream.cpp
+
+    strings["not a command stream"].plurals[0] = "=not a command stream";
+
     //   seen    src/engine/engine.cpp
 
     strings["00xy: Arpeggio##seen"].plurals[0] = "00xy: =Arpeggio";
@@ -5010,6 +5014,199 @@ void DivLocale::addTranslationsTemplate()
     strings["FAxx: Fast volume slide (0y: down; x0: up)##seen"].plurals[0] = "FAxx: =Fast volume slide (0y: down; x0: up)";
     strings["FFxx: Stop song##seen"].plurals[0] = "FFxx: =Stop song";
     strings["9xxx: Set sample offset*256##seen"].plurals[0] = "9xxx: =Set sample offset*256";
+
+    strings["on seek: %s"].plurals[0] = "=on seek: %s";
+    strings["on pre tell: %s"].plurals[0] = "=on pre tell: %s";
+    strings["file is empty"].plurals[0] = "=file is empty";
+    strings["on tell: %s"].plurals[0] = "=on tell: %s";
+    strings["ROM size mismatch, expected: %d bytes, was: %d"].plurals[0] = "=ROM size mismatch, expected: %d bytes, was: %d";
+    strings["on get size: %s"].plurals[0] = "=on get size: %s";
+    strings["on read: %s"].plurals[0] = "=on read: %s";
+    strings["invalid index"].plurals[0] = "=invalid index";
+    strings["max number of total channels is %d"].plurals[0] = "=max number of total channels is %d";
+    strings["max number of systems is %d"].plurals[0] = "=max number of systems is %d";
+    strings["cannot remove the last one"].plurals[0] = "=cannot remove the last one";
+    strings["source and destination are equal"].plurals[0] = "=source and destination are equal";
+    strings["invalid source index"].plurals[0] = "=invalid source index";
+    strings["invalid destination index"].plurals[0] = "=invalid destination index";
+    strings["too many wavetables!"].plurals[0] = "=too many wavetables!";
+    strings["could not seek to end: %s"].plurals[0] = "=could not seek to end: %s";
+    strings["could not determine file size: %s"].plurals[0] = "=could not determine file size: %s";
+    strings["file size is invalid!"].plurals[0] = "=file size is invalid!";
+    strings["could not seek to beginning: %s"].plurals[0] = "=could not seek to beginning: %s";
+    strings["could not read entire file: %s"].plurals[0] = "=could not read entire file: %s";
+    strings["invalid wavetable header/data!"].plurals[0] = "=invalid wavetable header/data!";
+    strings["premature end of file"].plurals[0] = "=premature end of file";
+    strings["too many samples!"].plurals[0] = "=too many samples!";
+    strings["no free patterns in channel %d!"].plurals[0] = "=no free patterns in channel %d!";
+
+    //           src/engine/fileOps.cpp
+
+    strings["this module was created with a more recent version of Furnace!"].plurals[0] = "=this module was created with a more recent version of Furnace!";
+    strings["couldn't seek to info header!"].plurals[0] = "=couldn't seek to info header!";
+    strings["invalid info header!"].plurals[0] = "=invalid info header!";
+    strings["pattern length is negative!"].plurals[0] = "=pattern length is negative!";
+    strings["pattern length is too large!"].plurals[0] = "=pattern length is too large!";
+    strings["song length is negative!"].plurals[0] = "=song length is negative!";
+    strings["song is too long!"].plurals[0] = "=song is too long!";
+    strings["invalid instrument count!"].plurals[0] = "=invalid instrument count!";
+    strings["invalid wavetable count!"].plurals[0] = "=invalid wavetable count!";
+    strings["invalid sample count!"].plurals[0] = "=invalid sample count!";
+    strings["invalid pattern count!"].plurals[0] = "=invalid pattern count!";
+    strings["unrecognized system ID %.2x!"].plurals[0] = "=unrecognized system ID %.2x!";
+    strings["zero chips!"].plurals[0] = "=zero chips!";
+    strings["channel %d has too many effect columns! (%d)"].plurals[0] = "=channel %d has too many effect columns! (%d)";
+    strings["couldn't seek to chip %d flags!"].plurals[0] = "=couldn't seek to chip %d flags!";
+    strings["invalid flag header!"].plurals[0] = "=invalid flag header!";
+    strings["couldn't read instrument directory"].plurals[0] = "=couldn't read instrument directory";
+    strings["invalid instrument directory data!"].plurals[0] = "=invalid instrument directory data!";
+    strings["couldn't read wavetable directory"].plurals[0] = "=couldn't read wavetable directory";
+    strings["invalid wavetable directory data!"].plurals[0] = "=invalid wavetable directory data!";
+    strings["couldn't read sample directory"].plurals[0] = "=couldn't read sample directory";
+    strings["invalid sample directory data!"].plurals[0] = "=invalid sample directory data!";
+    strings["couldn't seek to subsong %d!"].plurals[0] = "=couldn't seek to subsong %d!";
+    strings["invalid subsong header!"].plurals[0] = "=invalid subsong header!";
+    strings["couldn't seek to instrument %d!"].plurals[0] = "=couldn't seek to instrument %d!";
+    strings["invalid instrument header/data!"].plurals[0] = "=invalid instrument header/data!";
+    strings["couldn't seek to wavetable %d!"].plurals[0] = "=couldn't seek to wavetable %d!";
+    strings["couldn't seek to sample %d!"].plurals[0] = "=couldn't seek to sample %d!";
+    strings["invalid sample header/data!"].plurals[0] = "=invalid sample header/data!";
+    strings["couldn't seek to pattern in %x!"].plurals[0] = "=couldn't seek to pattern in %x!";
+    strings["invalid pattern header!"].plurals[0] = "=invalid pattern header!";
+    strings["pattern channel out of range!"].plurals[0] = "=pattern channel out of range!";
+    strings["pattern index out of range!"].plurals[0] = "=pattern index out of range!";
+    strings["pattern subsong out of range!"].plurals[0] = "=pattern subsong out of range!";
+    strings["incomplete file"].plurals[0] = "=incomplete file";
+    strings["file is too small"].plurals[0] = "=file is too small";
+    strings["not a .dmf/.fur/.fub song"].plurals[0] = "=not a .dmf/.fur/.fub song";
+    strings["unknown decompression error"].plurals[0] = "=unknown decompression error";
+    strings["decompression error: %s"].plurals[0] = "=decompression error: %s";
+    strings["unknown decompression finish error"].plurals[0] = "=unknown decompression finish error";
+    strings["decompression finish error: %s"].plurals[0] = "=decompression finish error: %s";
+    strings["not a compatible song/instrument"].plurals[0] = "=not a compatible song/instrument";
+    strings["maximum number of instruments is 256"].plurals[0] = "=maximum number of instruments is 256";
+    strings["maximum number of wavetables is 256"].plurals[0] = "=maximum number of wavetables is 256";
+    strings["maximum number of samples is 256"].plurals[0] = "=maximum number of samples is 256";
+
+    //           src/engine/fileOpsIns.cpp
+
+    strings["did not read entire instrument file!"].plurals[0] = "=did not read entire instrument file!";
+    strings["this instrument is made with a more recent version of Furnace!"].plurals[0] = "=this instrument is made with a more recent version of Furnace!";
+    strings["unknown instrument format"].plurals[0] = "=unknown instrument format";
+    strings["there is more data at the end of the file! what happened here!"].plurals[0] = "=there is more data at the end of the file! what happened here!";
+    strings["exactly %d bytes, if you are curious"].plurals[0] = "=exactly %d bytes, if you are curious";
+
+    //           src/engine/fileOpsSample.cpp
+
+    strings["could not open file! (%s)"].plurals[0] = "=could not open file! (%s)";
+    strings["could not get file length! (%s)"].plurals[0] = "=could not get file length! (%s)";
+    strings["file is empty!"].plurals[0] = "=file is empty!";
+    strings["file is invalid!"].plurals[0] = "=file is invalid!";
+    strings["could not seek to beginning of file! (%s)"].plurals[0] = "=could not seek to beginning of file! (%s)";
+    strings["wait... is that right? no I don't think so..."].plurals[0] = "=wait... is that right? no I don't think so...";
+    strings["BRR sample is empty!"].plurals[0] = "=BRR sample is empty!";
+    strings["possibly corrupt BRR sample!"].plurals[0] = "=possibly corrupt BRR sample!";
+    strings["could not read file! (%s)"].plurals[0] = "=could not read file! (%s)";
+    strings["Furnace was not compiled with libsndfile!"].plurals[0] = "=Furnace was not compiled with libsndfile!";
+    strings["could not open file! (%s %s)"].plurals[0] = "=could not open file! (%s %s)";
+    strings["could not open file! (%s)\nif this is raw sample data, you may import it by right-clicking the Load Sample icon and selecting \"import raw\"."].plurals[0] = "=could not open file! (%s)\nif this is raw sample data, you may import it by right-clicking the Load Sample icon and selecting \"import raw\".";
+    strings["this sample is too big! max sample size is 16777215."].plurals[0] = "=this sample is too big! max sample size is 16777215.";
+
+    //           src/engine/importExport/bnk.cpp
+
+    strings["GEMS BNK currently not supported."].plurals[0] = "=GEMS BNK currently not supported.";
+
+    //           src/engine/importExport/dmf.cpp
+
+    strings["this version is not supported by Furnace yet"].plurals[0] = "=this version is not supported by Furnace yet";
+    strings["system not supported. running old version?"].plurals[0] = "=system not supported. running old version?";
+    strings["Yamaha YMU759 emulation is incomplete! please migrate your song to the OPL3 system."].plurals[0] = "=Yamaha YMU759 emulation is incomplete! please migrate your song to the OPL3 system.";
+    strings["order at %d, %d out of range! (%d)"].plurals[0] = "=order at %d, %d out of range! (%d)";
+    strings["file is corrupt or unreadable at operators"].plurals[0] = "=file is corrupt or unreadable at operators";
+    strings["file is corrupt or unreadable at wavetables"].plurals[0] = "=file is corrupt or unreadable at wavetables";
+    strings["file is corrupt or unreadable at effect columns"].plurals[0] = "=file is corrupt or unreadable at effect columns";
+    strings["file is corrupt or unreadable at samples"].plurals[0] = "=file is corrupt or unreadable at samples";
+    strings["invalid version to save in! this is a bug!"].plurals[0] = "=invalid version to save in! this is a bug!";
+    strings["multiple systems not possible on .dmf"].plurals[0] = "=multiple systems not possible on .dmf";
+    strings["YMU759 song saving is not supported"].plurals[0] = "=YMU759 song saving is not supported";
+    strings["Master System FM expansion not supported in 1.0/legacy .dmf!"].plurals[0] = "=Master System FM expansion not supported in 1.0/legacy .dmf!";
+    strings["NES + VRC7 not supported in 1.0/legacy .dmf!"].plurals[0] = "=NES + VRC7 not supported in 1.0/legacy .dmf!";
+    strings["FDS not supported in 1.0/legacy .dmf!"].plurals[0] = "=FDS not supported in 1.0/legacy .dmf!";
+    strings["this system is not possible on .dmf"].plurals[0] = "=this system is not possible on .dmf";
+    strings["maximum .dmf song length is 127"].plurals[0] = "=maximum .dmf song length is 127";
+    strings["maximum number of instruments in .dmf is 128"].plurals[0] = "=maximum number of instruments in .dmf is 128";
+    strings["maximum number of wavetables in .dmf is 64"].plurals[0] = "=maximum number of wavetables in .dmf is 64";
+    strings["order %d, %d is out of range (0-127)"].plurals[0] = "=order %d, %d is out of range (0-127)";
+    strings["only the currently selected subsong will be saved"].plurals[0] = "=only the currently selected subsong will be saved";
+    strings["grooves will not be saved"].plurals[0] = "=grooves will not be saved";
+    strings["only the first two speeds will be effective"].plurals[0] = "=only the first two speeds will be effective";
+    strings[".dmf format does not support virtual tempo"].plurals[0] = "=.dmf format does not support virtual tempo";
+    strings[".dmf format does not support tuning"].plurals[0] = "=.dmf format does not support tuning";
+    strings["absolute duty/cutoff macro not available in .dmf!"].plurals[0] = "=absolute duty/cutoff macro not available in .dmf!";
+    strings["duty precision will be lost"].plurals[0] = "=duty precision will be lost";
+    strings[".dmf format does not support arbitrary-pitch sample mode"].plurals[0] = "=.dmf format does not support arbitrary-pitch sample mode";
+    strings["no FM macros in .dmf format"].plurals[0] = "=no FM macros in .dmf format";
+    strings[".dmf only supports volume or cutoff macro in C64, but not both. volume macro will be lost."].plurals[0] = "=.dmf only supports volume or cutoff macro in C64, but not both. volume macro will be lost.";
+    strings["note/macro release will be converted to note off!"].plurals[0] = "=note/macro release will be converted to note off!";
+    strings["samples' rates will be rounded to nearest compatible value"].plurals[0] = "=samples' rates will be rounded to nearest compatible value";
+
+    //           src/engine/importExport/dmp.cpp
+
+    strings["unknown instrument type %d!"].plurals[0] = "=unknown instrument type %d!";
+
+    //           src/engine/importExport/fc.cpp
+
+    strings["invalid header!"].plurals[0] = "=invalid header!";
+
+    //           src/engine/importExport/ftm.cpp
+
+    strings["incompatible version"].plurals[0] = "=incompatible version";
+    strings["channel counts do not match"].plurals[0] = "=channel counts do not match";
+    strings["too many instruments/out of range"].plurals[0] = "=too many instruments/out of range";
+    strings["invalid instrument type"].plurals[0] = "=invalid instrument type";
+    strings["too many sequences"].plurals[0] = "=too many sequences";
+    strings["sequences block version is too old"].plurals[0] = "=sequences block version is too old";
+    strings["unknown block "].plurals[0] = "=unknown block ";
+    strings["incomplete block "].plurals[0] = "=incomplete block ";
+
+    //           src/engine/importExport/gyb.cpp
+
+    strings["GYBv3 file appears to have invalid data offsets."].plurals[0] = "=GYBv3 file appears to have invalid data offsets.";
+    strings["Invalid value found in patch file. %s"].plurals[0] = "=Invalid value found in patch file. %s";
+
+    //           src/engine/importExport/s3i.cpp
+
+    strings["S3I PCM samples currently not supported."].plurals[0] = "=S3I PCM samples currently not supported.";
+
+    //           src/engine/vgmOps.cpp
+
+    strings["VGM version is too low"].plurals[0] = "=VGM version is too low";
+
+    //names of memory composition memories
+
+    strings["DPCM"].plurals[0] = "=DPCM";
+    strings["Chip Memory"].plurals[0] = "=Chip Memory";
+    strings["Sample ROM"].plurals[0] = "=Sample ROM";
+    strings["Sample Memory"].plurals[0] = "=Sample Memory";
+    strings["SPC/DSP Memory"].plurals[0] = "=SPC/DSP Memory";
+    strings["Sample RAM"].plurals[0] = "=Sample RAM";
+    strings["ADPCM"].plurals[0] = "=ADPCM";
+
+    //names of memory entries
+
+    strings["Sample"].plurals[0] = "=Sample";
+    strings["Wave RAM"].plurals[0] = "=Wave RAM";
+    strings["End of Sample"].plurals[0] = "=End of Sample";
+    strings["Reserved wavetable RAM"].plurals[0] = "=Reserved wavetable RAM";
+    strings["Phrase Book"].plurals[0] = "=Phrase Book";
+    strings["Channel %d (load)"].plurals[0] = "=Channel %d (load)";
+    strings["Channel %d (play)"].plurals[0] = "=Channel %d (play)";
+    strings["Registers"].plurals[0] = "=Registers";
+    strings["PCM"].plurals[0] = "=PCM";
+    strings["ADPCM"].plurals[0] = "=ADPCM";
+    strings["State"].plurals[0] = "=State";
+    strings["Sample Directory"].plurals[0] = "=Sample Directory";
+    strings["Echo Buffer"].plurals[0] = "=Echo Buffer";
 
     //   sesd    src/engine/sysDef.cpp
 

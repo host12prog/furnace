@@ -22,6 +22,17 @@
 #include "../../ta-log.h"
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define rWrite(a,v) {if(!skipRegisterWrites) {writes.push(QueuedWrite(a,v)); if(dumpWrites) addWrite(a,v);}}
 
 #define CHIP_DIVIDER 64
@@ -539,7 +550,7 @@ void DivPlatformK007232::renderSamples(int sysID) {
   memset(sampleLoaded,0,256*sizeof(bool));
 
   memCompo=DivMemoryComposition();
-  memCompo.name="Sample ROM";
+  memCompo.name=_LE("Sample ROM");
 
   size_t memPos=0;
   for (int i=0; i<parent->song.sampleLen; i++) {
@@ -559,7 +570,7 @@ void DivPlatformK007232::renderSamples(int sysID) {
         memPos=(memPos+0x1ffff)&0xfe0000;
       }
       sampleOffK007232[i]=memPos;
-      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+actualLength+1));
+      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+actualLength+1));
       for (int j=0; j<actualLength; j++) {
         // convert to 7 bit unsigned
         unsigned char val=(unsigned char)(s->data8[j])^0x80;

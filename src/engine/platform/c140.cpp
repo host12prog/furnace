@@ -22,6 +22,17 @@
 #include "../../ta-log.h"
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define CHIP_FREQBASE (is219?74448896:12582912)
 
 #define rWrite(a,v) {if(!skipRegisterWrites) {writes.push(QueuedWrite(a,v)); if(dumpWrites) addWrite(a,v); }}
@@ -606,7 +617,7 @@ void DivPlatformC140::renderSamples(int sysID) {
   memset(sampleLoaded,0,256*sizeof(bool));
 
   memCompo=DivMemoryComposition();
-  memCompo.name="Sample ROM";
+  memCompo.name=_LE("Sample ROM");
 
   size_t memPos=0;
   for (int i=0; i<parent->song.sampleLen; i++) {
@@ -666,7 +677,7 @@ void DivPlatformC140::renderSamples(int sysID) {
       }
       sampleOff[i]=memPos>>1;
       sampleLoaded[i]=true;
-      memCompo.entries.push_back(DivMemoryEntry((DivMemoryEntryType)(DIV_MEMORY_BANK0+((memPos>>17)&3)),"Sample",i,memPos,memPos+length));
+      memCompo.entries.push_back(DivMemoryEntry((DivMemoryEntryType)(DIV_MEMORY_BANK0+((memPos>>17)&3)),_LE("Sample"),i,memPos,memPos+length));
       memPos+=length;
     } else { // C140 (16-bit)
       unsigned int length=s->length16+4;
@@ -713,7 +724,7 @@ void DivPlatformC140::renderSamples(int sysID) {
       }
       sampleOff[i]=memPos>>1;
       sampleLoaded[i]=true;
-      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+length));
+      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+length));
       memPos+=length;
     }
   }

@@ -19,6 +19,17 @@
 
 #include "shared.h"
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 class DivEngine;
 
 void DivEngine::loadS3I(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath) {
@@ -78,7 +89,7 @@ void DivEngine::loadS3I(SafeReader& reader, std::vector<DivInstrument*>& ret, St
       // Skip more stuff we don't need
       reader.seek(21, SEEK_CUR);
     } else {
-      lastError="S3I PCM samples currently not supported.";
+      lastError=_LE("S3I PCM samples currently not supported.");
       logE("S3I PCM samples currently not supported.");
     }
     String insName = reader.readString(28);
@@ -91,7 +102,7 @@ void DivEngine::loadS3I(SafeReader& reader, std::vector<DivInstrument*>& ret, St
       logW("S3I signature invalid.");
     };
   } catch (EndOfFileException& e) {
-    lastError="premature end of file";
+    lastError=_LE("premature end of file");
     logE("premature end of file");
     delete ins;
     return;

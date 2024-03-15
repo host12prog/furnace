@@ -23,6 +23,17 @@
 #include <string.h>
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define rWrite(a,v) if (!skipRegisterWrites) {writes.push(QueuedWrite(a,v)); if (dumpWrites) {addWrite(a,v);} }
 #define rWriteDelay(a,v,d) if (!skipRegisterWrites) {writes.push(QueuedWrite(a,v,d)); if (dumpWrites) {addWrite(a,v);} }
 
@@ -387,9 +398,9 @@ void DivPlatformMSM6295::renderSamples(int sysID) {
   }
 
   memCompo=DivMemoryComposition();
-  memCompo.name="Sample ROM";
+  memCompo.name=_LE("Sample ROM");
 
-  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,"Phrase Book",-1,0,128*8));
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,_LE("Phrase Book"),-1,0,128*8));
 
   // sample data
   size_t memPos=128*8;
@@ -429,7 +440,7 @@ void DivPlatformMSM6295::renderSamples(int sysID) {
       bankedPhrase[i].bank=bankInd;
       bankedPhrase[i].phrase=phraseInd;
       bankedPhrase[i].length=paddedLen;
-      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+paddedLen));
+      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+paddedLen));
       memPos+=paddedLen;
       phraseInd++;
     }
@@ -471,7 +482,7 @@ void DivPlatformMSM6295::renderSamples(int sysID) {
         sampleLoaded[i]=true;
       }
       sampleOffVOX[i]=memPos;
-      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+paddedLen));
+      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+paddedLen));
       memPos+=paddedLen;
     }
     adpcmMemLen=memPos+256;

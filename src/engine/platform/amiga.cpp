@@ -23,6 +23,17 @@
 #include "../../ta-log.h"
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define AMIGA_DIVIDER 8
 #define AMIGA_VPMASK 7
 #define CHIP_DIVIDER 16
@@ -940,10 +951,10 @@ void DivPlatformAmiga::renderSamples(int sysID) {
   memset(sampleLoaded,0,256*sizeof(bool));
 
   memCompo=DivMemoryComposition();
-  memCompo.name="Chip Memory";
+  memCompo.name=_LE("Chip Memory");
 
-  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_WAVE_RAM,"Wave RAM",-1,0,1024));
-  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,"End of Sample",-1,1024,1026));
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_WAVE_RAM,_LE("Wave RAM"),-1,0,1024));
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,_LE("End of Sample"),-1,1024,1026));
 
   // first 1024 bytes reserved for wavetable
   // the next 2 bytes are reserved for end of sample
@@ -965,7 +976,7 @@ void DivPlatformAmiga::renderSamples(int sysID) {
     if (actualLength>0) {
       sampleOff[i]=memPos;
       memcpy(&sampleMem[memPos],s->data8,actualLength);
-      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+actualLength));
+      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+actualLength));
       memPos+=actualLength;
     }
     // align memPos to short
