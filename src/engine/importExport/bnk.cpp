@@ -19,6 +19,17 @@
 
 #include "shared.h"
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 class DivEngine;
 
 void DivEngine::loadBNK(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath) {
@@ -98,7 +109,7 @@ void DivEngine::loadBNK(SafeReader& reader, std::vector<DivInstrument*>& ret, St
       reader.seek(0, SEEK_END);
 
     } catch (EndOfFileException& e) {
-      lastError="premature end of file";
+      lastError=_LE("premature end of file");
       logE("premature end of file");
       for (int i = 0; i < readCount; ++i) {
         delete insList[i];
@@ -108,7 +119,7 @@ void DivEngine::loadBNK(SafeReader& reader, std::vector<DivInstrument*>& ret, St
 
   } else {
     // assume GEMS BNK for now.
-    lastError="GEMS BNK currently not supported.";
+    lastError=_LE("GEMS BNK currently not supported.");
     logE("GEMS BNK currently not supported.");
   }
 

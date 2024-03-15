@@ -5112,6 +5112,76 @@ void DivLocale::addTranslationsTemplate()
     strings["could not open file! (%s)\nif this is raw sample data, you may import it by right-clicking the Load Sample icon and selecting \"import raw\"."].plurals[0] = "=could not open file! (%s)\nif this is raw sample data, you may import it by right-clicking the Load Sample icon and selecting \"import raw\".";
     strings["this sample is too big! max sample size is 16777215."].plurals[0] = "=this sample is too big! max sample size is 16777215.";
 
+    //           src/engine/importExport/bnk.cpp
+
+    strings["GEMS BNK currently not supported."].plurals[0] = "=GEMS BNK currently not supported.";
+
+    //           src/engine/importExport/dmf.cpp
+
+    strings["this version is not supported by Furnace yet"].plurals[0] = "=this version is not supported by Furnace yet";
+    strings["system not supported. running old version?"].plurals[0] = "=system not supported. running old version?";
+    strings["Yamaha YMU759 emulation is incomplete! please migrate your song to the OPL3 system."].plurals[0] = "=Yamaha YMU759 emulation is incomplete! please migrate your song to the OPL3 system.";
+    strings["order at %d, %d out of range! (%d)"].plurals[0] = "=order at %d, %d out of range! (%d)";
+    strings["file is corrupt or unreadable at operators"].plurals[0] = "=file is corrupt or unreadable at operators";
+    strings["file is corrupt or unreadable at wavetables"].plurals[0] = "=file is corrupt or unreadable at wavetables";
+    strings["file is corrupt or unreadable at effect columns"].plurals[0] = "=file is corrupt or unreadable at effect columns";
+    strings["file is corrupt or unreadable at samples"].plurals[0] = "=file is corrupt or unreadable at samples";
+    strings["invalid version to save in! this is a bug!"].plurals[0] = "=invalid version to save in! this is a bug!";
+    strings["multiple systems not possible on .dmf"].plurals[0] = "=multiple systems not possible on .dmf";
+    strings["YMU759 song saving is not supported"].plurals[0] = "=YMU759 song saving is not supported";
+    strings["Master System FM expansion not supported in 1.0/legacy .dmf!"].plurals[0] = "=Master System FM expansion not supported in 1.0/legacy .dmf!";
+    strings["NES + VRC7 not supported in 1.0/legacy .dmf!"].plurals[0] = "=NES + VRC7 not supported in 1.0/legacy .dmf!";
+    strings["FDS not supported in 1.0/legacy .dmf!"].plurals[0] = "=FDS not supported in 1.0/legacy .dmf!";
+    strings["this system is not possible on .dmf"].plurals[0] = "=this system is not possible on .dmf";
+    strings["maximum .dmf song length is 127"].plurals[0] = "=maximum .dmf song length is 127";
+    strings["maximum number of instruments in .dmf is 128"].plurals[0] = "=maximum number of instruments in .dmf is 128";
+    strings["maximum number of wavetables in .dmf is 64"].plurals[0] = "=maximum number of wavetables in .dmf is 64";
+    strings["order %d, %d is out of range (0-127)"].plurals[0] = "=order %d, %d is out of range (0-127)";
+    strings["only the currently selected subsong will be saved"].plurals[0] = "=only the currently selected subsong will be saved";
+    strings["grooves will not be saved"].plurals[0] = "=grooves will not be saved";
+    strings["only the first two speeds will be effective"].plurals[0] = "=only the first two speeds will be effective";
+    strings[".dmf format does not support virtual tempo"].plurals[0] = "=.dmf format does not support virtual tempo";
+    strings[".dmf format does not support tuning"].plurals[0] = "=.dmf format does not support tuning";
+    strings["absolute duty/cutoff macro not available in .dmf!"].plurals[0] = "=absolute duty/cutoff macro not available in .dmf!";
+    strings["duty precision will be lost"].plurals[0] = "=duty precision will be lost";
+    strings[".dmf format does not support arbitrary-pitch sample mode"].plurals[0] = "=.dmf format does not support arbitrary-pitch sample mode";
+    strings["no FM macros in .dmf format"].plurals[0] = "=no FM macros in .dmf format";
+    strings[".dmf only supports volume or cutoff macro in C64, but not both. volume macro will be lost."].plurals[0] = "=.dmf only supports volume or cutoff macro in C64, but not both. volume macro will be lost.";
+    strings["note/macro release will be converted to note off!"].plurals[0] = "=note/macro release will be converted to note off!";
+    strings["samples' rates will be rounded to nearest compatible value"].plurals[0] = "=samples' rates will be rounded to nearest compatible value";
+
+    //           src/engine/importExport/dmp.cpp
+
+    strings["unknown instrument type %d!"].plurals[0] = "=unknown instrument type %d!";
+
+    //           src/engine/importExport/fc.cpp
+
+    strings["invalid header!"].plurals[0] = "=invalid header!";
+
+    //           src/engine/importExport/ftm.cpp
+
+    strings["incompatible version"].plurals[0] = "=incompatible version";
+    strings["channel counts do not match"].plurals[0] = "=channel counts do not match";
+    strings["too many instruments/out of range"].plurals[0] = "=too many instruments/out of range";
+    strings["invalid instrument type"].plurals[0] = "=invalid instrument type";
+    strings["too many sequences"].plurals[0] = "=too many sequences";
+    strings["sequences block version is too old"].plurals[0] = "=sequences block version is too old";
+    strings["unknown block "].plurals[0] = "=unknown block ";
+    strings["incomplete block "].plurals[0] = "=incomplete block ";
+
+    //           src/engine/importExport/gyb.cpp
+
+    strings["GYBv3 file appears to have invalid data offsets."].plurals[0] = "=GYBv3 file appears to have invalid data offsets.";
+    strings["Invalid value found in patch file. %s"].plurals[0] = "=Invalid value found in patch file. %s";
+
+    //           src/engine/importExport/s3i.cpp
+
+    strings["S3I PCM samples currently not supported."].plurals[0] = "=S3I PCM samples currently not supported.";
+
+    //           src/engine/vgmOps.cpp
+
+    strings["VGM version is too low"].plurals[0] = "=VGM version is too low";
+
     //   sesd    src/engine/sysDef.cpp
 
     strings["help! what's going on!"].plurals[0] = "=help! what's going on!";

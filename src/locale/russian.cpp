@@ -5007,6 +5007,76 @@ void DivLocale::addTranslationsRussian()
     strings["could not open file! (%s)\nif this is raw sample data, you may import it by right-clicking the Load Sample icon and selecting \"import raw\"."].plurals[0] = "не смог открыть файл! (%s)\nесли это сырые данные сэмпла, попробуйте импортировать их: ПКМ по иконке \"Открыть\" в списке сэмплов, выберите \"импорт сырых данных\".";
     strings["this sample is too big! max sample size is 16777215."].plurals[0] = "сэмпл слишком большой! максимальный размер сэмпла 16777215.";
 
+    //           src/engine/importExport/bnk.cpp
+
+    strings["GEMS BNK currently not supported."].plurals[0] = "GEMS BNK пока не поддерживается.";
+
+    //           src/engine/importExport/dmf.cpp
+
+    strings["this version is not supported by Furnace yet"].plurals[0] = "эта версия пока не поддерживается Furnace";
+    strings["system not supported. running old version?"].plurals[0] = "система не поддерживается. вы на старой версии?";
+    strings["Yamaha YMU759 emulation is incomplete! please migrate your song to the OPL3 system."].plurals[0] = "Эмуляция Yamaha YMU759 неполноценна! переделайте свой трек под OPL3.";
+    strings["order at %d, %d out of range! (%d)"].plurals[0] = "значение в матрице паттернов %d, %d недействительно! (%d)";
+    strings["file is corrupt or unreadable at operators"].plurals[0] = "файл повреждён/нечитаем в секции операторов";
+    strings["file is corrupt or unreadable at wavetables"].plurals[0] = "файл повреждён/нечитаем в секции волновых таблиц";
+    strings["file is corrupt or unreadable at effect columns"].plurals[0] = "файл повреждён/нечитаем в секции столбцов эффектов";
+    strings["file is corrupt or unreadable at samples"].plurals[0] = "файл повреждён/нечитаем в секции сэмплов";
+    strings["invalid version to save in! this is a bug!"].plurals[0] = "енправильная версия для сохранения! это баг!";
+    strings["multiple systems not possible on .dmf"].plurals[0] = "несколько чипов/систем невозможно сохранить в .dmf";
+    strings["YMU759 song saving is not supported"].plurals[0] = "Сохранение треков с YMU759 не поддерживается";
+    strings["Master System FM expansion not supported in 1.0/legacy .dmf!"].plurals[0] = "Master System FM расширение не поддерживается в 1.0/legacy .dmf!";
+    strings["NES + VRC7 not supported in 1.0/legacy .dmf!"].plurals[0] = "NES + VRC7 не поддерживаются в 1.0/legacy .dmf!";
+    strings["FDS not supported in 1.0/legacy .dmf!"].plurals[0] = "FDS не поддерживается в 1.0/legacy .dmf!";
+    strings["this system is not possible on .dmf"].plurals[0] = "эта система не поддерживается в .dmf";
+    strings["maximum .dmf song length is 127"].plurals[0] = "маскимальная длина трека .dmf составляет 127";
+    strings["maximum number of instruments in .dmf is 128"].plurals[0] = "максимальное число инструментов в .dmf равно 128";
+    strings["maximum number of wavetables in .dmf is 64"].plurals[0] = "максимальное число волновых таблиц в .dmf равно 64";
+    strings["order %d, %d is out of range (0-127)"].plurals[0] = "значение в матрице паттернов %d, %d недействительно (0-127)";
+    strings["only the currently selected subsong will be saved"].plurals[0] = "будет сохранена только текущая подпесня";
+    strings["grooves will not be saved"].plurals[0] = "ритм-паттерны не будут сохранены";
+    strings["only the first two speeds will be effective"].plurals[0] = "только первые две скорости будут применены";
+    strings[".dmf format does not support virtual tempo"].plurals[0] = ".dmf не поддерживает виртуальный темп";
+    strings[".dmf format does not support tuning"].plurals[0] = ".dmf не поддерживает настройку строя (частоты ноты A-4)";
+    strings["absolute duty/cutoff macro not available in .dmf!"].plurals[0] = "абсолютные макросы частоты среза/скважности не поддерживаются в .dmf!";
+    strings["duty precision will be lost"].plurals[0] = "точность настройки скважности не будет сохранена";
+    strings[".dmf format does not support arbitrary-pitch sample mode"].plurals[0] = ".dmf не поддерживает проигрывание сэмплов с произвольной частотой";
+    strings["no FM macros in .dmf format"].plurals[0] = "формат .dmf не поддерживает FM-макросы";
+    strings[".dmf only supports volume or cutoff macro in C64, but not both. volume macro will be lost."].plurals[0] = ".dmf позволяет применять для C64 либо макрос громкости, либо макрос частоты среза, но не оба одновременно. макрос громкости не будет сохранён.";
+    strings["note/macro release will be converted to note off!"].plurals[0] = "ноты релиза макросов или огибающей будут преобразованы в заглушение ноты!";
+    strings["samples' rates will be rounded to nearest compatible value"].plurals[0] = "частоты дискретизации сэмплов будут преобразованы в ближайшие совместимые.";
+
+    //           src/engine/importExport/dmp.cpp
+
+    strings["unknown instrument type %d!"].plurals[0] = "неизвестный тип инструмента %d!";
+
+    //           src/engine/importExport/fc.cpp
+
+    strings["invalid header!"].plurals[0] = "неправильный заголовок";
+
+    //           src/engine/importExport/ftm.cpp
+
+    strings["incompatible version"].plurals[0] = "несовместимая версия";
+    strings["channel counts do not match"].plurals[0] = "количества каналов не совпадают";
+    strings["too many instruments/out of range"].plurals[0] = "слишком много инструментов/недействительное значение";
+    strings["invalid instrument type"].plurals[0] = "неизвестный тип инструмента";
+    strings["too many sequences"].plurals[0] = "слишком много последовательностей (макросов)";
+    strings["sequences block version is too old"].plurals[0] = "слишком старая версия блока последовательностей";
+    strings["unknown block "].plurals[0] = "неизвестный блок ";
+    strings["incomplete block "].plurals[0] = "неполный блок ";
+
+    //           src/engine/importExport/gyb.cpp
+
+    strings["GYBv3 file appears to have invalid data offsets."].plurals[0] = "Похоже, что в файле GYBv3 неверные смещения (указатели на данные).";
+    strings["Invalid value found in patch file. %s"].plurals[0] = "Найдено недействительное значение в файле патча. %s";
+
+    //           src/engine/importExport/s3i.cpp
+
+    strings["S3I PCM samples currently not supported."].plurals[0] = "S3I: ИКМ-сэмплы пока не поддерживаются.";
+
+    //           src/engine/vgmOps.cpp
+
+    strings["VGM version is too low"].plurals[0] = "Версия VGM слишком старая";
+
     //   sesd    src/engine/sysDef.cpp
 
     strings["20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"].plurals[0] = "20xx: Режим канала (бит 0: меандр; бит 1: шум; бит 2: огибающая)";

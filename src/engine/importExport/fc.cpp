@@ -19,6 +19,17 @@
 
 #include "importExport.h"
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 class DivEngine;
 
 unsigned char fcXORTriangle[32]={
@@ -159,7 +170,7 @@ bool DivEngine::loadFC(unsigned char* file, size_t len) {
     // load here
     if (!reader.seek(0,SEEK_SET)) {
       logE("premature end of file!");
-      lastError="incomplete file";
+      lastError=_LE("incomplete file");
       delete[] file;
       return false;
     }
@@ -274,7 +285,7 @@ bool DivEngine::loadFC(unsigned char* file, size_t len) {
     // patterns
     if (!reader.seek(patPtr,SEEK_SET)) {
       logE("premature end of file!");
-      lastError="incomplete file";
+      lastError=_LE("incomplete file");
       delete[] file;
       return false;
     }
@@ -295,7 +306,7 @@ bool DivEngine::loadFC(unsigned char* file, size_t len) {
     // freq sequences
     if (!reader.seek(freqMacroPtr,SEEK_SET)) {
       logE("premature end of file!");
-      lastError="incomplete file";
+      lastError=_LE("incomplete file");
       delete[] file;
       return false;
     }
@@ -311,7 +322,7 @@ bool DivEngine::loadFC(unsigned char* file, size_t len) {
     // vol sequences
     if (!reader.seek(volMacroPtr,SEEK_SET)) {
       logE("premature end of file!");
-      lastError="incomplete file";
+      lastError=_LE("incomplete file");
       delete[] file;
       return false;
     }
@@ -327,7 +338,7 @@ bool DivEngine::loadFC(unsigned char* file, size_t len) {
     // samples
     if (!reader.seek(samplePtr,SEEK_SET)) {
       logE("premature end of file!");
-      lastError="incomplete file";
+      lastError=_LE("incomplete file");
       delete[] file;
       return false;
     }
@@ -354,7 +365,7 @@ bool DivEngine::loadFC(unsigned char* file, size_t len) {
     if (isFC14) {
       if (!reader.seek(wavePtr,SEEK_SET)) {
         logE("premature end of file!");
-        lastError="incomplete file";
+        lastError=_LE("incomplete file");
         delete[] file;
         return false;
       }
@@ -700,10 +711,10 @@ bool DivEngine::loadFC(unsigned char* file, size_t len) {
     success=true;
   } catch (EndOfFileException& e) {
     //logE("premature end of file!");
-    lastError="incomplete file";
+    lastError=_LE("incomplete file");
   } catch (InvalidHeaderException& e) {
     //logE("invalid header!");
-    lastError="invalid header!";
+    lastError=_LE("invalid header!");
   }
   return success;
 }
