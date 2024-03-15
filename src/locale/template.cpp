@@ -5182,6 +5182,32 @@ void DivLocale::addTranslationsTemplate()
 
     strings["VGM version is too low"].plurals[0] = "=VGM version is too low";
 
+    //names of memory composition memories
+
+    strings["DPCM"].plurals[0] = "=DPCM";
+    strings["Chip Memory"].plurals[0] = "=Chip Memory";
+    strings["Sample ROM"].plurals[0] = "=Sample ROM";
+    strings["Sample Memory"].plurals[0] = "=Sample Memory";
+    strings["SPC/DSP Memory"].plurals[0] = "=SPC/DSP Memory";
+    strings["Sample RAM"].plurals[0] = "=Sample RAM";
+    strings["ADPCM"].plurals[0] = "=ADPCM";
+
+    //names of memory entries
+
+    strings["Sample"].plurals[0] = "=Sample";
+    strings["Wave RAM"].plurals[0] = "=Wave RAM";
+    strings["End of Sample"].plurals[0] = "=End of Sample";
+    strings["Reserved wavetable RAM"].plurals[0] = "=Reserved wavetable RAM";
+    strings["Phrase Book"].plurals[0] = "=Phrase Book";
+    strings["Channel %d (load)"].plurals[0] = "=Channel %d (load)";
+    strings["Channel %d (play)"].plurals[0] = "=Channel %d (play)";
+    strings["Registers"].plurals[0] = "=Registers";
+    strings["PCM"].plurals[0] = "=PCM";
+    strings["ADPCM"].plurals[0] = "=ADPCM";
+    strings["State"].plurals[0] = "=State";
+    strings["Sample Directory"].plurals[0] = "=Sample Directory";
+    strings["Echo Buffer"].plurals[0] = "=Echo Buffer";
+
     //   sesd    src/engine/sysDef.cpp
 
     strings["help! what's going on!"].plurals[0] = "=help! what's going on!";

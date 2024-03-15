@@ -22,6 +22,17 @@
 #include "../../ta-log.h"
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define CHIP_FREQBASE 25165824
 
 #define rWrite(a,v) {if(!skipRegisterWrites) {ymz280b.write(0,a); ymz280b.write(1,v); regPool[a]=v; if(dumpWrites) addWrite(a,v); }}
@@ -453,7 +464,7 @@ void DivPlatformYMZ280B::renderSamples(int sysID) {
   memset(sampleLoaded,0,256*sizeof(bool));
 
   memCompo=DivMemoryComposition();
-  memCompo.name="Sample ROM";
+  memCompo.name=_LE("Sample ROM");
 
   size_t memPos=0;
   for (int i=0; i<parent->song.sampleLen; i++) {
@@ -479,7 +490,7 @@ void DivPlatformYMZ280B::renderSamples(int sysID) {
       }
 #endif
       sampleOff[i]=memPos;
-      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+length));
+      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+length));
       memPos+=length;
     }
     if (actualLength<length) {

@@ -22,6 +22,17 @@
 #include "../../ta-log.h"
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 //#define rWrite(a,v) pendingWrites[a]=v;
 #define rWrite(a,v) if (!skipRegisterWrites) {writes.push(QueuedWrite(a,v)); if (dumpWrites) {addWrite(a,v);} }
 #define chWrite(c,a,v) rWrite(((c)<<5)|(a),v);
@@ -668,7 +679,7 @@ void DivPlatformSoundUnit::renderSamples(int sysID) {
   memset(sampleLoaded,0,256*sizeof(bool));
 
   memCompo=DivMemoryComposition();
-  memCompo.name="Sample RAM";
+  memCompo.name=_LE("Sample RAM");
 
   size_t memPos=0;
   for (int i=0; i<parent->song.sampleLen; i++) {
@@ -692,7 +703,7 @@ void DivPlatformSoundUnit::renderSamples(int sysID) {
       sampleLoaded[i]=true;
     }
     sampleOffSU[i]=memPos;
-    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+paddedLen));
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+paddedLen));
     memPos+=paddedLen;
   }
   sampleMemLen=memPos;
@@ -704,7 +715,7 @@ void DivPlatformSoundUnit::renderSamples(int sysID) {
   memCompo.capacity=sampleMemSize?65536:8192;
 
   if (initIlSize&64) {
-    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_ECHO,"Echo Buffer",-1,memCompo.capacity-((1+(initIlSize&63))<<7),memCompo.capacity));
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_ECHO,_LE("Echo Buffer"),-1,memCompo.capacity-((1+(initIlSize&63))<<7),memCompo.capacity));
   }
 }
 

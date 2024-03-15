@@ -22,6 +22,17 @@
 #include "../../ta-log.h"
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define PITCH_OFFSET ((double)(16*2048*(chanMax+1)))
 #define NOTE_ES5506(c,note) (parent->calcBaseFreq(chipClock,chan[c].pcm.freqOffs,note,false))
 
@@ -1214,7 +1225,7 @@ void DivPlatformES5506::renderSamples(int sysID) {
   memset(sampleLoaded,0,256*sizeof(bool));
 
   memCompo=DivMemoryComposition();
-  memCompo.name="Sample Memory";
+  memCompo.name=_LE("Sample Memory");
 
   size_t memPos=128; // add silent at begin and end of each bank for reverse playback
   for (int i=0; i<parent->song.sampleLen; i++) {
@@ -1244,7 +1255,7 @@ void DivPlatformES5506::renderSamples(int sysID) {
     }
     sampleOffES5506[i]=memPos;
     sampleLoaded[i]=true;
-    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+length));
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+length));
     memPos+=length;
   }
   sampleMemLen=memPos+256;

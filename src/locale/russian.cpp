@@ -5077,6 +5077,32 @@ void DivLocale::addTranslationsRussian()
 
     strings["VGM version is too low"].plurals[0] = "Версия VGM слишком старая";
 
+    //names of memory composition memories
+
+    strings["DPCM"].plurals[0] = "ДИКМ";
+    strings["Chip Memory"].plurals[0] = "Память чипа";
+    strings["Sample ROM"].plurals[0] = "ПЗУ сэмплов";
+    strings["Sample Memory"].plurals[0] = "Память сэмплов";
+    strings["SPC/DSP Memory"].plurals[0] = "Память SPC/DSP";
+    strings["Sample RAM"].plurals[0] = "ОЗУ сэмплов";
+    strings["ADPCM"].plurals[0] = "АДИКМ";
+
+    //names of memory entries
+
+    strings["Sample"].plurals[0] = "Сэмпл";
+    strings["Wave RAM"].plurals[0] = "ОЗУ волн";
+    strings["End of Sample"].plurals[0] = "Конец сэмпла";
+    strings["Reserved wavetable RAM"].plurals[0] = "ОЗУ, зарезервированная под волновую таблицу";
+    strings["Phrase Book"].plurals[0] = "Книга фраз";
+    strings["Channel %d (load)"].plurals[0] = "Канал %d (загрузка)";
+    strings["Channel %d (play)"].plurals[0] = "Канал %d (проигрывание)";
+    strings["Registers"].plurals[0] = "Регистры";
+    strings["PCM"].plurals[0] = "ИКМ";
+    strings["ADPCM"].plurals[0] = "АДИКМ";
+    strings["State"].plurals[0] = "Состояние";
+    strings["Sample Directory"].plurals[0] = "Секция сэмплов";
+    strings["Echo Buffer"].plurals[0] = "Буфер эхо";
+
     //   sesd    src/engine/sysDef.cpp
 
     strings["20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"].plurals[0] = "20xx: Режим канала (бит 0: меандр; бит 1: шум; бит 2: огибающая)";

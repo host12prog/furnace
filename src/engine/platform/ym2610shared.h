@@ -28,6 +28,17 @@
 #include "sound/ymfm/ymfm_opn.h"
 #include <string.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define CHIP_FREQBASE fmFreqBase
 #define CHIP_DIVIDER fmDivBase
 
@@ -190,7 +201,7 @@ class DivPlatformYM2610Base: public DivPlatformOPN {
           sampleLoaded[0][i]=true;
         }
         sampleOffA[i]=memPos;
-        memCompoA.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+paddedLen));
+        memCompoA.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+paddedLen));
         memPos+=paddedLen;
       }
       adpcmAMemLen=memPos+256;
@@ -224,7 +235,7 @@ class DivPlatformYM2610Base: public DivPlatformOPN {
           sampleLoaded[1][i]=true;
         }
         sampleOffB[i]=memPos;
-        memCompoB.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+paddedLen));
+        memCompoB.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+paddedLen));
         memPos+=paddedLen;
       }
       adpcmBMemLen=memPos+256;

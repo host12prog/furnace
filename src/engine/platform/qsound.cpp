@@ -22,6 +22,17 @@
 #include "../../ta-log.h"
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define CHIP_DIVIDER (1248*2)
 #define QS_NOTE_FREQUENCY(x) parent->calcBaseFreq(440,4096,(x)-3,false)
 
@@ -732,7 +743,7 @@ bool DivPlatformQSound::isSampleLoaded(int index, int sample) {
 }
 
 const char* DivPlatformQSound::getSampleMemName(int index) {
-  return index == 0 ? "PCM" : index == 1 ? "ADPCM" : NULL;
+  return index == 0 ? _LE("PCM") : index == 1 ? _LE("ADPCM") : NULL;
 }
 
 const DivMemoryComposition* DivPlatformQSound::getMemCompo(int index) {
@@ -746,7 +757,7 @@ void DivPlatformQSound::renderSamples(int sysID) {
   memset(sampleLoadedBS,0,256*sizeof(bool));
 
   memCompo=DivMemoryComposition();
-  memCompo.name="Sample ROM";
+  memCompo.name=_LE("Sample ROM");
 
   size_t memPos=0;
   for (int i=0; i<parent->song.sampleLen; i++) {
@@ -779,7 +790,7 @@ void DivPlatformQSound::renderSamples(int sysID) {
       sampleLoaded[i]=true;
     }
     offPCM[i]=memPos^0x8000;
-    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"PCM",i,memPos,memPos+length));
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("PCM"),i,memPos,memPos+length));
     memPos+=length+16;
   }
   sampleMemLen=memPos+256;
@@ -817,7 +828,7 @@ void DivPlatformQSound::renderSamples(int sysID) {
       sampleLoadedBS[i]=true;
     }
     offBS[i]=memPos;
-    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE_ALT1,"ADPCM",i,memPos,memPos+length));
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE_ALT1,_LE("ADPCM"),i,memPos,memPos+length));
     memPos+=length+16;
   }
   sampleMemLenBS=memPos+256;
