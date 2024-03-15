@@ -3189,7 +3189,8 @@ DivDataErrors DivInstrument::readInsData(SafeReader& reader, short version, DivS
     tildearrow_version = true;
   } else if (memcmp(magic,"INS2",4)==0) {
     type=1;
-  }else if (memcmp(magic,"FINS",4)==0) {
+    tildearrow_version = true;
+  } else if (memcmp(magic,"FINS",4)==0) {
     type=2;
     tildearrow_version = true;
   } else if (memcmp(magic,"IN2B",4)==0) {
@@ -3209,7 +3210,6 @@ DivDataErrors DivInstrument::readInsData(SafeReader& reader, short version, DivS
   }
   return readInsDataOld(reader,version,tildearrow_version);
 }
-
 void DivInstrument::convertC64SpecialMacro() {
   // merge special and test/gate macros into new special macro
   int maxLen=MAX(std.get_macro(DIV_MACRO_EX3, false)->len,std.get_macro(DIV_MACRO_EX4, false)->len);
