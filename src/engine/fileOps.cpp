@@ -1314,7 +1314,9 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
     // subsongs
     if (ds.version>=95) {
       subSong->name=reader.readString();
+      logV("before reading subsong notes pos %x", (int)reader.tell());
       subSong->notes=reader.readString();
+      logV("after reading subsong notes pos %x", (int)reader.tell());
       numberOfSubSongs=(unsigned char)reader.readC();
       reader.readC(); // reserved
       reader.readC();
@@ -2041,6 +2043,15 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
           if (!ds.systemFlags[i].has("fixedAll")) {
             ds.systemFlags[i].set("fixedAll",false);
           }
+        }
+      }
+    }
+
+    // C64 macro race
+    if (ds.version<195) {
+      for (int i=0; i<ds.systemLen; i++) {
+        if (ds.system[i]==DIV_SYSTEM_C64_8580 || ds.system[i]==DIV_SYSTEM_C64_6581) {
+          ds.systemFlags[i].set("macroRace",true);
         }
       }
     }

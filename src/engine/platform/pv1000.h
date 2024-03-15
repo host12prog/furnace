@@ -31,6 +31,7 @@ class DivPlatformPV1000: public DivDispatch {
   Channel chan[3];
   DivDispatchOscBuffer* oscBuf[3];
   bool isMuted[3];
+  bool raw_freq[3];
 
   unsigned char regPool[4];
   d65010g031_t d65010g031;

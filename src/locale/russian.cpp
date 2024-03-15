@@ -291,7 +291,7 @@ void DivLocale::addTranslationsRussian()
     strings["accept 0B+0D to jump to a specific row of an order##sgcf"].plurals[0] = "принять 0B+0D как прыжок на конкретную строку паттерна на конкретной позиции матрицы паттернов";
     strings["Other##sgcf"].plurals[0] = "Другое";
     strings["Auto-insert one tick gap between notes##sgcf"].plurals[0] = "Автоматически вставлять паузу в 1 шаг движка между нотами";
-    strings["when enabled, a one-tick note cut will be inserted between non-legato/non-portamento notes.\nthis simulates the behavior of some Amiga/SNES music engines.\n\nineffective on C64.##sgcf"].plurals[0] = "при включении этого флага между нотами без эффекта легато и авто-портаменто будет вставлено заглушение ноты длиной в один шаг движка.\nэто симуляция повдения некоторых музыкальных драйверов Amiga/SNES.\n\nничего не меняет для C64.";
+    strings["when enabled, a one-tick note cut will be inserted between non-legato/non-portamento notes.\nthis simulates the behavior of some Amiga/SNES music engines.\n\nineffective on C64.##sgcf"].plurals[0] = "при включении этого флага между нотами без эффекта легато и авто-портаменто будет вставлено заглушение ноты длиной в один шаг движка.\nэто симуляция поведения некоторых музыкальных драйверов Amiga/SNES.\n\nничего не меняет для C64.";
     strings["Don't reset slides after note off##sgcf"].plurals[0] = "Не переинициализировать авто-портаменто после окончания ноты";
     strings["when enabled, note off will not reset the channel's slide effect.##sgcf"].plurals[0] = "при включении этого флага окончание ноты не будет останавливать авто-портаменто на этом канале.";
     strings["Don't reset portamento after reaching target##sgcf"].plurals[0] = "Не переинициализировать авто-портаменто после достижения цели";
@@ -307,6 +307,7 @@ void DivLocale::addTranslationsRussian()
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "Останавливать аппаратное портаменто на каналах импульсов NES при начале новой ноты";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "Не останавливать эффект изменения громкости при достижении нулевой или максимальной громкости";
     strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Останавливать эффекты E1xy/E2xy на новой ноте";
+    strings["Slower 0Axy volume slide##sgcf"].plurals[0] = "Замедление изменения громкости эффектом 0Axy";
 
     //   sgcs  src/gui/csPlayer.cpp
 
@@ -2170,6 +2171,7 @@ void DivLocale::addTranslationsRussian()
     strings["- 0 disables envelope reset. not recommended!\n- 1 may trigger SID envelope bugs.\n- values that are too high may result in notes being skipped.##sgsc"].plurals[0] = "- 0 отключает сброс огибающей. не рекомендуется!\n- 1 может привести к появлению сбоев огибающей SID.\n- слишком большие значения могут привести к пропуску коротких нот.";
     strings["Disable 1Exy env update (compatibility)##sgsc"].plurals[0] = "Отключить обновление огибающей при применении эффекта 1Exy (совместимость)";
     strings["Relative duty and cutoff macros are coarse (compatibility)##sgsc"].plurals[0] = "Макросы скважности и частоты среза в относительном режиме имеют меньшее разрешение (совместимость)";
+    strings["Cutoff macro race conditions (compatibility)##sgsc"].plurals[0] = "Состояние гонки макроса скважности (совместимость)";
     strings["Disable ExtCh FM macros (compatibility)##sgsc1"].plurals[0] = "Отключить FM-макросы для расширенного канала (совместимость)";
     strings["Ins change in ExtCh operator 2-4 affects FB (compatibility)##sgsc1"].plurals[0] = "Смена инструмента на операторах 2-4 расш. канала меняет FB (совместимость)";
     strings["SSG Volume##sgsc0"].plurals[0] = "Громкость SSG";
@@ -3419,6 +3421,8 @@ void DivLocale::addTranslationsRussian()
     strings["Wave RAM##CC_GUI_COLOR_MEMORY_WAVE_RAM"].plurals[0] = "ОЗУ волн##CC_GUI_COLOR_MEMORY_WAVE_RAM";
     strings["Wavetable (static)##CC_GUI_COLOR_MEMORY_WAVE_STATIC"].plurals[0] = "Волновая таблица (статич.)##CC_GUI_COLOR_MEMORY_WAVE_STATIC";
     strings["Echo buffer##CC_GUI_COLOR_MEMORY_ECHO"].plurals[0] = "Буфер эхо##CC_GUI_COLOR_MEMORY_ECHO";
+    strings["Namco 163 load pos##CC_GUI_COLOR_MEMORY_N163_LOAD"].plurals[0] = "Namco 163 положение загрузки##CC_GUI_COLOR_MEMORY_N163_LOAD";
+    strings["Namco 163 play pos##CC_GUI_COLOR_MEMORY_N163_PLAY"].plurals[0] = "Namco 163 положение проигрывания##CC_GUI_COLOR_MEMORY_N163_PLAY";
     strings["Sample (bank 0)##CC_GUI_COLOR_MEMORY_BANK0"].plurals[0] = "Сэмпл (банк 0)##CC_GUI_COLOR_MEMORY_BANK0";
     strings["Sample (bank 1)##CC_GUI_COLOR_MEMORY_BANK1"].plurals[0] = "Сэмпл (банк 1)##CC_GUI_COLOR_MEMORY_BANK1";
     strings["Sample (bank 2)##CC_GUI_COLOR_MEMORY_BANK2"].plurals[0] = "Сэмпл (банк 2)##CC_GUI_COLOR_MEMORY_BANK2";
@@ -4183,6 +4187,7 @@ void DivLocale::addTranslationsRussian()
     strings["Volume##sgiPV"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiPV"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiPV"].plurals[0] = "Частота";
+    strings["Raw Frequency##sgiPV"].plurals[0] = "Частота (регистровое знач.)";
 
     //   sgiQ      src/gui/inst/qsound.cpp
 
@@ -4885,6 +4890,7 @@ void DivLocale::addTranslationsRussian()
     strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: Установить глубину вибрато";
     strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: Расстройка (80: без расстройки)";
     strings["E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen"].plurals[0] = "E6xy: Отложенное транспонирование ноты (x: 0-7 = вверх, 8-F = вниз (после (x % 7) шагов движка); y: полутонов)";
+    strings["E7xx: Delayed note release##seen"].plurals[0] = "E7xx: Отложенный релиз";
     strings["EAxx: Legato##seen"].plurals[0] = "EAxx: Легато";
     strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: (СОВМЕСТИМОСТЬ) Установить банк сэмплов";
     strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: Заглушить ноту";
@@ -5451,6 +5457,7 @@ void DivLocale::addTranslationsRussian()
     strings["a SoC with wavetable sound hardware.##sesd"].plurals[0] = "СнК с таблично-волновым синтезатором звука.";
     strings["a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.##sesd"].plurals[0] = "игровая консоль с тремя каналами квадратных волн. вот что получается, если скрестить TIA и VIC.";
     strings["10xx: Set ring modulation (0: disable, 1: enable)##sesd"].plurals[0] = "10xx: Кольцевая модуляция (0: выкл., 1: вкл.)";
+    strings["11xx: Raw frequency (0-3E)##sesd"].plurals[0] = "11xx: Сырая частота (0-3E)";
     strings["another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.##sesd"].plurals[0] = "ещё одна система с пищалкой ZX Spectrum, на этот раз содержащая полноценные прямоугольные волны с регулировкой скважности и тремя уровнями громкости для каждого канала. Также имеется перекрывающий канал сэмплов с регулировкой частоты.";
     strings["12xx: Set pulse width##sesd1"].plurals[0] = "12xx: Скважность";
     strings["this PCM chip was widely used at Konami arcade boards in 1990-1992.##sesd"].plurals[0] = "этот ИКМ чип широко использовался в игровых автоматах Konami с 1990 по 1992.";

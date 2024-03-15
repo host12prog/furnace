@@ -118,6 +118,8 @@ const char* DivEngine::getEffectDesc(unsigned char effect, int chan, bool notNul
       return "E5xx: Set pitch (80: center)##seen";
     case 0xe6:
       return "E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen";
+    case 0xe7:
+      return "E7xx: Delayed note release##seen";
     case 0xea:
       return "EAxx: Legato##seen";
     case 0xeb:
@@ -4333,11 +4335,13 @@ bool DivEngine::init() {
   return true;
 }
 
-bool DivEngine::quit() {
+bool DivEngine::quit(bool saveConfig) {
   deinitAudioBackend();
   quitDispatch();
-  logI("saving config.");
-  saveConf();
+  if (saveConfig) {
+    logI("saving config.");
+    saveConf();
+  }
   active=false;
   for (int i=0; i<DIV_MAX_OUTPUTS; i++) {
     if (oscBuf[i]!=NULL) delete[] oscBuf[i];

@@ -425,6 +425,7 @@ enum FurnaceGUIColors {
   GUI_COLOR_PATCHBAY_CONNECTION_HI,
 
   GUI_COLOR_MEMORY_BG,
+  GUI_COLOR_MEMORY_DATA,
   GUI_COLOR_MEMORY_FREE,
   GUI_COLOR_MEMORY_PADDING,
   GUI_COLOR_MEMORY_RESERVED,
@@ -435,6 +436,8 @@ enum FurnaceGUIColors {
   GUI_COLOR_MEMORY_WAVE_RAM,
   GUI_COLOR_MEMORY_WAVE_STATIC,
   GUI_COLOR_MEMORY_ECHO,
+  GUI_COLOR_MEMORY_N163_LOAD,
+  GUI_COLOR_MEMORY_N163_PLAY,
   GUI_COLOR_MEMORY_BANK0,
   GUI_COLOR_MEMORY_BANK1,
   GUI_COLOR_MEMORY_BANK2,
@@ -2832,7 +2835,7 @@ class FurnaceGUI {
     bool detectOutOfBoundsWindow(SDL_Rect& failing);
     int processEvent(SDL_Event* ev);
     bool loop();
-    bool finish();
+    bool finish(bool saveConfig=false);
     bool init();
     bool requestQuit();
     FurnaceGUI();

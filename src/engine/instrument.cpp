@@ -3210,7 +3210,6 @@ DivDataErrors DivInstrument::readInsData(SafeReader& reader, short version, DivS
   }
   return readInsDataOld(reader,version,tildearrow_version);
 }
-
 void DivInstrument::convertC64SpecialMacro() {
   // merge special and test/gate macros into new special macro
   int maxLen=MAX(std.get_macro(DIV_MACRO_EX3, false)->len,std.get_macro(DIV_MACRO_EX4, false)->len);

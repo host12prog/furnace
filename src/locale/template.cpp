@@ -364,6 +364,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "=Stop NES pulse channels hardware sweep on new note";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "=Do not stop volume slide after reaching zero or full volume";
     strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "=Stop E1xy/E2xy effects on new note";
+    strings["Slower 0Axy volume slide##sgcf"].plurals[0] = "=Slower 0Axy volume slide";
 
     //   sgcs  src/gui/csPlayer.cpp
 
@@ -2224,6 +2225,7 @@ void DivLocale::addTranslationsTemplate()
     strings["- 0 disables envelope reset. not recommended!\n- 1 may trigger SID envelope bugs.\n- values that are too high may result in notes being skipped.##sgsc"].plurals[0] = "=- 0 disables envelope reset. not recommended!\n- 1 may trigger SID envelope bugs.\n- values that are too high may result in notes being skipped.";
     strings["Disable 1Exy env update (compatibility)##sgsc"].plurals[0] = "=Disable 1Exy env update (compatibility)";
     strings["Relative duty and cutoff macros are coarse (compatibility)##sgsc"].plurals[0] = "=Relative duty and cutoff macros are coarse (compatibility)";
+    strings["Cutoff macro race conditions (compatibility)##sgsc"].plurals[0] = "Cutoff macro race conditions (compatibility)";
     strings["Disable ExtCh FM macros (compatibility)##sgsc1"].plurals[0] = "=Disable ExtCh FM macros (compatibility)";
     strings["Ins change in ExtCh operator 2-4 affects FB (compatibility)##sgsc1"].plurals[0] = "=Ins change in ExtCh operator 2-4 affects FB (compatibility)";
     strings["SSG Volume##sgsc0"].plurals[0] = "=SSG Volume";
@@ -3452,6 +3454,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Wave RAM##CC_GUI_COLOR_MEMORY_WAVE_RAM"].plurals[0] = "=Wave RAM##CC_GUI_COLOR_MEMORY_WAVE_RAM";
     strings["Wavetable (static)##CC_GUI_COLOR_MEMORY_WAVE_STATIC"].plurals[0] = "=Wavetable (static)##CC_GUI_COLOR_MEMORY_WAVE_STATIC";
     strings["Echo buffer##CC_GUI_COLOR_MEMORY_ECHO"].plurals[0] = "=Echo buffer##CC_GUI_COLOR_MEMORY_ECHO";
+    strings["Namco 163 load pos##CC_GUI_COLOR_MEMORY_N163_LOAD"].plurals[0] = "=Namco 163 play pos##CC_GUI_COLOR_MEMORY_N163_LOAD";
+    strings["Namco 163 play pos##CC_GUI_COLOR_MEMORY_N163_PLAY"].plurals[0] = "=Namco 163 play pos##CC_GUI_COLOR_MEMORY_N163_PLAY";
     strings["Sample (bank 0)##CC_GUI_COLOR_MEMORY_BANK0"].plurals[0] = "=Sample (bank 0)##CC_GUI_COLOR_MEMORY_BANK0";
     strings["Sample (bank 1)##CC_GUI_COLOR_MEMORY_BANK1"].plurals[0] = "=Sample (bank 1)##CC_GUI_COLOR_MEMORY_BANK1";
     strings["Sample (bank 2)##CC_GUI_COLOR_MEMORY_BANK2"].plurals[0] = "=Sample (bank 2)##CC_GUI_COLOR_MEMORY_BANK2";
@@ -4286,6 +4290,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Volume##sgiPV"].plurals[0] = "=Volume";
     strings["Arpeggio##sgiPV"].plurals[0] = "=Arpeggio";
     strings["Pitch##sgiPV"].plurals[0] = "=Pitch";
+    strings["Raw Frequency##sgiPV"].plurals[0] = "=Raw Frequency";
 
     //   sgiQ      src/gui/inst/qsound.cpp
 
@@ -4990,6 +4995,7 @@ void DivLocale::addTranslationsTemplate()
     strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: =Set vibrato range";
     strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: =Set pitch (80: center)";
     strings["E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen"].plurals[0] = "E6xy: =Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)";
+    strings["E7xx: Delayed note release##seen"].plurals[0] = "E7xx: =Delayed note release";
     strings["EAxx: Legato##seen"].plurals[0] = "EAxx: =Legato";
     strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: =Set LEGACY sample mode bank";
     strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: =Note cut";
@@ -5593,6 +5599,7 @@ void DivLocale::addTranslationsTemplate()
     strings["a SoC with wavetable sound hardware.##sesd"].plurals[0] = "=a SoC with wavetable sound hardware.";
     strings["a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.##sesd"].plurals[0] = "=a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.";
     strings["10xx: Set ring modulation (0: disable, 1: enable)##sesd"].plurals[0] = "=10xx: Set ring modulation (0: disable, 1: enable)";
+    strings["11xx: Raw frequency (0-3E)##sesd"].plurals[0] = "=11xx: Raw frequency (0-3E)";
     strings["ZX Spectrum Beeper (QuadTone Engine)##sesd"].plurals[0] = "=ZX Spectrum Beeper (QuadTone Engine)";
     strings["another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.##sesd"].plurals[0] = "=another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.";
     strings["12xx: Set pulse width##sesd1"].plurals[0] = "=12xx: Set pulse width";

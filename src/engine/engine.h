@@ -54,8 +54,8 @@ class DivWorkPool;
 
 #define DIV_UNSTABLE
 
-#define DIV_VERSION "dev194"
-#define DIV_ENGINE_VERSION 194
+#define DIV_VERSION "dev195"
+#define DIV_ENGINE_VERSION 195
 // for imports
 #define DIV_VERSION_MOD 0xff01
 #define DIV_VERSION_FC 0xff02
@@ -107,6 +107,7 @@ struct DivChannelState {
   int tremoloDepth, tremoloRate, tremoloPos;
   int pw_slide, pw_slide_speed, cutoff_slide, cutoff_slide_speed;
   int transposeDelay, transposeSemitones;
+  int releaseDelay;
   unsigned char arp, arpStage, arpTicks, panL, panR, panRL, panRR, lastVibrato, lastPorta;
   bool doNote, legato, portaStop, keyOn, keyOff, nowYouCanStop, stopOnOff, releasing;
   bool arpYield, delayLocked, inPorta, scheduledSlideReset, shorthandPorta, wasShorthandPorta, noteOnInhibit, resetArp;
@@ -148,6 +149,7 @@ struct DivChannelState {
     cutoff_slide_speed(0),
     transposeDelay(-1),
     transposeSemitones(0xff),
+    releaseDelay(-1),
     arp(0),
     arpStage(-1),
     arpTicks(1),
@@ -1280,7 +1282,7 @@ class DivEngine {
     void everythingOK();
 
     // terminate the engine.
-    bool quit();
+    bool quit(bool saveConfig=true);
 
     unsigned char* yrw801ROM;
     unsigned char* tg100ROM;
