@@ -3189,8 +3189,7 @@ DivDataErrors DivInstrument::readInsData(SafeReader& reader, short version, DivS
     tildearrow_version = true;
   } else if (memcmp(magic,"INS2",4)==0) {
     type=1;
-    tildearrow_version = true;
-  } else if (memcmp(magic,"FINS",4)==0) {
+  }else if (memcmp(magic,"FINS",4)==0) {
     type=2;
     tildearrow_version = true;
   } else if (memcmp(magic,"IN2B",4)==0) {
