@@ -1659,7 +1659,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             s->speeds.val[0]=reader.readI();
           }
           if (blockVersion>=2) {
-            int temp = s->virtualTempoN;
             int tempo = reader.readI();
 
             logV("tempo %d", tempo);
