@@ -891,7 +891,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             {
               ds.subsong[i]->hz=customHz;
 
-              ds.subsong[i]->virtualTempoN = (short)(150.0 / (float)customHz * (pal ? (50.0) : (60.0)));
+              ds.subsong[i]->virtualTempoD = (short)(2.5 * customHz);
             }
             logV("- %s",subSongName);
           }
@@ -1670,7 +1670,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             }
             else
             {
-              s->virtualTempoN = (short)((float)temp * (float)tempo / 150.0);
+              s->virtualTempoN = tempo;
             }
 
             s->patLen=reader.readI();
@@ -1765,12 +1765,12 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                 pat->data[row][3]=nextVol;
                 if(map_channels[ch] == vrc6_saw_chan) //scale volume
                 {
-                  pat->data[row][3] = pat->data[row][3] * 42 / 15;
+                  pat->data[row][3] = (pat->data[row][3] * 42) / 15;
                 }
 
                 if(map_channels[ch] == fds_chan)
                 {
-                  pat->data[row][3] = pat->data[row][3] * 31 / 15;
+                  pat->data[row][3] = (pat->data[row][3] * 31) / 15;
                 }
               } 
               else 
