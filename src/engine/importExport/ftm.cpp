@@ -871,30 +871,53 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         ds.name=reader.readString(32);
         ds.author=reader.readString(32);
         ds.category=reader.readString(32);
+        ds.copyright=ds.category; //copyright seems to never show up in UI?
         ds.systemName="NES";
       } else if (blockName=="HEADER") {
         CHECK_BLOCK_VERSION(4);
         unsigned char totalSongs=reader.readC();
         logV("%d songs:",totalSongs+1);
         ds.subsong.reserve(totalSongs);
-        for (int i=0; i<=totalSongs; i++) {
-          String subSongName=reader.readString();
-          ds.subsong.push_back(new DivSubSong);
-          ds.subsong[i]->name=subSongName;
-          ds.subsong[i]->hilightA=hilightA;
-          ds.subsong[i]->hilightB=hilightB;
-          if (customHz!=0) {
-            ds.subsong[i]->hz=customHz;
+        if (blockVersion>=3) 
+        {
+          for (int i=0; i<=totalSongs; i++) 
+          {
+            String subSongName=reader.readString();
+            ds.subsong.push_back(new DivSubSong);
+            ds.subsong[i]->name=subSongName;
+            ds.subsong[i]->hilightA=hilightA;
+            ds.subsong[i]->hilightB=hilightB;
+            if (customHz!=0)
+            {
+              ds.subsong[i]->hz=customHz;
 
-            ds.subsong[i]->virtualTempoN = (short)(150.0 / (float)customHz * (pal ? (50.0) : (60.0)));
+              ds.subsong[i]->virtualTempoN = (short)(150.0 / (float)customHz * (pal ? (50.0) : (60.0)));
+            }
+            logV("- %s",subSongName);
           }
-          logV("- %s",subSongName);
         }
+        else //one subsong
+        {
+          ds.subsong.push_back(new DivSubSong);
+          ds.subsong[0]->name="";
+          ds.subsong[0]->hilightA=hilightA;
+          ds.subsong[0]->hilightB=hilightB;
+          if (customHz!=0)
+          {
+            ds.subsong[0]->hz=customHz;
+
+            ds.subsong[0]->virtualTempoN = (short)(150.0 / (float)customHz * (pal ? (50.0) : (60.0)));
+          }
+          logV("one song");
+        }
+
         for (unsigned int i=0; i<tchans; i++) {
           // TODO: obey channel ID
           unsigned char chID=reader.readC();
           logV("for channel ID %d",chID);
-          for (int j=0; j<=totalSongs; j++) {
+
+          for (int j=0; j<=totalSongs; j++) 
+          {
             unsigned char effectCols=reader.readC();
 
             if(map_channels[i] == 0xfe)
@@ -1433,17 +1456,50 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         CHECK_BLOCK_VERSION(6);
         //reader.seek(blockSize,SEEK_CUR);
 
-        if(blockVersion < 3)
+        if(blockVersion < 2)
         {
           lastError=_LE("sequences block version is too old");
           delete[] file;
           return false;
         }
 
+        unsigned int seq_count = reader.readI();
+
+        if(blockVersion == 2)
+        {
+          for(unsigned int i = 0; i < seq_count; i++)
+          {
+            unsigned int index = reader.readI();
+            unsigned int type = reader.readI();
+            unsigned char size = reader.readC();
+            macros[index][type].len = size;
+
+            logV("macro index %d type %d size %d", index, type, size);
+
+            for(int j = 0; j < size; j++)
+            {
+              unsigned char seq = reader.readC();
+              reader.readC(); //what
+              macros[index][type].val[j] = seq;
+
+              logV("- %d", seq);
+            }
+
+            for(int k = 0; k < (int)ds.ins.size(); k++)
+            {
+              DivInstrument* ins=ds.ins[k];
+              if(sequenceIndex[k][type] == index && ins->type == DIV_INS_NES && hasSequence[k][type])
+              {
+                copy_macro(ins, &macros[index][type], type, 0);
+              }
+            }
+          }
+
+          goto end_seq;
+        }
+
         unsigned char* Indices = new unsigned char[128 * 5];
 		    unsigned char* Types = new unsigned char[128 * 5];
-
-        unsigned int seq_count = reader.readI();
 
         for(unsigned int i = 0; i < seq_count; i++)
         {
@@ -1539,6 +1595,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
         delete[] Indices;
         delete[] Types;
+
+        end_seq:;
       } 
       else if (blockName=="GROOVES") {
         CHECK_BLOCK_VERSION(6);
@@ -1949,7 +2007,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
           memset(sample->dataDPCM, 0xAA, true_size);
 
-          reader.read(sample->dataDPCM,true_size);
+          reader.read(sample->dataDPCM,sample_len);
         }
 
         int last_non_empty_sample = 0xff;
