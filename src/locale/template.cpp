@@ -4995,7 +4995,7 @@ void DivLocale::addTranslationsTemplate()
     strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: =Set vibrato range";
     strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: =Set pitch (80: center)";
     strings["E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen"].plurals[0] = "E6xy: =Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)";
-    strings["E7xx: Delayed note release##seen"].plurals[0] = "E7xx: =Delayed note release";
+    strings["E7xx: Macro release##seen"].plurals[0] = "E7xx: =Macro release";
     strings["EAxx: Legato##seen"].plurals[0] = "EAxx: =Legato";
     strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: =Set LEGACY sample mode bank";
     strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: =Note cut";
@@ -5012,6 +5012,9 @@ void DivLocale::addTranslationsTemplate()
     strings["F8xx: Single tick volume slide up##seen"].plurals[0] = "F8xx: =Single tick volume slide up";
     strings["F9xx: Single tick volume slide down##seen"].plurals[0] = "F9xx: =Single tick volume slide down";
     strings["FAxx: Fast volume slide (0y: down; x0: up)##seen"].plurals[0] = "FAxx: =Fast volume slide (0y: down; x0: up)";
+    strings["FCxx: Note release##seen"].plurals[0] = "FCxx: =Note release";
+    strings["FDxx: Set virtual tempo numerator##seen"].plurals[0] = "FDxx: =Set virtual tempo numerator";
+    strings["FExx: Set virtual tempo denominator##seen"].plurals[0] = "FExx: =Set virtual tempo denominator";
     strings["FFxx: Stop song##seen"].plurals[0] = "FFxx: =Stop song";
     strings["9xxx: Set sample offset*256##seen"].plurals[0] = "9xxx: =Set sample offset*256";
 

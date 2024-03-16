@@ -411,17 +411,17 @@ int DivPlatformN163::dispatch(DivCommand c) {
     }
     case DIV_CMD_WAVE:
       chan[c.chan].wave=c.value;
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_N163));
       if (chan[c.chan].waveMode) {
         chan[c.chan].waveUpdated=true;
-        chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_N163));
       }
       chan[c.chan].keyOn=true;
       break;
     case DIV_CMD_WAVE_LOCAL:
       chan[c.chan].wave=c.value | (1 << 30);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_N163));
       if (chan[c.chan].waveMode) {
         chan[c.chan].waveUpdated=true;
-        chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_N163));
       }
       chan[c.chan].keyOn=true;
       break;
