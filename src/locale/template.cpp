@@ -364,7 +364,6 @@ void DivLocale::addTranslationsTemplate()
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "=Stop NES pulse channels hardware sweep on new note";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "=Do not stop volume slide after reaching zero or full volume";
     strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "=Stop E1xy/E2xy effects on new note";
-    strings["Slower 0Axy volume slide##sgcf"].plurals[0] = "=Slower 0Axy volume slide";
 
     //   sgcs  src/gui/csPlayer.cpp
 
@@ -4995,7 +4994,6 @@ void DivLocale::addTranslationsTemplate()
     strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: =Set vibrato range";
     strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: =Set pitch (80: center)";
     strings["E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen"].plurals[0] = "E6xy: =Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)";
-    strings["E7xx: Delayed note release##seen"].plurals[0] = "E7xx: =Delayed note release";
     strings["EAxx: Legato##seen"].plurals[0] = "EAxx: =Legato";
     strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: =Set LEGACY sample mode bank";
     strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: =Note cut";

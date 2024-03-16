@@ -652,6 +652,10 @@ void DivEngine::processRow(int i, bool afterDelay) {
         chan[i].portaSpeed=-1;
         chan[i].isE1E2 = false;
         dispatchCmd(DivCommand(DIV_CMD_HINT_PORTA,i,CLAMP(chan[i].portaNote,-128,127),MAX(chan[i].portaSpeed,0)));
+        /*if (i==2 && sysOfChan[i]==DIV_SYSTEM_SMS) {
+          chan[i+1].portaNote=-1;
+          chan[i+1].portaSpeed=-1;
+        }*/
       }
       chan[i].scheduledSlideReset=true;
     }
@@ -918,9 +922,9 @@ void DivEngine::processRow(int i, bool afterDelay) {
         // TODO: non-0x-or-x0 value should be treated as 00
         if (effectVal!=0) {
           if ((effectVal&15)!=0) {
-            chan[i].volSpeed=-(effectVal&15)*(song.slowerVolSlide ? 32 : 64);
+            chan[i].volSpeed=-(effectVal&15)*64;
           } else {
-            chan[i].volSpeed=(effectVal>>4)*(song.slowerVolSlide ? 32 : 64);
+            chan[i].volSpeed=(effectVal>>4)*64;
           }
           // tremolo and vol slides are incompatible
           chan[i].tremoloDepth=0;
@@ -1038,9 +1042,6 @@ void DivEngine::processRow(int i, bool afterDelay) {
           chan[i].transposeDelay = -1;
           chan[i].transposeSemitones = 0xff;
         }
-        break;
-      case 0xe7: // Delayed note release
-        chan[i].releaseDelay = effectVal + 1;
         break;
       case 0xea: // legato mode
         chan[i].legato=effectVal;
@@ -1638,36 +1639,6 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
             chan[i].transposeDelay = -1;
             chan[i].transposeSemitones = 0xff;
           }
-        }
-
-        if(chan[i].releaseDelay > 0) //delayed note release
-        {
-          chan[i].releaseDelay--;
-        }
-        if(chan[i].releaseDelay == 0)
-        {
-          chan[i].keyOn=false;
-          chan[i].keyOff=true;
-          if (chan[i].inPorta && song.noteOffResetsSlides) {
-            if (chan[i].stopOnOff) {
-              chan[i].portaNote=-1;
-              chan[i].portaSpeed=-1;
-              chan[i].isE1E2 = false;
-              dispatchCmd(DivCommand(DIV_CMD_HINT_PORTA,i,CLAMP(chan[i].portaNote,-128,127),MAX(chan[i].portaSpeed,0)));
-              chan[i].stopOnOff=false;
-            }
-            if (disCont[dispatchOfChan[i]].dispatch->keyOffAffectsPorta(dispatchChanOfChan[i])) {
-              chan[i].portaNote=-1;
-              chan[i].portaSpeed=-1;
-              chan[i].isE1E2 = false;
-              dispatchCmd(DivCommand(DIV_CMD_HINT_PORTA,i,CLAMP(chan[i].portaNote,-128,127),MAX(chan[i].portaSpeed,0)));
-            }
-            chan[i].scheduledSlideReset=true;
-          }
-          dispatchCmd(DivCommand(DIV_CMD_NOTE_OFF_ENV,i));
-          chan[i].releasing=true;
-
-          chan[i].releaseDelay = -1;
         }
 
         if (!song.noSlidesOnFirstTick || !firstTick) {

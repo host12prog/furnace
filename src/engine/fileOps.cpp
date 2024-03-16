@@ -1314,9 +1314,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
     // subsongs
     if (ds.version>=95) {
       subSong->name=reader.readString();
-      logV("before reading subsong notes pos %x", (int)reader.tell());
       subSong->notes=reader.readString();
-      logV("after reading subsong notes pos %x", (int)reader.tell());
       numberOfSubSongs=(unsigned char)reader.readC();
       reader.readC(); // reserved
       reader.readC();
