@@ -307,6 +307,7 @@ void DivLocale::addTranslationsRussian()
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "Останавливать аппаратное портаменто на каналах импульсов NES при начале новой ноты";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "Не останавливать эффект изменения громкости при достижении нулевой или максимальной громкости";
     strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Останавливать эффекты E1xy/E2xy на новой ноте";
+    strings["Slower 0Axy volume slide##sgcf"].plurals[0] = "Замедление изменения громкости эффектом 0Axy";
 
     //   sgcs  src/gui/csPlayer.cpp
 

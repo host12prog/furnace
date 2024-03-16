@@ -364,6 +364,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "=Stop NES pulse channels hardware sweep on new note";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "=Do not stop volume slide after reaching zero or full volume";
     strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "=Stop E1xy/E2xy effects on new note";
+    strings["Slower 0Axy volume slide##sgcf"].plurals[0] = "=Slower 0Axy volume slide";
 
     //   sgcs  src/gui/csPlayer.cpp
 

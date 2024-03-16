@@ -922,9 +922,9 @@ void DivEngine::processRow(int i, bool afterDelay) {
         // TODO: non-0x-or-x0 value should be treated as 00
         if (effectVal!=0) {
           if ((effectVal&15)!=0) {
-            chan[i].volSpeed=-(effectVal&15)*64;
+            chan[i].volSpeed=-(effectVal&15)*(song.slowerVolSlide ? 32 : 64);
           } else {
-            chan[i].volSpeed=(effectVal>>4)*64;
+            chan[i].volSpeed=(effectVal>>4)*(song.slowerVolSlide ? 32 : 64);
           }
           // tremolo and vol slides are incompatible
           chan[i].tremoloDepth=0;
