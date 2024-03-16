@@ -1477,7 +1477,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             unsigned char size = reader.readC();
             macros[index][type].len = size;
 
-            logV("macro index %d type %d size %d", index, type, size);
+            //logV("macro index %d type %d size %d", index, type, size);
 
             for(int j = 0; j < size; j++)
             {
@@ -1485,7 +1485,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               reader.readC(); //what
               macros[index][type].val[j] = seq;
 
-              logV("- %d", seq);
+              //logV("- %d", seq);
             }
 
             for(int k = 0; k < (int)ds.ins.size(); k++)
