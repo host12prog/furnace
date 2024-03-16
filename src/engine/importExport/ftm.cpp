@@ -1463,6 +1463,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           return false;
         }
 
+        unsigned char* Indices = new unsigned char[128 * 5];
+		    unsigned char* Types = new unsigned char[128 * 5];
+
         unsigned int seq_count = reader.readI();
 
         if(blockVersion == 2)
@@ -1497,9 +1500,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
           goto end_seq;
         }
-
-        unsigned char* Indices = new unsigned char[128 * 5];
-		    unsigned char* Types = new unsigned char[128 * 5];
 
         for(unsigned int i = 0; i < seq_count; i++)
         {
@@ -1593,10 +1593,10 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           }
         }
 
+        end_seq:;
+
         delete[] Indices;
         delete[] Types;
-
-        end_seq:;
       } 
       else if (blockName=="GROOVES") {
         CHECK_BLOCK_VERSION(6);
