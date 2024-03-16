@@ -148,7 +148,6 @@ struct DivChannelState {
     cutoff_slide_speed(0),
     transposeDelay(-1),
     transposeSemitones(0xff),
-    releaseDelay(-1),
     arp(0),
     arpStage(-1),
     arpTicks(1),
