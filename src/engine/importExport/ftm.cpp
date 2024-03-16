@@ -125,7 +125,7 @@ const int ftEffectMap[]={
   0x21, // 050B Sunsoft noise period
   -1, // VRC7 "custom patch port" - not supported?
   -1, // VRC7 "custom patch write"
-  0xfc, // delayed release - not supported yet
+  0xfc, // delayed release
   0x09, // select groove
   0xe6, // delayed note transpose
   0x11, // Namco 163 wave RAM offset
@@ -240,7 +240,7 @@ const int eftEffectMap[]={
   0x100,		// // // AY8930 extra volume bit
   -1, // VRC7 "custom patch port" - not supported?
   -1, // VRC7 "custom patch write"
-  0xfc, // delayed release - not supported yet
+  0xfc, // delayed release
   0x09, // select groove
   0xe6, // delayed note transpose
   0x11, // Namco 163 wave RAM offset

@@ -1153,7 +1153,7 @@ void DivEngine::processRow(int i, bool afterDelay) {
         break;
 
       case 0xfc: // delayed note release
-        if (effectVal>0 && (song.delayBehavior==2 || effectVal<nextSpeed)) {
+        if (song.delayBehavior==2 || effectVal<nextSpeed) {
           chan[i].cut=effectVal+1;
           chan[i].cutType=1;
         }
@@ -1678,7 +1678,8 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
           }
         }
         if (chan[i].cut>0) {
-          if (--chan[i].cut<1) {
+          chan[i].cut--;
+          if (chan[i].cut == 0) {
             if (chan[i].cutType==2) {
               dispatchCmd(DivCommand(DIV_CMD_ENV_RELEASE,i));
               chan[i].releasing=true;
