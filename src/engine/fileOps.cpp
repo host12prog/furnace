@@ -2085,7 +2085,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 bool DivEngine::load(unsigned char* f, size_t slen, String path) {
   unsigned char* file;
   size_t len;
-  if (slen<18) {
+  if (slen<21) {
     logE("too small!");
     lastError=_LE("file is too small");
     delete[] f;
