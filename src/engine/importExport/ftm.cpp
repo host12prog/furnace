@@ -471,7 +471,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     unsigned char map_channels[DIV_MAX_CHANS];
     unsigned int hilightA=4;
     unsigned int hilightB=16;
-    double customHz=60;
+    double customHz=60.0;
 
     unsigned char fds_chan = 0xff;
     unsigned char vrc6_saw_chan = 0xff;
