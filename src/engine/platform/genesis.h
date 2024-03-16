@@ -23,9 +23,7 @@
 #include "fmshared_OPN.h"
 #include "sound/ymfm/ymfm_opn.h"
 extern "C" {
-extern "C" {
 #include "../../../extern/YMF276-LLE/fmopn2.h"
-}
 }
 
 class DivYM2612Interface: public ymfm::ymfm_interface {
@@ -108,7 +106,6 @@ class DivPlatformGenesis: public DivPlatformOPN {
 
     inline void processDAC(int iRate);
     inline void commitState(int ch, DivInstrument* ins);
-    void acquire276OscSub();
     void acquire_nuked(short** buf, size_t len);
     void acquire_nuked276(short** buf, size_t len);
     void handle_nuked276_per_chan_osc();

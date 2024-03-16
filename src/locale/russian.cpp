@@ -4890,6 +4890,7 @@ void DivLocale::addTranslationsRussian()
     strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: Установить глубину вибрато";
     strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: Расстройка (80: без расстройки)";
     strings["E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen"].plurals[0] = "E6xy: Отложенное транспонирование ноты (x: 0-7 = вверх, 8-F = вниз (после (x % 7) шагов движка); y: полутонов)";
+    strings["E7xx: Macro release##seen"].plurals[0] = "E7xx: Релиз макросов";
     strings["EAxx: Legato##seen"].plurals[0] = "EAxx: Легато";
     strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: (СОВМЕСТИМОСТЬ) Установить банк сэмплов";
     strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: Заглушить ноту";
@@ -4906,6 +4907,9 @@ void DivLocale::addTranslationsRussian()
     strings["F8xx: Single tick volume slide up##seen"].plurals[0] = "F8xx: Изменение громкости вверх (один шаг движка)";
     strings["F9xx: Single tick volume slide down##seen"].plurals[0] = "F9xx: Изменение громкости вниз (один шаг движка)";
     strings["FAxx: Fast volume slide (0y: down; x0: up)##seen"].plurals[0] = "FAxx: Быстрое изменение громкости (0y: вниз; x0: вверх)";
+    strings["FCxx: Note release##seen"].plurals[0] = "FCxx: Релиз ноты";
+    strings["FDxx: Set virtual tempo numerator##seen"].plurals[0] = "FDxx: Числитель виртуального темпа";
+    strings["FExx: Set virtual tempo denominator##seen"].plurals[0] = "FExx: Знаменатель виртуального темпа";
     strings["FFxx: Stop song##seen"].plurals[0] = "FFxx: Остановить трек";
     strings["9xxx: Set sample offset*256##seen"].plurals[0] = "9xxx: Начальное смещение сэмпла (xxx*256 шагов)";
 
