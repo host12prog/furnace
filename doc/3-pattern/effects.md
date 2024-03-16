@@ -12,8 +12,8 @@ however, effects are continuous, which means you only need to type it once and t
 - `FAxy`: **Fast volume slide.** same as `0Axy` above but 4× faster.
 - `F3xx`: **Fine volume slide up.** same as `0Ax0` but 64× slower.
 - `F4xx`: **Fine volume slide down.** same as `0A0x` but 64× slower.
-- `F8xx`: **Single tick volume slide up.** adds `x` to volume on first tick only.
-- `F9xx`: **Single tick volume slide down.** subtracts `x` from volume on first tick only.
+- `F8xx`: **Single tick volume slide up.** adds `xx` to volume on first tick only.
+- `F9xx`: **Single tick volume slide down.** subtracts `xx` from volume on first tick only.
   - ---
 - `07xy`: **Tremolo.** changes volume to be "wavy" with a sine LFO. `x` is the speed. `y` is the depth.
   - tremolo is downward only.
@@ -86,7 +86,7 @@ not all chips support these effects.
   - this effect is not continuous; it must be entered on every row.
 - `ECxx`: **Note cut.** triggers note off after `xx` ticks. this triggers key off in FM/hardware envelope chips, or cuts note otherwise.
 - `EDxx`: **Note delay.** delays note by `xx` ticks.
-- `FCxx`: **Note release.** releases current note after `xx` ticks. this releases macros and triggers key off in FM/hardware envelope chips.
+- `FCxx`: **Note release.** (works like `Lxx` in FamiTracker) releases current note after `xx` ticks. this releases macros and triggers key off in FM/hardware envelope chips.
 - `E7xx`: **Macro release.** releases macros after `xx` ticks. this does not trigger key off.
 
 ## other
