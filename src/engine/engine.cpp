@@ -118,6 +118,8 @@ const char* DivEngine::getEffectDesc(unsigned char effect, int chan, bool notNul
       return "E5xx: Set pitch (80: center)##seen";
     case 0xe6:
       return "E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen";
+    case 0xe7:
+      return "E7xx: Macro release##seen";
     case 0xea:
       return "EAxx: Legato##seen";
     case 0xeb:
@@ -150,6 +152,12 @@ const char* DivEngine::getEffectDesc(unsigned char effect, int chan, bool notNul
       return "F9xx: Single tick volume slide down##seen";
     case 0xfa:
       return "FAxx: Fast volume slide (0y: down; x0: up)##seen";
+    case 0xfc:
+      return "FCxx: Note release##seen";
+    case 0xfd:
+      return "FDxx: Set virtual tempo numerator##seen";
+    case 0xfe:
+      return "FExx: Set virtual tempo denominator##seen";
     case 0xff:
       return "FFxx: Stop song##seen";
     default:
@@ -1698,7 +1706,7 @@ void DivEngine::playSub(bool preserveDrift, int goalRow) {
       runMidiTime(cycles);
     }
     if (oldOrder!=curOrder) break;
-    if (ticks-((tempoAccum+curSubSong->virtualTempoN)/MAX(1,curSubSong->virtualTempoD))<1 && curRow>=goalRow) break;
+    if (ticks-((tempoAccum+virtualTempoN)/MAX(1,virtualTempoD))<1 && curRow>=goalRow) break;
   }
   for (int i=0; i<song.systemLen; i++) disCont[i].dispatch->setSkipRegisterWrites(false);
   if (goal>0 || goalRow>0) {
@@ -1706,6 +1714,7 @@ void DivEngine::playSub(bool preserveDrift, int goalRow) {
   }
   for (int i=0; i<chans; i++) {
     chan[i].cut=-1;
+    chan[i].cutType=0;
   }
   repeatPattern=oldRepeatPattern;
   if (preserveDrift) {
@@ -2135,6 +2144,8 @@ void DivEngine::reset() {
   extValue=0;
   extValuePresent=0;
   speeds=curSubSong->speeds;
+  virtualTempoN=curSubSong->virtualTempoN;
+  virtualTempoD=curSubSong->virtualTempoD;
   firstTick=false;
   shallStop=false;
   shallStopSched=false;
@@ -2380,6 +2391,21 @@ float DivEngine::getHz() {
 
 float DivEngine::getCurHz() {
   return divider;
+}
+
+short DivEngine::getVirtualTempoN() {
+  return virtualTempoN;
+}
+
+short DivEngine::getVirtualTempoD() {
+  return virtualTempoD;
+}
+
+void DivEngine::virtualTempoChanged() {
+  BUSY_BEGIN;
+  virtualTempoN=curSubSong->virtualTempoN;
+  virtualTempoD=curSubSong->virtualTempoD;
+  BUSY_END;
 }
 
 int DivEngine::getTotalSeconds() {

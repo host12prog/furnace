@@ -4449,7 +4449,7 @@ bool FurnaceGUI::loop() {
           info=settings.language == DIV_LANG_ENGLISH ? "| Groove" : _L("| Groove##sggu");
         }
 
-        info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? " @ %gHz (%g BPM) " : _L(" @ %gHz (%g BPM) ##sggu")),e->getCurHz(),calcBPM(e->getSpeeds(),e->getCurHz(),e->curSubSong->virtualTempoN,e->curSubSong->virtualTempoD));
+        info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? " @ %gHz (%g BPM) " : _L(" @ %gHz (%g BPM) ##sggu")),e->getCurHz(),calcBPM(e->getSpeeds(),e->getCurHz(),e->getVirtualTempoN(),e->getVirtualTempoD()));
 
         if (settings.orderRowsBase) {
           info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Order %.2X/%.2X " : _L("| Order %.2X/%.2X ##sggu")),playOrder,e->curSubSong->ordersLen-1);

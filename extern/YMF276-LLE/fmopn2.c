@@ -2066,6 +2066,8 @@ void FMOPN2_YMF276Accumulator1(fmopn2_t *chip)
     int acc_l = 0;
     int acc_r = 0;
 
+    chip->osc_out = 0;
+
     for (i = 0; i < 14; i++)
         accm += ((chip->ch_accm[i][1] >> 5) & 1) << i;
     if (chip->alg_output && !test_dac)
