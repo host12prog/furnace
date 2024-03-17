@@ -4996,6 +4996,8 @@ void DivLocale::addTranslationsTemplate()
     strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: =Set pitch (80: center)";
     strings["E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen"].plurals[0] = "E6xy: =Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)";
     strings["E7xx: Macro release##seen"].plurals[0] = "E7xx: =Macro release";
+    strings["E8xy: Delayed note transpose up (x: ticks; y: semitones)##seen"].plurals[0] = "E8xy: =Delayed note transpose up (x: ticks; y: semitones)";
+    strings["E9xy: Delayed note transpose down (x: ticks; y: semitones)##seen"].plurals[0] = "E9xy: =Delayed note transpose down (x: ticks; y: semitones)";
     strings["EAxx: Legato##seen"].plurals[0] = "EAxx: =Legato";
     strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: =Set LEGACY sample mode bank";
     strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: =Note cut";

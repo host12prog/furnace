@@ -18,6 +18,7 @@
  */
 
 #include "stringsUtil.h"
+#include <stdio.h>
 
 const char* ssgEnvTypes[8]={
   "Down Down Down##sgistru", "Down.##sgistru", "Down Up Down Up##sgistru", "Down UP##sgistru", "Up Up Up##sgistru", "Up.##sgistru", "Up Down Up Down##sgistru", "Up DOWN##sgistru"

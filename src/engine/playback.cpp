@@ -1032,7 +1032,7 @@ void DivEngine::processRow(int i, bool afterDelay) {
         dispatchCmd(DivCommand(DIV_CMD_HINT_PITCH,i,chan[i].pitch));
         break;
       case 0xe6: // Delayed note transpose
-        if ((effectVal&15)!=0) {
+        if (effectVal!=0) {
           chan[i].legatoDelay=(((effectVal&0xf0)>>4)&7)+1;
           if (effectVal&128) {
             chan[i].legatoTarget=-(effectVal&15);
@@ -1051,7 +1051,7 @@ void DivEngine::processRow(int i, bool afterDelay) {
         }
         break;
       case 0xe8: // delayed note transpose up
-        if ((effectVal&15)!=0) {
+        if (effectVal!=0) {
           chan[i].legatoDelay=((effectVal&0xf0)>>4)+1;
           chan[i].legatoTarget=(effectVal&15);
         } else {
@@ -1060,7 +1060,7 @@ void DivEngine::processRow(int i, bool afterDelay) {
         }
         break;
       case 0xe9: // delayed note transpose down
-        if ((effectVal&15)!=0) {
+        if (effectVal!=0) {
           chan[i].legatoDelay=((effectVal&0xf0)>>4)+1;
           chan[i].legatoTarget=-(effectVal&15);
         } else {

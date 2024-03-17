@@ -34,14 +34,11 @@ however, effects are continuous, which means you only need to type it once and t
 - `E2xy`: **Note slide down.** `x` is the speed, while `y` is how many semitones to slide down.
   - ---
 - `EAxx`: **Toggle legato.** while on, new notes instantly change the pitch of the currently playing sound instead of starting it over.
-- `E6xy`: **Quick legato (compatibility).** transposes note by `y` semitones after `x` ticks.
-  - if `x` is between 0 and 7, it transposes up.
-  - if `x` is between 8 and F, it transposes down.
-- `E8xy`: **Quick legato up**. transposes note up by `y` semitones after `x` ticks.
-- `E9xy`: **Quick legato down**. transposes note down by `y` semitones after `x` ticks.
+- `E6xy`: **Delayed note transpose.** (works like `Txy` in FamiTracker) instantly transposes note up or down after certain number of ticks. `x` dictates the delay and the direction of transpose: when `x` is between `0` and `7` note is transposed *up* after `x` ticks. when `x` is between `8` and `F` note is transposed *down* after `(x - 7)` ticks. so the MSB of `x` dictates the direction. `y` is how many semitones to transpose up/down.
+- `E8xy`: **Delayed note transpose up.** transposes note up by `y` semitones after `x` ticks.
+- `E9xy`: **Delayed note transpose down.** transposes note down by `y` semitones after `x` ticks.
 - `00xy`: **Arpeggio.** this effect produces a rapid cycle between the current note, the note plus `x` semitones and the note plus `y` semitones.
 - `E0xx`: **Set arpeggio speed.** this sets the number of ticks between arpeggio values. default is 1.
-- `E6xy`: **Delayed note transpose.** (works like `Txy` in FamiTracker) instantly transposes note up or down after certain number of ticks. `x` dictates the delay and the direction of transpose: when `x` is between `0` and `7` note is transposed *up* after `x` ticks. when `x` is between `8` and `F` note is transposed *down* after `(x - 7)` ticks. so the MSB of `x` dictates the direction. `y` is how many semitones to transpose up/down.
   - ---
 - `04xy`: **Vibrato.** changes pitch to be "wavy" with a sine LFO. `x` is the speed, while `y` is the depth.
   - maximum vibrato depth is ±1 semitone.
