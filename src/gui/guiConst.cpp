@@ -119,7 +119,7 @@ const int vgmVersions[7]={
 };
 
 // name, icon, letter icon
-const char* insTypes[DIV_INS_MAX+1][3]={
+const char* insTypes[][3]={
   {"SN76489/Sega PSG",ICON_FA_BAR_CHART,ICON_FUR_INS_STD},
   {"FM (OPN)",ICON_FA_AREA_CHART,ICON_FUR_INS_FM},
   {"Game Boy",ICON_FA_GAMEPAD,ICON_FUR_INS_GB},
@@ -171,6 +171,7 @@ const char* insTypes[DIV_INS_MAX+1][3]={
   {"SM8521",ICON_FA_GAMEPAD,ICON_FUR_INS_SM8521},
   {"PV-1000",ICON_FA_GAMEPAD,ICON_FUR_INS_PV1000},
   {"K053260",ICON_FA_BAR_CHART,ICON_FUR_INS_K053260},
+  //{"YMF292",ICON_FA_QUESTION,ICON_FA_QUESTION}, //unused
   {"SCSP",ICON_FA_QUESTION,ICON_FUR_INS_SCSP},
   {"TED",ICON_FA_BAR_CHART,ICON_FUR_INS_TED},
   {"C140",ICON_FA_VOLUME_UP,ICON_FUR_INS_C140},
@@ -186,6 +187,8 @@ const char* insTypes[DIV_INS_MAX+1][3]={
   {"SID2",ICON_FA_KEYBOARD_O,ICON_FUR_INS_SID2},
   {NULL,ICON_FA_QUESTION,ICON_FA_QUESTION}
 };
+
+static_assert((sizeof(insTypes)/sizeof(const char*))==3 * (DIV_INS_MAX + 1),"update instrument defines list! (\"insTypes\")");
 
 const char* sampleLoopModes[DIV_SAMPLE_LOOP_MAX]={
   "Forward##sggc",
