@@ -1781,7 +1781,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             int effectCols=ds.subsong[subs]->pat[map_channels[ch]].effectCols;
             if (blockVersion>=6) effectCols=4;
 
-            if(ds.version == 0x020)
+            if(ds.version == 0x200)
             {
               effectCols = 1;
             }
@@ -2364,7 +2364,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
       }
     }
 
-    //addWarning("FamiTracker import is experimental!");
+    ds.insLen = ds.ins.size();
 
     if(ds.insLen > 0)
     {
@@ -2372,6 +2372,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
       {
         for(int i = 0; i < 128; i++)
         {
+          if (ds.ins.empty()) break;
           int index = i >= (int)ds.insLen ? ((int)ds.insLen - 1) : i;
           if(index < 0) index = 0;
           DivInstrument* ins = ds.ins[index];
