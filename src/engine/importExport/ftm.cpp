@@ -875,7 +875,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         ds.systemName="NES";
       } else if (blockName=="HEADER") {
         CHECK_BLOCK_VERSION(4);
-        unsigned char totalSongs=reader.readC();
+        unsigned char totalSongs=0;
+        if (blockVersion>=2) totalSongs=reader.readC();
         logV("%d songs:",totalSongs+1);
         ds.subsong.reserve(totalSongs);
         if (blockVersion>=3) 
