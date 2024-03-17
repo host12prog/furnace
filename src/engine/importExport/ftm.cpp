@@ -1726,10 +1726,10 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           DivPattern* pat=ds.subsong[subs]->pat[map_channels[ch]].getPattern(patNum,true);
           for (int i=0; i<numRows; i++) {
             unsigned int row=0;
-            if (blockVersion>=2 && blockVersion<6) { // row index
-              row=reader.readI();
+            if (ds.version==0x200 || blockVersion >= 6) { // row index
+              row=(unsigned char)reader.readI();
             } else {
-              row=reader.readC();
+              row=reader.readI();
             }
 
             unsigned char nextNote=reader.readC();
@@ -2024,13 +2024,13 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           reader.read(sample->dataDPCM,sample_len);
         }
 
-        int last_non_empty_sample = 0xff;
+        int last_non_empty_sample = 0;
 
         for(int i = 255; i > 0; i--)
         {
           DivSample* s = ds.sample[i];
 
-          if(s->dataDPCM)
+          if(s->dataDPCM && s->lengthDPCM > 0)
           {
             last_non_empty_sample = i;
             break;
