@@ -2488,6 +2488,7 @@ class FurnaceGUI {
 
   // export options
   int audioExportType;
+  int dmfExportVersion;
   FurnaceGUIExportTypes curExportType;
 
   void drawExportAudio(bool onWindow=false);
