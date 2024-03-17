@@ -37,6 +37,15 @@ class DivEngine;
     logW("incompatible block version %d for %s!",blockVersion,blockName); \
   }
 
+#define CHECK_SEQS if(index > 255 || type > 8 || size > 255) \
+{ \
+  lastError=_LE("too many sequences"); \
+  delete[] Indices; \
+  delete[] Types; \
+  delete[] file; \
+  return false; \
+}
+
 enum
 {
   FT_EF_NONE = 0,
@@ -1476,6 +1485,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             unsigned int index = reader.readI();
             unsigned int type = reader.readI();
             unsigned char size = reader.readC();
+
+            CHECK_SEQS
+
             macros[index][type].len = size;
 
             //logV("macro index %d type %d size %d", index, type, size);
@@ -1511,6 +1523,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
           unsigned char size = reader.readC();
           unsigned int setting = 0;
+
+          CHECK_SEQS
 
           macros[index][type].len = size;
 
@@ -2048,6 +2062,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           unsigned char size = reader.readC();
           unsigned int setting = 0;
 
+          CHECK_SEQS
+
           macros[index][type].len = size;
 
           unsigned int loop = reader.readI();
@@ -2163,6 +2179,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           unsigned char size = reader.readC();
           unsigned int setting = 0;
 
+          CHECK_SEQS
+
           macros[index][type].len = size;
 
           unsigned int loop = reader.readI();
@@ -2214,6 +2232,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           unsigned char size = reader.readC();
           unsigned int setting = 0;
 
+          CHECK_SEQS
+
           macros[index][type].len = size;
 
           unsigned int loop = reader.readI();
@@ -2262,6 +2282,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
           unsigned char size = reader.readC();
           unsigned int setting = 0;
+
+          CHECK_SEQS
 
           macros[index][type].len = size;
 
