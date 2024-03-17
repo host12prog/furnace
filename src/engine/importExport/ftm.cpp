@@ -2518,7 +2518,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == i) //instrument
               {
                 DivInstrument* ins = ds.ins[i];
-                bool go_to_end = false;
 
                 if(ins->type != DIV_INS_VRC6_SAW && ii == vrc6_saw_chan) //we encountered non-VRC6-saw instrument on VRC6 saw channel
                 {
