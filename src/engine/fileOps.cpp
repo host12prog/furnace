@@ -2095,12 +2095,19 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
   bool dnft_extension = false;
   bool eft_extension = false;
 
-  if (path.find(".dnm") != std::string::npos)
+  String pathlower = path;
+
+  for (char& i: pathlower) 
+  {
+    if (i>='A' && i<='Z') i+='a'-'A';
+  }
+
+  if (pathlower.find(".dnm") != std::string::npos)
   {
     dnft_extension = true;
   }
 
-  if (path.find(".eft") != std::string::npos)
+  if (pathlower.find(".eft") != std::string::npos)
   {
     eft_extension = true;
   }
