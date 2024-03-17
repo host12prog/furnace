@@ -2442,7 +2442,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == i) //instrument
               {
                 DivInstrument* ins = ds.ins[i];
-                bool go_to_end = false;
 
                 if(ins->type != DIV_INS_VRC6 && (ii == vrc6_chans[0] || ii == vrc6_chans[1])) //we encountered non-VRC6 instrument on VRC6 channel
                 {
@@ -2472,11 +2471,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   ins_vrc6_conv[i][0] = i;
                   ins_vrc6_conv[i][1] = ds.ins.size() - 1;
 
-                  go_to_end = true;
-                }
-
-                if(go_to_end)
-                {
                   goto end1;
                 }
               }
@@ -2532,11 +2526,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   ins_vrc6_saw_conv[i][0] = i;
                   ins_vrc6_saw_conv[i][1] = ds.ins.size() - 1;
 
-                  go_to_end = true;
-                }
-
-                if(go_to_end)
-                {
                   goto end2;
                 }
               }
@@ -2562,7 +2551,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == i) //instrument
               {
                 DivInstrument* ins = ds.ins[i];
-                bool go_to_end = false;
 
                 if(ins->type != DIV_INS_NES && (ii == mmc5_chans[0] || ii == mmc5_chans[1] || ii < 5)) //we encountered VRC6 (or whatever?) instrument on NES/MMC5 channel
                 {
@@ -2612,11 +2600,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   ins_nes_conv[i][0] = i;
                   ins_nes_conv[i][1] = ds.ins.size() - 1;
 
-                  go_to_end = true;
-                }
-
-                if(go_to_end)
-                {
                   goto end3;
                 }
               }
