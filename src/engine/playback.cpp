@@ -1032,27 +1032,40 @@ void DivEngine::processRow(int i, bool afterDelay) {
         dispatchCmd(DivCommand(DIV_CMD_HINT_PITCH,i,chan[i].pitch));
         break;
       case 0xe6: // Delayed note transpose
-        if(effectVal != 0)
-        {
-          chan[i].transposeDelay = (((effectVal & 0xf0) >> 4) & 7);
-          bool negative_semitones = (effectVal >> 7);
-          chan[i].transposeSemitones = (effectVal & 0xf);
-
-          if(negative_semitones)
-          {
-            chan[i].transposeSemitones *= -1;
+        if ((effectVal&15)!=0) {
+          chan[i].legatoDelay=(((effectVal&0xf0)>>4)&7)+1;
+          if (effectVal&128) {
+            chan[i].legatoTarget=-(effectVal&15);
+          } else {
+            chan[i].legatoTarget=(effectVal&15);
           }
-        }
-        else
-        {
-          chan[i].transposeDelay = -1;
-          chan[i].transposeSemitones = 0xff;
+        } else {
+          chan[i].legatoDelay=-1;
+          chan[i].legatoTarget=0;
         }
         break;
       case 0xe7: // delayed macro release
         if (song.delayBehavior==2 || effectVal<nextSpeed) {
           chan[i].cut=effectVal+1;
           chan[i].cutType=2;
+        }
+        break;
+      case 0xe8: // delayed note transpose up
+        if ((effectVal&15)!=0) {
+          chan[i].legatoDelay=((effectVal&0xf0)>>4)+1;
+          chan[i].legatoTarget=(effectVal&15);
+        } else {
+          chan[i].legatoDelay=-1;
+          chan[i].legatoTarget=0;
+        }
+        break;
+      case 0xe9: // delayed note transpose down
+        if ((effectVal&15)!=0) {
+          chan[i].legatoDelay=((effectVal&0xf0)>>4)+1;
+          chan[i].legatoTarget=-(effectVal&15);
+        } else {
+          chan[i].legatoDelay=-1;
+          chan[i].legatoTarget=0;
         }
         break;
       case 0xea: // legato mode
@@ -1648,22 +1661,15 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
           dispatchCmd(DivCommand(DIV_CMD_DO_CUTOFF_SLIDE,i,chan[i].cutoff_slide,chan[i].cutoff_slide_speed));
         }
 
-        if(chan[i].transposeSemitones != 0xff)
-        {
-          if(chan[i].transposeDelay > 0)
-          {
-            chan[i].transposeDelay--;
-          }
-          else
-          {
-            chan[i].note += chan[i].transposeSemitones;
-            dispatchCmd(DivCommand(DIV_CMD_LEGATO,i,chan[i].note+(chan[i].arp>>4)));
-
-            chan[i].transposeDelay = -1;
-            chan[i].transposeSemitones = 0xff;
+        if (chan[i].legatoDelay>0) {
+          if (--chan[i].legatoDelay<1) {
+            chan[i].note+=chan[i].legatoTarget;
+            dispatchCmd(DivCommand(DIV_CMD_LEGATO,i,chan[i].note));
+            dispatchCmd(DivCommand(DIV_CMD_HINT_LEGATO,i,chan[i].note));
+            chan[i].legatoDelay=-1;
+            chan[i].legatoTarget=0;
           }
         }
-
         if (!song.noSlidesOnFirstTick || !firstTick) {
           if ((chan[i].keyOn || chan[i].keyOff) && chan[i].portaSpeed>0) {
             if (dispatchCmd(DivCommand(DIV_CMD_NOTE_PORTA,i,chan[i].portaSpeed*(song.linearPitch==2?song.pitchSlideSpeed:1),chan[i].portaNote))==2 && chan[i].portaStop && song.targetResetsSlides) {

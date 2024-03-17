@@ -120,6 +120,10 @@ const char* DivEngine::getEffectDesc(unsigned char effect, int chan, bool notNul
       return "E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen";
     case 0xe7:
       return "E7xx: Macro release##seen";
+    case 0xe8:
+      return "E8xy: Delayed note transpose up (x: ticks; y: semitones)##seen";
+    case 0xe9:
+      return "E9xy: Delayed note transpose down (x: ticks; y: semitones)##seen";
     case 0xea:
       return "EAxx: Legato##seen";
     case 0xeb:
