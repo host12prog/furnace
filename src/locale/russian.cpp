@@ -644,7 +644,7 @@ void DivLocale::addTranslationsRussian()
     strings["settings##menubar"].plurals[0] = "настройки##menubar";
     strings["full screen##sggu"].plurals[0] = "полноэкранный режим";
     strings["lock layout##sggu"].plurals[0] = "зафиксировать компоновку окон";
-    strings["visualizer##sggu"].plurals[0] = "визуализатор эффектов";
+    strings["pattern visualizer##sggu"].plurals[0] = "визуализатор эффектов в паттерне";
     strings["reset layout##sggu"].plurals[0] = "сбросить компоновку окон";
     strings["Are you sure you want to reset the workspace layout?##sggu"].plurals[0] = "Вы уверены, что хотите сброить компоновку окон интерфейса?";
     strings["switch to mobile view##sggu"].plurals[0] = "переключиться на мобильный интерфейс";
@@ -667,6 +667,10 @@ void DivLocale::addTranslationsRussian()
     strings["chip manager##sggu"].plurals[0] = "менеджер чипов";
     strings["compatibility flags##sggu"].plurals[0] = "флаги совместимости";
     strings["song comments##sggu"].plurals[0] = "комментарии трека";
+    strings["song##sggu"].plurals[0] = "трек";
+    strings["visualizers##sggu"].plurals[0] = "визуализаторы";
+    strings["tempo##sggu"].plurals[0] = "темп";
+    strings["debug##sggu"].plurals[0] = "отладка";
     strings["instrument editor##sggu"].plurals[0] = "редактор инструментов";
     strings["wavetable editor##sggu"].plurals[0] = "редактор волновых таблиц";
     strings["sample editor##sggu"].plurals[0] = "редактор сэмплов";

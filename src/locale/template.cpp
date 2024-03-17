@@ -704,7 +704,7 @@ void DivLocale::addTranslationsTemplate()
     strings["settings##menubar"].plurals[0] = "=settings##menubar";
     strings["full screen##sggu"].plurals[0] = "=full screen";
     strings["lock layout##sggu"].plurals[0] = "=lock layout";
-    strings["visualizer##sggu"].plurals[0] = "=visualizer";
+    strings["pattern visualizer##sggu"].plurals[0] = "=pattern visualizer";
     strings["reset layout##sggu"].plurals[0] = "=reset layout";
     strings["Are you sure you want to reset the workspace layout?##sggu"].plurals[0] = "=Are you sure you want to reset the workspace layout?";
     strings["switch to mobile view##sggu"].plurals[0] = "=switch to mobile view";
@@ -726,6 +726,10 @@ void DivLocale::addTranslationsTemplate()
     strings["pattern manager##sggu"].plurals[0] = "=pattern manager";
     strings["chip manager##sggu"].plurals[0] = "=chip manager";
     strings["compatibility flags##sggu"].plurals[0] = "=compatibility flags";
+    strings["song##sggu"].plurals[0] = "=song";
+    strings["visualizers##sggu"].plurals[0] = "=visualizers";
+    strings["tempo##sggu"].plurals[0] = "=tempo";
+    strings["debug##sggu"].plurals[0] = "=debug";
     strings["song comments##sggu"].plurals[0] = "=song comments";
     strings["instrument editor##sggu"].plurals[0] = "=instrument editor";
     strings["wavetable editor##sggu"].plurals[0] = "=wavetable editor";
