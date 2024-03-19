@@ -75,13 +75,8 @@ const char** DivPlatformNES::getRegisterSheet() {
 
 void DivPlatformNES::doWrite(unsigned short addr, unsigned char data) {
   if (useNP) {
-    if (isE) {
-      e1_NP->Write(addr,data);
-      e2_NP->Write(addr,data);
-    } else {
-      nes1_NP->Write(addr,data);
-      nes2_NP->Write(addr,data);
-    }
+    nes1_NP->Write(addr,data);
+    nes2_NP->Write(addr,data);
   } else {
     apu_wr_reg(nes,addr,data);
   }
@@ -167,40 +162,9 @@ void DivPlatformNES::acquire_NSFPlay(short** buf, size_t len) {
   }
 }
 
-void DivPlatformNES::acquire_NSFPlayE(short** buf, size_t len) {
-  int out1[2];
-  int out2[2];
-  for (size_t i=0; i<len; i++) {
-    doPCM;
-  
-    e1_NP->Tick(8);
-    e2_NP->TickFrameSequence(8);
-    e2_NP->Tick(8);
-    e1_NP->Render(out1);
-    e2_NP->Render(out2);
-
-    int sample=(out1[0]+out1[1]+out2[0]+out2[1])<<1;
-    if (sample>32767) sample=32767;
-    if (sample<-32768) sample=-32768;
-    buf[0][i]=sample;
-    if (++writeOscBuf>=4) {
-      writeOscBuf=0;
-      oscBuf[0]->data[oscBuf[0]->needle++]=e1_NP->out[0]<<11;
-      oscBuf[1]->data[oscBuf[1]->needle++]=e1_NP->out[1]<<11;
-      oscBuf[2]->data[oscBuf[2]->needle++]=e2_NP->out[0]<<11;
-      oscBuf[3]->data[oscBuf[3]->needle++]=e2_NP->out[1]<<11;
-      oscBuf[4]->data[oscBuf[4]->needle++]=e2_NP->out[2]<<8;
-    }
-  }
-}
-
 void DivPlatformNES::acquire(short** buf, size_t len) {
   if (useNP) {
-    if (isE) {
-      acquire_NSFPlayE(buf,len);
-    } else {
-      acquire_NSFPlay(buf,len);
-    }
+    acquire_NSFPlay(buf,len);
   } else {
     acquire_puNES(buf,len);
   }
@@ -289,8 +253,6 @@ void DivPlatformNES::tick(bool sysTick) {
       }
       if (i!=2) {
         rWrite(0x4000+i*4,(chan[i].envMode<<4)|chan[i].outVol|((chan[i].duty&3)<<6));
-      } else if (isE) {
-        rWrite(0x4000+9,chan[i].duty);
       }
       if (i==3) { // noise
         chan[i].freqChanged=true;
@@ -328,9 +290,7 @@ void DivPlatformNES::tick(bool sysTick) {
           }
         }
         ntPos+=chan[i].pitch2;
-        if (isE) {
-          chan[i].freq=31-(ntPos&31);
-        } else if (parent->song.properNoiseLayout) {
+        if (parent->song.properNoiseLayout) {
           chan[i].freq=15-(ntPos&15);
         } else {
           if (ntPos<0) ntPos=0;
@@ -767,13 +727,8 @@ int DivPlatformNES::dispatch(DivCommand c) {
 void DivPlatformNES::muteChannel(int ch, bool mute) {
   isMuted[ch]=mute;
   if (useNP) {
-    if (isE) {
-      e1_NP->SetMask(((int)isMuted[0])|(isMuted[1]<<1));
-      e2_NP->SetMask(((int)isMuted[2])|(isMuted[3]<<1)|(isMuted[4]<<2));
-    } else {
-      nes1_NP->SetMask(((int)isMuted[0])|(isMuted[1]<<1));
-      nes2_NP->SetMask(((int)isMuted[2])|(isMuted[3]<<1)|(isMuted[4]<<2));
-    }
+    nes1_NP->SetMask(((int)isMuted[0])|(isMuted[1]<<1));
+    nes2_NP->SetMask(((int)isMuted[2])|(isMuted[3]<<1)|(isMuted[4]<<2));
   } else {
     nes->muted[ch]=mute;
   }
@@ -839,17 +794,10 @@ void DivPlatformNES::reset() {
   linearCount=255;
 
   if (useNP) {
-    if (isE) {
-      e1_NP->Reset();
-      e2_NP->Reset();
-      e1_NP->SetMask(((int)isMuted[0])|(isMuted[1]<<1));
-      e2_NP->SetMask(((int)isMuted[2])|(isMuted[3]<<1)|(isMuted[4]<<2));
-    } else {
-      nes1_NP->Reset();
-      nes2_NP->Reset();
-      nes1_NP->SetMask(((int)isMuted[0])|(isMuted[1]<<1));
-      nes2_NP->SetMask(((int)isMuted[2])|(isMuted[3]<<1)|(isMuted[4]<<2));
-    }
+    nes1_NP->Reset();
+    nes2_NP->Reset();
+    nes1_NP->SetMask(((int)isMuted[0])|(isMuted[1]<<1));
+    nes2_NP->SetMask(((int)isMuted[2])|(isMuted[3]<<1)|(isMuted[4]<<2));
   } else {
     apu_turn_on(nes,apuType);
     nes->apu.cpu_cycles=0;
@@ -882,19 +830,11 @@ void DivPlatformNES::setFlags(const DivConfig& flags) {
     apuType=0;
   }
   if (useNP) {
-    if (isE) {
-      e1_NP->SetClock(rate);
-      e1_NP->SetRate(rate);
-      e2_NP->SetClock(rate);
-      e2_NP->SetRate(rate);
-      e2_NP->SetPal(apuType==1);
-    } else {
-      nes1_NP->SetClock(rate);
-      nes1_NP->SetRate(rate);
-      nes2_NP->SetClock(rate);
-      nes2_NP->SetRate(rate);
-      nes2_NP->SetPal(apuType==1);
-    }
+    nes1_NP->SetClock(rate);
+    nes1_NP->SetRate(rate);
+    nes2_NP->SetClock(rate);
+    nes2_NP->SetRate(rate);
+    nes2_NP->SetPal(apuType==1);
   } else {
     nes->apu.type=apuType;
   }
@@ -926,12 +866,6 @@ void DivPlatformNES::poke(std::vector<DivRegWrite>& wlist) {
 
 void DivPlatformNES::setNSFPlay(bool use) {
   useNP=use;
-}
-
-void DivPlatformNES::set5E01(bool use) {
-  isE=use;
-  // for now
-  if (isE) useNP=true;
 }
 
 unsigned char DivPlatformNES::readDMC(unsigned short addr) {
@@ -1010,25 +944,14 @@ int DivPlatformNES::init(DivEngine* p, int channels, int sugRate, const DivConfi
   dumpWrites=false;
   skipRegisterWrites=false;
   if (useNP) {
-    if (isE) {
-      e1_NP=new xgm::I5E01_APU;
-      e1_NP->SetOption(xgm::I5E01_APU::OPT_NONLINEAR_MIXER,1);
-      e2_NP=new xgm::I5E01_DMC;
-      e2_NP->SetOption(xgm::I5E01_DMC::OPT_NONLINEAR_MIXER,1);
-      e2_NP->SetMemory([this](unsigned short addr, unsigned int& data) {
-        data=readDMC(addr);
-      });
-      e2_NP->SetAPU(e1_NP);
-    } else {
-      nes1_NP=new xgm::NES_APU;
-      nes1_NP->SetOption(xgm::NES_APU::OPT_NONLINEAR_MIXER,1);
-      nes2_NP=new xgm::NES_DMC;
-      nes2_NP->SetOption(xgm::NES_DMC::OPT_NONLINEAR_MIXER,1);
-      nes2_NP->SetMemory([this](unsigned short addr, unsigned int& data) {
-        data=readDMC(addr);
-      });
-      nes2_NP->SetAPU(nes1_NP);
-    }
+    nes1_NP=new xgm::NES_APU;
+    nes1_NP->SetOption(xgm::NES_APU::OPT_NONLINEAR_MIXER,1);
+    nes2_NP=new xgm::NES_DMC;
+    nes2_NP->SetOption(xgm::NES_DMC::OPT_NONLINEAR_MIXER,1);
+    nes2_NP->SetMemory([this](unsigned short addr, unsigned int& data) {
+      data=readDMC(addr);
+    });
+    nes2_NP->SetAPU(nes1_NP);
   } else {
     nes=new struct NESAPU;
     nes->readDMC=_readDMC;
@@ -1057,13 +980,8 @@ void DivPlatformNES::quit() {
     delete oscBuf[i];
   }
   if (useNP) {
-    if (isE) {
-      delete e1_NP;
-      delete e2_NP;
-    } else {
-      delete nes1_NP;
-      delete nes2_NP;
-    }
+    delete nes1_NP;
+    delete nes2_NP;
   } else {
     delete nes;
   }
