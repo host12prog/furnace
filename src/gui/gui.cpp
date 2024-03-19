@@ -6180,8 +6180,8 @@ bool FurnaceGUI::loop() {
         if (ImGui::MenuItem(temp)) 
         {
           // create wave
-          curWave=e->addLocalWave(curIns);
-          if (curWave==-1) 
+          curLocalWave=e->addLocalWave(curIns);
+          if (curLocalWave == -1)
           {
             showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sggu"));
           } 
