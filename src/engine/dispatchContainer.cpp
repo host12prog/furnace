@@ -720,6 +720,9 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
     case DIV_SYSTEM_DAVE:
       dispatch=new DivPlatformDave;
       break;
+    case DIV_SYSTEM_NDS:
+      dispatch=new DivPlatformNDS;
+      break;
     case DIV_SYSTEM_SID2:
       dispatch=new DivPlatformSID2;
       break;
