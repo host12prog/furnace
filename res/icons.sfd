@@ -21,7 +21,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 0
 CreationTime: 1691897631
-ModificationTime: 1707975019
+ModificationTime: 1710868096
 PfmFamily: 81
 TTFWeight: 400
 TTFWidth: 5
@@ -50,10 +50,10 @@ NameList: AGL For New Fonts
 DisplaySize: -24
 AntiAlias: 1
 FitToEm: 0
-WinInfo: 57712 16 20
+WinInfo: 57520 16 20
 BeginPrivate: 0
 EndPrivate
-BeginChars: 65536 105
+BeginChars: 65536 106
 
 StartChar: space
 Encoding: 32 32 0
@@ -4909,7 +4909,6 @@ Type: 12
 WasModified: 0
 WasOrder2: 0
 Layer: 0
-CopiedFrom: Furnace Icons
 EndUndoOperation
 EndUndoes
 Redoes
@@ -4924,7 +4923,7 @@ NamedP: "baseline 2"
 NamedP: "baseline 1"
  896 0 l 1028
 EndSplineSet
-Comment: "O"
+Comment: "1028"
 Colour: ff00ff
 EndChar
 
@@ -5152,6 +5151,23 @@ HStem: -253.33 85.3906<331.166 506.082> -61.0693 130.176<891.389 1021.56> 95.107
 VStem: 82.0938 106.562<1187.69 1294.25> 202.297 107.5<-147.67 75.4575> 493.891 104.688<1189.56 1294.25> 526.75 107.5<-147.386 74.3151> 700.609 101.797<624.17 897.764 983.232 1204.95> 1030.84 108.516<1002.5 1185.69> 1187.45 101.779<-25.1182 211.505> 1233.73 109.453<750.416 1168>
 DStem2: 188.656 1294.25 82.0938 1294.25 0.271727 -0.962374<0 593.586> 891.389 69.1064 891.389 -61.0693 0.717299 0.696766<0 311.586> 1024.12 905.42 922.406 897.764 0.413517 -0.910496<0 262.054> 1289.23 -25.1182 1187.45 -248.998 0.73569 0.677318<0 314.262>
 LayerCount: 2
+UndoRedoHistory
+Layer: 0
+Undoes
+UndoOperation
+Index: 0
+Type: 12
+WasModified: 0
+WasOrder2: 0
+Layer: 0
+HStem: -253.3 85.3906<331.166 506.082> -61.0391 130.176<891.389 1021.56> 95.1377 85.4687<356.078 505.623> 117.311 130.176<1455.12 1585.3> 612.716 89.2188<1388.21 1579.14> 624.2 92.1875<328.559 354.926> 897.794 85.4688<802.406 938.743> 1204.98 89.2969<802.406 1011.58 1380.73 1582.23>
+VStem: 82.0938 106.562<1187.72 1294.28> 202.297 107.5<-147.64 75.4877> 493.891 104.688<1189.59 1294.28> 526.75 107.5<-147.355 74.3454> 700.609 101.797<624.2 897.794 983.263 1204.98> 1030.84 108.516<1002.53 1185.72> 1187.45 101.78<-25.0879 211.535> 1233.73 109.453<750.447 1168.03>
+DStem2: 188.656 1294.28 82.0938 1294.28 0.271727 -0.962374<0 593.586> 891.389 69.1366 891.389 -61.0391 0.717299 0.696766<0 311.586> 1024.12 905.45 922.406 897.794 0.413517 -0.910496<0 262.054> 1289.23 -25.0879 1187.45 -248.968 0.735691 0.677318<0 314.262>
+EndUndoOperation
+EndUndoes
+Redoes
+EndRedoes
+EndUndoRedoHistory
 Back
 SplineSet
 0 1294.24804688 m 5
@@ -5167,24 +5183,6 @@ NamedP: "2-line"
 NamedP: "2-line"
  1792 624.169921875 l 1029
 EndSplineSet
-UndoRedoHistory
-Layer: 1
-Undoes
-UndoOperation
-Index: 0
-Type: 12
-WasModified: 0
-WasOrder2: 0
-Layer: 0
-HStem: -253.3 85.3906<331.166 506.082> -61.0391 130.176<891.389 1021.56> 95.1377 85.4687<356.078 505.623> 117.311 130.176<1455.12 1585.3> 612.716 89.2188<1388.21 1579.14> 624.2 92.1875<328.559 354.926> 897.794 85.4688<802.406 938.743> 1204.98 89.2969<802.406 1011.58 1380.73 1582.23>
-VStem: 82.0938 106.562<1187.72 1294.28> 202.297 107.5<-147.64 75.4877> 493.891 104.688<1189.59 1294.28> 526.75 107.5<-147.355 74.3454> 700.609 101.797<624.2 897.794 983.263 1204.98> 1030.84 108.516<1002.53 1185.72> 1187.45 101.78<-25.0879 211.535> 1233.73 109.453<750.447 1168.03>
-DStem2: 188.656 1294.28 82.0938 1294.28 0.271727 -0.962374<0 593.586> 891.389 69.1366 891.389 -61.0391 0.717299 0.696766<0 311.586> 1024.12 905.45 922.406 897.794 0.413517 -0.910496<0 262.054> 1289.23 -25.0879 1187.45 -248.968 0.735691 0.677318<0 314.262>
-CopiedFrom: Furnace Icons
-EndUndoOperation
-EndUndoes
-Redoes
-EndRedoes
-EndUndoRedoHistory
 Fore
 SplineSet
 418.234375 -253.330078125 m 0xe3dc
@@ -5299,21 +5297,6 @@ Type: 3
 WasModified: 1
 WasOrder2: 0
 Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 12
-WasModified: 0
-WasOrder2: 0
-Layer: 0
-CopiedFrom: Furnace Icons
 EndUndoOperation
 EndUndoes
 Redoes
@@ -5448,21 +5431,6 @@ WasModified: 1
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 12
-WasModified: 0
-WasOrder2: 0
-Layer: 0
-CopiedFrom: Furnace Icons
-EndUndoOperation
 EndUndoes
 Redoes
 EndRedoes
@@ -5538,21 +5506,6 @@ Type: 3
 WasModified: 1
 WasOrder2: 0
 Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 12
-WasModified: 0
-WasOrder2: 0
-Layer: 0
-CopiedFrom: Furnace Icons
 EndUndoOperation
 EndUndoes
 Redoes
@@ -5655,21 +5608,6 @@ Type: 3
 WasModified: 1
 WasOrder2: 0
 Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 12
-WasModified: 0
-WasOrder2: 0
-Layer: 0
-CopiedFrom: Furnace Icons
 EndUndoOperation
 EndUndoes
 Redoes
@@ -5849,21 +5787,6 @@ WasModified: 1
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 12
-WasModified: 0
-WasOrder2: 0
-Layer: 0
-CopiedFrom: Furnace Icons
-EndUndoOperation
 EndUndoes
 Redoes
 EndRedoes
@@ -5958,21 +5881,6 @@ WasModified: 1
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 12
-WasModified: 0
-WasOrder2: 0
-Layer: 0
-CopiedFrom: Furnace Icons
-EndUndoOperation
 EndUndoes
 Redoes
 EndRedoes
@@ -6055,35 +5963,6 @@ Type: 3
 WasModified: 1
 WasOrder2: 0
 Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 3
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 3
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 4
-Type: 12
-WasModified: 0
-WasOrder2: 0
-Layer: 0
-CopiedFrom: Furnace Icons
 EndUndoOperation
 EndUndoes
 Redoes
@@ -6252,35 +6131,6 @@ WasModified: 1
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 3
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 3
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 4
-Type: 12
-WasModified: 0
-WasOrder2: 0
-Layer: 0
-CopiedFrom: Furnace Icons
-EndUndoOperation
 EndUndoes
 Redoes
 EndRedoes
@@ -6436,35 +6286,6 @@ WasModified: 1
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 3
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 3
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 4
-Type: 12
-WasModified: 0
-WasOrder2: 0
-Layer: 0
-CopiedFrom: Furnace Icons
-EndUndoOperation
 EndUndoes
 Redoes
 EndRedoes
@@ -6566,35 +6387,6 @@ Type: 3
 WasModified: 1
 WasOrder2: 0
 Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 3
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 3
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 4
-Type: 12
-WasModified: 0
-WasOrder2: 0
-Layer: 0
-CopiedFrom: Furnace Icons
 EndUndoOperation
 EndUndoes
 Redoes
@@ -6711,21 +6503,10 @@ Layer: 0
 Undoes
 UndoOperation
 Index: 0
-Type: 1
+Type: 4
 WasModified: 0
 WasOrder2: 0
-Layer: 1
-Width: 1792
-VWidth: 1792
-LBearingChange: 0
-UnicodeEnc: 0
-InstructionsLength: 0
-SplineSet
-1632 70 m 1
- 1632 -50 l 1025
-160 1210 m 1
- 160 1330 l 1025
-EndSplineSet
+Layer: 2
 EndUndoOperation
 EndUndoes
 Redoes
@@ -6746,80 +6527,20 @@ Layer: 1
 Undoes
 UndoOperation
 Index: 0
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 1
-Type: 12
-WasModified: 0
-WasOrder2: 0
-Layer: 0
-CopiedFrom: Furnace Icons
-EndUndoOperation
-UndoOperation
-Index: 2
 Type: 1
-WasModified: 1
+WasModified: 0
 WasOrder2: 0
-Layer: 2
+Layer: 1
 Width: 1792
 VWidth: 1792
 LBearingChange: 0
 UnicodeEnc: 0
 InstructionsLength: 0
 SplineSet
-1632 1210.01171875 m 1
- 1632 1329.98828125 l 1
- 1619.75878906 1329.98828125 1193.45019531 1325.24316406 843.048828125 668.2421875 c 0
- 755.229492188 503.581054688 663.75 384.705078125 577.82421875 298.780273438 c 0
- 473.91796875 194.873046875 377.610351562 138.502929688 303.73046875 107.581054688 c 0
- 262.674804688 90.396484375 228.48828125 81.078125 203.702148438 76.0087890625 c 0
- 176.166992188 70.3779296875 160.23046875 70 159.536132812 69.986328125 c 1
- 159.698242188 69.9873046875 160 69.98828125 160 69.98828125 c 1
- 160 -49.98828125 l 1
- 172.241210938 -49.98828125 598.549804688 -45.2431640625 948.951171875 611.7578125 c 0
- 1036.77050781 776.418945312 1128.25 895.294921875 1214.17578125 981.219726562 c 0
- 1318.08203125 1085.12695312 1414.38964844 1141.49707031 1488.26953125 1172.41894531 c 0
- 1529.32519531 1189.60351562 1563.51171875 1198.921875 1588.29785156 1203.99121094 c 0
- 1615.83300781 1209.62207031 1631.76953125 1210 1632.46386719 1210.01367188 c 1
- 1632.30175781 1210.01269531 1632 1210.01171875 1632 1210.01171875 c 1
-159.999999952 1210.01176537 m 1
- 159.999999952 1329.98823463 l 1
- 170.809951102 1329.98823463 504.536374276 1326.28810718 823.734604363 872.948478072 c 1
- 800.889124326 837.280193024 778.251310121 799.419416229 755.928040313 759.232259114 c 1
- 695.916689064 850.735795855 635.614260663 923.430234862 577.824293264 981.220202232 c 0
- 473.917602143 1085.12689335 377.61065751 1141.49706263 303.730893464 1172.41936621 c 0
- 262.674555191 1189.60345677 228.488523437 1198.92230209 203.702403502 1203.99126863 c 0
- 176.167181121 1209.62244935 160.230079948 1210.00005891 159.536222574 1210.01396385 c 1
- 159.698263781 1210.01275358 159.999999952 1210.01176537 159.999999952 1210.01176537 c 1
-1632 1090.03515625 m 5
- 1632 1449.96484375 l 5
- 1558.47725996 1449.96484375 1167.58409474 1409.79522486 823.734604363 872.948478072 c 5
- 865.988935134 812.936984165 907.988680731 745.046220598 948.951069976 668.241740764 c 4
- 977.706682766 614.324966782 1006.85482384 565.317167145 1036.07195969 520.767740886 c 5
- 1042.35821703 532.084488601 1048.61953126 543.58571637 1054.85351562 555.274414062 c 4
- 1093.06152344 626.915039062 1265.13574219 948.919921875 1534.69042969 1061.74121094 c 4
- 1536.87304688 1062.65429688 1591.23828125 1085.29492188 1632 1090.03515625 c 5
-1036.07195969 520.767740886 m 1
- 1096.08331094 429.264204145 1156.38573934 356.569765138 1214.17570674 298.779797768 c 0
- 1318.08239786 194.873106647 1414.38934249 138.502937368 1488.26910654 107.580633787 c 0
- 1529.32544481 90.3965432265 1563.51147656 81.0776979108 1588.2975965 76.0087313726 c 0
- 1615.83281888 70.3775506458 1631.76992005 69.9999410877 1632.46377743 69.986036148 c 1
- 1632.30173622 69.9872464204 1632.00000005 69.9882346324 1632.00000005 69.9882346324 c 1
- 1632.00000005 -49.9882346324 l 1
- 1621.1900489 -49.9882346324 1287.46362572 -46.2881071791 968.265395637 407.051521928 c 1
- 991.110875674 442.719806976 1013.74868988 480.580583771 1036.07195969 520.767740886 c 1
-968.265395637 407.051521928 m 5
- 926.011064866 467.063015835 884.011319269 534.953779402 843.048930024 611.758259236 c 4
- 814.293317234 665.675033218 785.145176159 714.682832855 755.928040313 759.232259114 c 5
- 749.641782968 747.9155114 743.380468741 736.41428363 737.146484375 724.725585938 c 4
- 698.938476562 653.084960938 526.864257812 331.080078125 257.309570312 218.258789062 c 4
- 255.126953125 217.345703125 200.76171875 194.705078125 160 189.96484375 c 5
- 160 -169.96484375 l 5
- 233.522740042 -169.96484375 624.415905262 -129.795224857 968.265395637 407.051521928 c 5
+1632 70 m 1
+ 1632 -50 l 1025
+160 1210 m 1
+ 160 1330 l 1025
 EndSplineSet
 EndUndoOperation
 EndUndoes
@@ -6846,29 +6567,8 @@ WasModified: 0
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 3
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
 EndUndoes
 Redoes
-RedoOperation
-Index: 0
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndRedoOperation
 EndRedoes
 EndUndoRedoHistory
 Fore
@@ -6925,29 +6625,8 @@ WasModified: 0
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 3
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
 EndUndoes
 Redoes
-RedoOperation
-Index: 0
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndRedoOperation
 EndRedoes
 EndUndoRedoHistory
 Fore
@@ -6996,29 +6675,8 @@ WasModified: 0
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 3
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
 EndUndoes
 Redoes
-RedoOperation
-Index: 0
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndRedoOperation
 EndRedoes
 EndUndoRedoHistory
 Fore
@@ -7091,29 +6749,8 @@ WasModified: 1
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 3
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
 EndUndoes
 Redoes
-RedoOperation
-Index: 0
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndRedoOperation
 EndRedoes
 EndUndoRedoHistory
 Fore
@@ -7184,29 +6821,8 @@ WasModified: 1
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 3
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
 EndUndoes
 Redoes
-RedoOperation
-Index: 0
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndRedoOperation
 EndRedoes
 EndUndoRedoHistory
 Fore
@@ -7248,29 +6864,8 @@ WasModified: 1
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 3
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
 EndUndoes
 Redoes
-RedoOperation
-Index: 0
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndRedoOperation
 EndRedoes
 EndUndoRedoHistory
 Fore
@@ -7314,29 +6909,8 @@ WasModified: 1
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 3
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
 EndUndoes
 Redoes
-RedoOperation
-Index: 0
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndRedoOperation
 EndRedoes
 EndUndoRedoHistory
 Fore
@@ -7378,29 +6952,8 @@ WasModified: 1
 WasOrder2: 0
 Layer: 2
 EndUndoOperation
-UndoOperation
-Index: 1
-Type: 4
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
-UndoOperation
-Index: 2
-Type: 3
-WasModified: 0
-WasOrder2: 0
-Layer: 2
-EndUndoOperation
 EndUndoes
 Redoes
-RedoOperation
-Index: 0
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndRedoOperation
 EndRedoes
 EndUndoRedoHistory
 Fore
@@ -7449,13 +7002,6 @@ Layer: 2
 EndUndoOperation
 EndUndoes
 Redoes
-RedoOperation
-Index: 0
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndRedoOperation
 EndRedoes
 EndUndoRedoHistory
 Fore
@@ -7529,13 +7075,6 @@ Layer: 2
 EndUndoOperation
 EndUndoes
 Redoes
-RedoOperation
-Index: 0
-Type: 4
-WasModified: 1
-WasOrder2: 0
-Layer: 2
-EndRedoOperation
 EndRedoes
 EndUndoRedoHistory
 Fore
@@ -8877,6 +8416,87 @@ SplineSet
  578.333333333 1316.83333333 587.333333333 1389.66666667 594 1397 c 2
  650 1453 l 2
  650.666666667 1453.66666667 651.166666667 1454 651.5 1454 c 0xf4
+EndSplineSet
+EndChar
+
+StartChar: uniE140
+Encoding: 57664 57664 105
+Width: 1792
+Flags: HW
+LayerCount: 2
+UndoRedoHistory
+Layer: 1
+Undoes
+UndoOperation
+Index: 0
+Type: 3
+WasModified: 0
+WasOrder2: 0
+Layer: 2
+EndUndoOperation
+EndUndoes
+Redoes
+EndRedoes
+EndUndoRedoHistory
+Fore
+SplineSet
+218.852 936.798 m 1
+ 515.141 936.798 l 2
+ 568.8519 936.798 617.289 928.00894 661.039 910.4308 c 0
+ 704.5937 892.755 741.7031 866.5831 772.562 831.8175 c 0
+ 803.4214 796.9542 827.2495 753.3995 844.0464 700.9585 c 0
+ 860.8433 648.6147 869.2417 587.5795 869.2417 518.0485 c 0
+ 869.2417 448.4196 860.84326 387.3845 844.0464 335.0405 c 0
+ 827.2495 282.5991 803.4214 239.0444 772.562 204.1815 c 0
+ 741.7026 169.4159 704.5932 143.244 661.039 125.5682 c 0
+ 617.289 107.9901 568.8515 99.201 515.141 99.201 c 2
+ 218.852 99.201 l 1
+ 218.852 936.799 l 1
+ 218.852 936.798 l 1
+515.141 219.22 m 1
+ 577.641 219.22 628.032 238.8489 666.313 278.0091 c 0
+ 704.7896 317.1693 723.9302 374.7864 723.9302 450.7631 c 2
+ 723.9302 585.2361 l 2
+ 723.9302 661.2127 704.7896 718.8301 666.313 757.9901 c 0
+ 628.0318 797.2479 577.6411 816.7792 515.141 816.7792 c 2
+ 354.399 816.7792 l 1
+ 354.399 219.2202 l 1
+ 515.141 219.2202 l 1
+ 515.141 219.22 l 1
+1269.63 84.8447 m 2
+ 1199.1222 84.8447 1139.357 97.6377 1090.138 123.2236 c 0
+ 1040.9192 148.8095 998.7318 183.1845 963.576 226.4466 c 1
+ 994.7606 255.6458 1025.9461 284.845 1057.1307 314.0443 c 1
+ 1086.8182 278.0091 1119.4354 250.7631 1154.9823 232.4037 c 0
+ 1190.5292 214.0443 1231.1542 204.767 1276.8573 204.767 c 0
+ 1330.3729 204.767 1370.8026 216.7787 1397.9513 240.8022 c 0
+ 1425.1 264.8257 1438.7716 297.2475 1438.7716 337.9702 c 0
+ 1438.7716 370.7827 1429.20129 396.7593 1410.0607 415.9975 c 0
+ 1390.7248 435.2358 1356.7404 449.5913 1307.9127 459.1616 c 0
+ 1283.108 463.58836 1258.3033 468.01512 1233.4986 472.4428 c 0
+ 1152.0533 487.5795 1090.7256 514.435 1049.9046 552.8139 c 0
+ 1009.0836 591.1928 988.7718 644.0248 988.7718 711.2119 c 0
+ 988.7718 748.0283 995.80305 781.4267 1009.8656 811.4069 c 0
+ 1023.7328 841.3874 1043.4594 866.5827 1068.6547 886.9928 c 0
+ 1093.85 907.4029 1124.3188 923.2233 1160.4516 934.3561 c 0
+ 1196.3891 945.5866 1236.8188 951.153 1281.5456 951.153 c 0
+ 1344.8268 951.153 1399.5146 940.2155 1445.9986 918.2428 c 0
+ 1492.2877 896.1725 1531.9361 864.4342 1564.7486 822.8326 c 1
+ 1533.1734 794.8375 1501.5972 766.8424 1470.022 738.8482 c 1
+ 1448.3423 766.7779 1421.9751 789.2388 1390.7251 806.0357 c 0
+ 1359.6704 822.8326 1320.8032 831.231 1274.3191 831.231 c 0
+ 1226.4675 831.231 1189.1629 821.56303 1162.7961 802.4224 c 0
+ 1136.4289 783.1841 1123.1477 755.1568 1123.1477 718.438 c 0
+ 1123.1477 683.1841 1133.8899 657.0122 1155.5696 639.8247 c 0
+ 1177.2493 622.6372 1210.843 609.5513 1256.3506 600.7622 c 2
+ 1330.7647 585.2349 l 2
+ 1414.7491 569.2193 1476.2727 541.9732 1514.9447 503.5943 c 0
+ 1553.8119 465.2154 1573.1478 412.3834 1573.1478 345.1963 c 0
+ 1573.1478 306.0361 1566.31186 270.3916 1552.8353 238.3603 c 0
+ 1539.1634 206.4267 1519.4369 178.9853 1493.4603 156.2314 c 0
+ 1467.2884 133.3798 1435.6478 115.8017 1397.9525 103.3994 c 0
+ 1360.4525 90.9971 1317.4837 84.8447 1269.6325 84.8447 c 2
+ 1269.63 84.8447 l 2
 EndSplineSet
 EndChar
 EndChars
