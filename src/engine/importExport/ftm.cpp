@@ -378,9 +378,9 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
       Furnace seems to default to the first wave if value in macro is higher than last occupied index in 
       local wavetables list. Famitracker sticks to the last wavetable. That's why I cap the macro values so 
       they never go out of bounds*/
-      if(to->val[i] >= ins->std.local_waves.size())
+      if(to->val[i] >= (int)ins->std.local_waves.size() && (int)ins->std.local_waves.size() > 0)
       {
-        to->val[i] = ins->std.local_waves.size() - 1;
+        to->val[i] = (int)ins->std.local_waves.size() - 1;
       }
 
       to->val[i] |= (1 << 30); //referencing local wavetables!
