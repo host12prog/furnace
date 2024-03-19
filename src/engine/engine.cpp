@@ -586,7 +586,7 @@ void DivEngine::createNew(const char* description, String sysName, bool inBase64
     initSongWithDesc(description,inBase64);
   }
   if (sysName=="") {
-    song.systemName=getSongSystemLegacyName(song,!getConfInt("noMultiSystem",0));
+    song.systemName=_LE(getSongSystemLegacyName(song,!getConfInt("noMultiSystem",0)).c_str());
   } else {
     song.systemName=sysName;
   }
@@ -622,7 +622,7 @@ void DivEngine::createNewFromDefaults() {
   }
   String sysName=getConfString("initialSysName","");
   if (sysName=="") {
-    song.systemName=getSongSystemLegacyName(song,!getConfInt("noMultiSystem",0));
+    song.systemName=_LE(getSongSystemLegacyName(song,!getConfInt("noMultiSystem",0)).c_str());
   } else {
     song.systemName=sysName;
   }
@@ -999,7 +999,10 @@ void DivEngine::delUnusedSamples() {
         i->type==DIV_INS_GA20 ||
         i->type==DIV_INS_K053260 ||
         i->type==DIV_INS_C140 ||
-        i->type==DIV_INS_C219) {
+        i->type==DIV_INS_C219 ||
+        i->type==DIV_INS_NDS ||
+        i->type==DIV_INS_GBA_DMA ||
+        i->type==DIV_INS_GBA_MINMOD) {
       if (i->amiga.initSample>=0 && i->amiga.initSample<song.sampleLen) {
         isUsed[i->amiga.initSample]=true;
       }
@@ -4291,7 +4294,7 @@ bool DivEngine::init() {
     }
     String sysName=getConfString("initialSysName","");
     if (sysName=="") {
-      song.systemName=getSongSystemLegacyName(song,!getConfInt("noMultiSystem",0));
+      song.systemName=_LE(getSongSystemLegacyName(song,!getConfInt("noMultiSystem",0)).c_str());
     } else {
       song.systemName=sysName;
     }

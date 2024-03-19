@@ -1928,7 +1928,11 @@ void DivEngine::registerSystems() {
     {"Sample##sesd"},
     {"PCM##sesd"},
     {DIV_CH_PCM},
-    {DIV_INS_AMIGA}
+    {DIV_INS_AMIGA},
+    {},
+    {
+      {0x10, {DIV_CMD_WAVE, "10xx: Set waveform##sesd0"}},
+    }
   );
 
   sysDefs[DIV_SYSTEM_K007232]=new DivSysDef(
@@ -2137,6 +2141,52 @@ void DivEngine::registerSystems() {
       {0x18, {DIV_CMD_SAMPLE_MODE, "18xx: Select PCM/DPCM mode (0: PCM; 1: DPCM)##sesd"}},
       {0x19, {DIV_CMD_NES_LINEAR_LENGTH, "19xx: Set wave linear counter (0 to 7F; 80 and higher halt)##sesd"}},
       {0x20, {DIV_CMD_SAMPLE_FREQ, "20xx: Set DPCM frequency (0 to F)##sesd"}}
+    }
+  );
+  
+  sysDefs[DIV_SYSTEM_GBA_DMA]=new DivSysDef(
+    "Game Boy Advance DMA Sound", NULL, 0xd7, 0, 2, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 256,
+    "additional PCM FIFO channels in Game Boy Advance driven directly by its DMA hardware.##sesd",
+    {"PCM 1##sesd", "PCM 2##sesd"},
+    {"P1##sesd", "P2##sesd"},
+    {DIV_CH_PCM, DIV_CH_PCM},
+    {DIV_INS_GBA_DMA, DIV_INS_GBA_DMA},
+    {DIV_INS_AMIGA, DIV_INS_AMIGA},
+    {},
+    {
+      {0x10, {DIV_CMD_WAVE, "10xx: Set waveform##sesd0"}},
+      {0x11, {DIV_CMD_WAVE_LOCAL, "11xx: Set waveform (local)##sesd"}},
+    }
+  );
+
+  sysDefs[DIV_SYSTEM_GBA_MINMOD]=new DivSysDef(
+    "Game Boy Advance MinMod", NULL, 0xd8, 0, 16, false, true, 0, false, 1U<<DIV_SAMPLE_DEPTH_8BIT, 0, 256,
+    "additional PCM FIFO channels in Game Boy Advance driven by software mixing to provide up to sixteen sample channels.##sesd",
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd", "Channel 9##sesd", "Channel 10##sesd", "Channel 11##sesd", "Channel 12##sesd", "Channel 13##sesd", "Channel 14##sesd", "Channel 15##sesd", "Channel 16##sesd"},
+    {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"},
+    {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM},
+    {DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD, DIV_INS_GBA_MINMOD},
+    {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
+    {},
+    {
+      {0x10, {DIV_CMD_WAVE, "10xx: Set waveform##sesd0"}},
+      {0x11, {DIV_CMD_MINMOD_ECHO, "11xy: Set echo channel (x: left/right source; y: delay (0 disables))##sesd"}},
+      {0x12, {DIV_CMD_SNES_INVERT, "12xy: Toggle invert (x: left; y: right)##sesd"}},
+      {0x13, {DIV_CMD_WAVE_LOCAL, "13xx: Set waveform (local)##sesd"}},
+    }
+  );
+
+  sysDefs[DIV_SYSTEM_NDS]=new DivSysDef(
+    "Nintendo DS (NDS)", NULL, 0xd6, 0, 16, false, true, 0, false, (1U<<DIV_SAMPLE_DEPTH_8BIT)|(1U<<DIV_SAMPLE_DEPTH_IMA_ADPCM)|(1U<<DIV_SAMPLE_DEPTH_16BIT), 32, 32,
+    "a handheld video game console with two screens. it uses a stylus.##sesd",
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd", "Channel 9##sesd", "Channel 10##sesd", "Channel 11##sesd", "Channel 12##sesd", "Channel 13##sesd", "Channel 14##sesd", "Channel 15##sesd", "Channel 16##sesd"},
+    {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"},
+    {DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PCM, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_NOISE, DIV_CH_NOISE},
+    {DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS, DIV_INS_NDS},
+    {DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA, DIV_INS_AMIGA},
+    {
+      {0x12, {DIV_CMD_STD_NOISE_MODE, "12xx: Set duty cycle (pulse: 0 to 7)##sesd"}},
+      {0x1f, {DIV_CMD_ADPCMA_GLOBAL_VOLUME, "1Fxx: Set global volume (0 to 7F)##sesd"}},
     }
   );
 

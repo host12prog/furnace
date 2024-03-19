@@ -309,6 +309,7 @@ enum FurnaceGUIColors {
   GUI_COLOR_INSTR_GBA_MINMOD,
   GUI_COLOR_INSTR_KURUMITSU,
   GUI_COLOR_INSTR_SID2,
+  GUI_COLOR_INSTR_NDS,
   GUI_COLOR_INSTR_UNKNOWN,
 
   GUI_COLOR_CHANNEL_BG,
@@ -2653,7 +2654,10 @@ class FurnaceGUI {
   void drawInsPOWERNOISE(DivInstrument* ins);
   void drawInsPOWERNOISESLOPE(DivInstrument* ins);
   void drawInsDAVE(DivInstrument* ins);
+  void drawInsGBADMA(DivInstrument* ins);
+  void drawInsGBAMINMOD(DivInstrument* ins);
   void drawInsSID2(DivInstrument* ins);
+  void drawInsNDS(DivInstrument* ins);
 
   void insTabWave(DivInstrument* ins);
 

@@ -181,10 +181,11 @@ const char* insTypes[][3]={
   {"PowerNoise (noise)##sggc",ICON_FUR_NOISE,ICON_FUR_INS_POWERNOISE},
   {"PowerNoise (slope)##sggc",ICON_FUR_SAW,ICON_FUR_INS_POWERNOISE_SLOPE},
   {"DAVE",ICON_FA_BAR_CHART,ICON_FUR_INS_DAVE},
-  {"DIV_INS_GBA_DMA",ICON_FA_BAR_CHART,ICON_FUR_INS_STD},
-  {"DIV_INS_GBA_MINMOD",ICON_FA_BAR_CHART,ICON_FUR_INS_STD},
+  {"GBA DMA",ICON_FA_GAMEPAD,ICON_FUR_INS_GBA_DMA},
+  {"GBA MinMod",ICON_FA_VOLUME_UP,ICON_FUR_INS_GBA_MINMOD},
   {"DIV_INS_KURUMITSU",ICON_FA_BAR_CHART,ICON_FUR_INS_STD},
   {"SID2",ICON_FA_KEYBOARD_O,ICON_FUR_INS_SID2},
+  {"NDS",ICON_FA_BAR_CHART,ICON_FUR_INS_NDS},
   {NULL,ICON_FA_QUESTION,ICON_FA_QUESTION}
 };
 
@@ -210,7 +211,7 @@ const char* sampleDepths[DIV_SAMPLE_DEPTH_MAX]={
   "VOX",
   "8-bit µ-law PCM##sggc",
   "C219 PCM",
-  NULL,
+  "IMA ADPCM",
   NULL,
   NULL,
   "16-bit PCM##sggc"
@@ -1024,6 +1025,7 @@ const FurnaceGUIColorDef guiColors[GUI_COLOR_MAX]={
   D(GUI_COLOR_INSTR_GBA_MINMOD,"",ImVec4(0.0f,0.7f,0.8f,1.0f)),
   D(GUI_COLOR_INSTR_KURUMITSU,"",ImVec4(0.0f,0.7f,0.8f,1.0f)),
   D(GUI_COLOR_INSTR_SID2,"",ImVec4(0.0f,0.7f,0.8f,1.0f)),
+  D(GUI_COLOR_INSTR_NDS,"",ImVec4(0.7f,0.7f,0.8f,1.0f)),
   D(GUI_COLOR_INSTR_UNKNOWN,"",ImVec4(0.3f,0.3f,0.3f,1.0f)),
 
   D(GUI_COLOR_CHANNEL_BG,"",ImVec4(0.4f,0.6f,0.8f,1.0f)),
@@ -1267,6 +1269,8 @@ const int availableSystems[]={
   DIV_SYSTEM_C140,
   DIV_SYSTEM_C219,
   DIV_SYSTEM_ES5503,
+  DIV_SYSTEM_GBA_DMA,
+  DIV_SYSTEM_GBA_MINMOD,
   DIV_SYSTEM_PCM_DAC,
   DIV_SYSTEM_ESFM,
   DIV_SYSTEM_PONG,
@@ -1274,6 +1278,7 @@ const int availableSystems[]={
   DIV_SYSTEM_DAVE,
   DIV_SYSTEM_SID2,
   DIV_SYSTEM_5E01,
+  DIV_SYSTEM_NDS,
   0 // don't remove this last one!
 };
 
@@ -1365,6 +1370,8 @@ const int chipsSpecial[]={
   DIV_SYSTEM_MMC5,
   DIV_SYSTEM_SM8521,
   DIV_SYSTEM_DAVE,
+  DIV_SYSTEM_NDS,
+  DIV_SYSTEM_5E01,
   0 // don't remove this last one!
 };
 
@@ -1388,6 +1395,9 @@ const int chipsSample[]={
   DIV_SYSTEM_C140,
   DIV_SYSTEM_C219,
   DIV_SYSTEM_ES5503,
+  DIV_SYSTEM_NDS,
+  DIV_SYSTEM_GBA_DMA,
+  DIV_SYSTEM_GBA_MINMOD,
   0 // don't remove this last one!
 };
 
