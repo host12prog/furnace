@@ -6184,7 +6184,7 @@ bool FurnaceGUI::loop() {
           if (curLocalWave == -1)
           {
             showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sggu"));
-          } 
+          }
           else 
           {
             wantScrollList=true;
