@@ -1689,7 +1689,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             
             if(tempo == 0)
             {
-              s->virtualTempoN = 150;
+              //s->virtualTempoN = 150;
+              s->virtualTempoN = s->virtualTempoD;
             }
             else
             {
