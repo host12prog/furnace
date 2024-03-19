@@ -3243,12 +3243,12 @@ void FurnaceGUI::initSystemPresets() {
   ENTRY(
     "Namco C219", {
       CH(DIV_SYSTEM_C219, 1.0f, 0, "")
-    }
+    }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
-    "NDS", {
+    "Nintendo DS (NDS)", {
       CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
-    }
+    }, NULL, MENU_STATUS_USUAL
   );
   CATEGORY_END;
 
@@ -3434,14 +3434,9 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
-    "Nintendo DS NDS", {
+    "Nintendo DS (NDS)", {
       CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
-    }
-  );
-  ENTRY(
-    "NDS", {
-      CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
-    }
+    }, NULL, MENU_STATUS_USUAL
   );
   CATEGORY_END;
 
