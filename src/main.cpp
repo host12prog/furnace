@@ -746,6 +746,8 @@ int main(int argc, char** argv) {
     return 1;
   }
 
+  e.song.systemName=g._L(e.getSongSystemLegacyName(e.song,!e.getConfInt("noMultiSystem",0)).c_str()); //show translated system names when initializing song
+
   if (displayEngineFailError) {
     logE("displaying engine fail error.");
     g.showError("error while initializing audio!");

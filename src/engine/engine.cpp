@@ -586,7 +586,7 @@ void DivEngine::createNew(const char* description, String sysName, bool inBase64
     initSongWithDesc(description,inBase64);
   }
   if (sysName=="") {
-    song.systemName=getSongSystemLegacyName(song,!getConfInt("noMultiSystem",0));
+    song.systemName=_LE(getSongSystemLegacyName(song,!getConfInt("noMultiSystem",0)).c_str());
   } else {
     song.systemName=sysName;
   }
@@ -622,7 +622,7 @@ void DivEngine::createNewFromDefaults() {
   }
   String sysName=getConfString("initialSysName","");
   if (sysName=="") {
-    song.systemName=getSongSystemLegacyName(song,!getConfInt("noMultiSystem",0));
+    song.systemName=_LE(getSongSystemLegacyName(song,!getConfInt("noMultiSystem",0)).c_str());
   } else {
     song.systemName=sysName;
   }
@@ -4294,7 +4294,7 @@ bool DivEngine::init() {
     }
     String sysName=getConfString("initialSysName","");
     if (sysName=="") {
-      song.systemName=getSongSystemLegacyName(song,!getConfInt("noMultiSystem",0));
+      song.systemName=_LE(getSongSystemLegacyName(song,!getConfInt("noMultiSystem",0)).c_str());
     } else {
       song.systemName=sysName;
     }
