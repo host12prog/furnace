@@ -292,6 +292,16 @@ void FurnaceGUI::initSystemPresets() {
       CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
   );
+  ENTRY(
+    "Game Boy Advance (DMA)", {
+      CH(DIV_SYSTEM_GBA_DMA, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_LIST_START
+  );
+  ENTRY(
+    "Game Boy Advance (MinMod)", {
+      CH(DIV_SYSTEM_GBA_MINMOD, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_LIST_END
+  );
   CATEGORY_END;
 
   CATEGORY_BEGIN(_L("Computers##sgpr"),_L("let's get to work on chiptune today.##sgpr"));
@@ -3249,6 +3259,16 @@ void FurnaceGUI::initSystemPresets() {
     "Nintendo DS (NDS)", {
       CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "Game Boy Advance (DMA)", {
+      CH(DIV_SYSTEM_GBA_DMA, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_LIST_START
+  );
+  ENTRY(
+    "Game Boy Advance (MinMod)", {
+      CH(DIV_SYSTEM_GBA_MINMOD, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_LIST_END
   );
   CATEGORY_END;
 
