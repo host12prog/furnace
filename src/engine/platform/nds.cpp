@@ -103,41 +103,41 @@ void DivPlatformNDS::write_byte(u32 addr, u8 data) {
 void DivPlatformNDS::tick(bool sysTick) {
   for (int i=0; i<16; i++) {
     chan[i].std.next();
-    if (chan[i].std.vol.had) {
-      chan[i].outVol=((chan[i].vol&0x7f)*MIN(chan[i].macroVolMul,chan[i].std.vol.val))/chan[i].macroVolMul;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
+      chan[i].outVol=((chan[i].vol&0x7f)*MIN(chan[i].macroVolMul,chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val))/chan[i].macroVolMul;
       writeOutVol(i);
     }
     if (NEW_ARP_STRAT) {
       chan[i].handleArp();
-    } else if (chan[i].std.arp.had) {
+    } else if (chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->had) {
       if (!chan[i].inPorta) {
-        chan[i].baseFreq=NOTE_PERIODIC(parent->calcArp(chan[i].note,chan[i].std.arp.val));
+        chan[i].baseFreq=NOTE_PERIODIC(parent->calcArp(chan[i].note,chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val));
       }
       chan[i].freqChanged=true;
     }
-    if (chan[i].std.pitch.had) {
-      if (chan[i].std.pitch.mode) {
-        chan[i].pitch2+=chan[i].std.pitch.val;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
+      if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->mode) {
+        chan[i].pitch2+=chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
         CLAMP_VAR(chan[i].pitch2,-32768,32767);
       } else {
-        chan[i].pitch2=chan[i].std.pitch.val;
+        chan[i].pitch2=chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
       }
       chan[i].freqChanged=true;
     }
     if ((i>=8) && (i<14)) {
-      if (chan[i].std.duty.had) {
-        chan[i].duty=chan[i].std.duty.val;
+      if (chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->had) {
+        chan[i].duty=chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->val;
         if ((!chan[i].pcm)) { // pulse
           rWrite8(0x03+i*16,(rRead8(0x03+i*16)&0xe8)|(chan[i].duty&7));
         }
       }
     }
-    if (chan[i].std.panL.had) { // panning
-      chan[i].panning=0x40+chan[i].std.panL.val;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->had) { // panning
+      chan[i].panning=0x40+chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->val;
       rWrite8(0x02+i*16,chan[i].panning);
     }
-    if (chan[i].std.phaseReset.had) {
-      if ((chan[i].std.phaseReset.val==1) && chan[i].active) {
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->had) {
+      if ((chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->val==1) && chan[i].active) {
         chan[i].audPos=0;
         chan[i].setPos=true;
         if ((rRead8(0x03+i*16)&0x80)==0)
@@ -286,7 +286,7 @@ int DivPlatformNDS::dispatch(DivCommand c) {
       chan[c.chan].busy=true;
       chan[c.chan].keyOn=true;
       chan[c.chan].macroInit(ins);
-      if (!parent->song.brokenOutVol && !chan[c.chan].std.vol.will) {
+      if (!parent->song.brokenOutVol && !chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->will) {
         chan[c.chan].outVol=chan[c.chan].vol;
       }
       break;
@@ -317,14 +317,14 @@ int DivPlatformNDS::dispatch(DivCommand c) {
     case DIV_CMD_VOLUME:
       if (chan[c.chan].vol!=c.value) {
         chan[c.chan].vol=c.value;
-        if (!chan[c.chan].std.vol.has) {
+        if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
           chan[c.chan].outVol=c.value;
           writeOutVol(c.chan);
         }
       }
       break;
     case DIV_CMD_GET_VOLUME:
-      if (chan[c.chan].std.vol.has) {
+      if (chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
         return chan[c.chan].vol;
       }
       return chan[c.chan].outVol;
@@ -367,7 +367,7 @@ int DivPlatformNDS::dispatch(DivCommand c) {
       }
       break;
     case DIV_CMD_LEGATO: {
-      chan[c.chan].baseFreq=NOTE_PERIODIC(c.value+chan[c.chan].sampleNoteDelta+((HACKY_LEGATO_MESS)?(chan[c.chan].std.arp.val-12):(0)));
+      chan[c.chan].baseFreq=NOTE_PERIODIC(c.value+chan[c.chan].sampleNoteDelta+((HACKY_LEGATO_MESS)?(chan[c.chan].std.get_div_macro_struct(DIV_MACRO_ARP)->val-12):(0)));
       chan[c.chan].freqChanged=true;
       chan[c.chan].note=c.value;
       break;
@@ -376,7 +376,7 @@ int DivPlatformNDS::dispatch(DivCommand c) {
       if (chan[c.chan].active && c.value2) {
         if (parent->song.resetMacroOnPorta) chan[c.chan].macroInit(parent->getIns(chan[c.chan].ins,DIV_INS_NDS));
       }
-      if (!chan[c.chan].inPorta && c.value && !parent->song.brokenPortaArp && chan[c.chan].std.arp.will && !NEW_ARP_STRAT) chan[c.chan].baseFreq=NOTE_PERIODIC(chan[c.chan].note);
+      if (!chan[c.chan].inPorta && c.value && !parent->song.brokenPortaArp && chan[c.chan].std.get_div_macro_struct(DIV_MACRO_ARP)->will && !NEW_ARP_STRAT) chan[c.chan].baseFreq=NOTE_PERIODIC(chan[c.chan].note);
       chan[c.chan].inPorta=c.value;
       break;
     case DIV_CMD_SAMPLE_POS:

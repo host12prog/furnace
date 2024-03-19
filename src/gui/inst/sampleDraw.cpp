@@ -176,14 +176,15 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
       ImGui::EndCombo();
     }
     // Wavetable
-    if (ins->type==DIV_INS_AMIGA || ins->type==DIV_INS_SNES) {
+    if (ins->type==DIV_INS_AMIGA || ins->type==DIV_INS_SNES || ins->type==DIV_INS_GBA_DMA || ins->type==DIV_INS_GBA_MINMOD) {
       ImGui::BeginDisabled(ins->amiga.useNoteMap);
-      P(ImGui::Checkbox(_L("Use wavetable (Amiga/SNES/Generic DAC only)##sgismpd"),&ins->amiga.useWave));
+      const char* useWaveText=ins->type==DIV_INS_AMIGA?_L("Use wavetable (Amiga/Generic DAC only)##sgismpd"):_L("Use wavetable##sgismpd");
+      P(ImGui::Checkbox(useWaveText,&ins->amiga.useWave));
       if (ins->amiga.useWave) {
         int len=ins->amiga.waveLen+1;
         int origLen=len;
         if (ImGui::InputInt(_L("Width##sgismpd"),&len,2,16)) {
-          if (ins->type==DIV_INS_SNES) {
+          if (ins->type==DIV_INS_SNES || ins->type==DIV_INS_GBA_DMA) {
             if (len<16) len=16;
             if (len>256) len=256;
             if (len>origLen) {

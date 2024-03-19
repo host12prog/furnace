@@ -4238,7 +4238,8 @@ void DivLocale::addTranslationsRussian()
     strings["Use sample##sgismpd"].plurals[0] = "Использовать сэмпл";
     strings["Sample bank slot##BANKSLOT"].plurals[0] = "Номер банка сэмплов##BANKSLOT";
     strings["Sample##sgismpd1"].plurals[0] = "Сэмпл";
-    strings["Use wavetable (Amiga/SNES/Generic DAC only)##sgismpd"].plurals[0] = "Использовать волновую таблицу (только для Amiga/SNES/типичного ЦАП)";
+    strings["Use wavetable (Amiga/Generic DAC only)##sgismpd"].plurals[0] = "Использовать волновую таблицу (только для Amiga/типичного ЦАП)";
+    strings["Use wavetable##sgismpd"].plurals[0] = "Использовать волновую таблицу";
     strings["Width##sgismpd"].plurals[0] = "Длина";
     strings["Use sample map##sgismpd"].plurals[0] = "Использовать карту сэмплов";
     strings["pitch##sgismpd"].plurals[0] = "частота";

@@ -4341,7 +4341,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Use sample##sgismpd"].plurals[0] = "=Use sample";
     strings["Sample bank slot##BANKSLOT"].plurals[0] = "=Sample bank slot##BANKSLOT";
     strings["Sample##sgismpd1"].plurals[0] = "=Sample";
-    strings["Use wavetable (Amiga/SNES/Generic DAC only)##sgismpd"].plurals[0] = "=Use wavetable (Amiga/SNES/Generic DAC only)";
+    strings["Use wavetable (Amiga/Generic DAC only)##sgismpd"].plurals[0] = "=Use wavetable (Amiga/Generic DAC only)";
+    strings["Use wavetable##sgismpd"].plurals[0] = "=Use wavetable";
     strings["Width##sgismpd"].plurals[0] = "=Width";
     strings["Use sample map##sgismpd"].plurals[0] = "=Use sample map";
     strings["pitch##sgismpd"].plurals[0] = "=pitch";

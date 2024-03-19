@@ -2654,6 +2654,8 @@ class FurnaceGUI {
   void drawInsPOWERNOISE(DivInstrument* ins);
   void drawInsPOWERNOISESLOPE(DivInstrument* ins);
   void drawInsDAVE(DivInstrument* ins);
+  void drawInsGBADMA(DivInstrument* ins);
+  void drawInsGBAMINMOD(DivInstrument* ins);
   void drawInsSID2(DivInstrument* ins);
   void drawInsNDS(DivInstrument* ins);
 

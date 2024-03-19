@@ -17,7 +17,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include "fileOpsCommon.h"
+#include "shared.h"
+
+class DivEngine;
 
 static const char* trueFalse[2]={
   "no", "yes"
@@ -49,11 +51,11 @@ void writeTextMacro(SafeWriter* w, DivInstrumentMacro& m, const char* name, bool
   int len=m.len;
   switch (m.open&6) {
     case 2:
-      len=16;
+      len=18;
       w->writeText(" [ADSR]");
       break;
     case 4:
-      len=16;
+      len=18;
       w->writeText(" [LFO]");
       break;
   }
@@ -188,6 +190,15 @@ SafeWriter* DivEngine::saveText(bool separatePatterns) {
       }
     }
 
+    if (ins->type==DIV_INS_ES5503) {
+      w->writeText("- ES503 parameters:\n");
+
+      w->writeText(fmt::sprintf("  - oscillator mode: %d\n",ins->es5503.initial_osc_mode));
+
+      w->writeText(fmt::sprintf("  - phase reset on key-on: %s\n",trueFalse[ins->es5503.phase_reset_on_start?1:0]));
+      w->writeText(fmt::sprintf("  - softpan virtual channel: %s\n",trueFalse[ins->es5503.softpan_virtual_channel?1:0]));
+    }
+
     if (ins->type==DIV_INS_GB) {
       w->writeText("- Game Boy parameters:\n");
       w->writeText(fmt::sprintf("  - volume: %d\n",ins->gb.envVol));
@@ -199,32 +210,32 @@ SafeWriter* DivEngine::saveText(bool separatePatterns) {
       if (ins->gb.hwSeqLen>0) {
         w->writeText("  - hardware sequence:\n");
         for (int j=0; j<ins->gb.hwSeqLen; j++) {
-          w->writeText(fmt::sprintf("    - %d: %.2X %.4X\n",j,ins->gb.hwSeq[j].cmd,ins->gb.hwSeq[j].data));
+          w->writeText(fmt::sprintf("    - %d: %.2X %.4X\n",j,ins->gb.get_gb_hw_seq(j, false)->cmd,ins->gb.get_gb_hw_seq(j, false)->data));
         }
       }
     }
 
     bool header=false;
-    writeTextMacro(w,ins->std.volMacro,"vol",header);
-    writeTextMacro(w,ins->std.arpMacro,"arp",header);
-    writeTextMacro(w,ins->std.dutyMacro,"duty",header);
-    writeTextMacro(w,ins->std.waveMacro,"wave",header);
-    writeTextMacro(w,ins->std.pitchMacro,"pitch",header);
-    writeTextMacro(w,ins->std.panLMacro,"panL",header);
-    writeTextMacro(w,ins->std.panRMacro,"panR",header);
-    writeTextMacro(w,ins->std.phaseResetMacro,"phaseReset",header);
-    writeTextMacro(w,ins->std.ex1Macro,"ex1",header);
-    writeTextMacro(w,ins->std.ex2Macro,"ex2",header);
-    writeTextMacro(w,ins->std.ex3Macro,"ex3",header);
-    writeTextMacro(w,ins->std.ex4Macro,"ex4",header);
-    writeTextMacro(w,ins->std.ex5Macro,"ex5",header);
-    writeTextMacro(w,ins->std.ex6Macro,"ex6",header);
-    writeTextMacro(w,ins->std.ex7Macro,"ex7",header);
-    writeTextMacro(w,ins->std.ex8Macro,"ex8",header);
-    writeTextMacro(w,ins->std.algMacro,"alg",header);
-    writeTextMacro(w,ins->std.fbMacro,"fb",header);
-    writeTextMacro(w,ins->std.fmsMacro,"fms",header);
-    writeTextMacro(w,ins->std.amsMacro,"ams",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_VOL, false),"vol",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_ARP, false),"arp",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_DUTY, false),"duty",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_WAVE, false),"wave",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_PITCH, false),"pitch",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_PAN_LEFT, false),"panL",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_PAN_RIGHT, false),"panR",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_PHASE_RESET, false),"phaseReset",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX1, false),"ex1",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX2, false),"ex2",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX3, false),"ex3",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX4, false),"ex4",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX5, false),"ex5",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX6, false),"ex6",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX7, false),"ex7",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX8, false),"ex8",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_ALG, false),"alg",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_FB, false),"fb",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_FMS, false),"fms",header);
+    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_AMS, false),"ams",header);
 
     // TODO: the rest
     w->writeText("\n");
@@ -311,7 +322,6 @@ SafeWriter* DivEngine::saveText(bool separatePatterns) {
 
           for (int l=0; l<chans; l++) {
             DivPattern* p=s->pat[l].getPattern(s->orders.ord[l][j],false);
-
             int note=p->data[k][0];
             int octave=p->data[k][1];
 

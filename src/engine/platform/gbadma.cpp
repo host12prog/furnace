@@ -106,22 +106,22 @@ void DivPlatformGBADMA::tick(bool sysTick) {
   for (int i=0; i<2; i++) {
     DivInstrument* ins=parent->getIns(chan[i].ins,DIV_INS_AMIGA);
     chan[i].std.next();
-    if (chan[i].std.vol.had) {
-      chan[i].envVol=chan[i].std.vol.val;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
+      chan[i].envVol=chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val;
       if (ins->type==DIV_INS_AMIGA) chan[i].envVol/=32;
       else if (chan[i].envVol>2) chan[i].envVol=2;
     }
     if (NEW_ARP_STRAT) {
       chan[i].handleArp();
-    } else if (chan[i].std.arp.had) {
+    } else if (chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->had) {
       if (!chan[i].inPorta) {
-        chan[i].baseFreq=NOTE_PERIODIC(parent->calcArp(chan[i].note,chan[i].std.arp.val));
+        chan[i].baseFreq=NOTE_PERIODIC(parent->calcArp(chan[i].note,chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val));
       }
       chan[i].freqChanged=true;
     }
-    if (chan[i].useWave && chan[i].std.wave.had) {
-      if (chan[i].wave!=chan[i].std.wave.val || chan[i].ws.activeChanged()) {
-        chan[i].wave=chan[i].std.wave.val;
+    if (chan[i].useWave && chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
+      if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || chan[i].ws.activeChanged()) {
+        chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
         chan[i].ws.changeWave1(chan[i].wave);
         if (!chan[i].keyOff) chan[i].keyOn=true;
       }
@@ -131,28 +131,28 @@ void DivPlatformGBADMA::tick(bool sysTick) {
         updateWave(i);
       }
     }
-    if (chan[i].std.pitch.had) {
-      if (chan[i].std.pitch.mode) {
-        chan[i].pitch2+=chan[i].std.pitch.val;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
+      if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->mode) {
+        chan[i].pitch2+=chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
         CLAMP_VAR(chan[i].pitch2,-32768,32767);
       } else {
-        chan[i].pitch2=chan[i].std.pitch.val;
+        chan[i].pitch2=chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
       }
       chan[i].freqChanged=true;
     }
     if (ins->type==DIV_INS_AMIGA) {
-      if (chan[0].std.panL.had) {
-        chan[0].pan=(chan[0].pan&~2)|(chan[0].std.panL.val>0?2:0);
+      if (chan[0].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->had) {
+        chan[0].pan=(chan[0].pan&~2)|(chan[0].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->val>0?2:0);
       }
-      if (chan[0].std.panR.had) {
-        chan[0].pan=(chan[0].pan&~1)|(chan[0].std.panR.val>0?1:0);
+      if (chan[0].std.get_div_macro_struct(DIV_MACRO_PAN_RIGHT)->had) {
+        chan[0].pan=(chan[0].pan&~1)|(chan[0].std.get_div_macro_struct(DIV_MACRO_PAN_RIGHT)->val>0?1:0);
       }
     } else {
-      if (chan[i].std.panL.had) {
-        chan[i].pan=chan[i].std.panL.val&3;
+      if (chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->had) {
+        chan[i].pan=chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->val&3;
       }
     }
-    if (chan[i].std.phaseReset.had && chan[i].std.phaseReset.val==1) {
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->had && chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->val==1) {
       chan[i].audPos=0;
     }
     if (chan[i].freqChanged || chan[i].keyOn || chan[i].keyOff) {
@@ -175,7 +175,7 @@ void DivPlatformGBADMA::tick(bool sysTick) {
         if (chan[i].freq>65536*1024) chan[i].freq=65536*1024;
       }
       if (chan[i].keyOn) {
-        if (!chan[i].std.vol.had) {
+        if (!chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
           chan[i].envVol=2;
         }
         chan[i].keyOn=false;
@@ -231,7 +231,7 @@ int DivPlatformGBADMA::dispatch(DivCommand c) {
       chan[c.chan].active=true;
       chan[c.chan].keyOn=true;
       chan[c.chan].macroInit(ins);
-      if (!parent->song.brokenOutVol && !chan[c.chan].std.vol.will) {
+      if (!parent->song.brokenOutVol && !chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->will) {
         chan[c.chan].envVol=2;
       }
       if (chan[c.chan].useWave) {
@@ -259,7 +259,7 @@ int DivPlatformGBADMA::dispatch(DivCommand c) {
     case DIV_CMD_VOLUME:
       if (chan[c.chan].vol!=c.value) {
         chan[c.chan].vol=MIN(c.value,2);
-        if (!chan[c.chan].std.vol.has) {
+        if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
           chan[c.chan].envVol=2;
         }
       }
@@ -308,7 +308,7 @@ int DivPlatformGBADMA::dispatch(DivCommand c) {
       break;
     }
     case DIV_CMD_LEGATO: {
-      chan[c.chan].baseFreq=NOTE_PERIODIC(c.value+((HACKY_LEGATO_MESS)?(chan[c.chan].std.arp.val):(0)));
+      chan[c.chan].baseFreq=NOTE_PERIODIC(c.value+((HACKY_LEGATO_MESS)?(chan[c.chan].std.get_div_macro_struct(DIV_MACRO_ARP)->val):(0)));
       chan[c.chan].freqChanged=true;
       chan[c.chan].note=c.value;
       break;

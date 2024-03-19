@@ -761,6 +761,7 @@ src/engine/importExport/opm.cpp
 src/engine/importExport/opni.cpp
 src/engine/importExport/s3i.cpp
 src/engine/importExport/sbi.cpp
+src/engine/importExport/text.cpp
 src/engine/importExport/tfi.cpp
 src/engine/importExport/vgi.cpp
 src/engine/importExport/wopl.cpp
@@ -938,6 +939,8 @@ src/gui/inst/ymz280b.cpp
 src/gui/inst/powernoise.cpp
 src/gui/inst/powernoise_slope.cpp
 src/gui/inst/dave.cpp
+src/gui/inst/gbadma.cpp
+src/gui/inst/gbaminmod.cpp
 src/gui/inst/sid2.cpp
 src/gui/inst/nds.cpp
 
