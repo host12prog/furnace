@@ -887,7 +887,9 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
       case DIV_INS_POWERNOISE_SLOPE:
       case DIV_INS_DAVE:
       case DIV_INS_SID2:
-        init_type = init_type - (unsigned short)1; //tildearrow's verson modules are incompatible with these inst indices so we comply...
+        init_type = init_type - (unsigned short)1; break; //tildearrow's verson modules are incompatible with these inst indices so we comply...
+      case DIV_INS_NDS:
+        init_type = 59; break;
       default: break;
     }
   }
@@ -2271,9 +2273,15 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
       goto proceed;
     }
 
-    if(type == 58) //powernoise slope inst
+    if(type == 58) //dave inst
     {
       type = DIV_INS_DAVE;
+      goto proceed;
+    }
+
+    if(type == 59) //Nintendo DS (NDS) inst
+    {
+      type = DIV_INS_NDS;
       goto proceed;
     }
   }

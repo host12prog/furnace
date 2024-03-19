@@ -939,6 +939,7 @@ src/gui/inst/powernoise.cpp
 src/gui/inst/powernoise_slope.cpp
 src/gui/inst/dave.cpp
 src/gui/inst/sid2.cpp
+src/gui/inst/nds.cpp
 
 src/gui/inst/wavetable.cpp
 
