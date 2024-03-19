@@ -396,7 +396,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
     case DIV_SYSTEM_GBA_DMA: {
       int dacDepth=flags.getInt("dacDepth",9);
 
-      ImGui::Text("DAC bit depth (reduces output rate):");
+      ImGui::Text(_L("DAC bit depth (reduces output rate):##sgsc"));
       if (CWSliderInt("##DACDepth",&dacDepth,6,9)) {
         if (dacDepth<6) dacDepth=6;
         if (dacDepth>9) dacDepth=9;
@@ -417,31 +417,31 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       int dacDepth=flags.getInt("dacDepth",9);
       int channels=flags.getInt("channels",16);
       int sampRate=flags.getInt("sampRate",21845);
-      ImGui::Text("Volume scale:");
+      ImGui::Text(_L("Volume scale:##sgsc"));
       if (CWSliderInt("##VolScale",&volScale,0,32768)) {
         if (volScale<0) volScale=0;
         if (volScale>32768) volScale=32768;
         altered=true;
       } rightClickable
-      ImGui::Text("Mix buffers (allows longer echo delay):");
+      ImGui::Text(_L("Mix buffers (allows longer echo delay):##sgsc"));
       if (CWSliderInt("##MixBufs",&mixBufs,2,15)) {
         if (mixBufs<2) mixBufs=2;
         if (mixBufs>16) mixBufs=16;
         altered=true;
       } rightClickable
-      ImGui::Text("DAC bit depth (reduces output rate):");
+      ImGui::Text(_L("DAC bit depth (reduces output rate):##sgsc"));
       if (CWSliderInt("##DACDepth",&dacDepth,6,9)) {
         if (dacDepth<6) dacDepth=6;
         if (dacDepth>9) dacDepth=9;
         altered=true;
       } rightClickable
-      ImGui::Text("Channel limit:");
+      ImGui::Text(_L("Channel limit:##sgsc"));
       if (CWSliderInt("##Channels",&channels,1,16)) {
         if (channels<1) channels=1;
         if (channels>16) channels=16;
         altered=true;
       } rightClickable
-      ImGui::Text("Sample rate:");
+      ImGui::Text(_L("Sample rate:##sgsc"));
       if (CWSliderInt("##SampRate",&sampRate,256,65536)) {
         if (sampRate<1) sampRate=21845;
         if (sampRate>65536) sampRate=65536;
@@ -449,9 +449,9 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       } rightClickable
       DivPlatformGBAMinMod* dispatch=(DivPlatformGBAMinMod*)e->getDispatch(chan);
       float maxCPU=dispatch->maxCPU*100;
-      ImGui::Text("Actual sample rate: %d Hz", dispatch->chipClock);
+      ImGui::Text(_L("Actual sample rate: %d Hz##sgsc"), dispatch->chipClock);
       if (maxCPU>90) ImGui::PushStyleColor(ImGuiCol_Text,uiColors[GUI_COLOR_WARNING]);
-      ImGui::Text("Max mixer CPU usage: %.0f%%", maxCPU);
+      ImGui::Text(_L("Max mixer CPU usage: %.0f%%##sgsc"), maxCPU);
       if (maxCPU>90) ImGui::PopStyleColor();
       FurnaceGUI::popWarningColor();
       if (altered) {
@@ -2381,7 +2381,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       if (ImGui::Checkbox("PAL",&sysPal)) {
         altered=true;
       }
-      if (ImGui::Checkbox("Disable hissing",&noHiss)) {
+      if (ImGui::Checkbox(_L("Disable hissing##sgsc"),&noHiss)) {
         altered=true;
       }
       if (altered) {
@@ -2397,11 +2397,11 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
 
       ImGui::Text("Model:");
       ImGui::Indent();
-      if (ImGui::RadioButton("DS (4MB RAM)",chipType==0)) {
+      if (ImGui::RadioButton(_L("DS (4MB RAM)##sgsc"),chipType==0)) {
         chipType=0;
         altered=true;
       }
-      if (ImGui::RadioButton("DSi (16MB RAM)",chipType==1)) {
+      if (ImGui::RadioButton(_L("DSi (16MB RAM)##sgsc"),chipType==1)) {
         chipType=1;
         altered=true;
       }
@@ -2495,7 +2495,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
     }
     ImGui::Indent();
     if (ImGui::InputInt(_L("Hz##sgscHz"),&customClock,100,10000)) {
-      if (customClock<MIN_CUSTOM_CLOCK) customClock=0;
+      if (customClock<MIN_CUSTOM_CLOCK) customClock=MIN_CUSTOM_CLOCK;
       if (customClock>MAX_CUSTOM_CLOCK) customClock=MAX_CUSTOM_CLOCK;
       altered=true;
     }

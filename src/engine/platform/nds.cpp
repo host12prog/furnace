@@ -25,6 +25,17 @@
 #define CHIP_DIVIDER 32
 #define CLOCK_DIVIDER 512 // for match to output rate
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define rRead8(a) (nds.read8(a))
 #define rWrite8(a,v) {if(!skipRegisterWrites) {nds.write8((a),(v)); regPool[(a)]=(v); if(dumpWrites) addWrite((a),(v)); }}
 #define rWrite16(a,v) { \
@@ -525,7 +536,7 @@ void DivPlatformNDS::renderSamples(int sysID) {
   memset(sampleLoaded,0,256*sizeof(bool));
 
   memCompo=DivMemoryComposition();
-  memCompo.name="Main Memory";
+  memCompo.name=_LE("Main Memory");
 
   size_t memPos=0;
   for (int i=0; i<parent->song.sampleLen; i++) {
@@ -541,7 +552,7 @@ void DivPlatformNDS::renderSamples(int sysID) {
     if (actualLength>0) {
       memcpy(&sampleMem[memPos],src,actualLength);
       sampleOff[i]=memPos;
-      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+actualLength));
+      memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+actualLength));
       memPos+=actualLength;
     }
     if (actualLength<length) {

@@ -284,7 +284,7 @@ const char* es5506ControlModes[3]={
 };
 
 const char* minModModeBits[3]={
-  "invert right", "invert left", NULL
+  "invert right##sgistru", "invert left##sgistru", NULL
 };
 
 const char* daveControlBits[5]={

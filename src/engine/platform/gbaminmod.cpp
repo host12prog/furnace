@@ -26,6 +26,17 @@
 
 #define rWrite(a,v) {regPool[a]=v;}
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 const char* regCheatSheetMinMod[]={
   "CHx_Counter", "x0",
   "CHx_Address", "x2",
@@ -244,7 +255,7 @@ void DivPlatformGBAMinMod::tick(bool sysTick) {
     if (chan[i].useWave && chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || chan[i].ws.activeChanged()) {
         chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
-        chan[i].ws.changeWave1(chan[i].wave);
+        chan[i].ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_GBA_MINMOD));
       }
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
@@ -390,7 +401,7 @@ int DivPlatformGBAMinMod::dispatch(DivCommand c) {
             chan[c.chan].wave=0;
           }
           chan[c.chan].ws.setWidth(chan[c.chan].wtLen);
-          chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+          chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_GBA_MINMOD));
         }
         chan[c.chan].ws.init(ins,chan[c.chan].wtLen,255,chan[c.chan].insChanged);
       } else {
@@ -464,7 +475,12 @@ int DivPlatformGBAMinMod::dispatch(DivCommand c) {
     case DIV_CMD_WAVE:
       if (!chan[c.chan].useWave) break;
       chan[c.chan].wave=c.value;
-      chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_GBA_MINMOD));
+      break;
+    case DIV_CMD_WAVE_LOCAL:
+      if (!chan[c.chan].useWave) break;
+      chan[c.chan].wave=c.value | (1 << 30);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_GBA_MINMOD));
       break;
     case DIV_CMD_NOTE_PORTA: {
       int destFreq=NOTE_FREQUENCY(c.value2);
@@ -590,6 +606,7 @@ void DivPlatformGBAMinMod::reset() {
     chan[i].ws.setEngine(parent);
     chan[i].ws.init(NULL,32,255);
   }
+  maxCPU = 0.0f;
 }
 
 void DivPlatformGBAMinMod::resetMixer() {
@@ -701,7 +718,7 @@ void DivPlatformGBAMinMod::renderSamples(int sysID) {
       sampleOff[i]=memPos;
       memcpy(&sampleMem[memPos],s->data8,actualLength);
       memPos+=actualLength;
-      romMemCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"PCM",i,sampleOff[i],memPos));
+      romMemCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("PCM"),i,sampleOff[i],memPos));
       // if it's one-shot, add 16 silent samples for looping area
       // this should be enough for most cases even though the
       // frequency register can make position jump by up to 256 samples
@@ -738,11 +755,11 @@ void DivPlatformGBAMinMod::setFlags(const DivConfig& flags) {
   wtMemCompo.entries.clear();
   mixMemCompo.entries.clear();
   for (int i=0; i<chanMax; i++) {
-    wtMemCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_WAVE_RAM, fmt::sprintf("Channel %d",i),-1,i*256,i*256));
+    wtMemCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_WAVE_RAM, fmt::sprintf(_LE("Channel %d"),i),-1,i*256,i*256));
   }
   for (int i=0; i<(int)mixBufs; i++) {
-    mixMemCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_ECHO, fmt::sprintf("Buffer %d Left",i),-1,i*2048,i*2048));
-    mixMemCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_ECHO, fmt::sprintf("Buffer %d Right",i),-1,i*2048+1024,i*2048+1024));
+    mixMemCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_ECHO, fmt::sprintf(_LE("Buffer %d Left"),i),-1,i*2048,i*2048));
+    mixMemCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_ECHO, fmt::sprintf(_LE("Buffer %d Right"),i),-1,i*2048+1024,i*2048+1024));
   }
 }
 
@@ -757,14 +774,14 @@ int DivPlatformGBAMinMod::init(DivEngine* p, int channels, int sugRate, const Di
   sampleMem=new signed char[getSampleMemCapacity()];
   sampleMemLen=0;
   romMemCompo=DivMemoryComposition();
-  romMemCompo.name="Sample ROM";
+  romMemCompo.name=_LE("Sample ROM");
   wtMemCompo=DivMemoryComposition();
-  wtMemCompo.name="Wavetable RAM";
+  wtMemCompo.name=_LE("Wavetable RAM");
   wtMemCompo.capacity=256*16;
   wtMemCompo.memory=(unsigned char*)wtMem;
   wtMemCompo.waveformView=DIV_MEMORY_WAVE_8BIT_SIGNED;
   mixMemCompo=DivMemoryComposition();
-  mixMemCompo.name="Mix/Echo Buffer";
+  mixMemCompo.name=_LE("Mix/Echo Buffer");
   mixMemCompo.capacity=2048*15;
   mixMemCompo.memory=(unsigned char*)mixBuf;
   mixMemCompo.waveformView=DIV_MEMORY_WAVE_8BIT_SIGNED;

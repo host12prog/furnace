@@ -135,13 +135,13 @@ void FurnaceGUI::initSystemPresets() {
     }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
-    "Game Boy Advance (no software mixing)", {
+    _L("Game Boy Advance (no software mixing)##sgpr"), {
       CH(DIV_SYSTEM_GB, 1.0f, 0, "chipType=3"),
       CH(DIV_SYSTEM_GBA_DMA, 0.5f, 0, ""),
     }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
-    "Game Boy Advance (with MinMod)", {
+    _L("Game Boy Advance (with MinMod)##sgpr"), {
       CH(DIV_SYSTEM_GB, 1.0f, 0, "chipType=3"),
       CH(DIV_SYSTEM_GBA_MINMOD, 0.5f, 0, ""),
     }, NULL, MENU_STATUS_USUAL

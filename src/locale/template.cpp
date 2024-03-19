@@ -128,6 +128,7 @@ void DivLocale::addTranslationsTemplate()
     strings["FFTW by Matteo Frigo and Steven G. Johnson##sgab"].plurals[0] = "=FFTW by Matteo Frigo and Steven G. Johnson";
     strings["backward-cpp by Google##sgab"].plurals[0] = "=backward-cpp by Google";
     strings["adpcm by superctr##sgab"].plurals[0] = "=adpcm by superctr";
+    strings["adpcm-xq by David Bryant##sgab"].plurals[0] = "=adpcm-xq by David Bryant";
     strings["Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt##sgab"].plurals[0] = "=Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt";
     strings["YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt##sgab"].plurals[0] = "=YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt";
     strings["ymfm by Aaron Giles##sgab"].plurals[0] = "=ymfm by Aaron Giles";
@@ -170,6 +171,7 @@ void DivLocale::addTranslationsTemplate()
     strings["ep128emu by Istvan Varga##sgab"].plurals[0] = "=ep128emu by Istvan Varga";
     strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] = "=SID2 emulator (modification of reSID) by LTVA";
     strings["5E01 emulator (modification of NSFPlay) by Euly##sgab"].plurals[0] = "=5E01 emulator (modification of NSFPlay) by Euly";
+    strings["NDS sound emulator by cam900##sgab"].plurals[0] = "=NDS sound emulator by cam900";
 
     strings["greetings to:##sgab"].plurals[0] = "=greetings to:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "=NEOART Costa Rica";
@@ -1672,6 +1674,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Sega Genesis (CSM with Sega CD)##sgpr"].plurals[0] = "=Sega Genesis (CSM with Sega CD)";
     strings["Sega Master System (with FM expansion)##sgpr"].plurals[0] = "=Sega Master System (with FM expansion)";
     strings["Sega Master System (with FM expansion in drums mode)##sgpr"].plurals[0] = "=Sega Master System (with FM expansion in drums mode)";
+    strings["Game Boy Advance (no software mixing)##sgpr"].plurals[0] = "=Game Boy Advance (no software mixing)";
+    strings["Game Boy Advance (with MinMod)##sgpr"].plurals[0] = "=Game Boy Advance (with MinMod)";
     strings["Famicom with Konami VRC6##sgpr"].plurals[0] = "=Famicom with Konami VRC6";
     strings["Famicom with Konami VRC7##sgpr0"].plurals[0] = "=Famicom with Konami VRC7";
     strings["Famicom with MMC5##sgpr"].plurals[0] = "=Famicom with MMC5";
@@ -2003,6 +2007,9 @@ void DivLocale::addTranslationsTemplate()
     strings["C219: maximum sample length is 131072##sgse"].plurals[0] = "=C219: maximum sample length is 131072";
     strings["MSM6295: samples can't loop##sgse"].plurals[0] = "=MSM6295: samples can't loop";
     strings["MSM6295: maximum bankswitched sample length is 129024##sgse"].plurals[0] = "=MSM6295: maximum bankswitched sample length is 129024";
+    strings["GBA DMA: loop start must be a multiple of 4##sgse"].plurals[0] = "=GBA DMA: loop start must be a multiple of 4##sgse";
+    strings["GBA DMA: loop length must be a multiple of 16##sgse"].plurals[0] = "=GBA DMA: loop length must be a multiple of 16##sgse";
+    strings["GBA DMA: sample length will be padded to multiple of 16##sgse"].plurals[0] = "=GBA DMA: sample length will be padded to multiple of 16##sgse";
     strings["ES5506: backward loop mode isn't supported##sgse"].plurals[0] = "=ES5506: backward loop mode isn't supported";
     strings["backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506##sgse"].plurals[0] = "=backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506";
     strings["Info##sgse"].plurals[0] = "=Info";
@@ -2203,6 +2210,14 @@ void DivLocale::addTranslationsTemplate()
     strings["Exact output (normal)##sgsc"].plurals[0] = "=Exact output (normal)";
     strings["Pretty please one more compat flag when I use arpeggio and my sound length##sgsc"].plurals[0] = "=Pretty please one more compat flag when I use arpeggio and my sound length";
     strings["Clock rate:##sgsc2"].plurals[0] = "=Clock rate:";
+    strings["Pretty please one more compat flag when I use arpeggio and my sound length##sgsc"].plurals[0] = "=Pretty please one more compat flag when I use arpeggio and my sound length##sgsc";
+    strings["DAC bit depth (reduces output rate):##sgsc"].plurals[0] = "=DAC bit depth (reduces output rate):";
+    strings["Volume scale:##sgsc"].plurals[0] = "=Volume scale:";
+    strings["Mix buffers (allows longer echo delay):##sgsc"].plurals[0] = "=Mix buffers (allows longer echo delay):";
+    strings["Channel limit:##sgsc"].plurals[0] = "=Channel limit:";
+    strings["Sample rate:##sgsc"].plurals[0] = "=Sample rate:";
+    strings["Actual sample rate: %d Hz##sgsc"].plurals[0] = "=Actual sample rate: %d Hz";
+    strings["Max mixer CPU usage: %.0f%%##sgsc"].plurals[0] = "=Max mixer CPU usage: %.0f%%";
     strings["Arcade (4MHz)##sgsc"].plurals[0] = "=Arcade (4MHz)";
     strings["Half NTSC (1.79MHz)##sgsc"].plurals[0] = "=Half NTSC (1.79MHz)";
     strings["Patch set:##sgsc"].plurals[0] = "=Patch set:";
@@ -2364,6 +2379,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Waveform storage mode:##sgsc1"].plurals[0] = "=Waveform storage mode:";
     strings["Dynamic (unconfirmed)##sgsc"].plurals[0] = "=Dynamic (unconfirmed)";
     strings["Static (up to 5 waves)##sgsc"].plurals[0] = "=Static (up to 5 waves)";
+    strings["DS (4MB RAM)##sgsc"].plurals[0] = "=DS (4MB RAM)";
+    strings["DSi (16MB RAM)##sgsc"].plurals[0] = "=DSi (16MB RAM)";
     strings["nothing to configure##sgsc"].plurals[0] = "=nothing to configure";
     strings["Downmix chip output to mono##sgsc"].plurals[0] = "=Downmix chip output to mono";
     strings["Reserved blocks for wavetables:##sgsc"].plurals[0] = "=Reserved blocks for wavetables:";
@@ -3506,6 +3523,8 @@ void DivLocale::addTranslationsTemplate()
     //   sgifmeh   src/gui/inst/fmEnvUtil.h
     //   sgiGA20   src/gui/inst/ga20.cpp
     //   sgiGB     src/gui/inst/gb.cpp
+    //   sgiGBADMA src/gui/inst/gbadma.cpp
+    //sgiGBAMINMOD src/gui/inst/gbaminmod.cpp
     //   sgiK00    src/gui/inst/k007232.cpp
     //   sgiK05    src/gui/inst/k053260.cpp
     //   sgimcd    src/gui/inst/macroDraw.cpp
@@ -3517,6 +3536,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgiMULPCM src/gui/inst/multipcm.cpp
     //   sgiN163   src/gui/inst/n163.cpp
     //   sgiWSG    src/gui/inst/namco.cpp
+    //   sgiNDS    src/gui/inst/nds.cpp
     //   sgiNES    src/gui/inst/nes.cpp
     //   sgiOPL    src/gui/inst/opl.cpp
     //   sgiOPLL   src/gui/inst/opll.cpp
@@ -3880,6 +3900,28 @@ void DivLocale::addTranslationsTemplate()
     strings["Panning##sgiGB"].plurals[0] = "=Panning";
     strings["Phase Reset##sgiGB"].plurals[0] = "=Phase Reset";
 
+    //   sgiGBADMA src/gui/inst/gbadma.cpp
+
+    strings["Macros##sgiGBADMA"].plurals[0] = "=Macros";
+    strings["Volume##sgiGBADMA"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiGBADMA"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiGBADMA"].plurals[0] = "=Pitch";
+    strings["Waveform##sgiGBADMA"].plurals[0] = "=Waveform";
+    strings["Panning##sgiGBADMA"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiGBADMA"].plurals[0] = "=Phase Reset";
+
+    //sgiGBAMINMOD src/gui/inst/gbaminmod.cpp
+
+    strings["Macros##sgiGBAMINMOD"].plurals[0] = "=Macros";
+    strings["Volume##sgiGBAMINMOD"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiGBAMINMOD"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiGBAMINMOD"].plurals[0] = "=Pitch";
+    strings["Waveform##sgiGBAMINMOD"].plurals[0] = "=Waveform";
+    strings["Panning (left)##sgiGBAMINMOD"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiGBAMINMOD"].plurals[0] = "=Panning (right)";
+    strings["Special##sgiGBAMINMOD"].plurals[0] = "=Special";
+    strings["Phase Reset##sgiGBAMINMOD"].plurals[0] = "=Phase Reset";
+
     //   sgiK00    src/gui/inst/k007232.cpp
 
     strings["Macros##sgiK00"].plurals[0] = "=Macros";
@@ -4038,6 +4080,16 @@ void DivLocale::addTranslationsTemplate()
     strings["Waveform##sgiWSG"].plurals[0] = "=Waveform";
     strings["Panning (left)##sgiWSG"].plurals[0] = "=Panning (left)";
     strings["Panning (right)##sgiWSG"].plurals[0] = "=Panning (right)";
+
+    //   sgiNDS    src/gui/inst/nds.cpp
+
+    strings["Macros##sgiNDS"].plurals[0] = "=Macros";
+    strings["Volume##sgiNDS"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiNDS"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiNDS"].plurals[0] = "=Pitch";
+    strings["Duty##sgiNDS"].plurals[0] = "=Duty";
+    strings["Panning##sgiNDS"].plurals[0] = "=Panning";
+    strings["Phase Reset##sgiNDS"].plurals[0] = "=Phase Reset";
 
     //   sgiNES    src/gui/inst/nes.cpp
 
@@ -5210,16 +5262,22 @@ void DivLocale::addTranslationsTemplate()
     strings["Sample"].plurals[0] = "=Sample";
     strings["Wave RAM"].plurals[0] = "=Wave RAM";
     strings["End of Sample"].plurals[0] = "=End of Sample";
+    strings["Wavetable RAM"].plurals[0] = "=Wavetable RAM";
     strings["Reserved wavetable RAM"].plurals[0] = "=Reserved wavetable RAM";
     strings["Phrase Book"].plurals[0] = "=Phrase Book";
     strings["Channel %d (load)"].plurals[0] = "=Channel %d (load)";
     strings["Channel %d (play)"].plurals[0] = "=Channel %d (play)";
+    strings["Channel %d"].plurals[0] = "=Channel %d";
+    strings["Buffer %d Left"].plurals[0] = "=Buffer %d Left";
+    strings["Buffer %d Right"].plurals[0] = "=Buffer %d Right";
     strings["Registers"].plurals[0] = "=Registers";
     strings["PCM"].plurals[0] = "=PCM";
     strings["ADPCM"].plurals[0] = "=ADPCM";
     strings["State"].plurals[0] = "=State";
     strings["Sample Directory"].plurals[0] = "=Sample Directory";
     strings["Echo Buffer"].plurals[0] = "=Echo Buffer";
+    strings["Mix/Echo Buffer"].plurals[0] = "=Mix/Echo Buffer";
+    strings["Main Memory"].plurals[0] = "=Main Memory";
 
     //   sesd    src/engine/sysDef.cpp
 
@@ -5368,6 +5426,7 @@ void DivLocale::addTranslationsTemplate()
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "=3xxx: Set pulse width (0 to FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "=4xxx: Set cutoff (0 to 7FF)";
     strings["10xx: Set waveform##sesd0"].plurals[0] = "=10xx: Set waveform";
+    strings["13xx: Set waveform (local)##sesd"].plurals[0] = "13xx: =Set waveform (local)";
     strings["11xx: Set raw period##sesd"].plurals[0] = "=11xx: Set raw period (0-1F)";
     strings["11xx: Set waveform (local)##sesd"].plurals[0] = "=11xx: Set waveform (local)";
     strings["20xx: Set PCM frequency##sesd"].plurals[0] = "=20xx: Set PCM frequency";
@@ -5745,6 +5804,13 @@ void DivLocale::addTranslationsTemplate()
     strings["a fictional sound chip by Euly. similar to Ricoh 2A03, but all the duty cycles are different, noise has 32 pitches instead of 16 and you have four hard-coded waveforms on triangle channel.##sesd"].plurals[0] = "=a fictional sound chip by Euly. similar to Ricoh 2A03, but all the duty cycles are different, noise has 32 pitches instead of 16 and you have four hard-coded waveforms on triangle channel.";
     strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1, wave: 0 to 3)##sesd"].plurals[0] = "=12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1, wave: 0 to 3)";
     strings["19xx: Set wave linear counter (0 to 7F; 80 and higher halt)##sesd"].plurals[0] = "=19xx: Set wave linear counter (0 to 7F; 80 and higher halt)";
+    strings["additional PCM FIFO channels in Game Boy Advance driven directly by its DMA hardware.##sesd"].plurals[0] = "=additional PCM FIFO channels in Game Boy Advance driven directly by its DMA hardware.";
+    strings["additional PCM FIFO channels in Game Boy Advance driven by software mixing to provide up to sixteen sample channels.##sesd"].plurals[0] = "=additional PCM FIFO channels in Game Boy Advance driven by software mixing to provide up to sixteen sample channels.";
+    strings["11xy: Set echo channel (x: left/right source; y: delay (0 disables))##sesd"].plurals[0] = "11xy: =Set echo channel (x: left/right source; y: delay (0 disables))";
+    strings["12xy: Toggle invert (x: left; y: right)##sesd"].plurals[0] = "12xy: =Toggle invert (x: left; y: right)";
+    strings["a handheld video game console with two screens. it uses a stylus.##sesd"].plurals[0] = "=a handheld video game console with two screens. it uses a stylus.";
+    strings["12xx: Set duty cycle (pulse: 0 to 7)##sesd"].plurals[0] = "12xx: =Set duty cycle (pulse: 0 to 7)";
+    strings["1Fxx: Set global volume (0 to 7F)##sesd"].plurals[0] = "1Fxx: =Set global volume (0 to 7F)";
     strings["Dummy System##sesd"].plurals[0] = "=Dummy System";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "=this is a system designed for testing purposes.";
 

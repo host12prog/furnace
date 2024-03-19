@@ -25,6 +25,17 @@
 
 #define CHIP_DIVIDER 16
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 void DivPlatformGBADMA::acquire(short** buf, size_t len) {
   // HLE for now
   int outL[2]={0,0};
@@ -122,7 +133,7 @@ void DivPlatformGBADMA::tick(bool sysTick) {
     if (chan[i].useWave && chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       if (chan[i].wave!=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val || chan[i].ws.activeChanged()) {
         chan[i].wave=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val;
-        chan[i].ws.changeWave1(chan[i].wave);
+        chan[i].ws.changeWave1(chan[i].wave & 0xff, false, (chan[i].wave & (1 << 30)) ? true : false, parent->getIns(chan[i].ins,DIV_INS_GBA_DMA));
         if (!chan[i].keyOff) chan[i].keyOn=true;
       }
     }
@@ -200,7 +211,7 @@ int DivPlatformGBADMA::dispatch(DivCommand c) {
           if (chan[c.chan].wave<0) {
             chan[c.chan].wave=0;
             chan[c.chan].ws.setWidth(chan[c.chan].audLen);
-            chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+            chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_GBA_DMA));
           }
         }
       } else {
@@ -280,7 +291,13 @@ int DivPlatformGBADMA::dispatch(DivCommand c) {
       if (!chan[c.chan].useWave) break;
       chan[c.chan].wave=c.value;
       chan[c.chan].keyOn=true;
-      chan[c.chan].ws.changeWave1(chan[c.chan].wave);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_GBA_DMA));
+      break;
+    case DIV_CMD_WAVE_LOCAL:
+      if (!chan[c.chan].useWave) break;
+      chan[c.chan].wave=c.value | (1 << 30);
+      chan[c.chan].keyOn=true;
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_GBA_DMA));
       break;
     case DIV_CMD_NOTE_PORTA: {
       DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_AMIGA);
@@ -479,7 +496,7 @@ void DivPlatformGBADMA::renderSamples(int sysID) {
       break;
     }
     sampleLoaded[i]=true;
-    romMemCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"PCM",i,sampleOff[i],memPos));
+    romMemCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("PCM"),i,sampleOff[i],memPos));
     // pad to multiple of 16 bytes
     memPos=(memPos+15)&~15;
   }
@@ -502,7 +519,7 @@ int DivPlatformGBADMA::init(DivEngine* p, int channels, int sugRate, const DivCo
   dumpWrites=false;
   skipRegisterWrites=false;
   wtMemCompo=DivMemoryComposition();
-  wtMemCompo.name="Wavetable RAM";
+  wtMemCompo.name=_LE("Wavetable RAM");
   wtMemCompo.used=256*2;
   wtMemCompo.capacity=256*2;
   wtMemCompo.memory=(unsigned char*)wtMem;
@@ -510,12 +527,12 @@ int DivPlatformGBADMA::init(DivEngine* p, int channels, int sugRate, const DivCo
   for (int i=0; i<2; i++) {
     isMuted[i]=false;
     oscBuf[i]=new DivDispatchOscBuffer;
-    wtMemCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_WAVE_RAM, fmt::sprintf("Channel %d",i),-1,i*256,i*256));
+    wtMemCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_WAVE_RAM, fmt::sprintf(_LE("Channel %d"),i),-1,i*256,i*256));
   }
   sampleMem=new signed char[getSampleMemCapacity()];
   sampleMemLen=0;
   romMemCompo=DivMemoryComposition();
-  romMemCompo.name="Sample ROM";
+  romMemCompo.name=_LE("Sample ROM");
   setFlags(flags);
   reset();
   return 2;
