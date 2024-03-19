@@ -1063,7 +1063,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
               bool empty_note_map = true;
 
-              for (int j=0; j<dpcmNotes; j++) 
+              for (int j=0; j<96; j++) 
               {
                 if(ins->amiga.get_amiga_sample_map(j, true)->map != -1)
                 {
