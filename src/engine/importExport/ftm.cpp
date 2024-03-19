@@ -1737,7 +1737,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           for (int i=0; i<numRows; i++) {
             unsigned int row=0;
             if (ds.version==0x200 || blockVersion >= 6) { // row index
-              row=(unsigned char)reader.readI();
+              row=(unsigned char)reader.readC();
             } else {
               row=reader.readI();
             }
@@ -1818,7 +1818,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             {
               nextEffect=reader.readC();
 
-              if((nextEffect < FT_EF_COUNT && !eft) || (nextEffect < EFT_EF_COUNT && eft))
+              if(nextEffect>0 && (nextEffect < FT_EF_COUNT && !eft) || (nextEffect < EFT_EF_COUNT && eft))
               {
                 nextEffectVal=reader.readC();
 
