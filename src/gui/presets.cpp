@@ -31,11 +31,15 @@
 //     }
 //   );
 // flags are a string of new line-separated values.
+// use SUB_ENTRY instead of ENTRY to add sub-entries to the previous entry.
 
 #define CH FurnaceGUISysDefChip
 #define CATEGORY_BEGIN(x,y) cat=FurnaceGUISysCategory(x,y);
 #define CATEGORY_END sysCategories.push_back(cat);
-#define ENTRY(...) cat.systems.push_back(FurnaceGUISysDef(__VA_ARGS__));
+#define ENTRY(...) \
+  cat.systems.push_back(FurnaceGUISysDef(__VA_ARGS__));
+#define SUB_ENTRY(...) \
+  cat.systems[cat.systems.size()-1].subDefs.push_back(FurnaceGUISysDef(__VA_ARGS__));
 
 void FurnaceGUI::initSystemPresets() {
   sysCategories.clear();
@@ -128,6 +132,18 @@ void FurnaceGUI::initSystemPresets() {
   ENTRY(
     "Game Boy", {
       CH(DIV_SYSTEM_GB, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "Game Boy Advance (no software mixing)", {
+      CH(DIV_SYSTEM_GB, 1.0f, 0, "chipType=3"),
+      CH(DIV_SYSTEM_GBA_DMA, 0.5f, 0, ""),
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "Game Boy Advance (with MinMod)", {
+      CH(DIV_SYSTEM_GB, 1.0f, 0, "chipType=3"),
+      CH(DIV_SYSTEM_GBA_MINMOD, 0.5f, 0, ""),
     }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
@@ -269,6 +285,11 @@ void FurnaceGUI::initSystemPresets() {
   ENTRY(
     "Casio PV-1000", {
       CH(DIV_SYSTEM_PV1000, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "Nintendo DS (NDS)", {
+      CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
   );
   CATEGORY_END;
@@ -3222,7 +3243,12 @@ void FurnaceGUI::initSystemPresets() {
   ENTRY(
     "Namco C219", {
       CH(DIV_SYSTEM_C219, 1.0f, 0, "")
-    }, NULL, MENU_STATUS_USUAL
+    }
+  );
+  ENTRY(
+    "NDS", {
+      CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
+    }
   );
   CATEGORY_END;
 
@@ -3406,6 +3432,16 @@ void FurnaceGUI::initSystemPresets() {
     "5E01", {
       CH(DIV_SYSTEM_5E01, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "Nintendo DS NDS", {
+      CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
+    }
+  );
+  ENTRY(
+    "NDS", {
+      CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
+    }
   );
   CATEGORY_END;
 

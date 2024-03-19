@@ -3822,6 +3822,9 @@ CONFIG_SECTION(_L("Color##sgse")) {
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_POWERNOISE_SLOPE,"PowerNoise (slope)");
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_DAVE,"DAVE");
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_SID2,"SID2");
+    UI_COLOR_CONFIG(GUI_COLOR_INSTR_NDS,"NDS");
+    UI_COLOR_CONFIG(GUI_COLOR_INSTR_GBA_DMA,"GBA DMA");
+    UI_COLOR_CONFIG(GUI_COLOR_INSTR_GBA_MINMOD,"GBA MinMod");
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_UNKNOWN,"Other/Unknown");
     ImGui::TreePop();
   }
@@ -5889,6 +5892,7 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".pcf",uiColors[GUI_COLOR_FILE_FONT],ICON_FA_FONT);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".psf",uiColors[GUI_COLOR_FILE_FONT],ICON_FA_FONT);
 
+  ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".dmf",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".mod",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".fc13",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".fc14",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);

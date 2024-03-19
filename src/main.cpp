@@ -215,6 +215,7 @@ TAParamResult pVersion(String) {
   printf("- ESFMu (modified version) by Kagamiin~ (LGPLv2.1)\n");
   printf("- ymfm by Aaron Giles (BSD 3-clause)\n");
   printf("- adpcm by superctr (public domain)\n");
+  printf("- adpcm-xq by David Bryant (BSD 3-clause)\n");
   printf("- MAME SN76496 emulation core by Nicola Salmoria (BSD 3-clause)\n");
   printf("- MAME AY-3-8910 emulation core by Couriersud (BSD 3-clause)\n");
   printf("- MAME SAA1099 emulation core by Juergen Buchmueller and Manuel Abadia (BSD 3-clause)\n");
@@ -251,6 +252,7 @@ TAParamResult pVersion(String) {
   printf("- ep128emu by Istvan Varga (GPLv2)\n");
   printf("- SID2 emulator by LTVA (GPLv2); modified version of reSID\n");
   printf("- 5E01 emulator by Euly (unknown open-source license); modified version of NSFPlay\n");
+  printf("- NDS sound emulator by cam900 (zlib license)\n");
   return TA_PARAM_QUIT;
 }
 
