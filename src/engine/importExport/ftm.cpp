@@ -1818,7 +1818,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             {
               nextEffect=reader.readC();
 
-              if(nextEffect>0 && (nextEffect < FT_EF_COUNT && !eft) || (nextEffect < EFT_EF_COUNT && eft))
+              if(nextEffect>0 && ((nextEffect < FT_EF_COUNT && !eft) || (nextEffect < EFT_EF_COUNT && eft)))
               {
                 nextEffectVal=reader.readC();
 
