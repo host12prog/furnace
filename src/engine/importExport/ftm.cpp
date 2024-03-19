@@ -374,6 +374,15 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
 
     if((DivMacroType)convert_macros_n163[macro_type] == DIV_MACRO_WAVE && ins->type == DIV_INS_N163)
     {
+      /*There are some modules where wave macro goes e.g. 0, 1, ..., 63. But there are only e.g. 25 waves. 
+      Furnace seems to default to the first wave if value in macro is higher than last occupied index in 
+      local wavetables list. Famitracker sticks to the last wavetable. That's why I cap the macro values so 
+      they never go out of bounds*/
+      if(to->val[i] >= ins->std.local_waves.size())
+      {
+        to->val[i] = ins->std.local_waves.size() - 1;
+      }
+
       to->val[i] |= (1 << 30); //referencing local wavetables!
     }
 
