@@ -2346,7 +2346,7 @@ void DivLocale::addTranslationsRussian()
     strings["Name##sgsm"].plurals[0] = "Название";
     strings["Actions##sgsm"].plurals[0] = "Действия";
     strings["(drag to swap chips)##sgsm"].plurals[0] = "(перетащите, чтобы поменять местами каналы)";
-    strings["Clone##SysDup"].plurals[0] = "Клонировать##SysDupl";
+    strings["Clone##SysDup"].plurals[0] = "Клонировать##SysDup";
     strings["cannot duplicate chip! (##sgsm"].plurals[0] = "не получилось склонировать чип! (";
     strings["max number of systems is %d##sgsm"].plurals[0] = "максимальное число чипов/систем не может превышать %d";
     strings["max number of total channels is %d##sgsm"].plurals[0] = "максимальное общее число каналов не может превышать %d";
