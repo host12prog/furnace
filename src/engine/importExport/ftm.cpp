@@ -925,7 +925,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           {
             ds.subsong[0]->hz=customHz;
 
-            ds.subsong[0]->virtualTempoN = (short)(150.0 / (float)customHz * (pal ? (50.0) : (60.0)));
+            ds.subsong[0]->virtualTempoD = (short)(2.5 * customHz);
           }
           logV("one song");
         }
@@ -1689,11 +1689,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             
             if(tempo == 0)
             {
-              s->virtualTempoN = 150.0; //TODO: make it properly
+              s->virtualTempoN = 150;
             }
             else
             {
-              s->virtualTempoN = tempo;
+              s->virtualTempoN = (short)((float)s->virtualTempoN * (float)tempo / 150.0);
             }
 
             s->patLen=reader.readI();
