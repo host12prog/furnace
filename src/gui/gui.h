@@ -1855,6 +1855,7 @@ class FurnaceGUI {
     int translate_channel_names_pattern;
     int translate_channel_names_osc;
     int translate_short_channel_names;
+    int follow_log;
     String mainFontPath;
     String headFontPath;
     String patFontPath;
@@ -2064,6 +2065,7 @@ class FurnaceGUI {
       translate_channel_names_pattern(0),
       translate_channel_names_osc(0),
       translate_short_channel_names(0),
+      follow_log(0),
       mainFontPath(""),
       headFontPath(""),
       patFontPath(""),
@@ -2424,9 +2426,6 @@ class FurnaceGUI {
   float keyHit[DIV_MAX_CHANS];
   float keyHit1[DIV_MAX_CHANS];
   int lastIns[DIV_MAX_CHANS];
-
-  // log window
-  bool followLog;
 
   // piano
   enum PianoLayoutMode {

@@ -4125,6 +4125,8 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.translate_channel_names_pattern=conf.getInt("translateChanNamesPat",0);
     settings.translate_channel_names_osc=conf.getInt("translateChanNamesOsc",0);
     settings.translate_short_channel_names=conf.getInt("translateShortChanNames",0);
+
+    settings.follow_log=conf.getInt("followLog",0);
   }
 
   if (groups&GUI_SETTINGS_AUDIO) {
@@ -4547,6 +4549,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.translate_channel_names_pattern, 0, 1);
   clampSetting(settings.translate_channel_names_osc, 0, 1);
   clampSetting(settings.translate_short_channel_names, 0, 1);
+  clampSetting(settings.follow_log, 0, 1);
   clampSetting(settings.playbackTime,0,1);
   clampSetting(settings.shaderOsc,0,1);
   clampSetting(settings.oscLineSize,0.25f,16.0f);
@@ -4613,6 +4616,8 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("translateChanNamesPat",settings.translate_channel_names_pattern);
     conf.set("translateChanNamesOsc",settings.translate_channel_names_osc);
     conf.set("translateShortChanNames",settings.translate_short_channel_names);
+
+    conf.set("followLog",settings.follow_log);
   }
 
   // audio

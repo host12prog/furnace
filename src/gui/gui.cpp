@@ -7929,7 +7929,6 @@ FurnaceGUI::FurnaceGUI():
   xyOscDecayTime(10.0f),
   xyOscIntensity(2.0f),
   xyOscThickness(2.0f),
-  followLog(true),
 #ifdef IS_MOBILE
   pianoOctaves(7),
   pianoOctavesEdit(2),
