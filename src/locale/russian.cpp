@@ -5412,7 +5412,7 @@ void DivLocale::addTranslationsRussian()
     strings["10xy: Set channel mode (x: noise; y: tone)##sesd"].plurals[0] = "10xy: Режим канала (x: шум; y: тон)";
     strings["11xx: Set noise frequency##sesd"].plurals[0] = "11xx: Частота шума";
     strings["12xx: Setup envelope (refer to docs for more information)##sesd"].plurals[0] = "12xx: Настройка огибающей (см. инструкцию)";
-    strings["an improved version of the AY-3-8910 with a bigger frequency range, duty cycles, configurable noise and per-channel envelopes!##sesd"].plurals[0] = "улучшенная версия AY-3-8910 с большим диапазоном частот, настройкой скважности, настраиваемым шумом и огибвющей на каждый канал!";
+    strings["an improved version of the AY-3-8910 with a bigger frequency range, duty cycles, configurable noise and per-channel envelopes!##sesd"].plurals[0] = "улучшенная версия AY-3-8910 с большим диапазоном частот, настройкой скважности, настраиваемым шумом и огибающей на каждый канал!";
     strings["Commodore's successor to the PET.\nits square wave channels are more than just square...##sesd"].plurals[0] = "Компьютер Commodore, вышедший после PET.\nего каналы квадратных волн могут играть не только лишь квадратные волны...";
     strings["one channel of 1-bit wavetable which is better (and worse) than the PC Speaker.##sesd"].plurals[0] = "один канал 1-битной волновой таблицы, что лучше (или хуже), чем PC Speaker (пищалка).";
     strings["FM? nah... samples! Nintendo's answer to Sega.##sesd"].plurals[0] = "FM? не... сэмплы! Ответ Nintendo в сторону Sega.";
