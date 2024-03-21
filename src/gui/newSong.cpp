@@ -136,7 +136,7 @@ void FurnaceGUI::drawNewSong() {
           if (ImGui::IsItemHovered()) {
             ImGui::SetTooltip("%s",_L(i.description));
           }
-          if (strcmp(i.name,"User")==0) ImGui::Separator();
+          if (strcmp(i.name,_L("User##sgpr"))==0) ImGui::Separator();
           index++;
         }
       }
@@ -146,60 +146,78 @@ void FurnaceGUI::drawNewSong() {
       if (ImGui::BeginTable("Systems",1,ImGuiTableFlags_BordersInnerV|ImGuiTableFlags_ScrollY)) {
         std::vector<FurnaceGUISysDef>& category=(newSongQuery.empty())?(sysCategories[newSongCategory].systems):(newSongSearchResults);
 
-        for(int i = 0; i < (int)category.size(); i++)
+        if((int)category.size() == 0)
         {
-          FurnaceGUISysDef* sysdef = &category[i];
-
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
 
-          if(sysdef->menuStatus == MENU_STATUS_LIST_START && showing_search_results == false)
+          if(newSongQuery.empty())
           {
-            if(ImGui::TreeNode(_L(sysdef->name)))
-            {
-              SHOW_HOVER_INFO
+            ImGui::Text(_L("no systems here yet!##sgns"));
+          }
+          else
+          {
+            ImGui::Text(_L("no results##sgns"));
+          }
+        }
 
-              while(sysdef->menuStatus != MENU_STATUS_LIST_END)
+        if((int)category.size() != 0)
+        {
+          for(int i = 0; i < (int)category.size(); i++)
+          {
+            FurnaceGUISysDef* sysdef = &category[i];
+
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+
+            if(sysdef->menuStatus == MENU_STATUS_LIST_START && showing_search_results == false)
+            {
+              if(ImGui::TreeNode(_L(sysdef->name)))
               {
-                sysdef = &category[i];
-                i++;
-                
-                if (ImGui::Selectable(_L(sysdef->name),false,ImGuiSelectableFlags_DontClosePopups)) {
-                  nextDesc=sysdef->definition;
-                  nextDescName=sysdef->name;
-                  accepted=true;
+                SHOW_HOVER_INFO
+
+                while(sysdef->menuStatus != MENU_STATUS_LIST_END)
+                {
+                  sysdef = &category[i];
+                  i++;
+                  
+                  if (ImGui::Selectable(_L(sysdef->name),false,ImGuiSelectableFlags_DontClosePopups)) {
+                    nextDesc=sysdef->definition;
+                    nextDescName=sysdef->name;
+                    accepted=true;
+                  }
+
+                  SHOW_HOVER_INFO
                 }
 
-                SHOW_HOVER_INFO
+                i--;
+                sysdef = &category[i];
+
+                ImGui::TreePop();
               }
 
-              i--;
-              sysdef = &category[i];
-
-              ImGui::TreePop();
+              else
+              {
+                SHOW_HOVER_INFO
+                
+                while(sysdef->menuStatus != MENU_STATUS_LIST_END)
+                {
+                  i++;
+                  sysdef = &category[i];
+                }
+              }
             }
 
             else
             {
-              SHOW_HOVER_INFO
-              
-              while(sysdef->menuStatus != MENU_STATUS_LIST_END)
-              {
-                i++;
-                sysdef = &category[i];
+              if (ImGui::Selectable(_L(sysdef->name),false,ImGuiSelectableFlags_DontClosePopups)) {
+                nextDesc=sysdef->definition;
+                nextDescName=sysdef->name;
+                accepted=true;
               }
-            }
-          }
 
-          else
-          {
-            if (ImGui::Selectable(_L(sysdef->name),false,ImGuiSelectableFlags_DontClosePopups)) {
-              nextDesc=sysdef->definition;
-              nextDescName=sysdef->name;
-              accepted=true;
+              SHOW_HOVER_INFO
             }
-
-            SHOW_HOVER_INFO
           }
         }
 

@@ -471,7 +471,7 @@ void FurnaceGUI::drawPattern() {
     ImDrawList* tdl=NULL;
 
     if (chans<1) {
-      ImGui::Text("there aren't any channels to show.");
+      ImGui::Text(_L("there aren't any channels to show.##sgpa"));
     } else if (ImGui::BeginTable("PatternView",displayChans+2,ImGuiTableFlags_BordersInnerV|ImGuiTableFlags_ScrollX|ImGuiTableFlags_ScrollY|ImGuiTableFlags_NoPadInnerX|ImGuiTableFlags_NoBordersInFrozenArea|((settings.cursorFollowsWheel || wheelCalmDown)?ImGuiTableFlags_NoScrollWithMouse:0))) {
       ImGui::TableSetupColumn("pos",ImGuiTableColumnFlags_WidthFixed);
       char chanID[2048];

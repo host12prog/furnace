@@ -38,10 +38,6 @@
 #define CATEGORY_END sysCategories.push_back(cat);
 #define ENTRY(...) \
   cat.systems.push_back(FurnaceGUISysDef(__VA_ARGS__));
-#define SUB_ENTRY(...) \
-  cat.systems[cat.systems.size()-1].subDefs.push_back(FurnaceGUISysDef(__VA_ARGS__));
-#define SUB_SUB_ENTRY(...) \
-  cat.systems[cat.systems.size()-1].subDefs[cat.systems[cat.systems.size()-1].subDefs.size()-1].subDefs.push_back(FurnaceGUISysDef(__VA_ARGS__));
 
 void FurnaceGUI::initSystemPresets() {
   sysCategories.clear();
@@ -2828,7 +2824,7 @@ void FurnaceGUI::initSystemPresets() {
   );
   CATEGORY_END;
 
-  CATEGORY_BEGIN("User","system presets that you have saved.");
+  CATEGORY_BEGIN(_L("User##sgpr"),_L("system presets that you have saved.##sgpr"));
   CATEGORY_END;
 
   CATEGORY_BEGIN("FM",_L("chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.##sgpr"));

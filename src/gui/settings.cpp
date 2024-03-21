@@ -2637,12 +2637,12 @@ void FurnaceGUI::drawSettings() {
         ImGui::Unindent();
 
         if (settings.cursorFollowsWheel) {
-          ImGui::Text("How many steps to move with each scroll wheel step?");
-          if (ImGui::RadioButton("One##cws0",settings.cursorWheelStep==0)) {
+          ImGui::Text(_L("How many steps to move with each scroll wheel step?##sgse"));
+          if (ImGui::RadioButton(_L("One##cws0"),settings.cursorWheelStep==0)) {
             settings.cursorWheelStep=0;
             settingsChanged=true;
           }
-          if (ImGui::RadioButton("Edit Step##cws1",settings.cursorWheelStep==1)) {
+          if (ImGui::RadioButton(_L("Edit Step##cws1"),settings.cursorWheelStep==1)) {
             settings.cursorWheelStep=1;
             settingsChanged=true;
           }

@@ -1525,6 +1525,8 @@ void DivLocale::addTranslationsRussian()
     strings["Search...##sgns"].plurals[0] = "Поиск...";
     strings["Categories##sgns"].plurals[0] = "Категории";
     strings["Systems##sgns"].plurals[0] = "Системы";
+    strings["no systems here yet!##sgns"].plurals[0] = "пока здесь нет ни одной системы!";
+    strings["no results##sgns"].plurals[0] = "ничего не найдено";
     strings["I'm feeling lucky##sgns"].plurals[0] = "Мне повезёт!";
     strings["Cancel##sgns"].plurals[0] = "Отмена";
 
@@ -1573,6 +1575,7 @@ void DivLocale::addTranslationsRussian()
     //   sgpa  src/gui/pattern.cpp
 
     strings["Pattern###Pattern"].plurals[0] = "Паттерны###Pattern";
+    strings["there aren't any channels to show.##sgpa"].plurals[0] = "нет каналов для отображения.";
     strings["click for pattern options (effect columns/pattern names/visualizer)##sgpa"].plurals[0] = "нажмите для открытия меню настроек (столбцы эффектов/названия паттернов/визуализатор эффектов)";
     strings["Options:##sgpa"].plurals[0] = "Настройки:";
     strings["Effect columns/collapse##sgpa"].plurals[0] = "Столбцы эффектов и свёртка канала";
@@ -1838,6 +1841,8 @@ void DivLocale::addTranslationsRussian()
     strings["Dynax/Nakanihon 3rd generation hardware##sgpr"].plurals[0] = "Аппаратная платформа 3-го поколения Dynax/Nakanihon";
     strings["Dynax/Nakanihon 3rd generation hardware (drums mode)##sgpr"].plurals[0] = "Аппаратная платформа 3-го поколения Dynax/Nakanihon (в режиме ударных)";
     strings["Dynax/Nakanihon Real Break (drums mode)##sgpr"].plurals[0] = "Dynax/Nakanihon Real Break (в режиме ударных)";
+    strings["User##sgpr"].plurals[0] = "Пользовательские";
+    strings["system presets that you have saved.##sgpr"].plurals[0] = "пресеты систем, которые вы сохранили.";
     strings["chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.##sgpr"].plurals[0] = "чипы, использующую частотную модуляцию (FM-синтез) для генерации звука.\nв некоторых из них присутствуют и другие способы синтеза звука (каналы с квадратными волнами или сэмплами).\nНа самом деле, \"FM\" здесь означает фазовую модуляцию,\nно они неотличимы друг от друга при использовании синусоидальных волн.";
     strings["Yamaha YM2203 (extended channel 3)##sgpr"].plurals[0] = "Yamaha YM2203 (расширенный 3-ий канал)";
     strings["Yamaha YM2203 (extended channel 3 and CSM)##sgpr"].plurals[0] = "Yamaha YM2203 (расширенный 3-ий канал и CSM)";
@@ -2881,6 +2886,9 @@ void DivLocale::addTranslationsRussian()
     strings["No##csw0"].plurals[0] = "Нет##csw0";
     strings["Yes##csw1"].plurals[0] = "Да##csw1";
     strings["Inverted##csw2"].plurals[0] = "Да, но в обратном направлении##csw2";
+    strings["How many steps to move with each scroll wheel step?##sgse"].plurals[0] = "На сколько позиций свдигаться при каждом шаге колёсика мыши?";
+    strings["One##cws0"].plurals[0] = "На одну##cws0";
+    strings["Edit Step##cws1"].plurals[0] = "На шаг редактирования##cws1";
     strings["Assets##sgse0"].plurals[0] = "Ресурсы";
     strings["Display instrument type menu when adding instrument##sgse"].plurals[0] = "Отображать тип инструмента при добавлении инструмента";
     strings["Select asset after opening one##sgse"].plurals[0] = "Выделять объект после открытия";

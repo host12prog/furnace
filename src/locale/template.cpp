@@ -1583,6 +1583,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Search...##sgns"].plurals[0] = "=Search...";
     strings["Categories##sgns"].plurals[0] = "=Categories";
     strings["Systems##sgns"].plurals[0] = "=Systems";
+    strings["no systems here yet!##sgns"].plurals[0] = "=no systems here yet!";
+    strings["no results##sgns"].plurals[0] = "=no results";
     strings["I'm feeling lucky##sgns"].plurals[0] = "=I'm feeling lucky";
     strings["Cancel##sgns"].plurals[0] = "=Cancel";
 
@@ -1632,6 +1634,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgpa  src/gui/pattern.cpp
 
     strings["Pattern###Pattern"].plurals[0] = "=Pattern###Pattern";
+    strings["there aren't any channels to show.##sgpa"].plurals[0] = "=there aren't any channels to show.";
     strings["click for pattern options (effect columns/pattern names/visualizer)##sgpa"].plurals[0] = "=click for pattern options (effect columns/pattern names/visualizer)";
     strings["Options:##sgpa"].plurals[0] = "=Options:";
     strings["Effect columns/collapse##sgpa"].plurals[0] = "=Effect columns/collapse";
@@ -1897,6 +1900,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Dynax/Nakanihon 3rd generation hardware##sgpr"].plurals[0] = "=Dynax/Nakanihon 3rd generation hardware";
     strings["Dynax/Nakanihon 3rd generation hardware (drums mode)##sgpr"].plurals[0] = "=Dynax/Nakanihon 3rd generation hardware (drums mode)";
     strings["Dynax/Nakanihon Real Break (drums mode)##sgpr"].plurals[0] = "=Dynax/Nakanihon Real Break (drums mode)";
+    strings["User##sgpr"].plurals[0] = "=User";
+    strings["system presets that you have saved.##sgpr"].plurals[0] = "=system presets that you have saved.";
     strings["chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.##sgpr"].plurals[0] = "=chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.";
     strings["Yamaha YM2203 (extended channel 3)##sgpr"].plurals[0] = "=Yamaha YM2203 (extended channel 3)";
     strings["Yamaha YM2203 (extended channel 3 and CSM)##sgpr"].plurals[0] = "=Yamaha YM2203 (extended channel 3 and CSM)";
@@ -2915,6 +2920,9 @@ void DivLocale::addTranslationsTemplate()
     strings["No##csw0"].plurals[0] = "=No##csw0";
     strings["Yes##csw1"].plurals[0] = "=Yes##csw1";
     strings["Inverted##csw2"].plurals[0] = "=Inverted##csw2";
+    strings["How many steps to move with each scroll wheel step?##sgse"].plurals[0] = "=How many steps to move with each scroll wheel step?";
+    strings["One##cws0"].plurals[0] = "=One##cws0";
+    strings["Edit Step##cws1"].plurals[0] = "=Edit Step##cws1";
     strings["Assets##sgse0"].plurals[0] = "=Assets";
     strings["Display instrument type menu when adding instrument##sgse"].plurals[0] = "=Display instrument type menu when adding instrument";
     strings["Select asset after opening one##sgse"].plurals[0] = "=Select asset after opening one";

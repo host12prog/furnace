@@ -2535,7 +2535,6 @@ class FurnaceGUI {
 
   void updateWindowTitle();
   void autoDetectSystem();
-  void autoDetectSystemIter(std::vector<FurnaceGUISysDef>& category, bool& isMatch, std::map<DivSystem,int>& defCountMap, std::map<DivSystem,DivConfig>& defConfMap, std::map<DivSystem,int>& sysCountMap, std::map<DivSystem,DivConfig>& sysConfMap);
   void prepareLayout();
   ImVec4 channelColor(int ch);
   ImVec4 channelTextColor(int ch);
@@ -2575,8 +2574,6 @@ class FurnaceGUI {
   void waveListItem(int index, float* wavePreview, int dir, int asset);
   void localWaveListItem(int i, float* wavePreview, DivInstrument* ins);
   void sampleListItem(int index, int dir, int asset);
-
-  void drawSysDefs(std::vector<FurnaceGUISysDef>& category, bool& accepted, std::vector<int>& sysDefStack);
 
   void toggleMobileUI(bool enable, bool force=false);
 

@@ -627,9 +627,29 @@ void FurnaceGUI::updateWindowTitle() {
   if (sdlWin!=NULL) SDL_SetWindowTitle(sdlWin,title.c_str());
 }
 
-void FurnaceGUI::autoDetectSystemIter(std::vector<FurnaceGUISysDef>& category, bool& isMatch, std::map<DivSystem,int>& defCountMap, std::map<DivSystem,DivConfig>& defConfMap, std::map<DivSystem,int>& sysCountMap, std::map<DivSystem,DivConfig>& sysConfMap) {
-  for (FurnaceGUISysDef& j: category) {
-    if (!j.orig.empty()) {
+void FurnaceGUI::autoDetectSystem() {
+  std::map<DivSystem,int> sysCountMap;
+  std::map<DivSystem,DivConfig> sysConfMap;
+  for (int i=0; i<e->song.systemLen; i++) {
+    auto it=sysCountMap.find(e->song.system[i]);
+    if (it==sysCountMap.cend()) {
+      sysCountMap[e->song.system[i]]=1;
+    } else {
+      it->second++;
+    }
+    sysConfMap[e->song.system[i]]=e->song.systemFlags[i];
+  }
+
+  logV("sysCountMap:");
+  for (std::pair<DivSystem,int> k: sysCountMap) {
+    logV("%s: %d",e->getSystemName(k.first),k.second);
+  }
+
+  bool isMatch=false;
+  std::map<DivSystem,int> defCountMap;
+  std::map<DivSystem,DivConfig> defConfMap;
+  for (FurnaceGUISysCategory& i: sysCategories) {
+    for (FurnaceGUISysDef& j: i.systems) {
       defCountMap.clear();
       defConfMap.clear();
       for (FurnaceGUISysDefChip& k: j.orig) {
@@ -643,21 +663,21 @@ void FurnaceGUI::autoDetectSystemIter(std::vector<FurnaceGUISysDef>& category, b
         dc.loadFromMemory(k.flags);
         defConfMap[k.sys]=dc;
       }
-      if (defCountMap.size()==sysCountMap.size()) {
-        isMatch=true;
-        /*logV("trying on defCountMap: %s",j.name);
-        for (std::pair<DivSystem,int> k: defCountMap) {
-          logV("- %s: %d",e->getSystemName(k.first),k.second);
-        }*/
-        for (std::pair<DivSystem,int> k: defCountMap) {
-          auto countI=sysCountMap.find(k.first);
-          if (countI==sysCountMap.cend()) {
-            isMatch=false;
-            break;
-          } else if (countI->second!=k.second) {
-            isMatch=false;
-            break;
-          }
+      if (defCountMap.size()!=sysCountMap.size()) continue;
+      isMatch=true;
+      /*logV("trying on defCountMap: %s",j.name);
+      for (std::pair<DivSystem,int> k: defCountMap) {
+        logV("- %s: %d",e->getSystemName(k.first),k.second);
+      }*/
+      for (std::pair<DivSystem,int> k: defCountMap) {
+        auto countI=sysCountMap.find(k.first);
+        if (countI==sysCountMap.cend()) {
+          isMatch=false;
+          break;
+        } else if (countI->second!=k.second) {
+          isMatch=false;
+          break;
+        }
 
         auto confI=sysConfMap.find(k.first);
         if (confI==sysConfMap.cend()) {
