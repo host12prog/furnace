@@ -54,6 +54,7 @@ bool showing_search_results = false;
 
 void FurnaceGUI::drawNewSong() {
   bool accepted=false;
+  std::vector<int> sysDefStack;
 
   ImGui::PushFont(bigFont);
   ImGui::SetCursorPosX((ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(_L("Choose a System!##sgns")).x)*0.5);
@@ -135,6 +136,7 @@ void FurnaceGUI::drawNewSong() {
           if (ImGui::IsItemHovered()) {
             ImGui::SetTooltip("%s",_L(i.description));
           }
+          if (strcmp(i.name,"User")==0) ImGui::Separator();
           index++;
         }
       }
