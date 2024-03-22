@@ -23,7 +23,7 @@
 #include <math.h>
 
 #define CHIP_DIVIDER 32
-#define CLOCK_DIVIDER 512 // for match to output rate
+#define CLOCK_DIVIDER 128 // for match to output rate
 
 #ifdef HAVE_GUI
 #include "../../gui/gui.h"
