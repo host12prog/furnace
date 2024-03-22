@@ -145,10 +145,8 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
             return "SAM Coupé";
         }
       }
-
-      String teeeemp = getSystemName(ds.system[0]);
-      String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
-      return temmrrrp;
+      
+      return getSystemName(ds.system[0]);
     }
     case 2:
       if (ds.system[0]==DIV_SYSTEM_YM2612 && ds.system[1]==DIV_SYSTEM_SMS) {

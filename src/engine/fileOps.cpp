@@ -1336,7 +1336,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       ds.systemNameJ=reader.readString();
       ds.categoryJ=reader.readString();
     } else {
-      String teeeemp = getSongSystemLegacyName(ds,!getConfInt("noMultiSystem",0));
+      String teeeemp = _LE(getSongSystemLegacyName(ds,!getConfInt("noMultiSystem",0)).c_str());
       String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
       ds.systemName=temmrrrp;
       ds.autoSystem=true;

@@ -724,7 +724,7 @@ void FurnaceGUI::drawSettings() {
           ImGui::PushID(i);
 
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(_L("Invert##sgse0")).x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0);
-          if (ImGui::BeginCombo("##System",getSystemName(sysID),ImGuiComboFlags_HeightLargest)) {
+          if (ImGui::BeginCombo("##System",_L(getSystemName(sysID)),ImGuiComboFlags_HeightLargest)) {
             
             sysID=systemPicker(true);
             

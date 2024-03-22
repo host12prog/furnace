@@ -1116,7 +1116,7 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
       ds.systemFlags[0].set("brokenPitch",true);
     }
 
-    ds.systemName=getSongSystemLegacyName(ds,!getConfInt("noMultiSystem",0));
+    ds.systemName=_LE(getSongSystemLegacyName(ds,!getConfInt("noMultiSystem",0)).c_str());
 
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;
