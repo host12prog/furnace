@@ -1664,6 +1664,7 @@ class FurnaceGUI {
   char emptyLabel[32];
   char emptyLabel2[32];
 
+  public:
   struct Settings {
     bool settingsChanged;
     int mainFontSize, patFontSize, headFontSize, iconSize;
@@ -2086,6 +2087,7 @@ class FurnaceGUI {
       defaultAuthorName("") {}
   } settings;
 
+  private:
   char finalLayoutPath[4096];
 
   DivInstrument* prevInsData;

@@ -746,7 +746,10 @@ int main(int argc, char** argv) {
     return 1;
   }
 
-  g.autoDetectSystem(); //for some reason it detects properly on system start ONLY IF I PLACE IT THERE
+  if(g.settings.initialSysName == "")
+  {
+    g.autoDetectSystem(); //for some reason it detects properly on system start ONLY IF I PLACE IT THERE
+  }
   
   if (displayEngineFailError) {
     logE("displaying engine fail error.");
