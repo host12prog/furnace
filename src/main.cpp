@@ -746,7 +746,6 @@ int main(int argc, char** argv) {
     return 1;
   }
 
-  e.song.systemName=g._L(e.getSongSystemLegacyName(e.song,!e.getConfInt("noMultiSystem",0)).c_str()); //show translated system names when initializing song
   g.autoDetectSystem(); //for some reason it detects properly on system start ONLY IF I PLACE IT THERE
   
   if (displayEngineFailError) {
