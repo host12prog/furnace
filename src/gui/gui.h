@@ -2534,7 +2534,7 @@ class FurnaceGUI {
   bool portSet(String label, unsigned int portSetID, int ins, int outs, int activeIns, int activeOuts, int& clickedPort, std::map<unsigned int,ImVec2>& portPos);
 
   void updateWindowTitle();
-  void autoDetectSystem();
+  void autoDetectSystemIter(std::vector<FurnaceGUISysDef>& category, bool& isMatch, std::map<DivSystem,int>& defCountMap, std::map<DivSystem,DivConfig>& defConfMap, std::map<DivSystem,int>& sysCountMap, std::map<DivSystem,DivConfig>& sysConfMap);
   void prepareLayout();
   ImVec4 channelColor(int ch);
   ImVec4 channelTextColor(int ch);
@@ -2813,6 +2813,7 @@ class FurnaceGUI {
   const char* getSystemPartNumber(DivSystem sys, DivConfig& flags);
 
   public:
+    void autoDetectSystem();
     //translation
     DivLocale locale;
     //this is a horrible hack to allow localized strings in bitfield type macros...
