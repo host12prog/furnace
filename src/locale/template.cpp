@@ -1586,6 +1586,7 @@ void DivLocale::addTranslationsTemplate()
     strings["no systems here yet!##sgns"].plurals[0] = "=no systems here yet!";
     strings["no results##sgns"].plurals[0] = "=no results";
     strings["I'm feeling lucky##sgns"].plurals[0] = "=I'm feeling lucky";
+    strings["no categories available! what in the world.##sgns"].plurals[0] = "=no categories available! what in the world.";
     strings["Cancel##sgns"].plurals[0] = "=Cancel";
 
     //   sgme  src/gui/memory.cpp
