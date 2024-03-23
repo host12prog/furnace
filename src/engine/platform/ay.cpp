@@ -906,11 +906,11 @@ void DivPlatformAY8910::setFlags(const DivConfig& flags) {
   if (ay!=NULL) delete ay;
   switch (flags.getInt("chipType",0)) {
     case 1:
+      clockSel=flags.getBool("halfClock",false);
       ay=new ym2149_device(rate,clockSel);
       clockSel=flags.getBool("halfClock",false);
       sunsoft=false;
       intellivision=false;
-      clockSel=flags.getBool("halfClock",false);
       break;
     case 2:
       ay=new sunsoft_5b_sound_device(rate);

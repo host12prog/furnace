@@ -74,6 +74,7 @@ void DivLocale::addTranslationsRussian()
     strings["FFTW by Matteo Frigo and Steven G. Johnson##sgab"].plurals[0] = "FFTW за авторством Matteo Frigo и Steven G. Johnson";
     strings["backward-cpp by Google##sgab"].plurals[0] = "backward-cpp за авторством Google";
     strings["adpcm by superctr##sgab"].plurals[0] = "adpcm за авторством superctr";
+    strings["adpcm-xq by David Bryant##sgab"].plurals[0] = "adpcm-xq за авторством David Bryant";
     strings["Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt##sgab"].plurals[0] = "Nuked-OPL3/OPLL/OPM/OPN2/PSG за авторством nukeykt";
     strings["YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt##sgab"].plurals[0] = "YM3812-LLE, YMF262-LLE и YMF276-LLE за авторством nukeykt";
     strings["ymfm by Aaron Giles##sgab"].plurals[0] = "ymfm за авторством Aaron Giles";
@@ -111,11 +112,12 @@ void DivLocale::addTranslationsRussian()
     strings["SM8521 emulator (modified version) by cam900##sgab"].plurals[0] = "Эмулятор SM8521 (модифицированная версия) за авторством cam900";
     strings["D65010G031 emulator (modified version) by cam900##sgab"].plurals[0] = "Эмулятор D65010G031 (модифицированная версия) за авторством cam900";
     strings["Namco C140/C219 emulator (modified version) by cam900##sgab"].plurals[0] = "Эмулятор C140/C219 (модифицированная версия) за авторством cam900";
-    strings["ESFMu emulator by Kagamiin~##sgab"].plurals[0] = "Эмулятор ESFMu за авторством Kagamiin~";
+    strings["ESFMu emulator (modified version) by Kagamiin~##sgab"].plurals[0] = "Эмулятор ESFMu (модифицированная версия) за авторством Kagamiin~";
     strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] = "Эмулятор PowerNoise за авторством scratchminer";
     strings["ep128emu by Istvan Varga##sgab"].plurals[0] = "ep128emu за авторством Istvan Varga";
     strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] = "эмулятор SID2 (модификация reSID) за авторством LTVA";
     strings["5E01 emulator (modification of NSFPlay) by Euly##sgab"].plurals[0] = "эмулятор 5E01 (модификация NSFPlay) за авторством Euly";
+    strings["NDS sound emulator by cam900##sgab"].plurals[0] = "NDS sound emulator за авторством cam900";
 
     strings["greetings to:##sgab"].plurals[0] = "передаём привет:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "NEOART Costa Rica";
@@ -307,6 +309,7 @@ void DivLocale::addTranslationsRussian()
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "Останавливать аппаратное портаменто на каналах импульсов NES при начале новой ноты";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "Не останавливать эффект изменения громкости при достижении нулевой или максимальной громкости";
     strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Останавливать эффекты E1xy/E2xy на новой ноте";
+    strings["Slower 0Axy volume slide##sgcf"].plurals[0] = "Замедление изменения громкости эффектом 0Axy";
 
     //   sgcs  src/gui/csPlayer.cpp
 
@@ -643,7 +646,7 @@ void DivLocale::addTranslationsRussian()
     strings["settings##menubar"].plurals[0] = "настройки##menubar";
     strings["full screen##sggu"].plurals[0] = "полноэкранный режим";
     strings["lock layout##sggu"].plurals[0] = "зафиксировать компоновку окон";
-    strings["visualizer##sggu"].plurals[0] = "визуализатор эффектов";
+    strings["pattern visualizer##sggu"].plurals[0] = "визуализатор эффектов в паттерне";
     strings["reset layout##sggu"].plurals[0] = "сбросить компоновку окон";
     strings["Are you sure you want to reset the workspace layout?##sggu"].plurals[0] = "Вы уверены, что хотите сброить компоновку окон интерфейса?";
     strings["switch to mobile view##sggu"].plurals[0] = "переключиться на мобильный интерфейс";
@@ -666,6 +669,10 @@ void DivLocale::addTranslationsRussian()
     strings["chip manager##sggu"].plurals[0] = "менеджер чипов";
     strings["compatibility flags##sggu"].plurals[0] = "флаги совместимости";
     strings["song comments##sggu"].plurals[0] = "комментарии трека";
+    strings["song##sggu"].plurals[0] = "трек";
+    strings["visualizers##sggu"].plurals[0] = "визуализаторы";
+    strings["tempo##sggu"].plurals[0] = "темп";
+    strings["debug##sggu"].plurals[0] = "отладка";
     strings["instrument editor##sggu"].plurals[0] = "редактор инструментов";
     strings["wavetable editor##sggu"].plurals[0] = "редактор волновых таблиц";
     strings["sample editor##sggu"].plurals[0] = "редактор сэмплов";
@@ -1518,7 +1525,10 @@ void DivLocale::addTranslationsRussian()
     strings["Search...##sgns"].plurals[0] = "Поиск...";
     strings["Categories##sgns"].plurals[0] = "Категории";
     strings["Systems##sgns"].plurals[0] = "Системы";
+    strings["no systems here yet!##sgns"].plurals[0] = "пока здесь нет ни одной системы!";
+    strings["no results##sgns"].plurals[0] = "ничего не найдено";
     strings["I'm feeling lucky##sgns"].plurals[0] = "Мне повезёт!";
+    strings["no categories available! what in the world.##sgns"].plurals[0] = "нет доступных категорий! что происходит...";
     strings["Cancel##sgns"].plurals[0] = "Отмена";
 
     //   sgme  src/gui/memory.cpp
@@ -1566,6 +1576,7 @@ void DivLocale::addTranslationsRussian()
     //   sgpa  src/gui/pattern.cpp
 
     strings["Pattern###Pattern"].plurals[0] = "Паттерны###Pattern";
+    strings["there aren't any channels to show.##sgpa"].plurals[0] = "нет каналов для отображения.";
     strings["click for pattern options (effect columns/pattern names/visualizer)##sgpa"].plurals[0] = "нажмите для открытия меню настроек (столбцы эффектов/названия паттернов/визуализатор эффектов)";
     strings["Options:##sgpa"].plurals[0] = "Настройки:";
     strings["Effect columns/collapse##sgpa"].plurals[0] = "Столбцы эффектов и свёртка канала";
@@ -1608,6 +1619,8 @@ void DivLocale::addTranslationsRussian()
     strings["Sega Genesis (CSM with Sega CD)##sgpr"].plurals[0] = "Sega Genesis (CSM с Sega CD)";
     strings["Sega Master System (with FM expansion)##sgpr"].plurals[0] = "Sega Master System (с FM-расширением)";
     strings["Sega Master System (with FM expansion in drums mode)##sgpr"].plurals[0] = "Sega Master System (с FM-расширением в режиме ударных)";
+    strings["Game Boy Advance (no software mixing)##sgpr"].plurals[0] = "Game Boy Advance (без программного микширования)";
+    strings["Game Boy Advance (with MinMod)##sgpr"].plurals[0] = "Game Boy Advance (с драйвером MinMod)";
     strings["Famicom with Konami VRC6##sgpr"].plurals[0] = "Famicom с Konami VRC6";
     strings["Famicom with Konami VRC7##sgpr0"].plurals[0] = "Famicom с Konami VRC7";
     strings["Famicom with MMC5##sgpr"].plurals[0] = "Famicom с MMC5";
@@ -1829,6 +1842,8 @@ void DivLocale::addTranslationsRussian()
     strings["Dynax/Nakanihon 3rd generation hardware##sgpr"].plurals[0] = "Аппаратная платформа 3-го поколения Dynax/Nakanihon";
     strings["Dynax/Nakanihon 3rd generation hardware (drums mode)##sgpr"].plurals[0] = "Аппаратная платформа 3-го поколения Dynax/Nakanihon (в режиме ударных)";
     strings["Dynax/Nakanihon Real Break (drums mode)##sgpr"].plurals[0] = "Dynax/Nakanihon Real Break (в режиме ударных)";
+    strings["User##sgpr"].plurals[0] = "Пользовательские";
+    strings["system presets that you have saved.##sgpr"].plurals[0] = "пресеты систем, которые вы сохранили.";
     strings["chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.##sgpr"].plurals[0] = "чипы, использующую частотную модуляцию (FM-синтез) для генерации звука.\nв некоторых из них присутствуют и другие способы синтеза звука (каналы с квадратными волнами или сэмплами).\nНа самом деле, \"FM\" здесь означает фазовую модуляцию,\nно они неотличимы друг от друга при использовании синусоидальных волн.";
     strings["Yamaha YM2203 (extended channel 3)##sgpr"].plurals[0] = "Yamaha YM2203 (расширенный 3-ий канал)";
     strings["Yamaha YM2203 (extended channel 3 and CSM)##sgpr"].plurals[0] = "Yamaha YM2203 (расширенный 3-ий канал и CSM)";
@@ -1939,6 +1954,9 @@ void DivLocale::addTranslationsRussian()
     strings["C219: maximum sample length is 131072##sgse"].plurals[0] = "C219: максимальная длина сэмпла равна 131072";
     strings["MSM6295: samples can't loop##sgse"].plurals[0] = "MSM6295: сэмплы не могут быть зациклены";
     strings["MSM6295: maximum bankswitched sample length is 129024##sgse"].plurals[0] = "MSM6295: максимальная длина сэмпла с заменой банков равна 129024";
+    strings["GBA DMA: loop start must be a multiple of 4##sgse"].plurals[0] = "GBA DMA: начало цикла должно быть кратно 4##sgse";
+    strings["GBA DMA: loop length must be a multiple of 16##sgse"].plurals[0] = "GBA DMA: длина зацикленной части должна быть кратна 16##sgse";
+    strings["GBA DMA: sample length will be padded to multiple of 16##sgse"].plurals[0] = "GBA DMA: длина сэмпла будет скорректирована до кратности 16##sgse";
     strings["ES5506: backward loop mode isn't supported##sgse"].plurals[0] = "ES5506: режим обратного зацикливания не поддерживается";
     strings["backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506##sgse"].plurals[0] = "режим обратного и \"туда-обратно\" зацикливания поддерживается только для универсального ИКМ ЦАП\n\"туда-обратно\" также поддерживается для ES5506";
     strings["Info##sgse"].plurals[0] = "Информация";
@@ -2144,6 +2162,13 @@ void DivLocale::addTranslationsRussian()
     strings["Exact output (normal)##sgsc"].plurals[0] = "Точный вывод (нормально)";
     strings["Pretty please one more compat flag when I use arpeggio and my sound length##sgsc"].plurals[0] = "Ну пожалуйста ещё один флаг совместимости когда я использую арпеджио и малую длину звука на шумовом канале";
     strings["Clock rate:##sgsc2"].plurals[0] = "Частота:";
+    strings["DAC bit depth (reduces output rate):##sgsc"].plurals[0] = "Глубина квантования ЦАП (уменьшает частоту дискретизации):";
+    strings["Volume scale:##sgsc"].plurals[0] = "Громкость:";
+    strings["Mix buffers (allows longer echo delay):##sgsc"].plurals[0] = "Буферы микширования (позволяет делать более долгую задержку эха):";
+    strings["Channel limit:##sgsc"].plurals[0] = "Димит числа каналов:";
+    strings["Sample rate:##sgsc"].plurals[0] = "Частота дискретизации:";
+    strings["Actual sample rate: %d Hz##sgsc"].plurals[0] = "Настоящая частота дискретизации: %d Гц";
+    strings["Max mixer CPU usage: %.0f%%##sgsc"].plurals[0] = "Максимальное использование ЦП микшером: %.0f%%";
     strings["Arcade (4MHz)##sgsc"].plurals[0] = "Arcade (4 МГц)";
     strings["Half NTSC (1.79MHz)##sgsc"].plurals[0] = "Половина NTSC (1.79 МГц)";
     strings["Patch set:##sgsc"].plurals[0] = "Набор патчей:";
@@ -2170,6 +2195,7 @@ void DivLocale::addTranslationsRussian()
     strings["- 0 disables envelope reset. not recommended!\n- 1 may trigger SID envelope bugs.\n- values that are too high may result in notes being skipped.##sgsc"].plurals[0] = "- 0 отключает сброс огибающей. не рекомендуется!\n- 1 может привести к появлению сбоев огибающей SID.\n- слишком большие значения могут привести к пропуску коротких нот.";
     strings["Disable 1Exy env update (compatibility)##sgsc"].plurals[0] = "Отключить обновление огибающей при применении эффекта 1Exy (совместимость)";
     strings["Relative duty and cutoff macros are coarse (compatibility)##sgsc"].plurals[0] = "Макросы скважности и частоты среза в относительном режиме имеют меньшее разрешение (совместимость)";
+    strings["Cutoff macro race conditions (compatibility)##sgsc"].plurals[0] = "Состояние гонки макроса скважности (совместимость)";
     strings["Disable ExtCh FM macros (compatibility)##sgsc1"].plurals[0] = "Отключить FM-макросы для расширенного канала (совместимость)";
     strings["Ins change in ExtCh operator 2-4 affects FB (compatibility)##sgsc1"].plurals[0] = "Смена инструмента на операторах 2-4 расш. канала меняет FB (совместимость)";
     strings["SSG Volume##sgsc0"].plurals[0] = "Громкость SSG";
@@ -2245,6 +2271,8 @@ void DivLocale::addTranslationsRussian()
     strings["Bankswitched (NMK112)##sgsc"].plurals[0] = "Смена банков (NMK112)";
     strings["Clock rate:##sgsc12"].plurals[0] = "Тактовая частота:";
     strings["1.5MHz (Arcade)##sgsc"].plurals[0] = "1.5 МГц (Arcade)";
+    strings["Consistent frequency across all duties##sgsc"].plurals[0] = "Стабильная частота для всех скважностей";
+    strings["note: only works for an initial LFSR value of 0!##sgsc"].plurals[0] = "примечание: работает только для нулевого начального состояния РСЛОС!";
     strings["Clock rate:##sgsc13"].plurals[0] = "Тактовая частота:";
     strings["Clock rate:##sgsc14"].plurals[0] = "Тактовая частота:";
     strings["Chip type:##sgsc4"].plurals[0] = "Тип чипа:";
@@ -2302,6 +2330,8 @@ void DivLocale::addTranslationsRussian()
     strings["Waveform storage mode:##sgsc1"].plurals[0] = "Способ хранения волн:";
     strings["Dynamic (unconfirmed)##sgsc"].plurals[0] = "Динамический (не подтверждён)";
     strings["Static (up to 5 waves)##sgsc"].plurals[0] = "Статический (до 5 волн)";
+    strings["DS (4MB RAM)##sgsc"].plurals[0] = "DS (4 МиБ ОЗУ)";
+    strings["DSi (16MB RAM)##sgsc"].plurals[0] = "DSi (16 МиБ ОЗУ)";
     strings["nothing to configure##sgsc"].plurals[0] = "настраивать нечего";
     strings["Downmix chip output to mono##sgsc"].plurals[0] = "Свести звук чипа в моно";
     strings["Reserved blocks for wavetables:##sgsc"].plurals[0] = "Зарезервированных блоков под волновые таблицы:";
@@ -2322,7 +2352,7 @@ void DivLocale::addTranslationsRussian()
     strings["Name##sgsm"].plurals[0] = "Название";
     strings["Actions##sgsm"].plurals[0] = "Действия";
     strings["(drag to swap chips)##sgsm"].plurals[0] = "(перетащите, чтобы поменять местами каналы)";
-    strings["Clone##SysDup"].plurals[0] = "Клонировать##SysDupl";
+    strings["Clone##SysDup"].plurals[0] = "Клонировать##SysDup";
     strings["cannot duplicate chip! (##sgsm"].plurals[0] = "не получилось склонировать чип! (";
     strings["max number of systems is %d##sgsm"].plurals[0] = "максимальное число чипов/систем не может превышать %d";
     strings["max number of total channels is %d##sgsm"].plurals[0] = "максимальное общее число каналов не может превышать %d";
@@ -2519,6 +2549,7 @@ void DivLocale::addTranslationsRussian()
     strings["High##sgse"].plurals[0] = "Высокое";
     strings["Low##sgse"].plurals[0] = "Низкое";
     strings["ASAP (C++ port)##sgse"].plurals[0] = "ASAP (портирован на C++)";
+    strings["ESFMu (fast)##sgse"].plurals[0] = "ESFMu (быстрый)";
     strings["KIOCSOUND on /dev/tty1##sgse"].plurals[0] = "KIOCSOUND в /dev/tty1";
     strings["KIOCSOUND on standard output##sgse"].plurals[0] = "KIOCSOUND в стандартном выводе";
     strings["Disabled/custom##sgse0"].plurals[0] = "Выкл./пользовательский";
@@ -2856,6 +2887,9 @@ void DivLocale::addTranslationsRussian()
     strings["No##csw0"].plurals[0] = "Нет##csw0";
     strings["Yes##csw1"].plurals[0] = "Да##csw1";
     strings["Inverted##csw2"].plurals[0] = "Да, но в обратном направлении##csw2";
+    strings["How many steps to move with each scroll wheel step?##sgse"].plurals[0] = "На сколько позиций свдигаться при каждом шаге колёсика мыши?";
+    strings["One##cws0"].plurals[0] = "На одну##cws0";
+    strings["Edit Step##cws1"].plurals[0] = "На шаг редактирования##cws1";
     strings["Assets##sgse0"].plurals[0] = "Ресурсы";
     strings["Display instrument type menu when adding instrument##sgse"].plurals[0] = "Отображать тип инструмента при добавлении инструмента";
     strings["Select asset after opening one##sgse"].plurals[0] = "Выделять объект после открытия";
@@ -3416,6 +3450,8 @@ void DivLocale::addTranslationsRussian()
     strings["Wave RAM##CC_GUI_COLOR_MEMORY_WAVE_RAM"].plurals[0] = "ОЗУ волн##CC_GUI_COLOR_MEMORY_WAVE_RAM";
     strings["Wavetable (static)##CC_GUI_COLOR_MEMORY_WAVE_STATIC"].plurals[0] = "Волновая таблица (статич.)##CC_GUI_COLOR_MEMORY_WAVE_STATIC";
     strings["Echo buffer##CC_GUI_COLOR_MEMORY_ECHO"].plurals[0] = "Буфер эхо##CC_GUI_COLOR_MEMORY_ECHO";
+    strings["Namco 163 load pos##CC_GUI_COLOR_MEMORY_N163_LOAD"].plurals[0] = "Namco 163 положение загрузки##CC_GUI_COLOR_MEMORY_N163_LOAD";
+    strings["Namco 163 play pos##CC_GUI_COLOR_MEMORY_N163_PLAY"].plurals[0] = "Namco 163 положение проигрывания##CC_GUI_COLOR_MEMORY_N163_PLAY";
     strings["Sample (bank 0)##CC_GUI_COLOR_MEMORY_BANK0"].plurals[0] = "Сэмпл (банк 0)##CC_GUI_COLOR_MEMORY_BANK0";
     strings["Sample (bank 1)##CC_GUI_COLOR_MEMORY_BANK1"].plurals[0] = "Сэмпл (банк 1)##CC_GUI_COLOR_MEMORY_BANK1";
     strings["Sample (bank 2)##CC_GUI_COLOR_MEMORY_BANK2"].plurals[0] = "Сэмпл (банк 2)##CC_GUI_COLOR_MEMORY_BANK2";
@@ -3766,6 +3802,28 @@ void DivLocale::addTranslationsRussian()
     strings["Panning##sgiGB"].plurals[0] = "Панорамирование";
     strings["Phase Reset##sgiGB"].plurals[0] = "Сброс фазы";
 
+    //   sgiGBADMA src/gui/inst/gbadma.cpp
+
+    strings["Macros##sgiGBADMA"].plurals[0] = "Макросы";
+    strings["Volume##sgiGBADMA"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiGBADMA"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiGBADMA"].plurals[0] = "Частота";
+    strings["Waveform##sgiGBADMA"].plurals[0] = "Волна";
+    strings["Panning##sgiGBADMA"].plurals[0] = "Панорамирование";
+    strings["Phase Reset##sgiGBADMA"].plurals[0] = "Сброс фазы";
+
+    //sgiGBAMINMOD src/gui/inst/gbaminmod.cpp
+
+    strings["Macros##sgiGBAMINMOD"].plurals[0] = "Макросы";
+    strings["Volume##sgiGBAMINMOD"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiGBAMINMOD"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiGBAMINMOD"].plurals[0] = "Частота";
+    strings["Waveform##sgiGBAMINMOD"].plurals[0] = "Волна";
+    strings["Panning (left)##sgiGBAMINMOD"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiGBAMINMOD"].plurals[0] = "Панорамирование (правый)";
+    strings["Special##sgiGBAMINMOD"].plurals[0] = "Разное";
+    strings["Phase Reset##sgiGBAMINMOD"].plurals[0] = "Сброс фазы";
+
     //   sgiK00    src/gui/inst/k007232.cpp
 
     strings["Macros##sgiK00"].plurals[0] = "Макросы";
@@ -3833,6 +3891,7 @@ void DivLocale::addTranslationsRussian()
     strings["Panning (left)##sgiLYNX"].plurals[0] = "Панорамирование (левый)";
     strings["Panning (right)##sgiLYNX"].plurals[0] = "Панорамирование (правый)";
     strings["Phase Reset##sgiLYNX"].plurals[0] = "Сброс фазы";
+    strings["Load LFSR##sgiLYNX"].plurals[0] = "Загрузить в РСЛОС";
 
     //   sgi5232   src/gui/inst/msm5232.cpp
 
@@ -3923,6 +3982,16 @@ void DivLocale::addTranslationsRussian()
     strings["Waveform##sgiWSG"].plurals[0] = "Волна";
     strings["Panning (left)##sgiWSG"].plurals[0] = "Панорамирование (левый)";
     strings["Panning (right)##sgiWSG"].plurals[0] = "Панорамирование (правый)";
+
+    //   sgiNDS    src/gui/inst/nds.cpp
+
+    strings["Macros##sgiNDS"].plurals[0] = "Макросы";
+    strings["Volume##sgiNDS"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiNDS"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiNDS"].plurals[0] = "Частота";
+    strings["Duty##sgiNDS"].plurals[0] = "Скважность";
+    strings["Panning##sgiNDS"].plurals[0] = "Панорамирование";
+    strings["Phase Reset##sgiNDS"].plurals[0] = "Сброс фазы";
 
     //   sgiNES    src/gui/inst/nes.cpp
 
@@ -4179,6 +4248,7 @@ void DivLocale::addTranslationsRussian()
     strings["Volume##sgiPV"].plurals[0] = "Громкость";
     strings["Arpeggio##sgiPV"].plurals[0] = "Арпеджио";
     strings["Pitch##sgiPV"].plurals[0] = "Частота";
+    strings["Raw Frequency##sgiPV"].plurals[0] = "Частота (регистровое знач.)";
 
     //   sgiQ      src/gui/inst/qsound.cpp
 
@@ -4225,7 +4295,8 @@ void DivLocale::addTranslationsRussian()
     strings["Use sample##sgismpd"].plurals[0] = "Использовать сэмпл";
     strings["Sample bank slot##BANKSLOT"].plurals[0] = "Номер банка сэмплов##BANKSLOT";
     strings["Sample##sgismpd1"].plurals[0] = "Сэмпл";
-    strings["Use wavetable (Amiga/SNES/Generic DAC only)##sgismpd"].plurals[0] = "Использовать волновую таблицу (только для Amiga/SNES/типичного ЦАП)";
+    strings["Use wavetable (Amiga/Generic DAC only)##sgismpd"].plurals[0] = "Использовать волновую таблицу (только для Amiga/типичного ЦАП)";
+    strings["Use wavetable##sgismpd"].plurals[0] = "Использовать волновую таблицу";
     strings["Width##sgismpd"].plurals[0] = "Длина";
     strings["Use sample map##sgismpd"].plurals[0] = "Использовать карту сэмплов";
     strings["pitch##sgismpd"].plurals[0] = "частота";
@@ -4846,6 +4917,10 @@ void DivLocale::addTranslationsRussian()
 
     // no more instruments
 
+    //           src/engine/cmdStream.cpp
+
+    strings["not a command stream"].plurals[0] = "не является потоком команд";
+
     //   seen    src/engine/engine.cpp
 
     strings["00xy: Arpeggio##seen"].plurals[0] = "00xy: Арпеджио";
@@ -4877,6 +4952,9 @@ void DivLocale::addTranslationsRussian()
     strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: Установить глубину вибрато";
     strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: Расстройка (80: без расстройки)";
     strings["E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen"].plurals[0] = "E6xy: Отложенное транспонирование ноты (x: 0-7 = вверх, 8-F = вниз (после (x % 7) шагов движка); y: полутонов)";
+    strings["E7xx: Macro release##seen"].plurals[0] = "E7xx: Релиз макросов";
+    strings["E8xy: Delayed note transpose up (x: ticks; y: semitones)##seen"].plurals[0] = "E8xy: Отложенное транспонирование ноты вверх (x: шагов движка; y: полутонов)";
+    strings["E9xy: Delayed note transpose down (x: ticks; y: semitones)##seen"].plurals[0] = "E9xy: Отложенное транспонирование ноты вниз (x: шагов движка; y: полутонов)";
     strings["EAxx: Legato##seen"].plurals[0] = "EAxx: Легато";
     strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: (СОВМЕСТИМОСТЬ) Установить банк сэмплов";
     strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: Заглушить ноту";
@@ -4893,8 +4971,213 @@ void DivLocale::addTranslationsRussian()
     strings["F8xx: Single tick volume slide up##seen"].plurals[0] = "F8xx: Изменение громкости вверх (один шаг движка)";
     strings["F9xx: Single tick volume slide down##seen"].plurals[0] = "F9xx: Изменение громкости вниз (один шаг движка)";
     strings["FAxx: Fast volume slide (0y: down; x0: up)##seen"].plurals[0] = "FAxx: Быстрое изменение громкости (0y: вниз; x0: вверх)";
+    strings["FCxx: Note release##seen"].plurals[0] = "FCxx: Релиз ноты";
+    strings["FDxx: Set virtual tempo numerator##seen"].plurals[0] = "FDxx: Числитель виртуального темпа";
+    strings["FExx: Set virtual tempo denominator##seen"].plurals[0] = "FExx: Знаменатель виртуального темпа";
     strings["FFxx: Stop song##seen"].plurals[0] = "FFxx: Остановить трек";
     strings["9xxx: Set sample offset*256##seen"].plurals[0] = "9xxx: Начальное смещение сэмпла (xxx*256 шагов)";
+
+    strings["on seek: %s"].plurals[0] = "во время перехода по файлу: %s";
+    strings["on pre tell: %s"].plurals[0] = "перед запросом положения в файле: %s";
+    strings["file is empty"].plurals[0] = "пустой файл";
+    strings["on tell: %s"].plurals[0] = "во время запроса положения в файле: %s";
+    strings["ROM size mismatch, expected: %d bytes, was: %d"].plurals[0] = "несоответствие размера ROM, ожидалось: %d байт, на самом деле: %d";
+    strings["on get size: %s"].plurals[0] = "при запросе размера: %s";
+    strings["on read: %s"].plurals[0] = "при чтении: %s";
+    strings["invalid index"].plurals[0] = "недействительный индекс";
+    strings["max number of total channels is %d"].plurals[0] = "максимальное общее число каналов равно %d";
+    strings["max number of systems is %d"].plurals[0] = "максимальное число чипов/систем равно %d";
+    strings["cannot remove the last one"].plurals[0] = "не могу удалить последнюю";
+    strings["source and destination are equal"].plurals[0] = "системы совпадают";
+    strings["invalid source index"].plurals[0] = "недействительный индекс исходной системы";
+    strings["invalid destination index"].plurals[0] = "недействительный индекс системы назначения";
+    strings["too many wavetables!"].plurals[0] = "слишком много волновых таблиц!";
+    strings["could not seek to end: %s"].plurals[0] = "не смог перейти в конец файла: %s";
+    strings["could not determine file size: %s"].plurals[0] = "не смог определить размер файла: %s";
+    strings["file size is invalid!"].plurals[0] = "недействительный размер файла!";
+    strings["could not seek to beginning: %s"].plurals[0] = "не смог перейти в начало файла: %s";
+    strings["could not read entire file: %s"].plurals[0] = "не смог прочитать весь файл: %s";
+    strings["invalid wavetable header/data!"].plurals[0] = "неправильный заголовок/данные волновой таблицы!";
+    strings["premature end of file"].plurals[0] = "преждевременный конец файла";
+    strings["too many samples!"].plurals[0] = "слишком много сэмплов!";
+    strings["no free patterns in channel %d!"].plurals[0] = "нет свободных паттернов для канала %d!";
+    
+    //           src/engine/fileOps.cpp
+        
+    strings["this module was created with a more recent version of Furnace!"].plurals[0] = "этот модуль был создан в более новой версии Furnace!";
+    strings["couldn't seek to info header!"].plurals[0] = "не смог перейти к заголовку с информацией!";
+    strings["invalid info header!"].plurals[0] = "неправильный заголовок с информацией!";
+    strings["pattern length is negative!"].plurals[0] = "отрицательная длина паттерна!";
+    strings["pattern length is too large!"].plurals[0] = "слишком большая длина паттерна!";
+    strings["song length is negative!"].plurals[0] = "отрицательная длина трека!";
+    strings["song is too long!"].plurals[0] = "трек слишком длинный!";
+    strings["invalid instrument count!"].plurals[0] = "неправильное число инструментов!";
+    strings["invalid wavetable count!"].plurals[0] = "неправильное число волновых таблиц!";
+    strings["invalid sample count!"].plurals[0] = "неправильное число сэмплов!";
+    strings["invalid pattern count!"].plurals[0] = "неправильное число паттернов!";
+    strings["unrecognized system ID %.2x!"].plurals[0] = "неизвестный индекс системы %.2x!";
+    strings["zero chips!"].plurals[0] = "нулевое число чипов!";
+    strings["channel %d has too many effect columns! (%d)"].plurals[0] = "канал %d содержит слишком много столбцов эффектов! (%d)";
+    strings["couldn't seek to chip %d flags!"].plurals[0] = "не смог перейти к флагам чипа %d!";
+    strings["invalid flag header!"].plurals[0] = "неправильный заголовок флагов!";
+    strings["couldn't read instrument directory"].plurals[0] = "не смог прочитать папку с инструментами";
+    strings["invalid instrument directory data!"].plurals[0] = "неправильные данные папки с инструментами!";
+    strings["couldn't read wavetable directory"].plurals[0] = "не смог прочитать папку с волновыми таблицами";
+    strings["invalid wavetable directory data!"].plurals[0] = "неправильные данные папки с волновыми таблицами!";
+    strings["couldn't read sample directory"].plurals[0] = "не смог прочитать папку с сэмплами";
+    strings["invalid sample directory data!"].plurals[0] = "неправильные данные папки с сэмплами!";
+    strings["couldn't seek to subsong %d!"].plurals[0] = "не смог перейти к подпесне %d!";
+    strings["invalid subsong header!"].plurals[0] = "неправильный заголовок подпесни!";
+    strings["couldn't seek to instrument %d!"].plurals[0] = "не смог перейти к инструменту %d!";
+    strings["invalid instrument header/data!"].plurals[0] = "неправильный заголовок/данные инструмента!";
+    strings["couldn't seek to wavetable %d!"].plurals[0] = "не смог перейти к волновой таблице %d!";
+    strings["couldn't seek to sample %d!"].plurals[0] = "не смог перейти к сэмплу %d!";
+    strings["invalid sample header/data!"].plurals[0] = "неправильный заголовок/данные сэмпла!";
+    strings["couldn't seek to pattern in %x!"].plurals[0] = "не смог перейти к паттерну в %x!";
+    strings["invalid pattern header!"].plurals[0] = "неправильный заголовок паттерна!";
+    strings["pattern channel out of range!"].plurals[0] = "канал паттерна за пределами числа каналов!";
+    strings["pattern index out of range!"].plurals[0] = "индекс паттерна за пределами числа паттернов!";
+    strings["pattern subsong out of range!"].plurals[0] = "подпесня паттерна за пределами числа подпесен!";
+    strings["incomplete file"].plurals[0] = "неполный файл";
+    strings["file is too small"].plurals[0] = "файл слишком маленький";
+    strings["not a .dmf/.fur/.fub song"].plurals[0] = "не является модулем .dmf/.fur/.fub";
+    strings["unknown decompression error"].plurals[0] = "неизвестная ошибка распаковки";
+    strings["decompression error: %s"].plurals[0] = "ошибка распаковки: %s";
+    strings["unknown decompression finish error"].plurals[0] = "неизвестная ошибка при завершении распаковки";
+    strings["decompression finish error: %s"].plurals[0] = "ошибка при завершении распаковки: %s";
+    strings["not a compatible song/instrument"].plurals[0] = "не является совместимым модулем/файлом инструмента";
+    strings["maximum number of instruments is 256"].plurals[0] = "максимальное число инструментов равно 256";
+    strings["maximum number of wavetables is 256"].plurals[0] = "максимальное число волновых таблиц равно 256";
+    strings["maximum number of samples is 256"].plurals[0] = "максимальное число сэмплов равно 256";
+
+    //           src/engine/fileOpsIns.cpp
+
+    strings["did not read entire instrument file!"].plurals[0] = "не смог прочитать весь файл инструмента!";
+    strings["this instrument is made with a more recent version of Furnace!"].plurals[0] = "этот инструмент был создан в более новой версии Furnace!";
+    strings["unknown instrument format"].plurals[0] = "неизвестный формат инструмента";
+    strings["there is more data at the end of the file! what happened here!"].plurals[0] = "в конце файла содержатся ещё данные! что происходит!";
+    strings["exactly %d bytes, if you are curious"].plurals[0] = "а именно %d байт, если вам интересно";
+
+    //           src/engine/fileOpsSample.cpp
+
+    strings["could not open file! (%s)"].plurals[0] = "не смог открыть файл! (%s)";
+    strings["could not get file length! (%s)"].plurals[0] = "не смог определить длину файла! (%s)";
+    strings["file is empty!"].plurals[0] = "файл пустой!";
+    strings["file is invalid!"].plurals[0] = "файл повреждён/слишком большой!";
+    strings["could not seek to beginning of file! (%s)"].plurals[0] = "не смог перейти к началу файла! (%s)";
+    strings["wait... is that right? no I don't think so..."].plurals[0] = "подождите... так вообще правильно? нет, я так не думаю...";
+    strings["BRR sample is empty!"].plurals[0] = "BRR-сэмпл пуст!";
+    strings["possibly corrupt BRR sample!"].plurals[0] = "BRR-сэмпл, возможно, повреждён!";
+    strings["could not read file! (%s)"].plurals[0] = "не смог прочитать файл! (%s)";
+    strings["Furnace was not compiled with libsndfile!"].plurals[0] = "Furnace не был скомпилирован с libsndfile!";
+    strings["could not open file! (%s %s)"].plurals[0] = "не смог открыть файл! (%s %s)";
+    strings["could not open file! (%s)\nif this is raw sample data, you may import it by right-clicking the Load Sample icon and selecting \"import raw\"."].plurals[0] = "не смог открыть файл! (%s)\nесли это сырые данные сэмпла, попробуйте импортировать их: ПКМ по иконке \"Открыть\" в списке сэмплов, выберите \"импорт сырых данных\".";
+    strings["this sample is too big! max sample size is 16777215."].plurals[0] = "сэмпл слишком большой! максимальный размер сэмпла 16777215.";
+
+    //           src/engine/importExport/bnk.cpp
+
+    strings["GEMS BNK currently not supported."].plurals[0] = "GEMS BNK пока не поддерживается.";
+
+    //           src/engine/importExport/dmf.cpp
+
+    strings["this version is not supported by Furnace yet"].plurals[0] = "эта версия пока не поддерживается Furnace";
+    strings["system not supported. running old version?"].plurals[0] = "система не поддерживается. вы на старой версии?";
+    strings["Yamaha YMU759 emulation is incomplete! please migrate your song to the OPL3 system."].plurals[0] = "Эмуляция Yamaha YMU759 неполноценна! переделайте свой трек под OPL3.";
+    strings["order at %d, %d out of range! (%d)"].plurals[0] = "значение в матрице паттернов %d, %d недействительно! (%d)";
+    strings["file is corrupt or unreadable at operators"].plurals[0] = "файл повреждён/нечитаем в секции операторов";
+    strings["file is corrupt or unreadable at wavetables"].plurals[0] = "файл повреждён/нечитаем в секции волновых таблиц";
+    strings["file is corrupt or unreadable at effect columns"].plurals[0] = "файл повреждён/нечитаем в секции столбцов эффектов";
+    strings["file is corrupt or unreadable at samples"].plurals[0] = "файл повреждён/нечитаем в секции сэмплов";
+    strings["invalid version to save in! this is a bug!"].plurals[0] = "енправильная версия для сохранения! это баг!";
+    strings["multiple systems not possible on .dmf"].plurals[0] = "несколько чипов/систем невозможно сохранить в .dmf";
+    strings["YMU759 song saving is not supported"].plurals[0] = "Сохранение треков с YMU759 не поддерживается";
+    strings["Master System FM expansion not supported in 1.0/legacy .dmf!"].plurals[0] = "Master System FM расширение не поддерживается в 1.0/legacy .dmf!";
+    strings["NES + VRC7 not supported in 1.0/legacy .dmf!"].plurals[0] = "NES + VRC7 не поддерживаются в 1.0/legacy .dmf!";
+    strings["FDS not supported in 1.0/legacy .dmf!"].plurals[0] = "FDS не поддерживается в 1.0/legacy .dmf!";
+    strings["this system is not possible on .dmf"].plurals[0] = "эта система не поддерживается в .dmf";
+    strings["maximum .dmf song length is 127"].plurals[0] = "маскимальная длина трека .dmf составляет 127";
+    strings["maximum number of instruments in .dmf is 128"].plurals[0] = "максимальное число инструментов в .dmf равно 128";
+    strings["maximum number of wavetables in .dmf is 64"].plurals[0] = "максимальное число волновых таблиц в .dmf равно 64";
+    strings["order %d, %d is out of range (0-127)"].plurals[0] = "значение в матрице паттернов %d, %d недействительно (0-127)";
+    strings["only the currently selected subsong will be saved"].plurals[0] = "будет сохранена только текущая подпесня";
+    strings["grooves will not be saved"].plurals[0] = "ритм-паттерны не будут сохранены";
+    strings["only the first two speeds will be effective"].plurals[0] = "только первые две скорости будут применены";
+    strings[".dmf format does not support virtual tempo"].plurals[0] = ".dmf не поддерживает виртуальный темп";
+    strings[".dmf format does not support tuning"].plurals[0] = ".dmf не поддерживает настройку строя (частоты ноты A-4)";
+    strings["absolute duty/cutoff macro not available in .dmf!"].plurals[0] = "абсолютные макросы частоты среза/скважности не поддерживаются в .dmf!";
+    strings["duty precision will be lost"].plurals[0] = "точность настройки скважности не будет сохранена";
+    strings[".dmf format does not support arbitrary-pitch sample mode"].plurals[0] = ".dmf не поддерживает проигрывание сэмплов с произвольной частотой";
+    strings["no FM macros in .dmf format"].plurals[0] = "формат .dmf не поддерживает FM-макросы";
+    strings[".dmf only supports volume or cutoff macro in C64, but not both. volume macro will be lost."].plurals[0] = ".dmf позволяет применять для C64 либо макрос громкости, либо макрос частоты среза, но не оба одновременно. макрос громкости не будет сохранён.";
+    strings["note/macro release will be converted to note off!"].plurals[0] = "ноты релиза макросов или огибающей будут преобразованы в заглушение ноты!";
+    strings["samples' rates will be rounded to nearest compatible value"].plurals[0] = "частоты дискретизации сэмплов будут преобразованы в ближайшие совместимые.";
+
+    //           src/engine/importExport/dmp.cpp
+
+    strings["unknown instrument type %d!"].plurals[0] = "неизвестный тип инструмента %d!";
+
+    //           src/engine/importExport/fc.cpp
+
+    strings["invalid header!"].plurals[0] = "неправильный заголовок";
+
+    //           src/engine/importExport/ftm.cpp
+
+    strings["incompatible version"].plurals[0] = "несовместимая версия";
+    strings["channel counts do not match"].plurals[0] = "количества каналов не совпадают";
+    strings["too many instruments/out of range"].plurals[0] = "слишком много инструментов/недействительное значение";
+    strings["invalid instrument type"].plurals[0] = "неизвестный тип инструмента";
+    strings["too many sequences"].plurals[0] = "слишком много последовательностей (макросов)";
+    strings["sequences block version is too old"].plurals[0] = "слишком старая версия блока последовательностей";
+    strings["unknown block "].plurals[0] = "неизвестный блок ";
+    strings["incomplete block "].plurals[0] = "неполный блок ";
+    strings[" [VRC6 copy]"].plurals[0] = " [копия для VRC6]";
+    strings[" [VRC6 saw copy]"].plurals[0] = " [копия для пилы VRC6]";
+    strings[" [NES copy]"].plurals[0] = " [копия для NES]";
+
+    //           src/engine/importExport/gyb.cpp
+
+    strings["GYBv3 file appears to have invalid data offsets."].plurals[0] = "Похоже, что в файле GYBv3 неверные смещения (указатели на данные).";
+    strings["Invalid value found in patch file. %s"].plurals[0] = "Найдено недействительное значение в файле патча. %s";
+
+    //           src/engine/importExport/s3i.cpp
+
+    strings["S3I PCM samples currently not supported."].plurals[0] = "S3I: ИКМ-сэмплы пока не поддерживаются.";
+
+    //           src/engine/vgmOps.cpp
+
+    strings["VGM version is too low"].plurals[0] = "Версия VGM слишком старая";
+
+    //names of memory composition memories
+
+    strings["DPCM"].plurals[0] = "ДИКМ";
+    strings["Chip Memory"].plurals[0] = "Память чипа";
+    strings["Sample ROM"].plurals[0] = "ПЗУ сэмплов";
+    strings["Sample Memory"].plurals[0] = "Память сэмплов";
+    strings["SPC/DSP Memory"].plurals[0] = "Память SPC/DSP";
+    strings["Sample RAM"].plurals[0] = "ОЗУ сэмплов";
+    strings["ADPCM"].plurals[0] = "АДИКМ";
+
+    //names of memory entries
+
+    strings["Sample"].plurals[0] = "Сэмпл";
+    strings["Wave RAM"].plurals[0] = "ОЗУ волн";
+    strings["End of Sample"].plurals[0] = "Конец сэмпла";
+    strings["Wavetable RAM"].plurals[0] = "ОЗУ под волновую таблицу";
+    strings["Reserved wavetable RAM"].plurals[0] = "ОЗУ, зарезервированная под волновую таблицу";
+    strings["Phrase Book"].plurals[0] = "Книга фраз";
+    strings["Channel %d (load)"].plurals[0] = "Канал %d (загрузка)";
+    strings["Channel %d (play)"].plurals[0] = "Канал %d (проигрывание)";
+    strings["Channel %d"].plurals[0] = "Канал %d";
+    strings["Buffer %d Left"].plurals[0] = "Буфер %d лево";
+    strings["Buffer %d Right"].plurals[0] = "Буфер %d право";
+    strings["Registers"].plurals[0] = "Регистры";
+    strings["PCM"].plurals[0] = "ИКМ";
+    strings["ADPCM"].plurals[0] = "АДИКМ";
+    strings["State"].plurals[0] = "Состояние";
+    strings["Sample Directory"].plurals[0] = "Секция сэмплов";
+    strings["Echo Buffer"].plurals[0] = "Буфер эхо";
+    strings["Mix/Echo Buffer"].plurals[0] = "Буфер микширования/эхо";
+    strings["Main Memory"].plurals[0] = "Основная память";
 
     //   sesd    src/engine/sysDef.cpp
 
@@ -5027,6 +5310,7 @@ void DivLocale::addTranslationsRussian()
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "3xxx: Скважность (0-FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "4xxx: Частота среза (0-7FF)";
     strings["10xx: Set waveform##sesd0"].plurals[0] = "10xx: Волна";
+    strings["13xx: Set waveform (local)##sesd"].plurals[0] = "13xx: Волна (локальная)";
     strings["11xx: Set raw period (0-1F)##sesd"].plurals[0] = "11xx: \"Сырое\" значение периода (0-1F)";
     strings["11xx: Set waveform (local)##sesd"].plurals[0] = "11xx: Волна (локальная)";
     strings["20xx: Set PCM frequency##sesd"].plurals[0] = "20xx: Частота ИКМ";
@@ -5137,7 +5421,7 @@ void DivLocale::addTranslationsRussian()
     strings["10xy: Set channel mode (x: noise; y: tone)##sesd"].plurals[0] = "10xy: Режим канала (x: шум; y: тон)";
     strings["11xx: Set noise frequency##sesd"].plurals[0] = "11xx: Частота шума";
     strings["12xx: Setup envelope (refer to docs for more information)##sesd"].plurals[0] = "12xx: Настройка огибающей (см. инструкцию)";
-    strings["an improved version of the AY-3-8910 with a bigger frequency range, duty cycles, configurable noise and per-channel envelopes!##sesd"].plurals[0] = "улучшенная версия AY-3-8910 с большим диапазоном частот, настройкой скважности, настраиваемым шумом и огибвющей на каждый канал!";
+    strings["an improved version of the AY-3-8910 with a bigger frequency range, duty cycles, configurable noise and per-channel envelopes!##sesd"].plurals[0] = "улучшенная версия AY-3-8910 с большим диапазоном частот, настройкой скважности, настраиваемым шумом и огибающей на каждый канал!";
     strings["Commodore's successor to the PET.\nits square wave channels are more than just square...##sesd"].plurals[0] = "Компьютер Commodore, вышедший после PET.\nего каналы квадратных волн могут играть не только лишь квадратные волны...";
     strings["one channel of 1-bit wavetable which is better (and worse) than the PC Speaker.##sesd"].plurals[0] = "один канал 1-битной волновой таблицы, что лучше (или хуже), чем PC Speaker (пищалка).";
     strings["FM? nah... samples! Nintendo's answer to Sega.##sesd"].plurals[0] = "FM? не... сэмплы! Ответ Nintendo в сторону Sega.";
@@ -5259,7 +5543,7 @@ void DivLocale::addTranslationsRussian()
     strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.##sesd"].plurals[0] = "Taito попросили Yamaha вернуть два отсутствующих FM-канала, и Yamaha с радостью предоставила им этот чип.\nЭто версия в режиме расширенного канала, который превращает третий FM-канал в четыре оператора с независимыми нотами/частотами.";
     strings["so Taito asked Yamaha if they could get the two missing FM channels back, and Yamaha gladly provided them with this chip.\nthis one is in Extended Channel mode, which turns the third FM channel into four operators with independent notes/frequencies.\nthis one includes CSM mode control for special effects on Channel 3.##sesd"].plurals[0] = "Taito попросили Yamaha вернуть два отсутствующих FM-канала, и Yamaha с радостью предоставила им этот чип.\nЭто версия в режиме расширенного канала, который превращает третий FM-канал в четыре оператора с независимыми нотами/частотами.\nУ этой версии есть контроль режима CSM для специальных эффектов на третьем канале.";
     strings["this is the same thing as SegaPCM, but only exposes 5 of the channels for compatibility with DefleMask.##sesd"].plurals[0] = "это то же самое, что и SegaPCM, но доступно всего пять каналов для совместимости с DefleMask.";
-    strings["a sound chip used in several Seta/Allumer-manufactured arcade boards with too many channels of wavetable sound, which also are capable of sampled sound.##sesd"].plurals[0] = "звуковой чип, использовавшийся в нескольких аркадных автоматах Seta/Allumer. имеет слишком много каналов полновых таблиц, способных так же воспроизводить сэмплы.";
+    strings["a sound chip used in several Seta/Allumer-manufactured arcade boards with too many channels of wavetable sound, which also are capable of sampled sound.##sesd"].plurals[0] = "звуковой чип, использовавшийся в нескольких аркадных автоматах Seta/Allumer. имеет слишком много каналов волновых таблиц, способных так же воспроизводить сэмплы.";
     strings["10xx: Set waveform##sesd7"].plurals[0] = "10xx: Волна";
     strings["11xx: Set envelope shape##sesd"].plurals[0] = "11xx: Форма огибающей";
     strings["12xx: Set sample bank slot (0 to 7)##sesd"].plurals[0] = "12xx: Слот банка сэмплов (0-7)";
@@ -5346,6 +5630,7 @@ void DivLocale::addTranslationsRussian()
     strings["a SoC with wavetable sound hardware.##sesd"].plurals[0] = "СнК с таблично-волновым синтезатором звука.";
     strings["a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.##sesd"].plurals[0] = "игровая консоль с тремя каналами квадратных волн. вот что получается, если скрестить TIA и VIC.";
     strings["10xx: Set ring modulation (0: disable, 1: enable)##sesd"].plurals[0] = "10xx: Кольцевая модуляция (0: выкл., 1: вкл.)";
+    strings["11xx: Raw frequency (0-3E)##sesd"].plurals[0] = "11xx: Сырая частота (0-3E)";
     strings["another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.##sesd"].plurals[0] = "ещё одна система с пищалкой ZX Spectrum, на этот раз содержащая полноценные прямоугольные волны с регулировкой скважности и тремя уровнями громкости для каждого канала. Также имеется перекрывающий канал сэмплов с регулировкой частоты.";
     strings["12xx: Set pulse width##sesd1"].plurals[0] = "12xx: Скважность";
     strings["this PCM chip was widely used at Konami arcade boards in 1990-1992.##sesd"].plurals[0] = "этот ИКМ чип широко использовался в игровых автоматах Konami с 1990 по 1992.";
@@ -5380,6 +5665,13 @@ void DivLocale::addTranslationsRussian()
     strings["a fictional sound chip by Euly. similar to Ricoh 2A03, but all the duty cycles are different, noise has 32 pitches instead of 16 and you have four hard-coded waveforms on triangle channel.##sesd"].plurals[0] = "вымышленный звуковой чип за авторством Euly. почти как Ricoh 2A03, но все четыре скважности разные, у шума 32 частоты вместо 16, а на канале треугольной волны можно играть четыре предопределённые волны.";
     strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1, wave: 0 to 3)##sesd"].plurals[0] = "12xx: Скважность/режим шума (меандр: 0-3; шум: 0 или 1; волна: 0-3)";
     strings["19xx: Set wave linear counter (0 to 7F; 80 and higher halt)##sesd"].plurals[0] = "19xx: Линейный счётчик канала волны (0-7F; 80 и выше мгновенно останавливают волну)";
+    strings["additional PCM FIFO channels in Game Boy Advance driven directly by its DMA hardware.##sesd"].plurals[0] = "дополнительные ИКМ FIFO-каналы в Game Boy Advance с сигналом напрямую от аппаратного контроллера DMA.";
+    strings["additional PCM FIFO channels in Game Boy Advance driven by software mixing to provide up to sixteen sample channels.##sesd"].plurals[0] = "дополнительные ИКМ FIFO-каналы в Game Boy Advance, управляемые при помощи программного микширования, что даёт до 16 каналов сэмплов.";
+    strings["11xy: Set echo channel (x: left/right source; y: delay (0 disables))##sesd"].plurals[0] = "11xy: Канал эхо (x: левый/правый источник; y: задержка (0 отключает))";
+    strings["12xy: Toggle invert (x: left; y: right)##sesd"].plurals[0] = "12xy: Инверсия сигнала (x: лево; y: право)";
+    strings["a handheld video game console with two screens. it uses a stylus.##sesd"].plurals[0] = "портативная игровая консоль с двумя экранами. необходим стилус.";
+    strings["12xx: Set duty cycle (pulse: 0 to 7)##sesd"].plurals[0] = "12xx: Скважность (прямоуг.: 0-7)";
+    strings["1Fxx: Set global volume (0 to 7F)##sesd"].plurals[0] = "1Fxx: Глобальная громкость (0-7F)";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "это система, разработанная для тестирования.";
 
     strings["help! what's going on!"].plurals[0] = "помогите! что происходит!";

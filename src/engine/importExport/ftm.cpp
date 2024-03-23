@@ -19,12 +19,32 @@
 
 #include "importExport.h"
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 class DivEngine;
 
 #define CHECK_BLOCK_VERSION(x) \
   if (blockVersion>x) { \
     logW("incompatible block version %d for %s!",blockVersion,blockName); \
   }
+
+#define CHECK_SEQS if(index > 255 || type > 8 || size > 255) \
+{ \
+  lastError=_LE("too many sequences"); \
+  delete[] Indices; \
+  delete[] Types; \
+  delete[] file; \
+  return false; \
+}
 
 enum
 {
@@ -114,7 +134,7 @@ const int ftEffectMap[]={
   0x21, // 050B Sunsoft noise period
   -1, // VRC7 "custom patch port" - not supported?
   -1, // VRC7 "custom patch write"
-  -1, // delayed release - not supported yet
+  0xfc, // delayed release
   0x09, // select groove
   0xe6, // delayed note transpose
   0x11, // Namco 163 wave RAM offset
@@ -229,7 +249,7 @@ const int eftEffectMap[]={
   0x100,		// // // AY8930 extra volume bit
   -1, // VRC7 "custom patch port" - not supported?
   -1, // VRC7 "custom patch write"
-  -1, // delayed release - not supported yet
+  0xfc, // delayed release
   0x09, // select groove
   0xe6, // delayed note transpose
   0x11, // Namco 163 wave RAM offset
@@ -237,15 +257,15 @@ const int eftEffectMap[]={
   -1, // FDS auto FM - not supported yet
   -1, // phase reset - not supported
   -1, // harmonic - not supported
-  -1,								// // // Pulse width modulation effect
-  -1,     // // // Relative volume change
-  -1,    // // // SAA1099 noise mode
+  -1,		// // // Pulse width modulation effect
+  -1,   // // // Relative volume change
+  -1,   // // // SAA1099 noise mode
   0x13, // // // SID filter resonance
   0x40, // // // SID filter cutoff hi
   0x40, // // // SID filter cutoff lo
   0x14, // // // SID filter mode
-  -1,    // // // SID envelope parameters
-  -1,        // // // SID ringmod
+  -1,  // // // SID envelope parameters
+  -1,  // // // SID ringmod
 };
 
 const int eff_conversion_050[][2] = 
@@ -354,6 +374,15 @@ void copy_macro(DivInstrument* ins, DivInstrumentMacro* from, int macro_type, in
 
     if((DivMacroType)convert_macros_n163[macro_type] == DIV_MACRO_WAVE && ins->type == DIV_INS_N163)
     {
+      /*There are some modules where wave macro goes e.g. 0, 1, ..., 63. But there are only e.g. 25 waves. 
+      Furnace seems to default to the first wave if value in macro is higher than last occupied index in 
+      local wavetables list. Famitracker sticks to the last wavetable. That's why I cap the macro values so 
+      they never go out of bounds*/
+      if(to->val[i] >= (int)ins->std.local_waves.size() && (int)ins->std.local_waves.size() > 0)
+      {
+        to->val[i] = (int)ins->std.local_waves.size() - 1;
+      }
+
       to->val[i] |= (1 << 30); //referencing local wavetables!
     }
 
@@ -460,11 +489,12 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     unsigned char map_channels[DIV_MAX_CHANS];
     unsigned int hilightA=4;
     unsigned int hilightB=16;
-    double customHz=60;
+    double customHz=60.0;
 
     unsigned char fds_chan = 0xff;
     unsigned char vrc6_saw_chan = 0xff;
     unsigned char n163_chans[8] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
+    unsigned char vrc7_chans[6] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
 
     unsigned char vrc6_chans[2] = { 0xff, 0xff };
     unsigned char mmc5_chans[2] = { 0xff, 0xff };
@@ -490,7 +520,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
     if (!reader.seek((dnft && dnft_sig) ? 21 : 18,SEEK_SET)) {
       logE("premature end of file!");
-      lastError="incomplete file";
+      lastError=_LE("incomplete file");
       delete[] file;
       return false;
     }
@@ -499,7 +529,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
     if ((ds.version>0x0450 && !eft) || (eft && ds.version>0x0460)) {
       logE("incompatible version %x!",ds.version);
-      lastError="incompatible version";
+      lastError=_LE("incompatible version");
       delete[] file;
       return false;
     }
@@ -733,6 +763,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           for(int ch = 0; ch < 6; ch++)
           {
             map_channels[curr_chan] = map_ch;
+            vrc7_chans[ch] = map_ch;
             curr_chan++;
             map_ch++;
           }
@@ -835,7 +866,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           if(!eft || (eft && (expansions & 8) == 0)) //ignore since I have no idea how to tell apart E-FT versions which do or do not have PCM chan. Yes, this may lead to all the righer channels to be shifted but at least you still get note data!
           {
             logE("channel counts do not match! %d != %d",tchans,calcChans);
-            lastError="channel counts do not match";
+            lastError=_LE("channel counts do not match");
             delete[] file;
             return false;
           }
@@ -858,30 +889,54 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         ds.name=reader.readString(32);
         ds.author=reader.readString(32);
         ds.category=reader.readString(32);
+        ds.copyright=ds.category; //copyright seems to never show up in UI?
         ds.systemName="NES";
       } else if (blockName=="HEADER") {
         CHECK_BLOCK_VERSION(4);
-        unsigned char totalSongs=reader.readC();
+        unsigned char totalSongs=0;
+        if (blockVersion>=2) totalSongs=reader.readC();
         logV("%d songs:",totalSongs+1);
         ds.subsong.reserve(totalSongs);
-        for (int i=0; i<=totalSongs; i++) {
-          String subSongName=reader.readString();
-          ds.subsong.push_back(new DivSubSong);
-          ds.subsong[i]->name=subSongName;
-          ds.subsong[i]->hilightA=hilightA;
-          ds.subsong[i]->hilightB=hilightB;
-          if (customHz!=0) {
-            ds.subsong[i]->hz=customHz;
+        if (blockVersion>=3) 
+        {
+          for (int i=0; i<=totalSongs; i++) 
+          {
+            String subSongName=reader.readString();
+            ds.subsong.push_back(new DivSubSong);
+            ds.subsong[i]->name=subSongName;
+            ds.subsong[i]->hilightA=hilightA;
+            ds.subsong[i]->hilightB=hilightB;
+            if (customHz!=0)
+            {
+              ds.subsong[i]->hz=customHz;
 
-            ds.subsong[i]->virtualTempoN = (short)(150.0 / (float)customHz * (pal ? (50.0) : (60.0)));
+              ds.subsong[i]->virtualTempoD = (short)(2.5 * customHz);
+            }
+            logV("- %s",subSongName);
           }
-          logV("- %s",subSongName);
         }
+        else //one subsong
+        {
+          ds.subsong.push_back(new DivSubSong);
+          ds.subsong[0]->name="";
+          ds.subsong[0]->hilightA=hilightA;
+          ds.subsong[0]->hilightB=hilightB;
+          if (customHz!=0)
+          {
+            ds.subsong[0]->hz=customHz;
+
+            ds.subsong[0]->virtualTempoD = (short)(2.5 * customHz);
+          }
+          logV("one song");
+        }
+
         for (unsigned int i=0; i<tchans; i++) {
           // TODO: obey channel ID
           unsigned char chID=reader.readC();
           logV("for channel ID %d",chID);
-          for (int j=0; j<=totalSongs; j++) {
+
+          for (int j=0; j<=totalSongs; j++) 
+          {
             unsigned char effectCols=reader.readC();
 
             if(map_channels[i] == 0xfe)
@@ -911,7 +966,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         ds.insLen=reader.readI();
         if (ds.insLen<0 || ds.insLen>256) {
           logE("too many instruments/out of range!");
-          lastError="too many instruments/out of range";
+          lastError=_LE("too many instruments/out of range");
           delete[] file;
           return false;
         }
@@ -958,7 +1013,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               break;
             default: {
               logE("%d: invalid instrument type %d",insIndex,insType);
-              lastError="invalid instrument type";
+              lastError=_LE("invalid instrument type");
               delete[] file;
               return false;
             }
@@ -970,7 +1025,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               unsigned int totalSeqs=reader.readI();
               if (totalSeqs>5) {
                 logE("%d: too many sequences!",insIndex);
-                lastError="too many sequences";
+                lastError=_LE("too many sequences");
                 delete[] file;
                 return false;
               }
@@ -1008,7 +1063,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
               bool empty_note_map = true;
 
-              for (int j=0; j<dpcmNotes; j++) 
+              for (int j=0; j<96; j++) 
               {
                 if(ins->amiga.get_amiga_sample_map(j, true)->map != -1)
                 {
@@ -1028,7 +1083,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               unsigned int totalSeqs=reader.readI();
               if (totalSeqs>5) {
                 logE("%d: too many sequences!",insIndex);
-                lastError="too many sequences";
+                lastError=_LE("too many sequences");
                 delete[] file;
                 return false;
               }
@@ -1165,7 +1220,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               unsigned int totalSeqs=reader.readI();
               if (totalSeqs>5) {
                 logE("%d: too many sequences!",insIndex);
-                lastError="too many sequences";
+                lastError=_LE("too many sequences");
                 delete[] file;
                 return false;
               }
@@ -1217,7 +1272,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               unsigned int totalSeqs=reader.readI();
               if (totalSeqs>5) {
                 logE("%d: too many sequences!",insIndex);
-                lastError="too many sequences";
+                lastError=_LE("too many sequences");
                 delete[] file;
                 return false;
               }
@@ -1368,7 +1423,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   if (totalSeqs>5) 
                   {
                     logE("%d: too many sequences!",insIndex);
-                    lastError="too many sequences";
+                    lastError=_LE("too many sequences");
                     delete[] file;
                     return false;
                   }
@@ -1403,7 +1458,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
             default: {
               logE("%d: what's going on here?",insIndex);
-              lastError="invalid instrument type";
+              lastError=_LE("invalid instrument type");
               delete[] file;
               return false;
             }
@@ -1420,9 +1475,9 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         CHECK_BLOCK_VERSION(6);
         //reader.seek(blockSize,SEEK_CUR);
 
-        if(blockVersion < 3)
+        if(blockVersion < 2)
         {
-          lastError="sequences block version is too old";
+          lastError=_LE("sequences block version is too old");
           delete[] file;
           return false;
         }
@@ -1431,6 +1486,42 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 		    unsigned char* Types = new unsigned char[128 * 5];
 
         unsigned int seq_count = reader.readI();
+
+        if(blockVersion == 2)
+        {
+          for(unsigned int i = 0; i < seq_count; i++)
+          {
+            unsigned int index = reader.readI();
+            unsigned int type = reader.readI();
+            unsigned char size = reader.readC();
+
+            CHECK_SEQS
+
+            macros[index][type].len = size;
+
+            //logV("macro index %d type %d size %d", index, type, size);
+
+            for(int j = 0; j < size; j++)
+            {
+              unsigned char seq = reader.readC();
+              reader.readC(); //what
+              macros[index][type].val[j] = seq;
+
+              //logV("- %d", seq);
+            }
+
+            for(int k = 0; k < (int)ds.ins.size(); k++)
+            {
+              DivInstrument* ins=ds.ins[k];
+              if(sequenceIndex[k][type] == index && ins->type == DIV_INS_NES && hasSequence[k][type])
+              {
+                copy_macro(ins, &macros[index][type], type, 0);
+              }
+            }
+          }
+
+          goto end_seq;
+        }
 
         for(unsigned int i = 0; i < seq_count; i++)
         {
@@ -1441,6 +1532,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
           unsigned char size = reader.readC();
           unsigned int setting = 0;
+
+          CHECK_SEQS
 
           macros[index][type].len = size;
 
@@ -1524,6 +1617,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           }
         }
 
+        end_seq:;
+
         delete[] Indices;
         delete[] Types;
       } 
@@ -1588,18 +1683,18 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             s->speeds.val[0]=reader.readI();
           }
           if (blockVersion>=2) {
-            int temp = s->virtualTempoN;
             int tempo = reader.readI();
 
             logV("tempo %d", tempo);
             
             if(tempo == 0)
             {
-              s->virtualTempoN = 150.0; //TODO: make it properly
+              //s->virtualTempoN = 150;
+              s->virtualTempoN = s->virtualTempoD;
             }
             else
             {
-              s->virtualTempoN = (short)((float)temp * (float)tempo / 150.0);
+              s->virtualTempoN = (short)((float)s->virtualTempoN * (float)tempo / 150.0);
             }
 
             s->patLen=reader.readI();
@@ -1641,10 +1736,10 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           DivPattern* pat=ds.subsong[subs]->pat[map_channels[ch]].getPattern(patNum,true);
           for (int i=0; i<numRows; i++) {
             unsigned int row=0;
-            if (blockVersion>=2 && blockVersion<6) { // row index
-              row=reader.readI();
+            if (ds.version==0x200 || blockVersion >= 6) { // row index
+              row=(unsigned char)reader.readC();
             } else {
-              row=reader.readC();
+              row=reader.readI();
             }
 
             unsigned char nextNote=reader.readC();
@@ -1692,14 +1787,14 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             {
               if (nextVol<0x10) {
                 pat->data[row][3]=nextVol;
-                if(map_channels[ch] == vrc6_saw_chan)
+                if(map_channels[ch] == vrc6_saw_chan) //scale volume
                 {
-                  pat->data[row][3] = pat->data[row][3] * 42 / 15;
+                  pat->data[row][3] = (pat->data[row][3] * 42) / 15;
                 }
 
                 if(map_channels[ch] == fds_chan)
                 {
-                  pat->data[row][3] = pat->data[row][3] * 31 / 15;
+                  pat->data[row][3] = (pat->data[row][3] * 31) / 15;
                 }
               } 
               else 
@@ -1711,8 +1806,97 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
             int effectCols=ds.subsong[subs]->pat[map_channels[ch]].effectCols;
             if (blockVersion>=6) effectCols=4;
 
-            for (int j=0; j<effectCols; j++) {
-              unsigned char nextEffect=reader.readC();
+            if(ds.version == 0x200)
+            {
+              effectCols = 1;
+            }
+
+            unsigned char nextEffectVal=0;
+            unsigned char nextEffect=0;
+
+            for (int j=0; j<effectCols; j++) 
+            {
+              nextEffect=reader.readC();
+
+              if(nextEffect>0 && ((nextEffect < FT_EF_COUNT && !eft) || (nextEffect < EFT_EF_COUNT && eft)))
+              {
+                nextEffectVal=reader.readC();
+
+                if (blockVersion < 3) 
+                {
+                  if (nextEffect == FT_EF_PORTAOFF)
+                  {
+                    nextEffect = FT_EF_PORTAMENTO;
+                    nextEffectVal = 0;
+                  }
+                  else if (nextEffect == FT_EF_PORTAMENTO)
+                  {
+                    if (nextEffect < 0xFF)
+                      nextEffectVal++;
+                  }
+                }
+              }
+              else if (blockVersion<6)
+              {
+                nextEffectVal=reader.readC();
+              }
+
+              // Specific for version 2.0
+              if (ds.version == 0x0200 && j == 0) 
+              {
+                if (nextEffect == FT_EF_SPEED && nextEffectVal < 20)
+                  nextEffectVal++;
+
+                if (pat->data[row][3] == 0)
+                  pat->data[row][3] = 0xf;
+                else {
+                  pat->data[row][3]--;
+                  pat->data[row][3] &= 0x0F;
+                }
+
+                if (pat->data[row][0] == 0)
+                  pat->data[row][2] = -1;
+              }
+
+              if (blockVersion == 3) 
+              {
+                // Fix for VRC7 portamento
+                bool is_vrc7 = false;
+
+                for(int vrr = 0; vrr < 6; vrr++)
+                {
+                  if(map_channels[ch] == vrc7_chans[vrr])
+                  {
+                    is_vrc7 = true;
+                  }
+                }
+
+                if (is_vrc7) 
+                {
+                  switch (nextEffect) 
+                  {
+                    case FT_EF_PORTA_DOWN:
+                      nextEffect = FT_EF_PORTA_UP;
+                      break;
+                    case FT_EF_PORTA_UP:
+                      nextEffect = FT_EF_PORTA_DOWN;
+                      break;
+                    default: break;
+                  }
+                }
+                // FDS pitch effect fix
+                else if (map_channels[ch] == fds_chan) 
+                {
+                  switch (nextEffect) 
+                  {
+                    case FT_EF_PITCH:
+                      if (nextEffectVal != 0x80)
+                        nextEffectVal = (0x100 - nextEffectVal) & 0xFF;
+                      break;
+                    default: break;
+                  }
+                }
+              }
 
               for(int v = 0; v < 8; v++)
               {
@@ -1743,9 +1927,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
                 stop:;
               }
-
-              unsigned char nextEffectVal=0;
-              if (nextEffect!=0 || blockVersion<6) nextEffectVal=reader.readC();
               
               //logW("next effect %d val %d", nextEffect, nextEffectVal);
 
@@ -1850,16 +2031,16 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
           memset(sample->dataDPCM, 0xAA, true_size);
 
-          reader.read(sample->dataDPCM,true_size);
+          reader.read(sample->dataDPCM,sample_len);
         }
 
-        int last_non_empty_sample = 0xff;
+        int last_non_empty_sample = 0;
 
         for(int i = 255; i > 0; i--)
         {
           DivSample* s = ds.sample[i];
 
-          if(s->dataDPCM)
+          if(s->dataDPCM && s->lengthDPCM > 0)
           {
             last_non_empty_sample = i;
             break;
@@ -1890,6 +2071,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
           unsigned char size = reader.readC();
           unsigned int setting = 0;
+
+          CHECK_SEQS
 
           macros[index][type].len = size;
 
@@ -2006,6 +2189,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           unsigned char size = reader.readC();
           unsigned int setting = 0;
 
+          CHECK_SEQS
+
           macros[index][type].len = size;
 
           unsigned int loop = reader.readI();
@@ -2057,6 +2242,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           unsigned char size = reader.readC();
           unsigned int setting = 0;
 
+          CHECK_SEQS
+
           macros[index][type].len = size;
 
           unsigned int loop = reader.readI();
@@ -2105,6 +2292,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
           unsigned char size = reader.readC();
           unsigned int setting = 0;
+
+          CHECK_SEQS
 
           macros[index][type].len = size;
 
@@ -2195,20 +2384,20 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
         reader.seek(blockSize,SEEK_CUR);
       } else {
         logE("block %s is unknown!",blockName);
-        lastError="unknown block "+blockName;
+        lastError=_LE("unknown block ")+blockName;
         delete[] file;
         return false;
       }
 
       if ((reader.tell()-blockStart)!=blockSize) {
         logE("block %s is incomplete! reader.tell()-blockStart %d blockSize %d",blockName, (reader.tell()-blockStart),blockSize);
-        lastError="incomplete block "+blockName;
+        lastError=_LE("incomplete block ")+blockName;
         delete[] file;
         return false;
       }
     }
 
-    //addWarning("FamiTracker import is experimental!");
+    ds.insLen = ds.ins.size();
 
     if(ds.insLen > 0)
     {
@@ -2216,6 +2405,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
       {
         for(int i = 0; i < 128; i++)
         {
+          if (ds.ins.empty()) break;
           int index = i >= (int)ds.insLen ? ((int)ds.insLen - 1) : i;
           if(index < 0) index = 0;
           DivInstrument* ins = ds.ins[index];
@@ -2284,7 +2474,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == i) //instrument
               {
                 DivInstrument* ins = ds.ins[i];
-                bool go_to_end = false;
 
                 if(ins->type != DIV_INS_VRC6 && (ii == vrc6_chans[0] || ii == vrc6_chans[1])) //we encountered non-VRC6 instrument on VRC6 channel
                 {
@@ -2293,7 +2482,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
                   copyInstrument(ds.ins[ds.ins.size() - 1], ins);
 
-                  ds.ins[ds.ins.size() - 1]->name += " [VRC6 copy]";
+                  ds.ins[ds.ins.size() - 1]->name += _LE(" [VRC6 copy]");
                   ds.ins[ds.ins.size() - 1]->amiga.useSample = false;
                   ds.ins[ds.ins.size() - 1]->amiga.useNoteMap = false;
 
@@ -2314,11 +2503,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   ins_vrc6_conv[i][0] = i;
                   ins_vrc6_conv[i][1] = ds.ins.size() - 1;
 
-                  go_to_end = true;
-                }
-
-                if(go_to_end)
-                {
                   goto end1;
                 }
               }
@@ -2344,7 +2528,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == i) //instrument
               {
                 DivInstrument* ins = ds.ins[i];
-                bool go_to_end = false;
 
                 if(ins->type != DIV_INS_VRC6_SAW && ii == vrc6_saw_chan) //we encountered non-VRC6-saw instrument on VRC6 saw channel
                 {
@@ -2353,7 +2536,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
                   copyInstrument(ds.ins[ds.ins.size() - 1], ins);
 
-                  ds.ins[ds.ins.size() - 1]->name += " [VRC6 saw copy]";
+                  ds.ins[ds.ins.size() - 1]->name += _LE(" [VRC6 saw copy]");
                   ds.ins[ds.ins.size() - 1]->amiga.useSample = false;
                   ds.ins[ds.ins.size() - 1]->amiga.useNoteMap = false;
 
@@ -2374,11 +2557,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                   ins_vrc6_saw_conv[i][0] = i;
                   ins_vrc6_saw_conv[i][1] = ds.ins.size() - 1;
 
-                  go_to_end = true;
-                }
-
-                if(go_to_end)
-                {
                   goto end2;
                 }
               }
@@ -2404,7 +2582,6 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
               if(ds.subsong[j]->pat[ii].data[k]->data[l][2] == i) //instrument
               {
                 DivInstrument* ins = ds.ins[i];
-                bool go_to_end = false;
 
                 if(ins->type != DIV_INS_NES && (ii == mmc5_chans[0] || ii == mmc5_chans[1] || ii < 5)) //we encountered VRC6 (or whatever?) instrument on NES/MMC5 channel
                 {
@@ -2413,18 +2590,47 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
 
                   copyInstrument(ds.ins[ds.ins.size() - 1], ins);
 
-                  ds.ins[ds.ins.size() - 1]->name += " [NES copy]";
+                  ds.ins[ds.ins.size() - 1]->name += _LE(" [NES copy]");
 
                   ds.ins[ds.ins.size() - 1]->type = DIV_INS_NES;
+
+                  if(ins->type == DIV_INS_VRC6)
+                  {
+                    if(insnew->std.get_macro(DIV_MACRO_DUTY, false)->len > 0) //convert duties for NES
+                    {
+                      for(int mm = 0; mm < insnew->std.get_macro(DIV_MACRO_DUTY, false)->len; mm++)
+                      {
+                        switch(insnew->std.get_macro(DIV_MACRO_DUTY, false)->val[mm])
+                        {
+                          case 0:
+                          case 1:
+                          {
+                            insnew->std.get_macro(DIV_MACRO_DUTY, false)->val[mm] = 0;
+                            break;
+                          }
+                          case 2:
+                          case 3:
+                          case 4:
+                          case 5:
+                          {
+                            insnew->std.get_macro(DIV_MACRO_DUTY, false)->val[mm] = 1;
+                            break;
+                          }
+                          case 6:
+                          case 7:
+                          {
+                            insnew->std.get_macro(DIV_MACRO_DUTY, false)->val[mm] = 2;
+                            break;
+                          }
+                          default: break;
+                        }
+                      }
+                    }
+                  }
 
                   ins_nes_conv[i][0] = i;
                   ins_nes_conv[i][1] = ds.ins.size() - 1;
 
-                  go_to_end = true;
-                }
-
-                if(go_to_end)
-                {
                   goto end3;
                 }
               }
@@ -2476,9 +2682,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     ds.sampleLen = ds.sample.size();
     ds.waveLen = ds.wave.size();
 
+    //set compat flags
     ds.dontDisableVolSlideOnZero = true;
     ds.resetNesSweep = true;
     ds.stopE1E2OnNoteOn = true;
+    ds.slowerVolSlide = true;
 
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;
@@ -2498,7 +2706,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     }
   } catch (EndOfFileException& e) {
     logE("premature end of file!");
-    lastError="incomplete file";
+    lastError=_LE("incomplete file");
     delete[] file;
     return false;
   }

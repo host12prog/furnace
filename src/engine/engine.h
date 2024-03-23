@@ -54,8 +54,8 @@ class DivWorkPool;
 
 #define DIV_UNSTABLE
 
-#define DIV_VERSION "dev193"
-#define DIV_ENGINE_VERSION 193
+#define DIV_VERSION "dev196"
+#define DIV_ENGINE_VERSION 196
 // for imports
 #define DIV_VERSION_MOD 0xff01
 #define DIV_VERSION_FC 0xff02
@@ -101,13 +101,12 @@ struct DivChannelState {
   std::vector<DivDelayedCommand> delayed;
   int note, oldNote, lastIns, pitch, portaSpeed, portaNote;
   bool isE1E2;
-  int volume, volSpeed, cut, rowDelay, volMax;
+  int volume, volSpeed, cut, legatoDelay, legatoTarget, rowDelay, volMax;
   int delayOrder, delayRow, retrigSpeed, retrigTick;
   int vibratoDepth, vibratoRate, vibratoPos, vibratoPosGiant, vibratoDir, vibratoFine;
   int tremoloDepth, tremoloRate, tremoloPos;
   int pw_slide, pw_slide_speed, cutoff_slide, cutoff_slide_speed;
-  int transposeDelay, transposeSemitones;
-  unsigned char arp, arpStage, arpTicks, panL, panR, panRL, panRR, lastVibrato, lastPorta;
+  unsigned char arp, arpStage, arpTicks, panL, panR, panRL, panRR, lastVibrato, lastPorta, cutType;
   bool doNote, legato, portaStop, keyOn, keyOff, nowYouCanStop, stopOnOff, releasing;
   bool arpYield, delayLocked, inPorta, scheduledSlideReset, shorthandPorta, wasShorthandPorta, noteOnInhibit, resetArp;
   bool wentThroughNote, goneThroughNote;
@@ -127,6 +126,8 @@ struct DivChannelState {
     volume(0x7f00),
     volSpeed(0),
     cut(-1),
+    legatoDelay(-1),
+    legatoTarget(0),
     rowDelay(0),
     volMax(0),
     delayOrder(0),
@@ -146,8 +147,6 @@ struct DivChannelState {
     pw_slide_speed(0),
     cutoff_slide(0),
     cutoff_slide_speed(0),
-    transposeDelay(-1),
-    transposeSemitones(0xff),
     arp(0),
     arpStage(-1),
     arpTicks(1),
@@ -157,6 +156,7 @@ struct DivChannelState {
     panRR(0),
     lastVibrato(0),
     lastPorta(0),
+    cutType(0),
     doNote(false),
     legato(false),
     portaStop(false),
@@ -452,6 +452,7 @@ class DivEngine {
   int curMidiTimePiece, curMidiTimeCode;
   unsigned char extValue, pendingMetroTick;
   DivGroovePattern speeds;
+  short virtualTempoN, virtualTempoD;
   short tempoAccum;
   DivStatusView view;
   DivHaltPositions haltOn;
@@ -900,6 +901,13 @@ class DivEngine {
     // get current Hz
     float getCurHz();
 
+    // get virtual tempo
+    short getVirtualTempoN();
+    short getVirtualTempoD();
+
+    // tell engine about virtual tempo changes
+    void virtualTempoChanged();
+
     // get time
     int getTotalTicks(); // 1/1000000th of a second
     int getTotalSeconds();
@@ -1280,7 +1288,7 @@ class DivEngine {
     void everythingOK();
 
     // terminate the engine.
-    bool quit();
+    bool quit(bool saveConfig=true);
 
     unsigned char* yrw801ROM;
     unsigned char* tg100ROM;
@@ -1361,6 +1369,8 @@ class DivEngine {
       curMidiTimeCode(0),
       extValue(0),
       pendingMetroTick(0),
+      virtualTempoN(150),
+      virtualTempoD(150),
       tempoAccum(0),
       view(DIV_STATUS_NOTHING),
       haltOn(DIV_HALT_NONE),

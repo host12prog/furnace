@@ -71,8 +71,17 @@ void DivPlatformPV1000::tick(bool sysTick) {
       }
       chan[i].freqChanged=true;
     }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->had) {
+      chan[i].freq=chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val;
+      chan[i].freqChanged=true;
+      raw_freq[i] = true;
+    }
     if (chan[i].freqChanged || chan[i].keyOn || chan[i].keyOff) {
-      chan[i].freq=0x3f-parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,chan[i].pitch2,chipClock,CHIP_DIVIDER);
+      if(!raw_freq[i])
+      {
+        chan[i].freq=0x3f-parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,true,0,chan[i].pitch2,chipClock,CHIP_DIVIDER);
+      }
+      
       if (chan[i].freq<0) chan[i].freq=0;
       if (chan[i].freq>62) chan[i].freq=62;
       if (isMuted[i]) chan[i].keyOn=false;
@@ -88,6 +97,8 @@ void DivPlatformPV1000::tick(bool sysTick) {
       }
       chan[i].freqChanged=false;
     }
+
+    raw_freq[i] = false;
   }
 }
 
@@ -136,6 +147,11 @@ int DivPlatformPV1000::dispatch(DivCommand c) {
     case DIV_CMD_PITCH:
       chan[c.chan].pitch=c.value;
       chan[c.chan].freqChanged=true;
+      break;
+    case DIV_CMD_RAW_FREQ:
+      chan[c.chan].freq = c.value % 63;
+      raw_freq[c.chan] = true;
+      chan[c.chan].freqChanged = true;
       break;
     case DIV_CMD_STD_NOISE_MODE: // ring modulation
       if (c.value&1) {

@@ -31,11 +31,13 @@
 //     }
 //   );
 // flags are a string of new line-separated values.
+// use SUB_ENTRY instead of ENTRY to add sub-entries to the previous entry.
 
 #define CH FurnaceGUISysDefChip
 #define CATEGORY_BEGIN(x,y) cat=FurnaceGUISysCategory(x,y);
 #define CATEGORY_END sysCategories.push_back(cat);
-#define ENTRY(...) cat.systems.push_back(FurnaceGUISysDef(__VA_ARGS__));
+#define ENTRY(...) \
+  cat.systems.push_back(FurnaceGUISysDef(__VA_ARGS__));
 
 void FurnaceGUI::initSystemPresets() {
   sysCategories.clear();
@@ -128,6 +130,18 @@ void FurnaceGUI::initSystemPresets() {
   ENTRY(
     "Game Boy", {
       CH(DIV_SYSTEM_GB, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    _L("Game Boy Advance (no software mixing)##sgpr"), {
+      CH(DIV_SYSTEM_GB, 1.0f, 0, "chipType=3"),
+      CH(DIV_SYSTEM_GBA_DMA, 0.5f, 0, ""),
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    _L("Game Boy Advance (with MinMod)##sgpr"), {
+      CH(DIV_SYSTEM_GB, 1.0f, 0, "chipType=3"),
+      CH(DIV_SYSTEM_GBA_MINMOD, 0.5f, 0, ""),
     }, NULL, MENU_STATUS_USUAL
   );
   ENTRY(
@@ -270,6 +284,21 @@ void FurnaceGUI::initSystemPresets() {
     "Casio PV-1000", {
       CH(DIV_SYSTEM_PV1000, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "Nintendo DS (NDS)", {
+      CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "Game Boy Advance (DMA)", {
+      CH(DIV_SYSTEM_GBA_DMA, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_LIST_START
+  );
+  ENTRY(
+    "Game Boy Advance (MinMod)", {
+      CH(DIV_SYSTEM_GBA_MINMOD, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_LIST_END
   );
   CATEGORY_END;
 
@@ -2795,6 +2824,8 @@ void FurnaceGUI::initSystemPresets() {
   );
   CATEGORY_END;
 
+  CATEGORY_BEGIN(_L("User##sgpr"),_L("system presets that you have saved.##sgpr"));
+  CATEGORY_END;
 
   CATEGORY_BEGIN("FM",_L("chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.##sgpr"));
   ENTRY(
@@ -3224,6 +3255,21 @@ void FurnaceGUI::initSystemPresets() {
       CH(DIV_SYSTEM_C219, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
   );
+  ENTRY(
+    "Nintendo DS (NDS)", {
+      CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_USUAL
+  );
+  ENTRY(
+    "Game Boy Advance (DMA)", {
+      CH(DIV_SYSTEM_GBA_DMA, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_LIST_START
+  );
+  ENTRY(
+    "Game Boy Advance (MinMod)", {
+      CH(DIV_SYSTEM_GBA_MINMOD, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_LIST_END
+  );
   CATEGORY_END;
 
   CATEGORY_BEGIN(_L("Wavetable##sgpr"),_L("chips which use user-specified waveforms to generate sound.##sgpr"));
@@ -3407,6 +3453,11 @@ void FurnaceGUI::initSystemPresets() {
       CH(DIV_SYSTEM_5E01, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
   );
+  ENTRY(
+    "Nintendo DS (NDS)", {
+      CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_USUAL
+  );
   CATEGORY_END;
 
   CATEGORY_BEGIN(_L("DefleMask-compatible##sgpr"),_L("these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"));
@@ -3514,4 +3565,13 @@ FurnaceGUISysDef::FurnaceGUISysDef(const char* n, std::initializer_list<FurnaceG
   if (extra) {
     definition+=extra;
   }
+}
+
+// functions for loading/saving user presets
+bool loadUserPresets(bool redundancy) {
+  return true;
+}
+
+bool saveUserPresets(bool redundancy) {
+  return true;
 }

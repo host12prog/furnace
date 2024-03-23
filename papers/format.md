@@ -240,7 +240,9 @@ size | description
      |   - 0xd2: Ensoniq ES5503 (hard pan) - 32 channels
      |   - 0xd4: PowerNoise - 4 channels
      |   - 0xd5: Dave - 6 channels
-     |   - 0xd6: Nintendo DS - 16 channels (UNAVAILABLE)
+     |   - 0xd6: Nintendo DS - 16 channels
+     |   - 0xd7: Game Boy Advance (direct) - 2 channels
+     |   - 0xd8: Game Boy Advance (MinMod) - 16 channels
      |   - 0xde: YM2610B extended - 19 channels
      |   - 0xe0: QSound - 19 channels
      |   - 0xf0: SID2 - 3 channels
@@ -565,9 +567,13 @@ size | description
      | - 4: QSound ADPCM
      | - 5: ADPCM-A
      | - 6: ADPCM-B
+     | - 7: K05 ADPCM
      | - 8: 8-bit PCM
      | - 9: BRR (SNES)
      | - 10: VOX
+     | - 11: 8-bit μ-law PCM
+     | - 12: C219 PCM
+     | - 13: IMA ADPCM
      | - 16: 16-bit PCM
   1  | loop direction (>=123) or reserved
      | - 0: forward

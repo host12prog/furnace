@@ -77,6 +77,7 @@
 #define ICON_FUR_INS_GBA_MINMOD u8"\ue13d"
 #define ICON_FUR_INS_KURUMITSU u8"\ue13e"
 #define ICON_FUR_INS_SID2 u8"\ue13f"
+#define ICON_FUR_INS_NDS u8"\ue140"
 
 // sample editor
 #define ICON_FUR_SAMPLE_APPLY_SILENCE u8"\ue200"

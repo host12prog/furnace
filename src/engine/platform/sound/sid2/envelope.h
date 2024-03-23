@@ -17,6 +17,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //  ---------------------------------------------------------------------------
 #include "siddefs.h"
+#include <stdint.h>
 
 // ----------------------------------------------------------------------------
 // A 15 bit counter is used to implement the envelope rates, in effect

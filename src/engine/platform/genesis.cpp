@@ -143,7 +143,7 @@ void DivPlatformGenesis::acquire_nuked(short** buf, size_t len) {
       if (!writes.empty()) {
         QueuedWrite& w=writes.front();
         if (w.addrOrVal) {
-          //logV("%.3x = %.2x",w.addr,w.val);
+          //logV("%.3x=%.2x",w.addr,w.val);
           OPN2_Write(&fm,0x1+((w.addr>>8)<<1),w.val);
           regPool[w.addr&0x1ff]=w.val;
           writes.pop_front();

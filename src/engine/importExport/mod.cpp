@@ -19,6 +19,17 @@
 
 #include "importExport.h"
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 class DivEngine;
 
 bool DivEngine::loadMod(unsigned char* file, size_t len) {
@@ -439,10 +450,10 @@ bool DivEngine::loadMod(unsigned char* file, size_t len) {
     success=true;
   } catch (EndOfFileException& e) {
     //logE("premature end of file!");
-    lastError="incomplete file";
+    lastError=_LE("incomplete file");
   } catch (InvalidHeaderException& e) {
     //logE("invalid info header!");
-    lastError="invalid info header!";
+    lastError=_LE("invalid info header!");
   }
   return success;
 }

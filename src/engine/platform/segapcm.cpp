@@ -23,6 +23,17 @@
 #include <string.h>
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define rWrite(a,v) if (!skipRegisterWrites) {writes.push(QueuedWrite(a,v)); if (dumpWrites) {addWrite(a,v);} }
 #define chWrite(c,a,v) rWrite(((c)<<3)+(a),v)
 
@@ -493,7 +504,7 @@ void DivPlatformSegaPCM::renderSamples(int sysID) {
   memset(sampleEndSegaPCM,0,256);
 
   memCompo=DivMemoryComposition();
-  memCompo.name="Sample ROM";
+  memCompo.name=_LE("Sample ROM");
   
   for (int i=0; i<parent->song.sampleLen; i++) {
     DivSample* sample=parent->getSample(i);
@@ -509,7 +520,7 @@ void DivPlatformSegaPCM::renderSamples(int sysID) {
     sampleLoaded[i]=true;
     if (memPos>=2097152) break;
     sampleOffSegaPCM[i]=memPos;
-    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+alignedSize));
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+alignedSize));
     for (unsigned int j=0; j<alignedSize; j++) {
       if (j>=sample->samples) {
         sampleMem[memPos++]=0;

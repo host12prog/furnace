@@ -485,6 +485,8 @@ extern/adpcm/yma_codec.c
 extern/adpcm/ymb_codec.c
 extern/adpcm/ymz_codec.c
 
+extern/adpcm-xq/adpcm-lib.c
+
 extern/opn/ym3438.c
 extern/Nuked-PSG/ympsg.c
 extern/opm/opm.c
@@ -625,6 +627,8 @@ src/engine/platform/sound/es5503.cpp
 
 src/engine/platform/sound/dave/dave.cpp
 
+src/engine/platform/sound/nds.cpp
+
 src/engine/platform/oplAInterface.cpp
 src/engine/platform/ym2608Interface.cpp
 src/engine/platform/ym2610Interface.cpp
@@ -729,6 +733,9 @@ src/engine/platform/esfm.cpp
 src/engine/platform/es5503.cpp
 src/engine/platform/powernoise.cpp
 src/engine/platform/dave.cpp
+src/engine/platform/gbadma.cpp
+src/engine/platform/gbaminmod.cpp
+src/engine/platform/nds.cpp
 src/engine/platform/pcmdac.cpp
 src/engine/platform/dummy.cpp
 
@@ -754,6 +761,7 @@ src/engine/importExport/opm.cpp
 src/engine/importExport/opni.cpp
 src/engine/importExport/s3i.cpp
 src/engine/importExport/sbi.cpp
+src/engine/importExport/text.cpp
 src/engine/importExport/tfi.cpp
 src/engine/importExport/vgi.cpp
 src/engine/importExport/wopl.cpp
@@ -931,7 +939,10 @@ src/gui/inst/ymz280b.cpp
 src/gui/inst/powernoise.cpp
 src/gui/inst/powernoise_slope.cpp
 src/gui/inst/dave.cpp
+src/gui/inst/gbadma.cpp
+src/gui/inst/gbaminmod.cpp
 src/gui/inst/sid2.cpp
+src/gui/inst/nds.cpp
 
 src/gui/inst/wavetable.cpp
 

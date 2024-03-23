@@ -19,7 +19,81 @@
 
 #include "importExport.h"
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 class DivEngine;
+
+// known version numbers:
+// - 27: v1.1.7
+//   - current format version
+//   - adds sample start/end points
+// - 26: v1.1.3
+//   - changes height of FDS wave to 6-bit (it was 4-bit before)
+// - 25: v1.1
+//   - adds pattern names (in a rather odd way)
+//     - v1.1.4 fixes these but breaks old songs (yeah)
+//   - introduces SMS+OPLL system
+// - 24: v0.12/0.13/1.0
+//   - changes pattern length from char to int, probably to allow for size 256
+// - 23: ???
+//   - what happened here?
+// - 20: v11.1 (?)
+//   - E5xx effect range is now ±1 semitone
+// - 19: v11
+//   - introduces Arcade system
+//   - changes to the FM instrument format due to YMU759 being dropped
+// - 18: v10
+//   - radically changes STD instrument for Game Boy
+// - 17: v9
+//   - changes C64 volIsCutoff flag from int to char for unknown reasons
+// - 16: v8 (?)
+//   - introduces C64 system
+// - 15: v7 (?)
+// - 14: v6 (?)
+//   - introduces NES system
+//   - changes macro and wave values from char to int
+// - 13: v5.1
+//   - introduces PC Engine system in later version (how?)
+//   - stores highlight in file
+// - 12: v5 (?)
+//   - introduces Game Boy system
+//   - introduces wavetables
+// - 11: ???
+//   - introduces Sega Master System
+//   - custom Hz support
+//   - instrument type (FM/STD) present
+//   - prior to this version the instrument type depended on the system
+// - 10: ???
+//   - introduces multiple effect columns
+// - 9: v3.9
+//   - introduces Genesis system
+//   - introduces system number
+//   - patterns now stored in current known format
+// - 8: ???
+//   - only used in the Medivo YMU cover
+// - 7: ???
+//   - only present in a later version of First.dmf
+//   - pattern format changes: empty field is 0xFF instead of 0x80
+//   - instrument now stored in pattern
+// - 5: BETA 3
+//   - adds arpeggio tick
+// - 4: BETA 2
+//   - possibly adds instrument number (stored in channel)?
+//   - cannot confirm as I don't have any version 4 modules
+// - 3: BETA 1
+//   - possibly the first version that could save
+//   - basic format, no system number, 16 instruments, one speed, YMU759-only
+//   - patterns were stored in a different format (chars instead of shorts) and no instrument
+//   - if somebody manages to find a version 2 or even 1 module, please tell me as it will be worth a lot
 
 static double samplePitches[11]={
   0.1666666666, 0.2, 0.25, 0.333333333, 0.5,
@@ -46,7 +120,7 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
 
     if (!reader.seek(16,SEEK_SET)) {
       logE("premature end of file!");
-      lastError="incomplete file";
+      lastError=_LE("incomplete file");
       delete[] file;
       return false;
     }
@@ -54,7 +128,7 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
     logI("module version %d (0x%.2x)",ds.version,ds.version);
     if (ds.version>0x1b) {
       logE("this version is not supported by Furnace yet!");
-      lastError="this version is not supported by Furnace yet";
+      lastError=_LE("this version is not supported by Furnace yet");
       delete[] file;
       return false;
     }
@@ -70,7 +144,7 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
     }
     if (ds.system[0]==DIV_SYSTEM_NULL) {
       logE("invalid system 0x%.2x!",sys);
-      lastError="system not supported. running old version?";
+      lastError=_LE("system not supported. running old version?");
       delete[] file;
       return false;
     }
@@ -224,25 +298,25 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
 
     if (ds.subsong[0]->patLen<0) {
       logE("pattern length is negative!");
-      lastError="pattern lengrh is negative!";
+      lastError=_LE("pattern length is negative!");
       delete[] file;
       return false;
     }
     if (ds.subsong[0]->patLen>256) {
       logE("pattern length is too large!");
-      lastError="pattern length is too large!";
+      lastError=_LE("pattern length is too large!");
       delete[] file;
       return false;
     }
     if (ds.subsong[0]->ordersLen<0) {
       logE("song length is negative!");
-      lastError="song length is negative!";
+      lastError=_LE("song length is negative!");
       delete[] file;
       return false;
     }
     if (ds.subsong[0]->ordersLen>127) {
       logE("song is too long!");
-      lastError="song is too long!";
+      lastError=_LE("song is too long!");
       delete[] file;
       return false;
     }
@@ -278,7 +352,7 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
           break;
       }
       ds.subsong[0]->timeBase=0;
-      addWarning("Yamaha YMU759 emulation is incomplete! please migrate your song to the OPL3 system.");
+      addWarning(_LE("Yamaha YMU759 emulation is incomplete! please migrate your song to the OPL3 system."));
     }
 
     logV("%x",reader.tell());
@@ -289,7 +363,7 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
         ds.subsong[0]->orders.ord[i][j]=reader.readC();
         if (ds.subsong[0]->orders.ord[i][j]>0x7f) {
           logE("order at %d, %d out of range! (%d)",i,j,ds.subsong[0]->orders.ord[i][j]);
-          lastError=fmt::sprintf("order at %d, %d out of range! (%d)",i,j,ds.subsong[0]->orders.ord[i][j]);
+          lastError=fmt::sprintf(_LE("order at %d, %d out of range! (%d)"),i,j,ds.subsong[0]->orders.ord[i][j]);
           delete[] file;
           return false;
         }
@@ -387,7 +461,7 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
         logD("ALG %d FB %d FMS %d AMS %d OPS %d",ins->fm.alg,ins->fm.fb,ins->fm.fms,ins->fm.ams,ins->fm.ops);
         if (ins->fm.ops!=2 && ins->fm.ops!=4) {
           logE("invalid op count %d. did we read it wrong?",ins->fm.ops);
-          lastError="file is corrupt or unreadable at operators";
+          lastError=_LE("file is corrupt or unreadable at operators");
           delete[] file;
           return false;
         }
@@ -658,7 +732,7 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
         }
         if (wave->len>65) {
           logE("invalid wave length %d. are we doing something wrong?",wave->len);
-          lastError="file is corrupt or unreadable at wavetables";
+          lastError=_LE("file is corrupt or unreadable at wavetables");
           delete[] file;
           return false;
         }
@@ -701,7 +775,7 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
       logD("%d fx rows: %d",i,chan.effectCols);
       if (chan.effectCols>4 || chan.effectCols<1) {
         logE("invalid effect column count %d. are you sure everything is ok?",chan.effectCols);
-        lastError="file is corrupt or unreadable at effect columns";
+        lastError=_LE("file is corrupt or unreadable at effect columns");
         delete[] file;
         return false;
       }
@@ -828,7 +902,7 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
       unsigned char* adpcmData;
       if (length<0) {
         logE("invalid sample length %d. are we doing something wrong?",length);
-        lastError="file is corrupt or unreadable at samples";
+        lastError=_LE("file is corrupt or unreadable at samples");
         delete[] file;
         return false;
       }
@@ -918,19 +992,19 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
           if (ds.version>=0x1b) {
             if (cutStart<0 || cutStart>scaledLen) {
               logE("cutStart is out of range! (%d, scaledLen: %d)",cutStart,scaledLen);
-              lastError="file is corrupt or unreadable at samples";
+              lastError=_LE("file is corrupt or unreadable at samples");
               delete[] file;
               return false;
             }
             if (cutEnd<0 || cutEnd>scaledLen) {
               logE("cutEnd is out of range! (%d, scaledLen: %d)",cutEnd,scaledLen);
-              lastError="file is corrupt or unreadable at samples";
+              lastError=_LE("file is corrupt or unreadable at samples");
               delete[] file;
               return false;
             }
             if (cutEnd<cutStart) {
               logE("cutEnd %d is before cutStart %d. what's going on?",cutEnd,cutStart);
-              lastError="file is corrupt or unreadable at samples";
+              lastError=_LE("file is corrupt or unreadable at samples");
               delete[] file;
               return false;
             }
@@ -1029,11 +1103,12 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
       ds.systemFlags[0].set("dpcmMode",false);
     }
 
-    // C64 no key priority, reset time and multiply relative
+    // C64 no key priority, reset time, multiply relative and macro race
     if (ds.system[0]==DIV_SYSTEM_C64_8580 || ds.system[0]==DIV_SYSTEM_C64_6581) {
       ds.systemFlags[0].set("keyPriority",false);
       ds.systemFlags[0].set("initResetTime",1);
       ds.systemFlags[0].set("multiplyRel",true);
+      ds.systemFlags[0].set("macroRace",true);
     }
 
     // OPM broken pitch
@@ -1041,7 +1116,7 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
       ds.systemFlags[0].set("brokenPitch",true);
     }
 
-    ds.systemName=getSongSystemLegacyName(ds,!getConfInt("noMultiSystem",0));
+    ds.systemName=_LE(getSongSystemLegacyName(ds,!getConfInt("noMultiSystem",0)).c_str());
 
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;
@@ -1061,7 +1136,7 @@ bool DivEngine::loadDMF(unsigned char* file, size_t len) {
     }
   } catch (EndOfFileException& e) {
     logE("premature end of file!");
-    lastError="incomplete file";
+    lastError=_LE("incomplete file");
     delete[] file;
     return false;
   }
@@ -1074,7 +1149,7 @@ SafeWriter* DivEngine::saveDMF(unsigned char version) {
   if (version>26) version=26;
   if (version<24) {
     logE("cannot save in this version!");
-    lastError="invalid version to save in! this is a bug!";
+    lastError=_LE("invalid version to save in! this is a bug!");
     return NULL;
   }
   // check whether system is compound
@@ -1102,60 +1177,60 @@ SafeWriter* DivEngine::saveDMF(unsigned char version) {
   // fail if more than one system
   if (!isFlat && song.systemLen!=1) {
       logE("cannot save multiple systems in this format!");
-      lastError="multiple systems not possible on .dmf";
+      lastError=_LE("multiple systems not possible on .dmf");
       return NULL;
     }
   // fail if this is an YMU759 song
   if (song.system[0]==DIV_SYSTEM_YMU759) {
     logE("cannot save YMU759 song!");
-    lastError="YMU759 song saving is not supported";
+    lastError=_LE("YMU759 song saving is not supported");
     return NULL;
   }
   // fail if the system is SMS+OPLL and version<25
   if (version<25 && song.system[0]==DIV_SYSTEM_SMS && song.system[1]==DIV_SYSTEM_OPLL) {
     logE("Master System FM expansion not supported in 1.0/legacy .dmf!");
-    lastError="Master System FM expansion not supported in 1.0/legacy .dmf!";
+    lastError=_LE("Master System FM expansion not supported in 1.0/legacy .dmf!");
     return NULL;
   }
   // fail if the system is NES+VRC7 and version<25
   if (version<25 && song.system[0]==DIV_SYSTEM_NES && song.system[1]==DIV_SYSTEM_VRC7) {
     logE("NES + VRC7 not supported in 1.0/legacy .dmf!");
-    lastError="NES + VRC7 not supported in 1.0/legacy .dmf!";
+    lastError=_LE("NES + VRC7 not supported in 1.0/legacy .dmf!");
     return NULL;
   }
   // fail if the system is FDS and version<25
   if (version<25 && song.system[0]==DIV_SYSTEM_NES && song.system[1]==DIV_SYSTEM_FDS) {
     logE("FDS not supported in 1.0/legacy .dmf!");
-    lastError="FDS not supported in 1.0/legacy .dmf!";
+    lastError=_LE("FDS not supported in 1.0/legacy .dmf!");
     return NULL;
   }
   // fail if the system is Furnace-exclusive
   if (!isFlat && systemToFileDMF(song.system[0])==0) {
     logE("cannot save Furnace-exclusive system song!");
-    lastError="this system is not possible on .dmf";
+    lastError=_LE("this system is not possible on .dmf");
     return NULL;
   }
   // fail if values are out of range
   if (curSubSong->ordersLen>127) {
     logE("maximum .dmf song length is 127!");
-    lastError="maximum .dmf song length is 127";
+    lastError=_LE("maximum .dmf song length is 127");
     return NULL;
   }
   if (song.ins.size()>128) {
     logE("maximum number of instruments in .dmf is 128!");
-    lastError="maximum number of instruments in .dmf is 128";
+    lastError=_LE("maximum number of instruments in .dmf is 128");
     return NULL;
   }
   if (song.wave.size()>64) {
     logE("maximum number of wavetables in .dmf is 64!");
-    lastError="maximum number of wavetables in .dmf is 64";
+    lastError=_LE("maximum number of wavetables in .dmf is 64");
     return NULL;
   }
   for (int i=0; i<chans; i++) {
     for (int j=0; j<curSubSong->ordersLen; j++) {
       if (curOrders->ord[i][j]>0x7f) {
         logE("order %d, %d is out of range (0-127)!",curOrders->ord[i][j]);
-        lastError=fmt::sprintf("order %d, %d is out of range (0-127)",curOrders->ord[i][j]);
+        lastError=fmt::sprintf(_LE("order %d, %d is out of range (0-127)"),curOrders->ord[i][j]);
         return NULL;
       }
     }
@@ -1226,40 +1301,40 @@ SafeWriter* DivEngine::saveDMF(unsigned char version) {
   }
 
   if (song.subsong.size()>1) {
-    addWarning("only the currently selected subsong will be saved");
+    addWarning(_LE("only the currently selected subsong will be saved"));
   }
 
   if (!song.grooves.empty()) {
-    addWarning("grooves will not be saved");
+    addWarning(_LE("grooves will not be saved"));
   }
 
   if (curSubSong->speeds.len>2) {
-    addWarning("only the first two speeds will be effective");
+    addWarning(_LE("only the first two speeds will be effective"));
   }
 
   if (curSubSong->virtualTempoD!=curSubSong->virtualTempoN) {
-    addWarning(".dmf format does not support virtual tempo");
+    addWarning(_LE(".dmf format does not support virtual tempo"));
   }
 
   if (song.tuning<439.99 && song.tuning>440.01) {
-    addWarning(".dmf format does not support tuning");
+    addWarning(_LE(".dmf format does not support tuning"));
   }
 
   if (sys==DIV_SYSTEM_C64_6581 || sys==DIV_SYSTEM_C64_8580) {
-    addWarning("absolute duty/cutoff macro not available in .dmf!");
-    addWarning("duty precision will be lost");
+    addWarning(_LE("absolute duty/cutoff macro not available in .dmf!"));
+    addWarning(_LE("duty precision will be lost"));
   }
 
   for (DivInstrument* i: song.ins) {
     if (i->type==DIV_INS_AMIGA) {
-      addWarning(".dmf format does not support arbitrary-pitch sample mode");
+      addWarning(_LE(".dmf format does not support arbitrary-pitch sample mode"));
       break;
     }
   }
 
   for (DivInstrument* i: song.ins) {
     if (i->type==DIV_INS_FM || i->type==DIV_INS_OPM) {
-      addWarning("no FM macros in .dmf format");
+      addWarning(_LE("no FM macros in .dmf format"));
       break;
     }
   }
@@ -1344,7 +1419,7 @@ SafeWriter* DivEngine::saveDMF(unsigned char version) {
           if (i->std.get_macro(DIV_MACRO_ALG, false)->len>0) volIsCutoff=true;
           if (volIsCutoff) {
             if (i->std.get_macro(DIV_MACRO_VOL, false)->len>0) {
-              addWarning(".dmf only supports volume or cutoff macro in C64, but not both. volume macro will be lost.");
+              addWarning(_LE(".dmf only supports volume or cutoff macro in C64, but not both. volume macro will be lost."));
             }
             realVolMacroLen=i->std.get_macro(DIV_MACRO_ALG, false)->len;
             if (realVolMacroLen>127) realVolMacroLen=127;
@@ -1507,7 +1582,7 @@ SafeWriter* DivEngine::saveDMF(unsigned char version) {
           w->writeS(0);
           if (!relWarning) {
             relWarning=true;
-            addWarning("note/macro release will be converted to note off!");
+            addWarning(_LE("note/macro release will be converted to note off!"));
           }
         } else {
           w->writeS(pat->data[k][0]); // note
@@ -1527,7 +1602,7 @@ SafeWriter* DivEngine::saveDMF(unsigned char version) {
   }
 
   if (song.sample.size()>0) {
-    addWarning("samples' rates will be rounded to nearest compatible value");
+    addWarning(_LE("samples' rates will be rounded to nearest compatible value"));
   }
 
   w->writeC(song.sample.size());

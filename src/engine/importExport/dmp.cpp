@@ -19,6 +19,17 @@
 
 #include "importExport.h"
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 class DivEngine;
 
 void DivEngine::loadDMP(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath) {
@@ -31,14 +42,14 @@ void DivEngine::loadDMP(SafeReader& reader, std::vector<DivInstrument*>& ret, St
     version=reader.readC();
     logD(".dmp version %d",version);
   } catch (EndOfFileException& e) {
-    lastError="premature end of file";
+    lastError=_LE("premature end of file");
     logE("premature end of file");
     delete ins;
     return;
   }
 
   if (version>11) {
-    lastError="unknown instrument version!";
+    lastError=_LE("unknown instrument version!");
     delete ins;
     return;
   }
@@ -88,13 +99,13 @@ void DivEngine::loadDMP(SafeReader& reader, std::vector<DivInstrument*>& ret, St
           break;
         default:
           logD("instrument type is unknown");
-          lastError=fmt::sprintf("unknown instrument type %d!",sys);
+          lastError=fmt::sprintf(_LE("unknown instrument type %d!"),sys);
           delete ins;
           return;
           break;
       }
     } catch (EndOfFileException& e) {
-      lastError="premature end of file";
+      lastError=_LE("premature end of file");
       logE("premature end of file");
       delete ins;
       return;
@@ -340,7 +351,7 @@ void DivEngine::loadDMP(SafeReader& reader, std::vector<DivInstrument*>& ret, St
       }
     }
   } catch (EndOfFileException& e) {
-    lastError="premature end of file";
+    lastError=_LE("premature end of file");
     logE("premature end of file");
     delete ins;
     return;

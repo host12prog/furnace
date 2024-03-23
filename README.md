@@ -12,7 +12,7 @@ Here are the [future plans](todo_list.md).
 
 [Our Discord server](https://discord.gg/sT8zcsyJZt)
 
-**Notice that Furnace-B modules are incompatible with tildearrow's Furnace version. However, you can export module in the format that is compatible (file -> export -> Furnace).**
+**Notice that Furnace-B modules can be incompatible with tildearrow's Furnace version. However, you can try to export module in the format that is compatible (file -> export -> Furnace).**
 
 # Furnace (chiptune tracker)
 
@@ -299,7 +299,7 @@ Available options:
 | `WITH_DEMOS` | `ON` | Install demo songs on `make install` |
 | `WITH_INSTRUMENTS` | `ON` | Install demo instruments on `make install` |
 | `WITH_WAVETABLES` | `ON` | Install wavetables on `make install` |
-| `SHOW_OPEN_ASSETS_MENU_ENTRY` | `ON` | `Show option to open built-in assets directory (on supported platforms)` |
+| `SHOW_OPEN_ASSETS_MENU_ENTRY` | `OFF` | Show option to open built-in assets directory (on supported platforms) |
 
 (\*) `ON` if system-installed JACK detected, otherwise `OFF`
 

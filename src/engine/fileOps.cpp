@@ -26,6 +26,17 @@
 #include <zlib.h>
 #include <fmt/printf.h>
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 struct InflateBlock {
   unsigned char* buf;
   size_t len;
@@ -681,7 +692,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
     if (!reader.seek(16,SEEK_SET)) {
       logE("premature end of file!");
-      lastError="incomplete file";
+      lastError=_LE("incomplete file");
       delete[] file;
       return false;
     }
@@ -690,7 +701,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
     if (ds.version>DIV_ENGINE_VERSION) {
       logW("this module was created with a more recent version of Furnace!");
-      addWarning("this module was created with a more recent version of Furnace!");
+      addWarning(_LE("this module was created with a more recent version of Furnace!"));
     }
 
     if (ds.version<37) { // compat flags not stored back then
@@ -831,7 +842,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
     if (!reader.seek(infoSeek,SEEK_SET)) {
       logE("couldn't seek to info header at %d!",infoSeek);
-      lastError="couldn't seek to info header!";
+      lastError=_LE("couldn't seek to info header!");
       delete[] file;
       return false;
     }
@@ -840,7 +851,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
     reader.read(magic,4);
     if (strcmp(magic,"INFO")!=0) {
       logE("invalid info header!");
-      lastError="invalid info header!";
+      lastError=_LE("invalid info header!");
       delete[] file;
       return false;
     }
@@ -866,49 +877,49 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
     if (subSong->patLen<0) {
       logE("pattern length is negative!");
-      lastError="pattern lengrh is negative!";
+      lastError=_LE("pattern length is negative!");
       delete[] file;
       return false;
     }
     if (subSong->patLen>DIV_MAX_ROWS) {
       logE("pattern length is too large!");
-      lastError="pattern length is too large!";
+      lastError=_LE("pattern length is too large!");
       delete[] file;
       return false;
     }
     if (subSong->ordersLen<0) {
       logE("song length is negative!");
-      lastError="song length is negative!";
+      lastError=_LE("song length is negative!");
       delete[] file;
       return false;
     }
     if (subSong->ordersLen>DIV_MAX_PATTERNS) {
       logE("song is too long!");
-      lastError="song is too long!";
+      lastError=_LE("song is too long!");
       delete[] file;
       return false;
     }
     if (ds.insLen<0 || ds.insLen>256) {
       logE("invalid instrument count!");
-      lastError="invalid instrument count!";
+      lastError=_LE("invalid instrument count!");
       delete[] file;
       return false;
     }
     if (ds.waveLen<0 || ds.waveLen>256) {
       logE("invalid wavetable count!");
-      lastError="invalid wavetable count!";
+      lastError=_LE("invalid wavetable count!");
       delete[] file;
       return false;
     }
     if (ds.sampleLen<0 || ds.sampleLen>256) {
       logE("invalid sample count!");
-      lastError="invalid sample count!";
+      lastError=_LE("invalid sample count!");
       delete[] file;
       return false;
     }
     if (numberOfPats<0) {
       logE("invalid pattern count!");
-      lastError="invalid pattern count!";
+      lastError=_LE("invalid pattern count!");
       delete[] file;
       return false;
     }
@@ -921,7 +932,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       logD("- %d: %.2x (%s)",i,sysID,getSystemName(ds.system[i]));
       if (sysID!=0 && systemToFileFur(ds.system[i])==0) {
         logE("unrecognized system ID %.2x",sysID);
-        lastError=fmt::sprintf("unrecognized system ID %.2x!",sysID);
+        lastError=fmt::sprintf(_LE("unrecognized system ID %.2x!"),sysID);
         delete[] file;
         return false;
       }
@@ -938,7 +949,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
     logV("system len: %d",ds.systemLen);
     if (ds.systemLen<1) {
       logE("zero chips!");
-      lastError="zero chips!";
+      lastError=_LE("zero chips!");
       delete[] file;
       return false;
     }
@@ -1125,7 +1136,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       subSong->pat[i].effectCols=reader.readC();
       if (subSong->pat[i].effectCols<1 || subSong->pat[i].effectCols>DIV_MAX_EFFECTS) {
         logE("channel %d has zero or too many effect columns! (%d)",i,subSong->pat[i].effectCols);
-        lastError=fmt::sprintf("channel %d has too many effect columns! (%d)",i,subSong->pat[i].effectCols);
+        lastError=fmt::sprintf(_LE("channel %d has too many effect columns! (%d)"),i,subSong->pat[i].effectCols);
         delete[] file;
         return false;
       }
@@ -1303,7 +1314,9 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
     // subsongs
     if (ds.version>=95) {
       subSong->name=reader.readString();
+      logV("before reading subsong notes pos %x", (int)reader.tell());
       subSong->notes=reader.readString();
+      logV("after reading subsong notes pos %x", (int)reader.tell());
       numberOfSubSongs=(unsigned char)reader.readC();
       reader.readC(); // reserved
       reader.readC();
@@ -1323,7 +1336,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       ds.systemNameJ=reader.readString();
       ds.categoryJ=reader.readString();
     } else {
-      String teeeemp = getSongSystemLegacyName(ds,!getConfInt("noMultiSystem",0));
+      String teeeemp = _LE(getSongSystemLegacyName(ds,!getConfInt("noMultiSystem",0)).c_str());
       String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
       ds.systemName=temmrrrp;
       ds.autoSystem=true;
@@ -1418,7 +1431,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
         if (!reader.seek(sysFlagsPtr[i],SEEK_SET)) {
           logE("couldn't seek to chip %d flags!",i+1);
-          lastError=fmt::sprintf("couldn't seek to chip %d flags!",i+1);
+          lastError=fmt::sprintf(_LE("couldn't seek to chip %d flags!"),i+1);
           ds.unload();
           delete[] file;
           return false;
@@ -1427,7 +1440,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
         reader.read(magic,4);
         if (strcmp(magic,"FLAG")!=0) {
           logE("%d: invalid flag header!",i);
-          lastError="invalid flag header!";
+          lastError=_LE("invalid flag header!");
           ds.unload();
           delete[] file;
           return false;
@@ -1450,13 +1463,13 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
       if (!reader.seek(assetDirPtr[0],SEEK_SET)) {
         logE("couldn't seek to ins dir!");
-        lastError=fmt::sprintf("couldn't read instrument directory");
+        lastError=fmt::sprintf(_LE("couldn't read instrument directory"));
         ds.unload();
         delete[] file;
         return false;
       }
       if (readAssetDirData(reader,ds.insDir)!=DIV_DATA_SUCCESS) {
-        lastError="invalid instrument directory data!";
+        lastError=_LE("invalid instrument directory data!");
         ds.unload();
         delete[] file;
         return false;
@@ -1464,13 +1477,13 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
       if (!reader.seek(assetDirPtr[1],SEEK_SET)) {
         logE("couldn't seek to wave dir!");
-        lastError=fmt::sprintf("couldn't read wavetable directory");
+        lastError=fmt::sprintf(_LE("couldn't read wavetable directory"));
         ds.unload();
         delete[] file;
         return false;
       }
       if (readAssetDirData(reader,ds.waveDir)!=DIV_DATA_SUCCESS) {
-        lastError="invalid wavetable directory data!";
+        lastError=_LE("invalid wavetable directory data!");
         ds.unload();
         delete[] file;
         return false;
@@ -1478,13 +1491,13 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
       if (!reader.seek(assetDirPtr[2],SEEK_SET)) {
         logE("couldn't seek to sample dir!");
-        lastError=fmt::sprintf("couldn't read sample directory");
+        lastError=fmt::sprintf(_LE("couldn't read sample directory"));
         ds.unload();
         delete[] file;
         return false;
       }
       if (readAssetDirData(reader,ds.sampleDir)!=DIV_DATA_SUCCESS) {
-        lastError="invalid sample directory data!";
+        lastError=_LE("invalid sample directory data!");
         ds.unload();
         delete[] file;
         return false;
@@ -1498,7 +1511,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
         ds.subsong.push_back(new DivSubSong);
         if (!reader.seek(subSongPtr[i],SEEK_SET)) {
           logE("couldn't seek to subsong %d!",i+1);
-          lastError=fmt::sprintf("couldn't seek to subsong %d!",i+1);
+          lastError=fmt::sprintf(_LE("couldn't seek to subsong %d!"),i+1);
           ds.unload();
           delete[] file;
           return false;
@@ -1507,7 +1520,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
         reader.read(magic,4);
         if (strcmp(magic,"SONG")!=0) {
           logE("%d: invalid subsong header!",i);
-          lastError="invalid subsong header!";
+          lastError=_LE("invalid subsong header!");
           ds.unload();
           delete[] file;
           return false;
@@ -1588,7 +1601,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       logD("reading instrument %d at %x...",i,insPtr[i]);
       if (!reader.seek(insPtr[i],SEEK_SET)) {
         logE("couldn't seek to instrument %d!",i);
-        lastError=fmt::sprintf("couldn't seek to instrument %d!",i);
+        lastError=fmt::sprintf(_LE("couldn't seek to instrument %d!"),i);
         ds.unload();
         delete ins;
         delete[] file;
@@ -1596,7 +1609,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       }
       
       if (ins->readInsData(reader,ds.version)!=DIV_DATA_SUCCESS) {
-        lastError="invalid instrument header/data!";
+        lastError=_LE("invalid instrument header/data!");
         ds.unload();
         delete ins;
         delete[] file;
@@ -1613,7 +1626,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       logD("reading wavetable %d at %x...",i,wavePtr[i]);
       if (!reader.seek(wavePtr[i],SEEK_SET)) {
         logE("couldn't seek to wavetable %d!",i);
-        lastError=fmt::sprintf("couldn't seek to wavetable %d!",i);
+        lastError=fmt::sprintf(_LE("couldn't seek to wavetable %d!"),i);
         ds.unload();
         delete wave;
         delete[] file;
@@ -1621,7 +1634,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       }
 
       if (wave->readWaveData(reader,ds.version)!=DIV_DATA_SUCCESS) {
-        lastError="invalid wavetable header/data!";
+        lastError=_LE("invalid wavetable header/data!");
         ds.unload();
         delete wave;
         delete[] file;
@@ -1638,7 +1651,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
       if (!reader.seek(samplePtr[i],SEEK_SET)) {
         logE("couldn't seek to sample %d!",i);
-        lastError=fmt::sprintf("couldn't seek to sample %d!",i);
+        lastError=fmt::sprintf(_LE("couldn't seek to sample %d!"),i);
         ds.unload();
         delete sample;
         delete[] file;
@@ -1646,7 +1659,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       }
 
       if (sample->readSampleData(reader,ds.version)!=DIV_DATA_SUCCESS) {
-        lastError="invalid sample header/data!";
+        lastError=_LE("invalid sample header/data!");
         ds.unload();
         delete sample;
         delete[] file;
@@ -1661,7 +1674,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       bool isNewFormat=false;
       if (!reader.seek(i,SEEK_SET)) {
         logE("couldn't seek to pattern in %x!",i);
-        lastError=fmt::sprintf("couldn't seek to pattern in %x!",i);
+        lastError=fmt::sprintf(_LE("couldn't seek to pattern in %x!"),i);
         ds.unload();
         delete[] file;
         return false;
@@ -1671,7 +1684,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       if (strcmp(magic,"PATR")!=0) {
         if (strcmp(magic,"PATN")!=0 || ds.version<157) {
           logE("%x: invalid pattern header!",i);
-          lastError="invalid pattern header!";
+          lastError=_LE("invalid pattern header!");
           ds.unload();
           delete[] file;
           return false;
@@ -1690,21 +1703,21 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
         if (chan<0 || chan>=tchans) {
           logE("pattern channel out of range!",i);
-          lastError="pattern channel out of range!";
+          lastError=_LE("pattern channel out of range!");
           ds.unload();
           delete[] file;
           return false;
         }
         if (index<0 || index>(DIV_MAX_PATTERNS-1)) {
           logE("pattern index out of range!",i);
-          lastError="pattern index out of range!";
+          lastError=_LE("pattern index out of range!");
           ds.unload();
           delete[] file;
           return false;
         }
         if (subs<0 || subs>=(int)ds.subsong.size()) {
           logE("pattern subsong out of range!",i);
-          lastError="pattern subsong out of range!";
+          lastError=_LE("pattern subsong out of range!");
           ds.unload();
           delete[] file;
           return false;
@@ -1779,21 +1792,21 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 
         if (chan<0 || chan>=tchans) {
           logE("pattern channel out of range!",i);
-          lastError="pattern channel out of range!";
+          lastError=_LE("pattern channel out of range!");
           ds.unload();
           delete[] file;
           return false;
         }
         if (index<0 || index>(DIV_MAX_PATTERNS-1)) {
           logE("pattern index out of range!",i);
-          lastError="pattern index out of range!";
+          lastError=_LE("pattern index out of range!");
           ds.unload();
           delete[] file;
           return false;
         }
         if (subs<0 || subs>=(int)ds.subsong.size()) {
           logE("pattern subsong out of range!",i);
-          lastError="pattern subsong out of range!";
+          lastError=_LE("pattern subsong out of range!");
           ds.unload();
           delete[] file;
           return false;
@@ -2022,6 +2035,27 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       }
     }
 
+    // OPLL fixedAll compat
+    if (ds.version<194) {
+      for (int i=0; i<ds.systemLen; i++) {
+        if (ds.system[i]==DIV_SYSTEM_OPLL ||
+            ds.system[i]==DIV_SYSTEM_OPLL_DRUMS) {
+          if (!ds.systemFlags[i].has("fixedAll")) {
+            ds.systemFlags[i].set("fixedAll",false);
+          }
+        }
+      }
+    }
+
+    // C64 macro race
+    if (ds.version<195) {
+      for (int i=0; i<ds.systemLen; i++) {
+        if (ds.system[i]==DIV_SYSTEM_C64_8580 || ds.system[i]==DIV_SYSTEM_C64_6581) {
+          ds.systemFlags[i].set("macroRace",true);
+        }
+      }
+    }
+
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;
     saveLock.lock();
@@ -2040,7 +2074,7 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
     }
   } catch (EndOfFileException& e) {
     logE("premature end of file!");
-    lastError="incomplete file";
+    lastError=_LE("incomplete file");
     delete[] file;
     return false;
   }
@@ -2051,9 +2085,9 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
 bool DivEngine::load(unsigned char* f, size_t slen, String path) {
   unsigned char* file;
   size_t len;
-  if (slen<18) {
+  if (slen<21) {
     logE("too small!");
-    lastError="file is too small";
+    lastError=_LE("file is too small");
     delete[] f;
     return false;
   }
@@ -2061,12 +2095,19 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
   bool dnft_extension = false;
   bool eft_extension = false;
 
-  if (path.find(".dnm") != std::string::npos)
+  String pathlower = path;
+
+  for (char& i: pathlower) 
+  {
+    if (i>='A' && i<='Z') i+='a'-'A';
+  }
+
+  if (pathlower.find(".dnm") != std::string::npos)
   {
     dnft_extension = true;
   }
 
-  if (path.find(".eft") != std::string::npos)
+  if (pathlower.find(".eft") != std::string::npos)
   {
     eft_extension = true;
   }
@@ -2094,7 +2135,7 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
         logD("zlib error: %s",zl.msg);
       }
       inflateEnd(&zl);
-      lastError="not a .dmf/.fur song";
+      lastError=_LE("not a .dmf/.fur/.fub song");
       throw NotZlibException(0);
     }
 
@@ -2108,10 +2149,10 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
       if (nextErr!=Z_OK && nextErr!=Z_STREAM_END) {
         if (zl.msg==NULL) {
           logD("zlib error: unknown error! %d",nextErr);
-          lastError="unknown decompression error";
+          lastError=_LE("unknown decompression error");
         } else {
           logD("zlib inflate: %s",zl.msg);
-          lastError=fmt::sprintf("decompression error: %s",zl.msg);
+          lastError=fmt::sprintf(_LE("decompression error: %s"),zl.msg);
         }
         for (InflateBlock* i: blocks) delete i;
         blocks.clear();
@@ -2129,10 +2170,10 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
     if (nextErr!=Z_OK) {
       if (zl.msg==NULL) {
         logD("zlib end error: unknown error! %d",nextErr);
-        lastError="unknown decompression finish error";
+        lastError=_LE("unknown decompression finish error");
       } else {
         logD("zlib end: %s",zl.msg);
-        lastError=fmt::sprintf("decompression finish error: %s",zl.msg);
+        lastError=fmt::sprintf(_LE("decompression finish error: %s"),zl.msg);
       }
       for (InflateBlock* i: blocks) delete i;
       blocks.clear();
@@ -2146,7 +2187,7 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
     }
     if (finalSize<1) {
       logD("compressed too small!");
-      lastError="file too small";
+      lastError=_LE("file is too small");
       for (InflateBlock* i: blocks) delete i;
       blocks.clear();
       throw NotZlibException(0);
@@ -2189,7 +2230,7 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
   
   // step 4: not a valid file
   logE("not a valid module!");
-  lastError="not a compatible song/instrument";
+  lastError=_LE("not a compatible song/instrument");
   delete[] file;
   return false;
 }
@@ -2283,19 +2324,19 @@ SafeWriter* DivEngine::saveFur(bool notPrimary, bool newPatternFormat, bool tild
   */
   if (song.ins.size()>256) {
     logE("maximum number of instruments is 256!");
-    lastError="maximum number of instruments is 256";
+    lastError=_LE("maximum number of instruments is 256");
     saveLock.unlock();
     return NULL;
   }
   if (song.wave.size()>256) {
     logE("maximum number of wavetables is 256!");
-    lastError="maximum number of wavetables is 256";
+    lastError=_LE("maximum number of wavetables is 256");
     saveLock.unlock();
     return NULL;
   }
   if (song.sample.size()>256) {
     logE("maximum number of samples is 256!");
-    lastError="maximum number of samples is 256";
+    lastError=_LE("maximum number of samples is 256");
     saveLock.unlock();
     return NULL;
   }
@@ -2879,366 +2920,6 @@ SafeWriter* DivEngine::saveFur(bool notPrimary, bool newPatternFormat, bool tild
   w->seek(assetDirPtrSeek,SEEK_SET);
   for (size_t i=0; i<3; i++) {
     w->writeI(assetDirPtr[i]);
-  }
-
-  saveLock.unlock();
-  return w;
-}
-
-static const char* trueFalse[2]={
-  "no", "yes"
-};
-
-static const char* gbEnvDir[2]={
-  "down", "up"
-};
-
-static const char* notes[12]={
-  "C-", "C#", "D-", "D#", "E-", "F-", "F#", "G-", "G#", "A-", "A#", "B-"
-};
-
-static const char* notesNegative[12]={
-  "c_", "c+", "d_", "d+", "e_", "f_", "f+", "g_", "g+", "a_", "a+", "b_"
-};
-
-static const char* sampleLoopModes[4]={
-  "forward", "backward", "ping-pong", "invalid"
-};
-
-void writeTextMacro(SafeWriter* w, DivInstrumentMacro& m, const char* name, bool& wroteMacroHeader) {
-  if ((m.open&6)==0 && m.len<1) return;
-  if (!wroteMacroHeader) {
-    w->writeText("- macros:\n");
-    wroteMacroHeader=true;
-  }
-  w->writeText(fmt::sprintf("  - %s:",name));
-  int len=m.len;
-  switch (m.open&6) {
-    case 2:
-      len=18;
-      w->writeText(" [ADSR]");
-      break;
-    case 4:
-      len=18;
-      w->writeText(" [LFO]");
-      break;
-  }
-  if (m.mode) {
-    w->writeText(fmt::sprintf(" [MODE %d]",m.mode));
-  }
-  if (m.delay>0) {
-    w->writeText(fmt::sprintf(" [DELAY %d]",m.delay));
-  }
-  if (m.speed>1) {
-    w->writeText(fmt::sprintf(" [SPEED %d]",m.speed));
-  }
-  for (int i=0; i<len; i++) {
-    if (i==m.loop) {
-      w->writeText(" |");
-    }
-    if (i==m.rel) {
-      w->writeText(" /");
-    }
-    w->writeText(fmt::sprintf(" %d",m.val[i]));
-  }
-  w->writeText("\n");
-}
-
-SafeWriter* DivEngine::saveText(bool separatePatterns) {
-  saveLock.lock();
-
-  SafeWriter* w=new SafeWriter;
-  w->init();
-
-  w->writeText(fmt::sprintf("# Furnace Text Export\n\ngenerated by Furnace %s (%d)\n\n# Song Information\n\n",DIV_VERSION,DIV_ENGINE_VERSION));
-  w->writeText(fmt::sprintf("- name: %s\n",song.name));
-  w->writeText(fmt::sprintf("- author: %s\n",song.author));
-  w->writeText(fmt::sprintf("- album: %s\n",song.category));
-  w->writeText(fmt::sprintf("- system: %s\n",song.systemName));
-  w->writeText(fmt::sprintf("- tuning: %g\n\n",song.tuning));
-  
-  w->writeText(fmt::sprintf("- instruments: %d\n",song.insLen));
-  w->writeText(fmt::sprintf("- wavetables: %d\n",song.waveLen));
-  w->writeText(fmt::sprintf("- samples: %d\n\n",song.sampleLen));
-  
-  w->writeText("# Sound Chips\n\n");
-
-  for (int i=0; i<song.systemLen; i++) {
-    w->writeText(fmt::sprintf("- %s\n",getSystemName(song.system[i])));
-    w->writeText(fmt::sprintf("  - id: %.2X\n",(int)song.system[i]));
-    w->writeText(fmt::sprintf("  - volume: %g\n",song.systemVol[i]));
-    w->writeText(fmt::sprintf("  - panning: %g\n",song.systemPan[i]));
-    w->writeText(fmt::sprintf("  - front/rear: %g\n",song.systemPanFR[i]));
-    
-    String sysFlags=song.systemFlags[i].toString();
-
-    if (!sysFlags.empty()) {
-      w->writeText(fmt::sprintf("  - flags:\n```\n%s\n```\n",sysFlags));
-    }
-  }
-
-  if (!song.notes.empty()) {
-    w->writeText("\n# Song Comments\n\n");
-    w->writeText(song.notes);
-  }
-
-  w->writeText("\n# Instruments\n\n");
-
-  for (int i=0; i<song.insLen; i++) {
-    DivInstrument* ins=song.ins[i];
-
-    w->writeText(fmt::sprintf("## %.2X: %s\n\n",i,ins->name));
-
-    w->writeText(fmt::sprintf("- type: %d\n",(int)ins->type));
-
-    if (ins->type==DIV_INS_FM || ins->type==DIV_INS_OPL || ins->type==DIV_INS_OPLL || ins->type==DIV_INS_OPZ || ins->type==DIV_INS_OPL_DRUMS || ins->type==DIV_INS_OPM || ins->type==DIV_INS_ESFM) {
-      w->writeText("- FM parameters:\n");
-      w->writeText(fmt::sprintf("  - ALG: %d\n",ins->fm.alg));
-      w->writeText(fmt::sprintf("  - FB: %d\n",ins->fm.fb));
-      w->writeText(fmt::sprintf("  - FMS: %d\n",ins->fm.fms));
-      w->writeText(fmt::sprintf("  - AMS: %d\n",ins->fm.ams));
-      w->writeText(fmt::sprintf("  - FMS2: %d\n",ins->fm.fms2));
-      w->writeText(fmt::sprintf("  - AMS2: %d\n",ins->fm.ams2));
-      w->writeText(fmt::sprintf("  - operators: %d\n",ins->fm.ops));
-      w->writeText(fmt::sprintf("  - OPLL patch: %d\n",ins->fm.opllPreset));
-      w->writeText(fmt::sprintf("  - fixed drum freq: %s\n",trueFalse[ins->fm.fixedDrums?1:0]));
-      w->writeText(fmt::sprintf("  - kick freq: %.4X\n",ins->fm.kickFreq));
-      w->writeText(fmt::sprintf("  - snare/hat freq: %.4X\n",ins->fm.snareHatFreq));
-      w->writeText(fmt::sprintf("  - tom/top freq: %.4X\n",ins->fm.tomTopFreq));
-      
-      for (int j=0; j<ins->fm.ops; j++) {
-        DivInstrumentFM::Operator& op=ins->fm.op[j];
-
-        w->writeText(fmt::sprintf("  - operator %d:\n",j));
-        w->writeText(fmt::sprintf("    - enabled: %s\n",trueFalse[op.enable?1:0]));
-        w->writeText(fmt::sprintf("    - AM: %d\n",op.am));
-        w->writeText(fmt::sprintf("    - AR: %d\n",op.ar));
-        w->writeText(fmt::sprintf("    - DR: %d\n",op.dr));
-        w->writeText(fmt::sprintf("    - MULT: %d\n",op.mult));
-        w->writeText(fmt::sprintf("    - RR: %d\n",op.rr));
-        w->writeText(fmt::sprintf("    - SL: %d\n",op.sl));
-        w->writeText(fmt::sprintf("    - TL: %d\n",op.tl));
-        w->writeText(fmt::sprintf("    - DT2: %d\n",op.dt2));
-        w->writeText(fmt::sprintf("    - RS: %d\n",op.rs));
-        w->writeText(fmt::sprintf("    - DT: %d\n",op.dt));
-        w->writeText(fmt::sprintf("    - D2R: %d\n",op.d2r));
-        w->writeText(fmt::sprintf("    - SSG-EG: %d\n",op.ssgEnv));
-        w->writeText(fmt::sprintf("    - DAM: %d\n",op.dam));
-        w->writeText(fmt::sprintf("    - DVB: %d\n",op.dvb));
-        w->writeText(fmt::sprintf("    - EGT: %d\n",op.egt));
-        w->writeText(fmt::sprintf("    - KSL: %d\n",op.ksl));
-        w->writeText(fmt::sprintf("    - SUS: %d\n",op.sus));
-        w->writeText(fmt::sprintf("    - VIB: %d\n",op.vib));
-        w->writeText(fmt::sprintf("    - WS: %d\n",op.ws));
-        w->writeText(fmt::sprintf("    - KSR: %d\n",op.ksr));
-        w->writeText(fmt::sprintf("    - TL volume scale: %d\n",op.kvs));
-      }
-    }
-
-    if (ins->type==DIV_INS_ESFM) {
-      w->writeText("- ESFM parameters:\n");
-      w->writeText(fmt::sprintf("  - noise mode: %d\n",ins->esfm.noise));
-
-      for (int j=0; j<ins->fm.ops; j++) {
-        DivInstrumentESFM::Operator& opE=ins->esfm.op[j];
-
-        w->writeText(fmt::sprintf("  - operator %d:\n",j));
-        w->writeText(fmt::sprintf("    - DL: %d\n",opE.delay));
-        w->writeText(fmt::sprintf("    - OL: %d\n",opE.outLvl));
-        w->writeText(fmt::sprintf("    - MI: %d\n",opE.modIn));
-        w->writeText(fmt::sprintf("    - output left: %s\n",trueFalse[opE.left?1:0]));
-        w->writeText(fmt::sprintf("    - output right: %s\n",trueFalse[opE.right?1:0]));
-        w->writeText(fmt::sprintf("    - CT: %d\n",opE.ct));
-        w->writeText(fmt::sprintf("    - DT: %d\n",opE.dt));
-        w->writeText(fmt::sprintf("    - fixed frequency: %s\n",trueFalse[opE.fixed?1:0]));
-      }
-    }
-
-    if (ins->type==DIV_INS_ES5503) {
-      w->writeText("- ES503 parameters:\n");
-
-      w->writeText(fmt::sprintf("  - oscillator mode: %d\n",ins->es5503.initial_osc_mode));
-
-      w->writeText(fmt::sprintf("  - phase reset on key-on: %s\n",trueFalse[ins->es5503.phase_reset_on_start?1:0]));
-      w->writeText(fmt::sprintf("  - softpan virtual channel: %s\n",trueFalse[ins->es5503.softpan_virtual_channel?1:0]));
-    }
-
-    if (ins->type==DIV_INS_GB) {
-      w->writeText("- Game Boy parameters:\n");
-      w->writeText(fmt::sprintf("  - volume: %d\n",ins->gb.envVol));
-      w->writeText(fmt::sprintf("  - direction: %s\n",gbEnvDir[ins->gb.envDir?1:0]));
-      w->writeText(fmt::sprintf("  - length: %d\n",ins->gb.envLen));
-      w->writeText(fmt::sprintf("  - sound length: %d\n",ins->gb.soundLen));
-      w->writeText(fmt::sprintf("  - use software envelope: %s\n",trueFalse[ins->gb.softEnv?1:0]));
-      w->writeText(fmt::sprintf("  - always initialize: %s\n",trueFalse[ins->gb.softEnv?1:0]));
-      if (ins->gb.hwSeqLen>0) {
-        w->writeText("  - hardware sequence:\n");
-        for (int j=0; j<ins->gb.hwSeqLen; j++) {
-          w->writeText(fmt::sprintf("    - %d: %.2X %.4X\n",j,ins->gb.get_gb_hw_seq(j, false)->cmd,ins->gb.get_gb_hw_seq(j, false)->data));
-        }
-      }
-    }
-
-    bool header=false;
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_VOL, false),"vol",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_ARP, false),"arp",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_DUTY, false),"duty",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_WAVE, false),"wave",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_PITCH, false),"pitch",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_PAN_LEFT, false),"panL",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_PAN_RIGHT, false),"panR",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_PHASE_RESET, false),"phaseReset",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX1, false),"ex1",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX2, false),"ex2",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX3, false),"ex3",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX4, false),"ex4",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX5, false),"ex5",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX6, false),"ex6",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX7, false),"ex7",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_EX8, false),"ex8",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_ALG, false),"alg",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_FB, false),"fb",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_FMS, false),"fms",header);
-    writeTextMacro(w,*ins->std.get_macro(DIV_MACRO_AMS, false),"ams",header);
-
-    // TODO: the rest
-    w->writeText("\n");
-  }
-
-  w->writeText("\n# Wavetables\n\n");
-
-  for (int i=0; i<song.waveLen; i++) {
-    DivWavetable* wave=song.wave[i];
-
-    w->writeText(fmt::sprintf("- %d (%dx%d):",i,wave->len+1,wave->max+1));
-    for (int j=0; j<=wave->len; j++) {
-      w->writeText(fmt::sprintf(" %d",wave->data[j]));
-    }
-    w->writeText("\n");
-  }
-
-  w->writeText("\n# Samples\n\n");
-
-  for (int i=0; i<song.sampleLen; i++) {
-    DivSample* sample=song.sample[i];
-
-    w->writeText(fmt::sprintf("## %.2X: %s\n\n",i,sample->name));
-
-    w->writeText(fmt::sprintf("- format: %d\n",(int)sample->depth));
-    w->writeText(fmt::sprintf("- data length: %d\n",sample->getCurBufLen()));
-    w->writeText(fmt::sprintf("- samples: %d\n",sample->samples));
-    w->writeText(fmt::sprintf("- rate: %d\n",sample->centerRate));
-    w->writeText(fmt::sprintf("- compat rate: %d\n",sample->rate));
-    w->writeText(fmt::sprintf("- loop: %s\n",trueFalse[sample->loop?1:0]));
-    if (sample->loop) {
-      w->writeText(fmt::sprintf("  - start: %d\n",sample->loopStart));
-      w->writeText(fmt::sprintf("  - end: %d\n",sample->loopEnd));
-      w->writeText(fmt::sprintf("  - mode: %s\n",sampleLoopModes[sample->loopMode&3]));
-    }
-    w->writeText(fmt::sprintf("- BRR emphasis: %s\n",trueFalse[sample->brrEmphasis?1:0]));
-    w->writeText(fmt::sprintf("- dither: %s\n",trueFalse[sample->dither?1:0]));
-
-    // TODO' render matrix
-    unsigned char* buf=(unsigned char*)sample->getCurBuf();
-    unsigned int bufLen=sample->getCurBufLen();
-    w->writeText("\n```");
-    for (unsigned int i=0; i<bufLen; i++) {
-      if ((i&15)==0) w->writeText(fmt::sprintf("\n%.8X:",i));
-      w->writeText(fmt::sprintf(" %.2X",buf[i]));
-    }
-    w->writeText("\n```\n\n");
-  }
-
-  w->writeText("\n# Subsongs\n\n");
-
-  for (size_t i=0; i<song.subsong.size(); i++) {
-    DivSubSong* s=song.subsong[i];
-    w->writeText(fmt::sprintf("## %d: %s\n\n",(int)i,s->name));
-
-    w->writeText(fmt::sprintf("- tick rate: %g\n",s->hz));
-    w->writeText(fmt::sprintf("- speeds:"));
-    for (int j=0; j<s->speeds.len; j++) {
-      w->writeText(fmt::sprintf(" %d",s->speeds.val[j]));
-    }
-    w->writeText("\n");
-    w->writeText(fmt::sprintf("- virtual tempo: %d/%d\n",s->virtualTempoN,s->virtualTempoD));
-    w->writeText(fmt::sprintf("- time base: %d\n",s->timeBase));
-    w->writeText(fmt::sprintf("- pattern length: %d\n",s->patLen));
-    w->writeText(fmt::sprintf("\norders:\n```\n"));
-
-    for (int j=0; j<s->ordersLen; j++) {
-      w->writeText(fmt::sprintf("%.2X |",j));
-      for (int k=0; k<chans; k++) {
-        w->writeText(fmt::sprintf(" %.2X",s->orders.ord[k][j]));
-      }
-      w->writeText("\n");
-    }
-    w->writeText("```\n\n## Patterns\n\n");
-
-    if (separatePatterns) {
-      w->writeText("TODO: separate patterns\n\n");
-    } else {
-      for (int j=0; j<s->ordersLen; j++) {
-        w->writeText(fmt::sprintf("----- ORDER %.2X\n",j));
-
-        for (int k=0; k<s->patLen; k++) {
-          w->writeText(fmt::sprintf("%.2X ",k));
-
-          for (int l=0; l<chans; l++) {
-            DivPattern* p=s->pat[l].getPattern(s->orders.ord[l][j],false);
-            int note=p->data[k][0];
-            int octave=p->data[k][1];
-
-            if (note==0 && octave==0) {
-              w->writeText("|... ");
-            } else if (note==100) {
-              w->writeText("|OFF ");
-            } else if (note==101) {
-              w->writeText("|=== ");
-            } else if (note==102) {
-              w->writeText("|REL ");
-            } else if ((octave>9 && octave<250) || note>12) {
-              w->writeText("|??? ");
-            } else {
-              if (octave>=128) octave-=256;
-              if (note>11) {
-                note-=12;
-                octave++;
-              }
-              w->writeText(fmt::sprintf("|%s%d ",(octave<0)?notesNegative[note]:notes[note],(octave<0)?(-octave):octave));
-            }
-
-            if (p->data[k][2]==-1) {
-              w->writeText(".. ");
-            } else {
-              w->writeText(fmt::sprintf("%.2X ",p->data[k][2]&0xff));
-            }
-
-            if (p->data[k][3]==-1) {
-              w->writeText("..");
-            } else {
-              w->writeText(fmt::sprintf("%.2X",p->data[k][3]&0xff));
-            }
-
-            for (int m=0; m<s->pat[l].effectCols; m++) {
-              if (p->data[k][4+(m<<1)]==-1) {
-                w->writeText(" ..");
-              } else {
-                w->writeText(fmt::sprintf(" %.2X",p->data[k][4+(m<<1)]&0xff));
-              }
-              if (p->data[k][5+(m<<1)]==-1) {
-                w->writeText("..");
-              } else {
-                w->writeText(fmt::sprintf("%.2X",p->data[k][5+(m<<1)]&0xff));
-              }
-            }
-          }
-
-          w->writeText("\n");
-        }
-      }
-    }
-
   }
 
   saveLock.unlock();

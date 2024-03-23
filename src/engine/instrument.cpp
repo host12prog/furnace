@@ -85,7 +85,8 @@ bool DivInstrumentGB::operator==(const DivInstrumentGB& other) {
     _C(soundLen) &&
     _C(hwSeqLen) &&
     _C(softEnv) &&
-    _C(alwaysInit)
+    _C(alwaysInit) &&
+    _C(doubleWave)
   );
 }
 
@@ -459,6 +460,7 @@ void DivInstrument::writeFeatureGB(SafeWriter* w) {
   w->writeC(gb.soundLen);
 
   w->writeC(
+    (gb.doubleWave?4:0)|
     (gb.alwaysInit?2:0)|
     (gb.softEnv?1:0)
   );
@@ -887,7 +889,9 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
       case DIV_INS_POWERNOISE_SLOPE:
       case DIV_INS_DAVE:
       case DIV_INS_SID2:
-        init_type = init_type - (unsigned short)1; //tildearrow's verson modules are incompatible with these inst indices so we comply...
+        init_type = init_type - (unsigned short)1; break; //tildearrow's verson modules are incompatible with these inst indices so we comply...
+      case DIV_INS_NDS:
+        init_type = 59; break;
       default: break;
     }
   }
@@ -1151,10 +1155,6 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         break;
       case DIV_INS_DAVE:
         break;
-      case DIV_INS_GBA_DMA:
-        break;
-      case DIV_INS_GBA_MINMOD:
-        break;
       case DIV_INS_KURUMITSU:
         break;
       case DIV_INS_SID2:
@@ -1162,6 +1162,18 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         break;
       case DIV_INS_POKEY:
         featurePO=true;
+        break;
+      case DIV_INS_NDS:
+        featureSM=true;
+        if (amiga.useSample) featureSL=true;
+        break;
+      case DIV_INS_GBA_DMA:
+        featureSM=true;
+        featureSL=true;
+        break;
+      case DIV_INS_GBA_MINMOD:
+        featureSM=true;
+        featureSL=true;
         break;
       case DIV_INS_MAX:
         break;
@@ -1690,6 +1702,7 @@ void DivInstrument::readFeatureGB(SafeReader& reader, short version) {
   gb.soundLen=reader.readC();
 
   next=reader.readC();
+  if (version>=196) gb.doubleWave=next&4;
   gb.alwaysInit=next&2;
   gb.softEnv=next&1;
 
@@ -2262,9 +2275,15 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
       goto proceed;
     }
 
-    if(type == 58) //powernoise slope inst
+    if(type == 58) //dave inst
     {
       type = DIV_INS_DAVE;
+      goto proceed;
+    }
+
+    if(type == 59) //Nintendo DS (NDS) inst
+    {
+      type = DIV_INS_NDS;
       goto proceed;
     }
   }
@@ -3212,7 +3231,6 @@ DivDataErrors DivInstrument::readInsData(SafeReader& reader, short version, DivS
   }
   return readInsDataOld(reader,version,tildearrow_version);
 }
-
 void DivInstrument::convertC64SpecialMacro() {
   // merge special and test/gate macros into new special macro
   int maxLen=MAX(std.get_macro(DIV_MACRO_EX3, false)->len,std.get_macro(DIV_MACRO_EX4, false)->len);

@@ -2,7 +2,7 @@
 
 some of the effect numbers are taken from ProTracker / FastTracker 2.
 
-however, effects are continuous, which means you only need to type it once and then stop it with an effect value of `00` or no effect value at all.
+however, effects are continuous (unless specified), which means you only need to type it once and then stop it with an effect value of `00` or no effect value at all.
 
 ## volume
 
@@ -12,8 +12,8 @@ however, effects are continuous, which means you only need to type it once and t
 - `FAxy`: **Fast volume slide.** same as `0Axy` above but 4× faster.
 - `F3xx`: **Fine volume slide up.** same as `0Ax0` but 64× slower.
 - `F4xx`: **Fine volume slide down.** same as `0A0x` but 64× slower.
-- `F8xx`: **Single tick volume slide up.** adds `x` to volume on first tick only.
-- `F9xx`: **Single tick volume slide down.** subtracts `x` from volume on first tick only.
+- `F8xx`: **Single tick volume slide up.** adds `xx` to volume on first tick only.
+- `F9xx`: **Single tick volume slide down.** subtracts `xx` from volume on first tick only.
   - ---
 - `07xy`: **Tremolo.** changes volume to be "wavy" with a sine LFO. `x` is the speed. `y` is the depth.
   - tremolo is downward only.
@@ -34,9 +34,11 @@ however, effects are continuous, which means you only need to type it once and t
 - `E2xy`: **Note slide down.** `x` is the speed, while `y` is how many semitones to slide down.
   - ---
 - `EAxx`: **Toggle legato.** while on, new notes instantly change the pitch of the currently playing sound instead of starting it over.
+- `E6xy`: **Delayed note transpose.** (works like `Txy` in FamiTracker) instantly transposes note up or down after certain number of ticks. `x` dictates the delay and the direction of transpose: when `x` is between `0` and `7` note is transposed *up* after `x` ticks. when `x` is between `8` and `F` note is transposed *down* after `(x - 7)` ticks. so the MSB of `x` dictates the direction. `y` is how many semitones to transpose up/down.
+- `E8xy`: **Delayed note transpose up.** transposes note up by `y` semitones after `x` ticks.
+- `E9xy`: **Delayed note transpose down.** transposes note down by `y` semitones after `x` ticks.
 - `00xy`: **Arpeggio.** this effect produces a rapid cycle between the current note, the note plus `x` semitones and the note plus `y` semitones.
 - `E0xx`: **Set arpeggio speed.** this sets the number of ticks between arpeggio values. default is 1.
-- `E6xy`: **Delayed note transpose.** (works like `Txy` in FamiTracker) instantly transposes note up or down after certain number of ticks. `x` dictates the delay and the direction of transpose: when `x` is between `0` and `7` note is transposed *up* after `x` ticks. when `x` is between `8` and `F` note is transposed *down* after `(x - 7)` ticks. so the MSB of `x` dictates the direction. `y` is how many semitones to transpose up/down.
   - ---
 - `04xy`: **Vibrato.** changes pitch to be "wavy" with a sine LFO. `x` is the speed, while `y` is the depth.
   - maximum vibrato depth is ±1 semitone.
@@ -71,6 +73,9 @@ not all chips support these effects.
   - `xxx` may be from `000` to `3FF`.
 - `F0xx`: **Set BPM.** changes tick rate according to beats per minute. range is `01` to `FF`.
   - ---
+- `FDxx`: **Set virtual tempo numerator.** sets the virtual tempo's numerator to the effect value.
+- `FExx`: **Set virtual tempo denominator.** sets the virtual tempo's denominator to the effect value.
+  - ---
 - `0Bxx`: **Jump to order.** `x` is the order to play after the current row.
   - this marks the end of a loop with order `x` as the loop start.
 - `0Dxx`: **Jump to next pattern.** skips the current row and remainder of current order. `x` is the row at which to start playing the next pattern.
@@ -81,8 +86,10 @@ not all chips support these effects.
 
 - `0Cxx`: **Retrigger.** repeats current note every `xx` ticks.
   - this effect is not continuous; it must be entered on every row.
-- `ECxx`: **Note cut.** ends current note after `xx` ticks. for FM instruments, it's equivalent to a "key off".
-- `EDxx`: **Note delay.** delays note by `x` ticks.
+- `ECxx`: **Note cut.** triggers note off after `xx` ticks. this triggers key off in FM/hardware envelope chips, or cuts note otherwise.
+- `EDxx`: **Note delay.** delays note by `xx` ticks.
+- `FCxx`: **Note release.** (works like `Lxx` in FamiTracker) releases current note after `xx` ticks. this releases macros and triggers key off in FM/hardware envelope chips.
+- `E7xx`: **Macro release.** releases macros after `xx` ticks. this does not trigger key off.
 
 ## other
 

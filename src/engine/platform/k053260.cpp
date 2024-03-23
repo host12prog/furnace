@@ -22,6 +22,17 @@
 #include "../../ta-log.h"
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define rWrite(a,v) {if(!skipRegisterWrites) {k053260.write(a,v); regPool[a]=v; if(dumpWrites) addWrite(a,v);}}
 
 #define CHIP_DIVIDER 16
@@ -81,7 +92,7 @@ void DivPlatformK053260::acquire(short** buf, size_t len) {
     buf[1][i]=rout;
 
     for (int i=0; i<4; i++) {
-      oscBuf[i]->data[oscBuf[i]->needle++]=(k053260.voice_out(i,0)+k053260.voice_out(i,1))>>2;
+      oscBuf[i]->data[oscBuf[i]->needle++]=(k053260.voice_out(i,0)+k053260.voice_out(i,1))>>1;
     }
   }
 }
@@ -477,7 +488,7 @@ void DivPlatformK053260::renderSamples(int sysID) {
   memset(sampleLoaded,0,256*sizeof(bool));
 
   memCompo=DivMemoryComposition();
-  memCompo.name="Sample ROM";
+  memCompo.name=_LE("Sample ROM");
 
   size_t memPos=1; // for avoid silence
   for (int i=0; i<parent->song.sampleLen; i++) {
@@ -494,7 +505,7 @@ void DivPlatformK053260::renderSamples(int sysID) {
       actualLength=MIN((int)(getSampleMemCapacity()-memPos-1),length);
       if (actualLength>0) {
         sampleOffK053260[i]=memPos-1;
-        memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+actualLength+1));
+        memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+actualLength+1));
         for (int j=0; j<actualLength; j++) {
           sampleMem[memPos++]=s->dataK[j];
         }
@@ -505,7 +516,7 @@ void DivPlatformK053260::renderSamples(int sysID) {
       actualLength=MIN((int)(getSampleMemCapacity()-memPos-1),length);
       if (actualLength>0) {
         sampleOffK053260[i]=memPos-1;
-        memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,"Sample",i,memPos,memPos+actualLength+1));
+        memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_SAMPLE,_LE("Sample"),i,memPos,memPos+actualLength+1));
         for (int j=0; j<actualLength; j++) {
           sampleMem[memPos++]=s->data8[j];
         }

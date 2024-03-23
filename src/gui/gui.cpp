@@ -627,6 +627,75 @@ void FurnaceGUI::updateWindowTitle() {
   if (sdlWin!=NULL) SDL_SetWindowTitle(sdlWin,title.c_str());
 }
 
+void FurnaceGUI::autoDetectSystemIter(std::vector<FurnaceGUISysDef>& category, bool& isMatch, std::map<DivSystem,int>& defCountMap, std::map<DivSystem,DivConfig>& defConfMap, std::map<DivSystem,int>& sysCountMap, std::map<DivSystem,DivConfig>& sysConfMap) {
+  for (FurnaceGUISysDef& j: category) {
+    if (!j.orig.empty()) {
+      defCountMap.clear();
+      defConfMap.clear();
+      for (FurnaceGUISysDefChip& k: j.orig) {
+        auto it=defCountMap.find(k.sys);
+        if (it==defCountMap.cend()) {
+          defCountMap[k.sys]=1;
+        } else {
+          it->second++;
+        }
+        DivConfig dc;
+        dc.loadFromMemory(k.flags);
+        defConfMap[k.sys]=dc;
+      }
+      if (defCountMap.size()==sysCountMap.size()) {
+        isMatch=true;
+        logV("trying on defCountMap: %s",j.name);
+        for (std::pair<DivSystem,int> k: defCountMap) {
+          logV("- %s: %d",e->getSystemName(k.first),k.second);
+        }
+        for (std::pair<DivSystem,int> k: defCountMap) {
+          auto countI=sysCountMap.find(k.first);
+          if (countI==sysCountMap.cend()) {
+            isMatch=false;
+            break;
+          } else if (countI->second!=k.second) {
+            isMatch=false;
+            break;
+          }
+
+          auto confI=sysConfMap.find(k.first);
+          if (confI==sysConfMap.cend()) {
+            isMatch=false;
+            break;
+          }
+          DivConfig& sysDC=confI->second;
+          auto defConfI=defConfMap.find(k.first);
+          if (defConfI==defConfMap.cend()) {
+            isMatch=false;
+            break;
+          }
+          for (std::pair<String,String> l: defConfI->second.configMap()) {
+            if (!sysDC.has(l.first)) {
+              isMatch=false;
+              break;
+            }
+            if (sysDC.getString(l.first,"")!=l.second) {
+              isMatch=false;
+              break;
+            }
+          }
+          if (!isMatch) break;
+        }
+        if (isMatch) {
+          logV("match found!");
+          //e->song.systemName=j.name;
+          String teeeemp = _L(j.name);
+          String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
+          e->song.systemName=temmrrrp;
+          break;
+        }
+      }
+    }
+    if (isMatch) break;
+  }
+}
+
 void FurnaceGUI::autoDetectSystem() {
   std::map<DivSystem,int> sysCountMap;
   std::map<DivSystem,DivConfig> sysConfMap;
@@ -649,67 +718,7 @@ void FurnaceGUI::autoDetectSystem() {
   std::map<DivSystem,int> defCountMap;
   std::map<DivSystem,DivConfig> defConfMap;
   for (FurnaceGUISysCategory& i: sysCategories) {
-    for (FurnaceGUISysDef& j: i.systems) {
-      defCountMap.clear();
-      defConfMap.clear();
-      for (FurnaceGUISysDefChip& k: j.orig) {
-        auto it=defCountMap.find(k.sys);
-        if (it==defCountMap.cend()) {
-          defCountMap[k.sys]=1;
-        } else {
-          it->second++;
-        }
-        DivConfig dc;
-        dc.loadFromMemory(k.flags);
-        defConfMap[k.sys]=dc;
-      }
-      if (defCountMap.size()!=sysCountMap.size()) continue;
-      isMatch=true;
-      /*logV("trying on defCountMap: %s",j.name);
-      for (std::pair<DivSystem,int> k: defCountMap) {
-        logV("- %s: %d",e->getSystemName(k.first),k.second);
-      }*/
-      for (std::pair<DivSystem,int> k: defCountMap) {
-        auto countI=sysCountMap.find(k.first);
-        if (countI==sysCountMap.cend()) {
-          isMatch=false;
-          break;
-        } else if (countI->second!=k.second) {
-          isMatch=false;
-          break;
-        }
-
-        auto confI=sysConfMap.find(k.first);
-        if (confI==sysConfMap.cend()) {
-          isMatch=false;
-          break;
-        }
-        DivConfig& sysDC=confI->second;
-        auto defConfI=defConfMap.find(k.first);
-        if (defConfI==defConfMap.cend()) {
-          isMatch=false;
-          break;
-        }
-        for (std::pair<String,String> l: defConfI->second.configMap()) {
-          if (!sysDC.has(l.first)) {
-            isMatch=false;
-            break;
-          }
-          if (sysDC.getString(l.first,"")!=l.second) {
-            isMatch=false;
-            break;
-          }
-        }
-        if (!isMatch) break;
-      }
-      if (isMatch) {
-        logV("match found!");
-        String xcv = j.name;
-        String temmrrrp = xcv.substr(0, xcv.find("##"));
-        e->song.systemName=temmrrrp;
-        break;
-      }
-    }
+    autoDetectSystemIter(i.systems,isMatch,defCountMap,defConfMap,sysCountMap,sysConfMap);
     if (isMatch) break;
   }
 
@@ -4361,7 +4370,7 @@ bool FurnaceGUI::loop() {
         if (ImGui::MenuItem(_L("lock layout##sggu"),NULL,lockLayout)) {
           lockLayout=!lockLayout;
         }
-        if (ImGui::MenuItem(_L("visualizer##sggu"),NULL,fancyPattern)) {
+        if (ImGui::MenuItem(_L("pattern visualizer##sggu"),NULL,fancyPattern)) {
           fancyPattern=!fancyPattern;
           e->enableCommandStream(fancyPattern);
           e->getCommandStream(cmdStream);
@@ -4382,41 +4391,58 @@ bool FurnaceGUI::loop() {
         ImGui::EndMenu();
       }
       if (ImGui::BeginMenu(settings.capitalMenuBar?_L("Window##menubar"):_L("window##menubar"))) {
-        if (ImGui::MenuItem(_L("song information##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SONG_INFO),songInfoOpen)) songInfoOpen=!songInfoOpen;
-        if (ImGui::MenuItem(_L("subsongs##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SUBSONGS),subSongsOpen)) subSongsOpen=!subSongsOpen;
-        if (ImGui::MenuItem(_L("speed##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SPEED),speedOpen)) speedOpen=!speedOpen;
-        if (settings.unifiedDataView) {
-          if (ImGui::MenuItem(_L("assets##sggu"),BIND_FOR(GUI_ACTION_WINDOW_INS_LIST),insListOpen)) insListOpen=!insListOpen;
-        } else {
-          if (ImGui::MenuItem(_L("instruments##sggu"),BIND_FOR(GUI_ACTION_WINDOW_INS_LIST),insListOpen)) insListOpen=!insListOpen;
-          if (ImGui::MenuItem(_L("wavetables##sggu"),BIND_FOR(GUI_ACTION_WINDOW_WAVE_LIST),waveListOpen)) waveListOpen=!waveListOpen;
-          if (ImGui::MenuItem(_L("samples##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SAMPLE_LIST),sampleListOpen)) sampleListOpen=!sampleListOpen;
+        if (ImGui::BeginMenu(_L("song##sggu"))) {
+          if (ImGui::MenuItem(_L("song comments##sggu"), BIND_FOR(GUI_ACTION_WINDOW_NOTES), notesOpen)) notesOpen = !notesOpen;
+          if (ImGui::MenuItem(_L("song information##sggu"), BIND_FOR(GUI_ACTION_WINDOW_SONG_INFO), songInfoOpen)) songInfoOpen = !songInfoOpen;
+          if (ImGui::MenuItem(_L("subsongs##sggu"), BIND_FOR(GUI_ACTION_WINDOW_SUBSONGS), subSongsOpen)) subSongsOpen = !subSongsOpen;
+          ImGui::Separator();
+          if (ImGui::MenuItem(_L("channels##sggu"),BIND_FOR(GUI_ACTION_WINDOW_CHANNELS),channelsOpen)) channelsOpen=!channelsOpen;
+          if (ImGui::MenuItem(_L("chip manager##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SYS_MANAGER),sysManagerOpen)) sysManagerOpen=!sysManagerOpen;
+          if (ImGui::MenuItem(_L("orders##sggu"),BIND_FOR(GUI_ACTION_WINDOW_ORDERS),ordersOpen)) ordersOpen=!ordersOpen;
+          if (ImGui::MenuItem(_L("pattern##sggu"),BIND_FOR(GUI_ACTION_WINDOW_PATTERN),patternOpen)) patternOpen=!patternOpen;
+          if (ImGui::MenuItem(_L("pattern manager##sggu"),BIND_FOR(GUI_ACTION_WINDOW_PAT_MANAGER),patManagerOpen)) patManagerOpen=!patManagerOpen;
+          if (ImGui::MenuItem(_L("mixer##sggu"),BIND_FOR(GUI_ACTION_WINDOW_MIXER),mixerOpen)) mixerOpen=!mixerOpen;
+          if (ImGui::MenuItem(_L("compatibility flags##sggu"),BIND_FOR(GUI_ACTION_WINDOW_COMPAT_FLAGS),compatFlagsOpen)) compatFlagsOpen=!compatFlagsOpen;
+          ImGui::EndMenu();
         }
-        if (ImGui::MenuItem(_L("orders##sggu"),BIND_FOR(GUI_ACTION_WINDOW_ORDERS),ordersOpen)) ordersOpen=!ordersOpen;
-        if (ImGui::MenuItem(_L("pattern##sggu"),BIND_FOR(GUI_ACTION_WINDOW_PATTERN),patternOpen)) patternOpen=!patternOpen;
-        if (ImGui::MenuItem(_L("mixer##sggu"),BIND_FOR(GUI_ACTION_WINDOW_MIXER),mixerOpen)) mixerOpen=!mixerOpen;
-        if (ImGui::MenuItem(_L("grooves##sggu"),BIND_FOR(GUI_ACTION_WINDOW_GROOVES),groovesOpen)) groovesOpen=!groovesOpen;
-        if (ImGui::MenuItem(_L("channels##sggu"),BIND_FOR(GUI_ACTION_WINDOW_CHANNELS),channelsOpen)) channelsOpen=!channelsOpen;
-        if (ImGui::MenuItem(_L("pattern manager##sggu"),BIND_FOR(GUI_ACTION_WINDOW_PAT_MANAGER),patManagerOpen)) patManagerOpen=!patManagerOpen;
-        if (ImGui::MenuItem(_L("chip manager##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SYS_MANAGER),sysManagerOpen)) sysManagerOpen=!sysManagerOpen;
-        if (ImGui::MenuItem(_L("compatibility flags##sggu"),BIND_FOR(GUI_ACTION_WINDOW_COMPAT_FLAGS),compatFlagsOpen)) compatFlagsOpen=!compatFlagsOpen;
-        if (ImGui::MenuItem(_L("song comments##sggu"),BIND_FOR(GUI_ACTION_WINDOW_NOTES),notesOpen)) notesOpen=!notesOpen;
+        if (ImGui::BeginMenu(_L("assets##sggu"))) {
+          if (settings.unifiedDataView) {
+            if (ImGui::MenuItem(_L("assets##sggu"), BIND_FOR(GUI_ACTION_WINDOW_INS_LIST), insListOpen)) insListOpen = !insListOpen;
+          } else {
+            if (ImGui::MenuItem(_L("instruments##sggu"), BIND_FOR(GUI_ACTION_WINDOW_INS_LIST), insListOpen)) insListOpen = !insListOpen;
+            if (ImGui::MenuItem(_L("samples##sggu"), BIND_FOR(GUI_ACTION_WINDOW_SAMPLE_LIST), sampleListOpen)) sampleListOpen = !sampleListOpen;
+            if (ImGui::MenuItem(_L("wavetables##sggu"), BIND_FOR(GUI_ACTION_WINDOW_WAVE_LIST), waveListOpen)) waveListOpen = !waveListOpen;
+          }
+          ImGui::Separator();
+          if (ImGui::MenuItem(_L("instrument editor##sggu"), BIND_FOR(GUI_ACTION_WINDOW_INS_EDIT), insEditOpen)) insEditOpen = !insEditOpen;
+          if (ImGui::MenuItem(_L("sample editor##sggu"), BIND_FOR(GUI_ACTION_WINDOW_SAMPLE_EDIT), sampleEditOpen)) sampleEditOpen = !sampleEditOpen;
+          if (ImGui::MenuItem(_L("wavetable editor##sggu"), BIND_FOR(GUI_ACTION_WINDOW_WAVE_EDIT), waveEditOpen)) waveEditOpen = !waveEditOpen;
+          ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu(_L("visualizers##sggu"))) {
+          if (ImGui::MenuItem(_L("oscilloscope (master)##sggu"),BIND_FOR(GUI_ACTION_WINDOW_OSCILLOSCOPE),oscOpen)) oscOpen=!oscOpen;
+          if (ImGui::MenuItem(_L("oscilloscope (per-channel)##sggu"),BIND_FOR(GUI_ACTION_WINDOW_CHAN_OSC),chanOscOpen)) chanOscOpen=!chanOscOpen;
+          if (ImGui::MenuItem(_L("oscilloscope (X-Y)##sggu"),BIND_FOR(GUI_ACTION_WINDOW_XY_OSC),xyOscOpen)) xyOscOpen=!xyOscOpen;
+          if (ImGui::MenuItem(_L("volume meter##sggu"),BIND_FOR(GUI_ACTION_WINDOW_VOL_METER),volMeterOpen)) volMeterOpen=!volMeterOpen;
+          ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu(_L("tempo##sggu"))) {
+          if (ImGui::MenuItem(_L("clock##sggu"),BIND_FOR(GUI_ACTION_WINDOW_CLOCK),clockOpen)) clockOpen=!clockOpen;
+          if (ImGui::MenuItem(_L("grooves##sggu"),BIND_FOR(GUI_ACTION_WINDOW_GROOVES),groovesOpen)) groovesOpen=!groovesOpen;
+          if (ImGui::MenuItem(_L("speed##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SPEED),speedOpen)) speedOpen=!speedOpen;
+          ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu(_L("debug##sggu"))) {
+          if (ImGui::MenuItem(_L("log viewer##sggu"),BIND_FOR(GUI_ACTION_WINDOW_LOG),logOpen)) logOpen=!logOpen;
+          if (ImGui::MenuItem(_L("register view##sggu"),BIND_FOR(GUI_ACTION_WINDOW_REGISTER_VIEW),regViewOpen)) regViewOpen=!regViewOpen;
+          if (ImGui::MenuItem(_L("statistics##sggu"),BIND_FOR(GUI_ACTION_WINDOW_STATS),statsOpen)) statsOpen=!statsOpen;
+          if (ImGui::MenuItem(_L("memory composition##sggu"),BIND_FOR(GUI_ACTION_WINDOW_MEMORY),memoryOpen)) memoryOpen=!memoryOpen;
+          ImGui::EndMenu();
+        }
         ImGui::Separator();
-        if (ImGui::MenuItem(_L("instrument editor##sggu"),BIND_FOR(GUI_ACTION_WINDOW_INS_EDIT),insEditOpen)) insEditOpen=!insEditOpen;
-        if (ImGui::MenuItem(_L("wavetable editor##sggu"),BIND_FOR(GUI_ACTION_WINDOW_WAVE_EDIT),waveEditOpen)) waveEditOpen=!waveEditOpen;
-        if (ImGui::MenuItem(_L("sample editor##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SAMPLE_EDIT),sampleEditOpen)) sampleEditOpen=!sampleEditOpen;
-        ImGui::Separator();
+        if (ImGui::MenuItem(_L("effect list##sggu"),BIND_FOR(GUI_ACTION_WINDOW_EFFECT_LIST),effectListOpen)) effectListOpen=!effectListOpen;
         if (ImGui::MenuItem(_L("play/edit controls##sggu"),BIND_FOR(GUI_ACTION_WINDOW_EDIT_CONTROLS),editControlsOpen)) editControlsOpen=!editControlsOpen;
         if (ImGui::MenuItem(_L("piano/input pad##sggu"),BIND_FOR(GUI_ACTION_WINDOW_PIANO),pianoOpen)) pianoOpen=!pianoOpen;
-        if (ImGui::MenuItem(_L("oscilloscope (master)##sggu"),BIND_FOR(GUI_ACTION_WINDOW_OSCILLOSCOPE),oscOpen)) oscOpen=!oscOpen;
-        if (ImGui::MenuItem(_L("oscilloscope (per-channel)##sggu"),BIND_FOR(GUI_ACTION_WINDOW_CHAN_OSC),chanOscOpen)) chanOscOpen=!chanOscOpen;
-        if (ImGui::MenuItem(_L("oscilloscope (X-Y)##sggu"),BIND_FOR(GUI_ACTION_WINDOW_XY_OSC),xyOscOpen)) xyOscOpen=!xyOscOpen;
-        if (ImGui::MenuItem(_L("volume meter##sggu"),BIND_FOR(GUI_ACTION_WINDOW_VOL_METER),volMeterOpen)) volMeterOpen=!volMeterOpen;
-        if (ImGui::MenuItem(_L("clock##sggu"),BIND_FOR(GUI_ACTION_WINDOW_CLOCK),clockOpen)) clockOpen=!clockOpen;
-        if (ImGui::MenuItem(_L("register view##sggu"),BIND_FOR(GUI_ACTION_WINDOW_REGISTER_VIEW),regViewOpen)) regViewOpen=!regViewOpen;
-        if (ImGui::MenuItem(_L("log viewer##sggu"),BIND_FOR(GUI_ACTION_WINDOW_LOG),logOpen)) logOpen=!logOpen;
-        if (ImGui::MenuItem(_L("statistics##sggu"),BIND_FOR(GUI_ACTION_WINDOW_STATS),statsOpen)) statsOpen=!statsOpen;
-        if (ImGui::MenuItem(_L("memory composition##sggu"),BIND_FOR(GUI_ACTION_WINDOW_MEMORY),memoryOpen)) memoryOpen=!memoryOpen;
         if (spoilerOpen) if (ImGui::MenuItem(_L("spoiler##sggu"),NULL,spoilerOpen)) spoilerOpen=!spoilerOpen;
 
         ImGui::EndMenu();
@@ -4425,7 +4451,6 @@ bool FurnaceGUI::loop() {
         if (ImGui::MenuItem(_L("effect list##sggu"),BIND_FOR(GUI_ACTION_WINDOW_EFFECT_LIST),effectListOpen)) effectListOpen=!effectListOpen;
         if (ImGui::MenuItem(_L("debug menu##sggu"),BIND_FOR(GUI_ACTION_WINDOW_DEBUG))) debugOpen=!debugOpen;
         if (ImGui::MenuItem(_L("inspector##sggu"))) inspectorOpen=!inspectorOpen;
-        //if (ImGui::MenuItem("shader editor")) shaderEditor=!shaderEditor;
         if (ImGui::MenuItem(_L("panic##sggu"),BIND_FOR(GUI_ACTION_PANIC))) e->syncReset();
         if (ImGui::MenuItem(_L("about...##sggu"),BIND_FOR(GUI_ACTION_WINDOW_ABOUT))) {
           aboutOpen=true;
@@ -4449,7 +4474,7 @@ bool FurnaceGUI::loop() {
           info=settings.language == DIV_LANG_ENGLISH ? "| Groove" : _L("| Groove##sggu");
         }
 
-        info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? " @ %gHz (%g BPM) " : _L(" @ %gHz (%g BPM) ##sggu")),e->getCurHz(),calcBPM(e->getSpeeds(),e->getCurHz(),e->curSubSong->virtualTempoN,e->curSubSong->virtualTempoD));
+        info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? " @ %gHz (%g BPM) " : _L(" @ %gHz (%g BPM) ##sggu")),e->getCurHz(),calcBPM(e->getSpeeds(),e->getCurHz(),e->getVirtualTempoN(),e->getVirtualTempoD()));
 
         if (settings.orderRowsBase) {
           info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Order %.2X/%.2X " : _L("| Order %.2X/%.2X ##sggu")),playOrder,e->curSubSong->ordersLen-1);
@@ -6164,11 +6189,11 @@ bool FurnaceGUI::loop() {
         if (ImGui::MenuItem(temp)) 
         {
           // create wave
-          curWave=e->addLocalWave(curIns);
-          if (curWave==-1) 
+          curLocalWave=e->addLocalWave(curIns);
+          if (curLocalWave == -1)
           {
             showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sggu"));
-          } 
+          }
           else 
           {
             wantScrollList=true;
@@ -7403,8 +7428,12 @@ void FurnaceGUI::commitState() {
   }
 }
 
-bool FurnaceGUI::finish() {
+bool FurnaceGUI::finish(bool saveConfig) {
   commitState();
+  if (saveConfig) {
+    logI("saving config.");
+    e->saveConf();
+  }
   rend->quitGUI();
   ImGui_ImplSDL2_Shutdown();
   quitRender();
@@ -7909,7 +7938,6 @@ FurnaceGUI::FurnaceGUI():
   xyOscDecayTime(10.0f),
   xyOscIntensity(2.0f),
   xyOscThickness(2.0f),
-  followLog(true),
 #ifdef IS_MOBILE
   pianoOctaves(7),
   pianoOctavesEdit(2),

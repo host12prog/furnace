@@ -22,6 +22,17 @@
 #include "../../ta-log.h"
 #include <math.h>
 
+#ifdef HAVE_GUI
+#include "../../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 #define rWrite(a,v) if (!skipRegisterWrites) {writes.push(QueuedWrite(a,v)); if (dumpWrites) {addWrite(a,v);} }
 #define rWriteMask(a,v,m) if (!skipRegisterWrites) {writes.push(QueuedWrite(a,v,m)); if (dumpWrites) {addWrite(a,v);} }
 #define chWrite(c,a,v) \
@@ -279,6 +290,19 @@ void DivPlatformN163::tick(bool sysTick) {
       chan[i].freqChanged=false;
     }
   }
+
+  // update memory composition positions
+  for (int i=0; i<=chanMax; i++) {
+    memCompo.entries[i].begin=chan[i].wavePos>>1;
+    memCompo.entries[i].end=(chan[i].wavePos+chan[i].waveLen)>>1;
+    memCompo.entries[i+8].begin=chan[i].curWavePos>>1;
+    memCompo.entries[i+8].end=(chan[i].curWavePos+chan[i].curWaveLen)>>1;
+  }
+
+  // update register pool
+  for (int i=0; i<128; i++) {
+    regPool[i]=n163.reg(i);
+  }
 }
 
 int DivPlatformN163::dispatch(DivCommand c) {
@@ -363,7 +387,9 @@ int DivPlatformN163::dispatch(DivCommand c) {
       chan[c.chan].freqChanged=true;
       break;
     case DIV_CMD_NOTE_PORTA: {
-      int destFreq=NOTE_FREQUENCY(c.value2);
+      double destFreqD=NOTE_FREQUENCY(c.value2);
+      if (destFreqD>2000000000.0) destFreqD=2000000000.0;
+      int destFreq=destFreqD;
       bool return2=false;
       if (destFreq>chan[c.chan].baseFreq) {
         chan[c.chan].baseFreq+=c.value*((parent->song.linearPitch==2)?1:16);
@@ -387,17 +413,17 @@ int DivPlatformN163::dispatch(DivCommand c) {
     }
     case DIV_CMD_WAVE:
       chan[c.chan].wave=c.value;
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_N163));
       if (chan[c.chan].waveMode) {
         chan[c.chan].waveUpdated=true;
-        chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_N163));
       }
       chan[c.chan].keyOn=true;
       break;
     case DIV_CMD_WAVE_LOCAL:
       chan[c.chan].wave=c.value | (1 << 30);
+      chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_N163));
       if (chan[c.chan].waveMode) {
         chan[c.chan].waveUpdated=true;
-        chan[c.chan].ws.changeWave1(chan[c.chan].wave & 0xff, false, (chan[c.chan].wave & (1 << 30)) ? true : false, parent->getIns(chan[c.chan].ins,DIV_INS_N163));
       }
       chan[c.chan].keyOn=true;
       break;
@@ -485,6 +511,7 @@ void DivPlatformN163::forceIns() {
       chan[i].waveChanged=true;
     }
   }
+  memCompo.entries[16].begin=120-chanMax*8;
 }
 
 void DivPlatformN163::notifyWaveChange(int wave) {
@@ -525,9 +552,6 @@ DivDispatchOscBuffer* DivPlatformN163::getOscBuffer(int ch) {
 }
 
 unsigned char* DivPlatformN163::getRegisterPool() {
-  for (int i=0; i<128; i++) {
-    regPool[i]=n163.reg(i);
-  }
   return regPool;
 }
 
@@ -553,6 +577,8 @@ void DivPlatformN163::reset() {
   loadWave=-1;
   loadPos=0;
   rWrite(0x7f,initChanMax<<4);
+
+  memCompo.entries[16].begin=120-chanMax*8;
 }
 
 void DivPlatformN163::poke(unsigned int addr, unsigned short val) {
@@ -561,6 +587,11 @@ void DivPlatformN163::poke(unsigned int addr, unsigned short val) {
 
 void DivPlatformN163::poke(std::vector<DivRegWrite>& wlist) {
   for (DivRegWrite& i: wlist) rWrite(i.addr,i.val);
+}
+
+const DivMemoryComposition* DivPlatformN163::getMemCompo(int index) {
+  if (index!=0) return NULL;
+  return &memCompo;
 }
 
 void DivPlatformN163::setFlags(const DivConfig& flags) {
@@ -600,6 +631,20 @@ int DivPlatformN163::init(DivEngine* p, int channels, int sugRate, const DivConf
     isMuted[i]=false;
     oscBuf[i]=new DivDispatchOscBuffer;
   }
+
+  memCompo.used=0;
+  memCompo.capacity=128;
+  memCompo.memory=regPool;
+  memCompo.waveformView=DIV_MEMORY_WAVE_4BIT;
+
+  for (int i=0; i<8; i++) {
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_N163_LOAD,fmt::sprintf(_LE("Channel %d (load)"),i),-1,0,0));
+  }
+  for (int i=0; i<8; i++) {
+    memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_N163_PLAY,fmt::sprintf(_LE("Channel %d (play)"),i),-1,0,0));
+  }
+  memCompo.entries.push_back(DivMemoryEntry(DIV_MEMORY_RESERVED,_LE("Registers"),-1,127,128));
+
   setFlags(flags);
 
   reset();

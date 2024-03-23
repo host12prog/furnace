@@ -22,6 +22,17 @@
 #include "../utfutils.h"
 #include "song.h"
 
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
 constexpr int MASTER_CLOCK_PREC=(sizeof(void*)==8)?8:0;
 
 DivDispatch* writeES5503[2]={NULL,NULL};
@@ -1189,7 +1200,7 @@ void DivEngine::performVGMWrite(SafeWriter* w, DivSystem sys, DivRegWrite& write
 
 SafeWriter* DivEngine::saveVGM(bool* sysToExport, bool loop, int version, bool patternHints, bool directStream, int trailingTicks) {
   if (version<0x150) {
-    lastError="VGM version is too low";
+    lastError=_LE("VGM version is too low");
     return NULL;
   }
   stop();
@@ -2521,7 +2532,7 @@ SafeWriter* DivEngine::saveVGM(bool* sysToExport, bool loop, int version, bool p
   while (!done) {
     if (loopPos==-1) {
       if (loopOrder==curOrder && loopRow==curRow) {
-        if ((ticks-((tempoAccum+curSubSong->virtualTempoN)/curSubSong->virtualTempoD))<=0) {
+        if ((ticks-((tempoAccum+virtualTempoN)/virtualTempoD))<=0) {
           writeLoop=true;
         }
       }

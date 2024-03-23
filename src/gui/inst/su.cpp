@@ -338,7 +338,7 @@ void FurnaceGUI::drawInsSU(DivInstrument* ins)
     macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiSU"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiSU"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Duty/Noise##sgiSU"),ins,DIV_MACRO_DUTY,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiSU"),ins,DIV_MACRO_WAVE,0xff,0,8,160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiSU"),ins,DIV_MACRO_WAVE,0xff,0,8,64,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
 
     macroList.push_back(FurnaceGUIMacroDesc(_L("Panning##sgiSU"),ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
 

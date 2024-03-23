@@ -45,7 +45,10 @@ void FurnaceGUI::drawLog() {
   }
   if (!logOpen) return;
   if (ImGui::Begin("Log Viewer",&logOpen,globalWinFlags,_L("Log Viewer###Log Viewer"))) {
-    ImGui::Checkbox("Follow",&followLog);
+    if(ImGui::Checkbox("Follow",(bool*)&settings.follow_log))
+    {
+      willCommit=true;
+    }
     ImGui::SameLine();
     ImGui::Text("Level");
     ImGui::SameLine();
@@ -86,7 +89,7 @@ void FurnaceGUI::drawLog() {
       }
       ImGui::PopFont();
 
-      if (followLog) {
+      if (settings.follow_log) {
         ImGui::SetScrollY(ImGui::GetScrollMaxY());
       }
       ImGui::EndTable();
