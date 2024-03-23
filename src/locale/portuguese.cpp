@@ -50,6 +50,7 @@ void DivLocale::addTranslationsPortuguese()
     //   sgcl  src/gui/clock.cpp          --DONE--
     //   sgcp  src/gui/commandPalette.cpp --DONE--
     //   sgcf  src/gui/compatFlags.cpp    --    -- revise
+    //   sgcs  src/gui/csPlayer.cpp
     //   sgdl  src/gui/dataList.cpp       --DONE--
     //   sgda  src/gui/doAction.cpp       --DONE--
     //   sgec  src/gui/editControls.cpp   --    -- revise
@@ -128,6 +129,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["FFTW by Matteo Frigo and Steven G. Johnson##sgab"].plurals[0] =                  "FFTW por Matteo Frigo and Steven G. Johnson";
     strings["backward-cpp by Google##sgab"].plurals[0] =                                      "backward-cpp da Google";
     strings["adpcm by superctr##sgab"].plurals[0] =                                           "adpcm por superctr";
+    strings["adpcm-xq by David Bryant##sgab"].plurals[0] =                                    "adpcm-xq por David Bryant";
     strings["Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt##sgab"].plurals[0] =                     "Nuked-OPL3/OPLL/OPM/OPN2/PSG por nukeykt";
     strings["YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt##sgab"].plurals[0] =            "YM3812-LLE, YMF262-LLE e YMF276-LLE por nukeykt";
     strings["ymfm by Aaron Giles##sgab"].plurals[0] =                                         "ymfm por Aaron Giles";
@@ -165,10 +167,12 @@ void DivLocale::addTranslationsPortuguese()
     strings["SM8521 emulator (modified version) by cam900##sgab"].plurals[0] =                "emulador de SM8521 (versão modificada) by cam900";
     strings["D65010G031 emulator (modified version) by cam900##sgab"].plurals[0] =            "emulador de D65010G031 (versão modificada) by cam900";
     strings["Namco C140/C219 emulator (modified version) by cam900##sgab"].plurals[0] =       "emulador de Namco C140/C219 (versão modificada) by cam900";
-    strings["ESFMu emulator by Kagamiin~##sgab"].plurals[0] =                                 "ESFMu por Kagamiin~";
+    strings["ESFMu emulator by Kagamiin~##sgab"].plurals[0] =                                 "ESFMu (versão modificada) por Kagamiin~";
     strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] =                         "emulador PowerNoise por scratchminer";
     strings["ep128emu by Istvan Varga##sgab"].plurals[0] =                                    "ep128emu por Istvan Varga";
     strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] =               "emulador SID2 (modificação do reSID) por LTVA";
+    strings["5E01 emulator (modification of NSFPlay) by Euly##sgab"].plurals[0] =             "emulador 5E01 (modificação do NSFPlay) por Euly";
+    strings["NDS sound emulator by cam900##sgab"].plurals[0] =                                "emulador de áudio de NDS por cam900";
 
 
     strings["greetings to:##sgab"].plurals[0] =                    "saudações a:";
@@ -363,6 +367,17 @@ void DivLocale::addTranslationsPortuguese()
     strings["when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels##sgcf"].plurals[0] = "quando habilitado, macros de volume arredondam para cima ao serem aplicadas\nisso previne que o escalonamento de volume gere um volume igual a 0, que gera silêncio em alguns chips\n\nnão tem efeito em canais com volume logarítmico";
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "Interromper sweep de hardware dos canais de pulso do NES em nova nota";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "Não interromper slide de volume após alcançar volume zero ou máximo";
+    strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Interromper efeitos E1xy/E2xy em nova nota";
+    strings["Slower 0Axy volume slide##sgcf"].plurals[0] = "Slide de volume 0Axy é mais lento";
+
+    //   sgcs  src/gui/csPlayer.cpp
+
+    strings["Command Stream Player###Command Stream Player"].plurals[0] = "Reprodutor de fluxo de comandos###Command Stream Player";
+    strings["Load##sgcs"].plurals[0] = "Carregar";
+    strings["Kill##sgcs"].plurals[0] = "Matar";
+    strings["Burn Current Song##sgcs"].plurals[0] = "Destruir Música Atual";
+    strings["Status##sgcs"].plurals[0] = "Estado";
+    strings["Hex##sgcs"].plurals[0] = "Hex";
 
 
     //   sgdl  src/gui/dataList.cpp
@@ -695,7 +710,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["settings##menubar"].plurals[0] = "opções##menubar";
     strings["full screen##sggu"].plurals[0] = "tela cheia";
     strings["lock layout##sggu"].plurals[0] = "travar leiaute";
-    strings["visualizer##sggu"].plurals[0] = "visualizador";
+    strings["pattern visualizer##sggu"].plurals[0] = "visualizador de sequência";
     strings["reset layout##sggu"].plurals[0] = "redefinir leiaute";
     strings["Are you sure you want to reset the workspace layout?##sggu"].plurals[0] = "Tem certeza de que quer redefinir o leiaute do espaço de trabalho?";
     strings["switch to mobile view##sggu"].plurals[0] = "trocar para leiaute otimizado para dispositivos móveis";
@@ -717,6 +732,10 @@ void DivLocale::addTranslationsPortuguese()
     strings["pattern manager##sggu"].plurals[0] = "gerenciador de sequências";
     strings["chip manager##sggu"].plurals[0] = "gerenciador de chips";
     strings["compatibility flags##sggu"].plurals[0] = "opções de compatibilidade";
+    strings["song##sggu"].plurals[0] = "música";
+    strings["visualizers##sggu"].plurals[0] = "visualizadores";
+    strings["tempo##sggu"].plurals[0] = "tempo";
+    strings["debug##sggu"].plurals[0] = "depuração";
     strings["song comments##sggu"].plurals[0] = "comentários da música";
     strings["instrument editor##sggu"].plurals[0] = "editor de instrumentos";
     strings["wavetable editor##sggu"].plurals[0] = "editor de wavetables";
@@ -989,6 +1008,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["Grooves##sggc"].plurals[0] = "Grooves";
     strings["Oscilloscope (X-Y)##sggc"].plurals[0] = "Osciloscópio (X-Y)";
     strings["Memory Composition##sggc"].plurals[0] = "Composição da Memória";
+    strings["Command Stream Player##sggc"].plurals[0] = "Reprodutor de Fluxo de Comandos";
     strings["Collapse/expand current window##sggc"].plurals[0] = "Contrair/expandir janela atual";
     strings["Close current window##sggc"].plurals[0] = "Fechar janela atual";
     strings["---Pattern##sggc"].plurals[0] = "---Sequência";
@@ -1399,18 +1419,17 @@ void DivLocale::addTranslationsPortuguese()
     strings["this option exports the song to a text file.\n##sgeo"].plurals[0] = "essa opção exporta a música para um arquivo texto.\n";
     strings["Cancel##sgeo7"].plurals[0] = "Cancelar";
     strings["Export##sgeo6"].plurals[0] = "Exportar";
-    strings["this option exports a text or binary file which\n"
+    strings["this option exports a binary file which\n"
             "contains a dump of the internal command stream\n"
             "produced when playing the song.\n\n"
             "technical/development use only!"].plurals[0] = 
 
-            "essa opção exporta um arquivo texto ou binário que\n"
+            "essa opção exporta um arquivo binário que\n"
             "contém um despejo do fluxo de comandos interno\n"
             "produzido ao reproduzir a música.\n\n"
             "somente para uso técnico ou para desenvolvimento!";
     strings["Cancel##sgeo8"].plurals[0] = "Cancelar";
-    strings["Export (binary)##sgeo"].plurals[0] = "Exportar (binário)";
-    strings["Export (text)##sgeo"].plurals[0] = "Exportar (texto)";
+    strings["Export##sgeo"].plurals[0] = "Exportar";
     strings["this option exports a module which is\n"
             "compatible with tildearrow Furnace app.\n\n"
 
@@ -1568,12 +1587,20 @@ void DivLocale::addTranslationsPortuguese()
     strings["Search...##sgns"].plurals[0] = "Procurar...";
     strings["Categories##sgns"].plurals[0] = "Categorias";
     strings["Systems##sgns"].plurals[0] = "Sistemas";
+    strings["no systems here yet!##sgns"].plurals[0] = "nenhum sistema aqui ainda!";
+    strings["no results##sgns"].plurals[0] = "nenhum resultado";
     strings["I'm feeling lucky##sgns"].plurals[0] = "Estou com sorte";
+    strings["no categories available! what in the world.##sgns"].plurals[0] = "nenhuma categoria disponível! que país é esse...";
     strings["Cancel##sgns"].plurals[0] = "Cancelar";
 
     //   sgme  src/gui/memory.cpp
 
     strings["Memory Composition###Memory Composition"].plurals[0] = "Composição da Memória###Memory Composition";
+    strings["bank %d##sgme"].plurals[0] = "banco %d";
+    strings["%d-%d ($%x-$%x): %d bytes ($%x)##sgme"].plurals[0] = "%d-%d ($%x-$%x): %d bytes ($%x)";
+    strings["click to open sample editor##sgme"].plurals[0] = "clique para abrir o editor de samples";
+    strings["%d-%d ($%x-$%x): %d bytes ($%x)##sgme"].plurals[0] = "%d-%d ($%x-$%x): %d bytes ($%x)";
+    strings["no chips with memory##sgme"].plurals[0] = "nenhum chip com memória";
 
     //   sgor  src/gui/orders.cpp
 
@@ -1613,6 +1640,7 @@ void DivLocale::addTranslationsPortuguese()
     //   sgpa  src/gui/pattern.cpp
 
     strings["Pattern###Pattern"].plurals[0] = "Sequência###Pattern";
+    strings["there aren't any channels to show.##sgpa"].plurals[0] = "não há nenhum canal a ser exibido.";
     strings["click for pattern options (effect columns/pattern names/visualizer)##sgpa"].plurals[0] = "clique para opções de sequência (colunas de efeito/nomes das faixas/visualizador)";
     strings["Options:##sgpa"].plurals[0] = "Opções:";
     strings["Effect columns/collapse##sgpa"].plurals[0] = "Botões de colunas de efeito/contrair faixa";
@@ -1655,6 +1683,8 @@ void DivLocale::addTranslationsPortuguese()
     strings["Sega Genesis (CSM with Sega CD)##sgpr"].plurals[0] = "Sega Mega Drive (CSM, com Mega CD)";
     strings["Sega Master System (with FM expansion)##sgpr"].plurals[0] = "Sega Master System (with expansão FM)";
     strings["Sega Master System (with FM expansion in drums mode)##sgpr"].plurals[0] = "Sega Master System (with expansão FM em modo bateria)";
+    strings["Game Boy Advance (no software mixing)##sgpr"].plurals[0] = "Game Boy Advance (sem mixing em software)";
+    strings["Game Boy Advance (with MinMod)##sgpr"].plurals[0] = "Game Boy Advance (com MinMod)";
     strings["Famicom with Konami VRC6##sgpr"].plurals[0] = "Famicom com Konami VRC6";
     strings["Famicom with Konami VRC7##sgpr0"].plurals[0] = "Famicom com Konami VRC7";
     strings["Famicom with MMC5##sgpr"].plurals[0] = "Famicom com MMC5";
@@ -1876,6 +1906,8 @@ void DivLocale::addTranslationsPortuguese()
     strings["Dynax/Nakanihon 3rd generation hardware##sgpr"].plurals[0] = "Hardware Dynax/Nakanihon de 3ª geração";
     strings["Dynax/Nakanihon 3rd generation hardware (drums mode)##sgpr"].plurals[0] = "Hardware Dynax/Nakanihon de 3ª geração (modo bateria)";
     strings["Dynax/Nakanihon Real Break (drums mode)##sgpr"].plurals[0] = "Dynax/Nakanihon Real Break (modo bateria)";
+    strings["User##sgpr"].plurals[0] = "Usuário";
+    strings["system presets that you have saved.##sgpr"].plurals[0] = "predefinições de sistema que você salvou.";
     strings["chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.##sgpr"].plurals[0] = "chips que utilizam modulação de frequência (FM) para gerar som.\nalguns destes também possuem mais recursos (como canais de onda quadrada e samples).\nNa verdade, \"FM\" aqui significa modulação de fase,\nmas as duas técnicas são indistinguíveis\nse você utilizar ondas senoidais.";
     strings["Yamaha YM2203 (extended channel 3)##sgpr"].plurals[0] = "Yamaha YM2203 (canal 3 estendido)";
     strings["Yamaha YM2203 (extended channel 3 and CSM)##sgpr"].plurals[0] = "Yamaha YM2203 (canal 3 estendido e CSM)";
@@ -1986,6 +2018,9 @@ void DivLocale::addTranslationsPortuguese()
     strings["C219: maximum sample length is 131072##sgse"].plurals[0] = "C219: o comprimento máximo da sample é 131072";
     strings["MSM6295: samples can't loop##sgse"].plurals[0] = "MSM6295: não é possível repetir (loop) samples";
     strings["MSM6295: maximum bankswitched sample length is 129024##sgse"].plurals[0] = "MSM6295: o comprimento máximo da sample com bankswitching é 129024";
+    strings["GBA DMA: loop start must be a multiple of 4##sgse"].plurals[0] = "GBA DMA: o início do loop precisa ser um múltiplo de 4##sgse";
+    strings["GBA DMA: loop length must be a multiple of 16##sgse"].plurals[0] = "GBA DMA: o comprimento do loop precisa ser um múltiplo de 16##sgse";
+    strings["GBA DMA: sample length will be padded to multiple of 16##sgse"].plurals[0] = "GBA DMA: o comprimento da sample será preenchida até um múltiplo de 16##sgse";
     strings["ES5506: backward loop mode isn't supported##sgse"].plurals[0] = "ES5506: modo de repetição (loop) reverso não é suportado";
     strings["backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506##sgse"].plurals[0] = "reverso/pingue-pongue suportado somente no DAC PCM Genérico\npingue-pongue também suportado no ES5506";
     strings["Info##sgse"].plurals[0] = "Informações";
@@ -2186,6 +2221,14 @@ void DivLocale::addTranslationsPortuguese()
     strings["Exact output (normal)##sgsc"].plurals[0] = "Saída exata (normal)";
     strings["Pretty please one more compat flag when I use arpeggio and my sound length##sgsc"].plurals[0] = "Porfavorzinho mais uma opção de compatibilidade quando eu usar arpejo e meu comprimento de som";
     strings["Clock rate:##sgsc2"].plurals[0] = "Taxa de clock:";
+    strings["Pretty please one more compat flag when I use arpeggio and my sound length##sgsc"].plurals[0] = "Porfavorzinho mais uma opção de compatibilidade quando eu usar arpejo e meu comprimento de som";
+    strings["DAC bit depth (reduces output rate):##sgsc"].plurals[0] = "Profundidade de bits do DAC (reduz a taxa de amostragem):";
+    strings["Volume scale:##sgsc"].plurals[0] = "Escala de volume:";
+    strings["Mix buffers (allows longer echo delay):##sgsc"].plurals[0] = "Quantidade de buffers de mixing (permite atraso de eco mais longo):";
+    strings["Channel limit:##sgsc"].plurals[0] = "Limite de canais:";
+    strings["Sample rate:##sgsc"].plurals[0] = "Taxa de amostragem:";
+    strings["Actual sample rate: %d Hz##sgsc"].plurals[0] = "Taxa de amostragem real: %d Hz";
+    strings["Max mixer CPU usage: %.0f%%##sgsc"].plurals[0] = "Uso de CPU máximo do mixer: %.0f%%";
     strings["Arcade (4MHz)##sgsc"].plurals[0] = "Arcade (4MHz)";
     strings["Half NTSC (1.79MHz)##sgsc"].plurals[0] = "Metade do NTSC (1.79MHz)";
     strings["Patch set:##sgsc"].plurals[0] = "Conjunto de timbres:";
@@ -2212,6 +2255,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["- 0 disables envelope reset. not recommended!\n- 1 may trigger SID envelope bugs.\n- values that are too high may result in notes being skipped.##sgsc"].plurals[0] = "- 0 desabilita o reinício do envelope. não recomendado!\n- 1 pode causar bugs de envelope do SID.\n- valores muito altos podem resultar em notas sendo puladas.";
     strings["Disable 1Exy env update (compatibility)##sgsc"].plurals[0] = "Desabilitar atualização de envelope via 1Exy (compatibilidade)";
     strings["Relative duty and cutoff macros are coarse (compatibility)##sgsc"].plurals[0] = "Macros de ciclo de trabalho e ponto de corte relativos são grossas (compatibilidade)";
+    strings["Cutoff macro race conditions (compatibility)##sgsc"].plurals[0] = "Condições de corrida nas macros de ponto de corte (compatibilidade)";
     strings["Disable ExtCh FM macros (compatibility)##sgsc1"].plurals[0] = "Desabilitar macros FM ExtCh (compatibilidade)";
     strings["Ins change in ExtCh operator 2-4 affects FB (compatibility)##sgsc1"].plurals[0] = "Mudança de inst. no operador ExtCh 2-4 afeta FB (compatibilidade)";
     strings["SSG Volume##sgsc0"].plurals[0] = "Volume do SSG";
@@ -2287,6 +2331,8 @@ void DivLocale::addTranslationsPortuguese()
     strings["Bankswitched (NMK112)##sgsc"].plurals[0] = "Usar Bankswitching (NMK112)";
     strings["Clock rate:##sgsc12"].plurals[0] = "Taxa de clock:";
     strings["1.5MHz (Arcade)##sgsc"].plurals[0] = "1.5MHz (Arcade)";
+    strings["Consistent frequency across all duties##sgsc"].plurals[0] = "Frequência consistente ao longo de todos os ciclos de trabalho";
+    strings["note: only works for an initial LFSR value of 0!##sgsc"].plurals[0] = "nota: só funciona para um valor inicial de LFSR igual a 0!";
     strings["Clock rate:##sgsc13"].plurals[0] = "Taxa de clock:";
     strings["Clock rate:##sgsc14"].plurals[0] = "Taxa de clock:";
     strings["Chip type:##sgsc4"].plurals[0] = "Tipo de chip:";
@@ -2344,11 +2390,14 @@ void DivLocale::addTranslationsPortuguese()
     strings["Waveform storage mode:##sgsc1"].plurals[0] = "Modo de armazenamento das waveforms:";
     strings["Dynamic (unconfirmed)##sgsc"].plurals[0] = "Dinâmico (não confirmado)";
     strings["Static (up to 5 waves)##sgsc"].plurals[0] = "Estático (até 5 ondas)";
+    strings["DS (4MB RAM)##sgsc"].plurals[0] = "DS (4MB RAM)";
+    strings["DSi (16MB RAM)##sgsc"].plurals[0] = "DSi (16MB RAM)";
     strings["nothing to configure##sgsc"].plurals[0] = "nada para configurar";
     strings["Downmix chip output to mono##sgsc"].plurals[0] = "Misturar saída do chip para mono";
     strings["Reserved blocks for wavetables:##sgsc"].plurals[0] = "Blocos reservados para wavetables:";
     strings["Reserve this many blocks 256 bytes each in sample memory.\nEach block holds one wavetable (is used for one wavetable channel),\nso reserve as many as you need.##sgsc"].plurals[0] = "Reserva tal quantidade de blocos, 256 bytes cada, na memória de sample.\nCada bloco irá conter uma wavetable (será usado para um canal wavetable),\nentão reserve tantos quanto você precisar.";
     strings["Custom clock rate##sgsc"].plurals[0] = "Taxa de clock personalizada";
+    strings["Hz##sgscHz"].plurals[0] = "Hz##sgscHz";
     strings["1MB##sgsc"].plurals[0] = "1MB";
     strings["256KB##sgsc"].plurals[0] = "256KB";
     strings["Namco System 2 (2MB)##sgsc"].plurals[0] = "Namco System 2 (2MB)";
@@ -2538,6 +2587,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["High##sgse"].plurals[0] = "Alta";
     strings["Low##sgse"].plurals[0] = "Baixa";
     strings["ASAP (C++ port)##sgse"].plurals[0] = "ASAP (conversão para C++)";
+    strings["ESFMu (fast)##sgse"].plurals[0] = "ESFMu (rápido)";
     strings["KIOCSOUND on /dev/tty1##sgse"].plurals[0] = "KIOCSOUND em /dev/tty1";
     strings["KIOCSOUND on standard output##sgse"].plurals[0] = "KIOCSOUND na saída padrão";
     strings["Disabled/custom##sgse0"].plurals[0] = "Desabilitado/personalizado";
@@ -2876,6 +2926,9 @@ void DivLocale::addTranslationsPortuguese()
     strings["No##csw0"].plurals[0] = "Não##csw0";
     strings["Yes##csw1"].plurals[0] = "Sim##csw1";
     strings["Inverted##csw2"].plurals[0] = "Invertido##csw2";
+    strings["How many steps to move with each scroll wheel step?##sgse"].plurals[0] = "Quantos passos mover com cada passo do scroll do mouse?";
+    strings["One##cws0"].plurals[0] = "Um a um##cws0";
+    strings["Edit Step##cws1"].plurals[0] = "Passo de edição##cws1";
     strings["Assets##sgse0"].plurals[0] = "Recursos";
     strings["Display instrument type menu when adding instrument##sgse"].plurals[0] = "Mostrar menu de tipo de instrumento ao adicionar instrumento";
     strings["Select asset after opening one##sgse"].plurals[0] = "Selecionar recurso após abrir um";
@@ -3109,6 +3162,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["Piano##sgse"].plurals[0] = "Piano";
     strings["Clock##sgse"].plurals[0] = "Clock";
     strings["Patchbay##sgse"].plurals[0] = "Patchbay";
+    strings["Memory Composition##sgse"].plurals[0] = "Composição da Memória##sgse";
     strings["Log Viewer##sgse"].plurals[0] = "Visualizador de logs";
 
     // these are messy, but the ##CC_GUI... is required.
@@ -3425,6 +3479,27 @@ void DivLocale::addTranslationsPortuguese()
     strings["Connection (selected)##CC_GUI_COLOR_PATCHBAY_CONNECTION"].plurals[0] = "Conexão (selecionada)##CC_GUI_COLOR_PATCHBAY_CONNECTION";
     strings["Connection (other)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG"].plurals[0] = "Conexão (outra)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG";
 
+    strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Fundo##CC_GUI_COLOR_MEMORY_BG";
+    strings["Unknown##CC_GUI_COLOR_MEMORY_FREE"].plurals[0] = "Desconhecido##CC_GUI_COLOR_MEMORY_FREE";
+    strings["Reserved##CC_GUI_COLOR_MEMORY_RESERVED"].plurals[0] = "Reservado##CC_GUI_COLOR_MEMORY_RESERVED";
+    strings["Sample##CC_GUI_COLOR_MEMORY_SAMPLE"].plurals[0] = "Sample##CC_GUI_COLOR_MEMORY_SAMPLE";
+    strings["Sample (alternate 1)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT1"].plurals[0] = "Sample (alternativo 1)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT1";
+    strings["Sample (alternate 2)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT2"].plurals[0] = "Sample (alternativo 2)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT2";
+    strings["Sample (alternate 3)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT3"].plurals[0] = "Sample (alternativo 3)##CC_GUI_COLOR_MEMORY_SAMPLE_ALT3";
+    strings["Wave RAM##CC_GUI_COLOR_MEMORY_WAVE_RAM"].plurals[0] = "Memória RAM de Onda##CC_GUI_COLOR_MEMORY_WAVE_RAM";
+    strings["Wavetable (static)##CC_GUI_COLOR_MEMORY_WAVE_STATIC"].plurals[0] = "Wavetable (estática)##CC_GUI_COLOR_MEMORY_WAVE_STATIC";
+    strings["Echo buffer##CC_GUI_COLOR_MEMORY_ECHO"].plurals[0] = "Buffer de Eco##CC_GUI_COLOR_MEMORY_ECHO";
+    strings["Namco 163 load pos##CC_GUI_COLOR_MEMORY_N163_LOAD"].plurals[0] = "Posição de carga de onda do Namco 163##CC_GUI_COLOR_MEMORY_N163_LOAD";
+    strings["Namco 163 play pos##CC_GUI_COLOR_MEMORY_N163_PLAY"].plurals[0] = "Posição de reprodução de onda do Namco 163##CC_GUI_COLOR_MEMORY_N163_PLAY";
+    strings["Sample (bank 0)##CC_GUI_COLOR_MEMORY_BANK0"].plurals[0] = "Sample (banco 0)##CC_GUI_COLOR_MEMORY_BANK0";
+    strings["Sample (bank 1)##CC_GUI_COLOR_MEMORY_BANK1"].plurals[0] = "Sample (banco 1)##CC_GUI_COLOR_MEMORY_BANK1";
+    strings["Sample (bank 2)##CC_GUI_COLOR_MEMORY_BANK2"].plurals[0] = "Sample (banco 2)##CC_GUI_COLOR_MEMORY_BANK2";
+    strings["Sample (bank 3)##CC_GUI_COLOR_MEMORY_BANK3"].plurals[0] = "Sample (banco 3)##CC_GUI_COLOR_MEMORY_BANK3";
+    strings["Sample (bank 4)##CC_GUI_COLOR_MEMORY_BANK4"].plurals[0] = "Sample (banco 4)##CC_GUI_COLOR_MEMORY_BANK4";
+    strings["Sample (bank 5)##CC_GUI_COLOR_MEMORY_BANK5"].plurals[0] = "Sample (banco 5)##CC_GUI_COLOR_MEMORY_BANK5";
+    strings["Sample (bank 6)##CC_GUI_COLOR_MEMORY_BANK6"].plurals[0] = "Sample (banco 6)##CC_GUI_COLOR_MEMORY_BANK6";
+    strings["Sample (bank 7)##CC_GUI_COLOR_MEMORY_BANK7"].plurals[0] = "Sample (banco 7)##CC_GUI_COLOR_MEMORY_BANK7";
+
     strings["Log level: Error##CC_GUI_COLOR_LOGLEVEL_ERROR"].plurals[0] = "Nível de log: Erro##CC_GUI_COLOR_LOGLEVEL_ERROR";
     strings["Log level: Warning##CC_GUI_COLOR_LOGLEVEL_WARNING"].plurals[0] = "Nível de log: Aviso##CC_GUI_COLOR_LOGLEVEL_WARNING";
     strings["Log level: Info##CC_GUI_COLOR_LOGLEVEL_INFO"].plurals[0] = "Nível de log: Informação##CC_GUI_COLOR_LOGLEVEL_INFO";
@@ -3462,6 +3537,8 @@ void DivLocale::addTranslationsPortuguese()
     //   sgifmeh   src/gui/inst/fmEnvUtil.h          --DONE--
     //   sgiGA20   src/gui/inst/ga20.cpp             --DONE--
     //   sgiGB     src/gui/inst/gb.cpp               --DONE--
+    //   sgiGBADMA src/gui/inst/gbadma.cpp
+    //sgiGBAMINMOD src/gui/inst/gbaminmod.cpp
     //   sgiK00    src/gui/inst/k007232.cpp          --DONE--
     //   sgiK05    src/gui/inst/k053260.cpp          --DONE--
     //   sgimcd    src/gui/inst/macroDraw.cpp        --DONE--
@@ -3472,6 +3549,7 @@ void DivLocale::addTranslationsPortuguese()
     //   sgi6295   src/gui/inst/msm6295.cpp          --DONE--
     //   sgiMULPCM src/gui/inst/multipcm.cpp         --DONE--
     //   sgiN163   src/gui/inst/n163.cpp             --DONE--
+    //   sgiNDS    src/gui/inst/nds.cpp
     //   sgiWSG    src/gui/inst/namco.cpp            --DONE--
     //   sgiNES    src/gui/inst/nes.cpp              --DONE--
     //   sgiOPL    src/gui/inst/opl.cpp              --DONE--
@@ -3663,7 +3741,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["Panning (right)##sgiDAVE"].plurals[0] = "Balanço (direita)";
     strings["Phase Reset##sgiDAVE"].plurals[0] = "Redef. de fase";
     strings["Control##sgiDAVE"].plurals[0] = "Controle";
-    strings["Raw Frequency##sgiDAVE"].plurals[0] = "Frequência Crua";
+    strings["Raw Frequency##sgiDAVE"].plurals[0] = "Frequência (val. registrador)";
 
     //   sgi5503   src/gui/inst/es5503.cpp
 
@@ -3836,6 +3914,28 @@ void DivLocale::addTranslationsPortuguese()
     strings["Panning##sgiGB"].plurals[0] = "Balanço";
     strings["Phase Reset##sgiGB"].plurals[0] = "Redef. de Fase";
 
+    //   sgiGBADMA src/gui/inst/gbadma.cpp
+
+    strings["Macros##sgiGBADMA"].plurals[0] = "Macros";
+    strings["Volume##sgiGBADMA"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiGBADMA"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiGBADMA"].plurals[0] = "Tom";
+    strings["Waveform##sgiGBADMA"].plurals[0] = "Forma de Onda";
+    strings["Panning##sgiGBADMA"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiGBADMA"].plurals[0] = "Redef. de Fase";
+
+    //sgiGBAMINMOD src/gui/inst/gbaminmod.cpp
+
+    strings["Macros##sgiGBAMINMOD"].plurals[0] = "Macros";
+    strings["Volume##sgiGBAMINMOD"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiGBAMINMOD"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiGBAMINMOD"].plurals[0] = "Tom";
+    strings["Waveform##sgiGBAMINMOD"].plurals[0] = "Forma de Onda";
+    strings["Panning (left)##sgiGBAMINMOD"].plurals[0] = "Balanço (esquerda)";
+    strings["Panning (right)##sgiGBAMINMOD"].plurals[0] = "Balanço (direita)";
+    strings["Special##sgiGBAMINMOD"].plurals[0] = "Especial";
+    strings["Phase Reset##sgiGBAMINMOD"].plurals[0] = "Redef. de Fase";
+
     //   sgiK00    src/gui/inst/k007232.cpp
 
     strings["Macros##sgiK00"].plurals[0] = "Macros";
@@ -3903,6 +4003,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["Panning (left)##sgiLYNX"].plurals[0] = "Balanço (esquerda)";
     strings["Panning (right)##sgiLYNX"].plurals[0] = "Balanço (direita)";
     strings["Phase Reset##sgiLYNX"].plurals[0] = "Redef. de Fase";
+    strings["Load LFSR##sgiLYNX"].plurals[0] = "Carregar LFSR";
 
     //   sgi5232   src/gui/inst/msm5232.cpp
 
@@ -3993,6 +4094,16 @@ void DivLocale::addTranslationsPortuguese()
     strings["Waveform##sgiWSG"].plurals[0] = "Forma de onda";
     strings["Panning (left)##sgiWSG"].plurals[0] = "Balanço (esquerda)";
     strings["Panning (right)##sgiWSG"].plurals[0] = "Balanço (direita)";
+
+    //   sgiNDS    src/gui/inst/nds.cpp
+
+    strings["Macros##sgiNDS"].plurals[0] = "Macros";
+    strings["Volume##sgiNDS"].plurals[0] = "Volume";
+    strings["Arpeggio##sgiNDS"].plurals[0] = "Arpejo";
+    strings["Pitch##sgiNDS"].plurals[0] = "Tom";
+    strings["Duty##sgiNDS"].plurals[0] = "Ciclo de Trab.";
+    strings["Panning##sgiNDS"].plurals[0] = "Balanço";
+    strings["Phase Reset##sgiNDS"].plurals[0] = "Redef. de Fase";
 
     //   sgiNES    src/gui/inst/nes.cpp
 
@@ -4249,6 +4360,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["Volume##sgiPV"].plurals[0] = "Volume";
     strings["Arpeggio##sgiPV"].plurals[0] = "Arpejo";
     strings["Pitch##sgiPV"].plurals[0] = "Tom";
+    strings["Raw Frequency##sgiPV"].plurals[0] = "Frequência (val. registrador)";
 
     //   sgiQ      src/gui/inst/qsound.cpp
 
@@ -4295,7 +4407,8 @@ void DivLocale::addTranslationsPortuguese()
     strings["Use sample##sgismpd"].plurals[0] = "Usar amostra";
     strings["Sample bank slot##BANKSLOT"].plurals[0] = "Vaga do banco de samples##BANKSLOT";
     strings["Sample##sgismpd1"].plurals[0] = "Sample";
-    strings["Use wavetable (Amiga/SNES/Generic DAC only)##sgismpd"].plurals[0] = "Utilizar wavetable (Amiga/SNES/DAC Genérico somente)";
+    strings["Use wavetable (Amiga/Generic DAC only)##sgismpd"].plurals[0] = "Utilizar wavetable (Amiga/DAC Genérico somente)";
+    strings["Use wavetable##sgismpd"].plurals[0] = "Utilizar wavetable";
     strings["Width##sgismpd"].plurals[0] = "Largura";
     strings["Use sample map##sgismpd"].plurals[0] = "Utilizar mapa de samples";
     strings["pitch##sgismpd"].plurals[0] = "tom";
@@ -4918,6 +5031,10 @@ void DivLocale::addTranslationsPortuguese()
     //   seen    src/engine/engine.cpp  --DONE--
     //   sesd    src/engine/sysDef.cpp  --
 
+    //           src/engine/cmdStream.cpp
+
+    strings["not a command stream"].plurals[0] = "não é um fluxo de comandos";
+
     //   seen    src/engine/engine.cpp
 
     strings["00xy: Arpeggio##seen"].plurals[0] = "00xy: Arpejo";
@@ -4949,6 +5066,9 @@ void DivLocale::addTranslationsPortuguese()
     strings["E4xx: Set vibrato range##seen"].plurals[0] = "E4xx: Definir alcance do vibrato";
     strings["E5xx: Set pitch (80: center)##seen"].plurals[0] = "E5xx: Definir tom (desafinação; 80: centro)";
     strings["E6xy: Delayed note transpose (x: 0-7 = up, 8-F = down (after (x % 7) ticks); y: semitones)##seen"].plurals[0] = "E6xy: Transposição atrasada de nota (x: 0-7 = para cima, 8-F = para baixo (após (x % 7) ticks); y: semitons)";
+    strings["E7xx: Macro release##seen"].plurals[0] = "E7xx: Repouso de macro atrasado (x: ticks)";
+    strings["E8xy: Delayed note transpose up (x: ticks; y: semitones)##seen"].plurals[0] = "E8xy: Transposição de nota atrasada para cima (x: ticks; y: semitons)";
+    strings["E9xy: Delayed note transpose down (x: ticks; y: semitones)##seen"].plurals[0] = "E9xy: Transposição de nota atrasada para baixo (x: ticks; y: semitons)";
     strings["EAxx: Legato##seen"].plurals[0] = "EAxx: Legato";
     strings["EBxx: Set LEGACY sample mode bank##seen"].plurals[0] = "EBxx: Definir banco de samples modo LEGADO";
     strings["ECxx: Note cut##seen"].plurals[0] = "ECxx: Corte de nota";
@@ -4965,9 +5085,214 @@ void DivLocale::addTranslationsPortuguese()
     strings["F8xx: Single tick volume slide up##seen"].plurals[0] = "F8xx: Slide de um tick de volume para cima";
     strings["F9xx: Single tick volume slide down##seen"].plurals[0] = "F9xx: Slide de um tick de volume para baixo";
     strings["FAxx: Fast volume slide (0y: down; x0: up)##seen"].plurals[0] = "FAxx: Slide rápido de volume (0y: para baixo; x0: para cima)";
+    strings["FCxx: Note release##seen"].plurals[0] = "FCxx: Repouso de nota atrasado (x: ticks)";
+    strings["FDxx: Set virtual tempo numerator##seen"].plurals[0] = "FDxx: Definir numerador do tempo virtual";
+    strings["FExx: Set virtual tempo denominator##seen"].plurals[0] = "FExx: Definir denominador do tempo virtual";
     strings["FFxx: Stop song##seen"].plurals[0] = "FFxx: Parar música";
     strings["9xxx: Set sample offset*256##seen"].plurals[0] = "9xxx: Definir deslocamento de sample*256";
 
+    strings["on seek: %s"].plurals[0] = "ao avançar: %s";
+    strings["on pre tell: %s"].plurals[0] = "ao predeterminar posição: %s";
+    strings["file is empty"].plurals[0] = "o arquivo está vazio";
+    strings["on tell: %s"].plurals[0] = "ao determinar posição: %s";
+    strings["ROM size mismatch, expected: %d bytes, was: %d"].plurals[0] = "divergência de tamanho da ROM, esperado: %d bytes, encontrado: %d";
+    strings["on get size: %s"].plurals[0] = "ao obter tamanho: %s";
+    strings["on read: %s"].plurals[0] = "ao ler: %s";
+    strings["invalid index"].plurals[0] = "índice inválido";
+    strings["max number of total channels is %d"].plurals[0] = "número máximo total de canais é %d";
+    strings["max number of systems is %d"].plurals[0] = "número máximo de sistemas é %d";
+    strings["cannot remove the last one"].plurals[0] = "não pode remover o último";
+    strings["source and destination are equal"].plurals[0] = "a origem e o destino são os mesmos";
+    strings["invalid source index"].plurals[0] = "índice de origem inválido";
+    strings["invalid destination index"].plurals[0] = "índice de destino inválido";
+    strings["too many wavetables!"].plurals[0] = "há muitas wavetables!";
+    strings["could not seek to end: %s"].plurals[0] = "não pôde avançar até o final: %s";
+    strings["could not determine file size: %s"].plurals[0] = "não pode determinar o tamanho do arquivo: %s";
+    strings["file size is invalid!"].plurals[0] = "o tamanho do arquivo é inválido!";
+    strings["could not seek to beginning: %s"].plurals[0] = "não pode rebobinar até o começo: %s";
+    strings["could not read entire file: %s"].plurals[0] = "não pôde ler o arquivo inteiro: %s";
+    strings["invalid wavetable header/data!"].plurals[0] = "cabeçalho/dados da wavetable inválidos!";
+    strings["premature end of file"].plurals[0] = "fim prematuro do arquivo";
+    strings["too many samples!"].plurals[0] = "há muitas samples!";
+    strings["no free patterns in channel %d!"].plurals[0] = "não há sequências livres no canal %d!";
+
+    //           src/engine/fileOps.cpp
+
+    strings["this module was created with a more recent version of Furnace!"].plurals[0] = "este módulo foi criado com uma versão mais recente do Furnace!";
+    strings["couldn't seek to info header!"].plurals[0] = "não pôde avançar até o header \"info\"!";
+    strings["invalid info header!"].plurals[0] = "header \"info\" inválido!";
+    strings["pattern length is negative!"].plurals[0] = "o comprimento da sequência é negativo!";
+    strings["pattern length is too large!"].plurals[0] = "o comprimento da sequência é muito longo!";
+    strings["song length is negative!"].plurals[0] = "o comprimento da música é negativo!";
+    strings["song is too long!"].plurals[0] = "a música é muito longa!";
+    strings["invalid instrument count!"].plurals[0] = "quantidade de instrumentos inválida!";
+    strings["invalid wavetable count!"].plurals[0] = "quantidade de wavetables inválida!";
+    strings["invalid sample count!"].plurals[0] = "quantidade de samples inválida!";
+    strings["invalid pattern count!"].plurals[0] = "quantidade de sequências inválida!";
+    strings["unrecognized system ID %.2x!"].plurals[0] = "identificador de sistema %.2x não reconhecido!";
+    strings["zero chips!"].plurals[0] = "zero chips!";
+    strings["channel %d has too many effect columns! (%d)"].plurals[0] = "o canal %d contém muitas colunas de efeito! (%d)";
+    strings["couldn't seek to chip %d flags!"].plurals[0] = "não pôde avançar até as opções do chip %d!";
+    strings["invalid flag header!"].plurals[0] = "cabeçalho \"flag\" inválido!";
+    strings["couldn't read instrument directory"].plurals[0] = "não pôde ler o diretório de instrumentos";
+    strings["invalid instrument directory data!"].plurals[0] = "dados do diretório de instrumentos inválidos!";
+    strings["couldn't read wavetable directory"].plurals[0] = "não pôde ler o diretório de wavetables";
+    strings["invalid wavetable directory data!"].plurals[0] = "dados do diretório de wavetables inválidos!";
+    strings["couldn't read sample directory"].plurals[0] = "não pôde ler o diretório de samples";
+    strings["invalid sample directory data!"].plurals[0] = "dados do diretório de samples inválidos!";
+    strings["couldn't seek to subsong %d!"].plurals[0] = "não pôde avançar até a subfaixa %d!";
+    strings["invalid subsong header!"].plurals[0] = "cabeçalho da subfaixa inválido!";
+    strings["couldn't seek to instrument %d!"].plurals[0] = "não pôde avançar até o instrumento %d!";
+    strings["invalid instrument header/data!"].plurals[0] = "cabeçalho/dados do instrumento inválidos!";
+    strings["couldn't seek to wavetable %d!"].plurals[0] = "não pôde avançar até a wavetable %d!";
+    strings["couldn't seek to sample %d!"].plurals[0] = "não pôde avançar até a sample %d!";
+    strings["invalid sample header/data!"].plurals[0] = "cabeçalho/dados da sample inválidos!";
+    strings["couldn't seek to pattern in %x!"].plurals[0] = "não pôde avançar até a sequência em %x!";
+    strings["invalid pattern header!"].plurals[0] = "cabeçalho da sequência inválido!";
+    strings["pattern channel out of range!"].plurals[0] = "canal da sequência fora do intervalo!";
+    strings["pattern index out of range!"].plurals[0] = "índice da sequência fora do intervalo!";
+    strings["pattern subsong out of range!"].plurals[0] = "subfaixa da sequência fora do intervalo!";
+    strings["incomplete file"].plurals[0] = "arquivo incompleto";
+    strings["file is too small"].plurals[0] = "o arquivo é muito pequeno";
+    strings["not a .dmf/.fur/.fub song"].plurals[0] = "esta não é uma música .dmf/.fur/.fub";
+    strings["unknown decompression error"].plurals[0] = "erro desconhecido de descompressõa";
+    strings["decompression error: %s"].plurals[0] = "erro de descompressão: %s";
+    strings["unknown decompression finish error"].plurals[0] = "erro desconhecido ao final da descompressão";
+    strings["decompression finish error: %s"].plurals[0] = "erro ao final da descompressão: %s";
+    strings["not a compatible song/instrument"].plurals[0] = "esta não é uma música/instrumento compatível";
+    strings["maximum number of instruments is 256"].plurals[0] = "o número máximo de instrumentos é 256";
+    strings["maximum number of wavetables is 256"].plurals[0] = "o número máximo de wavetables é 256";
+    strings["maximum number of samples is 256"].plurals[0] = "o número máximo de samples é 256";
+
+    //           src/engine/fileOpsIns.cpp
+
+    strings["did not read entire instrument file!"].plurals[0] = "o arquivo de instrumento não foi lido por completo!";
+    strings["this instrument is made with a more recent version of Furnace!"].plurals[0] = "este instrumento foi feito com uma versão mais recente do Furnace!";
+    strings["unknown instrument format"].plurals[0] = "formato de instrumento desconhecido";
+    strings["there is more data at the end of the file! what happened here!"].plurals[0] = "há mais dados ao final do arquivo! que diacho é esse!?";
+    strings["exactly %d bytes, if you are curious"].plurals[0] = "exatamente %d bytes, caso você tenha a curiosidade";
+
+    //           src/engine/fileOpsSample.cpp
+
+    strings["could not open file! (%s)"].plurals[0] = "não pôde abrir o arquivo! (%s)";
+    strings["could not get file length! (%s)"].plurals[0] = "não pôde obter o tamanho do arquivo! (%s)";
+    strings["file is empty!"].plurals[0] = "o arquivo está vazio!";
+    strings["file is invalid!"].plurals[0] = "o arquivo é inválido!";
+    strings["could not seek to beginning of file! (%s)"].plurals[0] = "não pôde localizar o início do arquivo! (%s)";
+    strings["wait... is that right? no I don't think so..."].plurals[0] = "peraí... isso está certo? não, eu não acho que esteja...";
+    strings["BRR sample is empty!"].plurals[0] = "a sample BRR está vazia!";
+    strings["possibly corrupt BRR sample!"].plurals[0] = "a sample BRR pode estar corrompida!";
+    strings["could not read file! (%s)"].plurals[0] = "não pôde ler o arquivo! (%s)";
+    strings["Furnace was not compiled with libsndfile!"].plurals[0] = "Furnace não foi compilado com a biblioteca libsndfile!";
+    strings["could not open file! (%s %s)"].plurals[0] = "não pôde abrir o arquivo! (%s %s)";
+    strings["could not open file! (%s)\nif this is raw sample data, you may import it by right-clicking the Load Sample icon and selecting \"import raw\"."].plurals[0] = "não pôde abrir o arquivo! (%s)\nse isso for uma sample em formato \"raw\", você pode importá-la clicando com o botão direito no ícone Abrir e selecionando \"importar em formato raw\".";
+    strings["this sample is too big! max sample size is 16777215."].plurals[0] = "esta sample é muito grande! o tamanho máximo de uma sample é 16777215.";
+
+    //           src/engine/importExport/bnk.cpp
+
+    strings["GEMS BNK currently not supported."].plurals[0] = "O formato BNK do GEMS atualmente não é suportado.";
+
+    //           src/engine/importExport/dmf.cpp
+
+    strings["this version is not supported by Furnace yet"].plurals[0] = "esta versão ainda não é suportada pelo Furnace";
+    strings["system not supported. running old version?"].plurals[0] = "sistema não suportado. usando uma versão antiga?";
+    strings["Yamaha YMU759 emulation is incomplete! please migrate your song to the OPL3 system."].plurals[0] = "a emulação do Yamaha YMU759 é incompleta! por favor migre sua música para o sistema OPL3.";
+    strings["order at %d, %d out of range! (%d)"].plurals[0] = "ordem em %d, %d fora do intervalo! (%d)";
+    strings["file is corrupt or unreadable at operators"].plurals[0] = "o arquivo está corrompido ou ilegível nos operadores";
+    strings["file is corrupt or unreadable at wavetables"].plurals[0] = "o arquivo está corrompido ou ilegível nas wavetables";
+    strings["file is corrupt or unreadable at effect columns"].plurals[0] = "o arquivo está corrompido ou ilegível nas colunas de efeito";
+    strings["file is corrupt or unreadable at samples"].plurals[0] = "o arquivo está corrompido ou ilegível nas samples";
+    strings["invalid version to save in! this is a bug!"].plurals[0] = "versão inválida para salvar! isso é um bug!";
+    strings["multiple systems not possible on .dmf"].plurals[0] = "não é possível ter múltiplos sistemas em um arquivo .dmf";
+    strings["YMU759 song saving is not supported"].plurals[0] = "salvar músicas do YMU759 não é suportado";
+    strings["Master System FM expansion not supported in 1.0/legacy .dmf!"].plurals[0] = "a expansão FM do Master System não é suportada na versão 1.0/legada do formato .dmf!";
+    strings["NES + VRC7 not supported in 1.0/legacy .dmf!"].plurals[0] = "NES + VRC7 não é suportado na versão 1.0/legada do formato .dmf!";
+    strings["FDS not supported in 1.0/legacy .dmf!"].plurals[0] = "FDS não é suportado na versão 1.0/legada do formato .dmf!";
+    strings["this system is not possible on .dmf"].plurals[0] = "esse sistema não é possível no formato .dmf";
+    strings["maximum .dmf song length is 127"].plurals[0] = "o comprimento máximo da música no formato .dmf é 127";
+    strings["maximum number of instruments in .dmf is 128"].plurals[0] = "o número máximo de instrumentos no formato .dmf é 128";
+    strings["maximum number of wavetables in .dmf is 64"].plurals[0] = "o número máximo de wavetables no formato .dmf é 64";
+    strings["order %d, %d is out of range (0-127)"].plurals[0] = "a ordem %d, %d está fora do intervalo (0-127)";
+    strings["only the currently selected subsong will be saved"].plurals[0] = "somente a subfaixa atualmente selecionada será salva";
+    strings["grooves will not be saved"].plurals[0] = "grooves não serão salvos";
+    strings["only the first two speeds will be effective"].plurals[0] = "somente as primeiras duas velocidades serão efetivas";
+    strings[".dmf format does not support virtual tempo"].plurals[0] = "o formato .dmf não suporta tempo virtual";
+    strings[".dmf format does not support tuning"].plurals[0] = "o formato .dmf não suporta afinação";
+    strings["absolute duty/cutoff macro not available in .dmf!"].plurals[0] = "a macro de ponto de corte/ciclo de trabalho absoluto não está disponível no formato .dmf";
+    strings["duty precision will be lost"].plurals[0] = "haverá perda de precisão de ciclo de trabalho";
+    strings[".dmf format does not support arbitrary-pitch sample mode"].plurals[0] = "o formato .dmf não suporta modo de sample de tom arbitrário";
+    strings["no FM macros in .dmf format"].plurals[0] = "não há macros FM no formato .dmf";
+    strings[".dmf only supports volume or cutoff macro in C64, but not both. volume macro will be lost."].plurals[0] = ".dmf só suporta macros de volume ou ponto de corte no C64, não ambas ao mesmo tempo. a macro de volume será perdida.";
+    strings["note/macro release will be converted to note off!"].plurals[0] = "repouso de nota/macro serão convertidas pra note-off!";
+    strings["samples' rates will be rounded to nearest compatible value"].plurals[0] = "as taxas das samples serão arredondadas para os valores compatíveis mais próximos";
+
+    //           src/engine/importExport/dmp.cpp
+
+    strings["unknown instrument type %d!"].plurals[0] = "tipo de instrumento %d desconhecido!";
+
+    //           src/engine/importExport/fc.cpp
+
+    strings["invalid header!"].plurals[0] = "cabeçalho inválido!";
+
+    //           src/engine/importExport/ftm.cpp
+
+    strings["incompatible version"].plurals[0] = "versão incompatível";
+    strings["channel counts do not match"].plurals[0] = "a quantidade de canais não corresponde ao esperado";
+    strings["too many instruments/out of range"].plurals[0] = "há muitos instrumentos/fora do intervalo";
+    strings["invalid instrument type"].plurals[0] = "tipo de instrumento inválido";
+    strings["too many sequences"].plurals[0] = "há muitas macros";
+    strings["sequences block version is too old"].plurals[0] = "a versão do bloco de macros é muito antiga";
+    strings["unknown block "].plurals[0] = "bloco desconhecido: ";
+    strings["incomplete block "].plurals[0] = "bloco incompleto: ";
+    strings[" [VRC6 copy]"].plurals[0] = " [cópia do VRC6]";
+    strings[" [VRC6 saw copy]"].plurals[0] = " [cópia do VRC6 serra]";
+    strings[" [NES copy]"].plurals[0] = " [cópia do NES]";
+
+    //           src/engine/importExport/gyb.cpp
+
+    strings["GYBv3 file appears to have invalid data offsets."].plurals[0] = "o arquivo GYBv3 parece ter ponteiros de dados inválidos.";
+    strings["Invalid value found in patch file. %s"].plurals[0] = "Dados inválidos encontrados no arquivo de timbre. %s";
+
+    //           src/engine/importExport/s3i.cpp
+
+    strings["S3I PCM samples currently not supported."].plurals[0] = "samples PCM S3I atualmente não são suportadas.";
+
+    //           src/engine/vgmOps.cpp
+
+    strings["VGM version is too low"].plurals[0] = "a versão do VGM é muito antiga";
+
+    //names of memory composition memories
+
+    strings["DPCM"].plurals[0] = "DPCM";
+    strings["Chip Memory"].plurals[0] = "Memória do Chip";
+    strings["Sample ROM"].plurals[0] = "ROM de Sample";
+    strings["Sample Memory"].plurals[0] = "Memória de Sample";
+    strings["SPC/DSP Memory"].plurals[0] = "Memória do S-SMP/DSP"; // terminologia correta, a gente se vê por aqui!
+    strings["Sample RAM"].plurals[0] = "RAM de Sample";
+    strings["ADPCM"].plurals[0] = "ADPCM";
+
+    //names of memory entries
+
+    strings["Sample"].plurals[0] = "Sample";
+    strings["Wave RAM"].plurals[0] = "RAM de Onda";
+    strings["End of Sample"].plurals[0] = "Final da Sample";
+    strings["Wavetable RAM"].plurals[0] = "RAM de Wavetable";
+    strings["Reserved wavetable RAM"].plurals[0] = "RAM de wavetable reservada";
+    strings["Phrase Book"].plurals[0] = "Livro de Frases";
+    strings["Channel %d (load)"].plurals[0] = "Canal %d (carregar)";
+    strings["Channel %d (play)"].plurals[0] = "Canal %d (reproduzir)";
+    strings["Channel %d"].plurals[0] = "Canal %d";
+    strings["Buffer %d Left"].plurals[0] = "Buffer %d Esquerdo";
+    strings["Buffer %d Right"].plurals[0] = "Buffer %d Direito";
+    strings["Registers"].plurals[0] = "Registradores";
+    strings["PCM"].plurals[0] = "PCM";
+    strings["ADPCM"].plurals[0] = "ADPCM";
+    strings["State"].plurals[0] = "Estado";
+    strings["Sample Directory"].plurals[0] = "Diretório de Sample";
+    strings["Echo Buffer"].plurals[0] = "Buffer de Eco";
+    strings["Mix/Echo Buffer"].plurals[0] = "Buffer de Mix/Eco";
+    strings["Main Memory"].plurals[0] = "Memória Principal";
+    
     //   sesd    src/engine/sysDef.cpp
 
     strings["help! what's going on!"].plurals[0] = "socorro! o que está acontecendo?!";
@@ -5115,6 +5440,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "3xxx: Definir largura de pulso (0 a FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "4xxx: Definir ponto de corte (0 to 7FF)";
     strings["10xx: Set waveform##sesd0"].plurals[0] = "10xx: Definir forma de onda";
+    strings["13xx: Set waveform (local)##sesd"].plurals[0] = "13xx: Definir forma de onda (local)";
     strings["11xx: Set raw period##sesd"].plurals[0] = "11xx: Definir período (val. registrador) (0-1F)";
     strings["11xx: Set waveform (local)##sesd"].plurals[0] = "11xx: Definir forma de onda (local)";
     strings["20xx: Set PCM frequency##sesd"].plurals[0] = "20xx: Definir frequência do PCM";
@@ -5203,7 +5529,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["16xx: Set length counter (refer to manual for a list of values)##sesd"].plurals[0] = "16xx: Definir contador de comprimento (veja o manual para uma lista de valores)";
     strings["17xx: Set frame counter mode (0: 4-step, 1: 5-step)##sesd"].plurals[0] = "17xx: Definir modo do contador de quadros (0: 4 passos, 1: 5 passos)";
     strings["18xx: Select PCM/DPCM mode (0: PCM; 1: DPCM)##sesd"].plurals[0] = "18xx: Selecionar modo PCM/DPCM (0: PCM; 1: DPCM)";
-    strings["19xx: Set triangle linear counter (0 to 7F; 80 and higher halt)##sesd"].plurals[0] = "19xx: Definir contador linear do canal triângulo (0 a 7F; valores 80 e superiores param)";
+    strings["19xx: Set triangle linear counter (0 to 7F; 80 and higher halt)##sesd"].plurals[0] = "19xx: Definir contador linear do canal triângulo (0 a 7F; valores 80 e superiores interrompem)";
     strings["20xx: Set DPCM frequency (0 to F)##sesd"].plurals[0] = "20xx: Definir frequência DPCM (0 a F)";
     strings["<COMPOUND SYSTEM!>##sesd3"].plurals[0] = "<SISTEMA COMPOSTO!>";
     strings["<COMPOUND SYSTEM!>##sesd4"].plurals[0] = "<SISTEMA COMPOSTO!>";
@@ -5455,6 +5781,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["a SoC with wavetable sound hardware.##sesd"].plurals[0] = "um SoC com hardware de som wavetable.";
     strings["a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.##sesd"].plurals[0] = "um console de jogo com 3 canais de onda quadrada. é o que acontece quando se funde a TIA e o VIC juntos.";
     strings["10xx: Set ring modulation (0: disable, 1: enable)##sesd"].plurals[0] = "10xx: Alternar modulação anel (0: desabilitar, 1: habilitar)";
+    strings["11xx: Raw frequency (0-3E)##sesd"].plurals[0] = "11xx: Definir frequência (valor do registrador, 0-3E)";
     strings["ZX Spectrum Beeper (QuadTone Engine)##sesd"].plurals[0] = "Beeper do ZX Spectrum (Motor QuadTone)";
     strings["another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.##sesd"].plurals[0] = "outro sistema de beeper do ZX Spectrum, dessa vez com pulsos PWM completos e volume de 3 níveis por canal. ele também possui um canal de sobreposição de sample com tom controlável.";
     strings["12xx: Set pulse width##sesd1"].plurals[0] = "12xx: Definir largura de pulso";
@@ -5487,7 +5814,17 @@ void DivLocale::addTranslationsPortuguese()
     strings["14xx: Toggle swap counters (noise only)##sesd"].plurals[0] = "14xx: Alternar trocar contadores (somente ruído)";
     strings["15xx: Toggle low pass (noise only)##sesd"].plurals[0] = "15xx: Alternar passa baixa (somente ruído)";
     strings["16xx: Set clock divider (0: /2; 1: /3)##sesd"].plurals[0] = "16xx: Definir divisor de clock (0: /2; 1: /3)";
-    strings["a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.##sesd"].plurals[0] = "um chip fictício por LTVA. como o SID, mas com muitos de seus problemas consertados. também possui recursos estendidos como mais modos de mistura de formas de onda, ruído tonal, filtro e volume por canal.";
+    strings["a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.##sesd"].plurals[0] = "um chip de som fictício por LTVA. como o SID, mas com muitos de seus problemas consertados. também possui recursos estendidos como mais modos de mistura de formas de onda, ruído tonal, filtro e volume por canal.";
+    strings["a fictional sound chip by Euly. similar to Ricoh 2A03, but all the duty cycles are different, noise has 32 pitches instead of 16 and you have four hard-coded waveforms on triangle channel.##sesd"].plurals[0] = "um chip de som fictício por Euly. similar ao Ricoh 2A03, mas todos os ciclos de trabalho são diferentes, o ruído tem 32 tons ao invés de 16 e você possui 4 formas de onda predefinidas no lugar do canal de triângulo.";
+    strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1, wave: 0 to 3)##sesd"].plurals[0] = "12xx: Definir ciclo de trabalho/modo de ruído/onda (pulso: 0 a 3; ruído: 0 ou 1, onda: 0 a 3)";
+    strings["19xx: Set wave linear counter (0 to 7F; 80 and higher halt)##sesd"].plurals[0] = "19xx: Definir contador linear do canal de onda (0 a 7F; valores 80 e superiores interrompem)";
+    strings["additional PCM FIFO channels in Game Boy Advance driven directly by its DMA hardware.##sesd"].plurals[0] = "canais PCM FIFO adicionais no Game Boy Advance controlados diretamente por seu hardware de DMA.";
+    strings["additional PCM FIFO channels in Game Boy Advance driven by software mixing to provide up to sixteen sample channels.##sesd"].plurals[0] = "canais PCM FIFO adicionais no Game Boy Advance controlados por mixing em software para prover até 16 canais de sample.";
+    strings["11xy: Set echo channel (x: left/right source; y: delay (0 disables))##sesd"].plurals[0] = "11xy: Definir canal de eco (x: fonte esquerda/direita; y: atraso (0 desabilita))";
+    strings["12xy: Toggle invert (x: left; y: right)##sesd"].plurals[0] = "12xy: Alternar inversão (x: lado esquerdo; y: lado direito)";
+    strings["a handheld video game console with two screens. it uses a stylus.##sesd"].plurals[0] = "um console de videogame portátil com duas telas. ele usa uma canetinha.";
+    strings["12xx: Set duty cycle (pulse: 0 to 7)##sesd"].plurals[0] = "12xx: Definir ciclo de trabalho (pulso: 0 a 7)";
+    strings["1Fxx: Set global volume (0 to 7F)##sesd"].plurals[0] = "1Fxx: Definir volume global (0 a 7F)";
     strings["Dummy System##sesd"].plurals[0] = "Sistema Fantoche"; // TODO: Sistema Fictício seria melhor? acho muito literal...
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "este é um sistema desenvolvido para propósito de testes.";
     
