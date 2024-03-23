@@ -74,6 +74,7 @@ void DivLocale::addTranslationsPolish()
     strings["FFTW by Matteo Frigo and Steven G. Johnson##sgab"].plurals[0] = "FFTW autorstwa Matteo Frigo i Stevena G. Johnsona";
     strings["backward-cpp by Google##sgab"].plurals[0] = "backward-cpp autorstwa Google";
     strings["adpcm by superctr##sgab"].plurals[0] = "adpcm autorstwa superctr";
+    strings["adpcm-xq by David Bryant##sgab"].plurals[0] = "adpcm-xq autorstwa Davida Bryanta";
     strings["Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt##sgab"].plurals[0] = "Nuked-OPL3/OPLL/OPM/OPN2/PSG autorstwa nukeykt";
     strings["YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt##sgab"].plurals[0] = "YM3812-LLE, YMF262-LLE i YMF276-LLE autorstwa nukeykt";
     strings["ymfm by Aaron Giles##sgab"].plurals[0] = "ymfm autorstwa Aarona Gilesa";
@@ -115,7 +116,8 @@ void DivLocale::addTranslationsPolish()
     strings["PowerNoise emulator by scratchminer##sgab"].plurals[0] = "Emulator PowerNoise autorstwa scratchminera";
     strings["ep128emu by Istvan Varga##sgab"].plurals[0] = "ep128emu autorstwa Istvana Vargi";
     strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] = "emulator SID2 (modyfikacja reSID) autorstwa LTVA";
- strings["5E01 emulator (modification of NSFPlay) by Euly##sgab"].plurals[0] = "emulator 5E01 (modyfikacja NSFPlay) autorstwa Euly";
+    strings["5E01 emulator (modification of NSFPlay) by Euly##sgab"].plurals[0] = "emulator 5E01 (modyfikacja NSFPlay) autorstwa Euly";
+    strings["NDS sound emulator by cam900##sgab"].plurals[0] = "NDS sound emulator autorstwa cam900";
 
     strings["greetings to:##sgab"].plurals[0] = "z pozdrowieniami dla:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "NEOART Costa Rica";
@@ -1523,7 +1525,10 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Search...##sgns"].plurals[0] = "Szukaj...";
     strings["Categories##sgns"].plurals[0] = "Kategorie";
     strings["Systems##sgns"].plurals[0] = "Systemy";
+    strings["no systems here yet!##sgns"].plurals[0] = "nie ma tu jeszcze żadnego systemu!";
+    strings["no results##sgns"].plurals[0] = "nie znaleziono";
     strings["I'm feeling lucky##sgns"].plurals[0] = "Szczęśliwy traf";
+    strings["no categories available! what in the world.##sgns"].plurals[0] = "żadna z kategorii nie jest dostępna! co do kurwy";
     strings["Cancel##sgns"].plurals[0] = "Anuluj";
 
     //   sgme  src/gui/memory.cpp
@@ -1571,6 +1576,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     //   sgpa  src/gui/pattern.cpp
 
     strings["Pattern###Pattern"].plurals[0] = "Wzorzec###Pattern";
+    strings["there aren't any channels to show.##sgpa"].plurals[0] = "brak kanałów do wyświetlenia.";
     strings["click for pattern options (effect columns/pattern names/visualizer)##sgpa"].plurals[0] = "naciśnij, aby otworzyć menu ustawień (kolumny efektów/nazwy wzorców/wizualizator efektów)";
     strings["Options:##sgpa"].plurals[0] = "Opcje:";
     strings["Effect columns/collapse##sgpa"].plurals[0] = "Roszerzanie kolumn efektów";
@@ -1613,6 +1619,8 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Sega Genesis (CSM with Sega CD)##sgpr"].plurals[0] = "Sega Mega Drive (CSM i Sega Mega-CD)";
     strings["Sega Master System (with FM expansion)##sgpr"].plurals[0] = "Sega Master System (z rozszerzeniem FM)";
     strings["Sega Master System (with FM expansion in drums mode)##sgpr"].plurals[0] = "Sega Master System (z rozszerzeniem FM w trybie perkusji)";
+    strings["Game Boy Advance (no software mixing)##sgpr"].plurals[0] = "Game Boy Advance (bez programowego miksowania)";
+    strings["Game Boy Advance (with MinMod)##sgpr"].plurals[0] = "Game Boy Advance (z MinModem)";
     strings["Famicom with Konami VRC6##sgpr"].plurals[0] = "Famicom z Konami VRC6";
     strings["Famicom with Konami VRC7##sgpr0"].plurals[0] = "Famicom z Konami VRC7";
     strings["Famicom with MMC5##sgpr"].plurals[0] = "Famicom z MMC5";
@@ -1834,6 +1842,8 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Dynax/Nakanihon 3rd generation hardware##sgpr"].plurals[0] = "Trzecia generacja sprzetu Dynax/Nakanihon";
     strings["Dynax/Nakanihon 3rd generation hardware (drums mode)##sgpr"].plurals[0] = "Trzecia generacja sprzetu Dynax/Nakanihon (tryb perkusji)";
     strings["Dynax/Nakanihon Real Break (drums mode)##sgpr"].plurals[0] = "Dynax/Nakanihon Real Break (tryb perkusji)";
+    strings["User##sgpr"].plurals[0] = "Użytkownika";
+    strings["system presets that you have saved.##sgpr"].plurals[0] = "uprzednio zapisane presety systemów.";
     strings["chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.##sgpr"].plurals[0] = "układy wykorzystujące modulację częstotliwości (syntezę FM) do generowania dźwięku\nw niektorych z nich stosowane sa również inne metody syntezy dźwięku (kanały fali prostokątnej lub sample).\nW rzeczywistości \"FM\" oznacza tutaj modulację fazy, ale są one nie do odróżnienia od siebie, gdy używają fal sinusoidalnych.";
     strings["Yamaha YM2203 (extended channel 3)##sgpr"].plurals[0] = "Yamaha YM2203 z rozszerzonym kanałem 3";
     strings["Yamaha YM2203 (extended channel 3 and CSM)##sgpr"].plurals[0] = "Yamaha YM2203 z rozszerzonym kanałem 3 i CSM)";
@@ -1944,6 +1954,9 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["C219: maximum sample length is 131072##sgse"].plurals[0] = "C219: maksymalna długość sampla wynosi 131072";
     strings["MSM6295: samples can't loop##sgse"].plurals[0] = "MSM6295: zapętlanie sampli niewspierane";
     strings["MSM6295: maximum bankswitched sample length is 129024##sgse"].plurals[0] = "MSM6295: maksymalna długość sampla przy zmianie banków wynosi 129024";
+    strings["GBA DMA: loop start must be a multiple of 4##sgse"].plurals[0] = "GBA DMA: punkt początku pętli musi być wielokrotnością 4##sgse";
+    strings["GBA DMA: loop length must be a multiple of 16##sgse"].plurals[0] = "GBA DMA: dłogość pętli musi być wielokrotnością 16##sgse";
+    strings["GBA DMA: sample length will be padded to multiple of 16##sgse"].plurals[0] = "GBA DMA: długość sampla zostanie przeskalowana do wielokrotności 16##sgse";
     strings["ES5506: backward loop mode isn't supported##sgse"].plurals[0] = "ES5506: tryb pętli odwrotnej nie jest obsługiwany";
     strings["backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506##sgse"].plurals[0] = "Tryb odwrócony jest obsługiwany tylko przez uniwersalny przetwornik C/A, a także przez ES5506.";
     strings["Info##sgse"].plurals[0] = "Info";
@@ -2142,13 +2155,20 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Original (DMG)##sgsc"].plurals[0] = "Oryginalny (DMG)";
     strings["Game Boy Color (rev C)##sgsc"].plurals[0] = "Game Boy Color (wersja C)";
     strings["Game Boy Color (rev E)##sgsc"].plurals[0] = "Game Boy Color (wersja E)";
-    strings["Wave channel orientation:##sgsc"].plurals[0] = "Orientacja koanału syntezy tablicowej";
+    strings["Wave channel orientation:##sgsc"].plurals[0] = "Orientacja kanału syntezy tablicowej";
     strings["Normal##sgsc"].plurals[0] = "Normalna";
     strings["Inverted##sgsc"].plurals[0] = "Odwrócona";
     strings["Exact data (inverted)##sgsc"].plurals[0] = "Te same dane (odwrócona)";
     strings["Exact output (normal)##sgsc"].plurals[0] = "Ten sam dźwięk (normalna)";
     strings["Pretty please one more compat flag when I use arpeggio and my sound length##sgsc"].plurals[0] = "Cóż, proszę o kolejną flagę kompatybilności, gdy używam arpeggio i małej długości dźwięku na kanale szumu";
     strings["Clock rate:##sgsc2"].plurals[0] = "Taktowanie zegara:";
+    strings["DAC bit depth (reduces output rate):##sgsc"].plurals[0] = "Rozdzielczość DAC (zmniejsza częstotliwość samplowania):";
+    strings["Volume scale:##sgsc"].plurals[0] = "Głośność:";
+    strings["Mix buffers (allows longer echo delay):##sgsc"].plurals[0] = "Bufory miksowania (pozwala na dłuższe opóźnienie echa):";
+    strings["Channel limit:##sgsc"].plurals[0] = "Limit ilości kanałów:";
+    strings["Sample rate:##sgsc"].plurals[0] = "Częstotliwość samplowania:";
+    strings["Actual sample rate: %d Hz##sgsc"].plurals[0] = "Rzeczywista częstotliwość: %d Hz";
+    strings["Max mixer CPU usage: %.0f%%##sgsc"].plurals[0] = "Maksymalne użycie CPU podczas miksowania: %.0f%%";
     strings["Arcade (4MHz)##sgsc"].plurals[0] = "Arcade (4 MHz)";
     strings["Half NTSC (1.79MHz)##sgsc"].plurals[0] = "Polowa NTSC (1.79 MHz)";
     strings["Patch set:##sgsc"].plurals[0] = "Zestaw instrumentów:";
@@ -2310,6 +2330,8 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Waveform storage mode:##sgsc1"].plurals[0] = "Tryb przechowywania fal:";
     strings["Dynamic (unconfirmed)##sgsc"].plurals[0] = "Dynamiczny (niezweryfikowany)";
     strings["Static (up to 5 waves)##sgsc"].plurals[0] = "Statyczny (maks. 5 fal)";
+    strings["DS (4MB RAM)##sgsc"].plurals[0] = "DS (4 MB RAM)";
+    strings["DSi (16MB RAM)##sgsc"].plurals[0] = "DSi (16 MB RAM)";
     strings["nothing to configure##sgsc"].plurals[0] = "nic do skonfigurowania";
     strings["Downmix chip output to mono##sgsc"].plurals[0] = "Miksuj dźwięk układu do mono";
     strings["Reserved blocks for wavetables:##sgsc"].plurals[0] = "Zarezerwowane bloki dla tablic fal:";
@@ -2865,6 +2887,9 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["No##csw0"].plurals[0] = "Nie##csw0";
     strings["Yes##csw1"].plurals[0] = "Tak##csw1";
     strings["Inverted##csw2"].plurals[0] = "Tak, ale w przeciwnym kierunku##csw2";
+    strings["How many steps to move with each scroll wheel step?##sgse"].plurals[0] = "O ile kroków ma się przesuwać przy każdym ruchu kółkiem myszy?";
+    strings["One##cws0"].plurals[0] = "O jeden##cws0";
+    strings["Edit Step##cws1"].plurals[0] = "O krok edycji##cws1";
     strings["Assets##sgse0"].plurals[0] = "Zasoby";
     strings["Display instrument type menu when adding instrument##sgse"].plurals[0] = "Wyświetlaj menu wyboru typu instrumentu podczas dodawania instrumentu";
     strings["Select asset after opening one##sgse"].plurals[0] = "Wybierz obiekt po jego otwarciu";
@@ -3777,6 +3802,28 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     strings["Panning##sgiGB"].plurals[0] = "Panning";
     strings["Phase Reset##sgiGB"].plurals[0] = "Reset fazy";
 
+    //   sgiGBADMA src/gui/inst/gbadma.cpp
+
+    strings["Macros##sgiGBADMA"].plurals[0] = "Makra";
+    strings["Volume##sgiGBADMA"].plurals[0] = "Głośność";
+    strings["Arpeggio##sgiGBADMA"].plurals[0] = "Arpeggio";
+    strings["Pitch##sgiGBADMA"].plurals[0] = "Wysokość";
+    strings["Waveform##sgiGBADMA"].plurals[0] = "Kształt fali";
+    strings["Panning##sgiGBADMA"].plurals[0] = "Panning";
+    strings["Phase Reset##sgiGBADMA"].plurals[0] = "Reset fazy";
+
+    //sgiGBAMINMOD src/gui/inst/gbaminmod.cpp
+
+    strings["Macros##sgiGBAMINMOD"].plurals[0] = "Makra";
+    strings["Volume##sgiGBAMINMOD"].plurals[0] = "Głośność";
+    strings["Arpeggio##sgiGBAMINMOD"].plurals[0] = "Arpeggio";
+    strings["Pitch##sgiGBAMINMOD"].plurals[0] = "Wysokość";
+    strings["Waveform##sgiGBAMINMOD"].plurals[0] = "Kształt fali";
+    strings["Panning (left)##sgiGBAMINMOD"].plurals[0] = "Panning (lewy)";
+    strings["Panning (right)##sgiGBAMINMOD"].plurals[0] = "Panning (prawy)";
+    strings["Special##sgiGBAMINMOD"].plurals[0] = "Inne";
+    strings["Phase Reset##sgiGBAMINMOD"].plurals[0] = "Reset fazy";
+
     //   sgiK00    src/gui/inst/k007232.cpp
 
     strings["Macros##sgiK00"].plurals[0] = "Makra";
@@ -3935,6 +3982,16 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     strings["Waveform##sgiWSG"].plurals[0] = "Fala";
     strings["Panning (left)##sgiWSG"].plurals[0] = "Panning (lewo)";
     strings["Panning (right)##sgiWSG"].plurals[0] = "Panning (prawo)";
+
+     //   sgiNDS    src/gui/inst/nds.cpp
+
+    strings["Macros##sgiNDS"].plurals[0] = "Makra";
+    strings["Volume##sgiNDS"].plurals[0] = "Głośność";
+    strings["Arpeggio##sgiNDS"].plurals[0] = "Arpeggio";
+    strings["Pitch##sgiNDS"].plurals[0] = "Wysokośc";
+    strings["Duty##sgiNDS"].plurals[0] = "Szerokość fali prost.";
+    strings["Panning##sgiNDS"].plurals[0] = "Panning";
+    strings["Phase Reset##sgiNDS"].plurals[0] = "Reset fazy";
 
     //   sgiNES    src/gui/inst/nes.cpp
 
@@ -4239,6 +4296,7 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     strings["Sample bank slot##BANKSLOT"].plurals[0] = "Numer banka sampli##BANKSLOT";
     strings["Sample##sgismpd1"].plurals[0] = "Sampel";
     strings["Use wavetable (Amiga/SNES/Generic DAC only)##sgismpd"].plurals[0] = "Używaj tablicy fal (tylko dla Amiga/SNES/typowego przetwornika C/A)";
+    strings["Use wavetable##sgismpd"].plurals[0] = "Używaj tablicy fal";
     strings["Width##sgismpd"].plurals[0] = "Szerokość";
     strings["Use sample map##sgismpd"].plurals[0] = "Użyj mapy sampli";
     strings["pitch##sgismpd"].plurals[0] = "wysokość dźwięku";
@@ -5104,16 +5162,22 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     strings["Sample"].plurals[0] = "Sampel";
     strings["Wave RAM"].plurals[0] = "RAM na fale";
     strings["End of Sample"].plurals[0] = "Koniec sampla";
+    strings["Wavetable RAM"].plurals[0] = "RAM na tablice fal";
     strings["Reserved wavetable RAM"].plurals[0] = "Zarezerwowany RAM na tablice fal";
     strings["Phrase Book"].plurals[0] = "Księga fraz";
     strings["Channel %d (load)"].plurals[0] = "Kanał %d (wczytywanie)";
     strings["Channel %d (play)"].plurals[0] = "Kanał %d (odtwarzanie)";
+    strings["Channel %d"].plurals[0] = "Kanał %d";
+    strings["Buffer %d Left"].plurals[0] = "Bufor %d lewy";
+    strings["Buffer %d Right"].plurals[0] = "Bufor %d prawy";
     strings["Registers"].plurals[0] = "Rejestry";
     strings["PCM"].plurals[0] = "PCM";
     strings["ADPCM"].plurals[0] = "ADPCM";
     strings["State"].plurals[0] = "Status";
     strings["Sample Directory"].plurals[0] = "Sekcja sampli";
     strings["Echo Buffer"].plurals[0] = "Bufor echo";
+    strings["Mix/Echo Buffer"].plurals[0] = "Bufor miksowania/echo";
+    strings["Main Memory"].plurals[0] = "Główna pamięć";
 
     //   sesd    src/engine/sysDef.cpp
 
@@ -5246,6 +5310,7 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     strings["3xxx: Set pulse width (0 to FFF)##sesd"].plurals[0] = "3xxx: Ustaw szerokość fali prost. (0-FFF)";
     strings["4xxx: Set cutoff (0 to 7FF)##sesd"].plurals[0] = "4xxx: Ustaw punkt odcięcia (0-7FF)";
     strings["10xx: Set waveform##sesd0"].plurals[0] = "10xx: Ustaw kształt fali";
+    strings["13xx: Set waveform (local)##sesd"].plurals[0] = "13xx: Ustaw kształt fali (lokalny)";
     strings["11xx: Set raw period (0-1F)##sesd"].plurals[0] = "11xx: Ustaw absolutny okres (0-1F)";
     strings["11xx: Set waveform (local)##sesd"].plurals[0] = "11xx: Ustaw kształt fali (lokalny)";
     strings["20xx: Set PCM frequency##sesd"].plurals[0] = "20xx: Ustaw częstotliwość PCM";
@@ -5565,7 +5630,7 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     strings["a SoC with wavetable sound hardware.##sesd"].plurals[0] = "CPU z syntezatorem tablicowym.";
     strings["a game console with 3 channels of square wave. it's what happens after fusing TIA and VIC together.##sesd"].plurals[0] = "konsola do gier z trzema kanałami fali kwadratowej. oto, co otrzymujesz po skrzyżowaniu TIA i VIC.";
     strings["10xx: Set ring modulation (0: disable, 1: enable)##sesd"].plurals[0] = "10xx: Ustaw modulację kołową (0: wył., 1: wł.)";
-strings["11xx: Raw frequency (0-3E)##sesd"].plurals[0] = "11xx: Absulutna częstotliwość (0-3E)";
+    strings["11xx: Raw frequency (0-3E)##sesd"].plurals[0] = "11xx: Absulutna częstotliwość (0-3E)";
     strings["another ZX Spectrum beeper system with full PWM pulses and 3-level volume per channel. it also has a pitchable overlay sample channel.##sesd"].plurals[0] = "kolejny system brzęczyka ZX Spectrum, tym razem zawierający pełnoprawne fale prostokątne z regulowaną szerokością i trzema poziomami głośności dla każdego kanału. ma również nakładający się ma inne kanały kanał sampli z kontrolą częstotliwości.";
     strings["12xx: Set pulse width##sesd1"].plurals[0] = "12xx: Ustaw szerokość fali prost.";
     strings["this PCM chip was widely used at Konami arcade boards in 1990-1992.##sesd"].plurals[0] = "ten układ PCM był szeroko stosowany w automatach do gier Konami w latach 1990-1992.";
@@ -5597,9 +5662,16 @@ strings["11xx: Raw frequency (0-3E)##sesd"].plurals[0] = "11xx: Absulutna częst
     strings["15xx: Toggle low pass (noise only)##sesd"].plurals[0] = "15xx: Włącz filtr dolnoprzep. (tylko szum)";
     strings["16xx: Set clock divider (0: /2; 1: /3)##sesd"].plurals[0] = "16xx: Ustaw dzielnik zegara (0: /2; 1: /3)";
     strings["a fictional sound chip by LTVA. like SID, but with many of its problems fixed. also features extended functionality like more wave mixing modes, tonal noise, filter and volume per channel.##sesd"].plurals[0] = "fikcyjny układ dźwiękowy stworzony przez LTVA. podobny do SID, ale z wieloma naprawionymi problemami. ten układ ma również dodatkowe funkcje, takie jak nowe metody miksowania fal, melodyjny szum, oddzielna regulacja głośności i filtr na każdym kanale.";
- strings["a fictional sound chip by Euly. similar to Ricoh 2A03, but all the duty cycles are different, noise has 32 pitches instead of 16 and you have four hard-coded waveforms on triangle channel.##sesd"].plurals[0] = "fikcyjny układ dźwiękowy stworzony przez Euly. podobny do Ricoh 2A03, ale wszytskie szerokości fali prostokątnej są inne, szum ma 32 możliwe częstotliwości do wyboru (zamiast 16), masz też również 4 pre-definiowany kształty fal na kanale 3.";
+    strings["a fictional sound chip by Euly. similar to Ricoh 2A03, but all the duty cycles are different, noise has 32 pitches instead of 16 and you have four hard-coded waveforms on triangle channel.##sesd"].plurals[0] = "fikcyjny układ dźwiękowy stworzony przez Euly. podobny do Ricoh 2A03, ale wszytskie szerokości fali prostokątnej są inne, szum ma 32 możliwe częstotliwości do wyboru (zamiast 16), masz też również 4 pre-definiowany kształty fal na kanale 3.";
     strings["12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1, wave: 0 to 3)##sesd"].plurals[0] = "12xx: Ustaw szerokość fali prostokątnej/tryb szumu (fala prost.: 0-3; szum: 0 lub 1; fala: 0-3)";
     strings["19xx: Set wave linear counter (0 to 7F; 80 and higher halt)##sesd"].plurals[0] = "19xx: Ustaw liniowy licznik fali (0-7F; 80 i wyższe zatrzymują)";
+    strings["additional PCM FIFO channels in Game Boy Advance driven directly by its DMA hardware.##sesd"].plurals[0] = "dodatkowe kanały PCM typu FIFO znajdujące się w Game Boy'u Advance sterowane bezpośrednio przez własne, sprzętowe DMA";
+    strings["additional PCM FIFO channels in Game Boy Advance driven by software mixing to provide up to sixteen sample channels.##sesd"].plurals[0] = "dodatkowe kanały PCM typu FIFO znajdujące się w Game Boy'u Advance sterowane przez główny procesor, aby uzyskać 16 kanałów PCM.";
+    strings["11xy: Set echo channel (x: left/right source; y: delay (0 disables))##sesd"].plurals[0] = "11xy: Ustaw kanał echo (x: lewe/prawe źródło; y: opóźnienie (0 wyłącza))";
+    strings["12xy: Toggle invert (x: left; y: right)##sesd"].plurals[0] = "12xy: Włącz odwrócenie sygnału (x: lewo; y: prawo)";
+    strings["a handheld video game console with two screens. it uses a stylus.##sesd"].plurals[0] = "przenośna konsola do gier z dwoma ekranami. w zestawie był rysik";
+    strings["12xx: Set duty cycle (pulse: 0 to 7)##sesd"].plurals[0] = "12xx: Ustaw szerokość fali prostokątnej (zakres: 0-7)";
+    strings["1Fxx: Set global volume (0 to 7F)##sesd"].plurals[0] = "1Fxx: Ustaw globalną głośność (0-7F)";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "ten system jest przeznaczony do testowania.";
 
     strings["help! what's going on!"].plurals[0] = "pomocy! co się dzieje?";
