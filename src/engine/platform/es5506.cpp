@@ -121,6 +121,38 @@ const char** DivPlatformES5506::getRegisterSheet() {
   return regCheatSheetES5506;
 }
 
+int DivPlatformES5506::calc_f_from_k(float N, int K, int F, bool highpass)
+{
+  if(highpass)
+  {
+    float W = (int)(acos((5.0f*N - 8.0f) / (4.0f*(N - 2.0f))));
+    return (int)((W * (float)F) / (2.0f * 3.1415f));
+  }
+  else
+  {
+    float W = (int)(acos((K*K*(-1.0f*N) + K*K + 131070.0f*K*N + 8589672450.0f*N) / (131070.0f * (K - 65535.0f) * N)));
+    return (int)((W * (float)F) / (2.0f * 3.1415f));
+  }
+  
+  return 0;
+}
+
+int DivPlatformES5506::calc_k_from_f(float N, float f, int F, bool highpass)
+{
+  float W = 2 * 3.1415 * f / F;
+
+  if(highpass)
+  {
+    (int)(65535.0f * (cos(W) - 0.5f - sqrt(pow(cos(W), 2.0f) + (2.0f/N) * (1.0f - cos(W)) - 1)) / (1.0f - (1.0f/N)));
+  }
+  else
+  {
+    return (int)(65535.0f * (1.0f - cos(W) - sqrt(pow(cos(W), 2.0f) + (2.0f/N) * (1.0f - cos(W)) - 1)) / (1.0f - (1.0f/N)));
+  }
+
+  return 0;
+}
+
 void DivPlatformES5506::acquire(short** buf, size_t len) {
   for (size_t h=0; h<len; h++) {
     // convert 32 bit access to 8 bit host interface

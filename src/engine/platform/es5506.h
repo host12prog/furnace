@@ -275,7 +275,7 @@ class DivPlatformES5506: public DivDispatch, public es550x_intf {
   bool irqTrigger;
   unsigned int curCR;
 
-  unsigned char initChanMax, chanMax;
+  unsigned char chanMax;
 
   es5506_core es5506;
   DivMemoryComposition memCompo;
@@ -291,6 +291,12 @@ class DivPlatformES5506: public DivDispatch, public es550x_intf {
       if (sampleMem==NULL) return 0;
       return sampleMem[((bank&3)<<21)|(address&0x1fffff)];
     }
+
+    static int calc_f_from_k(float N, int K, int F, bool highpass);
+    static int calc_k_from_f(float N, float f, int F, bool highpass);
+
+    int chipClock;
+    unsigned char initChanMax;
 
     virtual void acquire(short** buf, size_t len) override;
     virtual int dispatch(DivCommand c) override;

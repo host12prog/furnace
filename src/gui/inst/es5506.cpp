@@ -25,6 +25,8 @@
 #include "fm.h"
 #include "../intConst.h"
 
+#include "../../engine/platform/es5506.h"
+
 class FurnaceGUI;
 
 const char* friendly_filter_modes[] = 
@@ -103,7 +105,7 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
         ImGui::EndCombo();
       }
 
-      if(ins->es5506.filter.mode >= 1 && ins->es5506.filter.mode <= 6)
+      if(ins->es5506.filter.virtual_filter_mode >= 1 && ins->es5506.filter.virtual_filter_mode <= 6)
       {
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize("Cutoff").x);
         P(CWSliderScalar("Cutoff",ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
@@ -114,11 +116,13 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
         ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch,0.0);
         ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch,0.0);
         // filter
-        if(ins->es5506.filter.mode >= 6)
+        if(ins->es5506.filter.virtual_filter_mode >= 6)
         {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
-          P(CWSliderScalar("Cutoff 1",ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
+          int max_cutoff1 = DivPlatformES5506::calc_f_from_k(0.7071, 65535, 16000000 / (16*(32+1)), false); //doesn't work
+          //int max_cutoff1 = DivPlatformES5506::calc_k_from_f(0.7071, 2000, 16000000 / (16*(32+1)), false);
+          P(CWSliderScalar("Cutoff 1",ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,(const void*)&max_cutoff1)); rightClickable
           ImGui::TableNextColumn();
           P(CWSliderScalar("Cutoff 2",ImGuiDataType_U16,&ins->es5506.filter.k2,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
         }
