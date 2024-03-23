@@ -125,15 +125,15 @@ int DivPlatformES5506::calc_f_from_k(float N, int K, int F, bool highpass)
 {
   if(highpass)
   {
-    float W = (int)(acos((5.0f*N - 8.0f) / (4.0f*(N - 2.0f))));
+    float W = pow(cos((4.0f*(float)K*(float)K*N + 262140*(float)K*N + 21474181125.0f*N - 34358689800.0f) / (524280*(float)K*N + 17179344900*N - 34358689800.0f)), -1.0f);
     return (int)((W * (float)F) / (2.0f * 3.1415f));
   }
   else
   {
-    float W = (int)(acos((K*K*(-1.0f*N) + K*K + 131070.0f*K*N + 8589672450.0f*N) / (131070.0f * (K - 65535.0f) * N)));
+    float W = pow(cos(((float)K*(float)K*(-1.0f*N) + (float)K*(float)K + 131070.0f*(float)K*N - 8589672450.0f*N) / (131070.0f * ((float)K - 65535.0f) * N)), -1.0f);
     return (int)((W * (float)F) / (2.0f * 3.1415f));
   }
-  
+
   return 0;
 }
 
@@ -143,7 +143,7 @@ int DivPlatformES5506::calc_k_from_f(float N, float f, int F, bool highpass)
 
   if(highpass)
   {
-    (int)(65535.0f * (cos(W) - 0.5f - sqrt(pow(cos(W), 2.0f) + (2.0f/N) * (1.0f - cos(W)) - 1)) / (1.0f - (1.0f/N)));
+    return (int)(65535.0f * (cos(W) - 0.5f - sqrt(pow(cos(W), 2.0f) + (2.0f/N) * (1.0f - cos(W)) - 1)) / (1.0f - (1.0f/N)));
   }
   else
   {

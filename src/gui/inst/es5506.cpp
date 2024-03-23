@@ -116,7 +116,7 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
         ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch,0.0);
         ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch,0.0);
         // filter
-        if(ins->es5506.filter.virtual_filter_mode >= 6)
+        if(ins->es5506.filter.virtual_filter_mode > 6)
         {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
