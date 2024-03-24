@@ -795,7 +795,6 @@ int DivPlatformES5506::dispatch(DivCommand c) {
           switch(ins->es5506.filter.virtual_filter_mode)
           {
             case 1:
-            case 5:
             {
               chan[c.chan].filter.k2 = calc_k_from_f(0.7071f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), false);
               break;
@@ -812,28 +811,43 @@ int DivPlatformES5506::dispatch(DivCommand c) {
             }
             case 4: //both K1 and K2 get the same cutoff value
             {
-              chan[c.chan].filter.k1 = calc_k_from_f(0.9170f, (float)ins->es5506.filter.k1, 16000000 / (16*(32+1)), false);
+              chan[c.chan].filter.k1 = calc_k_from_f(0.9170f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), false);
               chan[c.chan].filter.k2 = chan[c.chan].filter.k1;
+              break;
+            }
+            case 5:
+            {
+              chan[c.chan].filter.k2 = calc_k_from_f(0.7071f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), true);
               break;
             }
             case 6:
             {
-              chan[c.chan].filter.k2 = calc_k_from_f(0.8409f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), false);
+              chan[c.chan].filter.k2 = calc_k_from_f(0.8409f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), true);
               break;
             }
             //and here we finally come to the part of having two cutoff frequencies!
             case 7:
-            case 9:
             {
               chan[c.chan].filter.k1 = calc_k_from_f(0.8409f, (float)ins->es5506.filter.k1, 16000000 / (16*(32+1)), false);
               chan[c.chan].filter.k2 = calc_k_from_f(0.8409f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), false);
               break;
             }
             case 8:
-            case 10:
             {
               chan[c.chan].filter.k1 = calc_k_from_f(0.8909f, (float)ins->es5506.filter.k1, 16000000 / (16*(32+1)), false);
               chan[c.chan].filter.k2 = calc_k_from_f(0.7071f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), false);
+              break;
+            }
+            case 9:
+            {
+              chan[c.chan].filter.k1 = calc_k_from_f(0.8409f, (float)ins->es5506.filter.k1, 16000000 / (16*(32+1)), false);
+              chan[c.chan].filter.k2 = calc_k_from_f(0.8409f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), true);
+              break;
+            }
+            case 10:
+            {
+              chan[c.chan].filter.k1 = calc_k_from_f(0.8909f, (float)ins->es5506.filter.k1, 16000000 / (16*(32+1)), false);
+              chan[c.chan].filter.k2 = calc_k_from_f(0.7071f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), true);
               break;
             }
             default: break;
