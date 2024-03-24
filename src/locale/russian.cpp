@@ -3659,6 +3659,7 @@ void DivLocale::addTranslationsRussian()
     strings["Filter K1##sgiOTTO0"].plurals[0] = "K1 фильтра";
     strings["Filter K2##sgiOTTO0"].plurals[0] = "K2 фильтра";
     strings["Envelope length##sgiOTTO"].plurals[0] = "Длина огиб.";
+    strings["Envelope count##sgiOTTO"].plurals[0] = "Скорость огиб.";
     strings["Left Volume Ramp##sgiOTTO"].plurals[0] = "Нараст. лев. громк.";
     strings["Right Volume Ramp##sgiOTTO"].plurals[0] = "Нараст. прав. громк.";
     strings["Filter K1 Ramp##sgiOTTO"].plurals[0] = "Нараст. K1 фильтра";

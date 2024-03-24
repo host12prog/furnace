@@ -139,7 +139,7 @@ int DivPlatformES5506::calc_f_from_k(float N, int K, int F, bool highpass)
 
 int DivPlatformES5506::calc_k_from_f(float N, float f, int F, bool highpass)
 {
-  float W = 2 * 3.1415 * f / F;
+  float W = 2 * 3.1415 * f / (float)F;
 
   if(highpass)
   {
@@ -788,6 +788,56 @@ int DivPlatformES5506::dispatch(DivCommand c) {
           chan[c.chan].envelope=ins->es5506.envelope;
         } else {
           chan[c.chan].sampleNoteDelta=0;
+        }
+
+        if(ins->es5506.friendly_mode)
+        {
+          switch(ins->es5506.filter.virtual_filter_mode)
+          {
+            case 1:
+            case 5:
+            {
+              chan[c.chan].filter.k2 = calc_k_from_f(0.7071f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), false);
+              break;
+            }
+            case 2:
+            {
+              chan[c.chan].filter.k1 = calc_k_from_f(0.8409f, (float)ins->es5506.filter.k1, 16000000 / (16*(32+1)), false);
+              break;
+            }
+            case 3:
+            {
+              chan[c.chan].filter.k1 = calc_k_from_f(0.8909f, (float)ins->es5506.filter.k1, 16000000 / (16*(32+1)), false);
+              break;
+            }
+            case 4: //both K1 and K2 get the same cutoff value
+            {
+              chan[c.chan].filter.k1 = calc_k_from_f(0.9170f, (float)ins->es5506.filter.k1, 16000000 / (16*(32+1)), false);
+              chan[c.chan].filter.k2 = chan[c.chan].filter.k1;
+              break;
+            }
+            case 6:
+            {
+              chan[c.chan].filter.k2 = calc_k_from_f(0.8409f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), false);
+              break;
+            }
+            //and here we finally come to the part of having two cutoff frequencies!
+            case 7:
+            case 9:
+            {
+              chan[c.chan].filter.k1 = calc_k_from_f(0.8409f, (float)ins->es5506.filter.k1, 16000000 / (16*(32+1)), false);
+              chan[c.chan].filter.k2 = calc_k_from_f(0.8409f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), false);
+              break;
+            }
+            case 8:
+            case 10:
+            {
+              chan[c.chan].filter.k1 = calc_k_from_f(0.8909f, (float)ins->es5506.filter.k1, 16000000 / (16*(32+1)), false);
+              chan[c.chan].filter.k2 = calc_k_from_f(0.7071f, (float)ins->es5506.filter.k2, 16000000 / (16*(32+1)), false);
+              break;
+            }
+            default: break;
+          }
         }
       } else {
         int sample=ins->amiga.getSample(chan[c.chan].sampleNote);

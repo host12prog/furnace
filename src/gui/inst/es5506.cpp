@@ -55,7 +55,9 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
     
     if(friendly)
     {
-      ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+      ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize("Filter Mode").x);
+      ImGui::Text("Filter Mode");
+      ImGui::SameLine();
       if (ImGui::BeginCombo("##filtModes",friendly_filter_modes[ins->es5506.filter.virtual_filter_mode]))
       {
         int j = 0;
@@ -105,10 +107,135 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
         ImGui::EndCombo();
       }
 
+      float N1 = 0.0;
+      float N2 = 0.0;
+
+      int max_cutoff1 = 0;
+      int max_cutoff2 = 0;
+
+      bool highpass1 = false;
+      bool highpass2 = false;
+
+      switch(ins->es5506.filter.virtual_filter_mode)
+      {
+        case 0:
+        {
+          ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)2;
+          ins->es5506.filter.k1 = 65535;
+          ins->es5506.filter.k2 = 65535;
+          break;
+        }
+        case 1:
+        {
+          ins->es5506.filter.k1 = 65535;
+          N1 = 0.7071f;
+          ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)3;
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65534, 16000000 / (16*(32+1)), false);
+          break;
+        }
+        case 2:
+        {
+          ins->es5506.filter.k2 = 65535;
+          N1 = 0.8409f;
+          ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)2;
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65534, 16000000 / (16*(32+1)), false);
+          break;
+        }
+        case 3:
+        {
+          ins->es5506.filter.k2 = 65535;
+          N1 = 0.8909f;
+          ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)3;
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65534, 16000000 / (16*(32+1)), false);
+          break;
+        }
+        case 4: //both k1 and k2 are assigned the cutoff1 param
+        {
+          N1 = 0.9170f;
+          ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)2;
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65534, 16000000 / (16*(32+1)), false);
+          break;
+        }
+        case 5:
+        {
+          ins->es5506.filter.k1 = 65535;
+          N1 = 0.7071f;
+          ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)1;
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65534, 16000000 / (16*(32+1)), true);
+          break;
+        }
+        case 6:
+        {
+          ins->es5506.filter.k1 = 65535;
+          N1 = 0.8409f;
+          ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)0;
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65534, 16000000 / (16*(32+1)), true);
+          break;
+        }
+        case 7:
+        {
+          N1 = 0.8409f;
+          N2 = 0.8409f;
+          ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)2;
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65534, 16000000 / (16*(32+1)), false);
+          max_cutoff2 = DivPlatformES5506::calc_f_from_k(N2, 65534, 16000000 / (16*(32+1)), false);
+          break;
+        }
+        case 8:
+        {
+          N1 = 0.8909f;
+          N2 = 0.7071f;
+          ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)3;
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65534, 16000000 / (16*(32+1)), false);
+          max_cutoff2 = DivPlatformES5506::calc_f_from_k(N2, 65534, 16000000 / (16*(32+1)), false);
+          break;
+        }
+        case 9:
+        {
+          N1 = 0.8409f;
+          N2 = 0.8409f;
+          ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)0;
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65534, 16000000 / (16*(32+1)), false);
+          max_cutoff2 = DivPlatformES5506::calc_f_from_k(N2, 65534, 16000000 / (16*(32+1)), true);
+          break;
+        }
+        case 10:
+        {
+          N1 = 0.8909f;
+          N2 = 0.7071f;
+          ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)1;
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65534, 16000000 / (16*(32+1)), false);
+          max_cutoff2 = DivPlatformES5506::calc_f_from_k(N2, 65534, 16000000 / (16*(32+1)), true);
+          break;
+        }
+        default: break;
+      }
+
       if(ins->es5506.filter.virtual_filter_mode >= 1 && ins->es5506.filter.virtual_filter_mode <= 6)
       {
-        ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize("Cutoff").x);
-        P(CWSliderScalar("Cutoff",ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
+        ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize("Cutoff (Hz)").x);
+
+        switch(ins->es5506.filter.virtual_filter_mode)
+        {
+          case 1:
+          case 4:
+          case 5:
+          case 6: 
+          {
+            //if(ins->es5506.filter.k2 > max_cutoff1) ins->es5506.filter.k2 = max_cutoff1;
+            P(CWSliderScalar("Cutoff (Hz)",ImGuiDataType_U16,&ins->es5506.filter.k2,&_ZERO,(const void*)&max_cutoff1)); rightClickable
+            break;
+          }
+
+          case 2:
+          case 3:
+          {
+            //if(ins->es5506.filter.k1 > max_cutoff1) ins->es5506.filter.k1 = max_cutoff1;
+            P(CWSliderScalar("Cutoff (Hz)",ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,(const void*)&max_cutoff1)); rightClickable
+            break;
+          }
+          default: break;
+        }
       }
 
       if (ImGui::BeginTable("ESParams",2,ImGuiTableFlags_SizingStretchSame)) 
@@ -120,11 +247,12 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
         {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
-          int max_cutoff1 = DivPlatformES5506::calc_f_from_k(0.7071, 65535, 16000000 / (16*(32+1)), false); //doesn't work
-          //int max_cutoff1 = DivPlatformES5506::calc_k_from_f(0.7071, 2000, 16000000 / (16*(32+1)), false);
-          P(CWSliderScalar("Cutoff 1",ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,(const void*)&max_cutoff1)); rightClickable
+          //max_cutoff1 = DivPlatformES5506::calc_f_from_k(0.7071, 65534, 16000000 / (16*(32+1)), false); //doesn't work
+          //if(ins->es5506.filter.k1 > max_cutoff1) ins->es5506.filter.k1 = max_cutoff1;
+          //if(ins->es5506.filter.k2 > max_cutoff2) ins->es5506.filter.k2 = max_cutoff2;
+          P(CWSliderScalar("Cutoff 1 (Hz)",ImGuiDataType_U16,&ins->es5506.filter.k1,&_ZERO,(const void*)&max_cutoff1)); rightClickable
           ImGui::TableNextColumn();
-          P(CWSliderScalar("Cutoff 2",ImGuiDataType_U16,&ins->es5506.filter.k2,&_ZERO,&_SIXTY_FIVE_THOUSAND_FIVE_HUNDRED_THIRTY_FIVE)); rightClickable
+          P(CWSliderScalar("Cutoff 2 (Hz)",ImGuiDataType_U16,&ins->es5506.filter.k2,&_ZERO,(const void*)&max_cutoff2)); rightClickable
         }
 
         // envelope

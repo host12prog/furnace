@@ -3766,6 +3766,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Filter K1##sgiOTTO0"].plurals[0] = "=Filter K1";
     strings["Filter K2##sgiOTTO0"].plurals[0] = "=Filter K2";
     strings["Envelope length##sgiOTTO"].plurals[0] = "=Envelope length";
+    strings["Envelope count##sgiOTTO"].plurals[0] = "=Envelope count";
     strings["Left Volume Ramp##sgiOTTO"].plurals[0] = "=Left Volume Ramp";
     strings["Right Volume Ramp##sgiOTTO"].plurals[0] = "=Right Volume Ramp";
     strings["Filter K1 Ramp##sgiOTTO"].plurals[0] = "=Filter K1 Ramp";
