@@ -113,9 +113,6 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
       int max_cutoff1 = 0;
       int max_cutoff2 = 0;
 
-      bool highpass1 = false;
-      bool highpass2 = false;
-
       switch(ins->es5506.filter.virtual_filter_mode)
       {
         case 0:
