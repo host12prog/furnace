@@ -158,7 +158,7 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
           ins->es5506.filter.k1 = 65535;
           N1 = 0.7071f;
           ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)1;
-          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65536, 16000000 / (16*(32+1)), true);
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65535, 16000000 / (16*(32+1)), true);
           break;
         }
         case 6:
@@ -166,7 +166,7 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
           ins->es5506.filter.k1 = 65535;
           N1 = 0.8409f;
           ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)0;
-          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65536, 16000000 / (16*(32+1)), true);
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65535, 16000000 / (16*(32+1)), true);
           break;
         }
         case 7:
@@ -193,7 +193,7 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
           N2 = 0.8409f;
           ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)0;
           max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65536, 16000000 / (16*(32+1)), false);
-          max_cutoff2 = DivPlatformES5506::calc_f_from_k(N2, 65536, 16000000 / (16*(32+1)), true);
+          max_cutoff2 = DivPlatformES5506::calc_f_from_k(N2, 65535, 16000000 / (16*(32+1)), true);
           break;
         }
         case 10:
@@ -202,7 +202,7 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
           N2 = 0.7071f;
           ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)1;
           max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65536, 16000000 / (16*(32+1)), false);
-          max_cutoff2 = DivPlatformES5506::calc_f_from_k(N2, 65536, 16000000 / (16*(32+1)), true);
+          max_cutoff2 = DivPlatformES5506::calc_f_from_k(N2, 65535, 16000000 / (16*(32+1)), true);
           break;
         }
         default: break;
