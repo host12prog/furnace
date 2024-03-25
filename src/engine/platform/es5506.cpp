@@ -143,7 +143,7 @@ int DivPlatformES5506::calc_k_from_f(float N, float f, int F, bool highpass)
 
   if(highpass)
   {
-    return (int)(65535.0f * (cos(W) - 0.5f - sqrt(pow(cos(W), 2.0f) + (2.0f/N) * (1.0f - cos(W)) - 1)) / (1.0f - (1.0f/N)));
+    return (int)(65535.0f * (cos(W) - 0.5f - sqrt(pow(cos(W), 2.0f) + (2.0f/N) * (1.0f - cos(W)) - 1)));
   }
   else
   {
