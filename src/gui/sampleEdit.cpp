@@ -563,7 +563,7 @@ void FurnaceGUI::drawSampleEdit() {
 
           ImGui::TableNextColumn();
           ImGui::AlignTextToFramePadding();
-          ImGui::Text("Hz");
+          ImGui::Text(_L("Hz##sgse"));
           ImGui::SameLine();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (ImGui::InputInt("##SampleRate",&targetRate,10,200)) { MARK_MODIFIED
@@ -1435,7 +1435,7 @@ void FurnaceGUI::drawSampleEdit() {
               t=fmt::sprintf("%d.%03d",timeMs/1000,timeMs%1000);
             }
           } else {
-            t=fmt::sprintf("%dms",timeMs);
+            t=fmt::sprintf(_L("%dms"),timeMs);
           }
           dl->AddText(pos,color,t.c_str());
         }

@@ -135,7 +135,7 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
           ins->es5506.filter.k2 = 65535;
           N1 = 0.8409f;
           ins->es5506.filter.mode = (DivInstrumentES5506::Filter::FilterMode)2;
-          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65534, 16000000 / (16*(32+1)), false);
+          max_cutoff1 = DivPlatformES5506::calc_f_from_k(N1, 65534, 16000000 / (16*(32+1)), false) / 4; //WHYYYYY??Y?Y?Y?Y???
           break;
         }
         case 3:

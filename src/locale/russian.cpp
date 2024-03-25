@@ -1973,6 +1973,7 @@ void DivLocale::addTranslationsRussian()
     strings["enable this option to slightly boost high frequencies\nto compensate for the SNES' Gaussian filter's muffle.##sgse"].plurals[0] = "включите эту опцию для небольшого усиления высоких частот\nдля компенсации фильтрующего свойства гауссовой интерполяции, из-за которого сэмпл \"приглушается\".";
     strings["8-bit dither##sgse"].plurals[0] = "8-битный дизеринг";
     strings["dither the sample when used on a chip that only supports 8-bit samples.##sgse"].plurals[0] = "произвести дизеринг для сэмпла при его использовании для чипа, поддерживающего только 8-битные сэмплы.";
+    strings["Hz##sgse"].plurals[0] = "Гц";
     strings["Note##sgse"].plurals[0] = "Нота";
     strings["%s"].plurals[0] = "%s";
     strings["Fine##sgse"].plurals[0] = "Расстройка";
@@ -2039,6 +2040,7 @@ void DivLocale::addTranslationsRussian()
     strings["Create instrument from sample##sgse"].plurals[0] = "Создать инструмент из сэмпла";
     strings["Zoom##sgse0"].plurals[0] = "Масштаб";
     strings["Zoom##sgse1"].plurals[0] = "Масштаб";
+    strings["%dms"].plurals[0] = "%d мс";
     strings["Auto##sgse"].plurals[0] = "Автоматически";
     strings["cut##sgse"].plurals[0] = "вырезать";
     strings["copy##sgse"].plurals[0] = "копировать";

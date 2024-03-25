@@ -2032,6 +2032,7 @@ void DivLocale::addTranslationsTemplate()
     strings["enable this option to slightly boost high frequencies\nto compensate for the SNES' Gaussian filter's muffle.##sgse"].plurals[0] = "=enable this option to slightly boost high frequencies\nto compensate for the SNES' Gaussian filter's muffle.";
     strings["8-bit dither##sgse"].plurals[0] = "=8-bit dither";
     strings["dither the sample when used on a chip that only supports 8-bit samples.##sgse"].plurals[0] = "=dither the sample when used on a chip that only supports 8-bit samples.";
+    strings["Hz##sgse"].plurals[0] = "=Hz";
     strings["Note##sgse"].plurals[0] = "=Note";
     strings["%s"].plurals[0] = "=%s";
     strings["Fine##sgse"].plurals[0] = "=Fine";
@@ -2096,6 +2097,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Create instrument from sample##sgse"].plurals[0] = "=Create instrument from sample";
     strings["Zoom##sgse0"].plurals[0] = "=Zoom";
     strings["Zoom##sgse1"].plurals[0] = "=Zoom";
+    strings["%dms"].plurals[0] = "=%dms";
     strings["Auto##sgse"].plurals[0] = "=Auto";
     strings["cut##sgse"].plurals[0] = "=cut";
     strings["copy##sgse"].plurals[0] = "=copy";
