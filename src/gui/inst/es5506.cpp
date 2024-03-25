@@ -49,11 +49,11 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
 {
   if (ImGui::BeginTabItem("ES5506")) 
   {
-    bool friendly = ins->es5506.friendly_mode;
-    ImGui::Checkbox("Friendly insrument editor", &ins->es5506.friendly_mode);
-    ImGui::Separator();
+    //bool friendly = ins->es5506.friendly_mode;
+    //ImGui::Checkbox("Friendly insrument editor", &ins->es5506.friendly_mode);
+    //ImGui::Separator();
     
-    if(friendly)
+    /*if(friendly)
     {
       ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize("Filter Mode").x);
       ImGui::Text("Filter Mode");
@@ -276,9 +276,9 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
         ImGui::Checkbox(_L("K2 Ramp Slowdown##sgiOTTO"),&ins->es5506.envelope.k2Slow);
         ImGui::EndTable();
       }
-    }
-    else
-    {
+    }*/
+    //else
+    //{
       if (ImGui::BeginTable("ESParams",2,ImGuiTableFlags_SizingStretchSame)) 
       {
         ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch,0.0);
@@ -313,7 +313,7 @@ void FurnaceGUI::drawInsES5506(DivInstrument* ins)
         ImGui::Checkbox(_L("K2 Ramp Slowdown##sgiOTTO"),&ins->es5506.envelope.k2Slow);
         ImGui::EndTable();
       }
-    }
+    //}
 
     ImGui::EndTabItem();
   }
