@@ -1986,6 +1986,9 @@ void DivLocale::addTranslationsPortuguese()
     strings["C219: maximum sample length is 131072##sgsed"].plurals[0] = "C219: o comprimento máximo da sample é 131072";
     strings["MSM6295: samples can't loop##sgsed"].plurals[0] = "MSM6295: não é possível repetir (loop) samples";
     strings["MSM6295: maximum bankswitched sample length is 129024##sgsed"].plurals[0] = "MSM6295: o comprimento máximo da sample com bankswitching é 129024";
+    strings["GBA DMA: loop start must be a multiple of 4##sgsed"].plurals[0] = "GBA DMA: o início do loop precisa ser um múltiplo de 4";
+    strings["GBA DMA: loop length must be a multiple of 16##sgsed"].plurals[0] = "GBA DMA: o comprimento do loop precisa ser um múltiplo de 16";
+    strings["GBA DMA: sample length will be padded to multiple of 16##sgsed"].plurals[0] = "GBA DMA: o comprimento da sample será preenchida até um múltiplo de 16";
     strings["ES5506: backward loop mode isn't supported##sgsed"].plurals[0] = "ES5506: modo de repetição (loop) reverso não é suportado";
     strings["backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506##sgsed"].plurals[0] = "reverso/pingue-pongue suportado somente no DAC PCM Genérico\npingue-pongue também suportado no ES5506";
     strings["Info##sgsed"].plurals[0] = "Informações";
