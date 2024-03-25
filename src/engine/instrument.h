@@ -796,9 +796,11 @@ struct DivInstrumentES5506 {
       FILTER_MODE_LPK2_LPK1,
     };
     FilterMode mode;
+    unsigned char virtual_filter_mode;
     unsigned short k1, k2;
     Filter():
       mode(FILTER_MODE_LPK2_LPK1),
+      virtual_filter_mode(0),
       k1(0xffff),
       k2(0xffff) {}
   };
@@ -819,6 +821,8 @@ struct DivInstrumentES5506 {
   Filter filter;
   Envelope envelope;
 
+  bool friendly_mode;
+
   bool operator==(const DivInstrumentES5506& other);
   bool operator!=(const DivInstrumentES5506& other) {
     return !(*this==other);
@@ -826,7 +830,8 @@ struct DivInstrumentES5506 {
 
   DivInstrumentES5506():
     filter(Filter()),
-    envelope(Envelope()) {}
+    envelope(Envelope()),
+    friendly_mode(false) {}
 };
 
 struct DivInstrumentES5503 {

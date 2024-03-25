@@ -207,6 +207,7 @@ bool DivInstrumentSoundUnit::operator==(const DivInstrumentSoundUnit& other) {
 bool DivInstrumentES5506::operator==(const DivInstrumentES5506& other) {
   return (
     _C(filter.mode) &&
+    _C(filter.virtual_filter_mode) &&
     _C(filter.k1) &&
     _C(filter.k2) &&
     _C(envelope.ecount) &&
@@ -215,7 +216,8 @@ bool DivInstrumentES5506::operator==(const DivInstrumentES5506& other) {
     _C(envelope.k1Ramp) &&
     _C(envelope.k2Ramp) &&
     _C(envelope.k1Slow) &&
-    _C(envelope.k2Slow)
+    _C(envelope.k2Slow) &&
+    _C(friendly_mode)
   );
 }
 
