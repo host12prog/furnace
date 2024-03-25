@@ -1089,6 +1089,10 @@ void DivPlatformOPLL::setFlags(const DivConfig& flags) {
     chipClock=4000000.0;
   } else if (clockSel==1) {
     chipClock=COLOR_PAL*4.0/5.0;
+  } else if (clockSel==4) {
+    chipClock=COLOR_PAL*3.0/8.0;
+  } else if (clockSel==5) {
+    chipClock=COLOR_PAL*2.0/5.0;
   } else {
     chipClock=COLOR_NTSC;
   }

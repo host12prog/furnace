@@ -2163,7 +2163,7 @@ void DivLocale::addTranslationsRussian()
     strings["Exact data (inverted)##sgsc"].plurals[0] = "Точные данные (инвертирован)";
     strings["Exact output (normal)##sgsc"].plurals[0] = "Точный вывод (нормально)";
     strings["Pretty please one more compat flag when I use arpeggio and my sound length##sgsc"].plurals[0] = "Ну пожалуйста ещё один флаг совместимости когда я использую арпеджио и малую длину звука на шумовом канале";
-    strings["Clock rate:##sgsc2"].plurals[0] = "Частота:";
+    strings["Clock rate:##sgsc2"].plurals[0] = "Тактовая частота:";
     strings["DAC bit depth (reduces output rate):##sgsc"].plurals[0] = "Глубина квантования ЦАП (уменьшает частоту дискретизации):";
     strings["Volume scale:##sgsc"].plurals[0] = "Громкость:";
     strings["Mix buffers (allows longer echo delay):##sgsc"].plurals[0] = "Буферы микширования (позволяет делать более долгую задержку эха):";

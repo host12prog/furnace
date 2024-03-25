@@ -491,6 +491,18 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
         clockSel=3;
         altered=true;
       }
+
+      if (type==DIV_SYSTEM_VRC7) 
+      {
+        if (ImGui::RadioButton("NES PAL (1.67MHz)",clockSel==4)) {
+          clockSel=4;
+          altered=true;
+        }
+        if (ImGui::RadioButton("Dendy (1.77MHz)",clockSel==5)) {
+          clockSel=5;
+          altered=true;
+        }
+      }
       ImGui::Unindent();
       if (type!=DIV_SYSTEM_VRC7) {
         ImGui::Text(_L("Patch set:##sgsc"));
