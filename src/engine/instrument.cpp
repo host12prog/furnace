@@ -2109,7 +2109,7 @@ void DivInstrument::readFeatureNE(SafeReader& reader, short version) {
       amiga.get_amiga_sample_map(note, true)->dpcmFreq=reader.readC();
       amiga.get_amiga_sample_map(note, true)->dpcmDelta=reader.readC();
 
-      if(version < 193)
+      if(version < 193 && type != DIV_INS_AMIGA)
       {
         amiga.get_amiga_sample_map(note, true)->freq = 0;
       }

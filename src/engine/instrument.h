@@ -528,6 +528,13 @@ struct DivInstrumentAmiga {
       if(allocate)
       {
         noteMap.resize(120);
+
+        for(int j = 0; j < 120; j++)
+        {
+          noteMap[j].map=-1;
+          noteMap[j].freq=j;
+        }
+
         return &noteMap[i];
       }
       else
