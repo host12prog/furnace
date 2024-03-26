@@ -878,6 +878,13 @@ void DivInstrument::writeFeaturePO(SafeWriter* w)
   FEATURE_END;
 }
 
+void DivInstrument::writeFeatureFZ(SafeWriter* w)
+{
+  FEATURE_BEGIN("FZ");
+
+  FEATURE_END;
+}
+
 void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bool insName, bool tilde_version) {
   size_t blockStartSeek=0;
   size_t blockEndSeek=0;
@@ -1263,6 +1270,9 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
     if (pokey!=defaultIns.pokey) {
       featurePO=true;
     }
+    if (fzt!=defaultIns.fzt) {
+      featureFZ=true;
+    }
   }
 
   // check ins name
@@ -1452,6 +1462,9 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
   }
   if (featurePO) {
     writeFeaturePO(w);
+  }
+  if (featureFZ) {
+    writeFeatureFZ(w);
   }
 
   if (fui && (featureSL || featureWL)) {
@@ -2262,6 +2275,12 @@ void DivInstrument::readFeaturePO(SafeReader& reader, short version) {
 
   pokey.raw_freq_macro_mode = reader.readC();
 
+  READ_FEAT_END;
+}
+
+void DivInstrument::readFeatureFZ(SafeReader& reader, short version) {
+  READ_FEAT_BEGIN;
+  
   READ_FEAT_END;
 }
 
