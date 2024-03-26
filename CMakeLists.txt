@@ -629,6 +629,8 @@ src/engine/platform/sound/dave/dave.cpp
 
 src/engine/platform/sound/nds.cpp
 
+src/engine/platform/sound/fzt.c
+
 src/engine/platform/oplAInterface.cpp
 src/engine/platform/ym2608Interface.cpp
 src/engine/platform/ym2610Interface.cpp
