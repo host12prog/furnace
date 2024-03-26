@@ -15,6 +15,8 @@ extern "C"
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <math.h>
+#include <string.h>
 
 #define NUM_CHANNELS 4
 
