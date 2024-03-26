@@ -4,6 +4,60 @@ downloaded there: https://github.com/LTVA1/furnace*/
 
 #include "fzt.h"
 
+#define PI 3.1415
+
+#define FZT_NUM_CHANNELS 4
+
+typedef enum {
+    SE_WAVEFORM_NONE = 0,
+    SE_WAVEFORM_NOISE = 1,
+    SE_WAVEFORM_PULSE = 2,
+    SE_WAVEFORM_TRIANGLE = 4,
+    SE_WAVEFORM_SAW = 8,
+    SE_WAVEFORM_NOISE_METAL = 16,
+    SE_WAVEFORM_SINE = 32,
+} SoundEngineWaveformType;
+
+typedef enum {
+    SE_ENABLE_FILTER = 1,
+    SE_ENABLE_GATE = 2,
+    SE_ENABLE_RING_MOD = 4,
+    SE_ENABLE_HARD_SYNC = 8,
+    SE_ENABLE_KEYDOWN_SYNC = 16, // sync oscillators on keydown
+} SoundEngineFlags;
+
+typedef enum {
+    FIL_OUTPUT_LOWPASS = 1,
+    FIL_OUTPUT_HIGHPASS = 2,
+    FIL_OUTPUT_BANDPASS = 3,
+    FIL_OUTPUT_LOW_HIGH = 4,
+    FIL_OUTPUT_HIGH_BAND = 5,
+    FIL_OUTPUT_LOW_BAND = 6,
+    FIL_OUTPUT_LOW_HIGH_BAND = 7,
+    /* ============ */
+    FIL_MODES = 8,
+} SoundEngineFilterModes;
+
+typedef enum {
+    ATTACK = 1,
+    DECAY = 2,
+    SUSTAIN = 3,
+    RELEASE = 4,
+    DONE = 5,
+} SoundEngineEnvelopeStates;
+
+typedef enum {
+    TE_ENABLE_VIBRATO = 1,
+    TE_ENABLE_PWM = 2,
+    TE_PROG_NO_RESTART = 4,
+    TE_SET_CUTOFF = 8,
+    TE_SET_PW = 16,
+    TE_RETRIGGER_ON_SLIDE = 32, // call trigger instrument function even if slide command is there
+} TrackerEngineFlags;
+
+#define MIDDLE_C (12 * 4)
+#define MAX_NOTE (12 * 7 + 11)
+
 const uint32_t frequency_table[FREQ_TAB_SIZE] = {
     (uint32_t)(2093.00 * 1024), // 7th octave, the highest in this tracker
     (uint32_t)(2217.46 * 1024), // frequency precision is 1 / 1024th of Hz
@@ -409,7 +463,7 @@ void sound_engine_init(
 
     sound_engine->sample_rate = sample_rate;
 
-    for(int i = 0; i < NUM_CHANNELS; ++i) {
+    for(int i = 0; i < FZT_NUM_CHANNELS; ++i) {
         sound_engine->channel[i].lfsr = RANDOM_SEED;
     }
 
@@ -457,13 +511,23 @@ void sound_engine_fill_buffer(
     SoundEngine* sound_engine,
     short** audio_buffer,
     size_t audio_buffer_size) {
-    int32_t channel_output[NUM_CHANNELS];
-    int32_t channel_output_final[NUM_CHANNELS];
+    int32_t channel_output[FZT_NUM_CHANNELS];
+    int32_t channel_output_final[FZT_NUM_CHANNELS];
+
+    for(int i = 0; i < FZT_NUM_CHANNELS; i++)
+    {
+        if(sound_engine->osc_buf[i] != NULL)
+        {
+            free(sound_engine->osc_buf[i]);
+        }
+
+        sound_engine->osc_buf[i] = (short*)malloc(sizeof(short) * audio_buffer_size);
+    }
 
     for(uint32_t i = 0; i < (uint32_t)audio_buffer_size; ++i) {
-        int32_t output = WAVE_AMP * 2;
+        int32_t output = 0;
 
-        for(uint32_t chan = 0; chan < NUM_CHANNELS; ++chan) {
+        for(uint32_t chan = 0; chan < FZT_NUM_CHANNELS; ++chan) {
             SoundEngineChannel* channel = &sound_engine->channel[chan];
 
             if(channel->frequency > 0) {
@@ -551,9 +615,10 @@ void sound_engine_fill_buffer(
                 }
 
                 output += channel_output_final[chan];
+                sound_engine->osc_buf[chan][i] = output >> 2;
             }
         }
 
-        audio_buffer[0][i] = output >> 8;
+        audio_buffer[0][i] = output >> 3;
     }
 }

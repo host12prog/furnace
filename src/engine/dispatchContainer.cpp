@@ -91,6 +91,7 @@
 #include "platform/sid2.h"
 #include "platform/5e01.h"
 #include "platform/nds.h"
+#include "platform/fzt.h"
 #include "platform/dummy.h"
 #include "../ta-log.h"
 #include "song.h"
@@ -728,6 +729,9 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
       break;
     case DIV_SYSTEM_5E01:
       dispatch=new DivPlatform5E01;
+      break;
+    case DIV_SYSTEM_FZT:
+      dispatch=new DivPlatformFZT;
       break;
     case DIV_SYSTEM_DUMMY:
       dispatch=new DivPlatformDummy;

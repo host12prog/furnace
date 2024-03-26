@@ -4,8 +4,8 @@ downloaded there: https://github.com/LTVA1/furnace*/
 
 #pragma once
 
-#ifndef _FZT_H
-#define _FZT_H
+#ifndef FZT_H
+#define FZT_H
 
 #ifdef __cplusplus
 extern "C"
@@ -17,8 +17,9 @@ extern "C"
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <stdlib.h>
 
-#define NUM_CHANNELS 4
+#define FZT_NUM_CHANNELS 4
 
 #define RANDOM_SEED 0xf31782ce
 
@@ -39,48 +40,8 @@ extern "C"
          (((uint64_t)MAX_ADSR / ((slope) * (slope)*256 / 8)) * BASE_FREQ / eng->sample_rate) : \
          ((uint64_t)MAX_ADSR * BASE_FREQ / eng->sample_rate))
 
-#define PI 3.1415
-
 #define FREQ_TAB_SIZE 12 /* one octave */
 #define NUM_OCTAVES 8 /* 0-7th octaves */
-
-typedef enum {
-    SE_WAVEFORM_NONE = 0,
-    SE_WAVEFORM_NOISE = 1,
-    SE_WAVEFORM_PULSE = 2,
-    SE_WAVEFORM_TRIANGLE = 4,
-    SE_WAVEFORM_SAW = 8,
-    SE_WAVEFORM_NOISE_METAL = 16,
-    SE_WAVEFORM_SINE = 32,
-} SoundEngineWaveformType;
-
-typedef enum {
-    SE_ENABLE_FILTER = 1,
-    SE_ENABLE_GATE = 2,
-    SE_ENABLE_RING_MOD = 4,
-    SE_ENABLE_HARD_SYNC = 8,
-    SE_ENABLE_KEYDOWN_SYNC = 16, // sync oscillators on keydown
-} SoundEngineFlags;
-
-typedef enum {
-    FIL_OUTPUT_LOWPASS = 1,
-    FIL_OUTPUT_HIGHPASS = 2,
-    FIL_OUTPUT_BANDPASS = 3,
-    FIL_OUTPUT_LOW_HIGH = 4,
-    FIL_OUTPUT_HIGH_BAND = 5,
-    FIL_OUTPUT_LOW_BAND = 6,
-    FIL_OUTPUT_LOW_HIGH_BAND = 7,
-    /* ============ */
-    FIL_MODES = 8,
-} SoundEngineFilterModes;
-
-typedef enum {
-    ATTACK = 1,
-    DECAY = 2,
-    SUSTAIN = 3,
-    RELEASE = 4,
-    DONE = 5,
-} SoundEngineEnvelopeStates;
 
 typedef struct {
     uint8_t a, d, s, r, volume, envelope_state;
@@ -110,12 +71,12 @@ typedef struct {
 } SoundEngineChannel;
 
 typedef struct {
-    SoundEngineChannel channel[NUM_CHANNELS];
+    SoundEngineChannel channel[FZT_NUM_CHANNELS];
     uint32_t sample_rate;
     bool external_audio_output;
     uint8_t sine_lut[SINE_LUT_SIZE];
 
-    // uint32_t counter; //for debug
+    short* osc_buf[FZT_NUM_CHANNELS];
 } SoundEngine;
 
 uint16_t sound_engine_triangle(uint32_t acc);

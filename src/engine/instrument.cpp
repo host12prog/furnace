@@ -282,6 +282,29 @@ bool DivInstrumentPOKEY::operator==(const DivInstrumentPOKEY& other) {
   return _C(raw_freq_macro_mode);
 }
 
+bool DivInstrumentFZT::operator==(const DivInstrumentFZT& other) {
+  return (
+    _C(waveform) &&
+    _C(flags) &&
+    _C(sound_engine_flags) &&
+    _C(slide_speed) &&
+    _C(hard_sync) &&
+    _C(pw) &&
+    _C(program_period) &&
+    _C(vibrato_speed) &&
+    _C(vibrato_depth) &&
+    _C(vibrato_delay) &&
+    _C(pwm_speed) &&
+    _C(pwm_depth) &&
+    _C(pwm_delay) &&
+    _C(filter_cutoff) &&
+    _C(filter_resonance) &&
+    _C(filter_type) &&
+    _C(base_note) &&
+    _C(finetune)
+  );
+}
+
 #undef _C
 
 #define FEATURE_BEGIN(x) \
@@ -927,6 +950,7 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
   bool featureLW=(std.local_waves.size() > 0 ? true : false);
 
   bool featurePO=false;
+  bool featureFZ = false;
 
   bool checkForWL=false;
 
@@ -1175,6 +1199,8 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         featureSM=true;
         featureSL=true;
         break;
+      case DIV_INS_FZT:
+        featureFZ = true;
       case DIV_INS_MAX:
         break;
       case DIV_INS_NULL:
