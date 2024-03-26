@@ -1,3 +1,7 @@
+/*This is an emulation code of software synth engine of LTVA's Flizzer Tracker
+program, originally written for Flipper Zero. The Flizzer Tracker source code can be
+downloaded there: https://github.com/LTVA1/furnace*/
+
 #include "fzt.h"
 
 const uint32_t frequency_table[FREQ_TAB_SIZE] = {
