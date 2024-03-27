@@ -59,7 +59,7 @@ int DivPlatformFZT::dispatch(DivCommand c) {
       chan[c.chan].macroInit(ins);
 
 
-      sound_engine_set_channel_frequency(sound_engine, &sound_engine->channel[c.chan], MIDDLE_C << 8);
+      sound_engine_set_channel_frequency(sound_engine, &sound_engine->channel[c.chan], c.value << 8);
       sound_engine->channel[c.chan].waveform = SE_WAVEFORM_TRIANGLE;
       sound_engine->channel[c.chan].adsr.a = 0x20;
       sound_engine->channel[c.chan].adsr.volume = 0x80;
