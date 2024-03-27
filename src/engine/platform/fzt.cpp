@@ -216,10 +216,10 @@ float DivPlatformFZT::getPostAmp() {
 
 void DivPlatformFZT::reset() {
   while (!writes.empty()) writes.pop();
-  for (int i=0; i<3; i++) {
+  for (int i=0; i<FZT_NUM_CHANNELS; i++) {
     chan[i]=DivPlatformFZT::Channel();
     chan[i].std.setEngine(parent);
-    
+    memset((void*)&fztChan[i], 0, sizeof(TrackerEngineChannel));
   }
 
   sound_engine_init(sound_engine, rate);

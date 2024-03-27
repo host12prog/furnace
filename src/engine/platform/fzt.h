@@ -26,12 +26,40 @@
 
 #define FZT_NUM_CHANNELS 4
 
+typedef struct {
+    unsigned short flags;
+
+    unsigned char channel_flags;
+
+    unsigned short note, target_note, last_note, fixed_note;
+    signed short arpeggio_note;
+
+    unsigned char volume;
+
+    unsigned char program_counter, program_tick, program_loop, program_period;
+
+    unsigned short filter_cutoff, filter_resonance;
+    unsigned char filter_type;
+
+    unsigned char vibrato_speed, vibrato_depth, vibrato_delay;
+    unsigned char pwm_speed, pwm_depth, pwm_delay;
+
+    unsigned int vibrato_position, pwm_position; // basically accumulators
+
+    unsigned char extarp1, extarp2;
+
+    unsigned short pw;
+
+    unsigned char slide_speed;
+} TrackerEngineChannel;
+
 class DivPlatformFZT: public DivDispatch {
   struct Channel: public SharedChannel<int> {
     Channel():
       SharedChannel<int>(255) {}
   };
   Channel chan[FZT_NUM_CHANNELS];
+  TrackerEngineChannel fztChan[FZT_NUM_CHANNELS];
   bool isMuted[FZT_NUM_CHANNELS];
   DivDispatchOscBuffer* oscBuf[FZT_NUM_CHANNELS];
   struct QueuedWrite {
