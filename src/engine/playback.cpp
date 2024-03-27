@@ -280,6 +280,9 @@ const char* cmdName[]={
   "DELAYED_TRANSPOSE",
 
   "MINMOD_ECHO",
+
+  "VOLUME_FZT",
+  "EFFECT_FZT",
 };
 
 static_assert((sizeof(cmdName)/sizeof(void*))==DIV_CMD_MAX,"update cmdName!");
@@ -705,6 +708,15 @@ void DivEngine::processRow(int i, bool afterDelay) {
       chan[i].volume=pat->data[whatRow][3]<<8;
       dispatchCmd(DivCommand(DIV_CMD_VOLUME,i,chan[i].volume>>8));
       dispatchCmd(DivCommand(DIV_CMD_HINT_VOLUME,i,chan[i].volume>>8));
+
+      DivDispatch* maybeFZT = getDispatchFromChanIndex(i);
+      if(maybeFZT != NULL) //only for FZT sound source since in it I want to run my own vol, pitch and vibrato calc!
+      {
+        if(sysOfChan[i] == DIV_SYSTEM_FZT)
+        {
+          dispatchCmd(DivCommand(DIV_CMD_VOLUME_FZT,i,pat->data[whatRow][3]));
+        }
+      }
     }
   }
 
@@ -722,6 +734,15 @@ void DivEngine::processRow(int i, bool afterDelay) {
 
     if (effectVal==-1) effectVal=0;
     effectVal&=255;
+
+    DivDispatch* maybeFZT = getDispatchFromChanIndex(i);
+    if(maybeFZT != NULL) //only for FZT sound source since in it I want to run my own vol, pitch and vibrato calc!
+    {
+      if(sysOfChan[i] == DIV_SYSTEM_FZT && effect != -1)
+      {
+        dispatchCmd(DivCommand(DIV_CMD_EFFECT_FZT,i,effect,effectVal));
+      }
+    }
 
     // per-system effect
     if (!perSystemEffect(i,effect,effectVal)) switch (effect) {

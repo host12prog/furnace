@@ -635,6 +635,7 @@ class DivEngine {
     DivWavetable* getLocalWave(DivInstrument* ins, int index);
     DivSample* getSample(int index);
     DivDispatch* getDispatch(int index);
+    DivDispatch* getDispatchFromChanIndex(int ch);
     // parse old system setup description
     String decodeSysDesc(String desc);
     // start fresh

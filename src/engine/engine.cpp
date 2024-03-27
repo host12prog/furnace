@@ -1566,6 +1566,12 @@ DivDispatch* DivEngine::getDispatch(int index) {
   return disCont[index].dispatch;
 }
 
+DivDispatch* DivEngine::getDispatchFromChanIndex(int ch) {
+  if (ch<0) return NULL;
+  if (ch>=chans) return NULL;
+  return disCont[dispatchOfChan[ch]].dispatch;
+}
+
 void DivEngine::setLoops(int loops) {
   remainingLoops=loops;
 }

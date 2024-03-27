@@ -143,6 +143,12 @@ int DivPlatformFZT::dispatch(DivCommand c) {
       if (!chan[c.chan].inPorta && c.value && !parent->song.brokenPortaArp && chan[c.chan].std.get_div_macro_struct(DIV_MACRO_ARP)->will && !NEW_ARP_STRAT) chan[c.chan].baseFreq=NOTE_FREQUENCY(chan[c.chan].note);
       chan[c.chan].inPorta=c.value;
       break;
+    case DIV_CMD_VOLUME_FZT:
+      logV("vol fzt");
+      break;
+    case DIV_CMD_EFFECT_FZT:
+      logV("eff fzt");
+      break;
     case DIV_CMD_GET_VOLMAX:
       return 255;
       break;
