@@ -55,11 +55,14 @@ void FurnaceGUI::doAction(int what) {
       }
       break;
     case GUI_ACTION_SAVE:
-      if (curFileName=="" || curFileName==backupPath || e->song.version>=0xff00) {
-        openFileDialog(GUI_FILE_SAVE);
-      } else {
-        if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-          showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sgda"),lastError));
+      if(!e->song.is_prohibited_to_save)
+      {
+        if (curFileName=="" || curFileName==backupPath || e->song.version>=0xff00) {
+          openFileDialog(GUI_FILE_SAVE);
+        } else {
+          if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
+            showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sgda"),lastError));
+          }
         }
       }
       break;

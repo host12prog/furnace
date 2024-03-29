@@ -2688,6 +2688,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     ds.stopE1E2OnNoteOn = true;
     ds.slowerVolSlide = true;
 
+    ds.is_prohibited_to_save = true;
+
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;
     saveLock.lock();

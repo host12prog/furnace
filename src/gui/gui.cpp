@@ -4139,12 +4139,15 @@ bool FurnaceGUI::loop() {
           ImGui::EndMenu();
         }
         ImGui::Separator();
-        if (ImGui::MenuItem(_L("save##sggu"),BIND_FOR(GUI_ACTION_SAVE))) {
-          if (curFileName=="" || (curFileName.find(backupPath)==0) || e->song.version>=0xff00) {
-            openFileDialog(GUI_FILE_SAVE);
-          } else {
-            if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-              showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sggu0"),lastError));
+        if(!e->song.is_prohibited_to_save)
+        {
+          if (ImGui::MenuItem(_L("save##sggu"),BIND_FOR(GUI_ACTION_SAVE))) {
+            if (curFileName=="" || (curFileName.find(backupPath)==0) || e->song.version>=0xff00) {
+              openFileDialog(GUI_FILE_SAVE);
+            } else {
+              if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
+                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sggu0"),lastError));
+              }
             }
           }
         }
