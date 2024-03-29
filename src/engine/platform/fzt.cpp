@@ -23,6 +23,9 @@
 #include <math.h>
 #include "../../ta-log.h"
 
+#define my_min(a, b) (((a) < (b)) ? (a) : (b))
+#define my_max(a, b) (((a) > (b)) ? (a) : (b))
+
 #define CHIP_FREQBASE 4410000
 
 void DivPlatformFZT::acquire(short** buf, size_t len) 
@@ -135,6 +138,294 @@ void DivPlatformFZT::tracker_engine_trigger_instrument_internal(int chan, DivIns
   sound_engine_enable_gate(sound_engine, &sound_engine->channel[chan], true);
 }
 
+void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_program) 
+{
+
+}
+
+void DivPlatformFZT::tracker_engine_execute_volume(int vol, int chan)
+{
+  if(!(fztChan[chan].channel_flags & TEC_DISABLED)) 
+  {
+    sound_engine->channel[chan].adsr.volume = (int32_t)fztChan[chan].volume * (int32_t)vol / (MUS_NOTE_VOLUME_NONE);
+  }
+}
+
+void DivPlatformFZT::tracker_engine_execute_track_command(int chan, bool first_tick, int opcode)
+{
+  if(opcode != 0)
+  {
+    if((opcode & 0x7f00) == 0x00) 
+    {
+      fztChan[chan].extarp1 = ((opcode & 0xf0) >> 4);
+      fztChan[chan].extarp2 = (opcode & 0xf);
+    }
+    else 
+    {
+      do_command(opcode, chan, current_tick, false);
+    }
+  }
+
+  if(fztChan[chan].channel_flags & TEC_DISABLED)
+  {
+    sound_engine->channel[chan].adsr.volume = 0;
+  }
+}
+
+void DivPlatformFZT::tracker_engine_execute_program_tick(int chann, int advance) {
+    TrackerEngineChannel* te_channel = &fztChan[chann];
+    uint8_t tick = te_channel->program_tick;
+    uint8_t visited[FZT_INST_PROG_LEN] = {0};
+
+do_it_again:;
+    
+    DivInstrument* ins=parent->getIns(chan[chann].ins,DIV_INS_FZT);
+    const uint16_t inst = (ins->fzt.program[tick].cmd << 8) | (ins->fzt.program[tick].val) | (ins->fzt.program[tick].unite << 15);
+
+    if((inst & 0x7fff) == 0x7fff) 
+    {
+      te_channel->channel_flags &= ~(TEC_PROGRAM_RUNNING);
+      return;
+    }
+
+    uint8_t dont_reloop = 0;
+
+    if((inst & 0x7fff) != 0x7ffe) 
+    {
+        switch(inst & 0x7f00) 
+        {
+        case 0x7f00: 
+        {
+            if(!visited[tick]) {
+                visited[tick] = 1;
+                tick = inst & (FZT_INST_PROG_LEN - 1);
+            }
+
+            else
+                return;
+
+            break;
+        }
+
+        case 0x7d00:
+            break;
+
+        case 0x7e00: 
+        {
+            if(te_channel->program_loop == (inst & 0xff)) 
+            {
+              if(advance) te_channel->program_loop = 1;
+            }
+
+            else 
+            {
+              if(advance) ++te_channel->program_loop;
+
+              uint8_t l = 0;
+
+              while(((ins->fzt.program[tick].cmd << 8) | (ins->fzt.program[tick].val) | (ins->fzt.program[tick].unite << 15) & 0x7f00) != 0x7d00 && tick > 0) 
+              {
+                --tick;
+                if(!((ins->fzt.program[tick].cmd << 8) | (ins->fzt.program[tick].val) | (ins->fzt.program[tick].unite << 15) & 0x8000)) ++l;
+              }
+
+              --tick;
+
+              dont_reloop = l <= 1;
+            }
+
+            break;
+        }
+
+        default: {
+            do_command(inst, chann, te_channel->program_counter, true);
+            break;
+        }
+        }
+    }
+
+    if((inst & 0x7fff) == 0x7ffe || (inst & 0x7f00) != 0x7f00) {
+        ++tick;
+        if(tick >= FZT_INST_PROG_LEN) {
+            tick = 0;
+        }
+    }
+
+    // skip to next on msb
+
+    if(((inst & 0x8000) || ((inst & 0x7f00) == 0x7d00) ||
+        ((inst & 0x7f00) == 0x7f00)) &&
+       (inst & 0x7fff) != 0x7ffe && !dont_reloop) {
+        goto do_it_again;
+    }
+
+    if(advance) {
+        te_channel->program_tick = tick;
+    }
+}
+
+void DivPlatformFZT::tracker_engine_advance_channel(int chan) 
+{
+  SoundEngineChannel* se_channel = &sound_engine->channel[chan];
+  TrackerEngineChannel* te_channel = &fztChan[chan];
+
+  if(te_channel->channel_flags & TEC_PLAYING) 
+  {
+    if(!(se_channel->flags & SE_ENABLE_GATE)) 
+    {
+      te_channel->flags &= ~(TEC_PLAYING);
+    }
+
+    if(te_channel->slide_speed != 0) 
+    {
+        if(te_channel->target_note > te_channel->note) 
+        {
+            te_channel->note += my_min(
+                te_channel->slide_speed * 4, te_channel->target_note - te_channel->note);
+        }
+
+        else if(te_channel->target_note < te_channel->note) 
+        {
+            te_channel->note -= my_min(
+                te_channel->slide_speed * 4, te_channel->note - te_channel->target_note);
+        }
+    }
+
+    if(te_channel->channel_flags & TEC_PROGRAM_RUNNING) 
+    {
+      uint8_t u = (te_channel->program_counter + 1) >= te_channel->program_period;
+      tracker_engine_execute_program_tick(chan, u);
+      ++te_channel->program_counter;
+
+      if(u) te_channel->program_counter = 0;
+    }
+
+    int16_t vib = 0;
+    int32_t pwm = 0;
+
+    if(te_channel->flags & TE_ENABLE_VIBRATO) {
+        if(te_channel->vibrato_delay > 0) {
+            te_channel->vibrato_delay--;
+        }
+
+        else {
+            te_channel->vibrato_position += ((uint32_t)te_channel->vibrato_speed << 21);
+            vib = (int32_t)(sound_engine_triangle(te_channel->vibrato_position >> 9) -
+                            WAVE_AMP / 2) *
+                  (int32_t)te_channel->vibrato_depth / (256 * 128);
+        }
+    }
+
+    if(te_channel->flags & TE_ENABLE_PWM) {
+        if(te_channel->pwm_delay > 0) {
+            te_channel->pwm_delay--;
+        }
+
+        else {
+            te_channel->pwm_position +=
+                ((uint32_t)te_channel->pwm_speed
+                  << 20); // so minimum PWM speed is even lower than minimum vibrato speed
+            pwm = ((int32_t)sound_engine_triangle((te_channel->pwm_position) >> 9) -
+                    WAVE_AMP / 2) *
+                  (int32_t)te_channel->pwm_depth / (256 * 16);
+        }
+
+        int16_t final_pwm = (int16_t)fztChan[chan].pw + pwm;
+
+        if(final_pwm < 0) {
+            final_pwm = 0;
+        }
+
+        if(final_pwm > 0xfff) {
+            final_pwm = 0xfff;
+        }
+
+        sound_engine->channel[chan].pw = final_pwm;
+    }
+
+    else {
+        sound_engine->channel[chan].pw = fztChan[chan].pw;
+    }
+
+    int32_t chn_note = (int16_t)(te_channel->fixed_note != 0xffff ? te_channel->fixed_note : te_channel->note) + vib + ((int16_t)te_channel->arpeggio_note << 8);
+
+    if(chn_note < 0) {
+        chn_note = 0;
+    }
+
+    if(chn_note > ((12 * 7 + 11) << 8)) {
+        chn_note = ((12 * 7 + 11) << 8); // highest note is B-7
+    }
+
+    tracker_engine_set_note(chan, (uint16_t)chn_note, false);
+  }
+
+  if(fztChan[chan].channel_flags & TEC_DISABLED) // so we can't set some non-zero volme from inst program too
+  {
+    sound_engine->channel[chan].adsr.volume = 0;
+  }
+}
+
+void DivPlatformFZT::tracker_engine_advance_tick()
+{
+  for(uint8_t chann = 0; chann < FZT_NUM_CHANNELS; chann++) 
+  {
+    SoundEngineChannel* se_channel = &sound_engine->channel[chann];
+    TrackerEngineChannel* te_channel = &fztChan[chann];
+    DivInstrument* pinst = parent->getIns(chan[chann].ins,DIV_INS_FZT);
+
+    uint8_t note_delay = 0;
+
+    opcode = tracker_engine_get_command(&pattern->step[pattern_step]);
+
+    if((opcode & 0x7ff0) == 0xED00) {
+        note_delay = (opcode & 0xf);
+    }
+
+    if(current_tick == note_delay)
+    {
+      int note = chan[chann].note;
+      //uint8_t inst = tracker_engine_get_instrument(&pattern->step[pattern_step]);
+
+      if(note != 100 && note != 101 && note != -1)
+      {
+        uint8_t prev_adsr_volume = se_channel->adsr.volume;
+
+        if((opcode & 0x7f00) == 0x0300) 
+        {
+          if(pinst->fzt.flags & TE_RETRIGGER_ON_SLIDE) 
+          {
+            uint16_t temp_note = te_channel->note;
+            tracker_engine_trigger_instrument_internal(chann, pinst, note << 8);
+            te_channel->note = temp_note;
+          }
+
+          te_channel->target_note = ((note + pinst->fzt.base_note - MIDDLE_C) << 8) + pinst->fzt.finetune;
+          te_channel->slide_speed = (opcode & 0xff);
+        }
+
+        else if((opcode & 0x7f00) == 0xea00) 
+        {
+          te_channel->note = te_channel->target_note = te_channel->last_note = ((note + pinst->fzt.base_note - MIDDLE_C) << 8) + pinst->fzt.finetune;
+        }
+
+        /*else {
+            tracker_engine_trigger_instrument_internal(chann, pinst, note << 8);
+            te_channel->note =
+                ((note + pinst->fzt.base_note - MIDDLE_C) << 8) + pinst->fzt.finetune;
+
+            te_channel->target_note =
+                ((note + pinst->fzt.base_note - MIDDLE_C) << 8) + pinst->fzt.finetune;
+        }*/
+      }
+    }
+
+    //tracker_engine_execute_track_command(chan, tracker_engine->current_tick == note_delay);
+
+    tracker_engine_advance_channel(chann);
+  }
+}
+
 void DivPlatformFZT::tick(bool sysTick) {
   for (int i=0; i<FZT_NUM_CHANNELS; i++) {
     chan[i].std.next();
@@ -145,7 +436,7 @@ int DivPlatformFZT::dispatch(DivCommand c) {
   if (c.chan>FZT_NUM_CHANNELS - 1) return 0;
   switch (c.cmd) {
     case DIV_CMD_NOTE_ON: {
-      DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_SID2);
+      DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_FZT);
       if (c.value!=DIV_NOTE_NULL) {
         chan[c.chan].baseFreq=NOTE_FREQUENCY(c.value);
         chan[c.chan].freqChanged=true;
@@ -154,13 +445,6 @@ int DivPlatformFZT::dispatch(DivCommand c) {
       chan[c.chan].active=true;
       chan[c.chan].keyOn=true;
       chan[c.chan].macroInit(ins);
-
-
-      /*sound_engine_set_channel_frequency(sound_engine, &sound_engine->channel[c.chan], c.value << 8);
-      sound_engine->channel[c.chan].waveform = SE_WAVEFORM_TRIANGLE;
-      sound_engine->channel[c.chan].adsr.a = 0x20;
-      sound_engine->channel[c.chan].adsr.volume = 0x80;
-      sound_engine_enable_gate(sound_engine, &sound_engine->channel[c.chan], true);*/
 
       tracker_engine_trigger_instrument_internal(c.chan, ins, c.value << 8);
       break;
@@ -253,6 +537,7 @@ int DivPlatformFZT::dispatch(DivCommand c) {
       break;
     case DIV_CMD_EFFECT_FZT:
       logV("eff fzt");
+      current_tick = c.value >> 8;
       break;
     case DIV_CMD_GET_VOLMAX:
       return 255;

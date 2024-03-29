@@ -26,6 +26,8 @@
 
 #define FZT_NUM_CHANNELS 4
 
+#define MUS_NOTE_VOLUME_NONE 255
+
 typedef enum {
     TEC_PLAYING = 1,
     TEC_PROGRAM_RUNNING = 2,
@@ -77,6 +79,7 @@ class DivPlatformFZT: public DivDispatch {
   FixedQueue<QueuedWrite,512> writes;
 
   SoundEngine* sound_engine;
+  int current_tick;
 
   public:
     void acquire(short** buf, size_t len);
@@ -89,6 +92,12 @@ class DivPlatformFZT: public DivDispatch {
 
     void tracker_engine_trigger_instrument_internal(int chan, DivInstrument* pinst, int note);
     void tracker_engine_set_note(int chan, int note, bool update_note);
+    void tracker_engine_execute_volume(int vol, int chan);
+    void tracker_engine_execute_track_command(int chan, bool first_tick, int opcode);
+    void do_command(int opcode, int channel, int tick, bool from_program);
+    void tracker_engine_execute_program_tick(int chan, int advance);
+    void tracker_engine_advance_channel(int chan);
+    void tracker_engine_advance_tick();
 
     void muteChannel(int ch, bool mute);
     void setFlags(const DivConfig& flags);
