@@ -97,7 +97,7 @@ class DivPlatformFZT: public DivDispatch {
     void do_command(int opcode, int channel, int tick, bool from_program);
     void tracker_engine_execute_program_tick(int chan, int advance);
     void tracker_engine_advance_channel(int chan);
-    void tracker_engine_advance_tick();
+    void tracker_engine_advance_tick(int chann, int opcode);
 
     void muteChannel(int ch, bool mute);
     void setFlags(const DivConfig& flags);

@@ -740,7 +740,7 @@ void DivEngine::processRow(int i, bool afterDelay) {
     {
       if(sysOfChan[i] == DIV_SYSTEM_FZT && effect != -1)
       {
-        dispatchCmd(DivCommand(DIV_CMD_EFFECT_FZT,i,effect | ((speed1 - ticks) << 8),effectVal));
+        dispatchCmd(DivCommand(DIV_CMD_EFFECT_FZT,i,effect | ((speeds.val[0] - ticks) << 8),effectVal));
       }
     }
 
