@@ -169,13 +169,19 @@ int DivPlatformFZT::dispatch(DivCommand c) {
       chan[c.chan].active=false;
       chan[c.chan].keyOff=true;
       chan[c.chan].keyOn=false;
-      //chan[c.chan].macroInit(NULL);
+      chan[c.chan].macroInit(NULL);
+
+      sound_engine_enable_gate(sound_engine, &sound_engine->channel[c.chan], 0);
+      sound_engine->channel[c.chan].adsr.volume = 0;
+      fztChan[c.chan].volume = 0;
       break;
     case DIV_CMD_NOTE_OFF_ENV:
       chan[c.chan].active=false;
       chan[c.chan].keyOff=true;
       chan[c.chan].keyOn=false;
       chan[c.chan].std.release();
+
+      sound_engine_enable_gate(sound_engine, &sound_engine->channel[c.chan], 0);
       break;
     case DIV_CMD_ENV_RELEASE:
       chan[c.chan].std.release();
