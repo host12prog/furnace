@@ -1536,8 +1536,7 @@ void DivLocale::addTranslationsRussian()
     strings["Memory Composition###Memory Composition"].plurals[0] = "Содержание памяти###Memory Composition";
     strings["bank %d##sgme"].plurals[0] = "банк %d";
     strings["%d-%d ($%x-$%x): %d bytes ($%x)##sgme"].plurals[0] = "%d-%d ($%x-$%x): %d байт ($%x)";
-    strings["click to open sample editor##sgme"].plurals[0] = "нажмите, чтобы открыть редактор сэмплов";
-    strings["%d-%d ($%x-$%x): %d bytes ($%x)##sgme"].plurals[0] = "%d-%d ($%x-$%x): %d байт ($%x)";
+    strings["%d-%d ($%x-$%x): %dK ($%x)##sgme"].plurals[0] = "%d-%d ($%x-$%x): %d КиБ ($%x)";
     strings["no chips with memory##sgme"].plurals[0] = "нет чипов с памятью";
 
     //   sgor  src/gui/orders.cpp
@@ -3073,7 +3072,7 @@ void DivLocale::addTranslationsRussian()
     strings["After Release Rate##susp1"].plurals[0] = "После уклона релиза##susp1";
     strings["Use separate colors for carriers/modulators in FM editor##sgse"].plurals[0] = "Использовать различные цвета для модулирующих и несущих операторов";
     strings["Unsigned FM detune values##sgse"].plurals[0] = "Беззнаковое значение параметра расстройки";
-    strings["Statistics##sgse"].plurals[0] = "Окно статистики";
+    strings["Memory Composition##sgse"].plurals[0] = "Содержание памяти";
     strings["Chip memory usage unit:##sgse"].plurals[0] = "Единицы измерения использования памяти чипа:";
     strings["Bytes##MUU0"].plurals[0] = "Байты##MUU0";
     strings["Kilobytes##MUU1"].plurals[0] = "Килобайты##MUU1";
