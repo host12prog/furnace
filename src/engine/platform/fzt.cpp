@@ -38,6 +38,103 @@ void DivPlatformFZT::acquire(short** buf, size_t len)
   }
 }
 
+void DivPlatformFZT::tracker_engine_set_note(int chan, int note, bool update_note) 
+{
+  if(update_note) fztChan[chan].note = note;
+
+  sound_engine_set_channel_frequency(sound_engine, &sound_engine->channel[chan], note);
+}
+
+void DivPlatformFZT::tracker_engine_trigger_instrument_internal(int chan, DivInstrument* pinst, int note)
+{
+  SoundEngineChannel* se_channel = &sound_engine->channel[chan];
+  TrackerEngineChannel* te_channel = &fztChan[chan];
+
+  te_channel->channel_flags = TEC_PLAYING | (te_channel->channel_flags & TEC_DISABLED);
+
+  te_channel->program_period = pinst->fzt.program_period;
+
+  if(!(pinst->fzt.flags & TE_PROG_NO_RESTART) && pinst->fzt.program_period > 0) {
+      te_channel->channel_flags |= TEC_PROGRAM_RUNNING;
+
+      te_channel->program_counter = 0;
+      te_channel->program_loop = 1;
+      te_channel->program_tick = 0;
+  }
+
+  se_channel->waveform = pinst->fzt.waveform;
+  se_channel->flags = pinst->fzt.sound_engine_flags;
+
+  te_channel->flags = pinst->fzt.flags;
+
+  te_channel->arpeggio_note = 0;
+  te_channel->fixed_note = 0xffff;
+
+  note += (uint16_t)(((int16_t)pinst->fzt.base_note - MIDDLE_C) << 8);
+  tracker_engine_set_note(chan, note + (int16_t)pinst->fzt.finetune, true);
+
+  te_channel->last_note = te_channel->target_note = note + (int16_t)pinst->fzt.finetune;
+
+  te_channel->extarp1 = te_channel->extarp2 = 0;
+
+  if(pinst->fzt.flags & TE_ENABLE_VIBRATO) {
+      te_channel->vibrato_speed = pinst->fzt.vibrato_speed;
+      te_channel->vibrato_depth = pinst->fzt.vibrato_depth;
+      te_channel->vibrato_delay = pinst->fzt.vibrato_delay;
+  }
+
+  if(pinst->fzt.flags & TE_ENABLE_PWM) {
+      te_channel->pwm_speed = pinst->fzt.pwm_speed;
+      te_channel->pwm_depth = pinst->fzt.pwm_depth;
+      te_channel->pwm_delay = pinst->fzt.pwm_delay;
+  }
+
+  if(pinst->fzt.sound_engine_flags & SE_ENABLE_KEYDOWN_SYNC) {
+      te_channel->vibrato_position = ((ACC_LENGTH / 2 / 2) << 9);
+      te_channel->pwm_position = ((ACC_LENGTH / 2 / 2) << 9);
+
+      se_channel->accumulator = 0;
+      se_channel->lfsr = RANDOM_SEED;
+  }
+
+  if(pinst->fzt.flags & TE_SET_CUTOFF) {
+      te_channel->filter_cutoff = ((uint16_t)pinst->fzt.filter_cutoff << 3);
+      te_channel->filter_resonance = (uint16_t)pinst->fzt.filter_resonance;
+
+      se_channel->filter.low = 0;
+      se_channel->filter.high = 0;
+      se_channel->filter.band = 0;
+
+      sound_engine_filter_set_coeff(
+          &se_channel->filter, te_channel->filter_cutoff, te_channel->filter_resonance);
+  }
+
+  if(pinst->fzt.sound_engine_flags & SE_ENABLE_FILTER) {
+      te_channel->filter_type = pinst->fzt.filter_type;
+      se_channel->filter_mode = te_channel->filter_type;
+  }
+
+  if(pinst->fzt.flags & TE_SET_PW) {
+      te_channel->pw = (pinst->fzt.pw << 4);
+      se_channel->pw = (pinst->fzt.pw << 4);
+  }
+
+  se_channel->ring_mod = pinst->fzt.ring_mod;
+  se_channel->hard_sync = pinst->fzt.hard_sync;
+
+  te_channel->slide_speed = pinst->fzt.slide_speed;
+
+  se_channel->adsr.a = pinst->fzt.adsr.a;
+  se_channel->adsr.d = pinst->fzt.adsr.d;
+  se_channel->adsr.s = pinst->fzt.adsr.s;
+  se_channel->adsr.r = pinst->fzt.adsr.r;
+  se_channel->adsr.volume = pinst->fzt.adsr.volume;
+
+  te_channel->volume = pinst->fzt.adsr.volume;
+
+  sound_engine_enable_gate(sound_engine, &sound_engine->channel[chan], true);
+}
+
 void DivPlatformFZT::tick(bool sysTick) {
   for (int i=0; i<FZT_NUM_CHANNELS; i++) {
     chan[i].std.next();
@@ -59,11 +156,13 @@ int DivPlatformFZT::dispatch(DivCommand c) {
       chan[c.chan].macroInit(ins);
 
 
-      sound_engine_set_channel_frequency(sound_engine, &sound_engine->channel[c.chan], c.value << 8);
+      /*sound_engine_set_channel_frequency(sound_engine, &sound_engine->channel[c.chan], c.value << 8);
       sound_engine->channel[c.chan].waveform = SE_WAVEFORM_TRIANGLE;
       sound_engine->channel[c.chan].adsr.a = 0x20;
       sound_engine->channel[c.chan].adsr.volume = 0x80;
-      sound_engine_enable_gate(sound_engine, &sound_engine->channel[c.chan], true);
+      sound_engine_enable_gate(sound_engine, &sound_engine->channel[c.chan], true);*/
+
+      tracker_engine_trigger_instrument_internal(c.chan, ins, c.value << 8);
       break;
     }
     case DIV_CMD_NOTE_OFF:

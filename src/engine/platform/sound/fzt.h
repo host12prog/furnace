@@ -89,6 +89,7 @@ void sound_engine_set_channel_frequency(
     SoundEngine* sound_engine,
     SoundEngineChannel* channel,
     uint16_t note);
+void sound_engine_filter_set_coeff(SoundEngineFilter* flt, uint32_t frequency, uint16_t resonance);
 void sound_engine_fill_buffer(
     SoundEngine* sound_engine,
     short** audio_buffer,

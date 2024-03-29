@@ -26,6 +26,12 @@
 
 #define FZT_NUM_CHANNELS 4
 
+typedef enum {
+    TEC_PLAYING = 1,
+    TEC_PROGRAM_RUNNING = 2,
+    TEC_DISABLED = 4,
+} TrackerEngineChannelFlags;
+
 typedef struct {
     unsigned short flags;
 
@@ -80,6 +86,10 @@ class DivPlatformFZT: public DivDispatch {
     void reset();
     void forceIns();
     void tick(bool sysTick=true);
+
+    void tracker_engine_trigger_instrument_internal(int chan, DivInstrument* pinst, int note);
+    void tracker_engine_set_note(int chan, int note, bool update_note);
+
     void muteChannel(int ch, bool mute);
     void setFlags(const DivConfig& flags);
     void notifyInsChange(int ins);
