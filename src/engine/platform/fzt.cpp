@@ -182,6 +182,23 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
         break;
     }
 
+    case 0x0400: {
+        if(tick == 0) {
+            if(opcode & 0xff) {
+                te_channel->flags |= TE_ENABLE_VIBRATO;
+
+                te_channel->vibrato_speed = (opcode & 0xf0);
+                te_channel->vibrato_depth = ((opcode & 0x0f) << 4);
+            }
+
+            else {
+                te_channel->flags &= ~(TE_ENABLE_VIBRATO);
+            }
+        }
+
+        break;
+    }
+
     default: break;
   }
 }
@@ -420,9 +437,10 @@ void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode)
     int note = chan[chann].note;
     //uint8_t inst = tracker_engine_get_instrument(&pattern->step[pattern_step]);
 
-    if(note != 100 && note != 101 && note != -1)
+    if(chan[chann].fzt_note != -1 && chan[chann].fzt_note < 20)
     {
       //uint8_t prev_adsr_volume = se_channel->adsr.volume;
+      //int realnote=(note+(signed char)octave*12)+60;
 
       if((opcode & 0xff00) == 0x0300)
       {
@@ -433,8 +451,13 @@ void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode)
           te_channel->note = temp_note;
         }
 
-        te_channel->target_note = ((note + pinst->fzt.base_note - MIDDLE_C) << 8) + pinst->fzt.finetune;
-        te_channel->slide_speed = (opcode & 0xff);
+        int notee = (chan[chann].fzt_note+chan[chann].fzt_octave*12);
+        if(notee >= 0 && notee <= MAX_NOTE)
+        {
+          //notee <<= 8;
+          te_channel->target_note = ((notee + (int)pinst->fzt.base_note - MIDDLE_C) << 8) + (int)pinst->fzt.finetune;
+          te_channel->slide_speed = (opcode & 0xff);
+        }
       }
 
       else if((opcode & 0xff00) == 0xea00) 
@@ -571,7 +594,9 @@ int DivPlatformFZT::dispatch(DivCommand c) {
     case DIV_CMD_EFFECT_FZT:
       logV("eff fzt");
       current_tick = c.value >> 8;
-      tracker_engine_advance_tick(c.chan, ((c.value & 0xff) << 8) | c.value2);
+      chan[c.chan].fzt_note = (c.value2 >> 8) & 0xff;
+      chan[c.chan].fzt_octave = (c.value2 >> 16) & 0xff;
+      tracker_engine_advance_tick(c.chan, ((c.value & 0xff) << 8) | (c.value2 & 0xff));
       break;
     case DIV_CMD_GET_VOLMAX:
       return 255;

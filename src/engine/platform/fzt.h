@@ -63,8 +63,12 @@ typedef struct {
 
 class DivPlatformFZT: public DivDispatch {
   struct Channel: public SharedChannel<int> {
+    int fzt_note;
+    int fzt_octave;
     Channel():
-      SharedChannel<int>(255) {}
+      SharedChannel<int>(255),
+      fzt_note(0),
+      fzt_octave(0) {}
   };
   Channel chan[FZT_NUM_CHANNELS];
   TrackerEngineChannel fztChan[FZT_NUM_CHANNELS];

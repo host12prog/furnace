@@ -1693,7 +1693,7 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
           {
             if(sysOfChan[i] == DIV_SYSTEM_FZT && effect != -1)
             {
-              dispatchCmd(DivCommand(DIV_CMD_EFFECT_FZT,i,effect | ((speeds.val[0] - ticks) << 8),effectVal));
+              dispatchCmd(DivCommand(DIV_CMD_EFFECT_FZT,i,effect | ((speeds.val[0] - ticks) << 8),effectVal | (pat->data[whatRow][0] << 8) | (pat->data[whatRow][1] << 16)));
             }
           }
         }

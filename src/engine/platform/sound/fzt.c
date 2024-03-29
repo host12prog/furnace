@@ -615,7 +615,7 @@ void sound_engine_fill_buffer(
                 }
 
                 output += channel_output_final[chan];
-                sound_engine->osc_buf[chan][i] = output >> 2;
+                sound_engine->osc_buf[chan][i] = channel_output_final[chan] >> 2;
             }
         }
 
