@@ -735,14 +735,14 @@ void DivEngine::processRow(int i, bool afterDelay) {
     if (effectVal==-1) effectVal=0;
     effectVal&=255;
 
-    DivDispatch* maybeFZT = getDispatchFromChanIndex(i);
+    /*DivDispatch* maybeFZT = getDispatchFromChanIndex(i);
     if(maybeFZT != NULL) //only for FZT sound source since in it I want to run my own vol, pitch and vibrato calc!
     {
       if(sysOfChan[i] == DIV_SYSTEM_FZT && effect != -1)
       {
         dispatchCmd(DivCommand(DIV_CMD_EFFECT_FZT,i,effect | ((speeds.val[0] - ticks) << 8),effectVal));
       }
-    }
+    }*/
 
     // per-system effect
     if (!perSystemEffect(i,effect,effectVal)) switch (effect) {
@@ -1671,6 +1671,30 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
             default: // both
               dispatchCmd(DivCommand(DIV_CMD_PITCH,i,chan[i].pitch+(((chan[i].vibratoDepth*vibTable[chan[i].vibratoPos]*chan[i].vibratoFine)>>4)/15)));
               break;
+          }
+        }
+
+        //int whatOrder=afterDelay?chan[i].delayOrder:curOrder;
+        //int whatRow=afterDelay?chan[i].delayRow:curRow;
+        int whatOrder=curOrder;
+        int whatRow=curRow;
+        DivPattern* pat=curPat[i].getPattern(curOrders->ord[i][whatOrder],false);
+
+        for (int j=0; j<curPat[i].effectCols; j++) 
+        {
+          short effect=pat->data[whatRow][4+(j<<1)];
+          short effectVal=pat->data[whatRow][5+(j<<1)];
+
+          if (effectVal==-1) effectVal=0;
+          effectVal&=255;
+
+          DivDispatch* maybeFZT = getDispatchFromChanIndex(i);
+          if(maybeFZT != NULL) //only for FZT sound source since in it I want to run my own vol, pitch and vibrato calc!
+          {
+            if(sysOfChan[i] == DIV_SYSTEM_FZT && effect != -1)
+            {
+              dispatchCmd(DivCommand(DIV_CMD_EFFECT_FZT,i,effect | ((speeds.val[0] - ticks) << 8),effectVal));
+            }
           }
         }
         

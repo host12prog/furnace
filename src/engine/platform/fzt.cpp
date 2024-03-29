@@ -140,7 +140,50 @@ void DivPlatformFZT::tracker_engine_trigger_instrument_internal(int chan, DivIns
 
 void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_program) 
 {
+  TrackerEngineChannel* te_channel = &fztChan[channel];
+  SoundEngineChannel* se_channel = &sound_engine->channel[channel];
 
+  switch(opcode & 0xff00) 
+  {
+    case 0x0000: {
+        if(tick == 0) {
+            if(te_channel->fixed_note != 0xffff) {
+                te_channel->note = te_channel->last_note;
+                te_channel->fixed_note = 0xffff;
+            }
+
+            if((opcode & 0xff) == 0xf0)
+                te_channel->arpeggio_note = te_channel->extarp1;
+            else if((opcode & 0xff) == 0xf1)
+                te_channel->arpeggio_note = te_channel->extarp2;
+            else
+                te_channel->arpeggio_note = (opcode & 0xff);
+        }
+        break;
+    }
+
+    case 0x0100: {
+        uint32_t prev = te_channel->note;
+
+        te_channel->note += ((opcode & 0xff) << 2);
+        if(prev > te_channel->note) te_channel->note = 0xffff;
+
+        te_channel->target_note = te_channel->note;
+        break;
+    }
+
+    case 0x0200: {
+        int32_t prev = te_channel->note;
+
+        te_channel->note -= ((opcode & 0xff) << 2);
+        if(prev < te_channel->note) te_channel->note = 0;
+
+        te_channel->target_note = te_channel->note;
+        break;
+    }
+
+    default: break;
+  }
 }
 
 void DivPlatformFZT::tracker_engine_execute_volume(int vol, int chan)
@@ -310,9 +353,7 @@ void DivPlatformFZT::tracker_engine_advance_channel(int chan)
 
         else {
             te_channel->vibrato_position += ((uint32_t)te_channel->vibrato_speed << 21);
-            vib = (int32_t)(sound_engine_triangle(te_channel->vibrato_position >> 9) -
-                            WAVE_AMP / 2) *
-                  (int32_t)te_channel->vibrato_depth / (256 * 128);
+            vib = (int32_t)(sound_engine_triangle(te_channel->vibrato_position >> 9) - WAVE_AMP / 2) * (int32_t)te_channel->vibrato_depth / (256 * 128);
         }
     }
 
@@ -322,12 +363,8 @@ void DivPlatformFZT::tracker_engine_advance_channel(int chan)
         }
 
         else {
-            te_channel->pwm_position +=
-                ((uint32_t)te_channel->pwm_speed
-                  << 20); // so minimum PWM speed is even lower than minimum vibrato speed
-            pwm = ((int32_t)sound_engine_triangle((te_channel->pwm_position) >> 9) -
-                    WAVE_AMP / 2) *
-                  (int32_t)te_channel->pwm_depth / (256 * 16);
+            te_channel->pwm_position += ((uint32_t)te_channel->pwm_speed << 20); // so minimum PWM speed is even lower than minimum vibrato speed
+            pwm = ((int32_t)sound_engine_triangle((te_channel->pwm_position) >> 9) - WAVE_AMP / 2) * (int32_t)te_channel->pwm_depth / (256 * 16);
         }
 
         int16_t final_pwm = (int16_t)fztChan[chan].pw + pwm;
@@ -368,7 +405,7 @@ void DivPlatformFZT::tracker_engine_advance_channel(int chan)
 
 void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode)
 {
-  SoundEngineChannel* se_channel = &sound_engine->channel[chann];
+  //SoundEngineChannel* se_channel = &sound_engine->channel[chann];
   TrackerEngineChannel* te_channel = &fztChan[chann];
   DivInstrument* pinst = parent->getIns(chan[chann].ins,DIV_INS_FZT);
 
