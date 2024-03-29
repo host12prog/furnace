@@ -155,7 +155,7 @@ void DivPlatformFZT::tracker_engine_execute_track_command(int chan, bool first_t
 {
   if(opcode != 0)
   {
-    if((opcode & 0x7f00) == 0x00) 
+    if((opcode & 0xff00) == 0x00) 
     {
       fztChan[chan].extarp1 = ((opcode & 0xf0) >> 4);
       fztChan[chan].extarp2 = (opcode & 0xf);
@@ -223,10 +223,10 @@ do_it_again:;
 
               uint8_t l = 0;
 
-              while(((ins->fzt.program[tick].cmd << 8) | (ins->fzt.program[tick].val) | (ins->fzt.program[tick].unite << 15) & 0x7f00) != 0x7d00 && tick > 0) 
+              while((((ins->fzt.program[tick].cmd << 8) | (ins->fzt.program[tick].val) | (ins->fzt.program[tick].unite << 15)) & 0x7f00) != 0x7d00 && tick > 0) 
               {
                 --tick;
-                if(!((ins->fzt.program[tick].cmd << 8) | (ins->fzt.program[tick].val) | (ins->fzt.program[tick].unite << 15) & 0x8000)) ++l;
+                if(!(((ins->fzt.program[tick].cmd << 8) | (ins->fzt.program[tick].val) | (ins->fzt.program[tick].unite << 15)) & 0x8000)) ++l;
               }
 
               --tick;
@@ -374,7 +374,7 @@ void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode)
 
   uint8_t note_delay = 0;
 
-  if((opcode & 0x7ff0) == 0xED00) {
+  if((opcode & 0xfff0) == 0xED00) {
     note_delay = (opcode & 0xf);
   }
 
@@ -385,9 +385,9 @@ void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode)
 
     if(note != 100 && note != 101 && note != -1)
     {
-      uint8_t prev_adsr_volume = se_channel->adsr.volume;
+      //uint8_t prev_adsr_volume = se_channel->adsr.volume;
 
-      if((opcode & 0x7f00) == 0x0300)
+      if((opcode & 0xff00) == 0x0300)
       {
         if(pinst->fzt.flags & TE_RETRIGGER_ON_SLIDE) 
         {
@@ -400,7 +400,7 @@ void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode)
         te_channel->slide_speed = (opcode & 0xff);
       }
 
-      else if((opcode & 0x7f00) == 0xea00) 
+      else if((opcode & 0xff00) == 0xea00) 
       {
         te_channel->note = te_channel->target_note = te_channel->last_note = ((note + pinst->fzt.base_note - MIDDLE_C) << 8) + pinst->fzt.finetune;
       }
