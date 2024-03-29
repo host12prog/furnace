@@ -1110,6 +1110,12 @@ struct DivInstrumentFZT {
         program[i].val = 0;
         program[i].unite = false;
       }
+
+      program[0].val = 0;
+      program[1].val = 0xf0;
+      program[2].val = 0xf1;
+      program[3].cmd = 0x7f;
+      program[3].val = 0;
     }
 };
 

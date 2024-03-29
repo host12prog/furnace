@@ -223,7 +223,7 @@ void DivPlatformFZT::tracker_engine_execute_program_tick(int chann, int advance)
 do_it_again:;
     
     DivInstrument* ins=parent->getIns(chan[chann].ins,DIV_INS_FZT);
-    const uint16_t inst = (ins->fzt.program[tick].cmd << 8) | (ins->fzt.program[tick].val) | (ins->fzt.program[tick].unite << 15);
+    const uint16_t inst = (ins->fzt.program[tick].cmd << 8) | (ins->fzt.program[tick].val) | ((ins->fzt.program[tick].unite ? 1 : 0) << 15);
 
     if((inst & 0x7fff) == 0x7fff) 
     {
