@@ -596,15 +596,6 @@ int DivPlatformFZT::dispatch(DivCommand c) {
       chan[c.chan].fzt_note = c.value;
       chan[c.chan].fzt_octave = c.value2 & 0xff;
       current_tick = 0;
-      /*if(c.value2 & (1 << 24))
-      {
-        tracker_engine_advance_tick(c.chan, -1, true);
-      }
-      else
-      {
-        int opcode = c.value2 >> 8;
-        tracker_engine_advance_tick(c.chan, opcode, true);
-      }*/
       break;
     case DIV_CMD_VOLUME_FZT:
       logV("vol fzt");
