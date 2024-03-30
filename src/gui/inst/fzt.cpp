@@ -33,8 +33,8 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
   {
     if (ImGui::BeginTable("FZTnote",2,ImGuiTableFlags_NoHostExtendX))
     {
-      ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed, 120.0f);
-      ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed, 120.0f);
+      ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed, 170.0f*dpiScale);
+      ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed, 140.0f*dpiScale);
 
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
@@ -55,7 +55,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
         ImGui::EndCombo();
       }
       ImGui::TableNextColumn();
-      ImGui::InputScalar("finetune",ImGuiDataType_S8,&ins->fzt.finetune,NULL,NULL,"%d");
+      ImGui::InputScalar(_L("Finetune##sgiFZT"),ImGuiDataType_S8,&ins->fzt.finetune,NULL,NULL,"%d");
       ImGui::EndTable();
     }
 

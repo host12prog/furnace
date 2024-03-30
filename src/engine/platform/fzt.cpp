@@ -76,7 +76,10 @@ void DivPlatformFZT::tracker_engine_trigger_instrument_internal(int chan, DivIns
   note += (uint16_t)(((int16_t)pinst->fzt.base_note - MIDDLE_C) << 8);
   tracker_engine_set_note(chan, note + (int16_t)pinst->fzt.finetune, true);
 
-  te_channel->last_note = te_channel->target_note = note + (int16_t)pinst->fzt.finetune;
+  if (note + (int)pinst->fzt.finetune > 0 && note + (int)pinst->fzt.finetune <= MAX_NOTE << 8)
+  {
+      te_channel->last_note = te_channel->target_note = note + (int16_t)pinst->fzt.finetune;
+  }
 
   te_channel->extarp1 = te_channel->extarp2 = 0;
 
@@ -163,10 +166,8 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
     }
 
     case 0x0100: {
-        uint32_t prev = te_channel->note;
-
         te_channel->note += ((opcode & 0xff) << 2);
-        if(prev > te_channel->note) te_channel->note = 0xffff;
+        if(te_channel->note > (MAX_NOTE << 8)) te_channel->note = (MAX_NOTE << 8);
 
         te_channel->target_note = te_channel->note;
         break;
@@ -257,7 +258,7 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
     }
 
     case 0x0a00: {
-        if(!(te_channel->channel_flags & TEC_DISABLED)) {
+        if(!(te_channel->channel_flags & TEC_DISABLED) && !(isMuted[channel])) {
             te_channel->volume -= (opcode & 0xf);
             if(te_channel->volume > MAX_ADSR_VOLUME) te_channel->volume = 0;
             te_channel->volume += ((opcode >> 4) & 0xf);
@@ -320,10 +321,8 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
 
     case 0xf200: {
         if(tick == 0) {
-            uint32_t prev = te_channel->note;
-
             te_channel->note += (opcode & 0xf);
-            if(prev > te_channel->note) te_channel->note = 0xffff;
+            if(te_channel->note > (MAX_NOTE << 8)) te_channel->note = (MAX_NOTE << 8);
 
             te_channel->target_note = te_channel->note;
         }
@@ -802,7 +801,7 @@ void DivPlatformFZT::tracker_engine_advance_channel(int chan)
     tracker_engine_set_note(chan, (uint16_t)chn_note, false);
   }
 
-  if(fztChan[chan].channel_flags & TEC_DISABLED) // so we can't set some non-zero volme from inst program too
+  if((fztChan[chan].channel_flags & TEC_DISABLED) || isMuted[chan]) // so we can't set some non-zero volme from inst program too
   {
     sound_engine->channel[chan].adsr.volume = 0;
   }
@@ -1016,6 +1015,14 @@ int DivPlatformFZT::dispatch(DivCommand c) {
 
 void DivPlatformFZT::muteChannel(int ch, bool mute) {
   isMuted[ch]=mute;
+  if(mute)
+  {
+    fztChan[ch].channel_flags |= TEC_DISABLED;
+  }
+  else
+  {
+    fztChan[ch].channel_flags &= ~TEC_DISABLED;
+  }
 }
 
 void DivPlatformFZT::forceIns() {
