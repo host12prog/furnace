@@ -199,6 +199,394 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
         break;
     }
 
+    case 0x1100: {
+        if(tick == 0) {
+            if(opcode & 0xff) {
+                te_channel->flags |= TE_ENABLE_PWM;
+
+                te_channel->pwm_speed = (opcode & 0xf0);
+                te_channel->pwm_depth = ((opcode & 0x0f) << 4);
+            }
+
+            else {
+                te_channel->flags &= ~(TE_ENABLE_PWM);
+            }
+        }
+
+        break;
+    }
+
+    case 0x1200: {
+        if(tick == 0) {
+            te_channel->pw = ((opcode & 0xff) << 4);
+        }
+
+        break;
+    }
+
+    case 0x1300: {
+        int16_t temp_pw = te_channel->pw + (int16_t)(opcode & 0xff);
+
+        if(temp_pw < 0) temp_pw = 0;
+        if(temp_pw > 0xfff) temp_pw = 0xfff;
+
+        te_channel->pw = temp_pw;
+
+        break;
+    }
+
+    case 0x1400: {
+        int16_t temp_pw = te_channel->pw - (int16_t)(opcode & 0xff);
+
+        if(temp_pw < 0) temp_pw = 0;
+        if(temp_pw > 0xfff) temp_pw = 0xfff;
+
+        te_channel->pw = temp_pw;
+
+        break;
+    }
+
+    case 0x1500: {
+        if(tick == 0) {
+            te_channel->filter_cutoff = ((opcode & 0xff) << 3);
+            sound_engine_filter_set_coeff(
+                &se_channel->filter, te_channel->filter_cutoff, te_channel->filter_resonance);
+        }
+
+        break;
+    }
+
+    case 0x0a00: {
+        if(!(te_channel->channel_flags & TEC_DISABLED)) {
+            te_channel->volume -= (opcode & 0xf);
+            if(te_channel->volume > MAX_ADSR_VOLUME) te_channel->volume = 0;
+            te_channel->volume += ((opcode >> 4) & 0xf);
+            if(te_channel->volume > MAX_ADSR_VOLUME) te_channel->volume = MAX_ADSR_VOLUME;
+
+            se_channel->adsr.volume = (int32_t)te_channel->volume;
+            se_channel->adsr.volume = (int32_t)se_channel->adsr.volume;
+        }
+
+        break;
+    }
+
+    case 0x1000: {
+        if(tick == 0) {
+            se_channel->waveform = (opcode & 0x3f);
+        }
+
+        break;
+    }
+
+    case 0x1600: {
+        if(tick == 0) {
+            if(!(te_channel->channel_flags & TEC_DISABLED)) {
+                te_channel->volume = opcode & 0xff;
+
+                se_channel->adsr.volume = (int32_t)te_channel->volume;
+                se_channel->adsr.volume = (int32_t)se_channel->adsr.volume;
+            }
+        }
+
+        break;
+    }
+
+    case 0x1700: {
+        if(tick == 0) {
+            if(opcode & 0xf) {
+                se_channel->flags |= SE_ENABLE_FILTER;
+            }
+
+            else {
+                se_channel->flags &= ~SE_ENABLE_FILTER;
+            }
+        }
+
+        break;
+    }
+
+    case 0xf100: {
+        if(tick == 0) {
+            int32_t prev = te_channel->note;
+
+            te_channel->note -= (opcode & 0xf);
+            if(prev < te_channel->note) te_channel->note = 0;
+
+            te_channel->target_note = te_channel->note;
+        }
+
+        break;
+    }
+
+    case 0xf200: {
+        if(tick == 0) {
+            uint32_t prev = te_channel->note;
+
+            te_channel->note += (opcode & 0xf);
+            if(prev > te_channel->note) te_channel->note = 0xffff;
+
+            te_channel->target_note = te_channel->note;
+        }
+
+        break;
+    }
+
+    case 0x1800: {
+        if(tick == 0) {
+            se_channel->filter_mode = (opcode & 0xf);
+        }
+
+        break;
+    }
+
+    case 0x0c00: {
+        if((opcode & 0xf) > 0 && (tick % (opcode & 0xf)) == 0) {
+            uint8_t prev_vol_tr = te_channel->volume;
+            uint8_t prev_vol_cyd = se_channel->adsr.volume;
+            DivInstrument* ins=parent->getIns(chan[channel].ins,DIV_INS_FZT);
+            tracker_engine_trigger_instrument_internal(
+                channel, ins, te_channel->last_note);
+            te_channel->volume = prev_vol_tr;
+            se_channel->adsr.volume = prev_vol_cyd;
+        }
+
+        break;
+    }
+
+    case 0xf800: {
+        if(tick == 0) {
+            te_channel->volume -= (opcode & 0xf);
+
+            if(te_channel->volume > MAX_ADSR_VOLUME) te_channel->volume = 0;
+
+            se_channel->adsr.volume = (int32_t)te_channel->volume;
+            se_channel->adsr.volume = (int32_t)se_channel->adsr.volume;
+        }
+
+        break;
+    }
+
+    case 0xf900: {
+        if(tick == 0) {
+            te_channel->volume += (opcode & 0xf);
+
+            if(te_channel->volume > MAX_ADSR_VOLUME) te_channel->volume = MAX_ADSR_VOLUME;
+
+            se_channel->adsr.volume = (int32_t)te_channel->volume;
+            se_channel->adsr.volume = (int32_t)se_channel->adsr.volume;
+        }
+
+        break;
+    }
+
+    case 0xEC00: {
+        if((opcode & 0xf) <= tick) {
+            se_channel->adsr.volume = 0;
+            te_channel->volume = 0;
+        }
+
+        break;
+    }
+
+    case 0x1900: {
+        if(tick == (opcode & 0xf)) {
+            se_channel->accumulator = 0;
+            se_channel->lfsr = RANDOM_SEED;
+        }
+
+        break;
+    }
+
+    case 0x0900: {
+        if(tick == 0) {
+            if(from_program) {
+                te_channel->program_period = opcode & 0xff;
+            }
+
+            //else {
+                //tracker_engine->song->speed = opcode & 0xff;
+            //}
+        }
+
+        break;
+    }
+
+    case 0x1A00: {
+        te_channel->filter_cutoff += (opcode & 0xff);
+
+        if(te_channel->filter_cutoff > 0x7ff) {
+            te_channel->filter_cutoff = 0x7ff;
+        }
+
+        sound_engine_filter_set_coeff(
+            &se_channel->filter, te_channel->filter_cutoff, te_channel->filter_resonance);
+
+        break;
+    }
+
+    case 0x1B00: {
+        te_channel->filter_cutoff -= (opcode & 0xff);
+
+        if(te_channel->filter_cutoff > 0x7ff) // unsigned int overflow
+        {
+            te_channel->filter_cutoff = 0;
+        }
+
+        sound_engine_filter_set_coeff(
+            &se_channel->filter, te_channel->filter_cutoff, te_channel->filter_resonance);
+
+        break;
+    }
+
+    case 0x1C00: {
+        if(tick == 0) {
+            te_channel->filter_resonance = (opcode & 0xff);
+            sound_engine_filter_set_coeff(
+                &se_channel->filter, te_channel->filter_cutoff, te_channel->filter_resonance);
+        }
+
+        break;
+    }
+
+    case 0x1D00: {
+        te_channel->filter_resonance += (opcode & 0xff);
+
+        if(te_channel->filter_resonance > 0xff) {
+            te_channel->filter_resonance = 0xff;
+        }
+
+        sound_engine_filter_set_coeff(
+            &se_channel->filter, te_channel->filter_cutoff, te_channel->filter_resonance);
+        break;
+    }
+
+    case 0x1E00: {
+        te_channel->filter_resonance -= (opcode & 0xff);
+
+        if(te_channel->filter_resonance > 0xff) {
+            te_channel->filter_resonance = 0;
+        }
+
+        sound_engine_filter_set_coeff(
+            &se_channel->filter, te_channel->filter_cutoff, te_channel->filter_resonance);
+        break;
+    }
+
+    case 0x1f00: {
+        if(tick == 0) {
+            se_channel->ring_mod = (opcode & 0xff);
+        }
+
+        break;
+    }
+
+    case 0x2000: {
+        if(tick == 0) {
+            se_channel->hard_sync = (opcode & 0xff);
+        }
+
+        break;
+    }
+
+    case 0x2100: {
+        if(tick == 0) {
+            se_channel->adsr.a = (opcode & 0xff);
+
+            if(se_channel->adsr.envelope_state == ATTACK) {
+                se_channel->adsr.envelope_speed =
+                    envspd(sound_engine, se_channel->adsr.a);
+            }
+        }
+
+        break;
+    }
+
+    case 0x2200: {
+        if(tick == 0) {
+            se_channel->adsr.d = (opcode & 0xff);
+
+            if(se_channel->adsr.envelope_state == DECAY) {
+                se_channel->adsr.envelope_speed =
+                    envspd(sound_engine, se_channel->adsr.d);
+            }
+        }
+
+        break;
+    }
+
+    case 0x2300: {
+        if(tick == 0) {
+            se_channel->adsr.s = (opcode & 0xff);
+        }
+
+        break;
+    }
+
+    case 0x2400: {
+        if(tick == 0) {
+            se_channel->adsr.r = (opcode & 0xff);
+
+            if(se_channel->adsr.envelope_state == RELEASE) {
+                se_channel->adsr.envelope_speed =
+                    envspd(sound_engine, se_channel->adsr.r);
+            }
+        }
+
+        break;
+    }
+
+    case 0x2500: {
+        if(tick == 0) {
+            te_channel->program_counter = 0;
+            te_channel->program_loop = 0;
+            te_channel->program_period = 0;
+            te_channel->program_tick = 0;
+        }
+
+        break;
+    }
+
+    /*case 0xC000: {
+        if(tick == 0 && (opcode & 0xff) > 0) {
+            tracker_engine_set_rate(opcode & 0xff);
+        }
+
+        break;
+    }*/
+
+    case 0x2600: {
+        uint32_t prev = te_channel->note;
+
+        te_channel->note += ((opcode & 0xff) << 8);
+        if(prev > te_channel->note) te_channel->note = 0xffff;
+
+        te_channel->target_note = te_channel->note;
+        break;
+    }
+
+    case 0x2700: {
+        int32_t prev = te_channel->note;
+
+        te_channel->note -= ((opcode & 0xff) << 8);
+        if(prev < te_channel->note) te_channel->note = 0;
+
+        te_channel->target_note = te_channel->note;
+        break;
+    }
+
+    case 0x2800: {
+        te_channel->arpeggio_note = 0;
+        te_channel->fixed_note = ((opcode & 0xff) << 8);
+
+        break;
+    }
+
+    case 0x2900: {
+        sound_engine_enable_gate(sound_engine, se_channel, 0);
+
+        break;
+    }
+
     default: break;
   }
 }
