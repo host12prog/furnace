@@ -3769,7 +3769,7 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     //   sgiGB     src/gui/inst/gb.cpp
 
     strings["Game Boy##sgiGB"].plurals[0] = "Game Boy";
-    strings["Use software envelope##sgiGB"].plurals[0] = "Używaj obwiedni sprzetowej";
+    strings["Use software envelope##sgiGB"].plurals[0] = "Używaj obwiedni programowej";
     strings["Initialize envelope on every note##sgiGB"].plurals[0] = "Inicjalizuj obwiednię przy każdej nucie";
     strings["Volume##sgiGB0"].plurals[0] = "Głośność";
     strings["Length##sgiGB"].plurals[0] = "Długość";
