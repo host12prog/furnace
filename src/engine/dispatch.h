@@ -284,6 +284,7 @@ enum DivDispatchCmds {
 
   DIV_CMD_VOLUME_FZT, //vol
   DIV_CMD_EFFECT_FZT, //eff + eff val
+  DIV_CMD_NOTE_FZT, //note
 
   DIV_CMD_MAX
 };

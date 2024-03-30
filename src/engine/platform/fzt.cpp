@@ -420,7 +420,7 @@ void DivPlatformFZT::tracker_engine_advance_channel(int chan)
   }
 }
 
-void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode)
+void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode, bool do_retrig)
 {
   //SoundEngineChannel* se_channel = &sound_engine->channel[chann];
   TrackerEngineChannel* te_channel = &fztChan[chann];
@@ -436,7 +436,7 @@ void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode)
   {
     int note = chan[chann].note;
     //uint8_t inst = tracker_engine_get_instrument(&pattern->step[pattern_step]);
-
+    int notee = (chan[chann].fzt_note + chan[chann].fzt_octave * 12);
     if(chan[chann].fzt_note != -1 && chan[chann].fzt_note < 20)
     {
       //uint8_t prev_adsr_volume = se_channel->adsr.volume;
@@ -451,7 +451,7 @@ void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode)
           te_channel->note = temp_note;
         }
 
-        int notee = (chan[chann].fzt_note+chan[chann].fzt_octave*12);
+        notee = (chan[chann].fzt_note+chan[chann].fzt_octave*12);
         if(notee >= 0 && notee <= MAX_NOTE)
         {
           //notee <<= 8;
@@ -462,17 +462,20 @@ void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode)
 
       else if((opcode & 0xff00) == 0xea00) 
       {
-        te_channel->note = te_channel->target_note = te_channel->last_note = ((note + pinst->fzt.base_note - MIDDLE_C) << 8) + pinst->fzt.finetune;
+        te_channel->note = te_channel->target_note = te_channel->last_note = ((notee + pinst->fzt.base_note - MIDDLE_C) << 8) + pinst->fzt.finetune;
       }
 
-      /*else {
-          tracker_engine_trigger_instrument_internal(chann, pinst, note << 8);
+      else {
+        if(do_retrig)
+        {
+          tracker_engine_trigger_instrument_internal(chann, pinst, notee << 8);
           te_channel->note =
-              ((note + pinst->fzt.base_note - MIDDLE_C) << 8) + pinst->fzt.finetune;
+              ((notee + pinst->fzt.base_note - MIDDLE_C) << 8) + pinst->fzt.finetune;
 
           te_channel->target_note =
-              ((note + pinst->fzt.base_note - MIDDLE_C) << 8) + pinst->fzt.finetune;
-      }*/
+              ((notee + pinst->fzt.base_note - MIDDLE_C) << 8) + pinst->fzt.finetune;
+        }
+      }
     }
   }
 
@@ -588,15 +591,31 @@ int DivPlatformFZT::dispatch(DivCommand c) {
       if (!chan[c.chan].inPorta && c.value && !parent->song.brokenPortaArp && chan[c.chan].std.get_div_macro_struct(DIV_MACRO_ARP)->will && !NEW_ARP_STRAT) chan[c.chan].baseFreq=NOTE_FREQUENCY(chan[c.chan].note);
       chan[c.chan].inPorta=c.value;
       break;
+    case DIV_CMD_NOTE_FZT:
+      logV("note fzt");
+      chan[c.chan].fzt_note = c.value;
+      chan[c.chan].fzt_octave = c.value2 & 0xff;
+      current_tick = 0;
+      /*if(c.value2 & (1 << 24))
+      {
+        tracker_engine_advance_tick(c.chan, -1, true);
+      }
+      else
+      {
+        int opcode = c.value2 >> 8;
+        tracker_engine_advance_tick(c.chan, opcode, true);
+      }*/
+      break;
     case DIV_CMD_VOLUME_FZT:
       logV("vol fzt");
+      tracker_engine_execute_volume(c.value, c.chan);
       break;
     case DIV_CMD_EFFECT_FZT:
       logV("eff fzt");
       current_tick = c.value >> 8;
       chan[c.chan].fzt_note = (c.value2 >> 8) & 0xff;
       chan[c.chan].fzt_octave = (c.value2 >> 16) & 0xff;
-      tracker_engine_advance_tick(c.chan, ((c.value & 0xff) << 8) | (c.value2 & 0xff));
+      tracker_engine_advance_tick(c.chan, ((c.value & 0xff) << 8) | (c.value2 & 0xff), false);
       break;
     case DIV_CMD_GET_VOLMAX:
       return 255;
