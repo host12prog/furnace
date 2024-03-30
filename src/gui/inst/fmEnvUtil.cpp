@@ -882,6 +882,80 @@ void FurnaceGUI::drawFMEnv(unsigned char tl, unsigned char ar, unsigned char dr,
   }
 }
 
+void FurnaceGUI::drawFZTEnv(unsigned char tl, unsigned char ar, unsigned char dr, unsigned char d2r, unsigned char rr, unsigned char sl, unsigned char sus, unsigned char egt, unsigned char algOrGlobalSus, float maxTl, float maxArDr, float maxRr, const ImVec2& size, unsigned short instType) {
+  ImDrawList* dl=ImGui::GetWindowDrawList();
+  ImGuiWindow* window=ImGui::GetCurrentWindow();
+
+  ImVec2 minArea=window->DC.CursorPos;
+  ImVec2 maxArea=ImVec2(
+    minArea.x+size.x,
+    minArea.y+size.y
+  );
+  ImRect rect=ImRect(minArea,maxArea);
+  ImGuiStyle& style=ImGui::GetStyle();
+  ImU32 color=ImGui::GetColorU32(uiColors[GUI_COLOR_FM_ENVELOPE]);
+  ImU32 colorR=ImGui::GetColorU32(uiColors[GUI_COLOR_FM_ENVELOPE_RELEASE]); // Relsease triangle
+  ImU32 colorS=ImGui::GetColorU32(uiColors[GUI_COLOR_FM_ENVELOPE_SUS_GUIDE]); // Sustain horiz/vert line color
+  ImGui::ItemSize(size,style.FramePadding.y);
+  if (ImGui::ItemAdd(rect,ImGui::GetID("fmEnv"))) {
+    ImGui::RenderFrame(rect.Min,rect.Max,ImGui::GetColorU32(ImGuiCol_FrameBg),true,style.FrameRounding);
+
+    //Adjust for OPLL global sustain setting
+    if (instType==DIV_INS_OPLL && algOrGlobalSus==1.0){
+      rr = 5.0;
+    }
+    //calculate x positions
+    float arPos=float(maxArDr-(float)ar)/maxArDr; //peak of AR, start of DR
+    float drPos=arPos+(((float)sl/255.0)*(float(maxArDr-(float)dr)/maxArDr)); //end of DR, start of D2R
+    float d2rPos=drPos+(((255.0-(float)sl)/255.0)*(float(255.0-(float)d2r)/255.0)); //End of D2R
+    float rrPos=(float(maxRr-(float)rr)/float(maxRr)); //end of RR
+
+    //shrink all the x positions horizontally
+    arPos/=2.0;
+    drPos/=2.0;
+    d2rPos/=2.0;
+    rrPos/=1.0;
+
+    ImVec2 pos1=ImLerp(rect.Min,rect.Max,ImVec2(0.0,1.0)); //the bottom corner
+    ImVec2 pos2=ImLerp(rect.Min,rect.Max,ImVec2(arPos,((float)tl/maxTl))); //peak of AR, start of DR
+    ImVec2 pos3=ImLerp(rect.Min,rect.Max,ImVec2(drPos,(float)(((float)tl/maxTl)+((float)sl/255.0)-(((float)tl/maxTl)*((float)sl/255.0))))); //end of DR, start of D2R
+    ImVec2 pos4=ImLerp(rect.Min,rect.Max,ImVec2(d2rPos,1.0)); //end of D2R
+    ImVec2 posRStart=ImLerp(rect.Min,rect.Max,ImVec2(0.0,((float)tl/maxTl))); //release start
+    ImVec2 posREnd=ImLerp(rect.Min,rect.Max,ImVec2(rrPos,1.0));//release end
+    ImVec2 posSLineHEnd=ImLerp(rect.Min,rect.Max,ImVec2(1.0,(float)(((float)tl/maxTl)+((float)sl/255.0)-(((float)tl/maxTl)*((float)sl/255.0))))); //sustain horizontal line end
+    ImVec2 posSLineVEnd=ImLerp(rect.Min,rect.Max,ImVec2(drPos,1.0)); //sustain vertical line end
+    ImVec2 posDecayRate0Pt=ImLerp(rect.Min,rect.Max,ImVec2(1.0,((float)tl/maxTl))); //Height of the peak of AR, forever
+    ImVec2 posDecay2Rate0Pt=ImLerp(rect.Min,rect.Max,ImVec2(1.0,(float)(((float)tl/maxTl)+((float)sl/255.0)-(((float)tl/maxTl)*((float)sl/255.0))))); //Height of the peak of SR, forever
+
+    //dl->Flags=ImDrawListFlags_AntiAliasedLines|ImDrawListFlags_AntiAliasedLinesUseTex;
+    if ((float)ar==0.0) { //if AR = 0, the envelope never starts
+      dl->AddTriangleFilled(posRStart,posREnd,pos1,colorS); //draw release as shaded triangle behind everything
+      addAALine(dl,pos1,pos4,color); //draw line on ground
+    } else if ((float)dr==0.0 && (float)sl!=0.0) { //if DR = 0 and SL is not 0, then the envelope stays at max volume forever
+      dl->AddTriangleFilled(posRStart,posREnd,pos1,colorS); //draw release as shaded triangle behind everything
+      //addAALine(dl,pos3,posSLineHEnd,colorS); //draw horiz line through sustain level
+      //addAALine(dl,pos3,posSLineVEnd,colorS); //draw vert. line through sustain level
+      addAALine(dl,pos1,pos2,color); //A
+      addAALine(dl,pos2,posDecayRate0Pt,color); //Line from A to end of graph
+    } else if ((float)d2r==0.0 || ((instType==DIV_INS_OPL || instType==DIV_INS_SNES || instType == DIV_INS_ESFM) && sus==1.0) || (instType==DIV_INS_OPLL && egt!=0.0)) { //envelope stays at the sustain level forever
+      dl->AddTriangleFilled(posRStart,posREnd,pos1,colorS); //draw release as shaded triangle behind everything
+      addAALine(dl,pos3,posSLineHEnd,colorR); //draw horiz line through sustain level
+      addAALine(dl,pos3,posSLineVEnd,colorR); //draw vert. line through sustain level
+      addAALine(dl,pos1,pos2,color); //A
+      addAALine(dl,pos2,pos3,color); //D
+      addAALine(dl,pos3,posDecay2Rate0Pt,color); //Line from D to end of graph
+    } else { //draw graph normally
+      dl->AddTriangleFilled(posRStart,posREnd,pos1,colorS); //draw release as shaded triangle behind everything
+      addAALine(dl,pos3,posSLineHEnd,colorR); //draw horiz line through sustain level
+      addAALine(dl,pos3,posSLineVEnd,colorR); //draw vert. line through sustain level
+      addAALine(dl,pos1,pos2,color); //A
+      addAALine(dl,pos2,pos3,color); //D
+      addAALine(dl,pos3,pos4,color); //D2
+    }
+    //dl->Flags^=ImDrawListFlags_AntiAliasedLines|ImDrawListFlags_AntiAliasedLinesUseTex;
+  }
+}
+
 void FurnaceGUI::drawGBEnv(unsigned char vol, unsigned char len, unsigned char sLen, bool dir, const ImVec2& size) {
   ImDrawList* dl=ImGui::GetWindowDrawList();
   ImGuiWindow* window=ImGui::GetCurrentWindow();

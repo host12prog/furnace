@@ -946,6 +946,7 @@ src/gui/inst/gbadma.cpp
 src/gui/inst/gbaminmod.cpp
 src/gui/inst/sid2.cpp
 src/gui/inst/nds.cpp
+src/gui/inst/fzt.cpp
 
 src/gui/inst/wavetable.cpp
 
