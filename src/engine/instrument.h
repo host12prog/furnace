@@ -1171,13 +1171,13 @@ struct DivInstrumentFZT {
         program[i].unite = false;
       }
 
-      program[0].cmd = 0x00;
+      program[0].cmd = TE_EFFECT_ARPEGGIO;
       program[0].val = 0;
-      program[1].cmd = 0x00;
+      program[1].cmd = TE_EFFECT_ARPEGGIO;
       program[1].val = 0xf0;
-      program[2].cmd = 0x00;
+      program[2].cmd = TE_EFFECT_ARPEGGIO;
       program[2].val = 0xf1;
-      program[3].cmd = 0x7f;
+      program[3].cmd = TE_PROGRAM_JUMP;
       program[3].val = 0;
     }
 };

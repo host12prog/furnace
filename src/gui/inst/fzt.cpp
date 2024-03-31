@@ -642,9 +642,55 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 
           ImGui::TableNextColumn();
 
-          if(ins->fzt.program[i].unite)
+          ImRect rect = ImGui::TableGetCellBgRect(ImGui::GetCurrentTable(), 3);
+          ImVec2 size = ImVec2(ImGui::GetContentRegionAvail().x,30.0f * dpiScale);
+          ImGuiStyle& style=ImGui::GetStyle();
+
+          ImDrawList* dl=ImGui::GetWindowDrawList();
+          ImGuiWindow* window=ImGui::GetCurrentWindow();
+          ImVec2 minArea=window->DC.CursorPos;
+          ImVec2 maxArea=ImVec2(
+            minArea.x+size.x,
+            minArea.y+size.y
+          );
+          //ImRect rect=ImRect(minArea,maxArea);
+          ImGui::ItemSize(size,style.FramePadding.y);
+          ImU32 color=ImGui::GetColorU32(uiColors[GUI_COLOR_FM_ENVELOPE]);
+          if (ImGui::ItemAdd(rect,ImGui::GetID("unitee")))
           {
-            ImGui::Text("unite");
+            ImGui::RenderFrame(rect.Min,rect.Max,ImGui::GetColorU32(ImGuiCol_WindowBg),true,style.FrameRounding);
+
+            ImVec2 pos1=ImLerp(rect.Min,rect.Max,ImVec2(0.0,0.3)); //top corner
+            ImVec2 pos2=ImLerp(rect.Min,rect.Max,ImVec2(0.7,0.6)); //angle of opening bracket
+            ImVec2 pos3=ImLerp(rect.Min,rect.Max,ImVec2(0.7,1.0)); //the bottom end
+            ImVec2 pos4=ImLerp(rect.Min,rect.Max,ImVec2(0.7,0.0)); //the top end
+            ImVec2 pos5=ImLerp(rect.Min,rect.Max,ImVec2(0.7,0.3)); //angle of closing bracket
+            ImVec2 pos6=ImLerp(rect.Min,rect.Max,ImVec2(0.0,0.6)); //bottom corner
+
+            if(i == 0 && ins->fzt.program[i].unite)
+            {
+              addAALine(dl,pos1,pos2,color,2.0f * dpiScale); //opening bracket
+              addAALine(dl,pos2,pos3,color,2.0f * dpiScale);
+            }
+            if(i > 0)
+            {
+              if(ins->fzt.program[i].unite && !ins->fzt.program[i-1].unite)
+              {
+                addAALine(dl,pos1,pos2,color,2.0f * dpiScale); //opening bracket
+                addAALine(dl,pos2,pos3,color,2.0f * dpiScale);
+              }
+
+              if(!ins->fzt.program[i].unite && ins->fzt.program[i-1].unite)
+              {
+                addAALine(dl,pos4,pos5,color,2.0f * dpiScale); //closing bracket
+                addAALine(dl,pos5,pos6,color,2.0f * dpiScale);
+              }
+
+              if(ins->fzt.program[i].unite && ins->fzt.program[i-1].unite)
+              {
+                addAALine(dl,pos3,pos4,color,2.0f * dpiScale); //mid bracket
+              }
+            }
           }
         }
 
@@ -657,6 +703,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 
   if (ImGui::BeginTabItem(_L("Macros##sgiFZT"))) 
   {
+    ImGui::Text(_L("Warning! Macros are NOT supported by FZT file format! Do not use them if you want to export .fzt file!##sgiFZT"));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiFZT"),ins,DIV_MACRO_VOL,0xff,0,0xff,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
 
     drawMacros(macroList,macroEditStateMacros);

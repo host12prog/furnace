@@ -23,7 +23,7 @@
 
 class FurnaceGUI;
 
-void addAALine(ImDrawList* dl, const ImVec2& p1, const ImVec2& p2, const ImU32 color, float thickness=1.0f) {
+void addAALine(ImDrawList* dl, const ImVec2& p1, const ImVec2& p2, const ImU32 color, float thickness) {
   ImVec2 pt[2];
   pt[0]=p1;
   pt[1]=p2;
