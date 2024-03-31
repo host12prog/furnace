@@ -465,9 +465,20 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 
   if (ImGui::BeginTabItem(_L("Instrument program##sgiFZT"))) 
   {
-    ImGui::PushItemWidth(25.0f*dpiScale);
-    ImGui::InputScalar(_L("Program period##sgiFZT"),ImGuiDataType_U8,&ins->fzt.program_period,NULL,NULL,"%02X");
+    int prper = ins->fzt.program_period;
+    ImGui::PushItemWidth(85.0f*dpiScale);
+    if(ImGui::InputInt("Program period##sgiFZT22", &prper))
+    {
+      if(prper < 1) prper = 1;
+      if(prper > 0xff) prper = 0xff;
+      ins->fzt.program_period = prper;
+    }
     ImGui::PopItemWidth();
+    bool fztRestart = ins->fzt.flags & TE_PROG_NO_RESTART;
+    if (ImGui::Checkbox(_L("Do not restart instrument program on keydown##sgiFZT"),&fztRestart)) 
+    {
+      ins->fzt.flags ^= TE_PROG_NO_RESTART;
+    }
 
     if (ImGui::BeginChild("HWSeqSU",ImGui::GetContentRegionAvail(),true,ImGuiWindowFlags_MenuBar)) 
     {
