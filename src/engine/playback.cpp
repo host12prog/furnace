@@ -1557,7 +1557,7 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
         if (macroInt->hasRelease && !disCont[dispatchOfChan[note.channel]].dispatch->isVolGlobal()) {
           dispatchCmd(DivCommand(DIV_CMD_NOTE_OFF_ENV,note.channel));
         } else {
-          dispatchCmd(DivCommand(DIV_CMD_NOTE_OFF,note.channel));
+          dispatchCmd(DivCommand(DIV_CMD_NOTE_OFF,note.channel,0xffff)); //marks that note off is from instrument preview?? for FZT system
         }
       } else {
         dispatchCmd(DivCommand(DIV_CMD_NOTE_OFF,note.channel));
@@ -1663,7 +1663,10 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
         if (chan[i].retrigSpeed) {
           if (--chan[i].retrigTick<0) {
             chan[i].retrigTick=chan[i].retrigSpeed-1;
-            dispatchCmd(DivCommand(DIV_CMD_NOTE_ON,i,DIV_NOTE_NULL));
+            if(sysOfChan[i] != DIV_SYSTEM_FZT)
+            {
+              dispatchCmd(DivCommand(DIV_CMD_NOTE_ON,i,DIV_NOTE_NULL));
+            }
             keyHit[i]=true;
           }
         }

@@ -907,8 +907,12 @@ int DivPlatformFZT::dispatch(DivCommand c) {
       chan[c.chan].macroInit(NULL);
 
       sound_engine_enable_gate(sound_engine, &sound_engine->channel[c.chan], 0);
-      sound_engine->channel[c.chan].adsr.volume = 0;
-      fztChan[c.chan].volume = 0;
+
+      if(c.value != 0xffff)
+      {
+        sound_engine->channel[c.chan].adsr.volume = 0;
+        fztChan[c.chan].volume = 0;
+      }
       break;
     case DIV_CMD_NOTE_OFF_ENV:
       chan[c.chan].active=false;
