@@ -352,7 +352,7 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
         break;
     }
 
-    case 0xf800: {
+    case 0xf900: {
         if(tick == 0) {
             te_channel->volume -= (opcode & 0xf);
 
@@ -365,7 +365,7 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
         break;
     }
 
-    case 0xf900: {
+    case 0xf800: {
         if(tick == 0) {
             te_channel->volume += (opcode & 0xf);
 
@@ -979,17 +979,17 @@ int DivPlatformFZT::dispatch(DivCommand c) {
       chan[c.chan].inPorta=c.value;
       break;
     case DIV_CMD_NOTE_FZT:
-      logV("note fzt");
+      //logV("note fzt");
       chan[c.chan].fzt_note = c.value;
       chan[c.chan].fzt_octave = c.value2 & 0xff;
       current_tick = 0;
       break;
     case DIV_CMD_VOLUME_FZT:
-      logV("vol fzt");
+      //logV("vol fzt");
       tracker_engine_execute_volume(c.value, c.chan);
       break;
     case DIV_CMD_EFFECT_FZT:
-      logV("eff fzt");
+      //logV("eff fzt");
       current_tick = c.value >> 8;
       chan[c.chan].fzt_note = (c.value2 >> 8) & 0xff;
       chan[c.chan].fzt_octave = (c.value2 >> 16) & 0xff;
