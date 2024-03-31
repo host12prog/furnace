@@ -358,6 +358,18 @@ const char* snesGainModes[5]={
   "Increase (bent line)##sgistru"
 };
 
+const char* fztFilterModes[8+1]={
+  "Off##sgistru",
+  "Lowpass##sgistru",
+  "Highpass##sgistru",
+  "Bandpass##sgistru",
+  "Low + High##sgistru",
+  "High + Band##sgistru",
+  "Low + Band##sgistru",
+  "Low + High + Band##sgistru",
+  NULL
+};
+
 const int detuneMap[2][8]={
   {-3, -2, -1, 0, 1, 2, 3, 4},
   { 7,  6,  5, 0, 1, 2, 3, 4}

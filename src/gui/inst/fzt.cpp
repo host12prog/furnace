@@ -33,8 +33,8 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
   {
     if (ImGui::BeginTable("FZTnote",2,ImGuiTableFlags_NoHostExtendX))
     {
-      ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed, 170.0f*dpiScale);
-      ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed, 140.0f*dpiScale);
+      ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed, 120.0f*dpiScale);
+      ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed, 98.0f*dpiScale);
 
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
@@ -42,6 +42,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::SameLine();
       char tempID[10];
       snprintf(tempID,10,"%s",noteNames[ins->fzt.base_note + 60]);
+      ImGui::PushItemWidth(60.0f*dpiScale);
       if (ImGui::BeginCombo("##NN1",tempID)) 
       {
         for (int j=0; j<=MAX_NOTE; j++) 
@@ -54,8 +55,54 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
         }
         ImGui::EndCombo();
       }
+      ImGui::PopItemWidth();
       ImGui::TableNextColumn();
+      ImGui::PushItemWidth(40.0f*dpiScale);
       ImGui::InputScalar(_L("Finetune##sgiFZT"),ImGuiDataType_S8,&ins->fzt.finetune,NULL,NULL,"%d");
+      ImGui::PopItemWidth();
+      ImGui::EndTable();
+    }
+
+    if (ImGui::BeginTable("FZTslide",4,ImGuiTableFlags_NoHostExtendX))
+    {
+      ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed, 100.0f*dpiScale);
+      ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed, 70.0f*dpiScale);
+      ImGui::TableSetupColumn("c2",ImGuiTableColumnFlags_WidthFixed, 45.0f*dpiScale);
+      ImGui::TableSetupColumn("c3",ImGuiTableColumnFlags_WidthFixed, 90.0f*dpiScale);
+
+      ImGui::TableNextRow();
+      ImGui::TableNextColumn();
+      ImGui::PushItemWidth(25.0f*dpiScale);
+      ImGui::InputScalar(_L("Slide speed##sgiFZT"),ImGuiDataType_U8,&ins->fzt.slide_speed,NULL,NULL,"%02X");
+      ImGui::PopItemWidth();
+      ImGui::TableNextColumn();
+      bool fztSetPw = ins->fzt.flags & TE_SET_PW;
+      if (ImGui::Checkbox(_L("Set PW##sgiFZT"),&fztSetPw)) 
+      {
+        ins->fzt.flags ^= TE_SET_PW;
+      }
+      if (ImGui::IsItemHovered()) 
+      {
+        ImGui::SetTooltip(_L("Set pulse width on keydown##sgiFZT"));
+      }
+      ImGui::TableNextColumn();
+      ImGui::PushItemWidth(25.0f*dpiScale);
+      ImGui::InputScalar("",ImGuiDataType_U8,&ins->fzt.pw,NULL,NULL,"%02X");
+      if (ImGui::IsItemHovered()) 
+      {
+        ImGui::SetTooltip(_L("Initial pulse width##sgiFZT"));
+      }
+      ImGui::PopItemWidth();
+      ImGui::TableNextColumn();
+      bool fztSetCut = ins->fzt.flags & TE_SET_CUTOFF;
+      if (ImGui::Checkbox(_L("Set cutoff##sgiFZT"),&fztSetCut)) 
+      {
+        ins->fzt.flags ^= TE_SET_CUTOFF;
+      }
+      if (ImGui::IsItemHovered()) 
+      {
+        ImGui::SetTooltip(_L("Set filter cutoff on keydown##sgiFZT"));
+      }
       ImGui::EndTable();
     }
 
@@ -110,6 +157,201 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
     }
     popToggleColors();
 
+    if (ImGui::BeginTable("FZTfilt",4,ImGuiTableFlags_NoHostExtendX))
+    {
+      ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed, 100.0f*dpiScale);
+      ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed, 70.0f*dpiScale);
+      ImGui::TableSetupColumn("c2",ImGuiTableColumnFlags_WidthFixed, 120.0f*dpiScale);
+      ImGui::TableSetupColumn("c3",ImGuiTableColumnFlags_WidthFixed, 220.0f*dpiScale);
+
+      ImGui::TableNextRow();
+      ImGui::TableNextColumn();
+
+      bool fztSetPw = ins->fzt.sound_engine_flags & SE_ENABLE_FILTER;
+      if (ImGui::Checkbox(_L("Enable filter##sgiFZT"),&fztSetPw)) 
+      {
+        ins->fzt.sound_engine_flags ^= SE_ENABLE_FILTER;
+      }
+
+      ImGui::TableNextColumn();
+
+      ImGui::PushItemWidth(25.0f*dpiScale);
+      ImGui::InputScalar(_L("Cutoff##sgiFZT"),ImGuiDataType_U8,&ins->fzt.filter_cutoff,NULL,NULL,"%02X");
+      ImGui::PopItemWidth();
+
+      ImGui::TableNextColumn();
+
+      ImGui::PushItemWidth(25.0f*dpiScale);
+      ImGui::InputScalar(_L("Resonance##sgiFZT"),ImGuiDataType_U8,&ins->fzt.filter_resonance,NULL,NULL,"%02X");
+      ImGui::PopItemWidth();
+
+      ImGui::TableNextColumn();
+
+      ImGui::Text(_L("Type##sgiFZT"));
+      ImGui::SameLine();
+      ImGui::PushItemWidth(140.0f*dpiScale);
+      char tempID[40];
+      snprintf(tempID,40,"%s",_L(fztFilterModes[ins->fzt.filter_type]));
+      if (ImGui::BeginCombo("##NNN1",tempID)) 
+      {
+        for (int j=0; j<8; j++) 
+        {
+          snprintf(tempID,40,"%s",_L(fztFilterModes[j]));
+          if (ImGui::Selectable(tempID,ins->fzt.filter_type==j))
+          {
+            ins->fzt.filter_type=j;
+          }
+        }
+        ImGui::EndCombo();
+      }
+      ImGui::PopItemWidth();
+
+      ImGui::EndTable();
+    }
+
+    if (ImGui::BeginTable("FZThard",4,ImGuiTableFlags_NoHostExtendX))
+    {
+      ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed, 160.0f*dpiScale);
+      ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed, 130.0f*dpiScale);
+      ImGui::TableSetupColumn("c2",ImGuiTableColumnFlags_WidthFixed, 140.0f*dpiScale);
+      ImGui::TableSetupColumn("c3",ImGuiTableColumnFlags_WidthFixed, 130.0f*dpiScale);
+
+      ImGui::TableNextRow();
+      ImGui::TableNextColumn();
+
+      bool fztRing = ins->fzt.sound_engine_flags & SE_ENABLE_RING_MOD;
+      if (ImGui::Checkbox(_L("Enable ring modulation##sgiFZT"),&fztRing)) 
+      {
+        ins->fzt.sound_engine_flags ^= SE_ENABLE_RING_MOD;
+      }
+
+      ImGui::TableNextColumn();
+
+      ImGui::PushItemWidth(25.0f*dpiScale);
+      ImGui::InputScalar(_L("Ring mod source##sgiFZT"),ImGuiDataType_U8,&ins->fzt.ring_mod,NULL,NULL,"%02X");
+      ImGui::PopItemWidth();
+      if (ImGui::IsItemHovered()) 
+      {
+        ImGui::SetTooltip(_L("FF = self-modulation##sgiFZT"));
+      }
+
+      ImGui::TableNextColumn();
+
+      bool fztSync = ins->fzt.sound_engine_flags & SE_ENABLE_HARD_SYNC;
+      if (ImGui::Checkbox(_L("Enable hard sync##sgiFZT"),&fztSync)) 
+      {
+        ins->fzt.sound_engine_flags ^= SE_ENABLE_HARD_SYNC;
+      }
+
+      ImGui::TableNextColumn();
+
+      ImGui::PushItemWidth(25.0f*dpiScale);
+      ImGui::InputScalar(_L("Hard sync source##sgiFZT"),ImGuiDataType_U8,&ins->fzt.hard_sync,NULL,NULL,"%02X");
+      ImGui::PopItemWidth();
+      if (ImGui::IsItemHovered()) 
+      {
+        ImGui::SetTooltip(_L("FF = self-sync##sgiFZT"));
+      }
+
+      ImGui::EndTable();
+    }
+
+    if (ImGui::BeginTable("FZTsli",2,ImGuiTableFlags_NoHostExtendX))
+    {
+      ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed, 160.0f*dpiScale);
+      ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed, 160.0f*dpiScale);
+
+      ImGui::TableNextRow();
+      ImGui::TableNextColumn();
+
+      bool fztSlRetrig = ins->fzt.flags & TE_RETRIGGER_ON_SLIDE;
+      if (ImGui::Checkbox(_L("Retrigger on slide##sgiFZT"),&fztSlRetrig)) 
+      {
+        ins->fzt.flags ^= TE_RETRIGGER_ON_SLIDE;
+      }
+      if (ImGui::IsItemHovered()) 
+      {
+        ImGui::SetTooltip(_L("Restart instrument and envelope even if slide command (03xx) is placed with the note.##sgiFZT"));
+      }
+
+      ImGui::TableNextColumn();
+
+      bool fztKeySync = ins->fzt.sound_engine_flags & SE_ENABLE_KEYDOWN_SYNC;
+      if (ImGui::Checkbox(_L("Sync osc. on keydown##sgiFZT"),&fztKeySync)) 
+      {
+        ins->fzt.sound_engine_flags ^= SE_ENABLE_KEYDOWN_SYNC;
+      }
+      if (ImGui::IsItemHovered()) 
+      {
+        ImGui::SetTooltip(_L("Reset phase of oscillator each time new note is played.\nDoes not happen when slide (03xx) or legato command is placed.##sgiFZT"));
+      }
+
+      ImGui::EndTable();
+    }
+
+    if (ImGui::BeginTable("FZTvib",4,ImGuiTableFlags_NoHostExtendX))
+    {
+      ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed, 70.0f*dpiScale);
+      ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed, 70.0f*dpiScale);
+      ImGui::TableSetupColumn("c2",ImGuiTableColumnFlags_WidthFixed, 70.0f*dpiScale);
+      ImGui::TableSetupColumn("c3",ImGuiTableColumnFlags_WidthFixed, 70.0f*dpiScale);
+
+      ImGui::TableNextRow();
+      ImGui::TableNextColumn();
+
+      bool fztVib = ins->fzt.flags & TE_ENABLE_VIBRATO;
+      if (ImGui::Checkbox(_L("Vibrato##sgiFZT"),&fztVib)) 
+      {
+        ins->fzt.flags ^= TE_ENABLE_VIBRATO;
+      }
+
+      ImGui::TableNextColumn();
+
+      ImGui::PushItemWidth(25.0f*dpiScale);
+      ImGui::InputScalar(_L("Speed##sgiFZT0"),ImGuiDataType_U8,&ins->fzt.vibrato_speed,NULL,NULL,"%02X");
+      ImGui::PopItemWidth();
+
+      ImGui::TableNextColumn();
+
+      ImGui::PushItemWidth(25.0f*dpiScale);
+      ImGui::InputScalar(_L("Depth##sgiFZT0"),ImGuiDataType_U8,&ins->fzt.vibrato_depth,NULL,NULL,"%02X");
+      ImGui::PopItemWidth();
+
+      ImGui::TableNextColumn();
+
+      ImGui::PushItemWidth(25.0f*dpiScale);
+      ImGui::InputScalar(_L("Delay##sgiFZT0"),ImGuiDataType_U8,&ins->fzt.vibrato_delay,NULL,NULL,"%02X");
+      ImGui::PopItemWidth();
+
+      ImGui::TableNextColumn();
+
+      bool fztPwm = ins->fzt.flags & TE_ENABLE_PWM;
+      if (ImGui::Checkbox(_L("PWM##sgiFZT"),&fztPwm)) 
+      {
+        ins->fzt.flags ^= TE_ENABLE_PWM;
+      }
+
+      ImGui::TableNextColumn();
+
+      ImGui::PushItemWidth(25.0f*dpiScale);
+      ImGui::InputScalar(_L("Speed##sgiFZT1"),ImGuiDataType_U8,&ins->fzt.pwm_speed,NULL,NULL,"%02X");
+      ImGui::PopItemWidth();
+
+      ImGui::TableNextColumn();
+
+      ImGui::PushItemWidth(25.0f*dpiScale);
+      ImGui::InputScalar(_L("Depth##sgiFZT1"),ImGuiDataType_U8,&ins->fzt.pwm_depth,NULL,NULL,"%02X");
+      ImGui::PopItemWidth();
+
+      ImGui::TableNextColumn();
+
+      ImGui::PushItemWidth(25.0f*dpiScale);
+      ImGui::InputScalar(_L("Delay##sgiFZT1"),ImGuiDataType_U8,&ins->fzt.pwm_delay,NULL,NULL,"%02X");
+      ImGui::PopItemWidth();
+
+      ImGui::EndTable();
+    }
+
     ImVec2 sliderSize=ImVec2(30.0f*dpiScale,256.0*dpiScale);
 
     if (ImGui::BeginTable("FZTEnvParams",6,ImGuiTableFlags_NoHostExtendX))
@@ -158,62 +400,15 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::EndTable();
     }
 
-    /*P(CWSliderScalar(_L("Duty##sgiSID2"),ImGuiDataType_U16,&ins->c64.duty,&_ZERO,&_FOUR_THOUSAND_NINETY_FIVE)); rightClickable
+    ImGui::EndTabItem();
+  }
 
-    bool ringMod=ins->c64.ringMod;
-    if (ImGui::Checkbox(_L("Ring Modulation##sgiSID2"),&ringMod)) 
-    { PARAMETER
-      ins->c64.ringMod=ringMod;
-    }
-    bool oscSync=ins->c64.oscSync;
-    if (ImGui::Checkbox(_L("Oscillator Sync##sgiSID2"),&oscSync)) 
-    { PARAMETER
-      ins->c64.oscSync=oscSync;
-    }
+  if (ImGui::BeginTabItem(_L("Instrument program##sgiFZT"))) 
+  {
+    ImGui::PushItemWidth(25.0f*dpiScale);
+    ImGui::InputScalar(_L("Program period##sgiFZT"),ImGuiDataType_U8,&ins->fzt.program_period,NULL,NULL,"%02X");
+    ImGui::PopItemWidth();
 
-    P(ImGui::Checkbox(_L("Enable filter##sgiSID2"),&ins->c64.toFilter));
-    P(ImGui::Checkbox(_L("Initialize filter##sgiSID2"),&ins->c64.initFilter));
-    
-    P(CWSliderScalar(_L("Cutoff##sgiSID2"),ImGuiDataType_U16,&ins->c64.cut,&_ZERO,&_FOUR_THOUSAND_NINETY_FIVE)); rightClickable
-    P(CWSliderScalar(_L("Resonance##sgiSID2"),ImGuiDataType_U8,&ins->c64.res,&_ZERO,&_TWO_HUNDRED_FIFTY_FIVE)); rightClickable
-
-    ImGui::AlignTextToFramePadding();
-    ImGui::Text(_L("Filter Mode##sgiSID2"));
-    ImGui::SameLine();
-    pushToggleColors(ins->c64.lp);
-    if (ImGui::Button(_L("low##sgiSID2"))) 
-    { PARAMETER
-      ins->c64.lp=!ins->c64.lp;
-    }
-    popToggleColors();
-    ImGui::SameLine();
-    pushToggleColors(ins->c64.bp);
-    if (ImGui::Button(_L("band##sgiSID2"))) 
-    { PARAMETER
-      ins->c64.bp=!ins->c64.bp;
-    }
-    popToggleColors();
-    ImGui::SameLine();
-    pushToggleColors(ins->c64.hp);
-    if (ImGui::Button(_L("high##sgiSID2"))) 
-    { PARAMETER
-      ins->c64.hp=!ins->c64.hp;
-    }
-    popToggleColors();
-
-    P(CWSliderScalar(_L("Noise Mode##sgiSID2"),ImGuiDataType_U8,&ins->sid2.noise_mode,&_ZERO,&_THREE));
-    P(CWSliderScalar(_L("Wave Mix Mode##sgiSID2"),ImGuiDataType_U8,&ins->sid2.mix_mode,&_ZERO,&_THREE,_L(SID2waveMixModes[ins->sid2.mix_mode&3])));
-
-    if (ImGui::Checkbox(_L("Absolute Cutoff Macro##sgiSID2"),&ins->c64.filterIsAbs)) 
-    {
-      ins->std.get_macro(DIV_MACRO_ALG, true)->vZoom=-1;
-      PARAMETER;
-    }
-    if (ImGui::Checkbox(_L("Absolute Duty Macro##sgiSID2"),&ins->c64.dutyIsAbs)) 
-    {
-      ins->std.get_macro(DIV_MACRO_DUTY, true)->vZoom=-1;
-      PARAMETER;
-    }*/
     ImGui::EndTabItem();
   }
 
