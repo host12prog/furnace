@@ -27,6 +27,66 @@
 
 class FurnaceGUI;
 
+const unsigned short fzt_commands_map[] = 
+{
+  DivInstrumentFZT::TE_EFFECT_ARPEGGIO,
+  DivInstrumentFZT::TE_EFFECT_PORTAMENTO_UP,
+  DivInstrumentFZT::TE_EFFECT_PORTAMENTO_DOWN,
+  DivInstrumentFZT::TE_EFFECT_VIBRATO,
+  DivInstrumentFZT::TE_EFFECT_PWM,
+  DivInstrumentFZT::TE_EFFECT_SET_PW,
+  DivInstrumentFZT::TE_EFFECT_PW_DOWN,
+  DivInstrumentFZT::TE_EFFECT_PW_UP,
+  DivInstrumentFZT::TE_EFFECT_SET_CUTOFF,
+  DivInstrumentFZT::TE_EFFECT_VOLUME_FADE,
+  DivInstrumentFZT::TE_EFFECT_SET_WAVEFORM,
+  DivInstrumentFZT::TE_EFFECT_SET_VOLUME,
+
+  DivInstrumentFZT::TE_EFFECT_EXT_TOGGLE_FILTER,
+  DivInstrumentFZT::TE_EFFECT_EXT_PORTA_UP,
+  DivInstrumentFZT::TE_EFFECT_EXT_PORTA_DN,
+  DivInstrumentFZT::TE_EFFECT_EXT_FILTER_MODE,
+  //TE_EFFECT_EXT_PATTERN_LOOP = 0x0e60, // e60 = start, e61-e6f = end and indication how many loops you want
+  //is not supported in Furnace yet
+  DivInstrumentFZT::TE_EFFECT_EXT_RETRIGGER,
+  DivInstrumentFZT::TE_EFFECT_EXT_FINE_VOLUME_DOWN,
+  DivInstrumentFZT::TE_EFFECT_EXT_FINE_VOLUME_UP,
+  DivInstrumentFZT::TE_EFFECT_EXT_NOTE_CUT,
+  DivInstrumentFZT::TE_EFFECT_EXT_PHASE_RESET,
+
+  DivInstrumentFZT::TE_EFFECT_SET_SPEED_PROG_PERIOD,
+  DivInstrumentFZT::TE_EFFECT_CUTOFF_UP, // Gxx
+  DivInstrumentFZT::TE_EFFECT_CUTOFF_DOWN, // Hxx
+  DivInstrumentFZT::TE_EFFECT_SET_RESONANCE, // Ixx
+  DivInstrumentFZT::TE_EFFECT_RESONANCE_UP, // Jxx
+  DivInstrumentFZT::TE_EFFECT_RESONANCE_DOWN, // Kxx
+
+  DivInstrumentFZT::TE_EFFECT_SET_ATTACK, // Lxx
+  DivInstrumentFZT::TE_EFFECT_SET_DECAY, // Mxx
+  DivInstrumentFZT::TE_EFFECT_SET_SUSTAIN, // Nxx
+  DivInstrumentFZT::TE_EFFECT_SET_RELEASE, // Oxx
+
+  DivInstrumentFZT::TE_EFFECT_SET_RING_MOD_SRC, // Rxx
+  DivInstrumentFZT::TE_EFFECT_SET_HARD_SYNC_SRC, // Sxx
+
+  DivInstrumentFZT::TE_EFFECT_PORTA_UP_SEMITONE, // Txx
+  DivInstrumentFZT::TE_EFFECT_PORTA_DOWN_SEMITONE, // Uxx
+  /*
+  TE_EFFECT_ = 0x1f00, //Vxx
+  TE_EFFECT_ = 0x2000, //Wxx
+  */
+  DivInstrumentFZT::TE_EFFECT_ARPEGGIO_ABS, // Yxx
+  DivInstrumentFZT::TE_EFFECT_TRIGGER_RELEASE, // Zxx
+
+  /* These effects work only in instrument program */
+  DivInstrumentFZT::TE_PROGRAM_LOOP_BEGIN,
+  DivInstrumentFZT::TE_PROGRAM_LOOP_END,
+  DivInstrumentFZT::TE_PROGRAM_JUMP,
+  DivInstrumentFZT::TE_PROGRAM_NOP,
+  DivInstrumentFZT::TE_PROGRAM_END,
+  0xffff,
+};
+
 void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 {
   if (ImGui::BeginTabItem("FZT")) 
@@ -409,6 +469,189 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
     ImGui::InputScalar(_L("Program period##sgiFZT"),ImGuiDataType_U8,&ins->fzt.program_period,NULL,NULL,"%02X");
     ImGui::PopItemWidth();
 
+    if (ImGui::BeginChild("HWSeqSU",ImGui::GetContentRegionAvail(),true,ImGuiWindowFlags_MenuBar)) 
+    {
+      ImGui::BeginMenuBar();
+      ImGui::Text(_L("Instrument program##sgiFZT"));
+      ImGui::EndMenuBar();
+
+      if (ImGui::BeginTable("HWSeqListFZT",4)) 
+      {
+        ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed, 40.0f*dpiScale);
+        ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableSetupColumn("c2",ImGuiTableColumnFlags_WidthFixed, 80.0f*dpiScale);
+        ImGui::TableSetupColumn("c3",ImGuiTableColumnFlags_WidthFixed, 40.0f*dpiScale);
+
+        ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
+        ImGui::TableNextColumn();
+        ImGui::Text(_L("Tick##sgiFZT"));
+        ImGui::TableNextColumn();
+        ImGui::Text(_L("Command##sgiFZT"));
+        ImGui::TableNextColumn();
+        ImGui::Text(_L("Move/Remove##sgiFZT"));
+        ImGui::TableNextColumn();
+        ImGui::Text(_L("Unite##sgiFZT"));
+
+        for (int i=0; i<FZT_INST_PROG_LEN; i++) 
+        {
+          ImGui::TableNextRow();
+          ImGui::TableNextColumn();
+          ImGui::Text("%01X",i);
+          ImGui::TableNextColumn();
+          ImGui::PushID(i);
+          if (ins->fzt.program[i].cmd>=DivInstrumentFZT::TE_PROGRAM_END)
+          {
+            ins->fzt.program[i].cmd=DivInstrumentFZT::TE_PROGRAM_END;
+          }
+          int cmd=0;
+          ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+          while(fzt_commands_map[cmd] != 0xffff)
+          {
+            if(fzt_commands_map[cmd] == (ins->fzt.program[i].cmd & 0xff00))
+            {
+              if(fzt_commands_map[cmd] == DivInstrumentFZT::TE_PROGRAM_JUMP)
+              {
+                if(ins->fzt.program[i].cmd == DivInstrumentFZT::TE_PROGRAM_NOP)
+                {
+                  cmd = 40;
+                  break;
+                }
+                if(ins->fzt.program[i].cmd == DivInstrumentFZT::TE_PROGRAM_NOP)
+                {
+                  cmd = 41;
+                  break;
+                }
+              }
+              break;
+            }
+            cmd++;
+          }
+          if (ImGui::BeginCombo("##HWSeqCmd",_L(fztCmdTypes[cmd])))
+          {
+            int j = 0;
+
+            while(fztCmdTypes[j])
+            {
+              if (ImGui::Selectable(_L(fztCmdTypes[j])))
+              {
+                if (ins->fzt.program[i].cmd!=fzt_commands_map[j]) 
+                {
+                  ins->fzt.program[i].cmd=fzt_commands_map[j];
+                  ins->fzt.program[i].val=0;
+
+                  if(ins->fzt.program[i].cmd >= 0x7f00)
+                  {
+                    ins->fzt.program[i].unite=false;
+                  }
+                }
+              }
+
+              j++;
+            }
+
+            ImGui::EndCombo();
+          }
+
+
+          switch (ins->fzt.program[i].cmd) 
+          {
+            case DivInstrumentFZT::TE_EFFECT_ARPEGGIO: 
+            {
+              ImGui::Text("arp");
+              break;
+            }
+            case DivInstrumentFZT::TE_PROGRAM_NOP: 
+            {
+              ImGui::Text("nop");
+              break;
+            }
+            case DivInstrumentFZT::TE_PROGRAM_END: 
+            {
+              ImGui::Text("end");
+              break;
+            }
+            default:
+              break;
+          }
+          if(ins->fzt.program[i].cmd < 0x7f00)
+          {
+              ImGui::Checkbox(_L("Execute next command at the same tick##sgiFZT"), &ins->fzt.program[i].unite);
+          }
+          ImGui::PopID();
+          ImGui::TableNextColumn();
+          ImGui::PushID(i+512);
+          if (ImGui::Button(ICON_FA_CHEVRON_UP "##HWCmdUp")) 
+          {
+            if (i>0) 
+            {
+              e->lockEngine([ins,i]() 
+              {
+                ins->fzt.program[i - 1].cmd^=ins->fzt.program[i].cmd;
+                ins->fzt.program[i].cmd^=ins->fzt.program[i - 1].cmd;
+                ins->fzt.program[i - 1].cmd^=ins->fzt.program[i].cmd;
+
+                ins->fzt.program[i - 1].val^=ins->fzt.program[i].val;
+                ins->fzt.program[i].val^=ins->fzt.program[i - 1].val;
+                ins->fzt.program[i - 1].val^=ins->fzt.program[i].val;
+
+                ins->fzt.program[i - 1].unite^=ins->fzt.program[i].unite;
+                ins->fzt.program[i].unite^=ins->fzt.program[i - 1].unite;
+                ins->fzt.program[i - 1].unite^=ins->fzt.program[i].unite;
+              });
+            }
+            MARK_MODIFIED;
+          }
+          ImGui::SameLine();
+          if (ImGui::Button(ICON_FA_CHEVRON_DOWN "##HWCmdDown")) 
+          {
+            if (i<FZT_INST_PROG_LEN - 1) 
+            {
+              e->lockEngine([ins,i]() 
+              {
+                ins->fzt.program[i + 1].cmd^=ins->fzt.program[i].cmd;
+                ins->fzt.program[i].cmd^=ins->fzt.program[i + 1].cmd;
+                ins->fzt.program[i + 1].cmd^=ins->fzt.program[i].cmd;
+
+                ins->fzt.program[i + 1].val^=ins->fzt.program[i].val;
+                ins->fzt.program[i].val^=ins->fzt.program[i + 1].val;
+                ins->fzt.program[i + 1].val^=ins->fzt.program[i].val;
+
+                ins->fzt.program[i + 1].unite^=ins->fzt.program[i].unite;
+                ins->fzt.program[i].unite^=ins->fzt.program[i + 1].unite;
+                ins->fzt.program[i + 1].unite^=ins->fzt.program[i].unite;
+              });
+            }
+            MARK_MODIFIED;
+          }
+          ImGui::SameLine();
+          pushDestColor();
+          if (ImGui::Button(ICON_FA_TIMES "##HWCmdDel")) 
+          {
+            for (int j=i; j<FZT_INST_PROG_LEN; j++) 
+            {
+              ins->fzt.program[j].cmd=ins->fzt.program[j+1].cmd;
+              ins->fzt.program[j].val=ins->fzt.program[j+1].val;
+              ins->fzt.program[j].unite=ins->fzt.program[j+1].unite;
+            }
+            ins->fzt.program[FZT_INST_PROG_LEN - 1].cmd=DivInstrumentFZT::TE_PROGRAM_NOP;
+            ins->fzt.program[FZT_INST_PROG_LEN - 1].val=0;
+            ins->fzt.program[FZT_INST_PROG_LEN - 1].unite=false;
+          }
+          popDestColor();
+          ImGui::PopID();
+
+          ImGui::TableNextColumn();
+
+          if(ins->fzt.program[i].unite)
+          {
+            ImGui::Text("unite");
+          }
+        }
+
+        ImGui::EndTable();
+      }
+    }
+    ImGui::EndChild();
     ImGui::EndTabItem();
   }
 

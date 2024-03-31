@@ -1049,6 +1049,65 @@ typedef enum {
 #define MAX_NOTE (12 * 7 + 11)
 
 struct DivInstrumentFZT {
+
+  enum FztCommands: unsigned short {
+    TE_EFFECT_ARPEGGIO = 0x0000,
+    TE_EFFECT_PORTAMENTO_UP = 0x0100,
+    TE_EFFECT_PORTAMENTO_DOWN = 0x0200,
+    TE_EFFECT_VIBRATO = 0x0400,
+    TE_EFFECT_PWM = 0x1100,
+    TE_EFFECT_SET_PW = 0x1200,
+    TE_EFFECT_PW_DOWN = 0x1400,
+    TE_EFFECT_PW_UP = 0x1300,
+    TE_EFFECT_SET_CUTOFF = 0x1500,
+    TE_EFFECT_VOLUME_FADE = 0x0a00,
+    TE_EFFECT_SET_WAVEFORM = 0x1000,
+    TE_EFFECT_SET_VOLUME = 0x1600,
+
+    TE_EFFECT_EXT_TOGGLE_FILTER = 0x1700,
+    TE_EFFECT_EXT_PORTA_UP = 0xf100,
+    TE_EFFECT_EXT_PORTA_DN = 0xf200,
+    TE_EFFECT_EXT_FILTER_MODE = 0x1800,
+    //TE_EFFECT_EXT_PATTERN_LOOP = 0x0e60, // e60 = start, e61-e6f = end and indication how many loops you want
+    //is not supported in Furnace yet
+    TE_EFFECT_EXT_RETRIGGER = 0x0e90,
+    TE_EFFECT_EXT_FINE_VOLUME_DOWN = 0xf400,
+    TE_EFFECT_EXT_FINE_VOLUME_UP = 0xf300,
+    TE_EFFECT_EXT_NOTE_CUT = 0xec00,
+    TE_EFFECT_EXT_PHASE_RESET = 0x1900,
+
+    TE_EFFECT_SET_SPEED_PROG_PERIOD = 0x0f00,
+    TE_EFFECT_CUTOFF_UP = 0x1A00, // Gxx
+    TE_EFFECT_CUTOFF_DOWN = 0x1B00, // Hxx
+    TE_EFFECT_SET_RESONANCE = 0x1C00, // Ixx
+    TE_EFFECT_RESONANCE_UP = 0x1D00, // Jxx
+    TE_EFFECT_RESONANCE_DOWN = 0x1E00, // Kxx
+
+    TE_EFFECT_SET_ATTACK = 0x2100, // Lxx
+    TE_EFFECT_SET_DECAY = 0x2200, // Mxx
+    TE_EFFECT_SET_SUSTAIN = 0x2300, // Nxx
+    TE_EFFECT_SET_RELEASE = 0x2400, // Oxx
+
+    TE_EFFECT_SET_RING_MOD_SRC = 0x1b00, // Rxx
+    TE_EFFECT_SET_HARD_SYNC_SRC = 0x1c00, // Sxx
+
+    TE_EFFECT_PORTA_UP_SEMITONE = 0x2600, // Txx
+    TE_EFFECT_PORTA_DOWN_SEMITONE = 0x2700, // Uxx
+    /*
+    TE_EFFECT_ = 0x1f00, //Vxx
+    TE_EFFECT_ = 0x2000, //Wxx
+    */
+    TE_EFFECT_ARPEGGIO_ABS = 0x2800, // Yxx
+    TE_EFFECT_TRIGGER_RELEASE = 0x2900, // Zxx
+
+    /* These effects work only in instrument program */
+    TE_PROGRAM_LOOP_BEGIN = 0x7d00,
+    TE_PROGRAM_LOOP_END = 0x7e00,
+    TE_PROGRAM_JUMP = 0x7f00,
+    TE_PROGRAM_NOP = 0x7ffe,
+    TE_PROGRAM_END = 0x7fff,
+  };
+
   unsigned char waveform;
   unsigned short flags;
   unsigned short sound_engine_flags;
@@ -1062,7 +1121,7 @@ struct DivInstrumentFZT {
   unsigned char pw; // store only one byte since we don't have the luxury of virtually unlimited memory!
 
   typedef struct {
-    unsigned char cmd;
+    unsigned short cmd;
     unsigned char val;
     bool unite;
   } ProgramFZT;
@@ -1107,13 +1166,16 @@ struct DivInstrumentFZT {
     {
       for(int i = 0; i < FZT_INST_PROG_LEN; i++)
       {
-        program[i].cmd = 0;
+        program[i].cmd = TE_PROGRAM_NOP;
         program[i].val = 0;
         program[i].unite = false;
       }
 
+      program[0].cmd = 0x00;
       program[0].val = 0;
+      program[1].cmd = 0x00;
       program[1].val = 0xf0;
+      program[2].cmd = 0x00;
       program[2].val = 0xf1;
       program[3].cmd = 0x7f;
       program[3].val = 0;

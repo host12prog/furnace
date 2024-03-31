@@ -370,6 +370,52 @@ const char* fztFilterModes[8+1]={
   NULL
 };
 
+const char* fztCmdTypes[]={
+  "Arpeggio##sgistru",
+  "Portamento up##sgistru",
+  "Portamento down##sgistru",
+  "Vibrato##sgistru",
+  "PWM##sgistru",
+  "Set pulse width##sgistru",
+  "Pulse width down##sgistru",
+  "Pulse width up##sgistru",
+  "Set filter cutoff##sgistru",
+  "Volume fade##sgistru",
+  "Set waveform##sgistru",
+  "Set volume##sgistru",
+  "Toggle filter##sgistru",
+  "Fine portamento up##sgistru",
+  "Fine portamento down##sgistru",
+  "Filter mode##sgistru",
+  "Retrigger##sgistru",
+  "Fine volume down##sgistru",
+  "Fine volume up##sgistru",
+  "Note cut##sgistru",
+  "Phase reset##sgistru",
+  "Program period##sgistru",
+  "Filter cutoff up##sgistru",
+  "Filter cutoff down##sgistru",
+  "Set filter resonance##sgistru",
+  "Filter resonance up##sgistru",
+  "Filter resonance down##sgistru",
+  "Set attack##sgistru",
+  "Set decay##sgistru",
+  "Set sustain##sgistru",
+  "Set release##sgistru",
+  "Ring modulation source##sgistru",
+  "Hard sync source##sgistru",
+  "Portamento up (semitones)##sgistru",
+  "Portamento down (semitones)##sgistru",
+  "Absolute arpeggio note##sgistru",
+  "Trigger release##sgistru",
+  "Loop begin##sgistru",
+  "Loop end##sgistru",
+  "Jump##sgistru",
+  "NOP##sgistru",
+  "Program end##sgistru",
+  NULL
+};
+
 const int detuneMap[2][8]={
   {-3, -2, -1, 0, 1, 2, 3, 4},
   { 7,  6,  5, 0, 1, 2, 3, 4}
