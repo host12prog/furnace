@@ -647,7 +647,6 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
           ImGuiStyle& style=ImGui::GetStyle();
 
           ImDrawList* dl=ImGui::GetWindowDrawList();
-          ImGuiWindow* window=ImGui::GetCurrentWindow();
           ImGui::ItemSize(size,style.FramePadding.y);
           ImU32 color=ImGui::GetColorU32(uiColors[GUI_COLOR_FM_ENVELOPE]);
           if (ImGui::ItemAdd(rect,ImGui::GetID("unitee")))
