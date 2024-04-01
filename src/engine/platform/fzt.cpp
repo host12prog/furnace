@@ -690,7 +690,7 @@ do_it_again:;
         }
 
         default: {
-            do_command(inst, chann, te_channel->program_counter, true);
+            do_command(inst & 0x7fff, chann, te_channel->program_counter, true);
             break;
         }
         }

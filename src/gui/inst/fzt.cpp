@@ -25,6 +25,8 @@
 #include "fm.h"
 #include "../intConst.h"
 
+#include "../../engine/platform/fzt.h"
+
 class FurnaceGUI;
 
 const unsigned short fzt_commands_map[] = 
@@ -527,7 +529,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
                   cmd = 40;
                   break;
                 }
-                if(ins->fzt.program[i].cmd == DivInstrumentFZT::TE_PROGRAM_NOP)
+                if(ins->fzt.program[i].cmd == DivInstrumentFZT::TE_PROGRAM_END)
                 {
                   cmd = 41;
                   break;
@@ -543,14 +545,14 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 
             while(fztCmdTypes[j])
             {
-              if (ImGui::Selectable(_L(fztCmdTypes[j])))
+              if (ImGui::Selectable(_L(fztCmdTypes[j]), j == cmd))
               {
                 if (ins->fzt.program[i].cmd!=fzt_commands_map[j]) 
                 {
                   ins->fzt.program[i].cmd=fzt_commands_map[j];
                   ins->fzt.program[i].val=0;
 
-                  if(ins->fzt.program[i].cmd >= 0x7f00)
+                  if(ins->fzt.program[i].cmd >= 40)
                   {
                     ins->fzt.program[i].unite=false;
                   }
@@ -566,19 +568,261 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 
           switch (ins->fzt.program[i].cmd) 
           {
-            case DivInstrumentFZT::TE_EFFECT_ARPEGGIO: 
+            case DivInstrumentFZT::TE_EFFECT_PORTAMENTO_UP:
+            case DivInstrumentFZT::TE_EFFECT_PORTAMENTO_DOWN:
+            case DivInstrumentFZT::TE_EFFECT_SET_PW:
+            case DivInstrumentFZT::TE_EFFECT_PW_DOWN:
+            case DivInstrumentFZT::TE_EFFECT_PW_UP:
+            case DivInstrumentFZT::TE_EFFECT_SET_CUTOFF:
+            case DivInstrumentFZT::TE_EFFECT_SET_VOLUME:
+            case DivInstrumentFZT::TE_EFFECT_SET_SPEED_PROG_PERIOD:
+            case DivInstrumentFZT::TE_EFFECT_CUTOFF_UP:
+            case DivInstrumentFZT::TE_EFFECT_CUTOFF_DOWN:
+            case DivInstrumentFZT::TE_EFFECT_SET_RESONANCE:
+            case DivInstrumentFZT::TE_EFFECT_RESONANCE_UP:
+            case DivInstrumentFZT::TE_EFFECT_RESONANCE_DOWN:
+            case DivInstrumentFZT::TE_EFFECT_SET_ATTACK:
+            case DivInstrumentFZT::TE_EFFECT_SET_DECAY:
+            case DivInstrumentFZT::TE_EFFECT_SET_SUSTAIN:
+            case DivInstrumentFZT::TE_EFFECT_SET_RELEASE:
+            case DivInstrumentFZT::TE_EFFECT_PORTA_UP_SEMITONE:
+            case DivInstrumentFZT::TE_EFFECT_PORTA_DOWN_SEMITONE:
+            case DivInstrumentFZT::TE_EFFECT_ARPEGGIO_ABS:
+            case DivInstrumentFZT::TE_EFFECT_TRIGGER_RELEASE:
             {
-              ImGui::Text("arp");
+              int temp = ins->fzt.program[i].val;
+              if(CWSliderInt(_L("Value##sgiFZT"),&temp,0,0xff,"%02X"))
+              {
+                ins->fzt.program[i].val = temp;
+              }
+              break;
+            }
+            case DivInstrumentFZT::TE_EFFECT_ARPEGGIO:
+            {
+              bool disabled = (ins->fzt.program[i].val == 0xf0 || ins->fzt.program[i].val == 0xf1);
+              ImGui::BeginDisabled(disabled);
+              int temp = ins->fzt.program[i].val;
+              char buf[6];
+
+              int note = ins->fzt.base_note + 60 + ins->fzt.program[i].val;
+              if(note > MAX_NOTE + 60) note = MAX_NOTE + 60;
+              int max_note_slider = MAX_NOTE - ins->fzt.base_note;
+              
+              if(!disabled)
+              {
+                if(ins->fzt.program[i].val > max_note_slider) ins->fzt.program[i].val = max_note_slider;
+                snprintf(buf, 6, "%s", noteNames[note]);
+              }
+              if(disabled)
+              {
+                snprintf(buf, 6, "");
+              }
+              
+              if(CWSliderInt(_L("Semitones##sgiFZT"),&temp,0,max_note_slider, buf))
+              {
+                ins->fzt.program[i].val = temp;
+              }
+              ImGui::EndDisabled();
+
+              bool ext1 = ins->fzt.program[i].val == 0xf0;
+
+              if(ImGui::Checkbox(_L("First external arpeggio note##sgiFZT"), &ext1))
+              {
+                if(ext1)
+                {
+                  ins->fzt.program[i].val = 0xf0;
+                }
+                else
+                {
+                  ins->fzt.program[i].val = 0;
+                }
+              }
+
+              bool ext2 = ins->fzt.program[i].val == 0xf1;
+
+              if(ImGui::Checkbox(_L("Second external arpeggio note##sgiFZT1"), &ext2))
+              {
+                if(ext2)
+                {
+                  ins->fzt.program[i].val = 0xf1;
+                }
+                else
+                {
+                  ins->fzt.program[i].val = 0;
+                }
+              }
+              break;
+            }
+            case DivInstrumentFZT::TE_EFFECT_VIBRATO:
+            case DivInstrumentFZT::TE_EFFECT_PWM:
+            {
+              int speed = ins->fzt.program[i].val >> 4;
+              if(CWSliderInt(_L("Speed##sgiFZT2"),&speed,0,0xf,"%01X"))
+              {
+                ins->fzt.program[i].val &= 0x0f;
+                ins->fzt.program[i].val |= (speed << 4);
+              }
+              int depth = ins->fzt.program[i].val & 15;
+              if(CWSliderInt(_L("Depth##sgiFZT11"),&depth,0,0xf,"%01X"))
+              {
+                ins->fzt.program[i].val &= 0xf0;
+                ins->fzt.program[i].val |= (depth);
+              }
+              break;
+            }
+            case DivInstrumentFZT::TE_EFFECT_EXT_TOGGLE_FILTER:
+            case DivInstrumentFZT::TE_EFFECT_EXT_PORTA_UP:
+            case DivInstrumentFZT::TE_EFFECT_EXT_PORTA_DN:
+            case DivInstrumentFZT::TE_EFFECT_EXT_RETRIGGER:
+            case DivInstrumentFZT::TE_EFFECT_EXT_FINE_VOLUME_DOWN:
+            case DivInstrumentFZT::TE_EFFECT_EXT_FINE_VOLUME_UP:
+            case DivInstrumentFZT::TE_EFFECT_EXT_NOTE_CUT:
+            case DivInstrumentFZT::TE_EFFECT_EXT_PHASE_RESET:
+            {
+              if(ins->fzt.program[i].val > 0xf) ins->fzt.program[i].val = 0xf;
+              int temp = ins->fzt.program[i].val;
+              if(CWSliderInt(_L("Value##sgiFZT"),&temp,0,0xf,"%01X"))
+              {
+                ins->fzt.program[i].val = temp;
+              }
+              break;
+            }
+            case DivInstrumentFZT::TE_EFFECT_EXT_FILTER_MODE:
+            {
+              if(ins->fzt.program[i].val > 7) ins->fzt.program[i].val = 7;
+              int temp = ins->fzt.program[i].val;
+              char buf[60];
+              snprintf(buf, 60, "%s", fztFilterModes[temp]);
+              if(CWSliderInt(_L("Value##sgiFZT"),&temp,0,7,buf))
+              {
+                ins->fzt.program[i].val = temp;
+              }
+              break;
+            }
+            case DivInstrumentFZT::TE_EFFECT_VOLUME_FADE: 
+            {
+              int speed = ins->fzt.program[i].val >> 4;
+              if(CWSliderInt(_L("Up##sgiFZT2"),&speed,0,0xf,"%01X"))
+              {
+                ins->fzt.program[i].val &= 0x0f;
+                ins->fzt.program[i].val |= (speed << 4);
+              }
+              int depth = ins->fzt.program[i].val & 15;
+              if(CWSliderInt(_L("Down##sgiFZT11"),&depth,0,0xf,"%01X"))
+              {
+                ins->fzt.program[i].val &= 0xf0;
+                ins->fzt.program[i].val |= (depth);
+              }
+              break;
+            }
+            case DivInstrumentFZT::TE_EFFECT_SET_RING_MOD_SRC:
+            case DivInstrumentFZT::TE_EFFECT_SET_HARD_SYNC_SRC:
+            {
+              if(ins->fzt.program[i].val > FZT_NUM_CHANNELS-1 && ins->fzt.program[i].val != 0xff) ins->fzt.program[i].val = FZT_NUM_CHANNELS-1;
+              bool disabled = (ins->fzt.program[i].val == 0xff);
+
+              ImGui::BeginDisabled(disabled);
+              int temp = ins->fzt.program[i].val;
+              char buf[6];
+              
+              if(!disabled)
+              {
+                snprintf(buf, 6, "%01X", ins->fzt.program[i].val);
+              }
+              if(disabled)
+              {
+                snprintf(buf, 6, "");
+              }
+              
+              if(CWSliderInt(_L("Source channel##sgiFZT"),&temp,0,FZT_NUM_CHANNELS-1, buf))
+              {
+                ins->fzt.program[i].val = temp;
+              }
+              ImGui::EndDisabled();
+
+              bool ext1 = ins->fzt.program[i].val == 0xff;
+
+              if(ImGui::Checkbox(_L("Source is self##sgiFZT"), &ext1))
+              {
+                if(ext1)
+                {
+                  ins->fzt.program[i].val = 0xff;
+                }
+                else
+                {
+                  ins->fzt.program[i].val = 0;
+                }
+              }
+              break;
+            }
+            case DivInstrumentFZT::TE_EFFECT_SET_WAVEFORM: 
+            {
+              bool fztNoise = ins->fzt.program[i].val & SE_WAVEFORM_NOISE;
+              pushToggleColors(fztNoise);
+              if (ImGui::Button(_L("noise##sgiFZT"))) 
+              { PARAMETER
+                ins->fzt.program[i].val ^= SE_WAVEFORM_NOISE;
+              }
+              popToggleColors();
+              ImGui::SameLine();
+              bool fztPulse = ins->fzt.program[i].val & SE_WAVEFORM_PULSE;
+              pushToggleColors(fztPulse);
+              if (ImGui::Button(_L("pulse##sgiFZT"))) 
+              { PARAMETER
+                ins->fzt.program[i].val ^= SE_WAVEFORM_PULSE;
+              }
+              popToggleColors();
+              ImGui::SameLine();
+              bool fztTri = ins->fzt.program[i].val & SE_WAVEFORM_TRIANGLE;
+              pushToggleColors(fztTri);
+              if (ImGui::Button(_L("triangle##sgiFZT"))) 
+              { PARAMETER
+                ins->fzt.program[i].val ^= SE_WAVEFORM_TRIANGLE;
+              }
+              popToggleColors();
+              ImGui::SameLine();
+              bool fztSaw = ins->fzt.program[i].val & SE_WAVEFORM_SAW;
+              pushToggleColors(fztSaw);
+              if (ImGui::Button(_L("saw##sgiFZT"))) 
+              { PARAMETER
+                ins->fzt.program[i].val ^= SE_WAVEFORM_SAW;
+              }
+              popToggleColors();
+              ImGui::SameLine();
+              bool fztMetal = ins->fzt.program[i].val & SE_WAVEFORM_NOISE_METAL;
+              pushToggleColors(fztMetal);
+              if (ImGui::Button(_L("metal##sgiFZT"))) 
+              { PARAMETER
+                ins->fzt.program[i].val ^= SE_WAVEFORM_NOISE_METAL;
+              }
+              popToggleColors();
+              ImGui::SameLine();
+              bool fztSine = ins->fzt.program[i].val & SE_WAVEFORM_SINE;
+              pushToggleColors(fztSine);
+              if (ImGui::Button(_L("sine##sgiFZT"))) 
+              { PARAMETER
+                ins->fzt.program[i].val ^= SE_WAVEFORM_SINE;
+              }
+              popToggleColors();
+              break;
+            }
+            case DivInstrumentFZT::TE_PROGRAM_JUMP: 
+            {
+              int temp = ins->fzt.program[i].val;
+              if(CWSliderInt(_L("Step to jump to##sgiFZT"),&temp,0,0xf,"%02X"))
+              {
+                ins->fzt.program[i].val = temp;
+              }
               break;
             }
             case DivInstrumentFZT::TE_PROGRAM_NOP: 
             {
-              ImGui::Text("nop");
+              ImGui::Text(_L("No operation##sgiFZT"));
               break;
             }
             case DivInstrumentFZT::TE_PROGRAM_END: 
             {
-              ImGui::Text("end");
+              ImGui::Text(_L("Program end##sgiFZT"));
               break;
             }
             default:
