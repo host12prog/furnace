@@ -40,6 +40,7 @@ typedef struct {
     unsigned char channel_flags;
 
     unsigned short note, target_note, last_note, fixed_note;
+    signed short finetune_note;
     signed short arpeggio_note;
 
     unsigned char volume;

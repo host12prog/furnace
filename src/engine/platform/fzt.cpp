@@ -580,6 +580,11 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
         break;
     }
 
+    case 0xE500: {
+        te_channel->finetune_note = ((int16_t)(opcode & 0xff) - 0x80) * 2;
+        break;
+    }
+
     case 0x2900: {
         sound_engine_enable_gate(sound_engine, se_channel, 0);
 
@@ -627,14 +632,14 @@ void DivPlatformFZT::tracker_engine_execute_program_tick(int chann, int advance)
 do_it_again:;
     
     DivInstrument* ins=parent->getIns(chan[chann].ins,DIV_INS_FZT);
-    uint16_t inst = (ins->fzt.program[tick].cmd) | (ins->fzt.program[tick].val) | ((ins->fzt.program[tick].unite ? 1 : 0) << 15);
+    uint32_t inst = (ins->fzt.program[tick].cmd) | (ins->fzt.program[tick].val) | ((ins->fzt.program[tick].unite ? 1 : 0) << 16);
 
     if(ins->fzt.program[tick].cmd == DivInstrumentFZT::TE_PROGRAM_NOP || ins->fzt.program[tick].cmd == DivInstrumentFZT::TE_PROGRAM_END)
     {
       inst = ins->fzt.program[tick].cmd;
     }
 
-    if((inst & 0x7fff) == 0x7fff) 
+    if((inst & 0xffff) == 0x7fff) 
     {
       te_channel->channel_flags &= ~(TEC_PROGRAM_RUNNING);
       return;
@@ -642,9 +647,9 @@ do_it_again:;
 
     uint8_t dont_reloop = 0;
 
-    if((inst & 0x7fff) != 0x7ffe) 
+    if((inst & 0xffff) != 0x7ffe) 
     {
-        switch(inst & 0x7f00) 
+        switch(inst & 0xff00)
         {
         case 0x7f00: 
         {
@@ -675,10 +680,22 @@ do_it_again:;
 
               uint8_t l = 0;
 
-              while((((ins->fzt.program[tick].cmd << 8) | (ins->fzt.program[tick].val) | (ins->fzt.program[tick].unite << 15)) & 0x7f00) != 0x7d00 && tick > 0) 
+              uint32_t next_inst = (ins->fzt.program[tick].cmd) | (ins->fzt.program[tick].val) | ((ins->fzt.program[tick].unite ? 1 : 0) << 16);
+              if(ins->fzt.program[tick].cmd == DivInstrumentFZT::TE_PROGRAM_NOP || ins->fzt.program[tick].cmd == DivInstrumentFZT::TE_PROGRAM_END)
+              {
+                next_inst = ins->fzt.program[tick].cmd;
+              }
+
+              while((next_inst & 0xff00) != 0x7d00 && tick > 0) 
               {
                 --tick;
-                if(!(((ins->fzt.program[tick].cmd << 8) | (ins->fzt.program[tick].val) | (ins->fzt.program[tick].unite << 15)) & 0x8000)) ++l;
+                next_inst = (ins->fzt.program[tick].cmd) | (ins->fzt.program[tick].val) | ((ins->fzt.program[tick].unite ? 1 : 0) << 16);
+                if(ins->fzt.program[tick].cmd == DivInstrumentFZT::TE_PROGRAM_NOP || ins->fzt.program[tick].cmd == DivInstrumentFZT::TE_PROGRAM_END)
+                {
+                  next_inst = ins->fzt.program[tick].cmd;
+                }
+                
+                if(!(next_inst & 0x10000)) ++l;
               }
 
               --tick;
@@ -690,13 +707,13 @@ do_it_again:;
         }
 
         default: {
-            do_command(inst & 0x7fff, chann, te_channel->program_counter, true);
+            do_command(inst & 0xffff, chann, te_channel->program_counter, true);
             break;
         }
         }
     }
 
-    if((inst & 0x7fff) == 0x7ffe || (inst & 0x7f00) != 0x7f00) {
+    if((inst & 0xffff) == 0x7ffe || (inst & 0xff00) != 0x7f00) {
         ++tick;
         if(tick >= FZT_INST_PROG_LEN) {
             tick = 0;
@@ -705,9 +722,9 @@ do_it_again:;
 
     // skip to next on msb
 
-    if(((inst & 0x8000) || ((inst & 0x7f00) == 0x7d00) ||
-        ((inst & 0x7f00) == 0x7f00)) &&
-       (inst & 0x7fff) != 0x7ffe && !dont_reloop) {
+    if(((inst & 0x10000) || ((inst & 0xff00) == 0x7d00) ||
+        ((inst & 0xff00) == 0x7f00)) &&
+       (inst & 0xffff) != 0x7ffe && !dont_reloop) {
         goto do_it_again;
     }
 
@@ -793,7 +810,7 @@ void DivPlatformFZT::tracker_engine_advance_channel(int chan)
         sound_engine->channel[chan].pw = fztChan[chan].pw;
     }
 
-    int32_t chn_note = (int16_t)(te_channel->fixed_note != 0xffff ? te_channel->fixed_note : te_channel->note) + vib + ((int16_t)te_channel->arpeggio_note << 8);
+    int32_t chn_note = (int16_t)(te_channel->fixed_note != 0xffff ? te_channel->fixed_note : te_channel->note) + vib + ((int16_t)te_channel->arpeggio_note << 8) + te_channel->finetune_note;
 
     if(chn_note < 0) {
         chn_note = 0;

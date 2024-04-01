@@ -73,8 +73,8 @@ const unsigned short fzt_commands_map[] =
 
   DivInstrumentFZT::TE_EFFECT_PORTA_UP_SEMITONE, // Txx
   DivInstrumentFZT::TE_EFFECT_PORTA_DOWN_SEMITONE, // Uxx
+  DivInstrumentFZT::TE_EFFECT_PITCH, //Vxx
   /*
-  TE_EFFECT_ = 0x1f00, //Vxx
   TE_EFFECT_ = 0x2000, //Wxx
   */
   DivInstrumentFZT::TE_EFFECT_ARPEGGIO_ABS, // Yxx
@@ -512,7 +512,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
           ImGui::Text("%01X",i);
           ImGui::TableNextColumn();
           ImGui::PushID(i);
-          if (ins->fzt.program[i].cmd>=DivInstrumentFZT::TE_PROGRAM_END)
+          if (ins->fzt.program[i].cmd>=DivInstrumentFZT::TE_PROGRAM_END && ins->fzt.program[i].cmd != DivInstrumentFZT::TE_EFFECT_PITCH)
           {
             ins->fzt.program[i].cmd=DivInstrumentFZT::TE_PROGRAM_END;
           }
@@ -526,12 +526,12 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
               {
                 if(ins->fzt.program[i].cmd == DivInstrumentFZT::TE_PROGRAM_NOP)
                 {
-                  cmd = 40;
+                  cmd = 41;
                   break;
                 }
                 if(ins->fzt.program[i].cmd == DivInstrumentFZT::TE_PROGRAM_END)
                 {
-                  cmd = 41;
+                  cmd = 42;
                   break;
                 }
               }
@@ -539,7 +539,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             }
             cmd++;
           }
-          if (ImGui::BeginCombo("##HWSeqCmd",_L(fztCmdTypes[cmd])))
+          if (ImGui::BeginCombo("##HWSeqCmd",_L(fztCmdTypes[cmd]),ImGuiComboFlags_HeightLarge))
           {
             int j = 0;
 
@@ -552,7 +552,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
                   ins->fzt.program[i].cmd=fzt_commands_map[j];
                   ins->fzt.program[i].val=0;
 
-                  if(ins->fzt.program[i].cmd >= 40)
+                  if(ins->fzt.program[i].cmd >= 41)
                   {
                     ins->fzt.program[i].unite=false;
                   }
@@ -587,6 +587,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             case DivInstrumentFZT::TE_EFFECT_SET_RELEASE:
             case DivInstrumentFZT::TE_EFFECT_PORTA_UP_SEMITONE:
             case DivInstrumentFZT::TE_EFFECT_PORTA_DOWN_SEMITONE:
+            case DivInstrumentFZT::TE_EFFECT_PITCH:
             case DivInstrumentFZT::TE_EFFECT_ARPEGGIO_ABS:
             case DivInstrumentFZT::TE_EFFECT_TRIGGER_RELEASE:
             {
@@ -806,6 +807,19 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
               popToggleColors();
               break;
             }
+            case DivInstrumentFZT::TE_PROGRAM_LOOP_BEGIN: 
+            {
+              break;
+            }
+            case DivInstrumentFZT::TE_PROGRAM_LOOP_END: 
+            {
+              int temp = ins->fzt.program[i].val;
+              if(CWSliderInt(_L("Loops##sgiFZT"),&temp,0,0xff,"%02X"))
+              {
+                ins->fzt.program[i].val = temp;
+              }
+              break;
+            }
             case DivInstrumentFZT::TE_PROGRAM_JUMP: 
             {
               int temp = ins->fzt.program[i].val;
@@ -828,7 +842,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             default:
               break;
           }
-          if(ins->fzt.program[i].cmd < 0x7f00)
+          if(ins->fzt.program[i].cmd < 0x7d00 || ins->fzt.program[i].cmd == 0xE500)
           {
               ImGui::Checkbox(_L("Execute next command at the same tick##sgiFZT"), &ins->fzt.program[i].unite);
           }

@@ -1093,8 +1093,8 @@ struct DivInstrumentFZT {
 
     TE_EFFECT_PORTA_UP_SEMITONE = 0x2600, // Txx
     TE_EFFECT_PORTA_DOWN_SEMITONE = 0x2700, // Uxx
+    TE_EFFECT_PITCH = 0xE500, //Vxx
     /*
-    TE_EFFECT_ = 0x1f00, //Vxx
     TE_EFFECT_ = 0x2000, //Wxx
     */
     TE_EFFECT_ARPEGGIO_ABS = 0x2800, // Yxx
