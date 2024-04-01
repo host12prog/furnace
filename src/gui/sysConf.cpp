@@ -2476,6 +2476,9 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       }
       break;
     }
+    case DIV_SYSTEM_FZT:
+      supportsCustomRate=true;
+      break;
     default: {
       bool sysPal=flags.getInt("clockSel",0);
 

@@ -26,7 +26,7 @@
 #define my_min(a, b) (((a) < (b)) ? (a) : (b))
 #define my_max(a, b) (((a) > (b)) ? (a) : (b))
 
-#define CHIP_FREQBASE 4410000
+#define CHIP_FREQBASE 441000
 
 void DivPlatformFZT::acquire(short** buf, size_t len) 
 {
@@ -1109,7 +1109,7 @@ void DivPlatformFZT::setFlags(const DivConfig& flags) {
       break;
   }*/
   CHECK_CUSTOM_CLOCK;
-  rate=chipClock / 100; //TODO: custom rate
+  rate=chipClock / 10;
   for (int i=0; i<FZT_NUM_CHANNELS; i++) {
     oscBuf[i]->rate=rate;
   }
