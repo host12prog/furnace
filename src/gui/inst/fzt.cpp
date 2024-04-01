@@ -615,7 +615,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
               }
               if(disabled)
               {
-                snprintf(buf, 6, "");
+                memset(buf,0,6);
               }
               
               if(CWSliderInt(_L("Semitones##sgiFZT"),&temp,0,max_note_slider, buf))
@@ -731,7 +731,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
               }
               if(disabled)
               {
-                snprintf(buf, 6, "");
+                memset(buf,0,6);
               }
               
               if(CWSliderInt(_L("Source channel##sgiFZT"),&temp,0,FZT_NUM_CHANNELS-1, buf))
