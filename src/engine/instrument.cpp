@@ -882,6 +882,57 @@ void DivInstrument::writeFeatureFZ(SafeWriter* w)
 {
   FEATURE_BEGIN("FZ");
 
+  w->writeC(fzt.waveform);
+  w->writeS(fzt.flags);
+  w->writeS(fzt.sound_engine_flags);
+  w->writeC(fzt.slide_speed);
+
+  w->writeC(fzt.adsr.a);
+  w->writeC(fzt.adsr.d);
+  w->writeC(fzt.adsr.s);
+  w->writeC(fzt.adsr.r);
+  w->writeC(fzt.adsr.volume);
+
+  w->writeC(fzt.ring_mod);
+  w->writeC(fzt.hard_sync);
+  w->writeC(fzt.pw);
+
+  unsigned char prog_len = 0;
+
+  for(int i = 0; i < FZT_INST_PROG_LEN; i++)
+  {
+    if(fzt.program[i].cmd != DivInstrumentFZT::TE_PROGRAM_NOP)
+    {
+      prog_len = i + 1;
+    }
+  }
+
+  w->writeC(prog_len);
+
+  for(int i = 0; i < prog_len - 1; i++)
+  {
+    w->writeS(fzt.program[i].cmd);
+    w->writeC(fzt.program[i].val);
+    w->writeC((unsigned char)fzt.program[i].unite);
+  }
+
+  w->writeC(fzt.program_period);
+
+  w->writeC(fzt.vibrato_speed);
+  w->writeC(fzt.vibrato_depth);
+  w->writeC(fzt.vibrato_delay);
+
+  w->writeC(fzt.pwm_speed);
+  w->writeC(fzt.pwm_depth);
+  w->writeC(fzt.pwm_delay);
+
+  w->writeC(fzt.filter_cutoff);
+  w->writeC(fzt.filter_resonance);
+  w->writeC(fzt.filter_type);
+
+  w->writeC(fzt.base_note);
+  w->writeC(fzt.finetune);
+
   FEATURE_END;
 }
 
@@ -2280,6 +2331,54 @@ void DivInstrument::readFeaturePO(SafeReader& reader, short version) {
 
 void DivInstrument::readFeatureFZ(SafeReader& reader, short version) {
   READ_FEAT_BEGIN;
+
+  fzt.waveform = reader.readC();
+  fzt.flags = reader.readS();
+  fzt.sound_engine_flags = reader.readS();
+  fzt.slide_speed = reader.readC();
+
+  fzt.adsr.a = reader.readC();
+  fzt.adsr.d = reader.readC();
+  fzt.adsr.s = reader.readC();
+  fzt.adsr.r = reader.readC();
+  fzt.adsr.volume = reader.readC();
+
+  fzt.ring_mod = reader.readC();
+  fzt.hard_sync = reader.readC();
+  fzt.pw = reader.readC();
+
+  unsigned char prog_len = reader.readC();
+
+  for(int i = 0; i < FZT_INST_PROG_LEN; i++)
+  {
+    fzt.program[i].cmd = DivInstrumentFZT::TE_PROGRAM_NOP;
+    fzt.program[i].val = 0;
+    fzt.program[i].unite = false;
+  }
+
+  for(int i = 0; i < prog_len - 1; i++)
+  {
+    fzt.program[i].cmd = reader.readS();
+    fzt.program[i].val = reader.readC();
+    fzt.program[i].unite = (bool)reader.readC();
+  }
+
+  fzt.program_period = reader.readC();
+
+  fzt.vibrato_speed = reader.readC();
+  fzt.vibrato_depth = reader.readC();
+  fzt.vibrato_delay = reader.readC();
+
+  fzt.pwm_speed = reader.readC();
+  fzt.pwm_depth = reader.readC();
+  fzt.pwm_delay = reader.readC();
+
+  fzt.filter_cutoff = reader.readC();
+  fzt.filter_resonance = reader.readC();
+  fzt.filter_type = reader.readC();
+
+  fzt.base_note = reader.readC();
+  fzt.finetune = (signed char)reader.readC();
   
   READ_FEAT_END;
 }
@@ -2399,6 +2498,8 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
       readFeatureLW(reader,version);
     } else if (memcmp(featCode,"PO",2)==0) { // POKEY
       readFeaturePO(reader,version);
+    } else if (memcmp(featCode,"FZ",2)==0) { // FZT sound source
+      readFeatureFZ(reader,version);
     } else {
       if (song==NULL && (memcmp(featCode,"SL",2)==0 || (memcmp(featCode,"WL",2)==0))) {
         // nothing
