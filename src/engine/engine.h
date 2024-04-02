@@ -52,10 +52,10 @@ class DivWorkPool;
 #define EXTERN_BUSY_BEGIN_SOFT e->softLocked=true; e->isBusy.lock();
 #define EXTERN_BUSY_END e->isBusy.unlock(); e->softLocked=false;
 
-#define DIV_UNSTABLE
+//#define DIV_UNSTABLE
 
-#define DIV_VERSION "dev196"
-#define DIV_ENGINE_VERSION 196
+#define DIV_VERSION "0.6.2"
+#define DIV_ENGINE_VERSION 197
 // for imports
 #define DIV_VERSION_MOD 0xff01
 #define DIV_VERSION_FC 0xff02
@@ -444,6 +444,8 @@ class DivEngine {
   int cycles;
   double clockDrift;
   int midiClockCycles;
+  int numTimesPlayed;
+  int crossedPatterns;
   double midiClockDrift;
   int midiTimeCycles;
   double midiTimeDrift;
@@ -753,6 +755,9 @@ class DivEngine {
 
     // find song loop position
     void walkSong(int& loopOrder, int& loopRow, int& loopEnd);
+
+    // set number of times the song has played
+    void setNumTimesPlayed(int count);
 
     // play (returns whether successful)
     bool play();
@@ -1350,6 +1355,8 @@ class DivEngine {
       cycles(0),
       clockDrift(0),
       midiClockCycles(0),
+      numTimesPlayed(0),
+      crossedPatterns(0),
       midiClockDrift(0),
       midiTimeCycles(0),
       midiTimeDrift(0),

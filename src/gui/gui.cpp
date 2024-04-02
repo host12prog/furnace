@@ -640,7 +640,7 @@ void FurnaceGUI::autoDetectSystemIter(std::vector<FurnaceGUISysDef>& category, b
           it->second++;
         }
         DivConfig dc;
-        dc.loadFromMemory(k.flags);
+        dc.loadFromMemory(k.flags.c_str());
         defConfMap[k.sys]=dc;
       }
       if (defCountMap.size()==sysCountMap.size()) {
@@ -1103,6 +1103,12 @@ void FurnaceGUI::play(int row) {
   if (e->getStreamPlayer()) {
     e->killStream();
   }
+  if (shaderEditor) {
+    numTimesPlayed++;
+    e->setNumTimesPlayed(numTimesPlayed);
+  } else {
+    e->setNumTimesPlayed(-1);
+  }
   memset(chanOscVol,0,DIV_MAX_CHANS*sizeof(float));
   for (int i=0; i<DIV_MAX_CHANS; i++) {
     chanOscChan[i].pitch=0.0f;
@@ -1133,6 +1139,50 @@ void FurnaceGUI::setOrder(unsigned char order, bool forced) {
 }
 
 void FurnaceGUI::stop() {
+  if (shaderEditor) {
+    if (numTimesPlayed>=25) {
+      switch (numTimesPlayed) {
+        case 25:
+          showError("*bleep*\n\n\nAccess Denied");
+          break;
+        case 26:
+          showError("*bleep*\n\n\nAccess Is Denied");
+          break;
+        case 27:
+          showError("*bleep*\n\n\nUnauthorized Access");
+          break;
+        case 28:
+          showError("*bleep*\n\n\nIllegal Access");
+          break;
+        case 29:
+          showError("Please, move away from the stop button");
+          break;
+        case 30:
+          showError("You will not stop the song");
+          break;
+        case 31:
+          showError("Move on immediately");
+          break;
+        case 32:
+          showError("You will not stop the song!");
+          break;
+        case 33:
+          showError("No, no and no!");
+          break;
+        case 34:
+          showError("Will we do this all day?");
+          break;
+        case 35:
+          showError("");
+          break;
+        default:
+          showError("YOU HAVE NO CHOICE.");
+          break;
+      }
+      numTimesPlayed++;
+      return;
+    }
+  }
   bool wasPlaying=e->isPlaying();
   e->walkSong(loopOrder,loopRow,loopEnd);
   e->stop();
@@ -1179,6 +1229,11 @@ void FurnaceGUI::stopPreviewNote(SDL_Scancode scancode, bool autoNote) {
 void FurnaceGUI::noteInput(int num, int key, int vol) {
   DivPattern* pat=e->curPat[cursor.xCoarse].getPattern(e->curOrders->ord[cursor.xCoarse][curOrder],true);
   bool removeIns=false;
+
+  if (shaderEditor && num==84) {
+    showError("This note is reserved for the Master. You may not use it.");
+    return;
+  }
 
   prepareUndo(GUI_UNDO_PATTERN_EDIT);
 
@@ -1355,6 +1410,7 @@ void FurnaceGUI::orderInput(int num) {
 void FurnaceGUI::keyDown(SDL_Event& ev) {
   if (ImGuiFileDialog::Instance()->IsOpened()) return;
   if (aboutOpen) return;
+  if (cvOpen) return;
 
   int mapped=ev.key.keysym.sym;
   if (ev.key.keysym.mod&KMOD_CTRL) {
@@ -3103,6 +3159,7 @@ int FurnaceGUI::processEvent(SDL_Event* ev) {
     e->saveConf();
   }
 #endif
+  if (cvOpen) return 1;
   if (ev->type==SDL_KEYDOWN) {
     if (!ev->key.repeat && latchTarget==0 && !wantCaptureKeyboard && !sampleMapWaitingInput && (ev->key.keysym.mod&(~(VALID_MODS)))==0) {
       if (settings.notePreviewBehavior==0) return 1;
@@ -3480,6 +3537,7 @@ bool FurnaceGUI::loop() {
   DECLARE_METRIC(regView)
   DECLARE_METRIC(log)
   DECLARE_METRIC(effectList)
+  DECLARE_METRIC(userPresets)
   DECLARE_METRIC(popup)
 
 #ifdef IS_MOBILE
@@ -4037,6 +4095,7 @@ bool FurnaceGUI::loop() {
         IMPORT_CLOSE(xyOscOpen);
         IMPORT_CLOSE(memoryOpen);
         IMPORT_CLOSE(csPlayerOpen);
+        IMPORT_CLOSE(userPresetsOpen);
       } else if (pendingLayoutImportStep==1) {
         // let the UI settle
       } else if (pendingLayoutImportStep==2) {
@@ -4342,6 +4401,11 @@ bool FurnaceGUI::loop() {
         if (ImGui::MenuItem(_L("restore backup##sggu"),BIND_FOR(GUI_ACTION_OPEN_BACKUP))) {
           doAction(GUI_ACTION_OPEN_BACKUP);
         }
+        if (numTimesPlayed>3) {
+          if (ImGui::MenuItem("Enable Serious Mode")) {
+            cvOpen=true;
+          }
+        }
         ImGui::Separator();
         if (ImGui::MenuItem(_L("exit...##sggu"),BIND_FOR(GUI_ACTION_QUIT))) {
           requestQuit();
@@ -4387,6 +4451,11 @@ bool FurnaceGUI::loop() {
           toggleMobileUI(!mobileUI);
         }
 #endif
+        /*
+        if (ImGui::MenuItem("manage presets...",BIND_FOR(GUI_ACTION_WINDOW_USER_PRESETS))) {
+          userPresetsOpen=true;
+        }
+        */
         if (ImGui::MenuItem(_L("settings...##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SETTINGS))) {
           syncSettings();
           settingsOpen=true;
@@ -4668,6 +4737,7 @@ bool FurnaceGUI::loop() {
       MEASURE(grooves,drawGrooves());
       MEASURE(regView,drawRegView());
       MEASURE(memory,drawMemory());
+      MEASURE(userPresets,drawUserPresets());
     } else {
       globalWinFlags=0;
       ImGui::DockSpaceOverViewport(NULL,lockLayout?(ImGuiDockNodeFlags_NoWindowMenuButton|ImGuiDockNodeFlags_NoMove|ImGuiDockNodeFlags_NoResize|ImGuiDockNodeFlags_NoCloseButton|ImGuiDockNodeFlags_NoDocking|ImGuiDockNodeFlags_NoDockingSplitMe|ImGuiDockNodeFlags_NoDockingSplitOther):0);
@@ -4710,32 +4780,7 @@ bool FurnaceGUI::loop() {
       MEASURE(regView,drawRegView());
       MEASURE(log,drawLog());
       MEASURE(effectList,drawEffectList());
-    }
-
-    // NEW CODE - REMOVE WHEN DONE
-    if (shaderEditor) {
-      if (ImGui::Begin("Shader Editor 2024",&shaderEditor,ImGuiWindowFlags_NoScrollWithMouse|ImGuiWindowFlags_NoScrollbar)) {
-        ImGui::PushFont(patFont);
-        ImGui::InputTextMultiline("##SHFragment",&newOscFragment,ImVec2(ImGui::GetContentRegionAvail().x,ImGui::GetContentRegionAvail().y-ImGui::GetFrameHeightWithSpacing()),ImGuiInputTextFlags_UndoRedo);
-        ImGui::PopFont();
-        if (ImGui::Button("Save")) {
-          FILE* f=ps_fopen("/storage/emulated/0/osc.fsh","w");
-          if (f==NULL) {
-            showError("Something happened");
-          } else {
-            fwrite(newOscFragment.c_str(),1,newOscFragment.size(),f);
-            fclose(f);
-            showError("Saved!");
-          }
-        }
-        ImGui::SameLine();
-        if (ImGui::Button("Apply")) {
-          if (!rend->regenOscShader(newOscFragment.c_str())) {
-            showError("Of course you screwed it up, again!");
-          }
-        }
-      }
-      ImGui::End();
+      MEASURE(userPresets,drawUserPresets());
     }
 
     // release selection if mouse released
@@ -4997,6 +5042,9 @@ bool FurnaceGUI::loop() {
                     break;
                   case GUI_WARN_OPEN_BACKUP:
                     openFileDialog(GUI_FILE_OPEN_BACKUP);
+                    break;
+                  case GUI_WARN_CV:
+                    cvOpen=true;
                     break;
                   default:
                     break;
@@ -5753,6 +5801,30 @@ bool FurnaceGUI::loop() {
           if (ImGui::Button(_L("No##sggu10"))) {
             ImGui::CloseCurrentPopup();
             openFileDialog(GUI_FILE_OPEN);
+          }
+          ImGui::SameLine();
+          if (ImGui::Button(_L("Cancel##sggu6")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+            ImGui::CloseCurrentPopup();
+          }
+          break;
+        case GUI_WARN_CV:
+          if (ImGui::Button("Yes")) {
+            ImGui::CloseCurrentPopup();
+            if (curFileName=="" || curFileName.find(backupPath)==0 || e->song.version>=0xff00) {
+              openFileDialog(GUI_FILE_SAVE);
+              postWarnAction=GUI_WARN_CV;
+            } else {
+              if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
+                showError(fmt::sprintf("Error while saving file! (%s)",lastError));
+              } else {
+                cvOpen=true;
+              }
+            }
+          }
+          ImGui::SameLine();
+          if (ImGui::Button("No")) {
+            ImGui::CloseCurrentPopup();
+            cvOpen=true;
           }
           ImGui::SameLine();
           if (ImGui::Button(_L("Cancel##sggu6")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
@@ -6769,6 +6841,7 @@ bool FurnaceGUI::init() {
   subSongsOpen=e->getConfBool("subSongsOpen",true);
   findOpen=e->getConfBool("findOpen",false);
   spoilerOpen=e->getConfBool("spoilerOpen",false);
+  userPresetsOpen=e->getConfBool("userPresetsOpen",false);
 
   insListDir=e->getConfBool("insListDir",false);
   waveListDir=e->getConfBool("waveListDir",false);
@@ -6861,6 +6934,8 @@ bool FurnaceGUI::init() {
   xyOscDecayTime=e->getConfFloat("xyOscDecayTime",10.0f);
   xyOscIntensity=e->getConfFloat("xyOscIntensity",2.0f);
   xyOscThickness=e->getConfFloat("xyOscThickness",2.0f);
+
+  cvHiScore=e->getConfInt("cvHiScore",25000);
 
   syncSettings();
 
@@ -7169,6 +7244,8 @@ bool FurnaceGUI::init() {
   locale.setLanguage((DivLang)settings.language);
   initSystemPresets();
 
+  loadUserPresets(true);
+
   // NEW CODE - REMOVE WHEN DONE
   newOscFragment=rend->getStupidFragment();
 
@@ -7202,6 +7279,20 @@ bool FurnaceGUI::init() {
   toggleMobileUI(mobileUI,true);
 
   firstFrame=true;
+
+  time_t timet=time(NULL);
+  struct tm* curtm=localtime(&timet);
+  if (curtm!=NULL) {
+    if (curtm->tm_mon==3 && curtm->tm_mday==1) {
+      if (cvHiScore<=25000) {
+        shaderEditor=true;
+      }
+    }
+  }
+
+  if (!shaderEditor) {
+    e->setNumTimesPlayed(-1);
+  }
 
   userEvents=SDL_RegisterEvents(1);
 
@@ -7331,6 +7422,7 @@ void FurnaceGUI::commitState() {
   e->setConf("subSongsOpen",subSongsOpen);
   e->setConf("findOpen",findOpen);
   e->setConf("spoilerOpen",spoilerOpen);
+  e->setConf("userPresetsOpen",userPresetsOpen);
 
   // commit dir state
   e->setConf("insListDir",insListDir);
@@ -7429,10 +7521,15 @@ void FurnaceGUI::commitState() {
       e->setConf(key,recentFile[i]);
     }
   }
+
+  e->setConf("cvHiScore",cvHiScore);
 }
 
 bool FurnaceGUI::finish(bool saveConfig) {
   commitState();
+  if (userPresetsOpen) {
+    saveUserPresets(true);
+  }
   if (saveConfig) {
     logI("saving config.");
     e->saveConf();
@@ -7485,6 +7582,7 @@ FurnaceGUI::FurnaceGUI():
   sdlWin(NULL),
   vibrator(NULL),
   vibratorAvailable(false),
+  cv(NULL),
   sampleTex(NULL),
   sampleTexW(0),
   sampleTexH(0),
@@ -7547,6 +7645,7 @@ FurnaceGUI::FurnaceGUI():
   wheelCalmDown(0),
   shallDetectScale(0),
   cpuCores(0),
+  numTimesPlayed(0),
   secondTimer(0.0f),
   userEvents(0xffffffff),
   mobileMenuPos(0.0f),
@@ -7685,6 +7784,7 @@ FurnaceGUI::FurnaceGUI():
   xyOscOpen(false),
   memoryOpen(false),
   csPlayerOpen(false),
+  userPresetsOpen(false),
   insListDir(false),
   waveListDir(false),
   sampleListDir(false),

@@ -647,6 +647,7 @@ int main(int argc, char** argv) {
 
   if (benchMode) {
     logI("starting benchmark!");
+    e.setNumTimesPlayed(-1);
     if (benchMode==2) {
       e.benchmarkSeek();
     } else {
@@ -657,6 +658,7 @@ int main(int argc, char** argv) {
   }
 
   if (outName!="" || vgmOutName!="" || cmdOutName!="") {
+    e.setNumTimesPlayed(-1);
     if (cmdOutName!="") {
       SafeWriter* w=e.saveCommand();
       if (w!=NULL) {
@@ -700,6 +702,7 @@ int main(int argc, char** argv) {
 
   if (consoleMode) {
     bool cliSuccess=false;
+    e.setNumTimesPlayed(-1);
     cli.bindEngine(&e);
     if (!cli.init()) {
       reportError("error while starting CLI!");

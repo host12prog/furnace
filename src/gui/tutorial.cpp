@@ -22,7 +22,538 @@
 #include "IconsFontAwesome4.h"
 #include "imgui_internal.h"
 
+#include "gif_load.h"
+
 #define TS FurnaceGUITutorialStep
+
+#ifdef _WIN32
+#include <windows.h>
+#include "../utfutils.h"
+#else
+#include <dirent.h>
+#endif
+
+enum FurnaceCVObjectTypes {
+  CV_NULL=0,
+  CV_PLAYER,
+  CV_BULLET,
+  CV_ENEMY_BULLET,
+  CV_BOMB,
+  CV_ENEMY_BOMB,
+  CV_EXPLOSION,
+  CV_ENEMY,
+  CV_FURBALL,
+  CV_MINE,
+  CV_POWERUP_P,
+  CV_POWERUP_S,
+  CV_EXTRA_LIFE
+};
+
+struct FurnaceCVObject {
+  FurnaceCV* cv;
+  unsigned short type;
+  unsigned short spriteDef[512];
+  unsigned char spriteWidth, spriteHeight;
+  bool dead;
+  short x, y;
+  unsigned char z, prio;
+  short collX0, collX1, collY0, collY1;
+  
+  virtual void collision(FurnaceCVObject* other);
+  virtual void tick();
+  FurnaceCVObject(FurnaceCV* p):
+    cv(p),
+    type(0),
+    spriteWidth(2),
+    spriteHeight(2),
+    dead(false),
+    x(0),
+    y(0),
+    z(0),
+    prio(1),
+    collX0(0),
+    collX1(15),
+    collY0(0),
+    collY1(15) {
+    memset(spriteDef,0,512*sizeof(unsigned short));
+    spriteDef[0]=4;
+    spriteDef[1]=5;
+    spriteDef[2]=36;
+    spriteDef[3]=37;
+  }
+  virtual ~FurnaceCVObject() {
+  }
+};
+
+void FurnaceCVObject::collision(FurnaceCVObject* other) {
+}
+
+void FurnaceCVObject::tick() {
+}
+
+struct FurnaceCVPlayer: FurnaceCVObject {
+  short subX, subY;
+  short speedX, speedY;
+  unsigned char shootDir;
+  unsigned char animFrame;
+  unsigned char invincible;
+  unsigned char shotTimer;
+
+  void collision(FurnaceCVObject* other);
+  void tick();
+  FurnaceCVPlayer(FurnaceCV* p):
+    FurnaceCVObject(p),
+    subX(0),
+    subY(0),
+    speedX(0),
+    speedY(0),
+    shootDir(2),
+    animFrame(0),
+    invincible(120),
+    shotTimer(4) {
+      type=CV_PLAYER;
+      spriteWidth=3;
+      spriteHeight=3;
+      spriteDef[0]=0x10;
+      spriteDef[1]=0x11;
+      spriteDef[2]=0x12;
+      spriteDef[3]=0x30;
+      spriteDef[4]=0x31;
+      spriteDef[5]=0x32;
+      spriteDef[6]=0x50;
+      spriteDef[7]=0x51;
+      spriteDef[8]=0x52;
+      collX0=0;
+      collX1=23;
+      collY0=0;
+      collY1=23;
+    }
+};
+
+struct FurnaceCVBullet: FurnaceCVObject {
+  short subX, subY;
+  short speedX, speedY;
+  unsigned char bulletType, orient, life;
+  
+  void killBullet();
+  void setType(unsigned char t);
+  void collision(FurnaceCVObject* other);
+  void tick();
+  FurnaceCVBullet(FurnaceCV* p):
+    FurnaceCVObject(p),
+    subX(0),
+    subY(0),
+    speedX(0),
+    speedY(0),
+    bulletType(0),
+    orient(0),
+    life(0) {
+    type=CV_BULLET;
+    spriteWidth=1;
+    spriteHeight=1;
+    spriteDef[0]=6;
+    collX0=2;
+    collX1=5;
+    collY0=2;
+    collY1=5;
+  }
+};
+
+struct FurnaceCVEnemyBullet: FurnaceCVObject {
+  short subX, subY;
+  short speedX, speedY;
+  unsigned char animFrame, bulletType;
+  
+  void setType(unsigned char type);
+  void tick();
+  FurnaceCVEnemyBullet(FurnaceCV* p):
+    FurnaceCVObject(p),
+    subX(0),
+    subY(0),
+    speedX(0),
+    speedY(0),
+    animFrame(rand()&0xff),
+    bulletType(0) {
+    type=CV_ENEMY_BULLET;
+    spriteWidth=1;
+    spriteHeight=1;
+    spriteDef[0]=6;
+    collX0=2;
+    collX1=5;
+    collY0=2;
+    collY1=5;
+  }
+};
+
+struct FurnaceCVEnemy1: FurnaceCVObject {
+  unsigned char enemyType;
+  unsigned char health;
+  unsigned char orient;
+  unsigned char stopped;
+  unsigned char animFrame;
+  short nextTime, shootTime;
+  unsigned char shootCooldown;
+
+  void collision(FurnaceCVObject* other);
+
+  void tick();
+  void setType(unsigned char type);
+  FurnaceCVEnemy1(FurnaceCV* p):
+    FurnaceCVObject(p),
+    enemyType(0),
+    health(1),
+    orient(rand()&3),
+    stopped(0),
+    animFrame(0),
+    nextTime(64+(rand()%600)),
+    shootTime(8),
+    shootCooldown(0) {
+    type=CV_ENEMY;
+    spriteDef[0]=0x200;
+    spriteDef[1]=0x201;
+    spriteDef[2]=0x220;
+    spriteDef[3]=0x221;
+  }
+};
+
+struct FurnaceCVEnemyVortex: FurnaceCVObject {
+  unsigned char stopped;
+  unsigned char animFrame;
+  short nextTime, shootTime, speedX, speedY;
+
+  void collision(FurnaceCVObject* other);
+
+  void tick();
+  FurnaceCVEnemyVortex(FurnaceCV* p):
+    FurnaceCVObject(p),
+    stopped(0),
+    animFrame(0),
+    nextTime(4+(rand()%140)),
+    shootTime(360),
+    speedX((rand()%5)-2),
+    speedY((rand()%5)-2) {
+    type=CV_ENEMY;
+    spriteDef[0]=0x480;
+    spriteDef[1]=0x481;
+    spriteDef[2]=0x4a0;
+    spriteDef[3]=0x4a1;
+  }
+};
+
+struct FurnaceCVExplTiny: FurnaceCVObject {
+  unsigned char animFrame;
+
+  void tick();
+  FurnaceCVExplTiny(FurnaceCV* p):
+    FurnaceCVObject(p),
+    animFrame(0) {
+    type=CV_EXPLOSION;
+    spriteWidth=1;
+    spriteHeight=1;
+    spriteDef[0]=8;
+  }
+};
+
+struct FurnaceCVExplMedium: FurnaceCVObject {
+  unsigned char animFrame;
+
+  void tick();
+  FurnaceCVExplMedium(FurnaceCV* p):
+    FurnaceCVObject(p),
+    animFrame(0) {
+    type=CV_EXPLOSION;
+    spriteWidth=3;
+    spriteHeight=3;
+    spriteDef[0]=0x210;
+    spriteDef[1]=0x211;
+    spriteDef[2]=0x212;
+    spriteDef[3]=0x230;
+    spriteDef[4]=0x231;
+    spriteDef[5]=0x232;
+    spriteDef[6]=0x250;
+    spriteDef[7]=0x251;
+    spriteDef[8]=0x252;
+  }
+};
+
+struct FurnaceCVFurBallMedium: FurnaceCVObject {
+  unsigned char animFrame;
+
+  void tick();
+  FurnaceCVFurBallMedium(FurnaceCV* p):
+    FurnaceCVObject(p),
+    animFrame(0) {
+    type=CV_FURBALL;
+    spriteWidth=3;
+    spriteHeight=3;
+    spriteDef[0]=0x410;
+    spriteDef[1]=0x411;
+    spriteDef[2]=0x412;
+    spriteDef[3]=0x430;
+    spriteDef[4]=0x431;
+    spriteDef[5]=0x432;
+    spriteDef[6]=0x450;
+    spriteDef[7]=0x451;
+    spriteDef[8]=0x452;
+  }
+};
+
+struct FurnaceCVFurBallLarge: FurnaceCVObject {
+  unsigned char animFrame;
+
+  void tick();
+  FurnaceCVFurBallLarge(FurnaceCV* p):
+    FurnaceCVObject(p),
+    animFrame(0) {
+    type=CV_FURBALL;
+    spriteWidth=4;
+    spriteHeight=4;
+    spriteDef[0]=0x390;
+    spriteDef[1]=0x391;
+    spriteDef[2]=0x392;
+    spriteDef[3]=0x393;
+    spriteDef[4]=0x3b0;
+    spriteDef[5]=0x3b1;
+    spriteDef[6]=0x3b2;
+    spriteDef[7]=0x3b3;
+    spriteDef[8]=0x3d0;
+    spriteDef[9]=0x3d1;
+    spriteDef[10]=0x3d2;
+    spriteDef[11]=0x3d3;
+    spriteDef[12]=0x3f0;
+    spriteDef[13]=0x3f1;
+    spriteDef[14]=0x3f2;
+    spriteDef[15]=0x3f3;
+  }
+};
+
+struct FurnaceCVMine: FurnaceCVObject {
+  void collision(FurnaceCVObject* other);
+  FurnaceCVMine(FurnaceCV* p):
+    FurnaceCVObject(p) {
+      type=CV_MINE;
+    }
+};
+
+struct FurnaceCVPowerupP: FurnaceCVObject {
+  unsigned char life;
+  void collision(FurnaceCVObject* other);
+  void tick();
+  FurnaceCVPowerupP(FurnaceCV* p):
+    FurnaceCVObject(p),
+    life(255) {
+      type=CV_POWERUP_P;
+    }
+};
+
+struct FurnaceCVPowerupS: FurnaceCVObject {
+  unsigned char life;
+  void collision(FurnaceCVObject* other);
+  void tick();
+  FurnaceCVPowerupS(FurnaceCV* p):
+    FurnaceCVObject(p),
+    life(255) {
+      type=CV_POWERUP_S;
+    }
+};
+
+struct FurnaceCVExtraLife: FurnaceCVObject {
+  unsigned char life;
+  void collision(FurnaceCVObject* other);
+  void tick();
+  FurnaceCVExtraLife(FurnaceCV* p):
+    FurnaceCVObject(p),
+    life(255) {
+      type=CV_EXTRA_LIFE;
+    }
+};
+
+struct FurnaceCV {
+  SDL_Surface* surface;
+  unsigned char* prioBuf;
+  DivEngine* e;
+  unsigned char* tileData;
+  
+  // state
+  unsigned short* curStage;
+  int stageWidth, stageHeight;
+
+  const char* typeAddr;
+  unsigned char typeDelay;
+  int typeX, typeY;
+  int typeXStart, typeYStart;
+  int typeXEnd, typeYEnd;
+
+  int textWait, curText, transWait;
+  int ticksToInit;
+
+  bool inGame, inTransition, newHiScore, playSongs, pleaseInitSongs;
+  unsigned char lives, respawnTime, stage, shotType;
+  int score;
+  int hiScore;
+  short lastPlayerX, lastPlayerY;
+  short fxChanBase, fxInsBase;
+  
+  // graphics
+  unsigned short tile0[56][80];
+  unsigned short tile1[56][80];
+  unsigned short scrollX[2];
+  unsigned short scrollY[2];
+  unsigned char bgColor;
+  std::vector<FurnaceCVObject*> sprite;
+  // this offset is applied to sprites.
+  int viewX, viewY;
+
+  // input
+  unsigned char joyInputPrev;
+  unsigned char joyPressed;
+  unsigned char joyReleased;
+  unsigned char joyInput;
+
+  template<typename T> T* createObject(short x=0, short y=0);
+  void buildStage(int which);
+
+  void putText(int fontBase, bool fontHeight, String text, int x, int y);
+
+  void startTyping(const char* text, int x, int y);
+
+  void soundEffect(int ins, int chan, int note);
+  void stopSoundEffect(int ins, int chan, int note);
+
+  void addScore(int amount);
+
+  void typeTick();
+
+  void rasterH(int scanline);
+  void render(unsigned char joyIn);
+  void tileDataRead(struct GIF_WHDR* data);
+  void loadInstruments();
+  bool init(DivEngine* eng);
+  void unload();
+
+  FurnaceCV():
+    surface(NULL),
+    e(NULL),
+    tileData(NULL),
+    curStage(NULL),
+    stageWidth(0),
+    stageHeight(0),
+    typeAddr(NULL),
+    typeDelay(0),
+    typeX(0),
+    typeY(0),
+    typeXStart(0),
+    typeYStart(0),
+    typeXEnd(39),
+    typeYEnd(27),
+    textWait(60),
+    curText(0),
+    transWait(0),
+    ticksToInit(2),
+    inGame(false),
+    inTransition(false),
+    newHiScore(false),
+    playSongs(true),
+    pleaseInitSongs(false),
+    lives(3),
+    respawnTime(0),
+    stage(0),
+    shotType(0),
+    score(0),
+    hiScore(25000),
+    lastPlayerX(0),
+    lastPlayerY(0),
+    fxChanBase(-1),
+    fxInsBase(-1),
+    bgColor(0),
+    viewX(0),
+    viewY(0),
+    joyInputPrev(0),
+    joyPressed(0),
+    joyReleased(0),
+    joyInput(0) {
+    memset(tile0,0,80*56*sizeof(short));
+    memset(tile1,0,80*56*sizeof(short));
+
+    scrollX[0]=0;
+    scrollX[1]=0;
+    scrollY[0]=0;
+    scrollY[1]=0;
+  }
+};
+
+static const char* cvText[]={
+  // intro
+  "Play demo songs?\n"
+  "- Down: Play current song\n"
+  "- Up: Play demo songs",
+
+  "Welcome to Combat Vehicle!\n\n"
+  "Controls:\n"
+  "X - Shoot      Arrow Key - Move\n"
+  "Z - Special    Esc - Quit",
+
+  "GAME OVER",
+
+  "Conglaturation!\n"
+  "\n"
+  "With high score beat, it\n"
+  "enables Serious Mode.\n"
+  "The User is now peace.",
+
+  "Restart Furnace to apply\n"
+  "changes.",
+
+  "Restart Furnace to apply\n"
+  "changes.",
+
+  "Restart Furnace to apply\n"
+  "changes.",
+
+  "Restart Furnace to apply\n"
+  "changes.",
+
+  "Restart Furnace to apply\n"
+  "changes.",
+
+  "Never gonna give STOP posting\n"
+  "about Rick Astley",
+
+  "I'M TIRED OF SEEING IT",
+
+  "My friends on TikTok rickroll\n"
+  "me",
+
+  "On Discord's fucking rickroll",
+
+  "I was in a server. Right?",
+
+  "And AAAAALLL of the channels\n"
+  "are just Never Gonna Give You Up.",
+
+  "I've searched for Half-Life 3\n"
+  "and the video I watched it and\n"
+  "I said: Hey Babe, Never Gonna\n"
+  "Give You Up HAHA",
+
+  "Diiiiiiiing Diiiiiiiiiiiing\n"
+  "Diiing Diiiiiiing Diiiiiiiiiing\n"
+  "Didididiiiiiiiing",
+
+  "I fucking looked at the DefleMask\n"
+  "1.2 teaser trailer and I said\n"
+  "That's a rickroll",
+
+  "I've looked at my [REDACTED],\n"
+  "I think of the scientist and I go\n"
+  "[REDACTED], more like never gonna\n"
+  "[REDACTED] up\n",
+
+  "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+
+  // this is totally intentional. do not attempt to fix it.
+  (const char*)1
+};
 
 void FurnaceGUI::initTutorial() {
   tutorials[GUI_TUTORIAL_OVERVIEW]=FurnaceGUITutorialDef("Overview",{
@@ -242,6 +773,141 @@ void FurnaceGUI::activateTutorial(FurnaceGUITutorials which) {
   */
 }
 
+void FurnaceGUI::initRandomDemoSong() {
+  std::vector<String> subDirs;
+#if !defined(IS_MOBILE) && defined(FURNACE_DATADIR) && defined(SHOW_OPEN_ASSETS_MENU_ENTRY)
+  String demoPath=FURNACE_DATADIR;
+  demoPath+=DIR_SEPARATOR_STR;
+  demoPath+="demos";
+#else
+#ifdef IS_MOBILE
+  String demoPath="/storage/emulated/0/demos";
+#else
+  String demoPath="demos";
+#endif
+#endif
+
+  logW("searching for demos in %s...",demoPath);
+
+#ifdef _WIN32
+  WIN32_FIND_DATAW de;
+  String realDemoPath=demoPath;
+  realDemoPath+=DIR_SEPARATOR_STR;
+  realDemoPath+="*";
+  HANDLE d=FindFirstFileW(utf8To16(realDemoPath.c_str()).c_str(),&de);
+  if (d==INVALID_HANDLE_VALUE) {
+    realDemoPath="..";
+    realDemoPath+=DIR_SEPARATOR_STR;
+    realDemoPath+="demos";
+    realDemoPath+=DIR_SEPARATOR_STR;
+    realDemoPath+="*";
+    logW("OH NO");
+    HANDLE d=FindFirstFileW(utf8To16(realDemoPath.c_str()).c_str(),&de);
+    if (d==INVALID_HANDLE_VALUE) {
+      logW("dang it");
+      return;
+    }
+  }
+  do {
+    String u8Name=utf16To8(de.cFileName);
+    if (u8Name==".") continue;
+    if (u8Name=="..") continue;
+    if (de.dwFileAttributes&FILE_ATTRIBUTE_DIRECTORY) {
+      String newPath=demoPath;
+      newPath+=DIR_SEPARATOR_STR;
+      newPath+=u8Name;
+      logW("adding subdir %s",newPath);
+      subDirs.push_back(newPath);
+    } else if (strstr(u8Name.c_str(),".fur")!=NULL) {
+      String newPath=demoPath;
+      newPath+=DIR_SEPARATOR_STR;
+      newPath+=u8Name;
+      randomDemoSong.push_back(newPath);
+    }
+  } while (FindNextFileW(d,&de)!=0);
+  FindClose(d);
+#else
+  DIR* d=opendir(demoPath.c_str());
+  if (d==NULL) {
+    demoPath="..";
+    demoPath+=DIR_SEPARATOR_STR;
+    demoPath+="demos";
+    logW("OH NO");
+    d=opendir(demoPath.c_str());
+    if (d==NULL) {
+      logW("dang it");
+      return;
+    }
+  }
+
+  struct dirent* de=NULL;
+  while (true) {
+    de=readdir(d);
+    if (de==NULL) break;
+    if (strcmp(de->d_name,".")==0) continue;
+    if (strcmp(de->d_name,"..")==0) continue;
+    if (de->d_type==DT_DIR) {
+      String newPath=demoPath;
+      newPath+=DIR_SEPARATOR_STR;
+      newPath+=de->d_name;
+      logW("adding subdir %s",newPath);
+      subDirs.push_back(newPath);
+    } else if (de->d_type==DT_REG && strstr(de->d_name,".fur")!=NULL) {
+      String newPath=demoPath;
+      newPath+=DIR_SEPARATOR_STR;
+      newPath+=de->d_name;
+      randomDemoSong.push_back(newPath);
+    }
+  }
+  closedir(d);
+#endif
+
+  for (String& i: subDirs) {
+#ifdef _WIN32
+    WIN32_FIND_DATAW de1;
+    String realI=i;
+    realI+=DIR_SEPARATOR_STR;
+    realI+="*.fur";
+    HANDLE d1=FindFirstFileW(utf8To16(realI.c_str()).c_str(),&de1);
+    if (d1==INVALID_HANDLE_VALUE) continue;
+    do {
+      String u8Name=utf16To8(de1.cFileName);
+      String newPath=i;
+      newPath+=DIR_SEPARATOR_STR;
+      newPath+=u8Name;
+      randomDemoSong.push_back(newPath);
+    } while (FindNextFileW(d1,&de1)!=0);
+    FindClose(d1);
+#else
+    DIR* d1=opendir(i.c_str());
+    if (d1==NULL) continue;
+
+    struct dirent* de1=NULL;
+    while (true) {
+      de1=readdir(d1);
+      if (de1==NULL) break;
+      if (strcmp(de1->d_name,".")==0) continue;
+      if (strcmp(de1->d_name,"..")==0) continue;
+      if (de1->d_type==DT_REG && strstr(de1->d_name,".fur")!=NULL) {
+        String newPath=i;
+        newPath+=DIR_SEPARATOR_STR;
+        newPath+=de1->d_name;
+        randomDemoSong.push_back(newPath);
+      }
+    }
+    closedir(d1);
+#endif
+  }
+}
+
+bool FurnaceGUI::loadRandomDemoSong() {
+  if (randomDemoSong.empty()) return false;
+  String which=randomDemoSong[rand()%randomDemoSong.size()];
+  logW("RDS LOAD... %s",which);
+  load(which);
+  return true;
+}
+
 void FurnaceGUI::drawTutorial() {
   // welcome
   if (!tutorial.protoWelcome) {
@@ -358,6 +1024,205 @@ void FurnaceGUI::drawTutorial() {
       }
     }
     ImGui::End();
+  }
+
+  if (cvOpen) {
+    ImGui::SetNextWindowPos(ImVec2(0,0));
+    ImGui::SetNextWindowSize(ImVec2(canvasW,canvasH));
+    if (ImGui::Begin("Combat Vehicle",&cvOpen,ImGuiWindowFlags_NoDocking|ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_Modal|ImGuiWindowFlags_NoTitleBar)) {
+      ImVec2 dpadLoc=ImVec2(canvasW*0.25,canvasH*0.85); 
+      ImVec2 buttonLoc=ImVec2(canvasW*0.75,canvasH*0.85);
+      float oneUnit=canvasW*0.15;
+
+      ImVec2 dpadUpStart=ImVec2(
+        dpadLoc.x-oneUnit*1.5,
+        dpadLoc.y-oneUnit*1.5
+      );
+      ImVec2 dpadUpEnd=ImVec2(
+        dpadLoc.x+oneUnit*1.5,
+        dpadLoc.y-oneUnit*0.5
+      );
+      ImVec2 dpadLeftEnd=ImVec2(
+        dpadLoc.x-oneUnit*0.5,
+        dpadLoc.y+oneUnit*1.5
+      );
+      ImVec2 dpadDownStart=ImVec2(
+        dpadLoc.x-oneUnit*1.5,
+        dpadLoc.y+oneUnit*0.5
+      );
+      ImVec2 dpadDownEnd=ImVec2(
+        dpadLoc.x+oneUnit*1.5,
+        dpadLoc.y+oneUnit*1.5
+      );
+      ImVec2 dpadRightStart=ImVec2(
+        dpadLoc.x+oneUnit*0.5,
+        dpadLoc.y-oneUnit*1.5
+      );
+
+      ImVec2 buttonBStart=ImVec2(
+        buttonLoc.x-oneUnit*1.25,
+        buttonLoc.y-oneUnit*0.5
+      );
+      ImVec2 buttonBEnd=ImVec2(
+        buttonLoc.x-oneUnit*0.25,
+        buttonLoc.y+oneUnit*0.5
+      );
+      ImVec2 buttonAStart=ImVec2(
+        buttonLoc.x+oneUnit*0.25,
+        buttonLoc.y-oneUnit*0.5
+      );
+      ImVec2 buttonAEnd=ImVec2(
+        buttonLoc.x+oneUnit*1.25,
+        buttonLoc.y+oneUnit*0.5
+      );
+
+      unsigned char touchControls=0;
+
+      if (mobileUI) {
+        for (TouchPoint& i: activePoints) {
+          // B
+          if (i.x>=buttonBStart.x && i.y>=buttonBStart.y &&
+              i.x<=buttonBEnd.x && i.y<=buttonBEnd.y) {
+            touchControls|=1;
+          }
+          // A
+          if (i.x>=buttonAStart.x && i.y>=buttonAStart.y &&
+              i.x<=buttonAEnd.x && i.y<=buttonAEnd.y) {
+            touchControls|=2;
+          }
+          // up
+          if (i.x>=dpadUpStart.x && i.y>=dpadUpStart.y &&
+              i.x<=dpadUpEnd.x && i.y<=dpadUpEnd.y) {
+            touchControls|=16;
+          }
+          // down
+          if (i.x>=dpadDownStart.x && i.y>=dpadDownStart.y &&
+              i.x<=dpadDownEnd.x && i.y<=dpadDownEnd.y) {
+            touchControls|=32;
+          }
+          // left
+          if (i.x>=dpadUpStart.x && i.y>=dpadUpStart.y &&
+              i.x<=dpadLeftEnd.x && i.y<=dpadLeftEnd.y) {
+            touchControls|=64;
+          }
+          // right
+          if (i.x>=dpadRightStart.x && i.y>=dpadRightStart.y &&
+              i.x<=dpadDownEnd.x && i.y<=dpadDownEnd.y) {
+            touchControls|=128;
+          }
+        }
+      }
+
+      if (cv==NULL) {
+        initRandomDemoSong();
+        cv=new FurnaceCV;
+        cv->init(e);
+        cv->hiScore=cvHiScore;
+        e->setNumTimesPlayed(-1);
+        shaderEditor=false;
+      }
+      if (cvTex==NULL) {
+        cvTex=rend->createTexture(true,320,224,false);
+      }
+
+      if (cv->pleaseInitSongs) {
+        cv->pleaseInitSongs=false;
+        if (cv->playSongs) {
+          if (loadRandomDemoSong()) {
+            cv->loadInstruments();
+          }
+        }
+      }
+
+      WAKE_UP;
+
+      if (cv->inTransition && cv->transWait==1) {
+        // load random demo song
+        if (cv->playSongs) {
+          if (loadRandomDemoSong()) {
+            cv->loadInstruments();
+            e->changeSongP(0);
+            e->setOrder(0);
+            e->play();
+          }
+        }
+      }
+
+      cv->render(touchControls);
+      
+      if (cv->hiScore>cvHiScore) {
+        cvHiScore=cv->hiScore;
+      }
+
+      if (cvTex!=NULL) {
+        SDL_LockSurface(cv->surface);
+        rend->updateTexture(cvTex,cv->surface->pixels,320*4);
+        SDL_UnlockSurface(cv->surface);
+
+        ImDrawList* dl=ImGui::GetForegroundDrawList();
+
+        ImVec2 p0, p1;
+
+        if (((double)canvasH/(double)canvasW)>0.7) {
+          if (mobileUI) {
+            p0=ImVec2(0.0,0.0);
+            p1=ImVec2(canvasW,canvasW*0.7);
+          } else {
+            p0=ImVec2(0.0,(canvasH-(canvasW*0.7))*0.5);
+            p1=ImVec2(canvasW,canvasW*0.7+(canvasH-(canvasW*0.7))*0.5);
+          }
+        } else {
+          p0=ImVec2((canvasW-(canvasH/0.7))*0.5,0.0);
+          p1=ImVec2((canvasH/0.7)+(canvasW-(canvasH/0.7))*0.5,canvasH);
+        }
+
+        dl->AddRectFilled(ImVec2(0,0),ImVec2(canvasW,canvasH),0xff000000);
+
+        dl->AddImage(rend->getTextureID(cvTex),p0,p1);
+
+        if (mobileUI) {
+          dl->AddRect(dpadUpStart,dpadUpEnd,0xff0000ff,0,0,dpiScale);
+          dl->AddRect(dpadUpStart,dpadLeftEnd,0xff00ffff,0,0,dpiScale);
+          dl->AddRect(dpadDownStart,dpadDownEnd,0xff00ff00,0,0,dpiScale);
+          dl->AddRect(dpadRightStart,dpadDownEnd,0xffff0000,0,0,dpiScale);
+
+          dl->AddRect(buttonBStart,buttonBEnd,0xffffff00,0,0,dpiScale);
+          dl->AddRect(buttonAStart,buttonAEnd,0xffff00ff,0,0,dpiScale);
+        }
+      }
+    }
+    ImGui::End();
+
+    if (ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+      time_t timet=time(NULL);
+      struct tm* curtm=localtime(&timet);
+      if (curtm!=NULL) {
+        if (curtm->tm_mon==3 && curtm->tm_mday==1) {
+          if (cvHiScore>25000) {
+            if (cv!=NULL) {
+              cv->unload();
+              delete cv;
+              cv=NULL;
+            }
+            cvOpen=false;
+          }
+        } else {
+          if (cv!=NULL) {
+            cv->unload();
+            delete cv;
+            cv=NULL;
+          }
+          cvOpen=false;
+        }
+      } else {
+        if (cv!=NULL) {
+          cv->unload();
+          delete cv;
+          cv=NULL;
+        }
+        cvOpen=false;
+      }
+    }
   }
 }
 
