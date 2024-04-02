@@ -709,15 +709,6 @@ void DivEngine::processRow(int i, bool afterDelay) {
       chan[i].volume=pat->data[whatRow][3]<<8;
       dispatchCmd(DivCommand(DIV_CMD_VOLUME,i,chan[i].volume>>8));
       dispatchCmd(DivCommand(DIV_CMD_HINT_VOLUME,i,chan[i].volume>>8));
-
-      /*DivDispatch* maybeFZT = getDispatchFromChanIndex(i);
-      if(maybeFZT != NULL) //only for FZT sound source since in it I want to run my own vol, pitch and vibrato calc!
-      {
-        if(sysOfChan[i] == DIV_SYSTEM_FZT)
-        {
-          dispatchCmd(DivCommand(DIV_CMD_VOLUME_FZT,i,pat->data[whatRow][3]));
-        }
-      }*/
     }
   }
 
@@ -1258,6 +1249,14 @@ void DivEngine::processRow(int i, bool afterDelay) {
   chan[i].shorthandPorta=false;
   chan[i].noteOnInhibit=false;
 
+  DivDispatch* maybeFZT = getDispatchFromChanIndex(i);
+  if(maybeFZT != NULL) //only for FZT sound source since in it I want to run my own vol, pitch and vibrato calc!
+  {
+    if(sysOfChan[i] == DIV_SYSTEM_FZT && pat->data[whatRow][3] != -1)
+    {
+      dispatchCmd(DivCommand(DIV_CMD_VOLUME_FZT,i,pat->data[whatRow][3]));
+    }
+  }
   // post effects
   for (int j=0; j<curPat[i].effectCols; j++) {
     short effect=pat->data[whatRow][4+(j<<1)];
@@ -1576,8 +1575,8 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
 
         if (curRow == 0 && curOrder > 0)
         {
-            whatOrder--;
-            whatRow = curSubSong->patLen - 1;
+          whatOrder--;
+          whatRow = curSubSong->patLen - 1;
         }
         DivPattern* pat=curPat[i].getPattern(curOrders->ord[i][whatOrder],false);
         int seek=(pat->data[whatRow][0]+pat->data[whatRow][1]*12);
@@ -1600,7 +1599,7 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
           {
             if(sysOfChan[i] == DIV_SYSTEM_FZT)
             {
-              dispatchCmd(DivCommand(DIV_CMD_VOLUME_FZT,i,pat->data[whatRow][3]));
+              //dispatchCmd(DivCommand(DIV_CMD_VOLUME_FZT,i,pat->data[whatRow][3]));
             }
           }
         }
