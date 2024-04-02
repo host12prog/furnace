@@ -519,7 +519,6 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
               if(dispatch->chan[j].ins == curIns && ((dispatch->sound_engine->channel[j].flags & SE_ENABLE_GATE) || dispatch->sound_engine->channel[j].adsr.envelope > 0) && e->isRunning())
               {
                 current_program_step = dispatch->fztChan[j].program_tick;
-                cur_chan = j;
                 in_search = false;
               }
             }
