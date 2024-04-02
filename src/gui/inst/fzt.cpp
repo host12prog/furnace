@@ -506,7 +506,6 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
         ImGui::Text(_L("Unite##sgiFZT"));
 
         int current_program_step = 0xffff;
-        int cur_chan = 0xffff;
         bool in_search = true;
 
         for(int i = 0; i < e->song.systemLen && in_search; i++)
