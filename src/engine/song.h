@@ -341,6 +341,9 @@ struct DivSong {
   bool stopE1E2OnNoteOn; //stop executing E1xy/E2xy effect when new note occurs
   bool slowerVolSlide; //0Axy volume slide is 2 times slower
 
+  //prohibit saving famitracker imported files
+  bool is_prohibited_to_save;
+
   std::vector<DivInstrument*> ins;
   std::vector<DivWavetable*> wave;
   std::vector<DivSample*> sample;
@@ -467,7 +470,8 @@ struct DivSong {
     resetNesSweep(false),
     dontDisableVolSlideOnZero(false),
     stopE1E2OnNoteOn(false),
-    slowerVolSlide(false) {
+    slowerVolSlide(false),
+    is_prohibited_to_save(false) {
     for (int i=0; i<DIV_MAX_CHIPS; i++) {
       system[i]=DIV_SYSTEM_NULL;
       systemVol[i]=1.0;

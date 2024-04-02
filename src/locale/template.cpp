@@ -1005,6 +1005,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Oscilloscope (X-Y)##sggc"].plurals[0] = "=Oscilloscope (X-Y)";
     strings["Memory Composition##sggc"].plurals[0] = "=Memory Composition";
     strings["Command Stream Player##sggc"].plurals[0] = "=Command Stream Player";
+    strings["User Presets##sggc"].plurals[0] = "=User Presets";
     strings["Collapse/expand current window##sggc"].plurals[0] = "=Collapse/expand current window";
     strings["Close current window##sggc"].plurals[0] = "=Close current window";
     strings["---Pattern##sggc"].plurals[0] = "=---Pattern";
@@ -1594,8 +1595,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Memory Composition###Memory Composition"].plurals[0] = "=Memory Composition###Memory Composition";
     strings["bank %d##sgme"].plurals[0] = "=bank %d";
     strings["%d-%d ($%x-$%x): %d bytes ($%x)##sgme"].plurals[0] = "=%d-%d ($%x-$%x): %d bytes ($%x)";
-    strings["click to open sample editor##sgme"].plurals[0] = "=click to open sample editor";
-    strings["%d-%d ($%x-$%x): %d bytes ($%x)##sgme"].plurals[0] = "=%d-%d ($%x-$%x): %d bytes ($%x)";
+    strings["%d-%d ($%x-$%x): %dK ($%x)##sgme"].plurals[0] = "=%d-%d ($%x-$%x): %dK ($%x)";
     strings["no chips with memory##sgme"].plurals[0] = "=no chips with memory";
 
     //   sgor  src/gui/orders.cpp
@@ -3107,7 +3107,7 @@ void DivLocale::addTranslationsTemplate()
     strings["After Release Rate##susp1"].plurals[0] = "=After Release Rate##susp1";
     strings["Use separate colors for carriers/modulators in FM editor##sgse"].plurals[0] = "=Use separate colors for carriers/modulators in FM editor";
     strings["Unsigned FM detune values##sgse"].plurals[0] = "=Unsigned FM detune values";
-    strings["Statistics##sgse"].plurals[0] = "=Statistics";
+    strings["Memory Composition##sgse"].plurals[0] = "=Memory Composition";
     strings["Chip memory usage unit:##sgse"].plurals[0] = "=Chip memory usage unit:";
     strings["Bytes##MUU0"].plurals[0] = "=Bytes##MUU0";
     strings["Kilobytes##MUU1"].plurals[0] = "=Kilobytes##MUU1";

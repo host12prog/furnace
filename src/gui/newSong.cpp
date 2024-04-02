@@ -94,10 +94,10 @@ void FurnaceGUI::drawNewSong() {
           }
         }
         std::sort(newSongSearchResults.begin(),newSongSearchResults.end(),[](const FurnaceGUISysDef& a, const FurnaceGUISysDef& b) {
-          return strcmp(a.name,b.name)<0;
+          return strcmp(a.name.c_str(), b.name.c_str())<0;
         });
         auto lastItem=std::unique(newSongSearchResults.begin(),newSongSearchResults.end(),[](const FurnaceGUISysDef& a, const FurnaceGUISysDef& b) {
-          return strcmp(a.name,b.name)==0;
+          return strcmp(a.name.c_str(),b.name.c_str())==0;
         });
         newSongSearchResults.erase(lastItem,newSongSearchResults.end());
       }
@@ -172,7 +172,7 @@ void FurnaceGUI::drawNewSong() {
 
             if(sysdef->menuStatus == MENU_STATUS_LIST_START && showing_search_results == false)
             {
-              if(ImGui::TreeNode(_L(sysdef->name)))
+              if(ImGui::TreeNode(_L(sysdef->name.c_str())))
               {
                 SHOW_HOVER_INFO
 
@@ -181,7 +181,7 @@ void FurnaceGUI::drawNewSong() {
                   sysdef = &category[i];
                   i++;
                   
-                  if (ImGui::Selectable(_L(sysdef->name),false,ImGuiSelectableFlags_DontClosePopups)) {
+                  if (ImGui::Selectable(_L(sysdef->name.c_str()),false,ImGuiSelectableFlags_DontClosePopups)) {
                     nextDesc=sysdef->definition;
                     nextDescName=sysdef->name;
                     accepted=true;
@@ -210,7 +210,7 @@ void FurnaceGUI::drawNewSong() {
 
             else
             {
-              if (ImGui::Selectable(_L(sysdef->name),false,ImGuiSelectableFlags_DontClosePopups)) {
+              if (ImGui::Selectable(_L(sysdef->name.c_str()),false,ImGuiSelectableFlags_DontClosePopups)) {
                 nextDesc=sysdef->definition;
                 nextDescName=sysdef->name;
                 accepted=true;

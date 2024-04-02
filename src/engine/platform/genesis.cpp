@@ -1826,6 +1826,7 @@ void DivPlatformGenesis::setFlags(const DivConfig& flags) {
   }
   noExtMacros=flags.getBool("noExtMacros",false);
   fbAllOps=flags.getBool("fbAllOps",false);
+  msw=flags.getBool("msw",false);
   switch (chipType) {
     case 1: // YM2612
       OPN2_SetChipType(&fm,ym3438_mode_ym2612);

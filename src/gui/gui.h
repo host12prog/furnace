@@ -497,6 +497,7 @@ enum FurnaceGUIWindows {
   GUI_WINDOW_XY_OSC,
   GUI_WINDOW_MEMORY,
   GUI_WINDOW_CS_PLAYER,
+  GUI_WINDOW_USER_PRESETS,
   GUI_WINDOW_SPOILER
 };
 
@@ -697,6 +698,7 @@ enum FurnaceGUIActions {
   GUI_ACTION_WINDOW_XY_OSC,
   GUI_ACTION_WINDOW_MEMORY,
   GUI_ACTION_WINDOW_CS_PLAYER,
+  GUI_ACTION_WINDOW_USER_PRESETS,
 
   GUI_ACTION_COLLAPSE_WINDOW,
   GUI_ACTION_CLOSE_WINDOW,
@@ -1258,12 +1260,13 @@ struct Gradient2D {
 
 struct FurnaceGUISysDefChip {
   DivSystem sys;
-  float vol, pan;
-  const char* flags;
-  FurnaceGUISysDefChip(DivSystem s, float v, float p, const char* f):
+  float vol, pan, panFR;
+  String flags;
+  FurnaceGUISysDefChip(DivSystem s, float v, float p, const char* f, float pf=0.0):
     sys(s),
     vol(v),
     pan(p),
+    panFR(pf),
     flags(f) {}
 };
 
@@ -1275,8 +1278,8 @@ enum menu_status
 };
 
 struct FurnaceGUISysDef {
-  const char* name;
-  const char* extra;
+  String name;
+  String extra;
   menu_status menuStatus;
   String definition;
   std::vector<FurnaceGUISysDefChip> orig;
@@ -1488,7 +1491,7 @@ class FurnaceGUIRender {
     virtual bool lockTexture(FurnaceGUITexture* which, void** data, int* pitch);
     virtual bool unlockTexture(FurnaceGUITexture* which);
     virtual bool updateTexture(FurnaceGUITexture* which, void* data, int pitch);
-    virtual FurnaceGUITexture* createTexture(bool dynamic, int width, int height);
+    virtual FurnaceGUITexture* createTexture(bool dynamic, int width, int height, bool interpolate=true);
     virtual bool destroyTexture(FurnaceGUITexture* which);
     virtual void setTextureBlendMode(FurnaceGUITexture* which, FurnaceGUIBlendMode mode);
     virtual void setBlendMode(FurnaceGUIBlendMode mode);
@@ -1542,7 +1545,7 @@ class FurnaceGUI {
   SDL_Window* sdlWin;
   SDL_Haptic* vibrator;
   bool vibratorAvailable;
-  
+
   FurnaceGUITexture* sampleTex;
   int sampleTexW, sampleTexH;
   bool updateSampleTex;
@@ -2117,7 +2120,7 @@ class FurnaceGUI {
   bool mixerOpen, debugOpen, inspectorOpen, oscOpen, volMeterOpen, statsOpen, compatFlagsOpen;
   bool pianoOpen, notesOpen, channelsOpen, regViewOpen, logOpen, effectListOpen, chanOscOpen;
   bool subSongsOpen, findOpen, spoilerOpen, patManagerOpen, sysManagerOpen, clockOpen, speedOpen;
-  bool groovesOpen, xyOscOpen, memoryOpen, csPlayerOpen;
+  bool groovesOpen, xyOscOpen, memoryOpen, csPlayerOpen, userPresetsOpen;
   bool insListDir, waveListDir, sampleListDir;
 
   bool clockShowReal, clockShowRow, clockShowBeat, clockShowMetro, clockShowTime;
@@ -2496,6 +2499,9 @@ class FurnaceGUI {
   int dmfExportVersion;
   FurnaceGUIExportTypes curExportType;
 
+  // user presets window
+  int selectedUserPreset;
+
   void drawExportAudio(bool onWindow=false);
   void drawExportVGM(bool onWindow=false);
   void drawExportZSM(bool onWindow=false);
@@ -2698,6 +2704,7 @@ class FurnaceGUI {
   void drawSpoiler();
   void drawClock();
   void drawXYOsc();
+  void drawUserPresets();
 
   void parseKeybinds();
   void promptKey(int which);
@@ -2801,8 +2808,8 @@ class FurnaceGUI {
   void applyUISettings(bool updateFonts=true);
   void initSystemPresets();
 
-  bool loadUserPresets(bool redundancy=true);
-  bool saveUserPresets(bool redundancy=true);
+  //bool loadUserPresets(bool redundancy=true);
+  //bool saveUserPresets(bool redundancy=true);
 
   void encodeMMLStr(String& target, int* macro, int macroLen, int macroLoop, int macroRel, bool hex=false, bool bit30=false);
   void decodeMMLStr(String& source, int* macro, unsigned char& macroLen, unsigned char& macroLoop, int macroMin, int macroMax, unsigned char& macroRel, bool bit30=false);

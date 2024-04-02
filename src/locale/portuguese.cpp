@@ -484,7 +484,7 @@ void DivLocale::addTranslationsPortuguese()
     strings["Save File##sggu1"].plurals[0] = "Salvar Arquivo";
     strings["DefleMask 1.0/legacy module##sggu"].plurals[0] = "Módulo do DefleMask 1.0/legado";
     strings["Save File##sggu2"].plurals[0] = "Salvar arquivo";
-    strings["Furnace-B song##sggu1"].plurals[0] = "Música do Furnace-B";
+    strings["Furnace-B song##sggu"].plurals[0] = "Música do Furnace-B";
     strings["Load Instrument##sggu"].plurals[0] = "Carregar Instrumento";
     strings["all compatible files##sggu1"].plurals[0] = "todos os arquivos compatíveis";
     strings["Furnace instrument##sggu0"].plurals[0] = "Instrumento do Furnace";

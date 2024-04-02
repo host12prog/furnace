@@ -640,7 +640,7 @@ void FurnaceGUI::autoDetectSystemIter(std::vector<FurnaceGUISysDef>& category, b
           it->second++;
         }
         DivConfig dc;
-        dc.loadFromMemory(k.flags);
+        dc.loadFromMemory(k.flags.c_str());
         defConfMap[k.sys]=dc;
       }
       if (defCountMap.size()==sysCountMap.size()) {
@@ -685,7 +685,7 @@ void FurnaceGUI::autoDetectSystemIter(std::vector<FurnaceGUISysDef>& category, b
         if (isMatch) {
           logV("match found!");
           //e->song.systemName=j.name;
-          String teeeemp = _L(j.name);
+          String teeeemp = _L(j.name.c_str());
           String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
           e->song.systemName=temmrrrp;
           break;
@@ -3480,6 +3480,7 @@ bool FurnaceGUI::loop() {
   DECLARE_METRIC(regView)
   DECLARE_METRIC(log)
   DECLARE_METRIC(effectList)
+  DECLARE_METRIC(userPresets)
   DECLARE_METRIC(popup)
 
 #ifdef IS_MOBILE
@@ -4037,6 +4038,7 @@ bool FurnaceGUI::loop() {
         IMPORT_CLOSE(xyOscOpen);
         IMPORT_CLOSE(memoryOpen);
         IMPORT_CLOSE(csPlayerOpen);
+        IMPORT_CLOSE(userPresetsOpen);
       } else if (pendingLayoutImportStep==1) {
         // let the UI settle
       } else if (pendingLayoutImportStep==2) {
@@ -4139,12 +4141,15 @@ bool FurnaceGUI::loop() {
           ImGui::EndMenu();
         }
         ImGui::Separator();
-        if (ImGui::MenuItem(_L("save##sggu"),BIND_FOR(GUI_ACTION_SAVE))) {
-          if (curFileName=="" || (curFileName.find(backupPath)==0) || e->song.version>=0xff00) {
-            openFileDialog(GUI_FILE_SAVE);
-          } else {
-            if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-              showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sggu0"),lastError));
+        if(!e->song.is_prohibited_to_save)
+        {
+          if (ImGui::MenuItem(_L("save##sggu"),BIND_FOR(GUI_ACTION_SAVE))) {
+            if (curFileName=="" || (curFileName.find(backupPath)==0) || e->song.version>=0xff00) {
+              openFileDialog(GUI_FILE_SAVE);
+            } else {
+              if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
+                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sggu0"),lastError));
+              }
             }
           }
         }
@@ -4384,6 +4389,11 @@ bool FurnaceGUI::loop() {
           toggleMobileUI(!mobileUI);
         }
 #endif
+        /*
+        if (ImGui::MenuItem("manage presets...",BIND_FOR(GUI_ACTION_WINDOW_USER_PRESETS))) {
+          userPresetsOpen=true;
+        }
+        */
         if (ImGui::MenuItem(_L("settings...##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SETTINGS))) {
           syncSettings();
           settingsOpen=true;
@@ -4665,6 +4675,7 @@ bool FurnaceGUI::loop() {
       MEASURE(grooves,drawGrooves());
       MEASURE(regView,drawRegView());
       MEASURE(memory,drawMemory());
+      MEASURE(userPresets,drawUserPresets());
     } else {
       globalWinFlags=0;
       ImGui::DockSpaceOverViewport(NULL,lockLayout?(ImGuiDockNodeFlags_NoWindowMenuButton|ImGuiDockNodeFlags_NoMove|ImGuiDockNodeFlags_NoResize|ImGuiDockNodeFlags_NoCloseButton|ImGuiDockNodeFlags_NoDocking|ImGuiDockNodeFlags_NoDockingSplitMe|ImGuiDockNodeFlags_NoDockingSplitOther):0);
@@ -4707,32 +4718,7 @@ bool FurnaceGUI::loop() {
       MEASURE(regView,drawRegView());
       MEASURE(log,drawLog());
       MEASURE(effectList,drawEffectList());
-    }
-
-    // NEW CODE - REMOVE WHEN DONE
-    if (shaderEditor) {
-      if (ImGui::Begin("Shader Editor 2024",&shaderEditor,ImGuiWindowFlags_NoScrollWithMouse|ImGuiWindowFlags_NoScrollbar)) {
-        ImGui::PushFont(patFont);
-        ImGui::InputTextMultiline("##SHFragment",&newOscFragment,ImVec2(ImGui::GetContentRegionAvail().x,ImGui::GetContentRegionAvail().y-ImGui::GetFrameHeightWithSpacing()),ImGuiInputTextFlags_UndoRedo);
-        ImGui::PopFont();
-        if (ImGui::Button("Save")) {
-          FILE* f=ps_fopen("/storage/emulated/0/osc.fsh","w");
-          if (f==NULL) {
-            showError("Something happened");
-          } else {
-            fwrite(newOscFragment.c_str(),1,newOscFragment.size(),f);
-            fclose(f);
-            showError("Saved!");
-          }
-        }
-        ImGui::SameLine();
-        if (ImGui::Button("Apply")) {
-          if (!rend->regenOscShader(newOscFragment.c_str())) {
-            showError("Of course you screwed it up, again!");
-          }
-        }
-      }
-      ImGui::End();
+      MEASURE(userPresets,drawUserPresets());
     }
 
     // release selection if mouse released
@@ -6766,6 +6752,7 @@ bool FurnaceGUI::init() {
   subSongsOpen=e->getConfBool("subSongsOpen",true);
   findOpen=e->getConfBool("findOpen",false);
   spoilerOpen=e->getConfBool("spoilerOpen",false);
+  userPresetsOpen=e->getConfBool("userPresetsOpen",false);
 
   insListDir=e->getConfBool("insListDir",false);
   waveListDir=e->getConfBool("waveListDir",false);
@@ -7166,6 +7153,8 @@ bool FurnaceGUI::init() {
   locale.setLanguage((DivLang)settings.language);
   initSystemPresets();
 
+  //loadUserPresets(true);
+
   // NEW CODE - REMOVE WHEN DONE
   newOscFragment=rend->getStupidFragment();
 
@@ -7328,6 +7317,7 @@ void FurnaceGUI::commitState() {
   e->setConf("subSongsOpen",subSongsOpen);
   e->setConf("findOpen",findOpen);
   e->setConf("spoilerOpen",spoilerOpen);
+  e->setConf("userPresetsOpen",userPresetsOpen);
 
   // commit dir state
   e->setConf("insListDir",insListDir);
@@ -7430,6 +7420,9 @@ void FurnaceGUI::commitState() {
 
 bool FurnaceGUI::finish(bool saveConfig) {
   commitState();
+  if (userPresetsOpen) {
+    //saveUserPresets(true);
+  }
   if (saveConfig) {
     logI("saving config.");
     e->saveConf();
@@ -7682,6 +7675,7 @@ FurnaceGUI::FurnaceGUI():
   xyOscOpen(false),
   memoryOpen(false),
   csPlayerOpen(false),
+  userPresetsOpen(false),
   insListDir(false),
   waveListDir(false),
   sampleListDir(false),

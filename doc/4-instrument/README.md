@@ -79,6 +79,8 @@ the following instrument types are available:
 - [PowerNoise](powernoise.md) - for use with PowerNoise chip.
 - [Dave](dave.md) - for use with Dave chip.
 - [SID2](sid2.md) - for use with SID2 chip.
+- [Game Boy Advance DMA](gbadma.md) - for use with Game Boy Advance in direct mode.
+- [Game Boy Advance MinMod](gbaminmod.md) - for use with Game Boy Advance with the MinMod software mixing driver.
 
 ## macros
 

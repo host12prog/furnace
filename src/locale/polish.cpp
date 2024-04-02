@@ -421,7 +421,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Save File##sggu1"].plurals[0] = "Zapisz plik";
     strings["DefleMask 1.0/legacy module##sggu"].plurals[0] = "moduł DefleMaska 1.0/legacy";
     strings["Save File##sggu2"].plurals[0] = "Zapisz plik";
-    strings["Furnace song##sggu1"].plurals[0] = "modul Furnace";
+    strings["Furnace-B song##sggu"].plurals[0] = "modul Furnace-B";
     strings["Load Instrument##sggu"].plurals[0] = "Wczytaj instrument";
     strings["all compatible files##sggu1"].plurals[0] = "wszystkie kompatybilne pliki";
     strings["Furnace instrument##sggu0"].plurals[0] = "instrument Furnace";
@@ -3769,7 +3769,7 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     //   sgiGB     src/gui/inst/gb.cpp
 
     strings["Game Boy##sgiGB"].plurals[0] = "Game Boy";
-    strings["Use software envelope##sgiGB"].plurals[0] = "Używaj obwiedni sprzetowej";
+    strings["Use software envelope##sgiGB"].plurals[0] = "Używaj obwiedni programowej";
     strings["Initialize envelope on every note##sgiGB"].plurals[0] = "Inicjalizuj obwiednię przy każdej nucie";
     strings["Volume##sgiGB0"].plurals[0] = "Głośność";
     strings["Length##sgiGB"].plurals[0] = "Długość";
