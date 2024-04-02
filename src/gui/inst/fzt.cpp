@@ -505,11 +505,42 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
         ImGui::TableNextColumn();
         ImGui::Text(_L("Unite##sgiFZT"));
 
+        int current_program_step = 0xffff;
+        int cur_chan = 0xffff;
+        bool in_search = true;
+
+        for(int i = 0; i < e->song.systemLen && in_search; i++)
+        {
+          if(e->song.system[i] == DIV_SYSTEM_FZT)
+          {
+            DivPlatformFZT* dispatch = (DivPlatformFZT*)e->getDispatch(i);
+
+            for(int j = 0; j < FZT_NUM_CHANNELS && in_search; j++)
+            {
+              if(dispatch->chan[j].ins == curIns && ((dispatch->sound_engine->channel[j].flags & SE_ENABLE_GATE) || dispatch->sound_engine->channel[j].adsr.envelope > 0) && e->isRunning())
+              {
+                current_program_step = dispatch->fztChan[j].program_tick;
+                cur_chan = j;
+                in_search = false;
+              }
+            }
+          }
+        }
+
         for (int i=0; i<FZT_INST_PROG_LEN; i++) 
         {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
-          ImGui::Text("%01X",i);
+          char number[10];
+          if(current_program_step == i)
+          {
+            snprintf(number, 10, "%01X%s",i," >");
+          }
+          else
+          {
+            snprintf(number, 10, "%01X",i);
+          }
+          ImGui::Text(number);
           ImGui::TableNextColumn();
           ImGui::PushID(i);
           if (ins->fzt.program[i].cmd>=DivInstrumentFZT::TE_PROGRAM_END && ins->fzt.program[i].cmd != DivInstrumentFZT::TE_EFFECT_PITCH)

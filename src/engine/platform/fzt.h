@@ -63,30 +63,30 @@ typedef struct {
 } TrackerEngineChannel;
 
 class DivPlatformFZT: public DivDispatch {
-  struct Channel: public SharedChannel<int> {
-    int fzt_note;
-    int fzt_octave;
-    Channel():
-      SharedChannel<int>(255),
-      fzt_note(0),
-      fzt_octave(0) {}
-  };
-  Channel chan[FZT_NUM_CHANNELS];
-  TrackerEngineChannel fztChan[FZT_NUM_CHANNELS];
-  bool isMuted[FZT_NUM_CHANNELS];
-  DivDispatchOscBuffer* oscBuf[FZT_NUM_CHANNELS];
-  struct QueuedWrite {
-      unsigned char addr;
-      unsigned char val;
-      QueuedWrite(): addr(0), val(0) {}
-      QueuedWrite(unsigned char a, unsigned char v): addr(a), val(v) {}
-  };
-  FixedQueue<QueuedWrite,512> writes;
-
-  SoundEngine* sound_engine;
-  int current_tick;
-
   public:
+    struct Channel: public SharedChannel<int> {
+      int fzt_note;
+      int fzt_octave;
+      Channel():
+        SharedChannel<int>(255),
+        fzt_note(0),
+        fzt_octave(0) {}
+    };
+    Channel chan[FZT_NUM_CHANNELS];
+    TrackerEngineChannel fztChan[FZT_NUM_CHANNELS];
+    bool isMuted[FZT_NUM_CHANNELS];
+    DivDispatchOscBuffer* oscBuf[FZT_NUM_CHANNELS];
+    struct QueuedWrite {
+        unsigned char addr;
+        unsigned char val;
+        QueuedWrite(): addr(0), val(0) {}
+        QueuedWrite(unsigned char a, unsigned char v): addr(a), val(v) {}
+    };
+    FixedQueue<QueuedWrite,512> writes;
+
+    SoundEngine* sound_engine;
+    int current_tick;
+
     void acquire(short** buf, size_t len);
     int dispatch(DivCommand c);
     void* getChanState(int chan);
