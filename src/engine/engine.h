@@ -444,8 +444,6 @@ class DivEngine {
   int cycles;
   double clockDrift;
   int midiClockCycles;
-  int numTimesPlayed;
-  int crossedPatterns;
   double midiClockDrift;
   int midiTimeCycles;
   double midiTimeDrift;
@@ -755,9 +753,6 @@ class DivEngine {
 
     // find song loop position
     void walkSong(int& loopOrder, int& loopRow, int& loopEnd);
-
-    // set number of times the song has played
-    void setNumTimesPlayed(int count);
 
     // play (returns whether successful)
     bool play();
@@ -1355,8 +1350,6 @@ class DivEngine {
       cycles(0),
       clockDrift(0),
       midiClockCycles(0),
-      numTimesPlayed(0),
-      crossedPatterns(0),
       midiClockDrift(0),
       midiTimeCycles(0),
       midiTimeDrift(0),
