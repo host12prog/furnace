@@ -3571,7 +3571,7 @@ FurnaceGUISysDef::FurnaceGUISysDef(const char* n, std::initializer_list<FurnaceG
   }
 }
 
-FurnaceGUISysDef::FurnaceGUISysDef(const char* n, const char* def, DivEngine* e):
+/*FurnaceGUISysDef::FurnaceGUISysDef(const char* n, const char* def, DivEngine* e):
   name(n),
   definition(def) {
   // extract definition
@@ -3840,11 +3840,11 @@ bool FurnaceGUI::saveUserPresets(bool redundancy) {
   fclose(f);
   logD("presets written successfully.");
   return true;
-}
+}*/
 
 // user presets management
 void FurnaceGUI::drawUserPresets() {
-  if (nextWindow==GUI_WINDOW_USER_PRESETS) {
+  /*if (nextWindow==GUI_WINDOW_USER_PRESETS) {
     userPresetsOpen=true;
     ImGui::SetNextWindowFocus();
     nextWindow=GUI_WINDOW_NOTHING;
@@ -3883,5 +3883,5 @@ void FurnaceGUI::drawUserPresets() {
     saveUserPresets(true);
   }
   if (ImGui::IsWindowFocused(ImGuiFocusedFlags_ChildWindows)) curWindow=GUI_WINDOW_USER_PRESETS;
-  ImGui::End();
+  ImGui::End();*/
 }

@@ -1005,6 +1005,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Oscilloscope (X-Y)##sggc"].plurals[0] = "=Oscilloscope (X-Y)";
     strings["Memory Composition##sggc"].plurals[0] = "=Memory Composition";
     strings["Command Stream Player##sggc"].plurals[0] = "=Command Stream Player";
+    strings["User Presets##sggc"].plurals[0] = "=User Presets";
     strings["Collapse/expand current window##sggc"].plurals[0] = "=Collapse/expand current window";
     strings["Close current window##sggc"].plurals[0] = "=Close current window";
     strings["---Pattern##sggc"].plurals[0] = "=---Pattern";

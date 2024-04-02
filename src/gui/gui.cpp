@@ -685,7 +685,7 @@ void FurnaceGUI::autoDetectSystemIter(std::vector<FurnaceGUISysDef>& category, b
         if (isMatch) {
           logV("match found!");
           //e->song.systemName=j.name;
-          String teeeemp = _L(j.name);
+          String teeeemp = _L(j.name.c_str());
           String temmrrrp = teeeemp.substr(0, teeeemp.find("##"));
           e->song.systemName=temmrrrp;
           break;
@@ -1103,12 +1103,6 @@ void FurnaceGUI::play(int row) {
   if (e->getStreamPlayer()) {
     e->killStream();
   }
-  if (shaderEditor) {
-    numTimesPlayed++;
-    e->setNumTimesPlayed(numTimesPlayed);
-  } else {
-    e->setNumTimesPlayed(-1);
-  }
   memset(chanOscVol,0,DIV_MAX_CHANS*sizeof(float));
   for (int i=0; i<DIV_MAX_CHANS; i++) {
     chanOscChan[i].pitch=0.0f;
@@ -1139,50 +1133,6 @@ void FurnaceGUI::setOrder(unsigned char order, bool forced) {
 }
 
 void FurnaceGUI::stop() {
-  if (shaderEditor) {
-    if (numTimesPlayed>=25) {
-      switch (numTimesPlayed) {
-        case 25:
-          showError("*bleep*\n\n\nAccess Denied");
-          break;
-        case 26:
-          showError("*bleep*\n\n\nAccess Is Denied");
-          break;
-        case 27:
-          showError("*bleep*\n\n\nUnauthorized Access");
-          break;
-        case 28:
-          showError("*bleep*\n\n\nIllegal Access");
-          break;
-        case 29:
-          showError("Please, move away from the stop button");
-          break;
-        case 30:
-          showError("You will not stop the song");
-          break;
-        case 31:
-          showError("Move on immediately");
-          break;
-        case 32:
-          showError("You will not stop the song!");
-          break;
-        case 33:
-          showError("No, no and no!");
-          break;
-        case 34:
-          showError("Will we do this all day?");
-          break;
-        case 35:
-          showError("");
-          break;
-        default:
-          showError("YOU HAVE NO CHOICE.");
-          break;
-      }
-      numTimesPlayed++;
-      return;
-    }
-  }
   bool wasPlaying=e->isPlaying();
   e->walkSong(loopOrder,loopRow,loopEnd);
   e->stop();
@@ -1229,11 +1179,6 @@ void FurnaceGUI::stopPreviewNote(SDL_Scancode scancode, bool autoNote) {
 void FurnaceGUI::noteInput(int num, int key, int vol) {
   DivPattern* pat=e->curPat[cursor.xCoarse].getPattern(e->curOrders->ord[cursor.xCoarse][curOrder],true);
   bool removeIns=false;
-
-  if (shaderEditor && num==84) {
-    showError("This note is reserved for the Master. You may not use it.");
-    return;
-  }
 
   prepareUndo(GUI_UNDO_PATTERN_EDIT);
 
@@ -1410,7 +1355,6 @@ void FurnaceGUI::orderInput(int num) {
 void FurnaceGUI::keyDown(SDL_Event& ev) {
   if (ImGuiFileDialog::Instance()->IsOpened()) return;
   if (aboutOpen) return;
-  if (cvOpen) return;
 
   int mapped=ev.key.keysym.sym;
   if (ev.key.keysym.mod&KMOD_CTRL) {
@@ -3159,7 +3103,6 @@ int FurnaceGUI::processEvent(SDL_Event* ev) {
     e->saveConf();
   }
 #endif
-  if (cvOpen) return 1;
   if (ev->type==SDL_KEYDOWN) {
     if (!ev->key.repeat && latchTarget==0 && !wantCaptureKeyboard && !sampleMapWaitingInput && (ev->key.keysym.mod&(~(VALID_MODS)))==0) {
       if (settings.notePreviewBehavior==0) return 1;
@@ -4401,11 +4344,6 @@ bool FurnaceGUI::loop() {
         if (ImGui::MenuItem(_L("restore backup##sggu"),BIND_FOR(GUI_ACTION_OPEN_BACKUP))) {
           doAction(GUI_ACTION_OPEN_BACKUP);
         }
-        if (numTimesPlayed>3) {
-          if (ImGui::MenuItem("Enable Serious Mode")) {
-            cvOpen=true;
-          }
-        }
         ImGui::Separator();
         if (ImGui::MenuItem(_L("exit...##sggu"),BIND_FOR(GUI_ACTION_QUIT))) {
           requestQuit();
@@ -5042,9 +4980,6 @@ bool FurnaceGUI::loop() {
                     break;
                   case GUI_WARN_OPEN_BACKUP:
                     openFileDialog(GUI_FILE_OPEN_BACKUP);
-                    break;
-                  case GUI_WARN_CV:
-                    cvOpen=true;
                     break;
                   default:
                     break;
@@ -5801,30 +5736,6 @@ bool FurnaceGUI::loop() {
           if (ImGui::Button(_L("No##sggu10"))) {
             ImGui::CloseCurrentPopup();
             openFileDialog(GUI_FILE_OPEN);
-          }
-          ImGui::SameLine();
-          if (ImGui::Button(_L("Cancel##sggu6")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
-            ImGui::CloseCurrentPopup();
-          }
-          break;
-        case GUI_WARN_CV:
-          if (ImGui::Button("Yes")) {
-            ImGui::CloseCurrentPopup();
-            if (curFileName=="" || curFileName.find(backupPath)==0 || e->song.version>=0xff00) {
-              openFileDialog(GUI_FILE_SAVE);
-              postWarnAction=GUI_WARN_CV;
-            } else {
-              if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-                showError(fmt::sprintf("Error while saving file! (%s)",lastError));
-              } else {
-                cvOpen=true;
-              }
-            }
-          }
-          ImGui::SameLine();
-          if (ImGui::Button("No")) {
-            ImGui::CloseCurrentPopup();
-            cvOpen=true;
           }
           ImGui::SameLine();
           if (ImGui::Button(_L("Cancel##sggu6")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
@@ -6935,8 +6846,6 @@ bool FurnaceGUI::init() {
   xyOscIntensity=e->getConfFloat("xyOscIntensity",2.0f);
   xyOscThickness=e->getConfFloat("xyOscThickness",2.0f);
 
-  cvHiScore=e->getConfInt("cvHiScore",25000);
-
   syncSettings();
 
   if (!settings.persistFadeOut) {
@@ -7244,7 +7153,7 @@ bool FurnaceGUI::init() {
   locale.setLanguage((DivLang)settings.language);
   initSystemPresets();
 
-  loadUserPresets(true);
+  //loadUserPresets(true);
 
   // NEW CODE - REMOVE WHEN DONE
   newOscFragment=rend->getStupidFragment();
@@ -7279,20 +7188,6 @@ bool FurnaceGUI::init() {
   toggleMobileUI(mobileUI,true);
 
   firstFrame=true;
-
-  time_t timet=time(NULL);
-  struct tm* curtm=localtime(&timet);
-  if (curtm!=NULL) {
-    if (curtm->tm_mon==3 && curtm->tm_mday==1) {
-      if (cvHiScore<=25000) {
-        shaderEditor=true;
-      }
-    }
-  }
-
-  if (!shaderEditor) {
-    e->setNumTimesPlayed(-1);
-  }
 
   userEvents=SDL_RegisterEvents(1);
 
@@ -7521,14 +7416,12 @@ void FurnaceGUI::commitState() {
       e->setConf(key,recentFile[i]);
     }
   }
-
-  e->setConf("cvHiScore",cvHiScore);
 }
 
 bool FurnaceGUI::finish(bool saveConfig) {
   commitState();
   if (userPresetsOpen) {
-    saveUserPresets(true);
+    //saveUserPresets(true);
   }
   if (saveConfig) {
     logI("saving config.");
@@ -7582,7 +7475,6 @@ FurnaceGUI::FurnaceGUI():
   sdlWin(NULL),
   vibrator(NULL),
   vibratorAvailable(false),
-  cv(NULL),
   sampleTex(NULL),
   sampleTexW(0),
   sampleTexH(0),
@@ -7645,7 +7537,6 @@ FurnaceGUI::FurnaceGUI():
   wheelCalmDown(0),
   shallDetectScale(0),
   cpuCores(0),
-  numTimesPlayed(0),
   secondTimer(0.0f),
   userEvents(0xffffffff),
   mobileMenuPos(0.0f),

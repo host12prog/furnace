@@ -596,7 +596,6 @@ enum FurnaceGUIWarnings {
   GUI_WARN_SUBSONG_DEL,
   GUI_WARN_SYSTEM_DEL,
   GUI_WARN_CLEAR_HISTORY,
-  GUI_WARN_CV,
   GUI_WARN_GENERIC
 };
 
@@ -1278,8 +1277,8 @@ enum menu_status
 };
 
 struct FurnaceGUISysDef {
-  const char* name;
-  const char* extra;
+  String name;
+  String extra;
   menu_status menuStatus;
   String definition;
   std::vector<FurnaceGUISysDefChip> orig;
@@ -1536,8 +1535,6 @@ struct PendingDrawOsc {
     lineSize(0.0f) {}
 };
 
-struct FurnaceCV;
-
 class FurnaceGUI {
   DivEngine* e;
 
@@ -1547,9 +1544,6 @@ class FurnaceGUI {
   SDL_Window* sdlWin;
   SDL_Haptic* vibrator;
   bool vibratorAvailable;
-
-  FurnaceCV* cv;
-  FurnaceGUITexture* cvTex;
 
   FurnaceGUITexture* sampleTex;
   int sampleTexW, sampleTexH;
@@ -1590,7 +1584,6 @@ class FurnaceGUI {
   bool willExport[DIV_MAX_CHIPS];
   int vgmExportVersion;
   int vgmExportTrailingTicks;
-  int cvHiScore;
   int drawHalt;
   int zsmExportTickRate;
   int macroPointSize;
@@ -1601,7 +1594,6 @@ class FurnaceGUI {
   int wheelCalmDown;
   int shallDetectScale;
   int cpuCores;
-  int numTimesPlayed;
   float secondTimer;
   unsigned int userEvents;
   float mobileMenuPos, autoButtonSize, mobileEditAnim;
@@ -2508,7 +2500,6 @@ class FurnaceGUI {
 
   // user presets window
   int selectedUserPreset;
-  std::vector<String> randomDemoSong;
 
   void drawExportAudio(bool onWindow=false);
   void drawExportVGM(bool onWindow=false);
@@ -2814,8 +2805,8 @@ class FurnaceGUI {
   void applyUISettings(bool updateFonts=true);
   void initSystemPresets();
 
-  bool loadUserPresets(bool redundancy=true);
-  bool saveUserPresets(bool redundancy=true);
+  //bool loadUserPresets(bool redundancy=true);
+  //bool saveUserPresets(bool redundancy=true);
 
   void encodeMMLStr(String& target, int* macro, int macroLen, int macroLoop, int macroRel, bool hex=false, bool bit30=false);
   void decodeMMLStr(String& source, int* macro, unsigned char& macroLen, unsigned char& macroLoop, int macroMin, int macroMax, unsigned char& macroRel, bool bit30=false);

@@ -948,6 +948,7 @@ void DivLocale::addTranslationsRussian()
     strings["Oscilloscope (X-Y)##sggc"].plurals[0] = "Осциллограф (X-Y)";
     strings["Memory Composition##sggc"].plurals[0] = "Содержание памяти";
     strings["Command Stream Player##sggc"].plurals[0] = "Проигрыватель потока команд";
+    strings["User Presets##sggc"].plurals[0] = "Пользовательские пресеты";
     strings["Collapse/expand current window##sggc"].plurals[0] = "Свернуть/развернуть текущее окно";
     strings["Close current window##sggc"].plurals[0] = "Закрыть текущее окно";
 

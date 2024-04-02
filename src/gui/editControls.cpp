@@ -593,10 +593,6 @@ void FurnaceGUI::drawMobileControls() {
           memoryOpen=!memoryOpen;
         }
 
-        if (ImGui::Button("CV")) {
-          cvOpen=!cvOpen;
-        }
-
         ImGui::Separator();
 
         ImGui::Button(_L("Panic##sgec"));

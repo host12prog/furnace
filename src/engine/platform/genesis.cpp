@@ -1721,7 +1721,6 @@ void DivPlatformGenesis::reset() {
       OPN2_SetChipType(&fm,0);
       break;
   }
-  OPN2_SetMSW(&fm,msw?1:0);
   if (dumpWrites) {
     addWrite(0xffffffff,0);
   }
@@ -1839,7 +1838,6 @@ void DivPlatformGenesis::setFlags(const DivConfig& flags) {
       OPN2_SetChipType(&fm,0);
       break;
   }
-  OPN2_SetMSW(&fm,msw?1:0);
   CHECK_CUSTOM_CLOCK;
   if (useYMFM==1) {
     if (fm_ymfm!=NULL) delete fm_ymfm;
