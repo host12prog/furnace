@@ -4140,9 +4140,6 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.vsync=conf.getInt("vsync",1);
     settings.frameRateLimit=conf.getInt("frameRateLimit",100);
 
-    settings.vsync=conf.getInt("vsync",1);
-    settings.frameRateLimit=conf.getInt("frameRateLimit",100);
-
     settings.chanOscThreads=conf.getInt("chanOscThreads",0);
     settings.renderPoolThreads=conf.getInt("renderPoolThreads",0);
     settings.shaderOsc=conf.getInt("shaderOsc",0);
@@ -4415,7 +4412,6 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.opl3Core=conf.getInt("opl3Core",0);
     settings.esfmCore=conf.getInt("esfmCore",0);
     settings.opllCore=conf.getInt("opllCore",0);
-    settings.opllCore=conf.getInt("opllCore",0);
     settings.arcadeCoreRender=conf.getInt("arcadeCoreRender",1);
     settings.ym2612CoreRender=conf.getInt("ym2612CoreRender",0);
     settings.snCoreRender=conf.getInt("snCoreRender",0);
@@ -4427,7 +4423,6 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.opl2CoreRender=conf.getInt("opl2CoreRender",0);
     settings.opl3CoreRender=conf.getInt("opl3CoreRender",0);
     settings.esfmCoreRender=conf.getInt("esfmCoreRender",0);
-    settings.opllCoreRender=conf.getInt("opllCoreRender",0);
     settings.opllCoreRender=conf.getInt("opllCoreRender",0);
 
     settings.pcSpeakerOutMethod=conf.getInt("pcSpeakerOutMethod",0);
@@ -4459,7 +4454,6 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.opl3Core,0,2);
   clampSetting(settings.esfmCore,0,1);
   clampSetting(settings.opllCore,0,1);
-  clampSetting(settings.opllCore,0,1);
   clampSetting(settings.arcadeCoreRender,0,1);
   clampSetting(settings.ym2612CoreRender,0,2);
   clampSetting(settings.snCoreRender,0,1);
@@ -4471,7 +4465,6 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.opl2CoreRender,0,2);
   clampSetting(settings.opl3CoreRender,0,2);
   clampSetting(settings.esfmCoreRender,0,1);
-  clampSetting(settings.opllCoreRender,0,1);
   clampSetting(settings.opllCoreRender,0,1);
   clampSetting(settings.pcSpeakerOutMethod,0,4);
   clampSetting(settings.mainFont,0,6);
@@ -4626,8 +4619,6 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.cursorWheelStep,0,1);
   clampSetting(settings.vsync,0,4);
   clampSetting(settings.frameRateLimit,0,1000);
-  clampSetting(settings.vsync,0,4);
-  clampSetting(settings.frameRateLimit,0,1000);
 
   if (settings.exportLoops<0.0) settings.exportLoops=0.0;
   if (settings.exportFadeOut<0.0) settings.exportFadeOut=0.0;  
@@ -4650,10 +4641,6 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
 
     conf.set("renderBackend",settings.renderBackend);
     conf.set("renderClearPos",settings.renderClearPos);
-
-    conf.set("vsync",settings.vsync);
-    conf.set("frameRateLimit",settings.frameRateLimit);
-
 
     conf.set("vsync",settings.vsync);
     conf.set("frameRateLimit",settings.frameRateLimit);
@@ -4930,7 +4917,6 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("opl3Core",settings.opl3Core);
     conf.set("esfmCore",settings.esfmCore);
     conf.set("opllCore",settings.opllCore);
-    conf.set("opllCore",settings.opllCore);
     conf.set("arcadeCoreRender",settings.arcadeCoreRender);
     conf.set("ym2612CoreRender",settings.ym2612CoreRender);
     conf.set("snCoreRender",settings.snCoreRender);
@@ -4942,7 +4928,6 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("opl2CoreRender",settings.opl2CoreRender);
     conf.set("opl3CoreRender",settings.opl3CoreRender);
     conf.set("esfmCoreRender",settings.esfmCoreRender);
-    conf.set("opllCoreRender",settings.opllCoreRender);
     conf.set("opllCoreRender",settings.opllCoreRender);
 
     conf.set("pcSpeakerOutMethod",settings.pcSpeakerOutMethod);
@@ -4970,10 +4955,6 @@ void FurnaceGUI::syncSettings() {
   if (rend!=NULL) {
     rend->setSwapInterval(settings.vsync);
   }
-
-  if (rend!=NULL) {
-    rend->setSwapInterval(settings.vsync);
-  }
 }
 
 void FurnaceGUI::commitSettings() {
@@ -4994,7 +4975,6 @@ void FurnaceGUI::commitSettings() {
     settings.opl3Core!=e->getConfInt("opl3Core",0) ||
     settings.esfmCore!=e->getConfInt("esfmCore",0) ||
     settings.opllCore!=e->getConfInt("opllCore",0) ||
-    settings.opllCore!=e->getConfInt("opllCore",0) ||
     settings.arcadeCoreRender!=e->getConfInt("arcadeCoreRender",0) ||
     settings.ym2612CoreRender!=e->getConfInt("ym2612CoreRender",0) ||
     settings.snCoreRender!=e->getConfInt("snCoreRender",0) ||
@@ -5006,7 +4986,6 @@ void FurnaceGUI::commitSettings() {
     settings.opl2CoreRender!=e->getConfInt("opl2CoreRender",0) ||
     settings.opl3CoreRender!=e->getConfInt("opl3CoreRender",0) ||
     settings.esfmCoreRender!=e->getConfInt("esfmCoreRender",0) ||
-    settings.opllCoreRender!=e->getConfInt("opllCoreRender",0) ||
     settings.opllCoreRender!=e->getConfInt("opllCoreRender",0) ||
     settings.audioQuality!=e->getConfInt("audioQuality",0) ||
     settings.audioHiPass!=e->getConfInt("audioHiPass",1)
@@ -5099,8 +5078,6 @@ bool FurnaceGUI::exportColors(String path) {
 bool FurnaceGUI::importKeybinds(String path) {
   DivConfig c;
   if (!c.loadFromFile(path.c_str(),false,false)) {
-  DivConfig c;
-  if (!c.loadFromFile(path.c_str(),false,false)) {
     logW("error while opening keybind file for import: %s",strerror(errno));
     return false;
   }
@@ -5111,16 +5088,8 @@ bool FurnaceGUI::importKeybinds(String path) {
   } else {
     // unoptimal
     for (auto& key: c.configMap()) {
-  if (c.has("configVersion")) {
-    // new
-    readConfig(c,GUI_SETTINGS_KEYBOARD);
-  } else {
-    // unoptimal
-    for (auto& key: c.configMap()) {
       for (int i=0; i<GUI_ACTION_MAX; i++) {
         try {
-          if (key.first==guiActions[i].name) {
-            actionKeys[i]=std::stoi(key.second);
           if (key.first==guiActions[i].name) {
             actionKeys[i]=std::stoi(key.second);
             break;
@@ -5142,23 +5111,11 @@ bool FurnaceGUI::exportKeybinds(String path) {
   c.set("configVersion",DIV_ENGINE_VERSION);
   writeConfig(c,GUI_SETTINGS_KEYBOARD);
 
-  DivConfig c;
-
-  c.set("configVersion",DIV_ENGINE_VERSION);
-  writeConfig(c,GUI_SETTINGS_KEYBOARD);
-
   FILE* f=ps_fopen(path.c_str(),"wb");
   if (f==NULL) {
     logW("error while opening keybind file for export: %s",strerror(errno));
     return false;
   }
-
-  String result=c.toString();
-
-  if (fwrite(result.c_str(),1,result.size(),f)!=result.size()) {
-    logW("couldn't write keybind file entirely.");
-  }
-
 
   String result=c.toString();
 
