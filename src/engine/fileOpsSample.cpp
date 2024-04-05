@@ -394,7 +394,7 @@ DivSample* DivEngine::sampleFromFileRaw(const char* path, DivSampleDepth depth, 
 
   lenDivided=len/channels;
 
-  unsigned int samples=lenDivided;
+  unsigned int samples=lenDivided * 8;
   switch (depth) {
     case DIV_SAMPLE_DEPTH_1BIT:
     case DIV_SAMPLE_DEPTH_1BIT_DPCM:

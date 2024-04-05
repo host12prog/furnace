@@ -197,12 +197,12 @@ const char* opllCores[]={
 };
 
 const char* coreQualities[]={
-  "Horrible",
-  "Low",
-  "Medium",
-  "High",
-  "Ultra",
-  "Ultimate"
+  "Horrible##sgse",
+  "Low##sgse",
+  "Medium##sgse",
+  "High##sgse",
+  "Ultra##sgse",
+  "Ultimate##sgse"
 };
 
 const char* pcspkrOutMethods[]={
@@ -446,7 +446,7 @@ void FurnaceGUI::drawSettings() {
         }
 
         bool vsyncB=settings.vsync;
-        if (ImGui::Checkbox("VSync",&vsyncB)) {
+        if (ImGui::Checkbox(_L("VSync##sgse"),&vsyncB)) {
           settings.vsync=vsyncB;
           settingsChanged=true;
           if (rend!=NULL) {
@@ -454,13 +454,13 @@ void FurnaceGUI::drawSettings() {
           }
         }
 
-        if (ImGui::SliderInt("Frame rate limit",&settings.frameRateLimit,0,250,settings.frameRateLimit==0?"Unlimited":"%d")) {
+        if (ImGui::SliderInt(_L("Frame rate limit##sgse"),&settings.frameRateLimit,0,250,settings.frameRateLimit==0?"Unlimited":"%d")) {
           settingsChanged=true;
         }
         if (settings.frameRateLimit<0) settings.frameRateLimit=0;
         if (settings.frameRateLimit>1000) settings.frameRateLimit=1000;
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("only applies when VSync is disabled.");
+          ImGui::SetTooltip(_L("only applies when VSync is disabled.##sgse"));
         }
 
         bool renderClearPosB=settings.renderClearPos;

@@ -2552,6 +2552,12 @@ void DivLocale::addTranslationsRussian()
     strings["Low##sgse"].plurals[0] = "Низкое";
     strings["ASAP (C++ port)##sgse"].plurals[0] = "ASAP (портирован на C++)";
     strings["ESFMu (fast)##sgse"].plurals[0] = "ESFMu (быстрый)";
+    strings["Horrible##sgse"].plurals[0] = "Ужасное";
+    strings["Low##sgse"].plurals[0] = "Низкое";
+    strings["Medium##sgse"].plurals[0] = "Среднее";
+    strings["High##sgse"].plurals[0] = "Высокое";
+    strings["Ultra##sgse"].plurals[0] = "Очень высокое";
+    strings["Ultimate##sgse"].plurals[0] = "Максимальное";
     strings["KIOCSOUND on /dev/tty1##sgse"].plurals[0] = "KIOCSOUND в /dev/tty1";
     strings["KIOCSOUND on standard output##sgse"].plurals[0] = "KIOCSOUND в стандартном выводе";
     strings["Disabled/custom##sgse0"].plurals[0] = "Выкл./пользовательский";
@@ -2605,6 +2611,9 @@ void DivLocale::addTranslationsRussian()
     strings["Automatic##sgse0"].plurals[0] = "Выбирать автоматически";
     strings["Automatic##sgse1"].plurals[0] = "Выбирать автоматически";
     strings["you may need to restart Furnace for this setting to take effect.##sgse1"].plurals[0] = "возможно, вам потребуется перезапустить Furnace, чтобы эта настрока применилась.";
+    strings["VSync##sgse"].plurals[0] = "Вертикальная синхронизация";
+    strings["Frame rate limit##sgse"].plurals[0] = "Ограничение частоты кадров";
+    strings["only applies when VSync is disabled.##sgse"].plurals[0] = "применяется только при отключённой вертикальной синхронизации.";
     strings["Late render clear##sgse"].plurals[0] = "Запаздывающая очистка буфера отрисовщика";
     strings["calls rend->clear() after rend->present(). might reduce UI latency by one frame in some drivers.##sgse"].plurals[0] = "вызывает rend->clear() после rend->present(). может устранить запаздывание отрисовки интерфейса на один кадр для некоторых драйверов.";
     strings["Power-saving mode##sgse"].plurals[0] = "Режим энергосбережения";
