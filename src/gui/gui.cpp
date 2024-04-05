@@ -4262,6 +4262,10 @@ bool FurnaceGUI::loop() {
             curExportType=GUI_EXPORT_CMD_STREAM;
             displayExport=true;
           }
+          if (ImGui::MenuItem(_L("export FZT module...##sggu1"))) {
+            curExportType=GUI_EXPORT_FZT;
+            displayExport=true;
+          }
           if (ImGui::MenuItem(_L("export Furnace module...##sggu"))) {
             curExportType=GUI_EXPORT_FUR;
             displayExport=true;
@@ -4955,7 +4959,7 @@ bool FurnaceGUI::loop() {
             checkExtension(".fur");
           }
           if (curFileDialog==GUI_FILE_EXPORT_FZT) {
-            checkExtension(".fur");
+            checkExtension(".fzt");
           }
           if (curFileDialog==GUI_FILE_EXPORT_COLORS) {
             checkExtension(".cfgc");

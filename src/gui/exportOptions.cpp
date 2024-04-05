@@ -405,6 +405,9 @@ void FurnaceGUI::drawExport() {
     case GUI_EXPORT_FUR:
       drawExportFur(true);
       break;
+    case GUI_EXPORT_FZT:
+      drawExportFZT(true);
+      break;
     default:
       ImGui::Text(_L("congratulations! you've unlocked a secret panel.##sgeo"));
       if (ImGui::Button(_L("Toggle hidden systems##sgeo"))) {
