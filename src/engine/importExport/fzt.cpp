@@ -17,23 +17,42 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#pragma once
+#include "importExport.h"
 
-#include "../dataErrors.h"
-#include "../engine.h"
-#include "../../ta-log.h"
-#include "../instrument.h"
-#include "../song.h"
-#include <zlib.h>
-#include <fmt/printf.h>
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
 
-#define DIV_READ_SIZE 131072
-#define DIV_DMF_MAGIC ".DelekDefleMask."
-#define DIV_FUR_MAGIC "-Furnace module-"
-#define DIV_FUR_B_MAGIC "Furnace-B module"
-#define DIV_FTM_MAGIC "FamiTracker Module"
-#define DIV_DN_FTM_MAGIC "Dn-FamiTracker Module"
-#define DIV_FC13_MAGIC "SMOD"
-#define DIV_FC14_MAGIC "FC14"
-#define DIV_S3M_MAGIC "SCRM"
-#define DIV_FZT_MAGIC "FZT!SONG"
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
+
+class DivEngine;
+
+bool DivEngine::loadFZT(unsigned char* file, size_t len)
+{
+    SafeReader reader=SafeReader(file,len);
+    warnings="";
+
+    logV("loading FZT module...");
+
+    delete[] file;
+    return true;
+}
+
+SafeWriter* DivEngine::saveFZT()
+{
+    saveLock.lock();
+
+    SafeWriter* w=new SafeWriter;
+    w->init();
+
+    //export...
+    logV("exporting FZT module...");
+
+    saveLock.unlock();
+    return w;
+}

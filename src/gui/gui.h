@@ -561,6 +561,7 @@ enum FurnaceGUIFileDialogs {
   GUI_FILE_EXPORT_VGM,
   GUI_FILE_EXPORT_ZSM,
   GUI_FILE_EXPORT_CMDSTREAM,
+  GUI_FILE_EXPORT_FZT,
   GUI_FILE_EXPORT_TEXT,
   GUI_FILE_EXPORT_ROM,
   GUI_FILE_EXPORT_FUR,
@@ -1553,7 +1554,7 @@ class FurnaceGUI {
   String newOscFragment;
   String workingDir, fileName, clipboard, warnString, errorString, lastError, curFileName, nextFile, sysSearchQuery, newSongQuery, paletteQuery;
   String workingDirSong, workingDirIns, workingDirWave, workingDirSample, workingDirAudioExport;
-  String workingDirVGMExport, workingDirZSMExport, workingDirROMExport, workingDirFURExport, workingDirFont, workingDirColors, workingDirKeybinds;
+  String workingDirVGMExport, workingDirZSMExport, workingDirROMExport, workingDirFURExport, workingDirFZTExport, workingDirFont, workingDirColors, workingDirKeybinds;
   String workingDirLayout, workingDirROM, workingDirTest;
   String mmlString[32];
   String mmlStringW, grooveString, grooveListString, mmlStringModTable;
@@ -2510,6 +2511,7 @@ class FurnaceGUI {
   void drawExportAmigaVal(bool onWindow=false);
   void drawExportText(bool onWindow=false);
   void drawExportCommand(bool onWindow=false);
+  void drawExportFZT(bool onWindow=false);
   void drawExportFur(bool onWindow=false);
   void drawSSGEnv(unsigned char type, const ImVec2& size);
   void drawWaveform(unsigned char type, bool opz, const ImVec2& size);

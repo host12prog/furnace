@@ -754,6 +754,7 @@ src/engine/importExport/fc.cpp
 src/engine/importExport/ftm.cpp
 src/engine/importExport/mod.cpp
 src/engine/importExport/s3m.cpp
+src/engine/importExport/fzt.cpp
 
 src/engine/importExport/shared.cpp
 src/engine/importExport/dmp.cpp

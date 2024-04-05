@@ -281,6 +281,25 @@ void FurnaceGUI::drawExportCommand(bool onWindow) {
   }
 }
 
+void FurnaceGUI::drawExportFZT(bool onWindow) {
+  exitDisabledTimer=1;
+  
+  ImGui::Text(_L(
+    "this option exports a Flizzer Tracker module which\n"
+    "is meant to be played back on Flipper Zero with\n"
+    "Flizzer Tracker app installed."
+  ));
+  if (onWindow) {
+    ImGui::Separator();
+    if (ImGui::Button(_L("Cancel##sgeo9"),ImVec2(250.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    ImGui::SameLine();
+  }
+  if (ImGui::Button(_L("Export##sgeo9"),ImVec2(250.0f*dpiScale,0))) {
+    openFileDialog(GUI_FILE_EXPORT_FZT);
+    ImGui::CloseCurrentPopup();
+  }
+}
+
 void FurnaceGUI::drawExportFur(bool onWindow) {
   exitDisabledTimer=1;
   
@@ -350,6 +369,10 @@ void FurnaceGUI::drawExport() {
       }
       if (ImGui::BeginTabItem(_L("Furnace##sgeo"))) {
         drawExportFur(true);
+        ImGui::EndTabItem();
+      }
+      if (ImGui::BeginTabItem("FZT")) {
+        drawExportFZT(true);
         ImGui::EndTabItem();
       }
       ImGui::EndTabBar();

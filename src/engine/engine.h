@@ -559,6 +559,7 @@ class DivEngine {
   bool loadS3M(unsigned char* file, size_t len);
   bool loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_sig, bool eft);
   bool loadFC(unsigned char* file, size_t len);
+  bool loadFZT(unsigned char* file, size_t len);
 
   void loadDMP(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath);
   void loadTFI(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath);
@@ -670,6 +671,8 @@ class DivEngine {
     SafeWriter* saveCommand();
     // export to text
     SafeWriter* saveText(bool separatePatterns=true);
+    // export to FZT
+    SafeWriter* saveFZT();
     // export to an audio file
     bool saveAudio(const char* path, int loops, DivAudioExportModes mode, double fadeOutTime=0.0);
     // wait for audio export to finish

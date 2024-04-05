@@ -2220,6 +2220,8 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
     return loadFur(file,len,true);
   } else if (memcmp(file,DIV_FC13_MAGIC,4)==0 || memcmp(file,DIV_FC14_MAGIC,4)==0) {
     return loadFC(file,len);
+  } else if (memcmp(file,DIV_FZT_MAGIC,8)==0) {
+    return loadFZT(file,len);
   }
 
   // step 3: try loading as .mod

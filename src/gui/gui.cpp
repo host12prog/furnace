@@ -1642,7 +1642,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openLoad(
         settings.language == DIV_LANG_ENGLISH ? "Open File" : _L("Open File##sggu"),
-        { settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu0"), "*.fub *.fur *.dmf *.mod *.fc13 *.fc14 *.smod *.fc *.ftm *.0cc *.dnm *.eft",
+        { settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu0"), "*.fub *.fur *.dmf *.mod *.fc13 *.fc14 *.smod *.fc *.ftm *.0cc *.dnm *.eft *.fzt",
          settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu0"), "*"},
         workingDirSong,
         dpiScale
@@ -1910,6 +1910,15 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Export Command Stream" : _L("Export Command Stream##sggu2"),
         {settings.language == DIV_LANG_ENGLISH ? "binary file" : _L("binary file##sggu"), "*.bin"},
         workingDirROMExport,
+        dpiScale
+      );
+      break;
+    case GUI_FILE_EXPORT_FZT:
+      if (!dirExists(workingDirFZTExport)) workingDirFZTExport=getHomeDir();
+      hasOpened=fileDialog->openSave(
+        settings.language == DIV_LANG_ENGLISH ? "Export FZT module" : _L("Export FZT module##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "FZT module" : _L("FZT module##sggu"), "*.fzt"},
+        workingDirFZTExport,
         dpiScale
       );
       break;
@@ -4200,6 +4209,10 @@ bool FurnaceGUI::loop() {
             drawExportCommand();
             ImGui::EndMenu();
           }
+          if (ImGui::BeginMenu(_L("export FZT module...##sggu"))) {
+            drawExportFZT();
+            ImGui::EndMenu();
+          }
           if (ImGui::BeginMenu(_L("export Furnace module...##sggu"))) {
             drawExportFur();
             ImGui::EndMenu();
@@ -4842,6 +4855,9 @@ bool FurnaceGUI::loop() {
         case GUI_FILE_EXPORT_FUR:
           workingDirFURExport=fileDialog->getPath()+DIR_SEPARATOR_STR;
           break;
+        case GUI_FILE_EXPORT_FZT:
+          workingDirFZTExport=fileDialog->getPath()+DIR_SEPARATOR_STR;
+          break;
         case GUI_FILE_LOAD_MAIN_FONT:
         case GUI_FILE_LOAD_HEAD_FONT:
         case GUI_FILE_LOAD_PAT_FONT:
@@ -4936,6 +4952,9 @@ bool FurnaceGUI::loop() {
             checkExtension(".bin");
           }
           if (curFileDialog==GUI_FILE_EXPORT_FUR) {
+            checkExtension(".fur");
+          }
+          if (curFileDialog==GUI_FILE_EXPORT_FZT) {
             checkExtension(".fur");
           }
           if (curFileDialog==GUI_FILE_EXPORT_COLORS) {
@@ -5455,6 +5474,28 @@ bool FurnaceGUI::loop() {
                 }
               } else {
                 String export_err = settings.language == DIV_LANG_ENGLISH ? "could not write tildearrow version Furnace module! (%s)" : _L("could not write tildearrow version Furnace module! (%s)##sggu");
+                showError(fmt::sprintf(export_err,e->getLastError()));
+              }
+              break;
+            }
+            case GUI_FILE_EXPORT_FZT: {
+              SafeWriter* w=e->saveFZT();
+              if (w!=NULL) {
+                FILE* f=ps_fopen(copyOfName.c_str(),"wb");
+                if (f!=NULL) {
+                  fwrite(w->getFinalBuf(),1,w->size(),f);
+                  fclose(f);
+                  pushRecentSys(copyOfName.c_str());
+                } else {
+                  showError(settings.language == DIV_LANG_ENGLISH ? "could not open file!" : _L("could not open file!##sggu"));
+                }
+                w->finish();
+                delete w;
+                if (!e->getWarnings().empty()) {
+                  showWarning(e->getWarnings(),GUI_WARN_GENERIC);
+                }
+              } else {
+                String export_err = settings.language == DIV_LANG_ENGLISH ? "could not write FZT module! (%s)" : _L("could not write FZT module! (%s)##sggu");
                 showError(fmt::sprintf(export_err,e->getLastError()));
               }
               break;
