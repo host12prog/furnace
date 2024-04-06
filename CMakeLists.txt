@@ -486,7 +486,7 @@ extern/adpcm/yma_codec.c
 extern/adpcm/ymb_codec.c
 extern/adpcm/ymz_codec.c
 
-extern/adpcm-xq/adpcm-lib.c
+extern/adpcm-xq-s/adpcm-lib.c
 
 extern/opn/ym3438.c
 extern/Nuked-PSG/ympsg.c
@@ -498,6 +498,7 @@ extern/YMF262-LLE/fmopl3.c
 extern/YMF276-LLE/fmopn2.c
 extern/ESFMu/esfm.c
 extern/ESFMu/esfm_registers.c
+extern/emu2413/emu2413.c
 
 extern/pwrnoise/pwrnoise.c
 

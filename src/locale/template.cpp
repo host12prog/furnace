@@ -2585,6 +2585,12 @@ void DivLocale::addTranslationsTemplate()
     strings["Low##sgse"].plurals[0] = "=Low";
     strings["ASAP (C++ port)##sgse"].plurals[0] = "=ASAP (C++ port)";
     strings["ESFMu (fast)##sgse"].plurals[0] = "=ESFMu (fast)";
+    strings["Horrible##sgse"].plurals[0] = "=Horrible";
+    strings["Low##sgse"].plurals[0] = "=Low";
+    strings["Medium##sgse"].plurals[0] = "=Medium";
+    strings["High##sgse"].plurals[0] = "=High";
+    strings["Ultra##sgse"].plurals[0] = "=Ultra";
+    strings["Ultimate##sgse"].plurals[0] = "=Ultimate";
     strings["KIOCSOUND on /dev/tty1##sgse"].plurals[0] = "=KIOCSOUND on /dev/tty1";
     strings["KIOCSOUND on standard output##sgse"].plurals[0] = "=KIOCSOUND on standard output";
     strings["Disabled/custom##sgse0"].plurals[0] = "=Disabled/custom";
@@ -2638,6 +2644,9 @@ void DivLocale::addTranslationsTemplate()
     strings["Automatic##sgse0"].plurals[0] = "=Automatic";
     strings["Automatic##sgse1"].plurals[0] = "=Automatic";
     strings["you may need to restart Furnace for this setting to take effect.##sgse1"].plurals[0] = "=you may need to restart Furnace for this setting to take effect.";
+    strings["VSync##sgse"].plurals[0] = "=VSync";
+    strings["Frame rate limit##sgse"].plurals[0] = "=Frame rate limit";
+    strings["only applies when VSync is disabled.##sgse"].plurals[0] = "=only applies when VSync is disabled.";
     strings["Late render clear##sgse"].plurals[0] = "=Late render clear";
     strings["calls rend->clear() after rend->present(). might reduce UI latency by one frame in some drivers.##sgse"].plurals[0] = "=calls rend->clear() after rend->present(). might reduce UI latency by one frame in some drivers.";
     strings["Power-saving mode##sgse"].plurals[0] = "=Power-saving mode";

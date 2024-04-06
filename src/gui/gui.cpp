@@ -3706,6 +3706,10 @@ bool FurnaceGUI::loop() {
         scrConfW=scrW;
         scrConfH=scrH;
       }
+      if (rend!=NULL) {
+        logV("restoring swap interval...");
+        rend->setSwapInterval(settings.vsync);
+      }
     }
     // update canvas size as well
     if (!rend->getOutputSize(canvasW,canvasH)) {
@@ -3966,7 +3970,7 @@ bool FurnaceGUI::loop() {
 
       logD("starting render backend...");
       while (++initAttempts<=5) {
-        if (rend->init(sdlWin)) {
+        if (rend->init(sdlWin,settings.vsync)) {
           break;
         }
         SDL_Delay(1000);
@@ -4590,7 +4594,8 @@ bool FurnaceGUI::loop() {
                 if (maxVol<1 || p->data[cursor.y][3]>maxVol) {
                   info=fmt::sprintf(_L("Set volume: %d (%.2X, INVALID!)##sggu"),p->data[cursor.y][3],p->data[cursor.y][3]);
                 } else {
-                  info=fmt::sprintf(_L("Set volume: %d (%.2X, %d%%)##sggu"),p->data[cursor.y][3],p->data[cursor.y][3],(p->data[cursor.y][3]*100)/maxVol);
+                  float realVol=e->mapVelocity(cursor.xCoarse,(float)p->data[cursor.y][3]/(float)maxVol);
+                  info=fmt::sprintf(_L("Set volume: %d (%.2X, %d%%)##sggu"),p->data[cursor.y][3],p->data[cursor.y][3],(int)(realVol*100.0f));
                 }
                 hasInfo=true;
               }
@@ -6639,6 +6644,22 @@ bool FurnaceGUI::loop() {
     
     drawTimeEnd=SDL_GetPerformanceCounter();
     swapTimeBegin=SDL_GetPerformanceCounter();
+    if (!settings.vsync || !rend->canVSync()) {
+      unsigned int presentDelay=SDL_GetPerformanceFrequency()/settings.frameRateLimit;
+      if ((nextPresentTime-swapTimeBegin)<presentDelay) {
+#ifdef _WIN32
+        unsigned int mDivider=SDL_GetPerformanceFrequency()/1000;
+        Sleep((unsigned int)(nextPresentTime-swapTimeBegin)/mDivider);
+#else
+        unsigned int mDivider=SDL_GetPerformanceFrequency()/1000000;
+        usleep((unsigned int)(nextPresentTime-swapTimeBegin)/mDivider);
+#endif
+
+        nextPresentTime+=presentDelay;
+      } else {
+        nextPresentTime=swapTimeBegin+presentDelay;
+      }
+    }
     rend->present();
     if (settings.renderClearPos) {
       rend->clear(uiColors[GUI_COLOR_BACKGROUND]);
@@ -7139,7 +7160,7 @@ bool FurnaceGUI::init() {
   }
 
   logD("starting render backend...");
-  if (!rend->init(sdlWin)) {
+  if (!rend->init(sdlWin,settings.vsync)) {
     logE("it failed...");
     if (settings.renderBackend!="SDL") {
       settings.renderBackend="SDL";
@@ -7561,7 +7582,6 @@ FurnaceGUI::FurnaceGUI():
   snesFilterHex(false),
   modTableHex(false),
   displayEditString(false),
-  shaderEditor(false),
   mobileEdit(false),
   killGraphics(false),
   safeMode(false),
@@ -7871,6 +7891,7 @@ FurnaceGUI::FurnaceGUI():
   eventTimeBegin(0),
   eventTimeEnd(0),
   eventTimeDelta(0),
+  nextPresentTime(0),
   perfMetricsLen(0),
   chanToMove(-1),
   sysToMove(-1),
