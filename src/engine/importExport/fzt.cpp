@@ -136,6 +136,7 @@ const int fzt_commands_map_real[][2] =
   { DivInstrumentFZT::TE_EFFECT_EXT_FINE_VOLUME_DOWN, TEE_EFFECT_EXT_FINE_VOLUME_DOWN},
   { DivInstrumentFZT::TE_EFFECT_EXT_FINE_VOLUME_UP, TEE_EFFECT_EXT_FINE_VOLUME_UP},
   { DivInstrumentFZT::TE_EFFECT_EXT_NOTE_CUT, TEE_EFFECT_EXT_NOTE_CUT},
+  { 0xED00, TEE_EFFECT_EXT_NOTE_DELAY},
   { DivInstrumentFZT::TE_EFFECT_EXT_PHASE_RESET, TEE_EFFECT_EXT_PHASE_RESET},
   { DivInstrumentFZT::TE_EFFECT_SET_SPEED_PROG_PERIOD, TEE_EFFECT_SET_SPEED_PROG_PERIOD},
   { DivInstrumentFZT::TE_EFFECT_CUTOFF_UP, TEE_EFFECT_CUTOFF_UP},
@@ -199,13 +200,13 @@ int convert_fzt_eff_to_furnace(uint16_t fzt_eff, bool mask_value)
 
     while(fzt_commands_map_real[index][0] != -1 || fzt_commands_map_real[index][1] != -1)
     {
-        if((fzt_eff & 0x7f00) == fzt_commands_map_real[index][1])
-        {
-            return fzt_commands_map_real[index][0] | (mask_value ? 0 : eff_val_hex2);
-        }
-        if((fzt_eff & 0x7ff0) == fzt_commands_map_real[index][1])
+        if((fzt_eff & 0x7ff0) == fzt_commands_map_real[index][1] && (fzt_eff & 0x7fff) >= TEE_EFFECT_EXT_TOGGLE_FILTER && (fzt_eff & 0x7fff) < TEE_EFFECT_SET_SPEED_PROG_PERIOD)
         {
             return fzt_commands_map_real[index][0] | (mask_value ? 0 : eff_val_hex1);
+        }
+        if((fzt_eff & 0x7f00) == fzt_commands_map_real[index][1] && ((fzt_eff & 0x7fff) < TEE_EFFECT_EXT_TOGGLE_FILTER || (fzt_eff & 0x7fff) >= TEE_EFFECT_SET_SPEED_PROG_PERIOD))
+        {
+            return fzt_commands_map_real[index][0] | (mask_value ? 0 : eff_val_hex2);
         }
         if((fzt_eff & 0x7fff) == TEE_PROGRAM_NOP)
         {
