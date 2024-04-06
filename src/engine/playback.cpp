@@ -1580,7 +1580,7 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
         }
         DivPattern* pat=curPat[i].getPattern(curOrders->ord[i][whatOrder],false);
         int seek=(pat->data[whatRow][0]+pat->data[whatRow][1]*12);
-        if (seek >= 0 && pat->data[whatRow][0] < 100 && (pat->data[whatRow][0] != 0 && pat->data[whatRow][1] != 0) && (speeds.val[0] - ticks) == 0) 
+        if (seek >= 0 && pat->data[whatRow][0] < 100 && (pat->data[whatRow][0] != 0 && pat->data[whatRow][1] != 0 && pat->data[whatRow][0] != -1 && pat->data[whatRow][1] != 0 && -1) && (speeds.val[0] - ticks) == 0) 
         {
           DivDispatch* maybeFZT = getDispatchFromChanIndex(i);
           if(maybeFZT != NULL) //only for FZT sound source since in it I want to run my own vol, pitch and vibrato calc!
@@ -1647,7 +1647,13 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
           {
             if(sysOfChan[i] == DIV_SYSTEM_FZT && effect != -1)
             {
-              dispatchCmd(DivCommand(DIV_CMD_EFFECT_FZT,i,effect | ((speeds.val[0] - ticks) << 8),effectVal | (pat->data[whatRow][0] << 8) | (pat->data[whatRow][1] << 16)));
+              bool invalid_note = false;
+              if(pat->data[whatRow][0] <= 0 || pat->data[whatRow][0] > 20)
+              {
+                invalid_note = true;
+              }
+
+              dispatchCmd(DivCommand(DIV_CMD_EFFECT_FZT,i,effect | ((speeds.val[0] - ticks) << 8),effectVal | (pat->data[whatRow][0] << 8) | (pat->data[whatRow][1] << 16) | (invalid_note ? (1 << 24) : 0)));
             }
           }
         }

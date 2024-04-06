@@ -1017,8 +1017,12 @@ int DivPlatformFZT::dispatch(DivCommand c) {
     case DIV_CMD_EFFECT_FZT:
       //logV("eff fzt");
       current_tick = c.value >> 8;
-      chan[c.chan].fzt_note = (c.value2 >> 8) & 0xff;
-      chan[c.chan].fzt_octave = (c.value2 >> 16) & 0xff;
+      if(!(c.value2 & (1 << 24)))
+      {
+        chan[c.chan].fzt_note = (c.value2 >> 8) & 0xff;
+        chan[c.chan].fzt_octave = (c.value2 >> 16) & 0xff;
+      }
+      
       tracker_engine_advance_tick(c.chan, ((c.value & 0xff) << 8) | (c.value2 & 0xff), false);
       break;
     case DIV_CMD_GET_VOLMAX:
