@@ -116,6 +116,7 @@ const int fzt_commands_map_real[][2] =
   { DivInstrumentFZT::TE_EFFECT_ARPEGGIO, TEE_EFFECT_ARPEGGIO},    
   { DivInstrumentFZT::TE_EFFECT_PORTAMENTO_UP, TEE_EFFECT_PORTAMENTO_UP},
   { DivInstrumentFZT::TE_EFFECT_PORTAMENTO_DOWN, TEE_EFFECT_PORTAMENTO_DOWN},
+  { 0x0300, TEE_EFFECT_SLIDE},
   { DivInstrumentFZT::TE_EFFECT_VIBRATO, TEE_EFFECT_VIBRATO},
   { DivInstrumentFZT::TE_EFFECT_PWM, TEE_EFFECT_PWM},
   { DivInstrumentFZT::TE_EFFECT_SET_PW, TEE_EFFECT_SET_PW},
@@ -125,6 +126,7 @@ const int fzt_commands_map_real[][2] =
   { DivInstrumentFZT::TE_EFFECT_VOLUME_FADE, TEE_EFFECT_VOLUME_FADE},
   { DivInstrumentFZT::TE_EFFECT_SET_WAVEFORM, TEE_EFFECT_SET_WAVEFORM},
   { DivInstrumentFZT::TE_EFFECT_SET_VOLUME, TEE_EFFECT_SET_VOLUME},
+  { 0x0d00, TEE_EFFECT_SKIP_PATTERN},
   { DivInstrumentFZT::TE_EFFECT_EXT_TOGGLE_FILTER, TEE_EFFECT_EXT_TOGGLE_FILTER},
   { DivInstrumentFZT::TE_EFFECT_EXT_PORTA_UP, TEE_EFFECT_EXT_PORTA_UP},
   { DivInstrumentFZT::TE_EFFECT_EXT_PORTA_DN, TEE_EFFECT_EXT_PORTA_DN},
@@ -150,6 +152,7 @@ const int fzt_commands_map_real[][2] =
   { DivInstrumentFZT::TE_EFFECT_PORTA_UP_SEMITONE, TEE_EFFECT_PORTA_UP_SEMITONE},
   { DivInstrumentFZT::TE_EFFECT_PORTA_DOWN_SEMITONE, TEE_EFFECT_PORTA_DOWN_SEMITONE},
   { DivInstrumentFZT::TE_EFFECT_PITCH, TEE_EFFECT_PITCH},
+  { 0xEA00, TEE_EFFECT_LEGATO},
   { DivInstrumentFZT::TE_EFFECT_ARPEGGIO_ABS, TEE_EFFECT_ARPEGGIO_ABS},
   { DivInstrumentFZT::TE_EFFECT_TRIGGER_RELEASE, TEE_EFFECT_TRIGGER_RELEASE},
   { DivInstrumentFZT::TE_PROGRAM_LOOP_BEGIN, TEE_PROGRAM_LOOP_BEGIN},
@@ -183,6 +186,59 @@ int search_pattern(int** array, int cur_index)
     }
 
     return -1;
+}
+
+int convert_fzt_eff_to_furnace(uint16_t fzt_eff, bool mask_value)
+{
+    uint8_t eff_val_hex2 = fzt_eff & 0xff;
+    uint8_t eff_val_hex1 = fzt_eff & 0xf;
+
+    int index = 0;
+
+    if(fzt_eff == 0) return -1;
+
+    while(fzt_commands_map_real[index][0] != -1 || fzt_commands_map_real[index][1] != -1)
+    {
+        if((fzt_eff & 0x7f00) == fzt_commands_map_real[index][1])
+        {
+            return fzt_commands_map_real[index][0] | (mask_value ? 0 : eff_val_hex2);
+        }
+        if((fzt_eff & 0x7ff0) == fzt_commands_map_real[index][1])
+        {
+            return fzt_commands_map_real[index][0] | (mask_value ? 0 : eff_val_hex1);
+        }
+        if((fzt_eff & 0x7fff) == TEE_PROGRAM_NOP)
+        {
+            return DivInstrumentFZT::TE_PROGRAM_NOP;
+        }
+        if((fzt_eff & 0x7fff) == TEE_PROGRAM_END)
+        {
+            return DivInstrumentFZT::TE_PROGRAM_END;
+        }
+
+        index++;
+    }
+
+    return -1;
+}
+
+bool is_0_f_fzt_command(uint16_t command)
+{
+    int index = 0;
+
+    if(command == 0) return false;
+
+    while(fzt_commands_map_real[index][0] != -1 || fzt_commands_map_real[index][1] != -1)
+    {
+        if((command & 0x7ff0) == fzt_commands_map_real[index][1] && (command & 0x7fff) >= TEE_EFFECT_EXT_TOGGLE_FILTER && (command & 0x7fff) < TEE_EFFECT_SET_SPEED_PROG_PERIOD)
+        {
+            return true;
+        }
+
+        index++;
+    }
+
+    return false;
 }
 
 uint8_t tracker_engine_get_note(TrackerSongPatternStep* step) {
@@ -296,7 +352,7 @@ bool DivEngine::loadFZT(unsigned char* file, size_t len)
         DivSubSong* sub_song = ds.subsong[0];
         sub_song->patLen = pattern_length;
 
-        if(loop_start >= loop_end)
+        if(loop_start >= loop_end && loop_end != 0)
         {
             lastError=_LE("invalid loop start and loop end!");
             DELETE_ORDERS
@@ -413,7 +469,200 @@ bool DivEngine::loadFZT(unsigned char* file, size_t len)
                             pat->data[row][1]--;
                         }
                     }
+                    if(note == MUS_NOTE_CUT_FZT)
+                    {
+                        pat->data[row][0] = 100;
+                    }
+                    if(note == MUS_NOTE_RELEASE_FZT)
+                    {
+                        pat->data[row][0] = 101;
+                    }
+
+                    int inst = tracker_engine_get_instrument(step);
+
+                    if(inst != MUS_NOTE_INSTRUMENT_NONE_FZT)
+                    {
+                        pat->data[row][2] = inst;
+                    }
+
+                    int vol = tracker_engine_get_volume(step);
+
+                    if(vol != MUS_NOTE_VOLUME_NONE_FZT)
+                    {
+                        pat->data[row][3] = vol * 0xff / MUS_NOTE_VOLUME_NONE_FZT;
+                    }
+
+                    int effect = convert_fzt_eff_to_furnace(tracker_engine_get_command(step), false);
+
+                    if(effect != -1)
+                    {
+                        pat->data[row][4] = effect >> 8;
+                        pat->data[row][5] = effect & 0xff;
+                    }
                 }
+            }
+        }
+
+        unsigned char num_instruments = reader.readC();
+
+        if(num_instruments > 31)
+        {
+            lastError=_LE("too many instruments!");
+            DELETE_ORDERS
+            delete[] file;
+            return false;
+        }
+
+        for(int i = 0; i < num_instruments; i++)
+        {
+            DivInstrument* ins = new DivInstrument;
+            ins->type = DIV_INS_FZT;
+
+            for(int j = 0; j < FZT_INST_PROG_LEN; j++)
+            {
+                ins->fzt.program[j].cmd = DivInstrumentFZT::TE_PROGRAM_NOP;
+                ins->fzt.program[j].val = 0;
+                ins->fzt.program[j].unite = false;
+            }
+
+            ins->name = reader.readString(14);
+
+            ins->fzt.waveform = reader.readC();
+            ins->fzt.flags = reader.readS();
+            ins->fzt.sound_engine_flags = reader.readS();
+
+            ins->fzt.base_note = reader.readC();
+            ins->fzt.finetune = (signed char)reader.readC();
+
+            ins->fzt.slide_speed = reader.readC();
+
+            ins->fzt.adsr.a = reader.readC();
+            ins->fzt.adsr.d = reader.readC();
+            ins->fzt.adsr.s = reader.readC();
+            ins->fzt.adsr.r = reader.readC();
+            ins->fzt.adsr.volume = reader.readC();
+
+            ins->fzt.pw = reader.readC();
+
+            if(ins->fzt.sound_engine_flags & SE_ENABLE_RING_MOD)
+            {
+                ins->fzt.ring_mod = reader.readC();
+            }
+
+            if(ins->fzt.sound_engine_flags & SE_ENABLE_HARD_SYNC)
+            {
+                ins->fzt.hard_sync = reader.readC();
+            }
+
+            unsigned char progsteps = reader.readC();
+
+            if(progsteps > FZT_INST_PROG_LEN)
+            {
+                lastError=_LE("instrument program is too long!");
+                DELETE_ORDERS
+                delete[] file;
+                return false;
+            }
+
+            if(progsteps > 0)
+            {
+                for(int j = 0; j < progsteps; j++)
+                {
+                    uint16_t command = reader.readS();
+
+                    uint16_t fur_command = convert_fzt_eff_to_furnace(command, true);
+                    
+                    ins->fzt.program[j].cmd = fur_command;
+
+                    if((command & 0x7fff) == 0)
+                    {
+                        ins->fzt.program[j].cmd = DivInstrumentFZT::TE_EFFECT_ARPEGGIO;
+                    }
+
+                    if(is_0_f_fzt_command(command))
+                    {
+                        ins->fzt.program[j].val = command & 0xf;
+                    }
+                    else
+                    {
+                        ins->fzt.program[j].val = command & 0xff;
+                    }
+
+                    if(command & 0x8000)
+                    {
+                        ins->fzt.program[j].unite = true;
+                    }
+                }
+            }
+
+            ins->fzt.program_period = reader.readC();
+
+            if(ins->fzt.flags & TE_ENABLE_VIBRATO)
+            {
+                ins->fzt.vibrato_speed = reader.readC();
+                ins->fzt.vibrato_depth = reader.readC();
+                ins->fzt.vibrato_delay = reader.readC();
+            }
+
+            if(ins->fzt.flags & TE_ENABLE_PWM)
+            {
+                ins->fzt.pwm_speed = reader.readC();
+                ins->fzt.pwm_depth = reader.readC();
+                ins->fzt.pwm_delay = reader.readC();
+            }
+
+            if(ins->fzt.sound_engine_flags & SE_ENABLE_FILTER)
+            {
+                ins->fzt.filter_cutoff = reader.readC();
+                ins->fzt.filter_resonance = reader.readC();
+                ins->fzt.filter_type = reader.readC();
+            }
+
+            ds.ins.push_back(ins);
+        }
+
+        ds.insLen = ds.ins.size();
+
+        if(loop_start != loop_end && loop_end > 0)
+        {
+            bool placed_0bxx = false;
+
+            for(int i = 0; i < FZT_NUM_CHANNELS; i++) //try to find place for 0bxx effect in first effect column of some channel
+            {
+                DivPattern* pat = sub_song->pat[i].getPattern(sub_song->orders.ord[i][num_sequence_steps - 1], true);
+
+                if(pat->data[pattern_length - 1][4] == -1 && pat->data[pattern_length - 1][5] == -1)
+                {
+                    pat->data[pattern_length - 1][4] = 0x0b;
+                    pat->data[pattern_length - 1][5] = loop_start;
+
+                    placed_0bxx = true;
+                    break;
+                }
+            }
+            if(!placed_0bxx) //search other effect columns!
+            {
+                for(int i = 0; i < FZT_NUM_CHANNELS; i++) //try to find place for 0bxx effect in first effect column of some channel
+                {
+                    DivPattern* pat = sub_song->pat[i].getPattern(sub_song->orders.ord[i][num_sequence_steps - 1], true);
+
+                    for(int j = 1; j < DIV_MAX_EFFECTS; j++)
+                    {
+                        if(pat->data[pattern_length - 1][4 + j*2] == -1 && pat->data[pattern_length - 1][5 + j*2] == -1)
+                        {
+                            pat->data[pattern_length - 1][4 + j*2] = 0x0b;
+                            pat->data[pattern_length - 1][5 + j*2] = loop_start;
+
+                            placed_0bxx = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(!placed_0bxx) //strange but well...
+            {
+                logW("couldn't place 0bxx command to make a loop point");
+                addWarning(_LE("couldn't place 0bxx command to make a loop point"));
             }
         }
 
