@@ -94,6 +94,29 @@ void DivPlatformOPLL::acquire_ymfm(short** buf, size_t len) {
 }
 
 void DivPlatformOPLL::acquire_emu(short** buf, size_t len) {
+  thread_local int os;
+
+  for (size_t h=0; h<len; h++) {
+    if (!writes.empty()) {
+      QueuedWrite& w=writes.front();
+      OPLL_writeReg(fm_emu,w.addr,w.val);
+      writes.pop();
+    }
+    os=OPLL_calc(fm_emu);
+    os=os+(os<<1);
+    if (os<-32768) os=-32768;
+    if (os>32767) os=32767;
+    
+    buf[0][h]=os;
+
+    for (int i=0; i<11; i++) {
+      if (i>=6 && properDrums) {
+        oscBuf[i]->data[oscBuf[i]->needle++]=fm_emu->ch_out[i+3]<<3;
+      } else {
+        oscBuf[i]->data[oscBuf[i]->needle++]=fm_emu->ch_out[i]<<3;
+      }
+    }
+  }
 }
 
 void DivPlatformOPLL::acquire(short** buf, size_t len) {
@@ -987,6 +1010,10 @@ int DivPlatformOPLL::getRegisterPoolSize() {
   return 64;
 }
 
+static const unsigned char nukedToEmuPatch[4]={
+  0, 2, 0 /* TODO */, 1
+};
+
 void DivPlatformOPLL::reset() {
   while (!writes.empty()) writes.pop();
   memset(regPool,0,256);
@@ -1011,6 +1038,11 @@ void DivPlatformOPLL::reset() {
   }
   if (dumpWrites) {
     addWrite(0xffffffff,0);
+  }
+  if (selCore==1) {
+    OPLL_reset(fm_emu);
+    OPLL_setChipType(fm_emu,vrc7?1:0);
+    OPLL_resetPatch(fm_emu,nukedToEmuPatch[patchSet&3]);
   }
   for (int i=0; i<11; i++) {
     chan[i]=DivPlatformOPLL::Channel();
@@ -1107,10 +1139,18 @@ void DivPlatformOPLL::setFlags(const DivConfig& flags) {
     chipClock=COLOR_NTSC;
   }
   CHECK_CUSTOM_CLOCK;
-  rate=chipClock/36;
   patchSet=flags.getInt("patchSet",0);
+  if (selCore==1) {
+    rate=chipClock/72;
+  } else {
+    rate=chipClock/36;
+  }
   for (int i=0; i<11; i++) {
-    oscBuf[i]->rate=rate/2;
+    if (selCore==1) {
+      oscBuf[i]->rate=rate;
+    } else {
+      oscBuf[i]->rate=rate/2;
+    }
   }
   noTopHatFreq=flags.getBool("noTopHatFreq",false);
   fixedAll=flags.getBool("fixedAll",true);
@@ -1121,6 +1161,12 @@ int DivPlatformOPLL::init(DivEngine* p, int channels, int sugRate, const DivConf
   dumpWrites=false;
   skipRegisterWrites=false;
   patchSet=0;
+  fm_emu=NULL;
+  if (selCore==1) {
+    fm_emu=OPLL_new(72,1);
+    OPLL_setChipType(fm_emu,vrc7?1:0);
+  }
+  
   for (int i=0; i<11; i++) {
     isMuted[i]=false;
     oscBuf[i]=new DivDispatchOscBuffer;
@@ -1134,6 +1180,10 @@ int DivPlatformOPLL::init(DivEngine* p, int channels, int sugRate, const DivConf
 void DivPlatformOPLL::quit() {
   for (int i=0; i<11; i++) {
     delete oscBuf[i];
+  }
+  if (fm_emu!=NULL) {
+    OPLL_delete(fm_emu);
+    fm_emu=NULL;
   }
 }
 
