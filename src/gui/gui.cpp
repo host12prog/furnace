@@ -2293,7 +2293,7 @@ void FurnaceGUI::openRecentFile(String path) {
     showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before opening file?" : _L("Unsaved changes! Save changes before opening file?##sggu1"),GUI_WARN_OPEN_DROP);
   } else {
     if (load(path)>0) {
-      showError(fmt::sprintf("Error while loading file! (%s)",lastError));
+      showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while loading file! (%s)" : _L("Error while loading file! (%s)##sggu0"), lastError));
     }
   }
 }
