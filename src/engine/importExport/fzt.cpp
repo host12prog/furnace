@@ -667,6 +667,8 @@ bool DivEngine::loadFZT(unsigned char* file, size_t len)
             }
         }
 
+        ds.is_prohibited_to_save = true;
+
         if (active) quitDispatch();
         BUSY_BEGIN_SOFT;
         saveLock.lock();
