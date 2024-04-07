@@ -747,7 +747,7 @@ SafeWriter* DivEngine::saveFZT()
 
     for (int i = 0; i < 17; i++)
     {
-        if (i < name.length())
+        if (i < (int)name.length())
         {
             w->writeC(name[i]);
         }
