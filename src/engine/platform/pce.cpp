@@ -94,9 +94,9 @@ void DivPlatformPCE::acquire(short** buf, size_t len) {
       regPool[w.addr&0x0f]=w.val;
       writes.pop();
     }
-    memset(tempL,0,24*sizeof(int));
-    memset(tempR,0,24*sizeof(int));
-    pce->Update(24);
+    tempL[0]=0;
+    tempR[0]=0;
+    pce->Update(coreQuality);
     pce->ResetTS(0);
 
     for (int i=0; i<6; i++) {
@@ -634,7 +634,7 @@ void DivPlatformPCE::setFlags(const DivConfig& flags) {
   }
   CHECK_CUSTOM_CLOCK;
   antiClickEnabled=!flags.getBool("noAntiClick",false);
-  rate=chipClock/12;
+  rate=chipClock/(coreQuality>>1);
   for (int i=0; i<6; i++) {
     oscBuf[i]->rate=rate;
   }
@@ -652,6 +652,32 @@ void DivPlatformPCE::poke(unsigned int addr, unsigned short val) {
 
 void DivPlatformPCE::poke(std::vector<DivRegWrite>& wlist) {
   for (DivRegWrite& i: wlist) rWrite(i.addr,i.val);
+}
+
+void DivPlatformPCE::setCoreQuality(unsigned char q) {
+  switch (q) {
+    case 0:
+      coreQuality=192;
+      break;
+    case 1:
+      coreQuality=96;
+      break;
+    case 2:
+      coreQuality=48;
+      break;
+    case 3:
+      coreQuality=24;
+      break;
+    case 4:
+      coreQuality=6;
+      break;
+    case 5:
+      coreQuality=2;
+      break;
+    default:
+      coreQuality=24;
+      break;
+  }
 }
 
 int DivPlatformPCE::init(DivEngine* p, int channels, int sugRate, const DivConfig& flags) {

@@ -303,9 +303,19 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
       break;
     case DIV_SYSTEM_GB:
       dispatch=new DivPlatformGB;
+      if (isRender) {
+        ((DivPlatformGB*)dispatch)->setCoreQuality(eng->getConfInt("gbQualityRender",3));
+      } else {
+        ((DivPlatformGB*)dispatch)->setCoreQuality(eng->getConfInt("gbQuality",3));
+      }
       break;
     case DIV_SYSTEM_PCE:
       dispatch=new DivPlatformPCE;
+      if (isRender) {
+        ((DivPlatformPCE*)dispatch)->setCoreQuality(eng->getConfInt("pceQualityRender",3));
+      } else {
+        ((DivPlatformPCE*)dispatch)->setCoreQuality(eng->getConfInt("pceQuality",3));
+      }
       break;
     case DIV_SYSTEM_NES:
       dispatch=new DivPlatformNES;
@@ -319,8 +329,10 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
       dispatch=new DivPlatformC64;
       if (isRender) {
         ((DivPlatformC64*)dispatch)->setCore(eng->getConfInt("c64CoreRender",1));
+        ((DivPlatformC64*)dispatch)->setCoreQuality(eng->getConfInt("dsidQualityRender",3));
       } else {
         ((DivPlatformC64*)dispatch)->setCore(eng->getConfInt("c64Core",0));
+        ((DivPlatformC64*)dispatch)->setCoreQuality(eng->getConfInt("dsidQuality",3));
       }
       ((DivPlatformC64*)dispatch)->setChipModel(true);
       break;
@@ -328,8 +340,10 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
       dispatch=new DivPlatformC64;
       if (isRender) {
         ((DivPlatformC64*)dispatch)->setCore(eng->getConfInt("c64CoreRender",1));
+        ((DivPlatformC64*)dispatch)->setCoreQuality(eng->getConfInt("dsidQualityRender",3));
       } else {
         ((DivPlatformC64*)dispatch)->setCore(eng->getConfInt("c64Core",0));
+        ((DivPlatformC64*)dispatch)->setCoreQuality(eng->getConfInt("dsidQuality",3));
       }
       ((DivPlatformC64*)dispatch)->setChipModel(false);
       break;
@@ -560,6 +574,11 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
       break;
     case DIV_SYSTEM_SAA1099: {
       dispatch=new DivPlatformSAA1099;
+      if (isRender) {
+        ((DivPlatformSAA1099*)dispatch)->setCoreQuality(eng->getConfInt("saaQualityRender",3));
+      } else {
+        ((DivPlatformSAA1099*)dispatch)->setCoreQuality(eng->getConfInt("saaQuality",3));
+      }
       break;
     }
     case DIV_SYSTEM_PCSPKR:
@@ -597,18 +616,33 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
       break;
     case DIV_SYSTEM_SWAN:
       dispatch=new DivPlatformSwan;
+      if (isRender) {
+        ((DivPlatformSwan*)dispatch)->setCoreQuality(eng->getConfInt("swanQualityRender",3));
+      } else {
+        ((DivPlatformSwan*)dispatch)->setCoreQuality(eng->getConfInt("swanQuality",3));
+      }
       break;
     case DIV_SYSTEM_T6W28:
       dispatch=new DivPlatformT6W28;
       break;
     case DIV_SYSTEM_VBOY:
       dispatch=new DivPlatformVB;
+      if (isRender) {
+        ((DivPlatformVB*)dispatch)->setCoreQuality(eng->getConfInt("vbQualityRender",3));
+      } else {
+        ((DivPlatformVB*)dispatch)->setCoreQuality(eng->getConfInt("vbQuality",3));
+      }
       break;
     case DIV_SYSTEM_VERA:
       dispatch=new DivPlatformVERA;
       break;
     case DIV_SYSTEM_BUBSYS_WSG:
       dispatch=new DivPlatformBubSysWSG;
+      if (isRender) {
+        ((DivPlatformBubSysWSG*)dispatch)->setCoreQuality(eng->getConfInt("bubsysQualityRender",3));
+      } else {
+        ((DivPlatformBubSysWSG*)dispatch)->setCoreQuality(eng->getConfInt("bubsysQuality",3));
+      }
       break;
     case DIV_SYSTEM_N163:
       dispatch=new DivPlatformN163;
@@ -634,10 +668,20 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
     case DIV_SYSTEM_SCC:
       dispatch=new DivPlatformSCC;
       ((DivPlatformSCC*)dispatch)->setChipModel(false);
+      if (isRender) {
+        ((DivPlatformSCC*)dispatch)->setCoreQuality(eng->getConfInt("sccQualityRender",3));
+      } else {
+        ((DivPlatformSCC*)dispatch)->setCoreQuality(eng->getConfInt("sccQuality",3));
+      }
       break;
     case DIV_SYSTEM_SCC_PLUS:
       dispatch=new DivPlatformSCC;
       ((DivPlatformSCC*)dispatch)->setChipModel(true);
+      if (isRender) {
+        ((DivPlatformSCC*)dispatch)->setCoreQuality(eng->getConfInt("sccQualityRender",3));
+      } else {
+        ((DivPlatformSCC*)dispatch)->setCoreQuality(eng->getConfInt("sccQuality",3));
+      }
       break;
     case DIV_SYSTEM_YMZ280B:
       dispatch=new DivPlatformYMZ280B;
@@ -682,6 +726,11 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
       break;
     case DIV_SYSTEM_SM8521:
       dispatch=new DivPlatformSM8521;
+      if (isRender) {
+        ((DivPlatformSM8521*)dispatch)->setCoreQuality(eng->getConfInt("smQualityRender",3));
+      } else {
+        ((DivPlatformSM8521*)dispatch)->setCoreQuality(eng->getConfInt("smQuality",3));
+      }
       break;
     case DIV_SYSTEM_PV1000:
       dispatch=new DivPlatformPV1000;
@@ -722,12 +771,22 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
       break;
     case DIV_SYSTEM_POWERNOISE:
       dispatch=new DivPlatformPowerNoise;
+      if (isRender) {
+        ((DivPlatformPowerNoise*)dispatch)->setCoreQuality(eng->getConfInt("pnQualityRender",3));
+      } else {
+        ((DivPlatformPowerNoise*)dispatch)->setCoreQuality(eng->getConfInt("pnQuality",3));
+      }
       break;
     case DIV_SYSTEM_DAVE:
       dispatch=new DivPlatformDave;
       break;
     case DIV_SYSTEM_NDS:
       dispatch=new DivPlatformNDS;
+      if (isRender) {
+        ((DivPlatformNDS*)dispatch)->setCoreQuality(eng->getConfInt("ndsQualityRender",3));
+      } else {
+        ((DivPlatformNDS*)dispatch)->setCoreQuality(eng->getConfInt("ndsQuality",3));
+      }
       break;
     case DIV_SYSTEM_SID2:
       dispatch=new DivPlatformSID2;

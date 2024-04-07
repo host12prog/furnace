@@ -227,6 +227,7 @@ const char* aboutLine[]={
   "Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt##sgab",
   "YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt##sgab",
   "ymfm by Aaron Giles##sgab",
+  "emu2413 by Digital Sound Antiques##sgab",
   "MAME SN76496 by Nicola Salmoria##sgab",
   "MAME AY-3-8910 by Couriersud##sgab",
   "with AY8930 fixes by Eulous, cam900 and Grauw##sgab",

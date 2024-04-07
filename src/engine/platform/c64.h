@@ -87,6 +87,7 @@ class DivPlatformC64: public DivDispatch {
   SID* sid;
   reSIDfp::SID* sid_fp;
   struct SID_chip* sid_d;
+  int coreQuality;
   unsigned char regPool[32];
   
   friend void putDispatchChip(void*,int);
@@ -124,6 +125,7 @@ class DivPlatformC64: public DivDispatch {
     int init(DivEngine* parent, int channels, int sugRate, const DivConfig& flags);
     void setChipModel(bool is6581);
     void setCore(unsigned char which);
+    void setCoreQuality(unsigned char q);
     void quit();
     ~DivPlatformC64();
 };
