@@ -197,8 +197,8 @@ const char* opllCores[]={
 };
 
 const char* coreQualities[]={
-  "Horrible##sgse",
-  "Low##sgse",
+  "Lower##sgse",
+  "Low##sgse1",
   "Medium##sgse",
   "High##sgse",
   "Ultra##sgse",
@@ -342,6 +342,18 @@ const char* specificControls[19]={
 #define END_SECTION } \
   ImGui::EndChild(); \
   ImGui::EndTabItem();
+
+#define CORE_QUALITY(_name,_play,_render) \
+  ImGui::TableNextRow(); \
+  ImGui::TableNextColumn(); \
+  ImGui::AlignTextToFramePadding(); \
+  ImGui::Text(_name); \
+  ImGui::TableNextColumn(); \
+  ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x); \
+  if (ImGui::Combo("##" _name "Q",&settings._play,coreQualities,6)) settingsChanged=true; \
+  ImGui::TableNextColumn(); \
+  ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x); \
+  if (ImGui::Combo("##" _name "QR",&settings._render,coreQualities,6)) settingsChanged=true;
 
 String stripName(String what) {
   String ret;
@@ -1644,7 +1656,7 @@ void FurnaceGUI::drawSettings() {
       }
 
       CONFIG_SECTION(_L("Emulation##sgse")) {
-        // SUBSECTION LAYOUT
+        // SUBSECTION CORES
         CONFIG_SUBSECTION(_L("Cores##sgse"));
         if (ImGui::BeginTable("##Cores",3)) {
           ImGui::TableSetupColumn("##System",ImGuiTableColumnFlags_WidthFixed);
@@ -1862,7 +1874,44 @@ void FurnaceGUI::drawSettings() {
 
           ImGui::EndTable();
         }
-        ImGui::Separator();
+
+        // SUBSECTION OTHER
+        CONFIG_SUBSECTION("Quality");
+        if (ImGui::BeginTable("##CoreQual",3)) {
+          ImGui::TableSetupColumn("##System",ImGuiTableColumnFlags_WidthFixed);
+          ImGui::TableSetupColumn("##PlaybackCores",ImGuiTableColumnFlags_WidthStretch);
+          ImGui::TableSetupColumn("##RenderCores",ImGuiTableColumnFlags_WidthStretch);
+          ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
+          ImGui::TableNextColumn();
+          ImGui::Text("System");
+          ImGui::TableNextColumn();
+          ImGui::Text("Playback");
+          if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("used for playback");
+          }
+          ImGui::TableNextColumn();
+          ImGui::Text("Render");
+          if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip("used in audio export");
+          }
+
+          CORE_QUALITY("Bubble System WSG",bubsysQuality,bubsysQualityRender);
+          CORE_QUALITY("Game Boy",gbQuality,gbQualityRender);
+          CORE_QUALITY("Nintendo DS",ndsQuality,ndsQualityRender);
+          CORE_QUALITY("PC Engine",pceQuality,pceQualityRender);
+          CORE_QUALITY("PowerNoise",pnQuality,pnQualityRender);
+          CORE_QUALITY("SAA1099",saaQuality,saaQualityRender);
+          CORE_QUALITY("SCC",sccQuality,sccQualityRender);
+          CORE_QUALITY("SID (dSID)",dsidQuality,dsidQualityRender);
+          CORE_QUALITY("SM8521",smQuality,smQualityRender);
+          CORE_QUALITY("Virtual Boy",vbQuality,vbQualityRender);
+          CORE_QUALITY("WonderSwan",swanQuality,swanQualityRender);
+
+          ImGui::EndTable();
+        }
+
+        // SUBSECTION OTHER
+        CONFIG_SUBSECTION("Other");
 
         ImGui::AlignTextToFramePadding();
         ImGui::Text(_L("PC Speaker strategy##sgse"));
@@ -4412,6 +4461,19 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.opl3Core=conf.getInt("opl3Core",0);
     settings.esfmCore=conf.getInt("esfmCore",0);
     settings.opllCore=conf.getInt("opllCore",0);
+
+    settings.bubsysQuality=conf.getInt("bubsysQuality",3);
+    settings.dsidQuality=conf.getInt("dsidQuality",3);
+    settings.gbQuality=conf.getInt("gbQuality",3);
+    settings.ndsQuality=conf.getInt("ndsQuality",3);
+    settings.pceQuality=conf.getInt("pceQuality",3);
+    settings.pnQuality=conf.getInt("pnQuality",3);
+    settings.saaQuality=conf.getInt("saaQuality",3);
+    settings.sccQuality=conf.getInt("sccQuality",3);
+    settings.smQuality=conf.getInt("smQuality",3);
+    settings.swanQuality=conf.getInt("swanQuality",3);
+    settings.vbQuality=conf.getInt("vbQuality",3);
+
     settings.arcadeCoreRender=conf.getInt("arcadeCoreRender",1);
     settings.ym2612CoreRender=conf.getInt("ym2612CoreRender",0);
     settings.snCoreRender=conf.getInt("snCoreRender",0);
@@ -4424,6 +4486,18 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.opl3CoreRender=conf.getInt("opl3CoreRender",0);
     settings.esfmCoreRender=conf.getInt("esfmCoreRender",0);
     settings.opllCoreRender=conf.getInt("opllCoreRender",0);
+
+    settings.bubsysQualityRender=conf.getInt("bubsysQualityRender",3);
+    settings.dsidQualityRender=conf.getInt("dsidQualityRender",3);
+    settings.gbQualityRender=conf.getInt("gbQualityRender",3);
+    settings.ndsQualityRender=conf.getInt("ndsQualityRender",3);
+    settings.pceQualityRender=conf.getInt("pceQualityRender",3);
+    settings.pnQualityRender=conf.getInt("pnQualityRender",3);
+    settings.saaQualityRender=conf.getInt("saaQualityRender",3);
+    settings.sccQualityRender=conf.getInt("sccQualityRender",3);
+    settings.smQualityRender=conf.getInt("smQualityRender",3);
+    settings.swanQualityRender=conf.getInt("swanQualityRender",3);
+    settings.vbQualityRender=conf.getInt("vbQualityRender",3);
 
     settings.pcSpeakerOutMethod=conf.getInt("pcSpeakerOutMethod",0);
 
@@ -4454,6 +4528,17 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.opl3Core,0,2);
   clampSetting(settings.esfmCore,0,1);
   clampSetting(settings.opllCore,0,1);
+  clampSetting(settings.bubsysQuality,0,5);
+  clampSetting(settings.dsidQuality,0,5);
+  clampSetting(settings.gbQuality,0,5);
+  clampSetting(settings.ndsQuality,0,5);
+  clampSetting(settings.pceQuality,0,5);
+  clampSetting(settings.pnQuality,0,5);
+  clampSetting(settings.saaQuality,0,5);
+  clampSetting(settings.sccQuality,0,5);
+  clampSetting(settings.smQuality,0,5);
+  clampSetting(settings.swanQuality,0,5);
+  clampSetting(settings.vbQuality,0,5);
   clampSetting(settings.arcadeCoreRender,0,1);
   clampSetting(settings.ym2612CoreRender,0,2);
   clampSetting(settings.snCoreRender,0,1);
@@ -4466,6 +4551,17 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.opl3CoreRender,0,2);
   clampSetting(settings.esfmCoreRender,0,1);
   clampSetting(settings.opllCoreRender,0,1);
+  clampSetting(settings.bubsysQualityRender,0,5);
+  clampSetting(settings.dsidQualityRender,0,5);
+  clampSetting(settings.gbQualityRender,0,5);
+  clampSetting(settings.ndsQualityRender,0,5);
+  clampSetting(settings.pceQualityRender,0,5);
+  clampSetting(settings.pnQualityRender,0,5);
+  clampSetting(settings.saaQualityRender,0,5);
+  clampSetting(settings.sccQualityRender,0,5);
+  clampSetting(settings.smQualityRender,0,5);
+  clampSetting(settings.swanQualityRender,0,5);
+  clampSetting(settings.vbQualityRender,0,5);
   clampSetting(settings.pcSpeakerOutMethod,0,4);
   clampSetting(settings.mainFont,0,6);
   clampSetting(settings.patFont,0,6);
@@ -4917,6 +5013,19 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("opl3Core",settings.opl3Core);
     conf.set("esfmCore",settings.esfmCore);
     conf.set("opllCore",settings.opllCore);
+
+    conf.set("bubsysQuality",settings.bubsysQuality);
+    conf.set("dsidQuality",settings.dsidQuality);
+    conf.set("gbQuality",settings.gbQuality);
+    conf.set("ndsQuality",settings.ndsQuality);
+    conf.set("pceQuality",settings.pceQuality);
+    conf.set("pnQuality",settings.pnQuality);
+    conf.set("saaQuality",settings.saaQuality);
+    conf.set("sccQuality",settings.sccQuality);
+    conf.set("smQuality",settings.smQuality);
+    conf.set("swanQuality",settings.swanQuality);
+    conf.set("vbQuality",settings.vbQuality);
+
     conf.set("arcadeCoreRender",settings.arcadeCoreRender);
     conf.set("ym2612CoreRender",settings.ym2612CoreRender);
     conf.set("snCoreRender",settings.snCoreRender);
@@ -4929,6 +5038,18 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("opl3CoreRender",settings.opl3CoreRender);
     conf.set("esfmCoreRender",settings.esfmCoreRender);
     conf.set("opllCoreRender",settings.opllCoreRender);
+
+    conf.set("bubsysQualityRender",settings.bubsysQualityRender);
+    conf.set("dsidQualityRender",settings.dsidQualityRender);
+    conf.set("gbQualityRender",settings.gbQualityRender);
+    conf.set("ndsQualityRender",settings.ndsQualityRender);
+    conf.set("pceQualityRender",settings.pceQualityRender);
+    conf.set("pnQualityRender",settings.pnQualityRender);
+    conf.set("saaQualityRender",settings.saaQualityRender);
+    conf.set("sccQualityRender",settings.sccQualityRender);
+    conf.set("smQualityRender",settings.smQualityRender);
+    conf.set("swanQualityRender",settings.swanQualityRender);
+    conf.set("vbQualityRender",settings.vbQualityRender);
 
     conf.set("pcSpeakerOutMethod",settings.pcSpeakerOutMethod);
 
@@ -4975,18 +5096,17 @@ void FurnaceGUI::commitSettings() {
     settings.opl3Core!=e->getConfInt("opl3Core",0) ||
     settings.esfmCore!=e->getConfInt("esfmCore",0) ||
     settings.opllCore!=e->getConfInt("opllCore",0) ||
-    settings.arcadeCoreRender!=e->getConfInt("arcadeCoreRender",0) ||
-    settings.ym2612CoreRender!=e->getConfInt("ym2612CoreRender",0) ||
-    settings.snCoreRender!=e->getConfInt("snCoreRender",0) ||
-    settings.nesCoreRender!=e->getConfInt("nesCoreRender",0) ||
-    settings.fdsCoreRender!=e->getConfInt("fdsCoreRender",0) ||
-    settings.c64CoreRender!=e->getConfInt("c64CoreRender",0) ||
-    settings.pokeyCoreRender!=e->getConfInt("pokeyCoreRender",1) ||
-    settings.opnCoreRender!=e->getConfInt("opnCoreRender",1) ||
-    settings.opl2CoreRender!=e->getConfInt("opl2CoreRender",0) ||
-    settings.opl3CoreRender!=e->getConfInt("opl3CoreRender",0) ||
-    settings.esfmCoreRender!=e->getConfInt("esfmCoreRender",0) ||
-    settings.opllCoreRender!=e->getConfInt("opllCoreRender",0) ||
+    settings.bubsysQuality!=e->getConfInt("bubsysQuality",3) ||
+    settings.dsidQuality!=e->getConfInt("dsidQuality",3) ||
+    settings.gbQuality!=e->getConfInt("gbQuality",3) ||
+    settings.ndsQuality!=e->getConfInt("ndsQuality",3) ||
+    settings.pceQuality!=e->getConfInt("pceQuality",3) ||
+    settings.pnQuality!=e->getConfInt("pnQuality",3) ||
+    settings.saaQuality!=e->getConfInt("saaQuality",3) ||
+    settings.sccQuality!=e->getConfInt("sccQuality",3) ||
+    settings.smQuality!=e->getConfInt("smQuality",3) ||
+    settings.swanQuality!=e->getConfInt("swanQuality",3) ||
+    settings.vbQuality!=e->getConfInt("vbQuality",3) ||
     settings.audioQuality!=e->getConfInt("audioQuality",0) ||
     settings.audioHiPass!=e->getConfInt("audioHiPass",1)
   );
@@ -5810,7 +5930,9 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
 
     // two fallback fonts
     mainFont=ImGui::GetIO().Fonts->AddFontFromMemoryCompressedTTF(font_liberationSans_compressed_data,font_liberationSans_compressed_size,MAX(1,e->getConfInt("mainFontSize",18)*dpiScale),&fc1,fontRange);
-    mainFont=ImGui::GetIO().Fonts->AddFontFromMemoryCompressedTTF(font_unifont_compressed_data,font_unifont_compressed_size,MAX(1,e->getConfInt("mainFontSize",18)*dpiScale),&fc1,fontRange);
+    if (settings.loadJapanese || settings.loadChinese || settings.loadChineseTraditional || settings.loadKorean) {
+      mainFont=ImGui::GetIO().Fonts->AddFontFromMemoryCompressedTTF(font_unifont_compressed_data,font_unifont_compressed_size,MAX(1,e->getConfInt("mainFontSize",18)*dpiScale),&fc1,fontRange);
+    }
 
     ImFontConfig fc;
     fc.MergeMode=true;
