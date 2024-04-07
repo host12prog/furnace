@@ -386,8 +386,6 @@ bool DivEngine::loadFZT(unsigned char* file, size_t len)
             //logV("%02X %02X %02X %02X", orders[0][i][0], orders[1][i][0], orders[2][i][0], orders[3][i][0]);
         }
 
-        int max_pat[FZT_NUM_CHANNELS];
-
         for(int i = 0; i < FZT_NUM_CHANNELS; i++) //fzt has global pattern indices while Furnace ones are per-channel
         {
             int pat_count = 0;
@@ -414,8 +412,6 @@ bool DivEngine::loadFZT(unsigned char* file, size_t len)
                     pat_count++;
                 }
             }
-
-            max_pat[i] = pat_count;
         }
 
         unsigned char num_patterns = reader.readC();
