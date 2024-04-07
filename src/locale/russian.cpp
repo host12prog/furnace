@@ -78,6 +78,7 @@ void DivLocale::addTranslationsRussian()
     strings["Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt##sgab"].plurals[0] = "Nuked-OPL3/OPLL/OPM/OPN2/PSG за авторством nukeykt";
     strings["YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt##sgab"].plurals[0] = "YM3812-LLE, YMF262-LLE и YMF276-LLE за авторством nukeykt";
     strings["ymfm by Aaron Giles##sgab"].plurals[0] = "ymfm за авторством Aaron Giles";
+    strings["emu2413 by Digital Sound Antiques##sgab"].plurals[0] = "emu2413 за авторством Digital Sound Antiques";
     strings["MAME SN76496 by Nicola Salmoria##sgab"].plurals[0] = "MAME SN76496 за авторством Nicola Salmoria";
     strings["MAME AY-3-8910 by Couriersud##sgab"].plurals[0] = "MAME AY-3-8910 за авторством Couriersud";
     strings["with AY8930 fixes by Eulous, cam900 and Grauw##sgab"].plurals[0] = "с исправлениями для AY8930 за авторством Eulous, cam900 и Grauw";
@@ -2552,8 +2553,8 @@ void DivLocale::addTranslationsRussian()
     strings["Low##sgse"].plurals[0] = "Низкое";
     strings["ASAP (C++ port)##sgse"].plurals[0] = "ASAP (портирован на C++)";
     strings["ESFMu (fast)##sgse"].plurals[0] = "ESFMu (быстрый)";
-    strings["Horrible##sgse"].plurals[0] = "Ужасное";
-    strings["Low##sgse"].plurals[0] = "Низкое";
+    strings["Lower##sgse"].plurals[0] = "Очень низкое";
+    strings["Low##sgse1"].plurals[0] = "Низкое";
     strings["Medium##sgse"].plurals[0] = "Среднее";
     strings["High##sgse"].plurals[0] = "Высокое";
     strings["Ultra##sgse"].plurals[0] = "Очень высокое";
@@ -2788,6 +2789,10 @@ void DivLocale::addTranslationsRussian()
     strings["used for playback##sgse"].plurals[0] = "используется(-ются) для воспроизведения";
     strings["Render Core(s)##sgse"].plurals[0] = "Ядро(-а) рендера";
     strings["used in audio export##sgse"].plurals[0] = "используется(-ются) при рендере звука в аудиофайл";
+    strings["Quality##sgse1"].plurals[0] = "Качество";
+    strings["Playback##sgse"].plurals[0] = "Воспроизведение";
+    strings["Render##sgse"].plurals[0] = "Рендер";
+    strings["Other##sgse"].plurals[0] = "Разное";
     strings["PC Speaker strategy##sgse"].plurals[0] = "Взаимодействие с PC Speaker";
     strings["Sample ROMs:##sgse"].plurals[0] = "Образы ROM сэмплов:";
     strings["OPL4 YRW801 path##sgse"].plurals[0] = "Путь к OPL4 YRW801";

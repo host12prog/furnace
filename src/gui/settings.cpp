@@ -202,7 +202,8 @@ const char* coreQualities[]={
   "Medium##sgse",
   "High##sgse",
   "Ultra##sgse",
-  "Ultimate##sgse"
+  "Ultimate##sgse",
+  NULL
 };
 
 const char* pcspkrOutMethods[]={
@@ -350,10 +351,36 @@ const char* specificControls[19]={
   ImGui::Text(_name); \
   ImGui::TableNextColumn(); \
   ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x); \
-  if (ImGui::Combo("##" _name "Q",&settings._play,coreQualities,6)) settingsChanged=true; \
+  if (ImGui::BeginCombo("##" _name "Q",_L(coreQualities[settings._play]))) \
+  { \
+    int i = 0; \
+    while(coreQualities[i]) \
+    { \
+      if (ImGui::Selectable(_L(coreQualities[i]))) \
+      { \
+        settings._play = i; \
+        settingsChanged=true; \
+      } \
+      i++; \
+    } \
+    ImGui::EndCombo(); \
+  } \
   ImGui::TableNextColumn(); \
   ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x); \
-  if (ImGui::Combo("##" _name "QR",&settings._render,coreQualities,6)) settingsChanged=true;
+  if (ImGui::BeginCombo("##" _name "QR",_L(coreQualities[settings._render]))) \
+  { \
+    int i = 0; \
+    while(coreQualities[i]) \
+    { \
+      if (ImGui::Selectable(_L(coreQualities[i]))) \
+      { \
+        settings._render = i; \
+        settingsChanged=true; \
+      } \
+      i++; \
+    } \
+    ImGui::EndCombo(); \
+  }
 
 String stripName(String what) {
   String ret;
@@ -1203,8 +1230,8 @@ void FurnaceGUI::drawSettings() {
             i++;
           }
 
-            ImGui::EndCombo();
-          }
+          ImGui::EndCombo();
+        }
         
         bool clampSamplesB=settings.clampSamples;
         if (ImGui::Checkbox(_L("Software clipping##sgse"),&clampSamplesB)) {
@@ -1876,23 +1903,23 @@ void FurnaceGUI::drawSettings() {
         }
 
         // SUBSECTION OTHER
-        CONFIG_SUBSECTION("Quality");
+        CONFIG_SUBSECTION(_L("Quality##sgse1"));
         if (ImGui::BeginTable("##CoreQual",3)) {
           ImGui::TableSetupColumn("##System",ImGuiTableColumnFlags_WidthFixed);
           ImGui::TableSetupColumn("##PlaybackCores",ImGuiTableColumnFlags_WidthStretch);
           ImGui::TableSetupColumn("##RenderCores",ImGuiTableColumnFlags_WidthStretch);
           ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
           ImGui::TableNextColumn();
-          ImGui::Text("System");
+          ImGui::Text(_L("System##sgse"));
           ImGui::TableNextColumn();
-          ImGui::Text("Playback");
+          ImGui::Text(_L("Playback##sgse"));
           if (ImGui::IsItemHovered()) {
-            ImGui::SetTooltip("used for playback");
+            ImGui::SetTooltip(_L("used for playback##sgse"));
           }
           ImGui::TableNextColumn();
-          ImGui::Text("Render");
+          ImGui::Text(_L("Render##sgse"));
           if (ImGui::IsItemHovered()) {
-            ImGui::SetTooltip("used in audio export");
+            ImGui::SetTooltip(_L("used in audio export##sgse"));
           }
 
           CORE_QUALITY("Bubble System WSG",bubsysQuality,bubsysQualityRender);
@@ -1911,7 +1938,7 @@ void FurnaceGUI::drawSettings() {
         }
 
         // SUBSECTION OTHER
-        CONFIG_SUBSECTION("Other");
+        CONFIG_SUBSECTION(_L("Other##sgse"));
 
         ImGui::AlignTextToFramePadding();
         ImGui::Text(_L("PC Speaker strategy##sgse"));

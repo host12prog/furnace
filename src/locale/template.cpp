@@ -132,6 +132,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt##sgab"].plurals[0] = "=Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt";
     strings["YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt##sgab"].plurals[0] = "=YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt";
     strings["ymfm by Aaron Giles##sgab"].plurals[0] = "=ymfm by Aaron Giles";
+    strings["emu2413 by Digital Sound Antiques##sgab"].plurals[0] = "=emu2413 by Digital Sound Antiques";
     strings["MAME SN76496 by Nicola Salmoria##sgab"].plurals[0] = "=MAME SN76496 by Nicola Salmoria";
     strings["MAME AY-3-8910 by Couriersud##sgab"].plurals[0] = "=MAME AY-3-8910 by Couriersud";
     strings["with AY8930 fixes by Eulous, cam900 and Grauw##sgab"].plurals[0] = "=with AY8930 fixes by Eulous, cam900 and Grauw";
@@ -2585,8 +2586,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Low##sgse"].plurals[0] = "=Low";
     strings["ASAP (C++ port)##sgse"].plurals[0] = "=ASAP (C++ port)";
     strings["ESFMu (fast)##sgse"].plurals[0] = "=ESFMu (fast)";
-    strings["Horrible##sgse"].plurals[0] = "=Horrible";
-    strings["Low##sgse"].plurals[0] = "=Low";
+    strings["Lower##sgse"].plurals[0] = "=Lower";
+    strings["Low##sgse1"].plurals[0] = "=Low";
     strings["Medium##sgse"].plurals[0] = "=Medium";
     strings["High##sgse"].plurals[0] = "=High";
     strings["Ultra##sgse"].plurals[0] = "=Ultra";
@@ -2822,6 +2823,10 @@ void DivLocale::addTranslationsTemplate()
     strings["used for playback##sgse"].plurals[0] = "=used for playback";
     strings["Render Core(s)##sgse"].plurals[0] = "=Render Core(s)";
     strings["used in audio export##sgse"].plurals[0] = "=used in audio export";
+    strings["Quality##sgse1"].plurals[0] = "=Quality";
+    strings["Playback##sgse"].plurals[0] = "=Playback";
+    strings["Render##sgse"].plurals[0] = "=Render";
+    strings["Other##sgse"].plurals[0] = "=Other";
     strings["PC Speaker strategy##sgse"].plurals[0] = "=PC Speaker strategy";
     strings["Sample ROMs:##sgse"].plurals[0] = "=Sample ROMs:";
     strings["OPL4 YRW801 path##sgse"].plurals[0] = "=OPL4 YRW801 path";
