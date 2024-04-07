@@ -712,7 +712,10 @@ bool DivEngine::exportFZTFindErrors()
 
 void DivEngine::exportFZTFindWarnings()
 {
-    
+    if(song.name.length() > 17)
+    {
+        warnings += _LE("song name is too long. Only first 17 characters will be written.\n");
+    }
 }
 
 SafeWriter* DivEngine::saveFZT()
@@ -736,6 +739,23 @@ SafeWriter* DivEngine::saveFZT()
 
     w->writeText(DIV_FZT_MAGIC);
     w->writeC(TRACKER_ENGINE_VERSION);
+
+    String name = song.name;
+    for (auto & c: name) c = toupper(c);
+
+    name.erase(name.begin() + 17, name.end());
+
+    for (int i = 0; i < 17; i++)
+    {
+        if (i < name.length())
+        {
+            w->writeC(name[i]);
+        }
+        else
+        {
+            w->writeC(0);
+        }
+    }
 
     saveLock.unlock();
     return w;
