@@ -671,6 +671,9 @@ class DivEngine {
     SafeWriter* saveCommand();
     // export to text
     SafeWriter* saveText(bool separatePatterns=true);
+
+    bool exportFZTFindErrors();
+    void exportFZTFindWarnings();
     // export to FZT
     SafeWriter* saveFZT();
     // export to an audio file

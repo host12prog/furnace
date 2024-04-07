@@ -5504,8 +5504,11 @@ bool FurnaceGUI::loop() {
                   showWarning(e->getWarnings(),GUI_WARN_GENERIC);
                 }
               } else {
-                String export_err = settings.language == DIV_LANG_ENGLISH ? "could not write FZT module! (%s)" : _L("could not write FZT module! (%s)##sggu");
-                showError(fmt::sprintf(export_err,e->getLastError()));
+                String export_err = settings.language == DIV_LANG_ENGLISH ? "could not write FZT module!" : _L("could not write FZT module!##sggu");
+                showError(fmt::sprintf("%s\n%s",export_err,e->getLastError()));
+              }
+              if (!e->getWarnings().empty()) {
+                  showWarning(e->getWarnings(), GUI_WARN_GENERIC);
               }
               break;
             }

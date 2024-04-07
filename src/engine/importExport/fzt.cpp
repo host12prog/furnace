@@ -697,6 +697,28 @@ bool DivEngine::loadFZT(unsigned char* file, size_t len)
     return true;
 }
 
+bool DivEngine::exportFZTFindErrors()
+{
+    if(song.systemLen != 1)
+    {
+        lastError += _LE("song contains more than one system.");
+        return true;
+    }
+
+    if(song.system[0] != DIV_SYSTEM_FZT)
+    {
+        lastError += _LE("system is not FZT sound source.");
+        return true;
+    }
+
+    return false;
+}
+
+void DivEngine::exportFZTFindWarnings()
+{
+    
+}
+
 SafeWriter* DivEngine::saveFZT()
 {
     saveLock.lock();
@@ -704,8 +726,20 @@ SafeWriter* DivEngine::saveFZT()
     SafeWriter* w=new SafeWriter;
     w->init();
 
-    //export...
     logV("exporting FZT module...");
+    lastError = "";
+    warnings = "";
+
+    if(exportFZTFindErrors())
+    {
+        saveLock.unlock();
+        return NULL;
+    }
+
+    exportFZTFindWarnings(); //we still try to export but warn user that some things will be not exported or will be exported wrong
+
+    w->writeText(DIV_FZT_MAGIC);
+    w->writeC(TRACKER_ENGINE_VERSION);
 
     saveLock.unlock();
     return w;
