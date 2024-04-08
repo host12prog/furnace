@@ -673,7 +673,9 @@ class DivEngine {
     SafeWriter* saveText(bool separatePatterns=true);
 
     bool exportFZTFindErrors();
-    void exportFZTFindWarnings();
+    bool cmp_pats(DivPattern* pat1, DivPattern* pat2, int patLen);
+    bool pattern_unique(int chan, int ord);
+    int exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_you);
     // export to FZT
     SafeWriter* saveFZT();
     // export to an audio file

@@ -43,6 +43,10 @@ extern FurnaceGUI g;
 #define MUS_NOTE_INSTRUMENT_NONE_FZT 31
 #define MUS_NOTE_VOLUME_NONE_FZT 31
 
+#define FZT_SONG_NAME_LEN 17
+
+#define FZT_SONG_MAX_PATTERNS 256
+
 class DivEngine;
 
 typedef enum {
@@ -429,14 +433,14 @@ bool DivEngine::loadFZT(unsigned char* file, size_t len)
 
         for(int i = 0; i < num_patterns; i++)
         {
-            logV("pat %d", i);
+            //logV("pat %d", i);
             for(int j = 0; j < pattern_length; j++)
             {
                 patterns[i].step[j].note = reader.readC();
                 patterns[i].step[j].inst_vol = reader.readC();
                 patterns[i].step[j].command = reader.readS();
 
-                if(i == 0 || i == 1 || i == 2) logV("%02X %02X %04X", patterns[i].step[j].note, patterns[i].step[j].inst_vol, patterns[i].step[j].command);
+                //if(i == 0 || i == 1 || i == 2) logV("%02X %02X %04X", patterns[i].step[j].note, patterns[i].step[j].inst_vol, patterns[i].step[j].command);
                 //logV("%02X %02X %02X %04X", tracker_engine_get_note(&patterns[i].step[j]), tracker_engine_get_instrument(&patterns[i].step[j]), tracker_engine_get_volume(&patterns[i].step[j]), tracker_engine_get_command(&patterns[i].step[j]));
             }
         }
@@ -707,15 +711,178 @@ bool DivEngine::exportFZTFindErrors()
         return true;
     }
 
+    if((int)song.subsong.size() == 0)
+    {
+        lastError += _LE("you have no subsongs in the module.");
+        return true;
+    }
+
     return false;
 }
 
-void DivEngine::exportFZTFindWarnings()
+typedef struct
 {
-    if(song.name.length() > 17)
+    uint8_t channel;
+    uint8_t pattern;
+} fzt_pat;
+
+typedef struct
+{
+    std::vector<fzt_pat> patterns;
+} fzt_pat_list;
+
+bool DivEngine::cmp_pats(DivPattern* pat1, DivPattern* pat2, int patLen)
+{
+    for(int i = 0; i < patLen; i++)
     {
-        warnings += _LE("song name is too long. Only first 17 characters will be written.\n");
+        for(int j = 0; j < DIV_MAX_COLS; j++)
+        {
+            if(pat1->data[i][j] != pat2->data[i][j])
+            {
+                return true;
+            }
+        }
     }
+
+    return false;
+}
+
+int chanFZT = 0;
+int patFZT = 0;
+
+bool DivEngine::pattern_unique(int chan, int order)
+{
+    DivSubSong* sub_song = song.subsong[0];
+    DivPattern* pat = sub_song->pat[chan].getPattern(sub_song->orders.ord[chan][order], true);
+
+    for(int j = 0; j < order; j++)
+    {
+        for(int i = 0; i < ((j < order) ? FZT_NUM_CHANNELS : (chan - 1)); i++)
+        {
+            DivPattern* pat_curr = sub_song->pat[i].getPattern(sub_song->orders.ord[i][j], true);
+
+            if(!cmp_pats(pat_curr, pat, sub_song->patLen))
+            {
+                chanFZT = i;
+                patFZT = j;
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+int DivEngine::exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_you)
+{
+    fzt_pat_list* fzt_patterns = (fzt_pat_list*)fuck_you;
+
+    if((int)song.name.length() > 17)
+    {
+        warnings += fmt::sprintf(_LE("song name is too long. Only first %d characters will be written.\n\n"), FZT_SONG_NAME_LEN);
+    }
+
+    DivSubSong* sub_song = song.subsong[0];
+
+    bool found_0b = false;
+
+    for(int i = 0; i < FZT_NUM_CHANNELS && !found_0b; i++)
+    {
+        for(int j = 0; j < sub_song->ordersLen && !found_0b; j++)
+        {
+            DivPattern* pat = sub_song->pat[i].getPattern(sub_song->orders.ord[i][j], true);
+
+            for(int row = 0; row < sub_song->patLen && !found_0b; row++)
+            {
+                for(int col = 0; col < DIV_MAX_EFFECTS && !found_0b; col++)
+                {
+                    if(pat->data[row][4 + col*2] == 0x0b)
+                    {
+                        if(row != sub_song->patLen - 1)
+                        {
+                            String temp = fmt::sprintf(_LE("you have 0Bxx command placed not on the last pattern row (channel %d, pattern %d, row %d, effect column %d).\n"
+                            "FZT export will try to loop your song as if it was placed on last pattern row.\n\n"), i, j, row, col);
+                        }
+
+                        *loop_end = j;
+                        *loop_start = pat->data[row][5 + col*2];
+
+                        found_0b = true;
+                    }
+                }
+            }
+        }
+    }
+
+    if(!found_0b)
+    {
+        warnings += _LE("there wasn't any 0bxx command, so your song won't be looped.\n"
+        "To make song loop, place 0Bxx command somewhere in the song on the last pattern row.\n\n");
+    }
+
+    int current_fzt_pattern = 0;
+
+    for(int j = 0; j < sub_song->ordersLen; j++)
+    {
+        for(int i = 0; i < FZT_NUM_CHANNELS; i++)
+        {
+            if(pattern_unique(i, j) && current_fzt_pattern < FZT_SONG_MAX_PATTERNS)
+            {
+                fzt_patterns[current_fzt_pattern].patterns[0].channel = i;
+                fzt_patterns[current_fzt_pattern].patterns[0].pattern = j;
+                current_fzt_pattern++;
+            }
+            else
+            {
+                fzt_patterns[current_fzt_pattern].patterns[0].channel = i;
+                fzt_patterns[current_fzt_pattern].patterns[0].pattern = j;
+            }
+        }
+    }
+
+    if(current_fzt_pattern >= FZT_SONG_MAX_PATTERNS)
+    {
+        warnings += fmt::sprintf(_LE("there are more than %d patterns in the song. only %d patterns will be saved.\n\n"), FZT_SONG_MAX_PATTERNS, FZT_SONG_MAX_PATTERNS);
+    }
+
+    if(sub_song->speeds.len > 1 || song.grooves.size() > 0)
+    {
+        warnings += _LE("you are using two speeds or groove patterns which are not supported in FZT.\nFirst speed will be used.\n\n");
+    }
+
+    bool rate_too_high = false;
+
+    if(sub_song->hz > 255.0f)
+    {
+        rate_too_high = true;
+        warnings += _LE("Your song rate is higher than 255 Hz. It will be capped at 255 Hz in FZT file.\n\n");
+    }
+
+    for(int i = 0; i < FZT_NUM_CHANNELS && !rate_too_high; i++)
+    {
+        for(int j = 0; j < sub_song->ordersLen && !rate_too_high; j++)
+        {
+            DivPattern* pat = sub_song->pat[i].getPattern(sub_song->orders.ord[i][j], true);
+
+            for(int row = 0; row < sub_song->patLen && !rate_too_high; row++)
+            {
+                for(int col = 0; col < DIV_MAX_EFFECTS && !rate_too_high; col++)
+                {
+                    if((pat->data[row][4 + col*2] & 0xf0) == 0xc0)
+                    {
+                        int param = ((pat->data[row][4 + col*2] & 0x0f) << 8) | (pat->data[row][5 + col*2] & 0xff);
+                        if(param > 0xff)
+                        {
+                            rate_too_high = true;
+                            warnings += fmt::sprintf(_LE("You are setting engine rate that is higher than 255 Hz (channel %d, pattern %d, row %d, effect column %d).\nThe command(s) will be capped at 255 Hz.\n\n"), i, j, row, col);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return current_fzt_pattern;
 }
 
 SafeWriter* DivEngine::saveFZT()
@@ -735,7 +902,17 @@ SafeWriter* DivEngine::saveFZT()
         return NULL;
     }
 
-    exportFZTFindWarnings(); //we still try to export but warn user that some things will be not exported or will be exported wrong
+    int loop_start = 0;
+    int loop_end = 0;
+
+    fzt_pat_list fzt_patterns[FZT_SONG_MAX_PATTERNS];
+
+    for (int i = 0; i < FZT_SONG_MAX_PATTERNS; i++)
+    {
+        fzt_patterns[i].patterns.push_back(fzt_pat());
+    }
+
+    int num_pats_fzt = exportFZTFindWarnings(&loop_start, &loop_end, (void*)fzt_patterns); //we still try to export but warn user that some things will be not exported or will be exported wrong
 
     w->writeText(DIV_FZT_MAGIC);
     w->writeC(TRACKER_ENGINE_VERSION);
@@ -743,9 +920,12 @@ SafeWriter* DivEngine::saveFZT()
     String name = song.name;
     for (auto & c: name) c = toupper(c);
 
-    name.erase(name.begin() + 17, name.end());
+    if (name.length() > 0)
+    {
+        name.erase(name.begin() + MIN(FZT_SONG_NAME_LEN, (int)name.length()), name.end());
+    }
 
-    for (int i = 0; i < 17; i++)
+    for (int i = 0; i < FZT_SONG_NAME_LEN; i++)
     {
         if (i < (int)name.length())
         {
@@ -755,6 +935,68 @@ SafeWriter* DivEngine::saveFZT()
         {
             w->writeC(0);
         }
+    }
+
+    DivSubSong* sub_song = song.subsong[0];
+
+    w->writeC(loop_start);
+    w->writeC(loop_end);
+    w->writeC(sub_song->patLen);
+
+    w->writeC(sub_song->speeds.val[0]);
+    w->writeC(MIN((int)sub_song->hz, 255));
+
+    w->writeC(sub_song->ordersLen);
+
+    for(int j = 0; j < sub_song->ordersLen; j++)
+    {
+        String ssss = "";
+
+        for(int i = 0; i < FZT_NUM_CHANNELS; i++)
+        {
+            for(int pat = 0; pat < num_pats_fzt; pat++)
+            {
+                DivPattern* patt = sub_song->pat[i].getPattern(sub_song->orders.ord[i][j], false);
+
+                if(fzt_patterns[pat].patterns[0].channel == i && fzt_patterns[pat].patterns[0].pattern == j)
+                {
+                    w->writeC(pat);
+                    ssss += fmt::sprintf("%02X ", pat);
+                    goto finish;
+                }
+                else
+                {
+                    for(int j1 = 0; j1 <= j; j1++)
+                    {
+                        for(int i1 = 0; i1 < i; i1++)
+                        {
+                            DivPattern* kill_me = sub_song->pat[i1].getPattern(sub_song->orders.ord[i1][j1], false);
+
+                            if(!cmp_pats(kill_me, patt, sub_song->patLen)) //patterns are equal
+                            {
+                                for(int pat1 = 0; pat1 < num_pats_fzt; pat1++)
+                                {
+                                    if(fzt_patterns[pat1].patterns[0].channel == i1 && fzt_patterns[pat1].patterns[0].pattern == j1)
+                                    {
+                                        w->writeC(pat1);
+                                        ssss += fmt::sprintf("%02X ", pat1);
+                                        goto end;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    end:;
+                }
+            }
+
+            finish:;
+            //fzt_patterns[current_fzt_pattern].patterns[0].channel = i;
+            //fzt_patterns[current_fzt_pattern].patterns[0].pattern = j;
+        }
+
+        logV(ssss.c_str());
     }
 
     saveLock.unlock();
