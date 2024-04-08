@@ -949,7 +949,7 @@ SafeWriter* DivEngine::saveFZT()
 
     for(int j = 0; j < sub_song->ordersLen; j++)
     {
-        String ssss = "";
+        //String ssss = "";
 
         for(int i = 0; i < FZT_NUM_CHANNELS; i++)
         {
@@ -957,17 +957,17 @@ SafeWriter* DivEngine::saveFZT()
             {
                 DivPattern* patt = sub_song->pat[i].getPattern(sub_song->orders.ord[i][j], false);
 
-                if(fzt_patterns[pat].patterns[0].channel == i && fzt_patterns[pat].patterns[0].pattern == j)
+                if(fzt_patterns[pat].patterns[0].channel == i && fzt_patterns[pat].patterns[0].pattern == j) //new pattern
                 {
                     w->writeC(pat);
-                    ssss += fmt::sprintf("%02X ", pat);
+                    //ssss += fmt::sprintf(" %d %02X |", i, pat);
                     goto finish;
                 }
-                else
+                else //a copy of that pattern exists "before" the current encounter
                 {
                     for(int j1 = 0; j1 <= j; j1++)
                     {
-                        for(int i1 = 0; i1 < i; i1++)
+                        for(int i1 = 0; i1 < (j1 == j ? i : FZT_NUM_CHANNELS); i1++)
                         {
                             DivPattern* kill_me = sub_song->pat[i1].getPattern(sub_song->orders.ord[i1][j1], false);
 
@@ -978,24 +978,20 @@ SafeWriter* DivEngine::saveFZT()
                                     if(fzt_patterns[pat1].patterns[0].channel == i1 && fzt_patterns[pat1].patterns[0].pattern == j1)
                                     {
                                         w->writeC(pat1);
-                                        ssss += fmt::sprintf("%02X ", pat1);
-                                        goto end;
+                                        //ssss += fmt::sprintf(" %d %02X |", i, pat1);
+                                        goto finish;
                                     }
                                 }
                             }
                         }
                     }
-
-                    end:;
                 }
             }
 
             finish:;
-            //fzt_patterns[current_fzt_pattern].patterns[0].channel = i;
-            //fzt_patterns[current_fzt_pattern].patterns[0].pattern = j;
         }
 
-        logV(ssss.c_str());
+        //logV(ssss.c_str());
     }
 
     saveLock.unlock();
