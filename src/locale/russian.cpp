@@ -2630,8 +2630,9 @@ void DivLocale::addTranslationsRussian()
     strings["Oscilloscope rendering engine:##sgse"].plurals[0] = "Движок отрисовки осциллографов:";
     strings["ImGui line plot##sgse"].plurals[0] = "Отрисовка линий от ImGui";
     strings["render using Dear ImGui's built-in line drawing functions.##sgse"].plurals[0] = "отрисовывать при помощи встроенных функций отрисовки линий Dear ImGui.";
-    strings["GLSL/HLSL (if available)##sgse"].plurals[0] = "GLSL/HLSL (при наличии)";
-    strings["render using shaders that run on the graphics card.\nonly available in OpenGL render backend.##sgse"].plurals[0] = "отрисовывать при помощи шейдеров, исполняемых на ГП.\nработает только при выборе OpenGL в качестве библиотеки отрисовки.";
+    strings["GLSL (if available)##sgse"].plurals[0] = "GLSL (при наличии)";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL ES 2.0 render backend.##sgse"].plurals[0] = "отрисовывать при помощи шейдеров, исполняемых на ГП.\nработает только при выборе OpenGL ES 2.0 в качестве библиотеки отрисовки.";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL 3.0 render backend.##sgse"].plurals[0] = "отрисовывать при помощи шейдеров, исполняемых на ГП.\nработает только при выборе OpenGL 3.0 в качестве библиотеки отрисовки.";
     strings["File##sgse"].plurals[0] = "Файл";
     strings["Use system file picker##sgse"].plurals[0] = "Использовать диалоговое окно выбора файлов ОС";
     strings["Number of recent files##sgse"].plurals[0] = "Количество недавних файлов";

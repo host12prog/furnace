@@ -2663,8 +2663,9 @@ void DivLocale::addTranslationsTemplate()
     strings["Oscilloscope rendering engine:##sgse"].plurals[0] = "=Oscilloscope rendering engine:";
     strings["ImGui line plot##sgse"].plurals[0] = "=ImGui line plot";
     strings["render using Dear ImGui's built-in line drawing functions.##sgse"].plurals[0] = "=render using Dear ImGui's built-in line drawing functions.";
-    strings["GLSL/HLSL (if available)##sgse"].plurals[0] = "=GLSL/HLSL (if available)";
-    strings["render using shaders that run on the graphics card.\nonly available in OpenGL render backend.##sgse"].plurals[0] = "=render using shaders that run on the graphics card.\nonly available in OpenGL render backend.";
+    strings["GLSL (if available)##sgse"].plurals[0] = "=GLSL (if available)";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL ES 2.0 render backend.##sgse"].plurals[0] = "=render using shaders that run on the graphics card.\nonly available in OpenGL ES 2.0 render backend.";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL 3.0 render backend.##sgse"].plurals[0] = "=render using shaders that run on the graphics card.\nonly available in OpenGL 3.0 render backend.";
     strings["File##sgse"].plurals[0] = "=File";
     strings["Use system file picker##sgse"].plurals[0] = "=Use system file picker";
     strings["Number of recent files##sgse"].plurals[0] = "=Number of recent files";
