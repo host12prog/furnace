@@ -102,7 +102,7 @@ void DivPlatformOPLL::acquire_emu(short** buf, size_t len) {
       OPLL_writeReg(fm_emu,w.addr,w.val);
       writes.pop();
     }
-    os=OPLL_calc(fm_emu);
+    os=-OPLL_calc(fm_emu);
     os=os+(os<<1);
     if (os<-32768) os=-32768;
     if (os>32767) os=32767;
@@ -111,9 +111,9 @@ void DivPlatformOPLL::acquire_emu(short** buf, size_t len) {
 
     for (int i=0; i<11; i++) {
       if (i>=6 && properDrums) {
-        oscBuf[i]->data[oscBuf[i]->needle++]=fm_emu->ch_out[i+3]<<3;
+        oscBuf[i]->data[oscBuf[i]->needle++]=(-fm_emu->ch_out[i+3])<<3;
       } else {
-        oscBuf[i]->data[oscBuf[i]->needle++]=fm_emu->ch_out[i]<<3;
+        oscBuf[i]->data[oscBuf[i]->needle++]=(-fm_emu->ch_out[i])<<3;
       }
     }
   }
@@ -390,6 +390,19 @@ int DivPlatformOPLL::toFreq(int freq) {
 
 void DivPlatformOPLL::muteChannel(int ch, bool mute) {
   isMuted[ch]=mute;
+  if (selCore==1) {
+    OPLL_setMask(fm_emu,
+      (isMuted[0]?1:0)|
+      (isMuted[1]?2:0)|
+      (isMuted[2]?4:0)|
+      (isMuted[3]?8:0)|
+      (isMuted[4]?16:0)|
+      (isMuted[5]?32:0)|
+      (isMuted[6]?64:0)|
+      (isMuted[7]?128:0)|
+      (isMuted[8]?256:0)
+    );
+  }
 }
 
 void DivPlatformOPLL::commitState(int ch, DivInstrument* ins) {
@@ -1043,6 +1056,17 @@ void DivPlatformOPLL::reset() {
     OPLL_reset(fm_emu);
     OPLL_setChipType(fm_emu,vrc7?1:0);
     OPLL_resetPatch(fm_emu,vrc7?1:nukedToEmuPatch[patchSet&3]);
+    OPLL_setMask(fm_emu,
+      (isMuted[0]?1:0)|
+      (isMuted[1]?2:0)|
+      (isMuted[2]?4:0)|
+      (isMuted[3]?8:0)|
+      (isMuted[4]?16:0)|
+      (isMuted[5]?32:0)|
+      (isMuted[6]?64:0)|
+      (isMuted[7]?128:0)|
+      (isMuted[8]?256:0)
+    );
   }
   for (int i=0; i<11; i++) {
     chan[i]=DivPlatformOPLL::Channel();

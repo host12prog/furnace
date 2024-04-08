@@ -307,6 +307,7 @@ int DivPlatformPowerNoise::dispatch(DivCommand c) {
         chan[c.chan].vol=c.value;
         if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
           chan[c.chan].outVol=c.value;
+          chWrite(c.chan,0x06,isMuted[c.chan]?0:volPan(chan[c.chan].outVol,chan[c.chan].pan));
         }
       }
       break;
@@ -464,7 +465,7 @@ void DivPlatformPowerNoise::reset() {
   rWrite(0,0x87);
   // set per-channel panning
   for (int i=0; i<4; i++) {
-    chWrite(i,0x06,volPan(chan[i].outVol,chan[i].pan));
+    chWrite(i,0x06,isMuted[i]?0:volPan(chan[i].outVol,chan[i].pan));
   }
   // set default params so we have sound
   // noise
