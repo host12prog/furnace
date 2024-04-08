@@ -747,9 +747,6 @@ bool DivEngine::cmp_pats(DivPattern* pat1, DivPattern* pat2, int patLen)
     return false;
 }
 
-int chanFZT = 0;
-int patFZT = 0;
-
 bool DivEngine::pattern_unique(int chan, int order)
 {
     DivSubSong* sub_song = song.subsong[0];
@@ -763,8 +760,6 @@ bool DivEngine::pattern_unique(int chan, int order)
 
             if(!cmp_pats(pat_curr, pat, sub_song->patLen))
             {
-                chanFZT = i;
-                patFZT = j;
                 return false;
             }
         }
@@ -876,6 +871,11 @@ int DivEngine::exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_
                             warnings += fmt::sprintf(_LE("You are setting engine rate that is higher than 255 Hz (channel %d, pattern %d, row %d, effect column %d).\nThe command(s) will be capped at 255 Hz.\n\n"), i, j, row, col);
                         }
                     }
+                }
+
+                if(pat->data[row][2] > MUS_NOTE_INSTRUMENT_NONE_FZT - 1)
+                {
+                    warnings += fmt::sprintf(_LE("You are using instrument index that is higher than %02X (channel %d, pattern %d, row %d).\nThe index will be capped at %02X.\n\n"), MUS_NOTE_VOLUME_NONE_FZT - 1, i, j, row, MUS_NOTE_VOLUME_NONE_FZT - 1);
                 }
             }
         }
@@ -992,6 +992,60 @@ SafeWriter* DivEngine::saveFZT()
         }
 
         //logV(ssss.c_str());
+    }
+
+    w->writeC(num_pats_fzt);
+
+    for(int i = 0; i < num_pats_fzt; i++)
+    {
+        DivPattern* pat = sub_song->pat[fzt_patterns[i].patterns[0].channel].getPattern(sub_song->orders.ord[fzt_patterns[i].patterns[0].channel][fzt_patterns[i].patterns[0].pattern], false);
+
+        for(int row = 0; row < sub_song->patLen; row++)
+        {
+            TrackerSongPatternStep step;
+
+            set_note(&step, MUS_NOTE_NONE_FZT);
+            set_instrument(&step, MUS_NOTE_INSTRUMENT_NONE_FZT);
+            set_volume(&step, MUS_NOTE_VOLUME_NONE_FZT);
+            set_command(&step, 0);
+            
+            if(pat->data[row][0] > 0 && pat->data[row][1] > -1)
+            {
+                if(pat->data[row][0] == 100)
+                {
+                    set_note(&step, MUS_NOTE_CUT_FZT);
+                }
+                else if(pat->data[row][0] == 101)
+                {
+                    set_note(&step, MUS_NOTE_RELEASE_FZT);
+                }
+                else if(pat->data[row][0] < 20)
+                {
+                    int note = pat->data[row][0];
+                    int octave = pat->data[row][1];
+
+                    if(note == 12)
+                    {
+                        note = 0;
+                        octave++;
+                    }
+
+                    set_note(&step, note + octave * 12);
+                }
+            }
+            if(pat->data[row][2] > -1)
+            {
+                set_instrument(&step, MIN(MUS_NOTE_INSTRUMENT_NONE_FZT - 1, pat->data[row][2]));
+            }
+            if(pat->data[row][3] > -1)
+            {
+                set_volume(&step, pat->data[row][3] * MUS_NOTE_VOLUME_NONE_FZT / 0xff);
+            }
+            //commands hell
+            w->writeC(step.note);
+            w->writeC(step.inst_vol);
+            w->writeS(step.command);
+        }
     }
 
     saveLock.unlock();
