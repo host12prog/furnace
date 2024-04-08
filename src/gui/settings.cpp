@@ -477,7 +477,7 @@ void FurnaceGUI::drawSettings() {
             settingsChanged=true;
           }
 #endif
-          if (ImGui::Selectable("Software",curRenderBackend=="Software")) {
+          if (ImGui::Selectable(_L("Software##sgse"),curRenderBackend=="Software")) {
             settings.renderBackend="Software";
             settingsChanged=true;
           }
@@ -505,7 +505,7 @@ void FurnaceGUI::drawSettings() {
           }
         }
 
-        ImGui::TextWrapped("current backend: %s\n%s\n%s\n%s",rend->getBackendName(),rend->getVendorName(),rend->getDeviceName(),rend->getAPIVersion());
+        ImGui::TextWrapped(_L("current backend: %s\n%s\n%s\n%s##sgse"),rend->getBackendName(),rend->getVendorName(),rend->getDeviceName(),rend->getAPIVersion());
 
         bool vsyncB=settings.vsync;
         if (ImGui::Checkbox(_L("VSync##sgse"),&vsyncB)) {

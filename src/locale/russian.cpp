@@ -2607,11 +2607,13 @@ void DivLocale::addTranslationsRussian()
     strings["General##sgse"].plurals[0] = "Основные";
     strings["Program##sgse1"].plurals[0] = "Программа";
     strings["Render backend##sgse"].plurals[0] = "Библиотека отрисовки";
+    strings["Software##sgse"].plurals[0] = "Программная отрисовка";
     strings["you may need to restart Furnace for this setting to take effect.##sgse0"].plurals[0] = "возможно, вам потребуется перезапустить Furnace, чтобы эта настрока применилась.";
     strings["Render driver##sgse"].plurals[0] = "Драйвер отрисовки";
     strings["Automatic##sgse0"].plurals[0] = "Выбирать автоматически";
     strings["Automatic##sgse1"].plurals[0] = "Выбирать автоматически";
     strings["you may need to restart Furnace for this setting to take effect.##sgse1"].plurals[0] = "возможно, вам потребуется перезапустить Furnace, чтобы эта настрока применилась.";
+    strings["current backend: %s\n%s\n%s\n%s##sgse"].plurals[0] = "текущая библиотека отрисовки: %s\n%s\n%s\n%s";
     strings["VSync##sgse"].plurals[0] = "Вертикальная синхронизация";
     strings["Frame rate limit##sgse"].plurals[0] = "Ограничение частоты кадров";
     strings["only applies when VSync is disabled.##sgse"].plurals[0] = "применяется только при отключённой вертикальной синхронизации.";
