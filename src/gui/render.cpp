@@ -31,9 +31,12 @@
 #ifdef HAVE_RENDER_DX11
 #include "render/renderDX11.h"
 #endif
+#include "render/renderSoftware.h"
 
 bool FurnaceGUI::initRender() {
   if (rend!=NULL) return false;
+
+  logV("requested backend: %s",settings.renderBackend);
 
   if (safeMode) {
     renderBackend=GUI_BACKEND_SDL;
@@ -49,6 +52,8 @@ bool FurnaceGUI::initRender() {
     renderBackend=GUI_BACKEND_DX9;
   } else if (settings.renderBackend=="SDL") {
     renderBackend=GUI_BACKEND_SDL;
+  } else if (settings.renderBackend=="Software") {
+    renderBackend=GUI_BACKEND_SOFTWARE;
   } else {
     renderBackend=GUI_BACKEND_DEFAULT;
   }
@@ -99,6 +104,10 @@ bool FurnaceGUI::initRender() {
       rend=new FurnaceGUIRenderSDL;
       break;
 #endif
+    case GUI_BACKEND_SOFTWARE:
+      logI("render backend: Software");
+      rend=new FurnaceGUIRenderSoftware;
+      break;
     default:
       logE("invalid render backend!");
       return false;

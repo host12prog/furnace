@@ -2640,11 +2640,13 @@ void DivLocale::addTranslationsTemplate()
     strings["General##sgse"].plurals[0] = "=General";
     strings["Program##sgse1"].plurals[0] = "=Program";
     strings["Render backend##sgse"].plurals[0] = "=Render backend";
+    strings["Software##sgse"].plurals[0] = "=Software";
     strings["you may need to restart Furnace for this setting to take effect.##sgse0"].plurals[0] = "=you may need to restart Furnace for this setting to take effect.";
     strings["Render driver##sgse"].plurals[0] = "=Render driver";
     strings["Automatic##sgse0"].plurals[0] = "=Automatic";
     strings["Automatic##sgse1"].plurals[0] = "=Automatic";
     strings["you may need to restart Furnace for this setting to take effect.##sgse1"].plurals[0] = "=you may need to restart Furnace for this setting to take effect.";
+    strings["current backend: %s\n%s\n%s\n%s##sgse"].plurals[0] = "=current backend: %s\n%s\n%s\n%s";
     strings["VSync##sgse"].plurals[0] = "=VSync";
     strings["Frame rate limit##sgse"].plurals[0] = "=Frame rate limit";
     strings["only applies when VSync is disabled.##sgse"].plurals[0] = "=only applies when VSync is disabled.";
@@ -2663,8 +2665,9 @@ void DivLocale::addTranslationsTemplate()
     strings["Oscilloscope rendering engine:##sgse"].plurals[0] = "=Oscilloscope rendering engine:";
     strings["ImGui line plot##sgse"].plurals[0] = "=ImGui line plot";
     strings["render using Dear ImGui's built-in line drawing functions.##sgse"].plurals[0] = "=render using Dear ImGui's built-in line drawing functions.";
-    strings["GLSL/HLSL (if available)##sgse"].plurals[0] = "=GLSL/HLSL (if available)";
-    strings["render using shaders that run on the graphics card.\nonly available in OpenGL render backend.##sgse"].plurals[0] = "=render using shaders that run on the graphics card.\nonly available in OpenGL render backend.";
+    strings["GLSL (if available)##sgse"].plurals[0] = "=GLSL (if available)";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL ES 2.0 render backend.##sgse"].plurals[0] = "=render using shaders that run on the graphics card.\nonly available in OpenGL ES 2.0 render backend.";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL 3.0 render backend.##sgse"].plurals[0] = "=render using shaders that run on the graphics card.\nonly available in OpenGL 3.0 render backend.";
     strings["File##sgse"].plurals[0] = "=File";
     strings["Use system file picker##sgse"].plurals[0] = "=Use system file picker";
     strings["Number of recent files##sgse"].plurals[0] = "=Number of recent files";

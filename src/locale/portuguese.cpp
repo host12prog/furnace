@@ -2656,8 +2656,8 @@ void DivLocale::addTranslationsPortuguese()
     strings["Oscilloscope rendering engine:##sgse"].plurals[0] = "Motor de renderização de osciloscópio:";
     strings["ImGui line plot##sgse"].plurals[0] = "Plotagem de linhas do ImGui";
     strings["render using Dear ImGui's built-in line drawing functions.##sgse"].plurals[0] = "desenha o osciloscópio utilizando as funções embutidas de desenho de linha do Dear ImGui.";
-    strings["GLSL/HLSL (if available)##sgse"].plurals[0] = "GLSL/HLSL (se disponível)";
-    strings["render using shaders that run on the graphics card.\nonly available in OpenGL render backend.##sgse"].plurals[0] = "renderiza utilizando sombreadores que executam na placa de vídeo.\nsomente disponível no backend de renderização OpenGL.";
+    strings["GLSL (if available)##sgse"].plurals[0] = "GLSL (se disponível)";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL 3.0 render backend.##sgse"].plurals[0] = "renderiza utilizando sombreadores que executam na placa de vídeo.\nsomente disponível no backend de renderização OpenGL 3.0.";
     strings["File##sgse"].plurals[0] = "Arquivo";
     strings["Use system file picker##sgse"].plurals[0] = "Usar diálogo de arquivos do sistema";
     strings["Number of recent files##sgse"].plurals[0] = "Número de arquivos recentes";

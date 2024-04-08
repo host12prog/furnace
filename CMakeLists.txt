@@ -805,6 +805,7 @@ extern/imgui_patched/imgui_draw.cpp
 extern/imgui_patched/imgui_tables.cpp
 extern/imgui_patched/imgui_widgets.cpp
 extern/imgui_patched/backends/imgui_impl_sdl2.cpp
+extern/imgui_software_renderer/imgui_sw.cpp
 extern/imgui_patched/misc/cpp/imgui_stdlib.cpp
 extern/igfd/ImGuiFileDialog.cpp
 
@@ -812,6 +813,7 @@ src/gui/plot_nolerp.cpp
 
 src/gui/render.cpp
 src/gui/render/abstract.cpp
+src/gui/render/renderSoftware.cpp
 
 src/gui/font_exo.cpp
 src/gui/font_liberationSans.cpp
@@ -824,6 +826,7 @@ src/gui/font_unifont.cpp
 src/gui/font_icon.cpp
 src/gui/font_furicon.cpp
 src/gui/fonts.cpp
+src/gui/fontzlib.cpp
 
 src/gui/image_icon.cpp
 src/gui/image.cpp
@@ -1036,7 +1039,7 @@ if (WITH_RENDER_DX11)
       list(APPEND GUI_SOURCES src/gui/render/renderDX11.cpp)
       list(APPEND GUI_SOURCES extern/imgui_patched/backends/imgui_impl_dx11.cpp)
       list(APPEND DEPENDENCIES_DEFINES HAVE_RENDER_DX11)
-      list(APPEND DEPENDENCIES_LIBRARIES d3d11)
+      list(APPEND DEPENDENCIES_LIBRARIES d3d11 dxgi)
       message(STATUS "UI render backend: DirectX 11")
     endif()
   else()
@@ -1118,6 +1121,7 @@ if (BUILD_GUI)
   list(APPEND DEPENDENCIES_INCLUDE_DIRS
     extern/imgui_patched
     extern/imgui_patched/backends
+    extern/imgui_software_renderer
     extern/igfd
   )
   if (WIN32 OR APPLE)

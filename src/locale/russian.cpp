@@ -2607,11 +2607,13 @@ void DivLocale::addTranslationsRussian()
     strings["General##sgse"].plurals[0] = "Основные";
     strings["Program##sgse1"].plurals[0] = "Программа";
     strings["Render backend##sgse"].plurals[0] = "Библиотека отрисовки";
+    strings["Software##sgse"].plurals[0] = "Программная отрисовка";
     strings["you may need to restart Furnace for this setting to take effect.##sgse0"].plurals[0] = "возможно, вам потребуется перезапустить Furnace, чтобы эта настрока применилась.";
     strings["Render driver##sgse"].plurals[0] = "Драйвер отрисовки";
     strings["Automatic##sgse0"].plurals[0] = "Выбирать автоматически";
     strings["Automatic##sgse1"].plurals[0] = "Выбирать автоматически";
     strings["you may need to restart Furnace for this setting to take effect.##sgse1"].plurals[0] = "возможно, вам потребуется перезапустить Furnace, чтобы эта настрока применилась.";
+    strings["current backend: %s\n%s\n%s\n%s##sgse"].plurals[0] = "текущая библиотека отрисовки: %s\n%s\n%s\n%s";
     strings["VSync##sgse"].plurals[0] = "Вертикальная синхронизация";
     strings["Frame rate limit##sgse"].plurals[0] = "Ограничение частоты кадров";
     strings["only applies when VSync is disabled.##sgse"].plurals[0] = "применяется только при отключённой вертикальной синхронизации.";
@@ -2630,8 +2632,9 @@ void DivLocale::addTranslationsRussian()
     strings["Oscilloscope rendering engine:##sgse"].plurals[0] = "Движок отрисовки осциллографов:";
     strings["ImGui line plot##sgse"].plurals[0] = "Отрисовка линий от ImGui";
     strings["render using Dear ImGui's built-in line drawing functions.##sgse"].plurals[0] = "отрисовывать при помощи встроенных функций отрисовки линий Dear ImGui.";
-    strings["GLSL/HLSL (if available)##sgse"].plurals[0] = "GLSL/HLSL (при наличии)";
-    strings["render using shaders that run on the graphics card.\nonly available in OpenGL render backend.##sgse"].plurals[0] = "отрисовывать при помощи шейдеров, исполняемых на ГП.\nработает только при выборе OpenGL в качестве библиотеки отрисовки.";
+    strings["GLSL (if available)##sgse"].plurals[0] = "GLSL (при наличии)";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL ES 2.0 render backend.##sgse"].plurals[0] = "отрисовывать при помощи шейдеров, исполняемых на ГП.\nработает только при выборе OpenGL ES 2.0 в качестве библиотеки отрисовки.";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL 3.0 render backend.##sgse"].plurals[0] = "отрисовывать при помощи шейдеров, исполняемых на ГП.\nработает только при выборе OpenGL 3.0 в качестве библиотеки отрисовки.";
     strings["File##sgse"].plurals[0] = "Файл";
     strings["Use system file picker##sgse"].plurals[0] = "Использовать диалоговое окно выбора файлов ОС";
     strings["Number of recent files##sgse"].plurals[0] = "Количество недавних файлов";
