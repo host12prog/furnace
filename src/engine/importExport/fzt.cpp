@@ -834,8 +834,7 @@ int DivEngine::exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_
             }
             else
             {
-                fzt_patterns[current_fzt_pattern].patterns[0].channel = i;
-                fzt_patterns[current_fzt_pattern].patterns[0].pattern = j;
+                //fzt_patterns[current_fzt_pattern].patterns[0].channel = 0xff;
             }
         }
     }
@@ -944,7 +943,7 @@ SafeWriter* DivEngine::saveFZT()
     w->writeC(sub_song->patLen);
 
     w->writeC(sub_song->speeds.val[0]);
-    w->writeC(MIN((int)sub_song->hz, 255));
+    w->writeC((unsigned char)MIN((int)sub_song->hz, (int)255));
 
     w->writeC(sub_song->ordersLen);
 
