@@ -593,6 +593,14 @@ void FurnaceGUI::drawMobileControls() {
           memoryOpen=!memoryOpen;
         }
 
+        if (ImGui::Button("CV")) {
+          cvOpen=!cvOpen;
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Presets")) {
+          userPresetsOpen=!userPresetsOpen;
+        }
+
         ImGui::Separator();
 
         ImGui::Button(_L("Panic##sgec"));

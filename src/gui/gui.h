@@ -2576,6 +2576,7 @@ class FurnaceGUI {
 
   // user presets window
   int selectedUserPreset;
+  std::vector<int> selectedUserPresetSub;
 
   void drawExportAudio(bool onWindow=false);
   void drawExportVGM(bool onWindow=false);
@@ -2658,6 +2659,9 @@ class FurnaceGUI {
   void waveListItem(int index, float* wavePreview, int dir, int asset);
   void localWaveListItem(int i, float* wavePreview, DivInstrument* ins);
   void sampleListItem(int index, int dir, int asset);
+
+  //void drawSysDefs(std::vector<FurnaceGUISysDef>& category, bool& accepted, std::vector<int>& sysDefStack);
+  void printPresets(std::vector<FurnaceGUISysDef>& items, int depth);
 
   void toggleMobileUI(bool enable, bool force=false);
 
