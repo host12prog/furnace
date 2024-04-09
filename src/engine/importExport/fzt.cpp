@@ -266,11 +266,11 @@ uint16_t convert_furnace_eff_to_fzt(uint16_t fur_eff, bool mask_value)
         {
             return TEE_PROGRAM_END;
         }
-        if((fur_eff & 0xfff0) == fzt_commands_map_real[index][0] && (fzt_commands_map_real[index][1] < TEE_EFFECT_EXT_TOGGLE_FILTER || fzt_commands_map_real[index][1] >= TEE_EFFECT_SET_SPEED_PROG_PERIOD))
+        if((fur_eff & 0xfff0) == fzt_commands_map_real[index][0] && (fzt_commands_map_real[index][1] >= TEE_EFFECT_EXT_TOGGLE_FILTER && fzt_commands_map_real[index][1] < TEE_EFFECT_SET_SPEED_PROG_PERIOD))
         {
             return fzt_commands_map_real[index][1] | (mask_value ? 0 : eff_val_hex1);
         }
-        if((fur_eff & 0xff00) == fzt_commands_map_real[index][0] && (fzt_commands_map_real[index][1] >= TEE_EFFECT_EXT_TOGGLE_FILTER || fzt_commands_map_real[index][1] < TEE_EFFECT_SET_SPEED_PROG_PERIOD))
+        if((fur_eff & 0xff00) == fzt_commands_map_real[index][0] && (fzt_commands_map_real[index][1] < TEE_EFFECT_EXT_TOGGLE_FILTER || fzt_commands_map_real[index][1] >= TEE_EFFECT_SET_SPEED_PROG_PERIOD))
         {
             return fzt_commands_map_real[index][1] | (mask_value ? 0 : eff_val_hex2);
         }
