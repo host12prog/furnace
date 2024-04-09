@@ -5,6 +5,7 @@
 //   publish, and distribute this file as you see fit.
 
 #include "imgui.h"
+#include "imgui_internal.h"
 #ifndef IMGUI_DISABLE
 #include "imgui_sw.hpp"
 
@@ -37,7 +38,6 @@ struct PaintTarget
   uint32_t *pixels;
   int width;
   int height;
-  ImVec2 DisplayPos;
 };
 
 // ----------------------------------------------------------------------------
@@ -46,7 +46,11 @@ struct PaintTarget
 union ColorInt
 {
   struct {
-    uint8_t r, g, b, a;
+#ifdef TA_BIG_ENDIAN
+    uint8_t a, r, g, b;
+#else
+    uint8_t b, g, r, a;
+#endif
   };
   uint32_t u32;
   ColorInt():
@@ -54,6 +58,16 @@ union ColorInt
 
   ColorInt(uint32_t c):
     u32(c) {}
+
+  ColorInt(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha):
+    b(blue),
+    g(green),
+    r(red),
+    a(alpha) {}
+
+  static ColorInt bgra(uint32_t c) {
+    return ColorInt((c&0xff00ff00)|((c&0xff)<<16)|((c&0xff0000)>>16));
+  }
 
 
   ColorInt &operator*=(const ColorInt &other)
@@ -67,12 +81,17 @@ union ColorInt
 };
 #pragma pack(pop)
 
-uint32_t blend(const ColorInt &target, const ColorInt &source)
+static inline uint32_t blend(const ColorInt &target, const ColorInt &source)
 {
+  if (source.a == 0) return target.u32;
   if (source.a >= 255) return source.u32;
-  return (target.a << 24u) | (((source.b * source.a + target.b * (255 - source.a)) / 255) << 16u)
-          | (((source.g * source.a + target.g * (255 - source.a)) / 255) << 8u)
-          | ((source.r * source.a + target.r * (255 - source.a)) / 255);
+  const unsigned char ia=255-source.a;
+  return (
+    (target.a << 24u) |
+    (((source.r * source.a + target.r * ia + 255) >> 8) << 16u) |
+    (((source.g * source.a + target.g * ia + 255) >> 8) << 8u) |
+    (((source.b * source.a + target.b * ia + 255) >> 8) << 0u)
+  );
 }
 
 // ----------------------------------------------------------------------------
@@ -106,6 +125,21 @@ bool operator!=(const ImVec2 &a, const ImVec2 &b) { return a.x != b.x || a.y != 
 
 ImVec4 operator*(const float f, const ImVec4 &v) { return ImVec4{ f * v.x, f * v.y, f * v.z, f * v.w }; }
 
+
+ColorInt operator*(const float other, const ColorInt& that)
+{
+  return ColorInt(
+    (that.r * (int)(other * 256.0f)) >> 8,
+    (that.g * (int)(other * 256.0f)) >> 8,
+    (that.b * (int)(other * 256.0f)) >> 8,
+    (that.a * (int)(other * 256.0f)) >> 8
+  );
+}
+
+ColorInt operator+(const ColorInt& l, const ColorInt& r) {
+  return ColorInt(l.u32+r.u32);
+}
+
 // ----------------------------------------------------------------------------
 // Copies of functions in ImGui, inlined for speed:
 
@@ -121,9 +155,9 @@ inline ImVec4 color_convert_u32_to_float4(ImU32 in)
 inline ImU32 color_convert_float4_to_u32(const ImVec4 &in)
 {
   ImU32 out;
-  out = uint32_t(in.x * 255.0f + 0.5f) << IM_COL32_R_SHIFT;
+  out = uint32_t(in.x * 255.0f + 0.5f) << IM_COL32_B_SHIFT;
   out |= uint32_t(in.y * 255.0f + 0.5f) << IM_COL32_G_SHIFT;
-  out |= uint32_t(in.z * 255.0f + 0.5f) << IM_COL32_B_SHIFT;
+  out |= uint32_t(in.z * 255.0f + 0.5f) << IM_COL32_R_SHIFT;
   out |= uint32_t(in.w * 255.0f + 0.5f) << IM_COL32_A_SHIFT;
   return out;
 }
@@ -133,8 +167,8 @@ inline ImU32 color_convert_float4_to_u32(const ImVec4 &in)
 // To keep the code simple we use 64 bits to avoid overflows.
 // TODO: make it 32-bit or else
 
-using Int = int64_t;
-const Int kFixedBias = 256;
+using Int = int32_t;
+const Int kFixedBias = 1;
 
 struct Point
 {
@@ -171,21 +205,24 @@ inline float barycentric(const ImVec2 &a, const ImVec2 &b, const ImVec2 &point)
 
 inline uint8_t sample_font_texture(const SWTexture &texture, int x, int y)
 {
-  return reinterpret_cast<const uint8_t *>(texture.pixels)[x + y * texture.width];
+  return ((const uint8_t*)texture.pixels)[x + y];
 }
 
-inline uint32_t sample_texture(const SWTexture &texture, int x, int y) { return texture.pixels[x + y * texture.width]; }
+inline uint32_t sample_texture(const SWTexture &texture, int x, int y) { return texture.pixels[x + y]; }
 
 static void paint_uniform_rectangle(const PaintTarget &target,
   const ImVec2 &min_f,
   const ImVec2 &max_f,
   const ColorInt &color)
 {
+  // don't if our rectangle is transparent
+  if (color.a==0) return;
+
   // Integer bounding box [min, max):
-  int min_x_i = static_cast<int>(min_f.x + 0.5f);
-  int min_y_i = static_cast<int>(min_f.y + 0.5f);
-  int max_x_i = static_cast<int>(max_f.x + 0.5f);
-  int max_y_i = static_cast<int>(max_f.y + 0.5f);
+  int min_x_i = (int)(min_f.x + 0.5f);
+  int min_y_i = (int)(min_f.y + 0.5f);
+  int max_x_i = (int)(max_f.x + 0.5f);
+  int max_y_i = (int)(max_f.y + 0.5f);
 
   // Clamp to render target:
   min_x_i = std::max(min_x_i, 0);
@@ -193,22 +230,34 @@ static void paint_uniform_rectangle(const PaintTarget &target,
   max_x_i = std::min(max_x_i, target.width);
   max_y_i = std::min(max_y_i, target.height);
 
-  // We often blend the same colors over and over again, so optimize for this (saves 25% total cpu):
-  uint32_t last_target_pixel = target.pixels[min_y_i * target.width + min_x_i];
-  const auto *lastColorRef = reinterpret_cast<const ColorInt *>(&last_target_pixel);
-  uint32_t last_output = blend(*lastColorRef, color);
-
-  for (int y = min_y_i; y < max_y_i; ++y) {
-    for (int x = min_x_i; x < max_x_i; ++x) {
-      uint32_t &target_pixel = target.pixels[y * target.width + x];
-      if (target_pixel == last_target_pixel) {
-        target_pixel = last_output;
-        continue;
+  if (color.a==255) {
+    // fast path if alpha blending is not necessary
+    for (int y = min_y_i; y < max_y_i; ++y) {
+      uint32_t* target_pixel = &target.pixels[y * target.width + min_x_i - 1];
+      for (int x = min_x_i; x < max_x_i; ++x) {
+        ++target_pixel;
+        *target_pixel = color.u32;
       }
-      last_target_pixel = target_pixel;
-      const auto *colorRef = reinterpret_cast<const ColorInt *>(&target_pixel);
-      target_pixel = blend(*colorRef, color);
-      last_output = target_pixel;
+    }
+  } else {
+    // We often blend the same colors over and over again, so optimize for this (saves 25% total cpu):
+    uint32_t last_target_pixel = target.pixels[min_y_i * target.width + min_x_i];
+    const ColorInt* lastColorRef = (const ColorInt*)(&last_target_pixel);
+    uint32_t last_output = blend(*lastColorRef, color);
+
+    for (int y = min_y_i; y < max_y_i; ++y) {
+      uint32_t* target_pixel = &target.pixels[y * target.width + min_x_i - 1];
+      for (int x = min_x_i; x < max_x_i; ++x) {
+        ++target_pixel;
+        if (*target_pixel == last_target_pixel) {
+          *target_pixel = last_output;
+          continue;
+        }
+        last_target_pixel = *target_pixel;
+        const ColorInt* colorRef = (const ColorInt*)(target_pixel);
+        *target_pixel = blend(*colorRef, color);
+        last_output = *target_pixel;
+      }
     }
   }
 }
@@ -233,16 +282,16 @@ static void paint_uniform_textured_rectangle(const PaintTarget &target,
   float max_y_f = max_p.y;
 
   // Clip against clip_rect:
-  min_x_f = std::max(min_x_f, clip_rect.x - target.DisplayPos.x);
-  min_y_f = std::max(min_y_f, clip_rect.y - target.DisplayPos.y);
-  max_x_f = std::min(max_x_f, clip_rect.z - 0.5f - target.DisplayPos.x);
-  max_y_f = std::min(max_y_f, clip_rect.w - 0.5f - target.DisplayPos.y);
+  min_x_f = std::max(min_x_f, clip_rect.x);
+  min_y_f = std::max(min_y_f, clip_rect.y);
+  max_x_f = std::min(max_x_f, clip_rect.z - 0.5f);
+  max_y_f = std::min(max_y_f, clip_rect.w - 0.5f);
 
   // Integer bounding box [min, max):
-  int min_x_i = static_cast<int>(min_x_f);
-  int min_y_i = static_cast<int>(min_y_f);
-  int max_x_i = static_cast<int>(max_x_f + 1.0f);
-  int max_y_i = static_cast<int>(max_y_f + 1.0f);
+  int min_x_i = (int)(min_x_f);
+  int min_y_i = (int)(min_y_f);
+  int max_x_i = (int)(max_x_f + 1.0f);
+  int max_y_i = (int)(max_y_f + 1.0f);
 
   // Clip against render target:
   min_x_i = std::max(min_x_i, 0);
@@ -264,28 +313,30 @@ static void paint_uniform_textured_rectangle(const PaintTarget &target,
   int startY = uv_topleft.y * (texture.height - 1.0f) + 0.5f;
 
   int currentX = startX;
-  int currentY = startY;
+  int currentY = startY * texture.width;
 
   float deltaX = delta_uv_per_pixel.x * texture.width;
   float deltaY = delta_uv_per_pixel.y * texture.height;
 
+  const ColorInt colorRef = ColorInt::bgra(min_v.col);
+
   for (int y = min_y_i; y < max_y_i; ++y) {
     currentX = startX;
+    uint32_t* target_pixel = &target.pixels[y * target.width - 1 + min_x_i];
     for (int x = min_x_i; x < max_x_i; ++x) {
-      uint32_t& target_pixel = target.pixels[y * target.width + x];
-      const ColorInt targetColorRef = ColorInt(target_pixel);
-      const ColorInt colorRef = ColorInt(min_v.col);
+      ++target_pixel;
+      const ColorInt* targetColorRef = (const ColorInt*)(target_pixel);
 
       if (texture.isAlpha) {
         uint8_t texel = sample_font_texture(texture, currentX, currentY);
         if (deltaX != 0 && currentX < texture.width - 1) { currentX += 1; }
 
         // The font texture is all black or all white, so optimize for this:
-        if (texel == 0) { continue; }
-        if (texel == 255) {
-          target_pixel = blend(targetColorRef, colorRef);
-          continue;
+        // anti-aliasing will be lost, but it doesn't matter
+        if (texel & 0x80) {
+          *target_pixel = blend(*targetColorRef, colorRef);
         }
+        continue;
 
       } else {
         uint32_t texColor = sample_texture(texture, currentX, currentY);
@@ -294,10 +345,10 @@ static void paint_uniform_textured_rectangle(const PaintTarget &target,
         if (deltaX != 0 && currentX < texture.width - 1) { currentX += 1; }
 
         src_color *= colorRef;
-        target_pixel = blend(targetColorRef, src_color);
+        *target_pixel = blend(*targetColorRef, src_color);
       }
     }
-    if (deltaY != 0 && currentY < texture.height - 1) { currentY += 1; }
+    if (deltaY != 0 && currentY < (texture.height - 1)*texture.width) { currentY += texture.width; }
   }
 }
 
@@ -334,16 +385,16 @@ static void paint_triangle(const PaintTarget &target,
   float max_y_f = max3(p0.y, p1.y, p2.y);
 
   // Clip against clip_rect:
-  min_x_f = std::max(min_x_f, clip_rect.x - target.DisplayPos.x);
-  min_y_f = std::max(min_y_f, clip_rect.y - target.DisplayPos.y);
-  max_x_f = std::min(max_x_f, clip_rect.z - 0.5f - target.DisplayPos.x);
-  max_y_f = std::min(max_y_f, clip_rect.w - 0.5f - target.DisplayPos.y);
+  min_x_f = std::max(min_x_f, clip_rect.x);
+  min_y_f = std::max(min_y_f, clip_rect.y);
+  max_x_f = std::min(max_x_f, clip_rect.z - 0.5f);
+  max_y_f = std::min(max_y_f, clip_rect.w - 0.5f);
 
   // Integer bounding box [min, max):
-  int min_x_i = static_cast<int>(min_x_f);
-  int min_y_i = static_cast<int>(min_y_f);
-  int max_x_i = static_cast<int>(max_x_f + 1.0f);
-  int max_y_i = static_cast<int>(max_y_f + 1.0f);
+  int min_x_i = (int)(min_x_f);
+  int min_y_i = (int)(min_y_f);
+  int max_x_i = (int)(max_x_f + 1.0f);
+  int max_y_i = (int)(max_y_f + 1.0f);
 
   // Clip against render target:
   min_x_i = std::max(min_x_i, 0);
@@ -398,26 +449,30 @@ static void paint_triangle(const PaintTarget &target,
 
   const bool has_uniform_color = (v0.col == v1.col && v0.col == v2.col);
 
-  const ImVec4 c0 = color_convert_u32_to_float4(v0.col);
-  const ImVec4 c1 = color_convert_u32_to_float4(v1.col);
-  const ImVec4 c2 = color_convert_u32_to_float4(v2.col);
+  const ColorInt c0 = ColorInt::bgra(v0.col);
+  const ColorInt c1 = ColorInt::bgra(v1.col);
+  const ColorInt c2 = ColorInt::bgra(v2.col);
 
   // We often blend the same colors over and over again, so optimize for this (saves 10% total cpu):
   uint32_t last_target_pixel = 0;
-  const auto *lastColorRef = reinterpret_cast<const ColorInt *>(&last_target_pixel);
-  const auto *colorRef = reinterpret_cast<const ColorInt *>(&v0.col);
-  uint32_t last_output = blend(*lastColorRef, *colorRef);
+  const ColorInt* lastColorRef = (const ColorInt*)(&last_target_pixel);
+  const ColorInt colorRef = ColorInt::bgra(v0.col);
+  uint32_t last_output = blend(*lastColorRef, colorRef);
 
   for (int y = min_y_i; y < max_y_i; ++y) {
     auto bary = bary_current_row;
 
     bool has_been_inside_this_row = false;
 
+    uint32_t* target_pixel = &target.pixels[y * target.width + min_x_i - 1];
+
     for (int x = min_x_i; x < max_x_i; ++x) {
       const auto w0 = bary.w0;
       const auto w1 = bary.w1;
       const auto w2 = bary.w2;
       bary += bary_dx;
+
+      ++target_pixel;
 
       {
         // Inside/outside test:
@@ -435,20 +490,19 @@ static void paint_triangle(const PaintTarget &target,
       }
       has_been_inside_this_row = true;
 
-      uint32_t &target_pixel = target.pixels[y * target.width + x];
 
       if (has_uniform_color && !texture) {
-        if (target_pixel == last_target_pixel) {
-          target_pixel = last_output;
+        if (*target_pixel == last_target_pixel) {
+          *target_pixel = last_output;
           continue;
         }
-        last_target_pixel = target_pixel;
-        target_pixel = blend(*lastColorRef, *colorRef);
-        last_output = target_pixel;
+        last_target_pixel = *target_pixel;
+        *target_pixel = blend(*lastColorRef, colorRef);
+        last_output = *target_pixel;
         continue;
       }
 
-      ImVec4 src_color;
+      ColorInt src_color;
 
       if (has_uniform_color) {
         src_color = c0;
@@ -462,19 +516,18 @@ static void paint_triangle(const PaintTarget &target,
         const ImVec2 uv = w0 * v0.uv + w1 * v1.uv + w2 * v2.uv;
         int x = uv.x * (texture->width - 1.0f) + 0.5f;
         int y = uv.y * (texture->height - 1.0f) + 0.5f;
-        src_color.w *= sample_font_texture(*texture, x, y) / 255.0f;
+        src_color.a = (src_color.a * sample_font_texture(*texture, x, y) + 255) >> 8;
       }
 
-      if (src_color.w <= 0.0f) { continue; }// Transparent.
-      if (src_color.w >= 1.0f) {
+      if (!src_color.a) { continue; }// Transparent.
+      if (src_color.a == 255) {
         // Opaque, no blending needed:
-        target_pixel = color_convert_float4_to_u32(src_color);
+        *target_pixel = src_color.u32;
         continue;
       }
 
-      ImVec4 target_color = color_convert_u32_to_float4(target_pixel);
-      const auto blended_color = src_color.w * src_color + (1.0f - src_color.w) * target_color;
-      target_pixel = color_convert_float4_to_u32(blended_color);
+      const ColorInt* target_color = (const ColorInt*)target_pixel;
+      *target_pixel = blend(*target_color, src_color);
     }
 
     bary_current_row += bary_dy;
@@ -485,32 +538,22 @@ static void paint_draw_cmd(const PaintTarget &target,
   const ImDrawVert *vertices,
   const ImDrawIdx *idx_buffer,
   const ImDrawCmd &pcmd,
-  const SwOptions &options)
+  const SwOptions &options,
+  const ImVec2& white_uv)
 {
-  const auto texture = reinterpret_cast<const SWTexture *>(pcmd.TextureId);
+  const SWTexture* texture = (const SWTexture*)(pcmd.TextureId);
   IM_ASSERT(texture);
-
-  // ImGui uses the first pixel for "white".
-  const ImVec2 white_uv = ImVec2(0.5f / texture->width, 0.5f / texture->height);
 
   for (unsigned int i = 0; i + 3 <= pcmd.ElemCount;) {
     ImDrawVert v0 = vertices[idx_buffer[i + 0]];
-    v0.pos.x -= target.DisplayPos.x;
-    v0.pos.y -= target.DisplayPos.y;
     ImDrawVert v1 = vertices[idx_buffer[i + 1]];
-    v1.pos.x -= target.DisplayPos.x;
-    v1.pos.y -= target.DisplayPos.y;
     ImDrawVert v2 = vertices[idx_buffer[i + 2]];
-    v2.pos.x -= target.DisplayPos.x;
-    v2.pos.y -= target.DisplayPos.y;
 
     // Text is common, and is made of textured rectangles. So let's optimize for it.
     // This assumes the ImGui way to layout text does not change.
     if (options.optimize_text && i + 6 <= pcmd.ElemCount && idx_buffer[i + 3] == idx_buffer[i + 0]
         && idx_buffer[i + 4] == idx_buffer[i + 2]) {
       ImDrawVert v3 = vertices[idx_buffer[i + 5]];
-      v3.pos.x -= target.DisplayPos.x;
-      v3.pos.y -= target.DisplayPos.y;
 
       if (v0.pos.x == v3.pos.x && v1.pos.x == v2.pos.x && v0.pos.y == v1.pos.y && v2.pos.y == v3.pos.y
           && v0.uv.x == v3.uv.x && v1.uv.x == v2.uv.x && v0.uv.y == v1.uv.y && v2.uv.y == v3.uv.y) {
@@ -530,20 +573,14 @@ static void paint_draw_cmd(const PaintTarget &target,
     // so we can save a lot of CPU by detecting them:
     if (options.optimize_rectangles && i + 6 <= pcmd.ElemCount) {
       ImDrawVert v3 = vertices[idx_buffer[i + 3]];
-      v3.pos.x -= target.DisplayPos.x;
-      v3.pos.y -= target.DisplayPos.y;
       ImDrawVert v4 = vertices[idx_buffer[i + 4]];
-      v4.pos.x -= target.DisplayPos.x;
-      v4.pos.y -= target.DisplayPos.y;
       ImDrawVert v5 = vertices[idx_buffer[i + 5]];
-      v5.pos.x -= target.DisplayPos.x;
-      v5.pos.y -= target.DisplayPos.y;
 
       ImVec2 min, max;
-      min.x = min3(v0.pos.x - target.DisplayPos.x, v1.pos.x - target.DisplayPos.x, v2.pos.x - target.DisplayPos.x);
-      min.y = min3(v0.pos.y - target.DisplayPos.y, v1.pos.y - target.DisplayPos.y, v2.pos.y - target.DisplayPos.y);
-      max.x = max3(v0.pos.x - target.DisplayPos.x, v1.pos.x - target.DisplayPos.x, v2.pos.x - target.DisplayPos.x);
-      max.y = max3(v0.pos.y - target.DisplayPos.y, v1.pos.y - target.DisplayPos.y, v2.pos.y - target.DisplayPos.y);
+      min.x = min3(v0.pos.x, v1.pos.x, v2.pos.x);
+      min.y = min3(v0.pos.y, v1.pos.y, v2.pos.y);
+      max.x = max3(v0.pos.x, v1.pos.x, v2.pos.x);
+      max.y = max3(v0.pos.y, v1.pos.y, v2.pos.y);
 
       // Not the prettiest way to do this, but it catches all cases
       // of a rectangle split into two triangles.
@@ -557,10 +594,10 @@ static void paint_draw_cmd(const PaintTarget &target,
         const bool has_uniform_color =
           v0.col == v1.col && v0.col == v2.col && v0.col == v3.col && v0.col == v4.col && v0.col == v5.col;
 
-        min.x = std::max(min.x, pcmd.ClipRect.x - target.DisplayPos.x);
-        min.y = std::max(min.y, pcmd.ClipRect.y - target.DisplayPos.y);
-        max.x = std::min(max.x, pcmd.ClipRect.z - 0.5f - target.DisplayPos.x);
-        max.y = std::min(max.y, pcmd.ClipRect.w - 0.5f - target.DisplayPos.y);
+        min.x = std::max(min.x, pcmd.ClipRect.x);
+        min.y = std::max(min.y, pcmd.ClipRect.y);
+        max.x = std::min(max.x, pcmd.ClipRect.z - 0.5f);
+        max.y = std::min(max.y, pcmd.ClipRect.w - 0.5f);
 
         if (max.x < min.x || max.y < min.y) {
           i += 6;
@@ -568,8 +605,8 @@ static void paint_draw_cmd(const PaintTarget &target,
         }// Completely clipped
 
         if (has_uniform_color) {
-          const auto *colorRef = reinterpret_cast<const ColorInt *>(&v0.col);
-          paint_uniform_rectangle(target, min, max, *colorRef);
+          const ColorInt colorRef = ColorInt::bgra(v0.col);
+          paint_uniform_rectangle(target, min, max, colorRef);
           i += 6;
           continue;
         }
@@ -586,13 +623,14 @@ static void paint_draw_list(const PaintTarget &target, const ImDrawList *cmd_lis
 {
   const ImDrawIdx *idx_buffer = &cmd_list->IdxBuffer[0];
   const ImDrawVert *vertices = cmd_list->VtxBuffer.Data;
+  const ImVec2 white_uv = cmd_list->_Data->TexUvWhitePixel;
 
   for (int cmd_i = 0; cmd_i < cmd_list->CmdBuffer.size(); cmd_i++) {
     const ImDrawCmd &pcmd = cmd_list->CmdBuffer[cmd_i];
     if (pcmd.UserCallback) {
       pcmd.UserCallback(cmd_list, &pcmd);
     } else {
-      paint_draw_cmd(target, vertices, idx_buffer, pcmd, options);
+      paint_draw_cmd(target, vertices, idx_buffer, pcmd, options, white_uv);
     }
     idx_buffer += pcmd.ElemCount;
   }
@@ -602,7 +640,7 @@ static void paint_imgui(uint32_t *pixels, ImDrawData *drawData, int fb_width, in
 {
   if (fb_width <= 0 || fb_height <= 0) return;
 
-  PaintTarget target{ pixels, fb_width, fb_height, drawData->DisplayPos };
+  PaintTarget target{ pixels, fb_width, fb_height };
 
   for (int i = 0; i < drawData->CmdListsCount; ++i) {
     paint_draw_list(target, drawData->CmdLists[i], options);
@@ -659,6 +697,7 @@ void ImGui_ImplSW_RenderDrawData(ImDrawData* draw_data) {
     if (SDL_LockSurface(surf)!=0) return;
   }
   paint_imgui((uint32_t*)surf->pixels,draw_data,surf->w,surf->h);
+  // 0xAARRGGBB
   if (mustLock) {
     SDL_UnlockSurface(surf);
   }

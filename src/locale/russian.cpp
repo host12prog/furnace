@@ -2617,6 +2617,7 @@ void DivLocale::addTranslationsRussian()
     strings["VSync##sgse"].plurals[0] = "Вертикальная синхронизация";
     strings["Frame rate limit##sgse"].plurals[0] = "Ограничение частоты кадров";
     strings["only applies when VSync is disabled.##sgse"].plurals[0] = "применяется только при отключённой вертикальной синхронизации.";
+    strings["Display render time##sgse"].plurals[0] = "Отображать время отрисовки";
     strings["Late render clear##sgse"].plurals[0] = "Запаздывающая очистка буфера отрисовщика";
     strings["calls rend->clear() after rend->present(). might reduce UI latency by one frame in some drivers.##sgse"].plurals[0] = "вызывает rend->clear() после rend->present(). может устранить запаздывание отрисовки интерфейса на один кадр для некоторых драйверов.";
     strings["Power-saving mode##sgse"].plurals[0] = "Режим энергосбережения";

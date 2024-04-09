@@ -2650,6 +2650,7 @@ void DivLocale::addTranslationsTemplate()
     strings["VSync##sgse"].plurals[0] = "=VSync";
     strings["Frame rate limit##sgse"].plurals[0] = "=Frame rate limit";
     strings["only applies when VSync is disabled.##sgse"].plurals[0] = "=only applies when VSync is disabled.";
+    strings["Display render time##sgse"].plurals[0] = "=Display render time";
     strings["Late render clear##sgse"].plurals[0] = "=Late render clear";
     strings["calls rend->clear() after rend->present(). might reduce UI latency by one frame in some drivers.##sgse"].plurals[0] = "=calls rend->clear() after rend->present(). might reduce UI latency by one frame in some drivers.";
     strings["Power-saving mode##sgse"].plurals[0] = "=Power-saving mode";

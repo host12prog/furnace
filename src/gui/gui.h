@@ -1905,6 +1905,7 @@ class FurnaceGUI {
     int cursorWheelStep;
     int vsync;
     int frameRateLimit;
+    int displayRenderTime;
     unsigned int maxUndoSteps;
     int language;
     int translate_channel_names_pattern;
@@ -2142,6 +2143,7 @@ class FurnaceGUI {
       cursorWheelStep(0),
       vsync(1),
       frameRateLimit(60),
+      displayRenderTime(0),
       maxUndoSteps(100),
       language(DIV_LANG_ENGLISH),
       translate_channel_names_pattern(0),
