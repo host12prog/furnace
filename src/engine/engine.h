@@ -559,6 +559,7 @@ class DivEngine {
   bool loadS3M(unsigned char* file, size_t len);
   bool loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_sig, bool eft);
   bool loadFC(unsigned char* file, size_t len);
+  bool loadFZT(unsigned char* file, size_t len);
 
   void loadDMP(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath);
   void loadTFI(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath);
@@ -635,6 +636,7 @@ class DivEngine {
     DivWavetable* getLocalWave(DivInstrument* ins, int index);
     DivSample* getSample(int index);
     DivDispatch* getDispatch(int index);
+    DivDispatch* getDispatchFromChanIndex(int ch);
     // parse old system setup description
     String decodeSysDesc(String desc);
     // start fresh
@@ -669,6 +671,13 @@ class DivEngine {
     SafeWriter* saveCommand();
     // export to text
     SafeWriter* saveText(bool separatePatterns=true);
+
+    bool exportFZTFindErrors();
+    bool cmp_pats(DivPattern* pat1, DivPattern* pat2, int patLen);
+    bool pattern_unique(int chan, int ord);
+    int exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_you);
+    // export to FZT
+    SafeWriter* saveFZT();
     // export to an audio file
     bool saveAudio(const char* path, int loops, DivAudioExportModes mode, double fadeOutTime=0.0);
     // wait for audio export to finish

@@ -441,7 +441,7 @@ void FurnaceGUI::drawSettings() {
         // SUBSECTION PROGRAM
         CONFIG_SUBSECTION(_L("Program##sgse1"));
         String curRenderBackend=settings.renderBackend.empty()?GUI_BACKEND_DEFAULT_NAME:settings.renderBackend;
-        if (ImGui::BeginCombo(_L("Render backend##sgse"),curRenderBackend.c_str())) {
+        if (ImGui::BeginCombo(_L("Render backend##sgse"),_L(curRenderBackend.c_str()))) {
 #ifdef HAVE_RENDER_SDL
           if (ImGui::Selectable("SDL Renderer",curRenderBackend=="SDL")) {
             settings.renderBackend="SDL";
@@ -3989,6 +3989,7 @@ CONFIG_SECTION(_L("Color##sgse")) {
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_NDS,"Nintendo DS");
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_GBA_DMA,"GBA DMA");
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_GBA_MINMOD,"GBA MinMod");
+    UI_COLOR_CONFIG(GUI_COLOR_INSTR_FZT,"Flizzer Tracker");
     UI_COLOR_CONFIG(GUI_COLOR_INSTR_UNKNOWN,"Other/Unknown");
     ImGui::TreePop();
   }
@@ -5802,6 +5803,11 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
     initSystemPresets();
   }
 
+  if(!safeMode && renderBackend==GUI_BACKEND_SOFTWARE)
+  {
+    locale.setLanguage((DivLang)settings.language);
+  }
+
   if (mobileUI) {
     sty.FramePadding=ImVec2(8.0f,6.0f);
   }
@@ -6169,6 +6175,7 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".0cc",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".dnm",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".eft",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
+  ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".fzt",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".dmf",uiColors[GUI_COLOR_FILE_SONG_IMPORT],ICON_FA_FILE);
   ImGuiFileDialog::Instance()->SetFileStyle(IGFD_FileStyleByExtension,".dmp",uiColors[GUI_COLOR_FILE_INSTR],ICON_FA_FILE);
 

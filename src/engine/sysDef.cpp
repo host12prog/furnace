@@ -2188,6 +2188,48 @@ void DivEngine::registerSystems() {
     }
   );
 
+  sysDefs[DIV_SYSTEM_FZT]=new DivSysDef(
+    "FZT sound source", NULL, 0xf2, 0, 4, false, true, 0, false, 0, 0, 0,
+    "a software synth core by LTVA used in Flizzer Tracker (Flipper Zero chiptune tracker).##sesd",
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd"},
+    {"1", "2", "3", "4"},
+    {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
+    {DIV_INS_FZT, DIV_INS_FZT, DIV_INS_FZT, DIV_INS_FZT, DIV_INS_FZT},
+    {},
+    {},
+    {
+      //these commands are read by opcode inside fzt dispatch code.
+      //they are never passed through dispatchCmd() thing.
+      //that's why I set every one of them to "DIV_CMD_WAVE" ID.
+      {0x10, {DIV_CMD_WAVE, "10xx: Set wave (bits: 0: noise, 1: pulse, 2: triangle, 3: sawtooth, 4: metallic noise, 5: sine)##sesd"}},
+      {0x11, {DIV_CMD_WAVE, "11xy: PWM (pulsolo) with speed x and depth y##sesd"}},
+      {0x12, {DIV_CMD_WAVE, "12xx: Set pulse width##sesd"}},
+      {0x13, {DIV_CMD_WAVE, "13xx: Pulse width up##sesd"}},
+      {0x14, {DIV_CMD_WAVE, "14xx: Pulse width down##sesd"}},
+      {0x15, {DIV_CMD_WAVE, "15xx: Set filter cutoff##sesd"}},
+      {0x16, {DIV_CMD_WAVE, "16xx: Set volume##sesd"}},
+      {0x17, {DIV_CMD_WAVE, "17xx: Toggle filter##sesd"}},
+      {0x18, {DIV_CMD_WAVE, "18xx: Set filter mode##sesd"}},
+      {0x19, {DIV_CMD_WAVE, "19xx: Phase reset##sesd"}},
+      {0x1A, {DIV_CMD_WAVE, "1Axx: Filter cutoff up##sesd"}},
+      {0x1B, {DIV_CMD_WAVE, "1Bxx: Filter cutoff down##sesd"}},
+      {0x1C, {DIV_CMD_WAVE, "1Cxx: Set filter resonance##sesd"}},
+      {0x1D, {DIV_CMD_WAVE, "1Dxx: Filter resonance up##sesd"}},
+      {0x1E, {DIV_CMD_WAVE, "1Exx: Filter resonance down##sesd"}},
+      {0x1F, {DIV_CMD_WAVE, "1Fxx: Ring mod source (FF = self)##sesd"}},
+      {0x20, {DIV_CMD_WAVE, "20xx: Hard sync source (FF = self)##sesd"}},
+      {0x21, {DIV_CMD_WAVE, "21xx: Set attack speed##sesd"}},
+      {0x22, {DIV_CMD_WAVE, "22xx: Set decay speed##sesd"}},
+      {0x23, {DIV_CMD_WAVE, "23xx: Set sustain level##sesd"}},
+      {0x24, {DIV_CMD_WAVE, "24xx: Set release rate##sesd"}},
+      {0x25, {DIV_CMD_WAVE, "25xx: Restart instrument program##sesd"}},
+      {0x26, {DIV_CMD_WAVE, "26xx: Portamento up (semitones)##sesd"}},
+      {0x27, {DIV_CMD_WAVE, "27xx: Portamento down (semitones)##sesd"}},
+      {0x28, {DIV_CMD_WAVE, "28xx: Absolute arpeggio note"}},
+      {0x29, {DIV_CMD_WAVE, "29xx: Trigger envelope release"}},
+    }
+  );
+
   sysDefs[DIV_SYSTEM_DUMMY]=new DivSysDef(
     "Dummy System##sesd", NULL, 0xfd, 0, 8, false, true, 0, false, 0, 0, 0,
     "this is a system designed for testing purposes.##sesd",

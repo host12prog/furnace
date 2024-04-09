@@ -36,3 +36,4 @@
 #define DIV_FC13_MAGIC "SMOD"
 #define DIV_FC14_MAGIC "FC14"
 #define DIV_S3M_MAGIC "SCRM"
+#define DIV_FZT_MAGIC "FZT!SONG"

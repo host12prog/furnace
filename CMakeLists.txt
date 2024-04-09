@@ -641,6 +641,8 @@ src/engine/platform/sound/dave/dave.cpp
 
 src/engine/platform/sound/nds.cpp
 
+src/engine/platform/sound/fzt.c
+
 src/engine/platform/oplAInterface.cpp
 src/engine/platform/ym2608Interface.cpp
 src/engine/platform/ym2610Interface.cpp
@@ -748,6 +750,7 @@ src/engine/platform/dave.cpp
 src/engine/platform/gbadma.cpp
 src/engine/platform/gbaminmod.cpp
 src/engine/platform/nds.cpp
+src/engine/platform/fzt.cpp
 src/engine/platform/pcmdac.cpp
 src/engine/platform/dummy.cpp
 
@@ -762,6 +765,7 @@ src/engine/importExport/fc.cpp
 src/engine/importExport/ftm.cpp
 src/engine/importExport/mod.cpp
 src/engine/importExport/s3m.cpp
+src/engine/importExport/fzt.cpp
 
 src/engine/importExport/shared.cpp
 src/engine/importExport/dmp.cpp
@@ -965,6 +969,7 @@ src/gui/inst/gbadma.cpp
 src/gui/inst/gbaminmod.cpp
 src/gui/inst/sid2.cpp
 src/gui/inst/nds.cpp
+src/gui/inst/fzt.cpp
 
 src/gui/inst/wavetable.cpp
 

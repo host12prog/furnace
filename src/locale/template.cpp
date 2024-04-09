@@ -893,6 +893,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Cancel##sggu3"].plurals[0] = "=Cancel";
     strings["Error! No string provided!##sggu"].plurals[0] = "=Error! No string provided!";
     strings["OK##sggu4"].plurals[0] = "=OK";
+    strings["%.0fµs##sggu"].plurals[0] = "=%.0fµs";
     strings["error while loading fonts! please check your settings.##sggu1"].plurals[0] = "=error while loading fonts! please check your settings.";
     strings["it appears I couldn't load these fonts. any setting you can check?##sggu"].plurals[0] = "=it appears I couldn't load these fonts. any setting you can check?";
     strings["could not init renderer! %s##sggu"].plurals[0] = "=could not init renderer! %s";
@@ -2642,6 +2643,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Program##sgse1"].plurals[0] = "=Program";
     strings["Render backend##sgse"].plurals[0] = "=Render backend";
     strings["Software##sgse"].plurals[0] = "=Software";
+    strings["Software"].plurals[0] = "=Software"; //sigh
     strings["you may need to restart Furnace for this setting to take effect.##sgse0"].plurals[0] = "=you may need to restart Furnace for this setting to take effect.";
     strings["Render driver##sgse"].plurals[0] = "=Render driver";
     strings["Automatic##sgse0"].plurals[0] = "=Automatic";

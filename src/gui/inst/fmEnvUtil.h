@@ -177,3 +177,5 @@ enum ES5503_osc_modes {
     } \
     ImGui::EndDragDropTarget(); \
   }
+
+  void addAALine(ImDrawList* dl, const ImVec2& p1, const ImVec2& p2, const ImU32 color, float thickness=1.0f);

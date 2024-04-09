@@ -486,6 +486,11 @@ void FurnaceGUI::drawActualInsEditor()
         drawInsNDS(ins); break;
       }
 
+      case DIV_INS_FZT:
+      {
+        drawInsFZT(ins); break;
+      }
+
       default: break;
     }
 

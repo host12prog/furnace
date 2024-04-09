@@ -100,6 +100,7 @@ enum DivInstrumentType: unsigned short {
   DIV_INS_KURUMITSU=62,
   DIV_INS_SID2=63,
   DIV_INS_NDS=64,
+  DIV_INS_FZT = 65,
   DIV_INS_MAX,
   DIV_INS_NULL
 };
@@ -984,6 +985,203 @@ struct DivInstrumentPOKEY {
     raw_freq_macro_mode(0) {}
 };
 
+struct FZTInstrumentAdsr {
+  unsigned char a, d, s, r, volume;
+
+  FZTInstrumentAdsr():
+    a(0x4),
+    d(0x28),
+    s(0x80),
+    r(0x30),
+    volume(0x80) {}
+};
+
+#define FZT_INST_PROG_LEN 16
+
+typedef enum {
+    SE_WAVEFORM_NONE = 0,
+    SE_WAVEFORM_NOISE = 1,
+    SE_WAVEFORM_PULSE = 2,
+    SE_WAVEFORM_TRIANGLE = 4,
+    SE_WAVEFORM_SAW = 8,
+    SE_WAVEFORM_NOISE_METAL = 16,
+    SE_WAVEFORM_SINE = 32,
+} SoundEngineWaveformType;
+
+typedef enum {
+    SE_ENABLE_FILTER = 1,
+    SE_ENABLE_GATE = 2,
+    SE_ENABLE_RING_MOD = 4,
+    SE_ENABLE_HARD_SYNC = 8,
+    SE_ENABLE_KEYDOWN_SYNC = 16, // sync oscillators on keydown
+} SoundEngineFlags;
+
+typedef enum {
+    FIL_OUTPUT_LOWPASS = 1,
+    FIL_OUTPUT_HIGHPASS = 2,
+    FIL_OUTPUT_BANDPASS = 3,
+    FIL_OUTPUT_LOW_HIGH = 4,
+    FIL_OUTPUT_HIGH_BAND = 5,
+    FIL_OUTPUT_LOW_BAND = 6,
+    FIL_OUTPUT_LOW_HIGH_BAND = 7,
+    /* ============ */
+    FIL_MODES = 8,
+} SoundEngineFilterModes;
+
+typedef enum {
+    ATTACK = 1,
+    DECAY = 2,
+    SUSTAIN = 3,
+    RELEASE = 4,
+    DONE = 5,
+} SoundEngineEnvelopeStates;
+
+typedef enum {
+    TE_ENABLE_VIBRATO = 1,
+    TE_ENABLE_PWM = 2,
+    TE_PROG_NO_RESTART = 4,
+    TE_SET_CUTOFF = 8,
+    TE_SET_PW = 16,
+    TE_RETRIGGER_ON_SLIDE = 32, // call trigger instrument function even if slide command is there
+} TrackerEngineFlags;
+
+#define MIDDLE_C (12 * 4)
+#define MAX_NOTE (12 * 7 + 11)
+
+struct DivInstrumentFZT {
+
+  enum FztCommands: unsigned short {
+    TE_EFFECT_ARPEGGIO = 0x0000,
+    TE_EFFECT_PORTAMENTO_UP = 0x0100,
+    TE_EFFECT_PORTAMENTO_DOWN = 0x0200,
+    TE_EFFECT_VIBRATO = 0x0400,
+    TE_EFFECT_PWM = 0x1100,
+    TE_EFFECT_SET_PW = 0x1200,
+    TE_EFFECT_PW_DOWN = 0x1400,
+    TE_EFFECT_PW_UP = 0x1300,
+    TE_EFFECT_SET_CUTOFF = 0x1500,
+    TE_EFFECT_VOLUME_FADE = 0x0a00,
+    TE_EFFECT_SET_WAVEFORM = 0x1000,
+    TE_EFFECT_SET_VOLUME = 0x1600,
+
+    TE_EFFECT_EXT_TOGGLE_FILTER = 0x1700,
+    TE_EFFECT_EXT_PORTA_UP = 0xf100,
+    TE_EFFECT_EXT_PORTA_DN = 0xf200,
+    TE_EFFECT_EXT_FILTER_MODE = 0x1800,
+    //TE_EFFECT_EXT_PATTERN_LOOP = 0x0e60, // e60 = start, e61-e6f = end and indication how many loops you want
+    //is not supported in Furnace yet
+    TE_EFFECT_EXT_RETRIGGER = 0x0e90,
+    TE_EFFECT_EXT_FINE_VOLUME_DOWN = 0xf400,
+    TE_EFFECT_EXT_FINE_VOLUME_UP = 0xf300,
+    TE_EFFECT_EXT_NOTE_CUT = 0xec00,
+    TE_EFFECT_EXT_PHASE_RESET = 0x1900,
+
+    TE_EFFECT_SET_SPEED_PROG_PERIOD = 0x0f00,
+    TE_EFFECT_CUTOFF_UP = 0x1A00, // Gxx
+    TE_EFFECT_CUTOFF_DOWN = 0x1B00, // Hxx
+    TE_EFFECT_SET_RESONANCE = 0x1C00, // Ixx
+    TE_EFFECT_RESONANCE_UP = 0x1D00, // Jxx
+    TE_EFFECT_RESONANCE_DOWN = 0x1E00, // Kxx
+
+    TE_EFFECT_SET_ATTACK = 0x2100, // Lxx
+    TE_EFFECT_SET_DECAY = 0x2200, // Mxx
+    TE_EFFECT_SET_SUSTAIN = 0x2300, // Nxx
+    TE_EFFECT_SET_RELEASE = 0x2400, // Oxx
+
+    TE_EFFECT_SET_RING_MOD_SRC = 0x1f00, // Rxx
+    TE_EFFECT_SET_HARD_SYNC_SRC = 0x2000, // Sxx
+
+    TE_EFFECT_PORTA_UP_SEMITONE = 0x2600, // Txx
+    TE_EFFECT_PORTA_DOWN_SEMITONE = 0x2700, // Uxx
+    TE_EFFECT_PITCH = 0xE500, //Vxx
+    /*
+    TE_EFFECT_ = 0x2000, //Wxx
+    */
+    TE_EFFECT_ARPEGGIO_ABS = 0x2800, // Yxx
+    TE_EFFECT_TRIGGER_RELEASE = 0x2900, // Zxx
+
+    /* These effects work only in instrument program */
+    TE_PROGRAM_LOOP_BEGIN = 0x7d00,
+    TE_PROGRAM_LOOP_END = 0x7e00,
+    TE_PROGRAM_JUMP = 0x7f00,
+    TE_PROGRAM_NOP = 0x7ffe,
+    TE_PROGRAM_END = 0x7fff,
+  };
+
+  unsigned char waveform;
+  unsigned short flags;
+  unsigned short sound_engine_flags;
+
+  unsigned char slide_speed;
+
+  FZTInstrumentAdsr adsr;
+
+  unsigned char ring_mod, hard_sync; // 0xff = self
+
+  unsigned char pw; // store only one byte since we don't have the luxury of virtually unlimited memory!
+
+  typedef struct {
+    unsigned short cmd;
+    unsigned char val;
+    bool unite;
+  } ProgramFZT;
+
+  ProgramFZT program[FZT_INST_PROG_LEN];
+
+  unsigned char program_period;
+
+  unsigned char vibrato_speed, vibrato_depth, vibrato_delay;
+  unsigned char pwm_speed, pwm_depth, pwm_delay;
+
+  unsigned char filter_cutoff, filter_resonance, filter_type;
+
+  unsigned char base_note;
+  signed char finetune;
+
+  bool operator==(const DivInstrumentFZT& other);
+  bool operator!=(const DivInstrumentFZT& other) {
+    return !(*this==other);
+  }
+
+  DivInstrumentFZT():
+    waveform(SE_WAVEFORM_PULSE),
+    flags(TE_SET_CUTOFF | TE_SET_PW | TE_ENABLE_VIBRATO),
+    sound_engine_flags(SE_ENABLE_KEYDOWN_SYNC),
+    slide_speed(0),
+    ring_mod(0),
+    hard_sync(0),
+    pw(0x80),
+    program_period(1),
+    vibrato_speed(0x60),
+    vibrato_depth(0x20),
+    vibrato_delay(0x20),
+    pwm_speed(0),
+    pwm_depth(0),
+    pwm_delay(0),
+    filter_cutoff(0xd0),
+    filter_resonance(0),
+    filter_type(FIL_OUTPUT_LOWPASS),
+    base_note(MIDDLE_C),
+    finetune(0) 
+    {
+      for(int i = 0; i < FZT_INST_PROG_LEN; i++)
+      {
+        program[i].cmd = TE_PROGRAM_NOP;
+        program[i].val = 0;
+        program[i].unite = false;
+      }
+
+      program[0].cmd = TE_EFFECT_ARPEGGIO;
+      program[0].val = 0;
+      program[1].cmd = TE_EFFECT_ARPEGGIO;
+      program[1].val = 0xf0;
+      program[2].cmd = TE_EFFECT_ARPEGGIO;
+      program[2].val = 0xf1;
+      program[3].cmd = TE_PROGRAM_JUMP;
+      program[3].val = 0;
+    }
+};
+
 struct DivInstrument {
   String name;
   DivInstrumentType type;
@@ -1005,6 +1203,7 @@ struct DivInstrument {
   DivInstrumentPowerNoise powernoise;
   DivInstrumentSID2 sid2;
   DivInstrumentPOKEY pokey;
+  DivInstrumentFZT fzt;
 
   /**
    * these are internal functions.
@@ -1035,6 +1234,7 @@ struct DivInstrument {
   void writeFeatureS2(SafeWriter* w);
   void writeFeatureLW(SafeWriter* w);
   void writeFeaturePO(SafeWriter* w);
+  void writeFeatureFZ(SafeWriter* w);
 
   void readFeatureNA(SafeReader& reader, short version);
   void readFeatureFM(SafeReader& reader, short version);
@@ -1061,6 +1261,7 @@ struct DivInstrument {
   void readFeatureS2(SafeReader& reader, short version);
   void readFeatureLW(SafeReader& reader, short version);
   void readFeaturePO(SafeReader& reader, short version);
+  void readFeatureFZ(SafeReader& reader, short version);
 
   DivDataErrors readInsDataOld(SafeReader& reader, short version, bool tildearrow_version);
   DivDataErrors readInsDataNew(SafeReader& reader, short version, bool fui, DivSong* song, bool tildearrow_version);

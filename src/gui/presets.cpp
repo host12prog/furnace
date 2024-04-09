@@ -3462,6 +3462,11 @@ void FurnaceGUI::initSystemPresets() {
       CH(DIV_SYSTEM_NDS, 1.0f, 0, "")
     }, NULL, MENU_STATUS_USUAL
   );
+  ENTRY(
+    "Flizzer Tracker sound source (FZT)", {
+      CH(DIV_SYSTEM_FZT, 1.0f, 0, "")
+    }, NULL, MENU_STATUS_USUAL
+  );
   CATEGORY_END;
 
   CATEGORY_BEGIN(_L("DefleMask-compatible##sgpr"),_L("these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"));

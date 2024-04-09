@@ -325,6 +325,7 @@ enum FurnaceGUIColors {
   GUI_COLOR_INSTR_KURUMITSU,
   GUI_COLOR_INSTR_SID2,
   GUI_COLOR_INSTR_NDS,
+  GUI_COLOR_INSTR_FZT,
   GUI_COLOR_INSTR_UNKNOWN,
 
   GUI_COLOR_CHANNEL_BG,
@@ -575,6 +576,7 @@ enum FurnaceGUIFileDialogs {
   GUI_FILE_EXPORT_VGM,
   GUI_FILE_EXPORT_ZSM,
   GUI_FILE_EXPORT_CMDSTREAM,
+  GUI_FILE_EXPORT_FZT,
   GUI_FILE_EXPORT_TEXT,
   GUI_FILE_EXPORT_ROM,
   GUI_FILE_EXPORT_FUR,
@@ -625,7 +627,8 @@ enum FurnaceGUIExportTypes {
   GUI_EXPORT_CMD_STREAM,
   GUI_EXPORT_AMIGA_VAL,
   GUI_EXPORT_TEXT,
-  GUI_EXPORT_FUR
+  GUI_EXPORT_FUR,
+  GUI_EXPORT_FZT
 };
 
 enum FurnaceGUIFMAlgs {
@@ -1574,7 +1577,7 @@ class FurnaceGUI {
 
   String workingDir, fileName, clipboard, warnString, errorString, lastError, curFileName, nextFile, sysSearchQuery, newSongQuery, paletteQuery;
   String workingDirSong, workingDirIns, workingDirWave, workingDirSample, workingDirAudioExport;
-  String workingDirVGMExport, workingDirZSMExport, workingDirROMExport, workingDirFURExport, workingDirFont, workingDirColors, workingDirKeybinds;
+  String workingDirVGMExport, workingDirZSMExport, workingDirROMExport, workingDirFURExport, workingDirFZTExport, workingDirFont, workingDirColors, workingDirKeybinds;
   String workingDirLayout, workingDirROM, workingDirTest;
   String mmlString[32];
   String mmlStringW, grooveString, grooveListString, mmlStringModTable;
@@ -2586,12 +2589,14 @@ class FurnaceGUI {
   void drawExportAmigaVal(bool onWindow=false);
   void drawExportText(bool onWindow=false);
   void drawExportCommand(bool onWindow=false);
+  void drawExportFZT(bool onWindow=false);
   void drawExportFur(bool onWindow=false);
   void drawSSGEnv(unsigned char type, const ImVec2& size);
   void drawWaveform(unsigned char type, bool opz, const ImVec2& size);
   void drawAlgorithm(unsigned char alg, FurnaceGUIFMAlgs algType, const ImVec2& size);
   void drawESFMAlgorithm(DivInstrumentESFM& esfm, const ImVec2& size);
   void drawFMEnv(unsigned char tl, unsigned char ar, unsigned char dr, unsigned char d2r, unsigned char rr, unsigned char sl, unsigned char sus, unsigned char egt, unsigned char algOrGlobalSus, float maxTl, float maxArDr, float maxRr, const ImVec2& size, unsigned short instType);
+  void drawFZTEnv(unsigned char tl, unsigned char ar, unsigned char dr, unsigned char d2r, unsigned char rr, unsigned char sl, unsigned char sus, unsigned char egt, unsigned char algOrGlobalSus, float maxTl, float maxArDr, float maxRr, const ImVec2& size, unsigned short instType);
   void drawGBEnv(unsigned char vol, unsigned char len, unsigned char sLen, bool dir, const ImVec2& size);
   bool drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& flags, bool modifyOnChange, bool fromMenu=false);
   void kvsConfig(DivInstrument* ins, bool supportsKVS=true);
@@ -2747,6 +2752,7 @@ class FurnaceGUI {
   void drawInsGBAMINMOD(DivInstrument* ins);
   void drawInsSID2(DivInstrument* ins);
   void drawInsNDS(DivInstrument* ins);
+  void drawInsFZT(DivInstrument* ins);
 
   void insTabWave(DivInstrument* ins);
 
