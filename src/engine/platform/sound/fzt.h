@@ -26,6 +26,9 @@ extern "C"
 #define ACC_BITS 23
 #define ACC_LENGTH (1 << (ACC_BITS - 1))
 
+#define OVERSAMPLE_ACC_BITS 26
+#define OVERSAMPLE_ACC_LENGTH (1 << (OVERSAMPLE_ACC_BITS - 1))
+
 #define OUTPUT_BITS 16
 #define WAVE_AMP (1 << OUTPUT_BITS)
 

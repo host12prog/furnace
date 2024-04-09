@@ -779,7 +779,7 @@ void DivPlatformFZT::tracker_engine_advance_channel(int chan)
 
         else {
             te_channel->vibrato_position += ((uint32_t)te_channel->vibrato_speed << 21);
-            vib = (int32_t)(sound_engine_triangle(te_channel->vibrato_position >> 9) - WAVE_AMP / 2) * (int32_t)te_channel->vibrato_depth / (256 * 128);
+            vib = (int32_t)(sound_engine_triangle(te_channel->vibrato_position >> 6) - WAVE_AMP / 2) * (int32_t)te_channel->vibrato_depth / (256 * 128);
         }
     }
 
@@ -790,7 +790,7 @@ void DivPlatformFZT::tracker_engine_advance_channel(int chan)
 
         else {
             te_channel->pwm_position += ((uint32_t)te_channel->pwm_speed << 20); // so minimum PWM speed is even lower than minimum vibrato speed
-            pwm = ((int32_t)sound_engine_triangle((te_channel->pwm_position) >> 9) - WAVE_AMP / 2) * (int32_t)te_channel->pwm_depth / (256 * 16);
+            pwm = ((int32_t)sound_engine_triangle((te_channel->pwm_position) >> 6) - WAVE_AMP / 2) * (int32_t)te_channel->pwm_depth / (256 * 16);
         }
 
         int16_t final_pwm = (int16_t)fztChan[chan].pw + pwm;

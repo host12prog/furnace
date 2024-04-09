@@ -181,24 +181,24 @@ int32_t sound_engine_output_bandpass(SoundEngineFilter* flt) {
 uint16_t sound_engine_pulse(uint32_t acc, uint32_t pw) // 0-FFF pulse width range
 {
     return (
-        ((acc >> (((uint32_t)ACC_BITS - 17))) >= ((pw == 0xfff ? pw + 1 : pw) << 4) ?
+        ((acc >> (((uint32_t)OVERSAMPLE_ACC_BITS - 17))) >= ((pw == 0xfff ? pw + 1 : pw) << 4) ?
              (WAVE_AMP - 1) :
              0));
 }
 
 uint16_t sound_engine_saw(uint32_t acc) {
-    return (acc >> (ACC_BITS - OUTPUT_BITS - 1)) & (WAVE_AMP - 1);
+    return (acc >> (OVERSAMPLE_ACC_BITS - OUTPUT_BITS - 1)) & (WAVE_AMP - 1);
 }
 
 uint16_t sound_engine_triangle(uint32_t acc) {
     return (
-        (((acc & (ACC_LENGTH / 2)) ? ~acc : acc) >> (ACC_BITS - OUTPUT_BITS - 2)) &
+        (((acc & (OVERSAMPLE_ACC_LENGTH / 2)) ? ~acc : acc) >> (OVERSAMPLE_ACC_BITS - OUTPUT_BITS - 2)) &
         (WAVE_AMP * 2 - 1));
 }
 
 uint16_t sound_engine_sine(uint32_t acc, SoundEngine* sound_engine) {
     return (
-        (uint16_t)sound_engine->sine_lut[(acc >> (ACC_BITS - SINE_LUT_BITDEPTH))]
+        (uint16_t)sound_engine->sine_lut[(acc >> (OVERSAMPLE_ACC_BITS - SINE_LUT_BITDEPTH))]
         << (OUTPUT_BITS - SINE_LUT_BITDEPTH));
 }
 
@@ -211,8 +211,8 @@ void shift_lfsr(uint32_t* v, uint32_t tap_0, uint32_t tap_1) {
     *v = (*v >> 1) ^ ((zero - (*v & lsb)) & feedback);
 }
 
-uint16_t sound_engine_noise(SoundEngineChannel* channel, uint32_t prev_acc) {
-    if((prev_acc & (ACC_LENGTH / 32)) != (channel->accumulator & (ACC_LENGTH / 32))) {
+uint16_t sound_engine_noise(SoundEngineChannel* channel, uint32_t prev_acc, uint8_t advance) {
+    if((prev_acc & (OVERSAMPLE_ACC_LENGTH / 32)) != (channel->accumulator & (OVERSAMPLE_ACC_LENGTH / 32)) && advance) { //advance is to preserve noise sound from orig fzt
         if(channel->waveform & SE_WAVEFORM_NOISE_METAL) {
             shift_lfsr(&channel->lfsr, 14, 8);
             channel->lfsr &= (1 << (14 + 1)) - 1;
@@ -228,12 +228,12 @@ uint16_t sound_engine_noise(SoundEngineChannel* channel, uint32_t prev_acc) {
 }
 
 uint16_t
-    sound_engine_osc(SoundEngine* sound_engine, SoundEngineChannel* channel, uint32_t prev_acc) {
+    sound_engine_osc(SoundEngine* sound_engine, SoundEngineChannel* channel, uint32_t prev_acc, uint8_t advance) {
     switch(channel->waveform) {
     case SE_WAVEFORM_NOISE:
     case SE_WAVEFORM_NOISE_METAL:
     case(SE_WAVEFORM_NOISE | SE_WAVEFORM_NOISE_METAL): {
-        return sound_engine_noise(channel, prev_acc);
+        return sound_engine_noise(channel, prev_acc, advance);
         break;
     }
 
@@ -261,13 +261,13 @@ uint16_t
     case(SE_WAVEFORM_PULSE | SE_WAVEFORM_NOISE_METAL):
     case(SE_WAVEFORM_PULSE | SE_WAVEFORM_NOISE | SE_WAVEFORM_NOISE_METAL): {
         return sound_engine_pulse(channel->accumulator, channel->pw) &
-               sound_engine_noise(channel, prev_acc);
+               sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_NOISE):
     case(SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_NOISE_METAL):
     case(SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_NOISE | SE_WAVEFORM_NOISE_METAL): {
-        return sound_engine_triangle(channel->accumulator) & sound_engine_noise(channel, prev_acc);
+        return sound_engine_triangle(channel->accumulator) & sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_PULSE | SE_WAVEFORM_TRIANGLE): {
@@ -279,13 +279,13 @@ uint16_t
     case(SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_PULSE | SE_WAVEFORM_NOISE_METAL):
     case(SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_PULSE | SE_WAVEFORM_NOISE | SE_WAVEFORM_NOISE_METAL): {
         return sound_engine_pulse(channel->accumulator, channel->pw) &
-               sound_engine_noise(channel, prev_acc) & sound_engine_triangle(channel->accumulator);
+               sound_engine_noise(channel, prev_acc, advance) & sound_engine_triangle(channel->accumulator);
     }
 
     case(SE_WAVEFORM_SAW | SE_WAVEFORM_NOISE):
     case(SE_WAVEFORM_SAW | SE_WAVEFORM_NOISE_METAL):
     case(SE_WAVEFORM_SAW | SE_WAVEFORM_NOISE | SE_WAVEFORM_NOISE_METAL): {
-        return sound_engine_saw(channel->accumulator) & sound_engine_noise(channel, prev_acc);
+        return sound_engine_saw(channel->accumulator) & sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_PULSE | SE_WAVEFORM_SAW): {
@@ -297,7 +297,7 @@ uint16_t
     case(SE_WAVEFORM_PULSE | SE_WAVEFORM_SAW | SE_WAVEFORM_NOISE_METAL):
     case(SE_WAVEFORM_PULSE | SE_WAVEFORM_SAW | SE_WAVEFORM_NOISE | SE_WAVEFORM_NOISE_METAL): {
         return sound_engine_pulse(channel->accumulator, channel->pw) &
-               sound_engine_saw(channel->accumulator) & sound_engine_noise(channel, prev_acc);
+               sound_engine_saw(channel->accumulator) & sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_SAW): {
@@ -309,7 +309,7 @@ uint16_t
     case(SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_SAW | SE_WAVEFORM_NOISE_METAL):
     case(SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_SAW | SE_WAVEFORM_NOISE | SE_WAVEFORM_NOISE_METAL): {
         return sound_engine_triangle(channel->accumulator) &
-               sound_engine_saw(channel->accumulator) & sound_engine_noise(channel, prev_acc);
+               sound_engine_saw(channel->accumulator) & sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_PULSE | SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_SAW): {
@@ -325,14 +325,14 @@ uint16_t
         SE_WAVEFORM_NOISE_METAL): {
         return sound_engine_pulse(channel->accumulator, channel->pw) &
                sound_engine_triangle(channel->accumulator) &
-               sound_engine_saw(channel->accumulator) & sound_engine_noise(channel, prev_acc);
+               sound_engine_saw(channel->accumulator) & sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_NOISE):
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_NOISE_METAL):
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_NOISE | SE_WAVEFORM_NOISE_METAL): {
         return sound_engine_sine(channel->accumulator, sound_engine) &
-               sound_engine_noise(channel, prev_acc);
+               sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_PULSE): {
@@ -345,7 +345,7 @@ uint16_t
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_PULSE | SE_WAVEFORM_NOISE | SE_WAVEFORM_NOISE_METAL): {
         return sound_engine_pulse(channel->accumulator, channel->pw) &
                sound_engine_sine(channel->accumulator, sound_engine) &
-               sound_engine_noise(channel, prev_acc);
+               sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_TRIANGLE): {
@@ -358,7 +358,7 @@ uint16_t
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_NOISE | SE_WAVEFORM_NOISE_METAL): {
         return sound_engine_triangle(channel->accumulator) &
                sound_engine_sine(channel->accumulator, sound_engine) &
-               sound_engine_noise(channel, prev_acc);
+               sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_PULSE): {
@@ -375,7 +375,7 @@ uint16_t
         return sound_engine_pulse(channel->accumulator, channel->pw) &
                sound_engine_triangle(channel->accumulator) &
                sound_engine_sine(channel->accumulator, sound_engine) &
-               sound_engine_noise(channel, prev_acc);
+               sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_SAW): {
@@ -388,7 +388,7 @@ uint16_t
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_SAW | SE_WAVEFORM_NOISE | SE_WAVEFORM_NOISE_METAL): {
         return sound_engine_saw(channel->accumulator) &
                sound_engine_sine(channel->accumulator, sound_engine) &
-               sound_engine_noise(channel, prev_acc);
+               sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_PULSE | SE_WAVEFORM_SAW): {
@@ -405,7 +405,7 @@ uint16_t
         return sound_engine_pulse(channel->accumulator, channel->pw) &
                sound_engine_saw(channel->accumulator) &
                sound_engine_sine(channel->accumulator, sound_engine) &
-               sound_engine_noise(channel, prev_acc);
+               sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_SAW): {
@@ -422,7 +422,7 @@ uint16_t
         return sound_engine_saw(channel->accumulator) &
                sound_engine_triangle(channel->accumulator) &
                sound_engine_sine(channel->accumulator, sound_engine) &
-               sound_engine_noise(channel, prev_acc);
+               sound_engine_noise(channel, prev_acc, advance);
     }
 
     case(SE_WAVEFORM_SINE | SE_WAVEFORM_PULSE | SE_WAVEFORM_TRIANGLE | SE_WAVEFORM_SAW): {
@@ -445,7 +445,7 @@ uint16_t
                sound_engine_pulse(channel->accumulator, channel->pw) &
                sound_engine_triangle(channel->accumulator) &
                sound_engine_sine(channel->accumulator, sound_engine) &
-               sound_engine_noise(channel, prev_acc);
+               sound_engine_noise(channel, prev_acc, advance);
     }
 
     default:
@@ -529,16 +529,26 @@ void sound_engine_fill_buffer(
 
         for(uint32_t chan = 0; chan < FZT_NUM_CHANNELS; ++chan) {
             SoundEngineChannel* channel = &sound_engine->channel[chan];
+            channel_output[chan] = 0;
 
-            if(channel->frequency > 0) {
+            if(channel->frequency > 0) 
+            {
                 channel->sync_bit = 0;
+                channel->sync_bit |= (channel->accumulator > OVERSAMPLE_ACC_LENGTH ? 1 : 0);
+
                 uint32_t prev_acc = channel->accumulator;
 
-                channel->accumulator += channel->frequency;
+                for(int i = 0; i < 8; i++)
+                {
+                    channel->accumulator += channel->frequency;
+                    channel->accumulator &= OVERSAMPLE_ACC_LENGTH - 1;
 
-                channel->sync_bit |= (channel->accumulator > ACC_LENGTH ? 1 : 0);
+                    channel_output[chan] +=
+                        sound_engine_osc(sound_engine, channel, prev_acc, i == 7);
+                }
 
-                channel->accumulator &= ACC_LENGTH - 1;
+                channel_output[chan] >>= 3;
+                channel_output[chan] -= WAVE_AMP / 2;
 
                 if(channel->flags & SE_ENABLE_HARD_SYNC) {
                     uint8_t hard_sync_src = channel->hard_sync == 0xff ? chan : channel->hard_sync;
@@ -547,9 +557,6 @@ void sound_engine_fill_buffer(
                         channel->accumulator = 0;
                     }
                 }
-
-                channel_output[chan] =
-                    sound_engine_osc(sound_engine, channel, prev_acc) - WAVE_AMP / 2;
 
                 if(channel->flags & SE_ENABLE_RING_MOD) {
                     uint8_t ring_mod_src = channel->ring_mod == 0xff ? chan : channel->ring_mod;
