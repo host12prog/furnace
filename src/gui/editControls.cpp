@@ -592,10 +592,7 @@ void FurnaceGUI::drawMobileControls() {
         if (ImGui::Button("Memory")) {
           memoryOpen=!memoryOpen;
         }
-
-        if (ImGui::Button("CV")) {
-          cvOpen=!cvOpen;
-        }
+        
         ImGui::SameLine();
         if (ImGui::Button("Presets")) {
           userPresetsOpen=!userPresetsOpen;
