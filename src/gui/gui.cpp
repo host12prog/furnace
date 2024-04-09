@@ -7124,10 +7124,6 @@ bool FurnaceGUI::init() {
     SDL_SetHint(SDL_HINT_RENDER_DRIVER,settings.renderDriver.c_str());
   }
 
-  if (safeMode) {
-    SDL_SetHint(SDL_HINT_RENDER_DRIVER,"software");
-  }
-
   logD("starting render backend...");
   if (!rend->init(sdlWin,settings.vsync)) {
     logE("it failed...");
