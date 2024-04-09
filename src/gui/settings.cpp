@@ -441,7 +441,7 @@ void FurnaceGUI::drawSettings() {
         // SUBSECTION PROGRAM
         CONFIG_SUBSECTION(_L("Program##sgse1"));
         String curRenderBackend=settings.renderBackend.empty()?GUI_BACKEND_DEFAULT_NAME:settings.renderBackend;
-        if (ImGui::BeginCombo(_L("Render backend##sgse"),curRenderBackend.c_str())) {
+        if (ImGui::BeginCombo(_L("Render backend##sgse"),_L(curRenderBackend.c_str()))) {
 #ifdef HAVE_RENDER_SDL
           if (ImGui::Selectable("SDL Renderer",curRenderBackend=="SDL")) {
             settings.renderBackend="SDL";
@@ -5801,6 +5801,11 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
 
     locale.setLanguage((DivLang)DIV_LANG_ENGLISH);
     initSystemPresets();
+  }
+
+  if(!safeMode && renderBackend==GUI_BACKEND_SOFTWARE)
+  {
+    locale.setLanguage((DivLang)settings.language);
   }
 
   if (mobileUI) {

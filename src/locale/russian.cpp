@@ -835,6 +835,7 @@ void DivLocale::addTranslationsRussian()
     strings["Cancel##sggu3"].plurals[0] = "Отмена";
     strings["Error! No string provided!##sggu"].plurals[0] = "Ошибка! Не предоставлена строка!";
     strings["OK##sggu4"].plurals[0] = "ОК";
+    strings["%.0fµs##sggu"].plurals[0] = "%.0f мс";
     strings["error while loading fonts! please check your settings.##sggu1"].plurals[0] = "Ошибка при загрузке шрифтов! пожалуйста, проверьте настройки.";
     strings["it appears I couldn't load these fonts. any setting you can check?##sggu"].plurals[0] = "кажется, я не могу загрузить эти шрифты. проверьте настройки?";
     strings["could not init renderer! %s##sggu"].plurals[0] = "не получилось инициализировать движок отрисовки! %s";
@@ -2608,6 +2609,7 @@ void DivLocale::addTranslationsRussian()
     strings["Program##sgse1"].plurals[0] = "Программа";
     strings["Render backend##sgse"].plurals[0] = "Библиотека отрисовки";
     strings["Software##sgse"].plurals[0] = "Программная отрисовка";
+    strings["Software"].plurals[0] = "Программная отрисовка"; //sigh
     strings["you may need to restart Furnace for this setting to take effect.##sgse0"].plurals[0] = "возможно, вам потребуется перезапустить Furnace, чтобы эта настрока применилась.";
     strings["Render driver##sgse"].plurals[0] = "Драйвер отрисовки";
     strings["Automatic##sgse0"].plurals[0] = "Выбирать автоматически";

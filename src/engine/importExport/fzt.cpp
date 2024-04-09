@@ -44,6 +44,7 @@ extern FurnaceGUI g;
 #define MUS_NOTE_VOLUME_NONE_FZT 31
 
 #define FZT_SONG_NAME_LEN 17
+#define FZT_INST_NAME_LEN (FZT_SONG_NAME_LEN - 3)
 
 #define FZT_SONG_MAX_PATTERNS 256
 
@@ -231,11 +232,11 @@ bool is_0_f_fzt_command(uint16_t command)
 {
     int index = 0;
 
-    if(command == 0) return false;
+    if (command == 0) return false;
 
-    while(fzt_commands_map_real[index][0] != -1 || fzt_commands_map_real[index][1] != -1)
+    while (fzt_commands_map_real[index][0] != -1 || fzt_commands_map_real[index][1] != -1)
     {
-        if((command & 0x7ff0) == fzt_commands_map_real[index][1] && (command & 0x7fff) >= TEE_EFFECT_EXT_TOGGLE_FILTER && (command & 0x7fff) < TEE_EFFECT_SET_SPEED_PROG_PERIOD)
+        if ((command & 0x7ff0) == fzt_commands_map_real[index][1] && (command & 0x7fff) >= TEE_EFFECT_EXT_TOGGLE_FILTER && (command & 0x7fff) < TEE_EFFECT_SET_SPEED_PROG_PERIOD)
         {
             return true;
         }
@@ -244,6 +245,40 @@ bool is_0_f_fzt_command(uint16_t command)
     }
 
     return false;
+}
+
+uint16_t convert_furnace_eff_to_fzt(uint16_t fur_eff, bool mask_value)
+{
+    uint8_t eff_val_hex2 = fur_eff & 0xff;
+    uint8_t eff_val_hex1 = fur_eff & 0xf;
+
+    int index = 0;
+
+    if (fur_eff == 0) return 0;
+
+    while(fzt_commands_map_real[index][0] != -1 || fzt_commands_map_real[index][1] != -1)
+    {
+        if(fur_eff == DivInstrumentFZT::TE_PROGRAM_NOP)
+        {
+            return TEE_PROGRAM_NOP;
+        }
+        if(fur_eff == DivInstrumentFZT::TE_PROGRAM_END)
+        {
+            return TEE_PROGRAM_END;
+        }
+        if((fur_eff & 0xfff0) == fzt_commands_map_real[index][0] && (fzt_commands_map_real[index][1] < TEE_EFFECT_EXT_TOGGLE_FILTER || fzt_commands_map_real[index][1] >= TEE_EFFECT_SET_SPEED_PROG_PERIOD))
+        {
+            return fzt_commands_map_real[index][1] | (mask_value ? 0 : eff_val_hex1);
+        }
+        if((fur_eff & 0xff00) == fzt_commands_map_real[index][0] && (fzt_commands_map_real[index][1] >= TEE_EFFECT_EXT_TOGGLE_FILTER || fzt_commands_map_real[index][1] < TEE_EFFECT_SET_SPEED_PROG_PERIOD))
+        {
+            return fzt_commands_map_real[index][1] | (mask_value ? 0 : eff_val_hex2);
+        }
+
+        index++;
+    }
+
+    return 0;
 }
 
 uint8_t tracker_engine_get_note(TrackerSongPatternStep* step) {
@@ -490,7 +525,7 @@ bool DivEngine::loadFZT(unsigned char* file, size_t len)
 
                     if(vol != MUS_NOTE_VOLUME_NONE_FZT)
                     {
-                        pat->data[row][3] = vol * 0xff / MUS_NOTE_VOLUME_NONE_FZT;
+                        pat->data[row][3] = (short)((float)vol * 255.0f / (float)(MUS_NOTE_VOLUME_NONE_FZT - 1));
                     }
 
                     int effect = convert_fzt_eff_to_furnace(tracker_engine_get_command(step), false);
@@ -940,12 +975,12 @@ SafeWriter* DivEngine::saveFZT()
 
     w->writeC(loop_start);
     w->writeC(loop_end);
-    w->writeC(sub_song->patLen);
+    w->writeS(sub_song->patLen);
 
     w->writeC(sub_song->speeds.val[0]);
     w->writeC((unsigned char)MIN((int)sub_song->hz, (int)255));
 
-    w->writeC(sub_song->ordersLen);
+    w->writeS(sub_song->ordersLen);
 
     for(int j = 0; j < sub_song->ordersLen; j++)
     {
@@ -1039,12 +1074,120 @@ SafeWriter* DivEngine::saveFZT()
             }
             if(pat->data[row][3] > -1)
             {
-                set_volume(&step, pat->data[row][3] * MUS_NOTE_VOLUME_NONE_FZT / 0xff);
+                set_volume(&step, (uint8_t)((float)pat->data[row][3] * (float)(MUS_NOTE_VOLUME_NONE_FZT - 1) / 255.0f));
             }
-            //commands hell
+            
+            // "what is written below ~~can~~ **MUST** be used against me in programming crimes court" - LTVA
+
+            uint16_t command = convert_furnace_eff_to_fzt((MAX(0, pat->data[row][4]) << 8) | MAX(0, pat->data[row][5]), false);
+            set_command(&step, command);
+
+            //logV("pat %d step %d command %04X", i, row, command);
+
             w->writeC(step.note);
             w->writeC(step.inst_vol);
             w->writeS(step.command);
+        }
+    }
+
+    w->writeC(MIN(MUS_NOTE_INSTRUMENT_NONE_FZT, song.insLen));
+
+    for(int i = 0; i < MIN(MUS_NOTE_INSTRUMENT_NONE_FZT, song.insLen); i++)
+    {
+        DivInstrument* ins = getIns(i,DIV_INS_FZT);
+
+        String name = ins->name;
+        for (auto & c: name) c = toupper(c);
+
+        if (name.length() > 0)
+        {
+            name.erase(name.begin() + MIN(FZT_INST_NAME_LEN, (int)name.length()), name.end());
+        }
+
+        for (int i = 0; i < FZT_INST_NAME_LEN; i++)
+        {
+            if (i < (int)name.length())
+            {
+                w->writeC(name[i]);
+            }
+            else
+            {
+                w->writeC(0);
+            }
+        }
+
+        w->writeC(ins->fzt.waveform);
+        w->writeS(ins->fzt.flags);
+        w->writeS(ins->fzt.sound_engine_flags);
+
+        w->writeC(ins->fzt.base_note);
+        w->writeC(ins->fzt.finetune);
+
+        w->writeC(ins->fzt.slide_speed);
+
+        w->writeC(ins->fzt.adsr.a);
+        w->writeC(ins->fzt.adsr.d);
+        w->writeC(ins->fzt.adsr.s);
+        w->writeC(ins->fzt.adsr.r);
+        w->writeC(ins->fzt.adsr.volume);
+
+        w->writeC(ins->fzt.pw);
+
+        if(ins->fzt.sound_engine_flags & SE_ENABLE_RING_MOD)
+        {
+            w->writeC(ins->fzt.ring_mod);
+        }
+
+        if(ins->fzt.sound_engine_flags & SE_ENABLE_HARD_SYNC)
+        {
+            w->writeC(ins->fzt.hard_sync);
+        }
+
+        int progsteps = 0;
+
+        for(int j = 0; j < FZT_INST_PROG_LEN; j++)
+        {
+            if(ins->fzt.program[j].cmd != DivInstrumentFZT::TE_PROGRAM_NOP)
+            {
+                progsteps = j + 1;
+            }
+        }
+
+        w->writeC(progsteps);
+
+        if(progsteps > 0)
+        {
+            for(int j = 0; j < progsteps; j++)
+            {
+                uint16_t command = convert_furnace_eff_to_fzt(ins->fzt.program[j].cmd, true) | ins->fzt.program[j].val;
+
+                if(ins->fzt.program[j].unite) command |= 0x8000;
+
+                w->writeS(command);
+            }
+        }
+
+        w->writeC(ins->fzt.program_period);
+
+        if(ins->fzt.flags & TE_ENABLE_VIBRATO)
+        {
+            w->writeC(ins->fzt.vibrato_speed);
+            w->writeC(ins->fzt.vibrato_depth);
+            w->writeC(ins->fzt.vibrato_delay);
+        }
+
+        if(ins->fzt.flags & TE_ENABLE_PWM)
+        {
+            w->writeC(ins->fzt.pwm_speed);
+            w->writeC(ins->fzt.pwm_depth);
+            w->writeC(ins->fzt.pwm_delay);
+        }
+
+        if(ins->fzt.sound_engine_flags & SE_ENABLE_FILTER)
+        {
+            w->writeC(ins->fzt.filter_cutoff);
+            w->writeC(ins->fzt.filter_resonance);
+            w->writeC(ins->fzt.filter_type);
         }
     }
 

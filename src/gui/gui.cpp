@@ -6470,7 +6470,7 @@ bool FurnaceGUI::loop() {
 #endif
 
     if (settings.displayRenderTime) {
-      String renderTime=fmt::sprintf("%.0fµs",ImGui::GetIO().DeltaTime*1000000.0);
+      String renderTime=fmt::sprintf(_L("%.0fµs##sggu"),ImGui::GetIO().DeltaTime*1000000.0);
       String renderTime2=fmt::sprintf("%.1f FPS",1.0/ImGui::GetIO().DeltaTime);
       ImDrawList* dl=ImGui::GetForegroundDrawList();
       ImVec2 markPos=ImVec2(canvasW-ImGui::CalcTextSize(renderTime.c_str()).x-60.0*dpiScale,4.0*dpiScale);
