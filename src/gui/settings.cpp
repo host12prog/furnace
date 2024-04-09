@@ -4249,7 +4249,6 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.vsync=conf.getInt("vsync",1);
     settings.frameRateLimit=conf.getInt("frameRateLimit",100);
     settings.displayRenderTime=conf.getInt("displayRenderTime",0);
-    settings.displayRenderTime=conf.getInt("displayRenderTime",0);
 
     settings.chanOscThreads=conf.getInt("chanOscThreads",0);
     settings.renderPoolThreads=conf.getInt("renderPoolThreads",0);
@@ -4778,7 +4777,6 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.vsync,0,4);
   clampSetting(settings.frameRateLimit,0,1000);
   clampSetting(settings.displayRenderTime,0,1);
-  clampSetting(settings.displayRenderTime,0,1);
 
   if (settings.exportLoops<0.0) settings.exportLoops=0.0;
   if (settings.exportFadeOut<0.0) settings.exportFadeOut=0.0;  
@@ -4804,7 +4802,6 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
 
     conf.set("vsync",settings.vsync);
     conf.set("frameRateLimit",settings.frameRateLimit);
-    conf.set("displayRenderTime",settings.displayRenderTime);
     conf.set("displayRenderTime",settings.displayRenderTime);
 
     conf.set("chanOscThreads",settings.chanOscThreads);
