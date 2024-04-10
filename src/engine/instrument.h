@@ -1070,7 +1070,7 @@ struct DivInstrumentFZT {
     TE_EFFECT_EXT_FILTER_MODE = 0x1800,
     //TE_EFFECT_EXT_PATTERN_LOOP = 0x0e60, // e60 = start, e61-e6f = end and indication how many loops you want
     //is not supported in Furnace yet
-    TE_EFFECT_EXT_RETRIGGER = 0x0e90,
+    TE_EFFECT_EXT_RETRIGGER = 0x0c00,
     TE_EFFECT_EXT_FINE_VOLUME_DOWN = 0xf400,
     TE_EFFECT_EXT_FINE_VOLUME_UP = 0xf300,
     TE_EFFECT_EXT_NOTE_CUT = 0xec00,
