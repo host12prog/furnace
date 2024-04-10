@@ -250,7 +250,7 @@ bool is_0_f_fzt_command(uint16_t command)
 uint16_t convert_furnace_eff_to_fzt(uint16_t fur_eff, bool mask_value)
 {
     uint8_t eff_val_hex2 = fur_eff & 0xff;
-    uint8_t eff_val_hex1 = fur_eff & 0xf;
+    uint8_t eff_val_hex1 = MIN(0xf, (fur_eff & 0xff));
 
     int index = 0;
 
