@@ -2189,7 +2189,7 @@ void DivEngine::registerSystems() {
   );
 
   sysDefs[DIV_SYSTEM_FZT]=new DivSysDef(
-    "FZT sound source", NULL, 0xf2, 0, 4, false, true, 0, false, 0, 0, 0,
+    "FZT sound source", NULL, 0xf3, 0, 4, false, true, 0, false, 0, 0, 0,
     "a software synth core by LTVA used in Flizzer Tracker (Flipper Zero chiptune tracker).##sesd",
     {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd"},
     {"1", "2", "3", "4"},
