@@ -78,6 +78,7 @@ void DivLocale::addTranslationsPolish()
     strings["Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt##sgab"].plurals[0] = "Nuked-OPL3/OPLL/OPM/OPN2/PSG autorstwa nukeykt";
     strings["YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt##sgab"].plurals[0] = "YM3812-LLE, YMF262-LLE i YMF276-LLE autorstwa nukeykt";
     strings["ymfm by Aaron Giles##sgab"].plurals[0] = "ymfm autorstwa Aarona Gilesa";
+    strings["emu2413 by Digital Sound Antiques##sgab"].plurals[0] = "emu2413 autorstwa Digital Sound Antiques";
     strings["MAME SN76496 by Nicola Salmoria##sgab"].plurals[0] = "MAME SN76496 autorstwa Nicoli Salmorii";
     strings["MAME AY-3-8910 by Couriersud##sgab"].plurals[0] = "MAME AY-3-8910 autorstwa Couriersud";
     strings["with AY8930 fixes by Eulous, cam900 and Grauw##sgab"].plurals[0] = "z poprawkami dla AY8930 autorstwa Eulousa, cam900 i Grauwa";
@@ -2170,7 +2171,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Actual sample rate: %d Hz##sgsc"].plurals[0] = "Rzeczywista częstotliwość: %d Hz";
     strings["Max mixer CPU usage: %.0f%%##sgsc"].plurals[0] = "Maksymalne użycie CPU podczas miksowania: %.0f%%";
     strings["Arcade (4MHz)##sgsc"].plurals[0] = "Arcade (4 MHz)";
-    strings["Half NTSC (1.79MHz)##sgsc"].plurals[0] = "Polowa NTSC (1.79 MHz)";
+    strings["Half NTSC (1.79MHz)##sgsc"].plurals[0] = "Połowa NTSC (1.79 MHz)";
     strings["Patch set:##sgsc"].plurals[0] = "Zestaw instrumentów:";
     strings["Ignore top/hi-hat frequency changes##sgsc"].plurals[0] = "Ignoruj zmiany częstotliwości talerzy i hi-hatów";
     strings["Apply fixed frequency to all drums at once##sgsc"].plurals[0] = "Stosuj stałą częstotliwość do wszystich instrumentów perkusyjnych";
