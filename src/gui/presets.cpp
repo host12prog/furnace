@@ -3888,12 +3888,21 @@ void FurnaceGUI::printPresets(std::vector<FurnaceGUISysDef>& items, size_t depth
           break;
         }
       }
+<<<<<<< HEAD
     }
     ImGui::PushID(index+1);
     if (ImGui::Selectable(i.name.c_str(),isSelected)) {
       selectedUserPreset=depthStack;
       selectedUserPreset.push_back(index);
     }
+=======
+    }
+    ImGui::PushID(index+1);
+    if (ImGui::Selectable(i.name.c_str(),isSelected)) {
+      selectedUserPreset=depthStack;
+      selectedUserPreset.push_back(index);
+    }
+>>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
     ImGui::PopID();
     if (!i.subDefs.empty()) {
       depthStack.push_back(index);
@@ -3944,7 +3953,11 @@ void FurnaceGUI::drawUserPresets() {
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
       if (ImGui::Button(ICON_FA_PLUS "##AddPreset")) {
+<<<<<<< HEAD
         userCategory->systems.push_back(FurnaceGUISysDef(_L("New Preset##sgpr"),{}));
+=======
+        userCategory->systems.push_back(FurnaceGUISysDef("New Preset",{}));
+>>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
         selectedUserPreset.clear();
         selectedUserPreset.push_back(userCategory->systems.size()-1);
       }
@@ -3953,13 +3966,21 @@ void FurnaceGUI::drawUserPresets() {
       // editor
       ImGui::TableNextColumn();
       if (selectedUserPreset.empty()) {
+<<<<<<< HEAD
         ImGui::Text(_L("select a preset##sgpr"));
+=======
+        ImGui::Text("select a preset");
+>>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
       } else {
         FurnaceGUISysDef* preset=selectPreset(userCategory->systems);
 
         if (preset!=NULL) {
           ImGui::AlignTextToFramePadding();
+<<<<<<< HEAD
           ImGui::Text(_L("Name##sgpr"));
+=======
+          ImGui::Text("Name");
+>>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
           ImGui::SameLine();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           ImGui::InputText("##PName",&preset->name);

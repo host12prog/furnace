@@ -580,7 +580,7 @@ void FurnaceGUI::drawMobileControls() {
         if (ImGui::Button(_L("Compat Flags##sgec"))) {
           compatFlagsOpen=!compatFlagsOpen;
         }
-        ImGui::SameLine();
+        ImGui::SameLine() ;
         if (ImGui::Button(_L("XYOsc##sgec"))) {
           xyOscOpen=!xyOscOpen;
         }
