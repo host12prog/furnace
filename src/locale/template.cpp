@@ -2985,6 +2985,10 @@ void DivLocale::addTranslationsTemplate()
     strings["Disable##fah0"].plurals[0] = "=Disable##fah0";
     strings["Enable##fah1"].plurals[0] = "=Enable##fah1";
     strings["Force##fah2"].plurals[0] = "=Force##fah2";
+    strings["Oversample##sgse"].plurals[0] = "=Oversample";
+    strings["saves video memory. reduces font rendering quality.\nuse for pixel/bitmap fonts.##sgse"].plurals[0] = "=saves video memory. reduces font rendering quality.\nuse for pixel/bitmap fonts.";
+    strings["default.##sgse"].plurals[0] = "=default.";
+    strings["slightly better font rendering quality.\nuses more video memory.##sgse"].plurals[0] = "=slightly better font rendering quality.\nuses more video memory.";
     strings["Load fallback font##sgse"].plurals[0] = "=Load fallback font";
     strings["disable to save video memory.##sgse"].plurals[0] = "=disable to save video memory.";
     strings["Display Japanese characters##sgse"].plurals[0] = "=Display Japanese characters";

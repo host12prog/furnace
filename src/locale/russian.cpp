@@ -2951,6 +2951,10 @@ void DivLocale::addTranslationsRussian()
     strings["Disable##fah0"].plurals[0] = "Отключить##fah0";
     strings["Enable##fah1"].plurals[0] = "Включить##fah1";
     strings["Force##fah2"].plurals[0] = "Принудительное##fah2";
+    strings["Oversample##sgse"].plurals[0] = "Супердискретизация";
+    strings["saves video memory. reduces font rendering quality.\nuse for pixel/bitmap fonts.##sgse"].plurals[0] = "уменьшенное использование видеопамяти, ухудшенная отрисовка шрифтов.\nиспользуйте для пиксельных/растровых шрифтов.";
+    strings["default.##sgse"].plurals[0] = "настройка по умолчанию.";
+    strings["slightly better font rendering quality.\nuses more video memory.##sgse"].plurals[0] = "незначительно улучшенная отрисовка шрифтов.\nиспользует больше видеопамяти.";
     strings["Load fallback font##sgse"].plurals[0] = "Загружать резервный шрифт";
     strings["disable to save video memory.##sgse"].plurals[0] = "отключите, если хотите уменьшить использование видеопамяти.";
     strings["Display Japanese characters##sgse"].plurals[0] = "Отображать японские символы (вкл. иероглифы)";

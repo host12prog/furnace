@@ -3051,7 +3051,7 @@ void FurnaceGUI::drawSettings() {
           ImGui::Unindent();
         }
 
-        ImGui::Text("Oversample");
+        ImGui::Text(_L("Oversample##sgse"));
 
         ImGui::SameLine();
         if (ImGui::RadioButton("1×##fos1",settings.fontOversample==1)) {
@@ -3059,7 +3059,7 @@ void FurnaceGUI::drawSettings() {
           settingsChanged=true;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("saves video memory. reduces font rendering quality.\nuse for pixel/bitmap fonts.");
+          ImGui::SetTooltip(_L("saves video memory. reduces font rendering quality.\nuse for pixel/bitmap fonts.##sgse"));
         }
         ImGui::SameLine();
         if (ImGui::RadioButton("2×##fos2",settings.fontOversample==2)) {
@@ -3067,7 +3067,7 @@ void FurnaceGUI::drawSettings() {
           settingsChanged=true;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("default.");
+          ImGui::SetTooltip(_L("default.##sgse"));
         }
         ImGui::SameLine();
         if (ImGui::RadioButton("3×##fos3",settings.fontOversample==3)) {
@@ -3075,7 +3075,7 @@ void FurnaceGUI::drawSettings() {
           settingsChanged=true;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("slightly better font rendering quality.\nuses more video memory.");
+          ImGui::SetTooltip(_L("slightly better font rendering quality.\nuses more video memory.##sgse"));
         }
 
         bool loadFallbackB=settings.loadFallback;
