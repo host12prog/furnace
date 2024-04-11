@@ -48,6 +48,13 @@ extern FurnaceGUI g;
 
 #define FZT_SONG_MAX_PATTERNS 256
 
+#define WARNING_ABOUT_ONE_DIGIT_COMMAND(eff) \
+if(pat->data[row][4] == eff && pat->data[row][5] > 0xf && !found_invalid_effects[eff]) \
+{ \
+    warnings += fmt::sprintf(_LE("You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"), eff, i, j, row); \
+    found_invalid_effects[eff] = true; \
+}
+
 class DivEngine;
 
 typedef enum {
@@ -236,7 +243,7 @@ bool is_0_f_fzt_command(uint16_t command)
 
     while (fzt_commands_map_real[index][0] != -1 || fzt_commands_map_real[index][1] != -1)
     {
-        if ((command & 0x7ff0) == fzt_commands_map_real[index][1] && (command & 0x7fff) >= TEE_EFFECT_EXT_TOGGLE_FILTER && (command & 0x7fff) < TEE_EFFECT_SET_SPEED_PROG_PERIOD)
+        if ((command & 0x7fff) >= TEE_EFFECT_EXT_TOGGLE_FILTER && (command & 0x7fff) < TEE_EFFECT_SET_SPEED_PROG_PERIOD)
         {
             return true;
         }
@@ -266,13 +273,9 @@ uint16_t convert_furnace_eff_to_fzt(uint16_t fur_eff, bool mask_value)
         {
             return TEE_PROGRAM_END;
         }
-        if((fur_eff & 0xfff0) == fzt_commands_map_real[index][0] && (fzt_commands_map_real[index][1] >= TEE_EFFECT_EXT_TOGGLE_FILTER && fzt_commands_map_real[index][1] < TEE_EFFECT_SET_SPEED_PROG_PERIOD))
+        if((fur_eff & 0xff00) == fzt_commands_map_real[index][0])
         {
-            return fzt_commands_map_real[index][1] | (mask_value ? 0 : eff_val_hex1);
-        }
-        if((fur_eff & 0xff00) == fzt_commands_map_real[index][0] && (fzt_commands_map_real[index][1] < TEE_EFFECT_EXT_TOGGLE_FILTER || fzt_commands_map_real[index][1] >= TEE_EFFECT_SET_SPEED_PROG_PERIOD))
-        {
-            return fzt_commands_map_real[index][1] | (mask_value ? 0 : eff_val_hex2);
+            return fzt_commands_map_real[index][1] | (mask_value ? 0 : (is_0_f_fzt_command(fzt_commands_map_real[index][1]) ? eff_val_hex1 : eff_val_hex2));
         }
 
         index++;
@@ -752,6 +755,12 @@ bool DivEngine::exportFZTFindErrors()
         return true;
     }
 
+    if((int)song.insLen == 0)
+    {
+        lastError += _LE("you must have at least one instrument in the song.");
+        return true;
+    }
+
     return false;
 }
 
@@ -846,7 +855,7 @@ int DivEngine::exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_
 
     if(!found_0b)
     {
-        warnings += _LE("there wasn't any 0bxx command, so your song won't be looped.\n"
+        warnings += _LE("There wasn't any 0Bxx command, so your song won't be looped.\n"
         "To make song loop, place 0Bxx command somewhere in the song on the last pattern row.\n\n");
     }
 
@@ -936,58 +945,18 @@ int DivEngine::exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_
 
             for(int row = 0; row < sub_song->patLen && !rate_too_high; row++)
             {
-                if(pat->data[row][4] == 0x17 && pat->data[row][5] > 0xf && !found_invalid_effects[0x17])
-                {
-                    warnings += fmt::sprintf(_LE("You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"), 0x17, i, j, row);
-                    found_invalid_effects[0x17] = true;
-                }
-                if(pat->data[row][4] == 0xf1 && pat->data[row][5] > 0xf && !found_invalid_effects[0xf1])
-                {
-                    warnings += fmt::sprintf(_LE("You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"), 0xf1, i, j, row);
-                    found_invalid_effects[0xf1] = true;
-                }
-                if(pat->data[row][4] == 0xf2 && pat->data[row][5] > 0xf && !found_invalid_effects[0xf2])
-                {
-                    warnings += fmt::sprintf(_LE("You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"), 0xf2, i, j, row);
-                    found_invalid_effects[0xf2] = true;
-                }
-                if(pat->data[row][4] == 0x18 && pat->data[row][5] > 0xf && !found_invalid_effects[0x18])
-                {
-                    warnings += fmt::sprintf(_LE("You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"), 0x18, i, j, row);
-                    found_invalid_effects[0x18] = true;
-                }
-                if(pat->data[row][4] == 0x0c && pat->data[row][5] > 0xf && !found_invalid_effects[0x0c])
-                {
-                    warnings += fmt::sprintf(_LE("You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"), 0x0c, i, j, row);
-                    found_invalid_effects[0x0c] = true;
-                }
-                if(pat->data[row][4] == 0xf3 && pat->data[row][5] > 0xf && !found_invalid_effects[0xf3])
-                {
-                    warnings += fmt::sprintf(_LE("You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"), 0xf3, i, j, row);
-                    found_invalid_effects[0xf3] = true;
-                }
-                if(pat->data[row][4] == 0xf4 && pat->data[row][5] > 0xf && !found_invalid_effects[0xf4])
-                {
-                    warnings += fmt::sprintf(_LE("You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"), 0xf4, i, j, row);
-                    found_invalid_effects[0xf4] = true;
-                }
-                if(pat->data[row][4] == 0xec && pat->data[row][5] > 0xf && !found_invalid_effects[0xec])
-                {
-                    warnings += fmt::sprintf(_LE("You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"), 0xec, i, j, row);
-                    found_invalid_effects[0xec] = true;
-                }
-                if(pat->data[row][4] == 0xed && pat->data[row][5] > 0xf && !found_invalid_effects[0xed])
-                {
-                    warnings += fmt::sprintf(_LE("You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"), 0xed, i, j, row);
-                    found_invalid_effects[0xed] = true;
-                }
-                if(pat->data[row][4] == 0x19 && pat->data[row][5] > 0xf && !found_invalid_effects[0x19])
-                {
-                    warnings += fmt::sprintf(_LE("You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"), 0x19, i, j, row);
-                    found_invalid_effects[0x19] = true;
-                }
+                WARNING_ABOUT_ONE_DIGIT_COMMAND(0x17);
+                WARNING_ABOUT_ONE_DIGIT_COMMAND(0xf1);
+                WARNING_ABOUT_ONE_DIGIT_COMMAND(0xf2);
+                WARNING_ABOUT_ONE_DIGIT_COMMAND(0x18);
+                WARNING_ABOUT_ONE_DIGIT_COMMAND(0x0c);
+                WARNING_ABOUT_ONE_DIGIT_COMMAND(0xf3);
+                WARNING_ABOUT_ONE_DIGIT_COMMAND(0xf4);
+                WARNING_ABOUT_ONE_DIGIT_COMMAND(0xec);
+                WARNING_ABOUT_ONE_DIGIT_COMMAND(0xed);
+                WARNING_ABOUT_ONE_DIGIT_COMMAND(0x19);
 
-                if((pat->data[row][4] == 0xfd || pat->data[row][4] == 0xfe) && (!found_invalid_effects[0xfd] || !found_invalid_effects[0xfe]))
+                if((pat->data[row][4] == 0xfd || pat->data[row][4] == 0xfe) && (!found_invalid_effects[0xfd] && !found_invalid_effects[0xfe]))
                 {
                     warnings += fmt::sprintf(_LE("You are using virtual tempo control effect (channel %d, pattern %d, row %d).\nThe effect is not supported in FZT and will be ignored.\n\n"), i, j, row);
                     found_invalid_effects[0xfd] = true;
