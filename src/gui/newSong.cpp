@@ -223,13 +223,9 @@ void FurnaceGUI::drawNewSong() {
           {
             ImGui::Text(_L("no results##sgns"));
           }
-<<<<<<< HEAD
         } 
         else 
         {
-=======
-        } else {
->>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
           bool alreadyHover=false;
           sysDefStack.push_back(newSongQuery.empty()?newSongCategory:-1);
           drawSysDefs(category,accepted,sysDefStack,alreadyHover);

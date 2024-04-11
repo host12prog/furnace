@@ -616,25 +616,15 @@ void FurnaceGUI::drawSettings() {
 
 #ifdef IS_MOBILE
         // SUBSECTION VIBRATION
-<<<<<<< HEAD
         CONFIG_SUBSECTION(_L("Vibration##sgse"));
 
         if (ImGui::SliderFloat(_L("Strength##sgse"),&settings.vibrationStrength,0.0f,1.0f)) {
-=======
-        CONFIG_SUBSECTION("Vibration");
-
-        if (ImGui::SliderFloat("Strength",&settings.vibrationStrength,0.0f,1.0f)) {
->>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
           if (settings.vibrationStrength<0.0f) settings.vibrationStrength=0.0f;
           if (settings.vibrationStrength>1.0f) settings.vibrationStrength=1.0f;
           settingsChanged=true;
         }
 
-<<<<<<< HEAD
         if (ImGui::SliderInt(_L("Length##sgse"),&settings.vibrationLength,10,500)) {
-=======
-        if (ImGui::SliderInt("Length",&settings.vibrationLength,10,500)) {
->>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
           if (settings.vibrationLength<10) settings.vibrationLength=10;
           if (settings.vibrationLength>500) settings.vibrationLength=500;
           settingsChanged=true;
@@ -3062,20 +3052,12 @@ void FurnaceGUI::drawSettings() {
         }
 
         bool loadFallbackB=settings.loadFallback;
-<<<<<<< HEAD
         if (ImGui::Checkbox(_L("Load fallback font##sgse"),&loadFallbackB)) {
-=======
-        if (ImGui::Checkbox("Load fallback font",&loadFallbackB)) {
->>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
           settings.loadFallback=loadFallbackB;
           settingsChanged=true;
         }
         if (ImGui::IsItemHovered()) {
-<<<<<<< HEAD
           ImGui::SetTooltip(_L("disable to save video memory.##sgse"));
-=======
-          ImGui::SetTooltip("disable to save video memory.");
->>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
         }
 
         bool loadJapaneseB=settings.loadJapanese;
@@ -4330,7 +4312,6 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.playOnLoad=conf.getInt("playOnLoad",0);
     settings.centerPopup=conf.getInt("centerPopup",1);
 
-<<<<<<< HEAD
     settings.language=conf.getInt("language",(int)DIV_LANG_ENGLISH);
     locale.setLanguage((DivLang)settings.language);
     initSystemPresets();
@@ -4342,8 +4323,6 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
 
     settings.follow_log=conf.getInt("followLog",0);
 
-=======
->>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
     settings.vibrationStrength=conf.getFloat("vibrationStrength",0.5f);
     settings.vibrationLength=conf.getInt("vibrationLength",100);
   }
@@ -4894,7 +4873,6 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("playOnLoad",settings.playOnLoad);
     conf.set("centerPopup",settings.centerPopup);
 
-<<<<<<< HEAD
     conf.set("language",settings.language);
 
     conf.set("translateChanNamesPat",settings.translate_channel_names_pattern);
@@ -4903,8 +4881,6 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
 
     conf.set("followLog",settings.follow_log);
 
-=======
->>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
     conf.set("vibrationStrength",settings.vibrationStrength);
     conf.set("vibrationLength",settings.vibrationLength);
   }

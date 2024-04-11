@@ -1902,14 +1902,11 @@ class FurnaceGUI {
     int frameRateLimit;
     int displayRenderTime;
     unsigned int maxUndoSteps;
-<<<<<<< HEAD
     int language;
     int translate_channel_names_pattern;
     int translate_channel_names_osc;
     int translate_short_channel_names;
     int follow_log;
-=======
->>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
     float vibrationStrength;
     int vibrationLength;
     String mainFontPath;
@@ -2146,14 +2143,11 @@ class FurnaceGUI {
       frameRateLimit(60),
       displayRenderTime(0),
       maxUndoSteps(100),
-<<<<<<< HEAD
       language(DIV_LANG_ENGLISH),
       translate_channel_names_pattern(0),
       translate_channel_names_osc(0),
       translate_short_channel_names(0),
       follow_log(0),
-=======
->>>>>>> 3e6a80d2070629f8df9b28d8fe40c0561f3786a7
       vibrationStrength(0.5f),
       vibrationLength(100),
       mainFontPath(""),
