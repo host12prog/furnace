@@ -1591,6 +1591,7 @@ void DivLocale::addTranslationsTemplate()
     strings["no results##sgns"].plurals[0] = "=no results";
     strings["I'm feeling lucky##sgns"].plurals[0] = "=I'm feeling lucky";
     strings["no categories available! what in the world.##sgns"].plurals[0] = "=no categories available! what in the world.";
+    strings["it appears you're extremely lucky today!##sgns"].plurals[0] = "=it appears you're extremely lucky today!";
     strings["Cancel##sgns"].plurals[0] = "=Cancel";
 
     //   sgme  src/gui/memory.cpp
@@ -1960,6 +1961,13 @@ void DivLocale::addTranslationsTemplate()
     strings["Famicom with Konami VRC7##sgpr1"].plurals[0] = "=Famicom with Konami VRC7";
     strings["Arcade (YM2151 and SegaPCM)##sgpr1"].plurals[0] = "=Arcade (YM2151 and SegaPCM)";
     strings["Neo Geo CD (extended channel 2)##sgpr1"].plurals[0] = "=Neo Geo CD (extended channel 2)";
+
+    strings["User Presets##sgpr"].plurals[0] = "=User Presets";
+    strings["Error! User category does not exist!##sgpr"].plurals[0] = "=Error! User category does not exist!";
+    strings["New Preset##sgpr"].plurals[0] = "=New Preset";
+    strings["select a preset##sgpr"].plurals[0] = "=select a preset";
+    strings["Name##sgpr"].plurals[0] = "=Name";
+    strings["Save and Close##sgpr"].plurals[0] = "=Save and Close";
 
     //   sgrv  src/gui/regView.cpp
 

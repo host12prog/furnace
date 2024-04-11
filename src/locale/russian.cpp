@@ -1533,6 +1533,7 @@ void DivLocale::addTranslationsRussian()
     strings["no results##sgns"].plurals[0] = "ничего не найдено";
     strings["I'm feeling lucky##sgns"].plurals[0] = "Мне повезёт!";
     strings["no categories available! what in the world.##sgns"].plurals[0] = "нет доступных категорий! что происходит...";
+    strings["it appears you're extremely lucky today!##sgns"].plurals[0] = "похоже, что вам сегодня очень повезло!";
     strings["Cancel##sgns"].plurals[0] = "Отмена";
 
     //   sgme  src/gui/memory.cpp
@@ -1901,6 +1902,13 @@ void DivLocale::addTranslationsRussian()
     strings["Famicom with Konami VRC7##sgpr"].plurals[0] = "Famicom с Konami VRC7";
     strings["Arcade (YM2151 and SegaPCM)##sgpr1"].plurals[0] = "Arcade (YM2151 и SegaPCM)";
     strings["Neo Geo CD (extended channel 2)##sgpr1"].plurals[0] = "Neo Geo CD (расширенный 2-ой канал)";
+
+    strings["User Presets##sgpr"].plurals[0] = "Пользовательские пресеты";
+    strings["Error! User category does not exist!##sgpr"].plurals[0] = "Ошибка! Категория пользовательских пресетов не существует!";
+    strings["New Preset##sgpr"].plurals[0] = "Новый пресет";
+    strings["select a preset##sgpr"].plurals[0] = "выберите пресет";
+    strings["Name##sgpr"].plurals[0] = "Название";
+    strings["Save and Close##sgpr"].plurals[0] = "Сохранить и закрыть";
 
     //   sgrv  src/gui/regView.cpp
 
