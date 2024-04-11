@@ -1903,6 +1903,13 @@ void DivLocale::addTranslationsRussian()
     strings["Arcade (YM2151 and SegaPCM)##sgpr1"].plurals[0] = "Arcade (YM2151 и SegaPCM)";
     strings["Neo Geo CD (extended channel 2)##sgpr1"].plurals[0] = "Neo Geo CD (расширенный 2-ой канал)";
 
+    strings["User Presets##sgpr"].plurals[0] = "Пользовательские пресеты";
+    strings["Error! User category does not exist!##sgpr"].plurals[0] = "Ошибка! Категория пользовательских пресетов не существует!";
+    strings["New Preset##sgpr"].plurals[0] = "Новый пресет";
+    strings["select a preset##sgpr"].plurals[0] = "выберите пресет";
+    strings["Name##sgpr"].plurals[0] = "Название";
+    strings["Save and Close##sgpr"].plurals[0] = "Сохранить и закрыть";
+
     //   sgrv  src/gui/regView.cpp
 
     strings["Register View###Register View"].plurals[0] = "Регистры###Register View";

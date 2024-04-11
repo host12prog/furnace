@@ -3819,7 +3819,7 @@ bool FurnaceGUI::saveUserPresets(bool redundancy) {
   FurnaceGUISysCategory* userCategory=NULL;
 
   for (FurnaceGUISysCategory& i: sysCategories) {
-    if (strcmp(i.name,"User")==0) {
+    if (strcmp(i.name,"User")==0 || strcmp(i.name,"User##sgpr")==0) {
       userCategory=&i;
       break;
     }
@@ -3926,10 +3926,10 @@ void FurnaceGUI::drawUserPresets() {
     nextWindow=GUI_WINDOW_NOTHING;
   }
   if (!userPresetsOpen) return;
-  if (ImGui::Begin("User Presets",&userPresetsOpen,globalWinFlags)) {
+  if (ImGui::Begin(_L("User Presets##sgpr"),&userPresetsOpen,globalWinFlags)) {
     FurnaceGUISysCategory* userCategory=NULL;
     for (FurnaceGUISysCategory& i: sysCategories) {
-      if (strcmp(i.name,"User##sgpr")==0) {
+      if (strcmp(i.name,"User##sgpr")==0 || strcmp(i.name,"User")==0) {
         userCategory=&i;
         break;
       }
@@ -3938,13 +3938,13 @@ void FurnaceGUI::drawUserPresets() {
     std::vector<int> depthStack;
 
     if (userCategory==NULL) {
-      ImGui::Text("Error! User category does not exist!");
+      ImGui::Text(_L("Error! User category does not exist!##sgpr"));
     } else if (ImGui::BeginTable("UserPresets",2,ImGuiTableFlags_BordersInnerV)) {
       // preset list
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
       if (ImGui::Button(ICON_FA_PLUS "##AddPreset")) {
-        userCategory->systems.push_back(FurnaceGUISysDef("New Preset",{}));
+        userCategory->systems.push_back(FurnaceGUISysDef(_L("New Preset##sgpr"),{}));
         selectedUserPreset.clear();
         selectedUserPreset.push_back(userCategory->systems.size()-1);
       }
@@ -3953,13 +3953,13 @@ void FurnaceGUI::drawUserPresets() {
       // editor
       ImGui::TableNextColumn();
       if (selectedUserPreset.empty()) {
-        ImGui::Text("select a preset");
+        ImGui::Text(_L("select a preset##sgpr"));
       } else {
         FurnaceGUISysDef* preset=selectPreset(userCategory->systems);
 
         if (preset!=NULL) {
           ImGui::AlignTextToFramePadding();
-          ImGui::Text("Name");
+          ImGui::Text(_L("Name##sgpr"));
           ImGui::SameLine();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           ImGui::InputText("##PName",&preset->name);
@@ -3971,7 +3971,7 @@ void FurnaceGUI::drawUserPresets() {
       ImGui::EndTable();
     }
 
-    if (ImGui::Button("Save and Close")) {
+    if (ImGui::Button(_L("Save and Close##sgpr"))) {
       userPresetsOpen=false;
     }
   }

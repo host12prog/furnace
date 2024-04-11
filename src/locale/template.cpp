@@ -1962,6 +1962,13 @@ void DivLocale::addTranslationsTemplate()
     strings["Arcade (YM2151 and SegaPCM)##sgpr1"].plurals[0] = "=Arcade (YM2151 and SegaPCM)";
     strings["Neo Geo CD (extended channel 2)##sgpr1"].plurals[0] = "=Neo Geo CD (extended channel 2)";
 
+    strings["User Presets##sgpr"].plurals[0] = "=User Presets";
+    strings["Error! User category does not exist!##sgpr"].plurals[0] = "=Error! User category does not exist!";
+    strings["New Preset##sgpr"].plurals[0] = "=New Preset";
+    strings["select a preset##sgpr"].plurals[0] = "=select a preset";
+    strings["Name##sgpr"].plurals[0] = "=Name";
+    strings["Save and Close##sgpr"].plurals[0] = "=Save and Close";
+
     //   sgrv  src/gui/regView.cpp
 
     strings["Register View###Register View"].plurals[0] = "=Register View###Register View";
