@@ -119,6 +119,7 @@ for other operating systems, you may [build the source](#developer-info).
     - Generic PCM DAC
     - SID2
     - 5E01
+    - [Flizzer tracker sound source](https://github.com/LTVA1/flizzer_tracker) (with `.fzt` files import and export support) 
 - mix and match sound chips!
   - over 200 ready to use presets from computers, game consoles and arcade boards...
   - ...or create your own - up to 32 of them or a total of 128 channels!
