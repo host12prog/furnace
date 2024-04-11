@@ -3051,6 +3051,33 @@ void FurnaceGUI::drawSettings() {
           ImGui::Unindent();
         }
 
+        ImGui::Text("Oversample");
+
+        ImGui::SameLine();
+        if (ImGui::RadioButton("1×##fos1",settings.fontOversample==1)) {
+          settings.fontOversample=1;
+          settingsChanged=true;
+        }
+        if (ImGui::IsItemHovered()) {
+          ImGui::SetTooltip("saves video memory. reduces font rendering quality.\nuse for pixel/bitmap fonts.");
+        }
+        ImGui::SameLine();
+        if (ImGui::RadioButton("2×##fos2",settings.fontOversample==2)) {
+          settings.fontOversample=2;
+          settingsChanged=true;
+        }
+        if (ImGui::IsItemHovered()) {
+          ImGui::SetTooltip("default.");
+        }
+        ImGui::SameLine();
+        if (ImGui::RadioButton("3×##fos3",settings.fontOversample==3)) {
+          settings.fontOversample=3;
+          settingsChanged=true;
+        }
+        if (ImGui::IsItemHovered()) {
+          ImGui::SetTooltip("slightly better font rendering quality.\nuses more video memory.");
+        }
+
         bool loadFallbackB=settings.loadFallback;
         if (ImGui::Checkbox(_L("Load fallback font##sgse"),&loadFallbackB)) {
           settings.loadFallback=loadFallbackB;
@@ -4441,6 +4468,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.fontBitmap=conf.getInt("fontBitmap",0);
     settings.fontAutoHint=conf.getInt("fontAutoHint",1);
     settings.fontAntiAlias=conf.getInt("fontAntiAlias",1);
+    settings.fontOversample=conf.getInt("fontOversample",2);
   }
 
   if (groups&GUI_SETTINGS_APPEARANCE) {
@@ -4795,6 +4823,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.fontBitmap,0,1);
   clampSetting(settings.fontAutoHint,0,2);
   clampSetting(settings.fontAntiAlias,0,1);
+  clampSetting(settings.fontOversample,0,2);
   clampSetting(settings.selectAssetOnLoad,0,1);
 
   clampSetting(settings.language,0,DIV_LANG_MAX-1);
@@ -4997,6 +5026,7 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("fontBitmap",settings.fontBitmap);
     conf.set("fontAutoHint",settings.fontAutoHint);
     conf.set("fontAntiAlias",settings.fontAntiAlias);
+    conf.set("fontOversample",settings.fontOversample);
   }
 
   // appearance
@@ -5951,7 +5981,7 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
     ImFontConfig fontConfH;
 
     fontConf.OversampleV=1;
-    fontConf.OversampleH=2;
+    fontConf.OversampleH=settings.fontOversample;
     fontConfP.OversampleV=1;
     fontConfP.OversampleH=2;
     fontConfB.OversampleV=1;
