@@ -1533,6 +1533,7 @@ void DivLocale::addTranslationsRussian()
     strings["no results##sgns"].plurals[0] = "ничего не найдено";
     strings["I'm feeling lucky##sgns"].plurals[0] = "Мне повезёт!";
     strings["no categories available! what in the world.##sgns"].plurals[0] = "нет доступных категорий! что происходит...";
+    strings["it appears you're extremely lucky today!##sgns"].plurals[0] = "похоже, что вам сегодня очень повезло!";
     strings["Cancel##sgns"].plurals[0] = "Отмена";
 
     //   sgme  src/gui/memory.cpp

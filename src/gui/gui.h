@@ -1287,20 +1287,14 @@ struct FurnaceGUISysDefChip {
     flags(f) {}
 };
 
-enum menu_status
-{
-  MENU_STATUS_USUAL = 0,
-  MENU_STATUS_LIST_START,
-  MENU_STATUS_LIST_END,
-};
-
 struct FurnaceGUISysDef {
   String name;
   String extra;
-  menu_status menuStatus;
   String definition;
   std::vector<FurnaceGUISysDefChip> orig;
-  FurnaceGUISysDef(const char* n, std::initializer_list<FurnaceGUISysDefChip> def, const char* e=NULL, menu_status menuStatuss = MENU_STATUS_USUAL);
+  std::vector<FurnaceGUISysDef> subDefs;
+  FurnaceGUISysDef(const char* n, std::initializer_list<FurnaceGUISysDefChip> def, const char* e=NULL);
+  FurnaceGUISysDef(const char* n, const char* def, DivEngine* e);
 };
 
 struct FurnaceGUISysCategory {
@@ -2578,8 +2572,9 @@ class FurnaceGUI {
   FurnaceGUIExportTypes curExportType;
 
   // user presets window
-  int selectedUserPreset;
-  std::vector<int> selectedUserPresetSub;
+  std::vector<int> selectedUserPreset;
+
+  std::vector<String> randomDemoSong;
 
   void drawExportAudio(bool onWindow=false);
   void drawExportVGM(bool onWindow=false);
@@ -2665,7 +2660,10 @@ class FurnaceGUI {
   void localWaveListItem(int i, float* wavePreview, DivInstrument* ins);
   void sampleListItem(int index, int dir, int asset);
 
-  //void drawSysDefs(std::vector<FurnaceGUISysDef>& category, bool& accepted, std::vector<int>& sysDefStack);
+  void drawSysDefs(std::vector<FurnaceGUISysDef>& category, bool& accepted, std::vector<int>& sysDefStack, bool& alreadyHover);
+  void printPresets(std::vector<FurnaceGUISysDef>& items, size_t depth, std::vector<int>& depthStack);
+  FurnaceGUISysDef* selectPreset(std::vector<FurnaceGUISysDef>& items);
+
   void printPresets(std::vector<FurnaceGUISysDef>& items, int depth);
 
   void toggleMobileUI(bool enable, bool force=false);
@@ -2891,8 +2889,8 @@ class FurnaceGUI {
   void applyUISettings(bool updateFonts=true);
   void initSystemPresets();
 
-  //bool loadUserPresets(bool redundancy=true);
-  //bool saveUserPresets(bool redundancy=true);
+  bool loadUserPresets(bool redundancy=true);
+  bool saveUserPresets(bool redundancy=true);
 
   void encodeMMLStr(String& target, int* macro, int macroLen, int macroLoop, int macroRel, bool hex=false, bool bit30=false);
   void decodeMMLStr(String& source, int* macro, unsigned char& macroLen, unsigned char& macroLoop, int macroMin, int macroMax, unsigned char& macroRel, bool bit30=false);
