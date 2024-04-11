@@ -2681,6 +2681,9 @@ void DivLocale::addTranslationsTemplate()
     strings["render using shaders that run on the graphics card.\nonly available in OpenGL ES 2.0 render backend.##sgse"].plurals[0] = "=render using shaders that run on the graphics card.\nonly available in OpenGL ES 2.0 render backend.";
     strings["render using shaders that run on the graphics card.\nonly available in OpenGL 3.0 render backend.##sgse"].plurals[0] = "=render using shaders that run on the graphics card.\nonly available in OpenGL 3.0 render backend.";
     strings["File##sgse"].plurals[0] = "=File";
+    strings["Vibration##sgse"].plurals[0] = "=Vibration";
+    strings["Strength##sgse"].plurals[0] = "=Strength";
+    strings["Length##sgse"].plurals[0] = "=Length";
     strings["Use system file picker##sgse"].plurals[0] = "=Use system file picker";
     strings["Number of recent files##sgse"].plurals[0] = "=Number of recent files";
     strings["Compress when saving##sgse"].plurals[0] = "=Compress when saving";
@@ -2982,6 +2985,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Disable##fah0"].plurals[0] = "=Disable##fah0";
     strings["Enable##fah1"].plurals[0] = "=Enable##fah1";
     strings["Force##fah2"].plurals[0] = "=Force##fah2";
+    strings["Load fallback font##sgse"].plurals[0] = "=Load fallback font";
+    strings["disable to save video memory.##sgse"].plurals[0] = "=disable to save video memory.";
     strings["Display Japanese characters##sgse"].plurals[0] = "=Display Japanese characters";
     strings["Only toggle this option if you have enough graphics memory.\n"
             "This is a temporary solution until dynamic font atlas is implemented in Dear ImGui.\n\n"

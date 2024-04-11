@@ -616,15 +616,15 @@ void FurnaceGUI::drawSettings() {
 
 #ifdef IS_MOBILE
         // SUBSECTION VIBRATION
-        CONFIG_SUBSECTION("Vibration");
+        CONFIG_SUBSECTION(_L("Vibration##sgse"));
 
-        if (ImGui::SliderFloat("Strength",&settings.vibrationStrength,0.0f,1.0f)) {
+        if (ImGui::SliderFloat(_L("Strength##sgse"),&settings.vibrationStrength,0.0f,1.0f)) {
           if (settings.vibrationStrength<0.0f) settings.vibrationStrength=0.0f;
           if (settings.vibrationStrength>1.0f) settings.vibrationStrength=1.0f;
           settingsChanged=true;
         }
 
-        if (ImGui::SliderInt("Length",&settings.vibrationLength,10,500)) {
+        if (ImGui::SliderInt(_L("Length##sgse"),&settings.vibrationLength,10,500)) {
           if (settings.vibrationLength<10) settings.vibrationLength=10;
           if (settings.vibrationLength>500) settings.vibrationLength=500;
           settingsChanged=true;
@@ -3052,12 +3052,12 @@ void FurnaceGUI::drawSettings() {
         }
 
         bool loadFallbackB=settings.loadFallback;
-        if (ImGui::Checkbox("Load fallback font",&loadFallbackB)) {
+        if (ImGui::Checkbox(_L("Load fallback font##sgse"),&loadFallbackB)) {
           settings.loadFallback=loadFallbackB;
           settingsChanged=true;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("disable to save video memory.");
+          ImGui::SetTooltip(_L("disable to save video memory.##sgse"));
         }
 
         bool loadJapaneseB=settings.loadJapanese;

@@ -2648,6 +2648,9 @@ void DivLocale::addTranslationsRussian()
     strings["render using shaders that run on the graphics card.\nonly available in OpenGL ES 2.0 render backend.##sgse"].plurals[0] = "отрисовывать при помощи шейдеров, исполняемых на ГП.\nработает только при выборе OpenGL ES 2.0 в качестве библиотеки отрисовки.";
     strings["render using shaders that run on the graphics card.\nonly available in OpenGL 3.0 render backend.##sgse"].plurals[0] = "отрисовывать при помощи шейдеров, исполняемых на ГП.\nработает только при выборе OpenGL 3.0 в качестве библиотеки отрисовки.";
     strings["File##sgse"].plurals[0] = "Файл";
+    strings["Vibration##sgse"].plurals[0] = "Вибрация";
+    strings["Strength##sgse"].plurals[0] = "Сила вибрации";
+    strings["Length##sgse"].plurals[0] = "Длина вибрации";
     strings["Use system file picker##sgse"].plurals[0] = "Использовать диалоговое окно выбора файлов ОС";
     strings["Number of recent files##sgse"].plurals[0] = "Количество недавних файлов";
     strings["Compress when saving##sgse"].plurals[0] = "Сжимать сохраняемые файлы";
@@ -2948,6 +2951,8 @@ void DivLocale::addTranslationsRussian()
     strings["Disable##fah0"].plurals[0] = "Отключить##fah0";
     strings["Enable##fah1"].plurals[0] = "Включить##fah1";
     strings["Force##fah2"].plurals[0] = "Принудительное##fah2";
+    strings["Load fallback font##sgse"].plurals[0] = "Загружать резервный шрифт";
+    strings["disable to save video memory.##sgse"].plurals[0] = "отключите, если хотите уменьшить использование видеопамяти.";
     strings["Display Japanese characters##sgse"].plurals[0] = "Отображать японские символы (вкл. иероглифы)";
     strings["Only toggle this option if you have enough graphics memory.\n"
             "This is a temporary solution until dynamic font atlas is implemented in Dear ImGui.\n\n"
