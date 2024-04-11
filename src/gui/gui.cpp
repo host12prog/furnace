@@ -8042,8 +8042,11 @@ FurnaceGUI::FurnaceGUI():
   waveGenSmooth(1),
   waveGenAmplify(1.0f),
   waveGenFM(false),
-  mustClear(3),
-  initialScreenWipe(1.0f) {
+  mustClear(2),
+  initialScreenWipe(1.0f),
+  audioExportType(0),
+  dmfExportVersion(0),
+  curExportType(GUI_EXPORT_NONE) {
   // value keys
   valueKeys[SDLK_0]=0;
   valueKeys[SDLK_1]=1;

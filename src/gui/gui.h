@@ -65,7 +65,7 @@
 // for now
 #define NOTIFY_LONG_HOLD \
   if (vibrator && vibratorAvailable) { \
-    if (SDL_HapticRumblePlay(vibrator,0.5f,20)!=0) { \
+    if (SDL_HapticRumblePlay(vibrator,settings.vibrationStrength,settings.vibrationLength)!=0) { \
       logV("could not vibrate: %s!",SDL_GetError()); \
     } \
   } else { \
@@ -1789,6 +1789,7 @@ class FurnaceGUI {
     int loadChinese;
     int loadChineseTraditional;
     int loadKorean;
+    int loadFallback;
     int fmLayout;
     int sampleLayout;
     int waveLayout;
@@ -1906,6 +1907,8 @@ class FurnaceGUI {
     int translate_channel_names_osc;
     int translate_short_channel_names;
     int follow_log;
+    float vibrationStrength;
+    int vibrationLength;
     String mainFontPath;
     String headFontPath;
     String patFontPath;
@@ -2028,6 +2031,7 @@ class FurnaceGUI {
       loadChinese(0),
       loadChineseTraditional(0),
       loadKorean(0),
+      loadFallback(1),
       fmLayout(4),
       sampleLayout(0),
       waveLayout(0),
@@ -2144,6 +2148,8 @@ class FurnaceGUI {
       translate_channel_names_osc(0),
       translate_short_channel_names(0),
       follow_log(0),
+      vibrationStrength(0.5f),
+      vibrationLength(100),
       mainFontPath(""),
       headFontPath(""),
       patFontPath(""),
@@ -2663,8 +2669,6 @@ class FurnaceGUI {
   void drawSysDefs(std::vector<FurnaceGUISysDef>& category, bool& accepted, std::vector<int>& sysDefStack, bool& alreadyHover);
   void printPresets(std::vector<FurnaceGUISysDef>& items, size_t depth, std::vector<int>& depthStack);
   FurnaceGUISysDef* selectPreset(std::vector<FurnaceGUISysDef>& items);
-
-  void printPresets(std::vector<FurnaceGUISysDef>& items, int depth);
 
   void toggleMobileUI(bool enable, bool force=false);
 

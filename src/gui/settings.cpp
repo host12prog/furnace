@@ -614,6 +614,23 @@ void FurnaceGUI::drawSettings() {
         }
         ImGui::Unindent();
 
+#ifdef IS_MOBILE
+        // SUBSECTION VIBRATION
+        CONFIG_SUBSECTION("Vibration");
+
+        if (ImGui::SliderFloat("Strength",&settings.vibrationStrength,0.0f,1.0f)) {
+          if (settings.vibrationStrength<0.0f) settings.vibrationStrength=0.0f;
+          if (settings.vibrationStrength>1.0f) settings.vibrationStrength=1.0f;
+          settingsChanged=true;
+        }
+
+        if (ImGui::SliderInt("Length",&settings.vibrationLength,10,500)) {
+          if (settings.vibrationLength<10) settings.vibrationLength=10;
+          if (settings.vibrationLength>500) settings.vibrationLength=500;
+          settingsChanged=true;
+        }
+#endif
+
         // SUBSECTION FILE
         CONFIG_SUBSECTION(_L("File##sgse"));
 
@@ -3034,6 +3051,15 @@ void FurnaceGUI::drawSettings() {
           ImGui::Unindent();
         }
 
+        bool loadFallbackB=settings.loadFallback;
+        if (ImGui::Checkbox("Load fallback font",&loadFallbackB)) {
+          settings.loadFallback=loadFallbackB;
+          settingsChanged=true;
+        }
+        if (ImGui::IsItemHovered()) {
+          ImGui::SetTooltip("disable to save video memory.");
+        }
+
         bool loadJapaneseB=settings.loadJapanese;
         if (ImGui::Checkbox(_L("Display Japanese characters##sgse"),&loadJapaneseB)) {
           settings.loadJapanese=loadJapaneseB;
@@ -4296,6 +4322,9 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.translate_short_channel_names=conf.getInt("translateShortChanNames",0);
 
     settings.follow_log=conf.getInt("followLog",0);
+
+    settings.vibrationStrength=conf.getFloat("vibrationStrength",0.5f);
+    settings.vibrationLength=conf.getInt("vibrationLength",100);
   }
 
   if (groups&GUI_SETTINGS_AUDIO) {
@@ -4405,6 +4434,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.loadChinese=conf.getInt("loadChinese",0);
     settings.loadChineseTraditional=conf.getInt("loadChineseTraditional",0);
     settings.loadKorean=conf.getInt("loadKorean",0);
+    settings.loadFallback=conf.getInt("loadFallback",1);
 
     settings.fontBackend=conf.getInt("fontBackend",FONT_BACKEND_DEFAULT);
     settings.fontHinting=conf.getInt("fontHinting",0);
@@ -4669,6 +4699,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.loadChinese,0,1);
   clampSetting(settings.loadChineseTraditional,0,1);
   clampSetting(settings.loadKorean,0,1);
+  clampSetting(settings.loadFallback,0,1);
   clampSetting(settings.fmLayout,0,6);
   clampSetting(settings.susPosition,0,1);
   clampSetting(settings.effectCursorDir,0,2);
@@ -4778,6 +4809,8 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.vsync,0,4);
   clampSetting(settings.frameRateLimit,0,1000);
   clampSetting(settings.displayRenderTime,0,1);
+  clampSetting(settings.vibrationStrength,0.0f,1.0f);
+  clampSetting(settings.vibrationLength,10,500);
 
   if (settings.exportLoops<0.0) settings.exportLoops=0.0;
   if (settings.exportFadeOut<0.0) settings.exportFadeOut=0.0;  
@@ -4847,6 +4880,9 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("translateShortChanNames",settings.translate_short_channel_names);
 
     conf.set("followLog",settings.follow_log);
+
+    conf.set("vibrationStrength",settings.vibrationStrength);
+    conf.set("vibrationLength",settings.vibrationLength);
   }
 
   // audio
@@ -4954,6 +4990,7 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("loadChinese",settings.loadChinese);
     conf.set("loadChineseTraditional",settings.loadChineseTraditional);
     conf.set("loadKorean",settings.loadKorean);
+    conf.set("loadFallback",settings.loadFallback);
 
     conf.set("fontBackend",settings.fontBackend);
     conf.set("fontHinting",settings.fontHinting);
@@ -6013,7 +6050,9 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
     }
 
     // two fallback fonts
-    mainFont=addFontZlib(font_liberationSans_compressed_data,font_liberationSans_compressed_size,MAX(1,e->getConfInt("mainFontSize",18)*dpiScale),&fc1,fontRange);
+    if (settings.loadFallback) {
+      mainFont=addFontZlib(font_liberationSans_compressed_data,font_liberationSans_compressed_size,MAX(1,e->getConfInt("mainFontSize",18)*dpiScale),&fc1,fontRange);
+    }
     if (settings.loadJapanese || settings.loadChinese || settings.loadChineseTraditional || settings.loadKorean) {
       mainFont=addFontZlib(font_unifont_compressed_data,font_unifont_compressed_size,MAX(1,e->getConfInt("mainFontSize",18)*dpiScale),&fc1,fontRange);
     }

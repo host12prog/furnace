@@ -22,7 +22,9 @@
 #include "../fileutils.h"
 #include <fmt/printf.h>
 #include "IconsFontAwesome4.h"
+#include "IconsFontAwesome4.h"
 #include <imgui.h>
+#include "misc/cpp/imgui_stdlib.h"
 #include "misc/cpp/imgui_stdlib.h"
 
 // add system configurations here.

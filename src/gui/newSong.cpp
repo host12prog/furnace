@@ -25,6 +25,7 @@
 String sysDefID;
 
 void FurnaceGUI::drawSysDefs(std::vector<FurnaceGUISysDef>& category, bool& accepted, std::vector<int>& sysDefStack, bool& alreadyHover) {
+void FurnaceGUI::drawSysDefs(std::vector<FurnaceGUISysDef>& category, bool& accepted, std::vector<int>& sysDefStack, bool& alreadyHover) {
   int index=0;
   String sysDefIDLeader="##NS";
   for (int i: sysDefStack) {
