@@ -3485,7 +3485,7 @@ void FurnaceGUI::initSystemPresets() {
     }
   );
   ENTRY(
-    "Flizzer Tracker sound source (FZT)", {
+    "Flizzer Tracker (FZT) sound source##sgpr", {
       CH(DIV_SYSTEM_FZT, 1.0f, 0, "")
     }
   );

@@ -358,6 +358,10 @@ const char* snesGainModes[5]={
   "Increase (bent line)##sgistru"
 };
 
+const char* fztShapeBits[]={
+  "noise##sgistru5", "pulse##sgistru5", "triangle##sgistru5", "saw##sgistru5", "metal##sgistru5", "sine##sgistru5", NULL
+};
+
 const char* fztFilterModes[8+1]={
   "Off##sgistru",
   "Lowpass##sgistru",

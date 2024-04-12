@@ -2189,7 +2189,7 @@ void DivEngine::registerSystems() {
   );
 
   sysDefs[DIV_SYSTEM_FZT]=new DivSysDef(
-    "FZT sound source", NULL, 0xf3, 0, 4, false, true, 0, false, 0, 0, 0,
+    "FZT sound source##sesd", NULL, 0xf3, 0, 4, false, true, 0, false, 0, 0, 0,
     "a software synth core by LTVA used in Flizzer Tracker (Flipper Zero chiptune tracker).##sesd",
     {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd"},
     {"1", "2", "3", "4"},
@@ -2225,8 +2225,8 @@ void DivEngine::registerSystems() {
       {0x25, {DIV_CMD_WAVE, "25xx: Restart instrument program##sesd"}},
       {0x26, {DIV_CMD_WAVE, "26xx: Portamento up (semitones)##sesd"}},
       {0x27, {DIV_CMD_WAVE, "27xx: Portamento down (semitones)##sesd"}},
-      {0x28, {DIV_CMD_WAVE, "28xx: Absolute arpeggio note"}},
-      {0x29, {DIV_CMD_WAVE, "29xx: Trigger envelope release"}},
+      {0x28, {DIV_CMD_WAVE, "28xx: Absolute arpeggio note##sesd"}},
+      {0x29, {DIV_CMD_WAVE, "29xx: Trigger envelope release##sesd"}},
     }
   );
 

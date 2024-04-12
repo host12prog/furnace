@@ -73,6 +73,8 @@ void DivPlatformFZT::tracker_engine_trigger_instrument_internal(int chan, DivIns
   te_channel->arpeggio_note = 0;
   te_channel->fixed_note = 0xffff;
 
+  te_channel->pitch_note = 0;
+
   note += (uint16_t)(((int16_t)pinst->fzt.base_note - MIDDLE_C) << 8);
   tracker_engine_set_note(chan, note + (int16_t)pinst->fzt.finetune, true);
 
@@ -265,7 +267,6 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
             if(te_channel->volume > MAX_ADSR_VOLUME) te_channel->volume = MAX_ADSR_VOLUME;
 
             se_channel->adsr.volume = (int32_t)te_channel->volume;
-            se_channel->adsr.volume = (int32_t)se_channel->adsr.volume;
         }
 
         break;
@@ -600,6 +601,7 @@ void DivPlatformFZT::tracker_engine_execute_volume(int vol, int chan)
   if(!(fztChan[chan].channel_flags & TEC_DISABLED)) 
   {
     sound_engine->channel[chan].adsr.volume = (int32_t)fztChan[chan].volume * (int32_t)vol / (MUS_NOTE_VOLUME_NONE);
+    fztChan[chan].fur_volume = vol;
   }
 }
 
@@ -810,7 +812,7 @@ void DivPlatformFZT::tracker_engine_advance_channel(int chan)
         sound_engine->channel[chan].pw = fztChan[chan].pw;
     }
 
-    int32_t chn_note = (int16_t)(te_channel->fixed_note != 0xffff ? te_channel->fixed_note : te_channel->note) + vib + ((int16_t)te_channel->arpeggio_note << 8) + te_channel->finetune_note;
+    int32_t chn_note = (te_channel->fixed_note != 0xffff ? te_channel->fixed_note : te_channel->note) + vib + (te_channel->arpeggio_note * 256) + te_channel->finetune_note + te_channel->pitch_note;
 
     if(chn_note < 0) {
         chn_note = 0;
@@ -893,9 +895,247 @@ void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode, bool do_
   //tracker_engine_advance_channel(chann);
 }
 
-void DivPlatformFZT::tick(bool sysTick) {
-  for (int i=0; i<FZT_NUM_CHANNELS; i++) {
+void DivPlatformFZT::tick(bool sysTick) 
+{
+  for (int i=0; i<FZT_NUM_CHANNELS; i++) 
+  {
     chan[i].std.next();
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had)
+    {
+      sound_engine->channel[i].adsr.volume = (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val & 255) * fztChan[i].fur_volume / MUS_NOTE_VOLUME_NONE;
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->had) 
+    {
+      if(chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val >= 0)
+      {
+        if(chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val & (0x40000000))
+        {
+          fztChan[i].fixed_note = (chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val & ~0x40000000) * 256;
+          fztChan[i].arpeggio_note = 0;
+        }
+        else
+        {
+          fztChan[i].fixed_note = 0xffff;
+          fztChan[i].arpeggio_note = (chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val & ~0x40000000);
+        }
+      }
+      else
+      {
+        if((chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val & (0x40000000)))
+        {
+          fztChan[i].fixed_note = 0xffff;
+          fztChan[i].arpeggio_note = (chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val | 0x40000000);
+        }
+        else
+        {
+          fztChan[i].fixed_note = (chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val) * 256;
+          fztChan[i].arpeggio_note = 0;
+        }
+      }
+
+      if(fztChan[i].fixed_note < 0) fztChan[i].fixed_note = 0;
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) 
+    {
+      if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->mode) 
+      {
+        fztChan[i].note += chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
+        fztChan[i].pitch_note = 0;
+      } 
+      else 
+      {
+        fztChan[i].pitch_note = chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
+      }
+      chan[i].freqChanged=true;
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->had) 
+    {
+      switch (chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->mode) 
+      {
+        case 0: // absolute
+          {
+            fztChan[i].pw = chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->val;
+          }
+          break;
+        case 1: // relative
+          {
+            fztChan[i].pw += chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->val;
+
+            if(fztChan[i].pw < 0) fztChan[i].pw = 0;
+            if(fztChan[i].pw > 0xfff) fztChan[i].pw = 0;
+          }
+          break;
+        default:
+          break;
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) 
+    {
+      sound_engine->channel[i].waveform = chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val & 63;
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) 
+    {
+      switch (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->mode) 
+      {
+        case 0: // absolute
+          {
+            fztChan[i].filter_cutoff = chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val;
+          }
+          break;
+        case 1: // relative
+          {
+            fztChan[i].filter_cutoff += chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val;
+
+            if(fztChan[i].filter_cutoff < 0) fztChan[i].filter_cutoff = 0;
+            if(fztChan[i].filter_cutoff > 0xfff) fztChan[i].filter_cutoff = 0;
+          }
+          break;
+        default:
+          break;
+      }
+
+      sound_engine_filter_set_coeff(&sound_engine->channel[i].filter, fztChan[i].filter_cutoff, fztChan[i].filter_resonance);
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->had) 
+    {
+      fztChan[i].filter_type = chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val & 7;
+      sound_engine->channel[i].filter_mode = chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val & 7;
+      //sound_engine_filter_set_coeff(&sound_engine->channel[i].filter, fztChan[i].filter_cutoff, fztChan[i].filter_resonance);
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->had) 
+    {
+      if(chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->val)
+      {
+        sound_engine->channel[i].flags |= SE_ENABLE_FILTER;
+      }
+      else
+      {
+        sound_engine->channel[i].flags &= ~SE_ENABLE_FILTER;
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX3)->had)
+    {
+      fztChan[i].filter_resonance = chan[i].std.get_div_macro_struct(DIV_MACRO_EX3)->val & 0xff;
+      sound_engine_filter_set_coeff(&sound_engine->channel[i].filter, fztChan[i].filter_cutoff, fztChan[i].filter_resonance);
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->had)
+    {
+      if(chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->val)
+      {
+        sound_engine->channel[i].accumulator = 0;
+        sound_engine->channel[i].lfsr = RANDOM_SEED;
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->had)
+    {
+      if(chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val)
+      {
+        uint8_t prev_vol_tr = fztChan[i].volume;
+        uint8_t prev_vol_cyd = sound_engine->channel[i].adsr.volume;
+        DivInstrument* ins=parent->getIns(chan[i].ins,DIV_INS_FZT);
+        tracker_engine_trigger_instrument_internal(i, ins, fztChan[i].last_note);
+        fztChan[i].volume = prev_vol_tr;
+        sound_engine->channel[i].adsr.volume = prev_vol_cyd;
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX5)->had)
+    {
+      if(chan[i].std.get_div_macro_struct(DIV_MACRO_EX5)->val)
+      {
+        sound_engine->channel[i].flags |= SE_ENABLE_RING_MOD;
+      }
+      else
+      {
+        sound_engine->channel[i].flags &= ~SE_ENABLE_RING_MOD;
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->had)
+    {
+      if(chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->val < FZT_NUM_CHANNELS)
+      {
+        sound_engine->channel[i].ring_mod = chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->val;
+      }
+      else
+      {
+        sound_engine->channel[i].ring_mod = 0xff;
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX7)->had)
+    {
+      if(chan[i].std.get_div_macro_struct(DIV_MACRO_EX7)->val)
+      {
+        sound_engine->channel[i].flags |= SE_ENABLE_HARD_SYNC;
+      }
+      else
+      {
+        sound_engine->channel[i].flags &= ~SE_ENABLE_HARD_SYNC;
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->had)
+    {
+      if(chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->val < FZT_NUM_CHANNELS)
+      {
+        sound_engine->channel[i].hard_sync = chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->val;
+      }
+      else
+      {
+        sound_engine->channel[i].hard_sync = 0xff;
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->had)
+    {
+      sound_engine->channel[i].adsr.a = chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->val & 0xff;
+
+      if(sound_engine->channel[i].adsr.envelope_state == ATTACK) 
+      {
+        sound_engine->channel[i].adsr.envelope_speed =
+            envspd(sound_engine, sound_engine->channel[i].adsr.a);
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX10)->had)
+    {
+      sound_engine->channel[i].adsr.d = chan[i].std.get_div_macro_struct(DIV_MACRO_EX10)->val & 0xff;
+
+      if(sound_engine->channel[i].adsr.envelope_state == DECAY)
+      {
+        sound_engine->channel[i].adsr.envelope_speed =
+            envspd(sound_engine, sound_engine->channel[i].adsr.d);
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX11)->had)
+    {
+      sound_engine->channel[i].adsr.s = chan[i].std.get_div_macro_struct(DIV_MACRO_EX11)->val & 0xff;
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX12)->had)
+    {
+      sound_engine->channel[i].adsr.r = chan[i].std.get_div_macro_struct(DIV_MACRO_EX12)->val & 0xff;
+
+      if(sound_engine->channel[i].adsr.envelope_state == RELEASE)
+      {
+        sound_engine->channel[i].adsr.envelope_speed =
+            envspd(sound_engine, sound_engine->channel[i].adsr.r);
+      }
+    }
+
     tracker_engine_advance_channel(i);
   }
 }
@@ -1110,6 +1350,7 @@ void DivPlatformFZT::reset() {
     chan[i]=DivPlatformFZT::Channel();
     chan[i].std.setEngine(parent);
     memset((void*)&fztChan[i], 0, sizeof(TrackerEngineChannel));
+    fztChan[i].fur_volume = MUS_NOTE_VOLUME_NONE;
   }
 
   sound_engine_init(sound_engine, rate);

@@ -71,6 +71,7 @@ extern const char* dualWSEffects[9];
 extern const char* gbHWSeqCmdTypes[6+1];
 extern const char* suHWSeqCmdTypes[7+1];
 extern const char* snesGainModes[5];
+extern const char* fztShapeBits[];
 extern const char* fztFilterModes[8+1];
 extern const char* fztCmdTypes[];
 extern const int detuneMap[2][8];

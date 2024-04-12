@@ -39,9 +39,9 @@ typedef struct {
 
     unsigned char channel_flags;
 
-    unsigned short note, target_note, last_note, fixed_note;
+    int note, target_note, last_note, fixed_note;
     signed short finetune_note;
-    signed short arpeggio_note;
+    int arpeggio_note;
 
     unsigned char volume;
 
@@ -57,9 +57,13 @@ typedef struct {
 
     unsigned char extarp1, extarp2;
 
-    unsigned short pw;
+    int pw;
 
     unsigned char slide_speed;
+
+    unsigned char fur_volume;
+
+    int pitch_note;
 } TrackerEngineChannel;
 
 class DivPlatformFZT: public DivDispatch {

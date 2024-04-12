@@ -478,6 +478,8 @@ void DivLocale::addTranslationsRussian()
     strings["Export Command Stream##sggu1"].plurals[0] = "Экспорт потока команд";
     strings["text file##sggu1"].plurals[0] = "текстовый файл";
     strings["Export Command Stream##sggu2"].plurals[0] = "Экспорт потока команд";
+    strings["Export FZT module##sggu"].plurals[0] = "Экспорт модуля FZT";
+    strings["FZT module##sggu"].plurals[0] = "Модуль FZT";
     strings["binary file##sggu"].plurals[0] = "бинарный файл";
     strings["Export Furnace song##sggu"].plurals[0] = "Экспорт модуля Furnace";
     strings["Furnace song##sggu2"].plurals[0] = "Модуль Furnace";
@@ -614,6 +616,8 @@ void DivLocale::addTranslationsRussian()
     strings["export Amiga validation data...##sggu0"].plurals[0] = "экспорт проверочного файла для компьютера Amiga...";
     strings["export text...##sggu0"].plurals[0] = "экспорт текста...";
     strings["export command stream...##sggu0"].plurals[0] = "экспорт потока команд...";
+    strings["export FZT module...##sggu"].plurals[0] = "экспорт модуля FZT...";
+    strings["export FZT module...##sggu1"].plurals[0] = "экспорт модуля FZT...";
     strings["export Furnace module...##sggu"].plurals[0] = "экспорт модуля Furnace...";
     strings["export audio...##sggu1"].plurals[0] = "экспорт аудио...";
     strings["export VGM...##sggu1"].plurals[0] = "экспорт VGM...";
@@ -1372,6 +1376,15 @@ void DivLocale::addTranslationsRussian()
             "используйте только при разработке!";
     strings["Cancel##sgeo8"].plurals[0] = "Отмена";
     strings["Export##sgeo"].plurals[0] = "Экспорт";
+    strings["this option exports a Flizzer Tracker module which\n"
+    "is meant to be played back on Flipper Zero with\n"
+    "Flizzer Tracker app installed."].plurals[0] = 
+
+            "эта опция позволяет экспортировать модуль Furnace Tracker'а,\n"
+            "который можно воспроизвести на Flipper Zero с установленным\n"
+            "приложением Flizzer Tracker.";
+    strings["Cancel##sgeo9"].plurals[0] = "Отмена";
+    strings["Export##sgeo9"].plurals[0] = "Экспорт";
     strings["this option exports a module which is\n"
             "compatible with tildearrow Furnace app.\n\n"
 
@@ -1895,6 +1908,7 @@ void DivLocale::addTranslationsRussian()
     strings["Modern/fantasy##sgpr"].plurals[0] = "Совр./вымышл.";
     strings["chips/systems which do not exist in reality or were made just several years ago.##sgpr"].plurals[0] = "чипы/системы, не имеющие физического воплощения или сделанные всего несколько лет назад.";
     strings["Commander X16 (VERA only)##sgpr1"].plurals[0] = "Commander X16 (только VERA)";
+    strings["Flizzer Tracker (FZT) sound source##sgpr"].plurals[0] = "Источник звука Flizzer Tracker (FZT)";
     strings["DefleMask-compatible##sgpr"].plurals[0] = "Совместимые с DefleMask";
     strings["these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"].plurals[0] = "эти пресеты совместимы с DefleMask.\nвыбирайте их, если вам будет нужно будет экспортировать модуль в .dmf или работать с этой программой.";
     strings["Sega Genesis (extended channel 3)##sgpr1"].plurals[0] = "Sega Genesis (расширенный 3-ий канал)";
@@ -3799,6 +3813,96 @@ void DivLocale::addTranslationsRussian()
     strings["(swapping)##sgifmeh"].plurals[0] = "(замена)";
     strings["- drag to swap operator\n- shift-drag to copy operator##sgifmeh"].plurals[0] = "- перетащите, чтобы поменять настройки операторов местами\n- перетащите с зажатой клавишей SHIFT, чтобы скопировать настройки оператора";
 
+    //   sgiFZT    src/gui/inst/fzt.cpp
+
+    strings["Base note##sgiFZT"].plurals[0] = "Базовая нота";
+    strings["Finetune##sgiFZT"].plurals[0] = "Расстройка";
+    strings["Slide speed##sgiFZT"].plurals[0] = "Скорость слайда";
+    strings["Set PW##sgiFZT"].plurals[0] = "Уст. скважн.";
+    strings["Set pulse width on keydown##sgiFZT"].plurals[0] = "Установить скважность на новой ноте";
+    strings["Initial pulse width##sgiFZT"].plurals[0] = "Начальна скважность";
+    strings["Set cutoff##sgiFZT"].plurals[0] = "Устан. част. среза";
+    strings["Set filter cutoff on keydown##sgiFZT"].plurals[0] = "Установить частоту среза фильтра на новой ноте";
+    strings["Waveform##sgiFZT"].plurals[0] = "Волна";
+    strings["noise##sgiFZT"].plurals[0] = "шум";
+    strings["pulse##sgiFZT"].plurals[0] = "прямоуг.";
+    strings["triangle##sgiFZT"].plurals[0] = "треуг.";
+    strings["saw##sgiFZT"].plurals[0] = "пила";
+    strings["metal##sgiFZT"].plurals[0] = "\"металл.\"";
+    strings["sine##sgiFZT"].plurals[0] = "синус";
+    strings["Enable filter##sgiFZT"].plurals[0] = "Включить фильтр";
+    strings["Cutoff##sgiFZT"].plurals[0] = "Частота среза";
+    strings["Resonance##sgiFZT"].plurals[0] = "Резонанс";
+    strings["Type##sgiFZT"].plurals[0] = "Тип";
+    strings["Enable ring modulation##sgiFZT"].plurals[0] = "Включить кольцевую модуляцию";
+    strings["Ring mod source##sgiFZT"].plurals[0] = "Источник кольцевой модуляции";
+    strings["FF = self-modulation##sgiFZT"].plurals[0] = "FF = самомодуляция";
+    strings["Enable hard sync##sgiFZT"].plurals[0] = "Включить синхронизацию осцилляторов";
+    strings["Hard sync source##sgiFZT"].plurals[0] = "Источник синхронизации";
+    strings["FF = self-sync##sgiFZT"].plurals[0] = "FF = самосинхронизация";
+    strings["Retrigger on slide##sgiFZT"].plurals[0] = "Перезапуск на слайде";
+    strings["Restart instrument and envelope even if slide command (03xx) is placed with the note.##sgiFZT"].plurals[0] = "Перезапустить инструмент и огибающую, даже если у ноты стоит эффект слайда (03xx).";
+    strings["Sync osc. on keydown##sgiFZT"].plurals[0] = "Сихнр. осц. на новой ноте";
+    strings["Reset phase of oscillator each time new note is played.\nDoes not happen when slide (03xx) or legato command is placed.##sgiFZT"].plurals[0] = "Сбросить фазу осциллятора на каждой новой ноте.\nНе выполняется при наличии команды слайда (03xx) или легато.";
+    strings["Vibrato##sgiFZT"].plurals[0] = "Вибрато";
+    strings["Speed##sgiFZT0"].plurals[0] = "Скорость";
+    strings["Depth##sgiFZT0"].plurals[0] = "Глубина";
+    strings["Delay##sgiFZT0"].plurals[0] = "Задержка";
+    strings["PWM##sgiFZT"].plurals[0] = "ШИМ";
+    strings["Speed##sgiFZT1"].plurals[0] = "Скорость";
+    strings["Depth##sgiFZT1"].plurals[0] = "Глубина";
+    strings["Delay##sgiFZT1"].plurals[0] = "Задержка";
+    strings["A##sgiFZT"].plurals[0] = "А";
+    strings["D##sgiFZT"].plurals[0] = "С";
+    strings["S##sgiFZT"].plurals[0] = "С";
+    strings["R##sgiFZT"].plurals[0] = "Р";
+    strings["VOL##sgiFZT"].plurals[0] = "ГР";
+    strings["Envelope##sgiFZT"].plurals[0] = "Огибающая";
+    strings["Instrument program##sgiFZT"].plurals[0] = "Программа инструмента";
+    strings["Program period##sgiFZT22"].plurals[0] = "Период программы";
+    strings["Do not restart instrument program on keydown##sgiFZT"].plurals[0] = "Не перезапускать программу инструмента на новой ноте";
+    strings["Tick##sgiFZT"].plurals[0] = "Шаг";
+    strings["Command##sgiFZT"].plurals[0] = "Команда";
+    strings["Move/Remove##sgiFZT"].plurals[0] = "Перем./Удал.";
+    strings["Unite##sgiFZT"].plurals[0] = "Объед.";
+    strings["Value##sgiFZT"].plurals[0] = "Значение";
+    strings["Semitones##sgiFZT"].plurals[0] = "Полутонов";
+    strings["First external arpeggio note##sgiFZT"].plurals[0] = "Первая внешняя нота арпеджио";
+    strings["Second external arpeggio note##sgiFZT1"].plurals[0] = "Вторая внешняя нота арпеджио";
+    strings["Speed##sgiFZT2"].plurals[0] = "Скорость";
+    strings["Depth##sgiFZT11"].plurals[0] = "Глубина";
+    strings["Value##sgiFZT"].plurals[0] = "Значение";
+    strings["Up##sgiFZT2"].plurals[0] = "Вверх";
+    strings["Down##sgiFZT11"].plurals[0] = "Вниз";
+    strings["Source channel##sgiFZT"].plurals[0] = "Канал-источник";
+    strings["Source is self##sgiFZT"].plurals[0] = "Текущий канал является источником";
+    strings["Loops##sgiFZT"].plurals[0] = "Циклов";
+    strings["Step to jump to##sgiFZT"].plurals[0] = "Шаг программы, на который совершается переход";
+    strings["No operation##sgiFZT"].plurals[0] = "Ничего не делать";
+    strings["Program end##sgiFZT"].plurals[0] = "Конец программы";
+    strings["Execute next command at the same tick##sgiFZT"].plurals[0] = "Выполнить следующую команду в этом же шаге";
+    strings["Macros##sgiFZT"].plurals[0] = "Макросы";
+    strings["Warning! Macros are NOT supported by FZT file format! Do not use them if you want to export .fzt file!##sgiFZT"].plurals[0] = "Внимание! Макросы НЕ ПОДДЕРЖИВАЮТСЯ форматом файла FZT! Не используйте их, если хотите экспортировать модуль в файл .fzt!";
+    strings["Volume##sgiFZT"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiFZT"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiFZT"].plurals[0] = "Частота";
+    strings["Duty##sgiFZT"].plurals[0] = "Скважность";
+    strings["Waveform##sgiFZT"].plurals[0] = "Волна";
+    strings["Cutoff##sgiFZT"].plurals[0] = "Частота среза";
+    strings["Filter Mode##sgiFZT"].plurals[0] = "Режим фильтра";
+    strings["Filter Toggle##sgiFZT"].plurals[0] = "Фильтр вкл./выкл.";
+    strings["Resonance##sgiFZT"].plurals[0] = "Резонанс";
+    strings["Phase Reset##sgiFZT"].plurals[0] = "Сброс фазы";
+    strings["Envelope Reset/Key Control##sgiFZT"].plurals[0] = "Упр. огибающей";
+    strings["Ring mod toggle##sgiFZT"].plurals[0] = "Кольц. мод. вкл./выкл.";
+    strings["Ring mod source##sgiFZT"].plurals[0] = "Источник кольц. мод.";
+    strings["Hard sync toggle##sgiFZT"].plurals[0] = "Синхр. осц. вкл./выкл.";
+    strings["Hard sync source##sgiFZT"].plurals[0] = "Источник синхр. осц.";
+    strings["Attack##sgiFZT"].plurals[0] = "Атака";
+    strings["Decay##sgiFZT"].plurals[0] = "Спад";
+    strings["Sustain##sgiFZT"].plurals[0] = "Сустейн";
+    strings["Release##sgiFZT"].plurals[0] = "Релиз";
+
     //   sgiGA20   src/gui/inst/ga20.cpp
 
     strings["Macros##sgiGA20"].plurals[0] = "Макросы";
@@ -4769,6 +4873,67 @@ void DivLocale::addTranslationsRussian()
     strings["Decrease (logarithmic)##sgistru"].plurals[0] = "Уменьш. (логарифмическое)";
     strings["Increase (linear)##sgistru"].plurals[0] = "Увелич. (линейное)";
     strings["Increase (bent line)##sgistru"].plurals[0] = "Увелич. (изогн. линия)";
+
+    strings["noise##sgistru5"].plurals[0] = "шум";
+    strings["pulse##sgistru5"].plurals[0] = "прямоуг.";
+    strings["triangle##sgistru5"].plurals[0] = "треуг.";
+    strings["saw##sgistru5"].plurals[0] = "пила";
+    strings["metal##sgistru5"].plurals[0] = "\"металл.\"";
+    strings["sine##sgistru5"].plurals[0] = "синус";
+
+    strings["Off##sgistru"].plurals[0] = "Выкл.";
+    strings["Lowpass##sgistru"].plurals[0] = "ФНЧ";
+    strings["Highpass##sgistru"].plurals[0] = "ФВЧ";
+    strings["Bandpass##sgistru"].plurals[0] = "ППФ";
+    strings["Low + High##sgistru"].plurals[0] = "ФНЧ + ФВЧ";
+    strings["High + Band##sgistru"].plurals[0] = "ФВЧ + ППФ";
+    strings["Low + Band##sgistru"].plurals[0] = "ФНЧ + ППФ";
+    strings["Low + High + Band##sgistru"].plurals[0] = "ФНЧ + ФВЧ + ППФ";
+
+    strings["Arpeggio##sgistru"].plurals[0] = "Арпеджио";
+    strings["Portamento up##sgistru"].plurals[0] = "Портаменто вверх";
+    strings["Portamento down##sgistru"].plurals[0] = "Портаменто вниз";
+    strings["Vibrato##sgistru1"].plurals[0] = "Вибрато";
+    strings["PWM##sgistru"].plurals[0] = "ШИМ";
+    strings["Set pulse width##sgistru"].plurals[0] = "Скважность";
+    strings["Pulse width down##sgistru"].plurals[0] = "Скважность вниз";
+    strings["Pulse width up##sgistru"].plurals[0] = "Скважность вверх";
+    strings["Set filter cutoff##sgistru"].plurals[0] = "Частота среза";
+    strings["Volume fade##sgistru"].plurals[0] = "Изменение громкости";
+    strings["Set waveform##sgistru"].plurals[0] = "Волна";
+    strings["Set volume##sgistru"].plurals[0] = "Громкость";
+    strings["Toggle filter##sgistru"].plurals[0] = "Вкл./выкл. фильтр";
+    strings["Fine portamento up##sgistru"].plurals[0] = "Точное портаменто вверх";
+    strings["Fine portamento down##sgistru"].plurals[0] = "Точное портаменто вниз";
+    strings["Filter mode##sgistru"].plurals[0] = "Режим фильтра";
+    strings["Retrigger##sgistru"].plurals[0] = "Циклич. перезапуск";
+    strings["Fine volume down##sgistru"].plurals[0] = "Точное изменение громкости вниз";
+    strings["Fine volume up##sgistru"].plurals[0] = "Точное изменение громкости вверх";
+    strings["Note cut##sgistru"].plurals[0] = "Заглушить ноту";
+    strings["Phase reset##sgistru"].plurals[0] = "Сброс фазы";
+    strings["Program period##sgistru"].plurals[0] = "Период программы";
+    strings["Filter cutoff up##sgistru"].plurals[0] = "Частота среза вверх";
+    strings["Filter cutoff down##sgistru"].plurals[0] = "Частота среза вниз";
+    strings["Set filter resonance##sgistru"].plurals[0] = "Резонанс";
+    strings["Filter resonance up##sgistru"].plurals[0] = "Резонанс вверх";
+    strings["Filter resonance down##sgistru"].plurals[0] = "Резонанс вниз";
+    strings["Set attack##sgistru"].plurals[0] = "Атака";
+    strings["Set decay##sgistru"].plurals[0] = "Спад";
+    strings["Set sustain##sgistru"].plurals[0] = "Сустейн";
+    strings["Set release##sgistru"].plurals[0] = "Релиз";
+    strings["Ring modulation source##sgistru"].plurals[0] = "Источник кольцевой модуляции";
+    strings["Hard sync source##sgistru"].plurals[0] = "Источник синхронизации осцилляторов";
+    strings["Portamento up (semitones)##sgistru"].plurals[0] = "Портаменто вверх (прлутонов)";
+    strings["Portamento down (semitones)##sgistru"].plurals[0] = "Портаменто вниз (полутонов)";
+    strings["Detune##sgistru"].plurals[0] = "Расстройка";
+    strings["Absolute arpeggio note##sgistru"].plurals[0] = "Абсолютная нота арпеджио";
+    strings["Trigger release##sgistru"].plurals[0] = "Релиз";
+    strings["Loop begin##sgistru"].plurals[0] = "Начало цикла";
+    strings["Loop end##sgistru"].plurals[0] = "Конец цикла";
+    strings["Jump##sgistru"].plurals[0] = "Переход на шаг";
+    strings["NOP##sgistru"].plurals[0] = "Ничего не делать";
+    strings["Program end##sgistru"].plurals[0] = "Конец программы";
+
     strings["Fixed##sgistru2"].plurals[0] = "Абсолютное";
     strings["Relative##sgistru"].plurals[0] = "Относительное";
     strings["QSound##sgistru"].plurals[0] = "QSound";
@@ -5713,6 +5878,34 @@ void DivLocale::addTranslationsRussian()
     strings["a handheld video game console with two screens. it uses a stylus.##sesd"].plurals[0] = "портативная игровая консоль с двумя экранами. необходим стилус.";
     strings["12xx: Set duty cycle (pulse: 0 to 7)##sesd"].plurals[0] = "12xx: Скважность (прямоуг.: 0-7)";
     strings["1Fxx: Set global volume (0 to 7F)##sesd"].plurals[0] = "1Fxx: Глобальная громкость (0-7F)";
+    strings["FZT sound source##sesd"].plurals[0] = "Источник звука FZT";
+    strings["a software synth core by LTVA used in Flizzer Tracker (Flipper Zero chiptune tracker).##sesd"].plurals[0] = "ядро программного синтеза за авторством LTVA, используемое в программе Flizzer Tracker (чиптюн-трекер для Flipper Zero).";
+    strings["10xx: Set wave (bits: 0: noise, 1: pulse, 2: triangle, 3: sawtooth, 4: metallic noise, 5: sine)##sesd"].plurals[0] = "10xx: Волна (биты: 0: шум, 1: прямоуг., 2: треуг., 3: пила, 4: \"металлический\" шум, 5: синус)";
+    strings["11xy: PWM (pulsolo) with speed x and depth y##sesd"].plurals[0] = "11xy: ШИМ (пульсоло) со скоростью x и глубиной y";
+    strings["12xx: Set pulse width##sesd"].plurals[0] = "12xx: Скважность";
+    strings["13xx: Pulse width up##sesd"].plurals[0] = "13xx: Изменение скважности вверх";
+    strings["14xx: Pulse width down##sesd"].plurals[0] = "14xx: Изменение скважности вниз";
+    strings["15xx: Set filter cutoff##sesd"].plurals[0] = "15xx: Частота среза фильтра";
+    strings["16xx: Set volume##sesd"].plurals[0] = "16xx: Громкость";
+    strings["17xx: Toggle filter##sesd"].plurals[0] = "=17xx: Вкл./выкл. фильтр";
+    strings["18xx: Set filter mode##sesd"].plurals[0] = "18xx: Режим фильтра";
+    strings["19xx: Phase reset##sesd"].plurals[0] = "19xx: Сброс фазы";
+    strings["1Axx: Filter cutoff up##sesd"].plurals[0] = "1Axx: Частота среза вверх";
+    strings["1Bxx: Filter cutoff down##sesd"].plurals[0] = "1Bxx: Частота среза вниз";
+    strings["1Cxx: Set filter resonance##sesd"].plurals[0] = "1Cxx: Резонанс фильтра";
+    strings["1Dxx: Filter resonance up##sesd"].plurals[0] = "1Dxx: Резонанс вверх";
+    strings["1Exx: Filter resonance down##sesd"].plurals[0] = "1Exx: Резонанс вниз";
+    strings["1Fxx: Ring mod source (FF = self)##sesd"].plurals[0] = "1Fxx: Источник кольцевой модуляции (FF = самомодуляция)";
+    strings["20xx: Hard sync source (FF = self)##sesd"].plurals[0] = "20xx: Источник синхронизации осцилляторов (FF = самосинхронизация)";
+    strings["21xx: Set attack speed##sesd"].plurals[0] = "21xx: Скорость атаки";
+    strings["22xx: Set decay speed##sesd"].plurals[0] = "22xx: Скорость спада";
+    strings["23xx: Set sustain level##sesd"].plurals[0] = "23xx: Уровень сустейна";
+    strings["24xx: Set release rate##sesd"].plurals[0] = "24xx: Скорость релиза";
+    strings["25xx: Restart instrument program##sesd"].plurals[0] = "25xx: Перезапустить программу инструмента";
+    strings["26xx: Portamento up (semitones)##sesd"].plurals[0] = "26xx: Портаменто вверх (полутонов)";
+    strings["27xx: Portamento down (semitones)##sesd"].plurals[0] = "27xx: Портаменто вниз (полутонов)";
+    strings["28xx: Absolute arpeggio note##sesd"].plurals[0] = "28xx: Абсолютная нота арпеджио";
+    strings["29xx: Trigger envelope release##sesd"].plurals[0] = "29xx: Релиз огибающей";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "это система, разработанная для тестирования.";
 
     strings["help! what's going on!"].plurals[0] = "помогите! что происходит!";

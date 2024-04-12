@@ -538,6 +538,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Export Command Stream##sggu1"].plurals[0] = "=Export Command Stream";
     strings["text file##sggu1"].plurals[0] = "=text file";
     strings["Export Command Stream##sggu2"].plurals[0] = "=Export Command Stream";
+    strings["Export FZT module##sggu"].plurals[0] = "=Export FZT module";
+    strings["FZT module##sggu"].plurals[0] = "=FZT module";
     strings["binary file##sggu"].plurals[0] = "=binary file";
     strings["Export Furnace song##sggu"].plurals[0] = "=Export Furnace song";
     strings["Furnace song##sggu2"].plurals[0] = "=Furnace song";
@@ -674,6 +676,8 @@ void DivLocale::addTranslationsTemplate()
     strings["export Amiga validation data...##sggu0"].plurals[0] = "=export Amiga validation data...";
     strings["export text...##sggu0"].plurals[0] = "=export text...";
     strings["export command stream...##sggu0"].plurals[0] = "=export command stream...";
+    strings["export FZT module...##sggu"].plurals[0] = "=export FZT module...";
+    strings["export FZT module...##sggu1"].plurals[0] = "=export FZT module...";
     strings["export Furnace module...##sggu"].plurals[0] = "=export Furnace module...";
     strings["export audio...##sggu1"].plurals[0] = "=export audio...";
     strings["export VGM...##sggu1"].plurals[0] = "=export VGM...";
@@ -1430,6 +1434,15 @@ void DivLocale::addTranslationsTemplate()
             "=technical/development use only!";
     strings["Cancel##sgeo8"].plurals[0] = "=Cancel";
     strings["Export##sgeo"].plurals[0] = "=Export";
+    strings["this option exports a Flizzer Tracker module which\n"
+    "is meant to be played back on Flipper Zero with\n"
+    "Flizzer Tracker app installed."].plurals[0] = 
+
+            "=this option exports a Flizzer Tracker module which\n"
+            "=is meant to be played back on Flipper Zero with\n"
+            "=Flizzer Tracker app installed.";
+    strings["Cancel##sgeo9"].plurals[0] = "=Cancel";
+    strings["Export##sgeo9"].plurals[0] = "=Export";
     strings["this option exports a module which is\n"
             "compatible with tildearrow Furnace app.\n\n"
 
@@ -1954,6 +1967,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Modern/fantasy##sgpr"].plurals[0] = "=Modern/fantasy";
     strings["chips/systems which do not exist in reality or were made just several years ago.##sgpr"].plurals[0] = "=chips/systems which do not exist in reality or were made just several years ago.";
     strings["Commander X16 (VERA only)##sgpr1"].plurals[0] = "=Commander X16 (VERA only)";
+    strings["Flizzer Tracker (FZT) sound source##sgpr"].plurals[0] = "=Flizzer Tracker (FZT) sound source";
     strings["DefleMask-compatible##sgpr"].plurals[0] = "=DefleMask-compatible";
     strings["these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"].plurals[0] = "=these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.";
     strings["Sega Genesis (extended channel 3)##sgpr1"].plurals[0] = "=Sega Genesis (extended channel 3)";
@@ -3570,6 +3584,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgiFDS    src/gui/inst/fds.cpp
     //   sgifmeu   src/gui/inst/fmEnvUtil.cpp
     //   sgifmeh   src/gui/inst/fmEnvUtil.h
+    //   sgiFZT    src/gui/inst/fzt.cpp
     //   sgiGA20   src/gui/inst/ga20.cpp
     //   sgiGB     src/gui/inst/gb.cpp
     //   sgiGBADMA src/gui/inst/gbadma.cpp
@@ -3624,7 +3639,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgiX1     src/gui/inst/x1_010.cpp
     //   sgiYMZ    src/gui/inst/ymz280b.cpp
 
-    //   sgiPCMA  src/gui/inst/adpcma.cpp
+    //   sgiPCMA   src/gui/inst/adpcma.cpp
 
     strings["Macros##sgiPCMA"].plurals[0] = "=Macros";
     strings["Volume##sgiPCMA"].plurals[0] = "=Volume";
@@ -3905,6 +3920,96 @@ void DivLocale::addTranslationsTemplate()
     strings["(copying)##sgifmeh"].plurals[0] = "=(copying)";
     strings["(swapping)##sgifmeh"].plurals[0] = "=(swapping)";
     strings["- drag to swap operator\n- shift-drag to copy operator##sgifmeh"].plurals[0] = "=- drag to swap operator\n- shift-drag to copy operator";
+
+    //   sgiFZT    src/gui/inst/fzt.cpp
+
+    strings["Base note##sgiFZT"].plurals[0] = "=Base note";
+    strings["Finetune##sgiFZT"].plurals[0] = "=Finetune";
+    strings["Slide speed##sgiFZT"].plurals[0] = "=Slide speed";
+    strings["Set PW##sgiFZT"].plurals[0] = "=Set PW";
+    strings["Set pulse width on keydown##sgiFZT"].plurals[0] = "=Set pulse width on keydown";
+    strings["Initial pulse width##sgiFZT"].plurals[0] = "=Initial pulse width";
+    strings["Set cutoff##sgiFZT"].plurals[0] = "=Set cutoff";
+    strings["Set filter cutoff on keydown##sgiFZT"].plurals[0] = "=Set filter cutoff on keydown";
+    strings["Waveform##sgiFZT"].plurals[0] = "=Waveform";
+    strings["noise##sgiFZT"].plurals[0] = "=noise";
+    strings["pulse##sgiFZT"].plurals[0] = "=pulse";
+    strings["triangle##sgiFZT"].plurals[0] = "=triangle";
+    strings["saw##sgiFZT"].plurals[0] = "=saw";
+    strings["metal##sgiFZT"].plurals[0] = "=metal";
+    strings["sine##sgiFZT"].plurals[0] = "=sine";
+    strings["Enable filter##sgiFZT"].plurals[0] = "=Enable filter";
+    strings["Cutoff##sgiFZT"].plurals[0] = "=Cutoff";
+    strings["Resonance##sgiFZT"].plurals[0] = "=Resonance";
+    strings["Type##sgiFZT"].plurals[0] = "=Type";
+    strings["Enable ring modulation##sgiFZT"].plurals[0] = "=Enable ring modulation";
+    strings["Ring mod source##sgiFZT"].plurals[0] = "=Ring mod source";
+    strings["FF = self-modulation##sgiFZT"].plurals[0] = "=FF = self-modulation";
+    strings["Enable hard sync##sgiFZT"].plurals[0] = "=Enable hard sync";
+    strings["Hard sync source##sgiFZT"].plurals[0] = "=Hard sync source";
+    strings["FF = self-sync##sgiFZT"].plurals[0] = "=FF = self-sync";
+    strings["Retrigger on slide##sgiFZT"].plurals[0] = "=Retrigger on slide";
+    strings["Restart instrument and envelope even if slide command (03xx) is placed with the note.##sgiFZT"].plurals[0] = "=Restart instrument and envelope even if slide command (03xx) is placed with the note.";
+    strings["Sync osc. on keydown##sgiFZT"].plurals[0] = "=Sync osc. on keydown";
+    strings["Reset phase of oscillator each time new note is played.\nDoes not happen when slide (03xx) or legato command is placed.##sgiFZT"].plurals[0] = "=Reset phase of oscillator each time new note is played.\nDoes not happen when slide (03xx) or legato command is placed.";
+    strings["Vibrato##sgiFZT"].plurals[0] = "=Vibrato";
+    strings["Speed##sgiFZT0"].plurals[0] = "=Speed";
+    strings["Depth##sgiFZT0"].plurals[0] = "=Depth";
+    strings["Delay##sgiFZT0"].plurals[0] = "=Delay";
+    strings["PWM##sgiFZT"].plurals[0] = "=PWM";
+    strings["Speed##sgiFZT1"].plurals[0] = "=Speed";
+    strings["Depth##sgiFZT1"].plurals[0] = "=Depth";
+    strings["Delay##sgiFZT1"].plurals[0] = "=Delay";
+    strings["A##sgiFZT"].plurals[0] = "=A";
+    strings["D##sgiFZT"].plurals[0] = "=D";
+    strings["S##sgiFZT"].plurals[0] = "=S";
+    strings["R##sgiFZT"].plurals[0] = "=R";
+    strings["VOL##sgiFZT"].plurals[0] = "=VOL";
+    strings["Envelope##sgiFZT"].plurals[0] = "=Envelope";
+    strings["Instrument program##sgiFZT"].plurals[0] = "=Instrument program";
+    strings["Program period##sgiFZT22"].plurals[0] = "=Program period";
+    strings["Do not restart instrument program on keydown##sgiFZT"].plurals[0] = "=Do not restart instrument program on keydown";
+    strings["Tick##sgiFZT"].plurals[0] = "=Tick";
+    strings["Command##sgiFZT"].plurals[0] = "=Command";
+    strings["Move/Remove##sgiFZT"].plurals[0] = "=Move/Remove";
+    strings["Unite##sgiFZT"].plurals[0] = "=Unite";
+    strings["Value##sgiFZT"].plurals[0] = "=Value";
+    strings["Semitones##sgiFZT"].plurals[0] = "=Semitones";
+    strings["First external arpeggio note##sgiFZT"].plurals[0] = "=First external arpeggio note";
+    strings["Second external arpeggio note##sgiFZT1"].plurals[0] = "=Second external arpeggio note";
+    strings["Speed##sgiFZT2"].plurals[0] = "=Speed";
+    strings["Depth##sgiFZT11"].plurals[0] = "=Depth";
+    strings["Value##sgiFZT"].plurals[0] = "=Value";
+    strings["Up##sgiFZT2"].plurals[0] = "=Up";
+    strings["Down##sgiFZT11"].plurals[0] = "=Down";
+    strings["Source channel##sgiFZT"].plurals[0] = "=Source channel";
+    strings["Source is self##sgiFZT"].plurals[0] = "=Source is self";
+    strings["Loops##sgiFZT"].plurals[0] = "=Loops";
+    strings["Step to jump to##sgiFZT"].plurals[0] = "=Step to jump to";
+    strings["No operation##sgiFZT"].plurals[0] = "=No operation";
+    strings["Program end##sgiFZT"].plurals[0] = "=Program end";
+    strings["Execute next command at the same tick##sgiFZT"].plurals[0] = "=Execute next command at the same tick";
+    strings["Macros##sgiFZT"].plurals[0] = "=Macros";
+    strings["Warning! Macros are NOT supported by FZT file format! Do not use them if you want to export .fzt file!##sgiFZT"].plurals[0] = "=Warning! Macros are NOT supported by FZT file format! Do not use them if you want to export .fzt file!";
+    strings["Volume##sgiFZT"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiFZT"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiFZT"].plurals[0] = "=Pitch";
+    strings["Duty##sgiFZT"].plurals[0] = "=Duty";
+    strings["Waveform##sgiFZT"].plurals[0] = "=Waveform";
+    strings["Cutoff##sgiFZT"].plurals[0] = "=Cutoff";
+    strings["Filter Mode##sgiFZT"].plurals[0] = "=Filter Mode";
+    strings["Filter Toggle##sgiFZT"].plurals[0] = "=Filter Toggle";
+    strings["Resonance##sgiFZT"].plurals[0] = "=Resonance";
+    strings["Phase Reset##sgiFZT"].plurals[0] = "=Phase Reset";
+    strings["Envelope Reset/Key Control##sgiFZT"].plurals[0] = "=Envelope Reset/Key Control";
+    strings["Ring mod toggle##sgiFZT"].plurals[0] = "=Ring mod toggle";
+    strings["Ring mod source##sgiFZT"].plurals[0] = "=Ring mod source";
+    strings["Hard sync toggle##sgiFZT"].plurals[0] = "=Hard sync toggle";
+    strings["Hard sync source##sgiFZT"].plurals[0] = "=Hard sync source";
+    strings["Attack##sgiFZT"].plurals[0] = "=Attack";
+    strings["Decay##sgiFZT"].plurals[0] = "=Decay";
+    strings["Sustain##sgiFZT"].plurals[0] = "=Sustain";
+    strings["Release##sgiFZT"].plurals[0] = "=Release";
 
     //   sgiGA20   src/gui/inst/ga20.cpp
 
@@ -4876,6 +4981,67 @@ void DivLocale::addTranslationsTemplate()
     strings["Decrease (logarithmic)##sgistru"].plurals[0] = "=Decrease (logarithmic)";
     strings["Increase (linear)##sgistru"].plurals[0] = "=Increase (linear)";
     strings["Increase (bent line)##sgistru"].plurals[0] = "=Increase (bent line)";
+
+    strings["noise##sgistru5"].plurals[0] = "=noise";
+    strings["pulse##sgistru5"].plurals[0] = "=pulse";
+    strings["triangle##sgistru5"].plurals[0] = "=triangle";
+    strings["saw##sgistru5"].plurals[0] = "=saw";
+    strings["metal##sgistru5"].plurals[0] = "=metal";
+    strings["sine##sgistru5"].plurals[0] = "=sine";
+
+    strings["Off##sgistru"].plurals[0] = "=Off";
+    strings["Lowpass##sgistru"].plurals[0] = "=Lowpass";
+    strings["Highpass##sgistru"].plurals[0] = "=Highpass";
+    strings["Bandpass##sgistru"].plurals[0] = "=Bandpass";
+    strings["Low + High##sgistru"].plurals[0] = "=Low + High";
+    strings["High + Band##sgistru"].plurals[0] = "=High + Band";
+    strings["Low + Band##sgistru"].plurals[0] = "=Low + Band";
+    strings["Low + High + Band##sgistru"].plurals[0] = "=Low + High + Band";
+
+    strings["Arpeggio##sgistru"].plurals[0] = "=Arpeggio";
+    strings["Portamento up##sgistru"].plurals[0] = "=Portamento up";
+    strings["Portamento down##sgistru"].plurals[0] = "=Portamento down";
+    strings["Vibrato##sgistru1"].plurals[0] = "=Vibrato";
+    strings["PWM##sgistru"].plurals[0] = "=PWM";
+    strings["Set pulse width##sgistru"].plurals[0] = "=Set pulse width";
+    strings["Pulse width down##sgistru"].plurals[0] = "=Pulse width down";
+    strings["Pulse width up##sgistru"].plurals[0] = "=Pulse width up";
+    strings["Set filter cutoff##sgistru"].plurals[0] = "=Set filter cutoff";
+    strings["Volume fade##sgistru"].plurals[0] = "=Volume fade";
+    strings["Set waveform##sgistru"].plurals[0] = "=Set waveform";
+    strings["Set volume##sgistru"].plurals[0] = "=Set volume";
+    strings["Toggle filter##sgistru"].plurals[0] = "=Toggle filter";
+    strings["Fine portamento up##sgistru"].plurals[0] = "=Fine portamento up";
+    strings["Fine portamento down##sgistru"].plurals[0] = "=Fine portamento down";
+    strings["Filter mode##sgistru"].plurals[0] = "=Filter mode";
+    strings["Retrigger##sgistru"].plurals[0] = "=Retrigger";
+    strings["Fine volume down##sgistru"].plurals[0] = "=Fine volume down";
+    strings["Fine volume up##sgistru"].plurals[0] = "=Fine volume up";
+    strings["Note cut##sgistru"].plurals[0] = "=Note cut";
+    strings["Phase reset##sgistru"].plurals[0] = "=Phase reset";
+    strings["Program period##sgistru"].plurals[0] = "=Program period";
+    strings["Filter cutoff up##sgistru"].plurals[0] = "=Filter cutoff up";
+    strings["Filter cutoff down##sgistru"].plurals[0] = "=Filter cutoff down";
+    strings["Set filter resonance##sgistru"].plurals[0] = "=Set filter resonance";
+    strings["Filter resonance up##sgistru"].plurals[0] = "=Filter resonance up";
+    strings["Filter resonance down##sgistru"].plurals[0] = "=Filter resonance down";
+    strings["Set attack##sgistru"].plurals[0] = "=Set attack";
+    strings["Set decay##sgistru"].plurals[0] = "=Set decay";
+    strings["Set sustain##sgistru"].plurals[0] = "=Set sustain";
+    strings["Set release##sgistru"].plurals[0] = "=Set release";
+    strings["Ring modulation source##sgistru"].plurals[0] = "=Ring modulation source";
+    strings["Hard sync source##sgistru"].plurals[0] = "=Hard sync source";
+    strings["Portamento up (semitones)##sgistru"].plurals[0] = "=Portamento up (semitones)";
+    strings["Portamento down (semitones)##sgistru"].plurals[0] = "=Portamento down (semitones)";
+    strings["Detune##sgistru"].plurals[0] = "=Detune";
+    strings["Absolute arpeggio note##sgistru"].plurals[0] = "=Absolute arpeggio note";
+    strings["Trigger release##sgistru"].plurals[0] = "=Trigger release";
+    strings["Loop begin##sgistru"].plurals[0] = "=Loop begin";
+    strings["Loop end##sgistru"].plurals[0] = "=Loop end";
+    strings["Jump##sgistru"].plurals[0] = "=Jump";
+    strings["NOP##sgistru"].plurals[0] = "=NOP";
+    strings["Program end##sgistru"].plurals[0] = "=Program end";
+
     strings["Fixed##sgistru2"].plurals[0] = "=Fixed";
     strings["Relative##sgistru"].plurals[0] = "=Relative";
     strings["QSound##sgistru"].plurals[0] = "=QSound";
@@ -5861,6 +6027,34 @@ void DivLocale::addTranslationsTemplate()
     strings["a handheld video game console with two screens. it uses a stylus.##sesd"].plurals[0] = "=a handheld video game console with two screens. it uses a stylus.";
     strings["12xx: Set duty cycle (pulse: 0 to 7)##sesd"].plurals[0] = "12xx: =Set duty cycle (pulse: 0 to 7)";
     strings["1Fxx: Set global volume (0 to 7F)##sesd"].plurals[0] = "1Fxx: =Set global volume (0 to 7F)";
+    strings["FZT sound source##sesd"].plurals[0] = "=FZT sound source";
+    strings["a software synth core by LTVA used in Flizzer Tracker (Flipper Zero chiptune tracker).##sesd"].plurals[0] = "=a software synth core by LTVA used in Flizzer Tracker (Flipper Zero chiptune tracker).";
+    strings["10xx: Set wave (bits: 0: noise, 1: pulse, 2: triangle, 3: sawtooth, 4: metallic noise, 5: sine)##sesd"].plurals[0] = "=10xx: Set wave (bits: 0: noise, 1: pulse, 2: triangle, 3: sawtooth, 4: metallic noise, 5: sine)";
+    strings["11xy: PWM (pulsolo) with speed x and depth y##sesd"].plurals[0] = "=11xy: PWM (pulsolo) with speed x and depth y";
+    strings["12xx: Set pulse width##sesd"].plurals[0] = "=12xx: Set pulse width";
+    strings["13xx: Pulse width up##sesd"].plurals[0] = "=13xx: Pulse width up";
+    strings["14xx: Pulse width down##sesd"].plurals[0] = "=14xx: Pulse width down";
+    strings["15xx: Set filter cutoff##sesd"].plurals[0] = "=15xx: Set filter cutoff";
+    strings["16xx: Set volume##sesd"].plurals[0] = "=16xx: Set volume";
+    strings["17xx: Toggle filter##sesd"].plurals[0] = "=17xx: Toggle filter";
+    strings["18xx: Set filter mode##sesd"].plurals[0] = "=18xx: Set filter mode";
+    strings["19xx: Phase reset##sesd"].plurals[0] = "=19xx: Phase reset";
+    strings["1Axx: Filter cutoff up##sesd"].plurals[0] = "=1Axx: Filter cutoff up";
+    strings["1Bxx: Filter cutoff down##sesd"].plurals[0] = "=1Bxx: Filter cutoff down";
+    strings["1Cxx: Set filter resonance##sesd"].plurals[0] = "=1Cxx: Set filter resonance";
+    strings["1Dxx: Filter resonance up##sesd"].plurals[0] = "=1Dxx: Filter resonance up";
+    strings["1Exx: Filter resonance down##sesd"].plurals[0] = "=1Exx: Filter resonance down";
+    strings["1Fxx: Ring mod source (FF = self)##sesd"].plurals[0] = "=1Fxx: Ring mod source (FF = self)";
+    strings["20xx: Hard sync source (FF = self)##sesd"].plurals[0] = "=20xx: Hard sync source (FF = self)";
+    strings["21xx: Set attack speed##sesd"].plurals[0] = "=21xx: Set attack speed";
+    strings["22xx: Set decay speed##sesd"].plurals[0] = "=22xx: Set decay speed";
+    strings["23xx: Set sustain level##sesd"].plurals[0] = "=23xx: Set sustain level";
+    strings["24xx: Set release rate##sesd"].plurals[0] = "=24xx: Set release rate";
+    strings["25xx: Restart instrument program##sesd"].plurals[0] = "=25xx: Restart instrument program";
+    strings["26xx: Portamento up (semitones)##sesd"].plurals[0] = "=26xx: Portamento up (semitones)";
+    strings["27xx: Portamento down (semitones)##sesd"].plurals[0] = "=27xx: Portamento down (semitones)";
+    strings["28xx: Absolute arpeggio note##sesd"].plurals[0] = "=28xx: Absolute arpeggio note";
+    strings["29xx: Trigger envelope release##sesd"].plurals[0] = "=29xx: Trigger envelope release";
     strings["Dummy System##sesd"].plurals[0] = "=Dummy System";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "=this is a system designed for testing purposes.";
 

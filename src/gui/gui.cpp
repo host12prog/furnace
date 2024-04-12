@@ -6791,6 +6791,7 @@ bool FurnaceGUI::init() {
   workingDirVGMExport=e->getConfString("lastDirVGMExport",workingDir);
   workingDirZSMExport=e->getConfString("lastDirZSMExport",workingDir);
   workingDirROMExport=e->getConfString("lastDirROMExport",workingDir);
+  workingDirFZTExport=e->getConfString("lastDirFZTExport",workingDir);
   workingDirFont=e->getConfString("lastDirFont",workingDir);
   workingDirColors=e->getConfString("lastDirColors",workingDir);
   workingDirKeybinds=e->getConfString("lastDirKeybinds",workingDir);
@@ -7352,6 +7353,7 @@ void FurnaceGUI::commitState() {
   e->setConf("lastDirVGMExport",workingDirVGMExport);
   e->setConf("lastDirZSMExport",workingDirZSMExport);
   e->setConf("lastDirROMExport",workingDirROMExport);
+  e->setConf("lastDirFZTExport",workingDirFZTExport);
   e->setConf("lastDirFont",workingDirFont);
   e->setConf("lastDirColors",workingDirColors);
   e->setConf("lastDirKeybinds",workingDirKeybinds);

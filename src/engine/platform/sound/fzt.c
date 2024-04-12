@@ -534,13 +534,13 @@ void sound_engine_fill_buffer(
             if(channel->frequency > 0) 
             {
                 channel->sync_bit = 0;
-                channel->sync_bit |= (channel->accumulator > OVERSAMPLE_ACC_LENGTH ? 1 : 0);
 
                 uint32_t prev_acc = channel->accumulator;
 
                 for(int i = 0; i < 8; i++)
                 {
                     channel->accumulator += channel->frequency;
+                    channel->sync_bit |= (channel->accumulator > OVERSAMPLE_ACC_LENGTH ? 1 : 0);
                     channel->accumulator &= OVERSAMPLE_ACC_LENGTH - 1;
 
                     channel_output[chan] +=

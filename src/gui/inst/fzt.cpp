@@ -469,7 +469,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
   {
     int prper = ins->fzt.program_period;
     ImGui::PushItemWidth(85.0f*dpiScale);
-    if(ImGui::InputInt("Program period##sgiFZT22", &prper))
+    if(ImGui::InputInt(_L("Program period##sgiFZT22"), &prper))
     {
       if(prper < 1) prper = 1;
       if(prper > 0xff) prper = 0xff;
@@ -722,7 +722,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
               if(ins->fzt.program[i].val > 7) ins->fzt.program[i].val = 7;
               int temp = ins->fzt.program[i].val;
               char buf[60];
-              snprintf(buf, 60, "%s", fztFilterModes[temp]);
+              snprintf(buf, 60, "%s", _L(fztFilterModes[temp]));
               if(CWSliderInt(_L("Value##sgiFZT"),&temp,0,7,buf))
               {
                 ins->fzt.program[i].val = temp;
@@ -995,7 +995,33 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
   if (ImGui::BeginTabItem(_L("Macros##sgiFZT"))) 
   {
     ImGui::Text(_L("Warning! Macros are NOT supported by FZT file format! Do not use them if you want to export .fzt file!##sgiFZT"));
+
     macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiFZT"),ins,DIV_MACRO_VOL,0xff,0,0xff,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiFZT"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiFZT"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Duty##sgiFZT"),ins,DIV_MACRO_DUTY,0xff,((ins->std.get_macro(DIV_MACRO_DUTY, true)->mode==1)?(-0xfff):0),0xfff,160,uiColors[GUI_COLOR_MACRO_OTHER],false,macroRelativeMode));
+
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiFZT"),ins,DIV_MACRO_WAVE,0xff,0,6,96,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,true,fztShapeBits,0));
+
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Cutoff##sgiFZT"),ins,DIV_MACRO_ALG,0xff,((ins->std.get_macro(DIV_MACRO_ALG, true)->mode==1)?(-0x7ff):0),0x7ff,160,uiColors[GUI_COLOR_MACRO_OTHER],false,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Filter Mode##sgiFZT"),ins,DIV_MACRO_EX1,0xff,0,7,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Filter Toggle##sgiFZT"),ins,DIV_MACRO_EX2,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Resonance##sgiFZT"),ins,DIV_MACRO_EX3,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgiFZT"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Envelope Reset/Key Control##sgiFZT"),ins,DIV_MACRO_EX4,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Ring mod toggle##sgiFZT"),ins,DIV_MACRO_EX5,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Ring mod source##sgiFZT"),ins,DIV_MACRO_EX6,0xff,0,FZT_NUM_CHANNELS,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Hard sync toggle##sgiFZT"),ins,DIV_MACRO_EX7,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Hard sync source##sgiFZT"),ins,DIV_MACRO_EX8,0xff,0,FZT_NUM_CHANNELS,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Attack##sgiFZT"),ins,DIV_MACRO_EX9, 0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Decay##sgiFZT"),ins,DIV_MACRO_EX10, 0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Sustain##sgiFZT"),ins,DIV_MACRO_EX11, 0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Release##sgiFZT"),ins,DIV_MACRO_EX12, 0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();
