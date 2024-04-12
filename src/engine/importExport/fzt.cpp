@@ -924,7 +924,7 @@ int DivEngine::exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_
 
                 if(pat->data[row][2] > MUS_NOTE_INSTRUMENT_NONE_FZT - 1)
                 {
-                    warnings += fmt::sprintf(_LE("You are using instrument index that is higher than %02X (channel %d, pattern %d, row %d).\nThe index will be capped at %02X.\n\n"), MUS_NOTE_VOLUME_NONE_FZT - 1, i, j, row, MUS_NOTE_VOLUME_NONE_FZT - 1);
+                    warnings += fmt::sprintf(_LE("You are using instrument index that is higher than %02X (channel %d, pattern %d, row %d).\nThe index will be capped at %02X.\n\n"), MUS_NOTE_INSTRUMENT_NONE_FZT - 1, i, j, row, MUS_NOTE_INSTRUMENT_NONE_FZT - 1);
                 }
             }
         }

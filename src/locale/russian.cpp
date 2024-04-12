@@ -1380,7 +1380,7 @@ void DivLocale::addTranslationsRussian()
     "is meant to be played back on Flipper Zero with\n"
     "Flizzer Tracker app installed."].plurals[0] = 
 
-            "эта опция позволяет экспортировать модуль Furnace Tracker'а,\n"
+            "эта опция позволяет экспортировать модуль Flizzer Tracker'а,\n"
             "который можно воспроизвести на Flipper Zero с установленным\n"
             "приложением Flizzer Tracker.";
     strings["Cancel##sgeo9"].plurals[0] = "Отмена";
