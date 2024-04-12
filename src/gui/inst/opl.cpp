@@ -34,6 +34,7 @@ class FurnaceGUI;
 void FurnaceGUI::drawInsOPL(DivInstrument* ins)
 {
   opCount=(ins->fm.ops==4)?4:2;
+  if(ins->type==DIV_INS_OPL_DRUMS) opCount = 4;
 
   if (ImGui::BeginTabItem("FM")) {
     DivInstrumentFM& fmOrigin=ins->fm;
@@ -286,7 +287,7 @@ void FurnaceGUI::drawInsOPL(DivInstrument* ins)
           ImGui::PushID(fmt::sprintf(_L("op%d##sgiOPL0"),i).c_str());
           String opNameLabel;
           if (ins->type==DIV_INS_OPL_DRUMS) {
-            opNameLabel=fmt::sprintf(_L("%s"),oplDrumNames[i]);
+            opNameLabel=fmt::sprintf("%s",_L(oplDrumNames[i]));
           } 
           else if (ins->type==DIV_INS_OPL && fmOrigin.opllPreset==16) 
           {
@@ -485,7 +486,7 @@ void FurnaceGUI::drawInsOPL(DivInstrument* ins)
           ImGui::Dummy(ImVec2(dpiScale,dpiScale));
           if (ins->type==DIV_INS_OPL_DRUMS) 
           {
-            snprintf(tempID,1024,_L("%s"),oplDrumNames[i]);
+            snprintf(tempID,1024,"%s",_L(oplDrumNames[i]));
           } 
           else if (ins->type==DIV_INS_OPL && fmOrigin.opllPreset==16) 
           {
