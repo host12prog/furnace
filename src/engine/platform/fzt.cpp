@@ -555,7 +555,7 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
     }*/
 
     case 0x2600: {
-        uint32_t prev = te_channel->note;
+        int prev = te_channel->note;
 
         te_channel->note += ((opcode & 0xff) << 8);
         if(prev > te_channel->note) te_channel->note = 0xffff;

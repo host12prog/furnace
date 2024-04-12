@@ -47,7 +47,7 @@ typedef struct {
 
     unsigned char program_counter, program_tick, program_loop, program_period;
 
-    unsigned short filter_cutoff, filter_resonance;
+    int filter_cutoff, filter_resonance;
     unsigned char filter_type;
 
     unsigned char vibrato_speed, vibrato_depth, vibrato_delay;
