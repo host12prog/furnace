@@ -75,7 +75,7 @@ void DivPlatformFZT::tracker_engine_trigger_instrument_internal(int chan, DivIns
 
   te_channel->pitch_note = 0;
 
-  note += (uint16_t)(((int16_t)pinst->fzt.base_note - MIDDLE_C) << 8);
+  note += (((int16_t)pinst->fzt.base_note - MIDDLE_C) << 8);
   tracker_engine_set_note(chan, note + (int16_t)pinst->fzt.finetune, true);
 
   if (note + (int)pinst->fzt.finetune > 0 && note + (int)pinst->fzt.finetune <= MAX_NOTE << 8)
