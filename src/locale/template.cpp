@@ -5394,6 +5394,39 @@ void DivLocale::addTranslationsTemplate()
 
     strings["GEMS BNK currently not supported."].plurals[0] = "=GEMS BNK currently not supported.";
 
+    //           src/engine/importExport/fzt.cpp
+
+    strings["You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"].plurals[0] = "=You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n";
+    strings["invalid pattern length!"].plurals[0] = "=invalid pattern length!";
+    strings["invalid loop start and loop end!"].plurals[0] = "=invalid loop start and loop end!";
+    strings["invalid orders length!"].plurals[0] = "=invalid orders length!";
+    strings["instrument program is too long!"].plurals[0] = "=instrument program is too long!";
+    strings["couldn't place 0Bxx command to make a loop point"].plurals[0] = "=couldn't place 0Bxx command to make a loop point";
+    strings["song contains more than one system."].plurals[0] = "=song contains more than one system.";
+    strings["system is not FZT sound source."].plurals[0] = "=system is not FZT sound source.";
+    strings["you have no subsongs in the module."].plurals[0] = "=you have no subsongs in the module.";
+    strings["you must have at least one instrument in the song."].plurals[0] = "=you must have at least one instrument in the song.";
+    strings["song name is too long. Only first %d characters will be written.\n\n"].plurals[0] = "=song name is too long. Only first %d characters will be written.\n\n";
+    strings[
+        "you have 0Bxx command placed not on the last pattern row (channel %d, pattern %d, row %d, effect column %d).\n"
+        "FZT export will try to loop your song as if it was placed on last pattern row.\n\n"].plurals[0] = 
+        
+        "=you have 0Bxx command placed not on the last pattern row (channel %d, pattern %d, row %d, effect column %d).\n"
+        "FZT export will try to loop your song as if it was placed on last pattern row.\n\n";
+    strings[
+        "There wasn't any 0Bxx command, so your song won't be looped.\n"
+        "To make song loop, place 0Bxx command somewhere in the song on the last pattern row.\n\n"].plurals[0] =
+
+        "=There wasn't any 0Bxx command, so your song won't be looped.\n"
+        "To make song loop, place 0Bxx command somewhere in the song on the last pattern row.\n\n";
+    strings["there are more than %d patterns in the song. only %d patterns will be saved.\n\n"].plurals[0] = "=there are more than %d patterns in the song. only %d patterns will be saved.\n\n";
+    strings["you are using two speeds or groove patterns which are not supported in FZT.\nFirst speed will be used.\n\n"].plurals[0] = "=you are using two speeds or groove patterns which are not supported in FZT.\nFirst speed will be used.\n\n";
+    strings["you are using virtual tempo which is not supported in FZT.\nTo stop using virtual tempo, simply make virtual tempo numerator and denominator equal.\nFZT does not support virtual tempo, so the settings will be ignored.\n\n"].plurals[0] = "=you are using virtual tempo which is not supported in FZT.\nTo stop using virtual tempo, simply make virtual tempo numerator and denominator equal.\nFZT does not support virtual tempo, so the settings will be ignored.\n\n";
+    strings["Your song rate is higher than 255 Hz. It will be capped at 255 Hz in FZT file.\n\n"].plurals[0] = "=Your song rate is higher than 255 Hz. It will be capped at 255 Hz in FZT file.\n\n";
+    strings["You are setting engine rate that is higher than 255 Hz (channel %d, pattern %d, row %d, effect column %d).\nThe command(s) will be capped at 255 Hz.\n\n"].plurals[0] = "=You are setting engine rate that is higher than 255 Hz (channel %d, pattern %d, row %d, effect column %d).\nThe command(s) will be capped at 255 Hz.\n\n";
+    strings["You are using instrument index that is higher than %02X (channel %d, pattern %d, row %d).\nThe index will be capped at %02X.\n\n"].plurals[0] = "=You are using instrument index that is higher than %02X (channel %d, pattern %d, row %d).\nThe index will be capped at %02X.\n\n";
+    strings["You are using virtual tempo control effect (channel %d, pattern %d, row %d).\nThe effect is not supported in FZT and will be ignored.\n\n"].plurals[0] = "=You are using virtual tempo control effect (channel %d, pattern %d, row %d).\nThe effect is not supported in FZT and will be ignored.\n\n";
+
     //           src/engine/importExport/dmf.cpp
 
     strings["this version is not supported by Furnace yet"].plurals[0] = "=this version is not supported by Furnace yet";

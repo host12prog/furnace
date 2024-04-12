@@ -700,8 +700,8 @@ bool DivEngine::loadFZT(unsigned char* file, size_t len)
             }
             if(!placed_0bxx) //strange but well...
             {
-                logW("couldn't place 0bxx command to make a loop point");
-                addWarning(_LE("couldn't place 0bxx command to make a loop point"));
+                logW("couldn't place 0Bxx command to make a loop point");
+                addWarning(_LE("couldn't place 0Bxx command to make a loop point"));
             }
         }
 

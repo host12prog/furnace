@@ -5284,6 +5284,39 @@ void DivLocale::addTranslationsRussian()
 
     strings["GEMS BNK currently not supported."].plurals[0] = "GEMS BNK пока не поддерживается.";
 
+    //           src/engine/importExport/fzt.cpp
+
+    strings["You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"].plurals[0] = "Вы используете эффект %02Xxx с параметром, превышающим 0xf (канал %d, паттерн %d, строка %d).\nПараметр эффекта будет уменьшен до 0xf.\n\n";
+    strings["invalid pattern length!"].plurals[0] = "Неправильная длина паттерна!";
+    strings["invalid loop start and loop end!"].plurals[0] = "неправильные начало и конец зацикленной части трека!";
+    strings["invalid orders length!"].plurals[0] = "неправильное число строк матрицы паттернов!";
+    strings["instrument program is too long!"].plurals[0] = "слишком длинная программа инструмента!";
+    strings["couldn't place 0Bxx command to make a loop point"].plurals[0] = "не смог разместить команду 0Bxx для создания точки зацикливания";
+    strings["song contains more than one system."].plurals[0] = "в треке содержится больше одной системы.";
+    strings["system is not FZT sound source."].plurals[0] = "система не является источником звука FZT.";
+    strings["you have no subsongs in the module."].plurals[0] = "в модуле нет подпесен.";
+    strings["you must have at least one instrument in the song."].plurals[0] = "необходимо наличие хотя бы одного инструмента.";
+    strings["song name is too long. Only first %d characters will be written.\n\n"].plurals[0] = "слишком длинное название трека. Будут записаны только первые %d символов.\n\n";
+    strings[
+        "you have 0Bxx command placed not on the last pattern row (channel %d, pattern %d, row %d, effect column %d).\n"
+        "FZT export will try to loop your song as if it was placed on last pattern row.\n\n"].plurals[0] = 
+        
+        "вы разместили команду 0Bxx не на последней строке паттерна (канал %d, паттерн %d, строка %d, столбец эффектов %d).\n"
+        "экспорт FZT попытается зациклить трек, исходя из того, что эффект как бы размещён на последней строке паттерна.\n\n";
+    strings[
+        "There wasn't any 0Bxx command, so your song won't be looped.\n"
+        "To make song loop, place 0Bxx command somewhere in the song on the last pattern row.\n\n"].plurals[0] =
+
+        "Нет ни одного эффекта 0Bxx, поэтому ваш трек не будет зациклен.\n"
+        "Для зацикливания трека разместите команду 0Bxx в конце какого-либо паттерна.\n\n";
+    strings["there are more than %d patterns in the song. only %d patterns will be saved.\n\n"].plurals[0] = "в треке содержится более %d паттернов. только первые %d паттернов будут сохранены.\n\n";
+    strings["you are using two speeds or groove patterns which are not supported in FZT.\nFirst speed will be used.\n\n"].plurals[0] = "вы используете две скорости или ритм-паттерны, которые не поддерживаются в FZT.\nБудет использована первая скорость.\n\n";
+    strings["you are using virtual tempo which is not supported in FZT.\nTo stop using virtual tempo, simply make virtual tempo numerator and denominator equal.\nFZT does not support virtual tempo, so the settings will be ignored.\n\n"].plurals[0] = "вы используете виртуальный темп, который не поддерживается в FZT.\nДля того, чтобы прекратить его использование, просто выставьте равные значения в числителе и знаменателе виртуального темпа.\nFZT не поддерживает виртуальный темп, поэтому его настройки будут проигнорированы.\n\n";
+    strings["Your song rate is higher than 255 Hz. It will be capped at 255 Hz in FZT file.\n\n"].plurals[0] = "Частота двидка трекера превышает 255 Гц. Она будет ограничена до 255 Гц в файле FZT.\n\n";
+    strings["You are setting engine rate that is higher than 255 Hz (channel %d, pattern %d, row %d, effect column %d).\nThe command(s) will be capped at 255 Hz.\n\n"].plurals[0] = "Вы устанавливаете частоту движка трекера, превышающую 255 Гц (канал %d, паттерн %d, строка %d, столбец эффектов %d).\nКоманда(-ы) будет(-ут) ограничены до 255 Гц.\n\n";
+    strings["You are using instrument index that is higher than %02X (channel %d, pattern %d, row %d).\nThe index will be capped at %02X.\n\n"].plurals[0] = "Вы используете индекс инструмента, который превышает %02X (канал %d, паттерн %d, строка %d).\nИндекс будет ограничен до %02X.\n\n";
+    strings["You are using virtual tempo control effect (channel %d, pattern %d, row %d).\nThe effect is not supported in FZT and will be ignored.\n\n"].plurals[0] = "Вы используете эффект управления виртуальным темпом (канал %d, паттерн %d, строка %d).\nЭффект не поддерживается в FZT и будет проигнорирован.\n\n";
+
     //           src/engine/importExport/dmf.cpp
 
     strings["this version is not supported by Furnace yet"].plurals[0] = "эта версия пока не поддерживается Furnace";
