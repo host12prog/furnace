@@ -887,6 +887,7 @@ src/gui/sysEx.cpp
 src/gui/sysManager.cpp
 src/gui/sysPartNumber.cpp
 src/gui/sysPicker.cpp
+src/gui/userPresets.cpp
 src/gui/util.cpp
 src/gui/waveEdit.cpp
 src/gui/volMeter.cpp
