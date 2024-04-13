@@ -5316,6 +5316,7 @@ void DivLocale::addTranslationsRussian()
     strings["You are setting engine rate that is higher than 255 Hz (channel %d, pattern %d, row %d, effect column %d).\nThe command(s) will be capped at 255 Hz.\n\n"].plurals[0] = "Вы устанавливаете частоту движка трекера, превышающую 255 Гц (канал %d, паттерн %d, строка %d, столбец эффектов %d).\nКоманда(-ы) будет(-ут) ограничены до 255 Гц.\n\n";
     strings["You are using instrument index that is higher than %02X (channel %d, pattern %d, row %d).\nThe index will be capped at %02X.\n\n"].plurals[0] = "Вы используете индекс инструмента, который превышает %02X (канал %d, паттерн %d, строка %d).\nИндекс будет ограничен до %02X.\n\n";
     strings["You are using virtual tempo control effect (channel %d, pattern %d, row %d).\nThe effect is not supported in FZT and will be ignored.\n\n"].plurals[0] = "Вы используете эффект управления виртуальным темпом (канал %d, паттерн %d, строка %d).\nЭффект не поддерживается в FZT и будет проигнорирован.\n\n";
+    strings["You are using macros in instrument %d.\nFZT does not support macros, so they will be ignored.\n\n"].plurals[0] = "Вы используете макросы в инструменте %d.\nFZT не поддерживает макросы, поэтому они будут проигнорированы.\n\n";
 
     //           src/engine/importExport/dmf.cpp
 

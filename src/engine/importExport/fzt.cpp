@@ -965,6 +965,22 @@ int DivEngine::exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_
         }
     }
 
+    bool found_macro = false;
+
+    for(int i = 0; i < song.insLen && !found_macro; i++)
+    {
+        for(int j = 0; j < (int)DIV_MACRO_EX20 && !found_macro; j++)
+        {
+            DivInstrument* ins = getIns(i, DIV_INS_FZT);
+            
+            if(ins->std.get_macro((DivMacroType)j, false)->len > 0)
+            {
+                warnings += fmt::sprintf(_LE("You are using macros in instrument %d.\nFZT does not support macros, so they will be ignored.\n\n"), i);
+                found_macro = true;
+            }
+        }
+    }
+
     return current_fzt_pattern;
 }
 

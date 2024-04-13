@@ -5426,6 +5426,7 @@ void DivLocale::addTranslationsTemplate()
     strings["You are setting engine rate that is higher than 255 Hz (channel %d, pattern %d, row %d, effect column %d).\nThe command(s) will be capped at 255 Hz.\n\n"].plurals[0] = "=You are setting engine rate that is higher than 255 Hz (channel %d, pattern %d, row %d, effect column %d).\nThe command(s) will be capped at 255 Hz.\n\n";
     strings["You are using instrument index that is higher than %02X (channel %d, pattern %d, row %d).\nThe index will be capped at %02X.\n\n"].plurals[0] = "=You are using instrument index that is higher than %02X (channel %d, pattern %d, row %d).\nThe index will be capped at %02X.\n\n";
     strings["You are using virtual tempo control effect (channel %d, pattern %d, row %d).\nThe effect is not supported in FZT and will be ignored.\n\n"].plurals[0] = "=You are using virtual tempo control effect (channel %d, pattern %d, row %d).\nThe effect is not supported in FZT and will be ignored.\n\n";
+    strings["You are using macros in instrument %d.\nFZT does not support macros, so they will be ignored.\n\n"].plurals[0] = "=You are using macros in instrument %d.\nFZT does not support macros, so they will be ignored.\n\n";
 
     //           src/engine/importExport/dmf.cpp
 
