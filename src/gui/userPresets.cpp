@@ -373,7 +373,7 @@ void FurnaceGUI::drawUserPresets() {
             ImGui::PushID(i);
 
             tempID=fmt::sprintf("%s##USystem",getSystemName(chip.sys));
-            ImGui::Button(tempID.c_str(),ImVec2(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize("Invert").x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0,0));
+            ImGui::Button(tempID.c_str(),ImVec2(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(_L("Invert##sgpr")).x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0,0));
             if (ImGui::BeginPopupContextItem("SysPickerCU",ImGuiPopupFlags_MouseButtonLeft)) {
               DivSystem picked=systemPicker();
               if (picked!=DIV_SYSTEM_NULL) {
@@ -385,7 +385,7 @@ void FurnaceGUI::drawUserPresets() {
             }
 
             ImGui::SameLine();
-            if (ImGui::Checkbox("Invert",&doInvert)) {
+            if (ImGui::Checkbox(_L("Invert##sgpr"),&doInvert)) {
               chip.vol=-chip.vol;
               mustBake=true;
             }
@@ -397,7 +397,7 @@ void FurnaceGUI::drawUserPresets() {
             }
             popDestColor();
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0);
-            if (CWSliderFloat("Volume",&vol,0.0f,3.0f)) {
+            if (CWSliderFloat(_L("Volume##sgpr"),&vol,0.0f,3.0f)) {
               if (doInvert) {
                 if (vol<0.0001) vol=0.0001;
               }
@@ -407,19 +407,19 @@ void FurnaceGUI::drawUserPresets() {
               mustBake=true;
             } rightClickable
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0);
-            if (CWSliderFloat("Panning",&chip.pan,-1.0f,1.0f)) {
+            if (CWSliderFloat(_L("Panning##sgpr"),&chip.pan,-1.0f,1.0f)) {
               if (chip.pan<-1.0f) chip.pan=-1.0f;
               if (chip.pan>1.0f) chip.pan=1.0f;
               mustBake=true;
             } rightClickable
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0);
-            if (CWSliderFloat("Front/Rear",&chip.panFR,-1.0f,1.0f)) {
+            if (CWSliderFloat(_L("Front/Rear##sgpr"),&chip.panFR,-1.0f,1.0f)) {
               if (chip.panFR<-1.0f) chip.panFR=-1.0f;
               if (chip.panFR>1.0f) chip.panFR=1.0f;
               mustBake=true;
             } rightClickable
 
-            if (ImGui::TreeNode("Configure")) {
+            if (ImGui::TreeNode(_L("Configure##sgpr"))) {
               DivConfig sysFlags;
               sysFlags.loadFromBase64(chip.flags.c_str());
               if (drawSysConf(-1,i,chip.sys,sysFlags,false)) {

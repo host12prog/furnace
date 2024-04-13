@@ -715,7 +715,7 @@ void DivLocale::addTranslationsTemplate()
     strings["reset layout##sggu"].plurals[0] = "=reset layout";
     strings["Are you sure you want to reset the workspace layout?##sggu"].plurals[0] = "=Are you sure you want to reset the workspace layout?";
     strings["switch to mobile view##sggu"].plurals[0] = "=switch to mobile view";
-    strings["manage presets...##sggu"].plurals[0] = "=manage presets...";
+    strings["user systems...##sggu"].plurals[0] = "=user systems...";
     strings["settings...##sggu"].plurals[0] = "=settings...";
     strings["Window##menubar"].plurals[0] = "=Window##menubar";
     strings["window##menubar"].plurals[0] = "=window##menubar";
@@ -1976,11 +1976,16 @@ void DivLocale::addTranslationsTemplate()
     strings["Arcade (YM2151 and SegaPCM)##sgpr1"].plurals[0] = "=Arcade (YM2151 and SegaPCM)";
     strings["Neo Geo CD (extended channel 2)##sgpr1"].plurals[0] = "=Neo Geo CD (extended channel 2)";
 
-    strings["User Presets##sgpr"].plurals[0] = "=User Presets";
+    strings["User Systems##sgpr"].plurals[0] = "=User Systems";
     strings["Error! User category does not exist!##sgpr"].plurals[0] = "=Error! User category does not exist!";
     strings["New Preset##sgpr"].plurals[0] = "=New Preset";
     strings["select a preset##sgpr"].plurals[0] = "=select a preset";
     strings["Name##sgpr"].plurals[0] = "=Name";
+    strings["Invert##sgpr"].plurals[0] = "=Invert";
+    strings["Volume##sgpr"].plurals[0] = "=Volume";
+    strings["Panning##sgpr"].plurals[0] = "=Panning";
+    strings["Front/Rear##sgpr"].plurals[0] = "=Front/Rear";
+    strings["Configure##sgpr"].plurals[0] = "=Configure";
     strings["Save and Close##sgpr"].plurals[0] = "=Save and Close";
 
     //   sgrv  src/gui/regView.cpp

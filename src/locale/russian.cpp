@@ -655,7 +655,7 @@ void DivLocale::addTranslationsRussian()
     strings["reset layout##sggu"].plurals[0] = "сбросить компоновку окон";
     strings["Are you sure you want to reset the workspace layout?##sggu"].plurals[0] = "Вы уверены, что хотите сброить компоновку окон интерфейса?";
     strings["switch to mobile view##sggu"].plurals[0] = "переключиться на мобильный интерфейс";
-    strings["manage presets...##sggu"].plurals[0] = "управление пресетами...";
+    strings["user systems...##sggu"].plurals[0] = "пользовательские системы...";
     strings["settings...##sggu"].plurals[0] = "настройки...";
     strings["Window##menubar"].plurals[0] = "Окно##menubar";
     strings["window##menubar"].plurals[0] = "окно##menubar";
@@ -1917,11 +1917,16 @@ void DivLocale::addTranslationsRussian()
     strings["Arcade (YM2151 and SegaPCM)##sgpr1"].plurals[0] = "Arcade (YM2151 и SegaPCM)";
     strings["Neo Geo CD (extended channel 2)##sgpr1"].plurals[0] = "Neo Geo CD (расширенный 2-ой канал)";
 
-    strings["User Presets##sgpr"].plurals[0] = "Пользовательские пресеты";
+    strings["User Systems##sgpr"].plurals[0] = "Пользовательские системы";
     strings["Error! User category does not exist!##sgpr"].plurals[0] = "Ошибка! Категория пользовательских пресетов не существует!";
     strings["New Preset##sgpr"].plurals[0] = "Новый пресет";
     strings["select a preset##sgpr"].plurals[0] = "выберите пресет";
     strings["Name##sgpr"].plurals[0] = "Название";
+    strings["Invert##sgpr"].plurals[0] = "Инв.";
+    strings["Volume##sgpr"].plurals[0] = "Громкость";
+    strings["Panning##sgpr"].plurals[0] = "Панорамирование";
+    strings["Front/Rear##sgpr"].plurals[0] = "Передн./задн.";
+    strings["Configure##sgpr"].plurals[0] = "Настроить";
     strings["Save and Close##sgpr"].plurals[0] = "Сохранить и закрыть";
 
     //   sgrv  src/gui/regView.cpp
