@@ -447,13 +447,17 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
         if (sampRate>65536) sampRate=65536;
         altered=true;
       } rightClickable
-      DivPlatformGBAMinMod* dispatch=(DivPlatformGBAMinMod*)e->getDispatch(chan);
-      float maxCPU=dispatch->maxCPU*100;
-      ImGui::Text(_L("Actual sample rate: %d Hz##sgsc"), dispatch->chipClock);
-      if (maxCPU>90) ImGui::PushStyleColor(ImGuiCol_Text,uiColors[GUI_COLOR_WARNING]);
-      ImGui::Text(_L("Max mixer CPU usage: %.0f%%##sgsc"), maxCPU);
-      if (maxCPU>90) ImGui::PopStyleColor();
-      FurnaceGUI::popWarningColor();
+      if (chan>=0) {
+        DivPlatformGBAMinMod* dispatch=(DivPlatformGBAMinMod*)e->getDispatch(chan);
+        if (dispatch!=NULL) {
+          float maxCPU=dispatch->maxCPU*100;
+          ImGui::Text(_L("Actual sample rate: %d Hz##sgsc"), dispatch->chipClock);
+          if (maxCPU>90) ImGui::PushStyleColor(ImGuiCol_Text,uiColors[GUI_COLOR_WARNING]);
+          ImGui::Text(_L("Max mixer CPU usage: %.0f%%##sgsc"),maxCPU);
+          if (maxCPU>90) ImGui::PopStyleColor();
+          FurnaceGUI::popWarningColor();
+        }
+      }
       if (altered) {
         e->lockSave([&]() {
           flags.set("volScale",volScale);
