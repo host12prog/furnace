@@ -4410,7 +4410,7 @@ bool FurnaceGUI::loop() {
           toggleMobileUI(!mobileUI);
         }
 #endif
-        if (ImGui::MenuItem(_L("manage presets...##sggu"),BIND_FOR(GUI_ACTION_WINDOW_USER_PRESETS))) {
+        if (ImGui::MenuItem(_L("user systems...##sggu"),BIND_FOR(GUI_ACTION_WINDOW_USER_PRESETS))) {
           userPresetsOpen=true;
         }
         
