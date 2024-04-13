@@ -343,7 +343,7 @@ void FurnaceGUI::drawUserPresets() {
       ImGui::TableNextColumn();
       if (ImGui::BeginChild("UList",ImVec2(ImGui::GetContentRegionAvail().x,ImGui::GetContentRegionAvail().y-ImGui::GetFrameHeightWithSpacing()))) {
         ImGui::AlignTextToFramePadding();
-        ImGui::Text("Systems");
+        ImGui::Text(_L("Systems##sgpr"));
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_PLUS "##AddPreset")) {
           userCategory->systems.push_back(FurnaceGUISysDef(_L("New Preset##sgpr"),{}));
@@ -367,11 +367,11 @@ void FurnaceGUI::drawUserPresets() {
             ImGui::AlignTextToFramePadding();
             ImGui::Text(_L("Name##sgpr"));
             ImGui::SameLine();
-            ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize("Remove").x-ImGui::GetStyle().ItemSpacing.x*2.0-ImGui::GetStyle().ItemInnerSpacing.x*2.0);
+            ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(_L("Remove##UPresetRemove")).x-ImGui::GetStyle().ItemSpacing.x*2.0-ImGui::GetStyle().ItemInnerSpacing.x*2.0);
             ImGui::InputText("##PName",&preset->name);
             ImGui::SameLine();
             pushDestColor();
-            if (ImGui::Button("Remove##UPresetRemove")) {
+            if (ImGui::Button(_L("Remove##UPresetRemove"))) {
               doRemovePreset=true;
             }
             popDestColor();
@@ -389,7 +389,7 @@ void FurnaceGUI::drawUserPresets() {
               float vol=fabs(chip.vol);
               ImGui::PushID(i);
 
-              tempID=fmt::sprintf("%s##USystem",getSystemName(chip.sys));
+              tempID=fmt::sprintf("%s##USystem",_L(getSystemName(chip.sys)));
               ImGui::Button(tempID.c_str(),ImVec2(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(_L("Invert##sgpr")).x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0,0));
               if (ImGui::BeginPopupContextItem("SysPickerCU",ImGuiPopupFlags_MouseButtonLeft)) {
                 DivSystem picked=systemPicker(false);

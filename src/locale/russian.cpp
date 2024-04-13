@@ -1919,9 +1919,11 @@ void DivLocale::addTranslationsRussian()
 
     strings["User Systems##sgpr"].plurals[0] = "Пользовательские системы";
     strings["Error! User category does not exist!##sgpr"].plurals[0] = "Ошибка! Категория пользовательских пресетов не существует!";
+    strings["Systems##sgpr"].plurals[0] = "Системы";
     strings["New Preset##sgpr"].plurals[0] = "Новый пресет";
     strings["select a preset##sgpr"].plurals[0] = "выберите пресет";
     strings["Name##sgpr"].plurals[0] = "Название";
+    strings["Remove##UPresetRemove"].plurals[0] = "Убрать##UPresetRemove";
     strings["Invert##sgpr"].plurals[0] = "Инв.";
     strings["Volume##sgpr"].plurals[0] = "Громкость";
     strings["Panning##sgpr"].plurals[0] = "Панорамирование";

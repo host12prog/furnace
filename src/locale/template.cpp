@@ -1978,9 +1978,11 @@ void DivLocale::addTranslationsTemplate()
 
     strings["User Systems##sgpr"].plurals[0] = "=User Systems";
     strings["Error! User category does not exist!##sgpr"].plurals[0] = "=Error! User category does not exist!";
+    strings["Systems##sgpr"].plurals[0] = "=Systems";
     strings["New Preset##sgpr"].plurals[0] = "=New Preset";
     strings["select a preset##sgpr"].plurals[0] = "=select a preset";
     strings["Name##sgpr"].plurals[0] = "=Name";
+    strings["Remove##UPresetRemove"].plurals[0] = "=Remove##UPresetRemove";
     strings["Invert##sgpr"].plurals[0] = "=Invert";
     strings["Volume##sgpr"].plurals[0] = "=Volume";
     strings["Panning##sgpr"].plurals[0] = "=Panning";
