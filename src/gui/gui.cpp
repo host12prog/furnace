@@ -7232,7 +7232,7 @@ bool FurnaceGUI::init() {
   locale.setLanguage((DivLang)settings.language);
   initSystemPresets();
 
-  //loadUserPresets(true);
+  loadUserPresets(true);
 
   applyUISettings();
 
