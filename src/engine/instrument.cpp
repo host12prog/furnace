@@ -909,7 +909,7 @@ void DivInstrument::writeFeatureFZ(SafeWriter* w)
 
   w->writeC(prog_len);
 
-  for(int i = 0; i < prog_len - 1; i++)
+  for(int i = 0; i < prog_len; i++)
   {
     w->writeS(fzt.program[i].cmd);
     w->writeC(fzt.program[i].val);
@@ -2356,7 +2356,7 @@ void DivInstrument::readFeatureFZ(SafeReader& reader, short version) {
     fzt.program[i].unite = false;
   }
 
-  for(int i = 0; i < prog_len - 1; i++)
+  for(int i = 0; i < prog_len; i++)
   {
     fzt.program[i].cmd = reader.readS();
     fzt.program[i].val = reader.readC();

@@ -558,7 +558,7 @@ void FurnaceGUI::drawFindReplace() {
                   ImGui::Text("%d",i.y);
                 }
                 ImGui::TableNextColumn();
-                ImGui::Text("%d (%s)",i.x+1,e->getChannelName(i.x));
+                ImGui::Text("%d (%s)",i.x+1,settings.translate_channel_names_pattern ? _L(e->getChannelName(i.x)) : e->getChannelName(i.x));
                 if (ImGui::TableNextColumn()) {
                   snprintf(tempID,1024,ICON_FA_CHEVRON_RIGHT "##_FR%d",index);
                   if (ImGui::Selectable(tempID)) {
@@ -876,10 +876,10 @@ void FurnaceGUI::drawFindReplace() {
             ImGui::Checkbox(_L("Confine to channels##sgfr"),&curQueryRangeX);
 
             ImGui::BeginDisabled(!curQueryRangeX);
-            snprintf(tempID,1024,"%d: %s",curQueryRangeXMin+1,e->getChannelName(curQueryRangeXMin));
+            snprintf(tempID,1024,"%d: %s",curQueryRangeXMin+1,settings.translate_channel_names_pattern ? _L(e->getChannelName(curQueryRangeXMin)) : e->getChannelName(curQueryRangeXMin));
             if (ImGui::BeginCombo(_L("From##sgfr"),tempID)) {
               for (int i=0; i<e->getTotalChannelCount(); i++) {
-                snprintf(tempID,1024,"%d: %s",i+1,e->getChannelName(i));
+                snprintf(tempID,1024,"%d: %s",i+1,settings.translate_channel_names_pattern ? _L(e->getChannelName(i)) : e->getChannelName(i));
                 if (ImGui::Selectable(tempID,curQueryRangeXMin==i)) {
                   curQueryRangeXMin=i;
                 }
@@ -887,10 +887,10 @@ void FurnaceGUI::drawFindReplace() {
               ImGui::EndCombo();
             }
 
-            snprintf(tempID,1024,"%d: %s",curQueryRangeXMax+1,e->getChannelName(curQueryRangeXMax));
+            snprintf(tempID,1024,"%d: %s",curQueryRangeXMax+1,settings.translate_channel_names_pattern ? _L(e->getChannelName(curQueryRangeXMax)) : e->getChannelName(curQueryRangeXMax));
             if (ImGui::BeginCombo(_L("To##sgfr"),tempID)) {
               for (int i=0; i<e->getTotalChannelCount(); i++) {
-                snprintf(tempID,1024,"%d: %s",i+1,e->getChannelName(i));
+                snprintf(tempID,1024,"%d: %s",i+1,settings.translate_channel_names_pattern ? _L(e->getChannelName(i)) : e->getChannelName(i));
                 if (ImGui::Selectable(tempID,curQueryRangeXMax==i)) {
                   curQueryRangeXMax=i;
                 }
