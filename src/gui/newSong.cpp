@@ -167,10 +167,14 @@ void FurnaceGUI::drawNewSong() {
         }
       }
       std::sort(newSongSearchResults.begin(),newSongSearchResults.end(),[](const FurnaceGUISysDef& a, const FurnaceGUISysDef& b) {
-        return strcmp(a.name.c_str(),b.name.c_str())<0;
+        String namea1 = a.name.substr(0, a.name.find("##"));
+        String nameb1 = b.name.substr(0, b.name.find("##"));
+        return strcmp(namea1.c_str(),nameb1.c_str())<0;
       });
       auto lastItem1=std::unique(newSongSearchResults.begin(),newSongSearchResults.end(),[](const FurnaceGUISysDef& a, const FurnaceGUISysDef& b) {
-        return a.name==b.name;
+        String namea1 = a.name.substr(0, a.name.find("##"));
+        String nameb1 = b.name.substr(0, b.name.find("##"));
+        return namea1 == nameb1;
       });
       newSongSearchResults.erase(lastItem1,newSongSearchResults.end());
     }

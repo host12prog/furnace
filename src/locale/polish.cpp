@@ -1896,7 +1896,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"].plurals[0] = "Te presety są kompatybilne z DefleMask. Wybierz je, jeśli chcesz wyeksportować moduł do .dmf lub pracować z tym programem.";
     strings["Sega Genesis (extended channel 3)##sgpr1"].plurals[0] = "Sega Mega Drive z rozszerzeniem kanału 3";
     strings["Sega Master System (with FM expansion)##sgpr1"].plurals[0] = "Sega Master System (z rozszerzeniem FM)";
-    strings["Famicom with Konami VRC7##sgpr"].plurals[0] = "Famicom z Konami VRC7";
+    strings["Famicom with Konami VRC7##sgpr1"].plurals[0] = "Famicom z Konami VRC7";
     strings["Arcade (YM2151 and SegaPCM)##sgpr1"].plurals[0] = "Arcade (YM2151 i SegaPCM)";
     strings["Neo Geo CD (extended channel 2)##sgpr1"].plurals[0] = "Neo Geo CD  z rozszerzonym kanałem 2";
 
