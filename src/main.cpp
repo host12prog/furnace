@@ -254,6 +254,7 @@ TAParamResult pVersion(String) {
   printf("- SID2 emulator by LTVA (GPLv2); modified version of reSID\n");
   printf("- 5E01 emulator by Euly (unknown open-source license); modified version of NSFPlay\n");
   printf("- NDS sound emulator by cam900 (zlib license)\n");
+  printf("- FZT sound source by LTVA (MIT)\n");
   return TA_PARAM_QUIT;
 }
 
@@ -565,72 +566,6 @@ int main(int argc, char** argv) {
     e.setAudio(DIV_AUDIO_DUMMY);
   }
 
-  if (!fileName.empty()) {
-    logI("loading module...");
-    FILE* f=ps_fopen(fileName.c_str(),"rb");
-    if (f==NULL) {
-      reportError(fmt::sprintf("couldn't open file! (%s)",strerror(errno)));
-      e.everythingOK();
-      finishLogFile();
-      return 1;
-    }
-    if (fseek(f,0,SEEK_END)<0) {
-      reportError(fmt::sprintf("couldn't open file! (couldn't get file size: %s)",strerror(errno)));
-      e.everythingOK();
-      fclose(f);
-      finishLogFile();
-      return 1;
-    }
-    ssize_t len=ftell(f);
-    if (len==(SIZE_MAX>>1)) {
-      reportError(fmt::sprintf("couldn't open file! (couldn't get file length: %s)",strerror(errno)));
-      e.everythingOK();
-      fclose(f);
-      finishLogFile();
-      return 1;
-    }
-    if (len<1) {
-      if (len==0) {
-        reportError("that file is empty!");
-      } else {
-        reportError(fmt::sprintf("couldn't open file! (tell error: %s)",strerror(errno)));
-      }
-      e.everythingOK();
-      fclose(f);
-      finishLogFile();
-      return 1;
-    }
-    unsigned char* file=new unsigned char[len];
-    if (fseek(f,0,SEEK_SET)<0) {
-      reportError(fmt::sprintf("couldn't open file! (size error: %s)",strerror(errno)));
-      e.everythingOK();
-      fclose(f);
-      delete[] file;
-      finishLogFile();
-      return 1;
-    }
-    if (fread(file,1,(size_t)len,f)!=(size_t)len) {
-      reportError(fmt::sprintf("couldn't open file! (read error: %s)",strerror(errno)));
-      e.everythingOK();
-      fclose(f);
-      delete[] file;
-      finishLogFile();
-      return 1;
-    }
-    fclose(f);
-    if (!e.load(file,(size_t)len,fileName)) {
-      reportError(fmt::sprintf("could not open file! (%s)",e.getLastError()));
-      e.everythingOK();
-      finishLogFile();
-      return 1;
-    }
-  }
-  if (infoMode) {
-    e.dumpSongInfo();
-    finishLogFile();
-    return 0;
-  }
-
   if (!e.init()) {
     if (consoleMode) {
       reportError("could not initialize engine!");
@@ -699,6 +634,117 @@ int main(int argc, char** argv) {
     return 0;
   }
 
+  if(!consoleMode)
+  {
+    #ifdef HAVE_GUI
+      if (safeMode) g.enableSafeMode();
+      g.bindEngine(&e);
+      if (!g.init()) {
+        reportError(g.getLastError());
+        finishLogFile();
+        e.everythingOK();
+        return 1;
+      }
+
+      //e.song.systemName=g._L(e.getSongSystemLegacyName(e.song,!e.getConfInt("noMultiSystem",0)).c_str()); //show translated system names when initializing song
+      if(g.settings.initialSysName == "")
+      {
+        //g.autoDetectSystem(); //for some reason it detects properly on system start ONLY IF I PLACE IT THERE
+        e.song.systemName=g._L(e.getSongSystemLegacyName(e.song,!e.getConfInt("noMultiSystem",0)).c_str()); //show translated system names when initializing song
+
+        if(g.settings.language == DIV_LANG_ENGLISH)
+        {
+          e.song.systemName = e.song.systemName.substr(0, e.song.systemName.find("##"));
+        }
+      }
+      
+      if (displayEngineFailError) {
+        logE("displaying engine fail error.");
+        g.showError("error while initializing audio!");
+      }
+
+      if (!fileName.empty()) {
+        g.setFileName(fileName);
+      }
+
+    #ifndef _WIN32
+      sigemptyset(&termsa.sa_mask);
+      termsa.sa_flags=0;
+      termsa.sa_handler=handleTermGUI;
+      sigaction(SIGTERM,&termsa,NULL);
+    #endif
+
+    #else
+      logE("GUI requested but GUI not compiled!");
+    #endif
+  }
+
+  if (!fileName.empty()) {
+    logI("loading module...");
+    FILE* f=ps_fopen(fileName.c_str(),"rb");
+    if (f==NULL) {
+      reportError(fmt::sprintf("couldn't open file! (%s)",strerror(errno)));
+      e.everythingOK();
+      finishLogFile();
+      return 1;
+    }
+    if (fseek(f,0,SEEK_END)<0) {
+      reportError(fmt::sprintf("couldn't open file! (couldn't get file size: %s)",strerror(errno)));
+      e.everythingOK();
+      fclose(f);
+      finishLogFile();
+      return 1;
+    }
+    ssize_t len=ftell(f);
+    if (len==(SIZE_MAX>>1)) {
+      reportError(fmt::sprintf("couldn't open file! (couldn't get file length: %s)",strerror(errno)));
+      e.everythingOK();
+      fclose(f);
+      finishLogFile();
+      return 1;
+    }
+    if (len<1) {
+      if (len==0) {
+        reportError("that file is empty!");
+      } else {
+        reportError(fmt::sprintf("couldn't open file! (tell error: %s)",strerror(errno)));
+      }
+      e.everythingOK();
+      fclose(f);
+      finishLogFile();
+      return 1;
+    }
+    unsigned char* file=new unsigned char[len];
+    if (fseek(f,0,SEEK_SET)<0) {
+      reportError(fmt::sprintf("couldn't open file! (size error: %s)",strerror(errno)));
+      e.everythingOK();
+      fclose(f);
+      delete[] file;
+      finishLogFile();
+      return 1;
+    }
+    if (fread(file,1,(size_t)len,f)!=(size_t)len) {
+      reportError(fmt::sprintf("couldn't open file! (read error: %s)",strerror(errno)));
+      e.everythingOK();
+      fclose(f);
+      delete[] file;
+      finishLogFile();
+      return 1;
+    }
+    fclose(f);
+    if (!e.load(file,(size_t)len,fileName)) {
+      reportError(fmt::sprintf("could not open file! (%s)",e.getLastError()));
+      e.everythingOK();
+      finishLogFile();
+      return 1;
+    }
+  }
+  if (infoMode) {
+    e.dumpSongInfo();
+    finishLogFile();
+    return 0;
+  }
+
   if (consoleMode) {
     bool cliSuccess=false;
     cli.bindEngine(&e);
@@ -738,38 +784,7 @@ int main(int argc, char** argv) {
   }
 
 #ifdef HAVE_GUI
-  if (safeMode) g.enableSafeMode();
-  g.bindEngine(&e);
-  if (!g.init()) {
-    reportError(g.getLastError());
-    finishLogFile();
-    e.everythingOK();
-    return 1;
-  }
-
-  //e.song.systemName=g._L(e.getSongSystemLegacyName(e.song,!e.getConfInt("noMultiSystem",0)).c_str()); //show translated system names when initializing song
-  if(g.settings.initialSysName == "")
-  {
-    //g.autoDetectSystem(); //for some reason it detects properly on system start ONLY IF I PLACE IT THERE
-    e.song.systemName=g._L(e.getSongSystemLegacyName(e.song,!e.getConfInt("noMultiSystem",0)).c_str()); //show translated system names when initializing song
-  }
-  
-  if (displayEngineFailError) {
-    logE("displaying engine fail error.");
-    g.showError("error while initializing audio!");
-  }
-
-  if (!fileName.empty()) {
-    g.setFileName(fileName);
-  }
-
-#ifndef _WIN32
-  sigemptyset(&termsa.sa_mask);
-  termsa.sa_flags=0;
-  termsa.sa_handler=handleTermGUI;
-  sigaction(SIGTERM,&termsa,NULL);
-#endif
-
+  g.updateWindowTitle();
   g.loop();
   logI("closing GUI.");
   g.finish(true);

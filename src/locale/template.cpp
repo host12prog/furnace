@@ -173,6 +173,7 @@ void DivLocale::addTranslationsTemplate()
     strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] = "=SID2 emulator (modification of reSID) by LTVA";
     strings["5E01 emulator (modification of NSFPlay) by Euly##sgab"].plurals[0] = "=5E01 emulator (modification of NSFPlay) by Euly";
     strings["NDS sound emulator by cam900##sgab"].plurals[0] = "=NDS sound emulator by cam900";
+    strings["FZT sound source by LTVA##sgab"].plurals[0] = "=FZT sound source by LTVA";
 
     strings["greetings to:##sgab"].plurals[0] = "=greetings to:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "=NEOART Costa Rica";

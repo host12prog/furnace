@@ -119,6 +119,7 @@ void DivLocale::addTranslationsRussian()
     strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] = "эмулятор SID2 (модификация reSID) за авторством LTVA";
     strings["5E01 emulator (modification of NSFPlay) by Euly##sgab"].plurals[0] = "эмулятор 5E01 (модификация NSFPlay) за авторством Euly";
     strings["NDS sound emulator by cam900##sgab"].plurals[0] = "NDS sound emulator за авторством cam900";
+    strings["FZT sound source by LTVA##sgab"].plurals[0] = "Источник звука FZT за авторством LTVA";
 
     strings["greetings to:##sgab"].plurals[0] = "передаём привет:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "NEOART Costa Rica";

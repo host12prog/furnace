@@ -269,6 +269,7 @@ const char* aboutLine[]={
   "SID2 emulator (modification of reSID) by LTVA##sgab",
   "5E01 emulator (modification of NSFPlay) by Euly##sgab",
   "NDS sound emulator by cam900##sgab",
+  "FZT sound source by LTVA##sgab",
   "",
   "greetings to:##sgab",
   "NEOART Costa Rica##sgab",
