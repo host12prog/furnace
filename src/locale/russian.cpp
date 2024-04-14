@@ -3858,7 +3858,7 @@ void DivLocale::addTranslationsRussian()
     strings["FF = self-sync##sgiFZT"].plurals[0] = "FF = самосинхронизация";
     strings["Retrigger on slide##sgiFZT"].plurals[0] = "Перезапуск на слайде";
     strings["Restart instrument and envelope even if slide command (03xx) is placed with the note.##sgiFZT"].plurals[0] = "Перезапустить инструмент и огибающую, даже если у ноты стоит эффект слайда (03xx).";
-    strings["Sync osc. on keydown##sgiFZT"].plurals[0] = "Сихнр. осц. на новой ноте";
+    strings["Sync osc. on keydown##sgiFZT"].plurals[0] = "Синхр. осц. на новой ноте";
     strings["Reset phase of oscillator each time new note is played.\nDoes not happen when slide (03xx) or legato command is placed.##sgiFZT"].plurals[0] = "Сбросить фазу осциллятора на каждой новой ноте.\nНе выполняется при наличии команды слайда (03xx) или легато.";
     strings["Vibrato##sgiFZT"].plurals[0] = "Вибрато";
     strings["Speed##sgiFZT0"].plurals[0] = "Скорость##sgiFZT0";
