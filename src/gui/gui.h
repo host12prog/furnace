@@ -2152,7 +2152,7 @@ class FurnaceGUI {
       translate_short_channel_names(0),
       follow_log(0),
       vibrationStrength(0.5f),
-      vibrationLength(100),
+      vibrationLength(20),
       mainFontPath(""),
       headFontPath(""),
       patFontPath(""),

@@ -4351,7 +4351,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.follow_log=conf.getInt("followLog",0);
 
     settings.vibrationStrength=conf.getFloat("vibrationStrength",0.5f);
-    settings.vibrationLength=conf.getInt("vibrationLength",100);
+    settings.vibrationLength=conf.getInt("vibrationLength",20);
   }
 
   if (groups&GUI_SETTINGS_AUDIO) {
