@@ -3359,6 +3359,13 @@ DivDataErrors DivInstrument::readInsData(SafeReader& reader, short version, DivS
     tildearrow_version = true;
   } else if (memcmp(magic,"FINS",4)==0) {
     type=2;
+    tildearrow_version = true;
+  } else if (memcmp(magic,"IN2B",4)==0) {
+    type=1;
+    tildearrow_version = false;
+  } else if (memcmp(magic,"FINB",4)==0) {
+    type=2;
+    tildearrow_version = false;
   } else {
     logE("invalid instrument header!");
     return DIV_DATA_INVALID_HEADER;

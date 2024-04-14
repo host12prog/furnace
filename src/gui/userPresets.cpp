@@ -467,15 +467,15 @@ void FurnaceGUI::drawUserPresets() {
 
             ImGui::Separator();
 
-            ImGui::Text("Advanced");
+            ImGui::Text(_L("Advanced##sgpr"));
             if (ImGui::InputTextMultiline("##UExtra",&preset->extra,ImVec2(ImGui::GetContentRegionAvail().x,120.0f*dpiScale),ImGuiInputTextFlags_UndoRedo)) {
               mustBake=true;
             }
             if (ImGui::IsItemHovered()) {
-              ImGui::SetTooltip(
+              ImGui::SetTooltip(_L(
                 "insert additional settings in `option=value` format.\n"
                 "available options:\n"
-                "- tickRate"
+                "- tickRate##sgpr")
               );
             }
 

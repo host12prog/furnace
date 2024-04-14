@@ -1930,6 +1930,14 @@ void DivLocale::addTranslationsRussian()
     strings["Panning##sgpr"].plurals[0] = "Панорамирование";
     strings["Front/Rear##sgpr"].plurals[0] = "Передн./задн.";
     strings["Configure##sgpr"].plurals[0] = "Настроить";
+    strings["Advanced##sgpr"].plurals[0] = "Дополнительно";
+    strings["insert additional settings in `option=value` format.\n"
+            "available options:\n"
+            "- tickRate##sgpr"].plurals[0] = 
+            
+            "вставьте дополнительные настройки в формате `параметр=значение`.\n"
+            "доступные параметры:\n"
+            "- tickRate (частота движка трекера)";
     strings["Save and Close##sgpr"].plurals[0] = "Сохранить и закрыть";
 
     //   sgrv  src/gui/regView.cpp
