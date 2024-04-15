@@ -4939,7 +4939,7 @@ void DivLocale::addTranslationsRussian()
     strings["Set release##sgistru"].plurals[0] = "Релиз";
     strings["Ring modulation source##sgistru"].plurals[0] = "Источник кольцевой модуляции";
     strings["Hard sync source##sgistru"].plurals[0] = "Источник синхронизации осцилляторов";
-    strings["Portamento up (semitones)##sgistru"].plurals[0] = "Портаменто вверх (прлутонов)";
+    strings["Portamento up (semitones)##sgistru"].plurals[0] = "Портаменто вверх (полутонов)";
     strings["Portamento down (semitones)##sgistru"].plurals[0] = "Портаменто вниз (полутонов)";
     strings["Detune##sgistru"].plurals[0] = "Расстройка";
     strings["Absolute arpeggio note##sgistru"].plurals[0] = "Абсолютная нота арпеджио";
