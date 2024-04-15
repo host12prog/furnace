@@ -137,6 +137,7 @@ const char* aboutLine[]={
   "NeoWar",
   "Nerreave",
   "niffuM",
+  "Nikku4211",
   "<nk>",
   "Notakin",
   "nwcr",
