@@ -56,6 +56,7 @@ void DivLocale::addTranslationsRussian()
     strings["-- documentation --##sgab"].plurals[0] = "-- документация --";
     strings["-- demo songs --##sgab"].plurals[0] = "-- демо-модули --";
     strings["-- additional feedback/fixes --##sgab"].plurals[0] = "-- обратная связь/фиксы --";
+    strings["-- Metal backend test team --##sgab"].plurals[0] = "-- Команда тестирования библиотеки отрисовки Metal --";
     strings["-- translations and related work --##sgab"].plurals[0] = "-- переводы и связанное с ними --";
     strings["LTVA1 (Russian translation)##sgab"].plurals[0] = "LTVA1 (перевод на русский язык)";
     strings["Kagamiin~ (Portuguese translation)##sgab"].plurals[0] = "Kagamiin~ (перевод на португальский язык)";

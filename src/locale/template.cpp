@@ -110,6 +110,7 @@ void DivLocale::addTranslationsTemplate()
     strings["-- documentation --##sgab"].plurals[0] = "=-- documentation --";
     strings["-- demo songs --##sgab"].plurals[0] = "=-- demo songs --";
     strings["-- additional feedback/fixes --##sgab"].plurals[0] = "=-- additional feedback/fixes --";
+    strings["-- Metal backend test team --##sgab"].plurals[0] = "=-- Metal backend test team --";
     strings["-- translations and related work --##sgab"].plurals[0] = "=-- translations and related work --";
     strings["LTVA1 (Russian translation)##sgab"].plurals[0] = "=LTVA1 (Russian translation)";
     strings["Kagamiin~ (Portuguese translation)##sgab"].plurals[0] = "=Kagamiin~ (Portuguese translation)";

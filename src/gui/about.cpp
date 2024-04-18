@@ -202,7 +202,7 @@ const char* aboutLine[]={
   "plane",
   "TheEssem",
   "",
-  "-- Metal backend test team --",
+  "-- Metal backend test team --##sgab",
   "Diggo",
   "konard",
   "NaxeCode",
