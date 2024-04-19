@@ -2209,7 +2209,7 @@ void DivLocale::addTranslationsRussian()
     strings["DAC bit depth (reduces output rate):##sgsc"].plurals[0] = "Глубина квантования ЦАП (уменьшает частоту дискретизации):";
     strings["Volume scale:##sgsc"].plurals[0] = "Громкость:";
     strings["Mix buffers (allows longer echo delay):##sgsc"].plurals[0] = "Буферы микширования (позволяет делать более долгую задержку эха):";
-    strings["Channel limit:##sgsc"].plurals[0] = "Димит числа каналов:";
+    strings["Channel limit:##sgsc"].plurals[0] = "Лимит числа каналов:";
     strings["Sample rate:##sgsc"].plurals[0] = "Частота дискретизации:";
     strings["Actual sample rate: %d Hz##sgsc"].plurals[0] = "Настоящая частота дискретизации: %d Гц";
     strings["Max mixer CPU usage: %.0f%%##sgsc"].plurals[0] = "Максимальное использование ЦП микшером: %.0f%%";
