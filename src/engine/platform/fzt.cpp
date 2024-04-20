@@ -587,7 +587,9 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
     }
 
     case 0x2900: {
+      if(tick == (opcode & 0xff)) {
         sound_engine_enable_gate(sound_engine, se_channel, 0);
+      }
 
         break;
     }
