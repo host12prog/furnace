@@ -1259,6 +1259,8 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         break;
       case DIV_INS_FZT:
         featureFZ = true;
+      case DIV_INS_BIFURCATOR:
+        break;
       case DIV_INS_MAX:
         break;
       case DIV_INS_NULL:

@@ -286,6 +286,9 @@ enum DivDispatchCmds {
   DIV_CMD_EFFECT_FZT, //eff + eff val
   DIV_CMD_NOTE_FZT, //note
 
+  DIV_CMD_BIFURCATOR_STATE_LOAD,
+  DIV_CMD_BIFURCATOR_PARAMETER,
+
   DIV_CMD_MAX
 };
 

@@ -101,6 +101,7 @@ enum DivInstrumentType: unsigned short {
   DIV_INS_SID2=63,
   DIV_INS_NDS=64,
   DIV_INS_FZT = 65,
+  DIV_INS_BIFURCATOR=66,
   DIV_INS_MAX,
   DIV_INS_NULL
 };

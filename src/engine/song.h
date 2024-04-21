@@ -142,6 +142,7 @@ enum DivSystem {
   DIV_SYSTEM_GBA_DMA,
   DIV_SYSTEM_GBA_MINMOD,
   DIV_SYSTEM_FZT,
+  DIV_SYSTEM_BIFURCATOR,
 };
 
 enum DivEffectType: unsigned short {

@@ -1271,7 +1271,7 @@ void FurnaceGUI::initSystemPresets() {
     );
     SUB_ENTRY(
       "Tandy 1000", {
-        CH(DIV_SYSTEM_SMS, 1.0f, 0, "chipType=5"), // NCR 8496 or SN76496 or Tandy PSSJ(with 8 bit DAC)
+        CH(DIV_SYSTEM_SMS, 1.0f, 0, "chipType=5"), // NCR 8496 or SN76496 or Tandy PSSJ (with 8 bit DAC)
         CH(DIV_SYSTEM_PCSPKR, 1.0f, 0, "")
       }
     );
@@ -3500,6 +3500,11 @@ void FurnaceGUI::initSystemPresets() {
   ENTRY(
     "Flizzer Tracker (FZT) sound source##sgpr", {
       CH(DIV_SYSTEM_FZT, 1.0f, 0, "")
+    }
+  );
+  ENTRY(
+    "Bifurcator", {
+      CH(DIV_SYSTEM_BIFURCATOR, 1.0f, 0, "")
     }
   );
   CATEGORY_END;
