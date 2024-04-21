@@ -905,7 +905,7 @@ void DivPlatformFZT::tick(bool sysTick)
 
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had)
     {
-      sound_engine->channel[i].adsr.volume = (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val & 255) * fztChan[i].fur_volume / MUS_NOTE_VOLUME_NONE;
+      sound_engine->channel[i].adsr.volume = chan[i].outVol = VOL_SCALE_LINEAR(chan[i].vol&255,MIN(255,chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val),255) * fztChan[i].volume / MUS_NOTE_VOLUME_NONE;
     }
 
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->had) 
@@ -1191,11 +1191,9 @@ int DivPlatformFZT::dispatch(DivCommand c) {
       }
       break;
     case DIV_CMD_VOLUME:
-      if (chan[c.chan].vol!=c.value) {
-        chan[c.chan].vol=c.value;
-        if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
-          chan[c.chan].outVol=c.value;
-        }
+      chan[c.chan].vol=c.value;
+      if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
+        chan[c.chan].outVol=c.value;
       }
       break;
     case DIV_CMD_GET_VOLUME:
