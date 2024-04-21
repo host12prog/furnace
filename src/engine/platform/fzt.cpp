@@ -397,7 +397,7 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
         break;
     }
 
-    case 0x0900: {
+    case 0x0f00: {
         if(tick == 0) {
             if(from_program) {
                 te_channel->program_period = opcode & 0xff;
