@@ -78,50 +78,50 @@ void DivPlatformBifurcator::acquire(short** buf, size_t len) {
 void DivPlatformBifurcator::tick(bool sysTick) {
   for (int i=0; i<4; i++) {
     chan[i].std.next();
-    if (chan[i].std.vol.had) {
-      chan[i].outVol=(chan[i].vol*MIN(chan[i].std.vol.val,255))/255;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
+      chan[i].outVol=(chan[i].vol*MIN(chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val,255))/255;
       chan[i].volChangedL=true;
       chan[i].volChangedR=true;
     }
     if (NEW_ARP_STRAT) {
       chan[i].handleArp();
-    } else if (chan[i].std.arp.had) {
+    } else if (chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->had) {
       if (!chan[i].inPorta) {
-        chan[i].baseFreq=NOTE_FREQUENCY(parent->calcArp(chan[i].note,chan[i].std.arp.val));
+        chan[i].baseFreq=NOTE_FREQUENCY(parent->calcArp(chan[i].note,chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val));
       }
       chan[i].freqChanged=true;
     }
-    if (chan[i].std.duty.had) {
-      rWrite(i*8+2,chan[i].std.duty.val&0xff);
-      rWrite(i*8+3,chan[i].std.duty.val>>8);
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->had) {
+      rWrite(i*8+2,chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->val&0xff);
+      rWrite(i*8+3,chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->val>>8);
     }
-    if (chan[i].std.pitch.had) {
-      if (chan[i].std.pitch.mode) {
-        chan[i].pitch2+=chan[i].std.pitch.val;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
+      if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->mode) {
+        chan[i].pitch2+=chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
         CLAMP_VAR(chan[i].pitch2,-32768,32767);
       } else {
-        chan[i].pitch2=chan[i].std.pitch.val;
+        chan[i].pitch2=chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
       }
       chan[i].freqChanged=true;
     }
-    if (chan[i].std.panL.had) {
-      chan[i].chPanL=(255*(chan[i].std.panL.val&255))/255;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->had) {
+      chan[i].chPanL=(255*(chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->val&255))/255;
       chan[i].volChangedL=true;
     }
 
-    if (chan[i].std.panR.had) {
-      chan[i].chPanR=(255*(chan[i].std.panR.val&255))/255;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_RIGHT)->had) {
+      chan[i].chPanR=(255*(chan[i].std.get_div_macro_struct(DIV_MACRO_PAN_RIGHT)->val&255))/255;
       chan[i].volChangedR=true;
     }
-    if (chan[i].std.phaseReset.had) {
-      if ((chan[i].std.phaseReset.val==1) && chan[i].active) {
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->had) {
+      if ((chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->val==1) && chan[i].active) {
         rWrite(i*8,1);
         rWrite(i*8+1,0);
       }
     }
-    if (chan[i].std.ex1.had) {
-      rWrite(i*8,chan[i].std.ex1.val&0xff);
-      rWrite(i*8+1,chan[i].std.ex1.val>>8);
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->had) {
+      rWrite(i*8,chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val&0xff);
+      rWrite(i*8+1,chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val>>8);
     }
     if (chan[i].freqChanged || chan[i].keyOn || chan[i].keyOff) {
       chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,2,chan[i].pitch2,chipClock,CHIP_FREQBASE);
@@ -129,7 +129,7 @@ void DivPlatformBifurcator::tick(bool sysTick) {
       rWrite(i*8+4,chan[i].freq&0xff);
       rWrite(i*8+5,chan[i].freq>>8);
       if (chan[i].keyOn) {
-        if (!chan[i].std.vol.had) {
+        if (!chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
           chan[i].outVol=chan[i].vol;
         }
         chan[i].volChangedL=true;
@@ -170,7 +170,7 @@ int DivPlatformBifurcator::dispatch(DivCommand c) {
       chan[c.chan].active=true;
       chan[c.chan].keyOn=true;
       chan[c.chan].macroInit(ins);
-      if (!parent->song.brokenOutVol && !chan[c.chan].std.vol.will) {
+      if (!parent->song.brokenOutVol && !chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->will) {
         chan[c.chan].outVol=chan[c.chan].vol;
       }
       break;
@@ -191,14 +191,14 @@ int DivPlatformBifurcator::dispatch(DivCommand c) {
       break;
     case DIV_CMD_VOLUME:
       chan[c.chan].vol=c.value;
-      if (!chan[c.chan].std.vol.has) {
+      if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
         chan[c.chan].outVol=c.value;
       }
       chan[c.chan].volChangedL=true;
       chan[c.chan].volChangedR=true;
       break;
     case DIV_CMD_GET_VOLUME:
-      if (chan[c.chan].std.vol.has) {
+      if (chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
         return chan[c.chan].vol;
       }
       return chan[c.chan].outVol;
@@ -237,7 +237,7 @@ int DivPlatformBifurcator::dispatch(DivCommand c) {
       break;
     }
     case DIV_CMD_LEGATO: {
-      chan[c.chan].baseFreq=NOTE_FREQUENCY(c.value+((HACKY_LEGATO_MESS)?(chan[c.chan].std.arp.val-12):(0)));
+      chan[c.chan].baseFreq=NOTE_FREQUENCY(c.value+((HACKY_LEGATO_MESS)?(chan[c.chan].std.get_div_macro_struct(DIV_MACRO_ARP)->val-12):(0)));
       chan[c.chan].freqChanged=true;
       chan[c.chan].note=c.value;
       break;
@@ -246,7 +246,7 @@ int DivPlatformBifurcator::dispatch(DivCommand c) {
       if (chan[c.chan].active && c.value2) {
         if (parent->song.resetMacroOnPorta) chan[c.chan].macroInit(parent->getIns(chan[c.chan].ins,DIV_INS_AMIGA));
       }
-      if (!chan[c.chan].inPorta && c.value && !parent->song.brokenPortaArp && chan[c.chan].std.arp.will && !NEW_ARP_STRAT) chan[c.chan].baseFreq=NOTE_FREQUENCY(chan[c.chan].note);
+      if (!chan[c.chan].inPorta && c.value && !parent->song.brokenPortaArp && chan[c.chan].std.get_div_macro_struct(DIV_MACRO_ARP)->will && !NEW_ARP_STRAT) chan[c.chan].baseFreq=NOTE_FREQUENCY(chan[c.chan].note);
       chan[c.chan].inPorta=c.value;
       break;
     case DIV_CMD_BIFURCATOR_STATE_LOAD:

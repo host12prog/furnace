@@ -2232,17 +2232,17 @@ void DivEngine::registerSystems() {
 
   sysDefs[DIV_SYSTEM_BIFURCATOR]=new DivSysDef(
     "Bifurcator", NULL, 0xd9, 0, 4, false, true, 0, false, 0, 0, 0,
-    "a fantasy sound chip using logistic map iterations to generate sound.",
-    {"Channel 1", "Channel 2", "Channel 3", "Channel 4"},
-    {"CH1", "CH2", "CH3", "CH4"},
+    "a fantasy sound chip using logistic map iterations to generate sound.##sesd",
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd"},
     {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
     {DIV_INS_BIFURCATOR, DIV_INS_BIFURCATOR, DIV_INS_BIFURCATOR, DIV_INS_BIFURCATOR},
     {},
     {
-      {0x10, {DIV_CMD_BIFURCATOR_STATE_LOAD, "10xx: Load low byte of channel sample state", constVal<0>, effectVal}},
-      {0x11, {DIV_CMD_BIFURCATOR_STATE_LOAD, "11xx: Load high byte of channel sample state", constVal<1>, effectVal}},
-      {0x12, {DIV_CMD_BIFURCATOR_PARAMETER, "12xx: Set low byte of channel parameter", constVal<0>, effectVal}},
-      {0x13, {DIV_CMD_BIFURCATOR_PARAMETER, "13xx: Set high byte of channel parameter", constVal<1>, effectVal}},
+      {0x10, {DIV_CMD_BIFURCATOR_STATE_LOAD, "10xx: Load low byte of channel sample state##sesd", constVal<0>, effectVal}},
+      {0x11, {DIV_CMD_BIFURCATOR_STATE_LOAD, "11xx: Load high byte of channel sample state##sesd", constVal<1>, effectVal}},
+      {0x12, {DIV_CMD_BIFURCATOR_PARAMETER, "12xx: Set low byte of channel parameter##sesd", constVal<0>, effectVal}},
+      {0x13, {DIV_CMD_BIFURCATOR_PARAMETER, "13xx: Set high byte of channel parameter##sesd", constVal<1>, effectVal}},
     }
   );
 

@@ -974,6 +974,7 @@ src/gui/inst/gbaminmod.cpp
 src/gui/inst/sid2.cpp
 src/gui/inst/nds.cpp
 src/gui/inst/fzt.cpp
+src/gui/inst/bifurcator.cpp
 
 src/gui/inst/wavetable.cpp
 

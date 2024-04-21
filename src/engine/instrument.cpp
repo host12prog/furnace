@@ -973,6 +973,8 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         init_type = init_type - (unsigned short)1; break; //tildearrow's verson modules are incompatible with these inst indices so we comply...
       case DIV_INS_NDS:
         init_type = 59; break;
+      case DIV_INS_BIFURCATOR:
+        init_type = 62; break;
       default: break;
     }
   }
@@ -2430,6 +2432,12 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
     if(type == 59) //Nintendo DS (NDS) inst
     {
       type = DIV_INS_NDS;
+      goto proceed;
+    }
+
+    if(type == 62) //Bifurcator inst
+    {
+      type = DIV_INS_BIFURCATOR;
       goto proceed;
     }
   }

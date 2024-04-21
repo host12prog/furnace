@@ -2764,6 +2764,7 @@ class FurnaceGUI {
   void drawInsSID2(DivInstrument* ins);
   void drawInsNDS(DivInstrument* ins);
   void drawInsFZT(DivInstrument* ins);
+  void drawInsBIFURCATOR(DivInstrument* ins);
 
   void insTabWave(DivInstrument* ins);
 

@@ -491,6 +491,11 @@ void FurnaceGUI::drawActualInsEditor()
         drawInsFZT(ins); break;
       }
 
+      case DIV_INS_BIFURCATOR:
+      {
+        drawInsBIFURCATOR(ins); break;
+      }
+
       default: break;
     }
 

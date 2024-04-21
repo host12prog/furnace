@@ -3591,6 +3591,7 @@ void DivLocale::addTranslationsTemplate()
     //   sgiAY     src/gui/inst/ay.cpp
     //   sgi8930   src/gui/inst/ay8930.cpp
     //   sgiB      src/gui/inst/beeper.cpp
+    //   sgiBIFUR  src/gui/inst/bifurcator.cpp
     //   sgiC140   src/gui/inst/c140.cpp
     //   sgiC219   src/gui/inst/c219.cpp
     //   sgiC64    src/gui/inst/c64.cpp
@@ -3726,6 +3727,17 @@ void DivLocale::addTranslationsTemplate()
     strings["Arpeggio##sgiB"].plurals[0] = "=Arpeggio";
     strings["Pitch##sgiB"].plurals[0] = "=Pitch";
     strings["Pulse Width##sgiB"].plurals[0] = "=Pulse Width";
+
+    //   sgiBIFUR  src/gui/inst/bifurcator.cpp
+
+    strings["Macros##sgiBIFUR"].plurals[0] = "=Macros";
+    strings["Volume##sgiBIFUR"].plurals[0] = "=Volume";
+    strings["Arpeggio##sgiBIFUR"].plurals[0] = "=Arpeggio";
+    strings["Pitch##sgiBIFUR"].plurals[0] = "=Pitch";
+    strings["Parameter##sgiBIFUR"].plurals[0] = "=Parameter";
+    strings["Panning (left)##sgiBIFUR"].plurals[0] = "=Panning (left)";
+    strings["Panning (right)##sgiBIFUR"].plurals[0] = "=Panning (right)";
+    strings["Load Value##sgiBIFUR"].plurals[0] = "=Load Value";
 
     //   sgiC140   src/gui/inst/c140.cpp
 
@@ -6106,6 +6118,11 @@ void DivLocale::addTranslationsTemplate()
     strings["27xx: Portamento down (semitones)##sesd"].plurals[0] = "=27xx: Portamento down (semitones)";
     strings["28xx: Absolute arpeggio note##sesd"].plurals[0] = "=28xx: Absolute arpeggio note";
     strings["29xx: Trigger envelope release##sesd"].plurals[0] = "=29xx: Trigger envelope release";
+    strings["a fantasy sound chip using logistic map iterations to generate sound.##sesd"].plurals[0] = "=a fantasy sound chip using logistic map iterations to generate sound.";
+    strings["10xx: Load low byte of channel sample state##sesd"].plurals[0] = "10xx: =Load low byte of channel sample state";
+    strings["11xx: Load high byte of channel sample state##sesd"].plurals[0] = "11xx: =Load high byte of channel sample state";
+    strings["12xx: Set low byte of channel parameter##sesd"].plurals[0] = "12xx: =Set low byte of channel parameter";
+    strings["13xx: Set high byte of channel parameter##sesd"].plurals[0] = "13xx: =Set high byte of channel parameter";
     strings["Dummy System##sesd"].plurals[0] = "=Dummy System";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "=this is a system designed for testing purposes.";
 

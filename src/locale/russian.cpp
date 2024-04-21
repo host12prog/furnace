@@ -3619,6 +3619,17 @@ void DivLocale::addTranslationsRussian()
     strings["Pitch##sgiB"].plurals[0] = "Частота";
     strings["Pulse Width##sgiB"].plurals[0] = "Скважность";
 
+    //   sgiBIFUR  src/gui/inst/bifurcator.cpp
+
+    strings["Macros##sgiBIFUR"].plurals[0] = "Макросы";
+    strings["Volume##sgiBIFUR"].plurals[0] = "Громкость";
+    strings["Arpeggio##sgiBIFUR"].plurals[0] = "Арпеджио";
+    strings["Pitch##sgiBIFUR"].plurals[0] = "Частота";
+    strings["Parameter##sgiBIFUR"].plurals[0] = "Параметр";
+    strings["Panning (left)##sgiBIFUR"].plurals[0] = "Панорамирование (левый)";
+    strings["Panning (right)##sgiBIFUR"].plurals[0] = "Панорамирование (правый)";
+    strings["Load Value##sgiBIFUR"].plurals[0] = "Загрузить значение";
+
     //   sgiC140   src/gui/inst/c140.cpp
 
     strings["Macros##sgiC140"].plurals[0] = "Макросы";
@@ -5957,6 +5968,11 @@ void DivLocale::addTranslationsRussian()
     strings["27xx: Portamento down (semitones)##sesd"].plurals[0] = "27xx: Портаменто вниз (полутонов)";
     strings["28xx: Absolute arpeggio note##sesd"].plurals[0] = "28xx: Абсолютная нота арпеджио";
     strings["29xx: Trigger envelope release##sesd"].plurals[0] = "29xx: Релиз огибающей";
+    strings["a fantasy sound chip using logistic map iterations to generate sound.##sesd"].plurals[0] = "вымышленный звуковой чип, использующий итерации логистического отображения для генерации звука.";
+    strings["10xx: Load low byte of channel sample state##sesd"].plurals[0] = "10xx: Загрузить младший байт сэмплового состояния канала";
+    strings["11xx: Load high byte of channel sample state##sesd"].plurals[0] = "11xx: Загрузить старший байт сэмплового состояния канала";
+    strings["12xx: Set low byte of channel parameter##sesd"].plurals[0] = "12xx: Младший байт параметра канала";
+    strings["13xx: Set high byte of channel parameter##sesd"].plurals[0] = "13xx: Старший байт параметра канала";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "это система, разработанная для тестирования.";
 
     strings["help! what's going on!"].plurals[0] = "помогите! что происходит!";
