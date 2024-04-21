@@ -3848,7 +3848,7 @@ void DivLocale::addTranslationsRussian()
     strings["Slide speed##sgiFZT"].plurals[0] = "Скорость слайда";
     strings["Set PW##sgiFZT"].plurals[0] = "Уст. скважн.";
     strings["Set pulse width on keydown##sgiFZT"].plurals[0] = "Установить скважность на новой ноте";
-    strings["Initial pulse width##sgiFZT"].plurals[0] = "Начальна скважность";
+    strings["Initial pulse width##sgiFZT"].plurals[0] = "Начальная скважность";
     strings["Set cutoff##sgiFZT"].plurals[0] = "Устан. част. среза";
     strings["Set filter cutoff on keydown##sgiFZT"].plurals[0] = "Установить частоту среза фильтра на новой ноте";
     strings["Waveform##sgiFZT"].plurals[0] = "Волна";
