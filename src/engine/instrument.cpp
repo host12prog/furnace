@@ -2569,6 +2569,8 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
     m = std.get_macro(DIV_MACRO_EX10, true);
     m = std.get_macro(DIV_MACRO_EX11, true);
 
+    UNUSED(m);
+
     if(std.get_macro(DIV_MACRO_AMS, true)->len > 0)
     {
       for (int i=0; i<256; i++) 
@@ -3398,6 +3400,8 @@ DivDataErrors DivInstrument::readInsDataOld(SafeReader &reader, short version, b
     m = std.get_macro(DIV_MACRO_FMS, true);
     m = std.get_macro(DIV_MACRO_EX10, true);
     m = std.get_macro(DIV_MACRO_EX11, true);
+
+    UNUSED(m);
 
     if(std.get_macro(DIV_MACRO_AMS, true)->len > 0)
     {
