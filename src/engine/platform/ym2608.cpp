@@ -1489,6 +1489,7 @@ void DivPlatformYM2608::forceIns() {
       chan[i].freqChanged=true;
     }
   }
+  immWrite(0x11,globalRSSVolume&0x3f);
   immWrite(0x22,lfoValue);
   for (int i=(adpcmAChanOffs); i<(adpcmBChanOffs + 1); i++) {
     chan[i].insChanged=true;

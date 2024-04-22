@@ -537,13 +537,15 @@ void FurnaceGUI::drawSettings() {
           settingsChanged=true;
         }
 
-        bool renderClearPosB=settings.renderClearPos;
-        if (ImGui::Checkbox(_L("Late render clear##sgse"),&renderClearPosB)) {
-          settings.renderClearPos=renderClearPosB;
-          settingsChanged=true;
-        }
-        if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("calls rend->clear() after rend->present(). might reduce UI latency by one frame in some drivers.##sgse"));
+        if (settings.renderBackend!=GUI_BACKEND_METAL) {
+          bool renderClearPosB=settings.renderClearPos;
+          if (ImGui::Checkbox(_L("Late render clear##sgse"),&renderClearPosB)) {
+            settings.renderClearPos=renderClearPosB;
+            settingsChanged=true;
+          }
+          if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip(_L("calls rend->clear() after rend->present(). might reduce UI latency by one frame in some drivers.##sgse"));
+          }
         }
 
         bool powerSaveB=settings.powerSave;
