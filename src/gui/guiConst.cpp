@@ -188,7 +188,6 @@ const char* insTypes[][3]={
   {"Nintendo DS",ICON_FA_BAR_CHART,ICON_FUR_INS_NDS},
   {"Flizzer Tracker",ICON_FA_GAMEPAD,ICON_FUR_INS_FZT},
   {"Bifurcator",ICON_FA_LINE_CHART,ICON_FA_QUESTION},
-  {"SID2",ICON_FA_KEYBOARD_O,ICON_FA_QUESTION},
   {NULL,ICON_FA_QUESTION,ICON_FA_QUESTION}
 };
 
@@ -1032,7 +1031,6 @@ const FurnaceGUIColorDef guiColors[GUI_COLOR_MAX]={
   D(GUI_COLOR_INSTR_NDS,"",ImVec4(0.7f,0.7f,0.8f,1.0f)),
   D(GUI_COLOR_INSTR_FZT,"",ImVec4(1.0f,0.6f,0.0f,1.0f)),
   D(GUI_COLOR_INSTR_BIFURCATOR,"",ImVec4(0.8925f,0.8925f,0.8925f,1.0f)),
-  D(GUI_COLOR_INSTR_C64,"",ImVec4(0.6f,0.75f,1.0f,1.0f)),
   D(GUI_COLOR_INSTR_UNKNOWN,"",ImVec4(0.3f,0.3f,0.3f,1.0f)),
 
   D(GUI_COLOR_CHANNEL_BG,"",ImVec4(0.4f,0.6f,0.8f,1.0f)),
@@ -1288,7 +1286,6 @@ const int availableSystems[]={
   DIV_SYSTEM_NDS,
   DIV_SYSTEM_FZT,
   DIV_SYSTEM_BIFURCATOR,
-  DIV_SYSTEM_SID2,
   0 // don't remove this last one!
 };
 

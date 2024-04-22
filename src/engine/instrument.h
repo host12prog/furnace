@@ -1212,7 +1212,7 @@ struct DivInstrument {
   void writeMacro(SafeWriter* w, const DivInstrumentMacro& m);
   void writeFeatureNA(SafeWriter* w);
   void writeFeatureFM(SafeWriter* w, bool fui);
-  void writeFeatureMA(SafeWriter* w);
+  void writeFeatureMA(SafeWriter* w, bool tildearrow_version);
   void writeFeature64(SafeWriter* w);
   void writeFeatureGB(SafeWriter* w);
   void writeFeatureSM(SafeWriter* w);
@@ -1239,7 +1239,7 @@ struct DivInstrument {
 
   void readFeatureNA(SafeReader& reader, short version);
   void readFeatureFM(SafeReader& reader, short version);
-  void readFeatureMA(SafeReader& reader, short version);
+  void readFeatureMA(SafeReader& reader, short version, bool tildearrow_version);
   void readFeature64(SafeReader& reader, bool& volIsCutoff, short version);
   void readFeatureGB(SafeReader& reader, short version);
   void readFeatureSM(SafeReader& reader, short version);

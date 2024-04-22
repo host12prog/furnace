@@ -3483,11 +3483,6 @@ void FurnaceGUI::initSystemPresets() {
     }
   );
   ENTRY(
-    "SID2", {
-      CH(DIV_SYSTEM_SID2, 1.0f, 0, "")
-    }
-  );
-  ENTRY(
     "5E01", {
       CH(DIV_SYSTEM_5E01, 1.0f, 0, "")
     }

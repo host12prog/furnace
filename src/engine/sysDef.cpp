@@ -2246,18 +2246,6 @@ void DivEngine::registerSystems() {
     }
   );
 
-  sysDefs[DIV_SYSTEM_SID2]=new DivSysDef(   
-    "SID2", NULL, 0xf0, 0, 3, false, true, 0, false, 0, 0, 0,
-    "a fantasy sound chip created by LTVA. it is similar to the SID chip, but with many of its problems fixed.",
-    {"Channel 1", "Channel 2", "Channel 3"},
-    {"CH1", "CH2", "CH3"},
-    {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
-    {DIV_INS_SID2, DIV_INS_SID2, DIV_INS_SID2},
-    {},
-    {}, 
-    SID2PostEffectHandlerMap
-  );
-
   sysDefs[DIV_SYSTEM_DUMMY]=new DivSysDef(
     "Dummy System##sesd", NULL, 0xfd, 0, 8, false, true, 0, false, 0, 0, 0,
     "this is a system designed for testing purposes.##sesd",

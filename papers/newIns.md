@@ -126,8 +126,12 @@ the following instrument types are available:
 - 57: PowerNoise (noise)
 - 58: PowerNoise (slope)
 - 59: Dave
+- 60: GBA DMA
+- 61: GBA MinMod
 - 63: SID2
 - 64: NDS
+- 65: FZT
+- 66: Bifurcator
 
 the following feature codes are recognized:
 

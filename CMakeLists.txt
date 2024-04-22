@@ -754,7 +754,6 @@ src/engine/platform/gbaminmod.cpp
 src/engine/platform/nds.cpp
 src/engine/platform/fzt.cpp
 src/engine/platform/bifurcator.cpp
-src/engine/platform/sid2.cpp
 src/engine/platform/pcmdac.cpp
 src/engine/platform/dummy.cpp
 

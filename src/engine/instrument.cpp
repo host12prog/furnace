@@ -424,7 +424,7 @@ void DivInstrument::writeMacro(SafeWriter* w, const DivInstrumentMacro& m) {
   }
 }
 
-void DivInstrument::writeFeatureMA(SafeWriter* w) {
+void DivInstrument::writeFeatureMA(SafeWriter* w, bool tildearrow_version) {
   FEATURE_BEGIN("MA");
 
   // if you update the macro header, please update this value as well.
@@ -433,9 +433,30 @@ void DivInstrument::writeFeatureMA(SafeWriter* w) {
   
   // write macros
   
-  for(int i = 0; i < 32; i++)
+  if(tildearrow_version && type == DIV_INS_SID2)
   {
-    writeMacro(w,*std.get_macro(DIV_MACRO_VOL + i, false));
+    for(int i = 0; i < 32; i++)
+    {
+      if((DivMacroType)i == DIV_MACRO_EX10)
+      {
+        writeMacro(w,*std.get_macro(DIV_MACRO_FMS, false));
+      }
+      else if((DivMacroType)i == DIV_MACRO_EX11)
+      {
+        writeMacro(w,*std.get_macro(DIV_MACRO_AMS, false));
+      }
+      else
+      {
+        writeMacro(w,*std.get_macro(DIV_MACRO_VOL + i, false));
+      }
+    }
+  }
+  else
+  {
+    for(int i = 0; i < 32; i++)
+    {
+      writeMacro(w,*std.get_macro(DIV_MACRO_VOL + i, false));
+    }
   }
 
   // "stop reading" code
@@ -823,34 +844,7 @@ void DivInstrument::writeFeaturePN(SafeWriter* w) {
 void DivInstrument::writeFeatureS2(SafeWriter* w) {
   FEATURE_BEGIN("S2");
 
-  w->writeC(
-    (c64.dutyIsAbs?0x80:0)|
-    (c64.initFilter?0x40:0)|
-    (c64.toFilter?0x10:0)|
-    (c64.noiseOn?8:0)|
-    (c64.pulseOn?4:0)|
-    (c64.sawOn?2:0)|
-    (c64.triOn?1:0)
-  );
-
-  w->writeC(
-    (c64.oscSync?0x80:0)|
-    (c64.ringMod?0x40:0)|
-    (c64.noTest?0x20:0)|
-    (c64.filterIsAbs?0x10:0)|
-    (c64.ch3off?8:0)|
-    (c64.bp?4:0)|
-    (c64.hp?2:0)|
-    (c64.lp?1:0)
-  );
-
-  w->writeC(((c64.a&15)<<4)|(c64.d&15));
-  w->writeC(((c64.s&15)<<4)|(c64.r&15));
-  w->writeS(c64.duty);
-  w->writeS(c64.cut&4095);
-  w->writeC(c64.res);
-
-  w->writeC(sid2.volume | (sid2.mix_mode << 4) | (sid2.noise_mode << 6));
+  w->writeC((sid2.volume & 15) | (sid2.mix_mode << 4) | (sid2.noise_mode << 6));
 
   FEATURE_END;
 }
@@ -969,7 +963,6 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
       case DIV_INS_POWERNOISE:
       case DIV_INS_POWERNOISE_SLOPE:
       case DIV_INS_DAVE:
-      case DIV_INS_SID2:
         init_type = init_type - (unsigned short)1; break; //tildearrow's verson modules are incompatible with these inst indices so we comply...
       case DIV_INS_NDS:
         init_type = 59; break;
@@ -1241,9 +1234,6 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         break;
       case DIV_INS_KURUMITSU:
         break;
-      case DIV_INS_SID2:
-        featureS2=true;
-        break;
       case DIV_INS_POKEY:
         featurePO=true;
         break;
@@ -1323,7 +1313,7 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
     if (powernoise!=defaultIns.powernoise) {
       featurePN=true;
     }
-    if (type == DIV_INS_SID2 && (sid2!=defaultIns.sid2 || c64!=defaultIns.c64)) {
+    if (sid2!=defaultIns.sid2) {
       featureS2=true;
     }
     if (pokey!=defaultIns.pokey) {
@@ -1452,7 +1442,7 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
     writeFeatureFM(w,fui);
   }
   if (featureMA) {
-    writeFeatureMA(w);
+    writeFeatureMA(w, tilde_version);
   }
   if (feature64) {
     writeFeature64(w);
@@ -1678,7 +1668,7 @@ void DivInstrument::readFeatureFM(SafeReader& reader, short version) {
   READ_FEAT_END;
 }
 
-void DivInstrument::readFeatureMA(SafeReader& reader, short version) {
+void DivInstrument::readFeatureMA(SafeReader& reader, short version, bool tildearrow_version) {
   READ_FEAT_BEGIN;
 
   unsigned short macroHeaderLen=reader.readS();
@@ -2266,47 +2256,55 @@ void DivInstrument::readFeaturePN(SafeReader& reader, short version) {
 void DivInstrument::readFeatureS2(SafeReader& reader, short version) {
   READ_FEAT_BEGIN;
 
-  unsigned char next=reader.readC();
-  c64.dutyIsAbs=next&128;
-  c64.initFilter=next&64;
-  //volIsCutoff=next&32;
-  c64.toFilter=next&16;
-  c64.noiseOn=next&8;
-  c64.pulseOn=next&4;
-  c64.sawOn=next&2;
-  c64.triOn=next&1;
+  if(version < 198)
+  {
+    unsigned char next=reader.readC();
+    c64.dutyIsAbs=next&128;
+    c64.initFilter=next&64;
+    //volIsCutoff=next&32;
+    c64.toFilter=next&16;
+    c64.noiseOn=next&8;
+    c64.pulseOn=next&4;
+    c64.sawOn=next&2;
+    c64.triOn=next&1;
 
-  next=reader.readC();
-  c64.oscSync=(next&128)?1:0;
-  c64.ringMod=(next&64)?1:0;
-  c64.noTest=next&32;
-  c64.filterIsAbs=next&16;
-  c64.ch3off=next&8;
-  c64.bp=next&4;
-  c64.hp=next&2;
-  c64.lp=next&1;
+    next=reader.readC();
+    c64.oscSync=(next&128)?1:0;
+    c64.ringMod=(next&64)?1:0;
+    c64.noTest=next&32;
+    c64.filterIsAbs=next&16;
+    c64.ch3off=next&8;
+    c64.bp=next&4;
+    c64.hp=next&2;
+    c64.lp=next&1;
 
-  next=reader.readC();
-  c64.a=(next>>4)&15;
-  c64.d=next&15;
+    next=reader.readC();
+    c64.a=(next>>4)&15;
+    c64.d=next&15;
 
-  next=reader.readC();
-  c64.s=(next>>4)&15;
-  c64.r=next&15;
+    next=reader.readC();
+    c64.s=(next>>4)&15;
+    c64.r=next&15;
 
-  c64.duty=reader.readS()&4095;
+    c64.duty=reader.readS()&4095;
 
-  c64.cut=reader.readS();
-  c64.res=reader.readC();
+    c64.cut=reader.readS();
+    c64.res=reader.readC();
 
-//  w->writeS(c64.cut&4095);
-//  w->writeC(c64.res);
+    uint8_t temp = reader.readC();
 
-  uint8_t temp = reader.readC();
+    sid2.volume = temp & 0xf;
+    sid2.mix_mode = (temp >> 4) & 3;
+    sid2.noise_mode = temp >> 6;
+  }
+  else
+  {
+    uint8_t temp = reader.readC();
 
-  sid2.volume = temp & 0xf;
-  sid2.mix_mode = (temp >> 4) & 3;
-  sid2.noise_mode = temp >> 6;
+    sid2.volume = temp & 0xf;
+    sid2.mix_mode = (temp >> 4) & 3;
+    sid2.noise_mode = temp >> 6;
+  }
 
   READ_FEAT_END;
 }
@@ -2461,7 +2459,7 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
     } else if (memcmp(featCode,"FM",2)==0) { // FM
       readFeatureFM(reader,version);
     } else if (memcmp(featCode,"MA",2)==0) { // macros
-      readFeatureMA(reader,version);
+      readFeatureMA(reader,version,tildearrow_version);
     } else if (memcmp(featCode,"64",2)==0) { // C64
       readFeature64(reader,volIsCutoff,version);
     } else if (memcmp(featCode,"GB",2)==0) { // Game Boy
@@ -2561,6 +2559,48 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
       for (int i=0; i<256; i++) {
         std.get_macro(DIV_MACRO_ALG, true)->val[i]=-std.get_macro(DIV_MACRO_ALG, true)->val[i];
       }
+    }
+  }
+
+  if(tildearrow_version && type == DIV_INS_SID2) //tildearrow uses different macros
+  {
+    DivInstrumentMacro* m = std.get_macro(DIV_MACRO_AMS, true);
+    m = std.get_macro(DIV_MACRO_FMS, true);
+    m = std.get_macro(DIV_MACRO_EX10, true);
+    m = std.get_macro(DIV_MACRO_EX11, true);
+
+    if(std.get_macro(DIV_MACRO_AMS, true)->len > 0)
+    {
+      for (int i=0; i<256; i++) 
+      {
+        std.get_macro(DIV_MACRO_EX11, true)->val[i]=std.get_macro(DIV_MACRO_AMS, true)->val[i];
+      }
+
+      std.get_macro(DIV_MACRO_EX11, true)->len = std.get_macro(DIV_MACRO_AMS, true)->len;
+      std.get_macro(DIV_MACRO_EX11, true)->delay = std.get_macro(DIV_MACRO_AMS, true)->delay;
+      std.get_macro(DIV_MACRO_EX11, true)->lenMemory = std.get_macro(DIV_MACRO_AMS, true)->lenMemory;
+      std.get_macro(DIV_MACRO_EX11, true)->mode = std.get_macro(DIV_MACRO_AMS, true)->mode;
+      std.get_macro(DIV_MACRO_EX11, true)->rel = std.get_macro(DIV_MACRO_AMS, true)->rel;
+      std.get_macro(DIV_MACRO_EX11, true)->speed = std.get_macro(DIV_MACRO_AMS, true)->speed;
+      std.get_macro(DIV_MACRO_EX11, true)->loop = std.get_macro(DIV_MACRO_AMS, true)->loop;
+      std.get_macro(DIV_MACRO_EX11, true)->open = std.get_macro(DIV_MACRO_AMS, true)->open;
+    }
+
+    if(std.get_macro(DIV_MACRO_FMS, true)->len > 0)
+    {
+      for (int i=0; i<256; i++) 
+      {
+        std.get_macro(DIV_MACRO_EX10, true)->val[i]=std.get_macro(DIV_MACRO_FMS, true)->val[i];
+      }
+
+      std.get_macro(DIV_MACRO_EX10, true)->len = std.get_macro(DIV_MACRO_FMS, true)->len;
+      std.get_macro(DIV_MACRO_EX10, true)->delay = std.get_macro(DIV_MACRO_FMS, true)->delay;
+      std.get_macro(DIV_MACRO_EX10, true)->lenMemory = std.get_macro(DIV_MACRO_FMS, true)->lenMemory;
+      std.get_macro(DIV_MACRO_EX10, true)->mode = std.get_macro(DIV_MACRO_FMS, true)->mode;
+      std.get_macro(DIV_MACRO_EX10, true)->rel = std.get_macro(DIV_MACRO_FMS, true)->rel;
+      std.get_macro(DIV_MACRO_EX10, true)->speed = std.get_macro(DIV_MACRO_FMS, true)->speed;
+      std.get_macro(DIV_MACRO_EX10, true)->loop = std.get_macro(DIV_MACRO_FMS, true)->loop;
+      std.get_macro(DIV_MACRO_EX10, true)->open = std.get_macro(DIV_MACRO_FMS, true)->open;
     }
   }
 
@@ -3350,6 +3390,48 @@ DivDataErrors DivInstrument::readInsDataOld(SafeReader &reader, short version, b
   // <187 special/test/gate merge
   if (type==DIV_INS_C64 && version<187) {
     convertC64SpecialMacro();
+  }
+
+  if(tildearrow_version && type == DIV_INS_SID2) //tildearrow uses different macros
+  {
+    DivInstrumentMacro* m = std.get_macro(DIV_MACRO_AMS, true);
+    m = std.get_macro(DIV_MACRO_FMS, true);
+    m = std.get_macro(DIV_MACRO_EX10, true);
+    m = std.get_macro(DIV_MACRO_EX11, true);
+
+    if(std.get_macro(DIV_MACRO_AMS, true)->len > 0)
+    {
+      for (int i=0; i<256; i++) 
+      {
+        std.get_macro(DIV_MACRO_EX11, true)->val[i]=std.get_macro(DIV_MACRO_AMS, true)->val[i];
+      }
+
+      std.get_macro(DIV_MACRO_EX11, true)->len = std.get_macro(DIV_MACRO_AMS, true)->len;
+      std.get_macro(DIV_MACRO_EX11, true)->delay = std.get_macro(DIV_MACRO_AMS, true)->delay;
+      std.get_macro(DIV_MACRO_EX11, true)->lenMemory = std.get_macro(DIV_MACRO_AMS, true)->lenMemory;
+      std.get_macro(DIV_MACRO_EX11, true)->mode = std.get_macro(DIV_MACRO_AMS, true)->mode;
+      std.get_macro(DIV_MACRO_EX11, true)->rel = std.get_macro(DIV_MACRO_AMS, true)->rel;
+      std.get_macro(DIV_MACRO_EX11, true)->speed = std.get_macro(DIV_MACRO_AMS, true)->speed;
+      std.get_macro(DIV_MACRO_EX11, true)->loop = std.get_macro(DIV_MACRO_AMS, true)->loop;
+      std.get_macro(DIV_MACRO_EX11, true)->open = std.get_macro(DIV_MACRO_AMS, true)->open;
+    }
+
+    if(std.get_macro(DIV_MACRO_FMS, true)->len > 0)
+    {
+      for (int i=0; i<256; i++) 
+      {
+        std.get_macro(DIV_MACRO_EX10, true)->val[i]=std.get_macro(DIV_MACRO_FMS, true)->val[i];
+      }
+
+      std.get_macro(DIV_MACRO_EX10, true)->len = std.get_macro(DIV_MACRO_FMS, true)->len;
+      std.get_macro(DIV_MACRO_EX10, true)->delay = std.get_macro(DIV_MACRO_FMS, true)->delay;
+      std.get_macro(DIV_MACRO_EX10, true)->lenMemory = std.get_macro(DIV_MACRO_FMS, true)->lenMemory;
+      std.get_macro(DIV_MACRO_EX10, true)->mode = std.get_macro(DIV_MACRO_FMS, true)->mode;
+      std.get_macro(DIV_MACRO_EX10, true)->rel = std.get_macro(DIV_MACRO_FMS, true)->rel;
+      std.get_macro(DIV_MACRO_EX10, true)->speed = std.get_macro(DIV_MACRO_FMS, true)->speed;
+      std.get_macro(DIV_MACRO_EX10, true)->loop = std.get_macro(DIV_MACRO_FMS, true)->loop;
+      std.get_macro(DIV_MACRO_EX10, true)->open = std.get_macro(DIV_MACRO_FMS, true)->open;
+    }
   }
 
   return DIV_DATA_SUCCESS;
