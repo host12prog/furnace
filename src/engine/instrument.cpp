@@ -2442,6 +2442,8 @@ DivDataErrors DivInstrument::readInsDataNew(SafeReader& reader, short version, b
       type = DIV_INS_BIFURCATOR;
       goto proceed;
     }
+
+    //SID2 instrument indices are the same, neat
   }
   
   proceed:;
