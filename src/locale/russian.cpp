@@ -5949,7 +5949,7 @@ void DivLocale::addTranslationsRussian()
     strings["14xx: Pulse width down##sesd"].plurals[0] = "14xx: Изменение скважности вниз";
     strings["15xx: Set filter cutoff##sesd"].plurals[0] = "15xx: Частота среза фильтра";
     strings["16xx: Set volume##sesd"].plurals[0] = "16xx: Громкость";
-    strings["17xx: Toggle filter##sesd"].plurals[0] = "=17xx: Вкл./выкл. фильтр";
+    strings["17xx: Toggle filter##sesd"].plurals[0] = "17xx: Вкл./выкл. фильтр";
     strings["18xx: Set filter mode##sesd"].plurals[0] = "18xx: Режим фильтра";
     strings["19xx: Phase reset##sesd"].plurals[0] = "19xx: Сброс фазы";
     strings["1Axx: Filter cutoff up##sesd"].plurals[0] = "1Axx: Частота среза вверх";

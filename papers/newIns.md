@@ -722,7 +722,7 @@ size | description
 
 # SID2 data (S2)
 
-Basically C64 data, but last three bytes are different (and volIsCutoff flag is missing). From version `198`, only last byte (`data`) is present, other info is read from C64 data section.
+Basically C64 data, but last three bytes are different (and volIsCutoff flag is missing). From version `198`, only last byte (`data`) is present, other info is read from C64 data section. From version `199` one additional byte at the end is read which is filter resonance. In that case C64 data section resonance value is ignored
 
 ```
 size | description
