@@ -2112,6 +2112,7 @@ int FurnaceGUI::save(String path, int dmfVersion) {
     return 1;
   }
   if (settings.compress) {
+    logV("compressing with zlib");
     unsigned char zbuf[131072];
     int ret;
     z_stream zl;
