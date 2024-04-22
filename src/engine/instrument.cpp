@@ -1263,6 +1263,10 @@ void DivInstrument::putInsData2(SafeWriter* w, bool fui, const DivSong* song, bo
         featureFZ = true;
       case DIV_INS_BIFURCATOR:
         break;
+      case DIV_INS_SID2:
+        feature64=true;
+        featureS2=true;
+        break;
       case DIV_INS_MAX:
         break;
       case DIV_INS_NULL:

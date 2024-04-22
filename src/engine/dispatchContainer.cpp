@@ -93,6 +93,7 @@
 #include "platform/nds.h"
 #include "platform/fzt.h"
 #include "platform/bifurcator.h"
+#include "platform/sid2.h"
 #include "platform/dummy.h"
 #include "../ta-log.h"
 #include "song.h"
@@ -800,6 +801,9 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
       break;
     case DIV_SYSTEM_FZT:
       dispatch=new DivPlatformFZT;
+      break;
+    case DIV_SYSTEM_SID2:
+      dispatch=new DivPlatformSID2;
       break;
     case DIV_SYSTEM_DUMMY:
       dispatch=new DivPlatformDummy;
