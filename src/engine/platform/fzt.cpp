@@ -151,7 +151,7 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
   switch(opcode & 0xff00) 
   {
     case 0x0000: {
-        if(tick == 0) {
+        if(tick == 0 || from_program) {
             if(te_channel->fixed_note != 0xffff) {
                 te_channel->note = te_channel->last_note;
                 te_channel->fixed_note = 0xffff;

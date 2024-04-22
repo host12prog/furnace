@@ -1580,6 +1580,25 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
         {
           whatOrder--;
           whatRow = curSubSong->patLen - 1;
+
+          bool found_od = false;
+
+          for(int j = 0; j < chans && !found_od; j++)
+          {
+            DivPattern* pat=curPat[j].getPattern(curOrders->ord[j][whatOrder],false);
+
+            for(int y = 0; y < curSubSong->patLen && !found_od; y++)
+            {
+              for(int k = 0; k < DIV_MAX_EFFECTS && !found_od; k++)
+              {
+                if(pat->data[y][4 + k*2] == 0x0d)
+                {
+                  whatRow = y;
+                  found_od = true;
+                }
+              }
+            }
+          }
         }
         DivPattern* pat=curPat[i].getPattern(curOrders->ord[i][whatOrder],false);
         int seek=(pat->data[whatRow][0]+pat->data[whatRow][1]*12);
@@ -1633,6 +1652,25 @@ bool DivEngine::nextTick(bool noAccum, bool inhibitLowLat) {
       {
         whatOrder--;
         whatRow = curSubSong->patLen - 1;
+
+        bool found_od = false;
+
+          for(int j = 0; j < chans && !found_od; j++)
+          {
+            DivPattern* pat=curPat[j].getPattern(curOrders->ord[j][whatOrder],false);
+
+            for(int y = 0; y < curSubSong->patLen && !found_od; y++)
+            {
+              for(int k = 0; k < DIV_MAX_EFFECTS && !found_od; k++)
+              {
+                if(pat->data[y][4 + k*2] == 0x0d)
+                {
+                  whatRow = y;
+                  found_od = true;
+                }
+              }
+            }
+          }
       }
       for (int i=0; i<chans; i++) 
       {
