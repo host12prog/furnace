@@ -352,7 +352,8 @@ size | description
   2  | duty
   2  | cutoff/resonance
      | - bit 12-15: resonance
-     | - bit 0-10: cutoff
+     | - bit 0-10: cutoff (0-11 on SID2)
+  1  | upper nibble of resonance (for SID2) (>=199)
 ```
 
 ## C64 compatibility note (>=187)
@@ -722,7 +723,7 @@ size | description
 
 # SID2 data (S2)
 
-Basically C64 data, but last three bytes are different (and volIsCutoff flag is missing). From version `198`, only last byte (`data`) is present, other info is read from C64 data section. From version `199` one additional byte at the end is read which is filter resonance. In that case C64 data section resonance value is ignored
+Basically C64 data, but last three bytes are different (and volIsCutoff flag is missing). From version `198`, only last byte (`data`) is present, other info is read from C64 data section.
 
 ```
 size | description

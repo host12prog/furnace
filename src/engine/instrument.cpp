@@ -492,7 +492,9 @@ void DivInstrument::writeFeature64(SafeWriter* w) {
   w->writeC(((c64.a&15)<<4)|(c64.d&15));
   w->writeC(((c64.s&15)<<4)|(c64.r&15));
   w->writeS(c64.duty);
-  w->writeS((unsigned short)((c64.cut&4095)|(c64.res<<12))); //SID2
+  w->writeS((unsigned short)((c64.cut&4095)|((c64.res&15)<<12)));
+
+  w->writeC((c64.res>>4)&15);
 
   FEATURE_END;
 }
@@ -845,7 +847,6 @@ void DivInstrument::writeFeatureS2(SafeWriter* w) {
   FEATURE_BEGIN("S2");
 
   w->writeC((sid2.volume & 15) | (sid2.mix_mode << 4) | (sid2.noise_mode << 6));
-  w->writeC(c64.res);
 
   FEATURE_END;
 }
@@ -1775,10 +1776,11 @@ void DivInstrument::readFeature64(SafeReader& reader, bool& volIsCutoff, short v
 
   unsigned short cr=reader.readS();
   c64.cut=cr&4095; //SID2
+  c64.res=cr>>12;
 
-  if(type != DIV_INS_SID2)
+  if (version>=199) 
   {
-    c64.res=cr>>12;
+    c64.res|=((unsigned char)reader.readC())<<4;
   }
 
   READ_FEAT_END;
@@ -2309,11 +2311,6 @@ void DivInstrument::readFeatureS2(SafeReader& reader, short version) {
     sid2.volume = temp & 0xf;
     sid2.mix_mode = (temp >> 4) & 3;
     sid2.noise_mode = temp >> 6;
-
-    if(version > 198)
-    {
-      c64.res = reader.readC();
-    }
   }
 
   READ_FEAT_END;
