@@ -495,9 +495,6 @@ void DivInstrument::writeFeature64(SafeWriter* w) {
   w->writeS((unsigned short)((c64.cut&4095)|((c64.res&15)<<12)));
 
   w->writeC((c64.res>>4)&15);
-  w->writeS((unsigned short)((c64.cut&4095)|((c64.res&15)<<12)));
-
-  w->writeC((c64.res>>4)&15);
 
   FEATURE_END;
 }
