@@ -72,6 +72,7 @@ enum DivAudioEngines {
   DIV_AUDIO_JACK=0,
   DIV_AUDIO_SDL=1,
   DIV_AUDIO_PORTAUDIO=2,
+  DIV_AUDIO_PIPE=3,
 
   DIV_AUDIO_NULL=126,
   DIV_AUDIO_DUMMY=127
@@ -413,6 +414,7 @@ class DivEngine {
   bool shallStop, shallStopSched;
   bool endOfSong;
   bool consoleMode;
+  bool disableStatusOut;
   bool extValuePresent;
   bool repeatPattern;
   bool metronome;
@@ -1133,7 +1135,7 @@ class DivEngine {
     void rescanMidiDevices();
 
     // set the console mode.
-    void setConsoleMode(bool enable);
+    void setConsoleMode(bool enable, bool statusOut=true);
 
     // get metronome
     bool getMetronome();
@@ -1316,6 +1318,7 @@ class DivEngine {
       shallStopSched(false),
       endOfSong(false),
       consoleMode(false),
+      disableStatusOut(false),
       extValuePresent(false),
       repeatPattern(false),
       metronome(false),
