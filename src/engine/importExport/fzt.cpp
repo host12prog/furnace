@@ -55,6 +55,13 @@ if(pat->data[row][4] == eff && pat->data[row][5] > 0xf && !found_invalid_effects
     found_invalid_effects[eff] = true; \
 }
 
+#define WARNING_ABOUT_TWO_DIGIT_COMMAND(eff) \
+if(pat->data[row][4] == eff && !found_invalid_effects[eff]) \
+{ \
+    warnings += fmt::sprintf(_LE("You are using %02Xxx effect which is not supported by FZT format (channel %d, pattern %d, row %d).\n\n"), eff, i, j, row); \
+    found_invalid_effects[eff] = true; \
+}
+
 class DivEngine;
 
 typedef enum {
@@ -894,6 +901,7 @@ int DivEngine::exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_
     }
 
     bool rate_too_high = false;
+    bool inst_index_out_of_bounds = false;
 
     if(sub_song->hz > 255.0f)
     {
@@ -922,9 +930,10 @@ int DivEngine::exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_
                     }
                 }
 
-                if(pat->data[row][2] > MUS_NOTE_INSTRUMENT_NONE_FZT - 1)
+                if(pat->data[row][2] > MUS_NOTE_INSTRUMENT_NONE_FZT - 1 && !inst_index_out_of_bounds)
                 {
                     warnings += fmt::sprintf(_LE("You are using instrument index that is higher than %02X (channel %d, pattern %d, row %d).\nThe index will be capped at %02X.\n\n"), MUS_NOTE_INSTRUMENT_NONE_FZT - 1, i, j, row, MUS_NOTE_INSTRUMENT_NONE_FZT - 1);
+                    inst_index_out_of_bounds = true;
                 }
             }
         }
@@ -955,6 +964,30 @@ int DivEngine::exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_
                 WARNING_ABOUT_ONE_DIGIT_COMMAND(0xec);
                 WARNING_ABOUT_ONE_DIGIT_COMMAND(0xed);
                 WARNING_ABOUT_ONE_DIGIT_COMMAND(0x19);
+
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0x05);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0x06);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0x07);
+
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xE0);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xE1);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xE2);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xE3);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xE4);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xE6);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xE7);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xE8);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xE9);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xEE);
+
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xF0);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xF5);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xF6);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xF7);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xF8);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xF9);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xFA);
+                WARNING_ABOUT_TWO_DIGIT_COMMAND(0xFC);
 
                 if((pat->data[row][4] == 0xfd || pat->data[row][4] == 0xfe) && (!found_invalid_effects[0xfd] && !found_invalid_effects[0xfe]))
                 {

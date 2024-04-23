@@ -5426,6 +5426,7 @@ void DivLocale::addTranslationsTemplate()
     //           src/engine/importExport/fzt.cpp
 
     strings["You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"].plurals[0] = "=You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n";
+    strings["You are using %02Xxx effect which is not supported by FZT format (channel %d, pattern %d, row %d).\n\n"].plurals[0] = "=You are using %02Xxx effect which is not supported by FZT format (channel %d, pattern %d, row %d).\n\n";
     strings["invalid pattern length!"].plurals[0] = "=invalid pattern length!";
     strings["invalid loop start and loop end!"].plurals[0] = "=invalid loop start and loop end!";
     strings["invalid orders length!"].plurals[0] = "=invalid orders length!";

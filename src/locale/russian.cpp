@@ -5315,6 +5315,7 @@ void DivLocale::addTranslationsRussian()
     //           src/engine/importExport/fzt.cpp
 
     strings["You are using %02Xxx effect with param higher than 0xf (channel %d, pattern %d, row %d).\nThe effect param will be capped at 0xf.\n\n"].plurals[0] = "Вы используете эффект %02Xxx с параметром, превышающим 0xf (канал %d, паттерн %d, строка %d).\nПараметр эффекта будет уменьшен до 0xf.\n\n";
+    strings["You are using %02Xxx effect which is not supported by FZT format (channel %d, pattern %d, row %d).\n\n"].plurals[0] = "Вы используете эффект %02Xxx, который не поддерживается форматом FZT (канал %d, паттерн %d, строка %d).\n\n";
     strings["invalid pattern length!"].plurals[0] = "Неправильная длина паттерна!";
     strings["invalid loop start and loop end!"].plurals[0] = "неправильные начало и конец зацикленной части трека!";
     strings["invalid orders length!"].plurals[0] = "неправильное число строк матрицы паттернов!";
