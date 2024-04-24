@@ -835,6 +835,9 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
     if (ds.version<191) {
       ds.oldAlwaysSetVolume=true;
     }
+    if (ds.version<200) {
+      ds.oldSampleOffset=true;
+    }
     ds.isDMF=false;
     
     reader.readS(); // reserved
@@ -1392,7 +1395,9 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       } else {
         reader.readC();
       }
-      for (int i=0; i<1; i++) {
+      if (ds.version>=200) {
+        ds.oldSampleOffset=reader.readC();
+      } else {
         reader.readC();
       }
     }
@@ -2596,9 +2601,7 @@ SafeWriter* DivEngine::saveFur(bool notPrimary, bool newPatternFormat, bool tild
   w->writeC(song.resetArpPhaseOnNewNote);
   w->writeC(song.ceilVolumeScaling);
   w->writeC(song.oldAlwaysSetVolume);
-  for (int i=0; i<1; i++) {
-    w->writeC(0);
-  }
+  w->writeC(song.oldSampleOffset);
 
   // speeds of first song
   w->writeC(subSong->speeds.len);

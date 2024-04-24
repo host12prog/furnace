@@ -1642,7 +1642,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openLoad(
         settings.language == DIV_LANG_ENGLISH ? "Open File" : _L("Open File##sggu"),
-        { settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu0"), "*.fub *.fur *.dmf *.mod *.fc13 *.fc14 *.smod *.fc *.ftm *.0cc *.dnm *.eft *.fzt",
+        { settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu0"), "*.fub *.fur *.dmf *.mod *.fc13 *.fc14 *.smod *.fc *.ftm *.0cc *.dnm *.eft *.fzt *.tfe",
          settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu0"), "*"},
         workingDirSong,
         dpiScale

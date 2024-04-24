@@ -167,7 +167,17 @@ const char* DivEngine::getEffectDesc(unsigned char effect, int chan, bool notNul
       return "FFxx: Stop song##seen";
     default:
       if ((effect&0xf0)==0x90) {
-        return "9xxx: Set sample offset*256##seen";
+        if (song.oldSampleOffset) {
+          return "9xxx: Set sample offset*256#seen";
+        }
+        switch (effect) {
+          case 0x90:
+            return "90xx: Set sample offset (first byte)#seen";
+          case 0x91:
+            return "91xx: Set sample offset (second byte, ×256)#seen";
+          case 0x92:
+            return "92xx: Set sample offset (third byte, ×65536)#seen";
+        }
       } else if (chan>=0 && chan<chans) {
         DivSysDef* sysDef=sysDefs[sysOfChan[chan]];
         auto iter=sysDef->effectHandlers.find(effect);
@@ -573,6 +583,9 @@ void DivEngine::initSongWithDesc(const char* description, bool inBase64, bool ol
   
   // extra attributes
   song.subsong[0]->hz=c.getDouble("tickRate",60.0);
+  if (song.subsong[0]->hz<1.0) song.subsong[0]->hz=1.0;
+  if (song.subsong[0]->hz>999.0) song.subsong[0]->hz=999.0;
+
   song.author=getConfString("defaultAuthorName","");
 }
 
