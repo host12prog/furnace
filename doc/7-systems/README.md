@@ -75,6 +75,7 @@ this is the full list of chips that Furnace supports.
 - [Ensoniq ES5503](es5503.md)
 - [Konami SCC](scc.md)
 - [FDS](fds.md)
+- [FZT sound source](fzt.md)
 - [Game Boy](game-boy.md)
 - [Game Boy Advance](gba.md)
 - [Generic PCM DAC](dac.md)

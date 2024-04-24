@@ -8,16 +8,11 @@ filter cutoff and resonance ranges were extended, as well as the frequency - fin
 
 ## effects
 
-- `10xx`: **change wave.** the following values are accepted:
-  - `00`: nothing
-  - `01`: triangle
-  - `02`: saw
-  - `03`: triangle and saw
-  - `04`: pulse
-  - `05`: pulse and triangle
-  - `06`: pulse and saw
-  - `07`: pulse and triangle and saw
-  - `08`: noise
+- `10xx`: **change wave.** lower 4 bits specify the wave:
+  - `bit 0`: triangle
+  - `bit 1`: saw
+  - `bit 2`: pulse
+  - `bit 3`: noise
 - `11xx`: **set resonance.** `xx` may be a value between `00` and `FF`.
 - `12xx`: **set filter mode.** the following values are accepted:
   - `00`: filter off

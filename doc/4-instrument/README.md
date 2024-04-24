@@ -81,6 +81,7 @@ the following instrument types are available:
 - [SID2](sid2.md) - for use with SID2 chip.
 - [Game Boy Advance DMA](gbadma.md) - for use with Game Boy Advance in direct mode.
 - [Game Boy Advance MinMod](gbaminmod.md) - for use with Game Boy Advance with the MinMod software mixing driver.
+- [FZT](fzt.md) - for use with FZT sound source chip.
 
 ## macros
 
