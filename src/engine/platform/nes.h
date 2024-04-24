@@ -28,7 +28,7 @@ class DivPlatformNES: public DivDispatch {
   struct Channel: public SharedChannel<signed char> {
     int prevFreq;
     unsigned char duty, sweep, envMode, len;
-    bool sweepChanged, furnaceDac;
+    bool sweepChanged, furnaceDac, setPos;
     int note;
     bool do_sweep;
     Channel():
@@ -40,13 +40,14 @@ class DivPlatformNES: public DivDispatch {
       len(0x1f),
       sweepChanged(false),
       furnaceDac(false),
+      setPos(false),
       note(0),
       do_sweep(false) {}
   };
   Channel chan[5];
   DivDispatchOscBuffer* oscBuf[5];
   bool isMuted[5];
-  int dacPeriod, dacRate;
+  int dacPeriod, dacRate, dpcmPos;
   unsigned int dacPos, dacAntiClick;
   int dacSample;
   unsigned char* dpcmMem;
