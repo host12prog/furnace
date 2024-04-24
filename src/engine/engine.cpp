@@ -168,15 +168,15 @@ const char* DivEngine::getEffectDesc(unsigned char effect, int chan, bool notNul
     default:
       if ((effect&0xf0)==0x90) {
         if (song.oldSampleOffset) {
-          return "9xxx: Set sample offset*256#seen";
+          return "9xxx: Set sample offset*256##seen";
         }
         switch (effect) {
           case 0x90:
-            return "90xx: Set sample offset (first byte)#seen";
+            return "90xx: Set sample offset (first byte)##seen";
           case 0x91:
-            return "91xx: Set sample offset (second byte, ×256)#seen";
+            return "91xx: Set sample offset (second byte, ×256)##seen";
           case 0x92:
-            return "92xx: Set sample offset (third byte, ×65536)#seen";
+            return "92xx: Set sample offset (third byte, ×65536)##seen";
         }
       } else if (chan>=0 && chan<chans) {
         DivSysDef* sysDef=sysDefs[sysOfChan[chan]];

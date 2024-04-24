@@ -37,3 +37,4 @@
 #define DIV_FC14_MAGIC "FC14"
 #define DIV_S3M_MAGIC "SCRM"
 #define DIV_FZT_MAGIC "FZT!SONG"
+#define DIV_TFM_MAGIC "TFMfmtV2"

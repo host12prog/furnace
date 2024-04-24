@@ -5321,6 +5321,9 @@ void DivLocale::addTranslationsTemplate()
     strings["FExx: Set virtual tempo denominator##seen"].plurals[0] = "FExx: =Set virtual tempo denominator";
     strings["FFxx: Stop song##seen"].plurals[0] = "FFxx: =Stop song";
     strings["9xxx: Set sample offset*256##seen"].plurals[0] = "9xxx: =Set sample offset*256";
+    strings["90xx: Set sample offset (first byte)##seen"].plurals[0] = "90xx: =Set sample offset (first byte)";
+    strings["91xx: Set sample offset (second byte, ×256)##seen"].plurals[0] = "91xx: =Set sample offset (second byte, ×256)";
+    strings["92xx: Set sample offset (third byte, ×65536)##seen"].plurals[0] = "92xx: =Set sample offset (third byte, ×65536)";
 
     strings["on seek: %s"].plurals[0] = "=on seek: %s";
     strings["on pre tell: %s"].plurals[0] = "=on pre tell: %s";
@@ -5522,6 +5525,10 @@ void DivLocale::addTranslationsTemplate()
     //           src/engine/importExport/s3i.cpp
 
     strings["S3I PCM samples currently not supported."].plurals[0] = "=S3I PCM samples currently not supported.";
+
+    //           src/engine/importExport/tfm.cpp
+
+    strings["interleave factor is bigger than 8, speed information may be inaccurate"].plurals[0] = "=interleave factor is bigger than 8, speed information may be inaccurate";
 
     //           src/engine/vgmOps.cpp
 

@@ -5210,6 +5210,9 @@ void DivLocale::addTranslationsRussian()
     strings["FExx: Set virtual tempo denominator##seen"].plurals[0] = "FExx: Знаменатель виртуального темпа";
     strings["FFxx: Stop song##seen"].plurals[0] = "FFxx: Остановить трек";
     strings["9xxx: Set sample offset*256##seen"].plurals[0] = "9xxx: Начальное смещение сэмпла (xxx*256 шагов)";
+    strings["90xx: Set sample offset (first byte)##seen"].plurals[0] = "90xx: Начальное смещение сэмпла (младший байт)";
+    strings["91xx: Set sample offset (second byte, ×256)##seen"].plurals[0] = "91xx: Начальное смещение сэмпла (средний байт, ×256)";
+    strings["92xx: Set sample offset (third byte, ×65536)##seen"].plurals[0] = "92xx: Начальное смещение сэмпла (старший байт, ×65536)";
 
     strings["on seek: %s"].plurals[0] = "во время перехода по файлу: %s";
     strings["on pre tell: %s"].plurals[0] = "перед запросом положения в файле: %s";
@@ -5411,6 +5414,10 @@ void DivLocale::addTranslationsRussian()
     //           src/engine/importExport/s3i.cpp
 
     strings["S3I PCM samples currently not supported."].plurals[0] = "S3I: ИКМ-сэмплы пока не поддерживаются.";
+
+    //           src/engine/importExport/tfm.cpp
+
+    strings["interleave factor is bigger than 8, speed information may be inaccurate"].plurals[0] = "параметр чередования больше 8, скорость проигрывания трека может быть неправильной";
 
     //           src/engine/vgmOps.cpp
 

@@ -17,7 +17,18 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include "fileOpsCommon.h"
+#include "importExport.h"
+
+#ifdef HAVE_GUI
+#include "../gui/gui.h"
+extern FurnaceGUI g;
+#endif
+
+#ifdef HAVE_GUI
+#define _LE(string) g.locale.getText(string)
+#else
+#define _LE(string) (string)
+#endif
 
 class TFMRLEReader;
 

@@ -2227,10 +2227,14 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
     return loadFC(file,len);
   } else if (memcmp(file,DIV_FZT_MAGIC,8)==0) {
     return loadFZT(file,len);
+  } else if (memcmp(file,DIV_TFM_MAGIC,8)==0) {
+    return loadTFMv2(file,len);
   }
 
-  // step 3: try loading as .mod
-  if (loadMod(file,len)) {
+  // step 3: try loading as .mod or TFEv1 (if the file extension matches)
+  if (pathlower.find(".tfe") != std::string::npos) {
+    return loadTFMv1(file,len);
+  } else if (loadMod(file,len)) {
     delete[] f;
     return true;
   }
