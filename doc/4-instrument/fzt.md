@@ -1,6 +1,6 @@
 # FZT instrument editor
 
-the FZT instrument editor consists of two tabs: "FZT" to control various parameters of sound channels, "Instrument program" to modify them (mostly for `.fzt` format compatibility) and "Macros" containing several macros.
+the FZT instrument editor consists of three tabs: "FZT" to control various parameters of sound channels, "Instrument program" to modify them (mostly for `.fzt` format compatibility) and "Macros" containing several macros.
 
 ## FZT
 
@@ -59,7 +59,7 @@ program consists of 16 steps that are executed one by one sequentially.
 
 by default a simple arpeggio program is set up so that `00xy` effect works.
 
-- **Program period**: how many engine ticks it takes to advance one program step.\
+- **Program period**: how many engine ticks it takes to advance one program step.
   - notice that if program period is higher than `1`, effects like portamento and filter cutoff/duty change are executed each tick, so they will be executed twice (for each program step) if program period is `2`.
 - **Do not restart instrument program on keydown**: do not restart it on new note.
 
