@@ -132,8 +132,7 @@ void DivPlatformSID2::tick(bool sysTick) {
         chan[i].duty-=chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->val;
       }
 
-      if(chan[i].duty < 0) chan[i].duty = 0;
-      if(chan[i].duty > 4095) chan[i].duty = 4095;
+      chan[i].duty &= 4095;
 
       rWrite(i*7+2,chan[i].duty&0xff);
       rWrite(i*7+3,(chan[i].duty>>8) | (chan[i].outVol << 4));
