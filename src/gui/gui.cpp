@@ -1980,11 +1980,30 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       );
       break;
     case GUI_FILE_IMPORT_LAYOUT:
-      if (!dirExists(workingDirKeybinds)) workingDirKeybinds=getHomeDir();
+      if (!dirExists(workingDirLayout)) workingDirLayout=getHomeDir();
       hasOpened=fileDialog->openLoad(
         settings.language == DIV_LANG_ENGLISH ? "Select Layout File" : _L("Select Layout File##sggu"),
         {settings.language == DIV_LANG_ENGLISH ? ".ini files" : _L(".ini files##sggu0"), "*.ini"},
-        workingDirKeybinds,
+        workingDirLayout,
+        dpiScale
+      );
+      break;
+    case GUI_FILE_IMPORT_USER_PRESETS:
+    case GUI_FILE_IMPORT_USER_PRESETS_REPLACE:
+      if (!dirExists(workingDirConfig)) workingDirConfig=getHomeDir();
+      hasOpened=fileDialog->openLoad(
+        settings.language == DIV_LANG_ENGLISH ? "Select User Presets File" : _L("Select User Presets File##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu4"), "*.cfgu"},
+        workingDirConfig,
+        dpiScale
+      );
+      break;
+    case GUI_FILE_IMPORT_CONFIG:
+      if (!dirExists(workingDirConfig)) workingDirConfig=getHomeDir();
+      hasOpened=fileDialog->openLoad(
+        settings.language == DIV_LANG_ENGLISH ? "Select Settings File" : _L("Select Settings File##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu5"), "*.cfg"},
+        workingDirConfig,
         dpiScale
       );
       break;
@@ -2007,11 +2026,29 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       );
       break;
     case GUI_FILE_EXPORT_LAYOUT:
-      if (!dirExists(workingDirKeybinds)) workingDirKeybinds=getHomeDir();
+      if (!dirExists(workingDirLayout)) workingDirLayout=getHomeDir();
       hasOpened=fileDialog->openSave(
         settings.language == DIV_LANG_ENGLISH ? "Export Layout" : _L("Export Layout##sggu"),
         {settings.language == DIV_LANG_ENGLISH ? ".ini files" : _L(".ini files##sggu1"), "*.ini"},
-        workingDirKeybinds,
+        workingDirLayout,
+        dpiScale
+      );
+      break;
+    case GUI_FILE_EXPORT_USER_PRESETS:
+      if (!dirExists(workingDirConfig)) workingDirConfig=getHomeDir();
+      hasOpened=fileDialog->openSave(
+        settings.language == DIV_LANG_ENGLISH ? "Export User Presets" : _L("Export User Presets##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu6"), "*.cfgu"},
+        workingDirConfig,
+        dpiScale
+      );
+      break;
+    case GUI_FILE_EXPORT_CONFIG:
+      if (!dirExists(workingDirConfig)) workingDirConfig=getHomeDir();
+      hasOpened=fileDialog->openSave(
+        settings.language == DIV_LANG_ENGLISH ? "Export Settings" : _L("Export Settings##sggu",
+        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu7"), "*.cfg"},
+        workingDirConfig,
         dpiScale
       );
       break;
@@ -4884,6 +4921,13 @@ bool FurnaceGUI::loop() {
         case GUI_FILE_EXPORT_LAYOUT:
           workingDirLayout=fileDialog->getPath()+DIR_SEPARATOR_STR;
           break;
+        case GUI_FILE_IMPORT_USER_PRESETS:
+        case GUI_FILE_IMPORT_USER_PRESETS_REPLACE:
+        case GUI_FILE_EXPORT_USER_PRESETS:
+        case GUI_FILE_IMPORT_CONFIG:
+        case GUI_FILE_EXPORT_CONFIG:
+          workingDirConfig=fileDialog->getPath()+DIR_SEPARATOR_STR;
+          break;
         case GUI_FILE_YRW801_ROM_OPEN:
         case GUI_FILE_TG100_ROM_OPEN:
         case GUI_FILE_MU5_ROM_OPEN:
@@ -4974,6 +5018,12 @@ bool FurnaceGUI::loop() {
           }
           if (curFileDialog==GUI_FILE_EXPORT_LAYOUT) {
             checkExtension(".ini");
+          }
+          if (curFileDialog==GUI_FILE_EXPORT_USER_PRESETS) {
+            checkExtension(".cfgu");
+          }
+          if (curFileDialog==GUI_FILE_EXPORT_CONFIG) {
+            checkExtension(".cfg");
           }
           String copyOfName=fileName;
           switch (curFileDialog) {
@@ -5530,6 +5580,19 @@ bool FurnaceGUI::loop() {
             case GUI_FILE_IMPORT_LAYOUT:
               importLayout(copyOfName);
               break;
+            case GUI_FILE_IMPORT_USER_PRESETS:
+              if (!loadUserPresets(false,copyOfName,true)) {
+                showError("could not import user presets!");
+              }
+              break;
+            case GUI_FILE_IMPORT_USER_PRESETS_REPLACE:
+              if (!loadUserPresets(false,copyOfName,false)) {
+                showError(fmt::sprintf("could not import user presets! (%s)",strerror(errno)));
+              }
+              break;
+            case GUI_FILE_IMPORT_CONFIG:
+              importConfig(copyOfName);
+              break;
             case GUI_FILE_EXPORT_COLORS:
               exportColors(copyOfName);
               break;
@@ -5538,6 +5601,14 @@ bool FurnaceGUI::loop() {
               break;
             case GUI_FILE_EXPORT_LAYOUT:
               exportLayout(copyOfName);
+              break;
+            case GUI_FILE_EXPORT_USER_PRESETS:
+              if (!saveUserPresets(false,copyOfName)) {
+                showError(fmt::sprintf("could not import user presets! (%s)",strerror(errno)));
+              }
+              break;
+            case GUI_FILE_EXPORT_CONFIG:
+              exportConfig(copyOfName);
               break;
             case GUI_FILE_YRW801_ROM_OPEN:
               settings.yrw801Path=copyOfName;
@@ -6797,6 +6868,7 @@ bool FurnaceGUI::init() {
   workingDirColors=e->getConfString("lastDirColors",workingDir);
   workingDirKeybinds=e->getConfString("lastDirKeybinds",workingDir);
   workingDirLayout=e->getConfString("lastDirLayout",workingDir);
+  workingDirConfig=e->getConfString("lastDirConfig",workingDir);
   workingDirTest=e->getConfString("lastDirTest",workingDir);
 
   editControlsOpen=e->getConfBool("editControlsOpen",true);
@@ -7359,6 +7431,7 @@ void FurnaceGUI::commitState() {
   e->setConf("lastDirColors",workingDirColors);
   e->setConf("lastDirKeybinds",workingDirKeybinds);
   e->setConf("lastDirLayout",workingDirLayout);
+  e->setConf("lastDirConfig",workingDirConfig);
   e->setConf("lastDirTest",workingDirTest);
 
   // commit last open windows
