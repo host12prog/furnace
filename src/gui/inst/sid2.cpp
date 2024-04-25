@@ -88,9 +88,9 @@ void FurnaceGUI::drawInsSID2(DivInstrument* ins)
       CENTER_TEXT(_L("R##sgiSID2"));
       ImGui::TextUnformatted(_L("R##sgiSID2"));
       ImGui::TableNextColumn();
-      CENTER_TEXT(_L("VOL##sgiSID2"));
-      ImGui::TextUnformatted(_L("VOL##sgiSID2"));
-      ImGui::TableNextColumn();
+      //CENTER_TEXT(_L("VOL##sgiSID2"));
+      //ImGui::TextUnformatted(_L("VOL##sgiSID2"));
+      //ImGui::TableNextColumn();
       CENTER_TEXT(_L("Envelope##sgiSID2"));
       ImGui::TextUnformatted(_L("Envelope##sgiSID2"));
 
