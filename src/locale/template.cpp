@@ -820,12 +820,6 @@ void DivLocale::addTranslationsTemplate()
     strings["could not write FZT module!##sggu"].plurals[0] = "=could not write FZT module!";
     strings["could not import user presets!##sggu"].plurals[0] = "=could not import user presets!";
     strings["could not import user presets! (%s)##sggu"].plurals[0] = "=could not import user presets! (%s)";
-    strings[""].plurals[0] = "=";
-    strings[""].plurals[0] = "=";
-    strings[""].plurals[0] = "=";
-    strings[""].plurals[0] = "=";
-    strings[""].plurals[0] = "=";
-    strings[""].plurals[0] = "=";
     strings["Could not write ZSM! (%s)##sggu"].plurals[0] = "=Could not write ZSM! (%s)";
     strings["could not write text! (%s)##sggu"].plurals[0] = "=could not write text! (%s)";
     strings["could not write command stream! (%s)##sggu"].plurals[0] = "=could not write command stream! (%s)";
@@ -2016,6 +2010,9 @@ void DivLocale::addTranslationsTemplate()
             "=available options:\n"
             "=- tickRate";
     strings["Save and Close##sgpr"].plurals[0] = "=Save and Close";
+    strings["Import##sgpr"].plurals[0] = "=Import";
+    strings["Import (replace)##sgpr"].plurals[0] = "=Import (replace)";
+    strings["Export##sgpr"].plurals[0] = "=Export";
 
     //   sgrv  src/gui/regView.cpp
 

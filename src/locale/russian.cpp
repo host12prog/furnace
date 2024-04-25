@@ -498,11 +498,19 @@ void DivLocale::addTranslationsRussian()
     strings["configuration files##sggu1"].plurals[0] = "файлы конфигурации";
     strings["Select Layout File##sggu"].plurals[0] = "Выберите файл с настройками компоновки окон интерфейса";
     strings[".ini files##sggu0"].plurals[0] = "файлы .ini";
+    strings["Select User Presets File##sggu"].plurals[0] = "Выберите файл пользовательских пресетов";
+    strings["configuration files##sggu4"].plurals[0] = "файлы конфигурации";
+    strings["Select Settings File##sggu"].plurals[0] = "Выберите файл с настройками";
+    strings["configuration files##sggu5"].plurals[0] = "файлы конфигурации";
     strings["Export Colors##sggu"].plurals[0] = "Экспортировать настройки цветов";
     strings["configuration files##sggu2"].plurals[0] = "файлы конфигурации";
     strings["Export Keybinds##sggu"].plurals[0] = "Экспортировать настройки клавиатуры";
     strings["configuration files##sggu3"].plurals[0] = "файлы конфигурации";
-    strings["Export Layout##sggu"].plurals[0] = "Экспортиировать компоновку окон интерфейса";
+    strings["Export Layout##sggu"].plurals[0] = "Экспортировать компоновку окон интерфейса";
+    strings["Export User Presets##sggu"].plurals[0] = "Экспортировать пользовательские пресеты";
+    strings["configuration files##sggu6"].plurals[0] = "файлы конфигурации";
+    strings["Export Settings##sggu"].plurals[0] = "Экспортировать настройки";
+    strings["configuration files##sggu7"].plurals[0] = "файлы конфигурации";
     strings[".ini files##sggu1"].plurals[0] = "файлы .ini";
     strings["Load ROM##sggu"].plurals[0] = "Загрузить ROM";
     strings["compatible files##sggu7"].plurals[0] = "совместимые файлы";
@@ -752,6 +760,9 @@ void DivLocale::addTranslationsRussian()
     strings["cannot load wavetable! (##sggu"].plurals[0] = "не могу загрузить волновую таблицу! (";
     strings["...but you haven't selected a wavetable!##sggu"].plurals[0] = "...но вы не выбрали волновую таблицу!";
     strings["could not open file!##sggu"].plurals[0] = "не удалось открыть файл!";
+    strings["could not write FZT module!##sggu"].plurals[0] = "не удалось записать модуль FZT!";
+    strings["could not import user presets!##sggu"].plurals[0] = "не удалось импортировать пользовательские пресеты!";
+    strings["could not import user presets! (%s)##sggu"].plurals[0] = "не удалось импортировать пользовательские пресеты! (%s)";
     strings["Could not write ZSM! (%s)##sggu"].plurals[0] = "Не удалось записать файл ZSM! (%s)";
     strings["could not write text! (%s)##sggu"].plurals[0] = "не удалось записать текстовый файл! (%s)";
     strings["could not write command stream! (%s)##sggu"].plurals[0] = "не удалось записать файл с потоком команд! (%s)";
@@ -1940,6 +1951,9 @@ void DivLocale::addTranslationsRussian()
             "доступные параметры:\n"
             "- tickRate (частота движка трекера)";
     strings["Save and Close##sgpr"].plurals[0] = "Сохранить и закрыть";
+    strings["Import##sgpr"].plurals[0] = "Импорт";
+    strings["Import (replace)##sgpr"].plurals[0] = "Импорт (с заменой)";
+    strings["Export##sgpr"].plurals[0] = "Экспорт";
 
     //   sgrv  src/gui/regView.cpp
 

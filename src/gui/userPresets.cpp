@@ -512,15 +512,15 @@ void FurnaceGUI::drawUserPresets() {
     ImGui::SameLine();
     ImGui::Dummy(ImVec2(8.0f*dpiScale,1.0f));
     ImGui::SameLine();
-    if (ImGui::Button("Import")) {
+    if (ImGui::Button(_L("Import##sgpr"))) {
       openFileDialog(GUI_FILE_IMPORT_USER_PRESETS);
     }
     ImGui::SameLine();
-    if (ImGui::Button("Import (replace)")) {
+    if (ImGui::Button(_L("Import (replace)##sgpr"))) {
       openFileDialog(GUI_FILE_IMPORT_USER_PRESETS_REPLACE);
     }
     ImGui::SameLine();
-    if (ImGui::Button("Export")) {
+    if (ImGui::Button(_L("Export##sgpr"))) {
       openFileDialog(GUI_FILE_EXPORT_USER_PRESETS);
     }
   }
