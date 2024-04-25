@@ -346,7 +346,7 @@ void FurnaceGUI::drawUserPresets() {
         ImGui::Text(_L("Systems##sgpr"));
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_PLUS "##AddPreset")) {
-          userCategory->systems.push_back(FurnaceGUISysDef(_L("New Preset##sgpr"),{}));
+          userCategory->systems.push_back(FurnaceGUISysDef(settings.language == DIV_LANG_ENGLISH ? "New Preset" : _L("New Preset##sgpr"),{}));
           selectedUserPreset.clear();
           selectedUserPreset.push_back(userCategory->systems.size()-1);
         }
