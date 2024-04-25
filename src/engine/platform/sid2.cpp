@@ -317,6 +317,8 @@ int DivPlatformSID2::dispatch(DivCommand c) {
 
         chan[c.chan].noise_mode = ins->sid2.noise_mode;
         chan[c.chan].mix_mode = ins->sid2.mix_mode;
+
+        //chan[c.chan].outVol=ins->sid2.volume;
       }
       if (chan[c.chan].insChanged || chan[c.chan].resetFilter) {
         chan[c.chan].filter=ins->c64.toFilter;

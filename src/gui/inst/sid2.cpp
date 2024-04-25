@@ -64,13 +64,14 @@ void FurnaceGUI::drawInsSID2(DivInstrument* ins)
 
     ImVec2 sliderSize=ImVec2(20.0f*dpiScale,128.0*dpiScale);
 
-    if (ImGui::BeginTable("C64EnvParams",6,ImGuiTableFlags_NoHostExtendX))
+    //if (ImGui::BeginTable("C64EnvParams",6,ImGuiTableFlags_NoHostExtendX))
+    if (ImGui::BeginTable("C64EnvParams",5,ImGuiTableFlags_NoHostExtendX)) //sigh tildearrow
     {
       ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed,sliderSize.x);
       ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed,sliderSize.x);
       ImGui::TableSetupColumn("c2",ImGuiTableColumnFlags_WidthFixed,sliderSize.x);
       ImGui::TableSetupColumn("c3",ImGuiTableColumnFlags_WidthFixed,sliderSize.x);
-      ImGui::TableSetupColumn("c4",ImGuiTableColumnFlags_WidthFixed,sliderSize.x);
+      //ImGui::TableSetupColumn("c4",ImGuiTableColumnFlags_WidthFixed,sliderSize.x);
       ImGui::TableSetupColumn("c5",ImGuiTableColumnFlags_WidthStretch);
 
       ImGui::TableNextRow();
@@ -103,8 +104,8 @@ void FurnaceGUI::drawInsSID2(DivInstrument* ins)
       ImGui::TableNextColumn();
       P(CWVSliderScalar("##Release",sliderSize,ImGuiDataType_U8,&ins->c64.r,&_ZERO,&_FIFTEEN)); rightClickable
       ImGui::TableNextColumn();
-      P(CWVSliderScalar("##Volume",sliderSize,ImGuiDataType_U8,&ins->sid2.volume,&_ZERO,&_FIFTEEN)); rightClickable
-      ImGui::TableNextColumn();
+      //P(CWVSliderScalar("##Volume",sliderSize,ImGuiDataType_U8,&ins->sid2.volume,&_ZERO,&_FIFTEEN)); rightClickable
+      //ImGui::TableNextColumn();
       drawFMEnv(15-ins->sid2.volume,16-ins->c64.a,16-ins->c64.d,15-(ins->c64.r == 15 ? (ins->c64.r - 1) : ins->c64.r),15-(ins->c64.r == 15 ? (ins->c64.r - 1) : ins->c64.r),15-ins->c64.s,0,0,0,15,16,15,ImVec2(ImGui::GetContentRegionAvail().x,sliderSize.y),ins->type); //the (ins->c64.r == 15 ? (ins->c64.r - 1) : ins->c64.r) is used so release part never becomes horizontal (which isn't the case with SID envelope)
 
       ImGui::EndTable();

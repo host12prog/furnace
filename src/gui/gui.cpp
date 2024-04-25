@@ -2046,7 +2046,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_CONFIG:
       if (!dirExists(workingDirConfig)) workingDirConfig=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export Settings" : _L("Export Settings##sggu",
+        settings.language == DIV_LANG_ENGLISH ? "Export Settings" : _L("Export Settings##sggu"),
         {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu7"), "*.cfg"},
         workingDirConfig,
         dpiScale
@@ -5582,12 +5582,12 @@ bool FurnaceGUI::loop() {
               break;
             case GUI_FILE_IMPORT_USER_PRESETS:
               if (!loadUserPresets(false,copyOfName,true)) {
-                showError("could not import user presets!");
+                showError(settings.language == DIV_LANG_ENGLISH ? "could not import user presets!" : _L("could not import user presets!##sggu"));
               }
               break;
             case GUI_FILE_IMPORT_USER_PRESETS_REPLACE:
               if (!loadUserPresets(false,copyOfName,false)) {
-                showError(fmt::sprintf("could not import user presets! (%s)",strerror(errno)));
+                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "could not import user presets! (%s)" : _L("could not import user presets! (%s)##sggu"),strerror(errno)));
               }
               break;
             case GUI_FILE_IMPORT_CONFIG:
@@ -5604,7 +5604,7 @@ bool FurnaceGUI::loop() {
               break;
             case GUI_FILE_EXPORT_USER_PRESETS:
               if (!saveUserPresets(false,copyOfName)) {
-                showError(fmt::sprintf("could not import user presets! (%s)",strerror(errno)));
+                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "could not import user presets! (%s)" : _L("could not import user presets! (%s)##sggu"),strerror(errno)));
               }
               break;
             case GUI_FILE_EXPORT_CONFIG:

@@ -2911,9 +2911,6 @@ class FurnaceGUI {
   void applyUISettings(bool updateFonts=true);
   void initSystemPresets();
 
-  void initRandomDemoSong();
-  bool loadRandomDemoSong();
-
   bool loadUserPresets(bool redundancy=true, String path="", bool append=false);
   bool saveUserPresets(bool redundancy=true, String path="");
 
