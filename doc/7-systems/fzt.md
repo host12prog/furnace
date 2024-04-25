@@ -75,6 +75,8 @@ D-4 01 .. ....
 ```
 to achieve the same sound.
 
+Notice that `.fzt` file format does not support the following effects: `05xx`, `06xx`, `07xx`, `E0xx`, `E1xx`, `E2xx`, `E3xx`, `E4xx`, `E6xx`, `E7xy`, `E8xy`, `E9xy`, `EExx`, `F0xx`, `F5xx`, `F6xx`, `F7xx`, `F8xx`, `F9xx`, `FAxx`, `FCxx`, `FDxx`, `FExx`. Some of them may work in Furnace-B for FZT sound source, but not all. 
+
 ## info
 
 this chip uses the [FZT](../4-instrument/fzt.md) instrument editor.
