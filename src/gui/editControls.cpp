@@ -699,15 +699,28 @@ void FurnaceGUI::drawEditControls() {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
           ImGui::AlignTextToFramePadding();
-          ImGui::Text(_L("Edit Step##sgec0"));
+          if (ImGui::SmallButton(changeCoarse?_L("Coarse Step##sgec"):_L("Edit Step##sgec0"))) {
+            changeCoarse=!changeCoarse;
+          }
           ImGui::TableNextColumn();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          if (ImGui::InputInt("##EditStep",&editStep,1,1)) {
-            if (editStep>=e->curSubSong->patLen) editStep=e->curSubSong->patLen-1;
-            if (editStep<0) editStep=0;
+          if (changeCoarse) {
+            if (ImGui::InputInt("##CoarseStep",&editStepCoarse,1,1)) {
+              if (editStepCoarse>=e->curSubSong->patLen) editStepCoarse=e->curSubSong->patLen-1;
+              if (editStepCoarse<0) editStepCoarse=0;
 
-            if (settings.insFocusesPattern && !ImGui::IsItemActive() && patternOpen) {
-              nextWindow=GUI_WINDOW_PATTERN;
+              if (settings.insFocusesPattern && !ImGui::IsItemActive() && patternOpen) {
+                nextWindow=GUI_WINDOW_PATTERN;
+              }
+            }
+          } else {
+            if (ImGui::InputInt("##EditStep",&editStep,1,1)) {
+              if (editStep>=e->curSubSong->patLen) editStep=e->curSubSong->patLen-1;
+              if (editStep<0) editStep=0;
+
+              if (settings.insFocusesPattern && !ImGui::IsItemActive() && patternOpen) {
+                nextWindow=GUI_WINDOW_PATTERN;
+              }
             }
           }
 
@@ -845,15 +858,28 @@ void FurnaceGUI::drawEditControls() {
         }
 
         ImGui::SameLine();
-        ImGui::Text(_L("Edit Step##sgec1"));
+        if (ImGui::SmallButton(changeCoarse?_L("Coarse Step##sgec1"):_L("Edit Step##sgec1"))) {
+          changeCoarse=!changeCoarse;
+        }
         ImGui::SameLine();
         ImGui::SetNextItemWidth(96.0f*dpiScale);
-        if (ImGui::InputInt("##EditStep",&editStep,1,1)) {
-          if (editStep>=e->curSubSong->patLen) editStep=e->curSubSong->patLen-1;
-          if (editStep<0) editStep=0;
+        if (changeCoarse) {
+          if (ImGui::InputInt("##CoarseStep",&editStepCoarse,1,1)) {
+            if (editStepCoarse>=e->curSubSong->patLen) editStepCoarse=e->curSubSong->patLen-1;
+            if (editStepCoarse<0) editStepCoarse=0;
 
-          if (settings.insFocusesPattern && !ImGui::IsItemActive() && patternOpen) {
-            nextWindow=GUI_WINDOW_PATTERN;
+            if (settings.insFocusesPattern && !ImGui::IsItemActive() && patternOpen) {
+              nextWindow=GUI_WINDOW_PATTERN;
+            }
+          }
+        } else {
+          if (ImGui::InputInt("##EditStep",&editStep,1,1)) {
+            if (editStep>=e->curSubSong->patLen) editStep=e->curSubSong->patLen-1;
+            if (editStep<0) editStep=0;
+
+            if (settings.insFocusesPattern && !ImGui::IsItemActive() && patternOpen) {
+              nextWindow=GUI_WINDOW_PATTERN;
+            }
           }
         }
 
@@ -949,14 +975,27 @@ void FurnaceGUI::drawEditControls() {
           }
         }
 
-        ImGui::Text(_L("Step##sgec0"));
+        if (ImGui::SmallButton(changeCoarse?_L("Coarse##sgec0"):_L("Step##sgec0"))) {
+          changeCoarse=!changeCoarse;
+        }
         ImGui::SetNextItemWidth(avail);
-        if (ImGui::InputInt("##EditStep",&editStep,0,0)) {
-          if (editStep>=e->curSubSong->patLen) editStep=e->curSubSong->patLen-1;
-          if (editStep<0) editStep=0;
+        if (changeCoarse) {
+          if (ImGui::InputInt("##CoarseStep",&editStepCoarse,1,1)) {
+            if (editStepCoarse>=e->curSubSong->patLen) editStepCoarse=e->curSubSong->patLen-1;
+            if (editStepCoarse<0) editStepCoarse=0;
 
-          if (settings.insFocusesPattern && !ImGui::IsItemActive() && patternOpen) {
-            nextWindow=GUI_WINDOW_PATTERN;
+            if (settings.insFocusesPattern && !ImGui::IsItemActive() && patternOpen) {
+              nextWindow=GUI_WINDOW_PATTERN;
+            }
+          }
+        } else {
+          if (ImGui::InputInt("##EditStep",&editStep,0,0)) {
+            if (editStep>=e->curSubSong->patLen) editStep=e->curSubSong->patLen-1;
+            if (editStep<0) editStep=0;
+
+            if (settings.insFocusesPattern && !ImGui::IsItemActive() && patternOpen) {
+              nextWindow=GUI_WINDOW_PATTERN;
+            }
           }
         }
 
@@ -1104,16 +1143,29 @@ void FurnaceGUI::drawEditControls() {
         }
 
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Step##sgec1"));
+        if (ImGui::SmallButton(changeCoarse?_L("Coarse##sgec1"):_L("Step##sgec1"))) {
+          changeCoarse=!changeCoarse;
+        }
         ImGui::SameLine();
         ImGui::SetCursorPosX(cursor);
         ImGui::SetNextItemWidth(avail);
-        if (ImGui::InputInt("##EditStep",&editStep,1,1)) {
-          if (editStep>=e->curSubSong->patLen) editStep=e->curSubSong->patLen-1;
-          if (editStep<0) editStep=0;
+        if (changeCoarse) {
+          if (ImGui::InputInt("##CoarseStep",&editStepCoarse,1,1)) {
+            if (editStepCoarse>=e->curSubSong->patLen) editStepCoarse=e->curSubSong->patLen-1;
+            if (editStepCoarse<0) editStepCoarse=0;
 
-          if (settings.insFocusesPattern && !ImGui::IsItemActive() && patternOpen) {
-            nextWindow=GUI_WINDOW_PATTERN;
+            if (settings.insFocusesPattern && !ImGui::IsItemActive() && patternOpen) {
+              nextWindow=GUI_WINDOW_PATTERN;
+            }
+          }
+        } else {
+          if (ImGui::InputInt("##EditStep",&editStep,1,1)) {
+            if (editStep>=e->curSubSong->patLen) editStep=e->curSubSong->patLen-1;
+            if (editStep<0) editStep=0;
+
+            if (settings.insFocusesPattern && !ImGui::IsItemActive() && patternOpen) {
+              nextWindow=GUI_WINDOW_PATTERN;
+            }
           }
         }
         ImGui::NextColumn();
