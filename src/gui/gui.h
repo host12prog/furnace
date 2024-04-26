@@ -1714,7 +1714,9 @@ class FurnaceGUI {
     int fdsCore;
     int c64Core;
     int pokeyCore;
-    int opnCore;
+    int opn1Core;
+    int opnaCore;
+    int opnbCore;
     int opl2Core;
     int opl3Core;
     int esfmCore;
@@ -1737,7 +1739,9 @@ class FurnaceGUI {
     int fdsCoreRender;
     int c64CoreRender;
     int pokeyCoreRender;
-    int opnCoreRender;
+    int opn1CoreRender;
+    int opnaCoreRender;
+    int opnbCoreRender;
     int opl2CoreRender;
     int opl3CoreRender;
     int esfmCoreRender;
@@ -1916,6 +1920,7 @@ class FurnaceGUI {
     int vsync;
     int frameRateLimit;
     int displayRenderTime;
+    int inputRepeat;
     unsigned int maxUndoSteps;
     int language;
     int translate_channel_names_pattern;
@@ -1959,7 +1964,9 @@ class FurnaceGUI {
       fdsCore(0),
       c64Core(0),
       pokeyCore(1),
-      opnCore(1),
+      opn1Core(1),
+      opnaCore(1),
+      opnbCore(1),
       opl2Core(0),
       opl3Core(0),
       esfmCore(0),
@@ -1982,7 +1989,9 @@ class FurnaceGUI {
       fdsCoreRender(1),
       c64CoreRender(1),
       pokeyCoreRender(1),
-      opnCoreRender(1),
+      opn1CoreRender(1),
+      opnaCoreRender(1),
+      opnbCoreRender(1),
       opl2CoreRender(0),
       opl3CoreRender(0),
       esfmCoreRender(0),
@@ -2158,6 +2167,7 @@ class FurnaceGUI {
       vsync(1),
       frameRateLimit(60),
       displayRenderTime(0),
+      inputRepeat(0),
       maxUndoSteps(100),
       language(DIV_LANG_ENGLISH),
       translate_channel_names_pattern(0),

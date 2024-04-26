@@ -168,6 +168,7 @@ const char* pokeyCores[]={
 const char* opnCores[]={
   "ymfm only",
   "Nuked-OPN2 (FM) + ymfm (SSG/ADPCM)",
+  "YM2608-LLE",
   NULL
 };
 
@@ -1873,13 +1874,35 @@ void FurnaceGUI::drawSettings() {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
           ImGui::AlignTextToFramePadding();
-          ImGui::Text("OPN/OPNA/OPNB");
+          ImGui::Text("OPN");
           ImGui::TableNextColumn();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          if (ImGui::Combo("##OPNCore",&settings.opnCore,opnCores,2)) settingsChanged=true;
+          if (ImGui::Combo("##OPNCore",&settings.opn1Core,opnCores,3)) settingsChanged=true;
           ImGui::TableNextColumn();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-          if (ImGui::Combo("##OPNCoreRender",&settings.opnCoreRender,opnCores,2)) settingsChanged=true;
+          if (ImGui::Combo("##OPNCoreRender",&settings.opn1CoreRender,opnCores,3)) settingsChanged=true;
+
+          ImGui::TableNextRow();
+          ImGui::TableNextColumn();
+          ImGui::AlignTextToFramePadding();
+          ImGui::Text("OPNA");
+          ImGui::TableNextColumn();
+          ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+          if (ImGui::Combo("##OPNACore",&settings.opnaCore,opnCores,3)) settingsChanged=true;
+          ImGui::TableNextColumn();
+          ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+          if (ImGui::Combo("##OPNACoreRender",&settings.opnaCoreRender,opnCores,3)) settingsChanged=true;
+
+          ImGui::TableNextRow();
+          ImGui::TableNextColumn();
+          ImGui::AlignTextToFramePadding();
+          ImGui::Text("OPNB");
+          ImGui::TableNextColumn();
+          ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+          if (ImGui::Combo("##OPNBCore",&settings.opnbCore,opnCores,3)) settingsChanged=true;
+          ImGui::TableNextColumn();
+          ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
+          if (ImGui::Combo("##OPNBCoreRender",&settings.opnbCoreRender,opnCores,3)) settingsChanged=true;
 
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
@@ -2645,6 +2668,12 @@ void FurnaceGUI::drawSettings() {
         bool pushNibbleB=settings.pushNibble;
         if (ImGui::Checkbox(_L("Push value when overwriting instead of clearing it##sgse"),&pushNibbleB)) {
           settings.pushNibble=pushNibbleB;
+          settingsChanged=true;
+        }
+
+        bool inputRepeatB=settings.inputRepeat;
+        if (ImGui::Checkbox("Keyboard note/value input repeat (hold key to input continuously)",&inputRepeatB)) {
+          settings.inputRepeat=inputRepeatB;
           settingsChanged=true;
         }
 
@@ -4449,6 +4478,8 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.insTypeMenu=conf.getInt("insTypeMenu",1);
 
     settings.selectAssetOnLoad=conf.getInt("selectAssetOnLoad",1);
+
+    settings.inputRepeat=conf.getInt("inputRepeat",0);
   }
 
   if (groups&GUI_SETTINGS_FONT) {
@@ -4583,7 +4614,9 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.fdsCore=conf.getInt("fdsCore",0);
     settings.c64Core=conf.getInt("c64Core",0);
     settings.pokeyCore=conf.getInt("pokeyCore",1);
-    settings.opnCore=conf.getInt("opnCore",1);
+    settings.opn1Core=conf.getInt("opn1Core",1);
+    settings.opnaCore=conf.getInt("opnaCore",1);
+    settings.opnbCore=conf.getInt("opnbCore",1);
     settings.opl2Core=conf.getInt("opl2Core",0);
     settings.opl3Core=conf.getInt("opl3Core",0);
     settings.esfmCore=conf.getInt("esfmCore",0);
@@ -4608,7 +4641,9 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.fdsCoreRender=conf.getInt("fdsCoreRender",1);
     settings.c64CoreRender=conf.getInt("c64CoreRender",1);
     settings.pokeyCoreRender=conf.getInt("pokeyCoreRender",1);
-    settings.opnCoreRender=conf.getInt("opnCoreRender",1);
+    settings.opn1CoreRender=conf.getInt("opn1CoreRender",1);
+    settings.opnaCoreRender=conf.getInt("opnaCoreRender",1);
+    settings.opnbCoreRender=conf.getInt("opnbCoreRender",1);
     settings.opl2CoreRender=conf.getInt("opl2CoreRender",0);
     settings.opl3CoreRender=conf.getInt("opl3CoreRender",0);
     settings.esfmCoreRender=conf.getInt("esfmCoreRender",0);
@@ -4650,7 +4685,9 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.fdsCore,0,1);
   clampSetting(settings.c64Core,0,2);
   clampSetting(settings.pokeyCore,0,1);
-  clampSetting(settings.opnCore,0,1);
+  clampSetting(settings.opn1Core,0,2);
+  clampSetting(settings.opnaCore,0,2);
+  clampSetting(settings.opnbCore,0,2);
   clampSetting(settings.opl2Core,0,2);
   clampSetting(settings.opl3Core,0,2);
   clampSetting(settings.esfmCore,0,1);
@@ -4673,7 +4710,9 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.fdsCoreRender,0,1);
   clampSetting(settings.c64CoreRender,0,2);
   clampSetting(settings.pokeyCoreRender,0,1);
-  clampSetting(settings.opnCoreRender,0,1);
+  clampSetting(settings.opn1CoreRender,0,2);
+  clampSetting(settings.opnaCoreRender,0,2);
+  clampSetting(settings.opnbCoreRender,0,2);
   clampSetting(settings.opl2CoreRender,0,2);
   clampSetting(settings.opl3CoreRender,0,2);
   clampSetting(settings.esfmCoreRender,0,1);
@@ -4847,6 +4886,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.displayRenderTime,0,1);
   clampSetting(settings.vibrationStrength,0.0f,1.0f);
   clampSetting(settings.vibrationLength,10,500);
+  clampSetting(settings.inputRepeat,0,1);
 
   if (settings.exportLoops<0.0) settings.exportLoops=0.0;
   if (settings.exportFadeOut<0.0) settings.exportFadeOut=0.0;  
@@ -5006,6 +5046,8 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("insTypeMenu",settings.insTypeMenu);
     
     conf.set("selectAssetOnLoad",settings.selectAssetOnLoad);
+
+    conf.set("inputRepeat",settings.inputRepeat);
   }
 
   // font
@@ -5146,7 +5188,9 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("fdsCore",settings.fdsCore);
     conf.set("c64Core",settings.c64Core);
     conf.set("pokeyCore",settings.pokeyCore);
-    conf.set("opnCore",settings.opnCore);
+    conf.set("opn1Core",settings.opn1Core);
+    conf.set("opnaCore",settings.opnaCore);
+    conf.set("opnbCore",settings.opnbCore);
     conf.set("opl2Core",settings.opl2Core);
     conf.set("opl3Core",settings.opl3Core);
     conf.set("esfmCore",settings.esfmCore);
@@ -5171,7 +5215,9 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     conf.set("fdsCoreRender",settings.fdsCoreRender);
     conf.set("c64CoreRender",settings.c64CoreRender);
     conf.set("pokeyCoreRender",settings.pokeyCoreRender);
-    conf.set("opnCoreRender",settings.opnCoreRender);
+    conf.set("opn1CoreRender",settings.opn1CoreRender);
+    conf.set("opnaCoreRender",settings.opnaCoreRender);
+    conf.set("opnbCoreRender",settings.opnbCoreRender);
     conf.set("opl2CoreRender",settings.opl2CoreRender);
     conf.set("opl3CoreRender",settings.opl3CoreRender);
     conf.set("esfmCoreRender",settings.esfmCoreRender);
@@ -5229,7 +5275,9 @@ void FurnaceGUI::commitSettings() {
     settings.fdsCore!=e->getConfInt("fdsCore",0) ||
     settings.c64Core!=e->getConfInt("c64Core",0) ||
     settings.pokeyCore!=e->getConfInt("pokeyCore",1) ||
-    settings.opnCore!=e->getConfInt("opnCore",1) ||
+    settings.opn1Core!=e->getConfInt("opn1Core",1) ||
+    settings.opnaCore!=e->getConfInt("opnaCore",1) ||
+    settings.opnbCore!=e->getConfInt("opnbCore",1) ||
     settings.opl2Core!=e->getConfInt("opl2Core",0) ||
     settings.opl3Core!=e->getConfInt("opl3Core",0) ||
     settings.esfmCore!=e->getConfInt("esfmCore",0) ||

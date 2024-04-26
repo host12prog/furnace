@@ -309,7 +309,9 @@ double DivPlatformYM2608::NOTE_ADPCMB(int note) {
 }
 
 void DivPlatformYM2608::acquire(short** buf, size_t len) {
-  if (useCombo) {
+  if (useCombo==2) {
+    acquire_lle(buf,len);
+  } else if (useCombo==1) {
     acquire_combo(buf,len);
   } else {
     acquire_ymfm(buf,len);
@@ -498,6 +500,14 @@ void DivPlatformYM2608::acquire_ymfm(short** buf, size_t len) {
     oscBuf[adpcmBChanOffs]->data[oscBuf[adpcmBChanOffs]->needle++]=(abe->get_last_out(0)+abe->get_last_out(1))>>1;
   }
 }
+
+void DivPlatformYM2608::acquire_lle(short** buf, size_t len) {
+  for (size_t h=0; h<len; h++) {
+    FMOPNA_Clock(&fm_lle,0);
+    FMOPNA_Clock(&fm_lle,1);
+  }
+}
+
 
 void DivPlatformYM2608::tick(bool sysTick) {
   // FM
@@ -1552,6 +1562,7 @@ void DivPlatformYM2608::reset() {
   OPN2_Reset(&fm_nuked);
   OPN2_SetChipType(&fm_nuked,ym3438_mode_opn);
   fm->reset();
+  memset(&fm_lle,0,sizeof(fmopna_t));
   for (int i=0; i<16; i++) {
     chan[i]=DivPlatformOPN::OPNChannelStereo();
     chan[i].std.setEngine(parent);
