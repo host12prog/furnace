@@ -2902,7 +2902,7 @@ void DivLocale::addTranslationsRussian()
     strings["remembers the window's last position on start-up.##sgse"].plurals[0] = "при запуске программы восстанавливает последнее положение каждого окна.";
     strings["Only allow window movement when clicking on title bar##sgse"].plurals[0] = "Разрешать перемещение окон только при нажатии на их полосу заголовка";
     strings["Center pop-up windows##sgse"].plurals[0] = "Центрировать всплывающие окна";
-    strings["Play/edit controls layout:##sgse"].plurals[0] = "Компоновка управления вспроизведением/редактированием:";
+    strings["Play/edit controls layout:##sgse"].plurals[0] = "Компоновка управления воспроизведением/редактированием:";
     strings["Classic##ecl0"].plurals[0] = "Классическая##ecl0";
     strings["Compact##ecl1"].plurals[0] = "Компактная##ecl1";
     strings["Compact (vertical)##ecl2"].plurals[0] = "Компактная (вертикальная)##ecl2";
