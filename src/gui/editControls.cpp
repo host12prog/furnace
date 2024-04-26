@@ -699,7 +699,7 @@ void FurnaceGUI::drawEditControls() {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
           ImGui::AlignTextToFramePadding();
-          if (ImGui::SmallButton(changeCoarse?_L("Coarse Step##sgec"):_L("Edit Step##sgec0"))) {
+          if (ImGui::SmallButton(changeCoarse?_L("Coarse Step##sgec0"):_L("Edit Step##sgec0"))) {
             changeCoarse=!changeCoarse;
           }
           ImGui::TableNextColumn();

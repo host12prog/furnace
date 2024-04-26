@@ -1222,6 +1222,7 @@ void DivLocale::addTranslationsRussian()
     strings["Done! Baked %d files.##sgec"].plurals[2] = "Готово! Создано %d файлов.";
     strings["Play/Edit Controls###Play/Edit Controls"].plurals[0] = "Управл. воспр./ред.###Play/Edit Controls";
     strings["Octave##sgec0"].plurals[0] = "Октава";
+    strings["Coarse Step##sgec0"].plurals[0] = "Грубый шаг редактирования";
     strings["Edit Step##sgec0"].plurals[0] = "Шаг редактирования";
     strings["Play##sgec0"].plurals[0] = "Воспроизвести";
     strings["Stop##sgec0"].plurals[0] = "Стоп";
@@ -1242,6 +1243,7 @@ void DivLocale::addTranslationsRussian()
     strings["Edit##sgec1"].plurals[0] = "Режим редактирования";
     strings["Metronome##sgec1"].plurals[0] = "Метроном";
     strings["Octave##sgec1"].plurals[0] = "Октава";
+    strings["Coarse Step##sgec1"].plurals[0] = "Грубый шаг";
     strings["Edit Step##sgec1"].plurals[0] = "Шаг";
     strings["Follow##sgec1"].plurals[0] = "Следовать за прогрессом воспроизведения";
     strings["Orders##sgec2"].plurals[0] = "Матрица паттернов";
@@ -1257,6 +1259,7 @@ void DivLocale::addTranslationsRussian()
     strings["Metronome##sgec2"].plurals[0] = "Метроном";
     strings["Oct.##sgec"].plurals[0] = "Окт.";
     strings["Octave##sgec2"].plurals[0] = "Октава";
+    strings["Coarse##sgec0"].plurals[0] = "Грубый шаг";
     strings["Step##sgec0"].plurals[0] = "Шаг";
     strings["Foll.##sgec"].plurals[0] = "След.";
     strings["Follow##sgec2"].plurals[0] = "Следовать за прогрессом воспроизведения";
@@ -1281,6 +1284,7 @@ void DivLocale::addTranslationsRussian()
     strings["Polyphony##sgec3"].plurals[0] = "Полифония превью";
     strings["Edit Controls###Edit Controls"].plurals[0] = "Управление редактированием###Edit Controls";
     strings["Octave##sgec3"].plurals[0] = "Октава";
+    strings["Coarse##sgec1"].plurals[0] = "Грубый шаг";
     strings["Step##sgec1"].plurals[0] = "Шаг";
     strings["Follow orders##sgec"].plurals[0] = "След. за воспр. в матр. патт.";
     strings["Follow pattern##sgec"].plurals[0] = "След. за воспр. в патт.";

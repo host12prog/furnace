@@ -1276,6 +1276,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Done! Baked %d files.##sgec"].plurals[1] = "=Done! Baked %d files.";
     strings["Play/Edit Controls###Play/Edit Controls"].plurals[0] = "=Play/Edit Controls###Play/Edit Controls";
     strings["Octave##sgec0"].plurals[0] = "=Octave";
+    strings["Coarse Step##sgec0"].plurals[0] = "=Coarse Step";
     strings["Edit Step##sgec0"].plurals[0] = "=Edit Step";
     strings["Play##sgec0"].plurals[0] = "=Play";
     strings["Stop##sgec0"].plurals[0] = "=Stop";
@@ -1296,6 +1297,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Edit##sgec1"].plurals[0] = "=Edit";
     strings["Metronome##sgec1"].plurals[0] = "=Metronome";
     strings["Octave##sgec1"].plurals[0] = "=Octave";
+    strings["Coarse Step##sgec1"].plurals[0] = "=Coarse Step";
     strings["Edit Step##sgec1"].plurals[0] = "=Edit Step";
     strings["Follow##sgec1"].plurals[0] = "=Follow";
     strings["Orders##sgec2"].plurals[0] = "=Orders";
@@ -1311,6 +1313,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Metronome##sgec2"].plurals[0] = "=Metronome";
     strings["Oct.##sgec"].plurals[0] = "=Oct.";
     strings["Octave##sgec2"].plurals[0] = "=Octave";
+    strings["Coarse##sgec0"].plurals[0] = "=Coarse";
     strings["Step##sgec0"].plurals[0] = "=Step";
     strings["Foll.##sgec"].plurals[0] = "=Foll.";
     strings["Follow##sgec2"].plurals[0] = "=Follow";
@@ -1335,6 +1338,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Polyphony##sgec3"].plurals[0] = "=Polyphony";
     strings["Edit Controls###Edit Controls"].plurals[0] = "=Edit Controls###Edit Controls";
     strings["Octave##sgec3"].plurals[0] = "=Octave";
+    strings["Coarse##sgec1"].plurals[0] = "=Coarse";
     strings["Step##sgec1"].plurals[0] = "=Step";
     strings["Follow orders##sgec"].plurals[0] = "=Follow orders";
     strings["Follow pattern##sgec"].plurals[0] = "=Follow pattern";
