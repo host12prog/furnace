@@ -10,7 +10,7 @@ notice that the number input fields require entering numbers from keyboard. all 
 
 - **Base note**: allows specifying a base note.
   - range is `C-0` to `B-7`.
-  - how it works: when base note is `C-4` and you place `C-4` in pattern, `C-4` is played. when you place `C-3` there, `C-3` will be played. when you place `C-5` there, `C-5` will be played, and so on.
+  - how it works: when base note is `C-4` and you place `C-4` in pattern, `C-4` is played. when base note is `C-3`, `C-3` will be played. when base note is `C-5`, `C-5` will be played, and so on.
 - **Finetune**: determines the detune from pure tone. `127` is just shy +0.5 semitones, `-128` is -0.5 semitones.
 - **Slide speed**: determines the speed with which note slides. is usually overriden by `03xx` command.
 - **Set PW**: set pulse width (duty) on new note.
@@ -18,12 +18,12 @@ notice that the number input fields require entering numbers from keyboard. all 
 - **Set cutoff**: set filter parameters on new note.
 - **Waveform**: set initial waveform.
   - waveforms are mixed with bitwise AND rule.
-  - metal enables short looped tonal noise mode (and enables noise even if `noise` is disabled).
+  - `metal` enables short looped tonal noise mode (and enables noise even if `noise` is disabled).
   - `sine` is 8-bit 256-steps LUT sine wave.
 - **Cutoff**: initial filter cutoff.
 - **Resonance**: initial filter resonance.
 - **Type**: initial filter type.
-  - combined types can be used to achieve new sounds. E.g. lowpass + highpass gives notch (bandstop) filter.
+  - combined types can be used to achieve new sounds. E.g. `lowpass + highpass` gives notch (bandstop) filter.
 - **Enable ring modulation**: when enabled, the channel's output will be multiplied with the source channel's.
 - **Ring mod source**: the channel from which the modulation signal comes. `FF` means self-modulation (signal is effectively squared).
 - **Enable hard sync**: enables oscillator hard sync. as the source channel's oscillator finishes a cycle, it resets the period of the channel's oscillator, forcing the latter to have the same base frequency. this can produce a harmonically rich sound, the timbre of which can be altered by varying the synchronized oscillator's frequency.
@@ -31,7 +31,7 @@ notice that the number input fields require entering numbers from keyboard. all 
 - **Retrigger on slide**: restart envelope and instrument program even if `03xx` effect is placed next to the note. notice that macros are not restarted in that case.
 - **Sync osc. on keydown**: reset the phase of oscillator on new note. makes new notes "stand out" but may produce clicks.
 - **Vibrato**: enable instrument vibrato. vibrato is done with triangle LFO.
-  - the following settings can be overriden by `04xx` effect.
+  - the following settings can be overriden by `04xy` effect.
 - **Vibrato speed**: how fast vibrato is.
 - **Vibrato depth**: how "deep" vibrato is. `FF` means swing from -1 to +1 semitone.
 - **Vibrato delay**: how many ticks to wait from new note. after specified number of ticks vibrato is enabled.
