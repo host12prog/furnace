@@ -11,8 +11,8 @@ Furnace-B provides support for both importing and exporting `.fzt` files for the
   - `bit 1`: pulse
   - `bit 2`: triangle
   - `bit 3`: sawtooth
-  - `bit 3`: metallic noise
-  - `bit 3`: sine
+  - `bit 4`: metallic noise
+  - `bit 5`: sine
 - `11xy`: **PWM (pulsolo).** `x` is speed and `y` is depth.
 - `12xx`: **set pulse width.**
 - `13xx`: **pulse width up.**
