@@ -33,7 +33,9 @@ the following instrument types are available:
 - [C219](c219.md) - for use with C219 sample chip.
 - [C64](c64.md) - for use with Commodore 64 SID.
 - [Dave](dave.md) - for use with Dave chip.
+- [ES5503](es5503.md) - for use with Ensoniq ES5503 sound chip.
 - [ES5506](es5506.md) - for use with Ensoniq ES5506 sound chip.
+- [FM (ESFM)](fm-esfm.md) - for use with ESS ES1xxx-series (ESFM).
 - [FDS](fds.md) - for use with Famicom Disk System sound source.
 - [FM (ESFM)](fm-esfm.md) - for use with ESFM.
 - [FM (OPL)](fm-opll.md) - for use with YM3526 (OPL), YM3812 (OPL2) and YMF262 (OPL3).
@@ -41,6 +43,7 @@ the following instrument types are available:
 - [FM (OPM)](fm-opm.md) - for use with YM2151.
 - [FM (OPN)](fm-opn.md) - for use with YM2612, YM2203, YM2608, YM2610 and YM2610B.
 - [FM (OPZ)](fm-opz.md) - for use with YM2414.
+- [FZT](fzt.md) - for use with FZT sound source chip.
 - [GA20](ga20.md) - for use with GA20 sample chip.
 - [Game Boy Advance DMA](gbadma.md) - for use with Game Boy Advance in direct mode.
 - [Game Boy Advance MinMod](gbaminmod.md) - for use with Game Boy Advance with the MinMod software mixing driver.
@@ -73,16 +76,6 @@ the following instrument types are available:
 - [Sound Unit](su.md) - for use with Sound Unit chip.
 - [T6W28](t6w28.md) - for use with Toshiba T6W28 PSG sound source.
 - [TED](ted.md) - for use with Commodore Plus/4 and Commodore 16's TED chip.
-- [C140](c140.md) - for use with C140 sample chip.
-- [C219](c219.md) - for use with C219 sample chip.
-- [FM (ESFM)](fm-esfm.md) - for use with ESS ES1xxx-series (ESFM).
-- [ES5503](es5503.md) - for use with Ensoniq ES5503 sound chip.
-- [PowerNoise](powernoise.md) - for use with PowerNoise chip.
-- [Dave](dave.md) - for use with Dave chip.
-- [SID2](sid2.md) - for use with SID2 chip.
-- [Game Boy Advance DMA](gbadma.md) - for use with Game Boy Advance in direct mode.
-- [Game Boy Advance MinMod](gbaminmod.md) - for use with Game Boy Advance with the MinMod software mixing driver.
-- [FZT](fzt.md) - for use with FZT sound source chip.
 
 ## macros
 
