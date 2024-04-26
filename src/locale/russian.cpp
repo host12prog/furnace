@@ -77,7 +77,7 @@ void DivLocale::addTranslationsRussian()
     strings["adpcm by superctr##sgab"].plurals[0] = "adpcm за авторством superctr";
     strings["adpcm-xq by David Bryant##sgab"].plurals[0] = "adpcm-xq за авторством David Bryant";
     strings["Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt##sgab"].plurals[0] = "Nuked-OPL3/OPLL/OPM/OPN2/PSG за авторством nukeykt";
-    strings["YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt##sgab"].plurals[0] = "YM3812-LLE, YMF262-LLE и YMF276-LLE за авторством nukeykt";
+    strings["YM3812-LLE, YMF262-LLE, YMF276-LLE и YM2608-LLE by nukeykt##sgab"].plurals[0] = "YM3812-LLE, YMF262-LLE, YMF276-LLE и YM2608-LLE за авторством nukeykt";
     strings["ymfm by Aaron Giles##sgab"].plurals[0] = "ymfm за авторством Aaron Giles";
     strings["emu2413 by Digital Sound Antiques##sgab"].plurals[0] = "emu2413 за авторством Digital Sound Antiques";
     strings["MAME SN76496 by Nicola Salmoria##sgab"].plurals[0] = "MAME SN76496 за авторством Nicola Salmoria";
@@ -2929,6 +2929,7 @@ void DivLocale::addTranslationsRussian()
     strings["Insert pushes entire channel row##sgse"].plurals[0] = "Клавиша Insert сдвигает паттерны на всех каналах";
     strings["Pull delete affects entire channel row##sgse"].plurals[0] = "Удаление с подтягиванием следующих строк сдвигает паттерны на всех каналах";
     strings["Push value when overwriting instead of clearing it##sgse"].plurals[0] = "Отодвинуть значение ячейки в соседнюю вместо удаления при перезаписи ячейки";
+    strings["Keyboard note/value input repeat (hold key to input continuously)##sgse"].plurals[0] = "Повторяющийся ввод нот/значений с клавиатуры (удерживайте клавишу для постоянного ввода";
     strings["Effect input behavior:##sgse"].plurals[0] = "Ввод эффектов:";
     strings["Move down##eicb0"].plurals[0] = "перемещаться вниз##eicb0";
     strings["Move to effect value (otherwise move down)##eicb1"].plurals[0] = "Перепрыгнуть на параметр эффекта (иначе перемещаться вниз)##eicb1";

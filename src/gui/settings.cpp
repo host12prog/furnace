@@ -2672,7 +2672,7 @@ void FurnaceGUI::drawSettings() {
         }
 
         bool inputRepeatB=settings.inputRepeat;
-        if (ImGui::Checkbox("Keyboard note/value input repeat (hold key to input continuously)",&inputRepeatB)) {
+        if (ImGui::Checkbox(_L("Keyboard note/value input repeat (hold key to input continuously)##sgse"),&inputRepeatB)) {
           settings.inputRepeat=inputRepeatB;
           settingsChanged=true;
         }

@@ -131,7 +131,7 @@ void DivLocale::addTranslationsTemplate()
     strings["adpcm by superctr##sgab"].plurals[0] = "=adpcm by superctr";
     strings["adpcm-xq by David Bryant##sgab"].plurals[0] = "=adpcm-xq by David Bryant";
     strings["Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt##sgab"].plurals[0] = "=Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt";
-    strings["YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt##sgab"].plurals[0] = "=YM3812-LLE, YMF262-LLE and YMF276-LLE by nukeykt";
+    strings["YM3812-LLE, YMF262-LLE, YMF276-LLE and YM2608-LLE by nukeykt##sgab"].plurals[0] = "=YM3812-LLE, YMF262-LLE, YMF276-LLE and YM2608-LLE by nukeykt";
     strings["ymfm by Aaron Giles##sgab"].plurals[0] = "=ymfm by Aaron Giles";
     strings["emu2413 by Digital Sound Antiques##sgab"].plurals[0] = "=emu2413 by Digital Sound Antiques";
     strings["MAME SN76496 by Nicola Salmoria##sgab"].plurals[0] = "=MAME SN76496 by Nicola Salmoria";
@@ -2963,6 +2963,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Insert pushes entire channel row##sgse"].plurals[0] = "=Insert pushes entire channel row";
     strings["Pull delete affects entire channel row##sgse"].plurals[0] = "=Pull delete affects entire channel row";
     strings["Push value when overwriting instead of clearing it##sgse"].plurals[0] = "=Push value when overwriting instead of clearing it";
+    strings["Keyboard note/value input repeat (hold key to input continuously)##sgse"].plurals[0] = "=Keyboard note/value input repeat (hold key to input continuously)";
     strings["Effect input behavior:##sgse"].plurals[0] = "=Effect input behavior:";
     strings["Move down##eicb0"].plurals[0] = "=Move down##eicb0";
     strings["Move to effect value (otherwise move down)##eicb1"].plurals[0] = "=Move to effect value (otherwise move down)##eicb1";

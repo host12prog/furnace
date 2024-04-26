@@ -212,7 +212,7 @@ void DivPlatformESFM::tick(bool sysTick) {
         rWrite(baseAddr+ADDR_DAM_DVB_LEFT_RIGHT_MODIN,((opE.modIn&7)<<1)|(((opE.left&chan[i].globalPan)&1)<<4)|(((opE.right&(chan[i].globalPan>>1))&1)<<5)|((op.dvb&1)<<6)|(op.dam<<7));
       }
 
-      if (m.op_get_div_macro_struct(DIV_MACRO_OP_EGT)->had | m.op_get_div_macro_struct(DIV_MACRO_OP_WS)->had) {
+      if (m.op_get_div_macro_struct(DIV_MACRO_OP_EGT)->had || m.op_get_div_macro_struct(DIV_MACRO_OP_WS)->had) {
         unsigned char noise=chan[i].state.esfm.noise&3;
         if (m.op_get_div_macro_struct(DIV_MACRO_OP_EGT)->had) {
           // outLvl
