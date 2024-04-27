@@ -503,89 +503,148 @@ void DivPlatformYM2608::acquire_ymfm(short** buf, size_t len) {
 
 void DivPlatformYM2608::acquire_lle(short** buf, size_t len) {
   for (size_t h=0; h<len; h++) {
+    bool have0=false;
+    bool have1=false;
+    unsigned char howLong=0;
     while (true) {
+      bool canWeWrite=fm_lle.prescaler_latch[1]&1;
+
       lastS=fm_lle.o_s;
       lastSH=fm_lle.o_sh1;
       lastSH2=fm_lle.o_sh2;
 
-      if (delay>0) {
-        if (delay>1) {
-          delay--;
+      if (canWeWrite) {
+        if (delay>0) {
+          if (delay==3) {
+            fm_lle.input.cs=1;
+            fm_lle.input.rd=1;
+            fm_lle.input.wr=1;
+            fm_lle.input.a0=0;
+            fm_lle.input.a1=0;
+            //logV("preparing a delay");
+            delay=0;
+          } else {
+            fm_lle.input.cs=0;
+            fm_lle.input.rd=0;
+            fm_lle.input.wr=1;
+            fm_lle.input.a0=0;
+            fm_lle.input.a1=0;
+            fm_lle.input.data=0;
+            //logV("preparing a read");
+            delay=1;
+          }
+        } else if (!writes.empty()) {
+          QueuedWrite& w=writes.front();
+          if (w.addrOrVal) {
+            fm_lle.input.cs=0;
+            fm_lle.input.rd=1;
+            fm_lle.input.wr=0;
+            fm_lle.input.a1=w.addr>>8;
+            fm_lle.input.a0=1;
+            fm_lle.input.data=w.val;
+
+            delay=2;
+
+            //logV("VAL %.2x",w.val);
+
+            regPool[w.addr&0x1ff]=w.val;
+            writes.pop_front();
+          } else {
+            fm_lle.input.cs=0;
+            fm_lle.input.rd=1;
+            fm_lle.input.wr=0;
+            fm_lle.input.a1=w.addr>>8;
+            fm_lle.input.a0=0;
+            fm_lle.input.data=w.addr&0xff;
+
+            delay=2;
+
+            //logV("ADDR %.2x =",w.addr);
+
+            w.addrOrVal=true;
+          }
         } else {
-          fm_lle.input.cs=0;
-          fm_lle.input.rd=0;
+          fm_lle.input.cs=1;
+          fm_lle.input.rd=1;
           fm_lle.input.wr=1;
           fm_lle.input.a0=0;
           fm_lle.input.a1=0;
-          delay=1;
-        }
-      } else if (!writes.empty()) {
-        QueuedWrite& w=writes.front();
-        if (w.addrOrVal) {
-          fm_lle.input.cs=0;
-          fm_lle.input.rd=1;
-          fm_lle.input.wr=0;
-          fm_lle.input.a1=w.addr>>8;
-          fm_lle.input.a0=1;
-          fm_lle.input.data=w.val;
-
-          delay=32;
-
-          //logV("%.3x = %.2x",w.addr,w.val);
-
-          regPool[w.addr&0x1ff]=w.val;
-          writes.pop_front();
-        } else {
-          fm_lle.input.cs=0;
-          fm_lle.input.rd=1;
-          fm_lle.input.wr=0;
-          fm_lle.input.a1=w.addr>>8;
-          fm_lle.input.a0=0;
-          fm_lle.input.data=w.addr&0xff;
-
-          delay=32;
-
-          w.addrOrVal=true;
+          //logV("nothing to do");
         }
       }
 
       FMOPNA_Clock(&fm_lle,0);
       FMOPNA_Clock(&fm_lle,1);
 
-      if (delay==1) {
-        // check busy status here
-        if (!(fm_lle.o_data&0x80)) {
-          delay=0;
-        } else {
-          //logV("AM BUSY");
+      if (canWeWrite) {
+        if (delay==1) {
+          // check busy status here
+          //if (!(fm_lle.o_data&0x80)) {
+          if (!fm_lle.busy_cnt_en[1]) {
+            delay=3;
+          } else {
+            //logV("AM BUSY");
+          }
         }
       }
 
       if (fm_lle.o_s && !lastS) {
         dacVal>>=1;
-        dacVal|=(fm_lle.o_opo&1)<<16;
+        dacVal|=(fm_lle.o_opo&1)<<23;
+        howLong++;
       }
 
       if (!fm_lle.o_sh1 && lastSH) {
-        /*int e=(dacVal>>10)&7;
-        int m=(dacVal>>0)&1023;
-        dacOut[0]=dacVal-0x10000;//(m<<e)>>1;
-        logV("%.8x (%d, %d)",dacVal,m,e);
-        dacVal=0;*/
-        break;
+        //int e=(dacVal>>10)&7;
+        //int m=(dacVal>>0)&1023;
+        dacOut[0]=dacVal>>8;//(m<<e)>>1;
+        have0=true;
       }
 
+      if (!fm_lle.o_sh2 && lastSH2) {
+        //int e=(dacVal>>10)&7;
+        //int m=(dacVal>>0)&1023;
+        dacOut[1]=dacVal>>8;//(m<<e)>>1;
+        have1=true;
+      }
+
+      if (have0 && have1) break;
+
       // ADPCM data bus
-      //if (fm_lle.input.!=0) {
-        //logV("%x",fm_lle.input.ad);
-      //}
+      if (fm_lle.o_dm!=0) {
+        //logV("%x",fm_lle.o_dm);
+      }
     }
 
-    // TODO: o_analog
+    if (howLong!=48) {
+      //logW("NOT 48! %d",howLong);
+    }
 
     // DAC
-    buf[0][h]=fm_lle.ac_fm_accm1[0]>>1;
-    buf[1][h]=buf[0][h];
+    int accm1=dacOut[0]-0x4000;
+    int accm2=dacOut[1]-0x4000;
+
+    if (accm1&0x20000) {
+      accm1|=0xfffc0000;
+    }
+    if (accm2&0x20000) {
+      accm2|=0xfffc0000;
+    }
+
+    //logV("%.8x %.8x",dacOut[0],dacOut[1]);
+
+    //logV("%.8x %d",accm1,howLong);
+
+    int outL=(accm1<<1)+fm_lle.o_analog*ssgVol*42;
+    int outR=(accm2<<1)+fm_lle.o_analog*ssgVol*42;
+
+    if (outL<-32768) outL=-32768;
+    if (outL>32767) outL=32767;
+    if (outR<-32768) outR=-32768;
+    if (outR>32767) outR=32767;
+
+    buf[0][h]=outL;
+    buf[1][h]=outR;
   }
 }
 
