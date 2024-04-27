@@ -27,6 +27,9 @@ LTVA:
 - Raw period macro and effects for POKEY
 - A list of wavetables (e.g. Kurumi wavetable builder output) can be pasted into global/local wavetable list using just one shortcut
 - Add Euly's 5E01 fictional sound chip
+- FZT sound source "chip"
+- and `.fzt` file format import/export
+- NES DPCM sample custom loop point
 
 freq-mod:
 - 86-PCM streo DAC fix
