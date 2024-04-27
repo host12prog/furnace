@@ -608,12 +608,26 @@ void DivPlatformYM2608::acquire_lle(short** buf, size_t len) {
         have1=true;
       }
 
-      if (have0 && have1) break;
-
       // ADPCM data bus
-      if (fm_lle.o_dm!=0) {
-        //logV("%x",fm_lle.o_dm);
+      // thanks nukeykt
+      const int newAddr=(fm_lle.o_dm&255)|(fm_lle.o_a8<<8);
+      if (cas && !fm_lle.o_cas) {
+        adMemAddr&=~0x3fe00;
+        adMemAddr|=newAddr<<9;
       }
+      if (ras && !fm_lle.o_ras) {
+        adMemAddr&=~0x1ff;
+        adMemAddr|=newAddr;
+      }
+
+      if (fm_lle.o_romcs==0) {
+        fm_lle.input.dm=adpcmBMem[adMemAddr&0x3ffff];
+        fm_lle.input.dt0=fm_lle.input.dm&1;
+      }
+      cas=fm_lle.o_cas;
+      ras=fm_lle.o_ras;
+
+      if (have0 && have1) break;
     }
 
     if (howLong!=48) {
@@ -924,7 +938,7 @@ void DivPlatformYM2608::tick(bool sysTick) {
       if (chan[adpcmBChanOffs].pan!=(chan[adpcmBChanOffs].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->val&3)) {
         chan[adpcmBChanOffs].pan=chan[adpcmBChanOffs].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->val&3;
         if (!isMuted[adpcmBChanOffs]) {
-          immWrite(0x101,(isMuted[adpcmBChanOffs]?0:(chan[adpcmBChanOffs].pan<<6))|2);
+          immWrite(0x101,(isMuted[adpcmBChanOffs]?0:(chan[adpcmBChanOffs].pan<<6))|1);
           hardResetElapsed++;
         }
       }
@@ -1091,7 +1105,7 @@ int DivPlatformYM2608::dispatch(DivCommand c) {
             int end=sampleOffB[chan[c.chan].sample]+s->lengthB-1;
             immWrite(0x104,(end>>5)&0xff);
             immWrite(0x105,(end>>13)&0xff);
-            immWrite(0x101,(isMuted[c.chan]?0:(chan[c.chan].pan<<6))|2);
+            immWrite(0x101,(isMuted[c.chan]?0:(chan[c.chan].pan<<6))|1);
             if (c.value!=DIV_NOTE_NULL) {
               chan[c.chan].note=c.value;
               chan[c.chan].baseFreq=NOTE_ADPCMB(chan[c.chan].note);
@@ -1123,7 +1137,7 @@ int DivPlatformYM2608::dispatch(DivCommand c) {
             int end=sampleOffB[chan[c.chan].sample]+s->lengthB-1;
             immWrite(0x104,(end>>5)&0xff);
             immWrite(0x105,(end>>13)&0xff);
-            immWrite(0x101,(isMuted[c.chan]?0:(chan[c.chan].pan<<6))|2);
+            immWrite(0x101,(isMuted[c.chan]?0:(chan[c.chan].pan<<6))|1);
             int freq=(65536.0*(double)s->rate)/((double)chipClock/144.0);
             immWrite(0x109,freq&0xff);
             immWrite(0x10a,(freq>>8)&0xff);
@@ -1267,7 +1281,7 @@ int DivPlatformYM2608::dispatch(DivCommand c) {
         chan[c.chan].pan=(c.value2>0)|((c.value>0)<<1);
       }
       if (c.chan>(adpcmBChanOffs - 1)) {
-        immWrite(0x101,(isMuted[c.chan]?0:(chan[c.chan].pan<<6))|2);
+        immWrite(0x101,(isMuted[c.chan]?0:(chan[c.chan].pan<<6))|1);
         break;
       }
       if (c.chan>8) {
@@ -1583,7 +1597,7 @@ int DivPlatformYM2608::dispatch(DivCommand c) {
 void DivPlatformYM2608::muteChannel(int ch, bool mute) {
   isMuted[ch]=mute;
   if (ch>(adpcmBChanOffs - 1)) { // ADPCM-B
-    immWrite(0x101,(isMuted[ch]?0:(chan[ch].pan<<6))|2);
+    immWrite(0x101,(isMuted[ch]?0:(chan[ch].pan<<6))|1);
   }
   if (ch>(adpcmAChanOffs - 1)) { // ADPCM-A
     immWrite(0x18+(ch-(adpcmAChanOffs)),isMuted[ch]?0:((chan[ch].pan<<6)|chan[ch].outVol));
@@ -1761,6 +1775,10 @@ void DivPlatformYM2608::reset() {
     lastSH=false;
     lastSH2=false;
     lastS=false;
+    cas=0;
+    ras=0;
+    adReadCount=0;
+    adMemAddr=0;
   }
 
   lastBusy=60;
