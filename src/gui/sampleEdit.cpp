@@ -246,8 +246,21 @@ void FurnaceGUI::drawSampleEdit() {
             break;
           case DIV_SYSTEM_NES:
             if (sample->loop) {
-              if (sample->loopStart!=0 || sample->loopEnd!=(int)(sample->samples)) {
-                SAMPLE_WARN(warnLoopPos,_L("NES: loop point ignored on DPCM (may only loop entire sample)##sgsed"));
+              //if (sample->loopStart!=0 || sample->loopEnd!=(int)(sample->samples)) {
+                //SAMPLE_WARN(warnLoopPos,_L("NES: loop point ignored on DPCM (may only loop entire sample)##sgsed"));
+              //}
+
+              if (sample->loopStart&15) {
+                int tryWith=(sample->loopStart)&(~15);
+                if (tryWith>(int)sample->samples) tryWith-=16;
+                String alignHint=fmt::sprintf(_L("NES: loop start must be a multiple of 16 (try with %d)##sgsed"),tryWith);
+                SAMPLE_WARN(warnLoopStart,alignHint);
+              }
+              if ((sample->loopEnd)&15) {
+                int tryWith=(sample->loopEnd + 1)&(~15); //+1 bc of how sample length is treated: https://www.nesdev.org/wiki/APU_DMC
+                if (tryWith>(int)sample->samples) tryWith-=16;
+                String alignHint=fmt::sprintf(_L("NES: loop end must be a multiple of 16 (try with %d)##sgsed"),tryWith);
+                SAMPLE_WARN(warnLoopEnd,alignHint);
               }
             }
             if (sample->samples>32648) {
@@ -1845,7 +1858,8 @@ void FurnaceGUI::drawSampleEdit() {
           if (!statusBar2.empty()) {
             statusBar2+=" | ";
           }
-          statusBar2+=fmt::sprintf("%.2fHz",e->getSamplePreviewRate());
+          String mygod = _L("%.2fHz##sgsed");
+          statusBar2+=fmt::sprintf(mygod,e->getSamplePreviewRate());
 
           int start=sampleSelStart;
           int end=sampleSelEnd;

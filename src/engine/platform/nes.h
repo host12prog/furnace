@@ -21,7 +21,7 @@
 #define _NES_H
 
 #include "../dispatch.h"
-
+#include "../../fixedQueue.h"
 #include "sound/nes_nsfplay/nes_apu.h"
 
 class DivPlatformNES: public DivDispatch {
@@ -47,6 +47,13 @@ class DivPlatformNES: public DivDispatch {
   Channel chan[5];
   DivDispatchOscBuffer* oscBuf[5];
   bool isMuted[5];
+  struct QueuedWrite {
+      unsigned short addr;
+      unsigned char val;
+      QueuedWrite(): addr(0), val(0) {}
+      QueuedWrite(unsigned short a, unsigned char v): addr(a), val(v) {}
+  };
+  FixedQueue<QueuedWrite,128> writes;
   int dacPeriod, dacRate, dpcmPos;
   unsigned int dacPos, dacAntiClick;
   int dacSample;

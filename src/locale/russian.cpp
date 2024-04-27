@@ -1989,7 +1989,8 @@ void DivLocale::addTranslationsRussian()
     strings["SNES: sample length will be padded to multiple of 16##sgsed"].plurals[0] = "SNES: длина сэмпла будет скорректирована до кратности 16";
     strings["QSound: loop cannot be longer than 32767 samples##sgsed"].plurals[0] = "QSound: цикл не может быть длиннее 32767 сэмплов";
     strings["QSound: maximum sample length is 65535##sgsed"].plurals[0] = "QSound: максимальная длина сэмпла: 65535";
-    strings["NES: loop point ignored on DPCM (may only loop entire sample)##sgsed"].plurals[0] = "NES: точка зацикливания игнорируется для ДИКМ (зациклить можно только сэмпл целиком)";
+    strings["NES: loop start must be a multiple of 16 (try with %d)##sgsed"].plurals[0] = "NES: начало цикла должно быть кратно 16 (попробуйте %d)";
+    strings["NES: loop end must be a multiple of 16 (try with %d)##sgsed"].plurals[0] = "NES: конец цикла должен быть кратен 16 (попробуйте %d)";
     strings["NES: maximum DPCM sample length is 32648##sgsed"].plurals[0] = "NES: максимальная длина ДИКМ-сэмпла равна 32648";
     strings["X1-010: samples can't loop##sgsed"].plurals[0] = "X1-010: сэмплы не могут быть зациклены";
     strings["X1-010: maximum sample length is 131072##sgsed"].plurals[0] = "X1-010: максимальная длина сэмпла равна 131072";
@@ -2121,6 +2122,7 @@ void DivLocale::addTranslationsRussian()
     strings[" (%d-%d: %d samples)##sgsed"].plurals[0] = " (%d-%d: %d сэмпл)";
     strings[" (%d-%d: %d samples)##sgsed"].plurals[1] = " (%d-%d: %d сэмпла)";
     strings[" (%d-%d: %d samples)##sgsed"].plurals[2] = " (%d-%d: %d сэмплов)";
+    strings["%.2fHz##sgsed"].plurals[0] = "%.2f Гц";
     strings["Non-8/16-bit samples cannot be edited without prior conversion.##sgsed"].plurals[0] = "Сэмплы в формате, отличающемся от 8- или 16-битной ИКМ, невозможно редактировать\nбез предварительной конвертации в один из этих форматов.";
 
     //   sgsi  src/gui/songInfo.cpp

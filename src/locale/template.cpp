@@ -2048,7 +2048,8 @@ void DivLocale::addTranslationsTemplate()
     strings["SNES: sample length will be padded to multiple of 16##sgsed"].plurals[0] = "=SNES: sample length will be padded to multiple of 16";
     strings["QSound: loop cannot be longer than 32767 samples##sgsed"].plurals[0] = "=QSound: loop cannot be longer than 32767 samples";
     strings["QSound: maximum sample length is 65535##sgsed"].plurals[0] = "=QSound: maximum sample length is 65535";
-    strings["NES: loop point ignored on DPCM (may only loop entire sample)##sgsed"].plurals[0] = "=NES: loop point ignored on DPCM (may only loop entire sample)";
+    strings["NES: loop start must be a multiple of 16 (try with %d)##sgsed"].plurals[0] = "=NES: loop start must be a multiple of 16 (try with %d)";
+    strings["NES: loop end must be a multiple of 16 (try with %d)##sgsed"].plurals[0] = "=NES: loop end must be a multiple of 16 (try with %d)";
     strings["NES: maximum DPCM sample length is 32648##sgsed"].plurals[0] = "=NES: maximum DPCM sample length is 32648";
     strings["X1-010: samples can't loop##sgsed"].plurals[0] = "=X1-010: samples can't loop";
     strings["X1-010: maximum sample length is 131072##sgsed"].plurals[0] = "=X1-010: maximum sample length is 131072";
@@ -2175,6 +2176,7 @@ void DivLocale::addTranslationsTemplate()
     strings["%d bytes##sgsed"].plurals[1] = "=%d bytes";
     strings[" (%d-%d: %d samples)##sgsed"].plurals[0] = "= (%d-%d: %d sample)";
     strings[" (%d-%d: %d samples)##sgsed"].plurals[1] = "= (%d-%d: %d samples)";
+    strings["%.2fHz##sgsed"].plurals[0] = "=%.2fHz";
     strings["Non-8/16-bit samples cannot be edited without prior conversion.##sgsed"].plurals[0] = "=Non-8/16-bit samples cannot be edited without prior conversion.";
 
     //   sgsi  src/gui/songInfo.cpp
