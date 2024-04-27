@@ -756,8 +756,6 @@ void DivPlatformSID2::reset() {
   for (int i=0; i<3; i++) {
     chan[i]=DivPlatformSID2::Channel();
     chan[i].std.setEngine(parent);
-    fakeLow[i]=0;
-    fakeBand[i]=0;
     chan[i].vol = 15;
 
     chan[i].filtControl = 7;
@@ -804,17 +802,6 @@ void DivPlatformSID2::setFlags(const DivConfig& flags) {
     oscBuf[i]->rate=rate/16;
   }
   keyPriority=flags.getBool("keyPriority",true);
-
-  // init fake filter table
-  // taken from dSID
-  double cutRatio=-2.0*3.14*(12500.0/256.0)/(double)oscBuf[0]->rate;
-
-  for (int i=0; i<4095; i++) 
-  {
-    double c=(double)i/16.0+0.2;
-    c=1-exp(c*cutRatio);
-    fakeCutTable[i]=c;
-  }
 }
 
 int DivPlatformSID2::init(DivEngine* p, int channels, int sugRate, const DivConfig& flags) {

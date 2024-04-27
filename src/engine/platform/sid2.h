@@ -66,9 +66,6 @@ class DivPlatformSID2: public DivDispatch {
   Channel chan[3];
   DivDispatchOscBuffer* oscBuf[3];
   bool isMuted[3];
-  float fakeLow[3];
-  float fakeBand[3];
-  float fakeCutTable[4096];
   struct QueuedWrite {
       unsigned char addr;
       unsigned char val;
