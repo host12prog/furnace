@@ -2430,10 +2430,11 @@ void FMOPNA_2612_Clock(fmopna_2612_t* chip, int clk)
         };
 
 
+        // tildearrow: per-channel oscilloscope for SSG
         chip->o_analog = 0;
-        chip->o_analog += volume_lut[sign_a ? 0 : vol_a];
-        chip->o_analog += volume_lut[sign_b ? 0 : vol_b];
-        chip->o_analog += volume_lut[sign_c ? 0 : vol_c];
+        chip->o_analog += chip->o_analog_ch[0] = volume_lut[sign_a ? 0 : vol_a];
+        chip->o_analog += chip->o_analog_ch[1] = volume_lut[sign_b ? 0 : vol_b];
+        chip->o_analog += chip->o_analog_ch[2] = volume_lut[sign_c ? 0 : vol_c];
     }
 
     {
@@ -5164,10 +5165,10 @@ void FMOPNA_2612_Clock(fmopna_2612_t* chip, int clk)
         if ((chip->ad_dsp_w43[1] & 1) != 0 && (chip->ad_dsp_w43[0] & 2) == 0)
             chip->ad_dsp_w45 = chip->ad_dsp_w40;
 
-        if (chip->ad_dsp_w45 == 0x1fff || (chip->ad_dsp_w45 & 0x1ffe) == 0)
+        if ((chip->ad_dsp_w45 >> 3) == 0x1fff || ((chip->ad_dsp_w45 >> 3) & 0x1ffe) == 0)
             chip->ad_output = 0;
         else
-            chip->ad_output = chip->ad_dsp_w45;
+            chip->ad_output = chip->ad_dsp_w45 >> 3;
 
         if ((chip->ad_code_ctrl_l & 0x4000) != 0 && (chip->ad_dsp_load_alu1[0] & 1) == 0)
         {
@@ -5308,7 +5309,7 @@ void FMOPNA_2612_Clock(fmopna_2612_t* chip, int clk)
                 chip->ad_reg_l && chip->ad_start_l[2])
                 accm1 += chip->ac_ad_output;
             chip->ac_fm_accm1[0] = chip->ac_da_sync2 ? accm1 : chip->ac_fm_accm1[1];
-            if (chip->ac_fm_pan & 2)
+            if ((chip->ac_fm_pan & 2) != 0 && chip->ac_fm_output_en)
                 chip->ac_fm_accm1[0] += chip->ac_fm_output;
             chip->ac_fm_accm1[0] &= 0x3ffff;
 
@@ -5322,7 +5323,7 @@ void FMOPNA_2612_Clock(fmopna_2612_t* chip, int clk)
                 chip->ad_reg_r && chip->ad_start_l[2])
                 accm2 += chip->ac_ad_output;
             chip->ac_fm_accm2[0] = chip->ac_da_sync ? accm2 : chip->ac_fm_accm2[1];
-            if (chip->ac_fm_pan & 1)
+            if ((chip->ac_fm_pan & 1) != 0 && chip->ac_fm_output_en)
                 chip->ac_fm_accm2[0] += chip->ac_fm_output;
             chip->ac_fm_accm2[0] &= 0x3ffff;
 
@@ -5368,6 +5369,8 @@ void FMOPNA_2612_Clock(fmopna_2612_t* chip, int clk)
 
             chip->ac_rss_load = chip->rss_cnt2[1] == 0;
 
+            // tildearrow: per-channel osc
+            chip->last_rss_sample = rss_sample & 0xffff;
         }
         if (chip->rss_eclk2)
         {
