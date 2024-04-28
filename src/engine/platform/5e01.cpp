@@ -419,7 +419,6 @@ void DivPlatform5E01::tick(bool sysTick) {
           if(lsamp->loopStart > 0 && lsamp->loopEnd > lsamp->loopStart && goingToLoop)
           {
             int loop_start_addr = (sampleOffDPCM[dacSample] + lsamp->loopStart) / 8;
-            int loop_end_addr = (sampleOffDPCM[dacSample] + lsamp->loopEnd) / 8;
             int loop_len = (lsamp->loopEnd - lsamp->loopStart) / 8;
 
             rWrite(0x4112,(loop_start_addr >> 6)&0xff);
