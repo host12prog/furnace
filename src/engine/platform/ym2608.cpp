@@ -501,11 +501,14 @@ void DivPlatformYM2608::acquire_ymfm(short** buf, size_t len) {
   }
 }
 
+// ac_fm_output
 void DivPlatformYM2608::acquire_lle(short** buf, size_t len) {
   for (size_t h=0; h<len; h++) {
     bool have0=false;
     bool have1=false;
     unsigned char howLong=0;
+    unsigned char subCycle=0x100-12;
+    unsigned char subSubCycle=0;
     while (true) {
       bool canWeWrite=fm_lle.prescaler_latch[1]&1;
 
@@ -521,7 +524,6 @@ void DivPlatformYM2608::acquire_lle(short** buf, size_t len) {
             fm_lle.input.wr=1;
             fm_lle.input.a0=0;
             fm_lle.input.a1=0;
-            //logV("preparing a delay");
             delay=0;
           } else {
             fm_lle.input.cs=0;
@@ -530,7 +532,6 @@ void DivPlatformYM2608::acquire_lle(short** buf, size_t len) {
             fm_lle.input.a0=0;
             fm_lle.input.a1=0;
             fm_lle.input.data=0;
-            //logV("preparing a read");
             delay=1;
           }
         } else if (!writes.empty()) {
@@ -545,8 +546,6 @@ void DivPlatformYM2608::acquire_lle(short** buf, size_t len) {
 
             delay=2;
 
-            //logV("VAL %.2x",w.val);
-
             regPool[w.addr&0x1ff]=w.val;
             writes.pop_front();
           } else {
@@ -559,8 +558,6 @@ void DivPlatformYM2608::acquire_lle(short** buf, size_t len) {
 
             delay=2;
 
-            //logV("ADDR %.2x =",w.addr);
-
             w.addrOrVal=true;
           }
         } else {
@@ -569,42 +566,65 @@ void DivPlatformYM2608::acquire_lle(short** buf, size_t len) {
           fm_lle.input.wr=1;
           fm_lle.input.a0=0;
           fm_lle.input.a1=0;
-          //logV("nothing to do");
         }
       }
 
       FMOPNA_Clock(&fm_lle,0);
       FMOPNA_Clock(&fm_lle,1);
 
+      if (++subSubCycle>=6) {
+        subSubCycle=0;
+        if (subCycle<12) {
+          oscBuf[subCycle]->data[oscBuf[subCycle]->needle++]=fm_lle.ac_fm_output;
+        }
+        subCycle++;
+      }
+
       if (canWeWrite) {
         if (delay==1) {
           // check busy status here
-          //if (!(fm_lle.o_data&0x80)) {
           if (!fm_lle.busy_cnt_en[1]) {
-            delay=3;
-          } else {
-            //logV("AM BUSY");
+            delay=0;
           }
         }
       }
 
       if (fm_lle.o_s && !lastS) {
         dacVal>>=1;
-        dacVal|=(fm_lle.o_opo&1)<<23;
+        dacVal|=(fm_lle.o_opo&1)<<14;
         howLong++;
       }
 
       if (!fm_lle.o_sh1 && lastSH) {
+        if (dacVal&0x2000) { // positive
+          int e=(dacVal>>10)&7;
+          int m=(dacVal>>0)&1023;
+          dacOut[0]=m<<e;
+          if (e) dacOut[0]+=512<<e;
+        } else { // negative
+          int e=((dacVal>>10)&7)^7;
+          int m=((dacVal>>0)&1023)^1023;
+          dacOut[0]=-(m<<e);
+          if (e) dacOut[0]-=512<<e;
+        }
         //int e=(dacVal>>10)&7;
         //int m=(dacVal>>0)&1023;
-        dacOut[0]=dacVal>>8;//(m<<e)>>1;
+        //m-=512;
         have0=true;
       }
 
       if (!fm_lle.o_sh2 && lastSH2) {
-        //int e=(dacVal>>10)&7;
-        //int m=(dacVal>>0)&1023;
-        dacOut[1]=dacVal>>8;//(m<<e)>>1;
+        if (dacVal&0x2000) { // positive
+          int e=(dacVal>>10)&7;
+          int m=(dacVal>>0)&1023;
+          dacOut[1]=(m<<e);
+          if (e) dacOut[1]+=512<<e;
+        } else { // negative
+          int e=((dacVal>>10)&7)^7;
+          int m=((dacVal>>0)&1023)^1023;
+          dacOut[1]=-(m<<e);
+          if (e) dacOut[1]-=512<<e;
+        }
         have1=true;
       }
 
@@ -635,19 +655,8 @@ void DivPlatformYM2608::acquire_lle(short** buf, size_t len) {
     }
 
     // DAC
-    int accm1=dacOut[0]-0x4000;
-    int accm2=dacOut[1]-0x4000;
-
-    if (accm1&0x20000) {
-      accm1|=0xfffc0000;
-    }
-    if (accm2&0x20000) {
-      accm2|=0xfffc0000;
-    }
-
-    //logV("%.8x %.8x",dacOut[0],dacOut[1]);
-
-    //logV("%.8x %d",accm1,howLong);
+    int accm1=dacOut[0];
+    int accm2=dacOut[1];
 
     int outL=(accm1<<1)+fm_lle.o_analog*ssgVol*42;
     int outR=(accm2<<1)+fm_lle.o_analog*ssgVol*42;
