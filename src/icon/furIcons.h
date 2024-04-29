@@ -3,11 +3,7 @@
 // not auto-generated. update every time you change icons.ttf!
 
 #define ICON_MIN_FUR 0xe0f0
-<<<<<<< HEAD
 #define ICON_MAX_FUR 0xe2ff
-=======
-#define ICON_MAX_FUR 0xe161
->>>>>>> 73957ad57dca2b4e106b9ab4b05ea9b548c7f655
 
 // test
 #define ICON_FUR_TEST0 u8"\ue0f0"
@@ -71,7 +67,6 @@
 #define ICON_FUR_INS_SCSP u8"\ue133"
 #define ICON_FUR_INS_TED u8"\ue134"
 #define ICON_FUR_INS_C140 u8"\ue135"
-<<<<<<< HEAD
 #define ICON_FUR_INS_C219 u8"\ue136"
 #define ICON_FUR_INS_ESFM u8"\ue137"
 #define ICON_FUR_INS_ES5503 u8"\ue138"
@@ -84,18 +79,6 @@
 #define ICON_FUR_INS_SID2 u8"\ue13f"
 #define ICON_FUR_INS_NDS u8"\ue140"
 #define ICON_FUR_INS_FZT u8"\ue141"
-=======
-#define ICON_FUR_INS_C219 u8"\ue142"
-#define ICON_FUR_INS_ESFM u8"\ue143"
-#define ICON_FUR_INS_POWERNOISE u8"\ue15a"
-#define ICON_FUR_INS_POWERNOISE_SAW u8"\ue15b"
-#define ICON_FUR_INS_DAVE u8"\ue15c"
-#define ICON_FUR_INS_NDS u8"\ue15d"
-#define ICON_FUR_INS_GBA_DMA u8"\ue15e"
-#define ICON_FUR_INS_GBA_MINMOD u8"\ue15f"
-#define ICON_FUR_INS_BIFURCATOR u8"\ue160"
-#define ICON_FUR_INS_SID2 u8"\ue161"
->>>>>>> 73957ad57dca2b4e106b9ab4b05ea9b548c7f655
 
 // sample editor
 #define ICON_FUR_SAMPLE_APPLY_SILENCE u8"\ue200"
