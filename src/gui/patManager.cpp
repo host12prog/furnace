@@ -33,9 +33,6 @@ void FurnaceGUI::drawPatManager() {
   unsigned char isUsed[DIV_MAX_PATTERNS];
   bool isNull[DIV_MAX_PATTERNS];
   if (ImGui::Begin("Pattern Manager",&patManagerOpen,globalWinFlags, _L("Pattern Manager###Pattern Manager"))) {
-    ImGui::Text(_L("Global Tasks:##sgpm"));
-
-    ImGui::SameLine();
 
     if (ImGui::Button(_L("De-duplicate patterns##sgpm"))) {
       e->lockEngine([this]() {

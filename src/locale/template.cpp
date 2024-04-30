@@ -1658,7 +1658,6 @@ void DivLocale::addTranslationsTemplate()
     //   sgpm  src/gui/patManager.cpp
 
     strings["Pattern Manager###Pattern Manager"].plurals[0] = "=Pattern Manager###Pattern Manager";
-    strings["Global Tasks:##sgpm"].plurals[0] = "=Global Tasks:";
     strings["De-duplicate patterns##sgpm"].plurals[0] = "=De-duplicate patterns";
     strings["Re-arrange patterns##sgpm"].plurals[0] = "=Re-arrange patterns";
     strings["Sort orders##sgpm"].plurals[0] = "=Sort orders";

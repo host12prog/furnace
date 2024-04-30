@@ -1629,7 +1629,6 @@ void DivLocale::addTranslationsPortuguese()
     //   sgpm  src/gui/patManager.cpp
 
     strings["Pattern Manager###Pattern Manager"].plurals[0] = "Gerenciador de Sequências###Pattern Manager";
-    strings["Global Tasks:##sgpm"].plurals[0] = "Tarefas Globais:";
     strings["De-duplicate patterns##sgpm"].plurals[0] = "Deduplicar sequências";
     strings["Re-arrange patterns##sgpm"].plurals[0] = "Reordenar sequências";
     strings["Sort orders##sgpm"].plurals[0] = "Ordenar ordens";

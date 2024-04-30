@@ -250,16 +250,16 @@ void FurnaceGUI::drawSampleEdit() {
                 //SAMPLE_WARN(warnLoopPos,_L("NES: loop point ignored on DPCM (may only loop entire sample)##sgsed"));
               //}
 
-              if (sample->loopStart&15) {
-                int tryWith=(sample->loopStart)&(~15);
-                if (tryWith>(int)sample->samples) tryWith-=16;
-                String alignHint=fmt::sprintf(_L("NES: loop start must be a multiple of 16 (try with %d)##sgsed"),tryWith);
+              if (sample->loopStart&127) {
+                int tryWith=(sample->loopStart)&(~127);
+                if (tryWith>(int)sample->samples) tryWith-=128;
+                String alignHint=fmt::sprintf(_L("NES: loop start must be a multiple of 128 (try with %d)##sgsed"),tryWith);
                 SAMPLE_WARN(warnLoopStart,alignHint);
               }
-              if ((sample->loopEnd)&15) {
-                int tryWith=(sample->loopEnd + 1)&(~15); //+1 bc of how sample length is treated: https://www.nesdev.org/wiki/APU_DMC
-                if (tryWith>(int)sample->samples) tryWith-=16;
-                String alignHint=fmt::sprintf(_L("NES: loop end must be a multiple of 16 (try with %d)##sgsed"),tryWith);
+              if ((sample->loopEnd)&127) {
+                int tryWith=(sample->loopEnd + 1)&(~127); //+1 bc of how sample length is treated: https://www.nesdev.org/wiki/APU_DMC
+                if (tryWith>(int)sample->samples) tryWith-=128;
+                String alignHint=fmt::sprintf(_L("NES: loop end must be a multiple of 128 (try with %d)##sgsed"),tryWith);
                 SAMPLE_WARN(warnLoopEnd,alignHint);
               }
             }

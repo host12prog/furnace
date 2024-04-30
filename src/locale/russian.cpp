@@ -1599,7 +1599,6 @@ void DivLocale::addTranslationsRussian()
     //   sgpm  src/gui/patManager.cpp
 
     strings["Pattern Manager###Pattern Manager"].plurals[0] = "Менеджер паттернов###Pattern Manager";
-    strings["Global Tasks:##sgpm"].plurals[0] = "Глобальное редактирование:";
     strings["De-duplicate patterns##sgpm"].plurals[0] = "Удалить дубликаты паттернов";
     strings["Re-arrange patterns##sgpm"].plurals[0] = "Отсортировать паттерны";
     strings["Sort orders##sgpm"].plurals[0] = "Отсортировать столбцы матрицы паттернов";

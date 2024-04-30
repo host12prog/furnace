@@ -1566,7 +1566,6 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     //   sgpm  src/gui/patManager.cpp
 
     strings["Pattern Manager###Pattern Manager"].plurals[0] = "Menedżer wzorców###Pattern Manager";
-    strings["Global Tasks:##sgpm"].plurals[0] = "Globalne edytowanie:";
     strings["De-duplicate patterns##sgpm"].plurals[0] = "Usuń zduplikowane wzorce";
     strings["Re-arrange patterns##sgpm"].plurals[0] = "Sortuj wzorce";
     strings["Sort orders##sgpm"].plurals[0] = "Sortuj wiesze matrycy wzorców";
