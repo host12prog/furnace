@@ -1722,6 +1722,7 @@ class FurnaceGUI {
     int opl3Core;
     int esfmCore;
     int opllCore;
+    int ayCore;
     int bubsysQuality;
     int dsidQuality;
     int gbQuality;
@@ -1747,6 +1748,7 @@ class FurnaceGUI {
     int opl3CoreRender;
     int esfmCoreRender;
     int opllCoreRender;
+    int ayCoreRender;
     int bubsysQualityRender;
     int dsidQualityRender;
     int gbQualityRender;
@@ -1972,6 +1974,7 @@ class FurnaceGUI {
       opl3Core(0),
       esfmCore(0),
       opllCore(0),
+      ayCore(0),
       bubsysQuality(3),
       dsidQuality(3),
       gbQuality(3),
@@ -1997,6 +2000,7 @@ class FurnaceGUI {
       opl3CoreRender(0),
       esfmCoreRender(0),
       opllCoreRender(0),
+      ayCoreRender(0),
       bubsysQualityRender(3),
       dsidQualityRender(3),
       gbQualityRender(3),

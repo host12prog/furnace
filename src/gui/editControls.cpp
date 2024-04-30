@@ -597,6 +597,10 @@ void FurnaceGUI::drawMobileControls() {
         if (ImGui::Button("Presets")) {
           userPresetsOpen=!userPresetsOpen;
         }
+        ImGui::SameLine();
+        if (ImGui::Button("PatManager")) {
+          patManagerOpen=!patManagerOpen;
+        }
 
         ImGui::Separator();
 
