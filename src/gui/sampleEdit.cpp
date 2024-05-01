@@ -250,10 +250,10 @@ void FurnaceGUI::drawSampleEdit() {
                 //SAMPLE_WARN(warnLoopPos,_L("NES: loop point ignored on DPCM (may only loop entire sample)##sgsed"));
               //}
 
-              if (sample->loopStart&127) {
-                int tryWith=(sample->loopStart)&(~127);
-                if (tryWith>(int)sample->samples) tryWith-=128;
-                String alignHint=fmt::sprintf(_L("NES: loop start must be a multiple of 128 (try with %d)##sgsed"),tryWith);
+              if (sample->loopStart&511) {
+                int tryWith=(sample->loopStart)&(~511);
+                if (tryWith>(int)sample->samples) tryWith-=512;
+                String alignHint=fmt::sprintf(_L("NES: loop start must be a multiple of 512 (try with %d)##sgsed"),tryWith);
                 SAMPLE_WARN(warnLoopStart,alignHint);
               }
               if ((sample->loopEnd)&127) {
