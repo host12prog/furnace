@@ -739,7 +739,8 @@ void DivPlatformGB::setFlags(const DivConfig& flags) {
 void DivPlatformGB::setCoreQuality(unsigned char q) {
   switch (q) {
     case 0:
-      coreQuality=120;
+      // sorry...
+      coreQuality=64;
       break;
     case 1:
       coreQuality=64;
