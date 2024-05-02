@@ -7146,20 +7146,18 @@ bool FurnaceGUI::init() {
   logV("window size: %dx%d",scrW,scrH);
 
   if (!initRender()) {
-    if (settings.renderBackend!="SDL") {
-      settings.renderBackend="SDL";
-      e->setConf("renderBackend","SDL");
+    if (settings.renderBackend!="Software") {
+      settings.renderBackend="Software";
+      e->setConf("renderBackend","Software");
       e->saveConf();
-      lastError=fmt::sprintf("could not init renderer!\r\nthe render backend has been set to a safe value. please restart Furnace.");
+      lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer!\r\nfalling back to software renderer. please restart Furnace." : _L("could not init renderer!\r\nfalling back to software renderer. please restart Furnace.##sggu")));
+    } else if (settings.renderBackend=="SDL") {
+      lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace." : _L("could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.##sggu")),SDL_GetError());
+      settings.renderBackend="Software";
+      e->setConf("renderBackend","Software");
+      e->saveConf();
     } else {
-      String rend_err = (settings.language == DIV_LANG_ENGLISH ? "could not init renderer! %s" : _L("could not init renderer! %s##sggu"));
-      lastError=fmt::sprintf(rend_err,SDL_GetError());
-      if (!settings.renderDriver.empty()) {
-        settings.renderDriver="";
-        e->setConf("renderDriver","");
-        e->saveConf();
-        lastError+=fmt::sprintf(_L("\r\nthe render driver has been set to a safe value. please restart Furnace.##sggu"));
-      }
+      lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer!" : _L("could not init renderer!##sggu")));
     }
     return false;
   }
@@ -7249,20 +7247,18 @@ bool FurnaceGUI::init() {
   logD("starting render backend...");
   if (!rend->init(sdlWin,settings.vsync)) {
     logE("it failed...");
-    if (settings.renderBackend!="SDL") {
-      settings.renderBackend="SDL";
-      e->setConf("renderBackend","SDL");
+    if (settings.renderBackend!="Software") {
+      settings.renderBackend="Software";
+      e->setConf("renderBackend","Software");
       e->saveConf();
-      lastError=fmt::sprintf("could not init renderer!\r\nthe render backend has been set to a safe value. please restart Furnace.");
+      lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer!\r\nfalling back to software renderer. please restart Furnace." : _L("could not init renderer!\r\nfalling back to software renderer. please restart Furnace.##sggu")));
+    } else if (settings.renderBackend=="SDL") {
+      lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace." : _L("could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.##sggu")),SDL_GetError());
+      settings.renderBackend="Software";
+      e->setConf("renderBackend","Software");
+      e->saveConf();
     } else {
-      String rend_err = (settings.language == DIV_LANG_ENGLISH ? "could not init renderer! %s" : _L("could not init renderer! %s##sggu"));
-      lastError=fmt::sprintf(rend_err,SDL_GetError());
-      if (!settings.renderDriver.empty()) {
-        settings.renderDriver="";
-        e->setConf("renderDriver","");
-        e->saveConf();
-        lastError+=fmt::sprintf("\r\nthe render driver has been set to a safe value. please restart Furnace.");
-      }
+      lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer!" : _L("could not init renderer!##sggu")));
     }
     return false;
   }

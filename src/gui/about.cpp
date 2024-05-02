@@ -160,6 +160,7 @@ const char* aboutLine[]={
   "scooblee",
   "sheffield^2",
   "sillygoose",
+  "Slightly Large NC",
   "smaybius",
   "SnugglyBun",
   "Spinning Square Waves",

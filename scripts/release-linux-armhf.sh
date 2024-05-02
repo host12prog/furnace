@@ -1,6 +1,6 @@
 #!/bin/bash
 # make linux release
-# run on an Ubuntu 16.04 machine or VM for best results.
+# run on an Ubuntu 20.04 machine or VM for best results.
 
 if [ ! -e /tmp/furnace ]; then
   ln -s "$PWD" /tmp/furnace || exit 1
@@ -8,24 +8,23 @@ fi
 
 cd /tmp/furnace
 
-if [ ! -e linuxbuild ]; then
-  mkdir linuxbuild || exit 1
+if [ ! -e armbuild ]; then
+  mkdir armbuild || exit 1
 fi
 
-cd linuxbuild
+cd armbuild
 
-# -DWITH_PORTAUDIO=OFF: Ubuntu 16.04 doesn't like it
-cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-O3" -DCMAKE_CXX_FLAGS="-O3 -Wall -Wextra -Wno-unused-parameter -Werror" -DWITH_PORTAUDIO=OFF -DWITH_DEMOS=ON -DWITH_INSTRUMENTS=ON -DWITH_WAVETABLES=ON .. || exit 1
+cmake -DCMAKE_TOOLCHAIN_FILE=/tmp/furnace/scripts/Cross-Linux-armhf.cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-O3" -DCMAKE_CXX_FLAGS="-O3 -Wall -Wextra -Wno-unused-parameter -Werror" -DWITH_PORTAUDIO=OFF -DWITH_DEMOS=ON -DWITH_INSTRUMENTS=ON -DWITH_WAVETABLES=ON .. || exit 1
 make -j4 || exit 1
 
 cd ..
 
-mkdir -p release/linux/furnace || exit 1
-cd linuxbuild
+mkdir -p release/linuxarm/furnace || exit 1
+cd armbuild
 
-make DESTDIR=/tmp/furnace/release/linux/furnace install || exit 1
+make DESTDIR=/tmp/furnace/release/linuxarm/furnace install || exit 1
 
-cd ../release/linux/furnace
+cd ../release/linuxarm/furnace
 
 cp -v ../../../res/logo.png .DirIcon || exit 1
 #cp -v ../../../res/furnace.desktop . || exit 1

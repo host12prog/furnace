@@ -856,6 +856,8 @@ void DivLocale::addTranslationsRussian()
     strings["%.0fµs##sggu"].plurals[0] = "%.0f мс";
     strings["error while loading fonts! please check your settings.##sggu1"].plurals[0] = "Ошибка при загрузке шрифтов! пожалуйста, проверьте настройки.";
     strings["it appears I couldn't load these fonts. any setting you can check?##sggu"].plurals[0] = "кажется, я не могу загрузить эти шрифты. проверьте настройки?";
+    strings["could not init renderer!\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "не получилось инициализировать движок отрисовки!\r\nперехожу на программную отрисовку. пожалуйста, перезапустите Furnace.";
+    strings["could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "не получилось инициализировать движок отрисовки! %s\r\nперехожу на программную отрисовку. пожалуйста, перезапустите Furnace.";
     strings["could not init renderer! %s##sggu"].plurals[0] = "не получилось инициализировать движок отрисовки! %s";
     strings["\r\nthe render driver has been set to a safe value. please restart Furnace.##sggu"].plurals[0] = "\r\nдвижок отрисовки был сброшен до безопасного. пожалуйста, перезапустите Furnace.";
     strings["could not open window! %s##sggu"].plurals[0] = "не удалось открыть окно! %s";

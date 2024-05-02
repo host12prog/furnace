@@ -913,6 +913,8 @@ void DivLocale::addTranslationsTemplate()
     strings["%.0fµs##sggu"].plurals[0] = "=%.0fµs";
     strings["error while loading fonts! please check your settings.##sggu1"].plurals[0] = "=error while loading fonts! please check your settings.";
     strings["it appears I couldn't load these fonts. any setting you can check?##sggu"].plurals[0] = "=it appears I couldn't load these fonts. any setting you can check?";
+    strings["could not init renderer!\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "=could not init renderer!\r\nfalling back to software renderer. please restart Furnace.";
+    strings["could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "=could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.";
     strings["could not init renderer! %s##sggu"].plurals[0] = "=could not init renderer! %s";
     strings["\r\nthe render driver has been set to a safe value. please restart Furnace.##sggu"].plurals[0] = "=\r\nthe render driver has been set to a safe value. please restart Furnace.";
     strings["could not open window! %s##sggu"].plurals[0] = "=could not open window! %s";
