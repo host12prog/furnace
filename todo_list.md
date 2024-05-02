@@ -13,7 +13,6 @@ Change:
 
 Add:
 - Import of the following: “xm”, “it”, "med", "s3m", "mptm", "a2m", "rmt", “vt” (Vortex Tracker), “sng” (GoatTracker)
-- DPCM loop point
 - Chips from pending Furnace PRs, if possible (right now it’s OPL4, MultiPCM and NDS)
 - Features from pending Furnace PRs, **if possible**
 - Ability to copy-paste LFO and ADSR type macros
