@@ -7149,15 +7149,12 @@ bool FurnaceGUI::init() {
     if (settings.renderBackend!="Software") {
       settings.renderBackend="Software";
       e->setConf("renderBackend","Software");
-    if (settings.renderBackend!="Software") {
-      settings.renderBackend="Software";
-      e->setConf("renderBackend","Software");
       e->saveConf();
       lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer!\r\nfalling back to software renderer. please restart Furnace." : _L("could not init renderer!\r\nfalling back to software renderer. please restart Furnace.##sggu")));
     } else if (settings.renderBackend=="SDL") {
       lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace." : _L("could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.##sggu")),SDL_GetError());
       settings.renderBackend="Software";
-      e->setConf("renderBackend", "Software");
+      e->setConf("renderBackend","Software");
       e->saveConf();
     } else {
       lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer!" : _L("could not init renderer!##sggu")));
@@ -7258,7 +7255,7 @@ bool FurnaceGUI::init() {
     } else if (settings.renderBackend=="SDL") {
       lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace." : _L("could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.##sggu")),SDL_GetError());
       settings.renderBackend="Software";
-      e->setConf("renderBackend", "Software");
+      e->setConf("renderBackend","Software");
       e->saveConf();
     } else {
       lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer!" : _L("could not init renderer!##sggu")));

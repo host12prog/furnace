@@ -42,12 +42,6 @@ typedef HRESULT (WINAPI *SPDA)(PROCESS_DPI_AWARENESS);
 struct sigaction termsa;
 #endif
 
-#ifdef SUPPORT_XP
-#define TUT_INTRO_PLAYED true
-#else
-#define TUT_INTRO_PLAYED false
-#endif
-
 #include "cli/cli.h"
 
 #ifdef HAVE_GUI
@@ -591,75 +585,6 @@ int main(int argc, char** argv) {
     e.setAudio(DIV_AUDIO_DUMMY);
   }
 
-<<<<<<< HEAD
-=======
-  if (!fileName.empty() && ((!e.getConfBool("tutIntroPlayed",TUT_INTRO_PLAYED)) || e.getConfInt("alwaysPlayIntro",0)!=3 || consoleMode || benchMode || infoMode || outName!="" || vgmOutName!="" || cmdOutName!="")) {
-    logI("loading module...");
-    FILE* f=ps_fopen(fileName.c_str(),"rb");
-    if (f==NULL) {
-      reportError(fmt::sprintf("couldn't open file! (%s)",strerror(errno)));
-      e.everythingOK();
-      finishLogFile();
-      return 1;
-    }
-    if (fseek(f,0,SEEK_END)<0) {
-      reportError(fmt::sprintf("couldn't open file! (couldn't get file size: %s)",strerror(errno)));
-      e.everythingOK();
-      fclose(f);
-      finishLogFile();
-      return 1;
-    }
-    ssize_t len=ftell(f);
-    if (len==(SIZE_MAX>>1)) {
-      reportError(fmt::sprintf("couldn't open file! (couldn't get file length: %s)",strerror(errno)));
-      e.everythingOK();
-      fclose(f);
-      finishLogFile();
-      return 1;
-    }
-    if (len<1) {
-      if (len==0) {
-        reportError("that file is empty!");
-      } else {
-        reportError(fmt::sprintf("couldn't open file! (tell error: %s)",strerror(errno)));
-      }
-      e.everythingOK();
-      fclose(f);
-      finishLogFile();
-      return 1;
-    }
-    unsigned char* file=new unsigned char[len];
-    if (fseek(f,0,SEEK_SET)<0) {
-      reportError(fmt::sprintf("couldn't open file! (size error: %s)",strerror(errno)));
-      e.everythingOK();
-      fclose(f);
-      delete[] file;
-      finishLogFile();
-      return 1;
-    }
-    if (fread(file,1,(size_t)len,f)!=(size_t)len) {
-      reportError(fmt::sprintf("couldn't open file! (read error: %s)",strerror(errno)));
-      e.everythingOK();
-      fclose(f);
-      delete[] file;
-      finishLogFile();
-      return 1;
-    }
-    fclose(f);
-    if (!e.load(file,(size_t)len,fileName.c_str())) {
-      reportError(fmt::sprintf("could not open file! (%s)",e.getLastError()));
-      e.everythingOK();
-      finishLogFile();
-      return 1;
-    }
-  }
-  if (infoMode) {
-    e.dumpSongInfo();
-    finishLogFile();
-    return 0;
-  }
-
->>>>>>> 6ec8ff8bfbf0b29ede68e417edc3a2d94e82afc9
   if (!e.init()) {
     if (consoleMode) {
       reportError("could not initialize engine!");
