@@ -83,7 +83,7 @@ typedef struct {
 } SoundEngine;
 
 uint16_t sound_engine_triangle(uint32_t acc);
-uint32_t get_freq(uint16_t note);
+uint32_t get_freq(int note);
 
 void sound_engine_init(
     SoundEngine* sound_engine,
@@ -91,7 +91,7 @@ void sound_engine_init(
 void sound_engine_set_channel_frequency(
     SoundEngine* sound_engine,
     SoundEngineChannel* channel,
-    uint16_t note);
+    int note);
 void sound_engine_filter_set_coeff(SoundEngineFilter* flt, uint32_t frequency, uint16_t resonance);
 void sound_engine_fill_buffer(
     SoundEngine* sound_engine,

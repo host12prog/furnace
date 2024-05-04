@@ -73,7 +73,9 @@ const uint32_t frequency_table[FREQ_TAB_SIZE] = {
     (uint32_t)(3951.07 * 1024 * 4),
 };
 
-uint32_t get_freq(uint16_t note) {
+uint32_t get_freq(int note) {
+    if(note <= 0) return frequency_table[0] / (2 << 8);
+
     if(note >= ((FREQ_TAB_SIZE * 8 - 1) << 8)) {
         return frequency_table[FREQ_TAB_SIZE - 1];
     }
@@ -475,7 +477,7 @@ void sound_engine_init(
 void sound_engine_set_channel_frequency(
     SoundEngine* sound_engine,
     SoundEngineChannel* channel,
-    uint16_t note) {
+    int note) {
     uint32_t frequency = get_freq(note);
 
     if(frequency != 0) {

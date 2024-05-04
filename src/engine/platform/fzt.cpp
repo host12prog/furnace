@@ -75,12 +75,12 @@ void DivPlatformFZT::tracker_engine_trigger_instrument_internal(int chan, DivIns
 
   te_channel->pitch_note = 0;
 
-  note += (((int16_t)pinst->fzt.base_note - MIDDLE_C) << 8);
-  tracker_engine_set_note(chan, note + (int16_t)pinst->fzt.finetune, true);
+  note += (((int)pinst->fzt.base_note - MIDDLE_C) << 8);
+  tracker_engine_set_note(chan, note + (int)pinst->fzt.finetune, true);
 
   if (note + (int)pinst->fzt.finetune > 0 && note + (int)pinst->fzt.finetune <= MAX_NOTE << 8)
   {
-      te_channel->last_note = te_channel->target_note = note + (int16_t)pinst->fzt.finetune;
+      te_channel->last_note = te_channel->target_note = note + (int)pinst->fzt.finetune;
   }
 
   te_channel->extarp1 = te_channel->extarp2 = 0;
@@ -176,10 +176,8 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
     }
 
     case 0x0200: {
-        int32_t prev = te_channel->note;
-
         te_channel->note -= ((opcode & 0xff) << 2);
-        if(prev < te_channel->note) te_channel->note = 0;
+        if(te_channel->note < 0) te_channel->note = 0;
 
         te_channel->target_note = te_channel->note;
         break;
@@ -309,10 +307,8 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
 
     case 0xf100: {
         if(tick == 0) {
-            int32_t prev = te_channel->note;
-
             te_channel->note -= (opcode & 0xf);
-            if(prev < te_channel->note) te_channel->note = 0;
+            if(te_channel->note < 0) te_channel->note = 0;
 
             te_channel->target_note = te_channel->note;
         }
@@ -565,10 +561,8 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
     }
 
     case 0x2700: {
-        int32_t prev = te_channel->note;
-
         te_channel->note -= ((opcode & 0xff) << 8);
-        if(prev < te_channel->note) te_channel->note = 0;
+        if(te_channel->note < 0) te_channel->note = 0;
 
         te_channel->target_note = te_channel->note;
         break;
@@ -773,7 +767,7 @@ void DivPlatformFZT::tracker_engine_advance_channel(int chan)
       if(u) te_channel->program_counter = 0;
     }
 
-    int16_t vib = 0;
+    int32_t vib = 0;
     int32_t pwm = 0;
 
     if(te_channel->flags & TE_ENABLE_VIBRATO) {
@@ -814,7 +808,7 @@ void DivPlatformFZT::tracker_engine_advance_channel(int chan)
         sound_engine->channel[chan].pw = fztChan[chan].pw;
     }
 
-    int32_t chn_note = (te_channel->fixed_note != 0xffff ? te_channel->fixed_note : te_channel->note) + vib + (te_channel->arpeggio_note * 256) + te_channel->finetune_note + te_channel->pitch_note;
+    int chn_note = ((int)te_channel->fixed_note != 0xffff ? (int)te_channel->fixed_note : (int)te_channel->note) + (int)vib + ((int)te_channel->arpeggio_note * 256) + (int)te_channel->finetune_note + (int)te_channel->pitch_note;
 
     if(chn_note < 0) {
         chn_note = 0;
@@ -824,7 +818,7 @@ void DivPlatformFZT::tracker_engine_advance_channel(int chan)
         chn_note = ((12 * 7 + 11) << 8); // highest note is B-7
     }
 
-    tracker_engine_set_note(chan, (uint16_t)chn_note, false);
+    tracker_engine_set_note(chan, chn_note, false);
   }
 
   if((fztChan[chan].channel_flags & TEC_DISABLED) || isMuted[chan]) // so we can't set some non-zero volme from inst program too
@@ -859,7 +853,7 @@ void DivPlatformFZT::tracker_engine_advance_tick(int chann, int opcode, bool do_
       {
         if(pinst->fzt.flags & TE_RETRIGGER_ON_SLIDE) 
         {
-          uint16_t temp_note = te_channel->note;
+          int temp_note = te_channel->note;
           tracker_engine_trigger_instrument_internal(chann, pinst, note << 8);
           te_channel->note = temp_note;
         }
