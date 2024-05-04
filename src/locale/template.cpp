@@ -660,6 +660,7 @@ void DivLocale::addTranslationsTemplate()
     strings["collapse song##sggu"].plurals[0] = "=collapse song";
     strings["expand song##sggu"].plurals[0] = "=expand song";
     strings["find/replace##sggu"].plurals[0] = "=find/replace";
+    strings["clone pattern##sggu"].plurals[0] = "=clone pattern";
     strings["Furnace has been started in Safe Mode.\nthis means that:\n\n- software rendering is being used\n- audio output may not work\n- font loading is disabled\n\ncheck any settings which may have made Furnace start up in this mode.\nfont loading is one of these.##sggu"].plurals[0] = "=Furnace has been started in Safe Mode.\nthis means that:\n\n- software rendering is being used\n- audio output may not work\n- font loading is disabled\n\ncheck any settings which may have made Furnace start up in this mode.\nfont loading is one of these.";
     strings["Unsaved changes! Save changes before opening file?##sggu0"].plurals[0] = "=Unsaved changes! Save changes before opening file?";
     strings["Unsaved changes! Save changes before opening file?##sggu2"].plurals[0] = "=Unsaved changes! Save changes before opening file?";
@@ -1097,6 +1098,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Set note input latch##sggc"].plurals[0] = "=Set note input latch";
     strings["Change mobile scroll mode##sggc"].plurals[0] = "=Change mobile scroll mode";
     strings["Clear note input latch##sggc"].plurals[0] = "=Clear note input latch";
+    strings["Clone pattern##sggc"].plurals[0] = "=Clone pattern";
     strings["---Instrument list##sggc"].plurals[0] = "=---Instrument list";
     strings["Add instrument##sggc0"].plurals[0] = "=Add instrument";
     strings["Duplicate instrument##sggc0"].plurals[0] = "=Duplicate instrument";

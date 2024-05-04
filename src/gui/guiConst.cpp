@@ -690,6 +690,7 @@ const FurnaceGUIActionDef guiActions[GUI_ACTION_MAX]={
   D("PAT_LATCH", "Set note input latch##sggc", 0),
   D("PAT_SCROLL_MODE", "Change mobile scroll mode##sggc", 0),
   D("PAT_CLEAR_LATCH", "Clear note input latch##sggc", 0),
+  D("PAT_CLONE", "Clone pattern##sggc", 0),
   D("PAT_MAX", "", NOT_AN_ACTION),
 
   D("INS_LIST_MIN", "---Instrument list##sggc", NOT_AN_ACTION),

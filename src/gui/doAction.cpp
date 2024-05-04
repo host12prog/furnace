@@ -668,6 +668,14 @@ void FurnaceGUI::doAction(int what) {
       latchNibble=false;
       break;
 
+    case GUI_ACTION_PAT_CLONE:
+    {
+      prepareUndo(GUI_UNDO_PATTERN_EDIT);
+      e->clonePattern(curOrder,cursor.xCoarse);
+      makeUndo(GUI_UNDO_PATTERN_EDIT);
+      break;
+    }
+
     case GUI_ACTION_INS_LIST_ADD:
       if (settings.insTypeMenu) {
         makeInsTypeList=e->getPossibleInsTypes();

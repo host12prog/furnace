@@ -3066,13 +3066,18 @@ void FurnaceGUI::editOptions(bool topMenu) {
 
   if (topMenu) {
     ImGui::Separator();
-    if (ImGui::MenuItem(_L("find/replace##sggu"),BIND_FOR(GUI_ACTION_WINDOW_FIND),findOpen)) {
+    if (ImGui::MenuItem(_L("find/replace##sggu"),BIND_FOR(GUI_ACTION_WINDOW_FIND))) {
       if (findOpen) {
         findOpen=false;
       } else {
         nextWindow=GUI_WINDOW_FIND;
       }
     }
+  }
+
+  if (topMenu) {
+    ImGui::Separator();
+    if (ImGui::MenuItem(_L("clone pattern##sggu"),BIND_FOR(GUI_ACTION_PAT_CLONE))) doAction(GUI_ACTION_PAT_CLONE);
   }
 }
 void FurnaceGUI::toggleMobileUI(bool enable, bool force) {

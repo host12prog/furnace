@@ -600,6 +600,7 @@ void DivLocale::addTranslationsRussian()
     strings["collapse song##sggu"].plurals[0] = "сжать трек";
     strings["expand song##sggu"].plurals[0] = "расширить трек";
     strings["find/replace##sggu"].plurals[0] = "найти/заменить";
+    strings["clone pattern##sggu"].plurals[0] = "клонировать паттерн";
     strings["Furnace has been started in Safe Mode.\nthis means that:\n\n- software rendering is being used\n- audio output may not work\n- font loading is disabled\n\ncheck any settings which may have made Furnace start up in this mode.\nfont loading is one of these.##sggu"].plurals[0] = "Furnace был запущен в безопасном режиме.\nэто означает:\n\n- используется программная отрисовка\n- может не работать вывод звука\n- отключена загрузка шрифтов\n\nпроверьте, какие настройки могли привести к запуску программы в этом режиме.\nзагрузка шрифтов может быть одной из таких.";
     strings["Unsaved changes! Save changes before opening file?##sggu0"].plurals[0] = "Остались несохранённые изменения! Сохранить их перед открытием файла?";
     strings["Unsaved changes! Save changes before opening file?##sggu2"].plurals[0] = "Остались несохранённые изменения! Сохранить их перед открытием файла?";
@@ -1041,6 +1042,7 @@ void DivLocale::addTranslationsRussian()
     strings["Set note input latch##sggc"].plurals[0] = "Задать буфер ввода для нот";
     strings["Change mobile scroll mode##sggc"].plurals[0] = "Переключить режим мобильной прокрутки";
     strings["Clear note input latch##sggc"].plurals[0] = "Очистить буфер ввода для нот";
+    strings["Clone pattern##sggc"].plurals[0] = "Клонировать паттерн";
 
     strings["---Instrument list##sggc"].plurals[0] = "---Instrument list";
     strings["Add instrument##sggc0"].plurals[0] = "Добавить инструмент";

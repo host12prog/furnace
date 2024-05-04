@@ -3328,6 +3328,25 @@ void DivEngine::deepCloneOrder(int pos, bool where) {
   BUSY_END;
 }
 
+void DivEngine::clonePattern(int pos, int chan)
+{
+  // find free slot
+  for (int j=0; j<DIV_MAX_PATTERNS; j++) 
+  {
+    //logD("finding free slot in %d...",j);
+    if (curPat[chan].data[j]==NULL) 
+    {
+      int origOrd=curOrders->ord[chan][pos];
+      //order[i]=j;
+      curOrders->ord[chan][pos] = j;
+      DivPattern* oldPat=curPat[chan].getPattern(origOrd,false);
+      DivPattern* pat=curPat[chan].getPattern(j,true);
+      memcpy(pat->data,oldPat->data,DIV_MAX_ROWS*DIV_MAX_COLS*sizeof(short));
+      break;
+    }
+  }
+}
+
 void DivEngine::deleteOrder(int pos) {
   if (curSubSong->ordersLen<=1) return;
   BUSY_BEGIN_SOFT;

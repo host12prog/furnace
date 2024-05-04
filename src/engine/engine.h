@@ -1023,6 +1023,9 @@ class DivEngine {
     // deep clone orders
     void deepCloneOrder(int pos, bool where);
 
+    // clone pattern
+    void clonePattern(int pos, int chan);
+
     // delete order
     void deleteOrder(int pos);
 
