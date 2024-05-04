@@ -1106,7 +1106,7 @@ bool DivEngine::changeSystem(int index, DivSystem which, bool preserveOrder) {
 }
 
 bool DivEngine::addSystem(DivSystem which) {
-  if (song.systemLen>DIV_MAX_CHIPS) {
+  if (song.systemLen>=DIV_MAX_CHIPS) {
     lastError=fmt::sprintf(_LE("max number of systems is %d"),DIV_MAX_CHIPS);
     return false;
   }
@@ -1156,7 +1156,11 @@ bool DivEngine::addSystem(DivSystem which) {
 }
 
 bool DivEngine::cloneSystem(int index, bool add_chip_count, bool pat) {
-  if (song.systemLen>=DIV_MAX_CHIPS) {
+  if (index<0 || index>=song.systemLen) {
+    lastError=_LE("invalid index");
+    return false;
+  }
+  if (song.systemLen>==DIV_MAX_CHIPS) {
     lastError=fmt::sprintf(_LE("max number of systems is %d"),DIV_MAX_CHIPS);
     return false;
   }
