@@ -267,6 +267,8 @@ void DivLocale::addTranslationsRussian()
     strings["when enabled, duty macro will always reset phase, even if its value hasn't changed.##sgcf"].plurals[0] = "при включении этого флага макрос скважности всегда будет сбрасывать фазу, даже если значение скважности не меняется.";
     strings["Don't persist volume macro after it finishes##sgcf"].plurals[0] = "Не удерживать значение макроса громкости после его завершения";
     strings["when enabled, a value in the volume column that happens after the volume macro is done will disregard the macro.##sgcf"].plurals[0] = "при включении этого флага значение в столбце громкости, расположенное после завершения макроса громкости, не будет учитывать значение макроса.";
+    strings["Old sample offset effect##sgcf"].plurals[0] = "Старый эффект начального смещения сэмпла";
+    strings["behavior changed in 0.6.3##sgcf"].plurals[0] = "поведение изменено в версии 0.6.3";
     strings[".mod import##sgcf"].plurals[0] = "импорт .mod";
     strings["Don't slide on the first tick of a row##sgcf"].plurals[0] = "Не исполнять авто-портаменто в первый шаг движка трекера каждой строки";
     strings["simulates ProTracker's behavior of not applying volume/pitch slides on the first tick of a row.##sgcf"].plurals[0] = "симулирует поведение программы ProTracker, которая не исполняет изменения громкости и частоты на первом шаге движка каждого столбца.";

@@ -65,9 +65,9 @@ void FurnaceGUI::drawCompatFlags() {
         if (ImGui::IsItemHovered()) {
           ImGui::SetTooltip(_L("when enabled, a value in the volume column that happens after the volume macro is done will disregard the macro.##sgcf"));
         }
-        ImGui::Checkbox("Old sample offset effect",&e->song.oldSampleOffset);
+        ImGui::Checkbox(_L("Old sample offset effect##sgcf"),&e->song.oldSampleOffset);
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("behavior changed in 0.6.3");
+          ImGui::SetTooltip(_L("behavior changed in 0.6.3##sgcf"));
         }
         ImGui::EndTabItem();
       }

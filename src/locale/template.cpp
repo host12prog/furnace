@@ -324,6 +324,8 @@ void DivLocale::addTranslationsTemplate()
     strings["when enabled, duty macro will always reset phase, even if its value hasn't changed.##sgcf"].plurals[0] = "=when enabled, duty macro will always reset phase, even if its value hasn't changed.";
     strings["Don't persist volume macro after it finishes##sgcf"].plurals[0] = "=Don't persist volume macro after it finishes";
     strings["when enabled, a value in the volume column that happens after the volume macro is done will disregard the macro.##sgcf"].plurals[0] = "=when enabled, a value in the volume column that happens after the volume macro is done will disregard the macro.";
+    strings["Old sample offset effect##sgcf"].plurals[0] = "=Old sample offset effect";
+    strings["behavior changed in 0.6.3##sgcf"].plurals[0] = "=behavior changed in 0.6.3";
     strings[".mod import##sgcf"].plurals[0] = "=.mod import";
     strings["Don't slide on the first tick of a row##sgcf"].plurals[0] = "=Don't slide on the first tick of a row";
     strings["simulates ProTracker's behavior of not applying volume/pitch slides on the first tick of a row.##sgcf"].plurals[0] = "=simulates ProTracker's behavior of not applying volume/pitch slides on the first tick of a row.";
