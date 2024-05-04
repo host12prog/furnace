@@ -117,7 +117,7 @@ const int ftEffectMap[]={
   0x01, // porta up
   0x02, // porta down
   0x12,
-  0x90, // sample offset - not supported yet
+  0x90, // sample offset
   0xe1, // Slide up
   0xe2,	// Slide down
   0x0a,
@@ -228,7 +228,7 @@ const int eftEffectMap[]={
   0x01, // porta up
   0x02, // porta down
   0x12,
-  0x90, // sample offset - not supported yet
+  0x90, // sample offset
   0xe1, // Slide up
   0xe2,	// Slide down
   0x0a,
@@ -2796,6 +2796,8 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
     ds.resetNesSweep = true;
     ds.stopE1E2OnNoteOn = true;
     ds.slowerVolSlide = true;
+    ds.delayBehavior = 2; //lax EDxx/ECxx effect policy (thanks raijin2612!)
+    ds.oldSampleOffset = true; //old sample offset effect behaviour (thanks raijin2612!)
 
     ds.is_prohibited_to_save = true;
 
