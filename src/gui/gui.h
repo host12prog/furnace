@@ -2708,7 +2708,6 @@ class FurnaceGUI {
   void drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUIMacroEditState& state);
   void alterSampleMap(int column, int val);
 
-  void insTabFM(DivInstrument* ins);
   void insTabSample(DivInstrument* ins);
 
   void drawOrderButtons();
