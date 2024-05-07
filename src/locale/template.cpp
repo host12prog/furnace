@@ -918,6 +918,7 @@ void DivLocale::addTranslationsTemplate()
     strings["it appears I couldn't load these fonts. any setting you can check?##sggu"].plurals[0] = "=it appears I couldn't load these fonts. any setting you can check?";
     strings["could not init renderer!\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "=could not init renderer!\r\nfalling back to software renderer. please restart Furnace.";
     strings["could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "=could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.";
+    strings["\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "\r\n=falling back to software renderer. please restart Furnace.";
     strings["could not init renderer! %s##sggu"].plurals[0] = "=could not init renderer! %s";
     strings["\r\nthe render driver has been set to a safe value. please restart Furnace.##sggu"].plurals[0] = "=\r\nthe render driver has been set to a safe value. please restart Furnace.";
     strings["could not open window! %s##sggu"].plurals[0] = "=could not open window! %s";
@@ -1074,6 +1075,10 @@ void DivLocale::addTranslationsTemplate()
     strings["Expand selection to end of pattern##sggc"].plurals[0] = "=Expand selection to end of pattern";
     strings["Expand selection upwards (coarse)##sggc"].plurals[0] = "=Expand selection upwards (coarse)";
     strings["Expand selection downwards (coarse)##sggc"].plurals[0] = "=Expand selection downwards (coarse)";
+    strings["Move selection up##sggc"].plurals[0] = "=Move selection up";
+    strings["Move selection down##sggc"].plurals[0] = "=Move selection down";
+    strings["Move selection to previous channel##sggc"].plurals[0] = "=Move selection to previous channel";
+    strings["Move selection to next channel##sggc"].plurals[0] = "=Move selection to next channel";
     strings["Delete##sggc"].plurals[0] = "=Delete";
     strings["Pull delete##sggc"].plurals[0] = "=Pull delete";
     strings["Insert##sggc"].plurals[0] = "=Insert";
@@ -5624,6 +5629,7 @@ void DivLocale::addTranslationsTemplate()
     strings["16xx: Set raw period higher byte##sesd"].plurals[0] = "=16xx: Set raw period higher byte";
     strings["27xx: Set noise AND mask##sesd"].plurals[0] = "=27xx: Set noise AND mask";
     strings["28xx: Set noise OR mask##sesd"].plurals[0] = "=28xx: Set noise OR mask";
+    strings["2Cxy: Automatic noise frequency (auto-PWM) (x: mode (0: disable, 1: freq, 2: freq + OR mask); y: offset##sesd"].plurals[0] = "=2Cxy: Automatic noise frequency (auto-PWM) (x: mode (0: disable, 1: freq, 2: freq + OR mask); y: offset";
     strings["2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER##sesd"].plurals[0] = "=2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER";
     strings["30xx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "=30xx: Toggle hard envelope reset on new notes";
     strings["18xx: Toggle extended channel 3 mode##sesd"].plurals[0] = "=18xx: Toggle extended channel 3 mode";

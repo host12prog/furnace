@@ -861,6 +861,7 @@ void DivLocale::addTranslationsRussian()
     strings["it appears I couldn't load these fonts. any setting you can check?##sggu"].plurals[0] = "кажется, я не могу загрузить эти шрифты. проверьте настройки?";
     strings["could not init renderer!\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "не получилось инициализировать движок отрисовки!\r\nперехожу на программную отрисовку. пожалуйста, перезапустите Furnace.";
     strings["could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "не получилось инициализировать движок отрисовки! %s\r\nперехожу на программную отрисовку. пожалуйста, перезапустите Furnace.";
+    strings["\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "\r\nперехожу на программную отрисовку. пожалуйста, перезапустите Furnace.";
     strings["could not init renderer! %s##sggu"].plurals[0] = "не получилось инициализировать движок отрисовки! %s";
     strings["\r\nthe render driver has been set to a safe value. please restart Furnace.##sggu"].plurals[0] = "\r\nдвижок отрисовки был сброшен до безопасного. пожалуйста, перезапустите Furnace.";
     strings["could not open window! %s##sggu"].plurals[0] = "не удалось открыть окно! %s";
@@ -1018,6 +1019,10 @@ void DivLocale::addTranslationsRussian()
     strings["Expand selection to end of pattern##sggc"].plurals[0] = "Расширить выделенную область до конца паттерна";
     strings["Expand selection upwards (coarse)##sggc"].plurals[0] = "Расширить выделенную область вверх (грубо)";
     strings["Expand selection downwards (coarse)##sggc"].plurals[0] = "Расширить выделенную область вниз (грубо)";
+    strings["Move selection up##sggc"].plurals[0] = "Передвинуть выделенную область вверх";
+    strings["Move selection down##sggc"].plurals[0] = "Передвинуть выделенную область вниз";
+    strings["Move selection to previous channel##sggc"].plurals[0] = "Передвинуть выделенную область на предыдущий канал";
+    strings["Move selection to next channel##sggc"].plurals[0] = "Передвинуть выделенную область на следующий канал";
     strings["Delete##sggc"].plurals[0] = "Удалить";
     strings["Pull delete##sggc"].plurals[0] = "Удалить с подтягиванием следующих строк";
     strings["Insert##sggc"].plurals[0] = "Вставить с сдвигом строк вниз";
@@ -5485,6 +5490,7 @@ void DivLocale::addTranslationsRussian()
 
     strings["20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"].plurals[0] = "20xx: Режим канала (бит 0: меандр; бит 1: шум; бит 2: огибающая)";
     strings["21xx: Set noise frequency (0 to 1F)##sesd"].plurals[0] = "21xx: Частота шума (0-1F)";
+    strings["21xx: Set noise frequency (0 to FF)##sesd"].plurals[0] = "21xx: Частота шума (0-FF)";
     strings["22xy: Set envelope mode (x: shape, y: enable for this channel)##sesd"].plurals[0] = "22xy: Режим огибающей (x: форма, y: включить для этого канала)";
     strings["23xx: Set envelope period low byte##sesd"].plurals[0] = "23xx: Младший байт периода огибающей";
     strings["24xx: Set envelope period high byte##sesd"].plurals[0] = "24xx: Старший байт периода огибающей";
@@ -5497,6 +5503,7 @@ void DivLocale::addTranslationsRussian()
     strings["16xx: Set raw period higher byte##sesd"].plurals[0] = "16xx: \"Сырое\" значение периода (старший байт)";
     strings["27xx: Set noise AND mask##sesd"].plurals[0] = "27xx: Маска шума И";
     strings["28xx: Set noise OR mask##sesd"].plurals[0] = "28xx: Маска шума ИЛИ";
+    strings["2Cxy: Automatic noise frequency (auto-PWM) (x: mode (0: disable, 1: freq, 2: freq + OR mask); y: offset##sesd"].plurals[0] = "2Cxy: Автоматическая частота шума (авто-ШИМ) (x: режим (0: выкл., 1: частота, 2: частота + маска ИЛИ); y: сдвиг";
     strings["2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER##sesd"].plurals[0] = "2Dxx: НЕ ДЛЯ ИСПОЛЬЗОВАНИЯ КОМПОЗИТОРОМ";
     strings["30xx: Toggle hard envelope reset on new notes##sesd"].plurals[0] = "30xx: Переключить жёсткий перезапуск огибающей на новой ноте";
     strings["18xx: Toggle extended channel 3 mode##sesd"].plurals[0] = "18xx: Переключить расширенный режим 3-го канала";
