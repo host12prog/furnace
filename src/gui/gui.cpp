@@ -7172,7 +7172,14 @@ bool FurnaceGUI::init() {
   logD("creating window...");
   sdlWin=SDL_CreateWindow("Furnace",scrX,scrY,scrW,scrH,SDL_WINDOW_RESIZABLE|SDL_WINDOW_ALLOW_HIGHDPI|(scrMax?SDL_WINDOW_MAXIMIZED:0)|(fullScreen?SDL_WINDOW_FULLSCREEN_DESKTOP:0)|rend->getWindowFlags());
   if (sdlWin==NULL) {
-    lastError=fmt::sprintf(_L("could not open window! %s##sggu"),SDL_GetError());
+    const char* sdlErr=SDL_GetError();
+    lastError=fmt::sprintf("could not open window! %s",sdlErr);
+    if (settings.renderBackend!="Software" && strcmp(sdlErr,"No matching GL pixel format available")==0) {
+      settings.renderBackend="Software";
+      e->setConf("renderBackend","Software");
+      e->saveConf();
+      lastError+=_L("\r\nfalling back to software renderer. please restart Furnace.##sggu");
+    }
     return false;
   }
 

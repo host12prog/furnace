@@ -798,6 +798,10 @@ enum FurnaceGUIActions {
   GUI_ACTION_PAT_SELECTION_END,
   GUI_ACTION_PAT_SELECTION_UP_COARSE,
   GUI_ACTION_PAT_SELECTION_DOWN_COARSE,
+  GUI_ACTION_PAT_MOVE_UP,
+  GUI_ACTION_PAT_MOVE_DOWN,
+  GUI_ACTION_PAT_MOVE_LEFT_CHANNEL,
+  GUI_ACTION_PAT_MOVE_RIGHT_CHANNEL,
   GUI_ACTION_PAT_DELETE,
   GUI_ACTION_PAT_PULL_DELETE,
   GUI_ACTION_PAT_INSERT,
@@ -2891,6 +2895,7 @@ class FurnaceGUI {
   void doDelete();
   void doPullDelete();
   void doInsert();
+  void moveSelected(int x, int y);
   void doTranspose(int amount, OperationMask& mask);
   String doCopy(bool cut, bool writeClipboard, const SelectionPoint& sStart, const SelectionPoint& sEnd);
   void doPasteFurnace(PasteMode mode, int arg, bool readClipboard, String clipb, std::vector<String> data, int startOff, bool invalidData, UndoRegion ur);

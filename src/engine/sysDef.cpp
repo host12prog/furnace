@@ -445,27 +445,23 @@ void DivEngine::registerSystems() {
     {0x2f, {DIV_CMD_AY_IO_WRITE, "2Fxx: Write to I/O port B##sesd", constVal<1>, effectVal}},
   };
 
-  EffectHandlerMap ay8930PostEffectHandlerMap = {
-    {0x12, {DIV_CMD_STD_NOISE_MODE, "12xx: Set duty cycle (0 to 8)##sesd",
+  EffectHandlerMap ay8930PostEffectHandlerMap={
+    {0x20, {DIV_CMD_STD_NOISE_MODE, "20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)"}},
+    {0x21, {DIV_CMD_STD_NOISE_FREQ, "21xx: Set noise frequency (0 to FF)"}},
+    {0x22, {DIV_CMD_AY_ENVELOPE_SET, "22xy: Set envelope mode (x: shape, y: enable for this channel)"}},
+    {0x23, {DIV_CMD_AY_ENVELOPE_LOW, "23xx: Set envelope period low byte"}},
+    {0x24, {DIV_CMD_AY_ENVELOPE_HIGH, "24xx: Set envelope period high byte"}},
+    {0x25, {DIV_CMD_AY_ENVELOPE_SLIDE, "25xx: Envelope slide up", negEffectVal}},
+    {0x26, {DIV_CMD_AY_ENVELOPE_SLIDE, "26xx: Envelope slide down"}},
+    {0x29, {DIV_CMD_AY_AUTO_ENVELOPE, "29xy: Set auto-envelope (x: numerator; y: denominator)"}},
+    {0x2e, {DIV_CMD_AY_IO_WRITE, "2Exx: Write to I/O port A", constVal<0>, effectVal}},
+    {0x2f, {DIV_CMD_AY_IO_WRITE, "2Fxx: Write to I/O port B", constVal<1>, effectVal}},
+    {0x12, {DIV_CMD_STD_NOISE_MODE, "12xx: Set duty cycle (0 to 8)",
       [](unsigned char, unsigned char val) -> int { return 0x10+(val&15); }}},
-    
-    {0x15, {DIV_CMD_RAW_FREQ, "15xx: Set raw period##sesd"}},
-    {0x16, {DIV_CMD_RAW_FREQ_HIGHER_BYTE, "16xx: Set raw period higher byte##sesd"}},
-
-    {0x20, {DIV_CMD_STD_NOISE_MODE, "20xx: Set channel mode (bit 0: square; bit 1: noise; bit 2: envelope)##sesd"}},
-    {0x21, {DIV_CMD_STD_NOISE_FREQ, "21xx: Set noise frequency (0 to 1F)##sesd"}},
-    {0x22, {DIV_CMD_AY_ENVELOPE_SET, "22xy: Set envelope mode (x: shape, y: enable for this channel)##sesd"}},
-    {0x23, {DIV_CMD_AY_ENVELOPE_LOW, "23xx: Set envelope period low byte##sesd"}},
-    {0x24, {DIV_CMD_AY_ENVELOPE_HIGH, "24xx: Set envelope period high byte##sesd"}},
-    {0x25, {DIV_CMD_AY_ENVELOPE_SLIDE, "25xx: Envelope slide up##sesd0", negEffectVal}},
-    {0x26, {DIV_CMD_AY_ENVELOPE_SLIDE, "26xx: Envelope slide down##sesd0"}},
-    {0x29, {DIV_CMD_AY_AUTO_ENVELOPE, "29xy: Set auto-envelope (x: numerator; y: denominator)##sesd0"}},
-    {0x2e, {DIV_CMD_AY_IO_WRITE, "2Exx: Write to I/O port A##sesd", constVal<0>, effectVal}},
-    {0x2f, {DIV_CMD_AY_IO_WRITE, "2Fxx: Write to I/O port B##sesd", constVal<1>, effectVal}},
-
-    {0x27, {DIV_CMD_AY_NOISE_MASK_AND, "27xx: Set noise AND mask##sesd"}},
-    {0x28, {DIV_CMD_AY_NOISE_MASK_OR, "28xx: Set noise OR mask##sesd"}},
-    {0x2d, {DIV_CMD_AY_IO_WRITE, "2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER##sesd", constVal<255>, effectVal}},
+    {0x27, {DIV_CMD_AY_NOISE_MASK_AND, "27xx: Set noise AND mask"}},
+    {0x28, {DIV_CMD_AY_NOISE_MASK_OR, "28xx: Set noise OR mask"}},
+    {0x2c, {DIV_CMD_AY_AUTO_PWM, "2Cxy: Automatic noise frequency (x: mode (0: disable, 1: freq, 2: freq + OR mask); y: offset"}},
+    {0x2d, {DIV_CMD_AY_IO_WRITE, "2Dxx: NOT TO BE EMPLOYED BY THE COMPOSER", constVal<255>, effectVal}},
   };
 
   EffectHandlerMap fmEffectHandlerMap={
