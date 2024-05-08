@@ -2714,10 +2714,19 @@ void DivLocale::addTranslationsTemplate()
     strings["Software##sgse"].plurals[0] = "=Software";
     strings["Software"].plurals[0] = "=Software"; //sigh
     strings["you may need to restart Furnace for this setting to take effect.##sgse0"].plurals[0] = "=you may need to restart Furnace for this setting to take effect.";
+    strings["Advanced render backend settings##sgse"].plurals[0] = "=Advanced render backend settings";
+    strings["beware: changing these settings may render Furnace unusable! do so at your own risk.\nstart Furnace with -safemode if you mess something up.##sgse"].plurals[0] = "=beware: changing these settings may render Furnace unusable! do so at your own risk.\nstart Furnace with -safemode if you mess something up.";
     strings["Render driver##sgse"].plurals[0] = "=Render driver";
     strings["Automatic##sgse0"].plurals[0] = "=Automatic";
     strings["Automatic##sgse1"].plurals[0] = "=Automatic";
     strings["you may need to restart Furnace for this setting to take effect.##sgse1"].plurals[0] = "=you may need to restart Furnace for this setting to take effect.";
+    strings["Red bits##sgse"].plurals[0] = "=Red bits";
+    strings["Green bits##sgse"].plurals[0] = "=Green bits";
+    strings["Blue bits##sgse"].plurals[0] = "=Blue bits";
+    strings["Alpha bits##sgse"].plurals[0] = "=Alpha bits";
+    strings["Color depth##sgse"].plurals[0] = "=Color depth";
+    strings["Double buffer##sgse"].plurals[0] = "=Double buffer";
+    strings["the following values are common (in red, green, blue, alpha order):\n- 24 bits: 8, 8, 8, 0\n- 16 bits: 5, 6, 5, 0\n- 32 bits (with alpha): 8, 8, 8, 8\n- 30 bits (deep): 10, 10, 10, 0##sgse"].plurals[0] = "=the following values are common (in red, green, blue, alpha order):\n- 24 bits: 8, 8, 8, 0\n- 16 bits: 5, 6, 5, 0\n- 32 bits (with alpha): 8, 8, 8, 8\n- 30 bits (deep): 10, 10, 10, 0";
     strings["current backend: %s\n%s\n%s\n%s##sgse"].plurals[0] = "=current backend: %s\n%s\n%s\n%s";
     strings["VSync##sgse"].plurals[0] = "=VSync";
     strings["Frame rate limit##sgse"].plurals[0] = "=Frame rate limit";

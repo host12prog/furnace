@@ -499,7 +499,7 @@ void FurnaceGUI::drawSettings() {
           ImGui::SetTooltip(_L("you may need to restart Furnace for this setting to take effect.##sgse0"));
         }
 
-        if (ImGui::TreeNode(_L("Advanced render backend settings#sggu"))) {
+        if (ImGui::TreeNode(_L("Advanced render backend settings##sgse"))) {
           if (curRenderBackend=="SDL") {
             if (ImGui::BeginCombo(_L("Render driver##sgse"),settings.renderDriver.empty()?_L("Automatic##sgse0"):settings.renderDriver.c_str())) {
               if (ImGui::Selectable(_L("Automatic##sgse1"),settings.renderDriver.empty())) {
@@ -518,39 +518,39 @@ void FurnaceGUI::drawSettings() {
               ImGui::SetTooltip(_L("you may need to restart Furnace for this setting to take effect.##sgse1"));
             }
           } else if (curRenderBackend.find("OpenGL")==0) {
-            ImGui::TextWrapped(_L("beware: changing these settings may render Furnace unusable! do so at your own risk.\nstart Furnace with -safemode if you mess something up.#sggu"));
-            if (ImGui::InputInt(_L("Red bits#sggu"),&settings.glRedSize)) {
+            ImGui::TextWrapped(_L("beware: changing these settings may render Furnace unusable! do so at your own risk.\nstart Furnace with -safemode if you mess something up.##sgse"));
+            if (ImGui::InputInt(_L("Red bits##sgse"),&settings.glRedSize)) {
               if (settings.glRedSize<0) settings.glRedSize=0;
               if (settings.glRedSize>32) settings.glRedSize=32;
               settingsChanged=true;
             }
-            if (ImGui::InputInt(_L("Green bits#sggu"),&settings.glGreenSize)) {
+            if (ImGui::InputInt(_L("Green bits##sgse"),&settings.glGreenSize)) {
               if (settings.glGreenSize<0) settings.glGreenSize=0;
               if (settings.glGreenSize>32) settings.glGreenSize=32;
               settingsChanged=true;
             }
-            if (ImGui::InputInt(_L("Blue bits#sggu"),&settings.glBlueSize)) {
+            if (ImGui::InputInt(_L("Blue bits##sgse"),&settings.glBlueSize)) {
               if (settings.glBlueSize<0) settings.glBlueSize=0;
               if (settings.glBlueSize>32) settings.glBlueSize=32;
               settingsChanged=true;
             }
-            if (ImGui::InputInt(_L("Alpha bits#sggu"),&settings.glAlphaSize)) {
+            if (ImGui::InputInt(_L("Alpha bits##sgse"),&settings.glAlphaSize)) {
               if (settings.glAlphaSize<0) settings.glAlphaSize=0;
               if (settings.glAlphaSize>32) settings.glAlphaSize=32;
               settingsChanged=true;
             }
-            if (ImGui::InputInt(_L("Color depth#sggu"),&settings.glDepthSize)) {
+            if (ImGui::InputInt(_L("Color depth##sgse"),&settings.glDepthSize)) {
               if (settings.glDepthSize<0) settings.glDepthSize=0;
               if (settings.glDepthSize>128) settings.glDepthSize=128;
               settingsChanged=true;
             }
             bool glDoubleBufferB=settings.glDoubleBuffer;
-            if (ImGui::Checkbox(_L("Double buffer#sggu"),&glDoubleBufferB)) {
+            if (ImGui::Checkbox(_L("Double buffer##sgse"),&glDoubleBufferB)) {
               settings.glDoubleBuffer=glDoubleBufferB;
               settingsChanged=true;
             }
 
-            ImGui::TextWrapped(_L("the following values are common (in red, green, blue, alpha order):\n- 24 bits: 8, 8, 8, 0\n- 16 bits: 5, 6, 5, 0\n- 32 bits (with alpha): 8, 8, 8, 8\n- 30 bits (deep): 10, 10, 10, 0#sggu"));
+            ImGui::TextWrapped(_L("the following values are common (in red, green, blue, alpha order):\n- 24 bits: 8, 8, 8, 0\n- 16 bits: 5, 6, 5, 0\n- 32 bits (with alpha): 8, 8, 8, 8\n- 30 bits (deep): 10, 10, 10, 0##sgse"));
           }
           ImGui::TreePop();
         }
