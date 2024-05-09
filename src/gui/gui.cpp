@@ -5668,6 +5668,7 @@ bool FurnaceGUI::loop() {
 
     if (displayPendingIns) {
       displayPendingIns=false;
+      insBankSearchQuery="";
       ImGui::OpenPopup("Select Instrument###Select Instrument");
     }
 
@@ -6328,94 +6329,208 @@ bool FurnaceGUI::loop() {
     }
 
     // TODO:
-    // - multiple selection
     // - replace instrument
     centerNextWindow("Select Instrument###Select Instrument",canvasW,canvasH);
-    if (ImGui::BeginPopupModal(_L("Select Instrument###Select Instrument"),NULL,ImGuiWindowFlags_AlwaysAutoResize)) {
+    if (ImGui::BeginPopupModal(_L("Select Instrument###Select Instrument"),NULL,ImGuiWindowFlags_AlwaysAutoResize)) 
+    {
       bool quitPlease=false;
-      if (pendingInsSingle) {
+      if (pendingInsSingle) 
+      {
         ImGui::Text(_L("this is an instrument bank! select which one to use:##sggu"));
-      } else {
+      } 
+      else 
+      {
         ImGui::AlignTextToFramePadding();
         ImGui::Text(_L("this is an instrument bank! select which ones to load:##sggu"));
         ImGui::SameLine();
-        if (ImGui::Button(_L("All##sggu"))) {
-          for (std::pair<DivInstrument*,bool>& i: pendingIns) {
+        if (ImGui::Button(_L("All##sggu"))) 
+        {
+          for (std::pair<DivInstrument*,bool>& i: pendingIns) 
+          {
             i.second=true;
           }
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("None##sggu"))) {
-          for (std::pair<DivInstrument*,bool>& i: pendingIns) {
+        if (ImGui::Button(_L("None##sggu"))) 
+        {
+          for (std::pair<DivInstrument*,bool>& i: pendingIns) 
+          {
             i.second=false;
           }
         }
       }
+      bool reissueSearch=false;
+
+      if (ImGui::InputTextWithHint("##SysSearch",settings.language == DIV_LANG_ENGLISH ? "Search..." : _L("Search...##sggu"),&insBankSearchQuery)) reissueSearch=true;
+
       bool anySelected=false;
       float sizeY=ImGui::GetFrameHeightWithSpacing()*pendingIns.size();
-      if (sizeY>(canvasH-180.0*dpiScale)) {
+      if (sizeY>(canvasH-180.0*dpiScale)) 
+      {
         sizeY=canvasH-180.0*dpiScale;
         if (sizeY<60.0*dpiScale) sizeY=60.0*dpiScale;
       }
-      if (ImGui::BeginTable("PendingInsList",1,ImGuiTableFlags_ScrollY,ImVec2(0.0f,sizeY))) {
-        for (size_t i=0; i<pendingIns.size(); i++) {
-          ImGui::TableNextRow();
-          ImGui::TableNextColumn();
-          String id=fmt::sprintf("%d: %s",(int)i,pendingIns[i].first->name);
-          if (pendingInsSingle) {
-            if (ImGui::Selectable(id.c_str())) {
-              pendingIns[i].second=true;
-              quitPlease=true;
-            }
-          } else {
-            ImGuiIO& io = ImGui::GetIO();
-            if(ImGui::Checkbox(id.c_str(),&pendingIns[i].second) && io.KeyShift)
+      if (ImGui::BeginTable("PendingInsList",1,ImGuiTableFlags_ScrollY,ImVec2(0.0f,sizeY))) 
+      {
+        if (insBankSearchQuery.empty()) 
+        {
+          for (size_t i=0; i<pendingIns.size(); i++) 
+          {
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+            String id=fmt::sprintf("%d: %s",(int)i,pendingIns[i].first->name);
+            if (pendingInsSingle) 
             {
-              for(int jj = (int)i - 1; jj >= 0; jj--)
+              if (ImGui::Selectable(id.c_str())) 
               {
-                if(pendingIns[jj].second) //pressed shift and there's selected item above
+                pendingIns[i].second=true;
+                quitPlease=true;
+              }
+            } 
+            else 
+            {
+              ImGuiIO& io = ImGui::GetIO();
+              if(ImGui::Checkbox(id.c_str(),&pendingIns[i].second) && io.KeyShift)
+              {
+                for(int jj = (int)i - 1; jj >= 0; jj--)
                 {
-                  for(int k = jj; k < (int)i; k++)
+                  if(pendingIns[jj].second) //pressed shift and there's selected item above
                   {
-                    pendingIns[k].second = true;
-                  }
+                    for(int k = jj; k < (int)i; k++)
+                    {
+                      pendingIns[k].second = true;
+                    }
 
+                    break;
+                  }
+                }
+              }
+            }
+            if (pendingIns[i].second) anySelected=true;
+          }
+        }
+        else //display search results
+        {
+          if(reissueSearch)
+          {
+            String lowerCase=insBankSearchQuery;
+
+            for (char& ii: lowerCase) 
+            {
+              if (ii>='A' && ii<='Z') ii+='a'-'A';
+            }
+
+            insBankSearchResults.clear();
+            for (int j=0; j < (int)pendingIns.size(); j++) 
+            {
+              String lowerCase1 = pendingIns[j].first->name;
+
+              for (char& ii: lowerCase1) 
+              {
+                if (ii>='A' && ii<='Z') ii+='a'-'A';
+              }
+
+              if (lowerCase1.find(lowerCase)!=String::npos) 
+              {
+                insBankSearchResults.push_back(std::make_pair(pendingIns[j].first, pendingIns[j].second));
+              }
+            }
+          }
+
+          for (size_t i=0; i<insBankSearchResults.size(); i++)
+          {
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+            String id=fmt::sprintf("%d: %s",(int)i,insBankSearchResults[i].first->name);
+            if (pendingInsSingle) 
+            {
+              if (ImGui::Selectable(id.c_str())) 
+              {
+                insBankSearchResults[i].second=true;
+                quitPlease=true;
+              }
+            } 
+            else 
+            {
+              ImGuiIO& io = ImGui::GetIO();
+              if(ImGui::Checkbox(id.c_str(),&insBankSearchResults[i].second) && io.KeyShift)
+              {
+                for(int jj = (int)i - 1; jj >= 0; jj--)
+                {
+                  if(insBankSearchResults[jj].second) //pressed shift and there's selected item above
+                  {
+                    for(int k = jj; k < (int)i; k++)
+                    {
+                      insBankSearchResults[k].second = true;
+                    }
+
+                    break;
+                  }
+                }
+              }
+            }
+            if (insBankSearchResults[i].second) anySelected=true;
+          }
+
+          for (size_t i=0; i<pendingIns.size(); i++)
+          {
+            if(insBankSearchResults.size() > 0)
+            {
+              for (size_t j=0; j<insBankSearchResults.size(); j++)
+              {
+                if(insBankSearchResults[j].first == pendingIns[i].first && insBankSearchResults[j].second && pendingIns[i].first != NULL)
+                {
+                  pendingIns[i].second = true;
+                  if (pendingIns[i].second) anySelected=true;
                   break;
                 }
               }
             }
           }
-          if (pendingIns[i].second) anySelected=true;
         }
         ImGui::EndTable();
       }
-      if (!pendingInsSingle) {
+      if (!pendingInsSingle) 
+      {
         ImGui::BeginDisabled(!anySelected);
-        if (ImGui::Button(_L("OK##sggu2"))) {
+        if (ImGui::Button(_L("OK##sggu2"))) 
+        {
           quitPlease=true;
         }
         ImGui::EndDisabled();
         ImGui::SameLine();
       }
-      if (ImGui::Button(_L("Cancel##sggu2")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
-        for (std::pair<DivInstrument*,bool>& i: pendingIns) {
+      if (ImGui::Button(_L("Cancel##sggu2")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) 
+      {
+        for (std::pair<DivInstrument*,bool>& i: pendingIns) 
+        {
           i.second=false;
         }
         quitPlease=true;
       }
-      if (quitPlease) {
+      if (quitPlease) 
+      {
         ImGui::CloseCurrentPopup();
-        for (std::pair<DivInstrument*,bool>& i: pendingIns) {
-          if (!i.second || pendingInsSingle) {
-            if (i.second) {
-              if (curIns>=0 && curIns<(int)e->song.ins.size()) {
-                *e->song.ins[curIns]=*i.first;
-              } else {
+        for (std::pair<DivInstrument*,bool>& i: pendingIns) 
+        {
+          if (!i.second || pendingInsSingle) 
+          {
+            if (i.second) 
+            {
+              if (curIns>=0 && curIns<(int)e->song.ins.size()) 
+              {
+                //*e->song.ins[curIns]=*i.first;
+                e->copyInstrument(e->song.ins[curIns], i.first);
+              } 
+              else 
+              {
                 showError(settings.language == DIV_LANG_ENGLISH ? "...but you haven't selected an instrument!" : _L("...but you haven't selected an instrument!##sggu1"));
               }
             }
             delete i.first;
-          } else {
+          } 
+          else 
+          {
             e->addInstrumentPtr(i.first);
           }
         }

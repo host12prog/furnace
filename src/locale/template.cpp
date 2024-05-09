@@ -893,6 +893,7 @@ void DivLocale::addTranslationsTemplate()
     strings["this is an instrument bank! select which one to use:##sggu"].plurals[0] = "=this is an instrument bank! select which one to use:";
     strings["this is an instrument bank! select which ones to load:##sggu"].plurals[0] = "=this is an instrument bank! select which ones to load:";
     strings["All##sggu"].plurals[0] = "=All";
+    strings["Search...##sggu"].plurals[0] = "=Search...";
     strings["None##sggu"].plurals[0] = "=None";
     strings["OK##sggu2"].plurals[0] = "=OK";
     strings["Cancel##sggu2"].plurals[0] = "=Cancel";

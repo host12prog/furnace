@@ -78,20 +78,25 @@ DivSystem FurnaceGUI::systemPicker(bool full_width) {
     }
     ImGui::EndTabBar();
   }
-  if (reissueSearch) {
+  if (reissueSearch) 
+  {
     String lowerCase=sysSearchQuery;
-    for (char& i: lowerCase) {
+    for (char& i: lowerCase) 
+    {
       if (i>='A' && i<='Z') i+='a'-'A';
     }
 
     sysSearchResults.clear();
-    for (int j=0; curSysSection[j]; j++) {
+    for (int j=0; curSysSection[j]; j++) 
+    {
       String lowerCase1=_L(e->getSystemName((DivSystem)curSysSection[j]));
-      for (char& i: lowerCase1) {
+      for (char& i: lowerCase1) 
+      {
         if (i>='A' && i<='Z') i+='a'-'A';
       }
 
-      if (lowerCase1.find(lowerCase)!=String::npos) {
+      if (lowerCase1.find(lowerCase)!=String::npos) 
+      {
         sysSearchResults.push_back((DivSystem)curSysSection[j]);
       }
     }
@@ -192,16 +197,20 @@ DivSystem FurnaceGUI::systemPicker(bool full_width) {
           else
           {
             if (ImGui::Selectable(_L(e->getSystemName((DivSystem)curSysSection[j])),false,0,ImVec2(full_width ? real_full_width : 500.0f*dpiScale,0.0f))) ret=(DivSystem)curSysSection[j];
-            if (ImGui::IsItemHovered()) {
+            if (ImGui::IsItemHovered()) 
+            {
               hoveredSys=(DivSystem)curSysSection[j];
             }
           }
 
         RESTRICT_CHIP_SHOW_END
       }
-    } else {
+    } 
+    else 
+    {
       // display search results
-      for (DivSystem i: sysSearchResults) {
+      for (DivSystem i: sysSearchResults) 
+      {
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
         if (ImGui::Selectable(_L(e->getSystemName(i)),false,0,ImVec2(full_width ? real_full_width : 500.0f*dpiScale,0.0f))) ret=i;

@@ -835,6 +835,7 @@ void DivLocale::addTranslationsRussian()
     strings["Select Instrument###Select Instrument"].plurals[0] = "Выберите инструмент###Select Instrument";
     strings["this is an instrument bank! select which one to use:##sggu"].plurals[0] = "это банк инструментов! выберите, какой вы хотите использовать:";
     strings["this is an instrument bank! select which ones to load:##sggu"].plurals[0] = "это банк инструментов! выберите, какой вы хотите загрузить";
+    strings["Search...##sggu"].plurals[0] = "Поиск...";
     strings["All##sggu"].plurals[0] = "Все";
     strings["None##sggu"].plurals[0] = "Никакой";
     strings["OK##sggu2"].plurals[0] = "ОК";
