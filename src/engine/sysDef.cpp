@@ -2120,7 +2120,7 @@ void DivEngine::registerSystems() {
   );
 
   sysDefs[DIV_SYSTEM_5E01]=new DivSysDef(
-    "5E01", NULL, 0xf1, 0, 5, false, true, 0, false, 0, 0, 0,
+    "5E01", NULL, 0xf1, 0, 5, false, true, 0, false, (1U<<DIV_SAMPLE_DEPTH_1BIT_DPCM)|(1U<<DIV_SAMPLE_DEPTH_8BIT), 0, 0,
     "a fictional sound chip by Euly. similar to Ricoh 2A03, but all the duty cycles are different, noise has 32 pitches instead of 16 and you have four hard-coded waveforms on triangle channel.##sesd",
     {"Pulse 1##sesd", "Pulse 2##sesd", "Wave##sesd", "Noise##sesd", "DPCM##sesd"},
     {"S1##sesd", "S2##sesd", "WA##sesd", "NO##sesd", "DMC##sesd"},
