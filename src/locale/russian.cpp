@@ -2578,7 +2578,7 @@ void DivLocale::addTranslationsRussian()
     //popups
     strings["Warning###Warning"].plurals[0] = "Внимание###Warning";
     strings["Error###Error"].plurals[0] = "Ошибка###Error";
-    strings["Select Instrument###Select Instrument"].plurals[0] = "Выберете инструмент###Select Instrument";
+    strings["Select Instrument###Select Instrument"].plurals[0] = "Выберите инструмент###Select Instrument";
     strings["Import Raw Sample###Import Raw Sample"].plurals[0] = "Импорт сырых данных сэмпла###Import Raw Sample";
     strings["Rendering...###Rendering..."].plurals[0] = "Рендер...###Rendering...";
     
