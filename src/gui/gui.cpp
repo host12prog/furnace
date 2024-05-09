@@ -6368,7 +6368,22 @@ bool FurnaceGUI::loop() {
               quitPlease=true;
             }
           } else {
-            ImGui::Checkbox(id.c_str(),&pendingIns[i].second);
+            ImGuiIO& io = ImGui::GetIO();
+            if(ImGui::Checkbox(id.c_str(),&pendingIns[i].second) && io.KeyShift)
+            {
+              for(int jj = i - 1; jj >= 0; jj--)
+              {
+                if(pendingIns[jj].second) //pressed shift and there's selected item above
+                {
+                  for(int k = jj; k < i; k++)
+                  {
+                    pendingIns[k].second = true;
+                  }
+
+                  break;
+                }
+              }
+            }
           }
           if (pendingIns[i].second) anySelected=true;
         }
