@@ -6345,17 +6345,37 @@ bool FurnaceGUI::loop() {
         ImGui::SameLine();
         if (ImGui::Button(_L("All##sggu"))) 
         {
-          for (std::pair<DivInstrument*,bool>& i: pendingIns) 
+          if (insBankSearchQuery.empty())
           {
-            i.second=true;
+            for (std::pair<DivInstrument*,bool>& i: pendingIns) 
+            {
+              i.second=true;
+            }
+          }
+          else
+          {
+            for (std::pair<DivInstrument*,bool>& i: insBankSearchResults) 
+            {
+              i.second=true;
+            }
           }
         }
         ImGui::SameLine();
         if (ImGui::Button(_L("None##sggu"))) 
         {
-          for (std::pair<DivInstrument*,bool>& i: pendingIns) 
+          if (insBankSearchQuery.empty())
           {
-            i.second=false;
+            for (std::pair<DivInstrument*,bool>& i: pendingIns) 
+            {
+              i.second=false;
+            }
+          }
+          else
+          {
+            for (std::pair<DivInstrument*,bool>& i: insBankSearchResults) 
+            {
+              i.second=false;
+            }
           }
         }
       }
@@ -6372,7 +6392,7 @@ bool FurnaceGUI::loop() {
       }
       if (ImGui::BeginTable("PendingInsList",1,ImGuiTableFlags_ScrollY,ImVec2(0.0f,sizeY))) 
       {
-        if (insBankSearchQuery.empty()) 
+        if (insBankSearchQuery.empty())
         {
           for (size_t i=0; i<pendingIns.size(); i++) 
           {
