@@ -35,7 +35,8 @@ Furnace achieves the authentic sound of videogame hardware by emulating sound ch
 - **OPN/OPNA/OPNB cores**:
   - **ymfm only**: lower CPU usage, less accurate FM.
   - **Nuked-OPN2 (FM) + ymfm (SSG/ADPCM)**: default cores. more accurate FM at the cost of more CPU load.
-  - **YM2608-LLE**: a new core written by the author of the Nuked cores. high accuracy, but extremely high CPU usage.
+  - **YM2608-LLE**: a new core written by the author of the Nuked cores. high accuracy, but **extremely** high CPU usage.
+    - this core uses a *lot* of CPU time. not suitable for playback! 
 
 - **OPL/OPL2/Y8950 core**:
   - **Nuked-OPL3**: high quality OPL emulation core. slightly off due to tiny differences between OPL and OPL3, but otherwise it is good.
@@ -59,4 +60,4 @@ Furnace achieves the authentic sound of videogame hardware by emulating sound ch
 
 - **AY-3-8910/SSG core**:
   - **MAME**: default core.
-  - **AtomicSSG**: SSG core extracted from YM2608-LLE.
+  - **AtomicSSG**: SSG core extracted from YM2608-LLE. Extremely accurate, but CPU intensive.
