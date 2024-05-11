@@ -3038,10 +3038,10 @@ void DivEngine::doPasteWaves(int index, bool local, int inst)
   char* clipText=SDL_GetClipboardText();
   if (clipText!=NULL) 
   {
-    if (clipText[0]) 
-    {
+    //if (clipText[0]) 
+    //{
       clipb=clipText;
-    }
+    //}
     SDL_free(clipText);
   }
 
