@@ -3033,15 +3033,17 @@ bool non_zero_wave(int* data, int len)
 
 void DivEngine::doPasteWaves(int index, bool local, int inst)
 {
-  String clipb;
+  static String clipb;
 
   char* clipText=SDL_GetClipboardText();
   if (clipText!=NULL) 
   {
-    //if (clipText[0]) 
-    //{
+    logD("SDL clipboard text: \"%s\"", clipText);
+
+    if (clipText[0]) 
+    {
       clipb=clipText;
-    //}
+    }
     SDL_free(clipText);
   }
 
