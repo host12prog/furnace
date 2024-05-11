@@ -3040,6 +3040,14 @@ void DivEngine::doPasteWaves(int index, bool local, int inst)
   {
     logD("SDL clipboard text: \"%s\"", clipText);
 
+    int i = 0;
+
+    while(clipText[i])
+    {
+      logV("%02X", clipText[i]);
+      i++;
+    }
+
     if (clipText[0]) 
     {
       clipb=clipText;
