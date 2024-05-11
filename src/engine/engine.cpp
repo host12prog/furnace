@@ -3042,6 +3042,9 @@ void DivEngine::doPasteWaves(int index, bool local, int inst)
 
     int i = 0;
 
+    logD("SDL error: %s", SDL_GetError());
+    //SDL_ClearError();
+
     while(clipText[i])
     {
       logV("%02X", clipText[i]);
