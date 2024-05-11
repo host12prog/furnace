@@ -3036,14 +3036,18 @@ void DivEngine::doPasteWaves(int index, bool local, int inst)
   String clipb;
 
   char* clipText=SDL_GetClipboardText();
-  if (clipText!=NULL) {
-    if (clipText[0]) {
+  if (clipText!=NULL) 
+  {
+    if (clipText[0]) 
+    {
       clipb=clipText;
     }
     SDL_free(clipText);
   }
 
   logD("pasting wavetables from string");
+
+  logD("Clipboard text: \"%s\"", clipb.c_str());
 
   std::vector<String> data;
   String tempS;
@@ -3097,7 +3101,7 @@ void DivEngine::doPasteWaves(int index, bool local, int inst)
         }
 
         wave[wave_pos] = atoi(numb);
-        logD("val %d", wave[wave_pos]);
+        //logD("val %d", wave[wave_pos]);
         wave_pos++;
       }
     }
