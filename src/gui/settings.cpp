@@ -109,18 +109,6 @@ const bool isProAudio[]={
   false
 };
 
-const char* nonProAudioOuts[]={
-  "Mono##sgse0",
-  "Stereo##sgse",
-  "What?##sgse0",
-  "Quadraphonic##sgse",
-  "What?##sgse1",
-  "5.1 Surround##sgse",
-  "What?##sgse2",
-  "7.1 Surround##sgse",
-  NULL
-};
-
 const char* audioQualities[]={
   "High##sgse",
   "Low##sgse",
@@ -295,12 +283,6 @@ const char* specificControls[19]={
 #define BUFFER_SIZE_SELECTABLE(x) \
   if (ImGui::Selectable(#x,settings.audioBufSize==x)) { \
     settings.audioBufSize=x; \
-    settingsChanged=true; \
-  }
-
-#define CHANS_SELECTABLE(x) \
-  if (ImGui::Selectable(_L(nonProAudioOuts[x-1]),settings.audioChans==x)) { \
-    settings.audioChans=x; \
     settingsChanged=true; \
   }
 
@@ -756,13 +738,13 @@ void FurnaceGUI::drawSettings() {
         ImGui::BeginDisabled(settings.persistFadeOut);
         ImGui::Indent();
         if (ImGui::InputInt(_L("Loops##sgse"),&settings.exportLoops,1,2)) {
-          if (exportLoops<0) exportLoops=0;
-          exportLoops=settings.exportLoops;
+          if (settings.exportLoops<0) settings.exportLoops=0;
+          audioExportOptions.loops=settings.exportLoops;
           settingsChanged=true;
         }
         if (ImGui::InputDouble(_L("Fade out (seconds)##sgse"),&settings.exportFadeOut,1.0,2.0,"%.1f")) {
-          if (exportFadeOut<0.0) exportFadeOut=0.0;
-          exportFadeOut=settings.exportFadeOut;
+          if (settings.exportFadeOut<0.0) settings.exportFadeOut=0.0;
+          audioExportOptions.fadeOut=settings.exportFadeOut;
           settingsChanged=true;
         }
         ImGui::Unindent();
@@ -1205,28 +1187,16 @@ void FurnaceGUI::drawSettings() {
 
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
-          if (isProAudio[settings.audioEngine]) {
-            ImGui::AlignTextToFramePadding();
-            ImGui::Text(_L("Outputs##sgse"));
-            ImGui::TableNextColumn();
-            if (ImGui::InputInt("##AudioChansI",&settings.audioChans,1,2)) {
-              if (settings.audioChans<1) settings.audioChans=1;
-              if (settings.audioChans>16) settings.audioChans=16;
-              settingsChanged=true;
-            }
-          } else {
-            ImGui::AlignTextToFramePadding();
-            ImGui::Text(_L("Channels##sgse"));
-            ImGui::TableNextColumn();
-            String chStr=(settings.audioChans<1 || settings.audioChans>8)?_L("What?##sgse3"):_L(nonProAudioOuts[settings.audioChans-1]);
-            if (ImGui::BeginCombo("##AudioChans",chStr.c_str())) {
-              CHANS_SELECTABLE(1);
-              CHANS_SELECTABLE(2);
-              CHANS_SELECTABLE(4);
-              CHANS_SELECTABLE(6);
-              CHANS_SELECTABLE(8);
-              ImGui::EndCombo();
-            }
+          ImGui::AlignTextToFramePadding();
+          ImGui::Text(_L("Outputs##sgse"));
+          ImGui::TableNextColumn();
+          if (ImGui::InputInt("##AudioChansI",&settings.audioChans,1,2)) {
+            if (settings.audioChans<1) settings.audioChans=1;
+            if (settings.audioChans>16) settings.audioChans=16;
+            settingsChanged=true;
+          }
+          if (ImGui::IsItemHovered()) {
+            ImGui::SetTooltip(_L("common values:\n- 1 for mono\n- 2 for stereo\n- 4 for quadraphonic\n- 6 for 5.1 surround\n- 8 for 7.1 surround##sgse"));
           }
 
           ImGui::TableNextRow();

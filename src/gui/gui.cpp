@@ -2456,7 +2456,7 @@ int FurnaceGUI::loadStream(String path) {
 
 
 void FurnaceGUI::exportAudio(String path, DivAudioExportModes mode) {
-  e->saveAudio(path.c_str(),exportLoops+1,mode,exportFadeOut);
+  e->saveAudio(path.c_str(),audioExportOptions);
   displayExporting=true;
 }
 
@@ -7099,10 +7099,10 @@ bool FurnaceGUI::init() {
   followOrders=e->getConfBool("followOrders",true);
   followPattern=e->getConfBool("followPattern",true);
   noteInputPoly=e->getConfBool("noteInputPoly",true);
-  exportLoops=e->getConfInt("exportLoops",0);
-  if (exportLoops<0) exportLoops=0;
-  exportFadeOut=e->getConfDouble("exportFadeOut",0.0);
-  if (exportFadeOut<0.0) exportFadeOut=0.0;
+  audioExportOptions.loops=e->getConfInt("exportLoops",0);
+  if (audioExportOptions.loops<0) audioExportOptions.loops=0;
+  audioExportOptions.fadeOut=e->getConfDouble("exportFadeOut",0.0);
+  if (audioExportOptions.fadeOut<0.0) audioExportOptions.fadeOut=0.0;
   orderEditMode=e->getConfInt("orderEditMode",0);
   if (orderEditMode<0) orderEditMode=0;
   if (orderEditMode>3) orderEditMode=3;
@@ -7161,8 +7161,8 @@ bool FurnaceGUI::init() {
   syncSettings();
 
   if (!settings.persistFadeOut) {
-    exportLoops=settings.exportLoops;
-    exportFadeOut=settings.exportFadeOut;
+    audioExportOptions.loops=settings.exportLoops;
+    audioExportOptions.fadeOut=settings.exportFadeOut;
   }
 
   for (int i=0; i<settings.maxRecentFile; i++) {
@@ -7659,8 +7659,8 @@ void FurnaceGUI::commitState() {
   e->setConf("orderEditMode",orderEditMode);
   e->setConf("noteInputPoly",noteInputPoly);
   if (settings.persistFadeOut) {
-    e->setConf("exportLoops",exportLoops);
-    e->setConf("exportFadeOut",exportFadeOut);
+    e->setConf("exportLoops",audioExportOptions.loops);
+    e->setConf("exportFadeOut",audioExportOptions.fadeOut);
   }
 
   // commit oscilloscope state
@@ -7918,7 +7918,6 @@ FurnaceGUI::FurnaceGUI():
   oldRow(0),
   editStep(1),
   editStepCoarse(16),
-  exportLoops(0),
   soloChan(-1),
   orderEditMode(0),
   orderCursor(-1),
@@ -7941,7 +7940,6 @@ FurnaceGUI::FurnaceGUI():
   curPaletteChoice(0),
   curPaletteType(0),
   soloTimeout(0.0f),
-  exportFadeOut(5.0),
   patExtraButtons(false),
   patChannelNames(false),
   patChannelPairs(true),
