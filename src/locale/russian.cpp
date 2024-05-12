@@ -1320,9 +1320,15 @@ void DivLocale::addTranslationsRussian()
 
     //   sgeo  src/gui/exportOptions.cpp
 
+    strings["Export type:##sgeo"].plurals[0] = "Тип экспорта:";
     strings["one file##sgeo"].plurals[0] = "один файл";
     strings["multiple files (one per chip)##sgeo"].plurals[0] = "файлы (по одному на чип)";
     strings["multiple files (one per channel)##sgeo"].plurals[0] = "файлы (по одному на канал)";
+    strings["Bit depth:##sgeo"].plurals[0] = "Глубина квантования:";
+    strings["16-bit integer##sgeo"].plurals[0] = "16-битное целое число";
+    strings["32-bit float##sgeo"].plurals[0] = "32-битное число с плавающей запятой";
+    strings["Sample rate##sgeo"].plurals[0] = "Частота квантования";
+    strings["Channels in file##sgeo"].plurals[0] = "Каналов аудио в файле";
     strings["Loops##sgeo"].plurals[0] = "Повторов трека";
     strings["Fade out (seconds)##sgeo"].plurals[0] = "Затухание (в секундах)";
     strings["Cancel##sgeo0"].plurals[0] = "Отмена";
@@ -2606,21 +2612,12 @@ void DivLocale::addTranslationsRussian()
 
     //src/gui/settings.cpp
 
-
     strings["<Use system font>##sgse0"].plurals[0] = "<Использовать системный шрифт>";
     strings["<Custom...>##sgse0"].plurals[0] = "<Внешний...>";
     strings["<Use system font>##sgse1"].plurals[0] = "<Использовать системный шрифт>";
     strings["<Custom...>##sgse1"].plurals[0] = "<Внешний...>";
     strings["<Use system font>##sgse2"].plurals[0] = "<Использовать системный шрифт>";
     strings["<Custom...>##sgse2"].plurals[0] = "<Внешний...>";
-    strings["Mono##sgse0"].plurals[0] = "Моно";
-    strings["Stereo##sgse"].plurals[0] = "Стерео";
-    strings["What?##sgse0"].plurals[0] = "Что?";
-    strings["Quadraphonic##sgse"].plurals[0] = "Евадрафонический";
-    strings["What?##sgse1"].plurals[0] = "Что?";
-    strings["5.1 Surround##sgse"].plurals[0] = "5.1 объёмный звук";
-    strings["What?##sgse2"].plurals[0] = "Что?";
-    strings["7.1 Surround##sgse"].plurals[0] = "7.1 объёмный звук";
     strings["High##sgse"].plurals[0] = "Высокое";
     strings["Low##sgse"].plurals[0] = "Низкое";
     strings["ASAP (C++ port)##sgse"].plurals[0] = "ASAP (портирован на C++)";
@@ -2785,6 +2782,7 @@ void DivLocale::addTranslationsRussian()
     strings["<System default>##sgse1"].plurals[0] = "<По умолчанию>";
     strings["Sample rate##sgse"].plurals[0] = "Частота дискретизации";
     strings["Outputs##sgse"].plurals[0] = "Выводы";
+    strings["common values:\n- 1 for mono\n- 2 for stereo\n- 4 for quadraphonic\n- 6 for 5.1 surround\n- 8 for 7.1 surround##sgse"].plurals[0] = "распространённые значения:\n- 1 для моно\n- 2 для стерео\n- 4 для квадрафонического звука\n- 6 для 5.1 объёмного звука\n- 8 для 7.1 объёмного звука";
     strings["Channels##sgse"].plurals[0] = "Число каналов";
     strings["What?##sgse3"].plurals[0] = "Что?";
     strings["Buffer size##sgse"].plurals[0] = "Размер буфера";

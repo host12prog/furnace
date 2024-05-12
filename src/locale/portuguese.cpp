@@ -2575,14 +2575,6 @@ void DivLocale::addTranslationsPortuguese()
     strings["<Custom...>##sgse1"].plurals[0] = "<Personalizado...>";
     strings["<Use system font>##sgse2"].plurals[0] = "<Usar fonte do sistema>";
     strings["<Custom...>##sgse2"].plurals[0] = "<Personalizado...>";
-    strings["Mono##sgse0"].plurals[0] = "Mono";
-    strings["Stereo##sgse"].plurals[0] = "Estéreo";
-    strings["What?##sgse0"].plurals[0] = "O quê?";
-    strings["Quadraphonic##sgse"].plurals[0] = "Quadrafônico";
-    strings["What?##sgse1"].plurals[0] = "O quê?";
-    strings["5.1 Surround##sgse"].plurals[0] = "5.1 Surround";
-    strings["What?##sgse2"].plurals[0] = "O quê?";
-    strings["7.1 Surround##sgse"].plurals[0] = "7.1 Surround";
     strings["High##sgse"].plurals[0] = "Alta";
     strings["Low##sgse"].plurals[0] = "Baixa";
     strings["ASAP (C++ port)##sgse"].plurals[0] = "ASAP (conversão para C++)";

@@ -1374,11 +1374,22 @@ void DivLocale::addTranslationsTemplate()
 
     //   sgeo  src/gui/exportOptions.cpp
 
+    strings["Export type:##sgeo"].plurals[0] = "=Export type:";
     strings["one file##sgeo"].plurals[0] = "=one file";
     strings["multiple files (one per chip)##sgeo"].plurals[0] = "=multiple files (one per chip)";
     strings["multiple files (one per channel)##sgeo"].plurals[0] = "=multiple files (one per channel)";
+    strings["Bit depth:##sgeo"].plurals[0] = "=Bit depth:";
+    strings["16-bit integer##sgeo"].plurals[0] = "=16-bit integer";
+    strings["32-bit float##sgeo"].plurals[0] = "=32-bit float";
+    strings["Sample rate##sgeo"].plurals[0] = "=Sample rate";
+    strings["Channels in file##sgeo"].plurals[0] = "=Channels in file";
     strings["Loops##sgeo"].plurals[0] = "=Loops";
     strings["Fade out (seconds)##sgeo"].plurals[0] = "=Fade out (seconds)";
+    strings["Channels to export:##sgeo"].plurals[0] = "=Channels to export:";
+    strings["All##sgeo"].plurals[0] = "=All";
+    strings["None##sgeo"].plurals[0] = "=None";
+    strings["Invert##sgeo"].plurals[0] = "=Invert";
+    strings["Channel Selection##sgeo"].plurals[0] = "=Channel Selection";
     strings["Cancel##sgeo0"].plurals[0] = "=Cancel";
     strings["Export##sgeo0"].plurals[0] = "=Export";
     strings["settings:##sgeo"].plurals[0] = "=settings:";
@@ -2646,14 +2657,6 @@ void DivLocale::addTranslationsTemplate()
     strings["<Custom...>##sgse1"].plurals[0] = "=<Custom...>";
     strings["<Use system font>##sgse2"].plurals[0] = "=<Use system font>";
     strings["<Custom...>##sgse2"].plurals[0] = "=<Custom...>";
-    strings["Mono##sgse0"].plurals[0] = "=Mono";
-    strings["Stereo##sgse"].plurals[0] = "=Stereo";
-    strings["What?##sgse0"].plurals[0] = "=What?";
-    strings["Quadraphonic##sgse"].plurals[0] = "=Quadraphonic";
-    strings["What?##sgse1"].plurals[0] = "=What?";
-    strings["5.1 Surround##sgse"].plurals[0] = "=5.1 Surround";
-    strings["What?##sgse2"].plurals[0] = "=What?";
-    strings["7.1 Surround##sgse"].plurals[0] = "=7.1 Surround";
     strings["High##sgse"].plurals[0] = "=High";
     strings["Low##sgse"].plurals[0] = "=Low";
     strings["ASAP (C++ port)##sgse"].plurals[0] = "=ASAP (C++ port)";
@@ -2820,6 +2823,7 @@ void DivLocale::addTranslationsTemplate()
     strings["<System default>##sgse1"].plurals[0] = "=<System default>";
     strings["Sample rate##sgse"].plurals[0] = "=Sample rate";
     strings["Outputs##sgse"].plurals[0] = "=Outputs";
+    strings["common values:\n- 1 for mono\n- 2 for stereo\n- 4 for quadraphonic\n- 6 for 5.1 surround\n- 8 for 7.1 surround##sgse"].plurals[0] = "=common values:\n- 1 for mono\n- 2 for stereo\n- 4 for quadraphonic\n- 6 for 5.1 surround\n- 8 for 7.1 surround";
     strings["Channels##sgse"].plurals[0] = "=Channels";
     strings["What?##sgse3"].plurals[0] = "=What?";
     strings["Buffer size##sgse"].plurals[0] = "=Buffer size";

@@ -8279,7 +8279,6 @@ FurnaceGUI::FurnaceGUI():
   waveGenFM(false),
   mustClear(2),
   initialScreenWipe(1.0f),
-  audioExportType(0),
   dmfExportVersion(0),
   curExportType(GUI_EXPORT_NONE) {
   // value keys

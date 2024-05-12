@@ -26,76 +26,76 @@
 void FurnaceGUI::drawExportAudio(bool onWindow) {
   exitDisabledTimer=1;
 
-  ImGui::Text("Export type:");
+  ImGui::Text(_L("Export type:##sgeo"));
 
   ImGui::Indent();
-  if (ImGui::RadioButton("one file",audioExportOptions.mode==DIV_EXPORT_MODE_ONE)) {
+  if (ImGui::RadioButton(_L("one file##sgeo"),audioExportOptions.mode==DIV_EXPORT_MODE_ONE)) {
     audioExportOptions.mode=DIV_EXPORT_MODE_ONE;
   }
-  if (ImGui::RadioButton("multiple files (one per chip)",audioExportOptions.mode==DIV_EXPORT_MODE_MANY_SYS)) {
+  if (ImGui::RadioButton(_L("multiple files (one per chip)##sgeo"),audioExportOptions.mode==DIV_EXPORT_MODE_MANY_SYS)) {
     audioExportOptions.mode=DIV_EXPORT_MODE_MANY_SYS;
         }
-  if (ImGui::RadioButton("multiple files (one per channel)",audioExportOptions.mode==DIV_EXPORT_MODE_MANY_CHAN)) {
+  if (ImGui::RadioButton(_L("multiple files (one per channel)##sgeo"),audioExportOptions.mode==DIV_EXPORT_MODE_MANY_CHAN)) {
     audioExportOptions.mode=DIV_EXPORT_MODE_MANY_CHAN;
   }
   ImGui::Unindent();
 
   if (audioExportOptions.mode!=DIV_EXPORT_MODE_MANY_SYS) {
-    ImGui::Text("Bit depth:");
+    ImGui::Text(_L("Bit depth:##sgeo"));
     ImGui::Indent();
-    if (ImGui::RadioButton("16-bit integer",audioExportOptions.format==DIV_EXPORT_FORMAT_S16)) {
+    if (ImGui::RadioButton(_L("16-bit integer##sgeo"),audioExportOptions.format==DIV_EXPORT_FORMAT_S16)) {
       audioExportOptions.format=DIV_EXPORT_FORMAT_S16;
     }
-    if (ImGui::RadioButton("32-bit float",audioExportOptions.format==DIV_EXPORT_FORMAT_F32)) {
+    if (ImGui::RadioButton(_L("32-bit float##sgeo"),audioExportOptions.format==DIV_EXPORT_FORMAT_F32)) {
       audioExportOptions.format=DIV_EXPORT_FORMAT_F32;
     }
     ImGui::Unindent();
   }
 
-  if (ImGui::InputInt("Sample rate",&audioExportOptions.sampleRate,100,10000)) {
+  if (ImGui::InputInt(_L("Sample rate##sgeo"),&audioExportOptions.sampleRate,100,10000)) {
     if (audioExportOptions.sampleRate<8000) audioExportOptions.sampleRate=8000;
     if (audioExportOptions.sampleRate>384000) audioExportOptions.sampleRate=384000;
   }
 
   if (audioExportOptions.mode!=DIV_EXPORT_MODE_MANY_SYS) {
-    if (ImGui::InputInt("Channels in file",&audioExportOptions.chans,1,1)) {
+    if (ImGui::InputInt(_L("Channels in file##sgeo"),&audioExportOptions.chans,1,1)) {
       if (audioExportOptions.chans<1) audioExportOptions.chans=1;
       if (audioExportOptions.chans>16) audioExportOptions.chans=16;
     }
   }
 
-  if (ImGui::InputInt("Loops",&audioExportOptions.loops,1,2)) {
+  if (ImGui::InputInt(_L("Loops##sgeo"),&audioExportOptions.loops,1,2)) {
     if (audioExportOptions.loops<0) audioExportOptions.loops=0;
   }
-  if (ImGui::InputDouble("Fade out (seconds)",&audioExportOptions.fadeOut,1.0,2.0,"%.1f")) {
+  if (ImGui::InputDouble(_L("Fade out (seconds)##sgeo"),&audioExportOptions.fadeOut,1.0,2.0,"%.1f")) {
     if (audioExportOptions.fadeOut<0.0) audioExportOptions.fadeOut=0.0;
   }
 
   bool isOneOn=false;
   if (audioExportOptions.mode==DIV_EXPORT_MODE_MANY_CHAN) {
-    ImGui::Text("Channels to export:");
+    ImGui::Text(_L("Channels to export:##sgeo"));
     ImGui::SameLine();
-    if (ImGui::SmallButton("All")) {
+    if (ImGui::SmallButton(_L("All##sgeo"))) {
       for (int i=0; i<DIV_MAX_CHANS; i++) {
         audioExportOptions.channelMask[i]=true;
       }
     }
     ImGui::SameLine();
-    if (ImGui::SmallButton("None")) {
+    if (ImGui::SmallButton(_L("None##sgeo"))) {
       for (int i=0; i<DIV_MAX_CHANS; i++) {
         audioExportOptions.channelMask[i]=false;
       }
     }
     ImGui::SameLine();
-    if (ImGui::SmallButton("Invert")) {
+    if (ImGui::SmallButton(_L("Invert##sgeo"))) {
       for (int i=0; i<DIV_MAX_CHANS; i++) {
         audioExportOptions.channelMask[i]=!audioExportOptions.channelMask[i];
       }
     }
 
-    if (ImGui::BeginChild("Channel Selection",ImVec2(0,200.0f*dpiScale))) {
+    if (ImGui::BeginChild(_L("Channel Selection##sgeo"),ImVec2(0,200.0f*dpiScale))) {
       for (int i=0; i<e->getTotalChannelCount(); i++) {
-        String name=fmt::sprintf("%d. %s##_CE%d",i+1,e->getChannelName(i),i);
+        String name=fmt::sprintf("%d. %s##_CE%d",i+1,settings.translate_channel_names_pattern ? _L(e->getChannelName(i)) : e->getChannelName(i), i);
         ImGui::Checkbox(name.c_str(),&audioExportOptions.channelMask[i]);
         if (audioExportOptions.channelMask[i]) isOneOn=true;
       }
