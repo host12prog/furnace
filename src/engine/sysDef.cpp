@@ -429,7 +429,8 @@ void DivEngine::registerSystems() {
 
   // Common effect handler maps
 
-  EffectHandlerMap ayPostEffectHandlerMap={
+  EffectHandlerMap ayPostEffectHandlerMap=
+  {
     {0x15, {DIV_CMD_RAW_FREQ, "15xx: Set raw period##sesd"}},
     {0x16, {DIV_CMD_RAW_FREQ_HIGHER_BYTE, "16xx: Set raw period higher nybble (0-F)##sesd"}},
 
@@ -445,7 +446,8 @@ void DivEngine::registerSystems() {
     {0x2f, {DIV_CMD_AY_IO_WRITE, "2Fxx: Write to I/O port B##sesd", constVal<1>, effectVal}},
   };
 
-  EffectHandlerMap ay8930PostEffectHandlerMap={
+  EffectHandlerMap ay8930PostEffectHandlerMap=
+  {
     {0x15, {DIV_CMD_RAW_FREQ, "15xx: Set raw period##sesd"}},
     {0x16, {DIV_CMD_RAW_FREQ_HIGHER_BYTE, "16xx: Set raw period higher byte##sesd"}},
 
