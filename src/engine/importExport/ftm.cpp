@@ -1741,7 +1741,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
           DivSubSong* s=ds.subsong[i];
 
           int framesLen=reader.readI();
-          if (framesLen<=1 || framesLen>256) {
+          if (framesLen<1 || framesLen>256) {
             logE("frames out of range");
             lastError = "frames out of range";
             delete[] file;
