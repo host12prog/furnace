@@ -5704,6 +5704,7 @@ void DivLocale::addTranslationsTemplate()
     strings["19xx: Set attack of all operators (0 to F)##sesd0"].plurals[0] = "=19xx: Set attack of all operators (0 to F)";
     strings["1Axx: Set attack of operator 1 (0 to F)##sesd0"].plurals[0] = "=1Axx: Set attack of operator 1 (0 to F)";
     strings["1Bxx: Set attack of operator 2 (0 to F)##sesd0"].plurals[0] = "=1Bxx: Set attack of operator 2 (0 to F)";
+    strings["20xx: Set patch (0 to F)##sesd"].plurals[0] = "=20xx: Set patch (0 to F)";
     strings["50xy: Set AM (x: operator from 1 to 2 (0 for all ops); y: AM)##sesd"].plurals[0] = "=50xy: Set AM (x: operator from 1 to 2 (0 for all ops); y: AM)";
     strings["51xy: Set sustain level (x: operator from 1 to 2 (0 for all ops); y: sustain)##sesd"].plurals[0] = "=51xy: Set sustain level (x: operator from 1 to 2 (0 for all ops); y: sustain)";
     strings["52xy: Set release (x: operator from 1 to 2 (0 for all ops); y: release)##sesd"].plurals[0] = "=52xy: Set release (x: operator from 1 to 2 (0 for all ops); y: release)";

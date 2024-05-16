@@ -2037,8 +2037,11 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                 if (nextEffect==0 && nextEffectVal==0) {
                   pat->data[row][4+(j*2)]=-1;
                   pat->data[row][5+(j*2)]=-1;
-                } else {
-                  if ((eft && nextEffect<eftEffectMapSize) || (!eft && nextEffect<ftEffectMapSize)) {
+                } 
+                else 
+                {
+                  if ((eft && nextEffect<eftEffectMapSize) || (!eft && nextEffect<ftEffectMapSize)) 
+                  {
                     if(eft)
                     {
                       pat->data[row][4+(j*2)]=eftEffectMap[nextEffect];
@@ -2086,7 +2089,28 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                         }
                       }
                     }
-                  } else {
+
+                    // VRC7 set patch effect
+                    bool is_vrc7 = false;
+
+                    for(int vrr = 0; vrr < 6; vrr++)
+                    {
+                      if(map_channels[ch] == vrc7_chans[vrr])
+                      {
+                        is_vrc7 = true;
+                      }
+                    }
+
+                    if (is_vrc7) 
+                    {
+                      if(pat->data[row][4 + (j * 2)] == 0x12)
+                      {
+                        pat->data[row][4 + (j * 2)] = 0x20; //set VRC7 patch
+                      }
+                    }
+                  } 
+                  else 
+                  {
                     pat->data[row][4+(j*2)]=-1;
                     pat->data[row][5+(j*2)]=-1;
                   }

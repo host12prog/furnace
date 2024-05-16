@@ -39,6 +39,7 @@ the YM2413 is equipped with the following features:
 - `19xx`: **set attack of all operators.**
 - `1Axx`: **set attack of operator 1.**
 - `1Bxx`: **set attack of operator 2.**
+- `20xx`: **set patch.**
 - `50xy`: **set AM of operator.**
   - `x` is the operator, either 1 or 2. a value of `0` means "all operators".
   - `y` determines whether AM is on.
