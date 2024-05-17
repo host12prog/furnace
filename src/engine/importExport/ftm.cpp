@@ -2105,7 +2105,7 @@ bool DivEngine::loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_si
                     {
                       if(pat->data[row][4 + (j * 2)] == 0x12)
                       {
-                        pat->data[row][4 + (j * 2)] = 0x20; //set VRC7 patch
+                        pat->data[row][4 + (j * 2)] = 0x10; //set VRC7 patch
                       }
                     }
                   } 

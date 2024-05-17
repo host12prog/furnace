@@ -5572,7 +5572,7 @@ void DivLocale::addTranslationsRussian()
     strings["19xx: Set attack of all operators (0 to F)##sesd0"].plurals[0] = "19xx: Атака всех операторов (0-F)";
     strings["1Axx: Set attack of operator 1 (0 to F)##sesd0"].plurals[0] = "1Axx: Атака оператора 1 (0-F)";
     strings["1Bxx: Set attack of operator 2 (0 to F)##sesd0"].plurals[0] = "1Bxx: Атака оператора 2 (0-F)";
-    strings["20xx: Set patch (0 to F)##sesd"].plurals[0] = "20xx: Патч (0-F)";
+    strings["10xx: Set patch (0 to F)##sesd"].plurals[0] = "10xx: Патч (0-F)";
     strings["50xy: Set AM (x: operator from 1 to 2 (0 for all ops); y: AM)##sesd"].plurals[0] = "50xy: Включить АМ (x: оператор 1-2 (0 для всех операторов); y: АМ)";
     strings["51xy: Set sustain level (x: operator from 1 to 2 (0 for all ops); y: sustain)##sesd"].plurals[0] = "51xy: Уровень сустейна (x: оператор 1-2 (0 для всех операторов); y: сустейн)";
     strings["52xy: Set release (x: operator from 1 to 2 (0 for all ops); y: release)##sesd"].plurals[0] = "52xy: Релиз (x: оператор 1-2 (0 для всех операторов); y: релиз)";

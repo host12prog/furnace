@@ -563,6 +563,7 @@ void DivEngine::registerSystems() {
   });
 
   EffectHandlerMap fmOPLLPostEffectHandlerMap={
+    {0x10, {DIV_CMD_WAVE, "10xx: Set patch (0 to F)##sesd"}},
     {0x11, {DIV_CMD_FM_FB, "11xx: Set feedback (0 to 7)##sesd1"}},
     {0x12, {DIV_CMD_FM_TL, "12xx: Set level of operator 1 (0 highest, 3F lowest)##sesd0", constVal<0>, effectVal}},
     {0x13, {DIV_CMD_FM_TL, "13xx: Set level of operator 2 (0 highest, 3F lowest)##sesd0", constVal<1>, effectVal}},
@@ -570,9 +571,6 @@ void DivEngine::registerSystems() {
     {0x19, {DIV_CMD_FM_AR, "19xx: Set attack of all operators (0 to F)##sesd0", constVal<-1>, effectValAnd<15>}},
     {0x1a, {DIV_CMD_FM_AR, "1Axx: Set attack of operator 1 (0 to F)##sesd0", constVal<0>, effectValAnd<15>}},
     {0x1b, {DIV_CMD_FM_AR, "1Bxx: Set attack of operator 2 (0 to F)##sesd0", constVal<1>, effectValAnd<15>}},
-
-    {0x20, {DIV_CMD_WAVE, "20xx: Set patch (0 to F)##sesd"}},
-
     {0x50, {DIV_CMD_FM_AM, "50xy: Set AM (x: operator from 1 to 2 (0 for all ops); y: AM)##sesd", effectOpVal<2>, effectValAnd<1>}},
     {0x51, {DIV_CMD_FM_SL, "51xy: Set sustain level (x: operator from 1 to 2 (0 for all ops); y: sustain)##sesd", effectOpVal<2>, effectValAnd<15>}},
     {0x52, {DIV_CMD_FM_RR, "52xy: Set release (x: operator from 1 to 2 (0 for all ops); y: release)##sesd", effectOpVal<2>, effectValAnd<15>}},

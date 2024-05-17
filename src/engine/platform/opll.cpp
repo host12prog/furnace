@@ -692,6 +692,13 @@ int DivPlatformOPLL::dispatch(DivCommand c) {
       chan[c.chan].freqChanged=true;
       break;
     }
+    case DIV_CMD_WAVE: {
+      if (c.chan>=6 && (crapDrums || properDrums)) break;
+      if (c.chan>=9) break;
+      chan[c.chan].state.opllPreset=c.value&15;
+      rWrite(0x30+c.chan,((15-VOL_SCALE_LOG_BROKEN(chan[c.chan].outVol,15-chan[c.chan].state.op[1].tl,15))&15)|(chan[c.chan].state.opllPreset<<4));
+      break;
+    }
     case DIV_CMD_FM_FB: {
       if (c.chan>=9 && !properDrums) return 0;
       //DivInstrumentFM::Operator& mod=chan[c.chan].state.op[0];
@@ -892,13 +899,6 @@ int DivPlatformOPLL::dispatch(DivCommand c) {
       rWrite(0x03,(car.ksl<<6)|((chan[c.chan].state.fms&1)<<4)|((chan[c.chan].state.ams&1)<<3)|chan[c.chan].state.fb);
       break;
     }
-    case DIV_CMD_WAVE:
-      if (c.chan<9) 
-      {
-        chan[c.chan].state.opllPreset = c.value & 15;
-        rWrite(0x30+ c.chan,((15-VOL_SCALE_LOG_BROKEN(chan[c.chan].outVol,15-chan[c.chan].state.op[1].tl,15))&15)|(chan[c.chan].state.opllPreset<<4));
-      }
-      break;
     case DIV_CMD_FM_EXTCH:
       if (!properDrumsSys) break;
       if ((int)properDrums==c.value) break;
