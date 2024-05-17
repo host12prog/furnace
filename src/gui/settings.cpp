@@ -103,12 +103,6 @@ const char* audioBackends[]={
   NULL
 };
 
-const bool isProAudio[]={
-  true,
-  false,
-  false
-};
-
 const char* audioQualities[]={
   "High##sgse",
   "Low##sgse",
@@ -439,6 +433,12 @@ void FurnaceGUI::drawSettings() {
 #ifdef HAVE_RENDER_DX11
           if (ImGui::Selectable("DirectX 11",curRenderBackend=="DirectX 11")) {
             settings.renderBackend="DirectX 11";
+            settingsChanged=true;
+          }
+#endif
+#ifdef HAVE_RENDER_DX9
+          if (ImGui::Selectable("DirectX 9",curRenderBackend=="DirectX 9")) {
+            settings.renderBackend="DirectX 9";
             settingsChanged=true;
           }
 #endif
@@ -1103,7 +1103,7 @@ void FurnaceGUI::drawSettings() {
             if (settings.audioEngine!=prevAudioEngine) {
               audioEngineChanged=true;
               settings.audioDevice="";
-              if (!isProAudio[settings.audioEngine]) settings.audioChans=2;
+              settings.audioChans=2;
             }
             ImGui::EndCombo();
           }

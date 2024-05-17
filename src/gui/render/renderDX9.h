@@ -18,53 +18,36 @@
  */
 
 #include "../gui.h"
-#ifdef INCLUDE_D3D11
-#include <d3d11.h>
+#ifdef INCLUDE_D3D9
+#include <d3d9.h>
+struct FurnaceGUIRenderDX9Private;
 #else
-typedef void ID3D11DeviceContext;
-typedef void ID3D11RenderTargetView;
-typedef void ID3D11Buffer;
-typedef void ID3D11RasterizerState;
-typedef void ID3D11BlendState;
-typedef void ID3D11VertexShader;
-typedef void ID3D11PixelShader;
-typedef void ID3D11InputLayout;
-typedef void IDXGISwapChain;
+typedef void IDirect3D9;
+typedef void IDirect3DVertexBuffer9;
+typedef void FurnaceGUIRenderDX9Private;
 #endif
 
-class FurnaceGUIRenderDX11: public FurnaceGUIRender {
-  ID3D11Device* device;
-  ID3D11DeviceContext* context;
-  ID3D11RenderTargetView* renderTarget;
-  IDXGISwapChain* swapchain;
-  ID3D11RasterizerState* rsState;
-  ID3D11BlendState* omBlendState;
+class FurnaceGUIRenderDX9: public FurnaceGUIRender {
+  IDirect3D9* iface;
+  IDirect3DDevice9* device;
+  FurnaceGUIRenderDX9Private* priv;
+  IDirect3DVertexBuffer9* wipeBuf;
 
-  ID3D11Buffer* quadVertex;
   int outW, outH, swapInterval;
 
-  bool dead;
+  bool dead, haveScene, supportsDynamicTex, supportsVSync, mustResize, squareTex, inScene;
 
   // SHADERS //
-  // -> wipe
-  ID3D11VertexShader* sh_wipe_vertex;
-  ID3D11PixelShader* sh_wipe_fragment;
-  ID3D11InputLayout* sh_wipe_inputLayout;
-  ID3D11Buffer* sh_wipe_uniform;
-  struct WipeUniform {
-    float alpha;
-    float padding[7];
-  };
 
   int maxWidth, maxHeight;
   String vendorName, deviceName, apiVersion;
 
-  bool destroyRenderTarget();
-  bool createRenderTarget();
-
   public:
     ImTextureID getTextureID(FurnaceGUITexture* which);
+    float getTextureU(FurnaceGUITexture* which);
+    float getTextureV(FurnaceGUITexture* which);
     FurnaceGUITextureFormat getTextureFormat(FurnaceGUITexture* which);
+    bool isTextureValid(FurnaceGUITexture* which);
     bool lockTexture(FurnaceGUITexture* which, void** data, int* pitch);
     bool unlockTexture(FurnaceGUITexture* which);
     bool updateTexture(FurnaceGUITexture* which, void* data, int pitch);
@@ -97,22 +80,21 @@ class FurnaceGUIRenderDX11: public FurnaceGUIRender {
     void quitGUI();
     bool quit();
     bool isDead();
-    FurnaceGUIRenderDX11():
+    FurnaceGUIRenderDX9():
+      iface(NULL),
       device(NULL),
-      context(NULL),
-      renderTarget(NULL),
-      swapchain(NULL),
-      rsState(NULL),
-      omBlendState(NULL),
-      quadVertex(NULL),
+      priv(NULL),
+      wipeBuf(NULL),
       outW(0),
       outH(0),
       swapInterval(1),
       dead(false),
-      sh_wipe_vertex(NULL),
-      sh_wipe_fragment(NULL),
-      sh_wipe_inputLayout(NULL),
-      sh_wipe_uniform(NULL),
+      haveScene(false),
+      supportsDynamicTex(false),
+      supportsVSync(false),
+      mustResize(false),
+      squareTex(false),
+      inScene(false),
       maxWidth(8192),
       maxHeight(8192) {
     }

@@ -213,7 +213,7 @@ void FurnaceGUI::drawChanOsc() {
 
       if (chanOscUseGrad) {
         if (chanOscGradTex==NULL) {
-          chanOscGradTex=rend->createTexture(true,chanOscGrad.width,chanOscGrad.height);
+          chanOscGradTex=rend->createTexture(true,chanOscGrad.width,chanOscGrad.height,true,bestTexFormat);
 
           if (chanOscGradTex==NULL) {
             logE("error while creating gradient texture!");
