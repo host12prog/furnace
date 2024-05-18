@@ -2692,6 +2692,7 @@ void DivLocale::addTranslationsRussian()
     strings["Color depth##sgse"].plurals[0] = "Глубина цвета";
     strings["Double buffer##sgse"].plurals[0] = "Двойная буферизация";
     strings["the following values are common (in red, green, blue, alpha order):\n- 24 bits: 8, 8, 8, 0\n- 16 bits: 5, 6, 5, 0\n- 32 bits (with alpha): 8, 8, 8, 8\n- 30 bits (deep): 10, 10, 10, 0##sgse"].plurals[0] = "распространёнными являются следующие значения (в порядке красный, зелёный, синий, прозрачность):\n- 24 бита: 8, 8, 8, 0\n- 16 бит: 5, 6, 5, 0\n- 32 бита (с прозрачностью): 8, 8, 8, 8\n- 30 бит (глубокое квантование цвета): 10, 10, 10, 0";
+    strings["nothing to configure##sgse"].plurals[0] = "нет настроек";
     strings["current backend: %s\n%s\n%s\n%s##sgse"].plurals[0] = "текущая библиотека отрисовки: %s\n%s\n%s\n%s";
     strings["VSync##sgse"].plurals[0] = "Вертикальная синхронизация";
     strings["Frame rate limit##sgse"].plurals[0] = "Ограничение частоты кадров";

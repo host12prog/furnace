@@ -2731,6 +2731,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Color depth##sgse"].plurals[0] = "=Color depth";
     strings["Double buffer##sgse"].plurals[0] = "=Double buffer";
     strings["the following values are common (in red, green, blue, alpha order):\n- 24 bits: 8, 8, 8, 0\n- 16 bits: 5, 6, 5, 0\n- 32 bits (with alpha): 8, 8, 8, 8\n- 30 bits (deep): 10, 10, 10, 0##sgse"].plurals[0] = "=the following values are common (in red, green, blue, alpha order):\n- 24 bits: 8, 8, 8, 0\n- 16 bits: 5, 6, 5, 0\n- 32 bits (with alpha): 8, 8, 8, 8\n- 30 bits (deep): 10, 10, 10, 0";
+    strings["nothing to configure##sgse"].plurals[0] = "=nothing to configure";
     strings["current backend: %s\n%s\n%s\n%s##sgse"].plurals[0] = "=current backend: %s\n%s\n%s\n%s";
     strings["VSync##sgse"].plurals[0] = "=VSync";
     strings["Frame rate limit##sgse"].plurals[0] = "=Frame rate limit";
