@@ -533,6 +533,8 @@ void FurnaceGUI::drawSettings() {
             }
 
             ImGui::TextWrapped(_L("the following values are common (in red, green, blue, alpha order):\n- 24 bits: 8, 8, 8, 0\n- 16 bits: 5, 6, 5, 0\n- 32 bits (with alpha): 8, 8, 8, 8\n- 30 bits (deep): 10, 10, 10, 0##sgse"));
+          } else {
+            ImGui::Text(_L("nothing to configure##sgse"));
           }
           ImGui::TreePop();
         }
