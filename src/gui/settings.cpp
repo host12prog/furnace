@@ -5636,6 +5636,24 @@ bool FurnaceGUI::exportConfig(String path) {
 
   fclose(f);
   return true;
+  DivConfig exConf=e->getConfObject();
+  writeConfig(exConf,GUI_SETTINGS_ALL);
+  commitState(exConf);
+
+  FILE* f=ps_fopen(path.c_str(),"wb");
+  if (f==NULL) {
+    logW("error while exporting config: %s",strerror(errno));
+    return false;
+  }
+
+  String result=exConf.toString();
+
+  if (fwrite(result.c_str(),1,result.size(),f)!=result.size()) {
+    logW("couldn't write config entirely.");
+  }
+
+  fclose(f);
+  return true;
 }
 
 void FurnaceGUI::resetColors() {
