@@ -649,6 +649,7 @@ enum FurnaceGUIWarnings {
   GUI_WARN_SUBSONG_DEL,
   GUI_WARN_SYSTEM_DEL,
   GUI_WARN_CLEAR_HISTORY,
+  GUI_WARN_RESET_CONFIG,
   GUI_WARN_GENERIC
 };
 
@@ -2899,7 +2900,8 @@ class FurnaceGUI {
 
   void syncSettings();
   void commitSettings();
-  void commitState();
+  void syncState();
+  void commitState(DivConfig& conf);
   void processDrags(int dragX, int dragY);
   void processPoint(SDL_Event& ev);
 

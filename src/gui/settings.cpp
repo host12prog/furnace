@@ -1069,6 +1069,21 @@ void FurnaceGUI::drawSettings() {
           ImGui::TextUnformatted(_L("iulserghiueshgui##sgse"));
         }*/
 
+        // SUBSECTION CONFIGURATION
+        CONFIG_SUBSECTION("Configuration");
+        if (ImGui::Button("Import")) {
+          openFileDialog(GUI_FILE_IMPORT_CONFIG);
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Export")) {
+          openFileDialog(GUI_FILE_EXPORT_CONFIG);
+        }
+        pushDestColor();
+        if (ImGui::Button("Factory Reset")) {
+          showWarning("Are you sure you want to reset all Furnace settings?\nYou must restart Furnace after doing so.",GUI_WARN_RESET_CONFIG);
+        }
+        popDestColor();
+
         END_SECTION;
       }
 
@@ -4278,6 +4293,11 @@ CONFIG_SECTION(_L("Color##sgse")) {
   }
   END_SECTION;
 }
+      CONFIG_SECTION("Backup") {
+        // SUBSECTION SETTINGS
+        CONFIG_SUBSECTION("Configuration");
+        END_SECTION;
+      }
       
       ImGui::EndTabBar();
     }
@@ -5560,11 +5580,39 @@ bool FurnaceGUI::exportLayout(String path) {
 }
 
 bool FurnaceGUI::importConfig(String path) {
-  return false;
+  DivConfig prevConf=e->getConfObject();
+  DivConfig& conf=e->getConfObject();
+  conf.clear();
+  if (!conf.loadFromFile(path.c_str(),false,false)) {
+    showError(fmt::sprintf("error while loading config! (%s)",strerror(errno)));
+    conf=prevConf;
+    return false;
+  }
+  syncState();
+  syncSettings();
+  commitSettings();
+  return true;
 }
 
 bool FurnaceGUI::exportConfig(String path) {
-  return false;
+  DivConfig exConf=e->getConfObject();
+  writeConfig(exConf,GUI_SETTINGS_ALL);
+  commitState(exConf);
+
+  FILE* f=ps_fopen(path.c_str(),"wb");
+  if (f==NULL) {
+    logW("error while exporting config: %s",strerror(errno));
+    return false;
+  }
+
+  String result=exConf.toString();
+
+  if (fwrite(result.c_str(),1,result.size(),f)!=result.size()) {
+    logW("couldn't write config entirely.");
+  }
+
+  fclose(f);
+  return true;
 }
 
 void FurnaceGUI::resetColors() {
