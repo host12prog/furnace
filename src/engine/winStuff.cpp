@@ -31,7 +31,7 @@ String getWinConfigPath() {
   HRESULT configHR;
   if ((configHR=SHGetFolderPathW(NULL,CSIDL_APPDATA,NULL,0,path))==S_OK) {
     configPath=path;
-    configPath+=L"\\furnace"; 
+    configPath+=L"\\furnace";
     if (!PathIsDirectoryW(configPath.c_str())) {
       logI("creating config dir...");
       int mkdirRet;
