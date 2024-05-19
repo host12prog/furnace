@@ -6171,28 +6171,15 @@ bool FurnaceGUI::loop() {
           break;
         case GUI_WARN_RESET_CONFIG:
           pushDestColor();
-          if (ImGui::Button("Yes")) {
-            e->factoryReset();
-            quit=true;
-            ImGui::CloseCurrentPopup();
+          if (ImGui::Button(_L("Yes##sggu6"))) {
+              e->factoryReset();
+              quit = true;
+              ImGui::CloseCurrentPopup();
           }
           popDestColor();
           ImGui::SameLine();
           if (ImGui::Button(_L("No##sggu6"))) {
-            ImGui::CloseCurrentPopup();
-          }
-          break;
-        case GUI_WARN_RESET_CONFIG:
-          pushDestColor();
-          if (ImGui::Button("Yes")) {
-            e->factoryReset();
-            quit=true;
-            ImGui::CloseCurrentPopup();
-          }
-          popDestColor();
-          ImGui::SameLine();
-          if (ImGui::Button("No")) {
-            ImGui::CloseCurrentPopup();
+              ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_GENERIC:
@@ -7460,6 +7447,7 @@ void FurnaceGUI::syncState() {
   workingDirVGMExport=e->getConfString("lastDirVGMExport",workingDir);
   workingDirZSMExport=e->getConfString("lastDirZSMExport",workingDir);
   workingDirROMExport=e->getConfString("lastDirROMExport",workingDir);
+  workingDirFZTExport=e->getConfString("lastDirFZTExport",workingDir);
   workingDirFont=e->getConfString("lastDirFont",workingDir);
   workingDirColors=e->getConfString("lastDirColors",workingDir);
   workingDirKeybinds=e->getConfString("lastDirKeybinds",workingDir);
@@ -7597,8 +7585,6 @@ void FurnaceGUI::syncState() {
   xyOscDecayTime=e->getConfFloat("xyOscDecayTime",10.0f);
   xyOscIntensity=e->getConfFloat("xyOscIntensity",2.0f);
   xyOscThickness=e->getConfFloat("xyOscThickness",2.0f);
-
-  cvHiScore=e->getConfInt("cvHiScore",25000);
 
   recentFile.clear();
   for (int i=0; i<settings.maxRecentFile; i++) {

@@ -2810,6 +2810,11 @@ void DivLocale::addTranslationsTemplate()
     strings["Translate short channel names (in orders and other places)##sgse"].plurals[0] = "=Translate short channel names (in orders and other places)";
     strings["test##sgse"].plurals[0] = "=test";
     strings["iulserghiueshgui##sgse"].plurals[0] = "=iulserghiueshgui";
+    strings["Configuration##sgse0"].plurals[0] = "=Configuration";
+    strings["Import##sgse"].plurals[0] = "=Import";
+    strings["Export##sgse"].plurals[0] = "=Export";
+    strings["Factory Reset##sgse"].plurals[0] = "=Factory Reset";
+    strings["Are you sure you want to reset all Furnace settings?\nYou must restart Furnace after doing so.##sgse"].plurals[0] = "=Are you sure you want to reset all Furnace settings?\nYou must restart Furnace after doing so.";
     strings["Audio##sgse"].plurals[0] = "=Audio";
     strings["Output##sgse"].plurals[0] = "=Output";
     strings["Backend##sgse"].plurals[0] = "=Backend";
@@ -3618,11 +3623,19 @@ void DivLocale::addTranslationsTemplate()
     strings["Log level: Debug##CC_GUI_COLOR_LOGLEVEL_DEBUG"].plurals[0] = "=Log level: Debug##CC_GUI_COLOR_LOGLEVEL_DEBUG";
     strings["Log level: Trace/Verbose##CC_GUI_COLOR_LOGLEVEL_TRACE"].plurals[0] = "=Log level: Trace/Verbose##CC_GUI_COLOR_LOGLEVEL_TRACE";
 
+    strings["Backup##sgse"].plurals[0] = "=Backup";
+    strings["Configuration##sgse1"].plurals[0] = "=Configuration";
+
     strings["OK##SettingsOK"].plurals[0] = "=OK##SettingsOK";
     strings["Cancel##SettingsCancel"].plurals[0] = "=Cancel##SettingsCancel";
     strings["Apply##SettingsApply"].plurals[0] = "=Apply##SettingsApply";
 
+    strings["could not initialize audio!##sgse"].plurals[0] = "=could not initialize audio!";
+    strings["error while loading fonts! please check your settings.##sgse"].plurals[0] = "=error while loading fonts! please check your settings.";
+    strings["error while loading config! (%s)##sgse"].plurals[0] = "=error while loading config! (%s)";
+
     //   sgut  src/gui/util.cpp
+
     strings["<nothing>##sgut"].plurals[0] = "=<nothing>";
     strings["Unknown##sgut0"].plurals[0] = "=Unknown";
     strings["Unknown##sgut1"].plurals[0] = "=Unknown";

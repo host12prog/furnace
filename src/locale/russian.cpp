@@ -2769,6 +2769,11 @@ void DivLocale::addTranslationsRussian()
     strings["Translate channel names in pattern header##sgse"].plurals[0] = "Переводить имена каналов в заголовках паттернов";
     strings["Translate channel names in channel oscilloscope label##sgse"].plurals[0] = "Переводить имена каналов в надписях на осциллографах отдельных каналов";
     strings["Translate short channel names (in orders and other places)##sgse"].plurals[0] = "Переводить короткие имена каналов (в матрице паттернов и других местах)";
+    strings["Configuration##sgse0"].plurals[0] = "Настройки программы";
+    strings["Import##sgse"].plurals[0] = "Импорт";
+    strings["Export##sgse"].plurals[0] = "Экспорт";
+    strings["Factory Reset##sgse"].plurals[0] = "Сброс на заводские настройки";
+    strings["Are you sure you want to reset all Furnace settings?\nYou must restart Furnace after doing so.##sgse"].plurals[0] = "Вы уверены, что хотите сбросить все настройки Furnace?\nВам нужно будет перезапустить Furnace после этого.";
     strings["Audio##sgse"].plurals[0] = "Аудио";
     strings["Output##sgse"].plurals[0] = "Вывод";
     strings["Backend##sgse"].plurals[0] = "Интерфейс";
@@ -3578,9 +3583,16 @@ void DivLocale::addTranslationsRussian()
     strings["Log level: Debug##CC_GUI_COLOR_LOGLEVEL_DEBUG"].plurals[0] = "Уровень лога: отладка##CC_GUI_COLOR_LOGLEVEL_DEBUG";
     strings["Log level: Trace/Verbose##CC_GUI_COLOR_LOGLEVEL_TRACE"].plurals[0] = "Уровень лога: диагностика/подробный##CC_GUI_COLOR_LOGLEVEL_TRACE";
 
+    strings["Backup##sgse"].plurals[0] = "Резервное копирование";
+    strings["Configuration##sgse1"].plurals[0] = "Настройки";
+
     strings["OK##SettingsOK"].plurals[0] = "ОК##SettingsOK";
     strings["Cancel##SettingsCancel"].plurals[0] = "Отмена##SettingsCancel";
     strings["Apply##SettingsApply"].plurals[0] = "Применить##SettingsApply";
+
+    strings["could not initialize audio!##sgse"].plurals[0] = "не смог инициализировать аудио!";
+    strings["error while loading fonts! please check your settings.##sgse"].plurals[0] = "произошла ошибка при загрузке шрифтов! проверьте свои настройки.";
+    strings["error while loading config! (%s)##sgse"].plurals[0] = "ошибка при загрузке файла настроек! (%s)";
 
     //src/gui/util.cpp
 
