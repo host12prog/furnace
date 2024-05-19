@@ -3152,7 +3152,6 @@ int FurnaceGUI::processEvent(SDL_Event* ev) {
     // TODO: save last song state here
   } else if (ev->type==SDL_APP_WILLENTERBACKGROUND) {
     commitState(e->getConfObject());
-    commitState(e->getConfObject());
     e->saveConf();
   }
 #endif
@@ -4003,7 +4002,6 @@ bool FurnaceGUI::loop() {
         }
       }
 
-      commitState(e->getConfObject());
       commitState(e->getConfObject());
       rend->quitGUI();
       rend->quit();
@@ -6184,32 +6182,6 @@ bool FurnaceGUI::loop() {
               ImGui::CloseCurrentPopup();
           }
           break;
-        case GUI_WARN_RESET_CONFIG:
-          pushDestColor();
-          if (ImGui::Button("Yes")) {
-            e->factoryReset();
-            quit=true;
-            ImGui::CloseCurrentPopup();
-          }
-          popDestColor();
-          ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu6"))) {
-            ImGui::CloseCurrentPopup();
-          }
-          break;
-        case GUI_WARN_RESET_CONFIG:
-          pushDestColor();
-          if (ImGui::Button(_L("Yes##sggu6"))) {
-              e->factoryReset();
-              quit = true;
-              ImGui::CloseCurrentPopup();
-          }
-          popDestColor();
-          ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu6"))) {
-              ImGui::CloseCurrentPopup();
-          }
-          break;
         case GUI_WARN_GENERIC:
           if (ImGui::Button(_L("OK##sggu1"))) {
             ImGui::CloseCurrentPopup();
@@ -7051,7 +7023,6 @@ bool FurnaceGUI::init() {
   logI("initializing GUI.");
 
   syncState();
-  syncState();
   syncSettings();
 
   if (!settings.persistFadeOut) {
@@ -7633,7 +7604,6 @@ void FurnaceGUI::commitState(DivConfig& conf) {
   }
 
   conf.set("configVersion",(int)DIV_ENGINE_VERSION);
-  conf.set("configVersion",(int)DIV_ENGINE_VERSION);
 
   conf.set("lastDir",workingDir);
   conf.set("lastDirSong",workingDirSong);
@@ -7687,45 +7657,8 @@ void FurnaceGUI::commitState(DivConfig& conf) {
   conf.set("findOpen",findOpen);
   conf.set("spoilerOpen",spoilerOpen);
   conf.set("userPresetsOpen",userPresetsOpen);
-  conf.set("editControlsOpen",editControlsOpen);
-  conf.set("ordersOpen",ordersOpen);
-  conf.set("insListOpen",insListOpen);
-  conf.set("songInfoOpen",songInfoOpen);
-  conf.set("patternOpen",patternOpen);
-  conf.set("insEditOpen",insEditOpen);
-  conf.set("waveListOpen",waveListOpen);
-  conf.set("waveEditOpen",waveEditOpen);
-  conf.set("sampleListOpen",sampleListOpen);
-  conf.set("sampleEditOpen",sampleEditOpen);
-  conf.set("settingsOpen",settingsOpen);
-  conf.set("mixerOpen",mixerOpen);
-  conf.set("oscOpen",oscOpen);
-  conf.set("chanOscOpen",chanOscOpen);
-  conf.set("xyOscOpen",xyOscOpen);
-  conf.set("memoryOpen",memoryOpen);
-  conf.set("volMeterOpen",volMeterOpen);
-  conf.set("statsOpen",statsOpen);
-  conf.set("compatFlagsOpen",compatFlagsOpen);
-  conf.set("pianoOpen",pianoOpen);
-  conf.set("notesOpen",notesOpen);
-  conf.set("channelsOpen",channelsOpen);
-  conf.set("patManagerOpen",patManagerOpen);
-  conf.set("sysManagerOpen",sysManagerOpen);
-  conf.set("clockOpen",clockOpen);
-  conf.set("speedOpen",speedOpen);
-  conf.set("groovesOpen",groovesOpen);
-  conf.set("regViewOpen",regViewOpen);
-  conf.set("logOpen",logOpen);
-  conf.set("effectListOpen",effectListOpen);
-  conf.set("subSongsOpen",subSongsOpen);
-  conf.set("findOpen",findOpen);
-  conf.set("spoilerOpen",spoilerOpen);
-  conf.set("userPresetsOpen",userPresetsOpen);
 
   // commit dir state
-  conf.set("insListDir",insListDir);
-  conf.set("waveListDir",waveListDir);
-  conf.set("sampleListDir",sampleListDir);
   conf.set("insListDir",insListDir);
   conf.set("waveListDir",waveListDir);
   conf.set("sampleListDir",sampleListDir);
@@ -7736,29 +7669,7 @@ void FurnaceGUI::commitState(DivConfig& conf) {
   conf.set("lastWindowX",settings.saveWindowPos?scrConfX:(int)SDL_WINDOWPOS_CENTERED);
   conf.set("lastWindowY",settings.saveWindowPos?scrConfY:(int)SDL_WINDOWPOS_CENTERED);
   conf.set("lastWindowMax",scrMax);
-  conf.set("lastWindowWidth",scrConfW);
-  conf.set("lastWindowHeight",scrConfH);
-  conf.set("lastWindowX",settings.saveWindowPos?scrConfX:(int)SDL_WINDOWPOS_CENTERED);
-  conf.set("lastWindowY",settings.saveWindowPos?scrConfY:(int)SDL_WINDOWPOS_CENTERED);
-  conf.set("lastWindowMax",scrMax);
 
-  conf.set("tempoView",tempoView);
-  conf.set("waveHex",waveHex);
-  conf.set("waveSigned",waveSigned);
-  conf.set("waveGenVisible",waveGenVisible);
-  conf.set("waveEditStyle",waveEditStyle);
-  conf.set("patExtraButtons",patExtraButtons);
-  conf.set("patChannelNames",patChannelNames);
-  conf.set("patChannelPairs",patChannelPairs);
-  conf.set("patChannelHints",(int)patChannelHints);
-  conf.set("lockLayout",lockLayout);
-  conf.set("fullScreen",fullScreen);
-  conf.set("mobileUI",mobileUI);
-  conf.set("edit",edit);
-  conf.set("followOrders",followOrders);
-  conf.set("followPattern",followPattern);
-  conf.set("orderEditMode",orderEditMode);
-  conf.set("noteInputPoly",noteInputPoly);
   conf.set("tempoView",tempoView);
   conf.set("waveHex",waveHex);
   conf.set("waveSigned",waveSigned);
@@ -7779,29 +7690,14 @@ void FurnaceGUI::commitState(DivConfig& conf) {
   if (settings.persistFadeOut) {
     conf.set("exportLoops",audioExportOptions.loops);
     conf.set("exportFadeOut",audioExportOptions.fadeOut);
-    conf.set("exportLoops",audioExportOptions.loops);
-    conf.set("exportFadeOut",audioExportOptions.fadeOut);
   }
 
   // commit oscilloscope state
   conf.set("oscZoom",oscZoom);
   conf.set("oscZoomSlider",oscZoomSlider);
   conf.set("oscWindowSize",oscWindowSize);
-  conf.set("oscZoom",oscZoom);
-  conf.set("oscZoomSlider",oscZoomSlider);
-  conf.set("oscWindowSize",oscWindowSize);
 
   // commit piano state
-  conf.set("pianoOctaves",pianoOctaves);
-  conf.set("pianoOctavesEdit",pianoOctavesEdit);
-  conf.set("pianoOptions",pianoOptions);
-  conf.set("pianoSharePosition",pianoSharePosition);
-  conf.set("pianoOptionsSet",pianoOptionsSet);
-  conf.set("pianoReadonly",pianoReadonly);
-  conf.set("pianoOffset",pianoOffset);
-  conf.set("pianoOffsetEdit",pianoOffsetEdit);
-  conf.set("pianoView",pianoView);
-  conf.set("pianoInputPadMode",pianoInputPadMode);
   conf.set("pianoOctaves",pianoOctaves);
   conf.set("pianoOctavesEdit",pianoOctavesEdit);
   conf.set("pianoOptions",pianoOptions);
@@ -7838,41 +7734,8 @@ void FurnaceGUI::commitState(DivConfig& conf) {
   conf.set("chanOscTextColorA",chanOscTextColor.w);
   conf.set("chanOscUseGrad",chanOscUseGrad);
   conf.set("chanOscGrad",chanOscGrad.toString());
-  conf.set("chanOscCols",chanOscCols);
-  conf.set("chanOscAutoColsType",chanOscAutoColsType);
-  conf.set("chanOscColorX",chanOscColorX);
-  conf.set("chanOscColorY",chanOscColorY);
-  conf.set("chanOscTextX",chanOscTextX);
-  conf.set("chanOscTextY",chanOscTextY);
-  conf.set("chanOscAmplify",chanOscAmplify);
-  conf.set("chanOscLineSize",chanOscLineSize);
-  conf.set("chanOscWindowSize",chanOscWindowSize);
-  conf.set("chanOscWaveCorr",chanOscWaveCorr);
-  conf.set("chanOscOptions",chanOscOptions);
-  conf.set("chanOscNormalize",chanOscNormalize);
-  conf.set("chanOscRandomPhase",chanOscRandomPhase);
-  conf.set("chanOscTextFormat",chanOscTextFormat);
-  conf.set("chanOscColorR",chanOscColor.x);
-  conf.set("chanOscColorG",chanOscColor.y);
-  conf.set("chanOscColorB",chanOscColor.z);
-  conf.set("chanOscColorA",chanOscColor.w);
-  conf.set("chanOscTextColorR",chanOscTextColor.x);
-  conf.set("chanOscTextColorG",chanOscTextColor.y);
-  conf.set("chanOscTextColorB",chanOscTextColor.z);
-  conf.set("chanOscTextColorA",chanOscTextColor.w);
-  conf.set("chanOscUseGrad",chanOscUseGrad);
-  conf.set("chanOscGrad",chanOscGrad.toString());
 
   // commit x-y osc state
-  conf.set("xyOscXChannel",xyOscXChannel);
-  conf.set("xyOscXInvert",xyOscXInvert);
-  conf.set("xyOscYChannel",xyOscYChannel);
-  conf.set("xyOscYInvert",xyOscYInvert);
-  conf.set("xyOscZoom",xyOscZoom);
-  conf.set("xyOscSamples",xyOscSamples);
-  conf.set("xyOscDecayTime",xyOscDecayTime);
-  conf.set("xyOscIntensity",xyOscIntensity);
-  conf.set("xyOscThickness",xyOscThickness);
   conf.set("xyOscXChannel",xyOscXChannel);
   conf.set("xyOscXInvert",xyOscXInvert);
   conf.set("xyOscYChannel",xyOscYChannel);
@@ -7888,16 +7751,13 @@ void FurnaceGUI::commitState(DivConfig& conf) {
     String key=fmt::sprintf("recentFile%d",i);
     if (i>=settings.maxRecentFile || i>=(int)recentFile.size()) {
       conf.set(key,"");
-      conf.set(key,"");
     } else {
-      conf.set(key,recentFile[i]);
       conf.set(key,recentFile[i]);
     }
   }
 }
 
 bool FurnaceGUI::finish(bool saveConfig) {
-  commitState(e->getConfObject());
   commitState(e->getConfObject());
   if (userPresetsOpen) {
     //saveUserPresets(true);
