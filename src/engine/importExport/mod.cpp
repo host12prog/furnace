@@ -411,8 +411,8 @@ bool DivEngine::loadMod(unsigned char* file, size_t len) {
     for(int i=0; i<chCount; i++) {
       ds.subsong[0]->chanShow[i]=true;
       ds.subsong[0]->chanShowChanOsc[i]=true;
-      ds.subsong[0]->chanName[i]=fmt::sprintf("Channel %d",i+1);
-      ds.subsong[0]->chanShortName[i]=fmt::sprintf("C%d",i+1);
+      //ds.subsong[0]->chanName[i]=fmt::sprintf("Channel %d",i+1);
+      //ds.subsong[0]->chanShortName[i]=fmt::sprintf("C%d",i+1);
     }
     for(int i=chCount; i<ds.systemLen*4; i++) {
       ds.subsong[0]->pat[i].effectCols=1;
