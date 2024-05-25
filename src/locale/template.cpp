@@ -2729,6 +2729,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Blue bits##sgse"].plurals[0] = "=Blue bits";
     strings["Alpha bits##sgse"].plurals[0] = "=Alpha bits";
     strings["Color depth##sgse"].plurals[0] = "=Color depth";
+    strings["Stencil buffer size##sgse"].plurals[0] = "=Stencil buffer size";
+    strings["Buffer size##sgse"].plurals[0] = "=Buffer size";
     strings["Double buffer##sgse"].plurals[0] = "=Double buffer";
     strings["the following values are common (in red, green, blue, alpha order):\n- 24 bits: 8, 8, 8, 0\n- 16 bits: 5, 6, 5, 0\n- 32 bits (with alpha): 8, 8, 8, 8\n- 30 bits (deep): 10, 10, 10, 0##sgse"].plurals[0] = "=the following values are common (in red, green, blue, alpha order):\n- 24 bits: 8, 8, 8, 0\n- 16 bits: 5, 6, 5, 0\n- 32 bits (with alpha): 8, 8, 8, 8\n- 30 bits (deep): 10, 10, 10, 0";
     strings["nothing to configure##sgse"].plurals[0] = "=nothing to configure";
@@ -2781,6 +2783,8 @@ void DivLocale::addTranslationsTemplate()
     strings["when enabled, saving an instrument will store its name.\nthis may increase file size.##sgse"].plurals[0] = "=when enabled, saving an instrument will store its name.\nthis may increase file size.";
     strings["Load instrument name from .fui##sgse"].plurals[0] = "=Load instrument name from .fui";
     strings["when enabled, loading an instrument will use the stored name (if present).\notherwise, it will use the file name.##sgse"].plurals[0] = "=when enabled, loading an instrument will use the stored name (if present).\notherwise, it will use the file name.";
+    strings["Auto-fill file name when saving##sggu"].plurals[0] = "=Auto-fill file name when saving";
+    strings["fill the file name field with an appropriate file name when saving or exporting.##sggu"].plurals[0] = "=fill the file name field with an appropriate file name when saving or exporting.";
     strings["New Song##sgse"].plurals[0] = "=New Song";
     strings["Initial system:##sgse"].plurals[0] = "=Initial system:";
     strings["Current system##sgse"].plurals[0] = "=Current system";
@@ -3625,6 +3629,29 @@ void DivLocale::addTranslationsTemplate()
 
     strings["Backup##sgse"].plurals[0] = "=Backup";
     strings["Configuration##sgse1"].plurals[0] = "=Configuration";
+    strings["Enable backup system##sgse"].plurals[0] = "=Enable backup system";
+    strings["Interval (in seconds)##sgse"].plurals[0] = "=Interval (in seconds)";
+    strings["Backups per file##sgse"].plurals[0] = "=Backups per file";
+    strings["Backup Management##sgse"].plurals[0] = "=Backup Management";
+    strings["Purge before:##sgse"].plurals[0] = "=Purge before:";
+    strings["Go##PDate"].plurals[0] = "=Go##PDate";
+    strings["PB used##sgse"].plurals[0] = "=PB used";
+    strings["TB used##sgse"].plurals[0] = "=TB used";
+    strings["GB used##sgse"].plurals[0] = "=GB used";
+    strings["MB used##sgse"].plurals[0] = "=MB used";
+    strings["KB used##sgse"].plurals[0] = "=KB used";
+    strings[" bytes used##sgse"].plurals[0] = "= byte used";
+    strings[" bytes used##sgse"].plurals[1] = "= bytes used";
+    strings["Refresh##sgse"].plurals[0] = "=Refresh";
+    strings["Delete all##sgse"].plurals[0] = "=Delete all";
+    strings["Name##sgse"].plurals[0] = "=Name";
+    strings["Size##sgse"].plurals[0] = "=Size";
+    strings["Latest##sgse"].plurals[0] = "=Latest";
+    strings["P##sgse"].plurals[0] = "=P";
+    strings["T##sgse"].plurals[0] = "=T";
+    strings["G##sgse"].plurals[0] = "=G";
+    strings["M##sgse"].plurals[0] = "=M";
+    strings["K##sgse"].plurals[0] = "=K";
 
     strings["OK##SettingsOK"].plurals[0] = "=OK##SettingsOK";
     strings["Cancel##SettingsCancel"].plurals[0] = "=Cancel##SettingsCancel";

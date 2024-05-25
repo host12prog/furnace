@@ -950,7 +950,7 @@ void FurnaceGUI::doAction(int what) {
       if (curLocalWave==-1) {
         showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgda0"));
       } else {
-        wantScrollListSample=true;
+        wantScrollListLocalWave=true;
         e->song.ins[curIns]->std.local_waves[curLocalWave]->len=finalWidth;
         e->song.ins[curIns]->std.local_waves[curLocalWave]->max=finalHeight-1;
         for (int j=0; j<finalWidth; j++) {
@@ -969,7 +969,7 @@ void FurnaceGUI::doAction(int what) {
           showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgda1"));
         } else {
           (*e->song.ins[curIns]->std.local_waves[curLocalWave])=(*e->song.ins[curIns]->std.local_waves[prevWave]);
-          wantScrollList=true;
+          wantScrollListLocalWave=true;
           MARK_MODIFIED;
           RESET_WAVE_MACRO_ZOOM;
         }
@@ -993,14 +993,14 @@ void FurnaceGUI::doAction(int what) {
     case GUI_ACTION_LOCAL_WAVE_LIST_MOVE_UP:
       if (e->moveLocalWaveUp(curIns, curLocalWave)) {
         curLocalWave--;
-        wantScrollList=true;
+        wantScrollListLocalWave=true;
         MARK_MODIFIED;
       }
       break;
     case GUI_ACTION_LOCAL_WAVE_LIST_MOVE_DOWN:
       if (e->moveLocalWaveDown(curIns, curLocalWave)) {
         curLocalWave++;
-        wantScrollList=true;
+        wantScrollListLocalWave=true;
         MARK_MODIFIED;
       }
       break;
@@ -1010,17 +1010,17 @@ void FurnaceGUI::doAction(int what) {
       break;
     case GUI_ACTION_LOCAL_WAVE_LIST_UP:
       if (--curLocalWave<0) curLocalWave=0;
-      wantScrollList=true;
+      wantScrollListLocalWave=true;
       break;
     case GUI_ACTION_LOCAL_WAVE_LIST_DOWN:
       if (++curLocalWave>=(int)e->song.ins[curIns]->std.local_waves.size()) curLocalWave=((int)e->song.ins[curIns]->std.local_waves.size())-1;
-      wantScrollList=true;
+      wantScrollListLocalWave=true;
       break;
     case GUI_ACTION_LOCAL_WAVE_LIST_DELETE:
       if (curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size()) {
         e->delLocalWave(curLocalWave, e->song.ins[curIns]);
         MARK_MODIFIED;
-        wantScrollList=true;
+        wantScrollListLocalWave=true;
         if (curLocalWave>=(int)e->song.ins[curIns]->std.local_waves.size()) {
           curLocalWave--;
         }
@@ -1043,7 +1043,7 @@ void FurnaceGUI::doAction(int what) {
             showError(settings.language == DIV_LANG_ENGLISH ? "too many samples!" : _L("too many samples!##sgda0"));
         }
         else {
-            wantScrollList = true;
+            wantScrollListSample = true;
             MARK_MODIFIED;
         }
         updateSampleTex = true;

@@ -699,12 +699,12 @@ void FurnaceGUI::drawSettings() {
               if (settings.glDepthSize>128) settings.glDepthSize=128;
               settingsChanged=true;
             }
-            if (ImGui::InputInt("Stencil buffer size",&settings.glStencilSize)) {
+            if (ImGui::InputInt(_L("Stencil buffer size##sgse"),&settings.glStencilSize)) {
               if (settings.glStencilSize<0) settings.glStencilSize=0;
               if (settings.glStencilSize>32) settings.glStencilSize=32;
               settingsChanged=true;
             }
-            if (ImGui::InputInt("Buffer size",&settings.glBufferSize)) {
+            if (ImGui::InputInt(_L("Buffer size##sgse"),&settings.glBufferSize)) {
               if (settings.glBufferSize<0) settings.glBufferSize=0;
               if (settings.glBufferSize>128) settings.glBufferSize=128;
               settingsChanged=true;
@@ -959,12 +959,12 @@ void FurnaceGUI::drawSettings() {
         }
 
         bool autoFillSaveB=settings.autoFillSave;
-        if (ImGui::Checkbox("Auto-fill file name when saving",&autoFillSaveB)) {
+        if (ImGui::Checkbox(_L("Auto-fill file name when saving##sggu"),&autoFillSaveB)) {
           settings.autoFillSave=autoFillSaveB;
           settingsChanged=true;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip("fill the file name field with an appropriate file name when saving or exporting.");
+          ImGui::SetTooltip(_L("fill the file name field with an appropriate file name when saving or exporting.##sggu"));
         }
 
         // SUBSECTION NEW SONG
@@ -4327,6 +4327,7 @@ void FurnaceGUI::drawSettings() {
           UI_COLOR_CONFIG(GUI_COLOR_INSTR_POWERNOISE_SLOPE,"PowerNoise (slope)");
           UI_COLOR_CONFIG(GUI_COLOR_INSTR_DAVE,"Dave");
           UI_COLOR_CONFIG(GUI_COLOR_INSTR_NDS,"Nintendo DS");
+          UI_COLOR_CONFIG(GUI_COLOR_INSTR_FZT,"FZT sound source");
           UI_COLOR_CONFIG(GUI_COLOR_INSTR_GBA_DMA,"GBA DMA");
           UI_COLOR_CONFIG(GUI_COLOR_INSTR_GBA_MINMOD,"GBA MinMod");
           UI_COLOR_CONFIG(GUI_COLOR_INSTR_BIFURCATOR,"Bifurcator");
@@ -4513,36 +4514,36 @@ void FurnaceGUI::drawSettings() {
         CONFIG_SUBSECTION(_L("Configuration##sgse1"));
 
         bool backupEnableB=settings.backupEnable;
-        if (ImGui::Checkbox("Enable backup system",&backupEnableB)) {
+        if (ImGui::Checkbox(_L("Enable backup system##sgse"),&backupEnableB)) {
           settings.backupEnable=backupEnableB;
           settingsChanged=true;
         }
 
-        if (ImGui::InputInt("Interval (in seconds)",&settings.backupInterval)) {
+        if (ImGui::InputInt(_L("Interval (in seconds)##sgse"),&settings.backupInterval)) {
           if (settings.backupInterval<10) settings.backupInterval=10;
           if (settings.backupInterval>86400) settings.backupInterval=86400;
         }
 
-        if (ImGui::InputInt("Backups per file",&settings.backupMaxCopies)) {
+        if (ImGui::InputInt(_L("Backups per file##sgse"),&settings.backupMaxCopies)) {
           if (settings.backupMaxCopies<1) settings.backupMaxCopies=1;
           if (settings.backupMaxCopies>100) settings.backupMaxCopies=100;
         }
 
         // SUBSECTION SETTINGS
-        CONFIG_SUBSECTION("Backup Management");
+        CONFIG_SUBSECTION(_L("Backup Management##sgse"));
         bool purgeDateChanged=false;
 
         ImGui::AlignTextToFramePadding();
-        ImGui::Text("Purge before:");
+        ImGui::Text(_L("Purge before:##sgse"));
         ImGui::SameLine();
-        ImGui::SetNextItemWidth(60.0f*dpiScale);
-        if (ImGui::InputInt("##PYear",&purgeYear,0,0)) purgeDateChanged=true;
+        ImGui::SetNextItemWidth(40.0f*dpiScale);
+        if (ImGui::InputInt("##PDay",&purgeDay,0,0)) purgeDateChanged=true;
         ImGui::SameLine();
         ImGui::SetNextItemWidth(40.0f*dpiScale);
         if (ImGui::InputInt("##PMonth",&purgeMonth,0,0)) purgeDateChanged=true;
         ImGui::SameLine();
-        ImGui::SetNextItemWidth(40.0f*dpiScale);
-        if (ImGui::InputInt("##PDay",&purgeDay,0,0)) purgeDateChanged=true;
+        ImGui::SetNextItemWidth(60.0f*dpiScale);
+        if (ImGui::InputInt("##PYear",&purgeYear,0,0)) purgeDateChanged=true;
 
         if (purgeDateChanged) {
           // check month/day validity
@@ -4607,40 +4608,40 @@ void FurnaceGUI::drawSettings() {
         }
 
         ImGui::SameLine();
-        if (ImGui::Button("Go##PDate")) {
+        if (ImGui::Button(_L("Go##PDate"))) {
           purgeBackups(purgeYear,purgeMonth,purgeDay);
         }
 
         backupEntryLock.lock();
         ImGui::AlignTextToFramePadding();
         if (totalBackupSize>=(1ULL<<50ULL)) {
-          ImGui::Text("%" PRIu64 "PB used",totalBackupSize>>50);
+          ImGui::Text("%" PRIu64 "%s", totalBackupSize >> 50, _L("PB used##sgse"));
         } else if (totalBackupSize>=(1ULL<<40ULL)) {
-          ImGui::Text("%" PRIu64 "TB used",totalBackupSize>>40);
+          ImGui::Text("%" PRIu64 "%s",totalBackupSize>>40, _L("TB used##sgse"));
         } else if (totalBackupSize>=(1ULL<<30ULL)) {
-          ImGui::Text("%" PRIu64 "GB used",totalBackupSize>>30);
+          ImGui::Text("%" PRIu64 "%s",totalBackupSize>>30, _L("GB used##sgse"));
         } else if (totalBackupSize>=(1ULL<<20ULL)) {
-          ImGui::Text("%" PRIu64 "MB used",totalBackupSize>>20);
+          ImGui::Text("%" PRIu64 "%s",totalBackupSize>>20, _L("MB used##sgse"));
         } else if (totalBackupSize>=(1ULL<<10ULL)) {
-          ImGui::Text("%" PRIu64 "KB used",totalBackupSize>>10);
+          ImGui::Text("%" PRIu64 "%s",totalBackupSize>>10, _L("KB used##sgse"));
         } else {
-          ImGui::Text("%" PRIu64 " bytes used",totalBackupSize);
+          ImGui::Text("%" PRIu64 "%s",totalBackupSize, _LP(" bytes used##sgse", totalBackupSize));
         }
 
         ImGui::SameLine();
 
-        if (ImGui::Button("Refresh")) {
+        if (ImGui::Button(_L("Refresh##sgse"))) {
           refreshBackups=true;
         }
         ImGui::SameLine();
-        if (ImGui::Button("Delete all")) {
+        if (ImGui::Button(_L("Delete all##sgse"))) {
           purgeBackups(0,0,0);
         }
 
         if (ImGui::BeginTable("BackupList",3,ImGuiTableFlags_ScrollY|ImGuiTableFlags_Borders)) {
-          ImGui::TableSetupColumn("Name",ImGuiTableColumnFlags_WidthStretch,0.6f);
-          ImGui::TableSetupColumn("Size",ImGuiTableColumnFlags_WidthStretch,0.15f);
-          ImGui::TableSetupColumn("Latest",ImGuiTableColumnFlags_WidthStretch,0.25f);
+          ImGui::TableSetupColumn(_L("Name##sgse"),ImGuiTableColumnFlags_WidthStretch,0.6f);
+          ImGui::TableSetupColumn(_L("Size##sgse"),ImGuiTableColumnFlags_WidthStretch,0.15f);
+          ImGui::TableSetupColumn(_L("Latest##sgse"),ImGuiTableColumnFlags_WidthStretch,0.25f);
 
           ImGui::TableHeadersRow();
 
@@ -4650,20 +4651,20 @@ void FurnaceGUI::drawSettings() {
             ImGui::TextUnformatted(i.name.c_str());
             ImGui::TableNextColumn();
             if (i.size>=(1ULL<<50ULL)) {
-              ImGui::Text("%" PRIu64 "P",i.size>>50);
+              ImGui::Text("%" PRIu64 "%s", i.size >> 50, _L("P##sgse"));
             } else if (i.size>=(1ULL<<40ULL)) {
-              ImGui::Text("%" PRIu64 "T",i.size>>40);
+              ImGui::Text("%" PRIu64 "%s",i.size>>40, _L("T##sgse"));
             } else if (i.size>=(1ULL<<30ULL)) {
-              ImGui::Text("%" PRIu64 "G",i.size>>30);
+              ImGui::Text("%" PRIu64 "%s",i.size>>30, _L("G##sgse"));
             } else if (i.size>=(1ULL<<20ULL)) {
-              ImGui::Text("%" PRIu64 "M",i.size>>20);
+              ImGui::Text("%" PRIu64 "%s",i.size>>20, _L("M##sgse"));
             } else if (i.size>=(1ULL<<10ULL)) {
-              ImGui::Text("%" PRIu64 "K",i.size>>10);
+              ImGui::Text("%" PRIu64 "%s",i.size>>10, _L("K##sgse"));
             } else {
               ImGui::Text("%" PRIu64 "",i.size);
             }
             ImGui::TableNextColumn();
-            ImGui::Text("%d-%02d-%02d",i.lastEntryTime.tm_year+1900,i.lastEntryTime.tm_mon+1,i.lastEntryTime.tm_mday);
+            ImGui::Text("%d.%02d.%d",i.lastEntryTime.tm_mday,i.lastEntryTime.tm_mon+1,i.lastEntryTime.tm_year+1900);
           }
 
           ImGui::EndTable();

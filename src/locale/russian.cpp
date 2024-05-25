@@ -2690,6 +2690,8 @@ void DivLocale::addTranslationsRussian()
     strings["Blue bits##sgse"].plurals[0] = "Биты синей составляющей";
     strings["Alpha bits##sgse"].plurals[0] = "Биты составляющей прозрачности";
     strings["Color depth##sgse"].plurals[0] = "Глубина цвета";
+    strings["Stencil buffer size##sgse"].plurals[0] = "Размер трафаретного буфера";
+    strings["Buffer size##sgse"].plurals[0] = "Размер буфера";
     strings["Double buffer##sgse"].plurals[0] = "Двойная буферизация";
     strings["the following values are common (in red, green, blue, alpha order):\n- 24 bits: 8, 8, 8, 0\n- 16 bits: 5, 6, 5, 0\n- 32 bits (with alpha): 8, 8, 8, 8\n- 30 bits (deep): 10, 10, 10, 0##sgse"].plurals[0] = "распространёнными являются следующие значения (в порядке красный, зелёный, синий, прозрачность):\n- 24 бита: 8, 8, 8, 0\n- 16 бит: 5, 6, 5, 0\n- 32 бита (с прозрачностью): 8, 8, 8, 8\n- 30 бит (глубокое квантование цвета): 10, 10, 10, 0";
     strings["nothing to configure##sgse"].plurals[0] = "нет настроек";
@@ -2742,6 +2744,8 @@ void DivLocale::addTranslationsRussian()
     strings["when enabled, saving an instrument will store its name.\nthis may increase file size.##sgse"].plurals[0] = "При включении имя инструмента будет сохраняться в файле.\nэто может увеличить размер файла.";
     strings["Load instrument name from .fui##sgse"].plurals[0] = "Загружать имя инструмента из файла .fui";
     strings["when enabled, loading an instrument will use the stored name (if present).\notherwise, it will use the file name.##sgse"].plurals[0] = "При включении имя инструмента будет загружаться из файла (при наличии имени в файле).\nВ противном случае будет использоваться имя файла.";
+    strings["Auto-fill file name when saving##sggu"].plurals[0] = "Автоматически подставлять имя файла при сохранении";
+    strings["fill the file name field with an appropriate file name when saving or exporting.##sggu"].plurals[0] = "подставлять соответствующее имя файла при экспорте или сохранении.";
     strings["New Song##sgse"].plurals[0] = "Новая композиция";
     strings["Initial system:##sgse"].plurals[0] = "Система по умолчанию:";
     strings["Current system##sgse"].plurals[0] = "Текущая";
@@ -3585,6 +3589,30 @@ void DivLocale::addTranslationsRussian()
 
     strings["Backup##sgse"].plurals[0] = "Резервное копирование";
     strings["Configuration##sgse1"].plurals[0] = "Настройки";
+    strings["Enable backup system##sgse"].plurals[0] = "Включить резервное копирование";
+    strings["Interval (in seconds)##sgse"].plurals[0] = "Интервал (в секундах)";
+    strings["Backups per file##sgse"].plurals[0] = "Резервных копий каждого файла";
+    strings["Backup Management##sgse"].plurals[0] = "Управление резервными копиями";
+    strings["Purge before:##sgse"].plurals[0] = "Удалить все до даты:";
+    strings["Go##PDate"].plurals[0] = "Удалить##PDate";
+    strings["PB used##sgse"].plurals[0] = " ПиБ использовано";
+    strings["TB used##sgse"].plurals[0] = " ТиБ использовано";
+    strings["GB used##sgse"].plurals[0] = " ГиБ использовано";
+    strings["MB used##sgse"].plurals[0] = " МиБ использовано";
+    strings["KB used##sgse"].plurals[0] = " КиБ использовано";
+    strings[" bytes used##sgse"].plurals[0] = " байт использовано";
+    strings[" bytes used##sgse"].plurals[1] = " байта использовано";
+    strings[" bytes used##sgse"].plurals[2] = " байтов использовано";
+    strings["Refresh##sgse"].plurals[0] = "Обновить список";
+    strings["Delete all##sgse"].plurals[0] = "Удалить все";
+    strings["Name##sgse"].plurals[0] = "Название";
+    strings["Size##sgse"].plurals[0] = "Размер посл. рез. копии";
+    strings["Latest##sgse"].plurals[0] = "Посл. рез. копия";
+    strings["P##sgse"].plurals[0] = " ПиБ";
+    strings["T##sgse"].plurals[0] = " ТиБ";
+    strings["G##sgse"].plurals[0] = " ГиБ";
+    strings["M##sgse"].plurals[0] = " МиБ";
+    strings["K##sgse"].plurals[0] = " КиБ";
 
     strings["OK##SettingsOK"].plurals[0] = "ОК##SettingsOK";
     strings["Cancel##SettingsCancel"].plurals[0] = "Отмена##SettingsCancel";

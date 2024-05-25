@@ -54,7 +54,7 @@ void FurnaceGUI::localWaveListItem(int i, float* wavePreview, DivInstrument* ins
 
     ImGui::PopStyleVar();
     curPos.x+=ImGui::CalcTextSize("2222").x;
-    if (wantScrollList && curLocalWave == i) ImGui::SetScrollHereY();
+    if (wantScrollListLocalWave && curLocalWave == i) ImGui::SetScrollHereY();
     if (ImGui::IsItemHovered()) 
     {
         if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) 
@@ -393,7 +393,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                     } 
                     else 
                     {
-                        wantScrollList=true;
+                        wantScrollListWave=true;
                         MARK_MODIFIED;
                         RESET_WAVE_MACRO_ZOOM;
                         nextWindow=GUI_WINDOW_WAVE_EDIT;

@@ -1656,7 +1656,7 @@ class FurnaceGUI {
   bool portrait, injectBackUp, mobileMenuOpen, warnColorPushed;
   bool wantCaptureKeyboard, oldWantCaptureKeyboard, displayMacroMenu;
   bool displayNew, displayExport, displayPalette, fullScreen, preserveChanPos, sysDupCloneChannels, sysDupEnd, noteInputPoly, notifyWaveChange;
-  bool wantScrollListIns, wantScrollListWave, wantScrollListSample;
+  bool wantScrollListIns, wantScrollListWave, wantScrollListSample, wantScrollListLocalWave;
   bool displayPendingIns, pendingInsSingle, displayPendingRawSample, snesFilterHex, modTableHex, displayEditString;
   bool changeCoarse;
   bool mobileEdit;

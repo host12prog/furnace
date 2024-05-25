@@ -6352,7 +6352,7 @@ bool FurnaceGUI::loop() {
           }
           else 
           {
-            wantScrollList=true;
+            wantScrollListLocalWave=true;
             e->song.ins[curIns]->std.local_waves[curLocalWave]->len=i.width;
             e->song.ins[curIns]->std.local_waves[curLocalWave]->max=i.height-1;
             for (int j=0; j<i.width; j++) 
