@@ -1637,6 +1637,18 @@ bool dirExists(String s) {
 
 void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
   bool hasOpened=false;
+
+  String shortName;
+  size_t shortNamePos=curFileName.rfind(DIR_SEPARATOR);
+  if (shortNamePos!=String::npos && (shortNamePos+1)<curFileName.size()) {
+    shortName=curFileName.substr(shortNamePos+1);
+    // remove extension
+    shortNamePos=shortName.rfind('.');
+    if (shortNamePos!=String::npos) {
+      shortName=shortName.substr(0,shortNamePos);
+    }
+  }
+
   switch (type) {
     case GUI_FILE_OPEN:
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
@@ -1675,7 +1687,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Save File" : _L("Save File##sggu1"),
         { settings.language == DIV_LANG_ENGLISH ? "DefleMask 1.1.3 module" : _L("DefleMask 1.1.3 module##sggu"), "*.dmf"},
         workingDirSong,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?shortName:""
       );
       break;
     case GUI_FILE_SAVE_DMF_LEGACY:
@@ -1684,7 +1697,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Save File" : _L("Save File##sggu2"),
         { settings.language == DIV_LANG_ENGLISH ? "DefleMask 1.0/legacy module" : _L("DefleMask 1.0/legacy module##sggu"), "*.dmf"},
         workingDirSong,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?shortName:""
       );
       break;
     case GUI_FILE_INS_OPEN:
@@ -1752,7 +1766,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Save Instrument" : _L("Save Instrument##sggu0"),
         {settings.language == DIV_LANG_ENGLISH ? "Furnace instrument" : _L("Furnace instrument##sggu1"), "*.fui"},
         workingDirIns,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?e->getIns(curIns)->name:""
       );
       break;
     case GUI_FILE_INS_SAVE_DMP:
@@ -1761,7 +1776,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Save Instrument" : _L("Save Instrument##sggu1"),
         {settings.language == DIV_LANG_ENGLISH ? "DefleMask preset" : _L("DefleMask preset##sggu1"), "*.dmp"},
         workingDirIns,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?e->getIns(curIns)->name:""
       );
       break;
     case GUI_FILE_WAVE_OPEN:
@@ -1838,7 +1854,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Save Sample" : _L("Save Sample##sggu"),
         {settings.language == DIV_LANG_ENGLISH ? "Wave file" : _L("Wave file##sggu0"), "*.wav"},
         workingDirSample,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?e->getSample(curSample)->name:""
       );
       break;
     case GUI_FILE_SAMPLE_SAVE_RAW:
@@ -1847,7 +1864,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Save Raw Sample" : _L("Save Raw Sample##sggu"),
         {settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu5"), "*"},
         workingDirSample,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?e->getSample(curSample)->name:""
       );
       break;
     case GUI_FILE_EXPORT_AUDIO_ONE:
@@ -1856,7 +1874,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Export Audio" : _L("Export Audio##sggu0"),
         {settings.language == DIV_LANG_ENGLISH ? "Wave file" : _L("Wave file##sggu1"), "*.wav"},
         workingDirAudioExport,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?shortName:""
       );
       break;
     case GUI_FILE_EXPORT_AUDIO_PER_SYS:
@@ -1865,7 +1884,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Export Audio" : _L("Export Audio##sggu1"),
         {settings.language == DIV_LANG_ENGLISH ? "Wave file" : _L("Wave file##sggu2"), "*.wav"},
         workingDirAudioExport,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?shortName:""
       );
       break;
     case GUI_FILE_EXPORT_AUDIO_PER_CHANNEL:
@@ -1874,7 +1894,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Export Audio" : _L("Export Audio##sggu2"),
         {settings.language == DIV_LANG_ENGLISH ? "Wave file" : _L("Wave file##sggu3"), "*.wav"},
         workingDirAudioExport,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?shortName:""
       );
       break;
     case GUI_FILE_EXPORT_VGM:
@@ -1883,7 +1904,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Export VGM" : _L("Export VGM##sggu"),
         {settings.language == DIV_LANG_ENGLISH ? "VGM file" : _L("VGM file##sggu"), "*.vgm"},
         workingDirVGMExport,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?shortName:""
       );
       break;
     case GUI_FILE_EXPORT_ZSM:
@@ -1892,7 +1914,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Export ZSM" : _L("Export ZSM##sggu"),
         {settings.language == DIV_LANG_ENGLISH ? "ZSM file" : _L("ZSM file##sggu"), "*.zsm"},
         workingDirZSMExport,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?shortName:""
       );
       break;
     case GUI_FILE_EXPORT_TEXT:
@@ -1901,7 +1924,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Export Command Stream" : _L("Export Command Stream##sggu0"),
         {settings.language == DIV_LANG_ENGLISH ? "text file" : _L("text file##sggu0"), "*.txt"},
         workingDirROMExport,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?shortName:""
       );
       break;
     case GUI_FILE_EXPORT_CMDSTREAM:
@@ -1910,7 +1934,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Export Command Stream" : _L("Export Command Stream##sggu2"),
         {settings.language == DIV_LANG_ENGLISH ? "binary file" : _L("binary file##sggu"), "*.bin"},
         workingDirROMExport,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?shortName:""
       );
       break;
     case GUI_FILE_EXPORT_FZT:
@@ -1919,7 +1944,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         settings.language == DIV_LANG_ENGLISH ? "Export FZT module" : _L("Export FZT module##sggu"),
         {settings.language == DIV_LANG_ENGLISH ? "FZT module" : _L("FZT module##sggu"), "*.fzt"},
         workingDirFZTExport,
-        dpiScale
+        dpiScale,
+        (settings.autoFillSave)?shortName:""
       );
       break;
     case GUI_FILE_EXPORT_ROM:
@@ -2390,7 +2416,7 @@ void FurnaceGUI::delFirstBackup(String name) {
     return strcmp(a.c_str(),b.c_str())<0;
   });
 
-  int totalDelete=((int)listOfFiles.size())-5;
+  int totalDelete=((int)listOfFiles.size())-settings.backupMaxCopies;
   for (int i=0; i<totalDelete; i++) {
     String toDelete=backupPath+String(DIR_SEPARATOR_STR)+listOfFiles[i];
     deleteFile(toDelete.c_str());
@@ -6725,7 +6751,7 @@ bool FurnaceGUI::loop() {
     layoutTimeEnd=SDL_GetPerformanceCounter();
 
     // backup trigger
-    if (modified) {
+    if (modified && settings.backupEnable) {
       if (backupTimer>0) {
         backupTimer=(backupTimer-ImGui::GetIO().DeltaTime);
         if (backupTimer<=0) {
@@ -6735,14 +6761,14 @@ bool FurnaceGUI::loop() {
             logV("curFileName: %s",curFileName);
             if (curFileName.find(backupPath)==0) {
               logD("backup file open. not saving backup.");
-              backupTimer=30.0;
+              backupTimer=settings.backupInterval;
               backupLock.unlock();
               return true;
             }
             if (!dirExists(backupPath.c_str())) {
               if (!makeDir(backupPath.c_str())) {
                 logW("could not create backup directory!");
-                backupTimer=30.0;
+                backupTimer=settings.backupInterval;
                 backupLock.unlock();
                 return false;
               }
@@ -6811,7 +6837,7 @@ bool FurnaceGUI::loop() {
               delFirstBackup(backupBaseName);
             }
             logD("backup saved.");
-            backupTimer=30.0;
+            backupTimer=settings.backupInterval;
             backupLock.unlock();
             return true;
           });
@@ -6942,7 +6968,9 @@ bool FurnaceGUI::loop() {
 
     wheelX=0;
     wheelY=0;
-    wantScrollList=false;
+    wantScrollListIns=false;
+    wantScrollListWave=false;
+    wantScrollListSample=false;
 
     pressedPoints.clear();
     releasedPoints.clear();
@@ -7024,6 +7052,14 @@ bool FurnaceGUI::init() {
 
   syncState();
   syncSettings();
+
+  recentFile.clear();
+  for (int i=0; i<settings.maxRecentFile; i++) {
+    String r=e->getConfString(fmt::sprintf("recentFile%d",i),"");
+    if (!r.empty()) {
+      recentFile.push_back(r);
+    }
+  }
 
   if (!settings.persistFadeOut) {
     audioExportOptions.loops=settings.exportLoops;
@@ -7182,7 +7218,7 @@ bool FurnaceGUI::init() {
   if (sdlWin==NULL) {
     const char* sdlErr=SDL_GetError();
     lastError=fmt::sprintf("could not open window! %s",sdlErr);
-    if (settings.renderBackend!="Software" && strcmp(sdlErr,"No matching GL pixel format available")==0) {
+    if (settings.renderBackend!="Software" && strstr(sdlErr,"matching")!=NULL) {
       settings.renderBackend="Software";
       e->setConf("renderBackend","Software");
       e->saveConf();
@@ -7432,6 +7468,29 @@ bool FurnaceGUI::init() {
   cpuCores=SDL_GetCPUCount();
   if (cpuCores<1) cpuCores=1;
 
+  time_t thisMakesNoSense=time(NULL);
+  struct tm curTime;
+#ifdef _WIN32
+  struct tm* tempTM=localtime(&thisMakesNoSense);
+  if (tempTM==NULL) {
+    memset(&curTime,0,sizeof(struct tm));
+  } else {
+    memcpy(&curTime,tempTM,sizeof(struct tm));
+    purgeYear=1900+curTime.tm_year-1;
+    purgeMonth=curTime.tm_mon+1;
+    purgeDay=curTime.tm_mday;
+  }
+#else
+  if (localtime_r(&thisMakesNoSense,&curTime)==NULL) {
+    memset(&curTime,0,sizeof(struct tm));
+  } else {
+    purgeYear=1900+curTime.tm_year-1;
+    purgeMonth=curTime.tm_mon+1;
+    purgeDay=curTime.tm_mday;
+  }
+#endif
+
+
   logI("done!");
   return true;
 }
@@ -7585,14 +7644,6 @@ void FurnaceGUI::syncState() {
   xyOscDecayTime=e->getConfFloat("xyOscDecayTime",10.0f);
   xyOscIntensity=e->getConfFloat("xyOscIntensity",2.0f);
   xyOscThickness=e->getConfFloat("xyOscThickness",2.0f);
-
-  recentFile.clear();
-  for (int i=0; i<settings.maxRecentFile; i++) {
-    String r=e->getConfString(fmt::sprintf("recentFile%d",i),"");
-    if (!r.empty()) {
-      recentFile.push_back(r);
-    }
-  }
 }
 
 void FurnaceGUI::commitState(DivConfig& conf) {
@@ -7846,9 +7897,11 @@ FurnaceGUI::FurnaceGUI():
   preserveChanPos(false),
   sysDupCloneChannels(true),
   sysDupEnd(false),
-  wantScrollList(false),
   noteInputPoly(true),
   notifyWaveChange(false),
+  wantScrollListIns(false),
+  wantScrollListWave(false),
+  wantScrollListSample(false),
   displayPendingIns(false),
   pendingInsSingle(false),
   displayPendingRawSample(false),
@@ -7923,7 +7976,9 @@ FurnaceGUI::FurnaceGUI():
   aboutScroll(0),
   aboutSin(0),
   aboutHue(0.0f),
-  backupTimer(15.0),
+  backupTimer(0.0),
+  totalBackupSize(0),
+  refreshBackups(true),
   learning(-1),
   mainFont(NULL),
   iconFont(NULL),
@@ -7969,6 +8024,9 @@ FurnaceGUI::FurnaceGUI():
   curPaletteChoice(0),
   curPaletteType(0),
   soloTimeout(0.0f),
+  purgeYear(2021),
+  purgeMonth(4),
+  purgeDay(4),
   patExtraButtons(false),
   patChannelNames(false),
   patChannelPairs(true),
