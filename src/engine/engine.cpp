@@ -1014,6 +1014,7 @@ void DivEngine::delUnusedSamples() {
         i->type==DIV_INS_K053260 ||
         i->type==DIV_INS_C140 ||
         i->type==DIV_INS_C219 ||
+        (i->type==DIV_INS_ES5503 && i->amiga.useSample) ||
         i->type==DIV_INS_NDS ||
         i->type==DIV_INS_GBA_DMA ||
         i->type==DIV_INS_GBA_MINMOD) {
