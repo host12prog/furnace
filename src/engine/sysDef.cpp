@@ -2248,6 +2248,19 @@ void DivEngine::registerSystems() {
     }
   );
 
+  sysDefs[DIV_SYSTEM_T85APU]=new DivSysDef(
+    "ATTiny85APU", NULL, 0xf4, 0, 6, false, true, 0, false, 0, 0, 0,
+    "a fantasy sound chip by AlexMush. it is actually a software synth for ATTiny series MCUs written entirely in AVR Assembly.##sesd",
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Noise##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "NOI##sesd"},
+    {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
+    {DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU},
+    {},
+    {
+      //effects
+    }
+  );
+
   sysDefs[DIV_SYSTEM_DUMMY]=new DivSysDef(
     "Dummy System##sesd", NULL, 0xfd, 0, 8, false, true, 0, false, 0, 0, 0,
     "this is a system designed for testing purposes.##sesd",

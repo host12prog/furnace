@@ -655,6 +655,8 @@ src/engine/platform/sound/nds.cpp
 
 src/engine/platform/sound/fzt.c
 
+src/engine/platform/sound/attiny85apu/t85apu.c
+
 src/engine/platform/oplAInterface.cpp
 src/engine/platform/ym2608Interface.cpp
 src/engine/platform/ym2610Interface.cpp
@@ -764,6 +766,7 @@ src/engine/platform/gbaminmod.cpp
 src/engine/platform/nds.cpp
 src/engine/platform/fzt.cpp
 src/engine/platform/bifurcator.cpp
+src/engine/platform/t85apu.cpp
 src/engine/platform/pcmdac.cpp
 src/engine/platform/dummy.cpp
 
@@ -986,6 +989,7 @@ src/gui/inst/sid2.cpp
 src/gui/inst/nds.cpp
 src/gui/inst/fzt.cpp
 src/gui/inst/bifurcator.cpp
+src/gui/inst/t85apu.cpp
 
 src/gui/inst/wavetable.cpp
 

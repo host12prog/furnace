@@ -2487,6 +2487,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       break;
     }
     case DIV_SYSTEM_FZT:
+    case DIV_SYSTEM_T85APU:
       supportsCustomRate=true;
       break;
     default: {

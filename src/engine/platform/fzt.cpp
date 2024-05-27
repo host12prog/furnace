@@ -1290,7 +1290,7 @@ void DivPlatformFZT::muteChannel(int ch, bool mute) {
 }
 
 void DivPlatformFZT::forceIns() {
-  for (int i=0; i<3; i++) {
+  for (int i=0; i<FZT_NUM_CHANNELS; i++) {
     chan[i].insChanged=true;
     if (chan[i].active) {
       chan[i].keyOn=true;
@@ -1308,7 +1308,7 @@ void DivPlatformFZT::notifyInsChange(int ins) {
 }
 
 void DivPlatformFZT::notifyInsDeletion(void* ins) {
-  for (int i=0; i<3; i++) {
+  for (int i=0; i<FZT_NUM_CHANNELS; i++) {
     chan[i].std.notifyInsDeletion((DivInstrument*)ins);
   }
 }

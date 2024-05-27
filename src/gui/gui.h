@@ -352,6 +352,7 @@ enum FurnaceGUIColors {
   GUI_COLOR_INSTR_NDS,
   GUI_COLOR_INSTR_FZT,
   GUI_COLOR_INSTR_BIFURCATOR,
+  GUI_COLOR_INSTR_AT85APU,
   GUI_COLOR_INSTR_UNKNOWN,
 
   GUI_COLOR_CHANNEL_BG,
@@ -2867,6 +2868,7 @@ class FurnaceGUI {
   void drawInsNDS(DivInstrument* ins);
   void drawInsFZT(DivInstrument* ins);
   void drawInsBIFURCATOR(DivInstrument* ins);
+  void drawInsT85APU(DivInstrument* ins);
 
   void insTabWave(DivInstrument* ins);
 

@@ -38,7 +38,7 @@ void FurnaceGUI::drawInsGBAMINMOD(DivInstrument* ins)
 
   if (ImGui::BeginTabItem(_L("Macros##sgiGBAMINMOD"))) 
   {
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiGBAMINMOD"),ins,DIV_MACRO_VOL,0xff,0,160,255,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiGBAMINMOD"),ins,DIV_MACRO_VOL,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiGBAMINMOD"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiGBAMINMOD"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiGBAMINMOD"), ins, DIV_MACRO_WAVE, 0xff, 0, WAVE_MACRO_MAX, 160, uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,false,NULL,true));

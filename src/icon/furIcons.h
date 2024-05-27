@@ -79,6 +79,8 @@
 #define ICON_FUR_INS_SID2 u8"\ue13f"
 #define ICON_FUR_INS_NDS u8"\ue140"
 #define ICON_FUR_INS_FZT u8"\ue141"
+#define ICON_FUR_INS_BIFURCATOR u8"\ue142"
+#define ICON_FUR_INS_AT85APU u8"\ue143"
 
 // sample editor
 #define ICON_FUR_SAMPLE_APPLY_SILENCE u8"\ue200"
