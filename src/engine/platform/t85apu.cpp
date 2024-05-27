@@ -77,7 +77,10 @@ void DivPlatformT85APU::acquire(short** buf, size_t len)
       writes.pop();
     }
 
-    t85APU_tick(t85_synth);
+    for(int i = 0; i < chipClock / rate; i++)
+    {
+      t85APU_tick(t85_synth);
+    }
 
     for (int j=0; j<T85APU_NUM_CHANS - 1; j++) 
     {
@@ -112,6 +115,7 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       chan[c.chan].macroInit(ins);
 
       rWrite(0, 0xff);
+      rWrite(0x06, 0x1);
       rWrite(0x09, 0x80);
       rWrite(0x10, 0x80);
       rWrite(0x15, 0xf);

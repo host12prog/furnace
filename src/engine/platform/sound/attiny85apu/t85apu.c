@@ -414,10 +414,10 @@ void t85APU_cycle (t85APU * apu) {
 void t85APU_tick (t85APU * apu) {
 	if (!apu) return;
 
-	//if (!apu->clockCycle) {
+	if (!apu->clockCycle) {
 		t85APU_cycle(apu);
 		apu->outPending = 1;
-	//}
+	}
 	if (apu->outPending && apu->clockCycle >= (apu->outputDelay & 511)) {
 		apu->outPending = 0;
 		apu->outputQueue[0] = apu->outputQueue[1];
