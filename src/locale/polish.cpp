@@ -2745,7 +2745,7 @@ void DivLocale::addTranslationsPolish()
     strings["Load instrument name from .fui##sgse"].plurals[0] = "Wczytaj nazwę instrumentu z pliku .fui";
     strings["when enabled, loading an instrument will use the stored name (if present).\notherwise, it will use the file name.##sgse"].plurals[0] = "gdy opcja ta jest włączona, nazwa instrumentu zostanie wczytana z pliku (jeśli w pliku znajduje się nazwa).\nw przeciwnym razie użyta zostanie nazwa pliku.";
     strings["Auto-fill file name when saving##sggu"].plurals[0] = "Autouzupełnianie nazwy pliku podczas zapisywania";
-    strings["fill the file name field with an appropriate file name when saving or exporting.##sggu"].plurals[0] = "uzpełnia pole nazwy pliku z odpowiednią nazwą podczas zapisu lub eksportu."
+    strings["fill the file name field with an appropriate file name when saving or exporting.##sggu"].plurals[0] = "uzpełnia pole nazwy pliku z odpowiednią nazwą podczas zapisu lub eksportu.";
     strings["New Song##sgse"].plurals[0] = "Nowa piosenka";
 	strings["Initial system:##sgse"].plurals[0] = "System domyślny:";
     strings["Current system##sgse"].plurals[0] = "Bieżący";
