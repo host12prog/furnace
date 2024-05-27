@@ -56,6 +56,7 @@ void DivLocale::addTranslationsPolish()
     strings["-- documentation --##sgab"].plurals[0] = "-- dokumentacja --";
     strings["-- demo songs --##sgab"].plurals[0] = "-- utwory demonstracyjne --";
     strings["-- additional feedback/fixes --##sgab"].plurals[0] = "-- dodatkowe opinie/poprawki --";
+	strings["-- Metal backend test team --##sgab"].plurals[0] = "-- Zespół testujący bibliotekę renderowania Metal --";
     strings["-- translations and related work --##sgab"].plurals[0] = "-- tłumaczenia --";
     strings["LTVA1 (Russian translation)##sgab"].plurals[0] = "LTVA1 (tłumaczenie na język rosyjski)";
     strings["Kagamiin~ (Portuguese translation)##sgab"].plurals[0] = "Kagamiin~ (tłumaczenie na język portugalski)";
@@ -119,6 +120,7 @@ void DivLocale::addTranslationsPolish()
     strings["SID2 emulator (modification of reSID) by LTVA##sgab"].plurals[0] = "emulator SID2 (modyfikacja reSID) autorstwa LTVA";
     strings["5E01 emulator (modification of NSFPlay) by Euly##sgab"].plurals[0] = "emulator 5E01 (modyfikacja NSFPlay) autorstwa Euly";
     strings["NDS sound emulator by cam900##sgab"].plurals[0] = "NDS sound emulator autorstwa cam900";
+	strings["FZT sound source by LTVA##sgab"].plurals[0] = "Źródło dźwięku FZT autorstwa LTVA";
 
     strings["greetings to:##sgab"].plurals[0] = "z pozdrowieniami dla:";
     strings["NEOART Costa Rica##sgab"].plurals[0] = "NEOART Costa Rica";
@@ -265,7 +267,9 @@ void DivLocale::addTranslationsPolish()
     strings["when enabled, duty macro will always reset phase, even if its value hasn't changed.##sgcf"].plurals[0] = "jeśli ta flaga jest włączona, makro szumu zawsze zresetuje fazę, nawet jeśli wartość makra szumu nie ulegnie zmianie.";
     strings["Don't persist volume macro after it finishes##sgcf"].plurals[0] = "Nie podtrzymuj wartości makra głośności po jego zakończeniu";
     strings["when enabled, a value in the volume column that happens after the volume macro is done will disregard the macro.##sgcf"].plurals[0] = "gdy ta flaga jest włączona, wartość w kolumnie głośności wysatępująca po zakończeniu makra głośności nie będzie uwzględniać wartości makra.";
-    strings[".mod import##sgcf"].plurals[0] = "import .mod";
+    strings["Old sample offset effect##sgcf"].plurals[0] = "Stary efekt  przesunięcia sampla";
+    strings["behavior changed in 0.6.3##sgcf"].plurals[0] = "zachowanie zostało zmienione w wersji 0.6.3";
+	strings[".mod import##sgcf"].plurals[0] = "import .mod";
     strings["Don't slide on the first tick of a row##sgcf"].plurals[0] = "Nie wykonuj płynnej zmiany wysokości w pierwszym kroku silnika danego wiersza.";
     strings["simulates ProTracker's behavior of not applying volume/pitch slides on the first tick of a row.##sgcf"].plurals[0] = "symuluje zachowanie ProTrackera, który nie wykonuje zmian głośności i wysokości w pierwszym kroku kolumny.";
     strings["Reset arpeggio position on row change##sgcf"].plurals[0] = "Zresetuj pozycję arpeggio przy zmianie wiersza wzorca.";
@@ -309,7 +313,7 @@ void DivLocale::addTranslationsPolish()
     strings["when enabled, volume macros round up when applied\nthis prevents volume scaling from causing vol=0, which is silent on some chips\n\nineffective on logarithmic channels##sgcf"].plurals[0] = "gdy ta flaga jest włączona, wartości makra głośności są zaokrąglane w górę\nzapobiega to sytuacji gdy vol=0 podczas skalowania, która powoduje wyciszenie na niektórych układach.\n\nnie działa na układach z logarytmiczną regulacją głośności";
     strings["Stop NES pulse channels hardware sweep on new note##sgcf"].plurals[0] = "Zatrzymaj sprzętowe portamento na kanałach fal prostokątnych NESa przy nowej nucie";
     strings["Do not stop volume slide after reaching zero or full volume##sgcf"].plurals[0] = "Nie zatrzymuj efektu płynnej zmiany głośności po osiągnięciu zerowej lub pełnej głośności";
-strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekty E1xy/E2xy przy nowej nucie";
+	strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekty E1xy/E2xy przy nowej nucie";
     strings["Slower 0Axy volume slide##sgcf"].plurals[0] = "Wolniejsza płynna zmiana głośności 0Axy";
 
 //   sgcs  src/gui/csPlayer.cpp
@@ -478,6 +482,8 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Export Command Stream##sggu1"].plurals[0] = "Eksportuj strumień komend";
     strings["text file##sggu1"].plurals[0] = "plik tekstowy";
     strings["Export Command Stream##sggu2"].plurals[0] = "Eksportuj strumień komend";
+	strings["Export FZT module##sggu"].plurals[0] = "Eksportuj moduł FZT";
+    strings["FZT module##sggu"].plurals[0] = "Moduł FZT";
     strings["binary file##sggu"].plurals[0] = "plik binarny";
     strings["Export Furnace song##sggu"].plurals[0] = "Eksportuj utwór Furnace";
     strings["Furnace song##sggu2"].plurals[0] = "Utwór Furnace";
@@ -494,12 +500,20 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["configuration files##sggu1"].plurals[0] = "pliki konfiguracji";
     strings["Select Layout File##sggu"].plurals[0] = "Wybierz plik z ustawieniami układu okna";
     strings[".ini files##sggu0"].plurals[0] = "pliki .ini";
+	strings["Select User Presets File##sggu"].plurals[0] = "Wybierz plik z presetami użytkownika";
+    strings["configuration files##sggu4"].plurals[0] = "pliki konfiguracji";
+    strings["Select Settings File##sggu"].plurals[0] = "Wybierz plik ustawień";
+    strings["configuration files##sggu5"].plurals[0] = "pliki konfiguracji";
     strings["Export Colors##sggu"].plurals[0] = "eksportuj ustawienia kolorów";
     strings["configuration files##sggu2"].plurals[0] = "pliki konfiguracji";
     strings["Export Keybinds##sggu"].plurals[0] = "Eksportuj przypisania klawiszy";
     strings["configuration files##sggu3"].plurals[0] = "pliki konfiguracji";
     strings["Export Layout##sggu"].plurals[0] = "Eksportuj uklad okna";
     strings[".ini files##sggu1"].plurals[0] = "pliki .ini";
+	strings["Export User Presets##sggu"].plurals[0] = "Eksportuj presety użytkownika";
+    strings["configuration files##sggu6"].plurals[0] = "pliki konfiguracji";
+    strings["Export Settings##sggu"].plurals[0] = "Eksportuj ustawienia";
+    strings["configuration files##sggu7"].plurals[0] = "pliki konfiguracji";
     strings["Load ROM##sggu"].plurals[0] = "Wczytaj ROM";
     strings["compatible files##sggu7"].plurals[0] = "kompatybilne pliki";
     strings["all files##sggu6"].plurals[0] = "wszystkie pliki";
@@ -586,6 +600,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["collapse song##sggu"].plurals[0] = "skróć utwór";
     strings["expand song##sggu"].plurals[0] = "rozszerz utwór";
     strings["find/replace##sggu"].plurals[0] = "znajdź/zamień";
+	strings["clone pattern##sggu"].plurals[0] = "klonuj wzorzec";
     strings["Furnace has been started in Safe Mode.\nthis means that:\n\n- software rendering is being used\n- audio output may not work\n- font loading is disabled\n\ncheck any settings which may have made Furnace start up in this mode.\nfont loading is one of these.##sggu"].plurals[0] = "Furnace został uruchomiony w trybie awaryjnym.\noznacza to, że:\n\n- używane jest renderowanie programowe\n- wyjście dźwięku może nie działać\n- wczytywanie czcionek jest wyłączone\n\nnależy sprawdzić, jakie ustawienia mogły spowodować, że program działa w tym trybie.\nczytanie czcionki mogło być jednym z nich.";
     strings["Unsaved changes! Save changes before opening file?##sggu0"].plurals[0] = "Niezapisano zmiany! Zapisać je przed wczytaniem pliku?";
     strings["Unsaved changes! Save changes before opening file?##sggu2"].plurals[0] = "=Unsaved changes! Save changes before opening file?";
@@ -614,6 +629,8 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["export Amiga validation data...##sggu0"].plurals[0] = "eksportuj plik kontrolny dla Amigi...";
     strings["export text...##sggu0"].plurals[0] = "eksportuj tekst...";
     strings["export command stream...##sggu0"].plurals[0] = "eksportuj strumień komend...";
+	strings["export FZT module...##sggu"].plurals[0] = "eksportuj moduł FZT...";
+    strings["export FZT module...##sggu1"].plurals[0] = "eksportuj moduł FZT...";
     strings["export Furnace module...##sggu"].plurals[0] = "eksportuj moduł Furnace...";
     strings["export audio...##sggu1"].plurals[0] = "eksportuj audio...";
     strings["export VGM...##sggu1"].plurals[0] = "eksportuj VGM...";
@@ -651,6 +668,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["reset layout##sggu"].plurals[0] = "resetuj układ okna";
     strings["Are you sure you want to reset the workspace layout?##sggu"].plurals[0] = "Czy jesteś pewien że chcesz zresetować układ okna?";
     strings["switch to mobile view##sggu"].plurals[0] = "przełącz na tryb mobilny";
+	strings["user systems...##sggu"].plurals[0] = "systemy użytkownika...";
     strings["settings...##sggu"].plurals[0] = "ustawienia...";
     strings["Window##menubar"].plurals[0] = "Okno##menubar";
     strings["window##menubar"].plurals[0] = "okno##menubar";
@@ -745,6 +763,9 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["cannot load wavetable! (##sggu"].plurals[0] = "nie mozna wczytać tablicy fal! (";
     strings["...but you haven't selected a wavetable!##sggu"].plurals[0] = "...ale nie wybrano tablicy!";
     strings["could not open file!##sggu"].plurals[0] = "nie udało się otworzyć pliku!";
+	strings["could not write FZT module!##sggu"].plurals[0] = "nie udało się zapisać modułu FZT!";
+    strings["could not import user presets!##sggu"].plurals[0] = "nie udało się importować presetów użytkownika!";
+    strings["could not import user presets! (%s)##sggu"].plurals[0] = "nie udało się importować presetów użytkownika! (%s)";
     strings["Could not write ZSM! (%s)##sggu"].plurals[0] = "nie udało się zapisać pliku ZSM! (%s)";
     strings["could not write text! (%s)##sggu"].plurals[0] = "nie udało się zapisać pliku tekstowego! (%s)";
     strings["could not write command stream! (%s)##sggu"].plurals[0] = "nie udało się zapisać strumienia komend! (%s)";
@@ -814,6 +835,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Select Instrument###Select Instrument"].plurals[0] = "Wybierz instrument###Select Instrument";
     strings["this is an instrument bank! select which one to use:##sggu"].plurals[0] = "to jest bank brzmień! wybierz instrument który checsz użyć:";
     strings["this is an instrument bank! select which ones to load:##sggu"].plurals[0] = "to jest bank brzmień! wybierz instrument który checsz wczytać";
+	strings["Search...##sggu"].plurals[0] = "Szukaj...";
     strings["All##sggu"].plurals[0] = "Wszystkie";
     strings["None##sggu"].plurals[0] = "Żadne";
     strings["OK##sggu2"].plurals[0] = "Ok";
@@ -835,11 +857,15 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Cancel##sggu3"].plurals[0] = "Anuluj";
     strings["Error! No string provided!##sggu"].plurals[0] = "Błąd! Nie podano ciągu znaków!";
     strings["OK##sggu4"].plurals[0] = "Ok";
+	strings["%.0fµs##sggu"].plurals[0] = "%.0f µs";
     strings["error while loading fonts! please check your settings.##sggu1"].plurals[0] = "błąd podczas wczytywania czcionek! Sprawdź swoje ustawienia.";
     strings["it appears I couldn't load these fonts. any setting you can check?##sggu"].plurals[0] = "wygląda na to że nie mogę wczytać tych czcionek. czy możesz sprawdzić ustawienia?";
-    strings["could not init renderer! %s##sggu"].plurals[0] = "N=nie udało się zainicjować silnika renderującego! %s";
-    strings["\r\nthe render driver has been set to a safe value. please restart Furnace.##sggu"].plurals[0] = "\r\nsilnik renderujący został zresetowany do bezpiecznego stanu. uruchom ponownie Furnace.";
-    strings["could not open window! %s##sggu"].plurals[0] = "nie udało się otworzyć okna! %s";
+	strings["could not init renderer!\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "nie udało się uruchomić silnika renderowania!\r\nprzechodzę na renderowanie programowe. proszę uruchomić Furnace ponownie.";
+    strings["could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "nie udało się uruchomić silnika renderowania! %s\r\nprzechodzę na renderowanie programowe. proszę uruchomić Furnace ponownie.";
+    strings["\r\nfalling back to software renderer. please restart Furnace.##sggu"].plurals[0] = "\r\nprzechodzę na renderowanie programowe. proszę uruchomić Furnace ponownie.";
+    strings["could not init renderer! %s##sggu"].plurals[0] = "nie udało się uruchomić silnika renderowania %s";
+    strings["\r\nthe render driver has been set to a safe value. please restart Furnace.##sggu"].plurals[0] = "\r\nsilnik renderowania został zresetowany do stanu bezpiecznego. proszę uruchomić Furnace ponownie.";
+    
     strings["error while loading fonts! please check your settings.##sggu2"].plurals[0] = "błąd podczas wczytywania czcionek! proszę sprawdzić swoje ustawienia.";
     strings["could NOT save layout! %s##sggu"].plurals[0] = "nie udało się zapisać układu okna! %s";
 
@@ -948,8 +974,9 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Grooves##sggc"].plurals[0] = "Wzory rytmów";
     strings["Oscilloscope (X-Y)##sggc"].plurals[0] = "Oscyloskop (X-Y)";
     strings["Memory Composition##sggc"].plurals[0] = "Zawartość pamięci";
-
-    strings["Collapse/expand current window##sggc"].plurals[0] = "Maksymalizuj/minimalizuj obecne okno";
+	strings["Command Stream Player##sggc"].plurals[0] = "Odtwarzacz strumienia komend";
+	strings["User Presets##sggc"].plurals[0] = "Presety użytkownika";
+	strings["Collapse/expand current window##sggc"].plurals[0] = "Maksymalizuj/minimalizuj obecne okno";
     strings["Close current window##sggc"].plurals[0] = "Zamknij obecne okno";
 
     strings["---Pattern##sggc"].plurals[0] = "---Pattern";
@@ -993,6 +1020,10 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Expand selection to end of pattern##sggc"].plurals[0] = "Rozszerz zaznaczenie do końca wzorca";
     strings["Expand selection upwards (coarse)##sggc"].plurals[0] = "Rozszerz zaznaczenie w górę (z grubsza)";
     strings["Expand selection downwards (coarse)##sggc"].plurals[0] = "Rozszerz zaznaczenie w dół (z grubsza)";
+	strings["Move selection up##sggc"].plurals[0] = "Przesuń zaznaczenie w górę";
+    strings["Move selection down##sggc"].plurals[0] = "Przesuń zaznaczenie w dół";
+    strings["Move selection to previous channel##sggc"].plurals[0] = "Przenieś zaznaczenie na poprzedni kanał";
+    strings["Move selection to next channel##sggc"].plurals[0] = "Przenieś zaznaczenie na następny kanał";
     strings["Delete##sggc"].plurals[0] = "Usuń";
     strings["Pull delete##sggc"].plurals[0] = "Usuń z zaciągnięciem następujących rzędów";
     strings["Insert##sggc"].plurals[0] = "Wstaw z wierszami przesuniętymi w dół";
@@ -1017,6 +1048,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Set note input latch##sggc"].plurals[0] = "Ustaw bufor wejściowy nut";
     strings["Change mobile scroll mode##sggc"].plurals[0] = "Przełącz na mobilny tryb przewijania";
     strings["Clear note input latch##sggc"].plurals[0] = "Wyczyść bufor wejściowy nut";
+	strings["Clone pattern##sggc"].plurals[0] = "Klonuj wzorzec";
 
     strings["---Instrument list##sggc"].plurals[0] = "---Instrument list";
     strings["Add instrument##sggc0"].plurals[0] = "Dodaj";
@@ -1202,6 +1234,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Done! Baked %d files.##sgec"].plurals[2] = "Gotowe! Wstawiono %d plików.";
     strings["Play/Edit Controls###Play/Edit Controls"].plurals[0] = "Sterowanie odtw./edycją###Play/Edit Controls";
     strings["Octave##sgec0"].plurals[0] = "Oktawa";
+	strings["Coarse Step##sgec0"].plurals[0] = "Większy krok edycji";
     strings["Edit Step##sgec0"].plurals[0] = "Krok edycji";
     strings["Play##sgec0"].plurals[0] = "Odtwarzaj";
     strings["Stop##sgec0"].plurals[0] = "Stop";
@@ -1220,6 +1253,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Step one row##sgec1"].plurals[0] = "Zrób jeden krok we wzorcu";
     strings["Repeat pattern##sgec1"].plurals[0] = "Zapętl wzorzec";
     strings["Edit##sgec1"].plurals[0] = "Tryb edycji";
+	strings["Coarse Step##sgec1"].plurals[0] = "Większy krok edycji";
     strings["Metronome##sgec1"].plurals[0] = "Metronom";
     strings["Octave##sgec1"].plurals[0] = "Oktawa";
     strings["Edit Step##sgec1"].plurals[0] = "Krok edycji";
@@ -1237,6 +1271,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Metronome##sgec2"].plurals[0] = "Metronom";
     strings["Oct.##sgec"].plurals[0] = "Okt.";
     strings["Octave##sgec2"].plurals[0] = "Oktawa";
+	strings["Coarse##sgec0"].plurals[0] = "Większy krok";
     strings["Step##sgec0"].plurals[0] = "Krok";
     strings["Foll.##sgec"].plurals[0] = "Pod.";
     strings["Follow##sgec2"].plurals[0] = "Podążaj";
@@ -1261,6 +1296,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Polyphony##sgec3"].plurals[0] = "Polifonia podglądu";
     strings["Edit Controls###Edit Controls"].plurals[0] = "Sterowanie edytowaniem###Edit Controls";
     strings["Octave##sgec3"].plurals[0] = "Oktawa";
+	strings["Coarse##sgec1"].plurals[0] = "Większy krok";
     strings["Step##sgec1"].plurals[0] = "Krok";
     strings["Follow orders##sgec"].plurals[0] = "Podążaj za matrycą wzorców";
     strings["Follow pattern##sgec"].plurals[0] = "Podążaj za wzorcem";
@@ -1283,10 +1319,16 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["ERROR##sgef"].plurals[0] = "BŁĄD";
 
     //   sgeo  src/gui/exportOptions.cpp
-
+	
+    strings["Export type:##sgeo"].plurals[0] = "Typ eksportu:";
     strings["one file##sgeo"].plurals[0] = "jeden plik";
     strings["multiple files (one per chip)##sgeo"].plurals[0] = "wiele plików (po jednym na układ)";
     strings["multiple files (one per channel)##sgeo"].plurals[0] = "wiele plików (po jednym na kanał)";
+	strings["Bit depth:##sgeo"].plurals[0] = "Rozdzielczość:";
+    strings["16-bit integer##sgeo"].plurals[0] = "16-bitowa liczba całkowita";
+    strings["32-bit float##sgeo"].plurals[0] = "32-bitowa liczba zmiennoprzecinkowa";
+    strings["Sample rate##sgeo"].plurals[0] = "Częstotliwość samplowania";
+	strings["Channels in file##sgeo"].plurals[0] = "Kanały audio w pliku";
     strings["Loops##sgeo"].plurals[0] = "Ilość powtórzeń";
     strings["Fade out (seconds)##sgeo"].plurals[0] = "Zanikanie (w sekundach)";
     strings["Cancel##sgeo0"].plurals[0] = "Anuluj";
@@ -1369,6 +1411,15 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
             "używać tylko do celów technicznych/programowania!";
     strings["Cancel##sgeo8"].plurals[0] = "Anuluj";
     strings["Export##sgeo"].plurals[0] = "Eksportuj";
+	    strings["this option exports a Flizzer Tracker module which\n"
+    "is meant to be played back on Flipper Zero with\n"
+    "Flizzer Tracker app installed."].plurals[0] = 
+
+            "ta opcja eksportuje moduł Flizzer Trackera,\n"
+            "który może zostać odtworzony na Flizzerze Zero z zainstalowanym\n"
+            "programem Flizzer Tracker.";
+    strings["Cancel##sgeo9"].plurals[0] = "Anuluj";
+    strings["Export##sgeo9"].plurals[0] = "Eksportuj";
     strings["this option exports a module which is\n"
             "compatible with tildearrow Furnace app.\n\n"
 
@@ -1891,6 +1942,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Modern/fantasy##sgpr"].plurals[0] = "Nowoczene/nieistniejace";
     strings["chips/systems which do not exist in reality or were made just several years ago.##sgpr"].plurals[0] = "Uklady/systemy, które nie wystepuja w fizycznej postaci lub zostały wyprodukowane zaledwie kilka lat temu.";
     strings["Commander X16 (VERA only)##sgpr1"].plurals[0] = "Commander X16 (tylko VERA)";
+	strings["Flizzer Tracker (FZT) sound source##sgpr"].plurals[0] = "Źródło dźwięku Flizzer Tracker (FZT)";
     strings["DefleMask-compatible##sgpr"].plurals[0] = "Zgodne z DefleMaskiem";
     strings["these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"].plurals[0] = "Te presety są kompatybilne z DefleMask. Wybierz je, jeśli chcesz wyeksportować moduł do .dmf lub pracować z tym programem.";
     strings["Sega Genesis (extended channel 3)##sgpr1"].plurals[0] = "Sega Mega Drive z rozszerzeniem kanału 3";
@@ -1898,6 +1950,31 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Famicom with Konami VRC7##sgpr1"].plurals[0] = "Famicom z Konami VRC7";
     strings["Arcade (YM2151 and SegaPCM)##sgpr1"].plurals[0] = "Arcade (YM2151 i SegaPCM)";
     strings["Neo Geo CD (extended channel 2)##sgpr1"].plurals[0] = "Neo Geo CD  z rozszerzonym kanałem 2";
+	
+	strings["User Systems##sgpr"].plurals[0] = "Systemy uźytkownika";
+    strings["Error! User category does not exist!##sgpr"].plurals[0] = "Błąd Kategoria użytkownika nie istnieje!";
+    strings["Systems##sgpr"].plurals[0] = "Systemy";
+    strings["New Preset##sgpr"].plurals[0] = "Nowy preset";
+    strings["select a preset##sgpr"].plurals[0] = "wybierz preset";
+    strings["Name##sgpr"].plurals[0] = "Nazwa";
+    strings["Remove##UPresetRemove"].plurals[0] = "Usuń##UPresetRemove";
+    strings["Invert##sgpr"].plurals[0] = "Odwr.";
+    strings["Volume##sgpr"].plurals[0] = "Głośność";
+    strings["Panning##sgpr"].plurals[0] = "Panning";
+    strings["Front/Rear##sgpr"].plurals[0] = "Przód/tył";
+    strings["Configure##sgpr"].plurals[0] = "Konfiguruj";
+    strings["Advanced##sgpr"].plurals[0] = "Zaawansowane";
+    strings["insert additional settings in `option=value` format.\n"
+            "available options:\n"
+            "- tickRate##sgpr"].plurals[0] = 
+            
+            "ustaw dodatkowe parametry w formacie opcja=wartość`.\n"
+            "dostepne opcje:\n"
+            "- tickRate (częstotliwość silnika trackera)";
+    strings["Save and Close##sgpr"].plurals[0] = "Zapisz i zamknij";
+    strings["Import##sgpr"].plurals[0] = "Importuj";
+    strings["Import (replace)##sgpr"].plurals[0] = "Importuj i zamień";
+    strings["Export##sgpr"].plurals[0] = "Eksportuj";
 
     //   sgrv  src/gui/regView.cpp
 
@@ -1929,6 +2006,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["SNES: sample length will be padded to multiple of 16##sgsed"].plurals[0] = "SNES: długość sampla zostanie dostosowana do wielokrotności 16";
     strings["QSound: loop cannot be longer than 32767 samples##sgsed"].plurals[0] = "QSound: pętla nie może być dłuższa niż 32767 sampli";
     strings["QSound: maximum sample length is 65535##sgsed"].plurals[0] = "QSound: maksymalna długość sampla: 65535";
+	strings["NES: loop start must be a multiple of 512 (try with %d)##sgsed"].plurals[0] = "NES: początek pętli musi być wielokrotnością 512 (spróbuj %d)";
     strings["NES: loop point ignored on DPCM (may only loop entire sample)##sgsed"].plurals[0] = "NES: punkt pętli jest ignorowany dla sampli DPCM (tylko cały sampel może być zapętlony)";
     strings["NES: maximum DPCM sample length is 32648##sgsed"].plurals[0] = "NES: maksymalna długość sampla DPCM wynosi 32648";
     strings["X1-010: samples can't loop##sgsed"].plurals[0] = "X1-010: zapętlanie sampli niewspierane";
@@ -1973,7 +2051,8 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["enable this option to slightly boost high frequencies\nto compensate for the SNES' Gaussian filter's muffle.##sgsed"].plurals[0] = "włącz tę opcję, aby lekko podbić wysokie częstotliwości.\naby skompensować filtrowanie interpolacji gaussowskiej, które powoduje, że sampel jest stłumiony.";
     strings["8-bit dither##sgsed"].plurals[0] = "8-bitowy dithering";
     strings["dither the sample when used on a chip that only supports 8-bit samples.##sgsed"].plurals[0] = "dithering sampla, gdy jest on używany na układzie obsługującym tylko 8-bitowe sample.";
-    strings["Note##sgsed"].plurals[0] = "Nuta";
+	strings["Hz##sgsed"].plurals[0] = "Hz";
+	strings["Note##sgsed"].plurals[0] = "Nuta";
     strings["%s"].plurals[0] = "%s";
     strings["Fine##sgsed"].plurals[0] = "Rozstrojenie";
     strings["Mode##sgsed"].plurals[0] = "Tryb";
@@ -2039,6 +2118,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Create instrument from sample##sgsed"].plurals[0] = "Stwórz instrument z sampla";
     strings["Zoom##sgsed0"].plurals[0] = "Powiększ";
     strings["Zoom##sgsed1"].plurals[0] = "Powiększ";
+	strings["%dms"].plurals[0] = "%d ms";
     strings["Auto##sgsed"].plurals[0] = "Automatyczny";
     strings["cut##sgsed"].plurals[0] = "wytnij";
     strings["copy##sgsed"].plurals[0] = "kopiuj";
@@ -2059,6 +2139,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings[" (%d-%d: %d samples)##sgsed"].plurals[0] = " (%d-%d: %d sampel)";
     strings[" (%d-%d: %d samples)##sgsed"].plurals[1] = " (%d-%d: %d sample)";
     strings[" (%d-%d: %d samples)##sgsed"].plurals[2] = " (%d-%d: %d sampli)";
+	strings["%.2fHz##sgsed"].plurals[0] = "%.2f Hz";
     strings["Non-8/16-bit samples cannot be edited without prior conversion.##sgsed"].plurals[0] = "Sample w formacie innym niż 8-bitowy lub 16-bitowy PCM nie mogą być edytowane bez uprzedniej konwersji do jednego z tych formatów.";
 
     //   sgsi  src/gui/songInfo.cpp
@@ -2531,7 +2612,6 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
 
     //src/gui/settings.cpp
 
-
     strings["<Use system font>##sgse0"].plurals[0] = "<Używaj czcionki systemowej>";
     strings["<Custom...>##sgse0"].plurals[0] = "<Niestandardowa...>";
     strings["<Use system font>##sgse1"].plurals[0] = "<Używaj czcionki systemowej>";
@@ -2542,6 +2622,12 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Low##sgse"].plurals[0] = "Niskie";
     strings["ASAP (C++ port)##sgse"].plurals[0] = "ASAP (przepisany na C++)";
     strings["ESFMu (fast)##sgse"].plurals[0] = "ESFMu (szybki)";
+	strings["Lower##sgse"].plurals[0] = "Bardzo niski";
+    strings["Low##sgse1"].plurals[0] = "Niski";
+    strings["Medium##sgse"].plurals[0] = "Średni";
+    strings["High##sgse"].plurals[0] = "Wysoki";
+    strings["Ultra##sgse"].plurals[0] = "Ultra";
+    strings["Ultimate##sgse"].plurals[0] = "Maksymalny";
     strings["KIOCSOUND on /dev/tty1##sgse"].plurals[0] = "KIOCSOUND na /dev/tty1";
     strings["KIOCSOUND on standard output##sgse"].plurals[0] = "KIOCSOUND na standardowym wyjściu";
     strings["Disabled/custom##sgse0"].plurals[0] = "Wył./niestandardowy";
@@ -2590,11 +2676,30 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["General##sgse"].plurals[0] = "Ogólne";
     strings["Program##sgse1"].plurals[0] = "Program";
     strings["Render backend##sgse"].plurals[0] = "Biblioteka renderownaia";
+	strings["Software##sgse"].plurals[0] = "Programowa";
+    strings["Software"].plurals[0] = "Programowa"; //sigh
     strings["you may need to restart Furnace for this setting to take effect.##sgse0"].plurals[0] = "może być konieczne ponowne uruchomienie Furnace, aby ta opcja została zastosowana";
-    strings["Render driver##sgse"].plurals[0] = "Sterownik renderowwania";
+    strings["Advanced render backend settings##sgse"].plurals[0] = "Zaawansowane ustawienia biblioteki renderowania";
+    strings["beware: changing these settings may render Furnace unusable! do so at your own risk.\nstart Furnace with -safemode if you mess something up.##sgse"].plurals[0] = "uwaga: zmiana tych ustawień może sprawić, że Furnace będzie niezdatny do dalszego użytkowania! działasz na własną odpowiedzialność\nmożesz uruchomić Furnace z parametrem -safemode, jeśli coś zepsujesz";
+    strings["Render driver##sgse"].plurals[0] = "Sterownik renderowania";
     strings["Automatic##sgse0"].plurals[0] = "Automatyczny";
     strings["Automatic##sgse1"].plurals[0] = "Automatyczny";
     strings["you may need to restart Furnace for this setting to take effect.##sgse1"].plurals[0] = "może być konieczne ponowne uruchomienie Furnace, aby ta opcja została zastosowana.";
+	strings["Red bits##sgse"].plurals[0] = "Bity czerwonej składowej";
+    strings["Green bits##sgse"].plurals[0] = "Bity zielonej składowej";
+    strings["Blue bits##sgse"].plurals[0] = "Bity niebieskiej składowej";
+    strings["Alpha bits##sgse"].plurals[0] = "Bity przeźroczystości";
+    strings["Color depth##sgse"].plurals[0] = "Głębia kolorów";
+    strings["Stencil buffer size##sgse"].plurals[0] = "Rozmiar bufora szablonu";
+    strings["Buffer size##sgse"].plurals[0] = "Rozmiar bufora";
+    strings["Double buffer##sgse"].plurals[0] = "Podwójne buforowanie";
+    strings["the following values are common (in red, green, blue, alpha order):\n- 24 bits: 8, 8, 8, 0\n- 16 bits: 5, 6, 5, 0\n- 32 bits (with alpha): 8, 8, 8, 8\n- 30 bits (deep): 10, 10, 10, 0##sgse"].plurals[0] = "powszechne są następujące wartości (w kolejności czerwony, zielony, niebieski, przeźroczysty):\n- 24 bity: 8, 8, 8, 0\n- 16 bitów: 5, 6, 5, 0\n- 32 bity (z przeźroczystością): 8, 8, 8, 8\n- 30 bitów (głęboka kwantyzacja): 10, 10, 10, 0";
+    strings["nothing to configure##sgse"].plurals[0] = "nic do konfiguracji";
+    strings["current backend: %s\n%s\n%s\n%s##sgse"].plurals[0] = "obecna biblioteka renderowania: %s\n%s\n%s\n%s";
+    strings["VSync##sgse"].plurals[0] = "Synchronizacja pionowa";
+    strings["Frame rate limit##sgse"].plurals[0] = "Limit częstotliwośći generowania klatek";
+    strings["only applies when VSync is disabled.##sgse"].plurals[0] = "ma zastosowanie tylko wtedy, gdy synchr. pionowa jest wyłączona";
+    strings["Display render time##sgse"].plurals[0] = "Wyświetlaj czas renderowania";
     strings["Late render clear##sgse"].plurals[0] = "Opóźnione czyszczenie bufora renderowania";
     strings["calls rend->clear() after rend->present(). might reduce UI latency by one frame in some drivers.##sgse"].plurals[0] = "Wywołuje rend->clear() po rend->present(). Może wyeliminować opóźnienie o jedną klatkę w renderowaniu interfejsu przy niektórych sterownikach.";
     strings["Power-saving mode##sgse"].plurals[0] = "Tryb oszczędzania energii";
@@ -2611,8 +2716,12 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["ImGui line plot##sgse"].plurals[0] = "Rysunek linii z ImGui";
     strings["render using Dear ImGui's built-in line drawing functions.##sgse"].plurals[0] = "renderuj przy pomocy wbudowanych funkcji Dear ImGui.";
     strings["GLSL (if available)##sgse"].plurals[0] = "GLSL (jeśli dostępne)";
-    strings["render using shaders that run on the graphics card.\nonly available in OpenGL 3.0 render backend.##sgse"].plurals[0] = "renderowanie przy użyciu shaderów wykonywanych na GPU.\ndostępny wyłącznie na silniku renderowania OpenGL 3.0";
-    strings["File##sgse"].plurals[0] = "Plik";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL ES 2.0 render backend.##sgse"].plurals[0] = "renderowanie przy użyciu shaderów wykonywanych na GPU.\ndostępny wyłącznie na bibliotece renderowania OpenGL ES 2.0";
+    strings["render using shaders that run on the graphics card.\nonly available in OpenGL 3.0 render backend.##sgse"].plurals[0] = "renderowanie przy użyciu shaderów wykonywanych na GPU.\ndostępny wyłącznie na bibliotece renderowania OpenGL 3.0";
+	strings["File##sgse"].plurals[0] = "Plik";
+	strings["Vibration##sgse"].plurals[0] = "Wibracje";
+    strings["Strength##sgse"].plurals[0] = "Siła wibracji";
+    strings["Length##sgse"].plurals[0] = "Długość wibracji";
     strings["Use system file picker##sgse"].plurals[0] = "Użyj systemowego okna wyboru plików";
     strings["Number of recent files##sgse"].plurals[0] = "Ilość ostatnich plików";
     strings["Compress when saving##sgse"].plurals[0] = "Kompresuj podczas zapisu";
@@ -2635,8 +2744,10 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["when enabled, saving an instrument will store its name.\nthis may increase file size.##sgse"].plurals[0] = "po włączeniu tej opcji nazwa instrumentu zostanie zapisana w pliku, co może zwiększyć jego rozmiar.";
     strings["Load instrument name from .fui##sgse"].plurals[0] = "Wczytaj nazwę instrumentu z pliku .fui";
     strings["when enabled, loading an instrument will use the stored name (if present).\notherwise, it will use the file name.##sgse"].plurals[0] = "gdy opcja ta jest włączona, nazwa instrumentu zostanie wczytana z pliku (jeśli w pliku znajduje się nazwa).\nw przeciwnym razie użyta zostanie nazwa pliku.";
-    strings["New Song##sgse"].plurals[0] = "Nowy utwór";
-    strings["Initial system:##sgse"].plurals[0] = "System domyślny:";
+    strings["Auto-fill file name when saving##sggu"].plurals[0] = "Autouzupełnianie nazwy pliku podczas zapisywania";
+    strings["fill the file name field with an appropriate file name when saving or exporting.##sggu"].plurals[0] = "uzpełnia pole nazwy pliku z odpowiednią nazwą podczas zapisu lub eksportu."
+    strings["New Song##sgse"].plurals[0] = "Nowa piosenka";
+	strings["Initial system:##sgse"].plurals[0] = "System domyślny:";
     strings["Current system##sgse"].plurals[0] = "Bieżący";
     strings["Randomize##sgse"].plurals[0] = "Losuj";
     strings["Reset to defaults##sgse"].plurals[0] = "Resetuj ustawienia";
@@ -2662,6 +2773,11 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Translate channel names in pattern header##sgse"].plurals[0] = "Tłumacz nazwy kanałów w nagłówku wzorca";
     strings["Translate channel names in channel oscilloscope label##sgse"].plurals[0] = "Tłumacz nazwy kanałów na oscyloskopie";
     strings["Translate short channel names (in orders and other places)##sgse"].plurals[0] = "Tłumacz nazwy kanałów (w matrycy wzorców i innych miejscach)";
+	strings["Configuration##sgse0"].plurals[0] = "Konfiguracja programu";
+    strings["Import##sgse"].plurals[0] = "Importuj";
+    strings["Export##sgse"].plurals[0] = "Eksportuj";
+    strings["Factory Reset##sgse"].plurals[0] = "Resetuj do ustawień fabrycznych";
+    strings["Are you sure you want to reset all Furnace settings?\nYou must restart Furnace after doing so.##sgse"].plurals[0] = "Czy jeśteś pewien że chcesz zresetować wszystkie ustawienia Furnace?\nBędzie niezbędne ponowne uruchomienie Furnace.";
     strings["Audio##sgse"].plurals[0] = "Audio";
     strings["Output##sgse"].plurals[0] = "Wyjście";
     strings["Backend##sgse"].plurals[0] = "Interfejs";
@@ -2676,6 +2792,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["<System default>##sgse1"].plurals[0] = "<Domyślny>";
     strings["Sample rate##sgse"].plurals[0] = "Częstotliwość samplowania";
     strings["Outputs##sgse"].plurals[0] = "Wyjścia";
+	strings["common values:\n- 1 for mono\n- 2 for stereo\n- 4 for quadraphonic\n- 6 for 5.1 surround\n- 8 for 7.1 surround##sgse"].plurals[0] = "powszechne wartości:\n- 1: mono\n- 2: stereo\n- 4: dźwięk kwadrofoniczny\n- 6: dźwięk przestrzenny 5.1\n- 8: dźwięk przestrzenny 7.1";
     strings["Channels##sgse"].plurals[0] = "Ilość kanałów";
     strings["What?##sgse3"].plurals[0] = "Co?";
     strings["Buffer size##sgse"].plurals[0] = "Rozmiar bufora";
@@ -2769,6 +2886,10 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["used for playback##sgse"].plurals[0] = "używane do odtwarzania";
     strings["Render Core(s)##sgse"].plurals[0] = "Rdzenie renderowania";
     strings["used in audio export##sgse"].plurals[0] = "używane do eksportowania audio";
+	strings["Quality##sgse1"].plurals[0] = "Jakość";
+    strings["Playback##sgse"].plurals[0] = "ВOdtwarzanie";
+    strings["Render##sgse"].plurals[0] = "Renderowanie";
+    strings["Other##sgse"].plurals[0] = "Inne";
     strings["PC Speaker strategy##sgse"].plurals[0] = "Działanie PC Speaker'a";
     strings["Sample ROMs:##sgse"].plurals[0] = "Obrazy ROM sampli:";
     strings["OPL4 YRW801 path##sgse"].plurals[0] = "Sćieżka do OPL4 YRW801";
@@ -2842,6 +2963,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Insert pushes entire channel row##sgse"].plurals[0] = "Klawisz Insert przesuwa wiersz całego kanału";
     strings["Pull delete affects entire channel row##sgse"].plurals[0] = "Usunięcie z podciąganiem następujących linii wpływa na cały wiersz kanału";
     strings["Push value when overwriting instead of clearing it##sgse"].plurals[0] = "Przenieś wartość komórki do sąsiedniej komórki zamiast ją usuwać podczas nadpisywania";
+    strings["Keyboard note/value input repeat (hold key to input continuously)##sgse"].plurals[0] = "Powtarzanie wprowadzania nut/wartości z klawiatury (przytrzymaj klawisz dla ciągłego wpisywania)";
     strings["Effect input behavior:##sgse"].plurals[0] = "Wprowadzanie efektów:";
     strings["Move down##eicb0"].plurals[0] = "Przesuń w dół##eicb0";
     strings["Move to effect value (otherwise move down)##eicb1"].plurals[0] = "Przejdź do parametru efektu (w przeciwnym razie przejdź w dół)##eicb1";
@@ -2909,6 +3031,12 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Disable##fah0"].plurals[0] = "Wyłącz##fah0";
     strings["Enable##fah1"].plurals[0] = "Włącz##fah1";
     strings["Force##fah2"].plurals[0] = "Wymuś##fah2";
+	strings["Oversample##sgse"].plurals[0] = "Supersampling";
+    strings["saves video memory. reduces font rendering quality.\nuse for pixel/bitmap fonts.##sgse"].plurals[0] = "oszczędza pamięć VRAM, obniża jakość renderowania czcionek\nużywaj przy czcionkach bitmapowych.";
+    strings["default.##sgse"].plurals[0] = "domyślny.";
+    strings["slightly better font rendering quality.\nuses more video memory.##sgse"].plurals[0] = "nieco lepsza jakość renderowania\nużuwa więcej pamięci VRAM.";
+    strings["Load fallback font##sgse"].plurals[0] = "Wczytaj zapasową czcionkę";
+    strings["disable to save video memory.##sgse"].plurals[0] = "wyłącz by oszczędzić pamięć VRAM.";
     strings["Display Japanese characters##sgse"].plurals[0] = "Wyświetlaj japońskie znaki";
     strings["Only toggle this option if you have enough graphics memory.\n"
             "This is a temporary solution until dynamic font atlas is implemented in Dear ImGui.\n\n"
@@ -3432,7 +3560,7 @@ strings["Stop E1xy/E2xy effects on new note##sgcf"].plurals[0] = "Zatrymuj efekt
     strings["Connection (selected)##CC_GUI_COLOR_PATCHBAY_CONNECTION"].plurals[0] = "Połączenie (zaznaczone)##CC_GUI_COLOR_PATCHBAY_CONNECTION";
     strings["Connection (other)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG"].plurals[0] = "Połączenie (inne)##CC_GUI_COLOR_PATCHBAY_CONNECTION_BG";
 
-strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_MEMORY_BG";
+	strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_MEMORY_BG";
     strings["Unknown##CC_GUI_COLOR_MEMORY_FREE"].plurals[0] = "Nieznany##CC_GUI_COLOR_MEMORY_FREE";
     strings["Reserved##CC_GUI_COLOR_MEMORY_RESERVED"].plurals[0] = "Zarezerwowany##CC_GUI_COLOR_MEMORY_RESERVED";
     strings["Sample##CC_GUI_COLOR_MEMORY_SAMPLE"].plurals[0] = "Sampel##CC_GUI_COLOR_MEMORY_SAMPLE";
@@ -3458,10 +3586,41 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     strings["Log level: Info##CC_GUI_COLOR_LOGLEVEL_INFO"].plurals[0] = "Poziom wpisu dziennika: Info##CC_GUI_COLOR_LOGLEVEL_INFO";
     strings["Log level: Debug##CC_GUI_COLOR_LOGLEVEL_DEBUG"].plurals[0] = "Poziom wpisu dziennika: Debug##CC_GUI_COLOR_LOGLEVEL_DEBUG";
     strings["Log level: Trace/Verbose##CC_GUI_COLOR_LOGLEVEL_TRACE"].plurals[0] = "Poziom wpisu dziennika: Diagnostyka/Szczegóły##CC_GUI_COLOR_LOGLEVEL_TRACE";
-
+	
+	strings["Backup##sgse"].plurals[0] = "Kopia zapasowa";
+    strings["Configuration##sgse1"].plurals[0] = "Ustawienia";
+    strings["Enable backup system##sgse"].plurals[0] = "Włącz tworzenie kopii zapasowych";
+    strings["Interval (in seconds)##sgse"].plurals[0] = "Przerwa (w sekundach)";
+    strings["Backups per file##sgse"].plurals[0] = "Ilość kopii zapasowych na plik";
+    strings["Backup Management##sgse"].plurals[0] = "Zarządzanie kopiami zapasowymi";
+    strings["Purge before:##sgse"].plurals[0] = "Usuń wszystkie przed:";
+    strings["Go##PDate"].plurals[0] = "Start##PDate";
+    strings["PB used##sgse"].plurals[0] = " PB użytych";
+    strings["TB used##sgse"].plurals[0] = " TB użytych";
+    strings["GB used##sgse"].plurals[0] = " GB użytych";
+    strings["MB used##sgse"].plurals[0] = " MB użytych";
+    strings["KB used##sgse"].plurals[0] = " KB użytych";
+    strings[" bytes used##sgse"].plurals[0] = " bajt użyty";
+    strings[" bytes used##sgse"].plurals[1] = " bajty użyte";
+    strings[" bytes used##sgse"].plurals[2] = " bajtów użytych";
+    strings["Refresh##sgse"].plurals[0] = "Odśwież";
+    strings["Delete all##sgse"].plurals[0] = "Usuń wszystkie";
+    strings["Name##sgse"].plurals[0] = "Nazwa";
+    strings["Size##sgse"].plurals[0] = "Rozmiar";
+    strings["Latest##sgse"].plurals[0] = "Ostatnie";
+    strings["P##sgse"].plurals[0] = " P";
+    strings["T##sgse"].plurals[0] = " T";
+    strings["G##sgse"].plurals[0] = " G";
+    strings["M##sgse"].plurals[0] = " M";
+    strings["K##sgse"].plurals[0] = " K";
+	
     strings["OK##SettingsOK"].plurals[0] = "OK##SettingsOK";
     strings["Cancel##SettingsCancel"].plurals[0] = "Anuluj##SettingsCancel";
     strings["Apply##SettingsApply"].plurals[0] = "Zastosuj##SettingsApply";
+	
+	strings["could not initialize audio!##sgse"].plurals[0] = "nie udało się zainicjować dźwięku!";
+    strings["error while loading fonts! please check your settings.##sgse"].plurals[0] = "błąd podczas wczytywania czcionek! proszę sprawdzić swoje ustawienia";
+    strings["error while loading config! (%s)##sgse"].plurals[0] = "оbłąd podczas wczytywania ustawień (%s)";
 
     //src/gui/util.cpp
 
@@ -3539,6 +3698,17 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     strings["Arpeggio##sgiB"].plurals[0] = "Arpeggio";
     strings["Pitch##sgiB"].plurals[0] = "Wysokość";
     strings["Pulse Width##sgiB"].plurals[0] = "Szerokość fali prostokątnej";
+	
+	//   sgiBIFUR  src/gui/inst/bifurcator.cpp
+
+    strings["Macros##sgiBIFUR"].plurals[0] = "Makra";
+    strings["Volume##sgiBIFUR"].plurals[0] = "Głośność";
+    strings["Arpeggio##sgiBIFUR"].plurals[0] = "Arpeggio";
+    strings["Pitch##sgiBIFUR"].plurals[0] = "Wysokość";
+    strings["Parameter##sgiBIFUR"].plurals[0] = "Parametr";
+    strings["Panning (left)##sgiBIFUR"].plurals[0] = "Panning (lewy)";
+    strings["Panning (right)##sgiBIFUR"].plurals[0] = "Panning (prawy)";
+    strings["Load Value##sgiBIFUR"].plurals[0] = "Załaduj wartość";
 
     //   sgiC140   src/gui/inst/c140.cpp
 
@@ -3584,7 +3754,7 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     strings["Enable filter##sgiC64"].plurals[0] = "Włącz filtr";
     strings["Initialize filter##sgiC64"].plurals[0] = "Inicjalizuj filtr";
     strings["Cutoff##sgiC640"].plurals[0] = "Punkt odcięcia";
-    strings["Resonance##sgiC640"].plurals[0] = "Rezonans)";
+    strings["Resonance##sgiC640"].plurals[0] = "Rezonans";
     strings["Filter Mode##sgiC640"].plurals[0] = "typ filtra";
     strings["low##sgiC64"].plurals[0] = "dolno";
     strings["band##sgiC64"].plurals[0] = "środk.";
@@ -3651,6 +3821,7 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     strings["Filter K1##sgiOTTO0"].plurals[0] = "K1 filtra";
     strings["Filter K2##sgiOTTO0"].plurals[0] = "K2 filtra";
     strings["Envelope length##sgiOTTO"].plurals[0] = "Długość obwiedni";
+	strings["Envelope count##sgiOTTO"].plurals[0] = "Szybkość obw.";
     strings["Left Volume Ramp##sgiOTTO"].plurals[0] = "Zwiększenie głośności lewej strony.";
     strings["Right Volume Ramp##sgiOTTO"].plurals[0] = "Zwiększenie głośności prawej strony.";
     strings["Filter K1 Ramp##sgiOTTO"].plurals[0] = "Narastanie obw. K1 filtra";
@@ -5664,6 +5835,39 @@ strings["Background##CC_GUI_COLOR_MEMORY_BG"].plurals[0] = "Tło##CC_GUI_COLOR_M
     strings["a handheld video game console with two screens. it uses a stylus.##sesd"].plurals[0] = "przenośna konsola do gier z dwoma ekranami. w zestawie był rysik";
     strings["12xx: Set duty cycle (pulse: 0 to 7)##sesd"].plurals[0] = "12xx: Ustaw szerokość fali prostokątnej (zakres: 0-7)";
     strings["1Fxx: Set global volume (0 to 7F)##sesd"].plurals[0] = "1Fxx: Ustaw globalną głośność (0-7F)";
+	strings["FZT sound source##sesd"].plurals[0] = "Źródło dźwięku FZT";
+    strings["a software synth core by LTVA used in Flizzer Tracker (Flipper Zero chiptune tracker).##sesd"].plurals[0] = " syntezator dźwięku autorstwa LTVA używany w Flizzer Trackerze (tracker dla Flippera Zero).";
+    strings["10xx: Set wave (bits: 0: noise, 1: pulse, 2: triangle, 3: sawtooth, 4: metallic noise, 5: sine)##sesd"].plurals[0] = "10xx: Ustaw kształt fali (bity: 0: szum, 1: fala prost., 2: fala trójk., 3: piłokształtna, 4: \"metaliczny\" szum, 5: sinusoida)";
+    strings["11xy: PWM (pulsolo) with speed x and depth y##sesd"].plurals[0] = "11xy: PWM (pulsolo) z szybkością (x) i głębokością (y)";
+    strings["12xx: Set pulse width##sesd"].plurals[0] = "12xx: Ustaw szerokość fali prost.";
+    strings["13xx: Pulse width up##sesd"].plurals[0] = "13xx: Szerokość fali prostokątnej w górę";
+    strings["14xx: Pulse width down##sesd"].plurals[0] = "14xx: Szerokość fali prostokątnej w dół";
+    strings["15xx: Set filter cutoff##sesd"].plurals[0] = "15xx: Ustaw punkt odcięcia filtra";
+    strings["16xx: Set volume##sesd"].plurals[0] = "16xx: Ustaw głośność";
+    strings["17xx: Toggle filter##sesd"].plurals[0] = "17xx: Wł./wył filtr";
+    strings["18xx: Set filter mode##sesd"].plurals[0] = "18xx: Ustaw tryb filtra";
+    strings["19xx: Phase reset##sesd"].plurals[0] = "19xx: Reset fazy";
+    strings["1Axx: Filter cutoff up##sesd"].plurals[0] = "1Axx: Punkt odcięcia filtra w górę";
+    strings["1Bxx: Filter cutoff down##sesd"].plurals[0] = "1Bxx: unkt odcięcia filtra w dół";
+    strings["1Cxx: Set filter resonance##sesd"].plurals[0] = "1Cxx: Ustaw rezonans filtra";
+    strings["1Dxx: Filter resonance up##sesd"].plurals[0] = "1Dxx: Rezonans w górę";
+    strings["1Exx: Filter resonance down##sesd"].plurals[0] = "1Exx: Rezonans w górę";
+    strings["1Fxx: Ring mod source (FF = self)##sesd"].plurals[0] = "1Fxx: Ustaw sygnał źródłowy modulacji kołowej (FF = automodulacja)";
+    strings["20xx: Hard sync source (FF = self)##sesd"].plurals[0] = "20xx: Ustaw źródło synchronizacji oscylatora (FF = automodulacja)";
+    strings["21xx: Set attack speed##sesd"].plurals[0] = "21xx: Ustaw atak";
+    strings["22xx: Set decay speed##sesd"].plurals[0] = "22xx: Ustaw opadanie";
+    strings["23xx: Set sustain level##sesd"].plurals[0] = "23xx: Ustaw podtrzymanie";
+    strings["24xx: Set release rate##sesd"].plurals[0] = "24xx: Ustaw zwolnienie";
+    strings["25xx: Restart instrument program##sesd"].plurals[0] = "25xx: Zrestartuj parametry instrumentu";
+    strings["26xx: Portamento up (semitones)##sesd"].plurals[0] = "26xx: Portamento w górę (w półtonach)";
+    strings["27xx: Portamento down (semitones)##sesd"].plurals[0] = "27xx: Portamento w dół (w półtonach)";
+    strings["28xx: Absolute arpeggio note##sesd"].plurals[0] = "28xx: Absolutna nuta arpeggio";
+    strings["29xx: Trigger envelope release##sesd"].plurals[0] = "29xx: Wywołaj zwolnienie obwiedni";
+    strings["a fantasy sound chip using logistic map iterations to generate sound.##sesd"].plurals[0] = "fikcyjny układ audio wykorzystujący ciąg iteracji odwzorowania logistycznego do synteszy dźwięku ";
+    strings["10xx: Load low byte of channel sample state##sesd"].plurals[0] = "10xx: Załaduj niski bajt stanu samplowania kanału";
+    strings["11xx: Load high byte of channel sample state##sesd"].plurals[0] = "11xx: Załaduj wysoki bajt stanu samplowania kanału";
+    strings["12xx: Set low byte of channel parameter##sesd"].plurals[0] = "12xx: Ustaw niski bajt parametru kanału";
+    strings["13xx: Set high byte of channel parameter##sesd"].plurals[0] = "13xx: Ustaw wysoki bajt parametru kanału";
     strings["this is a system designed for testing purposes.##sesd"].plurals[0] = "ten system jest przeznaczony do testowania.";
 
     strings["help! what's going on!"].plurals[0] = "pomocy! co się dzieje?";
