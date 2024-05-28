@@ -82,9 +82,9 @@ void DivPlatformT85APU::acquire(short** buf, size_t len)
       t85APU_tick(t85_synth);
     }
 
-    for (int j=0; j<T85APU_NUM_CHANS - 1; j++) 
+    for (int j=0; j<T85APU_NUM_CHANS - 3; j++) //without noise and env channels...
     {
-      oscBuf[j]->data[oscBuf[j]->needle++]=(t85_synth->channelOutput[j])<<7;
+      oscBuf[j]->data[oscBuf[j]->needle++]=(t85_synth->channelOutput[j])<<6;
     }
 
     buf[0][h]=t85_synth->outputQueue[0] << 8;
@@ -97,6 +97,43 @@ void DivPlatformT85APU::tick(bool sysTick)
   for (int i=0; i<T85APU_NUM_CHANS; i++) 
   {
     chan[i].std.next();
+
+    if (chan[i].freqChanged || chan[i].keyOn || chan[i].keyOff) 
+    {
+      if(i < 5 || i == 7)
+      {
+        chan[i].freq = parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE,11);
+
+        if(chan[i].freq < 0) chan[i].freq = 0;
+        if(chan[i].freq > 0x3ff) chan[i].freq = 0x3ff;
+
+        if(i < 5)
+        {
+          rWrite(i, chan[i].freq & 0xff);
+        }
+        if(i == 7)
+        {
+          rWrite(5, chan[i].freq & 0xff);
+        }
+
+        if(i == 0 || i == 1)
+        {
+          rWrite(0x6, (chan[0].freq >> 8) | ((chan[1].freq >> 8) << 4));
+        }
+        if(i == 2 || i == 3)
+        {
+          rWrite(0x7, (chan[2].freq >> 8) | ((chan[3].freq >> 8) << 4));
+        }
+        if(i == 7 || i == 4)
+        {
+          rWrite(0x8, (chan[4].freq >> 8) | ((chan[7].freq >> 8) << 4));
+        }
+      }
+
+      if (chan[i].keyOn) chan[i].keyOn=false;
+      if (chan[i].keyOff) chan[i].keyOff=false;
+      chan[i].freqChanged=false;
+    }
   }
 }
 
@@ -114,8 +151,8 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       chan[c.chan].keyOn=true;
       chan[c.chan].macroInit(ins);
 
-      rWrite(0, 0xff);
-      rWrite(0x06, 0x1);
+      //rWrite(0, 0xff);
+      //rWrite(0x06, 0x1);
       rWrite(0x09, 0x80);
       rWrite(0x10, 0x80);
       rWrite(0x15, 0xf);
@@ -126,6 +163,11 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       chan[c.chan].keyOff=true;
       chan[c.chan].keyOn=false;
       chan[c.chan].macroInit(NULL);
+
+      if(c.chan < 5)
+      {
+        rWrite(0x10 + c.chan, 0);
+      }
       break;
     case DIV_CMD_NOTE_OFF_ENV:
       chan[c.chan].active=false;
