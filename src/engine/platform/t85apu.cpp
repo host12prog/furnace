@@ -102,10 +102,24 @@ void DivPlatformT85APU::tick(bool sysTick)
     {
       if(i < 5 || i == 7)
       {
-        chan[i].freq = parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE,11);
+        chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
+        if (chan[i].freq<0) chan[i].freq=0;
+        if (chan[i].freq>0xffff) chan[i].freq=0xffff;
 
-        if(chan[i].freq < 0) chan[i].freq = 0;
-        if(chan[i].freq > 0x3ff) chan[i].freq = 0x3ff;
+        //chan[i].octave = 0;
+        //chan[i].increment = 0;
+        //if (chan[i].freq > UINT16_MAX) chan[i].freq = UINT16_MAX;
+        chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 8 + 1), 0);
+        chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
+        if (chan[i].increment > UINT8_MAX)
+        {
+          chan[i].increment = round(chan[i].increment / 2.0); chan[i].octave++;
+        }
+
+        if(chan[i].octave > 7) chan[i].octave = 7;
+        if(chan[i].increment > 0xff) chan[i].increment = 0xff;
+
+        chan[i].freq = chan[i].increment | (chan[i].octave << 8);
 
         if(i < 5)
         {
@@ -130,6 +144,28 @@ void DivPlatformT85APU::tick(bool sysTick)
         }
       }
 
+      if(i == 5 || i == 6)
+      {
+        chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
+        if (chan[i].freq<0) chan[i].freq=0;
+        if (chan[i].freq>0xffffff) chan[i].freq=0xffffff;
+
+        chan[i].octave = 0;
+        chan[i].increment = 0;
+        if (round(chan[i].freq) > UINT16_MAX) chan[i].freq = UINT16_MAX;
+        chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 16 + 1), 0);
+        chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
+        if (chan[i].increment > UINT8_MAX)
+        {
+          chan[i].increment = round(chan[i].increment / 2.0); chan[i].octave++;
+        }
+
+        if(chan[i].octave > 15) chan[i].octave = 15;
+        if(chan[i].increment > 0xff) chan[i].increment = 0xff;
+
+        chan[i].freq = chan[i].increment | (chan[i].octave << 8);
+      }
+
       if (chan[i].keyOn) chan[i].keyOn=false;
       if (chan[i].keyOff) chan[i].keyOff=false;
       chan[i].freqChanged=false;
@@ -141,7 +177,7 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
   if (c.chan > T85APU_NUM_CHANS - 1) return 0;
   switch (c.cmd) {
     case DIV_CMD_NOTE_ON: {
-      DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_FZT);
+      DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_AT85APU);
       if (c.value!=DIV_NOTE_NULL) {
         chan[c.chan].baseFreq=NOTE_FREQUENCY(c.value);
         chan[c.chan].freqChanged=true;
@@ -155,7 +191,7 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       //rWrite(0x06, 0x1);
       rWrite(0x09, 0x80);
       rWrite(0x10, 0x80);
-      rWrite(0x15, 0xf);
+      //rWrite(0x15, 0xf);
       break;
     }
     case DIV_CMD_NOTE_OFF:

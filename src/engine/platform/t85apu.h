@@ -29,8 +29,11 @@
 class DivPlatformT85APU: public DivDispatch {
   public:
     struct Channel: public SharedChannel<int> {
+      int octave, increment;
       Channel():
-        SharedChannel<int>(255) {}
+        SharedChannel<int>(255),
+        octave(0),
+        increment(0) {}
     };
     Channel chan[T85APU_NUM_CHANS];
     bool isMuted[T85APU_NUM_CHANS];
