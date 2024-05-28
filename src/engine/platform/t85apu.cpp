@@ -58,10 +58,11 @@ ___________ _______ ____________________________________________________________
 #define my_min(a, b) (((a) < (b)) ? (a) : (b))
 #define my_max(a, b) (((a) > (b)) ? (a) : (b))
 
-#define CHIP_FREQBASE 8000000
+#define CHIP_FREQBASE 524288
+#define CHIP_DEFAULTCLOCK 8000000
 
-#define T85_OUTPUT_IDEAL 0
-#define T85_OUTPUT_EARRAPE_FUCKING_15kHz_PWM 1
+#define T85_OUTPUT_IDEAL_PB4 0
+#define T85_OUTPUT_EARRAPE_FUCKING_31kHz_PWM 1
 
 #define rWrite(a,v) if (!skipRegisterWrites) {writes.push(QueuedWrite(a,v)); if (dumpWrites) {addWrite(a,v);} }
 
@@ -87,8 +88,8 @@ void DivPlatformT85APU::acquire(short** buf, size_t len)
       oscBuf[j]->data[oscBuf[j]->needle++]=(t85_synth->channelOutput[j])<<5;
     }
 
-    buf[0][h]=t85_synth->currentOutput << 8;
-    buf[1][h]=t85_synth->currentOutput << 8;
+    buf[0][h]=t85_synth->currentOutput << ((16-1)-t85_synth->outputBitdepth);
+    buf[1][h]=t85_synth->currentOutput << ((16-1)-t85_synth->outputBitdepth);
   }
 }
 
@@ -144,9 +145,6 @@ void DivPlatformT85APU::tick(bool sysTick)
           chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
           if (chan[i].freq<0) chan[i].freq=0;
           if (chan[i].freq>0xfffff) chan[i].freq=0xfffff;
-
-          chan[i].freq = (int)((double)chan[i].freq * std::pow(2, 1.0 / 12.0)); //why the fuck it's one semitone lower?
-          chan[i].freq /= 16;
 
           chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 8 + 1), 0);
           chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
@@ -430,7 +428,7 @@ int DivPlatformT85APU::getOutputCount() {
 }
 
 void DivPlatformT85APU::setFlags(const DivConfig& flags) {
-  chipClock = CHIP_FREQBASE;
+  chipClock = CHIP_DEFAULTCLOCK;
   CHECK_CUSTOM_CLOCK;
   rate=chipClock / 512;
   for (int i=0; i<T85APU_NUM_CHANS; i++) 
@@ -450,7 +448,7 @@ int DivPlatformT85APU::init(DivEngine* p, int channels, int sugRate, const DivCo
     oscBuf[i]=new DivDispatchOscBuffer;
   }
 
-  t85_synth = t85APU_new(chipClock, rate, T85_OUTPUT_IDEAL);
+  t85_synth = t85APU_new(chipClock, rate, T85_OUTPUT_IDEAL_PB4);
 
   setFlags(flags);
 
