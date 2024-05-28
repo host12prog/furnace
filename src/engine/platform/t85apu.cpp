@@ -61,7 +61,7 @@ ___________ _______ ____________________________________________________________
 #define CHIP_FREQBASE 8000000
 
 #define T85_OUTPUT_IDEAL 0
-#define T85_OUTPUT_EARRAPE_FUCKING_15kHZ_PWM 1
+#define T85_OUTPUT_EARRAPE_FUCKING_15kHz_PWM 1
 
 #define rWrite(a,v) if (!skipRegisterWrites) {writes.push(QueuedWrite(a,v)); if (dumpWrites) {addWrite(a,v);} }
 
