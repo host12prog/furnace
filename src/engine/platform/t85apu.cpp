@@ -87,8 +87,8 @@ void DivPlatformT85APU::acquire(short** buf, size_t len)
       oscBuf[j]->data[oscBuf[j]->needle++]=(t85_synth->channelOutput[j])<<5;
     }
 
-    buf[0][h]=t85_synth->outputQueue[0] << 8;
-    buf[1][h]=t85_synth->outputQueue[0] << 8;
+    buf[0][h]=t85_synth->currentOutput << 8;
+    buf[1][h]=t85_synth->currentOutput << 8;
   }
 }
 
