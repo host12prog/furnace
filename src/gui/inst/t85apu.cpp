@@ -34,6 +34,7 @@ void FurnaceGUI::drawInsT85APU(DivInstrument* ins)
     macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiT85APU"),ins,DIV_MACRO_VOL,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiT85APU"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiT85APU"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Duty##sgiT85APU"),ins,DIV_MACRO_DUTY,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiT85APU"), ins, DIV_MACRO_WAVE, 0xff, 0, WAVE_MACRO_MAX, 160, uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,false,NULL,true));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (left)##sgiT85APU"),ins,DIV_MACRO_PAN_LEFT,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (right)##sgiT85APU"),ins,DIV_MACRO_PAN_RIGHT,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER]));

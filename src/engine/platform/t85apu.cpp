@@ -84,7 +84,7 @@ void DivPlatformT85APU::acquire(short** buf, size_t len)
 
     for (int j=0; j<T85APU_NUM_CHANS - 3; j++) //without noise and env channels...
     {
-      oscBuf[j]->data[oscBuf[j]->needle++]=(t85_synth->channelOutput[j])<<6;
+      oscBuf[j]->data[oscBuf[j]->needle++]=(t85_synth->channelOutput[j])<<5;
     }
 
     buf[0][h]=t85_synth->outputQueue[0] << 8;
@@ -98,72 +98,128 @@ void DivPlatformT85APU::tick(bool sysTick)
   {
     chan[i].std.next();
 
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) \
+    {
+      if(i < 5)
+      {
+        chan[i].outVol=VOL_SCALE_LINEAR(chan[i].vol&255,MIN(255,chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val),255);
+        rWrite(0x10 + i, chan[i].outVol);
+      }
+    }
+
+    if (NEW_ARP_STRAT) {
+      chan[i].handleArp();
+    } else if (chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->had) {
+      if (!chan[i].inPorta) {
+        chan[i].baseFreq=NOTE_FREQUENCY(parent->calcArp(chan[i].note,chan[i].std.get_div_macro_struct(DIV_MACRO_ARP)->val));
+      }
+      chan[i].freqChanged=true;
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->had) {
+      if (chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->mode) {
+        chan[i].pitch2+=chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
+        CLAMP_VAR(chan[i].pitch2,-65535,65535);
+      } else {
+        chan[i].pitch2=chan[i].std.get_div_macro_struct(DIV_MACRO_PITCH)->val;
+      }
+      chan[i].freqChanged=true;
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->had) 
+    {
+      if(i < 5)
+      {
+        chan[i].duty=chan[i].std.get_div_macro_struct(DIV_MACRO_DUTY)->val & 255;
+        rWrite(0x9 + i, chan[i].duty);
+      }
+    }
+
     if (chan[i].freqChanged || chan[i].keyOn || chan[i].keyOff) 
     {
-      if(i < 5 || i == 7)
+      if(chan[i].freqChanged)
       {
-        chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
-        if (chan[i].freq<0) chan[i].freq=0;
-        if (chan[i].freq>0xffff) chan[i].freq=0xffff;
-
-        //chan[i].octave = 0;
-        //chan[i].increment = 0;
-        //if (chan[i].freq > UINT16_MAX) chan[i].freq = UINT16_MAX;
-        chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 8 + 1), 0);
-        chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
-        if (chan[i].increment > UINT8_MAX)
+        if(i < 5 || i == 7)
         {
-          chan[i].increment = round(chan[i].increment / 2.0); chan[i].octave++;
+          chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
+          if (chan[i].freq<0) chan[i].freq=0;
+          if (chan[i].freq>0xfffff) chan[i].freq=0xfffff;
+
+          chan[i].freq = (int)((double)chan[i].freq * std::pow(2, 1.0 / 12.0)); //why the fuck it's one semitone lower?
+          chan[i].freq /= 16;
+
+          chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 8 + 1), 0);
+          chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
+          if (chan[i].increment > UINT8_MAX)
+          {
+            chan[i].increment /= 2; chan[i].octave++;
+          }
+
+          if(chan[i].octave > 7) chan[i].octave = 7;
+          if(chan[i].increment > 0xff) chan[i].increment = 0xff;
+
+          chan[i].freq = chan[i].increment | (chan[i].octave << 8);
+
+          if(i < 5)
+          {
+            rWrite(i, chan[i].freq & 0xff);
+          }
+          if(i == 7)
+          {
+            rWrite(5, chan[i].freq & 0xff);
+          }
+
+          if(i == 0 || i == 1)
+          {
+            rWrite(0x6, (chan[0].freq >> 8) | ((chan[1].freq >> 8) << 4));
+          }
+          if(i == 2 || i == 3)
+          {
+            rWrite(0x7, (chan[2].freq >> 8) | ((chan[3].freq >> 8) << 4));
+          }
+          if(i == 7 || i == 4)
+          {
+            rWrite(0x8, (chan[4].freq >> 8) | ((chan[7].freq >> 8) << 4));
+          }
         }
 
-        if(chan[i].octave > 7) chan[i].octave = 7;
-        if(chan[i].increment > 0xff) chan[i].increment = 0xff;
+        if(i == 5 || i == 6)
+        {
+          chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
+          if (chan[i].freq<0) chan[i].freq=0;
+          if (chan[i].freq>0xfffff) chan[i].freq=0xfffff;
 
-        chan[i].freq = chan[i].increment | (chan[i].octave << 8);
+          chan[i].freq = (int)((double)chan[i].freq * std::pow(2, 1.0 / 12.0)); //why the fuck it's one semitone lower?
+          
+          chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 16 + 1), 0);
+          chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
+          if (chan[i].increment > UINT8_MAX)
+          {
+            chan[i].increment /= 2; chan[i].octave++;
+          }
 
-        if(i < 5)
-        {
-          rWrite(i, chan[i].freq & 0xff);
-        }
-        if(i == 7)
-        {
-          rWrite(5, chan[i].freq & 0xff);
-        }
+          if(chan[i].octave > 15) chan[i].octave = 15;
+          if(chan[i].increment > 0xff) chan[i].increment = 0xff;
 
-        if(i == 0 || i == 1)
-        {
-          rWrite(0x6, (chan[0].freq >> 8) | ((chan[1].freq >> 8) << 4));
-        }
-        if(i == 2 || i == 3)
-        {
-          rWrite(0x7, (chan[2].freq >> 8) | ((chan[3].freq >> 8) << 4));
-        }
-        if(i == 7 || i == 4)
-        {
-          rWrite(0x8, (chan[4].freq >> 8) | ((chan[7].freq >> 8) << 4));
+          chan[i].freq = chan[i].increment | (chan[i].octave << 8);
+
+          if(i == 5)
+          {
+            rWrite(0x1d, chan[5].freq & 0xff);
+          }
+          if(i == 6)
+          {
+            rWrite(0x1f, chan[6].freq & 0xff);
+          }
+
+          rWrite(0x1e, ((chan[6].freq >> 8) << 4) | (chan[5].freq >> 8));
         }
       }
 
-      if(i == 5 || i == 6)
+      if(chan[i].keyOn && i < 5)
       {
-        chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
-        if (chan[i].freq<0) chan[i].freq=0;
-        if (chan[i].freq>0xffffff) chan[i].freq=0xffffff;
-
-        chan[i].octave = 0;
-        chan[i].increment = 0;
-        if (round(chan[i].freq) > UINT16_MAX) chan[i].freq = UINT16_MAX;
-        chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 16 + 1), 0);
-        chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
-        if (chan[i].increment > UINT8_MAX)
-        {
-          chan[i].increment = round(chan[i].increment / 2.0); chan[i].octave++;
-        }
-
-        if(chan[i].octave > 15) chan[i].octave = 15;
-        if(chan[i].increment > 0xff) chan[i].increment = 0xff;
-
-        chan[i].freq = chan[i].increment | (chan[i].octave << 8);
+        rWrite(0x09 + i, chan[i].duty);
+        rWrite(0x10 + i, chan[i].outVol);
       }
 
       if (chan[i].keyOn) chan[i].keyOn=false;
@@ -189,8 +245,6 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
 
       //rWrite(0, 0xff);
       //rWrite(0x06, 0x1);
-      rWrite(0x09, 0x80);
-      rWrite(0x10, 0x80);
       //rWrite(0x15, 0xf);
       break;
     }
@@ -359,6 +413,11 @@ void DivPlatformT85APU::reset() {
   {
     chan[i]=DivPlatformT85APU::Channel();
     chan[i].std.setEngine(parent);
+
+    chan[i].vol = 0xff;
+    chan[i].noise = false;
+    chan[i].envelope = false;
+    chan[i].duty = 0x80;
   }
 
   memset(regPool,0,0x20);
