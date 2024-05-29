@@ -59,6 +59,8 @@ ___________ _______ ____________________________________________________________
 #define my_max(a, b) (((a) > (b)) ? (a) : (b))
 
 #define CHIP_FREQBASE 524288
+#define CHIP_FREQBASE_ENV CHIP_FREQBASE*256
+
 #define CHIP_DEFAULTCLOCK 8000000
 
 #define T85_OUTPUT_IDEAL_PB4 0
@@ -144,7 +146,7 @@ void DivPlatformT85APU::tick(bool sysTick)
         {
           chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
           if (chan[i].freq<0) chan[i].freq=0;
-          if (chan[i].freq>0xfffff) chan[i].freq=0xfffff;
+          if (chan[i].freq>0xffff) chan[i].freq=0xffff;
 
           chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 8 + 1), 0);
           chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
@@ -182,14 +184,12 @@ void DivPlatformT85APU::tick(bool sysTick)
         }
 
         if(i == 5 || i == 6)
-        {
-          chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
+        { // envelope channels
+          chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE_ENV);
           if (chan[i].freq<0) chan[i].freq=0;
-          if (chan[i].freq>0xfffff) chan[i].freq=0xfffff;
-
-          chan[i].freq = (int)((double)chan[i].freq * std::pow(2, 1.0 / 12.0)); //why the fuck it's one semitone lower?
+          if (chan[i].freq>0xffffff) chan[i].freq=0xffffff;
           
-          chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 16 + 1), 0);
+          chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 8 + 1), 0);
           chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
           if (chan[i].increment > UINT8_MAX)
           {
