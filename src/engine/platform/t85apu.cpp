@@ -264,18 +264,17 @@ void DivPlatformT85APU::tick(bool sysTick)
         if(i < 5 || i == 7)
         {
           chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
-          if (chan[i].freq<0) chan[i].freq=0;
-          if (chan[i].freq>0xffff) chan[i].freq=0xffff;
+          CLAMP_VAR(chan[i].freq, 0, 0xFFFF);
 
           chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 8 + 1), 0);
           chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
-          if (chan[i].increment > UINT8_MAX)
+          if (chan[i].increment > UINT8_MAX && chan[i].octave < 7)
           {
             chan[i].increment /= 2; chan[i].octave++;
           }
 
-          if(chan[i].octave > 7) chan[i].octave = 7;
-          if(chan[i].increment > 0xff) chan[i].increment = 0xff;
+          CLAMP_VAR(chan[i].octave, 0, 7);
+          CLAMP_VAR(chan[i].increment, 0, 0xff);
 
           chan[i].freq = chan[i].increment | (chan[i].octave << 8);
 
@@ -305,18 +304,17 @@ void DivPlatformT85APU::tick(bool sysTick)
         if(i == 5 || i == 6)
         { // envelope channels
           chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE_ENV);
-          if (chan[i].freq<0) chan[i].freq=0;
-          if (chan[i].freq>0xffffff) chan[i].freq=0xffffff;
+          CLAMP_VAR(chan[i].freq, 0, 0xFFFFFF);
           
           chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 8 + 1), 0);
           chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
-          if (chan[i].increment > UINT8_MAX)
+          if (chan[i].increment > UINT8_MAX && chan[i].octave < 15)
           {
             chan[i].increment /= 2; chan[i].octave++;
           }
 
-          if(chan[i].octave > 15) chan[i].octave = 15;
-          if(chan[i].increment > 0xff) chan[i].increment = 0xff;
+          CLAMP_VAR(chan[i].octave, 0, 15);
+          CLAMP_VAR(chan[i].increment, 0, 0xff);
 
           chan[i].freq = chan[i].increment | (chan[i].octave << 8);
 
