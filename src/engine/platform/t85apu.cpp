@@ -85,10 +85,14 @@ void DivPlatformT85APU::acquire(short** buf, size_t len)
       t85APU_tick(t85_synth);
     }
 
-    for (int j=0; j<T85APU_NUM_CHANS - 3; j++) //without noise and env channels...
+    for (int j=0; j<T85APU_NUM_REAL_CHANS; j++) //without noise and env channels...
     {
       oscBuf[j]->data[oscBuf[j]->needle++]=(t85_synth->channelOutput[j])<<5;
     }
+    oscBuf[5]->data[oscBuf[5]->needle++]=(t85_synth->envSmpVolume[0])<<7;  // Envelope A
+    oscBuf[6]->data[oscBuf[6]->needle++]=(t85_synth->envSmpVolume[1])<<7;  // Envelope B
+
+    oscBuf[7]->data[oscBuf[7]->needle++]=(t85_synth->noiseMask&0x80) ? INT16_MAX : 0; // Noise
 
     buf[0][h]=t85_synth->currentOutput << ((16-1)-t85_synth->outputBitdepth);
     buf[1][h]=t85_synth->currentOutput << ((16-1)-t85_synth->outputBitdepth);
