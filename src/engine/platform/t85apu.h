@@ -32,15 +32,19 @@ class DivPlatformT85APU: public DivDispatch {
       int octave, increment;
       int duty;
       bool noise, envelope;
+      int env_num, env_shape;
       Channel():
         SharedChannel<int>(255),
         octave(0),
         increment(0),
         duty(0x80),
         noise(false),
-        envelope(false) {}
+        envelope(false),
+        env_num(0) {}
     };
     Channel chan[T85APU_NUM_CHANS];
+    int env_shape[2];
+    int env_init_phase[2];
     bool isMuted[T85APU_NUM_CHANS];
     DivDispatchOscBuffer* oscBuf[T85APU_NUM_CHANS];
     struct QueuedWrite {

@@ -138,6 +138,105 @@ void DivPlatformT85APU::tick(bool sysTick)
       }
     }
 
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) 
+    {
+      if(i < 5)
+      {
+        chan[i].noise = chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&2;
+        chan[i].envelope = chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&4;
+
+        rWrite(0x15 + i, (chan[i].noise ? 0x80 : 0) | (chan[i].envelope ? 0x40 : 0) | (chan[i].env_num ? 0x10 : 0) | 0xF);
+
+        if(chan[i].envelope)
+        {
+          switch(chan[i].env_num)
+          {
+            case 0: rWrite(0x1c, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
+            case 1: rWrite(0x1c, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
+            default: break;
+          }
+        }
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->had) 
+    {
+      if(i < 5)
+      {
+        env_shape[chan[i].env_num] = chan[i].std.get_div_macro_struct(DIV_MACRO_EX1)->val&7;
+
+        rWrite(0x1c, (env_shape[1] << 4) | env_shape[0]);
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->had) 
+    {
+      if(i == 7)
+      {
+        int bits = chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->val;
+
+        rWrite(0xe, bits & 0xff);
+        rWrite(0xf, bits >> 8);
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX3)->had) 
+    {
+      if(i < 5)
+      {
+        int bits = chan[i].std.get_div_macro_struct(DIV_MACRO_EX3)->val;
+        env_init_phase[chan[i].env_num] = bits;
+
+        rWrite(0x1a, bits & 0xff);
+        rWrite(0x1b, bits >> 8);
+
+        if(chan[i].envelope)
+        {
+          switch(chan[i].env_num)
+          {
+            case 0: rWrite(0x1c, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
+            case 1: rWrite(0x1c, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
+            default: break;
+          }
+        }
+      }
+    }
+
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->had) 
+    {
+      if(chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->val)
+      {
+        switch(i)
+        {
+          case 0: rWrite(0x6, (chan[0].freq >> 8) | ((chan[1].freq >> 8) << 4) | 0x8); break;
+          case 1: rWrite(0x6, (chan[0].freq >> 8) | ((chan[1].freq >> 8) << 4) | 0x80); break;
+
+          case 2: rWrite(0x7, (chan[2].freq >> 8) | ((chan[3].freq >> 8) << 4) | 0x8); break;
+          case 3: rWrite(0x7, (chan[2].freq >> 8) | ((chan[3].freq >> 8) << 4) | 0x80); break;
+
+          case 4: rWrite(0x8, (chan[4].freq >> 8) | ((chan[7].freq >> 8) << 4) | 0x8); break;
+
+          case 5:
+          {
+            rWrite(0x1a, env_init_phase[0] & 0xff);
+            rWrite(0x1b, env_init_phase[0] >> 8);
+            rWrite(0x1c, (env_shape[1] << 4) | 0x8 | env_shape[0]);
+            break;
+          }
+          case 6:
+          {
+            rWrite(0x1a, env_init_phase[0] & 0xff);
+            rWrite(0x1b, env_init_phase[0] >> 8);
+            rWrite(0x1c, 0x80 | (env_shape[1] << 4) | env_shape[0]);
+            break;
+          }
+
+          case 7: rWrite(0x8, (chan[4].freq >> 8) | ((chan[7].freq >> 8) << 4) | 0x80); break;
+          default: break;
+        }
+      }
+    }
+
     if (chan[i].freqChanged || chan[i].keyOn || chan[i].keyOff) 
     {
       if(chan[i].freqChanged)
@@ -207,10 +306,10 @@ void DivPlatformT85APU::tick(bool sysTick)
           }
           if(i == 6)
           {
-            rWrite(0x1f, chan[6].freq & 0xff);
+            rWrite(0x1e, chan[6].freq & 0xff);
           }
 
-          rWrite(0x1e, ((chan[6].freq >> 8) << 4) | (chan[5].freq >> 8));
+          rWrite(0x1f, ((chan[6].freq >> 8) << 4) | (chan[5].freq >> 8));
         }
       }
 
@@ -240,10 +339,6 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       chan[c.chan].active=true;
       chan[c.chan].keyOn=true;
       chan[c.chan].macroInit(ins);
-
-      //rWrite(0, 0xff);
-      //rWrite(0x06, 0x1);
-      //rWrite(0x15, 0xf);
       break;
     }
     case DIV_CMD_NOTE_OFF:
@@ -273,9 +368,17 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       }
       break;
     case DIV_CMD_VOLUME:
-      chan[c.chan].vol=c.value;
-      if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
-        chan[c.chan].outVol=c.value;
+      if (chan[c.chan].vol!=c.value) {
+        chan[c.chan].vol=c.value;
+        if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
+          chan[c.chan].outVol=c.value;
+          chan[c.chan].vol=chan[c.chan].outVol;
+
+          if(c.chan < 5)
+          {
+            rWrite(0x10 + c.chan,chan[c.chan].vol);
+          }
+        }
       }
       break;
     case DIV_CMD_GET_VOLUME:
@@ -416,7 +519,14 @@ void DivPlatformT85APU::reset() {
     chan[i].noise = false;
     chan[i].envelope = false;
     chan[i].duty = 0x80;
+    chan[i].env_num = 0;
   }
+
+  env_shape[0] = 0;
+  env_shape[1] = 0;
+
+  env_init_phase[0] = 0;
+  env_init_phase[1] = 0;
 
   memset(regPool,0,0x20);
 
