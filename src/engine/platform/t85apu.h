@@ -25,6 +25,7 @@
 #include "sound/attiny85apu/t85apu.h"
 
 #define T85APU_NUM_CHANS 8
+#define T85APU_NUM_REAL_CHANS 5
 
 class DivPlatformT85APU: public DivDispatch {
   public:

@@ -578,6 +578,8 @@ void DivPlatformT85APU::reset() {
   env_init_phase[1] = 0;
 
   memset(regPool,0,0x20);
+  memset(regPool+0x15,0x0F,T85APU_NUM_REAL_CHANS);  // Initial channel config settings
+  regPool[0x0F] = 0x24; // Initial noise XOR setting
 
   t85APU_reset(t85_synth);
 }
