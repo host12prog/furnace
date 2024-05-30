@@ -2250,10 +2250,10 @@ void DivEngine::registerSystems() {
 
   sysDefs[DIV_SYSTEM_T85APU]=new DivSysDef(
     "ATTiny85APU", NULL, 0xf4, 0, 8, false, true, 0, false, 0, 0, 0,
-    "a fantasy sound chip by AlexMush. it is actually a software synth for ATTiny series MCUs written entirely in AVR Assembly.##sesd",
-    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Envelope 1##sesd", "Envelope 2##sesd", "Noise##sesd"},
-    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "E1##sesd", "E2##sesd", "NO##sesd"},
-    {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_NOISE},
+    "a software synth for the ATTiny25/45/85 MCUs written entirely in AVR Assembly by alexmush.##sesd",
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Noise##sesd", "Envelope 1##sesd", "Envelope 2##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "NO##sesd", "E1##sesd", "E2##sesd"},
+    {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_NOISE, DIV_CH_WAVE, DIV_CH_WAVE},
     {DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU},
     {},
     {
