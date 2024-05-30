@@ -36,12 +36,13 @@ void FurnaceGUI::drawInsT85APU(DivInstrument* ins)
     macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiT85APU"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Duty##sgiT85APU"),ins,DIV_MACRO_DUTY,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
     macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiT85APU"),ins,DIV_MACRO_WAVE,0xff,0,3,48,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,true,ayShapeBits));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Envelope##sgiT85APU"),ins,DIV_MACRO_EX1,0xff,0,3,48,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,ayEnvBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Envelope Shape##sgiT85APU"),ins,DIV_MACRO_EX1,0xff,0,3,48,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,ayEnvBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Envelope Number##sgiT85APU"),ins,DIV_MACRO_EX4,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER]));
     //macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (left)##sgiT85APU"),ins,DIV_MACRO_PAN_LEFT,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
     //macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (right)##sgiT85APU"),ins,DIV_MACRO_PAN_RIGHT,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER]));
 
     macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgiT85APU"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Envelope Phase Reset##sgiT85APU"),ins,DIV_MACRO_EX3,0xff,0,16,256,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_L("Envelope Starting Phase##sgiT85APU"),ins,DIV_MACRO_EX3,0xff,0,65535,160,uiColors[GUI_COLOR_MACRO_OTHER]));
 
     macroList.push_back(FurnaceGUIMacroDesc(_L("LFSR Feedback bits##sgiT85APU"),ins,DIV_MACRO_EX2,0xff,0,16,256,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 

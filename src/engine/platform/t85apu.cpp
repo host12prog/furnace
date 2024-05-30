@@ -202,6 +202,26 @@ void DivPlatformT85APU::tick(bool sysTick)
       }
     }
 
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->had) 
+    {
+      if(i < 5)
+      {
+        chan[i].env_num = chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val;
+
+        rWrite(0x15 + i, (chan[i].noise ? 0x80 : 0) | (chan[i].envelope ? 0x40 : 0) | (chan[i].env_num ? 0x10 : 0) | 0xF);
+
+        if(chan[i].envelope)
+        {
+          switch(chan[i].env_num)
+          {
+            case 0: rWrite(0x1c, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
+            case 1: rWrite(0x1c, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
+            default: break;
+          }
+        }
+      }
+    }
+
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->had) 
     {
       if(chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->val)
@@ -317,6 +337,37 @@ void DivPlatformT85APU::tick(bool sysTick)
       {
         rWrite(0x09 + i, chan[i].duty);
         rWrite(0x10 + i, chan[i].outVol);
+      }
+
+      if(chan[i].keyOn && i >= 5 && i < 7)
+      {
+        // envelope channels
+        chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE_ENV);
+        if (chan[i].freq<0) chan[i].freq=0;
+        if (chan[i].freq>0xffffff) chan[i].freq=0xffffff;
+        
+        chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 8 + 1), 0);
+        chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
+        if (chan[i].increment > UINT8_MAX)
+        {
+          chan[i].increment /= 2; chan[i].octave++;
+        }
+
+        if(chan[i].octave > 15) chan[i].octave = 15;
+        if(chan[i].increment > 0xff) chan[i].increment = 0xff;
+
+        chan[i].freq = chan[i].increment | (chan[i].octave << 8);
+
+        if(i == 5)
+        {
+          rWrite(0x1d, chan[5].freq & 0xff);
+        }
+        if(i == 6)
+        {
+          rWrite(0x1e, chan[6].freq & 0xff);
+        }
+
+        rWrite(0x1f, ((chan[6].freq >> 8) << 4) | (chan[5].freq >> 8));
       }
 
       if (chan[i].keyOn) chan[i].keyOn=false;
