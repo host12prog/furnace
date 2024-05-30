@@ -89,12 +89,12 @@ void DivPlatformT85APU::acquire(short** buf, size_t len)
 
     for (int j=0; j<T85APU_NUM_REAL_CHANS; j++) //without noise and env channels...
     {
-      oscBuf[j]->data[oscBuf[j]->needle++]=(t85_synth->channelOutput[j])<<5;
+      oscBuf[j]->data[oscBuf[j]->needle++]=isMuted[j] ? 0 : (t85_synth->channelOutput[j])<<5; // Tone channels
     }
-    oscBuf[5]->data[oscBuf[5]->needle++]=(t85_synth->envSmpVolume[0])<<7;  // Envelope A
-    oscBuf[6]->data[oscBuf[6]->needle++]=(t85_synth->envSmpVolume[1])<<7;  // Envelope B
+    oscBuf[5]->data[oscBuf[5]->needle++]=isMuted[5] ? 0 : (t85_synth->envSmpVolume[0])<<7;  // Envelope A
+    oscBuf[6]->data[oscBuf[6]->needle++]=isMuted[6] ? 0 : (t85_synth->envSmpVolume[1])<<7;  // Envelope B
 
-    oscBuf[7]->data[oscBuf[7]->needle++]=(t85_synth->noiseMask&0x80) ? INT16_MAX : 0; // Noise
+    oscBuf[7]->data[oscBuf[7]->needle++]=(t85_synth->noiseMask&0x80 && !isMuted[7] ) ? INT16_MAX : 0; // Noise
 
     buf[0][h]=t85_synth->currentOutput << ((16-1)-t85_synth->outputBitdepth);
     buf[1][h]=t85_synth->currentOutput << ((16-1)-t85_synth->outputBitdepth);
@@ -151,7 +151,9 @@ void DivPlatformT85APU::tick(bool sysTick)
         chan[i].noise = chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&2;
         chan[i].envelope = chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&4;
 
-        rWrite(CFG_A + i, (chan[i].noise ? 0x80 : 0) | (chan[i].envelope ? 0x40 : 0) | (chan[i].env_num ? 0x10 : 0) | 0xF);
+        rWrite(CFG_A + i, 
+          (chan[i].noise && !isMuted[7] ? 1<<NOISE_EN : 0) | 
+          (chan[i].envelope && !isMuted[5+chan[i].env_num] ? 1<<ENV_EN : 0) | (chan[i].env_num << SLOT_NUM) | 0xF);
 
         if(chan[i].envelope)
         {
@@ -214,7 +216,10 @@ void DivPlatformT85APU::tick(bool sysTick)
       {
         chan[i].env_num = chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val;
 
-        rWrite(CFG_A + i, (chan[i].noise ? 0x80 : 0) | (chan[i].envelope ? 0x40 : 0) | (chan[i].env_num ? 0x10 : 0) | 0xF);
+        rWrite(CFG_A + i, 
+          (chan[i].noise && !isMuted[7] ? 1<<NOISE_EN : 0) | 
+          (chan[i].envelope && !isMuted[5+chan[i].env_num] ? 1<<ENV_EN : 0) | (chan[i].env_num << SLOT_NUM) |
+          0xF);
 
         if(chan[i].envelope)
         {
