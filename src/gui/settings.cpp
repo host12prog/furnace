@@ -3849,6 +3849,14 @@ void FurnaceGUI::drawSettings() {
           settingsChanged=true;
         }
 
+        // SUBSECTION SAMPLE EDITOR
+        CONFIG_SUBSECTION(_L("Sample Editor##sgse"));
+        bool display_hex_coords_in_sample_editorB=settings.display_hex_coords_in_sample_editor;
+        if (ImGui::Checkbox(_L("Display mouse hover sample coordinates in hex##sgse"),&display_hex_coords_in_sample_editorB)) {
+          settings.display_hex_coords_in_sample_editor=display_hex_coords_in_sample_editorB;
+          settingsChanged=true;
+        }
+
         // SUBSECTION WAVE EDITOR
         CONFIG_SUBSECTION(_L("Wave Editor##sgse"));
         bool waveLayoutB=settings.waveLayout;
@@ -4926,6 +4934,8 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.vibrationStrength=conf.getFloat("vibrationStrength",0.5f);
     settings.vibrationLength=conf.getInt("vibrationLength",20);
 
+    settings.display_hex_coords_in_sample_editor=conf.getInt("display_hex_coords_in_sample_editor",0);
+
     settings.backupEnable=conf.getInt("backupEnable",1);
     settings.backupInterval=conf.getInt("backupInterval",30);
     settings.backupMaxCopies=conf.getInt("backupMaxCopies",5);
@@ -5433,6 +5443,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.displayRenderTime,0,1);
   clampSetting(settings.vibrationStrength,0.0f,1.0f);
   clampSetting(settings.vibrationLength,10,500);
+  clampSetting(settings.display_hex_coords_in_sample_editor,0,1);
   clampSetting(settings.inputRepeat,0,1);
   clampSetting(settings.glRedSize,0,32);
   clampSetting(settings.glGreenSize,0,32);
@@ -5525,6 +5536,8 @@ void FurnaceGUI::writeConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
 
     conf.set("vibrationStrength",settings.vibrationStrength);
     conf.set("vibrationLength",settings.vibrationLength);
+
+    conf.set("display_hex_coords_in_sample_editor",settings.display_hex_coords_in_sample_editor);
 
     conf.set("backupEnable",settings.backupEnable);
     conf.set("backupInterval",settings.backupInterval);

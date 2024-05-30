@@ -3170,6 +3170,7 @@ void DivLocale::addTranslationsRussian()
     strings["Grid##mel2"].plurals[0] = "Прямоугольная сетка##mel2";
     strings["Single (with list)##mel3"].plurals[0] = "Окно редактирования одного макроса + список##mel3";
     strings["Use classic macro editor vertical slider##sgse"].plurals[0] = "Использовать классическую вертикальную полосу прокрутки";
+    strings["Display mouse hover sample coordinates in hex##sgse"].plurals[0] = "Отображать координаты курсора в окне сэмпла в шестнадцатеричном формате";
     strings["Wave Editor##sgse"].plurals[0] = "Редактор волновых таблиц";
     strings["Use compact wave editor##sgse"].plurals[0] = "Использовать компактный редактор волновых таблиц";
     strings["FM Editor##sgse0"].plurals[0] = "Редактор FM-инструментов";

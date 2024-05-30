@@ -1887,7 +1887,14 @@ void FurnaceGUI::drawSampleEdit() {
           }
           posY=(0.5-pos.y/rectSize.y)*((sample->depth==DIV_SAMPLE_DEPTH_8BIT)?255:65535);
           if (posX>=0) {
-            statusBar2=fmt::sprintf("(%d, %d)",posX,posY);
+            if(settings.display_hex_coords_in_sample_editor)
+            {
+              statusBar2=fmt::sprintf("(0x%x, %d)",posX,posY);
+            }
+            else
+            {
+              statusBar2=fmt::sprintf("(%d, %d)",posX,posY);
+            }
           }
         }
 

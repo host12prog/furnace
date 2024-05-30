@@ -3211,6 +3211,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Single (with list)##mel3"].plurals[0] = "=Single (with list)##mel3";
     strings["Use classic macro editor vertical slider##sgse"].plurals[0] = "=Use classic macro editor vertical slider";
     strings["Wave Editor##sgse"].plurals[0] = "=Wave Editor";
+    strings["Display mouse hover sample coordinates in hex##sgse"].plurals[0] = "=Display mouse hover sample coordinates in hex";
     strings["Use compact wave editor##sgse"].plurals[0] = "=Use compact wave editor";
     strings["FM Editor##sgse0"].plurals[0] = "=FM Editor";
     strings["FM parameter names:##sgse"].plurals[0] = "=FM parameter names:";

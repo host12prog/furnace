@@ -2001,6 +2001,7 @@ class FurnaceGUI {
     int follow_log;
     float vibrationStrength;
     int vibrationLength;
+    int display_hex_coords_in_sample_editor;
     String mainFontPath;
     String headFontPath;
     String patFontPath;
@@ -2262,6 +2263,7 @@ class FurnaceGUI {
       follow_log(0),
       vibrationStrength(0.5f),
       vibrationLength(20),
+      display_hex_coords_in_sample_editor(0),
       mainFontPath(""),
       headFontPath(""),
       patFontPath(""),
