@@ -1331,6 +1331,11 @@ void DivLocale::addTranslationsRussian()
     strings["Channels in file##sgeo"].plurals[0] = "Каналов аудио в файле";
     strings["Loops##sgeo"].plurals[0] = "Повторов трека";
     strings["Fade out (seconds)##sgeo"].plurals[0] = "Затухание (в секундах)";
+    strings["Channels to export:##sgeo"].plurals[0] = "Экспортировать каналы:";
+    strings["All##sgeo"].plurals[0] = "Все";
+    strings["None##sgeo"].plurals[0] = "Ни одного";
+    strings["Invert##sgeo"].plurals[0] = "Инвертировать выделение";
+    strings["Channel Selection##sgeo"].plurals[0] = "Выбор каналов";
     strings["Cancel##sgeo0"].plurals[0] = "Отмена";
     strings["Export##sgeo0"].plurals[0] = "Экспорт";
     strings["settings:##sgeo"].plurals[0] = "настройки:";
