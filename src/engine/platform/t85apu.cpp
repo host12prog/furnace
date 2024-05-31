@@ -507,6 +507,11 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
 
 void DivPlatformT85APU::muteChannel(int ch, bool mute) {
   isMuted[ch]=mute;
+  if (parent->isExporting()) {
+    isMuted[ENV_A_CH] = 0;
+    isMuted[ENV_B_CH] = 0;
+    isMuted[NOISE_CH] = 0;
+  }
   t85APU_setMute(t85_synth, ch, mute);
 }
 
