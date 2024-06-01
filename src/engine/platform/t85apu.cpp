@@ -187,6 +187,7 @@ void DivPlatformT85APU::tick(bool sysTick)
       if(i == NOISE_CH)
       {
         int bits = chan[i].std.get_div_macro_struct(DIV_MACRO_EX2)->val;
+        noise_lsfr_feedback_bits = bits;
 
         rWrite(NTPLO, bits & 0xff);
         rWrite(NTPHI, bits >> 8);
@@ -487,6 +488,115 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       if (!chan[c.chan].inPorta && c.value && !parent->song.brokenPortaArp && chan[c.chan].std.get_div_macro_struct(DIV_MACRO_ARP)->will && !NEW_ARP_STRAT) chan[c.chan].baseFreq=NOTE_FREQUENCY(chan[c.chan].note);
       chan[c.chan].inPorta=c.value;
       break;
+    case DIV_CMD_WAVE:
+      chan[c.chan].noise = c.value&1;
+      chan[c.chan].envelope = c.value&2;
+
+      rWrite(CFG_A + c.chan, 
+        (chan[c.chan].noise && !isMuted[NOISE_CH] ? 1<<NOISE_EN : 0) | 
+        (chan[c.chan].envelope && !isMuted[ENV_CH_START+chan[c.chan].env_num] ? 1<<ENV_EN : 0) | (chan[c.chan].env_num << SLOT_NUM) | 0xF);
+
+      if(chan[c.chan].envelope)
+      {
+        switch(chan[c.chan].env_num)
+        {
+          case 0: rWrite(E_SHP, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
+          case 1: rWrite(E_SHP, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
+          default: break;
+        }
+      }
+      break;
+    case DIV_CMD_C64_FINE_DUTY:
+      if(c.chan < T85APU_NUM_REAL_CHANS)
+      {
+        chan[c.chan].duty=c.value & 255;
+        rWrite(DUTYA + c.chan, chan[c.chan].duty);
+      }
+      break;
+    case DIV_CMD_AY_ENVELOPE_SET:
+      if(c.chan == ENV_A_CH || c.chan == ENV_B_CH)
+      {
+        env_shape[c.chan-ENV_CH_START] = c.value & 7;
+
+        rWrite(E_SHP, (env_shape[1] << 4) | env_shape[0]);
+      }
+      break;
+    case DIV_CMD_AY_ENVELOPE_LOW:
+      if(c.chan < T85APU_NUM_REAL_CHANS)
+      {
+        env_init_phase[chan[c.chan].env_num] &= 0xff00;
+        env_init_phase[chan[c.chan].env_num] |= c.value & 0xff;
+
+        rWrite(ELDLO, env_init_phase[chan[c.chan].env_num] & 0xff);
+        rWrite(ELDHI, env_init_phase[chan[c.chan].env_num] >> 8);
+
+        if(chan[c.chan].envelope)
+        {
+          switch(chan[c.chan].env_num)
+          {
+            case 0: rWrite(E_SHP, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
+            case 1: rWrite(E_SHP, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
+            default: break;
+          }
+        }
+      }
+      break;
+    case DIV_CMD_AY_ENVELOPE_HIGH:
+      if(c.chan < T85APU_NUM_REAL_CHANS)
+      {
+        env_init_phase[chan[c.chan].env_num] &= 0x00ff;
+        env_init_phase[chan[c.chan].env_num] |= (c.value & 0xff) << 8;
+
+        rWrite(ELDLO, env_init_phase[chan[c.chan].env_num] & 0xff);
+        rWrite(ELDHI, env_init_phase[chan[c.chan].env_num] >> 8);
+
+        if(chan[c.chan].envelope)
+        {
+          switch(chan[c.chan].env_num)
+          {
+            case 0: rWrite(E_SHP, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
+            case 1: rWrite(E_SHP, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
+            default: break;
+          }
+        }
+      }
+      break;
+
+    case DIV_CMD_POWERNOISE_COUNTER_LOAD:
+      if(c.chan == NOISE_CH)
+      {
+        switch(c.value)
+        {
+          case 0: noise_lsfr_feedback_bits &= 0xff00; noise_lsfr_feedback_bits |= c.value2 & 0xff; break;
+          case 1: noise_lsfr_feedback_bits &= 0x00ff; noise_lsfr_feedback_bits |= (c.value2 & 0xff) << 8; break;
+          default: break;
+        }
+
+        rWrite(NTPLO, noise_lsfr_feedback_bits & 0xff);
+        rWrite(NTPHI, noise_lsfr_feedback_bits >> 8);
+      }
+      break;
+    case DIV_CMD_AY_AUTO_ENVELOPE:
+      if(c.chan < T85APU_NUM_REAL_CHANS)
+      {
+        chan[c.chan].env_num = c.value & 1;
+
+        rWrite(CFG_A + c.chan, 
+          (chan[c.chan].noise && !isMuted[NOISE_CH] ? 1<<NOISE_EN : 0) | 
+          (chan[c.chan].envelope && !isMuted[ENV_CH_START+chan[c.chan].env_num] ? 1<<ENV_EN : 0) | (chan[c.chan].env_num << SLOT_NUM) |
+          0xF);
+
+        if(chan[c.chan].envelope)
+        {
+          switch(chan[c.chan].env_num)
+          {
+            case 0: rWrite(E_SHP, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
+            case 1: rWrite(E_SHP, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
+            default: break;
+          }
+        }
+      }
+      break;
     case DIV_CMD_GET_VOLMAX:
       return 255;
       break;
@@ -591,6 +701,8 @@ void DivPlatformT85APU::reset() {
 
   env_init_phase[0] = 0;
   env_init_phase[1] = 0;
+
+  noise_lsfr_feedback_bits = 0x2400;
 
   memset(regPool,0,0x20);
   memset(regPool+0x15,0x0F,T85APU_NUM_REAL_CHANS);  // Initial channel config settings
