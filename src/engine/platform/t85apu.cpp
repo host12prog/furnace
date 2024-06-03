@@ -77,14 +77,25 @@ ___________ _______ ____________________________________________________________
 
 void DivPlatformT85APU::acquire(short** buf, size_t len) 
 {
+  static uint32_t cycle;
+  cycle = 0;
   for (size_t h=0; h<len; h++) 
   {
-    if (!writes.empty()) 
+    if((cycle == 511) || audio_type == T85_OUTPUT_IDEAL_PB4)
     {
-      QueuedWrite w=writes.front();
-      t85APU_writeReg(t85_synth, w.addr, w.val);
-      regPool[w.addr&0x1f]=w.val;
-      writes.pop();
+      if (!writes.empty()) 
+      {
+        QueuedWrite w=writes.front();
+        t85APU_writeReg(t85_synth, w.addr, w.val);
+        regPool[w.addr&0x1f]=w.val;
+        writes.pop();
+      }
+    }
+
+    if(audio_type == T85_OUTPUT_EARRAPE_FUCKING_31kHz_PWM)
+    {
+      cycle++;
+      if(cycle > 511) cycle = 0;
     }
 
     for(int i = 0; i < chipClock / rate; i++)
@@ -716,9 +727,19 @@ int DivPlatformT85APU::getOutputCount() {
 }
 
 void DivPlatformT85APU::setFlags(const DivConfig& flags) {
+  audio_type=flags.getInt("audioRenderType",T85_OUTPUT_IDEAL_PB4);
+  t85APU_setOutputType(t85_synth, audio_type);
   chipClock = CHIP_DEFAULTCLOCK;
   CHECK_CUSTOM_CLOCK;
-  rate=chipClock / 512;
+  if(audio_type == T85_OUTPUT_IDEAL_PB4)
+  {
+    rate=chipClock / 512;
+  }
+  if(audio_type == T85_OUTPUT_EARRAPE_FUCKING_31kHz_PWM)
+  {
+    rate=chipClock;
+  }
+  
   for (int i=0; i<T85APU_NUM_CHANS; i++) 
   {
     oscBuf[i]->rate=rate;
@@ -736,7 +757,7 @@ int DivPlatformT85APU::init(DivEngine* p, int channels, int sugRate, const DivCo
     oscBuf[i]=new DivDispatchOscBuffer;
   }
 
-  t85_synth = t85APU_new(chipClock, rate, T85_OUTPUT_IDEAL_PB4);
+  t85_synth = t85APU_new(chipClock, rate, audio_type);
 
   setFlags(flags);
 

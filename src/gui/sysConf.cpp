@@ -2487,9 +2487,29 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       break;
     }
     case DIV_SYSTEM_FZT:
-    case DIV_SYSTEM_T85APU:
       supportsCustomRate=true;
       break;
+    case DIV_SYSTEM_T85APU:
+    {
+        int audioRenderType = flags.getInt("audioRenderType", 0);
+
+        ImGui::Text(_L("Audio render:##sgsc"));
+        ImGui::Indent();
+        if (ImGui::RadioButton(_L("Idealized 15625Hz (at 8MHz clock)##sgsc"), audioRenderType == 0)) {
+            audioRenderType = 0;
+            altered = true;
+        }
+        if (ImGui::RadioButton(_L("31250Hz PWM rate and 15625Hz actual sample rate audio (at 8MHz clock)##sgsc"), audioRenderType == 1)) {
+            audioRenderType = 1;
+            altered = true;
+        }
+        if (altered) {
+            e->lockSave([&]() {
+                flags.set("audioRenderType", audioRenderType);
+            });
+        }
+        break;
+    }
     default: {
       bool sysPal=flags.getInt("clockSel",0);
 

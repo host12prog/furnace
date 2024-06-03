@@ -48,6 +48,7 @@ class DivPlatformT85APU: public DivDispatch {
     int env_init_phase[2];
     int noise_lsfr_feedback_bits;
     bool isMuted[T85APU_NUM_CHANS];
+    int audio_type;
     DivDispatchOscBuffer* oscBuf[T85APU_NUM_CHANS];
     struct QueuedWrite {
         unsigned char addr;
