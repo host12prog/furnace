@@ -2495,7 +2495,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
 
         ImGui::Text(_L("Audio render:##sgsc"));
         ImGui::Indent();
-        if (ImGui::RadioButton(_L("Idealized 15625Hz (at 8MHz clock)##sgsc"), audioRenderType == 0)) {
+        if (ImGui::RadioButton(_L("Idealized 15625Hz PCM (at 8MHz clock)##sgsc"), audioRenderType == 0)) {
             audioRenderType = 0;
             altered = true;
         }
