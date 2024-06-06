@@ -267,7 +267,7 @@ SafeWriter* DivEngine::saveT85(bool loop, int trailingTicks)
     // write GD3 tag
     gd3Off=(int)w->tell();
     w->write("Gd3 ",4);
-    w->writeI(0x100);
+    w->writeI(currentGd3Version);
     w->writeI(0); // length. will be written later
 
     WString ws;
