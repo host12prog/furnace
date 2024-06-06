@@ -1960,6 +1960,15 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         dpiScale
       );
       break;
+    case GUI_FILE_EXPORT_T85:
+      if (!dirExists(workingDirT85Export)) workingDirT85Export=getHomeDir();
+      hasOpened=fileDialog->openSave(
+        settings.language == DIV_LANG_ENGLISH ? "Export .t85 file" : _L("Export .t85 file##sggu"),
+        {settings.language == DIV_LANG_ENGLISH ? "ATTiny85APU register dump file" : _L("ATTiny85APU register dump file##sggu2"), "*.t85"},
+        workingDirT85Export,
+        dpiScale
+      );
+      break;
     case GUI_FILE_LOAD_MAIN_FONT:
       if (!dirExists(workingDirFont)) workingDirFont=getHomeDir();
       hasOpened=fileDialog->openLoad(
@@ -4290,6 +4299,10 @@ bool FurnaceGUI::loop() {
             drawExportFur();
             ImGui::EndMenu();
           }
+          if (ImGui::BeginMenu(_L("export ATTiny85APU register dump...##sggu"))) {
+            drawExportFur();
+            ImGui::EndMenu();
+          }
         } else if (settings.exportOptionsLayout==2) {
           if (ImGui::MenuItem(_L("export audio...##sggu1"))) {
             curExportType=GUI_EXPORT_AUDIO;
@@ -4341,6 +4354,10 @@ bool FurnaceGUI::loop() {
           }
           if (ImGui::MenuItem(_L("export Furnace module...##sggu"))) {
             curExportType=GUI_EXPORT_FUR;
+            displayExport=true;
+          }
+          if (ImGui::MenuItem(_L("export ATTiny85APU register dump...##sggu"))) {
+            curExportType=GUI_EXPORT_T85;
             displayExport=true;
           }
         } else {
@@ -4936,6 +4953,9 @@ bool FurnaceGUI::loop() {
         case GUI_FILE_EXPORT_FZT:
           workingDirFZTExport=fileDialog->getPath()+DIR_SEPARATOR_STR;
           break;
+        case GUI_FILE_EXPORT_T85:
+          workingDirT85Export=fileDialog->getPath()+DIR_SEPARATOR_STR;
+          break;
         case GUI_FILE_LOAD_MAIN_FONT:
         case GUI_FILE_LOAD_HEAD_FONT:
         case GUI_FILE_LOAD_PAT_FONT:
@@ -5041,6 +5061,9 @@ bool FurnaceGUI::loop() {
           }
           if (curFileDialog==GUI_FILE_EXPORT_FZT) {
             checkExtension(".fzt");
+          }
+          if (curFileDialog==GUI_FILE_EXPORT_T85) {
+            checkExtension(".t85");
           }
           if (curFileDialog==GUI_FILE_EXPORT_COLORS) {
             checkExtension(".cfgc");
@@ -5587,6 +5610,31 @@ bool FurnaceGUI::loop() {
                 }
               } else {
                 String export_err = settings.language == DIV_LANG_ENGLISH ? "could not write FZT module!" : _L("could not write FZT module!##sggu");
+                showError(fmt::sprintf("%s\n%s",export_err,e->getLastError()));
+              }
+              if (!e->getWarnings().empty()) {
+                  showWarning(e->getWarnings(), GUI_WARN_GENERIC);
+              }
+              break;
+            }
+            case GUI_FILE_EXPORT_T85: {
+              SafeWriter* w=e->saveT85(t85_loop, t85_trailingTicks);
+              if (w!=NULL) {
+                FILE* f=ps_fopen(copyOfName.c_str(),"wb");
+                if (f!=NULL) {
+                  fwrite(w->getFinalBuf(),1,w->size(),f);
+                  fclose(f);
+                  pushRecentSys(copyOfName.c_str());
+                } else {
+                  showError(settings.language == DIV_LANG_ENGLISH ? "could not open file!" : _L("could not open file!##sggu"));
+                }
+                w->finish();
+                delete w;
+                if (!e->getWarnings().empty()) {
+                  showWarning(e->getWarnings(),GUI_WARN_GENERIC);
+                }
+              } else {
+                String export_err = settings.language == DIV_LANG_ENGLISH ? "could not write ATTiny85APU register dump!" : _L("could not write ATTiny85APU register dump!##sggu");
                 showError(fmt::sprintf("%s\n%s",export_err,e->getLastError()));
               }
               if (!e->getWarnings().empty()) {
@@ -7507,6 +7555,8 @@ void FurnaceGUI::syncState() {
   workingDirZSMExport=e->getConfString("lastDirZSMExport",workingDir);
   workingDirROMExport=e->getConfString("lastDirROMExport",workingDir);
   workingDirFZTExport=e->getConfString("lastDirFZTExport",workingDir);
+  workingDirFURExport=e->getConfString("lastDirFURExport",workingDir);
+  workingDirT85Export=e->getConfString("lastDirT85Export",workingDir);
   workingDirFont=e->getConfString("lastDirFont",workingDir);
   workingDirColors=e->getConfString("lastDirColors",workingDir);
   workingDirKeybinds=e->getConfString("lastDirKeybinds",workingDir);
@@ -7665,7 +7715,9 @@ void FurnaceGUI::commitState(DivConfig& conf) {
   conf.set("lastDirVGMExport",workingDirVGMExport);
   conf.set("lastDirZSMExport",workingDirZSMExport);
   conf.set("lastDirROMExport",workingDirROMExport);
-  e->setConf("lastDirFZTExport",workingDirFZTExport);
+  conf.set("lastDirFURExport",workingDirFURExport);
+  conf.set("lastDirFZTExport",workingDirFZTExport);
+  conf.set("lastDirT85Export",workingDirT85Export);
   conf.set("lastDirFont",workingDirFont);
   conf.set("lastDirColors",workingDirColors);
   conf.set("lastDirKeybinds",workingDirKeybinds);
@@ -7919,6 +7971,8 @@ FurnaceGUI::FurnaceGUI():
   debugFFT(false),
   vgmExportVersion(0x171),
   vgmExportTrailingTicks(-1),
+  t85_loop(false),
+  t85_trailingTicks(-1),
   drawHalt(10),
   zsmExportTickRate(60),
   macroPointSize(16),

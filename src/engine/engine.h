@@ -717,6 +717,8 @@ class DivEngine {
     int exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_you);
     // export to FZT
     SafeWriter* saveFZT();
+    // export to .t85 (ATTiny85APU register dump, similar to VGM)
+    SafeWriter* saveT85(bool loop, int trailingTicks);
     // export to an audio file
     bool saveAudio(const char* path, DivAudioExportOptions options);
     // wait for audio export to finish
