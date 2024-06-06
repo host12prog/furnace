@@ -7971,7 +7971,7 @@ FurnaceGUI::FurnaceGUI():
   debugFFT(false),
   vgmExportVersion(0x171),
   vgmExportTrailingTicks(-1),
-  t85_loop(false),
+  t85_loop(true),
   t85_trailingTicks(-1),
   drawHalt(10),
   zsmExportTickRate(60),
