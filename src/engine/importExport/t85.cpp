@@ -86,7 +86,7 @@ SafeWriter* DivEngine::saveT85(bool loop, int trailingTicks)
 
     bool trailing=false;
     bool beenOneLoopAlready=false;
-    bool mayWriteRate=(fmod(curSubSong->hz,1.0)<0.00001 || fmod(curSubSong->hz,1.0)>0.99999);
+    //bool mayWriteRate=(fmod(curSubSong->hz,1.0)<0.00001 || fmod(curSubSong->hz,1.0)>0.99999);
     int countDown=MAX(0,trailingTicks)+1;
 
     DivDispatchContainer* t85_cont = &disCont[0];
