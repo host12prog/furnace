@@ -77,7 +77,7 @@ void DivLocale::addTranslationsRussian()
     strings["adpcm by superctr##sgab"].plurals[0] = "adpcm за авторством superctr";
     strings["adpcm-xq by David Bryant##sgab"].plurals[0] = "adpcm-xq за авторством David Bryant";
     strings["Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt##sgab"].plurals[0] = "Nuked-OPL3/OPLL/OPM/OPN2/PSG за авторством nukeykt";
-    strings["YM3812-LLE, YMF262-LLE, YMF276-LLE и YM2608-LLE by nukeykt##sgab"].plurals[0] = "YM3812-LLE, YMF262-LLE, YMF276-LLE и YM2608-LLE за авторством nukeykt";
+    strings["YM3812-LLE, YMF262-LLE, YMF276-LLE and YM2608-LLE by nukeykt##sgab"].plurals[0] = "YM3812-LLE, YMF262-LLE, YMF276-LLE и YM2608-LLE за авторством nukeykt";
     strings["ymfm by Aaron Giles##sgab"].plurals[0] = "ymfm за авторством Aaron Giles";
     strings["emu2413 by Digital Sound Antiques##sgab"].plurals[0] = "emu2413 за авторством Digital Sound Antiques";
     strings["MAME SN76496 by Nicola Salmoria##sgab"].plurals[0] = "MAME SN76496 за авторством Nicola Salmoria";
