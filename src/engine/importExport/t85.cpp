@@ -37,8 +37,8 @@ extern FurnaceGUI g;
 
 #define REG_WRITE 0x41
 #define WAIT_TICKS 0x61
-#define WAIT_50Hz 0x62
-#define WAIT_60Hz 0x63
+#define WAIT_50Hz 0x63
+#define WAIT_60Hz 0x62
 
 // constants
 static const uint32_t currentFileVersion = 0x00000000;	// 16.8.8 bits semantic versioning
