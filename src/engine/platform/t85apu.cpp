@@ -420,6 +420,35 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       if(c.chan < T85APU_NUM_REAL_CHANS)
       {
         rWrite(VOL_A + c.chan, 0);
+        rWrite(PILOA + c.chan, chan[c.chan].freq & 0xff);
+      }
+
+      chan[c.chan].freq = 0;
+
+      if(c.chan == 0 || c.chan == 1)
+      {
+        rWrite(PHIAB, (chan[0].freq >> 8) | ((chan[1].freq >> 8) << 4));
+      }
+      if(c.chan == 2 || c.chan == 3)
+      {
+        rWrite(PHICD, (chan[2].freq >> 8) | ((chan[3].freq >> 8) << 4));
+      }
+      if(c.chan == NOISE_CH || c.chan == 4)
+      {
+        rWrite(PHIEN, (chan[4].freq >> 8) | ((chan[NOISE_CH].freq >> 8) << 4));
+      }
+
+      if(c.chan == ENV_A_CH)
+      {
+        rWrite(EPLOA, chan[ENV_A_CH].freq & 0xff);
+      }
+      if(c.chan == ENV_B_CH)
+      {
+        rWrite(EPLOB, chan[ENV_B_CH].freq & 0xff);
+      }
+      if(c.chan == ENV_A_CH || c.chan == ENV_B_CH)
+      {
+        rWrite(EPIHI, ((chan[ENV_B_CH].freq >> 8) << 4) | (chan[ENV_A_CH].freq >> 8));
       }
       break;
     case DIV_CMD_NOTE_OFF_ENV:
