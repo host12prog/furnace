@@ -164,6 +164,7 @@ void DivPlatformT85APU::tick(bool sysTick)
     {
       if(i < T85APU_NUM_REAL_CHANS)
       {
+        chan[i].tone = chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&1;
         chan[i].noise = chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&2;
         chan[i].envelope = chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&4;
 
@@ -179,6 +180,53 @@ void DivPlatformT85APU::tick(bool sysTick)
             case 1: rWrite(E_SHP, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
             default: break;
           }
+        }
+
+        if(!chan[i].tone) //disable tone
+        {
+          rWrite(PILOA + i, 0); //0 freq
+
+          switch(i)
+          {
+            case 0: rWrite(PHIAB, (0 >> 8) | ((chan[1].freq >> 8) << 4)); break;
+            case 1: rWrite(PHIAB, (chan[0].freq >> 8) | ((0 >> 8) << 4)); break;
+
+            case 2: rWrite(PHICD, (0 >> 8) | ((chan[3].freq >> 8) << 4)); break;
+            case 3: rWrite(PHICD, (chan[2].freq >> 8) | ((0 >> 8) << 4)); break;
+
+            case 4: rWrite(PHIEN, (0 >> 8) | ((chan[NOISE_CH].freq >> 8) << 4)); break;
+            default: break;
+          }
+
+          if(chan[i].noise) //write proper duty
+          {
+            rWrite(DUTYA + i, 0);
+          }
+          else
+          {
+            rWrite(DUTYA + i, 0xff);
+          }
+
+          chan[i].enabled = false; //so subsequent pitch changes do not break 0 freq
+
+          switch(i) //do phase reset
+          {
+            case 0: rWrite(PHIAB, (0 >> 8) | ((chan[1].freq >> 8) << 4) | 0x8); break;
+            case 1: rWrite(PHIAB, (chan[0].freq >> 8) | ((0 >> 8) << 4) | 0x80); break;
+
+            case 2: rWrite(PHICD, (0 >> 8) | ((chan[3].freq >> 8) << 4) | 0x8); break;
+            case 3: rWrite(PHICD, (chan[2].freq >> 8) | ((0 >> 8) << 4) | 0x80); break;
+
+            case 4: rWrite(PHIEN, (0 >> 8) | ((chan[NOISE_CH].freq >> 8) << 4) | 0x8); break;
+            default: break;
+          }
+        }
+
+        if(chan[i].tone)
+        {
+          chan[i].enabled = true;
+          chan[i].freqChanged = true;
+          rWrite(DUTYA + i, chan[i].duty); //restore duty!
         }
       }
     }
@@ -355,7 +403,11 @@ void DivPlatformT85APU::tick(bool sysTick)
 
       if(chan[i].keyOn && i < T85APU_NUM_REAL_CHANS)
       {
-        rWrite(DUTYA + i, chan[i].duty);
+        //chan[i].tone = true;
+        if(chan[i].tone)
+        {
+          rWrite(DUTYA + i, chan[i].duty);
+        }
         rWrite(VOL_A + i, chan[i].outVol);
       }
 
@@ -529,8 +581,10 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       chan[c.chan].inPorta=c.value;
       break;
     case DIV_CMD_WAVE:
+    {
       chan[c.chan].noise = c.value&1;
       chan[c.chan].envelope = c.value&2;
+      chan[c.chan].tone = c.value&4;
 
       rWrite(CFG_A + c.chan, 
         (chan[c.chan].noise && !isMuted[NOISE_CH] ? 1<<NOISE_EN : 0) | 
@@ -545,7 +599,55 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
           default: break;
         }
       }
+
+      if(!chan[c.chan].tone) //disable tone
+      {
+        rWrite(PILOA + c.chan, 0); //0 freq
+
+        switch(c.chan)
+        {
+          case 0: rWrite(PHIAB, (0 >> 8) | ((chan[1].freq >> 8) << 4)); break;
+          case 1: rWrite(PHIAB, (chan[0].freq >> 8) | ((0 >> 8) << 4)); break;
+
+          case 2: rWrite(PHICD, (0 >> 8) | ((chan[3].freq >> 8) << 4)); break;
+          case 3: rWrite(PHICD, (chan[2].freq >> 8) | ((0 >> 8) << 4)); break;
+
+          case 4: rWrite(PHIEN, (0 >> 8) | ((chan[NOISE_CH].freq >> 8) << 4)); break;
+          default: break;
+        }
+
+        if(chan[c.chan].noise) //write proper duty
+        {
+          rWrite(DUTYA + c.chan, 0);
+        }
+        else
+        {
+          rWrite(DUTYA + c.chan, 0xff);
+        }
+
+        chan[c.chan].enabled = false; //so subsequent pitch changes do not break 0 freq
+
+        switch(c.chan) //do phase reset
+        {
+          case 0: rWrite(PHIAB, (0 >> 8) | ((chan[1].freq >> 8) << 4) | 0x8); break;
+          case 1: rWrite(PHIAB, (chan[0].freq >> 8) | ((0 >> 8) << 4) | 0x80); break;
+
+          case 2: rWrite(PHICD, (0 >> 8) | ((chan[3].freq >> 8) << 4) | 0x8); break;
+          case 3: rWrite(PHICD, (chan[2].freq >> 8) | ((0 >> 8) << 4) | 0x80); break;
+
+          case 4: rWrite(PHIEN, (0 >> 8) | ((chan[NOISE_CH].freq >> 8) << 4) | 0x8); break;
+          default: break;
+        }
+      }
+
+      if(chan[c.chan].tone)
+      {
+        chan[c.chan].enabled = true;
+        chan[c.chan].freqChanged = true;
+        rWrite(DUTYA + c.chan, chan[c.chan].duty); //restore duty!
+      }
       break;
+    }
     case DIV_CMD_C64_FINE_DUTY:
       if(c.chan < T85APU_NUM_REAL_CHANS)
       {
@@ -732,6 +834,7 @@ void DivPlatformT85APU::reset() {
     chan[i].vol = 0xff;
     chan[i].noise = false;
     chan[i].envelope = false;
+    chan[i].tone = true;
     chan[i].duty = 0x80;
     chan[i].env_num = 0;
 

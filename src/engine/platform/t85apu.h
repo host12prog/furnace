@@ -32,7 +32,7 @@ class DivPlatformT85APU: public DivDispatch {
     struct Channel: public SharedChannel<int> {
       int octave, increment;
       int duty;
-      bool noise, envelope, enabled;
+      bool noise, envelope, tone, enabled;
       int env_num, env_shape;
       Channel():
         SharedChannel<int>(255),
@@ -41,6 +41,8 @@ class DivPlatformT85APU: public DivDispatch {
         duty(0x80),
         noise(false),
         envelope(false),
+        tone(true),
+        enabled(true),
         env_num(0) {}
     };
     Channel chan[T85APU_NUM_CHANS];
