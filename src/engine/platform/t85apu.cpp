@@ -186,18 +186,6 @@ void DivPlatformT85APU::tick(bool sysTick)
         {
           rWrite(PILOA + i, 0); //0 freq
 
-          switch(i)
-          {
-            case 0: rWrite(PHIAB, (0 >> 8) | ((chan[1].freq >> 8) << 4)); break;
-            case 1: rWrite(PHIAB, (chan[0].freq >> 8) | ((0 >> 8) << 4)); break;
-
-            case 2: rWrite(PHICD, (0 >> 8) | ((chan[3].freq >> 8) << 4)); break;
-            case 3: rWrite(PHICD, (chan[2].freq >> 8) | ((0 >> 8) << 4)); break;
-
-            case 4: rWrite(PHIEN, (0 >> 8) | ((chan[NOISE_CH].freq >> 8) << 4)); break;
-            default: break;
-          }
-
           if(chan[i].noise) //write proper duty
           {
             rWrite(DUTYA + i, 0);
@@ -322,8 +310,8 @@ void DivPlatformT85APU::tick(bool sysTick)
           }
           case ENV_B_CH:
           {
-            rWrite(ELDLO, env_init_phase[0] & 0xff);
-            rWrite(ELDHI, env_init_phase[0] >> 8);
+            rWrite(ELDLO, env_init_phase[1] & 0xff);
+            rWrite(ELDHI, env_init_phase[1] >> 8);
             rWrite(E_SHP, 0x80 | (env_shape[1] << 4) | env_shape[0]);
             break;
           }
@@ -337,12 +325,12 @@ void DivPlatformT85APU::tick(bool sysTick)
     {
       if(chan[i].freqChanged && chan[i].enabled)
       {
-        if(i < 6) // Tone and noise
+        if(i <= NOISE_CH) // Tone and noise
         {
           chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE);
           CLAMP_VAR(chan[i].freq, 0, 0xFFFF);
 
-          chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 8 + 1), 0);
+          chan[i].octave = my_max(floor(std::log2(chan[i].freq) - 8 + 1), 0);
           chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
           if (chan[i].increment > UINT8_MAX && chan[i].octave < 7)
           {
@@ -376,7 +364,7 @@ void DivPlatformT85APU::tick(bool sysTick)
           chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE_ENV);
           CLAMP_VAR(chan[i].freq, 0, 0xFFFFFF);
           
-          chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 8 + 1), 0);
+          chan[i].octave = my_max(floor(std::log2(chan[i].freq) - 8 + 1), 0);
           chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
           if (chan[i].increment > UINT8_MAX && chan[i].octave < 15)
           {
@@ -417,7 +405,7 @@ void DivPlatformT85APU::tick(bool sysTick)
         chan[i].freq=parent->calcFreq(chan[i].baseFreq,chan[i].pitch,chan[i].fixedArp?chan[i].baseNoteOverride:chan[i].arpOff,chan[i].fixedArp,false,8,chan[i].pitch2,chipClock,CHIP_FREQBASE_ENV);
         CLAMP_VAR(chan[i].freq, 0, 0xFFFFFF);
         
-        chan[i].octave = (int)std::fmax(floor(std::log2(chan[i].freq) - 8 + 1), 0);
+        chan[i].octave = my_max(floor(std::log2(chan[i].freq) - 8 + 1), 0);
         chan[i].increment = round(chan[i].freq / std::pow(2, chan[i].octave));
         if (chan[i].increment > UINT8_MAX && chan[i].octave < 15)
         {
@@ -450,6 +438,7 @@ void DivPlatformT85APU::tick(bool sysTick)
 
 int DivPlatformT85APU::dispatch(DivCommand c) {
   if (c.chan > T85APU_NUM_CHANS - 1) return 0;
+  int envNum;
   switch (c.cmd) {
     case DIV_CMD_NOTE_ON: {
       DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_AT85APU);
@@ -470,7 +459,7 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       chan[c.chan].keyOn=false;
       chan[c.chan].enabled=false;
       chan[c.chan].macroInit(NULL);
-      chan[c.chan].freq = 0;
+      chan[c.chan].freq = 0; chan[c.chan].increment = 0;
 
       if (c.chan < T85APU_NUM_REAL_CHANS)
       {
@@ -483,24 +472,7 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       } 
       else if (c.chan == ENV_A_CH || c.chan == ENV_B_CH) 
       {
-        rWrite(EPLOA + (c.chan - ENV_A_CH), chan[c.chan].freq & 0xff);
-      }
-
-      if(c.chan == 0 || c.chan == 1) 
-      {
-        rWrite(PHIAB, (chan[0].freq >> 8) | ((chan[1].freq >> 8) << 4));
-      } 
-      else if(c.chan == 2 || c.chan == 3) 
-      {
-        rWrite(PHICD, (chan[2].freq >> 8) | ((chan[3].freq >> 8) << 4));
-      } 
-      else if(c.chan == NOISE_CH || c.chan == 4) 
-      {
-        rWrite(PHIEN, (chan[4].freq >> 8) | ((chan[NOISE_CH].freq >> 8) << 4));
-      } 
-      else if(c.chan == ENV_A_CH || c.chan == ENV_B_CH) 
-      {
-        rWrite(EPIHI, ((chan[ENV_B_CH].freq >> 8) << 4) | (chan[ENV_A_CH].freq >> 8));
+        rWrite(EPLOA + (c.chan - ENV_CH_START), chan[c.chan].freq & 0xff);
       }
       break;
     case DIV_CMD_NOTE_OFF_ENV:
@@ -582,69 +554,60 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       break;
     case DIV_CMD_WAVE:
     {
-      chan[c.chan].noise = c.value&1;
-      chan[c.chan].envelope = c.value&2;
-      chan[c.chan].tone = c.value&4;
-
-      rWrite(CFG_A + c.chan, 
-        (chan[c.chan].noise && !isMuted[NOISE_CH] ? 1<<NOISE_EN : 0) | 
-        (chan[c.chan].envelope && !isMuted[ENV_CH_START+chan[c.chan].env_num] ? 1<<ENV_EN : 0) | (chan[c.chan].env_num << SLOT_NUM) | 0xF);
-
-      if(chan[c.chan].envelope)
+      if(c.chan < T85APU_NUM_REAL_CHANS)
       {
-        switch(chan[c.chan].env_num)
+        chan[c.chan].tone = c.value&1;
+        chan[c.chan].noise = c.value&2;
+        chan[c.chan].envelope = c.value&4;
+
+        rWrite(CFG_A + c.chan, 
+          (chan[c.chan].noise && !isMuted[NOISE_CH] ? 1<<NOISE_EN : 0) | 
+          (chan[c.chan].envelope && !isMuted[ENV_CH_START+chan[c.chan].env_num] ? 1<<ENV_EN : 0) | (chan[c.chan].env_num << SLOT_NUM) | 0xF);
+
+        if(chan[c.chan].envelope)
         {
-          case 0: rWrite(E_SHP, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
-          case 1: rWrite(E_SHP, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
-          default: break;
-        }
-      }
-
-      if(!chan[c.chan].tone) //disable tone
-      {
-        rWrite(PILOA + c.chan, 0); //0 freq
-
-        switch(c.chan)
-        {
-          case 0: rWrite(PHIAB, (0 >> 8) | ((chan[1].freq >> 8) << 4)); break;
-          case 1: rWrite(PHIAB, (chan[0].freq >> 8) | ((0 >> 8) << 4)); break;
-
-          case 2: rWrite(PHICD, (0 >> 8) | ((chan[3].freq >> 8) << 4)); break;
-          case 3: rWrite(PHICD, (chan[2].freq >> 8) | ((0 >> 8) << 4)); break;
-
-          case 4: rWrite(PHIEN, (0 >> 8) | ((chan[NOISE_CH].freq >> 8) << 4)); break;
-          default: break;
+          switch(chan[c.chan].env_num)
+          {
+            case 0: rWrite(E_SHP, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
+            case 1: rWrite(E_SHP, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
+            default: break;
+          }
         }
 
-        if(chan[c.chan].noise) //write proper duty
+        if(!chan[c.chan].tone) //disable tone
         {
-          rWrite(DUTYA + c.chan, 0);
+          rWrite(PILOA + c.chan, 0); //0 freq
+
+          if(chan[c.chan].noise) //write proper duty
+          {
+            rWrite(DUTYA + c.chan, 0);
+          }
+          else
+          {
+            rWrite(DUTYA + c.chan, 0xff);
+          }
+
+          chan[c.chan].enabled = false; //so subsequent pitch changes do not break 0 freq
+
+          switch(c.chan) //do phase reset
+          {
+            case 0: rWrite(PHIAB, (0 >> 8) | ((chan[1].freq >> 8) << 4) | 0x8); break;
+            case 1: rWrite(PHIAB, (chan[0].freq >> 8) | ((0 >> 8) << 4) | 0x80); break;
+
+            case 2: rWrite(PHICD, (0 >> 8) | ((chan[3].freq >> 8) << 4) | 0x8); break;
+            case 3: rWrite(PHICD, (chan[2].freq >> 8) | ((0 >> 8) << 4) | 0x80); break;
+
+            case 4: rWrite(PHIEN, (0 >> 8) | ((chan[NOISE_CH].freq >> 8) << 4) | 0x8); break;
+            default: break;
+          }
         }
-        else
+
+        if(chan[c.chan].tone)
         {
-          rWrite(DUTYA + c.chan, 0xff);
+          chan[c.chan].enabled = true;
+          chan[c.chan].freqChanged = true;
+          rWrite(DUTYA + c.chan, chan[c.chan].duty); //restore duty!
         }
-
-        chan[c.chan].enabled = false; //so subsequent pitch changes do not break 0 freq
-
-        switch(c.chan) //do phase reset
-        {
-          case 0: rWrite(PHIAB, (0 >> 8) | ((chan[1].freq >> 8) << 4) | 0x8); break;
-          case 1: rWrite(PHIAB, (chan[0].freq >> 8) | ((0 >> 8) << 4) | 0x80); break;
-
-          case 2: rWrite(PHICD, (0 >> 8) | ((chan[3].freq >> 8) << 4) | 0x8); break;
-          case 3: rWrite(PHICD, (chan[2].freq >> 8) | ((0 >> 8) << 4) | 0x80); break;
-
-          case 4: rWrite(PHIEN, (0 >> 8) | ((chan[NOISE_CH].freq >> 8) << 4) | 0x8); break;
-          default: break;
-        }
-      }
-
-      if(chan[c.chan].tone)
-      {
-        chan[c.chan].enabled = true;
-        chan[c.chan].freqChanged = true;
-        rWrite(DUTYA + c.chan, chan[c.chan].duty); //restore duty!
       }
       break;
     }
@@ -666,40 +629,59 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
     case DIV_CMD_AY_ENVELOPE_LOW:
       if(c.chan < T85APU_NUM_REAL_CHANS)
       {
-        env_init_phase[chan[c.chan].env_num] &= 0xff00;
-        env_init_phase[chan[c.chan].env_num] |= c.value & 0xff;
+        envNum = chan[c.chan].env_num;
+      } 
+      else if (c.chan == ENV_A_CH || c.chan == ENV_B_CH) 
+      {
+        envNum = c.chan - ENV_CH_START;
+      }
+      else if (c.chan == NOISE_CH)
+      {
+        break;
+      }
+      env_init_phase[envNum] &= 0xff00;
+      env_init_phase[envNum] |= c.value & 0xff;
 
-        rWrite(ELDLO, env_init_phase[chan[c.chan].env_num] & 0xff);
-        rWrite(ELDHI, env_init_phase[chan[c.chan].env_num] >> 8);
+      rWrite(ELDLO, env_init_phase[envNum] & 0xff);
+      rWrite(ELDHI, env_init_phase[envNum] >> 8);
 
-        if(chan[c.chan].envelope)
+      if(chan[c.chan].envelope)
+      {
+        switch(envNum)
         {
-          switch(chan[c.chan].env_num)
-          {
-            case 0: rWrite(E_SHP, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
-            case 1: rWrite(E_SHP, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
-            default: break;
-          }
+          case 0: rWrite(E_SHP, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
+          case 1: rWrite(E_SHP, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
+          default: break;
         }
       }
       break;
     case DIV_CMD_AY_ENVELOPE_HIGH:
       if(c.chan < T85APU_NUM_REAL_CHANS)
       {
-        env_init_phase[chan[c.chan].env_num] &= 0x00ff;
-        env_init_phase[chan[c.chan].env_num] |= (c.value & 0xff) << 8;
+        envNum = chan[c.chan].env_num;
+      } 
+      else if (c.chan == ENV_A_CH || c.chan == ENV_B_CH) 
+      {
+        envNum = c.chan - ENV_CH_START;
+      }
+      else if (c.chan == NOISE_CH)
+      {
+        break;
+      }
 
-        rWrite(ELDLO, env_init_phase[chan[c.chan].env_num] & 0xff);
-        rWrite(ELDHI, env_init_phase[chan[c.chan].env_num] >> 8);
+      env_init_phase[envNum] &= 0x00ff;
+      env_init_phase[envNum] |= (c.value & 0xff) << 8;
 
-        if(chan[c.chan].envelope)
+      rWrite(ELDLO, env_init_phase[envNum] & 0xff);
+      rWrite(ELDHI, env_init_phase[envNum] >> 8);
+
+      if(chan[c.chan].envelope)
+      {
+        switch(envNum)
         {
-          switch(chan[c.chan].env_num)
-          {
-            case 0: rWrite(E_SHP, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
-            case 1: rWrite(E_SHP, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
-            default: break;
-          }
+          case 0: rWrite(E_SHP, (env_shape[1] << 4) | 0x8 | env_shape[0]); break;
+          case 1: rWrite(E_SHP, 0x80 | (env_shape[1] << 4) | env_shape[0]); break;
+          default: break;
         }
       }
       break;
