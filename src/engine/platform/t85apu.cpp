@@ -438,7 +438,7 @@ void DivPlatformT85APU::tick(bool sysTick)
 
 int DivPlatformT85APU::dispatch(DivCommand c) {
   if (c.chan > T85APU_NUM_CHANS - 1) return 0;
-  int envNum;
+  int envNum = 0;
   switch (c.cmd) {
     case DIV_CMD_NOTE_ON: {
       DivInstrument* ins=parent->getIns(chan[c.chan].ins,DIV_INS_AT85APU);
@@ -627,6 +627,7 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       }
       break;
     case DIV_CMD_AY_ENVELOPE_LOW:
+    {
       if(c.chan < T85APU_NUM_REAL_CHANS)
       {
         envNum = chan[c.chan].env_num;
@@ -635,7 +636,7 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       {
         envNum = c.chan - ENV_CH_START;
       }
-      else if (c.chan == NOISE_CH)
+      if (c.chan == NOISE_CH)
       {
         break;
       }
@@ -655,7 +656,9 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
         }
       }
       break;
+    }
     case DIV_CMD_AY_ENVELOPE_HIGH:
+    {
       if(c.chan < T85APU_NUM_REAL_CHANS)
       {
         envNum = chan[c.chan].env_num;
@@ -664,7 +667,7 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
       {
         envNum = c.chan - ENV_CH_START;
       }
-      else if (c.chan == NOISE_CH)
+      if (c.chan == NOISE_CH)
       {
         break;
       }
@@ -685,7 +688,7 @@ int DivPlatformT85APU::dispatch(DivCommand c) {
         }
       }
       break;
-
+    }
     case DIV_CMD_POWERNOISE_COUNTER_LOAD:
       if(c.chan == NOISE_CH)
       {
