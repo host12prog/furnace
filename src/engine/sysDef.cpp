@@ -2257,7 +2257,7 @@ void DivEngine::registerSystems() {
     {DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU},
     {},
     {
-      {0x10, {DIV_CMD_WAVE, "10xx: Set wave (bit 0: noise, bit 1: envelope, bit 2: tone)##sesd"}},
+      {0x10, {DIV_CMD_WAVE, "10xx: Set wave (bit 0: tone, bit 1: noise, bit 2: envelope)##sesd"}},
       {0x11, {DIV_CMD_C64_FINE_DUTY, "11xx: Set duty cycle##sesd"}},
       {0x12, {DIV_CMD_AY_ENVELOPE_SET, "12xx: Set envelope shape (envelope channels only, 0-7)##sesd"}},
       {0x13, {DIV_CMD_AY_ENVELOPE_LOW, "13xx: Set envelope starting phase (lower byte)##sesd"}},
