@@ -303,10 +303,6 @@ const char* SID2waveMixModes[5]={
   "8580 SID##sgistru", "bitwise AND##sgistru", "bitwise OR##sgistru", "bitwise XOR##sgistru", NULL
 };
 
-const char* t85ShapeBits[3]={
-  "noise##sgistru1", "envelope##sgistru", NULL
-};
-
 const int orderedOps[4]={
   0, 2, 1, 3
 };

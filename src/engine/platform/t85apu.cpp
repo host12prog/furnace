@@ -164,8 +164,8 @@ void DivPlatformT85APU::tick(bool sysTick)
     {
       if(i < T85APU_NUM_REAL_CHANS)
       {
-        chan[i].noise = chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&1;
-        chan[i].envelope = chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&2;
+        chan[i].noise = chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&2;
+        chan[i].envelope = chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&4;
 
         rWrite(CFG_A + i, 
           (chan[i].noise && !isMuted[NOISE_CH] ? 1<<NOISE_EN : 0) | 
