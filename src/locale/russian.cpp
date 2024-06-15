@@ -461,6 +461,8 @@ void DivLocale::addTranslationsRussian()
     strings["Load Sample##sggu"].plurals[0] = "Загрузить сэмпл";
     strings["compatible files##sggu3"].plurals[0] = "совместимые файлы";
     strings["all files##sggu3"].plurals[0] = "все файлы";
+    strings["NES DPCM data##sggu"].plurals[0] = "Данные ДИКМ для NES";
+    strings["SNES Bit Rate Reduction##sggu"].plurals[0] = "SNES Bit Rate Reduction";
     strings["Load Raw Sample##sggu"].plurals[0] = "Загрузить сырые данные сэмпла";
     strings["all files##sggu4"].plurals[0] = "все файлы";
     strings["Save Sample##sggu"].plurals[0] = "Сохранить сэмпл";

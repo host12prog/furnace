@@ -66,6 +66,10 @@
 
 #include "actionUtil.h"
 
+#ifdef HAVE_SNDFILE
+#include <sndfile.h>
+#endif
+
 bool Particle::update(float frameTime) {
   pos.x+=speed.x*frameTime;
   pos.y+=speed.y*frameTime;
@@ -1830,8 +1834,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       if (!dirExists(workingDirSample)) workingDirSample=getHomeDir();
       hasOpened=fileDialog->openLoad(
         settings.language == DIV_LANG_ENGLISH ? "Load Sample" : _L("Load Sample##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu3"), "*.wav *.dmc *.brr",
-         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu3"), "*"},
+        audioLoadFormats,
         workingDirSample,
         dpiScale,
         NULL, // TODO
@@ -7492,6 +7495,47 @@ bool FurnaceGUI::init() {
     purgeDay=curTime.tm_mday;
   }
 #endif
+
+  // initialize audio formats
+  String compatFormats;
+
+  audioLoadFormats.push_back(settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu3"));
+  audioLoadFormats.push_back("");
+
+#ifdef HAVE_SNDFILE
+  int value=0;
+  sf_command(NULL,SFC_GET_FORMAT_MAJOR_COUNT,&value,sizeof(int));
+  logV("sample formats: %d",value);
+
+  for (int i=0; i<value; i++) {
+    SF_FORMAT_INFO f;
+    f.format=i;
+    if (sf_command(NULL,SFC_GET_FORMAT_MAJOR,&f,sizeof(SF_FORMAT_INFO))!=0) continue;
+    logV("format %d: %s (%s)\n",i,f.name,f.extension);
+    // these two are/will be handled somewhere else
+    if (strcmp(f.extension,"raw")==0) continue;
+    if (strcmp(f.extension,"xi")==0) continue;
+    // just in case
+    if (strcmp(f.extension,"dmc")==0) continue;
+    if (strcmp(f.extension,"brr")==0) continue;
+    audioLoadFormats.push_back(f.name);
+    audioLoadFormats.push_back(fmt::sprintf("*.%s",f.extension));
+    compatFormats+=fmt::sprintf("*.%s ",f.extension);
+  }
+#endif
+
+  compatFormats+="*.dmc ";
+  compatFormats+="*.brr";
+  audioLoadFormats[1]=compatFormats;
+
+  audioLoadFormats.push_back(settings.language == DIV_LANG_ENGLISH ? "NES DPCM data" : _L("NES DPCM data##sggu"));
+  audioLoadFormats.push_back("*.dmc");
+
+  audioLoadFormats.push_back(settings.language == DIV_LANG_ENGLISH ? "SNES Bit Rate Reduction" : _L("SNES Bit Rate Reduction##sggu"));
+  audioLoadFormats.push_back("*.brr");
+
+  audioLoadFormats.push_back(settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu3"));
+  audioLoadFormats.push_back("*");
 
 
   logI("done!");

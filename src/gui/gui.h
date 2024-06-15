@@ -2404,6 +2404,8 @@ class FurnaceGUI {
 
   std::vector<FurnaceGUISysCategory> sysCategories;
 
+  std::vector<String> audioLoadFormats;
+
   bool wavePreviewOn;
   SDL_Scancode wavePreviewKey;
   int wavePreviewNote;

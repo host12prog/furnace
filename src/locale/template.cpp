@@ -521,6 +521,8 @@ void DivLocale::addTranslationsTemplate()
     strings["Load Sample##sggu"].plurals[0] = "=Load Sample";
     strings["compatible files##sggu3"].plurals[0] = "=compatible files";
     strings["all files##sggu3"].plurals[0] = "=all files";
+    strings["NES DPCM data##sggu"].plurals[0] = "=NES DPCM data";
+    strings["SNES Bit Rate Reduction##sggu"].plurals[0] = "=SNES Bit Rate Reduction";
     strings["Load Raw Sample##sggu"].plurals[0] = "=Load Raw Sample";
     strings["all files##sggu4"].plurals[0] = "=all files";
     strings["Save Sample##sggu"].plurals[0] = "=Save Sample";
