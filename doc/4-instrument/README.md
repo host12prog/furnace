@@ -25,6 +25,7 @@ the following instrument types are available:
 - [ADPCM-A](adpcm-a.md) - for use with ADPCM-A sample chip.
 - [ADPCM-B](adpcm-b.md) - for use with ADPCM-B sample chip.
 - [Atari Lynx](lynx.md) - for use with Atari Lynx handheld console.
+- [ATTiny85APU](t85.md) - for use with ATTiny85APU fantasy chip.
 - [AY-3-8910/SSG](ay8910.md) - for use with AY-3-8910 PSG sound source and SSG portion in YM2610.
 - [AY8930](ay8930.md) - for use with Microchip AY8930 E-PSG sound source.
 - [Beeper](beeper.md) - for use with PC Speaker and ZX Spectrum Beeper (SFX-like engine).
