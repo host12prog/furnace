@@ -3754,6 +3754,7 @@ void DivLocale::addTranslationsRussian()
     strings["Envelope##sgiC640"].plurals[0] = "Огибающая";
     strings["Envelope##sgiC641"].plurals[0] = "Огибающая";
     strings["Duty##sgiC640"].plurals[0] = "Скважность";
+    strings["Reset duty on new note##sgiC64"].plurals[0] = "Сброс скважности на новой ноте";
     strings["Ring Modulation##sgiC64"].plurals[0] = "Кольцевая модуляция";
     strings["Oscillator Sync##sgiC64"].plurals[0] = "Синхронизация осцилляторов";
     strings["Enable filter##sgiC64"].plurals[0] = "Включить фильтр";
@@ -4604,6 +4605,7 @@ void DivLocale::addTranslationsRussian()
     strings["VOL##sgiSID2"].plurals[0] = "ГР";
     strings["Envelope##sgiSID2"].plurals[0] = "Огибающая";
     strings["Duty##sgiSID2"].plurals[0] = "Скважность";
+    strings["Reset duty on new note##sgiSID2"].plurals[0] = "Сброс скважности на новой ноте";
     strings["Ring Modulation##sgiSID2"].plurals[0] = "Кольцевая модуляция";
     strings["Oscillator Sync##sgiSID2"].plurals[0] = "Синхронизация осцилляторов";
     strings["Enable filter##sgiSID2"].plurals[0] = "Включить фильтр";

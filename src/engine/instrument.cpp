@@ -494,7 +494,7 @@ void DivInstrument::writeFeature64(SafeWriter* w) {
   w->writeS(c64.duty);
   w->writeS((unsigned short)((c64.cut&4095)|((c64.res&15)<<12)));
 
-  w->writeC((c64.res>>4)&15);
+  w->writeC(((c64.res>>4)&15) | (c64.resetDuty?0x10:0));
 
   FEATURE_END;
 }
@@ -1782,7 +1782,13 @@ void DivInstrument::readFeature64(SafeReader& reader, bool& volIsCutoff, short v
 
   if (version>=199) 
   {
-    c64.res|=((unsigned char)reader.readC())<<4;
+    unsigned char tttempp = (unsigned char)reader.readC();
+    c64.res|=(tttempp)<<4;
+
+    if(version >= 212)
+    {
+      c64.resetDuty = (tttempp & 0x10) ? true : false;
+    }
   }
 
   READ_FEAT_END;

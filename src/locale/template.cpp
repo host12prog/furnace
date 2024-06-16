@@ -3864,6 +3864,7 @@ void DivLocale::addTranslationsTemplate()
     strings["Envelope##sgiC640"].plurals[0] = "=Envelope";
     strings["Envelope##sgiC641"].plurals[0] = "=Envelope";
     strings["Duty##sgiC640"].plurals[0] = "=Duty";
+    strings["Reset duty on new note##sgiC64"].plurals[0] = "=Reset duty on new note";
     strings["Ring Modulation##sgiC64"].plurals[0] = "=Ring Modulation";
     strings["Oscillator Sync##sgiC64"].plurals[0] = "=Oscillator Sync";
     strings["Enable filter##sgiC64"].plurals[0] = "=Enable filter";
@@ -4714,6 +4715,7 @@ void DivLocale::addTranslationsTemplate()
     strings["VOL##sgiSID2"].plurals[0] = "=VOL";
     strings["Envelope##sgiSID2"].plurals[0] = "=Envelope";
     strings["Duty##sgiSID2"].plurals[0] = "=Duty";
+    strings["Reset duty on new note##sgiSID2"].plurals[0] = "=Reset duty on new note";
     strings["Ring Modulation##sgiSID2"].plurals[0] = "=Ring Modulation";
     strings["Oscillator Sync##sgiSID2"].plurals[0] = "=Oscillator Sync";
     strings["Enable filter##sgiSID2"].plurals[0] = "=Enable filter";
