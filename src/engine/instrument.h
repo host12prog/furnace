@@ -102,6 +102,7 @@ enum DivInstrumentType: unsigned short {
   DIV_INS_NDS=64,
   DIV_INS_FZT = 65,
   DIV_INS_BIFURCATOR=66,
+  DIV_INS_AT85APU=67,
   DIV_INS_MAX,
   DIV_INS_NULL
 };
@@ -463,7 +464,7 @@ struct DivInstrumentC64 {
   unsigned char a, d, s, r;
   unsigned short duty;
   unsigned char ringMod, oscSync;
-  bool toFilter, initFilter, dutyIsAbs, filterIsAbs, noTest;
+  bool toFilter, initFilter, dutyIsAbs, filterIsAbs, noTest, resetDuty;
   unsigned char res;
   unsigned short cut;
   bool hp, lp, bp, ch3off;
@@ -490,6 +491,7 @@ struct DivInstrumentC64 {
     dutyIsAbs(false),
     filterIsAbs(false),
     noTest(false),
+    resetDuty(true),
     res(0),
     cut(0),
     hp(false),

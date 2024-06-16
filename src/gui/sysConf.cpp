@@ -2489,6 +2489,92 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
     case DIV_SYSTEM_FZT:
       supportsCustomRate=true;
       break;
+    case DIV_SYSTEM_T85APU:
+    {
+        int clockSel=flags.getInt("clockSel",1);
+
+        ImGui::Text(_L("Clock rate:##sgsc10"));
+        ImGui::Indent();
+        if (ImGui::RadioButton("1MHz (Calibrated Internal Oscillator / 8)##sgsc",clockSel==0)) 
+        {
+          clockSel=0;
+          altered=true;
+        }
+        if (ImGui::RadioButton("8MHz (Calibrated Internal Oscillator)",clockSel==1)) 
+        {
+          clockSel=1;
+          altered=true;
+        }
+        if (ImGui::RadioButton("16MHz (High Frequency PLL Clock)",clockSel==2))
+        {
+          clockSel=2;
+          altered=true;
+        }
+        ImGui::Unindent();
+        
+        int chipClock=flags.getInt("customClock",0);
+        if (!chipClock) 
+        {
+          switch (clockSel) 
+          {
+            case 0:
+              chipClock=1000000;
+              break;
+            case 1:
+              chipClock=8000000;
+              break;
+            case 2:
+              chipClock=16000000;
+              break;
+          }
+        }
+
+        int audioRenderType = flags.getInt("audioRenderType", 0);
+
+        ImGui::Text(_L("Audio output method:##sgsc"));
+        ImGui::Indent();
+        if (ImGui::RadioButton(_L("Idealized internal output - 8-bit PCM##sgsc"), audioRenderType == 0)) 
+        {
+            audioRenderType = 0;
+            altered = true;
+        }
+        if (ImGui::RadioButton(_L("Real internal output - 8-bit PWM##sgsc"), audioRenderType == 1)) 
+        {
+            audioRenderType = 1;
+            altered = true;
+        }
+        ImGui::Unindent();
+
+        if (ImGui::BeginTable("t85Rate",2)) 
+        {
+          ImGui::TableNextRow();
+          ImGui::TableNextColumn();
+          ImGui::TableSetBgColor(ImGuiTableBgTarget_CellBg,ImGui::GetColorU32(ImGuiCol_TableHeaderBg));
+          ImGui::Text(_L("Sample Rate##sgsc"));
+          ImGui::TableNextColumn();
+          ImGui::Text(_L("%.0fHz##sgsc"), chipClock/512.0);
+
+          if (audioRenderType == 1) 
+          {
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+            ImGui::TableSetBgColor(ImGuiTableBgTarget_CellBg,ImGui::GetColorU32(ImGuiCol_TableHeaderBg));
+            ImGui::Text(_L("PWM Rate##sgsc"));
+            ImGui::TableNextColumn();
+            ImGui::Text(_L("%.0fHz##sgsc"), chipClock/256.0);
+          }
+
+          ImGui::EndTable();
+        }
+
+        if (altered) {
+            e->lockSave([&]() {
+                flags.set("clockSel", clockSel);
+                flags.set("audioRenderType", audioRenderType);
+            });
+        }
+        break;
+    }
     default: {
       bool sysPal=flags.getInt("clockSel",0);
 

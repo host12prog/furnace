@@ -112,6 +112,11 @@ void FurnaceGUI::drawInsSID2(DivInstrument* ins)
     }
 
     P(CWSliderScalar(_L("Duty##sgiSID2"),ImGuiDataType_U16,&ins->c64.duty,&_ZERO,&_FOUR_THOUSAND_NINETY_FIVE)); rightClickable
+    bool resetDuty=ins->c64.resetDuty;
+    if (ImGui::Checkbox(_L("Reset duty on new note##sgiSID2"),&resetDuty)) 
+    { PARAMETER
+      ins->c64.resetDuty=resetDuty;
+    }
 
     bool ringMod=ins->c64.ringMod;
     if (ImGui::Checkbox(_L("Ring Modulation##sgiSID2"),&ringMod)) 

@@ -13,8 +13,8 @@ the SID2 instrument editor consists of two tabs: "SID2" to control various param
 - **Decay**: determines the diminishing time for the sound. the higher the value, the longer the decay (0 to 15).
 - **Sustain**: sets the volume level at which the sound stops decaying and holds steady (0 to 15).
 - **Release**: determines the rate at which the sound fades out after note off. the higher the value, the longer the release (0 to 15).
-- **Volume**: master volume of ADSR envelope on the channel (0 to 15).
 - **Duty**: specifies the width of a pulse wave (0 to 4095).
+- **Reset duty on new note**: overwrite current duty value with the one that's specified in the instrument on new note.
 - **Ring Modulation**: when enabled, the channel's output will be multiplied with the previous channel's.
 - **Oscillator Sync**: enables oscillator hard sync. as the previous channel's oscillator finishes a cycle, it resets the period of the channel's oscillator, forcing the latter to have the same base frequency. this can produce a harmonically rich sound, the timbre of which can be altered by varying the synchronized oscillator's frequency.
 

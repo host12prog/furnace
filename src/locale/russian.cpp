@@ -77,7 +77,7 @@ void DivLocale::addTranslationsRussian()
     strings["adpcm by superctr##sgab"].plurals[0] = "adpcm за авторством superctr";
     strings["adpcm-xq by David Bryant##sgab"].plurals[0] = "adpcm-xq за авторством David Bryant";
     strings["Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt##sgab"].plurals[0] = "Nuked-OPL3/OPLL/OPM/OPN2/PSG за авторством nukeykt";
-    strings["YM3812-LLE, YMF262-LLE, YMF276-LLE и YM2608-LLE by nukeykt##sgab"].plurals[0] = "YM3812-LLE, YMF262-LLE, YMF276-LLE и YM2608-LLE за авторством nukeykt";
+    strings["YM3812-LLE, YMF262-LLE, YMF276-LLE and YM2608-LLE by nukeykt##sgab"].plurals[0] = "YM3812-LLE, YMF262-LLE, YMF276-LLE и YM2608-LLE за авторством nukeykt";
     strings["ymfm by Aaron Giles##sgab"].plurals[0] = "ymfm за авторством Aaron Giles";
     strings["emu2413 by Digital Sound Antiques##sgab"].plurals[0] = "emu2413 за авторством Digital Sound Antiques";
     strings["MAME SN76496 by Nicola Salmoria##sgab"].plurals[0] = "MAME SN76496 за авторством Nicola Salmoria";
@@ -1333,6 +1333,11 @@ void DivLocale::addTranslationsRussian()
     strings["Channels in file##sgeo"].plurals[0] = "Каналов аудио в файле";
     strings["Loops##sgeo"].plurals[0] = "Повторов трека";
     strings["Fade out (seconds)##sgeo"].plurals[0] = "Затухание (в секундах)";
+    strings["Channels to export:##sgeo"].plurals[0] = "Экспортировать каналы:";
+    strings["All##sgeo"].plurals[0] = "Все";
+    strings["None##sgeo"].plurals[0] = "Ни одного";
+    strings["Invert##sgeo"].plurals[0] = "Инвертировать выделение";
+    strings["Channel Selection##sgeo"].plurals[0] = "Выбор каналов";
     strings["Cancel##sgeo0"].plurals[0] = "Отмена";
     strings["Export##sgeo0"].plurals[0] = "Экспорт";
     strings["settings:##sgeo"].plurals[0] = "настройки:";
@@ -3752,6 +3757,7 @@ void DivLocale::addTranslationsRussian()
     strings["Envelope##sgiC640"].plurals[0] = "Огибающая";
     strings["Envelope##sgiC641"].plurals[0] = "Огибающая";
     strings["Duty##sgiC640"].plurals[0] = "Скважность";
+    strings["Reset duty on new note##sgiC64"].plurals[0] = "Сброс скважности на новой ноте";
     strings["Ring Modulation##sgiC64"].plurals[0] = "Кольцевая модуляция";
     strings["Oscillator Sync##sgiC64"].plurals[0] = "Синхронизация осцилляторов";
     strings["Enable filter##sgiC64"].plurals[0] = "Включить фильтр";
@@ -4602,6 +4608,7 @@ void DivLocale::addTranslationsRussian()
     strings["VOL##sgiSID2"].plurals[0] = "ГР";
     strings["Envelope##sgiSID2"].plurals[0] = "Огибающая";
     strings["Duty##sgiSID2"].plurals[0] = "Скважность";
+    strings["Reset duty on new note##sgiSID2"].plurals[0] = "Сброс скважности на новой ноте";
     strings["Ring Modulation##sgiSID2"].plurals[0] = "Кольцевая модуляция";
     strings["Oscillator Sync##sgiSID2"].plurals[0] = "Синхронизация осцилляторов";
     strings["Enable filter##sgiSID2"].plurals[0] = "Включить фильтр";

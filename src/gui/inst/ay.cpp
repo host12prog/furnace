@@ -40,7 +40,7 @@ void FurnaceGUI::drawInsAY(DivInstrument* ins)
     if(!ins->amiga.useSample)
     {
       macroList.push_back(FurnaceGUIMacroDesc(_L("Noise Freq##sgiAY"),ins,DIV_MACRO_DUTY,0xff,0,31,64,uiColors[GUI_COLOR_MACRO_OTHER]));
-      macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiAY"),ins,DIV_MACRO_WAVE,0xff,0,3,64,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,true,ayShapeBits));
+      macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiAY"),ins,DIV_MACRO_WAVE,0xff,0,3,48,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,true,ayShapeBits));
     }
 
     macroList.push_back(FurnaceGUIMacroDesc(_L("Raw Period##sgiAY"),ins,DIV_MACRO_EX4,0xff,0,0xfff,256,uiColors[GUI_COLOR_MACRO_OTHER]));

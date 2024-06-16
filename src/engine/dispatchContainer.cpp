@@ -82,6 +82,7 @@
 #include "platform/ted.h"
 #include "platform/c140.h"
 #include "platform/es5503.h"
+#include "platform/sid2.h"
 #include "platform/gbadma.h"
 #include "platform/gbaminmod.h"
 #include "platform/pcmdac.h"
@@ -92,7 +93,7 @@
 #include "platform/nds.h"
 #include "platform/fzt.h"
 #include "platform/bifurcator.h"
-#include "platform/sid2.h"
+#include "platform/t85apu.h"
 #include "platform/dummy.h"
 #include "../ta-log.h"
 #include "song.h"
@@ -805,6 +806,9 @@ void DivDispatchContainer::init(DivSystem sys, DivEngine* eng, int chanCount, do
       break;
     case DIV_SYSTEM_FZT:
       dispatch=new DivPlatformFZT;
+      break;
+    case DIV_SYSTEM_T85APU:
+      dispatch=new DivPlatformT85APU;
       break;
     case DIV_SYSTEM_DUMMY:
       dispatch=new DivPlatformDummy;

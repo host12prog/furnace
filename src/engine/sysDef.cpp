@@ -2248,6 +2248,26 @@ void DivEngine::registerSystems() {
     }
   );
 
+  sysDefs[DIV_SYSTEM_T85APU]=new DivSysDef(
+    "ATTiny85APU", NULL, 0xf4, 0, 8, false, true, 0, false, 0, 0, 0,
+    "a software synth for the ATTiny25/45/85 MCUs written entirely in AVR Assembly by alexmush.##sesd",
+    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Noise##sesd", "Envelope 1##sesd", "Envelope 2##sesd"},
+    {"CH1##sesd", "CH2##sesd", "CH3##sesd", "CH4##sesd", "CH5##sesd", "NO##sesd", "E1##sesd", "E2##sesd"},
+    {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_NOISE, DIV_CH_WAVE, DIV_CH_WAVE},
+    {DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU},
+    {},
+    {
+      {0x10, {DIV_CMD_WAVE, "10xx: Set wave (bit 0: tone, bit 1: noise, bit 2: envelope)##sesd"}},
+      {0x11, {DIV_CMD_C64_FINE_DUTY, "11xx: Set duty cycle##sesd"}},
+      {0x12, {DIV_CMD_AY_ENVELOPE_SET, "12xx: Set envelope shape (envelope channels only, 0-7)##sesd"}},
+      {0x13, {DIV_CMD_AY_ENVELOPE_LOW, "13xx: Set envelope starting phase (lower byte)##sesd"}},
+      {0x14, {DIV_CMD_AY_ENVELOPE_HIGH, "14xx: Set envelope starting phase (higher byte)##sesd"}},
+      {0x15, {DIV_CMD_POWERNOISE_COUNTER_LOAD, "15xx: Load low byte of noise generator LFSR feedback bits##sesd", constVal<0>, effectVal}},
+      {0x16, {DIV_CMD_POWERNOISE_COUNTER_LOAD, "16xx: Load high byte of noise generator LFSR feedback bits##sesd", constVal<1>, effectVal}},
+      {0x17, {DIV_CMD_AY_AUTO_ENVELOPE, "17xx: Set envelope number (0 to 1)##sesd"}},
+    }
+  );
+
   sysDefs[DIV_SYSTEM_DUMMY]=new DivSysDef(
     "Dummy System##sesd", NULL, 0xfd, 0, 8, false, true, 0, false, 0, 0, 0,
     "this is a system designed for testing purposes.##sesd",

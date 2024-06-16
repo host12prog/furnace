@@ -354,6 +354,7 @@ enum FurnaceGUIColors {
   GUI_COLOR_INSTR_NDS,
   GUI_COLOR_INSTR_FZT,
   GUI_COLOR_INSTR_BIFURCATOR,
+  GUI_COLOR_INSTR_AT85APU,
   GUI_COLOR_INSTR_UNKNOWN,
 
   GUI_COLOR_CHANNEL_BG,
@@ -608,6 +609,7 @@ enum FurnaceGUIFileDialogs {
   GUI_FILE_EXPORT_TEXT,
   GUI_FILE_EXPORT_ROM,
   GUI_FILE_EXPORT_FUR,
+  GUI_FILE_EXPORT_T85,
   GUI_FILE_LOAD_MAIN_FONT,
   GUI_FILE_LOAD_HEAD_FONT,
   GUI_FILE_LOAD_PAT_FONT,
@@ -662,7 +664,8 @@ enum FurnaceGUIExportTypes {
   GUI_EXPORT_AMIGA_VAL,
   GUI_EXPORT_TEXT,
   GUI_EXPORT_FUR,
-  GUI_EXPORT_FZT
+  GUI_EXPORT_FZT,
+  GUI_EXPORT_T85
 };
 
 enum FurnaceGUIFMAlgs {
@@ -1633,7 +1636,7 @@ class FurnaceGUI {
 
   String workingDir, fileName, clipboard, warnString, errorString, lastError, curFileName, nextFile, sysSearchQuery, newSongQuery, paletteQuery, insBankSearchQuery;
   String workingDirSong, workingDirIns, workingDirWave, workingDirSample, workingDirAudioExport;
-  String workingDirVGMExport, workingDirZSMExport, workingDirROMExport, workingDirFURExport, workingDirFZTExport, workingDirFont, workingDirColors, workingDirKeybinds;
+  String workingDirVGMExport, workingDirZSMExport, workingDirROMExport, workingDirFURExport, workingDirFZTExport, workingDirT85Export, workingDirFont, workingDirColors, workingDirKeybinds;
   String workingDirLayout, workingDirROM, workingDirTest;
   String workingDirConfig;
   String mmlString[32];
@@ -1670,6 +1673,8 @@ class FurnaceGUI {
   bool willExport[DIV_MAX_CHIPS];
   int vgmExportVersion;
   int vgmExportTrailingTicks;
+  bool t85_loop;
+  int t85_trailingTicks;
   int drawHalt;
   int zsmExportTickRate;
   int macroPointSize;
@@ -2710,6 +2715,7 @@ class FurnaceGUI {
   void drawExportCommand(bool onWindow=false);
   void drawExportFZT(bool onWindow=false);
   void drawExportFur(bool onWindow=false);
+  void drawExportT85(bool onWindow=false);
   void drawSSGEnv(unsigned char type, const ImVec2& size);
   void drawWaveform(unsigned char type, bool opz, const ImVec2& size);
   void drawAlgorithm(unsigned char alg, FurnaceGUIFMAlgs algType, const ImVec2& size);
@@ -2873,6 +2879,7 @@ class FurnaceGUI {
   void drawInsNDS(DivInstrument* ins);
   void drawInsFZT(DivInstrument* ins);
   void drawInsBIFURCATOR(DivInstrument* ins);
+  void drawInsT85APU(DivInstrument* ins);
 
   void insTabWave(DivInstrument* ins);
 

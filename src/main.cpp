@@ -271,6 +271,7 @@ TAParamResult pVersion(String) {
   printf("- 5E01 emulator by Euly (unknown open-source license); modified version of NSFPlay\n");
   printf("- NDS sound emulator by cam900 (zlib license)\n");
   printf("- FZT sound source by LTVA (MIT)\n");
+  printf("- ATTiny85APU emulator (libt85apu) by AlexMush\n");
   return TA_PARAM_QUIT;
 }
 

@@ -54,8 +54,8 @@ class DivWorkPool;
 
 #define DIV_UNSTABLE
 
-#define DIV_VERSION "dev211"
-#define DIV_ENGINE_VERSION 211
+#define DIV_VERSION "dev212"
+#define DIV_ENGINE_VERSION 212
 // for imports
 #define DIV_VERSION_MOD 0xff01
 #define DIV_VERSION_FC 0xff02
@@ -717,6 +717,8 @@ class DivEngine {
     int exportFZTFindWarnings(int* loop_start, int* loop_end, void* fuck_you);
     // export to FZT
     SafeWriter* saveFZT();
+    // export to .t85 (ATTiny85APU register dump, similar to VGM)
+    SafeWriter* saveT85(bool loop, int trailingTicks);
     // export to an audio file
     bool saveAudio(const char* path, DivAudioExportOptions options);
     // wait for audio export to finish

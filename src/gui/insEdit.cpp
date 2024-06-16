@@ -496,6 +496,11 @@ void FurnaceGUI::drawActualInsEditor()
         drawInsBIFURCATOR(ins); break;
       }
 
+      case DIV_INS_AT85APU:
+      {
+        drawInsT85APU(ins); break;
+      }
+
       default: break;
     }
 
