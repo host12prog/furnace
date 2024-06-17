@@ -1050,7 +1050,7 @@ void DivPlatformOPL::tick(bool sysTick) {
 
       if (chan[adpcmChan].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
         chan[adpcmChan].outVol=(chan[adpcmChan].vol*MIN(chan[adpcmChan].macroVolMul,chan[adpcmChan].std.get_div_macro_struct(DIV_MACRO_VOL)->val))/chan[adpcmChan].macroVolMul;
-        immWrite(18,chan[adpcmChan].outVol);
+        immWrite(18,(isMuted[adpcmChan]?0:chan[adpcmChan].outVol));
       }
 
       if (NEW_ARP_STRAT) {
@@ -1228,7 +1228,10 @@ int DivPlatformOPL::toFreq(int freq) {
 
 void DivPlatformOPL::muteChannel(int ch, bool mute) {
   isMuted[ch]=mute;
-  if (ch==adpcmChan) return;
+  if (ch==adpcmChan) {
+    immWrite(18,(isMuted[adpcmChan]?0:chan[adpcmChan].outVol));
+    return;
+  }
   if (oplType<3 && ch<melodicChans) {
     fm.channel[outChanMap[ch]].muted=mute;
   }
@@ -1391,7 +1394,7 @@ int DivPlatformOPL::dispatch(DivCommand c) {
           chan[c.chan].fixedFreq=0;
           if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->will) {
             chan[c.chan].outVol=chan[c.chan].vol;
-            immWrite(18,chan[c.chan].outVol);
+            immWrite(18,(isMuted[adpcmChan]?0:chan[adpcmChan].outVol));
           }
           if (c.value!=DIV_NOTE_NULL) {
             chan[c.chan].sample=ins->amiga.getSample(c.value);
@@ -1522,7 +1525,7 @@ int DivPlatformOPL::dispatch(DivCommand c) {
         chan[c.chan].outVol=c.value;
       }
       if (c.chan==adpcmChan) { // ADPCM-B
-        immWrite(18,chan[c.chan].outVol);
+        immWrite(18,(isMuted[adpcmChan]?0:chan[adpcmChan].outVol));
         break;
       }
       int ops=(slots[3][c.chan]!=255 && chan[c.chan].state.ops==4 && oplType==3)?4:2;
@@ -2254,7 +2257,7 @@ void DivPlatformOPL::reset() {
     adpcmB->reset();
 
     // volume
-    immWrite(18,0xff);
+    immWrite(18,(isMuted[adpcmChan]?0:0xff));
     // ADPCM limit
     immWrite(20,0xff);
     immWrite(19,0xff);
