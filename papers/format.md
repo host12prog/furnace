@@ -250,6 +250,8 @@ size | description
      |   - 0xe0: QSound - 19 channels
      |   - 0xf0: SID2 - 3 channels
      |   - 0xf1: 5E01 - 5 channels
+     |   - 0xf3: FZT sound source - 4 channels
+     |   - 0xf4: ATTiny85APU - 8 channels
      |   - 0xfc: Pong - 1 channel
      |   - 0xfd: Dummy System - 8 channels
      |   - 0xfe: reserved for development
