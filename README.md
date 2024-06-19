@@ -117,7 +117,6 @@ for other operating systems, you may [build the source](#developer-info).
     - tildearrow Sound Unit
     - PowerNoise
     - Bifurcator
-    - SID2
     - Generic PCM DAC
     - SID2
     - 5E01
