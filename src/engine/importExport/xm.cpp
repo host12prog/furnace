@@ -257,9 +257,9 @@ bool DivEngine::loadXM(unsigned char* file, size_t len) {
         for (int j=0; j<96; j++) {
           unsigned char nextMap=reader.readC();
           if (nextMap==0) {
-            ins->amiga.noteMap[j].map=-1;
+            ins->amiga.get_amiga_sample_map(j, true)->map=-1;
           } else {
-            ins->amiga.noteMap[j].map=ds.sample.size()+nextMap-1;
+            ins->amiga.get_amiga_sample_map(j, true)->map=ds.sample.size()+nextMap-1;
           }
         }
 

@@ -1531,13 +1531,13 @@ void DivLocale::addTranslationsPolish()
     strings["invalid instrument type! change it first.##sgie"].plurals[0] = "nieprawidłowy typ instrumentu! zmień go najpierw.";
     strings["Instrument Editor###Instrument Editor"].plurals[0] = "Edytor instrumentów###Instrument Editor";
     strings["waiting...##sgie0"].plurals[0] = "czekaj...";
-    strings["waiting...##sgie1"].plurals[0] = "czekaj...";
+    strings["waiting..."].plurals[0] = "czekaj...";
     strings["no instrument selected##sgie0"].plurals[0] = "nie wybrano żadnego instrumentu";
-    strings["no instrument selected##sgie1"].plurals[0] = "nie wybrano żadnego instrumentu";
+    strings["no instrument selected"].plurals[0] = "nie wybrano żadnego instrumentu";
     strings["select one...##sgie"].plurals[0] = "wybierz jeden...";
     strings["or##sgie0"].plurals[0] = "albo";
-    strings["Open##sgie1"].plurals[0] = "Otwórz";
-    strings["or##sgie1"].plurals[0] = "albo";
+    strings["Open"].plurals[0] = "Otwórz";
+    strings["or"].plurals[0] = "albo";
     strings["Create New##sgie"].plurals[0] = "Stwórz nowy";
     strings["copy##sgie"].plurals[0] = "kopiuj";
     strings["paste##sgie"].plurals[0] = "wklej";

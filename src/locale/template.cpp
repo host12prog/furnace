@@ -1596,13 +1596,13 @@ void DivLocale::addTranslationsTemplate()
     strings["invalid instrument type! change it first.##sgie"].plurals[0] = "=invalid instrument type! change it first.";
     strings["Instrument Editor###Instrument Editor"].plurals[0] = "=Instrument Editor###Instrument Editor";
     strings["waiting...##sgie0"].plurals[0] = "=waiting...";
-    strings["waiting...##sgie1"].plurals[0] = "=waiting...";
+    strings["waiting..."].plurals[0] = "=waiting...";
     strings["no instrument selected##sgie0"].plurals[0] = "=no instrument selected";
-    strings["no instrument selected##sgie1"].plurals[0] = "=no instrument selected";
+    strings["no instrument selected"].plurals[0] = "=no instrument selected";
     strings["select one...##sgie"].plurals[0] = "=select one...";
     strings["or##sgie0"].plurals[0] = "=or";
-    strings["Open##sgie1"].plurals[0] = "=Open";
-    strings["or##sgie1"].plurals[0] = "=or";
+    strings["Open"].plurals[0] = "=Open";
+    strings["or"].plurals[0] = "=or";
     strings["Create New##sgie"].plurals[0] = "=Create New";
     strings["copy##sgie"].plurals[0] = "=copy";
     strings["paste##sgie"].plurals[0] = "=paste";

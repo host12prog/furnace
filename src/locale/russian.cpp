@@ -1538,13 +1538,13 @@ void DivLocale::addTranslationsRussian()
     strings["invalid instrument type! change it first.##sgie"].plurals[0] = "недопустимый тип инструмента! сначала поменяйте его.";
     strings["Instrument Editor###Instrument Editor"].plurals[0] = "Ред. инструментов###Instrument Editor";
     strings["waiting...##sgie0"].plurals[0] = "ожидание...";
-    strings["waiting...##sgie1"].plurals[0] = "ожидание...";
+    strings["waiting..."].plurals[0] = "ожидание...";
     strings["no instrument selected##sgie0"].plurals[0] = "не выбрано ни одного инструмента";
-    strings["no instrument selected##sgie1"].plurals[0] = "не выбрано ни одного инструмента";
+    strings["no instrument selected"].plurals[0] = "не выбрано ни одного инструмента";
     strings["select one...##sgie"].plurals[0] = "выберите один...";
     strings["or##sgie0"].plurals[0] = "или";
-    strings["Open##sgie1"].plurals[0] = "Откройте";
-    strings["or##sgie1"].plurals[0] = "или";
+    strings["Open"].plurals[0] = "Откройте";
+    strings["or"].plurals[0] = "или";
     strings["Create New##sgie"].plurals[0] = "Создайте новый";
     strings["copy##sgie"].plurals[0] = "копировать";
     strings["paste##sgie"].plurals[0] = "вставить";

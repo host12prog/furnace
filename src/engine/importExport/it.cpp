@@ -280,8 +280,8 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
       // note map
       ins->amiga.useNoteMap=true;
       for (int j=0; j<120; j++) {
-        ins->amiga.noteMap[j].freq=(unsigned char)reader.readC();
-        ins->amiga.noteMap[j].map=reader.readC()-1;
+        ins->amiga.get_amiga_sample_map(j, true)->freq=(unsigned char)reader.readC();
+        ins->amiga.get_amiga_sample_map(j, true)->map=reader.readC()-1;
       }
 
       // TODO: envelopes...
