@@ -1978,6 +1978,24 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
         dpiScale
       );
       break;
+    case GUI_FILE_EXPORT_FUR:
+      if (!dirExists(workingDirFURExport)) workingDirFURExport=getHomeDir();
+      hasOpened=fileDialog->openSave(
+        _("Export Furnace song"),
+        {_("Furnace song"), "*.fur"},
+        workingDirFURExport,
+        dpiScale
+      );
+      break;
+    case GUI_FILE_EXPORT_T85:
+      if (!dirExists(workingDirT85Export)) workingDirT85Export=getHomeDir();
+      hasOpened=fileDialog->openSave(
+        _("Export .t85 file"),
+        {_("ATTiny85APU register dump file"), "*.t85"},
+        workingDirT85Export,
+        dpiScale
+      );
+      break;
     case GUI_FILE_LOAD_HEAD_FONT:
       if (!dirExists(workingDirFont)) workingDirFont=getHomeDir();
       hasOpened=fileDialog->openLoad(
@@ -5428,6 +5446,26 @@ bool FurnaceGUI::loop() {
               }
               break;
             }
+            case GUI_FILE_LOCAL_WAVE_OPEN_REPLACE: {
+              DivWavetable* wave=e->waveFromFile(copyOfName.c_str());
+              if (wave==NULL) {
+                String wave_err = _("cannot load wavetable! (");
+                showError(wave_err+e->getLastError()+")");
+              } else {
+                if (curWave>=0 && curWave<(int)e->song.wave.size()) {
+                  e->lockEngine([this,wave]() {
+                    DivInstrument* ins = e->song.ins[curIns];
+                    *ins->std.local_waves[curLocalWave] = *wave;
+                    //*e->song.wave[curWave]=*wave;
+                    MARK_MODIFIED;
+                  });
+                } else {
+                  showError(_("...but you haven't selected a wavetable!"));
+                }
+                delete wave;
+              }
+              break;
+            }
             case GUI_FILE_EXPORT_VGM: {
               SafeWriter* w=e->saveVGM(willExport,vgmExportLoop,vgmExportVersion,vgmExportPatternHints,vgmExportDirectStream,vgmExportTrailingTicks);
               if (w!=NULL) {
@@ -5533,6 +5571,78 @@ bool FurnaceGUI::loop() {
                 }
               } else {
                 showError(fmt::sprintf(_("could not write command stream! (%s)"),e->getLastError()));
+              }
+              break;
+            }
+            case GUI_FILE_EXPORT_FUR: {
+              SafeWriter* w=e->saveFur(false,settings.newPatternFormat, true);
+              if (w!=NULL) {
+                FILE* f=ps_fopen(copyOfName.c_str(),"wb");
+                if (f!=NULL) {
+                  fwrite(w->getFinalBuf(),1,w->size(),f);
+                  fclose(f);
+                  pushRecentSys(copyOfName.c_str());
+                } else {
+                  showError(_("could not open file!"));
+                }
+                w->finish();
+                delete w;
+                if (!e->getWarnings().empty()) {
+                  showWarning(e->getWarnings(),GUI_WARN_GENERIC);
+                }
+              } else {
+                String export_err = _("could not write tildearrow version Furnace module! (%s)");
+                showError(fmt::sprintf(export_err,e->getLastError()));
+              }
+              break;
+            }
+            case GUI_FILE_EXPORT_FZT: {
+              SafeWriter* w=e->saveFZT();
+              if (w!=NULL) {
+                FILE* f=ps_fopen(copyOfName.c_str(),"wb");
+                if (f!=NULL) {
+                  fwrite(w->getFinalBuf(),1,w->size(),f);
+                  fclose(f);
+                  pushRecentSys(copyOfName.c_str());
+                } else {
+                  showError(_("could not open file!"));
+                }
+                w->finish();
+                delete w;
+                if (!e->getWarnings().empty()) {
+                  showWarning(e->getWarnings(),GUI_WARN_GENERIC);
+                }
+              } else {
+                String export_err = _("could not write FZT module!");
+                showError(fmt::sprintf("%s\n%s",export_err,e->getLastError()));
+              }
+              if (!e->getWarnings().empty()) {
+                  showWarning(e->getWarnings(), GUI_WARN_GENERIC);
+              }
+              break;
+            }
+            case GUI_FILE_EXPORT_T85: {
+              SafeWriter* w=e->saveT85(t85_loop, t85_trailingTicks);
+              if (w!=NULL) {
+                FILE* f=ps_fopen(copyOfName.c_str(),"wb");
+                if (f!=NULL) {
+                  fwrite(w->getFinalBuf(),1,w->size(),f);
+                  fclose(f);
+                  pushRecentSys(copyOfName.c_str());
+                } else {
+                  showError(_("could not open file!"));
+                }
+                w->finish();
+                delete w;
+                if (!e->getWarnings().empty()) {
+                  showWarning(e->getWarnings(),GUI_WARN_GENERIC);
+                }
+              } else {
+                String export_err = _("could not write ATTiny85APU register dump!");
+                showError(fmt::sprintf("%s\n%s",export_err,e->getLastError()));
+              }
+              if (!e->getWarnings().empty()) {
+                  showWarning(e->getWarnings(), GUI_WARN_GENERIC);
               }
               break;
             }
