@@ -71,7 +71,7 @@
 #define ICON_FUR_INS_ESFM u8"\ue137"
 #define ICON_FUR_INS_ES5503 u8"\ue138"
 #define ICON_FUR_INS_POWERNOISE u8"\ue139"
-#define ICON_FUR_INS_POWERNOISE_SLOPE u8"\ue13a"
+#define ICON_FUR_INS_POWERNOISE_SAW u8"\ue13a"
 #define ICON_FUR_INS_DAVE u8"\ue13b"
 #define ICON_FUR_INS_GBA_DMA u8"\ue13c"
 #define ICON_FUR_INS_GBA_MINMOD u8"\ue13d"

@@ -96,11 +96,11 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
           case 2: // 5B
             switch (ds.systemFlags[0].getInt("clockSel",0)) {
               case 6: // 5B NTSC
-                return "Sunsoft 5B standalone##sesd";
+                return "Sunsoft 5B standalone";
               case 8: // 5B PAL
-                return "Sunsoft 5B standalone (PAL)##sesd";
+                return "Sunsoft 5B standalone (PAL)";
               default:
-                return "Overclocked Sunsoft 5B##sesd";
+                return "Overclocked Sunsoft 5B";
             }
             break;
           case 3: // AY-3-8914
@@ -160,26 +160,26 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
         return "NTSC-J Sega Master System";
       }
       if (ds.system[0]==DIV_SYSTEM_OPLL_DRUMS && ds.system[1]==DIV_SYSTEM_SMS) {
-        return "NTSC-J Sega Master System + drums##sesd";
+        return "NTSC-J Sega Master System + drums";
       }
       if (ds.system[0]==DIV_SYSTEM_OPLL && ds.system[1]==DIV_SYSTEM_AY8910) {
         return "MSX-MUSIC";
       }
       if (ds.system[0]==DIV_SYSTEM_OPLL_DRUMS && ds.system[1]==DIV_SYSTEM_AY8910) {
-        return "MSX-MUSIC + drums##sesd";
+        return "MSX-MUSIC + drums";
       }
       if (ds.system[0]==DIV_SYSTEM_C64_6581 && ds.system[1]==DIV_SYSTEM_C64_6581) {
-        return "Commodore 64 with dual 6581##sesd";
+        return "Commodore 64 with dual 6581";
       }
       if (ds.system[0]==DIV_SYSTEM_C64_8580 && ds.system[1]==DIV_SYSTEM_C64_8580) {
-        return "Commodore 64 with dual 8580##sesd";
+        return "Commodore 64 with dual 8580";
       }
 
       if (ds.system[0]==DIV_SYSTEM_YM2151 && ds.system[1]==DIV_SYSTEM_SEGAPCM_COMPAT) {
-        return "YM2151 + SegaPCM Arcade (compatibility)##sesd";
+        return "YM2151 + SegaPCM Arcade (compatibility)";
       }
       if (ds.system[0]==DIV_SYSTEM_YM2151 && ds.system[1]==DIV_SYSTEM_SEGAPCM) {
-        return "YM2151 + SegaPCM Arcade##sesd";
+        return "YM2151 + SegaPCM Arcade";
       }
 
       if (ds.system[0]==DIV_SYSTEM_SAA1099 && ds.system[1]==DIV_SYSTEM_SAA1099) {
@@ -187,7 +187,7 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
       }
 
       if (ds.system[0]==DIV_SYSTEM_GB && ds.system[1]==DIV_SYSTEM_AY8910) {
-        return "Game Boy with AY expansion##sesd";
+        return "Game Boy with AY expansion";
       }
 
       if (ds.system[0]==DIV_SYSTEM_NES && ds.system[1]==DIV_SYSTEM_VRC6) {
@@ -226,7 +226,7 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
       }
       break;
   }
-  if (isMultiSystemAcceptable) return "multi-system##sesd";
+  if (isMultiSystemAcceptable) return "multi-system";
 
   String ret="";
   for (int i=0; i<ds.systemLen; i++) {
@@ -240,7 +240,7 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
 }
 
 const char* DivEngine::getSystemName(DivSystem sys) {
-  if (sysDefs[sys]==NULL) return "Unknown##sesd";
+  if (sysDefs[sys]==NULL) return "Unknown";
   return sysDefs[sys]->name;
 }
 
@@ -925,7 +925,7 @@ void DivEngine::registerSystems() {
     {},
     {
       {0x10, {DIV_CMD_WAVE, "10xx: Set waveform##sesd0"}},
-      {0x11, {DIV_CMD_RAW_FREQ, "11xx: Set raw period (0-1F)##sesd"}},
+      {0x11, {DIV_CMD_RAW_FREQ, "11xx: Set raw period (0-1F)"}},
     }
   );
 
@@ -2023,19 +2023,19 @@ void DivEngine::registerSystems() {
   );
   
   sysDefs[DIV_SYSTEM_ES5503]=new DivSysDef(
-    "Ensoniq ES5503", NULL, 0xd2, 0, 32, false, true, 0x171, false, (1U<<DIV_SAMPLE_DEPTH_8BIT), 256, 256,
-    "first Ensoniq chip used in their synths and Apple IIGS computer. Has 32 hard-panned 8-bit wavetable/sample channels, can do oscillator sync (like SID) and amplitude modulation. Can have up to 128 KiB (2 banks of 64 KiB) of memory for wavetables/samples.\nAs Robert Yannes (SID chip creator) said, it's more or less what SID chip could be if he was given enough time for its development.##sesd",
-    {"Channel 1##sesd", "Channel 2##sesd", "Channel 3##sesd", "Channel 4##sesd", "Channel 5##sesd", "Channel 6##sesd", "Channel 7##sesd", "Channel 8##sesd", "Channel 9##sesd", "Channel 10##sesd", "Channel 11##sesd", "Channel 12##sesd", "Channel 13##sesd", "Channel 14##sesd", "Channel 15##sesd", "Channel 16##sesd", "Channel 17##sesd", "Channel 18##sesd", "Channel 19##sesd", "Channel 20##sesd", "Channel 21##sesd", "Channel 22##sesd", "Channel 23##sesd", "Channel 24##sesd", "Channel 25##sesd", "Channel 26##sesd", "Channel 27##sesd", "Channel 28##sesd", "Channel 29##sesd", "Channel 30##sesd", "Channel 31##sesd", "Channel 32##sesd"},
+    _("Ensoniq ES5503"), NULL, 0xd2, 0, 32, false, true, 0x171, false, (1U<<DIV_SAMPLE_DEPTH_8BIT), 256, 256,
+    _("first Ensoniq chip used in their synths and Apple IIGS computer. Has 32 hard-panned 8-bit wavetable/sample channels, can do oscillator sync (like SID) and amplitude modulation. Can have up to 128 KiB (2 banks of 64 KiB) of memory for wavetables/samples.\nAs Robert Yannes (SID chip creator) said, it's more or less what SID chip could be if he was given enough time for its development."),
+    {_("Channel 1"), _("Channel 2"), _("Channel 3"), _("Channel 4"), _("Channel 5"), _("Channel 6"), _("Channel 7"), _("Channel 8"), _("Channel 9"), _("Channel 10"), _("Channel 11"), _("Channel 12"), _("Channel 13"), _("Channel 14"), _("Channel 15"), _("Channel 16"), _("Channel 17"), _("Channel 18"), _("Channel 19"), _("Channel 20"), _("Channel 21"), _("Channel 22"), _("Channel 23"), _("Channel 24"), _("Channel 25"), _("Channel 26"), _("Channel 27"), _("Channel 28"), _("Channel 29"), _("Channel 30"), _("Channel 31"), _("Channel 32")},
     {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32"},
     {DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE, DIV_CH_WAVE },
     {DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503, DIV_INS_ES5503},
     {},
     {
-      {0x11, {DIV_CMD_ES5503_NUM_ENABLED_OSC, "11xx: Set number of enabled oscillators (2-1F)##sesd"}},
-      {0x12, {DIV_CMD_ES5503_OSC_OUTPUT, "12xx: Set oscillator output (0-7, 0=left, 1=right)##sesd"}},
-      {0x13, {DIV_CMD_ES5503_WAVE_LENGTH, "13xx: Set wave/sample length (0-7, 0=256, 1=512, 2=1024, etc.)##sesd"}},
-      {0x14, {DIV_CMD_ES5503_WAVE_POS, "14xx: Set wave/sample position in memory (xx*256 offset)##sesd"}},
-      {0x15, {DIV_CMD_ES5503_OSC_MODE, "15xx: Set oscillator mode (0-3)##sesd"}},
+      {0x11, {DIV_CMD_ES5503_NUM_ENABLED_OSC, _("11xx: Set number of enabled oscillators (2-1F)")}},
+      {0x12, {DIV_CMD_ES5503_OSC_OUTPUT, _("12xx: Set oscillator output (0-7, 0=left, 1=right)")}},
+      {0x13, {DIV_CMD_ES5503_WAVE_LENGTH, _("13xx: Set wave/sample length (0-7, 0=256, 1=512, 2=1024, etc.)")}},
+      {0x14, {DIV_CMD_ES5503_WAVE_POS, _("14xx: Set wave/sample position in memory (xx*256 offset)")}},
+      {0x15, {DIV_CMD_ES5503_OSC_MODE, _("15xx: Set oscillator mode (0-3)")}},
     },
     {}
   );
@@ -2167,14 +2167,76 @@ void DivEngine::registerSystems() {
     {DIV_INS_SID2, DIV_INS_SID2, DIV_INS_SID2},
     {},
     {
-      {0x10, {DIV_CMD_WAVE, "10xx: Set wave (bit 0: tone, bit 1: noise, bit 2: envelope)##sesd"}},
-      {0x11, {DIV_CMD_C64_FINE_DUTY, "11xx: Set duty cycle##sesd"}},
-      {0x12, {DIV_CMD_AY_ENVELOPE_SET, "12xx: Set envelope shape (envelope channels only, 0-7)##sesd"}},
-      {0x13, {DIV_CMD_AY_ENVELOPE_LOW, "13xx: Set envelope starting phase (lower byte)##sesd"}},
-      {0x14, {DIV_CMD_AY_ENVELOPE_HIGH, "14xx: Set envelope starting phase (higher byte)##sesd"}},
-      {0x15, {DIV_CMD_POWERNOISE_COUNTER_LOAD, "15xx: Load low byte of noise generator LFSR feedback bits##sesd", constVal<0>, effectVal}},
-      {0x16, {DIV_CMD_POWERNOISE_COUNTER_LOAD, "16xx: Load high byte of noise generator LFSR feedback bits##sesd", constVal<1>, effectVal}},
-      {0x17, {DIV_CMD_AY_AUTO_ENVELOPE, "17xx: Set envelope number (0 to 1)##sesd"}},
+      {0x10, {DIV_CMD_WAVE, _("10xx: Set wave (bit 0: tone, bit 1: noise, bit 2: envelope)")}},
+      {0x11, {DIV_CMD_C64_FINE_DUTY, _("11xx: Set duty cycle")}},
+      {0x12, {DIV_CMD_AY_ENVELOPE_SET, _("12xx: Set envelope shape (envelope channels only, 0-7))")}},
+      {0x13, {DIV_CMD_AY_ENVELOPE_LOW, _("13xx: Set envelope starting phase (lower byte))")}},
+      {0x14, {DIV_CMD_AY_ENVELOPE_HIGH, _("14xx: Set envelope starting phase (higher byte))")}},
+      {0x15, {DIV_CMD_POWERNOISE_COUNTER_LOAD, _("15xx: Load low byte of noise generator LFSR feedback bits)"), constVal<0>, effectVal}},
+      {0x16, {DIV_CMD_POWERNOISE_COUNTER_LOAD, _("16xx: Load high byte of noise generator LFSR feedback bits)"), constVal<1>, effectVal}},
+      {0x17, {DIV_CMD_AY_AUTO_ENVELOPE, _("17xx: Set envelope number (0 to 1))")}},
+    }
+  );
+
+  sysDefs[DIV_SYSTEM_FZT]=new DivSysDef(
+    _("FZT sound source"), NULL, 0xf3, 0, 4, false, true, 0, false, 0, 0, 0,
+    _("a software synth core by LTVA used in Flizzer Tracker (Flipper Zero chiptune tracker)."),
+    {_("Channel 1"), _("Channel 2"), _("Channel 3"), _("Channel 4")},
+    {"1", "2", "3", "4"},
+    {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
+    {DIV_INS_FZT, DIV_INS_FZT, DIV_INS_FZT, DIV_INS_FZT, DIV_INS_FZT},
+    {},
+    {},
+    {
+      //these commands are read by opcode inside fzt dispatch code.
+      //they are never passed through dispatchCmd() thing.
+      //that's why I set every one of them to "DIV_CMD_WAVE" ID.
+      {0x10, {DIV_CMD_WAVE, _("10xx: Set wave (bits: 0: noise, 1: pulse, 2: triangle, 3: sawtooth, 4: metallic noise, 5: sine)")}},
+      {0x11, {DIV_CMD_WAVE, _("11xy: PWM (pulsolo) with speed x and depth y")}},
+      {0x12, {DIV_CMD_WAVE, _("12xx: Set pulse width")}},
+      {0x13, {DIV_CMD_WAVE, _("13xx: Pulse width up")}},
+      {0x14, {DIV_CMD_WAVE, _("14xx: Pulse width down")}},
+      {0x15, {DIV_CMD_WAVE, _("15xx: Set filter cutoff")}},
+      {0x16, {DIV_CMD_WAVE, _("16xx: Set volume")}},
+      {0x17, {DIV_CMD_WAVE, _("17xx: Toggle filter")}},
+      {0x18, {DIV_CMD_WAVE, _("18xx: Set filter mode")}},
+      {0x19, {DIV_CMD_WAVE, _("19xx: Phase reset")}},
+      {0x1A, {DIV_CMD_WAVE, _("1Axx: Filter cutoff up")}},
+      {0x1B, {DIV_CMD_WAVE, _("1Bxx: Filter cutoff down")}},
+      {0x1C, {DIV_CMD_WAVE, _("1Cxx: Set filter resonance")}},
+      {0x1D, {DIV_CMD_WAVE, _("1Dxx: Filter resonance up")}},
+      {0x1E, {DIV_CMD_WAVE, _("1Exx: Filter resonance down")}},
+      {0x1F, {DIV_CMD_WAVE, _("1Fxx: Ring mod source (FF = self)")}},
+      {0x20, {DIV_CMD_WAVE, _("20xx: Hard sync source (FF = self)")}},
+      {0x21, {DIV_CMD_WAVE, _("21xx: Set attack speed")}},
+      {0x22, {DIV_CMD_WAVE, _("22xx: Set decay speed")}},
+      {0x23, {DIV_CMD_WAVE, _("23xx: Set sustain level")}},
+      {0x24, {DIV_CMD_WAVE, _("24xx: Set release rate")}},
+      {0x25, {DIV_CMD_WAVE, _("25xx: Restart instrument program")}},
+      {0x26, {DIV_CMD_WAVE, _("26xx: Portamento up (semitones)")}},
+      {0x27, {DIV_CMD_WAVE, _("27xx: Portamento down (semitones)")}},
+      {0x28, {DIV_CMD_WAVE, _("28xx: Absolute arpeggio note")}},
+      {0x29, {DIV_CMD_WAVE, _("29xx: Trigger envelope release")}},
+    }
+  );
+
+  sysDefs[DIV_SYSTEM_T85APU]=new DivSysDef(
+    _("ATTiny85APU"), NULL, 0xf4, 0, 8, false, true, 0, false, 0, 0, 0,
+    _("a software synth for the ATTiny25/45/85 MCUs written entirely in AVR Assembly by alexmush."),
+    {_("Channel 1"), _("Channel 2"), _("Channel 3"), _("Channel 4"), _("Channel 5"), _("Noise"), _("Envelope 1"), _("Envelope 2")},
+    {"CH1", "CH2", "CH3", "CH4", "CH5", "NO", "E1", "E2"},
+    {DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_PULSE, DIV_CH_NOISE, DIV_CH_WAVE, DIV_CH_WAVE},
+    {DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU, DIV_INS_AT85APU},
+    {},
+    {
+      {0x10, {DIV_CMD_WAVE, _("10xx: Set wave (bit 0: tone, bit 1: noise, bit 2: envelope)")}},
+      {0x11, {DIV_CMD_C64_FINE_DUTY, _("11xx: Set duty cycle")}},
+      {0x12, {DIV_CMD_AY_ENVELOPE_SET, _("12xx: Set envelope shape (envelope channels only, 0-7)")}},
+      {0x13, {DIV_CMD_AY_ENVELOPE_LOW, _("13xx: Set envelope starting phase (lower byte)")}},
+      {0x14, {DIV_CMD_AY_ENVELOPE_HIGH, _("14xx: Set envelope starting phase (higher byte)")}},
+      {0x15, {DIV_CMD_POWERNOISE_COUNTER_LOAD, _("15xx: Load low byte of noise generator LFSR feedback bits"), constVal<0>, effectVal}},
+      {0x16, {DIV_CMD_POWERNOISE_COUNTER_LOAD, _("16xx: Load high byte of noise generator LFSR feedback bits"), constVal<1>, effectVal}},
+      {0x17, {DIV_CMD_AY_AUTO_ENVELOPE, _("17xx: Set envelope number (0 to 1)")}},
     }
   );
 

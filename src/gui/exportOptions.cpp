@@ -253,6 +253,36 @@ void FurnaceGUI::drawExportZSM(bool onWindow) {
   }
 }
 
+void FurnaceGUI::drawExportDMF(bool onWindow) {
+  exitDisabledTimer=1;
+
+  ImGui::Text(_L("DefleMask file (1.1.3+)##sgeo"));
+  if (onWindow) {
+    ImGui::Separator();
+    if (ImGui::Button(_L("Cancel##sgeo4"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
+    ImGui::SameLine();
+  }
+  if (ImGui::Button(_L("Export##sgeo4"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
+    openFileDialog(GUI_FILE_SAVE_DMF);
+    ImGui::CloseCurrentPopup();
+  }
+}
+
+void FurnaceGUI::drawExportDMFLegacy(bool onWindow) {
+  exitDisabledTimer=1;
+
+  ImGui::Text(_L("DefleMask file (1.0/legacy)##sgeo"));
+  if (onWindow) {
+    ImGui::Separator();
+    if (ImGui::Button(_L("Cancel##sgeo5"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
+    ImGui::SameLine();
+  }
+  if (ImGui::Button(_L("Export##sgeo5"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
+    openFileDialog(GUI_FILE_SAVE_DMF_LEGACY);
+    ImGui::CloseCurrentPopup();
+  }
+}
+
 void FurnaceGUI::drawExportTiuna(bool onWindow) {
   exitDisabledTimer=1;
 
@@ -398,31 +428,71 @@ void FurnaceGUI::drawExportFZT(bool onWindow) {
 }
 
 void FurnaceGUI::drawExportFur(bool onWindow) {
+    exitDisabledTimer = 1;
+
+    ImGui::Text(_L(
+        "this option exports a module which is\n"
+        "compatible with tildearrow Furnace app.\n\n"
+
+        "not all chips and inst macros will be supported!"
+    ));
+    if (onWindow) {
+        ImGui::Separator();
+        if (ImGui::Button(_L("Cancel##sgeo9"), ImVec2(HALF_WINDOW_WIDTH * dpiScale, 0))) ImGui::CloseCurrentPopup();
+        ImGui::SameLine();
+    }
+    if (ImGui::Button(_L("Export##sgeo7"), ImVec2(HALF_WINDOW_WIDTH * dpiScale, 0))) {
+        openFileDialog(GUI_FILE_EXPORT_FUR);
+        ImGui::CloseCurrentPopup();
+    }
+}
+
+void FurnaceGUI::drawExportT85(bool onWindow) {
   exitDisabledTimer=1;
   
   ImGui::Text(_L(
-    "this option exports a module which is\n"
-    "compatible with tildearrow Furnace app.\n\n"
-
-  ImGui::Text(_(
-    "export in DefleMask module format.\n"
-    "only do it if you really, really need to, or are downgrading an existing .dmf."
+    "this option exports a .t85 register dump file for\n"
+    "ATTiny85APU.\n\n"
+    "You must have one ATTiny85APU system in your song\n"
+    "to be able to export."
   ));
 
-  ImGui::Text(_("format version:"));
-  ImGui::RadioButton(_("1.1.3 and higher"),&dmfExportVersion,0);
-  ImGui::RadioButton(_("1.0/legacy (0.12)"),&dmfExportVersion,1);
+  ImGui::Checkbox(_L("loop##sgeo0"),&t85_loop);
+  if (t85_loop && e->song.loopModality==2) {
+    ImGui::Text(_L("loop trail:##sgeo"));
+    ImGui::Indent();
+    if (ImGui::RadioButton(_L("auto-detect##sgeo"),t85_trailingTicks==-1)) {
+      t85_trailingTicks=-1;
+    }
+    if (ImGui::RadioButton(_L("add one loop##sgeo1"),t85_trailingTicks==-2)) {
+      t85_trailingTicks=-2;
+    }
+    if (ImGui::RadioButton(_L("custom##sgeo"),t85_trailingTicks>=0)) {
+      t85_trailingTicks=0;
+    }
+    if (t85_trailingTicks>=0) {
+      ImGui::SameLine();
+      if (ImGui::InputInt("##TrailTicks",&t85_trailingTicks,1,100)) {
+        if (t85_trailingTicks<0) t85_trailingTicks=0;
+      }
+    }
+    ImGui::Unindent();
+  }
 
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_("Cancel"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_L("Cancel##sgeo9"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_("Export"),ImVec2(200.0f*dpiScale,0))) {
-    if (dmfExportVersion==1) {
-      openFileDialog(GUI_FILE_SAVE_DMF_LEGACY);
-    } else {
-      openFileDialog(GUI_FILE_SAVE_DMF);
+
+  bool can_export = true;
+
+  if(e->song.systemLen > 1) can_export = false;
+  else
+  {
+    if(e->song.system[0] != DIV_SYSTEM_T85APU)
+    {
+      can_export = false;
     }
   }
 
@@ -445,11 +515,11 @@ void FurnaceGUI::drawExport() {
         drawExportVGM(true);
         ImGui::EndTabItem();
       }
-      if (ImGui::BeginTabItem("DMF (1.1.3+)")) {
+      if (ImGui::BeginTabItem(_("DMF (1.1.3+)"))) {
         drawExportDMF(true);
         ImGui::EndTabItem();
       }
-      if (ImGui::BeginTabItem(_L("DMF (1.0/legacy)##sgeo"))) {
+      if (ImGui::BeginTabItem(_("DMF (1.0/legacy)"))) {
         drawExportDMFLegacy(true);
         ImGui::EndTabItem();
       }
@@ -494,8 +564,16 @@ void FurnaceGUI::drawExport() {
         drawExportCommand(true);
         ImGui::EndTabItem();
       }
-      if (ImGui::BeginTabItem(_("DMF"))) {
-        drawExportDMF(true);
+      if (ImGui::BeginTabItem(_("Furnace"))) {
+        drawExportFur(true);
+        ImGui::EndTabItem();
+      }
+      if (ImGui::BeginTabItem("FZT")) {
+        drawExportFZT(true);
+        ImGui::EndTabItem();
+      }
+      if (ImGui::BeginTabItem("T85")) {
+        drawExportT85(true);
         ImGui::EndTabItem();
       }
       ImGui::EndTabBar();

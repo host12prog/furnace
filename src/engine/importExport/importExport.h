@@ -34,6 +34,7 @@
 #define DIV_FTM_MAGIC "FamiTracker Module"
 #define DIV_DN_FTM_MAGIC "Dn-FamiTracker Module"
 #define DIV_FC13_MAGIC "SMOD"
+#define DIV_FZT_MAGIC "FZT!SONG"
 #define DIV_FC14_MAGIC "FC14"
 #define DIV_S3M_MAGIC "SCRM"
 #define DIV_XM_MAGIC "Extended Module: "

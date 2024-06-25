@@ -509,6 +509,18 @@ void FurnaceGUI::drawMobileControls() {
           doAction(GUI_ACTION_SAVE_AS);
         }
 
+        if (ImGui::Button("1.1+ .dmf")) {
+          mobileMenuOpen=false;
+          openFileDialog(GUI_FILE_SAVE_DMF);
+        }
+        ImGui::SameLine();
+        if (ImGui::Button(_L("Legacy .dmf##sgec"))) {
+          mobileMenuOpen=false;
+          openFileDialog(GUI_FILE_SAVE_DMF_LEGACY);
+        }
+
+        ImGui::SameLine();
+
         if (ImGui::Button(_("Export"))) {
           doAction(GUI_ACTION_EXPORT);
         }
@@ -580,10 +592,6 @@ void FurnaceGUI::drawMobileControls() {
         ImGui::SameLine();
         if (ImGui::Button(_("Memory"))) {
           memoryOpen=!memoryOpen;
-        }
-
-        if (ImGui::Button(_("CV"))) {
-          cvOpen=!cvOpen;
         }
         ImGui::SameLine();
         if (ImGui::Button(_("Presets"))) {

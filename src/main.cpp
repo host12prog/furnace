@@ -804,51 +804,6 @@ int main(int argc, char** argv) {
     return 0;
   }
 
-  if(!consoleMode)
-  {
-    #ifdef HAVE_GUI
-      if (safeMode) g.enableSafeMode();
-      g.bindEngine(&e);
-      if (!g.init()) {
-        reportError(g.getLastError());
-        finishLogFile();
-        e.everythingOK();
-        return 1;
-      }
-
-      //e.song.systemName=g._L(e.getSongSystemLegacyName(e.song,!e.getConfInt("noMultiSystem",0)).c_str()); //show translated system names when initializing song
-      if(g.settings.initialSysName == "")
-      {
-        //g.autoDetectSystem(); //for some reason it detects properly on system start ONLY IF I PLACE IT THERE
-        e.song.systemName=g._L(e.getSongSystemLegacyName(e.song,!e.getConfInt("noMultiSystem",0)).c_str()); //show translated system names when initializing song
-
-        if(g.settings.language == DIV_LANG_ENGLISH)
-        {
-          e.song.systemName = e.song.systemName.substr(0, e.song.systemName.find("##"));
-        }
-      }
-      
-      if (displayEngineFailError) {
-        logE("displaying engine fail error.");
-        g.showError("error while initializing audio!");
-      }
-
-      if (!fileName.empty()) {
-        g.setFileName(fileName);
-      }
-
-    #ifndef _WIN32
-      sigemptyset(&termsa.sa_mask);
-      termsa.sa_flags=0;
-      termsa.sa_handler=handleTermGUI;
-      sigaction(SIGTERM,&termsa,NULL);
-    #endif
-
-    #else
-      logE("GUI requested but GUI not compiled!");
-    #endif
-  }
-
   if (!fileName.empty()) {
     logI("loading module...");
     FILE* f=ps_fopen(fileName.c_str(),"rb");

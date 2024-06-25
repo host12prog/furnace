@@ -1093,15 +1093,18 @@ void FurnaceGUI::drawSettings() {
           float vol=fabs(sysVol);
           ImGui::PushID(i);
 
-          ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(_("Invert")).x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0);
-          if (ImGui::BeginCombo("##System",getSystemName(sysID))) {
-            for (int j=0; availableSystems[j]; j++) {
-              if (ImGui::Selectable(getSystemName((DivSystem)availableSystems[j]),sysID==availableSystems[j])) {
-                sysID=(DivSystem)availableSystems[j];
-                settings.initialSys.set(fmt::sprintf("id%d",i),(int)e->systemToFileFur(sysID));
-                settings.initialSys.set(fmt::sprintf("flags%d",i),"");
-                settingsChanged=true;
-              }
+          ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(_L("Invert##sgse0")).x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0);
+          if (ImGui::BeginCombo("##System",_L(getSystemName(sysID)),ImGuiComboFlags_HeightLargest)) {
+            
+            sysID=systemPicker(true);
+            
+            if (sysID!=DIV_SYSTEM_NULL)
+            {
+              settings.initialSys.set(fmt::sprintf("id%d",i),(int)e->systemToFileFur(sysID));
+              settings.initialSys.set(fmt::sprintf("flags%d",i),"");
+              settingsChanged=true;
+
+              ImGui::CloseCurrentPopup();
             }
 
             ImGui::EndCombo();
@@ -1207,25 +1210,6 @@ void FurnaceGUI::drawSettings() {
 
         // SUBSECTION START-UP
         CONFIG_SUBSECTION(_("Start-up"));
-        ImGui::Text(_("Play intro on start-up:"));
-        ImGui::Indent();
-        if (ImGui::RadioButton(_("No##pis0"),settings.alwaysPlayIntro==0)) {
-          settings.alwaysPlayIntro=0;
-          settingsChanged=true;
-        }
-        if (ImGui::RadioButton(_("Short##pis1"),settings.alwaysPlayIntro==1)) {
-          settings.alwaysPlayIntro=1;
-          settingsChanged=true;
-        }
-        if (ImGui::RadioButton(_("Full (short when loading song)##pis2"),settings.alwaysPlayIntro==2)) {
-          settings.alwaysPlayIntro=2;
-          settingsChanged=true;
-        }
-        if (ImGui::RadioButton(_("Full (always)##pis3"),settings.alwaysPlayIntro==3)) {
-          settings.alwaysPlayIntro=3;
-          settingsChanged=true;
-        }
-        ImGui::Unindent();
 
         bool disableFadeInB=settings.disableFadeIn;
         if (ImGui::Checkbox(_("Disable fade-in during start-up"),&disableFadeInB)) {
@@ -3927,12 +3911,6 @@ void FurnaceGUI::drawSettings() {
           settingsChanged=true;
         }
 
-        bool roundedMenusB=settings.roundedMenus;
-        if (ImGui::Checkbox(_L("Rounded menu corners##sgse"),&roundedMenusB)) {
-          settings.roundedMenus=roundedMenusB;
-          settingsChanged=true;
-        }
-
         bool frameBordersB=settings.frameBorders;
         if (ImGui::Checkbox(_("Borders around widgets"),&frameBordersB)) {
           settings.frameBorders=frameBordersB;
@@ -3984,43 +3962,6 @@ void FurnaceGUI::drawSettings() {
         if (ImGui::Button(_("Reset defaults"))) {
           showWarning(_("Are you sure you want to reset the color scheme?"),GUI_WARN_RESET_COLORS);
         }
-        bool basicColorsB=!settings.basicColors;
-        if (ImGui::Checkbox(_("Guru mode"),&basicColorsB)) {
-          settings.basicColors=!basicColorsB;
-          applyUISettings(false);
-          settingsChanged=true;
-        }
-        if (settings.basicColors) {
-          if (ImGui::TreeNode(_("Interface"))) {
-            if (ImGui::SliderInt(_("Frame shading"),&settings.guiColorsShading,0,100,"%d%%")) {
-              if (settings.guiColorsShading<0) settings.guiColorsShading=0;
-              if (settings.guiColorsShading>100) settings.guiColorsShading=100;
-              applyUISettings(false);
-              settingsChanged=true;
-            }
-            ImGui::Text(_("Color scheme type:"));
-            ImGui::Indent();
-            if (ImGui::RadioButton(_("Dark##gcb0"),settings.guiColorsBase==0)) {
-              settings.guiColorsBase=0;
-              applyUISettings(false);
-              settingsChanged=true;
-            }
-            if (ImGui::RadioButton(_("Light##gcb1"),settings.guiColorsBase==1)) {
-              settings.guiColorsBase=1;
-              applyUISettings(false);
-              settingsChanged=true;
-            }
-            ImGui::Unindent();
-
-            ImGui::Text(_("Accent colors:"));
-            ImGui::Indent();
-            UI_COLOR_CONFIG(GUI_COLOR_ACCENT_PRIMARY,_("Primary"));
-            UI_COLOR_CONFIG(GUI_COLOR_ACCENT_SECONDARY,_("Secondary"));
-            ImGui::Unindent();
-
-            ImGui::TreePop();
-          }
-        } else {
           if (ImGui::TreeNode(_("Interface"))) {
             if (ImGui::SliderInt(_("Frame shading"),&settings.guiColorsShading,0,100,"%d%%")) {
               if (settings.guiColorsShading<0) settings.guiColorsShading=0;
@@ -4694,69 +4635,6 @@ void FurnaceGUI::drawSettings() {
         }
 
         END_SECTION;
-      }
-      if (nonLatchNibble) {
-        // ok, so you decided to read the code.
-        // these are the cheat codes:
-        // "Debug" - toggles mobile UI
-        // "Nice Amiga cover of the song!" - enables hidden systems (YMU759/Dummy)
-        // "42 63" - enables all instrument types
-        // "4-bit FDS" - enables partial pitch linearity option
-        // "Power of the Chip" - enables options for multi-threaded audio
-        // "btcdbcb" - use modern UI padding
-        // "????" - enables stuff
-        CONFIG_SECTION(_("Cheat Codes")) {
-          // SUBSECTION ENTER CODE:
-          CONFIG_SUBSECTION(_("Enter code:"));
-          ImGui::InputText("##CheatCode",&mmlString[31]);
-          if (ImGui::Button(_("Submit"))) {
-            unsigned int checker=0x11111111;
-            unsigned int checker1=0;
-            int index=0;
-            mmlString[30]=_("invalid code");
-
-            for (char& i: mmlString[31]) {
-              checker^=((unsigned int)i)<<index;
-              checker1+=i;
-              checker=(checker>>1|(((checker)^(checker>>2)^(checker>>3)^(checker>>5))&1)<<31);
-              checker1<<=1;
-              index=(index+1)&31;
-            }
-            if (checker==0x90888b65 && checker1==0x1482) {
-              mmlString[30]=_("toggled alternate UI");
-              toggleMobileUI(!mobileUI);
-            }
-            if (checker==0x5a42a113 && checker1==0xe4ef451e) {
-              mmlString[30]=_(":smile: :star_struck: :sunglasses: :ok_hand:");
-              settings.hiddenSystems=!settings.hiddenSystems;
-            }
-            if (checker==0xe888896b && checker1==0xbde) {
-              mmlString[30]=_("enabled all instrument types");
-              settings.displayAllInsTypes=!settings.displayAllInsTypes;
-            }
-            if (checker==0x3f88abcc && checker1==0xf4a6) {
-              mmlString[30]=_("OK, if I bring your Partial pitch linearity will you stop bothering me?");
-              settings.displayPartial=1;
-            }
-            if (checker==0x8537719f && checker1==0x17a1f34) {
-              mmlString[30]=_("unlocked audio multi-threading options!");
-              settings.showPool=1;
-            }
-            if (checker==0x94222d83 && checker1==0x6600) {
-              mmlString[30]=_("enabled \"comfortable\" mode");
-              ImGuiStyle& sty=ImGui::GetStyle();
-              sty.FramePadding=ImVec2(20.0f*dpiScale,20.0f*dpiScale);
-              sty.ItemSpacing=ImVec2(10.0f*dpiScale,10.0f*dpiScale);
-              sty.ItemInnerSpacing=ImVec2(10.0f*dpiScale,10.0f*dpiScale);
-              settingsOpen=false;
-            }
-
-            mmlString[31]="";
-          }
-          ImGui::Text("%s",mmlString[30].c_str());
-
-          END_SECTION;
-        }
       }
       ImGui::EndTabBar();
     }

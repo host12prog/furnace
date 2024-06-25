@@ -84,12 +84,13 @@ void FurnaceGUI::drawSysManager() {
   } else {
     //ImGui::SetNextWindowSizeConstraints(ImVec2(440.0f*dpiScale,400.0f*dpiScale),ImVec2(canvasW,canvasH));
   }
-  if (ImGui::Begin("Chip Manager",&sysManagerOpen,globalWinFlags,_("Chip Manager"))) {
-    ImGui::Checkbox(_("Preserve channel order"),&preserveChanPos);
+  if (ImGui::Begin("Chip Manager",&sysManagerOpen,globalWinFlags,_L("Chip Manager###Chip Manager"))) {
+    ImGui::Checkbox(_L("Preserve channel order##sgsm"),&preserveChanPos);
     ImGui::SameLine();
-    ImGui::Checkbox(_("Clone channel data"),&sysDupCloneChannels);
-    ImGui::SameLine();
-    ImGui::Checkbox(_("Clone at end"),&sysDupEnd);
+    ImGui::Checkbox(_L("Clone channel data##sgsm"),&sysDupCloneChannels);
+    //ImGui::SameLine();
+    //russian is too long
+    ImGui::Checkbox(_L("Clone at end##sgsm"),&sysDupEnd);
     if (ImGui::BeginTable("SystemList",3)) {
       ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed);
       ImGui::TableSetupColumn("c2",ImGuiTableColumnFlags_WidthStretch);
@@ -97,9 +98,9 @@ void FurnaceGUI::drawSysManager() {
       ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
       ImGui::TableNextColumn();
       ImGui::TableNextColumn();
-      ImGui::Text(_("Name"));
+      ImGui::Text(_L("Name##sgsm"));
       ImGui::TableNextColumn();
-      ImGui::Text(_("Actions"));
+      ImGui::Text(_L("Actions##sgsm"));
       for (unsigned char i=0; i<e->song.systemLen; i++) {
         ImGui::PushID(i);
         ImGui::TableNextRow();
@@ -112,7 +113,7 @@ void FurnaceGUI::drawSysManager() {
           ImGui::Button(ICON_FA_ARROWS "##SysDrag");
           ImGui::EndDragDropSource();
         } else if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_("(drag to swap chips)"));
+          ImGui::SetTooltip(_L("(drag to swap chips)##sgsm"));
         }
         if (ImGui::BeginDragDropTarget()) {
           const ImGuiPayload* dragItem=ImGui::AcceptDragDropPayload("FUR_SYS");
@@ -134,16 +135,13 @@ void FurnaceGUI::drawSysManager() {
           ImGui::TreePop();
           collapsed = false;
         }
-        ImGui::TableNextColumn();
-        if (ImGui::Button(_("Clone##SysDup"))) {
-          if (!e->duplicateSystem(i,sysDupCloneChannels,sysDupEnd)) {
-            showError(fmt::sprintf(_("cannot clone chip! (%s)"),e->getLastError()));
-          } else {
-            MARK_MODIFIED;
-          }
+        if(settings.showTooltipInChipManager && collapsed)
+        {
+          SHOW_HOVER_INFO
         }
-        ImGui::SameLine();
-        ImGui::Button(_("Change##SysChange"));
+
+        ImGui::TableNextColumn();
+        ImGui::Button(_L("Change##SysChange"));
         if (ImGui::BeginPopupContextItem("SysPickerC",ImGuiPopupFlags_MouseButtonLeft)) {
           DivSystem picked=systemPicker(false);
           if (picked!=DIV_SYSTEM_NULL) {
@@ -154,7 +152,7 @@ void FurnaceGUI::drawSysManager() {
               }
               updateWindowTitle();
             } else {
-              showError(fmt::sprintf(_("cannot change chip! (%s)"),e->getLastError()));
+              showError((settings.language == DIV_LANG_ENGLISH ? "cannot remove chip! (" : _L("cannot change chip! (##sggu"))+e->getLastError()+")");
             }
             updateWindowTitle();
             ImGui::CloseCurrentPopup();
@@ -216,11 +214,11 @@ void FurnaceGUI::drawSysManager() {
         pushDestColor();
         if (ImGui::Button(ICON_FA_TIMES "##SysRemove")) {
           sysToDelete=i;
-          showWarning(_("Are you sure you want to remove this chip?"),GUI_WARN_SYSTEM_DEL);
+          showWarning(settings.language == DIV_LANG_ENGLISH ? "Are you sure you want to remove this chip?" : _L("Are you sure you want to remove this chip?##sgsm"),GUI_WARN_SYSTEM_DEL);
         }
         popDestColor();
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_("Remove"));
+          ImGui::SetTooltip(_L("Remove##sgsm"));
         }
         ImGui::EndDisabled();
         ImGui::PopID();
@@ -234,7 +232,7 @@ void FurnaceGUI::drawSysManager() {
           DivSystem picked=systemPicker(false);
           if (picked!=DIV_SYSTEM_NULL) {
             if (!e->addSystem(picked)) {
-              showError(fmt::sprintf(_("cannot add chip! (%s)"),e->getLastError()));
+              showError(settings.language == DIV_LANG_ENGLISH ? ("cannot add chip! (") : (_L("cannot add chip! (##sgsm"))+e->getLastError()+")");
             } else {
               MARK_MODIFIED;
             }

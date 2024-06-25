@@ -95,12 +95,6 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
           altered=true;
         }
       }
-
-      if (msw) {
-        if (ImGui::Checkbox(_("Modified sine wave (joke)"),&msw)) {
-          altered=true;
-        }
-      }
       
       if (altered) {
         e->lockSave([&]() {

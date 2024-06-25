@@ -294,6 +294,10 @@ const char* aboutLine[]={
   _N("PowerNoise emulator by scratchminer"),
   _N("ep128emu by Istvan Varga"),
   _N("NDS sound emulator by cam900"),
+  _N("SID2 emulator (modification of reSID) by LTVA"),
+  _N("5E01 emulator (modification of NSFPlay) by Euly"),
+  _N("FZT sound source by LTVA"),
+  _N("ATTiny85APU emulator by AlexMush"),
   "",
   _N("greetings to:"),
   "NEOART Costa Rica",
@@ -313,7 +317,7 @@ const char* aboutLine[]={
   "",
   _N("help Furnace grow:"),
   "https://github.com/tildearrow/furnace",
-  "help Furnace-B:##sgab",
+  "help Furnace-B:",
   "https://github.com/LTVA1/furnace",
   "",
   _N("contact tildearrow at:"),
@@ -421,16 +425,6 @@ void FurnaceGUI::drawAbout() {
     while (aboutHue>1) aboutHue--;
     while (aboutSin>=2400) aboutSin-=2400;
     if (aboutScroll>(42*dpiScale*aboutCount+canvasH)) aboutScroll=-20*dpiScale;
-
-    if (ImGui::IsKeyPressed(ImGuiKey_Space)) {
-      aboutOpen=false;
-      if (modified) {
-        showWarning(_("Unsaved changes! Save changes before playing?"),GUI_WARN_CV);
-      } else {
-        cvOpen=true;
-        cvNotSerious=true;
-      }
-    }
 
     WAKE_UP;
   }

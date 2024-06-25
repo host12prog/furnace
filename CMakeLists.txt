@@ -806,6 +806,7 @@ src/engine/importExport/dmp.cpp
 src/engine/importExport/bnk.cpp
 src/engine/importExport/ff.cpp
 src/engine/importExport/gyb.cpp
+src/engine/importExport/it.cpp
 src/engine/importExport/opli.cpp
 src/engine/importExport/opm.cpp
 src/engine/importExport/opni.cpp
@@ -816,6 +817,7 @@ src/engine/importExport/tfi.cpp
 src/engine/importExport/vgi.cpp
 src/engine/importExport/wopl.cpp
 src/engine/importExport/wopn.cpp
+src/engine/importExport/xm.cpp
 src/engine/importExport/y12.cpp
 )
 

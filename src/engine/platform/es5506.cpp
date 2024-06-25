@@ -271,12 +271,12 @@ void DivPlatformES5506::tick(bool sysTick) {
     DivInstrument* ins=parent->getIns(chan[i].ins,DIV_INS_ES5506);
     signed int k1=chan[i].k1Prev,k2=chan[i].k2Prev;
     // volume/panning macros
-    if (chan[i].std.vol.had) {
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
       int nextVol;
       if (amigaVol) {
-        nextVol=VOL_SCALE_LINEAR(MIN(64,chan[i].vol),MIN(64,chan[i].std.vol.val),64);
+        nextVol=VOL_SCALE_LINEAR(MIN(64,chan[i].vol),MIN(64,chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val),64);
       } else {
-        nextVol=VOL_SCALE_LOG((0xfff*chan[i].vol)/0xff,(0xfff*chan[i].std.vol.val)/chan[i].volMacroMax,0xfff);
+        nextVol=VOL_SCALE_LOG((0xfff*chan[i].vol)/0xff,(0xfff*chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val)/chan[i].volMacroMax,0xfff);
       }
       if (chan[i].outVol!=nextVol) {
         chan[i].outVol=nextVol;
@@ -942,7 +942,7 @@ int DivPlatformES5506::dispatch(DivCommand c) {
         chan[c.chan].noteChanged.changed=0xff;
         chan[c.chan].volChanged.changed=0xff;
       }
-      if (!chan[c.chan].std.vol.will) {
+      if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->will) {
         if (amigaVol) {
           chan[c.chan].outVol=chan[c.chan].vol;
         } else {
@@ -950,17 +950,17 @@ int DivPlatformES5506::dispatch(DivCommand c) {
         }
       }
       if (amigaVol) {
-        if (!chan[c.chan].std.panL.will) {
+        if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->will) {
           chan[c.chan].outLVol=amigaPanTable[(chan[c.chan].lVol>>1)&127];
         }
-        if (!chan[c.chan].std.panR.will) {
+        if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_PAN_RIGHT)->will) {
           chan[c.chan].outRVol=amigaPanTable[(chan[c.chan].rVol>>1)&127];
         }
       } else {
-        if (!chan[c.chan].std.panL.will) {
+        if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->will) {
           chan[c.chan].outLVol=(0xfff*chan[c.chan].lVol)/0xff;
         }
-        if (!chan[c.chan].std.panR.will) {
+        if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_PAN_RIGHT)->will) {
           chan[c.chan].outRVol=(0xfff*chan[c.chan].rVol)/0xff;
         }
       }
@@ -988,7 +988,7 @@ int DivPlatformES5506::dispatch(DivCommand c) {
     case DIV_CMD_VOLUME:
       if (chan[c.chan].vol!=c.value) {
         chan[c.chan].vol=c.value;
-        if (!chan[c.chan].std.vol.has) {
+        if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_VOL)->has) {
           if (amigaVol) {
             chan[c.chan].outVol=c.value;
           } else {
@@ -1010,7 +1010,7 @@ int DivPlatformES5506::dispatch(DivCommand c) {
         // Left volume
         if (chan[c.chan].lVol!=c.value) {
           chan[c.chan].lVol=c.value;
-          if (!chan[c.chan].std.panL.has) {
+          if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->has) {
             chan[c.chan].outLVol=amigaPanTable[(c.value>>1)&127];
             chan[c.chan].volChanged.lVol=1;
           }
@@ -1018,7 +1018,7 @@ int DivPlatformES5506::dispatch(DivCommand c) {
         // Right volume
         if (chan[c.chan].rVol!=c.value2) {
           chan[c.chan].rVol=c.value2;
-          if (!chan[c.chan].std.panR.has) {
+          if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_PAN_RIGHT)->has) {
             chan[c.chan].outRVol=amigaPanTable[(c.value2>>1)&127];
             chan[c.chan].volChanged.rVol=1;
           }
@@ -1027,7 +1027,7 @@ int DivPlatformES5506::dispatch(DivCommand c) {
         // Left volume
         if (chan[c.chan].lVol!=c.value) {
           chan[c.chan].lVol=c.value;
-          if (!chan[c.chan].std.panL.has) {
+          if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_PAN_LEFT)->has) {
             chan[c.chan].outLVol=(0xfff*c.value)/0xff;
             chan[c.chan].volChanged.lVol=1;
           }
@@ -1035,7 +1035,7 @@ int DivPlatformES5506::dispatch(DivCommand c) {
         // Right volume
         if (chan[c.chan].rVol!=c.value2) {
           chan[c.chan].rVol=c.value2;
-          if (!chan[c.chan].std.panR.has) {
+          if (!chan[c.chan].std.get_div_macro_struct(DIV_MACRO_PAN_RIGHT)->has) {
             chan[c.chan].outRVol=(0xfff*c.value2)/0xff;
             chan[c.chan].volChanged.rVol=1;
           }

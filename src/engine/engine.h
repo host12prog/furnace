@@ -1271,9 +1271,10 @@ class DivEngine {
 
     // move system
     bool swapSystem(int src, int dest, bool preserveOrder=true);
+    void swapSystemUnsafe(int src, int dest, bool preserveOrder);
 
     // clone system
-    bool cloneSystem(int index, bool add_chip_count, bool pat);
+    bool cloneSystem(int index, bool pat=true, bool end=false);
 
     // add effect
     bool addEffect(DivEffectType which);
