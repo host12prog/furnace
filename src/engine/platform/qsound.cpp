@@ -27,11 +27,7 @@
 extern FurnaceGUI g;
 #endif
 
-#ifdef HAVE_GUI
-#define _LE(string) g.locale.getText(string)
-#else
 #define _LE(string) (string)
-#endif
 
 #define CHIP_DIVIDER (1248*2)
 #define QS_NOTE_FREQUENCY(x) parent->calcBaseFreq(440,4096,(x)-3,false)

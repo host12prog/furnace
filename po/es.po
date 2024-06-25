@@ -10,37 +10,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/engine/engine.cpp:198 src/gui/settings.cpp:4199
+#: src/engine/engine.cpp:194 src/gui/settings.cpp:4199
 msgid "Invalid effect"
 msgstr "Efecto inválido"
 
-#: src/engine/engine.cpp:1193
+#: src/engine/engine.cpp:1189
 msgid "invalid index"
 msgstr "índice inválido"
 
-#: src/engine/engine.cpp:1197
+#: src/engine/engine.cpp:1193
 #, c-format
 msgid "max number of systems is %d"
 msgstr "número máximo de sistemas es %d"
 
-#: src/engine/engine.cpp:1201
+#: src/engine/engine.cpp:1197
 #, c-format
 msgid "max number of total channels is %d"
 msgstr "número máximo de canales es %d"
 
-#: src/engine/engine.cpp:1472
+#: src/engine/engine.cpp:1468
 msgid "source and destination are equal"
 msgstr "origen y destino son iguales"
 
-#: src/engine/engine.cpp:1476
+#: src/engine/engine.cpp:1472
 msgid "invalid source index"
 msgstr "índice de origen inválido"
 
-#: src/engine/engine.cpp:1480
+#: src/engine/engine.cpp:1476
 msgid "invalid destination index"
 msgstr "índixe de destino inválido"
 
-#: src/engine/engine.cpp:3207
+#: src/engine/engine.cpp:3203 src/gui/doAction.cpp:1039
+#: src/gui/doAction.cpp:1060
 #, c-format
 msgid "Sample %d"
 msgstr ""
@@ -1074,7 +1075,7 @@ msgstr ""
 msgid "Sega Master System + FM Expansion"
 msgstr "Sega Master System + Expansión FM"
 
-#: src/engine/sysDef.cpp:742 src/gui/settings.cpp:4097
+#: src/engine/sysDef.cpp:742 src/gui/inst/gb.cpp:32 src/gui/settings.cpp:4097
 msgid "Game Boy"
 msgstr ""
 
@@ -4232,8 +4233,9 @@ msgid "Frequency"
 msgstr "Frecuencia"
 
 #: src/gui/chanOsc.cpp:37 src/gui/findReplace.cpp:687
-#: src/gui/findReplace.cpp:943 src/gui/guiConst.cpp:235 src/gui/mixer.cpp:268
-#: src/gui/sampleEdit.cpp:1016 src/gui/settings.cpp:276
+#: src/gui/findReplace.cpp:943 src/gui/guiConst.cpp:235
+#: src/gui/inst/fzt.cpp:999 src/gui/inst/gb.cpp:167 src/gui/inst/gb.cpp:351
+#: src/gui/mixer.cpp:268 src/gui/sampleEdit.cpp:1016 src/gui/settings.cpp:276
 #: src/gui/settings.cpp:1129 src/gui/settings.cpp:1493
 #: src/gui/settings.cpp:1505 src/gui/settings.cpp:3442
 #: src/gui/settings.cpp:4087 src/gui/userPresets.cpp:417
@@ -4420,11 +4422,17 @@ msgstr "no se pudo crear búferes FFT"
 msgid "Error!"
 msgstr "¡Error!"
 
+#: src/gui/chanOsc.cpp:672
+msgid ""
+"\n"
+"quiet##sgco"
+msgstr ""
+
 #: src/gui/clock.cpp:31 src/gui/guiConst.cpp:617 src/gui/settings.cpp:4273
 msgid "Clock"
 msgstr "Reloj"
 
-#: src/gui/commandPalette.cpp:51 src/gui/newSong.cpp:133
+#: src/gui/commandPalette.cpp:51 src/gui/gui.cpp:6333 src/gui/newSong.cpp:133
 #: src/gui/sysPicker.cpp:68
 msgid "Search..."
 msgstr "Buscar..."
@@ -4450,6 +4458,7 @@ msgid "Search chip (to add)..."
 msgstr "Buscar chip para agregar..."
 
 #: src/gui/commandPalette.cpp:93 src/gui/commandPalette.cpp:167
+#: src/gui/dataList.cpp:166
 msgid "- None -"
 msgstr "- Ninguno -"
 
@@ -4469,6 +4478,11 @@ msgstr "tipo de paleta de comandos inválida"
 #: src/gui/settings.cpp:6958
 msgid "Cancel"
 msgstr "Cancelar"
+
+#: src/gui/commandPalette.cpp:229
+#, fuzzy
+msgid "cannot add chip! ("
+msgstr "¡no se puede agregar el chip! (%s)"
 
 #: src/gui/compatFlags.cpp:31 src/gui/guiConst.cpp:605
 msgid "Compatibility Flags"
@@ -5163,6 +5177,23 @@ msgstr ""
 "\n"
 "sin efecto en canales con volumen logarítmico"
 
+#: src/gui/compatFlags.cpp:354
+msgid "Stop NES pulse channels hardware sweep on new note##sgcf"
+msgstr ""
+
+#: src/gui/compatFlags.cpp:355
+msgid "Do not stop volume slide after reaching zero or full volume##sgcf"
+msgstr ""
+
+#: src/gui/compatFlags.cpp:356
+msgid "Stop E1xy/E2xy effects on new note##sgcf"
+msgstr ""
+
+#: src/gui/compatFlags.cpp:357
+#, fuzzy
+msgid "Slower 0Axy volume slide##sgcf"
+msgstr "Deslizamientos de volumen antiguos"
+
 #: src/gui/csPlayer.cpp:112 src/gui/guiConst.cpp:621
 msgid "Command Stream Player"
 msgstr "Reproductor de Command Stream"
@@ -5283,6 +5314,11 @@ msgstr "guardar (.dmp)"
 #: src/gui/editControls.cpp:50 src/gui/gui.cpp:2791 src/gui/gui.cpp:2800
 msgid "delete"
 msgstr "borrar"
+
+#: src/gui/dataList.cpp:162
+#, fuzzy, c-format
+msgid "%.2X: <INVALID>"
+msgstr "INVÁLIDO"
 
 #: src/gui/dataList.cpp:245
 msgid "out of memory for this sample!"
@@ -5423,7 +5459,8 @@ msgstr "Ondas"
 msgid "Samples"
 msgstr ""
 
-#: src/gui/dataList.cpp:747 src/gui/waveEdit.cpp:502
+#: src/gui/dataList.cpp:747 src/gui/inst/wavetable.cpp:502
+#: src/gui/waveEdit.cpp:502
 msgid "save as .dmw..."
 msgstr "guardar como .dmw..."
 
@@ -5458,6 +5495,91 @@ msgid "%d apple"
 msgid_plural "%d apples"
 msgstr[0] "%d manzana"
 msgstr[1] "%d manzanas"
+
+#: src/gui/doAction.cpp:38
+#, fuzzy
+msgid "Unsaved changes! Save changes before creating a new song?##sgda"
+msgstr "¡Cambios no guardados! ¿Guardar antes de crear una nueva canción?"
+
+#: src/gui/doAction.cpp:45
+#, fuzzy
+msgid "Unsaved changes! Save changes before opening another file?##sgda"
+msgstr "¡Cambios no guardados! ¿Guardar cambios antes de abrir otro archivo?"
+
+#: src/gui/doAction.cpp:52
+#, fuzzy
+msgid "Unsaved changes! Save changes before opening backup?##sgda"
+msgstr "¡Cambios no guardados! ¿Guardar cambios antes de abrir una copia?"
+
+#: src/gui/doAction.cpp:64
+#, fuzzy, c-format
+msgid "Error while saving file! (%s)##sgda"
+msgstr "¡Error al guardar el archivo! (%s)"
+
+#: src/gui/doAction.cpp:192
+#, fuzzy
+msgid "Error while sending request (MIDI output not configured?)##sgda"
+msgstr "Error al enviar el pedido (¿salida MIDI no configurada?)"
+
+#: src/gui/doAction.cpp:200
+#, fuzzy
+msgid "Select an option: (cannot be undone!)##sgda"
+msgstr "Selecciona una opción: (no se puede deshacer)"
+
+#: src/gui/doAction.cpp:702
+#, fuzzy
+msgid "too many instruments!##sgda0"
+msgstr "¡demasiados instrumentos!"
+
+#: src/gui/doAction.cpp:731
+#, fuzzy
+msgid "too many instruments!##sgda1"
+msgstr "¡demasiados instrumentos!"
+
+#: src/gui/doAction.cpp:837 src/gui/doAction.cpp:951
+#, fuzzy
+msgid "too many wavetables!##sgda0"
+msgstr "¡demasiadas ondas!"
+
+#: src/gui/doAction.cpp:855 src/gui/doAction.cpp:969
+#, fuzzy
+msgid "too many wavetables!##sgda1"
+msgstr "¡demasiadas ondas!"
+
+#: src/gui/doAction.cpp:1043
+#, fuzzy
+msgid "too many samples!##sgda0"
+msgstr "¡demasiados samples!"
+
+#: src/gui/doAction.cpp:1063
+#, fuzzy
+msgid "too many samples!##sgda1"
+msgstr "¡demasiados samples!"
+
+#: src/gui/doAction.cpp:1268
+#, fuzzy
+msgid "couldn't paste! make sure your sample is 8 or 16-bit.##sgda"
+msgstr "¡no se pudo pegar! asegúrate de que el sample sea de 8 bits o 16."
+
+#: src/gui/doAction.cpp:1738
+#, fuzzy
+msgid "too many instruments!##sgda2"
+msgstr "¡demasiados instrumentos!"
+
+#: src/gui/doAction.cpp:1773
+#, fuzzy
+msgid "select at least one sample!##sgda"
+msgstr "¡selecciona por lo menos un sample!"
+
+#: src/gui/doAction.cpp:1775
+#, fuzzy
+msgid "maximum size is 256 samples!##sgda"
+msgstr "¡tamaño máximo es 256 samples!"
+
+#: src/gui/doAction.cpp:1779
+#, fuzzy
+msgid "too many wavetables!##sgda2"
+msgstr "¡demasiadas ondas!"
 
 #: src/gui/editControls.cpp:47 src/gui/gui.cpp:2757 src/gui/sampleEdit.cpp:1749
 msgid "cut"
@@ -5629,6 +5751,10 @@ msgstr ""
 msgid "clear"
 msgstr "limpiar"
 
+#: src/gui/editControls.cpp:238
+msgid "Mobile Edit###MobileEdit"
+msgstr ""
+
 #: src/gui/editControls.cpp:333
 msgid "Mobile Controls"
 msgstr "Controles Móvil"
@@ -5684,6 +5810,10 @@ msgstr "¡Cambios no guardados! ¿Guardar antes de crear una nueva canción?"
 msgid "Save as..."
 msgstr "Guardar como..."
 
+#: src/gui/editControls.cpp:517
+msgid "Legacy .dmf##sgec"
+msgstr ""
+
 #: src/gui/editControls.cpp:524 src/gui/exportOptions.cpp:119
 #: src/gui/exportOptions.cpp:221 src/gui/exportOptions.cpp:250
 #: src/gui/exportOptions.cpp:323 src/gui/exportOptions.cpp:384
@@ -5708,8 +5838,8 @@ msgid "Subsongs"
 msgstr "Subcanciones"
 
 #: src/gui/editControls.cpp:544 src/gui/guiConst.cpp:239
-#: src/gui/guiConst.cpp:588 src/gui/speed.cpp:32 src/gui/speed.cpp:102
-#: src/gui/sysConf.cpp:2194
+#: src/gui/guiConst.cpp:588 src/gui/inst/gb.cpp:208 src/gui/speed.cpp:32
+#: src/gui/speed.cpp:102 src/gui/sysConf.cpp:2194
 msgid "Speed"
 msgstr "Velocidad"
 
@@ -6022,7 +6152,8 @@ msgstr "Tasa de samples"
 msgid "Channels in file"
 msgstr "Canales en el archivo"
 
-#: src/gui/exportOptions.cpp:71 src/gui/settings.cpp:946
+#: src/gui/exportOptions.cpp:71 src/gui/inst/fzt.cpp:846
+#: src/gui/settings.cpp:946
 msgid "Loops"
 msgstr "Bucles"
 
@@ -6040,6 +6171,10 @@ msgstr "Canales para exportar:"
 #: src/gui/waveEdit.cpp:1121
 msgid "Invert"
 msgstr "Invertir"
+
+#: src/gui/exportOptions.cpp:100
+msgid "Channel Selection##sgeo"
+msgstr ""
 
 #: src/gui/exportOptions.cpp:134
 msgid "select at least one channel"
@@ -6154,6 +6289,36 @@ msgstr "Velocidad de ticks (en Hz)"
 msgid "optimize size"
 msgstr "optimizar tamaño"
 
+#: src/gui/exportOptions.cpp:259
+#, fuzzy
+msgid "DefleMask file (1.1.3+)##sgeo"
+msgstr "Módulo 1.1.3 de DefleMask"
+
+#: src/gui/exportOptions.cpp:262
+#, fuzzy
+msgid "Cancel##sgeo4"
+msgstr "Cancelar"
+
+#: src/gui/exportOptions.cpp:265
+#, fuzzy
+msgid "Export##sgeo4"
+msgstr "Exportar"
+
+#: src/gui/exportOptions.cpp:274
+#, fuzzy
+msgid "DefleMask file (1.0/legacy)##sgeo"
+msgstr "Módulo 1.0/legacy de DefleMask"
+
+#: src/gui/exportOptions.cpp:277
+#, fuzzy
+msgid "Cancel##sgeo5"
+msgstr "Cancelar"
+
+#: src/gui/exportOptions.cpp:280
+#, fuzzy
+msgid "Export##sgeo5"
+msgstr "Exportar"
+
 #: src/gui/exportOptions.cpp:289
 msgid "for use with TIunA driver. outputs asm source."
 msgstr ""
@@ -6195,6 +6360,47 @@ msgstr ""
 "producida al reproducir la canción.\n"
 "\n"
 "solo para uso técnico o de desarrollo!"
+
+#: src/gui/exportOptions.cpp:421 src/gui/exportOptions.cpp:441
+#: src/gui/exportOptions.cpp:484
+#, fuzzy
+msgid "Cancel##sgeo9"
+msgstr "Cancelar"
+
+#: src/gui/exportOptions.cpp:424 src/gui/exportOptions.cpp:500
+#, fuzzy
+msgid "Export##sgeo9"
+msgstr "Exportar"
+
+#: src/gui/exportOptions.cpp:444
+#, fuzzy
+msgid "Export##sgeo7"
+msgstr "Exportar"
+
+#: src/gui/exportOptions.cpp:460
+#, fuzzy
+msgid "loop##sgeo0"
+msgstr "Abrir archivo"
+
+#: src/gui/exportOptions.cpp:462
+#, fuzzy
+msgid "loop trail:##sgeo"
+msgstr "cola del bucle:"
+
+#: src/gui/exportOptions.cpp:464
+#, fuzzy
+msgid "auto-detect##sgeo"
+msgstr "auto-detectar"
+
+#: src/gui/exportOptions.cpp:467
+#, fuzzy
+msgid "add one loop##sgeo1"
+msgstr "añadir una"
+
+#: src/gui/exportOptions.cpp:470
+#, fuzzy
+msgid "custom##sgeo"
+msgstr "personalizada"
 
 #: src/gui/exportOptions.cpp:510 src/gui/settings.cpp:1254
 #: src/gui/settings.cpp:4001
@@ -6360,6 +6566,7 @@ msgid "Effect"
 msgstr "Efecto"
 
 #: src/gui/findReplace.cpp:725 src/gui/findReplace.cpp:1003
+#: src/gui/inst/fzt.cpp:624 src/gui/inst/fzt.cpp:714 src/gui/inst/fzt.cpp:726
 #: src/gui/settings.cpp:2313
 msgid "Value"
 msgstr "Valor"
@@ -6465,6 +6672,11 @@ msgstr "patrón"
 #: src/gui/grooves.cpp:132
 msgid "remove"
 msgstr "remover"
+
+#: src/gui/gui.cpp:85
+#, c-format
+msgid "Instrument %d"
+msgstr "Instrumento %d"
 
 #: src/gui/gui.cpp:1126 src/gui/gui.cpp:1130
 msgid "the song is over!"
@@ -6655,6 +6867,15 @@ msgstr "archivo de texto"
 #: src/gui/gui.cpp:1953
 msgid "binary file"
 msgstr "archivo binario"
+
+#: src/gui/gui.cpp:1962
+#, fuzzy
+msgid "Export FZT module"
+msgstr "Exportar colores"
+
+#: src/gui/gui.cpp:1963
+msgid "FZT module"
+msgstr ""
 
 #: src/gui/gui.cpp:1970 src/gui/gui.cpp:5495
 msgid "Coming soon!"
@@ -7020,6 +7241,11 @@ msgstr "expandir canción"
 msgid "find/replace"
 msgstr "buscar/reemplazar"
 
+#: src/gui/gui.cpp:3115
+#, fuzzy
+msgid "clone pattern"
+msgstr "colapsar patrón"
+
 #: src/gui/gui.cpp:3122 src/gui/gui.cpp:5905 src/gui/gui.cpp:7657
 #, c-format
 msgid "could NOT save layout! %s"
@@ -7117,6 +7343,16 @@ msgstr "exportar como audio..."
 msgid "export VGM..."
 msgstr "exportar como VGM..."
 
+#: src/gui/gui.cpp:4257
+#, fuzzy
+msgid "export .dmf (1.1.3+)...0"
+msgstr "exportar como .dmf..."
+
+#: src/gui/gui.cpp:4260
+#, fuzzy
+msgid "export .dmf (1.0/legacy)...0"
+msgstr "exportar como .dmf..."
+
 #: src/gui/gui.cpp:4268 src/gui/gui.cpp:4317
 msgid "export ZSM..."
 msgstr "exportar como ZSM..."
@@ -7135,6 +7371,16 @@ msgstr "exportar corr. de comandos..."
 
 #: src/gui/gui.cpp:4291 src/gui/gui.cpp:4340
 msgid "export .dmf..."
+msgstr "exportar como .dmf..."
+
+#: src/gui/gui.cpp:4304
+#, fuzzy
+msgid "export .dmf (1.1.3+)...1"
+msgstr "exportar como .dmf..."
+
+#: src/gui/gui.cpp:4308
+#, fuzzy
+msgid "export .dmf (1.0/legacy)...1"
 msgstr "exportar como .dmf..."
 
 #: src/gui/gui.cpp:4345
@@ -7615,13 +7861,18 @@ msgstr ""
 msgid "...but you haven't selected an instrument!"
 msgstr "...pero no has seleccionado un insrumento"
 
-#: src/gui/gui.cpp:5341
+#: src/gui/gui.cpp:5341 src/gui/gui.cpp:5377
 msgid "there were some errors while loading wavetables:\n"
 msgstr "hubieron errores al cargar las ondas:\n"
 
 #: src/gui/gui.cpp:5350 src/gui/gui.cpp:5360 src/gui/gui.cpp:5417
 #, c-format
 msgid "cannot load wavetable! (%s)"
+msgstr "¡no se pudo cargar la onda! (%s)"
+
+#: src/gui/gui.cpp:5386 src/gui/gui.cpp:5397
+#, fuzzy
+msgid "cannot load wavetable! ("
 msgstr "¡no se pudo cargar la onda! (%s)"
 
 #: src/gui/gui.cpp:5425
@@ -7779,7 +8030,7 @@ msgstr "¡demasiados instrumentos!"
 msgid "Drum Kit"
 msgstr "Batería"
 
-#: src/gui/gui.cpp:6260
+#: src/gui/gui.cpp:6260 src/gui/gui.cpp:6289
 msgid "too many wavetables!"
 msgstr "¡demasiadas ondas!"
 
@@ -7826,6 +8077,11 @@ msgstr "Orden de bit reverso"
 #: src/gui/gui.cpp:6606
 msgid "Error! No string provided!"
 msgstr "¡Error! ¡No hay cuerda!"
+
+#: src/gui/gui.cpp:6639
+#, c-format
+msgid "%.0fµs"
+msgstr ""
 
 #: src/gui/gui.cpp:6927
 msgid "it appears I couldn't load these fonts. any setting you can check?"
@@ -7972,12 +8228,13 @@ msgstr "mejor posible"
 msgid "Invalid"
 msgstr "Inválido"
 
-#: src/gui/guiConst.cpp:234 src/gui/settings.cpp:4088
+#: src/gui/guiConst.cpp:234 src/gui/inst/fzt.cpp:1001 src/gui/inst/gb.cpp:355
+#: src/gui/settings.cpp:4088
 msgid "Pitch"
 msgstr "Tono"
 
-#: src/gui/guiConst.cpp:236 src/gui/mixer.cpp:279 src/gui/settings.cpp:1140
-#: src/gui/userPresets.cpp:427
+#: src/gui/guiConst.cpp:236 src/gui/inst/gb.cpp:358 src/gui/mixer.cpp:279
+#: src/gui/settings.cpp:1140 src/gui/userPresets.cpp:427
 msgid "Panning"
 msgstr "Balance"
 
@@ -8893,8 +9150,9 @@ msgstr "Abrir archivo"
 msgid "export .dmp..."
 msgstr "exportar como .dmf..."
 
-#: src/gui/insEdit.cpp:118 src/gui/sampleEdit.cpp:501 src/gui/settings.cpp:1666
-#: src/gui/settings.cpp:2311 src/gui/settings.cpp:6972
+#: src/gui/insEdit.cpp:118 src/gui/inst/fzt.cpp:252 src/gui/sampleEdit.cpp:501
+#: src/gui/settings.cpp:1666 src/gui/settings.cpp:2311
+#: src/gui/settings.cpp:6972
 msgid "Type"
 msgstr "Tipo"
 
@@ -8969,6 +9227,4826 @@ msgstr "Mínimo"
 msgid "Max"
 msgstr "Máximo"
 
+#: src/gui/inst/adpcma.cpp:34
+msgid "Macros##sgiPCMA"
+msgstr ""
+
+#: src/gui/inst/adpcma.cpp:36
+#, fuzzy
+msgid "Volume##sgiPCMA"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/adpcma.cpp:37
+#, fuzzy
+msgid "Global Volume##sgiPCMA"
+msgstr "Volumen Global"
+
+#: src/gui/inst/adpcma.cpp:38
+#, fuzzy
+msgid "Panning##sgiPCMA"
+msgstr "Balance"
+
+#: src/gui/inst/adpcma.cpp:39
+#, fuzzy
+msgid "Phase Reset##sgiPCMA"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/adpcmb.cpp:34
+msgid "Macros##sgiPCMB"
+msgstr ""
+
+#: src/gui/inst/adpcmb.cpp:36
+#, fuzzy
+msgid "Volume##sgiPCMB"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/adpcmb.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiPCMB"
+msgstr "Arpegio"
+
+#: src/gui/inst/adpcmb.cpp:38
+msgid "Pitch##sgiPCMB"
+msgstr ""
+
+#: src/gui/inst/adpcmb.cpp:39
+#, fuzzy
+msgid "Panning##sgiPCMB"
+msgstr "Balance"
+
+#: src/gui/inst/adpcmb.cpp:40
+#, fuzzy
+msgid "Phase Reset##sgiPCMB"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/amiga.cpp:39
+msgid "Macros##sgiSAMPLE"
+msgstr ""
+
+#: src/gui/inst/amiga.cpp:41
+#, fuzzy
+msgid "Volume##sgiSAMPLE"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/amiga.cpp:42
+msgid "Arpeggio##sgiSAMPLE"
+msgstr ""
+
+#: src/gui/inst/amiga.cpp:43
+msgid "Pitch##sgiSAMPLE"
+msgstr ""
+
+#: src/gui/inst/amiga.cpp:59
+msgid "Panning##sgiSAMPLE"
+msgstr ""
+
+#: src/gui/inst/amiga.cpp:63
+#, fuzzy
+msgid "Panning (left)##sgiSAMPLE"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/amiga.cpp:68
+msgid "Surround##sgiSAMPLE"
+msgstr ""
+
+#: src/gui/inst/amiga.cpp:72
+#, fuzzy
+msgid "Panning (right)##sgiSAMPLE"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/amiga.cpp:75
+#, fuzzy
+msgid "Waveform##sgiSAMPLE"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/amiga.cpp:77
+#, fuzzy
+msgid "Phase Reset##sgiSAMPLE"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/ay.cpp:34
+#, fuzzy
+msgid "Macros##sgiAY"
+msgstr "Macros"
+
+#: src/gui/inst/ay.cpp:36
+#, fuzzy
+msgid "Volume##sgiAY"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/ay.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiAY"
+msgstr "Arpegio"
+
+#: src/gui/inst/ay.cpp:38
+msgid "Pitch##sgiAY"
+msgstr ""
+
+#: src/gui/inst/ay.cpp:42
+#, fuzzy
+msgid "Noise Freq##sgiAY"
+msgstr "Frec Ruido"
+
+#: src/gui/inst/ay.cpp:43
+#, fuzzy
+msgid "Waveform##sgiAY"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/ay.cpp:46
+msgid "Raw Period##sgiAY"
+msgstr ""
+
+#: src/gui/inst/ay.cpp:47
+msgid "Raw Envelope Period##sgiAY"
+msgstr ""
+
+#: src/gui/inst/ay.cpp:49
+#, fuzzy
+msgid "Phase Reset##sgiAY"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/ay.cpp:51
+#, fuzzy
+msgid "Envelope##sgiAY"
+msgstr "Envelope"
+
+#: src/gui/inst/ay.cpp:53
+msgid "AutoEnv Num##sgiAY"
+msgstr ""
+
+#: src/gui/inst/ay.cpp:54
+msgid "AutoEnv Den##sgiAY"
+msgstr ""
+
+#: src/gui/inst/ay8930.cpp:34
+msgid "Macros##sgi8930"
+msgstr ""
+
+#: src/gui/inst/ay8930.cpp:36
+#, fuzzy
+msgid "Volume##sgi8930"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/ay8930.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgi8930"
+msgstr "Arpegio"
+
+#: src/gui/inst/ay8930.cpp:38
+msgid "Pitch##sgi8930"
+msgstr ""
+
+#: src/gui/inst/ay8930.cpp:42
+#, fuzzy
+msgid "Noise Freq##sgi8930"
+msgstr "Frec Ruido"
+
+#: src/gui/inst/ay8930.cpp:43
+#, fuzzy
+msgid "Waveform##sgi8930"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/ay8930.cpp:46
+msgid "Raw Period##sgi8930"
+msgstr ""
+
+#: src/gui/inst/ay8930.cpp:47
+msgid "Raw Envelope Period##sgi8930"
+msgstr ""
+
+#: src/gui/inst/ay8930.cpp:49
+#, fuzzy
+msgid "Phase Reset##sgi8930"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/ay8930.cpp:51
+msgid "Duty##sgi8930"
+msgstr ""
+
+#: src/gui/inst/ay8930.cpp:52
+#, fuzzy
+msgid "Envelope##sgi8930"
+msgstr "Envelope"
+
+#: src/gui/inst/ay8930.cpp:54
+msgid "AutoEnv Num##sgi8930"
+msgstr ""
+
+#: src/gui/inst/ay8930.cpp:55
+msgid "AutoEnv Den##sgi8930"
+msgstr ""
+
+#: src/gui/inst/ay8930.cpp:57
+#, fuzzy
+msgid "Noise AND Mask##sgi8930"
+msgstr "Másc Ruido Y"
+
+#: src/gui/inst/ay8930.cpp:58
+#, fuzzy
+msgid "Noise OR Mask##sgi8930"
+msgstr "Másc Ruido O"
+
+#: src/gui/inst/beeper.cpp:32
+#, fuzzy
+msgid "Macros##sgiB"
+msgstr "Macros"
+
+#: src/gui/inst/beeper.cpp:34
+#, fuzzy
+msgid "Volume##sgiB"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/beeper.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiB"
+msgstr "Arpegio"
+
+#: src/gui/inst/beeper.cpp:36
+#, fuzzy
+msgid "Pitch##sgiB"
+msgstr "Tono"
+
+#: src/gui/inst/beeper.cpp:38
+#, fuzzy
+msgid "Pulse Width##sgiB"
+msgstr "Ancho de Pulso"
+
+#: src/gui/inst/bifurcator.cpp:32
+msgid "Macros##sgiBIFUR"
+msgstr ""
+
+#: src/gui/inst/bifurcator.cpp:37
+#, fuzzy
+msgid "Volume##sgiBIFUR"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/bifurcator.cpp:38
+#, fuzzy
+msgid "Arpeggio##sgiBIFUR"
+msgstr "Arpegio"
+
+#: src/gui/inst/bifurcator.cpp:39
+msgid "Pitch##sgiBIFUR"
+msgstr ""
+
+#: src/gui/inst/bifurcator.cpp:41
+#, fuzzy
+msgid "Parameter##sgiBIFUR"
+msgstr "Parámetro"
+
+#: src/gui/inst/bifurcator.cpp:43
+#, fuzzy
+msgid "Panning (left)##sgiBIFUR"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/bifurcator.cpp:44
+#, fuzzy
+msgid "Panning (right)##sgiBIFUR"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/bifurcator.cpp:46
+#, fuzzy
+msgid "Load Value##sgiBIFUR"
+msgstr "Cargar Valor"
+
+#: src/gui/inst/c140.cpp:34
+msgid "Macros##sgiC140"
+msgstr ""
+
+#: src/gui/inst/c140.cpp:39
+#, fuzzy
+msgid "Volume##sgiC140"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/c140.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiC140"
+msgstr "Arpegio"
+
+#: src/gui/inst/c140.cpp:41
+msgid "Pitch##sgiC140"
+msgstr ""
+
+#: src/gui/inst/c140.cpp:43
+#, fuzzy
+msgid "Panning (left)##sgiC140"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/c140.cpp:44
+#, fuzzy
+msgid "Panning (right)##sgiC140"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/c140.cpp:46
+#, fuzzy
+msgid "Phase Reset##sgiC140"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/c219.cpp:34
+msgid "Macros##sgiC219"
+msgstr ""
+
+#: src/gui/inst/c219.cpp:39
+#, fuzzy
+msgid "Volume##sgiC219"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/c219.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiC219"
+msgstr "Arpegio"
+
+#: src/gui/inst/c219.cpp:41
+msgid "Pitch##sgiC219"
+msgstr ""
+
+#: src/gui/inst/c219.cpp:42
+#, fuzzy
+msgid "Control##sgiC219"
+msgstr "Control"
+
+#: src/gui/inst/c219.cpp:44
+#, fuzzy
+msgid "Panning (left)##sgiC219"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/c219.cpp:45
+#, fuzzy
+msgid "Panning (right)##sgiC219"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/c219.cpp:47
+#, fuzzy
+msgid "Phase Reset##sgiC219"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/c64.cpp:35
+#, fuzzy
+msgid "Waveform##sgiC640"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/c64.cpp:38
+msgid "tri##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:45
+msgid "saw##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:52
+msgid "pulse##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:59
+msgid "noise##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:77
+msgid "A##sgiC640"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:78
+msgid "A##sgiC641"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:80
+msgid "D##sgiC640"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:81
+msgid "D##sgiC641"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:83
+msgid "S##sgiC640"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:84
+msgid "S##sgiC641"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:86
+msgid "R##sgiC640"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:87
+msgid "R##sgiC641"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:89
+#, fuzzy
+msgid "Envelope##sgiC640"
+msgstr "Envelope"
+
+#: src/gui/inst/c64.cpp:90
+#, fuzzy
+msgid "Envelope##sgiC641"
+msgstr "Envelope"
+
+#: src/gui/inst/c64.cpp:107
+msgid "Duty##sgiC640"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:109
+msgid "Reset duty on new note##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:115
+#, fuzzy
+msgid "Ring Modulation##sgiC64"
+msgstr "Modulación de Aro"
+
+#: src/gui/inst/c64.cpp:120
+#, fuzzy
+msgid "Oscillator Sync##sgiC64"
+msgstr "Sincronizar Osciladores"
+
+#: src/gui/inst/c64.cpp:125
+#, fuzzy
+msgid "Enable filter##sgiC64"
+msgstr "Activar filtro"
+
+#: src/gui/inst/c64.cpp:126
+#, fuzzy
+msgid "Initialize filter##sgiC64"
+msgstr "Inicializar filtro"
+
+#: src/gui/inst/c64.cpp:128
+msgid "Cutoff##sgiC640"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:129
+#, fuzzy
+msgid "Resonance##sgiC640"
+msgstr "Resonancia"
+
+#: src/gui/inst/c64.cpp:132
+#, fuzzy
+msgid "Filter Mode##sgiC640"
+msgstr "Modo de Filtro"
+
+#: src/gui/inst/c64.cpp:135
+msgid "low##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:142
+msgid "band##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:149
+msgid "high##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:156
+#, fuzzy
+msgid "ch3off##sgiC64"
+msgstr "canal 3 apagado"
+
+#: src/gui/inst/c64.cpp:162
+#, fuzzy
+msgid "Absolute Cutoff Macro##sgiC64"
+msgstr "Macro de Límite Absoluta"
+
+#: src/gui/inst/c64.cpp:167
+#, fuzzy
+msgid "Absolute Duty Macro##sgiC64"
+msgstr "Macro de Ancho Absoluta"
+
+#: src/gui/inst/c64.cpp:172
+#, fuzzy
+msgid "Don't test before new note##sgiC64"
+msgstr "No probar antes de cada nota"
+
+#: src/gui/inst/c64.cpp:176
+#, fuzzy
+msgid "Macros##sgiC64"
+msgstr "Macros"
+
+#: src/gui/inst/c64.cpp:201
+#, fuzzy
+msgid "Volume##sgiC64"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/c64.cpp:202
+#, fuzzy
+msgid "Arpeggio##sgiC64"
+msgstr "Arpegio"
+
+#: src/gui/inst/c64.cpp:203
+msgid "Pitch##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:204
+msgid "Duty##sgiC641"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:205
+#, fuzzy
+msgid "Waveform##sgiC641"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/c64.cpp:207
+msgid "Cutoff##sgiC641"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:208
+#, fuzzy
+msgid "Filter Mode##sgiC641"
+msgstr "Modo de Filtro"
+
+#: src/gui/inst/c64.cpp:209
+#, fuzzy
+msgid "Filter Toggle##sgiC64"
+msgstr "Activar Filtro"
+
+#: src/gui/inst/c64.cpp:210
+#, fuzzy
+msgid "Resonance##sgiC641"
+msgstr "Resonancia"
+
+#: src/gui/inst/c64.cpp:212
+#, fuzzy
+msgid "Special##sgiC64"
+msgstr "Especial"
+
+#: src/gui/inst/c64.cpp:213
+#, fuzzy
+msgid "Attack##sgiC64"
+msgstr "Ataque"
+
+#: src/gui/inst/c64.cpp:214
+msgid "Decay##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:215
+#, fuzzy
+msgid "Sustain##sgiC64"
+msgstr "Guía de sostenido"
+
+#: src/gui/inst/c64.cpp:216
+#, fuzzy
+msgid "Release##sgiC64"
+msgstr "Lanzamiento"
+
+#: src/gui/inst/dave.cpp:32
+msgid "Macros##sgiDAVE"
+msgstr ""
+
+#: src/gui/inst/dave.cpp:37
+#, fuzzy
+msgid "Volume##sgiDAVE"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/dave.cpp:38
+#, fuzzy
+msgid "Arpeggio##sgiDAVE"
+msgstr "Arpegio"
+
+#: src/gui/inst/dave.cpp:39
+msgid "Pitch##sgiDAVE"
+msgstr ""
+
+#: src/gui/inst/dave.cpp:40
+#, fuzzy
+msgid "Noise Freq##sgiDAVE"
+msgstr "Frec Ruido"
+
+#: src/gui/inst/dave.cpp:42
+#, fuzzy
+msgid "Waveform##sgiDAVE"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/dave.cpp:44
+#, fuzzy
+msgid "Panning (left)##sgiDAVE"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/dave.cpp:45
+#, fuzzy
+msgid "Panning (right)##sgiDAVE"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/dave.cpp:47
+#, fuzzy
+msgid "Phase Reset##sgiDAVE"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/dave.cpp:49
+#, fuzzy
+msgid "Control##sgiDAVE"
+msgstr "Control"
+
+#: src/gui/inst/dave.cpp:51
+msgid "Raw Frequency##sgiDAVE"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:35
+msgid "Oscillator mode:##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:41
+msgid "Freerun##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:50
+msgid "Oneshot##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:59
+msgid "Sync/AM##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:68
+msgid "Swap##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:77
+msgid "Virtual softpan channel##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:80
+msgid ""
+"Combines odd and next even channel into one virtual channel with 256-step "
+"panning.\n"
+"Instrument, volume and effects need to be placed on the odd channel (e.g. "
+"1st, 3rd, 5th etc.)##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:83
+msgid "Phase reset on key-on##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:91
+msgid "Macros##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:96
+#, fuzzy
+msgid "Volume##sgi5503"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/es5503.cpp:97
+#, fuzzy
+msgid "Arpeggio##sgi5503"
+msgstr "Arpegio"
+
+#: src/gui/inst/es5503.cpp:98
+msgid "Pitch##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:99
+msgid "Osc. mode##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:103
+#, fuzzy
+msgid "Panning (left)##sgi5503"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/es5503.cpp:104
+#, fuzzy
+msgid "Panning (right)##sgi5503"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/es5503.cpp:109
+#, fuzzy
+msgid "Waveform##sgi5503"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/es5503.cpp:112
+#, fuzzy
+msgid "Phase Reset##sgi5503"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/es5503.cpp:114
+msgid "Wave/sample pos.##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:115
+msgid "Osc. output##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5506.cpp:289
+#, fuzzy
+msgid "Filter Mode##sgiOTTO0"
+msgstr "Modo de Filtro"
+
+#: src/gui/inst/es5506.cpp:292
+#, fuzzy
+msgid "Filter K1##sgiOTTO0"
+msgstr "Filtro C1"
+
+#: src/gui/inst/es5506.cpp:294
+#, fuzzy
+msgid "Filter K2##sgiOTTO0"
+msgstr "Filtro C1"
+
+#: src/gui/inst/es5506.cpp:298
+#, fuzzy
+msgid "Envelope length##sgiOTTO"
+msgstr "Longitud envelope"
+
+#: src/gui/inst/es5506.cpp:301
+#, fuzzy
+msgid "Left Volume Ramp##sgiOTTO"
+msgstr "Rampa Volumen Izq"
+
+#: src/gui/inst/es5506.cpp:303
+#, fuzzy
+msgid "Right Volume Ramp##sgiOTTO"
+msgstr "Rampa Volumen Der"
+
+#: src/gui/inst/es5506.cpp:306
+#, fuzzy
+msgid "Filter K1 Ramp##sgiOTTO"
+msgstr "Rampa Filtro C1"
+
+#: src/gui/inst/es5506.cpp:308
+#, fuzzy
+msgid "Filter K2 Ramp##sgiOTTO"
+msgstr "Rampa Filtro C2"
+
+#: src/gui/inst/es5506.cpp:311
+#, fuzzy
+msgid "K1 Ramp Slowdown##sgiOTTO"
+msgstr "Ralentizar Rampa C1"
+
+#: src/gui/inst/es5506.cpp:313
+#, fuzzy
+msgid "K2 Ramp Slowdown##sgiOTTO"
+msgstr "Ralentizar Rampa C2"
+
+#: src/gui/inst/es5506.cpp:323
+msgid "Macros##sgiOTTO"
+msgstr ""
+
+#: src/gui/inst/es5506.cpp:338
+#, fuzzy
+msgid "Volume##sgiOTTO"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/es5506.cpp:339
+#, fuzzy
+msgid "Arpeggio##sgiOTTO"
+msgstr "Arpegio"
+
+#: src/gui/inst/es5506.cpp:340
+msgid "Pitch##sgiOTTO"
+msgstr ""
+
+#: src/gui/inst/es5506.cpp:341
+#, fuzzy
+msgid "Panning (left)##sgiOTTO"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/es5506.cpp:342
+#, fuzzy
+msgid "Panning (right)##sgiOTTO"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/es5506.cpp:343
+#, fuzzy
+msgid "Phase Reset##sgiOTTO"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/es5506.cpp:345
+#, fuzzy
+msgid "Filter Mode##sgiOTTO1"
+msgstr "Modo de Filtro"
+
+#: src/gui/inst/es5506.cpp:346
+#, fuzzy
+msgid "Filter K1##sgiOTTO1"
+msgstr "Filtro C1"
+
+#: src/gui/inst/es5506.cpp:347
+#, fuzzy
+msgid "Filter K2##sgiOTTO1"
+msgstr "Filtro C1"
+
+#: src/gui/inst/es5506.cpp:349
+#, fuzzy
+msgid "Outputs##sgiOTTO"
+msgstr "Cantidad de salidas"
+
+#: src/gui/inst/es5506.cpp:350
+#, fuzzy
+msgid "Control##sgiOTTO"
+msgstr "Control"
+
+#: src/gui/inst/esfm.cpp:187
+#, fuzzy
+msgid "Other##sgiESFM0"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/esfm.cpp:188
+#, fuzzy
+msgid "Other##sgiESFM1"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/esfm.cpp:194
+#, fuzzy
+msgid "Envelope##sgiESFM0"
+msgstr "Envelope"
+
+#: src/gui/inst/esfm.cpp:195
+#, fuzzy
+msgid "Envelope##sgiESFM1"
+msgstr "Envelope"
+
+#: src/gui/inst/esfm.cpp:252
+#, c-format
+msgid "op%d##sgiESFM0"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:254
+#, c-format
+msgid "OP%d##sgiESFM1"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:338
+msgid "Detune in semitones##sgiESFM0"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:346
+msgid ""
+"Detune in fractions of semitone.\n"
+"128 = +1 semitone, -128 = -1 semitone.##sgiESFM0"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:377
+msgid "If operator outputs sound, enable left channel output.##sgiESFM0"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:387
+msgid "If operator outputs sound, enable right channel output.##sgiESFM0"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:433
+msgid "Block##sgiESFM0"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:439
+msgid "FreqNum##sgiESFM0"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:544
+#, c-format
+msgid "op%d##sgiESFM2"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:584
+#, fuzzy, c-format
+msgid "Operator %d##sgiESFM"
+msgstr "Operador %d"
+
+#: src/gui/inst/esfm.cpp:618
+#, fuzzy
+msgid "Waveform##sgiESFM"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/esfm.cpp:620
+#, fuzzy
+msgid "Envelope##sgiESFM"
+msgstr "Envelope"
+
+#: src/gui/inst/esfm.cpp:703
+msgid "Blk##sgiESFM"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:706
+msgid "Block##sgiESFM1"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:718
+msgid "F##sgiESFM"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:721
+#, fuzzy
+msgid "Frequency (F-Num)##sgiESFM"
+msgstr "Frecuencia (F-Num)"
+
+#: src/gui/inst/esfm.cpp:742
+msgid "Detune in semitones##sgiESFM1"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:750
+msgid ""
+"Detune in fractions of semitone.\n"
+"128 = +1 semitone, -128 = -1 semitone.##sgiESFM1"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:771
+msgid "If operator outputs sound, enable left channel output.##sgiESFM1"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:781
+msgid "If operator outputs sound, enable right channel output.##sgiESFM1"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:940
+#, c-format
+msgid "op%d##sgiESFM3"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:982
+#, c-format
+msgid "OP%d##sgiESFM4"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1129
+msgid "Block##sgiESFM2"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1141
+msgid "FreqNum##sgiESFM1"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1151
+msgid "Detune in semitones##sgiESFM2"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1162
+msgid ""
+"Detune in fractions of semitone.\n"
+"128 = +1 semitone, -128 = -1 semitone.##sgiESFM2"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1228
+msgid "If operator outputs sound, enable left channel output.##sgiESFM2"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1237
+msgid "If operator outputs sound, enable right channel output.##sgiESFM2"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1277
+#, fuzzy, c-format
+msgid "OP%d Macros##sgiESFM"
+msgstr "Macros del OP%d"
+
+#: src/gui/inst/esfm.cpp:1300
+msgid "Block##sgiESFM3"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1301
+msgid "FreqNum##sgiESFM2"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1306
+#, fuzzy
+msgid "Op. Arpeggio##sgiESFM"
+msgstr "Arpegio Op."
+
+#: src/gui/inst/esfm.cpp:1307
+#, fuzzy
+msgid "Op. Pitch##sgiESFM"
+msgstr "Tono Op."
+
+#: src/gui/inst/esfm.cpp:1316
+#, fuzzy
+msgid "Op. Panning##sgiESFM"
+msgstr "Balance Op."
+
+#: src/gui/inst/esfm.cpp:1324
+msgid "Macros##sgiESFM"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1328
+#, fuzzy
+msgid "Volume##sgiESFM"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/esfm.cpp:1329
+#, fuzzy
+msgid "Arpeggio##sgiESFM"
+msgstr "Arpegio"
+
+#: src/gui/inst/esfm.cpp:1330
+msgid "Pitch##sgiESFM"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1331
+#, fuzzy
+msgid "OP4 Noise Mode##sgiESFM"
+msgstr "Modo Ruido OP4"
+
+#: src/gui/inst/esfm.cpp:1332
+#, fuzzy
+msgid "Panning##sgiESFM"
+msgstr "Balance"
+
+#: src/gui/inst/esfm.cpp:1334
+#, fuzzy
+msgid "Phase Reset##sgiESFM"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/fds.cpp:63
+#, fuzzy
+msgid "Compatibility mode##sgiFDS"
+msgstr "Modo de compatibilidad"
+
+#: src/gui/inst/fds.cpp:66
+#, fuzzy
+msgid ""
+"only use for compatibility with .dmf modules!\n"
+"- initializes modulation table with first wavetable\n"
+"- does not alter modulation parameters on instrument change##sgiFDS"
+msgstr ""
+"¡sólo usar para compatibilidad con módulos .dmf!\n"
+"- carga tabla de modulación con la primera onda\n"
+"- no altera parámetros de modulación al cambiar instrumento"
+
+#: src/gui/inst/fds.cpp:68
+#, fuzzy
+msgid "Modulation depth##sgiFDS"
+msgstr "Profundidad de modulación"
+
+#: src/gui/inst/fds.cpp:73
+#, fuzzy
+msgid "Modulation speed##sgiFDS"
+msgstr "Velocidad de modulación"
+
+#: src/gui/inst/fds.cpp:78
+#, fuzzy
+msgid "Modulation table##sgiFDS"
+msgstr "Tabla de modulación"
+
+#: src/gui/inst/fds.cpp:134
+#, fuzzy
+msgid "Macros##sgiFDS"
+msgstr "Macros"
+
+#: src/gui/inst/fds.cpp:136
+#, fuzzy
+msgid "Volume##sgiFDS"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/fds.cpp:137
+#, fuzzy
+msgid "Arpeggio##sgiFDS"
+msgstr "Arpegio"
+
+#: src/gui/inst/fds.cpp:138
+msgid "Pitch##sgiFDS"
+msgstr ""
+
+#: src/gui/inst/fds.cpp:139
+#, fuzzy
+msgid "Waveform##sgiFDS"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/fds.cpp:140
+#, fuzzy
+msgid "Mod Depth##sgiFDS"
+msgstr "Prof Mod"
+
+#: src/gui/inst/fds.cpp:141
+#, fuzzy
+msgid "Mod Speed##sgiFDS"
+msgstr "Vel Mod"
+
+#: src/gui/inst/fds.cpp:142
+#, fuzzy
+msgid "Mod Position##sgiFDS"
+msgstr "Pos Mod"
+
+#: src/gui/inst/fmEnvUtil.cpp:1021
+msgid ""
+"left click to restart\n"
+"middle click to pause\n"
+"right click to see algorithm##sgifmeu"
+msgstr ""
+
+#: src/gui/inst/fmEnvUtil.cpp:1031
+#, fuzzy
+msgid ""
+"left click to configure TL scaling\n"
+"right click to see FM preview##sgifmeu"
+msgstr ""
+"clic izquierdo para configurar escala del TL\n"
+"clic derecho para la vista previa FM"
+
+#: src/gui/inst/fmEnvUtil.cpp:1035
+#, fuzzy
+msgid "right click to see FM preview##sgifmeu"
+msgstr "clic derecho para la vista previa FM"
+
+#: src/gui/inst/fmEnvUtil.cpp:1050
+#, fuzzy
+msgid "operator level changes with volume?##sgifmeu"
+msgstr "¿nivel de operador cambia con volumen?"
+
+#: src/gui/inst/fmEnvUtil.cpp:1059
+#, fuzzy
+msgid "AUTO##OPKVS"
+msgstr "SÍ##OPKVS"
+
+#: src/gui/inst/fmEnvUtil.cpp:1061
+#, fuzzy
+msgid "NO##OPKVS"
+msgstr "SÍ##OPKVS"
+
+#: src/gui/inst/fmEnvUtil.cpp:1063
+msgid "YES##OPKVS"
+msgstr "SÍ##OPKVS"
+
+#: src/gui/inst/fmEnvUtil.h:143
+#, fuzzy
+msgid "(copying)##sgifmeh"
+msgstr "(copiando)"
+
+#: src/gui/inst/fmEnvUtil.h:145
+#, fuzzy
+msgid "(swapping)##sgifmeh"
+msgstr "(intercambiando)"
+
+#: src/gui/inst/fmEnvUtil.h:149
+#, fuzzy
+msgid ""
+"- drag to swap operator\n"
+"- shift-drag to copy operator##sgifmeh"
+msgstr ""
+"- coge para intercambiar operador\n"
+"- shift-coge para copiar operador"
+
+#: src/gui/inst/fzt.cpp:103
+#, fuzzy
+msgid "Base note"
+msgstr "reiniciar notas"
+
+#: src/gui/inst/fzt.cpp:123
+#, fuzzy
+msgid "Finetune"
+msgstr "Desafinación"
+
+#: src/gui/inst/fzt.cpp:138
+#, fuzzy
+msgid "Slide speed"
+msgstr "velocidad"
+
+#: src/gui/inst/fzt.cpp:142
+msgid "Set PW"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:148
+#, fuzzy
+msgid "Set pulse width on keydown"
+msgstr "12xx: Cambiar ancho de pulso"
+
+#: src/gui/inst/fzt.cpp:155
+#, fuzzy
+msgid "Initial pulse width"
+msgstr "12xx: Cambiar ancho de pulso"
+
+#: src/gui/inst/fzt.cpp:160
+#, fuzzy
+msgid "Set cutoff"
+msgstr "Límite"
+
+#: src/gui/inst/fzt.cpp:166
+#, fuzzy
+msgid "Set filter cutoff on keydown"
+msgstr "35xx: Ajustar coeficiente 5 del filtro del eco"
+
+#: src/gui/inst/fzt.cpp:172 src/gui/inst/fzt.cpp:1004 src/gui/inst/gb.cpp:357
+#: src/gui/settings.cpp:4015 src/gui/settings.cpp:4070
+#: src/gui/settings.cpp:4238 src/gui/waveEdit.cpp:755
+msgid "Waveform"
+msgstr "Onda"
+
+#: src/gui/inst/fzt.cpp:176 src/gui/inst/fzt.cpp:792
+msgid "noise"
+msgstr "ruido"
+
+#: src/gui/inst/fzt.cpp:184 src/gui/inst/fzt.cpp:800
+msgid "pulse"
+msgstr "pulso"
+
+#: src/gui/inst/fzt.cpp:192 src/gui/inst/fzt.cpp:808
+msgid "triangle"
+msgstr "triángulo"
+
+#: src/gui/inst/fzt.cpp:200 src/gui/inst/fzt.cpp:816
+msgid "saw"
+msgstr "sierra"
+
+#: src/gui/inst/fzt.cpp:208 src/gui/inst/fzt.cpp:824
+msgid "metal"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:216 src/gui/inst/fzt.cpp:832
+#, fuzzy
+msgid "sine"
+msgstr "Coseno"
+
+#: src/gui/inst/fzt.cpp:233
+msgid "Enable filter"
+msgstr "Activar filtro"
+
+#: src/gui/inst/fzt.cpp:241 src/gui/inst/fzt.cpp:1006
+msgid "Cutoff"
+msgstr "Límite"
+
+#: src/gui/inst/fzt.cpp:247 src/gui/inst/fzt.cpp:1009
+#: src/gui/sampleEdit.cpp:1174
+msgid "Resonance"
+msgstr "Resonancia"
+
+#: src/gui/inst/fzt.cpp:285
+#, fuzzy
+msgid "Enable ring modulation"
+msgstr "Modulación de Aro"
+
+#: src/gui/inst/fzt.cpp:293 src/gui/inst/fzt.cpp:1015
+#, fuzzy
+msgid "Ring mod source"
+msgstr "mod aro"
+
+#: src/gui/inst/fzt.cpp:297
+#, fuzzy
+msgid "FF = self-modulation"
+msgstr "Modulación de Fase"
+
+#: src/gui/inst/fzt.cpp:303
+#, fuzzy
+msgid "Enable hard sync"
+msgstr "Activar el sistema de respaldo"
+
+#: src/gui/inst/fzt.cpp:311 src/gui/inst/fzt.cpp:1018
+msgid "Hard sync source"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:315
+msgid "FF = self-sync"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:330
+msgid "Retrigger on slide"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:336
+msgid ""
+"Restart instrument and envelope even if slide command (03xx) is placed with "
+"the note."
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:342
+msgid "Sync osc. on keydown"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:348
+msgid ""
+"Reset phase of oscillator each time new note is played.\n"
+"Does not happen when slide (03xx) or legato command is placed."
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:365
+msgid "Vibrato"
+msgstr "Vibrato"
+
+#: src/gui/inst/fzt.cpp:373
+#, fuzzy
+msgid "Speed0"
+msgstr "Velocidad"
+
+#: src/gui/inst/fzt.cpp:379
+#, fuzzy
+msgid "Depth0"
+msgstr "Profundidad"
+
+#: src/gui/inst/fzt.cpp:385
+#, fuzzy
+msgid "Delay0"
+msgstr "Retraso"
+
+#: src/gui/inst/fzt.cpp:391
+msgid "PWM"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:399
+#, fuzzy
+msgid "Speed1"
+msgstr "Velocidad"
+
+#: src/gui/inst/fzt.cpp:405
+#, fuzzy
+msgid "Depth1"
+msgstr "Profundidad"
+
+#: src/gui/inst/fzt.cpp:411
+#, fuzzy
+msgid "Delay1"
+msgstr "Retraso"
+
+#: src/gui/inst/fzt.cpp:430 src/gui/inst/fzt.cpp:431
+#, fuzzy
+msgid "A"
+msgstr "AM"
+
+#: src/gui/inst/fzt.cpp:433 src/gui/inst/fzt.cpp:434
+msgid "D"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:436 src/gui/inst/fzt.cpp:437
+#, fuzzy
+msgid "S"
+msgstr "SP"
+
+#: src/gui/inst/fzt.cpp:439 src/gui/inst/fzt.cpp:440
+msgid "R"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:442 src/gui/inst/fzt.cpp:443
+msgid "VOL"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:445 src/gui/inst/fzt.cpp:446 src/gui/settings.cpp:4057
+msgid "Envelope"
+msgstr "Envelope"
+
+#: src/gui/inst/fzt.cpp:468 src/gui/inst/fzt.cpp:488
+#, fuzzy
+msgid "Instrument program"
+msgstr "Editor de instrumentos"
+
+#: src/gui/inst/fzt.cpp:472
+#, fuzzy
+msgid "Program period22"
+msgstr "Programa"
+
+#: src/gui/inst/fzt.cpp:480
+#, fuzzy
+msgid "Do not restart instrument program on keydown"
+msgstr "Crear instrumento usando el sample"
+
+#: src/gui/inst/fzt.cpp:500 src/gui/inst/gb.cpp:111
+msgid "Tick"
+msgstr "Tick"
+
+#: src/gui/inst/fzt.cpp:502 src/gui/inst/gb.cpp:113
+msgid "Command"
+msgstr "Comando"
+
+#: src/gui/inst/fzt.cpp:504 src/gui/inst/gb.cpp:115
+msgid "Move/Remove"
+msgstr "Mover/Quitar"
+
+#: src/gui/inst/fzt.cpp:506
+msgid "Unite"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:651
+#, fuzzy
+msgid "Semitones"
+msgstr "tono"
+
+#: src/gui/inst/fzt.cpp:659
+msgid "First external arpeggio note"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:673
+msgid "Second external arpeggio note1"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:690
+#, fuzzy
+msgid "Speed2"
+msgstr "Velocidad"
+
+#: src/gui/inst/fzt.cpp:696
+#, fuzzy
+msgid "Depth11"
+msgstr "Profundidad"
+
+#: src/gui/inst/fzt.cpp:735
+#, fuzzy
+msgid "Up2"
+msgstr "Arriba"
+
+#: src/gui/inst/fzt.cpp:741
+#, fuzzy
+msgid "Down11"
+msgstr "Abajo"
+
+#: src/gui/inst/fzt.cpp:767
+#, fuzzy
+msgid "Source channel"
+msgstr "Reiniciar canales suavemente"
+
+#: src/gui/inst/fzt.cpp:775
+msgid "Source is self"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:855
+msgid "Step to jump to"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:863
+#, fuzzy
+msgid "No operation"
+msgstr "Operador FM"
+
+#: src/gui/inst/fzt.cpp:868
+#, fuzzy
+msgid "Program end"
+msgstr "Programa"
+
+#: src/gui/inst/fzt.cpp:876
+msgid "Execute next command at the same tick"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:995 src/gui/inst/gb.cpp:345
+msgid "Macros"
+msgstr "Macros"
+
+#: src/gui/inst/fzt.cpp:997
+msgid ""
+"Warning! Macros are NOT supported by FZT file format! Do not use them if you "
+"want to export .fzt file!"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:1000 src/gui/inst/gb.cpp:354
+msgid "Arpeggio"
+msgstr "Arpegio"
+
+#: src/gui/inst/fzt.cpp:1002 src/gui/waveEdit.cpp:622
+msgid "Duty"
+msgstr "Ancho de pulso"
+
+#: src/gui/inst/fzt.cpp:1007
+msgid "Filter Mode"
+msgstr "Modo de Filtro"
+
+#: src/gui/inst/fzt.cpp:1008
+msgid "Filter Toggle"
+msgstr "Activar Filtro"
+
+#: src/gui/inst/fzt.cpp:1011 src/gui/inst/gb.cpp:360
+#, fuzzy
+msgid "Phase Reset"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/fzt.cpp:1012
+#, fuzzy
+msgid "Envelope Reset/Key Control"
+msgstr "Tiempo de reinicio del envelope;"
+
+#: src/gui/inst/fzt.cpp:1014
+#, fuzzy
+msgid "Ring mod toggle"
+msgstr "mod aro"
+
+#: src/gui/inst/fzt.cpp:1017
+msgid "Hard sync toggle"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:1020 src/gui/sysConf.cpp:722
+msgid "Attack"
+msgstr "Ataque"
+
+#: src/gui/inst/fzt.cpp:1021 src/gui/sysConf.cpp:727
+msgid "Decay"
+msgstr "Caída"
+
+#: src/gui/inst/fzt.cpp:1022 src/gui/sysConf.cpp:732
+msgid "Sustain"
+msgstr "Sostenido"
+
+#: src/gui/inst/fzt.cpp:1023 src/gui/settings.cpp:4059 src/gui/sysConf.cpp:737
+msgid "Release"
+msgstr "Lanzamiento"
+
+#: src/gui/inst/ga20.cpp:34
+msgid "Macros##sgiGA20"
+msgstr ""
+
+#: src/gui/inst/ga20.cpp:36
+#, fuzzy
+msgid "Volume##sgiGA20"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/ga20.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiGA20"
+msgstr "Arpegio"
+
+#: src/gui/inst/ga20.cpp:38
+msgid "Pitch##sgiGA20"
+msgstr ""
+
+#: src/gui/inst/ga20.cpp:40
+#, fuzzy
+msgid "Phase Reset##sgiGA20"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/gb.cpp:34
+msgid "Use software envelope"
+msgstr "Usar envelope de software"
+
+#: src/gui/inst/gb.cpp:35
+msgid "Initialize envelope on every note"
+msgstr "Inicializar envelope en cada nota"
+
+#: src/gui/inst/gb.cpp:52
+#, fuzzy
+msgid "Volume##sgiGB0"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/gb.cpp:59 src/gui/settings.cpp:867
+msgid "Length"
+msgstr "Longitud"
+
+#: src/gui/inst/gb.cpp:66
+#, fuzzy
+msgid "Sound Length##sgiGB0"
+msgstr "Longitud de Sonido"
+
+#: src/gui/inst/gb.cpp:69
+msgid "Infinity"
+msgstr "Infinito"
+
+#: src/gui/inst/gb.cpp:73
+msgid "Direction"
+msgstr "Dirección"
+
+#: src/gui/inst/gb.cpp:76
+#, fuzzy
+msgid "Up##sgiGB0"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/gb.cpp:82
+#, fuzzy
+msgid "Down##sgiGB0"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/gb.cpp:100
+msgid "Hardware Sequence"
+msgstr "Secuencia de Hardware"
+
+#: src/gui/inst/gb.cpp:171
+msgid "Env Length"
+msgstr "Long Env"
+
+#: src/gui/inst/gb.cpp:175
+msgid "Sound Length"
+msgstr "Longitud de Sonido"
+
+#: src/gui/inst/gb.cpp:179 src/gui/inst/gb.cpp:213
+msgid "Up"
+msgstr "Arriba"
+
+#: src/gui/inst/gb.cpp:185 src/gui/inst/gb.cpp:219
+msgid "Down"
+msgstr "Abajo"
+
+#: src/gui/inst/gb.cpp:204
+msgid "Shift"
+msgstr "Turno"
+
+#: src/gui/inst/gb.cpp:237
+msgid "Ticks"
+msgstr "Ticks"
+
+#: src/gui/inst/gb.cpp:259
+msgid "Position"
+msgstr "Posición"
+
+#: src/gui/inst/gb.cpp:356
+msgid "Duty/Noise"
+msgstr "Ancho/Ruido"
+
+#: src/gui/inst/gbadma.cpp:39
+msgid "Macros##sgiGBADMA"
+msgstr ""
+
+#: src/gui/inst/gbadma.cpp:43
+msgid "Volume##sgiGBADMA"
+msgstr ""
+
+#: src/gui/inst/gbadma.cpp:44
+msgid "Arpeggio##sgiGBADMA"
+msgstr ""
+
+#: src/gui/inst/gbadma.cpp:45
+msgid "Pitch##sgiGBADMA"
+msgstr ""
+
+#: src/gui/inst/gbadma.cpp:46
+#, fuzzy
+msgid "Waveform##sgiGBADMA"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/gbadma.cpp:47
+msgid "Panning##sgiGBADMA"
+msgstr ""
+
+#: src/gui/inst/gbadma.cpp:49
+#, fuzzy
+msgid "Phase Reset##sgiGBADMA"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/gbaminmod.cpp:39
+msgid "Macros##sgiGBAMINMOD"
+msgstr ""
+
+#: src/gui/inst/gbaminmod.cpp:41
+msgid "Volume##sgiGBAMINMOD"
+msgstr ""
+
+#: src/gui/inst/gbaminmod.cpp:42
+msgid "Arpeggio##sgiGBAMINMOD"
+msgstr ""
+
+#: src/gui/inst/gbaminmod.cpp:43
+msgid "Pitch##sgiGBAMINMOD"
+msgstr ""
+
+#: src/gui/inst/gbaminmod.cpp:44
+#, fuzzy
+msgid "Waveform##sgiGBAMINMOD"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/gbaminmod.cpp:45
+#, fuzzy
+msgid "Panning (left)##sgiGBAMINMOD"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/gbaminmod.cpp:46
+#, fuzzy
+msgid "Panning (right)##sgiGBAMINMOD"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/gbaminmod.cpp:48
+msgid "Special##sgiGBAMINMOD"
+msgstr ""
+
+#: src/gui/inst/gbaminmod.cpp:50
+msgid "Phase Reset##sgiGBAMINMOD"
+msgstr ""
+
+#: src/gui/inst/k007232.cpp:34
+#, fuzzy
+msgid "Macros##sgiK00"
+msgstr "Macros"
+
+#: src/gui/inst/k007232.cpp:39
+#, fuzzy
+msgid "Volume##sgiK00"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/k007232.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiK00"
+msgstr "Arpegio"
+
+#: src/gui/inst/k007232.cpp:41
+msgid "Pitch##sgiK00"
+msgstr ""
+
+#: src/gui/inst/k007232.cpp:43
+#, fuzzy
+msgid "Panning (left)##sgiK00"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/k007232.cpp:44
+#, fuzzy
+msgid "Panning (right)##sgiK00"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/k007232.cpp:46
+#, fuzzy
+msgid "Phase Reset##sgiK00"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/k053260.cpp:34
+#, fuzzy
+msgid "Macros##sgiK05"
+msgstr "Macros"
+
+#: src/gui/inst/k053260.cpp:39
+#, fuzzy
+msgid "Volume##sgiK05"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/k053260.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiK05"
+msgstr "Arpegio"
+
+#: src/gui/inst/k053260.cpp:41
+msgid "Pitch##sgiK05"
+msgstr ""
+
+#: src/gui/inst/k053260.cpp:43
+#, fuzzy
+msgid "Panning##sgiK05"
+msgstr "Balance"
+
+#: src/gui/inst/k053260.cpp:45
+#, fuzzy
+msgid "Phase Reset##sgiK05"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/macroDraw.cpp:268
+msgid "Bottom##sgimcd0"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:277
+#, fuzzy
+msgid "Top##sgimcd0"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/macroDraw.cpp:291
+#, fuzzy
+msgid "Attack##sgimcd"
+msgstr "Ataque"
+
+#: src/gui/inst/macroDraw.cpp:300
+#, fuzzy
+msgid "Sustain##sgimcd"
+msgstr "Guía de sostenido"
+
+#: src/gui/inst/macroDraw.cpp:311
+msgid "Hold##sgimcd"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:320
+#, fuzzy
+msgid "SusTime##sgimcd"
+msgstr "TiempoSos"
+
+#: src/gui/inst/macroDraw.cpp:331
+msgid "Decay##sgimcd"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:340
+#, fuzzy
+msgid "SusDecay##sgimcd"
+msgstr "CaídaSos"
+
+#: src/gui/inst/macroDraw.cpp:374
+#, fuzzy
+msgid "Release##sgimcd"
+msgstr "Lanzamiento"
+
+#: src/gui/inst/macroDraw.cpp:396
+msgid "Bottom##sgimcd1"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:405
+#, fuzzy
+msgid "Top##sgimcd1"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/macroDraw.cpp:419
+#, fuzzy
+msgid "Speed##sgimcd"
+msgstr "Velocidades"
+
+#: src/gui/inst/macroDraw.cpp:428
+msgid "Phase##sgimcd"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:438
+#, fuzzy
+msgid "Shape##sgimcd"
+msgstr "Formas"
+
+#: src/gui/inst/macroDraw.cpp:512
+#, fuzzy
+msgid "Macro type: Sequence##sgimcd"
+msgstr "Tipo de macro: Secuencia"
+
+#: src/gui/inst/macroDraw.cpp:515
+#, fuzzy
+msgid "Macro type: ADSR##sgimcd"
+msgstr "Tipo de macro: ADSR"
+
+#: src/gui/inst/macroDraw.cpp:518
+#, fuzzy
+msgid "Macro type: LFO##sgimcd"
+msgstr "Tipo de macro: LFO"
+
+#: src/gui/inst/macroDraw.cpp:521
+#, fuzzy
+msgid "Macro type: What's going on here?##sgimcd"
+msgstr "Tipo de macro: ¿Qué está pasando?"
+
+#: src/gui/inst/macroDraw.cpp:534
+#, fuzzy
+msgid "Delay/Step Length##sgimcd"
+msgstr "Retraso/Longitud de Paso"
+
+#: src/gui/inst/macroDraw.cpp:537
+msgid "Step Length (ticks)##IMacroSpeed"
+msgstr "Longitud de Paso (ticks)##IMacroSpeed"
+
+#: src/gui/inst/macroDraw.cpp:541
+msgid "Delay##IMacroDelay"
+msgstr "Retraso##IMacroDelay"
+
+#: src/gui/inst/macroDraw.cpp:554
+#, fuzzy
+msgid "Release mode: Active (jump to release pos)##sgimcd"
+msgstr "Modo de lanzamiento: Activo (saltar al punto de lanzamiento)"
+
+#: src/gui/inst/macroDraw.cpp:556
+#, fuzzy
+msgid "Release mode: Passive (delayed release)##sgimcd"
+msgstr "Modo de lanzamiento: Pasivo (lanzamiento tardío)"
+
+#: src/gui/inst/macroDraw.cpp:679
+msgid "Tabs##sgimcd"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:812
+#, fuzzy
+msgid "Length##sgimcd"
+msgstr "Longitud"
+
+#: src/gui/inst/macroDraw.cpp:823
+#, fuzzy
+msgid "StepLen##sgimcd"
+msgstr "LongPaso"
+
+#: src/gui/inst/macroDraw.cpp:831
+msgid "Delay##sgimcd"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:855
+#, fuzzy
+msgid "The heck? No, this isn't even working correctly...##sgimcd"
+msgstr "¿Qué rayos? No, esto ni siquiera está funcionando correctamente..."
+
+#: src/gui/inst/macroDraw.cpp:858
+#, fuzzy
+msgid "The only problem with that selectedMacro is that it's a bug...##sgimcd"
+msgstr "El único problema con ese selectedMacro es que es un bug..."
+
+#: src/gui/inst/macroDraw.cpp:867
+msgid "Single (combo box)##sgimcd"
+msgstr ""
+
+#: src/gui/inst/macroDrawUtil.cpp:82 src/gui/inst/macroDrawUtil.cpp:88
+msgid "exponential##sgmu"
+msgstr ""
+
+#: src/gui/inst/macroDrawUtil.cpp:85 src/gui/inst/macroDrawUtil.cpp:91
+#, fuzzy
+msgid "linear##sgmu"
+msgstr "lineal"
+
+#: src/gui/inst/macroDrawUtil.cpp:93
+msgid "direct##sgmu"
+msgstr ""
+
+#: src/gui/inst/macroDrawUtil.cpp:104
+msgid "HP/K2, HP/K2##sgmu"
+msgstr ""
+
+#: src/gui/inst/macroDrawUtil.cpp:107
+msgid "HP/K2, LP/K1##sgmu"
+msgstr ""
+
+#: src/gui/inst/macroDrawUtil.cpp:110
+msgid "LP/K2, LP/K2##sgmu"
+msgstr ""
+
+#: src/gui/inst/macroDrawUtil.cpp:113
+msgid "LP/K2, LP/K1##sgmu"
+msgstr ""
+
+#: src/gui/inst/macroDrawUtil.cpp:128
+msgid "Saw##sgmu"
+msgstr ""
+
+#: src/gui/inst/macroDrawUtil.cpp:130
+#, fuzzy
+msgid "Square##sgmu"
+msgstr "Cuadrado"
+
+#: src/gui/inst/macroDrawUtil.cpp:132
+#, fuzzy
+msgid "Triangle##sgmu"
+msgstr "Triángulo"
+
+#: src/gui/inst/macroDrawUtil.cpp:134
+#, fuzzy
+msgid "Random##sgmu"
+msgstr "Aleatorio"
+
+#: src/gui/inst/mikey.cpp:34
+msgid "Macros##sgiLYNX"
+msgstr ""
+
+#: src/gui/inst/mikey.cpp:39
+#, fuzzy
+msgid "Volume##sgiLYNX"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/mikey.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiLYNX"
+msgstr "Arpegio"
+
+#: src/gui/inst/mikey.cpp:41
+msgid "Pitch##sgiLYNX"
+msgstr ""
+
+#: src/gui/inst/mikey.cpp:45
+#, fuzzy
+msgid "Duty/Int##sgiLYNX"
+msgstr "Trabajo/Int"
+
+#: src/gui/inst/mikey.cpp:48
+#, fuzzy
+msgid "Panning (left)##sgiLYNX"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/mikey.cpp:49
+#, fuzzy
+msgid "Panning (right)##sgiLYNX"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/mikey.cpp:51
+#, fuzzy
+msgid "Phase Reset##sgiLYNX"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/mikey.cpp:53
+#, fuzzy
+msgid "Load LFSR##sgiLYNX"
+msgstr "Cargar LFSR"
+
+#: src/gui/inst/msm5232.cpp:34
+msgid "Macros##sgi5232"
+msgstr ""
+
+#: src/gui/inst/msm5232.cpp:36
+#, fuzzy
+msgid "Volume##sgi5232"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/msm5232.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgi5232"
+msgstr "Arpegio"
+
+#: src/gui/inst/msm5232.cpp:39
+#, fuzzy
+msgid "Group Ctrl##sgi5232"
+msgstr "Ctrl Grupo"
+
+#: src/gui/inst/msm5232.cpp:40
+#, fuzzy
+msgid "Group Attack##sgi5232"
+msgstr "Ataq Grupo"
+
+#: src/gui/inst/msm5232.cpp:41
+#, fuzzy
+msgid "Group Decay##sgi5232"
+msgstr "Caída Grupo"
+
+#: src/gui/inst/msm5232.cpp:42
+msgid "Noise##sgi5232"
+msgstr ""
+
+#: src/gui/inst/msm6258.cpp:34
+msgid "Macros##sgi6258"
+msgstr ""
+
+#: src/gui/inst/msm6258.cpp:36
+#, fuzzy
+msgid "Frequency Divider##sgi6258"
+msgstr "Divisor Frec"
+
+#: src/gui/inst/msm6258.cpp:37
+#, fuzzy
+msgid "Panning##sgi6258"
+msgstr "Balance"
+
+#: src/gui/inst/msm6258.cpp:38
+#, fuzzy
+msgid "Phase Reset##sgi6258"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/msm6258.cpp:39
+#, fuzzy
+msgid "Clock Divider##sgi6258"
+msgstr "Divisor Reloj"
+
+#: src/gui/inst/msm6295.cpp:34
+msgid "Macros##sgi6295"
+msgstr ""
+
+#: src/gui/inst/msm6295.cpp:36
+#, fuzzy
+msgid "Volume##sgi6295"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/msm6295.cpp:37
+#, fuzzy
+msgid "Frequency Divider##sgi6295"
+msgstr "Divisor Frec"
+
+#: src/gui/inst/msm6295.cpp:38
+#, fuzzy
+msgid "Phase Reset##sgi6295"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/multipcm.cpp:32
+msgid "MultiPCM##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:47
+msgid "AR##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:48
+msgid "AR##sgiMULPCM1"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:51
+#, fuzzy
+msgid "Attack Rate##sgiMULPCM"
+msgstr "Tasa de Ataque"
+
+#: src/gui/inst/multipcm.cpp:54
+msgid "D1R##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:55
+msgid "D1R##sgiMULPCM1"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:58
+#, fuzzy
+msgid "Decay 1 Rate##sgiMULPCM"
+msgstr "Tasa de Caída 1"
+
+#: src/gui/inst/multipcm.cpp:61
+msgid "DL##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:62
+msgid "DL##sgiMULPCM1"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:65
+#, fuzzy
+msgid "Decay Level##sgiMULPCM"
+msgstr "Nivel de Caída"
+
+#: src/gui/inst/multipcm.cpp:68
+msgid "D2R##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:69
+msgid "D2R##sgiMULPCM1"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:72
+#, fuzzy
+msgid "Decay 2 Rate##sgiMULPCM"
+msgstr "Tasa de Caída 2"
+
+#: src/gui/inst/multipcm.cpp:75
+msgid "RR##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:76
+msgid "RR##sgiMULPCM1"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:79
+#, fuzzy
+msgid "Release Rate##sgiMULPCM"
+msgstr "Tasa de Lanzamiento"
+
+#: src/gui/inst/multipcm.cpp:82
+msgid "RC##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:83
+msgid "RC##sgiMULPCM1"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:86
+#, fuzzy
+msgid "Rate Correction##sgiMULPCM"
+msgstr "Corrección de Tasa"
+
+#: src/gui/inst/multipcm.cpp:89
+msgid "Envelope##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:90
+#, fuzzy
+msgid "Envelope##sgiMULPCM1"
+msgstr "Envelope"
+
+#: src/gui/inst/multipcm.cpp:116
+msgid "LFO Rate##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:118
+msgid "PM Depth##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:120
+msgid "AM Depth##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:128
+msgid "Macros##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:133
+#, fuzzy
+msgid "Volume##sgiMULPCM"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/multipcm.cpp:134
+msgid "Arpeggio##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:135
+msgid "Pitch##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:136
+msgid "Panning##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:138
+#, fuzzy
+msgid "Phase Reset##sgiMULPCM"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/n163.cpp:32
+msgid "Namco 163##sgiN163"
+msgstr ""
+
+#: src/gui/inst/n163.cpp:35
+#, fuzzy
+msgid "Load waveform##sgiN163"
+msgstr "Cargar onda"
+
+#: src/gui/inst/n163.cpp:42
+#, fuzzy
+msgid ""
+"when enabled, a waveform will be loaded into RAM.\n"
+"when disabled, only the offset and length change.##sgiN163"
+msgstr ""
+"activado: una onda se carga a la RAM.\n"
+"desactivado: solamente cambian la posición y longitud."
+
+#: src/gui/inst/n163.cpp:47
+msgid "Waveform##WAVE"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/n163.cpp:56
+#, fuzzy
+msgid "Per-channel wave position/length##sgiN163"
+msgstr "Posición/longitud de onda por canal"
+
+#: src/gui/inst/n163.cpp:68
+msgid "Ch##sgiN163"
+msgstr ""
+
+#: src/gui/inst/n163.cpp:70
+#, fuzzy
+msgid "Position##sgiN163"
+msgstr "Posición"
+
+#: src/gui/inst/n163.cpp:72
+#, fuzzy
+msgid "Length##sgiN163"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/n163.cpp:107
+#, fuzzy
+msgid "Position##WAVEPOS"
+msgstr "Posición"
+
+#: src/gui/inst/n163.cpp:112
+msgid "Length##WAVELEN"
+msgstr ""
+
+#: src/gui/inst/n163.cpp:124
+msgid "Macros##sgiN163"
+msgstr ""
+
+#: src/gui/inst/n163.cpp:126
+#, fuzzy
+msgid "Volume##sgiN163"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/n163.cpp:127
+#, fuzzy
+msgid "Arpeggio##sgiN163"
+msgstr "Arpegio"
+
+#: src/gui/inst/n163.cpp:128
+msgid "Pitch##sgiN163"
+msgstr ""
+
+#: src/gui/inst/n163.cpp:129
+#, fuzzy
+msgid "Wave Pos##sgiN163"
+msgstr "Pos Onda"
+
+#: src/gui/inst/n163.cpp:130
+#, fuzzy
+msgid "Waveform##sgiN163"
+msgstr "Onda (13)"
+
+#: src/gui/inst/n163.cpp:131
+#, fuzzy
+msgid "Wave Length##sgiN163"
+msgstr "Long Onda"
+
+#: src/gui/inst/namco.cpp:34
+#, fuzzy
+msgid "Macros##sgiWSG"
+msgstr "Macros"
+
+#: src/gui/inst/namco.cpp:39
+#, fuzzy
+msgid "Volume##sgiWSG"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/namco.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiWSG"
+msgstr "Arpegio"
+
+#: src/gui/inst/namco.cpp:41
+msgid "Pitch##sgiWSG"
+msgstr ""
+
+#: src/gui/inst/namco.cpp:42
+msgid "Noise##sgiWSG"
+msgstr ""
+
+#: src/gui/inst/namco.cpp:43
+#, fuzzy
+msgid "Waveform##sgiWSG"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/namco.cpp:45
+#, fuzzy
+msgid "Panning (left)##sgiWSG"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/namco.cpp:46
+#, fuzzy
+msgid "Panning (right)##sgiWSG"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/nds.cpp:34
+#, fuzzy
+msgid "Macros##sgiNDS"
+msgstr "Macros"
+
+#: src/gui/inst/nds.cpp:39
+#, fuzzy
+msgid "Volume##sgiNDS"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/nds.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiNDS"
+msgstr "Arpegio"
+
+#: src/gui/inst/nds.cpp:41
+msgid "Pitch##sgiNDS"
+msgstr ""
+
+#: src/gui/inst/nds.cpp:42
+msgid "Duty##sgiNDS"
+msgstr ""
+
+#: src/gui/inst/nds.cpp:43
+#, fuzzy
+msgid "Panning##sgiNDS"
+msgstr "Balance"
+
+#: src/gui/inst/nds.cpp:45
+#, fuzzy
+msgid "Phase Reset##sgiNDS"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/nes.cpp:34
+#, fuzzy
+msgid "Macros##sgiNES"
+msgstr "Macros"
+
+#: src/gui/inst/nes.cpp:36
+#, fuzzy
+msgid "Volume##sgiNES"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/nes.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiNES"
+msgstr "Arpegio"
+
+#: src/gui/inst/nes.cpp:38
+msgid "Pitch##sgiNES"
+msgstr ""
+
+#: src/gui/inst/nes.cpp:39
+#, fuzzy
+msgid "Duty/Noise##sgiNES"
+msgstr "Ancho/Ruido"
+
+#: src/gui/inst/nes.cpp:41
+#, fuzzy
+msgid "Phase Reset##sgiNES"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/opl.cpp:78
+msgid "4-op##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:87
+msgid "Drums##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:114
+#, fuzzy
+msgid "Fixed frequency mode##sgiOPL"
+msgstr "Modo de frecuencia fija"
+
+#: src/gui/inst/opl.cpp:117
+msgid ""
+"when enabled, drums will be set to the specified frequencies, ignoring the "
+"note.##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:126
+msgid "Drum##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:128
+msgid "Block##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:130
+#, fuzzy
+msgid "FreqNum##sgiOPL"
+msgstr "NúmFrec"
+
+#: src/gui/inst/opl.cpp:132
+msgid "Kick##sgiOPL0"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:133
+msgid "Snare/Hi-hat##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:134
+msgid "Tom/Top##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:212
+#, fuzzy
+msgid "Other##sgiOPL0"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/opl.cpp:213
+#, fuzzy
+msgid "Other##sgiOPL1"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/opl.cpp:222
+#, fuzzy
+msgid "Envelope##sgiOPL0"
+msgstr "Envelope"
+
+#: src/gui/inst/opl.cpp:223
+#, fuzzy
+msgid "Envelope##sgiOPL1"
+msgstr "Envelope"
+
+#: src/gui/inst/opl.cpp:287
+#, c-format
+msgid "op%d##sgiOPL0"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:296
+msgid "Kick##sgiOPL1"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:300
+msgid "Env##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:305
+#, c-format
+msgid "OP%d##sgiOPL1"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:399
+#, fuzzy
+msgid "OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL0"
+msgstr "Solo OPL2/3 (últimas 4 ondas solamente en OPL3)"
+
+#: src/gui/inst/opl.cpp:441
+#, c-format
+msgid "op%d##sgiOPL2"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:495
+#, fuzzy, c-format
+msgid "Envelope 2 (kick only)##sgiOPL0"
+msgstr "Envelope 2 (solo patear)"
+
+#: src/gui/inst/opl.cpp:499
+#, fuzzy, c-format
+msgid "Envelope##sgiOPL2"
+msgstr "Envelope"
+
+#: src/gui/inst/opl.cpp:504
+#, fuzzy, c-format
+msgid "Operator %d##sgiOPL"
+msgstr "Operador %d"
+
+#: src/gui/inst/opl.cpp:538
+#, fuzzy
+msgid "Waveform##sgiOPL"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/opl.cpp:540
+#, fuzzy
+msgid "Envelope##sgiOPL3"
+msgstr "Envelope"
+
+#: src/gui/inst/opl.cpp:603
+#, fuzzy
+msgid "OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL1"
+msgstr "Solo OPL2/3 (últimas 4 ondas solamente en OPL3)"
+
+#: src/gui/inst/opl.cpp:708
+#, c-format
+msgid "op%d##sgiOPL3"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:765
+#, fuzzy
+msgid "Envelope 2 (kick only)##sgiOPL1"
+msgstr "Envelope 2 (solo patear)"
+
+#: src/gui/inst/opl.cpp:769
+#, fuzzy
+msgid "Envelope##sgiOPL4"
+msgstr "Envelope"
+
+#: src/gui/inst/opl.cpp:774
+#, c-format
+msgid "OP%d##sgiOPL4"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:888
+#, fuzzy
+msgid "OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL2"
+msgstr "Solo OPL2/3 (últimas 4 ondas solamente en OPL3)"
+
+#: src/gui/inst/opl.cpp:920
+#, fuzzy
+msgid "FM Macros##sgiOPL"
+msgstr "Macros FM"
+
+#: src/gui/inst/opl.cpp:949
+#, fuzzy, c-format
+msgid "OP%d Macros##sgiOPL"
+msgstr "Macros del OP%d"
+
+#: src/gui/inst/opl.cpp:978
+#, fuzzy
+msgid "Macros##sgiOPL"
+msgstr "Macros"
+
+#: src/gui/inst/opl.cpp:982
+#, fuzzy
+msgid "Volume##sgiOPL"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/opl.cpp:983
+#, fuzzy
+msgid "Arpeggio##sgiOPL"
+msgstr "Arpegio"
+
+#: src/gui/inst/opl.cpp:984
+msgid "Pitch##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:985
+#, fuzzy
+msgid "Panning##sgiOPL"
+msgstr "Balance"
+
+#: src/gui/inst/opl.cpp:987
+#, fuzzy
+msgid "Phase Reset##sgiOPL"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/opll.cpp:131
+#, fuzzy, c-format
+msgid "%s name##sgiOPLL"
+msgstr "%s nombre"
+
+#: src/gui/inst/opll.cpp:169
+#, fuzzy
+msgid "Fixed frequency mode##sgiOPLL"
+msgstr "Modo de frecuencia fija"
+
+#: src/gui/inst/opll.cpp:172
+msgid ""
+"when enabled, drums will be set to the specified frequencies, ignoring the "
+"note.##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:182
+msgid "Drum##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:184
+msgid "Block##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:186
+#, fuzzy
+msgid "FreqNum##sgiOPLL"
+msgstr "NúmFrec"
+
+#: src/gui/inst/opll.cpp:188
+msgid "Kick##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:189
+msgid "Snare/Hi-hat##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:190
+msgid "Tom/Top##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:200
+msgid "Volume##TL"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/opll.cpp:203
+#, fuzzy
+msgid ""
+"this volume slider only works in compatibility (non-drums) system.##sgiOPLL"
+msgstr ""
+"este control de volumen solamente funciona en el sistema de compatibilidad "
+"(sin percusión)."
+
+#: src/gui/inst/opll.cpp:315
+#, fuzzy
+msgid "Other##sgiOPLL0"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/opll.cpp:316
+#, fuzzy
+msgid "Other##sgiOPLL1"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/opll.cpp:319
+#, fuzzy
+msgid "Envelope##sgiOPLL0"
+msgstr "Envelope"
+
+#: src/gui/inst/opll.cpp:320
+#, fuzzy
+msgid "Envelope##sgiOPLL1"
+msgstr "Envelope"
+
+#: src/gui/inst/opll.cpp:366
+#, c-format
+msgid "op%d##sgiOPLL0"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:368
+#, c-format
+msgid "OP%d##sgiOPLL1"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:505
+#, c-format
+msgid "op%d##sgiOPLL2"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:534
+#, fuzzy, c-format
+msgid "Operator %d##sgiOPLL"
+msgstr "Operador %d"
+
+#: src/gui/inst/opll.cpp:579
+#, fuzzy
+msgid "Waveform##sgiOPLL"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/opll.cpp:581
+#, fuzzy
+msgid "Envelope##sgiOPLL2"
+msgstr "Envelope"
+
+#: src/gui/inst/opll.cpp:731
+#, c-format
+msgid "op%d##sgiOPLL3"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:761
+#, c-format
+msgid "OP%d##sgiOPLL4"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:793
+msgid "SSG On##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:907
+#, fuzzy
+msgid "FM Macros##sgiOPLL"
+msgstr "Macros FM"
+
+#: src/gui/inst/opll.cpp:937
+#, fuzzy, c-format
+msgid "OP%d Macros##sgiOPLL"
+msgstr "Macros del OP%d"
+
+#: src/gui/inst/opll.cpp:974
+msgid "Macros##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:976
+#, fuzzy
+msgid "Volume##sgiOPLL"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/opll.cpp:977
+#, fuzzy
+msgid "Arpeggio##sgiOPLL"
+msgstr "Arpegio"
+
+#: src/gui/inst/opll.cpp:978
+msgid "Pitch##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:979
+msgid "Patch##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:981
+#, fuzzy
+msgid "Phase Reset##sgiOPLL"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/opm.cpp:186 src/gui/inst/opm.cpp:187
+#, fuzzy
+msgid "Envelope##sgiOPM0"
+msgstr "Envelope"
+
+#: src/gui/inst/opm.cpp:228
+#, c-format
+msgid "op%d##sgiOPM0"
+msgstr ""
+
+#: src/gui/inst/opm.cpp:230
+#, c-format
+msgid "OP%d##sgiOPM3"
+msgstr ""
+
+#: src/gui/inst/opm.cpp:366
+#, c-format
+msgid "op%d##sgiOPM1"
+msgstr ""
+
+#: src/gui/inst/opm.cpp:395
+#, fuzzy, c-format
+msgid "Operator %d##sgiOPM"
+msgstr "Operador %d"
+
+#: src/gui/inst/opm.cpp:435
+#, fuzzy
+msgid "Waveform##sgiOPM"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/opm.cpp:437
+#, fuzzy
+msgid "Envelope##sgiOPM1"
+msgstr "Envelope"
+
+#: src/gui/inst/opm.cpp:598
+#, c-format
+msgid "op%d##sgiOPM2"
+msgstr ""
+
+#: src/gui/inst/opm.cpp:630
+#, c-format
+msgid "OP%d##sgiOPM4"
+msgstr ""
+
+#: src/gui/inst/opm.cpp:776
+#, fuzzy
+msgid "FM Macros##sgiOPM"
+msgstr "Macros FM"
+
+#: src/gui/inst/opm.cpp:782
+#, fuzzy
+msgid "AM Depth##sgiOPM"
+msgstr "Profundidad AM"
+
+#: src/gui/inst/opm.cpp:783
+#, fuzzy
+msgid "PM Depth##sgiOPM"
+msgstr "Prof PM"
+
+#: src/gui/inst/opm.cpp:784
+#, fuzzy
+msgid "LFO Speed##sgiOPM"
+msgstr "Veloc LFO"
+
+#: src/gui/inst/opm.cpp:785
+#, fuzzy
+msgid "LFO Shape##sgiOPM"
+msgstr "Forma LFO"
+
+#: src/gui/inst/opm.cpp:786
+#, fuzzy
+msgid "OpMask##sgiOPM"
+msgstr "Màscara"
+
+#: src/gui/inst/opm.cpp:812
+#, fuzzy, c-format
+msgid "OP%d Macros##sgiOPM"
+msgstr "Macros del OP%d"
+
+#: src/gui/inst/opm.cpp:839
+#, fuzzy
+msgid "Macros##sgiOPM"
+msgstr "Macros"
+
+#: src/gui/inst/opm.cpp:843
+#, fuzzy
+msgid "Volume##sgiOPM"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/opm.cpp:844
+#, fuzzy
+msgid "Arpeggio##sgiOPM"
+msgstr "Arpegio"
+
+#: src/gui/inst/opm.cpp:845
+msgid "Pitch##sgiOPM"
+msgstr ""
+
+#: src/gui/inst/opm.cpp:846
+#, fuzzy
+msgid "Noise Freq##sgiOPM"
+msgstr "Frec Ruido"
+
+#: src/gui/inst/opm.cpp:847
+#, fuzzy
+msgid "Panning##sgiOPM"
+msgstr "Balance"
+
+#: src/gui/inst/opm.cpp:849
+#, fuzzy
+msgid "Phase Reset##sgiOPM"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/opn.cpp:189
+#, fuzzy
+msgid "Envelope##sgiOPN0"
+msgstr "Envelope"
+
+#: src/gui/inst/opn.cpp:190
+#, fuzzy
+msgid "Envelope##sgiOPN1"
+msgstr "Envelope"
+
+#: src/gui/inst/opn.cpp:232
+#, c-format
+msgid "op%d##sgiOPN0"
+msgstr ""
+
+#: src/gui/inst/opn.cpp:234
+#, c-format
+msgid "OP%d##sgiOPN1"
+msgstr ""
+
+#: src/gui/inst/opn.cpp:391
+#, c-format
+msgid "op%d##sgiOPN2"
+msgstr ""
+
+#: src/gui/inst/opn.cpp:423
+#, fuzzy, c-format
+msgid "Operator %d##sgiOPN"
+msgstr "Operador %d"
+
+#: src/gui/inst/opn.cpp:466
+#, fuzzy
+msgid "SSG-EG##sgiOPN"
+msgstr "SSG-EG"
+
+#: src/gui/inst/opn.cpp:468
+#, fuzzy
+msgid "Envelope##sgiOPN2"
+msgstr "Envelope"
+
+#: src/gui/inst/opn.cpp:644
+#, c-format
+msgid "op%d##sgiOPN3"
+msgstr ""
+
+#: src/gui/inst/opn.cpp:675
+#, c-format
+msgid "OP%d##sgiOPN4"
+msgstr ""
+
+#: src/gui/inst/opn.cpp:701
+#, fuzzy
+msgid "SSG On##sgiOPN"
+msgstr "SSG Activo"
+
+#: src/gui/inst/opn.cpp:837
+#, fuzzy
+msgid "FM Macros##sgiOPN"
+msgstr "Macros FM"
+
+#: src/gui/inst/opn.cpp:843
+#, fuzzy
+msgid "LFO Speed##sgiOPN"
+msgstr "Veloc LFO"
+
+#: src/gui/inst/opn.cpp:844
+#, fuzzy
+msgid "OpMask##sgiOPN"
+msgstr "Màscara"
+
+#: src/gui/inst/opn.cpp:870
+#, fuzzy, c-format
+msgid "OP%d Macros##sgiOPN"
+msgstr "Macros del OP%d"
+
+#: src/gui/inst/opn.cpp:897
+#, fuzzy
+msgid "Macros##sgiOPN"
+msgstr "Macros"
+
+#: src/gui/inst/opn.cpp:901
+#, fuzzy
+msgid "Volume##sgiOPN"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/opn.cpp:902
+#, fuzzy
+msgid "Arpeggio##sgiOPN"
+msgstr "Arpegio"
+
+#: src/gui/inst/opn.cpp:903
+msgid "Pitch##sgiOPN"
+msgstr ""
+
+#: src/gui/inst/opn.cpp:904
+#, fuzzy
+msgid "Panning##sgiOPN"
+msgstr "Balance"
+
+#: src/gui/inst/opn.cpp:906
+#, fuzzy
+msgid "Phase Reset##sgiOPN"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/opz.cpp:98
+#, fuzzy
+msgid "Request from TX81Z##sgiOPZ"
+msgstr "Pedir del TX81Z"
+
+#: src/gui/inst/opz.cpp:203
+#, fuzzy
+msgid "Other##sgiOPZ0"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/opz.cpp:204
+#, fuzzy
+msgid "Other##sgiOPZ1"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/opz.cpp:210
+#, fuzzy
+msgid "Envelope##sgiOPZ0"
+msgstr "Envelope"
+
+#: src/gui/inst/opz.cpp:211
+#, fuzzy
+msgid "Envelope##sgiOPZ1"
+msgstr "Envelope"
+
+#: src/gui/inst/opz.cpp:252
+#, c-format
+msgid "op%d##sgiOPZ0"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:254
+#, c-format
+msgid "OP%d##sgiOPZ1"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:357
+msgid "Fixed##sgiOPZ0"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:365
+msgid "Block##sgiOPZ0"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:371
+#, fuzzy
+msgid "FreqNum##sgiOPZ0"
+msgstr "NúmFrec"
+
+#: src/gui/inst/opz.cpp:429
+#, c-format
+msgid "op%d##sgiOPZ2"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:458
+#, fuzzy, c-format
+msgid "Operator %d##sgiOPZ"
+msgstr "Operador %d"
+
+#: src/gui/inst/opz.cpp:490
+#, fuzzy
+msgid "Waveform##sgiOPZ"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/opz.cpp:492
+#, fuzzy
+msgid "Envelope##sgiOPZ2"
+msgstr "Envelope"
+
+#: src/gui/inst/opz.cpp:570
+msgid "Block##sgiOPZ1"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:580
+msgid "Freq##sgiOPZ"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:640
+msgid "Fixed##sgiOPZ1"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:714
+#, c-format
+msgid "op%d##sgiOPZ3"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:746
+#, c-format
+msgid "OP%d##sgiOPZ4"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:763
+msgid "Fixed##sgiOPZ2"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:877
+msgid "Block##sgiOPZ2"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:890
+#, fuzzy
+msgid "FreqNum##sgiOPZ1"
+msgstr "NúmFrec"
+
+#: src/gui/inst/opz.cpp:955
+#, fuzzy
+msgid "FM Macros##sgiOPZ"
+msgstr "Macros FM"
+
+#: src/gui/inst/opz.cpp:960
+#, fuzzy
+msgid "AM Depth##sgiOPZ"
+msgstr "Profundidad AM"
+
+#: src/gui/inst/opz.cpp:961
+#, fuzzy
+msgid "PM Depth##sgiOPZ"
+msgstr "Prof PM"
+
+#: src/gui/inst/opz.cpp:962
+#, fuzzy
+msgid "LFO Speed##sgiOPZ"
+msgstr "Veloc LFO"
+
+#: src/gui/inst/opz.cpp:963
+#, fuzzy
+msgid "LFO Shape##sgiOPZ"
+msgstr "Forma LFO"
+
+#: src/gui/inst/opz.cpp:964
+#, fuzzy
+msgid "AM Depth 2##sgiOPZ"
+msgstr "Prof AM 2"
+
+#: src/gui/inst/opz.cpp:965
+#, fuzzy
+msgid "PM Depth 2##sgiOPZ"
+msgstr "Prof PM 2"
+
+#: src/gui/inst/opz.cpp:966
+#, fuzzy
+msgid "LFO2 Speed##sgiOPZ"
+msgstr "Veloc LFO2"
+
+#: src/gui/inst/opz.cpp:967
+#, fuzzy
+msgid "LFO2 Shape##sgiOPZ"
+msgstr "Forma LFO2"
+
+#: src/gui/inst/opz.cpp:993
+#, fuzzy, c-format
+msgid "OP%d Macros##sgiOPZ"
+msgstr "Macros del OP%d"
+
+#: src/gui/inst/opz.cpp:1020
+#, fuzzy
+msgid "Macros##sgiOPZ"
+msgstr "Macros"
+
+#: src/gui/inst/opz.cpp:1024
+#, fuzzy
+msgid "Volume##sgiOPZ"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/opz.cpp:1025
+#, fuzzy
+msgid "Arpeggio##sgiOPZ"
+msgstr "Arpegio"
+
+#: src/gui/inst/opz.cpp:1026
+msgid "Pitch##sgiOPZ"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:1027
+#, fuzzy
+msgid "Noise Freq##sgiOPZ"
+msgstr "Frec Ruido"
+
+#: src/gui/inst/opz.cpp:1028
+#, fuzzy
+msgid "Panning##sgiOPZ"
+msgstr "Balance"
+
+#: src/gui/inst/opz.cpp:1030
+#, fuzzy
+msgid "Phase Reset##sgiOPZ"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/pce.cpp:39
+#, fuzzy
+msgid "Macros##sgiPCE"
+msgstr "Macros"
+
+#: src/gui/inst/pce.cpp:44
+#, fuzzy
+msgid "Volume##sgiPCE"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/pce.cpp:45
+#, fuzzy
+msgid "Arpeggio##sgiPCE"
+msgstr "Arpegio"
+
+#: src/gui/inst/pce.cpp:46
+msgid "Pitch##sgiPCE"
+msgstr ""
+
+#: src/gui/inst/pce.cpp:50
+msgid "Noise##sgiPCE"
+msgstr ""
+
+#: src/gui/inst/pce.cpp:53
+#, fuzzy
+msgid "Waveform##sgiPCE"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/pce.cpp:54
+#, fuzzy
+msgid "Panning (left)##sgiPCE"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/pce.cpp:55
+#, fuzzy
+msgid "Panning (right)##sgiPCE"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/pce.cpp:57
+#, fuzzy
+msgid "Phase Reset##sgiPCE"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/pet.cpp:32
+#, fuzzy
+msgid "Macros##sgiPET"
+msgstr "Macros"
+
+#: src/gui/inst/pet.cpp:34
+#, fuzzy
+msgid "Volume##sgiPET"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/pet.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiPET"
+msgstr "Arpegio"
+
+#: src/gui/inst/pet.cpp:36
+msgid "Pitch##sgiPET"
+msgstr ""
+
+#: src/gui/inst/pet.cpp:38
+#, fuzzy
+msgid "Waveform##sgiPET"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/pokemini.cpp:32
+msgid "Macros##sgiPMQT"
+msgstr ""
+
+#: src/gui/inst/pokemini.cpp:34
+#, fuzzy
+msgid "Volume##sgiPMQT"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/pokemini.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiPMQT"
+msgstr "Arpegio"
+
+#: src/gui/inst/pokemini.cpp:36
+msgid "Pitch##sgiPMQT"
+msgstr ""
+
+#: src/gui/inst/pokemini.cpp:38
+#, fuzzy
+msgid "Pulse Width##sgiPMQT"
+msgstr "Ancho de Pulso"
+
+#: src/gui/inst/pokey.cpp:34
+msgid "16-bit raw period macro##sgiPOKEY"
+msgstr ""
+
+#: src/gui/inst/pokey.cpp:42
+msgid "Macros##sgiPOKEY"
+msgstr ""
+
+#: src/gui/inst/pokey.cpp:44
+#, fuzzy
+msgid "Volume##sgiPOKEY"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/pokey.cpp:45
+#, fuzzy
+msgid "Arpeggio##sgiPOKEY"
+msgstr "Arpegio"
+
+#: src/gui/inst/pokey.cpp:46
+msgid "Pitch##sgiPOKEY"
+msgstr ""
+
+#: src/gui/inst/pokey.cpp:49
+#, fuzzy
+msgid "Waveform##sgiPOKEY"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/pokey.cpp:51
+msgid "Raw Period##sgiPOKEY"
+msgstr ""
+
+#: src/gui/inst/powernoise.cpp:36
+#, fuzzy
+msgid "Octave offset##sgiPNN"
+msgstr "Desplazamiento de octava"
+
+#: src/gui/inst/powernoise.cpp:43
+#, fuzzy
+msgid "go to Macros for other parameters.##sgiPNN"
+msgstr "ve a Macros para otros párametros."
+
+#: src/gui/inst/powernoise.cpp:47
+#, fuzzy
+msgid "Macros##sgiPNN"
+msgstr "Macros"
+
+#: src/gui/inst/powernoise.cpp:52
+#, fuzzy
+msgid "Volume##sgiPNN"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/powernoise.cpp:53
+#, fuzzy
+msgid "Arpeggio##sgiPNN"
+msgstr "Arpegio"
+
+#: src/gui/inst/powernoise.cpp:54
+msgid "Pitch##sgiPNN"
+msgstr ""
+
+#: src/gui/inst/powernoise.cpp:56
+#, fuzzy
+msgid "Panning (left)##sgiPNN"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/powernoise.cpp:57
+#, fuzzy
+msgid "Panning (right)##sgiPNN"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/powernoise.cpp:59
+#, fuzzy
+msgid "Phase Reset##sgiPNN"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/powernoise.cpp:61
+#, fuzzy
+msgid "Control##sgiPNN"
+msgstr "Control"
+
+#: src/gui/inst/powernoise.cpp:62
+#, fuzzy
+msgid "Tap A Location##sgiPNN"
+msgstr "Ubicación Tap A"
+
+#: src/gui/inst/powernoise.cpp:63
+#, fuzzy
+msgid "Tap B Location##sgiPNN"
+msgstr "Ubicación Tap B"
+
+#: src/gui/inst/powernoise.cpp:64
+#, fuzzy
+msgid "Load LFSR##sgiPNN"
+msgstr "Cargar LFSR"
+
+#: src/gui/inst/powernoise_slope.cpp:36
+#, fuzzy
+msgid "Octave offset##sgiPNS"
+msgstr "Desplazamiento de octava"
+
+#: src/gui/inst/powernoise_slope.cpp:43
+#, fuzzy
+msgid "go to Macros for other parameters.##sgiPNS"
+msgstr "ve a Macros para otros párametros."
+
+#: src/gui/inst/powernoise_slope.cpp:47
+#, fuzzy
+msgid "Macros##sgiPNS"
+msgstr "Macros"
+
+#: src/gui/inst/powernoise_slope.cpp:52
+#, fuzzy
+msgid "Volume##sgiPNS"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/powernoise_slope.cpp:53
+#, fuzzy
+msgid "Arpeggio##sgiPNS"
+msgstr "Arpegio"
+
+#: src/gui/inst/powernoise_slope.cpp:54
+msgid "Pitch##sgiPNS"
+msgstr ""
+
+#: src/gui/inst/powernoise_slope.cpp:56
+#, fuzzy
+msgid "Panning (left)##sgiPNS"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/powernoise_slope.cpp:57
+#, fuzzy
+msgid "Panning (right)##sgiPNS"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/powernoise_slope.cpp:59
+#, fuzzy
+msgid "Phase Reset##sgiPNS"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/powernoise_slope.cpp:61
+#, fuzzy
+msgid "Control##sgiPNS"
+msgstr "Control"
+
+#: src/gui/inst/powernoise_slope.cpp:62
+#, fuzzy
+msgid "Portion A Length##sgiPNS"
+msgstr "Long Porción A"
+
+#: src/gui/inst/powernoise_slope.cpp:63
+#, fuzzy
+msgid "Portion B Length##sgiPNS"
+msgstr "Long Porción B"
+
+#: src/gui/inst/powernoise_slope.cpp:64
+#, fuzzy
+msgid "Portion A Offset##sgiPNS"
+msgstr "Desfaz Porción A"
+
+#: src/gui/inst/powernoise_slope.cpp:65
+#, fuzzy
+msgid "Portion B Offset##sgiPNS"
+msgstr "Desfaz Porción B"
+
+#: src/gui/inst/pv1000.cpp:32
+#, fuzzy
+msgid "Macros##sgiPV"
+msgstr "Macros"
+
+#: src/gui/inst/pv1000.cpp:34
+#, fuzzy
+msgid "Volume##sgiPV"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/pv1000.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiPV"
+msgstr "Arpegio"
+
+#: src/gui/inst/pv1000.cpp:36
+msgid "Pitch##sgiPV"
+msgstr ""
+
+#: src/gui/inst/pv1000.cpp:38
+#, fuzzy
+msgid "Raw Frequency##sgiPV"
+msgstr "Frecuencia"
+
+#: src/gui/inst/qsound.cpp:34
+#, fuzzy
+msgid "Macros##sgiQ"
+msgstr "Macros"
+
+#: src/gui/inst/qsound.cpp:39
+#, fuzzy
+msgid "Volume##sgiQ"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/qsound.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiQ"
+msgstr "Arpegio"
+
+#: src/gui/inst/qsound.cpp:41
+#, fuzzy
+msgid "Pitch##sgiQ"
+msgstr "Tono"
+
+#: src/gui/inst/qsound.cpp:43
+#, fuzzy
+msgid "Panning##sgiQ"
+msgstr "Balance"
+
+#: src/gui/inst/qsound.cpp:44
+#, fuzzy
+msgid "Surround##sgiQ"
+msgstr "Envolvente"
+
+#: src/gui/inst/qsound.cpp:46
+#, fuzzy
+msgid "Phase Reset##sgiQ"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/qsound.cpp:48
+#, fuzzy
+msgid "Echo Level##sgiQ"
+msgstr "Nivel Eco"
+
+#: src/gui/inst/qsound.cpp:49
+#, fuzzy
+msgid "Echo Feedback##sgiQ"
+msgstr "Retroalim Eco"
+
+#: src/gui/inst/qsound.cpp:50
+#, fuzzy
+msgid "Echo Length##sgiQ"
+msgstr "Long Eco"
+
+#: src/gui/inst/rf5c68.cpp:34
+#, fuzzy
+msgid "Macros##sgiRF5"
+msgstr "Macros"
+
+#: src/gui/inst/rf5c68.cpp:38
+#, fuzzy
+msgid "Volume##sgiRF5"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/rf5c68.cpp:39
+#, fuzzy
+msgid "Arpeggio##sgiRF5"
+msgstr "Arpegio"
+
+#: src/gui/inst/rf5c68.cpp:40
+msgid "Pitch##sgiRF5"
+msgstr ""
+
+#: src/gui/inst/rf5c68.cpp:42
+#, fuzzy
+msgid "Panning (left)##sgiRF5"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/rf5c68.cpp:43
+#, fuzzy
+msgid "Panning (right)##sgiRF5"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/rf5c68.cpp:45
+#, fuzzy
+msgid "Phase Reset##sgiRF5"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/saa1099.cpp:32
+#, fuzzy
+msgid "Macros##sgiSAA"
+msgstr "Macros"
+
+#: src/gui/inst/saa1099.cpp:36
+#, fuzzy
+msgid "Volume##sgiSAA"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/saa1099.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiSAA"
+msgstr "Arpegio"
+
+#: src/gui/inst/saa1099.cpp:38
+msgid "Pitch##sgiSAA"
+msgstr ""
+
+#: src/gui/inst/saa1099.cpp:40
+#, fuzzy
+msgid "Duty/Noise##sgiSAA"
+msgstr "Ancho/Ruido"
+
+#: src/gui/inst/saa1099.cpp:41
+#, fuzzy
+msgid "Waveform##sgiSAA"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/saa1099.cpp:43
+#, fuzzy
+msgid "Panning (left)##sgiSAA"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/saa1099.cpp:44
+#, fuzzy
+msgid "Panning (right)##sgiSAA"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/saa1099.cpp:46
+#, fuzzy
+msgid "Envelope##sgiSAA"
+msgstr "Envelope"
+
+#: src/gui/inst/sampleDraw.cpp:127
+msgid "Sample##sgismpd0"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:128
+msgid "DPCM##sgismpd"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:131
+#, fuzzy
+msgid "new DPCM features disabled (compatibility)!##sgismpd"
+msgstr "¡nuevas funciones DPCM desactivadas (compatibilidad)!"
+
+#: src/gui/inst/sampleDraw.cpp:132
+#, fuzzy
+msgid "click here to enable them.##sgismpd"
+msgstr "haz clic aquí para activarlas."
+
+#: src/gui/inst/sampleDraw.cpp:143
+#, fuzzy
+msgid "none selected##sgismpd"
+msgstr "ninguno seleccionado"
+
+#: src/gui/inst/sampleDraw.cpp:156
+#, fuzzy
+msgid "Use sample##sgismpd"
+msgstr "Usar mapa de samples"
+
+#: src/gui/inst/sampleDraw.cpp:158
+msgid "Sample bank slot##BANKSLOT"
+msgstr "Casillero de banco de samples##BANKSLOT"
+
+#: src/gui/inst/sampleDraw.cpp:165
+msgid "Sample##sgismpd1"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:181
+#, fuzzy
+msgid "Use wavetable (Amiga/Generic DAC only)##sgismpd"
+msgstr "Usar onda (solamente en Amiga/DAC Genérico)"
+
+#: src/gui/inst/sampleDraw.cpp:181
+#, fuzzy
+msgid "Use wavetable##sgismpd"
+msgstr "Usar onda"
+
+#: src/gui/inst/sampleDraw.cpp:186
+msgid "Width##sgismpd"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:207
+#, fuzzy
+msgid "Use sample map##sgismpd"
+msgstr "Usar mapa de samples"
+
+#: src/gui/inst/sampleDraw.cpp:231
+#, fuzzy
+msgid "pitch##sgismpd"
+msgstr "mod tono"
+
+#: src/gui/inst/sampleDraw.cpp:233
+msgid "loop##sgismpd"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:235
+msgid "delta##sgismpd"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:238
+msgid "note##sgismpd"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:241
+#, fuzzy
+msgid "sample name##sgismpd"
+msgstr "nombre del sample"
+
+#: src/gui/inst/sampleDraw.cpp:367
+#, c-format
+msgid "L##L%d"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:510
+#, fuzzy
+msgid "set entire map to this pitch##sgismpd"
+msgstr "usar este tono para todo el mapa"
+
+#: src/gui/inst/sampleDraw.cpp:518
+#, fuzzy
+msgid "set entire map to this delta counter value##sgismpd"
+msgstr "usar este valor del contador delta para todo el mapa"
+
+#: src/gui/inst/sampleDraw.cpp:527
+#, fuzzy
+msgid "set entire map to this note##sgismpd"
+msgstr "usar esta nota para todo el mapa"
+
+#: src/gui/inst/sampleDraw.cpp:536
+#, fuzzy
+msgid "set entire map to this sample##sgismpd"
+msgstr "usar este sample para todo el mapa"
+
+#: src/gui/inst/sampleDraw.cpp:546
+#, fuzzy
+msgid "reset pitches##sgismpd"
+msgstr "reiniciar tonos"
+
+#: src/gui/inst/sampleDraw.cpp:551
+#, fuzzy
+msgid "clear delta counter values##sgismpd"
+msgstr "borrar valores del contador delta"
+
+#: src/gui/inst/sampleDraw.cpp:557
+#, fuzzy
+msgid "reset notes##sgismpd"
+msgstr "reiniciar notas"
+
+#: src/gui/inst/sampleDraw.cpp:563
+#, fuzzy
+msgid "clear map samples##sgismpd"
+msgstr "borrar samples mapeados"
+
+#: src/gui/inst/scc.cpp:34
+#, fuzzy
+msgid "Macros##sgiSCC"
+msgstr "Macros"
+
+#: src/gui/inst/scc.cpp:36
+#, fuzzy
+msgid "Volume##sgiSCC"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/scc.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiSCC"
+msgstr "Arpegio"
+
+#: src/gui/inst/scc.cpp:38
+msgid "Pitch##sgiSCC"
+msgstr ""
+
+#: src/gui/inst/scc.cpp:40
+#, fuzzy
+msgid "Waveform##sgiSCC"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/segapcm.cpp:34
+msgid "Macros##sgiSEGA"
+msgstr ""
+
+#: src/gui/inst/segapcm.cpp:38
+#, fuzzy
+msgid "Volume##sgiSEGA"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/segapcm.cpp:39
+#, fuzzy
+msgid "Arpeggio##sgiSEGA"
+msgstr "Arpegio"
+
+#: src/gui/inst/segapcm.cpp:40
+msgid "Pitch##sgiSEGA"
+msgstr ""
+
+#: src/gui/inst/segapcm.cpp:42
+#, fuzzy
+msgid "Panning (left)##sgiSEGA"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/segapcm.cpp:43
+#, fuzzy
+msgid "Panning (right)##sgiSEGA"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/segapcm.cpp:45
+#, fuzzy
+msgid "Phase Reset##sgiSEGA"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/sid2.cpp:35
+#, fuzzy
+msgid "Waveform##sgiSID2"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/sid2.cpp:38
+msgid "tri##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:45
+msgid "saw##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:52
+msgid "pulse##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:59
+msgid "noise##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:79 src/gui/inst/sid2.cpp:80
+msgid "A##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:82 src/gui/inst/sid2.cpp:83
+msgid "D##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:85 src/gui/inst/sid2.cpp:86
+msgid "S##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:88 src/gui/inst/sid2.cpp:89
+msgid "R##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:94 src/gui/inst/sid2.cpp:95
+#, fuzzy
+msgid "Envelope##sgiSID2"
+msgstr "Envelope"
+
+#: src/gui/inst/sid2.cpp:114
+msgid "Duty##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:116
+msgid "Reset duty on new note##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:122
+#, fuzzy
+msgid "Ring Modulation##sgiSID2"
+msgstr "Modulación de Aro"
+
+#: src/gui/inst/sid2.cpp:127
+#, fuzzy
+msgid "Oscillator Sync##sgiSID2"
+msgstr "Sincronizar Osciladores"
+
+#: src/gui/inst/sid2.cpp:132
+#, fuzzy
+msgid "Enable filter##sgiSID2"
+msgstr "Activar filtro"
+
+#: src/gui/inst/sid2.cpp:133
+#, fuzzy
+msgid "Initialize filter##sgiSID2"
+msgstr "Inicializar filtro"
+
+#: src/gui/inst/sid2.cpp:135
+msgid "Cutoff##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:136
+#, fuzzy
+msgid "Resonance##sgiSID2"
+msgstr "Resonancia"
+
+#: src/gui/inst/sid2.cpp:139
+#, fuzzy
+msgid "Filter Mode##sgiSID2"
+msgstr "Modo de Filtro"
+
+#: src/gui/inst/sid2.cpp:142
+msgid "low##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:149
+msgid "band##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:156
+msgid "high##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:162
+#, fuzzy
+msgid "Noise Mode##sgiSID2"
+msgstr "Modo de Ruido"
+
+#: src/gui/inst/sid2.cpp:163
+#, fuzzy
+msgid "Wave Mix Mode##sgiSID2"
+msgstr "Modo de Mezcla de Onda"
+
+#: src/gui/inst/sid2.cpp:165
+#, fuzzy
+msgid "Absolute Cutoff Macro##sgiSID2"
+msgstr "Macro de Límite Absoluta"
+
+#: src/gui/inst/sid2.cpp:170
+#, fuzzy
+msgid "Absolute Duty Macro##sgiSID2"
+msgstr "Macro de Ancho Absoluta"
+
+#: src/gui/inst/sid2.cpp:178
+msgid "Macros##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:203
+#, fuzzy
+msgid "Volume##sgiSID2"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/sid2.cpp:204
+#, fuzzy
+msgid "Arpeggio##sgiSID2"
+msgstr "Arpegio"
+
+#: src/gui/inst/sid2.cpp:205
+msgid "Pitch##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:206
+msgid "Duty##sgiSID21"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:207
+#, fuzzy
+msgid "Waveform##sgiSID21"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/sid2.cpp:209
+#, fuzzy
+msgid "Noise Mode##sgiSID21"
+msgstr "Modo de Ruido"
+
+#: src/gui/inst/sid2.cpp:210
+#, fuzzy
+msgid "Wave Mix Mode##sgiSID21"
+msgstr "Modo de Mezcla de Onda"
+
+#: src/gui/inst/sid2.cpp:212
+msgid "Cutoff##sgiSID21"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:213
+#, fuzzy
+msgid "Filter Mode##sgiSID21"
+msgstr "Modo de Filtro"
+
+#: src/gui/inst/sid2.cpp:214
+#, fuzzy
+msgid "Filter Toggle##sgiSID2"
+msgstr "Activar Filtro"
+
+#: src/gui/inst/sid2.cpp:215
+#, fuzzy
+msgid "Resonance##sgiSID21"
+msgstr "Resonancia"
+
+#: src/gui/inst/sid2.cpp:217
+#, fuzzy
+msgid "Phase Reset##sgiSID2"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/sid2.cpp:218
+msgid "Envelope Reset/Key Control##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:220
+#, fuzzy
+msgid "Special##sgiSID2"
+msgstr "Especial"
+
+#: src/gui/inst/sid2.cpp:221
+msgid "Attack##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:222
+msgid "Decay##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:223
+#, fuzzy
+msgid "Sustain##sgiSID2"
+msgstr "Guía de sostenido"
+
+#: src/gui/inst/sid2.cpp:224
+#, fuzzy
+msgid "Release##sgiSID2"
+msgstr "Lanzamiento"
+
+#: src/gui/inst/sm8521.cpp:34
+#, fuzzy
+msgid "Macros##sgiSM"
+msgstr "Macros"
+
+#: src/gui/inst/sm8521.cpp:36
+#, fuzzy
+msgid "Volume##sgiSM"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/sm8521.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiSM"
+msgstr "Arpegio"
+
+#: src/gui/inst/sm8521.cpp:38
+msgid "Pitch##sgiSM"
+msgstr ""
+
+#: src/gui/inst/sm8521.cpp:40
+#, fuzzy
+msgid "Waveform##sgiSM"
+msgstr "Onda"
+
+#: src/gui/inst/snes.cpp:34
+#, fuzzy
+msgid "Use envelope##sgiSNES"
+msgstr "Usar envelope"
+
+#: src/gui/inst/snes.cpp:70
+#, fuzzy
+msgid "Envelope##sgiSNES0"
+msgstr "Envelope"
+
+#: src/gui/inst/snes.cpp:71
+#, fuzzy
+msgid "Envelope##sgiSNES1"
+msgstr "Envelope"
+
+#: src/gui/inst/snes.cpp:92
+#, fuzzy
+msgid "Sustain/release mode:##sgiSNES"
+msgstr "Modo de sostenido/lanzamiento:"
+
+#: src/gui/inst/snes.cpp:93
+#, fuzzy
+msgid "Direct (cut on release)##sgiSNES"
+msgstr "Directo (cortar al soltar)"
+
+#: src/gui/inst/snes.cpp:97
+#, fuzzy
+msgid "Effective (linear decrease)##sgiSNES"
+msgstr "Efectivo (caída lineal)"
+
+#: src/gui/inst/snes.cpp:101
+#, fuzzy
+msgid "Effective (exponential decrease)##sgiSNES"
+msgstr "Efectivo (caída exponencial)"
+
+#: src/gui/inst/snes.cpp:105
+#, fuzzy
+msgid "Delayed (write R on release)##sgiSNES"
+msgstr "Tardío (escribir R al soltar)"
+
+#: src/gui/inst/snes.cpp:119
+#, fuzzy
+msgid "Gain Mode##sgiSNES0"
+msgstr "Modo de Ganancia"
+
+#: src/gui/inst/snes.cpp:120
+#, fuzzy
+msgid "Gain Mode##sgiSNES1"
+msgstr "Modo de Ganancia"
+
+#: src/gui/inst/snes.cpp:122
+msgid "Gain##sgiSNES0"
+msgstr ""
+
+#: src/gui/inst/snes.cpp:123
+msgid "Gain##sgiSNES1"
+msgstr ""
+
+#: src/gui/inst/snes.cpp:127
+msgid "Direct##sgiSNES"
+msgstr ""
+
+#: src/gui/inst/snes.cpp:132
+#, fuzzy
+msgid "Decrease (linear)##sgiSNES"
+msgstr "Disminuir (lineal)"
+
+#: src/gui/inst/snes.cpp:137
+#, fuzzy
+msgid "Decrease (logarithmic)##sgiSNES"
+msgstr "Disminuir (logarítmico)"
+
+#: src/gui/inst/snes.cpp:142
+#, fuzzy
+msgid "Increase (linear)##sgiSNES"
+msgstr "Aumentar (lineal)"
+
+#: src/gui/inst/snes.cpp:147
+#, fuzzy
+msgid "Increase (bent line)##sgiSNES"
+msgstr "Aumentar (línea doblada)"
+
+#: src/gui/inst/snes.cpp:162
+#, fuzzy
+msgid ""
+"using decrease modes will not produce any sound at all, unless you know what "
+"you are doing.\n"
+"it is recommended to use the Gain macro for decrease instead.##sgiSNES"
+msgstr ""
+"al usar modos de disminución no se producirá ningún sonido a menos que sepas "
+"lo que estás haciendo.\n"
+"se recomienda usar la macro de Ganancia para disminución."
+
+#: src/gui/inst/snes.cpp:171
+msgid "Macros##sgiSNES"
+msgstr ""
+
+#: src/gui/inst/snes.cpp:176
+#, fuzzy
+msgid "Volume##sgiSNES"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/snes.cpp:177
+#, fuzzy
+msgid "Arpeggio##sgiSNES"
+msgstr "Arpegio"
+
+#: src/gui/inst/snes.cpp:178
+msgid "Pitch##sgiSNES"
+msgstr ""
+
+#: src/gui/inst/snes.cpp:179
+#, fuzzy
+msgid "Noise Freq##sgiSNES"
+msgstr "Frec Ruido"
+
+#: src/gui/inst/snes.cpp:180
+#, fuzzy
+msgid "Waveform##sgiSNES"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/snes.cpp:181
+#, fuzzy
+msgid "Panning (left)##sgiSNES"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/snes.cpp:182
+#, fuzzy
+msgid "Panning (right)##sgiSNES"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/snes.cpp:184
+#, fuzzy
+msgid "Special##sgiSNES"
+msgstr "Especial"
+
+#: src/gui/inst/snes.cpp:185
+msgid "Gain##sgiSNES2"
+msgstr ""
+
+#: src/gui/inst/std.cpp:32
+#, fuzzy
+msgid "Macros##sgiPSG"
+msgstr "Macros"
+
+#: src/gui/inst/std.cpp:34
+#, fuzzy
+msgid "Volume##sgiPSG"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/std.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiPSG"
+msgstr "Arpegio"
+
+#: src/gui/inst/std.cpp:36
+msgid "Pitch##sgiPSG"
+msgstr ""
+
+#: src/gui/inst/std.cpp:38
+msgid "Duty##sgiPSG"
+msgstr ""
+
+#: src/gui/inst/std.cpp:39
+#, fuzzy
+msgid "Panning##sgiPSG"
+msgstr "Balance"
+
+#: src/gui/inst/std.cpp:41
+#, fuzzy
+msgid "Phase Reset##sgiPSG"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/su.cpp:32
+msgid "Sound Unit##sgiSU"
+msgstr ""
+
+#: src/gui/inst/su.cpp:34
+#, fuzzy
+msgid "Switch roles of frequency and phase reset timer##sgiSU"
+msgstr ""
+"Intercambiar rol de la frecuencia y el temporizador de reinicio de fase"
+
+#: src/gui/inst/su.cpp:38
+#, fuzzy
+msgid "Hardware Sequence##sgiSU"
+msgstr "Secuencia de Hardware"
+
+#: src/gui/inst/su.cpp:49
+msgid "Tick##sgiSU0"
+msgstr ""
+
+#: src/gui/inst/su.cpp:51
+#, fuzzy
+msgid "Command##sgiSU0"
+msgstr "Comando"
+
+#: src/gui/inst/su.cpp:53
+#, fuzzy
+msgid "Move/Remove##sgiSU0"
+msgstr "Mover/Quitar"
+
+#: src/gui/inst/su.cpp:111
+#, fuzzy
+msgid "Period##sgiSU0"
+msgstr "Periodo"
+
+#: src/gui/inst/su.cpp:116
+#, fuzzy
+msgid "Amount##sgiSU0"
+msgstr "Cantidad"
+
+#: src/gui/inst/su.cpp:120
+msgid "Bound##sgiSU0"
+msgstr ""
+
+#: src/gui/inst/su.cpp:124
+#, fuzzy
+msgid "Up##sgiSU0"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/su.cpp:130
+#, fuzzy
+msgid "Down##sgiSU0"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/su.cpp:135
+#, fuzzy
+msgid "Loop##sgiSU"
+msgstr "Bucles"
+
+#: src/gui/inst/su.cpp:140
+msgid "Flip##sgiSU"
+msgstr ""
+
+#: src/gui/inst/su.cpp:162
+#, fuzzy
+msgid "Period##sgiSU1"
+msgstr "Periodo"
+
+#: src/gui/inst/su.cpp:168
+#, fuzzy
+msgid "Amount##sgiSU1"
+msgstr "Cantidad"
+
+#: src/gui/inst/su.cpp:172
+msgid "Bound##sgiSU1"
+msgstr ""
+
+#: src/gui/inst/su.cpp:176
+#, fuzzy
+msgid "Up##sgiSU1"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/su.cpp:182
+#, fuzzy
+msgid "Down##sgiSU1"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/su.cpp:202
+msgid "Ticks##sgiSU"
+msgstr ""
+
+#: src/gui/inst/su.cpp:224
+#, fuzzy
+msgid "Position##sgiSU"
+msgstr "Posición"
+
+#: src/gui/inst/su.cpp:332
+#, fuzzy
+msgid "Macros##sgiSU"
+msgstr "Macros"
+
+#: src/gui/inst/su.cpp:337
+#, fuzzy
+msgid "Volume##sgiSU"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/su.cpp:338
+#, fuzzy
+msgid "Arpeggio##sgiSU"
+msgstr "Arpegio"
+
+#: src/gui/inst/su.cpp:339
+msgid "Pitch##sgiSU"
+msgstr ""
+
+#: src/gui/inst/su.cpp:340
+#, fuzzy
+msgid "Duty/Noise##sgiSU"
+msgstr "Ancho/Ruido"
+
+#: src/gui/inst/su.cpp:341
+#, fuzzy
+msgid "Waveform##sgiSU"
+msgstr "Onda"
+
+#: src/gui/inst/su.cpp:343
+#, fuzzy
+msgid "Panning##sgiSU"
+msgstr "Balance"
+
+#: src/gui/inst/su.cpp:345
+#, fuzzy
+msgid "Phase Reset##sgiSU"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/su.cpp:347
+#, fuzzy
+msgid "Cutoff##sgiSU"
+msgstr "Límite"
+
+#: src/gui/inst/su.cpp:348
+#, fuzzy
+msgid "Resonance##sgiSU"
+msgstr "Resonancia"
+
+#: src/gui/inst/su.cpp:349
+#, fuzzy
+msgid "Control##sgiSU"
+msgstr "Control"
+
+#: src/gui/inst/su.cpp:350
+#, fuzzy
+msgid "Phase Reset Timer##sgiSU"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/swan.cpp:39
+msgid "Macros##sgiSWAN"
+msgstr ""
+
+#: src/gui/inst/swan.cpp:41
+#, fuzzy
+msgid "Volume##sgiSWAN"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/swan.cpp:42
+#, fuzzy
+msgid "Arpeggio##sgiSWAN"
+msgstr "Arpegio"
+
+#: src/gui/inst/swan.cpp:43
+msgid "Pitch##sgiSWAN"
+msgstr ""
+
+#: src/gui/inst/swan.cpp:47
+msgid "Noise##sgiSWAN"
+msgstr ""
+
+#: src/gui/inst/swan.cpp:48
+#, fuzzy
+msgid "Waveform##sgiSWAN"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/swan.cpp:51
+#, fuzzy
+msgid "Phase Reset##sgiSWAN"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/t6w28.cpp:32
+#, fuzzy
+msgid "Macros##sgiT6W"
+msgstr "Macros"
+
+#: src/gui/inst/t6w28.cpp:36
+#, fuzzy
+msgid "Volume##sgiT6W"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/t6w28.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiT6W"
+msgstr "Arpegio"
+
+#: src/gui/inst/t6w28.cpp:38
+msgid "Pitch##sgiT6W"
+msgstr ""
+
+#: src/gui/inst/t6w28.cpp:40
+#, fuzzy
+msgid "Panning (left)##sgiT6W"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/t6w28.cpp:41
+#, fuzzy
+msgid "Panning (right)##sgiT6W"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/t6w28.cpp:43
+#, fuzzy
+msgid "Noise Type##sgiT6W"
+msgstr "Tipo Ruido"
+
+#: src/gui/inst/t6w28.cpp:45
+#, fuzzy
+msgid "Phase Reset##sgiT6W"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/t85apu.cpp:32
+msgid "Macros##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:34
+#, fuzzy
+msgid "Volume##sgiT85APU"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/t85apu.cpp:35
+msgid "Arpeggio##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:36
+msgid "Pitch##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:37
+msgid "Duty##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:38
+#, fuzzy
+msgid "Waveform##sgiT85APU"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/t85apu.cpp:39
+msgid "Envelope Shape##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:40
+msgid "Envelope Number##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:44
+#, fuzzy
+msgid "Phase Reset##sgiT85APU"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/t85apu.cpp:45
+msgid "Envelope Starting Phase##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:47
+msgid "LFSR Feedback bits##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/ted.cpp:32
+#, fuzzy
+msgid "Macros##sgiTED"
+msgstr "Macros"
+
+#: src/gui/inst/ted.cpp:34
+#, fuzzy
+msgid "Volume##sgiTED"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/ted.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiTED"
+msgstr "Arpegio"
+
+#: src/gui/inst/ted.cpp:36
+msgid "Pitch##sgiTED"
+msgstr ""
+
+#: src/gui/inst/ted.cpp:38
+#, fuzzy
+msgid "Square/Noise##sgiTED"
+msgstr "Cuadrado/Ruido"
+
+#: src/gui/inst/ted.cpp:40
+#, fuzzy
+msgid "Phase Reset##sgiTED"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/tia.cpp:32
+#, fuzzy
+msgid "Macros##sgiTIA"
+msgstr "Macros"
+
+#: src/gui/inst/tia.cpp:34
+#, fuzzy
+msgid "Volume##sgiTIA"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/tia.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiTIA"
+msgstr "Arpegio"
+
+#: src/gui/inst/tia.cpp:36
+msgid "Pitch##sgiTIA"
+msgstr ""
+
+#: src/gui/inst/tia.cpp:38
+msgid "Raw Period##sgiTIA"
+msgstr ""
+
+#: src/gui/inst/tia.cpp:40
+#, fuzzy
+msgid "Waveform##sgiTIA"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/vboy.cpp:62
+#, fuzzy
+msgid "Set modulation table (channel 5 only)##sgiVB"
+msgstr "Aplicar tabla (sólo en el canal 5)"
+
+#: src/gui/inst/vboy.cpp:91
+msgid "Hex##MTHex"
+msgstr ""
+
+#: src/gui/inst/vboy.cpp:91
+msgid "Dec##MTHex"
+msgstr ""
+
+#: src/gui/inst/vboy.cpp:127
+#, fuzzy
+msgid "Macros##sgiVB"
+msgstr "Macros"
+
+#: src/gui/inst/vboy.cpp:132
+#, fuzzy
+msgid "Volume##sgiVB"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/vboy.cpp:133
+#, fuzzy
+msgid "Arpeggio##sgiVB"
+msgstr "Arpegio"
+
+#: src/gui/inst/vboy.cpp:134
+msgid "Pitch##sgiVB"
+msgstr ""
+
+#: src/gui/inst/vboy.cpp:135
+#, fuzzy
+msgid "Noise Length##sgiVB"
+msgstr "Long Ruido"
+
+#: src/gui/inst/vboy.cpp:136
+#, fuzzy
+msgid "Waveform##sgiVB"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/vboy.cpp:137
+#, fuzzy
+msgid "Panning (left)##sgiVB"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/vboy.cpp:138
+#, fuzzy
+msgid "Panning (right)##sgiVB"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/vboy.cpp:139
+#, fuzzy
+msgid "Phase Reset##sgiVB"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/vera.cpp:32
+msgid "Macros##sgiVERA"
+msgstr ""
+
+#: src/gui/inst/vera.cpp:34
+#, fuzzy
+msgid "Volume##sgiVERA"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/vera.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiVERA"
+msgstr "Arpegio"
+
+#: src/gui/inst/vera.cpp:36
+msgid "Pitch##sgiVERA"
+msgstr ""
+
+#: src/gui/inst/vera.cpp:38
+msgid "Duty##sgiVERA"
+msgstr ""
+
+#: src/gui/inst/vera.cpp:39
+#, fuzzy
+msgid "Waveform##sgiVERA"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/vera.cpp:40
+#, fuzzy
+msgid "Panning##sgiVERA"
+msgstr "Balance"
+
+#: src/gui/inst/vic.cpp:32
+#, fuzzy
+msgid "Macros##sgiVIC"
+msgstr "Macros"
+
+#: src/gui/inst/vic.cpp:34
+#, fuzzy
+msgid "Volume##sgiVIC"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/vic.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiVIC"
+msgstr "Arpegio"
+
+#: src/gui/inst/vic.cpp:36
+msgid "Pitch##sgiVIC"
+msgstr ""
+
+#: src/gui/inst/vic.cpp:38
+#, fuzzy
+msgid "On/Off##sgiVIC"
+msgstr "En/Ap"
+
+#: src/gui/inst/vic.cpp:39
+#, fuzzy
+msgid "Waveform##sgiVIC"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/vrc6.cpp:34
+msgid "Macros##sgiVRC6"
+msgstr ""
+
+#: src/gui/inst/vrc6.cpp:36
+#, fuzzy
+msgid "Volume##sgiVRC6"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/vrc6.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiVRC6"
+msgstr "Arpegio"
+
+#: src/gui/inst/vrc6.cpp:38
+msgid "Pitch##sgiVRC6"
+msgstr ""
+
+#: src/gui/inst/vrc6.cpp:42
+msgid "Duty##sgiVRC6"
+msgstr ""
+
+#: src/gui/inst/vrc6.cpp:47
+#, fuzzy
+msgid "Waveform##sgiVRC6"
+msgstr "Onda##WAVE"
+
+#: src/gui/inst/vrc6.cpp:48
+#, fuzzy
+msgid "Phase Reset##sgiVRC6"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/vrc6saw.cpp:32
+msgid "Macros##sgiVRC6S"
+msgstr ""
+
+#: src/gui/inst/vrc6saw.cpp:34
+#, fuzzy
+msgid "Volume##sgiVRC6S"
+msgstr "Volumen##CHF2"
+
+#: src/gui/inst/vrc6saw.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiVRC6S"
+msgstr "Arpegio"
+
+#: src/gui/inst/vrc6saw.cpp:36
+msgid "Pitch##sgiVRC6S"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:89
+#, fuzzy
+msgid "Wavetable##sgiwave"
+msgstr "Ondas"
+
+#: src/gui/inst/wavetable.cpp:141
+#, fuzzy
+msgid "Enable synthesizer##sgiwave"
+msgstr "Activar sintetizador"
+
+#: src/gui/inst/wavetable.cpp:162
+#, fuzzy
+msgid "Single-waveform##sgiwave"
+msgstr "Una onda"
+
+#: src/gui/inst/wavetable.cpp:173
+#, fuzzy
+msgid "Dual-waveform##sgiwave"
+msgstr "Dos ondas"
+
+#: src/gui/inst/wavetable.cpp:264
+msgid "Wave 1##sgiwave0"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:269
+msgid "Wave 2##sgiwave0"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:273
+msgid "Result##sgiwave"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:288
+msgid "Wave 1 ##sgiwave"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:298 src/gui/inst/wavetable.cpp:331
+#, fuzzy
+msgid ""
+"waveform macro is controlling wave 1!\n"
+"this value will be ineffective.##sgiwave"
+msgstr ""
+"¡la macro de onda está controlando la onda 1!\n"
+"este valor no tendrá efecto."
+
+#: src/gui/inst/wavetable.cpp:304
+msgid "Wave 1##sgiwave1"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:307
+msgid "Global##sgiwave1"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:338
+msgid "Wave 2##sgiwave1"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:340
+msgid "Global##sgiwave2"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:370
+#, fuzzy
+msgid "Resume preview##sgiwave"
+msgstr "Resumir vista previa"
+
+#: src/gui/inst/wavetable.cpp:374
+#, fuzzy
+msgid "Pause preview##sgiwave"
+msgstr "Pausar vista previa"
+
+#: src/gui/inst/wavetable.cpp:384
+#, fuzzy
+msgid "Restart preview##sgiwave"
+msgstr "Reiniciar vista previa"
+
+#: src/gui/inst/wavetable.cpp:392
+#, fuzzy
+msgid "too many wavetables!##sgiwave"
+msgstr "¡demasiadas ondas!"
+
+#: src/gui/inst/wavetable.cpp:409
+#, fuzzy
+msgid "Copy to new wavetable##sgiwave"
+msgstr "Copiar a nueva onda"
+
+#: src/gui/inst/wavetable.cpp:416
+#, fuzzy
+msgid "Update Rate##sgiwave"
+msgstr "Tasa de Cambio"
+
+#: src/gui/inst/wavetable.cpp:421
+#, fuzzy
+msgid "Speed##sgiwave"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/wavetable.cpp:429
+msgid "Amount##sgiwave"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:436
+msgid "Power##sgiwave"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:442
+msgid "Global##sgiwave"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:449
+#, fuzzy
+msgid ""
+"wavetable synthesizer disabled.\n"
+"use the Waveform macro to set the wave for this instrument.##sgiwave"
+msgstr ""
+"sintetizador de ondas desactivado.\n"
+"usa la macro de Onda para cambiar la onda de este instrumento."
+
+#: src/gui/inst/wavetable.cpp:455
+msgid "Local Waves##sgiwave"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:463
+msgid "Add##sgdl1"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:472
+#, fuzzy
+msgid "Duplicate##sgdl3"
+msgstr "Duplicar"
+
+#: src/gui/inst/wavetable.cpp:481
+#, fuzzy
+msgid "Open##sgdl1"
+msgstr "Abrir archivo"
+
+#: src/gui/inst/wavetable.cpp:485
+#, fuzzy
+msgid "replace...##sgdl3"
+msgstr "reemplazar"
+
+#: src/gui/inst/wavetable.cpp:498
+msgid "Save##sgdl3"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:506
+#, fuzzy
+msgid "save raw...##sgdl0"
+msgstr "guardar en bruto..."
+
+#: src/gui/inst/wavetable.cpp:519
+#, fuzzy
+msgid "Move up##sgdl1"
+msgstr "Mover hacia arriba"
+
+#: src/gui/inst/wavetable.cpp:528
+#, fuzzy
+msgid "Move down##sgdl1"
+msgstr "Mover hacia abajo"
+
+#: src/gui/inst/wavetable.cpp:539
+#, fuzzy
+msgid "Delete##sgdl4"
+msgstr "Borrar"
+
+#: src/gui/inst/x1_010.cpp:39
+#, fuzzy
+msgid "Macros##sgiX1"
+msgstr "Macros"
+
+#: src/gui/inst/x1_010.cpp:43
+#, fuzzy
+msgid "Volume##sgiX1"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/x1_010.cpp:44
+#, fuzzy
+msgid "Arpeggio##sgiX1"
+msgstr "Arpegio"
+
+#: src/gui/inst/x1_010.cpp:45
+msgid "Pitch##sgiX1"
+msgstr ""
+
+#: src/gui/inst/x1_010.cpp:47
+#, fuzzy
+msgid "Waveform##sgiX1"
+msgstr "Onda"
+
+#: src/gui/inst/x1_010.cpp:49
+#, fuzzy
+msgid "Panning (left)##sgiX1"
+msgstr "Balance (izquierdo)"
+
+#: src/gui/inst/x1_010.cpp:50
+#, fuzzy
+msgid "Panning (right)##sgiX1"
+msgstr "Balance (derecho)"
+
+#: src/gui/inst/x1_010.cpp:54
+#, fuzzy
+msgid "Phase Reset##sgiX1"
+msgstr "Temporizador de reinicio de fase"
+
+#: src/gui/inst/x1_010.cpp:59
+#, fuzzy
+msgid "Envelope##sgiX1"
+msgstr "Envelope"
+
+#: src/gui/inst/x1_010.cpp:60
+#, fuzzy
+msgid "Envelope Mode##sgiX1"
+msgstr "Modo Envelope"
+
+#: src/gui/inst/x1_010.cpp:61
+msgid "AutoEnv Num##sgiX1"
+msgstr ""
+
+#: src/gui/inst/x1_010.cpp:62
+msgid "AutoEnv Den##sgiX1"
+msgstr ""
+
+#: src/gui/inst/ymz280b.cpp:34
+#, fuzzy
+msgid "Macros##sgiYMZ"
+msgstr "Macros"
+
+#: src/gui/inst/ymz280b.cpp:39
+#, fuzzy
+msgid "Volume##sgiYMZ"
+msgstr "Volumen##TL"
+
+#: src/gui/inst/ymz280b.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiYMZ"
+msgstr "Arpegio"
+
+#: src/gui/inst/ymz280b.cpp:41
+msgid "Pitch##sgiYMZ"
+msgstr ""
+
+#: src/gui/inst/ymz280b.cpp:42
+#, fuzzy
+msgid "Panning##sgiYMZ"
+msgstr "Balance"
+
+#: src/gui/inst/ymz280b.cpp:44
+#, fuzzy
+msgid "Phase Reset##sgiYMZ"
+msgstr "Temporizador de reinicio de fase"
+
 #: src/gui/log.cpp:26
 msgid "warning"
 msgstr "atención"
@@ -9001,6 +14079,16 @@ msgstr "mensaje"
 #, c-format
 msgid "bank %d"
 msgstr "banco %d"
+
+#: src/gui/memory.cpp:149 src/gui/memory.cpp:158
+#, c-format
+msgid "%d-%d ($%x-$%x): %dK ($%x)##sgme"
+msgstr ""
+
+#: src/gui/memory.cpp:151 src/gui/memory.cpp:160
+#, c-format
+msgid "%d-%d ($%x-$%x): %d bytes ($%x)##sgme"
+msgstr ""
 
 #: src/gui/memory.cpp:175 src/gui/memory.cpp:176
 msgid "no chips with memory"
@@ -9071,6 +14159,10 @@ msgstr "Categorías"
 msgid "Systems"
 msgstr "Sistemas"
 
+#: src/gui/newSong.cpp:208
+msgid "User##sgpr"
+msgstr ""
+
 #: src/gui/newSong.cpp:223
 msgid "no systems here yet!"
 msgstr "aún no hay sistemas"
@@ -9090,6 +14182,10 @@ msgstr "¡no hay categorías disponibles! qué rayos."
 #: src/gui/newSong.cpp:280
 msgid "it appears you're extremely lucky today!"
 msgstr "¡parece que estás muy de suerte hoy!"
+
+#: src/gui/orders.cpp:46
+msgid "OrderSel###OrderSel"
+msgstr ""
 
 #: src/gui/orders.cpp:114
 msgid "Add new order"
@@ -9288,6 +14384,104 @@ msgstr "Compartir octava/rango de reproducción/edición"
 msgid "Read-only (can't input notes)"
 msgstr "Sólo lectura (sin entrada de notas)"
 
+#: src/gui/piano.cpp:451
+msgid "Input Pad###Input Pad"
+msgstr ""
+
+#: src/gui/presets.cpp:55
+msgid "Game consoles##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:55
+msgid "let's play some chiptune making games!##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:340
+msgid "Computers##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:340
+msgid "let's get to work on chiptune today.##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:1507
+msgid "Arcade systems##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:1507
+msgid "INSERT COIN##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:2879
+msgid "system presets that you have saved.##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:2883
+msgid ""
+"chips which use frequency modulation (FM) to generate sound.\n"
+"some of these also pack more (like square and sample channels).\n"
+"Actually \"FM\" here stands for phase modulation,\n"
+"but these two are indistinguishable\n"
+"if you use sine waves.##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:3109
+#, fuzzy
+msgid "Square##sgpr"
+msgstr "Cuadrado"
+
+#: src/gui/presets.cpp:3109
+msgid ""
+"these chips generate square/pulse tones only (but may include noise).##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:3224
+#, fuzzy
+msgid "Sample##sgpr"
+msgstr "Vista previa de samples"
+
+#: src/gui/presets.cpp:3224
+msgid "chips/systems which use PCM or ADPCM samples for sound synthesis.##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:3328
+#, fuzzy
+msgid "Wavetable##sgpr"
+msgstr "Ondas"
+
+#: src/gui/presets.cpp:3328
+msgid "chips which use user-specified waveforms to generate sound.##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:3393
+msgid "Specialized##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:3393
+msgid "chips/systems with unique sound synthesis methods.##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:3481
+msgid "Modern/fantasy##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:3481
+msgid ""
+"chips/systems which do not exist in reality or were made just several years "
+"ago.##sgpr"
+msgstr ""
+
+#: src/gui/presets.cpp:3536
+#, fuzzy
+msgid "DefleMask-compatible##sgpr"
+msgstr "wavetable de DefleMask"
+
+#: src/gui/presets.cpp:3536
+msgid ""
+"these configurations are compatible with DefleMask.\n"
+"select this if you need to save as .dmf or work with that program.##sgpr"
+msgstr ""
+
 #: src/gui/regView.cpp:38
 msgid "- no register pool available"
 msgstr "- no hay lista de registros disponible"
@@ -9328,6 +14522,11 @@ msgstr "SNES: la longitud del sample se alineará a un múltiplo de 16"
 #: src/gui/sampleEdit.cpp:249
 msgid "QSound: loop cannot be longer than 32767 samples"
 msgstr "QSound: el bucle no puede ser más largo que 32767 samples"
+
+#: src/gui/sampleEdit.cpp:253
+#, fuzzy
+msgid "QSound: maximum sample length is 65535"
+msgstr "C140: longitud máxima de un sample es 65535"
 
 #: src/gui/sampleEdit.cpp:259
 msgid "NES: loop point ignored on DPCM (may only loop entire sample)"
@@ -9536,6 +14735,19 @@ msgid "dither the sample when used on a chip that only supports 8-bit samples."
 msgstr ""
 "dithear el sample al ser usado en un chip que solo soporta samples 8-bit."
 
+#: src/gui/sampleEdit.cpp:588
+msgid "Hz"
+msgstr ""
+
+#: src/gui/sampleEdit.cpp:647
+msgid "Fine"
+msgstr "Fino"
+
+#: src/gui/sampleEdit.cpp:684
+#, fuzzy
+msgid "Mode"
+msgstr "Modo 1"
+
 #: src/gui/sampleEdit.cpp:854
 #, c-format
 msgid ""
@@ -9654,10 +14866,6 @@ msgstr "Aplicar filtro"
 msgid "Cutoff:"
 msgstr "Límite:"
 
-#: src/gui/sampleEdit.cpp:1174
-msgid "Resonance"
-msgstr "Resonancia"
-
 #: src/gui/sampleEdit.cpp:1180
 msgid "Power"
 msgstr "Potencia"
@@ -9703,9 +14911,22 @@ msgstr "Previsualizar sample"
 msgid "Create instrument from sample"
 msgstr "Crear instrumento usando el sample"
 
+#: src/gui/sampleEdit.cpp:1362
+msgid "Zoom##sgsed0"
+msgstr ""
+
 #: src/gui/sampleEdit.cpp:1366 src/gui/xyOsc.cpp:59
 msgid "Zoom"
 msgstr "Zoom"
+
+#: src/gui/sampleEdit.cpp:1388 src/gui/songInfo.cpp:79
+msgid "Auto"
+msgstr "Auto"
+
+#: src/gui/sampleEdit.cpp:1450
+#, c-format
+msgid "%dms"
+msgstr ""
 
 #: src/gui/sampleEdit.cpp:1760
 msgid "paste (replace)"
@@ -9740,6 +14961,11 @@ msgstr "%d samples, %d bytes"
 #, c-format
 msgid " (%d-%d: %d samples)"
 msgstr " (%d-%d: %d samples)"
+
+#: src/gui/sampleEdit.cpp:1879
+#, c-format
+msgid "%.2fHz"
+msgstr ""
 
 #: src/gui/sampleEdit.cpp:1997
 msgid "Non-8/16-bit samples cannot be edited without prior conversion."
@@ -9962,6 +15188,10 @@ msgstr "Idioma"
 msgid "Render backend"
 msgstr "Backend de renderizado"
 
+#: src/gui/settings.cpp:668
+msgid "Software##sgse"
+msgstr ""
+
 #: src/gui/settings.cpp:675 src/gui/settings.cpp:694 src/gui/settings.cpp:1313
 msgid "you may need to restart Furnace for this setting to take effect."
 msgstr "quizá tengas que reiniciar Furnace para que este ajuste tenga efecto."
@@ -10180,10 +15410,6 @@ msgstr "Vibración"
 msgid "Strength"
 msgstr "Fuerza"
 
-#: src/gui/settings.cpp:867
-msgid "Length"
-msgstr "Longitud"
-
 #: src/gui/settings.cpp:878
 msgid "Use system file picker"
 msgstr "Usar selector de archivos del sistema"
@@ -10303,6 +15529,11 @@ msgstr "Sistema actual"
 #: src/gui/settings.cpp:1059
 msgid "Reset to defaults"
 msgstr "Reiniciar a predeterminado"
+
+#: src/gui/settings.cpp:1096
+#, fuzzy
+msgid "Invert##sgse0"
+msgstr "Invertir##X"
 
 #: src/gui/settings.cpp:1155 src/gui/userPresets.cpp:439
 msgid "Configure"
@@ -10769,6 +16000,11 @@ msgstr "Lista de instrumentos"
 
 #: src/gui/settings.cpp:2473
 msgid "Wavetable list"
+msgstr "Lista de wavetables"
+
+#: src/gui/settings.cpp:2495
+#, fuzzy
+msgid "Local wavetables list##sgse"
 msgstr "Lista de wavetables"
 
 #: src/gui/settings.cpp:2516
@@ -11672,6 +16908,15 @@ msgstr "Único (con lista)##mel3"
 msgid "Use classic macro editor vertical slider"
 msgstr "Usar deslizador vertical clásico"
 
+#: src/gui/settings.cpp:3681
+#, fuzzy
+msgid "Sample Editor##sgse"
+msgstr "Editor de Samples"
+
+#: src/gui/settings.cpp:3683
+msgid "Display mouse hover sample coordinates in hex##sgse"
+msgstr ""
+
 #: src/gui/settings.cpp:3689
 msgid "Wave Editor"
 msgstr "Editor de Onda"
@@ -11820,6 +17065,38 @@ msgstr "Barras de desplazamiento redondas"
 #: src/gui/settings.cpp:3867
 msgid "Borders around widgets"
 msgstr "Bordes en los elementos"
+
+#: src/gui/settings.cpp:3873
+msgid "Misc##sgse"
+msgstr ""
+
+#: src/gui/settings.cpp:3875
+msgid "Wrap text##sgse"
+msgstr ""
+
+#: src/gui/settings.cpp:3880
+msgid "Wrap text in song/subsong comments window.##sgse"
+msgstr ""
+
+#: src/gui/settings.cpp:3884
+msgid "Frame shading in text windows##sgse"
+msgstr ""
+
+#: src/gui/settings.cpp:3889
+msgid ""
+"Apply frame shading to the multiline text fields\n"
+"such as song/subsong info/comments.##sgse"
+msgstr ""
+
+#: src/gui/settings.cpp:3893
+msgid "Show chip info in chip manager##sgse"
+msgstr ""
+
+#: src/gui/settings.cpp:3898
+msgid ""
+"Display tooltip in chip manager when hovering over the chip. Tooltip shows "
+"chip name and description.##sgse"
+msgstr ""
 
 #: src/gui/settings.cpp:3905
 msgid "Color scheme"
@@ -12105,11 +17382,6 @@ msgstr "Fondo (esquina inferior izquierda)"
 msgid "Background (bottom-right)"
 msgstr "Fondo (esquina inferior derecha)"
 
-#: src/gui/settings.cpp:4015 src/gui/settings.cpp:4070
-#: src/gui/settings.cpp:4238 src/gui/waveEdit.cpp:755
-msgid "Waveform"
-msgstr "Onda"
-
 #: src/gui/settings.cpp:4016
 msgid "Waveform (clip)"
 msgstr "Onda (fuera del límite)"
@@ -12222,17 +17494,9 @@ msgstr "Patrones inactivos"
 msgid "Envelope View"
 msgstr "Vista de Envelope"
 
-#: src/gui/settings.cpp:4057
-msgid "Envelope"
-msgstr "Envelope"
-
 #: src/gui/settings.cpp:4058
 msgid "Sustain guide"
 msgstr "Guía de sostenido"
-
-#: src/gui/settings.cpp:4059 src/gui/sysConf.cpp:737
-msgid "Release"
-msgstr "Lanzamiento"
 
 #: src/gui/settings.cpp:4064
 msgid "Algorithm background"
@@ -13131,10 +18395,6 @@ msgstr "Autor"
 msgid "Album"
 msgstr "Álbum"
 
-#: src/gui/songInfo.cpp:79
-msgid "Auto"
-msgstr "Auto"
-
 #: src/gui/songInfo.cpp:100
 msgid "Tuning (A-4)"
 msgstr "Afinación (en base a A-4)"
@@ -13587,18 +18847,6 @@ msgstr "Último canal usado"
 msgid "Hard reset envelope:"
 msgstr "Envelope del reinicio duro:"
 
-#: src/gui/sysConf.cpp:722
-msgid "Attack"
-msgstr "Ataque"
-
-#: src/gui/sysConf.cpp:727
-msgid "Decay"
-msgstr "Caída"
-
-#: src/gui/sysConf.cpp:732
-msgid "Sustain"
-msgstr "Sostenido"
-
 #: src/gui/sysConf.cpp:743
 msgid "Envelope reset time:"
 msgstr "Tiempo de reinicio del envelope;"
@@ -13769,9 +19017,17 @@ msgstr "Memoria del chip:"
 msgid "2MB (ECS/AGA max)"
 msgstr "2MB (máximo en ECS/AGA)"
 
+#: src/gui/sysConf.cpp:1031
+msgid "1MB##sgsc"
+msgstr ""
+
 #: src/gui/sysConf.cpp:1036
 msgid "512KB (OCS max)"
 msgstr "512KB (máximo en OCS)"
+
+#: src/gui/sysConf.cpp:1041
+msgid "256KB##sgsc"
+msgstr ""
 
 #: src/gui/sysConf.cpp:1049 src/gui/sysConf.cpp:1099 src/gui/sysConf.cpp:2441
 #: src/gui/sysConf.cpp:2642
@@ -14221,9 +19477,141 @@ msgstr ""
 msgid "V 47.0.0 (9-bit volume)"
 msgstr ""
 
+#: src/gui/sysConf.cpp:2517
+msgid "Downmix chip output to mono##sgsc"
+msgstr ""
+
+#: src/gui/sysConf.cpp:2529
+msgid "Reserved blocks for wavetables:##sgsc"
+msgstr ""
+
+#: src/gui/sysConf.cpp:2537
+msgid ""
+"Reserve this many blocks 256 bytes each in sample memory.\n"
+"Each block holds one wavetable (is used for one wavetable channel),\n"
+"so reserve as many as you need.##sgsc"
+msgstr ""
+
+# doesn't need translation
+#: src/gui/sysConf.cpp:2557
+#, fuzzy
+msgid "Clock rate:##sgsc10"
+msgstr "Velocidad del reloj:"
+
+#: src/gui/sysConf.cpp:2595
+msgid "Audio output method:##sgsc"
+msgstr ""
+
+#: src/gui/sysConf.cpp:2597
+msgid "Idealized internal output - 8-bit PCM##sgsc"
+msgstr ""
+
+#: src/gui/sysConf.cpp:2602
+msgid "Real internal output - 8-bit PWM##sgsc"
+msgstr ""
+
+#: src/gui/sysConf.cpp:2614
+#, fuzzy
+msgid "Sample Rate##sgsc"
+msgstr "Tasa de samples"
+
+#: src/gui/sysConf.cpp:2616 src/gui/sysConf.cpp:2625
+#, c-format
+msgid "%.0fHz##sgsc"
+msgstr ""
+
+#: src/gui/sysConf.cpp:2623
+msgid "PWM Rate##sgsc"
+msgstr ""
+
 #: src/gui/sysConf.cpp:2660
 msgid "Custom clock rate"
 msgstr "Tasa del reloj personalizada"
+
+#: src/gui/sysConf.cpp:2669
+msgid "Hz##sgscHz"
+msgstr ""
+
+#: src/gui/sysManager.cpp:87
+#, fuzzy
+msgid "Chip Manager###Chip Manager"
+msgstr "Gestor de chips"
+
+#: src/gui/sysManager.cpp:88
+#, fuzzy
+msgid "Preserve channel order##sgsm"
+msgstr "Preservar orden de canales"
+
+#: src/gui/sysManager.cpp:90
+#, fuzzy
+msgid "Clone channel data##sgsm"
+msgstr "Clonar datos de canal"
+
+#: src/gui/sysManager.cpp:93
+#, fuzzy
+msgid "Clone at end##sgsm"
+msgstr "Clonar al final"
+
+#: src/gui/sysManager.cpp:101
+msgid "Name##sgsm"
+msgstr ""
+
+#: src/gui/sysManager.cpp:103
+#, fuzzy
+msgid "Actions##sgsm"
+msgstr "Acciones"
+
+#: src/gui/sysManager.cpp:116
+#, fuzzy
+msgid "(drag to swap chips)##sgsm"
+msgstr "(coger para intercambiar chips)"
+
+#: src/gui/sysManager.cpp:144
+msgid "Change##SysChange"
+msgstr "Cambiar##SysChange"
+
+#: src/gui/sysManager.cpp:155
+#, fuzzy
+msgid "cannot change chip! ("
+msgstr "¡no se puede cambiar el chip! (%s)"
+
+#: src/gui/sysManager.cpp:163
+msgid "Clone##SysDup"
+msgstr "Clonar##SysDup"
+
+#: src/gui/sysManager.cpp:168 src/gui/sysManager.cpp:188
+#, fuzzy
+msgid "cannot duplicate chip! (##sgsm"
+msgstr "¡no se puede cambiar el chip! (%s)"
+
+#: src/gui/sysManager.cpp:201
+#, fuzzy, c-format
+msgid "max number of systems is %d##sgsm"
+msgstr "número máximo de sistemas es %d"
+
+#: src/gui/sysManager.cpp:206
+#, fuzzy, c-format
+msgid "max number of total channels is %d##sgsm"
+msgstr "número máximo de canales es %d"
+
+#: src/gui/sysManager.cpp:217
+#, fuzzy
+msgid "Are you sure you want to remove this chip?##sgsm"
+msgstr "¿Estás seguro que deseas remover este chip?"
+
+#: src/gui/sysManager.cpp:221
+#, fuzzy
+msgid "Remove##sgsm"
+msgstr "Remover"
+
+#: src/gui/sysManager.cpp:235
+#, fuzzy
+msgid "cannot add chip! (##sgsm"
+msgstr "¡no se puede agregar el chip! (%s)"
+
+#: src/gui/sysPartNumber.cpp:201
+msgid "ZXS Beeper##sgsa"
+msgstr ""
 
 #: src/gui/userPresets.cpp:325
 msgid "User Systems"
@@ -14467,10 +19855,6 @@ msgstr ""
 msgid "Shapes"
 msgstr "Formas"
 
-#: src/gui/waveEdit.cpp:622
-msgid "Duty"
-msgstr "Ancho de pulso"
-
 #: src/gui/waveEdit.cpp:632
 msgid "Exponent"
 msgstr "Exponente"
@@ -14605,10 +19989,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "no instrument selected##sgie1"
 #~ msgstr "no se ha seleccionado un instrumento"
-
-#, fuzzy
-#~ msgid "Open##sgie1"
-#~ msgstr "Abrir archivo"
 
 #~ msgid "00xy: Arpeggio"
 #~ msgstr "00xy: Arpegio"
@@ -14786,9 +20166,6 @@ msgstr ""
 #~ msgid "cannot remove the last one"
 #~ msgstr "no se puede remover el último"
 
-#~ msgid "Instrument %d"
-#~ msgstr "Instrumento %d"
-
 #~ msgid "could not seek to end: %s"
 #~ msgstr "no se puede ir al final: %s"
 
@@ -14809,9 +20186,6 @@ msgstr ""
 
 #~ msgid "premature end of file"
 #~ msgstr "fin de archivo prematuro"
-
-#~ msgid "too many samples!"
-#~ msgstr "¡demasiados samples!"
 
 #~ msgid "no free patterns in channel %d!"
 #~ msgstr "¡no hay patrones libres en canal %d!"
@@ -15003,50 +20377,8 @@ msgstr ""
 #~ msgid "STAGE %d"
 #~ msgstr "NIVEL %d"
 
-#~ msgid "Unsaved changes! Save changes before opening backup?"
-#~ msgstr "¡Cambios no guardados! ¿Guardar cambios antes de abrir una copia?"
-
-#~ msgid "Error while sending request (MIDI output not configured?)"
-#~ msgstr "Error al enviar el pedido (¿salida MIDI no configurada?)"
-
-#~ msgid "Select an option: (cannot be undone!)"
-#~ msgstr "Selecciona una opción: (no se puede deshacer)"
-
-#~ msgid "couldn't paste! make sure your sample is 8 or 16-bit."
-#~ msgstr "¡no se pudo pegar! asegúrate de que el sample sea de 8 bits o 16."
-
-#~ msgid "select at least one sample!"
-#~ msgstr "¡selecciona por lo menos un sample!"
-
-#~ msgid "maximum size is 256 samples!"
-#~ msgstr "¡tamaño máximo es 256 samples!"
-
-#~ msgid "Preserve channel order"
-#~ msgstr "Preservar orden de canales"
-
-#~ msgid "Clone channel data"
-#~ msgstr "Clonar datos de canal"
-
-#~ msgid "Clone at end"
-#~ msgstr "Clonar al final"
-
-#~ msgid "Actions"
-#~ msgstr "Acciones"
-
-#~ msgid "(drag to swap chips)"
-#~ msgstr "(coger para intercambiar chips)"
-
-#~ msgid "Clone##SysDup"
-#~ msgstr "Clonar##SysDup"
-
 #~ msgid "cannot clone chip! (%s)"
 #~ msgstr "¡no se puede clonar chip! (%s)"
-
-#~ msgid "Change##SysChange"
-#~ msgstr "Cambiar##SysChange"
-
-#~ msgid "Are you sure you want to remove this chip?"
-#~ msgstr "¿Estás seguro que deseas remover este chip?"
 
 #~ msgid "Down Down Down"
 #~ msgstr "Abajo Abajo"
@@ -15096,12 +20428,6 @@ msgstr ""
 #~ msgid "Detune 2"
 #~ msgstr "Desafinación 2"
 
-#~ msgid "AM"
-#~ msgstr "AM"
-
-#~ msgid "AM Depth"
-#~ msgstr "Profundidad AM"
-
 #~ msgid "Vibrato Depth"
 #~ msgstr "Profundidad Vibrato"
 
@@ -15110,9 +20436,6 @@ msgstr ""
 
 #~ msgid "Level Scaling"
 #~ msgstr "Escala Nivel"
-
-#~ msgid "Vibrato"
-#~ msgstr "Vibrato"
 
 #~ msgid "Scale Rate"
 #~ msgstr "Tasa Escala"
@@ -15129,17 +20452,11 @@ msgstr ""
 #~ msgid "Reverb"
 #~ msgstr "Reverb"
 
-#~ msgid "Fine"
-#~ msgstr "Fino"
-
 #~ msgid "LFO2 > Freq"
 #~ msgstr "LFO2 > Frec"
 
 #~ msgid "LFO2 > Amp"
 #~ msgstr "LFO2 > Amp"
-
-#~ msgid "OP4 Noise Mode"
-#~ msgstr "Modo Ruido OP4"
 
 #~ msgid "Envelope Delay"
 #~ msgstr "Retraso Envelope"
@@ -15403,21 +20720,6 @@ msgstr ""
 #~ msgid "How did you even"
 #~ msgstr "Cómo pudiste"
 
-#~ msgid "triangle"
-#~ msgstr "triángulo"
-
-#~ msgid "saw"
-#~ msgstr "sierra"
-
-#~ msgid "pulse"
-#~ msgstr "pulso"
-
-#~ msgid "noise"
-#~ msgstr "ruido"
-
-#~ msgid "tone"
-#~ msgstr "tono"
-
 #~ msgid "envelope"
 #~ msgstr "envelope"
 
@@ -15451,9 +20753,6 @@ msgstr ""
 #~ msgid "echo"
 #~ msgstr "eco"
 
-#~ msgid "pitch mod"
-#~ msgstr "mod tono"
-
 #~ msgid "invert right"
 #~ msgstr "invertir derecha"
 
@@ -15468,9 +20767,6 @@ msgstr ""
 
 #~ msgid "high"
 #~ msgstr "alto"
-
-#~ msgid "ch3off"
-#~ msgstr "canal 3 apagado"
 
 #~ msgid "test"
 #~ msgstr "prueba"
@@ -15537,9 +20833,6 @@ msgstr ""
 
 #~ msgid "VinvL"
 #~ msgstr "VvoltearI"
-
-#~ msgid "ring mod"
-#~ msgstr "mod aro"
 
 #~ msgid "low pass"
 #~ msgstr "paso bajo"
@@ -15634,9 +20927,6 @@ msgstr ""
 #~ msgid "Mix Chorus"
 #~ msgstr "Coro Mezcla"
 
-#~ msgid "Phase Modulation"
-#~ msgstr "Modulación de Fase"
-
 #~ msgid "Sweep"
 #~ msgstr "Barrer"
 
@@ -15661,18 +20951,6 @@ msgstr ""
 #~ msgid "Direct"
 #~ msgstr "Directo"
 
-#~ msgid "Decrease (linear)"
-#~ msgstr "Disminuir (lineal)"
-
-#~ msgid "Decrease (logarithmic)"
-#~ msgstr "Disminuir (logarítmico)"
-
-#~ msgid "Increase (linear)"
-#~ msgstr "Aumentar (lineal)"
-
-#~ msgid "Increase (bent line)"
-#~ msgstr "Aumentar (línea doblada)"
-
 #~ msgid "Relative"
 #~ msgstr "Relativo"
 
@@ -15691,154 +20969,20 @@ msgstr ""
 #~ msgid "%d: %d (direct)"
 #~ msgstr "%d: %d (directo)"
 
-#~ msgid "Random"
-#~ msgstr "Aleatorio"
-
-#~ msgid ""
-#~ "left click to configure TL scaling\n"
-#~ "right click to see FM preview"
-#~ msgstr ""
-#~ "clic izquierdo para configurar escala del TL\n"
-#~ "clic derecho para la vista previa FM"
-
-#~ msgid "right click to see FM preview"
-#~ msgstr "clic derecho para la vista previa FM"
-
-#~ msgid "operator level changes with volume?"
-#~ msgstr "¿nivel de operador cambia con volumen?"
-
-#~ msgid "YES##OPKVS"
-#~ msgstr "SÍ##OPKVS"
-
 #~ msgid "Bottom"
 #~ msgstr "Inferior"
 
 #~ msgid "Hold"
 #~ msgstr "Sostener"
 
-#~ msgid "SusTime"
-#~ msgstr "TiempoSos"
-
-#~ msgid "SusDecay"
-#~ msgstr "CaídaSos"
-
 #~ msgid "Shape"
 #~ msgstr "Forma"
-
-#~ msgid "Macro type: Sequence"
-#~ msgstr "Tipo de macro: Secuencia"
-
-#~ msgid "Macro type: ADSR"
-#~ msgstr "Tipo de macro: ADSR"
-
-#~ msgid "Macro type: LFO"
-#~ msgstr "Tipo de macro: LFO"
-
-#~ msgid "Macro type: What's going on here?"
-#~ msgstr "Tipo de macro: ¿Qué está pasando?"
-
-#~ msgid "Delay/Step Length"
-#~ msgstr "Retraso/Longitud de Paso"
-
-#~ msgid "Step Length (ticks)##IMacroSpeed"
-#~ msgstr "Longitud de Paso (ticks)##IMacroSpeed"
-
-#~ msgid "Delay##IMacroDelay"
-#~ msgstr "Retraso##IMacroDelay"
-
-#~ msgid "Release mode: Active (jump to release pos)"
-#~ msgstr "Modo de lanzamiento: Activo (saltar al punto de lanzamiento)"
-
-#~ msgid "Release mode: Passive (delayed release)"
-#~ msgstr "Modo de lanzamiento: Pasivo (lanzamiento tardío)"
-
-#~ msgid "StepLen"
-#~ msgstr "LongPaso"
-
-#~ msgid "Delay"
-#~ msgstr "Retraso"
-
-#~ msgid "The heck? No, this isn't even working correctly..."
-#~ msgstr "¿Qué rayos? No, esto ni siquiera está funcionando correctamente..."
-
-#~ msgid "The only problem with that selectedMacro is that it's a bug..."
-#~ msgstr "El único problema con ese selectedMacro es que es un bug..."
-
-#~ msgid "(copying)"
-#~ msgstr "(copiando)"
-
-#~ msgid "(swapping)"
-#~ msgstr "(intercambiando)"
-
-#~ msgid ""
-#~ "- drag to swap operator\n"
-#~ "- shift-drag to copy operator"
-#~ msgstr ""
-#~ "- coge para intercambiar operador\n"
-#~ "- shift-coge para copiar operador"
-
-#~ msgid "new DPCM features disabled (compatibility)!"
-#~ msgstr "¡nuevas funciones DPCM desactivadas (compatibilidad)!"
-
-#~ msgid "click here to enable them."
-#~ msgstr "haz clic aquí para activarlas."
-
-#~ msgid "none selected"
-#~ msgstr "ninguno seleccionado"
 
 #~ msgid "Use sample"
 #~ msgstr "Usar sample"
 
-#~ msgid "Sample bank slot##BANKSLOT"
-#~ msgstr "Casillero de banco de samples##BANKSLOT"
-
-#~ msgid "Use wavetable (Amiga/Generic DAC only)"
-#~ msgstr "Usar onda (solamente en Amiga/DAC Genérico)"
-
-#~ msgid "Use wavetable"
-#~ msgstr "Usar onda"
-
-#~ msgid "Use sample map"
-#~ msgstr "Usar mapa de samples"
-
 #~ msgid "delta"
 #~ msgstr "delta"
-
-#~ msgid "sample name"
-#~ msgstr "nombre del sample"
-
-#~ msgid "set entire map to this pitch"
-#~ msgstr "usar este tono para todo el mapa"
-
-#~ msgid "set entire map to this delta counter value"
-#~ msgstr "usar este valor del contador delta para todo el mapa"
-
-#~ msgid "set entire map to this note"
-#~ msgstr "usar esta nota para todo el mapa"
-
-#~ msgid "set entire map to this sample"
-#~ msgstr "usar este sample para todo el mapa"
-
-#~ msgid "reset pitches"
-#~ msgstr "reiniciar tonos"
-
-#~ msgid "clear delta counter values"
-#~ msgstr "borrar valores del contador delta"
-
-#~ msgid "reset notes"
-#~ msgstr "reiniciar notas"
-
-#~ msgid "clear map samples"
-#~ msgstr "borrar samples mapeados"
-
-#~ msgid "Request from TX81Z"
-#~ msgstr "Pedir del TX81Z"
-
-#~ msgid "%s name"
-#~ msgstr "%s nombre"
-
-#~ msgid "Fixed frequency mode"
-#~ msgstr "Modo de frecuencia fija"
 
 #~ msgid "Drum"
 #~ msgstr "Percusión"
@@ -15846,28 +20990,8 @@ msgstr ""
 #~ msgid "Block"
 #~ msgstr "Bloque"
 
-#~ msgid "FreqNum"
-#~ msgstr "NúmFrec"
-
-#~ msgid "Volume##TL"
-#~ msgstr "Volumen##TL"
-
-#~ msgid "this volume slider only works in compatibility (non-drums) system."
-#~ msgstr ""
-#~ "este control de volumen solamente funciona en el sistema de "
-#~ "compatibilidad (sin percusión)."
-
 #~ msgid "Env"
 #~ msgstr "Env"
-
-#~ msgid "OPL2/3 only (last 4 waveforms are OPL3 only)"
-#~ msgstr "Solo OPL2/3 (últimas 4 ondas solamente en OPL3)"
-
-#~ msgid "Envelope 2 (kick only)"
-#~ msgstr "Envelope 2 (solo patear)"
-
-#~ msgid "Operator %d"
-#~ msgstr "Operador %d"
 
 #~ msgid "Freq"
 #~ msgstr "Frec"
@@ -15881,147 +21005,14 @@ msgstr ""
 #~ msgid "F"
 #~ msgstr "F"
 
-#~ msgid "Frequency (F-Num)"
-#~ msgstr "Frecuencia (F-Num)"
-
-#~ msgid "SSG On"
-#~ msgstr "SSG Activo"
-
-#~ msgid "FM Macros"
-#~ msgstr "Macros FM"
-
-#~ msgid "LFO Speed"
-#~ msgstr "Veloc LFO"
-
-#~ msgid "PM Depth"
-#~ msgstr "Prof PM"
-
-#~ msgid "LFO Shape"
-#~ msgstr "Forma LFO"
-
-#~ msgid "OpMask"
-#~ msgstr "Màscara"
-
-#~ msgid "AM Depth 2"
-#~ msgstr "Prof AM 2"
-
-#~ msgid "PM Depth 2"
-#~ msgstr "Prof PM 2"
-
-#~ msgid "LFO2 Speed"
-#~ msgstr "Veloc LFO2"
-
-#~ msgid "LFO2 Shape"
-#~ msgstr "Forma LFO2"
-
 #~ msgid "Operator Macros"
 #~ msgstr "Macros del Operador"
-
-#~ msgid "OP%d Macros"
-#~ msgstr "Macros del OP%d"
-
-#~ msgid "Op. Arpeggio"
-#~ msgstr "Arpegio Op."
-
-#~ msgid "Op. Pitch"
-#~ msgstr "Tono Op."
-
-#~ msgid "Op. Panning"
-#~ msgstr "Balance Op."
-
-#~ msgid "Use software envelope"
-#~ msgstr "Usar envelope de software"
-
-#~ msgid "Initialize envelope on every note"
-#~ msgstr "Inicializar envelope en cada nota"
 
 #~ msgid "Double wave length (GBA only)"
 #~ msgstr "Longitud de onda doble (solamente en GBA)"
 
-#~ msgid "Sound Length"
-#~ msgstr "Longitud de Sonido"
-
-#~ msgid "Infinity"
-#~ msgstr "Infinito"
-
-#~ msgid "Direction"
-#~ msgstr "Dirección"
-
-#~ msgid "Up"
-#~ msgstr "Arriba"
-
-#~ msgid "Down"
-#~ msgstr "Abajo"
-
-#~ msgid "Hardware Sequence"
-#~ msgstr "Secuencia de Hardware"
-
-#~ msgid "Tick"
-#~ msgstr "Tick"
-
-#~ msgid "Command"
-#~ msgstr "Comando"
-
-#~ msgid "Move/Remove"
-#~ msgstr "Mover/Quitar"
-
-#~ msgid "Env Length"
-#~ msgstr "Long Env"
-
-#~ msgid "Shift"
-#~ msgstr "Turno"
-
-#~ msgid "Ticks"
-#~ msgstr "Ticks"
-
-#~ msgid "Position"
-#~ msgstr "Posición"
-
 #~ msgid "tri"
 #~ msgstr "tri"
-
-#~ msgid "Ring Modulation"
-#~ msgstr "Modulación de Aro"
-
-#~ msgid "Oscillator Sync"
-#~ msgstr "Sincronizar Osciladores"
-
-#~ msgid "Enable filter"
-#~ msgstr "Activar filtro"
-
-#~ msgid "Initialize filter"
-#~ msgstr "Inicializar filtro"
-
-#~ msgid "Cutoff"
-#~ msgstr "Límite"
-
-#~ msgid "Filter Mode"
-#~ msgstr "Modo de Filtro"
-
-#~ msgid "Noise Mode"
-#~ msgstr "Modo de Ruido"
-
-#~ msgid "Wave Mix Mode"
-#~ msgstr "Modo de Mezcla de Onda"
-
-#~ msgid "Absolute Cutoff Macro"
-#~ msgstr "Macro de Límite Absoluta"
-
-#~ msgid "Absolute Duty Macro"
-#~ msgstr "Macro de Ancho Absoluta"
-
-#~ msgid "Don't test before new note"
-#~ msgstr "No probar antes de cada nota"
-
-#~ msgid "Switch roles of frequency and phase reset timer"
-#~ msgstr ""
-#~ "Intercambiar rol de la frecuencia y el temporizador de reinicio de fase"
-
-#~ msgid "Period"
-#~ msgstr "Periodo"
-
-#~ msgid "Amount"
-#~ msgstr "Cantidad"
 
 #~ msgid "Bound"
 #~ msgstr "Límite"
@@ -16029,314 +21020,32 @@ msgstr ""
 #~ msgid "Flip"
 #~ msgstr "Voltear"
 
-#~ msgid "Load waveform"
-#~ msgstr "Cargar onda"
-
-#~ msgid ""
-#~ "when enabled, a waveform will be loaded into RAM.\n"
-#~ "when disabled, only the offset and length change."
-#~ msgstr ""
-#~ "activado: una onda se carga a la RAM.\n"
-#~ "desactivado: solamente cambian la posición y longitud."
-
-#~ msgid "Waveform##WAVE"
-#~ msgstr "Onda##WAVE"
-
-#~ msgid "Per-channel wave position/length"
-#~ msgstr "Posición/longitud de onda por canal"
-
 #~ msgid "Ch"
 #~ msgstr "Ca"
-
-#~ msgid "Compatibility mode"
-#~ msgstr "Modo de compatibilidad"
-
-#~ msgid ""
-#~ "only use for compatibility with .dmf modules!\n"
-#~ "- initializes modulation table with first wavetable\n"
-#~ "- does not alter modulation parameters on instrument change"
-#~ msgstr ""
-#~ "¡sólo usar para compatibilidad con módulos .dmf!\n"
-#~ "- carga tabla de modulación con la primera onda\n"
-#~ "- no altera parámetros de modulación al cambiar instrumento"
-
-#~ msgid "Modulation depth"
-#~ msgstr "Profundidad de modulación"
-
-#~ msgid "Modulation speed"
-#~ msgstr "Velocidad de modulación"
-
-#~ msgid "Modulation table"
-#~ msgstr "Tabla de modulación"
-
-#~ msgid "Set modulation table (channel 5 only)"
-#~ msgstr "Aplicar tabla (sólo en el canal 5)"
-
-#~ msgid "Filter K1"
-#~ msgstr "Filtro C1"
-
-#~ msgid "Filter K2"
-#~ msgstr "Filtro C1"
-
-#~ msgid "Envelope length"
-#~ msgstr "Longitud envelope"
-
-#~ msgid "Left Volume Ramp"
-#~ msgstr "Rampa Volumen Izq"
-
-#~ msgid "Right Volume Ramp"
-#~ msgstr "Rampa Volumen Der"
-
-#~ msgid "Filter K1 Ramp"
-#~ msgstr "Rampa Filtro C1"
-
-#~ msgid "Filter K2 Ramp"
-#~ msgstr "Rampa Filtro C2"
-
-#~ msgid "K1 Ramp Slowdown"
-#~ msgstr "Ralentizar Rampa C1"
-
-#~ msgid "K2 Ramp Slowdown"
-#~ msgstr "Ralentizar Rampa C2"
-
-#~ msgid "Attack Rate"
-#~ msgstr "Tasa de Ataque"
-
-#~ msgid "Decay 1 Rate"
-#~ msgstr "Tasa de Caída 1"
-
-#~ msgid "Decay Level"
-#~ msgstr "Nivel de Caída"
-
-#~ msgid "Decay 2 Rate"
-#~ msgstr "Tasa de Caída 2"
-
-#~ msgid "Release Rate"
-#~ msgstr "Tasa de Lanzamiento"
-
-#~ msgid "Rate Correction"
-#~ msgstr "Corrección de Tasa"
 
 #~ msgid "LFO Rate"
 #~ msgstr "Tasa de LFO"
 
-#~ msgid "Use envelope"
-#~ msgstr "Usar envelope"
-
-#~ msgid "Sustain/release mode:"
-#~ msgstr "Modo de sostenido/lanzamiento:"
-
-#~ msgid "Direct (cut on release)"
-#~ msgstr "Directo (cortar al soltar)"
-
-#~ msgid "Effective (linear decrease)"
-#~ msgstr "Efectivo (caída lineal)"
-
-#~ msgid "Effective (exponential decrease)"
-#~ msgstr "Efectivo (caída exponencial)"
-
-#~ msgid "Delayed (write R on release)"
-#~ msgstr "Tardío (escribir R al soltar)"
-
-#~ msgid "Gain Mode"
-#~ msgstr "Modo de Ganancia"
-
 #~ msgid "Gain"
 #~ msgstr "Ganancia"
-
-#~ msgid ""
-#~ "using decrease modes will not produce any sound at all, unless you know "
-#~ "what you are doing.\n"
-#~ "it is recommended to use the Gain macro for decrease instead."
-#~ msgstr ""
-#~ "al usar modos de disminución no se producirá ningún sonido a menos que "
-#~ "sepas lo que estás haciendo.\n"
-#~ "se recomienda usar la macro de Ganancia para disminución."
-
-#~ msgid "Enable synthesizer"
-#~ msgstr "Activar sintetizador"
-
-#~ msgid "Single-waveform"
-#~ msgstr "Una onda"
-
-#~ msgid "Dual-waveform"
-#~ msgstr "Dos ondas"
 
 #~ msgid "Wave 1"
 #~ msgstr "Onda 1"
 
-#~ msgid ""
-#~ "waveform macro is controlling wave 1!\n"
-#~ "this value will be ineffective."
-#~ msgstr ""
-#~ "¡la macro de onda está controlando la onda 1!\n"
-#~ "este valor no tendrá efecto."
-
 #~ msgid "Wave 2"
 #~ msgstr "Onda 2"
-
-#~ msgid "Resume preview"
-#~ msgstr "Resumir vista previa"
-
-#~ msgid "Pause preview"
-#~ msgstr "Pausar vista previa"
-
-#~ msgid "Restart preview"
-#~ msgstr "Reiniciar vista previa"
-
-#~ msgid "Copy to new wavetable"
-#~ msgstr "Copiar a nueva onda"
-
-#~ msgid "Update Rate"
-#~ msgstr "Tasa de Cambio"
 
 #~ msgid "Global"
 #~ msgstr "Global"
 
-#~ msgid ""
-#~ "wavetable synthesizer disabled.\n"
-#~ "use the Waveform macro to set the wave for this instrument."
-#~ msgstr ""
-#~ "sintetizador de ondas desactivado.\n"
-#~ "usa la macro de Onda para cambiar la onda de este instrumento."
-
-#~ msgid "Macros"
-#~ msgstr "Macros"
-
-#~ msgid "Arpeggio"
-#~ msgstr "Arpegio"
-
-#~ msgid "Duty/Noise"
-#~ msgstr "Ancho/Ruido"
-
-#~ msgid "Surround"
-#~ msgstr "Envolvente"
-
-#~ msgid "Panning (left)"
-#~ msgstr "Balance (izquierdo)"
-
-#~ msgid "Panning (right)"
-#~ msgstr "Balance (derecho)"
-
-#~ msgid "Noise Freq"
-#~ msgstr "Frec Ruido"
-
-#~ msgid "Noise AND Mask"
-#~ msgstr "Másc Ruido Y"
-
-#~ msgid "Noise OR Mask"
-#~ msgstr "Másc Ruido O"
-
-#~ msgid "On/Off"
-#~ msgstr "En/Ap"
-
 #~ msgid "Patch"
 #~ msgstr "Sonido"
-
-#~ msgid "Mod Depth"
-#~ msgstr "Prof Mod"
-
-#~ msgid "Mod Speed"
-#~ msgstr "Vel Mod"
-
-#~ msgid "Mod Position"
-#~ msgstr "Pos Mod"
-
-#~ msgid "Noise Length"
-#~ msgstr "Long Ruido"
-
-#~ msgid "Wave Pos"
-#~ msgstr "Pos Onda"
-
-#~ msgid "Wave Length"
-#~ msgstr "Long Onda"
 
 #~ msgid "AUDCTL"
 #~ msgstr "AUDCTL"
 
-#~ msgid "Pulse Width"
-#~ msgstr "Ancho de Pulso"
-
-#~ msgid "Duty/Int"
-#~ msgstr "Trabajo/Int"
-
-#~ msgid "Load LFSR"
-#~ msgstr "Cargar LFSR"
-
-#~ msgid "Envelope Mode"
-#~ msgstr "Modo Envelope"
-
-#~ msgid "Phase Reset Timer"
-#~ msgstr "Temporizador de reinicio de fase"
-
-#~ msgid "Freq Divider"
-#~ msgstr "Divisor Frec"
-
-#~ msgid "Clock Divider"
-#~ msgstr "Divisor Reloj"
-
-#~ msgid "Global Volume"
-#~ msgstr "Volumen Global"
-
-#~ msgid "Echo Level"
-#~ msgstr "Nivel Eco"
-
-#~ msgid "Echo Feedback"
-#~ msgstr "Retroalim Eco"
-
-#~ msgid "Echo Length"
-#~ msgstr "Long Eco"
-
-#~ msgid "Group Ctrl"
-#~ msgstr "Ctrl Grupo"
-
-#~ msgid "Group Attack"
-#~ msgstr "Ataq Grupo"
-
-#~ msgid "Group Decay"
-#~ msgstr "Caída Grupo"
-
-#~ msgid "Noise Type"
-#~ msgstr "Tipo Ruido"
-
-#~ msgid "Square/Noise"
-#~ msgstr "Cuadrado/Ruido"
-
-#~ msgid "Tap A Location"
-#~ msgstr "Ubicación Tap A"
-
-#~ msgid "Tap B Location"
-#~ msgstr "Ubicación Tap B"
-
-#~ msgid "Portion A Length"
-#~ msgstr "Long Porción A"
-
-#~ msgid "Portion B Length"
-#~ msgstr "Long Porción B"
-
-#~ msgid "Portion A Offset"
-#~ msgstr "Desfaz Porción A"
-
-#~ msgid "Portion B Offset"
-#~ msgstr "Desfaz Porción B"
-
-#~ msgid "Parameter"
-#~ msgstr "Parámetro"
-
-#~ msgid "Load Value"
-#~ msgstr "Cargar Valor"
-
-#~ msgid "Filter Toggle"
-#~ msgstr "Activar Filtro"
-
 #~ msgid "Wave Mix"
 #~ msgstr "Mezcla Ondas"
-
-#~ msgid "Octave offset"
-#~ msgstr "Desplazamiento de octava"
-
-#~ msgid "go to Macros for other parameters."
-#~ msgstr "ve a Macros para otros párametros."
 
 #~ msgid "X"
 #~ msgstr "X"

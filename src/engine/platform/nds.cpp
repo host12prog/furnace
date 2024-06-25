@@ -29,11 +29,7 @@
 extern FurnaceGUI g;
 #endif
 
-#ifdef HAVE_GUI
-#define _LE(string) g.locale.getText(string)
-#else
 #define _LE(string) (string)
-#endif
 
 #define rRead8(a) (nds.read8(a))
 #define rWrite8(a,v) {if(!skipRegisterWrites) {nds.write8((a),(v)); regPool[(a)]=(v); if(dumpWrites) addWrite((a),(v)); }}

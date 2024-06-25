@@ -235,7 +235,7 @@ void FurnaceGUI::drawMobileControls() {
 
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,ImVec2(0.0f,0.0f));
     ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding,mobileEditButtonSize.x);
-    if (ImGui::Begin("MobileEdit",NULL,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoBackground|ImGuiWindowFlags_NoDecoration,_L("Mobile Edit###MobileEdit"))) {
+    if (ImGui::Begin("MobileEdit",NULL,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoBackground|ImGuiWindowFlags_NoDecoration,_("Mobile Edit###MobileEdit"))) {
       bool mobileEditWas=mobileEdit;
       if (ImGui::IsMouseReleased(ImGuiMouseButton_Left) && mobileEdit) {
         mobileEdit=false;
@@ -514,7 +514,7 @@ void FurnaceGUI::drawMobileControls() {
           openFileDialog(GUI_FILE_SAVE_DMF);
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("Legacy .dmf##sgec"))) {
+        if (ImGui::Button(_("Legacy .dmf##sgec"))) {
           mobileMenuOpen=false;
           openFileDialog(GUI_FILE_SAVE_DMF_LEGACY);
         }

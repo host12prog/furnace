@@ -351,10 +351,10 @@ void FurnaceGUI::drawCompatFlags() {
         ImGui::EndTabItem();
       }
       if (ImGui::BeginTabItem("FamiTracker")) {
-        ImGui::Checkbox(_L("Stop NES pulse channels hardware sweep on new note##sgcf"),&e->song.resetNesSweep);
-        ImGui::Checkbox(_L("Do not stop volume slide after reaching zero or full volume##sgcf"),&e->song.dontDisableVolSlideOnZero);
-        ImGui::Checkbox(_L("Stop E1xy/E2xy effects on new note##sgcf"),&e->song.stopE1E2OnNoteOn);
-        ImGui::Checkbox(_L("Slower 0Axy volume slide##sgcf"),&e->song.slowerVolSlide);
+        ImGui::Checkbox(_("Stop NES pulse channels hardware sweep on new note##sgcf"),&e->song.resetNesSweep);
+        ImGui::Checkbox(_("Do not stop volume slide after reaching zero or full volume##sgcf"),&e->song.dontDisableVolSlideOnZero);
+        ImGui::Checkbox(_("Stop E1xy/E2xy effects on new note##sgcf"),&e->song.stopE1E2OnNoteOn);
+        ImGui::Checkbox(_("Slower 0Axy volume slide##sgcf"),&e->song.slowerVolSlide);
         
         ImGui::EndTabItem();
       }

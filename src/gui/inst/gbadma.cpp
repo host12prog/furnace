@@ -36,17 +36,17 @@ void FurnaceGUI::drawInsGBADMA(DivInstrument* ins)
 
   insTabSample(ins);
 
-  if (ImGui::BeginTabItem(_L("Macros##sgiGBADMA"))) 
+  if (ImGui::BeginTabItem(_("Macros##sgiGBADMA"))) 
   {
     panMax=2;
     
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiGBADMA"),ins,DIV_MACRO_VOL,0xff,0,2,32,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiGBADMA"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiGBADMA"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiGBADMA"), ins, DIV_MACRO_WAVE, 0xff, 0, WAVE_MACRO_MAX, 160, uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,false,NULL,true));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning##sgiGBADMA"),ins,DIV_MACRO_PAN_LEFT,0xff,0,panMax,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,panBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Volume##sgiGBADMA"),ins,DIV_MACRO_VOL,0xff,0,2,32,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Arpeggio##sgiGBADMA"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Pitch##sgiGBADMA"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Waveform##sgiGBADMA"), ins, DIV_MACRO_WAVE, 0xff, 0, WAVE_MACRO_MAX, 160, uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,false,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Panning##sgiGBADMA"),ins,DIV_MACRO_PAN_LEFT,0xff,0,panMax,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,panBits));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgiGBADMA"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Phase Reset##sgiGBADMA"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

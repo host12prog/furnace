@@ -669,7 +669,7 @@ void FurnaceGUI::drawChanOsc() {
                     );
                   } else {
                     if (debugFFT) {
-                      dl->AddText(inRect.Min,0xffffffff,_L("\nquiet##sgco"));
+                      dl->AddText(inRect.Min,0xffffffff,_("\nquiet##sgco"));
                     }
                   }
                 } else {

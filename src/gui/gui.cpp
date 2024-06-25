@@ -82,7 +82,7 @@ bool Particle::update(float frameTime) {
 
 const char* FurnaceGUI::getDefaultInsName()
 {
-  return _L("Instrument %d##sggu");
+  return _("Instrument %d");
 }
 
 void FurnaceGUI::centerNextWindow(const char* name, float w, float h) {
@@ -1959,8 +1959,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_FZT:
       if (!dirExists(workingDirFZTExport)) workingDirFZTExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export FZT module" : _L("Export FZT module##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "FZT module" : _L("FZT module##sggu"), "*.fzt"},
+        settings.language == 0 ? "Export FZT module" : _("Export FZT module"),
+        {settings.language == 0 ? "FZT module" : _("FZT module"), "*.fzt"},
         workingDirFZTExport,
         dpiScale,
         (settings.autoFillSave)?shortName:""
@@ -3112,7 +3112,7 @@ void FurnaceGUI::editOptions(bool topMenu) {
 
   if (topMenu) {
     ImGui::Separator();
-    if (ImGui::MenuItem(_L("clone pattern##sggu"),BIND_FOR(GUI_ACTION_PAT_CLONE))) doAction(GUI_ACTION_PAT_CLONE);
+    if (ImGui::MenuItem(_("clone pattern"),BIND_FOR(GUI_ACTION_PAT_CLONE))) doAction(GUI_ACTION_PAT_CLONE);
   }
 }
 void FurnaceGUI::toggleMobileUI(bool enable, bool force) {
@@ -4254,10 +4254,10 @@ bool FurnaceGUI::loop() {
             drawExportVGM();
             ImGui::EndMenu();
           }
-          if (ImGui::MenuItem(_L("export .dmf (1.1.3+)...##sggu0"))) {
+          if (ImGui::MenuItem(_("export .dmf (1.1.3+)...0"))) {
           openFileDialog(GUI_FILE_SAVE_DMF);
           }
-          if (ImGui::MenuItem(_L("export .dmf (1.0/legacy)...##sggu0"))) {
+          if (ImGui::MenuItem(_("export .dmf (1.0/legacy)...0"))) {
             openFileDialog(GUI_FILE_SAVE_DMF_LEGACY);
           }
           int numZSMCompat=0;
@@ -4301,11 +4301,11 @@ bool FurnaceGUI::loop() {
             curExportType=GUI_EXPORT_VGM;
             displayExport=true;
           }
-          if (ImGui::MenuItem(_L("export .dmf (1.1.3+)...##sggu1"))) {
+          if (ImGui::MenuItem(_("export .dmf (1.1.3+)...1"))) {
             curExportType=GUI_EXPORT_DMF;
             displayExport=true;
           }
-          if (ImGui::MenuItem(_L("export .dmf (1.0/legacy)...##sggu1"))) {
+          if (ImGui::MenuItem(_("export .dmf (1.0/legacy)...1"))) {
             curExportType=GUI_EXPORT_DMF_LEGACY;
             displayExport=true;
           }
@@ -5374,7 +5374,7 @@ bool FurnaceGUI::loop() {
               break;
             }
             case GUI_FILE_LOCAL_WAVE_OPEN: {
-              String errs = (settings.language == DIV_LANG_ENGLISH ? "there were some errors while loading wavetables:\n" : _L("there were some errors while loading wavetables:\n##sggu"));
+              String errs = (settings.language == 0 ? "there were some errors while loading wavetables:\n" : _("there were some errors while loading wavetables:\n"));
               bool warn=false;
               for (String i: fileDialog->getFileName()) {
                 DivWavetable* wave=e->waveFromFile(i.c_str());
@@ -5383,7 +5383,7 @@ bool FurnaceGUI::loop() {
                     warn=true;
                     errs+=fmt::sprintf("- %s: %s\n",i,e->getLastError());
                   } else {
-                    String wave_err = (settings.language == DIV_LANG_ENGLISH ? "cannot load wavetable! (" : _L("cannot load wavetable! (##sggu"));
+                    String wave_err = (settings.language == 0 ? "cannot load wavetable! (" : _("cannot load wavetable! ("));
                     showError(wave_err+e->getLastError()+")");
                   }
                 } else {
@@ -5394,7 +5394,7 @@ bool FurnaceGUI::loop() {
                       warn=true;
                       errs+=fmt::sprintf("- %s: %s\n",i,e->getLastError());
                     } else {
-                      String wave_err = (settings.language == DIV_LANG_ENGLISH ? "cannot load wavetable! (" : _L("cannot load wavetable! (##sggu"));
+                      String wave_err = (settings.language == 0 ? "cannot load wavetable! (" : _("cannot load wavetable! ("));
                       showError(wave_err+e->getLastError()+")");
                     }
                   } else {
@@ -6286,7 +6286,7 @@ bool FurnaceGUI::loop() {
           curLocalWave=e->addLocalWave(curIns);
           if (curLocalWave == -1)
           {
-            showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sggu"));
+            showError(settings.language == 0 ? "too many wavetables!" : _("too many wavetables!"));
           }
           else 
           {
@@ -6330,7 +6330,7 @@ bool FurnaceGUI::loop() {
       }
       bool reissueSearch=false;
 
-      if (ImGui::InputTextWithHint("##SysSearch",settings.language == DIV_LANG_ENGLISH ? "Search..." : _L("Search...##sggu"),&insBankSearchQuery)) reissueSearch=true;
+      if (ImGui::InputTextWithHint("##SysSearch",settings.language == 0 ? "Search..." : _("Search..."),&insBankSearchQuery)) reissueSearch=true;
 
       bool anySelected=false;
       float sizeY=ImGui::GetFrameHeightWithSpacing()*pendingIns.size();
@@ -6636,7 +6636,7 @@ bool FurnaceGUI::loop() {
 #endif
 
     if (settings.displayRenderTime) {
-      String renderTime=fmt::sprintf(_L("%.0fµs##sggu"),ImGui::GetIO().DeltaTime*1000000.0);
+      String renderTime=fmt::sprintf(_("%.0fµs"),ImGui::GetIO().DeltaTime*1000000.0);
       String renderTime2=fmt::sprintf("%.1f FPS",1.0/ImGui::GetIO().DeltaTime);
       ImDrawList* dl=ImGui::GetForegroundDrawList();
       ImVec2 markPos=ImVec2(canvasW-ImGui::CalcTextSize(renderTime.c_str()).x-60.0*dpiScale,4.0*dpiScale);

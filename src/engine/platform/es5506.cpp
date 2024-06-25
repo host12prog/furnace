@@ -27,11 +27,7 @@
 extern FurnaceGUI g;
 #endif
 
-#ifdef HAVE_GUI
-#define _LE(string) g.locale.getText(string)
-#else
 #define _LE(string) (string)
-#endif
 
 #define PITCH_OFFSET ((double)(16*2048*(chanMax+1)))
 #define NOTE_ES5506(c,note) ((amigaPitch && parent->song.linearPitch!=2)?parent->calcBaseFreq(COLOR_NTSC,chan[c].pcm.freqOffs,note,true):parent->calcBaseFreq(chipClock,chan[c].pcm.freqOffs,note,false))

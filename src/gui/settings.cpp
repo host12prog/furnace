@@ -665,7 +665,7 @@ void FurnaceGUI::drawSettings() {
             settingsChanged=true;
           }
 #endif
-          if (ImGui::Selectable(_L("Software##sgse"),curRenderBackend=="Software")) {
+          if (ImGui::Selectable(_("Software##sgse"),curRenderBackend=="Software")) {
             settings.renderBackend="Software";
             settingsChanged=true;
           }
@@ -1093,7 +1093,7 @@ void FurnaceGUI::drawSettings() {
           float vol=fabs(sysVol);
           ImGui::PushID(i);
 
-          ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(_L("Invert##sgse0")).x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0);
+          ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(_("Invert##sgse0")).x-ImGui::GetFrameHeightWithSpacing()*2.0-ImGui::GetStyle().ItemSpacing.x*2.0);
           if (ImGui::BeginCombo("##System",_L(getSystemName(sysID)),ImGuiComboFlags_HeightLargest)) {
             
             sysID=systemPicker(true);
@@ -2492,7 +2492,7 @@ void FurnaceGUI::drawSettings() {
           KEYBIND_CONFIG_END;
           ImGui::TreePop();
         }
-        if (ImGui::TreeNode(_L("Local wavetables list##sgse"))) {
+        if (ImGui::TreeNode(_("Local wavetables list##sgse"))) {
           KEYBIND_CONFIG_BEGIN("keysLocalWaveList");
 
           UI_KEYBIND_CONFIG(GUI_ACTION_LOCAL_WAVE_LIST_ADD);
@@ -3678,9 +3678,9 @@ void FurnaceGUI::drawSettings() {
         }
 
         // SUBSECTION SAMPLE EDITOR
-        CONFIG_SUBSECTION(_L("Sample Editor##sgse"));
+        CONFIG_SUBSECTION(_("Sample Editor##sgse"));
         bool display_hex_coords_in_sample_editorB=settings.display_hex_coords_in_sample_editor;
-        if (ImGui::Checkbox(_L("Display mouse hover sample coordinates in hex##sgse"),&display_hex_coords_in_sample_editorB)) {
+        if (ImGui::Checkbox(_("Display mouse hover sample coordinates in hex##sgse"),&display_hex_coords_in_sample_editorB)) {
           settings.display_hex_coords_in_sample_editor=display_hex_coords_in_sample_editorB;
           settingsChanged=true;
         }
@@ -3870,32 +3870,32 @@ void FurnaceGUI::drawSettings() {
         }
 
         // SUBSECTION MISC
-        CONFIG_SUBSECTION(_L("Misc##sgse"));
+        CONFIG_SUBSECTION(_("Misc##sgse"));
         bool wrapTextB=settings.wrapText;
-        if (ImGui::Checkbox(_L("Wrap text##sgse"),&wrapTextB)) {
+        if (ImGui::Checkbox(_("Wrap text##sgse"),&wrapTextB)) {
           settings.wrapText=wrapTextB;
           settingsChanged=true;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Wrap text in song/subsong comments window.##sgse"));
+          ImGui::SetTooltip(_("Wrap text in song/subsong comments window.##sgse"));
         }
 
         bool doFrameShadingForMultilineTextB=settings.doFrameShadingForMultilineText;
-        if (ImGui::Checkbox(_L("Frame shading in text windows##sgse"),&doFrameShadingForMultilineTextB)) {
+        if (ImGui::Checkbox(_("Frame shading in text windows##sgse"),&doFrameShadingForMultilineTextB)) {
           settings.doFrameShadingForMultilineText=doFrameShadingForMultilineTextB;
           settingsChanged=true;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Apply frame shading to the multiline text fields\nsuch as song/subsong info/comments.##sgse"));
+          ImGui::SetTooltip(_("Apply frame shading to the multiline text fields\nsuch as song/subsong info/comments.##sgse"));
         }
 
         bool showTooltipInChipManagerB=settings.showTooltipInChipManager;
-        if (ImGui::Checkbox(_L("Show chip info in chip manager##sgse"),&showTooltipInChipManagerB)) {
+        if (ImGui::Checkbox(_("Show chip info in chip manager##sgse"),&showTooltipInChipManagerB)) {
           settings.showTooltipInChipManager=showTooltipInChipManagerB;
           settingsChanged=true;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Display tooltip in chip manager when hovering over the chip. Tooltip shows chip name and description.##sgse"));
+          ImGui::SetTooltip(_("Display tooltip in chip manager when hovering over the chip. Tooltip shows chip name and description.##sgse"));
         }
 
         END_SECTION;
@@ -4724,8 +4724,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
     settings.playOnLoad=conf.getInt("playOnLoad",0);
     settings.centerPopup=conf.getInt("centerPopup",1);
 
-    settings.language=conf.getInt("language",(int)DIV_LANG_ENGLISH);
-    locale.setLanguage((DivLang)settings.language);
+    settings.language=conf.getInt("language",(int)0);
     initSystemPresets();
     updateWindowTitle();
 
@@ -5235,7 +5234,7 @@ void FurnaceGUI::readConfig(DivConfig& conf, FurnaceGUISettingGroups groups) {
   clampSetting(settings.fontOversample,1,3);
   clampSetting(settings.selectAssetOnLoad,0,1);
 
-  clampSetting(settings.language,0,DIV_LANG_MAX-1);
+  clampSetting(settings.language,0,1);
   clampSetting(settings.translate_channel_names_pattern, 0, 1);
   clampSetting(settings.translate_channel_names_osc, 0, 1);
   clampSetting(settings.translate_short_channel_names, 0, 1);
@@ -6365,14 +6364,7 @@ void FurnaceGUI::applyUISettings(bool updateFonts) {
     sty.AntiAliasedLines=false;
     sty.AntiAliasedLinesUseTex=false;
     sty.AntiAliasedFill=false;
-
-    locale.setLanguage((DivLang)DIV_LANG_ENGLISH);
     initSystemPresets();
-  }
-
-  if(!safeMode && renderBackend==GUI_BACKEND_SOFTWARE)
-  {
-    locale.setLanguage((DivLang)settings.language);
   }
 
   if (mobileUI) {

@@ -226,7 +226,7 @@ void FurnaceGUI::drawPalette() {
         case CMDPAL_TYPE_ADD_CHIP:
           if (i!=DIV_SYSTEM_NULL) {
             if (!e->addSystem((DivSystem)i)) {
-              showError(settings.language == DIV_LANG_ENGLISH ? ("cannot add chip! (") : (_L("cannot add chip! (##sgcp"))+e->getLastError()+")");
+              showError(settings.language == 0 ? ("cannot add chip! (") : (_("cannot add chip! ("))+e->getLastError()+")");
             } else {
               MARK_MODIFIED;
             }

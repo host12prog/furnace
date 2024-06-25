@@ -29,21 +29,21 @@ class FurnaceGUI;
 
 void FurnaceGUI::drawInsSAA1099(DivInstrument* ins)
 {
-  if (ImGui::BeginTabItem(_L("Macros##sgiSAA"))) 
+  if (ImGui::BeginTabItem(_("Macros##sgiSAA"))) 
   {
     panMax=15;
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiSAA"),ins,DIV_MACRO_VOL,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiSAA"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiSAA"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Volume##sgiSAA"),ins,DIV_MACRO_VOL,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Arpeggio##sgiSAA"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Pitch##sgiSAA"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Duty/Noise##sgiSAA"),ins,DIV_MACRO_DUTY,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiSAA"),ins,DIV_MACRO_WAVE,0xff,0,2,64,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,true,ayShapeBits,1));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Duty/Noise##sgiSAA"),ins,DIV_MACRO_DUTY,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Waveform##sgiSAA"),ins,DIV_MACRO_WAVE,0xff,0,2,64,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,true,ayShapeBits,1));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (left)##sgiSAA"),ins,DIV_MACRO_PAN_LEFT,0xff,0,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,NULL));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (right)##sgiSAA"),ins,DIV_MACRO_PAN_RIGHT,0xff,0,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Panning (left)##sgiSAA"),ins,DIV_MACRO_PAN_LEFT,0xff,0,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Panning (right)##sgiSAA"),ins,DIV_MACRO_PAN_RIGHT,0xff,0,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER]));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Envelope##sgiSAA"),ins,DIV_MACRO_EX1,0xff,0,8,160,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,saaEnvBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Envelope##sgiSAA"),ins,DIV_MACRO_EX1,0xff,0,8,160,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,saaEnvBits));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

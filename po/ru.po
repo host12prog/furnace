@@ -11,37 +11,38 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/engine/engine.cpp:198 src/gui/settings.cpp:4199
+#: src/engine/engine.cpp:194 src/gui/settings.cpp:4199
 msgid "Invalid effect"
 msgstr ""
 
-#: src/engine/engine.cpp:1193
+#: src/engine/engine.cpp:1189
 msgid "invalid index"
 msgstr "недействительный индекс"
 
-#: src/engine/engine.cpp:1197
+#: src/engine/engine.cpp:1193
 #, c-format
 msgid "max number of systems is %d"
 msgstr "максимальное число чипов/систем не может превышать %d"
 
-#: src/engine/engine.cpp:1201
+#: src/engine/engine.cpp:1197
 #, c-format
 msgid "max number of total channels is %d"
 msgstr "максимальное общее число каналов не может превышать %d"
 
-#: src/engine/engine.cpp:1472
+#: src/engine/engine.cpp:1468
 msgid "source and destination are equal"
 msgstr "системы совпадают"
 
-#: src/engine/engine.cpp:1476
+#: src/engine/engine.cpp:1472
 msgid "invalid source index"
 msgstr "недействительный индекс исходной системы"
 
-#: src/engine/engine.cpp:1480
+#: src/engine/engine.cpp:1476
 msgid "invalid destination index"
 msgstr "недействительный индекс системы назначения"
 
-#: src/engine/engine.cpp:3207
+#: src/engine/engine.cpp:3203 src/gui/doAction.cpp:1039
+#: src/gui/doAction.cpp:1060
 #, c-format
 msgid "Sample %d"
 msgstr "Сэмпл %d"
@@ -1042,7 +1043,7 @@ msgstr ""
 msgid "Sega Master System + FM Expansion"
 msgstr ""
 
-#: src/engine/sysDef.cpp:742 src/gui/settings.cpp:4097
+#: src/engine/sysDef.cpp:742 src/gui/inst/gb.cpp:32 src/gui/settings.cpp:4097
 msgid "Game Boy"
 msgstr "Game Boy"
 
@@ -4229,8 +4230,9 @@ msgid "Frequency"
 msgstr "Частота"
 
 #: src/gui/chanOsc.cpp:37 src/gui/findReplace.cpp:687
-#: src/gui/findReplace.cpp:943 src/gui/guiConst.cpp:235 src/gui/mixer.cpp:268
-#: src/gui/sampleEdit.cpp:1016 src/gui/settings.cpp:276
+#: src/gui/findReplace.cpp:943 src/gui/guiConst.cpp:235
+#: src/gui/inst/fzt.cpp:999 src/gui/inst/gb.cpp:167 src/gui/inst/gb.cpp:351
+#: src/gui/mixer.cpp:268 src/gui/sampleEdit.cpp:1016 src/gui/settings.cpp:276
 #: src/gui/settings.cpp:1129 src/gui/settings.cpp:1493
 #: src/gui/settings.cpp:1505 src/gui/settings.cpp:3442
 #: src/gui/settings.cpp:4087 src/gui/userPresets.cpp:417
@@ -4417,11 +4419,20 @@ msgstr ""
 msgid "Error!"
 msgstr "Ошибка!"
 
+#: src/gui/chanOsc.cpp:672
+#, fuzzy
+msgid ""
+"\n"
+"quiet##sgco"
+msgstr ""
+"\n"
+"тихо"
+
 #: src/gui/clock.cpp:31 src/gui/guiConst.cpp:617 src/gui/settings.cpp:4273
 msgid "Clock"
 msgstr "Часы"
 
-#: src/gui/commandPalette.cpp:51 src/gui/newSong.cpp:133
+#: src/gui/commandPalette.cpp:51 src/gui/gui.cpp:6333 src/gui/newSong.cpp:133
 #: src/gui/sysPicker.cpp:68
 msgid "Search..."
 msgstr "Поиск..."
@@ -4447,6 +4458,7 @@ msgid "Search chip (to add)..."
 msgstr "Искать чипы (для добавления)..."
 
 #: src/gui/commandPalette.cpp:93 src/gui/commandPalette.cpp:167
+#: src/gui/dataList.cpp:166
 msgid "- None -"
 msgstr "- Нет -"
 
@@ -4466,6 +4478,10 @@ msgstr ""
 #: src/gui/settings.cpp:6958
 msgid "Cancel"
 msgstr "Отмена"
+
+#: src/gui/commandPalette.cpp:229
+msgid "cannot add chip! ("
+msgstr "не могу добавить чип! ("
 
 #: src/gui/compatFlags.cpp:31 src/gui/guiConst.cpp:605
 msgid "Compatibility Flags"
@@ -5113,6 +5129,30 @@ msgstr ""
 "\n"
 "не эффективно на чипах с логарифмическим контролем громкости"
 
+#: src/gui/compatFlags.cpp:354
+#, fuzzy
+msgid "Stop NES pulse channels hardware sweep on new note##sgcf"
+msgstr ""
+"Останавливать аппаратное портаменто на каналах импульсов NES при начале "
+"новой ноты"
+
+#: src/gui/compatFlags.cpp:355
+#, fuzzy
+msgid "Do not stop volume slide after reaching zero or full volume##sgcf"
+msgstr ""
+"Не останавливать эффект изменения громкости при достижении нулевой или "
+"максимальной громкости"
+
+#: src/gui/compatFlags.cpp:356
+#, fuzzy
+msgid "Stop E1xy/E2xy effects on new note##sgcf"
+msgstr "Останавливать эффекты E1xy/E2xy на новой ноте"
+
+#: src/gui/compatFlags.cpp:357
+#, fuzzy
+msgid "Slower 0Axy volume slide##sgcf"
+msgstr "Замедление изменения громкости эффектом 0Axy"
+
 #: src/gui/csPlayer.cpp:112 src/gui/guiConst.cpp:621
 msgid "Command Stream Player"
 msgstr "Проигрыватель потока команд"
@@ -5234,6 +5274,11 @@ msgstr "экспортировать в .dmp"
 #: src/gui/editControls.cpp:50 src/gui/gui.cpp:2791 src/gui/gui.cpp:2800
 msgid "delete"
 msgstr "удалить"
+
+#: src/gui/dataList.cpp:162
+#, c-format
+msgid "%.2X: <INVALID>"
+msgstr "%.2X: <НЕДЕЙСТВ.>"
 
 #: src/gui/dataList.cpp:245
 msgid "out of memory for this sample!"
@@ -5374,7 +5419,8 @@ msgstr "Волновые таблицы"
 msgid "Samples"
 msgstr "Сэмплы"
 
-#: src/gui/dataList.cpp:747 src/gui/waveEdit.cpp:502
+#: src/gui/dataList.cpp:747 src/gui/inst/wavetable.cpp:502
+#: src/gui/waveEdit.cpp:502
 msgid "save as .dmw..."
 msgstr "сохранить как .dmw..."
 
@@ -5410,6 +5456,96 @@ msgid_plural "%d apples"
 msgstr[0] "%d яблоко"
 msgstr[1] "%d яблока"
 msgstr[2] "%d яблок"
+
+#: src/gui/doAction.cpp:38
+#, fuzzy
+msgid "Unsaved changes! Save changes before creating a new song?##sgda"
+msgstr ""
+"Остались несохранённые изменения! Сохранить их перед созданием нового трека?"
+
+#: src/gui/doAction.cpp:45
+#, fuzzy
+msgid "Unsaved changes! Save changes before opening another file?##sgda"
+msgstr ""
+"Остались несохранённые изменения! Сохранить их перед открытием другого файла?"
+
+#: src/gui/doAction.cpp:52
+#, fuzzy
+msgid "Unsaved changes! Save changes before opening backup?##sgda"
+msgstr ""
+"Остались несохранённые изменения! Сохранить их перед открытием резервной "
+"копии?"
+
+#: src/gui/doAction.cpp:64
+#, fuzzy, c-format
+msgid "Error while saving file! (%s)##sgda"
+msgstr "Ошибка при сохранении файла! (%s)"
+
+#: src/gui/doAction.cpp:192
+#, fuzzy
+msgid "Error while sending request (MIDI output not configured?)##sgda"
+msgstr "Ошибка при посылке запроса (MIDI вывод не настроен?)"
+
+#: src/gui/doAction.cpp:200
+#, fuzzy
+msgid "Select an option: (cannot be undone!)##sgda"
+msgstr "Выберите опцию: (действие не может быть отменено!)"
+
+#: src/gui/doAction.cpp:702
+#, fuzzy
+msgid "too many instruments!##sgda0"
+msgstr "слишком много инструментов!"
+
+#: src/gui/doAction.cpp:731
+#, fuzzy
+msgid "too many instruments!##sgda1"
+msgstr "слишком много инструментов!"
+
+#: src/gui/doAction.cpp:837 src/gui/doAction.cpp:951
+#, fuzzy
+msgid "too many wavetables!##sgda0"
+msgstr "слишком много волновых таблиц!"
+
+#: src/gui/doAction.cpp:855 src/gui/doAction.cpp:969
+#, fuzzy
+msgid "too many wavetables!##sgda1"
+msgstr "слишком много волновых таблиц!"
+
+#: src/gui/doAction.cpp:1043
+#, fuzzy
+msgid "too many samples!##sgda0"
+msgstr "слишком много сэмплов!"
+
+#: src/gui/doAction.cpp:1063
+#, fuzzy
+msgid "too many samples!##sgda1"
+msgstr "слишком много сэмплов!"
+
+#: src/gui/doAction.cpp:1268
+#, fuzzy
+msgid "couldn't paste! make sure your sample is 8 or 16-bit.##sgda"
+msgstr ""
+"Не получилось вставить сэмпл! убедитесь, что это 8- или 16-битный сэмпл."
+
+#: src/gui/doAction.cpp:1738
+#, fuzzy
+msgid "too many instruments!##sgda2"
+msgstr "слишком много инструментов!"
+
+#: src/gui/doAction.cpp:1773
+#, fuzzy
+msgid "select at least one sample!##sgda"
+msgstr "выберите хотя бы один сэмпл!"
+
+#: src/gui/doAction.cpp:1775
+#, fuzzy
+msgid "maximum size is 256 samples!##sgda"
+msgstr "максимальный размер равен 256 сэмплам!"
+
+#: src/gui/doAction.cpp:1779
+#, fuzzy
+msgid "too many wavetables!##sgda2"
+msgstr "слишком много волновых таблиц!"
 
 #: src/gui/editControls.cpp:47 src/gui/gui.cpp:2757 src/gui/sampleEdit.cpp:1749
 msgid "cut"
@@ -5567,6 +5703,10 @@ msgstr ""
 msgid "clear"
 msgstr "удалить"
 
+#: src/gui/editControls.cpp:238
+msgid "Mobile Edit###MobileEdit"
+msgstr "Мобильное меню редактирования###MobileEdit"
+
 #: src/gui/editControls.cpp:333
 msgid "Mobile Controls"
 msgstr ""
@@ -5623,6 +5763,11 @@ msgstr ""
 msgid "Save as..."
 msgstr "Сохранить как..."
 
+#: src/gui/editControls.cpp:517
+#, fuzzy
+msgid "Legacy .dmf##sgec"
+msgstr ".dmf (legacy)"
+
 #: src/gui/editControls.cpp:524 src/gui/exportOptions.cpp:119
 #: src/gui/exportOptions.cpp:221 src/gui/exportOptions.cpp:250
 #: src/gui/exportOptions.cpp:323 src/gui/exportOptions.cpp:384
@@ -5647,8 +5792,8 @@ msgid "Subsongs"
 msgstr "Подпесни"
 
 #: src/gui/editControls.cpp:544 src/gui/guiConst.cpp:239
-#: src/gui/guiConst.cpp:588 src/gui/speed.cpp:32 src/gui/speed.cpp:102
-#: src/gui/sysConf.cpp:2194
+#: src/gui/guiConst.cpp:588 src/gui/inst/gb.cpp:208 src/gui/speed.cpp:32
+#: src/gui/speed.cpp:102 src/gui/sysConf.cpp:2194
 msgid "Speed"
 msgstr "Скорость"
 
@@ -5957,7 +6102,8 @@ msgstr "Частота квантования"
 msgid "Channels in file"
 msgstr "Каналов аудио в файле"
 
-#: src/gui/exportOptions.cpp:71 src/gui/settings.cpp:946
+#: src/gui/exportOptions.cpp:71 src/gui/inst/fzt.cpp:846
+#: src/gui/settings.cpp:946
 msgid "Loops"
 msgstr "Циклы"
 
@@ -5975,6 +6121,10 @@ msgstr ""
 #: src/gui/waveEdit.cpp:1121
 msgid "Invert"
 msgstr "Инвертировать"
+
+#: src/gui/exportOptions.cpp:100
+msgid "Channel Selection##sgeo"
+msgstr ""
 
 #: src/gui/exportOptions.cpp:134
 msgid "select at least one channel"
@@ -6092,6 +6242,36 @@ msgstr "Частота движка (Гц)"
 msgid "optimize size"
 msgstr "оптимизировать размер"
 
+#: src/gui/exportOptions.cpp:259
+#, fuzzy
+msgid "DefleMask file (1.1.3+)##sgeo"
+msgstr "Файл DefleMask (1.0/legacy)"
+
+#: src/gui/exportOptions.cpp:262
+#, fuzzy
+msgid "Cancel##sgeo4"
+msgstr "Отмена"
+
+#: src/gui/exportOptions.cpp:265
+#, fuzzy
+msgid "Export##sgeo4"
+msgstr "Экспорт###Export"
+
+#: src/gui/exportOptions.cpp:274
+#, fuzzy
+msgid "DefleMask file (1.0/legacy)##sgeo"
+msgstr "Файл DefleMask (1.0/legacy)"
+
+#: src/gui/exportOptions.cpp:277
+#, fuzzy
+msgid "Cancel##sgeo5"
+msgstr "Отмена"
+
+#: src/gui/exportOptions.cpp:280
+#, fuzzy
+msgid "Export##sgeo5"
+msgstr "Экспорт###Export"
+
 #: src/gui/exportOptions.cpp:289
 msgid "for use with TIunA driver. outputs asm source."
 msgstr ""
@@ -6134,6 +6314,47 @@ msgstr ""
 "созданных во время проигрыаания трека.\n"
 "\n"
 "используйте только при разработке!"
+
+#: src/gui/exportOptions.cpp:421 src/gui/exportOptions.cpp:441
+#: src/gui/exportOptions.cpp:484
+#, fuzzy
+msgid "Cancel##sgeo9"
+msgstr "Отмена"
+
+#: src/gui/exportOptions.cpp:424 src/gui/exportOptions.cpp:500
+#, fuzzy
+msgid "Export##sgeo9"
+msgstr "Экспорт###Export"
+
+#: src/gui/exportOptions.cpp:444
+#, fuzzy
+msgid "Export##sgeo7"
+msgstr "Экспорт###Export"
+
+#: src/gui/exportOptions.cpp:460
+#, fuzzy
+msgid "loop##sgeo0"
+msgstr "Открыть файл"
+
+#: src/gui/exportOptions.cpp:462
+#, fuzzy
+msgid "loop trail:##sgeo"
+msgstr "маркер конца цикла:"
+
+#: src/gui/exportOptions.cpp:464
+#, fuzzy
+msgid "auto-detect##sgeo"
+msgstr "автоматически"
+
+#: src/gui/exportOptions.cpp:467
+#, fuzzy
+msgid "add one loop##sgeo1"
+msgstr "добавить один цикл"
+
+#: src/gui/exportOptions.cpp:470
+#, fuzzy
+msgid "custom##sgeo"
+msgstr "пользовательский"
 
 #: src/gui/exportOptions.cpp:510 src/gui/settings.cpp:1254
 #: src/gui/settings.cpp:4001
@@ -6297,6 +6518,7 @@ msgid "Effect"
 msgstr "Эффект"
 
 #: src/gui/findReplace.cpp:725 src/gui/findReplace.cpp:1003
+#: src/gui/inst/fzt.cpp:624 src/gui/inst/fzt.cpp:714 src/gui/inst/fzt.cpp:726
 #: src/gui/settings.cpp:2313
 msgid "Value"
 msgstr "Параметр"
@@ -6401,6 +6623,11 @@ msgstr "паттерны"
 #: src/gui/grooves.cpp:132
 msgid "remove"
 msgstr "удалить"
+
+#: src/gui/gui.cpp:85
+#, c-format
+msgid "Instrument %d"
+msgstr "Инструмент %d"
 
 #: src/gui/gui.cpp:1126 src/gui/gui.cpp:1130
 msgid "the song is over!"
@@ -6591,6 +6818,16 @@ msgstr "текстовый файл"
 #: src/gui/gui.cpp:1953
 msgid "binary file"
 msgstr "бинарный файл"
+
+#: src/gui/gui.cpp:1962
+#, fuzzy
+msgid "Export FZT module"
+msgstr "экспорт модуля Furnace..."
+
+#: src/gui/gui.cpp:1963
+#, fuzzy
+msgid "FZT module"
+msgstr "Источник звука FZT"
 
 #: src/gui/gui.cpp:1970 src/gui/gui.cpp:5495
 msgid "Coming soon!"
@@ -6956,6 +7193,10 @@ msgstr "расширить трек"
 msgid "find/replace"
 msgstr "найти/заменить"
 
+#: src/gui/gui.cpp:3115
+msgid "clone pattern"
+msgstr "клонировать паттерн"
+
 #: src/gui/gui.cpp:3122 src/gui/gui.cpp:5905 src/gui/gui.cpp:7657
 #, c-format
 msgid "could NOT save layout! %s"
@@ -7054,6 +7295,16 @@ msgstr "экспорт аудио..."
 msgid "export VGM..."
 msgstr "экспорт VGM..."
 
+#: src/gui/gui.cpp:4257
+#, fuzzy
+msgid "export .dmf (1.1.3+)...0"
+msgstr "экспорт .dmf (1.1.3+)..."
+
+#: src/gui/gui.cpp:4260
+#, fuzzy
+msgid "export .dmf (1.0/legacy)...0"
+msgstr "экспорт .dmf (1.0/legacy)..."
+
 #: src/gui/gui.cpp:4268 src/gui/gui.cpp:4317
 msgid "export ZSM..."
 msgstr "экспорт ZSM..."
@@ -7073,6 +7324,16 @@ msgstr "экспорт потока команд..."
 #: src/gui/gui.cpp:4291 src/gui/gui.cpp:4340
 msgid "export .dmf..."
 msgstr ""
+
+#: src/gui/gui.cpp:4304
+#, fuzzy
+msgid "export .dmf (1.1.3+)...1"
+msgstr "экспорт .dmf (1.1.3+)..."
+
+#: src/gui/gui.cpp:4308
+#, fuzzy
+msgid "export .dmf (1.0/legacy)...1"
+msgstr "экспорт .dmf (1.0/legacy)..."
 
 #: src/gui/gui.cpp:4345
 msgid "export..."
@@ -7556,7 +7817,7 @@ msgstr ""
 msgid "...but you haven't selected an instrument!"
 msgstr "...но вы не выбрали инструмент!"
 
-#: src/gui/gui.cpp:5341
+#: src/gui/gui.cpp:5341 src/gui/gui.cpp:5377
 msgid "there were some errors while loading wavetables:\n"
 msgstr "при загрузке волновых таблиц возникли следующие ошибки:\n"
 
@@ -7564,6 +7825,10 @@ msgstr "при загрузке волновых таблиц возникли �
 #, c-format
 msgid "cannot load wavetable! (%s)"
 msgstr ""
+
+#: src/gui/gui.cpp:5386 src/gui/gui.cpp:5397
+msgid "cannot load wavetable! ("
+msgstr "не могу загрузить волновую таблицу! ("
 
 #: src/gui/gui.cpp:5425
 msgid "...but you haven't selected a wavetable!"
@@ -7720,7 +7985,7 @@ msgstr "слишком много инструментов!"
 msgid "Drum Kit"
 msgstr ""
 
-#: src/gui/gui.cpp:6260
+#: src/gui/gui.cpp:6260 src/gui/gui.cpp:6289
 msgid "too many wavetables!"
 msgstr "слишком много волновых таблиц!"
 
@@ -7767,6 +8032,11 @@ msgstr "Обратный порядок битов"
 #: src/gui/gui.cpp:6606
 msgid "Error! No string provided!"
 msgstr "Ошибка! Не предоставлена строка!"
+
+#: src/gui/gui.cpp:6639
+#, c-format
+msgid "%.0fµs"
+msgstr "%.0f мс"
 
 #: src/gui/gui.cpp:6927
 msgid "it appears I couldn't load these fonts. any setting you can check?"
@@ -7911,12 +8181,13 @@ msgstr "наилучший"
 msgid "Invalid"
 msgstr "Недейств."
 
-#: src/gui/guiConst.cpp:234 src/gui/settings.cpp:4088
+#: src/gui/guiConst.cpp:234 src/gui/inst/fzt.cpp:1001 src/gui/inst/gb.cpp:355
+#: src/gui/settings.cpp:4088
 msgid "Pitch"
 msgstr "Частота"
 
-#: src/gui/guiConst.cpp:236 src/gui/mixer.cpp:279 src/gui/settings.cpp:1140
-#: src/gui/userPresets.cpp:427
+#: src/gui/guiConst.cpp:236 src/gui/inst/gb.cpp:358 src/gui/mixer.cpp:279
+#: src/gui/settings.cpp:1140 src/gui/userPresets.cpp:427
 msgid "Panning"
 msgstr "Панорамирование"
 
@@ -8839,8 +9110,9 @@ msgstr "Открыть файл"
 msgid "export .dmp..."
 msgstr "экспорт .dmp..."
 
-#: src/gui/insEdit.cpp:118 src/gui/sampleEdit.cpp:501 src/gui/settings.cpp:1666
-#: src/gui/settings.cpp:2311 src/gui/settings.cpp:6972
+#: src/gui/insEdit.cpp:118 src/gui/inst/fzt.cpp:252 src/gui/sampleEdit.cpp:501
+#: src/gui/settings.cpp:1666 src/gui/settings.cpp:2311
+#: src/gui/settings.cpp:6972
 msgid "Type"
 msgstr "Тип"
 
@@ -8913,6 +9185,4881 @@ msgstr "Минимум"
 msgid "Max"
 msgstr "Максимум"
 
+#: src/gui/inst/adpcma.cpp:34
+msgid "Macros##sgiPCMA"
+msgstr ""
+
+#: src/gui/inst/adpcma.cpp:36
+#, fuzzy
+msgid "Volume##sgiPCMA"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/adpcma.cpp:37
+#, fuzzy
+msgid "Global Volume##sgiPCMA"
+msgstr "Глобальная громкость"
+
+#: src/gui/inst/adpcma.cpp:38
+#, fuzzy
+msgid "Panning##sgiPCMA"
+msgstr "Панорамирование"
+
+#: src/gui/inst/adpcma.cpp:39
+#, fuzzy
+msgid "Phase Reset##sgiPCMA"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/adpcmb.cpp:34
+msgid "Macros##sgiPCMB"
+msgstr ""
+
+#: src/gui/inst/adpcmb.cpp:36
+#, fuzzy
+msgid "Volume##sgiPCMB"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/adpcmb.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiPCMB"
+msgstr "Арпеджио"
+
+#: src/gui/inst/adpcmb.cpp:38
+msgid "Pitch##sgiPCMB"
+msgstr ""
+
+#: src/gui/inst/adpcmb.cpp:39
+#, fuzzy
+msgid "Panning##sgiPCMB"
+msgstr "Панорамирование"
+
+#: src/gui/inst/adpcmb.cpp:40
+#, fuzzy
+msgid "Phase Reset##sgiPCMB"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/amiga.cpp:39
+msgid "Macros##sgiSAMPLE"
+msgstr ""
+
+#: src/gui/inst/amiga.cpp:41
+#, fuzzy
+msgid "Volume##sgiSAMPLE"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/amiga.cpp:42
+msgid "Arpeggio##sgiSAMPLE"
+msgstr ""
+
+#: src/gui/inst/amiga.cpp:43
+msgid "Pitch##sgiSAMPLE"
+msgstr ""
+
+#: src/gui/inst/amiga.cpp:59
+msgid "Panning##sgiSAMPLE"
+msgstr ""
+
+#: src/gui/inst/amiga.cpp:63
+#, fuzzy
+msgid "Panning (left)##sgiSAMPLE"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/amiga.cpp:68
+msgid "Surround##sgiSAMPLE"
+msgstr ""
+
+#: src/gui/inst/amiga.cpp:72
+#, fuzzy
+msgid "Panning (right)##sgiSAMPLE"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/amiga.cpp:75
+#, fuzzy
+msgid "Waveform##sgiSAMPLE"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/amiga.cpp:77
+#, fuzzy
+msgid "Phase Reset##sgiSAMPLE"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/ay.cpp:34
+#, fuzzy
+msgid "Macros##sgiAY"
+msgstr "Макросы"
+
+#: src/gui/inst/ay.cpp:36
+#, fuzzy
+msgid "Volume##sgiAY"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/ay.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiAY"
+msgstr "Арпеджио"
+
+#: src/gui/inst/ay.cpp:38
+msgid "Pitch##sgiAY"
+msgstr ""
+
+#: src/gui/inst/ay.cpp:42
+#, fuzzy
+msgid "Noise Freq##sgiAY"
+msgstr "Частота шума"
+
+#: src/gui/inst/ay.cpp:43
+#, fuzzy
+msgid "Waveform##sgiAY"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/ay.cpp:46
+#, fuzzy
+msgid "Raw Period##sgiAY"
+msgstr "Период (регистровое знач.)"
+
+#: src/gui/inst/ay.cpp:47
+#, fuzzy
+msgid "Raw Envelope Period##sgiAY"
+msgstr "Период огиб. (регистровое знач.)"
+
+#: src/gui/inst/ay.cpp:49
+#, fuzzy
+msgid "Phase Reset##sgiAY"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/ay.cpp:51
+#, fuzzy
+msgid "Envelope##sgiAY"
+msgstr "Огибающая"
+
+#: src/gui/inst/ay.cpp:53
+#, fuzzy
+msgid "AutoEnv Num##sgiAY"
+msgstr "Множ. част. авто-огиб."
+
+#: src/gui/inst/ay.cpp:54
+#, fuzzy
+msgid "AutoEnv Den##sgiAY"
+msgstr "Дел. част. авто-огиб."
+
+#: src/gui/inst/ay8930.cpp:34
+msgid "Macros##sgi8930"
+msgstr ""
+
+#: src/gui/inst/ay8930.cpp:36
+#, fuzzy
+msgid "Volume##sgi8930"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/ay8930.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgi8930"
+msgstr "Арпеджио"
+
+#: src/gui/inst/ay8930.cpp:38
+msgid "Pitch##sgi8930"
+msgstr ""
+
+#: src/gui/inst/ay8930.cpp:42
+#, fuzzy
+msgid "Noise Freq##sgi8930"
+msgstr "Частота шума"
+
+#: src/gui/inst/ay8930.cpp:43
+#, fuzzy
+msgid "Waveform##sgi8930"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/ay8930.cpp:46
+#, fuzzy
+msgid "Raw Period##sgi8930"
+msgstr "Период (регистровое знач.)"
+
+#: src/gui/inst/ay8930.cpp:47
+#, fuzzy
+msgid "Raw Envelope Period##sgi8930"
+msgstr "Период огиб. (регистровое знач.)"
+
+#: src/gui/inst/ay8930.cpp:49
+#, fuzzy
+msgid "Phase Reset##sgi8930"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/ay8930.cpp:51
+msgid "Duty##sgi8930"
+msgstr ""
+
+#: src/gui/inst/ay8930.cpp:52
+#, fuzzy
+msgid "Envelope##sgi8930"
+msgstr "Огибающая"
+
+#: src/gui/inst/ay8930.cpp:54
+#, fuzzy
+msgid "AutoEnv Num##sgi8930"
+msgstr "Множ. част. авто-огиб."
+
+#: src/gui/inst/ay8930.cpp:55
+#, fuzzy
+msgid "AutoEnv Den##sgi8930"
+msgstr "Дел. част. авто-огиб."
+
+#: src/gui/inst/ay8930.cpp:57
+#, fuzzy
+msgid "Noise AND Mask##sgi8930"
+msgstr "Маска шума (И)"
+
+#: src/gui/inst/ay8930.cpp:58
+#, fuzzy
+msgid "Noise OR Mask##sgi8930"
+msgstr "Маска шума (ИЛИ)"
+
+#: src/gui/inst/beeper.cpp:32
+#, fuzzy
+msgid "Macros##sgiB"
+msgstr "Макросы"
+
+#: src/gui/inst/beeper.cpp:34
+#, fuzzy
+msgid "Volume##sgiB"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/beeper.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiB"
+msgstr "Арпеджио"
+
+#: src/gui/inst/beeper.cpp:36
+#, fuzzy
+msgid "Pitch##sgiB"
+msgstr "Частота"
+
+#: src/gui/inst/beeper.cpp:38
+#, fuzzy
+msgid "Pulse Width##sgiB"
+msgstr "Скважность"
+
+#: src/gui/inst/bifurcator.cpp:32
+msgid "Macros##sgiBIFUR"
+msgstr ""
+
+#: src/gui/inst/bifurcator.cpp:37
+#, fuzzy
+msgid "Volume##sgiBIFUR"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/bifurcator.cpp:38
+#, fuzzy
+msgid "Arpeggio##sgiBIFUR"
+msgstr "Арпеджио"
+
+#: src/gui/inst/bifurcator.cpp:39
+msgid "Pitch##sgiBIFUR"
+msgstr ""
+
+#: src/gui/inst/bifurcator.cpp:41
+#, fuzzy
+msgid "Parameter##sgiBIFUR"
+msgstr "Параметр"
+
+#: src/gui/inst/bifurcator.cpp:43
+#, fuzzy
+msgid "Panning (left)##sgiBIFUR"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/bifurcator.cpp:44
+#, fuzzy
+msgid "Panning (right)##sgiBIFUR"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/bifurcator.cpp:46
+#, fuzzy
+msgid "Load Value##sgiBIFUR"
+msgstr "Загрузить значение"
+
+#: src/gui/inst/c140.cpp:34
+msgid "Macros##sgiC140"
+msgstr ""
+
+#: src/gui/inst/c140.cpp:39
+#, fuzzy
+msgid "Volume##sgiC140"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/c140.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiC140"
+msgstr "Арпеджио"
+
+#: src/gui/inst/c140.cpp:41
+msgid "Pitch##sgiC140"
+msgstr ""
+
+#: src/gui/inst/c140.cpp:43
+#, fuzzy
+msgid "Panning (left)##sgiC140"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/c140.cpp:44
+#, fuzzy
+msgid "Panning (right)##sgiC140"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/c140.cpp:46
+#, fuzzy
+msgid "Phase Reset##sgiC140"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/c219.cpp:34
+msgid "Macros##sgiC219"
+msgstr ""
+
+#: src/gui/inst/c219.cpp:39
+#, fuzzy
+msgid "Volume##sgiC219"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/c219.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiC219"
+msgstr "Арпеджио"
+
+#: src/gui/inst/c219.cpp:41
+msgid "Pitch##sgiC219"
+msgstr ""
+
+#: src/gui/inst/c219.cpp:42
+#, fuzzy
+msgid "Control##sgiC219"
+msgstr "Значение контроллера"
+
+#: src/gui/inst/c219.cpp:44
+#, fuzzy
+msgid "Panning (left)##sgiC219"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/c219.cpp:45
+#, fuzzy
+msgid "Panning (right)##sgiC219"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/c219.cpp:47
+#, fuzzy
+msgid "Phase Reset##sgiC219"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/c64.cpp:35
+#, fuzzy
+msgid "Waveform##sgiC640"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/c64.cpp:38
+msgid "tri##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:45
+msgid "saw##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:52
+msgid "pulse##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:59
+msgid "noise##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:77
+msgid "A##sgiC640"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:78
+msgid "A##sgiC641"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:80
+msgid "D##sgiC640"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:81
+msgid "D##sgiC641"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:83
+msgid "S##sgiC640"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:84
+msgid "S##sgiC641"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:86
+msgid "R##sgiC640"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:87
+msgid "R##sgiC641"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:89
+#, fuzzy
+msgid "Envelope##sgiC640"
+msgstr "Огибающая"
+
+#: src/gui/inst/c64.cpp:90
+#, fuzzy
+msgid "Envelope##sgiC641"
+msgstr "Огибающая"
+
+#: src/gui/inst/c64.cpp:107
+msgid "Duty##sgiC640"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:109
+msgid "Reset duty on new note##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:115
+#, fuzzy
+msgid "Ring Modulation##sgiC64"
+msgstr "Кольцевая модуляция"
+
+#: src/gui/inst/c64.cpp:120
+#, fuzzy
+msgid "Oscillator Sync##sgiC64"
+msgstr "Синхронизация осцилляторов"
+
+#: src/gui/inst/c64.cpp:125
+#, fuzzy
+msgid "Enable filter##sgiC64"
+msgstr "Включить фильтр"
+
+#: src/gui/inst/c64.cpp:126
+#, fuzzy
+msgid "Initialize filter##sgiC64"
+msgstr "Инициализировать фильтр"
+
+#: src/gui/inst/c64.cpp:128
+msgid "Cutoff##sgiC640"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:129
+#, fuzzy
+msgid "Resonance##sgiC640"
+msgstr "Резонанс (добротность)"
+
+#: src/gui/inst/c64.cpp:132
+#, fuzzy
+msgid "Filter Mode##sgiC640"
+msgstr "Тип фильтра"
+
+#: src/gui/inst/c64.cpp:135
+msgid "low##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:142
+msgid "band##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:149
+msgid "high##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:156
+#, fuzzy
+msgid "ch3off##sgiC64"
+msgstr "выкл. 3 кан."
+
+#: src/gui/inst/c64.cpp:162
+#, fuzzy
+msgid "Absolute Cutoff Macro##sgiC64"
+msgstr "Абсолютный макрос частоты среза"
+
+#: src/gui/inst/c64.cpp:167
+#, fuzzy
+msgid "Absolute Duty Macro##sgiC64"
+msgstr "Абсолютный макрос скважности"
+
+#: src/gui/inst/c64.cpp:172
+#, fuzzy
+msgid "Don't test before new note##sgiC64"
+msgstr "Не включать тестовый бит перед новой нотой"
+
+#: src/gui/inst/c64.cpp:176
+#, fuzzy
+msgid "Macros##sgiC64"
+msgstr "Макросы"
+
+#: src/gui/inst/c64.cpp:201
+#, fuzzy
+msgid "Volume##sgiC64"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/c64.cpp:202
+#, fuzzy
+msgid "Arpeggio##sgiC64"
+msgstr "Арпеджио"
+
+#: src/gui/inst/c64.cpp:203
+msgid "Pitch##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:204
+msgid "Duty##sgiC641"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:205
+#, fuzzy
+msgid "Waveform##sgiC641"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/c64.cpp:207
+msgid "Cutoff##sgiC641"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:208
+#, fuzzy
+msgid "Filter Mode##sgiC641"
+msgstr "Тип фильтра"
+
+#: src/gui/inst/c64.cpp:209
+#, fuzzy
+msgid "Filter Toggle##sgiC64"
+msgstr "Вкл./выкл. фильтр"
+
+#: src/gui/inst/c64.cpp:210
+#, fuzzy
+msgid "Resonance##sgiC641"
+msgstr "Резонанс (добротность)"
+
+#: src/gui/inst/c64.cpp:212
+#, fuzzy
+msgid "Special##sgiC64"
+msgstr "Особые"
+
+#: src/gui/inst/c64.cpp:213
+#, fuzzy
+msgid "Attack##sgiC64"
+msgstr "Атака"
+
+#: src/gui/inst/c64.cpp:214
+msgid "Decay##sgiC64"
+msgstr ""
+
+#: src/gui/inst/c64.cpp:215
+#, fuzzy
+msgid "Sustain##sgiC64"
+msgstr "Сустейн"
+
+#: src/gui/inst/c64.cpp:216
+#, fuzzy
+msgid "Release##sgiC64"
+msgstr "Релиз"
+
+#: src/gui/inst/dave.cpp:32
+msgid "Macros##sgiDAVE"
+msgstr ""
+
+#: src/gui/inst/dave.cpp:37
+#, fuzzy
+msgid "Volume##sgiDAVE"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/dave.cpp:38
+#, fuzzy
+msgid "Arpeggio##sgiDAVE"
+msgstr "Арпеджио"
+
+#: src/gui/inst/dave.cpp:39
+msgid "Pitch##sgiDAVE"
+msgstr ""
+
+#: src/gui/inst/dave.cpp:40
+#, fuzzy
+msgid "Noise Freq##sgiDAVE"
+msgstr "Частота шума"
+
+#: src/gui/inst/dave.cpp:42
+#, fuzzy
+msgid "Waveform##sgiDAVE"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/dave.cpp:44
+#, fuzzy
+msgid "Panning (left)##sgiDAVE"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/dave.cpp:45
+#, fuzzy
+msgid "Panning (right)##sgiDAVE"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/dave.cpp:47
+#, fuzzy
+msgid "Phase Reset##sgiDAVE"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/dave.cpp:49
+#, fuzzy
+msgid "Control##sgiDAVE"
+msgstr "Значение контроллера"
+
+#: src/gui/inst/dave.cpp:51
+#, fuzzy
+msgid "Raw Frequency##sgiDAVE"
+msgstr "Частота (регистровое знач.)"
+
+#: src/gui/inst/es5503.cpp:35
+#, fuzzy
+msgid "Oscillator mode:##sgi5503"
+msgstr "Режим осциллятора:"
+
+#: src/gui/inst/es5503.cpp:41
+#, fuzzy
+msgid "Freerun##sgi5503"
+msgstr "Свободн. (зацикл.)"
+
+#: src/gui/inst/es5503.cpp:50
+#, fuzzy
+msgid "Oneshot##sgi5503"
+msgstr "Однократн."
+
+#: src/gui/inst/es5503.cpp:59
+#, fuzzy
+msgid "Sync/AM##sgi5503"
+msgstr "Синхр./АМ"
+
+#: src/gui/inst/es5503.cpp:68
+msgid "Swap##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:77
+#, fuzzy
+msgid "Virtual softpan channel##sgi5503"
+msgstr "Виртуальный стерео-канал"
+
+#: src/gui/inst/es5503.cpp:80
+#, fuzzy
+msgid ""
+"Combines odd and next even channel into one virtual channel with 256-step "
+"panning.\n"
+"Instrument, volume and effects need to be placed on the odd channel (e.g. "
+"1st, 3rd, 5th etc.)##sgi5503"
+msgstr ""
+"Использует нечётный и следующий за ним чётный канал для создания "
+"виртуального канала с возможностью плавного панорамирования (256 шагов).\n"
+"Ноты, инструменты, команды громкости и эффекты необходимо размещать в "
+"нечётном канале (1-ый, 3-ий и т.д.)"
+
+#: src/gui/inst/es5503.cpp:83
+#, fuzzy
+msgid "Phase reset on key-on##sgi5503"
+msgstr "Сброс фазы в начале ноты"
+
+#: src/gui/inst/es5503.cpp:91
+msgid "Macros##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:96
+#, fuzzy
+msgid "Volume##sgi5503"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/es5503.cpp:97
+#, fuzzy
+msgid "Arpeggio##sgi5503"
+msgstr "Арпеджио"
+
+#: src/gui/inst/es5503.cpp:98
+msgid "Pitch##sgi5503"
+msgstr ""
+
+#: src/gui/inst/es5503.cpp:99
+#, fuzzy
+msgid "Osc. mode##sgi5503"
+msgstr "Реж. осцилл."
+
+#: src/gui/inst/es5503.cpp:103
+#, fuzzy
+msgid "Panning (left)##sgi5503"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/es5503.cpp:104
+#, fuzzy
+msgid "Panning (right)##sgi5503"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/es5503.cpp:109
+#, fuzzy
+msgid "Waveform##sgi5503"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/es5503.cpp:112
+#, fuzzy
+msgid "Phase Reset##sgi5503"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/es5503.cpp:114
+#, fuzzy
+msgid "Wave/sample pos.##sgi5503"
+msgstr "Полож. волны/сэмпла в памяти"
+
+#: src/gui/inst/es5503.cpp:115
+#, fuzzy
+msgid "Osc. output##sgi5503"
+msgstr "Вывод осцилл."
+
+#: src/gui/inst/es5506.cpp:289
+#, fuzzy
+msgid "Filter Mode##sgiOTTO0"
+msgstr "Тип фильтра"
+
+#: src/gui/inst/es5506.cpp:292
+#, fuzzy
+msgid "Filter K1##sgiOTTO0"
+msgstr "K1 фильтра"
+
+#: src/gui/inst/es5506.cpp:294
+#, fuzzy
+msgid "Filter K2##sgiOTTO0"
+msgstr "K2 фильтра"
+
+#: src/gui/inst/es5506.cpp:298
+#, fuzzy
+msgid "Envelope length##sgiOTTO"
+msgstr "Длина огиб."
+
+#: src/gui/inst/es5506.cpp:301
+#, fuzzy
+msgid "Left Volume Ramp##sgiOTTO"
+msgstr "Нараст. лев. громк."
+
+#: src/gui/inst/es5506.cpp:303
+#, fuzzy
+msgid "Right Volume Ramp##sgiOTTO"
+msgstr "Нараст. прав. громк."
+
+#: src/gui/inst/es5506.cpp:306
+#, fuzzy
+msgid "Filter K1 Ramp##sgiOTTO"
+msgstr "Нараст. K1 фильтра"
+
+#: src/gui/inst/es5506.cpp:308
+#, fuzzy
+msgid "Filter K2 Ramp##sgiOTTO"
+msgstr "Нараст. K2 фильтра"
+
+#: src/gui/inst/es5506.cpp:311
+#, fuzzy
+msgid "K1 Ramp Slowdown##sgiOTTO"
+msgstr "Замедл. нараст. K1"
+
+#: src/gui/inst/es5506.cpp:313
+#, fuzzy
+msgid "K2 Ramp Slowdown##sgiOTTO"
+msgstr "Замедл. нараст. K2"
+
+#: src/gui/inst/es5506.cpp:323
+msgid "Macros##sgiOTTO"
+msgstr ""
+
+#: src/gui/inst/es5506.cpp:338
+#, fuzzy
+msgid "Volume##sgiOTTO"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/es5506.cpp:339
+#, fuzzy
+msgid "Arpeggio##sgiOTTO"
+msgstr "Арпеджио"
+
+#: src/gui/inst/es5506.cpp:340
+msgid "Pitch##sgiOTTO"
+msgstr ""
+
+#: src/gui/inst/es5506.cpp:341
+#, fuzzy
+msgid "Panning (left)##sgiOTTO"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/es5506.cpp:342
+#, fuzzy
+msgid "Panning (right)##sgiOTTO"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/es5506.cpp:343
+#, fuzzy
+msgid "Phase Reset##sgiOTTO"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/es5506.cpp:345
+#, fuzzy
+msgid "Filter Mode##sgiOTTO1"
+msgstr "Тип фильтра"
+
+#: src/gui/inst/es5506.cpp:346
+#, fuzzy
+msgid "Filter K1##sgiOTTO1"
+msgstr "K1 фильтра"
+
+#: src/gui/inst/es5506.cpp:347
+#, fuzzy
+msgid "Filter K2##sgiOTTO1"
+msgstr "K2 фильтра"
+
+#: src/gui/inst/es5506.cpp:349
+#, fuzzy
+msgid "Outputs##sgiOTTO"
+msgstr "Выводы"
+
+#: src/gui/inst/es5506.cpp:350
+#, fuzzy
+msgid "Control##sgiOTTO"
+msgstr "Значение контроллера"
+
+#: src/gui/inst/esfm.cpp:187
+#, fuzzy
+msgid "Other##sgiESFM0"
+msgstr "Открыть файл"
+
+#: src/gui/inst/esfm.cpp:188
+#, fuzzy
+msgid "Other##sgiESFM1"
+msgstr "Открыть файл"
+
+#: src/gui/inst/esfm.cpp:194
+#, fuzzy
+msgid "Envelope##sgiESFM0"
+msgstr "Огибающая"
+
+#: src/gui/inst/esfm.cpp:195
+#, fuzzy
+msgid "Envelope##sgiESFM1"
+msgstr "Огибающая"
+
+#: src/gui/inst/esfm.cpp:252
+#, c-format
+msgid "op%d##sgiESFM0"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:254
+#, c-format
+msgid "OP%d##sgiESFM1"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:338
+#, fuzzy
+msgid "Detune in semitones##sgiESFM0"
+msgstr "Расстройка в полутонах"
+
+#: src/gui/inst/esfm.cpp:346
+#, fuzzy
+msgid ""
+"Detune in fractions of semitone.\n"
+"128 = +1 semitone, -128 = -1 semitone.##sgiESFM0"
+msgstr ""
+"Расстройка в долях полутона.\n"
+"128 = +1 полутон, -128 = -1 полутон."
+
+#: src/gui/inst/esfm.cpp:377
+#, fuzzy
+msgid "If operator outputs sound, enable left channel output.##sgiESFM0"
+msgstr "Включить вывод звука в левый канал."
+
+#: src/gui/inst/esfm.cpp:387
+#, fuzzy
+msgid "If operator outputs sound, enable right channel output.##sgiESFM0"
+msgstr "Включить вывод звука в правый канал."
+
+#: src/gui/inst/esfm.cpp:433
+msgid "Block##sgiESFM0"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:439
+msgid "FreqNum##sgiESFM0"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:544
+#, c-format
+msgid "op%d##sgiESFM2"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:584
+#, fuzzy, c-format
+msgid "Operator %d##sgiESFM"
+msgstr "Оператор %d"
+
+#: src/gui/inst/esfm.cpp:618
+#, fuzzy
+msgid "Waveform##sgiESFM"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/esfm.cpp:620
+#, fuzzy
+msgid "Envelope##sgiESFM"
+msgstr "Огибающая"
+
+#: src/gui/inst/esfm.cpp:703
+msgid "Blk##sgiESFM"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:706
+msgid "Block##sgiESFM1"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:718
+msgid "F##sgiESFM"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:721
+#, fuzzy
+msgid "Frequency (F-Num)##sgiESFM"
+msgstr "Частота (F-Num)"
+
+#: src/gui/inst/esfm.cpp:742
+#, fuzzy
+msgid "Detune in semitones##sgiESFM1"
+msgstr "Расстройка в полутонах"
+
+#: src/gui/inst/esfm.cpp:750
+#, fuzzy
+msgid ""
+"Detune in fractions of semitone.\n"
+"128 = +1 semitone, -128 = -1 semitone.##sgiESFM1"
+msgstr ""
+"Расстройка в долях полутона.\n"
+"128 = +1 полутон, -128 = -1 полутон."
+
+#: src/gui/inst/esfm.cpp:771
+#, fuzzy
+msgid "If operator outputs sound, enable left channel output.##sgiESFM1"
+msgstr "Включить вывод звука в левый канал."
+
+#: src/gui/inst/esfm.cpp:781
+#, fuzzy
+msgid "If operator outputs sound, enable right channel output.##sgiESFM1"
+msgstr "Включить вывод звука в правый канал."
+
+#: src/gui/inst/esfm.cpp:940
+#, c-format
+msgid "op%d##sgiESFM3"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:982
+#, c-format
+msgid "OP%d##sgiESFM4"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1129
+msgid "Block##sgiESFM2"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1141
+msgid "FreqNum##sgiESFM1"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1151
+#, fuzzy
+msgid "Detune in semitones##sgiESFM2"
+msgstr "Расстройка в полутонах"
+
+#: src/gui/inst/esfm.cpp:1162
+#, fuzzy
+msgid ""
+"Detune in fractions of semitone.\n"
+"128 = +1 semitone, -128 = -1 semitone.##sgiESFM2"
+msgstr ""
+"Расстройка в долях полутона.\n"
+"128 = +1 полутон, -128 = -1 полутон."
+
+#: src/gui/inst/esfm.cpp:1228
+#, fuzzy
+msgid "If operator outputs sound, enable left channel output.##sgiESFM2"
+msgstr "Включить вывод звука в левый канал."
+
+#: src/gui/inst/esfm.cpp:1237
+#, fuzzy
+msgid "If operator outputs sound, enable right channel output.##sgiESFM2"
+msgstr "Включить вывод звука в правый канал."
+
+#: src/gui/inst/esfm.cpp:1277
+#, fuzzy, c-format
+msgid "OP%d Macros##sgiESFM"
+msgstr "Макросы ОП%d"
+
+#: src/gui/inst/esfm.cpp:1300
+msgid "Block##sgiESFM3"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1301
+msgid "FreqNum##sgiESFM2"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1306
+#, fuzzy
+msgid "Op. Arpeggio##sgiESFM"
+msgstr "Арпеджио оператора"
+
+#: src/gui/inst/esfm.cpp:1307
+#, fuzzy
+msgid "Op. Pitch##sgiESFM"
+msgstr "Частота оператора"
+
+#: src/gui/inst/esfm.cpp:1316
+#, fuzzy
+msgid "Op. Panning##sgiESFM"
+msgstr "Панорамирование оператора"
+
+#: src/gui/inst/esfm.cpp:1324
+msgid "Macros##sgiESFM"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1328
+#, fuzzy
+msgid "Volume##sgiESFM"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/esfm.cpp:1329
+#, fuzzy
+msgid "Arpeggio##sgiESFM"
+msgstr "Арпеджио"
+
+#: src/gui/inst/esfm.cpp:1330
+msgid "Pitch##sgiESFM"
+msgstr ""
+
+#: src/gui/inst/esfm.cpp:1331
+#, fuzzy
+msgid "OP4 Noise Mode##sgiESFM"
+msgstr "Режим шума ОП4"
+
+#: src/gui/inst/esfm.cpp:1332
+#, fuzzy
+msgid "Panning##sgiESFM"
+msgstr "Панорамирование"
+
+#: src/gui/inst/esfm.cpp:1334
+#, fuzzy
+msgid "Phase Reset##sgiESFM"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/fds.cpp:63
+#, fuzzy
+msgid "Compatibility mode##sgiFDS"
+msgstr "Режим совместимости"
+
+#: src/gui/inst/fds.cpp:66
+#, fuzzy
+msgid ""
+"only use for compatibility with .dmf modules!\n"
+"- initializes modulation table with first wavetable\n"
+"- does not alter modulation parameters on instrument change##sgiFDS"
+msgstr ""
+"только для совместимости с модулями .dmf!\n"
+"- инициализирует волновую таблицу модулятора первой волновой таблицей\n"
+"- не изменяет параметры модуляции при смене инструмента"
+
+#: src/gui/inst/fds.cpp:68
+#, fuzzy
+msgid "Modulation depth##sgiFDS"
+msgstr "Глубина модуляции"
+
+#: src/gui/inst/fds.cpp:73
+#, fuzzy
+msgid "Modulation speed##sgiFDS"
+msgstr "Скорость модуляции"
+
+#: src/gui/inst/fds.cpp:78
+#, fuzzy
+msgid "Modulation table##sgiFDS"
+msgstr "Волновая таблица модуляции"
+
+#: src/gui/inst/fds.cpp:134
+#, fuzzy
+msgid "Macros##sgiFDS"
+msgstr "Макросы"
+
+#: src/gui/inst/fds.cpp:136
+#, fuzzy
+msgid "Volume##sgiFDS"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/fds.cpp:137
+#, fuzzy
+msgid "Arpeggio##sgiFDS"
+msgstr "Арпеджио"
+
+#: src/gui/inst/fds.cpp:138
+msgid "Pitch##sgiFDS"
+msgstr ""
+
+#: src/gui/inst/fds.cpp:139
+#, fuzzy
+msgid "Waveform##sgiFDS"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/fds.cpp:140
+#, fuzzy
+msgid "Mod Depth##sgiFDS"
+msgstr "Глуб. мод."
+
+#: src/gui/inst/fds.cpp:141
+#, fuzzy
+msgid "Mod Speed##sgiFDS"
+msgstr "Скор. мод."
+
+#: src/gui/inst/fds.cpp:142
+#, fuzzy
+msgid "Mod Position##sgiFDS"
+msgstr "Полож. мод."
+
+#: src/gui/inst/fmEnvUtil.cpp:1021
+#, fuzzy
+msgid ""
+"left click to restart\n"
+"middle click to pause\n"
+"right click to see algorithm##sgifmeu"
+msgstr ""
+"ЛКМ для перезапуска\n"
+"Нажмите колёсико, чтобы поставить на паузу\n"
+"ПКМ для переключения на визуализацию алгоритма"
+
+#: src/gui/inst/fmEnvUtil.cpp:1031
+#, fuzzy
+msgid ""
+"left click to configure TL scaling\n"
+"right click to see FM preview##sgifmeu"
+msgstr ""
+"ЛКМ для конфигурации масштабирования громкости операторов\n"
+"ПКМ для переключения на превью FM-сигнала"
+
+#: src/gui/inst/fmEnvUtil.cpp:1035
+#, fuzzy
+msgid "right click to see FM preview##sgifmeu"
+msgstr "ПКМ для переключения на превью FM-сигнала"
+
+#: src/gui/inst/fmEnvUtil.cpp:1050
+#, fuzzy
+msgid "operator level changes with volume?##sgifmeu"
+msgstr "Громкость оператора зависит от общей громкости?"
+
+#: src/gui/inst/fmEnvUtil.cpp:1059
+msgid "AUTO##OPKVS"
+msgstr "АВТО##OPKVS"
+
+#: src/gui/inst/fmEnvUtil.cpp:1061
+msgid "NO##OPKVS"
+msgstr "НЕТ##OPKVS"
+
+#: src/gui/inst/fmEnvUtil.cpp:1063
+msgid "YES##OPKVS"
+msgstr "ДА##OPKVS"
+
+#: src/gui/inst/fmEnvUtil.h:143
+#, fuzzy
+msgid "(copying)##sgifmeh"
+msgstr "(копирование)"
+
+#: src/gui/inst/fmEnvUtil.h:145
+#, fuzzy
+msgid "(swapping)##sgifmeh"
+msgstr "(замена)"
+
+#: src/gui/inst/fmEnvUtil.h:149
+#, fuzzy
+msgid ""
+"- drag to swap operator\n"
+"- shift-drag to copy operator##sgifmeh"
+msgstr ""
+"- перетащите, чтобы поменять настройки операторов местами\n"
+"- перетащите с зажатой клавишей SHIFT, чтобы скопировать настройки оператора"
+
+#: src/gui/inst/fzt.cpp:103
+msgid "Base note"
+msgstr "Базовая нота"
+
+#: src/gui/inst/fzt.cpp:123
+msgid "Finetune"
+msgstr "Расстройка"
+
+#: src/gui/inst/fzt.cpp:138
+msgid "Slide speed"
+msgstr "Скорость слайда"
+
+#: src/gui/inst/fzt.cpp:142
+msgid "Set PW"
+msgstr "Уст. скважн."
+
+#: src/gui/inst/fzt.cpp:148
+msgid "Set pulse width on keydown"
+msgstr "Установить скважность на новой ноте"
+
+#: src/gui/inst/fzt.cpp:155
+msgid "Initial pulse width"
+msgstr "Начальная скважность"
+
+#: src/gui/inst/fzt.cpp:160
+msgid "Set cutoff"
+msgstr "Устан. част. среза"
+
+#: src/gui/inst/fzt.cpp:166
+msgid "Set filter cutoff on keydown"
+msgstr "Установить частоту среза фильтра на новой ноте"
+
+#: src/gui/inst/fzt.cpp:172 src/gui/inst/fzt.cpp:1004 src/gui/inst/gb.cpp:357
+#: src/gui/settings.cpp:4015 src/gui/settings.cpp:4070
+#: src/gui/settings.cpp:4238 src/gui/waveEdit.cpp:755
+msgid "Waveform"
+msgstr "Волна"
+
+#: src/gui/inst/fzt.cpp:176 src/gui/inst/fzt.cpp:792
+msgid "noise"
+msgstr "шум"
+
+#: src/gui/inst/fzt.cpp:184 src/gui/inst/fzt.cpp:800
+msgid "pulse"
+msgstr "прямоуг."
+
+#: src/gui/inst/fzt.cpp:192 src/gui/inst/fzt.cpp:808
+msgid "triangle"
+msgstr "треуг."
+
+#: src/gui/inst/fzt.cpp:200 src/gui/inst/fzt.cpp:816
+msgid "saw"
+msgstr "пила"
+
+#: src/gui/inst/fzt.cpp:208 src/gui/inst/fzt.cpp:824
+msgid "metal"
+msgstr "\"металл.\""
+
+#: src/gui/inst/fzt.cpp:216 src/gui/inst/fzt.cpp:832
+msgid "sine"
+msgstr "синус"
+
+#: src/gui/inst/fzt.cpp:233
+msgid "Enable filter"
+msgstr "Включить фильтр"
+
+#: src/gui/inst/fzt.cpp:241 src/gui/inst/fzt.cpp:1006
+msgid "Cutoff"
+msgstr "Частота среза"
+
+#: src/gui/inst/fzt.cpp:247 src/gui/inst/fzt.cpp:1009
+#: src/gui/sampleEdit.cpp:1174
+msgid "Resonance"
+msgstr "Резонанс (добротность)"
+
+#: src/gui/inst/fzt.cpp:285
+msgid "Enable ring modulation"
+msgstr "Включить кольцевую модуляцию"
+
+#: src/gui/inst/fzt.cpp:293 src/gui/inst/fzt.cpp:1015
+#, fuzzy
+msgid "Ring mod source"
+msgstr "Источник кольцевой модуляции"
+
+#: src/gui/inst/fzt.cpp:297
+msgid "FF = self-modulation"
+msgstr "FF = самомодуляция"
+
+#: src/gui/inst/fzt.cpp:303
+msgid "Enable hard sync"
+msgstr "Включить синхронизацию осцилляторов"
+
+#: src/gui/inst/fzt.cpp:311 src/gui/inst/fzt.cpp:1018
+msgid "Hard sync source"
+msgstr "Источник синхронизации"
+
+#: src/gui/inst/fzt.cpp:315
+msgid "FF = self-sync"
+msgstr "FF = самосинхронизация"
+
+#: src/gui/inst/fzt.cpp:330
+msgid "Retrigger on slide"
+msgstr "Перезапуск на слайде"
+
+#: src/gui/inst/fzt.cpp:336
+msgid ""
+"Restart instrument and envelope even if slide command (03xx) is placed with "
+"the note."
+msgstr ""
+"Перезапустить инструмент и огибающую, даже если у ноты стоит эффект слайда "
+"(03xx)."
+
+#: src/gui/inst/fzt.cpp:342
+msgid "Sync osc. on keydown"
+msgstr "Синхр. осц. на новой ноте"
+
+#: src/gui/inst/fzt.cpp:348
+msgid ""
+"Reset phase of oscillator each time new note is played.\n"
+"Does not happen when slide (03xx) or legato command is placed."
+msgstr ""
+"Сбросить фазу осциллятора на каждой новой ноте.\n"
+"Не выполняется при наличии команды слайда (03xx) или легато."
+
+#: src/gui/inst/fzt.cpp:365
+msgid "Vibrato"
+msgstr "Вибрато"
+
+#: src/gui/inst/fzt.cpp:373
+#, fuzzy
+msgid "Speed0"
+msgstr "Скорость"
+
+#: src/gui/inst/fzt.cpp:379
+#, fuzzy
+msgid "Depth0"
+msgstr "Глубина"
+
+#: src/gui/inst/fzt.cpp:385
+#, fuzzy
+msgid "Delay0"
+msgstr "Задержка"
+
+#: src/gui/inst/fzt.cpp:391
+msgid "PWM"
+msgstr "ШИМ"
+
+#: src/gui/inst/fzt.cpp:399
+#, fuzzy
+msgid "Speed1"
+msgstr "Скорость"
+
+#: src/gui/inst/fzt.cpp:405
+#, fuzzy
+msgid "Depth1"
+msgstr "Глубина"
+
+#: src/gui/inst/fzt.cpp:411
+#, fuzzy
+msgid "Delay1"
+msgstr "Задержка"
+
+#: src/gui/inst/fzt.cpp:430 src/gui/inst/fzt.cpp:431
+msgid "A"
+msgstr "А"
+
+#: src/gui/inst/fzt.cpp:433 src/gui/inst/fzt.cpp:434
+msgid "D"
+msgstr "С"
+
+#: src/gui/inst/fzt.cpp:436 src/gui/inst/fzt.cpp:437
+msgid "S"
+msgstr "С"
+
+#: src/gui/inst/fzt.cpp:439 src/gui/inst/fzt.cpp:440
+msgid "R"
+msgstr "Р"
+
+#: src/gui/inst/fzt.cpp:442 src/gui/inst/fzt.cpp:443
+msgid "VOL"
+msgstr "ГР"
+
+#: src/gui/inst/fzt.cpp:445 src/gui/inst/fzt.cpp:446 src/gui/settings.cpp:4057
+msgid "Envelope"
+msgstr "Огибающая"
+
+#: src/gui/inst/fzt.cpp:468 src/gui/inst/fzt.cpp:488
+msgid "Instrument program"
+msgstr "Программа инструмента"
+
+#: src/gui/inst/fzt.cpp:472
+#, fuzzy
+msgid "Program period22"
+msgstr "Период программы"
+
+#: src/gui/inst/fzt.cpp:480
+msgid "Do not restart instrument program on keydown"
+msgstr "Не перезапускать программу инструмента на новой ноте"
+
+#: src/gui/inst/fzt.cpp:500 src/gui/inst/gb.cpp:111
+msgid "Tick"
+msgstr "Шаг"
+
+#: src/gui/inst/fzt.cpp:502 src/gui/inst/gb.cpp:113
+msgid "Command"
+msgstr "Команда"
+
+#: src/gui/inst/fzt.cpp:504 src/gui/inst/gb.cpp:115
+msgid "Move/Remove"
+msgstr "Перем./Удал."
+
+#: src/gui/inst/fzt.cpp:506
+msgid "Unite"
+msgstr "Объед."
+
+#: src/gui/inst/fzt.cpp:651
+msgid "Semitones"
+msgstr "Полутонов"
+
+#: src/gui/inst/fzt.cpp:659
+msgid "First external arpeggio note"
+msgstr "Первая внешняя нота арпеджио"
+
+#: src/gui/inst/fzt.cpp:673
+#, fuzzy
+msgid "Second external arpeggio note1"
+msgstr "Вторая внешняя нота арпеджио"
+
+#: src/gui/inst/fzt.cpp:690
+#, fuzzy
+msgid "Speed2"
+msgstr "Скорость"
+
+#: src/gui/inst/fzt.cpp:696
+#, fuzzy
+msgid "Depth11"
+msgstr "Глубина"
+
+#: src/gui/inst/fzt.cpp:735
+#, fuzzy
+msgid "Up2"
+msgstr "Вверх"
+
+#: src/gui/inst/fzt.cpp:741
+#, fuzzy
+msgid "Down11"
+msgstr "Вниз"
+
+#: src/gui/inst/fzt.cpp:767
+msgid "Source channel"
+msgstr "Канал-источник"
+
+#: src/gui/inst/fzt.cpp:775
+msgid "Source is self"
+msgstr "Текущий канал является источником"
+
+#: src/gui/inst/fzt.cpp:855
+msgid "Step to jump to"
+msgstr "Шаг программы, на который совершается переход"
+
+#: src/gui/inst/fzt.cpp:863
+msgid "No operation"
+msgstr "Ничего не делать"
+
+#: src/gui/inst/fzt.cpp:868
+msgid "Program end"
+msgstr "Конец программы"
+
+#: src/gui/inst/fzt.cpp:876
+msgid "Execute next command at the same tick"
+msgstr "Выполнить следующую команду в этом же шаге"
+
+#: src/gui/inst/fzt.cpp:995 src/gui/inst/gb.cpp:345
+msgid "Macros"
+msgstr "Макросы"
+
+#: src/gui/inst/fzt.cpp:997
+msgid ""
+"Warning! Macros are NOT supported by FZT file format! Do not use them if you "
+"want to export .fzt file!"
+msgstr ""
+
+#: src/gui/inst/fzt.cpp:1000 src/gui/inst/gb.cpp:354
+msgid "Arpeggio"
+msgstr "Арпеджио"
+
+#: src/gui/inst/fzt.cpp:1002 src/gui/waveEdit.cpp:622
+msgid "Duty"
+msgstr "Скважность"
+
+#: src/gui/inst/fzt.cpp:1007
+msgid "Filter Mode"
+msgstr "Тип фильтра"
+
+#: src/gui/inst/fzt.cpp:1008
+msgid "Filter Toggle"
+msgstr "Вкл./выкл. фильтр"
+
+#: src/gui/inst/fzt.cpp:1011 src/gui/inst/gb.cpp:360
+msgid "Phase Reset"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/fzt.cpp:1012
+msgid "Envelope Reset/Key Control"
+msgstr "Упр. огибающей"
+
+#: src/gui/inst/fzt.cpp:1014
+msgid "Ring mod toggle"
+msgstr "Кольц. мод. вкл./выкл."
+
+#: src/gui/inst/fzt.cpp:1017
+msgid "Hard sync toggle"
+msgstr "Синхр. осц. вкл./выкл."
+
+#: src/gui/inst/fzt.cpp:1020 src/gui/sysConf.cpp:722
+msgid "Attack"
+msgstr "Атака"
+
+#: src/gui/inst/fzt.cpp:1021 src/gui/sysConf.cpp:727
+msgid "Decay"
+msgstr "Спад"
+
+#: src/gui/inst/fzt.cpp:1022 src/gui/sysConf.cpp:732
+msgid "Sustain"
+msgstr "Сустейн"
+
+#: src/gui/inst/fzt.cpp:1023 src/gui/settings.cpp:4059 src/gui/sysConf.cpp:737
+msgid "Release"
+msgstr "Релиз"
+
+#: src/gui/inst/ga20.cpp:34
+msgid "Macros##sgiGA20"
+msgstr ""
+
+#: src/gui/inst/ga20.cpp:36
+#, fuzzy
+msgid "Volume##sgiGA20"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/ga20.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiGA20"
+msgstr "Арпеджио"
+
+#: src/gui/inst/ga20.cpp:38
+msgid "Pitch##sgiGA20"
+msgstr ""
+
+#: src/gui/inst/ga20.cpp:40
+#, fuzzy
+msgid "Phase Reset##sgiGA20"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/gb.cpp:34
+msgid "Use software envelope"
+msgstr "Использовать программную огибающую громкости"
+
+#: src/gui/inst/gb.cpp:35
+msgid "Initialize envelope on every note"
+msgstr "Инициализировать огибающую на каждой ноте"
+
+#: src/gui/inst/gb.cpp:52
+#, fuzzy
+msgid "Volume##sgiGB0"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/gb.cpp:59 src/gui/settings.cpp:867
+msgid "Length"
+msgstr "Длина вибрации"
+
+#: src/gui/inst/gb.cpp:66
+#, fuzzy
+msgid "Sound Length##sgiGB0"
+msgstr "Длина звука"
+
+#: src/gui/inst/gb.cpp:69
+msgid "Infinity"
+msgstr "Бесконечность"
+
+#: src/gui/inst/gb.cpp:73
+msgid "Direction"
+msgstr "Направление"
+
+#: src/gui/inst/gb.cpp:76
+#, fuzzy
+msgid "Up##sgiGB0"
+msgstr "Открыть файл"
+
+#: src/gui/inst/gb.cpp:82
+#, fuzzy
+msgid "Down##sgiGB0"
+msgstr "Открыть файл"
+
+#: src/gui/inst/gb.cpp:100
+msgid "Hardware Sequence"
+msgstr "Аппаратная последовательность"
+
+#: src/gui/inst/gb.cpp:171
+msgid "Env Length"
+msgstr "Длина огибающей"
+
+#: src/gui/inst/gb.cpp:175
+msgid "Sound Length"
+msgstr "Длина звука"
+
+#: src/gui/inst/gb.cpp:179 src/gui/inst/gb.cpp:213
+msgid "Up"
+msgstr "Вверх"
+
+#: src/gui/inst/gb.cpp:185 src/gui/inst/gb.cpp:219
+msgid "Down"
+msgstr "Вниз"
+
+#: src/gui/inst/gb.cpp:204
+msgid "Shift"
+msgstr "На сколько"
+
+#: src/gui/inst/gb.cpp:237
+msgid "Ticks"
+msgstr "Шагов"
+
+#: src/gui/inst/gb.cpp:259
+msgid "Position"
+msgstr "Положение"
+
+#: src/gui/inst/gb.cpp:356
+msgid "Duty/Noise"
+msgstr "Скважность/режим шума"
+
+#: src/gui/inst/gbadma.cpp:39
+msgid "Macros##sgiGBADMA"
+msgstr ""
+
+#: src/gui/inst/gbadma.cpp:43
+msgid "Volume##sgiGBADMA"
+msgstr ""
+
+#: src/gui/inst/gbadma.cpp:44
+msgid "Arpeggio##sgiGBADMA"
+msgstr ""
+
+#: src/gui/inst/gbadma.cpp:45
+msgid "Pitch##sgiGBADMA"
+msgstr ""
+
+#: src/gui/inst/gbadma.cpp:46
+#, fuzzy
+msgid "Waveform##sgiGBADMA"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/gbadma.cpp:47
+msgid "Panning##sgiGBADMA"
+msgstr ""
+
+#: src/gui/inst/gbadma.cpp:49
+#, fuzzy
+msgid "Phase Reset##sgiGBADMA"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/gbaminmod.cpp:39
+msgid "Macros##sgiGBAMINMOD"
+msgstr ""
+
+#: src/gui/inst/gbaminmod.cpp:41
+msgid "Volume##sgiGBAMINMOD"
+msgstr ""
+
+#: src/gui/inst/gbaminmod.cpp:42
+msgid "Arpeggio##sgiGBAMINMOD"
+msgstr ""
+
+#: src/gui/inst/gbaminmod.cpp:43
+msgid "Pitch##sgiGBAMINMOD"
+msgstr ""
+
+#: src/gui/inst/gbaminmod.cpp:44
+#, fuzzy
+msgid "Waveform##sgiGBAMINMOD"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/gbaminmod.cpp:45
+#, fuzzy
+msgid "Panning (left)##sgiGBAMINMOD"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/gbaminmod.cpp:46
+#, fuzzy
+msgid "Panning (right)##sgiGBAMINMOD"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/gbaminmod.cpp:48
+msgid "Special##sgiGBAMINMOD"
+msgstr ""
+
+#: src/gui/inst/gbaminmod.cpp:50
+#, fuzzy
+msgid "Phase Reset##sgiGBAMINMOD"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/k007232.cpp:34
+#, fuzzy
+msgid "Macros##sgiK00"
+msgstr "Макросы"
+
+#: src/gui/inst/k007232.cpp:39
+#, fuzzy
+msgid "Volume##sgiK00"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/k007232.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiK00"
+msgstr "Арпеджио"
+
+#: src/gui/inst/k007232.cpp:41
+msgid "Pitch##sgiK00"
+msgstr ""
+
+#: src/gui/inst/k007232.cpp:43
+#, fuzzy
+msgid "Panning (left)##sgiK00"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/k007232.cpp:44
+#, fuzzy
+msgid "Panning (right)##sgiK00"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/k007232.cpp:46
+#, fuzzy
+msgid "Phase Reset##sgiK00"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/k053260.cpp:34
+#, fuzzy
+msgid "Macros##sgiK05"
+msgstr "Макросы"
+
+#: src/gui/inst/k053260.cpp:39
+#, fuzzy
+msgid "Volume##sgiK05"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/k053260.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiK05"
+msgstr "Арпеджио"
+
+#: src/gui/inst/k053260.cpp:41
+msgid "Pitch##sgiK05"
+msgstr ""
+
+#: src/gui/inst/k053260.cpp:43
+#, fuzzy
+msgid "Panning##sgiK05"
+msgstr "Панорамирование"
+
+#: src/gui/inst/k053260.cpp:45
+#, fuzzy
+msgid "Phase Reset##sgiK05"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/macroDraw.cpp:268
+msgid "Bottom##sgimcd0"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:277
+#, fuzzy
+msgid "Top##sgimcd0"
+msgstr "Открыть файл"
+
+#: src/gui/inst/macroDraw.cpp:291
+#, fuzzy
+msgid "Attack##sgimcd"
+msgstr "Атака"
+
+#: src/gui/inst/macroDraw.cpp:300
+#, fuzzy
+msgid "Sustain##sgimcd"
+msgstr "Сустейн"
+
+#: src/gui/inst/macroDraw.cpp:311
+msgid "Hold##sgimcd"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:320
+#, fuzzy
+msgid "SusTime##sgimcd"
+msgstr "Время сустейна"
+
+#: src/gui/inst/macroDraw.cpp:331
+msgid "Decay##sgimcd"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:340
+#, fuzzy
+msgid "SusDecay##sgimcd"
+msgstr "Спад сустейна"
+
+#: src/gui/inst/macroDraw.cpp:374
+#, fuzzy
+msgid "Release##sgimcd"
+msgstr "Релиз"
+
+#: src/gui/inst/macroDraw.cpp:396
+msgid "Bottom##sgimcd1"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:405
+#, fuzzy
+msgid "Top##sgimcd1"
+msgstr "Открыть файл"
+
+#: src/gui/inst/macroDraw.cpp:419
+#, fuzzy
+msgid "Speed##sgimcd"
+msgstr "Скорости"
+
+#: src/gui/inst/macroDraw.cpp:428
+msgid "Phase##sgimcd"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:438
+#, fuzzy
+msgid "Shape##sgimcd"
+msgstr "Волны"
+
+#: src/gui/inst/macroDraw.cpp:512
+#, fuzzy
+msgid "Macro type: Sequence##sgimcd"
+msgstr "Тип макроса: последовательность"
+
+#: src/gui/inst/macroDraw.cpp:515
+#, fuzzy
+msgid "Macro type: ADSR##sgimcd"
+msgstr "Тип макроса: ADSR-огибающая"
+
+#: src/gui/inst/macroDraw.cpp:518
+#, fuzzy
+msgid "Macro type: LFO##sgimcd"
+msgstr "Тип макроса: ГНЧ"
+
+#: src/gui/inst/macroDraw.cpp:521
+#, fuzzy
+msgid "Macro type: What's going on here?##sgimcd"
+msgstr "Тип макроса: Что здесь происходит?"
+
+#: src/gui/inst/macroDraw.cpp:534
+#, fuzzy
+msgid "Delay/Step Length##sgimcd"
+msgstr "Задержка/длина шага"
+
+#: src/gui/inst/macroDraw.cpp:537
+msgid "Step Length (ticks)##IMacroSpeed"
+msgstr "Длина шага (в шагах движка трекера)##IMacroSpeed"
+
+#: src/gui/inst/macroDraw.cpp:541
+msgid "Delay##IMacroDelay"
+msgstr "Задержка##IMacroDelay"
+
+#: src/gui/inst/macroDraw.cpp:554
+#, fuzzy
+msgid "Release mode: Active (jump to release pos)##sgimcd"
+msgstr "Тип релиза: активный (прыгнуть на позицию релиза)"
+
+#: src/gui/inst/macroDraw.cpp:556
+#, fuzzy
+msgid "Release mode: Passive (delayed release)##sgimcd"
+msgstr "Тип релиза: пассивный (отложенный релиз)"
+
+#: src/gui/inst/macroDraw.cpp:679
+msgid "Tabs##sgimcd"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:812
+#, fuzzy
+msgid "Length##sgimcd"
+msgstr "Длина вибрации"
+
+#: src/gui/inst/macroDraw.cpp:823
+#, fuzzy
+msgid "StepLen##sgimcd"
+msgstr "Дл. шага"
+
+#: src/gui/inst/macroDraw.cpp:831
+msgid "Delay##sgimcd"
+msgstr ""
+
+#: src/gui/inst/macroDraw.cpp:855
+#, fuzzy
+msgid "The heck? No, this isn't even working correctly...##sgimcd"
+msgstr "Что за?.. Нет, оно ведь работает неправильно..."
+
+#: src/gui/inst/macroDraw.cpp:858
+#, fuzzy
+msgid "The only problem with that selectedMacro is that it's a bug...##sgimcd"
+msgstr "Единственная проблема с тем selectedMacro в том, что это не сбой..."
+
+#: src/gui/inst/macroDraw.cpp:867
+#, fuzzy
+msgid "Single (combo box)##sgimcd"
+msgstr "Один (выпадающий список)"
+
+#: src/gui/inst/macroDrawUtil.cpp:82 src/gui/inst/macroDrawUtil.cpp:88
+#, fuzzy
+msgid "exponential##sgmu"
+msgstr "экспоненциальное"
+
+#: src/gui/inst/macroDrawUtil.cpp:85 src/gui/inst/macroDrawUtil.cpp:91
+#, fuzzy
+msgid "linear##sgmu"
+msgstr "линейная"
+
+#: src/gui/inst/macroDrawUtil.cpp:93
+#, fuzzy
+msgid "direct##sgmu"
+msgstr "прямое"
+
+#: src/gui/inst/macroDrawUtil.cpp:104
+#, fuzzy
+msgid "HP/K2, HP/K2##sgmu"
+msgstr "ФВЧ/K2, ФВЧ/K2"
+
+#: src/gui/inst/macroDrawUtil.cpp:107
+#, fuzzy
+msgid "HP/K2, LP/K1##sgmu"
+msgstr "ФВЧ/K2, ФНЧ/K1"
+
+#: src/gui/inst/macroDrawUtil.cpp:110
+#, fuzzy
+msgid "LP/K2, LP/K2##sgmu"
+msgstr "ФНЧ/K2, ФНЧ/K2"
+
+#: src/gui/inst/macroDrawUtil.cpp:113
+#, fuzzy
+msgid "LP/K2, LP/K1##sgmu"
+msgstr "ФНЧ/K2, ФНЧ/K1"
+
+#: src/gui/inst/macroDrawUtil.cpp:128
+msgid "Saw##sgmu"
+msgstr ""
+
+#: src/gui/inst/macroDrawUtil.cpp:130
+#, fuzzy
+msgid "Square##sgmu"
+msgstr "Меандр"
+
+#: src/gui/inst/macroDrawUtil.cpp:132
+#, fuzzy
+msgid "Triangle##sgmu"
+msgstr "Треуг. волна"
+
+#: src/gui/inst/macroDrawUtil.cpp:134
+#, fuzzy
+msgid "Random##sgmu"
+msgstr "Шум"
+
+#: src/gui/inst/mikey.cpp:34
+msgid "Macros##sgiLYNX"
+msgstr ""
+
+#: src/gui/inst/mikey.cpp:39
+#, fuzzy
+msgid "Volume##sgiLYNX"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/mikey.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiLYNX"
+msgstr "Арпеджио"
+
+#: src/gui/inst/mikey.cpp:41
+msgid "Pitch##sgiLYNX"
+msgstr ""
+
+#: src/gui/inst/mikey.cpp:45
+#, fuzzy
+msgid "Duty/Int##sgiLYNX"
+msgstr "Скважность/инт."
+
+#: src/gui/inst/mikey.cpp:48
+#, fuzzy
+msgid "Panning (left)##sgiLYNX"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/mikey.cpp:49
+#, fuzzy
+msgid "Panning (right)##sgiLYNX"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/mikey.cpp:51
+#, fuzzy
+msgid "Phase Reset##sgiLYNX"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/mikey.cpp:53
+#, fuzzy
+msgid "Load LFSR##sgiLYNX"
+msgstr "Загрузить в РСЛОС"
+
+#: src/gui/inst/msm5232.cpp:34
+msgid "Macros##sgi5232"
+msgstr ""
+
+#: src/gui/inst/msm5232.cpp:36
+#, fuzzy
+msgid "Volume##sgi5232"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/msm5232.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgi5232"
+msgstr "Арпеджио"
+
+#: src/gui/inst/msm5232.cpp:39
+#, fuzzy
+msgid "Group Ctrl##sgi5232"
+msgstr "Контроль группы"
+
+#: src/gui/inst/msm5232.cpp:40
+#, fuzzy
+msgid "Group Attack##sgi5232"
+msgstr "Атака группы"
+
+#: src/gui/inst/msm5232.cpp:41
+#, fuzzy
+msgid "Group Decay##sgi5232"
+msgstr "Спад группы"
+
+#: src/gui/inst/msm5232.cpp:42
+msgid "Noise##sgi5232"
+msgstr ""
+
+#: src/gui/inst/msm6258.cpp:34
+msgid "Macros##sgi6258"
+msgstr ""
+
+#: src/gui/inst/msm6258.cpp:36
+#, fuzzy
+msgid "Frequency Divider##sgi6258"
+msgstr "Делитель частоты"
+
+#: src/gui/inst/msm6258.cpp:37
+#, fuzzy
+msgid "Panning##sgi6258"
+msgstr "Панорамирование"
+
+#: src/gui/inst/msm6258.cpp:38
+#, fuzzy
+msgid "Phase Reset##sgi6258"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/msm6258.cpp:39
+#, fuzzy
+msgid "Clock Divider##sgi6258"
+msgstr "Делитель тактовой частоты"
+
+#: src/gui/inst/msm6295.cpp:34
+msgid "Macros##sgi6295"
+msgstr ""
+
+#: src/gui/inst/msm6295.cpp:36
+#, fuzzy
+msgid "Volume##sgi6295"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/msm6295.cpp:37
+#, fuzzy
+msgid "Frequency Divider##sgi6295"
+msgstr "Делитель частоты"
+
+#: src/gui/inst/msm6295.cpp:38
+#, fuzzy
+msgid "Phase Reset##sgi6295"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/multipcm.cpp:32
+msgid "MultiPCM##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:47
+msgid "AR##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:48
+msgid "AR##sgiMULPCM1"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:51
+#, fuzzy
+msgid "Attack Rate##sgiMULPCM"
+msgstr "Скорость атаки"
+
+#: src/gui/inst/multipcm.cpp:54
+msgid "D1R##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:55
+msgid "D1R##sgiMULPCM1"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:58
+#, fuzzy
+msgid "Decay 1 Rate##sgiMULPCM"
+msgstr "Скорость спада 1"
+
+#: src/gui/inst/multipcm.cpp:61
+msgid "DL##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:62
+msgid "DL##sgiMULPCM1"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:65
+#, fuzzy
+msgid "Decay Level##sgiMULPCM"
+msgstr "Уровень спада"
+
+#: src/gui/inst/multipcm.cpp:68
+msgid "D2R##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:69
+msgid "D2R##sgiMULPCM1"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:72
+#, fuzzy
+msgid "Decay 2 Rate##sgiMULPCM"
+msgstr "Скорость спада 2"
+
+#: src/gui/inst/multipcm.cpp:75
+msgid "RR##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:76
+msgid "RR##sgiMULPCM1"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:79
+#, fuzzy
+msgid "Release Rate##sgiMULPCM"
+msgstr "Скорость релиза"
+
+#: src/gui/inst/multipcm.cpp:82
+msgid "RC##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:83
+msgid "RC##sgiMULPCM1"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:86
+#, fuzzy
+msgid "Rate Correction##sgiMULPCM"
+msgstr "Коррекция скорости"
+
+#: src/gui/inst/multipcm.cpp:89
+msgid "Envelope##sgiMULPCM0"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:90
+#, fuzzy
+msgid "Envelope##sgiMULPCM1"
+msgstr "Огибающая"
+
+#: src/gui/inst/multipcm.cpp:116
+msgid "LFO Rate##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:118
+msgid "PM Depth##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:120
+msgid "AM Depth##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:128
+msgid "Macros##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:133
+#, fuzzy
+msgid "Volume##sgiMULPCM"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/multipcm.cpp:134
+msgid "Arpeggio##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:135
+msgid "Pitch##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:136
+msgid "Panning##sgiMULPCM"
+msgstr ""
+
+#: src/gui/inst/multipcm.cpp:138
+#, fuzzy
+msgid "Phase Reset##sgiMULPCM"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/n163.cpp:32
+#, fuzzy
+msgid "Namco 163##sgiN163"
+msgstr "Namco 163"
+
+#: src/gui/inst/n163.cpp:35
+#, fuzzy
+msgid "Load waveform##sgiN163"
+msgstr "Загрузить волну"
+
+#: src/gui/inst/n163.cpp:42
+#, fuzzy
+msgid ""
+"when enabled, a waveform will be loaded into RAM.\n"
+"when disabled, only the offset and length change.##sgiN163"
+msgstr ""
+"при включении этой опции олна будет загружена в ОЗУ.\n"
+"если опция выключена, меняться будут только смещение и длина волны."
+
+#: src/gui/inst/n163.cpp:47
+msgid "Waveform##WAVE"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/n163.cpp:56
+#, fuzzy
+msgid "Per-channel wave position/length##sgiN163"
+msgstr "Позиционирование и длина волны отдельно для каждого канала"
+
+#: src/gui/inst/n163.cpp:68
+msgid "Ch##sgiN163"
+msgstr ""
+
+#: src/gui/inst/n163.cpp:70
+#, fuzzy
+msgid "Position##sgiN163"
+msgstr "Положение"
+
+#: src/gui/inst/n163.cpp:72
+#, fuzzy
+msgid "Length##sgiN163"
+msgstr "Открыть файл"
+
+#: src/gui/inst/n163.cpp:107
+msgid "Position##WAVEPOS"
+msgstr "Положение##WAVEPOS"
+
+#: src/gui/inst/n163.cpp:112
+msgid "Length##WAVELEN"
+msgstr "Длина##WAVELEN"
+
+#: src/gui/inst/n163.cpp:124
+msgid "Macros##sgiN163"
+msgstr ""
+
+#: src/gui/inst/n163.cpp:126
+#, fuzzy
+msgid "Volume##sgiN163"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/n163.cpp:127
+#, fuzzy
+msgid "Arpeggio##sgiN163"
+msgstr "Арпеджио"
+
+#: src/gui/inst/n163.cpp:128
+msgid "Pitch##sgiN163"
+msgstr ""
+
+#: src/gui/inst/n163.cpp:129
+#, fuzzy
+msgid "Wave Pos##sgiN163"
+msgstr "Полож. волны"
+
+#: src/gui/inst/n163.cpp:130
+#, fuzzy
+msgid "Waveform##sgiN163"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/n163.cpp:131
+#, fuzzy
+msgid "Wave Length##sgiN163"
+msgstr "Длина волны"
+
+#: src/gui/inst/namco.cpp:34
+#, fuzzy
+msgid "Macros##sgiWSG"
+msgstr "Макросы"
+
+#: src/gui/inst/namco.cpp:39
+#, fuzzy
+msgid "Volume##sgiWSG"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/namco.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiWSG"
+msgstr "Арпеджио"
+
+#: src/gui/inst/namco.cpp:41
+msgid "Pitch##sgiWSG"
+msgstr ""
+
+#: src/gui/inst/namco.cpp:42
+msgid "Noise##sgiWSG"
+msgstr ""
+
+#: src/gui/inst/namco.cpp:43
+#, fuzzy
+msgid "Waveform##sgiWSG"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/namco.cpp:45
+#, fuzzy
+msgid "Panning (left)##sgiWSG"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/namco.cpp:46
+#, fuzzy
+msgid "Panning (right)##sgiWSG"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/nds.cpp:34
+#, fuzzy
+msgid "Macros##sgiNDS"
+msgstr "Макросы"
+
+#: src/gui/inst/nds.cpp:39
+#, fuzzy
+msgid "Volume##sgiNDS"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/nds.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiNDS"
+msgstr "Арпеджио"
+
+#: src/gui/inst/nds.cpp:41
+msgid "Pitch##sgiNDS"
+msgstr ""
+
+#: src/gui/inst/nds.cpp:42
+msgid "Duty##sgiNDS"
+msgstr ""
+
+#: src/gui/inst/nds.cpp:43
+#, fuzzy
+msgid "Panning##sgiNDS"
+msgstr "Панорамирование"
+
+#: src/gui/inst/nds.cpp:45
+#, fuzzy
+msgid "Phase Reset##sgiNDS"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/nes.cpp:34
+#, fuzzy
+msgid "Macros##sgiNES"
+msgstr "Макросы"
+
+#: src/gui/inst/nes.cpp:36
+#, fuzzy
+msgid "Volume##sgiNES"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/nes.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiNES"
+msgstr "Арпеджио"
+
+#: src/gui/inst/nes.cpp:38
+msgid "Pitch##sgiNES"
+msgstr ""
+
+#: src/gui/inst/nes.cpp:39
+#, fuzzy
+msgid "Duty/Noise##sgiNES"
+msgstr "Скважность/режим шума"
+
+#: src/gui/inst/nes.cpp:41
+#, fuzzy
+msgid "Phase Reset##sgiNES"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/opl.cpp:78
+msgid "4-op##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:87
+msgid "Drums##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:114
+#, fuzzy
+msgid "Fixed frequency mode##sgiOPL"
+msgstr "Режим фиксированной частоты"
+
+#: src/gui/inst/opl.cpp:117
+#, fuzzy
+msgid ""
+"when enabled, drums will be set to the specified frequencies, ignoring the "
+"note.##sgiOPL"
+msgstr ""
+"при включении режима ударные будут звучать на указанных частотах. Значения "
+"нот будут игнорироваться."
+
+#: src/gui/inst/opl.cpp:126
+msgid "Drum##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:128
+msgid "Block##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:130
+#, fuzzy
+msgid "FreqNum##sgiOPL"
+msgstr "Частота"
+
+#: src/gui/inst/opl.cpp:132
+msgid "Kick##sgiOPL0"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:133
+#, fuzzy
+msgid "Snare/Hi-hat##sgiOPL"
+msgstr "Рабочий барабан/хай-хэт"
+
+#: src/gui/inst/opl.cpp:134
+#, fuzzy
+msgid "Tom/Top##sgiOPL"
+msgstr "Там-там/тарелка"
+
+#: src/gui/inst/opl.cpp:212
+#, fuzzy
+msgid "Other##sgiOPL0"
+msgstr "Открыть файл"
+
+#: src/gui/inst/opl.cpp:213
+#, fuzzy
+msgid "Other##sgiOPL1"
+msgstr "Открыть файл"
+
+#: src/gui/inst/opl.cpp:222
+#, fuzzy
+msgid "Envelope##sgiOPL0"
+msgstr "Огибающая"
+
+#: src/gui/inst/opl.cpp:223
+#, fuzzy
+msgid "Envelope##sgiOPL1"
+msgstr "Огибающая"
+
+#: src/gui/inst/opl.cpp:287
+#, c-format
+msgid "op%d##sgiOPL0"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:296
+msgid "Kick##sgiOPL1"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:300
+msgid "Env##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:305
+#, c-format
+msgid "OP%d##sgiOPL1"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:399
+#, fuzzy
+msgid "OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL0"
+msgstr "Только OPL2/3 (последние 4 волны только для OPL3)"
+
+#: src/gui/inst/opl.cpp:441
+#, c-format
+msgid "op%d##sgiOPL2"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:495
+#, fuzzy, c-format
+msgid "Envelope 2 (kick only)##sgiOPL0"
+msgstr "Огибающая 2 (только бочка)"
+
+#: src/gui/inst/opl.cpp:499
+#, fuzzy, c-format
+msgid "Envelope##sgiOPL2"
+msgstr "Огибающая"
+
+#: src/gui/inst/opl.cpp:504
+#, fuzzy, c-format
+msgid "Operator %d##sgiOPL"
+msgstr "Оператор %d"
+
+#: src/gui/inst/opl.cpp:538
+#, fuzzy
+msgid "Waveform##sgiOPL"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/opl.cpp:540
+#, fuzzy
+msgid "Envelope##sgiOPL3"
+msgstr "Огибающая"
+
+#: src/gui/inst/opl.cpp:603
+#, fuzzy
+msgid "OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL1"
+msgstr "Только OPL2/3 (последние 4 волны только для OPL3)"
+
+#: src/gui/inst/opl.cpp:708
+#, c-format
+msgid "op%d##sgiOPL3"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:765
+#, fuzzy
+msgid "Envelope 2 (kick only)##sgiOPL1"
+msgstr "Огибающая 2 (только бочка)"
+
+#: src/gui/inst/opl.cpp:769
+#, fuzzy
+msgid "Envelope##sgiOPL4"
+msgstr "Огибающая"
+
+#: src/gui/inst/opl.cpp:774
+#, c-format
+msgid "OP%d##sgiOPL4"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:888
+#, fuzzy
+msgid "OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL2"
+msgstr "Только OPL2/3 (последние 4 волны только для OPL3)"
+
+#: src/gui/inst/opl.cpp:920
+#, fuzzy
+msgid "FM Macros##sgiOPL"
+msgstr "Макросы FM"
+
+#: src/gui/inst/opl.cpp:949
+#, fuzzy, c-format
+msgid "OP%d Macros##sgiOPL"
+msgstr "Макросы ОП%d"
+
+#: src/gui/inst/opl.cpp:978
+#, fuzzy
+msgid "Macros##sgiOPL"
+msgstr "Макросы"
+
+#: src/gui/inst/opl.cpp:982
+#, fuzzy
+msgid "Volume##sgiOPL"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/opl.cpp:983
+#, fuzzy
+msgid "Arpeggio##sgiOPL"
+msgstr "Арпеджио"
+
+#: src/gui/inst/opl.cpp:984
+msgid "Pitch##sgiOPL"
+msgstr ""
+
+#: src/gui/inst/opl.cpp:985
+#, fuzzy
+msgid "Panning##sgiOPL"
+msgstr "Панорамирование"
+
+#: src/gui/inst/opl.cpp:987
+#, fuzzy
+msgid "Phase Reset##sgiOPL"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/opll.cpp:131
+#, fuzzy, c-format
+msgid "%s name##sgiOPLL"
+msgstr "название %s"
+
+#: src/gui/inst/opll.cpp:169
+#, fuzzy
+msgid "Fixed frequency mode##sgiOPLL"
+msgstr "Режим фиксированной частоты"
+
+#: src/gui/inst/opll.cpp:172
+#, fuzzy
+msgid ""
+"when enabled, drums will be set to the specified frequencies, ignoring the "
+"note.##sgiOPLL"
+msgstr ""
+"при включении режима ударные будут звучать на указанных частотах. Значения "
+"нот будут игнорироваться."
+
+#: src/gui/inst/opll.cpp:182
+msgid "Drum##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:184
+msgid "Block##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:186
+#, fuzzy
+msgid "FreqNum##sgiOPLL"
+msgstr "Частота"
+
+#: src/gui/inst/opll.cpp:188
+msgid "Kick##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:189
+#, fuzzy
+msgid "Snare/Hi-hat##sgiOPLL"
+msgstr "Рабочий барабан/хай-хэт"
+
+#: src/gui/inst/opll.cpp:190
+#, fuzzy
+msgid "Tom/Top##sgiOPLL"
+msgstr "Там-там/тарелка"
+
+#: src/gui/inst/opll.cpp:200
+msgid "Volume##TL"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/opll.cpp:203
+#, fuzzy
+msgid ""
+"this volume slider only works in compatibility (non-drums) system.##sgiOPLL"
+msgstr ""
+"эта регулировка громкости работает только в совместимой (без ударных) "
+"системе."
+
+#: src/gui/inst/opll.cpp:315
+#, fuzzy
+msgid "Other##sgiOPLL0"
+msgstr "Открыть файл"
+
+#: src/gui/inst/opll.cpp:316
+#, fuzzy
+msgid "Other##sgiOPLL1"
+msgstr "Открыть файл"
+
+#: src/gui/inst/opll.cpp:319
+#, fuzzy
+msgid "Envelope##sgiOPLL0"
+msgstr "Огибающая"
+
+#: src/gui/inst/opll.cpp:320
+#, fuzzy
+msgid "Envelope##sgiOPLL1"
+msgstr "Огибающая"
+
+#: src/gui/inst/opll.cpp:366
+#, c-format
+msgid "op%d##sgiOPLL0"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:368
+#, c-format
+msgid "OP%d##sgiOPLL1"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:505
+#, c-format
+msgid "op%d##sgiOPLL2"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:534
+#, fuzzy, c-format
+msgid "Operator %d##sgiOPLL"
+msgstr "Оператор %d"
+
+#: src/gui/inst/opll.cpp:579
+#, fuzzy
+msgid "Waveform##sgiOPLL"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/opll.cpp:581
+#, fuzzy
+msgid "Envelope##sgiOPLL2"
+msgstr "Огибающая"
+
+#: src/gui/inst/opll.cpp:731
+#, c-format
+msgid "op%d##sgiOPLL3"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:761
+#, c-format
+msgid "OP%d##sgiOPLL4"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:793
+msgid "SSG On##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:907
+#, fuzzy
+msgid "FM Macros##sgiOPLL"
+msgstr "Макросы FM"
+
+#: src/gui/inst/opll.cpp:937
+#, fuzzy, c-format
+msgid "OP%d Macros##sgiOPLL"
+msgstr "Макросы ОП%d"
+
+#: src/gui/inst/opll.cpp:974
+msgid "Macros##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:976
+#, fuzzy
+msgid "Volume##sgiOPLL"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/opll.cpp:977
+#, fuzzy
+msgid "Arpeggio##sgiOPLL"
+msgstr "Арпеджио"
+
+#: src/gui/inst/opll.cpp:978
+msgid "Pitch##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:979
+msgid "Patch##sgiOPLL"
+msgstr ""
+
+#: src/gui/inst/opll.cpp:981
+#, fuzzy
+msgid "Phase Reset##sgiOPLL"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/opm.cpp:186 src/gui/inst/opm.cpp:187
+#, fuzzy
+msgid "Envelope##sgiOPM0"
+msgstr "Огибающая"
+
+#: src/gui/inst/opm.cpp:228
+#, c-format
+msgid "op%d##sgiOPM0"
+msgstr ""
+
+#: src/gui/inst/opm.cpp:230
+#, c-format
+msgid "OP%d##sgiOPM3"
+msgstr ""
+
+#: src/gui/inst/opm.cpp:366
+#, c-format
+msgid "op%d##sgiOPM1"
+msgstr ""
+
+#: src/gui/inst/opm.cpp:395
+#, fuzzy, c-format
+msgid "Operator %d##sgiOPM"
+msgstr "Оператор %d"
+
+#: src/gui/inst/opm.cpp:435
+#, fuzzy
+msgid "Waveform##sgiOPM"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/opm.cpp:437
+#, fuzzy
+msgid "Envelope##sgiOPM1"
+msgstr "Огибающая"
+
+#: src/gui/inst/opm.cpp:598
+#, c-format
+msgid "op%d##sgiOPM2"
+msgstr ""
+
+#: src/gui/inst/opm.cpp:630
+#, c-format
+msgid "OP%d##sgiOPM4"
+msgstr ""
+
+#: src/gui/inst/opm.cpp:776
+#, fuzzy
+msgid "FM Macros##sgiOPM"
+msgstr "Макросы FM"
+
+#: src/gui/inst/opm.cpp:782
+#, fuzzy
+msgid "AM Depth##sgiOPM"
+msgstr "Глубина АМ"
+
+#: src/gui/inst/opm.cpp:783
+#, fuzzy
+msgid "PM Depth##sgiOPM"
+msgstr "Глубина ФМ"
+
+#: src/gui/inst/opm.cpp:784
+#, fuzzy
+msgid "LFO Speed##sgiOPM"
+msgstr "Частота ГНЧ"
+
+#: src/gui/inst/opm.cpp:785
+#, fuzzy
+msgid "LFO Shape##sgiOPM"
+msgstr "Форма волны ГНЧ"
+
+#: src/gui/inst/opm.cpp:786
+#, fuzzy
+msgid "OpMask##sgiOPM"
+msgstr "Маска операторов"
+
+#: src/gui/inst/opm.cpp:812
+#, fuzzy, c-format
+msgid "OP%d Macros##sgiOPM"
+msgstr "Макросы ОП%d"
+
+#: src/gui/inst/opm.cpp:839
+#, fuzzy
+msgid "Macros##sgiOPM"
+msgstr "Макросы"
+
+#: src/gui/inst/opm.cpp:843
+#, fuzzy
+msgid "Volume##sgiOPM"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/opm.cpp:844
+#, fuzzy
+msgid "Arpeggio##sgiOPM"
+msgstr "Арпеджио"
+
+#: src/gui/inst/opm.cpp:845
+msgid "Pitch##sgiOPM"
+msgstr ""
+
+#: src/gui/inst/opm.cpp:846
+#, fuzzy
+msgid "Noise Freq##sgiOPM"
+msgstr "Частота шума"
+
+#: src/gui/inst/opm.cpp:847
+#, fuzzy
+msgid "Panning##sgiOPM"
+msgstr "Панорамирование"
+
+#: src/gui/inst/opm.cpp:849
+#, fuzzy
+msgid "Phase Reset##sgiOPM"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/opn.cpp:189
+#, fuzzy
+msgid "Envelope##sgiOPN0"
+msgstr "Огибающая"
+
+#: src/gui/inst/opn.cpp:190
+#, fuzzy
+msgid "Envelope##sgiOPN1"
+msgstr "Огибающая"
+
+#: src/gui/inst/opn.cpp:232
+#, c-format
+msgid "op%d##sgiOPN0"
+msgstr ""
+
+#: src/gui/inst/opn.cpp:234
+#, c-format
+msgid "OP%d##sgiOPN1"
+msgstr ""
+
+#: src/gui/inst/opn.cpp:391
+#, c-format
+msgid "op%d##sgiOPN2"
+msgstr ""
+
+#: src/gui/inst/opn.cpp:423
+#, fuzzy, c-format
+msgid "Operator %d##sgiOPN"
+msgstr "Оператор %d"
+
+#: src/gui/inst/opn.cpp:466
+#, fuzzy
+msgid "SSG-EG##sgiOPN"
+msgstr "SSG-EG"
+
+#: src/gui/inst/opn.cpp:468
+#, fuzzy
+msgid "Envelope##sgiOPN2"
+msgstr "Огибающая"
+
+#: src/gui/inst/opn.cpp:644
+#, c-format
+msgid "op%d##sgiOPN3"
+msgstr ""
+
+#: src/gui/inst/opn.cpp:675
+#, c-format
+msgid "OP%d##sgiOPN4"
+msgstr ""
+
+#: src/gui/inst/opn.cpp:701
+#, fuzzy
+msgid "SSG On##sgiOPN"
+msgstr "Вкл. SSG"
+
+#: src/gui/inst/opn.cpp:837
+#, fuzzy
+msgid "FM Macros##sgiOPN"
+msgstr "Макросы FM"
+
+#: src/gui/inst/opn.cpp:843
+#, fuzzy
+msgid "LFO Speed##sgiOPN"
+msgstr "Частота ГНЧ"
+
+#: src/gui/inst/opn.cpp:844
+#, fuzzy
+msgid "OpMask##sgiOPN"
+msgstr "Маска операторов"
+
+#: src/gui/inst/opn.cpp:870
+#, fuzzy, c-format
+msgid "OP%d Macros##sgiOPN"
+msgstr "Макросы ОП%d"
+
+#: src/gui/inst/opn.cpp:897
+#, fuzzy
+msgid "Macros##sgiOPN"
+msgstr "Макросы"
+
+#: src/gui/inst/opn.cpp:901
+#, fuzzy
+msgid "Volume##sgiOPN"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/opn.cpp:902
+#, fuzzy
+msgid "Arpeggio##sgiOPN"
+msgstr "Арпеджио"
+
+#: src/gui/inst/opn.cpp:903
+msgid "Pitch##sgiOPN"
+msgstr ""
+
+#: src/gui/inst/opn.cpp:904
+#, fuzzy
+msgid "Panning##sgiOPN"
+msgstr "Панорамирование"
+
+#: src/gui/inst/opn.cpp:906
+#, fuzzy
+msgid "Phase Reset##sgiOPN"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/opz.cpp:98
+#, fuzzy
+msgid "Request from TX81Z##sgiOPZ"
+msgstr "Запросить у TX81Z"
+
+#: src/gui/inst/opz.cpp:203
+#, fuzzy
+msgid "Other##sgiOPZ0"
+msgstr "Открыть файл"
+
+#: src/gui/inst/opz.cpp:204
+#, fuzzy
+msgid "Other##sgiOPZ1"
+msgstr "Открыть файл"
+
+#: src/gui/inst/opz.cpp:210
+#, fuzzy
+msgid "Envelope##sgiOPZ0"
+msgstr "Огибающая"
+
+#: src/gui/inst/opz.cpp:211
+#, fuzzy
+msgid "Envelope##sgiOPZ1"
+msgstr "Огибающая"
+
+#: src/gui/inst/opz.cpp:252
+#, c-format
+msgid "op%d##sgiOPZ0"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:254
+#, c-format
+msgid "OP%d##sgiOPZ1"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:357
+msgid "Fixed##sgiOPZ0"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:365
+msgid "Block##sgiOPZ0"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:371
+#, fuzzy
+msgid "FreqNum##sgiOPZ0"
+msgstr "Частота"
+
+#: src/gui/inst/opz.cpp:429
+#, c-format
+msgid "op%d##sgiOPZ2"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:458
+#, fuzzy, c-format
+msgid "Operator %d##sgiOPZ"
+msgstr "Оператор %d"
+
+#: src/gui/inst/opz.cpp:490
+#, fuzzy
+msgid "Waveform##sgiOPZ"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/opz.cpp:492
+#, fuzzy
+msgid "Envelope##sgiOPZ2"
+msgstr "Огибающая"
+
+#: src/gui/inst/opz.cpp:570
+msgid "Block##sgiOPZ1"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:580
+msgid "Freq##sgiOPZ"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:640
+msgid "Fixed##sgiOPZ1"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:714
+#, c-format
+msgid "op%d##sgiOPZ3"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:746
+#, c-format
+msgid "OP%d##sgiOPZ4"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:763
+msgid "Fixed##sgiOPZ2"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:877
+msgid "Block##sgiOPZ2"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:890
+#, fuzzy
+msgid "FreqNum##sgiOPZ1"
+msgstr "Частота"
+
+#: src/gui/inst/opz.cpp:955
+#, fuzzy
+msgid "FM Macros##sgiOPZ"
+msgstr "Макросы FM"
+
+#: src/gui/inst/opz.cpp:960
+#, fuzzy
+msgid "AM Depth##sgiOPZ"
+msgstr "Глубина АМ"
+
+#: src/gui/inst/opz.cpp:961
+#, fuzzy
+msgid "PM Depth##sgiOPZ"
+msgstr "Глубина ФМ"
+
+#: src/gui/inst/opz.cpp:962
+#, fuzzy
+msgid "LFO Speed##sgiOPZ"
+msgstr "Частота ГНЧ"
+
+#: src/gui/inst/opz.cpp:963
+#, fuzzy
+msgid "LFO Shape##sgiOPZ"
+msgstr "Форма волны ГНЧ"
+
+#: src/gui/inst/opz.cpp:964
+#, fuzzy
+msgid "AM Depth 2##sgiOPZ"
+msgstr "Глубина АМ 2"
+
+#: src/gui/inst/opz.cpp:965
+#, fuzzy
+msgid "PM Depth 2##sgiOPZ"
+msgstr "Глубина ФМ 2"
+
+#: src/gui/inst/opz.cpp:966
+#, fuzzy
+msgid "LFO2 Speed##sgiOPZ"
+msgstr "Скорость ГНЧ 2"
+
+#: src/gui/inst/opz.cpp:967
+#, fuzzy
+msgid "LFO2 Shape##sgiOPZ"
+msgstr "Форма волны ГНЧ 2"
+
+#: src/gui/inst/opz.cpp:993
+#, fuzzy, c-format
+msgid "OP%d Macros##sgiOPZ"
+msgstr "Макросы ОП%d"
+
+#: src/gui/inst/opz.cpp:1020
+#, fuzzy
+msgid "Macros##sgiOPZ"
+msgstr "Макросы"
+
+#: src/gui/inst/opz.cpp:1024
+#, fuzzy
+msgid "Volume##sgiOPZ"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/opz.cpp:1025
+#, fuzzy
+msgid "Arpeggio##sgiOPZ"
+msgstr "Арпеджио"
+
+#: src/gui/inst/opz.cpp:1026
+msgid "Pitch##sgiOPZ"
+msgstr ""
+
+#: src/gui/inst/opz.cpp:1027
+#, fuzzy
+msgid "Noise Freq##sgiOPZ"
+msgstr "Частота шума"
+
+#: src/gui/inst/opz.cpp:1028
+#, fuzzy
+msgid "Panning##sgiOPZ"
+msgstr "Панорамирование"
+
+#: src/gui/inst/opz.cpp:1030
+#, fuzzy
+msgid "Phase Reset##sgiOPZ"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/pce.cpp:39
+#, fuzzy
+msgid "Macros##sgiPCE"
+msgstr "Макросы"
+
+#: src/gui/inst/pce.cpp:44
+#, fuzzy
+msgid "Volume##sgiPCE"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/pce.cpp:45
+#, fuzzy
+msgid "Arpeggio##sgiPCE"
+msgstr "Арпеджио"
+
+#: src/gui/inst/pce.cpp:46
+msgid "Pitch##sgiPCE"
+msgstr ""
+
+#: src/gui/inst/pce.cpp:50
+msgid "Noise##sgiPCE"
+msgstr ""
+
+#: src/gui/inst/pce.cpp:53
+#, fuzzy
+msgid "Waveform##sgiPCE"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/pce.cpp:54
+#, fuzzy
+msgid "Panning (left)##sgiPCE"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/pce.cpp:55
+#, fuzzy
+msgid "Panning (right)##sgiPCE"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/pce.cpp:57
+#, fuzzy
+msgid "Phase Reset##sgiPCE"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/pet.cpp:32
+#, fuzzy
+msgid "Macros##sgiPET"
+msgstr "Макросы"
+
+#: src/gui/inst/pet.cpp:34
+#, fuzzy
+msgid "Volume##sgiPET"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/pet.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiPET"
+msgstr "Арпеджио"
+
+#: src/gui/inst/pet.cpp:36
+msgid "Pitch##sgiPET"
+msgstr ""
+
+#: src/gui/inst/pet.cpp:38
+#, fuzzy
+msgid "Waveform##sgiPET"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/pokemini.cpp:32
+msgid "Macros##sgiPMQT"
+msgstr ""
+
+#: src/gui/inst/pokemini.cpp:34
+#, fuzzy
+msgid "Volume##sgiPMQT"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/pokemini.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiPMQT"
+msgstr "Арпеджио"
+
+#: src/gui/inst/pokemini.cpp:36
+msgid "Pitch##sgiPMQT"
+msgstr ""
+
+#: src/gui/inst/pokemini.cpp:38
+#, fuzzy
+msgid "Pulse Width##sgiPMQT"
+msgstr "Скважность"
+
+#: src/gui/inst/pokey.cpp:34
+#, fuzzy
+msgid "16-bit raw period macro##sgiPOKEY"
+msgstr "16-битный макрос периода (регистровое знач.)"
+
+#: src/gui/inst/pokey.cpp:42
+msgid "Macros##sgiPOKEY"
+msgstr ""
+
+#: src/gui/inst/pokey.cpp:44
+#, fuzzy
+msgid "Volume##sgiPOKEY"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/pokey.cpp:45
+#, fuzzy
+msgid "Arpeggio##sgiPOKEY"
+msgstr "Арпеджио"
+
+#: src/gui/inst/pokey.cpp:46
+msgid "Pitch##sgiPOKEY"
+msgstr ""
+
+#: src/gui/inst/pokey.cpp:49
+#, fuzzy
+msgid "Waveform##sgiPOKEY"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/pokey.cpp:51
+#, fuzzy
+msgid "Raw Period##sgiPOKEY"
+msgstr "Период (регистровое знач.)"
+
+#: src/gui/inst/powernoise.cpp:36
+#, fuzzy
+msgid "Octave offset##sgiPNN"
+msgstr "Сдвиг октавы"
+
+#: src/gui/inst/powernoise.cpp:43
+#, fuzzy
+msgid "go to Macros for other parameters.##sgiPNN"
+msgstr "Откройте вкладку макросов для управления другими параметрами."
+
+#: src/gui/inst/powernoise.cpp:47
+#, fuzzy
+msgid "Macros##sgiPNN"
+msgstr "Макросы"
+
+#: src/gui/inst/powernoise.cpp:52
+#, fuzzy
+msgid "Volume##sgiPNN"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/powernoise.cpp:53
+#, fuzzy
+msgid "Arpeggio##sgiPNN"
+msgstr "Арпеджио"
+
+#: src/gui/inst/powernoise.cpp:54
+msgid "Pitch##sgiPNN"
+msgstr ""
+
+#: src/gui/inst/powernoise.cpp:56
+#, fuzzy
+msgid "Panning (left)##sgiPNN"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/powernoise.cpp:57
+#, fuzzy
+msgid "Panning (right)##sgiPNN"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/powernoise.cpp:59
+#, fuzzy
+msgid "Phase Reset##sgiPNN"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/powernoise.cpp:61
+#, fuzzy
+msgid "Control##sgiPNN"
+msgstr "Значение контроллера"
+
+#: src/gui/inst/powernoise.cpp:62
+#, fuzzy
+msgid "Tap A Location##sgiPNN"
+msgstr "Положение отвода A"
+
+#: src/gui/inst/powernoise.cpp:63
+#, fuzzy
+msgid "Tap B Location##sgiPNN"
+msgstr "Положение отвода B"
+
+#: src/gui/inst/powernoise.cpp:64
+#, fuzzy
+msgid "Load LFSR##sgiPNN"
+msgstr "Загрузить в РСЛОС"
+
+#: src/gui/inst/powernoise_slope.cpp:36
+#, fuzzy
+msgid "Octave offset##sgiPNS"
+msgstr "Сдвиг октавы"
+
+#: src/gui/inst/powernoise_slope.cpp:43
+#, fuzzy
+msgid "go to Macros for other parameters.##sgiPNS"
+msgstr "Откройте вкладку макросов для управления другими параметрами."
+
+#: src/gui/inst/powernoise_slope.cpp:47
+#, fuzzy
+msgid "Macros##sgiPNS"
+msgstr "Макросы"
+
+#: src/gui/inst/powernoise_slope.cpp:52
+#, fuzzy
+msgid "Volume##sgiPNS"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/powernoise_slope.cpp:53
+#, fuzzy
+msgid "Arpeggio##sgiPNS"
+msgstr "Арпеджио"
+
+#: src/gui/inst/powernoise_slope.cpp:54
+msgid "Pitch##sgiPNS"
+msgstr ""
+
+#: src/gui/inst/powernoise_slope.cpp:56
+#, fuzzy
+msgid "Panning (left)##sgiPNS"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/powernoise_slope.cpp:57
+#, fuzzy
+msgid "Panning (right)##sgiPNS"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/powernoise_slope.cpp:59
+#, fuzzy
+msgid "Phase Reset##sgiPNS"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/powernoise_slope.cpp:61
+#, fuzzy
+msgid "Control##sgiPNS"
+msgstr "Значение контроллера"
+
+#: src/gui/inst/powernoise_slope.cpp:62
+#, fuzzy
+msgid "Portion A Length##sgiPNS"
+msgstr "Длина части A"
+
+#: src/gui/inst/powernoise_slope.cpp:63
+#, fuzzy
+msgid "Portion B Length##sgiPNS"
+msgstr "Длина части B"
+
+#: src/gui/inst/powernoise_slope.cpp:64
+#, fuzzy
+msgid "Portion A Offset##sgiPNS"
+msgstr "Сдвиг части A"
+
+#: src/gui/inst/powernoise_slope.cpp:65
+#, fuzzy
+msgid "Portion B Offset##sgiPNS"
+msgstr "Сдвиг части B"
+
+#: src/gui/inst/pv1000.cpp:32
+#, fuzzy
+msgid "Macros##sgiPV"
+msgstr "Макросы"
+
+#: src/gui/inst/pv1000.cpp:34
+#, fuzzy
+msgid "Volume##sgiPV"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/pv1000.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiPV"
+msgstr "Арпеджио"
+
+#: src/gui/inst/pv1000.cpp:36
+msgid "Pitch##sgiPV"
+msgstr ""
+
+#: src/gui/inst/pv1000.cpp:38
+#, fuzzy
+msgid "Raw Frequency##sgiPV"
+msgstr "Частота (регистровое знач.)"
+
+#: src/gui/inst/qsound.cpp:34
+#, fuzzy
+msgid "Macros##sgiQ"
+msgstr "Макросы"
+
+#: src/gui/inst/qsound.cpp:39
+#, fuzzy
+msgid "Volume##sgiQ"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/qsound.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiQ"
+msgstr "Арпеджио"
+
+#: src/gui/inst/qsound.cpp:41
+#, fuzzy
+msgid "Pitch##sgiQ"
+msgstr "Частота"
+
+#: src/gui/inst/qsound.cpp:43
+#, fuzzy
+msgid "Panning##sgiQ"
+msgstr "Панорамирование"
+
+#: src/gui/inst/qsound.cpp:44
+#, fuzzy
+msgid "Surround##sgiQ"
+msgstr "Окружающее звучание"
+
+#: src/gui/inst/qsound.cpp:46
+#, fuzzy
+msgid "Phase Reset##sgiQ"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/qsound.cpp:48
+#, fuzzy
+msgid "Echo Level##sgiQ"
+msgstr "Уровень эхо"
+
+#: src/gui/inst/qsound.cpp:49
+#, fuzzy
+msgid "Echo Feedback##sgiQ"
+msgstr "Обратная связь эхо"
+
+#: src/gui/inst/qsound.cpp:50
+#, fuzzy
+msgid "Echo Length##sgiQ"
+msgstr "Длина эхо"
+
+#: src/gui/inst/rf5c68.cpp:34
+#, fuzzy
+msgid "Macros##sgiRF5"
+msgstr "Макросы"
+
+#: src/gui/inst/rf5c68.cpp:38
+#, fuzzy
+msgid "Volume##sgiRF5"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/rf5c68.cpp:39
+#, fuzzy
+msgid "Arpeggio##sgiRF5"
+msgstr "Арпеджио"
+
+#: src/gui/inst/rf5c68.cpp:40
+msgid "Pitch##sgiRF5"
+msgstr ""
+
+#: src/gui/inst/rf5c68.cpp:42
+#, fuzzy
+msgid "Panning (left)##sgiRF5"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/rf5c68.cpp:43
+#, fuzzy
+msgid "Panning (right)##sgiRF5"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/rf5c68.cpp:45
+#, fuzzy
+msgid "Phase Reset##sgiRF5"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/saa1099.cpp:32
+#, fuzzy
+msgid "Macros##sgiSAA"
+msgstr "Макросы"
+
+#: src/gui/inst/saa1099.cpp:36
+#, fuzzy
+msgid "Volume##sgiSAA"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/saa1099.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiSAA"
+msgstr "Арпеджио"
+
+#: src/gui/inst/saa1099.cpp:38
+msgid "Pitch##sgiSAA"
+msgstr ""
+
+#: src/gui/inst/saa1099.cpp:40
+#, fuzzy
+msgid "Duty/Noise##sgiSAA"
+msgstr "Скважность/режим шума"
+
+#: src/gui/inst/saa1099.cpp:41
+#, fuzzy
+msgid "Waveform##sgiSAA"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/saa1099.cpp:43
+#, fuzzy
+msgid "Panning (left)##sgiSAA"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/saa1099.cpp:44
+#, fuzzy
+msgid "Panning (right)##sgiSAA"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/saa1099.cpp:46
+#, fuzzy
+msgid "Envelope##sgiSAA"
+msgstr "Огибающая"
+
+#: src/gui/inst/sampleDraw.cpp:127
+#, fuzzy
+msgid "Sample##sgismpd0"
+msgstr "Сэмплы"
+
+#: src/gui/inst/sampleDraw.cpp:128
+msgid "DPCM##sgismpd"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:131
+#, fuzzy
+msgid "new DPCM features disabled (compatibility)!##sgismpd"
+msgstr "новые функции ДИКМ отключены (совместимость)!"
+
+#: src/gui/inst/sampleDraw.cpp:132
+#, fuzzy
+msgid "click here to enable them.##sgismpd"
+msgstr "нажмите сюда, чтобы включить их."
+
+#: src/gui/inst/sampleDraw.cpp:143
+#, fuzzy
+msgid "none selected##sgismpd"
+msgstr "не выбран"
+
+#: src/gui/inst/sampleDraw.cpp:156
+#, fuzzy
+msgid "Use sample##sgismpd"
+msgstr "Использовать карту сэмплов"
+
+#: src/gui/inst/sampleDraw.cpp:158
+msgid "Sample bank slot##BANKSLOT"
+msgstr "Номер банка сэмплов##BANKSLOT"
+
+#: src/gui/inst/sampleDraw.cpp:165
+#, fuzzy
+msgid "Sample##sgismpd1"
+msgstr "Сэмплы"
+
+#: src/gui/inst/sampleDraw.cpp:181
+#, fuzzy
+msgid "Use wavetable (Amiga/Generic DAC only)##sgismpd"
+msgstr "Использовать волновую таблицу (только для Amiga/типичного ЦАП)"
+
+#: src/gui/inst/sampleDraw.cpp:181
+#, fuzzy
+msgid "Use wavetable##sgismpd"
+msgstr "Использовать волновую таблицу"
+
+#: src/gui/inst/sampleDraw.cpp:186
+msgid "Width##sgismpd"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:207
+#, fuzzy
+msgid "Use sample map##sgismpd"
+msgstr "Использовать карту сэмплов"
+
+#: src/gui/inst/sampleDraw.cpp:231
+#, fuzzy
+msgid "pitch##sgismpd"
+msgstr "част. мод."
+
+#: src/gui/inst/sampleDraw.cpp:233
+msgid "loop##sgismpd"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:235
+msgid "delta##sgismpd"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:238
+msgid "note##sgismpd"
+msgstr ""
+
+#: src/gui/inst/sampleDraw.cpp:241
+#, fuzzy
+msgid "sample name##sgismpd"
+msgstr "название сэмпла"
+
+#: src/gui/inst/sampleDraw.cpp:367
+#, c-format
+msgid "L##L%d"
+msgstr "Ц##L%d"
+
+#: src/gui/inst/sampleDraw.cpp:510
+#, fuzzy
+msgid "set entire map to this pitch##sgismpd"
+msgstr "установить эту частоту для всей карты"
+
+#: src/gui/inst/sampleDraw.cpp:518
+#, fuzzy
+msgid "set entire map to this delta counter value##sgismpd"
+msgstr "установить это нач. знач. дельта-счётчика для всей карты"
+
+#: src/gui/inst/sampleDraw.cpp:527
+#, fuzzy
+msgid "set entire map to this note##sgismpd"
+msgstr "установить эту ноту для всей карты"
+
+#: src/gui/inst/sampleDraw.cpp:536
+#, fuzzy
+msgid "set entire map to this sample##sgismpd"
+msgstr "установить этот сэмпл для всей карты"
+
+#: src/gui/inst/sampleDraw.cpp:546
+#, fuzzy
+msgid "reset pitches##sgismpd"
+msgstr "сбросить частоты"
+
+#: src/gui/inst/sampleDraw.cpp:551
+#, fuzzy
+msgid "clear delta counter values##sgismpd"
+msgstr "очистить нач. знач. дельта-счётчика"
+
+#: src/gui/inst/sampleDraw.cpp:557
+#, fuzzy
+msgid "reset notes##sgismpd"
+msgstr "сбросить ноты"
+
+#: src/gui/inst/sampleDraw.cpp:563
+#, fuzzy
+msgid "clear map samples##sgismpd"
+msgstr "сбросить сэмплы карты"
+
+#: src/gui/inst/scc.cpp:34
+#, fuzzy
+msgid "Macros##sgiSCC"
+msgstr "Макросы"
+
+#: src/gui/inst/scc.cpp:36
+#, fuzzy
+msgid "Volume##sgiSCC"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/scc.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiSCC"
+msgstr "Арпеджио"
+
+#: src/gui/inst/scc.cpp:38
+msgid "Pitch##sgiSCC"
+msgstr ""
+
+#: src/gui/inst/scc.cpp:40
+#, fuzzy
+msgid "Waveform##sgiSCC"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/segapcm.cpp:34
+msgid "Macros##sgiSEGA"
+msgstr ""
+
+#: src/gui/inst/segapcm.cpp:38
+#, fuzzy
+msgid "Volume##sgiSEGA"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/segapcm.cpp:39
+#, fuzzy
+msgid "Arpeggio##sgiSEGA"
+msgstr "Арпеджио"
+
+#: src/gui/inst/segapcm.cpp:40
+msgid "Pitch##sgiSEGA"
+msgstr ""
+
+#: src/gui/inst/segapcm.cpp:42
+#, fuzzy
+msgid "Panning (left)##sgiSEGA"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/segapcm.cpp:43
+#, fuzzy
+msgid "Panning (right)##sgiSEGA"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/segapcm.cpp:45
+#, fuzzy
+msgid "Phase Reset##sgiSEGA"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/sid2.cpp:35
+#, fuzzy
+msgid "Waveform##sgiSID2"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/sid2.cpp:38
+msgid "tri##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:45
+msgid "saw##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:52
+msgid "pulse##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:59
+msgid "noise##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:79 src/gui/inst/sid2.cpp:80
+msgid "A##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:82 src/gui/inst/sid2.cpp:83
+msgid "D##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:85 src/gui/inst/sid2.cpp:86
+msgid "S##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:88 src/gui/inst/sid2.cpp:89
+msgid "R##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:94 src/gui/inst/sid2.cpp:95
+#, fuzzy
+msgid "Envelope##sgiSID2"
+msgstr "Огибающая"
+
+#: src/gui/inst/sid2.cpp:114
+msgid "Duty##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:116
+msgid "Reset duty on new note##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:122
+#, fuzzy
+msgid "Ring Modulation##sgiSID2"
+msgstr "Кольцевая модуляция"
+
+#: src/gui/inst/sid2.cpp:127
+#, fuzzy
+msgid "Oscillator Sync##sgiSID2"
+msgstr "Синхронизация осцилляторов"
+
+#: src/gui/inst/sid2.cpp:132
+#, fuzzy
+msgid "Enable filter##sgiSID2"
+msgstr "Включить фильтр"
+
+#: src/gui/inst/sid2.cpp:133
+#, fuzzy
+msgid "Initialize filter##sgiSID2"
+msgstr "Инициализировать фильтр"
+
+#: src/gui/inst/sid2.cpp:135
+msgid "Cutoff##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:136
+#, fuzzy
+msgid "Resonance##sgiSID2"
+msgstr "Резонанс (добротность)"
+
+#: src/gui/inst/sid2.cpp:139
+#, fuzzy
+msgid "Filter Mode##sgiSID2"
+msgstr "Тип фильтра"
+
+#: src/gui/inst/sid2.cpp:142
+msgid "low##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:149
+msgid "band##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:156
+msgid "high##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:162
+#, fuzzy
+msgid "Noise Mode##sgiSID2"
+msgstr "Режим шума"
+
+#: src/gui/inst/sid2.cpp:163
+#, fuzzy
+msgid "Wave Mix Mode##sgiSID2"
+msgstr "Режим смешения волн"
+
+#: src/gui/inst/sid2.cpp:165
+#, fuzzy
+msgid "Absolute Cutoff Macro##sgiSID2"
+msgstr "Абсолютный макрос частоты среза"
+
+#: src/gui/inst/sid2.cpp:170
+#, fuzzy
+msgid "Absolute Duty Macro##sgiSID2"
+msgstr "Абсолютный макрос скважности"
+
+#: src/gui/inst/sid2.cpp:178
+msgid "Macros##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:203
+#, fuzzy
+msgid "Volume##sgiSID2"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/sid2.cpp:204
+#, fuzzy
+msgid "Arpeggio##sgiSID2"
+msgstr "Арпеджио"
+
+#: src/gui/inst/sid2.cpp:205
+msgid "Pitch##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:206
+msgid "Duty##sgiSID21"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:207
+#, fuzzy
+msgid "Waveform##sgiSID21"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/sid2.cpp:209
+#, fuzzy
+msgid "Noise Mode##sgiSID21"
+msgstr "Режим шума"
+
+#: src/gui/inst/sid2.cpp:210
+#, fuzzy
+msgid "Wave Mix Mode##sgiSID21"
+msgstr "Режим смешения волн"
+
+#: src/gui/inst/sid2.cpp:212
+msgid "Cutoff##sgiSID21"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:213
+#, fuzzy
+msgid "Filter Mode##sgiSID21"
+msgstr "Тип фильтра"
+
+#: src/gui/inst/sid2.cpp:214
+#, fuzzy
+msgid "Filter Toggle##sgiSID2"
+msgstr "Вкл./выкл. фильтр"
+
+#: src/gui/inst/sid2.cpp:215
+#, fuzzy
+msgid "Resonance##sgiSID21"
+msgstr "Резонанс (добротность)"
+
+#: src/gui/inst/sid2.cpp:217
+#, fuzzy
+msgid "Phase Reset##sgiSID2"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/sid2.cpp:218
+#, fuzzy
+msgid "Envelope Reset/Key Control##sgiSID2"
+msgstr "Упр. огибающей"
+
+#: src/gui/inst/sid2.cpp:220
+#, fuzzy
+msgid "Special##sgiSID2"
+msgstr "Особые"
+
+#: src/gui/inst/sid2.cpp:221
+msgid "Attack##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:222
+msgid "Decay##sgiSID2"
+msgstr ""
+
+#: src/gui/inst/sid2.cpp:223
+#, fuzzy
+msgid "Sustain##sgiSID2"
+msgstr "Сустейн"
+
+#: src/gui/inst/sid2.cpp:224
+#, fuzzy
+msgid "Release##sgiSID2"
+msgstr "Релиз"
+
+#: src/gui/inst/sm8521.cpp:34
+#, fuzzy
+msgid "Macros##sgiSM"
+msgstr "Макросы"
+
+#: src/gui/inst/sm8521.cpp:36
+#, fuzzy
+msgid "Volume##sgiSM"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/sm8521.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiSM"
+msgstr "Арпеджио"
+
+#: src/gui/inst/sm8521.cpp:38
+msgid "Pitch##sgiSM"
+msgstr ""
+
+#: src/gui/inst/sm8521.cpp:40
+#, fuzzy
+msgid "Waveform##sgiSM"
+msgstr "Волна"
+
+#: src/gui/inst/snes.cpp:34
+#, fuzzy
+msgid "Use envelope##sgiSNES"
+msgstr "Использовать огибающую"
+
+#: src/gui/inst/snes.cpp:70
+#, fuzzy
+msgid "Envelope##sgiSNES0"
+msgstr "Огибающая"
+
+#: src/gui/inst/snes.cpp:71
+#, fuzzy
+msgid "Envelope##sgiSNES1"
+msgstr "Огибающая"
+
+#: src/gui/inst/snes.cpp:92
+#, fuzzy
+msgid "Sustain/release mode:##sgiSNES"
+msgstr "Режим сустейна/релиза:"
+
+#: src/gui/inst/snes.cpp:93
+#, fuzzy
+msgid "Direct (cut on release)##sgiSNES"
+msgstr "Прямой (заглушить на релизе)"
+
+#: src/gui/inst/snes.cpp:97
+#, fuzzy
+msgid "Effective (linear decrease)##sgiSNES"
+msgstr "Эффективный (линейный спад)"
+
+#: src/gui/inst/snes.cpp:101
+#, fuzzy
+msgid "Effective (exponential decrease)##sgiSNES"
+msgstr "Эффективный (экспоненциальный спад)"
+
+#: src/gui/inst/snes.cpp:105
+#, fuzzy
+msgid "Delayed (write R on release)##sgiSNES"
+msgstr "Отложенный (записать R на релизе)"
+
+#: src/gui/inst/snes.cpp:119
+#, fuzzy
+msgid "Gain Mode##sgiSNES0"
+msgstr "Режим усиления"
+
+#: src/gui/inst/snes.cpp:120
+#, fuzzy
+msgid "Gain Mode##sgiSNES1"
+msgstr "Режим усиления"
+
+#: src/gui/inst/snes.cpp:122
+msgid "Gain##sgiSNES0"
+msgstr ""
+
+#: src/gui/inst/snes.cpp:123
+msgid "Gain##sgiSNES1"
+msgstr ""
+
+#: src/gui/inst/snes.cpp:127
+#, fuzzy
+msgid "Direct##sgiSNES"
+msgstr "Дес.##SNESFHex"
+
+#: src/gui/inst/snes.cpp:132
+#, fuzzy
+msgid "Decrease (linear)##sgiSNES"
+msgstr "Спад (линейный)"
+
+#: src/gui/inst/snes.cpp:137
+#, fuzzy
+msgid "Decrease (logarithmic)##sgiSNES"
+msgstr "Спад (логарифмический)"
+
+#: src/gui/inst/snes.cpp:142
+#, fuzzy
+msgid "Increase (linear)##sgiSNES"
+msgstr "Нарастание (линейное)"
+
+#: src/gui/inst/snes.cpp:147
+#, fuzzy
+msgid "Increase (bent line)##sgiSNES"
+msgstr "Нарастание (изогн. линия)"
+
+#: src/gui/inst/snes.cpp:162
+#, fuzzy
+msgid ""
+"using decrease modes will not produce any sound at all, unless you know what "
+"you are doing.\n"
+"it is recommended to use the Gain macro for decrease instead.##sgiSNES"
+msgstr ""
+"использование режимов спада приведёт к отсутствию звука, если вы не "
+"понимаете, как это всё работает.\n"
+"рекомендуется использовать макрос усиления для спада."
+
+#: src/gui/inst/snes.cpp:171
+msgid "Macros##sgiSNES"
+msgstr ""
+
+#: src/gui/inst/snes.cpp:176
+#, fuzzy
+msgid "Volume##sgiSNES"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/snes.cpp:177
+#, fuzzy
+msgid "Arpeggio##sgiSNES"
+msgstr "Арпеджио"
+
+#: src/gui/inst/snes.cpp:178
+msgid "Pitch##sgiSNES"
+msgstr ""
+
+#: src/gui/inst/snes.cpp:179
+#, fuzzy
+msgid "Noise Freq##sgiSNES"
+msgstr "Частота шума"
+
+#: src/gui/inst/snes.cpp:180
+#, fuzzy
+msgid "Waveform##sgiSNES"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/snes.cpp:181
+#, fuzzy
+msgid "Panning (left)##sgiSNES"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/snes.cpp:182
+#, fuzzy
+msgid "Panning (right)##sgiSNES"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/snes.cpp:184
+#, fuzzy
+msgid "Special##sgiSNES"
+msgstr "Особые"
+
+#: src/gui/inst/snes.cpp:185
+msgid "Gain##sgiSNES2"
+msgstr ""
+
+#: src/gui/inst/std.cpp:32
+#, fuzzy
+msgid "Macros##sgiPSG"
+msgstr "Макросы"
+
+#: src/gui/inst/std.cpp:34
+#, fuzzy
+msgid "Volume##sgiPSG"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/std.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiPSG"
+msgstr "Арпеджио"
+
+#: src/gui/inst/std.cpp:36
+msgid "Pitch##sgiPSG"
+msgstr ""
+
+#: src/gui/inst/std.cpp:38
+msgid "Duty##sgiPSG"
+msgstr ""
+
+#: src/gui/inst/std.cpp:39
+#, fuzzy
+msgid "Panning##sgiPSG"
+msgstr "Панорамирование"
+
+#: src/gui/inst/std.cpp:41
+#, fuzzy
+msgid "Phase Reset##sgiPSG"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/su.cpp:32
+#, fuzzy
+msgid "Sound Unit##sgiSU"
+msgstr "Sound Unit"
+
+#: src/gui/inst/su.cpp:34
+#, fuzzy
+msgid "Switch roles of frequency and phase reset timer##sgiSU"
+msgstr "Поменять роли таймера сброса фазы и таймера изменения частоты"
+
+#: src/gui/inst/su.cpp:38
+#, fuzzy
+msgid "Hardware Sequence##sgiSU"
+msgstr "Аппаратная последовательность"
+
+#: src/gui/inst/su.cpp:49
+msgid "Tick##sgiSU0"
+msgstr ""
+
+#: src/gui/inst/su.cpp:51
+#, fuzzy
+msgid "Command##sgiSU0"
+msgstr "Команда"
+
+#: src/gui/inst/su.cpp:53
+#, fuzzy
+msgid "Move/Remove##sgiSU0"
+msgstr "Перем./Удал."
+
+#: src/gui/inst/su.cpp:111
+#, fuzzy
+msgid "Period##sgiSU0"
+msgstr "Период"
+
+#: src/gui/inst/su.cpp:116
+#, fuzzy
+msgid "Amount##sgiSU0"
+msgstr "Количество"
+
+#: src/gui/inst/su.cpp:120
+msgid "Bound##sgiSU0"
+msgstr ""
+
+#: src/gui/inst/su.cpp:124
+#, fuzzy
+msgid "Up##sgiSU0"
+msgstr "Открыть файл"
+
+#: src/gui/inst/su.cpp:130
+#, fuzzy
+msgid "Down##sgiSU0"
+msgstr "Открыть файл"
+
+#: src/gui/inst/su.cpp:135
+#, fuzzy
+msgid "Loop##sgiSU"
+msgstr "Циклы"
+
+#: src/gui/inst/su.cpp:140
+msgid "Flip##sgiSU"
+msgstr ""
+
+#: src/gui/inst/su.cpp:162
+#, fuzzy
+msgid "Period##sgiSU1"
+msgstr "Период"
+
+#: src/gui/inst/su.cpp:168
+#, fuzzy
+msgid "Amount##sgiSU1"
+msgstr "Количество"
+
+#: src/gui/inst/su.cpp:172
+msgid "Bound##sgiSU1"
+msgstr ""
+
+#: src/gui/inst/su.cpp:176
+#, fuzzy
+msgid "Up##sgiSU1"
+msgstr "Открыть файл"
+
+#: src/gui/inst/su.cpp:182
+#, fuzzy
+msgid "Down##sgiSU1"
+msgstr "Открыть файл"
+
+#: src/gui/inst/su.cpp:202
+msgid "Ticks##sgiSU"
+msgstr ""
+
+#: src/gui/inst/su.cpp:224
+#, fuzzy
+msgid "Position##sgiSU"
+msgstr "Положение"
+
+#: src/gui/inst/su.cpp:332
+#, fuzzy
+msgid "Macros##sgiSU"
+msgstr "Макросы"
+
+#: src/gui/inst/su.cpp:337
+#, fuzzy
+msgid "Volume##sgiSU"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/su.cpp:338
+#, fuzzy
+msgid "Arpeggio##sgiSU"
+msgstr "Арпеджио"
+
+#: src/gui/inst/su.cpp:339
+msgid "Pitch##sgiSU"
+msgstr ""
+
+#: src/gui/inst/su.cpp:340
+#, fuzzy
+msgid "Duty/Noise##sgiSU"
+msgstr "Скважность/режим шума"
+
+#: src/gui/inst/su.cpp:341
+#, fuzzy
+msgid "Waveform##sgiSU"
+msgstr "Волна"
+
+#: src/gui/inst/su.cpp:343
+#, fuzzy
+msgid "Panning##sgiSU"
+msgstr "Панорамирование"
+
+#: src/gui/inst/su.cpp:345
+#, fuzzy
+msgid "Phase Reset##sgiSU"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/su.cpp:347
+#, fuzzy
+msgid "Cutoff##sgiSU"
+msgstr "Частота среза"
+
+#: src/gui/inst/su.cpp:348
+#, fuzzy
+msgid "Resonance##sgiSU"
+msgstr "Резонанс (добротность)"
+
+#: src/gui/inst/su.cpp:349
+#, fuzzy
+msgid "Control##sgiSU"
+msgstr "Значение контроллера"
+
+#: src/gui/inst/su.cpp:350
+#, fuzzy
+msgid "Phase Reset Timer##sgiSU"
+msgstr "Таймер сброса фазы"
+
+#: src/gui/inst/swan.cpp:39
+msgid "Macros##sgiSWAN"
+msgstr ""
+
+#: src/gui/inst/swan.cpp:41
+#, fuzzy
+msgid "Volume##sgiSWAN"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/swan.cpp:42
+#, fuzzy
+msgid "Arpeggio##sgiSWAN"
+msgstr "Арпеджио"
+
+#: src/gui/inst/swan.cpp:43
+msgid "Pitch##sgiSWAN"
+msgstr ""
+
+#: src/gui/inst/swan.cpp:47
+msgid "Noise##sgiSWAN"
+msgstr ""
+
+#: src/gui/inst/swan.cpp:48
+#, fuzzy
+msgid "Waveform##sgiSWAN"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/swan.cpp:51
+#, fuzzy
+msgid "Phase Reset##sgiSWAN"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/t6w28.cpp:32
+#, fuzzy
+msgid "Macros##sgiT6W"
+msgstr "Макросы"
+
+#: src/gui/inst/t6w28.cpp:36
+#, fuzzy
+msgid "Volume##sgiT6W"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/t6w28.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiT6W"
+msgstr "Арпеджио"
+
+#: src/gui/inst/t6w28.cpp:38
+msgid "Pitch##sgiT6W"
+msgstr ""
+
+#: src/gui/inst/t6w28.cpp:40
+#, fuzzy
+msgid "Panning (left)##sgiT6W"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/t6w28.cpp:41
+#, fuzzy
+msgid "Panning (right)##sgiT6W"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/t6w28.cpp:43
+#, fuzzy
+msgid "Noise Type##sgiT6W"
+msgstr "Режим шума"
+
+#: src/gui/inst/t6w28.cpp:45
+#, fuzzy
+msgid "Phase Reset##sgiT6W"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/t85apu.cpp:32
+msgid "Macros##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:34
+#, fuzzy
+msgid "Volume##sgiT85APU"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/t85apu.cpp:35
+msgid "Arpeggio##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:36
+msgid "Pitch##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:37
+msgid "Duty##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:38
+#, fuzzy
+msgid "Waveform##sgiT85APU"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/t85apu.cpp:39
+msgid "Envelope Shape##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:40
+msgid "Envelope Number##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:44
+#, fuzzy
+msgid "Phase Reset##sgiT85APU"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/t85apu.cpp:45
+msgid "Envelope Starting Phase##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/t85apu.cpp:47
+msgid "LFSR Feedback bits##sgiT85APU"
+msgstr ""
+
+#: src/gui/inst/ted.cpp:32
+#, fuzzy
+msgid "Macros##sgiTED"
+msgstr "Макросы"
+
+#: src/gui/inst/ted.cpp:34
+#, fuzzy
+msgid "Volume##sgiTED"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/ted.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiTED"
+msgstr "Арпеджио"
+
+#: src/gui/inst/ted.cpp:36
+msgid "Pitch##sgiTED"
+msgstr ""
+
+#: src/gui/inst/ted.cpp:38
+#, fuzzy
+msgid "Square/Noise##sgiTED"
+msgstr "Меандр/шум"
+
+#: src/gui/inst/ted.cpp:40
+#, fuzzy
+msgid "Phase Reset##sgiTED"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/tia.cpp:32
+#, fuzzy
+msgid "Macros##sgiTIA"
+msgstr "Макросы"
+
+#: src/gui/inst/tia.cpp:34
+#, fuzzy
+msgid "Volume##sgiTIA"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/tia.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiTIA"
+msgstr "Арпеджио"
+
+#: src/gui/inst/tia.cpp:36
+msgid "Pitch##sgiTIA"
+msgstr ""
+
+#: src/gui/inst/tia.cpp:38
+#, fuzzy
+msgid "Raw Period##sgiTIA"
+msgstr "Период (регистровое знач.)"
+
+#: src/gui/inst/tia.cpp:40
+#, fuzzy
+msgid "Waveform##sgiTIA"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/vboy.cpp:62
+#, fuzzy
+msgid "Set modulation table (channel 5 only)##sgiVB"
+msgstr "Выставить таблицу модуляции (только для 5-го канала)"
+
+#: src/gui/inst/vboy.cpp:91
+msgid "Hex##MTHex"
+msgstr "Шест.##MTHex"
+
+#: src/gui/inst/vboy.cpp:91
+msgid "Dec##MTHex"
+msgstr "Дес.##MTHex"
+
+#: src/gui/inst/vboy.cpp:127
+#, fuzzy
+msgid "Macros##sgiVB"
+msgstr "Макросы"
+
+#: src/gui/inst/vboy.cpp:132
+#, fuzzy
+msgid "Volume##sgiVB"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/vboy.cpp:133
+#, fuzzy
+msgid "Arpeggio##sgiVB"
+msgstr "Арпеджио"
+
+#: src/gui/inst/vboy.cpp:134
+msgid "Pitch##sgiVB"
+msgstr ""
+
+#: src/gui/inst/vboy.cpp:135
+#, fuzzy
+msgid "Noise Length##sgiVB"
+msgstr "Длина шума"
+
+#: src/gui/inst/vboy.cpp:136
+#, fuzzy
+msgid "Waveform##sgiVB"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/vboy.cpp:137
+#, fuzzy
+msgid "Panning (left)##sgiVB"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/vboy.cpp:138
+#, fuzzy
+msgid "Panning (right)##sgiVB"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/vboy.cpp:139
+#, fuzzy
+msgid "Phase Reset##sgiVB"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/vera.cpp:32
+msgid "Macros##sgiVERA"
+msgstr ""
+
+#: src/gui/inst/vera.cpp:34
+#, fuzzy
+msgid "Volume##sgiVERA"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/vera.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiVERA"
+msgstr "Арпеджио"
+
+#: src/gui/inst/vera.cpp:36
+msgid "Pitch##sgiVERA"
+msgstr ""
+
+#: src/gui/inst/vera.cpp:38
+msgid "Duty##sgiVERA"
+msgstr ""
+
+#: src/gui/inst/vera.cpp:39
+#, fuzzy
+msgid "Waveform##sgiVERA"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/vera.cpp:40
+#, fuzzy
+msgid "Panning##sgiVERA"
+msgstr "Панорамирование"
+
+#: src/gui/inst/vic.cpp:32
+#, fuzzy
+msgid "Macros##sgiVIC"
+msgstr "Макросы"
+
+#: src/gui/inst/vic.cpp:34
+#, fuzzy
+msgid "Volume##sgiVIC"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/vic.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiVIC"
+msgstr "Арпеджио"
+
+#: src/gui/inst/vic.cpp:36
+msgid "Pitch##sgiVIC"
+msgstr ""
+
+#: src/gui/inst/vic.cpp:38
+#, fuzzy
+msgid "On/Off##sgiVIC"
+msgstr "Вкл./выкл."
+
+#: src/gui/inst/vic.cpp:39
+#, fuzzy
+msgid "Waveform##sgiVIC"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/vrc6.cpp:34
+msgid "Macros##sgiVRC6"
+msgstr ""
+
+#: src/gui/inst/vrc6.cpp:36
+#, fuzzy
+msgid "Volume##sgiVRC6"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/vrc6.cpp:37
+#, fuzzy
+msgid "Arpeggio##sgiVRC6"
+msgstr "Арпеджио"
+
+#: src/gui/inst/vrc6.cpp:38
+msgid "Pitch##sgiVRC6"
+msgstr ""
+
+#: src/gui/inst/vrc6.cpp:42
+msgid "Duty##sgiVRC6"
+msgstr ""
+
+#: src/gui/inst/vrc6.cpp:47
+#, fuzzy
+msgid "Waveform##sgiVRC6"
+msgstr "Волна##WAVE"
+
+#: src/gui/inst/vrc6.cpp:48
+#, fuzzy
+msgid "Phase Reset##sgiVRC6"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/vrc6saw.cpp:32
+msgid "Macros##sgiVRC6S"
+msgstr ""
+
+#: src/gui/inst/vrc6saw.cpp:34
+#, fuzzy
+msgid "Volume##sgiVRC6S"
+msgstr "Пропорционально громкости##CHF2"
+
+#: src/gui/inst/vrc6saw.cpp:35
+#, fuzzy
+msgid "Arpeggio##sgiVRC6S"
+msgstr "Арпеджио"
+
+#: src/gui/inst/vrc6saw.cpp:36
+msgid "Pitch##sgiVRC6S"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:89
+#, fuzzy
+msgid "Wavetable##sgiwave"
+msgstr "Волновые таблицы"
+
+#: src/gui/inst/wavetable.cpp:141
+#, fuzzy
+msgid "Enable synthesizer##sgiwave"
+msgstr "Включить синтезатор"
+
+#: src/gui/inst/wavetable.cpp:162
+#, fuzzy
+msgid "Single-waveform##sgiwave"
+msgstr "Одна волна"
+
+#: src/gui/inst/wavetable.cpp:173
+#, fuzzy
+msgid "Dual-waveform##sgiwave"
+msgstr "Две волны"
+
+#: src/gui/inst/wavetable.cpp:264
+msgid "Wave 1##sgiwave0"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:269
+msgid "Wave 2##sgiwave0"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:273
+msgid "Result##sgiwave"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:288
+#, fuzzy
+msgid "Wave 1 ##sgiwave"
+msgstr "Волна 1 "
+
+#: src/gui/inst/wavetable.cpp:298 src/gui/inst/wavetable.cpp:331
+#, fuzzy
+msgid ""
+"waveform macro is controlling wave 1!\n"
+"this value will be ineffective.##sgiwave"
+msgstr ""
+"макрос волны контролирует волну 1!\n"
+"это значение не даст результата."
+
+#: src/gui/inst/wavetable.cpp:304
+msgid "Wave 1##sgiwave1"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:307
+msgid "Global##sgiwave1"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:338
+msgid "Wave 2##sgiwave1"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:340
+msgid "Global##sgiwave2"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:370
+#, fuzzy
+msgid "Resume preview##sgiwave"
+msgstr "Возобовить превью"
+
+#: src/gui/inst/wavetable.cpp:374
+#, fuzzy
+msgid "Pause preview##sgiwave"
+msgstr "Приостановить превью"
+
+#: src/gui/inst/wavetable.cpp:384
+#, fuzzy
+msgid "Restart preview##sgiwave"
+msgstr "Перезапустить превью"
+
+#: src/gui/inst/wavetable.cpp:392
+#, fuzzy
+msgid "too many wavetables!##sgiwave"
+msgstr "слишком много волновых таблиц!"
+
+#: src/gui/inst/wavetable.cpp:409
+#, fuzzy
+msgid "Copy to new wavetable##sgiwave"
+msgstr "Копировать в новую волновую таблицу"
+
+#: src/gui/inst/wavetable.cpp:416
+#, fuzzy
+msgid "Update Rate##sgiwave"
+msgstr "Частота обновления"
+
+#: src/gui/inst/wavetable.cpp:421
+#, fuzzy
+msgid "Speed##sgiwave"
+msgstr "Открыть файл"
+
+#: src/gui/inst/wavetable.cpp:429
+msgid "Amount##sgiwave"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:436
+msgid "Power##sgiwave"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:442
+msgid "Global##sgiwave"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:449
+#, fuzzy
+msgid ""
+"wavetable synthesizer disabled.\n"
+"use the Waveform macro to set the wave for this instrument.##sgiwave"
+msgstr ""
+"синтезатор волновых таблиц выключен.\n"
+"используйте макрос волны для задания волновой таблицы для этого инструмента."
+
+#: src/gui/inst/wavetable.cpp:455
+#, fuzzy
+msgid "Local Waves##sgiwave"
+msgstr "Локальные волн. табл."
+
+#: src/gui/inst/wavetable.cpp:463
+msgid "Add##sgdl1"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:472
+#, fuzzy
+msgid "Duplicate##sgdl3"
+msgstr "Клонировать"
+
+#: src/gui/inst/wavetable.cpp:481
+#, fuzzy
+msgid "Open##sgdl1"
+msgstr "Открыть файл"
+
+#: src/gui/inst/wavetable.cpp:485
+#, fuzzy
+msgid "replace...##sgdl3"
+msgstr "заменить..."
+
+#: src/gui/inst/wavetable.cpp:498
+msgid "Save##sgdl3"
+msgstr ""
+
+#: src/gui/inst/wavetable.cpp:506
+#, fuzzy
+msgid "save raw...##sgdl0"
+msgstr "сохранить сырые данные..."
+
+#: src/gui/inst/wavetable.cpp:519
+#, fuzzy
+msgid "Move up##sgdl1"
+msgstr "Переместить на одну позицию вверх"
+
+#: src/gui/inst/wavetable.cpp:528
+#, fuzzy
+msgid "Move down##sgdl1"
+msgstr "Переместить на одну позицию вниз"
+
+#: src/gui/inst/wavetable.cpp:539
+#, fuzzy
+msgid "Delete##sgdl4"
+msgstr "Удалить"
+
+#: src/gui/inst/x1_010.cpp:39
+#, fuzzy
+msgid "Macros##sgiX1"
+msgstr "Макросы"
+
+#: src/gui/inst/x1_010.cpp:43
+#, fuzzy
+msgid "Volume##sgiX1"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/x1_010.cpp:44
+#, fuzzy
+msgid "Arpeggio##sgiX1"
+msgstr "Арпеджио"
+
+#: src/gui/inst/x1_010.cpp:45
+msgid "Pitch##sgiX1"
+msgstr ""
+
+#: src/gui/inst/x1_010.cpp:47
+#, fuzzy
+msgid "Waveform##sgiX1"
+msgstr "Волна"
+
+#: src/gui/inst/x1_010.cpp:49
+#, fuzzy
+msgid "Panning (left)##sgiX1"
+msgstr "Панорамирование (левый)"
+
+#: src/gui/inst/x1_010.cpp:50
+#, fuzzy
+msgid "Panning (right)##sgiX1"
+msgstr "Панорамирование (правый)"
+
+#: src/gui/inst/x1_010.cpp:54
+#, fuzzy
+msgid "Phase Reset##sgiX1"
+msgstr "Сброс фазы"
+
+#: src/gui/inst/x1_010.cpp:59
+#, fuzzy
+msgid "Envelope##sgiX1"
+msgstr "Огибающая"
+
+#: src/gui/inst/x1_010.cpp:60
+#, fuzzy
+msgid "Envelope Mode##sgiX1"
+msgstr "Режим огибающей"
+
+#: src/gui/inst/x1_010.cpp:61
+#, fuzzy
+msgid "AutoEnv Num##sgiX1"
+msgstr "Множ. част. авто-огиб."
+
+#: src/gui/inst/x1_010.cpp:62
+#, fuzzy
+msgid "AutoEnv Den##sgiX1"
+msgstr "Дел. част. авто-огиб."
+
+#: src/gui/inst/ymz280b.cpp:34
+#, fuzzy
+msgid "Macros##sgiYMZ"
+msgstr "Макросы"
+
+#: src/gui/inst/ymz280b.cpp:39
+#, fuzzy
+msgid "Volume##sgiYMZ"
+msgstr "Громкость##TL"
+
+#: src/gui/inst/ymz280b.cpp:40
+#, fuzzy
+msgid "Arpeggio##sgiYMZ"
+msgstr "Арпеджио"
+
+#: src/gui/inst/ymz280b.cpp:41
+msgid "Pitch##sgiYMZ"
+msgstr ""
+
+#: src/gui/inst/ymz280b.cpp:42
+#, fuzzy
+msgid "Panning##sgiYMZ"
+msgstr "Панорамирование"
+
+#: src/gui/inst/ymz280b.cpp:44
+#, fuzzy
+msgid "Phase Reset##sgiYMZ"
+msgstr "Сброс фазы"
+
 #: src/gui/log.cpp:26
 msgid "warning"
 msgstr ""
@@ -8945,6 +14092,16 @@ msgstr ""
 #, c-format
 msgid "bank %d"
 msgstr "банк %d"
+
+#: src/gui/memory.cpp:149 src/gui/memory.cpp:158
+#, fuzzy, c-format
+msgid "%d-%d ($%x-$%x): %dK ($%x)##sgme"
+msgstr "%d-%d ($%x-$%x): %d КиБ ($%x)"
+
+#: src/gui/memory.cpp:151 src/gui/memory.cpp:160
+#, fuzzy, c-format
+msgid "%d-%d ($%x-$%x): %d bytes ($%x)##sgme"
+msgstr "%d-%d ($%x-$%x): %d байт ($%x)"
 
 #: src/gui/memory.cpp:175 src/gui/memory.cpp:176
 msgid "no chips with memory"
@@ -9015,6 +14172,10 @@ msgstr "Категории"
 msgid "Systems"
 msgstr "Системы"
 
+#: src/gui/newSong.cpp:208
+msgid "User##sgpr"
+msgstr ""
+
 #: src/gui/newSong.cpp:223
 msgid "no systems here yet!"
 msgstr "пока здесь нет ни одной системы!"
@@ -9034,6 +14195,10 @@ msgstr "нет доступных категорий! что происходи�
 #: src/gui/newSong.cpp:280
 msgid "it appears you're extremely lucky today!"
 msgstr "похоже, что вам сегодня очень повезло!"
+
+#: src/gui/orders.cpp:46
+msgid "OrderSel###OrderSel"
+msgstr "Выб. матр. пат.###OrderSel"
 
 #: src/gui/orders.cpp:114
 msgid "Add new order"
@@ -9232,6 +14397,135 @@ msgstr "Соблюдать настройки из окна настроек в�
 msgid "Read-only (can't input notes)"
 msgstr "Только чтение (нельзя вводить ноты)"
 
+#: src/gui/piano.cpp:451
+msgid "Input Pad###Input Pad"
+msgstr "Панель ввода###Input Pad"
+
+#: src/gui/presets.cpp:55
+#, fuzzy
+msgid "Game consoles##sgpr"
+msgstr "Игровые консоли"
+
+#: src/gui/presets.cpp:55
+#, fuzzy
+msgid "let's play some chiptune making games!##sgpr"
+msgstr "давайте поиграем в создание чиптюнов!"
+
+#: src/gui/presets.cpp:340
+#, fuzzy
+msgid "Computers##sgpr"
+msgstr "Компьютеры"
+
+#: src/gui/presets.cpp:340
+#, fuzzy
+msgid "let's get to work on chiptune today.##sgpr"
+msgstr "давайте сегодня поработаем над чиптюнами."
+
+#: src/gui/presets.cpp:1507
+#, fuzzy
+msgid "Arcade systems##sgpr"
+msgstr "Аркадные автоматы"
+
+#: src/gui/presets.cpp:1507
+#, fuzzy
+msgid "INSERT COIN##sgpr"
+msgstr "ВСТАВЬТЕ ЖЕТОН"
+
+#: src/gui/presets.cpp:2879
+#, fuzzy
+msgid "system presets that you have saved.##sgpr"
+msgstr "пресеты систем, которые вы сохранили."
+
+#: src/gui/presets.cpp:2883
+#, fuzzy
+msgid ""
+"chips which use frequency modulation (FM) to generate sound.\n"
+"some of these also pack more (like square and sample channels).\n"
+"Actually \"FM\" here stands for phase modulation,\n"
+"but these two are indistinguishable\n"
+"if you use sine waves.##sgpr"
+msgstr ""
+"чипы, использующую частотную модуляцию (FM-синтез) для генерации звука.\n"
+"в некоторых из них присутствуют и другие способы синтеза звука (каналы с "
+"квадратными волнами или сэмплами).\n"
+"На самом деле, \"FM\" здесь означает фазовую модуляцию,\n"
+"но они неотличимы друг от друга при использовании синусоидальных волн."
+
+#: src/gui/presets.cpp:3109
+#, fuzzy
+msgid "Square##sgpr"
+msgstr "Меандр"
+
+#: src/gui/presets.cpp:3109
+#, fuzzy
+msgid ""
+"these chips generate square/pulse tones only (but may include noise).##sgpr"
+msgstr ""
+"эти чипы способны генерировать лишь квадратные/прямоугольные волны (но могут "
+"также генерировать шум)."
+
+#: src/gui/presets.cpp:3224
+#, fuzzy
+msgid "Sample##sgpr"
+msgstr "Сэмплы"
+
+#: src/gui/presets.cpp:3224
+#, fuzzy
+msgid "chips/systems which use PCM or ADPCM samples for sound synthesis.##sgpr"
+msgstr ""
+"чипы/системы, которые используют ИКМ- или АДИКМ-сэмплы для воспроизведения "
+"звука."
+
+#: src/gui/presets.cpp:3328
+#, fuzzy
+msgid "Wavetable##sgpr"
+msgstr "Волновые таблицы"
+
+#: src/gui/presets.cpp:3328
+#, fuzzy
+msgid "chips which use user-specified waveforms to generate sound.##sgpr"
+msgstr ""
+"чипы, которые использует задаваемые пользователем волны для синтеза звука."
+
+#: src/gui/presets.cpp:3393
+#, fuzzy
+msgid "Specialized##sgpr"
+msgstr "Особые"
+
+#: src/gui/presets.cpp:3393
+#, fuzzy
+msgid "chips/systems with unique sound synthesis methods.##sgpr"
+msgstr "чипы/системы с уникальными методами синтеза звука."
+
+#: src/gui/presets.cpp:3481
+#, fuzzy
+msgid "Modern/fantasy##sgpr"
+msgstr "Совр./вымышл."
+
+#: src/gui/presets.cpp:3481
+#, fuzzy
+msgid ""
+"chips/systems which do not exist in reality or were made just several years "
+"ago.##sgpr"
+msgstr ""
+"чипы/системы, не имеющие физического воплощения или сделанные всего "
+"несколько лет назад."
+
+#: src/gui/presets.cpp:3536
+#, fuzzy
+msgid "DefleMask-compatible##sgpr"
+msgstr "Совместимые с DefleMask"
+
+#: src/gui/presets.cpp:3536
+#, fuzzy
+msgid ""
+"these configurations are compatible with DefleMask.\n"
+"select this if you need to save as .dmf or work with that program.##sgpr"
+msgstr ""
+"эти пресеты совместимы с DefleMask.\n"
+"выбирайте их, если вам будет нужно будет экспортировать модуль в .dmf или "
+"работать с этой программой."
+
 #: src/gui/regView.cpp:38
 msgid "- no register pool available"
 msgstr "- список регистров недоступен"
@@ -9272,6 +14566,10 @@ msgstr "SNES: длина сэмпла будет скорректирована 
 #: src/gui/sampleEdit.cpp:249
 msgid "QSound: loop cannot be longer than 32767 samples"
 msgstr "QSound: цикл не может быть длиннее 32767 сэмплов"
+
+#: src/gui/sampleEdit.cpp:253
+msgid "QSound: maximum sample length is 65535"
+msgstr "QSound: максимальная длина сэмпла: 65535"
 
 #: src/gui/sampleEdit.cpp:259
 msgid "NES: loop point ignored on DPCM (may only loop entire sample)"
@@ -9482,6 +14780,18 @@ msgstr ""
 "произвести дизеринг для сэмпла при его использовании для чипа, "
 "поддерживающего только 8-битные сэмплы."
 
+#: src/gui/sampleEdit.cpp:588
+msgid "Hz"
+msgstr "Гц"
+
+#: src/gui/sampleEdit.cpp:647
+msgid "Fine"
+msgstr "Расстройка"
+
+#: src/gui/sampleEdit.cpp:684
+msgid "Mode"
+msgstr "Режим"
+
 #: src/gui/sampleEdit.cpp:854
 #, c-format
 msgid ""
@@ -9602,10 +14912,6 @@ msgstr "Применить фильтр"
 msgid "Cutoff:"
 msgstr "Частота среза:"
 
-#: src/gui/sampleEdit.cpp:1174
-msgid "Resonance"
-msgstr "Резонанс (добротность)"
-
 #: src/gui/sampleEdit.cpp:1180
 msgid "Power"
 msgstr "Порядок фильтра"
@@ -9652,9 +14958,22 @@ msgstr "Превью сэмпла"
 msgid "Create instrument from sample"
 msgstr "Создать инструмент из сэмпла"
 
+#: src/gui/sampleEdit.cpp:1362
+msgid "Zoom##sgsed0"
+msgstr ""
+
 #: src/gui/sampleEdit.cpp:1366 src/gui/xyOsc.cpp:59
 msgid "Zoom"
 msgstr "Масштаб"
+
+#: src/gui/sampleEdit.cpp:1388 src/gui/songInfo.cpp:79
+msgid "Auto"
+msgstr "Автоматически"
+
+#: src/gui/sampleEdit.cpp:1450
+#, c-format
+msgid "%dms"
+msgstr "%d мс"
 
 #: src/gui/sampleEdit.cpp:1760
 msgid "paste (replace)"
@@ -9689,6 +15008,11 @@ msgstr ""
 #, c-format
 msgid " (%d-%d: %d samples)"
 msgstr " (%d-%d: %d сэмпл)"
+
+#: src/gui/sampleEdit.cpp:1879
+#, c-format
+msgid "%.2fHz"
+msgstr "%.2f Гц"
 
 #: src/gui/sampleEdit.cpp:1997
 msgid "Non-8/16-bit samples cannot be edited without prior conversion."
@@ -9914,6 +15238,11 @@ msgstr "Язык"
 msgid "Render backend"
 msgstr "Библиотека отрисовки"
 
+#: src/gui/settings.cpp:668
+#, fuzzy
+msgid "Software##sgse"
+msgstr "Программная отрисовка"
+
 #: src/gui/settings.cpp:675 src/gui/settings.cpp:694 src/gui/settings.cpp:1313
 msgid "you may need to restart Furnace for this setting to take effect."
 msgstr ""
@@ -10134,10 +15463,6 @@ msgstr "Вибрация"
 msgid "Strength"
 msgstr "Сила вибрации"
 
-#: src/gui/settings.cpp:867
-msgid "Length"
-msgstr "Длина вибрации"
-
 #: src/gui/settings.cpp:878
 msgid "Use system file picker"
 msgstr "Использовать диалоговое окно выбора файлов ОС"
@@ -10257,6 +15582,11 @@ msgstr "Текущая"
 #: src/gui/settings.cpp:1059
 msgid "Reset to defaults"
 msgstr "Устан. по умолчанию"
+
+#: src/gui/settings.cpp:1096
+#, fuzzy
+msgid "Invert##sgse0"
+msgstr "Инвертировать"
 
 #: src/gui/settings.cpp:1155 src/gui/userPresets.cpp:439
 msgid "Configure"
@@ -10728,6 +16058,11 @@ msgstr "Список инструментов"
 #: src/gui/settings.cpp:2473
 msgid "Wavetable list"
 msgstr "Список волновых таблиц"
+
+#: src/gui/settings.cpp:2495
+#, fuzzy
+msgid "Local wavetables list##sgse"
+msgstr "Список локальных волновых таблиц"
 
 #: src/gui/settings.cpp:2516
 msgid "Sample list"
@@ -11643,6 +16978,15 @@ msgstr "Окно редактирования одного макроса + сп
 msgid "Use classic macro editor vertical slider"
 msgstr "Использовать классическую вертикальную полосу прокрутки"
 
+#: src/gui/settings.cpp:3681
+#, fuzzy
+msgid "Sample Editor##sgse"
+msgstr "Редактор сэмплов"
+
+#: src/gui/settings.cpp:3683
+msgid "Display mouse hover sample coordinates in hex##sgse"
+msgstr ""
+
 #: src/gui/settings.cpp:3689
 msgid "Wave Editor"
 msgstr "Редактор волновых таблиц"
@@ -11791,6 +17135,47 @@ msgstr "Закруглённые края ползунка полосы прок
 #: src/gui/settings.cpp:3867
 msgid "Borders around widgets"
 msgstr "Границы вокруг кнопок, списков и т.д."
+
+#: src/gui/settings.cpp:3873
+msgid "Misc##sgse"
+msgstr ""
+
+#: src/gui/settings.cpp:3875
+#, fuzzy
+msgid "Wrap text##sgse"
+msgstr "Переносить текст на новую строку"
+
+#: src/gui/settings.cpp:3880
+#, fuzzy
+msgid "Wrap text in song/subsong comments window.##sgse"
+msgstr ""
+"Переносить текст на новую строку в окне информации/комментариев к композиции."
+
+#: src/gui/settings.cpp:3884
+#, fuzzy
+msgid "Frame shading in text windows##sgse"
+msgstr "Градиент в текстовых окнах"
+
+#: src/gui/settings.cpp:3889
+#, fuzzy
+msgid ""
+"Apply frame shading to the multiline text fields\n"
+"such as song/subsong info/comments.##sgse"
+msgstr "Применять градиент в окне информации/комментариев к композиции."
+
+#: src/gui/settings.cpp:3893
+#, fuzzy
+msgid "Show chip info in chip manager##sgse"
+msgstr "Отображать информацию о чипе в менеджере чипов"
+
+#: src/gui/settings.cpp:3898
+#, fuzzy
+msgid ""
+"Display tooltip in chip manager when hovering over the chip. Tooltip shows "
+"chip name and description.##sgse"
+msgstr ""
+"Отображать подсказку при наведении курсора на чип. Подсказка отображает "
+"название и описание чипа."
 
 #: src/gui/settings.cpp:3905
 msgid "Color scheme"
@@ -12076,11 +17461,6 @@ msgstr ""
 msgid "Background (bottom-right)"
 msgstr ""
 
-#: src/gui/settings.cpp:4015 src/gui/settings.cpp:4070
-#: src/gui/settings.cpp:4238 src/gui/waveEdit.cpp:755
-msgid "Waveform"
-msgstr "Волна"
-
 #: src/gui/settings.cpp:4016
 msgid "Waveform (clip)"
 msgstr ""
@@ -12193,17 +17573,9 @@ msgstr ""
 msgid "Envelope View"
 msgstr "Визуализатор огибающей"
 
-#: src/gui/settings.cpp:4057
-msgid "Envelope"
-msgstr "Огибающая"
-
 #: src/gui/settings.cpp:4058
 msgid "Sustain guide"
 msgstr ""
-
-#: src/gui/settings.cpp:4059 src/gui/sysConf.cpp:737
-msgid "Release"
-msgstr "Релиз"
 
 #: src/gui/settings.cpp:4064
 msgid "Algorithm background"
@@ -13107,10 +18479,6 @@ msgstr "Автор"
 msgid "Album"
 msgstr "Альбом"
 
-#: src/gui/songInfo.cpp:79
-msgid "Auto"
-msgstr "Автоматически"
-
 #: src/gui/songInfo.cpp:100
 msgid "Tuning (A-4)"
 msgstr "Частота (ля 4-ой октавы)"
@@ -13561,18 +18929,6 @@ msgstr "Последний использованный канал"
 msgid "Hard reset envelope:"
 msgstr "Огибающая при жёстком перезапуске:"
 
-#: src/gui/sysConf.cpp:722
-msgid "Attack"
-msgstr "Атака"
-
-#: src/gui/sysConf.cpp:727
-msgid "Decay"
-msgstr "Спад"
-
-#: src/gui/sysConf.cpp:732
-msgid "Sustain"
-msgstr "Сустейн"
-
 #: src/gui/sysConf.cpp:743
 msgid "Envelope reset time:"
 msgstr "Время сброса огибающей:"
@@ -13746,9 +19102,18 @@ msgstr "Память чипа:"
 msgid "2MB (ECS/AGA max)"
 msgstr "2 МиБ (максимум для ECS/AGA)"
 
+#: src/gui/sysConf.cpp:1031
+msgid "1MB##sgsc"
+msgstr ""
+
 #: src/gui/sysConf.cpp:1036
 msgid "512KB (OCS max)"
 msgstr "512 КиБ (максимум для OCS)"
+
+#: src/gui/sysConf.cpp:1041
+#, fuzzy
+msgid "256KB##sgsc"
+msgstr "256 КиБ"
 
 #: src/gui/sysConf.cpp:1049 src/gui/sysConf.cpp:1099 src/gui/sysConf.cpp:2441
 #: src/gui/sysConf.cpp:2642
@@ -14201,9 +19566,146 @@ msgstr ""
 msgid "V 47.0.0 (9-bit volume)"
 msgstr ""
 
+#: src/gui/sysConf.cpp:2517
+#, fuzzy
+msgid "Downmix chip output to mono##sgsc"
+msgstr "Свести звук чипа в моно"
+
+#: src/gui/sysConf.cpp:2529
+#, fuzzy
+msgid "Reserved blocks for wavetables:##sgsc"
+msgstr "Зарезервированных блоков под волновые таблицы:"
+
+#: src/gui/sysConf.cpp:2537
+#, fuzzy
+msgid ""
+"Reserve this many blocks 256 bytes each in sample memory.\n"
+"Each block holds one wavetable (is used for one wavetable channel),\n"
+"so reserve as many as you need.##sgsc"
+msgstr ""
+"Зарезервировать столько блоков, каждый по 256 байт, в памяти сэмплов.\n"
+"В каждый блок помещается одна волновая таблица (он используется для одного "
+"канала в режиме волновых таблиц),\n"
+"так что выделяйте столько, сколько вам нужно."
+
+#: src/gui/sysConf.cpp:2557
+#, fuzzy
+msgid "Clock rate:##sgsc10"
+msgstr "Тактовая частота:"
+
+#: src/gui/sysConf.cpp:2595
+msgid "Audio output method:##sgsc"
+msgstr ""
+
+#: src/gui/sysConf.cpp:2597
+msgid "Idealized internal output - 8-bit PCM##sgsc"
+msgstr ""
+
+#: src/gui/sysConf.cpp:2602
+msgid "Real internal output - 8-bit PWM##sgsc"
+msgstr ""
+
+#: src/gui/sysConf.cpp:2614
+#, fuzzy
+msgid "Sample Rate##sgsc"
+msgstr "Частота квантования"
+
+#: src/gui/sysConf.cpp:2616 src/gui/sysConf.cpp:2625
+#, c-format
+msgid "%.0fHz##sgsc"
+msgstr ""
+
+#: src/gui/sysConf.cpp:2623
+msgid "PWM Rate##sgsc"
+msgstr ""
+
 #: src/gui/sysConf.cpp:2660
 msgid "Custom clock rate"
 msgstr "Пользовательская тактовая частота"
+
+#: src/gui/sysConf.cpp:2669
+msgid "Hz##sgscHz"
+msgstr ""
+
+#: src/gui/sysManager.cpp:87
+msgid "Chip Manager###Chip Manager"
+msgstr "Менеджер чипов###Chip Manager"
+
+#: src/gui/sysManager.cpp:88
+#, fuzzy
+msgid "Preserve channel order##sgsm"
+msgstr "Сохранить порядок каналов"
+
+#: src/gui/sysManager.cpp:90
+#, fuzzy
+msgid "Clone channel data##sgsm"
+msgstr "Клонировать данные каналов"
+
+#: src/gui/sysManager.cpp:93
+#, fuzzy
+msgid "Clone at end##sgsm"
+msgstr "Клонировать в конец"
+
+#: src/gui/sysManager.cpp:101
+msgid "Name##sgsm"
+msgstr ""
+
+#: src/gui/sysManager.cpp:103
+#, fuzzy
+msgid "Actions##sgsm"
+msgstr "Действия"
+
+#: src/gui/sysManager.cpp:116
+#, fuzzy
+msgid "(drag to swap chips)##sgsm"
+msgstr "(перетащите, чтобы поменять местами каналы)"
+
+#: src/gui/sysManager.cpp:144
+msgid "Change##SysChange"
+msgstr "Сменить##SysChange"
+
+#: src/gui/sysManager.cpp:155
+msgid "cannot change chip! ("
+msgstr "не могу сменить чип! ("
+
+#: src/gui/sysManager.cpp:163
+msgid "Clone##SysDup"
+msgstr "Клонировать##SysDup"
+
+#: src/gui/sysManager.cpp:168 src/gui/sysManager.cpp:188
+#, fuzzy
+msgid "cannot duplicate chip! (##sgsm"
+msgstr "не получилось склонировать чип! ("
+
+#: src/gui/sysManager.cpp:201
+#, fuzzy, c-format
+msgid "max number of systems is %d##sgsm"
+msgstr "максимальное число чипов/систем не может превышать %d"
+
+#: src/gui/sysManager.cpp:206
+#, fuzzy, c-format
+msgid "max number of total channels is %d##sgsm"
+msgstr "максимальное общее число каналов не может превышать %d"
+
+#: src/gui/sysManager.cpp:217
+#, fuzzy
+msgid "Are you sure you want to remove this chip?##sgsm"
+msgstr "Вы действительно хотите удалить этот чип?"
+
+#: src/gui/sysManager.cpp:221
+#, fuzzy
+msgid "Remove##sgsm"
+msgstr "Удалить"
+
+#: src/gui/sysManager.cpp:235
+#, fuzzy
+msgid "cannot add chip! (##sgsm"
+msgstr "не могу добавить чип! ("
+
+#: src/gui/sysPartNumber.cpp:201
+#, fuzzy
+msgid "ZXS Beeper##sgsa"
+msgstr "ZXS (пищалка)"
 
 #: src/gui/userPresets.cpp:325
 msgid "User Systems"
@@ -14433,10 +19935,6 @@ msgstr ""
 msgid "Shapes"
 msgstr "Волны"
 
-#: src/gui/waveEdit.cpp:622
-msgid "Duty"
-msgstr "Скважность"
-
 #: src/gui/waveEdit.cpp:632
 msgid "Exponent"
 msgstr "Пок. степени"
@@ -14571,10 +20069,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "no instrument selected##sgie1"
 #~ msgstr "не выбрано ни одного инструмента"
-
-#, fuzzy
-#~ msgid "Open##sgie1"
-#~ msgstr "Открыть файл"
 
 #~ msgid "00xy: Arpeggio"
 #~ msgstr "00xy: Арпеджио"
@@ -14746,9 +20240,6 @@ msgstr ""
 #~ msgid "cannot remove the last one"
 #~ msgstr "не могу удалить последнюю"
 
-#~ msgid "Instrument %d"
-#~ msgstr "Инструмент %d"
-
 #~ msgid "could not seek to end: %s"
 #~ msgstr "не смог перейти в конец файла: %s"
 
@@ -14770,56 +20261,8 @@ msgstr ""
 #~ msgid "premature end of file"
 #~ msgstr "преждевременный конец файла"
 
-#~ msgid "too many samples!"
-#~ msgstr "слишком много сэмплов!"
-
 #~ msgid "no free patterns in channel %d!"
 #~ msgstr "нет свободных паттернов для канала %d!"
-
-#~ msgid "Unsaved changes! Save changes before opening backup?"
-#~ msgstr ""
-#~ "Остались несохранённые изменения! Сохранить их перед открытием резервной "
-#~ "копии?"
-
-#~ msgid "Error while sending request (MIDI output not configured?)"
-#~ msgstr "Ошибка при посылке запроса (MIDI вывод не настроен?)"
-
-#~ msgid "Select an option: (cannot be undone!)"
-#~ msgstr "Выберите опцию: (действие не может быть отменено!)"
-
-#~ msgid "couldn't paste! make sure your sample is 8 or 16-bit."
-#~ msgstr ""
-#~ "Не получилось вставить сэмпл! убедитесь, что это 8- или 16-битный сэмпл."
-
-#~ msgid "select at least one sample!"
-#~ msgstr "выберите хотя бы один сэмпл!"
-
-#~ msgid "maximum size is 256 samples!"
-#~ msgstr "максимальный размер равен 256 сэмплам!"
-
-#~ msgid "Preserve channel order"
-#~ msgstr "Сохранить порядок каналов"
-
-#~ msgid "Clone channel data"
-#~ msgstr "Клонировать данные каналов"
-
-#~ msgid "Clone at end"
-#~ msgstr "Клонировать в конец"
-
-#~ msgid "Actions"
-#~ msgstr "Действия"
-
-#~ msgid "(drag to swap chips)"
-#~ msgstr "(перетащите, чтобы поменять местами каналы)"
-
-#~ msgid "Clone##SysDup"
-#~ msgstr "Клонировать##SysDup"
-
-#~ msgid "Change##SysChange"
-#~ msgstr "Сменить##SysChange"
-
-#~ msgid "Are you sure you want to remove this chip?"
-#~ msgstr "Вы действительно хотите удалить этот чип?"
 
 #~ msgid "Down Down Down"
 #~ msgstr "Вниз Вниз Вниз"
@@ -14869,20 +20312,11 @@ msgstr ""
 #~ msgid "Detune 2"
 #~ msgstr "Расстройка 2"
 
-#~ msgid "AM Depth"
-#~ msgstr "Глубина АМ"
-
 #~ msgid "Vibrato Depth"
 #~ msgstr "Глубина вибрато"
 
-#~ msgid "Sustained"
-#~ msgstr "Сустейн"
-
 #~ msgid "Level Scaling"
 #~ msgstr "Масштаб. громкости"
-
-#~ msgid "Vibrato"
-#~ msgstr "Вибрато"
 
 #~ msgid "Scale Rate"
 #~ msgstr "Измен. коэфф. масш. в зав. от част."
@@ -14899,17 +20333,11 @@ msgstr ""
 #~ msgid "Reverb"
 #~ msgstr "Реверб"
 
-#~ msgid "Fine"
-#~ msgstr "Расстройка"
-
 #~ msgid "LFO2 > Freq"
 #~ msgstr "ОНЧ2 > част."
 
 #~ msgid "LFO2 > Amp"
 #~ msgstr "ОНЧ2 > част."
-
-#~ msgid "OP4 Noise Mode"
-#~ msgstr "Режим шума ОП4"
 
 #~ msgid "Envelope Delay"
 #~ msgstr "Задержка огибающей"
@@ -15160,18 +20588,6 @@ msgstr ""
 #~ msgid "How did you even"
 #~ msgstr "Как вы вообще смогли"
 
-#~ msgid "triangle"
-#~ msgstr "треуг."
-
-#~ msgid "saw"
-#~ msgstr "пила"
-
-#~ msgid "pulse"
-#~ msgstr "прямоуг."
-
-#~ msgid "noise"
-#~ msgstr "шум"
-
 #~ msgid "tone"
 #~ msgstr "тон"
 
@@ -15208,9 +20624,6 @@ msgstr ""
 #~ msgid "echo"
 #~ msgstr "эхо"
 
-#~ msgid "pitch mod"
-#~ msgstr "част. мод."
-
 #~ msgid "invert right"
 #~ msgstr "инв. справа"
 
@@ -15225,9 +20638,6 @@ msgstr ""
 
 #~ msgid "high"
 #~ msgstr "ФВЧ"
-
-#~ msgid "ch3off"
-#~ msgstr "выкл. 3 кан."
 
 #~ msgid "test"
 #~ msgstr "тест"
@@ -15403,54 +20813,8 @@ msgstr ""
 #~ msgid "Direct"
 #~ msgstr "Прямое"
 
-#~ msgid "Decrease (linear)"
-#~ msgstr "Спад (линейный)"
-
-#~ msgid "Decrease (logarithmic)"
-#~ msgstr "Спад (логарифмический)"
-
-#~ msgid "Increase (linear)"
-#~ msgstr "Нарастание (линейное)"
-
-#~ msgid "Increase (bent line)"
-#~ msgstr "Нарастание (изогн. линия)"
-
 #~ msgid "Relative"
 #~ msgstr "Относительное"
-
-#~ msgid "Random"
-#~ msgstr "Шум"
-
-#~ msgid ""
-#~ "left click to restart\n"
-#~ "middle click to pause\n"
-#~ "right click to see algorithm"
-#~ msgstr ""
-#~ "ЛКМ для перезапуска\n"
-#~ "Нажмите колёсико, чтобы поставить на паузу\n"
-#~ "ПКМ для переключения на визуализацию алгоритма"
-
-#~ msgid ""
-#~ "left click to configure TL scaling\n"
-#~ "right click to see FM preview"
-#~ msgstr ""
-#~ "ЛКМ для конфигурации масштабирования громкости операторов\n"
-#~ "ПКМ для переключения на превью FM-сигнала"
-
-#~ msgid "right click to see FM preview"
-#~ msgstr "ПКМ для переключения на превью FM-сигнала"
-
-#~ msgid "operator level changes with volume?"
-#~ msgstr "Громкость оператора зависит от общей громкости?"
-
-#~ msgid "AUTO##OPKVS"
-#~ msgstr "АВТО##OPKVS"
-
-#~ msgid "NO##OPKVS"
-#~ msgstr "НЕТ##OPKVS"
-
-#~ msgid "YES##OPKVS"
-#~ msgstr "ДА##OPKVS"
 
 #~ msgid "Bottom"
 #~ msgstr "Мин."
@@ -15458,137 +20822,14 @@ msgstr ""
 #~ msgid "Hold"
 #~ msgstr "Задержка после атаки"
 
-#~ msgid "SusTime"
-#~ msgstr "Время сустейна"
-
-#~ msgid "SusDecay"
-#~ msgstr "Спад сустейна"
-
 #~ msgid "Shape"
 #~ msgstr "Форма волны"
-
-#~ msgid "Macro type: Sequence"
-#~ msgstr "Тип макроса: последовательность"
-
-#~ msgid "Macro type: ADSR"
-#~ msgstr "Тип макроса: ADSR-огибающая"
-
-#~ msgid "Macro type: LFO"
-#~ msgstr "Тип макроса: ГНЧ"
-
-#~ msgid "Macro type: What's going on here?"
-#~ msgstr "Тип макроса: Что здесь происходит?"
-
-#~ msgid "Delay/Step Length"
-#~ msgstr "Задержка/длина шага"
-
-#~ msgid "Step Length (ticks)##IMacroSpeed"
-#~ msgstr "Длина шага (в шагах движка трекера)##IMacroSpeed"
-
-#~ msgid "Delay##IMacroDelay"
-#~ msgstr "Задержка##IMacroDelay"
-
-#~ msgid "Release mode: Active (jump to release pos)"
-#~ msgstr "Тип релиза: активный (прыгнуть на позицию релиза)"
-
-#~ msgid "Release mode: Passive (delayed release)"
-#~ msgstr "Тип релиза: пассивный (отложенный релиз)"
-
-#~ msgid "StepLen"
-#~ msgstr "Дл. шага"
-
-#~ msgid "Delay"
-#~ msgstr "Задержка"
-
-#~ msgid "The heck? No, this isn't even working correctly..."
-#~ msgstr "Что за?.. Нет, оно ведь работает неправильно..."
-
-#~ msgid "The only problem with that selectedMacro is that it's a bug..."
-#~ msgstr "Единственная проблема с тем selectedMacro в том, что это не сбой..."
-
-#~ msgid "(copying)"
-#~ msgstr "(копирование)"
-
-#~ msgid "(swapping)"
-#~ msgstr "(замена)"
-
-#~ msgid ""
-#~ "- drag to swap operator\n"
-#~ "- shift-drag to copy operator"
-#~ msgstr ""
-#~ "- перетащите, чтобы поменять настройки операторов местами\n"
-#~ "- перетащите с зажатой клавишей SHIFT, чтобы скопировать настройки "
-#~ "оператора"
-
-#~ msgid "new DPCM features disabled (compatibility)!"
-#~ msgstr "новые функции ДИКМ отключены (совместимость)!"
-
-#~ msgid "click here to enable them."
-#~ msgstr "нажмите сюда, чтобы включить их."
-
-#~ msgid "none selected"
-#~ msgstr "не выбран"
 
 #~ msgid "Use sample"
 #~ msgstr "Использовать сэмпл"
 
-#~ msgid "Sample bank slot##BANKSLOT"
-#~ msgstr "Номер банка сэмплов##BANKSLOT"
-
-#~ msgid "Use wavetable (Amiga/Generic DAC only)"
-#~ msgstr "Использовать волновую таблицу (только для Amiga/типичного ЦАП)"
-
-#~ msgid "Use wavetable"
-#~ msgstr "Использовать волновую таблицу"
-
-#~ msgid "Use sample map"
-#~ msgstr "Использовать карту сэмплов"
-
 #~ msgid "delta"
 #~ msgstr "нач. знач."
-
-#~ msgid "sample name"
-#~ msgstr "название сэмпла"
-
-#~ msgid "set entire map to this pitch"
-#~ msgstr "установить эту частоту для всей карты"
-
-#~ msgid "set entire map to this delta counter value"
-#~ msgstr "установить это нач. знач. дельта-счётчика для всей карты"
-
-#~ msgid "set entire map to this note"
-#~ msgstr "установить эту ноту для всей карты"
-
-#~ msgid "set entire map to this sample"
-#~ msgstr "установить этот сэмпл для всей карты"
-
-#~ msgid "reset pitches"
-#~ msgstr "сбросить частоты"
-
-#~ msgid "clear delta counter values"
-#~ msgstr "очистить нач. знач. дельта-счётчика"
-
-#~ msgid "reset notes"
-#~ msgstr "сбросить ноты"
-
-#~ msgid "clear map samples"
-#~ msgstr "сбросить сэмплы карты"
-
-#~ msgid "Request from TX81Z"
-#~ msgstr "Запросить у TX81Z"
-
-#~ msgid "%s name"
-#~ msgstr "название %s"
-
-#~ msgid "Fixed frequency mode"
-#~ msgstr "Режим фиксированной частоты"
-
-#~ msgid ""
-#~ "when enabled, drums will be set to the specified frequencies, ignoring "
-#~ "the note."
-#~ msgstr ""
-#~ "при включении режима ударные будут звучать на указанных частотах. "
-#~ "Значения нот будут игнорироваться."
 
 #~ msgid "Drum"
 #~ msgstr "Ударный"
@@ -15596,34 +20837,8 @@ msgstr ""
 #~ msgid "Block"
 #~ msgstr "Блок"
 
-#~ msgid "FreqNum"
-#~ msgstr "Частота"
-
-#~ msgid "Snare/Hi-hat"
-#~ msgstr "Рабочий барабан/хай-хэт"
-
-#~ msgid "Tom/Top"
-#~ msgstr "Там-там/тарелка"
-
-#~ msgid "Volume##TL"
-#~ msgstr "Громкость##TL"
-
-#~ msgid "this volume slider only works in compatibility (non-drums) system."
-#~ msgstr ""
-#~ "эта регулировка громкости работает только в совместимой (без ударных) "
-#~ "системе."
-
 #~ msgid "Env"
 #~ msgstr "Огиб."
-
-#~ msgid "OPL2/3 only (last 4 waveforms are OPL3 only)"
-#~ msgstr "Только OPL2/3 (последние 4 волны только для OPL3)"
-
-#~ msgid "Envelope 2 (kick only)"
-#~ msgstr "Огибающая 2 (только бочка)"
-
-#~ msgid "Operator %d"
-#~ msgstr "Оператор %d"
 
 #~ msgid "Freq"
 #~ msgstr "Част."
@@ -15634,140 +20849,8 @@ msgstr ""
 #~ msgid "F"
 #~ msgstr "Ч"
 
-#~ msgid "Frequency (F-Num)"
-#~ msgstr "Частота (F-Num)"
-
-#~ msgid "SSG On"
-#~ msgstr "Вкл. SSG"
-
-#~ msgid "FM Macros"
-#~ msgstr "Макросы FM"
-
-#~ msgid "LFO Speed"
-#~ msgstr "Частота ГНЧ"
-
-#~ msgid "PM Depth"
-#~ msgstr "Глубина ФМ"
-
-#~ msgid "LFO Shape"
-#~ msgstr "Форма волны ГНЧ"
-
-#~ msgid "OpMask"
-#~ msgstr "Маска операторов"
-
-#~ msgid "AM Depth 2"
-#~ msgstr "Глубина АМ 2"
-
-#~ msgid "PM Depth 2"
-#~ msgstr "Глубина ФМ 2"
-
-#~ msgid "LFO2 Speed"
-#~ msgstr "Скорость ГНЧ 2"
-
-#~ msgid "LFO2 Shape"
-#~ msgstr "Форма волны ГНЧ 2"
-
-#~ msgid "OP%d Macros"
-#~ msgstr "Макросы ОП%d"
-
-#~ msgid "Op. Arpeggio"
-#~ msgstr "Арпеджио оператора"
-
-#~ msgid "Op. Pitch"
-#~ msgstr "Частота оператора"
-
-#~ msgid "Op. Panning"
-#~ msgstr "Панорамирование оператора"
-
-#~ msgid "Use software envelope"
-#~ msgstr "Использовать программную огибающую громкости"
-
-#~ msgid "Initialize envelope on every note"
-#~ msgstr "Инициализировать огибающую на каждой ноте"
-
-#~ msgid "Sound Length"
-#~ msgstr "Длина звука"
-
-#~ msgid "Infinity"
-#~ msgstr "Бесконечность"
-
-#~ msgid "Direction"
-#~ msgstr "Направление"
-
-#~ msgid "Up"
-#~ msgstr "Вверх"
-
-#~ msgid "Down"
-#~ msgstr "Вниз"
-
-#~ msgid "Hardware Sequence"
-#~ msgstr "Аппаратная последовательность"
-
-#~ msgid "Tick"
-#~ msgstr "Шаг"
-
-#~ msgid "Command"
-#~ msgstr "Команда"
-
-#~ msgid "Move/Remove"
-#~ msgstr "Перем./Удал."
-
-#~ msgid "Env Length"
-#~ msgstr "Длина огибающей"
-
-#~ msgid "Shift"
-#~ msgstr "На сколько"
-
-#~ msgid "Ticks"
-#~ msgstr "Шагов"
-
-#~ msgid "Position"
-#~ msgstr "Положение"
-
 #~ msgid "tri"
 #~ msgstr "треуг."
-
-#~ msgid "Ring Modulation"
-#~ msgstr "Кольцевая модуляция"
-
-#~ msgid "Oscillator Sync"
-#~ msgstr "Синхронизация осцилляторов"
-
-#~ msgid "Enable filter"
-#~ msgstr "Включить фильтр"
-
-#~ msgid "Initialize filter"
-#~ msgstr "Инициализировать фильтр"
-
-#~ msgid "Cutoff"
-#~ msgstr "Частота среза"
-
-#~ msgid "Filter Mode"
-#~ msgstr "Тип фильтра"
-
-#~ msgid "Noise Mode"
-#~ msgstr "Режим шума"
-
-#~ msgid "Wave Mix Mode"
-#~ msgstr "Режим смешения волн"
-
-#~ msgid "Absolute Cutoff Macro"
-#~ msgstr "Абсолютный макрос частоты среза"
-
-#~ msgid "Absolute Duty Macro"
-#~ msgstr "Абсолютный макрос скважности"
-
-#~ msgid "Don't test before new note"
-#~ msgstr "Не включать тестовый бит перед новой нотой"
-
-#~ msgid "Switch roles of frequency and phase reset timer"
-#~ msgstr "Поменять роли таймера сброса фазы и таймера изменения частоты"
-
-#~ msgid "Period"
-#~ msgstr "Период"
-
-#~ msgid "Amount"
-#~ msgstr "Количество"
 
 #~ msgid "Bound"
 #~ msgstr "Граница"
@@ -15775,315 +20858,26 @@ msgstr ""
 #~ msgid "Flip"
 #~ msgstr "Туда-обратно"
 
-#~ msgid "Load waveform"
-#~ msgstr "Загрузить волну"
-
-#~ msgid ""
-#~ "when enabled, a waveform will be loaded into RAM.\n"
-#~ "when disabled, only the offset and length change."
-#~ msgstr ""
-#~ "при включении этой опции олна будет загружена в ОЗУ.\n"
-#~ "если опция выключена, меняться будут только смещение и длина волны."
-
-#~ msgid "Waveform##WAVE"
-#~ msgstr "Волна##WAVE"
-
-#~ msgid "Per-channel wave position/length"
-#~ msgstr "Позиционирование и длина волны отдельно для каждого канала"
-
 #~ msgid "Ch"
 #~ msgstr "Кан."
-
-#~ msgid "Compatibility mode"
-#~ msgstr "Режим совместимости"
-
-#~ msgid ""
-#~ "only use for compatibility with .dmf modules!\n"
-#~ "- initializes modulation table with first wavetable\n"
-#~ "- does not alter modulation parameters on instrument change"
-#~ msgstr ""
-#~ "только для совместимости с модулями .dmf!\n"
-#~ "- инициализирует волновую таблицу модулятора первой волновой таблицей\n"
-#~ "- не изменяет параметры модуляции при смене инструмента"
-
-#~ msgid "Modulation depth"
-#~ msgstr "Глубина модуляции"
-
-#~ msgid "Modulation speed"
-#~ msgstr "Скорость модуляции"
-
-#~ msgid "Modulation table"
-#~ msgstr "Волновая таблица модуляции"
-
-#~ msgid "Set modulation table (channel 5 only)"
-#~ msgstr "Выставить таблицу модуляции (только для 5-го канала)"
-
-#~ msgid "Filter K1"
-#~ msgstr "K1 фильтра"
-
-#~ msgid "Filter K2"
-#~ msgstr "K2 фильтра"
-
-#~ msgid "Envelope length"
-#~ msgstr "Длина огиб."
-
-#~ msgid "Left Volume Ramp"
-#~ msgstr "Нараст. лев. громк."
-
-#~ msgid "Right Volume Ramp"
-#~ msgstr "Нараст. прав. громк."
-
-#~ msgid "Filter K1 Ramp"
-#~ msgstr "Нараст. K1 фильтра"
-
-#~ msgid "Filter K2 Ramp"
-#~ msgstr "Нараст. K2 фильтра"
-
-#~ msgid "K1 Ramp Slowdown"
-#~ msgstr "Замедл. нараст. K1"
-
-#~ msgid "K2 Ramp Slowdown"
-#~ msgstr "Замедл. нараст. K2"
-
-#~ msgid "Attack Rate"
-#~ msgstr "Скорость атаки"
-
-#~ msgid "Decay 1 Rate"
-#~ msgstr "Скорость спада 1"
-
-#~ msgid "Decay Level"
-#~ msgstr "Уровень спада"
-
-#~ msgid "Decay 2 Rate"
-#~ msgstr "Скорость спада 2"
-
-#~ msgid "Release Rate"
-#~ msgstr "Скорость релиза"
-
-#~ msgid "Rate Correction"
-#~ msgstr "Коррекция скорости"
 
 #~ msgid "LFO Rate"
 #~ msgstr "Скорость ГНЧ"
 
-#~ msgid "Use envelope"
-#~ msgstr "Использовать огибающую"
-
-#~ msgid "Sustain/release mode:"
-#~ msgstr "Режим сустейна/релиза:"
-
-#~ msgid "Direct (cut on release)"
-#~ msgstr "Прямой (заглушить на релизе)"
-
-#~ msgid "Effective (linear decrease)"
-#~ msgstr "Эффективный (линейный спад)"
-
-#~ msgid "Effective (exponential decrease)"
-#~ msgstr "Эффективный (экспоненциальный спад)"
-
-#~ msgid "Delayed (write R on release)"
-#~ msgstr "Отложенный (записать R на релизе)"
-
-#~ msgid "Gain Mode"
-#~ msgstr "Режим усиления"
-
 #~ msgid "Gain"
 #~ msgstr "Усиление"
-
-#~ msgid ""
-#~ "using decrease modes will not produce any sound at all, unless you know "
-#~ "what you are doing.\n"
-#~ "it is recommended to use the Gain macro for decrease instead."
-#~ msgstr ""
-#~ "использование режимов спада приведёт к отсутствию звука, если вы не "
-#~ "понимаете, как это всё работает.\n"
-#~ "рекомендуется использовать макрос усиления для спада."
-
-#~ msgid "Enable synthesizer"
-#~ msgstr "Включить синтезатор"
-
-#~ msgid "Single-waveform"
-#~ msgstr "Одна волна"
-
-#~ msgid "Dual-waveform"
-#~ msgstr "Две волны"
 
 #~ msgid "Wave 1"
 #~ msgstr "Волна 1"
 
-#~ msgid ""
-#~ "waveform macro is controlling wave 1!\n"
-#~ "this value will be ineffective."
-#~ msgstr ""
-#~ "макрос волны контролирует волну 1!\n"
-#~ "это значение не даст результата."
-
 #~ msgid "Wave 2"
 #~ msgstr "Волна 2"
-
-#~ msgid "Resume preview"
-#~ msgstr "Возобовить превью"
-
-#~ msgid "Pause preview"
-#~ msgstr "Приостановить превью"
-
-#~ msgid "Restart preview"
-#~ msgstr "Перезапустить превью"
-
-#~ msgid "Copy to new wavetable"
-#~ msgstr "Копировать в новую волновую таблицу"
-
-#~ msgid "Update Rate"
-#~ msgstr "Частота обновления"
 
 #~ msgid "Global"
 #~ msgstr "Глобальная"
 
-#~ msgid ""
-#~ "wavetable synthesizer disabled.\n"
-#~ "use the Waveform macro to set the wave for this instrument."
-#~ msgstr ""
-#~ "синтезатор волновых таблиц выключен.\n"
-#~ "используйте макрос волны для задания волновой таблицы для этого "
-#~ "инструмента."
-
-#~ msgid "Macros"
-#~ msgstr "Макросы"
-
-#~ msgid "Arpeggio"
-#~ msgstr "Арпеджио"
-
-#~ msgid "Phase Reset"
-#~ msgstr "Сброс фазы"
-
-#~ msgid "Duty/Noise"
-#~ msgstr "Скважность/режим шума"
-
-#~ msgid "Surround"
-#~ msgstr "Окружающее звучание"
-
-#~ msgid "Panning (left)"
-#~ msgstr "Панорамирование (левый)"
-
-#~ msgid "Panning (right)"
-#~ msgstr "Панорамирование (правый)"
-
-#~ msgid "Noise Freq"
-#~ msgstr "Частота шума"
-
-#~ msgid "AutoEnv Num"
-#~ msgstr "Множ. част. авто-огиб."
-
-#~ msgid "AutoEnv Den"
-#~ msgstr "Дел. част. авто-огиб."
-
-#~ msgid "Noise AND Mask"
-#~ msgstr "Маска шума (И)"
-
-#~ msgid "Noise OR Mask"
-#~ msgstr "Маска шума (ИЛИ)"
-
-#~ msgid "On/Off"
-#~ msgstr "Вкл./выкл."
-
 #~ msgid "Patch"
 #~ msgstr "Патч"
-
-#~ msgid "Mod Depth"
-#~ msgstr "Глуб. мод."
-
-#~ msgid "Mod Speed"
-#~ msgstr "Скор. мод."
-
-#~ msgid "Mod Position"
-#~ msgstr "Полож. мод."
-
-#~ msgid "Noise Length"
-#~ msgstr "Длина шума"
-
-#~ msgid "Wave Pos"
-#~ msgstr "Полож. волны"
-
-#~ msgid "Wave Length"
-#~ msgstr "Длина волны"
-
-#~ msgid "Pulse Width"
-#~ msgstr "Скважность"
-
-#~ msgid "Duty/Int"
-#~ msgstr "Скважность/инт."
-
-#~ msgid "Load LFSR"
-#~ msgstr "Загрузить в РСЛОС"
-
-#~ msgid "Envelope Mode"
-#~ msgstr "Режим огибающей"
-
-#~ msgid "Phase Reset Timer"
-#~ msgstr "Таймер сброса фазы"
-
-#~ msgid "Clock Divider"
-#~ msgstr "Делитель тактовой частоты"
-
-#~ msgid "Global Volume"
-#~ msgstr "Глобальная громкость"
-
-#~ msgid "Echo Level"
-#~ msgstr "Уровень эхо"
-
-#~ msgid "Echo Feedback"
-#~ msgstr "Обратная связь эхо"
-
-#~ msgid "Echo Length"
-#~ msgstr "Длина эхо"
-
-#~ msgid "Group Ctrl"
-#~ msgstr "Контроль группы"
-
-#~ msgid "Group Attack"
-#~ msgstr "Атака группы"
-
-#~ msgid "Group Decay"
-#~ msgstr "Спад группы"
-
-#~ msgid "Noise Type"
-#~ msgstr "Режим шума"
-
-#~ msgid "Square/Noise"
-#~ msgstr "Меандр/шум"
-
-#~ msgid "Tap A Location"
-#~ msgstr "Положение отвода A"
-
-#~ msgid "Tap B Location"
-#~ msgstr "Положение отвода B"
-
-#~ msgid "Portion A Length"
-#~ msgstr "Длина части A"
-
-#~ msgid "Portion B Length"
-#~ msgstr "Длина части B"
-
-#~ msgid "Portion A Offset"
-#~ msgstr "Сдвиг части A"
-
-#~ msgid "Portion B Offset"
-#~ msgstr "Сдвиг части B"
-
-#~ msgid "Parameter"
-#~ msgstr "Параметр"
-
-#~ msgid "Load Value"
-#~ msgstr "Загрузить значение"
-
-#~ msgid "Filter Toggle"
-#~ msgstr "Вкл./выкл. фильтр"
-
-#~ msgid "Octave offset"
-#~ msgstr "Сдвиг октавы"
-
-#~ msgid "go to Macros for other parameters."
-#~ msgstr "Откройте вкладку макросов для управления другими параметрами."
 
 #~ msgid "E3xx: Set vibrato shape (0: up/down; 1: up only; 2: down only)"
 #~ msgstr "E3xx: Тип вибрато (0: вверх/вниз; 1: только вверх; 2: только вниз)"
@@ -16106,58 +20900,14 @@ msgstr ""
 #~ msgid "Xenium Demoparty"
 #~ msgstr "Демопати Xenium"
 
-#~ msgid ""
-#~ "\n"
-#~ "quiet"
-#~ msgstr ""
-#~ "\n"
-#~ "тихо"
-
-#~ msgid "Stop NES pulse channels hardware sweep on new note"
-#~ msgstr ""
-#~ "Останавливать аппаратное портаменто на каналах импульсов NES при начале "
-#~ "новой ноты"
-
-#~ msgid "Do not stop volume slide after reaching zero or full volume"
-#~ msgstr ""
-#~ "Не останавливать эффект изменения громкости при достижении нулевой или "
-#~ "максимальной громкости"
-
-#~ msgid "Stop E1xy/E2xy effects on new note"
-#~ msgstr "Останавливать эффекты E1xy/E2xy на новой ноте"
-
-#~ msgid "Slower 0Axy volume slide"
-#~ msgstr "Замедление изменения громкости эффектом 0Axy"
-
-#~ msgid "%.2X: <INVALID>"
-#~ msgstr "%.2X: <НЕДЕЙСТВ.>"
-
-#~ msgid "clone pattern"
-#~ msgstr "клонировать паттерн"
-
 #~ msgid "File##menubar"
 #~ msgstr "Файл##menubar"
 
 #~ msgid "file##menubar"
 #~ msgstr "файл##menubar"
 
-#~ msgid "export .dmf (1.1.3+)..."
-#~ msgstr "экспорт .dmf (1.1.3+)..."
-
-#~ msgid "export .dmf (1.0/legacy)..."
-#~ msgstr "экспорт .dmf (1.0/legacy)..."
-
-#~ msgid "export Furnace module..."
-#~ msgstr "экспорт модуля Furnace..."
-
-#~ msgid "cannot add chip! ("
-#~ msgstr "не могу добавить чип! ("
-
 #~ msgid "cannot remove chip! ("
 #~ msgstr "не могу убрать чип! ("
-
-#~ msgid "cannot change chip! ("
-#~ msgstr "не могу сменить чип! ("
 
 #~ msgid "Unsaved changes! Save before quitting?"
 #~ msgstr "Остались несохранённые изменения! Сохранить их перед выходом?"
@@ -16205,9 +20955,6 @@ msgstr ""
 #~ msgid "cannot load instrument! ("
 #~ msgstr "не могу загрузить инструмент! ("
 
-#~ msgid "cannot load wavetable! ("
-#~ msgstr "не могу загрузить волновую таблицу! ("
-
 #~ msgid "could not write tildearrow version Furnace module! (%s)"
 #~ msgstr "не удалось записать файл модуля для версии tildearrow! (%s)"
 
@@ -16216,9 +20963,6 @@ msgstr ""
 
 #~ msgid "New Song###New Song"
 #~ msgstr "Новый трек###New Song"
-
-#~ msgid "Export###Export"
-#~ msgstr "Экспорт###Export"
 
 #~ msgid "Error###Error"
 #~ msgstr "Ошибка###Error"
@@ -16231,9 +20975,6 @@ msgstr ""
 
 #~ msgid "Import Raw Sample###Import Raw Sample"
 #~ msgstr "Импортировать сырые данные сэмпла###Import Raw Sample"
-
-#~ msgid "%.0fµs"
-#~ msgstr "%.0f мс"
 
 #~ msgid "could not init renderer! %s"
 #~ msgstr "не получилось инициализировать движок отрисовки! %s"
@@ -16276,17 +21017,11 @@ msgstr ""
 #~ msgid "Paste local wavetables from clipboard"
 #~ msgstr "Вставить локальные волновые таблицы из буфера обмена"
 
-#~ msgid "Mobile Edit###MobileEdit"
-#~ msgstr "Мобильное меню редактирования###MobileEdit"
-
 #~ msgid "Mobile Controls###Mobile Controls"
 #~ msgstr "Мобильное меню управления###Mobile Controls"
 
 #~ msgid "Mobile Menu###Mobile Menu"
 #~ msgstr "Мобильное меню###Mobile Menu"
-
-#~ msgid "Legacy .dmf"
-#~ msgstr ".dmf (legacy)"
 
 #~ msgid "Done! Baked %d file."
 #~ msgid_plural "Done! Baked %d files."
@@ -16306,9 +21041,6 @@ msgstr ""
 #~ msgid "Effect List###Effect List"
 #~ msgstr "Список эффектов###Effect List"
 
-#~ msgid "DefleMask file (1.0/legacy)"
-#~ msgstr "Файл DefleMask (1.0/legacy)"
-
 #~ msgid "Find/Replace###Find/Replace"
 #~ msgstr "Найти/Заменить###Find/Replace"
 
@@ -16317,12 +21049,6 @@ msgstr ""
 
 #~ msgid "Memory Composition###Memory Composition"
 #~ msgstr "Содержание памяти###Memory Composition"
-
-#~ msgid "%d-%d ($%x-$%x): %d bytes ($%x)"
-#~ msgstr "%d-%d ($%x-$%x): %d байт ($%x)"
-
-#~ msgid "%d-%d ($%x-$%x): %dK ($%x)"
-#~ msgstr "%d-%d ($%x-$%x): %d КиБ ($%x)"
 
 #~ msgid "Oscilloscope###Oscilloscope"
 #~ msgstr "Осциллограф###Oscilloscope"
@@ -16335,15 +21061,6 @@ msgstr ""
 
 #~ msgid "Piano###Piano"
 #~ msgstr "Клав. пианино###Piano"
-
-#~ msgid "Input Pad###Input Pad"
-#~ msgstr "Панель ввода###Input Pad"
-
-#~ msgid "Game consoles"
-#~ msgstr "Игровые консоли"
-
-#~ msgid "let's play some chiptune making games!"
-#~ msgstr "давайте поиграем в создание чиптюнов!"
 
 #~ msgid "Sega Genesis (extended channel 3)"
 #~ msgstr "Sega Genesis (расширенный 3-ий канал)"
@@ -16392,12 +21109,6 @@ msgstr ""
 
 #~ msgid "Neo Geo AES (extended channel 2 and CSM)"
 #~ msgstr "Neo Geo AES (расширенный 2-ой канал и CSM)"
-
-#~ msgid "Computers"
-#~ msgstr "Компьютеры"
-
-#~ msgid "let's get to work on chiptune today."
-#~ msgstr "давайте сегодня поработаем над чиптюнами."
 
 #~ msgid "Commodore 64 (C64, 6581 SID + Sound Expander in drums mode)"
 #~ msgstr "Commodore 64 (C64, 6581 SID + Sound Expander в режиме ударных)"
@@ -16835,12 +21546,6 @@ msgstr ""
 #~ msgid "Commander X16 (with Twin OPL3)"
 #~ msgstr "Commander X16 (с Twin OPL3)"
 
-#~ msgid "Arcade systems"
-#~ msgstr "Аркадные автоматы"
-
-#~ msgid "INSERT COIN"
-#~ msgstr "ВСТАВЬТЕ ЖЕТОН"
-
 #~ msgid "Williams/Midway Y/T unit w/ADPCM sound board"
 #~ msgstr "Автомат Williams/Midway Y/T со звуковой картой АДИКМ"
 
@@ -17149,22 +21854,6 @@ msgstr ""
 #~ msgid "Dynax/Nakanihon Real Break (drums mode)"
 #~ msgstr "Dynax/Nakanihon Real Break (в режиме ударных)"
 
-#~ msgid "system presets that you have saved."
-#~ msgstr "пресеты систем, которые вы сохранили."
-
-#~ msgid ""
-#~ "chips which use frequency modulation (FM) to generate sound.\n"
-#~ "some of these also pack more (like square and sample channels).\n"
-#~ "Actually \"FM\" here stands for phase modulation,\n"
-#~ "but these two are indistinguishable\n"
-#~ "if you use sine waves."
-#~ msgstr ""
-#~ "чипы, использующую частотную модуляцию (FM-синтез) для генерации звука.\n"
-#~ "в некоторых из них присутствуют и другие способы синтеза звука (каналы с "
-#~ "квадратными волнами или сэмплами).\n"
-#~ "На самом деле, \"FM\" здесь означает фазовую модуляцию,\n"
-#~ "но они неотличимы друг от друга при использовании синусоидальных волн."
-
 #~ msgid "Yamaha YM2203 (extended channel 3)"
 #~ msgstr "Yamaha YM2203 (расширенный 3-ий канал)"
 
@@ -17231,38 +21920,17 @@ msgstr ""
 #~ msgid "Yamaha YMF289B (drums mode)"
 #~ msgstr "Yamaha YMF289B (в режиме ударных)"
 
-#~ msgid ""
-#~ "these chips generate square/pulse tones only (but may include noise)."
-#~ msgstr ""
-#~ "эти чипы способны генерировать лишь квадратные/прямоугольные волны (но "
-#~ "могут также генерировать шум)."
-
 #~ msgid "Sega PSG (SN76489-like)"
 #~ msgstr "Sega PSG (похож на SN76489)"
 
 #~ msgid "Sega PSG (SN76489-like, Stereo)"
 #~ msgstr "Sega PSG (похож на SN76489, стерео)"
 
-#~ msgid "chips/systems which use PCM or ADPCM samples for sound synthesis."
-#~ msgstr ""
-#~ "чипы/системы, которые используют ИКМ- или АДИКМ-сэмплы для "
-#~ "воспроизведения звука."
-
-#~ msgid "chips which use user-specified waveforms to generate sound."
-#~ msgstr ""
-#~ "чипы, которые использует задаваемые пользователем волны для синтеза звука."
-
 #~ msgid "Namco C15 (8-channel mono)"
 #~ msgstr "Namco C15 (8-канальный, моно)"
 
 #~ msgid "Namco C30 (8-channel stereo)"
 #~ msgstr "Namco C30 (8-канальный, стерео)"
-
-#~ msgid "Specialized"
-#~ msgstr "Особые"
-
-#~ msgid "chips/systems with unique sound synthesis methods."
-#~ msgstr "чипы/системы с уникальными методами синтеза звука."
 
 #~ msgid "Commodore PET (pseudo-wavetable)"
 #~ msgstr "Commodore PET (псевдо-волновая таблица)"
@@ -17272,24 +21940,6 @@ msgstr ""
 
 #~ msgid "ZX Spectrum (beeper only, QuadTone engine)"
 #~ msgstr "ZX Spectrum (только пищалка, драйвер QuadTone)"
-
-#~ msgid ""
-#~ "chips/systems which do not exist in reality or were made just several "
-#~ "years ago."
-#~ msgstr ""
-#~ "чипы/системы, не имеющие физического воплощения или сделанные всего "
-#~ "несколько лет назад."
-
-#~ msgid "DefleMask-compatible"
-#~ msgstr "Совместимые с DefleMask"
-
-#~ msgid ""
-#~ "these configurations are compatible with DefleMask.\n"
-#~ "select this if you need to save as .dmf or work with that program."
-#~ msgstr ""
-#~ "эти пресеты совместимы с DefleMask.\n"
-#~ "выбирайте их, если вам будет нужно будет экспортировать модуль в .dmf или "
-#~ "работать с этой программой."
 
 #~ msgid "Arcade (YM2151 and SegaPCM)"
 #~ msgstr "Arcade (YM2151 и SegaPCM)"
@@ -17306,23 +21956,11 @@ msgstr ""
 #~ msgid "%d: %s"
 #~ msgstr "%d: %s"
 
-#~ msgid "QSound: maximum sample length is 65535"
-#~ msgstr "QSound: максимальная длина сэмпла: 65535"
-
 #~ msgid "NES: loop start must be a multiple of 512 (try with %d)"
 #~ msgstr "NES: начало цикла должно быть кратно 512 (попробуйте %d)"
 
 #~ msgid "NES: loop end must be a multiple of 128 (try with %d)"
 #~ msgstr "NES: конец цикла должен быть кратен 128 (попробуйте %d)"
-
-#~ msgid "Hz"
-#~ msgstr "Гц"
-
-#~ msgid "Mode"
-#~ msgstr "Режим"
-
-#~ msgid "%dms"
-#~ msgstr "%d мс"
 
 #~ msgid "%d samples"
 #~ msgid_plural "%d samples"
@@ -17335,9 +21973,6 @@ msgstr ""
 #~ msgstr[0] "%d байт"
 #~ msgstr[1] "%d байта"
 #~ msgstr[2] "%d байтов"
-
-#~ msgid "%.2fHz"
-#~ msgstr "%.2f Гц"
 
 #~ msgid "Song Info###Song Information"
 #~ msgstr "О треке###Song Information"
@@ -17354,36 +21989,8 @@ msgstr ""
 #~ msgid "Subsongs###Subsongs"
 #~ msgstr "Подпесни###Subsongs"
 
-#~ msgid "Downmix chip output to mono"
-#~ msgstr "Свести звук чипа в моно"
-
-#~ msgid "Reserved blocks for wavetables:"
-#~ msgstr "Зарезервированных блоков под волновые таблицы:"
-
-#~ msgid ""
-#~ "Reserve this many blocks 256 bytes each in sample memory.\n"
-#~ "Each block holds one wavetable (is used for one wavetable channel),\n"
-#~ "so reserve as many as you need."
-#~ msgstr ""
-#~ "Зарезервировать столько блоков, каждый по 256 байт, в памяти сэмплов.\n"
-#~ "В каждый блок помещается одна волновая таблица (он используется для "
-#~ "одного канала в режиме волновых таблиц),\n"
-#~ "так что выделяйте столько, сколько вам нужно."
-
 #~ msgid "1MB"
 #~ msgstr "1 МиБ"
-
-#~ msgid "256KB"
-#~ msgstr "256 КиБ"
-
-#~ msgid "Chip Manager###Chip Manager"
-#~ msgstr "Менеджер чипов###Chip Manager"
-
-#~ msgid "cannot duplicate chip! ("
-#~ msgstr "не получилось склонировать чип! ("
-
-#~ msgid "ZXS Beeper"
-#~ msgstr "ZXS (пищалка)"
 
 #~ msgid "Volume Meter###Volume Meter"
 #~ msgstr "Измеритель громкости###Volume Meter"
@@ -17469,35 +22076,11 @@ msgstr ""
 #~ msgid "Mixer###Mixer"
 #~ msgstr "Микшер###Mixer"
 
-#~ msgid "OrderSel###OrderSel"
-#~ msgstr "Выб. матр. пат.###OrderSel"
-
 #~ msgid "Spoiler###Spoiler"
 #~ msgstr "Спойлер###Spoiler"
 
-#~ msgid "exponential"
-#~ msgstr "экспоненциальное"
-
-#~ msgid "direct"
-#~ msgstr "прямое"
-
-#~ msgid "HP/K2, HP/K2"
-#~ msgstr "ФВЧ/K2, ФВЧ/K2"
-
-#~ msgid "HP/K2, LP/K1"
-#~ msgstr "ФВЧ/K2, ФНЧ/K1"
-
-#~ msgid "LP/K2, LP/K2"
-#~ msgstr "ФНЧ/K2, ФНЧ/K2"
-
-#~ msgid "LP/K2, LP/K1"
-#~ msgstr "ФНЧ/K2, ФНЧ/K1"
-
 #~ msgid "Settings###Settings"
 #~ msgstr "Настройки###Settings"
-
-#~ msgid "Software"
-#~ msgstr "Программная отрисовка"
 
 #~ msgid "GUI language"
 #~ msgstr "Язык интерфейса"
@@ -17540,9 +22123,6 @@ msgstr ""
 #~ msgid "MultiPCM MU5 path"
 #~ msgstr "Путь к MultiPCM MU5"
 
-#~ msgid "Local wavetables list"
-#~ msgstr "Список локальных волновых таблиц"
-
 #~ msgid "Square border##CHS4"
 #~ msgstr "С прямоугольной границей вокруг названия##CHS4"
 
@@ -17560,32 +22140,6 @@ msgstr ""
 
 #~ msgid "Misc"
 #~ msgstr "Разное"
-
-#~ msgid "Wrap text"
-#~ msgstr "Переносить текст на новую строку"
-
-#~ msgid "Wrap text in song/subsong comments window."
-#~ msgstr ""
-#~ "Переносить текст на новую строку в окне информации/комментариев к "
-#~ "композиции."
-
-#~ msgid "Frame shading in text windows"
-#~ msgstr "Градиент в текстовых окнах"
-
-#~ msgid ""
-#~ "Apply frame shading to the multiline text fields\n"
-#~ "such as song/subsong info/comments."
-#~ msgstr "Применять градиент в окне информации/комментариев к композиции."
-
-#~ msgid "Show chip info in chip manager"
-#~ msgstr "Отображать информацию о чипе в менеджере чипов"
-
-#~ msgid ""
-#~ "Display tooltip in chip manager when hovering over the chip. Tooltip "
-#~ "shows chip name and description."
-#~ msgstr ""
-#~ "Отображать подсказку при наведении курсора на чип. Подсказка отображает "
-#~ "название и описание чипа."
 
 #~ msgid "Button##CC_GUI_COLOR_BUTTON"
 #~ msgstr "Кнопка##CC_GUI_COLOR_BUTTON"
@@ -18606,65 +23160,6 @@ msgstr ""
 #~ msgid "K"
 #~ msgstr " КиБ"
 
-#~ msgid "Raw Period"
-#~ msgstr "Период (регистровое знач.)"
-
-#~ msgid "Raw Envelope Period"
-#~ msgstr "Период огиб. (регистровое знач.)"
-
-#~ msgid "A"
-#~ msgstr "А"
-
-#~ msgid "D"
-#~ msgstr "С"
-
-#~ msgid "S"
-#~ msgstr "С"
-
-#~ msgid "R"
-#~ msgstr "Р"
-
-#~ msgid "Raw Frequency"
-#~ msgstr "Частота (регистровое знач.)"
-
-#~ msgid "Oscillator mode:"
-#~ msgstr "Режим осциллятора:"
-
-#~ msgid "Freerun"
-#~ msgstr "Свободн. (зацикл.)"
-
-#~ msgid "Oneshot"
-#~ msgstr "Однократн."
-
-#~ msgid "Sync/AM"
-#~ msgstr "Синхр./АМ"
-
-#~ msgid "Virtual softpan channel"
-#~ msgstr "Виртуальный стерео-канал"
-
-#~ msgid ""
-#~ "Combines odd and next even channel into one virtual channel with 256-step "
-#~ "panning.\n"
-#~ "Instrument, volume and effects need to be placed on the odd channel (e.g. "
-#~ "1st, 3rd, 5th etc.)"
-#~ msgstr ""
-#~ "Использует нечётный и следующий за ним чётный канал для создания "
-#~ "виртуального канала с возможностью плавного панорамирования (256 шагов).\n"
-#~ "Ноты, инструменты, команды громкости и эффекты необходимо размещать в "
-#~ "нечётном канале (1-ый, 3-ий и т.д.)"
-
-#~ msgid "Phase reset on key-on"
-#~ msgstr "Сброс фазы в начале ноты"
-
-#~ msgid "Osc. mode"
-#~ msgstr "Реж. осцилл."
-
-#~ msgid "Wave/sample pos."
-#~ msgstr "Полож. волны/сэмпла в памяти"
-
-#~ msgid "Osc. output"
-#~ msgstr "Вывод осцилл."
-
 #~ msgid "Envelope count"
 #~ msgstr "Скорость огиб."
 
@@ -18674,149 +23169,8 @@ msgstr ""
 #~ msgid "OP%d"
 #~ msgstr "ОП%d"
 
-#~ msgid "Detune in semitones"
-#~ msgstr "Расстройка в полутонах"
-
-#~ msgid ""
-#~ "Detune in fractions of semitone.\n"
-#~ "128 = +1 semitone, -128 = -1 semitone."
-#~ msgstr ""
-#~ "Расстройка в долях полутона.\n"
-#~ "128 = +1 полутон, -128 = -1 полутон."
-
-#~ msgid "If operator outputs sound, enable left channel output."
-#~ msgstr "Включить вывод звука в левый канал."
-
-#~ msgid "If operator outputs sound, enable right channel output."
-#~ msgstr "Включить вывод звука в правый канал."
-
-#~ msgid "Base note"
-#~ msgstr "Базовая нота"
-
-#~ msgid "Finetune"
-#~ msgstr "Расстройка"
-
-#~ msgid "Slide speed"
-#~ msgstr "Скорость слайда"
-
-#~ msgid "Set PW"
-#~ msgstr "Уст. скважн."
-
-#~ msgid "Set pulse width on keydown"
-#~ msgstr "Установить скважность на новой ноте"
-
-#~ msgid "Initial pulse width"
-#~ msgstr "Начальная скважность"
-
-#~ msgid "Set cutoff"
-#~ msgstr "Устан. част. среза"
-
-#~ msgid "Set filter cutoff on keydown"
-#~ msgstr "Установить частоту среза фильтра на новой ноте"
-
-#~ msgid "metal"
-#~ msgstr "\"металл.\""
-
-#~ msgid "sine"
-#~ msgstr "синус"
-
-#~ msgid "Enable ring modulation"
-#~ msgstr "Включить кольцевую модуляцию"
-
-#~ msgid "FF = self-modulation"
-#~ msgstr "FF = самомодуляция"
-
-#~ msgid "Enable hard sync"
-#~ msgstr "Включить синхронизацию осцилляторов"
-
-#~ msgid "Hard sync source"
-#~ msgstr "Источник синхронизации"
-
-#~ msgid "FF = self-sync"
-#~ msgstr "FF = самосинхронизация"
-
-#~ msgid "Retrigger on slide"
-#~ msgstr "Перезапуск на слайде"
-
-#~ msgid ""
-#~ "Restart instrument and envelope even if slide command (03xx) is placed "
-#~ "with the note."
-#~ msgstr ""
-#~ "Перезапустить инструмент и огибающую, даже если у ноты стоит эффект "
-#~ "слайда (03xx)."
-
-#~ msgid "Sync osc. on keydown"
-#~ msgstr "Синхр. осц. на новой ноте"
-
-#~ msgid ""
-#~ "Reset phase of oscillator each time new note is played.\n"
-#~ "Does not happen when slide (03xx) or legato command is placed."
-#~ msgstr ""
-#~ "Сбросить фазу осциллятора на каждой новой ноте.\n"
-#~ "Не выполняется при наличии команды слайда (03xx) или легато."
-
-#~ msgid "PWM"
-#~ msgstr "ШИМ"
-
-#~ msgid "VOL"
-#~ msgstr "ГР"
-
-#~ msgid "Instrument program"
-#~ msgstr "Программа инструмента"
-
-#~ msgid "Program period"
-#~ msgstr "Период программы"
-
-#~ msgid "Do not restart instrument program on keydown"
-#~ msgstr "Не перезапускать программу инструмента на новой ноте"
-
-#~ msgid "Unite"
-#~ msgstr "Объед."
-
-#~ msgid "Semitones"
-#~ msgstr "Полутонов"
-
-#~ msgid "First external arpeggio note"
-#~ msgstr "Первая внешняя нота арпеджио"
-
-#~ msgid "Second external arpeggio note"
-#~ msgstr "Вторая внешняя нота арпеджио"
-
-#~ msgid "Source channel"
-#~ msgstr "Канал-источник"
-
-#~ msgid "Source is self"
-#~ msgstr "Текущий канал является источником"
-
-#~ msgid "Step to jump to"
-#~ msgstr "Шаг программы, на который совершается переход"
-
-#~ msgid "No operation"
-#~ msgstr "Ничего не делать"
-
-#~ msgid "Program end"
-#~ msgstr "Конец программы"
-
-#~ msgid "Execute next command at the same tick"
-#~ msgstr "Выполнить следующую команду в этом же шаге"
-
-#~ msgid "Envelope Reset/Key Control"
-#~ msgstr "Упр. огибающей"
-
-#~ msgid "Ring mod toggle"
-#~ msgstr "Кольц. мод. вкл./выкл."
-
-#~ msgid "Hard sync toggle"
-#~ msgstr "Синхр. осц. вкл./выкл."
-
 #~ msgid "Tabs"
 #~ msgstr "Вкладки"
-
-#~ msgid "Single (combo box)"
-#~ msgstr "Один (выпадающий список)"
-
-#~ msgid "Frequency Divider"
-#~ msgstr "Делитель частоты"
 
 #~ msgid "AR"
 #~ msgstr "СА"
@@ -18836,20 +23190,8 @@ msgstr ""
 #~ msgid "RC"
 #~ msgstr "КС"
 
-#~ msgid "Position##WAVEPOS"
-#~ msgstr "Положение##WAVEPOS"
-
-#~ msgid "Length##WAVELEN"
-#~ msgstr "Длина##WAVELEN"
-
 #~ msgid "4-op"
 #~ msgstr "4-оп"
-
-#~ msgid "16-bit raw period macro"
-#~ msgstr "16-битный макрос периода (регистровое знач.)"
-
-#~ msgid "L##L%d"
-#~ msgstr "Ц##L%d"
 
 #~ msgid ""
 #~ "Ringmod from OP3 + double pitch ModInput\n"
@@ -18990,9 +23332,6 @@ msgstr ""
 #~ msgid "Set release"
 #~ msgstr "Релиз"
 
-#~ msgid "Ring modulation source"
-#~ msgstr "Источник кольцевой модуляции"
-
 #~ msgid "Portamento up (semitones)"
 #~ msgstr "Портаменто вверх (полутонов)"
 
@@ -19023,20 +23362,8 @@ msgstr ""
 #~ msgid "Local"
 #~ msgstr "Локальная"
 
-#~ msgid "Hex##MTHex"
-#~ msgstr "Шест.##MTHex"
-
-#~ msgid "Dec##MTHex"
-#~ msgstr "Дес.##MTHex"
-
 #~ msgid "Result"
 #~ msgstr "Результат"
-
-#~ msgid "Wave 1 "
-#~ msgstr "Волна 1 "
-
-#~ msgid "Local Waves"
-#~ msgstr "Локальные волн. табл."
 
 #~ msgid "not a command stream"
 #~ msgstr "не является потоком команд"

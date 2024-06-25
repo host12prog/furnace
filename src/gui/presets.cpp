@@ -52,7 +52,7 @@ void FurnaceGUI::initSystemPresets() {
 
   FurnaceGUISysCategory cat;
 
-  CATEGORY_BEGIN(_L("Game consoles##sgpr"),_L("let's play some chiptune making games!##sgpr"));
+  CATEGORY_BEGIN(_("Game consoles##sgpr"),_("let's play some chiptune making games!##sgpr"));
   ENTRY(
     "Sega Genesis", {
       CH(DIV_SYSTEM_YM2612, 1.0f, 0, ""),
@@ -337,7 +337,7 @@ void FurnaceGUI::initSystemPresets() {
   );
   CATEGORY_END;
 
-  CATEGORY_BEGIN(_L("Computers##sgpr"),_L("let's get to work on chiptune today.##sgpr"));
+  CATEGORY_BEGIN(_("Computers##sgpr"),_("let's get to work on chiptune today.##sgpr"));
   ENTRY(
     "Commodore PET", {
       CH(DIV_SYSTEM_PET, 1.0f, 0, "")
@@ -1504,7 +1504,7 @@ void FurnaceGUI::initSystemPresets() {
   );
   CATEGORY_END;
 
-  CATEGORY_BEGIN(_L("Arcade systems##sgpr"),_L("INSERT COIN##sgpr"));
+  CATEGORY_BEGIN(_("Arcade systems##sgpr"),_("INSERT COIN##sgpr"));
   ENTRY(
     "Pong", {
       CH(DIV_SYSTEM_PONG, 1.0f, 0, "")
@@ -2876,11 +2876,11 @@ void FurnaceGUI::initSystemPresets() {
   CATEGORY_END;
 
   
-  CATEGORY_BEGIN("User##sgpr",_L("system presets that you have saved.##sgpr"));
+  CATEGORY_BEGIN("User##sgpr",_("system presets that you have saved.##sgpr"));
   CATEGORY_END;
   
 
-  CATEGORY_BEGIN("FM",_L("chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.##sgpr"));
+  CATEGORY_BEGIN("FM",_("chips which use frequency modulation (FM) to generate sound.\nsome of these also pack more (like square and sample channels).\nActually \"FM\" here stands for phase modulation,\nbut these two are indistinguishable\nif you use sine waves.##sgpr"));
   ENTRY(
     "Yamaha YM2151 (OPM)", {
       CH(DIV_SYSTEM_YM2151, 1.0f, 0, "")
@@ -3106,7 +3106,7 @@ void FurnaceGUI::initSystemPresets() {
   }
   CATEGORY_END;
 
-  CATEGORY_BEGIN(_L("Square##sgpr"),_L("these chips generate square/pulse tones only (but may include noise).##sgpr"));
+  CATEGORY_BEGIN(_("Square##sgpr"),_("these chips generate square/pulse tones only (but may include noise).##sgpr"));
   ENTRY(
     "TI SN76489", {
       CH(DIV_SYSTEM_SMS, 1.0f, 0, "chipType=1")
@@ -3221,7 +3221,7 @@ void FurnaceGUI::initSystemPresets() {
   );
   CATEGORY_END;
 
-  CATEGORY_BEGIN(_L("Sample##sgpr"),_L("chips/systems which use PCM or ADPCM samples for sound synthesis.##sgpr"));
+  CATEGORY_BEGIN(_("Sample##sgpr"),_("chips/systems which use PCM or ADPCM samples for sound synthesis.##sgpr"));
   ENTRY(
     "Amiga", {
       CH(DIV_SYSTEM_AMIGA, 1.0f, 0, "clockSel=1")
@@ -3325,7 +3325,7 @@ void FurnaceGUI::initSystemPresets() {
   );
   CATEGORY_END;
 
-  CATEGORY_BEGIN(_L("Wavetable##sgpr"),_L("chips which use user-specified waveforms to generate sound.##sgpr"));
+  CATEGORY_BEGIN(_("Wavetable##sgpr"),_("chips which use user-specified waveforms to generate sound.##sgpr"));
   ENTRY(
     "PC Engine", {
       CH(DIV_SYSTEM_PCE, 1.0f, 0, "")
@@ -3390,7 +3390,7 @@ void FurnaceGUI::initSystemPresets() {
   );
   CATEGORY_END;
 
-  CATEGORY_BEGIN(_L("Specialized##sgpr"),_L("chips/systems with unique sound synthesis methods.##sgpr"));
+  CATEGORY_BEGIN(_("Specialized##sgpr"),_("chips/systems with unique sound synthesis methods.##sgpr"));
   ENTRY(
     "MOS Technology SID (6581)", {
       CH(DIV_SYSTEM_C64_6581, 1.0f, 0, "clockSel=1")
@@ -3478,7 +3478,7 @@ void FurnaceGUI::initSystemPresets() {
   );
   CATEGORY_END;
 
-  CATEGORY_BEGIN(_L("Modern/fantasy##sgpr"),_L("chips/systems which do not exist in reality or were made just several years ago.##sgpr"));
+  CATEGORY_BEGIN(_("Modern/fantasy##sgpr"),_("chips/systems which do not exist in reality or were made just several years ago.##sgpr"));
   ENTRY(
     "tildearrow Sound Unit", {
       CH(DIV_SYSTEM_SOUND_UNIT, 1.0f, 0, "")
@@ -3533,7 +3533,7 @@ void FurnaceGUI::initSystemPresets() {
   );
   CATEGORY_END;
 
-  CATEGORY_BEGIN(_L("DefleMask-compatible##sgpr"),_L("these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"));
+  CATEGORY_BEGIN(_("DefleMask-compatible##sgpr"),_("these configurations are compatible with DefleMask.\nselect this if you need to save as .dmf or work with that program.##sgpr"));
   ENTRY(
     "Sega Genesis", {
       CH(DIV_SYSTEM_YM2612, 1.0f, 0, ""),

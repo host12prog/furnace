@@ -36,12 +36,10 @@
 
 #include "fileDialog.h"
 
-#include "../locale/locale.h"
-
 //macros for localization (l10n):
 
-#define _L(string) locale.getText(string)
-#define _LP(string, n) locale.getTextPlural((string), n)
+#define _L(string) (string)
+#define _LP(string, n) (string)
 
 //===============================
 
@@ -2275,7 +2273,7 @@ class FurnaceGUI {
       backupMaxCopies(5),
       autoFillSave(0),
       maxUndoSteps(100),
-      language(DIV_LANG_ENGLISH),
+      language(0),
       translate_channel_names_pattern(0),
       translate_channel_names_osc(0),
       translate_short_channel_names(0),
@@ -3069,8 +3067,6 @@ class FurnaceGUI {
   public:
     void autoDetectSystem();
     void updateWindowTitle();
-    //translation
-    DivLocale locale;
     //this is a horrible hack to allow localized strings in bitfield type macros...
     int PlotBitfieldEx(const char* label, int (*values_getter)(void* data, int idx), void* data, int values_count, int values_offset, const char** overlay_text, int bits, ImVec2 frame_size, const bool* values_highlight, ImVec4 highlightColor);
     int PlotCustomEx(ImGuiPlotType plot_type, const char* label, float (*values_getter)(void* data, int idx), void* data, int values_count, int values_display_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 frame_size, ImVec4 color, int highlight, std::string (*hoverFunc)(int,float,void*), void* hoverFuncUser, bool blockMode, std::string (*guideFunc)(float), const bool* values_highlight, ImVec4 highlightColor);

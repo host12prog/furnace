@@ -153,7 +153,7 @@ String DivEngine::getSongSystemLegacyName(DivSong& ds, bool isMultiSystemAccepta
         return "Sega Genesis/Mega Drive";
       }
       if (ds.system[0]==DIV_SYSTEM_YM2612_EXT && ds.system[1]==DIV_SYSTEM_SMS) {
-        return "Sega Genesis Extended Channel 3##sesd0";
+        return "Sega Genesis Extended Channel 3";
       }
 
       if (ds.system[0]==DIV_SYSTEM_OPLL && ds.system[1]==DIV_SYSTEM_SMS) {
@@ -924,7 +924,7 @@ void DivEngine::registerSystems() {
     {},
     {},
     {
-      {0x10, {DIV_CMD_WAVE, "10xx: Set waveform##sesd0"}},
+      {0x10, {DIV_CMD_WAVE, "10xx: Set waveform"}},
       {0x11, {DIV_CMD_RAW_FREQ, "11xx: Set raw period (0-1F)"}},
     }
   );

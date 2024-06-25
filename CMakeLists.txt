@@ -1014,10 +1014,9 @@ src/gui/inst/t85apu.cpp
 
 src/gui/inst/wavetable.cpp
 
-src/locale/locale.cpp
-src/locale/russian.cpp
-src/locale/polish.cpp
-src/locale/portuguese.cpp
+# src/locale/russian.cpp
+# src/locale/polish.cpp
+# src/locale/portuguese.cpp
 # src/locale/template.cpp
 )
 

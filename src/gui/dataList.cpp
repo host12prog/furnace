@@ -159,11 +159,11 @@ void FurnaceGUI::insListItem(int i, int dir, int asset) {
       ImGui::TextNoHashHide("%.2X: %s",i,ins->name.c_str());
     } else {
       ImGui::SameLine();
-      ImGui::Text(_L("%.2X: <INVALID>##sgdl"),i);
+      ImGui::Text(_("%.2X: <INVALID>"),i);
     }
   } else {
     ImGui::SameLine();
-    ImGui::Text(_L("- None -##sgdl"));
+    ImGui::Text(_("- None -"));
   }
   ImGui::PopID();
   ImGui::PopStyleColor();

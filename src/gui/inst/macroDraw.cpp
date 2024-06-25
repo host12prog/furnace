@@ -265,7 +265,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Bottom##sgimcd0"));
+        ImGui::Text(_("Bottom##sgimcd0"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (ImGui::InputInt("##MABottom",&i.get_macro()->val[0],1,16)) { PARAMETER
@@ -274,7 +274,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         }
 
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Top##sgimcd0"));
+        ImGui::Text(_("Top##sgimcd0"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (ImGui::InputInt("##MATop",&i.get_macro()->val[1],1,16)) { PARAMETER
@@ -288,7 +288,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Attack##sgimcd"));
+        ImGui::Text(_("Attack##sgimcd"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (CWSliderInt("##MAAR",&i.get_macro()->val[2],0,255)) { PARAMETER
@@ -297,7 +297,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         } rightClickable
 
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Sustain##sgimcd"));
+        ImGui::Text(_("Sustain##sgimcd"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (CWSliderInt("##MASL",&i.get_macro()->val[5],0,255)) { PARAMETER
@@ -308,7 +308,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Hold##sgimcd"));
+        ImGui::Text(_("Hold##sgimcd"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (CWSliderInt("##MAHT",&i.get_macro()->val[3],0,255)) { PARAMETER
@@ -317,7 +317,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         } rightClickable
 
         ImGui::TableNextColumn();
-        ImGui::Text(_L("SusTime##sgimcd"));
+        ImGui::Text(_("SusTime##sgimcd"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (CWSliderInt("##MAST",&i.get_macro()->val[6],0,255)) { PARAMETER
@@ -328,7 +328,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Decay##sgimcd"));
+        ImGui::Text(_("Decay##sgimcd"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (CWSliderInt("##MADR",&i.get_macro()->val[4],0,255)) { PARAMETER
@@ -337,7 +337,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         } rightClickable
 
         ImGui::TableNextColumn();
-        ImGui::Text(_L("SusDecay##sgimcd"));
+        ImGui::Text(_("SusDecay##sgimcd"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (CWSliderInt("##MASR",&i.get_macro()->val[7],0,255)) { PARAMETER
@@ -371,7 +371,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         ImGui::TableNextColumn();
 
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Release##sgimcd"));
+        ImGui::Text(_("Release##sgimcd"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (CWSliderInt("##MARR",&i.get_macro()->val[8],0,255)) { PARAMETER
@@ -393,7 +393,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Bottom##sgimcd1"));
+        ImGui::Text(_("Bottom##sgimcd1"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (ImGui::InputInt("##MABottom",&i.get_macro()->val[0],1,16)) { PARAMETER
@@ -402,7 +402,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         }
 
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Top##sgimcd1"));
+        ImGui::Text(_("Top##sgimcd1"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (ImGui::InputInt("##MATop",&i.get_macro()->val[1],1,16)) { PARAMETER
@@ -416,7 +416,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Speed##sgimcd"));
+        ImGui::Text(_("Speed##sgimcd"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (CWSliderInt("##MLSpeed",&i.get_macro()->val[11],0,255)) { PARAMETER
@@ -425,7 +425,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
         } rightClickable
 
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Phase##sgimcd"));
+        ImGui::Text(_("Phase##sgimcd"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (CWSliderInt("##MLPhase",&i.get_macro()->val[13],0,1023)) { PARAMETER
@@ -435,7 +435,7 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
 
         ImGui::TableNextColumn();
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Shape##sgimcd"));
+        ImGui::Text(_("Shape##sgimcd"));
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
         if (CWSliderInt("##MLShape",&i.get_macro()->val[12],0,2,_L(macroLFOShapes[i.get_macro()->val[12]&3]))) { PARAMETER
@@ -509,16 +509,16 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
   if (ImGui::IsItemHovered()) { \
     switch (i.get_macro()->open&6) { \
       case 0: \
-        ImGui::SetTooltip(_L("Macro type: Sequence##sgimcd")); \
+        ImGui::SetTooltip(_("Macro type: Sequence##sgimcd")); \
         break; \
       case 2: \
-        ImGui::SetTooltip(_L("Macro type: ADSR##sgimcd")); \
+        ImGui::SetTooltip(_("Macro type: ADSR##sgimcd")); \
         break; \
       case 4: \
-        ImGui::SetTooltip(_L("Macro type: LFO##sgimcd")); \
+        ImGui::SetTooltip(_("Macro type: LFO##sgimcd")); \
         break; \
       default: \
-        ImGui::SetTooltip(_L("Macro type: What's going on here?##sgimcd")); \
+        ImGui::SetTooltip(_("Macro type: What's going on here?##sgimcd")); \
         break; \
     } \
   } \
@@ -531,14 +531,14 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
   ImGui::Button(ICON_FA_ELLIPSIS_H "##IMacroSet"); \
   popToggleColors(); \
   if (ImGui::IsItemHovered()) { \
-    ImGui::SetTooltip(_L("Delay/Step Length##sgimcd")); \
+    ImGui::SetTooltip(_("Delay/Step Length##sgimcd")); \
   } \
   if (ImGui::BeginPopupContextItem("IMacroSetP",ImGuiPopupFlags_MouseButtonLeft)) { \
-    if (ImGui::InputScalar(_L("Step Length (ticks)##IMacroSpeed"),ImGuiDataType_U8,&_x.get_macro()->speed,&_ONE,&_THREE)) { \
+    if (ImGui::InputScalar(_("Step Length (ticks)##IMacroSpeed"),ImGuiDataType_U8,&_x.get_macro()->speed,&_ONE,&_THREE)) { \
       if (_x.get_macro()->speed<1) _x.get_macro()->speed=1; \
       MARK_MODIFIED; \
     } \
-    if (ImGui::InputScalar(_L("Delay##IMacroDelay"),ImGuiDataType_U8,&_x.get_macro()->delay,&_ONE,&_THREE)) { \
+    if (ImGui::InputScalar(_("Delay##IMacroDelay"),ImGuiDataType_U8,&_x.get_macro()->delay,&_ONE,&_THREE)) { \
       MARK_MODIFIED; \
     } \
     ImGui::EndPopup(); \
@@ -551,9 +551,9 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
   } \
   if (ImGui::IsItemHovered()) { \
     if (i.get_macro()->open&8) { \
-      ImGui::SetTooltip(_L("Release mode: Active (jump to release pos)##sgimcd")); \
+      ImGui::SetTooltip(_("Release mode: Active (jump to release pos)##sgimcd")); \
     } else { \
-      ImGui::SetTooltip(_L("Release mode: Passive (delayed release)##sgimcd")); \
+      ImGui::SetTooltip(_("Release mode: Passive (delayed release)##sgimcd")); \
     } \
   } \
   popToggleColors(); \
@@ -676,7 +676,7 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
       break;
     }
     case 1: {
-      ImGui::Text(_L("Tabs##sgimcd"));
+      ImGui::Text(_("Tabs##sgimcd"));
       break;
     }
     case 2: {
@@ -809,7 +809,7 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
 
           if (m.get_macro()->open&1) {
             if ((m.get_macro()->open&6)==0) {
-              ImGui::Text(_L("Length##sgimcd"));
+              ImGui::Text(_("Length##sgimcd"));
               ImGui::SameLine();
               ImGui::SetNextItemWidth(120.0f*dpiScale);
               int macroLen=m.get_macro()->len;
@@ -820,7 +820,7 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
               }
               ImGui::SameLine();
             }
-            ImGui::Text(_L("StepLen##sgimcd"));
+            ImGui::Text(_("StepLen##sgimcd"));
             ImGui::SameLine();
             ImGui::SetNextItemWidth(120.0f*dpiScale);
             if (ImGui::InputScalar("##IMacroSpeed",ImGuiDataType_U8,&m.get_macro()->speed,&_ONE,&_THREE)) {
@@ -828,7 +828,7 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
               MARK_MODIFIED;
             }
             ImGui::SameLine();
-            ImGui::Text(_L("Delay##sgimcd"));
+            ImGui::Text(_("Delay##sgimcd"));
             ImGui::SameLine();
             ImGui::SetNextItemWidth(120.0f*dpiScale);
             if (ImGui::InputScalar("##IMacroDelay",ImGuiDataType_U8,&m.get_macro()->delay,&_ONE,&_THREE)) {
@@ -852,10 +852,10 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
               }
             }
           } else {
-            ImGui::Text(_L("The heck? No, this isn't even working correctly...##sgimcd"));
+            ImGui::Text(_("The heck? No, this isn't even working correctly...##sgimcd"));
           }
         } else {
-          ImGui::Text(_L("The only problem with that selectedMacro is that it's a bug...##sgimcd"));
+          ImGui::Text(_("The only problem with that selectedMacro is that it's a bug...##sgimcd"));
         }
 
         // goes here
@@ -864,7 +864,7 @@ void FurnaceGUI::drawMacros(std::vector<FurnaceGUIMacroDesc>& macros, FurnaceGUI
       break;
     }
     case 4: {
-      ImGui::Text(_L("Single (combo box)##sgimcd"));
+      ImGui::Text(_("Single (combo box)##sgimcd"));
       break;
     }
   }

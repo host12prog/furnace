@@ -97,7 +97,7 @@ void FurnaceGUI::drawExportAudio(bool onWindow) {
       }
     }
 
-    if (ImGui::BeginChild(_L("Channel Selection##sgeo"),ImVec2(0,200.0f*dpiScale))) {
+    if (ImGui::BeginChild(_("Channel Selection##sgeo"),ImVec2(0,200.0f*dpiScale))) {
       for (int i=0; i<e->getTotalChannelCount(); i++) {
         String name=fmt::sprintf("%d. %s##_CE%d",i+1,settings.translate_channel_names_pattern ? _L(e->getChannelName(i)) : e->getChannelName(i), i);
         ImGui::Checkbox(name.c_str(),&audioExportOptions.channelMask[i]);
@@ -256,13 +256,13 @@ void FurnaceGUI::drawExportZSM(bool onWindow) {
 void FurnaceGUI::drawExportDMF(bool onWindow) {
   exitDisabledTimer=1;
 
-  ImGui::Text(_L("DefleMask file (1.1.3+)##sgeo"));
+  ImGui::Text(_("DefleMask file (1.1.3+)##sgeo"));
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_L("Cancel##sgeo4"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_("Cancel##sgeo4"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_L("Export##sgeo4"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
+  if (ImGui::Button(_("Export##sgeo4"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
     openFileDialog(GUI_FILE_SAVE_DMF);
     ImGui::CloseCurrentPopup();
   }
@@ -271,13 +271,13 @@ void FurnaceGUI::drawExportDMF(bool onWindow) {
 void FurnaceGUI::drawExportDMFLegacy(bool onWindow) {
   exitDisabledTimer=1;
 
-  ImGui::Text(_L("DefleMask file (1.0/legacy)##sgeo"));
+  ImGui::Text(_("DefleMask file (1.0/legacy)##sgeo"));
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_L("Cancel##sgeo5"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_("Cancel##sgeo5"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_L("Export##sgeo5"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
+  if (ImGui::Button(_("Export##sgeo5"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
     openFileDialog(GUI_FILE_SAVE_DMF_LEGACY);
     ImGui::CloseCurrentPopup();
   }
@@ -418,10 +418,10 @@ void FurnaceGUI::drawExportFZT(bool onWindow) {
   ));
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_L("Cancel##sgeo9"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_("Cancel##sgeo9"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_L("Export##sgeo9"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
+  if (ImGui::Button(_("Export##sgeo9"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_FZT);
     ImGui::CloseCurrentPopup();
   }
@@ -438,10 +438,10 @@ void FurnaceGUI::drawExportFur(bool onWindow) {
     ));
     if (onWindow) {
         ImGui::Separator();
-        if (ImGui::Button(_L("Cancel##sgeo9"), ImVec2(HALF_WINDOW_WIDTH * dpiScale, 0))) ImGui::CloseCurrentPopup();
+        if (ImGui::Button(_("Cancel##sgeo9"), ImVec2(HALF_WINDOW_WIDTH * dpiScale, 0))) ImGui::CloseCurrentPopup();
         ImGui::SameLine();
     }
-    if (ImGui::Button(_L("Export##sgeo7"), ImVec2(HALF_WINDOW_WIDTH * dpiScale, 0))) {
+    if (ImGui::Button(_("Export##sgeo7"), ImVec2(HALF_WINDOW_WIDTH * dpiScale, 0))) {
         openFileDialog(GUI_FILE_EXPORT_FUR);
         ImGui::CloseCurrentPopup();
     }
@@ -457,17 +457,17 @@ void FurnaceGUI::drawExportT85(bool onWindow) {
     "to be able to export."
   ));
 
-  ImGui::Checkbox(_L("loop##sgeo0"),&t85_loop);
+  ImGui::Checkbox(_("loop##sgeo0"),&t85_loop);
   if (t85_loop && e->song.loopModality==2) {
-    ImGui::Text(_L("loop trail:##sgeo"));
+    ImGui::Text(_("loop trail:##sgeo"));
     ImGui::Indent();
-    if (ImGui::RadioButton(_L("auto-detect##sgeo"),t85_trailingTicks==-1)) {
+    if (ImGui::RadioButton(_("auto-detect##sgeo"),t85_trailingTicks==-1)) {
       t85_trailingTicks=-1;
     }
-    if (ImGui::RadioButton(_L("add one loop##sgeo1"),t85_trailingTicks==-2)) {
+    if (ImGui::RadioButton(_("add one loop##sgeo1"),t85_trailingTicks==-2)) {
       t85_trailingTicks=-2;
     }
-    if (ImGui::RadioButton(_L("custom##sgeo"),t85_trailingTicks>=0)) {
+    if (ImGui::RadioButton(_("custom##sgeo"),t85_trailingTicks>=0)) {
       t85_trailingTicks=0;
     }
     if (t85_trailingTicks>=0) {
@@ -481,7 +481,7 @@ void FurnaceGUI::drawExportT85(bool onWindow) {
 
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_L("Cancel##sgeo9"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_("Cancel##sgeo9"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
 
@@ -497,7 +497,7 @@ void FurnaceGUI::drawExportT85(bool onWindow) {
   }
 
   ImGui::BeginDisabled(!can_export);
-  if (ImGui::Button(_L("Export##sgeo9"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
+  if (ImGui::Button(_("Export##sgeo9"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_T85);
     ImGui::CloseCurrentPopup();
   }

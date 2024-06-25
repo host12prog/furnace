@@ -1028,7 +1028,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
         altered=true;
         mustRender=true;
       }
-      if (ImGui::RadioButton(_L("1MB##sgsc"),chipMem==20)) {
+      if (ImGui::RadioButton(_("1MB##sgsc"),chipMem==20)) {
         chipMem=20;
         altered=true;
         mustRender=true;
@@ -1038,7 +1038,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
         altered=true;
         mustRender=true;
       }
-      if (ImGui::RadioButton(_L("256KB##sgsc"),chipMem==18)) {
+      if (ImGui::RadioButton(_("256KB##sgsc"),chipMem==18)) {
         chipMem=18;
         altered=true;
         mustRender=true;
@@ -2514,7 +2514,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
     {
       bool mono = flags.getBool("monoOutput", false);
 
-      if (ImGui::Checkbox(_L("Downmix chip output to mono##sgsc"), &mono)) {
+      if (ImGui::Checkbox(_("Downmix chip output to mono##sgsc"), &mono)) {
         altered = true;
       }
 
@@ -2526,7 +2526,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
         rerender_es5503 = false;
       }
 
-      ImGui::TextUnformatted(_L("Reserved blocks for wavetables:##sgsc"));
+      ImGui::TextUnformatted(_("Reserved blocks for wavetables:##sgsc"));
       if(CWSliderInt("",&reserved,0,32))
       {
         altered = true;
@@ -2534,7 +2534,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       }
 
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Reserve this many blocks 256 bytes each in sample memory.\nEach block holds one wavetable (is used for one wavetable channel),\nso reserve as many as you need.##sgsc"));
+        ImGui::SetTooltip(_("Reserve this many blocks 256 bytes each in sample memory.\nEach block holds one wavetable (is used for one wavetable channel),\nso reserve as many as you need.##sgsc"));
       }
 
       if (altered) {
@@ -2554,7 +2554,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
     {
         int clockSel=flags.getInt("clockSel",1);
 
-        ImGui::Text(_L("Clock rate:##sgsc10"));
+        ImGui::Text(_("Clock rate:##sgsc10"));
         ImGui::Indent();
         if (ImGui::RadioButton("1MHz (Calibrated Internal Oscillator / 8)##sgsc",clockSel==0)) 
         {
@@ -2592,14 +2592,14 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
 
         int audioRenderType = flags.getInt("audioRenderType", 0);
 
-        ImGui::Text(_L("Audio output method:##sgsc"));
+        ImGui::Text(_("Audio output method:##sgsc"));
         ImGui::Indent();
-        if (ImGui::RadioButton(_L("Idealized internal output - 8-bit PCM##sgsc"), audioRenderType == 0)) 
+        if (ImGui::RadioButton(_("Idealized internal output - 8-bit PCM##sgsc"), audioRenderType == 0)) 
         {
             audioRenderType = 0;
             altered = true;
         }
-        if (ImGui::RadioButton(_L("Real internal output - 8-bit PWM##sgsc"), audioRenderType == 1)) 
+        if (ImGui::RadioButton(_("Real internal output - 8-bit PWM##sgsc"), audioRenderType == 1)) 
         {
             audioRenderType = 1;
             altered = true;
@@ -2611,18 +2611,18 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
           ImGui::TableSetBgColor(ImGuiTableBgTarget_CellBg,ImGui::GetColorU32(ImGuiCol_TableHeaderBg));
-          ImGui::Text(_L("Sample Rate##sgsc"));
+          ImGui::Text(_("Sample Rate##sgsc"));
           ImGui::TableNextColumn();
-          ImGui::Text(_L("%.0fHz##sgsc"), chipClock/512.0);
+          ImGui::Text(_("%.0fHz##sgsc"), chipClock/512.0);
 
           if (audioRenderType == 1) 
           {
             ImGui::TableNextRow();
             ImGui::TableNextColumn();
             ImGui::TableSetBgColor(ImGuiTableBgTarget_CellBg,ImGui::GetColorU32(ImGuiCol_TableHeaderBg));
-            ImGui::Text(_L("PWM Rate##sgsc"));
+            ImGui::Text(_("PWM Rate##sgsc"));
             ImGui::TableNextColumn();
-            ImGui::Text(_L("%.0fHz##sgsc"), chipClock/256.0);
+            ImGui::Text(_("%.0fHz##sgsc"), chipClock/256.0);
           }
 
           ImGui::EndTable();
@@ -2666,7 +2666,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       altered=true;
     }
     ImGui::Indent();
-    if (ImGui::InputInt(_L("Hz##sgscHz"),&customClock,100,10000)) {
+    if (ImGui::InputInt(_("Hz##sgscHz"),&customClock,100,10000)) {
       if (customClock<MIN_CUSTOM_CLOCK) customClock=MIN_CUSTOM_CLOCK;
       if (customClock>MAX_CUSTOM_CLOCK) customClock=MAX_CUSTOM_CLOCK;
       altered=true;

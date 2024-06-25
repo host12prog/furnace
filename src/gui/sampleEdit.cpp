@@ -250,7 +250,7 @@ void FurnaceGUI::drawSampleEdit() {
               }
             }
             if (sample->samples>65535) {
-              SAMPLE_WARN(warnLength,_L("QSound: maximum sample length is 65535##sgsed"));
+              SAMPLE_WARN(warnLength,_("QSound: maximum sample length is 65535"));
             }
             break;
           case DIV_SYSTEM_NES:
@@ -585,7 +585,7 @@ void FurnaceGUI::drawSampleEdit() {
 
           ImGui::TableNextColumn();
           ImGui::AlignTextToFramePadding();
-          ImGui::Text(_L("Hz##sgsed"));
+          ImGui::Text(_("Hz"));
           ImGui::SameLine();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (ImGui::InputInt("##SampleRate",&targetRate,10,200)) { MARK_MODIFIED
@@ -644,7 +644,7 @@ void FurnaceGUI::drawSampleEdit() {
           }
 
           ImGui::AlignTextToFramePadding();
-          ImGui::Text(_L("Fine##sgsed"));
+          ImGui::Text(_("Fine"));
           ImGui::SameLine();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           int prevFine=sampleNoteFine;
@@ -681,7 +681,7 @@ void FurnaceGUI::drawSampleEdit() {
           ImGui::BeginDisabled(!(doLoop || keepLoopAlive));
           keepLoopAlive=false;
           ImGui::AlignTextToFramePadding();
-          ImGui::Text(_L("Mode##sgsed"));
+          ImGui::Text(_("Mode"));
           ImGui::SameLine();
           pushWarningColor(!warnLoopMode.empty());
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
@@ -1359,7 +1359,7 @@ void FurnaceGUI::drawSampleEdit() {
         ImGui::SetTooltip(_("Create instrument from sample"));
       }
 
-      sameLineMaybe(ImGui::CalcTextSize(_L("Zoom##sgsed0")).x+150.0f*dpiScale+ImGui::CalcTextSize("100%").x);
+      sameLineMaybe(ImGui::CalcTextSize(_("Zoom##sgsed0")).x+150.0f*dpiScale+ImGui::CalcTextSize("100%").x);
       double zoomPercent=100.0/sampleZoom;
       bool checkZoomLimit=false;
       ImGui::AlignTextToFramePadding();
@@ -1385,7 +1385,7 @@ void FurnaceGUI::drawSampleEdit() {
         }
         ImGui::EndDisabled();
       } else {
-        if (ImGui::Button(_L("Auto##sgsed"))) {
+        if (ImGui::Button(_("Auto"))) {
           sampleZoomAuto=true;
           updateSampleTex=true;
         }
@@ -1447,7 +1447,7 @@ void FurnaceGUI::drawSampleEdit() {
               t=fmt::sprintf("%d.%03d",timeMs/1000,timeMs%1000);
             }
           } else {
-            t=fmt::sprintf(_L("%dms"),timeMs);
+            t=fmt::sprintf(_("%dms"),timeMs);
           }
           dl->AddText(pos,color,t.c_str());
         }
@@ -1876,7 +1876,7 @@ void FurnaceGUI::drawSampleEdit() {
           if (!statusBar2.empty()) {
             statusBar2+=" | ";
           }
-          String mygod = _L("%.2fHz##sgsed");
+          String mygod = _("%.2fHz");
           statusBar2+=fmt::sprintf(mygod,e->getSamplePreviewRate());
 
           int start=sampleSelStart;

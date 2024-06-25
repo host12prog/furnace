@@ -146,18 +146,18 @@ void FurnaceGUI::drawMemory() {
                       ImGui::Text(_("bank %d"),(int)entry.type-(int)DIV_MEMORY_BANK0);
                     }
                     if ((entry.end-entry.begin)>=1024 && settings.memUsageUnit==1) {
-                      ImGui::Text(_L("%d-%d ($%x-$%x): %dK ($%x)##sgme"),(int)entry.begin,(int)entry.end-1,(int)entry.begin,(int)entry.end-1,(int)(entry.end-entry.begin)>>10,(int)(entry.end-entry.begin));
+                      ImGui::Text(_("%d-%d ($%x-$%x): %dK ($%x)##sgme"),(int)entry.begin,(int)entry.end-1,(int)entry.begin,(int)entry.end-1,(int)(entry.end-entry.begin)>>10,(int)(entry.end-entry.begin));
                     } else {
-                      ImGui::Text(_L("%d-%d ($%x-$%x): %d bytes ($%x)##sgme"),(int)entry.begin,(int)entry.end-1,(int)entry.begin,(int)entry.end-1,(int)(entry.end-entry.begin),(int)(entry.end-entry.begin));
+                      ImGui::Text(_("%d-%d ($%x-$%x): %d bytes ($%x)##sgme"),(int)entry.begin,(int)entry.end-1,(int)entry.begin,(int)entry.end-1,(int)(entry.end-entry.begin),(int)(entry.end-entry.begin));
                     }
                     break;
                   }
                   default:
                     ImGui::Text("%d: %s",curHover,entry.name.c_str());
                     if ((entry.end-entry.begin)>=1024 && settings.memUsageUnit==1) {
-                      ImGui::Text(_L("%d-%d ($%x-$%x): %dK ($%x)##sgme"),(int)entry.begin,(int)entry.end-1,(int)entry.begin,(int)entry.end-1,(int)(entry.end-entry.begin)>>10,(int)(entry.end-entry.begin));
+                      ImGui::Text(_("%d-%d ($%x-$%x): %dK ($%x)##sgme"),(int)entry.begin,(int)entry.end-1,(int)entry.begin,(int)entry.end-1,(int)(entry.end-entry.begin)>>10,(int)(entry.end-entry.begin));
                     } else {
-                      ImGui::Text(_L("%d-%d ($%x-$%x): %d bytes ($%x)##sgme"),(int)entry.begin,(int)entry.end-1,(int)entry.begin,(int)entry.end-1,(int)(entry.end-entry.begin),(int)(entry.end-entry.begin));
+                      ImGui::Text(_("%d-%d ($%x-$%x): %d bytes ($%x)##sgme"),(int)entry.begin,(int)entry.end-1,(int)entry.begin,(int)entry.end-1,(int)(entry.end-entry.begin),(int)(entry.end-entry.begin));
                     }
                     break;
                 }

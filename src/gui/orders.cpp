@@ -43,7 +43,7 @@ void FurnaceGUI::drawMobileOrderSel() {
 
   ImGui::SetNextWindowPos(ImVec2(0.0f,mobileMenuPos*-0.65*canvasH));
   ImGui::SetNextWindowSize(ImVec2(canvasW,0.12*canvasW));
-  if (ImGui::Begin("OrderSel",NULL,globalWinFlags, _L("OrderSel###OrderSel"))) {
+  if (ImGui::Begin("OrderSel",NULL,globalWinFlags, _("OrderSel###OrderSel"))) {
     ImDrawList* dl=ImGui::GetWindowDrawList();
     ImGuiWindow* window=ImGui::GetCurrentWindow();
     ImGuiStyle& style=ImGui::GetStyle();

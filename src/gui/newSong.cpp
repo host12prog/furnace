@@ -205,7 +205,7 @@ void FurnaceGUI::drawNewSong() {
           if (ImGui::IsItemHovered()) {
             ImGui::SetTooltip("%s",_L(i.description));
           }
-          if (strcmp(i.name,_L("User##sgpr"))==0) ImGui::Separator();
+          if (strcmp(i.name,_("User##sgpr"))==0) ImGui::Separator();
           index++;
         }
       }
