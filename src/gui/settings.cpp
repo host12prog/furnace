@@ -1234,54 +1234,6 @@ void FurnaceGUI::drawSettings() {
           settingsChanged=true;
         }
 
-        CONFIG_SUBSECTION(_L("Language##sgse"));
-
-        if(ImGui::BeginCombo(_L("GUI language##sgse"), locale.getLangName(locale.getLangIndex())))
-        {
-          for(int i = 0; i < DIV_LANG_MAX; i++)
-          {
-            if (ImGui::Selectable(locale.getLangName((DivLang)i))) 
-            {
-              locale.setLanguage((DivLang)i);
-              initSystemPresets();
-
-              settings.language=i;
-              settingsChanged=true;
-
-              logI("The locale translated strings array size: %d", (int)locale.getMemoryUsage());
-            }
-          }
-
-          ImGui::EndCombo();
-        }
-
-        bool translate_channel_names_patternB=settings.translate_channel_names_pattern;
-        if (ImGui::Checkbox(_L("Translate channel names in pattern header##sgse"),&translate_channel_names_patternB)) {
-          settings.translate_channel_names_pattern=translate_channel_names_patternB;
-          settingsChanged=true;
-        }
-
-        bool translate_channel_names_oscB=settings.translate_channel_names_osc;
-        if (ImGui::Checkbox(_L("Translate channel names in channel oscilloscope label##sgse"),&translate_channel_names_oscB)) {
-          settings.translate_channel_names_osc=translate_channel_names_oscB;
-          settingsChanged=true;
-        }
-
-        bool translate_short_channel_namesB=settings.translate_short_channel_names;
-        if (ImGui::Checkbox(_L("Translate short channel names (in orders and other places)##sgse"),&translate_short_channel_namesB)) {
-          settings.translate_short_channel_names=translate_short_channel_namesB;
-          settingsChanged=true;
-        }
-        //ImGui::TextUnformatted(_L("test##sgse"));
-
-        /*if(settings.language == (int)DIV_LANG_RUSSIAN)
-        {
-          ImGui::Text(_LP("%d apple", 1), 1);
-          ImGui::Text(_LP("%d apple", 2), 2);
-          ImGui::Text(_LP("%d apple", 5), 5);
-          ImGui::TextUnformatted(_L("iulserghiueshgui##sgse"));
-        }*/
-
         // SUBSECTION CONFIGURATION
         CONFIG_SUBSECTION(_("Configuration"));
         if (ImGui::Button(_("Import"))) {

@@ -41,8 +41,6 @@
 #define DIV_IT_MAGIC "IMPM"
 #define DIV_TFM_MAGIC "TFMfmtV2"
 
-#define DIV_FUR_MAGIC_DS0 "Furnace-B module"
-
 enum DivFurVariants: int {
   DIV_FUR_VARIANT_VANILLA=0,
   DIV_FUR_VARIANT_B=1,
