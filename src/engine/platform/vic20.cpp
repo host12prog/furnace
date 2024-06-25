@@ -262,6 +262,7 @@ int DivPlatformVIC20::dispatch(DivCommand c) {
 }
 
 void DivPlatformVIC20::muteChannel(int ch, bool mute) {
+  isMuted[ch]=mute;
   if (chan[ch].onOff) {
     if (mute) {
       chan[ch].keyOff=true;

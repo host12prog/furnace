@@ -62,21 +62,21 @@ const double timeMultipliers[13]={
 #define MAX_RATE(_name,_x) \
    if (e->isPreviewingSample()) { \
      if ((int)e->getSamplePreviewRate()>(int)(_x)) { \
-       SAMPLE_WARN(warnRate,fmt::sprintf(_L("%s: maximum sample rate is %d##sgsed"),_name,(int)(_x))); \
+       SAMPLE_WARN(warnRate,fmt::sprintf(_("%s: maximum sample rate is %d"),_name,(int)(_x))); \
      } \
    }
 
 #define MIN_RATE(_name,_x) \
    if (e->isPreviewingSample()) { \
      if ((int)e->getSamplePreviewRate()<(int)(_x)) { \
-       SAMPLE_WARN(warnRate,fmt::sprintf(_L("%s: minimum sample rate is %d##sgsed"),_name,(int)(_x))); \
+       SAMPLE_WARN(warnRate,fmt::sprintf(_("%s: minimum sample rate is %d"),_name,(int)(_x))); \
      } \
    }
 
 #define EXACT_RATE(_name,_x) \
    if (e->isPreviewingSample()) { \
      if ((int)e->getSamplePreviewRate()!=(int)(_x)) { \
-       SAMPLE_WARN(warnRate,fmt::sprintf(_L("%s: sample rate must be %d##sgsed"),_name,(int)(_x))); \
+       SAMPLE_WARN(warnRate,fmt::sprintf(_("%s: sample rate must be %d"),_name,(int)(_x))); \
      } \
    }
 
@@ -93,11 +93,11 @@ void FurnaceGUI::drawSampleEdit() {
     ImGui::SetNextWindowPos(patWindowPos);
     ImGui::SetNextWindowSize(patWindowSize);
   }
-  if (ImGui::Begin("Sample Editor",&sampleEditOpen,globalWinFlags|(settings.allowEditDocking?0:ImGuiWindowFlags_NoDocking), _L("Sample Editor###Sample Editor"))) {
+  if (ImGui::Begin("Sample Editor",&sampleEditOpen,globalWinFlags|(settings.allowEditDocking?0:ImGuiWindowFlags_NoDocking),_("Sample Editor"))) {
     if (curSample<0 || curSample>=(int)e->song.sample.size()) {
       ImGui::SetCursorPosY(ImGui::GetCursorPosY()+(ImGui::GetContentRegionAvail().y-ImGui::GetFrameHeightWithSpacing()*2.0f)*0.5f);
-      CENTER_TEXT(_L("no sample selected##sgsed"));
-      ImGui::Text(_L("no sample selected##sgsed"));
+      CENTER_TEXT(_("no sample selected"));
+      ImGui::Text(_("no sample selected"));
       if (ImGui::BeginTable("noAssetCenter",3)) {
         ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch,0.5f);
         ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthFixed);
@@ -108,7 +108,7 @@ void FurnaceGUI::drawSampleEdit() {
         ImGui::TableNextColumn();
 
         if (e->song.sample.size()>0) {
-          if (ImGui::BeginCombo("##SampleSelect",_L("select one...##sgsed"))) {
+          if (ImGui::BeginCombo("##SampleSelect",_("select one..."))) {
             if (ImGui::BeginTable("SampleSelCombo",1,ImGuiTableFlags_ScrollY)) {
               actualSampleList();
               ImGui::EndTable();
@@ -116,16 +116,16 @@ void FurnaceGUI::drawSampleEdit() {
             ImGui::EndCombo();
           }
           ImGui::SameLine();
-          ImGui::TextUnformatted(_L("or##sgsed0"));
+          ImGui::TextUnformatted(_("or"));
           ImGui::SameLine();
         }
-        if (ImGui::Button(_L("Open##sgsed0"))) {
+        if (ImGui::Button(_("Open"))) {
           doAction(GUI_ACTION_SAMPLE_LIST_OPEN);
         }
         ImGui::SameLine();
-        ImGui::TextUnformatted(_L("or##sgsed1"));
+        ImGui::TextUnformatted(_("or"));
         ImGui::SameLine();
-        if (ImGui::Button(_L("Create New##sgsed"))) {
+        if (ImGui::Button(_("Create New"))) {
           doAction(GUI_ACTION_SAMPLE_LIST_ADD);
         }
 
@@ -134,16 +134,16 @@ void FurnaceGUI::drawSampleEdit() {
       }
     } else {
       DivSample* sample=e->song.sample[curSample];
-      String sampleType=_L("Invalid##sgsed0");
+      String sampleType=_("Invalid");
       if (sample->depth<DIV_SAMPLE_DEPTH_MAX) {
         if (sampleDepths[sample->depth]!=NULL) {
           sampleType=_L(sampleDepths[sample->depth]);
         }
       }
-      String loopType=_L("Invalid##sgsed1");
+      String loopType=_("Invalid");
       if (sample->loopMode<DIV_SAMPLE_LOOP_MAX) {
         if (sampleLoopModes[sample->loopMode]!=NULL) {
-          loopType=_L(sampleLoopModes[sample->loopMode]);
+          loopType=_(sampleLoopModes[sample->loopMode]);
         }
       }
 
@@ -168,10 +168,10 @@ void FurnaceGUI::drawSampleEdit() {
         doAction(GUI_ACTION_SAMPLE_LIST_OPEN_REPLACE);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Open##sgsed1"));
+        ImGui::SetTooltip(_("Open"));
       }
       if (ImGui::BeginPopupContextItem("SampleEOpenOpt")) {
-        if (ImGui::MenuItem(_L("import raw...##sgsed"))) {
+        if (ImGui::MenuItem(_("import raw..."))) {
           doAction((curSample>=0 && curSample<(int)e->song.sample.size())?GUI_ACTION_SAMPLE_LIST_OPEN_REPLACE_RAW:GUI_ACTION_SAMPLE_LIST_OPEN_RAW);
         }
         ImGui::EndPopup();
@@ -181,10 +181,10 @@ void FurnaceGUI::drawSampleEdit() {
         doAction(GUI_ACTION_SAMPLE_LIST_SAVE);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Save##sgsed"));
+        ImGui::SetTooltip(_("Save"));
       }
       if (ImGui::BeginPopupContextItem("SampleESaveOpt")) {
-        if (ImGui::MenuItem(_L("save raw...##sgsed"))) {
+        if (ImGui::MenuItem(_("save raw..."))) {
           doAction(GUI_ACTION_SAMPLE_LIST_SAVE_RAW);
         }
         ImGui::EndPopup();
@@ -192,7 +192,7 @@ void FurnaceGUI::drawSampleEdit() {
 
       ImGui::SameLine();
 
-      ImGui::Text(_L("Name##sgsed"));
+      ImGui::Text(_("Name"));
       ImGui::SameLine();
       ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
       ImGui::PushID(2+curSample);
@@ -226,18 +226,18 @@ void FurnaceGUI::drawSampleEdit() {
               if (sample->loopStart&15) {
                 int tryWith=(sample->loopStart+8)&(~15);
                 if (tryWith>(int)sample->samples) tryWith-=16;
-                String alignHint=fmt::sprintf(_L("SNES: loop start must be a multiple of 16 (try with %d)##sgsed"),tryWith);
+                String alignHint=fmt::sprintf(_("SNES: loop start must be a multiple of 16 (try with %d)"),tryWith);
                 SAMPLE_WARN(warnLoopStart,alignHint);
               }
               if (sample->loopEnd&15) {
                 int tryWith=(sample->loopEnd+8)&(~15);
                 if (tryWith>(int)sample->samples) tryWith-=16;
-                String alignHint=fmt::sprintf(_L("SNES: loop end must be a multiple of 16 (try with %d)##sgsed"),tryWith);
+                String alignHint=fmt::sprintf(_("SNES: loop end must be a multiple of 16 (try with %d)"),tryWith);
                 SAMPLE_WARN(warnLoopEnd,alignHint);
               }
             }
             if (sample->samples&15) {
-              SAMPLE_WARN(warnLength,_L("SNES: sample length will be padded to multiple of 16##sgsed"));
+              SAMPLE_WARN(warnLength,_("SNES: sample length will be padded to multiple of 16"));
             }
             if (dispatch!=NULL) {
               MAX_RATE("SNES",dispatch->chipClock/8.0);
@@ -246,7 +246,7 @@ void FurnaceGUI::drawSampleEdit() {
           case DIV_SYSTEM_QSOUND:
             if (sample->loop) {
               if (sample->loopEnd-sample->loopStart>32767) {
-                SAMPLE_WARN(warnLoopPos,_L("QSound: loop cannot be longer than 32767 samples##sgsed"));
+                SAMPLE_WARN(warnLoopPos,_("QSound: loop cannot be longer than 32767 samples"));
               }
             }
             if (sample->samples>65535) {
@@ -255,38 +255,25 @@ void FurnaceGUI::drawSampleEdit() {
             break;
           case DIV_SYSTEM_NES:
             if (sample->loop) {
-              //if (sample->loopStart!=0 || sample->loopEnd!=(int)(sample->samples)) {
-                //SAMPLE_WARN(warnLoopPos,_L("NES: loop point ignored on DPCM (may only loop entire sample)##sgsed"));
-              //}
-
-              if (sample->loopStart&511) {
-                int tryWith=(sample->loopStart)&(~511);
-                if (tryWith>(int)sample->samples) tryWith-=512;
-                String alignHint=fmt::sprintf(_L("NES: loop start must be a multiple of 512 (try with %d)##sgsed"),tryWith);
-                SAMPLE_WARN(warnLoopStart,alignHint);
-              }
-              if ((sample->loopEnd)&127) {
-                int tryWith=(sample->loopEnd + 1)&(~127); //+1 bc of how sample length is treated: https://www.nesdev.org/wiki/APU_DMC
-                if (tryWith>(int)sample->samples) tryWith-=128;
-                String alignHint=fmt::sprintf(_L("NES: loop end must be a multiple of 128 (try with %d)##sgsed"),tryWith);
-                SAMPLE_WARN(warnLoopEnd,alignHint);
+              if (sample->loopStart!=0 || sample->loopEnd!=(int)(sample->samples)) {
+                SAMPLE_WARN(warnLoopPos,_("NES: loop point ignored on DPCM (may only loop entire sample)"));
               }
             }
             if (sample->samples>32648) {
-              SAMPLE_WARN(warnLength,_L("NES: maximum DPCM sample length is 32648##sgsed"));
+              SAMPLE_WARN(warnLength,_("NES: maximum DPCM sample length is 32648"));
             }
             break;
           case DIV_SYSTEM_X1_010:
             if (sample->loop) {
-              SAMPLE_WARN(warnLoop,_L("X1-010: samples can't loop##sgsed"));
+              SAMPLE_WARN(warnLoop,_("X1-010: samples can't loop"));
             }
             if (sample->samples>131072) {
-              SAMPLE_WARN(warnLength,_L("X1-010: maximum sample length is 131072##sgsed"));
+              SAMPLE_WARN(warnLength,_("X1-010: maximum sample length is 131072"));
             }
             break;
           case DIV_SYSTEM_GA20:
             if (sample->loop) {
-              SAMPLE_WARN(warnLoop,_L("GA20: samples can't loop##sgsed"));
+              SAMPLE_WARN(warnLoop,_("GA20: samples can't loop"));
             }
             if (dispatch!=NULL) {
               MIN_RATE("GA20",dispatch->chipClock/1024);
@@ -297,10 +284,10 @@ void FurnaceGUI::drawSampleEdit() {
           case DIV_SYSTEM_YM2608_CSM:
             if (sample->loop) {
               if (sample->loopStart!=0 || sample->loopEnd!=(int)(sample->samples)) {
-                SAMPLE_WARN(warnLoopPos,_L("YM2608: loop point ignored on ADPCM (may only loop entire sample)##sgsed"));
+                SAMPLE_WARN(warnLoopPos,_("YM2608: loop point ignored on ADPCM (may only loop entire sample)"));
               }
               if (sample->samples&511) {
-                SAMPLE_WARN(warnLength,_L("YM2608: sample length will be padded to multiple of 512##sgsed"));
+                SAMPLE_WARN(warnLength,_("YM2608: sample length will be padded to multiple of 512"));
               }
             }
             break;
@@ -310,16 +297,16 @@ void FurnaceGUI::drawSampleEdit() {
           case DIV_SYSTEM_YM2610B:
           case DIV_SYSTEM_YM2610B_EXT:
             if (sample->loop) {
-              SAMPLE_WARN(warnLoop,_L("YM2610: ADPCM-A samples can't loop##sgsed"));
+              SAMPLE_WARN(warnLoop,_("YM2610: ADPCM-A samples can't loop"));
               if (sample->loopStart!=0 || sample->loopEnd!=(int)(sample->samples)) {
-                SAMPLE_WARN(warnLoopPos,_L("YM2610: loop point ignored on ADPCM-B (may only loop entire sample)##sgsed"));
+                SAMPLE_WARN(warnLoopPos,_("YM2610: loop point ignored on ADPCM-B (may only loop entire sample)"));
               }
               if (sample->samples&511) {
-                SAMPLE_WARN(warnLength,_L("YM2610: sample length will be padded to multiple of 512##sgsed"));
+                SAMPLE_WARN(warnLength,_("YM2610: sample length will be padded to multiple of 512"));
               }
             }
             if (sample->samples>2097152) {
-              SAMPLE_WARN(warnLength,_L("YM2610: maximum ADPCM-A sample length is 2097152##sgsed"));
+              SAMPLE_WARN(warnLength,_("YM2610: maximum ADPCM-A sample length is 2097152"));
             }
             if (dispatch!=NULL) {
               EXACT_RATE("YM2610 (ADPCM-A)",dispatch->chipClock/432);
@@ -328,24 +315,24 @@ void FurnaceGUI::drawSampleEdit() {
           case DIV_SYSTEM_Y8950:
             if (sample->loop) {
               if (sample->loopStart!=0 || sample->loopEnd!=(int)(sample->samples)) {
-                SAMPLE_WARN(warnLoopPos,_L("Y8950: loop point ignored on ADPCM (may only loop entire sample)##sgsed"));
+                SAMPLE_WARN(warnLoopPos,_("Y8950: loop point ignored on ADPCM (may only loop entire sample)"));
               }
               if (sample->samples&511) {
-                SAMPLE_WARN(warnLength,_L("Y8950: sample length will be padded to multiple of 512##sgsed"));
+                SAMPLE_WARN(warnLength,_("Y8950: sample length will be padded to multiple of 512"));
               }
             }
             break;
           case DIV_SYSTEM_AMIGA:
             if (sample->loop) {
               if (sample->loopStart&1) {
-                SAMPLE_WARN(warnLoopStart,_L("Amiga: loop start must be a multiple of 2##sgsed"));
+                SAMPLE_WARN(warnLoopStart,_("Amiga: loop start must be a multiple of 2"));
               }
               if (sample->loopEnd&1) {
-                SAMPLE_WARN(warnLoopEnd,_L("Amiga: loop end must be a multiple of 2##sgsed"));
+                SAMPLE_WARN(warnLoopEnd,_("Amiga: loop end must be a multiple of 2"));
               }
             }
             if (sample->samples>131070) {
-              SAMPLE_WARN(warnLength,_L("Amiga: maximum sample length is 131070##sgsed"));
+              SAMPLE_WARN(warnLength,_("Amiga: maximum sample length is 131070"));
             }
             if (dispatch!=NULL) {
               MAX_RATE("Amiga",31250.0);
@@ -354,7 +341,7 @@ void FurnaceGUI::drawSampleEdit() {
           case DIV_SYSTEM_SEGAPCM:
           case DIV_SYSTEM_SEGAPCM_COMPAT:
             if (sample->samples>65280) {
-              SAMPLE_WARN(warnLength,_L("SegaPCM: maximum sample length is 65280##sgsed"));
+              SAMPLE_WARN(warnLength,_("SegaPCM: maximum sample length is 65280"));
             }
             if (dispatch!=NULL) {
               MAX_RATE("SegaPCM",dispatch->chipClock/256);
@@ -363,16 +350,16 @@ void FurnaceGUI::drawSampleEdit() {
           case DIV_SYSTEM_K053260:
             if (sample->loop) {
               if (sample->loopStart!=0 || sample->loopEnd!=(int)(sample->samples)) {
-                SAMPLE_WARN(warnLoopPos,_L("K053260: loop point ignored (may only loop entire sample)##sgsed"));
+                SAMPLE_WARN(warnLoopPos,_("K053260: loop point ignored (may only loop entire sample)"));
               }
             }
             if (sample->samples>65535) {
-              SAMPLE_WARN(warnLength,_L("K053260: maximum sample length is 65535##sgsed"));
+              SAMPLE_WARN(warnLength,_("K053260: maximum sample length is 65535"));
             }
             break;
           case DIV_SYSTEM_C140:
             if (sample->samples>65535) {
-              SAMPLE_WARN(warnLength,_L("C140: maximum sample length is 65535##sgsed"));
+              SAMPLE_WARN(warnLength,_("C140: maximum sample length is 65535"));
             }
             if (dispatch!=NULL) {
               MAX_RATE("C140",dispatch->rate);
@@ -381,14 +368,14 @@ void FurnaceGUI::drawSampleEdit() {
           case DIV_SYSTEM_C219:
             if (sample->loop) {
               if (sample->loopStart&1) {
-                SAMPLE_WARN(warnLoopStart,_L("C219: loop start must be a multiple of 2##sgsed"));
+                SAMPLE_WARN(warnLoopStart,_("C219: loop start must be a multiple of 2"));
               }
               if (sample->loopEnd&1) {
-                SAMPLE_WARN(warnLoopEnd,_L("C219: loop end must be a multiple of 2##sgsed"));
+                SAMPLE_WARN(warnLoopEnd,_("C219: loop end must be a multiple of 2"));
               }
             }
             if (sample->samples>131072) {
-              SAMPLE_WARN(warnLength,_L("C219: maximum sample length is 131072##sgsed"));
+              SAMPLE_WARN(warnLength,_("C219: maximum sample length is 131072"));
             }
             if (dispatch!=NULL) {
               MAX_RATE("C219",dispatch->rate);
@@ -396,23 +383,23 @@ void FurnaceGUI::drawSampleEdit() {
             break;
           case DIV_SYSTEM_MSM6295:
             if (sample->loop) {
-              SAMPLE_WARN(warnLoop,_L("MSM6295: samples can't loop##sgsed"));
+              SAMPLE_WARN(warnLoop,_("MSM6295: samples can't loop"));
             }
             if (sample->samples>129024) {
-              SAMPLE_WARN(warnLength,_L("MSM6295: maximum bankswitched sample length is 129024##sgsed"));
+              SAMPLE_WARN(warnLength,_("MSM6295: maximum bankswitched sample length is 129024"));
             }
             break;
           case DIV_SYSTEM_GBA_DMA:
             if (sample->loop) {
               if (sample->loopStart&3) {
-                SAMPLE_WARN(warnLoopStart,"GBA DMA: loop start must be a multiple of 4##sgsed");
+                SAMPLE_WARN(warnLoopStart,_("GBA DMA: loop start must be a multiple of 4"));
               }
               if ((sample->loopEnd-sample->loopStart)&15) {
-                SAMPLE_WARN(warnLoopEnd,"GBA DMA: loop length must be a multiple of 16##sgsed");
+                SAMPLE_WARN(warnLoopEnd,_("GBA DMA: loop length must be a multiple of 16"));
               }
             }
             if (sample->samples&15) {
-              SAMPLE_WARN(warnLength,"GBA DMA: sample length will be padded to multiple of 16##sgsed");
+              SAMPLE_WARN(warnLength,_("GBA DMA: sample length will be padded to multiple of 16"));
             }
             break;
           default:
@@ -421,10 +408,10 @@ void FurnaceGUI::drawSampleEdit() {
         if (e->song.system[i]!=DIV_SYSTEM_PCM_DAC) {
           if (e->song.system[i]==DIV_SYSTEM_ES5506) {
             if (sample->loopMode==DIV_SAMPLE_LOOP_BACKWARD) {
-              SAMPLE_WARN(warnLoopMode,_L("ES5506: backward loop mode isn't supported##sgsed"));
+              SAMPLE_WARN(warnLoopMode,_("ES5506: backward loop mode isn't supported"));
             }
           } else if (sample->loopMode!=DIV_SAMPLE_LOOP_FORWARD) {
-            SAMPLE_WARN(warnLoopMode,_L("backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506##sgsed"));
+            SAMPLE_WARN(warnLoopMode,_("backward/ping-pong only supported in Generic PCM DAC\nping-pong also on ES5506"));
           }
         }
 
@@ -454,26 +441,26 @@ void FurnaceGUI::drawSampleEdit() {
           sampleInfo=!sampleInfo;
         }
         ImGui::SameLine();
-        ImGui::Text(_L("Info##sgsed"));
+        ImGui::Text(_("Info"));
         ImGui::TableNextColumn();
         pushToggleColors(!sampleCompatRate);
-        if (ImGui::Button(_L("Rate##sgsed0"))) {
+        if (ImGui::Button(_("Rate"))) {
           sampleCompatRate=false;
         }
         popToggleColors();
         ImGui::SameLine();
         pushToggleColors(sampleCompatRate);
-        if (ImGui::Button(_L("Compat Rate##sgsed"))) {
+        if (ImGui::Button(_("Compat Rate"))) {
           sampleCompatRate=true;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("used in DefleMask-compatible sample mode (17xx), in where samples are mapped to an octave.##sgsed"));
+          ImGui::SetTooltip(_("used in DefleMask-compatible sample mode (17xx), in where samples are mapped to an octave."));
         }
         popToggleColors();
         ImGui::TableNextColumn();
         bool doLoop=(sample->loop);
         pushWarningColor(!warnLoop.empty());
-        String loopCheckboxName=(doLoop && (sample->loopEnd-sample->loopStart)>0)?fmt::sprintf(_L("Loop (length: %d)##Loop"),sample->loopEnd-sample->loopStart):String(_L("Loop##sgsed"));
+        String loopCheckboxName=(doLoop && (sample->loopEnd-sample->loopStart)>0)?fmt::sprintf(_("Loop (length: %d)##Loop"),sample->loopEnd-sample->loopStart):String(_("Loop"));
         if (ImGui::Checkbox(loopCheckboxName.c_str(),&doLoop)) { MARK_MODIFIED
           if (doLoop) {
             sample->loop=true;
@@ -497,21 +484,21 @@ void FurnaceGUI::drawSampleEdit() {
         popWarningColor();
         if (ImGui::IsItemHovered() && (!warnLoop.empty() || sample->depth==DIV_SAMPLE_DEPTH_BRR)) {
           if (sample->depth==DIV_SAMPLE_DEPTH_BRR) {
-            SAMPLE_WARN(warnLoop,_L("changing the loop in a BRR sample may result in glitches!##sgsed0"));
+            SAMPLE_WARN(warnLoop,_("changing the loop in a BRR sample may result in glitches!"));
           }
           ImGui::SetTooltip("%s",warnLoop.c_str());
         }
 
         if (selColumns>1) {
           ImGui::TableNextColumn();
-          ImGui::Text(_L("Chips##sgsed"));
+          ImGui::Text(_("Chips"));
         }
         
         if (sampleInfo) {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
           ImGui::AlignTextToFramePadding();
-          ImGui::Text(_L("Type##sgsed"));
+          ImGui::Text(_("Type"));
           ImGui::SameLine();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (ImGui::BeginCombo("##SampleType",sampleType.c_str())) {
@@ -539,7 +526,7 @@ void FurnaceGUI::drawSampleEdit() {
           }
           if (sample->depth==DIV_SAMPLE_DEPTH_BRR || isThereSNES) {
             bool be=sample->brrEmphasis;
-            if (ImGui::Checkbox(_L("BRR emphasis##sgsed"),&be)) {
+            if (ImGui::Checkbox(_("BRR emphasis"),&be)) {
               sample->prepareUndo(true);
               sample->brrEmphasis=be;
               e->renderSamplesP(curSample);
@@ -548,15 +535,28 @@ void FurnaceGUI::drawSampleEdit() {
             }
             if (ImGui::IsItemHovered()) {
               if (sample->depth==DIV_SAMPLE_DEPTH_BRR) {
-                ImGui::SetTooltip(_L("this is a BRR sample.\nenabling this option will muffle it (only affects non-SNES chips).##sgsed"));
+                ImGui::SetTooltip(_("this is a BRR sample.\nenabling this option will muffle it (only affects non-SNES chips)."));
               } else {
-                ImGui::SetTooltip(_L("enable this option to slightly boost high frequencies\nto compensate for the SNES' Gaussian filter's muffle.##sgsed"));
+                ImGui::SetTooltip(_("enable this option to slightly boost high frequencies\nto compensate for the SNES' Gaussian filter's muffle."));
               }
+            }
+          }
+          if (sample->depth!=DIV_SAMPLE_DEPTH_BRR && isThereSNES) {
+            bool bf=sample->brrNoFilter;
+            if (ImGui::Checkbox(_("no BRR filters"),&bf)) {
+              sample->prepareUndo(true);
+              sample->brrNoFilter=bf;
+              e->renderSamplesP(curSample);
+              updateSampleTex=true;
+              MARK_MODIFIED;
+            }
+            if (ImGui::IsItemHovered()) {
+              ImGui::SetTooltip(_("enable this option to not use BRR blocks with filters\nand allow sample offset commands to be used safely."));
             }
           }
           if (sample->depth!=DIV_SAMPLE_DEPTH_8BIT && e->getSampleFormatMask()&(1L<<DIV_SAMPLE_DEPTH_8BIT)) {
             bool di=sample->dither;
-            if (ImGui::Checkbox(_L("8-bit dither##sgsed"),&di)) {
+            if (ImGui::Checkbox(_("8-bit dither"),&di)) {
               sample->prepareUndo(true);
               sample->dither=di;
               e->renderSamplesP(curSample);
@@ -564,7 +564,7 @@ void FurnaceGUI::drawSampleEdit() {
               MARK_MODIFIED;
             }
             if (ImGui::IsItemHovered()) {
-              ImGui::SetTooltip(_L("dither the sample when used on a chip that only supports 8-bit samples.##sgsed"));
+              ImGui::SetTooltip(_("dither the sample when used on a chip that only supports 8-bit samples."));
             }
           }
 
@@ -600,7 +600,7 @@ void FurnaceGUI::drawSampleEdit() {
           }
           
           ImGui::AlignTextToFramePadding();
-          ImGui::Text(_L("Note##sgsed"));
+          ImGui::Text(_("Note"));
           ImGui::SameLine();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (ImGui::BeginCombo("##SampleNote",noteNames[sampleNoteCoarse+60])) {
@@ -705,7 +705,7 @@ void FurnaceGUI::drawSampleEdit() {
 
           pushWarningColor(!warnLoopPos.empty() || !warnLoopStart.empty());
           ImGui::AlignTextToFramePadding();
-          ImGui::Text(_L("Start##sgsed"));
+          ImGui::Text(_("Start"));
           ImGui::SameLine();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (ImGui::InputInt("##LoopStartPosition",&sample->loopStart,1,16)) { MARK_MODIFIED
@@ -726,7 +726,7 @@ void FurnaceGUI::drawSampleEdit() {
           if (ImGui::IsItemHovered() && (!warnLoopPos.empty() || !warnLoopStart.empty() || sample->depth==DIV_SAMPLE_DEPTH_BRR)) {
             if (ImGui::BeginTooltip()) {
               if (sample->depth==DIV_SAMPLE_DEPTH_BRR) {
-                ImGui::Text(_L("changing the loop in a BRR sample may result in glitches!##sgsed1"));
+                ImGui::Text(_("changing the loop in a BRR sample may result in glitches!"));
               }
               if (!warnLoopStart.empty()) {
                 ImGui::Text("%s",warnLoopStart.c_str());
@@ -741,7 +741,7 @@ void FurnaceGUI::drawSampleEdit() {
 
           pushWarningColor(!warnLoopPos.empty() || !warnLoopEnd.empty());
           ImGui::AlignTextToFramePadding();
-          ImGui::Text(_L("End##sgsed"));
+          ImGui::Text(_("End"));
           ImGui::SameLine();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (ImGui::InputInt("##LoopEndPosition",&sample->loopEnd,1,16)) { MARK_MODIFIED
@@ -762,7 +762,7 @@ void FurnaceGUI::drawSampleEdit() {
           if (ImGui::IsItemHovered() && (!warnLoopPos.empty() || !warnLoopEnd.empty() || sample->depth==DIV_SAMPLE_DEPTH_BRR)) {
             if (ImGui::BeginTooltip()) {
               if (sample->depth==DIV_SAMPLE_DEPTH_BRR) {
-                ImGui::Text(_L("changing the loop in a BRR sample may result in glitches!##sgsed2"));
+                ImGui::Text(_("changing the loop in a BRR sample may result in glitches!"));
               }
               if (!warnLoopEnd.empty()) {
                 ImGui::Text("%s",warnLoopEnd.c_str());
@@ -851,13 +851,13 @@ void FurnaceGUI::drawSampleEdit() {
                     }
                     String toolText;
                     if (memName==NULL) {
-                      toolText=fmt::sprintf(_LP("%s\n%d bytes free##sgsed", totalFree),_L(e->getSystemName(e->song.system[j])),totalFree);
+                      toolText=fmt::sprintf(_("%s\n%d bytes free"),e->getSystemName(e->song.system[j]),totalFree);
                     } else {
-                      toolText=fmt::sprintf(_LP("%s (%s)\n%d bytes free##sgsed", totalFree),_L(e->getSystemName(e->song.system[j])),memName,totalFree);
+                      toolText=fmt::sprintf(_("%s (%s)\n%d bytes free"),e->getSystemName(e->song.system[j]),memName,totalFree);
                     }
 
                     if (isMemWarning[i][j] && sample->renderOn[i][j]) {
-                      toolText+=_L("\n\nnot enough memory for this sample!##sgsed");
+                      toolText+=_("\n\nnot enough memory for this sample!");
                     }
 
                     ImGui::SetTooltip("%s",toolText.c_str());
@@ -881,7 +881,7 @@ void FurnaceGUI::drawSampleEdit() {
       }
       popToggleColors();
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Edit mode: Select##sgsed"));
+        ImGui::SetTooltip(_("Edit mode: Select"));
       }
       sameLineMaybe();
       pushToggleColors(sampleDragMode);
@@ -890,7 +890,7 @@ void FurnaceGUI::drawSampleEdit() {
       }
       popToggleColors();
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Edit mode: Draw##sgsed"));
+        ImGui::SetTooltip(_("Edit mode: Draw"));
       }
       ImGui::BeginDisabled(sample->depth!=DIV_SAMPLE_DEPTH_8BIT && sample->depth!=DIV_SAMPLE_DEPTH_16BIT);
       sameLineMaybe();
@@ -901,22 +901,22 @@ void FurnaceGUI::drawSampleEdit() {
         resizeSize=sample->samples;
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Resize##sgsed0"));
+        ImGui::SetTooltip(_("Resize"));
       }
       if (openSampleResizeOpt) {
         openSampleResizeOpt=false;
         ImGui::OpenPopup("SResizeOpt");
       }
       if (ImGui::BeginPopupContextItem("SResizeOpt",ImGuiPopupFlags_MouseButtonLeft)) {
-        if (ImGui::InputInt(_L("Samples##sgsed0"),&resizeSize,1,64)) {
+        if (ImGui::InputInt(_("Samples"),&resizeSize,1,64)) {
           if (resizeSize<0) resizeSize=0;
           if (resizeSize>16777215) resizeSize=16777215;
         }
-        if (ImGui::Button(_L("Resize##sgsed1"))) {
+        if (ImGui::Button(_("Resize"))) {
           sample->prepareUndo(true);
           e->lockEngine([this,sample]() {
             if (!sample->resize(resizeSize)) {
-              showError(settings.language == DIV_LANG_ENGLISH ? "couldn't resize! make sure your sample is 8 or 16-bit." : _L("couldn't resize! make sure your sample is 8 or 16-bit.##sgsed"));
+              showError(_("couldn't resize! make sure your sample is 8 or 16-bit."));
             }
             e->renderSamples(curSample);
           });
@@ -936,14 +936,14 @@ void FurnaceGUI::drawSampleEdit() {
         resampleTarget=targetRate;
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Resample##sgsed0"));
+        ImGui::SetTooltip(_("Resample"));
       }
       if (openSampleResampleOpt) {
         openSampleResampleOpt=false;
         ImGui::OpenPopup("SResampleOpt");
       }
       if (ImGui::BeginPopupContextItem("SResampleOpt",ImGuiPopupFlags_MouseButtonLeft)) {
-        ImGui::Text(_L("Rate##sgsed1"));
+        ImGui::Text(_("Rate"));
         if (ImGui::InputDouble("##SRRate",&resampleTarget,1.0,50.0,"%g")) {
           if (resampleTarget<0) resampleTarget=0;
           if (resampleTarget>96000) resampleTarget=96000;
@@ -961,32 +961,17 @@ void FurnaceGUI::drawSampleEdit() {
           resampleTarget*=2.0;
         }
         double factor=resampleTarget/(double)targetRate;
-        if (ImGui::InputDouble(_L("Factor##sgsed"),&factor,0.125,0.5,"%g")) {
+        if (ImGui::InputDouble(_("Factor"),&factor,0.125,0.5,"%g")) {
           resampleTarget=(double)targetRate*factor;
           if (resampleTarget<0) resampleTarget=0;
           if (resampleTarget>96000) resampleTarget=96000;
         }
-//        ImGui::Combo(_L("Filter##sgsed"),&resampleStrat,resampleStrats,6);
-        if (ImGui::BeginCombo(_L("Filter##sgsed"),_L(resampleStrats[resampleStrat])))
-        {
-          int k = 0;
-          while(resampleStrats[k])
-          {
-            if (ImGui::Selectable(_L(resampleStrats[k])))
-            {
-              resampleStrat = k;
-            }
-        
-            k++;
-          }
-        
-          ImGui::EndCombo();
-        }
-        if (ImGui::Button(_L("Resample##sgsed1"))) {
+        ImGui::Combo(_("Filter"),&resampleStrat,LocalizedComboGetter,resampleStrats,6);
+        if (ImGui::Button(_("Resample"))) {
           sample->prepareUndo(true);
           e->lockEngine([this,sample,targetRate]() {
             if (!sample->resample(targetRate,resampleTarget,resampleStrat)) {
-              showError(settings.language == DIV_LANG_ENGLISH ? "couldn't resample! make sure your sample is 8 or 16-bit." : _L("couldn't resample! make sure your sample is 8 or 16-bit.##sgsed"));
+              showError(_("couldn't resample! make sure your sample is 8 or 16-bit."));
             }
             e->renderSamples(curSample);
           });
@@ -1007,35 +992,35 @@ void FurnaceGUI::drawSampleEdit() {
         doUndoSample();
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Undo##sgsed"));
+        ImGui::SetTooltip(_("Undo"));
       }
       sameLineMaybe();
       if (ImGui::Button(ICON_FA_REPEAT "##SRedo")) {
         doRedoSample();
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Redo##sgsed"));
+        ImGui::SetTooltip(_("Redo"));
       }
       ImGui::SameLine();
       ImGui::Dummy(ImVec2(4.0*dpiScale,dpiScale));
       sameLineMaybe();
       ImGui::Button(ICON_FA_VOLUME_UP "##SAmplify");
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Amplify##sgsed"));
+        ImGui::SetTooltip(_("Amplify"));
       }
       if (openSampleAmplifyOpt) {
         openSampleAmplifyOpt=false;
         ImGui::OpenPopup("SAmplifyOpt");
       }
       if (ImGui::BeginPopupContextItem("SAmplifyOpt",ImGuiPopupFlags_MouseButtonLeft)) {
-        ImGui::Text(_L("Volume##sgsed"));
+        ImGui::Text(_("Volume"));
         if (ImGui::InputFloat("##SRVolume",&amplifyVol,10.0,50.0,"%g%%")) {
           if (amplifyVol<0) amplifyVol=0;
           if (amplifyVol>10000) amplifyVol=10000;
         }
         ImGui::SameLine();
         ImGui::Text("(%.1fdB)",20.0*log10(amplifyVol/100.0f));
-        if (ImGui::Button(_L("Apply##sgsed0"))) {
+        if (ImGui::Button(_("Apply"))) {
           sample->prepareUndo(true);
           e->lockEngine([this,sample]() {
             SAMPLE_OP_BEGIN;
@@ -1071,42 +1056,42 @@ void FurnaceGUI::drawSampleEdit() {
         doAction(GUI_ACTION_SAMPLE_NORMALIZE);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Normalize##sgsed"));
+        ImGui::SetTooltip(_("Normalize"));
       }
       sameLineMaybe();
       if (ImGui::Button(ICON_FUR_SAMPLE_FADEIN "##SFadeIn")) {
         doAction(GUI_ACTION_SAMPLE_FADE_IN);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Fade in##sgsed"));
+        ImGui::SetTooltip(_("Fade in"));
       }
       sameLineMaybe();
       if (ImGui::Button(ICON_FUR_SAMPLE_FADEOUT "##SFadeOut")) {
         doAction(GUI_ACTION_SAMPLE_FADE_OUT);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Fade out##sgsed"));
+        ImGui::SetTooltip(_("Fade out"));
       }
       sameLineMaybe();
       ImGui::Button(ICON_FUR_SAMPLE_INSERT_SILENCE "##SInsertSilence");
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Insert silence##sgsed"));
+        ImGui::SetTooltip(_("Insert silence"));
       }
       if (openSampleSilenceOpt) {
         openSampleSilenceOpt=false;
         ImGui::OpenPopup("SSilenceOpt");
       }
       if (ImGui::BeginPopupContextItem("SSilenceOpt",ImGuiPopupFlags_MouseButtonLeft)) {
-        if (ImGui::InputInt(_L("Samples##sgsed1"),&silenceSize,1,64)) {
+        if (ImGui::InputInt(_("Samples"),&silenceSize,1,64)) {
           if (silenceSize<0) silenceSize=0;
           if (silenceSize>16777215) silenceSize=16777215;
         }
-        if (ImGui::Button(_L("Go##sgsed"))) {
+        if (ImGui::Button(_("Go"))) {
           int pos=(sampleSelStart==-1 || sampleSelStart==sampleSelEnd)?sample->samples:sampleSelStart;
           sample->prepareUndo(true);
           e->lockEngine([this,sample,pos]() {
             if (!sample->insert(pos,silenceSize)) {
-              showError(settings.language == DIV_LANG_ENGLISH ? "couldn't insert! make sure your sample is 8 or 16-bit." : _L("couldn't insert! make sure your sample is 8 or 16-bit.##sgsed"));
+              showError(_("couldn't insert! make sure your sample is 8 or 16-bit."));
             }
             e->renderSamples(curSample);
           });
@@ -1123,21 +1108,21 @@ void FurnaceGUI::drawSampleEdit() {
         doAction(GUI_ACTION_SAMPLE_SILENCE);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Apply silence##sgsed"));
+        ImGui::SetTooltip(_("Apply silence"));
       }
       sameLineMaybe();
       if (ImGui::Button(ICON_FA_TIMES "##SDelete")) {
         doAction(GUI_ACTION_SAMPLE_DELETE);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Delete##sgsed"));
+        ImGui::SetTooltip(_("Delete"));
       }
       sameLineMaybe();
       if (ImGui::Button(ICON_FA_CROP "##STrim")) {
         doAction(GUI_ACTION_SAMPLE_TRIM);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Trim##sgsed"));
+        ImGui::SetTooltip(_("Trim"));
       }
       ImGui::SameLine();
       ImGui::Dummy(ImVec2(4.0*dpiScale,dpiScale));
@@ -1146,26 +1131,26 @@ void FurnaceGUI::drawSampleEdit() {
         doAction(GUI_ACTION_SAMPLE_REVERSE);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Reverse##sgsed"));
+        ImGui::SetTooltip(_("Reverse"));
       }
       sameLineMaybe();
       if (ImGui::Button(ICON_FUR_SAMPLE_INVERT "##SInvert")) {
         doAction(GUI_ACTION_SAMPLE_INVERT);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Invert##sgsed"));
+        ImGui::SetTooltip(_("Invert"));
       }
       sameLineMaybe();
       if (ImGui::Button(ICON_FUR_SAMPLE_SIGN "##SSign")) {
         doAction(GUI_ACTION_SAMPLE_SIGN);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Signed/unsigned exchange##sgsed"));
+        ImGui::SetTooltip(_("Signed/unsigned exchange"));
       }
       sameLineMaybe();
       ImGui::Button(ICON_FUR_SAMPLE_FILTER "##SFilter");
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Apply filter##sgsed"));
+        ImGui::SetTooltip(_("Apply filter"));
       }
       if (openSampleFilterOpt) {
         openSampleFilterOpt=false;
@@ -1176,23 +1161,23 @@ void FurnaceGUI::drawSampleEdit() {
         float bandP=sampleFilterB*100.0f;
         float highP=sampleFilterH*100.0f;
         float resP=sampleFilterRes*100.0f;
-        ImGui::Text(_L("Cutoff:##sgsed"));
-        if (ImGui::InputFloat(_L("From##sgsed"),&sampleFilterCutStart,10.0f,1000.0f,"%.0f")) {
+        ImGui::Text(_("Cutoff:"));
+        if (ImGui::InputFloat(_("From"),&sampleFilterCutStart,10.0f,1000.0f,"%.0f")) {
           if (sampleFilterCutStart<0.0) sampleFilterCutStart=0.0;
           if (sampleFilterCutStart>sample->centerRate*0.5) sampleFilterCutStart=sample->centerRate*0.5;
         }
-        if (ImGui::InputFloat(_L("To##sgsed"),&sampleFilterCutEnd,10.0f,1000.0f,"%.0f")) {
+        if (ImGui::InputFloat(_("To"),&sampleFilterCutEnd,10.0f,1000.0f,"%.0f")) {
           if (sampleFilterCutEnd<0.0) sampleFilterCutEnd=0.0;
           if (sampleFilterCutEnd>sample->centerRate*0.5) sampleFilterCutEnd=sample->centerRate*0.5;
         }
         ImGui::Separator();
-        if (ImGui::SliderFloat(_L("Resonance##sgsed"),&resP,0.0f,99.0f,"%.1f%%")) {
+        if (ImGui::SliderFloat(_("Resonance"),&resP,0.0f,99.0f,"%.1f%%")) {
           sampleFilterRes=resP/100.0f;
           if (sampleFilterRes<0.0f) sampleFilterRes=0.0f;
           if (sampleFilterRes>0.99f) sampleFilterRes=0.99f;
         }
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Power##sgsed"));
+        ImGui::Text(_("Power"));
         ImGui::SameLine();
         if (ImGui::RadioButton("1x",sampleFilterPower==1)) {
           sampleFilterPower=1;
@@ -1206,23 +1191,23 @@ void FurnaceGUI::drawSampleEdit() {
           sampleFilterPower=3;
         }
         ImGui::Separator();
-        if (ImGui::SliderFloat(_L("Low-pass##sgsed"),&lowP,0.0f,100.0f,"%.1f%%")) {
+        if (ImGui::SliderFloat(_("Low-pass"),&lowP,0.0f,100.0f,"%.1f%%")) {
           sampleFilterL=lowP/100.0f;
           if (sampleFilterL<0.0f) sampleFilterL=0.0f;
           if (sampleFilterL>1.0f) sampleFilterL=1.0f;
         }
-        if (ImGui::SliderFloat(_L("Band-pass##sgsed"),&bandP,0.0f,100.0f,"%.1f%%")) {
+        if (ImGui::SliderFloat(_("Band-pass"),&bandP,0.0f,100.0f,"%.1f%%")) {
           sampleFilterB=bandP/100.0f;
           if (sampleFilterB<0.0f) sampleFilterB=0.0f;
           if (sampleFilterB>1.0f) sampleFilterB=1.0f;
         }
-        if (ImGui::SliderFloat(_L("High-pass##sgsed"),&highP,0.0f,100.0f,"%.1f%%")) {
+        if (ImGui::SliderFloat(_("High-pass"),&highP,0.0f,100.0f,"%.1f%%")) {
           sampleFilterH=highP/100.0f;
           if (sampleFilterH<0.0f) sampleFilterH=0.0f;
           if (sampleFilterH>1.0f) sampleFilterH=1.0f;
         }
 
-        if (ImGui::Button(_L("Apply##sgsed1"))) {
+        if (ImGui::Button(_("Apply"))) {
           sample->prepareUndo(true);
           e->lockEngine([this,sample]() {
             SAMPLE_OP_BEGIN;
@@ -1287,7 +1272,7 @@ void FurnaceGUI::drawSampleEdit() {
       sameLineMaybe();
       ImGui::Button(ICON_FUR_CROSSFADE "##CrossFade");
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Crossfade loop points##sgsed"));
+        ImGui::SetTooltip(_("Crossfade loop points"));
       }
       if (openSampleCrossFadeOpt) {
         openSampleCrossFadeOpt=false;
@@ -1296,22 +1281,22 @@ void FurnaceGUI::drawSampleEdit() {
       if (ImGui::BeginPopupContextItem("SCrossFadeOpt",ImGuiPopupFlags_MouseButtonLeft)) {
         if (sampleCrossFadeLoopLength>sample->loopStart) sampleCrossFadeLoopLength=sample->loopStart;
         if (sampleCrossFadeLoopLength>(sample->loopEnd-sample->loopStart)) sampleCrossFadeLoopLength=sample->loopEnd-sample->loopStart;
-        if (ImGui::SliderInt(_L("Number of samples##sgsed"),&sampleCrossFadeLoopLength,0,100000)) {
+        if (ImGui::SliderInt(_("Number of samples"),&sampleCrossFadeLoopLength,0,100000)) {
           if (sampleCrossFadeLoopLength<0) sampleCrossFadeLoopLength=0;
           if (sampleCrossFadeLoopLength>sample->loopStart) sampleCrossFadeLoopLength=sample->loopStart;
           if (sampleCrossFadeLoopLength>(sample->loopEnd-sample->loopStart)) sampleCrossFadeLoopLength=sample->loopEnd-sample->loopStart;
           if (sampleCrossFadeLoopLength>100000) sampleCrossFadeLoopLength=100000;
         }
-        if (ImGui::SliderInt(_L("Linear <-> Equal power##sgsed"),&sampleCrossFadeLoopLaw,0,100)) {
+        if (ImGui::SliderInt(_("Linear <-> Equal power"),&sampleCrossFadeLoopLaw,0,100)) {
           if (sampleCrossFadeLoopLaw<0) sampleCrossFadeLoopLaw=0;
           if (sampleCrossFadeLoopLaw>100) sampleCrossFadeLoopLaw=100;
         }
-        if (ImGui::Button(_L("Apply##sgsed2"))) {
+        if (ImGui::Button(_("Apply"))) {
           if (sampleCrossFadeLoopLength>sample->loopStart) {
-            showError(settings.language == DIV_LANG_ENGLISH ? "Crossfade: length would go out of bounds. Aborted..." : _L("Crossfade: length would go out of bounds. Aborted...##sgsed"));
+            showError(_("Crossfade: length would go out of bounds. Aborted..."));
             ImGui::CloseCurrentPopup();
           } else if (sampleCrossFadeLoopLength>(sample->loopEnd-sample->loopStart)) {
-            showError(settings.language == DIV_LANG_ENGLISH ? "Crossfade: length would overflow loopStart. Try a smaller random value." : _L("Crossfade: length would overflow loopStart. Try a smaller random value.##sgsed"));
+            showError(_("Crossfade: length would overflow loopStart. Try a smaller random value."));
             ImGui::CloseCurrentPopup();
           } else {
             sample->prepareUndo(true);
@@ -1357,28 +1342,28 @@ void FurnaceGUI::drawSampleEdit() {
         e->previewSample(curSample);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Preview sample##sgsed"));
+        ImGui::SetTooltip(_("Preview sample"));
       }
       sameLineMaybe();
       if (ImGui::Button(ICON_FA_STOP "##StopSample")) {
         e->stopSamplePreview();
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Stop sample preview##sgsed"));
+        ImGui::SetTooltip(_("Stop sample preview"));
       }
       sameLineMaybe();
       if (ImGui::Button(ICON_FA_UPLOAD "##MakeIns")) {
         doAction(GUI_ACTION_SAMPLE_MAKE_INS);
       }
       if (ImGui::IsItemHovered()) {
-        ImGui::SetTooltip(_L("Create instrument from sample##sgsed"));
+        ImGui::SetTooltip(_("Create instrument from sample"));
       }
 
       sameLineMaybe(ImGui::CalcTextSize(_L("Zoom##sgsed0")).x+150.0f*dpiScale+ImGui::CalcTextSize("100%").x);
       double zoomPercent=100.0/sampleZoom;
       bool checkZoomLimit=false;
       ImGui::AlignTextToFramePadding();
-      ImGui::Text(_L("Zoom##sgsed1"));
+      ImGui::Text(_("Zoom"));
       ImGui::SameLine();
       ImGui::SetNextItemWidth(150.0f*dpiScale);
       if (ImGui::InputDouble("##SZoom",&zoomPercent,zoomPercent/8.0,20.0,"%g%%")) {
@@ -1761,52 +1746,40 @@ void FurnaceGUI::drawSampleEdit() {
 
         if (ImGui::BeginPopup("SRightClick",ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoMove|ImGuiWindowFlags_AlwaysAutoResize)) {
           ImGui::BeginDisabled(sample->depth!=DIV_SAMPLE_DEPTH_8BIT && sample->depth!=DIV_SAMPLE_DEPTH_16BIT);
-          if (ImGui::MenuItem(_L("cut##sgsed"),BIND_FOR(GUI_ACTION_SAMPLE_CUT))) {
+          if (ImGui::MenuItem(_("cut"),BIND_FOR(GUI_ACTION_SAMPLE_CUT))) {
             doAction(GUI_ACTION_SAMPLE_CUT);
           }
           ImGui::EndDisabled();
-          if (ImGui::MenuItem(_L("copy##sgsed"),BIND_FOR(GUI_ACTION_SAMPLE_COPY))) {
+          if (ImGui::MenuItem(_("copy"),BIND_FOR(GUI_ACTION_SAMPLE_COPY))) {
             doAction(GUI_ACTION_SAMPLE_COPY);
           }
           ImGui::BeginDisabled(sample->depth!=DIV_SAMPLE_DEPTH_8BIT && sample->depth!=DIV_SAMPLE_DEPTH_16BIT);
-          if (ImGui::MenuItem(_L("paste##sgsed"),BIND_FOR(GUI_ACTION_SAMPLE_PASTE))) {
+          if (ImGui::MenuItem(_("paste"),BIND_FOR(GUI_ACTION_SAMPLE_PASTE))) {
             doAction(GUI_ACTION_SAMPLE_PASTE);
           }
-          if (ImGui::MenuItem(_L("paste (replace)##sgsed"),BIND_FOR(GUI_ACTION_SAMPLE_PASTE_REPLACE))) {
+          if (ImGui::MenuItem(_("paste (replace)"),BIND_FOR(GUI_ACTION_SAMPLE_PASTE_REPLACE))) {
             doAction(GUI_ACTION_SAMPLE_PASTE_REPLACE);
           }
-          if (ImGui::MenuItem(_L("paste (mix)##sgsed"),BIND_FOR(GUI_ACTION_SAMPLE_PASTE_MIX))) {
+          if (ImGui::MenuItem(_("paste (mix)"),BIND_FOR(GUI_ACTION_SAMPLE_PASTE_MIX))) {
             doAction(GUI_ACTION_SAMPLE_PASTE_MIX);
           }
           ImGui::EndDisabled();
-          if (ImGui::MenuItem(_L("select all##sgsed"),BIND_FOR(GUI_ACTION_SAMPLE_SELECT_ALL))) {
+          if (ImGui::MenuItem(_("select all"),BIND_FOR(GUI_ACTION_SAMPLE_SELECT_ALL))) {
             doAction(GUI_ACTION_SAMPLE_SELECT_ALL);
           }
           ImGui::Separator();
-          if (ImGui::MenuItem(_L("set loop to selection##sgsed"),BIND_FOR(GUI_ACTION_SAMPLE_SET_LOOP))) {
+          if (ImGui::MenuItem(_("set loop to selection"),BIND_FOR(GUI_ACTION_SAMPLE_SET_LOOP))) {
             doAction(GUI_ACTION_SAMPLE_SET_LOOP);
           }
-          if (ImGui::MenuItem(_L("create wavetable from selection##sgsed"),BIND_FOR(GUI_ACTION_SAMPLE_CREATE_WAVE))) {
+          if (ImGui::MenuItem(_("create wavetable from selection"),BIND_FOR(GUI_ACTION_SAMPLE_CREATE_WAVE))) {
             doAction(GUI_ACTION_SAMPLE_CREATE_WAVE);
           }
           ImGui::EndPopup();
         }
 
-        String statusBar=sampleDragMode?_L("Draw##sgsed"):_L("Select##sgsed");
+        String statusBar=sampleDragMode?_("Draw"):_("Select");
         String statusBar2="";
-        String statusBar3="";
-
-        if(settings.language == DIV_LANG_ENGLISH)
-        {
-          statusBar3=fmt::sprintf("%d samples, %d bytes",sample->samples,sample->getCurBufLen());
-        }
-        else
-        {
-          String temp1 = fmt::sprintf(_LP("%d samples##sgsed", sample->samples), sample->samples);
-          String temp2 = fmt::sprintf(_LP("%d bytes##sgsed", sample->getCurBufLen()), sample->getCurBufLen());
-          statusBar3=fmt::sprintf("%s, %s",temp1,temp2);
-        }
-        
+        String statusBar3=fmt::sprintf(_("%d samples, %d bytes"),sample->samples,sample->getCurBufLen());
         bool drawSelection=false;
 
         if (!sampleDragMode) {
@@ -1821,7 +1794,7 @@ void FurnaceGUI::drawSampleEdit() {
             if (start==end) {
               statusBar+=fmt::sprintf(" (%d)",start);
             } else {
-              statusBar+=fmt::sprintf(_LP(" (%d-%d: %d samples)##sgsed", end-start),start,end,end-start);
+              statusBar+=fmt::sprintf(_(" (%d-%d: %d samples)"),start,end,end-start);
             }
             drawSelection=true;
           }
@@ -2021,7 +1994,7 @@ void FurnaceGUI::drawSampleEdit() {
         }
 
         if (sample->depth!=DIV_SAMPLE_DEPTH_8BIT && sample->depth!=DIV_SAMPLE_DEPTH_16BIT && sampleDragMode) {
-          statusBar=_L("Non-8/16-bit samples cannot be edited without prior conversion.##sgsed");
+          statusBar=_("Non-8/16-bit samples cannot be edited without prior conversion.");
         }
         
         ImGui::SetCursorPosY(ImGui::GetCursorPosY()+ImGui::GetStyle().ScrollbarSize);

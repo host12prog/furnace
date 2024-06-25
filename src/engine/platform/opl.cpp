@@ -1048,8 +1048,8 @@ void DivPlatformOPL::tick(bool sysTick) {
     if (chan[adpcmChan].furnacePCM) {
       chan[adpcmChan].std.next();
 
-      if (chan[adpcmChan].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
-        chan[adpcmChan].outVol=(chan[adpcmChan].vol*MIN(chan[adpcmChan].macroVolMul,chan[adpcmChan].std.get_div_macro_struct(DIV_MACRO_VOL)->val))/chan[adpcmChan].macroVolMul;
+      if (chan[adpcmChan].std.vol.had) {
+        chan[adpcmChan].outVol=(chan[adpcmChan].vol*MIN(chan[adpcmChan].macroVolMul,chan[adpcmChan].std.vol.val))/chan[adpcmChan].macroVolMul;
         immWrite(18,(isMuted[adpcmChan]?0:chan[adpcmChan].outVol));
       }
 

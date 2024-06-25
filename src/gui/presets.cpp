@@ -141,13 +141,16 @@ void FurnaceGUI::initSystemPresets() {
     }
   );
   ENTRY(
-      "Game Boy Advance (no software mixing)##sgpr", {
+     "Game Boy Advance", {}
+  );
+  SUB_ENTRY(
+    "Game Boy Advance (no software mixing)", {
       CH(DIV_SYSTEM_GB, 1.0f, 0, "chipType=3"),
       CH(DIV_SYSTEM_GBA_DMA, 0.5f, 0, ""),
     }
   );
-  ENTRY(
-      "Game Boy Advance (with MinMod)##sgpr", {
+  SUB_ENTRY(
+    "Game Boy Advance (with MinMod)", {
       CH(DIV_SYSTEM_GB, 1.0f, 0, "chipType=3"),
       CH(DIV_SYSTEM_GBA_MINMOD, 0.5f, 0, ""),
     }
@@ -259,12 +262,23 @@ void FurnaceGUI::initSystemPresets() {
       CH(DIV_SYSTEM_TIA, 1.0f, 0, "")
     }
   );
+    SUB_ENTRY(
+      "Atari 2600/7800 (with software pitch driver)", {
+        CH(DIV_SYSTEM_TIA, 1.0f, 0, "softwarePitch=1")
+      }
+    );
   ENTRY(
     "Atari 7800 + Ballblazer/Commando", {
       CH(DIV_SYSTEM_TIA, 1.0f, 0, ""),
       CH(DIV_SYSTEM_POKEY, 1.0f, 0, "")
     }
   );
+    SUB_ENTRY(
+      "Atari 7800 (with software pitch driver) + Ballblazer/Commando", {
+        CH(DIV_SYSTEM_TIA, 1.0f, 0, "softwarePitch=1"),
+        CH(DIV_SYSTEM_POKEY, 1.0f, 0, "")
+      }
+    );
   ENTRY(
     "Atari Lynx", {
       CH(DIV_SYSTEM_LYNX, 1.0f, 0, "")
@@ -3431,6 +3445,11 @@ void FurnaceGUI::initSystemPresets() {
       CH(DIV_SYSTEM_TIA, 1.0f, 0, "")
     }
   );
+    SUB_ENTRY(
+      "Atari TIA (with software pitch driver)", {
+        CH(DIV_SYSTEM_TIA, 1.0f, 0, "softwarePitch=1")
+      }
+    );
   ENTRY(
     "NES (Ricoh 2A03)", {
       CH(DIV_SYSTEM_NES, 1.0f, 0, "")

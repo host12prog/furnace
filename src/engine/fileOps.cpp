@@ -2061,6 +2061,19 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       }
     }
 
+    // VERA old chip revision
+    // TIA old tuning
+    if (ds.version<213) {
+      for (int i=0; i<ds.systemLen; i++) {
+        if (ds.system[i]==DIV_SYSTEM_VERA) {
+          ds.systemFlags[i].set("chipType",0);
+        }
+        if (ds.system[i]==DIV_SYSTEM_TIA) {
+          ds.systemFlags[i].set("oldPitch",true);
+        }
+      }
+    }
+
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;
     saveLock.lock();

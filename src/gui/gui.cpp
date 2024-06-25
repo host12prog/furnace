@@ -523,6 +523,12 @@ bool FurnaceGUI::InvCheckbox(const char* label, bool* value) {
   return false;
 }
 
+bool FurnaceGUI::LocalizedComboGetter(void* data, int idx, const char** out_text) {
+  const char* const* items=(const char* const*)data;
+  if (out_text) *out_text=_(items[idx]);
+  return true;
+}
+
 void FurnaceGUI::sameLineMaybe(float width) {
   if (width<0.0f) width=ImGui::GetFrameHeight();
 
@@ -1117,11 +1123,11 @@ void FurnaceGUI::play(int row) {
   if (!followPattern) e->setOrder(curOrder);
   if (row>0) {
     if (!e->playToRow(row)) {
-      showError(settings.language == DIV_LANG_ENGLISH ? "the song is over!" : _L("the song is over!##sggu0"));
+      showError(_("the song is over!"));
     }
   } else {
     if (!e->play()) {
-      showError(settings.language == DIV_LANG_ENGLISH ? "the song is over!" : _L("the song is over!##sggu1"));
+      showError(_("the song is over!"));
     }
   }
   curNibble=false;
@@ -1657,21 +1663,21 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_OPEN:
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Open File" : _L("Open File##sggu"),
-        { settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu0"), "*.fub *.fur *.dmf *.mod *.fc13 *.fc14 *.smod *.fc *.ftm *.0cc *.dnm *.eft *.fzt *.tfe",
-         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu0"), "*"},
+        _("Open File"),
+        {_("compatible files"), "*.fur *.dmf *.mod *.s3m *.fc13 *.fc14 *.smod *.fc *.ftm *.0cc *.dnm *.eft *.fub *.tfe",
+         _("all files"), "*"},
         workingDirSong,
         dpiScale
       );
       break;
     case GUI_FILE_OPEN_BACKUP:
       if (!dirExists(backupPath)) {
-        showError(settings.language == DIV_LANG_ENGLISH ? "no backups made yet!" : _L("no backups made yet!##sggu"));
+        showError(_("no backups made yet!"));
         break;
       }
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Restore Backup" : _L("Restore Backup##sggu"),
-        { settings.language == DIV_LANG_ENGLISH ? "Furnace or Furnace-B song" : _L("Furnace or Furnace-B song##sggu"), "*.fur *.fub"},
+        _("Restore Backup"),
+        {_("Furnace song"), "*.fur"},
         backupPath+String(DIR_SEPARATOR_STR),
         dpiScale
       );
@@ -1679,8 +1685,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAVE:
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Save File" : _L("Save File##sggu0"),
-        {settings.language == DIV_LANG_ENGLISH ? "Furnace-B song" : _L("Furnace-B song##sggu"), "*.fub"},
+        _("Save File"),
+        {_("Furnace song"), "*.fur"},
         workingDirSong,
         dpiScale
       );
@@ -1688,8 +1694,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAVE_DMF:
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Save File" : _L("Save File##sggu1"),
-        { settings.language == DIV_LANG_ENGLISH ? "DefleMask 1.1.3 module" : _L("DefleMask 1.1.3 module##sggu"), "*.dmf"},
+        _("Export DMF"),
+        {_("DefleMask 1.1.3 module"), "*.dmf"},
         workingDirSong,
         dpiScale,
         (settings.autoFillSave)?shortName:""
@@ -1698,8 +1704,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAVE_DMF_LEGACY:
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Save File" : _L("Save File##sggu2"),
-        { settings.language == DIV_LANG_ENGLISH ? "DefleMask 1.0/legacy module" : _L("DefleMask 1.0/legacy module##sggu"), "*.dmf"},
+        _("Export DMF"),
+        {_("DefleMask 1.0/legacy module"), "*.dmf"},
         workingDirSong,
         dpiScale,
         (settings.autoFillSave)?shortName:""
@@ -1717,24 +1723,24 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
 
       if (!dirExists(workingDirIns)) workingDirIns=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Load Instrument" : _L("Load Instrument##sggu"),
-        { settings.language == DIV_LANG_ENGLISH ? "all compatible files" : _L("all compatible files##sggu1"), "*.fui *.dmp *.tfi *.vgi *.s3i *.sbi *.opli *.opni *.y12 *.bnk *.ff *.gyb *.opm *.wopl *.wopn",
-         settings.language == DIV_LANG_ENGLISH ? "Furnace instrument" : _L("Furnace instrument##sggu0"), "*.fui",
-         settings.language == DIV_LANG_ENGLISH ? "DefleMask preset" : _L("DefleMask preset##sggu0"), "*.dmp",
-         settings.language == DIV_LANG_ENGLISH ? "TFM Music Maker instrument" : _L("TFM Music Maker instrument##sggu"), "*.tfi",
-         settings.language == DIV_LANG_ENGLISH ? "VGM Music Maker instrument" : _L("VGM Music Maker instrument##sggu"), "*.vgi",
-         settings.language == DIV_LANG_ENGLISH ? "Scream Tracker 3 instrument" : _L("Scream Tracker 3 instrument##sggu"), "*.s3i",
-         settings.language == DIV_LANG_ENGLISH ? "SoundBlaster instrument" : _L("SoundBlaster instrument##sggu"), "*.sbi",
-         settings.language == DIV_LANG_ENGLISH ? "Wohlstand OPL instrument" : _L("Wohlstand OPL instrument##sggu"), "*.opli",
-         settings.language == DIV_LANG_ENGLISH ? "Wohlstand OPN instrument" : _L("Wohlstand OPN instrument##sggu"), "*.opni",
-         settings.language == DIV_LANG_ENGLISH ? "Gens KMod patch dump" : _L("Gens KMod patch dump##sggu"), "*.y12",
-         settings.language == DIV_LANG_ENGLISH ? "BNK file (AdLib)" : _L("BNK file (AdLib)##sggu"), "*.bnk",
-         settings.language == DIV_LANG_ENGLISH ? "FF preset bank" : _L("FF preset bank##sggu"), "*.ff",
-         settings.language == DIV_LANG_ENGLISH ? "2612edit GYB preset bank" : _L("2612edit GYB preset bank##sggu"), "*.gyb",
-         settings.language == DIV_LANG_ENGLISH ? "VOPM preset bank" : _L("VOPM preset bank##sggu"), "*.opm",
-         settings.language == DIV_LANG_ENGLISH ? "Wohlstand WOPL bank" : _L("Wohlstand WOPL bank##sggu"), "*.wopl",
-         settings.language == DIV_LANG_ENGLISH ? "Wohlstand WOPN bank" : _L("Wohlstand WOPN bank##sggu"), "*.wopn",
-         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu1"), "*"},
+        _("Load Instrument"),
+        {_("all compatible files"), "*.fui *.dmp *.tfi *.vgi *.s3i *.sbi *.opli *.opni *.y12 *.bnk *.ff *.gyb *.opm *.wopl *.wopn",
+         _("Furnace instrument"), "*.fui",
+         _("DefleMask preset"), "*.dmp",
+         _("TFM Music Maker instrument"), "*.tfi",
+         _("VGM Music Maker instrument"), "*.vgi",
+         _("Scream Tracker 3 instrument"), "*.s3i",
+         _("SoundBlaster instrument"), "*.sbi",
+         _("Wohlstand OPL instrument"), "*.opli",
+         _("Wohlstand OPN instrument"), "*.opni",
+         _("Gens KMod patch dump"), "*.y12",
+         _("BNK file (AdLib)"), "*.bnk",
+         _("FF preset bank"), "*.ff",
+         _("2612edit GYB preset bank"), "*.gyb",
+         _("VOPM preset bank"), "*.opm",
+         _("Wohlstand WOPL bank"), "*.wopl",
+         _("Wohlstand WOPN bank"), "*.wopn",
+         _("all files"), "*"},
         workingDirIns,
         dpiScale,
         [this](const char* path) {
@@ -1767,8 +1773,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_INS_SAVE:
       if (!dirExists(workingDirIns)) workingDirIns=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Save Instrument" : _L("Save Instrument##sggu0"),
-        {settings.language == DIV_LANG_ENGLISH ? "Furnace instrument" : _L("Furnace instrument##sggu1"), "*.fui"},
+        _("Save Instrument"),
+        {_("Furnace instrument"), "*.fui"},
         workingDirIns,
         dpiScale,
         (settings.autoFillSave)?e->getIns(curIns)->name:""
@@ -1777,8 +1783,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_INS_SAVE_DMP:
       if (!dirExists(workingDirIns)) workingDirIns=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Save Instrument" : _L("Save Instrument##sggu1"),
-        {settings.language == DIV_LANG_ENGLISH ? "DefleMask preset" : _L("DefleMask preset##sggu1"), "*.dmp"},
+        _("Save Instrument"),
+        {_("DefleMask preset"), "*.dmp"},
         workingDirIns,
         dpiScale,
         (settings.autoFillSave)?e->getIns(curIns)->name:""
@@ -1790,9 +1796,9 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_LOCAL_WAVE_OPEN_REPLACE:
       if (!dirExists(workingDirWave)) workingDirWave=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Load Wavetable" : _L("Load Wavetable##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu2"), "*.fuw *.dmw",
-         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu2"), "*"},
+        _("Load Wavetable"),
+        {_("compatible files"), "*.fuw *.dmw",
+         _("all files"), "*"},
         workingDirWave,
         dpiScale,
         NULL, // TODO
@@ -1803,8 +1809,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_LOCAL_WAVE_SAVE:
       if (!dirExists(workingDirWave)) workingDirWave=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Save Wavetable" : _L("Save Wavetable##sggu0"),
-        {settings.language == DIV_LANG_ENGLISH ? "Furnace wavetable" : _L("Furnace wavetable##sggu"), ".fuw"},
+        _("Save Wavetable"),
+        {_("Furnace wavetable"), ".fuw"},
         workingDirWave,
         dpiScale
       );
@@ -1813,8 +1819,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_LOCAL_WAVE_SAVE_DMW:
       if (!dirExists(workingDirWave)) workingDirWave=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Save Wavetable" : _L("Save Wavetable##sggu1"),
-        {settings.language == DIV_LANG_ENGLISH ? "DefleMask wavetable" : _L("DefleMask wavetable##sggu"), ".dmw"},
+        _("Save Wavetable"),
+        {_("DefleMask wavetable"), ".dmw"},
         workingDirWave,
         dpiScale
       );
@@ -1823,8 +1829,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_LOCAL_WAVE_SAVE_RAW:
       if (!dirExists(workingDirWave)) workingDirWave=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Save Wavetable" : _L("Save Wavetable##sggu2"),
-        {settings.language == DIV_LANG_ENGLISH ? "raw data" : _L("raw data##sggu"), ".raw"},
+        _("Save Wavetable"),
+        {_("raw data"), ".raw"},
         workingDirWave,
         dpiScale
       );
@@ -1833,7 +1839,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAMPLE_OPEN_REPLACE:
       if (!dirExists(workingDirSample)) workingDirSample=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Load Sample" : _L("Load Sample##sggu"),
+        _("Load Sample"),
         audioLoadFormats,
         workingDirSample,
         dpiScale,
@@ -1845,8 +1851,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAMPLE_OPEN_REPLACE_RAW:
       if (!dirExists(workingDirSample)) workingDirSample=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Load Raw Sample" : _L("Load Raw Sample##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu4"), "*"},
+        _("Load Raw Sample"),
+        {_("all files"), "*"},
         workingDirSample,
         dpiScale
       );
@@ -1854,8 +1860,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAMPLE_SAVE:
       if (!dirExists(workingDirSample)) workingDirSample=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Save Sample" : _L("Save Sample##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "Wave file" : _L("Wave file##sggu0"), "*.wav"},
+        _("Save Sample"),
+        {_("Wave file"), "*.wav"},
         workingDirSample,
         dpiScale,
         (settings.autoFillSave)?e->getSample(curSample)->name:""
@@ -1864,8 +1870,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_SAMPLE_SAVE_RAW:
       if (!dirExists(workingDirSample)) workingDirSample=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Save Raw Sample" : _L("Save Raw Sample##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu5"), "*"},
+        _("Save Raw Sample"),
+        {_("all files"), "*"},
         workingDirSample,
         dpiScale,
         (settings.autoFillSave)?e->getSample(curSample)->name:""
@@ -1874,8 +1880,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_AUDIO_ONE:
       if (!dirExists(workingDirAudioExport)) workingDirAudioExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export Audio" : _L("Export Audio##sggu0"),
-        {settings.language == DIV_LANG_ENGLISH ? "Wave file" : _L("Wave file##sggu1"), "*.wav"},
+        _("Export Audio"),
+        {_("Wave file"), "*.wav"},
         workingDirAudioExport,
         dpiScale,
         (settings.autoFillSave)?shortName:""
@@ -1884,8 +1890,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_AUDIO_PER_SYS:
       if (!dirExists(workingDirAudioExport)) workingDirAudioExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export Audio" : _L("Export Audio##sggu1"),
-        {settings.language == DIV_LANG_ENGLISH ? "Wave file" : _L("Wave file##sggu2"), "*.wav"},
+        _("Export Audio"),
+        {_("Wave file"), "*.wav"},
         workingDirAudioExport,
         dpiScale,
         (settings.autoFillSave)?shortName:""
@@ -1894,8 +1900,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_AUDIO_PER_CHANNEL:
       if (!dirExists(workingDirAudioExport)) workingDirAudioExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export Audio" : _L("Export Audio##sggu2"),
-        {settings.language == DIV_LANG_ENGLISH ? "Wave file" : _L("Wave file##sggu3"), "*.wav"},
+        _("Export Audio"),
+        {_("Wave file"), "*.wav"},
         workingDirAudioExport,
         dpiScale,
         (settings.autoFillSave)?shortName:""
@@ -1904,8 +1910,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_VGM:
       if (!dirExists(workingDirVGMExport)) workingDirVGMExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export VGM" : _L("Export VGM##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "VGM file" : _L("VGM file##sggu"), "*.vgm"},
+        _("Export VGM"),
+        {_("VGM file"), "*.vgm"},
         workingDirVGMExport,
         dpiScale,
         (settings.autoFillSave)?shortName:""
@@ -1914,18 +1920,27 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_ZSM:
       if (!dirExists(workingDirZSMExport)) workingDirZSMExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export ZSM" : _L("Export ZSM##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "ZSM file" : _L("ZSM file##sggu"), "*.zsm"},
+        _("Export ZSM"),
+        {_("ZSM file"), "*.zsm"},
         workingDirZSMExport,
         dpiScale,
         (settings.autoFillSave)?shortName:""
       );
       break;
+    case GUI_FILE_EXPORT_TIUNA:
+      if (!dirExists(workingDirROMExport)) workingDirROMExport=getHomeDir();
+      hasOpened=fileDialog->openSave(
+        "Export TIunA",
+        {"assembly files", "*.asm"},
+        workingDirROMExport,
+        dpiScale
+      );
+      break;
     case GUI_FILE_EXPORT_TEXT:
       if (!dirExists(workingDirROMExport)) workingDirROMExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export Command Stream" : _L("Export Command Stream##sggu0"),
-        {settings.language == DIV_LANG_ENGLISH ? "text file" : _L("text file##sggu0"), "*.txt"},
+        _("Export Command Stream"),
+        {_("text file"), "*.txt"},
         workingDirROMExport,
         dpiScale,
         (settings.autoFillSave)?shortName:""
@@ -1934,8 +1949,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_CMDSTREAM:
       if (!dirExists(workingDirROMExport)) workingDirROMExport=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export Command Stream" : _L("Export Command Stream##sggu2"),
-        {settings.language == DIV_LANG_ENGLISH ? "binary file" : _L("binary file##sggu"), "*.bin"},
+        _("Export Command Stream"),
+        {_("binary file"), "*.bin"},
         workingDirROMExport,
         dpiScale,
         (settings.autoFillSave)?shortName:""
@@ -1952,31 +1967,13 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       );
       break;
     case GUI_FILE_EXPORT_ROM:
-      showError(settings.language == DIV_LANG_ENGLISH ? "Coming soon!" : _L("Coming soon!##sggu"));
-      break;
-    case GUI_FILE_EXPORT_FUR:
-      if (!dirExists(workingDirFURExport)) workingDirFURExport=getHomeDir();
-      hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export Furnace song" : _L("Export Furnace song##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "Furnace song" : _L("Furnace song##sggu2"), "*.fur"},
-        workingDirFURExport,
-        dpiScale
-      );
-      break;
-    case GUI_FILE_EXPORT_T85:
-      if (!dirExists(workingDirT85Export)) workingDirT85Export=getHomeDir();
-      hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export .t85 file" : _L("Export .t85 file##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "ATTiny85APU register dump file" : _L("ATTiny85APU register dump file##sggu2"), "*.t85"},
-        workingDirT85Export,
-        dpiScale
-      );
+      showError(_("Coming soon!"));
       break;
     case GUI_FILE_LOAD_MAIN_FONT:
       if (!dirExists(workingDirFont)) workingDirFont=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Select Font" : _L("Select Font##sggu0"),
-        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu4"), "*.ttf *.otf *.ttc *.dfont *.pcf *.psf *.fon"},
+        _("Select Font"),
+        {_("compatible files"), "*.ttf *.otf *.ttc *.dfont *.pcf *.psf"},
         workingDirFont,
         dpiScale
       );
@@ -1984,8 +1981,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_LOAD_HEAD_FONT:
       if (!dirExists(workingDirFont)) workingDirFont=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Select Font" : _L("Select Font##sggu1"),
-        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu5"), "*.ttf *.otf *.ttc *.dfont *.pcf *.psf *.fon"},
+        _("Select Font"),
+        {_("compatible files"), "*.ttf *.otf *.ttc *.dfont *.pcf *.psf"},
         workingDirFont,
         dpiScale
       );
@@ -1993,8 +1990,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_LOAD_PAT_FONT:
       if (!dirExists(workingDirFont)) workingDirFont=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Select Font" : _L("Select Font##sggu2"),
-        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu6"), "*.ttf *.otf *.ttc *.dfont *.pcf *.psf *.fon"},
+        _("Select Font"),
+        {_("compatible files"), "*.ttf *.otf *.ttc *.dfont *.pcf *.psf"},
         workingDirFont,
         dpiScale
       );
@@ -2002,8 +1999,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_IMPORT_COLORS:
       if (!dirExists(workingDirColors)) workingDirColors=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Select Color File" : _L("Select Color File##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu0"), "*.cfgc"},
+        _("Select Color File"),
+        {_("configuration files"), "*.cfgc"},
         workingDirColors,
         dpiScale
       );
@@ -2011,8 +2008,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_IMPORT_KEYBINDS:
       if (!dirExists(workingDirKeybinds)) workingDirKeybinds=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Select Keybind File" : _L("Select Keybind File##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu1"), "*.cfgk"},
+        _("Select Keybind File"),
+        {_("configuration files"), "*.cfgk"},
         workingDirKeybinds,
         dpiScale
       );
@@ -2020,8 +2017,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_IMPORT_LAYOUT:
       if (!dirExists(workingDirLayout)) workingDirLayout=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Select Layout File" : _L("Select Layout File##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? ".ini files" : _L(".ini files##sggu0"), "*.ini"},
+        _("Select Layout File"),
+        {_(".ini files"), "*.ini"},
         workingDirLayout,
         dpiScale
       );
@@ -2030,8 +2027,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_IMPORT_USER_PRESETS_REPLACE:
       if (!dirExists(workingDirConfig)) workingDirConfig=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Select User Presets File" : _L("Select User Presets File##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu4"), "*.cfgu"},
+        _("Select User Presets File"),
+        {_("configuration files"), "*.cfgu"},
         workingDirConfig,
         dpiScale
       );
@@ -2039,8 +2036,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_IMPORT_CONFIG:
       if (!dirExists(workingDirConfig)) workingDirConfig=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Select Settings File" : _L("Select Settings File##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu5"), "*.cfg"},
+        _("Select Settings File"),
+        {_("configuration files"), "*.cfg"},
         workingDirConfig,
         dpiScale
       );
@@ -2048,8 +2045,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_COLORS:
       if (!dirExists(workingDirColors)) workingDirColors=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export Colors" : _L("Export Colors##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu2"), "*.cfgc"},
+        _("Export Colors"),
+        {_("configuration files"), "*.cfgc"},
         workingDirColors,
         dpiScale
       );
@@ -2057,8 +2054,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_KEYBINDS:
       if (!dirExists(workingDirKeybinds)) workingDirKeybinds=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export Keybinds" : _L("Export Keybinds##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu3"), "*.cfgk"},
+        _("Export Keybinds"),
+        {_("configuration files"), "*.cfgk"},
         workingDirKeybinds,
         dpiScale
       );
@@ -2066,8 +2063,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_LAYOUT:
       if (!dirExists(workingDirLayout)) workingDirLayout=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export Layout" : _L("Export Layout##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? ".ini files" : _L(".ini files##sggu1"), "*.ini"},
+        _("Export Layout"),
+        {_(".ini files"), "*.ini"},
         workingDirLayout,
         dpiScale
       );
@@ -2075,8 +2072,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_USER_PRESETS:
       if (!dirExists(workingDirConfig)) workingDirConfig=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export User Presets" : _L("Export User Presets##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu6"), "*.cfgu"},
+        _("Export User Presets"),
+        {_("configuration files"), "*.cfgu"},
         workingDirConfig,
         dpiScale
       );
@@ -2084,8 +2081,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_EXPORT_CONFIG:
       if (!dirExists(workingDirConfig)) workingDirConfig=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Export Settings" : _L("Export Settings##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "configuration files" : _L("configuration files##sggu7"), "*.cfg"},
+        _("Export Settings"),
+        {_("configuration files"), "*.cfg"},
         workingDirConfig,
         dpiScale
       );
@@ -2095,9 +2092,9 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_MU5_ROM_OPEN:
       if (!dirExists(workingDirSample)) workingDirSample=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Load ROM" : _L("Load ROM##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu7"), "*.rom *.bin",
-         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu6"), "*"},
+        _("Load ROM"),
+        {_("compatible files"), "*.rom *.bin",
+         _("all files"), "*"},
         workingDirROM,
         dpiScale
       );
@@ -2105,9 +2102,9 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_CMDSTREAM_OPEN:
       if (!dirExists(workingDirROM)) workingDirROM=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Play Command Stream" : _L("Play Command Stream##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "command stream" : _L("command stream##sggu"), "*.bin",
-         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu7"), "*"},
+        _("Play Command Stream"),
+        {_("command stream"), "*.bin",
+         _("all files"), "*"},
         workingDirROM,
         dpiScale
       );
@@ -2115,10 +2112,10 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_TEST_OPEN:
       if (!dirExists(workingDirTest)) workingDirTest=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Open Test" : _L("Open Test##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu8"), "*.fub *.fur *.dmf *.mod",
-         settings.language == DIV_LANG_ENGLISH ? "another option" : _L("another option##sggu0"), "*.wav *.ttf",
-         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu8"), "*"},
+        _("Open Test"),
+        {_("compatible files"), "*.fur *.dmf *.mod",
+         _("another option"), "*.wav *.ttf",
+         _("all files"), "*"},
         workingDirTest,
         dpiScale,
         [](const char* path) {
@@ -2133,10 +2130,10 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_TEST_OPEN_MULTI:
       if (!dirExists(workingDirTest)) workingDirTest=getHomeDir();
       hasOpened=fileDialog->openLoad(
-        settings.language == DIV_LANG_ENGLISH ? "Open Test (Multi)" : _L("Open Test (Multi)##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu9"), "*.fub *.fur *.dmf *.mod",
-         settings.language == DIV_LANG_ENGLISH ? "another option" : _L("another option##sggu1"), "*.wav *.ttf",
-         settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu9"), "*"},
+        _("Open Test (Multi)"),
+        {_("compatible files"), "*.fur *.dmf *.mod",
+         _("another option"), "*.wav *.ttf",
+         _("all files"), "*"},
         workingDirTest,
         dpiScale,
         [](const char* path) {
@@ -2152,9 +2149,9 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
     case GUI_FILE_TEST_SAVE:
       if (!dirExists(workingDirTest)) workingDirTest=getHomeDir();
       hasOpened=fileDialog->openSave(
-        settings.language == DIV_LANG_ENGLISH ? "Save Test" : _L("Save Test##sggu"),
-        {settings.language == DIV_LANG_ENGLISH ? "Furnace song" : _L("Furnace song##sggu"), "*.fub",
-         settings.language == DIV_LANG_ENGLISH ? "DefleMask module" : _L("DefleMask module##sggu"), "*.dmf"},
+        _("Save Test"),
+        {_("Furnace song"), "*.fur",
+         _("DefleMask module"), "*.dmf"},
         workingDirTest,
         dpiScale
       );
@@ -2195,7 +2192,7 @@ int FurnaceGUI::save(String path, int dmfVersion) {
     ret=deflateInit(&zl,Z_DEFAULT_COMPRESSION);
     if (ret!=Z_OK) {
       logE("zlib error!");
-      lastError="compression error";
+      lastError=_("compression error");
       fclose(outFile);
       w->finish();
       return 2;
@@ -2207,7 +2204,7 @@ int FurnaceGUI::save(String path, int dmfVersion) {
       zl.next_out=zbuf;
       if ((ret=deflate(&zl,Z_NO_FLUSH))==Z_STREAM_ERROR) {
         logE("zlib stream error!");
-        lastError="zlib stream error";
+        lastError=_("zlib stream error");
         deflateEnd(&zl);
         fclose(outFile);
         w->finish();
@@ -2229,7 +2226,7 @@ int FurnaceGUI::save(String path, int dmfVersion) {
     zl.next_out=zbuf;
     if ((ret=deflate(&zl,Z_FINISH))==Z_STREAM_ERROR) {
       logE("zlib finish stream error!");
-      lastError="zlib finish stream error";
+      lastError=_("zlib finish stream error");
       deflateEnd(&zl);
       fclose(outFile);
       w->finish();
@@ -2283,38 +2280,38 @@ int FurnaceGUI::load(String path) {
     }
     if (fseek(f,0,SEEK_END)<0) {
       perror("size error");
-      lastError=fmt::sprintf("on seek: %s",strerror(errno));
+      lastError=fmt::sprintf(_("on seek: %s"),strerror(errno));
       fclose(f);
       return 1;
     }
     ssize_t len=ftell(f);
     if (len==(SIZE_MAX>>1)) {
       perror("could not get file length");
-      lastError=fmt::sprintf("on pre tell: %s",strerror(errno));
+      lastError=fmt::sprintf(_("on pre tell: %s"),strerror(errno));
       fclose(f);
       return 1;
     }
     if (len<1) {
       if (len==0) {
         logE("that file is empty!");
-        lastError="file is empty";
+        lastError=_("file is empty");
       } else {
         perror("tell error");
-        lastError=fmt::sprintf("on tell: %s",strerror(errno));
+        lastError=fmt::sprintf(_("on tell: %s"),strerror(errno));
       }
       fclose(f);
       return 1;
     }
     if (fseek(f,0,SEEK_SET)<0) {
       perror("size error");
-      lastError=fmt::sprintf("on get size: %s",strerror(errno));
+      lastError=fmt::sprintf(_("on get size: %s"),strerror(errno));
       fclose(f);
       return 1;
     }
     unsigned char* file=new unsigned char[len];
     if (fread(file,1,(size_t)len,f)!=(size_t)len) {
       perror("read error");
-      lastError=fmt::sprintf("on read: %s",strerror(errno));
+      lastError=fmt::sprintf(_("on read: %s"),strerror(errno));
       fclose(f);
       delete[] file;
       return 1;
@@ -2340,7 +2337,7 @@ int FurnaceGUI::load(String path) {
   selStart=SelectionPoint();
   selEnd=SelectionPoint();
   cursor=SelectionPoint();
-  lastError="everything OK";
+  lastError=_("everything OK");
   undoHist.clear();
   redoHist.clear();
   updateWindowTitle();
@@ -2358,7 +2355,7 @@ int FurnaceGUI::load(String path) {
     }
   } else {
     // warn the user
-    showWarning(settings.language == DIV_LANG_ENGLISH ? "you have loaded a backup!\nif you need to, please save it somewhere.\n\nDO NOT RELY ON THE BACKUP SYSTEM FOR AUTO-SAVE!\nFurnace will not save backups of backups." : _L("you have loaded a backup!\nif you need to, please save it somewhere.\n\nDO NOT RELY ON THE BACKUP SYSTEM FOR AUTO-SAVE!\nFurnace will not save backups of backups.##sggu"),GUI_WARN_GENERIC);
+    showWarning(_("you have loaded a backup!\nif you need to, please save it somewhere.\n\nDO NOT RELY ON THE BACKUP SYSTEM FOR AUTO-SAVE!\nFurnace will not save backups of backups."),GUI_WARN_GENERIC);
   }
   return 0;
 }
@@ -2366,10 +2363,10 @@ int FurnaceGUI::load(String path) {
 void FurnaceGUI::openRecentFile(String path) {
   if (modified) {
     nextFile=path;
-    showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before opening file?" : _L("Unsaved changes! Save changes before opening file?##sggu1"),GUI_WARN_OPEN_DROP);
+    showWarning(_("Unsaved changes! Save changes before opening file?"),GUI_WARN_OPEN_DROP);
   } else {
     if (load(path)>0) {
-      showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while loading file! (%s)" : _L("Error while loading file! (%s)##sggu0"), lastError));
+      showError(fmt::sprintf(_("Error while loading file! (%s)"),lastError));
     }
   }
 }
@@ -2446,38 +2443,38 @@ int FurnaceGUI::loadStream(String path) {
     }
     if (fseek(f,0,SEEK_END)<0) {
       perror("size error");
-      lastError=fmt::sprintf("on seek: %s",strerror(errno));
+      lastError=fmt::sprintf(_("on seek: %s"),strerror(errno));
       fclose(f);
       return 1;
     }
     ssize_t len=ftell(f);
     if (len==(SIZE_MAX>>1)) {
       perror("could not get file length");
-      lastError=fmt::sprintf("on pre tell: %s",strerror(errno));
+      lastError=fmt::sprintf(_("on pre tell: %s"),strerror(errno));
       fclose(f);
       return 1;
     }
     if (len<1) {
       if (len==0) {
         logE("that file is empty!");
-        lastError="file is empty";
+        lastError=_("file is empty");
       } else {
         perror("tell error");
-        lastError=fmt::sprintf("on tell: %s",strerror(errno));
+        lastError=fmt::sprintf(_("on tell: %s"),strerror(errno));
       }
       fclose(f);
       return 1;
     }
     if (fseek(f,0,SEEK_SET)<0) {
       perror("size error");
-      lastError=fmt::sprintf("on get size: %s",strerror(errno));
+      lastError=fmt::sprintf(_("on get size: %s"),strerror(errno));
       fclose(f);
       return 1;
     }
     unsigned char* file=new unsigned char[len];
     if (fread(file,1,(size_t)len,f)!=(size_t)len) {
       perror("read error");
-      lastError=fmt::sprintf("on read: %s",strerror(errno));
+      lastError=fmt::sprintf(_("on read: %s"),strerror(errno));
       fclose(f);
       delete[] file;
       return 1;
@@ -2757,15 +2754,15 @@ void FurnaceGUI::editOptions(bool topMenu) {
   char id[4096];
   editOptsVisible=true;
 
-  if (ImGui::MenuItem(_L("cut##sggu"),BIND_FOR(GUI_ACTION_PAT_CUT))) doCopy(true,true,selStart,selEnd);
-  if (ImGui::MenuItem(_L("copy##sggu"),BIND_FOR(GUI_ACTION_PAT_COPY))) doCopy(false,true,selStart,selEnd);
-  if (ImGui::MenuItem(_L("paste##sggu0"),BIND_FOR(GUI_ACTION_PAT_PASTE))) doPaste();
-  if (ImGui::BeginMenu(_L("paste special...##sggu"))) {
-    if (ImGui::MenuItem(_L("paste mix##sggu"),BIND_FOR(GUI_ACTION_PAT_PASTE_MIX))) doPaste(GUI_PASTE_MODE_MIX_FG);
-    if (ImGui::MenuItem(_L("paste mix (background)##sggu"),BIND_FOR(GUI_ACTION_PAT_PASTE_MIX_BG))) doPaste(GUI_PASTE_MODE_MIX_BG);
-    if (ImGui::BeginMenu(_L("paste with ins (foreground)##sggu"))) {
+  if (ImGui::MenuItem(_("cut"),BIND_FOR(GUI_ACTION_PAT_CUT))) doCopy(true,true,selStart,selEnd);
+  if (ImGui::MenuItem(_("copy"),BIND_FOR(GUI_ACTION_PAT_COPY))) doCopy(false,true,selStart,selEnd);
+  if (ImGui::MenuItem(_("paste"),BIND_FOR(GUI_ACTION_PAT_PASTE))) doPaste();
+  if (ImGui::BeginMenu(_("paste special..."))) {
+    if (ImGui::MenuItem(_("paste mix"),BIND_FOR(GUI_ACTION_PAT_PASTE_MIX))) doPaste(GUI_PASTE_MODE_MIX_FG);
+    if (ImGui::MenuItem(_("paste mix (background)"),BIND_FOR(GUI_ACTION_PAT_PASTE_MIX_BG))) doPaste(GUI_PASTE_MODE_MIX_BG);
+    if (ImGui::BeginMenu(_("paste with ins (foreground)"))) {
       if (e->song.ins.empty()) {
-        ImGui::Text(_L("no instruments available##sggu0"));
+        ImGui::Text(_("no instruments available"));
       }
       for (size_t i=0; i<e->song.ins.size(); i++) {
         snprintf(id,4095,"%.2X: %s",(int)i,e->song.ins[i]->name.c_str());
@@ -2775,9 +2772,9 @@ void FurnaceGUI::editOptions(bool topMenu) {
       }
       ImGui::EndMenu();
     }
-    if (ImGui::BeginMenu(_L("paste with ins (background)##sggu"))) {
+    if (ImGui::BeginMenu(_("paste with ins (background)"))) {
       if (e->song.ins.empty()) {
-        ImGui::Text(_L("no instruments available##sggu1"));
+        ImGui::Text(_("no instruments available"));
       }
       for (size_t i=0; i<e->song.ins.size(); i++) {
         snprintf(id,4095,"%.2X: %s",(int)i,e->song.ins[i]->name.c_str());
@@ -2787,73 +2784,73 @@ void FurnaceGUI::editOptions(bool topMenu) {
       }
       ImGui::EndMenu();
     }
-    if (ImGui::MenuItem(_L("paste flood##sggu"),BIND_FOR(GUI_ACTION_PAT_PASTE_FLOOD))) doPaste(GUI_PASTE_MODE_FLOOD);
-    if (ImGui::MenuItem(_L("paste overflow##sggu"),BIND_FOR(GUI_ACTION_PAT_PASTE_OVERFLOW))) doPaste(GUI_PASTE_MODE_OVERFLOW);
+    if (ImGui::MenuItem(_("paste flood"),BIND_FOR(GUI_ACTION_PAT_PASTE_FLOOD))) doPaste(GUI_PASTE_MODE_FLOOD);
+    if (ImGui::MenuItem(_("paste overflow"),BIND_FOR(GUI_ACTION_PAT_PASTE_OVERFLOW))) doPaste(GUI_PASTE_MODE_OVERFLOW);
     ImGui::EndMenu();
   }
-  if (ImGui::MenuItem(_L("delete##sggu0"),BIND_FOR(GUI_ACTION_PAT_DELETE))) doDelete();
+  if (ImGui::MenuItem(_("delete"),BIND_FOR(GUI_ACTION_PAT_DELETE))) doDelete();
   if (topMenu) {
-    if (ImGui::MenuItem(_L("select all##sggu"),BIND_FOR(GUI_ACTION_PAT_SELECT_ALL))) doSelectAll();
+    if (ImGui::MenuItem(_("select all"),BIND_FOR(GUI_ACTION_PAT_SELECT_ALL))) doSelectAll();
   }
   ImGui::Separator();
 
-  if (ImGui::BeginMenu(_L("operation mask...##sggu"))) {
+  if (ImGui::BeginMenu(_("operation mask..."))) {
     drawOpMask(opMaskDelete);
     ImGui::SameLine();
-    ImGui::Text(_L("delete##sggu1"));
+    ImGui::Text(_("delete"));
 
     drawOpMask(opMaskPullDelete);
     ImGui::SameLine();
-    ImGui::Text(_L("pull delete##sggu"));
+    ImGui::Text(_("pull delete"));
 
     drawOpMask(opMaskInsert);
     ImGui::SameLine();
-    ImGui::Text(_L("insert##sggu"));
+    ImGui::Text(_("insert"));
 
     drawOpMask(opMaskPaste);
     ImGui::SameLine();
-    ImGui::Text(_L("paste##sggu1"));
+    ImGui::Text(_("paste"));
 
     drawOpMask(opMaskTransposeNote);
     ImGui::SameLine();
-    ImGui::Text(_L("transpose (note)##sggu"));
+    ImGui::Text(_("transpose (note)"));
 
     drawOpMask(opMaskTransposeValue);
     ImGui::SameLine();
-    ImGui::Text(_L("transpose (value)##sggu"));
+    ImGui::Text(_("transpose (value)"));
 
     drawOpMask(opMaskInterpolate);
     ImGui::SameLine();
-    ImGui::Text(_L("interpolate##sggu0"));
+    ImGui::Text(_("interpolate"));
 
     drawOpMask(opMaskFade);
     ImGui::SameLine();
-    ImGui::Text(_L("fade##sggu"));
+    ImGui::Text(_("fade"));
 
     drawOpMask(opMaskInvertVal);
     ImGui::SameLine();
-    ImGui::Text(_L("invert values##sggu0"));
+    ImGui::Text(_("invert values"));
 
     drawOpMask(opMaskScale);
     ImGui::SameLine();
-    ImGui::Text(_L("scale##sggu"));
+    ImGui::Text(_("scale"));
 
     drawOpMask(opMaskRandomize);
     ImGui::SameLine();
-    ImGui::Text(_L("randomize##sggu"));
+    ImGui::Text(_("randomize"));
 
     drawOpMask(opMaskFlip);
     ImGui::SameLine();
-    ImGui::Text(_L("flip##sggu"));
+    ImGui::Text(_("flip"));
 
     drawOpMask(opMaskCollapseExpand);
     ImGui::SameLine();
-    ImGui::Text(_L("collapse/expand##sggu"));
+    ImGui::Text(_("collapse/expand"));
 
     ImGui::EndMenu();
   }
 
-  ImGui::Text(_L("input latch##sggu"));
+  ImGui::Text(_("input latch"));
   ImGui::PushFont(patFont);
   if (ImGui::BeginTable("inputLatchTable",5,ImGuiTableFlags_Borders|ImGuiTableFlags_SizingFixedFit|ImGuiTableFlags_NoHostExtendX)) {
     static char id[64];
@@ -2880,7 +2877,7 @@ void FurnaceGUI::editOptions(bool topMenu) {
     }
     if (ImGui::IsItemHovered()) {
       ImGui::PushStyleColor(ImGuiCol_Text,uiColors[GUI_COLOR_TEXT]);
-      ImGui::SetTooltip(_L("&&: selected instrument\n..: no instrument##sggu"));
+      ImGui::SetTooltip(_("&&: selected instrument\n..: no instrument"));
       ImGui::PopStyleColor();
     }
     ImGui::PopStyleColor();
@@ -2934,7 +2931,7 @@ void FurnaceGUI::editOptions(bool topMenu) {
   }
   ImGui::PopFont();
   ImGui::SameLine();
-  if (ImGui::Button(_L("Set##sggu"))) {
+  if (ImGui::Button(_("Set"))) {
     DivPattern* pat=e->curPat[cursor.xCoarse].getPattern(e->curOrders->ord[cursor.xCoarse][curOrder],true);
     latchIns=pat->data[cursor.y][2];
     latchVol=pat->data[cursor.y][3];
@@ -2944,7 +2941,7 @@ void FurnaceGUI::editOptions(bool topMenu) {
     latchNibble=false;
   }
   ImGui::SameLine();
-  if (ImGui::Button(_L("Reset##sggu"))) {
+  if (ImGui::Button(_("Reset"))) {
     latchIns=-2;
     latchVol=-1;
     latchEffect=-1;
@@ -2954,18 +2951,18 @@ void FurnaceGUI::editOptions(bool topMenu) {
   }
   ImGui::Separator();
 
-  if (ImGui::MenuItem(_L("note up##sggu"),BIND_FOR(GUI_ACTION_PAT_NOTE_UP))) doTranspose(1,opMaskTransposeNote);
-  if (ImGui::MenuItem(_L("note down##sggu"),BIND_FOR(GUI_ACTION_PAT_NOTE_DOWN))) doTranspose(-1,opMaskTransposeNote);
-  if (ImGui::MenuItem(_L("octave up##sggu"),BIND_FOR(GUI_ACTION_PAT_OCTAVE_UP))) doTranspose(12,opMaskTransposeNote);
-  if (ImGui::MenuItem(_L("octave down##sggu"),BIND_FOR(GUI_ACTION_PAT_OCTAVE_DOWN)))  doTranspose(-12,opMaskTransposeNote);
+  if (ImGui::MenuItem(_("note up"),BIND_FOR(GUI_ACTION_PAT_NOTE_UP))) doTranspose(1,opMaskTransposeNote);
+  if (ImGui::MenuItem(_("note down"),BIND_FOR(GUI_ACTION_PAT_NOTE_DOWN))) doTranspose(-1,opMaskTransposeNote);
+  if (ImGui::MenuItem(_("octave up"),BIND_FOR(GUI_ACTION_PAT_OCTAVE_UP))) doTranspose(12,opMaskTransposeNote);
+  if (ImGui::MenuItem(_("octave down"),BIND_FOR(GUI_ACTION_PAT_OCTAVE_DOWN)))  doTranspose(-12,opMaskTransposeNote);
   ImGui::Separator();
-  if (ImGui::MenuItem(_L("values up##sggu"),BIND_FOR(GUI_ACTION_PAT_VALUE_UP))) doTranspose(1,opMaskTransposeValue);
-  if (ImGui::MenuItem(_L("values down##sggu"),BIND_FOR(GUI_ACTION_PAT_VALUE_DOWN))) doTranspose(-1,opMaskTransposeValue);
-  if (ImGui::MenuItem(_L("values up (+16)##sggu"),BIND_FOR(GUI_ACTION_PAT_VALUE_UP_COARSE))) doTranspose(16,opMaskTransposeValue);
-  if (ImGui::MenuItem(_L("values down (-16)##sggu"),BIND_FOR(GUI_ACTION_PAT_VALUE_DOWN_COARSE)))  doTranspose(-16,opMaskTransposeValue);
+  if (ImGui::MenuItem(_("values up"),BIND_FOR(GUI_ACTION_PAT_VALUE_UP))) doTranspose(1,opMaskTransposeValue);
+  if (ImGui::MenuItem(_("values down"),BIND_FOR(GUI_ACTION_PAT_VALUE_DOWN))) doTranspose(-1,opMaskTransposeValue);
+  if (ImGui::MenuItem(_("values up (+16)"),BIND_FOR(GUI_ACTION_PAT_VALUE_UP_COARSE))) doTranspose(16,opMaskTransposeValue);
+  if (ImGui::MenuItem(_("values down (-16)"),BIND_FOR(GUI_ACTION_PAT_VALUE_DOWN_COARSE)))  doTranspose(-16,opMaskTransposeValue);
   ImGui::Separator();
   ImGui::AlignTextToFramePadding();
-  ImGui::Text(_L("transpose##sggu"));
+  ImGui::Text(_("transpose"));
   ImGui::SameLine();
   ImGui::SetNextItemWidth(120.0f*dpiScale);
   if (ImGui::InputInt("##TransposeAmount",&transposeAmount,1,12)) {
@@ -2973,21 +2970,21 @@ void FurnaceGUI::editOptions(bool topMenu) {
     if (transposeAmount>96) transposeAmount=96;
   }
   ImGui::SameLine();
-  if (ImGui::Button(_L("Notes##sggu"))) {
+  if (ImGui::Button(_("Notes"))) {
     doTranspose(transposeAmount,opMaskTransposeNote);
     ImGui::CloseCurrentPopup();
   }
   ImGui::SameLine();
-  if (ImGui::Button(_L("Values##sggu"))) {
+  if (ImGui::Button(_("Values"))) {
     doTranspose(transposeAmount,opMaskTransposeValue);
     ImGui::CloseCurrentPopup();
   }
 
   ImGui::Separator();
-  if (ImGui::MenuItem(_L("interpolate##sggu1"),BIND_FOR(GUI_ACTION_PAT_INTERPOLATE))) doInterpolate();
-  if (ImGui::BeginMenu(_L("change instrument...##sggu"))) {
+  if (ImGui::MenuItem(_("interpolate"),BIND_FOR(GUI_ACTION_PAT_INTERPOLATE))) doInterpolate();
+  if (ImGui::BeginMenu(_("change instrument..."))) {
     if (e->song.ins.empty()) {
-      ImGui::Text(_L("no instruments available##sggu"));
+      ImGui::Text(_("no instruments available"));
     }
     for (size_t i=0; i<e->song.ins.size(); i++) {
       snprintf(id,4095,"%.2X: %s",(int)i,e->song.ins[i]->name.c_str());
@@ -2998,8 +2995,8 @@ void FurnaceGUI::editOptions(bool topMenu) {
     ImGui::EndMenu();
   }
 
-  if (ImGui::BeginMenu(_L("gradient/fade...##sggu"))) {
-    if (ImGui::InputInt(_L("Start##sggu"),&fadeMin,1,16)) {
+  if (ImGui::BeginMenu(_("gradient/fade..."))) {
+    if (ImGui::InputInt(_("Start"),&fadeMin,1,16)) {
       if (fadeMin<0) fadeMin=0;
       if (fadeMode) {
         if (fadeMin>15) fadeMin=15;
@@ -3007,7 +3004,7 @@ void FurnaceGUI::editOptions(bool topMenu) {
         if (fadeMin>255) fadeMin=255;
       }
     }
-    if (ImGui::InputInt(_L("End##sggu"),&fadeMax,1,16)) {
+    if (ImGui::InputInt(_("End"),&fadeMax,1,16)) {
       if (fadeMax<0) fadeMax=0;
       if (fadeMode) {
         if (fadeMax>15) fadeMax=15;
@@ -3015,7 +3012,7 @@ void FurnaceGUI::editOptions(bool topMenu) {
         if (fadeMax>255) fadeMax=255;
       }
     }
-    if (ImGui::Checkbox(_L("Nibble mode##sggu0"),&fadeMode)) {
+    if (ImGui::Checkbox(_("Nibble mode"),&fadeMode)) {
       if (fadeMode) {
         if (fadeMin>15) fadeMin=15;
         if (fadeMax>15) fadeMax=15;
@@ -3024,25 +3021,25 @@ void FurnaceGUI::editOptions(bool topMenu) {
         if (fadeMax>255) fadeMax=255;
       }
     }
-    if (ImGui::Button(_L("Go ahead##sggu"))) {
+    if (ImGui::Button(_("Go ahead"))) {
       doFade(fadeMin,fadeMax,fadeMode);
       ImGui::CloseCurrentPopup();
     }
     ImGui::EndMenu();
   }
-  if (ImGui::BeginMenu(_L("scale...##sggu"))) {
+  if (ImGui::BeginMenu(_("scale..."))) {
     if (ImGui::InputFloat("##ScaleMax",&scaleMax,1,10,"%.1f%%")) {
       if (scaleMax<0.0f) scaleMax=0.0f;
       if (scaleMax>25600.0f) scaleMax=25600.0f;
     }
-    if (ImGui::Button(_L("Scale##sggu"))) {
+    if (ImGui::Button(_("Scale"))) {
       doScale(scaleMax);
       ImGui::CloseCurrentPopup();
     }
     ImGui::EndMenu();
   }
-  if (ImGui::BeginMenu(_L("randomize...##sggu"))) {
-    if (ImGui::InputInt(_L("Minimum##sggu"),&randomizeMin,1,16)) {
+  if (ImGui::BeginMenu(_("randomize..."))) {
+    if (ImGui::InputInt(_("Minimum"),&randomizeMin,1,16)) {
       if (randomizeMin<0) randomizeMin=0;
       if (randomMode) {
         if (randomizeMin>15) randomizeMin=15;
@@ -3051,7 +3048,7 @@ void FurnaceGUI::editOptions(bool topMenu) {
       }
       if (randomizeMin>randomizeMax) randomizeMin=randomizeMax;
     }
-    if (ImGui::InputInt(_L("Maximum##sggu"),&randomizeMax,1,16)) {
+    if (ImGui::InputInt(_("Maximum"),&randomizeMax,1,16)) {
       if (randomizeMax<0) randomizeMax=0;
       if (randomizeMax<randomizeMin) randomizeMax=randomizeMin;
       if (randomMode) {
@@ -3060,7 +3057,7 @@ void FurnaceGUI::editOptions(bool topMenu) {
         if (randomizeMax>255) randomizeMax=255;
       }
     }
-    if (ImGui::Checkbox(_L("Nibble mode##sggu1"),&randomMode)) {
+    if (ImGui::Checkbox(_("Nibble mode"),&randomMode)) {
       if (randomMode) {
         if (randomizeMin>15) randomizeMin=15;
         if (randomizeMax>15) randomizeMax=15;
@@ -3070,41 +3067,41 @@ void FurnaceGUI::editOptions(bool topMenu) {
       }
     }
     // TODO: add an option to set effect to specific value?
-    if (ImGui::Button(_L("Randomize##sggu"))) {
+    if (ImGui::Button(_("Randomize"))) {
       doRandomize(randomizeMin,randomizeMax,randomMode);
       ImGui::CloseCurrentPopup();
     }
     ImGui::EndMenu();
   }
-  if (ImGui::MenuItem(_L("invert values##sggu1"),BIND_FOR(GUI_ACTION_PAT_INVERT_VALUES))) doInvertValues();
+  if (ImGui::MenuItem(_("invert values"),BIND_FOR(GUI_ACTION_PAT_INVERT_VALUES))) doInvertValues();
 
   ImGui::Separator();
 
-  if (ImGui::MenuItem(_L("flip selection##sggu"),BIND_FOR(GUI_ACTION_PAT_FLIP_SELECTION))) doFlip();
+  if (ImGui::MenuItem(_("flip selection"),BIND_FOR(GUI_ACTION_PAT_FLIP_SELECTION))) doFlip();
 
   ImGui::SetNextItemWidth(120.0f*dpiScale);
-  if (ImGui::InputInt(_L("collapse/expand amount##CollapseAmount"),&collapseAmount,1,4)) {
+  if (ImGui::InputInt(_("collapse/expand amount##CollapseAmount"),&collapseAmount,1,4)) {
     if (collapseAmount<2) collapseAmount=2;
     if (collapseAmount>256) collapseAmount=256;
   }
-  if (ImGui::MenuItem(_L("collapse##sggu"),BIND_FOR(GUI_ACTION_PAT_COLLAPSE_ROWS))) doCollapse(collapseAmount,selStart,selEnd);
-  if (ImGui::MenuItem(_L("expand##sggu"),BIND_FOR(GUI_ACTION_PAT_EXPAND_ROWS))) doExpand(collapseAmount,selStart,selEnd);
+  if (ImGui::MenuItem(_("collapse"),BIND_FOR(GUI_ACTION_PAT_COLLAPSE_ROWS))) doCollapse(collapseAmount,selStart,selEnd);
+  if (ImGui::MenuItem(_("expand"),BIND_FOR(GUI_ACTION_PAT_EXPAND_ROWS))) doExpand(collapseAmount,selStart,selEnd);
 
   if (topMenu) {
     ImGui::Separator();
-    if (ImGui::MenuItem(_L("collapse pattern##sggu"),BIND_FOR(GUI_ACTION_PAT_COLLAPSE_PAT))) doAction(GUI_ACTION_PAT_COLLAPSE_PAT);
-    if (ImGui::MenuItem(_L("expand pattern##sggu"),BIND_FOR(GUI_ACTION_PAT_EXPAND_PAT))) doAction(GUI_ACTION_PAT_EXPAND_PAT);
+    if (ImGui::MenuItem(_("collapse pattern"),BIND_FOR(GUI_ACTION_PAT_COLLAPSE_PAT))) doAction(GUI_ACTION_PAT_COLLAPSE_PAT);
+    if (ImGui::MenuItem(_("expand pattern"),BIND_FOR(GUI_ACTION_PAT_EXPAND_PAT))) doAction(GUI_ACTION_PAT_EXPAND_PAT);
   }
 
   if (topMenu) {
     ImGui::Separator();
-    if (ImGui::MenuItem(_L("collapse song##sggu"),BIND_FOR(GUI_ACTION_PAT_COLLAPSE_SONG))) doAction(GUI_ACTION_PAT_COLLAPSE_SONG);
-    if (ImGui::MenuItem(_L("expand song##sggu"),BIND_FOR(GUI_ACTION_PAT_EXPAND_SONG))) doAction(GUI_ACTION_PAT_EXPAND_SONG);
+    if (ImGui::MenuItem(_("collapse song"),BIND_FOR(GUI_ACTION_PAT_COLLAPSE_SONG))) doAction(GUI_ACTION_PAT_COLLAPSE_SONG);
+    if (ImGui::MenuItem(_("expand song"),BIND_FOR(GUI_ACTION_PAT_EXPAND_SONG))) doAction(GUI_ACTION_PAT_EXPAND_SONG);
   }
 
   if (topMenu) {
     ImGui::Separator();
-    if (ImGui::MenuItem(_L("find/replace##sggu"),BIND_FOR(GUI_ACTION_WINDOW_FIND))) {
+    if (ImGui::MenuItem(_("find/replace"),BIND_FOR(GUI_ACTION_WINDOW_FIND),findOpen)) {
       if (findOpen) {
         findOpen=false;
       } else {
@@ -3122,7 +3119,7 @@ void FurnaceGUI::toggleMobileUI(bool enable, bool force) {
   if (mobileUI!=enable || force) {
     if (!mobileUI && enable) {
       if (!ImGui::SaveIniSettingsToDisk(finalLayoutPath,true)) {
-        reportError(fmt::sprintf("could NOT save layout! %s",strerror(errno)));
+        reportError(fmt::sprintf(_("could NOT save layout! %s"),strerror(errno)));
       }
     }
     mobileUI=enable;
@@ -3134,7 +3131,7 @@ void FurnaceGUI::toggleMobileUI(bool enable, bool force) {
     } else {
       ImGui::GetIO().IniFilename=NULL;
       if (!ImGui::LoadIniSettingsFromDisk(finalLayoutPath,true)) {
-        reportError(fmt::sprintf("could NOT load layout! %s",strerror(errno)));
+        reportError(fmt::sprintf(_("could NOT load layout! %s"),strerror(errno)));
         ImGui::LoadIniSettingsFromMemory(defaultLayout);
       }
       ImGui::GetIO().ConfigFlags&=~ImGuiConfigFlags_InertialScrollEnable;
@@ -3586,7 +3583,7 @@ bool FurnaceGUI::loop() {
   }
 
   if (safeMode) {
-    showError(settings.language == DIV_LANG_ENGLISH ? "Furnace has been started in Safe Mode.\nthis means that:\n\n- software rendering is being used\n- audio output may not work\n- font loading is disabled\n\ncheck any settings which may have made Furnace start up in this mode.\nfont loading is one of these." : _L("Furnace has been started in Safe Mode.\nthis means that:\n\n- software rendering is being used\n- audio output may not work\n- font loading is disabled\n\ncheck any settings which may have made Furnace start up in this mode.\nfont loading is one of these.##sggu"));
+    showError(_("Furnace has been started in Safe Mode.\nthis means that:\n\n- software rendering is being used\n- audio output may not work\n- font loading is disabled\n\ncheck any settings which may have made Furnace start up in this mode.\nfont loading is one of these."));
     settingsOpen=true;
   }
 
@@ -3757,10 +3754,10 @@ bool FurnaceGUI::loop() {
               MARK_MODIFIED;
             } else if (modified) {
               nextFile=ev.drop.file;
-              showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before opening file?" : _L("Unsaved changes! Save changes before opening file?##sggu0"),GUI_WARN_OPEN_DROP);
+              showWarning(_("Unsaved changes! Save changes before opening file?"),GUI_WARN_OPEN_DROP);
             } else {
               if (load(ev.drop.file)>0) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while loading file! (%s)" : _L("Error while loading file! (%s)##sggu0"),lastError));
+                showError(fmt::sprintf(_("Error while loading file! (%s)"),lastError));
               }
             }
             SDL_free(ev.drop.file);
@@ -4059,7 +4056,7 @@ bool FurnaceGUI::loop() {
       }
 
       if (initAttempts>5) {
-        reportError("can't keep going without graphics! Furnace will quit now.");
+        reportError(_("can't keep going without graphics! Furnace will quit now."));
         quit=true;
         break;
       }
@@ -4073,7 +4070,7 @@ bool FurnaceGUI::loop() {
       logD("building font...");
       if (!ImGui::GetIO().Fonts->Build()) {
         logE("error while building font atlas!");
-        showError(settings.language == DIV_LANG_ENGLISH ? "error while loading fonts! please check your settings." : _L("error while loading fonts! please check your settings.##sggu0"));
+        showError(_("error while loading fonts! please check your settings."));
         ImGui::GetIO().Fonts->Clear();
         mainFont=ImGui::GetIO().Fonts->AddFontDefault();
         patFont=mainFont;
@@ -4194,29 +4191,29 @@ bool FurnaceGUI::loop() {
 
     if (!mobileUI) {
       ImGui::BeginMainMenuBar();
-      if (ImGui::BeginMenu(settings.capitalMenuBar?_L("File##menubar"):_L("file##menubar"))) {
-        if (ImGui::MenuItem(_L("new...##sggu"),BIND_FOR(GUI_ACTION_NEW))) {
+      if (ImGui::BeginMenu(settings.capitalMenuBar?_("File"):_("file"))) {
+        if (ImGui::MenuItem(_("new..."),BIND_FOR(GUI_ACTION_NEW))) {
           if (modified) {
-            showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before creating a new song?" : _L("Unsaved changes! Save changes before creating a new song?##sggu"),GUI_WARN_NEW);
+            showWarning(_("Unsaved changes! Save changes before creating a new song?"),GUI_WARN_NEW);
           } else {
             displayNew=true;
           }
         }
-        if (ImGui::MenuItem(_L("open...##sggu"),BIND_FOR(GUI_ACTION_OPEN))) {
+        if (ImGui::MenuItem(_("open..."),BIND_FOR(GUI_ACTION_OPEN))) {
           if (modified) {
-            showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before opening another file?" : _L("Unsaved changes! Save changes before opening another file?##sggu"),GUI_WARN_OPEN);
+            showWarning(_("Unsaved changes! Save changes before opening another file?"),GUI_WARN_OPEN);
           } else {
             openFileDialog(GUI_FILE_OPEN);
           }
         }
-        if (ImGui::BeginMenu(_L("open recent##sggu"))) {
+        if (ImGui::BeginMenu(_("open recent"))) {
           exitDisabledTimer=1;
           for (int i=0; i<(int)recentFile.size(); i++) {
             String item=recentFile[i];
             if (ImGui::MenuItem(item.c_str())) {
               if (modified) {
                 nextFile=item;
-                showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before opening file?" : _L("Unsaved changes! Save changes before opening file?##sggu1"),GUI_WARN_OPEN_DROP);
+                showWarning(_("Unsaved changes! Save changes before opening file?"),GUI_WARN_OPEN_DROP);
               } else {
                 recentFile.erase(i);
                 i--;
@@ -4225,38 +4222,35 @@ bool FurnaceGUI::loop() {
             }
           }
           if (recentFile.empty()) {
-            ImGui::Text(_L("nothing here yet##sggu"));
+            ImGui::Text(_("nothing here yet"));
           } else {
             ImGui::Separator();
-            if (ImGui::MenuItem(_L("clear history##sggu"))) {
-              showWarning(settings.language == DIV_LANG_ENGLISH ? "Are you sure you want to clear the recent file list?" : _L("Are you sure you want to clear the recent file list?##sggu"),GUI_WARN_CLEAR_HISTORY);
+            if (ImGui::MenuItem(_("clear history"))) {
+              showWarning(_("Are you sure you want to clear the recent file list?"),GUI_WARN_CLEAR_HISTORY);
             }
           }
           ImGui::EndMenu();
         }
         ImGui::Separator();
-        if(!e->song.is_prohibited_to_save)
-        {
-          if (ImGui::MenuItem(_L("save##sggu"),BIND_FOR(GUI_ACTION_SAVE))) {
-            if (curFileName=="" || (curFileName.find(backupPath)==0) || e->song.version>=0xff00) {
-              openFileDialog(GUI_FILE_SAVE);
-            } else {
-              if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sggu0"),lastError));
-              }
+        if (ImGui::MenuItem(_("save"),BIND_FOR(GUI_ACTION_SAVE))) {
+          if (curFileName=="" || (curFileName.find(backupPath)==0) || e->song.version>=0xff00) {
+            openFileDialog(GUI_FILE_SAVE);
+          } else {
+            if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
+              showError(fmt::sprintf(_("Error while saving file! (%s)"),lastError));
             }
           }
         }
-        if (ImGui::MenuItem(_L("save as...##sggu"),BIND_FOR(GUI_ACTION_SAVE_AS))) {
+        if (ImGui::MenuItem(_("save as..."),BIND_FOR(GUI_ACTION_SAVE_AS))) {
           openFileDialog(GUI_FILE_SAVE);
         }
         ImGui::Separator();
         if (settings.exportOptionsLayout==0) {
-          if (ImGui::BeginMenu(_L("export audio...##sggu0"))) {
+          if (ImGui::BeginMenu(_("export audio..."))) {
             drawExportAudio();
             ImGui::EndMenu();
           }
-          if (ImGui::BeginMenu(_L("export VGM...##sggu0"))) {
+          if (ImGui::BeginMenu(_("export VGM..."))) {
             drawExportVGM();
             ImGui::EndMenu();
           }
@@ -4271,7 +4265,7 @@ bool FurnaceGUI::loop() {
             if ((e->song.system[i]==DIV_SYSTEM_VERA) || (e->song.system[i]==DIV_SYSTEM_YM2151)) numZSMCompat++;
           }
           if (numZSMCompat>0) {
-            if (ImGui::BeginMenu(_L("export ZSM...##sggu0"))) {
+            if (ImGui::BeginMenu(_("export ZSM..."))) {
               drawExportZSM();
               ImGui::EndMenu();
             }
@@ -4281,37 +4275,29 @@ bool FurnaceGUI::loop() {
             if (e->song.system[i]==DIV_SYSTEM_AMIGA) numAmiga++;
           }
           if (numAmiga && settings.iCannotWait) {
-            if (ImGui::BeginMenu(_L("export Amiga validation data...##sggu0"))) {
+            if (ImGui::BeginMenu(_("export Amiga validation data..."))) {
               drawExportAmigaVal();
               ImGui::EndMenu();
             }
           }
-          if (ImGui::BeginMenu(_L("export text...##sggu0"))) {
+          if (ImGui::BeginMenu(_("export text..."))) {
             drawExportText();
             ImGui::EndMenu();
           }
-          if (ImGui::BeginMenu(_L("export command stream...##sggu0"))) {
+          if (ImGui::BeginMenu(_("export command stream..."))) {
             drawExportCommand();
             ImGui::EndMenu();
           }
-          if (ImGui::BeginMenu(_L("export FZT module...##sggu"))) {
-            drawExportFZT();
-            ImGui::EndMenu();
-          }
-          if (ImGui::BeginMenu(_L("export Furnace module...##sggu"))) {
-            drawExportFur();
-            ImGui::EndMenu();
-          }
-          if (ImGui::BeginMenu(_L("export ATTiny85APU register dump...##sggu"))) {
-            drawExportFur();
+          if (ImGui::BeginMenu(_("export .dmf..."))) {
+            drawExportDMF();
             ImGui::EndMenu();
           }
         } else if (settings.exportOptionsLayout==2) {
-          if (ImGui::MenuItem(_L("export audio...##sggu1"))) {
+          if (ImGui::MenuItem(_("export audio..."))) {
             curExportType=GUI_EXPORT_AUDIO;
             displayExport=true;
           }
-          if (ImGui::MenuItem(_L("export VGM...##sggu1"))) {
+          if (ImGui::MenuItem(_("export VGM..."))) {
             curExportType=GUI_EXPORT_VGM;
             displayExport=true;
           }
@@ -4328,7 +4314,7 @@ bool FurnaceGUI::loop() {
             if ((e->song.system[i]==DIV_SYSTEM_VERA) || (e->song.system[i]==DIV_SYSTEM_YM2151)) numZSMCompat++;
           }
           if (numZSMCompat>0) {
-            if (ImGui::MenuItem(_L("export ZSM...##sggu1"))) {
+            if (ImGui::MenuItem(_("export ZSM..."))) {
               curExportType=GUI_EXPORT_ZSM;
               displayExport=true;
             }
@@ -4338,48 +4324,40 @@ bool FurnaceGUI::loop() {
             if (e->song.system[i]==DIV_SYSTEM_AMIGA) numAmiga++;
           }
           if (numAmiga && settings.iCannotWait) {
-            if (ImGui::MenuItem(_L("export Amiga validation data...##sggu1"))) {
+            if (ImGui::MenuItem(_("export Amiga validation data..."))) {
               curExportType=GUI_EXPORT_AMIGA_VAL;
               displayExport=true;
             }
           }
-          if (ImGui::MenuItem(_L("export text...##sggu1"))) {
+          if (ImGui::MenuItem(_("export text..."))) {
             curExportType=GUI_EXPORT_TEXT;
             displayExport=true;
           }
-          if (ImGui::MenuItem(_L("export command stream...##sggu1"))) {
+          if (ImGui::MenuItem(_("export command stream..."))) {
             curExportType=GUI_EXPORT_CMD_STREAM;
             displayExport=true;
           }
-          if (ImGui::MenuItem(_L("export FZT module...##sggu1"))) {
-            curExportType=GUI_EXPORT_FZT;
-            displayExport=true;
-          }
-          if (ImGui::MenuItem(_L("export Furnace module...##sggu"))) {
-            curExportType=GUI_EXPORT_FUR;
-            displayExport=true;
-          }
-          if (ImGui::MenuItem(_L("export ATTiny85APU register dump...##sggu"))) {
-            curExportType=GUI_EXPORT_T85;
+          if (ImGui::MenuItem(_("export .dmf..."))) {
+            curExportType=GUI_EXPORT_DMF;
             displayExport=true;
           }
         } else {
-          if (ImGui::MenuItem(_L("export...##sggu"),BIND_FOR(GUI_ACTION_EXPORT))) {
+          if (ImGui::MenuItem(_("export..."),BIND_FOR(GUI_ACTION_EXPORT))) {
             displayExport=true;
           }
         }
         ImGui::Separator();
         if (!settings.classicChipOptions) {
-          if (ImGui::MenuItem(_L("manage chips##sggu"))) {
+          if (ImGui::MenuItem(_("manage chips"))) {
             nextWindow=GUI_WINDOW_SYS_MANAGER;
           }
         } else {
-          if (ImGui::BeginMenu(_L("add chip...##sggu"))) {
+          if (ImGui::BeginMenu(_("add chip..."))) {
             exitDisabledTimer=1;
             DivSystem picked=systemPicker(false);
             if (picked!=DIV_SYSTEM_NULL) {
               if (!e->addSystem(picked)) {
-                showError(settings.language == DIV_LANG_ENGLISH ? ("cannot add chip! (") : (_L("cannot add chip! (##sggu"))+e->getLastError()+")");
+                showError(fmt::sprintf(_("cannot add chip! (%s)"),e->getLastError()));
               } else {
                 MARK_MODIFIED;
               }
@@ -4391,7 +4369,7 @@ bool FurnaceGUI::loop() {
             }
             ImGui::EndMenu();
           }
-          if (ImGui::BeginMenu(_L("configure chip...##sggu"))) {
+          if (ImGui::BeginMenu(_("configure chip..."))) {
             exitDisabledTimer=1;
             for (int i=0; i<e->song.systemLen; i++) {
               if (ImGui::TreeNode(fmt::sprintf("%d. %s##_SYSP%d",i+1,getSystemName(e->song.system[i]),i).c_str())) {
@@ -4401,9 +4379,9 @@ bool FurnaceGUI::loop() {
             }
             ImGui::EndMenu();
           }
-          if (ImGui::BeginMenu(_L("change chip...##sggu"))) {
+          if (ImGui::BeginMenu(_("change chip..."))) {
             exitDisabledTimer=1;
-            ImGui::Checkbox(_L("Preserve channel positions##sggu0"),&preserveChanPos);
+            ImGui::Checkbox(_("Preserve channel positions"),&preserveChanPos);
             for (int i=0; i<e->song.systemLen; i++) {
               if (ImGui::BeginMenu(fmt::sprintf("%d. %s##_SYSC%d",i+1,getSystemName(e->song.system[i]),i).c_str())) {
                 DivSystem picked=systemPicker(false);
@@ -4415,7 +4393,7 @@ bool FurnaceGUI::loop() {
                     }
                     updateWindowTitle();
                   } else {
-                    showError((settings.language == DIV_LANG_ENGLISH ? "cannot remove chip! (" : _L("cannot change chip! (##sggu"))+e->getLastError()+")");
+                    showError(fmt::sprintf(_("cannot change chip! (%s)"),e->getLastError()));
                   }
                   updateWindowTitle();
                   ImGui::CloseCurrentPopup();
@@ -4425,13 +4403,13 @@ bool FurnaceGUI::loop() {
             }
             ImGui::EndMenu();
           }
-          if (ImGui::BeginMenu(_L("remove chip...##sggu"))) {
+          if (ImGui::BeginMenu(_("remove chip..."))) {
             exitDisabledTimer=1;
-            ImGui::Checkbox(_L("Preserve channel positions##sggu1"),&preserveChanPos);
+            ImGui::Checkbox(_("Preserve channel positions"),&preserveChanPos);
             for (int i=0; i<e->song.systemLen; i++) {
               if (ImGui::MenuItem(fmt::sprintf("%d. %s##_SYSR%d",i+1,getSystemName(e->song.system[i]),i).c_str())) {
                 if (!e->removeSystem(i,preserveChanPos)) {
-                  showError(settings.language == DIV_LANG_ENGLISH ? ("cannot remove chip! (") : (_L("cannot remove chip! (##sggu"))+e->getLastError()+")");
+                  showError(fmt::sprintf(_("cannot remove chip! (%s)"),e->getLastError()));
                 } else {
                   MARK_MODIFIED;
                 }
@@ -4445,17 +4423,17 @@ bool FurnaceGUI::loop() {
           }
         }
 #if defined(FURNACE_DATADIR) && defined(SHOW_OPEN_ASSETS_MENU_ENTRY)
-        if (ImGui::MenuItem(_L("open built-in assets directory##sggu"))) {
+        if (ImGui::MenuItem(_("open built-in assets directory"))) {
           SDL_OpenURL("file://" FURNACE_DATADIR);
         }
 #endif
         ImGui::BeginDisabled(exitDisabledTimer);
         ImGui::Separator();
-        if (ImGui::MenuItem(_L("restore backup##sggu"),BIND_FOR(GUI_ACTION_OPEN_BACKUP))) {
+        if (ImGui::MenuItem(_("restore backup"),BIND_FOR(GUI_ACTION_OPEN_BACKUP))) {
           doAction(GUI_ACTION_OPEN_BACKUP);
         }
         ImGui::Separator();
-        if (ImGui::MenuItem(_L("exit...##sggu"),BIND_FOR(GUI_ACTION_QUIT))) {
+        if (ImGui::MenuItem(_("exit..."),BIND_FOR(GUI_ACTION_QUIT))) {
           requestQuit();
         }
         ImGui::EndDisabled();
@@ -4463,115 +4441,114 @@ bool FurnaceGUI::loop() {
       } else {
         exitDisabledTimer=0;
       }
-      if (ImGui::BeginMenu(settings.capitalMenuBar?_L("Edit##menubar"):_L("edit##menubar"))) {
+      if (ImGui::BeginMenu(settings.capitalMenuBar?_("Edit"):_("edit"))) {
         ImGui::Text("...");
         ImGui::Separator();
-        if (ImGui::MenuItem(_L("undo##sggu"),BIND_FOR(GUI_ACTION_UNDO))) doUndo();
-        if (ImGui::MenuItem(_L("redo##sggu"),BIND_FOR(GUI_ACTION_REDO))) doRedo();
+        if (ImGui::MenuItem(_("undo"),BIND_FOR(GUI_ACTION_UNDO))) doUndo();
+        if (ImGui::MenuItem(_("redo"),BIND_FOR(GUI_ACTION_REDO))) doRedo();
         ImGui::Separator();
         editOptions(true);
         ImGui::Separator();
-        if (ImGui::MenuItem(_L("clear...##sggu"))) {
+        if (ImGui::MenuItem(_("clear..."))) {
           doAction(GUI_ACTION_CLEAR);
         }
         ImGui::EndMenu();
       }
-      if (ImGui::BeginMenu(settings.capitalMenuBar?_L("Settings##menubar"):_L("settings##menubar"))) {
-  #ifndef IS_MOBILE
-        if (ImGui::MenuItem(_L("full screen##sggu"),BIND_FOR(GUI_ACTION_FULLSCREEN),fullScreen)) {
+      if (ImGui::BeginMenu(settings.capitalMenuBar?_("Settings"):_("settings"))) {
+#ifndef IS_MOBILE
+        if (ImGui::MenuItem(_("full screen"),BIND_FOR(GUI_ACTION_FULLSCREEN),fullScreen)) {
           doAction(GUI_ACTION_FULLSCREEN);
         }
-  #endif
-        if (ImGui::MenuItem(_L("lock layout##sggu"),NULL,lockLayout)) {
+#endif
+        if (ImGui::MenuItem(_("lock layout"),NULL,lockLayout)) {
           lockLayout=!lockLayout;
         }
-        if (ImGui::MenuItem(_L("pattern visualizer##sggu"),NULL,fancyPattern)) {
+        if (ImGui::MenuItem(_("pattern visualizer"),NULL,fancyPattern)) {
           fancyPattern=!fancyPattern;
           e->enableCommandStream(fancyPattern);
           e->getCommandStream(cmdStream);
           cmdStream.clear();
         }
-        if (ImGui::MenuItem(_L("reset layout##sggu"))) {
-          showWarning(settings.language == DIV_LANG_ENGLISH ? "Are you sure you want to reset the workspace layout?" : _L("Are you sure you want to reset the workspace layout?##sggu"),GUI_WARN_RESET_LAYOUT);
+        if (ImGui::MenuItem(_("reset layout"))) {
+          showWarning(_("Are you sure you want to reset the workspace layout?"),GUI_WARN_RESET_LAYOUT);
         }
 #ifdef IS_MOBILE
-        if (ImGui::MenuItem(_L("switch to mobile view##sggu"))) {
+        if (ImGui::MenuItem(_("switch to mobile view"))) {
           toggleMobileUI(!mobileUI);
         }
 #endif
-        if (ImGui::MenuItem(_L("user systems...##sggu"),BIND_FOR(GUI_ACTION_WINDOW_USER_PRESETS))) {
+        if (ImGui::MenuItem(_("user systems..."),BIND_FOR(GUI_ACTION_WINDOW_USER_PRESETS))) {
           userPresetsOpen=true;
         }
-        
-        if (ImGui::MenuItem(_L("settings...##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SETTINGS))) {
+        if (ImGui::MenuItem(_("settings..."),BIND_FOR(GUI_ACTION_WINDOW_SETTINGS))) {
           syncSettings();
           settingsOpen=true;
         }
         ImGui::EndMenu();
       }
-      if (ImGui::BeginMenu(settings.capitalMenuBar?_L("Window##menubar"):_L("window##menubar"))) {
-        if (ImGui::BeginMenu(_L("song##sggu"))) {
-          if (ImGui::MenuItem(_L("song comments##sggu"), BIND_FOR(GUI_ACTION_WINDOW_NOTES), notesOpen)) notesOpen = !notesOpen;
-          if (ImGui::MenuItem(_L("song information##sggu"), BIND_FOR(GUI_ACTION_WINDOW_SONG_INFO), songInfoOpen)) songInfoOpen = !songInfoOpen;
-          if (ImGui::MenuItem(_L("subsongs##sggu"), BIND_FOR(GUI_ACTION_WINDOW_SUBSONGS), subSongsOpen)) subSongsOpen = !subSongsOpen;
+      if (ImGui::BeginMenu(settings.capitalMenuBar?_("Window"):_("window"))) {
+        if (ImGui::BeginMenu(_("song"))) {
+          if (ImGui::MenuItem(_("song comments"), BIND_FOR(GUI_ACTION_WINDOW_NOTES), notesOpen)) notesOpen = !notesOpen;
+          if (ImGui::MenuItem(_("song information"), BIND_FOR(GUI_ACTION_WINDOW_SONG_INFO), songInfoOpen)) songInfoOpen = !songInfoOpen;
+          if (ImGui::MenuItem(_("subsongs"), BIND_FOR(GUI_ACTION_WINDOW_SUBSONGS), subSongsOpen)) subSongsOpen = !subSongsOpen;
           ImGui::Separator();
-          if (ImGui::MenuItem(_L("channels##sggu"),BIND_FOR(GUI_ACTION_WINDOW_CHANNELS),channelsOpen)) channelsOpen=!channelsOpen;
-          if (ImGui::MenuItem(_L("chip manager##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SYS_MANAGER),sysManagerOpen)) sysManagerOpen=!sysManagerOpen;
-          if (ImGui::MenuItem(_L("orders##sggu"),BIND_FOR(GUI_ACTION_WINDOW_ORDERS),ordersOpen)) ordersOpen=!ordersOpen;
-          if (ImGui::MenuItem(_L("pattern##sggu"),BIND_FOR(GUI_ACTION_WINDOW_PATTERN),patternOpen)) patternOpen=!patternOpen;
-          if (ImGui::MenuItem(_L("pattern manager##sggu"),BIND_FOR(GUI_ACTION_WINDOW_PAT_MANAGER),patManagerOpen)) patManagerOpen=!patManagerOpen;
-          if (ImGui::MenuItem(_L("mixer##sggu"),BIND_FOR(GUI_ACTION_WINDOW_MIXER),mixerOpen)) mixerOpen=!mixerOpen;
-          if (ImGui::MenuItem(_L("compatibility flags##sggu"),BIND_FOR(GUI_ACTION_WINDOW_COMPAT_FLAGS),compatFlagsOpen)) compatFlagsOpen=!compatFlagsOpen;
+          if (ImGui::MenuItem(_("channels"),BIND_FOR(GUI_ACTION_WINDOW_CHANNELS),channelsOpen)) channelsOpen=!channelsOpen;
+          if (ImGui::MenuItem(_("chip manager"),BIND_FOR(GUI_ACTION_WINDOW_SYS_MANAGER),sysManagerOpen)) sysManagerOpen=!sysManagerOpen;
+          if (ImGui::MenuItem(_("orders"),BIND_FOR(GUI_ACTION_WINDOW_ORDERS),ordersOpen)) ordersOpen=!ordersOpen;
+          if (ImGui::MenuItem(_("pattern"),BIND_FOR(GUI_ACTION_WINDOW_PATTERN),patternOpen)) patternOpen=!patternOpen;
+          if (ImGui::MenuItem(_("pattern manager"),BIND_FOR(GUI_ACTION_WINDOW_PAT_MANAGER),patManagerOpen)) patManagerOpen=!patManagerOpen;
+          if (ImGui::MenuItem(_("mixer"),BIND_FOR(GUI_ACTION_WINDOW_MIXER),mixerOpen)) mixerOpen=!mixerOpen;
+          if (ImGui::MenuItem(_("compatibility flags"),BIND_FOR(GUI_ACTION_WINDOW_COMPAT_FLAGS),compatFlagsOpen)) compatFlagsOpen=!compatFlagsOpen;
           ImGui::EndMenu();
         }
-        if (ImGui::BeginMenu(_L("assets##sggu"))) {
+        if (ImGui::BeginMenu(_("assets"))) {
           if (settings.unifiedDataView) {
-            if (ImGui::MenuItem(_L("assets##sggu"), BIND_FOR(GUI_ACTION_WINDOW_INS_LIST), insListOpen)) insListOpen = !insListOpen;
+            if (ImGui::MenuItem(_("assets"), BIND_FOR(GUI_ACTION_WINDOW_INS_LIST), insListOpen)) insListOpen = !insListOpen;
           } else {
-            if (ImGui::MenuItem(_L("instruments##sggu"), BIND_FOR(GUI_ACTION_WINDOW_INS_LIST), insListOpen)) insListOpen = !insListOpen;
-            if (ImGui::MenuItem(_L("samples##sggu"), BIND_FOR(GUI_ACTION_WINDOW_SAMPLE_LIST), sampleListOpen)) sampleListOpen = !sampleListOpen;
-            if (ImGui::MenuItem(_L("wavetables##sggu"), BIND_FOR(GUI_ACTION_WINDOW_WAVE_LIST), waveListOpen)) waveListOpen = !waveListOpen;
+            if (ImGui::MenuItem(_("instruments"), BIND_FOR(GUI_ACTION_WINDOW_INS_LIST), insListOpen)) insListOpen = !insListOpen;
+            if (ImGui::MenuItem(_("samples"), BIND_FOR(GUI_ACTION_WINDOW_SAMPLE_LIST), sampleListOpen)) sampleListOpen = !sampleListOpen;
+            if (ImGui::MenuItem(_("wavetables"), BIND_FOR(GUI_ACTION_WINDOW_WAVE_LIST), waveListOpen)) waveListOpen = !waveListOpen;
           }
           ImGui::Separator();
-          if (ImGui::MenuItem(_L("instrument editor##sggu"), BIND_FOR(GUI_ACTION_WINDOW_INS_EDIT), insEditOpen)) insEditOpen = !insEditOpen;
-          if (ImGui::MenuItem(_L("sample editor##sggu"), BIND_FOR(GUI_ACTION_WINDOW_SAMPLE_EDIT), sampleEditOpen)) sampleEditOpen = !sampleEditOpen;
-          if (ImGui::MenuItem(_L("wavetable editor##sggu"), BIND_FOR(GUI_ACTION_WINDOW_WAVE_EDIT), waveEditOpen)) waveEditOpen = !waveEditOpen;
+          if (ImGui::MenuItem(_("instrument editor"), BIND_FOR(GUI_ACTION_WINDOW_INS_EDIT), insEditOpen)) insEditOpen = !insEditOpen;
+          if (ImGui::MenuItem(_("sample editor"), BIND_FOR(GUI_ACTION_WINDOW_SAMPLE_EDIT), sampleEditOpen)) sampleEditOpen = !sampleEditOpen;
+          if (ImGui::MenuItem(_("wavetable editor"), BIND_FOR(GUI_ACTION_WINDOW_WAVE_EDIT), waveEditOpen)) waveEditOpen = !waveEditOpen;
           ImGui::EndMenu();
         }
-        if (ImGui::BeginMenu(_L("visualizers##sggu"))) {
-          if (ImGui::MenuItem(_L("oscilloscope (master)##sggu"),BIND_FOR(GUI_ACTION_WINDOW_OSCILLOSCOPE),oscOpen)) oscOpen=!oscOpen;
-          if (ImGui::MenuItem(_L("oscilloscope (per-channel)##sggu"),BIND_FOR(GUI_ACTION_WINDOW_CHAN_OSC),chanOscOpen)) chanOscOpen=!chanOscOpen;
-          if (ImGui::MenuItem(_L("oscilloscope (X-Y)##sggu"),BIND_FOR(GUI_ACTION_WINDOW_XY_OSC),xyOscOpen)) xyOscOpen=!xyOscOpen;
-          if (ImGui::MenuItem(_L("volume meter##sggu"),BIND_FOR(GUI_ACTION_WINDOW_VOL_METER),volMeterOpen)) volMeterOpen=!volMeterOpen;
+        if (ImGui::BeginMenu(_("visualizers"))) {
+          if (ImGui::MenuItem(_("oscilloscope (master)"),BIND_FOR(GUI_ACTION_WINDOW_OSCILLOSCOPE),oscOpen)) oscOpen=!oscOpen;
+          if (ImGui::MenuItem(_("oscilloscope (per-channel)"),BIND_FOR(GUI_ACTION_WINDOW_CHAN_OSC),chanOscOpen)) chanOscOpen=!chanOscOpen;
+          if (ImGui::MenuItem(_("oscilloscope (X-Y)"),BIND_FOR(GUI_ACTION_WINDOW_XY_OSC),xyOscOpen)) xyOscOpen=!xyOscOpen;
+          if (ImGui::MenuItem(_("volume meter"),BIND_FOR(GUI_ACTION_WINDOW_VOL_METER),volMeterOpen)) volMeterOpen=!volMeterOpen;
           ImGui::EndMenu();
         }
-        if (ImGui::BeginMenu(_L("tempo##sggu"))) {
-          if (ImGui::MenuItem(_L("clock##sggu"),BIND_FOR(GUI_ACTION_WINDOW_CLOCK),clockOpen)) clockOpen=!clockOpen;
-          if (ImGui::MenuItem(_L("grooves##sggu"),BIND_FOR(GUI_ACTION_WINDOW_GROOVES),groovesOpen)) groovesOpen=!groovesOpen;
-          if (ImGui::MenuItem(_L("speed##sggu"),BIND_FOR(GUI_ACTION_WINDOW_SPEED),speedOpen)) speedOpen=!speedOpen;
+        if (ImGui::BeginMenu(_("tempo"))) {
+          if (ImGui::MenuItem(_("clock"),BIND_FOR(GUI_ACTION_WINDOW_CLOCK),clockOpen)) clockOpen=!clockOpen;
+          if (ImGui::MenuItem(_("grooves"),BIND_FOR(GUI_ACTION_WINDOW_GROOVES),groovesOpen)) groovesOpen=!groovesOpen;
+          if (ImGui::MenuItem(_("speed"),BIND_FOR(GUI_ACTION_WINDOW_SPEED),speedOpen)) speedOpen=!speedOpen;
           ImGui::EndMenu();
         }
-        if (ImGui::BeginMenu(_L("debug##sggu"))) {
-          if (ImGui::MenuItem(_L("log viewer##sggu"),BIND_FOR(GUI_ACTION_WINDOW_LOG),logOpen)) logOpen=!logOpen;
-          if (ImGui::MenuItem(_L("register view##sggu"),BIND_FOR(GUI_ACTION_WINDOW_REGISTER_VIEW),regViewOpen)) regViewOpen=!regViewOpen;
-          if (ImGui::MenuItem(_L("statistics##sggu"),BIND_FOR(GUI_ACTION_WINDOW_STATS),statsOpen)) statsOpen=!statsOpen;
-          if (ImGui::MenuItem(_L("memory composition##sggu"),BIND_FOR(GUI_ACTION_WINDOW_MEMORY),memoryOpen)) memoryOpen=!memoryOpen;
+        if (ImGui::BeginMenu(_("debug"))) {
+          if (ImGui::MenuItem(_("log viewer"),BIND_FOR(GUI_ACTION_WINDOW_LOG),logOpen)) logOpen=!logOpen;
+          if (ImGui::MenuItem(_("register view"),BIND_FOR(GUI_ACTION_WINDOW_REGISTER_VIEW),regViewOpen)) regViewOpen=!regViewOpen;
+          if (ImGui::MenuItem(_("statistics"),BIND_FOR(GUI_ACTION_WINDOW_STATS),statsOpen)) statsOpen=!statsOpen;
+          if (ImGui::MenuItem(_("memory composition"),BIND_FOR(GUI_ACTION_WINDOW_MEMORY),memoryOpen)) memoryOpen=!memoryOpen;
           ImGui::EndMenu();
         }
         ImGui::Separator();
-        if (ImGui::MenuItem(_L("effect list##sggu"),BIND_FOR(GUI_ACTION_WINDOW_EFFECT_LIST),effectListOpen)) effectListOpen=!effectListOpen;
-        if (ImGui::MenuItem(_L("play/edit controls##sggu"),BIND_FOR(GUI_ACTION_WINDOW_EDIT_CONTROLS),editControlsOpen)) editControlsOpen=!editControlsOpen;
-        if (ImGui::MenuItem(_L("piano/input pad##sggu"),BIND_FOR(GUI_ACTION_WINDOW_PIANO),pianoOpen)) pianoOpen=!pianoOpen;
-        if (spoilerOpen) if (ImGui::MenuItem(_L("spoiler##sggu"),NULL,spoilerOpen)) spoilerOpen=!spoilerOpen;
+        if (ImGui::MenuItem(_("effect list"),BIND_FOR(GUI_ACTION_WINDOW_EFFECT_LIST),effectListOpen)) effectListOpen=!effectListOpen;
+        if (ImGui::MenuItem(_("play/edit controls"),BIND_FOR(GUI_ACTION_WINDOW_EDIT_CONTROLS),editControlsOpen)) editControlsOpen=!editControlsOpen;
+        if (ImGui::MenuItem(_("piano/input pad"),BIND_FOR(GUI_ACTION_WINDOW_PIANO),pianoOpen)) pianoOpen=!pianoOpen;
+        if (spoilerOpen) if (ImGui::MenuItem(_("spoiler"),NULL,spoilerOpen)) spoilerOpen=!spoilerOpen;
 
         ImGui::EndMenu();
       }
-      if (ImGui::BeginMenu(settings.capitalMenuBar?_L("Help##menubar"):_L("help##menubar"))) {
-        if (ImGui::MenuItem(_L("effect list##sggu"),BIND_FOR(GUI_ACTION_WINDOW_EFFECT_LIST),effectListOpen)) effectListOpen=!effectListOpen;
-        if (ImGui::MenuItem(_L("debug menu##sggu"),BIND_FOR(GUI_ACTION_WINDOW_DEBUG))) debugOpen=!debugOpen;
-        if (ImGui::MenuItem(_L("inspector##sggu"))) inspectorOpen=!inspectorOpen;
-        if (ImGui::MenuItem(_L("panic##sggu"),BIND_FOR(GUI_ACTION_PANIC))) e->syncReset();
-        if (ImGui::MenuItem(_L("about...##sggu"),BIND_FOR(GUI_ACTION_WINDOW_ABOUT))) {
+      if (ImGui::BeginMenu(settings.capitalMenuBar?_("Help"):_("help"))) {
+        if (ImGui::MenuItem(_("effect list"),BIND_FOR(GUI_ACTION_WINDOW_EFFECT_LIST),effectListOpen)) effectListOpen=!effectListOpen;
+        if (ImGui::MenuItem(_("debug menu"),BIND_FOR(GUI_ACTION_WINDOW_DEBUG))) debugOpen=!debugOpen;
+        if (ImGui::MenuItem(_("inspector"))) inspectorOpen=!inspectorOpen;
+        if (ImGui::MenuItem(_("panic"),BIND_FOR(GUI_ACTION_PANIC))) e->syncReset();
+        if (ImGui::MenuItem(_("about..."),BIND_FOR(GUI_ACTION_WINDOW_ABOUT))) {
           aboutOpen=true;
           aboutScroll=0;
         }
@@ -4586,31 +4563,31 @@ bool FurnaceGUI::loop() {
 
         DivGroovePattern gp=e->getSpeeds();
         if (gp.len==2) {
-          info=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Speed %d:%d" : _L("| Speed %d:%d##sggu")),gp.val[0],gp.val[1]);
+          info=fmt::sprintf(_("| Speed %d:%d"),gp.val[0],gp.val[1]);
         } else if (gp.len==1) {
-          info=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Speed %d" : _L("| Speed %d##sggu")),gp.val[0]);
+          info=fmt::sprintf(_("| Speed %d"),gp.val[0]);
         } else {
-          info=settings.language == DIV_LANG_ENGLISH ? "| Groove" : _L("| Groove##sggu");
+          info=_("| Groove");
         }
 
-        info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? " @ %gHz (%g BPM) " : _L(" @ %gHz (%g BPM) ##sggu")),e->getCurHz(),calcBPM(e->getSpeeds(),e->getCurHz(),e->getVirtualTempoN(),e->getVirtualTempoD()));
+        info+=fmt::sprintf(_(" @ %gHz (%g BPM) "),e->getCurHz(),calcBPM(e->getSpeeds(),e->getCurHz(),e->getVirtualTempoN(),e->getVirtualTempoD()));
 
         if (settings.orderRowsBase) {
-          info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Order %.2X/%.2X " : _L("| Order %.2X/%.2X ##sggu")),playOrder,e->curSubSong->ordersLen-1);
+          info+=fmt::sprintf(_("| Order %.2X/%.2X "),playOrder,e->curSubSong->ordersLen-1);
         } else {
-          info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Order %d/%d " : _L("| Order %d/%d ##sggu")),playOrder,e->curSubSong->ordersLen-1);
+          info+=fmt::sprintf(_("| Order %d/%d "),playOrder,e->curSubSong->ordersLen-1);
         }
 
         if (settings.patRowsBase) {
-          info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Row %.2X/%.2X " : _L("| Row %.2X/%.2X ##sggu")),oldRow,e->curSubSong->patLen);
+          info+=fmt::sprintf(_("| Row %.2X/%.2X "),oldRow,e->curSubSong->patLen);
         } else {
-          info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "| Row %d/%d " : _L("| Row %d/%d ##sggu")),oldRow,e->curSubSong->patLen);
+          info+=fmt::sprintf(_("| Row %d/%d "),oldRow,e->curSubSong->patLen);
         }
 
-        info+="| ";
+        info+=_("| ");
 
         if (totalSeconds==0x7fffffff) {
-          info+=(settings.language == DIV_LANG_ENGLISH ? "Don't you have anything better to do?" : _L("Don't you have anything better to do?##sggu"));
+          info+=_("Don't you have anything better to do?");
         } else {
           if (totalSeconds>=86400) {
             int totalDays=totalSeconds/86400;
@@ -4619,23 +4596,15 @@ bool FurnaceGUI::loop() {
             int totalMonths=totalDays/30;
             totalDays%=30;
 
-            if (totalYears>1) {
-              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d years " : _LP("%d years ##sggu", totalYears)),totalYears);
-            } else if (totalYears) {
-              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d year " : _LP("%d years ##sggu", totalYears)),totalYears);
-            }
-
-            if (totalMonths>1) {
-              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d months " : _LP("%d months ##sggu", totalMonths)),totalMonths);
-            } else if (totalMonths) {
-              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d month " : _LP("%d months ##sggu", totalMonths)),totalMonths);
-            }
-
-            if (totalDays>1) {
-              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d days " : _LP("%d days ##sggu", totalDays)),totalDays);
-            } else {
-              info+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "%d day " : _LP("%d days ##sggu", totalDays)),totalDays);
-            }
+#ifdef HAVE_LOCALE
+            info+=fmt::sprintf(ngettext("%d year ","%d years ",totalYears),totalYears);
+            info+=fmt::sprintf(ngettext("%d month ","%d months ",totalMonths),totalMonths);
+            info+=fmt::sprintf(ngettext("%d day ","%d days ",totalDays),totalDays);
+#else
+            info+=fmt::sprintf(_GN("%d year ","%d years ",totalYears),totalYears);
+            info+=fmt::sprintf(_GN("%d month ","%d months ",totalMonths),totalMonths);
+            info+=fmt::sprintf(_GN("%d day ","%d days ",totalDays),totalDays);
+#endif
           }
 
           if (totalSeconds>=3600) {
@@ -4654,13 +4623,13 @@ bool FurnaceGUI::loop() {
             case 0: // note
               if (p->data[cursor.y][0]>0) {
                 if (p->data[cursor.y][0]==100) {
-                  info=fmt::sprintf(_L("Note off (cut)##sggu"));
+                  info=fmt::sprintf(_("Note off (cut)"));
                 } else if (p->data[cursor.y][0]==101) {
-                  info=fmt::sprintf(_L("Note off (release)##sggu"));
+                  info=fmt::sprintf(_("Note off (release)"));
                 } else if (p->data[cursor.y][0]==102) {
-                  info=fmt::sprintf(_L("Macro release only##sggu"));
+                  info=fmt::sprintf(_("Macro release only"));
                 } else {
-                  info=fmt::sprintf(_L("Note on: %s##sggu"),noteName(p->data[cursor.y][0],p->data[cursor.y][1]));
+                  info=fmt::sprintf(_("Note on: %s"),noteName(p->data[cursor.y][0],p->data[cursor.y][1]));
                 }
                 hasInfo=true;
               }
@@ -4668,10 +4637,10 @@ bool FurnaceGUI::loop() {
             case 1: // instrument
               if (p->data[cursor.y][2]>-1) {
                 if (p->data[cursor.y][2]>=(int)e->song.ins.size()) {
-                  info=fmt::sprintf(_L("Ins %d: <invalid>##sggu"),p->data[cursor.y][2]);
+                  info=fmt::sprintf(_("Ins %d: <invalid>"),p->data[cursor.y][2]);
                 } else {
                   DivInstrument* ins=e->getIns(p->data[cursor.y][2]);
-                  info=fmt::sprintf(_L("Ins %d: %s##sggu"),p->data[cursor.y][2],ins->name);
+                  info=fmt::sprintf(_("Ins %d: %s"),p->data[cursor.y][2],ins->name);
                 }
                 hasInfo=true;
               }
@@ -4680,10 +4649,10 @@ bool FurnaceGUI::loop() {
               if (p->data[cursor.y][3]>-1) {
                 int maxVol=e->getMaxVolumeChan(cursor.xCoarse);
                 if (maxVol<1 || p->data[cursor.y][3]>maxVol) {
-                  info=fmt::sprintf(_L("Set volume: %d (%.2X, INVALID!)##sggu"),p->data[cursor.y][3],p->data[cursor.y][3]);
+                  info=fmt::sprintf(_("Set volume: %d (%.2X, INVALID!)"),p->data[cursor.y][3],p->data[cursor.y][3]);
                 } else {
                   float realVol=e->mapVelocity(cursor.xCoarse,(float)p->data[cursor.y][3]/(float)maxVol);
-                  info=fmt::sprintf(_L("Set volume: %d (%.2X, %d%%)##sggu"),p->data[cursor.y][3],p->data[cursor.y][3],(int)(realVol*100.0f/(float)maxVol));
+                  info=fmt::sprintf(_("Set volume: %d (%.2X, %d%%)"),p->data[cursor.y][3],p->data[cursor.y][3],(int)(realVol*100.0f/(float)maxVol));
                 }
                 hasInfo=true;
               }
@@ -4705,7 +4674,7 @@ bool FurnaceGUI::loop() {
       }
       ImGui::PopStyleColor();
       if (modified) {
-        ImGui::Text(_L("| modified##sggu"));
+        ImGui::Text(_("| modified"));
       }
       ImGui::EndMainMenuBar();
     }
@@ -4871,10 +4840,10 @@ bool FurnaceGUI::loop() {
 
 #ifndef NFD_NON_THREADED
     if (fileDialog->isOpen() && settings.sysFileDialog) {
-      ImGui::OpenPopup("System File Dialog Pending");
+      ImGui::OpenPopup(_("System File Dialog Pending"));
     }
 
-    if (ImGui::BeginPopupModal("System File Dialog Pending",NULL,ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoBackground|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoMove)) {
+    if (ImGui::BeginPopupModal(_("System File Dialog Pending"),NULL,ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoBackground|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoMove)) {
       if (!fileDialog->isOpen()) {
         ImGui::CloseCurrentPopup();
       }
@@ -4946,6 +4915,7 @@ bool FurnaceGUI::loop() {
           workingDirZSMExport=fileDialog->getPath()+DIR_SEPARATOR_STR;
           break;
         case GUI_FILE_EXPORT_ROM:
+        case GUI_FILE_EXPORT_TIUNA:
         case GUI_FILE_EXPORT_TEXT:
         case GUI_FILE_EXPORT_CMDSTREAM:
           workingDirROMExport=fileDialog->getPath()+DIR_SEPARATOR_STR;
@@ -5001,12 +4971,12 @@ bool FurnaceGUI::loop() {
       }
       if (fileDialog->isError()) {
 #if defined(_WIN32) || defined(__APPLE__)
-        showError(settings.language == DIV_LANG_ENGLISH ? "there was an error in the file dialog! you may want to report this issue to:\nhttps://github.com/tildearrow/furnace/issues\ncheck the Log Viewer (window > log viewer) for more information.\n\nfor now please disable the system file picker in Settings > General." : _L("there was an error in the file dialog! you may want to report this issue to:\nhttps://github.com/tildearrow/furnace/issues\ncheck the Log Viewer (window > log viewer) for more information.\n\nfor now please disable the system file picker in Settings > General.##sggu"));
+        showError(_("there was an error in the file dialog! you may want to report this issue to:\nhttps://github.com/tildearrow/furnace/issues\ncheck the Log Viewer (window > log viewer) for more information.\n\nfor now please disable the system file picker in Settings > General."));
 #else
 #ifdef ANDROID
-        showError(settings.language == DIV_LANG_ENGLISH ? "can't do anything without Storage permissions!" : _L("can't do anything without Storage permissions!##sggu"));
+        showError(_("can't do anything without Storage permissions!"));
 #else
-        showError(settings.language == DIV_LANG_ENGLISH ? "Zenity/KDialog not available!\nplease install one of these, or disable the system file picker in Settings > General." : _L("Zenity/KDialog not available!\nplease install one of these, or disable the system file picker in Settings > General.##sggu"));
+        showError(_("Zenity/KDialog not available!\nplease install one of these, or disable the system file picker in Settings > General."));
 #endif
 #endif
       }
@@ -5088,13 +5058,13 @@ bool FurnaceGUI::loop() {
             case GUI_FILE_OPEN:
             case GUI_FILE_OPEN_BACKUP:
               if (load(copyOfName)>0) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while loading file! (%s)" : _L("Error while loading file! (%s)##sggu2"),lastError));
+                showError(fmt::sprintf(_("Error while loading file! (%s)"),lastError));
               }
               break;
             case GUI_FILE_SAVE: {
               bool saveWasSuccessful=true;
               if (save(copyOfName,0)>0) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sggu1"),lastError));
+                showError(fmt::sprintf(_("Error while saving file! (%s)"),lastError));
                 saveWasSuccessful=false;
               }
               if (saveWasSuccessful && postWarnAction!=GUI_WARN_GENERIC) {
@@ -5110,7 +5080,7 @@ bool FurnaceGUI::loop() {
                     break;
                   case GUI_WARN_OPEN_DROP:
                     if (load(nextFile)>0) {
-                      showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while loading file! (%s)" : _L("Error while loading file! (%s)##sggu3"),lastError));
+                      showError(fmt::sprintf(_("Error while loading file! (%s)"),lastError));
                     }
                     nextFile="";
                     break;
@@ -5129,13 +5099,13 @@ bool FurnaceGUI::loop() {
             case GUI_FILE_SAVE_DMF:
               logD("saving: %s",copyOfName.c_str());
               if (save(copyOfName,26)>0) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sggu2"),lastError));
+                showError(fmt::sprintf(_("Error while saving file! (%s)"),lastError));
               }
               break;
             case GUI_FILE_SAVE_DMF_LEGACY:
               logD("saving: %s",copyOfName.c_str());
               if (save(copyOfName,24)>0) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sggu3"),lastError));
+                showError(fmt::sprintf(_("Error while saving file! (%s)"),lastError));
               }
               break;
             case GUI_FILE_INS_SAVE:
@@ -5148,7 +5118,7 @@ bool FurnaceGUI::loop() {
             case GUI_FILE_INS_SAVE_DMP:
               if (curIns>=0 && curIns<(int)e->song.ins.size()) {
                 if (!e->song.ins[curIns]->saveDMP(copyOfName.c_str())) {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "error while saving instrument! only the following instrument types are supported:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS" : "error while saving instrument! only the following instrument types are supported:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS##sggu");
+                  showError(_("error while saving instrument! only the following instrument types are supported:\n- FM (OPN)\n- SN76489/Sega PSG\n- Game Boy\n- PC Engine\n- NES\n- C64\n- FM (OPLL)\n- FDS"));
                 } else {
                   pushRecentSys(copyOfName.c_str());
                 }
@@ -5197,7 +5167,7 @@ bool FurnaceGUI::loop() {
               }
               break;
             case GUI_FILE_SAMPLE_OPEN: {
-              String errs = (settings.language == DIV_LANG_ENGLISH ? "there were some errors while loading samples:\n" : _L("there were some errors while loading samples:\n#sggu"));
+              String errs=_("there were some errors while loading samples:\n");
               bool warn=false;
               for (String i: fileDialog->getFileName()) {
                 DivSample* s=e->sampleFromFile(i.c_str());
@@ -5242,7 +5212,7 @@ bool FurnaceGUI::loop() {
                   });
                   updateSampleTex=true;
                 } else {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "...but you haven't selected a sample!" : _L("...but you haven't selected a sample!##sggu0"));
+                  showError(_("...but you haven't selected a sample!"));
                   delete s;
                 }
               }
@@ -5257,7 +5227,7 @@ bool FurnaceGUI::loop() {
             case GUI_FILE_SAMPLE_SAVE:
               if (curSample>=0 && curSample<(int)e->song.sample.size()) {
                 if (!e->song.sample[curSample]->save(copyOfName.c_str())) {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "could not save sample! open Log Viewer for more information." : _L("could not save sample! open Log Viewer for more information.##sggu0"));
+                  showError(_("could not save sample! open Log Viewer for more information."));
                 } else {
                   pushRecentSys(copyOfName.c_str());
                 }
@@ -5266,7 +5236,7 @@ bool FurnaceGUI::loop() {
             case GUI_FILE_SAMPLE_SAVE_RAW:
               if (curSample>=0 && curSample<(int)e->song.sample.size()) {
                 if (!e->song.sample[curSample]->saveRaw(copyOfName.c_str())) {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "could not save sample! open Log Viewer for more information." : _L("could not save sample! open Log Viewer for more information.##sggu1"));
+                  showError(_("could not save sample! open Log Viewer for more information."));
                 } else {
                   pushRecentSys(copyOfName.c_str());
                 }
@@ -5285,13 +5255,13 @@ bool FurnaceGUI::loop() {
               std::vector<DivInstrument*> instruments;
               bool ask=false;
               bool warn=false;
-              String warns = (settings.language == DIV_LANG_ENGLISH ? "there were some warnings/errors while loading instruments:\n" : _L("there were some warnings/errors while loading instruments:\n#sggu"));
+              String warns=_("there were some warnings/errors while loading instruments:\n");
               int sampleCountBefore=e->song.sampleLen;
               for (String i: fileDialog->getFileName()) {
                 std::vector<DivInstrument*> insTemp=e->instrumentFromFile(i.c_str(),true,settings.readInsNames);
                 if (insTemp.empty()) {
                   warn=true;
-                  warns+=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "> %s: cannot load instrument! (%s)\n" : _L("> %s: cannot load instrument! (%s)\n#sggu")),i,_L(e->getLastError().c_str()));
+                  warns+=fmt::sprintf(_("> %s: cannot load instrument! (%s)\n"),i,e->getLastError());
                 } else if (!e->getWarnings().empty()) {
                   warn=true;
                   warns+=fmt::sprintf("> %s:\n%s\n",i,e->getWarnings());
@@ -5309,13 +5279,13 @@ bool FurnaceGUI::loop() {
                   if (fileDialog->getFileName().size()>1) {
                     showError(warns);
                   } else {
-                    showError(settings.language == DIV_LANG_ENGLISH ? "cannot load instrument! (" : _L("cannot load instrument! (##sggu")+e->getLastError()+")");
+                    showError(fmt::sprintf(_("cannot load instrument! (%s)"),e->getLastError()));
                   }
                 } else {
                   showWarning(warns,GUI_WARN_GENERIC);
                 }
               } else if (instruments.empty()) {
-                showError(settings.language == DIV_LANG_ENGLISH ? "congratulations! you managed to load nothing.\nyou are entitled to a bug report." : _L("congratulations! you managed to load nothing.\nyou are entitled to a bug report.##sggu"));
+                showError(_("congratulations! you managed to load nothing.\nyou are entitled to a bug report."));
               }
               if (!instruments.empty()) {
                 if (ask) { // ask which instruments to load
@@ -5356,21 +5326,19 @@ bool FurnaceGUI::loop() {
                   if (curIns>=0 && curIns<(int)e->song.ins.size()) {
                     *e->song.ins[curIns]=*instruments[0];
                   } else {
-                    showError(settings.language == DIV_LANG_ENGLISH ? "...but you haven't selected an instrument!" : _L("...but you haven't selected an instrument!##sggu0"));
+                    showError(_("...but you haven't selected an instrument!"));
                   }
                   for (DivInstrument* i: instruments) {
                     delete i;
                   }
                 }
               } else {
-                String temp = (settings.language == DIV_LANG_ENGLISH ? "cannot load instrument! (" : _L("cannot load instrument! (##sggu"));
-                String errerr = _L(e->getLastError().c_str());
-                showError(temp + errerr + ")");
+                showError(fmt::sprintf(_("cannot load instrument! (%s)"),e->getLastError()));
               }
               break;
             }
             case GUI_FILE_WAVE_OPEN: {
-              String errs = (settings.language == DIV_LANG_ENGLISH ? "there were some errors while loading wavetables:\n" : _L("there were some errors while loading wavetables:\n##sggu"));
+              String errs=_("there were some errors while loading wavetables:\n");
               bool warn=false;
               for (String i: fileDialog->getFileName()) {
                 DivWavetable* wave=e->waveFromFile(i.c_str());
@@ -5379,8 +5347,7 @@ bool FurnaceGUI::loop() {
                     warn=true;
                     errs+=fmt::sprintf("- %s: %s\n",i,e->getLastError());
                   } else {
-                    String wave_err = (settings.language == DIV_LANG_ENGLISH ? "cannot load wavetable! (" : _L("cannot load wavetable! (##sggu"));
-                    showError(wave_err+e->getLastError()+")");
+                    showError(fmt::sprintf(_("cannot load wavetable! (%s)"),e->getLastError()));
                   }
                 } else {
                   int waveCount=-1;
@@ -5390,8 +5357,7 @@ bool FurnaceGUI::loop() {
                       warn=true;
                       errs+=fmt::sprintf("- %s: %s\n",i,e->getLastError());
                     } else {
-                      String wave_err = (settings.language == DIV_LANG_ENGLISH ? "cannot load wavetable! (" : _L("cannot load wavetable! (##sggu"));
-                      showError(wave_err+e->getLastError()+")");
+                      showError(fmt::sprintf(_("cannot load wavetable! (%s)"),e->getLastError()));
                     }
                   } else {
                     if (settings.selectAssetOnLoad) {
@@ -5448,8 +5414,7 @@ bool FurnaceGUI::loop() {
             case GUI_FILE_WAVE_OPEN_REPLACE: {
               DivWavetable* wave=e->waveFromFile(copyOfName.c_str());
               if (wave==NULL) {
-                String wave_err = (settings.language == DIV_LANG_ENGLISH ? "cannot load wavetable! (" : _L("cannot load wavetable! (##sggu"));
-                showError(wave_err+e->getLastError()+")");
+                showError(fmt::sprintf(_("cannot load wavetable! (%s)"),e->getLastError()));
               } else {
                 if (curWave>=0 && curWave<(int)e->song.wave.size()) {
                   e->lockEngine([this,wave]() {
@@ -5457,27 +5422,7 @@ bool FurnaceGUI::loop() {
                     MARK_MODIFIED;
                   });
                 } else {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "...but you haven't selected a wavetable!" : _L("...but you haven't selected a wavetable!##sggu"));
-                }
-                delete wave;
-              }
-              break;
-            }
-            case GUI_FILE_LOCAL_WAVE_OPEN_REPLACE: {
-              DivWavetable* wave=e->waveFromFile(copyOfName.c_str());
-              if (wave==NULL) {
-                String wave_err = (settings.language == DIV_LANG_ENGLISH ? "cannot load wavetable! (" : _L("cannot load wavetable! (##sggu"));
-                showError(wave_err+e->getLastError()+")");
-              } else {
-                if (curWave>=0 && curWave<(int)e->song.wave.size()) {
-                  e->lockEngine([this,wave]() {
-                    DivInstrument* ins = e->song.ins[curIns];
-                    *ins->std.local_waves[curLocalWave] = *wave;
-                    //*e->song.wave[curWave]=*wave;
-                    MARK_MODIFIED;
-                  });
-                } else {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "...but you haven't selected a wavetable!" : _L("...but you haven't selected a wavetable!##sggu"));
+                  showError(_("...but you haven't selected a wavetable!"));
                 }
                 delete wave;
               }
@@ -5492,7 +5437,7 @@ bool FurnaceGUI::loop() {
                   fclose(f);
                   pushRecentSys(copyOfName.c_str());
                 } else {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "could not open file!" : _L("could not open file!##sggu"));
+                  showError(_("could not open file!"));
                 }
                 w->finish();
                 delete w;
@@ -5500,7 +5445,7 @@ bool FurnaceGUI::loop() {
                   showWarning(e->getWarnings(),GUI_WARN_GENERIC);
                 }
               } else {
-                showError(fmt::sprintf("could not write VGM! (%s)",e->getLastError()));
+                showError(fmt::sprintf(_("could not write VGM! (%s)"),e->getLastError()));
               }
               break;
             }
@@ -5513,7 +5458,7 @@ bool FurnaceGUI::loop() {
                   fclose(f);
                   pushRecentSys(copyOfName.c_str());
                 } else {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "could not open file!" : _L("could not open file!##sggu"));
+                  showError(_("could not open file!"));
                 }
                 w->finish();
                 delete w;
@@ -5521,13 +5466,33 @@ bool FurnaceGUI::loop() {
                   showWarning(e->getWarnings(),GUI_WARN_GENERIC);
                 }
               } else {
-                String export_err = settings.language == DIV_LANG_ENGLISH ? "Could not write ZSM! (%s)" : _L("Could not write ZSM! (%s)##sggu");
-                showError(fmt::sprintf(export_err,e->getLastError()));
+                showError(fmt::sprintf(_("Could not write ZSM! (%s)"),e->getLastError()));
+              }
+              break;
+            }
+            case GUI_FILE_EXPORT_TIUNA: {
+              SafeWriter* w=e->saveTiuna(willExport,asmBaseLabel.c_str(),tiunaFirstBankSize,tiunaOtherBankSize);
+              if (w!=NULL) {
+                FILE* f=ps_fopen(copyOfName.c_str(),"wb");
+                if (f!=NULL) {
+                  fwrite(w->getFinalBuf(),1,w->size(),f);
+                  fclose(f);
+                  pushRecentSys(copyOfName.c_str());
+                } else {
+                  showError("could not open file!");
+                }
+                w->finish();
+                delete w;
+                if (!e->getWarnings().empty()) {
+                  showWarning(e->getWarnings(),GUI_WARN_GENERIC);
+                }
+              } else {
+                showError(fmt::sprintf("Could not write TIunA! (%s)",e->getLastError()));
               }
               break;
             }
             case GUI_FILE_EXPORT_ROM:
-              showError(settings.language == DIV_LANG_ENGLISH ? "Coming soon!" : _L("Coming soon!##sggu"));
+              showError(_("Coming soon!"));
               break;
             case GUI_FILE_EXPORT_TEXT: {
               SafeWriter* w=e->saveText(false);
@@ -5538,7 +5503,7 @@ bool FurnaceGUI::loop() {
                   fclose(f);
                   pushRecentSys(copyOfName.c_str());
                 } else {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "could not open file!" : _L("could not open file!##sggu"));
+                  showError(_("could not open file!"));
                 }
                 w->finish();
                 delete w;
@@ -5546,8 +5511,7 @@ bool FurnaceGUI::loop() {
                   showWarning(e->getWarnings(),GUI_WARN_GENERIC);
                 }
               } else {
-                String export_err = settings.language == DIV_LANG_ENGLISH ? "could not write text! (%s)" : _L("could not write text! (%s)##sggu");
-                showError(fmt::sprintf(export_err,e->getLastError()));
+                showError(fmt::sprintf(_("could not write text! (%s)"),e->getLastError()));
               }
               break;
             }
@@ -5560,7 +5524,7 @@ bool FurnaceGUI::loop() {
                   fclose(f);
                   pushRecentSys(copyOfName.c_str());
                 } else {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "could not open file!" : _L("could not open file!##sggu"));
+                  showError(_("could not open file!"));
                 }
                 w->finish();
                 delete w;
@@ -5568,80 +5532,7 @@ bool FurnaceGUI::loop() {
                   showWarning(e->getWarnings(),GUI_WARN_GENERIC);
                 }
               } else {
-                String export_err = settings.language == DIV_LANG_ENGLISH ? "could not write command stream! (%s)" : _L("could not write command stream! (%s)##sggu");
-                showError(fmt::sprintf(export_err,e->getLastError()));
-              }
-              break;
-            }
-            case GUI_FILE_EXPORT_FUR: {
-              SafeWriter* w=e->saveFur(false,settings.newPatternFormat, true);
-              if (w!=NULL) {
-                FILE* f=ps_fopen(copyOfName.c_str(),"wb");
-                if (f!=NULL) {
-                  fwrite(w->getFinalBuf(),1,w->size(),f);
-                  fclose(f);
-                  pushRecentSys(copyOfName.c_str());
-                } else {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "could not open file!" : _L("could not open file!##sggu"));
-                }
-                w->finish();
-                delete w;
-                if (!e->getWarnings().empty()) {
-                  showWarning(e->getWarnings(),GUI_WARN_GENERIC);
-                }
-              } else {
-                String export_err = settings.language == DIV_LANG_ENGLISH ? "could not write tildearrow version Furnace module! (%s)" : _L("could not write tildearrow version Furnace module! (%s)##sggu");
-                showError(fmt::sprintf(export_err,e->getLastError()));
-              }
-              break;
-            }
-            case GUI_FILE_EXPORT_FZT: {
-              SafeWriter* w=e->saveFZT();
-              if (w!=NULL) {
-                FILE* f=ps_fopen(copyOfName.c_str(),"wb");
-                if (f!=NULL) {
-                  fwrite(w->getFinalBuf(),1,w->size(),f);
-                  fclose(f);
-                  pushRecentSys(copyOfName.c_str());
-                } else {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "could not open file!" : _L("could not open file!##sggu"));
-                }
-                w->finish();
-                delete w;
-                if (!e->getWarnings().empty()) {
-                  showWarning(e->getWarnings(),GUI_WARN_GENERIC);
-                }
-              } else {
-                String export_err = settings.language == DIV_LANG_ENGLISH ? "could not write FZT module!" : _L("could not write FZT module!##sggu");
-                showError(fmt::sprintf("%s\n%s",export_err,e->getLastError()));
-              }
-              if (!e->getWarnings().empty()) {
-                  showWarning(e->getWarnings(), GUI_WARN_GENERIC);
-              }
-              break;
-            }
-            case GUI_FILE_EXPORT_T85: {
-              SafeWriter* w=e->saveT85(t85_loop, t85_trailingTicks);
-              if (w!=NULL) {
-                FILE* f=ps_fopen(copyOfName.c_str(),"wb");
-                if (f!=NULL) {
-                  fwrite(w->getFinalBuf(),1,w->size(),f);
-                  fclose(f);
-                  pushRecentSys(copyOfName.c_str());
-                } else {
-                  showError(settings.language == DIV_LANG_ENGLISH ? "could not open file!" : _L("could not open file!##sggu"));
-                }
-                w->finish();
-                delete w;
-                if (!e->getWarnings().empty()) {
-                  showWarning(e->getWarnings(),GUI_WARN_GENERIC);
-                }
-              } else {
-                String export_err = settings.language == DIV_LANG_ENGLISH ? "could not write ATTiny85APU register dump!" : _L("could not write ATTiny85APU register dump!##sggu");
-                showError(fmt::sprintf("%s\n%s",export_err,e->getLastError()));
-              }
-              if (!e->getWarnings().empty()) {
-                  showWarning(e->getWarnings(), GUI_WARN_GENERIC);
+                showError(fmt::sprintf(_("could not write command stream! (%s)"),e->getLastError()));
               }
               break;
             }
@@ -5665,12 +5556,12 @@ bool FurnaceGUI::loop() {
               break;
             case GUI_FILE_IMPORT_USER_PRESETS:
               if (!loadUserPresets(false,copyOfName,true)) {
-                showError(settings.language == DIV_LANG_ENGLISH ? "could not import user presets!" : _L("could not import user presets!##sggu"));
+                showError(_("could not import user presets!"));
               }
               break;
             case GUI_FILE_IMPORT_USER_PRESETS_REPLACE:
               if (!loadUserPresets(false,copyOfName,false)) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "could not import user presets! (%s)" : _L("could not import user presets! (%s)##sggu"),strerror(errno)));
+                showError(fmt::sprintf(_("could not import user presets! (%s)"),strerror(errno)));
               }
               break;
             case GUI_FILE_IMPORT_CONFIG:
@@ -5687,7 +5578,7 @@ bool FurnaceGUI::loop() {
               break;
             case GUI_FILE_EXPORT_USER_PRESETS:
               if (!saveUserPresets(false,copyOfName)) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "could not import user presets! (%s)" : _L("could not import user presets! (%s)##sggu"),strerror(errno)));
+                showError(fmt::sprintf(_("could not import user presets! (%s)"),strerror(errno)));
               }
               break;
             case GUI_FILE_EXPORT_CONFIG:
@@ -5704,14 +5595,14 @@ bool FurnaceGUI::loop() {
               break;
             case GUI_FILE_CMDSTREAM_OPEN:
               if (loadStream(copyOfName)>0) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while loading file! (%s)" : _L("Error while loading file! (%s)##sggu4"),lastError));
+                showError(fmt::sprintf(_("Error while loading file! (%s)"),lastError));
               }
               break;
             case GUI_FILE_TEST_OPEN:
-              showWarning(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "You opened: %s" : _L("You opened: %s##sggu"),copyOfName),GUI_WARN_GENERIC);
+              showWarning(fmt::sprintf(_("You opened: %s"),copyOfName),GUI_WARN_GENERIC);
               break;
             case GUI_FILE_TEST_OPEN_MULTI: {
-              String msg = (settings.language == DIV_LANG_ENGLISH ? "You opened:" : _L("You opened:##sggu"));
+              String msg=_("You opened:");
               for (String i: fileDialog->getFileName()) {
                 msg+=fmt::sprintf("\n- %s",i);
               }
@@ -5719,7 +5610,7 @@ bool FurnaceGUI::loop() {
               break;
             }
             case GUI_FILE_TEST_SAVE:
-              showWarning(fmt::sprintf(_L("You saved: %s"),copyOfName),GUI_WARN_GENERIC);
+              showWarning(fmt::sprintf(_("You saved: %s"),copyOfName),GUI_WARN_GENERIC);
               break;
           }
           curFileDialog=GUI_FILE_OPEN;
@@ -5735,23 +5626,22 @@ bool FurnaceGUI::loop() {
 
     if (warnQuit) {
       warnQuit=false;
-      ImGui::OpenPopup("Warning###Warning");
+      ImGui::OpenPopup(_("Warning"));
     }
 
     if (displayError) {
       displayError=false;
-      ImGui::OpenPopup("Error###Error");
+      ImGui::OpenPopup(_("Error"));
     }
 
     if (displayPendingIns) {
       displayPendingIns=false;
-      insBankSearchQuery="";
-      ImGui::OpenPopup("Select Instrument###Select Instrument");
+      ImGui::OpenPopup(_("Select Instrument"));
     }
 
     if (displayPendingRawSample) {
       displayPendingRawSample=false;
-      ImGui::OpenPopup("Import Raw Sample###Import Raw Sample");
+      ImGui::OpenPopup(_("Import Raw Sample"));
     }
 
     if (displayInsTypeList) {
@@ -5771,7 +5661,7 @@ bool FurnaceGUI::loop() {
 
     if (displayExporting) {
       displayExporting=false;
-      ImGui::OpenPopup("Rendering...###Rendering...");
+      ImGui::OpenPopup(_("Rendering..."));
     }
 
     if (displayNew) {
@@ -5794,7 +5684,7 @@ bool FurnaceGUI::loop() {
         cursor=SelectionPoint();
         updateWindowTitle();
       } else {
-        ImGui::OpenPopup("New Song###New Song");
+        ImGui::OpenPopup(_("New Song"));
       }
     }
 
@@ -5804,12 +5694,12 @@ bool FurnaceGUI::loop() {
       paletteFirstFrame=true;
       curPaletteChoice=0;
       displayPalette=false;
-      ImGui::OpenPopup("Command Palette");
+      ImGui::OpenPopup(_("Command Palette"));
     }
 
     if (displayExport) {
       displayExport=false;
-      ImGui::OpenPopup("Export###Export");
+      ImGui::OpenPopup(_("Export"));
     }
 
     if (displayEditString) {
@@ -5824,10 +5714,10 @@ bool FurnaceGUI::loop() {
 
     MEASURE_BEGIN(popup);
 
-    centerNextWindow("Rendering...###Rendering...",canvasW,canvasH);
-    if (ImGui::BeginPopupModal(_L("Rendering...###Rendering..."),NULL,ImGuiWindowFlags_AlwaysAutoResize)) {
-      ImGui::Text(_L("Please wait...##sggu"));
-      if (ImGui::Button(_L("Abort##sggu"))) {
+    centerNextWindow(_("Rendering..."),canvasW,canvasH);
+    if (ImGui::BeginPopupModal(_("Rendering..."),NULL,ImGuiWindowFlags_AlwaysAutoResize)) {
+      ImGui::Text(_("Please wait..."));
+      if (ImGui::Button(_("Abort"))) {
         if (e->haltAudioFile()) {
           ImGui::CloseCurrentPopup();
         }
@@ -5842,7 +5732,7 @@ bool FurnaceGUI::loop() {
     ImVec2 newSongMinSize=mobileUI?ImVec2(canvasW-(portrait?0:(60.0*dpiScale)),canvasH-60.0*dpiScale):ImVec2(400.0f*dpiScale,200.0f*dpiScale);
     ImVec2 newSongMaxSize=ImVec2(canvasW-((mobileUI && !portrait)?(60.0*dpiScale):0),canvasH-(mobileUI?(60.0*dpiScale):0));
     ImGui::SetNextWindowSizeConstraints(newSongMinSize,newSongMaxSize);
-    if (ImGui::BeginPopupModal(_L("New Song###New Song"),NULL,ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoScrollWithMouse|ImGuiWindowFlags_NoScrollbar)) {
+    if (ImGui::BeginPopupModal(_("New Song"),NULL,ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoScrollWithMouse|ImGuiWindowFlags_NoScrollbar)) {
       ImGui::SetWindowPos(ImVec2(((canvasW)-ImGui::GetWindowSize().x)*0.5,((canvasH)-ImGui::GetWindowSize().y)*0.5));
       if (ImGui::GetWindowSize().x<newSongMinSize.x || ImGui::GetWindowSize().y<newSongMinSize.y) {
         ImGui::SetWindowSize(newSongMinSize,ImGuiCond_Always);
@@ -5854,213 +5744,237 @@ bool FurnaceGUI::loop() {
     ImVec2 wsize=ImVec2(canvasW*0.9,canvasH*0.4);
     ImGui::SetNextWindowPos(ImVec2((canvasW-wsize.x)*0.5,50*dpiScale));
     ImGui::SetNextWindowSize(wsize,ImGuiCond_Always);
-    if (ImGui::BeginPopup("Command Palette",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings)) {
+    if (ImGui::BeginPopup(_("Command Palette"),ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings)) {
       drawPalette();
       ImGui::EndPopup();
     }
 
-    if (ImGui::BeginPopupModal(_L("Export###Export"),NULL,ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoScrollWithMouse|ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_AlwaysAutoResize)) {
+    if (ImGui::BeginPopupModal(_("Export"),NULL,ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoScrollWithMouse|ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_AlwaysAutoResize)) {
       ImGui::SetWindowPos(ImVec2(((canvasW)-ImGui::GetWindowSize().x)*0.5,((canvasH)-ImGui::GetWindowSize().y)*0.5));
       drawExport();
       ImGui::EndPopup();
     }
 
-    centerNextWindow("Error###Error",canvasW,canvasH);
-    if (ImGui::BeginPopupModal(_L("Error###Error"),NULL,ImGuiWindowFlags_AlwaysAutoResize)) {
-      ImGui::TextNoHashHide("%s",errorString.c_str());
-      if (ImGui::Button(_L("OK##sggu0"))) {
+    centerNextWindow(_("Error"),canvasW,canvasH);
+    if (ImGui::BeginPopupModal(_("Error"),NULL,ImGuiWindowFlags_AlwaysAutoResize)) {
+      ImGui::Text(_("%s"),errorString.c_str());
+      if (ImGui::Button(_("OK"))) {
         ImGui::CloseCurrentPopup();
       }
       ImGui::EndPopup();
     }
 
-    centerNextWindow("Warning###Warning",canvasW,canvasH);
-    if (ImGui::BeginPopupModal(_L("Warning###Warning"),NULL,ImGuiWindowFlags_AlwaysAutoResize)) {
-      ImGui::TextNoHashHide("%s",warnString.c_str());
+    centerNextWindow(_("Warning"),canvasW,canvasH);
+    if (ImGui::BeginPopupModal(_("Warning"),NULL,ImGuiWindowFlags_AlwaysAutoResize)) {
+      ImGui::Text("%s",warnString.c_str());
       switch (warnAction) {
         case GUI_WARN_QUIT:
-          if (ImGui::Button(_L("Yes##sggu0"))) {
+          if (ImGui::Button(_("Yes"))) {
             ImGui::CloseCurrentPopup();
             if (curFileName=="" || curFileName.find(backupPath)==0 || e->song.version>=0xff00) {
               openFileDialog(GUI_FILE_SAVE);
               postWarnAction=GUI_WARN_QUIT;
             } else {
               if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sggu"),lastError));
+                showError(fmt::sprintf(_("Error while saving file! (%s)"),lastError));
               } else {
                 quit=true;
               }
             }
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu8"))) {
+          if (ImGui::Button(_("No"))) {
             ImGui::CloseCurrentPopup();
             quit=true;
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("Cancel##sggu4")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+          if (ImGui::Button(_("Cancel")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_NEW:
-          if (ImGui::Button(_L("Yes##sggu7"))) {
+          if (ImGui::Button(_("Yes"))) {
             ImGui::CloseCurrentPopup();
             if (curFileName=="" || curFileName.find(backupPath)==0 || e->song.version>=0xff00) {
               openFileDialog(GUI_FILE_SAVE);
               postWarnAction=GUI_WARN_NEW;
             } else {
               if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sggu"),lastError));
+                showError(fmt::sprintf(_("Error while saving file! (%s)"),lastError));
               } else {
                 displayNew=true;
               }
             }
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu9"))) {
+          if (ImGui::Button(_("No"))) {
             ImGui::CloseCurrentPopup();
             displayNew=true;
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("Cancel##sggu5")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+          if (ImGui::Button(_("Cancel")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_OPEN:
-          if (ImGui::Button(_L("Yes##sggu8"))) {
+          if (ImGui::Button(_("Yes"))) {
             ImGui::CloseCurrentPopup();
             if (curFileName=="" || curFileName.find(backupPath)==0 || e->song.version>=0xff00) {
               openFileDialog(GUI_FILE_SAVE);
               postWarnAction=GUI_WARN_OPEN;
             } else {
               if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sggu"),lastError));
+                showError(fmt::sprintf(_("Error while saving file! (%s)"),lastError));
               } else {
                 openFileDialog(GUI_FILE_OPEN);
               }
             }
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu10"))) {
+          if (ImGui::Button(_("No"))) {
             ImGui::CloseCurrentPopup();
             openFileDialog(GUI_FILE_OPEN);
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("Cancel##sggu6")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+          if (ImGui::Button(_("Cancel")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+            ImGui::CloseCurrentPopup();
+          }
+          break;
+        case GUI_WARN_CV:
+          if (ImGui::Button(_("Yes"))) {
+            ImGui::CloseCurrentPopup();
+            if (curFileName=="" || curFileName.find(backupPath)==0 || e->song.version>=0xff00) {
+              openFileDialog(GUI_FILE_SAVE);
+              postWarnAction=GUI_WARN_CV;
+            } else {
+              if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
+                showError(fmt::sprintf(_("Error while saving file! (%s)"),lastError));
+              } else {
+                cvOpen=true;
+              }
+            }
+          }
+          ImGui::SameLine();
+          if (ImGui::Button(_("No"))) {
+            ImGui::CloseCurrentPopup();
+            cvOpen=true;
+          }
+          ImGui::SameLine();
+          if (ImGui::Button(_("Cancel")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_OPEN_BACKUP:
-          if (ImGui::Button(_L("Yes##sggu9"))) {
+          if (ImGui::Button(_("Yes"))) {
             ImGui::CloseCurrentPopup();
             if (curFileName=="" || curFileName.find(backupPath)==0 || e->song.version>=0xff00) {
               openFileDialog(GUI_FILE_SAVE);
               postWarnAction=GUI_WARN_OPEN_BACKUP;
             } else {
               if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : _L("Error while saving file! (%s)##sggu"),lastError));
+                showError(fmt::sprintf(_("Error while saving file! (%s)"),lastError));
               } else {
                 openFileDialog(GUI_FILE_OPEN_BACKUP);
               }
             }
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu11"))) {
+          if (ImGui::Button(_("No"))) {
             ImGui::CloseCurrentPopup();
             openFileDialog(GUI_FILE_OPEN_BACKUP);
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("Cancel##sggu7")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+          if (ImGui::Button(_("Cancel")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_OPEN_DROP:
-          if (ImGui::Button(_L("Yes##sggu10"))) {
+          if (ImGui::Button(_("Yes"))) {
             ImGui::CloseCurrentPopup();
             if (curFileName=="" || curFileName.find(backupPath)==0 || e->song.version>=0xff00) {
               openFileDialog(GUI_FILE_SAVE);
               postWarnAction=GUI_WARN_OPEN_DROP;
             } else {
               if (save(curFileName,e->song.isDMF?e->song.version:0)>0) {
-                showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while saving file! (%s)" : "Error while saving file! (%s)",lastError));
+                showError(fmt::sprintf(_("Error while saving file! (%s)"),lastError));
                 nextFile="";
               } else {
                 if (load(nextFile)>0) {
-                  showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while loading file! (%s)" : _L("Error while loading file! (%s)##sggu5"),lastError));
+                  showError(fmt::sprintf(_("Error while loading file! (%s)"),lastError));
                 }
                 nextFile="";
               }
             }
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu12"))) {
+          if (ImGui::Button(_("No"))) {
             ImGui::CloseCurrentPopup();
             if (load(nextFile)>0) {
-              showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Error while loading file! (%s)" : _L("Error while loading file! (%s)##sggu6"),lastError));
+              showError(fmt::sprintf(_("Error while loading file! (%s)"),lastError));
             }
             nextFile="";
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("Cancel##sggu8")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+          if (ImGui::Button(_("Cancel")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
             ImGui::CloseCurrentPopup();
             nextFile="";
           }
           break;
         case GUI_WARN_RESET_LAYOUT:
-          if (ImGui::Button(_L("Yes##sggu11"))) {
+          if (ImGui::Button(_("Yes"))) {
             ImGui::CloseCurrentPopup();
             if (!mobileUI) {
               ImGui::LoadIniSettingsFromMemory(defaultLayout);
               if (!ImGui::SaveIniSettingsToDisk(finalLayoutPath,true)) {
-                reportError(fmt::sprintf(_L("could NOT save layout! %s##sggu"),strerror(errno)));
+                reportError(fmt::sprintf(_("could NOT save layout! %s"),strerror(errno)));
               }
             }
             settingsChanged=true;
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu0"))) {
+          if (ImGui::Button(_("No"))) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_RESET_KEYBINDS:
-          if (ImGui::Button(_L("Yes##sggu1"))) {
+          if (ImGui::Button(_("Yes"))) {
             ImGui::CloseCurrentPopup();
             resetKeybinds();
             settingsChanged=true;
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu1"))) {
+          if (ImGui::Button(_("No"))) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_RESET_COLORS:
-          if (ImGui::Button(_L("Yes##sggu2"))) {
+          if (ImGui::Button(_("Yes"))) {
             ImGui::CloseCurrentPopup();
             resetColors();
             applyUISettings(false);
             settingsChanged=true;
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu2"))) {
+          if (ImGui::Button(_("No"))) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_CLOSE_SETTINGS:
-          if (ImGui::Button(_L("Yes##sggu3"))) {
+          if (ImGui::Button(_("Yes"))) {
             ImGui::CloseCurrentPopup();
             settingsOpen=false;
             willCommit=true;
             settingsChanged=false;
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu3"))) {
+          if (ImGui::Button(_("No"))) {
             ImGui::CloseCurrentPopup();
             settingsOpen=false;
             syncSettings();
             settingsChanged=false;
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("Cancel##sggu0")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+          if (ImGui::Button(_("Cancel")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
             ImGui::CloseCurrentPopup();
           }
           break;
@@ -6073,17 +5987,17 @@ bool FurnaceGUI::loop() {
             ImGui::TableNextColumn();
             ImGui::PushFont(headFont);
             ImGui::AlignTextToFramePadding();
-            ImGui::Text(_L("Erasing##sggu"));
+            ImGui::Text(_("Erasing"));
             ImGui::PopFont();
 
-            if (ImGui::Button(_L("All subsongs##sggu"))) {
+            if (ImGui::Button(_("All subsongs"))) {
               stop();
               e->clearSubSongs();
               curOrder=0;
               MARK_MODIFIED;
               ImGui::CloseCurrentPopup();
             }
-            if (ImGui::Button(_L("Current subsong##sggu"))) {
+            if (ImGui::Button(_("Current subsong"))) {
               stop();
               e->lockEngine([this]() {
                 e->curSubSong->clearData();
@@ -6093,7 +6007,7 @@ bool FurnaceGUI::loop() {
               MARK_MODIFIED;
               ImGui::CloseCurrentPopup();
             }
-            if (ImGui::Button(_L("Orders##sggu"))) {
+            if (ImGui::Button(_("Orders"))) {
               stop();
               e->lockEngine([this]() {
                 memset(e->curOrders->ord,0,DIV_MAX_CHANS*DIV_MAX_PATTERNS);
@@ -6104,7 +6018,7 @@ bool FurnaceGUI::loop() {
               MARK_MODIFIED;
               ImGui::CloseCurrentPopup();
             }
-            if (ImGui::Button(_L("Pattern##sggu"))) {
+            if (ImGui::Button(_("Pattern"))) {
               stop();
               e->lockEngine([this]() {
                 for (int i=0; i<e->getTotalChannelCount(); i++) {
@@ -6119,7 +6033,7 @@ bool FurnaceGUI::loop() {
               MARK_MODIFIED;
               ImGui::CloseCurrentPopup();
             }
-            if (ImGui::Button(_L("Instruments##sggu"))) {
+            if (ImGui::Button(_("Instruments"))) {
               stop();
               e->lockEngine([this]() {
                 e->song.clearInstruments();
@@ -6128,7 +6042,7 @@ bool FurnaceGUI::loop() {
               MARK_MODIFIED;
               ImGui::CloseCurrentPopup();
             }
-            if (ImGui::Button(_L("Wavetables##sggu"))) {
+            if (ImGui::Button(_("Wavetables"))) {
               stop();
               e->lockEngine([this]() {
                 e->song.clearWavetables();
@@ -6137,7 +6051,7 @@ bool FurnaceGUI::loop() {
               MARK_MODIFIED;
               ImGui::CloseCurrentPopup();
             }
-            if (ImGui::Button(_L("Samples##sggu"))) {
+            if (ImGui::Button(_("Samples"))) {
               stop();
               e->lockEngine([this]() {
                 e->song.clearSamples();
@@ -6150,10 +6064,10 @@ bool FurnaceGUI::loop() {
             ImGui::TableNextColumn();
             ImGui::PushFont(headFont);
             ImGui::AlignTextToFramePadding();
-            ImGui::Text(_L("Optimization##sggu"));
+            ImGui::Text(_("Optimization"));
             ImGui::PopFont();
 
-            if (ImGui::Button(_L("De-duplicate patterns##sggu"))) {
+            if (ImGui::Button(_("De-duplicate patterns"))) {
               stop();
               e->lockEngine([this]() {
                 e->curSubSong->optimizePatterns();
@@ -6162,20 +6076,20 @@ bool FurnaceGUI::loop() {
               MARK_MODIFIED;
               ImGui::CloseCurrentPopup();
             }
-            if (ImGui::Button(_L("Remove unused instruments##sggu"))) {
+            if (ImGui::Button(_("Remove unused instruments"))) {
               stop();
               e->delUnusedIns();
               MARK_MODIFIED;
               ImGui::CloseCurrentPopup();
             }
             /*
-            if (ImGui::Button("Remove unused wavetables")) {
+            if (ImGui::Button(_("Remove unused wavetables"))) {
               stop();
               e->delUnusedWaves();
               MARK_MODIFIED;
               ImGui::CloseCurrentPopup();
             }*/
-            if (ImGui::Button(_L("Remove unused samples##sggu"))) {
+            if (ImGui::Button(_("Remove unused samples"))) {
               stop();
               e->delUnusedSamples();
               MARK_MODIFIED;
@@ -6192,7 +6106,7 @@ bool FurnaceGUI::loop() {
             ImGui::TableNextRow();
             ImGui::TableNextColumn();
             ImGui::TableNextColumn();
-            if (ImGui::Button(_L("Never mind! Cancel##sggu1")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+            if (ImGui::Button(_("Never mind! Cancel")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
               ImGui::CloseCurrentPopup();
             }
             ImGui::TableNextColumn();
@@ -6200,7 +6114,7 @@ bool FurnaceGUI::loop() {
           }
           break;
         case GUI_WARN_SUBSONG_DEL:
-          if (ImGui::Button(_L("Yes##sggu4"))) {
+          if (ImGui::Button(_("Yes"))) {
             if (e->removeSubSong(e->getCurrentSubSong())) {
               undoHist.clear();
               redoHist.clear();
@@ -6217,12 +6131,12 @@ bool FurnaceGUI::loop() {
             ImGui::CloseCurrentPopup();
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu4"))) {
+          if (ImGui::Button(_("No"))) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_SYSTEM_DEL:
-          if (ImGui::Button(_L("Yes##sggu5"))) {
+          if (ImGui::Button(_("Yes"))) {
             e->removeSystem(sysToDelete,preserveChanPos);
             if (e->song.autoSystem) {
               autoDetectSystem();
@@ -6232,35 +6146,35 @@ bool FurnaceGUI::loop() {
             ImGui::CloseCurrentPopup();
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu5"))) {
+          if (ImGui::Button(_("No"))) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_CLEAR_HISTORY:
-          if (ImGui::Button(_L("Yes##sggu6"))) {
+          if (ImGui::Button(_("Yes"))) {
             recentFile.clear();
             ImGui::CloseCurrentPopup();
           }
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu6"))) {
+          if (ImGui::Button(_("No"))) {
             ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_RESET_CONFIG:
           pushDestColor();
-          if (ImGui::Button(_L("Yes##sggu6"))) {
-              e->factoryReset();
-              quit = true;
-              ImGui::CloseCurrentPopup();
+          if (ImGui::Button(_("Yes"))) {
+            e->factoryReset();
+            quit=true;
+            ImGui::CloseCurrentPopup();
           }
           popDestColor();
           ImGui::SameLine();
-          if (ImGui::Button(_L("No##sggu6"))) {
-              ImGui::CloseCurrentPopup();
+          if (ImGui::Button(_("No"))) {
+            ImGui::CloseCurrentPopup();
           }
           break;
         case GUI_WARN_GENERIC:
-          if (ImGui::Button(_L("OK##sggu1"))) {
+          if (ImGui::Button(_("OK"))) {
             ImGui::CloseCurrentPopup();
           }
           break;
@@ -6271,16 +6185,16 @@ bool FurnaceGUI::loop() {
     if (ImGui::BeginPopup("InsTypeList",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoSavedSettings)) {
       char temp[1024];
       if (displayInsTypeListMakeInsSample==-2) {
-        ImGui::Text(_L("Drum kit mode:##sggu"));
-        if (ImGui::RadioButton(_L("Normal##sggu"),!makeDrumkitMode)) {
+        ImGui::Text(_("Drum kit mode:"));
+        if (ImGui::RadioButton(_("Normal"),!makeDrumkitMode)) {
           makeDrumkitMode=false;
         }
-        if (ImGui::RadioButton(_L("12 samples per octave##sggu"),makeDrumkitMode)) {
+        if (ImGui::RadioButton(_("12 samples per octave"),makeDrumkitMode)) {
           makeDrumkitMode=true;
         }
 
         if (!makeDrumkitMode) {
-          ImGui::Text(_L("Starting octave##sggu"));
+          ImGui::Text(_("Starting octave"));
           ImGui::SameLine();
           if (ImGui::InputInt("##DKOctave",&makeDrumkitOctave,1,3)) {
             if (makeDrumkitOctave<0) makeDrumkitOctave=0;
@@ -6296,11 +6210,11 @@ bool FurnaceGUI::loop() {
           // create ins
           curIns=e->addInstrument(-1,i);
           if (curIns==-1) {
-            showError(settings.language == DIV_LANG_ENGLISH ? "too many instruments!" : _L("too many instruments!##sggu"));
+            showError(_("too many instruments!"));
           } else {
             if (displayInsTypeListMakeInsSample==-2) {
               e->song.ins[curIns]->type=i;
-              e->song.ins[curIns]->name="Drum Kit";
+              e->song.ins[curIns]->name=_("Drum Kit");
               e->song.ins[curIns]->amiga.useNoteMap=true;
               if (i!=DIV_INS_AMIGA) e->song.ins[curIns]->amiga.useSample=true;
 
@@ -6366,12 +6280,9 @@ bool FurnaceGUI::loop() {
         {
           // create wave
           curWave=e->addWave();
-          if (curWave==-1) 
-          {
-            showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sggu"));
-          } 
-          else 
-          {
+          if (curWave==-1) {
+            showError(_("too many wavetables!"));
+          } else {
             e->song.wave[curWave]->len=i.width;
             e->song.wave[curWave]->max=i.height-1;
             for (int j=0; j<i.width; j++) {
@@ -6420,52 +6331,24 @@ bool FurnaceGUI::loop() {
 
     // TODO:
     // - replace instrument
-    centerNextWindow("Select Instrument###Select Instrument",canvasW,canvasH);
-    if (ImGui::BeginPopupModal(_L("Select Instrument###Select Instrument"),NULL,ImGuiWindowFlags_AlwaysAutoResize)) 
-    {
+    centerNextWindow(_("Select Instrument"),canvasW,canvasH);
+    if (ImGui::BeginPopupModal(_("Select Instrument"),NULL,ImGuiWindowFlags_AlwaysAutoResize)) {
       bool quitPlease=false;
-      if (pendingInsSingle) 
-      {
-        ImGui::Text(_L("this is an instrument bank! select which one to use:##sggu"));
-      } 
-      else 
-      {
+      if (pendingInsSingle) {
+        ImGui::Text(_("this is an instrument bank! select which one to use:"));
+      } else {
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("this is an instrument bank! select which ones to load:##sggu"));
+        ImGui::Text(_("this is an instrument bank! select which ones to load:"));
         ImGui::SameLine();
-        if (ImGui::Button(_L("All##sggu"))) 
-        {
-          if (insBankSearchQuery.empty())
-          {
-            for (std::pair<DivInstrument*,bool>& i: pendingIns) 
-            {
-              i.second=true;
-            }
-          }
-          else
-          {
-            for (std::pair<DivInstrument*,bool>& i: insBankSearchResults) 
-            {
-              i.second=true;
-            }
+        if (ImGui::Button(_("All"))) {
+          for (std::pair<DivInstrument*,bool>& i: pendingIns) {
+            i.second=true;
           }
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("None##sggu"))) 
-        {
-          if (insBankSearchQuery.empty())
-          {
-            for (std::pair<DivInstrument*,bool>& i: pendingIns) 
-            {
-              i.second=false;
-            }
-          }
-          else
-          {
-            for (std::pair<DivInstrument*,bool>& i: insBankSearchResults) 
-            {
-              i.second=false;
-            }
+        if (ImGui::Button(_("None"))) {
+          for (std::pair<DivInstrument*,bool>& i: pendingIns) {
+            i.second=false;
           }
         }
       }
@@ -6603,17 +6486,14 @@ bool FurnaceGUI::loop() {
       if (!pendingInsSingle) 
       {
         ImGui::BeginDisabled(!anySelected);
-        if (ImGui::Button(_L("OK##sggu2"))) 
-        {
+        if (ImGui::Button(_("OK"))) {
           quitPlease=true;
         }
         ImGui::EndDisabled();
         ImGui::SameLine();
       }
-      if (ImGui::Button(_L("Cancel##sggu2")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) 
-      {
-        for (std::pair<DivInstrument*,bool>& i: pendingIns) 
-        {
+      if (ImGui::Button(_("Cancel")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+        for (std::pair<DivInstrument*,bool>& i: pendingIns) {
           i.second=false;
         }
         quitPlease=true;
@@ -6621,20 +6501,13 @@ bool FurnaceGUI::loop() {
       if (quitPlease) 
       {
         ImGui::CloseCurrentPopup();
-        for (std::pair<DivInstrument*,bool>& i: pendingIns) 
-        {
-          if (!i.second || pendingInsSingle) 
-          {
-            if (i.second) 
-            {
-              if (curIns>=0 && curIns<(int)e->song.ins.size()) 
-              {
-                //*e->song.ins[curIns]=*i.first;
-                e->copyInstrument(e->song.ins[curIns], i.first);
-              } 
-              else 
-              {
-                showError(settings.language == DIV_LANG_ENGLISH ? "...but you haven't selected an instrument!" : _L("...but you haven't selected an instrument!##sggu1"));
+        for (std::pair<DivInstrument*,bool>& i: pendingIns) {
+          if (!i.second || pendingInsSingle) {
+            if (i.second) {
+              if (curIns>=0 && curIns<(int)e->song.ins.size()) {
+                *e->song.ins[curIns]=*i.first;
+              } else {
+                showError(_("...but you haven't selected an instrument!"));
               }
             }
             delete i.first;
@@ -6649,9 +6522,9 @@ bool FurnaceGUI::loop() {
       ImGui::EndPopup();
     }
 
-    centerNextWindow("Import Raw Sample###Import Raw Sample",canvasW,canvasH);
-    if (ImGui::BeginPopupModal(_L("Import Raw Sample###Import Raw Sample"),NULL,ImGuiWindowFlags_AlwaysAutoResize)) {
-      ImGui::Text(_L("Data type:##sggu"));
+    centerNextWindow(_("Import Raw Sample"),canvasW,canvasH);
+    if (ImGui::BeginPopupModal(_("Import Raw Sample"),NULL,ImGuiWindowFlags_AlwaysAutoResize)) {
+      ImGui::Text(_("Data type:"));
       for (int i=0; i<DIV_SAMPLE_DEPTH_MAX; i++) {
         if (sampleDepths[i]==NULL) continue;
        if (ImGui::RadioButton(sampleDepths[i],pendingRawSampleDepth==i)) pendingRawSampleDepth=i;
@@ -6663,7 +6536,7 @@ bool FurnaceGUI::loop() {
       }
 
       ImGui::AlignTextToFramePadding();
-      ImGui::Text(_L("Sample rate##sggu"));
+      ImGui::Text(_("Sample rate"));
       ImGui::SameLine();
       ImGui::SetNextItemWidth(120.0f*dpiScale);
       if (ImGui::InputInt("##RSRate",&pendingRawSampleRate,100,1000)) {
@@ -6673,17 +6546,17 @@ bool FurnaceGUI::loop() {
 
       if (pendingRawSampleDepth==DIV_SAMPLE_DEPTH_8BIT || pendingRawSampleDepth==DIV_SAMPLE_DEPTH_16BIT) {
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Channels##sggu"));
+        ImGui::Text(_("Channels"));
         ImGui::SameLine();
         ImGui::SetNextItemWidth(120.0f*dpiScale);
         if (ImGui::InputInt("##RSChans",&pendingRawSampleChannels,1,2)) {
         }
-        ImGui::Text(_L("(will be mixed down to mono)##sggu"));
-        ImGui::Checkbox(_L("Unsigned##sggu"),&pendingRawSampleUnsigned);
+        ImGui::Text(_("(will be mixed down to mono)"));
+        ImGui::Checkbox(_("Unsigned"),&pendingRawSampleUnsigned);
       }
 
       if (pendingRawSampleDepth==DIV_SAMPLE_DEPTH_16BIT) {
-        ImGui::Checkbox(_L("Big endian##sggu"),&pendingRawSampleBigEndian);
+        ImGui::Checkbox(_("Big endian"),&pendingRawSampleBigEndian);
       }
 
       if (pendingRawSampleDepth==DIV_SAMPLE_DEPTH_YMZ_ADPCM ||
@@ -6691,15 +6564,15 @@ bool FurnaceGUI::loop() {
           pendingRawSampleDepth==DIV_SAMPLE_DEPTH_ADPCM_A ||
           pendingRawSampleDepth==DIV_SAMPLE_DEPTH_ADPCM_B ||
           pendingRawSampleDepth==DIV_SAMPLE_DEPTH_VOX) {
-        ImGui::Checkbox(_L("Swap nibbles##sggu"),&pendingRawSampleSwapNibbles);
+        ImGui::Checkbox(_("Swap nibbles"),&pendingRawSampleSwapNibbles);
       }
 
       if (pendingRawSampleDepth==DIV_SAMPLE_DEPTH_8BIT) {
-        ImGui::Checkbox(_L("Swap words##sggu"),&pendingRawSampleBigEndian);
+        ImGui::Checkbox(_("Swap words"),&pendingRawSampleBigEndian);
       }
 
       if (pendingRawSampleDepth==DIV_SAMPLE_DEPTH_MULAW) {
-        ImGui::Text(_L("Encoding:##sggu"));
+        ImGui::Text(_("Encoding:"));
         ImGui::Indent();
         if (ImGui::RadioButton("G.711",pendingRawSampleSwapNibbles==0)) {
           pendingRawSampleSwapNibbles=0;
@@ -6712,10 +6585,10 @@ bool FurnaceGUI::loop() {
 
       if (pendingRawSampleDepth==DIV_SAMPLE_DEPTH_1BIT ||
           pendingRawSampleDepth==DIV_SAMPLE_DEPTH_1BIT_DPCM) {
-        ImGui::Checkbox(_L("Reverse bit order##sggu"),&pendingRawSampleSwapNibbles);
+        ImGui::Checkbox(_("Reverse bit order"),&pendingRawSampleSwapNibbles);
       }
 
-      if (ImGui::Button(_L("OK##sggu3"))) {
+      if (ImGui::Button(_("OK"))) {
         DivSample* s=e->sampleFromFileRaw(pendingRawSample.c_str(),(DivSampleDepth)pendingRawSampleDepth,pendingRawSampleChannels,pendingRawSampleBigEndian,pendingRawSampleUnsigned,pendingRawSampleSwapNibbles,pendingRawSampleRate);
         if (s==NULL) {
           showError(e->getLastError());
@@ -6732,7 +6605,7 @@ bool FurnaceGUI::loop() {
               });
               updateSampleTex=true;
             } else {
-              showError(settings.language == DIV_LANG_ENGLISH ? "...but you haven't selected a sample!" : _L("...but you haven't selected a sample!##sggu1"));
+              showError(_("...but you haven't selected a sample!"));
               delete s;
             }
           } else {
@@ -6746,7 +6619,7 @@ bool FurnaceGUI::loop() {
         ImGui::CloseCurrentPopup();
       }
       ImGui::SameLine();
-      if (ImGui::Button(_L("Cancel##sggu3")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+      if (ImGui::Button(_("Cancel")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
         ImGui::CloseCurrentPopup();
       }
       ImGui::EndPopup();
@@ -6754,7 +6627,7 @@ bool FurnaceGUI::loop() {
 
     if (ImGui::BeginPopup("EditString",ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoSavedSettings)) {
       if (editString==NULL) {
-        ImGui::Text(_L("Error! No string provided!##sggu"));
+        ImGui::Text(_("Error! No string provided!"));
       } else {
         if (displayEditString) {
           ImGui::SetItemDefaultFocus();
@@ -6764,7 +6637,7 @@ bool FurnaceGUI::loop() {
       }
       displayEditString=false;
       ImGui::SameLine();
-      if (ImGui::Button(_L("OK##sggu4")) || ImGui::IsKeyPressed(ImGuiKey_Enter,false)) {
+      if (ImGui::Button(_("OK")) || ImGui::IsKeyPressed(ImGuiKey_Enter,false)) {
         editString=NULL;
         ImGui::CloseCurrentPopup();
       }
@@ -6974,6 +6847,8 @@ bool FurnaceGUI::loop() {
         } else if (settings.disableFadeIn) {
           initialScreenWipe=0.0f;
         }
+      } else if (settings.disableFadeIn) {
+        initialScreenWipe=0.0f;
       }
     }
     
@@ -7052,7 +6927,7 @@ bool FurnaceGUI::loop() {
             if (rend) rend->destroyFontsTexture();
             if (!ImGui::GetIO().Fonts->Build()) {
               logE("error while building font atlas!");
-              showError(settings.language == DIV_LANG_ENGLISH ? "error while loading fonts! please check your settings." : _L("error while loading fonts! please check your settings.##sggu1"));
+              showError(_("error while loading fonts! please check your settings."));
               ImGui::GetIO().Fonts->Clear();
               mainFont=ImGui::GetIO().Fonts->AddFontDefault();
               patFont=mainFont;
@@ -7073,7 +6948,7 @@ bool FurnaceGUI::loop() {
     }
 
     if (fontsFailed) {
-      showError(settings.language == DIV_LANG_ENGLISH ? "it appears I couldn't load these fonts. any setting you can check?" : _L("it appears I couldn't load these fonts. any setting you can check?##sggu"));
+      showError(_("it appears I couldn't load these fonts. any setting you can check?"));
       logE("couldn't load fonts");
       ImGui::GetIO().Fonts->Clear();
       mainFont=ImGui::GetIO().Fonts->AddFontDefault();
@@ -7255,14 +7130,14 @@ bool FurnaceGUI::init() {
       settings.renderBackend="Software";
       e->setConf("renderBackend","Software");
       e->saveConf();
-      lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer!\r\nfalling back to software renderer. please restart Furnace." : _L("could not init renderer!\r\nfalling back to software renderer. please restart Furnace.##sggu")));
+      lastError=fmt::sprintf(_("could not init renderer!\nfalling back to software renderer. please restart Furnace."));
     } else if (settings.renderBackend=="SDL") {
-      lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace." : _L("could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.##sggu")),SDL_GetError());
+      lastError=fmt::sprintf(_("could not init renderer! %s\nfalling back to software renderer. please restart Furnace."),SDL_GetError());
       settings.renderBackend="Software";
       e->setConf("renderBackend","Software");
       e->saveConf();
     } else {
-      lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer!" : _L("could not init renderer!##sggu")));
+      lastError=fmt::sprintf(_("could not init renderer!"));
     }
     return false;
   }
@@ -7273,12 +7148,12 @@ bool FurnaceGUI::init() {
   sdlWin=SDL_CreateWindow("Furnace",scrX,scrY,scrW,scrH,SDL_WINDOW_RESIZABLE|SDL_WINDOW_ALLOW_HIGHDPI|(scrMax?SDL_WINDOW_MAXIMIZED:0)|(fullScreen?SDL_WINDOW_FULLSCREEN_DESKTOP:0)|rend->getWindowFlags());
   if (sdlWin==NULL) {
     const char* sdlErr=SDL_GetError();
-    lastError=fmt::sprintf("could not open window! %s",sdlErr);
+    lastError=fmt::sprintf(_("could not open window! %s"),sdlErr);
     if (settings.renderBackend!="Software" && strstr(sdlErr,"matching")!=NULL) {
       settings.renderBackend="Software";
       e->setConf("renderBackend","Software");
       e->saveConf();
-      lastError+=_L("\r\nfalling back to software renderer. please restart Furnace.##sggu");
+      lastError+=_("\nfalling back to software renderer. please restart Furnace.");
     }
     return false;
   }
@@ -7363,14 +7238,14 @@ bool FurnaceGUI::init() {
       settings.renderBackend="Software";
       e->setConf("renderBackend","Software");
       e->saveConf();
-      lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer!\r\nfalling back to software renderer. please restart Furnace." : _L("could not init renderer!\r\nfalling back to software renderer. please restart Furnace.##sggu")));
+      lastError=fmt::sprintf(_("could not init renderer!\nfalling back to software renderer. please restart Furnace."));
     } else if (settings.renderBackend=="SDL") {
-      lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace." : _L("could not init renderer! %s\r\nfalling back to software renderer. please restart Furnace.##sggu")),SDL_GetError());
+      lastError=fmt::sprintf(_("could not init renderer! %s\nfalling back to software renderer. please restart Furnace."),SDL_GetError());
       settings.renderBackend="Software";
       e->setConf("renderBackend","Software");
       e->saveConf();
     } else {
-      lastError=fmt::sprintf((settings.language == DIV_LANG_ENGLISH ? "could not init renderer!" : _L("could not init renderer!##sggu")));
+      lastError=fmt::sprintf(_("could not init renderer!"));
     }
     return false;
   }
@@ -7423,8 +7298,64 @@ bool FurnaceGUI::init() {
   ImGui::CreateContext();
   rend->initGUI(sdlWin);
 
-  locale.setLanguage((DivLang)settings.language);
-  initSystemPresets();
+  ImGuiLocEntry guiLocalization[8];
+
+  guiLocalization[0].Key=ImGuiLocKey_TableSizeOne;
+  guiLocalization[0].Text=_("Size column to fit###SizeOne");
+  guiLocalization[1].Key=ImGuiLocKey_TableSizeAllFit;
+  guiLocalization[1].Text=_("Size all columns to fit###SizeAll");
+  guiLocalization[2].Key=ImGuiLocKey_TableSizeAllDefault;
+  guiLocalization[2].Text=_("Size all columns to default###SizeAll");
+  guiLocalization[3].Key=ImGuiLocKey_TableResetOrder;
+  guiLocalization[3].Text=_("Reset order###ResetOrder");
+  guiLocalization[4].Key=ImGuiLocKey_WindowingMainMenuBar;
+  guiLocalization[4].Text=_("(Main menu bar)");
+  guiLocalization[5].Key=ImGuiLocKey_WindowingPopup;
+  guiLocalization[5].Text=_("(Popup)");
+  guiLocalization[6].Key=ImGuiLocKey_WindowingUntitled;
+  guiLocalization[6].Text=_("(Untitled)");
+  guiLocalization[7].Key=ImGuiLocKey_DockingHideTabBar;
+  guiLocalization[7].Text=_("Hide tab bar###HideTabBar");
+
+  ImGui::LocalizeRegisterEntries(guiLocalization,8);
+
+  const char* localeSettings=_("LocaleSettings: ccjk");
+  if (strlen(localeSettings)<20) {
+    logE("the LocaleSettings string is incomplete!");
+  } else {
+    localeRequiresChinese=(localeSettings[16]=='C');
+    localeRequiresChineseTrad=(localeSettings[17]=='C');
+    localeRequiresJapanese=(localeSettings[18]=='J');
+    localeRequiresKorean=(localeSettings[19]=='K');
+    if (strlen(localeSettings)>21) {
+      if (localeSettings[20]==' ') {
+        ImWchar next=0;
+        for (const char* i=&localeSettings[21]; *i; i++) {
+          if (((*i)>='0' && (*i)<='9') || ((*i)>='A' && (*i)<='F')) {
+            next<<=4;
+            if ((*i)>='0' && (*i)<='9') {
+              next|=(*i)-'0';
+            } else {
+              next|=(*i)-'A'+10;
+            }
+          } else {
+            localeExtraRanges.push_back(next);
+            next=0;
+          }
+        }
+        if (next!=0) {
+          localeExtraRanges.push_back(next);
+        }
+        localeExtraRanges.push_back(0);
+      }
+    }
+  }
+  if (!localeExtraRanges.empty()) {
+    logV("locale extra ranges:");
+    for (ImWchar i: localeExtraRanges) {
+      logV("%x",i);
+    }
+  }
 
   loadUserPresets(true);
 
@@ -7433,7 +7364,7 @@ bool FurnaceGUI::init() {
   logD("building font...");
   if (!ImGui::GetIO().Fonts->Build()) {
     logE("error while building font atlas!");
-    showError(settings.language == DIV_LANG_ENGLISH ? "error while loading fonts! please check your settings." : _L("error while loading fonts! please check your settings.##sggu2"));
+    showError(_("error while loading fonts! please check your settings."));
     ImGui::GetIO().Fonts->Clear();
     mainFont=ImGui::GetIO().Fonts->AddFontDefault();
     patFont=mainFont;
@@ -7549,13 +7480,13 @@ bool FurnaceGUI::init() {
   // initialize audio formats
   String compatFormats;
 
-  audioLoadFormats.push_back(settings.language == DIV_LANG_ENGLISH ? "compatible files" : _L("compatible files##sggu3"));
+  audioLoadFormats.push_back(_("compatible files"));
   audioLoadFormats.push_back("");
 
 #ifdef HAVE_SNDFILE
   int value=0;
   sf_command(NULL,SFC_GET_FORMAT_MAJOR_COUNT,&value,sizeof(int));
-  logV("sample formats: %d",value);
+  logV("simple formats: %d",value);
 
   for (int i=0; i<value; i++) {
     SF_FORMAT_INFO f;
@@ -7578,15 +7509,14 @@ bool FurnaceGUI::init() {
   compatFormats+="*.brr";
   audioLoadFormats[1]=compatFormats;
 
-  audioLoadFormats.push_back(settings.language == DIV_LANG_ENGLISH ? "NES DPCM data" : _L("NES DPCM data##sggu"));
+  audioLoadFormats.push_back(_("NES DPCM data"));
   audioLoadFormats.push_back("*.dmc");
 
-  audioLoadFormats.push_back(settings.language == DIV_LANG_ENGLISH ? "SNES Bit Rate Reduction" : _L("SNES Bit Rate Reduction##sggu"));
+  audioLoadFormats.push_back(_("SNES Bit Rate Reduction"));
   audioLoadFormats.push_back("*.brr");
 
-  audioLoadFormats.push_back(settings.language == DIV_LANG_ENGLISH ? "all files" : _L("all files##sggu3"));
+  audioLoadFormats.push_back(_("all files"));
   audioLoadFormats.push_back("*");
-
 
   logI("done!");
   return true;
@@ -7748,8 +7678,7 @@ void FurnaceGUI::syncState() {
 void FurnaceGUI::commitState(DivConfig& conf) {
   if (!mobileUI) {
     if (!ImGui::SaveIniSettingsToDisk(finalLayoutPath,true)) {
-      String layout_error = (settings.language == DIV_LANG_ENGLISH ? "could NOT save layout! %s" : _L("could NOT save layout! %s##sggu"));
-      reportError(fmt::sprintf("could NOT save layout! %s",strerror(errno)));
+      reportError(fmt::sprintf(_("could NOT save layout! %s"),strerror(errno)));
     }
   }
 
@@ -7951,8 +7880,8 @@ bool FurnaceGUI::finish(bool saveConfig) {
 }
 
 bool FurnaceGUI::requestQuit() {
-  if (modified) {
-    showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before quitting?" : _L("Unsaved changes! Save changes before quitting?##sggu"),GUI_WARN_QUIT);
+  if (modified && !cvOpen) {
+    showWarning(_("Unsaved changes! Save changes before quitting?"),GUI_WARN_QUIT);
   } else {
     quit=true;
   }
@@ -8024,6 +7953,9 @@ FurnaceGUI::FurnaceGUI():
   t85_trailingTicks(-1),
   drawHalt(10),
   zsmExportTickRate(60),
+  asmBaseLabel(""),
+  tiunaFirstBankSize(3072),
+  tiunaOtherBankSize(4096-48),
   macroPointSize(16),
   waveEditStyle(0),
   displayInsTypeListMakeInsSample(-1),
@@ -8090,6 +8022,10 @@ FurnaceGUI::FurnaceGUI():
   bigFont(NULL),
   headFont(NULL),
   fontRange(NULL),
+  localeRequiresJapanese(false),
+  localeRequiresChinese(false),
+  localeRequiresChineseTrad(false),
+  localeRequiresKorean(false),
   prevInsData(NULL),
   pendingLayoutImport(NULL),
   pendingLayoutImportLen(0),

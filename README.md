@@ -103,6 +103,7 @@ for other operating systems, you may [build the source](#developer-info).
   - TED used in Commodore Plus/4
   - Casio PV-1000
   - TIA used in Atari 2600
+    - including software tuning engine (TIunA)
   - POKEY used in Atari 8-bit computers
   - Dave used in Enterprise 64/128 computers
   - **Game Boy**
@@ -208,6 +209,8 @@ otherwise, you may also need the following:
 
 some Linux distributions (e.g. Ubuntu or openSUSE) will require you to install the `-dev` versions of these.
 
+having libintl is recommended for locale support, but if it isn't present, Furnace will use its own implementation.
+
 ## getting the source
 
 type the following on a terminal/console: (make sure Git is installed)
@@ -287,11 +290,13 @@ Available options:
 | Name | Default | Description |
 | :--: | :-----: | ----------- |
 | `BUILD_GUI` | `ON` | Build the tracker (disable to build only a headless player) |
+| `WITH_LOCALE` | `ON` | Enable language support |
 | `USE_RTMIDI` | `ON` | Build with MIDI support using RtMidi |
 | `USE_SDL2` | `ON` | Build with SDL2 (required to build with GUI) |
 | `USE_SNDFILE` | `ON` | Build with libsndfile (required in order to work with audio files) |
 | `USE_BACKWARD` | `ON` | Use backward-cpp to print a backtrace on crash/abort |
 | `USE_FREETYPE` | `OFF` | Build with FreeType support |
+| `USE_MOMO` | auto\*\*\* | Build a libintl implementation instead of using the system one |
 | `WITH_JACK` | auto\* | Whether to build with JACK support. Auto-detects if JACK is available |
 | `WITH_PORTAUDIO` | `ON` | Whether to build with PortAudio. |
 | `SYSTEM_FFTW` | `OFF` | Use a system-installed version of FFTW instead of the vendored one |
@@ -313,6 +318,8 @@ Available options:
 (\*) `ON` if system-installed JACK detected, otherwise `OFF`
 
 (\*\*) but consider enabling this & reporting any errors that arise from it!
+
+(\*\*\*) enabled by default if both libintl and setlocale aren't present (MSVC and Android), or on macOS
 
 ## CMake Error
 
