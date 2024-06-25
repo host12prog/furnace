@@ -2,7 +2,7 @@ name: Build furnace
 
 on:
   push:
-    branches: [master, locale]
+    branches: [master, merge-translations-TIAtune-and-stuff]
   pull_request:
     branches: master
 
