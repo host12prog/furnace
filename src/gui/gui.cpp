@@ -4660,7 +4660,7 @@ bool FurnaceGUI::loop() {
             default: // effect
               int actualCursor=((cursor.xFine+1)&(~1));
               if (p->data[cursor.y][actualCursor]>-1) {
-                info=_L(e->getEffectDesc(p->data[cursor.y][actualCursor],cursor.xCoarse,true));
+                info=_(e->getEffectDesc(p->data[cursor.y][actualCursor],cursor.xCoarse,true));
                 hasInfo=true;
               }
               break;
