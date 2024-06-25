@@ -24,6 +24,9 @@
 #include "../engine/workPool.h"
 #include "../engine/waveSynth.h"
 #include "imgui.h"
+
+#include "imgui_internal.h"
+
 #include "imgui_impl_sdl2.h"
 #include <SDL.h>
 #include <fftw3.h>
