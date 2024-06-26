@@ -19,6 +19,141 @@
 
 #include "importExport.h"
 
+void readEnvelope(SafeReader& reader, DivInstrument* ins, int env) {
+  unsigned char flags=reader.readC();
+  unsigned char numPoints=reader.readC();
+  unsigned char loopStart=reader.readC();
+  unsigned char loopEnd=reader.readC();
+  unsigned char susStart=reader.readC();
+  unsigned char susEnd=reader.readC();
+
+  if (numPoints>25) numPoints=25;
+
+  if (loopStart>=numPoints) loopStart=numPoints-1;
+  if (loopEnd>=numPoints) loopEnd=numPoints-1;
+  if (susStart>=numPoints) susStart=numPoints-1;
+  if (susEnd>=numPoints) susEnd=numPoints-1;
+
+  unsigned short pointTime[25];
+  signed char pointVal[25];
+
+  for (int i=0; i<25; i++) {
+    pointVal[i]=reader.readC();
+    pointTime[i]=reader.readS();
+  }
+
+  // x
+  reader.readC();
+
+  // don't process if there aren't any points or if the envelope is disabled
+  if (numPoints<1) return;
+  if (!(flags&1)) return;
+
+  // convert into macro, or try to
+  DivInstrumentMacro* target=NULL;
+  switch (env) {
+    case 0: // volume
+      target=&ins->std.volMacro;
+      break;
+    case 1: // panning (split later)
+      target=&ins->std.panLMacro;
+      break;
+    case 2: // pitch or cutoff
+      if (flags&128) {
+        target=&ins->std.ex1Macro; // ES5506 filter
+      } else {
+        target=&ins->std.pitchMacro;
+      }
+      break;
+  }
+  target->len=0;
+  int point=0;
+  bool pointJustBegan=true;
+  // mark loop end as end of envelope
+  if (flags&2) {
+    if (loopEnd<numPoints) numPoints=loopEnd+1;
+  }
+  for (int i=0; i<255; i++) {
+    int curPoint=MIN(point,numPoints-1);
+    int nextPoint=MIN(point+1,numPoints-1);
+    int p0=pointVal[curPoint];
+    int p1=pointVal[nextPoint];
+    while (i>pointTime[nextPoint]) {
+      point++;
+      pointJustBegan=true;
+      curPoint=MIN(point,numPoints-1);
+      nextPoint=MIN(point+1,numPoints-1);
+      p0=pointVal[curPoint];
+      p1=pointVal[nextPoint];
+      if ((point+1)>=numPoints) {
+        break;
+      }
+    }
+    if (pointJustBegan) {
+      pointJustBegan=false;
+      if (flags&2) { // loop
+        if (point==loopStart && (!(flags&4) || susStart==susEnd || loopStart>=susEnd)) {
+          target->loop=i;
+        }
+      }
+      if (flags&4) { // sustain
+        if (susStart!=susEnd) { // sustain loop
+          if (point==susStart) {
+            target->loop=i;
+          }
+        }
+        if (point==susEnd) {
+          target->rel=i;
+        }
+      }
+    }
+    if ((point+1)>=numPoints) {
+      target->len=i;
+      //target->val[i]=p0;
+      break;
+    }
+    int timeDiff=pointTime[nextPoint]-pointTime[curPoint];
+    int curTime=i-pointTime[curPoint];
+    if (timeDiff<1) timeDiff=1;
+    if (curTime<0) curTime=0;
+
+    if (env==2) {
+      if (flags&128) {
+        p0+=32;
+        p1+=32;
+        p0*=512;
+        p1*=512;
+      } else {
+        p0*=64;
+        p1*=64;
+      }
+    }
+
+    target->len=i+1;
+    target->val[i]=p0+(((p1-p0)*curTime)/timeDiff);
+  }
+
+  // split L/R
+  if (env==1) {
+    for (int i=0; i<ins->std.panLMacro.len; i++) {
+      int val=ins->std.panLMacro.val[i];
+      if (val==0) {
+        ins->std.panLMacro.val[i]=4095;
+        ins->std.panRMacro.val[i]=4095;
+      } else if (val>0) { // pan right
+        ins->std.panLMacro.val[i]=4095*pow(1.0-((double)val/64.0),0.25);
+        ins->std.panRMacro.val[i]=4095;
+      } else { // pan left
+        ins->std.panLMacro.val[i]=4095;
+        ins->std.panRMacro.val[i]=4095*pow(1.0+((double)val/64.0),0.25);
+      }
+    }
+    ins->std.panRMacro.len=ins->std.panLMacro.len;
+    ins->std.panRMacro.loop=ins->std.panLMacro.loop;
+    ins->std.panRMacro.rel=ins->std.panLMacro.rel;
+  }
+}
+
 bool DivEngine::loadIT(unsigned char* file, size_t len) {
   struct InvalidHeaderException {};
   bool success=false;
@@ -35,17 +170,20 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
 
   unsigned short patLen[256];
 
-  bool doesPitchSlide[32];
-  bool doesVibrato[32];
-  bool doesPanning[32];
-  bool doesVolSlide[32];
-  bool doesArp[32];
+  unsigned char defVol[256];
+  unsigned char noteMap[256][128];
 
-  memset(doesPitchSlide,0,32*sizeof(bool));
-  memset(doesVibrato,0,32*sizeof(bool));
-  memset(doesPanning,0,32*sizeof(bool));
-  memset(doesVolSlide,0,32*sizeof(bool));
-  memset(doesArp,0,32*sizeof(bool));
+  bool doesPitchSlide[64];
+  bool doesVibrato[64];
+  bool doesPanning[64];
+  bool doesVolSlide[64];
+  bool doesArp[64];
+
+  memset(doesPitchSlide,0,64*sizeof(bool));
+  memset(doesVibrato,0,64*sizeof(bool));
+  memset(doesPanning,0,64*sizeof(bool));
+  memset(doesVolSlide,0,64*sizeof(bool));
+  memset(doesArp,0,64*sizeof(bool));
   
   SafeReader reader=SafeReader(file,len);
   warnings="";
@@ -54,6 +192,9 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
   memset(chanVol,0,64);
   memset(orders,0,256);
   memset(patLen,0,256*sizeof(unsigned short));
+
+  memset(defVol,0,256);
+  memset(noteMap,0,256*128);
 
   try {
     DivSong ds;
@@ -93,6 +234,27 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
     unsigned short compatTracker=reader.readS();
     unsigned short flags=reader.readS();
     unsigned short special=reader.readS();
+
+    if (ds.insLen<0 || ds.insLen>256) {
+      logE("too many instruments!");
+      lastError="too many instruments";
+      delete[] file;
+      return false;
+    }
+
+    if (ds.sampleLen<0 || ds.sampleLen>256) {
+      logE("too many samples!");
+      lastError="too many samples";
+      delete[] file;
+      return false;
+    }
+
+    if (patCount>256) {
+      logE("too many patterns!");
+      lastError="too many patterns";
+      delete[] file;
+      return false;
+    }
 
     if (flags&8) {
       ds.linearPitch=2;
@@ -294,9 +456,17 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
       for (int j=0; j<120; j++) {
         ins->amiga.get_amiga_sample_map(j, true)->freq=(unsigned char)reader.readC();
         ins->amiga.get_amiga_sample_map(j, true)->map=reader.readC()-1;
+        noteMap[i][j]=ins->amiga.get_amiga_sample_map(j, true)->map;
       }
 
-      // TODO: envelopes...
+      // envelopes...
+      if (compatTracker<0x200) { // old format
+        // TODO
+      } else {
+        readEnvelope(reader,ins,0);
+        readEnvelope(reader,ins,1);
+        readEnvelope(reader,ins,2);
+      }
 
       ds.ins.push_back(ins);
     }
@@ -307,6 +477,14 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
 
       if (samplePtr[i]==0) {
         ds.sample.push_back(s);
+
+        // does the song not use instruments?
+        // create instrument then
+        if (ds.insLen==0) {
+          DivInstrument* ins=new DivInstrument;
+          ins->type=DIV_INS_ES5506;
+          ds.ins.push_back(ins);
+        }
         continue;
       }
 
@@ -335,9 +513,9 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
 
       unsigned char globalVol=reader.readC();
       unsigned char flags=reader.readC();
-      unsigned char sampleVol=reader.readC();
+      defVol[i]=reader.readC();
 
-      logV("volumes: %d %d",globalVol,sampleVol);
+      logV("volumes: %d",globalVol);
 
       s->name=reader.readString(26);
 
@@ -466,31 +644,43 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
         }
       }
 
+      // does the song not use instruments?
+      // create instrument then
+      if (ds.insLen==0) {
+        DivInstrument* ins=new DivInstrument;
+        ins->name=s->name;
+        ins->type=DIV_INS_ES5506;
+        ins->amiga.initSample=i;
+        ds.ins.push_back(ins);
+      }
+
       ds.sample.push_back(s);
     }
+
+    ds.insLen=ds.ins.size();
 
     // read patterns
     int maxChan=0;
     for (int i=0; i<patCount; i++) {
-      unsigned char effectCol[32];
-      unsigned char vibStatus[32];
-      bool vibStatusChanged[32];
-      bool vibing[32];
-      bool vibingOld[32];
-      unsigned char volSlideStatus[32];
-      bool volSlideStatusChanged[32];
-      bool volSliding[32];
-      bool volSlidingOld[32];
-      unsigned char portaStatus[32];
-      bool portaStatusChanged[32];
-      bool porting[32];
-      bool portingOld[32];
-      unsigned char portaType[32];
-      unsigned char arpStatus[32];
-      bool arpStatusChanged[32];
-      bool arping[32];
-      bool arpingOld[32];
-      bool did[32];
+      unsigned char effectCol[64];
+      unsigned char vibStatus[64];
+      bool vibStatusChanged[64];
+      bool vibing[64];
+      bool vibingOld[64];
+      unsigned char volSlideStatus[64];
+      bool volSlideStatusChanged[64];
+      bool volSliding[64];
+      bool volSlidingOld[64];
+      unsigned char portaStatus[64];
+      bool portaStatusChanged[64];
+      bool porting[64];
+      bool portingOld[64];
+      unsigned char portaType[64];
+      unsigned char arpStatus[64];
+      bool arpStatusChanged[64];
+      bool arping[64];
+      bool arpingOld[64];
+      bool did[64];
 
       if (patPtr[i]==0) continue;
 
@@ -503,25 +693,25 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
       int curRow=0;
       bool mustCommitInitial=true;
 
-      memset(effectCol,4,32);
-      memset(vibStatus,0,32);
-      memset(vibStatusChanged,0,32*sizeof(bool));
-      memset(vibing,0,32*sizeof(bool));
-      memset(vibingOld,0,32*sizeof(bool));
-      memset(volSlideStatus,0,32);
-      memset(volSlideStatusChanged,0,32*sizeof(bool));
-      memset(volSliding,0,32*sizeof(bool));
-      memset(volSlidingOld,0,32*sizeof(bool));
-      memset(portaStatus,0,32);
-      memset(portaStatusChanged,0,32*sizeof(bool));
-      memset(porting,0,32*sizeof(bool));
-      memset(portingOld,0,32*sizeof(bool));
-      memset(portaType,0,32);
-      memset(arpStatus,0,32);
-      memset(arpStatusChanged,0,32*sizeof(bool));
-      memset(arping,0,32*sizeof(bool));
-      memset(arpingOld,0,32*sizeof(bool));
-      memset(did,0,32*sizeof(bool));
+      memset(effectCol,4,64);
+      memset(vibStatus,0,64);
+      memset(vibStatusChanged,0,64*sizeof(bool));
+      memset(vibing,0,64*sizeof(bool));
+      memset(vibingOld,0,64*sizeof(bool));
+      memset(volSlideStatus,0,64);
+      memset(volSlideStatusChanged,0,64*sizeof(bool));
+      memset(volSliding,0,64*sizeof(bool));
+      memset(volSlidingOld,0,64*sizeof(bool));
+      memset(portaStatus,0,64);
+      memset(portaStatusChanged,0,64*sizeof(bool));
+      memset(porting,0,64*sizeof(bool));
+      memset(portingOld,0,64*sizeof(bool));
+      memset(portaType,0,64);
+      memset(arpStatus,0,64);
+      memset(arpStatusChanged,0,64*sizeof(bool));
+      memset(arping,0,64*sizeof(bool));
+      memset(arpingOld,0,64*sizeof(bool));
+      memset(did,0,64*sizeof(bool));
 
       memset(mask,0,64);
       memset(note,0,64);
@@ -624,22 +814,34 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
           }
 
           curRow++;
-          memset(effectCol,4,32);
-          memcpy(vibingOld,vibing,32*sizeof(bool));
-          memcpy(volSlidingOld,volSliding,32*sizeof(bool));
-          memcpy(portingOld,porting,32*sizeof(bool));
-          memcpy(arpingOld,arping,32*sizeof(bool));
-          memset(vibStatusChanged,0,32*sizeof(bool));
-          memset(volSlideStatusChanged,0,32*sizeof(bool));
-          memset(portaStatusChanged,0,32*sizeof(bool));
-          memset(arpStatusChanged,0,32*sizeof(bool));
-          memset(vibing,0,32*sizeof(bool));
-          memset(volSliding,0,32*sizeof(bool));
-          memset(porting,0,32*sizeof(bool));
-          memset(arping,0,32*sizeof(bool));
-          memset(did,0,32);
+          memset(effectCol,4,64);
+          memcpy(vibingOld,vibing,64*sizeof(bool));
+          memcpy(volSlidingOld,volSliding,64*sizeof(bool));
+          memcpy(portingOld,porting,64*sizeof(bool));
+          memcpy(arpingOld,arping,64*sizeof(bool));
+          memset(vibStatusChanged,0,64*sizeof(bool));
+          memset(volSlideStatusChanged,0,64*sizeof(bool));
+          memset(portaStatusChanged,0,64*sizeof(bool));
+          memset(arpStatusChanged,0,64*sizeof(bool));
+          memset(vibing,0,64*sizeof(bool));
+          memset(volSliding,0,64*sizeof(bool));
+          memset(porting,0,64*sizeof(bool));
+          memset(arping,0,64*sizeof(bool));
+          memset(did,0,64);
           mustCommitInitial=false;
-          if (curRow>=patRows) break;
+          if (curRow>=patRows) {
+            if (curRow>0) {
+              // place end of pattern marker
+              DivPattern* p=ds.subsong[0]->pat[0].getPattern(i,true);
+              p->data[curRow-1][effectCol[0]++]=0x0d;
+              p->data[curRow-1][effectCol[0]++]=0;
+
+              if ((effectCol[0]>>1)-2>ds.subsong[0]->pat[0].effectCols) {
+                ds.subsong[0]->pat[0].effectCols=(effectCol[0]>>1)-1;
+              }
+            }
+            break;
+          }
           continue;
         }
 
@@ -683,11 +885,11 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
         DivPattern* p=ds.subsong[0]->pat[chan].getPattern(i,true);
 
         if (hasNote) {
-          if (note[chan]==255) { // note off
-            p->data[curRow][0]=100;
-            p->data[curRow][1]=0;
-          } else if (note[chan]==254) { // note release
+          if (note[chan]==255) { // note release
             p->data[curRow][0]=101;
+            p->data[curRow][1]=0;
+          } else if (note[chan]==254) { // note off
+            p->data[curRow][0]=100;
             p->data[curRow][1]=0;
           } else if (note[chan]<120) {
             p->data[curRow][0]=note[chan]%12;
@@ -696,6 +898,9 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
               p->data[curRow][0]=12;
               p->data[curRow][1]--;
             }
+          } else { // note fade, but Furnace does not support that
+            p->data[curRow][0]=102;
+            p->data[curRow][1]=0;
           }
         }
         if (hasIns) {
@@ -703,6 +908,8 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
         }
         if (hasVol) {
           p->data[curRow][3]=vol[chan];
+        } else if (hasNote && hasIns && note[chan]<120 && ins[chan]>0) {
+          p->data[curRow][3]=defVol[noteMap[(ins[chan]-1)&255][note[chan]]];
         }
         if (hasEffect) {
           switch (effect[chan]+'A'-1) {
@@ -841,18 +1048,25 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
       }
     }
 
+    logV("maxChan: %d",maxChan);
+
     // set channel visibility
-    for (int i=maxChan+1; i<((maxChan+32)&(~31)); i++) {
+    for (int i=maxChan; i<((maxChan+32)&(~31)); i++) {
       ds.subsong[0]->chanShow[i]=false;
       ds.subsong[0]->chanShowChanOsc[i]=false;
     }
 
     // copy patterns to the rest of subsongs
-    // TODO: why does this use so much memory?
     int copiesMade=0;
     for (size_t i=1; i<ds.subsong.size(); i++) {
+      bool usedPat[256];
+      memset(usedPat,0,256*sizeof(bool));
+      for (int j=0; j<ds.subsong[i]->ordersLen; j++) {
+        usedPat[ds.subsong[i]->orders.ord[0][j]]=true;
+      }
       for (int j=0; j<maxChan; j++) {
         for (int k=0; k<patCount; k++) {
+          if (!usedPat[k]) continue;
           if (ds.subsong[0]->pat[j].data[k]) {
             ds.subsong[0]->pat[j].data[k]->copyOn(ds.subsong[i]->pat[j].getPattern(k,true));
             copiesMade++;
@@ -868,12 +1082,14 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
 
     logV("copies made %d",copiesMade);
 
-    // set pattern lengths and place end of pattern markers
+    // set pattern lengths
     for (size_t i=0; i<ds.subsong.size(); i++) {
-      int patLenMax=0;
+      unsigned short patLenMax=0;
       for (int j=0; j<ds.subsong[i]->ordersLen; j++) {
-        int nextLen=patLen[ds.subsong[i]->orders.ord[0][j]];
-        if (patLenMax<nextLen) patLenMax=nextLen;
+        unsigned short nextLen=patLen[ds.subsong[i]->orders.ord[0][j]];
+        if (patLenMax<nextLen) {
+          patLenMax=nextLen;
+        }
       }
       ds.subsong[i]->patLen=patLenMax;
     }
@@ -889,7 +1105,7 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
     ds.systemLen=(maxChan+32)>>5;
 
     // find subsongs
-    ds.findSubSongs();    
+    ds.findSubSongs(maxChan);    
 
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;
