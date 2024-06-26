@@ -29,15 +29,15 @@ class FurnaceGUI;
 
 void FurnaceGUI::drawInsTIA(DivInstrument* ins)
 {
-  if (ImGui::BeginTabItem(_L("Macros##sgiTIA"))) 
+  if (ImGui::BeginTabItem(_("Macros##sgiTIA"))) 
   {
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiTIA"),ins,DIV_MACRO_VOL,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiTIA"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiTIA"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Volume##sgiTIA"),ins,DIV_MACRO_VOL,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Arpeggio##sgiTIA"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Pitch##sgiTIA"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Raw Period##sgiTIA"),ins,DIV_MACRO_EX1,0xff,0,31,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Raw Period##sgiTIA"),ins,DIV_MACRO_EX1,0xff,0,31,64,uiColors[GUI_COLOR_MACRO_OTHER]));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiTIA"),ins,DIV_MACRO_WAVE,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_WAVE]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Waveform##sgiTIA"),ins,DIV_MACRO_WAVE,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_WAVE]));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

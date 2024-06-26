@@ -119,8 +119,8 @@ void FurnaceGUI::drawNewSong() {
   std::vector<int> sysDefStack;
 
   ImGui::PushFont(bigFont);
-  ImGui::SetCursorPosX((ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(_L("Choose a System!##sgns")).x)*0.5);
-  ImGui::Text(_L("Choose a System!##sgns"));
+  ImGui::SetCursorPosX((ImGui::GetContentRegionAvail().x-ImGui::CalcTextSize(_("Choose a System!")).x)*0.5);
+  ImGui::Text(_("Choose a System!"));
   ImGui::PopFont();
 
   ImVec2 avail=ImGui::GetContentRegionAvail();
@@ -130,7 +130,7 @@ void FurnaceGUI::drawNewSong() {
     if (newSongFirstFrame)
       ImGui::SetKeyboardFocusHere();
     ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-    if (ImGui::InputTextWithHint("##SysSearch",settings.language == DIV_LANG_ENGLISH ? "Search..." : _L("Search...##sgns"),&newSongQuery)) {
+    if (ImGui::InputTextWithHint("##SysSearch",_("Search..."),&newSongQuery)) {
       String lowerCase=newSongQuery;
       
       for (char& i: lowerCase) {
@@ -187,9 +187,9 @@ void FurnaceGUI::drawNewSong() {
       if (newSongQuery.empty()) {
         ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Categories##sgns"));
+        ImGui::Text(_("Categories"));
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Systems##sgns"));
+        ImGui::Text(_("Systems"));
       }
 
       ImGui::TableNextRow();
@@ -205,7 +205,7 @@ void FurnaceGUI::drawNewSong() {
           if (ImGui::IsItemHovered()) {
             ImGui::SetTooltip("%s",_L(i.description));
           }
-          if (strcmp(i.name,_L("User##sgpr"))==0) ImGui::Separator();
+          if (strcmp(i.name,_("User##sgpr"))==0) ImGui::Separator();
           index++;
         }
       }
@@ -219,13 +219,10 @@ void FurnaceGUI::drawNewSong() {
         {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
-          if (newSongQuery.empty()) 
-          {
-            ImGui::Text(_L("no systems here yet!##sgns"));
-          } 
-          else 
-          {
-            ImGui::Text(_L("no results##sgns"));
+          if (newSongQuery.empty()) {
+            ImGui::Text(_("no systems here yet!"));
+          } else {
+            ImGui::Text(_("no results"));
           }
         } 
         else 
@@ -243,9 +240,9 @@ void FurnaceGUI::drawNewSong() {
   }
   ImGui::EndChild();
 
-  if (ImGui::Button(_L("I'm feeling lucky##sgns"))) {
+  if (ImGui::Button(_("I'm feeling lucky"))) {
     if (sysCategories.size()==0) {
-      showError(_L("no categories available! what in the world.##sgns"));
+      showError(_("no categories available! what in the world."));
       ImGui::CloseCurrentPopup();
     } else {
       int tries=0;
@@ -280,7 +277,7 @@ void FurnaceGUI::drawNewSong() {
       }
 
       if (tries>=50) {
-        showError(_L("it appears you're extremely lucky today!##sgns"));
+        showError(_("it appears you're extremely lucky today!"));
         ImGui::CloseCurrentPopup();
       }
     }
@@ -288,7 +285,7 @@ void FurnaceGUI::drawNewSong() {
 
   ImGui::SameLine();
 
-  if (ImGui::Button(_L("Cancel##sgns")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+  if (ImGui::Button(_("Cancel")) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
     ImGui::CloseCurrentPopup();
   }
 

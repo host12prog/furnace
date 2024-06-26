@@ -124,12 +124,12 @@ void FurnaceGUI::alterSampleMap(int column, int val) {
 }
 
 void FurnaceGUI::insTabSample(DivInstrument* ins) {
-  const char* sampleTabName=_L("Sample##sgismpd0");
-  if (ins->type==DIV_INS_NES) sampleTabName=_L("DPCM##sgismpd");
+  const char* sampleTabName=_("Sample##sgismpd0");
+  if (ins->type==DIV_INS_NES) sampleTabName=_("DPCM##sgismpd");
   if (ImGui::BeginTabItem(sampleTabName)) {
     if (ins->type==DIV_INS_NES && e->song.oldDPCM) {
-      ImGui::Text(_L("new DPCM features disabled (compatibility)!##sgismpd"));
-      if (ImGui::Button(_L("click here to enable them.##sgismpd"))) {
+      ImGui::Text(_("new DPCM features disabled (compatibility)!##sgismpd"));
+      if (ImGui::Button(_("click here to enable them.##sgismpd"))) {
         e->song.oldDPCM=false;
         MARK_MODIFIED;
       }
@@ -140,7 +140,7 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
     String sName;
     bool wannaOpenSMPopup=false;
     if (ins->amiga.initSample<0 || ins->amiga.initSample>=e->song.sampleLen) {
-      sName=_L("none selected##sgismpd");
+      sName=_("none selected##sgismpd");
     } else {
       sName=e->song.sample[ins->amiga.initSample]->name;
     }
@@ -153,16 +153,16 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
         ins->type==DIV_INS_VRC6 ||
         ins->type==DIV_INS_SU ||
         ins->type==DIV_INS_ES5503) {
-      P(ImGui::Checkbox(_L("Use sample##sgismpd"),&ins->amiga.useSample));
+      P(ImGui::Checkbox(_("Use sample##sgismpd"),&ins->amiga.useSample));
       if (ins->type==DIV_INS_X1_010) {
-        if (ImGui::InputInt(_L("Sample bank slot##BANKSLOT"),&ins->x1_010.bankSlot,1,4)) { PARAMETER
+        if (ImGui::InputInt(_("Sample bank slot##BANKSLOT"),&ins->x1_010.bankSlot,1,4)) { PARAMETER
           if (ins->x1_010.bankSlot<0) ins->x1_010.bankSlot=0;
           if (ins->x1_010.bankSlot>=7) ins->x1_010.bankSlot=7;
         }
       }
     }
     ImGui::AlignTextToFramePadding();
-    ImGui::Text(_L("Sample##sgismpd1"));
+    ImGui::Text(_("Sample##sgismpd1"));
     ImGui::SameLine();
     ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
     if (ImGui::BeginCombo("##ISample",sName.c_str())) {
@@ -178,12 +178,12 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
     // Wavetable
     if (ins->type==DIV_INS_AMIGA || ins->type==DIV_INS_SNES || ins->type==DIV_INS_GBA_DMA || ins->type==DIV_INS_GBA_MINMOD) {
       ImGui::BeginDisabled(ins->amiga.useNoteMap);
-      const char* useWaveText=ins->type==DIV_INS_AMIGA?_L("Use wavetable (Amiga/Generic DAC only)##sgismpd"):_L("Use wavetable##sgismpd");
+      const char* useWaveText=ins->type==DIV_INS_AMIGA?_("Use wavetable (Amiga/Generic DAC only)##sgismpd"):_("Use wavetable##sgismpd");
       P(ImGui::Checkbox(useWaveText,&ins->amiga.useWave));
       if (ins->amiga.useWave) {
         int len=ins->amiga.waveLen+1;
         int origLen=len;
-        if (ImGui::InputInt(_L("Width##sgismpd"),&len,2,16)) {
+        if (ImGui::InputInt(_("Width##sgismpd"),&len,2,16)) {
           if (ins->type==DIV_INS_SNES || ins->type==DIV_INS_GBA_DMA) {
             if (len<16) len=16;
             if (len>256) len=256;
@@ -204,7 +204,7 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
     }
     // Note map
     ImGui::BeginDisabled(ins->amiga.useWave);
-    P(ImGui::Checkbox(_L("Use sample map##sgismpd"),&ins->amiga.useNoteMap));
+    P(ImGui::Checkbox(_("Use sample map##sgismpd"),&ins->amiga.useNoteMap));
     if (ins->amiga.useNoteMap) {
       if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) && ImGui::IsWindowHovered(ImGuiHoveredFlags_ChildWindows)) sampleMapFocused=false;
       if (curWindowLast!=GUI_WINDOW_INS_EDIT) sampleMapFocused=false;
@@ -228,17 +228,17 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
         ImGui::Text("#");
         if (ins->type==DIV_INS_NES) {
           ImGui::TableNextColumn();
-          ImGui::Text(_L("pitch##sgismpd"));
+          ImGui::Text(_("pitch##sgismpd"));
           ImGui::TableNextColumn();
-          ImGui::Text(_L("loop##sgismpd"));
+          ImGui::Text(_("loop##sgismpd"));
           ImGui::TableNextColumn();
-          ImGui::Text(_L("delta##sgismpd"));
+          ImGui::Text(_("delta##sgismpd"));
         } else {
           ImGui::TableNextColumn();
-          ImGui::Text(_L("note##sgismpd"));
+          ImGui::Text(_("note##sgismpd"));
         }
         ImGui::TableNextColumn();
-        ImGui::Text(_L("sample name##sgismpd"));
+        ImGui::Text(_("sample name##sgismpd"));
         int sampleMapMin=sampleMapSelStart;
         int sampleMapMax=sampleMapSelEnd;
         if (sampleMapMin>sampleMapMax) {
@@ -364,7 +364,7 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
             ImGui::PopFont();
 
             ImGui::TableNextColumn();
-            sName=fmt::sprintf(_L("L##L%d"),i);
+            sName=fmt::sprintf(_("L##L%d"),i);
             ImGui::Checkbox(sName.c_str(), (bool*)&ins->amiga.get_amiga_sample_map(i, true)->freq);
 
             // delta
@@ -507,7 +507,7 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
     if (ImGui::BeginPopup("SampleMapUtils",ImGuiWindowFlags_NoMove|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoSavedSettings)) {
       if (sampleMapSelStart==sampleMapSelEnd && sampleMapSelStart>=0 && sampleMapSelStart<120) {
         if (ins->type==DIV_INS_NES) {
-          if (ImGui::MenuItem(_L("set entire map to this pitch##sgismpd"))) {
+          if (ImGui::MenuItem(_("set entire map to this pitch##sgismpd"))) {
             if (sampleMapSelStart>=0 && sampleMapSelStart<120) {
               for (int i=0; i<120; i++) {
                 if (i==sampleMapSelStart) continue;
@@ -515,7 +515,7 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
               }
             }
           }
-          if (ImGui::MenuItem(_L("set entire map to this delta counter value##sgismpd"))) {
+          if (ImGui::MenuItem(_("set entire map to this delta counter value##sgismpd"))) {
             if (sampleMapSelStart>=0 && sampleMapSelStart<120) {
               for (int i=0; i<120; i++) {
                 if (i==sampleMapSelStart) continue;
@@ -524,7 +524,7 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
             }
           }
         } else {
-          if (ImGui::MenuItem(_L("set entire map to this note##sgismpd"))) {
+          if (ImGui::MenuItem(_("set entire map to this note##sgismpd"))) {
             if (sampleMapSelStart>=0 && sampleMapSelStart<120) {
               for (int i=0; i<120; i++) {
                 if (i==sampleMapSelStart) continue;
@@ -533,7 +533,7 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
             }
           }
         }
-        if (ImGui::MenuItem(_L("set entire map to this sample##sgismpd"))) {
+        if (ImGui::MenuItem(_("set entire map to this sample##sgismpd"))) {
           if (sampleMapSelStart>=0 && sampleMapSelStart<120) {
             for (int i=0; i<120; i++) {
               if (i==sampleMapSelStart) continue;
@@ -543,24 +543,24 @@ void FurnaceGUI::insTabSample(DivInstrument* ins) {
         }
       }
       if (ins->type==DIV_INS_NES) {
-        if (ImGui::MenuItem(_L("reset pitches##sgismpd"))) {
+        if (ImGui::MenuItem(_("reset pitches##sgismpd"))) {
           for (int i=0; i<120; i++) {
             ins->amiga.get_amiga_sample_map(i, true)->dpcmFreq=15;
           }
         }
-        if (ImGui::MenuItem(_L("clear delta counter values##sgismpd"))) {
+        if (ImGui::MenuItem(_("clear delta counter values##sgismpd"))) {
           for (int i=0; i<120; i++) {
             ins->amiga.get_amiga_sample_map(i, true)->dpcmDelta=-1;
           }
         }
       } else {
-        if (ImGui::MenuItem(_L("reset notes##sgismpd"))) {
+        if (ImGui::MenuItem(_("reset notes##sgismpd"))) {
           for (int i=0; i<120; i++) {
             ins->amiga.get_amiga_sample_map(i, true)->freq=i;
           }
         }
       }
-      if (ImGui::MenuItem(_L("clear map samples##sgismpd"))) {
+      if (ImGui::MenuItem(_("clear map samples##sgismpd"))) {
         for (int i=0; i<120; i++) {
           ins->amiga.get_amiga_sample_map(i, true)->map=-1;
         }

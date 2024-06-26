@@ -6937,7 +6937,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags, const 
         {
             if(strcmp(displayedName, window->DisplayedName) != 0)
             {
-                free(window->DisplayedName);
+                IM_DELETE(window->DisplayedName);
                 window->DisplayedName = ImStrdup(displayedName);
             }
         }

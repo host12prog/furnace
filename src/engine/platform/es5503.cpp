@@ -27,11 +27,7 @@
 extern FurnaceGUI g;
 #endif
 
-#ifdef HAVE_GUI
-#define _LE(string) g.locale.getText(string)
-#else
 #define _LE(string) (string)
-#endif
 
 #define my_min(a, b) ((a) >= (b) ? (b) : (a))
 

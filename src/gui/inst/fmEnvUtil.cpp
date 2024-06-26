@@ -1018,7 +1018,7 @@ void FurnaceGUI::drawGBEnv(unsigned char vol, unsigned char len, unsigned char s
 void FurnaceGUI::kvsConfig(DivInstrument* ins, bool supportsKVS) {
   if (fmPreviewOn) {
     if (ImGui::IsItemHovered()) {
-      ImGui::SetTooltip(_L("left click to restart\nmiddle click to pause\nright click to see algorithm##sgifmeu"));
+      ImGui::SetTooltip(_("left click to restart\nmiddle click to pause\nright click to see algorithm##sgifmeu"));
     }
     if (ImGui::IsItemClicked(ImGuiMouseButton_Left)) {
       updateFMPreview=true;
@@ -1028,11 +1028,11 @@ void FurnaceGUI::kvsConfig(DivInstrument* ins, bool supportsKVS) {
     }
   } else if (supportsKVS) {
     if (ImGui::IsItemHovered()) {
-      ImGui::SetTooltip(_L("left click to configure TL scaling\nright click to see FM preview##sgifmeu"));
+      ImGui::SetTooltip(_("left click to configure TL scaling\nright click to see FM preview##sgifmeu"));
     }
   } else {
     if (ImGui::IsItemHovered()) {
-      ImGui::SetTooltip(_L("right click to see FM preview##sgifmeu"));
+      ImGui::SetTooltip(_("right click to see FM preview##sgifmeu"));
     }
   }
   if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
@@ -1047,7 +1047,7 @@ void FurnaceGUI::kvsConfig(DivInstrument* ins, bool supportsKVS) {
     if (ins->type==DIV_INS_OPLL) opCount=2;
     if (ins->type==DIV_INS_OPL) opCount=(ins->fm.ops==4)?4:2;
     if (ImGui::BeginPopupContextItem("IKVSOpt",ImGuiPopupFlags_MouseButtonLeft)) {
-      ImGui::Text(_L("operator level changes with volume?##sgifmeu"));
+      ImGui::Text(_("operator level changes with volume?##sgifmeu"));
       if (ImGui::BeginTable("KVSTable",4,ImGuiTableFlags_BordersInner)) {
         ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed);
         ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch);
@@ -1056,11 +1056,11 @@ void FurnaceGUI::kvsConfig(DivInstrument* ins, bool supportsKVS) {
         for (int i=0; i<4; i++) {
           int o=(opCount==4 && ins->type!=DIV_INS_ESFM)?orderedOps[i]:i;
           if (!(i&1)) ImGui::TableNextRow();
-          const char* label=_L("AUTO##OPKVS");
+          const char* label=_("AUTO##OPKVS");
           if (ins->fm.op[o].kvs==0) {
-            label=_L("NO##OPKVS");
+            label=_("NO##OPKVS");
           } else if (ins->fm.op[o].kvs==1) {
-            label=_L("YES##OPKVS");
+            label=_("YES##OPKVS");
           }
           ImGui::TableNextColumn();
           ImGui::Text("%d",i+1);

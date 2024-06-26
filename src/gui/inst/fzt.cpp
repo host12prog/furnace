@@ -100,7 +100,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
-      ImGui::Text(_L("Base note##sgiFZT"));
+      ImGui::Text(_("Base note"));
       ImGui::SameLine();
       char tempID[10];
       snprintf(tempID,10,"%s",noteNames[ins->fzt.base_note + 60]);
@@ -120,7 +120,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::PopItemWidth();
       ImGui::TableNextColumn();
       ImGui::PushItemWidth(40.0f*dpiScale);
-      ImGui::InputScalar(_L("Finetune##sgiFZT"),ImGuiDataType_S8,&ins->fzt.finetune,NULL,NULL,"%d");
+      ImGui::InputScalar(_("Finetune"),ImGuiDataType_S8,&ins->fzt.finetune,NULL,NULL,"%d");
       ImGui::PopItemWidth();
       ImGui::EndTable();
     }
@@ -135,45 +135,45 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_L("Slide speed##sgiFZT"),ImGuiDataType_U8,&ins->fzt.slide_speed,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Slide speed"),ImGuiDataType_U8,&ins->fzt.slide_speed,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
       ImGui::TableNextColumn();
       bool fztSetPw = ins->fzt.flags & TE_SET_PW;
-      if (ImGui::Checkbox(_L("Set PW##sgiFZT"),&fztSetPw)) 
+      if (ImGui::Checkbox(_("Set PW"),&fztSetPw)) 
       {
         ins->fzt.flags ^= TE_SET_PW;
       }
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip(_L("Set pulse width on keydown##sgiFZT"));
+        ImGui::SetTooltip(_("Set pulse width on keydown"));
       }
       ImGui::TableNextColumn();
       ImGui::PushItemWidth(25.0f*dpiScale);
       ImGui::InputScalar("",ImGuiDataType_U8,&ins->fzt.pw,NULL,NULL,"%02X");
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip(_L("Initial pulse width##sgiFZT"));
+        ImGui::SetTooltip(_("Initial pulse width"));
       }
       ImGui::PopItemWidth();
       ImGui::TableNextColumn();
       bool fztSetCut = ins->fzt.flags & TE_SET_CUTOFF;
-      if (ImGui::Checkbox(_L("Set cutoff##sgiFZT"),&fztSetCut)) 
+      if (ImGui::Checkbox(_("Set cutoff"),&fztSetCut)) 
       {
         ins->fzt.flags ^= TE_SET_CUTOFF;
       }
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip(_L("Set filter cutoff on keydown##sgiFZT"));
+        ImGui::SetTooltip(_("Set filter cutoff on keydown"));
       }
       ImGui::EndTable();
     }
 
     ImGui::AlignTextToFramePadding();
-    ImGui::Text(_L("Waveform##sgiFZT"));
+    ImGui::Text(_("Waveform"));
     ImGui::SameLine();
     bool fztNoise = ins->fzt.waveform & SE_WAVEFORM_NOISE;
     pushToggleColors(fztNoise);
-    if (ImGui::Button(_L("noise##sgiFZT"))) 
+    if (ImGui::Button(_("noise"))) 
     { PARAMETER
       ins->fzt.waveform ^= SE_WAVEFORM_NOISE;
     }
@@ -181,7 +181,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
     ImGui::SameLine();
     bool fztPulse = ins->fzt.waveform & SE_WAVEFORM_PULSE;
     pushToggleColors(fztPulse);
-    if (ImGui::Button(_L("pulse##sgiFZT"))) 
+    if (ImGui::Button(_("pulse"))) 
     { PARAMETER
       ins->fzt.waveform ^= SE_WAVEFORM_PULSE;
     }
@@ -189,7 +189,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
     ImGui::SameLine();
     bool fztTri = ins->fzt.waveform & SE_WAVEFORM_TRIANGLE;
     pushToggleColors(fztTri);
-    if (ImGui::Button(_L("triangle##sgiFZT"))) 
+    if (ImGui::Button(_("triangle"))) 
     { PARAMETER
       ins->fzt.waveform ^= SE_WAVEFORM_TRIANGLE;
     }
@@ -197,7 +197,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
     ImGui::SameLine();
     bool fztSaw = ins->fzt.waveform & SE_WAVEFORM_SAW;
     pushToggleColors(fztSaw);
-    if (ImGui::Button(_L("saw##sgiFZT"))) 
+    if (ImGui::Button(_("saw"))) 
     { PARAMETER
       ins->fzt.waveform ^= SE_WAVEFORM_SAW;
     }
@@ -205,7 +205,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
     ImGui::SameLine();
     bool fztMetal = ins->fzt.waveform & SE_WAVEFORM_NOISE_METAL;
     pushToggleColors(fztMetal);
-    if (ImGui::Button(_L("metal##sgiFZT"))) 
+    if (ImGui::Button(_("metal"))) 
     { PARAMETER
       ins->fzt.waveform ^= SE_WAVEFORM_NOISE_METAL;
     }
@@ -213,7 +213,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
     ImGui::SameLine();
     bool fztSine = ins->fzt.waveform & SE_WAVEFORM_SINE;
     pushToggleColors(fztSine);
-    if (ImGui::Button(_L("sine##sgiFZT"))) 
+    if (ImGui::Button(_("sine"))) 
     { PARAMETER
       ins->fzt.waveform ^= SE_WAVEFORM_SINE;
     }
@@ -230,7 +230,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::TableNextColumn();
 
       bool fztSetPw = ins->fzt.sound_engine_flags & SE_ENABLE_FILTER;
-      if (ImGui::Checkbox(_L("Enable filter##sgiFZT"),&fztSetPw)) 
+      if (ImGui::Checkbox(_("Enable filter"),&fztSetPw)) 
       {
         ins->fzt.sound_engine_flags ^= SE_ENABLE_FILTER;
       }
@@ -238,18 +238,18 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_L("Cutoff##sgiFZT"),ImGuiDataType_U8,&ins->fzt.filter_cutoff,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Cutoff"),ImGuiDataType_U8,&ins->fzt.filter_cutoff,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_L("Resonance##sgiFZT"),ImGuiDataType_U8,&ins->fzt.filter_resonance,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Resonance"),ImGuiDataType_U8,&ins->fzt.filter_resonance,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::TableNextColumn();
 
-      ImGui::Text(_L("Type##sgiFZT"));
+      ImGui::Text(_("Type"));
       ImGui::SameLine();
       ImGui::PushItemWidth(140.0f*dpiScale);
       char tempID[40];
@@ -282,7 +282,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::TableNextColumn();
 
       bool fztRing = ins->fzt.sound_engine_flags & SE_ENABLE_RING_MOD;
-      if (ImGui::Checkbox(_L("Enable ring modulation##sgiFZT"),&fztRing)) 
+      if (ImGui::Checkbox(_("Enable ring modulation"),&fztRing)) 
       {
         ins->fzt.sound_engine_flags ^= SE_ENABLE_RING_MOD;
       }
@@ -290,17 +290,17 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_L("Ring mod source##sgiFZT"),ImGuiDataType_U8,&ins->fzt.ring_mod,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Ring mod source"),ImGuiDataType_U8,&ins->fzt.ring_mod,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip(_L("FF = self-modulation##sgiFZT"));
+        ImGui::SetTooltip(_("FF = self-modulation"));
       }
 
       ImGui::TableNextColumn();
 
       bool fztSync = ins->fzt.sound_engine_flags & SE_ENABLE_HARD_SYNC;
-      if (ImGui::Checkbox(_L("Enable hard sync##sgiFZT"),&fztSync)) 
+      if (ImGui::Checkbox(_("Enable hard sync"),&fztSync)) 
       {
         ins->fzt.sound_engine_flags ^= SE_ENABLE_HARD_SYNC;
       }
@@ -308,11 +308,11 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_L("Hard sync source##sgiFZT"),ImGuiDataType_U8,&ins->fzt.hard_sync,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Hard sync source"),ImGuiDataType_U8,&ins->fzt.hard_sync,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip(_L("FF = self-sync##sgiFZT"));
+        ImGui::SetTooltip(_("FF = self-sync"));
       }
 
       ImGui::EndTable();
@@ -327,25 +327,25 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::TableNextColumn();
 
       bool fztSlRetrig = ins->fzt.flags & TE_RETRIGGER_ON_SLIDE;
-      if (ImGui::Checkbox(_L("Retrigger on slide##sgiFZT"),&fztSlRetrig)) 
+      if (ImGui::Checkbox(_("Retrigger on slide"),&fztSlRetrig)) 
       {
         ins->fzt.flags ^= TE_RETRIGGER_ON_SLIDE;
       }
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip(_L("Restart instrument and envelope even if slide command (03xx) is placed with the note.##sgiFZT"));
+        ImGui::SetTooltip(_("Restart instrument and envelope even if slide command (03xx) is placed with the note."));
       }
 
       ImGui::TableNextColumn();
 
       bool fztKeySync = ins->fzt.sound_engine_flags & SE_ENABLE_KEYDOWN_SYNC;
-      if (ImGui::Checkbox(_L("Sync osc. on keydown##sgiFZT"),&fztKeySync)) 
+      if (ImGui::Checkbox(_("Sync osc. on keydown"),&fztKeySync)) 
       {
         ins->fzt.sound_engine_flags ^= SE_ENABLE_KEYDOWN_SYNC;
       }
       if (ImGui::IsItemHovered()) 
       {
-        ImGui::SetTooltip(_L("Reset phase of oscillator each time new note is played.\nDoes not happen when slide (03xx) or legato command is placed.##sgiFZT"));
+        ImGui::SetTooltip(_("Reset phase of oscillator each time new note is played.\nDoes not happen when slide (03xx) or legato command is placed."));
       }
 
       ImGui::EndTable();
@@ -362,7 +362,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::TableNextColumn();
 
       bool fztVib = ins->fzt.flags & TE_ENABLE_VIBRATO;
-      if (ImGui::Checkbox(_L("Vibrato##sgiFZT"),&fztVib)) 
+      if (ImGui::Checkbox(_("Vibrato"),&fztVib)) 
       {
         ins->fzt.flags ^= TE_ENABLE_VIBRATO;
       }
@@ -370,25 +370,25 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_L("Speed##sgiFZT0"),ImGuiDataType_U8,&ins->fzt.vibrato_speed,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Speed0"),ImGuiDataType_U8,&ins->fzt.vibrato_speed,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_L("Depth##sgiFZT0"),ImGuiDataType_U8,&ins->fzt.vibrato_depth,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Depth0"),ImGuiDataType_U8,&ins->fzt.vibrato_depth,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_L("Delay##sgiFZT0"),ImGuiDataType_U8,&ins->fzt.vibrato_delay,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Delay0"),ImGuiDataType_U8,&ins->fzt.vibrato_delay,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::TableNextColumn();
 
       bool fztPwm = ins->fzt.flags & TE_ENABLE_PWM;
-      if (ImGui::Checkbox(_L("PWM##sgiFZT"),&fztPwm)) 
+      if (ImGui::Checkbox(_("PWM"),&fztPwm)) 
       {
         ins->fzt.flags ^= TE_ENABLE_PWM;
       }
@@ -396,19 +396,19 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_L("Speed##sgiFZT1"),ImGuiDataType_U8,&ins->fzt.pwm_speed,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Speed1"),ImGuiDataType_U8,&ins->fzt.pwm_speed,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_L("Depth##sgiFZT1"),ImGuiDataType_U8,&ins->fzt.pwm_depth,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Depth1"),ImGuiDataType_U8,&ins->fzt.pwm_depth,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_L("Delay##sgiFZT1"),ImGuiDataType_U8,&ins->fzt.pwm_delay,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Delay1"),ImGuiDataType_U8,&ins->fzt.pwm_delay,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::EndTable();
@@ -427,23 +427,23 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
-      CENTER_TEXT(_L("A##sgiFZT"));
-      ImGui::TextUnformatted(_L("A##sgiFZT"));
+      CENTER_TEXT(_("A"));
+      ImGui::TextUnformatted(_("A"));
       ImGui::TableNextColumn();
-      CENTER_TEXT(_L("D##sgiFZT"));
-      ImGui::TextUnformatted(_L("D##sgiFZT"));
+      CENTER_TEXT(_("D"));
+      ImGui::TextUnformatted(_("D"));
       ImGui::TableNextColumn();
-      CENTER_TEXT(_L("S##sgiFZT"));
-      ImGui::TextUnformatted(_L("S##sgiFZT"));
+      CENTER_TEXT(_("S"));
+      ImGui::TextUnformatted(_("S"));
       ImGui::TableNextColumn();
-      CENTER_TEXT(_L("R##sgiFZT"));
-      ImGui::TextUnformatted(_L("R##sgiFZT"));
+      CENTER_TEXT(_("R"));
+      ImGui::TextUnformatted(_("R"));
       ImGui::TableNextColumn();
-      CENTER_TEXT(_L("VOL##sgiFZT"));
-      ImGui::TextUnformatted(_L("VOL##sgiFZT"));
+      CENTER_TEXT(_("VOL"));
+      ImGui::TextUnformatted(_("VOL"));
       ImGui::TableNextColumn();
-      CENTER_TEXT(_L("Envelope##sgiFZT"));
-      ImGui::TextUnformatted(_L("Envelope##sgiFZT"));
+      CENTER_TEXT(_("Envelope"));
+      ImGui::TextUnformatted(_("Envelope"));
 
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
@@ -465,11 +465,11 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
     ImGui::EndTabItem();
   }
 
-  if (ImGui::BeginTabItem(_L("Instrument program##sgiFZT"))) 
+  if (ImGui::BeginTabItem(_("Instrument program"))) 
   {
     int prper = ins->fzt.program_period;
     ImGui::PushItemWidth(85.0f*dpiScale);
-    if(ImGui::InputInt(_L("Program period##sgiFZT22"), &prper))
+    if(ImGui::InputInt(_("Program period22"), &prper))
     {
       if(prper < 1) prper = 1;
       if(prper > 0xff) prper = 0xff;
@@ -477,7 +477,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
     }
     ImGui::PopItemWidth();
     bool fztRestart = ins->fzt.flags & TE_PROG_NO_RESTART;
-    if (ImGui::Checkbox(_L("Do not restart instrument program on keydown##sgiFZT"),&fztRestart)) 
+    if (ImGui::Checkbox(_("Do not restart instrument program on keydown"),&fztRestart)) 
     {
       ins->fzt.flags ^= TE_PROG_NO_RESTART;
     }
@@ -485,7 +485,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
     if (ImGui::BeginChild("HWSeqSU",ImGui::GetContentRegionAvail(),true,ImGuiWindowFlags_MenuBar)) 
     {
       ImGui::BeginMenuBar();
-      ImGui::Text(_L("Instrument program##sgiFZT"));
+      ImGui::Text(_("Instrument program"));
       ImGui::EndMenuBar();
 
       if (ImGui::BeginTable("HWSeqListFZT",4)) 
@@ -497,13 +497,13 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 
         ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Tick##sgiFZT"));
+        ImGui::Text(_("Tick"));
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Command##sgiFZT"));
+        ImGui::Text(_("Command"));
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Move/Remove##sgiFZT"));
+        ImGui::Text(_("Move/Remove"));
         ImGui::TableNextColumn();
-        ImGui::Text(_L("Unite##sgiFZT"));
+        ImGui::Text(_("Unite"));
 
         int current_program_step = 0xffff;
         bool in_search = true;
@@ -621,7 +621,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             case DivInstrumentFZT::TE_EFFECT_TRIGGER_RELEASE:
             {
               int temp = ins->fzt.program[i].val;
-              if(CWSliderInt(_L("Value##sgiFZT"),&temp,0,0xff,"%02X"))
+              if(CWSliderInt(_("Value"),&temp,0,0xff,"%02X"))
               {
                 ins->fzt.program[i].val = temp;
               }
@@ -648,7 +648,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
                 memset(buf,0,6);
               }
               
-              if(CWSliderInt(_L("Semitones##sgiFZT"),&temp,0,max_note_slider, buf))
+              if(CWSliderInt(_("Semitones"),&temp,0,max_note_slider, buf))
               {
                 ins->fzt.program[i].val = temp;
               }
@@ -656,7 +656,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 
               bool ext1 = ins->fzt.program[i].val == 0xf0;
 
-              if(ImGui::Checkbox(_L("First external arpeggio note##sgiFZT"), &ext1))
+              if(ImGui::Checkbox(_("First external arpeggio note"), &ext1))
               {
                 if(ext1)
                 {
@@ -670,7 +670,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 
               bool ext2 = ins->fzt.program[i].val == 0xf1;
 
-              if(ImGui::Checkbox(_L("Second external arpeggio note##sgiFZT1"), &ext2))
+              if(ImGui::Checkbox(_("Second external arpeggio note1"), &ext2))
               {
                 if(ext2)
                 {
@@ -687,13 +687,13 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             case DivInstrumentFZT::TE_EFFECT_PWM:
             {
               int speed = ins->fzt.program[i].val >> 4;
-              if(CWSliderInt(_L("Speed##sgiFZT2"),&speed,0,0xf,"%01X"))
+              if(CWSliderInt(_("Speed2"),&speed,0,0xf,"%01X"))
               {
                 ins->fzt.program[i].val &= 0x0f;
                 ins->fzt.program[i].val |= (speed << 4);
               }
               int depth = ins->fzt.program[i].val & 15;
-              if(CWSliderInt(_L("Depth##sgiFZT11"),&depth,0,0xf,"%01X"))
+              if(CWSliderInt(_("Depth11"),&depth,0,0xf,"%01X"))
               {
                 ins->fzt.program[i].val &= 0xf0;
                 ins->fzt.program[i].val |= (depth);
@@ -711,7 +711,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             {
               if(ins->fzt.program[i].val > 0xf) ins->fzt.program[i].val = 0xf;
               int temp = ins->fzt.program[i].val;
-              if(CWSliderInt(_L("Value##sgiFZT"),&temp,0,0xf,"%01X"))
+              if(CWSliderInt(_("Value"),&temp,0,0xf,"%01X"))
               {
                 ins->fzt.program[i].val = temp;
               }
@@ -723,7 +723,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
               int temp = ins->fzt.program[i].val;
               char buf[60];
               snprintf(buf, 60, "%s", _L(fztFilterModes[temp]));
-              if(CWSliderInt(_L("Value##sgiFZT"),&temp,0,7,buf))
+              if(CWSliderInt(_("Value"),&temp,0,7,buf))
               {
                 ins->fzt.program[i].val = temp;
               }
@@ -732,13 +732,13 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             case DivInstrumentFZT::TE_EFFECT_VOLUME_FADE: 
             {
               int speed = ins->fzt.program[i].val >> 4;
-              if(CWSliderInt(_L("Up##sgiFZT2"),&speed,0,0xf,"%01X"))
+              if(CWSliderInt(_("Up2"),&speed,0,0xf,"%01X"))
               {
                 ins->fzt.program[i].val &= 0x0f;
                 ins->fzt.program[i].val |= (speed << 4);
               }
               int depth = ins->fzt.program[i].val & 15;
-              if(CWSliderInt(_L("Down##sgiFZT11"),&depth,0,0xf,"%01X"))
+              if(CWSliderInt(_("Down11"),&depth,0,0xf,"%01X"))
               {
                 ins->fzt.program[i].val &= 0xf0;
                 ins->fzt.program[i].val |= (depth);
@@ -764,7 +764,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
                 memset(buf,0,6);
               }
               
-              if(CWSliderInt(_L("Source channel##sgiFZT"),&temp,0,FZT_NUM_CHANNELS-1, buf))
+              if(CWSliderInt(_("Source channel"),&temp,0,FZT_NUM_CHANNELS-1, buf))
               {
                 ins->fzt.program[i].val = temp;
               }
@@ -772,7 +772,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 
               bool ext1 = ins->fzt.program[i].val == 0xff;
 
-              if(ImGui::Checkbox(_L("Source is self##sgiFZT"), &ext1))
+              if(ImGui::Checkbox(_("Source is self"), &ext1))
               {
                 if(ext1)
                 {
@@ -789,7 +789,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             {
               bool fztNoise = ins->fzt.program[i].val & SE_WAVEFORM_NOISE;
               pushToggleColors(fztNoise);
-              if (ImGui::Button(_L("noise##sgiFZT"))) 
+              if (ImGui::Button(_("noise"))) 
               { PARAMETER
                 ins->fzt.program[i].val ^= SE_WAVEFORM_NOISE;
               }
@@ -797,7 +797,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
               ImGui::SameLine();
               bool fztPulse = ins->fzt.program[i].val & SE_WAVEFORM_PULSE;
               pushToggleColors(fztPulse);
-              if (ImGui::Button(_L("pulse##sgiFZT"))) 
+              if (ImGui::Button(_("pulse"))) 
               { PARAMETER
                 ins->fzt.program[i].val ^= SE_WAVEFORM_PULSE;
               }
@@ -805,7 +805,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
               ImGui::SameLine();
               bool fztTri = ins->fzt.program[i].val & SE_WAVEFORM_TRIANGLE;
               pushToggleColors(fztTri);
-              if (ImGui::Button(_L("triangle##sgiFZT"))) 
+              if (ImGui::Button(_("triangle"))) 
               { PARAMETER
                 ins->fzt.program[i].val ^= SE_WAVEFORM_TRIANGLE;
               }
@@ -813,7 +813,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
               ImGui::SameLine();
               bool fztSaw = ins->fzt.program[i].val & SE_WAVEFORM_SAW;
               pushToggleColors(fztSaw);
-              if (ImGui::Button(_L("saw##sgiFZT"))) 
+              if (ImGui::Button(_("saw"))) 
               { PARAMETER
                 ins->fzt.program[i].val ^= SE_WAVEFORM_SAW;
               }
@@ -821,7 +821,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
               ImGui::SameLine();
               bool fztMetal = ins->fzt.program[i].val & SE_WAVEFORM_NOISE_METAL;
               pushToggleColors(fztMetal);
-              if (ImGui::Button(_L("metal##sgiFZT"))) 
+              if (ImGui::Button(_("metal"))) 
               { PARAMETER
                 ins->fzt.program[i].val ^= SE_WAVEFORM_NOISE_METAL;
               }
@@ -829,7 +829,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
               ImGui::SameLine();
               bool fztSine = ins->fzt.program[i].val & SE_WAVEFORM_SINE;
               pushToggleColors(fztSine);
-              if (ImGui::Button(_L("sine##sgiFZT"))) 
+              if (ImGui::Button(_("sine"))) 
               { PARAMETER
                 ins->fzt.program[i].val ^= SE_WAVEFORM_SINE;
               }
@@ -843,7 +843,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             case DivInstrumentFZT::TE_PROGRAM_LOOP_END: 
             {
               int temp = ins->fzt.program[i].val;
-              if(CWSliderInt(_L("Loops##sgiFZT"),&temp,0,0xff,"%02X"))
+              if(CWSliderInt(_("Loops"),&temp,0,0xff,"%02X"))
               {
                 ins->fzt.program[i].val = temp;
               }
@@ -852,7 +852,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             case DivInstrumentFZT::TE_PROGRAM_JUMP: 
             {
               int temp = ins->fzt.program[i].val;
-              if(CWSliderInt(_L("Step to jump to##sgiFZT"),&temp,0,0xf,"%02X"))
+              if(CWSliderInt(_("Step to jump to"),&temp,0,0xf,"%02X"))
               {
                 ins->fzt.program[i].val = temp;
               }
@@ -860,12 +860,12 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             }
             case DivInstrumentFZT::TE_PROGRAM_NOP: 
             {
-              ImGui::Text(_L("No operation##sgiFZT"));
+              ImGui::Text(_("No operation"));
               break;
             }
             case DivInstrumentFZT::TE_PROGRAM_END: 
             {
-              ImGui::Text(_L("Program end##sgiFZT"));
+              ImGui::Text(_("Program end"));
               break;
             }
             default:
@@ -873,7 +873,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
           }
           if(ins->fzt.program[i].cmd < 0x7d00 || ins->fzt.program[i].cmd == 0xE500)
           {
-              ImGui::Checkbox(_L("Execute next command at the same tick##sgiFZT"), &ins->fzt.program[i].unite);
+              ImGui::Checkbox(_("Execute next command at the same tick"), &ins->fzt.program[i].unite);
           }
           ImGui::PopID();
           ImGui::TableNextColumn();
@@ -992,35 +992,35 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
     ImGui::EndTabItem();
   }
 
-  if (ImGui::BeginTabItem(_L("Macros##sgiFZT"))) 
+  if (ImGui::BeginTabItem(_("Macros"))) 
   {
-    ImGui::Text(_L("Warning! Macros are NOT supported by FZT file format! Do not use them if you want to export .fzt file!##sgiFZT"));
+    ImGui::Text(_("Warning! Macros are NOT supported by FZT file format! Do not use them if you want to export .fzt file!"));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiFZT"),ins,DIV_MACRO_VOL,0xff,0,0xff,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiFZT"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiFZT"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Duty##sgiFZT"),ins,DIV_MACRO_DUTY,0xff,((ins->std.get_macro(DIV_MACRO_DUTY, true)->mode==1)?(-0xfff):0),0xfff,160,uiColors[GUI_COLOR_MACRO_OTHER],false,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Volume"),ins,DIV_MACRO_VOL,0xff,0,0xff,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Arpeggio"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Pitch"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Duty"),ins,DIV_MACRO_DUTY,0xff,((ins->std.get_macro(DIV_MACRO_DUTY, true)->mode==1)?(-0xfff):0),0xfff,160,uiColors[GUI_COLOR_MACRO_OTHER],false,macroRelativeMode));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiFZT"),ins,DIV_MACRO_WAVE,0xff,0,6,96,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,true,fztShapeBits,0));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Waveform"),ins,DIV_MACRO_WAVE,0xff,0,6,96,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,true,fztShapeBits,0));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Cutoff##sgiFZT"),ins,DIV_MACRO_ALG,0xff,((ins->std.get_macro(DIV_MACRO_ALG, true)->mode==1)?(-0x7ff):0),0x7ff,160,uiColors[GUI_COLOR_MACRO_OTHER],false,macroRelativeMode));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Filter Mode##sgiFZT"),ins,DIV_MACRO_EX1,0xff,0,7,64,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Filter Toggle##sgiFZT"),ins,DIV_MACRO_EX2,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Resonance##sgiFZT"),ins,DIV_MACRO_EX3,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Cutoff"),ins,DIV_MACRO_ALG,0xff,((ins->std.get_macro(DIV_MACRO_ALG, true)->mode==1)?(-0x7ff):0),0x7ff,160,uiColors[GUI_COLOR_MACRO_OTHER],false,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Filter Mode"),ins,DIV_MACRO_EX1,0xff,0,7,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Filter Toggle"),ins,DIV_MACRO_EX2,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Resonance"),ins,DIV_MACRO_EX3,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgiFZT"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Envelope Reset/Key Control##sgiFZT"),ins,DIV_MACRO_EX4,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Phase Reset"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Envelope Reset/Key Control"),ins,DIV_MACRO_EX4,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Ring mod toggle##sgiFZT"),ins,DIV_MACRO_EX5,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Ring mod source##sgiFZT"),ins,DIV_MACRO_EX6,0xff,0,FZT_NUM_CHANNELS,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Ring mod toggle"),ins,DIV_MACRO_EX5,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Ring mod source"),ins,DIV_MACRO_EX6,0xff,0,FZT_NUM_CHANNELS,64,uiColors[GUI_COLOR_MACRO_OTHER]));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Hard sync toggle##sgiFZT"),ins,DIV_MACRO_EX7,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Hard sync source##sgiFZT"),ins,DIV_MACRO_EX8,0xff,0,FZT_NUM_CHANNELS,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Hard sync toggle"),ins,DIV_MACRO_EX7,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Hard sync source"),ins,DIV_MACRO_EX8,0xff,0,FZT_NUM_CHANNELS,64,uiColors[GUI_COLOR_MACRO_OTHER]));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Attack##sgiFZT"),ins,DIV_MACRO_EX9, 0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Decay##sgiFZT"),ins,DIV_MACRO_EX10, 0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Sustain##sgiFZT"),ins,DIV_MACRO_EX11, 0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Release##sgiFZT"),ins,DIV_MACRO_EX12, 0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Attack"),ins,DIV_MACRO_EX9, 0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Decay"),ins,DIV_MACRO_EX10, 0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Sustain"),ins,DIV_MACRO_EX11, 0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Release"),ins,DIV_MACRO_EX12, 0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
 
 
     drawMacros(macroList,macroEditStateMacros);

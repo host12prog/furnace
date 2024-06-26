@@ -31,26 +31,26 @@ void FurnaceGUI::drawInsMIKEY(DivInstrument* ins)
 {
   insTabSample(ins);
 
-  if (ImGui::BeginTabItem(_L("Macros##sgiLYNX"))) 
+  if (ImGui::BeginTabItem(_("Macros##sgiLYNX"))) 
   {
     panMin=0;
     panMax=15;
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiLYNX"),ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiLYNX"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiLYNX"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Volume##sgiLYNX"),ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Arpeggio##sgiLYNX"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Pitch##sgiLYNX"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
 
     if(!ins->amiga.useSample)
     {
-      macroList.push_back(FurnaceGUIMacroDesc(_L("Duty/Int##sgiLYNX"),ins,DIV_MACRO_DUTY,0xff,0,10,160,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,mikeyFeedbackBits));
+      macroList.push_back(FurnaceGUIMacroDesc(_("Duty/Int##sgiLYNX"),ins,DIV_MACRO_DUTY,0xff,0,10,160,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,mikeyFeedbackBits));
     }
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (left)##sgiLYNX"),ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (right)##sgiLYNX"),ins,DIV_MACRO_PAN_RIGHT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Panning (left)##sgiLYNX"),ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Panning (right)##sgiLYNX"),ins,DIV_MACRO_PAN_RIGHT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER]));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgiLYNX"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Phase Reset##sgiLYNX"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Load LFSR##sgiLYNX"),ins,DIV_MACRO_EX1,0xff,0,12,192,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Load LFSR##sgiLYNX"),ins,DIV_MACRO_EX1,0xff,0,12,192,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

@@ -31,7 +31,7 @@ void FurnaceGUI::drawInsSNES(DivInstrument* ins)
 {
   if (ImGui::BeginTabItem("SNES")) 
   {
-    P(ImGui::Checkbox(_L("Use envelope##sgiSNES"),&ins->snes.useEnv));
+    P(ImGui::Checkbox(_("Use envelope##sgiSNES"),&ins->snes.useEnv));
     ImVec2 sliderSize=ImVec2(20.0f*dpiScale,128.0*dpiScale);
     if (ins->snes.useEnv) 
     {
@@ -67,8 +67,8 @@ void FurnaceGUI::drawInsSNES(DivInstrument* ins)
         CENTER_TEXT("R");
         ImGui::TextUnformatted("R");
         ImGui::TableNextColumn();
-        CENTER_TEXT(_L("Envelope##sgiSNES0"));
-        ImGui::TextUnformatted(_L("Envelope##sgiSNES1"));
+        CENTER_TEXT(_("Envelope##sgiSNES0"));
+        ImGui::TextUnformatted(_("Envelope##sgiSNES1"));
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
@@ -89,20 +89,20 @@ void FurnaceGUI::drawInsSNES(DivInstrument* ins)
 
         ImGui::EndTable();
       }
-      ImGui::Text(_L("Sustain/release mode:##sgiSNES"));
-      if (ImGui::RadioButton(_L("Direct (cut on release)##sgiSNES"),ins->snes.sus==0)) 
+      ImGui::Text(_("Sustain/release mode:##sgiSNES"));
+      if (ImGui::RadioButton(_("Direct (cut on release)##sgiSNES"),ins->snes.sus==0)) 
       {
         ins->snes.sus=0;
       }
-      if (ImGui::RadioButton(_L("Effective (linear decrease)##sgiSNES"),ins->snes.sus==1)) 
+      if (ImGui::RadioButton(_("Effective (linear decrease)##sgiSNES"),ins->snes.sus==1)) 
       {
         ins->snes.sus=1;
       }
-      if (ImGui::RadioButton(_L("Effective (exponential decrease)##sgiSNES"),ins->snes.sus==2)) 
+      if (ImGui::RadioButton(_("Effective (exponential decrease)##sgiSNES"),ins->snes.sus==2)) 
       {
         ins->snes.sus=2;
       }
-      if (ImGui::RadioButton(_L("Delayed (write R on release)##sgiSNES"),ins->snes.sus==3)) 
+      if (ImGui::RadioButton(_("Delayed (write R on release)##sgiSNES"),ins->snes.sus==3)) 
       {
         ins->snes.sus=3;
       }
@@ -116,35 +116,35 @@ void FurnaceGUI::drawInsSNES(DivInstrument* ins)
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
-        CENTER_TEXT(_L("Gain Mode##sgiSNES0"));
-        ImGui::TextUnformatted(_L("Gain Mode##sgiSNES1"));
+        CENTER_TEXT(_("Gain Mode##sgiSNES0"));
+        ImGui::TextUnformatted(_("Gain Mode##sgiSNES1"));
         ImGui::TableNextColumn();
-        CENTER_TEXT(_L("Gain##sgiSNES0"));
-        ImGui::TextUnformatted(_L("Gain##sgiSNES1"));
+        CENTER_TEXT(_("Gain##sgiSNES0"));
+        ImGui::TextUnformatted(_("Gain##sgiSNES1"));
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
-        if (ImGui::RadioButton(_L("Direct##sgiSNES"),ins->snes.gainMode==DivInstrumentSNES::GAIN_MODE_DIRECT)) 
+        if (ImGui::RadioButton(_("Direct##sgiSNES"),ins->snes.gainMode==DivInstrumentSNES::GAIN_MODE_DIRECT)) 
         {
           ins->snes.gainMode=DivInstrumentSNES::GAIN_MODE_DIRECT;
           PARAMETER;
         }
-        if (ImGui::RadioButton(_L("Decrease (linear)##sgiSNES"),ins->snes.gainMode==DivInstrumentSNES::GAIN_MODE_DEC_LINEAR)) 
+        if (ImGui::RadioButton(_("Decrease (linear)##sgiSNES"),ins->snes.gainMode==DivInstrumentSNES::GAIN_MODE_DEC_LINEAR)) 
         {
           ins->snes.gainMode=DivInstrumentSNES::GAIN_MODE_DEC_LINEAR;
           PARAMETER;
         }
-        if (ImGui::RadioButton(_L("Decrease (logarithmic)##sgiSNES"),ins->snes.gainMode==DivInstrumentSNES::GAIN_MODE_DEC_LOG)) 
+        if (ImGui::RadioButton(_("Decrease (logarithmic)##sgiSNES"),ins->snes.gainMode==DivInstrumentSNES::GAIN_MODE_DEC_LOG)) 
         {
           ins->snes.gainMode=DivInstrumentSNES::GAIN_MODE_DEC_LOG;
           PARAMETER;
         }
-        if (ImGui::RadioButton(_L("Increase (linear)##sgiSNES"),ins->snes.gainMode==DivInstrumentSNES::GAIN_MODE_INC_LINEAR)) 
+        if (ImGui::RadioButton(_("Increase (linear)##sgiSNES"),ins->snes.gainMode==DivInstrumentSNES::GAIN_MODE_INC_LINEAR)) 
         {
           ins->snes.gainMode=DivInstrumentSNES::GAIN_MODE_INC_LINEAR;
           PARAMETER;
         }
-        if (ImGui::RadioButton(_L("Increase (bent line)##sgiSNES"),ins->snes.gainMode==DivInstrumentSNES::GAIN_MODE_INC_INVLOG)) 
+        if (ImGui::RadioButton(_("Increase (bent line)##sgiSNES"),ins->snes.gainMode==DivInstrumentSNES::GAIN_MODE_INC_INVLOG)) 
         {
           ins->snes.gainMode=DivInstrumentSNES::GAIN_MODE_INC_INVLOG;
           PARAMETER;
@@ -159,7 +159,7 @@ void FurnaceGUI::drawInsSNES(DivInstrument* ins)
       }
       if (ins->snes.gainMode==DivInstrumentSNES::GAIN_MODE_DEC_LINEAR || ins->snes.gainMode==DivInstrumentSNES::GAIN_MODE_DEC_LOG) 
       {
-        ImGui::TextWrapped(_L("using decrease modes will not produce any sound at all, unless you know what you are doing.\nit is recommended to use the Gain macro for decrease instead.##sgiSNES"));
+        ImGui::TextWrapped(_("using decrease modes will not produce any sound at all, unless you know what you are doing.\nit is recommended to use the Gain macro for decrease instead.##sgiSNES"));
       }
     }
     ImGui::EndTabItem();
@@ -168,21 +168,21 @@ void FurnaceGUI::drawInsSNES(DivInstrument* ins)
   insTabWave(ins);
   insTabSample(ins);
 
-  if (ImGui::BeginTabItem(_L("Macros##sgiSNES"))) 
+  if (ImGui::BeginTabItem(_("Macros##sgiSNES"))) 
   {
     panMin=0;
     panMax=127;
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiSNES"),ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiSNES"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiSNES"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Noise Freq##sgiSNES"),ins,DIV_MACRO_DUTY,0xff,0,31,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiSNES"),ins,DIV_MACRO_WAVE,0xff,0,WAVE_MACRO_MAX,160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,false,NULL,true));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (left)##sgiSNES"),ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (right)##sgiSNES"),ins,DIV_MACRO_PAN_RIGHT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Volume##sgiSNES"),ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Arpeggio##sgiSNES"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Pitch##sgiSNES"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Noise Freq##sgiSNES"),ins,DIV_MACRO_DUTY,0xff,0,31,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Waveform##sgiSNES"),ins,DIV_MACRO_WAVE,0xff,0,WAVE_MACRO_MAX,160,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,false,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Panning (left)##sgiSNES"),ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,(ins->type==DIV_INS_AMIGA)?macroQSoundMode:NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Panning (right)##sgiSNES"),ins,DIV_MACRO_PAN_RIGHT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER]));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Special##sgiSNES"),ins,DIV_MACRO_EX1,0xff,0,5,96,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,snesModeBits));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Gain##sgiSNES2"),ins,DIV_MACRO_EX2,0xff,0,255,256,uiColors[GUI_COLOR_MACRO_VOLUME],false,NULL,macroHoverGain,false));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Special##sgiSNES"),ins,DIV_MACRO_EX1,0xff,0,5,96,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,snesModeBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Gain##sgiSNES2"),ins,DIV_MACRO_EX2,0xff,0,255,256,uiColors[GUI_COLOR_MACRO_VOLUME],false,NULL,macroHoverGain,false));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

@@ -33,11 +33,7 @@
 extern FurnaceGUI g;
 #endif
 
-#ifdef HAVE_GUI
-#define _LE(string) g.locale.getText(string)
-#else
 #define _LE(string) (string)
-#endif
 
 extern "C" {
 #include "../../../extern/YM2608-LLE/fmopna_2610.h"

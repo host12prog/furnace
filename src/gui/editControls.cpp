@@ -44,44 +44,44 @@ const float mobileButtonDistances[4][8]={
 
 const char* mobileButtonLabels[32]={
   // page 1
-  "cut##sgec",
-  "copy##sgec",
-  "paste##sgec",
-  "delete##sgec",
-  "select\nall##sgec",
-  "piano##sgec",
-  "undo##sgec",
-  "redo##sgec",
+  _N("cut"),
+  _N("copy"),
+  _N("paste"),
+  _N("delete"),
+  _N("select\nall"),
+  _N("piano"),
+  _N("undo"),
+  _N("redo"),
 
   // page 2
-  "paste\nmix##sgec",
-  "paste\nmix bg##sgec",
-  "paste\nins##sgec",
-  "paste\nins bg##sgec",
-  "paste\nflood##sgec",
-  "paste\noverflow##sgec",
-  "transpose\nnotes##sgec",
-  "transpose\nvalues##sgec",
+  _N("paste\nmix"),
+  _N("paste\nmix bg"),
+  _N("paste\nins"),
+  _N("paste\nins bg"),
+  _N("paste\nflood"),
+  _N("paste\noverflow"),
+  _N("transpose\nnotes"),
+  _N("transpose\nvalues"),
 
   // page 3
-  "change\nins##sgec",
-  "find/\nreplace##sgec",
-  "collapse##sgec",
-  "expand##sgec",
-  "flip##sgec",
-  "invert##sgec",
-  "interpolate##sgec",
-  "scale##sgec",
+  _N("change\nins"),
+  _N("find/\nreplace"),
+  _N("collapse"),
+  _N("expand"),
+  _N("flip"),
+  _N("invert"),
+  _N("interpolate"),
+  _N("scale"),
 
   // page 4
-  "fade##sgec",
-  "randomize##sgec",
-  "opmask##sgec",
-  "scroll\nmode##sgec",
-  "input\nlatch##sgec",
-  "set\nlatch##sgec",
-  "clear\nlatch##sgec",
-  "clear##sgec"
+  _N("fade"),
+  _N("randomize"),
+  _N("opmask"),
+  _N("scroll\nmode"),
+  _N("input\nlatch"),
+  _N("set\nlatch"),
+  _N("clear\nlatch"),
+  _N("clear")
 };
 
 const int mobileButtonActions[32]={
@@ -235,7 +235,7 @@ void FurnaceGUI::drawMobileControls() {
 
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding,ImVec2(0.0f,0.0f));
     ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding,mobileEditButtonSize.x);
-    if (ImGui::Begin("MobileEdit",NULL,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoBackground|ImGuiWindowFlags_NoDecoration,_L("Mobile Edit###MobileEdit"))) {
+    if (ImGui::Begin("MobileEdit",NULL,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoBackground|ImGuiWindowFlags_NoDecoration,_("Mobile Edit###MobileEdit"))) {
       bool mobileEditWas=mobileEdit;
       if (ImGui::IsMouseReleased(ImGuiMouseButton_Left) && mobileEdit) {
         mobileEdit=false;
@@ -293,7 +293,7 @@ void FurnaceGUI::drawMobileControls() {
             (mobileEditButtonPos.x*canvasW)+cos(buttonDir*2.0*M_PI)*buttonDist*buttonMirrorX*anim,
             (mobileEditButtonPos.y*canvasH)+sin(buttonDir*2.0*M_PI)*buttonDist*buttonMirrorY*anim
           ));
-          if (ImGui::Button(_L(mobileButtonLabels[i+mobileEditPage*8]),mobileEditButtonSize)) {
+          if (ImGui::Button(_(mobileButtonLabels[i+mobileEditPage*8]),mobileEditButtonSize)) {
             if (mobileButtonActions[i+mobileEditPage*8]) {
               doAction(mobileButtonActions[i+mobileEditPage*8]);
             }
@@ -330,7 +330,7 @@ void FurnaceGUI::drawMobileControls() {
   
   ImGui::SetNextWindowPos(portrait?ImVec2(0.0f,((1.0-mobileMenuPos*0.65)*canvasH)-(0.16*canvasW)):ImVec2(0.5*canvasW*mobileMenuPos,0.0f));
   ImGui::SetNextWindowSize(portrait?ImVec2(canvasW,0.16*canvasW):ImVec2(0.16*canvasH,canvasH));
-  if (ImGui::Begin("Mobile Controls",NULL,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|globalWinFlags, _L("Mobile Controls###Mobile Controls"))) {
+  if (ImGui::Begin("Mobile Controls",NULL,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|globalWinFlags,_("Mobile Controls"))) {
     float avail=portrait?ImGui::GetContentRegionAvail().y:ImGui::GetContentRegionAvail().x;
     ImVec2 buttonSize=ImVec2(avail,avail);
     const char* mobButtonName=ICON_FA_CHEVRON_RIGHT "##MobileMenu";
@@ -405,7 +405,7 @@ void FurnaceGUI::drawMobileControls() {
 
   ImGui::SetNextWindowPos(portrait?ImVec2(0.0f,((1.0-mobileMenuPos*0.65)*canvasH)):ImVec2(0.5*canvasW*(mobileMenuPos-1.0),0.0f));
   ImGui::SetNextWindowSize(portrait?ImVec2(canvasW,0.65*canvasH):ImVec2(0.5*canvasW,canvasH));
-  if (ImGui::Begin("Mobile Menu",NULL,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|globalWinFlags,_L("Mobile Menu###Mobile Menu"))) {
+  if (ImGui::Begin("Mobile Menu",NULL,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|globalWinFlags,_("Mobile Menu"))) {
     if (ImGui::BeginTable("SceneSel",5)) {
       ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch,1.0f);
       ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch,1.0f);
@@ -418,44 +418,44 @@ void FurnaceGUI::drawMobileControls() {
       ImVec2 buttonSize=ImGui::GetContentRegionAvail();
       buttonSize.y=30.0f*dpiScale;
 
-      if (ImGui::Button(_L("Pattern##sgec0"),buttonSize)) {
+      if (ImGui::Button(_("Pattern"),buttonSize)) {
         mobScene=GUI_SCENE_PATTERN;
       }
       ImGui::TableNextColumn();
-      if (ImGui::Button(_L("Orders##sgec0"),buttonSize)) {
+      if (ImGui::Button(_("Orders"),buttonSize)) {
         mobScene=GUI_SCENE_ORDERS;
       }
       ImGui::TableNextColumn();
-      if (ImGui::Button(_L("Ins##sgec"),buttonSize)) {
+      if (ImGui::Button(_("Ins"),buttonSize)) {
         mobScene=GUI_SCENE_INSTRUMENT;
       }
       ImGui::TableNextColumn();
-      if (ImGui::Button(_L("Wave##sgec"),buttonSize)) {
+      if (ImGui::Button(_("Wave"),buttonSize)) {
         mobScene=GUI_SCENE_WAVETABLE;
       }
       ImGui::TableNextColumn();
-      if (ImGui::Button(_L("Sample##sgec"),buttonSize)) {
+      if (ImGui::Button(_("Sample"),buttonSize)) {
         mobScene=GUI_SCENE_SAMPLE;
       }
       ImGui::TableNextRow();
       ImGui::TableNextColumn();
-      if (ImGui::Button(_L("Song##sgec"),buttonSize)) {
+      if (ImGui::Button(_("Song"),buttonSize)) {
         mobScene=GUI_SCENE_SONG;
       }
       ImGui::TableNextColumn();
-      if (ImGui::Button(_L("Channels##sgec"),buttonSize)) {
+      if (ImGui::Button(_("Channels"),buttonSize)) {
         mobScene=GUI_SCENE_CHANNELS;
       }
       ImGui::TableNextColumn();
-      if (ImGui::Button(_L("Chips##sgec"),buttonSize)) {
+      if (ImGui::Button(_("Chips"),buttonSize)) {
         mobScene=GUI_SCENE_CHIPS;
       }
       ImGui::TableNextColumn();
-      if (ImGui::Button(_L("Mixer##sgec"),buttonSize)) {
+      if (ImGui::Button(_("Mixer"),buttonSize)) {
         mobScene=GUI_SCENE_MIXER;
       }
       ImGui::TableNextColumn();
-      if (ImGui::Button(_L("Other##sgec"),buttonSize)) {
+      if (ImGui::Button(_("Other"),buttonSize)) {
         mobScene=GUI_SCENE_OTHER;
       }
       ImGui::EndTable();
@@ -484,27 +484,27 @@ void FurnaceGUI::drawMobileControls() {
         }
         break;
       case GUI_SCENE_SONG: {
-        if (ImGui::Button(_L("New##sgec"))) {
+        if (ImGui::Button(_("New"))) {
           mobileMenuOpen=false;
           //doAction(GUI_ACTION_NEW);
           if (modified) {
-            showWarning(settings.language == DIV_LANG_ENGLISH ? "Unsaved changes! Save changes before creating a new song?" : _L("Unsaved changes! Save changes before creating a new song?##sgec"),GUI_WARN_NEW);
+            showWarning(_("Unsaved changes! Save changes before creating a new song?"),GUI_WARN_NEW);
           } else {
             displayNew=true;
           }
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("Open##sgec"))) {
+        if (ImGui::Button(_("Open"))) {
           mobileMenuOpen=false;
           doAction(GUI_ACTION_OPEN);
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("Save##sgec"))) {
+        if (ImGui::Button(_("Save"))) {
           mobileMenuOpen=false;
           doAction(GUI_ACTION_SAVE);
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("Save as...##sgec"))) {
+        if (ImGui::Button(_("Save as..."))) {
           mobileMenuOpen=false;
           doAction(GUI_ACTION_SAVE_AS);
         }
@@ -514,17 +514,18 @@ void FurnaceGUI::drawMobileControls() {
           openFileDialog(GUI_FILE_SAVE_DMF);
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("Legacy .dmf##sgec"))) {
+        if (ImGui::Button(_("Legacy .dmf##sgec"))) {
           mobileMenuOpen=false;
           openFileDialog(GUI_FILE_SAVE_DMF_LEGACY);
         }
 
         ImGui::SameLine();
-        if (ImGui::Button(_L("Export##sgec"))) {
+
+        if (ImGui::Button(_("Export"))) {
           doAction(GUI_ACTION_EXPORT);
         }
 
-        if (ImGui::Button(_L("Restore Backup##sgec"))) {
+        if (ImGui::Button(_("Restore Backup"))) {
           mobileMenuOpen=false;
           doAction(GUI_ACTION_OPEN_BACKUP);
         }
@@ -532,15 +533,15 @@ void FurnaceGUI::drawMobileControls() {
         ImGui::Separator();
 
         if (ImGui::BeginTabBar("MobileSong")) {
-          if (ImGui::BeginTabItem(_L("Song Info##sgec"))) {
+          if (ImGui::BeginTabItem(_("Song Info"))) {
             drawSongInfo(true);
             ImGui::EndTabItem();
           }
-          if (ImGui::BeginTabItem(_L("Subsongs##sgec"))) {
+          if (ImGui::BeginTabItem(_("Subsongs"))) {
             drawSubSongs(true);
             ImGui::EndTabItem();
           }
-          if (ImGui::BeginTabItem(_L("Speed##sgec"))) {
+          if (ImGui::BeginTabItem(_("Speed"))) {
             drawSpeed(true);
             ImGui::EndTabItem();
           }
@@ -549,82 +550,81 @@ void FurnaceGUI::drawMobileControls() {
         break;
       }
       case GUI_SCENE_CHANNELS:
-        ImGui::Text(_L("Channels here...##sgec"));
+        ImGui::Text(_("Channels here..."));
         break;
       case GUI_SCENE_CHIPS:
-        ImGui::Text(_L("Chips here...##sgec"));
+        ImGui::Text(_("Chips here..."));
         break;
       case GUI_SCENE_MIXER:
-        ImGui::Text(_L("What the hell...##sgec"));
+        ImGui::Text(_("What the hell..."));
         break;
       case GUI_SCENE_OTHER: {
-        if (ImGui::Button(_L("Osc##sgec"))) {
+        if (ImGui::Button(_("Osc"))) {
           oscOpen=!oscOpen;
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("ChanOsc##sgec"))) {
+        if (ImGui::Button(_("ChanOsc"))) {
           chanOscOpen=!chanOscOpen;
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("RegView##sgec"))) {
+        if (ImGui::Button(_("RegView"))) {
           regViewOpen=!regViewOpen;
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("Stats##sgec"))) {
+        if (ImGui::Button(_("Stats"))) {
           statsOpen=!statsOpen;
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("Grooves##sgec"))) {
+        if (ImGui::Button(_("Grooves"))) {
           groovesOpen=!groovesOpen;
         }
-        if (ImGui::Button(_L("Compat Flags##sgec"))) {
+        if (ImGui::Button(_("Compat Flags"))) {
           compatFlagsOpen=!compatFlagsOpen;
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("XYOsc##sgec"))) {
+        if (ImGui::Button(_("XYOsc"))) {
           xyOscOpen=!xyOscOpen;
         }
         ImGui::SameLine();
-        if (ImGui::Button("Meter")) {
+        if (ImGui::Button(_("Meter"))) {
           volMeterOpen=!volMeterOpen;
         }
         ImGui::SameLine();
-        if (ImGui::Button("Memory")) {
+        if (ImGui::Button(_("Memory"))) {
           memoryOpen=!memoryOpen;
         }
-        
         ImGui::SameLine();
-        if (ImGui::Button("Presets")) {
+        if (ImGui::Button(_("Presets"))) {
           userPresetsOpen=!userPresetsOpen;
         }
         ImGui::SameLine();
-        if (ImGui::Button("PatManager")) {
+        if (ImGui::Button(_("PatManager"))) {
           patManagerOpen=!patManagerOpen;
         }
 
         ImGui::Separator();
 
-        ImGui::Button(_L("Panic##sgec"));
+        ImGui::Button(_("Panic"));
         ImGui::SameLine();
-        if (ImGui::Button(_L("Settings##sgec"))) {
+        if (ImGui::Button(_("Settings"))) {
           mobileMenuOpen=false;
           settingsOpen=true;
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("Log##sgec"))) {
+        if (ImGui::Button(_("Log"))) {
           logOpen=!logOpen;
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("Debug##sgec"))) {
+        if (ImGui::Button(_("Debug"))) {
           debugOpen=!debugOpen;
         }
         ImGui::SameLine();
-        if (ImGui::Button(_L("About##sgec"))) {
+        if (ImGui::Button(_("About"))) {
           mobileMenuOpen=false;
           mobileMenuPos=0.0f;
           aboutOpen=true;
         }
-        if (ImGui::Button(_L("Switch to Desktop Mode##sgec"))) {
+        if (ImGui::Button(_("Switch to Desktop Mode"))) {
           toggleMobileUI(!mobileUI);
         }
 
@@ -634,16 +634,16 @@ void FurnaceGUI::drawMobileControls() {
         }
 
         if (numAmiga) {
-          ImGui::Text(_L(
+          ImGui::Text(_(
             "this is NOT ROM export! only use for making sure the\n"
             "Furnace Amiga emulator is working properly by\n"
             "comparing it with real Amiga output."
           ));
           ImGui::AlignTextToFramePadding();
-          ImGui::Text(_L("Directory##sgec"));
+          ImGui::Text(_("Directory"));
           ImGui::SameLine();
           ImGui::InputText("##AVDPath",&workingDirROMExport);
-          if (ImGui::Button(_L("Bake Data##sgec"))) {
+          if (ImGui::Button(_("Bake Data"))) {
             std::vector<DivROMExportOutput> out=e->buildROM(DIV_ROM_AMIGA_VALIDATION);
             if (workingDirROMExport.size()>0) {
               if (workingDirROMExport[workingDirROMExport.size()-1]!=DIR_SEPARATOR) workingDirROMExport+=DIR_SEPARATOR_STR;
@@ -658,7 +658,7 @@ void FurnaceGUI::drawMobileControls() {
               i.data->finish();
               delete i.data;
             }
-            showError(fmt::sprintf(settings.language == DIV_LANG_ENGLISH ? "Done! Baked %d files." : _LP("Done! Baked %d files.##sgec", (int)out.size()),(int)out.size()));
+            showError(fmt::sprintf(_("Done! Baked %d files."),(int)out.size()));
           }
         }
 
@@ -678,7 +678,7 @@ void FurnaceGUI::drawEditControls() {
   if (!editControlsOpen) return;
   switch (settings.controlLayout) {
     case 0: // classic
-      if (ImGui::Begin("Play/Edit Controls",&editControlsOpen,globalWinFlags,_L("Play/Edit Controls###Play/Edit Controls"))) {
+      if (ImGui::Begin("Play/Edit Controls",&editControlsOpen,globalWinFlags,_("Play/Edit Controls"))) {
         if (ImGui::BeginTable("PlayEditAlign",2)) {
           ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthFixed);
           ImGui::TableSetupColumn("c1",ImGuiTableColumnFlags_WidthStretch);
@@ -686,7 +686,7 @@ void FurnaceGUI::drawEditControls() {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
           ImGui::AlignTextToFramePadding();
-          ImGui::Text(_L("Octave##sgec0"));
+          ImGui::Text(_("Octave"));
           ImGui::TableNextColumn();
           ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
           if (ImGui::InputInt("##Octave",&curOctave,1,1)) {
@@ -703,7 +703,7 @@ void FurnaceGUI::drawEditControls() {
           ImGui::TableNextRow();
           ImGui::TableNextColumn();
           ImGui::AlignTextToFramePadding();
-          if (ImGui::SmallButton(changeCoarse?_L("Coarse Step##sgec0"):_L("Edit Step##sgec0"))) {
+          if (ImGui::SmallButton(changeCoarse?_("Coarse Step"):_("Edit Step"))) {
             changeCoarse=!changeCoarse;
           }
           ImGui::TableNextColumn();
@@ -736,7 +736,7 @@ void FurnaceGUI::drawEditControls() {
           play();
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Play##sgec0"));
+          ImGui::SetTooltip(_("Play"));
         }
         popToggleColors();
         ImGui::SameLine();
@@ -744,25 +744,25 @@ void FurnaceGUI::drawEditControls() {
           stop();
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Stop##sgec0"));
+          ImGui::SetTooltip(_("Stop"));
         }
         ImGui::SameLine();
-        ImGui::Checkbox(_L("Edit##sgec0"),&edit);
+        ImGui::Checkbox(_("Edit"),&edit);
         ImGui::SameLine();
         bool metro=e->getMetronome();
-        if (ImGui::Checkbox(_L("Metronome##sgec0"),&metro)) {
+        if (ImGui::Checkbox(_("Metronome"),&metro)) {
           e->setMetronome(metro);
         }
 
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Follow##sgec0"));
+        ImGui::Text(_("Follow"));
         ImGui::SameLine();
-        unimportant(ImGui::Checkbox(_L("Orders##sgec1"),&followOrders));
+        unimportant(ImGui::Checkbox(_("Orders"),&followOrders));
         ImGui::SameLine();
-        unimportant(ImGui::Checkbox(_L("Pattern##sgec1"),&followPattern));
+        unimportant(ImGui::Checkbox(_("Pattern"),&followPattern));
 
         bool repeatPattern=e->getRepeatPattern();
-        if (ImGui::Checkbox(_L("Repeat pattern##sgec0"),&repeatPattern)) {
+        if (ImGui::Checkbox(_("Repeat pattern"),&repeatPattern)) {
           e->setRepeatPattern(repeatPattern);
         }
         ImGui::SameLine();
@@ -771,17 +771,17 @@ void FurnaceGUI::drawEditControls() {
           pendingStepUpdate=1;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Step one row##sgec0"));
+          ImGui::SetTooltip(_("Step one row"));
         }
 
         ImGui::SameLine();
         pushToggleColors(noteInputPoly);
-        if (ImGui::Button(noteInputPoly?(_L("Poly##PolyInput")):(_L("Mono##PolyInput")))) {
+        if (ImGui::Button(noteInputPoly?(_("Poly##PolyInput")):(_("Mono##PolyInput")))) {
           noteInputPoly=!noteInputPoly;
           e->setAutoNotePoly(noteInputPoly);
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Polyphony##sgec0"));
+          ImGui::SetTooltip(_("Polyphony"));
         }
         popToggleColors();
       }
@@ -789,12 +789,12 @@ void FurnaceGUI::drawEditControls() {
       ImGui::End();
       break;
     case 1: // compact
-      if (ImGui::Begin("Play/Edit Controls",&editControlsOpen,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|globalWinFlags,_L("Play/Edit Controls###Play/Edit Controls"))) {
+      if (ImGui::Begin("Play/Edit Controls",&editControlsOpen,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|globalWinFlags,_("Play/Edit Controls"))) {
         if (ImGui::Button(ICON_FA_STOP "##Stop")) {
           stop();
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Stop##sgec1"));
+          ImGui::SetTooltip(_("Stop"));
         }
         ImGui::SameLine();
         pushToggleColors(e->isPlaying());
@@ -802,7 +802,7 @@ void FurnaceGUI::drawEditControls() {
           play();
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Play##sgec1"));
+          ImGui::SetTooltip(_("Play"));
         }
         popToggleColors();
         ImGui::SameLine();
@@ -811,7 +811,7 @@ void FurnaceGUI::drawEditControls() {
           pendingStepUpdate=1;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Step one row##sgec1"));
+          ImGui::SetTooltip(_("Step one row"));
         }
 
         ImGui::SameLine();
@@ -821,7 +821,7 @@ void FurnaceGUI::drawEditControls() {
           e->setRepeatPattern(!repeatPattern);
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Repeat pattern##sgec1"));
+          ImGui::SetTooltip(_("Repeat pattern"));
         }
         popToggleColors();
 
@@ -831,7 +831,7 @@ void FurnaceGUI::drawEditControls() {
           edit=!edit;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Edit##sgec1"));
+          ImGui::SetTooltip(_("Edit"));
         }
         popToggleColors();
 
@@ -842,12 +842,12 @@ void FurnaceGUI::drawEditControls() {
           e->setMetronome(!metro);
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Metronome##sgec1"));
+          ImGui::SetTooltip(_("Metronome"));
         }
         popToggleColors();
 
         ImGui::SameLine();
-        ImGui::Text(_L("Octave##sgec1"));
+        ImGui::Text(_("Octave"));
         ImGui::SameLine();
         ImGui::SetNextItemWidth(96.0f*dpiScale);
         if (ImGui::InputInt("##Octave",&curOctave,1,1)) {
@@ -862,7 +862,7 @@ void FurnaceGUI::drawEditControls() {
         }
 
         ImGui::SameLine();
-        if (ImGui::SmallButton(changeCoarse?_L("Coarse Step##sgec1"):_L("Edit Step##sgec1"))) {
+        if (ImGui::SmallButton(changeCoarse?_("Coarse Step"):_("Edit Step"))) {
           changeCoarse=!changeCoarse;
         }
         ImGui::SameLine();
@@ -888,20 +888,20 @@ void FurnaceGUI::drawEditControls() {
         }
 
         ImGui::SameLine();
-        ImGui::Text(_L("Follow##sgec1"));
+        ImGui::Text(_("Follow"));
         ImGui::SameLine();
-        unimportant(ImGui::Checkbox(_L("Orders##sgec2"),&followOrders));
+        unimportant(ImGui::Checkbox(_("Orders"),&followOrders));
         ImGui::SameLine();
-        unimportant(ImGui::Checkbox(_L("Pattern##sgec2"),&followPattern));
+        unimportant(ImGui::Checkbox(_("Pattern"),&followPattern));
 
         ImGui::SameLine();
         pushToggleColors(noteInputPoly);
-        if (ImGui::Button(noteInputPoly?(_L("Poly##PolyInput")):(_L("Mono##PolyInput")))) {
+        if (ImGui::Button(noteInputPoly?_("Poly##PolyInput"):_("Mono##PolyInput"))) {
           noteInputPoly=!noteInputPoly;
           e->setAutoNotePoly(noteInputPoly);
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Polyphony##sgec1"));
+          ImGui::SetTooltip(_("Polyphony"));
         }
         popToggleColors();
       }
@@ -909,28 +909,28 @@ void FurnaceGUI::drawEditControls() {
       ImGui::End();
       break;
     case 2: // compact vertical
-      if (ImGui::Begin("Play/Edit Controls",&editControlsOpen,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|globalWinFlags,_L("Play/Edit Controls###Play/Edit Controls"))) {
+      if (ImGui::Begin("Play/Edit Controls",&editControlsOpen,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|globalWinFlags,_("Play/Edit Controls"))) {
         ImVec2 buttonSize=ImVec2(ImGui::GetContentRegionAvail().x,0.0f);
         pushToggleColors(e->isPlaying());
         if (ImGui::Button(ICON_FA_PLAY "##Play",buttonSize)) {
           play();
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Play##sgec2"));
+          ImGui::SetTooltip(_("Play"));
         }
         popToggleColors();
         if (ImGui::Button(ICON_FA_STOP "##Stop",buttonSize)) {
           stop();
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Stop##sgec2"));
+          ImGui::SetTooltip(_("Stop"));
         }
         if (ImGui::Button(ICON_FA_ARROW_DOWN "##StepOne",buttonSize)) {
           e->stepOne(cursor.y);
           pendingStepUpdate=1;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Step one row##sgec2"));
+          ImGui::SetTooltip(_("Step one row"));
         }
 
         bool repeatPattern=e->getRepeatPattern();
@@ -939,7 +939,7 @@ void FurnaceGUI::drawEditControls() {
           e->setRepeatPattern(!repeatPattern);
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Repeat pattern##sgec2"));
+          ImGui::SetTooltip(_("Repeat pattern"));
         }
         popToggleColors();
 
@@ -948,7 +948,7 @@ void FurnaceGUI::drawEditControls() {
           edit=!edit;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Edit##sgec2"));
+          ImGui::SetTooltip(_("Edit"));
         }
         popToggleColors();
 
@@ -958,13 +958,13 @@ void FurnaceGUI::drawEditControls() {
           e->setMetronome(!metro);
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Metronome##sgec2"));
+          ImGui::SetTooltip(_("Metronome"));
         }
         popToggleColors();
 
-        ImGui::Text(_L("Oct.##sgec"));
+        ImGui::Text(_("Oct."));
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Octave##sgec2"));
+          ImGui::SetTooltip(_("Octave"));
         }
         float avail=ImGui::GetContentRegionAvail().x;
         ImGui::SetNextItemWidth(avail);
@@ -979,7 +979,7 @@ void FurnaceGUI::drawEditControls() {
           }
         }
 
-        if (ImGui::SmallButton(changeCoarse?_L("Coarse##sgec0"):_L("Step##sgec0"))) {
+        if (ImGui::SmallButton(changeCoarse?_("Coarse"):_("Step"))) {
           changeCoarse=!changeCoarse;
         }
         ImGui::SetNextItemWidth(avail);
@@ -1003,34 +1003,34 @@ void FurnaceGUI::drawEditControls() {
           }
         }
 
-        ImGui::Text(_L("Foll.##sgec"));
+        ImGui::Text(_("Foll."));
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Follow##sgec2"));
+          ImGui::SetTooltip(_("Follow"));
         }
         pushToggleColors(followOrders);
-        if (ImGui::Button(_L("Ord##FollowOrders"),buttonSize)) { handleUnimportant
+        if (ImGui::Button(_("Ord##FollowOrders"),buttonSize)) { handleUnimportant
           followOrders=!followOrders;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Orders##sgec3"));
+          ImGui::SetTooltip(_("Orders"));
         }
         popToggleColors();
         pushToggleColors(followPattern);
-        if (ImGui::Button(_L("Pat##FollowPattern"),buttonSize)) { handleUnimportant
+        if (ImGui::Button(_("Pat##FollowPattern"),buttonSize)) { handleUnimportant
           followPattern=!followPattern;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Pattern##sgec3"));
+          ImGui::SetTooltip(_("Pattern"));
         }
         popToggleColors();
 
         pushToggleColors(noteInputPoly);
-        if (ImGui::Button(noteInputPoly?(_L("Poly##PolyInput")):(_L("Mono##PolyInput")))) {
+        if (ImGui::Button(noteInputPoly?_("Poly##PolyInput"):_("Mono##PolyInput"))) {
           noteInputPoly=!noteInputPoly;
           e->setAutoNotePoly(noteInputPoly);
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Polyphony##sgec2"));
+          ImGui::SetTooltip(_("Polyphony"));
         }
         popToggleColors();
       }
@@ -1038,14 +1038,14 @@ void FurnaceGUI::drawEditControls() {
       ImGui::End();
       break;
     case 3: // split
-      if (ImGui::Begin("Play Controls",&editControlsOpen,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|globalWinFlags,_L("Play Controls###Play Controls"))) {
+      if (ImGui::Begin("Play Controls",&editControlsOpen,ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse|globalWinFlags,_("Play Controls"))) {
         if (e->isPlaying()) {
           pushToggleColors(true);
           if (ImGui::Button(ICON_FA_STOP "##Stop")) {
             stop();
           }
           if (ImGui::IsItemHovered()) {
-            ImGui::SetTooltip(_L("Stop##sgec3"));
+            ImGui::SetTooltip(_("Stop"));
           }
           popToggleColors();
         } else {
@@ -1053,7 +1053,7 @@ void FurnaceGUI::drawEditControls() {
             play(oldRow);
           }
           if (ImGui::IsItemHovered()) {
-            ImGui::SetTooltip(_L("Play##sgec3"));
+            ImGui::SetTooltip(_("Play"));
           }
         }
         ImGui::SameLine();
@@ -1062,7 +1062,7 @@ void FurnaceGUI::drawEditControls() {
           play();
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Play from the beginning of this pattern##sgec"));
+          ImGui::SetTooltip(_("Play from the beginning of this pattern"));
         }
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_STEP_FORWARD "##PlayRepeat")) {
@@ -1070,7 +1070,7 @@ void FurnaceGUI::drawEditControls() {
           play();
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Repeat from the beginning of this pattern##sgec"));
+          ImGui::SetTooltip(_("Repeat from the beginning of this pattern"));
         }
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_ARROW_DOWN "##StepOne")) {
@@ -1078,7 +1078,7 @@ void FurnaceGUI::drawEditControls() {
           pendingStepUpdate=1;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Step one row##sgec3"));
+          ImGui::SetTooltip(_("Step one row"));
         }
 
         ImGui::SameLine();
@@ -1087,7 +1087,7 @@ void FurnaceGUI::drawEditControls() {
           edit=!edit;
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Edit##sgec3"));
+          ImGui::SetTooltip(_("Edit"));
         }
         popToggleColors();
 
@@ -1098,7 +1098,7 @@ void FurnaceGUI::drawEditControls() {
           e->setMetronome(!metro);
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Metronome##sgec3"));
+          ImGui::SetTooltip(_("Metronome"));
         }
         popToggleColors();
 
@@ -1109,28 +1109,28 @@ void FurnaceGUI::drawEditControls() {
           e->setRepeatPattern(!repeatPattern);
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Repeat pattern##sgec3"));
+          ImGui::SetTooltip(_("Repeat pattern"));
         }
         popToggleColors();
 
         ImGui::SameLine();
         pushToggleColors(noteInputPoly);
-        if (ImGui::Button(noteInputPoly?(_L("Poly##PolyInput")):(_L("Mono##PolyInput")))) {
+        if (ImGui::Button(noteInputPoly?_("Poly##PolyInput"):_("Mono##PolyInput"))) {
           noteInputPoly=!noteInputPoly;
           e->setAutoNotePoly(noteInputPoly);
         }
         if (ImGui::IsItemHovered()) {
-          ImGui::SetTooltip(_L("Polyphony##sgec3"));
+          ImGui::SetTooltip(_("Polyphony"));
         }
         popToggleColors();
       }
       if (ImGui::IsWindowFocused(ImGuiFocusedFlags_ChildWindows)) curWindow=GUI_WINDOW_EDIT_CONTROLS;
       ImGui::End();
 
-      if (ImGui::Begin("Edit Controls",&editControlsOpen,globalWinFlags, _L("Edit Controls###Edit Controls"))) {
+      if (ImGui::Begin("Edit Controls",&editControlsOpen,globalWinFlags,_("Edit Controls"))) {
         ImGui::Columns(2);
         ImGui::AlignTextToFramePadding();
-        ImGui::Text(_L("Octave##sgec3"));
+        ImGui::Text(_("Octave"));
         ImGui::SameLine();
         float cursor=ImGui::GetCursorPosX();
         float avail=ImGui::GetContentRegionAvail().x;
@@ -1147,7 +1147,7 @@ void FurnaceGUI::drawEditControls() {
         }
 
         ImGui::AlignTextToFramePadding();
-        if (ImGui::SmallButton(changeCoarse?_L("Coarse##sgec1"):_L("Step##sgec1"))) {
+        if (ImGui::SmallButton(changeCoarse?_("Coarse"):_("Step"))) {
           changeCoarse=!changeCoarse;
         }
         ImGui::SameLine();
@@ -1174,8 +1174,8 @@ void FurnaceGUI::drawEditControls() {
         }
         ImGui::NextColumn();
 
-        unimportant(ImGui::Checkbox(_L("Follow orders##sgec"),&followOrders));
-        unimportant(ImGui::Checkbox(_L("Follow pattern##sgec"),&followPattern));
+        unimportant(ImGui::Checkbox(_("Follow orders"),&followOrders));
+        unimportant(ImGui::Checkbox(_("Follow pattern"),&followPattern));
       }
       if (ImGui::IsWindowFocused(ImGuiFocusedFlags_ChildWindows)) curWindow=GUI_WINDOW_EDIT_CONTROLS;
       ImGui::End();

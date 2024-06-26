@@ -1586,10 +1586,10 @@ void DivInstrument::readFeatureNA(SafeReader& reader, short version) {
 
   name=reader.readString();
 
-  if(version == 192) //fix bug when older Furnace-B versions added "##sggu" to default instrument name
+  if(version == 192) //fix bug when older Furnace-B versions added "" to default instrument name
   {
     // Find position of substring in string
-    String fucccckkk = "##sggu";
+    String fucccckkk = "";
     size_t pos = name.find(fucccckkk);
     if (pos != std::string::npos)
     {

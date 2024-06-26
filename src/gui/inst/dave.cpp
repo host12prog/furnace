@@ -29,26 +29,26 @@ class FurnaceGUI;
 
 void FurnaceGUI::drawInsDAVE(DivInstrument* ins)
 {
-  if (ImGui::BeginTabItem(_L("Macros##sgiDAVE"))) 
+  if (ImGui::BeginTabItem(_("Macros##sgiDAVE"))) 
   {
     panMin=0;
     panMax=63;
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiDAVE"),ins,DIV_MACRO_VOL,0xff,0,63,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiDAVE"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiDAVE"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Noise Freq##sgiDAVE"),ins,DIV_MACRO_DUTY,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Volume##sgiDAVE"),ins,DIV_MACRO_VOL,0xff,0,63,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Arpeggio##sgiDAVE"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Pitch##sgiDAVE"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Noise Freq##sgiDAVE"),ins,DIV_MACRO_DUTY,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_OTHER]));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiDAVE"),ins,DIV_MACRO_WAVE,0xff,0,4,64,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Waveform##sgiDAVE"),ins,DIV_MACRO_WAVE,0xff,0,4,64,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (left)##sgiDAVE"),ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,NULL));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning (right)##sgiDAVE"),ins,DIV_MACRO_PAN_RIGHT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Panning (left)##sgiDAVE"),ins,DIV_MACRO_PAN_LEFT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER],false,NULL));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Panning (right)##sgiDAVE"),ins,DIV_MACRO_PAN_RIGHT,0xff,panMin,panMax,CLAMP(31+panMax-panMin,32,160),uiColors[GUI_COLOR_MACRO_OTHER]));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Phase Reset##sgiDAVE"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Phase Reset##sgiDAVE"),ins,DIV_MACRO_PHASE_RESET,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Control##sgiDAVE"),ins,DIV_MACRO_EX1,0xff,0,4,64,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,daveControlBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Control##sgiDAVE"),ins,DIV_MACRO_EX1,0xff,0,4,64,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,daveControlBits));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Raw Frequency##sgiDAVE"),ins,DIV_MACRO_EX2,0xff,0,4095,256,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Raw Frequency##sgiDAVE"),ins,DIV_MACRO_EX2,0xff,0,4095,256,uiColors[GUI_COLOR_MACRO_OTHER]));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

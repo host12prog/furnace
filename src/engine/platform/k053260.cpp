@@ -27,11 +27,7 @@
 extern FurnaceGUI g;
 #endif
 
-#ifdef HAVE_GUI
-#define _LE(string) g.locale.getText(string)
-#else
 #define _LE(string) (string)
-#endif
 
 #define rWrite(a,v) {if(!skipRegisterWrites) {k053260.write(a,v); regPool[a]=v; if(dumpWrites) addWrite(a,v);}}
 

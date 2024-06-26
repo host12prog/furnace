@@ -79,18 +79,18 @@ String macroHoverGain(int id, float val, void* u) {
 
 String FurnaceGUI::realMacroHoverGain(int id, float val, void* u) {
   if (val>=224.0f) {
-    return fmt::sprintf("%d: +%d (%s)",id,(int)(val-224), settings.language == DIV_LANG_ENGLISH ? "exponential" : _L("exponential##sgmu"));
+    return fmt::sprintf("%d: +%d (%s)",id,(int)(val-224), settings.language == 0 ? "exponential" : _("exponential##sgmu"));
   }
   if (val>=192.0f) {
-    return fmt::sprintf("%d: +%d (%s)",id,(int)(val-192), settings.language == DIV_LANG_ENGLISH ? "linear" : _L("linear##sgmu"));
+    return fmt::sprintf("%d: +%d (%s)",id,(int)(val-192), settings.language == 0 ? "linear" : _("linear##sgmu"));
   }
   if (val>=160.0f) {
-    return fmt::sprintf("%d: -%d (%s)",id,(int)(val-160), settings.language == DIV_LANG_ENGLISH ? "exponential" : _L("exponential##sgmu"));
+    return fmt::sprintf("%d: -%d (%s)",id,(int)(val-160), settings.language == 0 ? "exponential" : _("exponential##sgmu"));
   }
   if (val>=128.0f) {
-    return fmt::sprintf("%d: -%d (%s)",id,(int)(val-128), settings.language == DIV_LANG_ENGLISH ? "linear" : _L("linear##sgmu"));
+    return fmt::sprintf("%d: -%d (%s)",id,(int)(val-128), settings.language == 0 ? "linear" : _("linear##sgmu"));
   }
-  return fmt::sprintf("%d: %d (%s)",id,(int)val, settings.language == DIV_LANG_ENGLISH ? "direct" : _L("direct##sgmu"));
+  return fmt::sprintf("%d: %d (%s)",id,(int)val, settings.language == 0 ? "direct" : _("direct##sgmu"));
 }
 
 String macroHoverES5506FilterMode(int id, float val, void* u) {
@@ -101,16 +101,16 @@ String FurnaceGUI::realMacroHoverES5506FilterMode(int id, float val, void* u) {
   String mode="???";
   switch (((int)val)&3) {
     case 0:
-      mode=settings.language == DIV_LANG_ENGLISH ? "HP/K2, HP/K2" : _L("HP/K2, HP/K2##sgmu");
+      mode=settings.language == 0 ? "HP/K2, HP/K2" : _("HP/K2, HP/K2##sgmu");
       break;
     case 1:
-      mode=settings.language == DIV_LANG_ENGLISH ? "HP/K2, LP/K1" : _L("HP/K2, LP/K1##sgmu");
+      mode=settings.language == 0 ? "HP/K2, LP/K1" : _("HP/K2, LP/K1##sgmu");
       break;
     case 2:
-      mode=settings.language == DIV_LANG_ENGLISH ? "LP/K2, LP/K2" : _L("LP/K2, LP/K2##sgmu");
+      mode=settings.language == 0 ? "LP/K2, LP/K2" : _("LP/K2, LP/K2##sgmu");
       break;
     case 3:
-      mode=settings.language == DIV_LANG_ENGLISH ? "LP/K2, LP/K1" : _L("LP/K2, LP/K1##sgmu");
+      mode=settings.language == 0 ? "LP/K2, LP/K1" : _("LP/K2, LP/K1##sgmu");
       break;
     default:
       break;
@@ -125,13 +125,13 @@ String macroLFOWaves(int id, float val, void* u) {
 String FurnaceGUI::realMacroLFOWaves(int id, float val, void* u) {
   switch (((int)val)&3) {
     case 0:
-      return settings.language == DIV_LANG_ENGLISH ? "Saw" : _L("Saw##sgmu");
+      return settings.language == 0 ? "Saw" : _("Saw##sgmu");
     case 1:
-      return settings.language == DIV_LANG_ENGLISH ? "Square" : _L("Square##sgmu");
+      return settings.language == 0 ? "Square" : _("Square##sgmu");
     case 2:
-      return settings.language == DIV_LANG_ENGLISH ? "Triangle" : _L("Triangle##sgmu");
+      return settings.language == 0 ? "Triangle" : _("Triangle##sgmu");
     case 3:
-      return settings.language == DIV_LANG_ENGLISH ? "Random" : _L("Random##sgmu");
+      return settings.language == 0 ? "Random" : _("Random##sgmu");
     default:
       return "???";
   }

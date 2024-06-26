@@ -29,13 +29,13 @@ class FurnaceGUI;
 
 void FurnaceGUI::drawInsBEEPER(DivInstrument* ins)
 {
-  if (ImGui::BeginTabItem(_L("Macros##sgiB"))) 
+  if (ImGui::BeginTabItem(_("Macros##sgiB"))) 
   {
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiB"),ins,DIV_MACRO_VOL,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiB"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiB"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Volume##sgiB"),ins,DIV_MACRO_VOL,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Arpeggio##sgiB"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Pitch##sgiB"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Pulse Width##sgiB"),ins,DIV_MACRO_DUTY,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Pulse Width##sgiB"),ins,DIV_MACRO_DUTY,0xff,0,255,160,uiColors[GUI_COLOR_MACRO_OTHER]));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

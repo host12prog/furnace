@@ -31,11 +31,7 @@
 extern FurnaceGUI g;
 #endif
 
-#ifdef HAVE_GUI
-#define _LE(string) g.locale.getText(string)
-#else
 #define _LE(string) (string)
-#endif
 
 struct InflateBlock {
   unsigned char* buf;
@@ -2061,6 +2057,19 @@ bool DivEngine::loadFur(unsigned char* file, size_t len, bool tildearrow_version
       }
     }
 
+    // VERA old chip revision
+    // TIA old tuning
+    if (ds.version<213) {
+      for (int i=0; i<ds.systemLen; i++) {
+        if (ds.system[i]==DIV_SYSTEM_VERA) {
+          ds.systemFlags[i].set("chipType",0);
+        }
+        if (ds.system[i]==DIV_SYSTEM_TIA) {
+          ds.systemFlags[i].set("oldPitch",true);
+        }
+      }
+    }
+
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;
     saveLock.lock();
@@ -2229,6 +2238,14 @@ bool DivEngine::load(unsigned char* f, size_t slen, String path) {
     return loadFZT(file,len);
   } else if (memcmp(file,DIV_TFM_MAGIC,8)==0) {
     return loadTFMv2(file,len);
+  } else if (memcmp(file,DIV_IT_MAGIC,4)==0) {
+    return loadIT(file,len);
+  } else if (len>=48) {
+    if (memcmp(&file[0x2c],DIV_S3M_MAGIC,4)==0) {
+      return loadS3M(file,len);
+    } else if (memcmp(file,DIV_XM_MAGIC,17)==0) {
+      return loadXM(file,len);
+    }
   }
 
   // step 3: try loading as .mod or TFEv1 (if the file extension matches)

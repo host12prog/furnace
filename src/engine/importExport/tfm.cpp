@@ -24,11 +24,7 @@
 extern FurnaceGUI g;
 #endif
 
-#ifdef HAVE_GUI
-#define _LE(string) g.locale.getText(string)
-#else
 #define _LE(string) (string)
-#endif
 
 class TFMRLEReader;
 
@@ -532,6 +528,7 @@ bool DivEngine::loadTFMv1(unsigned char* file, size_t len) {
 
   try {
     DivSong ds;
+    ds.version=DIV_VERSION_TFE;
     ds.systemName="Sega Genesis/Mega Drive or TurboSound FM";
     ds.subsong[0]->hz=50;
     ds.systemLen=1;
@@ -723,6 +720,7 @@ bool DivEngine::loadTFMv2(unsigned char* file, size_t len) {
 
   try {
     DivSong ds;
+    ds.version=DIV_VERSION_TFE;
     ds.systemName="Sega Genesis/Mega Drive or TurboSound FM";
     ds.subsong[0]->hz=50;
     ds.systemLen=1;

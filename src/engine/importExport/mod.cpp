@@ -24,11 +24,7 @@
 extern FurnaceGUI g;
 #endif
 
-#ifdef HAVE_GUI
-#define _LE(string) g.locale.getText(string)
-#else
 #define _LE(string) (string)
-#endif
 
 class DivEngine;
 
@@ -430,6 +426,9 @@ bool DivEngine::loadMod(unsigned char* file, size_t len) {
       ds.ins.push_back(ins);
     }
     ds.insLen=ds.ins.size();
+
+    // find subsongs
+    ds.findSubSongs();
     
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;

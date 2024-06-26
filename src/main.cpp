@@ -31,7 +31,7 @@
 #include <windows.h>
 #include <combaseapi.h>
 #include <shellapi.h>
-
+#include "utfutils.h"
 #include "gui/shellScalingStub.h"
 
 typedef HRESULT (WINAPI *SPDA)(PROCESS_DPI_AWARENESS);
@@ -40,6 +40,33 @@ typedef HRESULT (WINAPI *SPDA)(PROCESS_DPI_AWARENESS);
 #include <unistd.h>
 
 struct sigaction termsa;
+#endif
+
+#ifdef SUPPORT_XP
+#define TUT_INTRO_PLAYED true
+#else
+#define TUT_INTRO_PLAYED false
+#endif
+
+#ifdef HAVE_LOCALE
+#ifdef HAVE_MOMO
+#define TA_BINDTEXTDOMAIN momo_bindtextdomain
+#define TA_TEXTDOMAIN momo_textdomain
+#else
+#define TA_BINDTEXTDOMAIN bindtextdomain
+#define TA_TEXTDOMAIN textdomain
+#endif
+
+#ifdef HAVE_SETLOCALE
+#include <locale.h>
+#endif
+
+#ifndef LC_CTYPE
+#define LC_CTYPE 0
+#endif
+#ifndef LC_MESSAGES
+#define LC_MESSAGES 1
+#endif
 #endif
 
 #include "cli/cli.h"
@@ -74,6 +101,7 @@ bool consoleNoStatus=false;
 bool consoleNoControls=false;
 
 bool displayEngineFailError=false;
+bool displayLocaleFailError=false;
 bool vgmOutDirect=false;
 
 bool safeMode=false;
@@ -82,6 +110,40 @@ bool safeModeWithAudio=false;
 bool infoMode=false;
 
 std::vector<TAParam> params;
+
+#ifdef HAVE_LOCALE
+char localeDir[4096];
+
+const char* localeDirs[]={
+#ifdef __APPLE__
+  "../Resources/locale",
+#endif
+  "locale",
+  ".." DIR_SEPARATOR_STR "share" DIR_SEPARATOR_STR "locale",
+  ".." DIR_SEPARATOR_STR "po" DIR_SEPARATOR_STR "locale",
+#ifdef LOCALE_DIR
+  LOCALE_DIR,
+#endif
+  NULL
+};
+#endif
+
+bool getExePath(char* argv0, char* exePath, size_t maxSize) {
+  if (argv0==NULL) return false;
+#ifdef _WIN32
+  wchar_t exePathW[4096];
+  WString argv0W=utf8To16(argv0);
+  if (GetFullPathNameW(argv0W.c_str(),4095,exePathW,NULL)==0) return false;
+  String exePathS=utf16To8(exePathW);
+  strncpy(exePath,exePathS.c_str(),maxSize);
+#else
+  if (realpath(argv0,exePath)==NULL) return false;
+#endif
+  char* lastChar=strrchr(exePath,DIR_SEPARATOR);
+  if (lastChar==NULL) return false;
+  *lastChar=0;
+  return true;
+}
 
 TAParamResult pHelp(String) {
   printf("usage: furnace [params] [filename]\n"
@@ -259,6 +321,7 @@ TAParamResult pVersion(String) {
   printf("- dSID by DefleMask Team (based on jsSID by Hermit) (MIT)\n");
   printf("- Stella by Stella Team (GPLv2)\n");
   printf("- vgsound_emu (second version, modified version) by cam900 (zlib license)\n");
+  printf("- Impulse Tracker GUS volume table by Jeffrey Lim (BSD 3-clause)\n");
   printf("- MAME GA20 core by Acho A. Tang, R. Belmont, Valley Bell (BSD 3-clause)\n");
   printf("- Atari800 mzpokeysnd POKEY emulator by Michael Borisov (GPLv2)\n");
   printf("- ASAP POKEY emulator by Piotr Fusik ported to C++ by laoo (GPLv2)\n");
@@ -487,6 +550,93 @@ int main(int argc, char** argv) {
   zsmOutName="";
   cmdOutName="";
 
+  // load config for locale
+  e.prePreInit();
+
+#ifdef HAVE_LOCALE
+  String reqLocale=e.getConfString("locale","");
+  if (!reqLocale.empty()) {
+    if (reqLocale.find(".")==String::npos) {
+      reqLocale+=".UTF-8";
+    }
+  }
+  if (reqLocale!="en_US.UTF-8") {
+    const char* localeRet=NULL;
+#ifdef HAVE_SETLOCALE
+    if ((localeRet=setlocale(LC_CTYPE,reqLocale.c_str()))==NULL) {
+      logE("could not set locale (CTYPE)!");
+      displayLocaleFailError=true;
+    } else {
+      logV("locale: %s",localeRet);
+    }
+    if ((localeRet=setlocale(LC_MESSAGES,reqLocale.c_str()))==NULL) {
+      logE("could not set locale (MESSAGES)!");
+      displayLocaleFailError=true;
+#ifdef HAVE_MOMO
+      if (momo_setlocale(LC_MESSAGES,reqLocale.c_str())==NULL) {
+        logV("Momo: could not set locale!");
+      }
+#endif
+    } else {
+      logV("locale: %s",localeRet);
+#ifdef HAVE_MOMO
+      if (momo_setlocale(LC_MESSAGES,localeRet)==NULL) {
+        logV("Momo: could not set locale!");
+      }
+#endif
+    }
+#else
+    if ((localeRet=momo_setlocale(LC_MESSAGES,reqLocale.c_str()))==NULL) {
+      logV("Momo: could not set locale!");
+    } else {
+      logV("locale: %s",localeRet);
+    }
+#endif
+
+    char exePath[4096];
+#ifdef ANDROID
+    memset(exePath,0,4096);
+#else
+    if (!getExePath(argv[0],exePath,4095)) memset(exePath,0,4096);
+#endif
+
+    bool textDomainBound=false;
+    for (int i=0; localeDirs[i]; i++) {
+#ifdef ANDROID
+      strncpy(localeDir,localeDirs[i],4095);
+#else
+      if (exePath[0]!=0 && localeDirs[i][0]!=DIR_SEPARATOR) {
+        strncpy(localeDir,exePath,4095);
+        strncat(localeDir,DIR_SEPARATOR_STR,4095);
+        strncat(localeDir,localeDirs[i],4095);
+      } else {
+        strncpy(localeDir,localeDirs[i],4095);
+      }
+#endif
+      logV("bind text domain: %s",localeDir);
+#ifndef ANDROID
+      if (!dirExists(localeDir)) continue;
+#endif
+      if ((localeRet=TA_BINDTEXTDOMAIN("furnace",localeDir))==NULL) {
+        continue;
+      } else {
+        textDomainBound=true;
+        logV("text domain 1: %s",localeRet);
+        break;
+      }
+    }
+    if (!textDomainBound) {
+      logE("could not bind text domain!");
+    } else {
+      if ((localeRet=TA_TEXTDOMAIN("furnace"))==NULL) {
+        logE("could not text domain!");
+      } else {
+        logV("text domain 2: %s",localeRet);
+      }
+    }
+#endif
+  }
+
   initParams();
 
   // parse arguments
@@ -654,51 +804,6 @@ int main(int argc, char** argv) {
     return 0;
   }
 
-  if(!consoleMode)
-  {
-    #ifdef HAVE_GUI
-      if (safeMode) g.enableSafeMode();
-      g.bindEngine(&e);
-      if (!g.init()) {
-        reportError(g.getLastError());
-        finishLogFile();
-        e.everythingOK();
-        return 1;
-      }
-
-      //e.song.systemName=g._L(e.getSongSystemLegacyName(e.song,!e.getConfInt("noMultiSystem",0)).c_str()); //show translated system names when initializing song
-      if(g.settings.initialSysName == "")
-      {
-        //g.autoDetectSystem(); //for some reason it detects properly on system start ONLY IF I PLACE IT THERE
-        e.song.systemName=g._L(e.getSongSystemLegacyName(e.song,!e.getConfInt("noMultiSystem",0)).c_str()); //show translated system names when initializing song
-
-        if(g.settings.language == DIV_LANG_ENGLISH)
-        {
-          e.song.systemName = e.song.systemName.substr(0, e.song.systemName.find("##"));
-        }
-      }
-      
-      if (displayEngineFailError) {
-        logE("displaying engine fail error.");
-        g.showError("error while initializing audio!");
-      }
-
-      if (!fileName.empty()) {
-        g.setFileName(fileName);
-      }
-
-    #ifndef _WIN32
-      sigemptyset(&termsa.sa_mask);
-      termsa.sa_flags=0;
-      termsa.sa_handler=handleTermGUI;
-      sigaction(SIGTERM,&termsa,NULL);
-    #endif
-
-    #else
-      logE("GUI requested but GUI not compiled!");
-    #endif
-  }
-
   if (!fileName.empty()) {
     logI("loading module...");
     FILE* f=ps_fopen(fileName.c_str(),"rb");
@@ -810,7 +915,41 @@ int main(int argc, char** argv) {
   }
 
 #ifdef HAVE_GUI
-  g.updateWindowTitle();
+  if (safeMode) g.enableSafeMode();
+  g.bindEngine(&e);
+  if (!g.init()) {
+    reportError(g.getLastError());
+    finishLogFile();
+    e.everythingOK();
+    return 1;
+  }
+
+  if (displayEngineFailError) {
+    logE("displaying engine fail error.");
+    g.showError("error while initializing audio!");
+  }
+
+  if (displayLocaleFailError) {
+#ifndef HAVE_MOMO
+#ifdef __unix__
+    g.showError("could not load language!\napparently your system does not support this language correctly.\nmake sure you've generated language data by editing /etc/locale.gen\nand then running locale-gen as root.");
+#else
+    g.showError("could not load language!\nthis is a bug!");
+#endif
+#endif
+  }
+
+  if (!fileName.empty()) {
+    g.setFileName(fileName);
+  }
+
+#ifndef _WIN32
+  sigemptyset(&termsa.sa_mask);
+  termsa.sa_flags=0;
+  termsa.sa_handler=handleTermGUI;
+  sigaction(SIGTERM,&termsa,NULL);
+#endif
+
   g.loop();
   logI("closing GUI.");
   g.finish(true);

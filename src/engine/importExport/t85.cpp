@@ -29,11 +29,7 @@
 extern FurnaceGUI g;
 #endif
 
-#ifdef HAVE_GUI
-#define _LE(string) g.locale.getText(string)
-#else
 #define _LE(string) (string)
-#endif
 
 #define REG_WRITE 0x41
 #define WAIT_TICKS 0x61

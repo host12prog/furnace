@@ -29,15 +29,15 @@ class FurnaceGUI;
 
 void FurnaceGUI::drawInsVERA(DivInstrument* ins)
 {
-  if (ImGui::BeginTabItem(_L("Macros##sgiVERA"))) 
+  if (ImGui::BeginTabItem(_("Macros##sgiVERA"))) 
   {
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Volume##sgiVERA"),ins,DIV_MACRO_VOL,0xff,0,63,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Arpeggio##sgiVERA"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Pitch##sgiVERA"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Volume##sgiVERA"),ins,DIV_MACRO_VOL,0xff,0,63,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Arpeggio##sgiVERA"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Pitch##sgiVERA"),ins,DIV_MACRO_PITCH,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
 
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Duty##sgiVERA"),ins,DIV_MACRO_DUTY,0xff,0,63,160,uiColors[GUI_COLOR_MACRO_OTHER]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Waveform##sgiVERA"),ins,DIV_MACRO_WAVE,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_WAVE]));
-    macroList.push_back(FurnaceGUIMacroDesc(_L("Panning##sgiVERA"),ins,DIV_MACRO_PAN_LEFT,0xff,0,2,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,panBits));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Duty##sgiVERA"),ins,DIV_MACRO_DUTY,0xff,0,63,160,uiColors[GUI_COLOR_MACRO_OTHER]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Waveform##sgiVERA"),ins,DIV_MACRO_WAVE,0xff,0,3,32,uiColors[GUI_COLOR_MACRO_WAVE]));
+    macroList.push_back(FurnaceGUIMacroDesc(_("Panning##sgiVERA"),ins,DIV_MACRO_PAN_LEFT,0xff,0,2,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true,panBits));
 
     drawMacros(macroList,macroEditStateMacros);
     ImGui::EndTabItem();

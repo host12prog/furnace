@@ -43,7 +43,7 @@ void FurnaceGUI::drawMobileOrderSel() {
 
   ImGui::SetNextWindowPos(ImVec2(0.0f,mobileMenuPos*-0.65*canvasH));
   ImGui::SetNextWindowSize(ImVec2(canvasW,0.12*canvasW));
-  if (ImGui::Begin("OrderSel",NULL,globalWinFlags, _L("OrderSel###OrderSel"))) {
+  if (ImGui::Begin("OrderSel",NULL,globalWinFlags, _("OrderSel###OrderSel"))) {
     ImDrawList* dl=ImGui::GetWindowDrawList();
     ImGuiWindow* window=ImGui::GetCurrentWindow();
     ImGuiStyle& style=ImGui::GetStyle();
@@ -111,7 +111,7 @@ void FurnaceGUI::drawOrderButtons() {
     doAction(GUI_ACTION_ORDERS_ADD);
   }
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(_L("Add new order##sgor"));
+    ImGui::SetTooltip(_("Add new order"));
   }
   NEXT_BUTTON;
 
@@ -122,7 +122,7 @@ void FurnaceGUI::drawOrderButtons() {
   }
   popDestColor();
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(_L("Remove order##sgor"));
+    ImGui::SetTooltip(_("Remove order"));
   } 
   NEXT_BUTTON;
 
@@ -134,7 +134,7 @@ void FurnaceGUI::drawOrderButtons() {
     doAction(GUI_ACTION_ORDERS_DEEP_CLONE);
   }
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(_L("Duplicate order (right-click to deep clone)##sgor"));
+    ImGui::SetTooltip(_("Duplicate order (right-click to deep clone)"));
   }
   NEXT_BUTTON;
 
@@ -143,7 +143,7 @@ void FurnaceGUI::drawOrderButtons() {
     doAction(GUI_ACTION_ORDERS_MOVE_UP);
   }
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(_L("Move order up##sgor"));
+    ImGui::SetTooltip(_("Move order up"));
   }
   NEXT_BUTTON;
 
@@ -152,7 +152,7 @@ void FurnaceGUI::drawOrderButtons() {
     doAction(GUI_ACTION_ORDERS_MOVE_DOWN);
   }
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(_L("Move order down##sgor"));
+    ImGui::SetTooltip(_("Move order down"));
   }
   NEXT_BUTTON;
 
@@ -164,7 +164,7 @@ void FurnaceGUI::drawOrderButtons() {
     doAction(GUI_ACTION_ORDERS_DEEP_CLONE_END);
   }
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(_L("Place copy of current order at end of song (right-click to deep clone)##sgor"));
+    ImGui::SetTooltip(_("Place copy of current order at end of song (right-click to deep clone)"));
   }
   NEXT_BUTTON;
 
@@ -174,9 +174,9 @@ void FurnaceGUI::drawOrderButtons() {
   }
   if (ImGui::IsItemHovered()) {
     if (changeAllOrders) {
-      ImGui::SetTooltip(_L("Order change mode: entire row##sgor"));
+      ImGui::SetTooltip(_("Order change mode: entire row"));
     } else {
-      ImGui::SetTooltip(_L("Order change mode: one##sgor"));
+      ImGui::SetTooltip(_("Order change mode: one"));
     }
   }
   NEXT_BUTTON;
@@ -202,13 +202,13 @@ void FurnaceGUI::drawOrderButtons() {
   }
   if (ImGui::IsItemHovered()) {
     if (orderEditMode==3) {
-      ImGui::SetTooltip(_L("Order edit mode: Select and type (scroll vertically)##sgor"));
+      ImGui::SetTooltip(_("Order edit mode: Select and type (scroll vertically)"));
     } else if (orderEditMode==2) {
-      ImGui::SetTooltip(_L("Order edit mode: Select and type (scroll horizontally)##sgor"));
+      ImGui::SetTooltip(_("Order edit mode: Select and type (scroll horizontally)"));
     } else if (orderEditMode==1) {
-      ImGui::SetTooltip(_L("Order edit mode: Select and type (don't scroll)##sgor"));
+      ImGui::SetTooltip(_("Order edit mode: Select and type (don't scroll)"));
     } else {
-      ImGui::SetTooltip(_L("Order edit mode: Click to change##sgor"));
+      ImGui::SetTooltip(_("Order edit mode: Click to change"));
     }
   }
 }
@@ -229,7 +229,7 @@ void FurnaceGUI::drawOrders() {
   } else {
     //ImGui::SetNextWindowSizeConstraints(ImVec2(440.0f*dpiScale,400.0f*dpiScale),ImVec2(canvasW,canvasH));
   }
-  if (ImGui::Begin("Orders",&ordersOpen,globalWinFlags|ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse, _L("Orders###Orders"))) {
+  if (ImGui::Begin("Orders",&ordersOpen,globalWinFlags|ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoScrollWithMouse,_("Orders"))) {
     if (ImGui::BeginTable("OrdColumn",(settings.orderButtonPos==0)?1:2,ImGuiTableFlags_BordersInnerV)) {
       if (settings.orderButtonPos==2) {
         ImGui::TableSetupColumn("c0",ImGuiTableColumnFlags_WidthStretch);

@@ -86,7 +86,7 @@ void FurnaceGUI::actualLocalWaveList()
 
 void FurnaceGUI::insTabWave(DivInstrument* ins)
 {
-    if (ImGui::BeginTabItem(_L("Wavetable##sgiwave"))) 
+    if (ImGui::BeginTabItem(_("Wavetable##sgiwave"))) 
     {
         switch (ins->type)
         {
@@ -138,7 +138,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                 wavePreviewHeight=31;
                 break;
         }
-        if (ImGui::Checkbox(_L("Enable synthesizer##sgiwave"),&ins->ws.enabled)) 
+        if (ImGui::Checkbox(_("Enable synthesizer##sgiwave"),&ins->ws.enabled)) 
         {
             wavePreviewInit=true;
         }
@@ -159,7 +159,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
             }
             if (ImGui::BeginCombo("##WSEffect",(ins->ws.effect&0x80)?_L(dualWSEffects[ins->ws.effect&0x7f]):_L(singleWSEffects[ins->ws.effect&0x7f]))) 
             {
-                ImGui::Text(_L("Single-waveform##sgiwave"));
+                ImGui::Text(_("Single-waveform##sgiwave"));
                 ImGui::Indent();
                 for (int i=0; i<DIV_WS_SINGLE_MAX; i++) 
                 {
@@ -170,7 +170,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                     }
                 }
                 ImGui::Unindent();
-                ImGui::Text(_L("Dual-waveform##sgiwave"));
+                ImGui::Text(_("Dual-waveform##sgiwave"));
                 ImGui::Indent();
                 for (int i=129; i<DIV_WS_DUAL_MAX; i++) 
                 {
@@ -261,16 +261,16 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                 ImGui::TableNextRow();
                 ImGui::TableNextColumn();
                 ImVec2 size1=ImVec2(ImGui::GetContentRegionAvail().x,ySize);
-                PlotNoLerp("##WaveformP1",wavePreview1,wave1->len+1,0,_L("Wave 1##sgiwave0"),0,wave1->max,size1);
+                PlotNoLerp("##WaveformP1",wavePreview1,wave1->len+1,0,_("Wave 1##sgiwave0"),0,wave1->max,size1);
                 if (isSingleWaveFX) 
                 {
                     ImGui::TableNextColumn();
                     ImVec2 size2=ImVec2(ImGui::GetContentRegionAvail().x,ySize);
-                    PlotNoLerp("##WaveformP2",wavePreview2,wave2->len+1,0,_L("Wave 2##sgiwave0"),0,wave2->max,size2);
+                    PlotNoLerp("##WaveformP2",wavePreview2,wave2->len+1,0,_("Wave 2##sgiwave0"),0,wave2->max,size2);
                 }
                 ImGui::TableNextColumn();
                 ImVec2 size3=ImVec2(ImGui::GetContentRegionAvail().x,ySize);
-                PlotNoLerp("##WaveformP3",wavePreview3,wavePreviewLen+1,0,_L("Result##sgiwave"),0,wavePreviewHeight,size3);
+                PlotNoLerp("##WaveformP3",wavePreview3,wavePreviewLen+1,0,_("Result##sgiwave"),0,wavePreviewHeight,size3);
 
                 ImGui::TableNextRow();
                 ImGui::TableNextColumn();
@@ -279,13 +279,13 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                     ImGui::PushStyleColor(ImGuiCol_Text,uiColors[GUI_COLOR_WARNING]);
                     ImGui::AlignTextToFramePadding();
 
-                    if(settings.language == DIV_LANG_ENGLISH)
+                    if(settings.language == 0)
                     {
                         ImGui::Text("Wave 1 " ICON_FA_EXCLAMATION_TRIANGLE);
                     }
                     else
                     {
-                        std::string str1 = _L("Wave 1 ##sgiwave");
+                        std::string str1 = _("Wave 1 ##sgiwave");
                         std::string str2 = ICON_FA_EXCLAMATION_TRIANGLE;
 
                         std::string sumstr = str1 + str2;
@@ -295,16 +295,16 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                     ImGui::PopStyleColor();
                     if (ImGui::IsItemHovered()) 
                     {
-                        ImGui::SetTooltip(_L("waveform macro is controlling wave 1!\nthis value will be ineffective.##sgiwave"));
+                        ImGui::SetTooltip(_("waveform macro is controlling wave 1!\nthis value will be ineffective.##sgiwave"));
                     }
                 } 
                 else 
                 {
                     ImGui::AlignTextToFramePadding();
-                    ImGui::Text(_L("Wave 1##sgiwave1"));
+                    ImGui::Text(_("Wave 1##sgiwave1"));
                 }
                 ImGui::SameLine();
-                if (ImGui::Checkbox(_L("Global##sgiwave1"),&ins->ws.wave1global)) 
+                if (ImGui::Checkbox(_("Global##sgiwave1"),&ins->ws.wave1global)) 
                 {
                     wavePreviewInit=true;
                 }
@@ -328,16 +328,16 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                 {
                     if (ImGui::IsItemHovered()) 
                     {
-                        ImGui::SetTooltip(_L("waveform macro is controlling wave 1!\nthis value will be ineffective.##sgiwave"));
+                        ImGui::SetTooltip(_("waveform macro is controlling wave 1!\nthis value will be ineffective.##sgiwave"));
                     }
                 }
                 if (isSingleWaveFX) 
                 {
                     ImGui::TableNextColumn();
                     ImGui::AlignTextToFramePadding();
-                    ImGui::Text(_L("Wave 2##sgiwave1"));
+                    ImGui::Text(_("Wave 2##sgiwave1"));
                     ImGui::SameLine();
-                    if (ImGui::Checkbox(_L("Global##sgiwave2"),&ins->ws.wave2global))
+                    if (ImGui::Checkbox(_("Global##sgiwave2"),&ins->ws.wave2global))
                     {
                         wavePreviewInit=true;
                     }
@@ -367,11 +367,11 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                 {
                     if (wavePreviewPaused) 
                     {
-                        ImGui::SetTooltip(_L("Resume preview##sgiwave"));
+                        ImGui::SetTooltip(_("Resume preview##sgiwave"));
                     } 
                     else 
                     {
-                        ImGui::SetTooltip(_L("Pause preview##sgiwave"));
+                        ImGui::SetTooltip(_("Pause preview##sgiwave"));
                     }
                 }
                 ImGui::SameLine();
@@ -381,7 +381,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                 }
                 if (ImGui::IsItemHovered()) 
                 {
-                    ImGui::SetTooltip(_L("Restart preview##sgiwave"));
+                    ImGui::SetTooltip(_("Restart preview##sgiwave"));
                 }
                 ImGui::SameLine();
                 if (ImGui::Button(ICON_FA_UPLOAD "##WSCopy")) 
@@ -389,7 +389,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                     curWave=e->addWave();
                     if (curWave==-1)
                     {
-                        showError(settings.language == DIV_LANG_ENGLISH ? "too many wavetables!" : _L("too many wavetables!##sgiwave"));
+                        showError(settings.language == 0 ? "too many wavetables!" : _("too many wavetables!##sgiwave"));
                     } 
                     else 
                     {
@@ -406,19 +406,19 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                 }
                 if (ImGui::IsItemHovered()) 
                 {
-                    ImGui::SetTooltip(_L("Copy to new wavetable##sgiwave"));
+                    ImGui::SetTooltip(_("Copy to new wavetable##sgiwave"));
                 }
                 ImGui::SameLine();
                 ImGui::Text("(%d×%d)",wavePreviewLen,wavePreviewHeight+1);
                 ImGui::EndTable();
             }
 
-            if (ImGui::InputScalar(_L("Update Rate##sgiwave"),ImGuiDataType_U8,&ins->ws.rateDivider,&_ONE,&_EIGHT)) 
+            if (ImGui::InputScalar(_("Update Rate##sgiwave"),ImGuiDataType_U8,&ins->ws.rateDivider,&_ONE,&_EIGHT)) 
             {
                 wavePreviewInit=true;
             }
             int speed=ins->ws.speed+1;
-            if (ImGui::InputInt(_L("Speed##sgiwave"),&speed,1,8)) 
+            if (ImGui::InputInt(_("Speed##sgiwave"),&speed,1,8)) 
             {
                 if (speed<1) speed=1;
                 if (speed>256) speed=256;
@@ -426,33 +426,33 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
                 wavePreviewInit=true;
             }
 
-            if (ImGui::InputScalar(_L("Amount##sgiwave"),ImGuiDataType_U8,&ins->ws.param1,&_ONE,&_EIGHT)) 
+            if (ImGui::InputScalar(_("Amount##sgiwave"),ImGuiDataType_U8,&ins->ws.param1,&_ONE,&_EIGHT)) 
             {
                 wavePreviewInit=true;
             }
 
             if (ins->ws.effect==DIV_WS_PHASE_MOD) 
             {
-                if (ImGui::InputScalar(_L("Power##sgiwave"),ImGuiDataType_U8,&ins->ws.param2,&_ONE,&_EIGHT)) 
+                if (ImGui::InputScalar(_("Power##sgiwave"),ImGuiDataType_U8,&ins->ws.param2,&_ONE,&_EIGHT)) 
                 {
                     wavePreviewInit=true;
                 }
             }
 
-            if (ImGui::Checkbox(_L("Global##sgiwave"),&ins->ws.global)) 
+            if (ImGui::Checkbox(_("Global##sgiwave"),&ins->ws.global)) 
             {
                 wavePreviewInit=true;
             }
         } 
         else 
         {
-            ImGui::TextWrapped(_L("wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"));
+            ImGui::TextWrapped(_("wavetable synthesizer disabled.\nuse the Waveform macro to set the wave for this instrument.##sgiwave"));
         }
 
         ImGui::EndTabItem();
     }
 
-    if (ImGui::BeginTabItem(_L("Local Waves##sgiwave"))) 
+    if (ImGui::BeginTabItem(_("Local Waves##sgiwave"))) 
     {
         if (ImGui::Button(ICON_FA_PLUS "##WaveAdd")) 
         {
@@ -460,7 +460,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         }
         if (ImGui::IsItemHovered()) 
         {
-            ImGui::SetTooltip(_L("Add##sgdl1"));
+            ImGui::SetTooltip(_("Add##sgdl1"));
         }
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_FILES_O "##WaveClone")) 
@@ -469,7 +469,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         }
         if (ImGui::IsItemHovered()) 
         {
-            ImGui::SetTooltip(_L("Duplicate##sgdl3"));
+            ImGui::SetTooltip(_("Duplicate##sgdl3"));
         }
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_FOLDER_OPEN "##WaveLoad")) 
@@ -478,11 +478,11 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         }
         if (ImGui::IsItemHovered()) 
         {
-            ImGui::SetTooltip(_L("Open##sgdl1"));
+            ImGui::SetTooltip(_("Open##sgdl1"));
         }
         if (ImGui::BeginPopupContextItem("WaveOpenOpt")) 
         {
-            if (ImGui::MenuItem(_L("replace...##sgdl3"))) 
+            if (ImGui::MenuItem(_("replace...##sgdl3"))) 
             {
                 doAction((curLocalWave>=0 && curLocalWave<(int)e->song.ins[curIns]->std.local_waves.size())?GUI_ACTION_LOCAL_WAVE_LIST_OPEN_REPLACE:GUI_ACTION_LOCAL_WAVE_LIST_OPEN);
             }
@@ -495,15 +495,15 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         }
         if (ImGui::IsItemHovered()) 
         {
-            ImGui::SetTooltip(_L("Save##sgdl3"));
+            ImGui::SetTooltip(_("Save##sgdl3"));
         }
         if (ImGui::BeginPopupContextItem("WaveSaveFormats",ImGuiMouseButton_Right)) 
         {
-            if (ImGui::MenuItem(_L("save as .dmw...##sgdl"))) 
+            if (ImGui::MenuItem(_("save as .dmw..."))) 
             {
                 doAction(GUI_ACTION_LOCAL_WAVE_LIST_SAVE_DMW);
             }
-            if (ImGui::MenuItem(_L("save raw...##sgdl0"))) 
+            if (ImGui::MenuItem(_("save raw...##sgdl0"))) 
             {
                 doAction(GUI_ACTION_LOCAL_WAVE_LIST_SAVE_RAW);
             }
@@ -516,7 +516,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         }
         if (ImGui::IsItemHovered()) 
         {
-            ImGui::SetTooltip(_L("Move up##sgdl1"));
+            ImGui::SetTooltip(_("Move up##sgdl1"));
         }
         ImGui::SameLine();
         if (ImGui::Button(ICON_FA_ARROW_DOWN "##WaveDown")) 
@@ -525,7 +525,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         }
         if (ImGui::IsItemHovered()) 
         {
-            ImGui::SetTooltip(_L("Move down##sgdl1"));
+            ImGui::SetTooltip(_("Move down##sgdl1"));
         }
         ImGui::SameLine();
         pushDestColor();
@@ -536,7 +536,7 @@ void FurnaceGUI::insTabWave(DivInstrument* ins)
         popDestColor();
         if (ImGui::IsItemHovered()) 
         {
-            ImGui::SetTooltip(_L("Delete##sgdl4"));
+            ImGui::SetTooltip(_("Delete##sgdl4"));
         }
         ImGui::Separator();
         if (ImGui::BeginTable("WaveListScroll",1,ImGuiTableFlags_ScrollY)) 

@@ -28,11 +28,7 @@
 extern FurnaceGUI g;
 #endif
 
-#ifdef HAVE_GUI
-#define _LE(string) g.locale.getText(string)
-#else
 #define _LE(string) (string)
-#endif
 
 #define CHIP_FREQBASE 131072
 
@@ -232,7 +228,7 @@ void DivPlatformSNES::tick(bool sysTick) {
           end=MIN(start+MAX(s->lengthBRR+((s->loop && s->depth!=DIV_SAMPLE_DEPTH_BRR)?9:0),1),getSampleMemCapacity());
           loop=MAX(start,end-1);
           if (chan[i].audPos>0) {
-            start=start+MIN(chan[i].audPos,s->lengthBRR-1)/16*9;
+            start=start+MIN(chan[i].audPos/16*9,end-start);
           }
           if (s->isLoopable()) {
             loop=((s->depth!=DIV_SAMPLE_DEPTH_BRR)?9:0)+start+((s->loopStart/16)*9);
@@ -479,7 +475,6 @@ int DivPlatformSNES::dispatch(DivCommand c) {
       chan[c.chan].inPorta=c.value;
       break;
     case DIV_CMD_SAMPLE_POS:
-      // may have to remove this
       chan[c.chan].audPos=c.value;
       chan[c.chan].setPos=true;
       break;
@@ -949,7 +944,6 @@ const void* DivPlatformSNES::getSampleMem(int index) {
 }
 
 size_t DivPlatformSNES::getSampleMemCapacity(int index) {
-  // TODO change it based on current echo buffer size
   return index == 0 ? (65536-echoDelay*2048) : 0;
 }
 

@@ -52,15 +52,18 @@ class DivWorkPool;
 #define EXTERN_BUSY_BEGIN_SOFT e->softLocked=true; e->isBusy.lock();
 #define EXTERN_BUSY_END e->isBusy.unlock(); e->softLocked=false;
 
-#define DIV_UNSTABLE
+//#define DIV_UNSTABLE
 
-#define DIV_VERSION "dev212"
-#define DIV_ENGINE_VERSION 212
+#define DIV_VERSION "0.6.5"
+#define DIV_ENGINE_VERSION 214
 // for imports
 #define DIV_VERSION_MOD 0xff01
 #define DIV_VERSION_FC 0xff02
 #define DIV_VERSION_S3M 0xff03
 #define DIV_VERSION_FTM 0xff04
+#define DIV_VERSION_TFE 0xff05
+#define DIV_VERSION_XM 0xff06
+#define DIV_VERSION_IT 0xff07
 
 enum DivStatusView {
   DIV_STATUS_NOTHING=0,
@@ -133,7 +136,7 @@ struct DivChannelState {
   bool isE1E2;
   int volume, volSpeed, cut, legatoDelay, legatoTarget, rowDelay, volMax;
   int delayOrder, delayRow, retrigSpeed, retrigTick;
-  int vibratoDepth, vibratoRate, vibratoPos, vibratoPosGiant, vibratoDir, vibratoFine;
+  int vibratoDepth, vibratoRate, vibratoPos, vibratoPosGiant, vibratoShape, vibratoFine;
   int tremoloDepth, tremoloRate, tremoloPos;
   int pw_slide, pw_slide_speed, cutoff_slide, cutoff_slide_speed;
   int sampleOff;
@@ -169,7 +172,7 @@ struct DivChannelState {
     vibratoRate(0),
     vibratoPos(0),
     vibratoPosGiant(0),
-    vibratoDir(0),
+    vibratoShape(0),
     vibratoFine(15),
     tremoloDepth(0),
     tremoloRate(0),
@@ -438,6 +441,7 @@ class DivEngine {
   String exportPath;
   std::thread* exportThread;
   int chans;
+  bool configLoaded;
   bool active;
   bool lowQuality;
   bool dcHiPass;
@@ -594,7 +598,9 @@ class DivEngine {
   bool loadFur(unsigned char* file, size_t len, bool tildearrow_version);
   bool loadMod(unsigned char* file, size_t len);
   bool loadS3M(unsigned char* file, size_t len);
-  bool loadFTM(unsigned char* file, size_t len, bool dnft, bool dnft_sig, bool eft);
+  bool loadXM(unsigned char* file, size_t len);
+  bool loadIT(unsigned char* file, size_t len);
+  bool loadFTM(unsigned char* file, size_t len, bool dnft, bool dnftSig, bool eft);
   bool loadFC(unsigned char* file, size_t len);
   bool loadFZT(unsigned char* file, size_t len);
   bool loadTFMv1(unsigned char* file, size_t len);
@@ -706,6 +712,8 @@ class DivEngine {
     SafeWriter* saveVGM(bool* sysToExport=NULL, bool loop=true, int version=0x171, bool patternHints=false, bool directStream=false, int trailingTicks=-1);
     // dump to ZSM.
     SafeWriter* saveZSM(unsigned int zsmrate=60, bool loop=true, bool optimize=true);
+    // dump to TIunA.
+    SafeWriter* saveTiuna(const bool* sysToExport, const char* baseLabel, int firstBankSize, int otherBankSize);
     // dump command stream.
     SafeWriter* saveCommand();
     // export to text
@@ -1263,9 +1271,10 @@ class DivEngine {
 
     // move system
     bool swapSystem(int src, int dest, bool preserveOrder=true);
+    void swapSystemUnsafe(int src, int dest, bool preserveOrder);
 
     // clone system
-    bool cloneSystem(int index, bool add_chip_count, bool pat);
+    bool cloneSystem(int index, bool pat=true, bool end=false);
 
     // add effect
     bool addEffect(DivEffectType which);
@@ -1334,6 +1343,9 @@ class DivEngine {
     // quit dispatch
     void quitDispatch();
 
+    // pre-pre-initialize the engine.
+    bool prePreInit();
+
     // pre-initialize the engine. returns whether Furnace should run in safe mode.
     bool preInit(bool noSafeMode=true);
 
@@ -1354,6 +1366,7 @@ class DivEngine {
       output(NULL),
       exportThread(NULL),
       chans(0),
+      configLoaded(false),
       active(false),
       lowQuality(false),
       dcHiPass(true),
