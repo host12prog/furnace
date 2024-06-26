@@ -97,7 +97,7 @@ void FurnaceGUI::drawExportAudio(bool onWindow) {
       }
     }
 
-    if (ImGui::BeginChild(_("Channel Selection##sgeo"),ImVec2(0,200.0f*dpiScale))) {
+    if (ImGui::BeginChild(_("Channel Selection##sgeo"),ImVec2(0,HALF_WINDOW_WIDTH*dpiScale))) {
       for (int i=0; i<e->getTotalChannelCount(); i++) {
         String name=fmt::sprintf("%d. %s##_CE%d",i+1,settings.translate_channel_names_pattern ? _L(e->getChannelName(i)) : e->getChannelName(i), i);
         ImGui::Checkbox(name.c_str(),&audioExportOptions.channelMask[i]);
@@ -111,12 +111,12 @@ void FurnaceGUI::drawExportAudio(bool onWindow) {
 
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_("Cancel"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_("Cancel"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
 
   if (isOneOn) {
-    if (ImGui::Button(_("Export"),ImVec2(200.0f*dpiScale,0))) {
+    if (ImGui::Button(_("Export"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
       switch (audioExportOptions.mode) {
         case DIV_EXPORT_MODE_ONE:
           openFileDialog(GUI_FILE_EXPORT_AUDIO_ONE);
@@ -215,10 +215,10 @@ void FurnaceGUI::drawExportVGM(bool onWindow) {
   if (hasOneAtLeast) {
     if (onWindow) {
       ImGui::Separator();
-      if (ImGui::Button(_("Cancel"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+      if (ImGui::Button(_("Cancel"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
       ImGui::SameLine();
     }
-    if (ImGui::Button(_("Export"),ImVec2(200.0f*dpiScale,0))) {
+    if (ImGui::Button(_("Export"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
       openFileDialog(GUI_FILE_EXPORT_VGM);
       ImGui::CloseCurrentPopup();
     }
@@ -226,7 +226,7 @@ void FurnaceGUI::drawExportVGM(bool onWindow) {
     ImGui::Text(_("nothing to export"));
     if (onWindow) {
       ImGui::Separator();
-      if (ImGui::Button(_("Cancel"),ImVec2(400.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+      if (ImGui::Button(_("Cancel"),ImVec2(WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
     }
   }
 }
@@ -244,10 +244,10 @@ void FurnaceGUI::drawExportZSM(bool onWindow) {
   ImGui::Checkbox(_("optimize size"),&zsmExportOptimize);
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_("Cancel"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_("Cancel"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_("Export"),ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_("Export"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_ZSM);
     ImGui::CloseCurrentPopup();
   }
@@ -317,10 +317,10 @@ void FurnaceGUI::drawExportTiuna(bool onWindow) {
   if (selected>0) {
     if (onWindow) {
       ImGui::Separator();
-      if (ImGui::Button(_("Cancel"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+      if (ImGui::Button(_("Cancel"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
       ImGui::SameLine();
     }
-    if (ImGui::Button(_("Export"),ImVec2(200.0f*dpiScale,0))) {
+    if (ImGui::Button(_("Export"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
       openFileDialog(GUI_FILE_EXPORT_TIUNA);
       ImGui::CloseCurrentPopup();
     }
@@ -328,7 +328,7 @@ void FurnaceGUI::drawExportTiuna(bool onWindow) {
     ImGui::Text(_("nothing to export"));
     if (onWindow) {
       ImGui::Separator();
-      if (ImGui::Button(_("Cancel"),ImVec2(400.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+      if (ImGui::Button(_("Cancel"),ImVec2(WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
     }
   }
 }
@@ -347,10 +347,10 @@ void FurnaceGUI::drawExportAmigaVal(bool onWindow) {
   ImGui::InputText("##AVDPath",&workingDirROMExport);
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_("Cancel"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_("Cancel"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_("Bake Data"),ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_("Bake Data"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
     std::vector<DivROMExportOutput> out=e->buildROM(DIV_ROM_AMIGA_VALIDATION);
     if (workingDirROMExport.size()>0) {
       if (workingDirROMExport[workingDirROMExport.size()-1]!=DIR_SEPARATOR) workingDirROMExport+=DIR_SEPARATOR_STR;
@@ -378,10 +378,10 @@ void FurnaceGUI::drawExportText(bool onWindow) {
   );
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_("Cancel"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_("Cancel"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_("Export"),ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_("Export"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_TEXT);
     ImGui::CloseCurrentPopup();
   }
@@ -399,10 +399,10 @@ void FurnaceGUI::drawExportCommand(bool onWindow) {
   ));
   if (onWindow) {
     ImGui::Separator();
-    if (ImGui::Button(_("Cancel"),ImVec2(200.0f*dpiScale,0))) ImGui::CloseCurrentPopup();
+    if (ImGui::Button(_("Cancel"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) ImGui::CloseCurrentPopup();
     ImGui::SameLine();
   }
-  if (ImGui::Button(_("Export"),ImVec2(200.0f*dpiScale,0))) {
+  if (ImGui::Button(_("Export"),ImVec2(HALF_WINDOW_WIDTH*dpiScale,0))) {
     openFileDialog(GUI_FILE_EXPORT_CMDSTREAM);
     ImGui::CloseCurrentPopup();
   }

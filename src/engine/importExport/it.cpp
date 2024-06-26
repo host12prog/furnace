@@ -53,16 +53,16 @@ void readEnvelope(SafeReader& reader, DivInstrument* ins, int env) {
   DivInstrumentMacro* target=NULL;
   switch (env) {
     case 0: // volume
-      target=&ins->std.volMacro;
+      target=ins->std.get_macro(DIV_MACRO_VOL, true);
       break;
     case 1: // panning (split later)
-      target=&ins->std.panLMacro;
+      target=ins->std.get_macro(DIV_MACRO_PAN_LEFT, true);
       break;
     case 2: // pitch or cutoff
       if (flags&128) {
-        target=&ins->std.ex1Macro; // ES5506 filter
+        target=ins->std.get_macro(DIV_MACRO_EX1, true); // ES5506 filter
       } else {
-        target=&ins->std.pitchMacro;
+        target=ins->std.get_macro(DIV_MACRO_PITCH, true);
       }
       break;
   }
@@ -135,22 +135,22 @@ void readEnvelope(SafeReader& reader, DivInstrument* ins, int env) {
 
   // split L/R
   if (env==1) {
-    for (int i=0; i<ins->std.panLMacro.len; i++) {
-      int val=ins->std.panLMacro.val[i];
+    for (int i=0; i<ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->len; i++) {
+      int val=ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->val[i];
       if (val==0) {
-        ins->std.panLMacro.val[i]=4095;
-        ins->std.panRMacro.val[i]=4095;
+        ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->val[i]=4095;
+        ins->std.get_macro(DIV_MACRO_PAN_RIGHT, true)->val[i]=4095;
       } else if (val>0) { // pan right
-        ins->std.panLMacro.val[i]=4095*pow(1.0-((double)val/64.0),0.25);
-        ins->std.panRMacro.val[i]=4095;
+        ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->val[i]=4095*pow(1.0-((double)val/64.0),0.25);
+        ins->std.get_macro(DIV_MACRO_PAN_RIGHT, true)->val[i]=4095;
       } else { // pan left
-        ins->std.panLMacro.val[i]=4095;
-        ins->std.panRMacro.val[i]=4095*pow(1.0+((double)val/64.0),0.25);
+        ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->val[i]=4095;
+        ins->std.get_macro(DIV_MACRO_PAN_RIGHT, true)->val[i]=4095*pow(1.0+((double)val/64.0),0.25);
       }
     }
-    ins->std.panRMacro.len=ins->std.panLMacro.len;
-    ins->std.panRMacro.loop=ins->std.panLMacro.loop;
-    ins->std.panRMacro.rel=ins->std.panLMacro.rel;
+    ins->std.get_macro(DIV_MACRO_PAN_RIGHT, true)->len=ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->len;
+    ins->std.get_macro(DIV_MACRO_PAN_RIGHT, true)->loop=ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->loop;
+    ins->std.get_macro(DIV_MACRO_PAN_RIGHT, true)->rel=ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->rel;
   }
 }
 

@@ -54,7 +54,7 @@ class DivWorkPool;
 
 #define DIV_UNSTABLE
 
-#define DIV_VERSION "Another undercooked furnace update"
+#define DIV_VERSION "0.6.5"
 #define DIV_ENGINE_VERSION 214
 // for imports
 #define DIV_VERSION_MOD 0xff01
