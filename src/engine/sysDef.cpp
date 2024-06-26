@@ -617,6 +617,12 @@ void DivEngine::registerSystems() {
     {0x1e, {DIV_CMD_C64_EXTENDED, _("1Exy: Change other parameters (LEGACY)")}},
     {0x20, {DIV_CMD_C64_AD, _("20xy: Set attack/decay (x: attack; y: decay)")}},
     {0x21, {DIV_CMD_C64_SR, _("21xy: Set sustain/release (x: sustain; y: release)")}},
+
+    {0x22, {DIV_CMD_PW_SLIDE_UP, _("22xx: Pulse width slide up")}},
+    {0x23, {DIV_CMD_PW_SLIDE_DN, _("23xx: Pulse width slide down")}},
+
+    {0x24, {DIV_CMD_CUTOFF_SLIDE_UP, _("24xx: Cutoff slide up")}},
+    {0x25, {DIV_CMD_CUTOFF_SLIDE_DN, _("25xx: Cutoff slide down")}},
   };
   const EffectHandler c64FineDutyHandler(DIV_CMD_C64_FINE_DUTY, _("3xxx: Set pulse width (0 to FFF)"), effectValLong<12>);
   const EffectHandler c64FineCutoffHandler(DIV_CMD_C64_FINE_CUTOFF, _("4xxx: Set cutoff (0 to 7FF)"), effectValLong<11>);
@@ -689,6 +695,12 @@ void DivEngine::registerSystems() {
     {0x14, {DIV_CMD_C64_FILTER_RESET, _("14xy: Reset cutoff (x: on new note; y: now)")}},
     {0x15, {DIV_CMD_C64_DUTY_RESET, _("15xy: Reset pulse width (x: on new note; y: now)")}},
     {0x16, {DIV_CMD_C64_EXTENDED, _("16xy: Change other parameters")}},
+
+    {0x17, {DIV_CMD_PW_SLIDE_UP, _("17xx: Pulse width slide up")}},
+    {0x18, {DIV_CMD_PW_SLIDE_DN, _("18xx: Pulse width slide down")}},
+
+    {0x19, {DIV_CMD_CUTOFF_SLIDE_UP, _("19xx: Cutoff slide up")}},
+    {0x1A, {DIV_CMD_CUTOFF_SLIDE_DN, _("1Axx: Cutoff slide down")}},
   };
   const EffectHandler SID2FineDutyHandler(DIV_CMD_C64_FINE_DUTY, _("3xxx: Set pulse width (0 to FFF)"), effectValLong<12>);
   const EffectHandler SID2FineCutoffHandler(DIV_CMD_C64_FINE_CUTOFF, _("4xxx: Set cutoff (0 to FFF)"), effectValLong<11>);
@@ -2166,16 +2178,8 @@ void DivEngine::registerSystems() {
     {DIV_CH_NOISE, DIV_CH_NOISE, DIV_CH_NOISE},
     {DIV_INS_SID2, DIV_INS_SID2, DIV_INS_SID2},
     {},
-    {
-      {0x10, {DIV_CMD_WAVE, _("10xx: Set wave (bit 0: tone, bit 1: noise, bit 2: envelope)")}},
-      {0x11, {DIV_CMD_C64_FINE_DUTY, _("11xx: Set duty cycle")}},
-      {0x12, {DIV_CMD_AY_ENVELOPE_SET, _("12xx: Set envelope shape (envelope channels only, 0-7))")}},
-      {0x13, {DIV_CMD_AY_ENVELOPE_LOW, _("13xx: Set envelope starting phase (lower byte))")}},
-      {0x14, {DIV_CMD_AY_ENVELOPE_HIGH, _("14xx: Set envelope starting phase (higher byte))")}},
-      {0x15, {DIV_CMD_POWERNOISE_COUNTER_LOAD, _("15xx: Load low byte of noise generator LFSR feedback bits)"), constVal<0>, effectVal}},
-      {0x16, {DIV_CMD_POWERNOISE_COUNTER_LOAD, _("16xx: Load high byte of noise generator LFSR feedback bits)"), constVal<1>, effectVal}},
-      {0x17, {DIV_CMD_AY_AUTO_ENVELOPE, _("17xx: Set envelope number (0 to 1))")}},
-    }
+    {},
+    SID2PostEffectHandlerMap
   );
 
   sysDefs[DIV_SYSTEM_FZT]=new DivSysDef(
