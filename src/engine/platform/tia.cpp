@@ -439,8 +439,8 @@ int DivPlatformTIA::getRegisterPoolSize() {
   return 6;
 }
 
-void DivPlatformTIA::reset(const DivConfig& flags) {
-  setFlags(flags);
+void DivPlatformTIA::reset() {
+  softwarePitch = softwarePitchActual;
   tuneCounter=0;
   tia.reset(mixingType);
   memset(regPool,0,16);
@@ -492,6 +492,7 @@ void DivPlatformTIA::setFlags(const DivConfig& flags) {
   rate=chipClock;
   mixingType=flags.getInt("mixingType",0)&3;
   softwarePitch=flags.getBool("softwarePitch",false);
+  softwarePitchActual = softwarePitch;
   oldPitch=flags.getBool("oldPitch",false);
   for (int i=0; i<2; i++) {
     oscBuf[i]->rate=rate/114;
@@ -509,7 +510,8 @@ int DivPlatformTIA::init(DivEngine* p, int channels, int sugRate, const DivConfi
     isMuted[i]=false;
     oscBuf[i]=new DivDispatchOscBuffer;
   }
-  reset(flags);
+  setFlags(flags);
+  reset();
   return 2;
 }
 

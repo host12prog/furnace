@@ -41,6 +41,7 @@ class DivPlatformTIA: public DivDispatch {
     DivDispatchOscBuffer* oscBuf[2];
     bool isMuted[2];
     bool softwarePitch;
+    bool softwarePitchActual;
     bool oldPitch;
     unsigned char mixingType;
     unsigned char chanOscCounter;
@@ -62,7 +63,7 @@ class DivPlatformTIA: public DivDispatch {
     DivDispatchOscBuffer* getOscBuffer(int chan);
     unsigned char* getRegisterPool();
     int getRegisterPoolSize();
-    void reset(const DivConfig& flags);
+    void reset();
     void forceIns();
     void tick(bool sysTick=true);
     void muteChannel(int ch, bool mute);

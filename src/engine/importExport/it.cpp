@@ -481,38 +481,38 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
 
       // scale envelope to global volume
       if (insVol>128) insVol=128;
-      if (ins->std.volMacro.len==0) {
-        ins->std.volMacro.len=1;
-        ins->std.volMacro.val[0]=insVol>>1;
+      if (ins->std.get_macro(DIV_MACRO_VOL, true)->len==0) {
+        ins->std.get_macro(DIV_MACRO_VOL, true)->len=1;
+        ins->std.get_macro(DIV_MACRO_VOL, true)->val[0]=insVol>>1;
       } else {
-        for (int j=0; j<ins->std.volMacro.len; j++) {
-          ins->std.volMacro.val[i]=(ins->std.volMacro.val[i]*insVol)>>7;
+        for (int j=0; j<ins->std.get_macro(DIV_MACRO_VOL, true)->len; j++) {
+          ins->std.get_macro(DIV_MACRO_VOL, true)->val[i]=(ins->std.get_macro(DIV_MACRO_VOL, true)->val[i]*insVol)>>7;
         }
       }
 
       // add note fade if there isn't a release point in the volume envelope
-      if (ins->std.volMacro.len>0 && ins->std.volMacro.rel>=ins->std.volMacro.len) {
-        ins->std.volMacro.len--;
-        int initial=ins->std.volMacro.val[ins->std.volMacro.len];
-        ins->std.volMacro.rel=ins->std.volMacro.len;
-        for (int i=1024; ins->std.volMacro.len<255; i-=fadeOut) {
-          ins->std.volMacro.val[ins->std.volMacro.len++]=(initial*i)>>10;
+      if (ins->std.get_macro(DIV_MACRO_VOL, true)->len>0 && ins->std.get_macro(DIV_MACRO_VOL, true)->rel>=ins->std.get_macro(DIV_MACRO_VOL, true)->len) {
+        ins->std.get_macro(DIV_MACRO_VOL, true)->len--;
+        int initial=ins->std.get_macro(DIV_MACRO_VOL, true)->val[ins->std.get_macro(DIV_MACRO_VOL, true)->len];
+        ins->std.get_macro(DIV_MACRO_VOL, true)->rel=ins->std.get_macro(DIV_MACRO_VOL, true)->len;
+        for (int i=1024; ins->std.get_macro(DIV_MACRO_VOL, true)->len<255; i-=fadeOut) {
+          ins->std.get_macro(DIV_MACRO_VOL, true)->val[ins->std.get_macro(DIV_MACRO_VOL, true)->len++]=(initial*i)>>10;
           if (i<0) break;
         }
       }
 
       // set filter macro to cutoff value if no filter envelope is defined
-      if (ins->std.ex1Macro.len==0 && initCut&0x80) {
+      if (ins->std.get_macro(DIV_MACRO_EX1, true)->len==0 && initCut&0x80) {
         if ((initCut&0x7f)==0x7f) {
-          ins->std.ex1Macro.len=1;
-          ins->std.ex1Macro.val[0]=65535;
+          ins->std.get_macro(DIV_MACRO_EX1, true)->len=1;
+          ins->std.get_macro(DIV_MACRO_EX1, true)->val[0]=65535;
         } else {
-          ins->std.ex1Macro.len=1;
-          ins->std.ex1Macro.val[0]=1024+(initCut&0x7f)*400;
+          ins->std.get_macro(DIV_MACRO_EX1, true)->len=1;
+          ins->std.get_macro(DIV_MACRO_EX1, true)->val[0]=1024+(initCut&0x7f)*400;
         }
       } else {
-        ins->std.ex1Macro.len=1;
-        ins->std.ex1Macro.val[0]=65535;
+        ins->std.get_macro(DIV_MACRO_EX1, true)->len=1;
+        ins->std.get_macro(DIV_MACRO_EX1, true)->val[0]=65535;
       }
 
       ds.ins.push_back(ins);
