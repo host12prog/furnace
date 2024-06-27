@@ -19,6 +19,14 @@
 
 #include "importExport.h"
 
+extern "C" {
+#include "../../../extern/itcompress/compression.h"
+}
+
+static const unsigned char volPortaSlide[10]={
+  0, 1, 4, 8, 16, 32, 64, 96, 128, 255
+};
+
 void readEnvelope(SafeReader& reader, DivInstrument* ins, int env) {
   unsigned char flags=reader.readC();
   unsigned char numPoints=reader.readC();
@@ -93,7 +101,9 @@ void readEnvelope(SafeReader& reader, DivInstrument* ins, int env) {
       pointJustBegan=false;
       if (flags&2) { // loop
         if (point==loopStart && (!(flags&4) || susStart==susEnd || loopStart>=susEnd)) {
-          target->loop=i;
+          if (loopStart!=loopEnd) {
+            target->loop=i;
+          }
         }
       }
       if (flags&4) { // sustain
@@ -202,7 +212,7 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
     ds.noSlidesOnFirstTick=true;
     ds.rowResetsArpPos=true;
     ds.ignoreJumpAtEnd=false;
-    ds.pitchSlideSpeed=4;
+    ds.pitchSlideSpeed=8;
 
     logV("Impulse Tracker module");
 
@@ -377,6 +387,8 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
 
       unsigned char initCut=255;
       unsigned char initRes=255;
+      unsigned char insVol=128;
+      unsigned short fadeOut=256;
 
       if (compatTracker<0x200) { // old format
         unsigned char flags=reader.readC();
@@ -393,7 +405,7 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
 
         reader.readS(); // x
 
-        unsigned short fadeOut=reader.readS();
+        fadeOut=reader.readS();
 
         logV("fadeOut: %d",fadeOut);
 
@@ -409,17 +421,16 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
         reader.readC();
         reader.readC();
 
-        unsigned short fadeOut=reader.readS();
+        fadeOut=reader.readS();
 
         logV("fadeOut: %d",fadeOut);
 
         reader.readC();
         reader.readC();
 
-        unsigned char globalVol=reader.readC();
+        insVol=reader.readC();
         unsigned char defPan=reader.readC();
 
-        logV("globalVol: %d",globalVol);
         logV("defPan: %d",defPan);
 
         // vol/pan randomization
@@ -468,6 +479,42 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
         readEnvelope(reader,ins,2);
       }
 
+      // scale envelope to global volume
+      if (insVol>128) insVol=128;
+      if (ins->std.volMacro.len==0) {
+        ins->std.volMacro.len=1;
+        ins->std.volMacro.val[0]=insVol>>1;
+      } else {
+        for (int j=0; j<ins->std.volMacro.len; j++) {
+          ins->std.volMacro.val[i]=(ins->std.volMacro.val[i]*insVol)>>7;
+        }
+      }
+
+      // add note fade if there isn't a release point in the volume envelope
+      if (ins->std.volMacro.len>0 && ins->std.volMacro.rel>=ins->std.volMacro.len) {
+        ins->std.volMacro.len--;
+        int initial=ins->std.volMacro.val[ins->std.volMacro.len];
+        ins->std.volMacro.rel=ins->std.volMacro.len;
+        for (int i=1024; ins->std.volMacro.len<255; i-=fadeOut) {
+          ins->std.volMacro.val[ins->std.volMacro.len++]=(initial*i)>>10;
+          if (i<0) break;
+        }
+      }
+
+      // set filter macro to cutoff value if no filter envelope is defined
+      if (ins->std.ex1Macro.len==0 && initCut&0x80) {
+        if ((initCut&0x7f)==0x7f) {
+          ins->std.ex1Macro.len=1;
+          ins->std.ex1Macro.val[0]=65535;
+        } else {
+          ins->std.ex1Macro.len=1;
+          ins->std.ex1Macro.val[0]=1024+(initCut&0x7f)*400;
+        }
+      } else {
+        ins->std.ex1Macro.len=1;
+        ins->std.ex1Macro.val[0]=65535;
+      }
+
       ds.ins.push_back(ins);
     }
 
@@ -511,11 +558,9 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
 
       reader.readC(); // 0
 
-      unsigned char globalVol=reader.readC();
+      unsigned char sampleVol=reader.readC();
       unsigned char flags=reader.readC();
       defVol[i]=reader.readC();
-
-      logV("volumes: %d",globalVol);
 
       s->name=reader.readString(26);
 
@@ -528,14 +573,6 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
         s->depth=DIV_SAMPLE_DEPTH_16BIT;
       } else {
         s->depth=DIV_SAMPLE_DEPTH_8BIT;
-      }
-
-      if (flags&8) {
-        logE("sample decompression not implemented!");
-        lastError="sample decompression not implemented";
-        delete s;
-        delete[] file;
-        return false;
       }
 
       s->init((unsigned int)reader.readI());
@@ -586,60 +623,87 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
         logD("seek not needed...");
       }
 
-      if (s->depth==DIV_SAMPLE_DEPTH_16BIT) {
-        if (flags&4) { // downmix stereo
-          for (unsigned int i=0; i<s->samples; i++) {
-            short l;
-            if (convert&2) {
-              l=reader.readS_BE();
-            } else {
-              l=reader.readS();
+      if (flags&8) { // compressed sample
+        unsigned int ret=0;
+        logV("decompression begin...");
+        if (s->depth==DIV_SAMPLE_DEPTH_16BIT) {
+          ret=it_decompress16(s->data16,s->samples,&file[reader.tell()],len-reader.tell(),(convert&4)?1:0,(flags&4)?2:1);
+        } else {
+          ret=it_decompress8(s->data8,s->samples,&file[reader.tell()],len-reader.tell(),(convert&4)?1:0,(flags&4)?2:1);
+        }
+        logV("got: %d",ret);
+      } else {
+        if (s->depth==DIV_SAMPLE_DEPTH_16BIT) {
+          if (flags&4) { // downmix stereo
+            for (unsigned int i=0; i<s->samples; i++) {
+              short l;
+              if (convert&2) {
+                l=reader.readS_BE();
+              } else {
+                l=reader.readS();
+              }
+              if (!(convert&1)) {
+                l^=0x8000;
+              }
+              s->data16[i]=l;
             }
-            if (!(convert&1)) {
-              l^=0x8000;
+            for (unsigned int i=0; i<s->samples; i++) {
+              short r;
+              if (convert&2) {
+                r=reader.readS_BE();
+              } else {
+                r=reader.readS();
+              }
+              if (!(convert&1)) {
+                r^=0x8000;
+              }
+              s->data16[i]=(s->data16[i]+r)>>1;
             }
-            s->data16[i]=l;
-          }
-          for (unsigned int i=0; i<s->samples; i++) {
-            short r;
-            if (convert&2) {
-              r=reader.readS_BE();
-            } else {
-              r=reader.readS();
+          } else {
+            for (unsigned int i=0; i<s->samples; i++) {
+              if (convert&2) {
+                s->data16[i]=reader.readS_BE()^((convert&1)?0:0x8000);
+              } else {
+                s->data16[i]=reader.readS()^((convert&1)?0:0x8000);
+              }
             }
-            if (!(convert&1)) {
-              r^=0x8000;
-            }
-            s->data16[i]=(s->data16[i]+r)>>1;
           }
         } else {
-          for (unsigned int i=0; i<s->samples; i++) {
-            if (convert&2) {
-              s->data16[i]=reader.readS_BE()^((convert&1)?0:0x8000);
-            } else {
-              s->data16[i]=reader.readS()^((convert&1)?0:0x8000);
+          if (flags&4) { // downmix stereo
+            for (unsigned int i=0; i<s->samples; i++) {
+              signed char l=reader.readC();
+              if (!(convert&1)) {
+                l^=0x80;
+              }
+              s->data8[i]=l;
+            }
+            for (unsigned int i=0; i<s->samples; i++) {
+              signed char r=reader.readC();
+              if (!(convert&1)) {
+                r^=0x80;
+              }
+              s->data8[i]=(s->data8[i]+r)>>1;
+            }
+          } else {
+            for (unsigned int i=0; i<s->samples; i++) {
+              s->data8[i]=reader.readC()^((convert&1)?0:0x80);
             }
           }
         }
-      } else {
-        if (flags&4) { // downmix stereo
-          for (unsigned int i=0; i<s->samples; i++) {
-            signed char l=reader.readC();
-            if (!(convert&1)) {
-              l^=0x80;
-            }
-            s->data8[i]=l;
+      }
+
+      // scale sample if necessary
+      if (s->samples>0) {
+        if (sampleVol>64) sampleVol=64;
+        if (sampleVol<64) {
+          // convert to 16-bit
+          if (s->depth==DIV_SAMPLE_DEPTH_8BIT) {
+            s->convert(DIV_SAMPLE_DEPTH_16BIT,0);
           }
+
+          // then scale
           for (unsigned int i=0; i<s->samples; i++) {
-            signed char r=reader.readC();
-            if (!(convert&1)) {
-              r^=0x80;
-            }
-            s->data8[i]=(s->data8[i]+r)>>1;
-          }
-        } else {
-          for (unsigned int i=0; i<s->samples; i++) {
-            s->data8[i]=reader.readC()^((convert&1)?0:0x80);
+            s->data16[i]=(s->data16[i]*sampleVol)>>6;
           }
         }
       }
@@ -657,10 +721,151 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
       ds.sample.push_back(s);
     }
 
-    ds.insLen=ds.ins.size();
+    // scan pattern data for effect use
+    int maxChan=0;
+    for (int i=0; i<patCount; i++) {
+      if (patPtr[i]==0) continue;
+
+      unsigned char mask[64];
+      unsigned char note[64];
+      unsigned char ins[64];
+      unsigned char vol[64];
+      unsigned char effect[64];
+      unsigned char effectVal[64];
+      int curRow=0;
+
+      memset(mask,0,64);
+      memset(note,0,64);
+      memset(ins,0,64);
+      memset(vol,0,64);
+      memset(effect,0,64);
+      memset(effectVal,0,64);
+
+      logV("scanning pattern %d...",i);
+      if (!reader.seek(patPtr[i],SEEK_SET)) {
+        logE("premature end of file!");
+        lastError="incomplete file";
+        delete[] file;
+        return false;
+      }
+
+      unsigned int dataLen=(unsigned short)reader.readS();
+      unsigned short patRows=reader.readS();
+
+      patLen[i]=patRows;
+
+      if (patRows>DIV_MAX_ROWS) {
+        logE("too many rows! %d",patRows);
+        lastError="too many rows";
+        delete[] file;
+        return false;
+      }
+
+      reader.readI(); // x
+
+      dataLen+=reader.tell();
+
+      // read pattern data
+      while (reader.tell()<dataLen) {
+        unsigned char chan=reader.readC();
+        bool hasVol=false;
+        bool hasEffect=false;
+
+        if (chan==0) {
+          curRow++;
+          if (curRow>=patRows) {
+            break;
+          }
+          continue;
+        }
+
+        if (chan&128) {
+          mask[(chan-1)&63]=reader.readC();
+        }
+        chan=(chan-1)&63;
+
+        if (chan>maxChan) maxChan=chan;
+
+        if (mask[chan]&1) {
+          note[chan]=reader.readC();
+        }
+        if (mask[chan]&2) {
+          ins[chan]=reader.readC();
+        }
+        if (mask[chan]&4) {
+          vol[chan]=reader.readC();
+          hasVol=true;
+        }
+        if (mask[chan]&8) {
+          effect[chan]=reader.readC();
+          effectVal[chan]=reader.readC();
+          hasEffect=true;
+        }
+        if (mask[chan]&64) {
+          hasVol=true;
+        }
+        if (mask[chan]&128) {
+          hasEffect=true;
+        }
+
+        if (hasVol) {
+          if (vol[chan]>64) {
+            if (vol[chan]>=65 && vol[chan]<=74) { // fine vol up
+              doesVolSlide[chan]=true;
+            } else if (vol[chan]>=75 && vol[chan]<=84) { // fine vol down
+              doesVolSlide[chan]=true;
+            } else if (vol[chan]>=85 && vol[chan]<=94) { // vol slide up
+              doesVolSlide[chan]=true;
+            } else if (vol[chan]>=95 && vol[chan]<=104) { // vol slide down
+              doesVolSlide[chan]=true;
+            } else if (vol[chan]>=105 && vol[chan]<=114) { // pitch down
+              doesPitchSlide[chan]=true;
+            } else if (vol[chan]>=115 && vol[chan]<=124) { // pitch up
+              doesPitchSlide[chan]=true;
+            } else if (vol[chan]>=193 && vol[chan]<=202) { // porta
+              doesPitchSlide[chan]=true;
+            } else if (vol[chan]>=203 && vol[chan]<=212) { // vibrato
+              doesVibrato[chan]=true;
+            }
+          }
+        }
+        if (hasEffect) {
+          switch (effect[chan]+'A'-1) {
+            case 'D': // vol slide
+              doesVolSlide[chan]=true;
+              break;
+            case 'E': // pitch down
+              doesPitchSlide[chan]=true;
+              break;
+            case 'F': // pitch up
+              doesPitchSlide[chan]=true;
+              break;
+            case 'G': // porta
+              doesPitchSlide[chan]=true;
+              break;
+            case 'H': // vibrato
+              doesVibrato[chan]=true;
+              break;
+            case 'J': // arp
+              doesArp[chan]=true;
+              break;
+            case 'K': // vol slide + vibrato
+              doesVolSlide[chan]=true;
+              doesVibrato[chan]=true;
+              break;
+            case 'L': // vol slide + porta
+              doesVolSlide[chan]=true;
+              doesPitchSlide[chan]=true;
+              break;
+            case 'U': // fine vibrato
+              doesVibrato[chan]=true;
+              break;
+          }
+        }
+      }
+    }
 
     // read patterns
-    int maxChan=0;
     for (int i=0; i<patCount; i++) {
       unsigned char effectCol[64];
       unsigned char vibStatus[64];
@@ -846,11 +1051,9 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
         }
 
         if (chan&128) {
-          mask[chan&63]=reader.readC();
+          mask[(chan-1)&63]=reader.readC();
         }
-        chan&=63;
-
-        if (chan>maxChan) maxChan=chan;
+        chan=(chan-1)&63;
 
         if (mask[chan]&1) {
           note[chan]=reader.readC();
@@ -907,9 +1110,35 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
           p->data[curRow][2]=ins[chan]-1;
         }
         if (hasVol) {
-          p->data[curRow][3]=vol[chan];
-        } else if (hasNote && hasIns && note[chan]<120 && ins[chan]>0) {
-          p->data[curRow][3]=defVol[noteMap[(ins[chan]-1)&255][note[chan]]];
+          if (vol[chan]<=64) {
+            p->data[curRow][3]=vol[chan];
+          } else { // effects in volume column
+            if (vol[chan]>=128 && vol[chan]<=192) { // panning
+              p->data[curRow][effectCol[chan]++]=0x80;
+              p->data[curRow][effectCol[chan]++]=CLAMP((vol[chan]-128)<<2,0,255);
+            } else if (vol[chan]>=65 && vol[chan]<=74) { // fine vol up
+            } else if (vol[chan]>=75 && vol[chan]<=84) { // fine vol down
+            } else if (vol[chan]>=85 && vol[chan]<=94) { // vol slide up
+            } else if (vol[chan]>=95 && vol[chan]<=104) { // vol slide down
+            } else if (vol[chan]>=105 && vol[chan]<=114) { // pitch down
+            } else if (vol[chan]>=115 && vol[chan]<=124) { // pitch up
+            } else if (vol[chan]>=193 && vol[chan]<=202) { // porta
+              unsigned char portaVal=volPortaSlide[vol[chan]-193];
+              if (portaVal!=0) {
+                portaStatus[chan]=portaVal;
+                portaStatusChanged[chan]=true;
+              }
+              portaType[chan]=3;
+              porting[chan]=true;
+            } else if (vol[chan]>=203 && vol[chan]<=212) { // vibrato
+            }
+          }
+        } else if (hasNote && hasIns && (note[chan]<120 || ds.insLen==0) && ins[chan]>0) {
+          if (ds.insLen==0) {
+            p->data[curRow][3]=defVol[(ins[chan]-1)&255];
+          } else {
+            p->data[curRow][3]=defVol[noteMap[(ins[chan]-1)&255][note[chan]]];
+          }
         }
         if (hasEffect) {
           switch (effect[chan]+'A'-1) {
@@ -992,15 +1221,15 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
               porting[chan]=true;
               portaType[chan]=3;
               break;
-            case 'M': // channel vol (extension)
+            case 'M': // channel vol
               break;
-            case 'N': // channel vol slide (extension)
+            case 'N': // channel vol slide
               break;
             case 'O': // offset
               p->data[curRow][effectCol[chan]++]=0x91;
               p->data[curRow][effectCol[chan]++]=effectVal[chan];
               break;
-            case 'P': // pan slide (extension)
+            case 'P': // pan slide
               break;
             case 'Q': // retrigger
               p->data[curRow][effectCol[chan]++]=0x0c;
@@ -1035,18 +1264,22 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
               break;
             case 'W': // global volume slide (!)
               break;
-            case 'X': // panning (extension)
+            case 'X': // panning
               p->data[curRow][effectCol[chan]++]=0x80;
               p->data[curRow][effectCol[chan]++]=effectVal[chan];
               break;
-            case 'Y': // panbrello (extension)
+            case 'Y': // panbrello
               break;
-            case 'Z': // MIDI macro (extension)
+            case 'Z': // MIDI macro
               break;
           }
         }
       }
     }
+
+    maxChan++;
+
+    ds.insLen=ds.ins.size();
 
     logV("maxChan: %d",maxChan);
 
@@ -1106,6 +1339,31 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
 
     // find subsongs
     ds.findSubSongs(maxChan);    
+
+    // populate subsongs with default panning values
+    for (size_t i=0; i<ds.subsong.size(); i++) {
+      for (int j=0; j<maxChan; j++) {
+        DivPattern* p=ds.subsong[i]->pat[j].getPattern(ds.subsong[i]->orders.ord[j][0],true);
+        for (int k=0; k<DIV_MAX_EFFECTS; k++) {
+          if (p->data[0][4+(k<<1)]==0x80) {
+            // give up if there's a panning effect already
+            break;
+          }
+          if (p->data[0][4+(k<<1)]==-1) {
+            if ((chanPan[j]&127)==100) {
+              // should be surround...
+              p->data[0][4+(k<<1)]=0x80;
+              p->data[0][5+(k<<1)]=0x80;
+            } else {
+              p->data[0][4+(k<<1)]=0x80;
+              p->data[0][5+(k<<1)]=CLAMP((chanPan[j]&127)<<2,0,255);
+            }
+            if (ds.subsong[i]->pat[j].effectCols<=k) ds.subsong[i]->pat[j].effectCols=k+1;
+            break;
+          }
+        }
+      }
+    }
 
     if (active) quitDispatch();
     BUSY_BEGIN_SOFT;
