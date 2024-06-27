@@ -286,7 +286,9 @@ const char* cmdName[]={
   "NOTE_FZT",
 
   "BIFURCATOR_STATE_LOAD",
-  "BIFURCATOR_PARAMETER"
+  "BIFURCATOR_PARAMETER",
+
+  "SOFTWARE_PITCH"
 };
 
 static_assert((sizeof(cmdName)/sizeof(void*))==DIV_CMD_MAX,"update cmdName!");

@@ -936,8 +936,9 @@ void DivEngine::registerSystems() {
     {},
     {},
     {
-      {0x10, {DIV_CMD_WAVE, "10xx: Set waveform"}},
-      {0x11, {DIV_CMD_RAW_FREQ, "11xx: Set raw period (0-1F)"}},
+      {0x10, {DIV_CMD_WAVE, _("10xx: Set waveform")}},
+      {0x11, {DIV_CMD_RAW_FREQ, _("11xx: Set raw period (0-1F)")}},
+      {0x20, {DIV_CMD_SOFTWARE_PITCH, _("20xx: Software pitch control (0 - off, 1 - on)")}},
     }
   );
 

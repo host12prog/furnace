@@ -332,6 +332,9 @@ int DivPlatformTIA::dispatch(DivCommand c) {
       raw_freq[c.chan] = true;
       chan[c.chan].freqChanged = true;
       break;
+    case DIV_CMD_SOFTWARE_PITCH:
+      softwarePitch = c.value & 1;
+      break;
     case DIV_CMD_NOTE_PORTA: {
       int destFreq=c.value2<<8;
       bool return2=false;
@@ -436,7 +439,8 @@ int DivPlatformTIA::getRegisterPoolSize() {
   return 6;
 }
 
-void DivPlatformTIA::reset() {
+void DivPlatformTIA::reset(const DivConfig& flags) {
+  setFlags(flags);
   tuneCounter=0;
   tia.reset(mixingType);
   memset(regPool,0,16);
@@ -505,8 +509,7 @@ int DivPlatformTIA::init(DivEngine* p, int channels, int sugRate, const DivConfi
     isMuted[i]=false;
     oscBuf[i]=new DivDispatchOscBuffer;
   }
-  setFlags(flags);
-  reset();
+  reset(flags);
   return 2;
 }
 

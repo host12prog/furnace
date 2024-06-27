@@ -1677,7 +1677,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       }
       hasOpened=fileDialog->openLoad(
         _("Restore Backup"),
-        {_("Furnace song"), "*.fur"},
+        {_("Furnace-B song"), "*.fub"},
         backupPath+String(DIR_SEPARATOR_STR),
         dpiScale
       );
@@ -1686,7 +1686,7 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
       if (!dirExists(workingDirSong)) workingDirSong=getHomeDir();
       hasOpened=fileDialog->openSave(
         _("Save File"),
-        {_("Furnace song"), "*.fur"},
+        {_("Furnace-B song"), "*.fub"},
         workingDirSong,
         dpiScale
       );
