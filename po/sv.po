@@ -134,7 +134,7 @@ msgstr "17xx: Växla till PCM-läge (FÖRÅLDRAD)"
 #: src/engine/sysDef.cpp:476 src/engine/sysDef.cpp:1661
 #: src/engine/sysDef.cpp:1971
 msgid "DFxx: Set sample playback direction (0: normal; 1: reverse)"
-msgstr "DFxx: Ange provuppspelningsriktning (0: normal; 1: omvänd)"
+msgstr "DFxx: Ange sampleuppspelningsriktning (0: normal; 1: omvänd)"
 
 #: src/engine/sysDef.cpp:481
 msgid "18xx: Toggle drums mode (1: enabled; 0: disabled)"
@@ -1545,7 +1545,7 @@ msgid ""
 "capabilities..."
 msgstr ""
 "det är en utmaning att göra musik på detta chip som knappt har "
-"musikalaförmågor..."
+"musikala förmågor..."
 
 #: src/engine/sysDef.cpp:933
 msgid "Philips SAA1099"
@@ -3790,14 +3790,10 @@ msgstr "Modulatortonsstämning (semitoner)"
 msgid "27xx: Portamento down (semitones)"
 msgstr "E2xy: Not glida ner (x: hastighet; y: halvtoner)"
 
-#: src/engine/sysDef.cpp:2218
-msgid "28xx: Absolute arpeggio note"
-msgstr ""
-
-#: src/engine/sysDef.cpp:2219
+#: src/engine/engine.cpp:104
 #, fuzzy
-msgid "29xx: Trigger envelope release"
-msgstr "15xx: Ange ADSR-återställningstid"
+msgid "E3xx: Set vibrato shape"
+msgstr "E4xx: Ange vibratogräns"
 
 #: src/engine/sysDef.cpp:2224
 msgid "ATTiny85APU"
@@ -4644,95 +4640,30 @@ msgstr ""
 "bestämmer nästa hastighet baserat på om raden är udda/jämn i stället för att "
 "växla mellan hastigheterna."
 
-#: src/gui/compatFlags.cpp:68
-msgid "Ignore duplicate slide effects"
-msgstr "Ignorera duplicerade glideffekter"
-
-#: src/gui/compatFlags.cpp:70
-msgid ""
-"if this is on, only the first slide of a row in a channel will be considered."
+#: src/gui/exportOptions.cpp:255
+msgid "for use with TIunA driver. outputs asm source."
 msgstr ""
-"Om detta är påslaget, kommer endast den första bilden i en rad i en kanal "
-"att beaktas."
 
-#: src/gui/compatFlags.cpp:72
-msgid "Ignore 0Dxx on the last order"
-msgstr "Ignorera 0Dxx på den senaste order"
-
-#: src/gui/compatFlags.cpp:74
-msgid ""
-"if this is on, a jump to next row effect will not take place when it is on "
-"the last order of a song."
+#: src/gui/exportOptions.cpp:256
+msgid "base song label name"
 msgstr ""
-"om detta är på, kommer en hopp till nästa radeffekt inte att ske när den är "
-"på den sista ordern i en låt."
 
-#: src/gui/compatFlags.cpp:76
-msgid "Buggy portamento after pitch slide"
-msgstr "Buggigt portamento efter tonhöjdsglidning"
-
-#: src/gui/compatFlags.cpp:78
-msgid "simulates a bug in where portamento does not work after sliding."
-msgstr "simulerar en bugg där portamento inte fungerar efter glidning."
-
-#: src/gui/compatFlags.cpp:80
-msgid "FM pitch slide octave boundary odd behavior"
-msgstr "FM-tonhöjdsglidning oktavgräns med udda beteende"
-
-#: src/gui/compatFlags.cpp:82
-msgid ""
-"if this is on, a pitch slide that crosses the octave boundary will stop for "
-"one tick and then continue from the nearest octave boundary.\n"
-"for .dmf compatibility."
+#: src/gui/exportOptions.cpp:257
+msgid "max size in first bank"
 msgstr ""
-"om detta är påslaget kommer en tonhöjdsglidning som korsar oktavgränsen att "
-"stanna i ett tick och fortsätta sedan från närmaste oktavgräns.\n"
-"för .dmf-kompatibilitet."
 
-#: src/gui/compatFlags.cpp:84
-msgid "Don't apply Game Boy envelope on note-less instrument change"
-msgstr "Använd ej Game Boy-ADSR vid byte av instrument utan noter"
-
-#: src/gui/compatFlags.cpp:86
-msgid "if this is on, an instrument change will not affect the envelope."
-msgstr "om detta är påslaget kommer ett instrumentbyte inte att påverka ADSR."
-
-#: src/gui/compatFlags.cpp:88
-msgid "Ignore DAC mode change outside of intended channel in ExtCh mode"
+#: src/gui/exportOptions.cpp:261
+msgid "max size in other banks"
 msgstr ""
-"Ignorera ändring av DAC-läge utanför den avsedda kanalen i utökat kanalläge"
 
-#: src/gui/compatFlags.cpp:90
-msgid "if this is on, 17xx has no effect on the operator channels in YM2612."
-msgstr "om detta är på har 17xx ingen effekt på operatorskanalerna i YM2612."
+#: src/gui/exportOptions.cpp:276
+#, fuzzy
+msgid "this chip is not supported by the file format!"
+msgstr "detta chip stöds inte av VGM-formatet!"
 
-#: src/gui/compatFlags.cpp:92
-msgid "E1xy/E2xy also take priority over slide stops"
-msgstr "E1xy/E2xy har också prioritet över glidstopp"
-
-#: src/gui/compatFlags.cpp:94
-msgid "does this make any sense by now?"
-msgstr "verkar detta vara vettigt nu?"
-
-#: src/gui/compatFlags.cpp:96
-msgid "E1xy/E2xy stop when repeating the same note"
-msgstr "E1xy/E2xy stoppar vid upprepning av samma not"
-
-#: src/gui/compatFlags.cpp:98
-msgid "ugh, if only this wasn't a thing..."
-msgstr "om det bara inte vore så här..."
-
-#: src/gui/compatFlags.cpp:100
-msgid "SN76489 duty macro always resets phase"
-msgstr "SN76489 arbetsmakro återställer alltid fas"
-
-#: src/gui/compatFlags.cpp:102
-msgid ""
-"when enabled, duty macro will always reset phase, even if its value hasn't "
-"changed."
+#: src/gui/exportOptions.cpp:278
+msgid "only one Atari TIA is supported!"
 msgstr ""
-"när den är aktiverad kommer arbetsmakrot alltid att återställa fasen, även "
-"om dess värde inte har ändrats."
 
 #: src/gui/compatFlags.cpp:104
 msgid "Broken volume scaling strategy"
@@ -11724,28 +11655,14 @@ msgstr "ADSR"
 msgid "Envelope##sgiOPL1"
 msgstr "ADSR"
 
-#: src/gui/inst/opl.cpp:287
-#, c-format
-msgid "op%d##sgiOPL0"
+#: src/gui/sysConf.cpp:1068
+msgid "Software pitch driver"
 msgstr ""
 
-#: src/gui/inst/opl.cpp:296
-msgid "Kick##sgiOPL1"
-msgstr ""
-
-#: src/gui/inst/opl.cpp:300
-msgid "Env##sgiOPL"
-msgstr ""
-
-#: src/gui/inst/opl.cpp:305
-#, c-format
-msgid "OP%d##sgiOPL1"
-msgstr ""
-
-#: src/gui/inst/opl.cpp:399
+#: src/gui/sysConf.cpp:1072
 #, fuzzy
-msgid "OPL2/3 only (last 4 waveforms are OPL3 only)##sgiOPL0"
-msgstr "Endast OPL2/3 (de sista 4 vågformerna är endast OPL3)"
+msgid "Old pitch table (compatibility)"
+msgstr "Brutna tonhöjdsmakro/glider (kompatibilitet)"
 
 #: src/gui/inst/opl.cpp:441
 #, c-format
@@ -11851,23 +11768,22 @@ msgstr "Fasåterställningstimer"
 msgid "%s name##sgiOPLL"
 msgstr "%s namn"
 
-#: src/gui/inst/opll.cpp:169
+#: src/gui/sysConf.cpp:1292
 #, fuzzy
-msgid "Fixed frequency mode##sgiOPLL"
-msgstr "Fast frekvensläge"
+msgid "Amiga channel volumes (64)"
+msgstr "Kanalvolymfält:"
 
-#: src/gui/inst/opll.cpp:172
-#, fuzzy
-msgid ""
-"when enabled, drums will be set to the specified frequencies, ignoring the "
-"note.##sgiOPLL"
+#: src/gui/sysConf.cpp:1296
+msgid "Amiga-like pitch (non-linear pitch only)"
 msgstr ""
-"om detta blir aktiverad kommer trummorna att ställas in på de angivna "
-"frekvenserna, utan hänsyn till noten."
 
-#: src/gui/inst/opll.cpp:182
-msgid "Drum##sgiOPLL"
-msgstr ""
+#: src/gui/sysConf.cpp:1332 src/gui/sysConf.cpp:1754
+msgid "3.54MHz (PAL)"
+msgstr "3,54MHz (PAL)"
+
+#: src/gui/sysConf.cpp:1336 src/gui/sysConf.cpp:1758 src/gui/sysConf.cpp:2330
+msgid "4MHz"
+msgstr "4MHz"
 
 #: src/gui/inst/opll.cpp:184
 msgid "Block##sgiOPLL"
@@ -12069,49 +11985,10 @@ msgstr "PM-djup"
 msgid "LFO Speed##sgiOPM"
 msgstr "LFO-hastighet"
 
-#: src/gui/inst/opm.cpp:785
+#: src/gui/sysConf.cpp:1897
 #, fuzzy
-msgid "LFO Shape##sgiOPM"
-msgstr "LFO-form"
-
-#: src/gui/inst/opm.cpp:786
-#, fuzzy
-msgid "OpMask##sgiOPM"
-msgstr "OpMask"
-
-#: src/gui/inst/opm.cpp:812
-#, fuzzy, c-format
-msgid "OP%d Macros##sgiOPM"
-msgstr "OP%d makron"
-
-#: src/gui/inst/opm.cpp:839
-#, fuzzy
-msgid "Macros##sgiOPM"
-msgstr "Makron"
-
-#: src/gui/inst/opm.cpp:843
-#, fuzzy
-msgid "Volume##sgiOPM"
-msgstr "Volym"
-
-#: src/gui/inst/opm.cpp:844
-#, fuzzy
-msgid "Arpeggio##sgiOPM"
-msgstr "Arpeggio"
-
-#: src/gui/inst/opm.cpp:845
-msgid "Pitch##sgiOPM"
-msgstr ""
-
-#: src/gui/inst/opm.cpp:846
-#, fuzzy
-msgid "Noise Freq##sgiOPM"
-msgstr "Brusfrekv."
-
-#: src/gui/inst/opm.cpp:847
-#, fuzzy
-msgid "Panning##sgiOPM"
-msgstr "Panorering"
+msgid "Maximum volume:"
+msgstr "Minimum"
 
 #: src/gui/inst/opm.cpp:849
 #, fuzzy
@@ -13879,22 +13756,12 @@ msgstr "Vågform"
 msgid "Phase Reset##sgiVRC6"
 msgstr "Fasåterställningstimer"
 
-#: src/gui/inst/vrc6saw.cpp:32
-msgid "Macros##sgiVRC6S"
+#: src/gui/sysConf.cpp:2476
+msgid "V 0.3.1"
 msgstr ""
 
-#: src/gui/inst/vrc6saw.cpp:34
-#, fuzzy
-msgid "Volume##sgiVRC6S"
-msgstr "Volym"
-
-#: src/gui/inst/vrc6saw.cpp:35
-#, fuzzy
-msgid "Arpeggio##sgiVRC6S"
-msgstr "Arpeggio"
-
-#: src/gui/inst/vrc6saw.cpp:36
-msgid "Pitch##sgiVRC6S"
+#: src/gui/sysConf.cpp:2480
+msgid "V 47.0.0 (9-bit volume)"
 msgstr ""
 
 #: src/gui/inst/wavetable.cpp:89
@@ -14363,50 +14230,9 @@ msgid ""
 "Pattern %.2X\n"
 "- not allocated"
 msgstr ""
-"Mönster %.2X\n"
-"- inte tilldelat"
-
-#: src/gui/patManager.cpp:105
-#, c-format
-msgid ""
-"Pattern %.2X\n"
-"- use count: %d (%.0f%%)\n"
-"\n"
-"right-click to erase"
-msgstr ""
-"Mönster %.2X\n"
-"- antal användningar: %d (%.0f%%)\n"
-"\n"
-"högerklicka för att radera"
-
-#: src/gui/pattern.cpp:468
-msgid "there aren't any channels to show."
-msgstr "det finns inga kanaler att visa."
-
-#: src/gui/pattern.cpp:492
-msgid "click for pattern options (effect columns/pattern names/visualizer)"
-msgstr ""
-"klicka för mönsteralternativ (effektkolumner/mönsternamn/visualiserare)"
-
-#: src/gui/pattern.cpp:504
-msgid "Options:"
-msgstr "Alternativ:"
-
-#: src/gui/pattern.cpp:506
-msgid "Effect columns/collapse"
-msgstr "Effektkolumner/dold"
-
-#: src/gui/pattern.cpp:507
-msgid "Pattern names"
-msgstr "Mönsternamn"
-
-#: src/gui/pattern.cpp:508
-msgid "Channel group hints"
-msgstr "Kanalgruppstips"
-
-#: src/gui/pattern.cpp:509
-msgid "Visualizer"
-msgstr "Visualiserare"
+"infoga ytterligare inställningar i formatet `option=värde`.\n"
+"tillgängliga alternativ:\n"
+"- tickRate"
 
 #: src/gui/pattern.cpp:517
 msgid "Channel status:"
@@ -15277,7 +15103,7 @@ msgstr "Allmänt"
 
 #: src/gui/settings.cpp:601
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 #: src/gui/settings.cpp:620
 msgid "Render backend"
@@ -15609,7 +15435,7 @@ msgid ""
 "fill the file name field with an appropriate file name when saving or "
 "exporting."
 msgstr ""
-"fyll filnamnsfältet med ett lämpligt filnamn när du sparar eller exportera."
+"fyll filnamnsfältet med ett lämpligt filnamn när du sparar eller exporterar."
 
 #: src/gui/settings.cpp:994
 msgid "Initial system:"
@@ -18726,9 +18552,9 @@ msgstr "5,95MHz (PAL)"
 msgid "Sample memory:"
 msgstr "Sampleminne"
 
-#: src/gui/sysConf.cpp:264
-msgid "8K (rev A/B/E)"
-msgstr "8K (rev. A/B/E)"
+#: src/gui/about.cpp:288
+msgid "Impulse Tracker GUS volume table by Jeffrey Lim"
+msgstr ""
 
 #: src/gui/sysConf.cpp:268
 msgid "64K (rev D/F)"
@@ -20058,10 +19884,68 @@ msgstr "(-Oändlighet)dB,(-Oändlighet)dB"
 
 #: src/gui/xyOsc.cpp:215
 #, c-format
-msgid "(-Infinity)dB,%.1fdB"
-msgstr "(-Oändlighet)dB,%.1fdB"
+msgid "Loop (length: %d)##Loop"
+msgstr "Loop (längd: %d)"
 
-#: src/gui/xyOsc.cpp:217
+#: src/gui/sampleEdit.cpp:463 src/gui/insEdit.cpp:544 src/gui/insEdit.cpp:554
+#: src/gui/insEdit.cpp:605 src/gui/insEdit.cpp:6022
+msgid "Loop"
+msgstr "Loop"
+
+#: src/gui/sampleEdit.cpp:487 src/gui/sampleEdit.cpp:729
+#: src/gui/sampleEdit.cpp:765
+msgid "changing the loop in a BRR sample may result in glitches!"
+msgstr "Om du ändrar loopen i en BRR-sample kan det leda till problem!"
+
+#: src/gui/sampleEdit.cpp:529
+msgid "BRR emphasis"
+msgstr "BRR-betoning"
+
+#: src/gui/sampleEdit.cpp:538
+msgid ""
+"this is a BRR sample.\n"
+"enabling this option will muffle it (only affects non-SNES chips)."
+msgstr ""
+"Detta är ett BRR-prov.Om du aktiverar detta alternativ kommer det att dämpas "
+"(påverkar endast icke-SNES-chips)."
+
+#: src/gui/sampleEdit.cpp:540
+msgid ""
+"enable this option to slightly boost high frequencies\n"
+"to compensate for the SNES' Gaussian filter's muffle."
+msgstr ""
+"aktivera detta alternativ för att öka höga frekvenser\n"
+"för att kompensera för SNES Gaussian-filtrets dämpning."
+
+#: src/gui/sampleEdit.cpp:546
+#, fuzzy
+msgid "no BRR filters"
+msgstr "Ekofilter"
+
+#: src/gui/sampleEdit.cpp:554
+msgid ""
+"enable this option to not use BRR blocks with filters\n"
+"and allow sample offset commands to be used safely."
+msgstr ""
+
+#: src/gui/sampleEdit.cpp:559
+msgid "8-bit dither"
+msgstr "8-bit dither"
+
+#: src/gui/sampleEdit.cpp:567
+msgid "dither the sample when used on a chip that only supports 8-bit samples."
+msgstr ""
+"dither sample när den används på ett chip som bara stöder 8-bitars sampel."
+
+#: src/gui/sampleEdit.cpp:708 src/gui/gui.cpp:2987
+msgid "Start"
+msgstr "Start"
+
+#: src/gui/sampleEdit.cpp:744 src/gui/gui.cpp:2995
+msgid "End"
+msgstr "Slut"
+
+#: src/gui/sampleEdit.cpp:854
 #, c-format
 msgid "%.1fdB,(-Infinity)dB"
 msgstr "%.1fdB,(-Oändlighet)dB"
