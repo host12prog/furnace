@@ -1,4 +1,4 @@
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: furnace 0.6.5\n"
@@ -15,33 +15,33 @@ msgstr ""
 msgid "Invalid effect"
 msgstr ""
 
-#: src/engine/engine.cpp:1189
+#: src/engine/engine.cpp:1118
 msgid "invalid index"
 msgstr "недействительный индекс"
 
-#: src/engine/engine.cpp:1193
+#: src/engine/engine.cpp:1122
 #, c-format
 msgid "max number of systems is %d"
 msgstr "максимальное число чипов/систем не может превышать %d"
 
-#: src/engine/engine.cpp:1197
+#: src/engine/engine.cpp:1126
 #, c-format
 msgid "max number of total channels is %d"
 msgstr "максимальное общее число каналов не может превышать %d"
 
-#: src/engine/engine.cpp:1468
+#: src/engine/engine.cpp:1397
 msgid "source and destination are equal"
 msgstr "системы совпадают"
 
-#: src/engine/engine.cpp:1472
+#: src/engine/engine.cpp:1401
 msgid "invalid source index"
 msgstr "недействительный индекс исходной системы"
 
-#: src/engine/engine.cpp:1476
+#: src/engine/engine.cpp:1405
 msgid "invalid destination index"
 msgstr "недействительный индекс системы назначения"
 
-#: src/engine/engine.cpp:3203 src/gui/doAction.cpp:1039
+#: src/engine/engine.cpp:3132 src/gui/doAction.cpp:1039
 #: src/gui/doAction.cpp:1060
 #, c-format
 msgid "Sample %d"
@@ -68,17 +68,17 @@ msgid "24xx: Set envelope period high byte"
 msgstr "24xx: Старший байт периода огибающей"
 
 #: src/engine/sysDef.cpp:438 src/engine/sysDef.cpp:451
-#: src/engine/sysDef.cpp:1607
+#: src/engine/sysDef.cpp:1620
 msgid "25xx: Envelope slide up"
 msgstr "25xx: Портаменто огибающей вверх"
 
 #: src/engine/sysDef.cpp:439 src/engine/sysDef.cpp:452
-#: src/engine/sysDef.cpp:1608
+#: src/engine/sysDef.cpp:1621
 msgid "26xx: Envelope slide down"
 msgstr "26xx: Портаменто огибающей вниз"
 
 #: src/engine/sysDef.cpp:440 src/engine/sysDef.cpp:453
-#: src/engine/sysDef.cpp:1609
+#: src/engine/sysDef.cpp:1622
 msgid "29xy: Set auto-envelope (x: numerator; y: denominator)"
 msgstr "29xy: Авто-огибающая (x: числитель; y: знаменатель)"
 
@@ -124,14 +124,14 @@ msgstr "30xx: Переключить жёсткий перезапуск оги�
 msgid "18xx: Toggle extended channel 3 mode"
 msgstr "18xx: Переключить расширенный режим 3-го канала"
 
-#: src/engine/sysDef.cpp:475 src/engine/sysDef.cpp:771
-#: src/engine/sysDef.cpp:1033 src/engine/sysDef.cpp:1280
-#: src/engine/sysDef.cpp:1601
+#: src/engine/sysDef.cpp:475 src/engine/sysDef.cpp:783
+#: src/engine/sysDef.cpp:1046 src/engine/sysDef.cpp:1293
+#: src/engine/sysDef.cpp:1614
 msgid "17xx: Toggle PCM mode (LEGACY)"
 msgstr "17xx: Переключить режим ИКМ (СОВМЕСТИМОСТЬ)"
 
-#: src/engine/sysDef.cpp:476 src/engine/sysDef.cpp:1661
-#: src/engine/sysDef.cpp:1971
+#: src/engine/sysDef.cpp:476 src/engine/sysDef.cpp:1674
+#: src/engine/sysDef.cpp:1984
 msgid "DFxx: Set sample playback direction (0: normal; 1: reverse)"
 msgstr "DFxx: Направление проигрывания сэмпла (0: обычное; 1: обратное)"
 
@@ -161,7 +161,7 @@ msgid "15xx: Set level of operator 4 (0 highest, 7F lowest)"
 msgstr "15xx: Уровень оператора 4 (0 макс., 7F мин.)"
 
 #: src/engine/sysDef.cpp:490 src/engine/sysDef.cpp:585
-#: src/engine/sysDef.cpp:640
+#: src/engine/sysDef.cpp:646
 msgid "16xy: Set operator multiplier (x: operator from 1 to 4; y: multiplier)"
 msgstr "16xy: Множитель частоты (x: оператор (1-4); y: множитель)"
 
@@ -186,19 +186,19 @@ msgid "1Dxx: Set attack of operator 4 (0 to 1F)"
 msgstr "1Dxx: Атака оператора 4 (0-1F)"
 
 #: src/engine/sysDef.cpp:496 src/engine/sysDef.cpp:593
-#: src/engine/sysDef.cpp:661
+#: src/engine/sysDef.cpp:667
 msgid "50xy: Set AM (x: operator from 1 to 4 (0 for all ops); y: AM)"
 msgstr "50xy: Включить АМ (x: оператор 1-4 (0 для всех операторов); y: АМ)"
 
 #: src/engine/sysDef.cpp:497 src/engine/sysDef.cpp:594
-#: src/engine/sysDef.cpp:662
+#: src/engine/sysDef.cpp:668
 msgid ""
 "51xy: Set sustain level (x: operator from 1 to 4 (0 for all ops); y: sustain)"
 msgstr ""
 "51xy: Уровень сустейна (x: оператор 1-4 (0 для всех операторов); y: уровень)"
 
 #: src/engine/sysDef.cpp:498 src/engine/sysDef.cpp:595
-#: src/engine/sysDef.cpp:663
+#: src/engine/sysDef.cpp:669
 msgid "52xy: Set release (x: operator from 1 to 4 (0 for all ops); y: release)"
 msgstr "52xy: Релиз (x: оператор 1-4 (0 для всех операторов); y: релиз)"
 
@@ -211,7 +211,7 @@ msgstr ""
 "- без расстройки))"
 
 #: src/engine/sysDef.cpp:500 src/engine/sysDef.cpp:597
-#: src/engine/sysDef.cpp:665
+#: src/engine/sysDef.cpp:671
 msgid ""
 "54xy: Set envelope scale (x: operator from 1 to 4 (0 for all ops); y: scale "
 "from 0 to 3)"
@@ -308,7 +308,7 @@ msgid ""
 "to 7)"
 msgstr "28xy: Реверб (x: оператор 1-4 (0 для всех операторов); y: реверб 0-7)"
 
-#: src/engine/sysDef.cpp:530 src/engine/sysDef.cpp:655
+#: src/engine/sysDef.cpp:530 src/engine/sysDef.cpp:661
 msgid ""
 "2Axy: Set waveform (x: operator from 1 to 4 (0 for all ops); y: waveform "
 "from 0 to 7)"
@@ -380,12 +380,12 @@ msgid "10xx: Set patch (0 to F)"
 msgstr "10xx: Патч (0-F)"
 
 #: src/engine/sysDef.cpp:560 src/engine/sysDef.cpp:581
-#: src/engine/sysDef.cpp:636
+#: src/engine/sysDef.cpp:642
 msgid "12xx: Set level of operator 1 (0 highest, 3F lowest)"
 msgstr "12xx: Уровень оператора 1 (0 макс., 3F мин.)"
 
 #: src/engine/sysDef.cpp:561 src/engine/sysDef.cpp:582
-#: src/engine/sysDef.cpp:637
+#: src/engine/sysDef.cpp:643
 msgid "13xx: Set level of operator 2 (0 highest, 3F lowest)"
 msgstr "13xx: Уровень оператора 2 (0 макс., 3F мин.)"
 
@@ -394,17 +394,17 @@ msgid "16xy: Set operator multiplier (x: operator from 1 to 2; y: multiplier)"
 msgstr "16xy: Множитель частоты (x: оператор 1-2; y: множитель)"
 
 #: src/engine/sysDef.cpp:563 src/engine/sysDef.cpp:587
-#: src/engine/sysDef.cpp:642
+#: src/engine/sysDef.cpp:648
 msgid "19xx: Set attack of all operators (0 to F)"
 msgstr "19xx: Атака всех операторов (0-F)"
 
 #: src/engine/sysDef.cpp:564 src/engine/sysDef.cpp:588
-#: src/engine/sysDef.cpp:643
+#: src/engine/sysDef.cpp:649
 msgid "1Axx: Set attack of operator 1 (0 to F)"
 msgstr "1Axx: Атака оператора 1 (0-F)"
 
 #: src/engine/sysDef.cpp:565 src/engine/sysDef.cpp:589
-#: src/engine/sysDef.cpp:644
+#: src/engine/sysDef.cpp:650
 msgid "1Bxx: Set attack of operator 2 (0 to F)"
 msgstr "1Bxx: Атака оператора 2 (0-F)"
 
@@ -441,17 +441,17 @@ msgstr ""
 "55xy: Сустейн огибающей (x: оператор 1-2 (0 для всех операторов); y: вкл.)"
 
 #: src/engine/sysDef.cpp:572 src/engine/sysDef.cpp:599
-#: src/engine/sysDef.cpp:667
+#: src/engine/sysDef.cpp:673
 msgid "56xx: Set decay of all operators (0 to F)"
 msgstr "56xx: Спад всех операторов (0-F)"
 
 #: src/engine/sysDef.cpp:573 src/engine/sysDef.cpp:600
-#: src/engine/sysDef.cpp:668
+#: src/engine/sysDef.cpp:674
 msgid "57xx: Set decay of operator 1 (0 to F)"
 msgstr "57xx: Спад оператора 1 (0-F)"
 
 #: src/engine/sysDef.cpp:574 src/engine/sysDef.cpp:601
-#: src/engine/sysDef.cpp:669
+#: src/engine/sysDef.cpp:675
 msgid "58xx: Set decay of operator 2 (0 to F)"
 msgstr "58xx: Спад оператора 2 (0-F)"
 
@@ -467,11 +467,11 @@ msgstr ""
 msgid "10xx: Set global AM depth (0: 1dB, 1: 4.8dB)"
 msgstr "10xx: Глобальная глубина АМ (0: 1 дБ, 1: 4.8 дБ)"
 
-#: src/engine/sysDef.cpp:583 src/engine/sysDef.cpp:638
+#: src/engine/sysDef.cpp:583 src/engine/sysDef.cpp:644
 msgid "14xx: Set level of operator 3 (0 highest, 3F lowest)"
 msgstr "14xx: Уровень оператора 3 (0 макс., 3F мин.)"
 
-#: src/engine/sysDef.cpp:584 src/engine/sysDef.cpp:639
+#: src/engine/sysDef.cpp:584 src/engine/sysDef.cpp:645
 msgid "15xx: Set level of operator 4 (0 highest, 3F lowest)"
 msgstr "15xx: Уровень оператора 4 (0 макс., 3F мин.)"
 
@@ -479,11 +479,11 @@ msgstr "15xx: Уровень оператора 4 (0 макс., 3F мин.)"
 msgid "17xx: Set global vibrato depth (0: normal, 1: double)"
 msgstr "17xx: Глобальная глубина вибрато (0: нормальная, 1: двойная)"
 
-#: src/engine/sysDef.cpp:590 src/engine/sysDef.cpp:645
+#: src/engine/sysDef.cpp:590 src/engine/sysDef.cpp:651
 msgid "1Cxx: Set attack of operator 3 (0 to F)"
 msgstr "1Cxx: Атака оператора 3 (0-F)"
 
-#: src/engine/sysDef.cpp:591 src/engine/sysDef.cpp:646
+#: src/engine/sysDef.cpp:591 src/engine/sysDef.cpp:652
 msgid "1Dxx: Set attack of operator 4 (0 to F)"
 msgstr "1Dxx: Атака оператора 4 (0-F)"
 
@@ -495,26 +495,26 @@ msgstr ""
 "2Axy: Форма волны (x: оператор 1-4 (0 для всех операторов); y: форма волны "
 "0-3 для OPL2 и 0-7 для OPL3)"
 
-#: src/engine/sysDef.cpp:596 src/engine/sysDef.cpp:664
+#: src/engine/sysDef.cpp:596 src/engine/sysDef.cpp:670
 msgid "53xy: Set vibrato (x: operator from 1 to 4 (0 for all ops); y: enabled)"
 msgstr "53xy: Вибрато (x: оператор 1-4 (0 для всех операторов); y: вкл.)"
 
-#: src/engine/sysDef.cpp:598 src/engine/sysDef.cpp:666
+#: src/engine/sysDef.cpp:598 src/engine/sysDef.cpp:672
 msgid ""
 "55xy: Set envelope sustain (x: operator from 1 to 4 (0 for all ops); y: "
 "enabled)"
 msgstr ""
 "55xy: Сустейн огибающей (x: оператор 1-4 (0 для всех операторов); y: вкл.)"
 
-#: src/engine/sysDef.cpp:602 src/engine/sysDef.cpp:670
+#: src/engine/sysDef.cpp:602 src/engine/sysDef.cpp:676
 msgid "59xx: Set decay of operator 3 (0 to F)"
 msgstr "59xx: Спад оператора 3 (0-F)"
 
-#: src/engine/sysDef.cpp:603 src/engine/sysDef.cpp:671
+#: src/engine/sysDef.cpp:603 src/engine/sysDef.cpp:677
 msgid "5Axx: Set decay of operator 4 (0 to F)"
 msgstr "5Axx: Спад оператора 4 (0-F)"
 
-#: src/engine/sysDef.cpp:604 src/engine/sysDef.cpp:672
+#: src/engine/sysDef.cpp:604 src/engine/sysDef.cpp:678
 msgid ""
 "5Bxy: Set whether key will scale envelope (x: operator from 1 to 4 (0 for "
 "all ops); y: enabled)"
@@ -522,7 +522,7 @@ msgstr ""
 "5Bxy: Масштаб. огиб. в зав. от ноты (x: оператор 1-4 (0 для всех "
 "операторов); y: вкл.)"
 
-#: src/engine/sysDef.cpp:608 src/engine/sysDef.cpp:685
+#: src/engine/sysDef.cpp:608 src/engine/sysDef.cpp:691
 msgid ""
 "10xx: Set waveform (bit 0: triangle; bit 1: saw; bit 2: pulse; bit 3: noise)"
 msgstr ""
@@ -573,29 +573,45 @@ msgstr "20xy: Установить атаку/спад (x: атака; y: спа
 msgid "21xy: Set sustain/release (x: sustain; y: release)"
 msgstr "21xy: Установить сустейн/релиз (x: сустейн; y: релиз)"
 
-#: src/engine/sysDef.cpp:621 src/engine/sysDef.cpp:693
+#: src/engine/sysDef.cpp:621
+msgid "22xx: Pulse width slide up"
+msgstr "22xx: Изменение скважности вверх"
+
+#: src/engine/sysDef.cpp:622
+msgid "23xx: Pulse width slide down"
+msgstr "23xx: Изменение скважности вниз"
+
+#: src/engine/sysDef.cpp:624
+msgid "24xx: Cutoff slide up"
+msgstr "24xx: Изменение частоты среза вверх"
+
+#: src/engine/sysDef.cpp:625
+msgid "25xx: Cutoff slide down"
+msgstr "25xx: Изменение частоты среза вниз"
+
+#: src/engine/sysDef.cpp:627 src/engine/sysDef.cpp:705
 msgid "3xxx: Set pulse width (0 to FFF)"
 msgstr "3xxx: Скважность (0-FFF)"
 
-#: src/engine/sysDef.cpp:622
+#: src/engine/sysDef.cpp:628
 msgid "4xxx: Set cutoff (0 to 7FF)"
 msgstr "4xxx: Частота среза (0-7FF)"
 
-#: src/engine/sysDef.cpp:627 src/engine/sysDef.cpp:750
-#: src/engine/sysDef.cpp:767 src/engine/sysDef.cpp:1008
-#: src/engine/sysDef.cpp:1058 src/engine/sysDef.cpp:1276
-#: src/engine/sysDef.cpp:1328 src/engine/sysDef.cpp:1598
-#: src/engine/sysDef.cpp:1796 src/engine/sysDef.cpp:1800
-#: src/engine/sysDef.cpp:1901 src/engine/sysDef.cpp:2089
-#: src/engine/sysDef.cpp:2103
+#: src/engine/sysDef.cpp:633 src/engine/sysDef.cpp:762
+#: src/engine/sysDef.cpp:779 src/engine/sysDef.cpp:939
+#: src/engine/sysDef.cpp:1021 src/engine/sysDef.cpp:1071
+#: src/engine/sysDef.cpp:1289 src/engine/sysDef.cpp:1341
+#: src/engine/sysDef.cpp:1611 src/engine/sysDef.cpp:1809
+#: src/engine/sysDef.cpp:1813 src/engine/sysDef.cpp:1914
+#: src/engine/sysDef.cpp:2102 src/engine/sysDef.cpp:2116
 msgid "10xx: Set waveform"
 msgstr "10xx: Волна"
 
-#: src/engine/sysDef.cpp:631
+#: src/engine/sysDef.cpp:637
 msgid "20xx: Set PCM frequency"
 msgstr "20xx: Частота ИКМ"
 
-#: src/engine/sysDef.cpp:635
+#: src/engine/sysDef.cpp:641
 msgid ""
 "10xy: Set AM depth (x: operator from 1 to 4 (0 for all ops); y: depth (0: "
 "1dB, 1: 4.8dB))"
@@ -603,7 +619,7 @@ msgstr ""
 "10xy: Глубина АМ (x: оператор 1-4 (0 для всех операторов); y: глубина (0: 1 "
 "дБ, 1: 4.8 дБ))"
 
-#: src/engine/sysDef.cpp:641
+#: src/engine/sysDef.cpp:647
 msgid ""
 "17xy: Set vibrato depth (x: operator from 1 to 4 (0 for all ops); y: depth "
 "(0: normal, 1: double))"
@@ -611,23 +627,23 @@ msgstr ""
 "17xy: Глубина вибрато (x: оператор 1-4 (0 для всех операторов); y: глубина "
 "(0: нормальная, 1: удвоенная))"
 
-#: src/engine/sysDef.cpp:647
+#: src/engine/sysDef.cpp:653
 msgid "20xy: Set panning of operator 1 (x: left; y: right)"
 msgstr "20xy: Панорамирование оператора 1 (x: лево; y: право)"
 
-#: src/engine/sysDef.cpp:648
+#: src/engine/sysDef.cpp:654
 msgid "21xy: Set panning of operator 2 (x: left; y: right)"
 msgstr "21xy: Панорамирование оператора 2 (x: лево; y: право)"
 
-#: src/engine/sysDef.cpp:649
+#: src/engine/sysDef.cpp:655
 msgid "22xy: Set panning of operator 3 (x: left; y: right)"
 msgstr "22xy: Панорамирование оператора 3 (x: лево; y: право)"
 
-#: src/engine/sysDef.cpp:650
+#: src/engine/sysDef.cpp:656
 msgid "23xy: Set panning of operator 4 (x: left; y: right)"
 msgstr "23xy: Панорамирование оператора 4 (x: лево; y: право)"
 
-#: src/engine/sysDef.cpp:651
+#: src/engine/sysDef.cpp:657
 msgid ""
 "24xy: Set output level register (x: operator from 1 to 4 (0 for all ops); y: "
 "level from 0 to 7)"
@@ -635,7 +651,7 @@ msgstr ""
 "24xy: Регистр выходного уровня (громкости) (x: оператор 1-4 (0 для всех "
 "операторов); y: уровень 0-7)"
 
-#: src/engine/sysDef.cpp:652
+#: src/engine/sysDef.cpp:658
 msgid ""
 "25xy: Set modulation input level (x: operator from 1 to 4 (0 for all ops); "
 "y: level from 0 to 7)"
@@ -643,7 +659,7 @@ msgstr ""
 "25xy: Уровень входной модуляции (x: оператор 1-4 (0 для всех операторов); y: "
 "уровень 0-7)"
 
-#: src/engine/sysDef.cpp:653
+#: src/engine/sysDef.cpp:659
 msgid ""
 "26xy: Set envelope delay (x: operator from 1 to 4 (0 for all ops); y: delay "
 "from 0 to 7)"
@@ -651,34 +667,34 @@ msgstr ""
 "26xy: Задержка огибающей (x: оператор 1-4 (0 для всех операторов); y: "
 "задержка 0-7)"
 
-#: src/engine/sysDef.cpp:654
+#: src/engine/sysDef.cpp:660
 msgid "27xx: Set noise mode for operator 4 (x: mode from 0 to 3)"
 msgstr "27xx: Режим шума для оператора 4 (x: режим 0-3)"
 
-#: src/engine/sysDef.cpp:656
+#: src/engine/sysDef.cpp:662
 msgid ""
 "2Fxy: Set fixed frequency block (x: operator from 1 to 4; y: octave from 0 "
 "to 7)"
 msgstr ""
 "2Fxy: Блок в режиме фиксированной частоты (x: оператор 1-4; y: октава 0-7)"
 
-#: src/engine/sysDef.cpp:657
+#: src/engine/sysDef.cpp:663
 msgid "40xx: Set detune of operator 1 (80: center)"
 msgstr "40xx: Расстройка оператора 1 (80: без расстройки)"
 
-#: src/engine/sysDef.cpp:658
+#: src/engine/sysDef.cpp:664
 msgid "41xx: Set detune of operator 2 (80: center)"
 msgstr "41xx: Расстройка оператора 2 (80: без расстройки)"
 
-#: src/engine/sysDef.cpp:659
+#: src/engine/sysDef.cpp:665
 msgid "42xx: Set detune of operator 3 (80: center)"
 msgstr "42xx: Расстройка оператора 3 (80: без расстройки)"
 
-#: src/engine/sysDef.cpp:660
+#: src/engine/sysDef.cpp:666
 msgid "43xx: Set detune of operator 4 (80: center)"
 msgstr "43xx: Расстройка оператора 4 (80: без расстройки)"
 
-#: src/engine/sysDef.cpp:675
+#: src/engine/sysDef.cpp:681
 msgid ""
 "3xyy: Set fixed frequency F-num of operator 1 (x: high 2 bits from 0 to 3; "
 "y: low 8 bits of F-num)"
@@ -686,7 +702,7 @@ msgstr ""
 "3xyy: Частота в режиме фиксированной частоты для оператора 1 (x: два старших "
 "бита 0-3; y: 8 младших битов частоты)"
 
-#: src/engine/sysDef.cpp:676
+#: src/engine/sysDef.cpp:682
 msgid ""
 "3xyy: Set fixed frequency F-num of operator 2 (x: high 2 bits from 4 to 7; "
 "y: low 8 bits of F-num)"
@@ -694,7 +710,7 @@ msgstr ""
 "3xyy: Частота в режиме фиксированной частоты для оператора 2 (x: два старших "
 "бита 4-7; y: 8 младших битов частоты)"
 
-#: src/engine/sysDef.cpp:677
+#: src/engine/sysDef.cpp:683
 msgid ""
 "3xyy: Set fixed frequency F-num of operator 3 (x: high 2 bits from 8 to B; "
 "y: low 8 bits of F-num)"
@@ -702,7 +718,7 @@ msgstr ""
 "3xyy: Частота в режиме фиксированной частоты для оператора 3 (x: два старших "
 "бита 8-B; y: 8 младших битов частоты)"
 
-#: src/engine/sysDef.cpp:678
+#: src/engine/sysDef.cpp:684
 msgid ""
 "3xyy: Set fixed frequency F-num of operator 4 (x: high 2 bits from C to F; "
 "y: low 8 bits of F-num)"
@@ -710,40 +726,56 @@ msgstr ""
 "3xyy: Частота в режиме фиксированной частоты для оператора 4 (x: два старших "
 "бита C-F; y: 8 младших битов частоты)"
 
-#: src/engine/sysDef.cpp:686
+#: src/engine/sysDef.cpp:692
 msgid "11xx: Set resonance (0 to FF)"
 msgstr "11xx: Резонанс (0-FF)"
 
-#: src/engine/sysDef.cpp:687
+#: src/engine/sysDef.cpp:693
 msgid ""
 "12xx: Set filter mode (bit 0: low pass; bit 1: band pass; bit 2: high pass)"
 msgstr "12xx: Режим фильтра (бит 0: ФНЧ; бит 1: ППФ; бит 2: ФВЧ)"
 
-#: src/engine/sysDef.cpp:688
+#: src/engine/sysDef.cpp:694
 msgid "13xx: Disable envelope reset for this channel (1 disables; 0 enables)"
 msgstr "13xx: Отключить ресет огибающей для этого канала (1 выкл.; 0 вкл.)"
 
-#: src/engine/sysDef.cpp:689
+#: src/engine/sysDef.cpp:695
 msgid "14xy: Reset cutoff (x: on new note; y: now)"
 msgstr "14xy: Сбросить частоту среза (x: на след. ноте; y: сейчас)"
 
-#: src/engine/sysDef.cpp:690
+#: src/engine/sysDef.cpp:696
 msgid "15xy: Reset pulse width (x: on new note; y: now)"
 msgstr "15xy: Сбросить скважность (x: на след. ноте; y: сейчас)"
 
-#: src/engine/sysDef.cpp:691
+#: src/engine/sysDef.cpp:697
 msgid "16xy: Change other parameters"
 msgstr "16xy: Изменить другие параметры"
 
-#: src/engine/sysDef.cpp:694 src/engine/sysDef.cpp:1741
+#: src/engine/sysDef.cpp:699
+msgid "17xx: Pulse width slide up"
+msgstr "17xx: Изменение скважности вверх"
+
+#: src/engine/sysDef.cpp:700
+msgid "18xx: Pulse width slide down"
+msgstr "18xx: Изменение скважности вниз"
+
+#: src/engine/sysDef.cpp:702
+msgid "19xx: Cutoff slide up"
+msgstr "19xx: Изменение частоты среза вверх"
+
+#: src/engine/sysDef.cpp:703
+msgid "1Axx: Cutoff slide down"
+msgstr "1Axx: Изменение частоты среза вниз"
+
+#: src/engine/sysDef.cpp:706 src/engine/sysDef.cpp:1754
 msgid "4xxx: Set cutoff (0 to FFF)"
 msgstr "4xxx: Частота среза (0-FFF)"
 
-#: src/engine/sysDef.cpp:702
+#: src/engine/sysDef.cpp:714
 msgid "Yamaha YMU759 (MA-2)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:703
+#: src/engine/sysDef.cpp:715
 msgid ""
 "a chip which found its way inside mobile phones in the 2000's.\n"
 "as proprietary as it is, it passed away after losing to MP3 in the mobile "
@@ -753,251 +785,251 @@ msgstr ""
 "несмотря на проприетарность, он проиграл формату MP3 во время соперничества "
 "разных видов мобильного железа."
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:761
-#: src/engine/sysDef.cpp:812 src/engine/sysDef.cpp:824
-#: src/engine/sysDef.cpp:879 src/engine/sysDef.cpp:920
-#: src/engine/sysDef.cpp:985 src/engine/sysDef.cpp:1083
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1245
-#: src/engine/sysDef.cpp:1260 src/engine/sysDef.cpp:1310
-#: src/engine/sysDef.cpp:1322 src/engine/sysDef.cpp:1364
-#: src/engine/sysDef.cpp:1404 src/engine/sysDef.cpp:1507
-#: src/engine/sysDef.cpp:1540 src/engine/sysDef.cpp:1580
-#: src/engine/sysDef.cpp:1592 src/engine/sysDef.cpp:1616
-#: src/engine/sysDef.cpp:1677 src/engine/sysDef.cpp:1713
-#: src/engine/sysDef.cpp:1749 src/engine/sysDef.cpp:1761
-#: src/engine/sysDef.cpp:1807 src/engine/sysDef.cpp:1818
-#: src/engine/sysDef.cpp:1829 src/engine/sysDef.cpp:1840
-#: src/engine/sysDef.cpp:1908 src/engine/sysDef.cpp:1918
-#: src/engine/sysDef.cpp:1928 src/engine/sysDef.cpp:1952
-#: src/engine/sysDef.cpp:1965 src/engine/sysDef.cpp:1978
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:1999
-#: src/engine/sysDef.cpp:2028 src/engine/sysDef.cpp:2063
-#: src/engine/sysDef.cpp:2096 src/engine/sysDef.cpp:2112
-#: src/engine/sysDef.cpp:2148 src/engine/sysDef.cpp:2164
-#: src/engine/sysDef.cpp:2184 src/engine/sysDef.cpp:2226
-#: src/engine/sysDef.cpp:2246
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:773
+#: src/engine/sysDef.cpp:824 src/engine/sysDef.cpp:836
+#: src/engine/sysDef.cpp:891 src/engine/sysDef.cpp:932
+#: src/engine/sysDef.cpp:998 src/engine/sysDef.cpp:1096
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1258
+#: src/engine/sysDef.cpp:1273 src/engine/sysDef.cpp:1323
+#: src/engine/sysDef.cpp:1335 src/engine/sysDef.cpp:1377
+#: src/engine/sysDef.cpp:1417 src/engine/sysDef.cpp:1520
+#: src/engine/sysDef.cpp:1553 src/engine/sysDef.cpp:1593
+#: src/engine/sysDef.cpp:1605 src/engine/sysDef.cpp:1629
+#: src/engine/sysDef.cpp:1690 src/engine/sysDef.cpp:1726
+#: src/engine/sysDef.cpp:1762 src/engine/sysDef.cpp:1774
+#: src/engine/sysDef.cpp:1820 src/engine/sysDef.cpp:1831
+#: src/engine/sysDef.cpp:1842 src/engine/sysDef.cpp:1853
+#: src/engine/sysDef.cpp:1921 src/engine/sysDef.cpp:1931
+#: src/engine/sysDef.cpp:1941 src/engine/sysDef.cpp:1965
+#: src/engine/sysDef.cpp:1978 src/engine/sysDef.cpp:1991
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2012
+#: src/engine/sysDef.cpp:2041 src/engine/sysDef.cpp:2076
+#: src/engine/sysDef.cpp:2109 src/engine/sysDef.cpp:2125
+#: src/engine/sysDef.cpp:2161 src/engine/sysDef.cpp:2177
+#: src/engine/sysDef.cpp:2189 src/engine/sysDef.cpp:2231
+#: src/engine/sysDef.cpp:2251
 msgid "Channel 1"
 msgstr "Канал 1"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:761
-#: src/engine/sysDef.cpp:812 src/engine/sysDef.cpp:824
-#: src/engine/sysDef.cpp:879 src/engine/sysDef.cpp:920
-#: src/engine/sysDef.cpp:985 src/engine/sysDef.cpp:1083
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1245
-#: src/engine/sysDef.cpp:1260 src/engine/sysDef.cpp:1310
-#: src/engine/sysDef.cpp:1322 src/engine/sysDef.cpp:1364
-#: src/engine/sysDef.cpp:1404 src/engine/sysDef.cpp:1507
-#: src/engine/sysDef.cpp:1540 src/engine/sysDef.cpp:1580
-#: src/engine/sysDef.cpp:1592 src/engine/sysDef.cpp:1616
-#: src/engine/sysDef.cpp:1677 src/engine/sysDef.cpp:1713
-#: src/engine/sysDef.cpp:1749 src/engine/sysDef.cpp:1761
-#: src/engine/sysDef.cpp:1807 src/engine/sysDef.cpp:1818
-#: src/engine/sysDef.cpp:1829 src/engine/sysDef.cpp:1840
-#: src/engine/sysDef.cpp:1908 src/engine/sysDef.cpp:1918
-#: src/engine/sysDef.cpp:1928 src/engine/sysDef.cpp:1952
-#: src/engine/sysDef.cpp:1965 src/engine/sysDef.cpp:1978
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:1999
-#: src/engine/sysDef.cpp:2028 src/engine/sysDef.cpp:2063
-#: src/engine/sysDef.cpp:2096 src/engine/sysDef.cpp:2112
-#: src/engine/sysDef.cpp:2148 src/engine/sysDef.cpp:2164
-#: src/engine/sysDef.cpp:2184 src/engine/sysDef.cpp:2226
-#: src/engine/sysDef.cpp:2246
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:773
+#: src/engine/sysDef.cpp:824 src/engine/sysDef.cpp:836
+#: src/engine/sysDef.cpp:891 src/engine/sysDef.cpp:932
+#: src/engine/sysDef.cpp:998 src/engine/sysDef.cpp:1096
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1258
+#: src/engine/sysDef.cpp:1273 src/engine/sysDef.cpp:1323
+#: src/engine/sysDef.cpp:1335 src/engine/sysDef.cpp:1377
+#: src/engine/sysDef.cpp:1417 src/engine/sysDef.cpp:1520
+#: src/engine/sysDef.cpp:1553 src/engine/sysDef.cpp:1593
+#: src/engine/sysDef.cpp:1605 src/engine/sysDef.cpp:1629
+#: src/engine/sysDef.cpp:1690 src/engine/sysDef.cpp:1726
+#: src/engine/sysDef.cpp:1762 src/engine/sysDef.cpp:1774
+#: src/engine/sysDef.cpp:1820 src/engine/sysDef.cpp:1831
+#: src/engine/sysDef.cpp:1842 src/engine/sysDef.cpp:1853
+#: src/engine/sysDef.cpp:1921 src/engine/sysDef.cpp:1931
+#: src/engine/sysDef.cpp:1941 src/engine/sysDef.cpp:1965
+#: src/engine/sysDef.cpp:1978 src/engine/sysDef.cpp:1991
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2012
+#: src/engine/sysDef.cpp:2041 src/engine/sysDef.cpp:2076
+#: src/engine/sysDef.cpp:2109 src/engine/sysDef.cpp:2125
+#: src/engine/sysDef.cpp:2161 src/engine/sysDef.cpp:2177
+#: src/engine/sysDef.cpp:2189 src/engine/sysDef.cpp:2231
+#: src/engine/sysDef.cpp:2251
 msgid "Channel 2"
 msgstr "Канал 2"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:761
-#: src/engine/sysDef.cpp:812 src/engine/sysDef.cpp:824
-#: src/engine/sysDef.cpp:879 src/engine/sysDef.cpp:985
-#: src/engine/sysDef.cpp:1083 src/engine/sysDef.cpp:1218
-#: src/engine/sysDef.cpp:1245 src/engine/sysDef.cpp:1260
-#: src/engine/sysDef.cpp:1310 src/engine/sysDef.cpp:1322
-#: src/engine/sysDef.cpp:1364 src/engine/sysDef.cpp:1404
-#: src/engine/sysDef.cpp:1507 src/engine/sysDef.cpp:1540
-#: src/engine/sysDef.cpp:1580 src/engine/sysDef.cpp:1592
-#: src/engine/sysDef.cpp:1677 src/engine/sysDef.cpp:1713
-#: src/engine/sysDef.cpp:1749 src/engine/sysDef.cpp:1761
-#: src/engine/sysDef.cpp:1807 src/engine/sysDef.cpp:1818
-#: src/engine/sysDef.cpp:1829 src/engine/sysDef.cpp:1840
-#: src/engine/sysDef.cpp:1918 src/engine/sysDef.cpp:1952
-#: src/engine/sysDef.cpp:1965 src/engine/sysDef.cpp:1988
-#: src/engine/sysDef.cpp:1999 src/engine/sysDef.cpp:2028
-#: src/engine/sysDef.cpp:2063 src/engine/sysDef.cpp:2096
-#: src/engine/sysDef.cpp:2112 src/engine/sysDef.cpp:2148
-#: src/engine/sysDef.cpp:2164 src/engine/sysDef.cpp:2184
-#: src/engine/sysDef.cpp:2226 src/engine/sysDef.cpp:2246
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:773
+#: src/engine/sysDef.cpp:824 src/engine/sysDef.cpp:836
+#: src/engine/sysDef.cpp:891 src/engine/sysDef.cpp:998
+#: src/engine/sysDef.cpp:1096 src/engine/sysDef.cpp:1231
+#: src/engine/sysDef.cpp:1258 src/engine/sysDef.cpp:1273
+#: src/engine/sysDef.cpp:1323 src/engine/sysDef.cpp:1335
+#: src/engine/sysDef.cpp:1377 src/engine/sysDef.cpp:1417
+#: src/engine/sysDef.cpp:1520 src/engine/sysDef.cpp:1553
+#: src/engine/sysDef.cpp:1593 src/engine/sysDef.cpp:1605
+#: src/engine/sysDef.cpp:1690 src/engine/sysDef.cpp:1726
+#: src/engine/sysDef.cpp:1762 src/engine/sysDef.cpp:1774
+#: src/engine/sysDef.cpp:1820 src/engine/sysDef.cpp:1831
+#: src/engine/sysDef.cpp:1842 src/engine/sysDef.cpp:1853
+#: src/engine/sysDef.cpp:1931 src/engine/sysDef.cpp:1965
+#: src/engine/sysDef.cpp:1978 src/engine/sysDef.cpp:2001
+#: src/engine/sysDef.cpp:2012 src/engine/sysDef.cpp:2041
+#: src/engine/sysDef.cpp:2076 src/engine/sysDef.cpp:2109
+#: src/engine/sysDef.cpp:2125 src/engine/sysDef.cpp:2161
+#: src/engine/sysDef.cpp:2177 src/engine/sysDef.cpp:2189
+#: src/engine/sysDef.cpp:2231 src/engine/sysDef.cpp:2251
 msgid "Channel 3"
 msgstr "Канал 3"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:761
-#: src/engine/sysDef.cpp:879 src/engine/sysDef.cpp:985
-#: src/engine/sysDef.cpp:1083 src/engine/sysDef.cpp:1218
-#: src/engine/sysDef.cpp:1245 src/engine/sysDef.cpp:1260
-#: src/engine/sysDef.cpp:1310 src/engine/sysDef.cpp:1322
-#: src/engine/sysDef.cpp:1364 src/engine/sysDef.cpp:1404
-#: src/engine/sysDef.cpp:1507 src/engine/sysDef.cpp:1540
-#: src/engine/sysDef.cpp:1580 src/engine/sysDef.cpp:1592
-#: src/engine/sysDef.cpp:1677 src/engine/sysDef.cpp:1713
-#: src/engine/sysDef.cpp:1749 src/engine/sysDef.cpp:1761
-#: src/engine/sysDef.cpp:1818 src/engine/sysDef.cpp:1829
-#: src/engine/sysDef.cpp:1840 src/engine/sysDef.cpp:1918
-#: src/engine/sysDef.cpp:1952 src/engine/sysDef.cpp:1965
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:1999
-#: src/engine/sysDef.cpp:2028 src/engine/sysDef.cpp:2096
-#: src/engine/sysDef.cpp:2112 src/engine/sysDef.cpp:2148
-#: src/engine/sysDef.cpp:2184 src/engine/sysDef.cpp:2226
-#: src/engine/sysDef.cpp:2246
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:773
+#: src/engine/sysDef.cpp:891 src/engine/sysDef.cpp:998
+#: src/engine/sysDef.cpp:1096 src/engine/sysDef.cpp:1231
+#: src/engine/sysDef.cpp:1258 src/engine/sysDef.cpp:1273
+#: src/engine/sysDef.cpp:1323 src/engine/sysDef.cpp:1335
+#: src/engine/sysDef.cpp:1377 src/engine/sysDef.cpp:1417
+#: src/engine/sysDef.cpp:1520 src/engine/sysDef.cpp:1553
+#: src/engine/sysDef.cpp:1593 src/engine/sysDef.cpp:1605
+#: src/engine/sysDef.cpp:1690 src/engine/sysDef.cpp:1726
+#: src/engine/sysDef.cpp:1762 src/engine/sysDef.cpp:1774
+#: src/engine/sysDef.cpp:1831 src/engine/sysDef.cpp:1842
+#: src/engine/sysDef.cpp:1853 src/engine/sysDef.cpp:1931
+#: src/engine/sysDef.cpp:1965 src/engine/sysDef.cpp:1978
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2012
+#: src/engine/sysDef.cpp:2041 src/engine/sysDef.cpp:2109
+#: src/engine/sysDef.cpp:2125 src/engine/sysDef.cpp:2161
+#: src/engine/sysDef.cpp:2189 src/engine/sysDef.cpp:2231
+#: src/engine/sysDef.cpp:2251
 msgid "Channel 4"
 msgstr "Канал 4"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:761
-#: src/engine/sysDef.cpp:985 src/engine/sysDef.cpp:1083
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1260
-#: src/engine/sysDef.cpp:1310 src/engine/sysDef.cpp:1322
-#: src/engine/sysDef.cpp:1364 src/engine/sysDef.cpp:1404
-#: src/engine/sysDef.cpp:1540 src/engine/sysDef.cpp:1580
-#: src/engine/sysDef.cpp:1592 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1713 src/engine/sysDef.cpp:1749
-#: src/engine/sysDef.cpp:1818 src/engine/sysDef.cpp:1829
-#: src/engine/sysDef.cpp:1840 src/engine/sysDef.cpp:1988
-#: src/engine/sysDef.cpp:1999 src/engine/sysDef.cpp:2028
-#: src/engine/sysDef.cpp:2096 src/engine/sysDef.cpp:2112
-#: src/engine/sysDef.cpp:2226 src/engine/sysDef.cpp:2246
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:773
+#: src/engine/sysDef.cpp:998 src/engine/sysDef.cpp:1096
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1273
+#: src/engine/sysDef.cpp:1323 src/engine/sysDef.cpp:1335
+#: src/engine/sysDef.cpp:1377 src/engine/sysDef.cpp:1417
+#: src/engine/sysDef.cpp:1553 src/engine/sysDef.cpp:1593
+#: src/engine/sysDef.cpp:1605 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:1726 src/engine/sysDef.cpp:1762
+#: src/engine/sysDef.cpp:1831 src/engine/sysDef.cpp:1842
+#: src/engine/sysDef.cpp:1853 src/engine/sysDef.cpp:2001
+#: src/engine/sysDef.cpp:2012 src/engine/sysDef.cpp:2041
+#: src/engine/sysDef.cpp:2109 src/engine/sysDef.cpp:2125
+#: src/engine/sysDef.cpp:2231 src/engine/sysDef.cpp:2251
 msgid "Channel 5"
 msgstr "Канал 5"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:761
-#: src/engine/sysDef.cpp:985 src/engine/sysDef.cpp:1083
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1260
-#: src/engine/sysDef.cpp:1310 src/engine/sysDef.cpp:1364
-#: src/engine/sysDef.cpp:1540 src/engine/sysDef.cpp:1592
-#: src/engine/sysDef.cpp:1677 src/engine/sysDef.cpp:1749
-#: src/engine/sysDef.cpp:1818 src/engine/sysDef.cpp:1829
-#: src/engine/sysDef.cpp:1840 src/engine/sysDef.cpp:1988
-#: src/engine/sysDef.cpp:1999 src/engine/sysDef.cpp:2028
-#: src/engine/sysDef.cpp:2096 src/engine/sysDef.cpp:2112
-#: src/engine/sysDef.cpp:2246
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:773
+#: src/engine/sysDef.cpp:998 src/engine/sysDef.cpp:1096
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1273
+#: src/engine/sysDef.cpp:1323 src/engine/sysDef.cpp:1377
+#: src/engine/sysDef.cpp:1553 src/engine/sysDef.cpp:1605
+#: src/engine/sysDef.cpp:1690 src/engine/sysDef.cpp:1762
+#: src/engine/sysDef.cpp:1831 src/engine/sysDef.cpp:1842
+#: src/engine/sysDef.cpp:1853 src/engine/sysDef.cpp:2001
+#: src/engine/sysDef.cpp:2012 src/engine/sysDef.cpp:2041
+#: src/engine/sysDef.cpp:2109 src/engine/sysDef.cpp:2125
+#: src/engine/sysDef.cpp:2251
 msgid "Channel 6"
 msgstr "Канал 6"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:985
-#: src/engine/sysDef.cpp:1083 src/engine/sysDef.cpp:1218
-#: src/engine/sysDef.cpp:1260 src/engine/sysDef.cpp:1310
-#: src/engine/sysDef.cpp:1540 src/engine/sysDef.cpp:1592
-#: src/engine/sysDef.cpp:1677 src/engine/sysDef.cpp:1749
-#: src/engine/sysDef.cpp:1818 src/engine/sysDef.cpp:1829
-#: src/engine/sysDef.cpp:1840 src/engine/sysDef.cpp:1988
-#: src/engine/sysDef.cpp:1999 src/engine/sysDef.cpp:2028
-#: src/engine/sysDef.cpp:2096 src/engine/sysDef.cpp:2112
-#: src/engine/sysDef.cpp:2246
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:998
+#: src/engine/sysDef.cpp:1096 src/engine/sysDef.cpp:1231
+#: src/engine/sysDef.cpp:1273 src/engine/sysDef.cpp:1323
+#: src/engine/sysDef.cpp:1553 src/engine/sysDef.cpp:1605
+#: src/engine/sysDef.cpp:1690 src/engine/sysDef.cpp:1762
+#: src/engine/sysDef.cpp:1831 src/engine/sysDef.cpp:1842
+#: src/engine/sysDef.cpp:1853 src/engine/sysDef.cpp:2001
+#: src/engine/sysDef.cpp:2012 src/engine/sysDef.cpp:2041
+#: src/engine/sysDef.cpp:2109 src/engine/sysDef.cpp:2125
+#: src/engine/sysDef.cpp:2251
 msgid "Channel 7"
 msgstr "Канал 7"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:985
-#: src/engine/sysDef.cpp:1083 src/engine/sysDef.cpp:1218
-#: src/engine/sysDef.cpp:1260 src/engine/sysDef.cpp:1310
-#: src/engine/sysDef.cpp:1540 src/engine/sysDef.cpp:1592
-#: src/engine/sysDef.cpp:1677 src/engine/sysDef.cpp:1749
-#: src/engine/sysDef.cpp:1818 src/engine/sysDef.cpp:1829
-#: src/engine/sysDef.cpp:1840 src/engine/sysDef.cpp:1988
-#: src/engine/sysDef.cpp:1999 src/engine/sysDef.cpp:2028
-#: src/engine/sysDef.cpp:2096 src/engine/sysDef.cpp:2112
-#: src/engine/sysDef.cpp:2246
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:998
+#: src/engine/sysDef.cpp:1096 src/engine/sysDef.cpp:1231
+#: src/engine/sysDef.cpp:1273 src/engine/sysDef.cpp:1323
+#: src/engine/sysDef.cpp:1553 src/engine/sysDef.cpp:1605
+#: src/engine/sysDef.cpp:1690 src/engine/sysDef.cpp:1762
+#: src/engine/sysDef.cpp:1831 src/engine/sysDef.cpp:1842
+#: src/engine/sysDef.cpp:1853 src/engine/sysDef.cpp:2001
+#: src/engine/sysDef.cpp:2012 src/engine/sysDef.cpp:2041
+#: src/engine/sysDef.cpp:2109 src/engine/sysDef.cpp:2125
+#: src/engine/sysDef.cpp:2251
 msgid "Channel 8"
 msgstr "Канал 8"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:1218
-#: src/engine/sysDef.cpp:1310 src/engine/sysDef.cpp:1540
-#: src/engine/sysDef.cpp:1592 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:1999
-#: src/engine/sysDef.cpp:2028 src/engine/sysDef.cpp:2096
-#: src/engine/sysDef.cpp:2112
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:1231
+#: src/engine/sysDef.cpp:1323 src/engine/sysDef.cpp:1553
+#: src/engine/sysDef.cpp:1605 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2012
+#: src/engine/sysDef.cpp:2041 src/engine/sysDef.cpp:2109
+#: src/engine/sysDef.cpp:2125
 msgid "Channel 9"
 msgstr "Канал 9"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:1218
-#: src/engine/sysDef.cpp:1310 src/engine/sysDef.cpp:1540
-#: src/engine/sysDef.cpp:1592 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:1999
-#: src/engine/sysDef.cpp:2028 src/engine/sysDef.cpp:2096
-#: src/engine/sysDef.cpp:2112
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:1231
+#: src/engine/sysDef.cpp:1323 src/engine/sysDef.cpp:1553
+#: src/engine/sysDef.cpp:1605 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2012
+#: src/engine/sysDef.cpp:2041 src/engine/sysDef.cpp:2109
+#: src/engine/sysDef.cpp:2125
 msgid "Channel 10"
 msgstr "Канал 10"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:1218
-#: src/engine/sysDef.cpp:1310 src/engine/sysDef.cpp:1540
-#: src/engine/sysDef.cpp:1592 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:1999
-#: src/engine/sysDef.cpp:2028 src/engine/sysDef.cpp:2096
-#: src/engine/sysDef.cpp:2112
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:1231
+#: src/engine/sysDef.cpp:1323 src/engine/sysDef.cpp:1553
+#: src/engine/sysDef.cpp:1605 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2012
+#: src/engine/sysDef.cpp:2041 src/engine/sysDef.cpp:2109
+#: src/engine/sysDef.cpp:2125
 msgid "Channel 11"
 msgstr "Канал 11"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:1218
-#: src/engine/sysDef.cpp:1310 src/engine/sysDef.cpp:1540
-#: src/engine/sysDef.cpp:1592 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:1999
-#: src/engine/sysDef.cpp:2028 src/engine/sysDef.cpp:2096
-#: src/engine/sysDef.cpp:2112
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:1231
+#: src/engine/sysDef.cpp:1323 src/engine/sysDef.cpp:1553
+#: src/engine/sysDef.cpp:1605 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2012
+#: src/engine/sysDef.cpp:2041 src/engine/sysDef.cpp:2109
+#: src/engine/sysDef.cpp:2125
 msgid "Channel 12"
 msgstr "Канал 12"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:1218
-#: src/engine/sysDef.cpp:1310 src/engine/sysDef.cpp:1540
-#: src/engine/sysDef.cpp:1592 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:1999
-#: src/engine/sysDef.cpp:2028 src/engine/sysDef.cpp:2096
-#: src/engine/sysDef.cpp:2112
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:1231
+#: src/engine/sysDef.cpp:1323 src/engine/sysDef.cpp:1553
+#: src/engine/sysDef.cpp:1605 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2012
+#: src/engine/sysDef.cpp:2041 src/engine/sysDef.cpp:2109
+#: src/engine/sysDef.cpp:2125
 msgid "Channel 13"
 msgstr "Канал 13"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:1218
-#: src/engine/sysDef.cpp:1310 src/engine/sysDef.cpp:1540
-#: src/engine/sysDef.cpp:1592 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:1999
-#: src/engine/sysDef.cpp:2028 src/engine/sysDef.cpp:2096
-#: src/engine/sysDef.cpp:2112
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:1231
+#: src/engine/sysDef.cpp:1323 src/engine/sysDef.cpp:1553
+#: src/engine/sysDef.cpp:1605 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2012
+#: src/engine/sysDef.cpp:2041 src/engine/sysDef.cpp:2109
+#: src/engine/sysDef.cpp:2125
 msgid "Channel 14"
 msgstr "Канал 14"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:1218
-#: src/engine/sysDef.cpp:1310 src/engine/sysDef.cpp:1540
-#: src/engine/sysDef.cpp:1592 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:1999
-#: src/engine/sysDef.cpp:2028 src/engine/sysDef.cpp:2096
-#: src/engine/sysDef.cpp:2112
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:1231
+#: src/engine/sysDef.cpp:1323 src/engine/sysDef.cpp:1553
+#: src/engine/sysDef.cpp:1605 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2012
+#: src/engine/sysDef.cpp:2041 src/engine/sysDef.cpp:2109
+#: src/engine/sysDef.cpp:2125
 msgid "Channel 15"
 msgstr "Канал 15"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:1218
-#: src/engine/sysDef.cpp:1310 src/engine/sysDef.cpp:1540
-#: src/engine/sysDef.cpp:1592 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:1999
-#: src/engine/sysDef.cpp:2028 src/engine/sysDef.cpp:2096
-#: src/engine/sysDef.cpp:2112
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:1231
+#: src/engine/sysDef.cpp:1323 src/engine/sysDef.cpp:1553
+#: src/engine/sysDef.cpp:1605 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2012
+#: src/engine/sysDef.cpp:2041 src/engine/sysDef.cpp:2109
+#: src/engine/sysDef.cpp:2125
 msgid "Channel 16"
 msgstr "Канал 16"
 
-#: src/engine/sysDef.cpp:704 src/engine/sysDef.cpp:705
-#: src/engine/sysDef.cpp:1070 src/engine/sysDef.cpp:1540
-#: src/engine/sysDef.cpp:1775 src/engine/sysDef.cpp:1896
-#: src/engine/sysDef.cpp:1952 src/engine/sysDef.cpp:1953
+#: src/engine/sysDef.cpp:716 src/engine/sysDef.cpp:717
+#: src/engine/sysDef.cpp:1083 src/engine/sysDef.cpp:1553
+#: src/engine/sysDef.cpp:1788 src/engine/sysDef.cpp:1909
+#: src/engine/sysDef.cpp:1965 src/engine/sysDef.cpp:1966
 #: src/gui/settings.cpp:4166
 msgid "PCM"
 msgstr "ИКМ"
 
-#: src/engine/sysDef.cpp:711
+#: src/engine/sysDef.cpp:723
 msgid "Sega Genesis/Mega Drive"
 msgstr ""
 
-#: src/engine/sysDef.cpp:717
+#: src/engine/sysDef.cpp:729
 msgid "Sega Genesis Extended Channel 3"
 msgstr "Sega Genesis расширенный 3-ий канал"
 
-#: src/engine/sysDef.cpp:723 src/gui/sysConf.cpp:152
+#: src/engine/sysDef.cpp:735 src/gui/sysConf.cpp:152
 msgid "TI SN76489"
 msgstr ""
 
-#: src/engine/sysDef.cpp:724
+#: src/engine/sysDef.cpp:736
 msgid ""
 "a square/noise sound chip found on the Sega Master System, ColecoVision, "
 "Tandy, TI's own 99/4A and a few other places."
@@ -1006,183 +1038,183 @@ msgstr ""
 "System, ColecoVision, Tandy, собственном устройстве TI 99/4A и некоторых "
 "других местах."
 
-#: src/engine/sysDef.cpp:725 src/engine/sysDef.cpp:1143
-#: src/engine/sysDef.cpp:1155 src/engine/sysDef.cpp:1168
-#: src/engine/sysDef.cpp:1882 src/engine/sysDef.cpp:1939
+#: src/engine/sysDef.cpp:737 src/engine/sysDef.cpp:1156
+#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1181
+#: src/engine/sysDef.cpp:1895 src/engine/sysDef.cpp:1952
 msgid "Square 1"
 msgstr "Меандр 1"
 
-#: src/engine/sysDef.cpp:725 src/engine/sysDef.cpp:1143
-#: src/engine/sysDef.cpp:1155 src/engine/sysDef.cpp:1168
-#: src/engine/sysDef.cpp:1882 src/engine/sysDef.cpp:1939
+#: src/engine/sysDef.cpp:737 src/engine/sysDef.cpp:1156
+#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1181
+#: src/engine/sysDef.cpp:1895 src/engine/sysDef.cpp:1952
 msgid "Square 2"
 msgstr "Меандр 2"
 
-#: src/engine/sysDef.cpp:725 src/engine/sysDef.cpp:1143
-#: src/engine/sysDef.cpp:1155 src/engine/sysDef.cpp:1168
-#: src/engine/sysDef.cpp:1882 src/engine/sysDef.cpp:1939
+#: src/engine/sysDef.cpp:737 src/engine/sysDef.cpp:1156
+#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1181
+#: src/engine/sysDef.cpp:1895 src/engine/sysDef.cpp:1952
 msgid "Square 3"
 msgstr "Меандр 3"
 
-#: src/engine/sysDef.cpp:725 src/engine/sysDef.cpp:744
-#: src/engine/sysDef.cpp:778 src/engine/sysDef.cpp:963
-#: src/engine/sysDef.cpp:1322 src/engine/sysDef.cpp:1882
-#: src/engine/sysDef.cpp:1928 src/engine/sysDef.cpp:2063
-#: src/engine/sysDef.cpp:2126 src/engine/sysDef.cpp:2226
+#: src/engine/sysDef.cpp:737 src/engine/sysDef.cpp:756
+#: src/engine/sysDef.cpp:790 src/engine/sysDef.cpp:976
+#: src/engine/sysDef.cpp:1335 src/engine/sysDef.cpp:1895
+#: src/engine/sysDef.cpp:1941 src/engine/sysDef.cpp:2076
+#: src/engine/sysDef.cpp:2139 src/engine/sysDef.cpp:2231
 #: src/gui/settings.cpp:4165
 msgid "Noise"
 msgstr "Шум"
 
-#: src/engine/sysDef.cpp:731
+#: src/engine/sysDef.cpp:743
 msgid "20xy: Set noise mode (x: preset freq/ch3 freq; y: thin pulse/noise)"
 msgstr ""
 "20xy: Режим шума (x: фикс. част./част. 3-го кан.; y: \"тонкая\" прямоуг. "
 "аолна/шум)"
 
-#: src/engine/sysDef.cpp:736
+#: src/engine/sysDef.cpp:748
 msgid "Sega Master System + FM Expansion"
 msgstr ""
 
-#: src/engine/sysDef.cpp:742 src/gui/inst/gb.cpp:32 src/gui/settings.cpp:4097
+#: src/engine/sysDef.cpp:754 src/gui/inst/gb.cpp:32 src/gui/settings.cpp:4097
 msgid "Game Boy"
 msgstr "Game Boy"
 
-#: src/engine/sysDef.cpp:743
+#: src/engine/sysDef.cpp:755
 msgid "the most popular portable game console of the era."
 msgstr "самая популярная портативная игровая консоль той эпохи."
 
-#: src/engine/sysDef.cpp:744 src/engine/sysDef.cpp:778
-#: src/engine/sysDef.cpp:1070 src/engine/sysDef.cpp:2126
+#: src/engine/sysDef.cpp:756 src/engine/sysDef.cpp:790
+#: src/engine/sysDef.cpp:1083 src/engine/sysDef.cpp:2139
 msgid "Pulse 1"
 msgstr "Прямоуг. 1"
 
-#: src/engine/sysDef.cpp:744 src/engine/sysDef.cpp:778
-#: src/engine/sysDef.cpp:1070 src/engine/sysDef.cpp:2126
+#: src/engine/sysDef.cpp:756 src/engine/sysDef.cpp:790
+#: src/engine/sysDef.cpp:1083 src/engine/sysDef.cpp:2139
 msgid "Pulse 2"
 msgstr "Прямоуг. 2"
 
-#: src/engine/sysDef.cpp:744 src/gui/guiConst.cpp:1448
+#: src/engine/sysDef.cpp:756 src/gui/guiConst.cpp:1448
 #: src/gui/settings.cpp:4002
 msgid "Wavetable"
 msgstr "Волн. табл."
 
-#: src/engine/sysDef.cpp:751
+#: src/engine/sysDef.cpp:763
 msgid "11xx: Set noise length (0: long; 1: short)"
 msgstr "11xx: Длина шума (0: длинный; 1: короткий)"
 
-#: src/engine/sysDef.cpp:752
+#: src/engine/sysDef.cpp:764
 msgid "12xx: Set duty cycle (0 to 3)"
 msgstr "12xx: Скважность (0-3)"
 
-#: src/engine/sysDef.cpp:753
+#: src/engine/sysDef.cpp:765
 msgid "13xy: Setup sweep (x: time; y: shift)"
 msgstr ""
 "13xy: Сконфигурировать аппаратное портаменто (x: длительность; y: расстояние)"
 
-#: src/engine/sysDef.cpp:754
+#: src/engine/sysDef.cpp:766
 msgid "14xx: Set sweep direction (0: up; 1: down)"
 msgstr "14xx: Направление аппаратного портаменто (0: вверх; 1: вниз)"
 
-#: src/engine/sysDef.cpp:759
+#: src/engine/sysDef.cpp:771
 msgid "PC Engine/TurboGrafx-16"
 msgstr ""
 
-#: src/engine/sysDef.cpp:760
+#: src/engine/sysDef.cpp:772
 msgid "an '80s game console with a wavetable sound chip, popular in Japan."
 msgstr ""
 "игровая консоль из 80-ых с чипом на волновых таблицах. Была популярна в "
 "Японии."
 
-#: src/engine/sysDef.cpp:768 src/engine/sysDef.cpp:1009
-#: src/engine/sysDef.cpp:1801
+#: src/engine/sysDef.cpp:780 src/engine/sysDef.cpp:1022
+#: src/engine/sysDef.cpp:1814
 msgid "11xx: Toggle noise mode"
 msgstr "11xx: Переключить режим шума"
 
-#: src/engine/sysDef.cpp:769
+#: src/engine/sysDef.cpp:781
 msgid "12xx: Setup LFO (0: disabled; 1: 1x depth; 2: 16x depth; 3: 256x depth)"
 msgstr ""
 "12xx: Настроить ГНЧ (0: выкл.; 1: глубина 1x; 2: глубина 16x; 3: глубина "
 "256x)"
 
-#: src/engine/sysDef.cpp:770
+#: src/engine/sysDef.cpp:782
 msgid "13xx: Set LFO speed"
 msgstr "13xx: Частота ГНЧ"
 
-#: src/engine/sysDef.cpp:776
+#: src/engine/sysDef.cpp:788
 msgid "NES (Ricoh 2A03)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:777
+#: src/engine/sysDef.cpp:789
 msgid ""
 "also known as Famicom in Japan, it's the most well-known game console of the "
 "'80s."
 msgstr ""
 "также известная в Японии как Famicom. Самая известная игровая консоль 80-ых."
 
-#: src/engine/sysDef.cpp:778 src/gui/waveEdit.cpp:31 src/gui/waveEdit.cpp:217
+#: src/engine/sysDef.cpp:790 src/gui/waveEdit.cpp:31 src/gui/waveEdit.cpp:217
 msgid "Triangle"
 msgstr "Треуг. волна"
 
-#: src/engine/sysDef.cpp:778 src/engine/sysDef.cpp:2126
+#: src/engine/sysDef.cpp:790 src/engine/sysDef.cpp:2139
 msgid "DPCM"
 msgstr "ДИКМ"
 
-#: src/engine/sysDef.cpp:784 src/engine/sysDef.cpp:2132
+#: src/engine/sysDef.cpp:796 src/engine/sysDef.cpp:2145
 msgid "11xx: Write to delta modulation counter (0 to 7F)"
 msgstr "11xx: Запись в регистр дельта-счётчика (0-7F)"
 
-#: src/engine/sysDef.cpp:785 src/engine/sysDef.cpp:1076
+#: src/engine/sysDef.cpp:797 src/engine/sysDef.cpp:1089
 msgid "12xx: Set duty cycle/noise mode (pulse: 0 to 3; noise: 0 or 1)"
 msgstr "12xx: Скважность/режим шума (меандр: 0-3; шум: 0 или 1)"
 
-#: src/engine/sysDef.cpp:786 src/engine/sysDef.cpp:2134
+#: src/engine/sysDef.cpp:798 src/engine/sysDef.cpp:2147
 msgid "13xy: Sweep up (x: time; y: shift)"
 msgstr "13xy: Аппаратное портаменто вверх (x: время; y: сдвиг)"
 
-#: src/engine/sysDef.cpp:787 src/engine/sysDef.cpp:2135
+#: src/engine/sysDef.cpp:799 src/engine/sysDef.cpp:2148
 msgid "14xy: Sweep down (x: time; y: shift)"
 msgstr "14xy: Аппаратное портаменто вниз (x: время; y: сдвиг)"
 
-#: src/engine/sysDef.cpp:788 src/engine/sysDef.cpp:2136
+#: src/engine/sysDef.cpp:800 src/engine/sysDef.cpp:2149
 msgid ""
 "15xx: Set envelope mode (0: envelope, 1: length, 2: looping, 3: constant)"
 msgstr "15xx: Режим огибающей (0: огибающая, 1: длина, 2: цикл, 3: постоянная)"
 
-#: src/engine/sysDef.cpp:789 src/engine/sysDef.cpp:2137
+#: src/engine/sysDef.cpp:801 src/engine/sysDef.cpp:2150
 msgid "16xx: Set length counter (refer to manual for a list of values)"
 msgstr "16xx: Счётчик длины (список значений см. в инструкции)"
 
-#: src/engine/sysDef.cpp:790 src/engine/sysDef.cpp:2138
+#: src/engine/sysDef.cpp:802 src/engine/sysDef.cpp:2151
 msgid "17xx: Set frame counter mode (0: 4-step, 1: 5-step)"
 msgstr "17xx: Режим счётчика кадров (0: 4 шага, 1: 5 шагов)"
 
-#: src/engine/sysDef.cpp:791 src/engine/sysDef.cpp:2139
+#: src/engine/sysDef.cpp:803 src/engine/sysDef.cpp:2152
 msgid "18xx: Select PCM/DPCM mode (0: PCM; 1: DPCM)"
 msgstr "18xx: Выбрать режим ИКМ/ДИКМ (0: ИКМ; 1: ДИКМ)"
 
-#: src/engine/sysDef.cpp:792 src/engine/sysDef.cpp:2140
+#: src/engine/sysDef.cpp:804 src/engine/sysDef.cpp:2153
 msgid "19xx: Set triangle linear counter (0 to 7F; 80 and higher halt)"
 msgstr ""
 "19xx: Линейный счётчик треуг. волны (0-7F; 80 и выше мгновенно останавливают "
 "волну)"
 
-#: src/engine/sysDef.cpp:793 src/engine/sysDef.cpp:2141
+#: src/engine/sysDef.cpp:805 src/engine/sysDef.cpp:2154
 msgid "20xx: Set DPCM frequency (0 to F)"
 msgstr "20xx: Частота ДИКМ (0-F)"
 
-#: src/engine/sysDef.cpp:798
+#: src/engine/sysDef.cpp:810
 msgid "NES + Konami VRC7"
 msgstr ""
 
-#: src/engine/sysDef.cpp:804
+#: src/engine/sysDef.cpp:816
 msgid "Famicom Disk System"
 msgstr ""
 
-#: src/engine/sysDef.cpp:810
+#: src/engine/sysDef.cpp:822
 msgid "Commodore 64 (SID 6581)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:811
+#: src/engine/sysDef.cpp:823
 msgid ""
 "this computer is powered by the SID chip, which had synthesizer features "
 "like a filter and ADSR."
@@ -1190,11 +1222,11 @@ msgstr ""
 "в этом компьютере стоит чип SID, который имеет продвинутый функционал, "
 "присущий синтезаторам, например, фильтр и ADSR-огибающую."
 
-#: src/engine/sysDef.cpp:822
+#: src/engine/sysDef.cpp:834
 msgid "Commodore 64 (SID 8580)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:823
+#: src/engine/sysDef.cpp:835
 msgid ""
 "this computer is powered by the SID chip, which had synthesizer features "
 "like a filter and ADSR.\n"
@@ -1204,169 +1236,169 @@ msgstr ""
 "присущий синтезаторам, например, фильтр и ADSR-огибающую.\n"
 "Это более новая ревизия чипа."
 
-#: src/engine/sysDef.cpp:834
+#: src/engine/sysDef.cpp:846
 msgid "DefleCade"
 msgstr ""
 
-#: src/engine/sysDef.cpp:840
+#: src/engine/sysDef.cpp:852
 msgid "Neo Geo CD"
 msgstr ""
 
-#: src/engine/sysDef.cpp:841
+#: src/engine/sysDef.cpp:853
 msgid ""
 "like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect "
 "the pins."
 msgstr ""
 "как Neo Geo, но без канала АДИКМ-B, потому что они не смогли подключить пины."
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:854
-#: src/engine/sysDef.cpp:896 src/engine/sysDef.cpp:908
-#: src/engine/sysDef.cpp:1040 src/engine/sysDef.cpp:1105
-#: src/engine/sysDef.cpp:1117 src/engine/sysDef.cpp:1130
-#: src/engine/sysDef.cpp:1143 src/engine/sysDef.cpp:1155
-#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1181
-#: src/engine/sysDef.cpp:1193 src/engine/sysDef.cpp:1287
-#: src/engine/sysDef.cpp:1340 src/engine/sysDef.cpp:1352
-#: src/engine/sysDef.cpp:1378 src/engine/sysDef.cpp:1391
-#: src/engine/sysDef.cpp:1415 src/engine/sysDef.cpp:1427
-#: src/engine/sysDef.cpp:1451 src/engine/sysDef.cpp:1463
-#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
-#: src/engine/sysDef.cpp:1689 src/engine/sysDef.cpp:1701
-#: src/engine/sysDef.cpp:1857 src/engine/sysDef.cpp:1869
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:908 src/engine/sysDef.cpp:920
+#: src/engine/sysDef.cpp:1053 src/engine/sysDef.cpp:1118
+#: src/engine/sysDef.cpp:1130 src/engine/sysDef.cpp:1143
+#: src/engine/sysDef.cpp:1156 src/engine/sysDef.cpp:1168
+#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1194
+#: src/engine/sysDef.cpp:1206 src/engine/sysDef.cpp:1300
+#: src/engine/sysDef.cpp:1353 src/engine/sysDef.cpp:1365
+#: src/engine/sysDef.cpp:1391 src/engine/sysDef.cpp:1404
+#: src/engine/sysDef.cpp:1428 src/engine/sysDef.cpp:1440
+#: src/engine/sysDef.cpp:1464 src/engine/sysDef.cpp:1476
+#: src/engine/sysDef.cpp:1489 src/engine/sysDef.cpp:1502
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
+#: src/engine/sysDef.cpp:1702 src/engine/sysDef.cpp:1714
+#: src/engine/sysDef.cpp:1870 src/engine/sysDef.cpp:1882
+#: src/engine/sysDef.cpp:2027
 msgid "FM 1"
 msgstr ""
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:896
-#: src/engine/sysDef.cpp:908 src/engine/sysDef.cpp:1040
-#: src/engine/sysDef.cpp:1105 src/engine/sysDef.cpp:1117
-#: src/engine/sysDef.cpp:1130 src/engine/sysDef.cpp:1143
-#: src/engine/sysDef.cpp:1155 src/engine/sysDef.cpp:1168
-#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1193
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1287
-#: src/engine/sysDef.cpp:1340 src/engine/sysDef.cpp:1352
-#: src/engine/sysDef.cpp:1378 src/engine/sysDef.cpp:1391
-#: src/engine/sysDef.cpp:1415 src/engine/sysDef.cpp:1427
-#: src/engine/sysDef.cpp:1439 src/engine/sysDef.cpp:1451
-#: src/engine/sysDef.cpp:1489 src/engine/sysDef.cpp:1554
-#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639 src/engine/sysDef.cpp:1689
-#: src/engine/sysDef.cpp:1701 src/engine/sysDef.cpp:1857
-#: src/engine/sysDef.cpp:1869 src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:908
+#: src/engine/sysDef.cpp:920 src/engine/sysDef.cpp:1053
+#: src/engine/sysDef.cpp:1118 src/engine/sysDef.cpp:1130
+#: src/engine/sysDef.cpp:1143 src/engine/sysDef.cpp:1156
+#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1181
+#: src/engine/sysDef.cpp:1194 src/engine/sysDef.cpp:1206
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1300
+#: src/engine/sysDef.cpp:1353 src/engine/sysDef.cpp:1365
+#: src/engine/sysDef.cpp:1391 src/engine/sysDef.cpp:1404
+#: src/engine/sysDef.cpp:1428 src/engine/sysDef.cpp:1440
+#: src/engine/sysDef.cpp:1452 src/engine/sysDef.cpp:1464
+#: src/engine/sysDef.cpp:1502 src/engine/sysDef.cpp:1567
+#: src/engine/sysDef.cpp:1580 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652 src/engine/sysDef.cpp:1702
+#: src/engine/sysDef.cpp:1714 src/engine/sysDef.cpp:1870
+#: src/engine/sysDef.cpp:1882 src/engine/sysDef.cpp:2027
 msgid "FM 2"
 msgstr ""
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:854
-#: src/engine/sysDef.cpp:896 src/engine/sysDef.cpp:908
-#: src/engine/sysDef.cpp:1040 src/engine/sysDef.cpp:1105
-#: src/engine/sysDef.cpp:1143 src/engine/sysDef.cpp:1181
-#: src/engine/sysDef.cpp:1193 src/engine/sysDef.cpp:1287
-#: src/engine/sysDef.cpp:1340 src/engine/sysDef.cpp:1352
-#: src/engine/sysDef.cpp:1415 src/engine/sysDef.cpp:1427
-#: src/engine/sysDef.cpp:1451 src/engine/sysDef.cpp:1463
-#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
-#: src/engine/sysDef.cpp:1689 src/engine/sysDef.cpp:1701
-#: src/engine/sysDef.cpp:1857 src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:908 src/engine/sysDef.cpp:920
+#: src/engine/sysDef.cpp:1053 src/engine/sysDef.cpp:1118
+#: src/engine/sysDef.cpp:1156 src/engine/sysDef.cpp:1194
+#: src/engine/sysDef.cpp:1206 src/engine/sysDef.cpp:1300
+#: src/engine/sysDef.cpp:1353 src/engine/sysDef.cpp:1365
+#: src/engine/sysDef.cpp:1428 src/engine/sysDef.cpp:1440
+#: src/engine/sysDef.cpp:1464 src/engine/sysDef.cpp:1476
+#: src/engine/sysDef.cpp:1489 src/engine/sysDef.cpp:1502
+#: src/engine/sysDef.cpp:1702 src/engine/sysDef.cpp:1714
+#: src/engine/sysDef.cpp:1870 src/engine/sysDef.cpp:2027
 msgid "FM 3"
 msgstr ""
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:854
-#: src/engine/sysDef.cpp:896 src/engine/sysDef.cpp:908
-#: src/engine/sysDef.cpp:1040 src/engine/sysDef.cpp:1143
-#: src/engine/sysDef.cpp:1155 src/engine/sysDef.cpp:1168
-#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1193
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1287
-#: src/engine/sysDef.cpp:1340 src/engine/sysDef.cpp:1352
-#: src/engine/sysDef.cpp:1378 src/engine/sysDef.cpp:1391
-#: src/engine/sysDef.cpp:1415 src/engine/sysDef.cpp:1427
-#: src/engine/sysDef.cpp:1439 src/engine/sysDef.cpp:1451
-#: src/engine/sysDef.cpp:1463 src/engine/sysDef.cpp:1476
-#: src/engine/sysDef.cpp:1489 src/engine/sysDef.cpp:1554
-#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639 src/engine/sysDef.cpp:1689
-#: src/engine/sysDef.cpp:1701 src/engine/sysDef.cpp:1857
-#: src/engine/sysDef.cpp:1869 src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:908 src/engine/sysDef.cpp:920
+#: src/engine/sysDef.cpp:1053 src/engine/sysDef.cpp:1156
+#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1181
+#: src/engine/sysDef.cpp:1194 src/engine/sysDef.cpp:1206
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1300
+#: src/engine/sysDef.cpp:1353 src/engine/sysDef.cpp:1365
+#: src/engine/sysDef.cpp:1391 src/engine/sysDef.cpp:1404
+#: src/engine/sysDef.cpp:1428 src/engine/sysDef.cpp:1440
+#: src/engine/sysDef.cpp:1452 src/engine/sysDef.cpp:1464
+#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1502 src/engine/sysDef.cpp:1567
+#: src/engine/sysDef.cpp:1580 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652 src/engine/sysDef.cpp:1702
+#: src/engine/sysDef.cpp:1714 src/engine/sysDef.cpp:1870
+#: src/engine/sysDef.cpp:1882 src/engine/sysDef.cpp:2027
 msgid "FM 4"
 msgstr ""
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:854
-#: src/engine/sysDef.cpp:867 src/engine/sysDef.cpp:935
-#: src/engine/sysDef.cpp:951 src/engine/sysDef.cpp:1105
-#: src/engine/sysDef.cpp:1117 src/engine/sysDef.cpp:1130
-#: src/engine/sysDef.cpp:1352 src/engine/sysDef.cpp:1451
-#: src/engine/sysDef.cpp:1463 src/engine/sysDef.cpp:1476
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:879 src/engine/sysDef.cpp:948
+#: src/engine/sysDef.cpp:964 src/engine/sysDef.cpp:1118
+#: src/engine/sysDef.cpp:1130 src/engine/sysDef.cpp:1143
+#: src/engine/sysDef.cpp:1365 src/engine/sysDef.cpp:1464
+#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
 msgid "PSG 1"
 msgstr ""
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:854
-#: src/engine/sysDef.cpp:867 src/engine/sysDef.cpp:935
-#: src/engine/sysDef.cpp:951 src/engine/sysDef.cpp:1105
-#: src/engine/sysDef.cpp:1117 src/engine/sysDef.cpp:1130
-#: src/engine/sysDef.cpp:1352 src/engine/sysDef.cpp:1451
-#: src/engine/sysDef.cpp:1463 src/engine/sysDef.cpp:1476
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:879 src/engine/sysDef.cpp:948
+#: src/engine/sysDef.cpp:964 src/engine/sysDef.cpp:1118
+#: src/engine/sysDef.cpp:1130 src/engine/sysDef.cpp:1143
+#: src/engine/sysDef.cpp:1365 src/engine/sysDef.cpp:1464
+#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
 msgid "PSG 2"
 msgstr ""
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:854
-#: src/engine/sysDef.cpp:867 src/engine/sysDef.cpp:935
-#: src/engine/sysDef.cpp:951 src/engine/sysDef.cpp:1105
-#: src/engine/sysDef.cpp:1117 src/engine/sysDef.cpp:1130
-#: src/engine/sysDef.cpp:1352 src/engine/sysDef.cpp:1451
-#: src/engine/sysDef.cpp:1463 src/engine/sysDef.cpp:1476
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:879 src/engine/sysDef.cpp:948
+#: src/engine/sysDef.cpp:964 src/engine/sysDef.cpp:1118
+#: src/engine/sysDef.cpp:1130 src/engine/sysDef.cpp:1143
+#: src/engine/sysDef.cpp:1365 src/engine/sysDef.cpp:1464
+#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
 msgid "PSG 3"
 msgstr ""
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:854
-#: src/engine/sysDef.cpp:1352 src/engine/sysDef.cpp:1451
-#: src/engine/sysDef.cpp:1463 src/engine/sysDef.cpp:1476
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:1365 src/engine/sysDef.cpp:1464
+#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
 msgid "ADPCM-A 1"
 msgstr "АДИКМ-A 1"
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:854
-#: src/engine/sysDef.cpp:1352 src/engine/sysDef.cpp:1451
-#: src/engine/sysDef.cpp:1463 src/engine/sysDef.cpp:1476
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:1365 src/engine/sysDef.cpp:1464
+#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
 msgid "ADPCM-A 2"
 msgstr "АДИКМ-A 2"
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:854
-#: src/engine/sysDef.cpp:1352 src/engine/sysDef.cpp:1451
-#: src/engine/sysDef.cpp:1463 src/engine/sysDef.cpp:1476
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:1365 src/engine/sysDef.cpp:1464
+#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
 msgid "ADPCM-A 3"
 msgstr "АДИКМ-A 3"
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:854
-#: src/engine/sysDef.cpp:1352 src/engine/sysDef.cpp:1451
-#: src/engine/sysDef.cpp:1463 src/engine/sysDef.cpp:1476
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:1365 src/engine/sysDef.cpp:1464
+#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
 msgid "ADPCM-A 4"
 msgstr "АДИКМ-A 4"
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:854
-#: src/engine/sysDef.cpp:1352 src/engine/sysDef.cpp:1451
-#: src/engine/sysDef.cpp:1463 src/engine/sysDef.cpp:1476
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:1365 src/engine/sysDef.cpp:1464
+#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
 msgid "ADPCM-A 5"
 msgstr "АДИКМ-A 5"
 
-#: src/engine/sysDef.cpp:842 src/engine/sysDef.cpp:854
-#: src/engine/sysDef.cpp:1352 src/engine/sysDef.cpp:1451
-#: src/engine/sysDef.cpp:1463 src/engine/sysDef.cpp:1476
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
+#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:1365 src/engine/sysDef.cpp:1464
+#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
 msgid "ADPCM-A 6"
 msgstr "АДИКМ-A 6"
 
-#: src/engine/sysDef.cpp:852
+#: src/engine/sysDef.cpp:864
 msgid "Neo Geo CD Extended Channel 2"
 msgstr "Neo Geo CD расширенный 2-ой канал"
 
-#: src/engine/sysDef.cpp:853
+#: src/engine/sysDef.cpp:865
 msgid ""
 "like Neo Geo, but lacking the ADPCM-B channel since they couldn't connect "
 "the pins.\n"
@@ -1378,31 +1410,31 @@ msgstr ""
 "Это версия в режиме расширенного канала, который превращает второй FM-канал "
 "в четыре оператора с независимыми нотами/частотами."
 
-#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:1463
-#: src/engine/sysDef.cpp:1476
+#: src/engine/sysDef.cpp:866 src/engine/sysDef.cpp:1476
+#: src/engine/sysDef.cpp:1489
 msgid "FM 2 OP1"
 msgstr ""
 
-#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:1463
-#: src/engine/sysDef.cpp:1476
+#: src/engine/sysDef.cpp:866 src/engine/sysDef.cpp:1476
+#: src/engine/sysDef.cpp:1489
 msgid "FM 2 OP2"
 msgstr ""
 
-#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:1463
-#: src/engine/sysDef.cpp:1476
+#: src/engine/sysDef.cpp:866 src/engine/sysDef.cpp:1476
+#: src/engine/sysDef.cpp:1489
 msgid "FM 2 OP3"
 msgstr ""
 
-#: src/engine/sysDef.cpp:854 src/engine/sysDef.cpp:1463
-#: src/engine/sysDef.cpp:1476
+#: src/engine/sysDef.cpp:866 src/engine/sysDef.cpp:1476
+#: src/engine/sysDef.cpp:1489
 msgid "FM 2 OP4"
 msgstr ""
 
-#: src/engine/sysDef.cpp:865 src/gui/sysConf.cpp:919
+#: src/engine/sysDef.cpp:877 src/gui/sysConf.cpp:919
 msgid "AY-3-8910"
 msgstr ""
 
-#: src/engine/sysDef.cpp:866
+#: src/engine/sysDef.cpp:878
 msgid ""
 "this chip is everywhere! ZX Spectrum, MSX, Amstrad CPC, Intellivision, "
 "Vectrex...\n"
@@ -1412,11 +1444,11 @@ msgstr ""
 "Открытие метода использования огибающей для баса легко позволило этому чипу "
 "победить SN76489."
 
-#: src/engine/sysDef.cpp:877
+#: src/engine/sysDef.cpp:889
 msgid "Amiga"
 msgstr ""
 
-#: src/engine/sysDef.cpp:878
+#: src/engine/sysDef.cpp:890
 msgid ""
 "a computer from the '80s with full sampling capabilities, giving it a sound "
 "ahead of its time."
@@ -1424,27 +1456,27 @@ msgstr ""
 "компьютер из 80-ых с полноценными возможностями сэмплирования, что давало "
 "ему звучание, опережавшее его эпоху."
 
-#: src/engine/sysDef.cpp:886
+#: src/engine/sysDef.cpp:898
 msgid "10xx: Toggle filter (0 disables; 1 enables)"
 msgstr "10xx: Переключить фильтр (0 выкл.; 1 вкл.)"
 
-#: src/engine/sysDef.cpp:887
+#: src/engine/sysDef.cpp:899
 msgid "11xx: Toggle AM with next channel"
 msgstr "11xx: Переключить АМ со следующим каналом"
 
-#: src/engine/sysDef.cpp:888
+#: src/engine/sysDef.cpp:900
 msgid "12xx: Toggle period modulation with next channel"
 msgstr "12xx: Переключить модуляцию периода со следующим каналом"
 
-#: src/engine/sysDef.cpp:889
+#: src/engine/sysDef.cpp:901
 msgid "13xx: Set waveform"
 msgstr "13xx: Волна"
 
-#: src/engine/sysDef.cpp:894
+#: src/engine/sysDef.cpp:906
 msgid "Yamaha YM2151 (OPM)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:895
+#: src/engine/sysDef.cpp:907
 msgid ""
 "this was Yamaha's first integrated FM chip.\n"
 "it was used in several synthesizers, computers and arcade boards."
@@ -1452,58 +1484,58 @@ msgstr ""
 "этот чип был первой интегральной микросхемой Yamaha.\n"
 "Он использовался в нескольких синтезаторах, компьютерах и аркадных автоматах."
 
-#: src/engine/sysDef.cpp:896 src/engine/sysDef.cpp:908
-#: src/engine/sysDef.cpp:1040 src/engine/sysDef.cpp:1143
-#: src/engine/sysDef.cpp:1155 src/engine/sysDef.cpp:1168
-#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1193
-#: src/engine/sysDef.cpp:1287 src/engine/sysDef.cpp:1340
-#: src/engine/sysDef.cpp:1352 src/engine/sysDef.cpp:1378
-#: src/engine/sysDef.cpp:1391 src/engine/sysDef.cpp:1415
-#: src/engine/sysDef.cpp:1427 src/engine/sysDef.cpp:1489
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
-#: src/engine/sysDef.cpp:1689 src/engine/sysDef.cpp:1701
-#: src/engine/sysDef.cpp:1857 src/engine/sysDef.cpp:1869
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:908 src/engine/sysDef.cpp:920
+#: src/engine/sysDef.cpp:1053 src/engine/sysDef.cpp:1156
+#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1181
+#: src/engine/sysDef.cpp:1194 src/engine/sysDef.cpp:1206
+#: src/engine/sysDef.cpp:1300 src/engine/sysDef.cpp:1353
+#: src/engine/sysDef.cpp:1365 src/engine/sysDef.cpp:1391
+#: src/engine/sysDef.cpp:1404 src/engine/sysDef.cpp:1428
+#: src/engine/sysDef.cpp:1440 src/engine/sysDef.cpp:1502
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
+#: src/engine/sysDef.cpp:1702 src/engine/sysDef.cpp:1714
+#: src/engine/sysDef.cpp:1870 src/engine/sysDef.cpp:1882
+#: src/engine/sysDef.cpp:2027
 msgid "FM 5"
 msgstr ""
 
-#: src/engine/sysDef.cpp:896 src/engine/sysDef.cpp:908
-#: src/engine/sysDef.cpp:1040 src/engine/sysDef.cpp:1143
-#: src/engine/sysDef.cpp:1155 src/engine/sysDef.cpp:1168
-#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1193
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1287
-#: src/engine/sysDef.cpp:1340 src/engine/sysDef.cpp:1352
-#: src/engine/sysDef.cpp:1378 src/engine/sysDef.cpp:1391
-#: src/engine/sysDef.cpp:1415 src/engine/sysDef.cpp:1427
-#: src/engine/sysDef.cpp:1439 src/engine/sysDef.cpp:1489
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
-#: src/engine/sysDef.cpp:1689 src/engine/sysDef.cpp:1701
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:908 src/engine/sysDef.cpp:920
+#: src/engine/sysDef.cpp:1053 src/engine/sysDef.cpp:1156
+#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1181
+#: src/engine/sysDef.cpp:1194 src/engine/sysDef.cpp:1206
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1300
+#: src/engine/sysDef.cpp:1353 src/engine/sysDef.cpp:1365
+#: src/engine/sysDef.cpp:1391 src/engine/sysDef.cpp:1404
+#: src/engine/sysDef.cpp:1428 src/engine/sysDef.cpp:1440
+#: src/engine/sysDef.cpp:1452 src/engine/sysDef.cpp:1502
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
+#: src/engine/sysDef.cpp:1702 src/engine/sysDef.cpp:1714
+#: src/engine/sysDef.cpp:2027
 msgid "FM 6"
 msgstr ""
 
-#: src/engine/sysDef.cpp:896 src/engine/sysDef.cpp:1040
-#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1193
-#: src/engine/sysDef.cpp:1287 src/engine/sysDef.cpp:1689
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:908 src/engine/sysDef.cpp:1053
+#: src/engine/sysDef.cpp:1194 src/engine/sysDef.cpp:1206
+#: src/engine/sysDef.cpp:1300 src/engine/sysDef.cpp:1702
+#: src/engine/sysDef.cpp:2027
 msgid "FM 7"
 msgstr ""
 
-#: src/engine/sysDef.cpp:896 src/engine/sysDef.cpp:1040
-#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1193
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1287
-#: src/engine/sysDef.cpp:1439 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639 src/engine/sysDef.cpp:1689
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:908 src/engine/sysDef.cpp:1053
+#: src/engine/sysDef.cpp:1194 src/engine/sysDef.cpp:1206
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1300
+#: src/engine/sysDef.cpp:1452 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652 src/engine/sysDef.cpp:1702
+#: src/engine/sysDef.cpp:2027
 msgid "FM 8"
 msgstr ""
 
-#: src/engine/sysDef.cpp:906
+#: src/engine/sysDef.cpp:918
 msgid "Yamaha YM2612 (OPN2)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:907
+#: src/engine/sysDef.cpp:919
 msgid ""
 "this chip is mostly known for being in the Sega Genesis (but it also was on "
 "the FM Towns computer)."
@@ -1511,11 +1543,11 @@ msgstr ""
 "этот чип в основном известен по причине того, что он находился в Sega "
 "Genesis (но он также использовался в компьютере FM Towns)."
 
-#: src/engine/sysDef.cpp:918
+#: src/engine/sysDef.cpp:930
 msgid "Atari TIA"
 msgstr ""
 
-#: src/engine/sysDef.cpp:919
+#: src/engine/sysDef.cpp:931
 msgid ""
 "it's a challenge to make music on this chip which barely has musical "
 "capabilities..."
@@ -1523,11 +1555,19 @@ msgstr ""
 "на этом чипе очень сложно писать музыку, ведь он едва ли обладает "
 "музыкальными возможностями..."
 
-#: src/engine/sysDef.cpp:933
+#: src/engine/sysDef.cpp:940
+msgid "11xx: Set raw period (0-1F)"
+msgstr "11xx: \"Сырое\" значение периода (0-1F)"
+
+#: src/engine/sysDef.cpp:941
+msgid "20xx: Software pitch control (0 - off, 1 - on)"
+msgstr ""
+
+#: src/engine/sysDef.cpp:946
 msgid "Philips SAA1099"
 msgstr ""
 
-#: src/engine/sysDef.cpp:934
+#: src/engine/sysDef.cpp:947
 msgid ""
 "supposedly an upgrade from the AY-3-8910, this was present on the Creative "
 "Music System (Game Blaster) and SAM Coupé."
@@ -1535,35 +1575,35 @@ msgstr ""
 "этот чип, судя по всему, улучшенная версия AY-3-8910, использовался в "
 "Creative Music System (Game Blaster) и SAM Coupé."
 
-#: src/engine/sysDef.cpp:935
+#: src/engine/sysDef.cpp:948
 msgid "PSG 4"
 msgstr ""
 
-#: src/engine/sysDef.cpp:935
+#: src/engine/sysDef.cpp:948
 msgid "PSG 5"
 msgstr ""
 
-#: src/engine/sysDef.cpp:935
+#: src/engine/sysDef.cpp:948
 msgid "PSG 6"
 msgstr ""
 
-#: src/engine/sysDef.cpp:942
+#: src/engine/sysDef.cpp:955
 msgid "10xy: Set channel mode (x: noise; y: tone)"
 msgstr "10xy: Режим канала (x: шум; y: тон)"
 
-#: src/engine/sysDef.cpp:943
+#: src/engine/sysDef.cpp:956
 msgid "11xx: Set noise frequency"
 msgstr "11xx: Частота шума"
 
-#: src/engine/sysDef.cpp:944
+#: src/engine/sysDef.cpp:957
 msgid "12xx: Setup envelope (refer to docs for more information)"
 msgstr "12xx: Настройка огибающей (см. инструкцию)"
 
-#: src/engine/sysDef.cpp:949
+#: src/engine/sysDef.cpp:962
 msgid "Microchip AY8930"
 msgstr ""
 
-#: src/engine/sysDef.cpp:950
+#: src/engine/sysDef.cpp:963
 msgid ""
 "an improved version of the AY-3-8910 with a bigger frequency range, duty "
 "cycles, configurable noise and per-channel envelopes!"
@@ -1571,11 +1611,11 @@ msgstr ""
 "улучшенная версия AY-3-8910 с большим диапазоном частот, настройкой "
 "скважности, настраиваемым шумом и огибающей на каждый канал!"
 
-#: src/engine/sysDef.cpp:961
+#: src/engine/sysDef.cpp:974
 msgid "Commodore VIC-20"
 msgstr ""
 
-#: src/engine/sysDef.cpp:962
+#: src/engine/sysDef.cpp:975
 msgid ""
 "Commodore's successor to the PET.\n"
 "its square wave channels are more than just square..."
@@ -1583,25 +1623,25 @@ msgstr ""
 "Компьютер Commodore, вышедший после PET.\n"
 "его каналы квадратных волн могут играть не только лишь квадратные волны..."
 
-#: src/engine/sysDef.cpp:963 src/gui/settings.cpp:141 src/gui/settings.cpp:219
+#: src/engine/sysDef.cpp:976 src/gui/settings.cpp:141 src/gui/settings.cpp:219
 #: src/gui/settings.cpp:4042
 msgid "Low"
 msgstr "Низкое"
 
-#: src/engine/sysDef.cpp:963
+#: src/engine/sysDef.cpp:976
 msgid "Mid"
 msgstr ""
 
-#: src/engine/sysDef.cpp:963 src/gui/settings.cpp:140 src/gui/settings.cpp:221
+#: src/engine/sysDef.cpp:976 src/gui/settings.cpp:140 src/gui/settings.cpp:221
 #: src/gui/settings.cpp:4043
 msgid "High"
 msgstr "Высокое"
 
-#: src/engine/sysDef.cpp:972
+#: src/engine/sysDef.cpp:985
 msgid "Commodore PET"
 msgstr ""
 
-#: src/engine/sysDef.cpp:973
+#: src/engine/sysDef.cpp:986
 msgid ""
 "one channel of 1-bit wavetable which is better (and worse) than the PC "
 "Speaker."
@@ -1609,93 +1649,93 @@ msgstr ""
 "один канал 1-битной волновой таблицы, что лучше (или хуже), чем PC Speaker "
 "(пищалка)."
 
-#: src/engine/sysDef.cpp:974 src/engine/sysDef.cpp:1270
-#: src/engine/sysDef.cpp:2126 src/gui/editControls.cpp:433
+#: src/engine/sysDef.cpp:987 src/engine/sysDef.cpp:1283
+#: src/engine/sysDef.cpp:2139 src/gui/editControls.cpp:433
 #: src/gui/settings.cpp:4089 src/gui/settings.cpp:4167
 msgid "Wave"
 msgstr "Волн. табл."
 
-#: src/engine/sysDef.cpp:983 src/gui/settings.cpp:4124
+#: src/engine/sysDef.cpp:996 src/gui/settings.cpp:4124
 msgid "SNES"
 msgstr ""
 
-#: src/engine/sysDef.cpp:984
+#: src/engine/sysDef.cpp:997
 msgid "FM? nah... samples! Nintendo's answer to Sega."
 msgstr "FM? не... сэмплы! Ответ Nintendo в сторону Sega."
 
-#: src/engine/sysDef.cpp:991
+#: src/engine/sysDef.cpp:1004
 msgid "18xx: Enable echo buffer"
 msgstr "18xx: Включить эхо-буфер"
 
-#: src/engine/sysDef.cpp:992
+#: src/engine/sysDef.cpp:1005
 msgid "19xx: Set echo delay (0 to F)"
 msgstr "19xx: Задержка эхо (0-F)"
 
-#: src/engine/sysDef.cpp:993
+#: src/engine/sysDef.cpp:1006
 msgid "1Axx: Set left echo volume"
 msgstr "1Axx: Громкость эхо на левом канале"
 
-#: src/engine/sysDef.cpp:994
+#: src/engine/sysDef.cpp:1007
 msgid "1Bxx: Set right echo volume"
 msgstr "1Bxx: Громкость эхо на правом канале"
 
-#: src/engine/sysDef.cpp:995
+#: src/engine/sysDef.cpp:1008
 msgid "1Cxx: Set echo feedback"
 msgstr "1Cxx: Обратная связь эхо"
 
-#: src/engine/sysDef.cpp:996
+#: src/engine/sysDef.cpp:1009
 msgid "1Exx: Set dry output volume (left)"
 msgstr "1Exx: Громкость канала (лево)"
 
-#: src/engine/sysDef.cpp:997
+#: src/engine/sysDef.cpp:1010
 msgid "1Fxx: Set dry output volume (right)"
 msgstr "1Fxx: Громкость канала (право)"
 
-#: src/engine/sysDef.cpp:998
+#: src/engine/sysDef.cpp:1011
 msgid "30xx: Set echo filter coefficient 0"
 msgstr "30xx: Коэффициент 0 фильтра эхо"
 
-#: src/engine/sysDef.cpp:999
+#: src/engine/sysDef.cpp:1012
 msgid "31xx: Set echo filter coefficient 1"
 msgstr "31xx: Коэффициент 1 фильтра эхо"
 
-#: src/engine/sysDef.cpp:1000
+#: src/engine/sysDef.cpp:1013
 msgid "32xx: Set echo filter coefficient 2"
 msgstr "32xx: Коэффициент 2 фильтра эхо"
 
-#: src/engine/sysDef.cpp:1001
+#: src/engine/sysDef.cpp:1014
 msgid "33xx: Set echo filter coefficient 3"
 msgstr "33xx: Коэффициент 3 фильтра эхо"
 
-#: src/engine/sysDef.cpp:1002
+#: src/engine/sysDef.cpp:1015
 msgid "34xx: Set echo filter coefficient 4"
 msgstr "34xx: Коэффициент 4 фильтра эхо"
 
-#: src/engine/sysDef.cpp:1003
+#: src/engine/sysDef.cpp:1016
 msgid "35xx: Set echo filter coefficient 5"
 msgstr "35xx: Коэффициент 5 фильтра эхо"
 
-#: src/engine/sysDef.cpp:1004
+#: src/engine/sysDef.cpp:1017
 msgid "36xx: Set echo filter coefficient 6"
 msgstr "36xx: Коэффициент 6 фильтра эхо"
 
-#: src/engine/sysDef.cpp:1005
+#: src/engine/sysDef.cpp:1018
 msgid "37xx: Set echo filter coefficient 7"
 msgstr "37xx: Коэффициент 7 фильтра эхо"
 
-#: src/engine/sysDef.cpp:1010
+#: src/engine/sysDef.cpp:1023
 msgid "12xx: Toggle echo on this channel"
 msgstr "12xx: Переключить эхо наэтом канале"
 
-#: src/engine/sysDef.cpp:1011
+#: src/engine/sysDef.cpp:1024
 msgid "13xx: Toggle pitch modulation"
 msgstr "13xx: Переключить частотную модуляцию"
 
-#: src/engine/sysDef.cpp:1012
+#: src/engine/sysDef.cpp:1025
 msgid "14xy: Toggle invert (x: left; y: right)"
 msgstr "14xy: Переключить инвертирование сигнала (x: левый; y: правый)"
 
-#: src/engine/sysDef.cpp:1013
+#: src/engine/sysDef.cpp:1026
 msgid ""
 "15xx: Set envelope mode (0: ADSR, 1: gain/direct, 2: dec, 3: exp, 4: inc, 5: "
 "bent)"
@@ -1703,60 +1743,60 @@ msgstr ""
 "15xx: Режим огибающей (0: ADSR, 1: усиление/прямой, 2: спад, 3: "
 "экспоненциальная, 4: нарастание, 5: изогн.)"
 
-#: src/engine/sysDef.cpp:1014
+#: src/engine/sysDef.cpp:1027
 msgid "16xx: Set gain (00 to 7F if direct; 00 to 1F otherwise)"
 msgstr "16xx: Усиление (00-7F в прямом режиме; иначе 00-1F)"
 
-#: src/engine/sysDef.cpp:1015
+#: src/engine/sysDef.cpp:1028
 msgid "1Dxx: Set noise frequency (00 to 1F)"
 msgstr "1Dxx: Частота шума (00-1F)"
 
-#: src/engine/sysDef.cpp:1016
+#: src/engine/sysDef.cpp:1029
 msgid "20xx: Set attack (0 to F)"
 msgstr "20xx: Атака (0-F)"
 
-#: src/engine/sysDef.cpp:1017
+#: src/engine/sysDef.cpp:1030
 msgid "21xx: Set decay (0 to 7)"
 msgstr "21xx: Спад (0-7)"
 
-#: src/engine/sysDef.cpp:1018
+#: src/engine/sysDef.cpp:1031
 msgid "22xx: Set sustain (0 to 7)"
 msgstr "22xx: Сустейн (0-7)"
 
-#: src/engine/sysDef.cpp:1019
+#: src/engine/sysDef.cpp:1032
 msgid "23xx: Set release (00 to 1F)"
 msgstr "23xx: Релиз (00-1F)"
 
-#: src/engine/sysDef.cpp:1024
+#: src/engine/sysDef.cpp:1037
 msgid "Konami VRC6"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1025
+#: src/engine/sysDef.cpp:1038
 msgid "an expansion chip for the Famicom, featuring a quirky sawtooth channel."
 msgstr ""
 "чип расширения для Famicom, содержащий своеобразный канал пилообразной волны."
 
-#: src/engine/sysDef.cpp:1026
+#: src/engine/sysDef.cpp:1039
 msgid "VRC6 1"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1026
+#: src/engine/sysDef.cpp:1039
 msgid "VRC6 2"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1026
+#: src/engine/sysDef.cpp:1039
 msgid "VRC6 Saw"
 msgstr "VRC6 пила"
 
-#: src/engine/sysDef.cpp:1032 src/engine/sysDef.cpp:2118
+#: src/engine/sysDef.cpp:1045 src/engine/sysDef.cpp:2131
 msgid "12xx: Set duty cycle (pulse: 0 to 7)"
 msgstr "12xx: Скважность (меандр: 0-7)"
 
-#: src/engine/sysDef.cpp:1038
+#: src/engine/sysDef.cpp:1051
 msgid "Yamaha YM2413 (OPLL)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1039
+#: src/engine/sysDef.cpp:1052
 msgid ""
 "cost-reduced version of the OPL with 16 patches and only one of them is user-"
 "configurable."
@@ -1764,99 +1804,99 @@ msgstr ""
 "удешевлённая версия OPL с 16-ю патчами, причём только один из них доступен "
 "для настройки пользователем."
 
-#: src/engine/sysDef.cpp:1040 src/engine/sysDef.cpp:1181
-#: src/engine/sysDef.cpp:1193 src/engine/sysDef.cpp:1689
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:1053 src/engine/sysDef.cpp:1194
+#: src/engine/sysDef.cpp:1206 src/engine/sysDef.cpp:1702
+#: src/engine/sysDef.cpp:2027
 msgid "FM 9"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1050
+#: src/engine/sysDef.cpp:1063
 msgid "Famicom Disk System (chip)"
 msgstr "Famicom Disk System (чип)"
 
-#: src/engine/sysDef.cpp:1051
+#: src/engine/sysDef.cpp:1064
 msgid "a disk drive for the Famicom which also contains one wavetable channel."
 msgstr ""
 "дисковый привод для Famicom, также содержащий один канал волновых таблиц."
 
-#: src/engine/sysDef.cpp:1052 src/gui/settings.cpp:4111
+#: src/engine/sysDef.cpp:1065 src/gui/settings.cpp:4111
 msgid "FDS"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1059
+#: src/engine/sysDef.cpp:1072
 msgid "11xx: Set modulation depth"
 msgstr "11xx: Глубина модуляции"
 
-#: src/engine/sysDef.cpp:1060
+#: src/engine/sysDef.cpp:1073
 msgid "12xy: Set modulation speed high byte (x: enable; y: value)"
 msgstr "12xy: Старший байт скорости модуляции (x: вкл.; y: значение)"
 
-#: src/engine/sysDef.cpp:1061
+#: src/engine/sysDef.cpp:1074
 msgid "13xx: Set modulation speed low byte"
 msgstr "13xx: Младший байт скорости модуляции"
 
-#: src/engine/sysDef.cpp:1062
+#: src/engine/sysDef.cpp:1075
 msgid "14xx: Set modulator position"
 msgstr "14xx: Положение модулятора"
 
-#: src/engine/sysDef.cpp:1063
+#: src/engine/sysDef.cpp:1076
 msgid "15xx: Set modulator table to waveform"
 msgstr "15xx: Назначить таблицу модуляции волны"
 
-#: src/engine/sysDef.cpp:1068
+#: src/engine/sysDef.cpp:1081
 msgid "MMC5"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1069
+#: src/engine/sysDef.cpp:1082
 msgid ""
 "an expansion chip for the Famicom, featuring a little-known PCM channel."
 msgstr "чип расширения для Famicom, имеющий малоизвестный канал ИКМ-сэмплов."
 
-#: src/engine/sysDef.cpp:1081 src/gui/settings.cpp:4113
+#: src/engine/sysDef.cpp:1094 src/gui/settings.cpp:4113
 msgid "Namco 163"
 msgstr "Namco 163"
 
-#: src/engine/sysDef.cpp:1082
+#: src/engine/sysDef.cpp:1095
 msgid "an expansion chip for the Famicom, with full wavetable."
 msgstr "чип расширения для Famicom, полностью на волновых таблицах."
 
-#: src/engine/sysDef.cpp:1089
+#: src/engine/sysDef.cpp:1102
 msgid "18xx: Change channel limits (0 to 7, x + 1)"
 msgstr "18xx: Изменить лимит каналов (0-7, x + 1)"
 
-#: src/engine/sysDef.cpp:1090
+#: src/engine/sysDef.cpp:1103
 msgid "20xx: Load a waveform into memory"
 msgstr "20xx: Загрузить волну в память"
 
-#: src/engine/sysDef.cpp:1091
+#: src/engine/sysDef.cpp:1104
 msgid "21xx: Set position for wave load"
 msgstr "21xx: Задать начальное смещение для загрузки волны"
 
-#: src/engine/sysDef.cpp:1094
+#: src/engine/sysDef.cpp:1107
 msgid "10xx: Select waveform"
 msgstr "10xx: Выбрать волну"
 
-#: src/engine/sysDef.cpp:1095
+#: src/engine/sysDef.cpp:1108
 msgid "11xx: Set waveform position in RAM"
 msgstr "11xx: Задать положение волны в ОЗУ"
 
-#: src/engine/sysDef.cpp:1096
+#: src/engine/sysDef.cpp:1109
 msgid "12xx: Set waveform length in RAM (04 to FC in steps of 4)"
 msgstr "12xx: Задать длину волны в ОЗУ (04-FC с шагом 4)"
 
-#: src/engine/sysDef.cpp:1097
+#: src/engine/sysDef.cpp:1110
 msgid "15xx: Set waveform load position"
 msgstr "15xx: Задать положение для загрузки волны"
 
-#: src/engine/sysDef.cpp:1098
+#: src/engine/sysDef.cpp:1111
 msgid "16xx: Set waveform load length (04 to FC in steps of 4)"
 msgstr "16xx: Задать длину загружаемой волны (04-FC с шагом 4)"
 
-#: src/engine/sysDef.cpp:1103
+#: src/engine/sysDef.cpp:1116
 msgid "Yamaha YM2203 (OPN)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1104
+#: src/engine/sysDef.cpp:1117
 msgid ""
 "cost-reduced version of the OPM with a different register layout and no "
 "stereo...\n"
@@ -1866,11 +1906,11 @@ msgstr ""
 "стерео...\n"
 "...но у неё внутри AY-3-8910! (на самом деле YM2149)"
 
-#: src/engine/sysDef.cpp:1115
+#: src/engine/sysDef.cpp:1128
 msgid "Yamaha YM2203 (OPN) Extended Channel 3"
 msgstr "Yamaha YM2203 (OPN) расширенный 3-ий канал"
 
-#: src/engine/sysDef.cpp:1116
+#: src/engine/sysDef.cpp:1129
 msgid ""
 "cost-reduced version of the OPM with a different register layout and no "
 "stereo...\n"
@@ -1884,43 +1924,43 @@ msgstr ""
 "Это версия в режиме расширенного канала, который превращает третий FM-канал "
 "в четыре оператора с независимыми нотами/частотами."
 
-#: src/engine/sysDef.cpp:1117 src/engine/sysDef.cpp:1130
-#: src/engine/sysDef.cpp:1155 src/engine/sysDef.cpp:1168
-#: src/engine/sysDef.cpp:1378 src/engine/sysDef.cpp:1391
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
-#: src/engine/sysDef.cpp:1869
+#: src/engine/sysDef.cpp:1130 src/engine/sysDef.cpp:1143
+#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1181
+#: src/engine/sysDef.cpp:1391 src/engine/sysDef.cpp:1404
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
+#: src/engine/sysDef.cpp:1882
 msgid "FM 3 OP1"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1117 src/engine/sysDef.cpp:1130
-#: src/engine/sysDef.cpp:1155 src/engine/sysDef.cpp:1168
-#: src/engine/sysDef.cpp:1378 src/engine/sysDef.cpp:1391
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
-#: src/engine/sysDef.cpp:1869
+#: src/engine/sysDef.cpp:1130 src/engine/sysDef.cpp:1143
+#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1181
+#: src/engine/sysDef.cpp:1391 src/engine/sysDef.cpp:1404
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
+#: src/engine/sysDef.cpp:1882
 msgid "FM 3 OP2"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1117 src/engine/sysDef.cpp:1130
-#: src/engine/sysDef.cpp:1155 src/engine/sysDef.cpp:1168
-#: src/engine/sysDef.cpp:1378 src/engine/sysDef.cpp:1391
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
-#: src/engine/sysDef.cpp:1869
+#: src/engine/sysDef.cpp:1130 src/engine/sysDef.cpp:1143
+#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1181
+#: src/engine/sysDef.cpp:1391 src/engine/sysDef.cpp:1404
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
+#: src/engine/sysDef.cpp:1882
 msgid "FM 3 OP3"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1117 src/engine/sysDef.cpp:1130
-#: src/engine/sysDef.cpp:1155 src/engine/sysDef.cpp:1168
-#: src/engine/sysDef.cpp:1378 src/engine/sysDef.cpp:1391
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
-#: src/engine/sysDef.cpp:1869
+#: src/engine/sysDef.cpp:1130 src/engine/sysDef.cpp:1143
+#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1181
+#: src/engine/sysDef.cpp:1391 src/engine/sysDef.cpp:1404
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
+#: src/engine/sysDef.cpp:1882
 msgid "FM 3 OP4"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1128
+#: src/engine/sysDef.cpp:1141
 msgid "Yamaha YM2203 (OPN) CSM"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1129
+#: src/engine/sysDef.cpp:1142
 msgid ""
 "cost-reduced version of the OPM with a different register layout and no "
 "stereo...\n"
@@ -1928,76 +1968,76 @@ msgid ""
 "CSM blah blah"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1130 src/engine/sysDef.cpp:1168
-#: src/engine/sysDef.cpp:1391 src/engine/sysDef.cpp:1476
-#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1869
+#: src/engine/sysDef.cpp:1143 src/engine/sysDef.cpp:1181
+#: src/engine/sysDef.cpp:1404 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1580 src/engine/sysDef.cpp:1882
 msgid "CSM Timer"
 msgstr "CSM таймер"
 
-#: src/engine/sysDef.cpp:1141
+#: src/engine/sysDef.cpp:1154
 msgid "Yamaha YM2608 (OPNA)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1142
+#: src/engine/sysDef.cpp:1155
 msgid ""
 "OPN but twice the FM channels, stereo makes a come-back and has rhythm and "
 "ADPCM channels."
 msgstr ""
 "OPN, но вдвое больше FM-каналов, возвращённое стерео, ритм- и АДИКМ каналы."
 
-#: src/engine/sysDef.cpp:1143 src/engine/sysDef.cpp:1155
-#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1156 src/engine/sysDef.cpp:1168
+#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1502
 msgid "Kick"
 msgstr "Бас-барабан"
 
-#: src/engine/sysDef.cpp:1143 src/engine/sysDef.cpp:1155
-#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1415
-#: src/engine/sysDef.cpp:1427 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1489 src/engine/sysDef.cpp:1639
-#: src/engine/sysDef.cpp:1701
+#: src/engine/sysDef.cpp:1156 src/engine/sysDef.cpp:1168
+#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1428
+#: src/engine/sysDef.cpp:1440 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1502 src/engine/sysDef.cpp:1652
+#: src/engine/sysDef.cpp:1714
 msgid "Snare"
 msgstr "Рабочий барабан"
 
-#: src/engine/sysDef.cpp:1143 src/engine/sysDef.cpp:1155
-#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1415
-#: src/engine/sysDef.cpp:1427 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1489 src/engine/sysDef.cpp:1639
-#: src/engine/sysDef.cpp:1701
+#: src/engine/sysDef.cpp:1156 src/engine/sysDef.cpp:1168
+#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1428
+#: src/engine/sysDef.cpp:1440 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1502 src/engine/sysDef.cpp:1652
+#: src/engine/sysDef.cpp:1714
 msgid "Top"
 msgstr "Макс."
 
-#: src/engine/sysDef.cpp:1143 src/engine/sysDef.cpp:1155
-#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1415
-#: src/engine/sysDef.cpp:1427 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1489 src/engine/sysDef.cpp:1639
-#: src/engine/sysDef.cpp:1701
+#: src/engine/sysDef.cpp:1156 src/engine/sysDef.cpp:1168
+#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1428
+#: src/engine/sysDef.cpp:1440 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1502 src/engine/sysDef.cpp:1652
+#: src/engine/sysDef.cpp:1714
 msgid "HiHat"
 msgstr "Хай-хэт"
 
-#: src/engine/sysDef.cpp:1143 src/engine/sysDef.cpp:1155
-#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1415
-#: src/engine/sysDef.cpp:1427 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1489 src/engine/sysDef.cpp:1639
-#: src/engine/sysDef.cpp:1701
+#: src/engine/sysDef.cpp:1156 src/engine/sysDef.cpp:1168
+#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1428
+#: src/engine/sysDef.cpp:1440 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1502 src/engine/sysDef.cpp:1652
+#: src/engine/sysDef.cpp:1714
 msgid "Tom"
 msgstr "Там-там"
 
-#: src/engine/sysDef.cpp:1143 src/engine/sysDef.cpp:1155
-#: src/engine/sysDef.cpp:1168
+#: src/engine/sysDef.cpp:1156 src/engine/sysDef.cpp:1168
+#: src/engine/sysDef.cpp:1181
 msgid "Rim"
 msgstr "Римшот"
 
-#: src/engine/sysDef.cpp:1143 src/engine/sysDef.cpp:1155
-#: src/engine/sysDef.cpp:1168 src/engine/sysDef.cpp:1689
-#: src/engine/sysDef.cpp:1701
+#: src/engine/sysDef.cpp:1156 src/engine/sysDef.cpp:1168
+#: src/engine/sysDef.cpp:1181 src/engine/sysDef.cpp:1702
+#: src/engine/sysDef.cpp:1714
 msgid "ADPCM"
 msgstr "АДИКМ"
 
-#: src/engine/sysDef.cpp:1153
+#: src/engine/sysDef.cpp:1166
 msgid "Yamaha YM2608 (OPNA) Extended Channel 3"
 msgstr "Yamaha YM2608 (OPNA) расширенный 3-ий канал"
 
-#: src/engine/sysDef.cpp:1154
+#: src/engine/sysDef.cpp:1167
 msgid ""
 "OPN but twice the FM channels, stereo makes a come-back and has rhythm and "
 "ADPCM channels.\n"
@@ -2008,22 +2048,22 @@ msgstr ""
 "Это версия в режиме расширенного канала, который превращает третий FM-канал "
 "в четыре оператора с независимыми нотами/частотами."
 
-#: src/engine/sysDef.cpp:1166
+#: src/engine/sysDef.cpp:1179
 msgid "Yamaha YM2608 (OPNA) CSM"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1167
+#: src/engine/sysDef.cpp:1180
 msgid ""
 "OPN but twice the FM channels, stereo makes a come-back and has rhythm and "
 "ADPCM channels.\n"
 "CSM blah blah"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1179
+#: src/engine/sysDef.cpp:1192
 msgid "Yamaha YM3526 (OPL)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1180
+#: src/engine/sysDef.cpp:1193
 msgid ""
 "OPN, but what if you only had two operators, no stereo, no detune and a "
 "lower ADSR parameter range?"
@@ -2031,19 +2071,19 @@ msgstr ""
 "OPN, но что если у него всего два оператора, нет стерео, нет расстройки и "
 "меньший диапазон регулировки параметров ADSR?"
 
-#: src/engine/sysDef.cpp:1191
+#: src/engine/sysDef.cpp:1204
 msgid "Yamaha YM3812 (OPL2)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1192
+#: src/engine/sysDef.cpp:1205
 msgid "OPL, but what if you had more waveforms to choose than the normal sine?"
 msgstr "OPL, но что если у него есть ещё волны, помимо синусоиды?"
 
-#: src/engine/sysDef.cpp:1203
+#: src/engine/sysDef.cpp:1216
 msgid "Yamaha YMF262 (OPL3)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1204
+#: src/engine/sysDef.cpp:1217
 msgid ""
 "OPL2, but what if you had twice the channels, 4-op mode, stereo and even "
 "more waveforms?"
@@ -2051,86 +2091,86 @@ msgstr ""
 "OPL2, но что если у него вдвое больше каналов, 4-оп режим, стерео и ещё "
 "больше волн?"
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "4OP 1"
 msgstr "4ОП 1"
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "4OP 3"
 msgstr "4ОП 3"
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "4OP 5"
 msgstr "4ОП 5"
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "4OP 7"
 msgstr "4ОП 7"
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "4OP 9"
 msgstr "4ОП 9"
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
+#: src/engine/sysDef.cpp:2027
 msgid "FM 10"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "4OP 11"
 msgstr "4ОП 11"
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
+#: src/engine/sysDef.cpp:2027
 msgid "FM 12"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
+#: src/engine/sysDef.cpp:2027
 msgid "FM 13"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
+#: src/engine/sysDef.cpp:2027
 msgid "FM 14"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1439
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1452
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
+#: src/engine/sysDef.cpp:2027
 msgid "FM 15"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:2027
 msgid "FM 16"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:2027
 msgid "FM 17"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1205 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:2027
 msgid "FM 18"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1216 src/gui/settings.cpp:4123
+#: src/engine/sysDef.cpp:1229 src/gui/settings.cpp:4123
 msgid "MultiPCM"
 msgstr "MultiPCM"
 
-#: src/engine/sysDef.cpp:1217
+#: src/engine/sysDef.cpp:1230
 msgid ""
 "how many channels of PCM do you want?\n"
 "MultiPCM: yes"
@@ -2138,92 +2178,92 @@ msgstr ""
 "Сколько каналов ИКМ-сэмплов вам нужно?\n"
 "MultiPCM: да"
 
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2041
 msgid "Channel 17"
 msgstr "Канал 17"
 
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2041
 msgid "Channel 18"
 msgstr "Канал 18"
 
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2041
 msgid "Channel 19"
 msgstr "Канал 19"
 
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2041
 msgid "Channel 20"
 msgstr "Канал 20"
 
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2041
 msgid "Channel 21"
 msgstr "Канал 21"
 
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2041
 msgid "Channel 22"
 msgstr "Канал 22"
 
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2041
 msgid "Channel 23"
 msgstr "Канал 23"
 
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:1988 src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2001 src/engine/sysDef.cpp:2041
 msgid "Channel 24"
 msgstr "Канал 24"
 
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2041
 msgid "Channel 25"
 msgstr "Канал 25"
 
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2041
 msgid "Channel 26"
 msgstr "Канал 26"
 
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2041
 msgid "Channel 27"
 msgstr "Канал 27"
 
-#: src/engine/sysDef.cpp:1218 src/engine/sysDef.cpp:1677
-#: src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1231 src/engine/sysDef.cpp:1690
+#: src/engine/sysDef.cpp:2041
 msgid "Channel 28"
 msgstr "Канал 28"
 
-#: src/engine/sysDef.cpp:1225
+#: src/engine/sysDef.cpp:1238
 msgid "PC Speaker"
 msgstr "PC Speaker (пищалка)"
 
-#: src/engine/sysDef.cpp:1226
+#: src/engine/sysDef.cpp:1239
 msgid "good luck! you get one square and no volume control."
 msgstr "удачи! у вас один канал меандра и нет регулировки громкости."
 
-#: src/engine/sysDef.cpp:1227 src/engine/sysDef.cpp:1236
+#: src/engine/sysDef.cpp:1240 src/engine/sysDef.cpp:1249
 #: src/gui/guiConst.cpp:1447 src/gui/waveEdit.cpp:199
 msgid "Square"
 msgstr "Меандр"
 
-#: src/engine/sysDef.cpp:1234
+#: src/engine/sysDef.cpp:1247
 msgid "Pong"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1235
+#: src/engine/sysDef.cpp:1248
 msgid "please don't use this chip. it was added as a joke."
 msgstr "пожалуйста, не используйте этот чип. он был добавлен в качестве шутки."
 
-#: src/engine/sysDef.cpp:1243 src/gui/settings.cpp:4116
+#: src/engine/sysDef.cpp:1256 src/gui/settings.cpp:4116
 msgid "POKEY"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1244
+#: src/engine/sysDef.cpp:1257
 msgid ""
 "TIA, but better and more flexible.\n"
 "used in the Atari 8-bit family of computers (400/800/XL/XE)."
@@ -2231,67 +2271,67 @@ msgstr ""
 "TIA, но лучше и более гибкий.\n"
 "использовался в семействе 8-битных компьютеров Atari (400/800/XL/XE)."
 
-#: src/engine/sysDef.cpp:1251 src/engine/sysDef.cpp:1722
+#: src/engine/sysDef.cpp:1264 src/engine/sysDef.cpp:1735
 msgid "10xx: Set waveform (0 to 7)"
 msgstr "10xx: Волна (0-7)"
 
-#: src/engine/sysDef.cpp:1252
+#: src/engine/sysDef.cpp:1265
 msgid "11xx: Set AUDCTL"
 msgstr "11xx: Установить AUDCTL"
 
-#: src/engine/sysDef.cpp:1253
+#: src/engine/sysDef.cpp:1266
 msgid "12xx: Toggle two-tone mode"
 msgstr "12xx: Переключить двухголосый режим"
 
-#: src/engine/sysDef.cpp:1258
+#: src/engine/sysDef.cpp:1271
 msgid "Ricoh RF5C68"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1259
+#: src/engine/sysDef.cpp:1272
 msgid ""
 "this is like SNES' sound chip but without interpolation and the rest of nice "
 "bits."
 msgstr ""
 "похоже на звуковой чип SNES, но без интерполяции и других приятных вещей."
 
-#: src/engine/sysDef.cpp:1268 src/gui/settings.cpp:4118
+#: src/engine/sysDef.cpp:1281 src/gui/settings.cpp:4118
 msgid "WonderSwan"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1269
+#: src/engine/sysDef.cpp:1282
 msgid "developed by the makers of the Game Boy and the Virtual Boy..."
 msgstr "от создателей Game Boy и Virtual Boy..."
 
-#: src/engine/sysDef.cpp:1270
+#: src/engine/sysDef.cpp:1283
 msgid "Wave/PCM"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1270
+#: src/engine/sysDef.cpp:1283
 msgid "Wave/Sweep"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1270
+#: src/engine/sysDef.cpp:1283
 msgid "Wave/Noise"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1277
+#: src/engine/sysDef.cpp:1290
 msgid "11xx: Setup noise mode (0: disabled; 1-8: enabled/tap)"
 msgstr "11xx: Настроить режим шума (0: выкл.; 1-8: вкл./отвод)"
 
-#: src/engine/sysDef.cpp:1278
+#: src/engine/sysDef.cpp:1291
 msgid "12xx: Setup sweep period (0: disabled; 1-20: enabled/period)"
 msgstr ""
 "12xx: Настроить период аппаратного портаменто (0: выкл.; 1-20: вкл./период)"
 
-#: src/engine/sysDef.cpp:1279
+#: src/engine/sysDef.cpp:1292
 msgid "13xx: Set sweep amount"
 msgstr "13xx: Скорость аппаратного портаменто"
 
-#: src/engine/sysDef.cpp:1285
+#: src/engine/sysDef.cpp:1298
 msgid "Yamaha YM2414 (OPZ)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1286
+#: src/engine/sysDef.cpp:1299
 msgid ""
 "like OPM, but with more waveforms, fixed frequency mode and totally... "
 "undocumented.\n"
@@ -2301,27 +2341,27 @@ msgstr ""
 "полным... отсутствием сведений о его устройстве.\n"
 "использовался в Yamaha TX81Z и некоторых других синтезаторах."
 
-#: src/engine/sysDef.cpp:1293
+#: src/engine/sysDef.cpp:1306
 msgid "2Fxx: Toggle hard envelope reset on new notes"
 msgstr "2Fxx: Переключить жёсткий перезапуск огибающей на новой ноте"
 
-#: src/engine/sysDef.cpp:1299 src/gui/settings.cpp:4141
+#: src/engine/sysDef.cpp:1312 src/gui/settings.cpp:4141
 msgid "Pokémon Mini"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1300
+#: src/engine/sysDef.cpp:1313
 msgid "this one is like PC Speaker but has duty cycles."
 msgstr "Похож на PC Speaker, но имеет настройку скважности."
 
-#: src/engine/sysDef.cpp:1301 src/gui/settings.cpp:4164 src/gui/waveEdit.cpp:33
+#: src/engine/sysDef.cpp:1314 src/gui/settings.cpp:4164 src/gui/waveEdit.cpp:33
 msgid "Pulse"
 msgstr "Меандр"
 
-#: src/engine/sysDef.cpp:1308
+#: src/engine/sysDef.cpp:1321
 msgid "SegaPCM"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1309
+#: src/engine/sysDef.cpp:1322
 msgid ""
 "used in some Sega arcade boards (like OutRun), and usually paired with a "
 "YM2151."
@@ -2329,22 +2369,22 @@ msgstr ""
 "использовался в некоторых аркадных автоматах Sega (например, OutRun), и "
 "обычно использовался в связке с YM2151."
 
-#: src/engine/sysDef.cpp:1320 src/gui/settings.cpp:4112
+#: src/engine/sysDef.cpp:1333 src/gui/settings.cpp:4112
 msgid "Virtual Boy"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1321
+#: src/engine/sysDef.cpp:1334
 msgid ""
 "a console which failed to sell well due to its headache-inducing features."
 msgstr ""
 "консоль, продажи которой не удались из-за того, что её особенности вызывали "
 "головную боль у игроков."
 
-#: src/engine/sysDef.cpp:1329
+#: src/engine/sysDef.cpp:1342
 msgid "11xx: Set noise length (0 to 7)"
 msgstr "11xx: Длина шума (0-7)"
 
-#: src/engine/sysDef.cpp:1330
+#: src/engine/sysDef.cpp:1343
 msgid ""
 "12xy: Setup envelope (x: enabled/loop (1: enable, 3: enable+loop); y: speed/"
 "direction (0-7: down, 8-F: up))"
@@ -2352,13 +2392,13 @@ msgstr ""
 "12xy: Настройка огибающей (x: вкл./цикл (1: вкл., 3: вкл.+цикл); y: скорость/"
 "направление (0-7: вниз, 8-F: вверх))"
 
-#: src/engine/sysDef.cpp:1331
+#: src/engine/sysDef.cpp:1344
 msgid "13xy: Setup sweep (x: speed; y: shift; channel 5 only)"
 msgstr ""
 "13xy: Настройка аппаратного портаменто (x: скорость; y: количество; только "
 "для 5-го канала)"
 
-#: src/engine/sysDef.cpp:1332
+#: src/engine/sysDef.cpp:1345
 msgid ""
 "14xy: Setup modulation (x: enabled/loop (1: enable, 3: enable+loop); y: "
 "speed; channel 5 only)"
@@ -2366,27 +2406,27 @@ msgstr ""
 "14xy: Настроить модуляцию (x: вкл./цикл (1: вкл., 3: вкл.+цикл); y: "
 "скорость; только для 5-го канала)"
 
-#: src/engine/sysDef.cpp:1333
+#: src/engine/sysDef.cpp:1346
 msgid "15xx: Set modulation waveform (x: wavetable; channel 5 only)"
 msgstr ""
 "15xx: Настройка волны модулятора (x: волновая таблица; только для 5-го "
 "канала)"
 
-#: src/engine/sysDef.cpp:1338
+#: src/engine/sysDef.cpp:1351
 msgid "Konami VRC7"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1339
+#: src/engine/sysDef.cpp:1352
 msgid ""
 "like OPLL, but even more cost reductions applied. three FM channels went "
 "missing, and drums mode did as well..."
 msgstr ""
 
-#: src/engine/sysDef.cpp:1350
+#: src/engine/sysDef.cpp:1363
 msgid "Yamaha YM2610B (OPNB2)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1351
+#: src/engine/sysDef.cpp:1364
 msgid ""
 "so Taito asked Yamaha if they could get the two missing FM channels back, "
 "and Yamaha gladly provided them with this chip."
@@ -2394,18 +2434,18 @@ msgstr ""
 "Taito попросили Yamaha вернуть два отсутствующих FM-канала, и Yamaha с "
 "радостью предоставила им этот чип."
 
-#: src/engine/sysDef.cpp:1352 src/engine/sysDef.cpp:1451
-#: src/engine/sysDef.cpp:1463 src/engine/sysDef.cpp:1476
-#: src/engine/sysDef.cpp:1554 src/engine/sysDef.cpp:1567
+#: src/engine/sysDef.cpp:1365 src/engine/sysDef.cpp:1464
+#: src/engine/sysDef.cpp:1476 src/engine/sysDef.cpp:1489
+#: src/engine/sysDef.cpp:1567 src/engine/sysDef.cpp:1580
 #: src/gui/settings.cpp:4133
 msgid "ADPCM-B"
 msgstr "АДИКМ-B"
 
-#: src/engine/sysDef.cpp:1362
+#: src/engine/sysDef.cpp:1375
 msgid "ZX Spectrum Beeper"
 msgstr "ZX Spectrum пищалка"
 
-#: src/engine/sysDef.cpp:1363
+#: src/engine/sysDef.cpp:1376
 msgid ""
 "the ZX Spectrum only had a basic beeper capable of...\n"
 "...a bunch of thin pulses and tons of other interesting stuff!\n"
@@ -2416,20 +2456,20 @@ msgstr ""
 "вещей!\n"
 "Furnace предоставляет систему с \"тонкими\" прямоугольными волнами."
 
-#: src/engine/sysDef.cpp:1370 src/engine/sysDef.cpp:1958
-#: src/engine/sysDef.cpp:2196
+#: src/engine/sysDef.cpp:1383 src/engine/sysDef.cpp:1971
+#: src/engine/sysDef.cpp:2201
 msgid "12xx: Set pulse width"
 msgstr "12xx: Скважность"
 
-#: src/engine/sysDef.cpp:1371
+#: src/engine/sysDef.cpp:1384
 msgid "17xx: Trigger overlay drum"
 msgstr "17xx: Запуск перекрывающего ударного инструмента"
 
-#: src/engine/sysDef.cpp:1376
+#: src/engine/sysDef.cpp:1389
 msgid "Yamaha YM2612 (OPN2) Extended Channel 3"
 msgstr "Yamaha YM2612 (OPN2) расширенный 3-ий канал"
 
-#: src/engine/sysDef.cpp:1377
+#: src/engine/sysDef.cpp:1390
 msgid ""
 "this chip is mostly known for being in the Sega Genesis (but it also was on "
 "the FM Towns computer).\n"
@@ -2441,11 +2481,11 @@ msgstr ""
 "Это версия в режиме расширенного канала, который превращает третий FM-канал "
 "в четыре оператора с независимыми нотами/частотами."
 
-#: src/engine/sysDef.cpp:1389
+#: src/engine/sysDef.cpp:1402
 msgid "Yamaha YM2612 (OPN2) CSM"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1390
+#: src/engine/sysDef.cpp:1403
 msgid ""
 "this chip is mostly known for being in the Sega Genesis (but it also was on "
 "the FM Towns computer).\n"
@@ -2456,11 +2496,11 @@ msgstr ""
 "У этой версии есть контроль режима CSM для специальных эффектов на третьем "
 "канале."
 
-#: src/engine/sysDef.cpp:1402 src/gui/settings.cpp:4114
+#: src/engine/sysDef.cpp:1415 src/gui/settings.cpp:4114
 msgid "Konami SCC"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1403
+#: src/engine/sysDef.cpp:1416
 msgid ""
 "a wavetable chip made by Konami for use with the MSX.\n"
 "the last channel shares its wavetable with the previous one though."
@@ -2468,44 +2508,44 @@ msgstr ""
 "чип с волновыми таблицами, сделанный Konami для использования с MSX.\n"
 "правда, последний и предпоследний каналы используют одну и ту же таблицу."
 
-#: src/engine/sysDef.cpp:1413
+#: src/engine/sysDef.cpp:1426
 msgid "Yamaha YM3526 (OPL) with drums"
 msgstr "Yamaha YM3526 (OPL) с ударными"
 
-#: src/engine/sysDef.cpp:1414
+#: src/engine/sysDef.cpp:1427
 msgid "the OPL chip but with drums mode enabled."
 msgstr "чип OPL, но с включённым режимом ударных."
 
-#: src/engine/sysDef.cpp:1415 src/engine/sysDef.cpp:1427
-#: src/engine/sysDef.cpp:1701
+#: src/engine/sysDef.cpp:1428 src/engine/sysDef.cpp:1440
+#: src/engine/sysDef.cpp:1714
 msgid "Kick/FM 7"
 msgstr "Бочка/FM7"
 
-#: src/engine/sysDef.cpp:1425
+#: src/engine/sysDef.cpp:1438
 msgid "Yamaha YM3812 (OPL2) with drums"
 msgstr "Yamaha YM3812 (OPL2) с ударными"
 
-#: src/engine/sysDef.cpp:1426
+#: src/engine/sysDef.cpp:1439
 msgid "the OPL2 chip but with drums mode enabled."
 msgstr "чип OPL2, но с включённым режимом ударных."
 
-#: src/engine/sysDef.cpp:1437
+#: src/engine/sysDef.cpp:1450
 msgid "Yamaha YMF262 (OPL3) with drums"
 msgstr "Yamaha YMF262 (OPL3) с ударными"
 
-#: src/engine/sysDef.cpp:1438
+#: src/engine/sysDef.cpp:1451
 msgid "the OPL3 chip but with drums mode enabled."
 msgstr "чип OPL3, но с включённым режимом ударных."
 
-#: src/engine/sysDef.cpp:1439 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1452 src/engine/sysDef.cpp:1652
 msgid "Kick/FM 16"
 msgstr "Бочка/FM16"
 
-#: src/engine/sysDef.cpp:1449
+#: src/engine/sysDef.cpp:1462
 msgid "Yamaha YM2610 (OPNB)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1450
+#: src/engine/sysDef.cpp:1463
 msgid ""
 "this chip was used in SNK's Neo Geo arcade board and video game console.\n"
 "it's like OPNA but the rhythm channels are ADPCM channels and two FM "
@@ -2516,11 +2556,11 @@ msgstr ""
 "похож на OPNA, но ритм-каналы теперь стали АДИКМ-каналами, и пропали два FM-"
 "канала."
 
-#: src/engine/sysDef.cpp:1461
+#: src/engine/sysDef.cpp:1474
 msgid "Yamaha YM2610 (OPNB) Extended Channel 2"
 msgstr "Yamaha YM2610 (OPNB) расширенный 2-ой канал"
 
-#: src/engine/sysDef.cpp:1462
+#: src/engine/sysDef.cpp:1475
 msgid ""
 "this chip was used in SNK's Neo Geo arcade board and video game console.\n"
 "it's like OPNA but the rhythm channels are ADPCM channels and two FM "
@@ -2535,11 +2575,11 @@ msgstr ""
 "Это версия в режиме расширенного канала, который превращает второй FM-канал "
 "в четыре оператора с независимыми нотами/частотами."
 
-#: src/engine/sysDef.cpp:1474
+#: src/engine/sysDef.cpp:1487
 msgid "Yamaha YM2610 (OPNB) CSM"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1475
+#: src/engine/sysDef.cpp:1488
 msgid ""
 "this chip was used in SNK's Neo Geo arcade board and video game console.\n"
 "it's like OPNA but the rhythm channels are ADPCM channels and two FM "
@@ -2547,49 +2587,49 @@ msgid ""
 "this one includes CSM mode control for special effects on Channel 2."
 msgstr ""
 
-#: src/engine/sysDef.cpp:1487
+#: src/engine/sysDef.cpp:1500
 msgid "Yamaha YM2413 (OPLL) with drums"
 msgstr "Yamaha YM2413 (OPLL) с ударными"
 
-#: src/engine/sysDef.cpp:1488
+#: src/engine/sysDef.cpp:1501
 msgid "the OPLL chips but with drums mode turned on."
 msgstr ""
 
-#: src/engine/sysDef.cpp:1499
+#: src/engine/sysDef.cpp:1512
 msgid "3xxx: Load LFSR (0 to FFF)"
 msgstr "3xxx: Загрузить в РСЛОС (0-FFF)"
 
-#: src/engine/sysDef.cpp:1505
+#: src/engine/sysDef.cpp:1518
 msgid "Atari Lynx"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1506
+#: src/engine/sysDef.cpp:1519
 msgid ""
 "a portable console made by Atari. it has all of Atari's trademark waveforms."
 msgstr ""
 "портативная игровая консоль от Atari. у неё есть все фирменные волны Atari."
 
-#: src/engine/sysDef.cpp:1517
+#: src/engine/sysDef.cpp:1530
 msgid "10xx: Set echo feedback level (00 to FF)"
 msgstr "10xx: Уровень обратной связи эхо (00-FF)"
 
-#: src/engine/sysDef.cpp:1518
+#: src/engine/sysDef.cpp:1531
 msgid "11xx: Set channel echo level (00 to FF)"
 msgstr "11xx: Уровень эхо на канале (00-FF)"
 
-#: src/engine/sysDef.cpp:1519
+#: src/engine/sysDef.cpp:1532
 msgid "12xx: Toggle QSound algorithm (0: disabled; 1: enabled)"
 msgstr "12xx: Переключить алгоритм QSound (0: выкл.; 1: вкл.)"
 
-#: src/engine/sysDef.cpp:1521
+#: src/engine/sysDef.cpp:1534
 msgid "3xxx: Set echo delay buffer length (000 to AA5)"
 msgstr "3xxx: Длина буфера задержки эхо (000-AA5)"
 
-#: src/engine/sysDef.cpp:1527
+#: src/engine/sysDef.cpp:1540
 msgid "Capcom QSound"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1528
+#: src/engine/sysDef.cpp:1541
 msgid ""
 "used in some of Capcom's arcade boards. surround-like sampled sound with "
 "echo."
@@ -2597,122 +2637,122 @@ msgstr ""
 "использовался в некоторых аркадных автоматах Capcom. сэмпилрованный звук с "
 "эхо и эффектом окружающего звучания."
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639 src/engine/sysDef.cpp:1788
-#: src/engine/sysDef.cpp:2082
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652 src/engine/sysDef.cpp:1801
+#: src/engine/sysDef.cpp:2095
 msgid "PCM 1"
 msgstr "ИКМ 1"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639 src/engine/sysDef.cpp:1788
-#: src/engine/sysDef.cpp:1857 src/engine/sysDef.cpp:1869
-#: src/engine/sysDef.cpp:2082
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652 src/engine/sysDef.cpp:1801
+#: src/engine/sysDef.cpp:1870 src/engine/sysDef.cpp:1882
+#: src/engine/sysDef.cpp:2095
 msgid "PCM 2"
 msgstr "ИКМ 2"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639 src/engine/sysDef.cpp:1788
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652 src/engine/sysDef.cpp:1801
 msgid "PCM 3"
 msgstr "ИКМ 3"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639 src/engine/sysDef.cpp:1788
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652 src/engine/sysDef.cpp:1801
 msgid "PCM 4"
 msgstr "ИКМ 4"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639 src/engine/sysDef.cpp:1788
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652 src/engine/sysDef.cpp:1801
 msgid "PCM 5"
 msgstr "ИКМ 5"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639 src/engine/sysDef.cpp:1788
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652 src/engine/sysDef.cpp:1801
 msgid "PCM 6"
 msgstr "ИКМ 6"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639 src/engine/sysDef.cpp:1788
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652 src/engine/sysDef.cpp:1801
 msgid "PCM 7"
 msgstr "ИКМ 7"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639 src/engine/sysDef.cpp:1788
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652 src/engine/sysDef.cpp:1801
 msgid "PCM 8"
 msgstr "ИКМ 8"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652
 msgid "PCM 9"
 msgstr "ИКМ 9"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652
 msgid "PCM 10"
 msgstr "ИКМ 10"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652
 msgid "PCM 11"
 msgstr "ИКМ 11"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652
 msgid "PCM 12"
 msgstr "ИКМ 12"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652
 msgid "PCM 13"
 msgstr "ИКМ 13"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652
 msgid "PCM 14"
 msgstr "ИКМ 14"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652
 msgid "PCM 15"
 msgstr "ИКМ 15"
 
-#: src/engine/sysDef.cpp:1529 src/engine/sysDef.cpp:1629
-#: src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1542 src/engine/sysDef.cpp:1642
+#: src/engine/sysDef.cpp:1652
 msgid "PCM 16"
 msgstr "ИКМ 16"
 
-#: src/engine/sysDef.cpp:1529
+#: src/engine/sysDef.cpp:1542
 msgid "ADPCM 1"
 msgstr "АДИКМ 1"
 
-#: src/engine/sysDef.cpp:1529
+#: src/engine/sysDef.cpp:1542
 msgid "ADPCM 2"
 msgstr "АДИКМ 2"
 
-#: src/engine/sysDef.cpp:1529
+#: src/engine/sysDef.cpp:1542
 msgid "ADPCM 3"
 msgstr "АДИКМ 3"
 
-#: src/engine/sysDef.cpp:1538 src/gui/settings.cpp:4120
+#: src/engine/sysDef.cpp:1551 src/gui/settings.cpp:4120
 msgid "VERA"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1539
+#: src/engine/sysDef.cpp:1552
 msgid "the chip used in a computer design created by The 8-Bit Guy."
 msgstr "чип, используемый в модели компьютера, разработанного 8-Bit Guy."
 
-#: src/engine/sysDef.cpp:1546
+#: src/engine/sysDef.cpp:1559
 msgid "20xx: Set waveform"
 msgstr "20xx: Волна"
 
-#: src/engine/sysDef.cpp:1547
+#: src/engine/sysDef.cpp:1560
 msgid "22xx: Set duty cycle (0 to 3F)"
 msgstr "22xx: Скважность (0-3F)"
 
-#: src/engine/sysDef.cpp:1552
+#: src/engine/sysDef.cpp:1565
 msgid "Yamaha YM2610B (OPNB2) Extended Channel 3"
 msgstr "Yamaha YM2610B (OPNB2) расширенный 3-ий канал"
 
-#: src/engine/sysDef.cpp:1553
+#: src/engine/sysDef.cpp:1566
 msgid ""
 "so Taito asked Yamaha if they could get the two missing FM channels back, "
 "and Yamaha gladly provided them with this chip.\n"
@@ -2724,22 +2764,22 @@ msgstr ""
 "Это версия в режиме расширенного канала, который превращает третий FM-канал "
 "в четыре оператора с независимыми нотами/частотами."
 
-#: src/engine/sysDef.cpp:1565
+#: src/engine/sysDef.cpp:1578
 msgid "Yamaha YM2610B (OPNB2) CSM"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1566
+#: src/engine/sysDef.cpp:1579
 msgid ""
 "so Taito asked Yamaha if they could get the two missing FM channels back, "
 "and Yamaha gladly provided them with this chip.\n"
 "CSM blah blah"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1578
+#: src/engine/sysDef.cpp:1591
 msgid "SegaPCM (compatible 5-channel mode)"
 msgstr "SegaPCM (совместимый 5-канальный режим)"
 
-#: src/engine/sysDef.cpp:1579
+#: src/engine/sysDef.cpp:1592
 msgid ""
 "this is the same thing as SegaPCM, but only exposes 5 of the channels for "
 "compatibility with DefleMask."
@@ -2747,11 +2787,11 @@ msgstr ""
 "это то же самое, что и SegaPCM, но доступно всего пять каналов для "
 "совместимости с DefleMask."
 
-#: src/engine/sysDef.cpp:1590
+#: src/engine/sysDef.cpp:1603
 msgid "Seta/Allumer X1-010"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1591
+#: src/engine/sysDef.cpp:1604
 msgid ""
 "a sound chip used in several Seta/Allumer-manufactured arcade boards with "
 "too many channels of wavetable sound, which also are capable of sampled "
@@ -2761,19 +2801,19 @@ msgstr ""
 "имеет слишком много каналов волновых таблиц, способных так же воспроизводить "
 "сэмплы."
 
-#: src/engine/sysDef.cpp:1599
+#: src/engine/sysDef.cpp:1612
 msgid "11xx: Set envelope shape"
 msgstr "11xx: Форма огибающей"
 
-#: src/engine/sysDef.cpp:1600
+#: src/engine/sysDef.cpp:1613
 msgid "12xx: Set sample bank slot (0 to 7)"
 msgstr "12xx: Слот банка сэмплов (0-7)"
 
-#: src/engine/sysDef.cpp:1604
+#: src/engine/sysDef.cpp:1617
 msgid "20xx: Set PCM frequency (1 to FF)"
 msgstr "20xx: Частота ИКМ (1-FF)"
 
-#: src/engine/sysDef.cpp:1605
+#: src/engine/sysDef.cpp:1618
 msgid ""
 "22xx: Set envelope mode (bit 0: enable; bit 1: one-shot; bit 2: split shape "
 "to L/R; bit 3/5: H.invert right/left; bit 4/6: V.invert right/left)"
@@ -2782,15 +2822,15 @@ msgstr ""
 "на лево/право; биты 3/5: Г.инвертир. право/лево; бит 4/6: В.инвертир. право/"
 "лево)"
 
-#: src/engine/sysDef.cpp:1606
+#: src/engine/sysDef.cpp:1619
 msgid "23xx: Set envelope period"
 msgstr "23xx: Период огибающей"
 
-#: src/engine/sysDef.cpp:1614
+#: src/engine/sysDef.cpp:1627
 msgid "Konami Bubble System WSG"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1615
+#: src/engine/sysDef.cpp:1628
 msgid ""
 "this is the wavetable part of the Bubble System, which also had two "
 "AY-3-8910s."
@@ -2798,141 +2838,141 @@ msgstr ""
 "это таблично-волновая часть Bubble System, которая так же имела два "
 "AY-3-8910."
 
-#: src/engine/sysDef.cpp:1627
+#: src/engine/sysDef.cpp:1640
 msgid "Yamaha YMF278B (OPL4)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1628
+#: src/engine/sysDef.cpp:1641
 msgid "like OPL3, but this time it also has a 24-channel version of MultiPCM."
 msgstr "как OPL3, но на этот раз также имеется 24-канальная версия MultiPCM."
 
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "PCM 17"
 msgstr "ИКМ 17"
 
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "PCM 18"
 msgstr "ИКМ 18"
 
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "PCM 19"
 msgstr "ИКМ 19"
 
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "PCM 20"
 msgstr "ИКМ 20"
 
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "PCM 21"
 msgstr "ИКМ 21"
 
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "PCM 22"
 msgstr "ИКМ 22"
 
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "PCM 23"
 msgstr "ИКМ 23"
 
-#: src/engine/sysDef.cpp:1629 src/engine/sysDef.cpp:1639
+#: src/engine/sysDef.cpp:1642 src/engine/sysDef.cpp:1652
 msgid "PCM 24"
 msgstr "ИКМ 24"
 
-#: src/engine/sysDef.cpp:1637
+#: src/engine/sysDef.cpp:1650
 msgid "Yamaha YMF278B (OPL4) with drums"
 msgstr "Yamaha YMF278B (OPL4) с ударными"
 
-#: src/engine/sysDef.cpp:1638
+#: src/engine/sysDef.cpp:1651
 msgid "the OPL4 but with drums mode turned on."
 msgstr "OPL4 с включёным режимом ударных."
 
-#: src/engine/sysDef.cpp:1646
+#: src/engine/sysDef.cpp:1659
 msgid "11xx: Set filter mode (00 to 03)"
 msgstr "11xx: Режим фильтра (00-03)"
 
-#: src/engine/sysDef.cpp:1647
+#: src/engine/sysDef.cpp:1660
 msgid "14xx: Set filter coefficient K1 low byte (00 to FF)"
 msgstr "14xx: Младший байт коэффициента фильтра K1 (00-FF)"
 
-#: src/engine/sysDef.cpp:1648
+#: src/engine/sysDef.cpp:1661
 msgid "15xx: Set filter coefficient K1 high byte (00 to FF)"
 msgstr "15xx: Старыший байт коэффициента фильтра K1 (00-FF)"
 
-#: src/engine/sysDef.cpp:1649
+#: src/engine/sysDef.cpp:1662
 msgid "16xx: Set filter coefficient K2 low byte (00 to FF)"
 msgstr "16xx: Младший байт коэффициента фильтра K2 (00-FF)"
 
-#: src/engine/sysDef.cpp:1650
+#: src/engine/sysDef.cpp:1663
 msgid "17xx: Set filter coefficient K2 high byte (00 to FF)"
 msgstr "17xx: Старыший байт коэффициента фильтра K2 (00-FF)"
 
-#: src/engine/sysDef.cpp:1651
+#: src/engine/sysDef.cpp:1664
 msgid "18xx: Set filter coefficient K1 slide up (00 to FF)"
 msgstr "18xx: Нарастание коэффициента фильтра K1 (00-FF)"
 
-#: src/engine/sysDef.cpp:1652
+#: src/engine/sysDef.cpp:1665
 msgid "19xx: Set filter coefficient K1 slide down (00 to FF)"
 msgstr "19xx: Уменьшение коэффициента фильтра K1 (00-FF)"
 
-#: src/engine/sysDef.cpp:1653
+#: src/engine/sysDef.cpp:1666
 msgid "1Axx: Set filter coefficient K2 slide up (00 to FF)"
 msgstr "1Axx: Нарастание коэффициента фильтра K2 (00-FF)"
 
-#: src/engine/sysDef.cpp:1654
+#: src/engine/sysDef.cpp:1667
 msgid "1Bxx: Set filter coefficient K2 slide down (00 to FF)"
 msgstr "1Bxx: Уменьшение коэффициента фильтра K2 (00 to FF)"
 
-#: src/engine/sysDef.cpp:1655
+#: src/engine/sysDef.cpp:1668
 msgid "22xx: Set envelope left volume ramp (signed) (00 to FF)"
 msgstr "22xx: Нарастание огибающей громкости левого канала (знаковое) (00-FF)"
 
-#: src/engine/sysDef.cpp:1656
+#: src/engine/sysDef.cpp:1669
 msgid "23xx: Set envelope right volume ramp (signed) (00 to FF)"
 msgstr "23xx: Нарастание огибающей громкости правого канала (знаковое) (00-FF)"
 
-#: src/engine/sysDef.cpp:1657
+#: src/engine/sysDef.cpp:1670
 msgid "24xx: Set envelope filter coefficient k1 ramp (signed) (00 to FF)"
 msgstr "24xx: Нарастание огибающей коэффициента фильтра K1 (знаковое) (00-FF)"
 
-#: src/engine/sysDef.cpp:1658
+#: src/engine/sysDef.cpp:1671
 msgid ""
 "25xx: Set envelope filter coefficient k1 ramp (signed, slower) (00 to FF)"
 msgstr ""
 "25xx: Нарастание огибающей коэффициента фильтра K1 (знаковое, медленнее) (00-"
 "FF)"
 
-#: src/engine/sysDef.cpp:1659
+#: src/engine/sysDef.cpp:1672
 msgid "26xx: Set envelope filter coefficient k2 ramp (signed) (00 to FF)"
 msgstr "26xx: Нарастание огибающей коэффициента фильтра K2 (знаковое) (00-FF)"
 
-#: src/engine/sysDef.cpp:1660
+#: src/engine/sysDef.cpp:1673
 msgid ""
 "27xx: Set envelope filter coefficient k2 ramp (signed, slower) (00 to FF)"
 msgstr ""
 "27xx: 25xx: Нарастание огибающей коэффициента фильтра K2 (знаковое, "
 "медленнее) (00-FF)"
 
-#: src/engine/sysDef.cpp:1664
+#: src/engine/sysDef.cpp:1677
 msgid "120x: Set pause (bit 0)"
 msgstr "120x: Пауза (бит 0)"
 
-#: src/engine/sysDef.cpp:1666
+#: src/engine/sysDef.cpp:1679
 msgid "2xxx: Set envelope count (000 to 1FF)"
 msgstr "2xxx: Отсчёт огибающей (000-1FF)"
 
-#: src/engine/sysDef.cpp:1667
+#: src/engine/sysDef.cpp:1680
 msgid "3xxx: Set filter coefficient K1 (000 to FFF)"
 msgstr "3xxx: Коэффициент фильтра K1 (000-FFF)"
 
-#: src/engine/sysDef.cpp:1668
+#: src/engine/sysDef.cpp:1681
 msgid "4xxx: Set filter coefficient K2 (000 to FFF)"
 msgstr "4xxx: Коэффициент фильтра K2 (000-FFF)"
 
-#: src/engine/sysDef.cpp:1675
+#: src/engine/sysDef.cpp:1688
 msgid "Ensoniq ES5506"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1676
+#: src/engine/sysDef.cpp:1689
 msgid ""
 "a sample chip made by Ensoniq, which is the basis for the GF1 chip found in "
 "Gravis' Ultrasound cards."
@@ -2940,58 +2980,58 @@ msgstr ""
 "сэмплерный чип от Ensoniq, на основе которго была сделан чип GF1, "
 "применявшийся в звуковых картах Gravis Ultrasound."
 
-#: src/engine/sysDef.cpp:1677 src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1690 src/engine/sysDef.cpp:2041
 msgid "Channel 29"
 msgstr "Канал 29"
 
-#: src/engine/sysDef.cpp:1677 src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1690 src/engine/sysDef.cpp:2041
 msgid "Channel 30"
 msgstr "Канал 30"
 
-#: src/engine/sysDef.cpp:1677 src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1690 src/engine/sysDef.cpp:2041
 msgid "Channel 31"
 msgstr "Канал 31"
 
-#: src/engine/sysDef.cpp:1677 src/engine/sysDef.cpp:2028
+#: src/engine/sysDef.cpp:1690 src/engine/sysDef.cpp:2041
 msgid "Channel 32"
 msgstr "Канал 32"
 
-#: src/engine/sysDef.cpp:1687
+#: src/engine/sysDef.cpp:1700
 msgid "Yamaha Y8950"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1688
+#: src/engine/sysDef.cpp:1701
 msgid "like OPL but with an ADPCM channel."
 msgstr "как OPL, но с каналом АДИКМ-сэмплов."
 
-#: src/engine/sysDef.cpp:1699
+#: src/engine/sysDef.cpp:1712
 msgid "Yamaha Y8950 with drums"
 msgstr "Yamaha Y8950 с ударными"
 
-#: src/engine/sysDef.cpp:1700
+#: src/engine/sysDef.cpp:1713
 msgid "the Y8950 chip, in drums mode."
 msgstr "Чип Y8950 в режиме ударных."
 
-#: src/engine/sysDef.cpp:1711
+#: src/engine/sysDef.cpp:1724
 msgid "Konami SCC+"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1712
+#: src/engine/sysDef.cpp:1725
 msgid ""
 "this is a variant of Konami's SCC chip with the last channel's wavetable "
 "being independent."
 msgstr ""
 "вариант чипа Konami SCC с независимой волновой таблицей последнего канала."
 
-#: src/engine/sysDef.cpp:1723
+#: src/engine/sysDef.cpp:1736
 msgid "12xx: Set pulse width (0 to 7F)"
 msgstr "12xx: Скважность (0-7F)"
 
-#: src/engine/sysDef.cpp:1724
+#: src/engine/sysDef.cpp:1737
 msgid "13xx: Set resonance (0 to FF)"
 msgstr "13xx: Резонанс (0-FF)"
 
-#: src/engine/sysDef.cpp:1725
+#: src/engine/sysDef.cpp:1738
 msgid ""
 "14xx: Set filter mode (bit 0: ring mod; bit 1: low pass; bit 2: high pass; "
 "bit 3: band pass)"
@@ -2999,57 +3039,57 @@ msgstr ""
 "14xx: Режим фильтра (бит 0: кольцевая модуляция; бит 1: ФНЧ; бит 2: ФВЧ; бит "
 "3: ППФ)"
 
-#: src/engine/sysDef.cpp:1726
+#: src/engine/sysDef.cpp:1739
 msgid "15xx: Set frequency sweep period low byte"
 msgstr "15xx: Младший байт аппаратного портаменто"
 
-#: src/engine/sysDef.cpp:1727
+#: src/engine/sysDef.cpp:1740
 msgid "16xx: Set frequency sweep period high byte"
 msgstr "16xx: Старший байт аппаратного портаменто"
 
-#: src/engine/sysDef.cpp:1728
+#: src/engine/sysDef.cpp:1741
 msgid "17xx: Set volume sweep period low byte"
 msgstr "17xx: Младший байт аппаратного изменения громкости"
 
-#: src/engine/sysDef.cpp:1729
+#: src/engine/sysDef.cpp:1742
 msgid "18xx: Set volume sweep period high byte"
 msgstr "18xx: Старший байт аппаратного изменения громкости"
 
-#: src/engine/sysDef.cpp:1730
+#: src/engine/sysDef.cpp:1743
 msgid "19xx: Set cutoff sweep period low byte"
 msgstr "19xx: Младший байт аппаратного изменения частоты среза"
 
-#: src/engine/sysDef.cpp:1731
+#: src/engine/sysDef.cpp:1744
 msgid "1Axx: Set cutoff sweep period high byte"
 msgstr "1Axx: Старший байт аппаратного изменения частоты среза"
 
-#: src/engine/sysDef.cpp:1732
+#: src/engine/sysDef.cpp:1745
 msgid "1Bxx: Set frequency sweep boundary"
 msgstr "1Bxx: Граница аппаратного портаменто"
 
-#: src/engine/sysDef.cpp:1733
+#: src/engine/sysDef.cpp:1746
 msgid "1Cxx: Set volume sweep boundary"
 msgstr "1Cxx: Граница аппаратного изменения громкости"
 
-#: src/engine/sysDef.cpp:1734
+#: src/engine/sysDef.cpp:1747
 msgid "1Dxx: Set cutoff sweep boundary"
 msgstr "1Dxx: Граница аппаратного изменения частоты среза"
 
-#: src/engine/sysDef.cpp:1735
+#: src/engine/sysDef.cpp:1748
 msgid "1Exx: Set phase reset period low byte"
 msgstr "1Exx: Младший байт периода сброса фазы"
 
-#: src/engine/sysDef.cpp:1736
+#: src/engine/sysDef.cpp:1749
 msgid "1Fxx: Set phase reset period high byte"
 msgstr "1Fxx: Старший байт периода сброса фазы"
 
-#: src/engine/sysDef.cpp:1737
+#: src/engine/sysDef.cpp:1750
 msgid "20xx: Toggle frequency sweep (bit 0-6: speed; bit 7: direction is up)"
 msgstr ""
 "20xx: Переключить аппаратное портаменто (биты 0-6: скорость; бит 7: "
 "направление вверх)"
 
-#: src/engine/sysDef.cpp:1738
+#: src/engine/sysDef.cpp:1751
 msgid ""
 "21xx: Toggle volume sweep (bit 0-4: speed; bit 5: direction is up; bit 6: "
 "loop; bit 7: alternate)"
@@ -3057,17 +3097,17 @@ msgstr ""
 "21xx: Переключить аппаратное изменение громкости (биты 0-4: скорость; бит 5: "
 "направление вверх; бит 6: цикл; бит 7: вверх-вниз)"
 
-#: src/engine/sysDef.cpp:1739
+#: src/engine/sysDef.cpp:1752
 msgid "22xx: Toggle cutoff sweep (bit 0-6: speed; bit 7: direction is up)"
 msgstr ""
 "22xx: Переключить аппаратное изменение частоты среза фильтра (бит 0-6: "
 "скорость; бит 7: направление вверх)"
 
-#: src/engine/sysDef.cpp:1747
+#: src/engine/sysDef.cpp:1760
 msgid "tildearrow Sound Unit"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1748
+#: src/engine/sysDef.cpp:1761
 msgid ""
 "tildearrow's fantasy sound chip. put SID, AY and VERA in a blender, and you "
 "get this!"
@@ -3075,48 +3115,48 @@ msgstr ""
 "вымышленный звуковой чип tildearrow. загрузите в блендер SID, AY и VERA, и "
 "вы получите этот чип!"
 
-#: src/engine/sysDef.cpp:1759
+#: src/engine/sysDef.cpp:1772
 msgid "OKI MSM6295"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1760
+#: src/engine/sysDef.cpp:1773
 msgid "an ADPCM sound chip manufactured by OKI and used in many arcade boards."
 msgstr ""
 "АДИКМ звуковой чип фирмы OKI. Использовался во многих аркадных автоматах."
 
-#: src/engine/sysDef.cpp:1767
+#: src/engine/sysDef.cpp:1780
 msgid "20xx: Set chip output rate (0: clock/132; 1: clock/165)"
 msgstr ""
 "20xx: Частота дискретизации выходного сигнала (0: тактовая частота/132; 1: "
 "тактовая частота/165)"
 
-#: src/engine/sysDef.cpp:1772
+#: src/engine/sysDef.cpp:1785
 msgid "OKI MSM6258"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1773
+#: src/engine/sysDef.cpp:1786
 msgid "an ADPCM sound chip manufactured by OKI and used in the Sharp X68000."
 msgstr "АДИКМ звуковой чип фирмы OKI, использовавшийся в Sharp X68000."
 
-#: src/engine/sysDef.cpp:1774 src/engine/sysDef.cpp:1895
+#: src/engine/sysDef.cpp:1787 src/engine/sysDef.cpp:1908
 #: src/gui/editControls.cpp:437 src/gui/guiConst.cpp:1450
 #: src/gui/settings.cpp:4295
 msgid "Sample"
 msgstr "Сэмплеры"
 
-#: src/engine/sysDef.cpp:1780
+#: src/engine/sysDef.cpp:1793
 msgid "20xx: Set frequency divider (0-2)"
 msgstr "20xx: Делитель частоты (0-2)"
 
-#: src/engine/sysDef.cpp:1781
+#: src/engine/sysDef.cpp:1794
 msgid "21xx: Select clock rate (0: full; 1: half)"
 msgstr "21xx: Тактовая частота (0: полная; 1: половинная)"
 
-#: src/engine/sysDef.cpp:1786
+#: src/engine/sysDef.cpp:1799
 msgid "Yamaha YMZ280B (PCMD8)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1787
+#: src/engine/sysDef.cpp:1800
 msgid ""
 "used in some arcade boards. Can play back either 4-bit ADPCM, 8-bit PCM or "
 "16-bit PCM."
@@ -3124,41 +3164,41 @@ msgstr ""
 "использовался в некоторых аркадных автоматах. Может воспроизводить 4-битные "
 "АДИКМ, 8- и 16-битные ИКМ сэмплы."
 
-#: src/engine/sysDef.cpp:1805 src/gui/settings.cpp:4126
+#: src/engine/sysDef.cpp:1818 src/gui/settings.cpp:4126
 msgid "Namco WSG"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1806
+#: src/engine/sysDef.cpp:1819
 msgid ""
 "a wavetable sound chip used in Pac-Man, among other early Namco arcade games."
 msgstr ""
 "таблично-волновой чип, использовавшийся в игровом автомате Pac-Man и других "
 "ранних автоматах Namco."
 
-#: src/engine/sysDef.cpp:1816
+#: src/engine/sysDef.cpp:1829
 msgid "Namco C15 WSG"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1817
+#: src/engine/sysDef.cpp:1830
 msgid ""
 "successor of the original Namco WSG chip, used in later Namco arcade games."
 msgstr ""
 "следующая модель после Namco WSG, использовался в поздних игровых автоматах "
 "Namco."
 
-#: src/engine/sysDef.cpp:1827
+#: src/engine/sysDef.cpp:1840
 msgid "Namco C30 WSG"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1828
+#: src/engine/sysDef.cpp:1841
 msgid "like Namco C15 but with stereo sound."
 msgstr "похож на Namco C15, но с поддержкой стерео."
 
-#: src/engine/sysDef.cpp:1838
+#: src/engine/sysDef.cpp:1851
 msgid "OKI MSM5232"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1839
+#: src/engine/sysDef.cpp:1852
 msgid ""
 "a square wave additive synthesis chip made by OKI. used in some arcade "
 "machines and instruments."
@@ -3166,27 +3206,27 @@ msgstr ""
 "чип с меандрами и аддитивным синтезом от фирмы OKI. использовался в "
 "некоторых игровых автоматах и инструментах."
 
-#: src/engine/sysDef.cpp:1847
+#: src/engine/sysDef.cpp:1860
 msgid "10xy: Set group control (x: sustain; y: part toggle bitmask)"
 msgstr "10xy: Контроль группы (x: сустейн; y: битовая маска частей)"
 
-#: src/engine/sysDef.cpp:1848 src/engine/sysDef.cpp:2006
+#: src/engine/sysDef.cpp:1861 src/engine/sysDef.cpp:2019
 msgid "11xx: Set noise mode"
 msgstr "11xx: Режим шума"
 
-#: src/engine/sysDef.cpp:1849
+#: src/engine/sysDef.cpp:1862
 msgid "12xx: Set group attack (0 to 5)"
 msgstr "12xx: Атака группы (0-5)"
 
-#: src/engine/sysDef.cpp:1850
+#: src/engine/sysDef.cpp:1863
 msgid "13xx: Set group decay (0 to 11)"
 msgstr "13xx: Спад группы (0-11)"
 
-#: src/engine/sysDef.cpp:1855
+#: src/engine/sysDef.cpp:1868
 msgid "Yamaha YM2612 (OPN2) with DualPCM"
 msgstr "Yamaha YM2612 (OPN2) с DualPCM"
 
-#: src/engine/sysDef.cpp:1856
+#: src/engine/sysDef.cpp:1869
 msgid ""
 "this chip is mostly known for being in the Sega Genesis (but it also was on "
 "the FM Towns computer).\n"
@@ -3197,15 +3237,15 @@ msgstr ""
 "эта версия использует программное смешение сигналов, за счёт чего возможно "
 "использование двух каналов сэмплов."
 
-#: src/engine/sysDef.cpp:1857 src/engine/sysDef.cpp:1869
+#: src/engine/sysDef.cpp:1870 src/engine/sysDef.cpp:1882
 msgid "FM 6/PCM 1"
 msgstr "FM 6/ИКМ 1"
 
-#: src/engine/sysDef.cpp:1867
+#: src/engine/sysDef.cpp:1880
 msgid "Yamaha YM2612 (OPN2) Extended Channel 3 with DualPCM and CSM"
 msgstr "Yamaha YM2612 (OPN2) расширенный 3-ий канал с DualPCM и CSM"
 
-#: src/engine/sysDef.cpp:1868
+#: src/engine/sysDef.cpp:1881
 msgid ""
 "this chip is mostly known for being in the Sega Genesis (but it also was on "
 "the FM Towns computer).\n"
@@ -3214,11 +3254,11 @@ msgid ""
 "four operators with independent notes/frequencies."
 msgstr ""
 
-#: src/engine/sysDef.cpp:1880 src/gui/settings.cpp:4096
+#: src/engine/sysDef.cpp:1893 src/gui/settings.cpp:4096
 msgid "T6W28"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1881
+#: src/engine/sysDef.cpp:1894
 msgid ""
 "an SN76489 derivative used in Neo Geo Pocket, has independent stereo volume "
 "and noise channel frequency."
@@ -3226,33 +3266,33 @@ msgstr ""
 "вариант SN76489, использовавшийся в Neo Geo Pocket. Имеет независимую "
 "регулировку громкости стереоканалов и частоты канала шума."
 
-#: src/engine/sysDef.cpp:1888
+#: src/engine/sysDef.cpp:1901
 msgid "20xx: Set noise length (0: short, 1: long)"
 msgstr "20xx: Длина шума (0: короткий, 1: длинный)"
 
-#: src/engine/sysDef.cpp:1893
+#: src/engine/sysDef.cpp:1906
 msgid "Generic PCM DAC"
 msgstr "Типичный ИКМ ЦАП"
 
-#: src/engine/sysDef.cpp:1894
+#: src/engine/sysDef.cpp:1907
 msgid "as generic sample playback as it gets."
 msgstr "настолько типичное воспроизведение сэмплов, насколько это возможно."
 
-#: src/engine/sysDef.cpp:1906
+#: src/engine/sysDef.cpp:1919
 msgid "Konami K007232"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1907
+#: src/engine/sysDef.cpp:1920
 msgid "this PCM chip was widely used at Konami arcade boards in 1986-1990."
 msgstr ""
 "этот ИКМ чип широко использовался в игровых автоматах Konami с 1986 по 1990 "
 "год."
 
-#: src/engine/sysDef.cpp:1916
+#: src/engine/sysDef.cpp:1929
 msgid "Irem GA20"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1917
+#: src/engine/sysDef.cpp:1930
 msgid ""
 "yet another PCM chip from Irem. like Amiga, but less pitch resolution and no "
 "sample loop."
@@ -3260,19 +3300,19 @@ msgstr ""
 "ещё один ИКМ чип от Irem. как Amiga, но с меньшим разрешением регулировки "
 "частоты и без зацикливания сэмплов."
 
-#: src/engine/sysDef.cpp:1926
+#: src/engine/sysDef.cpp:1939
 msgid "Sharp SM8521"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1927
+#: src/engine/sysDef.cpp:1940
 msgid "a SoC with wavetable sound hardware."
 msgstr "СнК с таблично-волновым синтезатором звука."
 
-#: src/engine/sysDef.cpp:1937
+#: src/engine/sysDef.cpp:1950
 msgid "Casio PV-1000"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1938
+#: src/engine/sysDef.cpp:1951
 msgid ""
 "a game console with 3 channels of square wave. it's what happens after "
 "fusing TIA and VIC together."
@@ -3280,15 +3320,15 @@ msgstr ""
 "игровая консоль с тремя каналами квадратных волн. вот что получается, если "
 "скрестить TIA и VIC."
 
-#: src/engine/sysDef.cpp:1945
+#: src/engine/sysDef.cpp:1958
 msgid "10xx: Set ring modulation (0: disable, 1: enable)"
 msgstr "10xx: Кольцевая модуляция (0: выкл., 1: вкл.)"
 
-#: src/engine/sysDef.cpp:1950
+#: src/engine/sysDef.cpp:1963
 msgid "ZX Spectrum Beeper (QuadTone Engine)"
 msgstr "ZX Spectrum пищалка (движок QuadTone)"
 
-#: src/engine/sysDef.cpp:1951
+#: src/engine/sysDef.cpp:1964
 msgid ""
 "another ZX Spectrum beeper system with full PWM pulses and 3-level volume "
 "per channel. it also has a pitchable overlay sample channel."
@@ -3298,20 +3338,20 @@ msgstr ""
 "каждого канала. Также имеется перекрывающий канал сэмплов с регулировкой "
 "частоты."
 
-#: src/engine/sysDef.cpp:1963
+#: src/engine/sysDef.cpp:1976
 msgid "Konami K053260"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1964
+#: src/engine/sysDef.cpp:1977
 msgid "this PCM chip was widely used at Konami arcade boards in 1990-1992."
 msgstr ""
 "этот ИКМ чип широко использовался в игровых автоматах Konami с 1990 по 1992."
 
-#: src/engine/sysDef.cpp:1976
+#: src/engine/sysDef.cpp:1989
 msgid "MOS Technology TED"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1977
+#: src/engine/sysDef.cpp:1990
 msgid ""
 "two square waves (one may be turned into noise). used in the Commodore "
 "Plus/4, 16 and 116."
@@ -3319,20 +3359,20 @@ msgstr ""
 "два канала квадратных волн (один из них может играть шум). использовался в "
 "Commodore Plus/4, 16 и 116."
 
-#: src/engine/sysDef.cpp:1986
+#: src/engine/sysDef.cpp:1999
 msgid "Namco C140"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1987
+#: src/engine/sysDef.cpp:2000
 msgid "Namco's first PCM chip from 1987. it's pretty good for being so."
 msgstr ""
 "первый ИКМ чип Namco из 1987 года. для своего времени он весьма неплох."
 
-#: src/engine/sysDef.cpp:1997
+#: src/engine/sysDef.cpp:2010
 msgid "Namco C219"
 msgstr ""
 
-#: src/engine/sysDef.cpp:1998
+#: src/engine/sysDef.cpp:2011
 msgid ""
 "Namco's PCM chip used in their NA-1/2 hardware.\n"
 "very similar to C140, but has noise generator."
@@ -3340,15 +3380,15 @@ msgstr ""
 "ИКМ чип Namco, использовавшийся в их устройствах NA-1/2.\n"
 "очень похож на C140, но имеет генератор шума."
 
-#: src/engine/sysDef.cpp:2007
+#: src/engine/sysDef.cpp:2020
 msgid "12xy: Set invert mode (x: surround; y: invert)"
 msgstr "12xy: Режим инвертирования (x: окруж. звук; y: инверт.)"
 
-#: src/engine/sysDef.cpp:2012
+#: src/engine/sysDef.cpp:2025
 msgid "ESS ES1xxx series (ESFM)"
 msgstr "ESS серия ES1xxx (ESFM)"
 
-#: src/engine/sysDef.cpp:2013
+#: src/engine/sysDef.cpp:2026
 msgid ""
 "a unique FM synth featured in PC sound cards.\n"
 "based on the OPL3 design, but with lots of its features extended."
@@ -3356,19 +3396,19 @@ msgstr ""
 "уникальный чип с FM-синтезом, применявшийся в звуковых картах для PC.\n"
 "основан на OPL3, но с сильно расширенным функционалом."
 
-#: src/engine/sysDef.cpp:2014
+#: src/engine/sysDef.cpp:2027
 msgid "FM 11"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2020
+#: src/engine/sysDef.cpp:2033
 msgid "2Exx: Toggle hard envelope reset on new notes"
 msgstr "2Exx: Переключить жёсткий перезапуск огибающей на новой ноте"
 
-#: src/engine/sysDef.cpp:2026
+#: src/engine/sysDef.cpp:2039
 msgid "Ensoniq ES5503"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2027
+#: src/engine/sysDef.cpp:2040
 msgid ""
 "first Ensoniq chip used in their synths and Apple IIGS computer. Has 32 hard-"
 "panned 8-bit wavetable/sample channels, can do oscillator sync (like SID) "
@@ -3384,31 +3424,31 @@ msgstr ""
 "Как сказал Robert Yannes (создатель чипа SID), это более-менее то, чем мог "
 "быть чип SID, если бы ему дали достаточно времени для его разработки."
 
-#: src/engine/sysDef.cpp:2034
+#: src/engine/sysDef.cpp:2047
 msgid "11xx: Set number of enabled oscillators (2-1F)"
 msgstr "11xx: Количество включённых осцилляторов (2-1F)"
 
-#: src/engine/sysDef.cpp:2035
+#: src/engine/sysDef.cpp:2048
 msgid "12xx: Set oscillator output (0-7, 0=left, 1=right)"
 msgstr "12xx: Вывод сигнала осциллятора (0-7, 0=лево, 1=право)"
 
-#: src/engine/sysDef.cpp:2036
+#: src/engine/sysDef.cpp:2049
 msgid "13xx: Set wave/sample length (0-7, 0=256, 1=512, 2=1024, etc.)"
 msgstr "13xx: Длина волны/сэмпла (0-7, 0=256, 1=512, 2=1024 и т.д.)"
 
-#: src/engine/sysDef.cpp:2037
+#: src/engine/sysDef.cpp:2050
 msgid "14xx: Set wave/sample position in memory (xx*256 offset)"
 msgstr "14xx: Начальное смещение волны/сэмпла в памяти (смещение xx*256)"
 
-#: src/engine/sysDef.cpp:2038
+#: src/engine/sysDef.cpp:2051
 msgid "15xx: Set oscillator mode (0-3)"
 msgstr "15xx: Режим осциллятора (0-3)"
 
-#: src/engine/sysDef.cpp:2044
+#: src/engine/sysDef.cpp:2057
 msgid "PowerNoise"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2045
+#: src/engine/sysDef.cpp:2058
 msgid ""
 "a fantasy sound chip designed by jvsTSX and The Beesh-Spweesh!\n"
 "used in the Hexheld fantasy console."
@@ -3416,23 +3456,23 @@ msgstr ""
 "вымышленный звуковой чип, разработанный jvsTSX и The Beesh-Spweesh!\n"
 "используется в вымышленной игровой консоли Hexheld."
 
-#: src/engine/sysDef.cpp:2046
+#: src/engine/sysDef.cpp:2059
 msgid "Noise 1"
 msgstr "Шум 1"
 
-#: src/engine/sysDef.cpp:2046
+#: src/engine/sysDef.cpp:2059
 msgid "Noise 2"
 msgstr "Шум 2"
 
-#: src/engine/sysDef.cpp:2046
+#: src/engine/sysDef.cpp:2059
 msgid "Noise 3"
 msgstr "Шум 3"
 
-#: src/engine/sysDef.cpp:2046
+#: src/engine/sysDef.cpp:2059
 msgid "Slope"
 msgstr "Скат"
 
-#: src/engine/sysDef.cpp:2052
+#: src/engine/sysDef.cpp:2065
 msgid ""
 "20xx: Load low byte of noise channel LFSR (00 to FF) or slope channel "
 "accumulator (00 to 7F)"
@@ -3440,69 +3480,69 @@ msgstr ""
 "20xx: Загрузить младший байт в РСЛОС канала шума (00-FF) или в аккумулятор "
 "канала ската (00-7F)"
 
-#: src/engine/sysDef.cpp:2053
+#: src/engine/sysDef.cpp:2066
 msgid "21xx: Load high byte of noise channel LFSR (00 to FF)"
 msgstr "21xx: Загрузить старший байт в РСЛОС канала шума (00-FF)"
 
-#: src/engine/sysDef.cpp:2054
+#: src/engine/sysDef.cpp:2067
 msgid "22xx: Write to I/O port A"
 msgstr "22xx: Записать в порт ввода-вывода A"
 
-#: src/engine/sysDef.cpp:2055
+#: src/engine/sysDef.cpp:2068
 msgid "23xx: Write to I/O port B"
 msgstr "23xx: Записать в порт ввода-вывода B"
 
-#: src/engine/sysDef.cpp:2061 src/gui/settings.cpp:4151
+#: src/engine/sysDef.cpp:2074 src/gui/settings.cpp:4151
 msgid "Dave"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2062
+#: src/engine/sysDef.cpp:2075
 msgid ""
 "this chip was featured in the Enterprise 128 computer. it is similar to "
 "POKEY, but with stereo output."
 msgstr ""
 
-#: src/engine/sysDef.cpp:2063
+#: src/engine/sysDef.cpp:2076
 msgid "DAC Left"
 msgstr "ЦАП левый"
 
-#: src/engine/sysDef.cpp:2063
+#: src/engine/sysDef.cpp:2076
 msgid "DAC Right"
 msgstr "ЦАП правый"
 
-#: src/engine/sysDef.cpp:2069
+#: src/engine/sysDef.cpp:2082
 msgid "10xx: Set waveform (0 to 4; 0 to 3 on noise)"
 msgstr "10xx: Волна (0-4; 0-3 на канале шума)"
 
-#: src/engine/sysDef.cpp:2070
+#: src/engine/sysDef.cpp:2083
 msgid "11xx: Set noise frequency source (0: fixed; 1-3: channels 1 to 3)"
 msgstr "11xx: Источник частоты шума (0: фикс.; 1-3: каналы 1-3)"
 
-#: src/engine/sysDef.cpp:2071
+#: src/engine/sysDef.cpp:2084
 msgid "12xx: Toggle high-pass with next channel"
 msgstr "12xx: Переключить ФВЧ от следующего канала"
 
-#: src/engine/sysDef.cpp:2072
+#: src/engine/sysDef.cpp:2085
 msgid "13xx: Toggle ring modulation with channel+2"
 msgstr "13xx: Переключить кольцевую модуляцию от канал+2"
 
-#: src/engine/sysDef.cpp:2073
+#: src/engine/sysDef.cpp:2086
 msgid "14xx: Toggle swap counters (noise only)"
 msgstr "14xx: Переключить смену счётчиков (только шум)"
 
-#: src/engine/sysDef.cpp:2074
+#: src/engine/sysDef.cpp:2087
 msgid "15xx: Toggle low pass (noise only)"
 msgstr "15xx: Переключить ФНЧ (только шум)"
 
-#: src/engine/sysDef.cpp:2075
+#: src/engine/sysDef.cpp:2088
 msgid "16xx: Set clock divider (0: /2; 1: /3)"
 msgstr "16xx: Делитель частоты (0: /2; 1: /3)"
 
-#: src/engine/sysDef.cpp:2080
+#: src/engine/sysDef.cpp:2093
 msgid "Game Boy Advance DMA Sound"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2081
+#: src/engine/sysDef.cpp:2094
 msgid ""
 "additional PCM FIFO channels in Game Boy Advance driven directly by its DMA "
 "hardware."
@@ -3510,134 +3550,94 @@ msgstr ""
 "дополнительные ИКМ FIFO-каналы в Game Boy Advance с сигналом напрямую от "
 "аппаратного контроллера DMA."
 
-#: src/engine/sysDef.cpp:2094
+#: src/engine/sysDef.cpp:2107
 msgid "Game Boy Advance MinMod"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2095
+#: src/engine/sysDef.cpp:2108
 msgid ""
 "additional PCM FIFO channels in Game Boy Advance driven by software mixing "
 "to provide up to sixteen sample channels"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2104
+#: src/engine/sysDef.cpp:2117
 msgid "11xy: Set echo channel (x: left/right source; y: delay (0 disables))"
 msgstr "11xy: Канал эхо (x: левый/правый источник; y: задержка (0 отключает))"
 
-#: src/engine/sysDef.cpp:2105
+#: src/engine/sysDef.cpp:2118
 msgid "12xy: Toggle invert (x: left; y: right)"
 msgstr "12xy: Инверсия сигнала (x: лево; y: право)"
 
-#: src/engine/sysDef.cpp:2110 src/gui/settings.cpp:4152
+#: src/engine/sysDef.cpp:2123 src/gui/settings.cpp:4152
 msgid "Nintendo DS"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2111
+#: src/engine/sysDef.cpp:2124
 msgid "a handheld video game console with two screens. it uses a stylus."
 msgstr "портативная игровая консоль с двумя экранами. необходим стилус."
 
-#: src/engine/sysDef.cpp:2119
+#: src/engine/sysDef.cpp:2132
 msgid "1Fxx: Set global volume (0 to 7F)"
 msgstr "1Fxx: Глобальная громкость (0-7F)"
 
-#: src/engine/sysDef.cpp:2124
+#: src/engine/sysDef.cpp:2137
 msgid "5E01"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2125
+#: src/engine/sysDef.cpp:2138
 msgid ""
 "a fantasy sound chip created by Euly. it is based on Ricoh 2A03, adding a "
 "couple features such as 32 noise pitches, an extra duty cycle, and three "
 "waveforms (besides triangle)."
 msgstr ""
 
-#: src/engine/sysDef.cpp:2133
+#: src/engine/sysDef.cpp:2146
 msgid ""
 "12xx: Set duty cycle/noise mode/waveform (pulse/wave: 0 to 3; noise: 0 or 1)"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2146 src/gui/settings.cpp:4155
+#: src/engine/sysDef.cpp:2159 src/gui/settings.cpp:4155
 msgid "Bifurcator"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2147
+#: src/engine/sysDef.cpp:2160
 msgid "a fantasy sound chip using logistic map iterations to generate sound."
 msgstr ""
 "вымышленный звуковой чип, использующий итерации логистического отображения "
 "для генерации звука."
 
-#: src/engine/sysDef.cpp:2154
+#: src/engine/sysDef.cpp:2167
 msgid "10xx: Load low byte of channel sample state"
 msgstr "10xx: Загрузить младший байт сэмплового состояния канала"
 
-#: src/engine/sysDef.cpp:2155
+#: src/engine/sysDef.cpp:2168
 msgid "11xx: Load high byte of channel sample state"
 msgstr "11xx: Загрузить старший байт сэмплового состояния канала"
 
-#: src/engine/sysDef.cpp:2156
+#: src/engine/sysDef.cpp:2169
 msgid "12xx: Set low byte of channel parameter"
 msgstr "12xx: Младший байт параметра канала"
 
-#: src/engine/sysDef.cpp:2157
+#: src/engine/sysDef.cpp:2170
 msgid "13xx: Set high byte of channel parameter"
 msgstr "13xx: Старший байт параметра канала"
 
-#: src/engine/sysDef.cpp:2162 src/gui/settings.cpp:4156
+#: src/engine/sysDef.cpp:2175 src/gui/settings.cpp:4156
 msgid "SID2"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2163
+#: src/engine/sysDef.cpp:2176
 msgid ""
 "a fantasy sound chip created by LTVA. it is similar to the SID chip, but "
 "with many of its problems fixed."
 msgstr ""
 
-#: src/engine/sysDef.cpp:2170 src/engine/sysDef.cpp:2232
-#, fuzzy
-msgid "10xx: Set wave (bit 0: tone, bit 1: noise, bit 2: envelope)"
-msgstr "20xx: Режим канала (бит 0: меандр; бит 1: шум; бит 2: огибающая)"
-
-#: src/engine/sysDef.cpp:2171 src/engine/sysDef.cpp:2233
-#, fuzzy
-msgid "11xx: Set duty cycle"
-msgstr "12xx: Скважность (0-8)"
-
-#: src/engine/sysDef.cpp:2172
-#, fuzzy
-msgid "12xx: Set envelope shape (envelope channels only, 0-7))"
-msgstr "22xy: Режим огибающей (x: форма, y: включить для этого канала)"
-
-#: src/engine/sysDef.cpp:2173
-#, fuzzy
-msgid "13xx: Set envelope starting phase (lower byte))"
-msgstr "23xx: Младший байт периода огибающей"
-
-#: src/engine/sysDef.cpp:2174
-#, fuzzy
-msgid "14xx: Set envelope starting phase (higher byte))"
-msgstr "24xx: Старший байт периода огибающей"
-
-#: src/engine/sysDef.cpp:2175
-#, fuzzy
-msgid "15xx: Load low byte of noise generator LFSR feedback bits)"
-msgstr "21xx: Загрузить старший байт в РСЛОС канала шума (00-FF)"
-
-#: src/engine/sysDef.cpp:2176
-#, fuzzy
-msgid "16xx: Load high byte of noise generator LFSR feedback bits)"
-msgstr "21xx: Загрузить старший байт в РСЛОС канала шума (00-FF)"
-
-#: src/engine/sysDef.cpp:2177
-#, fuzzy
-msgid "17xx: Set envelope number (0 to 1))"
-msgstr "2xxx: Отсчёт огибающей (000-1FF)"
-
-#: src/engine/sysDef.cpp:2182
+#: src/engine/sysDef.cpp:2187
 #, fuzzy
 msgid "FZT sound source"
 msgstr "Источник звука FZT"
 
-#: src/engine/sysDef.cpp:2183
+#: src/engine/sysDef.cpp:2188
 msgid ""
 "a software synth core by LTVA used in Flizzer Tracker (Flipper Zero chiptune "
 "tracker)."
@@ -3645,7 +3645,7 @@ msgstr ""
 "ядро программного синтеза за авторством LTVA, используемое в программе "
 "Flizzer Tracker (чиптюн-трекер для Flipper Zero)."
 
-#: src/engine/sysDef.cpp:2194
+#: src/engine/sysDef.cpp:2199
 msgid ""
 "10xx: Set wave (bits: 0: noise, 1: pulse, 2: triangle, 3: sawtooth, 4: "
 "metallic noise, 5: sine)"
@@ -3653,522 +3653,546 @@ msgstr ""
 "10xx: Волна (биты: 0: шум, 1: прямоуг., 2: треуг., 3: пила, 4: "
 "\"металлический\" шум, 5: синус)"
 
-#: src/engine/sysDef.cpp:2195
+#: src/engine/sysDef.cpp:2200
 msgid "11xy: PWM (pulsolo) with speed x and depth y"
 msgstr "11xy: ШИМ (пульсоло) со скоростью x и глубиной y"
 
-#: src/engine/sysDef.cpp:2197
+#: src/engine/sysDef.cpp:2202
 msgid "13xx: Pulse width up"
 msgstr "13xx: Изменение скважности вверх"
 
-#: src/engine/sysDef.cpp:2198
+#: src/engine/sysDef.cpp:2203
 msgid "14xx: Pulse width down"
 msgstr "14xx: Изменение скважности вниз"
 
-#: src/engine/sysDef.cpp:2199
+#: src/engine/sysDef.cpp:2204
 msgid "15xx: Set filter cutoff"
 msgstr "15xx: Частота среза фильтра"
 
-#: src/engine/sysDef.cpp:2200
+#: src/engine/sysDef.cpp:2205
 msgid "16xx: Set volume"
 msgstr "16xx: Громкость"
 
-#: src/engine/sysDef.cpp:2201
+#: src/engine/sysDef.cpp:2206
 msgid "17xx: Toggle filter"
 msgstr "17xx: Вкл./выкл. фильтр"
 
-#: src/engine/sysDef.cpp:2202
+#: src/engine/sysDef.cpp:2207
 msgid "18xx: Set filter mode"
 msgstr "18xx: Режим фильтра"
 
-#: src/engine/sysDef.cpp:2203
+#: src/engine/sysDef.cpp:2208
 msgid "19xx: Phase reset"
 msgstr "19xx: Сброс фазы"
 
-#: src/engine/sysDef.cpp:2204
+#: src/engine/sysDef.cpp:2209
 msgid "1Axx: Filter cutoff up"
 msgstr "1Axx: Частота среза вверх"
 
-#: src/engine/sysDef.cpp:2205
+#: src/engine/sysDef.cpp:2210
 msgid "1Bxx: Filter cutoff down"
 msgstr "1Bxx: Частота среза вниз"
 
-#: src/engine/sysDef.cpp:2206
+#: src/engine/sysDef.cpp:2211
 msgid "1Cxx: Set filter resonance"
 msgstr "1Cxx: Резонанс фильтра"
 
-#: src/engine/sysDef.cpp:2207
+#: src/engine/sysDef.cpp:2212
 msgid "1Dxx: Filter resonance up"
 msgstr "1Dxx: Резонанс вверх"
 
-#: src/engine/sysDef.cpp:2208
+#: src/engine/sysDef.cpp:2213
 msgid "1Exx: Filter resonance down"
 msgstr "1Exx: Резонанс вниз"
 
-#: src/engine/sysDef.cpp:2209
+#: src/engine/sysDef.cpp:2214
 msgid "1Fxx: Ring mod source (FF = self)"
 msgstr "1Fxx: Источник кольцевой модуляции (FF = самомодуляция)"
 
-#: src/engine/sysDef.cpp:2210
+#: src/engine/sysDef.cpp:2215
 msgid "20xx: Hard sync source (FF = self)"
 msgstr "20xx: Источник синхронизации осцилляторов (FF = самосинхронизация)"
 
-#: src/engine/sysDef.cpp:2211
+#: src/engine/sysDef.cpp:2216
 msgid "21xx: Set attack speed"
 msgstr "21xx: Скорость атаки"
 
-#: src/engine/sysDef.cpp:2212
+#: src/engine/sysDef.cpp:2217
 msgid "22xx: Set decay speed"
 msgstr "22xx: Скорость спада"
 
-#: src/engine/sysDef.cpp:2213
+#: src/engine/sysDef.cpp:2218
 msgid "23xx: Set sustain level"
 msgstr "23xx: Уровень сустейна"
 
-#: src/engine/sysDef.cpp:2214
+#: src/engine/sysDef.cpp:2219
 msgid "24xx: Set release rate"
 msgstr "24xx: Скорость релиза"
 
-#: src/engine/sysDef.cpp:2215
+#: src/engine/sysDef.cpp:2220
 msgid "25xx: Restart instrument program"
 msgstr "25xx: Перезапустить программу инструмента"
 
-#: src/engine/sysDef.cpp:2216
+#: src/engine/sysDef.cpp:2221
 msgid "26xx: Portamento up (semitones)"
 msgstr "26xx: Портаменто вверх (полутонов)"
 
-#: src/engine/sysDef.cpp:2217
+#: src/engine/sysDef.cpp:2222
 msgid "27xx: Portamento down (semitones)"
 msgstr "27xx: Портаменто вниз (полутонов)"
 
-#: src/engine/sysDef.cpp:2218
+#: src/engine/sysDef.cpp:2223
 msgid "28xx: Absolute arpeggio note"
 msgstr "28xx: Абсолютная нота арпеджио"
 
-#: src/engine/sysDef.cpp:2219
+#: src/engine/sysDef.cpp:2224
 msgid "29xx: Trigger envelope release"
 msgstr "29xx: Релиз огибающей"
 
-#: src/engine/sysDef.cpp:2224
+#: src/engine/sysDef.cpp:2229
 msgid "ATTiny85APU"
 msgstr ""
 
-#: src/engine/sysDef.cpp:2225
+#: src/engine/sysDef.cpp:2230
 msgid ""
 "a software synth for the ATTiny25/45/85 MCUs written entirely in AVR "
 "Assembly by alexmush."
 msgstr ""
 
-#: src/engine/sysDef.cpp:2226
+#: src/engine/sysDef.cpp:2231
 #, fuzzy
 msgid "Envelope 1"
 msgstr "Огибающая"
 
-#: src/engine/sysDef.cpp:2226
+#: src/engine/sysDef.cpp:2231
 #, fuzzy
 msgid "Envelope 2"
 msgstr "Огибающая"
 
-#: src/engine/sysDef.cpp:2234
+#: src/engine/sysDef.cpp:2237
+#, fuzzy
+msgid "10xx: Set wave (bit 0: tone, bit 1: noise, bit 2: envelope)"
+msgstr "20xx: Режим канала (бит 0: меандр; бит 1: шум; бит 2: огибающая)"
+
+#: src/engine/sysDef.cpp:2238
+#, fuzzy
+msgid "11xx: Set duty cycle"
+msgstr "12xx: Скважность (0-8)"
+
+#: src/engine/sysDef.cpp:2239
 #, fuzzy
 msgid "12xx: Set envelope shape (envelope channels only, 0-7)"
 msgstr "22xy: Режим огибающей (x: форма, y: включить для этого канала)"
 
-#: src/engine/sysDef.cpp:2235
+#: src/engine/sysDef.cpp:2240
 #, fuzzy
 msgid "13xx: Set envelope starting phase (lower byte)"
 msgstr "23xx: Младший байт периода огибающей"
 
-#: src/engine/sysDef.cpp:2236
+#: src/engine/sysDef.cpp:2241
 #, fuzzy
 msgid "14xx: Set envelope starting phase (higher byte)"
 msgstr "24xx: Старший байт периода огибающей"
 
-#: src/engine/sysDef.cpp:2237
+#: src/engine/sysDef.cpp:2242
 #, fuzzy
 msgid "15xx: Load low byte of noise generator LFSR feedback bits"
 msgstr "21xx: Загрузить старший байт в РСЛОС канала шума (00-FF)"
 
-#: src/engine/sysDef.cpp:2238
+#: src/engine/sysDef.cpp:2243
 #, fuzzy
 msgid "16xx: Load high byte of noise generator LFSR feedback bits"
 msgstr "21xx: Загрузить старший байт в РСЛОС канала шума (00-FF)"
 
-#: src/engine/sysDef.cpp:2239
+#: src/engine/sysDef.cpp:2244
 #, fuzzy
 msgid "17xx: Set envelope number (0 to 1)"
 msgstr "2xxx: Отсчёт огибающей (000-1FF)"
 
-#: src/engine/sysDef.cpp:2244
+#: src/engine/sysDef.cpp:2249
 msgid "Dummy System"
 msgstr "Система-болванка"
 
-#: src/engine/sysDef.cpp:2245
+#: src/engine/sysDef.cpp:2250
 msgid "this is a system designed for testing purposes."
 msgstr "это система, разработанная для тестирования."
 
-# TODO: this reads "are". should be "is".
 #: src/gui/about.cpp:26
-msgid "is proud to present"
+msgid "and Furnace-B developers"
+msgstr ""
+
+# TODO: this reads "are". should be "is".
+#: src/gui/about.cpp:27
+#, fuzzy
+msgid "are proud to present"
 msgstr "с гордостью представляют"
 
-#: src/gui/about.cpp:30
+#: src/gui/about.cpp:31
 msgid "the biggest multi-system chiptune tracker!"
 msgstr "самый большой мультисистемный чиптюн-трекер!"
 
-#: src/gui/about.cpp:31
+#: src/gui/about.cpp:32
 msgid "featuring DefleMask song compatibility."
 msgstr "совместим с файлами Deflemask."
 
-#: src/gui/about.cpp:33
+#: src/gui/about.cpp:34
 msgid "> CREDITS <"
 msgstr "> ТИТРЫ <"
 
-#: src/gui/about.cpp:35
+#: src/gui/about.cpp:36
 msgid "-- program --"
 msgstr "-- код --"
 
-#: src/gui/about.cpp:37
+#: src/gui/about.cpp:38
 msgid "A M 4 N (intro tune)"
 msgstr "A M 4 N (музыка в интро)"
 
-#: src/gui/about.cpp:52
+#: src/gui/about.cpp:53
 msgid "-- graphics/UI design --"
 msgstr "-- графика/дизайн интерфейса --"
 
-#: src/gui/about.cpp:59
+#: src/gui/about.cpp:60
 msgid "-- documentation --"
 msgstr "-- документация --"
 
-#: src/gui/about.cpp:70
+#: src/gui/about.cpp:71
 msgid "-- localization/translation team --"
 msgstr ""
 
-#: src/gui/about.cpp:83
+#: src/gui/about.cpp:84
 msgid "-- demo songs --"
 msgstr "-- демо-модули --"
 
-#: src/gui/about.cpp:212
+#: src/gui/about.cpp:213
 msgid "-- additional feedback/fixes --"
 msgstr "-- обратная связь/фиксы --"
 
-#: src/gui/about.cpp:223
+#: src/gui/about.cpp:224
 msgid "-- Metal backend test team --"
 msgstr "-- Команда тестирования библиотеки отрисовки Metal --"
 
-#: src/gui/about.cpp:229
+#: src/gui/about.cpp:230
 msgid "-- DirectX 9 backend test team --"
 msgstr "-- Команда тестирования библиотеки отрисовки DirectX 9 --"
 
-#: src/gui/about.cpp:236
+#: src/gui/about.cpp:237
 msgid "powered by:"
 msgstr "программа использует:"
 
-#: src/gui/about.cpp:237
+#: src/gui/about.cpp:238
 msgid "Dear ImGui by Omar Cornut"
 msgstr "Dear ImGui за авторством Omar Cornut"
 
-#: src/gui/about.cpp:238
+#: src/gui/about.cpp:239
 msgid "SDL2 by Sam Lantinga"
 msgstr "SDL2 за авторством Sam Lantinga"
 
-#: src/gui/about.cpp:242
+#: src/gui/about.cpp:243
 msgid "zlib by Jean-loup Gailly"
 msgstr "zlib за авторством Jean-loup Gailly"
 
-#: src/gui/about.cpp:243
+#: src/gui/about.cpp:244
 msgid "and Mark Adler"
 msgstr "и Mark Adler"
 
-#: src/gui/about.cpp:244
+#: src/gui/about.cpp:245
 msgid "libsndfile by Erik de Castro Lopo"
 msgstr "libsndfile за авторством Erik de Castro Lopo"
 
-#: src/gui/about.cpp:245
+#: src/gui/about.cpp:246
 msgid "Portable File Dialogs by Sam Hocevar"
 msgstr "Portable File Dialogs за авторством Sam Hocevar"
 
-#: src/gui/about.cpp:246
+#: src/gui/about.cpp:247
 msgid "Native File Dialog by Frogtoss Games"
 msgstr "Native File Dialog за авторством Frogtoss Games"
 
-#: src/gui/about.cpp:248
+#: src/gui/about.cpp:249
 msgid "Weak-JACK by x42"
 msgstr "Weak-JACK за авторством x42"
 
-#: src/gui/about.cpp:249
+#: src/gui/about.cpp:250
 msgid "RtMidi by Gary P. Scavone"
 msgstr "RtMidi за авторством Gary P. Scavone"
 
-#: src/gui/about.cpp:250
+#: src/gui/about.cpp:251
 msgid "FFTW by Matteo Frigo and Steven G. Johnson"
 msgstr "FFTW за авторством Matteo Frigo и Steven G. Johnson"
 
-#: src/gui/about.cpp:251
+#: src/gui/about.cpp:252
 msgid "backward-cpp by Google"
 msgstr "backward-cpp за авторством Google"
 
-#: src/gui/about.cpp:252
+#: src/gui/about.cpp:253
 msgid "adpcm by superctr"
 msgstr "adpcm за авторством superctr"
 
-#: src/gui/about.cpp:253
+#: src/gui/about.cpp:254
 msgid "adpcm-xq by David Bryant"
 msgstr "adpcm-xq за авторством David Bryant"
 
-#: src/gui/about.cpp:254
+#: src/gui/about.cpp:255
 msgid "Nuked-OPL3/OPLL/OPM/OPN2/PSG by nukeykt"
 msgstr "Nuked-OPL3/OPLL/OPM/OPN2/PSG за авторством nukeykt"
 
-#: src/gui/about.cpp:255
+#: src/gui/about.cpp:256
 msgid "YM3812-LLE, YMF262-LLE, YMF276-LLE and YM2608-LLE by nukeykt"
 msgstr "YM3812-LLE, YMF262-LLE, YMF276-LLE и YM2608-LLE за авторством nukeykt"
 
-#: src/gui/about.cpp:256
+#: src/gui/about.cpp:257
 msgid "ESFMu (modified version) by Kagamiin~"
 msgstr "Эмулятор ESFMu (модифицированная версия) за авторством Kagamiin~"
 
-#: src/gui/about.cpp:257
+#: src/gui/about.cpp:258
 msgid "ymfm by Aaron Giles"
 msgstr "ymfm за авторством Aaron Giles"
 
-#: src/gui/about.cpp:258
+#: src/gui/about.cpp:259
 msgid "emu2413 by Digital Sound Antiques"
 msgstr "emu2413 за авторством Digital Sound Antiques"
 
-#: src/gui/about.cpp:259
+#: src/gui/about.cpp:260
 msgid "MAME SN76496 by Nicola Salmoria"
 msgstr "MAME SN76496 за авторством Nicola Salmoria"
 
-#: src/gui/about.cpp:260
+#: src/gui/about.cpp:261
 msgid "MAME AY-3-8910 by Couriersud"
 msgstr "MAME AY-3-8910 за авторством Couriersud"
 
-#: src/gui/about.cpp:261
+#: src/gui/about.cpp:262
 msgid "with AY8930 fixes by Eulous, cam900 and Grauw"
 msgstr "с исправлениями для AY8930 за авторством Eulous, cam900 и Grauw"
 
-#: src/gui/about.cpp:262
+#: src/gui/about.cpp:263
 msgid "MAME SAA1099 by Juergen Buchmueller and Manuel Abadia"
 msgstr "MAME SAA1099 за авторством Juergen Buchmueller и Manuel Abadia"
 
-#: src/gui/about.cpp:263
+#: src/gui/about.cpp:264
 msgid "MAME Namco WSG by Nicola Salmoria and Aaron Giles"
 msgstr "MAME Namco WSG за авторством Nicola Salmoria и Aaron Giles"
 
-#: src/gui/about.cpp:264
+#: src/gui/about.cpp:265
 msgid "MAME RF5C68 core by Olivier Galibert and Aaron Giles"
 msgstr "MAME RF5C68 core за авторством Olivier Galibert и Aaron Giles"
 
-#: src/gui/about.cpp:265
+#: src/gui/about.cpp:266
 msgid "MAME MSM5232 core by Jarek Burczynski and Hiromitsu Shioya"
 msgstr "MAME MSM5232 core за авторством Jarek Burczynski и Hiromitsu Shioya"
 
-#: src/gui/about.cpp:266
+#: src/gui/about.cpp:267
 msgid "MAME MSM6258 core by Barry Rodewald"
 msgstr "MAME MSM6258 core за авторством Barry Rodewald"
 
-#: src/gui/about.cpp:267
+#: src/gui/about.cpp:268
 msgid "MAME YMZ280B core by Aaron Giles"
 msgstr "MAME YMZ280B core за авторством Aaron Giles"
 
-#: src/gui/about.cpp:268
+#: src/gui/about.cpp:269
 msgid "MAME GA20 core by Acho A. Tang and R. Belmont"
 msgstr "MAME GA20 core за авторством Acho A. Tang и R. Belmont"
 
-#: src/gui/about.cpp:269
+#: src/gui/about.cpp:270
 msgid "MAME SegaPCM core by Hiromitsu Shioya and Olivier Galibert"
 msgstr "MAME SegaPCM core за авторством Hiromitsu Shioya и Olivier Galibert"
 
-#: src/gui/about.cpp:270
+#: src/gui/about.cpp:271
 msgid "SAASound by Dave Hooper and Simon Owen"
 msgstr "SAASound за авторством Dave Hooper и Simon Owen"
 
-#: src/gui/about.cpp:271
+#: src/gui/about.cpp:272
 msgid "SameBoy by Lior Halphon"
 msgstr "SameBoy за авторством Lior Halphon"
 
-#: src/gui/about.cpp:272
+#: src/gui/about.cpp:273
 msgid "Mednafen PCE, WonderSwan, T6W28 and Virtual Boy audio cores"
 msgstr "Ядра эмуляции Mednafen PCE, WonderSwan, T6W28 и Virtual Boy"
 
-#: src/gui/about.cpp:273
+#: src/gui/about.cpp:274
 msgid "SNES DSP core by Blargg"
 msgstr "SNES DSP core за авторством Blargg"
 
-#: src/gui/about.cpp:274
+#: src/gui/about.cpp:275
 msgid "puNES (NES, MMC5 and FDS) by FHorse"
 msgstr "puNES (NES, MMC5 и FDS) за авторством FHorse"
 
-#: src/gui/about.cpp:275
+#: src/gui/about.cpp:276
 msgid "NSFPlay (NES and FDS) by Brad Smith and Brezza"
 msgstr "NSFPlay (NES and FDS) за авторством Brad Smith и Brezza"
 
-#: src/gui/about.cpp:276
+#: src/gui/about.cpp:277
 msgid "reSID by Dag Lem"
 msgstr "reSID за авторством Dag Lem"
 
-#: src/gui/about.cpp:277
+#: src/gui/about.cpp:278
 msgid "reSIDfp by Dag Lem, Antti Lankila"
 msgstr "reSIDfp за авторством Dag Lem, Antti Lankila"
 
-#: src/gui/about.cpp:278
+#: src/gui/about.cpp:279
 msgid "and Leandro Nini"
 msgstr "и Leandro Nini"
 
-#: src/gui/about.cpp:279
+#: src/gui/about.cpp:280
 msgid "dSID by DefleMask Team based on jsSID"
 msgstr "dSID за авторством команды DefleMask (на основе jsSID)"
 
-#: src/gui/about.cpp:280
+#: src/gui/about.cpp:281
 msgid "Stella by Stella Team"
 msgstr "Stella за авторством Stella Team"
 
-#: src/gui/about.cpp:281
+#: src/gui/about.cpp:282
 msgid "QSound emulator by superctr and Valley Bell"
 msgstr "Эмулятор QSound за авторством superctr и Valley Bell"
 
-#: src/gui/about.cpp:282
+#: src/gui/about.cpp:283
 msgid "VICE VIC-20 sound core by Rami Rasanen and viznut"
 msgstr "Ядро эмуляции VICE VIC-20 за авторством Rami Rasanen и viznut"
 
-#: src/gui/about.cpp:283
+#: src/gui/about.cpp:284
 msgid "VICE TED sound core by Andreas Boose, Tibor Biczo"
 msgstr "Ядро эмуляции VICE TED за авторством Andreas Boose, Tibor Biczo"
 
-#: src/gui/about.cpp:284
+#: src/gui/about.cpp:285
 msgid "and Marco van den Heuvel"
 msgstr "и Marco van den Heuvel"
 
-#: src/gui/about.cpp:285
+#: src/gui/about.cpp:286
 msgid "VERA sound core by Frank van den Hoef"
 msgstr "Ядро эмуляции VERA за авторством Frank van den Hoef"
 
-#: src/gui/about.cpp:286
+#: src/gui/about.cpp:287
 msgid "mzpokeysnd POKEY emulator by Michael Borisov"
 msgstr "mzpokeysnd (эмулятор POKEY) за авторством Michael Borisov"
 
-#: src/gui/about.cpp:287
+#: src/gui/about.cpp:288
 msgid "ASAP POKEY emulator by Piotr Fusik"
 msgstr "ASAP (эмулятор POKEY) за авторством Piotr Fusik"
 
-#: src/gui/about.cpp:288
+#: src/gui/about.cpp:289
 msgid "ported by laoo to C++"
 msgstr "портирован на C++ laoo"
 
-#: src/gui/about.cpp:289
+#: src/gui/about.cpp:290
 msgid "vgsound_emu (second version, modified version) by cam900"
 msgstr "vgsound_emu (версия вторая, модифицированная) за авторством cam900"
 
-#: src/gui/about.cpp:290
+#: src/gui/about.cpp:291
 msgid "Impulse Tracker GUS volume table by Jeffrey Lim"
 msgstr ""
 
-#: src/gui/about.cpp:291
+#: src/gui/about.cpp:292
+msgid "Schism Tracker IT sample decompression"
+msgstr ""
+
+#: src/gui/about.cpp:293
 msgid "SM8521 emulator (modified version) by cam900"
 msgstr "Эмулятор SM8521 (модифицированная версия) за авторством cam900"
 
-#: src/gui/about.cpp:292
+#: src/gui/about.cpp:294
 msgid "D65010G031 emulator (modified version) by cam900"
 msgstr "Эмулятор D65010G031 (модифицированная версия) за авторством cam900"
 
-#: src/gui/about.cpp:293
+#: src/gui/about.cpp:295
 msgid "Namco C140/C219 emulator (modified version) by cam900"
 msgstr "Эмулятор C140/C219 (модифицированная версия) за авторством cam900"
 
-#: src/gui/about.cpp:294
+#: src/gui/about.cpp:296
 msgid "PowerNoise emulator by scratchminer"
 msgstr "Эмулятор PowerNoise за авторством scratchminer"
 
-#: src/gui/about.cpp:295
+#: src/gui/about.cpp:297
 msgid "ep128emu by Istvan Varga"
 msgstr "ep128emu за авторством Istvan Varga"
 
-#: src/gui/about.cpp:296
+#: src/gui/about.cpp:298
 msgid "NDS sound emulator by cam900"
 msgstr "NDS sound emulator за авторством cam900"
 
-#: src/gui/about.cpp:297
+#: src/gui/about.cpp:299
 msgid "SID2 emulator (modification of reSID) by LTVA"
 msgstr "эмулятор SID2 (модификация reSID) за авторством LTVA"
 
-#: src/gui/about.cpp:298
+#: src/gui/about.cpp:300
 msgid "5E01 emulator (modification of NSFPlay) by Euly"
 msgstr "эмулятор 5E01 (модификация NSFPlay) за авторством Euly"
 
-#: src/gui/about.cpp:299
+#: src/gui/about.cpp:301
 msgid "FZT sound source by LTVA"
 msgstr ""
 
-#: src/gui/about.cpp:300
+#: src/gui/about.cpp:302
 msgid "ATTiny85APU emulator by AlexMush"
 msgstr ""
 
-#: src/gui/about.cpp:302
+#: src/gui/about.cpp:304
 msgid "greetings to:"
 msgstr "передаём привет:"
 
-#: src/gui/about.cpp:306
+#: src/gui/about.cpp:308
 msgid "all members of Deflers of Noice!"
 msgstr "всем участникам Deflers of Noice!"
 
-#: src/gui/about.cpp:313
+#: src/gui/about.cpp:310
 msgid "copyright © 2021-2024 tildearrow"
 msgstr "Все права защищены © 2021-2024 tildearrow"
 
-#: src/gui/about.cpp:314
+#: src/gui/about.cpp:311
 msgid "(and contributors)."
 msgstr "(и участники разработки)."
 
-#: src/gui/about.cpp:315
+#: src/gui/about.cpp:312
 msgid "licensed under GPLv2+! see"
 msgstr "лицензировано по GPLv2+! см."
 
-#: src/gui/about.cpp:316
+#: src/gui/about.cpp:313
 msgid "LICENSE for more information."
 msgstr "LICENSE для доп. информации."
 
-#: src/gui/about.cpp:318
+#: src/gui/about.cpp:315
 msgid "help Furnace grow:"
 msgstr "помогите в развитии Furnace:"
 
-#: src/gui/about.cpp:323
+#: src/gui/about.cpp:317
+#, fuzzy
+msgid "help Furnace-B:"
+msgstr "помогите в развитии Furnace:"
+
+#: src/gui/about.cpp:320
 msgid "contact tildearrow at:"
 msgstr "вы можете связаться с tildearrow:"
 
-#: src/gui/about.cpp:326
+#: src/gui/about.cpp:323
 msgid "disclaimer:"
 msgstr "внимание:"
 
-#: src/gui/about.cpp:327
+#: src/gui/about.cpp:324
 msgid "despite the fact this program works"
 msgstr "несмотря на то что эта программа работает"
 
-#: src/gui/about.cpp:328
+#: src/gui/about.cpp:325
 msgid "with the .dmf file format, it is NOT"
 msgstr "с файлами формата .dmf, она НЕ"
 
-#: src/gui/about.cpp:329
+#: src/gui/about.cpp:326
 msgid "affiliated with Delek or DefleMask in"
 msgstr "связана с Delek'ом или программой DefleMask,"
 
-#: src/gui/about.cpp:330
+#: src/gui/about.cpp:327
 msgid "any way, nor it is a replacement for"
 msgstr "и не является заменой"
 
-#: src/gui/about.cpp:331
+#: src/gui/about.cpp:328
 msgid "the original program."
 msgstr "оригинальной программы."
 
-#: src/gui/about.cpp:333
+#: src/gui/about.cpp:330
 msgid "it also comes with ABSOLUTELY NO WARRANTY."
 msgstr "она также предоставляется БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ."
 
-#: src/gui/about.cpp:335
+#: src/gui/about.cpp:332
 msgid "thanks to all contributors/bug reporters!"
 msgstr "спасибо всем, кто помогает с разработкой и сообщает о багах!"
 
-#: src/gui/about.cpp:342
+#: src/gui/about.cpp:339
 msgid "About Furnace"
 msgstr "О Furnace"
 
@@ -6654,9 +6678,9 @@ msgstr "все файлы"
 msgid "no backups made yet!"
 msgstr "резервных копий пока нет!"
 
-#: src/gui/gui.cpp:1680 src/gui/gui.cpp:1689 src/gui/gui.cpp:1985
-#: src/gui/gui.cpp:2171
-msgid "Furnace song"
+#: src/gui/gui.cpp:1680 src/gui/gui.cpp:1689
+#, fuzzy
+msgid "Furnace-B song"
 msgstr "модуль Furnace"
 
 #: src/gui/gui.cpp:1688
@@ -6841,6 +6865,10 @@ msgstr "Выберите шрифт"
 #: src/gui/gui.cpp:1984
 #, fuzzy
 msgid "Export Furnace song"
+msgstr "модуль Furnace"
+
+#: src/gui/gui.cpp:1985 src/gui/gui.cpp:2171
+msgid "Furnace song"
 msgstr "модуль Furnace"
 
 #: src/gui/gui.cpp:1993
@@ -12622,6 +12650,11 @@ msgid "Pitch##sgiPV"
 msgstr ""
 
 #: src/gui/inst/pv1000.cpp:38
+#, fuzzy
+msgid "Ring Modulation##sgiPV"
+msgstr "Кольцевая модуляция"
+
+#: src/gui/inst/pv1000.cpp:40
 #, fuzzy
 msgid "Raw Frequency##sgiPV"
 msgstr "Частота (регистровое знач.)"
@@ -20093,6 +20126,30 @@ msgid "%.1fdB,%.1fdB"
 msgstr ""
 
 #, fuzzy
+#~ msgid "12xx: Set envelope shape (envelope channels only, 0-7))"
+#~ msgstr "22xy: Режим огибающей (x: форма, y: включить для этого канала)"
+
+#, fuzzy
+#~ msgid "13xx: Set envelope starting phase (lower byte))"
+#~ msgstr "23xx: Младший байт периода огибающей"
+
+#, fuzzy
+#~ msgid "14xx: Set envelope starting phase (higher byte))"
+#~ msgstr "24xx: Старший байт периода огибающей"
+
+#, fuzzy
+#~ msgid "15xx: Load low byte of noise generator LFSR feedback bits)"
+#~ msgstr "21xx: Загрузить старший байт в РСЛОС канала шума (00-FF)"
+
+#, fuzzy
+#~ msgid "16xx: Load high byte of noise generator LFSR feedback bits)"
+#~ msgstr "21xx: Загрузить старший байт в РСЛОС канала шума (00-FF)"
+
+#, fuzzy
+#~ msgid "17xx: Set envelope number (0 to 1))"
+#~ msgstr "2xxx: Отсчёт огибающей (000-1FF)"
+
+#, fuzzy
 #~ msgid "waiting...##sgie1"
 #~ msgstr "ожидание...##BLearn"
 
@@ -23895,38 +23952,11 @@ msgstr ""
 #~ "2Cxy: Автоматическая частота шума (авто-ШИМ) (x: режим (0: выкл., 1: "
 #~ "частота, 2: частота + маска ИЛИ); y: сдвиг"
 
-#~ msgid "22xx: Pulse width slide up"
-#~ msgstr "22xx: Изменение скважности вверх"
-
-#~ msgid "23xx: Pulse width slide down"
-#~ msgstr "23xx: Изменение скважности вниз"
-
-#~ msgid "24xx: Cutoff slide up"
-#~ msgstr "24xx: Изменение частоты среза вверх"
-
-#~ msgid "25xx: Cutoff slide down"
-#~ msgstr "25xx: Изменение частоты среза вниз"
-
 #~ msgid "13xx: Set waveform (local)"
 #~ msgstr "13xx: Волна (локальная)"
 
-#~ msgid "11xx: Set raw period (0-1F)"
-#~ msgstr "11xx: \"Сырое\" значение периода (0-1F)"
-
 #~ msgid "11xx: Set waveform (local)"
 #~ msgstr "11xx: Волна (локальная)"
-
-#~ msgid "17xx: Pulse width slide up"
-#~ msgstr "17xx: Изменение скважности вверх"
-
-#~ msgid "18xx: Pulse width slide down"
-#~ msgstr "18xx: Изменение скважности вниз"
-
-#~ msgid "19xx: Cutoff slide up"
-#~ msgstr "19xx: Изменение частоты среза вверх"
-
-#~ msgid "1Axx: Cutoff slide down"
-#~ msgstr "1Axx: Изменение частоты среза вниз"
 
 #~ msgid "<COMPOUND SYSTEM!>"
 #~ msgstr "<СОСТАВНАЯ СИСТЕМА!>"
