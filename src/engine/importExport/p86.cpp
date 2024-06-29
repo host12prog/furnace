@@ -128,7 +128,7 @@ void DivEngine::loadP86(SafeReader& reader, std::vector<DivSample*>& ret, String
 
             int sample_pos = 0;
 
-            for(int j = 0; j < headers[i].sample_length; j++)
+            for(uint32_t j = 0; j < headers[i].sample_length; j++)
             {
                 unsigned char curr_byte = (unsigned char)reader.readC();
                 //curr_byte += 0x80;
