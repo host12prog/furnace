@@ -7657,6 +7657,12 @@ bool FurnaceGUI::init() {
   audioLoadFormats.push_back(_("SNES Bit Rate Reduction"));
   audioLoadFormats.push_back("*.brr");
 
+  audioLoadFormats.push_back(_("PMD's YM2608 ADPCM-B sample bank"));
+  audioLoadFormats.push_back("*.ppc");
+
+  audioLoadFormats.push_back(_("PPS 4-bit AY-3-8910 sample bank"));
+  audioLoadFormats.push_back("*.pps");
+
   audioLoadFormats.push_back(_("all files"));
   audioLoadFormats.push_back("*");
 

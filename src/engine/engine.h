@@ -622,6 +622,7 @@ class DivEngine {
   void loadWOPN(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath);
 
   //sample banks
+  void loadPPC(SafeReader& reader, std::vector<DivSample*>& ret, String& stripPath);
   void loadPPS(SafeReader& reader, std::vector<DivSample*>& ret, String& stripPath);
 
   int loadSampleROM(String path, ssize_t expectedSize, unsigned char*& ret);

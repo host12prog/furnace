@@ -128,6 +128,10 @@ std::vector<DivSample*> DivEngine::sampleFromFile(const char* path) {
       {
         loadPPS(reader,ret,stripPath);
       }
+      if(extS == ".ppc")
+      {
+        loadPPC(reader,ret,stripPath);
+      }
       //... other formats
 
       delete[] buf; //done with buffer

@@ -88,8 +88,6 @@ void DivEngine::loadPPS(SafeReader& reader, std::vector<DivSample*>& ret, String
         headers[i].sample_length = (unsigned short)reader.readS();
         headers[i]._pitch = (unsigned char)reader.readC();
         headers[i]._vol = (unsigned char)reader.readC();
-
-        logI("pps: start %d len %d", headers[i].start_pointer, headers[i].sample_length);
     }
 
     for(int i = 0; i < PPS_BANK_SIZE; i++)
@@ -118,6 +116,8 @@ void DivEngine::loadPPS(SafeReader& reader, std::vector<DivSample*>& ret, String
             }
 
             ret.push_back(s);
+
+            logI("pps: start %d len %d", headers[i].start_pointer, headers[i].sample_length);
         }
     }
   } 
