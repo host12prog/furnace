@@ -31,10 +31,12 @@ extern FurnaceGUI g;
 
 #define _LE(string) (string)
 
-DivSample* DivEngine::sampleFromFile(const char* path) {
+std::vector<DivSample*> DivEngine::sampleFromFile(const char* path) {
+  std::vector<DivSample*> ret;
+
   if (song.sample.size()>=256) {
     lastError=_LE("too many samples!");
-    return NULL;
+    return ret;
   }
   BUSY_BEGIN;
   warnings="";
@@ -75,7 +77,7 @@ DivSample* DivEngine::sampleFromFile(const char* path) {
         BUSY_END;
         lastError=fmt::sprintf(_LE("could not open file! (%s)"),strerror(errno));
         delete sample;
-        return NULL;
+        return ret;
       }
 
       if (fseek(f,0,SEEK_END)<0) {
@@ -83,7 +85,7 @@ DivSample* DivEngine::sampleFromFile(const char* path) {
         BUSY_END;
         lastError=fmt::sprintf(_LE("could not get file length! (%s)"),strerror(errno));
         delete sample;
-        return NULL;
+        return ret;
       }
 
       len=ftell(f);
@@ -93,7 +95,7 @@ DivSample* DivEngine::sampleFromFile(const char* path) {
         BUSY_END;
         lastError=_LE("file is empty!");
         delete sample;
-        return NULL;
+        return ret;
       }
 
       if (len==(SIZE_MAX>>1)) {
@@ -101,7 +103,7 @@ DivSample* DivEngine::sampleFromFile(const char* path) {
         BUSY_END;
         lastError=_LE("file is invalid!");
         delete sample;
-        return NULL;
+        return ret;
       }
 
       if (fseek(f,0,SEEK_SET)<0) {
@@ -109,7 +111,7 @@ DivSample* DivEngine::sampleFromFile(const char* path) {
         BUSY_END;
         lastError=fmt::sprintf(_LE("could not seek to beginning of file! (%s)"),strerror(errno));
         delete sample;
-        return NULL;
+        return ret;
       }
 
       if (extS==".dmc") {
@@ -127,7 +129,7 @@ DivSample* DivEngine::sampleFromFile(const char* path) {
         BUSY_END;
         lastError=_LE("wait... is that right? no I don't think so...");
         delete sample;
-        return NULL;
+        return ret;
       }
 
       unsigned char* dataBuf=sample->dataDPCM;
@@ -154,14 +156,14 @@ DivSample* DivEngine::sampleFromFile(const char* path) {
             BUSY_END;
             lastError=_LE("BRR sample is empty!");
             delete sample;
-            return NULL;
+            return ret;
           }
         } else if ((len%9)!=0) {
           fclose(f);
           BUSY_END;
           lastError=_LE("possibly corrupt BRR sample!");
           delete sample;
-          return NULL;
+          return ret;
         }
       }
 
@@ -170,16 +172,17 @@ DivSample* DivEngine::sampleFromFile(const char* path) {
         BUSY_END;
         lastError=fmt::sprintf(_LE("could not read file! (%s)"),strerror(errno));
         delete sample;
-        return NULL;
+        return ret;
       }
       BUSY_END;
-      return sample;
+      ret.push_back(sample);
+      return ret;
     }
   }
 
 #ifndef HAVE_SNDFILE
   lastError=_LE("Furnace was not compiled with libsndfile!");
-  return NULL;
+  return ret;
 #else
   SF_INFO si;
   SFWrapper sfWrap;
@@ -193,13 +196,13 @@ DivSample* DivEngine::sampleFromFile(const char* path) {
     } else {
       lastError=fmt::sprintf(_LE("could not open file! (%s)\nif this is raw sample data, you may import it by right-clicking the Load Sample icon and selecting \"import raw\"."),sf_error_number(err));
     }
-    return NULL;
+    return ret;
   }
   if (si.frames>16777215) {
     lastError=_LE("this sample is too big! max sample size is 16777215.");
     sfWrap.doClose();
     BUSY_END;
-    return NULL;
+    return ret;
   }
   void* buf=NULL;
   sf_count_t sampleLen=sizeof(short);
@@ -305,7 +308,8 @@ DivSample* DivEngine::sampleFromFile(const char* path) {
   if (sample->centerRate>64000) sample->centerRate=64000;
   sfWrap.doClose();
   BUSY_END;
-  return sample;
+  ret.push_back(sample);
+  return ret;
 #endif
 }
 

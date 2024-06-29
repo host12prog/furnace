@@ -3736,8 +3736,9 @@ bool FurnaceGUI::loop() {
           if (ev.drop.file!=NULL) {
             int sampleCountBefore=e->song.sampleLen;
             std::vector<DivInstrument*> instruments=e->instrumentFromFile(ev.drop.file,true,settings.readInsNames);
+            std::vector<DivSample*> samples = e->sampleFromFile(ev.drop.file);
             DivWavetable* droppedWave=NULL;
-            DivSample* droppedSample=NULL;
+            //DivSample* droppedSample=NULL;
             if (!instruments.empty()) {
               if (e->song.sampleLen!=sampleCountBefore) {
                 e->renderSamplesP();
@@ -3762,10 +3763,22 @@ bool FurnaceGUI::loop() {
               }
               nextWindow=GUI_WINDOW_WAVE_LIST;
               MARK_MODIFIED;
-            } else if ((droppedSample=e->sampleFromFile(ev.drop.file))!=NULL) {
+            } 
+            else if (!samples.empty()) 
+            {
+              e->renderSamplesP();
+              if (!e->getWarnings().empty())
+              {
+                showWarning(e->getWarnings(),GUI_WARN_GENERIC);
+              }
               int sampleCount=-1;
-              sampleCount=e->addSamplePtr(droppedSample);
-              if (sampleCount>=0 && settings.selectAssetOnLoad) {
+              for (DivSample* i: samples)
+              {
+                sampleCount=e->addSamplePtr(i);
+              }
+              //sampleCount=e->addSamplePtr(droppedSample);
+              if (sampleCount>=0 && settings.selectAssetOnLoad) 
+              {
                 curSample=sampleCount;
                 updateSampleTex=true;
               }
@@ -5190,24 +5203,42 @@ bool FurnaceGUI::loop() {
               String errs=_("there were some errors while loading samples:\n");
               bool warn=false;
               for (String i: fileDialog->getFileName()) {
-                DivSample* s=e->sampleFromFile(i.c_str());
-                if (s==NULL) {
+                std::vector<DivSample*> samples=e->sampleFromFile(i.c_str());
+                if (samples.empty()) {
                   if (fileDialog->getFileName().size()>1) {
                     warn=true;
                     errs+=fmt::sprintf("- %s: %s\n",i,e->getLastError());
                   } else {
                     showError(e->getLastError());
                   }
-                } else {
-                  if (e->addSamplePtr(s)==-1) {
-                    if (fileDialog->getFileName().size()>1) {
-                      warn=true;
-                      errs+=fmt::sprintf("- %s: %s\n",i,e->getLastError());
-                    } else {
-                      showError(e->getLastError());
+                } 
+                else 
+                {
+                  for (DivSample* s: samples)
+                  {
+                    int counter = 0;
+
+                    if (e->addSamplePtr(s)==-1)
+                    {
+                      if(counter == 0) //so only 1st sample gives warning or error, it should prevent a lot of duplicate errors
+                      {
+                        if (fileDialog->getFileName().size()>1)
+                        {
+                          warn=true;
+                          errs+=fmt::sprintf("- %s: %s\n",i,e->getLastError());
+                        } 
+                        else 
+                        {
+                          showError(e->getLastError());
+                        }
+                      }
+                    } 
+                    else 
+                    {
+                      MARK_MODIFIED;
                     }
-                  } else {
-                    MARK_MODIFIED;
+
+                    counter++;
                   }
                 }
               }
@@ -5216,24 +5247,43 @@ bool FurnaceGUI::loop() {
               }
               break;
             }
-            case GUI_FILE_SAMPLE_OPEN_REPLACE: {
-              DivSample* s=e->sampleFromFile(copyOfName.c_str());
-              if (s==NULL) {
+            case GUI_FILE_SAMPLE_OPEN_REPLACE: 
+            {
+              std::vector<DivSample*> samples=e->sampleFromFile(copyOfName.c_str());
+              if (samples.empty()) 
+              {
                 showError(e->getLastError());
-              } else {
-                if (curSample>=0 && curSample<(int)e->song.sample.size()) {
-                  e->lockEngine([this,s]() {
-                    // if it crashes here please tell me...
-                    DivSample* oldSample=e->song.sample[curSample];
-                    e->song.sample[curSample]=s;
-                    delete oldSample;
-                    e->renderSamples();
-                    MARK_MODIFIED;
-                  });
-                  updateSampleTex=true;
-                } else {
-                  showError(_("...but you haven't selected a sample!"));
-                  delete s;
+              } 
+              else 
+              {
+                if((int)samples.size() == 1)
+                {
+                  if (curSample>=0 && curSample<(int)e->song.sample.size()) 
+                  {
+                    DivSample* s = samples[0];
+                    e->lockEngine([this, s]()
+                    {
+                      // if it crashes here please tell me...
+                      DivSample* oldSample=e->song.sample[curSample];
+                      e->song.sample[curSample]= s;
+                      delete oldSample;
+                      e->renderSamples();
+                      MARK_MODIFIED;
+                    });
+                    updateSampleTex=true;
+                  } 
+                  else 
+                  {
+                    showError(_("...but you haven't selected a sample!"));
+                    delete samples[0];
+                  }
+                }
+                else
+                {
+                  for (DivSample* s: samples) 
+                  {
+                    delete s;
+                  }
                 }
               }
               break;

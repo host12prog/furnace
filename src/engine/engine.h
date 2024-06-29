@@ -1053,7 +1053,8 @@ class DivEngine {
     int addSamplePtr(DivSample* which);
 
     // get sample from file
-    DivSample* sampleFromFile(const char* path);
+    //DivSample* sampleFromFile(const char* path);
+    std::vector<DivSample*> sampleFromFile(const char* path);
 
     // get raw sample
     DivSample* sampleFromFileRaw(const char* path, DivSampleDepth depth, int channels, bool bigEndian, bool unsign, bool swapNibbles, int rate);
