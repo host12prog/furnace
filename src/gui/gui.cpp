@@ -3766,15 +3766,17 @@ bool FurnaceGUI::loop() {
             } 
             else if (!samples.empty()) 
             {
-              e->renderSamplesP();
+              if (e->song.sampleLen!=sampleCountBefore) {
+                //e->renderSamplesP();
+              }
               if (!e->getWarnings().empty())
               {
                 showWarning(e->getWarnings(),GUI_WARN_GENERIC);
               }
               int sampleCount=-1;
-              for (DivSample* i: samples)
+              for (DivSample* s: samples)
               {
-                sampleCount=e->addSamplePtr(i);
+                sampleCount=e->addSamplePtr(s);
               }
               //sampleCount=e->addSamplePtr(droppedSample);
               if (sampleCount>=0 && settings.selectAssetOnLoad) 

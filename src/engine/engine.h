@@ -621,6 +621,9 @@ class DivEngine {
   void loadWOPL(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath);
   void loadWOPN(SafeReader& reader, std::vector<DivInstrument*>& ret, String& stripPath);
 
+  //sample banks
+  void loadPPS(SafeReader& reader, std::vector<DivSample*>& ret, String& stripPath);
+
   int loadSampleROM(String path, ssize_t expectedSize, unsigned char*& ret);
 
   bool initAudioBackend();

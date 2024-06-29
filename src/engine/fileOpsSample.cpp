@@ -67,6 +67,74 @@ std::vector<DivSample*> DivEngine::sampleFromFile(const char* path) {
       }
       extS+=i;
     }
+
+    if(extS == ".pps" || extS == ".ppc") //sample banks!
+    {
+      String stripPath;
+      const char* pathReduxEnd=strrchr(pathRedux,'.');
+      if (pathReduxEnd==NULL) {
+        stripPath=pathRedux;
+      } else {
+        for (const char* i=pathRedux; i!=pathReduxEnd && (*i); i++) {
+          stripPath+=*i;
+        }
+      }
+
+      FILE* f=ps_fopen(path,"rb");
+      if (f==NULL) {
+        lastError=strerror(errno);
+        return ret;
+      }
+      unsigned char* buf;
+      ssize_t len;
+      if (fseek(f,0,SEEK_END)!=0) {
+        lastError=strerror(errno);
+        fclose(f);
+        return ret;
+      }
+      len=ftell(f);
+      if (len<0) {
+        lastError=strerror(errno);
+        fclose(f);
+        return ret;
+      }
+      if (len==(SIZE_MAX>>1)) {
+        lastError=strerror(errno);
+        fclose(f);
+        return ret;
+      }
+      if (len==0) {
+        lastError=strerror(errno);
+        fclose(f);
+        return ret;
+      }
+      if (fseek(f,0,SEEK_SET)!=0) {
+        lastError=strerror(errno);
+        fclose(f);
+        return ret;
+      }
+      buf=new unsigned char[len];
+      if (fread(buf,1,len,f)!=(size_t)len) {
+        logW("did not read entire sample bank file buffer!");
+        lastError=_LE("did not read entire sample bank file!");
+        delete[] buf;
+        return ret;
+      }
+      fclose(f);
+
+      SafeReader reader = SafeReader(buf,len);
+      
+      if(extS == ".pps")
+      {
+        loadPPS(reader,ret,stripPath);
+      }
+      //... other formats
+
+      delete[] buf; //done with buffer
+      BUSY_END;
+      return ret;
+    }
+
     if (extS==".dmc" || extS==".brr") { // read as .dmc or .brr
       size_t len=0;
       DivSample* sample=new DivSample;

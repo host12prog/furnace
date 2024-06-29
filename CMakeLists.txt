@@ -821,6 +821,8 @@ src/engine/importExport/wopl.cpp
 src/engine/importExport/wopn.cpp
 src/engine/importExport/xm.cpp
 src/engine/importExport/y12.cpp
+
+src/engine/importExport/pps.cpp
 )
 
 if (USE_SNDFILE)
