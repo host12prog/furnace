@@ -7648,7 +7648,11 @@ bool FurnaceGUI::init() {
 #endif
 
   compatFormats+="*.dmc ";
-  compatFormats+="*.brr";
+  compatFormats+="*.brr ";
+
+  compatFormats+="*.ppc ";
+  compatFormats+="*.pps ";
+  compatFormats+="*.pvi";
   audioLoadFormats[1]=compatFormats;
 
   audioLoadFormats.push_back(_("NES DPCM data"));
@@ -7662,6 +7666,9 @@ bool FurnaceGUI::init() {
 
   audioLoadFormats.push_back(_("PPS 4-bit AY-3-8910 sample bank"));
   audioLoadFormats.push_back("*.pps");
+
+  audioLoadFormats.push_back(_("PVI YM2608 ADPCM-B sample bank"));
+  audioLoadFormats.push_back("*.pvi");
 
   audioLoadFormats.push_back(_("all files"));
   audioLoadFormats.push_back("*");

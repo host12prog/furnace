@@ -824,6 +824,7 @@ src/engine/importExport/y12.cpp
 
 src/engine/importExport/ppc.cpp
 src/engine/importExport/pps.cpp
+src/engine/importExport/pvi.cpp
 )
 
 if (USE_SNDFILE)
