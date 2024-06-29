@@ -126,7 +126,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
       return false;
     }
 
-    ds.name=reader.readString(28);
+    ds.name=reader.readStringLatin1(28);
     
     reader.readC(); // 0x1a
     if (reader.readC()!=16) {
@@ -375,7 +375,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
           return false;
         }
 
-        String name=reader.readString(28);
+        String name=reader.readStringLatin1(28);
         ins->name=name;
 
         ds.ins.push_back(ins);
@@ -410,7 +410,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
         }
       }
 
-      String dosName=reader.readString(12);
+      String dosName=reader.readStringLatin1(12);
 
       if (ins->type==DIV_INS_ES5506) {
         unsigned int memSeg=0;
@@ -443,7 +443,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
         reader.readI();
         reader.readI();
 
-        String name=reader.readString(28);
+        String name=reader.readStringLatin1(28);
         s->name=dosName;
         ins->name=name;
 
@@ -583,14 +583,19 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
         // x
         reader.readS();
 
-        // oh no, we've got a problem here...
-        // C-2 speed
-        reader.readI();
+        // C-2 speed - convert to macro
+        int centerRate=reader.readI();
+        double centerNote=12.0*log2((double)centerRate/8363.0);
+        if (round(centerNote)!=0) {
+          ins->std.arpMacro.len=1;
+          ins->std.arpMacro.val[0]=round(centerNote);
+        }
+        logV("centerRate: %d (%f)",centerRate,centerNote);
 
         // x
         reader.seek(12,SEEK_CUR);
 
-        String name=reader.readString(28);
+        String name=reader.readStringLatin1(28);
         ins->name=name;
 
         // "SCRI"
@@ -890,7 +895,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
               break;
             case 'C': // next order
               p->data[curRow][effectCol[chan]++]=0x0d;
-              p->data[curRow][effectCol[chan]++]=effectVal;
+              p->data[curRow][effectCol[chan]++]=(effectVal>>4)*10+(effectVal&15);
               break;
             case 'D': // vol slide
               if (effectVal!=0) {
@@ -907,6 +912,9 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
                 portaStatus[chan]=effectVal;
                 portaStatusChanged[chan]=true;
               }
+              if (hasNoteIns) {
+                portaStatusChanged[chan]=true;
+              }
               portaType[chan]=2;
               porting[chan]=true;
               break;
@@ -915,12 +923,18 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
                 portaStatus[chan]=effectVal;
                 portaStatusChanged[chan]=true;
               }
+              if (hasNoteIns) {
+                portaStatusChanged[chan]=true;
+              }
               portaType[chan]=1;
               porting[chan]=true;
               break;
             case 'G': // porta
               if (effectVal!=0) {
                 portaStatus[chan]=effectVal;
+                portaStatusChanged[chan]=true;
+              }
+              if (hasNoteIns) {
                 portaStatusChanged[chan]=true;
               }
               portaType[chan]=3;
