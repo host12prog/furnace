@@ -1755,7 +1755,8 @@ void FurnaceGUI::openFileDialog(FurnaceGUIFileDialogs type) {
                 prevIns=curIns;
               }
               if (prevIns>=0 && prevIns<=(int)e->song.ins.size()) {
-                *e->song.ins[prevIns]=*instruments[0];
+                //*e->song.ins[prevIns]=*instruments[0];
+                e->copyInstrument(e->song.ins[prevIns], instruments[0]);
               }
             } else {
               e->loadTempIns(instruments[0]);
@@ -4878,7 +4879,8 @@ bool FurnaceGUI::loop() {
         if (curFileDialog==GUI_FILE_INS_OPEN_REPLACE) {
           if (prevInsData!=NULL) {
             if (prevIns>=0 && prevIns<(int)e->song.ins.size()) {
-              *e->song.ins[prevIns]=*prevInsData;
+              //*e->song.ins[prevIns]=*prevInsData;
+              e->copyInstrument(e->song.ins[prevIns], prevInsData);
             }
           }
         } else {
@@ -5342,7 +5344,8 @@ bool FurnaceGUI::loop() {
                   pendingInsSingle=true;
                 } else { // replace with the only instrument
                   if (curIns>=0 && curIns<(int)e->song.ins.size()) {
-                    *e->song.ins[curIns]=*instruments[0];
+                    //*e->song.ins[curIns]=*instruments[0];
+                    e->copyInstrument(e->song.ins[curIns], instruments[0]);
                   } else {
                     showError(_("...but you haven't selected an instrument!"));
                   }
@@ -6591,7 +6594,8 @@ bool FurnaceGUI::loop() {
           if (!i.second || pendingInsSingle) {
             if (i.second) {
               if (curIns>=0 && curIns<(int)e->song.ins.size()) {
-                *e->song.ins[curIns]=*i.first;
+                //*e->song.ins[curIns]=*i.first;
+                e->copyInstrument(e->song.ins[curIns], i.first);
               } else {
                 showError(_("...but you haven't selected an instrument!"));
               }
