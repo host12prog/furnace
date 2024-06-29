@@ -587,8 +587,8 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
         int centerRate=reader.readI();
         double centerNote=12.0*log2((double)centerRate/8363.0);
         if (round(centerNote)!=0) {
-          ins->std.arpMacro.len=1;
-          ins->std.arpMacro.val[0]=round(centerNote);
+          ins->std.get_macro(DIV_MACRO_ARP, true)->len=1;
+          ins->std.get_macro(DIV_MACRO_ARP, true)->val[0]=round(centerNote);
         }
         logV("centerRate: %d (%f)",centerRate,centerNote);
 
