@@ -86,6 +86,7 @@ typedef struct
     uint16_t end_pointer;
 } PPC_HEADER;
 
+#define UNUSED(x) (void)(x)
 
 void DivEngine::loadPPC(SafeReader& reader, std::vector<DivSample*>& ret, String& stripPath)
 {
@@ -95,6 +96,7 @@ void DivEngine::loadPPC(SafeReader& reader, std::vector<DivSample*>& ret, String
 
     String file_sig = reader.readString(30);
     unsigned short end_of_data = (unsigned short)reader.readS();
+    UNUSED(end_of_data);
 
     if(file_sig != PPC_FILE_SIG) return;
 
