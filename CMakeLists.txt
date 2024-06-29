@@ -822,9 +822,12 @@ src/engine/importExport/wopn.cpp
 src/engine/importExport/xm.cpp
 src/engine/importExport/y12.cpp
 
+src/engine/importExport/p86.cpp
+src/engine/importExport/pdx.cpp
 src/engine/importExport/ppc.cpp
 src/engine/importExport/pps.cpp
 src/engine/importExport/pvi.cpp
+src/engine/importExport/pzi.cpp
 )
 
 if (USE_SNDFILE)

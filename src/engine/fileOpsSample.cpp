@@ -68,7 +68,8 @@ std::vector<DivSample*> DivEngine::sampleFromFile(const char* path) {
       extS+=i;
     }
 
-    if(extS == ".pps" || extS == ".ppc" || extS == ".pvi") //sample banks!
+    if(extS == ".pps" || extS == ".ppc" || extS == ".pvi" ||
+      extS == ".pdx" || extS == ".pzi" || extS == ".p86") //sample banks!
     {
       String stripPath;
       const char* pathReduxEnd=strrchr(pathRedux,'.');
@@ -136,7 +137,18 @@ std::vector<DivSample*> DivEngine::sampleFromFile(const char* path) {
       {
         loadPVI(reader,ret,stripPath);
       }
-      //... other formats
+      if(extS == ".pdx")
+      {
+        loadPDX(reader,ret,stripPath);
+      }
+      if(extS == ".pzi")
+      {
+        loadPZI(reader,ret,stripPath);
+      }
+      if(extS == ".p86")
+      {
+        loadP86(reader,ret,stripPath);
+      }
 
       delete[] buf; //done with buffer
       BUSY_END;
