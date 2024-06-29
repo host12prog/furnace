@@ -85,7 +85,7 @@ void DivEngine::loadPDX(SafeReader& reader, std::vector<DivSample*>& ret, String
 
             int sample_pos = 0;
 
-            for(int j = 0; j < headers[i].sample_length; j++)
+            for(unsigned short j = 0; j < headers[i].sample_length; j++)
             {
                 unsigned char curr_byte = (unsigned char)reader.readC();
                 curr_byte = (curr_byte << 4) | (curr_byte >> 4);

@@ -117,7 +117,6 @@ void DivEngine::loadPZI(SafeReader& reader, std::vector<DivSample*>& ret, String
     {
         if (headers[i].start_pointer < MAX_SANITY_CAP && headers[i].sample_length < MAX_SANITY_CAP &&
             headers[i].loop_start < MAX_SANITY_CAP && headers[i].loop_end < MAX_SANITY_CAP &&
-            headers[i].sample_rate < MAX_SANITY_CAP &&
             headers[i].start_pointer > 0 && headers[i].sample_length > 0)
         {
             DivSample* s = new DivSample;
@@ -131,7 +130,7 @@ void DivEngine::loadPZI(SafeReader& reader, std::vector<DivSample*>& ret, String
 
             int sample_pos = 0;
 
-            for (int j = 0; j < headers[i].sample_length; j++)
+            for (uint32_t j = 0; j < headers[i].sample_length; j++)
             {
                 unsigned char curr_byte = (unsigned char)reader.readC();
                 curr_byte += 0x80;
