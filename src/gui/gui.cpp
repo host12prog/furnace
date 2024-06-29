@@ -7655,7 +7655,8 @@ bool FurnaceGUI::init() {
   compatFormats+="*.pvi ";
   compatFormats+="*.pdx ";
   compatFormats+="*.pzi ";
-  compatFormats+="*.p86";
+  compatFormats+="*.p86 ";
+  compatFormats+="*.p";
   audioLoadFormats[1]=compatFormats;
 
   audioLoadFormats.push_back(_("NES DPCM data"));
@@ -7681,6 +7682,9 @@ bool FurnaceGUI::init() {
 
   audioLoadFormats.push_back(_("P86 8-bit PCM sample bank"));
   audioLoadFormats.push_back("*.p86");
+
+  audioLoadFormats.push_back(_("P OKI ADPCM sample bank"));
+  audioLoadFormats.push_back("*.p");
 
   audioLoadFormats.push_back(_("all files"));
   audioLoadFormats.push_back("*");
