@@ -155,6 +155,17 @@ std::vector<DivSample*> DivEngine::sampleFromFile(const char* path) {
         loadP(reader,ret,stripPath);
       }
 
+      if((int)ret.size() > 0)
+      {
+        int counter = 0;
+
+        for(DivSample* s: ret)
+        {
+          s->name = fmt::sprintf("%s sample %d", stripPath, counter);
+          counter++;
+        }
+      }
+
       delete[] buf; //done with buffer
       BUSY_END;
       return ret;
