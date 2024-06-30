@@ -111,8 +111,6 @@ void DivEngine::loadP86(SafeReader& reader, std::vector<DivSample*>& ret, String
         headers[i].sample_length = read_3bytes(reader);
     }
 
-    //return;
-
     for(int i = 0; i < P86_BANK_SIZE; i++)
     {
         if(headers[i].start_pointer != 0 && headers[i].sample_length != 0)
@@ -147,9 +145,5 @@ void DivEngine::loadP86(SafeReader& reader, std::vector<DivSample*>& ret, String
   {
     lastError=_LE("premature end of file");
     logE("premature end of file");
-    /* if (ins != NULL) 
-    {
-      delete ins;
-    } */
   }
 }

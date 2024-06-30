@@ -158,9 +158,5 @@ void DivEngine::loadPZI(SafeReader& reader, std::vector<DivSample*>& ret, String
   {
     lastError=_LE("premature end of file");
     logE("premature end of file");
-    /* if (ins != NULL) 
-    {
-      delete ins;
-    } */
   }
 }
