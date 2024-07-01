@@ -82,7 +82,8 @@ Stream of Sample Data {
 
 } */
 
-#define PVI_FILE_SIG "PVI2"
+#define PVIV2_FILE_SIG "PVI2"
+#define PVIV1_FILE_SIG "PVI1"
 
 #define PVI_BANK_SIZE 128
 #define PVI_SAMPLE_RATE 16000
@@ -104,7 +105,7 @@ void DivEngine::loadPVI(SafeReader& reader, std::vector<DivSample*>& ret, String
     reader.seek(0, SEEK_SET);
 
     String file_sig = reader.readString(4);
-    if(file_sig != PVI_FILE_SIG) return;
+    if(file_sig != PVIV1_FILE_SIG && file_sig != PVIV2_FILE_SIG) return;
 
     unsigned int unknown_settings = (unsigned int)reader.readI();
     UNUSED(unknown_settings);
