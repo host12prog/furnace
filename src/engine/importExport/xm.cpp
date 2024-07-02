@@ -42,10 +42,10 @@ void readEnvelope(DivInstrument* ins, int env, unsigned char flags, unsigned cha
   DivInstrumentMacro* target=NULL;
   switch (env) {
     case 0: // volume
-      target=&ins->std.volMacro;
+      target=ins->std.get_macro(DIV_MACRO_VOL, true);
       break;
     case 1: // panning (split later)
-      target=&ins->std.panLMacro;
+      target=ins->std.get_macro(DIV_MACRO_PAN_LEFT, true);
       break;
   }
   target->len=0;
@@ -102,22 +102,22 @@ void readEnvelope(DivInstrument* ins, int env, unsigned char flags, unsigned cha
 
   // split L/R
   if (env==1) {
-    for (int i=0; i<ins->std.panLMacro.len; i++) {
-      int val=ins->std.panLMacro.val[i];
+    for (int i=0; i<ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->len; i++) {
+      int val=ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->val[i];
       if (val==0) {
-        ins->std.panLMacro.val[i]=4095;
-        ins->std.panRMacro.val[i]=4095;
+        ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->val[i]=4095;
+        ins->std.get_macro(DIV_MACRO_PAN_RIGHT, true)->val[i]=4095;
       } else if (val>0) { // pan right
-        ins->std.panLMacro.val[i]=4095*pow(1.0-((double)val/64.0),0.25);
-        ins->std.panRMacro.val[i]=4095;
+        ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->val[i]=4095*pow(1.0-((double)val/64.0),0.25);
+        ins->std.get_macro(DIV_MACRO_PAN_RIGHT, true)->val[i]=4095;
       } else { // pan left
-        ins->std.panLMacro.val[i]=4095;
-        ins->std.panRMacro.val[i]=4095*pow(1.0+((double)val/64.0),0.25);
+        ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->val[i]=4095;
+        ins->std.get_macro(DIV_MACRO_PAN_RIGHT, true)->val[i]=4095*pow(1.0+((double)val/64.0),0.25);
       }
     }
-    ins->std.panRMacro.len=ins->std.panLMacro.len;
-    ins->std.panRMacro.loop=ins->std.panLMacro.loop;
-    ins->std.panRMacro.rel=ins->std.panLMacro.rel;
+    ins->std.get_macro(DIV_MACRO_PAN_RIGHT, true)->len=ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->len;
+    ins->std.get_macro(DIV_MACRO_PAN_RIGHT, true)->loop=ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->loop;
+    ins->std.get_macro(DIV_MACRO_PAN_RIGHT, true)->rel=ins->std.get_macro(DIV_MACRO_PAN_LEFT, true)->rel;
   }
 }
 
@@ -514,21 +514,21 @@ bool DivEngine::loadXM(unsigned char* file, size_t len) {
         if (volType&1) {
           // add fade-out
           int cur=64;
-          if (ins->std.volMacro.len>0) {
-            cur=ins->std.volMacro.val[ins->std.volMacro.len-1];
+          if (ins->std.get_macro(DIV_MACRO_VOL, true)->len>0) {
+            cur=ins->std.get_macro(DIV_MACRO_VOL, true)->val[ins->std.get_macro(DIV_MACRO_VOL, true)->len-1];
           }
-          for (int fadeOut=32767; fadeOut>0 && ins->std.volMacro.len<254; fadeOut-=volFade) {
-            ins->std.volMacro.val[ins->std.volMacro.len++]=(cur*fadeOut)>>15;
+          for (int fadeOut=32767; fadeOut>0 && ins->std.get_macro(DIV_MACRO_VOL, true)->len<254; fadeOut-=volFade) {
+            ins->std.get_macro(DIV_MACRO_VOL, true)->val[ins->std.get_macro(DIV_MACRO_VOL, true)->len++]=(cur*fadeOut)>>15;
           }
-          if (ins->std.volMacro.len<255) {
-            ins->std.volMacro.val[ins->std.volMacro.len++]=0;
+          if (ins->std.get_macro(DIV_MACRO_VOL, true)->len<255) {
+            ins->std.get_macro(DIV_MACRO_VOL, true)->val[ins->std.get_macro(DIV_MACRO_VOL, true)->len++]=0;
           }
         } else {
           // add a one-tick macro to make note release happy
-          ins->std.volMacro.val[0]=64;
-          ins->std.volMacro.val[1]=0;
-          ins->std.volMacro.rel=0;
-          ins->std.volMacro.len=2;
+          ins->std.get_macro(DIV_MACRO_VOL, true)->val[0]=64;
+          ins->std.get_macro(DIV_MACRO_VOL, true)->val[1]=0;
+          ins->std.get_macro(DIV_MACRO_VOL, true)->rel=0;
+          ins->std.get_macro(DIV_MACRO_VOL, true)->len=2;
         }
 
         if (!reader.seek(headerSeek,SEEK_SET)) {
