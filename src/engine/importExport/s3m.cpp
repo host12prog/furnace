@@ -214,11 +214,12 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
 
     logD("reading orders...");
     size_t curSubSong=0;
+    int curOrder1=0;
     ds.subsong[curSubSong]->ordersLen=0;
     bool subSongIncreased=false;
     for (int i=0; i<ordersLen; i++) {
       unsigned char nextOrder=reader.readC();
-      orders[i]=curOrder;
+      orders[i]=curOrder1;
       
       // skip +++ order
       if (nextOrder==254) {
@@ -232,7 +233,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
           curSubSong++;
           subSongIncreased=true;
         }
-        curOrder=0;
+        curOrder1=0;
         continue;
       }
       subSongIncreased=false;
@@ -246,7 +247,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
         ds.subsong[curSubSong]->orders.ord[j][ds.subsong[curSubSong]->ordersLen]=nextOrder;
       }
       ds.subsong[curSubSong]->ordersLen++;
-      curOrder++;
+      curOrder1++;
     }
 
     logD("reading ins pointers...");
@@ -423,7 +424,12 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
 
         unsigned int length=reader.readI();
 
-        logV("length: %x",length);
+        if (length>16777216) {
+          logE("abnormal sample size! %x",reader.tell());
+          lastError="bad sample size";
+          delete[] file;
+          return false;
+        }
 
         DivSample* s=new DivSample;
 
@@ -891,6 +897,7 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
               break;
             case 'B': // go to order
               p->data[curRow][effectCol[chan]++]=0x0b;
+              logD("0B: %x %x",effectVal,orders[effectVal]);
               p->data[curRow][effectCol[chan]++]=orders[effectVal];
               break;
             case 'C': // next order

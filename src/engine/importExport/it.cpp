@@ -305,11 +305,12 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
 
     logD("reading orders...");
     size_t curSubSong=0;
+    int curOrder1=0;
     ds.subsong[curSubSong]->ordersLen=0;
     bool subSongIncreased=false;
     for (int i=0; i<ordersLen; i++) {
       unsigned char nextOrder=reader.readC();
-      orders[i]=curOrder;
+      orders[i]=curOrder1;
       
       // skip +++ order
       if (nextOrder==254) {
@@ -323,7 +324,7 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
           curSubSong++;
           subSongIncreased=true;
         }
-        curOrder=0;
+        curOrder1=0;
         continue;
       }
       subSongIncreased=false;
@@ -337,7 +338,7 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
         ds.subsong[curSubSong]->orders.ord[j][ds.subsong[curSubSong]->ordersLen]=nextOrder;
       }
       ds.subsong[curSubSong]->ordersLen++;
-      curOrder++;
+      curOrder1++;
     }
 
     for (int i=0; i<ds.insLen; i++) {
@@ -547,7 +548,7 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
       reader.read(magic,4);
 
       if (memcmp(magic,"IMPS",4)!=0) {
-        logE("invalid sample header!");
+        logW("invalid sample header!");
         lastError="invalid sample header";
         delete s;
         delete[] file;
@@ -575,7 +576,16 @@ bool DivEngine::loadIT(unsigned char* file, size_t len) {
         s->depth=DIV_SAMPLE_DEPTH_8BIT;
       }
 
-      s->init((unsigned int)reader.readI());
+      unsigned int sampleLen=reader.readI();
+
+      if (sampleLen>16777216) {
+        logE("abnormal sample size! %x",reader.tell());
+        lastError="bad sample size";
+        delete[] file;
+        return false;
+      }
+
+      s->init(sampleLen);
       s->loopStart=reader.readI();
       s->loopEnd=reader.readI();
       s->centerRate=reader.readI()/2;
