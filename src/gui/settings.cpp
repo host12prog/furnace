@@ -1397,7 +1397,7 @@ void FurnaceGUI::drawSettings() {
           }
           ImGui::EndTable();
         }
-
+        
         bool renderPoolThreadsB=(settings.renderPoolThreads>0);
         if (ImGui::Checkbox(_("Multi-threaded (EXPERIMENTAL)"),&renderPoolThreadsB)) {
           if (renderPoolThreadsB) {
