@@ -801,15 +801,6 @@ void FurnaceGUI::drawDebug() {
         settings.displayPartial=displayPartialB;
         willCommit = true;
       }
-
-      bool showPoolB = settings.showPool;
-      if (ImGui::Checkbox("unlocked audio multi-threading options!", &showPoolB))
-      {
-        settings.showPool=showPoolB;
-        willCommit = true;
-      }
-
-
       
       ImGui::TreePop();
     }
