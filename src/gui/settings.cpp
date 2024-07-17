@@ -175,7 +175,8 @@ const char* c64Cores[]={
 
 const char* pokeyCores[]={
   "Atari800 (mzpokeysnd)",
-  _N("ASAP (C++ port)")
+  _N("ASAP (C++ port)"),
+  NULL
 };
 
 const char* opnCores[]={
