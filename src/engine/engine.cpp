@@ -55,124 +55,134 @@ void process(void* u, float** in, float** out, int inChans, int outChans, unsign
 const char* DivEngine::getEffectDesc(unsigned char effect, int chan, bool notNull) {
   switch (effect) {
     case 0x00:
-      return "00xy: Arpeggio";
+      return _("00xy: Arpeggio");
     case 0x01:
-      return "01xx: Pitch slide up";
+      return _("01xx: Pitch slide up");
     case 0x02:
-      return "02xx: Pitch slide down";
+      return _("02xx: Pitch slide down");
     case 0x03:
-      return "03xx: Portamento";
+      return _("03xx: Portamento");
     case 0x04:
-      return "04xy: Vibrato (x: speed; y: depth)";
+      return _("04xy: Vibrato (x: speed; y: depth)");
     case 0x05:
-      return "05xy: Volume slide + vibrato (compatibility only!)";
+      return _("05xy: Volume slide + vibrato (compatibility only!)");
     case 0x06:
-      return "06xy: Volume slide + portamento (compatibility only!)";
+      return _("06xy: Volume slide + portamento (compatibility only!)");
     case 0x07:
-      return "07xy: Tremolo (x: speed; y: depth)";
+      return _("07xy: Tremolo (x: speed; y: depth)");
     case 0x08:
-      return "08xy: Set panning (x: left; y: right)";
+      return _("08xy: Set panning (x: left; y: right)");
     case 0x09:
-      return "09xx: Set groove pattern (speed 1 if no grooves exist)";
+      return _("09xx: Set groove pattern (speed 1 if no grooves exist)");
     case 0x0a:
-      return "0Axy: Volume slide (0y: down; x0: up)";
+      return _("0Axy: Volume slide (0y: down; x0: up)");
     case 0x0b:
-      return "0Bxx: Jump to pattern";
+      return _("0Bxx: Jump to pattern");
     case 0x0c:
-      return "0Cxx: Retrigger";
+      return _("0Cxx: Retrigger");
     case 0x0d:
-      return "0Dxx: Jump to next pattern";
+      return _("0Dxx: Jump to next pattern");
     case 0x0f:
-      return "0Fxx: Set speed (speed 2 if no grooves exist)";
+      return _("0Fxx: Set speed (speed 2 if no grooves exist)");
     case 0x80:
-      return "80xx: Set panning (00: left; 80: center; FF: right)";
+      return _("80xx: Set panning (00: left; 80: center; FF: right)");
     case 0x81:
-      return "81xx: Set panning (left channel)";
+      return _("81xx: Set panning (left channel)");
     case 0x82:
-      return "82xx: Set panning (right channel)";
+      return _("82xx: Set panning (right channel)");
+    case 0x83:
+      return _("83xy: Panning slide (x0: left; 0y: right)");
+    case 0x84:
+      return _("84xy: Panbrello (x: speed; y: depth)");
     case 0x88:
-      return "88xy: Set panning (rear channels; x: left; y: right)";
+      return _("88xy: Set panning (rear channels; x: left; y: right)");
       break;
     case 0x89:
-      return "89xx: Set panning (rear left channel)";
+      return _("89xx: Set panning (rear left channel)");
       break;
     case 0x8a:
-      return "8Axx: Set panning (rear right channel)";
+      return _("8Axx: Set panning (rear right channel)");
       break;
     case 0xc0: case 0xc1: case 0xc2: case 0xc3:
-      return "Cxxx: Set tick rate (hz)";
+      return _("Cxxx: Set tick rate (hz)");
+    case 0xd8:
+      return _("D8xx: Set volume slide bottom boundary");
+    case 0xd9:
+      return _("D9xx: Set volume slide top boundary");
+    case 0xdc:
+      return _("DCxx: Delayed mute");
     case 0xe0:
-      return "E0xx: Set arp speed";
+      return _("E0xx: Set arp speed");
     case 0xe1:
-      return "E1xy: Note slide up (x: speed; y: semitones)";
+      return _("E1xy: Note slide up (x: speed; y: semitones)");
     case 0xe2:
-      return "E2xy: Note slide down (x: speed; y: semitones)";
+      return _("E2xy: Note slide down (x: speed; y: semitones)");
     case 0xe3:
-      return "E3xx: Set vibrato shape (0: up/down; 1: up only; 2: down only)";
+      return _("E3xx: Set vibrato shape");
     case 0xe4:
-      return "E4xx: Set vibrato range";
+      return _("E4xx: Set vibrato range");
     case 0xe5:
-      return "E5xx: Set pitch (80: center)";
+      return _("E5xx: Set pitch (80: center)");
     case 0xe6:
-      return "E6xy: Quick legato (x: time (0-7 up; 8-F down); y: semitones)";
+      return _("E6xy: Quick legato (x: time (0-7 up; 8-F down); y: semitones)");
     case 0xe7:
-      return "E7xx: Macro release";
+      return _("E7xx: Macro release");
     case 0xe8:
-      return "E8xy: Quick legato up (x: time; y: semitones)";
+      return _("E8xy: Quick legato up (x: time; y: semitones)");
     case 0xe9:
-      return "E9xy: Quick legato down (x: time; y: semitones)";
+      return _("E9xy: Quick legato down (x: time; y: semitones)");
     case 0xea:
-      return "EAxx: Legato";
+      return _("EAxx: Legato");
     case 0xeb:
-      return "EBxx: Set LEGACY sample mode bank";
+      return _("EBxx: Set LEGACY sample mode bank");
     case 0xec:
-      return "ECxx: Note cut";
+      return _("ECxx: Note cut");
     case 0xed:
-      return "EDxx: Note delay";
+      return _("EDxx: Note delay");
     case 0xee:
-      return "EExx: Send external command";
+      return _("EExx: Send external command");
     case 0xf0:
-      return "F0xx: Set tick rate (bpm)";
+      return _("F0xx: Set tick rate (bpm)");
     case 0xf1:
-      return "F1xx: Single tick note slide up";
+      return _("F1xx: Single tick note slide up");
     case 0xf2:
-      return "F2xx: Single tick note slide down";
+      return _("F2xx: Single tick note slide down");
     case 0xf3:
-      return "F3xx: Fine volume slide up";
+      return _("F3xx: Fine volume slide up");
     case 0xf4:
-      return "F4xx: Fine volume slide down";
+      return _("F4xx: Fine volume slide down");
     case 0xf5:
-      return "F5xx: Disable macro (see manual)";
+      return _("F5xx: Disable macro (see manual)");
     case 0xf6:
-      return "F6xx: Enable macro (see manual)";
+      return _("F6xx: Enable macro (see manual)");
     case 0xf7:
-      return "F7xx: Restart macro (see manual)";
+      return _("F7xx: Restart macro (see manual)");
     case 0xf8:
-      return "F8xx: Single tick volume slide up";
+      return _("F8xx: Single tick volume slide up");
     case 0xf9:
-      return "F9xx: Single tick volume slide down";
+      return _("F9xx: Single tick volume slide down");
     case 0xfa:
-      return "FAxx: Fast volume slide (0y: down; x0: up)";
+      return _("FAxx: Fast volume slide (0y: down; x0: up)");
     case 0xfc:
-      return "FCxx: Note release";
+      return _("FCxx: Note release");
     case 0xfd:
-      return "FDxx: Set virtual tempo numerator";
+      return _("FDxx: Set virtual tempo numerator");
     case 0xfe:
-      return "FExx: Set virtual tempo denominator";
+      return _("FExx: Set virtual tempo denominator");
     case 0xff:
-      return "FFxx: Stop song";
+      return _("FFxx: Stop song");
     default:
       if ((effect&0xf0)==0x90) {
         if (song.oldSampleOffset) {
-          return "9xxx: Set sample offset*256";
+          return _("9xxx: Set sample offset*256");
         }
         switch (effect) {
           case 0x90:
-            return "90xx: Set sample offset (first byte)";
+            return _("90xx: Set sample offset (first byte)");
           case 0x91:
-            return "91xx: Set sample offset (second byte, ×256)";
+            return _("91xx: Set sample offset (second byte, ×256)");
           case 0x92:
-            return "92xx: Set sample offset (third byte, ×65536)";
+            return _("92xx: Set sample offset (third byte, ×65536)");
         }
       } else if (chan>=0 && chan<chans) {
         DivSysDef* sysDef=sysDefs[sysOfChan[chan]];
@@ -2129,6 +2139,7 @@ void DivEngine::reset() {
     chan[i]=DivChannelState();
     if (i<chans) chan[i].volMax=(disCont[dispatchOfChan[i]].dispatch->dispatch(DivCommand(DIV_CMD_GET_VOLMAX,dispatchChanOfChan[i]))<<8)|0xff;
     chan[i].volume=chan[i].volMax;
+    chan[i].volTop=chan[i].volMax;
     if (song.linearPitch==0) chan[i].vibratoFine=4;
   }
   extValue=0;
@@ -2342,6 +2353,13 @@ int DivEngine::mapVelocity(int ch, float vel) {
   if (ch>=chans) return 0;
   if (disCont[dispatchOfChan[ch]].dispatch==NULL) return 0;
   return disCont[dispatchOfChan[ch]].dispatch->mapVelocity(dispatchChanOfChan[ch],vel);
+}
+
+float DivEngine::getGain(int ch, int vol) {
+  if (ch<0) return 0;
+  if (ch>=chans) return 0;
+  if (disCont[dispatchOfChan[ch]].dispatch==NULL) return 0;
+  return disCont[dispatchOfChan[ch]].dispatch->getGain(dispatchChanOfChan[ch],vol);
 }
 
 unsigned char DivEngine::getOrder() {

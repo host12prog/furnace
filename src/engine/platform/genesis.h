@@ -98,6 +98,9 @@ class DivPlatformGenesis: public DivPlatformOPN {
     short dacWrite;
 
     int dac_shifter, o_lro, o_bco;
+
+    int interruptSim;
+    int interruptSimCycles;
   
     unsigned char dacVolTable[128];
   

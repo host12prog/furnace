@@ -432,7 +432,7 @@ void FurnaceGUI::drawInsOPM(DivInstrument* ins)
             TOOLTIP_TEXT(FM_NAME(FM_AR));
 
             ImGui::TableNextColumn();
-            ImGui::Text(_("Waveform##sgiOPM"));
+            //ImGui::Text(_("Waveform##sgiOPM"));
             ImGui::TableNextColumn();
             ImGui::Text(_("Envelope##sgiOPM1"));
             ImGui::TableNextColumn();
@@ -505,7 +505,7 @@ void FurnaceGUI::drawInsOPM(DivInstrument* ins)
             
             ImGui::TableNextColumn();
             
-            drawWaveform(0,true,ImVec2(waveWidth,waveHeight));
+            //drawWaveform(0,true,ImVec2(waveWidth,waveHeight));
             
             // params
             ImGui::Separator();

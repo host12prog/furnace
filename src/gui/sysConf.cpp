@@ -44,6 +44,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       } else {
         chipType=flags.getBool("ladderEffect",0)?1:0;
       }
+      int interruptSimCycles=flags.getInt("interruptSimCycles",0);
       bool noExtMacros=flags.getBool("noExtMacros",false);
       bool fbAllOps=flags.getBool("fbAllOps",false);
 
@@ -95,6 +96,13 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
           altered=true;
         }
       }
+
+      ImGui::Text(_("DAC interrupt simulation:"));
+      if (CWSliderInt(_("cycles##InterruptSim"),&interruptSimCycles,0,256)) {
+        if (interruptSimCycles<0) interruptSimCycles=0;
+        if (interruptSimCycles>256) interruptSimCycles=256;
+        altered=true;
+      } rightClickable
       
       if (altered) {
         e->lockSave([&]() {
@@ -379,8 +387,10 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
         }
         ImGui::Unindent();
       }
-      if (ImGui::Checkbox(_("Pretty please one more compat flag when I use arpeggio and my sound length"),&enoughAlready)) {
-        altered=true;
+      if (enoughAlready) {
+        if (ImGui::Checkbox(_("Pretty please one more compat flag when I use arpeggio and my sound length"),&enoughAlready)) {
+          altered=true;
+        }
       }
 
       if (altered) {
@@ -756,8 +766,10 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
         altered=true;
       }
 
-      if (ImGui::Checkbox(_("Relative duty and cutoff macros are coarse (compatibility)"),&multiplyRel)) {
-        altered=true;
+      if (multiplyRel) {
+        if (ImGui::Checkbox(_("Relative duty and cutoff macros are coarse (compatibility)"),&multiplyRel)) {
+          altered=true;
+        }
       }
 
       if (ImGui::Checkbox(_("Cutoff macro race conditions (compatibility)"),&macroRace)) {

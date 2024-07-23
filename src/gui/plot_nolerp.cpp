@@ -195,7 +195,7 @@ void PlotNoLerp(const char* label, const float* values, int values_count, int va
     PlotNoLerpEx(ImGuiPlotType_Lines, label, &Plot_ArrayGetter, (void*)&data, values_count, values_offset, overlay_text, scale_min, scale_max, graph_size);
 }
 
-int FurnaceGUI::PlotBitfieldEx(const char* label, int (*values_getter)(void* data, int idx), void* data, int values_count, int values_offset, const char** overlay_text, int bits, ImVec2 frame_size, const bool* values_highlight, ImVec4 highlightColor)
+int FurnaceGUI::PlotBitfieldEx(const char* label, int (*values_getter)(void* data, int idx), void* data, int values_count, int values_offset, const char** overlay_text, int bits, ImVec2 frame_size, const bool* values_highlight, ImVec4 highlightColor, ImVec4 color)
 {
     ImGuiContext& gg = *GImGui;
     ImGuiWindow* window = ImGui::GetCurrentWindow();
@@ -244,8 +244,8 @@ int FurnaceGUI::PlotBitfieldEx(const char* label, int (*values_getter)(void* dat
 
         float t0 = 0.0f;
         ImVec2 tp0 = ImVec2( t0, 0.0f );                       // Point in the normalized space of our target rectangle
-        const ImU32 col_base = ImGui::GetColorU32(ImGuiCol_PlotHistogram);
-        const ImU32 col_hovered = ImGui::GetColorU32(ImGuiCol_PlotHistogramHovered);
+        const ImU32 col_base = ImGui::GetColorU32(color);
+        const ImU32 col_hovered = ImGui::GetColorU32(color);
 
         for (int n = 0; n < res_w; n++)
         {
@@ -300,11 +300,11 @@ int FurnaceGUI::PlotBitfieldEx(const char* label, int (*values_getter)(void* dat
     return idx_hovered;
 }
 
-void PlotBitfield(const char* label, const int* values, int values_count, int values_offset, const char** overlay_text, int bits, ImVec2 graph_size, int stride, const bool* values_highlight, ImVec4 highlightColor)
+void PlotBitfield(const char* label, const int* values, int values_count, int values_offset, const char** overlay_text, int bits, ImVec2 graph_size, int stride, const bool* values_highlight, ImVec4 highlightColor, ImVec4 color)
 {
     FurnacePlotIntArrayGetterData data(values, stride);
 #ifdef HAVE_GUI
-    g.PlotBitfieldEx(label, &Plot_IntArrayGetter, (void*)&data, values_count, values_offset, overlay_text, bits, graph_size, values_highlight, highlightColor);
+    g.PlotBitfieldEx(label, &Plot_IntArrayGetter, (void*)&data, values_count, values_offset, overlay_text, bits, graph_size, values_highlight, highlightColor, color);
 #endif
 }
 

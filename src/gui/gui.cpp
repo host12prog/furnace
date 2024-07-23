@@ -4102,6 +4102,9 @@ bool FurnaceGUI::loop() {
       rend->initGUI(sdlWin);
 
       logD("building font...");
+      if (rend->areTexturesSquare()) {
+        ImGui::GetIO().Fonts->Flags|=ImFontAtlasFlags_Square;
+      }
       if (!ImGui::GetIO().Fonts->Build()) {
         logE("error while building font atlas!");
         showError(_("error while loading fonts! please check your settings."));
@@ -4110,7 +4113,12 @@ bool FurnaceGUI::loop() {
         patFont=mainFont;
         bigFont=mainFont;
         headFont=mainFont;
-        if (rend) rend->destroyFontsTexture();
+        if (rend) {
+          rend->destroyFontsTexture();
+          if (rend->areTexturesSquare()) {
+            ImGui::GetIO().Fonts->Flags|=ImFontAtlasFlags_Square;
+          }
+        }
         if (!ImGui::GetIO().Fonts->Build()) {
           logE("error again while building font atlas!");
         }
@@ -4304,6 +4312,19 @@ bool FurnaceGUI::loop() {
               ImGui::EndMenu();
             }
           }
+          bool hasTiunaCompat=false;
+          for (int i=0; i<e->song.systemLen; i++) {
+            if (e->song.system[i]==DIV_SYSTEM_TIA) {
+              hasTiunaCompat=true;
+              break;
+            }
+          }
+          if (hasTiunaCompat) {
+            if (ImGui::BeginMenu(_("export TIunA..."))) {
+              drawExportTiuna();
+              ImGui::EndMenu();
+            }
+          }
           int numAmiga=0;
           for (int i=0; i<e->song.systemLen; i++) {
             if (e->song.system[i]==DIV_SYSTEM_AMIGA) numAmiga++;
@@ -4350,6 +4371,19 @@ bool FurnaceGUI::loop() {
           if (numZSMCompat>0) {
             if (ImGui::MenuItem(_("export ZSM..."))) {
               curExportType=GUI_EXPORT_ZSM;
+              displayExport=true;
+            }
+          }
+          bool hasTiunaCompat=false;
+          for (int i=0; i<e->song.systemLen; i++) {
+            if (e->song.system[i]==DIV_SYSTEM_TIA) {
+              hasTiunaCompat=true;
+              break;
+            }
+          }
+          if (hasTiunaCompat) {
+            if (ImGui::MenuItem(_("export TIunA..."))) {
+              curExportType=GUI_EXPORT_TIUNA;
               displayExport=true;
             }
           }
@@ -4685,7 +4719,7 @@ bool FurnaceGUI::loop() {
                 if (maxVol<1 || p->data[cursor.y][3]>maxVol) {
                   info=fmt::sprintf(_("Set volume: %d (%.2X, INVALID!)"),p->data[cursor.y][3],p->data[cursor.y][3]);
                 } else {
-                  float realVol=e->mapVelocity(cursor.xCoarse,(float)p->data[cursor.y][3]/(float)maxVol);
+                  float realVol=e->getGain(cursor.xCoarse,p->data[cursor.y][3]);
                   info=fmt::sprintf(_("Set volume: %d (%.2X, %d%%)"),p->data[cursor.y][3],p->data[cursor.y][3],(int)(realVol*100.0f/(float)maxVol));
                 }
                 hasInfo=true;
@@ -7258,7 +7292,12 @@ bool FurnaceGUI::loop() {
 
             applyUISettings();
 
-            if (rend) rend->destroyFontsTexture();
+            if (rend) {
+              rend->destroyFontsTexture();
+              if (rend->areTexturesSquare()) {
+                ImGui::GetIO().Fonts->Flags|=ImFontAtlasFlags_Square;
+              }
+            }
             if (!ImGui::GetIO().Fonts->Build()) {
               logE("error while building font atlas!");
               showError(_("error while loading fonts! please check your settings."));
@@ -7267,7 +7306,12 @@ bool FurnaceGUI::loop() {
               patFont=mainFont;
               bigFont=mainFont;
               headFont=mainFont;
-              if (rend) rend->destroyFontsTexture();
+              if (rend) {
+                rend->destroyFontsTexture();
+                if (rend->areTexturesSquare()) {
+                  ImGui::GetIO().Fonts->Flags|=ImFontAtlasFlags_Square;
+                }
+              }
               if (!ImGui::GetIO().Fonts->Build()) {
                 logE("error again while building font atlas!");
               } else {
@@ -7289,7 +7333,12 @@ bool FurnaceGUI::loop() {
       patFont=mainFont;
       bigFont=mainFont;
       headFont=mainFont;
-      if (rend) rend->destroyFontsTexture();
+      if (rend) {
+        rend->destroyFontsTexture();
+        if (rend->areTexturesSquare()) {
+          ImGui::GetIO().Fonts->Flags|=ImFontAtlasFlags_Square;
+        }
+      }
       if (!ImGui::GetIO().Fonts->Build()) {
         logE("error again while building font atlas!");
       } else {
@@ -7624,6 +7673,8 @@ bool FurnaceGUI::init() {
 
   updateWindowTitle();
 
+  logV("max texture size: %dx%d",rend->getMaxTextureWidth(),rend->getMaxTextureHeight());
+
   rend->clear(ImVec4(0.0,0.0,0.0,1.0));
   rend->present();
 
@@ -7696,6 +7747,9 @@ bool FurnaceGUI::init() {
   applyUISettings();
 
   logD("building font...");
+  if (rend->areTexturesSquare()) {
+    ImGui::GetIO().Fonts->Flags|=ImFontAtlasFlags_Square;
+  }
   if (!ImGui::GetIO().Fonts->Build()) {
     logE("error while building font atlas!");
     showError(_("error while loading fonts! please check your settings."));
@@ -7704,7 +7758,9 @@ bool FurnaceGUI::init() {
     patFont=mainFont;
     bigFont=mainFont;
     headFont=mainFont;
-    if (rend) rend->destroyFontsTexture();
+    if (rend) {
+      rend->destroyFontsTexture();
+    }
     if (!ImGui::GetIO().Fonts->Build()) {
       logE("error again while building font atlas!");
     }

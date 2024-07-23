@@ -404,6 +404,7 @@ void DivPlatformAY8910::tick(bool sysTick) {
       }
       rWrite((i)<<1,chan[i].freq&0xff);
       rWrite(1+((i)<<1),chan[i].freq>>8);
+
       if (chan[i].keyOn) chan[i].keyOn=false;
       if (chan[i].keyOff) chan[i].keyOff=false;
       if (chan[i].freqChanged && chan[i].autoEnvNum>0 && chan[i].autoEnvDen>0) {
@@ -532,6 +533,7 @@ int DivPlatformAY8910::dispatch(DivCommand c) {
         chan[c.chan].freqChanged=true;
         chan[c.chan].note=c.value;
       }
+      chan[c.chan].fixedFreq=0;
       chan[c.chan].active=true;
       chan[c.chan].keyOn=true;
       chan[c.chan].macroInit(ins);
@@ -809,6 +811,11 @@ DivDispatchOscBuffer* DivPlatformAY8910::getOscBuffer(int ch) {
 
 int DivPlatformAY8910::mapVelocity(int ch, float vel) {
   return round(15.0*pow(vel,0.33));
+}
+
+float DivPlatformAY8910::getGain(int ch, int vol) {
+  if (vol==0) return 0;
+  return 1.0/pow(10.0,(float)(15-vol)*2.0/20.0);
 }
 
 unsigned char* DivPlatformAY8910::getRegisterPool() {

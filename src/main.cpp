@@ -610,7 +610,13 @@ int main(int argc, char** argv) {
       strncpy(localeDir,localeDirs[i],4095);
 #else
       if (exePath[0]!=0 && localeDirs[i][0]!=DIR_SEPARATOR) {
-        strncpy(localeDir,exePath,4095);
+        // do you NOT understand what memset IS
+        char* i_s=exePath;
+        for (int i_i=0; i_i<4095; i_i++) {
+          localeDir[i_i]=*i_s;
+          if ((*i_s)==0) break;
+          i_s++;
+        }
         strncat(localeDir,DIR_SEPARATOR_STR,4095);
         strncat(localeDir,localeDirs[i],4095);
       } else {
@@ -662,7 +668,7 @@ int main(int argc, char** argv) {
             val=argv[i+1];
             i++;
           } else {
-            reportError(fmt::sprintf("incomplete param %s.",arg.c_str()));
+            reportError(fmt::sprintf(_("incomplete param %s."),arg.c_str()));
             return 1;
           }
         }
@@ -740,9 +746,75 @@ int main(int argc, char** argv) {
     e.setAudio(DIV_AUDIO_DUMMY);
   }
 
+  if (!fileName.empty() && ((!e.getConfBool("tutIntroPlayed",TUT_INTRO_PLAYED)) || e.getConfInt("alwaysPlayIntro",0)!=3 || consoleMode || benchMode || infoMode || outName!="" || vgmOutName!="" || cmdOutName!="")) {
+    logI("loading module...");
+    FILE* f=ps_fopen(fileName.c_str(),"rb");
+    if (f==NULL) {
+      reportError(fmt::sprintf(_("couldn't open file! (%s)"),strerror(errno)));
+      e.everythingOK();
+      finishLogFile();
+      return 1;
+    }
+    if (fseek(f,0,SEEK_END)<0) {
+      reportError(fmt::sprintf(_("couldn't open file! (couldn't get file size: %s)"),strerror(errno)));
+      e.everythingOK();
+      fclose(f);
+      finishLogFile();
+      return 1;
+    }
+    ssize_t len=ftell(f);
+    if (len==(SIZE_MAX>>1)) {
+      reportError(fmt::sprintf(_("couldn't open file! (couldn't get file length: %s)"),strerror(errno)));
+      e.everythingOK();
+      fclose(f);
+      finishLogFile();
+      return 1;
+    }
+    if (len<1) {
+      if (len==0) {
+        reportError(_("that file is empty!"));
+      } else {
+        reportError(fmt::sprintf(_("couldn't open file! (tell error: %s)"),strerror(errno)));
+      }
+      e.everythingOK();
+      fclose(f);
+      finishLogFile();
+      return 1;
+    }
+    unsigned char* file=new unsigned char[len];
+    if (fseek(f,0,SEEK_SET)<0) {
+      reportError(fmt::sprintf(_("couldn't open file! (size error: %s)"),strerror(errno)));
+      e.everythingOK();
+      fclose(f);
+      delete[] file;
+      finishLogFile();
+      return 1;
+    }
+    if (fread(file,1,(size_t)len,f)!=(size_t)len) {
+      reportError(fmt::sprintf(_("couldn't open file! (read error: %s)"),strerror(errno)));
+      e.everythingOK();
+      fclose(f);
+      delete[] file;
+      finishLogFile();
+      return 1;
+    }
+    fclose(f);
+    if (!e.load(file,(size_t)len,fileName.c_str())) {
+      reportError(fmt::sprintf(_("could not open file! (%s)"),e.getLastError()));
+      e.everythingOK();
+      finishLogFile();
+      return 1;
+    }
+  }
+  if (infoMode) {
+    e.dumpSongInfo();
+    finishLogFile();
+    return 0;
+  }
+
   if (!e.init()) {
     if (consoleMode) {
-      reportError("could not initialize engine!");
+      reportError(_("could not initialize engine!"));
       finishLogFile();
       return 1;
     } else {
@@ -775,12 +847,12 @@ int main(int argc, char** argv) {
           fwrite(w->getFinalBuf(),1,w->size(),f);
           fclose(f);
         } else {
-          reportError(fmt::sprintf("could not open file! (%s)",e.getLastError()));
+          reportError(fmt::sprintf(_("could not open file! (%s)"),e.getLastError()));
         }
         w->finish();
         delete w;
       } else {
-        reportError("could not write command stream!");
+        reportError(_("could not write command stream!"));
       }
     }
     if (vgmOutName!="") {
@@ -791,12 +863,12 @@ int main(int argc, char** argv) {
           fwrite(w->getFinalBuf(),1,w->size(),f);
           fclose(f);
         } else {
-          reportError(fmt::sprintf("could not open file! (%s)",e.getLastError()));
+          reportError(fmt::sprintf(_("could not open file! (%s)"),e.getLastError()));
         }
         w->finish();
         delete w;
       } else {
-        reportError("could not write VGM!");
+        reportError(_("could not write VGM!"));
       }
     }
     if (outName!="") {
@@ -884,11 +956,11 @@ int main(int argc, char** argv) {
     }
     cli.bindEngine(&e);
     if (!cli.init()) {
-      reportError("error while starting CLI!");
+      reportError(_("error while starting CLI!"));
     } else {
       cliSuccess=true;
     }
-    logI("playing...");
+    logI(_("playing..."));
     e.play();
     if (cliSuccess) {
       cli.loop();
@@ -929,8 +1001,8 @@ int main(int argc, char** argv) {
   }
 
   if (displayEngineFailError) {
-    logE("displaying engine fail error.");
-    g.showError("error while initializing audio!");
+    logE(_("displaying engine fail error."));
+    g.showError(_("error while initializing audio!"));
   }
 
   if (displayLocaleFailError) {

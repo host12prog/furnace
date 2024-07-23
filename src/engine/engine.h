@@ -55,7 +55,7 @@ class DivWorkPool;
 #define DIV_UNSTABLE
 
 #define DIV_VERSION "0.6.5"
-#define DIV_ENGINE_VERSION 214
+#define DIV_ENGINE_VERSION 216
 // for imports
 #define DIV_VERSION_MOD 0xff01
 #define DIV_VERSION_FC 0xff02
@@ -134,11 +134,12 @@ struct DivChannelState {
   std::vector<DivDelayedCommand> delayed;
   int note, oldNote, lastIns, pitch, portaSpeed, portaNote;
   bool isE1E2;
-  int volume, volSpeed, cut, legatoDelay, legatoTarget, rowDelay, volMax;
+  int volume, volSpeed, cut, volCut, legatoDelay, legatoTarget, rowDelay, volMax, volBottom, volTop;
   int delayOrder, delayRow, retrigSpeed, retrigTick;
   int vibratoDepth, vibratoRate, vibratoPos, vibratoPosGiant, vibratoShape, vibratoFine;
   int tremoloDepth, tremoloRate, tremoloPos;
   int pw_slide, pw_slide_speed, cutoff_slide, cutoff_slide_speed;
+  int panDepth, panRate, panPos, panSpeed;
   int sampleOff;
   unsigned char arp, arpStage, arpTicks, panL, panR, panRL, panRR, lastVibrato, lastPorta, cutType;
   bool doNote, legato, portaStop, keyOn, keyOff, nowYouCanStop, stopOnOff, releasing;
@@ -160,10 +161,13 @@ struct DivChannelState {
     volume(0x7f00),
     volSpeed(0),
     cut(-1),
+    volCut(-1),
     legatoDelay(-1),
     legatoTarget(0),
     rowDelay(0),
     volMax(0),
+    volBottom(0),
+    volTop(0),
     delayOrder(0),
     delayRow(0),
     retrigSpeed(0),
@@ -181,6 +185,10 @@ struct DivChannelState {
     pw_slide_speed(0),
     cutoff_slide(0),
     cutoff_slide_speed(0),
+    panDepth(0),
+    panRate(0),
+    panPos(0),
+    panSpeed(0),
     sampleOff(0),
     arp(0),
     arpStage(-1),
@@ -945,6 +953,9 @@ class DivEngine {
 
     // map MIDI velocity to volume
     int mapVelocity(int ch, float vel);
+
+    // map volume to gain
+    float getGain(int ch, int vol);
 
     // get current order
     unsigned char getOrder();

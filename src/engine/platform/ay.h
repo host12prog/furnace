@@ -74,6 +74,7 @@ class DivPlatformAY8910: public DivDispatch {
 
       unsigned char autoEnvNum, autoEnvDen;
       signed char konCycles;
+      unsigned short fixedFreq;
       Channel():
         SharedChannel<int>(15),
         curPSGMode(PSGMode(0)),
@@ -81,7 +82,8 @@ class DivPlatformAY8910: public DivDispatch {
         dac(DAC()),
         autoEnvNum(0),
         autoEnvDen(0),
-        konCycles(0) {}
+        konCycles(0),
+        fixedFreq(0) {}
     };
     Channel chan[3];
     bool isMuted[3];
@@ -143,6 +145,7 @@ class DivPlatformAY8910: public DivDispatch {
     void* getChanState(int chan);
     DivDispatchOscBuffer* getOscBuffer(int chan);
     int mapVelocity(int ch, float vel);
+    float getGain(int ch, int vol);
     unsigned char* getRegisterPool();
     int getRegisterPoolSize();
     void setCore(unsigned char core);

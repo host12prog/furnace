@@ -109,9 +109,9 @@ void FurnaceGUI::drawMacroEdit(FurnaceGUIMacroDesc& i, int totalFit, float avail
     }
 
     if (i.isBitfield) {
-      PlotBitfield("##IMacro",asInt,totalFit,0,i.bitfieldBits,i.max,ImVec2(availableWidth,(i.get_macro()->open&1)?(i.height*dpiScale):(32.0f*dpiScale)),sizeof(float),doHighlight);
+      PlotBitfield("##IMacro",asInt,totalFit,0,i.bitfieldBits,i.max,ImVec2(availableWidth,(i.get_macro()->open&1)?(i.height*dpiScale):(32.0f*dpiScale)),sizeof(float),doHighlight,uiColors[GUI_COLOR_MACRO_HIGHLIGHT],i.color);
     } else {
-      PlotCustom("##IMacro",asFloat,totalFit,macroDragScroll,NULL,i.min+i.get_macro()->vScroll,i.min+i.get_macro()->vScroll+i.get_macro()->vZoom,ImVec2(availableWidth,(i.get_macro()->open&1)?(i.height*dpiScale):(32.0f*dpiScale)),sizeof(float),i.color,i.get_macro()->len-macroDragScroll,i.hoverFunc,i.hoverFuncUser,i.blockMode,(i.get_macro()->open&1)?genericGuide:NULL,doHighlight);
+      PlotCustom("##IMacro",asFloat,totalFit,macroDragScroll,NULL,i.min+i.get_macro()->vScroll,i.min+i.get_macro()->vScroll+i.get_macro()->vZoom,ImVec2(availableWidth,(i.get_macro()->open&1)?(i.height*dpiScale):(32.0f*dpiScale)),sizeof(float),i.color,i.get_macro()->len-macroDragScroll,i.hoverFunc,i.hoverFuncUser,i.blockMode,(i.get_macro()->open&1)?genericGuide:NULL,doHighlight,uiColors[GUI_COLOR_MACRO_HIGHLIGHT]);
     }
     if ((i.get_macro()->open&1) && (ImGui::IsItemClicked(ImGuiMouseButton_Left) || ImGui::IsItemClicked(ImGuiMouseButton_Right))) {
       ImGui::InhibitInertialScroll();
