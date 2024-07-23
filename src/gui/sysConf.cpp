@@ -2542,7 +2542,7 @@ bool FurnaceGUI::drawSysConf(int chan, int sysPos, DivSystem type, DivConfig& fl
       if(CWSliderInt("",&reserved,0,32))
       {
         altered = true;
-        rerender_es5503 = true;
+        rerender_es5503 =  true;
       }
 
       if (ImGui::IsItemHovered()) {
