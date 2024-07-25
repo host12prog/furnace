@@ -321,6 +321,13 @@ bool DivEngine::loadS3M(unsigned char* file, size_t len) {
         ds.subsong[0]->chanShow[i]=false;
         ds.subsong[0]->chanShowChanOsc[i]=false;
       }
+
+      if (hasFM) {
+        for (int i=0; i<18; i++) {
+          ds.subsong[0]->chanShow[i]=false;
+          ds.subsong[0]->chanShowChanOsc[i]=false;
+        }
+      }
     }
 
     if (hasFM) {
