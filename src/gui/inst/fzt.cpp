@@ -370,19 +370,19 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_("Speed0"),ImGuiDataType_U8,&ins->fzt.vibrato_speed,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Speed##spd0"),ImGuiDataType_U8,&ins->fzt.vibrato_speed,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_("Depth0"),ImGuiDataType_U8,&ins->fzt.vibrato_depth,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Depth##dp0"),ImGuiDataType_U8,&ins->fzt.vibrato_depth,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_("Delay0"),ImGuiDataType_U8,&ins->fzt.vibrato_delay,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Delay##del0"),ImGuiDataType_U8,&ins->fzt.vibrato_delay,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::TableNextColumn();
@@ -396,19 +396,19 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_("Speed1"),ImGuiDataType_U8,&ins->fzt.pwm_speed,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Speed##spd1"),ImGuiDataType_U8,&ins->fzt.pwm_speed,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_("Depth1"),ImGuiDataType_U8,&ins->fzt.pwm_depth,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Depth##dp1"),ImGuiDataType_U8,&ins->fzt.pwm_depth,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::TableNextColumn();
 
       ImGui::PushItemWidth(25.0f*dpiScale);
-      ImGui::InputScalar(_("Delay1"),ImGuiDataType_U8,&ins->fzt.pwm_delay,NULL,NULL,"%02X");
+      ImGui::InputScalar(_("Delay##del1"),ImGuiDataType_U8,&ins->fzt.pwm_delay,NULL,NULL,"%02X");
       ImGui::PopItemWidth();
 
       ImGui::EndTable();
@@ -469,7 +469,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
   {
     int prper = ins->fzt.program_period;
     ImGui::PushItemWidth(85.0f*dpiScale);
-    if(ImGui::InputInt(_("Program period22"), &prper))
+    if(ImGui::InputInt(_("Program period"), &prper))
     {
       if(prper < 1) prper = 1;
       if(prper > 0xff) prper = 0xff;
@@ -670,7 +670,7 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
 
               bool ext2 = ins->fzt.program[i].val == 0xf1;
 
-              if(ImGui::Checkbox(_("Second external arpeggio note1"), &ext2))
+              if(ImGui::Checkbox(_("Second external arpeggio note"), &ext2))
               {
                 if(ext2)
                 {
@@ -687,13 +687,13 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             case DivInstrumentFZT::TE_EFFECT_PWM:
             {
               int speed = ins->fzt.program[i].val >> 4;
-              if(CWSliderInt(_("Speed2"),&speed,0,0xf,"%01X"))
+              if(CWSliderInt(_("Speed"),&speed,0,0xf,"%01X"))
               {
                 ins->fzt.program[i].val &= 0x0f;
                 ins->fzt.program[i].val |= (speed << 4);
               }
               int depth = ins->fzt.program[i].val & 15;
-              if(CWSliderInt(_("Depth11"),&depth,0,0xf,"%01X"))
+              if(CWSliderInt(_("Depth"),&depth,0,0xf,"%01X"))
               {
                 ins->fzt.program[i].val &= 0xf0;
                 ins->fzt.program[i].val |= (depth);
@@ -732,13 +732,13 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
             case DivInstrumentFZT::TE_EFFECT_VOLUME_FADE: 
             {
               int speed = ins->fzt.program[i].val >> 4;
-              if(CWSliderInt(_("Up2"),&speed,0,0xf,"%01X"))
+              if(CWSliderInt(_("Up"),&speed,0,0xf,"%01X"))
               {
                 ins->fzt.program[i].val &= 0x0f;
                 ins->fzt.program[i].val |= (speed << 4);
               }
               int depth = ins->fzt.program[i].val & 15;
-              if(CWSliderInt(_("Down11"),&depth,0,0xf,"%01X"))
+              if(CWSliderInt(_("Down"),&depth,0,0xf,"%01X"))
               {
                 ins->fzt.program[i].val &= 0xf0;
                 ins->fzt.program[i].val |= (depth);
