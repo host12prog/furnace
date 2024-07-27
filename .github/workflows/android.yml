@@ -78,7 +78,7 @@ jobs:
         mkdir -p target/furnace
         # if this fails i'm going to present top gear
 
-        mv ${{ steps.sign_app.outputs.signedReleaseFile }} target/furnace/${{ steps.package-identify.outputs.id }}.apk
+        mv ${{ steps.sign_app.outputs.signedFile }} target/furnace/${{ steps.package-identify.outputs.id }}.apk
         pushd target/furnace
 
         cp ../../LICENSE .
