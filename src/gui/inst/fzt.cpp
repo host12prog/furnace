@@ -541,7 +541,10 @@ void FurnaceGUI::drawInsFZT(DivInstrument* ins)
           ImGui::Text(number);
           ImGui::TableNextColumn();
           ImGui::PushID(i);
-          if (ins->fzt.program[i].cmd>=DivInstrumentFZT::TE_PROGRAM_END && ins->fzt.program[i].cmd != DivInstrumentFZT::TE_EFFECT_PITCH)
+          if (ins->fzt.program[i].cmd>=DivInstrumentFZT::TE_PROGRAM_END 
+            && ins->fzt.program[i].cmd != DivInstrumentFZT::TE_EFFECT_PITCH 
+            && ins->fzt.program[i].cmd != DivInstrumentFZT::TE_EFFECT_EXT_PORTA_UP && ins->fzt.program[i].cmd != DivInstrumentFZT::TE_EFFECT_EXT_PORTA_DN
+            && ins->fzt.program[i].cmd != DivInstrumentFZT::TE_EFFECT_EXT_FINE_VOLUME_UP && ins->fzt.program[i].cmd != DivInstrumentFZT::TE_EFFECT_EXT_FINE_VOLUME_DOWN)
           {
             ins->fzt.program[i].cmd=DivInstrumentFZT::TE_PROGRAM_END;
           }

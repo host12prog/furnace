@@ -307,8 +307,8 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
 
     case 0xf100: {
         if(tick == 0) {
-            te_channel->note -= (opcode & 0xf);
-            if(te_channel->note < 0) te_channel->note = 0;
+            te_channel->note += (opcode & 0xf);
+            if(te_channel->note > (MAX_NOTE << 8)) te_channel->note = (MAX_NOTE << 8);
 
             te_channel->target_note = te_channel->note;
         }
@@ -318,8 +318,8 @@ void DivPlatformFZT::do_command(int opcode, int channel, int tick, bool from_pro
 
     case 0xf200: {
         if(tick == 0) {
-            te_channel->note += (opcode & 0xf);
-            if(te_channel->note > (MAX_NOTE << 8)) te_channel->note = (MAX_NOTE << 8);
+            te_channel->note -= (opcode & 0xf);
+            if(te_channel->note < 0) te_channel->note = 0;
 
             te_channel->target_note = te_channel->note;
         }
