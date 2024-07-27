@@ -63,13 +63,13 @@ jobs:
 
     # do i really trust the Github Marketplace?
     - name: Sign the APK
-      uses: r0adkll/sign-android-release@v1
+      uses: ilharp/sign-android-release@v1
       # ID used to access action output
       id: sign_app
       with:
-        releaseDirectory: android/app/build/outputs/apk/release/
-        signingKeyBase64: ${{ secrets.SIGNINGKEYBASE64 }}
-        alias: ${{ secrets.ALIAS }}
+        releaseDir: android/app/build/outputs/apk/release/
+        signingKey: ${{ secrets.SIGNINGKEYBASE64 }}
+        keyAlias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEYSTOREPASSWORD }}
 
     - name: Package
