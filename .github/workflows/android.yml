@@ -53,11 +53,13 @@ jobs:
           libjack-jackd2-dev
 
     - name: Build (run Gradle)
+      id: build
       run: |
         cd ${PWD}/android/
         ./gradlew assembleRelease
         ./gradlew --stop
         cd ../..
+        echo "machete=${PWD}" >> $GITHUB_OUTPUT
 
     # do i really trust the Github Marketplace?
     - name: Sign the APK
@@ -65,7 +67,7 @@ jobs:
       # ID used to access action output
       id: sign_app
       with:
-        releaseDirectory: ${PWD}/android/app/build/outputs/apk/release
+        releaseDirectory: ${{ steps.build.outputs.machete }}/android/app/build/outputs/apk/release/
         signingKeyBase64: ${{ secrets.SIGNINGKEYBASE64 }}
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEYSTOREPASSWORD }}
