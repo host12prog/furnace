@@ -64,7 +64,7 @@ jobs:
 
         mkdir -p target/furnace
 
-        mv ${PWD}/android/app/build/outputs/apk/release/app-release.apk target/furnace/${{ steps.package-identify.outputs.id }}.apk
+        mv ${PWD}/android/app/build/outputs/apk/release/app-release-unsigned.apk target/furnace/${{ steps.package-identify.outputs.id }}.apk
         pushd target/furnace
 
         cp ../../LICENSE .
