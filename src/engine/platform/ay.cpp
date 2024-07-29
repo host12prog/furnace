@@ -668,7 +668,7 @@ int DivPlatformAY8910::dispatch(DivCommand c) {
       if (!(chan[c.chan].nextPSGMode.val&8)) {
         if (c.value<16) {
           chan[c.chan].nextPSGMode.val=(c.value+1)&7;
-          chan[c.chan].nextPSGMode.val|=chan[c.chan].curPSGMode.val&16
+          chan[c.chan].nextPSGMode.val|=chan[c.chan].curPSGMode.val&16;
           if (chan[c.chan].active) {
             chan[c.chan].curPSGMode.val=chan[c.chan].nextPSGMode.val;
           }
