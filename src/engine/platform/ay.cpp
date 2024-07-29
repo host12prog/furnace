@@ -388,7 +388,8 @@ void DivPlatformAY8910::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->had) {
       if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->val==1) {
         if (chan[i].active) chan[i].nextPSGMode.val |= 16;
-      } else {
+      }
+      if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->val==0){
         if (chan[i].active) chan[i].nextPSGMode.val &= ~16;
       }
     }
@@ -667,6 +668,7 @@ int DivPlatformAY8910::dispatch(DivCommand c) {
       if (!(chan[c.chan].nextPSGMode.val&8)) {
         if (c.value<16) {
           chan[c.chan].nextPSGMode.val=(c.value+1)&7;
+          chan[c.chan].nextPSGMode.val|=chan[c.chan].curPSGMode.val&16
           if (chan[c.chan].active) {
             chan[c.chan].curPSGMode.val=chan[c.chan].nextPSGMode.val;
           }

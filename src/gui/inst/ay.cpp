@@ -41,7 +41,7 @@ void FurnaceGUI::drawInsAY(DivInstrument* ins)
     {
       macroList.push_back(FurnaceGUIMacroDesc(_("Noise Freq##sgiAY"),ins,DIV_MACRO_DUTY,0xff,0,31,64,uiColors[GUI_COLOR_MACRO_OTHER]));
       macroList.push_back(FurnaceGUIMacroDesc(_("Waveform##sgiAY"),ins,DIV_MACRO_WAVE,0xff,0,3,48,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,true,ayShapeBits));
-      macroList.push_back(FurnaceGUIMacroDesc(_("Phase Reset##sgiAY"),ins,DIV_MACRO_EX6,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+      macroList.push_back(FurnaceGUIMacroDesc(_("Timer FX##sgiAY"),ins,DIV_MACRO_EX6,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
     }
 
     macroList.push_back(FurnaceGUIMacroDesc(_("Raw Period##sgiAY"),ins,DIV_MACRO_EX4,0xff,0,0xfff,256,uiColors[GUI_COLOR_MACRO_OTHER]));
