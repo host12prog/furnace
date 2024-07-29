@@ -297,7 +297,7 @@ void DivPlatformAY8910::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
       chan[i].outVol=MIN(15,chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val)-(15-(chan[i].vol&15));
       if (chan[i].outVol<0) chan[i].outVol=0;
-      if (!(chan[i].nextPSGMode.val&8)) {
+      if (!(chan[i].nextPSGMode.val&8) || !(chan[i].nextPSGMode.val&16)) {
         if (isMuted[i]) {
           rWrite(0x08+i,0);
         } else if (intellivision && (chan[i].nextPSGMode.getEnvelope())) {
