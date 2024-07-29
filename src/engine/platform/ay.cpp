@@ -156,7 +156,7 @@ void DivPlatformAY8910::runDAC() {
 
 void DivPlatformAY8910::runTFX() {
   for (int i=0; i<3; i++) {
-    if (chan[i].active && (chan[i].curPSGMode&16)) {
+    if (chan[i].active && (chan[i].curPSGMode.val&16)) {
       chan[i].tfx.counter += 1;
       if (chan[i].tfx.counter >= chan[i].tfx.period) {
         chan[i].tfx.counter = 0;
@@ -385,9 +385,9 @@ void DivPlatformAY8910::tick(bool sysTick) {
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->had) {
       if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->val==1) {
-        if (chan[i].active) chan[i].nextPSGMode |= 16;
+        if (chan[i].active) chan[i].nextPSGMode.val |= 16;
       } else {
-        if (chan[i].active) chan[i].nextPSGMode &= 16;
+        if (chan[i].active) chan[i].nextPSGMode.val &= ~16;
       }
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) {
