@@ -555,7 +555,7 @@ int DivPlatformAY8910::dispatch(DivCommand c) {
         chan[c.chan].sampleNote=DIV_NOTE_NULL;
         chan[c.chan].sampleNoteDelta=0;
         chan[c.chan].baseFreq=NOTE_PERIODIC(c.value);
-        chan[c.chan].tfx.period=(int)((rate / 16) / NOTE_PERIODIC(c.value));
+        chan[c.chan].tfx.period=(chan[i].freq+1);
         chan[c.chan].freqChanged=true;
         chan[c.chan].note=c.value;
       }
