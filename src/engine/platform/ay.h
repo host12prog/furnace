@@ -34,6 +34,7 @@ class DivPlatformAY8910: public DivDispatch {
     inline unsigned char regRemap(unsigned char reg) { return intellivision?AY8914RegRemap[reg&0x0f]:reg&0x0f; }
     struct Channel: public SharedChannel<int> {
       struct PSGMode {
+        // bit 4: timer FX
         // bit 3: DAC
         // bit 2: envelope
         // bit 1: noise
@@ -50,6 +51,10 @@ class DivPlatformAY8910: public DivDispatch {
 
         unsigned char getEnvelope() {
           return (val&8)?0:(val&4);
+        }
+
+        unsigned char getTimerFX() {
+          return (val&8)?0:(val&16);
         }
 
         PSGMode(unsigned char v=1):
@@ -72,6 +77,14 @@ class DivPlatformAY8910: public DivDispatch {
           setPos(false) {}
       } dac;
 
+      struct TFX {
+        int period, counter, out;
+        TFX():
+          period(0),
+          counter(0),
+          out(0) {}
+      } tfx;
+
       unsigned char autoEnvNum, autoEnvDen;
       signed char konCycles;
       unsigned short fixedFreq;
@@ -80,6 +93,7 @@ class DivPlatformAY8910: public DivDispatch {
         curPSGMode(PSGMode(0)),
         nextPSGMode(PSGMode(1)),
         dac(DAC()),
+        tfx(TFX()),
         autoEnvNum(0),
         autoEnvDen(0),
         konCycles(0),
@@ -139,6 +153,7 @@ class DivPlatformAY8910: public DivDispatch {
   
   public:
     void runDAC();
+    void runTFX();
     void setExtClockDiv(unsigned int eclk=COLOR_NTSC, unsigned char ediv=8);
     void acquire(short** buf, size_t len);
     int dispatch(DivCommand c);

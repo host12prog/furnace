@@ -154,6 +154,21 @@ void DivPlatformAY8910::runDAC() {
   }
 }
 
+void DivPlatformAY8910::runTFX() {
+  for (int i=0; i<3; i++) {
+    if (chan[i].active && (chan[i].curPSGMode&16)) {
+      chan[i].tfx.counter += 1;
+      if (chan[i].tfx.counter >= chan[i].tfx.period) {
+        chan[i].tfx.counter = 0;
+        chan[i].tfx.out = (chan[i].tfx.out != 0) ? 0 : chan[i].outVol;
+      }
+      if (!isMuted[i]) {
+        immWrite(0x08+i,chan[i].tfx.out);
+      }
+    }
+  }
+}
+
 void DivPlatformAY8910::checkWrites() {
   while (!writes.empty()) {
     QueuedWrite w=writes.front();
@@ -181,6 +196,7 @@ void DivPlatformAY8910::acquire_mame(short** buf, size_t len) {
   if (sunsoft) {
     for (size_t i=0; i<len; i++) {
       runDAC();
+      runTFX();
       checkWrites();
 
       ay->sound_stream_update(ayBuf,1);
@@ -194,6 +210,7 @@ void DivPlatformAY8910::acquire_mame(short** buf, size_t len) {
   } else {
     for (size_t i=0; i<len; i++) {
       runDAC();
+      runTFX();
       checkWrites();
 
       ay->sound_stream_update(ayBuf,1);
@@ -215,6 +232,7 @@ void DivPlatformAY8910::acquire_mame(short** buf, size_t len) {
 void DivPlatformAY8910::acquire_atomic(short** buf, size_t len) {
   for (size_t i=0; i<len; i++) {
     runDAC();
+    runTFX();
 
     if (!writes.empty()) {
       QueuedWrite w=writes.front();
@@ -364,6 +382,13 @@ void DivPlatformAY8910::tick(bool sysTick) {
       ayEnvPeriod=chan[i].std.get_div_macro_struct(DIV_MACRO_EX5)->val;
       immWrite(0x0b,ayEnvPeriod);
       immWrite(0x0c,ayEnvPeriod>>8);
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->had) {
+      if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->val==1) {
+        if (chan[i].active) chan[i].nextPSGMode |= 16;
+      } else {
+        if (chan[i].active) chan[i].nextPSGMode &= 16;
+      }
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) {
       chan[i].autoEnvDen=chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val;
