@@ -322,7 +322,7 @@ void DivPlatformAY8910::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       if (!(chan[i].nextPSGMode.val&8)) {
         chan[i].nextPSGMode.val=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&7;
-        chan[i].nextPSGMode.val|=(chan[i].curPSGMode&16);
+        chan[i].nextPSGMode.val|=(chan[i].curPSGMode.val&16);
         if (chan[i].active) {
           chan[i].curPSGMode.val=chan[i].nextPSGMode.val;
         }
