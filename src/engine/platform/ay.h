@@ -83,7 +83,7 @@ class DivPlatformAY8910: public DivDispatch {
           period(0),
           counter(0),
           offset(1),
-          denum(1),
+          den(1),
           num(1),
           out(0) {}
       } tfx;
