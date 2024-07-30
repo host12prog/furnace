@@ -34,7 +34,7 @@ void FurnaceGUI::drawInsAY(DivInstrument* ins)
   {
     if (ImGui::BeginTabItem(_("Timer Macros##sgiAY")))
     {
-      macroList.push_back(FurnaceGUIMacroDesc(_("Timer FX##sgiAY"),ins,DIV_MACRO_EX6,0xff,0,2,256,uiColors[GUI_COLOR_MACRO_OTHER]));
+      macroList.push_back(FurnaceGUIMacroDesc(_("Timer FX##sgiAY"),ins,DIV_MACRO_EX6,0xff,0,2,32,uiColors[GUI_COLOR_MACRO_OTHER]));
       macroList.push_back(FurnaceGUIMacroDesc(_("TFX Offset##sgiAY"),ins,DIV_MACRO_EX7,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true,macroRelativeMode));
       macroList.push_back(FurnaceGUIMacroDesc(_("Timer Num##sgiAY"),ins,DIV_MACRO_EX8,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_OTHER]));
       macroList.push_back(FurnaceGUIMacroDesc(_("Timer Den##sgiAY"),ins,DIV_MACRO_EX9,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_OTHER]));

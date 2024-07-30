@@ -156,13 +156,14 @@ void DivPlatformAY8910::runDAC() {
 
 void DivPlatformAY8910::runTFX() {
   for (int i=0; i<3; i++) {
-    if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8)) {
+    if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8) && chan[i].tfx.mode!=-1) {
       chan[i].tfx.counter += 1;
       if (chan[i].tfx.counter >= chan[i].tfx.period && !(chan[i].tfx.mode)) {
         chan[i].tfx.counter = 0;
         chan[i].tfx.out ^= 1;
         if (!isMuted[i]) {
-          immWrite(0x08+i,(chan[i].tfx.out*chan[i].outVol));
+          //immWrite(0x08+i,(chan[i].tfx.out*chan[i].outVol));
+          immWrite(0x07,(chan[i].curPSGMode.val^(chan[i].tfx.out<<i));
         }
       }
       if (chan[i].tfx.counter >= chan[i].tfx.period && chan[i].tfx.mode) {
@@ -172,7 +173,7 @@ void DivPlatformAY8910::runTFX() {
         }
       }
     }
-    chan[i].tfx.period=((chan[i].freq*(chan[i].tfx.den/chan[i].tfx.num))+chan[i].tfx.offset);
+    if (chan[i].tfx.den>0 && chan[i].tfx.num>0) chan[i].tfx.period=((chan[i].freq*(chan[i].tfx.den/chan[i].tfx.num))+chan[i].tfx.offset);
   }
 }
 
@@ -399,7 +400,8 @@ void DivPlatformAY8910::tick(bool sysTick) {
       switch (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->val) {
         default:
         case 0:
-          chan[i].nextPSGMode.val&=~16;
+          chan[i].nextPSGMode.val|=16;
+          chan[i].tfx.mode = -1; // this is a workaround!
           break;
         case 1:
           chan[i].nextPSGMode.val|=16;
