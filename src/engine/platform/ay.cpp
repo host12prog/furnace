@@ -156,7 +156,7 @@ void DivPlatformAY8910::runDAC() {
 
 void DivPlatformAY8910::runTFX() {
   for (int i=0; i<3; i++) {
-    if (chan[i].active && (chan[i].curPSGMode.val&16)) {
+    if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8)) {
       chan[i].tfx.counter += 1;
       if (chan[i].tfx.counter >= chan[i].tfx.period) {
         chan[i].tfx.counter = 0;
@@ -166,7 +166,7 @@ void DivPlatformAY8910::runTFX() {
         immWrite(0x08+i,(chan[i].tfx.out*chan[i].outVol));
       }
     }
-    chan[i].tfx.period=(chan[i].freq+1);
+    chan[i].tfx.period=((chan[i].freq*(chan[i].autoEnvDen/chan[i].autoEnvNum))+chan[i].tfx.offset);
   }
 }
 
@@ -346,6 +346,7 @@ void DivPlatformAY8910::tick(bool sysTick) {
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->had) {
       if (chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->val==1) {
+        chan[i].tfx.counter = 0;
         if (chan[i].nextPSGMode.val&8) {
           if (dumpWrites) addWrite(0xffff0002+(i<<8),0);
           if (chan[i].dac.sample<0 || chan[i].dac.sample>=parent->song.sampleLen) {
@@ -391,6 +392,9 @@ void DivPlatformAY8910::tick(bool sysTick) {
       } else {
         chan[i].nextPSGMode.val &= ~16;
       }
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX7)->had) {
+      chan[i].tfx.offset=chan[i].std.get_div_macro_struct(DIV_MACRO_EX7)->val;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) {
       chan[i].autoEnvDen=chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val;
