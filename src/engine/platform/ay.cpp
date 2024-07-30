@@ -172,7 +172,7 @@ void DivPlatformAY8910::runTFX() {
         }
       }
       if (mode == -1) {
-        immWrite(0x08+i,chan[i].outVol);
+        rWrite(0x08+i,(chan[i].outVol&15)|((chan[i].curPSGMode.getEnvelope())<<2));
       }
     }
     int timerPeriod = chan[i].freq*chan[i].tfx.den/chan[i].tfx.num;
