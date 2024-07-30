@@ -166,7 +166,7 @@ void DivPlatformAY8910::runTFX() {
         immWrite(0x08+i,(chan[i].tfx.out*chan[i].outVol));
       }
     }
-    chan[i].tfx.period=((chan[i].freq*(chan[i].autoEnvDen/chan[i].autoEnvNum))+chan[i].tfx.offset);
+    chan[i].tfx.period=((chan[i].freq*(chan[i].tfx.den/chan[i].tfx.num))+chan[i].tfx.offset);
   }
 }
 
@@ -387,14 +387,18 @@ void DivPlatformAY8910::tick(bool sysTick) {
       immWrite(0x0c,ayEnvPeriod>>8);
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->had) {
-      if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->val==1) {
-        chan[i].nextPSGMode.val |= 16;
-      } else {
-        chan[i].nextPSGMode.val &= ~16;
-      }
+      chan[i].nextPSGMode.val = chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->val?(chan[i].nextPSGMode.val|16):(chan[i].nextPSGMode.val&~16);
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX7)->had) {
       chan[i].tfx.offset=chan[i].std.get_div_macro_struct(DIV_MACRO_EX7)->val;
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->had) {
+      chan[i].tfx.num=chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->val;
+      if (!chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->will) chan[i].tfx.den=1;
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->had) {
+      chan[i].tfx.den=chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->val;
+      if (!chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->will) chan[i].tfx.num=1;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) {
       chan[i].autoEnvDen=chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val;

@@ -30,7 +30,17 @@ class FurnaceGUI;
 void FurnaceGUI::drawInsAY(DivInstrument* ins)
 {
   insTabSample(ins);
-
+  if (!ins->amiga.useSample)
+    if (ImGui::BeginTabItem(_("Timer Macros##sgiAY")))
+    {
+      macroList.push_back(FurnaceGUIMacroDesc(_("Timer FX##sgiAY"),ins,DIV_MACRO_EX6,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
+      macroList.push_back(FurnaceGUIMacroDesc(_("TFX Offset##sgiAY"),ins,DIV_MACRO_EX7,0xff,0,127,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+      macroList.push_back(FurnaceGUIMacroDesc(_("Timer Num##sgiAY"),ins,DIV_MACRO_EX8,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+      macroList.push_back(FurnaceGUIMacroDesc(_("Timer Den##sgiAY"),ins,DIV_MACRO_EX9,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+      drawMacros(macroList,macroEditStateMacros);
+      ImGui::EndTabItem();
+    }
+  }
   if (ImGui::BeginTabItem(_("Macros##sgiAY"))) 
   {
     macroList.push_back(FurnaceGUIMacroDesc(_("Volume##sgiAY"),ins,DIV_MACRO_VOL,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
@@ -41,8 +51,6 @@ void FurnaceGUI::drawInsAY(DivInstrument* ins)
     {
       macroList.push_back(FurnaceGUIMacroDesc(_("Noise Freq##sgiAY"),ins,DIV_MACRO_DUTY,0xff,0,31,64,uiColors[GUI_COLOR_MACRO_OTHER]));
       macroList.push_back(FurnaceGUIMacroDesc(_("Waveform##sgiAY"),ins,DIV_MACRO_WAVE,0xff,0,3,48,uiColors[GUI_COLOR_MACRO_WAVE],false,NULL,NULL,true,ayShapeBits));
-      macroList.push_back(FurnaceGUIMacroDesc(_("Timer FX##sgiAY"),ins,DIV_MACRO_EX6,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
-      macroList.push_back(FurnaceGUIMacroDesc(_("TFX Offset##sgiAY"),ins,DIV_MACRO_EX7,0xff,0,127,64,uiColors[GUI_COLOR_MACRO_OTHER]));
     }
 
     macroList.push_back(FurnaceGUIMacroDesc(_("Raw Period##sgiAY"),ins,DIV_MACRO_EX4,0xff,0,0xfff,256,uiColors[GUI_COLOR_MACRO_OTHER]));
