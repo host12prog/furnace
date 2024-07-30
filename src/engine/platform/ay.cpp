@@ -170,6 +170,7 @@ void DivPlatformAY8910::runTFX() {
         if (!isMuted[i]) {
           immWrite(0xd, ayEnvMode);
         }
+      }
     }
     chan[i].tfx.period=((chan[i].freq*(chan[i].tfx.den/chan[i].tfx.num))+chan[i].tfx.offset);
   }
