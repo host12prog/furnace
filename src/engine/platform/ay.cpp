@@ -158,13 +158,18 @@ void DivPlatformAY8910::runTFX() {
   for (int i=0; i<3; i++) {
     if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8)) {
       chan[i].tfx.counter += 1;
-      if (chan[i].tfx.counter >= chan[i].tfx.period) {
+      if (chan[i].tfx.counter >= chan[i].tfx.period && !mode) {
         chan[i].tfx.counter = 0;
         chan[i].tfx.out ^= 1;
+        if (!isMuted[i]) {
+          immWrite(0x08+i,(chan[i].tfx.out*chan[i].outVol));
+        }
       }
-      if (!isMuted[i]) {
-        immWrite(0x08+i,(chan[i].tfx.out*chan[i].outVol));
-      }
+      if (chan[i].tfx.counter >= chan[i].tfx.period && mode) {
+        chan[i].tfx.counter = 0;
+        if (!isMuted[i]) {
+          immWrite(0xd, ayEnvMode);
+        }
     }
     chan[i].tfx.period=((chan[i].freq*(chan[i].tfx.den/chan[i].tfx.num))+chan[i].tfx.offset);
   }
@@ -387,17 +392,35 @@ void DivPlatformAY8910::tick(bool sysTick) {
       immWrite(0x0c,ayEnvPeriod>>8);
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->had) {
-      chan[i].nextPSGMode.val = chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->val?(chan[i].nextPSGMode.val|16):(chan[i].nextPSGMode.val&~16);
+      // 0 - disable timer
+      // 1 - pwm
+      // 2 - syncbuzzer
+      switch (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->val) {
+        default:
+        case 0:
+          chan[i].nextPSGMode.val&=~16;
+          break;
+        case 1:
+          chan[i].nextPSGMode.val|=16;
+          chan[i].tfx.mode = 0;
+          break;
+        case 2:
+          chan[i].nextPSGMode.val|=16;
+          chan[i].tfx.mode = 1;
+          break;
+      }
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX7)->had) {
       chan[i].tfx.offset=chan[i].std.get_div_macro_struct(DIV_MACRO_EX7)->val;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->had) {
       chan[i].tfx.num=chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->val;
+      chan[i].freqChanged=true;
       if (!chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->will) chan[i].tfx.den=1;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->had) {
       chan[i].tfx.den=chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->val;
+      chan[i].freqChanged=true;
       if (!chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->will) chan[i].tfx.num=1;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) {

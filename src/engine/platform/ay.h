@@ -78,13 +78,14 @@ class DivPlatformAY8910: public DivDispatch {
       } dac;
 
       struct TFX {
-        int period, counter, offset, den, num, out;
+        int period, counter, offset, den, num, mode, out;
         TFX():
           period(0),
           counter(0),
           offset(1),
           den(1),
           num(1),
+          mode(0),
           out(0) {}
       } tfx;
 
