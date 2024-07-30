@@ -31,6 +31,7 @@ void FurnaceGUI::drawInsAY(DivInstrument* ins)
 {
   insTabSample(ins);
   if (!ins->amiga.useSample)
+  {
     if (ImGui::BeginTabItem(_("Timer Macros##sgiAY")))
     {
       macroList.push_back(FurnaceGUIMacroDesc(_("Timer FX##sgiAY"),ins,DIV_MACRO_EX6,0xff,0,1,32,uiColors[GUI_COLOR_MACRO_OTHER],false,NULL,NULL,true));
@@ -41,7 +42,7 @@ void FurnaceGUI::drawInsAY(DivInstrument* ins)
       ImGui::EndTabItem();
     }
   }
-  if (ImGui::BeginTabItem(_("Macros##sgiAY"))) 
+  if (ImGui::BeginTabItem(_("Macros##sgiAY")))
   {
     macroList.push_back(FurnaceGUIMacroDesc(_("Volume##sgiAY"),ins,DIV_MACRO_VOL,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
     macroList.push_back(FurnaceGUIMacroDesc(_("Arpeggio##sgiAY"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
