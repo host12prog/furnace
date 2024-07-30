@@ -155,6 +155,7 @@ void DivPlatformAY8910::runDAC() {
 }
 
 void DivPlatformAY8910::runTFX() {
+  int timerPeriod;
   for (int i=0; i<3; i++) {
     if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8) && chan[i].tfx.mode!=-1) {
       chan[i].tfx.counter += 1;
@@ -180,9 +181,9 @@ void DivPlatformAY8910::runTFX() {
       }
     }
     if (chan[i].tfx.num > 0) {
-	    int timerPeriod = chan[i].freq*chan[i].tfx.den/chan[i].tfx.num;
+	    timerPeriod = chan[i].freq*chan[i].tfx.den/chan[i].tfx.num;
 	  } else {
-	    int timerPeriod = chan[i].freq*chan[i].tfx.den;
+	    timerPeriod = chan[i].freq*chan[i].tfx.den;
 	  }
     chan[i].tfx.period=timerPeriod+chan[i].tfx.offset;
   }
