@@ -172,8 +172,11 @@ void DivPlatformAY8910::runTFX() {
         }
       }
       if (chan[i].tfx.mode == -1 && !isMuted[i]) {
-        if (intellivision && chan[i].curPSGMode.getEnvelope()) immWrite(0x08+i,(chan[i].outVol&0xc)<<2);
-        else immWrite(0x08+i,(chan[i].outVol&15)|((chan[i].curPSGMode.getEnvelope())<<2));
+        if (intellivision && chan[i].curPSGMode.getEnvelope()) {
+          immWrite(0x08+i,(chan[i].outVol&0xc)<<2);
+        } else {
+          immWrite(0x08+i,(chan[i].outVol&15)|((chan[i].curPSGMode.getEnvelope())<<2));
+        }
       }
     }
     int timerPeriod = chan[i].freq*chan[i].tfx.den/chan[i].tfx.num;
