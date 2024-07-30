@@ -172,7 +172,8 @@ void DivPlatformAY8910::runTFX() {
         }
       }
     }
-    if (chan[i].tfx.den>0 && chan[i].tfx.num>0) chan[i].tfx.period=((chan[i].freq*(chan[i].tfx.den/chan[i].tfx.num))+chan[i].tfx.offset);
+    int timerPeriod = chan[i].freq*chan[i].tfx.den/chan[i].tfx.num;
+    if (chan[i].tfx.den>0 && chan[i].tfx.num>0) chan[i].tfx.period=timerPeriod+chan[i].tfx.offset;
   }
 }
 
