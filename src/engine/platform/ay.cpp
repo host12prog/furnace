@@ -396,9 +396,9 @@ void DivPlatformAY8910::tick(bool sysTick) {
       if (!chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->will) chan[i].autoEnvDen=1;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->had) {
-      chan[i].freq=chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val;
+      chan[i].fixedFreq=chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val;
       chan[i].freqChanged=true;
-      raw_freq[i] = true;
+      //raw_freq[i] = true;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX5)->had) {
       ayEnvPeriod=chan[i].std.get_div_macro_struct(DIV_MACRO_EX5)->val;
@@ -475,9 +475,13 @@ void DivPlatformAY8910::tick(bool sysTick) {
         chan[i].curPSGMode.val=0;
         rWrite(0x08+i,0);
       }
-      rWrite((i)<<1,chan[i].freq&0xff);
-      rWrite(1+((i)<<1),chan[i].freq>>8);
-
+      if (chan[i].fixedFreq>0) {
+        rWrite((i)<<1,chan[i].fixedFreq&0xff);
+        rWrite(1+((i)<<1),chan[i].fixedFreq>>8);
+      } else {
+        rWrite((i)<<1,chan[i].freq&0xff);
+        rWrite(1+((i)<<1),chan[i].freq>>8);
+      }
       if (chan[i].keyOn) chan[i].keyOn=false;
       if (chan[i].keyOff) chan[i].keyOff=false;
       if (chan[i].freqChanged && chan[i].autoEnvNum>0 && chan[i].autoEnvDen>0) {
