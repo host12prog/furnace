@@ -158,14 +158,14 @@ void DivPlatformAY8910::runTFX() {
   for (int i=0; i<3; i++) {
     if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8)) {
       chan[i].tfx.counter += 1;
-      if (chan[i].tfx.counter >= chan[i].tfx.period && !mode) {
+      if (chan[i].tfx.counter >= chan[i].tfx.period && !(chan[i].tfx.mode)) {
         chan[i].tfx.counter = 0;
         chan[i].tfx.out ^= 1;
         if (!isMuted[i]) {
           immWrite(0x08+i,(chan[i].tfx.out*chan[i].outVol));
         }
       }
-      if (chan[i].tfx.counter >= chan[i].tfx.period && mode) {
+      if (chan[i].tfx.counter >= chan[i].tfx.period && chan[i].tfx.mode) {
         chan[i].tfx.counter = 0;
         if (!isMuted[i]) {
           immWrite(0xd, ayEnvMode);
