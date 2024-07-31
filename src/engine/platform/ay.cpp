@@ -202,7 +202,7 @@ void DivPlatformAY8910::runTFX(int iRate) {
     if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8) && chan[i].tfx.mode!=-1) {
       delta = chan[i].tfx.period/iRate;
       chan[i].tfx.phase += delta;
-      chan[i].tfx.out = floor(chan[i].tfx.phase) % 2;
+      chan[i].tfx.out = fmod(floor(chan[i].tfx.phase),2);
       if (chan[i].tfx.mode==0) {
         output = MAX(0, ((chan[i].tfx.out) ? (chan[i].outVol&15) : (chan[i].tfx.lowBound-(15-chan[i].outVol))));
         output &= 15;
