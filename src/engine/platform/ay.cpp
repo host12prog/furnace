@@ -191,6 +191,9 @@ void DivPlatformAY8910::runTFX() {
 	    timerPeriod = chan[i].freq*chan[i].tfx.den;
 	  }
     if (chan[i].tfx.num > 0 && chan[i].tfx.den > 0) chan[i].tfx.period=timerPeriod+chan[i].tfx.offset;
+    // workaround: if AtomicSSG core is selected
+    // the timer is clocked 2 octaves too high
+    if (selCore) chan[i].tfx.period >>= 2;
   }
 }
 
@@ -440,15 +443,15 @@ void DivPlatformAY8910::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->had) {
       chan[i].tfx.num=chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->val;
       chan[i].freqChanged=true;
-      if (!chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->will) chan[i].tfx.den=1;
+      if (!chan[i].std.get_div_macro_struct(DIV_MACRO_PMS)->will) chan[i].tfx.den=1;
     }
-    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->had) {
-      chan[i].tfx.den=chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->val;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_FMS)->had) {
+      chan[i].tfx.den=chan[i].std.get_div_macro_struct(DIV_MACRO_FMS)->val;
       chan[i].freqChanged=true;
       if (!chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->will) chan[i].tfx.num=1;
     }
-    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX10)->had) {
-      chan[i].tfx.lowBound=chan[i].std.get_div_macro_struct(DIV_MACRO_EX10)->val;
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_AMS)->had) {
+      chan[i].tfx.lowBound=chan[i].std.get_div_macro_struct(DIV_MACRO_AMS)->val;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) {
       chan[i].autoEnvDen=chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val;
