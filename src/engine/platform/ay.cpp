@@ -443,7 +443,7 @@ void DivPlatformAY8910::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->had) {
       chan[i].tfx.num=chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->val;
       chan[i].freqChanged=true;
-      if (!chan[i].std.get_div_macro_struct(DIV_MACRO_PMS)->will) chan[i].tfx.den=1;
+      if (!chan[i].std.get_div_macro_struct(DIV_MACRO_FMS)->will) chan[i].tfx.den=1;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_FMS)->had) {
       chan[i].tfx.den=chan[i].std.get_div_macro_struct(DIV_MACRO_FMS)->val;
