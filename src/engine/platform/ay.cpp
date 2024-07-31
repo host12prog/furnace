@@ -154,7 +154,7 @@ void DivPlatformAY8910::runDAC() {
   }
 }
 
-void DivPlatformAY8910::runTFX() {
+/*void DivPlatformAY8910::runTFX() {
   if (selCore) return;
   int timerPeriod, output;
   for (int i=0; i<3; i++) {
@@ -193,6 +193,32 @@ void DivPlatformAY8910::runTFX() {
 	  }
     if (chan[i].tfx.num > 0 && chan[i].tfx.den > 0) chan[i].tfx.period=timerPeriod+chan[i].tfx.offset;
   }
+}*/
+
+void DivPlatformAY8910::runTFX(int iRate) {
+  double delta;
+  int output, timerPeriod;
+  for (int i=0; i<3; i++) {
+    if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8) && chan[i].tfx.mode!=-1) {
+      delta = chan[i].tfx.period/iRate;
+      chan[i].tfx.phase += delta;
+      chan[i].tfx.out = floor(phase) % 2;
+      if (chan[i].tfx.mode==0) {
+        output = MAX(0, ((chan[i].tfx.out) ? (chan[i].outVol&15) : (chan[i].tfx.lowBound-(15-chan[i].outVol))));
+        output &= 15;
+        if (!isMuted[i]) {
+          immWrite(0x08+i,output|(chan[i].curPSGMode.getEnvelope()<<2));
+        }
+      }
+    }
+    if (chan[i].tfx.num > 0) {
+	    timerPeriod = chan[i].freq*chan[i].tfx.den/chan[i].tfx.num;
+	  } else {
+	    timerPeriod = chan[i].freq*chan[i].tfx.den;
+	  }
+    if (chan[i].tfx.num > 0 && chan[i].tfx.den > 0) timerPeriod=timerPeriod+chan[i].tfx.offset;
+    chan[i].tfx.period = iRate / (timerPeriod * 8);
+  }
 }
 
 void DivPlatformAY8910::checkWrites() {
@@ -222,7 +248,7 @@ void DivPlatformAY8910::acquire_mame(short** buf, size_t len) {
   if (sunsoft) {
     for (size_t i=0; i<len; i++) {
       runDAC();
-      runTFX();
+      runTFX(chipClock);
       checkWrites();
 
       ay->sound_stream_update(ayBuf,1);
@@ -236,7 +262,7 @@ void DivPlatformAY8910::acquire_mame(short** buf, size_t len) {
   } else {
     for (size_t i=0; i<len; i++) {
       runDAC();
-      runTFX();
+      runTFX(chipClock);
       checkWrites();
 
       ay->sound_stream_update(ayBuf,1);
@@ -258,7 +284,7 @@ void DivPlatformAY8910::acquire_mame(short** buf, size_t len) {
 void DivPlatformAY8910::acquire_atomic(short** buf, size_t len) {
   for (size_t i=0; i<len; i++) {
     runDAC();
-    runTFX();
+    runTFX(chipClock);
 
     if (!writes.empty()) {
       QueuedWrite w=writes.front();
@@ -296,7 +322,7 @@ void DivPlatformAY8910::fillStream(std::vector<DivDelayedWrite>& stream, int sRa
   writes.clear();
   for (size_t i=0; i<len; i++) {
     runDAC();
-    runTFX();
+    runTFX(chipClock);
     while (!writes.empty()) {
       QueuedWrite& w=writes.front();
       stream.push_back(DivDelayedWrite(i,w.addr,w.val));
