@@ -158,7 +158,7 @@ class DivPlatformAY8910: public DivDispatch {
   
   public:
     void runDAC();
-    void runTFX(int iRate);
+    void runTFX();
     void setExtClockDiv(unsigned int eclk=COLOR_NTSC, unsigned char ediv=8);
     void acquire(short** buf, size_t len);
     void fillStream(std::vector<DivDelayedWrite>& stream, int sRate, size_t len);
