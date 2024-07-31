@@ -154,12 +154,12 @@ void DivPlatformAY8910::runDAC() {
   }
 }
 
-void DivPlatformAY8910::runTFX() {
+void DivPlatformAY8910::runTFX(int iRate) {
   if (selCore) return;
   int timerPeriod, output;
   for (int i=0; i<3; i++) {
     if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8) && chan[i].tfx.mode!=-1) {
-      chan[i].tfx.counter += 1;
+      chan[i].tfx.counter += iRate;
       if (chan[i].tfx.counter >= chan[i].tfx.period && chan[i].tfx.mode == 0) {
         chan[i].tfx.counter = 0;
         chan[i].tfx.out ^= 1;
@@ -222,7 +222,7 @@ void DivPlatformAY8910::acquire_mame(short** buf, size_t len) {
   if (sunsoft) {
     for (size_t i=0; i<len; i++) {
       runDAC();
-      runTFX();
+      runTFX(rate);
       checkWrites();
 
       ay->sound_stream_update(ayBuf,1);
@@ -236,7 +236,7 @@ void DivPlatformAY8910::acquire_mame(short** buf, size_t len) {
   } else {
     for (size_t i=0; i<len; i++) {
       runDAC();
-      runTFX();
+      runTFX(rate);
       checkWrites();
 
       ay->sound_stream_update(ayBuf,1);
@@ -258,7 +258,7 @@ void DivPlatformAY8910::acquire_mame(short** buf, size_t len) {
 void DivPlatformAY8910::acquire_atomic(short** buf, size_t len) {
   for (size_t i=0; i<len; i++) {
     runDAC();
-    runTFX();
+    runTFX(rate);
 
     if (!writes.empty()) {
       QueuedWrite w=writes.front();
@@ -296,7 +296,7 @@ void DivPlatformAY8910::fillStream(std::vector<DivDelayedWrite>& stream, int sRa
   writes.clear();
   for (size_t i=0; i<len; i++) {
     runDAC();
-    runTFX();
+    runTFX(sRate);
     while (!writes.empty()) {
       QueuedWrite& w=writes.front();
       stream.push_back(DivDelayedWrite(i,w.addr,w.val));
