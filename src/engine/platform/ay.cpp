@@ -155,6 +155,7 @@ void DivPlatformAY8910::runDAC() {
 }
 
 void DivPlatformAY8910::runTFX() {
+  if (selCore) return;
   int timerPeriod, output;
   for (int i=0; i<3; i++) {
     if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8) && chan[i].tfx.mode!=-1) {
@@ -191,9 +192,6 @@ void DivPlatformAY8910::runTFX() {
 	    timerPeriod = chan[i].freq*chan[i].tfx.den;
 	  }
     if (chan[i].tfx.num > 0 && chan[i].tfx.den > 0) chan[i].tfx.period=timerPeriod+chan[i].tfx.offset;
-    // workaround: if AtomicSSG core is selected
-    // the timer is clocked 2 octaves too high
-    if (selCore) chan[i].tfx.period >>= 2;
   }
 }
 
