@@ -159,12 +159,13 @@ void DivPlatformAY8910::runTFX() {
   for (int i=0; i<3; i++) {
     if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8) && chan[i].tfx.mode!=-1) {
       chan[i].tfx.counter += 1;
-      if (chan[i].tfx.counter >= chan[i].tfx.period && !(chan[i].tfx.mode)) {
+      if (chan[i].tfx.counter >= chan[i].tfx.period && chan[i].tfx.mode == 0) {
         chan[i].tfx.counter = 0;
         chan[i].tfx.out ^= 1;
         output = !(chan[i].tfx.out)?(chan[i].tfx.lowBound-(15-(chan[i].outVol&15))):(chan[i].outVol&15);
+        output &= 15;
         if (!isMuted[i]) {
-          immWrite(0x08+i,output);
+          immWrite(0x08+i,output|(chan[i].curPSGMode.getEnvelope()<<2));
         }
       }
       if (chan[i].tfx.counter >= chan[i].tfx.period && chan[i].tfx.mode == 1) {
