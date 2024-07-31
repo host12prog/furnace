@@ -185,7 +185,7 @@ void DivPlatformAY8910::runTFX() {
 	  } else {
 	    timerPeriod = chan[i].freq*chan[i].tfx.den;
 	  }
-    chan[i].tfx.period=timerPeriod+chan[i].tfx.offset;
+    if (chan[i].tfx.num > 0 && chan[i].tfx.den > 0) chan[i].tfx.period=timerPeriod+chan[i].tfx.offset;
   }
 }
 
@@ -714,6 +714,10 @@ int DivPlatformAY8910::dispatch(DivCommand c) {
       break;
     }
     case DIV_CMD_STD_NOISE_MODE:
+      if (c.value&0xf0 && !(chan[c.chan].nextPSGMode&8)) {
+        chan[c.chan].nextPSGMode.val|=16;
+        chan[c.chan].tfx.mode = c.value&3;
+      }
       if (!(chan[c.chan].nextPSGMode.val&8)) {
         if (c.value<16) {
           chan[c.chan].nextPSGMode.val=(c.value+1)&7;
@@ -788,6 +792,9 @@ int DivPlatformAY8910::dispatch(DivCommand c) {
       }
       updateOutSel(true);
       immWrite(14+(c.value?1:0),(c.value?portBVal:portAVal));
+      break;
+    case DIV_CMD_AY_AUTO_PWM:
+      chan[c.chan].tfx.offset=c.value;
       break;
     case DIV_CMD_SAMPLE_MODE:
       if (c.value>0) {
