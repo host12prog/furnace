@@ -162,7 +162,7 @@ void DivPlatformAY8910::runTFX() {
       if (chan[i].tfx.counter >= chan[i].tfx.period && chan[i].tfx.mode == 0) {
         chan[i].tfx.counter = 0;
         chan[i].tfx.out ^= 1;
-        output = !(chan[i].tfx.out)?(chan[i].tfx.lowBound-(15-(chan[i].outVol&15))):(chan[i].outVol&15);
+        output = MAX(0,(((chan[i].tfx.out)?chan[i].outVol&15:chan[i].tfx.lowBound)-(15-chan[i].outVol)));
         output &= 15;
         if (!isMuted[i]) {
           immWrite(0x08+i,output|(chan[i].curPSGMode.getEnvelope()<<2));
