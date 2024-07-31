@@ -155,22 +155,27 @@ void DivPlatformAY8910::runDAC() {
 }
 
 void DivPlatformAY8910::runTFX() {
-  int timerPeriod;
+  int timerPeriod, output;
   for (int i=0; i<3; i++) {
     if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8) && chan[i].tfx.mode!=-1) {
       chan[i].tfx.counter += 1;
       if (chan[i].tfx.counter >= chan[i].tfx.period && !(chan[i].tfx.mode)) {
         chan[i].tfx.counter = 0;
         chan[i].tfx.out ^= 1;
+        output = !(chan[i].tfx.out)?(chan[i].tfx.lowBound-(15-(chan[i].outVol&15))):(chan[i].outVol&15);
         if (!isMuted[i]) {
-          immWrite(0x08+i,(chan[i].tfx.out*chan[i].outVol));
+          immWrite(0x08+i,output);
         }
       }
-      if (chan[i].tfx.counter >= chan[i].tfx.period && chan[i].tfx.mode) {
+      if (chan[i].tfx.counter >= chan[i].tfx.period && chan[i].tfx.mode == 1) {
         chan[i].tfx.counter = 0;
         if (!isMuted[i]) {
           immWrite(0xd, ayEnvMode);
         }
+      }
+      if (chan[i].tfx.counter >= chan[i].tfx.period && chan[i].tfx.mode == 2) {
+        chan[i].tfx.counter = 0;
+        immWrite(0x08+i,(chan[i].outVol&15)|(chan[i].tfx.out<<4));
       }
       if (chan[i].tfx.mode == -1 && !isMuted[i]) {
         if (intellivision && chan[i].curPSGMode.getEnvelope()) {
@@ -423,6 +428,10 @@ void DivPlatformAY8910::tick(bool sysTick) {
           chan[i].nextPSGMode.val|=16;
           chan[i].tfx.mode = 1;
           break;
+        case 3:
+          chan[i].nextPSGMode.val|=16;
+          chan[i].tfx.mode = 2;
+          break;
       }
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX7)->had) {
@@ -437,6 +446,9 @@ void DivPlatformAY8910::tick(bool sysTick) {
       chan[i].tfx.den=chan[i].std.get_div_macro_struct(DIV_MACRO_EX9)->val;
       chan[i].freqChanged=true;
       if (!chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->will) chan[i].tfx.num=1;
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX10)->had) {
+      chan[i].tfx.lowBound=chan[i].std.get_div_macro_struct(DIV_MACRO_EX10)->val;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) {
       chan[i].autoEnvDen=chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val;
@@ -714,9 +726,9 @@ int DivPlatformAY8910::dispatch(DivCommand c) {
       break;
     }
     case DIV_CMD_STD_NOISE_MODE:
-      if (c.value&0xf0 && !(chan[c.chan].nextPSGMode&8)) {
+      if (c.value&0xf0 && !(chan[c.chan].nextPSGMode.val&8)) {
         chan[c.chan].nextPSGMode.val|=16;
-        chan[c.chan].tfx.mode = c.value&3;
+        chan[c.chan].tfx.mode = (c.value&3);
       }
       if (!(chan[c.chan].nextPSGMode.val&8)) {
         if (c.value<16) {
