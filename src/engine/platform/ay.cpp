@@ -292,6 +292,19 @@ void DivPlatformAY8910::acquire(short** buf, size_t len) {
   }
 }
 
+void DivPlatformAY8910::fillStream(std::vector<DivDelayedWrite>& stream, int sRate, size_t len) {
+  writes.clear();
+  for (size_t i=0; i<len; i++) {
+    runDAC();
+    runTFX();
+    while (!writes.empty()) {
+      QueuedWrite& w=writes.front();
+      stream.push_back(DivDelayedWrite(i,w.addr,w.val));
+      writes.pop_front();
+    }
+  }
+}
+
 void DivPlatformAY8910::updateOutSel(bool immediate) {
   if (immediate) {
     immWrite(0x07,
