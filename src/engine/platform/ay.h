@@ -79,7 +79,6 @@ class DivPlatformAY8910: public DivDispatch {
 
       struct TFX {
         int period, counter, offset, den, num, mode, lowBound, out;
-        double phase;
         TFX():
           period(0),
           counter(0),
@@ -88,8 +87,7 @@ class DivPlatformAY8910: public DivDispatch {
           num(1),
           mode(0),
           lowBound(0),
-          out(0),
-          phase(0) {}
+          out(0) {}
       } tfx;
 
       unsigned char autoEnvNum, autoEnvDen;
@@ -160,7 +158,7 @@ class DivPlatformAY8910: public DivDispatch {
   
   public:
     void runDAC();
-    void runTFX(int iRate);
+    void runTFX();
     void setExtClockDiv(unsigned int eclk=COLOR_NTSC, unsigned char ediv=8);
     void acquire(short** buf, size_t len);
     void fillStream(std::vector<DivDelayedWrite>& stream, int sRate, size_t len);
