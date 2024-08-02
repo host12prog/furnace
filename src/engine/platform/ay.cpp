@@ -294,9 +294,12 @@ void DivPlatformAY8910::acquire(short** buf, size_t len) {
 
 void DivPlatformAY8910::fillStream(std::vector<DivDelayedWrite>& stream, int sRate, size_t len) {
   writes.clear();
+  int rate = floor(chipClock/sRate);
   for (size_t i=0; i<len; i++) {
-    runDAC();
-    runTFX();
+    for (int h=0;h<rate;h++) {
+      runDAC();
+	    runTFX();
+	  }
     while (!writes.empty()) {
       QueuedWrite& w=writes.front();
       stream.push_back(DivDelayedWrite(i,w.addr,w.val));
