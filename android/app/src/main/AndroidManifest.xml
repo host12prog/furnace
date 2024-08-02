@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.tildearrow.furnace"
+    package="org.ltva.furnaceB"
     android:versionCode="214"
     android:versionName="0.6.5"
     android:installLocation="auto">
@@ -92,7 +92,7 @@
                 <data android:scheme="content"/>
                 <data android:host="*"/>
                 <data android:mimeType="*/*"/>
-                <data android:pathPattern=".*\\.fur"/>
+                <data android:pathPattern=".*\\.fub"/>
             </intent-filter>
         </activity>
     </application>

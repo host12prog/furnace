@@ -154,6 +154,47 @@ void DivPlatformAY8910::runDAC() {
   }
 }
 
+void DivPlatformAY8910::runTFX() {
+  if (selCore) return;
+  int timerPeriod, output;
+  for (int i=0; i<3; i++) {
+    if (chan[i].active && (chan[i].curPSGMode.val&16) && !(chan[i].curPSGMode.val&8) && chan[i].tfx.mode!=-1) {
+      chan[i].tfx.counter += 1;
+      if (chan[i].tfx.counter >= chan[i].tfx.period && chan[i].tfx.mode == 0) {
+        chan[i].tfx.counter = 0;
+        chan[i].tfx.out ^= 1;
+        output = MAX(0, ((chan[i].tfx.out) ? (chan[i].outVol&15) : (chan[i].tfx.lowBound-(15-chan[i].outVol))));
+        output &= 15;
+        if (!isMuted[i]) {
+          immWrite(0x08+i,output|(chan[i].curPSGMode.getEnvelope()<<2));
+        }
+      }
+      if (chan[i].tfx.counter >= chan[i].tfx.period && chan[i].tfx.mode == 1) {
+        chan[i].tfx.counter = 0;
+        if (!isMuted[i]) {
+          immWrite(0xd, ayEnvMode);
+        }
+      }
+      if (chan[i].tfx.counter >= chan[i].tfx.period && chan[i].tfx.mode == 2) {
+        chan[i].tfx.counter = 0;
+      }
+      if (chan[i].tfx.mode == -1 && !isMuted[i]) {
+        if (intellivision && chan[i].curPSGMode.getEnvelope()) {
+          immWrite(0x08+i,(chan[i].outVol&0xc)<<2);
+        } else {
+          immWrite(0x08+i,(chan[i].outVol&15)|((chan[i].curPSGMode.getEnvelope())<<2));
+        }
+      }
+    }
+    if (chan[i].tfx.num > 0) {
+	    timerPeriod = chan[i].freq*chan[i].tfx.den/chan[i].tfx.num;
+	  } else {
+	    timerPeriod = chan[i].freq*chan[i].tfx.den;
+	  }
+    if (chan[i].tfx.num > 0 && chan[i].tfx.den > 0) chan[i].tfx.period=timerPeriod+chan[i].tfx.offset;
+  }
+}
+
 void DivPlatformAY8910::checkWrites() {
   while (!writes.empty()) {
     QueuedWrite w=writes.front();
@@ -181,6 +222,7 @@ void DivPlatformAY8910::acquire_mame(short** buf, size_t len) {
   if (sunsoft) {
     for (size_t i=0; i<len; i++) {
       runDAC();
+      runTFX();
       checkWrites();
 
       ay->sound_stream_update(ayBuf,1);
@@ -194,6 +236,7 @@ void DivPlatformAY8910::acquire_mame(short** buf, size_t len) {
   } else {
     for (size_t i=0; i<len; i++) {
       runDAC();
+      runTFX();
       checkWrites();
 
       ay->sound_stream_update(ayBuf,1);
@@ -215,6 +258,7 @@ void DivPlatformAY8910::acquire_mame(short** buf, size_t len) {
 void DivPlatformAY8910::acquire_atomic(short** buf, size_t len) {
   for (size_t i=0; i<len; i++) {
     runDAC();
+    runTFX();
 
     if (!writes.empty()) {
       QueuedWrite w=writes.front();
@@ -245,6 +289,22 @@ void DivPlatformAY8910::acquire(short** buf, size_t len) {
     acquire_atomic(buf,len);
   } else {
     acquire_mame(buf,len);
+  }
+}
+
+void DivPlatformAY8910::fillStream(std::vector<DivDelayedWrite>& stream, int sRate, size_t len) {
+  writes.clear();
+  int rate = floor(chipClock/sRate);
+  for (size_t i=0; i<len; i++) {
+    for (int h=0;h<rate;h++) {
+      runDAC();
+	    runTFX();
+	  }
+    while (!writes.empty()) {
+      QueuedWrite& w=writes.front();
+      stream.push_back(DivDelayedWrite(i,w.addr,w.val));
+      writes.pop_front();
+    }
   }
 }
 
@@ -279,7 +339,7 @@ void DivPlatformAY8910::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->had) {
       chan[i].outVol=MIN(15,chan[i].std.get_div_macro_struct(DIV_MACRO_VOL)->val)-(15-(chan[i].vol&15));
       if (chan[i].outVol<0) chan[i].outVol=0;
-      if (!(chan[i].nextPSGMode.val&8)) {
+      if (!(chan[i].nextPSGMode.val&8) || !(chan[i].nextPSGMode.val&16)) {
         if (isMuted[i]) {
           rWrite(0x08+i,0);
         } else if (intellivision && (chan[i].nextPSGMode.getEnvelope())) {
@@ -303,6 +363,7 @@ void DivPlatformAY8910::tick(bool sysTick) {
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->had) {
       if (!(chan[i].nextPSGMode.val&8)) {
         chan[i].nextPSGMode.val=chan[i].std.get_div_macro_struct(DIV_MACRO_WAVE)->val&7;
+        chan[i].nextPSGMode.val|=(chan[i].curPSGMode.val&16);
         if (chan[i].active) {
           chan[i].curPSGMode.val=chan[i].nextPSGMode.val;
         }
@@ -326,6 +387,7 @@ void DivPlatformAY8910::tick(bool sysTick) {
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->had) {
       if (chan[i].std.get_div_macro_struct(DIV_MACRO_PHASE_RESET)->val==1) {
+        chan[i].tfx.counter = 0;
         if (chan[i].nextPSGMode.val&8) {
           if (dumpWrites) addWrite(0xffff0002+(i<<8),0);
           if (chan[i].dac.sample<0 || chan[i].dac.sample>=parent->song.sampleLen) {
@@ -356,14 +418,54 @@ void DivPlatformAY8910::tick(bool sysTick) {
       if (!chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->will) chan[i].autoEnvDen=1;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->had) {
-      chan[i].freq=chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val;
+      chan[i].fixedFreq=chan[i].std.get_div_macro_struct(DIV_MACRO_EX4)->val;
       chan[i].freqChanged=true;
-      raw_freq[i] = true;
+      //raw_freq[i] = true;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX5)->had) {
       ayEnvPeriod=chan[i].std.get_div_macro_struct(DIV_MACRO_EX5)->val;
       immWrite(0x0b,ayEnvPeriod);
       immWrite(0x0c,ayEnvPeriod>>8);
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->had) {
+      // 0 - disable timer
+      // 1 - pwm
+      // 2 - syncbuzzer
+      switch (chan[i].std.get_div_macro_struct(DIV_MACRO_EX6)->val) {
+        default:
+        case 0:
+          chan[i].nextPSGMode.val|=16;
+          chan[i].tfx.mode = -1; // this is a workaround!
+          break;
+        case 1:
+          chan[i].nextPSGMode.val|=16;
+          chan[i].tfx.mode = 0;
+          break;
+        case 2:
+          chan[i].nextPSGMode.val|=16;
+          chan[i].tfx.mode = 1;
+          break;
+        case 3:
+          chan[i].nextPSGMode.val|=16;
+          chan[i].tfx.mode = 2;
+          break;
+      }
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX7)->had) {
+      chan[i].tfx.offset=chan[i].std.get_div_macro_struct(DIV_MACRO_EX7)->val;
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->had) {
+      chan[i].tfx.num=chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->val;
+      chan[i].freqChanged=true;
+      if (!chan[i].std.get_div_macro_struct(DIV_MACRO_FMS)->will) chan[i].tfx.den=1;
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_FMS)->had) {
+      chan[i].tfx.den=chan[i].std.get_div_macro_struct(DIV_MACRO_FMS)->val;
+      chan[i].freqChanged=true;
+      if (!chan[i].std.get_div_macro_struct(DIV_MACRO_EX8)->will) chan[i].tfx.num=1;
+    }
+    if (chan[i].std.get_div_macro_struct(DIV_MACRO_AMS)->had) {
+      chan[i].tfx.lowBound=chan[i].std.get_div_macro_struct(DIV_MACRO_AMS)->val;
     }
     if (chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->had) {
       chan[i].autoEnvDen=chan[i].std.get_div_macro_struct(DIV_MACRO_ALG)->val;
@@ -402,9 +504,13 @@ void DivPlatformAY8910::tick(bool sysTick) {
         chan[i].curPSGMode.val=0;
         rWrite(0x08+i,0);
       }
-      rWrite((i)<<1,chan[i].freq&0xff);
-      rWrite(1+((i)<<1),chan[i].freq>>8);
-
+      if (chan[i].fixedFreq>0) {
+        rWrite((i)<<1,chan[i].fixedFreq&0xff);
+        rWrite(1+((i)<<1),chan[i].fixedFreq>>8);
+      } else {
+        rWrite((i)<<1,chan[i].freq&0xff);
+        rWrite(1+((i)<<1),chan[i].freq>>8);
+      }
       if (chan[i].keyOn) chan[i].keyOn=false;
       if (chan[i].keyOff) chan[i].keyOff=false;
       if (chan[i].freqChanged && chan[i].autoEnvNum>0 && chan[i].autoEnvDen>0) {
@@ -637,9 +743,14 @@ int DivPlatformAY8910::dispatch(DivCommand c) {
       break;
     }
     case DIV_CMD_STD_NOISE_MODE:
+      if (c.value&0xf0 && !(chan[c.chan].nextPSGMode.val&8)) {
+        chan[c.chan].nextPSGMode.val|=16;
+        chan[c.chan].tfx.mode = (c.value&3);
+      }
       if (!(chan[c.chan].nextPSGMode.val&8)) {
         if (c.value<16) {
           chan[c.chan].nextPSGMode.val=(c.value+1)&7;
+          chan[c.chan].nextPSGMode.val|=chan[c.chan].curPSGMode.val&16;
           if (chan[c.chan].active) {
             chan[c.chan].curPSGMode.val=chan[c.chan].nextPSGMode.val;
           }
@@ -710,6 +821,9 @@ int DivPlatformAY8910::dispatch(DivCommand c) {
       }
       updateOutSel(true);
       immWrite(14+(c.value?1:0),(c.value?portBVal:portAVal));
+      break;
+    case DIV_CMD_AY_AUTO_PWM:
+      chan[c.chan].tfx.offset=c.value;
       break;
     case DIV_CMD_SAMPLE_MODE:
       if (c.value>0) {

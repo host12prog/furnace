@@ -8,12 +8,14 @@ else {
 }
 
 android {
+    //noinspection ExpiredTargetSdkVersion
     compileSdkVersion 26
     defaultConfig {
         if (buildAsApplication) {
-            applicationId "org.tildearrow.furnace"
+            applicationId "org.ltva.furnaceB"
         }
         minSdkVersion 21
+        //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 26
         versionCode 214
         versionName "0.6.5"

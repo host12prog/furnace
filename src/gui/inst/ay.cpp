@@ -30,8 +30,21 @@ class FurnaceGUI;
 void FurnaceGUI::drawInsAY(DivInstrument* ins)
 {
   insTabSample(ins);
-
-  if (ImGui::BeginTabItem(_("Macros##sgiAY"))) 
+  if (!ins->amiga.useSample)
+  {
+    if (ImGui::BeginTabItem(_("Timer Macros##sgiAY")))
+    {
+      ImGui::Text(_("Warning! Timer FX is only functional on MAME emulation core, and is not supported by FUR module format and VGM export!"));
+      macroList.push_back(FurnaceGUIMacroDesc(_("Timer FX##sgiAY"),ins,DIV_MACRO_EX6,0xff,0,3,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+      macroList.push_back(FurnaceGUIMacroDesc(_("TFX Offset##sgiAY"),ins,DIV_MACRO_EX7,0xff,-2048,2047,160,uiColors[GUI_COLOR_MACRO_PITCH],true));
+      macroList.push_back(FurnaceGUIMacroDesc(_("Timer Num##sgiAY"),ins,DIV_MACRO_EX8,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+      macroList.push_back(FurnaceGUIMacroDesc(_("Timer Den##sgiAY"),ins,DIV_MACRO_FMS,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+      macroList.push_back(FurnaceGUIMacroDesc(_("PWM Boundary##sgiAY"),ins,DIV_MACRO_AMS,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_OTHER]));
+      drawMacros(macroList,macroEditStateMacros);
+      ImGui::EndTabItem();
+    }
+  }
+  if (ImGui::BeginTabItem(_("Macros##sgiAY")))
   {
     macroList.push_back(FurnaceGUIMacroDesc(_("Volume##sgiAY"),ins,DIV_MACRO_VOL,0xff,0,15,64,uiColors[GUI_COLOR_MACRO_VOLUME]));
     macroList.push_back(FurnaceGUIMacroDesc(_("Arpeggio##sgiAY"),ins,DIV_MACRO_ARP,0xff,-120,120,160,uiColors[GUI_COLOR_MACRO_PITCH],true,NULL,macroHoverNote,false,NULL,true,ins->std.get_macro(DIV_MACRO_ARP, true)->val));
