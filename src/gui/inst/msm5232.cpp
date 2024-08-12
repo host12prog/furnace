@@ -29,8 +29,6 @@ class FurnaceGUI;
 
 void FurnaceGUI::drawInsMSM5232(DivInstrument* ins)
 {
-  insTabSample(ins);
-
   if (ImGui::BeginTabItem(_("Macros##sgi5232"))) 
   {
     macroList.push_back(FurnaceGUIMacroDesc(_("Volume##sgi5232"),ins,DIV_MACRO_VOL,0xff,0,127,160,uiColors[GUI_COLOR_MACRO_VOLUME]));
