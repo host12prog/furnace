@@ -1,4 +1,4 @@
-# Furnace (chiptune tracker)
+# Furnace (chiptune tracker) 
 
 ![screenshot](papers/screenshot3.png)
 
